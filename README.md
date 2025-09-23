@@ -1,0 +1,1 @@
+# whopsdk-typescript
