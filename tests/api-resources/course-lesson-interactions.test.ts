@@ -10,7 +10,7 @@ const client = new Whopsdk({
 describe('resource courseLessonInteractions', () => {
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.courseLessonInteractions.retrieve('id');
+    const responsePromise = client.courseLessonInteractions.retrieve('crsli_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

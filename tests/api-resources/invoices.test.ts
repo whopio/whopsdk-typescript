@@ -76,7 +76,7 @@ describe('resource invoices', () => {
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.invoices.retrieve('id');
+    const responsePromise = client.invoices.retrieve('inv_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -114,7 +114,7 @@ describe('resource invoices', () => {
 
   // Prism tests are disabled
   test.skip('void', async () => {
-    const responsePromise = client.invoices.void('id');
+    const responsePromise = client.invoices.void('inv_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
