@@ -64,13 +64,13 @@ describe('resource invoices', () => {
         unlimited_stock: true,
         visibility: 'visible',
       },
-      access_pass: { title: 'title', product_tax_code_id: 'product_tax_code_id' },
-      access_pass_id: 'access_pass_id',
+      access_pass: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
+      access_pass_id: 'prod_xxxxxxxxxxxxx',
       charge_buyer_fee: true,
       customer_name: 'customer_name',
       email_address: 'email_address',
-      member_id: 'member_id',
-      payment_token_id: 'payment_token_id',
+      member_id: 'mber_xxxxxxxxxxxxx',
+      payment_token_id: 'payt_xxxxxxxxxxxxx',
     });
   });
 
@@ -88,7 +88,7 @@ describe('resource invoices', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.invoices.list({ company_id: 'company_id' });
+    const responsePromise = client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -101,7 +101,7 @@ describe('resource invoices', () => {
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.invoices.list({
-      company_id: 'company_id',
+      company_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       direction: 'asc',
