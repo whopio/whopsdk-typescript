@@ -13,7 +13,7 @@ export class Invoices extends APIResource {
    * ```ts
    * const invoice = await client.invoices.create({
    *   collection_method: 'send_invoice',
-   *   due_date: 0,
+   *   due_date: 1701406800,
    *   plan: {},
    * });
    * ```
