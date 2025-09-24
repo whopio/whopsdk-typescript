@@ -81,8 +81,8 @@ describe('resource invoices', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.invoices.retrieve('id', { query_id: 'id' });
+  test.skip('retrieve', async () => {
+    const responsePromise = client.invoices.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -90,11 +90,6 @@ describe('resource invoices', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.invoices.retrieve('id', { query_id: 'id' });
   });
 
   // Prism tests are disabled
@@ -124,8 +119,8 @@ describe('resource invoices', () => {
   });
 
   // Prism tests are disabled
-  test.skip('void: only required params', async () => {
-    const responsePromise = client.invoices.void('id', { body_id: 'id' });
+  test.skip('void', async () => {
+    const responsePromise = client.invoices.void('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -136,10 +131,14 @@ describe('resource invoices', () => {
   });
 
   // Prism tests are disabled
-  test.skip('void: required and optional params', async () => {
-    const response = await client.invoices.void('id', {
-      body_id: 'id',
-      client_mutation_id: 'client_mutation_id',
-    });
+  test.skip('void: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.invoices.void(
+        'id',
+        { client_mutation_id: 'client_mutation_id' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whopsdk.NotFoundError);
   });
 });

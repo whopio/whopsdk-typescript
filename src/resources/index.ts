@@ -4,7 +4,6 @@ export {
   CourseLessonInteractions,
   type CourseLessonInteractionRetrieveResponse,
   type CourseLessonInteractionListResponse,
-  type CourseLessonInteractionRetrieveParams,
   type CourseLessonInteractionListParams,
 } from './course-lesson-interactions';
 export {
@@ -14,7 +13,6 @@ export {
   type InvoiceListResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
-  type InvoiceRetrieveParams,
   type InvoiceListParams,
   type InvoiceVoidParams,
 } from './invoices';
