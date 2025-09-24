@@ -289,203 +289,205 @@ export namespace InvoiceListResponse {
 }
 
 export interface InvoiceCreateParams {
-  input: InvoiceCreateParams.Input;
+  collection_method: 'send_invoice' | 'charge_automatically';
+
+  due_date: number;
+
+  plan: InvoiceCreateParams.Plan;
+
+  access_pass?: InvoiceCreateParams.AccessPass | null;
+
+  access_pass_id?: string | null;
+
+  charge_buyer_fee?: boolean | null;
+
+  client_mutation_id?: string | null;
+
+  customer_name?: string | null;
+
+  email_address?: string | null;
+
+  member_id?: string | null;
+
+  payment_token_id?: string | null;
 }
 
 export namespace InvoiceCreateParams {
-  export interface Input {
-    collection_method: 'send_invoice' | 'charge_automatically';
+  export interface Plan {
+    ach_payments?: boolean | null;
 
-    due_date: number;
+    base_currency?:
+      | 'usd'
+      | 'sgd'
+      | 'inr'
+      | 'aud'
+      | 'brl'
+      | 'cad'
+      | 'dkk'
+      | 'eur'
+      | 'nok'
+      | 'gbp'
+      | 'sek'
+      | 'chf'
+      | 'hkd'
+      | 'huf'
+      | 'jpy'
+      | 'mxn'
+      | 'myr'
+      | 'pln'
+      | 'czk'
+      | 'nzd'
+      | 'aed'
+      | 'eth'
+      | 'ape'
+      | 'cop'
+      | 'ron'
+      | 'thb'
+      | 'bgn'
+      | 'idr'
+      | 'dop'
+      | 'php'
+      | 'try'
+      | 'krw'
+      | 'twd'
+      | 'vnd'
+      | 'pkr'
+      | 'clp'
+      | 'uyu'
+      | 'ars'
+      | 'zar'
+      | 'dzd'
+      | 'tnd'
+      | 'mad'
+      | 'kes'
+      | 'kwd'
+      | 'jod'
+      | 'all'
+      | 'xcd'
+      | 'amd'
+      | 'bsd'
+      | 'bhd'
+      | 'bob'
+      | 'bam'
+      | 'khr'
+      | 'crc'
+      | 'xof'
+      | 'egp'
+      | 'etb'
+      | 'gmd'
+      | 'ghs'
+      | 'gtq'
+      | 'gyd'
+      | 'ils'
+      | 'jmd'
+      | 'mop'
+      | 'mga'
+      | 'mur'
+      | 'mdl'
+      | 'mnt'
+      | 'nad'
+      | 'ngn'
+      | 'mkd'
+      | 'omr'
+      | 'pyg'
+      | 'pen'
+      | 'qar'
+      | 'rwf'
+      | 'sar'
+      | 'rsd'
+      | 'lkr'
+      | 'tzs'
+      | 'ttd'
+      | 'uzs'
+      | 'rub'
+      | 'btc'
+      | null;
 
-    plan: Input.Plan;
+    billing_period?: number | null;
 
-    access_pass?: Input.AccessPass | null;
+    card_payments?: boolean | null;
 
-    access_pass_id?: string | null;
+    coinbase_commerce_accepted?: boolean | null;
 
-    charge_buyer_fee?: boolean | null;
+    custom_fields?: Array<Plan.CustomField> | null;
 
-    client_mutation_id?: string | null;
+    description?: string | null;
 
-    customer_name?: string | null;
+    expiration_days?: number | null;
 
-    email_address?: string | null;
+    initial_price?: number | null;
 
-    member_id?: string | null;
+    internal_notes?: string | null;
 
-    payment_token_id?: string | null;
+    offer_cancel_discount?: boolean | null;
+
+    paypal_accepted?: boolean | null;
+
+    plan_type?: 'renewal' | 'one_time' | null;
+
+    platform_balance_accepted?: boolean | null;
+
+    redirect_url?: string | null;
+
+    release_method?: 'buy_now' | 'waitlist' | 'raffle' | null;
+
+    release_method_settings?: Plan.ReleaseMethodSettings | null;
+
+    renewal_price?: number | null;
+
+    requirements?: Plan.Requirements | null;
+
+    split_pay_required_payments?: number | null;
+
+    splitit_accepted?: boolean | null;
+
+    stock?: number | null;
+
+    trial_period_days?: number | null;
+
+    unlimited_stock?: boolean | null;
+
+    visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
   }
 
-  export namespace Input {
-    export interface Plan {
-      ach_payments?: boolean | null;
+  export namespace Plan {
+    export interface CustomField {
+      field_type: 'text';
 
-      base_currency?:
-        | 'usd'
-        | 'sgd'
-        | 'inr'
-        | 'aud'
-        | 'brl'
-        | 'cad'
-        | 'dkk'
-        | 'eur'
-        | 'nok'
-        | 'gbp'
-        | 'sek'
-        | 'chf'
-        | 'hkd'
-        | 'huf'
-        | 'jpy'
-        | 'mxn'
-        | 'myr'
-        | 'pln'
-        | 'czk'
-        | 'nzd'
-        | 'aed'
-        | 'eth'
-        | 'ape'
-        | 'cop'
-        | 'ron'
-        | 'thb'
-        | 'bgn'
-        | 'idr'
-        | 'dop'
-        | 'php'
-        | 'try'
-        | 'krw'
-        | 'twd'
-        | 'vnd'
-        | 'pkr'
-        | 'clp'
-        | 'uyu'
-        | 'ars'
-        | 'zar'
-        | 'dzd'
-        | 'tnd'
-        | 'mad'
-        | 'kes'
-        | 'kwd'
-        | 'jod'
-        | 'all'
-        | 'xcd'
-        | 'amd'
-        | 'bsd'
-        | 'bhd'
-        | 'bob'
-        | 'bam'
-        | 'khr'
-        | 'crc'
-        | 'xof'
-        | 'egp'
-        | 'etb'
-        | 'gmd'
-        | 'ghs'
-        | 'gtq'
-        | 'gyd'
-        | 'ils'
-        | 'jmd'
-        | 'mop'
-        | 'mga'
-        | 'mur'
-        | 'mdl'
-        | 'mnt'
-        | 'nad'
-        | 'ngn'
-        | 'mkd'
-        | 'omr'
-        | 'pyg'
-        | 'pen'
-        | 'qar'
-        | 'rwf'
-        | 'sar'
-        | 'rsd'
-        | 'lkr'
-        | 'tzs'
-        | 'ttd'
-        | 'uzs'
-        | 'rub'
-        | 'btc'
-        | null;
+      name: string;
 
-      billing_period?: number | null;
+      id?: string | null;
 
-      card_payments?: boolean | null;
+      order?: number | null;
 
-      coinbase_commerce_accepted?: boolean | null;
+      placeholder?: string | null;
 
-      custom_fields?: Array<Plan.CustomField> | null;
-
-      description?: string | null;
-
-      expiration_days?: number | null;
-
-      initial_price?: unknown;
-
-      internal_notes?: string | null;
-
-      offer_cancel_discount?: boolean | null;
-
-      paypal_accepted?: boolean | null;
-
-      plan_type?: 'renewal' | 'one_time' | null;
-
-      platform_balance_accepted?: boolean | null;
-
-      redirect_url?: string | null;
-
-      release_method?: 'buy_now' | 'waitlist' | 'raffle' | null;
-
-      release_method_settings?: Plan.ReleaseMethodSettings | null;
-
-      renewal_price?: unknown;
-
-      requirements?: unknown;
-
-      split_pay_required_payments?: number | null;
-
-      splitit_accepted?: boolean | null;
-
-      stock?: number | null;
-
-      trial_period_days?: number | null;
-
-      unlimited_stock?: boolean | null;
-
-      visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
+      required?: boolean | null;
     }
 
-    export namespace Plan {
-      export interface CustomField {
-        field_type: 'text';
+    export interface ReleaseMethodSettings {
+      expires_at?: number | null;
 
-        name: string;
+      max_entries?: number | null;
 
-        id?: string | null;
+      nft_weighted_entries?: boolean | null;
 
-        order?: number | null;
-
-        placeholder?: string | null;
-
-        required?: boolean | null;
-      }
-
-      export interface ReleaseMethodSettings {
-        expires_at?: number | null;
-
-        max_entries?: number | null;
-
-        nft_weighted_entries?: boolean | null;
-
-        starts_at?: number | null;
-      }
+      starts_at?: number | null;
     }
 
-    export interface AccessPass {
-      title: string;
+    export interface Requirements {
+      custom_password?: string;
 
-      product_tax_code_id?: string | null;
+      email_required?: true;
+
+      ownership_of_access_passes?: Array<string>;
     }
+  }
+
+  export interface AccessPass {
+    title: string;
+
+    product_tax_code_id?: string | null;
   }
 }
 
