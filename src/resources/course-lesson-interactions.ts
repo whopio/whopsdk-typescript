@@ -6,12 +6,8 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 export class CourseLessonInteractions extends APIResource {
-  retrieve(
-    pathID: string,
-    query: CourseLessonInteractionRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<CourseLessonInteractionRetrieveResponse> {
-    return this._client.get(path`/course_lesson_interactions/${pathID}`, { query, ...options });
+  retrieve(id: string, options?: RequestOptions): APIPromise<CourseLessonInteractionRetrieveResponse> {
+    return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 
   list(
@@ -96,10 +92,6 @@ export namespace CourseLessonInteractionListResponse {
   }
 }
 
-export interface CourseLessonInteractionRetrieveParams {
-  query_id: string;
-}
-
 export interface CourseLessonInteractionListParams {
   after?: string | null;
 
@@ -122,7 +114,6 @@ export declare namespace CourseLessonInteractions {
   export {
     type CourseLessonInteractionRetrieveResponse as CourseLessonInteractionRetrieveResponse,
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
-    type CourseLessonInteractionRetrieveParams as CourseLessonInteractionRetrieveParams,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 }

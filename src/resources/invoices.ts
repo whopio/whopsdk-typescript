@@ -10,12 +10,8 @@ export class Invoices extends APIResource {
     return this._client.post('/invoices', { body, ...options });
   }
 
-  retrieve(
-    pathID: string,
-    query: InvoiceRetrieveParams,
-    options?: RequestOptions,
-  ): APIPromise<InvoiceRetrieveResponse> {
-    return this._client.get(path`/invoices/${pathID}`, { query, ...options });
+  retrieve(id: string, options?: RequestOptions): APIPromise<InvoiceRetrieveResponse> {
+    return this._client.get(path`/invoices/${id}`, options);
   }
 
   list(query: InvoiceListParams, options?: RequestOptions): APIPromise<InvoiceListResponse> {
@@ -23,11 +19,11 @@ export class Invoices extends APIResource {
   }
 
   void(
-    pathID: string,
-    body: InvoiceVoidParams,
+    id: string,
+    body: InvoiceVoidParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<InvoiceVoidResponse | null> {
-    return this._client.post(path`/invoices/${pathID}/void`, { body, ...options });
+    return this._client.post(path`/invoices/${id}/void`, { body, ...options });
   }
 }
 
@@ -634,10 +630,6 @@ export namespace InvoiceCreateParams {
   }
 }
 
-export interface InvoiceRetrieveParams {
-  query_id: string;
-}
-
 export interface InvoiceListParams {
   company_id: string;
 
@@ -667,8 +659,6 @@ export namespace InvoiceListParams {
 }
 
 export interface InvoiceVoidParams {
-  body_id: string;
-
   client_mutation_id?: string | null;
 }
 
@@ -679,7 +669,6 @@ export declare namespace Invoices {
     type InvoiceListResponse as InvoiceListResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
-    type InvoiceRetrieveParams as InvoiceRetrieveParams,
     type InvoiceListParams as InvoiceListParams,
     type InvoiceVoidParams as InvoiceVoidParams,
   };
