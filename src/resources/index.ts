@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  AccessPasses,
+  type AccessPassRetrieveResponse,
+  type AccessPassListResponse,
+  type AccessPassListParams,
+} from './access-passes';
+export { Companies, type CompanyRetrieveResponse } from './companies';
+export {
   CourseLessonInteractions,
   type CourseLessonInteractionRetrieveResponse,
   type CourseLessonInteractionListResponse,
