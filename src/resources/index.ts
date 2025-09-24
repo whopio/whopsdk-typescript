@@ -2,13 +2,13 @@
 
 export {
   CourseLessonInteractions,
-  type CourseLessonInteractionRetrieveResponse,
   type CourseLessonInteractionListResponse,
+  type CourseLessonInteractionListParams,
 } from './course-lesson-interactions';
 export {
   Invoices,
   type InvoiceCreateResponse,
-  type InvoiceRetrieveResponse,
   type InvoiceListResponse,
-  type InvoiceVoidResponse,
+  type InvoiceCreateParams,
+  type InvoiceListParams,
 } from './invoices';

@@ -29,7 +29,7 @@ const client = new Whopsdk({
   apiKey: process.env['WHOPSDK_API_KEY'], // This is the default and can be omitted
 });
 
-const invoices = await client.invoices.list();
+const invoices = await client.invoices.list({ company_id: 'company_id' });
 
 console.log(invoices.data);
 ```
@@ -46,7 +46,8 @@ const client = new Whopsdk({
   apiKey: process.env['WHOPSDK_API_KEY'], // This is the default and can be omitted
 });
 
-const invoices: Whopsdk.InvoiceListResponse = await client.invoices.list();
+const params: Whopsdk.InvoiceListParams = { company_id: 'company_id' };
+const invoices: Whopsdk.InvoiceListResponse = await client.invoices.list(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,7 +60,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const invoices = await client.invoices.list().catch(async (err) => {
+const invoices = await client.invoices.list({ company_id: 'company_id' }).catch(async (err) => {
   if (err instanceof Whopsdk.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -99,7 +100,7 @@ const client = new Whopsdk({
 });
 
 // Or, configure per-request:
-await client.invoices.list({
+await client.invoices.list({ company_id: 'company_id' }, {
   maxRetries: 5,
 });
 ```
@@ -116,7 +117,7 @@ const client = new Whopsdk({
 });
 
 // Override per-request:
-await client.invoices.list({
+await client.invoices.list({ company_id: 'company_id' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -139,11 +140,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Whopsdk();
 
-const response = await client.invoices.list().asResponse();
+const response = await client.invoices.list({ company_id: 'company_id' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: invoices, response: raw } = await client.invoices.list().withResponse();
+const { data: invoices, response: raw } = await client.invoices
+  .list({ company_id: 'company_id' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(invoices.data);
 ```
