@@ -67,7 +67,6 @@ describe('resource invoices', () => {
       access_pass: { title: 'title', product_tax_code_id: 'product_tax_code_id' },
       access_pass_id: 'access_pass_id',
       charge_buyer_fee: true,
-      client_mutation_id: 'client_mutation_id',
       customer_name: 'customer_name',
       email_address: 'email_address',
       member_id: 'member_id',
@@ -123,17 +122,5 @@ describe('resource invoices', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('void: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.invoices.void(
-        'id',
-        { client_mutation_id: 'client_mutation_id' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whopsdk.NotFoundError);
   });
 });

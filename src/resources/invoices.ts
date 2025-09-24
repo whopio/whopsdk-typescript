@@ -30,12 +30,8 @@ export class Invoices extends APIResource {
   /**
    * Void an invoice
    */
-  void(
-    id: string,
-    body: InvoiceVoidParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<InvoiceVoidResponse | null> {
-    return this._client.post(path`/invoices/${id}/void`, { body, ...options });
+  void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse | null> {
+    return this._client.post(path`/invoices/${id}/void`, options);
   }
 }
 
@@ -681,11 +677,6 @@ export interface InvoiceCreateParams {
   charge_buyer_fee?: boolean | null;
 
   /**
-   * A unique identifier for the client performing the mutation.
-   */
-  client_mutation_id?: string | null;
-
-  /**
    * The name of the customer to create this invoice for. This is required if you
    * want to create an invoice for a customer who does not have a member of your
    * company yet.
@@ -1065,13 +1056,6 @@ export namespace InvoiceListParams {
   }
 }
 
-export interface InvoiceVoidParams {
-  /**
-   * A unique identifier for the client performing the mutation.
-   */
-  client_mutation_id?: string | null;
-}
-
 export declare namespace Invoices {
   export {
     type InvoiceCreateResponse as InvoiceCreateResponse,
@@ -1080,6 +1064,5 @@ export declare namespace Invoices {
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
-    type InvoiceVoidParams as InvoiceVoidParams,
   };
 }
