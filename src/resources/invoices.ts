@@ -116,11 +116,6 @@ export namespace InvoiceCreateResponse {
     fetch_invoice_token: string;
 
     /**
-     * The member that the invoice was created for.
-     */
-    member: Invoice.Member | null;
-
-    /**
      * The number of the invoice.
      */
     number: string;
@@ -129,6 +124,11 @@ export namespace InvoiceCreateResponse {
      * The status of the invoice.
      */
     status: 'open' | 'paid' | 'past_due' | 'void';
+
+    /**
+     * The user that the invoice was created for.
+     */
+    user: Invoice.User | null;
   }
 
   export namespace Invoice {
@@ -237,28 +237,23 @@ export namespace InvoiceCreateResponse {
     }
 
     /**
-     * The member that the invoice was created for.
+     * The user that the invoice was created for.
      */
-    export interface Member {
+    export interface User {
       /**
-       * The internal ID of the user account for the member.
+       * The internal ID of the user.
        */
       id: string;
 
       /**
-       * The digital mailing address of the member.
-       */
-      email: string | null;
-
-      /**
-       * The written name of the member.
+       * The name of the user from their Whop account.
        */
       name: string | null;
 
       /**
-       * The whop username of the member.
+       * The username of the user from their Whop account.
        */
-      username: string | null;
+      username: string;
     }
   }
 }
@@ -298,11 +293,6 @@ export interface InvoiceRetrieveResponse {
   fetch_invoice_token: string;
 
   /**
-   * The member that the invoice was created for.
-   */
-  member: InvoiceRetrieveResponse.Member | null;
-
-  /**
    * The number of the invoice.
    */
   number: string;
@@ -311,6 +301,11 @@ export interface InvoiceRetrieveResponse {
    * The status of the invoice.
    */
   status: 'open' | 'paid' | 'past_due' | 'void';
+
+  /**
+   * The user that the invoice was created for.
+   */
+  user: InvoiceRetrieveResponse.User | null;
 }
 
 export namespace InvoiceRetrieveResponse {
@@ -419,28 +414,23 @@ export namespace InvoiceRetrieveResponse {
   }
 
   /**
-   * The member that the invoice was created for.
+   * The user that the invoice was created for.
    */
-  export interface Member {
+  export interface User {
     /**
-     * The internal ID of the user account for the member.
+     * The internal ID of the user.
      */
     id: string;
 
     /**
-     * The digital mailing address of the member.
-     */
-    email: string | null;
-
-    /**
-     * The written name of the member.
+     * The name of the user from their Whop account.
      */
     name: string | null;
 
     /**
-     * The whop username of the member.
+     * The username of the user from their Whop account.
      */
-    username: string | null;
+    username: string;
   }
 }
 
@@ -495,11 +485,6 @@ export namespace InvoiceListResponse {
     fetch_invoice_token: string;
 
     /**
-     * The member that the invoice was created for.
-     */
-    member: Data.Member | null;
-
-    /**
      * The number of the invoice.
      */
     number: string;
@@ -508,6 +493,11 @@ export namespace InvoiceListResponse {
      * The status of the invoice.
      */
     status: 'open' | 'paid' | 'past_due' | 'void';
+
+    /**
+     * The user that the invoice was created for.
+     */
+    user: Data.User | null;
   }
 
   export namespace Data {
@@ -616,28 +606,23 @@ export namespace InvoiceListResponse {
     }
 
     /**
-     * The member that the invoice was created for.
+     * The user that the invoice was created for.
      */
-    export interface Member {
+    export interface User {
       /**
-       * The internal ID of the user account for the member.
+       * The internal ID of the user.
        */
       id: string;
 
       /**
-       * The digital mailing address of the member.
-       */
-      email: string | null;
-
-      /**
-       * The written name of the member.
+       * The name of the user from their Whop account.
        */
       name: string | null;
 
       /**
-       * The whop username of the member.
+       * The username of the user from their Whop account.
        */
-      username: string | null;
+      username: string;
     }
   }
 
