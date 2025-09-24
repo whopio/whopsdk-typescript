@@ -32,94 +32,79 @@ export class Invoices extends APIResource {
  */
 export interface InvoiceCreateResponse {
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the checkout job that was created for this invoice.
    */
   checkout_job_id: string | null;
 
   /**
-   * A statement that defines an amount due by a customer.
+   * The invoice that was created for this invoice.
    */
   invoice: InvoiceCreateResponse.Invoice | null;
 }
 
 export namespace InvoiceCreateResponse {
   /**
-   * A statement that defines an amount due by a customer.
+   * The invoice that was created for this invoice.
    */
   export interface Invoice {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The ID of the invoice.
      */
     id: string;
 
     /**
-     * A valid timestamp in seconds, transported as an integer
+     * The date the invoice was created.
      */
     created_at: number;
 
     /**
-     * A plan for an access pass.
+     * The plan that the invoice was created for.
      */
     current_plan: Invoice.CurrentPlan;
 
     /**
-     * A valid timestamp in seconds, transported as an integer
+     * The date the invoice is due.
      */
     due_date: number | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The email address that the invoice was created for.
      */
     email_address: string | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The token to fetch the invoice.
      */
     fetch_invoice_token: string;
 
     /**
-     * A user of the site.
+     * The member that the invoice was created for.
      */
     member: Invoice.Member | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The number of the invoice.
      */
     number: string;
 
     /**
-     * The different statuses an invoice can be in
+     * The status of the invoice.
      */
     status: 'open' | 'paid' | 'past_due' | 'void';
   }
 
   export namespace Invoice {
     /**
-     * A plan for an access pass.
+     * The plan that the invoice was created for.
      */
     export interface CurrentPlan {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The internal ID of the plan.
        */
       id: string;
 
       /**
-       * The available currencies on the platform
+       * The respective currency identifier for the plan.
        */
       base_currency:
         | 'usd'
@@ -208,40 +193,32 @@ export namespace InvoiceCreateResponse {
         | 'btc';
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The formatted price (including currency) for the plan.
        */
       formatted_price: string;
     }
 
     /**
-     * A user of the site.
+     * The member that the invoice was created for.
      */
     export interface Member {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The internal ID of the user account for the member.
        */
       id: string;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The digital mailing address of the member.
        */
       email: string | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The written name of the member.
        */
       name: string | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The whop username of the member.
        */
       username: string | null;
     }
@@ -253,74 +230,63 @@ export namespace InvoiceCreateResponse {
  */
 export interface InvoiceRetrieveResponse {
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the invoice.
    */
   id: string;
 
   /**
-   * A valid timestamp in seconds, transported as an integer
+   * The date the invoice was created.
    */
   created_at: number;
 
   /**
-   * A plan for an access pass.
+   * The plan that the invoice was created for.
    */
   current_plan: InvoiceRetrieveResponse.CurrentPlan;
 
   /**
-   * A valid timestamp in seconds, transported as an integer
+   * The date the invoice is due.
    */
   due_date: number | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * The email address that the invoice was created for.
    */
   email_address: string | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * The token to fetch the invoice.
    */
   fetch_invoice_token: string;
 
   /**
-   * A user of the site.
+   * The member that the invoice was created for.
    */
   member: InvoiceRetrieveResponse.Member | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * The number of the invoice.
    */
   number: string;
 
   /**
-   * The different statuses an invoice can be in
+   * The status of the invoice.
    */
   status: 'open' | 'paid' | 'past_due' | 'void';
 }
 
 export namespace InvoiceRetrieveResponse {
   /**
-   * A plan for an access pass.
+   * The plan that the invoice was created for.
    */
   export interface CurrentPlan {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The internal ID of the plan.
      */
     id: string;
 
     /**
-     * The available currencies on the platform
+     * The respective currency identifier for the plan.
      */
     base_currency:
       | 'usd'
@@ -409,40 +375,32 @@ export namespace InvoiceRetrieveResponse {
       | 'btc';
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The formatted price (including currency) for the plan.
      */
     formatted_price: string;
   }
 
   /**
-   * A user of the site.
+   * The member that the invoice was created for.
    */
   export interface Member {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The internal ID of the user account for the member.
      */
     id: string;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The digital mailing address of the member.
      */
     email: string | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The written name of the member.
      */
     name: string | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The whop username of the member.
      */
     username: string | null;
   }
@@ -452,10 +410,13 @@ export namespace InvoiceRetrieveResponse {
  * The connection type for Invoice.
  */
 export interface InvoiceListResponse {
+  /**
+   * A list of nodes.
+   */
   data: Array<InvoiceListResponse.Data | null> | null;
 
   /**
-   * Information about pagination in a connection.
+   * Information to aid in pagination.
    */
   page_info: InvoiceListResponse.PageInfo;
 }
@@ -466,74 +427,63 @@ export namespace InvoiceListResponse {
    */
   export interface Data {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The ID of the invoice.
      */
     id: string;
 
     /**
-     * A valid timestamp in seconds, transported as an integer
+     * The date the invoice was created.
      */
     created_at: number;
 
     /**
-     * A plan for an access pass.
+     * The plan that the invoice was created for.
      */
     current_plan: Data.CurrentPlan;
 
     /**
-     * A valid timestamp in seconds, transported as an integer
+     * The date the invoice is due.
      */
     due_date: number | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The email address that the invoice was created for.
      */
     email_address: string | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The token to fetch the invoice.
      */
     fetch_invoice_token: string;
 
     /**
-     * A user of the site.
+     * The member that the invoice was created for.
      */
     member: Data.Member | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The number of the invoice.
      */
     number: string;
 
     /**
-     * The different statuses an invoice can be in
+     * The status of the invoice.
      */
     status: 'open' | 'paid' | 'past_due' | 'void';
   }
 
   export namespace Data {
     /**
-     * A plan for an access pass.
+     * The plan that the invoice was created for.
      */
     export interface CurrentPlan {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The internal ID of the plan.
        */
       id: string;
 
       /**
-       * The available currencies on the platform
+       * The respective currency identifier for the plan.
        */
       base_currency:
         | 'usd'
@@ -622,68 +572,58 @@ export namespace InvoiceListResponse {
         | 'btc';
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The formatted price (including currency) for the plan.
        */
       formatted_price: string;
     }
 
     /**
-     * A user of the site.
+     * The member that the invoice was created for.
      */
     export interface Member {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The internal ID of the user account for the member.
        */
       id: string;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The digital mailing address of the member.
        */
       email: string | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The written name of the member.
        */
       name: string | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The whop username of the member.
        */
       username: string | null;
     }
   }
 
   /**
-   * Information about pagination in a connection.
+   * Information to aid in pagination.
    */
   export interface PageInfo {
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * When paginating forwards, the cursor to continue.
      */
     end_cursor: string | null;
 
     /**
-     * Represents `true` or `false` values.
+     * When paginating forwards, are there more items?
      */
     has_next_page: boolean;
 
     /**
-     * Represents `true` or `false` values.
+     * When paginating backwards, are there more items?
      */
     has_previous_page: boolean;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * When paginating backwards, the cursor to continue.
      */
     start_cursor: string | null;
   }
@@ -696,12 +636,13 @@ export type InvoiceVoidResponse = boolean | null;
 
 export interface InvoiceCreateParams {
   /**
-   * The method of collection for an invoice.
+   * The method of collection for this invoice. If using charge_automatically, you
+   * must provide a payment_token.
    */
   collection_method: 'send_invoice' | 'charge_automatically';
 
   /**
-   * A valid timestamp in seconds, transported as an integer
+   * The date the invoice is due, if applicable.
    */
   due_date: number;
 
@@ -711,57 +652,50 @@ export interface InvoiceCreateParams {
   plan: InvoiceCreateParams.Plan;
 
   /**
-   * The properties of the access pass to create for this invoice.
+   * The properties of the access pass to create for this invoice. Include this if
+   * you want to create an invoice for a new product.
    */
   access_pass?: InvoiceCreateParams.AccessPass | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The access pass ID to create this invoice for. Include this if you want to
+   * create an invoice for an existing product.
    */
   access_pass_id?: string | null;
 
   /**
-   * Represents `true` or `false` values.
+   * Whether or not to charge the customer a buyer fee.
    */
   charge_buyer_fee?: boolean | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * A unique identifier for the client performing the mutation.
    */
   client_mutation_id?: string | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * The name of the customer to create this invoice for. This is required if you
+   * want to create an invoice for a customer who does not have a member of your
+   * company yet.
    */
   customer_name?: string | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * The email address to create this invoice for. This is required if you want to
+   * create an invoice for a user who does not have a member of your company yet.
    */
   email_address?: string | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The member ID to create this invoice for. Include this if you want to create an
+   * invoice for an existing member. If you do not have a member ID, you must provide
+   * an email_address and customer_name.
    */
   member_id?: string | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The payment token ID to use for this invoice. If using charge_automatically, you
+   * must provide a payment_token.
    */
   payment_token_id?: string | null;
 }
@@ -772,12 +706,12 @@ export namespace InvoiceCreateParams {
    */
   export interface Plan {
     /**
-     * Represents `true` or `false` values.
+     * Whether or not ACH payments are accepted
      */
     ach_payments?: boolean | null;
 
     /**
-     * The available currencies on the platform
+     * The respective currency identifier for the plan.
      */
     base_currency?:
       | 'usd'
@@ -867,195 +801,189 @@ export namespace InvoiceCreateParams {
       | null;
 
     /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
+     * The interval at which the plan charges (renewal plans).
      */
     billing_period?: number | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Whether or not card payments are accepted
      */
     card_payments?: boolean | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Marks whether coinbase commerce payments are/aren't accepted.
      */
     coinbase_commerce_accepted?: boolean | null;
 
+    /**
+     * An array of custom field objects.
+     */
     custom_fields?: Array<Plan.CustomField> | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The description of the plan.
      */
     description?: string | null;
 
     /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
+     * The interval at which the plan charges (expiration plans).
      */
     expiration_days?: number | null;
 
     /**
-     * A float that can be a string
+     * An additional amount charged upon first purchase.
      */
     initial_price?: number | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * A personal description or notes section for the business.
      */
     internal_notes?: string | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Whether or not to offer a discount to cancel a subscription.
      */
     offer_cancel_discount?: boolean | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Marks whether paypal payments are/aren't accepted.
      */
     paypal_accepted?: boolean | null;
 
     /**
-     * The type of plan that can be attached to an access pass
+     * Indicates if the plan is a one time payment or recurring.
      */
     plan_type?: 'renewal' | 'one_time' | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Marks whether platform balance payments are/aren't accepted.
      */
     platform_balance_accepted?: boolean | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The URL to redirect the customer to after purchase.
      */
     redirect_url?: string | null;
 
     /**
-     * The methods of how a plan can be released (including raffles and waitlists).
+     * This is the release method the business uses to sell this plan.
      */
     release_method?: 'buy_now' | 'waitlist' | 'raffle' | null;
 
+    /**
+     * Configurable settings on how this plan is released.
+     */
     release_method_settings?: Plan.ReleaseMethodSettings | null;
 
     /**
-     * A float that can be a string
+     * The amount the customer is charged every billing period.
      */
     renewal_price?: number | null;
 
     /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
+     * The number of payments required before pausing the subscription.
      */
     split_pay_required_payments?: number | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Marks whether payments using splitit, a payment processor, are/aren't accepted
+     * for the plan.
      */
     splitit_accepted?: boolean | null;
 
     /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
+     * The number of units available for purchase.
      */
     stock?: number | null;
 
     /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
+     * The number of free trial days added before a renewal plan.
      */
     trial_period_days?: number | null;
 
     /**
-     * Represents `true` or `false` values.
+     * Limits/doesn't limit the number of units available for purchase.
      */
     unlimited_stock?: boolean | null;
 
     /**
-     * Visibility of a resource
+     * Shows or hides the plan from public/business view.
      */
     visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
   }
 
   export namespace Plan {
     export interface CustomField {
+      /**
+       * The type of the custom field.
+       */
       field_type: 'text';
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The name of the custom field.
        */
       name: string;
 
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The ID of the custom field (if being updated)
        */
       id?: string | null;
 
       /**
-       * Represents non-fractional signed whole numeric values. Int can represent values
-       * between -(2^31) and 2^31 - 1.
+       * The order of the field.
        */
       order?: number | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The placeholder value of the field.
        */
       placeholder?: string | null;
 
       /**
-       * Represents `true` or `false` values.
+       * Whether or not the field is required.
        */
       required?: boolean | null;
     }
 
+    /**
+     * Configurable settings on how this plan is released.
+     */
     export interface ReleaseMethodSettings {
       /**
-       * A valid timestamp in seconds, transported as an integer
+       * When the raffle will expire
        */
       expires_at?: number | null;
 
       /**
-       * Represents non-fractional signed whole numeric values. Int can represent values
-       * between -(2^31) and 2^31 - 1.
+       * The maximum number of entries allowed for the raffle or waitlist
        */
       max_entries?: number | null;
 
       /**
-       * Represents `true` or `false` values.
+       * If this is enabled, the raffle will get entries based off of how many NFTs the
+       * user owns
        */
       nft_weighted_entries?: boolean | null;
 
       /**
-       * A valid timestamp in seconds, transported as an integer
+       * When the raffle will start
        */
       starts_at?: number | null;
     }
   }
 
   /**
-   * The properties of the access pass to create for this invoice.
+   * The properties of the access pass to create for this invoice. Include this if
+   * you want to create an invoice for a new product.
    */
   export interface AccessPass {
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The title of the access pass.
      */
     title: string;
 
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The ID of the product tax code to apply to this access pass.
      */
     product_tax_code_id?: string | null;
   }
@@ -1063,71 +991,71 @@ export namespace InvoiceCreateParams {
 
 export interface InvoiceListParams {
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the company to list invoices for
    */
   company_id: string;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * Returns the elements in the list that come after the specified cursor.
    */
   after?: string | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
 
   /**
-   * The direction of the sort.
+   * The direction to sort the invoices by
    */
   direction?: 'asc' | 'desc' | null;
 
   /**
-   * Filters for the invoices table.
+   * The filters to apply to the invoices
    */
   filters?: InvoiceListParams.Filters | null;
 
   /**
-   * Represents non-fractional signed whole numeric values. Int can represent values
-   * between -(2^31) and 2^31 - 1.
+   * Returns the first _n_ elements from the list.
    */
   first?: number | null;
 
   /**
-   * Represents non-fractional signed whole numeric values. Int can represent values
-   * between -(2^31) and 2^31 - 1.
+   * Returns the last _n_ elements from the list.
    */
   last?: number | null;
 
   /**
-   * Which columns can be used to sort.
+   * The order to sort the invoices by
    */
   order?: 'id' | 'created_at' | 'due_date' | null;
 }
 
 export namespace InvoiceListParams {
   /**
-   * Filters for the invoices table.
+   * The filters to apply to the invoices
    */
   export interface Filters {
+    /**
+     * The access pass IDs to filter the invoices by
+     */
     access_pass_ids?: Array<string> | null;
 
+    /**
+     * The collection methods to filter the invoices by
+     */
     collection_methods?: Array<'send_invoice' | 'charge_automatically'> | null;
 
+    /**
+     * The statuses to filter the invoices by
+     */
     statuses?: Array<'open' | 'paid' | 'past_due' | 'void'> | null;
   }
 }
 
 export interface InvoiceVoidParams {
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * A unique identifier for the client performing the mutation.
    */
   client_mutation_id?: string | null;
 }
