@@ -6,10 +6,16 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 export class CourseLessonInteractions extends APIResource {
+  /**
+   * Retrieves a course lesson interaction by ID
+   */
   retrieve(id: string, options?: RequestOptions): APIPromise<CourseLessonInteractionRetrieveResponse> {
     return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 
+  /**
+   * Lists course lesson interactions
+   */
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},
     options?: RequestOptions,

@@ -6,18 +6,30 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 export class Invoices extends APIResource {
+  /**
+   * Creates an invoice
+   */
   create(body: InvoiceCreateParams, options?: RequestOptions): APIPromise<InvoiceCreateResponse | null> {
     return this._client.post('/invoices', { body, ...options });
   }
 
+  /**
+   * Retrieves an invoice by ID or token
+   */
   retrieve(id: string, options?: RequestOptions): APIPromise<InvoiceRetrieveResponse> {
     return this._client.get(path`/invoices/${id}`, options);
   }
 
+  /**
+   * Lists invoices
+   */
   list(query: InvoiceListParams, options?: RequestOptions): APIPromise<InvoiceListResponse> {
     return this._client.get('/invoices', { query, ...options });
   }
 
+  /**
+   * Void an invoice
+   */
   void(
     id: string,
     body: InvoiceVoidParams | null | undefined = {},
