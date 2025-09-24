@@ -39,8 +39,8 @@ describe('resource accessPasses', () => {
       access_pass_type: 'regular',
       after: 'after',
       before: 'before',
-      first: 0,
-      last: 0,
+      first: 42,
+      last: 42,
     });
   });
 });

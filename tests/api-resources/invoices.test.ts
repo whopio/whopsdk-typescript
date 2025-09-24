@@ -12,7 +12,7 @@ describe('resource invoices', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
-      due_date: 0,
+      due_date: 1701406800,
       plan: {},
     });
     const rawResponse = await responsePromise.asResponse();
@@ -28,11 +28,11 @@ describe('resource invoices', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
-      due_date: 0,
+      due_date: 1701406800,
       plan: {
         ach_payments: true,
         base_currency: 'usd',
-        billing_period: 0,
+        billing_period: 42,
         card_payments: true,
         coinbase_commerce_accepted: true,
         custom_fields: [
@@ -40,14 +40,14 @@ describe('resource invoices', () => {
             field_type: 'text',
             name: 'name',
             id: 'id',
-            order: 0,
+            order: 42,
             placeholder: 'placeholder',
             required: true,
           },
         ],
         description: 'description',
-        expiration_days: 0,
-        initial_price: 0,
+        expiration_days: 42,
+        initial_price: 6.9,
         internal_notes: 'internal_notes',
         offer_cancel_discount: true,
         paypal_accepted: true,
@@ -55,12 +55,17 @@ describe('resource invoices', () => {
         platform_balance_accepted: true,
         redirect_url: 'redirect_url',
         release_method: 'buy_now',
-        release_method_settings: { expires_at: 0, max_entries: 0, nft_weighted_entries: true, starts_at: 0 },
-        renewal_price: 0,
-        split_pay_required_payments: 0,
+        release_method_settings: {
+          expires_at: 1701406800,
+          max_entries: 42,
+          nft_weighted_entries: true,
+          starts_at: 1701406800,
+        },
+        renewal_price: 6.9,
+        split_pay_required_payments: 42,
         splitit_accepted: true,
-        stock: 0,
-        trial_period_days: 0,
+        stock: 42,
+        trial_period_days: 42,
         unlimited_stock: true,
         visibility: 'visible',
       },
@@ -106,8 +111,8 @@ describe('resource invoices', () => {
       before: 'before',
       direction: 'asc',
       filters: { access_pass_ids: ['string'], collection_methods: ['send_invoice'], statuses: ['open'] },
-      first: 0,
-      last: 0,
+      first: 42,
+      last: 42,
       order: 'id',
     });
   });
