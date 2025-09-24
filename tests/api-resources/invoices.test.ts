@@ -81,6 +81,23 @@ describe('resource invoices', () => {
   });
 
   // Prism tests are disabled
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.invoices.retrieve('id', { query_id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.invoices.retrieve('id', { query_id: 'id' });
+  });
+
+  // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.invoices.list({ company_id: 'company_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -103,6 +120,26 @@ describe('resource invoices', () => {
       first: 0,
       last: 0,
       order: 'id',
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('void: only required params', async () => {
+    const responsePromise = client.invoices.void('id', { body_id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('void: required and optional params', async () => {
+    const response = await client.invoices.void('id', {
+      body_id: 'id',
+      client_mutation_id: 'client_mutation_id',
     });
   });
 });

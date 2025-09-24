@@ -20,6 +20,8 @@ import { APIPromise } from './core/api-promise';
 import {
   CourseLessonInteractionListParams,
   CourseLessonInteractionListResponse,
+  CourseLessonInteractionRetrieveParams,
+  CourseLessonInteractionRetrieveResponse,
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
 import {
@@ -27,6 +29,10 @@ import {
   InvoiceCreateResponse,
   InvoiceListParams,
   InvoiceListResponse,
+  InvoiceRetrieveParams,
+  InvoiceRetrieveResponse,
+  InvoiceVoidParams,
+  InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
 import { type Fetch } from './internal/builtin-types';
@@ -729,14 +735,20 @@ export declare namespace Whopsdk {
   export {
     Invoices as Invoices,
     type InvoiceCreateResponse as InvoiceCreateResponse,
+    type InvoiceRetrieveResponse as InvoiceRetrieveResponse,
     type InvoiceListResponse as InvoiceListResponse,
+    type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceRetrieveParams as InvoiceRetrieveParams,
     type InvoiceListParams as InvoiceListParams,
+    type InvoiceVoidParams as InvoiceVoidParams,
   };
 
   export {
     CourseLessonInteractions as CourseLessonInteractions,
+    type CourseLessonInteractionRetrieveResponse as CourseLessonInteractionRetrieveResponse,
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
+    type CourseLessonInteractionRetrieveParams as CourseLessonInteractionRetrieveParams,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 }
