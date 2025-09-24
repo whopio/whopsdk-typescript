@@ -18,6 +18,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  AccessPassListParams,
+  AccessPassListResponse,
+  AccessPassRetrieveResponse,
+  AccessPasses,
+} from './resources/access-passes';
+import { Companies, CompanyRetrieveResponse } from './resources/companies';
+import {
   CourseLessonInteractionListParams,
   CourseLessonInteractionListResponse,
   CourseLessonInteractionRetrieveResponse,
@@ -721,10 +728,14 @@ export class Whopsdk {
 
   invoices: API.Invoices = new API.Invoices(this);
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
+  accessPasses: API.AccessPasses = new API.AccessPasses(this);
+  companies: API.Companies = new API.Companies(this);
 }
 
 Whopsdk.Invoices = Invoices;
 Whopsdk.CourseLessonInteractions = CourseLessonInteractions;
+Whopsdk.AccessPasses = AccessPasses;
+Whopsdk.Companies = Companies;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -745,4 +756,13 @@ export declare namespace Whopsdk {
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
+
+  export {
+    AccessPasses as AccessPasses,
+    type AccessPassRetrieveResponse as AccessPassRetrieveResponse,
+    type AccessPassListResponse as AccessPassListResponse,
+    type AccessPassListParams as AccessPassListParams,
+  };
+
+  export { Companies as Companies, type CompanyRetrieveResponse as CompanyRetrieveResponse };
 }

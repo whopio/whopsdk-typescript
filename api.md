@@ -25,3 +25,25 @@ Methods:
 
 - <code title="get /course_lesson_interactions/{id}">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">retrieve</a>(id) -> CourseLessonInteractionRetrieveResponse</code>
 - <code title="get /course_lesson_interactions">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">list</a>({ ...params }) -> CourseLessonInteractionListResponse</code>
+
+# AccessPasses
+
+Types:
+
+- <code><a href="./src/resources/access-passes.ts">AccessPassRetrieveResponse</a></code>
+- <code><a href="./src/resources/access-passes.ts">AccessPassListResponse</a></code>
+
+Methods:
+
+- <code title="get /access_passes/{id}">client.accessPasses.<a href="./src/resources/access-passes.ts">retrieve</a>(id) -> AccessPassRetrieveResponse</code>
+- <code title="get /access_passes">client.accessPasses.<a href="./src/resources/access-passes.ts">list</a>({ ...params }) -> AccessPassListResponse</code>
+
+# Companies
+
+Types:
+
+- <code><a href="./src/resources/companies.ts">CompanyRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> CompanyRetrieveResponse</code>
