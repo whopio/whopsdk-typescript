@@ -23,78 +23,63 @@ export class CourseLessonInteractions extends APIResource {
  */
 export interface CourseLessonInteractionRetrieveResponse {
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the lesson interaction
    */
   id: string;
 
   /**
-   * Represents `true` or `false` values.
+   * Whether the lesson has been completed by the user
    */
   completed: boolean;
 
   /**
-   * A valid timestamp in seconds, transported as an integer
+   * When the interaction was created
    */
   created_at: number;
 
   /**
-   * A lesson from the courses app
+   * The lesson this interaction is for
    */
   lesson: CourseLessonInteractionRetrieveResponse.Lesson;
 
   /**
-   * An object representing a (sanitized) user of the site.
+   * The user who interacted with the lesson
    */
   user: CourseLessonInteractionRetrieveResponse.User;
 }
 
 export namespace CourseLessonInteractionRetrieveResponse {
   /**
-   * A lesson from the courses app
+   * The lesson this interaction is for
    */
   export interface Lesson {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The ID of the lesson
      */
     id: string;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The title of the lesson
      */
     title: string;
   }
 
   /**
-   * An object representing a (sanitized) user of the site.
+   * The user who interacted with the lesson
    */
   export interface User {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The internal ID of the user.
      */
     id: string;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The name of the user from their Whop account.
      */
     name: string | null;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * The username of the user from their Whop account.
      */
     username: string;
   }
@@ -104,10 +89,13 @@ export namespace CourseLessonInteractionRetrieveResponse {
  * The connection type for LessonInteraction.
  */
 export interface CourseLessonInteractionListResponse {
+  /**
+   * A list of nodes.
+   */
   data: Array<CourseLessonInteractionListResponse.Data | null> | null;
 
   /**
-   * Information about pagination in a connection.
+   * Information to aid in pagination.
    */
   page_info: CourseLessonInteractionListResponse.PageInfo;
 }
@@ -118,106 +106,89 @@ export namespace CourseLessonInteractionListResponse {
    */
   export interface Data {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * The ID of the lesson interaction
      */
     id: string;
 
     /**
-     * Represents `true` or `false` values.
+     * Whether the lesson has been completed by the user
      */
     completed: boolean;
 
     /**
-     * A valid timestamp in seconds, transported as an integer
+     * When the interaction was created
      */
     created_at: number;
 
     /**
-     * A lesson from the courses app
+     * The lesson this interaction is for
      */
     lesson: Data.Lesson;
 
     /**
-     * An object representing a (sanitized) user of the site.
+     * The user who interacted with the lesson
      */
     user: Data.User;
   }
 
   export namespace Data {
     /**
-     * A lesson from the courses app
+     * The lesson this interaction is for
      */
     export interface Lesson {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The ID of the lesson
        */
       id: string;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The title of the lesson
        */
       title: string;
     }
 
     /**
-     * An object representing a (sanitized) user of the site.
+     * The user who interacted with the lesson
      */
     export interface User {
       /**
-       * Represents a unique identifier that is Base64 obfuscated. It is often used to
-       * refetch an object or as key for a cache. The ID type appears in a JSON response
-       * as a String; however, it is not intended to be human-readable. When expected as
-       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-       * input value will be accepted as an ID.
+       * The internal ID of the user.
        */
       id: string;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The name of the user from their Whop account.
        */
       name: string | null;
 
       /**
-       * Represents textual data as UTF-8 character sequences. This type is most often
-       * used by GraphQL to represent free-form human-readable text.
+       * The username of the user from their Whop account.
        */
       username: string;
     }
   }
 
   /**
-   * Information about pagination in a connection.
+   * Information to aid in pagination.
    */
   export interface PageInfo {
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * When paginating forwards, the cursor to continue.
      */
     end_cursor: string | null;
 
     /**
-     * Represents `true` or `false` values.
+     * When paginating forwards, are there more items?
      */
     has_next_page: boolean;
 
     /**
-     * Represents `true` or `false` values.
+     * When paginating backwards, are there more items?
      */
     has_previous_page: boolean;
 
     /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
+     * When paginating backwards, the cursor to continue.
      */
     start_cursor: string | null;
   }
@@ -225,58 +196,42 @@ export namespace CourseLessonInteractionListResponse {
 
 export interface CourseLessonInteractionListParams {
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * Returns the elements in the list that come after the specified cursor.
    */
   after?: string | null;
 
   /**
-   * Represents textual data as UTF-8 character sequences. This type is most often
-   * used by GraphQL to represent free-form human-readable text.
+   * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
 
   /**
-   * Represents `true` or `false` values.
+   * Whether the lesson has been completed by the user
    */
   completed?: boolean | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the course to list course lesson interactions for
    */
   course_id?: string | null;
 
   /**
-   * Represents non-fractional signed whole numeric values. Int can represent values
-   * between -(2^31) and 2^31 - 1.
+   * Returns the first _n_ elements from the list.
    */
   first?: number | null;
 
   /**
-   * Represents non-fractional signed whole numeric values. Int can represent values
-   * between -(2^31) and 2^31 - 1.
+   * Returns the last _n_ elements from the list.
    */
   last?: number | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the lesson to list course lesson interactions for
    */
   lesson_id?: string | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * The ID of the user to list course lesson interactions for
    */
   user_id?: string | null;
 }
