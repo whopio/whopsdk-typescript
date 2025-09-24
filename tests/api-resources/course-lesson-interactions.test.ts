@@ -9,6 +9,23 @@ const client = new Whopsdk({
 
 describe('resource courseLessonInteractions', () => {
   // Prism tests are disabled
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.courseLessonInteractions.retrieve('id', { query_id: 'id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.courseLessonInteractions.retrieve('id', { query_id: 'id' });
+  });
+
+  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.courseLessonInteractions.list();
     const rawResponse = await responsePromise.asResponse();

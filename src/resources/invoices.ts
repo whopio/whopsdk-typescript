@@ -3,14 +3,31 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Invoices extends APIResource {
   create(body: InvoiceCreateParams, options?: RequestOptions): APIPromise<InvoiceCreateResponse | null> {
     return this._client.post('/invoices', { body, ...options });
   }
 
+  retrieve(
+    pathID: string,
+    query: InvoiceRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<InvoiceRetrieveResponse> {
+    return this._client.get(path`/invoices/${pathID}`, { query, ...options });
+  }
+
   list(query: InvoiceListParams, options?: RequestOptions): APIPromise<InvoiceListResponse> {
     return this._client.get('/invoices', { query, ...options });
+  }
+
+  void(
+    pathID: string,
+    body: InvoiceVoidParams,
+    options?: RequestOptions,
+  ): APIPromise<InvoiceVoidResponse | null> {
+    return this._client.post(path`/invoices/${pathID}/void`, { body, ...options });
   }
 }
 
@@ -143,6 +160,130 @@ export namespace InvoiceCreateResponse {
 
       username: string | null;
     }
+  }
+}
+
+export interface InvoiceRetrieveResponse {
+  id: string;
+
+  created_at: number;
+
+  current_plan: InvoiceRetrieveResponse.CurrentPlan;
+
+  due_date: number | null;
+
+  email_address: string | null;
+
+  fetch_invoice_token: string;
+
+  member: InvoiceRetrieveResponse.Member | null;
+
+  number: string;
+
+  status: 'open' | 'paid' | 'past_due' | 'void';
+}
+
+export namespace InvoiceRetrieveResponse {
+  export interface CurrentPlan {
+    id: string;
+
+    base_currency:
+      | 'usd'
+      | 'sgd'
+      | 'inr'
+      | 'aud'
+      | 'brl'
+      | 'cad'
+      | 'dkk'
+      | 'eur'
+      | 'nok'
+      | 'gbp'
+      | 'sek'
+      | 'chf'
+      | 'hkd'
+      | 'huf'
+      | 'jpy'
+      | 'mxn'
+      | 'myr'
+      | 'pln'
+      | 'czk'
+      | 'nzd'
+      | 'aed'
+      | 'eth'
+      | 'ape'
+      | 'cop'
+      | 'ron'
+      | 'thb'
+      | 'bgn'
+      | 'idr'
+      | 'dop'
+      | 'php'
+      | 'try'
+      | 'krw'
+      | 'twd'
+      | 'vnd'
+      | 'pkr'
+      | 'clp'
+      | 'uyu'
+      | 'ars'
+      | 'zar'
+      | 'dzd'
+      | 'tnd'
+      | 'mad'
+      | 'kes'
+      | 'kwd'
+      | 'jod'
+      | 'all'
+      | 'xcd'
+      | 'amd'
+      | 'bsd'
+      | 'bhd'
+      | 'bob'
+      | 'bam'
+      | 'khr'
+      | 'crc'
+      | 'xof'
+      | 'egp'
+      | 'etb'
+      | 'gmd'
+      | 'ghs'
+      | 'gtq'
+      | 'gyd'
+      | 'ils'
+      | 'jmd'
+      | 'mop'
+      | 'mga'
+      | 'mur'
+      | 'mdl'
+      | 'mnt'
+      | 'nad'
+      | 'ngn'
+      | 'mkd'
+      | 'omr'
+      | 'pyg'
+      | 'pen'
+      | 'qar'
+      | 'rwf'
+      | 'sar'
+      | 'rsd'
+      | 'lkr'
+      | 'tzs'
+      | 'ttd'
+      | 'uzs'
+      | 'rub'
+      | 'btc';
+
+    formatted_price: string;
+  }
+
+  export interface Member {
+    id: string;
+
+    email: string | null;
+
+    name: string | null;
+
+    username: string | null;
   }
 }
 
@@ -287,6 +428,8 @@ export namespace InvoiceListResponse {
     start_cursor: string | null;
   }
 }
+
+export type InvoiceVoidResponse = boolean | null;
 
 export interface InvoiceCreateParams {
   collection_method: 'send_invoice' | 'charge_automatically';
@@ -491,6 +634,10 @@ export namespace InvoiceCreateParams {
   }
 }
 
+export interface InvoiceRetrieveParams {
+  query_id: string;
+}
+
 export interface InvoiceListParams {
   company_id: string;
 
@@ -519,11 +666,21 @@ export namespace InvoiceListParams {
   }
 }
 
+export interface InvoiceVoidParams {
+  body_id: string;
+
+  client_mutation_id?: string | null;
+}
+
 export declare namespace Invoices {
   export {
     type InvoiceCreateResponse as InvoiceCreateResponse,
+    type InvoiceRetrieveResponse as InvoiceRetrieveResponse,
     type InvoiceListResponse as InvoiceListResponse,
+    type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceRetrieveParams as InvoiceRetrieveParams,
     type InvoiceListParams as InvoiceListParams,
+    type InvoiceVoidParams as InvoiceVoidParams,
   };
 }

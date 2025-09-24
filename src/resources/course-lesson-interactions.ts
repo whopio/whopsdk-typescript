@@ -3,13 +3,50 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class CourseLessonInteractions extends APIResource {
+  retrieve(
+    pathID: string,
+    query: CourseLessonInteractionRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<CourseLessonInteractionRetrieveResponse> {
+    return this._client.get(path`/course_lesson_interactions/${pathID}`, { query, ...options });
+  }
+
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CourseLessonInteractionListResponse> {
     return this._client.get('/course_lesson_interactions', { query, ...options });
+  }
+}
+
+export interface CourseLessonInteractionRetrieveResponse {
+  id: string;
+
+  completed: boolean;
+
+  created_at: number;
+
+  lesson: CourseLessonInteractionRetrieveResponse.Lesson;
+
+  user: CourseLessonInteractionRetrieveResponse.User;
+}
+
+export namespace CourseLessonInteractionRetrieveResponse {
+  export interface Lesson {
+    id: string;
+
+    title: string;
+  }
+
+  export interface User {
+    id: string;
+
+    name: string | null;
+
+    username: string;
   }
 }
 
@@ -59,6 +96,10 @@ export namespace CourseLessonInteractionListResponse {
   }
 }
 
+export interface CourseLessonInteractionRetrieveParams {
+  query_id: string;
+}
+
 export interface CourseLessonInteractionListParams {
   after?: string | null;
 
@@ -79,7 +120,9 @@ export interface CourseLessonInteractionListParams {
 
 export declare namespace CourseLessonInteractions {
   export {
+    type CourseLessonInteractionRetrieveResponse as CourseLessonInteractionRetrieveResponse,
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
+    type CourseLessonInteractionRetrieveParams as CourseLessonInteractionRetrieveParams,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 }
