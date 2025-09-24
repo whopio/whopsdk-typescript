@@ -57,11 +57,6 @@ describe('resource invoices', () => {
         release_method: 'buy_now',
         release_method_settings: { expires_at: 0, max_entries: 0, nft_weighted_entries: true, starts_at: 0 },
         renewal_price: 0,
-        requirements: {
-          custom_password: 'custom_password',
-          email_required: true,
-          ownership_of_access_passes: ['string'],
-        },
         split_pay_required_payments: 0,
         splitit_accepted: true,
         stock: 0,
