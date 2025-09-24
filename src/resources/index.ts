@@ -14,5 +14,4 @@ export {
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
-  type InvoiceVoidParams,
 } from './invoices';

@@ -29,7 +29,6 @@ import {
   InvoiceListParams,
   InvoiceListResponse,
   InvoiceRetrieveResponse,
-  InvoiceVoidParams,
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
@@ -738,7 +737,6 @@ export declare namespace Whopsdk {
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
-    type InvoiceVoidParams as InvoiceVoidParams,
   };
 
   export {
