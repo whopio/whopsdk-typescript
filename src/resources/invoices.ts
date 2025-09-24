@@ -8,6 +8,15 @@ import { path } from '../internal/utils/path';
 export class Invoices extends APIResource {
   /**
    * Creates an invoice
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.create({
+   *   collection_method: 'send_invoice',
+   *   due_date: 0,
+   *   plan: {},
+   * });
+   * ```
    */
   create(body: InvoiceCreateParams, options?: RequestOptions): APIPromise<InvoiceCreateResponse | null> {
     return this._client.post('/invoices', { body, ...options });
@@ -15,6 +24,13 @@ export class Invoices extends APIResource {
 
   /**
    * Retrieves an invoice by ID or token
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.retrieve(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<InvoiceRetrieveResponse> {
     return this._client.get(path`/invoices/${id}`, options);
@@ -22,6 +38,13 @@ export class Invoices extends APIResource {
 
   /**
    * Lists invoices
+   *
+   * @example
+   * ```ts
+   * const invoices = await client.invoices.list({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   * });
+   * ```
    */
   list(query: InvoiceListParams, options?: RequestOptions): APIPromise<InvoiceListResponse> {
     return this._client.get('/invoices', { query, ...options });
@@ -29,6 +52,13 @@ export class Invoices extends APIResource {
 
   /**
    * Void an invoice
+   *
+   * @example
+   * ```ts
+   * const response = await client.invoices.void(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse | null> {
     return this._client.post(path`/invoices/${id}/void`, options);
@@ -114,7 +144,7 @@ export namespace InvoiceCreateResponse {
       /**
        * The respective currency identifier for the plan.
        */
-      base_currency:
+      currency:
         | 'usd'
         | 'sgd'
         | 'inr'
@@ -296,7 +326,7 @@ export namespace InvoiceRetrieveResponse {
     /**
      * The respective currency identifier for the plan.
      */
-    base_currency:
+    currency:
       | 'usd'
       | 'sgd'
       | 'inr'
@@ -493,7 +523,7 @@ export namespace InvoiceListResponse {
       /**
        * The respective currency identifier for the plan.
        */
-      base_currency:
+      currency:
         | 'usd'
         | 'sgd'
         | 'inr'
