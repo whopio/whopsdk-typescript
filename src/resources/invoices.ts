@@ -75,14 +75,14 @@ export interface InvoiceCreateResponse {
   checkout_job_id: string | null;
 
   /**
-   * The invoice that was created for this invoice.
+   * A statement that defines an amount due by a customer.
    */
   invoice: InvoiceCreateResponse.Invoice | null;
 }
 
 export namespace InvoiceCreateResponse {
   /**
-   * The invoice that was created for this invoice.
+   * A statement that defines an amount due by a customer.
    */
   export interface Invoice {
     /**
@@ -123,7 +123,7 @@ export namespace InvoiceCreateResponse {
     /**
      * The status of the invoice.
      */
-    status: 'open' | 'paid' | 'past_due' | 'void';
+    status: 'open' | 'paid' | 'past_due' | 'void' | null;
 
     /**
      * The user that the invoice was created for.
@@ -228,7 +228,8 @@ export namespace InvoiceCreateResponse {
         | 'ttd'
         | 'uzs'
         | 'rub'
-        | 'btc';
+        | 'btc'
+        | null;
 
       /**
        * The formatted price (including currency) for the plan.
@@ -300,7 +301,7 @@ export interface InvoiceRetrieveResponse {
   /**
    * The status of the invoice.
    */
-  status: 'open' | 'paid' | 'past_due' | 'void';
+  status: 'open' | 'paid' | 'past_due' | 'void' | null;
 
   /**
    * The user that the invoice was created for.
@@ -405,7 +406,8 @@ export namespace InvoiceRetrieveResponse {
       | 'ttd'
       | 'uzs'
       | 'rub'
-      | 'btc';
+      | 'btc'
+      | null;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -492,7 +494,7 @@ export namespace InvoiceListResponse {
     /**
      * The status of the invoice.
      */
-    status: 'open' | 'paid' | 'past_due' | 'void';
+    status: 'open' | 'paid' | 'past_due' | 'void' | null;
 
     /**
      * The user that the invoice was created for.
@@ -597,7 +599,8 @@ export namespace InvoiceListResponse {
         | 'ttd'
         | 'uzs'
         | 'rub'
-        | 'btc';
+        | 'btc'
+        | null;
 
       /**
        * The formatted price (including currency) for the plan.
@@ -662,7 +665,7 @@ export interface InvoiceCreateParams {
    * The method of collection for this invoice. If using charge_automatically, you
    * must provide a payment_token.
    */
-  collection_method: 'send_invoice' | 'charge_automatically';
+  collection_method: 'send_invoice' | 'charge_automatically' | null;
 
   /**
    * The date the invoice is due, if applicable.
@@ -1062,12 +1065,12 @@ export namespace InvoiceListParams {
     /**
      * The collection methods to filter the invoices by
      */
-    collection_methods?: Array<'send_invoice' | 'charge_automatically'> | null;
+    collection_methods?: Array<'send_invoice' | 'charge_automatically' | null> | null;
 
     /**
      * The statuses to filter the invoices by
      */
-    statuses?: Array<'open' | 'paid' | 'past_due' | 'void'> | null;
+    statuses?: Array<'open' | 'paid' | 'past_due' | 'void' | null> | null;
   }
 }
 

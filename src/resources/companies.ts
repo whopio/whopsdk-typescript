@@ -192,7 +192,7 @@ export namespace CompanyRetrieveResponse {
     /**
      * The website
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
+    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | null;
   }
 }
 
