@@ -4,20 +4,22 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">AccessPass</a></code>
 - <code><a href="./src/resources/shared.ts">AccessPassListItem</a></code>
+- <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
+- <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteraction</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteractionListItem</a></code>
+- <code><a href="./src/resources/shared.ts">Currency</a></code>
+- <code><a href="./src/resources/shared.ts">IndustryTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
+- <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 
 # Invoices
 
 Types:
 
-- <code><a href="./src/resources/invoices.ts">CollectionMethod</a></code>
-- <code><a href="./src/resources/invoices.ts">Currency</a></code>
-- <code><a href="./src/resources/invoices.ts">InvoiceStatus</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceCreateResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceVoidResponse</a></code>
 
@@ -36,11 +38,6 @@ Methods:
 - <code title="get /course_lesson_interactions">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">list</a>({ ...params }) -> CourseLessonInteractionListItemsCursorPage</code>
 
 # AccessPasses
-
-Types:
-
-- <code><a href="./src/resources/access-passes.ts">BusinessTypes</a></code>
-- <code><a href="./src/resources/access-passes.ts">IndustryTypes</a></code>
 
 Methods:
 

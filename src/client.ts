@@ -19,13 +19,7 @@ import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import {
-  AccessPassListItemsCursorPage,
-  AccessPassListParams,
-  AccessPasses,
-  BusinessTypes,
-  IndustryTypes,
-} from './resources/access-passes';
+import { AccessPassListItemsCursorPage, AccessPassListParams, AccessPasses } from './resources/access-passes';
 import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListItemsCursorPage,
@@ -33,13 +27,10 @@ import {
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
 import {
-  CollectionMethod,
-  Currency,
   InvoiceCreateParams,
   InvoiceCreateResponse,
   InvoiceListItemsCursorPage,
   InvoiceListParams,
-  InvoiceStatus,
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
@@ -768,9 +759,6 @@ export declare namespace Whopsdk {
 
   export {
     Invoices as Invoices,
-    type CollectionMethod as CollectionMethod,
-    type Currency as Currency,
-    type InvoiceStatus as InvoiceStatus,
     type InvoiceCreateResponse as InvoiceCreateResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceListItemsCursorPage as InvoiceListItemsCursorPage,
@@ -786,8 +774,6 @@ export declare namespace Whopsdk {
 
   export {
     AccessPasses as AccessPasses,
-    type BusinessTypes as BusinessTypes,
-    type IndustryTypes as IndustryTypes,
     type AccessPassListItemsCursorPage as AccessPassListItemsCursorPage,
     type AccessPassListParams as AccessPassListParams,
   };
@@ -796,10 +782,15 @@ export declare namespace Whopsdk {
 
   export type AccessPass = API.AccessPass;
   export type AccessPassListItem = API.AccessPassListItem;
+  export type BusinessTypes = API.BusinessTypes;
+  export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
   export type CourseLessonInteraction = API.CourseLessonInteraction;
   export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
+  export type Currency = API.Currency;
+  export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
+  export type InvoiceStatus = API.InvoiceStatus;
   export type PageInfo = API.PageInfo;
 }
