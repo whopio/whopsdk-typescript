@@ -3,9 +3,12 @@
 Types:
 
 - <code><a href="./src/resources/shared.ts">AccessPass</a></code>
+- <code><a href="./src/resources/shared.ts">AccessPassListItem</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteraction</a></code>
+- <code><a href="./src/resources/shared.ts">CourseLessonInteractionListItem</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
+- <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 
 # Invoices

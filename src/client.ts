@@ -771,8 +771,11 @@ export declare namespace Whopsdk {
   export { Companies as Companies };
 
   export type AccessPass = API.AccessPass;
+  export type AccessPassListItem = API.AccessPassListItem;
   export type Company = API.Company;
   export type CourseLessonInteraction = API.CourseLessonInteraction;
+  export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
   export type Invoice = API.Invoice;
+  export type InvoiceListItem = API.InvoiceListItem;
   export type PageInfo = API.PageInfo;
 }
