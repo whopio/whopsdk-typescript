@@ -32,81 +32,12 @@ export interface CourseLessonInteractionListResponse {
   /**
    * A list of nodes.
    */
-  data: Array<CourseLessonInteractionListResponse.Data | null> | null;
+  data: Array<Shared.CourseLessonInteractionListItem | null> | null;
 
   /**
    * Information to aid in pagination.
    */
   page_info: Shared.PageInfo;
-}
-
-export namespace CourseLessonInteractionListResponse {
-  /**
-   * A lesson interaction tracking user progress in courses
-   */
-  export interface Data {
-    /**
-     * The ID of the lesson interaction
-     */
-    id: string;
-
-    /**
-     * Whether the lesson has been completed by the user
-     */
-    completed: boolean;
-
-    /**
-     * When the interaction was created
-     */
-    created_at: number;
-
-    /**
-     * The lesson this interaction is for
-     */
-    lesson: Data.Lesson;
-
-    /**
-     * The user who interacted with the lesson
-     */
-    user: Data.User;
-  }
-
-  export namespace Data {
-    /**
-     * The lesson this interaction is for
-     */
-    export interface Lesson {
-      /**
-       * The ID of the lesson
-       */
-      id: string;
-
-      /**
-       * The title of the lesson
-       */
-      title: string;
-    }
-
-    /**
-     * The user who interacted with the lesson
-     */
-    export interface User {
-      /**
-       * The internal ID of the user.
-       */
-      id: string;
-
-      /**
-       * The name of the user from their Whop account.
-       */
-      name: string | null;
-
-      /**
-       * The username of the user from their Whop account.
-       */
-      username: string;
-    }
-  }
 }
 
 export interface CourseLessonInteractionListParams {

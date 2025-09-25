@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as AccessPassesAPI from './access-passes';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -115,69 +114,12 @@ export interface AccessPassListResponse {
   /**
    * A list of nodes.
    */
-  data: Array<AccessPassListResponse.Data | null> | null;
+  data: Array<Shared.AccessPassListItem | null> | null;
 
   /**
    * Information to aid in pagination.
    */
   page_info: Shared.PageInfo;
-}
-
-export namespace AccessPassListResponse {
-  /**
-   * An object representing a (sanitized) access pass.
-   */
-  export interface Data {
-    /**
-     * The internal ID of the public access pass.
-     */
-    id: string;
-
-    /**
-     * The type of business the company is.
-     */
-    business_type: AccessPassesAPI.BusinessTypes | null;
-
-    /**
-     * When the access pass was created.
-     */
-    created_at: number;
-
-    /**
-     * The specific industry the company operates in.
-     */
-    industry_type: AccessPassesAPI.IndustryTypes | null;
-
-    /**
-     * The number of active users for this access pass.
-     */
-    member_count: number;
-
-    /**
-     * The number of reviews that have been published for the access pass.
-     */
-    published_reviews_count: number;
-
-    /**
-     * The route of the access pass.
-     */
-    route: string;
-
-    /**
-     * The title of the access pass. Use for Whop 4.0.
-     */
-    title: string;
-
-    /**
-     * When the access pass was updated.
-     */
-    updated_at: number;
-
-    /**
-     * Whether this product is Whop verified.
-     */
-    verified: boolean;
-  }
 }
 
 export interface AccessPassListParams {

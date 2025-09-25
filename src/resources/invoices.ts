@@ -189,106 +189,12 @@ export interface InvoiceListResponse {
   /**
    * A list of nodes.
    */
-  data: Array<InvoiceListResponse.Data | null> | null;
+  data: Array<Shared.InvoiceListItem | null> | null;
 
   /**
    * Information to aid in pagination.
    */
   page_info: Shared.PageInfo;
-}
-
-export namespace InvoiceListResponse {
-  /**
-   * A statement that defines an amount due by a customer.
-   */
-  export interface Data {
-    /**
-     * The ID of the invoice.
-     */
-    id: string;
-
-    /**
-     * The date the invoice was created.
-     */
-    created_at: number;
-
-    /**
-     * The plan that the invoice was created for.
-     */
-    current_plan: Data.CurrentPlan;
-
-    /**
-     * The date the invoice is due.
-     */
-    due_date: number | null;
-
-    /**
-     * The email address that the invoice was created for.
-     */
-    email_address: string | null;
-
-    /**
-     * The token to fetch the invoice.
-     */
-    fetch_invoice_token: string;
-
-    /**
-     * The number of the invoice.
-     */
-    number: string;
-
-    /**
-     * The status of the invoice.
-     */
-    status: InvoicesAPI.InvoiceStatus | null;
-
-    /**
-     * The user that the invoice was created for.
-     */
-    user: Data.User | null;
-  }
-
-  export namespace Data {
-    /**
-     * The plan that the invoice was created for.
-     */
-    export interface CurrentPlan {
-      /**
-       * The internal ID of the plan.
-       */
-      id: string;
-
-      /**
-       * The respective currency identifier for the plan.
-       */
-      currency: InvoicesAPI.Currency | null;
-
-      /**
-       * The formatted price (including currency) for the plan.
-       */
-      formatted_price: string;
-    }
-
-    /**
-     * The user that the invoice was created for.
-     */
-    export interface User {
-      /**
-       * The internal ID of the user.
-       */
-      id: string;
-
-      /**
-       * The name of the user from their Whop account.
-       */
-      name: string | null;
-
-      /**
-       * The username of the user from their Whop account.
-       */
-      username: string;
-    }
-  }
 }
 
 /**
