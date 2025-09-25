@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as AccessPassesAPI from './access-passes';
-import * as InvoicesAPI from './invoices';
+import * as Shared from './shared';
 import { CursorPage } from '../core/pagination';
 
 /**
@@ -16,7 +15,7 @@ export interface AccessPass {
   /**
    * The type of business the company is.
    */
-  business_type: AccessPassesAPI.BusinessTypes | null;
+  business_type: BusinessTypes | null;
 
   /**
    * When the access pass was created.
@@ -26,7 +25,7 @@ export interface AccessPass {
   /**
    * The specific industry the company operates in.
    */
-  industry_type: AccessPassesAPI.IndustryTypes | null;
+  industry_type: IndustryTypes | null;
 
   /**
    * The number of active users for this access pass.
@@ -98,7 +97,7 @@ export interface AccessPassListItem {
   /**
    * The type of business the company is.
    */
-  business_type: AccessPassesAPI.BusinessTypes | null;
+  business_type: BusinessTypes | null;
 
   /**
    * When the access pass was created.
@@ -108,7 +107,7 @@ export interface AccessPassListItem {
   /**
    * The specific industry the company operates in.
    */
-  industry_type: AccessPassesAPI.IndustryTypes | null;
+  industry_type: IndustryTypes | null;
 
   /**
    * The number of active users for this access pass.
@@ -142,6 +141,31 @@ export interface AccessPassListItem {
 }
 
 /**
+ * The different business types a company can be.
+ */
+export type BusinessTypes =
+  | 'education_program'
+  | 'coaching'
+  | 'software'
+  | 'paid_group'
+  | 'newsletter'
+  | 'agency'
+  | 'physical_products'
+  | 'brick_and_mortar'
+  | 'events'
+  | 'coaching_and_courses'
+  | 'other'
+  | 'saas'
+  | 'course'
+  | 'community'
+  | null;
+
+/**
+ * The method of collection for an invoice.
+ */
+export type CollectionMethod = 'send_invoice' | 'charge_automatically' | null;
+
+/**
  * An object representing a (sanitized) company.
  */
 export interface Company {
@@ -153,7 +177,7 @@ export interface Company {
   /**
    * The type of business the company is.
    */
-  business_type: AccessPassesAPI.BusinessTypes | null;
+  business_type: BusinessTypes | null;
 
   /**
    * When the company was created (signed up)
@@ -163,7 +187,7 @@ export interface Company {
   /**
    * The specific industry the company operates in.
    */
-  industry_type: AccessPassesAPI.IndustryTypes | null;
+  industry_type: IndustryTypes | null;
 
   /**
    * The number of members in the company.
@@ -383,6 +407,161 @@ export namespace CourseLessonInteractionListItem {
 }
 
 /**
+ * The available currencies on the platform
+ */
+export type Currency =
+  | 'usd'
+  | 'sgd'
+  | 'inr'
+  | 'aud'
+  | 'brl'
+  | 'cad'
+  | 'dkk'
+  | 'eur'
+  | 'nok'
+  | 'gbp'
+  | 'sek'
+  | 'chf'
+  | 'hkd'
+  | 'huf'
+  | 'jpy'
+  | 'mxn'
+  | 'myr'
+  | 'pln'
+  | 'czk'
+  | 'nzd'
+  | 'aed'
+  | 'eth'
+  | 'ape'
+  | 'cop'
+  | 'ron'
+  | 'thb'
+  | 'bgn'
+  | 'idr'
+  | 'dop'
+  | 'php'
+  | 'try'
+  | 'krw'
+  | 'twd'
+  | 'vnd'
+  | 'pkr'
+  | 'clp'
+  | 'uyu'
+  | 'ars'
+  | 'zar'
+  | 'dzd'
+  | 'tnd'
+  | 'mad'
+  | 'kes'
+  | 'kwd'
+  | 'jod'
+  | 'all'
+  | 'xcd'
+  | 'amd'
+  | 'bsd'
+  | 'bhd'
+  | 'bob'
+  | 'bam'
+  | 'khr'
+  | 'crc'
+  | 'xof'
+  | 'egp'
+  | 'etb'
+  | 'gmd'
+  | 'ghs'
+  | 'gtq'
+  | 'gyd'
+  | 'ils'
+  | 'jmd'
+  | 'mop'
+  | 'mga'
+  | 'mur'
+  | 'mdl'
+  | 'mnt'
+  | 'nad'
+  | 'ngn'
+  | 'mkd'
+  | 'omr'
+  | 'pyg'
+  | 'pen'
+  | 'qar'
+  | 'rwf'
+  | 'sar'
+  | 'rsd'
+  | 'lkr'
+  | 'tzs'
+  | 'ttd'
+  | 'uzs'
+  | 'rub'
+  | 'btc'
+  | null;
+
+/**
+ * The different industry types a company can be in.
+ */
+export type IndustryTypes =
+  | 'trading'
+  | 'sports_betting'
+  | 'reselling'
+  | 'fitness'
+  | 'amazon_fba'
+  | 'real_estate'
+  | 'kindle_book_publishing'
+  | 'dating'
+  | 'agencies'
+  | 'health_and_wellness'
+  | 'social_media'
+  | 'sales'
+  | 'business'
+  | 'ecommerce'
+  | 'video_games'
+  | 'home_services'
+  | 'ai'
+  | 'public_speaking'
+  | 'personal_finance'
+  | 'careers'
+  | 'travel'
+  | 'clipping'
+  | 'spirituality'
+  | 'vas'
+  | 'personal_development'
+  | 'software'
+  | 'other'
+  | 'marketing_agency'
+  | 'sales_agency'
+  | 'ai_agency'
+  | 'design_agency'
+  | 'coaching_agency'
+  | 'development_agency'
+  | 'recruiting_agency'
+  | 'customer_support_agency'
+  | 'clipping_agency'
+  | 'clothing'
+  | 'supplements'
+  | 'beauty_and_personal_care'
+  | 'fitness_gear'
+  | 'accessories'
+  | 'home_goods'
+  | 'electronics_and_gadgets'
+  | 'food_and_beverages'
+  | 'gym'
+  | 'restaurant'
+  | 'retail_store'
+  | 'coffee_shop'
+  | 'salon_spa'
+  | 'medical_dentist_office'
+  | 'hotel_lodging'
+  | 'auto_repair_shop'
+  | 'masterminds'
+  | 'webinars'
+  | 'bootcamps'
+  | 'convention'
+  | 'concerts'
+  | 'meetups'
+  | 'parties'
+  | null;
+
+/**
  * A statement that defines an amount due by a customer.
  */
 export interface Invoice {
@@ -424,7 +603,7 @@ export interface Invoice {
   /**
    * The status of the invoice.
    */
-  status: InvoicesAPI.InvoiceStatus | null;
+  status: InvoiceStatus | null;
 
   /**
    * The user that the invoice was created for.
@@ -445,7 +624,7 @@ export namespace Invoice {
     /**
      * The respective currency identifier for the plan.
      */
-    currency: InvoicesAPI.Currency | null;
+    currency: Shared.Currency | null;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -516,7 +695,7 @@ export interface InvoiceListItem {
   /**
    * The status of the invoice.
    */
-  status: InvoicesAPI.InvoiceStatus | null;
+  status: InvoiceStatus | null;
 
   /**
    * The user that the invoice was created for.
@@ -537,7 +716,7 @@ export namespace InvoiceListItem {
     /**
      * The respective currency identifier for the plan.
      */
-    currency: InvoicesAPI.Currency | null;
+    currency: Shared.Currency | null;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -565,6 +744,11 @@ export namespace InvoiceListItem {
     username: string;
   }
 }
+
+/**
+ * The different statuses an invoice can be in
+ */
+export type InvoiceStatus = 'open' | 'paid' | 'past_due' | 'void' | null;
 
 /**
  * Information about pagination in a connection.
