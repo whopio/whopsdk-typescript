@@ -2,6 +2,7 @@
 
 import * as AccessPassesAPI from './access-passes';
 import * as InvoicesAPI from './invoices';
+import { CursorPage } from '../core/pagination';
 
 /**
  * An object representing a (sanitized) access pass.
@@ -589,3 +590,9 @@ export interface PageInfo {
    */
   start_cursor: string | null;
 }
+
+export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
+
+export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
+
+export type AccessPassListItemsCursorPage = CursorPage<AccessPassListItem>;

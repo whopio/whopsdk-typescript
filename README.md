@@ -29,9 +29,10 @@ const client = new Whopsdk({
   apiKey: process.env['WHOPSDK_API_KEY'], // This is the default and can be omitted
 });
 
-const invoices = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+const page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+const invoiceListItem = page.data[0];
 
-console.log(invoices.data);
+console.log(invoiceListItem.id);
 ```
 
 ### Request & Response types
@@ -47,7 +48,7 @@ const client = new Whopsdk({
 });
 
 const params: Whopsdk.InvoiceListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
-const invoices: Whopsdk.InvoiceListResponse = await client.invoices.list(params);
+const [invoiceListItem]: [Whopsdk.InvoiceListItem | null] = await client.invoices.list(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,7 +61,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const invoices = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
+const page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
   if (err instanceof Whopsdk.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -144,11 +145,13 @@ const response = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: invoices, response: raw } = await client.invoices
+const { data: page, response: raw } = await client.invoices
   .list({ company_id: 'biz_xxxxxxxxxxxxxx' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(invoices.data);
+for await (const invoiceListItem of page) {
+  console.log(invoiceListItem.id);
+}
 ```
 
 ### Logging

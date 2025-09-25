@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as InvoicesAPI from './invoices';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -43,13 +44,22 @@ export class Invoices extends APIResource {
    *
    * @example
    * ```ts
-   * const invoices = await client.invoices.list({
+   * // Automatically fetches more pages as needed.
+   * for await (const invoiceListItem of client.invoices.list({
    *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * });
+   * })) {
+   *   // ...
+   * }
    * ```
    */
-  list(query: InvoiceListParams, options?: RequestOptions): APIPromise<InvoiceListResponse> {
-    return this._client.get('/invoices', { query, ...options });
+  list(
+    query: InvoiceListParams,
+    options?: RequestOptions,
+  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem | null> {
+    return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem | null>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -66,6 +76,8 @@ export class Invoices extends APIResource {
     return this._client.post(path`/invoices/${id}/void`, options);
   }
 }
+
+export type InvoiceListItemsCursorPage = CursorPage<Shared.InvoiceListItem | null>;
 
 /**
  * The method of collection for an invoice.
@@ -180,21 +192,6 @@ export interface InvoiceCreateResponse {
    * A statement that defines an amount due by a customer.
    */
   invoice: Shared.Invoice | null;
-}
-
-/**
- * The connection type for Invoice.
- */
-export interface InvoiceListResponse {
-  /**
-   * A list of nodes.
-   */
-  data: Array<Shared.InvoiceListItem | null> | null;
-
-  /**
-   * Information to aid in pagination.
-   */
-  page_info: Shared.PageInfo;
 }
 
 /**
@@ -467,16 +464,11 @@ export namespace InvoiceCreateParams {
   }
 }
 
-export interface InvoiceListParams {
+export interface InvoiceListParams extends CursorPageParams {
   /**
    * The ID of the company to list invoices for
    */
   company_id: string;
-
-  /**
-   * Returns the elements in the list that come after the specified cursor.
-   */
-  after?: string | null;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -537,8 +529,8 @@ export declare namespace Invoices {
     type Currency as Currency,
     type InvoiceStatus as InvoiceStatus,
     type InvoiceCreateResponse as InvoiceCreateResponse,
-    type InvoiceListResponse as InvoiceListResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
+    type InvoiceListItemsCursorPage as InvoiceListItemsCursorPage,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
   };

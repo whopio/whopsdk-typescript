@@ -5,14 +5,14 @@ export {
   AccessPasses,
   type BusinessTypes,
   type IndustryTypes,
-  type AccessPassListResponse,
   type AccessPassListParams,
+  type AccessPassListItemsCursorPage,
 } from './access-passes';
 export { Companies } from './companies';
 export {
   CourseLessonInteractions,
-  type CourseLessonInteractionListResponse,
   type CourseLessonInteractionListParams,
+  type CourseLessonInteractionListItemsCursorPage,
 } from './course-lesson-interactions';
 export {
   Invoices,
@@ -20,8 +20,8 @@ export {
   type Currency,
   type InvoiceStatus,
   type InvoiceCreateResponse,
-  type InvoiceListResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
+  type InvoiceListItemsCursorPage,
 } from './invoices';

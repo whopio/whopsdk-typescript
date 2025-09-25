@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -17,10 +18,18 @@ export class AccessPasses extends APIResource {
   /**
    * Lists access passes for a company
    */
-  list(query: AccessPassListParams, options?: RequestOptions): APIPromise<AccessPassListResponse> {
-    return this._client.get('/access_passes', { query, ...options });
+  list(
+    query: AccessPassListParams,
+    options?: RequestOptions,
+  ): PagePromise<AccessPassListItemsCursorPage, Shared.AccessPassListItem | null> {
+    return this._client.getAPIList('/access_passes', CursorPage<Shared.AccessPassListItem | null>, {
+      query,
+      ...options,
+    });
   }
 }
+
+export type AccessPassListItemsCursorPage = CursorPage<Shared.AccessPassListItem | null>;
 
 /**
  * The different business types a company can be.
@@ -107,22 +116,7 @@ export type IndustryTypes =
   | 'parties'
   | null;
 
-/**
- * The connection type for PublicAccessPass.
- */
-export interface AccessPassListResponse {
-  /**
-   * A list of nodes.
-   */
-  data: Array<Shared.AccessPassListItem | null> | null;
-
-  /**
-   * Information to aid in pagination.
-   */
-  page_info: Shared.PageInfo;
-}
-
-export interface AccessPassListParams {
+export interface AccessPassListParams extends CursorPageParams {
   /**
    * The ID of the company to filter access passes by
    */
@@ -132,11 +126,6 @@ export interface AccessPassListParams {
    * The type of access passes to filter by
    */
   access_pass_type?: 'regular' | 'app' | 'experience_upsell' | 'api_only' | null;
-
-  /**
-   * Returns the elements in the list that come after the specified cursor.
-   */
-  after?: string | null;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -158,7 +147,7 @@ export declare namespace AccessPasses {
   export {
     type BusinessTypes as BusinessTypes,
     type IndustryTypes as IndustryTypes,
-    type AccessPassListResponse as AccessPassListResponse,
+    type AccessPassListItemsCursorPage as AccessPassListItemsCursorPage,
     type AccessPassListParams as AccessPassListParams,
   };
 }
