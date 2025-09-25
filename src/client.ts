@@ -14,20 +14,22 @@ import * as Opts from './internal/request-options';
 import * as qs from './internal/qs';
 import { VERSION } from './version';
 import * as Errors from './core/error';
+import * as Pagination from './core/pagination';
+import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  AccessPassListItemsCursorPage,
   AccessPassListParams,
-  AccessPassListResponse,
   AccessPasses,
   BusinessTypes,
   IndustryTypes,
 } from './resources/access-passes';
 import { Companies } from './resources/companies';
 import {
+  CourseLessonInteractionListItemsCursorPage,
   CourseLessonInteractionListParams,
-  CourseLessonInteractionListResponse,
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
 import {
@@ -35,8 +37,8 @@ import {
   Currency,
   InvoiceCreateParams,
   InvoiceCreateResponse,
+  InvoiceListItemsCursorPage,
   InvoiceListParams,
-  InvoiceListResponse,
   InvoiceStatus,
   InvoiceVoidResponse,
   Invoices,
@@ -496,6 +498,25 @@ export class Whopsdk {
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
 
+  getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+    path: string,
+    Page: new (...args: any[]) => PageClass,
+    opts?: RequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+  }
+
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
+    Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
+    options: FinalRequestOptions,
+  ): Pagination.PagePromise<PageClass, Item> {
+    const request = this.makeRequest(options, null, undefined);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Whopsdk, request, Page);
+  }
+
   async fetchWithTimeout(
     url: RequestInfo,
     init: RequestInit | undefined,
@@ -742,21 +763,24 @@ Whopsdk.Companies = Companies;
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
 
+  export import CursorPage = Pagination.CursorPage;
+  export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
+
   export {
     Invoices as Invoices,
     type CollectionMethod as CollectionMethod,
     type Currency as Currency,
     type InvoiceStatus as InvoiceStatus,
     type InvoiceCreateResponse as InvoiceCreateResponse,
-    type InvoiceListResponse as InvoiceListResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
+    type InvoiceListItemsCursorPage as InvoiceListItemsCursorPage,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
   };
 
   export {
     CourseLessonInteractions as CourseLessonInteractions,
-    type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
+    type CourseLessonInteractionListItemsCursorPage as CourseLessonInteractionListItemsCursorPage,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 
@@ -764,7 +788,7 @@ export declare namespace Whopsdk {
     AccessPasses as AccessPasses,
     type BusinessTypes as BusinessTypes,
     type IndustryTypes as IndustryTypes,
-    type AccessPassListResponse as AccessPassListResponse,
+    type AccessPassListItemsCursorPage as AccessPassListItemsCursorPage,
     type AccessPassListParams as AccessPassListParams,
   };
 

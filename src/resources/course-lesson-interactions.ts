@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -20,32 +21,19 @@ export class CourseLessonInteractions extends APIResource {
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<CourseLessonInteractionListResponse> {
-    return this._client.get('/course_lesson_interactions', { query, ...options });
+  ): PagePromise<CourseLessonInteractionListItemsCursorPage, Shared.CourseLessonInteractionListItem | null> {
+    return this._client.getAPIList(
+      '/course_lesson_interactions',
+      CursorPage<Shared.CourseLessonInteractionListItem | null>,
+      { query, ...options },
+    );
   }
 }
 
-/**
- * The connection type for LessonInteraction.
- */
-export interface CourseLessonInteractionListResponse {
-  /**
-   * A list of nodes.
-   */
-  data: Array<Shared.CourseLessonInteractionListItem | null> | null;
+export type CourseLessonInteractionListItemsCursorPage =
+  CursorPage<Shared.CourseLessonInteractionListItem | null>;
 
-  /**
-   * Information to aid in pagination.
-   */
-  page_info: Shared.PageInfo;
-}
-
-export interface CourseLessonInteractionListParams {
-  /**
-   * Returns the elements in the list that come after the specified cursor.
-   */
-  after?: string | null;
-
+export interface CourseLessonInteractionListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
@@ -84,7 +72,7 @@ export interface CourseLessonInteractionListParams {
 
 export declare namespace CourseLessonInteractions {
   export {
-    type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
+    type CourseLessonInteractionListItemsCursorPage as CourseLessonInteractionListItemsCursorPage,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 }
