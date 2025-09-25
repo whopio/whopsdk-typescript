@@ -20,22 +20,24 @@ import { APIPromise } from './core/api-promise';
 import {
   AccessPassListParams,
   AccessPassListResponse,
-  AccessPassRetrieveResponse,
   AccessPasses,
+  BusinessTypes,
+  IndustryTypes,
 } from './resources/access-passes';
-import { Companies, CompanyRetrieveResponse } from './resources/companies';
+import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListParams,
   CourseLessonInteractionListResponse,
-  CourseLessonInteractionRetrieveResponse,
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
 import {
+  CollectionMethod,
+  Currency,
   InvoiceCreateParams,
   InvoiceCreateResponse,
   InvoiceListParams,
   InvoiceListResponse,
-  InvoiceRetrieveResponse,
+  InvoiceStatus,
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
@@ -742,8 +744,10 @@ export declare namespace Whopsdk {
 
   export {
     Invoices as Invoices,
+    type CollectionMethod as CollectionMethod,
+    type Currency as Currency,
+    type InvoiceStatus as InvoiceStatus,
     type InvoiceCreateResponse as InvoiceCreateResponse,
-    type InvoiceRetrieveResponse as InvoiceRetrieveResponse,
     type InvoiceListResponse as InvoiceListResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
@@ -752,17 +756,23 @@ export declare namespace Whopsdk {
 
   export {
     CourseLessonInteractions as CourseLessonInteractions,
-    type CourseLessonInteractionRetrieveResponse as CourseLessonInteractionRetrieveResponse,
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 
   export {
     AccessPasses as AccessPasses,
-    type AccessPassRetrieveResponse as AccessPassRetrieveResponse,
+    type BusinessTypes as BusinessTypes,
+    type IndustryTypes as IndustryTypes,
     type AccessPassListResponse as AccessPassListResponse,
     type AccessPassListParams as AccessPassListParams,
   };
 
-  export { Companies as Companies, type CompanyRetrieveResponse as CompanyRetrieveResponse };
+  export { Companies as Companies };
+
+  export type AccessPass = API.AccessPass;
+  export type Company = API.Company;
+  export type CourseLessonInteraction = API.CourseLessonInteraction;
+  export type Invoice = API.Invoice;
+  export type PageInfo = API.PageInfo;
 }

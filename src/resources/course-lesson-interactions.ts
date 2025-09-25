@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -9,7 +10,7 @@ export class CourseLessonInteractions extends APIResource {
   /**
    * Retrieves a course lesson interaction by ID
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<CourseLessonInteractionRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
     return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 
@@ -25,73 +26,6 @@ export class CourseLessonInteractions extends APIResource {
 }
 
 /**
- * A lesson interaction tracking user progress in courses
- */
-export interface CourseLessonInteractionRetrieveResponse {
-  /**
-   * The ID of the lesson interaction
-   */
-  id: string;
-
-  /**
-   * Whether the lesson has been completed by the user
-   */
-  completed: boolean;
-
-  /**
-   * When the interaction was created
-   */
-  created_at: number;
-
-  /**
-   * The lesson this interaction is for
-   */
-  lesson: CourseLessonInteractionRetrieveResponse.Lesson;
-
-  /**
-   * The user who interacted with the lesson
-   */
-  user: CourseLessonInteractionRetrieveResponse.User;
-}
-
-export namespace CourseLessonInteractionRetrieveResponse {
-  /**
-   * The lesson this interaction is for
-   */
-  export interface Lesson {
-    /**
-     * The ID of the lesson
-     */
-    id: string;
-
-    /**
-     * The title of the lesson
-     */
-    title: string;
-  }
-
-  /**
-   * The user who interacted with the lesson
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-
-    /**
-     * The name of the user from their Whop account.
-     */
-    name: string | null;
-
-    /**
-     * The username of the user from their Whop account.
-     */
-    username: string;
-  }
-}
-
-/**
  * The connection type for LessonInteraction.
  */
 export interface CourseLessonInteractionListResponse {
@@ -103,7 +37,7 @@ export interface CourseLessonInteractionListResponse {
   /**
    * Information to aid in pagination.
    */
-  page_info: CourseLessonInteractionListResponse.PageInfo;
+  page_info: Shared.PageInfo;
 }
 
 export namespace CourseLessonInteractionListResponse {
@@ -173,31 +107,6 @@ export namespace CourseLessonInteractionListResponse {
       username: string;
     }
   }
-
-  /**
-   * Information to aid in pagination.
-   */
-  export interface PageInfo {
-    /**
-     * When paginating forwards, the cursor to continue.
-     */
-    end_cursor: string | null;
-
-    /**
-     * When paginating forwards, are there more items?
-     */
-    has_next_page: boolean;
-
-    /**
-     * When paginating backwards, are there more items?
-     */
-    has_previous_page: boolean;
-
-    /**
-     * When paginating backwards, the cursor to continue.
-     */
-    start_cursor: string | null;
-  }
 }
 
 export interface CourseLessonInteractionListParams {
@@ -244,7 +153,6 @@ export interface CourseLessonInteractionListParams {
 
 export declare namespace CourseLessonInteractions {
   export {
-    type CourseLessonInteractionRetrieveResponse as CourseLessonInteractionRetrieveResponse,
     type CourseLessonInteractionListResponse as CourseLessonInteractionListResponse,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
