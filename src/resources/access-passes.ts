@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class AccessPasses extends APIResource {
   /**
-   * Retrieves an access pass by ID
+   * Retrieves an access pass by ID or route
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.AccessPass> {
     return this._client.get(path`/access_passes/${id}`, options);

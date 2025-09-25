@@ -233,7 +233,7 @@ The following tools are available in this MCP server.
 
 ### Resource `access_passes`:
 
-- `retrieve_access_passes` (`read`): Retrieves an access pass by ID
+- `retrieve_access_passes` (`read`): Retrieves an access pass by ID or route
 - `list_access_passes` (`read`): Lists access passes for a company
 
 ### Resource `companies`:
