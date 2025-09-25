@@ -127,6 +127,37 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the Whopsdk API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllInvoiceListItems(params) {
+  const allInvoiceListItems = [];
+  // Automatically fetches more pages as needed.
+  for await (const invoiceListItem of client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {
+    allInvoiceListItems.push(invoiceListItem);
+  }
+  return allInvoiceListItems;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+for (const invoiceListItem of page.data) {
+  console.log(invoiceListItem);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)
