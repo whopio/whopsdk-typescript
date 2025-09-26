@@ -12,6 +12,7 @@ describe('resource invoices', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
+      company_id: 'biz_xxxxxxxxxxxxxx',
       due_date: 1701406800,
       plan: {},
     });
@@ -28,6 +29,7 @@ describe('resource invoices', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
+      company_id: 'biz_xxxxxxxxxxxxxx',
       due_date: 1701406800,
       plan: {
         ach_payments: true,

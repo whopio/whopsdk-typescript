@@ -23,6 +23,10 @@ export const tool: Tool = {
       collection_method: {
         $ref: '#/$defs/collection_method',
       },
+      company_id: {
+        type: 'string',
+        description: 'The company ID to create this invoice for.',
+      },
       due_date: {
         type: 'integer',
         description: 'The date the invoice is due, if applicable.',
@@ -228,7 +232,7 @@ export const tool: Tool = {
           'The payment token ID to use for this invoice. If using charge_automatically, you must provide a payment_token.',
       },
     },
-    required: ['collection_method', 'due_date', 'plan'],
+    required: ['collection_method', 'company_id', 'due_date', 'plan'],
     $defs: {
       collection_method: {
         type: 'string',
