@@ -15,6 +15,7 @@ export class Invoices extends APIResource {
    * ```ts
    * const invoice = await client.invoices.create({
    *   collection_method: 'send_invoice',
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   due_date: 1701406800,
    *   plan: {},
    * });
@@ -104,6 +105,11 @@ export interface InvoiceCreateParams {
    * must provide a payment_token.
    */
   collection_method: Shared.CollectionMethod | null;
+
+  /**
+   * The company ID to create this invoice for.
+   */
+  company_id: string;
 
   /**
    * The date the invoice is due, if applicable.
@@ -291,7 +297,7 @@ export namespace InvoiceCreateParams {
       /**
        * The type of the custom field.
        */
-      field_type: 'text';
+      field_type: 'text' | null;
 
       /**
        * The name of the custom field.
