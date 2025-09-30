@@ -10,13 +10,23 @@ import { path } from '../internal/utils/path';
 export class CourseLessonInteractions extends APIResource {
   /**
    * Retrieves a course lesson interaction by ID
+   *
+   * Required permissions:
+   *
+   * - `course_lesson_interaction:read`
+   * - `courses:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction | null> {
     return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 
   /**
    * Lists course lesson interactions
+   *
+   * Required permissions:
+   *
+   * - `course_lesson_interaction:read`
+   * - `courses:read`
    */
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},
