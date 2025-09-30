@@ -34,6 +34,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'Returns the elements in the list that come before the specified cursor.',
       },
+      direction: {
+        type: 'string',
+        description: 'The direction of the sort.',
+        enum: ['asc', 'desc'],
+      },
       first: {
         type: 'integer',
         description: 'Returns the first _n_ elements from the list.',
@@ -41,6 +46,11 @@ export const tool: Tool = {
       last: {
         type: 'integer',
         description: 'Returns the last _n_ elements from the list.',
+      },
+      order: {
+        type: 'string',
+        description: 'The ways a relation of AccessPasses can be ordered',
+        enum: ['active_memberships_count', 'created_at', 'usd_gmv', 'usd_gmv_30_days'],
       },
       product_types: {
         type: 'array',
