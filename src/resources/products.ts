@@ -10,6 +10,10 @@ import { path } from '../internal/utils/path';
 export class Products extends APIResource {
   /**
    * Retrieves a product by ID or route
+   *
+   * Required permissions:
+   *
+   * - `access_pass:basic:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product | null> {
     return this._client.get(path`/products/${id}`, options);
@@ -57,9 +61,16 @@ export interface ProductListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The different types an access pass can be.
+   * The type of products to filter by
    */
-  product_type?: 'regular' | 'app' | 'experience_upsell' | 'api_only' | null;
+  product_types?: Array<'regular' | 'app' | 'experience_upsell' | 'api_only' | null> | null;
+
+  /**
+   * The visibility of the products to filter by
+   */
+  visibilities?: Array<
+    'visible' | 'hidden' | 'archived' | 'quick_link' | 'all' | 'not_quick_link' | 'not_archived' | null
+  > | null;
 }
 
 export declare namespace Products {

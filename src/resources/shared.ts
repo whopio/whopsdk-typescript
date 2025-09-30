@@ -660,9 +660,70 @@ export interface Product {
   created_at: number;
 
   /**
+   * The different types of custom CTAs that can be selected.
+   */
+  custom_cta:
+    | 'get_access'
+    | 'join'
+    | 'order_now'
+    | 'shop_now'
+    | 'call_now'
+    | 'donate_now'
+    | 'contact_us'
+    | 'sign_up'
+    | 'subscribe'
+    | 'purchase'
+    | 'get_offer'
+    | 'apply_now'
+    | 'complete_order'
+    | null;
+
+  /**
+   * The custom call to action URL for the access pass, if any.
+   */
+  custom_cta_url: string | null;
+
+  /**
+   * The custom statement descriptor for the access pass.
+   */
+  custom_statement_descriptor: string | null;
+
+  /**
+   * A short description of what the company offers or does.
+   */
+  description: string | null;
+
+  /**
+   * The percentage of a transaction a user is eligible to earn from the whop
+   * marketplace global affiliate program.
+   */
+  global_affiliate_percentage: number | null;
+
+  /**
+   * The different statuses of the global affiliate program for an access pass.
+   */
+  global_affiliate_status: 'enabled' | 'disabled' | null;
+
+  /**
+   * The headline of the access pass.
+   */
+  headline: string | null;
+
+  /**
    * The different industry types a company can be in.
    */
   industry_type: IndustryTypes | null;
+
+  /**
+   * The percentage of a transaction a user is eligible to earn from the whop
+   * marketplace member affiliate program.
+   */
+  member_affiliate_percentage: number | null;
+
+  /**
+   * The different statuses of the global affiliate program for an access pass.
+   */
+  member_affiliate_status: 'enabled' | 'disabled' | null;
 
   /**
    * The number of active users for this access pass.
@@ -673,6 +734,11 @@ export interface Product {
    * The user that owns the access pass (company owner).
    */
   owner_user: Product.OwnerUser;
+
+  /**
+   * The product tax code for the access pass, if any.
+   */
+  product_tax_code: Product.ProductTaxCode | null;
 
   /**
    * The number of reviews that have been published for the access pass.
@@ -698,6 +764,11 @@ export interface Product {
    * Whether this product is Whop verified.
    */
   verified: boolean;
+
+  /**
+   * Visibility of a resource
+   */
+  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
 }
 
 export namespace Product {
@@ -740,6 +811,26 @@ export namespace Product {
      */
     username: string;
   }
+
+  /**
+   * The product tax code for the access pass, if any.
+   */
+  export interface ProductTaxCode {
+    /**
+     * The internal ID of the product tax code.
+     */
+    id: string;
+
+    /**
+     * The name of the product tax code.
+     */
+    name: string;
+
+    /**
+     * The product_type of the ProductTaxCode
+     */
+    product_type: 'physical' | 'digital' | 'services' | null;
+  }
 }
 
 /**
@@ -760,6 +851,11 @@ export interface ProductListItem {
    * When the access pass was created.
    */
   created_at: number;
+
+  /**
+   * The headline of the access pass.
+   */
+  headline: string | null;
 
   /**
    * The different industry types a company can be in.
@@ -795,6 +891,11 @@ export interface ProductListItem {
    * Whether this product is Whop verified.
    */
   verified: boolean;
+
+  /**
+   * Visibility of a resource
+   */
+  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
 }
 
 export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
