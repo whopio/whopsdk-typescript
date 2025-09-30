@@ -635,6 +635,170 @@ export interface PageInfo {
   start_cursor: string | null;
 }
 
+/**
+ * An object representing a (sanitized) access pass.
+ */
+export interface Product {
+  /**
+   * The internal ID of the public access pass.
+   */
+  id: string;
+
+  /**
+   * The different business types a company can be.
+   */
+  business_type: BusinessTypes | null;
+
+  /**
+   * A short type of the company that this access pass belongs to.
+   */
+  company: Product.Company;
+
+  /**
+   * When the access pass was created.
+   */
+  created_at: number;
+
+  /**
+   * The different industry types a company can be in.
+   */
+  industry_type: IndustryTypes | null;
+
+  /**
+   * The number of active users for this access pass.
+   */
+  member_count: number;
+
+  /**
+   * The user that owns the access pass (company owner).
+   */
+  owner_user: Product.OwnerUser;
+
+  /**
+   * The number of reviews that have been published for the access pass.
+   */
+  published_reviews_count: number;
+
+  /**
+   * The route of the access pass.
+   */
+  route: string;
+
+  /**
+   * The title of the access pass. Use for Whop 4.0.
+   */
+  title: string;
+
+  /**
+   * When the access pass was updated.
+   */
+  updated_at: number;
+
+  /**
+   * Whether this product is Whop verified.
+   */
+  verified: boolean;
+}
+
+export namespace Product {
+  /**
+   * A short type of the company that this access pass belongs to.
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The slug/route of the company on the Whop site.
+     */
+    route: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * The user that owns the access pass (company owner).
+   */
+  export interface OwnerUser {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
+ * An object representing a (sanitized) access pass.
+ */
+export interface ProductListItem {
+  /**
+   * The internal ID of the public access pass.
+   */
+  id: string;
+
+  /**
+   * The different business types a company can be.
+   */
+  business_type: BusinessTypes | null;
+
+  /**
+   * When the access pass was created.
+   */
+  created_at: number;
+
+  /**
+   * The different industry types a company can be in.
+   */
+  industry_type: IndustryTypes | null;
+
+  /**
+   * The number of active users for this access pass.
+   */
+  member_count: number;
+
+  /**
+   * The number of reviews that have been published for the access pass.
+   */
+  published_reviews_count: number;
+
+  /**
+   * The route of the access pass.
+   */
+  route: string;
+
+  /**
+   * The title of the access pass. Use for Whop 4.0.
+   */
+  title: string;
+
+  /**
+   * When the access pass was updated.
+   */
+  updated_at: number;
+
+  /**
+   * Whether this product is Whop verified.
+   */
+  verified: boolean;
+}
+
 export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 
 export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
+
+export type ProductListItemsCursorPage = CursorPage<ProductListItem>;

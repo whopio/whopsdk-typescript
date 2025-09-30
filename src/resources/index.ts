@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
-export { AccessPasses } from './access-passes';
 export { Companies } from './companies';
 export {
   CourseLessonInteractions,
@@ -16,3 +15,4 @@ export {
   type InvoiceListParams,
   type InvoiceListItemsCursorPage,
 } from './invoices';
+export { Products, type ProductListParams, type ProductListItemsCursorPage } from './products';
