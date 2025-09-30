@@ -38,8 +38,10 @@ describe('resource products', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
+      direction: 'asc',
       first: 42,
       last: 42,
+      order: 'active_memberships_count',
       product_types: ['regular'],
       visibilities: ['visible'],
     });

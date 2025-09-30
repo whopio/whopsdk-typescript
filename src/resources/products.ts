@@ -51,6 +51,11 @@ export interface ProductListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * The direction of the sort.
+   */
+  direction?: 'asc' | 'desc' | null;
+
+  /**
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;
@@ -59,6 +64,11 @@ export interface ProductListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * The ways a relation of AccessPasses can be ordered
+   */
+  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
 
   /**
    * The type of products to filter by
