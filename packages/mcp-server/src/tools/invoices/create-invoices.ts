@@ -186,27 +186,6 @@ export const tool: Tool = {
           },
         },
       },
-      access_pass: {
-        type: 'object',
-        description:
-          'The properties of the access pass to create for this invoice. Include this if you want to create an invoice for a new product.',
-        properties: {
-          title: {
-            type: 'string',
-            description: 'The title of the access pass.',
-          },
-          product_tax_code_id: {
-            type: 'string',
-            description: 'The ID of the product tax code to apply to this access pass.',
-          },
-        },
-        required: ['title'],
-      },
-      access_pass_id: {
-        type: 'string',
-        description:
-          'The access pass ID to create this invoice for. Include this if you want to create an invoice for an existing product.',
-      },
       charge_buyer_fee: {
         type: 'boolean',
         description: 'Whether or not to charge the customer a buyer fee.',
@@ -230,6 +209,27 @@ export const tool: Tool = {
         type: 'string',
         description:
           'The payment token ID to use for this invoice. If using charge_automatically, you must provide a payment_token.',
+      },
+      product: {
+        type: 'object',
+        description:
+          'The properties of the access pass to create for this invoice. Include this if you want to create an invoice for a new product.',
+        properties: {
+          title: {
+            type: 'string',
+            description: 'The title of the access pass.',
+          },
+          product_tax_code_id: {
+            type: 'string',
+            description: 'The ID of the product tax code to apply to this access pass.',
+          },
+        },
+        required: ['title'],
+      },
+      product_id: {
+        type: 'string',
+        description:
+          'The access pass ID to create this invoice for. Include this if you want to create an invoice for an existing product.',
       },
     },
     required: ['collection_method', 'company_id', 'due_date', 'plan'],

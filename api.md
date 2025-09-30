@@ -2,8 +2,6 @@
 
 Types:
 
-- <code><a href="./src/resources/shared.ts">AccessPass</a></code>
-- <code><a href="./src/resources/shared.ts">AccessPassListItem</a></code>
 - <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
@@ -38,11 +36,6 @@ Methods:
 - <code title="get /course_lesson_interactions">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">list</a>({ ...params }) -> CourseLessonInteractionListItemsCursorPage</code>
 
 # AccessPasses
-
-Methods:
-
-- <code title="get /access_passes/{id}">client.accessPasses.<a href="./src/resources/access-passes.ts">retrieve</a>(id) -> AccessPass</code>
-- <code title="get /access_passes">client.accessPasses.<a href="./src/resources/access-passes.ts">list</a>({ ...params }) -> AccessPassListItemsCursorPage</code>
 
 # Companies
 

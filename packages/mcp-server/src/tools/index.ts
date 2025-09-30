@@ -10,8 +10,6 @@ import list_invoices from './invoices/list-invoices';
 import void_invoices from './invoices/void-invoices';
 import retrieve_course_lesson_interactions from './course-lesson-interactions/retrieve-course-lesson-interactions';
 import list_course_lesson_interactions from './course-lesson-interactions/list-course-lesson-interactions';
-import retrieve_access_passes from './access-passes/retrieve-access-passes';
-import list_access_passes from './access-passes/list-access-passes';
 import retrieve_companies from './companies/retrieve-companies';
 
 export const endpoints: Endpoint[] = [];
@@ -26,8 +24,6 @@ addEndpoint(list_invoices);
 addEndpoint(void_invoices);
 addEndpoint(retrieve_course_lesson_interactions);
 addEndpoint(list_course_lesson_interactions);
-addEndpoint(retrieve_access_passes);
-addEndpoint(list_access_passes);
 addEndpoint(retrieve_companies);
 
 export type Filter = {

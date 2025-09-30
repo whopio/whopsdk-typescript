@@ -71,13 +71,13 @@ describe('resource invoices', () => {
         unlimited_stock: true,
         visibility: 'visible',
       },
-      access_pass: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
-      access_pass_id: 'prod_xxxxxxxxxxxxx',
       charge_buyer_fee: true,
       customer_name: 'customer_name',
       email_address: 'email_address',
       member_id: 'mber_xxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
+      product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
+      product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
 
