@@ -231,11 +231,6 @@ The following tools are available in this MCP server.
 - `retrieve_course_lesson_interactions` (`read`): Retrieves a course lesson interaction by ID
 - `list_course_lesson_interactions` (`read`): Lists course lesson interactions
 
-### Resource `access_passes`:
-
-- `retrieve_access_passes` (`read`): Retrieves an access pass by ID or route
-- `list_access_passes` (`read`): Lists access passes for a company
-
 ### Resource `companies`:
 
 - `retrieve_companies` (`read`): Retrieves an company by ID

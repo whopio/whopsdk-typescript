@@ -122,18 +122,6 @@ export interface InvoiceCreateParams {
   plan: InvoiceCreateParams.Plan;
 
   /**
-   * The properties of the access pass to create for this invoice. Include this if
-   * you want to create an invoice for a new product.
-   */
-  access_pass?: InvoiceCreateParams.AccessPass | null;
-
-  /**
-   * The access pass ID to create this invoice for. Include this if you want to
-   * create an invoice for an existing product.
-   */
-  access_pass_id?: string | null;
-
-  /**
    * Whether or not to charge the customer a buyer fee.
    */
   charge_buyer_fee?: boolean | null;
@@ -163,6 +151,18 @@ export interface InvoiceCreateParams {
    * must provide a payment_token.
    */
   payment_token_id?: string | null;
+
+  /**
+   * The properties of the access pass to create for this invoice. Include this if
+   * you want to create an invoice for a new product.
+   */
+  product?: InvoiceCreateParams.Product | null;
+
+  /**
+   * The access pass ID to create this invoice for. Include this if you want to
+   * create an invoice for an existing product.
+   */
+  product_id?: string | null;
 }
 
 export namespace InvoiceCreateParams {
@@ -356,7 +356,7 @@ export namespace InvoiceCreateParams {
    * The properties of the access pass to create for this invoice. Include this if
    * you want to create an invoice for a new product.
    */
-  export interface AccessPass {
+  export interface Product {
     /**
      * The title of the access pass.
      */

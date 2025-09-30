@@ -19,7 +19,7 @@ import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { AccessPassListItemsCursorPage, AccessPassListParams, AccessPasses } from './resources/access-passes';
+import { AccessPasses } from './resources/access-passes';
 import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListItemsCursorPage,
@@ -772,16 +772,10 @@ export declare namespace Whopsdk {
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 
-  export {
-    AccessPasses as AccessPasses,
-    type AccessPassListItemsCursorPage as AccessPassListItemsCursorPage,
-    type AccessPassListParams as AccessPassListParams,
-  };
+  export { AccessPasses as AccessPasses };
 
   export { Companies as Companies };
 
-  export type AccessPass = API.AccessPass;
-  export type AccessPassListItem = API.AccessPassListItem;
   export type BusinessTypes = API.BusinessTypes;
   export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
