@@ -10,8 +10,6 @@ import { path } from '../internal/utils/path';
 export class Products extends APIResource {
   /**
    * Retrieves a product by ID or route
-   *
-   * Required permissions:
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product | null> {
     return this._client.get(path`/products/${id}`, options);

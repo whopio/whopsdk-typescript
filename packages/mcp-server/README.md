@@ -267,9 +267,6 @@ The following tools are available in this MCP server.
 ### Resource `products`:
 
 - `retrieve_products` (`read`): Retrieves a product by ID or route
-
-  Required permissions:
-
 - `list_products` (`read`): Lists products for a company
 
   Required permissions:
