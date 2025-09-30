@@ -40,7 +40,8 @@ describe('resource products', () => {
       before: 'before',
       first: 42,
       last: 42,
-      product_type: 'regular',
+      product_types: ['regular'],
+      visibilities: ['visible'],
     });
   });
 });
