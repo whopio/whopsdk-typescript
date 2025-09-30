@@ -36,7 +36,7 @@ export const tool: Tool = {
       },
       direction: {
         type: 'string',
-        description: 'The direction to sort the invoices by',
+        description: 'The direction of the sort.',
         enum: ['asc', 'desc'],
       },
       filters: {
@@ -78,7 +78,7 @@ export const tool: Tool = {
       },
       order: {
         type: 'string',
-        description: 'The order to sort the invoices by',
+        description: 'Which columns can be used to sort.',
         enum: ['id', 'created_at', 'due_date'],
       },
       jq_filter: {

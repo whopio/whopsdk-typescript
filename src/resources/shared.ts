@@ -20,13 +20,12 @@ export type BusinessTypes =
   | 'other'
   | 'saas'
   | 'course'
-  | 'community'
-  | null;
+  | 'community';
 
 /**
  * The method of collection for an invoice.
  */
-export type CollectionMethod = 'send_invoice' | 'charge_automatically' | null;
+export type CollectionMethod = 'send_invoice' | 'charge_automatically';
 
 /**
  * An object representing a (sanitized) company.
@@ -38,7 +37,7 @@ export interface Company {
   id: string;
 
   /**
-   * The type of business the company is.
+   * The different business types a company can be.
    */
   business_type: BusinessTypes | null;
 
@@ -48,7 +47,7 @@ export interface Company {
   created_at: number;
 
   /**
-   * The specific industry the company operates in.
+   * The different industry types a company can be in.
    */
   industry_type: IndustryTypes | null;
 
@@ -131,7 +130,7 @@ export namespace Company {
     /**
      * The website
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | null;
+    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
   }
 }
 
@@ -356,8 +355,7 @@ export type Currency =
   | 'ttd'
   | 'uzs'
   | 'rub'
-  | 'btc'
-  | null;
+  | 'btc';
 
 /**
  * The different industry types a company can be in.
@@ -421,8 +419,7 @@ export type IndustryTypes =
   | 'convention'
   | 'concerts'
   | 'meetups'
-  | 'parties'
-  | null;
+  | 'parties';
 
 /**
  * A statement that defines an amount due by a customer.
@@ -466,7 +463,7 @@ export interface Invoice {
   /**
    * The status of the invoice.
    */
-  status: InvoiceStatus | null;
+  status: InvoiceStatus;
 
   /**
    * The user that the invoice was created for.
@@ -487,7 +484,7 @@ export namespace Invoice {
     /**
      * The respective currency identifier for the plan.
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -558,7 +555,7 @@ export interface InvoiceListItem {
   /**
    * The status of the invoice.
    */
-  status: InvoiceStatus | null;
+  status: InvoiceStatus;
 
   /**
    * The user that the invoice was created for.
@@ -579,7 +576,7 @@ export namespace InvoiceListItem {
     /**
      * The respective currency identifier for the plan.
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -611,7 +608,7 @@ export namespace InvoiceListItem {
 /**
  * The different statuses an invoice can be in
  */
-export type InvoiceStatus = 'open' | 'paid' | 'past_due' | 'void' | null;
+export type InvoiceStatus = 'open' | 'paid' | 'past_due' | 'void';
 
 /**
  * Information about pagination in a connection.

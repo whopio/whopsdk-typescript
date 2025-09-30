@@ -104,7 +104,7 @@ export interface InvoiceCreateParams {
    * The method of collection for this invoice. If using charge_automatically, you
    * must provide a payment_token.
    */
-  collection_method: Shared.CollectionMethod | null;
+  collection_method: Shared.CollectionMethod;
 
   /**
    * The company ID to create this invoice for.
@@ -176,7 +176,7 @@ export namespace InvoiceCreateParams {
     ach_payments?: boolean | null;
 
     /**
-     * The respective currency identifier for the plan.
+     * The available currencies on the platform
      */
     base_currency?: Shared.Currency | null;
 
@@ -231,7 +231,7 @@ export namespace InvoiceCreateParams {
     paypal_accepted?: boolean | null;
 
     /**
-     * Indicates if the plan is a one time payment or recurring.
+     * The type of plan that can be attached to an access pass
      */
     plan_type?: 'renewal' | 'one_time' | null;
 
@@ -246,7 +246,7 @@ export namespace InvoiceCreateParams {
     redirect_url?: string | null;
 
     /**
-     * This is the release method the business uses to sell this plan.
+     * The methods of how a plan can be released (including raffles and waitlists).
      */
     release_method?: 'buy_now' | 'waitlist' | 'raffle' | null;
 
@@ -287,7 +287,7 @@ export namespace InvoiceCreateParams {
     unlimited_stock?: boolean | null;
 
     /**
-     * Shows or hides the plan from public/business view.
+     * Visibility of a resource
      */
     visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
   }
@@ -297,7 +297,7 @@ export namespace InvoiceCreateParams {
       /**
        * The type of the custom field.
        */
-      field_type: 'text' | null;
+      field_type: 'text';
 
       /**
        * The name of the custom field.
@@ -381,7 +381,7 @@ export interface InvoiceListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The direction to sort the invoices by
+   * The direction of the sort.
    */
   direction?: 'asc' | 'desc' | null;
 
@@ -401,7 +401,7 @@ export interface InvoiceListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The order to sort the invoices by
+   * Which columns can be used to sort.
    */
   order?: 'id' | 'created_at' | 'due_date' | null;
 }
@@ -419,12 +419,12 @@ export namespace InvoiceListParams {
     /**
      * The collection methods to filter the invoices by
      */
-    collection_methods?: Array<Shared.CollectionMethod | null> | null;
+    collection_methods?: Array<Shared.CollectionMethod> | null;
 
     /**
      * The statuses to filter the invoices by
      */
-    statuses?: Array<Shared.InvoiceStatus | null> | null;
+    statuses?: Array<Shared.InvoiceStatus> | null;
   }
 }
 

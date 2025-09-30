@@ -115,7 +115,7 @@ export const tool: Tool = {
           },
           plan_type: {
             type: 'string',
-            description: 'Indicates if the plan is a one time payment or recurring.',
+            description: 'The type of plan that can be attached to an access pass',
             enum: ['renewal', 'one_time'],
           },
           platform_balance_accepted: {
@@ -128,7 +128,7 @@ export const tool: Tool = {
           },
           release_method: {
             type: 'string',
-            description: 'This is the release method the business uses to sell this plan.',
+            description: 'The methods of how a plan can be released (including raffles and waitlists).',
             enum: ['buy_now', 'waitlist', 'raffle'],
           },
           release_method_settings: {
@@ -181,7 +181,7 @@ export const tool: Tool = {
           },
           visibility: {
             type: 'string',
-            description: 'Shows or hides the plan from public/business view.',
+            description: 'Visibility of a resource',
             enum: ['visible', 'hidden', 'archived', 'quick_link'],
           },
         },
