@@ -19,7 +19,7 @@ cd whopsdk-typescript
 
 ```sh
 # set env vars as needed
-export WHOPSDK_API_KEY="My API Key"
+export WHOP_API_KEY="My API Key"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -42,7 +42,7 @@ For clients with a configuration JSON, it might look something like this:
       "command": "node",
       "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=all"],
       "env": {
-        "WHOPSDK_API_KEY": "My API Key"
+        "WHOP_API_KEY": "My API Key"
       }
     }
   }
@@ -149,8 +149,8 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
-| ------------------- | ------------------------ | --------------- |
-| `x-whopsdk-api-key` | `apiKey` | bearerAuth |
+| ---------------- | ------------------------ | --------------- |
+| `x-whop-api-key` | `apiKey` | AppApiKey |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:
 
@@ -263,6 +263,18 @@ The following tools are available in this MCP server.
 
   - `course_lesson_interaction:read`
   - `courses:read`
+
+### Resource `products`:
+
+- `retrieve_products` (`read`): Retrieves a product by ID or route
+
+  Required permissions:
+
+- `list_products` (`read`): Lists products for a company
+
+  Required permissions:
+
+  - `access_pass:basic:read`
 
 ### Resource `companies`:
 

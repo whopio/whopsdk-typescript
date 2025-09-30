@@ -13,6 +13,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Product</a></code>
+- <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
 
 # Invoices
 
@@ -35,7 +37,12 @@ Methods:
 - <code title="get /course_lesson_interactions/{id}">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">retrieve</a>(id) -> CourseLessonInteraction | null</code>
 - <code title="get /course_lesson_interactions">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">list</a>({ ...params }) -> CourseLessonInteractionListItemsCursorPage</code>
 
-# AccessPasses
+# Products
+
+Methods:
+
+- <code title="get /products/{id}">client.products.<a href="./src/resources/products.ts">retrieve</a>(id) -> Product | null</code>
+- <code title="get /products">client.products.<a href="./src/resources/products.ts">list</a>({ ...params }) -> ProductListItemsCursorPage</code>
 
 # Companies
 

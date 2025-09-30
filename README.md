@@ -25,7 +25,9 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Whopsdk from 'whopsdk';
 
-const client = new Whopsdk();
+const client = new Whopsdk({
+  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
+});
 
 const page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
 const invoiceListItem = page.data[0];
@@ -41,7 +43,9 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Whopsdk from 'whopsdk';
 
-const client = new Whopsdk();
+const client = new Whopsdk({
+  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
+});
 
 const params: Whopsdk.InvoiceListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
 const [invoiceListItem]: [Whopsdk.InvoiceListItem | null] = await client.invoices.list(params);

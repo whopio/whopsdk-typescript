@@ -413,14 +413,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['WHOPSDK_API_KEY'] = 'My API Key';
+    process.env['WHOP_API_KEY'] = 'My API Key';
     const client = new Whopsdk();
     expect(client.apiKey).toBe('My API Key');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['WHOPSDK_API_KEY'] = 'another My API Key';
+    process.env['WHOP_API_KEY'] = 'another My API Key';
     const client = new Whopsdk({ apiKey: 'My API Key' });
     expect(client.apiKey).toBe('My API Key');
   });
