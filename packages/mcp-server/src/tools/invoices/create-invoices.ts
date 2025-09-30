@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 export const tool: Tool = {
   name: 'create_invoices',
-  description: 'Creates an invoice',
+  description: 'Creates an invoice\n\nRequired permissions:\n - `invoice:create`\n - `plan:basic:read`\n',
   inputSchema: {
     type: 'object',
     properties: {

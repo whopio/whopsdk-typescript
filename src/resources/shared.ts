@@ -128,9 +128,9 @@ export namespace Company {
     url: string;
 
     /**
-     * The website
+     * The different websites you can have social links for
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
+    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | null;
   }
 }
 
@@ -461,9 +461,9 @@ export interface Invoice {
   number: string;
 
   /**
-   * The status of the invoice.
+   * The different statuses an invoice can be in
    */
-  status: InvoiceStatus;
+  status: InvoiceStatus | null;
 
   /**
    * The user that the invoice was created for.
@@ -482,9 +482,9 @@ export namespace Invoice {
     id: string;
 
     /**
-     * The respective currency identifier for the plan.
+     * The available currencies on the platform
      */
-    currency: Shared.Currency;
+    currency: Shared.Currency | null;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -553,9 +553,9 @@ export interface InvoiceListItem {
   number: string;
 
   /**
-   * The status of the invoice.
+   * The different statuses an invoice can be in
    */
-  status: InvoiceStatus;
+  status: InvoiceStatus | null;
 
   /**
    * The user that the invoice was created for.
@@ -574,9 +574,9 @@ export namespace InvoiceListItem {
     id: string;
 
     /**
-     * The respective currency identifier for the plan.
+     * The available currencies on the platform
      */
-    currency: Shared.Currency;
+    currency: Shared.Currency | null;
 
     /**
      * The formatted price (including currency) for the plan.

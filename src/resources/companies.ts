@@ -9,8 +9,12 @@ import { path } from '../internal/utils/path';
 export class Companies extends APIResource {
   /**
    * Retrieves an company by ID
+   *
+   * Required permissions:
+   *
+   * - `company:basic:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company | null> {
     return this._client.get(path`/companies/${id}`, options);
   }
 }

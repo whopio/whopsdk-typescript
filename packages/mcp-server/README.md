@@ -222,15 +222,52 @@ The following tools are available in this MCP server.
 ### Resource `invoices`:
 
 - `create_invoices` (`write`): Creates an invoice
+
+  Required permissions:
+
+  - `invoice:create`
+  - `plan:basic:read`
+
 - `retrieve_invoices` (`read`): Retrieves an invoice by ID or token
+
+  Required permissions:
+
+  - `invoice:basic:read`
+  - `plan:basic:read`
+
 - `list_invoices` (`read`): Lists invoices
+
+  Required permissions:
+
+  - `invoice:basic:read`
+  - `plan:basic:read`
+
 - `void_invoices` (`write`): Void an invoice
+
+  Required permissions:
+
+  - `invoice:update`
 
 ### Resource `course_lesson_interactions`:
 
 - `retrieve_course_lesson_interactions` (`read`): Retrieves a course lesson interaction by ID
+
+  Required permissions:
+
+  - `course_lesson_interaction:read`
+  - `courses:read`
+
 - `list_course_lesson_interactions` (`read`): Lists course lesson interactions
+
+  Required permissions:
+
+  - `course_lesson_interaction:read`
+  - `courses:read`
 
 ### Resource `companies`:
 
 - `retrieve_companies` (`read`): Retrieves an company by ID
+
+  Required permissions:
+
+  - `company:basic:read`

@@ -11,6 +11,11 @@ export class Invoices extends APIResource {
   /**
    * Creates an invoice
    *
+   * Required permissions:
+   *
+   * - `invoice:create`
+   * - `plan:basic:read`
+   *
    * @example
    * ```ts
    * const invoice = await client.invoices.create({
@@ -28,6 +33,11 @@ export class Invoices extends APIResource {
   /**
    * Retrieves an invoice by ID or token
    *
+   * Required permissions:
+   *
+   * - `invoice:basic:read`
+   * - `plan:basic:read`
+   *
    * @example
    * ```ts
    * const invoice = await client.invoices.retrieve(
@@ -35,12 +45,17 @@ export class Invoices extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice | null> {
     return this._client.get(path`/invoices/${id}`, options);
   }
 
   /**
    * Lists invoices
+   *
+   * Required permissions:
+   *
+   * - `invoice:basic:read`
+   * - `plan:basic:read`
    *
    * @example
    * ```ts
@@ -64,6 +79,10 @@ export class Invoices extends APIResource {
 
   /**
    * Void an invoice
+   *
+   * Required permissions:
+   *
+   * - `invoice:update`
    *
    * @example
    * ```ts
@@ -101,10 +120,9 @@ export type InvoiceVoidResponse = boolean | null;
 
 export interface InvoiceCreateParams {
   /**
-   * The method of collection for this invoice. If using charge_automatically, you
-   * must provide a payment_token.
+   * The method of collection for an invoice.
    */
-  collection_method: Shared.CollectionMethod;
+  collection_method: Shared.CollectionMethod | null;
 
   /**
    * The company ID to create this invoice for.
@@ -297,7 +315,7 @@ export namespace InvoiceCreateParams {
       /**
        * The type of the custom field.
        */
-      field_type: 'text';
+      field_type: 'text' | null;
 
       /**
        * The name of the custom field.
@@ -419,12 +437,12 @@ export namespace InvoiceListParams {
     /**
      * The collection methods to filter the invoices by
      */
-    collection_methods?: Array<Shared.CollectionMethod> | null;
+    collection_methods?: Array<Shared.CollectionMethod | null> | null;
 
     /**
      * The statuses to filter the invoices by
      */
-    statuses?: Array<Shared.InvoiceStatus> | null;
+    statuses?: Array<Shared.InvoiceStatus | null> | null;
   }
 }
 
