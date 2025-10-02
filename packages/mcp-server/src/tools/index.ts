@@ -4,14 +4,21 @@ import { Metadata, Endpoint, HandlerFunction } from './types';
 
 export { Metadata, Endpoint, HandlerFunction };
 
+import create_apps from './apps/create-apps';
+import retrieve_apps from './apps/retrieve-apps';
+import update_apps from './apps/update-apps';
+import list_apps from './apps/list-apps';
 import create_invoices from './invoices/create-invoices';
 import retrieve_invoices from './invoices/retrieve-invoices';
 import list_invoices from './invoices/list-invoices';
 import void_invoices from './invoices/void-invoices';
 import retrieve_course_lesson_interactions from './course-lesson-interactions/retrieve-course-lesson-interactions';
 import list_course_lesson_interactions from './course-lesson-interactions/list-course-lesson-interactions';
+import create_products from './products/create-products';
 import retrieve_products from './products/retrieve-products';
+import update_products from './products/update-products';
 import list_products from './products/list-products';
+import delete_products from './products/delete-products';
 import retrieve_companies from './companies/retrieve-companies';
 
 export const endpoints: Endpoint[] = [];
@@ -20,14 +27,21 @@ function addEndpoint(endpoint: Endpoint) {
   endpoints.push(endpoint);
 }
 
+addEndpoint(create_apps);
+addEndpoint(retrieve_apps);
+addEndpoint(update_apps);
+addEndpoint(list_apps);
 addEndpoint(create_invoices);
 addEndpoint(retrieve_invoices);
 addEndpoint(list_invoices);
 addEndpoint(void_invoices);
 addEndpoint(retrieve_course_lesson_interactions);
 addEndpoint(list_course_lesson_interactions);
+addEndpoint(create_products);
 addEndpoint(retrieve_products);
+addEndpoint(update_products);
 addEndpoint(list_products);
+addEndpoint(delete_products);
 addEndpoint(retrieve_companies);
 
 export type Filter = {

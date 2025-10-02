@@ -20,6 +20,7 @@ cd whopsdk-typescript
 ```sh
 # set env vars as needed
 export WHOP_API_KEY="My API Key"
+export WHOP_WEBHOOK_SECRET="My Webhook Key"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -42,7 +43,8 @@ For clients with a configuration JSON, it might look something like this:
       "command": "node",
       "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=all"],
       "env": {
-        "WHOP_API_KEY": "My API Key"
+        "WHOP_API_KEY": "My API Key",
+        "WHOP_WEBHOOK_SECRET": "My Webhook Key"
       }
     }
   }
@@ -187,7 +189,7 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 import { server, endpoints, init } from "whopsdk-mcp/server";
 
 // import a specific tool
-import createInvoices from "whopsdk-mcp/tools/invoices/create-invoices";
+import createApps from "whopsdk-mcp/tools/apps/create-apps";
 
 // initialize the server and all endpoints
 init({ server, endpoints });
@@ -212,12 +214,36 @@ const myCustomEndpoint = {
 };
 
 // initialize the server with your custom endpoints
-init({ server: myServer, endpoints: [createInvoices, myCustomEndpoint] });
+init({ server: myServer, endpoints: [createApps, myCustomEndpoint] });
 ```
 
 ## Available Tools
 
 The following tools are available in this MCP server.
+
+### Resource `apps`:
+
+- `create_apps` (`write`): Create a new App
+
+  Required permissions:
+
+  - `developer:create_app`
+  - `developer:manage_api_key`
+
+- `retrieve_apps` (`read`): Retrieves an app by ID
+
+  Required permissions:
+
+  - `developer:manage_api_key`
+
+- `update_apps` (`write`): Update an existing App
+
+  Required permissions:
+
+  - `developer:update_app`
+  - `developer:manage_api_key`
+
+- `list_apps` (`read`): Fetches a list of apps
 
 ### Resource `invoices`:
 
@@ -266,10 +292,24 @@ The following tools are available in this MCP server.
 
 ### Resource `products`:
 
+- `create_products` (`write`): Creates a new Product
+
+  Required permissions:
+
+  - `access_pass:create`
+  - `access_pass:basic:read`
+
 - `retrieve_products` (`read`): Retrieves a product by ID or route
 
   Required permissions:
 
+  - `access_pass:basic:read`
+
+- `update_products` (`write`): Updates an existing Product
+
+  Required permissions:
+
+  - `access_pass:update`
   - `access_pass:basic:read`
 
 - `list_products` (`read`): Lists products for a company
@@ -277,6 +317,12 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `access_pass:basic:read`
+
+- `delete_products` (`write`): Deletes an existing Product
+
+  Required permissions:
+
+  - `access_pass:delete`
 
 ### Resource `companies`:
 

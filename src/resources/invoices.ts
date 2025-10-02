@@ -251,7 +251,7 @@ export namespace InvoiceCreateParams {
     /**
      * The type of plan that can be attached to an access pass
      */
-    plan_type?: 'renewal' | 'one_time' | null;
+    plan_type?: Shared.PlanType | null;
 
     /**
      * Marks whether platform balance payments are/aren't accepted.
@@ -266,7 +266,7 @@ export namespace InvoiceCreateParams {
     /**
      * The methods of how a plan can be released (including raffles and waitlists).
      */
-    release_method?: 'buy_now' | 'waitlist' | 'raffle' | null;
+    release_method?: Shared.ReleaseMethod | null;
 
     /**
      * Configurable settings on how this plan is released.
@@ -307,7 +307,7 @@ export namespace InvoiceCreateParams {
     /**
      * Visibility of a resource
      */
-    visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
+    visibility?: Shared.Visibility | null;
   }
 
   export namespace Plan {
@@ -401,7 +401,7 @@ export interface InvoiceListParams extends CursorPageParams {
   /**
    * The direction of the sort.
    */
-  direction?: 'asc' | 'desc' | null;
+  direction?: Shared.Direction | null;
 
   /**
    * The filters to apply to the invoices

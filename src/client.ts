@@ -19,6 +19,14 @@ import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import {
+  AppCreateParams,
+  AppListParams,
+  AppListResponse,
+  AppListResponsesCursorPage,
+  AppUpdateParams,
+  Apps,
+} from './resources/apps';
 import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListItemsCursorPage,
@@ -33,7 +41,22 @@ import {
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
-import { ProductListItemsCursorPage, ProductListParams, Products } from './resources/products';
+import {
+  ProductCreateParams,
+  ProductDeleteResponse,
+  ProductListItemsCursorPage,
+  ProductListParams,
+  ProductUpdateParams,
+  Products,
+} from './resources/products';
+import {
+  InvoiceCreatedWebhookEvent,
+  InvoicePaidWebhookEvent,
+  InvoicePastDueWebhookEvent,
+  InvoiceVoidedWebhookEvent,
+  UnwrapWebhookEvent,
+  Webhooks,
+} from './resources/webhooks';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -52,6 +75,11 @@ export interface ClientOptions {
    * The app API key from an app from the /dashboard/developer page
    */
   apiKey?: string | undefined;
+
+  /**
+   * Defaults to process.env['WHOP_WEBHOOK_SECRET'].
+   */
+  webhookKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -127,6 +155,7 @@ export interface ClientOptions {
  */
 export class Whopsdk {
   apiKey: string;
+  webhookKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -144,6 +173,7 @@ export class Whopsdk {
    * API Client for interfacing with the Whopsdk API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string} [opts.baseURL=process.env['WHOPSDK_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -155,6 +185,7 @@ export class Whopsdk {
   constructor({
     baseURL = readEnv('WHOPSDK_BASE_URL'),
     apiKey = readEnv('WHOP_API_KEY'),
+    webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -165,6 +196,7 @@ export class Whopsdk {
 
     const options: ClientOptions = {
       apiKey,
+      webhookKey,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -187,6 +219,7 @@ export class Whopsdk {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.webhookKey = webhookKey;
   }
 
   /**
@@ -203,6 +236,7 @@ export class Whopsdk {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      webhookKey: this.webhookKey,
       ...options,
     });
     return client;
@@ -734,22 +768,35 @@ export class Whopsdk {
 
   static toFile = Uploads.toFile;
 
+  apps: API.Apps = new API.Apps(this);
   invoices: API.Invoices = new API.Invoices(this);
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   products: API.Products = new API.Products(this);
   companies: API.Companies = new API.Companies(this);
+  webhooks: API.Webhooks = new API.Webhooks(this);
 }
 
+Whopsdk.Apps = Apps;
 Whopsdk.Invoices = Invoices;
 Whopsdk.CourseLessonInteractions = CourseLessonInteractions;
 Whopsdk.Products = Products;
 Whopsdk.Companies = Companies;
+Whopsdk.Webhooks = Webhooks;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
 
   export import CursorPage = Pagination.CursorPage;
   export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
+
+  export {
+    Apps as Apps,
+    type AppListResponse as AppListResponse,
+    type AppListResponsesCursorPage as AppListResponsesCursorPage,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+  };
 
   export {
     Invoices as Invoices,
@@ -768,23 +815,44 @@ export declare namespace Whopsdk {
 
   export {
     Products as Products,
+    type ProductDeleteResponse as ProductDeleteResponse,
     type ProductListItemsCursorPage as ProductListItemsCursorPage,
+    type ProductCreateParams as ProductCreateParams,
+    type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
   };
 
   export { Companies as Companies };
 
+  export {
+    Webhooks as Webhooks,
+    type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
+    type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
+    type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
+    type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type UnwrapWebhookEvent as UnwrapWebhookEvent,
+  };
+
+  export type AccessPassType = API.AccessPassType;
+  export type App = API.App;
+  export type AppStatuses = API.AppStatuses;
   export type BusinessTypes = API.BusinessTypes;
   export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
   export type CourseLessonInteraction = API.CourseLessonInteraction;
   export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
   export type Currency = API.Currency;
+  export type CustomCta = API.CustomCta;
+  export type Direction = API.Direction;
+  export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
   export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
   export type InvoiceStatus = API.InvoiceStatus;
   export type PageInfo = API.PageInfo;
+  export type PlanType = API.PlanType;
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
+  export type ReleaseMethod = API.ReleaseMethod;
+  export type Visibility = API.Visibility;
 }

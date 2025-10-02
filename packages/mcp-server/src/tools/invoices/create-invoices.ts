@@ -114,9 +114,7 @@ export const tool: Tool = {
             description: "Marks whether paypal payments are/aren't accepted.",
           },
           plan_type: {
-            type: 'string',
-            description: 'The type of plan that can be attached to an access pass',
-            enum: ['renewal', 'one_time'],
+            $ref: '#/$defs/plan_type',
           },
           platform_balance_accepted: {
             type: 'boolean',
@@ -127,9 +125,7 @@ export const tool: Tool = {
             description: 'The URL to redirect the customer to after purchase.',
           },
           release_method: {
-            type: 'string',
-            description: 'The methods of how a plan can be released (including raffles and waitlists).',
-            enum: ['buy_now', 'waitlist', 'raffle'],
+            $ref: '#/$defs/release_method',
           },
           release_method_settings: {
             type: 'object',
@@ -180,9 +176,7 @@ export const tool: Tool = {
             description: "Limits/doesn't limit the number of units available for purchase.",
           },
           visibility: {
-            type: 'string',
-            description: 'Visibility of a resource',
-            enum: ['visible', 'hidden', 'archived', 'quick_link'],
+            $ref: '#/$defs/visibility',
           },
         },
       },
@@ -328,6 +322,21 @@ export const tool: Tool = {
           'rub',
           'btc',
         ],
+      },
+      plan_type: {
+        type: 'string',
+        description: 'The type of plan that can be attached to an access pass',
+        enum: ['renewal', 'one_time'],
+      },
+      release_method: {
+        type: 'string',
+        description: 'The methods of how a plan can be released (including raffles and waitlists).',
+        enum: ['buy_now', 'waitlist', 'raffle'],
+      },
+      visibility: {
+        type: 'string',
+        description: 'Visibility of a resource',
+        enum: ['visible', 'hidden', 'archived', 'quick_link'],
       },
     },
   },

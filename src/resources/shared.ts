@@ -4,6 +4,181 @@ import * as Shared from './shared';
 import { CursorPage } from '../core/pagination';
 
 /**
+ * The different types an access pass can be.
+ */
+export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
+
+/**
+ * An object representing an app
+ */
+export interface App {
+  /**
+   * The ID of the app
+   */
+  id: string;
+
+  /**
+   * The API key for the app
+   */
+  api_key: App.APIKey | null;
+
+  /**
+   * The base url of the app
+   */
+  base_url: string | null;
+
+  /**
+   * The path part for a specific view of the app. This is the template part of the
+   * url after the base domain. Eg: /experiences/[experienceId]
+   */
+  dashboard_path: string | null;
+
+  /**
+   * The description of the app
+   */
+  description: string | null;
+
+  /**
+   * The path part for a specific view of the app. This is the template part of the
+   * url after the base domain. Eg: /experiences/[experienceId]
+   */
+  discover_path: string | null;
+
+  /**
+   * The unique part of the proxied domain for this app. Used to generate the base
+   * url used to display the app inside the whop platform. Refers to the id part in
+   * the final url: https://{domain_id}.apps.whop.com
+   */
+  domain_id: string;
+
+  /**
+   * The path part for a specific view of the app. This is the template part of the
+   * url after the base domain. Eg: /experiences/[experienceId]
+   */
+  experience_path: string | null;
+
+  /**
+   * The name of the app
+   */
+  name: string;
+
+  /**
+   * The set of permissions that an app requests to be granted when a user installs
+   * the app.
+   */
+  requested_permissions: Array<App.RequestedPermission>;
+
+  /**
+   * A collection of stats for the app.
+   */
+  stats: App.Stats | null;
+
+  /**
+   * The status of an experience interface
+   */
+  status: AppStatuses | null;
+
+  /**
+   * Whether this app has been verified by Whop. Verified apps are endorsed by whop
+   * and are shown in the 'featured apps' section of the app store.
+   */
+  verified: boolean;
+}
+
+export namespace App {
+  /**
+   * The API key for the app
+   */
+  export interface APIKey {
+    /**
+     * The ID of this API key
+     */
+    id: string;
+
+    /**
+     * This is the API key used to authenticate requests
+     */
+    token: string;
+
+    /**
+     * When this API key was created at
+     */
+    created_at: number;
+  }
+
+  /**
+   * A permission that the app requests from the admin of a company during the oauth
+   * flow.
+   */
+  export interface RequestedPermission {
+    /**
+     * Whether the action is required for the app to function.
+     */
+    is_required: boolean;
+
+    /**
+     * The reason for requesting the action.
+     */
+    justification: string;
+
+    /**
+     * The action that the app will request off of users when a user installs the app.
+     */
+    permission_action: RequestedPermission.PermissionAction;
+  }
+
+  export namespace RequestedPermission {
+    /**
+     * The action that the app will request off of users when a user installs the app.
+     */
+    export interface PermissionAction {
+      /**
+       * The identifier of the action.
+       */
+      action: string;
+
+      /**
+       * The human readable name of the action.
+       */
+      name: string;
+    }
+  }
+
+  /**
+   * A collection of stats for the app.
+   */
+  export interface Stats {
+    /**
+     * This is the number of users that have spent time in this app in the last 24
+     * hours.
+     */
+    dau: number;
+
+    /**
+     * This is the number of users that have spent time in this app in the last 28
+     * days.
+     */
+    mau: number;
+
+    /**
+     * This how much time, in seconds, users have spent in this app in the last 24
+     * hours.
+     */
+    time_spent_last24_hours: number;
+
+    /**
+     * This is the number of users that have spent time in this app in the last 7 days.
+     */
+    wau: number;
+  }
+}
+
+/**
+ * The status of an experience interface
+ */
+export type AppStatuses = 'live' | 'unlisted' | 'hidden';
+
+/**
  * The different business types a company can be.
  */
 export type BusinessTypes =
@@ -358,6 +533,34 @@ export type Currency =
   | 'btc';
 
 /**
+ * The different types of custom CTAs that can be selected.
+ */
+export type CustomCta =
+  | 'get_access'
+  | 'join'
+  | 'order_now'
+  | 'shop_now'
+  | 'call_now'
+  | 'donate_now'
+  | 'contact_us'
+  | 'sign_up'
+  | 'subscribe'
+  | 'purchase'
+  | 'get_offer'
+  | 'apply_now'
+  | 'complete_order';
+
+/**
+ * The direction of the sort.
+ */
+export type Direction = 'asc' | 'desc';
+
+/**
+ * The different statuses of the global affiliate program for an access pass.
+ */
+export type GlobalAffiliateStatus = 'enabled' | 'disabled';
+
+/**
  * The different industry types a company can be in.
  */
 export type IndustryTypes =
@@ -636,6 +839,11 @@ export interface PageInfo {
 }
 
 /**
+ * The type of plan that can be attached to an access pass
+ */
+export type PlanType = 'renewal' | 'one_time';
+
+/**
  * An object representing a (sanitized) access pass.
  */
 export interface Product {
@@ -662,21 +870,7 @@ export interface Product {
   /**
    * The different types of custom CTAs that can be selected.
    */
-  custom_cta:
-    | 'get_access'
-    | 'join'
-    | 'order_now'
-    | 'shop_now'
-    | 'call_now'
-    | 'donate_now'
-    | 'contact_us'
-    | 'sign_up'
-    | 'subscribe'
-    | 'purchase'
-    | 'get_offer'
-    | 'apply_now'
-    | 'complete_order'
-    | null;
+  custom_cta: CustomCta | null;
 
   /**
    * The custom call to action URL for the access pass, if any.
@@ -702,7 +896,7 @@ export interface Product {
   /**
    * The different statuses of the global affiliate program for an access pass.
    */
-  global_affiliate_status: 'enabled' | 'disabled' | null;
+  global_affiliate_status: GlobalAffiliateStatus | null;
 
   /**
    * The headline of the access pass.
@@ -723,7 +917,7 @@ export interface Product {
   /**
    * The different statuses of the global affiliate program for an access pass.
    */
-  member_affiliate_status: 'enabled' | 'disabled' | null;
+  member_affiliate_status: GlobalAffiliateStatus | null;
 
   /**
    * The number of active users for this access pass.
@@ -768,7 +962,7 @@ export interface Product {
   /**
    * Visibility of a resource
    */
-  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
+  visibility: Visibility | null;
 }
 
 export namespace Product {
@@ -895,8 +1089,18 @@ export interface ProductListItem {
   /**
    * Visibility of a resource
    */
-  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
+  visibility: Visibility | null;
 }
+
+/**
+ * The methods of how a plan can be released (including raffles and waitlists).
+ */
+export type ReleaseMethod = 'buy_now' | 'waitlist' | 'raffle';
+
+/**
+ * Visibility of a resource
+ */
+export type Visibility = 'visible' | 'hidden' | 'archived' | 'quick_link';
 
 export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 
