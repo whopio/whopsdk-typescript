@@ -18,7 +18,8 @@
       "command": "node",
       "args": ["${__dirname}/index.js"],
       "env": {
-        "WHOP_API_KEY": "${user_config.WHOP_API_KEY}"
+        "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
+        "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}"
       }
     }
   },
@@ -27,6 +28,12 @@
       "title": "api_key",
       "description": "The app API key from an app from the /dashboard/developer page",
       "required": true,
+      "type": "string"
+    },
+    "WHOP_WEBHOOK_SECRET": {
+      "title": "webhook_key",
+      "description": "",
+      "required": false,
       "type": "string"
     }
   },

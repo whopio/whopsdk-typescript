@@ -35,9 +35,7 @@ export const tool: Tool = {
         description: 'Returns the elements in the list that come before the specified cursor.',
       },
       direction: {
-        type: 'string',
-        description: 'The direction of the sort.',
-        enum: ['asc', 'desc'],
+        $ref: '#/$defs/direction',
       },
       filters: {
         type: 'object',
@@ -90,6 +88,11 @@ export const tool: Tool = {
     },
     required: ['company_id'],
     $defs: {
+      direction: {
+        type: 'string',
+        description: 'The direction of the sort.',
+        enum: ['asc', 'desc'],
+      },
       collection_method: {
         type: 'string',
         description: 'The method of collection for an invoice.',
