@@ -20,6 +20,15 @@ import update_products from './products/update-products';
 import list_products from './products/list-products';
 import delete_products from './products/delete-products';
 import retrieve_companies from './companies/retrieve-companies';
+import create_plans from './plans/create-plans';
+import retrieve_plans from './plans/retrieve-plans';
+import update_plans from './plans/update-plans';
+import list_plans from './plans/list-plans';
+import delete_plans from './plans/delete-plans';
+import retrieve_entries from './entries/retrieve-entries';
+import list_entries from './entries/list-entries';
+import approve_entries from './entries/approve-entries';
+import deny_entries from './entries/deny-entries';
 
 export const endpoints: Endpoint[] = [];
 
@@ -43,6 +52,15 @@ addEndpoint(update_products);
 addEndpoint(list_products);
 addEndpoint(delete_products);
 addEndpoint(retrieve_companies);
+addEndpoint(create_plans);
+addEndpoint(retrieve_plans);
+addEndpoint(update_plans);
+addEndpoint(list_plans);
+addEndpoint(delete_plans);
+addEndpoint(retrieve_entries);
+addEndpoint(list_entries);
+addEndpoint(approve_entries);
+addEndpoint(deny_entries);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

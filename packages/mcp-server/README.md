@@ -41,7 +41,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "whopsdk_api": {
       "command": "node",
-      "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=all"],
+      "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
         "WHOP_API_KEY": "My API Key",
         "WHOP_WEBHOOK_SECRET": "My Webhook Key"
@@ -331,3 +331,69 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `company:basic:read`
+
+### Resource `plans`:
+
+- `create_plans` (`write`): Create a new Plan
+
+  Required permissions:
+
+  - `plan:create`
+  - `access_pass:basic:read`
+  - `plan:basic:read`
+
+- `retrieve_plans` (`read`): Retrieves a plan by ID
+
+  Required permissions:
+
+  - `plan:basic:read`
+
+- `update_plans` (`write`): Update an existing Plan
+
+  Required permissions:
+
+  - `plan:update`
+  - `access_pass:basic:read`
+  - `plan:basic:read`
+
+- `list_plans` (`read`): Lists plans for a company
+
+  Required permissions:
+
+  - `plan:basic:read`
+
+- `delete_plans` (`write`): Delete an existing Plan
+
+  Required permissions:
+
+  - `plan:delete`
+
+### Resource `entries`:
+
+- `retrieve_entries` (`read`): Retrieves an entry by ID
+
+  Required permissions:
+
+  - `plan:waitlist:read`
+  - `member:email:read`
+
+- `list_entries` (`read`): Lists entries for a company
+
+  Required permissions:
+
+  - `plan:waitlist:read`
+  - `member:email:read`
+
+- `approve_entries` (`write`): Approve an entry
+
+  Required permissions:
+
+  - `plan:waitlist:manage`
+
+- `deny_entries` (`write`): Deny an entry
+
+  Required permissions:
+
+  - `plan:waitlist:manage`
+  - `plan:basic:read`
+  - `member:email:read`

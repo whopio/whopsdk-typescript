@@ -61,9 +61,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'The visibility of the products to filter by',
         items: {
-          type: 'string',
-          description: 'The different levels of visibility for resources',
-          enum: ['visible', 'hidden', 'archived', 'quick_link', 'all', 'not_quick_link', 'not_archived'],
+          $ref: '#/$defs/visibility_filter',
         },
       },
       jq_filter: {
@@ -84,6 +82,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The different types an access pass can be.',
         enum: ['regular', 'app', 'experience_upsell', 'api_only'],
+      },
+      visibility_filter: {
+        type: 'string',
+        description: 'The different levels of visibility for resources',
+        enum: ['visible', 'hidden', 'archived', 'quick_link', 'all', 'not_quick_link', 'not_archived'],
       },
     },
   },
