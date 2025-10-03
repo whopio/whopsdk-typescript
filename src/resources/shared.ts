@@ -28,6 +28,16 @@ export interface App {
   base_url: string | null;
 
   /**
+   * The company that owns the app
+   */
+  company: App.Company;
+
+  /**
+   * The creator of the app
+   */
+  creator: App.Creator;
+
+  /**
    * The path part for a specific view of the app. This is the template part of the
    * url after the base domain. Eg: /experiences/[experienceId]
    */
@@ -104,6 +114,41 @@ export namespace App {
      * When this API key was created at
      */
     created_at: number;
+  }
+
+  /**
+   * The company that owns the app
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * The creator of the app
+   */
+  export interface Creator {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
   }
 
   /**
@@ -1095,7 +1140,7 @@ export interface ProductListItem {
 /**
  * The methods of how a plan can be released (including raffles and waitlists).
  */
-export type ReleaseMethod = 'buy_now' | 'waitlist' | 'raffle';
+export type ReleaseMethod = 'buy_now' | 'waitlist';
 
 /**
  * Visibility of a resource

@@ -103,6 +103,16 @@ export interface AppListResponse {
   base_url: string | null;
 
   /**
+   * The company that owns the app
+   */
+  company: AppListResponse.Company;
+
+  /**
+   * The creator of the app
+   */
+  creator: AppListResponse.Creator;
+
+  /**
    * The path part for a specific view of the app. This is the template part of the
    * url after the base domain. Eg: /experiences/[experienceId]
    */
@@ -147,6 +157,43 @@ export interface AppListResponse {
    * and are shown in the 'featured apps' section of the app store.
    */
   verified: boolean;
+}
+
+export namespace AppListResponse {
+  /**
+   * The company that owns the app
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * The creator of the app
+   */
+  export interface Creator {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
 }
 
 export interface AppCreateParams {
