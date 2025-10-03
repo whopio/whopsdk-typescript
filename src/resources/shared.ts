@@ -601,6 +601,123 @@ export type CustomCta =
 export type Direction = 'asc' | 'desc';
 
 /**
+ * An object representing an entry in a raffle or waitlist.
+ */
+export interface Entry {
+  /**
+   * The internal ID of the entry.
+   */
+  id: string;
+
+  /**
+   * When the entry was created.
+   */
+  created_at: number | null;
+
+  /**
+   * Responses collected from the user when submitting their entry.
+   */
+  custom_field_responses: Array<Entry.CustomFieldResponse> | null;
+
+  /**
+   * The plan (waitlist/raffle) the entry if for.
+   */
+  plan: Entry.Plan | null;
+
+  /**
+   * The access pass tied to this entry, if there is one.
+   */
+  product: Entry.Product | null;
+
+  /**
+   * The status of an entry to a waitlist or raffle.
+   */
+  status: EntryStatus | null;
+
+  /**
+   * The user who created the entry.
+   */
+  user: Entry.User;
+}
+
+export namespace Entry {
+  /**
+   * The response from a custom field on checkout
+   */
+  export interface CustomFieldResponse {
+    /**
+     * The ID of the custom field item
+     */
+    id: string;
+
+    /**
+     * The response a user gave to the specific question or field.
+     */
+    answer: string;
+
+    /**
+     * The question asked by the custom field
+     */
+    question: string;
+  }
+
+  /**
+   * The plan (waitlist/raffle) the entry if for.
+   */
+  export interface Plan {
+    /**
+     * The internal ID of the plan.
+     */
+    id: string;
+  }
+
+  /**
+   * The access pass tied to this entry, if there is one.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public access pass.
+     */
+    id: string;
+
+    /**
+     * The title of the access pass. Use for Whop 4.0.
+     */
+    title: string;
+  }
+
+  /**
+   * The user who created the entry.
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
+ * The status of an entry to a waitlist or raffle.
+ */
+export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
+
+/**
  * The different statuses of the global affiliate program for an access pass.
  */
 export type GlobalAffiliateStatus = 'enabled' | 'disabled';
@@ -884,6 +1001,199 @@ export interface PageInfo {
 }
 
 /**
+ * An object representing a (sanitized) plan of an access pass.
+ */
+export interface Plan {
+  /**
+   * The internal ID of the plan.
+   */
+  id: string;
+
+  /**
+   * The interval at which the plan charges (renewal plans).
+   */
+  billing_period: number | null;
+
+  /**
+   * Whether or not the plan collects tax.
+   */
+  collect_tax: boolean;
+
+  /**
+   * The company for the plan.
+   */
+  company: Plan.Company | null;
+
+  /**
+   * When the plan was created.
+   */
+  created_at: number;
+
+  /**
+   * The available currencies on the platform
+   */
+  currency: Currency | null;
+
+  /**
+   * The custom fields for the plan.
+   */
+  custom_fields: Array<Plan.CustomField>;
+
+  /**
+   * The description of the plan.
+   */
+  description: string | null;
+
+  /**
+   * The interval at which the plan charges (expiration plans).
+   */
+  expiration_days: number | null;
+
+  /**
+   * The price a person has to pay for a plan on the initial purchase.
+   */
+  initial_price: number;
+
+  /**
+   * A personal description or notes section for the business.
+   */
+  internal_notes: string | null;
+
+  /**
+   * The invoice associated with this plan.
+   */
+  invoice: Plan.Invoice | null;
+
+  /**
+   * The number of members for the plan.
+   */
+  member_count: number | null;
+
+  /**
+   * The type of plan that can be attached to an access pass
+   */
+  plan_type: PlanType | null;
+
+  /**
+   * The access pass for the plan.
+   */
+  product: Plan.Product | null;
+
+  /**
+   * The direct link to purchase the access pass.
+   */
+  purchase_link: string;
+
+  /**
+   * The methods of how a plan can be released (including raffles and waitlists).
+   */
+  release_method: ReleaseMethod | null;
+
+  /**
+   * The price a person has to pay for a plan on the renewal purchase.
+   */
+  renewal_price: number;
+
+  /**
+   * Whether or not the tax is included in a plan's price (or if it hasn't been set
+   * up)
+   */
+  tax_type: TaxType | null;
+
+  /**
+   * The number of free trial days added before a renewal plan.
+   */
+  trial_period_days: number | null;
+
+  /**
+   * When the plan was last updated.
+   */
+  updated_at: number;
+
+  /**
+   * Visibility of a resource
+   */
+  visibility: Visibility | null;
+}
+
+export namespace Plan {
+  /**
+   * The company for the plan.
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * An object representing a custom field for a plan.
+   */
+  export interface CustomField {
+    /**
+     * The internal ID of the given custom field
+     */
+    id: string;
+
+    /**
+     * The type of the custom field.
+     */
+    field_type: 'text' | null;
+
+    /**
+     * The title/header of the custom field.
+     */
+    name: string;
+
+    /**
+     * How the custom field should be ordered when rendered on the checkout page.
+     */
+    order: number | null;
+
+    /**
+     * An example response displayed in the input field.
+     */
+    placeholder: string | null;
+
+    /**
+     * Whether or not the custom field is required.
+     */
+    required: boolean;
+  }
+
+  /**
+   * The invoice associated with this plan.
+   */
+  export interface Invoice {
+    /**
+     * The ID of the invoice.
+     */
+    id: string;
+  }
+
+  /**
+   * The access pass for the plan.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public access pass.
+     */
+    id: string;
+
+    /**
+     * The title of the access pass. Use for Whop 4.0.
+     */
+    title: string;
+  }
+}
+
+/**
  * The type of plan that can be attached to an access pass
  */
 export type PlanType = 'renewal' | 'one_time';
@@ -1143,9 +1453,27 @@ export interface ProductListItem {
 export type ReleaseMethod = 'buy_now' | 'waitlist';
 
 /**
+ * Whether or not the tax is included in a plan's price (or if it hasn't been set
+ * up)
+ */
+export type TaxType = 'inclusive' | 'exclusive' | 'unspecified';
+
+/**
  * Visibility of a resource
  */
 export type Visibility = 'visible' | 'hidden' | 'archived' | 'quick_link';
+
+/**
+ * The different levels of visibility for resources
+ */
+export type VisibilityFilter =
+  | 'visible'
+  | 'hidden'
+  | 'archived'
+  | 'quick_link'
+  | 'all'
+  | 'not_quick_link'
+  | 'not_archived';
 
 export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 

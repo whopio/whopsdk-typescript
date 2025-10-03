@@ -13,17 +13,22 @@ Types:
 - <code><a href="./src/resources/shared.ts">Currency</a></code>
 - <code><a href="./src/resources/shared.ts">CustomCta</a></code>
 - <code><a href="./src/resources/shared.ts">Direction</a></code>
+- <code><a href="./src/resources/shared.ts">Entry</a></code>
+- <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
 - <code><a href="./src/resources/shared.ts">IndustryTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Plan</a></code>
 - <code><a href="./src/resources/shared.ts">PlanType</a></code>
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
+- <code><a href="./src/resources/shared.ts">TaxType</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
+- <code><a href="./src/resources/shared.ts">VisibilityFilter</a></code>
 
 # Apps
 
@@ -92,3 +97,32 @@ Types:
 Methods:
 
 - <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>
+
+# Plans
+
+Types:
+
+- <code><a href="./src/resources/plans.ts">PlanListResponse</a></code>
+- <code><a href="./src/resources/plans.ts">PlanDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /plans">client.plans.<a href="./src/resources/plans.ts">create</a>({ ...params }) -> Plan | null</code>
+- <code title="get /plans/{id}">client.plans.<a href="./src/resources/plans.ts">retrieve</a>(id) -> Plan | null</code>
+- <code title="patch /plans/{id}">client.plans.<a href="./src/resources/plans.ts">update</a>(id, { ...params }) -> Plan | null</code>
+- <code title="get /plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> PlanListResponsesCursorPage</code>
+- <code title="delete /plans/{id}">client.plans.<a href="./src/resources/plans.ts">delete</a>(id) -> PlanDeleteResponse | null</code>
+
+# Entries
+
+Types:
+
+- <code><a href="./src/resources/entries.ts">EntryListResponse</a></code>
+- <code><a href="./src/resources/entries.ts">EntryApproveResponse</a></code>
+
+Methods:
+
+- <code title="get /entries/{id}">client.entries.<a href="./src/resources/entries.ts">retrieve</a>(id) -> Entry | null</code>
+- <code title="get /entries">client.entries.<a href="./src/resources/entries.ts">list</a>({ ...params }) -> EntryListResponsesCursorPage</code>
+- <code title="post /entries/{id}/approve">client.entries.<a href="./src/resources/entries.ts">approve</a>(id) -> EntryApproveResponse</code>
+- <code title="post /entries/{id}/deny">client.entries.<a href="./src/resources/entries.ts">deny</a>(id) -> Entry | null</code>

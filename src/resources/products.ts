@@ -506,9 +506,7 @@ export interface ProductListParams extends CursorPageParams {
   /**
    * The visibility of the products to filter by
    */
-  visibilities?: Array<
-    'visible' | 'hidden' | 'archived' | 'quick_link' | 'all' | 'not_quick_link' | 'not_archived' | null
-  > | null;
+  visibilities?: Array<Shared.VisibilityFilter | null> | null;
 }
 
 export declare namespace Products {

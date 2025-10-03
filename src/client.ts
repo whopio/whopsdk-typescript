@@ -34,6 +34,13 @@ import {
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
 import {
+  Entries,
+  EntryApproveResponse,
+  EntryListParams,
+  EntryListResponse,
+  EntryListResponsesCursorPage,
+} from './resources/entries';
+import {
   InvoiceCreateParams,
   InvoiceCreateResponse,
   InvoiceListItemsCursorPage,
@@ -41,6 +48,15 @@ import {
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
+import {
+  PlanCreateParams,
+  PlanDeleteResponse,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesCursorPage,
+  PlanUpdateParams,
+  Plans,
+} from './resources/plans';
 import {
   ProductCreateParams,
   ProductDeleteResponse,
@@ -774,6 +790,8 @@ export class Whopsdk {
   products: API.Products = new API.Products(this);
   companies: API.Companies = new API.Companies(this);
   webhooks: API.Webhooks = new API.Webhooks(this);
+  plans: API.Plans = new API.Plans(this);
+  entries: API.Entries = new API.Entries(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -782,6 +800,8 @@ Whopsdk.CourseLessonInteractions = CourseLessonInteractions;
 Whopsdk.Products = Products;
 Whopsdk.Companies = Companies;
 Whopsdk.Webhooks = Webhooks;
+Whopsdk.Plans = Plans;
+Whopsdk.Entries = Entries;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -833,6 +853,24 @@ export declare namespace Whopsdk {
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 
+  export {
+    Plans as Plans,
+    type PlanListResponse as PlanListResponse,
+    type PlanDeleteResponse as PlanDeleteResponse,
+    type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
+    type PlanCreateParams as PlanCreateParams,
+    type PlanUpdateParams as PlanUpdateParams,
+    type PlanListParams as PlanListParams,
+  };
+
+  export {
+    Entries as Entries,
+    type EntryListResponse as EntryListResponse,
+    type EntryApproveResponse as EntryApproveResponse,
+    type EntryListResponsesCursorPage as EntryListResponsesCursorPage,
+    type EntryListParams as EntryListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppStatuses = API.AppStatuses;
@@ -844,15 +882,20 @@ export declare namespace Whopsdk {
   export type Currency = API.Currency;
   export type CustomCta = API.CustomCta;
   export type Direction = API.Direction;
+  export type Entry = API.Entry;
+  export type EntryStatus = API.EntryStatus;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
   export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
   export type InvoiceStatus = API.InvoiceStatus;
   export type PageInfo = API.PageInfo;
+  export type Plan = API.Plan;
   export type PlanType = API.PlanType;
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
   export type ReleaseMethod = API.ReleaseMethod;
+  export type TaxType = API.TaxType;
   export type Visibility = API.Visibility;
+  export type VisibilityFilter = API.VisibilityFilter;
 }

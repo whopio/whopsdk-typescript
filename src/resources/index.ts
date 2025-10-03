@@ -16,6 +16,13 @@ export {
   type CourseLessonInteractionListItemsCursorPage,
 } from './course-lesson-interactions';
 export {
+  Entries,
+  type EntryListResponse,
+  type EntryApproveResponse,
+  type EntryListParams,
+  type EntryListResponsesCursorPage,
+} from './entries';
+export {
   Invoices,
   type InvoiceCreateResponse,
   type InvoiceVoidResponse,
@@ -23,6 +30,15 @@ export {
   type InvoiceListParams,
   type InvoiceListItemsCursorPage,
 } from './invoices';
+export {
+  Plans,
+  type PlanListResponse,
+  type PlanDeleteResponse,
+  type PlanCreateParams,
+  type PlanUpdateParams,
+  type PlanListParams,
+  type PlanListResponsesCursorPage,
+} from './plans';
 export {
   Products,
   type ProductDeleteResponse,
