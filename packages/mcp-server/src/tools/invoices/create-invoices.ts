@@ -331,7 +331,7 @@ export const tool: Tool = {
       release_method: {
         type: 'string',
         description: 'The methods of how a plan can be released (including raffles and waitlists).',
-        enum: ['buy_now', 'waitlist', 'raffle'],
+        enum: ['buy_now', 'waitlist'],
       },
       visibility: {
         type: 'string',
