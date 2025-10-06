@@ -149,6 +149,11 @@ export interface ProductCreateParams {
   business_type?: Shared.BusinessTypes | null;
 
   /**
+   * Whether or not to collect shipping information at checkout from the customer.
+   */
+  collect_shipping_address?: boolean | null;
+
+  /**
    * The different types of custom CTAs that can be selected.
    */
   custom_cta?: Shared.CustomCta | null;
@@ -367,6 +372,11 @@ export interface ProductUpdateParams {
    * The different business types a company can be.
    */
   business_type?: Shared.BusinessTypes | null;
+
+  /**
+   * Whether or not to collect shipping information at checkout from the customer.
+   */
+  collect_shipping_address?: boolean | null;
 
   /**
    * The different types of custom CTAs that can be selected.

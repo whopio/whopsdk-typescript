@@ -28,6 +28,7 @@ describe('resource products', () => {
       access_pass_type: 'regular',
       banner_image: { id: 'id', direct_upload_id: 'direct_upload_id' },
       business_type: 'education_program',
+      collect_shipping_address: true,
       custom_cta: 'get_access',
       custom_cta_url: 'custom_cta_url',
       custom_statement_descriptor: 'custom_statement_descriptor',
@@ -99,6 +100,7 @@ describe('resource products', () => {
         {
           banner_image: { id: 'id', direct_upload_id: 'direct_upload_id' },
           business_type: 'education_program',
+          collect_shipping_address: true,
           custom_cta: 'get_access',
           custom_cta_url: 'custom_cta_url',
           custom_statement_descriptor: 'custom_statement_descriptor',

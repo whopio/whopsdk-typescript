@@ -43,6 +43,10 @@ export const tool: Tool = {
       business_type: {
         $ref: '#/$defs/business_types',
       },
+      collect_shipping_address: {
+        type: 'boolean',
+        description: 'Whether or not to collect shipping information at checkout from the customer.',
+      },
       custom_cta: {
         $ref: '#/$defs/custom_cta',
       },
