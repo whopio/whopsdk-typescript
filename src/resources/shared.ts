@@ -718,6 +718,88 @@ export namespace Entry {
 export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
 
 /**
+ * Represents a post in forum
+ */
+export interface ForumPost {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The amount of comments on this post
+   */
+  comment_count: number;
+
+  /**
+   * The content of the forum post in Markdown format
+   */
+  content: string | null;
+
+  /**
+   * Whether the forum post has been edited
+   */
+  is_edited: boolean;
+
+  /**
+   * Whether this forum post is pinned
+   */
+  is_pinned: boolean;
+
+  /**
+   * Whether the user that sent the post is an admin of the bot
+   */
+  is_poster_admin: boolean;
+
+  /**
+   * The number of likes this post has received
+   */
+  like_count: number | null;
+
+  /**
+   * The ID of the parent forum post, if applicable
+   */
+  parent_id: string | null;
+
+  /**
+   * The title of the forum post
+   */
+  title: string | null;
+
+  /**
+   * The user who created this forum post
+   */
+  user: ForumPost.User;
+
+  /**
+   * The number of times this message has been viewed
+   */
+  view_count: number | null;
+}
+
+export namespace ForumPost {
+  /**
+   * The user who created this forum post
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
  * The different statuses of the global affiliate program for an access pass.
  */
 export type GlobalAffiliateStatus = 'enabled' | 'disabled';

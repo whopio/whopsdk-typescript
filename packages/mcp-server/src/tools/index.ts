@@ -29,6 +29,9 @@ import retrieve_entries from './entries/retrieve-entries';
 import list_entries from './entries/list-entries';
 import approve_entries from './entries/approve-entries';
 import deny_entries from './entries/deny-entries';
+import create_forum_posts from './forum-posts/create-forum-posts';
+import retrieve_forum_posts from './forum-posts/retrieve-forum-posts';
+import list_forum_posts from './forum-posts/list-forum-posts';
 
 export const endpoints: Endpoint[] = [];
 
@@ -61,6 +64,9 @@ addEndpoint(retrieve_entries);
 addEndpoint(list_entries);
 addEndpoint(approve_entries);
 addEndpoint(deny_entries);
+addEndpoint(create_forum_posts);
+addEndpoint(retrieve_forum_posts);
+addEndpoint(list_forum_posts);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

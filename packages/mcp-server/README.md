@@ -397,3 +397,23 @@ The following tools are available in this MCP server.
   - `plan:waitlist:manage`
   - `plan:basic:read`
   - `member:email:read`
+
+### Resource `forum_posts`:
+
+- `create_forum_posts` (`write`): Create a new forum post
+
+  Required permissions:
+
+  - `forum:post:create`
+
+- `retrieve_forum_posts` (`read`): Retrieves a forum post by ID
+
+  Required permissions:
+
+  - `forum:read`
+
+- `list_forum_posts` (`read`): Lists forum posts
+
+  Required permissions:
+
+  - `forum:read`
