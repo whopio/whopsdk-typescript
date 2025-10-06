@@ -15,6 +15,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Direction</a></code>
 - <code><a href="./src/resources/shared.ts">Entry</a></code>
 - <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
+- <code><a href="./src/resources/shared.ts">ForumPost</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
 - <code><a href="./src/resources/shared.ts">IndustryTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
@@ -126,3 +127,15 @@ Methods:
 - <code title="get /entries">client.entries.<a href="./src/resources/entries.ts">list</a>({ ...params }) -> EntryListResponsesCursorPage</code>
 - <code title="post /entries/{id}/approve">client.entries.<a href="./src/resources/entries.ts">approve</a>(id) -> EntryApproveResponse</code>
 - <code title="post /entries/{id}/deny">client.entries.<a href="./src/resources/entries.ts">deny</a>(id) -> Entry | null</code>
+
+# ForumPosts
+
+Types:
+
+- <code><a href="./src/resources/forum-posts.ts">ForumPostListResponse</a></code>
+
+Methods:
+
+- <code title="post /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">create</a>({ ...params }) -> ForumPost | null</code>
+- <code title="get /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">retrieve</a>(id) -> ForumPost | null</code>
+- <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>

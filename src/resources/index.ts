@@ -23,6 +23,13 @@ export {
   type EntryListResponsesCursorPage,
 } from './entries';
 export {
+  ForumPosts,
+  type ForumPostListResponse,
+  type ForumPostCreateParams,
+  type ForumPostListParams,
+  type ForumPostListResponsesCursorPage,
+} from './forum-posts';
+export {
   Invoices,
   type InvoiceCreateResponse,
   type InvoiceVoidResponse,

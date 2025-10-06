@@ -41,6 +41,13 @@ import {
   EntryListResponsesCursorPage,
 } from './resources/entries';
 import {
+  ForumPostCreateParams,
+  ForumPostListParams,
+  ForumPostListResponse,
+  ForumPostListResponsesCursorPage,
+  ForumPosts,
+} from './resources/forum-posts';
+import {
   InvoiceCreateParams,
   InvoiceCreateResponse,
   InvoiceListItemsCursorPage,
@@ -792,6 +799,7 @@ export class Whopsdk {
   webhooks: API.Webhooks = new API.Webhooks(this);
   plans: API.Plans = new API.Plans(this);
   entries: API.Entries = new API.Entries(this);
+  forumPosts: API.ForumPosts = new API.ForumPosts(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -802,6 +810,7 @@ Whopsdk.Companies = Companies;
 Whopsdk.Webhooks = Webhooks;
 Whopsdk.Plans = Plans;
 Whopsdk.Entries = Entries;
+Whopsdk.ForumPosts = ForumPosts;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -871,6 +880,14 @@ export declare namespace Whopsdk {
     type EntryListParams as EntryListParams,
   };
 
+  export {
+    ForumPosts as ForumPosts,
+    type ForumPostListResponse as ForumPostListResponse,
+    type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
+    type ForumPostCreateParams as ForumPostCreateParams,
+    type ForumPostListParams as ForumPostListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppStatuses = API.AppStatuses;
@@ -884,6 +901,7 @@ export declare namespace Whopsdk {
   export type Direction = API.Direction;
   export type Entry = API.Entry;
   export type EntryStatus = API.EntryStatus;
+  export type ForumPost = API.ForumPost;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
   export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
