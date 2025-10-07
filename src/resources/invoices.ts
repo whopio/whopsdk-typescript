@@ -26,7 +26,7 @@ export class Invoices extends APIResource {
    * });
    * ```
    */
-  create(body: InvoiceCreateParams, options?: RequestOptions): APIPromise<InvoiceCreateResponse | null> {
+  create(body: InvoiceCreateParams, options?: RequestOptions): APIPromise<InvoiceCreateResponse> {
     return this._client.post('/invoices', { body, ...options });
   }
 
@@ -45,7 +45,7 @@ export class Invoices extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice> {
     return this._client.get(path`/invoices/${id}`, options);
   }
 
@@ -91,7 +91,7 @@ export class Invoices extends APIResource {
    * );
    * ```
    */
-  void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse | null> {
+  void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse> {
     return this._client.post(path`/invoices/${id}/void`, options);
   }
 }
@@ -108,21 +108,22 @@ export interface InvoiceCreateResponse {
   checkout_job_id: string | null;
 
   /**
-   * A statement that defines an amount due by a customer.
+   * The invoice that was created for this invoice.
    */
-  invoice: Shared.Invoice | null;
+  invoice: Shared.Invoice;
 }
 
 /**
  * Represents `true` or `false` values.
  */
-export type InvoiceVoidResponse = boolean | null;
+export type InvoiceVoidResponse = boolean;
 
 export interface InvoiceCreateParams {
   /**
-   * The method of collection for an invoice.
+   * The method of collection for this invoice. If using charge_automatically, you
+   * must provide a payment_token.
    */
-  collection_method: Shared.CollectionMethod | null;
+  collection_method: Shared.CollectionMethod;
 
   /**
    * The company ID to create this invoice for.
@@ -310,7 +311,7 @@ export namespace InvoiceCreateParams {
       /**
        * The type of the custom field.
        */
-      field_type: 'text' | null;
+      field_type: 'text';
 
       /**
        * The name of the custom field.
@@ -406,12 +407,12 @@ export namespace InvoiceListParams {
     /**
      * The collection methods to filter the invoices by
      */
-    collection_methods?: Array<Shared.CollectionMethod | null> | null;
+    collection_methods?: Array<Shared.CollectionMethod> | null;
 
     /**
      * The statuses to filter the invoices by
      */
-    statuses?: Array<Shared.InvoiceStatus | null> | null;
+    statuses?: Array<Shared.InvoiceStatus> | null;
   }
 }
 

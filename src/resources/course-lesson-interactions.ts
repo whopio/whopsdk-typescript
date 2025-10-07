@@ -16,7 +16,7 @@ export class CourseLessonInteractions extends APIResource {
    * - `course_lesson_interaction:read`
    * - `courses:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
     return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 

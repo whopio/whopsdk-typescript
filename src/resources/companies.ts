@@ -14,7 +14,7 @@ export class Companies extends APIResource {
    *
    * - `company:basic:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company> {
     return this._client.get(path`/companies/${id}`, options);
   }
 }

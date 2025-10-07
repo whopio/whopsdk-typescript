@@ -24,7 +24,7 @@ export class Products extends APIResource {
    * });
    * ```
    */
-  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product | null> {
+  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.post('/products', { body, ...options });
   }
 
@@ -42,7 +42,7 @@ export class Products extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.get(path`/products/${id}`, options);
   }
 
@@ -65,7 +65,7 @@ export class Products extends APIResource {
     id: string,
     body: ProductUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.Product | null> {
+  ): APIPromise<Shared.Product> {
     return this._client.patch(path`/products/${id}`, { body, ...options });
   }
 
@@ -110,7 +110,7 @@ export class Products extends APIResource {
    * );
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<ProductDeleteResponse | null> {
+  delete(id: string, options?: RequestOptions): APIPromise<ProductDeleteResponse> {
     return this._client.delete(path`/products/${id}`, options);
   }
 }
@@ -120,7 +120,7 @@ export type ProductListItemsCursorPage = CursorPage<Shared.ProductListItem | nul
 /**
  * Represents `true` or `false` values.
  */
-export type ProductDeleteResponse = boolean | null;
+export type ProductDeleteResponse = boolean;
 
 export interface ProductCreateParams {
   /**
@@ -311,7 +311,7 @@ export namespace ProductCreateParams {
       /**
        * The type of the custom field.
        */
-      field_type: 'text' | null;
+      field_type: 'text';
 
       /**
        * The name of the custom field.
@@ -351,9 +351,9 @@ export namespace ProductCreateParams {
     content: string;
 
     /**
-     * Types of product highlight
+     * The type of this highlight.
      */
-    highlight_type: 'qualification' | 'benefit' | 'who_this_is_for' | 'pricing_feature' | null;
+    highlight_type: 'qualification' | 'benefit' | 'who_this_is_for' | 'pricing_feature';
 
     /**
      * The title of the product highlight, if applicable.
@@ -511,12 +511,12 @@ export interface ProductListParams extends CursorPageParams {
   /**
    * The type of products to filter by
    */
-  product_types?: Array<Shared.AccessPassType | null> | null;
+  product_types?: Array<Shared.AccessPassType> | null;
 
   /**
    * The visibility of the products to filter by
    */
-  visibilities?: Array<Shared.VisibilityFilter | null> | null;
+  visibilities?: Array<Shared.VisibilityFilter> | null;
 }
 
 export declare namespace Products {

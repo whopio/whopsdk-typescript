@@ -16,7 +16,7 @@ export class Entries extends APIResource {
    * - `plan:waitlist:read`
    * - `member:email:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Entry | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Entry> {
     return this._client.get(path`/entries/${id}`, options);
   }
 
@@ -55,7 +55,7 @@ export class Entries extends APIResource {
    * - `plan:basic:read`
    * - `member:email:read`
    */
-  deny(id: string, options?: RequestOptions): APIPromise<Shared.Entry | null> {
+  deny(id: string, options?: RequestOptions): APIPromise<Shared.Entry> {
     return this._client.post(path`/entries/${id}/deny`, options);
   }
 }
@@ -87,9 +87,9 @@ export interface EntryListResponse {
   product: EntryListResponse.Product | null;
 
   /**
-   * The status of an entry to a waitlist.
+   * The status of the entry.
    */
-  status: Shared.EntryStatus | null;
+  status: Shared.EntryStatus;
 
   /**
    * The user who created the entry.
@@ -203,7 +203,7 @@ export interface EntryListParams extends CursorPageParams {
   /**
    * The statuses to filter the entries by
    */
-  statuses?: Array<Shared.EntryStatus | null> | null;
+  statuses?: Array<Shared.EntryStatus> | null;
 }
 
 export declare namespace Entries {

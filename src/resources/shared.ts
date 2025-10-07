@@ -84,9 +84,13 @@ export interface App {
   stats: App.Stats | null;
 
   /**
-   * The status of an experience interface
+   * If the status is live, the app is visible on Whop discovery. In order to be
+   * live, you need to set the name, icon, and description. Being unlisted or hidden
+   * means it's not visible on Whop but you can still install the app via direct
+   * link. To remove the app from whop discovery, you should set the status to
+   * unlisted.
    */
-  status: AppStatuses | null;
+  status: AppStatuses;
 
   /**
    * Whether this app has been verified by Whop. Verified apps are endorsed by whop
@@ -348,9 +352,9 @@ export namespace Company {
     url: string;
 
     /**
-     * The different websites you can have social links for
+     * The website
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | null;
+    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
   }
 }
 
@@ -630,9 +634,9 @@ export interface Entry {
   product: Entry.Product | null;
 
   /**
-   * The status of an entry to a waitlist.
+   * The status of the entry.
    */
-  status: EntryStatus | null;
+  status: EntryStatus;
 
   /**
    * The user who created the entry.
@@ -908,9 +912,9 @@ export interface Invoice {
   number: string;
 
   /**
-   * The different statuses an invoice can be in
+   * The status of the invoice.
    */
-  status: InvoiceStatus | null;
+  status: InvoiceStatus;
 
   /**
    * The user that the invoice was created for.
@@ -929,9 +933,9 @@ export namespace Invoice {
     id: string;
 
     /**
-     * The available currencies on the platform
+     * The respective currency identifier for the plan.
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -1000,9 +1004,9 @@ export interface InvoiceListItem {
   number: string;
 
   /**
-   * The different statuses an invoice can be in
+   * The status of the invoice.
    */
-  status: InvoiceStatus | null;
+  status: InvoiceStatus;
 
   /**
    * The user that the invoice was created for.
@@ -1021,9 +1025,9 @@ export namespace InvoiceListItem {
     id: string;
 
     /**
-     * The available currencies on the platform
+     * The respective currency identifier for the plan.
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -1112,9 +1116,9 @@ export interface Plan {
   created_at: number;
 
   /**
-   * The available currencies on the platform
+   * The respective currency identifier for the plan.
    */
-  currency: Currency | null;
+  currency: Currency;
 
   /**
    * The custom fields for the plan.
@@ -1152,9 +1156,9 @@ export interface Plan {
   member_count: number | null;
 
   /**
-   * The type of plan that can be attached to an access pass
+   * Indicates if the plan is a one time payment or recurring.
    */
-  plan_type: PlanType | null;
+  plan_type: PlanType;
 
   /**
    * The access pass for the plan.
@@ -1167,9 +1171,9 @@ export interface Plan {
   purchase_link: string;
 
   /**
-   * The methods of how a plan can be released.
+   * This is the release method the business uses to sell this plan.
    */
-  release_method: ReleaseMethod | null;
+  release_method: ReleaseMethod;
 
   /**
    * The price a person has to pay for a plan on the renewal purchase.
@@ -1177,10 +1181,9 @@ export interface Plan {
   renewal_price: number;
 
   /**
-   * Whether or not the tax is included in a plan's price (or if it hasn't been set
-   * up)
+   * The tax type for the plan.
    */
-  tax_type: TaxType | null;
+  tax_type: TaxType;
 
   /**
    * The number of free trial days added before a renewal plan.
@@ -1193,9 +1196,9 @@ export interface Plan {
   updated_at: number;
 
   /**
-   * Visibility of a resource
+   * Shows or hides the plan from public/business view.
    */
-  visibility: Visibility | null;
+  visibility: Visibility;
 }
 
 export namespace Plan {
@@ -1224,9 +1227,9 @@ export namespace Plan {
     id: string;
 
     /**
-     * The type of the custom field.
+     * What type of input field to use.
      */
-    field_type: 'text' | null;
+    field_type: 'text';
 
     /**
      * The title/header of the custom field.
@@ -1305,9 +1308,9 @@ export interface Product {
   created_at: number;
 
   /**
-   * The different types of custom CTAs that can be selected.
+   * The custom call to action for the access pass.
    */
-  custom_cta: CustomCta | null;
+  custom_cta: CustomCta;
 
   /**
    * The custom call to action URL for the access pass, if any.
@@ -1331,9 +1334,9 @@ export interface Product {
   global_affiliate_percentage: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The status of the global affiliate program for this access pass.
    */
-  global_affiliate_status: GlobalAffiliateStatus | null;
+  global_affiliate_status: GlobalAffiliateStatus;
 
   /**
    * The headline of the access pass.
@@ -1352,9 +1355,9 @@ export interface Product {
   member_affiliate_percentage: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The status of the member affiliate program for this access pass.
    */
-  member_affiliate_status: GlobalAffiliateStatus | null;
+  member_affiliate_status: GlobalAffiliateStatus;
 
   /**
    * The number of active users for this access pass.
@@ -1397,9 +1400,9 @@ export interface Product {
   verified: boolean;
 
   /**
-   * Visibility of a resource
+   * This access pass will/will not be displayed publicly.
    */
-  visibility: Visibility | null;
+  visibility: Visibility;
 }
 
 export namespace Product {
@@ -1458,9 +1461,9 @@ export namespace Product {
     name: string;
 
     /**
-     * The product_type of the ProductTaxCode
+     * The type of product this tax code applies to.
      */
-    product_type: 'physical' | 'digital' | 'services' | null;
+    product_type: 'physical' | 'digital' | 'services';
   }
 }
 
@@ -1524,9 +1527,9 @@ export interface ProductListItem {
   verified: boolean;
 
   /**
-   * Visibility of a resource
+   * This access pass will/will not be displayed publicly.
    */
-  visibility: Visibility | null;
+  visibility: Visibility;
 }
 
 /**

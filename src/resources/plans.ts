@@ -25,7 +25,7 @@ export class Plans extends APIResource {
    * });
    * ```
    */
-  create(body: PlanCreateParams, options?: RequestOptions): APIPromise<Shared.Plan | null> {
+  create(body: PlanCreateParams, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.post('/plans', { body, ...options });
   }
 
@@ -43,7 +43,7 @@ export class Plans extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Plan | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.get(path`/plans/${id}`, options);
   }
 
@@ -67,7 +67,7 @@ export class Plans extends APIResource {
     id: string,
     body: PlanUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.Plan | null> {
+  ): APIPromise<Shared.Plan> {
     return this._client.patch(path`/plans/${id}`, { body, ...options });
   }
 
@@ -109,7 +109,7 @@ export class Plans extends APIResource {
    * );
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<PlanDeleteResponse | null> {
+  delete(id: string, options?: RequestOptions): APIPromise<PlanDeleteResponse> {
     return this._client.delete(path`/plans/${id}`, options);
   }
 }
@@ -141,9 +141,9 @@ export interface PlanListResponse {
   created_at: number;
 
   /**
-   * The available currencies on the platform
+   * The respective currency identifier for the plan.
    */
-  currency: Shared.Currency | null;
+  currency: Shared.Currency;
 
   /**
    * The description of the plan.
@@ -176,9 +176,9 @@ export interface PlanListResponse {
   member_count: number | null;
 
   /**
-   * The type of plan that can be attached to an access pass
+   * Indicates if the plan is a one time payment or recurring.
    */
-  plan_type: Shared.PlanType | null;
+  plan_type: Shared.PlanType;
 
   /**
    * The access pass for the plan.
@@ -191,9 +191,9 @@ export interface PlanListResponse {
   purchase_link: string;
 
   /**
-   * The methods of how a plan can be released.
+   * This is the release method the business uses to sell this plan.
    */
-  release_method: Shared.ReleaseMethod | null;
+  release_method: Shared.ReleaseMethod;
 
   /**
    * The price a person has to pay for a plan on the renewal purchase.
@@ -211,9 +211,9 @@ export interface PlanListResponse {
   updated_at: number;
 
   /**
-   * Visibility of a resource
+   * Shows or hides the plan from public/business view.
    */
-  visibility: Shared.Visibility | null;
+  visibility: Shared.Visibility;
 }
 
 export namespace PlanListResponse {
@@ -261,7 +261,7 @@ export namespace PlanListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type PlanDeleteResponse = boolean | null;
+export type PlanDeleteResponse = boolean;
 
 export interface PlanCreateParams {
   /**
@@ -356,7 +356,7 @@ export namespace PlanCreateParams {
     /**
      * The type of the custom field.
      */
-    field_type: 'text' | null;
+    field_type: 'text';
 
     /**
      * The name of the custom field.
@@ -482,7 +482,7 @@ export namespace PlanUpdateParams {
     /**
      * The type of the custom field.
      */
-    field_type: 'text' | null;
+    field_type: 'text';
 
     /**
      * The name of the custom field.
@@ -564,7 +564,7 @@ export interface PlanListParams extends CursorPageParams {
   /**
    * The plan type to filter the plans by
    */
-  plan_types?: Array<Shared.PlanType | null> | null;
+  plan_types?: Array<Shared.PlanType> | null;
 
   /**
    * The access pass IDs to filter the plans by
@@ -574,12 +574,12 @@ export interface PlanListParams extends CursorPageParams {
   /**
    * The release method to filter the plans by
    */
-  release_methods?: Array<Shared.ReleaseMethod | null> | null;
+  release_methods?: Array<Shared.ReleaseMethod> | null;
 
   /**
    * The visibility to filter the plans by
    */
-  visibilities?: Array<Shared.VisibilityFilter | null> | null;
+  visibilities?: Array<Shared.VisibilityFilter> | null;
 }
 
 export declare namespace Plans {

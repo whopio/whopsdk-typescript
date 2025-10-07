@@ -22,7 +22,7 @@ export class ForumPosts extends APIResource {
    * });
    * ```
    */
-  create(body: ForumPostCreateParams, options?: RequestOptions): APIPromise<Shared.ForumPost | null> {
+  create(body: ForumPostCreateParams, options?: RequestOptions): APIPromise<Shared.ForumPost> {
     return this._client.post('/forum_posts', { body, ...options });
   }
 
@@ -38,7 +38,7 @@ export class ForumPosts extends APIResource {
    * const forumPost = await client.forumPosts.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.ForumPost | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.ForumPost> {
     return this._client.get(path`/forum_posts/${id}`, options);
   }
 
