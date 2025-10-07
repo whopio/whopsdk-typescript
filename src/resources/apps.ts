@@ -341,7 +341,7 @@ export interface AppListParams extends CursorPageParams {
   /**
    * The different types of an app view
    */
-  view_type?: 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | null;
+  view_type?: Shared.AppViewType | null;
 }
 
 export declare namespace Apps {

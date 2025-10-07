@@ -32,6 +32,20 @@ import deny_entries from './entries/deny-entries';
 import create_forum_posts from './forum-posts/create-forum-posts';
 import retrieve_forum_posts from './forum-posts/retrieve-forum-posts';
 import list_forum_posts from './forum-posts/list-forum-posts';
+import create_transfers from './transfers/create-transfers';
+import retrieve_transfers from './transfers/retrieve-transfers';
+import list_transfers from './transfers/list-transfers';
+import retrieve_ledger_accounts from './ledger-accounts/retrieve-ledger-accounts';
+import retrieve_memberships from './memberships/retrieve-memberships';
+import update_memberships from './memberships/update-memberships';
+import list_memberships from './memberships/list-memberships';
+import cancel_memberships from './memberships/cancel-memberships';
+import retrieve_authorized_users from './authorized-users/retrieve-authorized-users';
+import list_authorized_users from './authorized-users/list-authorized-users';
+import create_app_builds from './app-builds/create-app-builds';
+import retrieve_app_builds from './app-builds/retrieve-app-builds';
+import list_app_builds from './app-builds/list-app-builds';
+import promote_app_builds from './app-builds/promote-app-builds';
 
 export const endpoints: Endpoint[] = [];
 
@@ -67,6 +81,20 @@ addEndpoint(deny_entries);
 addEndpoint(create_forum_posts);
 addEndpoint(retrieve_forum_posts);
 addEndpoint(list_forum_posts);
+addEndpoint(create_transfers);
+addEndpoint(retrieve_transfers);
+addEndpoint(list_transfers);
+addEndpoint(retrieve_ledger_accounts);
+addEndpoint(retrieve_memberships);
+addEndpoint(update_memberships);
+addEndpoint(list_memberships);
+addEndpoint(cancel_memberships);
+addEndpoint(retrieve_authorized_users);
+addEndpoint(list_authorized_users);
+addEndpoint(create_app_builds);
+addEndpoint(retrieve_app_builds);
+addEndpoint(list_app_builds);
+addEndpoint(promote_app_builds);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
