@@ -24,7 +24,7 @@ export class Apps extends APIResource {
    * });
    * ```
    */
-  create(body: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App | null> {
+  create(body: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App> {
     return this._client.post('/apps', { body, ...options });
   }
 
@@ -42,7 +42,7 @@ export class Apps extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.App | null> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.App> {
     return this._client.get(path`/apps/${id}`, options);
   }
 
@@ -63,7 +63,7 @@ export class Apps extends APIResource {
     id: string,
     body: AppUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.App | null> {
+  ): APIPromise<Shared.App> {
     return this._client.patch(path`/apps/${id}`, { body, ...options });
   }
 
@@ -148,9 +148,13 @@ export interface AppListResponse {
   name: string;
 
   /**
-   * The status of an experience interface
+   * If the status is live, the app is visible on Whop discovery. In order to be
+   * live, you need to set the name, icon, and description. Being unlisted or hidden
+   * means it's not visible on Whop but you can still install the app via direct
+   * link. To remove the app from whop discovery, you should set the status to
+   * unlisted.
    */
-  status: Shared.AppStatuses | null;
+  status: Shared.AppStatuses;
 
   /**
    * Whether this app has been verified by Whop. Verified apps are endorsed by whop
@@ -257,7 +261,7 @@ export interface AppUpdateParams {
   /**
    * The scopes that the app will request off of users when a user installs the app.
    */
-  required_scopes?: Array<'read_user' | null> | null;
+  required_scopes?: Array<'read_user'> | null;
 
   /**
    * The status of an experience interface

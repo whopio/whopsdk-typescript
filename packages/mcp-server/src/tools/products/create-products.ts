@@ -180,7 +180,7 @@ export const tool: Tool = {
             },
             highlight_type: {
               type: 'string',
-              description: 'Types of product highlight',
+              description: 'The type of this highlight.',
               enum: ['qualification', 'benefit', 'who_this_is_for', 'pricing_feature'],
             },
             title: {

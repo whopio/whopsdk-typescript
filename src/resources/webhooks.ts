@@ -39,7 +39,7 @@ export interface InvoiceCreatedWebhookEvent {
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice | null;
+  data?: Shared.Invoice;
 
   /**
    * The webhook event type
@@ -67,7 +67,7 @@ export interface InvoicePaidWebhookEvent {
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice | null;
+  data?: Shared.Invoice;
 
   /**
    * The webhook event type
@@ -95,7 +95,7 @@ export interface InvoicePastDueWebhookEvent {
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice | null;
+  data?: Shared.Invoice;
 
   /**
    * The webhook event type
@@ -123,7 +123,7 @@ export interface InvoiceVoidedWebhookEvent {
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice | null;
+  data?: Shared.Invoice;
 
   /**
    * The webhook event type
