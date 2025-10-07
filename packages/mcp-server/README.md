@@ -417,3 +417,101 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `forum:read`
+
+### Resource `transfers`:
+
+- `create_transfers` (`write`): Creates a new transfer between ledger accounts
+
+  Required permissions:
+
+  - `payout:transfer_funds`
+
+- `retrieve_transfers` (`read`): Retrieves a transfer by ID
+
+  Required permissions:
+
+  - `payout:transfer:read`
+
+- `list_transfers` (`read`): Lists transfers
+
+  Required permissions:
+
+  - `payout:transfer:read`
+
+### Resource `ledger_accounts`:
+
+- `retrieve_ledger_accounts` (`read`): Retrieves a ledger account by ID
+
+  Required permissions:
+
+  - `company:balance:read`
+
+### Resource `memberships`:
+
+- `retrieve_memberships` (`read`): Retrieves a membership by ID or license key
+
+  Required permissions:
+
+  - `member:basic:read`
+
+- `update_memberships` (`write`): Update a membership
+
+  Required permissions:
+
+  - `member:manage`
+  - `member:basic:read`
+
+- `list_memberships` (`read`): Lists memberships
+
+  Required permissions:
+
+  - `member:basic:read`
+
+- `cancel_memberships` (`write`): Cancels a membership either immediately or at the end of the current billing period
+
+  Required permissions:
+
+  - `member:manage`
+  - `member:basic:read`
+
+### Resource `authorized_users`:
+
+- `retrieve_authorized_users` (`read`): Retrieves a authorized user by ID
+
+  Required permissions:
+
+  - `company:authorized_user:read`
+  - `member:email:read`
+
+- `list_authorized_users` (`read`): Lists authorized users
+
+  Required permissions:
+
+  - `company:authorized_user:read`
+  - `member:email:read`
+
+### Resource `app_builds`:
+
+- `create_app_builds` (`write`): Creates a new app build
+
+  Required permissions:
+
+  - `developer:manage_builds`
+
+- `retrieve_app_builds` (`read`): Retrieves an app build by ID
+
+  Required permissions:
+
+  - `developer:manage_builds`
+
+- `list_app_builds` (`read`): Lists app builds for an app
+
+  Required permissions:
+
+  - `developer:manage_builds`
+
+- `promote_app_builds` (`write`): Promotes an app build to production
+
+  Required permissions:
+
+  - `developer:manage_builds`

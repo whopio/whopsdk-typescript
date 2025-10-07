@@ -2,6 +2,13 @@
 
 export * from './shared';
 export {
+  AppBuilds,
+  type AppBuildListResponse,
+  type AppBuildCreateParams,
+  type AppBuildListParams,
+  type AppBuildListResponsesCursorPage,
+} from './app-builds';
+export {
   Apps,
   type AppListResponse,
   type AppCreateParams,
@@ -9,6 +16,13 @@ export {
   type AppListParams,
   type AppListResponsesCursorPage,
 } from './apps';
+export {
+  AuthorizedUsers,
+  type AuthorizedUserRetrieveResponse,
+  type AuthorizedUserListResponse,
+  type AuthorizedUserListParams,
+  type AuthorizedUserListResponsesCursorPage,
+} from './authorized-users';
 export { Companies } from './companies';
 export {
   CourseLessonInteractions,
@@ -37,6 +51,15 @@ export {
   type InvoiceListParams,
   type InvoiceListItemsCursorPage,
 } from './invoices';
+export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
+export {
+  Memberships,
+  type MembershipListResponse,
+  type MembershipUpdateParams,
+  type MembershipListParams,
+  type MembershipCancelParams,
+  type MembershipListResponsesCursorPage,
+} from './memberships';
 export {
   Plans,
   type PlanListResponse,
@@ -54,6 +77,13 @@ export {
   type ProductListParams,
   type ProductListItemsCursorPage,
 } from './products';
+export {
+  Transfers,
+  type TransferListResponse,
+  type TransferCreateParams,
+  type TransferListParams,
+  type TransferListResponsesCursorPage,
+} from './transfers';
 export {
   Webhooks,
   type InvoiceCreatedWebhookEvent,

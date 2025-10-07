@@ -4,7 +4,12 @@ Types:
 
 - <code><a href="./src/resources/shared.ts">AccessPassType</a></code>
 - <code><a href="./src/resources/shared.ts">App</a></code>
+- <code><a href="./src/resources/shared.ts">AppBuild</a></code>
+- <code><a href="./src/resources/shared.ts">AppBuildPlatforms</a></code>
+- <code><a href="./src/resources/shared.ts">AppBuildStatuses</a></code>
 - <code><a href="./src/resources/shared.ts">AppStatuses</a></code>
+- <code><a href="./src/resources/shared.ts">AppViewType</a></code>
+- <code><a href="./src/resources/shared.ts">AuthorizedUserRoles</a></code>
 - <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
@@ -21,6 +26,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
+- <code><a href="./src/resources/shared.ts">Membership</a></code>
+- <code><a href="./src/resources/shared.ts">MembershipStatus</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Plan</a></code>
 - <code><a href="./src/resources/shared.ts">PlanType</a></code>
@@ -28,6 +35,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
 - <code><a href="./src/resources/shared.ts">TaxType</a></code>
+- <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
 - <code><a href="./src/resources/shared.ts">VisibilityFilter</a></code>
 
@@ -139,3 +147,63 @@ Methods:
 - <code title="post /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">create</a>({ ...params }) -> ForumPost</code>
 - <code title="get /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">retrieve</a>(id) -> ForumPost</code>
 - <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>
+
+# Transfers
+
+Types:
+
+- <code><a href="./src/resources/transfers.ts">TransferListResponse</a></code>
+
+Methods:
+
+- <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> Transfer</code>
+- <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id) -> Transfer</code>
+- <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
+
+# LedgerAccounts
+
+Types:
+
+- <code><a href="./src/resources/ledger-accounts.ts">LedgerAccountRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /ledger_accounts/{id}">client.ledgerAccounts.<a href="./src/resources/ledger-accounts.ts">retrieve</a>(id) -> LedgerAccountRetrieveResponse</code>
+
+# Memberships
+
+Types:
+
+- <code><a href="./src/resources/memberships.ts">MembershipListResponse</a></code>
+
+Methods:
+
+- <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id) -> Membership</code>
+- <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
+- <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
+
+# AuthorizedUsers
+
+Types:
+
+- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserRetrieveResponse</a></code>
+- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserListResponse</a></code>
+
+Methods:
+
+- <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUserRetrieveResponse</code>
+- <code title="get /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">list</a>({ ...params }) -> AuthorizedUserListResponsesCursorPage</code>
+
+# AppBuilds
+
+Types:
+
+- <code><a href="./src/resources/app-builds.ts">AppBuildListResponse</a></code>
+
+Methods:
+
+- <code title="post /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">create</a>({ ...params }) -> AppBuild</code>
+- <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id) -> AppBuild</code>
+- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
+- <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id) -> AppBuild</code>

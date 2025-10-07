@@ -66,9 +66,7 @@ export const tool: Tool = {
           "If true, you will only get apps that are verified by Whop. Use this to populate a 'featured apps' section on the app store.",
       },
       view_type: {
-        type: 'string',
-        description: 'The different types of an app view',
-        enum: ['hub', 'discover', 'dash', 'dashboard', 'analytics'],
+        $ref: '#/$defs/app_view_type',
       },
       jq_filter: {
         type: 'string',
@@ -83,6 +81,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The direction of the sort.',
         enum: ['asc', 'desc'],
+      },
+      app_view_type: {
+        type: 'string',
+        description: 'The different types of an app view',
+        enum: ['hub', 'discover', 'dash', 'dashboard', 'analytics'],
       },
     },
   },

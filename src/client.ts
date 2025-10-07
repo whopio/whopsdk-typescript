@@ -20,6 +20,13 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  AppBuildCreateParams,
+  AppBuildListParams,
+  AppBuildListResponse,
+  AppBuildListResponsesCursorPage,
+  AppBuilds,
+} from './resources/app-builds';
+import {
   AppCreateParams,
   AppListParams,
   AppListResponse,
@@ -27,6 +34,13 @@ import {
   AppUpdateParams,
   Apps,
 } from './resources/apps';
+import {
+  AuthorizedUserListParams,
+  AuthorizedUserListResponse,
+  AuthorizedUserListResponsesCursorPage,
+  AuthorizedUserRetrieveResponse,
+  AuthorizedUsers,
+} from './resources/authorized-users';
 import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListItemsCursorPage,
@@ -55,6 +69,15 @@ import {
   InvoiceVoidResponse,
   Invoices,
 } from './resources/invoices';
+import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
+import {
+  MembershipCancelParams,
+  MembershipListParams,
+  MembershipListResponse,
+  MembershipListResponsesCursorPage,
+  MembershipUpdateParams,
+  Memberships,
+} from './resources/memberships';
 import {
   PlanCreateParams,
   PlanDeleteResponse,
@@ -72,6 +95,13 @@ import {
   ProductUpdateParams,
   Products,
 } from './resources/products';
+import {
+  TransferCreateParams,
+  TransferListParams,
+  TransferListResponse,
+  TransferListResponsesCursorPage,
+  Transfers,
+} from './resources/transfers';
 import {
   InvoiceCreatedWebhookEvent,
   InvoicePaidWebhookEvent,
@@ -800,6 +830,11 @@ export class Whopsdk {
   plans: API.Plans = new API.Plans(this);
   entries: API.Entries = new API.Entries(this);
   forumPosts: API.ForumPosts = new API.ForumPosts(this);
+  transfers: API.Transfers = new API.Transfers(this);
+  ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
+  memberships: API.Memberships = new API.Memberships(this);
+  authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
+  appBuilds: API.AppBuilds = new API.AppBuilds(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -811,6 +846,11 @@ Whopsdk.Webhooks = Webhooks;
 Whopsdk.Plans = Plans;
 Whopsdk.Entries = Entries;
 Whopsdk.ForumPosts = ForumPosts;
+Whopsdk.Transfers = Transfers;
+Whopsdk.LedgerAccounts = LedgerAccounts;
+Whopsdk.Memberships = Memberships;
+Whopsdk.AuthorizedUsers = AuthorizedUsers;
+Whopsdk.AppBuilds = AppBuilds;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -888,9 +928,52 @@ export declare namespace Whopsdk {
     type ForumPostListParams as ForumPostListParams,
   };
 
+  export {
+    Transfers as Transfers,
+    type TransferListResponse as TransferListResponse,
+    type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferCreateParams as TransferCreateParams,
+    type TransferListParams as TransferListParams,
+  };
+
+  export {
+    LedgerAccounts as LedgerAccounts,
+    type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse,
+  };
+
+  export {
+    Memberships as Memberships,
+    type MembershipListResponse as MembershipListResponse,
+    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
+    type MembershipUpdateParams as MembershipUpdateParams,
+    type MembershipListParams as MembershipListParams,
+    type MembershipCancelParams as MembershipCancelParams,
+  };
+
+  export {
+    AuthorizedUsers as AuthorizedUsers,
+    type AuthorizedUserRetrieveResponse as AuthorizedUserRetrieveResponse,
+    type AuthorizedUserListResponse as AuthorizedUserListResponse,
+    type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
+    type AuthorizedUserListParams as AuthorizedUserListParams,
+  };
+
+  export {
+    AppBuilds as AppBuilds,
+    type AppBuildListResponse as AppBuildListResponse,
+    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
+    type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildListParams as AppBuildListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
+  export type AppBuild = API.AppBuild;
+  export type AppBuildPlatforms = API.AppBuildPlatforms;
+  export type AppBuildStatuses = API.AppBuildStatuses;
   export type AppStatuses = API.AppStatuses;
+  export type AppViewType = API.AppViewType;
+  export type AuthorizedUserRoles = API.AuthorizedUserRoles;
   export type BusinessTypes = API.BusinessTypes;
   export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
@@ -907,6 +990,8 @@ export declare namespace Whopsdk {
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
   export type InvoiceStatus = API.InvoiceStatus;
+  export type Membership = API.Membership;
+  export type MembershipStatus = API.MembershipStatus;
   export type PageInfo = API.PageInfo;
   export type Plan = API.Plan;
   export type PlanType = API.PlanType;
@@ -914,6 +999,7 @@ export declare namespace Whopsdk {
   export type ProductListItem = API.ProductListItem;
   export type ReleaseMethod = API.ReleaseMethod;
   export type TaxType = API.TaxType;
+  export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;
   export type VisibilityFilter = API.VisibilityFilter;
 }
