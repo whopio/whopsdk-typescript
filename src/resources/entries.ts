@@ -63,7 +63,7 @@ export class Entries extends APIResource {
 export type EntryListResponsesCursorPage = CursorPage<EntryListResponse | null>;
 
 /**
- * An object representing an entry in a raffle or waitlist.
+ * An object representing an entry in a waitlist.
  */
 export interface EntryListResponse {
   /**
@@ -77,7 +77,7 @@ export interface EntryListResponse {
   created_at: number | null;
 
   /**
-   * The plan (waitlist/raffle) the entry if for.
+   * The waitlist plan the entry if for.
    */
   plan: EntryListResponse.Plan | null;
 
@@ -87,7 +87,7 @@ export interface EntryListResponse {
   product: EntryListResponse.Product | null;
 
   /**
-   * The status of an entry to a waitlist or raffle.
+   * The status of an entry to a waitlist.
    */
   status: Shared.EntryStatus | null;
 
@@ -99,7 +99,7 @@ export interface EntryListResponse {
 
 export namespace EntryListResponse {
   /**
-   * The plan (waitlist/raffle) the entry if for.
+   * The waitlist plan the entry if for.
    */
   export interface Plan {
     /**

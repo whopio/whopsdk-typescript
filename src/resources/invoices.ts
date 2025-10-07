@@ -264,14 +264,9 @@ export namespace InvoiceCreateParams {
     redirect_url?: string | null;
 
     /**
-     * The methods of how a plan can be released (including raffles and waitlists).
+     * The methods of how a plan can be released.
      */
     release_method?: Shared.ReleaseMethod | null;
-
-    /**
-     * Configurable settings on how this plan is released.
-     */
-    release_method_settings?: Plan.ReleaseMethodSettings | null;
 
     /**
      * The amount the customer is charged every billing period.
@@ -341,32 +336,6 @@ export namespace InvoiceCreateParams {
        * Whether or not the field is required.
        */
       required?: boolean | null;
-    }
-
-    /**
-     * Configurable settings on how this plan is released.
-     */
-    export interface ReleaseMethodSettings {
-      /**
-       * When the raffle will expire
-       */
-      expires_at?: number | null;
-
-      /**
-       * The maximum number of entries allowed for the raffle or waitlist
-       */
-      max_entries?: number | null;
-
-      /**
-       * If this is enabled, the raffle will get entries based off of how many NFTs the
-       * user owns
-       */
-      nft_weighted_entries?: boolean | null;
-
-      /**
-       * When the raffle will start
-       */
-      starts_at?: number | null;
     }
   }
 

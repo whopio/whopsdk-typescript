@@ -57,12 +57,6 @@ describe('resource invoices', () => {
         platform_balance_accepted: true,
         redirect_url: 'redirect_url',
         release_method: 'buy_now',
-        release_method_settings: {
-          expires_at: 1701406800,
-          max_entries: 42,
-          nft_weighted_entries: true,
-          starts_at: 1701406800,
-        },
         renewal_price: 6.9,
         split_pay_required_payments: 42,
         splitit_accepted: true,

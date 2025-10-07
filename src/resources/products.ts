@@ -291,7 +291,7 @@ export namespace ProductCreateParams {
     plan_type?: Shared.PlanType | null;
 
     /**
-     * The methods of how a plan can be released (including raffles and waitlists).
+     * The methods of how a plan can be released.
      */
     release_method?: Shared.ReleaseMethod | null;
 
