@@ -191,7 +191,7 @@ export interface PlanListResponse {
   purchase_link: string;
 
   /**
-   * The methods of how a plan can be released (including raffles and waitlists).
+   * The methods of how a plan can be released.
    */
   release_method: Shared.ReleaseMethod | null;
 
@@ -300,6 +300,11 @@ export interface PlanCreateParams {
   expiration_days?: number | null;
 
   /**
+   * An image for the plan. This will be visible on the product page to customers.
+   */
+  image?: PlanCreateParams.Image | null;
+
+  /**
    * An additional amount charged upon first purchase.
    */
   initial_price?: number | null;
@@ -321,7 +326,7 @@ export interface PlanCreateParams {
   plan_type?: Shared.PlanType | null;
 
   /**
-   * The methods of how a plan can be released (including raffles and waitlists).
+   * The methods of how a plan can be released.
    */
   release_method?: Shared.ReleaseMethod | null;
 
@@ -329,6 +334,11 @@ export interface PlanCreateParams {
    * The amount the customer is charged every billing period.
    */
   renewal_price?: number | null;
+
+  /**
+   * The title of the plan. This will be visible on the product page to customers.
+   */
+  title?: string | null;
 
   /**
    * The number of free trial days added before a renewal plan.
@@ -373,6 +383,25 @@ export namespace PlanCreateParams {
      */
     required?: boolean | null;
   }
+
+  /**
+   * An image for the plan. This will be visible on the product page to customers.
+   */
+  export interface Image {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id?: string | null;
+
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id?: string | null;
+  }
 }
 
 export interface PlanUpdateParams {
@@ -402,6 +431,11 @@ export interface PlanUpdateParams {
   expiration_days?: number | null;
 
   /**
+   * An image for the plan. This will be visible on the product page to customers.
+   */
+  image?: PlanUpdateParams.Image | null;
+
+  /**
    * An additional amount charged upon first purchase.
    */
   initial_price?: number | null;
@@ -426,6 +460,11 @@ export interface PlanUpdateParams {
    * The amount the customer is charged every billing period.
    */
   renewal_price?: number | null;
+
+  /**
+   * The title of the plan. This will be visible on the product page to customers.
+   */
+  title?: string | null;
 
   /**
    * The number of free trial days added before a renewal plan.
@@ -469,6 +508,25 @@ export namespace PlanUpdateParams {
      * Whether or not the field is required.
      */
     required?: boolean | null;
+  }
+
+  /**
+   * An image for the plan. This will be visible on the product page to customers.
+   */
+  export interface Image {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id?: string | null;
+
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id?: string | null;
   }
 }
 

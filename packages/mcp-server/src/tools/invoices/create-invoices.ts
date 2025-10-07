@@ -127,29 +127,6 @@ export const tool: Tool = {
           release_method: {
             $ref: '#/$defs/release_method',
           },
-          release_method_settings: {
-            type: 'object',
-            description: 'Configurable settings on how this plan is released.',
-            properties: {
-              expires_at: {
-                type: 'integer',
-                description: 'When the raffle will expire',
-              },
-              max_entries: {
-                type: 'integer',
-                description: 'The maximum number of entries allowed for the raffle or waitlist',
-              },
-              nft_weighted_entries: {
-                type: 'boolean',
-                description:
-                  'If this is enabled, the raffle will get entries based off of how many NFTs the user owns',
-              },
-              starts_at: {
-                type: 'integer',
-                description: 'When the raffle will start',
-              },
-            },
-          },
           renewal_price: {
             type: 'number',
             description: 'The amount the customer is charged every billing period.',
@@ -330,7 +307,7 @@ export const tool: Tool = {
       },
       release_method: {
         type: 'string',
-        description: 'The methods of how a plan can be released (including raffles and waitlists).',
+        description: 'The methods of how a plan can be released.',
         enum: ['buy_now', 'waitlist'],
       },
       visibility: {

@@ -420,7 +420,7 @@ export const tool: Tool = {
       },
       release_method: {
         type: 'string',
-        description: 'The methods of how a plan can be released (including raffles and waitlists).',
+        description: 'The methods of how a plan can be released.',
         enum: ['buy_now', 'waitlist'],
       },
       visibility: {

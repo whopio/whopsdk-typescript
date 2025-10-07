@@ -601,7 +601,7 @@ export type CustomCta =
 export type Direction = 'asc' | 'desc';
 
 /**
- * An object representing an entry in a raffle or waitlist.
+ * An object representing an entry in a waitlist.
  */
 export interface Entry {
   /**
@@ -620,7 +620,7 @@ export interface Entry {
   custom_field_responses: Array<Entry.CustomFieldResponse> | null;
 
   /**
-   * The plan (waitlist/raffle) the entry if for.
+   * The waitlist plan the entry if for.
    */
   plan: Entry.Plan | null;
 
@@ -630,7 +630,7 @@ export interface Entry {
   product: Entry.Product | null;
 
   /**
-   * The status of an entry to a waitlist or raffle.
+   * The status of an entry to a waitlist.
    */
   status: EntryStatus | null;
 
@@ -662,7 +662,7 @@ export namespace Entry {
   }
 
   /**
-   * The plan (waitlist/raffle) the entry if for.
+   * The waitlist plan the entry if for.
    */
   export interface Plan {
     /**
@@ -713,7 +713,7 @@ export namespace Entry {
 }
 
 /**
- * The status of an entry to a waitlist or raffle.
+ * The status of an entry to a waitlist.
  */
 export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
 
@@ -1167,7 +1167,7 @@ export interface Plan {
   purchase_link: string;
 
   /**
-   * The methods of how a plan can be released (including raffles and waitlists).
+   * The methods of how a plan can be released.
    */
   release_method: ReleaseMethod | null;
 
@@ -1530,7 +1530,7 @@ export interface ProductListItem {
 }
 
 /**
- * The methods of how a plan can be released (including raffles and waitlists).
+ * The methods of how a plan can be released.
  */
 export type ReleaseMethod = 'buy_now' | 'waitlist';
 
