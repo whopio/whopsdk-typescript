@@ -59,15 +59,13 @@ export class Shipments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const shipmentListResponse of client.shipments.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
+   * for await (const shipmentListResponse of client.shipments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: ShipmentListParams,
+    query: ShipmentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse | null> {
     return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse | null>, {
@@ -165,14 +163,14 @@ export interface ShipmentCreateParams {
 
 export interface ShipmentListParams extends CursorPageParams {
   /**
-   * The ID of the company
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The ID of the company
+   */
+  company_id?: string | null;
 
   /**
    * Returns the first _n_ elements from the list.
