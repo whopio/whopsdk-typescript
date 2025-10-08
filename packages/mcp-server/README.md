@@ -515,3 +515,26 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `developer:manage_builds`
+
+### Resource `shipments`:
+
+- `create_shipments` (`write`): Creates a new shipment
+
+  Required permissions:
+
+  - `shipment:create`
+  - `payment:basic:read`
+
+- `retrieve_shipments` (`read`): Retrieves a shipment by ID
+
+  Required permissions:
+
+  - `shipment:basic:read`
+  - `payment:basic:read`
+
+- `list_shipments` (`read`): Lists shipments for a payment
+
+  Required permissions:
+
+  - `shipment:basic:read`
+  - `payment:basic:read`
