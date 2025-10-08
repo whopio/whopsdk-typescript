@@ -11,6 +11,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AppViewType</a></code>
 - <code><a href="./src/resources/shared.ts">AuthorizedUserRoles</a></code>
 - <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
+- <code><a href="./src/resources/shared.ts">CheckoutConfiguration</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteraction</a></code>
@@ -223,3 +224,15 @@ Methods:
 - <code title="post /shipments">client.shipments.<a href="./src/resources/shipments.ts">create</a>({ ...params }) -> Shipment</code>
 - <code title="get /shipments/{id}">client.shipments.<a href="./src/resources/shipments.ts">retrieve</a>(id) -> Shipment</code>
 - <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentListResponsesCursorPage</code>
+
+# CheckoutConfigurations
+
+Types:
+
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationListResponse</a></code>
+
+Methods:
+
+- <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfiguration</code>
+- <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id) -> CheckoutConfiguration</code>
+- <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>

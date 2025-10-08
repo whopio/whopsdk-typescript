@@ -23,6 +23,13 @@ export {
   type AuthorizedUserListParams,
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
+export {
+  CheckoutConfigurations,
+  type CheckoutConfigurationListResponse,
+  type CheckoutConfigurationCreateParams,
+  type CheckoutConfigurationListParams,
+  type CheckoutConfigurationListResponsesCursorPage,
+} from './checkout-configurations';
 export { Companies } from './companies';
 export {
   CourseLessonInteractions,
