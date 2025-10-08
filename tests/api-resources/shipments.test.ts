@@ -46,8 +46,8 @@ describe('resource shipments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.shipments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+  test.skip('list', async () => {
+    const responsePromise = client.shipments.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,15 +58,21 @@ describe('resource shipments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.shipments.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-      payment_id: 'pay_xxxxxxxxxxxxxx',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.shipments.list(
+        {
+          after: 'after',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          first: 42,
+          last: 42,
+          payment_id: 'pay_xxxxxxxxxxxxxx',
+          user_id: 'user_xxxxxxxxxxxxx',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whopsdk.NotFoundError);
   });
 });
