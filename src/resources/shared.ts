@@ -1793,6 +1793,202 @@ export interface ProductListItem {
 export type ReleaseMethod = 'buy_now' | 'waitlist';
 
 /**
+ * A shipment
+ */
+export interface Shipment {
+  /**
+   * The ID of the shipment
+   */
+  id: string;
+
+  /**
+   * The carrier of the shipment
+   */
+  carrier: ShipmentCarrier;
+
+  /**
+   * The date and time the shipment was created
+   */
+  created_at: number;
+
+  /**
+   * The delivery estimate of the shipment
+   */
+  delivery_estimate: number | null;
+
+  /**
+   * The payment of the shipment
+   */
+  payment: Shipment.Payment;
+
+  /**
+   * The service of the shipment
+   */
+  service: string | null;
+
+  /**
+   * The status of the shipment
+   */
+  status: ShipmentStatus;
+
+  /**
+   * The substatus of a shipment
+   */
+  substatus: ShipmentSubstatus | null;
+
+  /**
+   * The tracking code of the shipment
+   */
+  tracking_code: string;
+
+  /**
+   * The date and time the shipment was last updated
+   */
+  updated_at: number;
+}
+
+export namespace Shipment {
+  /**
+   * The payment of the shipment
+   */
+  export interface Payment {
+    /**
+     * The receipt ID
+     */
+    id: string;
+  }
+}
+
+/**
+ * The carrier of a shipment
+ */
+export type ShipmentCarrier =
+  | 'accurate'
+  | 'amazon_mws'
+  | 'amazon_shipping'
+  | 'apc'
+  | 'asendia_usa'
+  | 'australia_post'
+  | 'axlehire_v3'
+  | 'better_trucks'
+  | 'canada_post'
+  | 'canpar'
+  | 'columbus_last_mile'
+  | 'chronopost'
+  | 'cloud_sort'
+  | 'courier_express'
+  | 'couriers_please'
+  | 'cs_logistics'
+  | 'dai_post'
+  | 'deutsche_post_uk'
+  | 'deutsche_post'
+  | 'dhl_ecommerce_asia'
+  | 'dhl_ecs'
+  | 'dhl_express'
+  | 'dhl_paket'
+  | 'door_dash'
+  | 'dpd_nl'
+  | 'dpd_uk'
+  | 'dpd'
+  | 'epost_global'
+  | 'estafeta'
+  | 'evri'
+  | 'fastway'
+  | 'fedex_cross_border'
+  | 'fedex_default'
+  | 'fedex_mailview'
+  | 'fedex_smartpost'
+  | 'fedex'
+  | 'first_choice'
+  | 'first_mile'
+  | 'flexport'
+  | 'gio'
+  | 'gio_express'
+  | 'gso'
+  | 'hailify'
+  | 'henry'
+  | 'interlink_express'
+  | 'jet'
+  | 'kuroneko_yamato'
+  | 'la_post'
+  | 'lasership_v2'
+  | 'loomis_express'
+  | 'lso'
+  | 'ontrac'
+  | 'optima'
+  | 'osm_worldwide'
+  | 'parcelforce'
+  | 'parcll'
+  | 'passport_global'
+  | 'post_nl'
+  | 'purolator'
+  | 'quick'
+  | 'royal_mail'
+  | 'omni_parcel'
+  | 'sendle'
+  | 'sf_express'
+  | 'smart_kargo'
+  | 'sonic'
+  | 'spee_dee'
+  | 'swyft'
+  | 'tforce'
+  | 'uds'
+  | 'ups_iparcel'
+  | 'ups_mail_innovations'
+  | 'ups'
+  | 'usps'
+  | 'veho'
+  | 'yanwen';
+
+/**
+ * The status of a shipment
+ */
+export type ShipmentStatus =
+  | 'unknown'
+  | 'pre_transit'
+  | 'in_transit'
+  | 'out_for_delivery'
+  | 'delivered'
+  | 'available_for_pickup'
+  | 'return_to_sender'
+  | 'failure'
+  | 'cancelled'
+  | 'error';
+
+/**
+ * The substatus of a shipment
+ */
+export type ShipmentSubstatus =
+  | 'address_correction'
+  | 'arrived_at_destination'
+  | 'arrived_at_facility'
+  | 'arrived_at_pickup_location'
+  | 'awaiting_information'
+  | 'substatus_cancelled'
+  | 'damaged'
+  | 'delayed'
+  | 'delivery_exception'
+  | 'departed_facility'
+  | 'departed_origin_facility'
+  | 'expired'
+  | 'substatus_failure'
+  | 'held'
+  | 'substatus_in_transit'
+  | 'label_created'
+  | 'lost'
+  | 'missorted'
+  | 'substatus_out_for_delivery'
+  | 'received_at_destination_facility'
+  | 'received_at_origin_facility'
+  | 'refused'
+  | 'return'
+  | 'status_update'
+  | 'transferred_to_destination_carrier'
+  | 'transit_exception'
+  | 'substatus_unknown'
+  | 'weather_delay';
+
+/**
  * Whether or not the tax is included in a plan's price (or if it hasn't been set
  * up)
  */

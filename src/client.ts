@@ -96,6 +96,13 @@ import {
   Products,
 } from './resources/products';
 import {
+  ShipmentCreateParams,
+  ShipmentListParams,
+  ShipmentListResponse,
+  ShipmentListResponsesCursorPage,
+  Shipments,
+} from './resources/shipments';
+import {
   TransferCreateParams,
   TransferListParams,
   TransferListResponse,
@@ -835,6 +842,7 @@ export class Whopsdk {
   memberships: API.Memberships = new API.Memberships(this);
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
+  shipments: API.Shipments = new API.Shipments(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -851,6 +859,7 @@ Whopsdk.LedgerAccounts = LedgerAccounts;
 Whopsdk.Memberships = Memberships;
 Whopsdk.AuthorizedUsers = AuthorizedUsers;
 Whopsdk.AppBuilds = AppBuilds;
+Whopsdk.Shipments = Shipments;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -966,6 +975,14 @@ export declare namespace Whopsdk {
     type AppBuildListParams as AppBuildListParams,
   };
 
+  export {
+    Shipments as Shipments,
+    type ShipmentListResponse as ShipmentListResponse,
+    type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
+    type ShipmentCreateParams as ShipmentCreateParams,
+    type ShipmentListParams as ShipmentListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -998,6 +1015,10 @@ export declare namespace Whopsdk {
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
   export type ReleaseMethod = API.ReleaseMethod;
+  export type Shipment = API.Shipment;
+  export type ShipmentCarrier = API.ShipmentCarrier;
+  export type ShipmentStatus = API.ShipmentStatus;
+  export type ShipmentSubstatus = API.ShipmentSubstatus;
   export type TaxType = API.TaxType;
   export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;

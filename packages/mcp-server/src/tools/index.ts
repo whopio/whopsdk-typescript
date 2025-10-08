@@ -46,6 +46,9 @@ import create_app_builds from './app-builds/create-app-builds';
 import retrieve_app_builds from './app-builds/retrieve-app-builds';
 import list_app_builds from './app-builds/list-app-builds';
 import promote_app_builds from './app-builds/promote-app-builds';
+import create_shipments from './shipments/create-shipments';
+import retrieve_shipments from './shipments/retrieve-shipments';
+import list_shipments from './shipments/list-shipments';
 
 export const endpoints: Endpoint[] = [];
 
@@ -95,6 +98,9 @@ addEndpoint(create_app_builds);
 addEndpoint(retrieve_app_builds);
 addEndpoint(list_app_builds);
 addEndpoint(promote_app_builds);
+addEndpoint(create_shipments);
+addEndpoint(retrieve_shipments);
+addEndpoint(list_shipments);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

@@ -34,6 +34,10 @@ Types:
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
+- <code><a href="./src/resources/shared.ts">Shipment</a></code>
+- <code><a href="./src/resources/shared.ts">ShipmentCarrier</a></code>
+- <code><a href="./src/resources/shared.ts">ShipmentStatus</a></code>
+- <code><a href="./src/resources/shared.ts">ShipmentSubstatus</a></code>
 - <code><a href="./src/resources/shared.ts">TaxType</a></code>
 - <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
@@ -207,3 +211,15 @@ Methods:
 - <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id) -> AppBuild</code>
 - <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
 - <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id) -> AppBuild</code>
+
+# Shipments
+
+Types:
+
+- <code><a href="./src/resources/shipments.ts">ShipmentListResponse</a></code>
+
+Methods:
+
+- <code title="post /shipments">client.shipments.<a href="./src/resources/shipments.ts">create</a>({ ...params }) -> Shipment</code>
+- <code title="get /shipments/{id}">client.shipments.<a href="./src/resources/shipments.ts">retrieve</a>(id) -> Shipment</code>
+- <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentListResponsesCursorPage</code>

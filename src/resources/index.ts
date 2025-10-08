@@ -78,6 +78,13 @@ export {
   type ProductListItemsCursorPage,
 } from './products';
 export {
+  Shipments,
+  type ShipmentListResponse,
+  type ShipmentCreateParams,
+  type ShipmentListParams,
+  type ShipmentListResponsesCursorPage,
+} from './shipments';
+export {
   Transfers,
   type TransferListResponse,
   type TransferCreateParams,
