@@ -1189,6 +1189,11 @@ export interface Membership {
   license_key: string | null;
 
   /**
+   * The URL for the customer to manage their membership.
+   */
+  manage_url: string | null;
+
+  /**
    * The Member that this Membership belongs to.
    */
   member: Membership.Member | null;
@@ -1196,7 +1201,7 @@ export interface Membership {
   /**
    * A JSON object used to store software licensing information. Ex. HWID
    */
-  metadata: unknown;
+  metadata: { [key: string]: unknown };
 
   /**
    * The Plan this Membership is for.
@@ -1423,7 +1428,7 @@ export interface Plan {
   /**
    * The direct link to purchase the access pass.
    */
-  purchase_link: string;
+  purchase_url: string;
 
   /**
    * This is the release method the business uses to sell this plan.

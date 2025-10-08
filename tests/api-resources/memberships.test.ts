@@ -36,7 +36,11 @@ describe('resource memberships', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.update('mem_xxxxxxxxxxxxxx', { metadata: {} }, { path: '/_stainless_unknown_path' }),
+      client.memberships.update(
+        'mem_xxxxxxxxxxxxxx',
+        { metadata: { foo: 'bar' } },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Whopsdk.NotFoundError);
   });
 

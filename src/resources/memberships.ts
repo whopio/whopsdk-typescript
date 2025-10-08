@@ -120,6 +120,11 @@ export interface MembershipListResponse {
   license_key: string | null;
 
   /**
+   * The URL for the customer to manage their membership.
+   */
+  manage_url: string | null;
+
+  /**
    * The Member that this Membership belongs to.
    */
   member: MembershipListResponse.Member | null;
@@ -127,7 +132,7 @@ export interface MembershipListResponse {
   /**
    * A JSON object used to store software licensing information. Ex. HWID
    */
-  metadata: unknown;
+  metadata: { [key: string]: unknown };
 
   /**
    * The Plan this Membership is for.
@@ -238,7 +243,7 @@ export interface MembershipUpdateParams {
   /**
    * The metadata to update the membership with.
    */
-  metadata?: unknown | null;
+  metadata?: { [key: string]: unknown } | null;
 }
 
 export interface MembershipListParams extends CursorPageParams {
