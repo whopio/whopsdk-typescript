@@ -327,6 +327,103 @@ export type BusinessTypes =
   | 'community';
 
 /**
+ * A checkout session
+ */
+export interface CheckoutConfiguration {
+  /**
+   * The ID of the checkout session
+   */
+  id: string;
+
+  /**
+   * The affiliate code to use for the checkout session
+   */
+  affiliate_code: string;
+
+  /**
+   * The ID of the company to use for the checkout session
+   */
+  company_id: string;
+
+  /**
+   * The metadata to use for the checkout session
+   */
+  metadata: { [key: string]: unknown };
+
+  /**
+   * The plan to use for the checkout session
+   */
+  plan: CheckoutConfiguration.Plan;
+
+  /**
+   * The URL to redirect the user to after the checkout session is created
+   */
+  purchase_url: string;
+
+  /**
+   * The URL to redirect the user to after the checkout session is created
+   */
+  redirect_url: string;
+}
+
+export namespace CheckoutConfiguration {
+  /**
+   * The plan to use for the checkout session
+   */
+  export interface Plan {
+    /**
+     * The internal ID of the plan.
+     */
+    id: string;
+
+    /**
+     * The interval at which the plan charges (renewal plans).
+     */
+    billing_period: number | null;
+
+    /**
+     * The respective currency identifier for the plan.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The interval at which the plan charges (expiration plans).
+     */
+    expiration_days: number | null;
+
+    /**
+     * The price a person has to pay for a plan on the initial purchase.
+     */
+    initial_price: number;
+
+    /**
+     * Indicates if the plan is a one time payment or recurring.
+     */
+    plan_type: Shared.PlanType;
+
+    /**
+     * This is the release method the business uses to sell this plan.
+     */
+    release_method: Shared.ReleaseMethod;
+
+    /**
+     * The price a person has to pay for a plan on the renewal purchase.
+     */
+    renewal_price: number;
+
+    /**
+     * The number of free trial days added before a renewal plan.
+     */
+    trial_period_days: number | null;
+
+    /**
+     * Shows or hides the plan from public/business view.
+     */
+    visibility: Shared.Visibility;
+  }
+}
+
+/**
  * The method of collection for an invoice.
  */
 export type CollectionMethod = 'send_invoice' | 'charge_automatically';

@@ -538,3 +538,24 @@ The following tools are available in this MCP server.
 
   - `shipment:basic:read`
   - `payment:basic:read`
+
+### Resource `checkout_configurations`:
+
+- `create_checkout_configurations` (`write`): Creates a new checkout session
+
+  Required permissions:
+
+  - `checkout_configuration:create`
+  - `plan:create`
+
+- `retrieve_checkout_configurations` (`read`): Retrieves a checkout configuration by ID
+
+  Required permissions:
+
+  - `checkout_configuration:basic:read`
+
+- `list_checkout_configurations` (`read`): Lists checkout configurations
+
+  Required permissions:
+
+  - `checkout_configuration:basic:read`

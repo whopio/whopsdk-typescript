@@ -41,6 +41,13 @@ import {
   AuthorizedUserRetrieveResponse,
   AuthorizedUsers,
 } from './resources/authorized-users';
+import {
+  CheckoutConfigurationCreateParams,
+  CheckoutConfigurationListParams,
+  CheckoutConfigurationListResponse,
+  CheckoutConfigurationListResponsesCursorPage,
+  CheckoutConfigurations,
+} from './resources/checkout-configurations';
 import { Companies } from './resources/companies';
 import {
   CourseLessonInteractionListItemsCursorPage,
@@ -843,6 +850,7 @@ export class Whopsdk {
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
+  checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -860,6 +868,7 @@ Whopsdk.Memberships = Memberships;
 Whopsdk.AuthorizedUsers = AuthorizedUsers;
 Whopsdk.AppBuilds = AppBuilds;
 Whopsdk.Shipments = Shipments;
+Whopsdk.CheckoutConfigurations = CheckoutConfigurations;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -983,6 +992,14 @@ export declare namespace Whopsdk {
     type ShipmentListParams as ShipmentListParams,
   };
 
+  export {
+    CheckoutConfigurations as CheckoutConfigurations,
+    type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
+    type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
+    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
+    type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -992,6 +1009,7 @@ export declare namespace Whopsdk {
   export type AppViewType = API.AppViewType;
   export type AuthorizedUserRoles = API.AuthorizedUserRoles;
   export type BusinessTypes = API.BusinessTypes;
+  export type CheckoutConfiguration = API.CheckoutConfiguration;
   export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
   export type CourseLessonInteraction = API.CourseLessonInteraction;
