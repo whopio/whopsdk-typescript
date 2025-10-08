@@ -188,7 +188,7 @@ export interface PlanListResponse {
   /**
    * The direct link to purchase the access pass.
    */
-  purchase_link: string;
+  purchase_url: string;
 
   /**
    * This is the release method the business uses to sell this plan.

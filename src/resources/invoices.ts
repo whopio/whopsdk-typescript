@@ -190,29 +190,9 @@ export namespace InvoiceCreateParams {
    */
   export interface Plan {
     /**
-     * Whether or not ACH payments are accepted
-     */
-    ach_payments?: boolean | null;
-
-    /**
-     * The available currencies on the platform
-     */
-    base_currency?: Shared.Currency | null;
-
-    /**
      * The interval at which the plan charges (renewal plans).
      */
     billing_period?: number | null;
-
-    /**
-     * Whether or not card payments are accepted
-     */
-    card_payments?: boolean | null;
-
-    /**
-     * Marks whether coinbase commerce payments are/aren't accepted.
-     */
-    coinbase_commerce_accepted?: boolean | null;
 
     /**
      * An array of custom field objects.
@@ -240,29 +220,9 @@ export namespace InvoiceCreateParams {
     internal_notes?: string | null;
 
     /**
-     * Whether or not to offer a discount to cancel a subscription.
-     */
-    offer_cancel_discount?: boolean | null;
-
-    /**
-     * Marks whether paypal payments are/aren't accepted.
-     */
-    paypal_accepted?: boolean | null;
-
-    /**
      * The type of plan that can be attached to an access pass
      */
     plan_type?: Shared.PlanType | null;
-
-    /**
-     * Marks whether platform balance payments are/aren't accepted.
-     */
-    platform_balance_accepted?: boolean | null;
-
-    /**
-     * The URL to redirect the customer to after purchase.
-     */
-    redirect_url?: string | null;
 
     /**
      * The methods of how a plan can be released.
@@ -275,30 +235,9 @@ export namespace InvoiceCreateParams {
     renewal_price?: number | null;
 
     /**
-     * The number of payments required before pausing the subscription.
-     */
-    split_pay_required_payments?: number | null;
-
-    /**
-     * Marks whether payments using splitit, a payment processor, are/aren't accepted
-     * for the plan.
-     */
-    splitit_accepted?: boolean | null;
-
-    /**
-     * The number of units available for purchase.
-     */
-    stock?: number | null;
-
-    /**
      * The number of free trial days added before a renewal plan.
      */
     trial_period_days?: number | null;
-
-    /**
-     * Limits/doesn't limit the number of units available for purchase.
-     */
-    unlimited_stock?: boolean | null;
 
     /**
      * Visibility of a resource
