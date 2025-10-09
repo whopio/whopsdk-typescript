@@ -57,6 +57,10 @@ import list_messages from './messages/list-messages';
 import retrieve_chat_channels from './chat-channels/retrieve-chat-channels';
 import list_chat_channels from './chat-channels/list-chat-channels';
 import retrieve_users from './users/retrieve-users';
+import retrieve_payments from './payments/retrieve-payments';
+import list_payments from './payments/list-payments';
+import refund_payments from './payments/refund-payments';
+import retry_payments from './payments/retry-payments';
 
 export const endpoints: Endpoint[] = [];
 
@@ -117,6 +121,10 @@ addEndpoint(list_messages);
 addEndpoint(retrieve_chat_channels);
 addEndpoint(list_chat_channels);
 addEndpoint(retrieve_users);
+addEndpoint(retrieve_payments);
+addEndpoint(list_payments);
+addEndpoint(refund_payments);
+addEndpoint(retry_payments);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

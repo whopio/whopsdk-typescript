@@ -100,6 +100,13 @@ import {
   Messages,
 } from './resources/messages';
 import {
+  PaymentListParams,
+  PaymentListResponse,
+  PaymentListResponsesCursorPage,
+  PaymentRefundParams,
+  Payments,
+} from './resources/payments';
+import {
   PlanCreateParams,
   PlanDeleteResponse,
   PlanListParams,
@@ -869,6 +876,7 @@ export class Whopsdk {
   messages: API.Messages = new API.Messages(this);
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
   users: API.Users = new API.Users(this);
+  payments: API.Payments = new API.Payments(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -890,6 +898,7 @@ Whopsdk.CheckoutConfigurations = CheckoutConfigurations;
 Whopsdk.Messages = Messages;
 Whopsdk.ChatChannels = ChatChannels;
 Whopsdk.Users = Users;
+Whopsdk.Payments = Payments;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -1039,6 +1048,14 @@ export declare namespace Whopsdk {
 
   export { Users as Users, type UserRetrieveResponse as UserRetrieveResponse };
 
+  export {
+    Payments as Payments,
+    type PaymentListResponse as PaymentListResponse,
+    type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentListParams as PaymentListParams,
+    type PaymentRefundParams as PaymentRefundParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -1060,6 +1077,7 @@ export declare namespace Whopsdk {
   export type Entry = API.Entry;
   export type EntryStatus = API.EntryStatus;
   export type ForumPost = API.ForumPost;
+  export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
   export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
@@ -1068,10 +1086,13 @@ export declare namespace Whopsdk {
   export type Membership = API.Membership;
   export type MembershipStatus = API.MembershipStatus;
   export type PageInfo = API.PageInfo;
+  export type Payment = API.Payment;
   export type Plan = API.Plan;
   export type PlanType = API.PlanType;
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
+  export type PromoType = API.PromoType;
+  export type ReceiptStatus = API.ReceiptStatus;
   export type ReleaseMethod = API.ReleaseMethod;
   export type Shipment = API.Shipment;
   export type ShipmentCarrier = API.ShipmentCarrier;

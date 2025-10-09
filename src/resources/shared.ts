@@ -986,6 +986,27 @@ export namespace ForumPost {
 }
 
 /**
+ * The friendly status of a receipt
+ */
+export type FriendlyReceiptStatus =
+  | 'auto_refunded'
+  | 'refunded'
+  | 'partially_refunded'
+  | 'dispute_warning'
+  | 'open_resolution'
+  | 'open_dispute'
+  | 'failed'
+  | 'price_too_low'
+  | 'succeeded'
+  | 'drafted'
+  | 'uncollectible'
+  | 'unresolved'
+  | 'past_due'
+  | 'pending'
+  | 'incomplete'
+  | 'canceled';
+
+/**
  * The different statuses of the global affiliate program for an access pass.
  */
 export type GlobalAffiliateStatus = 'enabled' | 'disabled';
@@ -1449,6 +1470,324 @@ export interface PageInfo {
 }
 
 /**
+ * An object representing a receipt for a membership.
+ */
+export interface Payment {
+  /**
+   * The receipt ID
+   */
+  id: string;
+
+  /**
+   * How much the receipt is for after fees
+   */
+  amount_after_fees: number;
+
+  /**
+   * Whether this payment was auto refunded or not
+   */
+  auto_refunded: boolean;
+
+  /**
+   * The address of the user who made the payment.
+   */
+  billing_address: Payment.BillingAddress | null;
+
+  /**
+   * The billing reason
+   */
+  billing_reason: string | null;
+
+  /**
+   * The type of card used as the payment method.
+   */
+  card_brand: string | null;
+
+  /**
+   * The last 4 digits of the card used to make the payment.
+   */
+  card_last4: string | null;
+
+  /**
+   * The company for the receipt.
+   */
+  company: Payment.Company | null;
+
+  /**
+   * The datetime the receipt was created
+   */
+  created_at: number;
+
+  /**
+   * The available currencies on the platform
+   */
+  currency: Currency | null;
+
+  /**
+   * When an alert came in that this transaction will be disputed
+   */
+  dispute_alerted_at: number | null;
+
+  /**
+   * If the payment failed, the reason for the failure.
+   */
+  failure_message: string | null;
+
+  /**
+   * The time of the last payment attempt.
+   */
+  last_payment_attempt: number | null;
+
+  /**
+   * The membership attached to this receipt.
+   */
+  membership: Payment.Membership | null;
+
+  /**
+   * The datetime the receipt was paid
+   */
+  paid_at: number | null;
+
+  /**
+   * Returns the type of payment method used for the payment, if available. Ex.
+   * klarna, affirm, card, cashapp
+   */
+  payment_method_type: string | null;
+
+  /**
+   * The plan attached to this receipt.
+   */
+  plan: Payment.Plan | null;
+
+  /**
+   * The access pass attached to this receipt.
+   */
+  product: Payment.Product | null;
+
+  /**
+   * The promo code used for this receipt.
+   */
+  promo_code: Payment.PromoCode | null;
+
+  /**
+   * Whether the payment can be refunded.
+   */
+  refundable: boolean;
+
+  /**
+   * The payment refund amount(if applicable).
+   */
+  refunded_amount: number | null;
+
+  /**
+   * When the payment was refunded (if applicable).
+   */
+  refunded_at: number | null;
+
+  /**
+   * Whether the payment can be retried.
+   */
+  retryable: boolean;
+
+  /**
+   * The status of a receipt
+   */
+  status: ReceiptStatus | null;
+
+  /**
+   * The friendly status of the receipt.
+   */
+  substatus: FriendlyReceiptStatus;
+
+  /**
+   * The subtotal to show to the creator (excluding buyer fees).
+   */
+  subtotal: number | null;
+
+  /**
+   * The total to show to the creator (excluding buyer fees).
+   */
+  total: number | null;
+
+  /**
+   * The total in USD to show to the creator (excluding buyer fees).
+   */
+  usd_total: number | null;
+
+  /**
+   * The user that made this payment.
+   */
+  user: Payment.User | null;
+}
+
+export namespace Payment {
+  /**
+   * The address of the user who made the payment.
+   */
+  export interface BillingAddress {
+    /**
+     * The city of the address.
+     */
+    city: string | null;
+
+    /**
+     * The country of the address.
+     */
+    country: string | null;
+
+    /**
+     * The line 1 of the address.
+     */
+    line1: string | null;
+
+    /**
+     * The line 2 of the address.
+     */
+    line2: string | null;
+
+    /**
+     * The name of the customer.
+     */
+    name: string | null;
+
+    /**
+     * The postal code of the address.
+     */
+    postal_code: string | null;
+
+    /**
+     * The state of the address.
+     */
+    state: string | null;
+  }
+
+  /**
+   * The company for the receipt.
+   */
+  export interface Company {
+    /**
+     * The ID of the company
+     */
+    id: string;
+
+    /**
+     * The slug/route of the company on the Whop site.
+     */
+    route: string;
+
+    /**
+     * The written name of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * The membership attached to this receipt.
+   */
+  export interface Membership {
+    /**
+     * The internal ID of the membership.
+     */
+    id: string;
+
+    /**
+     * The state of the membership.
+     */
+    status: Shared.MembershipStatus;
+  }
+
+  /**
+   * The plan attached to this receipt.
+   */
+  export interface Plan {
+    /**
+     * The internal ID of the plan.
+     */
+    id: string;
+  }
+
+  /**
+   * The access pass attached to this receipt.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public access pass.
+     */
+    id: string;
+
+    /**
+     * The route of the access pass.
+     */
+    route: string;
+
+    /**
+     * The title of the access pass. Use for Whop 4.0.
+     */
+    title: string;
+  }
+
+  /**
+   * The promo code used for this receipt.
+   */
+  export interface PromoCode {
+    /**
+     * The ID of the promo.
+     */
+    id: string;
+
+    /**
+     * The amount off (% or flat amount) for the promo.
+     */
+    amount_off: number;
+
+    /**
+     * The monetary currency of the promo code.
+     */
+    base_currency: Shared.Currency;
+
+    /**
+     * The specific code used to apply the promo at checkout.
+     */
+    code: string | null;
+
+    /**
+     * The number of billing cycles the promo is applied for.
+     */
+    number_of_intervals: number | null;
+
+    /**
+     * The type (% or flat amount) of the promo.
+     */
+    promo_type: Shared.PromoType;
+  }
+
+  /**
+   * The user that made this payment.
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
  * An object representing a (sanitized) plan of an access pass.
  */
 export interface Plan {
@@ -1893,6 +2232,16 @@ export interface ProductListItem {
    */
   visibility: Visibility;
 }
+
+/**
+ * The type of promo code used to discount a plan
+ */
+export type PromoType = 'percentage' | 'flat_amount';
+
+/**
+ * The status of a receipt
+ */
+export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void';
 
 /**
  * The methods of how a plan can be released.

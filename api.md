@@ -23,6 +23,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Entry</a></code>
 - <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ForumPost</a></code>
+- <code><a href="./src/resources/shared.ts">FriendlyReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
 - <code><a href="./src/resources/shared.ts">IndustryTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
@@ -31,10 +32,13 @@ Types:
 - <code><a href="./src/resources/shared.ts">Membership</a></code>
 - <code><a href="./src/resources/shared.ts">MembershipStatus</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
+- <code><a href="./src/resources/shared.ts">Payment</a></code>
 - <code><a href="./src/resources/shared.ts">Plan</a></code>
 - <code><a href="./src/resources/shared.ts">PlanType</a></code>
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
+- <code><a href="./src/resources/shared.ts">PromoType</a></code>
+- <code><a href="./src/resources/shared.ts">ReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Shipment</a></code>
 - <code><a href="./src/resources/shared.ts">ShipmentCarrier</a></code>
@@ -273,3 +277,16 @@ Types:
 Methods:
 
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> UserRetrieveResponse</code>
+
+# Payments
+
+Types:
+
+- <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
+
+Methods:
+
+- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
+- <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
+- <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
+- <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
