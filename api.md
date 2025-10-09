@@ -263,3 +263,13 @@ Methods:
 
 - <code title="get /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">retrieve</a>(id) -> ChatChannelRetrieveResponse</code>
 - <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>
+
+# Users
+
+Types:
+
+- <code><a href="./src/resources/users.ts">UserRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> UserRetrieveResponse</code>
