@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'delete_plans',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nDelete an existing Plan\n\nRequired permissions:\n - `plan:delete`\n\n# Response Schema\n```json\n{\n  type: 'boolean',\n  description: 'Represents `true` or `false` values.'\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nDelete an existing Plan\n\nRequired permissions:\n - `plan:delete`\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/plan_delete_response',\n  $defs: {\n    plan_delete_response: {\n      type: 'boolean',\n      description: 'Represents `true` or `false` values.'\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {

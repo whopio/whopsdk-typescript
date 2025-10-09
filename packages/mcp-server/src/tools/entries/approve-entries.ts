@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'approve_entries',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nApprove an entry\n\nRequired permissions:\n - `plan:waitlist:manage`\n\n# Response Schema\n```json\n{\n  type: 'object',\n  description: 'An object representing an asynchronous job.',\n  properties: {\n    job_id: {\n      type: 'string',\n      description: 'The ID of the job.'\n    }\n  },\n  required: [    'job_id'\n  ]\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nApprove an entry\n\nRequired permissions:\n - `plan:waitlist:manage`\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/entry_approve_response',\n  $defs: {\n    entry_approve_response: {\n      type: 'object',\n      description: 'An object representing an asynchronous job.',\n      properties: {\n        job_id: {\n          type: 'string',\n          description: 'The ID of the job.'\n        }\n      },\n      required: [        'job_id'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
