@@ -591,3 +591,49 @@ The following tools are available in this MCP server.
 ### Resource `users`:
 
 - `retrieve_users` (`read`): Retrieves a user by ID or username
+
+### Resource `payments`:
+
+- `retrieve_payments` (`read`): Retrieves a payment by ID
+
+  Required permissions:
+
+  - `payment:basic:read`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `promo_code:basic:read`
+
+- `list_payments` (`read`): Lists payments
+
+  Required permissions:
+
+  - `payment:basic:read`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `promo_code:basic:read`
+
+- `refund_payments` (`write`): Refunds a payment
+
+  Required permissions:
+
+  - `payment:manage`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `promo_code:basic:read`
+
+- `retry_payments` (`write`): Retries a payment
+
+  Required permissions:
+
+  - `payment:manage`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `promo_code:basic:read`
