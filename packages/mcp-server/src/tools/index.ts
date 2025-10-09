@@ -52,6 +52,10 @@ import list_shipments from './shipments/list-shipments';
 import create_checkout_configurations from './checkout-configurations/create-checkout-configurations';
 import retrieve_checkout_configurations from './checkout-configurations/retrieve-checkout-configurations';
 import list_checkout_configurations from './checkout-configurations/list-checkout-configurations';
+import retrieve_messages from './messages/retrieve-messages';
+import list_messages from './messages/list-messages';
+import retrieve_chat_channels from './chat-channels/retrieve-chat-channels';
+import list_chat_channels from './chat-channels/list-chat-channels';
 
 export const endpoints: Endpoint[] = [];
 
@@ -107,6 +111,10 @@ addEndpoint(list_shipments);
 addEndpoint(create_checkout_configurations);
 addEndpoint(retrieve_checkout_configurations);
 addEndpoint(list_checkout_configurations);
+addEndpoint(retrieve_messages);
+addEndpoint(list_messages);
+addEndpoint(retrieve_chat_channels);
+addEndpoint(list_chat_channels);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

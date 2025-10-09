@@ -782,6 +782,11 @@ export type CustomCta =
 export type Direction = 'asc' | 'desc';
 
 /**
+ * The types of post
+ */
+export type DmsPostTypes = 'regular' | 'system' | 'automated';
+
+/**
  * An object representing an entry in a waitlist.
  */
 export interface Entry {
@@ -2269,6 +2274,16 @@ export type VisibilityFilter =
   | 'all'
   | 'not_quick_link'
   | 'not_archived';
+
+/**
+ * Who can post on a chat feed
+ */
+export type WhoCanPost = 'everyone' | 'admins';
+
+/**
+ * Who can react on a chat feed
+ */
+export type WhoCanReact = 'everyone' | 'no_one';
 
 export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 
