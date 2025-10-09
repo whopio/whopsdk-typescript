@@ -19,6 +19,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Currency</a></code>
 - <code><a href="./src/resources/shared.ts">CustomCta</a></code>
 - <code><a href="./src/resources/shared.ts">Direction</a></code>
+- <code><a href="./src/resources/shared.ts">DmsPostTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Entry</a></code>
 - <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ForumPost</a></code>
@@ -43,6 +44,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
 - <code><a href="./src/resources/shared.ts">VisibilityFilter</a></code>
+- <code><a href="./src/resources/shared.ts">WhoCanPost</a></code>
+- <code><a href="./src/resources/shared.ts">WhoCanReact</a></code>
 
 # Apps
 
@@ -236,3 +239,27 @@ Methods:
 - <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfiguration</code>
 - <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id) -> CheckoutConfiguration</code>
 - <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>
+
+# Messages
+
+Types:
+
+- <code><a href="./src/resources/messages.ts">MessageRetrieveResponse</a></code>
+- <code><a href="./src/resources/messages.ts">MessageListResponse</a></code>
+
+Methods:
+
+- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> MessageRetrieveResponse</code>
+- <code title="get /messages">client.messages.<a href="./src/resources/messages.ts">list</a>({ ...params }) -> MessageListResponsesCursorPage</code>
+
+# ChatChannels
+
+Types:
+
+- <code><a href="./src/resources/chat-channels.ts">ChatChannelRetrieveResponse</a></code>
+- <code><a href="./src/resources/chat-channels.ts">ChatChannelListResponse</a></code>
+
+Methods:
+
+- <code title="get /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">retrieve</a>(id) -> ChatChannelRetrieveResponse</code>
+- <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>

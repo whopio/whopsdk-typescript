@@ -42,6 +42,13 @@ import {
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
+  ChatChannelListParams,
+  ChatChannelListResponse,
+  ChatChannelListResponsesCursorPage,
+  ChatChannelRetrieveResponse,
+  ChatChannels,
+} from './resources/chat-channels';
+import {
   CheckoutConfigurationCreateParams,
   CheckoutConfigurationListParams,
   CheckoutConfigurationListResponse,
@@ -85,6 +92,13 @@ import {
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
+import {
+  MessageListParams,
+  MessageListResponse,
+  MessageListResponsesCursorPage,
+  MessageRetrieveResponse,
+  Messages,
+} from './resources/messages';
 import {
   PlanCreateParams,
   PlanDeleteResponse,
@@ -851,6 +865,8 @@ export class Whopsdk {
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
   checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
+  messages: API.Messages = new API.Messages(this);
+  chatChannels: API.ChatChannels = new API.ChatChannels(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -869,6 +885,8 @@ Whopsdk.AuthorizedUsers = AuthorizedUsers;
 Whopsdk.AppBuilds = AppBuilds;
 Whopsdk.Shipments = Shipments;
 Whopsdk.CheckoutConfigurations = CheckoutConfigurations;
+Whopsdk.Messages = Messages;
+Whopsdk.ChatChannels = ChatChannels;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -1000,6 +1018,22 @@ export declare namespace Whopsdk {
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
   };
 
+  export {
+    Messages as Messages,
+    type MessageRetrieveResponse as MessageRetrieveResponse,
+    type MessageListResponse as MessageListResponse,
+    type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageListParams as MessageListParams,
+  };
+
+  export {
+    ChatChannels as ChatChannels,
+    type ChatChannelRetrieveResponse as ChatChannelRetrieveResponse,
+    type ChatChannelListResponse as ChatChannelListResponse,
+    type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
+    type ChatChannelListParams as ChatChannelListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -1017,6 +1051,7 @@ export declare namespace Whopsdk {
   export type Currency = API.Currency;
   export type CustomCta = API.CustomCta;
   export type Direction = API.Direction;
+  export type DmsPostTypes = API.DmsPostTypes;
   export type Entry = API.Entry;
   export type EntryStatus = API.EntryStatus;
   export type ForumPost = API.ForumPost;
@@ -1041,4 +1076,6 @@ export declare namespace Whopsdk {
   export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;
   export type VisibilityFilter = API.VisibilityFilter;
+  export type WhoCanPost = API.WhoCanPost;
+  export type WhoCanReact = API.WhoCanReact;
 }

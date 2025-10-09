@@ -559,3 +559,31 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `checkout_configuration:basic:read`
+
+### Resource `messages`:
+
+- `retrieve_messages` (`read`): Retrieves a message
+
+  Required permissions:
+
+  - `chat:read`
+
+- `list_messages` (`read`): Lists messages inside a channel
+
+  Required permissions:
+
+  - `chat:read`
+
+### Resource `chat_channels`:
+
+- `retrieve_chat_channels` (`read`): Retrieves a chat channel
+
+  Required permissions:
+
+  - `chat:read`
+
+- `list_chat_channels` (`read`): Lists chat channels inside a company
+
+  Required permissions:
+
+  - `chat:read`

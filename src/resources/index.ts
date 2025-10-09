@@ -24,6 +24,13 @@ export {
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
+  ChatChannels,
+  type ChatChannelRetrieveResponse,
+  type ChatChannelListResponse,
+  type ChatChannelListParams,
+  type ChatChannelListResponsesCursorPage,
+} from './chat-channels';
+export {
   CheckoutConfigurations,
   type CheckoutConfigurationListResponse,
   type CheckoutConfigurationCreateParams,
@@ -67,6 +74,13 @@ export {
   type MembershipCancelParams,
   type MembershipListResponsesCursorPage,
 } from './memberships';
+export {
+  Messages,
+  type MessageRetrieveResponse,
+  type MessageListResponse,
+  type MessageListParams,
+  type MessageListResponsesCursorPage,
+} from './messages';
 export {
   Plans,
   type PlanListResponse,
