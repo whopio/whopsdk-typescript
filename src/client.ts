@@ -130,6 +130,7 @@ import {
   TransferListResponsesCursorPage,
   Transfers,
 } from './resources/transfers';
+import { UserRetrieveResponse, Users } from './resources/users';
 import {
   InvoiceCreatedWebhookEvent,
   InvoicePaidWebhookEvent,
@@ -867,6 +868,7 @@ export class Whopsdk {
   checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
   messages: API.Messages = new API.Messages(this);
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
+  users: API.Users = new API.Users(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -887,6 +889,7 @@ Whopsdk.Shipments = Shipments;
 Whopsdk.CheckoutConfigurations = CheckoutConfigurations;
 Whopsdk.Messages = Messages;
 Whopsdk.ChatChannels = ChatChannels;
+Whopsdk.Users = Users;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -1033,6 +1036,8 @@ export declare namespace Whopsdk {
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
     type ChatChannelListParams as ChatChannelListParams,
   };
+
+  export { Users as Users, type UserRetrieveResponse as UserRetrieveResponse };
 
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;

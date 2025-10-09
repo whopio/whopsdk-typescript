@@ -56,6 +56,7 @@ import retrieve_messages from './messages/retrieve-messages';
 import list_messages from './messages/list-messages';
 import retrieve_chat_channels from './chat-channels/retrieve-chat-channels';
 import list_chat_channels from './chat-channels/list-chat-channels';
+import retrieve_users from './users/retrieve-users';
 
 export const endpoints: Endpoint[] = [];
 
@@ -115,6 +116,7 @@ addEndpoint(retrieve_messages);
 addEndpoint(list_messages);
 addEndpoint(retrieve_chat_channels);
 addEndpoint(list_chat_channels);
+addEndpoint(retrieve_users);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

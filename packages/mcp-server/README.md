@@ -587,3 +587,7 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `chat:read`
+
+### Resource `users`:
+
+- `retrieve_users` (`read`): Retrieves a user by ID or username
