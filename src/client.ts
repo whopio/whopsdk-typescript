@@ -57,7 +57,6 @@ import {
 } from './resources/checkout-configurations';
 import { Companies } from './resources/companies';
 import {
-  CourseLessonInteractionListItemsCursorPage,
   CourseLessonInteractionListParams,
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
@@ -78,7 +77,6 @@ import {
 import {
   InvoiceCreateParams,
   InvoiceCreateResponse,
-  InvoiceListItemsCursorPage,
   InvoiceListParams,
   InvoiceVoidResponse,
   Invoices,
@@ -118,7 +116,6 @@ import {
 import {
   ProductCreateParams,
   ProductDeleteResponse,
-  ProductListItemsCursorPage,
   ProductListParams,
   ProductUpdateParams,
   Products,
@@ -928,21 +925,18 @@ export declare namespace Whopsdk {
     Invoices as Invoices,
     type InvoiceCreateResponse as InvoiceCreateResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
-    type InvoiceListItemsCursorPage as InvoiceListItemsCursorPage,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
   };
 
   export {
     CourseLessonInteractions as CourseLessonInteractions,
-    type CourseLessonInteractionListItemsCursorPage as CourseLessonInteractionListItemsCursorPage,
     type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
   };
 
   export {
     Products as Products,
     type ProductDeleteResponse as ProductDeleteResponse,
-    type ProductListItemsCursorPage as ProductListItemsCursorPage,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
