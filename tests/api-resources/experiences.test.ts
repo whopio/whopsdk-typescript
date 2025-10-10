@@ -7,10 +7,35 @@ const client = new Whopsdk({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource memberships', () => {
+describe('resource experiences', () => {
+  // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.experiences.create({
+      app_id: 'app_xxxxxxxxxxxxxx',
+      company_id: 'biz_xxxxxxxxxxxxxx',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.experiences.create({
+      app_id: 'app_xxxxxxxxxxxxxx',
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      name: 'name',
+      section_id: 'section_id',
+    });
+  });
+
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.memberships.retrieve('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.experiences.retrieve('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +47,7 @@ describe('resource memberships', () => {
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.memberships.update('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.experiences.update('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,9 +61,15 @@ describe('resource memberships', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.update(
-        'mem_xxxxxxxxxxxxxx',
-        { metadata: { foo: 'bar' } },
+      client.experiences.update(
+        'exp_xxxxxxxxxxxxxx',
+        {
+          access_level: 'public',
+          logo: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          name: 'name',
+          order: '123.45',
+          section_id: 'section_id',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whopsdk.NotFoundError);
@@ -46,7 +77,7 @@ describe('resource memberships', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.memberships.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.experiences.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,27 +89,20 @@ describe('resource memberships', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.memberships.list({
+    const response = await client.experiences.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
-      access_pass_ids: ['string'],
       after: 'after',
+      app_id: 'app_xxxxxxxxxxxxxx',
       before: 'before',
-      cancel_options: ['too_expensive'],
-      created_after: 1701406800,
-      created_before: 1701406800,
-      direction: 'asc',
       first: 42,
       last: 42,
-      order: 'id',
-      plan_ids: ['string'],
-      promo_code_ids: ['string'],
-      statuses: ['trialing'],
+      product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
 
   // Prism tests are disabled
-  test.skip('cancel', async () => {
-    const responsePromise = client.memberships.cancel('mem_xxxxxxxxxxxxxx');
+  test.skip('delete', async () => {
+    const responsePromise = client.experiences.delete('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,20 +113,10 @@ describe('resource memberships', () => {
   });
 
   // Prism tests are disabled
-  test.skip('cancel: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.memberships.cancel(
-        'mem_xxxxxxxxxxxxxx',
-        { cancellation_mode: 'at_period_end' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whopsdk.NotFoundError);
-  });
-
-  // Prism tests are disabled
-  test.skip('pause', async () => {
-    const responsePromise = client.memberships.pause('mem_xxxxxxxxxxxxxx');
+  test.skip('attach: only required params', async () => {
+    const responsePromise = client.experiences.attach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -113,20 +127,17 @@ describe('resource memberships', () => {
   });
 
   // Prism tests are disabled
-  test.skip('pause: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.memberships.pause(
-        'mem_xxxxxxxxxxxxxx',
-        { void_payments: true },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whopsdk.NotFoundError);
+  test.skip('attach: required and optional params', async () => {
+    const response = await client.experiences.attach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
   });
 
   // Prism tests are disabled
-  test.skip('resume', async () => {
-    const responsePromise = client.memberships.resume('mem_xxxxxxxxxxxxxx');
+  test.skip('detach: only required params', async () => {
+    const responsePromise = client.experiences.detach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -134,5 +145,12 @@ describe('resource memberships', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('detach: required and optional params', async () => {
+    const response = await client.experiences.detach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
   });
 });

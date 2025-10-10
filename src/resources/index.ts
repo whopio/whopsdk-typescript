@@ -50,6 +50,17 @@ export {
   type EntryListResponsesCursorPage,
 } from './entries';
 export {
+  Experiences,
+  type ExperienceListResponse,
+  type ExperienceDeleteResponse,
+  type ExperienceCreateParams,
+  type ExperienceUpdateParams,
+  type ExperienceListParams,
+  type ExperienceAttachParams,
+  type ExperienceDetachParams,
+  type ExperienceListResponsesCursorPage,
+} from './experiences';
+export {
   ForumPosts,
   type ForumPostListResponse,
   type ForumPostCreateParams,
@@ -70,6 +81,7 @@ export {
   type MembershipUpdateParams,
   type MembershipListParams,
   type MembershipCancelParams,
+  type MembershipPauseParams,
   type MembershipListResponsesCursorPage,
 } from './memberships';
 export {
