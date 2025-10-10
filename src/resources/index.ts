@@ -76,8 +76,8 @@ export {
 } from './memberships';
 export {
   Messages,
-  type MessageRetrieveResponse,
   type MessageListResponse,
+  type MessageCreateParams,
   type MessageListParams,
   type MessageListResponsesCursorPage,
 } from './messages';
@@ -112,6 +112,13 @@ export {
   type ShipmentListParams,
   type ShipmentListResponsesCursorPage,
 } from './shipments';
+export {
+  SupportChannels,
+  type SupportChannelRetrieveResponse,
+  type SupportChannelListResponse,
+  type SupportChannelListParams,
+  type SupportChannelListResponsesCursorPage,
+} from './support-channels';
 export {
   Transfers,
   type TransferListResponse,

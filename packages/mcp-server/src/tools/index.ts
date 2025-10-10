@@ -52,6 +52,7 @@ import list_shipments from './shipments/list-shipments';
 import create_checkout_configurations from './checkout-configurations/create-checkout-configurations';
 import retrieve_checkout_configurations from './checkout-configurations/retrieve-checkout-configurations';
 import list_checkout_configurations from './checkout-configurations/list-checkout-configurations';
+import create_messages from './messages/create-messages';
 import retrieve_messages from './messages/retrieve-messages';
 import list_messages from './messages/list-messages';
 import retrieve_chat_channels from './chat-channels/retrieve-chat-channels';
@@ -61,6 +62,8 @@ import retrieve_payments from './payments/retrieve-payments';
 import list_payments from './payments/list-payments';
 import refund_payments from './payments/refund-payments';
 import retry_payments from './payments/retry-payments';
+import retrieve_support_channels from './support-channels/retrieve-support-channels';
+import list_support_channels from './support-channels/list-support-channels';
 
 export const endpoints: Endpoint[] = [];
 
@@ -116,6 +119,7 @@ addEndpoint(list_shipments);
 addEndpoint(create_checkout_configurations);
 addEndpoint(retrieve_checkout_configurations);
 addEndpoint(list_checkout_configurations);
+addEndpoint(create_messages);
 addEndpoint(retrieve_messages);
 addEndpoint(list_messages);
 addEndpoint(retrieve_chat_channels);
@@ -125,6 +129,8 @@ addEndpoint(retrieve_payments);
 addEndpoint(list_payments);
 addEndpoint(refund_payments);
 addEndpoint(retry_payments);
+addEndpoint(retrieve_support_channels);
+addEndpoint(list_support_channels);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

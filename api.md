@@ -31,6 +31,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
 - <code><a href="./src/resources/shared.ts">Membership</a></code>
 - <code><a href="./src/resources/shared.ts">MembershipStatus</a></code>
+- <code><a href="./src/resources/shared.ts">Message</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Payment</a></code>
 - <code><a href="./src/resources/shared.ts">Plan</a></code>
@@ -248,12 +249,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/messages.ts">MessageRetrieveResponse</a></code>
 - <code><a href="./src/resources/messages.ts">MessageListResponse</a></code>
 
 Methods:
 
-- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> MessageRetrieveResponse</code>
+- <code title="post /messages">client.messages.<a href="./src/resources/messages.ts">create</a>({ ...params }) -> Message</code>
+- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
 - <code title="get /messages">client.messages.<a href="./src/resources/messages.ts">list</a>({ ...params }) -> MessageListResponsesCursorPage</code>
 
 # ChatChannels
@@ -290,3 +291,15 @@ Methods:
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
 - <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
+
+# SupportChannels
+
+Types:
+
+- <code><a href="./src/resources/support-channels.ts">SupportChannelRetrieveResponse</a></code>
+- <code><a href="./src/resources/support-channels.ts">SupportChannelListResponse</a></code>
+
+Methods:
+
+- <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannelRetrieveResponse</code>
+- <code title="get /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">list</a>({ ...params }) -> SupportChannelListResponsesCursorPage</code>

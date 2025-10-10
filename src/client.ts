@@ -93,10 +93,10 @@ import {
   Memberships,
 } from './resources/memberships';
 import {
+  MessageCreateParams,
   MessageListParams,
   MessageListResponse,
   MessageListResponsesCursorPage,
-  MessageRetrieveResponse,
   Messages,
 } from './resources/messages';
 import {
@@ -130,6 +130,13 @@ import {
   ShipmentListResponsesCursorPage,
   Shipments,
 } from './resources/shipments';
+import {
+  SupportChannelListParams,
+  SupportChannelListResponse,
+  SupportChannelListResponsesCursorPage,
+  SupportChannelRetrieveResponse,
+  SupportChannels,
+} from './resources/support-channels';
 import {
   TransferCreateParams,
   TransferListParams,
@@ -877,6 +884,7 @@ export class Whopsdk {
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
   users: API.Users = new API.Users(this);
   payments: API.Payments = new API.Payments(this);
+  supportChannels: API.SupportChannels = new API.SupportChannels(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -899,6 +907,7 @@ Whopsdk.Messages = Messages;
 Whopsdk.ChatChannels = ChatChannels;
 Whopsdk.Users = Users;
 Whopsdk.Payments = Payments;
+Whopsdk.SupportChannels = SupportChannels;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -1032,9 +1041,9 @@ export declare namespace Whopsdk {
 
   export {
     Messages as Messages,
-    type MessageRetrieveResponse as MessageRetrieveResponse,
     type MessageListResponse as MessageListResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageCreateParams as MessageCreateParams,
     type MessageListParams as MessageListParams,
   };
 
@@ -1054,6 +1063,14 @@ export declare namespace Whopsdk {
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
     type PaymentListParams as PaymentListParams,
     type PaymentRefundParams as PaymentRefundParams,
+  };
+
+  export {
+    SupportChannels as SupportChannels,
+    type SupportChannelRetrieveResponse as SupportChannelRetrieveResponse,
+    type SupportChannelListResponse as SupportChannelListResponse,
+    type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
+    type SupportChannelListParams as SupportChannelListParams,
   };
 
   export type AccessPassType = API.AccessPassType;
@@ -1085,6 +1102,7 @@ export declare namespace Whopsdk {
   export type InvoiceStatus = API.InvoiceStatus;
   export type Membership = API.Membership;
   export type MembershipStatus = API.MembershipStatus;
+  export type Message = API.Message;
   export type PageInfo = API.PageInfo;
   export type Payment = API.Payment;
   export type Plan = API.Plan;

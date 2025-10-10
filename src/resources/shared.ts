@@ -1450,6 +1450,145 @@ export type MembershipStatus =
   | 'drafted';
 
 /**
+ * Represents a message in a DM channel
+ */
+export interface Message {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The content of the message in Markdown format
+   */
+  content: string | null;
+
+  /**
+   * Whether the message has been edited
+   */
+  is_edited: boolean;
+
+  /**
+   * Whether this message is pinned
+   */
+  is_pinned: boolean;
+
+  /**
+   * The type of post
+   */
+  message_type: DmsPostTypes;
+
+  /**
+   * The poll for this message
+   */
+  poll: Message.Poll | null;
+
+  /**
+   * The reaction counts for this message
+   */
+  poll_votes: Array<Message.PollVote>;
+
+  /**
+   * The reaction counts for this message
+   */
+  reaction_counts: Array<Message.ReactionCount>;
+
+  /**
+   * The ID of the message this is replying to, if applicable
+   */
+  replying_to_message_id: string | null;
+
+  /**
+   * The user who sent this message
+   */
+  user: Message.User;
+
+  /**
+   * The number of times this message has been viewed
+   */
+  view_count: number | null;
+}
+
+export namespace Message {
+  /**
+   * The poll for this message
+   */
+  export interface Poll {
+    /**
+     * The options for the poll
+     */
+    options: Array<Poll.Option> | null;
+  }
+
+  export namespace Poll {
+    /**
+     * Represents a single poll option
+     */
+    export interface Option {
+      /**
+       * The ID of the poll option
+       */
+      id: string;
+
+      /**
+       * The text of the poll option
+       */
+      text: string;
+    }
+  }
+
+  /**
+   * Represents a reaction count for a feed post
+   */
+  export interface PollVote {
+    /**
+     * The number of users who reacted
+     */
+    count: number;
+
+    /**
+     * The reaction that was used
+     */
+    option_id: string | null;
+  }
+
+  /**
+   * Represents a reaction count for a feed post
+   */
+  export interface ReactionCount {
+    /**
+     * The number of users who reacted
+     */
+    count: number;
+
+    /**
+     * The emoji that was used in shortcode format (:heart:)
+     */
+    emoji: string | null;
+  }
+
+  /**
+   * The user who sent this message
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
  * Information about pagination in a connection.
  */
 export interface PageInfo {
