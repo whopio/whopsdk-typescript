@@ -265,6 +265,11 @@ export interface PaymentListResponse {
    * The user that made this payment.
    */
   user: PaymentListResponse.User | null;
+
+  /**
+   * Whether the payment can be voided.
+   */
+  voidable: boolean;
 }
 
 export namespace PaymentListResponse {

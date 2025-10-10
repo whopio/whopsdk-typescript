@@ -1762,6 +1762,11 @@ export interface Payment {
    * The user that made this payment.
    */
   user: Payment.User | null;
+
+  /**
+   * Whether the payment can be voided.
+   */
+  voidable: boolean;
 }
 
 export namespace Payment {
