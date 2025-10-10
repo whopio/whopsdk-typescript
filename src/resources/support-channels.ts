@@ -64,6 +64,11 @@ export interface SupportChannelRetrieveResponse {
   customer_user: SupportChannelRetrieveResponse.CustomerUser | null;
 
   /**
+   * When the last message was sent
+   */
+  last_message_at: number | null;
+
+  /**
    * When the support ticket was resolved (null if unresolved)
    */
   resolved_at: number | null;
@@ -114,6 +119,11 @@ export interface SupportChannelListResponse {
    * The customer user if this is a support chat
    */
   customer_user: SupportChannelListResponse.CustomerUser | null;
+
+  /**
+   * When the last message was sent
+   */
+  last_message_at: number | null;
 
   /**
    * When the support ticket was resolved (null if unresolved)
