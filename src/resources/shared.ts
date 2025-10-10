@@ -1783,6 +1783,11 @@ export interface Payment {
   last_payment_attempt: number | null;
 
   /**
+   * The member attached to this receipt.
+   */
+  member: Payment.Member | null;
+
+  /**
    * The membership attached to this receipt.
    */
   membership: Payment.Membership | null;
@@ -1928,6 +1933,21 @@ export namespace Payment {
      * The written name of the company.
      */
     title: string;
+  }
+
+  /**
+   * The member attached to this receipt.
+   */
+  export interface Member {
+    /**
+     * The ID of the member
+     */
+    id: string;
+
+    /**
+     * The phone number for the member, if available.
+     */
+    phone: string | null;
   }
 
   /**

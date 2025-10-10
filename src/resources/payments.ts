@@ -18,6 +18,7 @@ export class Payments extends APIResource {
    * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
+   * - `member:phone:read`
    * - `promo_code:basic:read`
    *
    * @example
@@ -41,6 +42,7 @@ export class Payments extends APIResource {
    * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
+   * - `member:phone:read`
    * - `promo_code:basic:read`
    *
    * @example
@@ -73,6 +75,7 @@ export class Payments extends APIResource {
    * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
+   * - `member:phone:read`
    * - `promo_code:basic:read`
    *
    * @example
@@ -100,6 +103,7 @@ export class Payments extends APIResource {
    * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
+   * - `member:phone:read`
    * - `promo_code:basic:read`
    *
    * @example
@@ -123,6 +127,7 @@ export class Payments extends APIResource {
    * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
+   * - `member:phone:read`
    * - `promo_code:basic:read`
    *
    * @example
@@ -207,6 +212,11 @@ export interface PaymentListResponse {
    * The time of the last payment attempt.
    */
   last_payment_attempt: number | null;
+
+  /**
+   * The member attached to this receipt.
+   */
+  member: PaymentListResponse.Member | null;
 
   /**
    * The membership attached to this receipt.
@@ -354,6 +364,21 @@ export namespace PaymentListResponse {
      * The written name of the company.
      */
     title: string;
+  }
+
+  /**
+   * The member attached to this receipt.
+   */
+  export interface Member {
+    /**
+     * The ID of the member
+     */
+    id: string;
+
+    /**
+     * The phone number for the member, if available.
+     */
+    phone: string | null;
   }
 
   /**

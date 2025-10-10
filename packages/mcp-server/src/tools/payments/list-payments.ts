@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_payments',
   description:
-    'Lists payments\n\nRequired permissions:\n - `payment:basic:read`\n - `plan:basic:read`\n - `access_pass:basic:read`\n - `member:email:read`\n - `member:basic:read`\n - `promo_code:basic:read`',
+    'Lists payments\n\nRequired permissions:\n - `payment:basic:read`\n - `plan:basic:read`\n - `access_pass:basic:read`\n - `member:email:read`\n - `member:basic:read`\n - `member:phone:read`\n - `promo_code:basic:read`',
   inputSchema: {
     type: 'object',
     properties: {
