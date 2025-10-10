@@ -562,6 +562,12 @@ The following tools are available in this MCP server.
 
 ### Resource `messages`:
 
+- `create_messages` (`write`): Creates a new message
+
+  Required permissions:
+
+  - `chat:message:create`
+
 - `retrieve_messages` (`read`): Retrieves a message
 
   Required permissions:
@@ -637,3 +643,17 @@ The following tools are available in this MCP server.
   - `member:email:read`
   - `member:basic:read`
   - `promo_code:basic:read`
+
+### Resource `support_channels`:
+
+- `retrieve_support_channels` (`read`): Retrieves a support channel
+
+  Required permissions:
+
+  - `support_chat:read`
+
+- `list_support_channels` (`read`): Lists chat channels inside a company
+
+  Required permissions:
+
+  - `support_chat:read`

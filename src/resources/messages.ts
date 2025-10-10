@@ -9,13 +9,36 @@ import { path } from '../internal/utils/path';
 
 export class Messages extends APIResource {
   /**
+   * Creates a new message
+   *
+   * Required permissions:
+   *
+   * - `chat:message:create`
+   *
+   * @example
+   * ```ts
+   * const message = await client.messages.create({
+   *   content: 'content',
+   * });
+   * ```
+   */
+  create(body: MessageCreateParams, options?: RequestOptions): APIPromise<Shared.Message> {
+    return this._client.post('/messages', { body, ...options });
+  }
+
+  /**
    * Retrieves a message
    *
    * Required permissions:
    *
    * - `chat:read`
+   *
+   * @example
+   * ```ts
+   * const message = await client.messages.retrieve('id');
+   * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<MessageRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Message> {
     return this._client.get(path`/messages/${id}`, options);
   }
 
@@ -25,6 +48,16 @@ export class Messages extends APIResource {
    * Required permissions:
    *
    * - `chat:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const messageListResponse of client.messages.list(
+   *   { channel_id: 'channel_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: MessageListParams,
@@ -38,145 +71,6 @@ export class Messages extends APIResource {
 }
 
 export type MessageListResponsesCursorPage = CursorPage<MessageListResponse | null>;
-
-/**
- * Represents a message in a DM channel
- */
-export interface MessageRetrieveResponse {
-  /**
-   * The unique identifier for the entity
-   */
-  id: string;
-
-  /**
-   * The content of the message in Markdown format
-   */
-  content: string | null;
-
-  /**
-   * Whether the message has been edited
-   */
-  is_edited: boolean;
-
-  /**
-   * Whether this message is pinned
-   */
-  is_pinned: boolean;
-
-  /**
-   * The type of post
-   */
-  message_type: Shared.DmsPostTypes;
-
-  /**
-   * The poll for this message
-   */
-  poll: MessageRetrieveResponse.Poll | null;
-
-  /**
-   * The reaction counts for this message
-   */
-  poll_votes: Array<MessageRetrieveResponse.PollVote>;
-
-  /**
-   * The reaction counts for this message
-   */
-  reaction_counts: Array<MessageRetrieveResponse.ReactionCount>;
-
-  /**
-   * The ID of the message this is replying to, if applicable
-   */
-  replying_to_message_id: string | null;
-
-  /**
-   * The user who sent this message
-   */
-  user: MessageRetrieveResponse.User;
-
-  /**
-   * The number of times this message has been viewed
-   */
-  view_count: number | null;
-}
-
-export namespace MessageRetrieveResponse {
-  /**
-   * The poll for this message
-   */
-  export interface Poll {
-    /**
-     * The options for the poll
-     */
-    options: Array<Poll.Option> | null;
-  }
-
-  export namespace Poll {
-    /**
-     * Represents a single poll option
-     */
-    export interface Option {
-      /**
-       * The ID of the poll option
-       */
-      id: string;
-
-      /**
-       * The text of the poll option
-       */
-      text: string;
-    }
-  }
-
-  /**
-   * Represents a reaction count for a feed post
-   */
-  export interface PollVote {
-    /**
-     * The number of users who reacted
-     */
-    count: number;
-
-    /**
-     * The reaction that was used
-     */
-    option_id: string | null;
-  }
-
-  /**
-   * Represents a reaction count for a feed post
-   */
-  export interface ReactionCount {
-    /**
-     * The number of users who reacted
-     */
-    count: number;
-
-    /**
-     * The emoji that was used in shortcode format (:heart:)
-     */
-    emoji: string | null;
-  }
-
-  /**
-   * The user who sent this message
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-
-    /**
-     * The name of the user from their Whop account.
-     */
-    name: string | null;
-
-    /**
-     * The username of the user from their Whop account.
-     */
-    username: string;
-  }
-}
 
 /**
  * Represents a message in a DM channel
@@ -317,6 +211,81 @@ export namespace MessageListResponse {
   }
 }
 
+export interface MessageCreateParams {
+  /**
+   * The content of the message in Markdown format.
+   */
+  content: string;
+
+  /**
+   * The attachments for this message, such as videos or images.
+   */
+  attachments?: Array<MessageCreateParams.Attachment> | null;
+
+  /**
+   * The ID of the channel to send to.
+   */
+  channel_id?: string | null;
+
+  /**
+   * The ID of the chat experience to send the message in.
+   */
+  experience_id?: string | null;
+
+  /**
+   * The poll for this message
+   */
+  poll?: MessageCreateParams.Poll | null;
+}
+
+export namespace MessageCreateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface Attachment {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id?: string | null;
+
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id?: string | null;
+  }
+
+  /**
+   * The poll for this message
+   */
+  export interface Poll {
+    /**
+     * The options for the poll. Must have sequential IDs starting from 1
+     */
+    options: Array<Poll.Option>;
+  }
+
+  export namespace Poll {
+    /**
+     * Input type for a single poll option
+     */
+    export interface Option {
+      /**
+       * Sequential ID for the poll option (starting from '1')
+       */
+      id: string;
+
+      /**
+       * The text of the poll option
+       */
+      text: string;
+    }
+  }
+}
+
 export interface MessageListParams extends CursorPageParams {
   /**
    * The ID of the channel or the experience ID to list messages for
@@ -341,9 +310,9 @@ export interface MessageListParams extends CursorPageParams {
 
 export declare namespace Messages {
   export {
-    type MessageRetrieveResponse as MessageRetrieveResponse,
     type MessageListResponse as MessageListResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageCreateParams as MessageCreateParams,
     type MessageListParams as MessageListParams,
   };
 }
