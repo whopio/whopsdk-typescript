@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
+import { CourseLessonInteractionListItemsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -39,9 +40,6 @@ export class CourseLessonInteractions extends APIResource {
     );
   }
 }
-
-export type CourseLessonInteractionListItemsCursorPage =
-  CursorPage<Shared.CourseLessonInteractionListItem | null>;
 
 export interface CourseLessonInteractionListParams extends CursorPageParams {
   /**
@@ -81,8 +79,7 @@ export interface CourseLessonInteractionListParams extends CursorPageParams {
 }
 
 export declare namespace CourseLessonInteractions {
-  export {
-    type CourseLessonInteractionListItemsCursorPage as CourseLessonInteractionListItemsCursorPage,
-    type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
-  };
+  export { type CourseLessonInteractionListParams as CourseLessonInteractionListParams };
 }
+
+export { type CourseLessonInteractionListItemsCursorPage };

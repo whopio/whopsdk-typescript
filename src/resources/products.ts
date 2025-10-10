@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
+import { ProductListItemsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -114,8 +115,6 @@ export class Products extends APIResource {
     return this._client.delete(path`/products/${id}`, options);
   }
 }
-
-export type ProductListItemsCursorPage = CursorPage<Shared.ProductListItem | null>;
 
 /**
  * Represents `true` or `false` values.
@@ -522,9 +521,10 @@ export interface ProductListParams extends CursorPageParams {
 export declare namespace Products {
   export {
     type ProductDeleteResponse as ProductDeleteResponse,
-    type ProductListItemsCursorPage as ProductListItemsCursorPage,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
   };
 }
+
+export { type ProductListItemsCursorPage };

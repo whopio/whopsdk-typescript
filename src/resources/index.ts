@@ -41,7 +41,6 @@ export { Companies } from './companies';
 export {
   CourseLessonInteractions,
   type CourseLessonInteractionListParams,
-  type CourseLessonInteractionListItemsCursorPage,
 } from './course-lesson-interactions';
 export {
   Entries,
@@ -63,7 +62,6 @@ export {
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
-  type InvoiceListItemsCursorPage,
 } from './invoices';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export {
@@ -103,7 +101,6 @@ export {
   type ProductCreateParams,
   type ProductUpdateParams,
   type ProductListParams,
-  type ProductListItemsCursorPage,
 } from './products';
 export {
   Shipments,
