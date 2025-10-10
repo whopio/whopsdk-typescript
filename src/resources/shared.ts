@@ -1327,6 +1327,11 @@ export interface Membership {
   metadata: { [key: string]: unknown };
 
   /**
+   * Whether the membership's payments are currently paused.
+   */
+  payment_collection_paused: boolean;
+
+  /**
    * The Plan this Membership is for.
    */
   plan: Membership.Plan;
