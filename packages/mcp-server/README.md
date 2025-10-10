@@ -623,6 +623,7 @@ The following tools are available in this MCP server.
   - `access_pass:basic:read`
   - `member:email:read`
   - `member:basic:read`
+  - `member:phone:read`
   - `promo_code:basic:read`
 
 - `list_payments` (`read`): Lists payments
@@ -634,6 +635,7 @@ The following tools are available in this MCP server.
   - `access_pass:basic:read`
   - `member:email:read`
   - `member:basic:read`
+  - `member:phone:read`
   - `promo_code:basic:read`
 
 - `refund_payments` (`write`): Refunds a payment
@@ -645,6 +647,7 @@ The following tools are available in this MCP server.
   - `access_pass:basic:read`
   - `member:email:read`
   - `member:basic:read`
+  - `member:phone:read`
   - `promo_code:basic:read`
 
 - `retry_payments` (`write`): Retries a payment
@@ -656,6 +659,7 @@ The following tools are available in this MCP server.
   - `access_pass:basic:read`
   - `member:email:read`
   - `member:basic:read`
+  - `member:phone:read`
   - `promo_code:basic:read`
 
 - `void_payments` (`write`): Voids a payment
@@ -667,6 +671,7 @@ The following tools are available in this MCP server.
   - `access_pass:basic:read`
   - `member:email:read`
   - `member:basic:read`
+  - `member:phone:read`
   - `promo_code:basic:read`
 
 ### Resource `support_channels`:
