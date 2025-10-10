@@ -22,6 +22,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">DmsPostTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Entry</a></code>
 - <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
+- <code><a href="./src/resources/shared.ts">Experience</a></code>
 - <code><a href="./src/resources/shared.ts">ForumPost</a></code>
 - <code><a href="./src/resources/shared.ts">FriendlyReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
@@ -195,6 +196,8 @@ Methods:
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
+- <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
+- <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
 
 # AuthorizedUsers
 
@@ -291,6 +294,7 @@ Methods:
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
 - <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
+- <code title="post /payments/{id}/void">client.payments.<a href="./src/resources/payments.ts">void</a>(id) -> Payment</code>
 
 # SupportChannels
 
@@ -303,3 +307,20 @@ Methods:
 
 - <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannelRetrieveResponse</code>
 - <code title="get /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">list</a>({ ...params }) -> SupportChannelListResponsesCursorPage</code>
+
+# Experiences
+
+Types:
+
+- <code><a href="./src/resources/experiences.ts">ExperienceListResponse</a></code>
+- <code><a href="./src/resources/experiences.ts">ExperienceDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /experiences">client.experiences.<a href="./src/resources/experiences.ts">create</a>({ ...params }) -> Experience</code>
+- <code title="get /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">retrieve</a>(id) -> Experience</code>
+- <code title="patch /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">update</a>(id, { ...params }) -> Experience</code>
+- <code title="get /experiences">client.experiences.<a href="./src/resources/experiences.ts">list</a>({ ...params }) -> ExperienceListResponsesCursorPage</code>
+- <code title="delete /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">delete</a>(id) -> ExperienceDeleteResponse</code>
+- <code title="post /experiences/{id}/attach">client.experiences.<a href="./src/resources/experiences.ts">attach</a>(id, { ...params }) -> Experience</code>
+- <code title="post /experiences/{id}/detach">client.experiences.<a href="./src/resources/experiences.ts">detach</a>(id, { ...params }) -> Experience</code>

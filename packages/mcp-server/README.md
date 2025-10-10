@@ -474,6 +474,20 @@ The following tools are available in this MCP server.
   - `member:manage`
   - `member:basic:read`
 
+- `pause_memberships` (`write`): Pauses a membership's payments
+
+  Required permissions:
+
+  - `member:manage`
+  - `member:basic:read`
+
+- `resume_memberships` (`write`): Resumes a membership's payments
+
+  Required permissions:
+
+  - `member:manage`
+  - `member:basic:read`
+
 ### Resource `authorized_users`:
 
 - `retrieve_authorized_users` (`read`): Retrieves a authorized user by ID
@@ -644,6 +658,17 @@ The following tools are available in this MCP server.
   - `member:basic:read`
   - `promo_code:basic:read`
 
+- `void_payments` (`write`): Voids a payment
+
+  Required permissions:
+
+  - `payment:manage`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `promo_code:basic:read`
+
 ### Resource `support_channels`:
 
 - `retrieve_support_channels` (`read`): Retrieves a support channel
@@ -657,3 +682,30 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `support_chat:read`
+
+### Resource `experiences`:
+
+- `create_experiences` (`write`): Required permissions:
+  - `experience:create`
+- `retrieve_experiences` (`read`): Retrieves an experience by ID
+- `update_experiences` (`write`): Required permissions:
+  - `experience:update`
+- `list_experiences` (`read`): Lists experiences for a company
+
+  Required permissions:
+
+  - `experience:hidden_experience:read`
+
+- `delete_experiences` (`write`): Required permissions:
+  - `experience:delete`
+- `attach_experiences` (`write`): Adds an experience to an product, making it accessible to the product's customers.
+
+  Required permissions:
+
+  - `experience:attach`
+
+- `detach_experiences` (`write`): Removes an experience from an product, making it inaccessible to the product's customers.
+
+  Required permissions:
+
+  - `experience:detach`

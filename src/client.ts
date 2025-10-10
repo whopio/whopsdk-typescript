@@ -68,6 +68,17 @@ import {
   EntryListResponsesCursorPage,
 } from './resources/entries';
 import {
+  ExperienceAttachParams,
+  ExperienceCreateParams,
+  ExperienceDeleteResponse,
+  ExperienceDetachParams,
+  ExperienceListParams,
+  ExperienceListResponse,
+  ExperienceListResponsesCursorPage,
+  ExperienceUpdateParams,
+  Experiences,
+} from './resources/experiences';
+import {
   ForumPostCreateParams,
   ForumPostListParams,
   ForumPostListResponse,
@@ -87,6 +98,7 @@ import {
   MembershipListParams,
   MembershipListResponse,
   MembershipListResponsesCursorPage,
+  MembershipPauseParams,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -882,6 +894,7 @@ export class Whopsdk {
   users: API.Users = new API.Users(this);
   payments: API.Payments = new API.Payments(this);
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
+  experiences: API.Experiences = new API.Experiences(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -905,6 +918,7 @@ Whopsdk.ChatChannels = ChatChannels;
 Whopsdk.Users = Users;
 Whopsdk.Payments = Payments;
 Whopsdk.SupportChannels = SupportChannels;
+Whopsdk.Experiences = Experiences;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -999,6 +1013,7 @@ export declare namespace Whopsdk {
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
     type MembershipCancelParams as MembershipCancelParams,
+    type MembershipPauseParams as MembershipPauseParams,
   };
 
   export {
@@ -1067,6 +1082,18 @@ export declare namespace Whopsdk {
     type SupportChannelListParams as SupportChannelListParams,
   };
 
+  export {
+    Experiences as Experiences,
+    type ExperienceListResponse as ExperienceListResponse,
+    type ExperienceDeleteResponse as ExperienceDeleteResponse,
+    type ExperienceListResponsesCursorPage as ExperienceListResponsesCursorPage,
+    type ExperienceCreateParams as ExperienceCreateParams,
+    type ExperienceUpdateParams as ExperienceUpdateParams,
+    type ExperienceListParams as ExperienceListParams,
+    type ExperienceAttachParams as ExperienceAttachParams,
+    type ExperienceDetachParams as ExperienceDetachParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -1087,6 +1114,7 @@ export declare namespace Whopsdk {
   export type DmsPostTypes = API.DmsPostTypes;
   export type Entry = API.Entry;
   export type EntryStatus = API.EntryStatus;
+  export type Experience = API.Experience;
   export type ForumPost = API.ForumPost;
   export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;

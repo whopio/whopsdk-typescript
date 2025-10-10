@@ -1,0 +1,78 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { maybeFilter } from 'whopsdk-mcp/filtering';
+import { Metadata, asTextContentResult } from 'whopsdk-mcp/tools/types';
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import Whopsdk from 'whopsdk';
+
+export const metadata: Metadata = {
+  resource: 'experiences',
+  operation: 'write',
+  tags: [],
+  httpMethod: 'patch',
+  httpPath: '/experiences/{id}',
+  operationId: 'updateExperience',
+};
+
+export const tool: Tool = {
+  name: 'update_experiences',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nRequired permissions:\n - `experience:update`\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/experience',\n  $defs: {\n    experience: {\n      type: 'object',\n      description: 'An object representing an experience belonging to a company.',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'The unique ID representing this experience'\n        },\n        app: {\n          type: 'object',\n          description: 'The experience interface for this experience.',\n          properties: {\n            id: {\n              type: 'string',\n              description: 'The ID of the app'\n            },\n            name: {\n              type: 'string',\n              description: 'The name of the app'\n            }\n          },\n          required: [            'id',\n            'name'\n          ]\n        },\n        company: {\n          type: 'object',\n          description: 'The company that owns this experience.',\n          properties: {\n            id: {\n              type: 'string',\n              description: 'The ID (tag) of the company.'\n            },\n            route: {\n              type: 'string',\n              description: 'The slug/route of the company on the Whop site.'\n            },\n            title: {\n              type: 'string',\n              description: 'The title of the company.'\n            }\n          },\n          required: [            'id',\n            'route',\n            'title'\n          ]\n        },\n        created_at: {\n          type: 'integer',\n          description: 'The timestamp of when this experience was created.'\n        },\n        name: {\n          type: 'string',\n          description: 'The written name of the description.'\n        },\n        order: {\n          type: 'string',\n          description: 'The order of the experience in the section'\n        },\n        products: {\n          type: 'array',\n          description: 'The access passes that are associated with this experience. This should not be used unless you are trying to list all access passes the experience has, for some reason. You probably don\\'t want to use this though and should be using accessPass.',\n          items: {\n            type: 'object',\n            description: 'An object representing a (sanitized) access pass.',\n            properties: {\n              id: {\n                type: 'string',\n                description: 'The internal ID of the public access pass.'\n              },\n              route: {\n                type: 'string',\n                description: 'The route of the access pass.'\n              },\n              title: {\n                type: 'string',\n                description: 'The title of the access pass. Use for Whop 4.0.'\n              }\n            },\n            required: [              'id',\n              'route',\n              'title'\n            ]\n          }\n        }\n      },\n      required: [        'id',\n        'app',\n        'company',\n        'created_at',\n        'name',\n        'order',\n        'products'\n      ]\n    }\n  }\n}\n```",
+  inputSchema: {
+    type: 'object',
+    properties: {
+      id: {
+        type: 'string',
+      },
+      access_level: {
+        type: 'string',
+        description: 'The different access levels for experiences (PUBLIC IS NEVER USED ANYMORE).',
+        enum: ['public', 'private'],
+      },
+      logo: {
+        type: 'object',
+        description: 'The logo for the experience',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+          },
+          direct_upload_id: {
+            type: 'string',
+            description:
+              'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+          },
+        },
+      },
+      name: {
+        type: 'string',
+        description: 'The name of the experience.',
+      },
+      order: {
+        type: 'string',
+        description: 'The order of the experience in the section.',
+      },
+      section_id: {
+        type: 'string',
+        description: 'The ID of the section to update.',
+      },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
+    },
+    required: ['id'],
+  },
+  annotations: {},
+};
+
+export const handler = async (client: Whopsdk, args: Record<string, unknown> | undefined) => {
+  const { id, jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.experiences.update(id, body)));
+};
+
+export default { metadata, tool, handler };

@@ -112,6 +112,29 @@ export class Payments extends APIResource {
   retry(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
     return this._client.post(path`/payments/${id}/retry`, options);
   }
+
+  /**
+   * Voids a payment
+   *
+   * Required permissions:
+   *
+   * - `payment:manage`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `promo_code:basic:read`
+   *
+   * @example
+   * ```ts
+   * const payment = await client.payments.void(
+   *   'pay_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  void(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
+    return this._client.post(path`/payments/${id}/void`, options);
+  }
 }
 
 export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse | null>;

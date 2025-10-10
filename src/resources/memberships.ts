@@ -68,6 +68,34 @@ export class Memberships extends APIResource {
   ): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/cancel`, { body, ...options });
   }
+
+  /**
+   * Pauses a membership's payments
+   *
+   * Required permissions:
+   *
+   * - `member:manage`
+   * - `member:basic:read`
+   */
+  pause(
+    id: string,
+    body: MembershipPauseParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/pause`, { body, ...options });
+  }
+
+  /**
+   * Resumes a membership's payments
+   *
+   * Required permissions:
+   *
+   * - `member:manage`
+   * - `member:basic:read`
+   */
+  resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/resume`, options);
+  }
 }
 
 export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse | null>;
@@ -333,6 +361,14 @@ export interface MembershipCancelParams {
   cancellation_mode?: 'at_period_end' | 'immediate' | null;
 }
 
+export interface MembershipPauseParams {
+  /**
+   * Whether to void past_due payments associated with the membership to prevent
+   * future payment attempts.
+   */
+  void_payments?: boolean | null;
+}
+
 export declare namespace Memberships {
   export {
     type MembershipListResponse as MembershipListResponse,
@@ -340,5 +376,6 @@ export declare namespace Memberships {
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
     type MembershipCancelParams as MembershipCancelParams,
+    type MembershipPauseParams as MembershipPauseParams,
   };
 }

@@ -904,6 +904,106 @@ export namespace Entry {
 export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
 
 /**
+ * An object representing an experience belonging to a company.
+ */
+export interface Experience {
+  /**
+   * The unique ID representing this experience
+   */
+  id: string;
+
+  /**
+   * The experience interface for this experience.
+   */
+  app: Experience.App;
+
+  /**
+   * The company that owns this experience.
+   */
+  company: Experience.Company;
+
+  /**
+   * The timestamp of when this experience was created.
+   */
+  created_at: number;
+
+  /**
+   * The written name of the description.
+   */
+  name: string;
+
+  /**
+   * The order of the experience in the section
+   */
+  order: string | null;
+
+  /**
+   * The access passes that are associated with this experience. This should not be
+   * used unless you are trying to list all access passes the experience has, for
+   * some reason. You probably don't want to use this though and should be using
+   * accessPass.
+   */
+  products: Array<Experience.Product>;
+}
+
+export namespace Experience {
+  /**
+   * The experience interface for this experience.
+   */
+  export interface App {
+    /**
+     * The ID of the app
+     */
+    id: string;
+
+    /**
+     * The name of the app
+     */
+    name: string;
+  }
+
+  /**
+   * The company that owns this experience.
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The slug/route of the company on the Whop site.
+     */
+    route: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * An object representing a (sanitized) access pass.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public access pass.
+     */
+    id: string;
+
+    /**
+     * The route of the access pass.
+     */
+    route: string;
+
+    /**
+     * The title of the access pass. Use for Whop 4.0.
+     */
+    title: string;
+  }
+}
+
+/**
  * Represents a post in forum
  */
 export interface ForumPost {
