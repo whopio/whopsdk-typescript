@@ -11,6 +11,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">AppViewType</a></code>
 - <code><a href="./src/resources/shared.ts">AuthorizedUserRoles</a></code>
 - <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
+- <code><a href="./src/resources/shared.ts">ChatChannel</a></code>
 - <code><a href="./src/resources/shared.ts">CheckoutConfiguration</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Company</a></code>
@@ -46,6 +47,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">ShipmentCarrier</a></code>
 - <code><a href="./src/resources/shared.ts">ShipmentStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ShipmentSubstatus</a></code>
+- <code><a href="./src/resources/shared.ts">SupportChannel</a></code>
 - <code><a href="./src/resources/shared.ts">TaxType</a></code>
 - <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
@@ -264,12 +266,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/chat-channels.ts">ChatChannelRetrieveResponse</a></code>
 - <code><a href="./src/resources/chat-channels.ts">ChatChannelListResponse</a></code>
 
 Methods:
 
-- <code title="get /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">retrieve</a>(id) -> ChatChannelRetrieveResponse</code>
+- <code title="get /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">retrieve</a>(id) -> ChatChannel</code>
+- <code title="patch /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">update</a>(id, { ...params }) -> ChatChannel</code>
 - <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>
 
 # Users
@@ -300,12 +302,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/support-channels.ts">SupportChannelRetrieveResponse</a></code>
 - <code><a href="./src/resources/support-channels.ts">SupportChannelListResponse</a></code>
 
 Methods:
 
-- <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannelRetrieveResponse</code>
+- <code title="post /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">create</a>({ ...params }) -> SupportChannel</code>
+- <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannel</code>
 - <code title="get /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">list</a>({ ...params }) -> SupportChannelListResponsesCursorPage</code>
 
 # Experiences

@@ -327,6 +327,68 @@ export type BusinessTypes =
   | 'community';
 
 /**
+ * Represents a Chat feed
+ */
+export interface ChatChannel {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * Whether or not media is banned in this chat
+   */
+  ban_media: boolean;
+
+  /**
+   * Whether or not URLs are banned in this chat
+   */
+  ban_urls: boolean;
+
+  /**
+   * List of banned words in this chat
+   */
+  banned_words: Array<string>;
+
+  /**
+   * The experience for this chat
+   */
+  experience: ChatChannel.Experience;
+
+  /**
+   * The number of seconds a user needs to wait before posting again, if any
+   */
+  user_posts_cooldown_seconds: number | null;
+
+  /**
+   * Who can post on this chat
+   */
+  who_can_post: WhoCanPost;
+
+  /**
+   * Who can react on this chat
+   */
+  who_can_react: WhoCanReact;
+}
+
+export namespace ChatChannel {
+  /**
+   * The experience for this chat
+   */
+  export interface Experience {
+    /**
+     * The unique ID representing this experience
+     */
+    id: string;
+
+    /**
+     * The written name of the description.
+     */
+    name: string;
+  }
+}
+
+/**
  * A checkout session
  */
 export interface CheckoutConfiguration {
@@ -2712,6 +2774,63 @@ export type ShipmentSubstatus =
   | 'transit_exception'
   | 'substatus_unknown'
   | 'weather_delay';
+
+/**
+ * Represents a DM channel
+ */
+export interface SupportChannel {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The bot ID if this is a support chat
+   */
+  company_id: string | null;
+
+  /**
+   * The custom name of the DM channel, if any
+   */
+  custom_name: string | null;
+
+  /**
+   * The customer user if this is a support chat
+   */
+  customer_user: SupportChannel.CustomerUser | null;
+
+  /**
+   * When the last message was sent
+   */
+  last_message_at: number | null;
+
+  /**
+   * When the support ticket was resolved (null if unresolved)
+   */
+  resolved_at: number | null;
+}
+
+export namespace SupportChannel {
+  /**
+   * The customer user if this is a support chat
+   */
+  export interface CustomerUser {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
 
 /**
  * Whether or not the tax is included in a plan's price (or if it hasn't been set
