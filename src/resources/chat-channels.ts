@@ -14,9 +14,36 @@ export class ChatChannels extends APIResource {
    * Required permissions:
    *
    * - `chat:read`
+   *
+   * @example
+   * ```ts
+   * const chatChannel = await client.chatChannels.retrieve(
+   *   'id',
+   * );
+   * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<ChatChannelRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.ChatChannel> {
     return this._client.get(path`/chat_channels/${id}`, options);
+  }
+
+  /**
+   * Updates a chat channel
+   *
+   * Required permissions:
+   *
+   * - `chat:moderate`
+   *
+   * @example
+   * ```ts
+   * const chatChannel = await client.chatChannels.update('id');
+   * ```
+   */
+  update(
+    id: string,
+    body: ChatChannelUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.ChatChannel> {
+    return this._client.patch(path`/chat_channels/${id}`, { body, ...options });
   }
 
   /**
@@ -25,6 +52,16 @@ export class ChatChannels extends APIResource {
    * Required permissions:
    *
    * - `chat:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const chatChannelListResponse of client.chatChannels.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: ChatChannelListParams,
@@ -38,68 +75,6 @@ export class ChatChannels extends APIResource {
 }
 
 export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse | null>;
-
-/**
- * Represents a Chat feed
- */
-export interface ChatChannelRetrieveResponse {
-  /**
-   * The unique identifier for the entity
-   */
-  id: string;
-
-  /**
-   * Whether or not media is banned in this chat
-   */
-  ban_media: boolean;
-
-  /**
-   * Whether or not URLs are banned in this chat
-   */
-  ban_urls: boolean;
-
-  /**
-   * List of banned words in this chat
-   */
-  banned_words: Array<string>;
-
-  /**
-   * The experience for this chat
-   */
-  experience: ChatChannelRetrieveResponse.Experience;
-
-  /**
-   * The number of seconds a user needs to wait before posting again, if any
-   */
-  user_posts_cooldown_seconds: number | null;
-
-  /**
-   * Who can post on this chat
-   */
-  who_can_post: Shared.WhoCanPost;
-
-  /**
-   * Who can react on this chat
-   */
-  who_can_react: Shared.WhoCanReact;
-}
-
-export namespace ChatChannelRetrieveResponse {
-  /**
-   * The experience for this chat
-   */
-  export interface Experience {
-    /**
-     * The unique ID representing this experience
-     */
-    id: string;
-
-    /**
-     * The written name of the description.
-     */
-    name: string;
-  }
-}
 
 /**
  * Represents a Chat feed
@@ -163,6 +138,38 @@ export namespace ChatChannelListResponse {
   }
 }
 
+export interface ChatChannelUpdateParams {
+  /**
+   * Whether media uploads are banned in this chat
+   */
+  ban_media?: boolean | null;
+
+  /**
+   * Whether URLs are banned in this chat
+   */
+  ban_urls?: boolean | null;
+
+  /**
+   * List of banned words for this chat
+   */
+  banned_words?: Array<string> | null;
+
+  /**
+   * The cooldown period in seconds between user posts
+   */
+  user_posts_cooldown_seconds?: number | null;
+
+  /**
+   * Who can post on a chat feed
+   */
+  who_can_post?: Shared.WhoCanPost | null;
+
+  /**
+   * Who can react on a chat feed
+   */
+  who_can_react?: Shared.WhoCanReact | null;
+}
+
 export interface ChatChannelListParams extends CursorPageParams {
   /**
    * The ID of the company to list chat channels for
@@ -192,9 +199,9 @@ export interface ChatChannelListParams extends CursorPageParams {
 
 export declare namespace ChatChannels {
   export {
-    type ChatChannelRetrieveResponse as ChatChannelRetrieveResponse,
     type ChatChannelListResponse as ChatChannelListResponse,
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
+    type ChatChannelUpdateParams as ChatChannelUpdateParams,
     type ChatChannelListParams as ChatChannelListParams,
   };
 }

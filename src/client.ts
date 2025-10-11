@@ -45,7 +45,7 @@ import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
-  ChatChannelRetrieveResponse,
+  ChatChannelUpdateParams,
   ChatChannels,
 } from './resources/chat-channels';
 import {
@@ -140,10 +140,10 @@ import {
   Shipments,
 } from './resources/shipments';
 import {
+  SupportChannelCreateParams,
   SupportChannelListParams,
   SupportChannelListResponse,
   SupportChannelListResponsesCursorPage,
-  SupportChannelRetrieveResponse,
   SupportChannels,
 } from './resources/support-channels';
 import {
@@ -1058,9 +1058,9 @@ export declare namespace Whopsdk {
 
   export {
     ChatChannels as ChatChannels,
-    type ChatChannelRetrieveResponse as ChatChannelRetrieveResponse,
     type ChatChannelListResponse as ChatChannelListResponse,
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
+    type ChatChannelUpdateParams as ChatChannelUpdateParams,
     type ChatChannelListParams as ChatChannelListParams,
   };
 
@@ -1076,9 +1076,9 @@ export declare namespace Whopsdk {
 
   export {
     SupportChannels as SupportChannels,
-    type SupportChannelRetrieveResponse as SupportChannelRetrieveResponse,
     type SupportChannelListResponse as SupportChannelListResponse,
     type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
+    type SupportChannelCreateParams as SupportChannelCreateParams,
     type SupportChannelListParams as SupportChannelListParams,
   };
 
@@ -1103,6 +1103,7 @@ export declare namespace Whopsdk {
   export type AppViewType = API.AppViewType;
   export type AuthorizedUserRoles = API.AuthorizedUserRoles;
   export type BusinessTypes = API.BusinessTypes;
+  export type ChatChannel = API.ChatChannel;
   export type CheckoutConfiguration = API.CheckoutConfiguration;
   export type CollectionMethod = API.CollectionMethod;
   export type Company = API.Company;
@@ -1138,6 +1139,7 @@ export declare namespace Whopsdk {
   export type ShipmentCarrier = API.ShipmentCarrier;
   export type ShipmentStatus = API.ShipmentStatus;
   export type ShipmentSubstatus = API.ShipmentSubstatus;
+  export type SupportChannel = API.SupportChannel;
   export type TaxType = API.TaxType;
   export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;

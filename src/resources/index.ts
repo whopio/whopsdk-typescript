@@ -25,8 +25,8 @@ export {
 } from './authorized-users';
 export {
   ChatChannels,
-  type ChatChannelRetrieveResponse,
   type ChatChannelListResponse,
+  type ChatChannelUpdateParams,
   type ChatChannelListParams,
   type ChatChannelListResponsesCursorPage,
 } from './chat-channels';
@@ -123,8 +123,8 @@ export {
 } from './shipments';
 export {
   SupportChannels,
-  type SupportChannelRetrieveResponse,
   type SupportChannelListResponse,
+  type SupportChannelCreateParams,
   type SupportChannelListParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';

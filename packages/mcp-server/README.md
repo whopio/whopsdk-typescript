@@ -602,6 +602,12 @@ The following tools are available in this MCP server.
 
   - `chat:read`
 
+- `update_chat_channels` (`write`): Updates a chat channel
+
+  Required permissions:
+
+  - `chat:moderate`
+
 - `list_chat_channels` (`read`): Lists chat channels inside a company
 
   Required permissions:
@@ -675,6 +681,12 @@ The following tools are available in this MCP server.
   - `promo_code:basic:read`
 
 ### Resource `support_channels`:
+
+- `create_support_channels` (`write`): Create a new support channel for a user in a bot. If one already exists, it will return the existing one.
+
+  Required permissions:
+
+  - `support_chat:create`
 
 - `retrieve_support_channels` (`read`): Retrieves a support channel
 
