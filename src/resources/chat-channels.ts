@@ -59,6 +59,11 @@ export interface ChatChannelRetrieveResponse {
   ban_urls: boolean;
 
   /**
+   * List of banned words in this chat
+   */
+  banned_words: Array<string>;
+
+  /**
    * The experience for this chat
    */
   experience: ChatChannelRetrieveResponse.Experience;
@@ -114,6 +119,11 @@ export interface ChatChannelListResponse {
    * Whether or not URLs are banned in this chat
    */
   ban_urls: boolean;
+
+  /**
+   * List of banned words in this chat
+   */
+  banned_words: Array<string>;
 
   /**
    * The experience for this chat
