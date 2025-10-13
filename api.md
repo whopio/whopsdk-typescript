@@ -41,6 +41,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
 - <code><a href="./src/resources/shared.ts">PromoType</a></code>
+- <code><a href="./src/resources/shared.ts">Reaction</a></code>
 - <code><a href="./src/resources/shared.ts">ReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Shipment</a></code>
@@ -326,3 +327,15 @@ Methods:
 - <code title="delete /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">delete</a>(id) -> ExperienceDeleteResponse</code>
 - <code title="post /experiences/{id}/attach">client.experiences.<a href="./src/resources/experiences.ts">attach</a>(id, { ...params }) -> Experience</code>
 - <code title="post /experiences/{id}/detach">client.experiences.<a href="./src/resources/experiences.ts">detach</a>(id, { ...params }) -> Experience</code>
+
+# Reactions
+
+Types:
+
+- <code><a href="./src/resources/reactions.ts">ReactionListResponse</a></code>
+
+Methods:
+
+- <code title="post /reactions">client.reactions.<a href="./src/resources/reactions.ts">create</a>({ ...params }) -> Reaction</code>
+- <code title="get /reactions/{id}">client.reactions.<a href="./src/resources/reactions.ts">retrieve</a>(id) -> Reaction</code>
+- <code title="get /reactions">client.reactions.<a href="./src/resources/reactions.ts">list</a>({ ...params }) -> ReactionListResponsesCursorPage</code>

@@ -726,3 +726,23 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `experience:detach`
+
+### Resource `reactions`:
+
+- `create_reactions` (`write`): Creates a new reaction
+
+  Required permissions:
+
+  - `chat:read`
+
+- `retrieve_reactions` (`read`): Retrieves a reaction
+
+  Required permissions:
+
+  - `chat:read`
+
+- `list_reactions` (`read`): Lists reactions for a post or a message
+
+  Required permissions:
+
+  - `chat:read`

@@ -2570,6 +2570,53 @@ export interface ProductListItem {
 export type PromoType = 'percentage' | 'flat_amount';
 
 /**
+ * Represents a reaction to a feed post
+ */
+export interface Reaction {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The emoji that was used in shortcode format (:heart:)
+   */
+  emoji: string | null;
+
+  /**
+   * The ID of the post this reaction belongs to
+   */
+  resource_id: string;
+
+  /**
+   * The user who reacted to the post
+   */
+  user: Reaction.User;
+}
+
+export namespace Reaction {
+  /**
+   * The user who reacted to the post
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
+/**
  * The status of a receipt
  */
 export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void';
