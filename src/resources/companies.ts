@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Retrieves an company by ID
+   * Retrieves an company by ID or its url route
    *
    * Required permissions:
    *
