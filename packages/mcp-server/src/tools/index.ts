@@ -76,6 +76,9 @@ import list_experiences from './experiences/list-experiences';
 import delete_experiences from './experiences/delete-experiences';
 import attach_experiences from './experiences/attach-experiences';
 import detach_experiences from './experiences/detach-experiences';
+import create_reactions from './reactions/create-reactions';
+import retrieve_reactions from './reactions/retrieve-reactions';
+import list_reactions from './reactions/list-reactions';
 
 export const endpoints: Endpoint[] = [];
 
@@ -155,6 +158,9 @@ addEndpoint(list_experiences);
 addEndpoint(delete_experiences);
 addEndpoint(attach_experiences);
 addEndpoint(detach_experiences);
+addEndpoint(create_reactions);
+addEndpoint(retrieve_reactions);
+addEndpoint(list_reactions);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

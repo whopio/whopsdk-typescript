@@ -115,6 +115,13 @@ export {
   type ProductListParams,
 } from './products';
 export {
+  Reactions,
+  type ReactionListResponse,
+  type ReactionCreateParams,
+  type ReactionListParams,
+  type ReactionListResponsesCursorPage,
+} from './reactions';
+export {
   Shipments,
   type ShipmentListResponse,
   type ShipmentCreateParams,

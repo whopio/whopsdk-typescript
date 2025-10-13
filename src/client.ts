@@ -133,6 +133,13 @@ import {
   Products,
 } from './resources/products';
 import {
+  ReactionCreateParams,
+  ReactionListParams,
+  ReactionListResponse,
+  ReactionListResponsesCursorPage,
+  Reactions,
+} from './resources/reactions';
+import {
   ShipmentCreateParams,
   ShipmentListParams,
   ShipmentListResponse,
@@ -895,6 +902,7 @@ export class Whopsdk {
   payments: API.Payments = new API.Payments(this);
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
+  reactions: API.Reactions = new API.Reactions(this);
 }
 
 Whopsdk.Apps = Apps;
@@ -919,6 +927,7 @@ Whopsdk.Users = Users;
 Whopsdk.Payments = Payments;
 Whopsdk.SupportChannels = SupportChannels;
 Whopsdk.Experiences = Experiences;
+Whopsdk.Reactions = Reactions;
 
 export declare namespace Whopsdk {
   export type RequestOptions = Opts.RequestOptions;
@@ -1094,6 +1103,14 @@ export declare namespace Whopsdk {
     type ExperienceDetachParams as ExperienceDetachParams,
   };
 
+  export {
+    Reactions as Reactions,
+    type ReactionListResponse as ReactionListResponse,
+    type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
+    type ReactionCreateParams as ReactionCreateParams,
+    type ReactionListParams as ReactionListParams,
+  };
+
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -1133,6 +1150,7 @@ export declare namespace Whopsdk {
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
   export type PromoType = API.PromoType;
+  export type Reaction = API.Reaction;
   export type ReceiptStatus = API.ReceiptStatus;
   export type ReleaseMethod = API.ReleaseMethod;
   export type Shipment = API.Shipment;
