@@ -91,8 +91,8 @@ export class Plans extends APIResource {
   list(
     query: PlanListParams,
     options?: RequestOptions,
-  ): PagePromise<PlanListResponsesCursorPage, PlanListResponse | null> {
-    return this._client.getAPIList('/plans', CursorPage<PlanListResponse | null>, { query, ...options });
+  ): PagePromise<PlanListResponsesCursorPage, PlanListResponse> {
+    return this._client.getAPIList('/plans', CursorPage<PlanListResponse>, { query, ...options });
   }
 
   /**
@@ -114,7 +114,7 @@ export class Plans extends APIResource {
   }
 }
 
-export type PlanListResponsesCursorPage = CursorPage<PlanListResponse | null>;
+export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
 
 /**
  * An object representing a (sanitized) plan of an access pass.

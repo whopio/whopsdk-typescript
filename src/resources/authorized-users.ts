@@ -31,15 +31,15 @@ export class AuthorizedUsers extends APIResource {
   list(
     query: AuthorizedUserListParams,
     options?: RequestOptions,
-  ): PagePromise<AuthorizedUserListResponsesCursorPage, AuthorizedUserListResponse | null> {
-    return this._client.getAPIList('/authorized_users', CursorPage<AuthorizedUserListResponse | null>, {
+  ): PagePromise<AuthorizedUserListResponsesCursorPage, AuthorizedUserListResponse> {
+    return this._client.getAPIList('/authorized_users', CursorPage<AuthorizedUserListResponse>, {
       query,
       ...options,
     });
   }
 }
 
-export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse | null>;
+export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse>;
 
 /**
  * A user who has elevated security privileges for a company

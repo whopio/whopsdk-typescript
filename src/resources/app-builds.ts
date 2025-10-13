@@ -66,11 +66,8 @@ export class AppBuilds extends APIResource {
   list(
     query: AppBuildListParams,
     options?: RequestOptions,
-  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse | null> {
-    return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
+    return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse>, { query, ...options });
   }
 
   /**
@@ -92,7 +89,7 @@ export class AppBuilds extends APIResource {
   }
 }
 
-export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse | null>;
+export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse>;
 
 /**
  * An App Build object representing a build of an application

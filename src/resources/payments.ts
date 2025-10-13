@@ -58,11 +58,8 @@ export class Payments extends APIResource {
   list(
     query: PaymentListParams,
     options?: RequestOptions,
-  ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse | null> {
-    return this._client.getAPIList('/payments', CursorPage<PaymentListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
+    return this._client.getAPIList('/payments', CursorPage<PaymentListResponse>, { query, ...options });
   }
 
   /**
@@ -142,7 +139,7 @@ export class Payments extends APIResource {
   }
 }
 
-export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse | null>;
+export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
 
 /**
  * An object representing a receipt for a membership.

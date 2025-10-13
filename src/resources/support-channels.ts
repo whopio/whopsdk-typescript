@@ -65,15 +65,15 @@ export class SupportChannels extends APIResource {
   list(
     query: SupportChannelListParams,
     options?: RequestOptions,
-  ): PagePromise<SupportChannelListResponsesCursorPage, SupportChannelListResponse | null> {
-    return this._client.getAPIList('/support_channels', CursorPage<SupportChannelListResponse | null>, {
+  ): PagePromise<SupportChannelListResponsesCursorPage, SupportChannelListResponse> {
+    return this._client.getAPIList('/support_channels', CursorPage<SupportChannelListResponse>, {
       query,
       ...options,
     });
   }
 }
 
-export type SupportChannelListResponsesCursorPage = CursorPage<SupportChannelListResponse | null>;
+export type SupportChannelListResponsesCursorPage = CursorPage<SupportChannelListResponse>;
 
 /**
  * Represents a DM channel

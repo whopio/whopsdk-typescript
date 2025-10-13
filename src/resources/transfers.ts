@@ -65,15 +65,12 @@ export class Transfers extends APIResource {
   list(
     query: TransferListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<TransferListResponsesCursorPage, TransferListResponse | null> {
-    return this._client.getAPIList('/transfers', CursorPage<TransferListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<TransferListResponsesCursorPage, TransferListResponse> {
+    return this._client.getAPIList('/transfers', CursorPage<TransferListResponse>, { query, ...options });
   }
 }
 
-export type TransferListResponsesCursorPage = CursorPage<TransferListResponse | null>;
+export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
 
 /**
  * Credit Transaction Transfer

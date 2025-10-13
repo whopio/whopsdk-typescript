@@ -31,8 +31,8 @@ export class Entries extends APIResource {
   list(
     query: EntryListParams,
     options?: RequestOptions,
-  ): PagePromise<EntryListResponsesCursorPage, EntryListResponse | null> {
-    return this._client.getAPIList('/entries', CursorPage<EntryListResponse | null>, { query, ...options });
+  ): PagePromise<EntryListResponsesCursorPage, EntryListResponse> {
+    return this._client.getAPIList('/entries', CursorPage<EntryListResponse>, { query, ...options });
   }
 
   /**
@@ -60,7 +60,7 @@ export class Entries extends APIResource {
   }
 }
 
-export type EntryListResponsesCursorPage = CursorPage<EntryListResponse | null>;
+export type EntryListResponsesCursorPage = CursorPage<EntryListResponse>;
 
 /**
  * An object representing an entry in a waitlist.

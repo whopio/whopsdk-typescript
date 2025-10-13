@@ -68,17 +68,16 @@ export class CheckoutConfigurations extends APIResource {
   list(
     query: CheckoutConfigurationListParams,
     options?: RequestOptions,
-  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse | null> {
+  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
     return this._client.getAPIList(
       '/checkout_configurations',
-      CursorPage<CheckoutConfigurationListResponse | null>,
+      CursorPage<CheckoutConfigurationListResponse>,
       { query, ...options },
     );
   }
 }
 
-export type CheckoutConfigurationListResponsesCursorPage =
-  CursorPage<CheckoutConfigurationListResponse | null>;
+export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutConfigurationListResponse>;
 
 /**
  * A checkout session

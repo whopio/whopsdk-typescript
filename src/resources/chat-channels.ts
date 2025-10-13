@@ -66,15 +66,15 @@ export class ChatChannels extends APIResource {
   list(
     query: ChatChannelListParams,
     options?: RequestOptions,
-  ): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse | null> {
-    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse | null>, {
+  ): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse> {
+    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse>, {
       query,
       ...options,
     });
   }
 }
 
-export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse | null>;
+export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse>;
 
 /**
  * Represents a Chat feed
