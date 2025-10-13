@@ -62,15 +62,12 @@ export class ForumPosts extends APIResource {
   list(
     query: ForumPostListParams,
     options?: RequestOptions,
-  ): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse | null> {
-    return this._client.getAPIList('/forum_posts', CursorPage<ForumPostListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse> {
+    return this._client.getAPIList('/forum_posts', CursorPage<ForumPostListResponse>, { query, ...options });
   }
 }
 
-export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse | null>;
+export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>;
 
 /**
  * Represents a post in forum

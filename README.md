@@ -48,7 +48,7 @@ const client = new Whopsdk({
 });
 
 const params: Whopsdk.InvoiceListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
-const [invoiceListItem]: [Whopsdk.InvoiceListItem | null] = await client.invoices.list(params);
+const [invoiceListItem]: [Whopsdk.InvoiceListItem] = await client.invoices.list(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.

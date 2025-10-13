@@ -90,11 +90,8 @@ export class Products extends APIResource {
   list(
     query: ProductListParams,
     options?: RequestOptions,
-  ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem | null> {
-    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
+    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, { query, ...options });
   }
 
   /**

@@ -67,15 +67,12 @@ export class Shipments extends APIResource {
   list(
     query: ShipmentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse | null> {
-    return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
+    return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse>, { query, ...options });
   }
 }
 
-export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse | null>;
+export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>;
 
 /**
  * A shipment

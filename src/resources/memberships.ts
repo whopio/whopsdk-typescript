@@ -45,11 +45,8 @@ export class Memberships extends APIResource {
   list(
     query: MembershipListParams,
     options?: RequestOptions,
-  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse | null> {
-    return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
+    return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
   }
 
   /**
@@ -98,7 +95,7 @@ export class Memberships extends APIResource {
   }
 }
 
-export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse | null>;
+export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
 
 /**
  * A membership represents a purchase between a User and a Company for a specific

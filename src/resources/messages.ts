@@ -62,15 +62,12 @@ export class Messages extends APIResource {
   list(
     query: MessageListParams,
     options?: RequestOptions,
-  ): PagePromise<MessageListResponsesCursorPage, MessageListResponse | null> {
-    return this._client.getAPIList('/messages', CursorPage<MessageListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
+    return this._client.getAPIList('/messages', CursorPage<MessageListResponse>, { query, ...options });
   }
 }
 
-export type MessageListResponsesCursorPage = CursorPage<MessageListResponse | null>;
+export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>;
 
 /**
  * Represents a message in a DM channel

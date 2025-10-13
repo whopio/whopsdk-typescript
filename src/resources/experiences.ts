@@ -79,11 +79,8 @@ export class Experiences extends APIResource {
   list(
     query: ExperienceListParams,
     options?: RequestOptions,
-  ): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse | null> {
-    return this._client.getAPIList('/experiences', CursorPage<ExperienceListResponse | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse> {
+    return this._client.getAPIList('/experiences', CursorPage<ExperienceListResponse>, { query, ...options });
   }
 
   /**
@@ -143,7 +140,7 @@ export class Experiences extends APIResource {
   }
 }
 
-export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse | null>;
+export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse>;
 
 /**
  * An object representing an experience belonging to a company.

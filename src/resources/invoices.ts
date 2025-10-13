@@ -71,11 +71,8 @@ export class Invoices extends APIResource {
   list(
     query: InvoiceListParams,
     options?: RequestOptions,
-  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem | null> {
-    return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem | null>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
+    return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem>, { query, ...options });
   }
 
   /**

@@ -81,12 +81,12 @@ export class Apps extends APIResource {
   list(
     query: AppListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<AppListResponsesCursorPage, AppListResponse | null> {
-    return this._client.getAPIList('/apps', CursorPage<AppListResponse | null>, { query, ...options });
+  ): PagePromise<AppListResponsesCursorPage, AppListResponse> {
+    return this._client.getAPIList('/apps', CursorPage<AppListResponse>, { query, ...options });
   }
 }
 
-export type AppListResponsesCursorPage = CursorPage<AppListResponse | null>;
+export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
 
 /**
  * An object representing an app

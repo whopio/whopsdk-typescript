@@ -32,10 +32,10 @@ export class CourseLessonInteractions extends APIResource {
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<CourseLessonInteractionListItemsCursorPage, Shared.CourseLessonInteractionListItem | null> {
+  ): PagePromise<CourseLessonInteractionListItemsCursorPage, Shared.CourseLessonInteractionListItem> {
     return this._client.getAPIList(
       '/course_lesson_interactions',
-      CursorPage<Shared.CourseLessonInteractionListItem | null>,
+      CursorPage<Shared.CourseLessonInteractionListItem>,
       { query, ...options },
     );
   }
