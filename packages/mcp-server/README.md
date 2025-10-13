@@ -326,7 +326,7 @@ The following tools are available in this MCP server.
 
 ### Resource `companies`:
 
-- `retrieve_companies` (`read`): Retrieves an company by ID
+- `retrieve_companies` (`read`): Retrieves an company by ID or its url route
 
   Required permissions:
 
