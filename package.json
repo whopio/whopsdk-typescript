@@ -27,7 +27,8 @@
     "fix": "./scripts/format"
   },
   "dependencies": {
-    "standardwebhooks": "^1.0.0"
+    "standardwebhooks": "^1.0.0",
+    "jose": "^6.1.0"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.17.0",
