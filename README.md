@@ -26,6 +26,7 @@ The full API of this library can be found in [api.md](api.md).
 import Whopsdk from 'whopsdk';
 
 const client = new Whopsdk({
+  appID: 'app_xxxxxxxxxxxxxx',
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
@@ -44,6 +45,7 @@ This library includes TypeScript definitions for all request params and response
 import Whopsdk from 'whopsdk';
 
 const client = new Whopsdk({
+  appID: 'app_xxxxxxxxxxxxxx',
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
@@ -97,6 +99,7 @@ You can use the `maxRetries` option to configure or disable this:
 ```js
 // Configure the default for all requests:
 const client = new Whopsdk({
+  appID: 'app_xxxxxxxxxxxxxx',
   maxRetries: 0, // default is 2
 });
 
@@ -114,6 +117,7 @@ Requests time out after 1 minute by default. You can configure this with a `time
 ```ts
 // Configure the default for all requests:
 const client = new Whopsdk({
+  appID: 'app_xxxxxxxxxxxxxx',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 

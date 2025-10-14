@@ -6,6 +6,7 @@ import Whopsdk from 'whopsdk';
 
 const client = new Whopsdk({
   apiKey: 'My API Key',
+  appID: 'app_xxxxxxxxxxxxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
