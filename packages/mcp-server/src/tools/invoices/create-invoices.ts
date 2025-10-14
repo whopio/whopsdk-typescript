@@ -136,15 +136,15 @@ export const tool: Tool = {
       product: {
         type: 'object',
         description:
-          'The properties of the access pass to create for this invoice. Include this if you want to create an invoice for a new product.',
+          'The properties of the product to create for this invoice. Include this if you want to create an invoice for a new product.',
         properties: {
           title: {
             type: 'string',
-            description: 'The title of the access pass.',
+            description: 'The title of the product.',
           },
           product_tax_code_id: {
             type: 'string',
-            description: 'The ID of the product tax code to apply to this access pass.',
+            description: 'The ID of the product tax code to apply to this product.',
           },
         },
         required: ['title'],
@@ -152,7 +152,7 @@ export const tool: Tool = {
       product_id: {
         type: 'string',
         description:
-          'The access pass ID to create this invoice for. Include this if you want to create an invoice for an existing product.',
+          'The product ID to create this invoice for. Include this if you want to create an invoice for an existing product.',
       },
     },
     required: ['collection_method', 'company_id', 'due_date', 'plan'],

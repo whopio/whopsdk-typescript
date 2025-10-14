@@ -23,18 +23,18 @@ export const tool: Tool = {
     properties: {
       company_id: {
         type: 'string',
-        description: 'The ID of the company to create the access pass for.',
+        description: 'The ID of the company to create the product for.',
       },
       title: {
         type: 'string',
-        description: 'The title of the access pass.',
+        description: 'The title of the product.',
       },
       access_pass_type: {
         $ref: '#/$defs/access_pass_type',
       },
       banner_image: {
         type: 'object',
-        description: 'A banner image for the access pass in png, jpeg format',
+        description: 'A banner image for the product in png, jpeg format',
         properties: {
           id: {
             type: 'string',
@@ -60,16 +60,16 @@ export const tool: Tool = {
       },
       custom_cta_url: {
         type: 'string',
-        description: 'The custom call to action URL for the access pass.',
+        description: 'The custom call to action URL for the product.',
       },
       custom_statement_descriptor: {
         type: 'string',
         description:
-          'The custom statement descriptor for the access pass i.e. WHOP*SPORTS, must be between 5 and 22 characters, contain at least one letter, and not contain any of the following characters: <, >, \\, \', "',
+          'The custom statement descriptor for the product i.e. WHOP*SPORTS, must be between 5 and 22 characters, contain at least one letter, and not contain any of the following characters: <, >, \\, \', "',
       },
       description: {
         type: 'string',
-        description: 'A written description of the access pass.',
+        description: 'A written description of the product.',
       },
       experience_ids: {
         type: 'array',
@@ -89,7 +89,7 @@ export const tool: Tool = {
       },
       headline: {
         type: 'string',
-        description: 'The headline of the access pass.',
+        description: 'The headline of the product.',
       },
       industry_type: {
         $ref: '#/$defs/industry_types',
@@ -168,7 +168,7 @@ export const tool: Tool = {
       },
       product_highlights: {
         type: 'array',
-        description: 'The product highlights for the access pass.',
+        description: 'The product highlights for the product.',
         items: {
           type: 'object',
           description: 'Input for creating a product highlight',
@@ -193,7 +193,7 @@ export const tool: Tool = {
       },
       product_tax_code_id: {
         type: 'string',
-        description: 'The ID of the product tax code to apply to this access pass.',
+        description: 'The ID of the product tax code to apply to this product.',
       },
       redirect_purchase_url: {
         type: 'string',
@@ -201,7 +201,7 @@ export const tool: Tool = {
       },
       route: {
         type: 'string',
-        description: 'The route of the access pass.',
+        description: 'The route of the product.',
       },
       visibility: {
         $ref: '#/$defs/visibility',

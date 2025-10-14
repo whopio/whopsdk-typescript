@@ -135,7 +135,7 @@ export namespace ShipmentListResponse {
    */
   export interface Payment {
     /**
-     * The receipt ID
+     * The payment ID
      */
     id: string;
   }
@@ -143,7 +143,7 @@ export namespace ShipmentListResponse {
 
 export interface ShipmentCreateParams {
   /**
-   * The ID of the bot to create the shipment for
+   * The ID of the company to create the shipment for
    */
   company_id: string;
 

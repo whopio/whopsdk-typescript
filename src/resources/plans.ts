@@ -186,7 +186,7 @@ export interface PlanListResponse {
   product: PlanListResponse.Product | null;
 
   /**
-   * The direct link to purchase the access pass.
+   * The direct link to purchase the product.
    */
   purchase_url: string;
 
@@ -247,12 +247,12 @@ export namespace PlanListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
@@ -270,7 +270,7 @@ export interface PlanCreateParams {
   company_id: string;
 
   /**
-   * The access pass the plan is related to.
+   * The product the plan is related to.
    */
   product_id: string;
 
@@ -567,7 +567,7 @@ export interface PlanListParams extends CursorPageParams {
   plan_types?: Array<Shared.PlanType> | null;
 
   /**
-   * The access pass IDs to filter the plans by
+   * The product IDs to filter the plans by
    */
   product_ids?: Array<string> | null;
 

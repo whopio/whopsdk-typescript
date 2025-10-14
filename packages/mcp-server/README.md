@@ -684,7 +684,7 @@ The following tools are available in this MCP server.
 
 ### Resource `support_channels`:
 
-- `create_support_channels` (`write`): Create a new support channel for a user in a bot. If one already exists, it will return the existing one.
+- `create_support_channels` (`write`): Create a new support channel for a user in a company. If one already exists, it will return the existing one.
 
   Required permissions:
 
