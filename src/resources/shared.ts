@@ -2912,7 +2912,7 @@ export interface Transfer {
   /**
    * The recipient of the credit transaction transfer
    */
-  destination: Transfer.UnionMember0 | null | Transfer.UnionMember1 | null;
+  destination: Transfer.User | null | Transfer.Company | null;
 
   /**
    * The ID of the destination ledger account
@@ -2932,7 +2932,7 @@ export interface Transfer {
   /**
    * The sender of the credit transaction transfer
    */
-  origin: Transfer.UnionMember0 | null | Transfer.UnionMember1 | null;
+  origin: Transfer.User | null | Transfer.Company | null;
 
   /**
    * The ID of the origin ledger account
@@ -2944,7 +2944,7 @@ export namespace Transfer {
   /**
    * An object representing a (sanitized) user of the site.
    */
-  export interface UnionMember0 {
+  export interface User {
     /**
      * The internal ID of the user.
      */
@@ -2958,7 +2958,7 @@ export namespace Transfer {
     /**
      * The typename of this object
      */
-    typename: 'PublicProfileUser';
+    typename: 'User';
 
     /**
      * The username of the user from their Whop account.
@@ -2969,7 +2969,7 @@ export namespace Transfer {
   /**
    * An object representing a (sanitized) company.
    */
-  export interface UnionMember1 {
+  export interface Company {
     /**
      * The ID (tag) of the company.
      */
@@ -2988,13 +2988,13 @@ export namespace Transfer {
     /**
      * The typename of this object
      */
-    typename: 'PublicCompany';
+    typename: 'Company';
   }
 
   /**
    * An object representing a (sanitized) user of the site.
    */
-  export interface UnionMember0 {
+  export interface User {
     /**
      * The internal ID of the user.
      */
@@ -3008,7 +3008,7 @@ export namespace Transfer {
     /**
      * The typename of this object
      */
-    typename: 'PublicProfileUser';
+    typename: 'User';
 
     /**
      * The username of the user from their Whop account.
@@ -3019,7 +3019,7 @@ export namespace Transfer {
   /**
    * An object representing a (sanitized) company.
    */
-  export interface UnionMember1 {
+  export interface Company {
     /**
      * The ID (tag) of the company.
      */
@@ -3038,7 +3038,7 @@ export namespace Transfer {
     /**
      * The typename of this object
      */
-    typename: 'PublicCompany';
+    typename: 'Company';
   }
 }
 
