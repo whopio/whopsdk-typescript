@@ -1,4 +1,4 @@
-# Whopsdk TypeScript MCP Server
+# Whop TypeScript MCP Server
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -26,7 +26,7 @@ node ./packages/mcp-server/dist/index.js
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y whopsdk-mcp`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y @whop/mcp`
 
 ### Via MCP Client
 
@@ -40,7 +40,7 @@ For clients with a configuration JSON, it might look something like this:
 ```json
 {
   "mcpServers": {
-    "whopsdk_api": {
+    "whop_sdk_api": {
       "command": "node",
       "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
@@ -161,7 +161,7 @@ A configuration JSON for this server might look like this, assuming the server i
 ```json
 {
   "mcpServers": {
-    "whopsdk_api": {
+    "whop_sdk_api": {
       "url": "http://localhost:3000",
       "headers": {
         "Authorization": "Bearer <auth value>"
@@ -188,10 +188,10 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "whopsdk-mcp/server";
+import { server, endpoints, init } from "@whop/mcp/server";
 
 // import a specific tool
-import createApps from "whopsdk-mcp/tools/apps/create-apps";
+import createApps from "@whop/mcp/tools/apps/create-apps";
 
 // initialize the server and all endpoints
 init({ server, endpoints });

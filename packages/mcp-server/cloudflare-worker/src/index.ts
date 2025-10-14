@@ -1,7 +1,7 @@
 import { makeOAuthConsent } from './app';
 import { McpAgent } from 'agents/mcp';
 import OAuthProvider from '@cloudflare/workers-oauth-provider';
-import { McpOptions, initMcpServer, server, ClientOptions } from 'whopsdk-mcp/server';
+import { McpOptions, initMcpServer, server, ClientOptions } from '@whop/mcp/server';
 
 type MCPProps = {
   clientProps: ClientOptions;
@@ -12,7 +12,7 @@ type MCPProps = {
  * The information displayed on the OAuth consent screen
  */
 const serverConfig: ServerConfig = {
-  orgName: 'Whopsdk',
+  orgName: 'Whop',
   instructionsUrl: undefined, // Set a url for where you show users how to get an API key
   logoUrl: undefined, // Set a custom logo url to appear during the OAuth flow
   clientProperties: [

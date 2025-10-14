@@ -1,4 +1,4 @@
-import { createPathTagFunction, encodeURIPath } from 'whopsdk/internal/utils/path';
+import { createPathTagFunction, encodeURIPath } from '@whop/sdk/internal/utils/path';
 import { inspect } from 'node:util';
 import { runInNewContext } from 'node:vm';
 

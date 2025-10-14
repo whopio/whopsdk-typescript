@@ -201,7 +201,7 @@ export interface ClientOptions {
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
-   * Defaults to process.env['WHOPSDK_BASE_URL'].
+   * Defaults to process.env['WHOP_BASE_URL'].
    */
   baseURL?: string | null | undefined;
 
@@ -255,7 +255,7 @@ export interface ClientOptions {
   /**
    * Set the log level.
    *
-   * Defaults to process.env['WHOPSDK_LOG'] or 'warn' if it isn't set.
+   * Defaults to process.env['WHOP_LOG'] or 'warn' if it isn't set.
    */
   logLevel?: LogLevel | undefined;
 
@@ -268,9 +268,9 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Whopsdk API.
+ * API Client for interfacing with the Whop API.
  */
-export class Whopsdk {
+export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string;
@@ -288,12 +288,12 @@ export class Whopsdk {
   private _options: ClientOptions;
 
   /**
-   * API Client for interfacing with the Whopsdk API.
+   * API Client for interfacing with the Whop API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['WHOPSDK_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -302,20 +302,20 @@ export class Whopsdk {
    * @param {Record<string, string | undefined>} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
   constructor({
-    baseURL = readEnv('WHOPSDK_BASE_URL'),
+    baseURL = readEnv('WHOP_BASE_URL'),
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
-      throw new Errors.WhopsdkError(
-        "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whopsdk client with an apiKey option, like new Whopsdk({ apiKey: 'My API Key' }).",
+      throw new Errors.WhopError(
+        "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
       );
     }
     if (appID === undefined) {
-      throw new Errors.WhopsdkError(
-        "The WHOP_APP_ID environment variable is missing or empty; either provide it, or instantiate the Whopsdk client with an appID option, like new Whopsdk({ appID: 'app_xxxxxxxxxxxxxx' }).",
+      throw new Errors.WhopError(
+        "The WHOP_APP_ID environment variable is missing or empty; either provide it, or instantiate the Whop client with an appID option, like new Whop({ appID: 'app_xxxxxxxxxxxxxx' }).",
       );
     }
 
@@ -328,14 +328,14 @@ export class Whopsdk {
     };
 
     this.baseURL = options.baseURL!;
-    this.timeout = options.timeout ?? Whopsdk.DEFAULT_TIMEOUT /* 1 minute */;
+    this.timeout = options.timeout ?? Whop.DEFAULT_TIMEOUT /* 1 minute */;
     this.logger = options.logger ?? console;
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
     this.logLevel =
       parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
-      parseLogLevel(readEnv('WHOPSDK_LOG'), "process.env['WHOPSDK_LOG']", this) ??
+      parseLogLevel(readEnv('WHOP_LOG'), "process.env['WHOP_LOG']", this) ??
       defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
@@ -661,7 +661,7 @@ export class Whopsdk {
     options: FinalRequestOptions,
   ): Pagination.PagePromise<PageClass, Item> {
     const request = this.makeRequest(options, null, undefined);
-    return new Pagination.PagePromise<PageClass, Item>(this as any as Whopsdk, request, Page);
+    return new Pagination.PagePromise<PageClass, Item>(this as any as Whop, request, Page);
   }
 
   async fetchWithTimeout(
@@ -878,10 +878,10 @@ export class Whopsdk {
     }
   }
 
-  static Whopsdk = this;
+  static Whop = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
-  static WhopsdkError = Errors.WhopsdkError;
+  static WhopError = Errors.WhopError;
   static APIError = Errors.APIError;
   static APIConnectionError = Errors.APIConnectionError;
   static APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
@@ -922,31 +922,31 @@ export class Whopsdk {
   reactions: API.Reactions = new API.Reactions(this);
 }
 
-Whopsdk.Apps = Apps;
-Whopsdk.Invoices = Invoices;
-Whopsdk.CourseLessonInteractions = CourseLessonInteractions;
-Whopsdk.Products = Products;
-Whopsdk.Companies = Companies;
-Whopsdk.Webhooks = Webhooks;
-Whopsdk.Plans = Plans;
-Whopsdk.Entries = Entries;
-Whopsdk.ForumPosts = ForumPosts;
-Whopsdk.Transfers = Transfers;
-Whopsdk.LedgerAccounts = LedgerAccounts;
-Whopsdk.Memberships = Memberships;
-Whopsdk.AuthorizedUsers = AuthorizedUsers;
-Whopsdk.AppBuilds = AppBuilds;
-Whopsdk.Shipments = Shipments;
-Whopsdk.CheckoutConfigurations = CheckoutConfigurations;
-Whopsdk.Messages = Messages;
-Whopsdk.ChatChannels = ChatChannels;
-Whopsdk.Users = Users;
-Whopsdk.Payments = Payments;
-Whopsdk.SupportChannels = SupportChannels;
-Whopsdk.Experiences = Experiences;
-Whopsdk.Reactions = Reactions;
+Whop.Apps = Apps;
+Whop.Invoices = Invoices;
+Whop.CourseLessonInteractions = CourseLessonInteractions;
+Whop.Products = Products;
+Whop.Companies = Companies;
+Whop.Webhooks = Webhooks;
+Whop.Plans = Plans;
+Whop.Entries = Entries;
+Whop.ForumPosts = ForumPosts;
+Whop.Transfers = Transfers;
+Whop.LedgerAccounts = LedgerAccounts;
+Whop.Memberships = Memberships;
+Whop.AuthorizedUsers = AuthorizedUsers;
+Whop.AppBuilds = AppBuilds;
+Whop.Shipments = Shipments;
+Whop.CheckoutConfigurations = CheckoutConfigurations;
+Whop.Messages = Messages;
+Whop.ChatChannels = ChatChannels;
+Whop.Users = Users;
+Whop.Payments = Payments;
+Whop.SupportChannels = SupportChannels;
+Whop.Experiences = Experiences;
+Whop.Reactions = Reactions;
 
-export declare namespace Whopsdk {
+export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
 
   export import CursorPage = Pagination.CursorPage;

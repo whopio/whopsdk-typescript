@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "whopsdk/*": ["./src/*"],
-      "whopsdk": ["./src/index.ts"]
+      "@whop/sdk/*": ["./src/*"],
+      "@whop/sdk": ["./src/index.ts"]
     },
     "noEmit": true,
 

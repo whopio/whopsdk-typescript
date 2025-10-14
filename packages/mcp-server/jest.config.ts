@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^whopsdk-mcp$': '<rootDir>/src/index.ts',
-    '^whopsdk-mcp/(.*)$': '<rootDir>/src/$1',
+    '^@whop/mcp$': '<rootDir>/src/index.ts',
+    '^@whop/mcp/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],

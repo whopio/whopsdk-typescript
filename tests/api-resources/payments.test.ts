@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   apiKey: 'My API Key',
   appID: 'app_xxxxxxxxxxxxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
@@ -76,7 +76,7 @@ describe('resource payments', () => {
         { partial_amount: 6.9 },
         { path: '/_stainless_unknown_path' },
       ),
-    ).rejects.toThrow(Whopsdk.NotFoundError);
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Prism tests are disabled

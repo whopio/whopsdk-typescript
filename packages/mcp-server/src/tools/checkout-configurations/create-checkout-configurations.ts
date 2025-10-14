@@ -1,9 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from 'whopsdk-mcp/tools/types';
+import { Metadata, asTextContentResult } from '@whop/mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
 export const metadata: Metadata = {
   resource: 'checkout_configurations',
@@ -274,7 +274,7 @@ export const tool: Tool = {
   annotations: {},
 };
 
-export const handler = async (client: Whopsdk, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
   const body = args as any;
   return asTextContentResult(await client.checkoutConfigurations.create(body));
 };

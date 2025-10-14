@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { Whopsdk } from '../client';
+import type { Whop } from '../client';
 
 export abstract class APIResource {
-  protected _client: Whopsdk;
+  protected _client: Whop;
 
-  constructor(client: Whopsdk) {
+  constructor(client: Whop) {
     this._client = client;
   }
 }

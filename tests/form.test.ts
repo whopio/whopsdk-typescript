@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'whopsdk/internal/uploads';
-import { toFile } from 'whopsdk/core/uploads';
+import { multipartFormRequestOptions, createForm } from '@whop/sdk/internal/uploads';
+import { toFile } from '@whop/sdk/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

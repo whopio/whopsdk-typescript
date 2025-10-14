@@ -2,7 +2,7 @@
 
 import { dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import Whopsdk, { ClientOptions } from 'whopsdk';
+import Whop, { ClientOptions } from '@whop/sdk';
 import { Endpoint, ContentBlock, Metadata } from './tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -31,7 +31,7 @@ export async function codeTool(): Promise<Endpoint> {
   const { newDenoHTTPWorker } = await import('@valtown/deno-http-worker');
   const { workerPath } = await import('./code-tool-paths.cjs');
 
-  const handler = async (client: Whopsdk, args: unknown) => {
+  const handler = async (client: Whop, args: unknown) => {
     const baseURLHostname = new URL(client.baseURL).hostname;
     const { code } = args as { code: string };
 

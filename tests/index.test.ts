@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'whopsdk/core/api-promise';
+import { APIPromise } from '@whop/sdk/core/api-promise';
 
 import util from 'node:util';
-import Whopsdk from 'whopsdk';
-import { APIUserAbortError } from 'whopsdk';
+import Whop from '@whop/sdk';
+import { APIUserAbortError } from '@whop/sdk';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -20,7 +20,7 @@ describe('instantiate client', () => {
   });
 
   describe('defaultHeaders', () => {
-    const client = new Whopsdk({
+    const client = new Whop({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
       apiKey: 'My API Key',
@@ -55,14 +55,14 @@ describe('instantiate client', () => {
 
     beforeEach(() => {
       process.env = { ...env };
-      process.env['WHOPSDK_LOG'] = undefined;
+      process.env['WHOP_LOG'] = undefined;
     });
 
     afterEach(() => {
       process.env = env;
     });
 
-    const forceAPIResponseForClient = async (client: Whopsdk) => {
+    const forceAPIResponseForClient = async (client: Whop) => {
       await new APIPromise(
         client,
         Promise.resolve({
@@ -88,7 +88,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Whopsdk({
+      const client = new Whop({
         logger: logger,
         logLevel: 'debug',
         apiKey: 'My API Key',
@@ -100,7 +100,7 @@ describe('instantiate client', () => {
     });
 
     test('default logLevel is warn', async () => {
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.logLevel).toBe('warn');
     });
 
@@ -113,7 +113,7 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      const client = new Whopsdk({
+      const client = new Whop({
         logger: logger,
         logLevel: 'info',
         apiKey: 'My API Key',
@@ -133,8 +133,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['WHOPSDK_LOG'] = 'debug';
-      const client = new Whopsdk({ logger: logger, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_LOG'] = 'debug';
+      const client = new Whop({ logger: logger, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.logLevel).toBe('debug');
 
       await forceAPIResponseForClient(client);
@@ -150,11 +150,11 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['WHOPSDK_LOG'] = 'not a log level';
-      const client = new Whopsdk({ logger: logger, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_LOG'] = 'not a log level';
+      const client = new Whop({ logger: logger, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.logLevel).toBe('warn');
       expect(warnMock).toHaveBeenCalledWith(
-        'process.env[\'WHOPSDK_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
+        'process.env[\'WHOP_LOG\'] was set to "not a log level", expected one of ["off","error","warn","info","debug"]',
       );
     });
 
@@ -167,8 +167,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['WHOPSDK_LOG'] = 'debug';
-      const client = new Whopsdk({
+      process.env['WHOP_LOG'] = 'debug';
+      const client = new Whop({
         logger: logger,
         logLevel: 'off',
         apiKey: 'My API Key',
@@ -188,8 +188,8 @@ describe('instantiate client', () => {
         error: jest.fn(),
       };
 
-      process.env['WHOPSDK_LOG'] = 'not a log level';
-      const client = new Whopsdk({
+      process.env['WHOP_LOG'] = 'not a log level';
+      const client = new Whop({
         logger: logger,
         logLevel: 'debug',
         apiKey: 'My API Key',
@@ -202,7 +202,7 @@ describe('instantiate client', () => {
 
   describe('defaultQuery', () => {
     test('with null query params given', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
         apiKey: 'My API Key',
@@ -212,7 +212,7 @@ describe('instantiate client', () => {
     });
 
     test('multiple default query params', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
         apiKey: 'My API Key',
@@ -222,7 +222,7 @@ describe('instantiate client', () => {
     });
 
     test('overriding with `undefined`', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
         apiKey: 'My API Key',
@@ -233,7 +233,7 @@ describe('instantiate client', () => {
   });
 
   test('custom fetch', async () => {
-    const client = new Whopsdk({
+    const client = new Whop({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
@@ -252,7 +252,7 @@ describe('instantiate client', () => {
 
   test('explicit global fetch', async () => {
     // make sure the global fetch type is assignable to our Fetch type
-    const client = new Whopsdk({
+    const client = new Whop({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
@@ -261,7 +261,7 @@ describe('instantiate client', () => {
   });
 
   test('custom signal', async () => {
-    const client = new Whopsdk({
+    const client = new Whop({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
@@ -294,7 +294,7 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Whopsdk({
+    const client = new Whop({
       baseURL: 'http://localhost:5000/',
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
@@ -307,7 +307,7 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/custom/path/',
         apiKey: 'My API Key',
         appID: 'app_xxxxxxxxxxxxxx',
@@ -316,7 +316,7 @@ describe('instantiate client', () => {
     });
 
     test('no trailing slash', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/custom/path',
         apiKey: 'My API Key',
         appID: 'app_xxxxxxxxxxxxxx',
@@ -325,11 +325,11 @@ describe('instantiate client', () => {
     });
 
     afterEach(() => {
-      process.env['WHOPSDK_BASE_URL'] = undefined;
+      process.env['WHOP_BASE_URL'] = undefined;
     });
 
     test('explicit option', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'https://example.com',
         apiKey: 'My API Key',
         appID: 'app_xxxxxxxxxxxxxx',
@@ -338,32 +338,32 @@ describe('instantiate client', () => {
     });
 
     test('env variable', () => {
-      process.env['WHOPSDK_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_BASE_URL'] = 'https://example.com/from_env';
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
-      process.env['WHOPSDK_BASE_URL'] = ''; // empty
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_BASE_URL'] = ''; // empty
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://api.whop.com/api/v1');
     });
 
     test('blank env variable', () => {
-      process.env['WHOPSDK_BASE_URL'] = '  '; // blank
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_BASE_URL'] = '  '; // blank
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.baseURL).toEqual('https://api.whop.com/api/v1');
     });
 
     test('in request options', () => {
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         apiKey: 'My API Key',
         appID: 'app_xxxxxxxxxxxxxx',
         baseURL: 'http://localhost:5000/client',
@@ -374,8 +374,8 @@ describe('instantiate client', () => {
     });
 
     test('in request options overridden by env variable', () => {
-      process.env['WHOPSDK_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+      process.env['WHOP_BASE_URL'] = 'http://localhost:5000/env';
+      const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -383,17 +383,17 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Whopsdk({ maxRetries: 4, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+    const client = new Whop({ maxRetries: 4, apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+    const client2 = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
     expect(client2.maxRetries).toEqual(2);
   });
 
   describe('withOptions', () => {
     test('creates a new client with overridden options', async () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         maxRetries: 3,
         apiKey: 'My API Key',
@@ -419,7 +419,7 @@ describe('instantiate client', () => {
     });
 
     test('inherits options from the parent client', async () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         defaultHeaders: { 'X-Test-Header': 'test-value' },
         defaultQuery: { 'test-param': 'test-value' },
@@ -439,7 +439,7 @@ describe('instantiate client', () => {
     });
 
     test('respects runtime property changes when creating new client', () => {
-      const client = new Whopsdk({
+      const client = new Whop({
         baseURL: 'http://localhost:5000/',
         timeout: 1000,
         apiKey: 'My API Key',
@@ -474,7 +474,7 @@ describe('instantiate client', () => {
     // set options via env var
     process.env['WHOP_API_KEY'] = 'My API Key';
     process.env['WHOP_APP_ID'] = 'app_xxxxxxxxxxxxxx';
-    const client = new Whopsdk();
+    const client = new Whop();
     expect(client.apiKey).toBe('My API Key');
     expect(client.appID).toBe('app_xxxxxxxxxxxxxx');
   });
@@ -483,14 +483,14 @@ describe('instantiate client', () => {
     // set options via env var
     process.env['WHOP_API_KEY'] = 'another My API Key';
     process.env['WHOP_APP_ID'] = 'another app_xxxxxxxxxxxxxx';
-    const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+    const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
     expect(client.apiKey).toBe('My API Key');
     expect(client.appID).toBe('app_xxxxxxxxxxxxxx');
   });
 });
 
 describe('request building', () => {
-  const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+  const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
 
   describe('custom headers', () => {
     test('handles undefined', async () => {
@@ -509,7 +509,7 @@ describe('request building', () => {
 });
 
 describe('default encoder', () => {
-  const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
+  const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx' });
 
   class Serializable {
     toJSON() {
@@ -594,7 +594,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Whopsdk({
+    const client = new Whop({
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
       timeout: 10,
@@ -629,7 +629,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Whopsdk({
+    const client = new Whop({
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
       fetch: testFetch,
@@ -658,7 +658,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Whopsdk({
+    const client = new Whop({
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
       fetch: testFetch,
@@ -692,7 +692,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Whopsdk({
+    const client = new Whop({
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
       fetch: testFetch,
@@ -726,7 +726,7 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Whopsdk({
+    const client = new Whop({
       apiKey: 'My API Key',
       appID: 'app_xxxxxxxxxxxxxx',
       fetch: testFetch,
@@ -761,7 +761,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx', fetch: testFetch });
+    const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -791,7 +791,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Whopsdk({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx', fetch: testFetch });
+    const client = new Whop({ apiKey: 'My API Key', appID: 'app_xxxxxxxxxxxxxx', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

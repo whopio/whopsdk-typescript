@@ -10,8 +10,8 @@ import {
   Implementation,
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'whopsdk';
-import Whopsdk from 'whopsdk';
+import { ClientOptions } from '@whop/sdk';
+import Whop from '@whop/sdk';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
@@ -27,13 +27,13 @@ import { McpOptions } from './options';
 export { McpOptions } from './options';
 export { ClientType } from './compat';
 export { Filter } from './tools';
-export { ClientOptions } from 'whopsdk';
+export { ClientOptions } from '@whop/sdk';
 export { endpoints } from './tools';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'whopsdk_api',
+      name: 'whop_sdk_api',
       version: '0.0.1',
     },
     { capabilities: { tools: {}, logging: {} } },
@@ -87,7 +87,7 @@ export function initMcpServer(params: {
     error: logAtLevel('error'),
   };
 
-  let client = new Whopsdk({
+  let client = new Whop({
     logger,
     ...params.clientOptions,
     defaultHeaders: {
@@ -178,7 +178,7 @@ export async function selectTools(endpoints: Endpoint[], options?: McpOptions): 
 export async function executeHandler(
   tool: Tool,
   handler: HandlerFunction,
-  client: Whopsdk,
+  client: Whop,
   args: Record<string, unknown> | undefined,
   compatibilityOptions?: Partial<ClientCapabilities>,
 ) {
