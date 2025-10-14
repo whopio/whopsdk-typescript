@@ -1,8 +1,8 @@
 {
-  "name": "whopsdk-mcp",
+  "name": "@whop/mcp",
   "version": "0.0.1",
-  "description": "The official MCP Server for the Whopsdk API",
-  "author": "Whopsdk <>",
+  "description": "The official MCP Server for the Whop API",
+  "author": "Whop <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
@@ -29,7 +29,7 @@
     "fix": "eslint --fix --ext ts,js ."
   },
   "dependencies": {
-    "whopsdk": "workspace:*",
+    "@whop/sdk": "workspace:*",
     "@cloudflare/cabidela": "^0.2.4",
     "@modelcontextprotocol/sdk": "^1.11.5",
     "@valtown/deno-http-worker": "^0.0.21",
@@ -67,8 +67,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "whopsdk-mcp": ".",
-    "whopsdk-mcp/*": "./src/*"
+    "@whop/mcp": ".",
+    "@whop/mcp/*": "./src/*"
   },
   "exports": {
     ".": {

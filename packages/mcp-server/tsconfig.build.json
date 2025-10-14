@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "whopsdk-mcp/*": ["./dist/src/*"],
-      "whopsdk-mcp": ["./dist/src/index.ts"]
+      "@whop/mcp/*": ["./dist/src/*"],
+      "@whop/mcp": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

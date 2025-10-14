@@ -25,7 +25,7 @@ export default tseslint.config(
         {
           patterns: [
             {
-              regex: '^whopsdk(/.*)?',
+              regex: '^@whop/sdk(/.*)?',
               message: 'Use a relative import, not a package import.',
             },
           ],

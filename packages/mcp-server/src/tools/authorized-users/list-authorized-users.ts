@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'whopsdk-mcp/filtering';
-import { Metadata, asTextContentResult } from 'whopsdk-mcp/tools/types';
+import { maybeFilter } from '@whop/mcp/filtering';
+import { Metadata, asTextContentResult } from '@whop/mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
 export const metadata: Metadata = {
   resource: 'authorized_users',
@@ -70,7 +70,7 @@ export const tool: Tool = {
   },
 };
 
-export const handler = async (client: Whopsdk, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   const response = await client.authorizedUsers.list(body).asResponse();
   return asTextContentResult(await maybeFilter(jq_filter, await response.json()));

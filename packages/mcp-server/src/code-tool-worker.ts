@@ -2,11 +2,11 @@
 
 import util from 'node:util';
 import { WorkerInput, WorkerSuccess, WorkerError } from './code-tool-types';
-import { Whopsdk } from 'whopsdk';
+import { Whop } from '@whop/sdk';
 
 const fetch = async (req: Request): Promise<Response> => {
   const { opts, code } = (await req.json()) as WorkerInput;
-  const client = new Whopsdk({
+  const client = new Whop({
     ...opts,
   });
 

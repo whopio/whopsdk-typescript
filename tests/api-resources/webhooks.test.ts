@@ -2,9 +2,9 @@
 
 import { Webhook } from 'standardwebhooks';
 
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   apiKey: 'My API Key',
   appID: 'app_xxxxxxxxxxxxxx',
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',

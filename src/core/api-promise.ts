@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type Whopsdk } from '../client';
+import { type Whop } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: Whopsdk;
+  #client: Whop;
 
   constructor(
-    client: Whopsdk,
+    client: Whop,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: Whopsdk,
+      client: Whop,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

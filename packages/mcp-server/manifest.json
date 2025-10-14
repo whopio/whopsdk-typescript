@@ -1,16 +1,17 @@
 {
   "dxt_version": "0.2",
-  "name": "whopsdk-mcp",
+  "name": "@whop/mcp",
   "version": "0.0.1",
-  "description": "The official MCP Server for the Whopsdk API",
+  "description": "The official MCP Server for the Whop API",
   "author": {
-    "name": "Whopsdk"
+    "name": "Whop"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/stainless-sdks/whopsdk-typescript.git"
   },
   "homepage": "https://github.com/stainless-sdks/whopsdk-typescript/tree/main/packages/mcp-server#readme",
+  "documentation": "https://docs.whop.com/apps",
   "server": {
     "type": "node",
     "entry_point": "index.js",

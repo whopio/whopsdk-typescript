@@ -55,12 +55,12 @@ $ cd whopsdk-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link whopsdk
+$ yarn link @whop/sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global whopsdk
+$ pnpm link -—global @whop/sdk
 ```
 
 ## Running tests

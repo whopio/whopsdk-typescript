@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Whopsdk } from 'whopsdk';
+import { Whop } from '@whop/sdk';
 
-const { stringifyQuery } = Whopsdk.prototype as any;
+const { stringifyQuery } = Whop.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

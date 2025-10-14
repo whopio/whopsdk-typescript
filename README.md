@@ -1,10 +1,10 @@
-# Whopsdk TypeScript API Library
+# Whop TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/whopsdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/whopsdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/whopsdk)
+[![NPM version](<https://img.shields.io/npm/v/@whop/sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@whop/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@whop/sdk)
 
-This library provides convenient access to the Whopsdk REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Whop REST API from server-side TypeScript or JavaScript.
 
-The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.whop.com](https://docs.whop.com/apps). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/whopsdk-typescript.git
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install whopsdk`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install @whop/sdk`
 
 ## Usage
 
@@ -23,17 +23,17 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   appID: 'app_xxxxxxxxxxxxxx',
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
-const page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-const invoiceListItem = page.data[0];
+const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+const paymentListResponse = page.data[0];
 
-console.log(invoiceListItem.id);
+console.log(paymentListResponse.id);
 ```
 
 ### Request & Response types
@@ -42,15 +42,15 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   appID: 'app_xxxxxxxxxxxxxx',
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Whopsdk.InvoiceListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
-const [invoiceListItem]: [Whopsdk.InvoiceListItem] = await client.invoices.list(params);
+const params: Whop.PaymentListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
+const [paymentListResponse]: [Whop.PaymentListResponse] = await client.payments.list(params);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -63,8 +63,8 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
-  if (err instanceof Whopsdk.APIError) {
+const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
+  if (err instanceof Whop.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
     console.log(err.headers); // {server: 'nginx', ...}
@@ -98,13 +98,13 @@ You can use the `maxRetries` option to configure or disable this:
 <!-- prettier-ignore -->
 ```js
 // Configure the default for all requests:
-const client = new Whopsdk({
+const client = new Whop({
   appID: 'app_xxxxxxxxxxxxxx',
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
   maxRetries: 5,
 });
 ```
@@ -116,13 +116,13 @@ Requests time out after 1 minute by default. You can configure this with a `time
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
-const client = new Whopsdk({
+const client = new Whop({
   appID: 'app_xxxxxxxxxxxxxx',
   timeout: 20 * 1000, // 20 seconds (default is 1 minute)
 });
 
 // Override per-request:
-await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -133,26 +133,26 @@ Note that requests which time out will be [retried twice by default](#retries).
 
 ## Auto-pagination
 
-List methods in the Whopsdk API are paginated.
+List methods in the Whop API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllInvoiceListItems(params) {
-  const allInvoiceListItems = [];
+async function fetchAllPaymentListResponses(params) {
+  const allPaymentListResponses = [];
   // Automatically fetches more pages as needed.
-  for await (const invoiceListItem of client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {
-    allInvoiceListItems.push(invoiceListItem);
+  for await (const paymentListResponse of client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {
+    allPaymentListResponses.push(paymentListResponse);
   }
-  return allInvoiceListItems;
+  return allPaymentListResponses;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-for (const invoiceListItem of page.data) {
-  console.log(invoiceListItem);
+let page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+for (const paymentListResponse of page.data) {
+  console.log(paymentListResponse);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -174,18 +174,18 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 
 <!-- prettier-ignore -->
 ```ts
-const client = new Whopsdk();
+const client = new Whop();
 
-const response = await client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();
+const response = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: page, response: raw } = await client.invoices
+const { data: page, response: raw } = await client.payments
   .list({ company_id: 'biz_xxxxxxxxxxxxxx' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-for await (const invoiceListItem of page) {
-  console.log(invoiceListItem.id);
+for await (const paymentListResponse of page) {
+  console.log(paymentListResponse.id);
 }
 ```
 
@@ -199,13 +199,13 @@ for await (const invoiceListItem of page) {
 
 The log level can be configured in two ways:
 
-1. Via the `WHOPSDK_LOG` environment variable
+1. Via the `WHOP_LOG` environment variable
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   logLevel: 'debug', // Show all log messages
 });
 ```
@@ -231,13 +231,13 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 import pino from 'pino';
 
 const logger = pino();
 
-const client = new Whopsdk({
-  logger: logger.child({ name: 'Whopsdk' }),
+const client = new Whop({
+  logger: logger.child({ name: 'Whop' }),
   logLevel: 'debug', // Send all messages to pino, allowing it to filter
 });
 ```
@@ -266,7 +266,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.invoices.list({
+client.payments.list({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',
@@ -300,10 +300,10 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 import fetch from 'my-fetch';
 
-const client = new Whopsdk({ fetch });
+const client = new Whop({ fetch });
 ```
 
 ### Fetch options
@@ -311,9 +311,9 @@ const client = new Whopsdk({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   fetchOptions: {
     // `RequestInit` options
   },
@@ -328,11 +328,11 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
-const client = new Whopsdk({
+const client = new Whop({
   fetchOptions: {
     dispatcher: proxyAgent,
   },
@@ -342,9 +342,9 @@ const client = new Whopsdk({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import Whopsdk from 'whopsdk';
+import Whop from '@whop/sdk';
 
-const client = new Whopsdk({
+const client = new Whop({
   fetchOptions: {
     proxy: 'http://localhost:8888',
   },
@@ -354,10 +354,10 @@ const client = new Whopsdk({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import Whopsdk from 'npm:whopsdk';
+import Whop from 'npm:@whop/sdk';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new Whopsdk({
+const client = new Whop({
   fetchOptions: {
     client: httpClient,
   },
