@@ -14,13 +14,6 @@ export class Messages extends APIResource {
    * Required permissions:
    *
    * - `chat:message:create`
-   *
-   * @example
-   * ```ts
-   * const message = await client.messages.create({
-   *   content: 'content',
-   * });
-   * ```
    */
   create(body: MessageCreateParams, options?: RequestOptions): APIPromise<Shared.Message> {
     return this._client.post('/messages', { body, ...options });
@@ -32,11 +25,6 @@ export class Messages extends APIResource {
    * Required permissions:
    *
    * - `chat:read`
-   *
-   * @example
-   * ```ts
-   * const message = await client.messages.retrieve('id');
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Message> {
     return this._client.get(path`/messages/${id}`, options);
@@ -48,16 +36,6 @@ export class Messages extends APIResource {
    * Required permissions:
    *
    * - `chat:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const messageListResponse of client.messages.list(
-   *   { channel_id: 'channel_id' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: MessageListParams,
@@ -210,6 +188,11 @@ export namespace MessageListResponse {
 
 export interface MessageCreateParams {
   /**
+   * The ID of the channel or experience to send to.
+   */
+  channel_id: string;
+
+  /**
    * The content of the message in Markdown format.
    */
   content: string;
@@ -218,16 +201,6 @@ export interface MessageCreateParams {
    * The attachments for this message, such as videos or images.
    */
   attachments?: Array<MessageCreateParams.Attachment> | null;
-
-  /**
-   * The ID of the channel to send to.
-   */
-  channel_id?: string | null;
-
-  /**
-   * The ID of the chat experience to send the message in.
-   */
-  experience_id?: string | null;
 
   /**
    * The poll for this message
@@ -293,6 +266,11 @@ export interface MessageListParams extends CursorPageParams {
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
 
   /**
    * Returns the first _n_ elements from the list.

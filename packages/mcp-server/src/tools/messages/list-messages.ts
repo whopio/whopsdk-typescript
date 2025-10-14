@@ -34,6 +34,9 @@ export const tool: Tool = {
         type: 'string',
         description: 'Returns the elements in the list that come before the specified cursor.',
       },
+      direction: {
+        $ref: '#/$defs/direction',
+      },
       first: {
         type: 'integer',
         description: 'Returns the first _n_ elements from the list.',
@@ -50,6 +53,13 @@ export const tool: Tool = {
       },
     },
     required: ['channel_id'],
+    $defs: {
+      direction: {
+        type: 'string',
+        description: 'The direction of the sort.',
+        enum: ['asc', 'desc'],
+      },
+    },
   },
   annotations: {
     readOnlyHint: true,
