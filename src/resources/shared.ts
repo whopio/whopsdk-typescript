@@ -924,12 +924,12 @@ export namespace Entry {
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
@@ -1049,17 +1049,17 @@ export namespace Experience {
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The route of the access pass.
+     * The route of the product.
      */
     route: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
@@ -1095,7 +1095,7 @@ export interface ForumPost {
   is_pinned: boolean;
 
   /**
-   * Whether the user that sent the post is an admin of the bot
+   * Whether the user that sent the post is an admin of the company
    */
   is_poster_admin: boolean;
 
@@ -1780,12 +1780,12 @@ export interface PageInfo {
  */
 export interface Payment {
   /**
-   * The receipt ID
+   * The payment ID
    */
   id: string;
 
   /**
-   * How much the receipt is for after fees
+   * How much the payment is for after fees
    */
   amount_after_fees: number;
 
@@ -1815,12 +1815,12 @@ export interface Payment {
   card_last4: string | null;
 
   /**
-   * The company for the receipt.
+   * The company for the payment.
    */
   company: Payment.Company | null;
 
   /**
-   * The datetime the receipt was created
+   * The datetime the payment was created
    */
   created_at: number;
 
@@ -1845,17 +1845,17 @@ export interface Payment {
   last_payment_attempt: number | null;
 
   /**
-   * The member attached to this receipt.
+   * The member attached to this payment.
    */
   member: Payment.Member | null;
 
   /**
-   * The membership attached to this receipt.
+   * The membership attached to this payment.
    */
   membership: Payment.Membership | null;
 
   /**
-   * The datetime the receipt was paid
+   * The datetime the payment was paid
    */
   paid_at: number | null;
 
@@ -1866,17 +1866,17 @@ export interface Payment {
   payment_method_type: string | null;
 
   /**
-   * The plan attached to this receipt.
+   * The plan attached to this payment.
    */
   plan: Payment.Plan | null;
 
   /**
-   * The access pass attached to this receipt.
+   * The access pass attached to this payment.
    */
   product: Payment.Product | null;
 
   /**
-   * The promo code used for this receipt.
+   * The promo code used for this payment.
    */
   promo_code: Payment.PromoCode | null;
 
@@ -1906,7 +1906,7 @@ export interface Payment {
   status: ReceiptStatus | null;
 
   /**
-   * The friendly status of the receipt.
+   * The friendly status of the payment.
    */
   substatus: FriendlyReceiptStatus;
 
@@ -1978,7 +1978,7 @@ export namespace Payment {
   }
 
   /**
-   * The company for the receipt.
+   * The company for the payment.
    */
   export interface Company {
     /**
@@ -1998,7 +1998,7 @@ export namespace Payment {
   }
 
   /**
-   * The member attached to this receipt.
+   * The member attached to this payment.
    */
   export interface Member {
     /**
@@ -2013,7 +2013,7 @@ export namespace Payment {
   }
 
   /**
-   * The membership attached to this receipt.
+   * The membership attached to this payment.
    */
   export interface Membership {
     /**
@@ -2028,7 +2028,7 @@ export namespace Payment {
   }
 
   /**
-   * The plan attached to this receipt.
+   * The plan attached to this payment.
    */
   export interface Plan {
     /**
@@ -2038,27 +2038,27 @@ export namespace Payment {
   }
 
   /**
-   * The access pass attached to this receipt.
+   * The access pass attached to this payment.
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The route of the access pass.
+     * The route of the product.
      */
     route: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
 
   /**
-   * The promo code used for this receipt.
+   * The promo code used for this payment.
    */
   export interface PromoCode {
     /**
@@ -2198,7 +2198,7 @@ export interface Plan {
   product: Plan.Product | null;
 
   /**
-   * The direct link to purchase the access pass.
+   * The direct link to purchase the product.
    */
   purchase_url: string;
 
@@ -2299,12 +2299,12 @@ export namespace Plan {
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
@@ -2320,7 +2320,7 @@ export type PlanType = 'renewal' | 'one_time';
  */
 export interface Product {
   /**
-   * The internal ID of the public access pass.
+   * The internal ID of the public product.
    */
   id: string;
 
@@ -2330,27 +2330,27 @@ export interface Product {
   business_type: BusinessTypes | null;
 
   /**
-   * A short type of the company that this access pass belongs to.
+   * A short type of the company that this product belongs to.
    */
   company: Product.Company;
 
   /**
-   * When the access pass was created.
+   * When the product was created.
    */
   created_at: number;
 
   /**
-   * The custom call to action for the access pass.
+   * The custom call to action for the product.
    */
   custom_cta: CustomCta;
 
   /**
-   * The custom call to action URL for the access pass, if any.
+   * The custom call to action URL for the product, if any.
    */
   custom_cta_url: string | null;
 
   /**
-   * The custom statement descriptor for the access pass.
+   * The custom statement descriptor for the product.
    */
   custom_statement_descriptor: string | null;
 
@@ -2366,12 +2366,12 @@ export interface Product {
   global_affiliate_percentage: number | null;
 
   /**
-   * The status of the global affiliate program for this access pass.
+   * The status of the global affiliate program for this product.
    */
   global_affiliate_status: GlobalAffiliateStatus;
 
   /**
-   * The headline of the access pass.
+   * The headline of the product.
    */
   headline: string | null;
 
@@ -2387,42 +2387,42 @@ export interface Product {
   member_affiliate_percentage: number | null;
 
   /**
-   * The status of the member affiliate program for this access pass.
+   * The status of the member affiliate program for this product.
    */
   member_affiliate_status: GlobalAffiliateStatus;
 
   /**
-   * The number of active users for this access pass.
+   * The number of active users for this product.
    */
   member_count: number;
 
   /**
-   * The user that owns the access pass (company owner).
+   * The user that owns the product (company owner).
    */
   owner_user: Product.OwnerUser;
 
   /**
-   * The product tax code for the access pass, if any.
+   * The product tax code for the product, if any.
    */
   product_tax_code: Product.ProductTaxCode | null;
 
   /**
-   * The number of reviews that have been published for the access pass.
+   * The number of reviews that have been published for the product.
    */
   published_reviews_count: number;
 
   /**
-   * The route of the access pass.
+   * The route of the product.
    */
   route: string;
 
   /**
-   * The title of the access pass. Use for Whop 4.0.
+   * The title of the product. Use for Whop 4.0.
    */
   title: string;
 
   /**
-   * When the access pass was updated.
+   * When the product was updated.
    */
   updated_at: number;
 
@@ -2432,14 +2432,14 @@ export interface Product {
   verified: boolean;
 
   /**
-   * This access pass will/will not be displayed publicly.
+   * This product will/will not be displayed publicly.
    */
   visibility: Visibility;
 }
 
 export namespace Product {
   /**
-   * A short type of the company that this access pass belongs to.
+   * A short type of the company that this product belongs to.
    */
   export interface Company {
     /**
@@ -2459,7 +2459,7 @@ export namespace Product {
   }
 
   /**
-   * The user that owns the access pass (company owner).
+   * The user that owns the product (company owner).
    */
   export interface OwnerUser {
     /**
@@ -2479,7 +2479,7 @@ export namespace Product {
   }
 
   /**
-   * The product tax code for the access pass, if any.
+   * The product tax code for the product, if any.
    */
   export interface ProductTaxCode {
     /**
@@ -2504,7 +2504,7 @@ export namespace Product {
  */
 export interface ProductListItem {
   /**
-   * The internal ID of the public access pass.
+   * The internal ID of the public product.
    */
   id: string;
 
@@ -2514,12 +2514,12 @@ export interface ProductListItem {
   business_type: BusinessTypes | null;
 
   /**
-   * When the access pass was created.
+   * When the product was created.
    */
   created_at: number;
 
   /**
-   * The headline of the access pass.
+   * The headline of the product.
    */
   headline: string | null;
 
@@ -2529,27 +2529,27 @@ export interface ProductListItem {
   industry_type: IndustryTypes | null;
 
   /**
-   * The number of active users for this access pass.
+   * The number of active users for this product.
    */
   member_count: number;
 
   /**
-   * The number of reviews that have been published for the access pass.
+   * The number of reviews that have been published for the product.
    */
   published_reviews_count: number;
 
   /**
-   * The route of the access pass.
+   * The route of the product.
    */
   route: string;
 
   /**
-   * The title of the access pass. Use for Whop 4.0.
+   * The title of the product. Use for Whop 4.0.
    */
   title: string;
 
   /**
-   * When the access pass was updated.
+   * When the product was updated.
    */
   updated_at: number;
 
@@ -2559,7 +2559,7 @@ export interface ProductListItem {
   verified: boolean;
 
   /**
-   * This access pass will/will not be displayed publicly.
+   * This product will/will not be displayed publicly.
    */
   visibility: Visibility;
 }
@@ -2687,7 +2687,7 @@ export namespace Shipment {
    */
   export interface Payment {
     /**
-     * The receipt ID
+     * The payment ID
      */
     id: string;
   }

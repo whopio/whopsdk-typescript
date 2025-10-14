@@ -26,7 +26,7 @@ export const tool: Tool = {
       },
       partial_amount: {
         type: 'number',
-        description: 'refund_payment | An amount if the refund is supposed to be partial.',
+        description: 'An amount if the refund is supposed to be partial.',
       },
     },
     required: ['id'],

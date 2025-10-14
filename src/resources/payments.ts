@@ -146,12 +146,12 @@ export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
  */
 export interface PaymentListResponse {
   /**
-   * The receipt ID
+   * The payment ID
    */
   id: string;
 
   /**
-   * How much the receipt is for after fees
+   * How much the payment is for after fees
    */
   amount_after_fees: number;
 
@@ -181,12 +181,12 @@ export interface PaymentListResponse {
   card_last4: string | null;
 
   /**
-   * The company for the receipt.
+   * The company for the payment.
    */
   company: PaymentListResponse.Company | null;
 
   /**
-   * The datetime the receipt was created
+   * The datetime the payment was created
    */
   created_at: number;
 
@@ -211,17 +211,17 @@ export interface PaymentListResponse {
   last_payment_attempt: number | null;
 
   /**
-   * The member attached to this receipt.
+   * The member attached to this payment.
    */
   member: PaymentListResponse.Member | null;
 
   /**
-   * The membership attached to this receipt.
+   * The membership attached to this payment.
    */
   membership: PaymentListResponse.Membership | null;
 
   /**
-   * The datetime the receipt was paid
+   * The datetime the payment was paid
    */
   paid_at: number | null;
 
@@ -232,17 +232,17 @@ export interface PaymentListResponse {
   payment_method_type: string | null;
 
   /**
-   * The plan attached to this receipt.
+   * The plan attached to this payment.
    */
   plan: PaymentListResponse.Plan | null;
 
   /**
-   * The access pass attached to this receipt.
+   * The access pass attached to this payment.
    */
   product: PaymentListResponse.Product | null;
 
   /**
-   * The promo code used for this receipt.
+   * The promo code used for this payment.
    */
   promo_code: PaymentListResponse.PromoCode | null;
 
@@ -272,7 +272,7 @@ export interface PaymentListResponse {
   status: Shared.ReceiptStatus | null;
 
   /**
-   * The friendly status of the receipt.
+   * The friendly status of the payment.
    */
   substatus: Shared.FriendlyReceiptStatus;
 
@@ -344,7 +344,7 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The company for the receipt.
+   * The company for the payment.
    */
   export interface Company {
     /**
@@ -364,7 +364,7 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The member attached to this receipt.
+   * The member attached to this payment.
    */
   export interface Member {
     /**
@@ -379,7 +379,7 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The membership attached to this receipt.
+   * The membership attached to this payment.
    */
   export interface Membership {
     /**
@@ -394,7 +394,7 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The plan attached to this receipt.
+   * The plan attached to this payment.
    */
   export interface Plan {
     /**
@@ -404,27 +404,27 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The access pass attached to this receipt.
+   * The access pass attached to this payment.
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The route of the access pass.
+     * The route of the product.
      */
     route: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
 
   /**
-   * The promo code used for this receipt.
+   * The promo code used for this payment.
    */
   export interface PromoCode {
     /**
@@ -570,7 +570,7 @@ export interface PaymentListParams extends CursorPageParams {
 
 export interface PaymentRefundParams {
   /**
-   * refund_payment | An amount if the refund is supposed to be partial.
+   * An amount if the refund is supposed to be partial.
    */
   partial_amount?: number | null;
 }

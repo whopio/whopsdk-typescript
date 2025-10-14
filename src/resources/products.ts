@@ -120,12 +120,12 @@ export type ProductDeleteResponse = boolean;
 
 export interface ProductCreateParams {
   /**
-   * The ID of the company to create the access pass for.
+   * The ID of the company to create the product for.
    */
   company_id: string;
 
   /**
-   * The title of the access pass.
+   * The title of the product.
    */
   title: string;
 
@@ -135,7 +135,7 @@ export interface ProductCreateParams {
   access_pass_type?: Shared.AccessPassType | null;
 
   /**
-   * A banner image for the access pass in png, jpeg format
+   * A banner image for the product in png, jpeg format
    */
   banner_image?: ProductCreateParams.BannerImage | null;
 
@@ -155,19 +155,19 @@ export interface ProductCreateParams {
   custom_cta?: Shared.CustomCta | null;
 
   /**
-   * The custom call to action URL for the access pass.
+   * The custom call to action URL for the product.
    */
   custom_cta_url?: string | null;
 
   /**
-   * The custom statement descriptor for the access pass i.e. WHOP\*SPORTS, must be
+   * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
    * between 5 and 22 characters, contain at least one letter, and not contain any of
    * the following characters: <, >, \, ', "
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the access pass.
+   * A written description of the product.
    */
   description?: string | null;
 
@@ -187,7 +187,7 @@ export interface ProductCreateParams {
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The headline of the access pass.
+   * The headline of the product.
    */
   headline?: string | null;
 
@@ -212,12 +212,12 @@ export interface ProductCreateParams {
   plan_options?: ProductCreateParams.PlanOptions | null;
 
   /**
-   * The product highlights for the access pass.
+   * The product highlights for the product.
    */
   product_highlights?: Array<ProductCreateParams.ProductHighlight> | null;
 
   /**
-   * The ID of the product tax code to apply to this access pass.
+   * The ID of the product tax code to apply to this product.
    */
   product_tax_code_id?: string | null;
 
@@ -227,7 +227,7 @@ export interface ProductCreateParams {
   redirect_purchase_url?: string | null;
 
   /**
-   * The route of the access pass.
+   * The route of the product.
    */
   route?: string | null;
 
@@ -239,7 +239,7 @@ export interface ProductCreateParams {
 
 export namespace ProductCreateParams {
   /**
-   * A banner image for the access pass in png, jpeg format
+   * A banner image for the product in png, jpeg format
    */
   export interface BannerImage {
     /**
@@ -360,7 +360,7 @@ export namespace ProductCreateParams {
 
 export interface ProductUpdateParams {
   /**
-   * A banner image for the access pass in png, jpeg format
+   * A banner image for the product in png, jpeg format
    */
   banner_image?: ProductUpdateParams.BannerImage | null;
 
@@ -380,19 +380,19 @@ export interface ProductUpdateParams {
   custom_cta?: Shared.CustomCta | null;
 
   /**
-   * The custom call to action URL for the access pass.
+   * The custom call to action URL for the product.
    */
   custom_cta_url?: string | null;
 
   /**
-   * The custom statement descriptor for the access pass i.e. WHOP\*SPORTS, must be
+   * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
    * between 5 and 22 characters, contain at least one letter, and not contain any of
    * the following characters: <, >, \, ', "
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the access pass.
+   * A written description of the product.
    */
   description?: string | null;
 
@@ -407,7 +407,7 @@ export interface ProductUpdateParams {
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The headline of the access pass.
+   * The headline of the product.
    */
   headline?: string | null;
 
@@ -427,7 +427,7 @@ export interface ProductUpdateParams {
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The ID of the product tax code to apply to this access pass.
+   * The ID of the product tax code to apply to this product.
    */
   product_tax_code_id?: string | null;
 
@@ -437,12 +437,12 @@ export interface ProductUpdateParams {
   redirect_purchase_url?: string | null;
 
   /**
-   * The route of the access pass.
+   * The route of the product.
    */
   route?: string | null;
 
   /**
-   * The title of the access pass.
+   * The title of the product.
    */
   title?: string | null;
 
@@ -454,7 +454,7 @@ export interface ProductUpdateParams {
 
 export namespace ProductUpdateParams {
   /**
-   * A banner image for the access pass in png, jpeg format
+   * A banner image for the product in png, jpeg format
    */
   export interface BannerImage {
     /**

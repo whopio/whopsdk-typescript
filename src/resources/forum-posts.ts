@@ -99,7 +99,7 @@ export interface ForumPostListResponse {
   is_pinned: boolean;
 
   /**
-   * Whether the user that sent the post is an admin of the bot
+   * Whether the user that sent the post is an admin of the company
    */
   is_poster_admin: boolean;
 

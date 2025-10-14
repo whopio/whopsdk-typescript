@@ -113,12 +113,12 @@ export namespace EntryListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public access pass.
+     * The internal ID of the public product.
      */
     id: string;
 
     /**
-     * The title of the access pass. Use for Whop 4.0.
+     * The title of the product. Use for Whop 4.0.
      */
     title: string;
   }
@@ -196,7 +196,7 @@ export interface EntryListParams extends CursorPageParams {
   plan_ids?: Array<string> | null;
 
   /**
-   * The access pass IDs to filter the entries by
+   * The product IDs to filter the entries by
    */
   product_ids?: Array<string> | null;
 

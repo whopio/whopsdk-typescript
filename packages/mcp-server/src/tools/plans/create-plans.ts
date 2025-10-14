@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       product_id: {
         type: 'string',
-        description: 'The access pass the plan is related to.',
+        description: 'The product the plan is related to.',
       },
       billing_period: {
         type: 'integer',
