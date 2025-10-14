@@ -194,6 +194,11 @@ export interface ClientOptions {
   webhookKey?: string | null | undefined;
 
   /**
+   * Defaults to process.env['WHOP_APP_ID'].
+   */
+  appID?: string | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['WHOPSDK_BASE_URL'].
@@ -268,6 +273,7 @@ export interface ClientOptions {
 export class Whopsdk {
   apiKey: string;
   webhookKey: string | null;
+  appID: string;
 
   baseURL: string;
   maxRetries: number;
@@ -286,6 +292,7 @@ export class Whopsdk {
    *
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
+   * @param {string | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['WHOPSDK_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -298,6 +305,7 @@ export class Whopsdk {
     baseURL = readEnv('WHOPSDK_BASE_URL'),
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
+    appID = readEnv('WHOP_APP_ID'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -305,10 +313,16 @@ export class Whopsdk {
         "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whopsdk client with an apiKey option, like new Whopsdk({ apiKey: 'My API Key' }).",
       );
     }
+    if (appID === undefined) {
+      throw new Errors.WhopsdkError(
+        "The WHOP_APP_ID environment variable is missing or empty; either provide it, or instantiate the Whopsdk client with an appID option, like new Whopsdk({ appID: 'app_xxxxxxxxxxxxxx' }).",
+      );
+    }
 
     const options: ClientOptions = {
       apiKey,
       webhookKey,
+      appID,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -332,6 +346,7 @@ export class Whopsdk {
 
     this.apiKey = apiKey;
     this.webhookKey = webhookKey;
+    this.appID = appID;
   }
 
   /**
@@ -349,6 +364,7 @@ export class Whopsdk {
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
+      appID: this.appID,
       ...options,
     });
     return client;
@@ -812,6 +828,7 @@ export class Whopsdk {
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
+        'X-Whop-App-Id': this.appID,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,

@@ -34,6 +34,15 @@ const serverConfig: ServerConfig = {
       placeholder: 'My Webhook Key',
       type: 'string',
     },
+    {
+      key: 'appID',
+      label: 'App ID',
+      description: '',
+      required: true,
+      default: undefined,
+      placeholder: 'app_xxxxxxxxxxxxxx',
+      type: 'string',
+    },
   ],
 };
 

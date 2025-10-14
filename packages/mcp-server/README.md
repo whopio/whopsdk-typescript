@@ -21,6 +21,7 @@ cd whopsdk-typescript
 # set env vars as needed
 export WHOP_API_KEY="My API Key"
 export WHOP_WEBHOOK_SECRET="My Webhook Key"
+export WHOP_APP_ID="app_xxxxxxxxxxxxxx"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -44,7 +45,8 @@ For clients with a configuration JSON, it might look something like this:
       "args": ["/path/to/local/whopsdk-typescript/packages/mcp-server", "--client=claude", "--tools=dynamic"],
       "env": {
         "WHOP_API_KEY": "My API Key",
-        "WHOP_WEBHOOK_SECRET": "My Webhook Key"
+        "WHOP_WEBHOOK_SECRET": "My Webhook Key",
+        "WHOP_APP_ID": "app_xxxxxxxxxxxxxx"
       }
     }
   }

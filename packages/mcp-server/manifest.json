@@ -19,7 +19,8 @@
       "args": ["${__dirname}/index.js"],
       "env": {
         "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
-        "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}"
+        "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}",
+        "WHOP_APP_ID": "${user_config.WHOP_APP_ID}"
       }
     }
   },
@@ -34,6 +35,12 @@
       "title": "webhook_key",
       "description": "",
       "required": false,
+      "type": "string"
+    },
+    "WHOP_APP_ID": {
+      "title": "app_id",
+      "description": "",
+      "required": true,
       "type": "string"
     }
   },
