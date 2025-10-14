@@ -46,11 +46,7 @@ export interface LedgerAccountRetrieveResponse {
   /**
    * The owner of the ledger account.
    */
-  owner:
-    | LedgerAccountRetrieveResponse.UnionMember0
-    | null
-    | LedgerAccountRetrieveResponse.UnionMember1
-    | null;
+  owner: LedgerAccountRetrieveResponse.User | null | LedgerAccountRetrieveResponse.Company | null;
 
   /**
    * The different approval statuses an account can have.
@@ -92,7 +88,7 @@ export namespace LedgerAccountRetrieveResponse {
   /**
    * An object representing a (sanitized) user of the site.
    */
-  export interface UnionMember0 {
+  export interface User {
     /**
      * The internal ID of the user.
      */
@@ -106,7 +102,7 @@ export namespace LedgerAccountRetrieveResponse {
     /**
      * The typename of this object
      */
-    typename: 'PublicProfileUser';
+    typename: 'User';
 
     /**
      * The username of the user from their Whop account.
@@ -117,7 +113,7 @@ export namespace LedgerAccountRetrieveResponse {
   /**
    * An object representing a (sanitized) company.
    */
-  export interface UnionMember1 {
+  export interface Company {
     /**
      * The ID (tag) of the company.
      */
@@ -136,7 +132,7 @@ export namespace LedgerAccountRetrieveResponse {
     /**
      * The typename of this object
      */
-    typename: 'PublicCompany';
+    typename: 'Company';
   }
 }
 
