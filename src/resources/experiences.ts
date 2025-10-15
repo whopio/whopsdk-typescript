@@ -164,7 +164,7 @@ export interface ExperienceListResponse {
   /**
    * The timestamp of when this experience was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The written name of the description.

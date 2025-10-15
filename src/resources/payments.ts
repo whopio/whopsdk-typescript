@@ -188,7 +188,7 @@ export interface PaymentListResponse {
   /**
    * The datetime the payment was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The available currencies on the platform
@@ -198,7 +198,7 @@ export interface PaymentListResponse {
   /**
    * When an alert came in that this transaction will be disputed
    */
-  dispute_alerted_at: number | null;
+  dispute_alerted_at: string | null;
 
   /**
    * If the payment failed, the reason for the failure.
@@ -208,7 +208,7 @@ export interface PaymentListResponse {
   /**
    * The time of the last payment attempt.
    */
-  last_payment_attempt: number | null;
+  last_payment_attempt: string | null;
 
   /**
    * The member attached to this payment.
@@ -223,7 +223,7 @@ export interface PaymentListResponse {
   /**
    * The datetime the payment was paid
    */
-  paid_at: number | null;
+  paid_at: string | null;
 
   /**
    * Returns the type of payment method used for the payment, if available. Ex.
@@ -259,7 +259,7 @@ export interface PaymentListResponse {
   /**
    * When the payment was refunded (if applicable).
    */
-  refunded_at: number | null;
+  refunded_at: string | null;
 
   /**
    * Whether the payment can be retried.
@@ -510,12 +510,12 @@ export interface PaymentListParams extends CursorPageParams {
   /**
    * The minimum creation date to filter by
    */
-  created_after?: number | null;
+  created_after?: string | null;
 
   /**
    * The maximum creation date to filter by
    */
-  created_before?: number | null;
+  created_before?: string | null;
 
   /**
    * The currency of the payment.

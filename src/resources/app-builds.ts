@@ -109,7 +109,7 @@ export interface AppBuildListResponse {
   /**
    * When this app build was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The URL to download the app build .zip file.

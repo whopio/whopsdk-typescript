@@ -74,7 +74,7 @@ export interface EntryListResponse {
   /**
    * When the entry was created.
    */
-  created_at: number | null;
+  created_at: string | null;
 
   /**
    * The waitlist plan the entry if for.

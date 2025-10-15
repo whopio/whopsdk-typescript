@@ -62,6 +62,11 @@ export interface MessageListResponse {
   content: string | null;
 
   /**
+   * The timestamp when the post was created
+   */
+  created_at: string;
+
+  /**
    * Whether the message has been edited
    */
   is_edited: boolean;
@@ -95,6 +100,11 @@ export interface MessageListResponse {
    * The ID of the message this is replying to, if applicable
    */
   replying_to_message_id: string | null;
+
+  /**
+   * The timestamp when the post was last updated
+   */
+  updated_at: string;
 
   /**
    * The user who sent this message

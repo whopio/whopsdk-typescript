@@ -50,12 +50,14 @@ export const tool: Tool = {
         },
       },
       created_after: {
-        type: 'integer',
+        type: 'string',
         description: 'The minimum creation date to filter by',
+        format: 'date-time',
       },
       created_before: {
-        type: 'integer',
+        type: 'string',
         description: 'The maximum creation date to filter by',
+        format: 'date-time',
       },
       currencies: {
         type: 'array',

@@ -116,7 +116,7 @@ export interface MembershipListResponse {
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
    */
-  canceled_at: number | null;
+  canceled_at: string | null;
 
   /**
    * The reason that the member canceled the membership (filled out by the member).
@@ -131,7 +131,7 @@ export interface MembershipListResponse {
   /**
    * The timestamp, in seconds, that this Membership was created at.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The available currencies on the platform
@@ -178,13 +178,13 @@ export interface MembershipListResponse {
    * The timestamp in seconds at which the current billing cycle for this
    * subscription ends. Only applies for memberships that have a renewal plan.
    */
-  renewal_period_end: number | null;
+  renewal_period_end: string | null;
 
   /**
    * The timestamp in seconds at which the current billing cycle for this
    * subscription start. Only applies for memberships that have a renewal plan.
    */
-  renewal_period_start: number | null;
+  renewal_period_start: string | null;
 
   /**
    * The status of the membership.
@@ -194,7 +194,7 @@ export interface MembershipListResponse {
   /**
    * A timestamp of when the membership was last updated
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * The user this membership belongs to
@@ -308,12 +308,12 @@ export interface MembershipListParams extends CursorPageParams {
   /**
    * The minimum creation date to filter by
    */
-  created_after?: number | null;
+  created_after?: string | null;
 
   /**
    * The maximum creation date to filter by
    */
-  created_before?: number | null;
+  created_before?: string | null;
 
   /**
    * The direction of the sort.
