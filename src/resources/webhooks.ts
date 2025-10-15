@@ -23,112 +23,112 @@ export interface InvoiceCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
-  id?: string;
+  id: string;
 
   /**
    * The API version for this webhook
    */
-  api_version?: 'v1';
+  api_version: 'v1';
 
   /**
    * The timestamp in seconds since the Unix epoch that the webhook was sent at on
    * the server
    */
-  created_at?: string;
+  created_at: string;
 
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice;
+  data: Shared.Invoice;
 
   /**
    * The webhook event type
    */
-  type?: 'invoice.created';
+  type: 'invoice.created';
 }
 
 export interface InvoicePaidWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
-  id?: string;
+  id: string;
 
   /**
    * The API version for this webhook
    */
-  api_version?: 'v1';
+  api_version: 'v1';
 
   /**
    * The timestamp in seconds since the Unix epoch that the webhook was sent at on
    * the server
    */
-  created_at?: string;
+  created_at: string;
 
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice;
+  data: Shared.Invoice;
 
   /**
    * The webhook event type
    */
-  type?: 'invoice.paid';
+  type: 'invoice.paid';
 }
 
 export interface InvoicePastDueWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
-  id?: string;
+  id: string;
 
   /**
    * The API version for this webhook
    */
-  api_version?: 'v1';
+  api_version: 'v1';
 
   /**
    * The timestamp in seconds since the Unix epoch that the webhook was sent at on
    * the server
    */
-  created_at?: string;
+  created_at: string;
 
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice;
+  data: Shared.Invoice;
 
   /**
    * The webhook event type
    */
-  type?: 'invoice.past_due';
+  type: 'invoice.past_due';
 }
 
 export interface InvoiceVoidedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
-  id?: string;
+  id: string;
 
   /**
    * The API version for this webhook
    */
-  api_version?: 'v1';
+  api_version: 'v1';
 
   /**
    * The timestamp in seconds since the Unix epoch that the webhook was sent at on
    * the server
    */
-  created_at?: string;
+  created_at: string;
 
   /**
    * A statement that defines an amount due by a customer.
    */
-  data?: Shared.Invoice;
+  data: Shared.Invoice;
 
   /**
    * The webhook event type
    */
-  type?: 'invoice.voided';
+  type: 'invoice.voided';
 }
 
 export type UnwrapWebhookEvent =
