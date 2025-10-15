@@ -91,12 +91,12 @@ export interface ShipmentListResponse {
   /**
    * The date and time the shipment was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The delivery estimate of the shipment
    */
-  delivery_estimate: number | null;
+  delivery_estimate: string | null;
 
   /**
    * The payment of the shipment
@@ -126,7 +126,7 @@ export interface ShipmentListResponse {
   /**
    * The date and time the shipment was last updated
    */
-  updated_at: number;
+  updated_at: string;
 }
 
 export namespace ShipmentListResponse {

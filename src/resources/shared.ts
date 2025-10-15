@@ -117,7 +117,7 @@ export namespace App {
     /**
      * When this API key was created at
      */
-    created_at: number;
+    created_at: string;
   }
 
   /**
@@ -240,7 +240,7 @@ export interface AppBuild {
   /**
    * When this app build was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The URL to download the app build .zip file.
@@ -507,7 +507,7 @@ export interface Company {
   /**
    * When the company was created (signed up)
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The different industry types a company can be in.
@@ -547,7 +547,7 @@ export interface Company {
   /**
    * The time the company was last updated.
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * If the company is Whop Verified
@@ -614,7 +614,7 @@ export interface CourseLessonInteraction {
   /**
    * When the interaction was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The lesson this interaction is for
@@ -681,7 +681,7 @@ export interface CourseLessonInteractionListItem {
   /**
    * When the interaction was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The lesson this interaction is for
@@ -860,7 +860,7 @@ export interface Entry {
   /**
    * When the entry was created.
    */
-  created_at: number | null;
+  created_at: string | null;
 
   /**
    * Responses collected from the user when submitting their entry.
@@ -987,7 +987,7 @@ export interface Experience {
   /**
    * The timestamp of when this experience was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The written name of the description.
@@ -1249,7 +1249,7 @@ export interface Invoice {
   /**
    * The date the invoice was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The plan that the invoice was created for.
@@ -1259,7 +1259,7 @@ export interface Invoice {
   /**
    * The date the invoice is due.
    */
-  due_date: number | null;
+  due_date: string | null;
 
   /**
    * The email address that the invoice was created for.
@@ -1341,7 +1341,7 @@ export interface InvoiceListItem {
   /**
    * The date the invoice was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The plan that the invoice was created for.
@@ -1351,7 +1351,7 @@ export interface InvoiceListItem {
   /**
    * The date the invoice is due.
    */
-  due_date: number | null;
+  due_date: string | null;
 
   /**
    * The email address that the invoice was created for.
@@ -1445,7 +1445,7 @@ export interface Membership {
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
    */
-  canceled_at: number | null;
+  canceled_at: string | null;
 
   /**
    * The reason that the member canceled the membership (filled out by the member).
@@ -1460,7 +1460,7 @@ export interface Membership {
   /**
    * The timestamp, in seconds, that this Membership was created at.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The available currencies on the platform
@@ -1507,13 +1507,13 @@ export interface Membership {
    * The timestamp in seconds at which the current billing cycle for this
    * subscription ends. Only applies for memberships that have a renewal plan.
    */
-  renewal_period_end: number | null;
+  renewal_period_end: string | null;
 
   /**
    * The timestamp in seconds at which the current billing cycle for this
    * subscription start. Only applies for memberships that have a renewal plan.
    */
-  renewal_period_start: number | null;
+  renewal_period_start: string | null;
 
   /**
    * The status of the membership.
@@ -1523,7 +1523,7 @@ export interface Membership {
   /**
    * A timestamp of when the membership was last updated
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * The user this membership belongs to
@@ -1626,6 +1626,11 @@ export interface Message {
   content: string | null;
 
   /**
+   * The timestamp when the post was created
+   */
+  created_at: string;
+
+  /**
    * Whether the message has been edited
    */
   is_edited: boolean;
@@ -1659,6 +1664,11 @@ export interface Message {
    * The ID of the message this is replying to, if applicable
    */
   replying_to_message_id: string | null;
+
+  /**
+   * The timestamp when the post was last updated
+   */
+  updated_at: string;
 
   /**
    * The user who sent this message
@@ -1822,7 +1832,7 @@ export interface Payment {
   /**
    * The datetime the payment was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The available currencies on the platform
@@ -1832,7 +1842,7 @@ export interface Payment {
   /**
    * When an alert came in that this transaction will be disputed
    */
-  dispute_alerted_at: number | null;
+  dispute_alerted_at: string | null;
 
   /**
    * If the payment failed, the reason for the failure.
@@ -1842,7 +1852,7 @@ export interface Payment {
   /**
    * The time of the last payment attempt.
    */
-  last_payment_attempt: number | null;
+  last_payment_attempt: string | null;
 
   /**
    * The member attached to this payment.
@@ -1857,7 +1867,7 @@ export interface Payment {
   /**
    * The datetime the payment was paid
    */
-  paid_at: number | null;
+  paid_at: string | null;
 
   /**
    * Returns the type of payment method used for the payment, if available. Ex.
@@ -1893,7 +1903,7 @@ export interface Payment {
   /**
    * When the payment was refunded (if applicable).
    */
-  refunded_at: number | null;
+  refunded_at: string | null;
 
   /**
    * Whether the payment can be retried.
@@ -2145,7 +2155,7 @@ export interface Plan {
   /**
    * When the plan was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The respective currency identifier for the plan.
@@ -2225,7 +2235,7 @@ export interface Plan {
   /**
    * When the plan was last updated.
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * Shows or hides the plan from public/business view.
@@ -2337,7 +2347,7 @@ export interface Product {
   /**
    * When the product was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The custom call to action for the product.
@@ -2424,7 +2434,7 @@ export interface Product {
   /**
    * When the product was updated.
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * Whether this product is Whop verified.
@@ -2516,7 +2526,7 @@ export interface ProductListItem {
   /**
    * When the product was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The headline of the product.
@@ -2551,7 +2561,7 @@ export interface ProductListItem {
   /**
    * When the product was updated.
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * Whether this product is Whop verified.
@@ -2643,12 +2653,12 @@ export interface Shipment {
   /**
    * The date and time the shipment was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The delivery estimate of the shipment
    */
-  delivery_estimate: number | null;
+  delivery_estimate: string | null;
 
   /**
    * The payment of the shipment
@@ -2678,7 +2688,7 @@ export interface Shipment {
   /**
    * The date and time the shipment was last updated
    */
-  updated_at: number;
+  updated_at: string;
 }
 
 export namespace Shipment {
@@ -2849,12 +2859,12 @@ export interface SupportChannel {
   /**
    * When the last message was sent
    */
-  last_message_at: number | null;
+  last_message_at: string | null;
 
   /**
    * When the support ticket was resolved (null if unresolved)
    */
-  resolved_at: number | null;
+  resolved_at: string | null;
 }
 
 export namespace SupportChannel {
@@ -2902,7 +2912,7 @@ export interface Transfer {
   /**
    * The timestamp when the credit transaction transfer was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The currency of the credit transaction transfer

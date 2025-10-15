@@ -89,7 +89,7 @@ export interface TransferListResponse {
   /**
    * The timestamp when the credit transaction transfer was created
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The currency of the credit transaction transfer

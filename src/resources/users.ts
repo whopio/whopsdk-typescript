@@ -43,7 +43,7 @@ export interface UserRetrieveResponse {
   /**
    * When the user was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The name of the user from their Whop account.

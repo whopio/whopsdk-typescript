@@ -102,12 +102,12 @@ export interface SupportChannelListResponse {
   /**
    * When the last message was sent
    */
-  last_message_at: number | null;
+  last_message_at: string | null;
 
   /**
    * When the support ticket was resolved (null if unresolved)
    */
-  resolved_at: number | null;
+  resolved_at: string | null;
 }
 
 export namespace SupportChannelListResponse {

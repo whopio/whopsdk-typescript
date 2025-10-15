@@ -138,7 +138,7 @@ export interface PlanListResponse {
   /**
    * When the plan was created.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * The respective currency identifier for the plan.
@@ -208,7 +208,7 @@ export interface PlanListResponse {
   /**
    * When the plan was last updated.
    */
-  updated_at: number;
+  updated_at: string;
 
   /**
    * Shows or hides the plan from public/business view.

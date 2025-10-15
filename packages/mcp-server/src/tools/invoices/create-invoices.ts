@@ -28,8 +28,9 @@ export const tool: Tool = {
         description: 'The company ID to create this invoice for.',
       },
       due_date: {
-        type: 'integer',
+        type: 'string',
         description: 'The date the invoice is due, if applicable.',
+        format: 'date-time',
       },
       plan: {
         type: 'object',

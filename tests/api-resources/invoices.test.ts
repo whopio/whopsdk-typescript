@@ -14,7 +14,7 @@ describe('resource invoices', () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: 1701406800,
+      due_date: '2023-12-01T05:00:00.401Z',
       plan: {},
     });
     const rawResponse = await responsePromise.asResponse();
@@ -31,7 +31,7 @@ describe('resource invoices', () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: 1701406800,
+      due_date: '2023-12-01T05:00:00.401Z',
       plan: {
         billing_period: 42,
         custom_fields: [

@@ -22,7 +22,7 @@ export class Invoices extends APIResource {
    * const invoice = await client.invoices.create({
    *   collection_method: 'send_invoice',
    *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   due_date: 1701406800,
+   *   due_date: '2023-12-01T05:00:00.401Z',
    *   plan: {},
    * });
    * ```
@@ -129,7 +129,7 @@ export interface InvoiceCreateParams {
   /**
    * The date the invoice is due, if applicable.
    */
-  due_date: number;
+  due_date: string;
 
   /**
    * The properties of the plan to create for this invoice.
