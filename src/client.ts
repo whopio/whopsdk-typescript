@@ -181,7 +181,7 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
+import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token.js';
 
 export interface ClientOptions {
   /**
