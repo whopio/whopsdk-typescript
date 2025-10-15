@@ -619,6 +619,7 @@ The following tools are available in this MCP server.
 ### Resource `users`:
 
 - `retrieve_users` (`read`): Retrieves a user by ID or username
+- `check_access_users` (`read`): Check if a user has access (and their access level) to a resource
 
 ### Resource `payments`:
 
