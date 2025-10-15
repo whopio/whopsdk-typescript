@@ -280,10 +280,12 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/users.ts">UserRetrieveResponse</a></code>
+- <code><a href="./src/resources/users.ts">UserCheckAccessResponse</a></code>
 
 Methods:
 
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> UserRetrieveResponse</code>
+- <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 
 # Payments
 

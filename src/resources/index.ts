@@ -142,7 +142,12 @@ export {
   type TransferListParams,
   type TransferListResponsesCursorPage,
 } from './transfers';
-export { Users, type UserRetrieveResponse } from './users';
+export {
+  Users,
+  type UserRetrieveResponse,
+  type UserCheckAccessResponse,
+  type UserCheckAccessParams,
+} from './users';
 export {
   Webhooks,
   type InvoiceCreatedWebhookEvent,

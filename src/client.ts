@@ -160,7 +160,12 @@ import {
   TransferListResponsesCursorPage,
   Transfers,
 } from './resources/transfers';
-import { UserRetrieveResponse, Users } from './resources/users';
+import {
+  UserCheckAccessParams,
+  UserCheckAccessResponse,
+  UserRetrieveResponse,
+  Users,
+} from './resources/users';
 import {
   InvoiceCreatedWebhookEvent,
   InvoicePaidWebhookEvent,
@@ -1090,7 +1095,12 @@ export declare namespace Whop {
     type ChatChannelListParams as ChatChannelListParams,
   };
 
-  export { Users as Users, type UserRetrieveResponse as UserRetrieveResponse };
+  export {
+    Users as Users,
+    type UserRetrieveResponse as UserRetrieveResponse,
+    type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserCheckAccessParams as UserCheckAccessParams,
+  };
 
   export {
     Payments as Payments,
