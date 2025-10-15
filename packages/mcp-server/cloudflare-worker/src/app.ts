@@ -8,7 +8,7 @@ import {
   renderAuthorizationRejectedContent,
 } from './utils';
 import type { OAuthHelpers } from '@cloudflare/workers-oauth-provider';
-import { McpOptions } from '@whop/sdk-mcp/server';
+import { McpOptions } from '@whop/mcp/server';
 import { ServerConfig } from '.';
 
 export type Bindings = Env & {

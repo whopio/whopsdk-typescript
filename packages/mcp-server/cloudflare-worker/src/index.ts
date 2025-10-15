@@ -1,7 +1,7 @@
 import { makeOAuthConsent } from './app';
 import { McpAgent } from 'agents/mcp';
 import OAuthProvider from '@cloudflare/workers-oauth-provider';
-import { McpOptions, initMcpServer, server, ClientOptions } from '@whop/sdk-mcp/server';
+import { McpOptions, initMcpServer, server, ClientOptions } from '@whop/mcp/server';
 
 type MCPProps = {
   clientProps: ClientOptions;
