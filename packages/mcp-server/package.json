@@ -1,5 +1,5 @@
 {
-  "name": "@whop/mcp",
+  "name": "@whop/sdk-mcp",
   "version": "0.0.1",
   "description": "The official MCP Server for the Whop API",
   "author": "Whop <>",
@@ -67,8 +67,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "@whop/mcp": ".",
-    "@whop/mcp/*": "./src/*"
+    "@whop/sdk-mcp": ".",
+    "@whop/sdk-mcp/*": "./src/*"
   },
   "exports": {
     ".": {
