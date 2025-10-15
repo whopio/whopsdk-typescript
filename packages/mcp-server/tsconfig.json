@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "@whop/sdk-mcp/*": ["./src/*"],
-      "@whop/sdk-mcp": ["./src/index.ts"]
+      "@whop/mcp/*": ["./src/*"],
+      "@whop/mcp": ["./src/index.ts"]
     },
     "noEmit": true,
 
