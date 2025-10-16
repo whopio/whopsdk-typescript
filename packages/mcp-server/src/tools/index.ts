@@ -80,6 +80,11 @@ import detach_experiences from './experiences/detach-experiences';
 import create_reactions from './reactions/create-reactions';
 import retrieve_reactions from './reactions/retrieve-reactions';
 import list_reactions from './reactions/list-reactions';
+import retrieve_members from './members/retrieve-members';
+import list_members from './members/list-members';
+import retrieve_forums from './forums/retrieve-forums';
+import update_forums from './forums/update-forums';
+import list_forums from './forums/list-forums';
 
 export const endpoints: Endpoint[] = [];
 
@@ -163,6 +168,11 @@ addEndpoint(detach_experiences);
 addEndpoint(create_reactions);
 addEndpoint(retrieve_reactions);
 addEndpoint(list_reactions);
+addEndpoint(retrieve_members);
+addEndpoint(list_members);
+addEndpoint(retrieve_forums);
+addEndpoint(update_forums);
+addEndpoint(list_forums);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

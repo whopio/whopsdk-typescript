@@ -4,6 +4,11 @@ import * as Shared from './shared';
 import { CursorPage } from '../core/pagination';
 
 /**
+ * The access level a given user (or company) has to an access pass or company.
+ */
+export type AccessLevel = 'no_access' | 'admin' | 'customer';
+
+/**
  * The different types an access pass can be.
  */
 export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
@@ -852,6 +857,11 @@ export type Direction = 'asc' | 'desc';
 export type DmsPostTypes = 'regular' | 'system' | 'automated';
 
 /**
+ * Email notification preference option for a forum feed
+ */
+export type EmailNotificationPreferences = 'all_admin_posts' | 'only_weekly_summary' | 'none';
+
+/**
  * An object representing an entry in a waitlist.
  */
 export interface Entry {
@@ -1065,6 +1075,53 @@ export namespace Experience {
      * The title of the product. Use for Whop 4.0.
      */
     title: string;
+  }
+}
+
+/**
+ * Represents a forum feed
+ */
+export interface Forum {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The email notification preference for this forum
+   */
+  email_notification_preference: EmailNotificationPreferences;
+
+  /**
+   * The experience for this forum
+   */
+  experience: Forum.Experience;
+
+  /**
+   * Who can comment on this forum
+   */
+  who_can_comment: WhoCanCommentTypes;
+
+  /**
+   * Who can post on this forum
+   */
+  who_can_post: WhoCanPostTypes;
+}
+
+export namespace Forum {
+  /**
+   * The experience for this forum
+   */
+  export interface Experience {
+    /**
+     * The unique ID representing this experience
+     */
+    id: string;
+
+    /**
+     * The written name of the description.
+     */
+    name: string;
   }
 }
 
@@ -1428,6 +1485,30 @@ export namespace InvoiceListItem {
  * The different statuses an invoice can be in
  */
 export type InvoiceStatus = 'open' | 'paid' | 'past_due' | 'void';
+
+/**
+ * The different most recent actions a member can have.
+ */
+export type MemberMostRecentActions =
+  | 'canceling'
+  | 'churned'
+  | 'finished_split_pay'
+  | 'paused'
+  | 'paid_subscriber'
+  | 'paid_once'
+  | 'expiring'
+  | 'joined'
+  | 'drafted'
+  | 'left'
+  | 'trialing'
+  | 'pending_entry'
+  | 'renewing'
+  | 'past_due';
+
+/**
+ * The different statuses a Member can have.
+ */
+export type MemberStatuses = 'drafted' | 'joined' | 'left';
 
 /**
  * A membership represents a purchase between a User and a Company for a specific
@@ -3073,9 +3154,19 @@ export type VisibilityFilter =
   | 'not_archived';
 
 /**
+ * Who can comment on a forum feed
+ */
+export type WhoCanCommentTypes = 'everyone' | 'admins';
+
+/**
  * Who can post on a chat feed
  */
 export type WhoCanPost = 'everyone' | 'admins';
+
+/**
+ * Who can post on a forum feed
+ */
+export type WhoCanPostTypes = 'everyone' | 'admins';
 
 /**
  * Who can react on a chat feed

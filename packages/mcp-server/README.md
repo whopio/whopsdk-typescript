@@ -734,3 +734,41 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `chat:read`
+
+### Resource `members`:
+
+- `retrieve_members` (`read`): Retrieves a member of a company by ID
+
+  Required permissions:
+
+  - `member:basic:read`
+  - `member:email:read`
+  - `member:phone:read`
+
+- `list_members` (`read`): List the members of a company
+
+  Required permissions:
+
+  - `member:basic:read`
+  - `member:email:read`
+  - `member:phone:read`
+
+### Resource `forums`:
+
+- `retrieve_forums` (`read`): Retrieves a forum
+
+  Required permissions:
+
+  - `forum:read`
+
+- `update_forums` (`write`): Updates a forum
+
+  Required permissions:
+
+  - `forum:moderate`
+
+- `list_forums` (`read`): Lists forums inside a company
+
+  Required permissions:
+
+  - `forum:read`
