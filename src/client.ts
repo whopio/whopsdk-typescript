@@ -86,6 +86,13 @@ import {
   ForumPosts,
 } from './resources/forum-posts';
 import {
+  ForumListParams,
+  ForumListResponse,
+  ForumListResponsesCursorPage,
+  ForumUpdateParams,
+  Forums,
+} from './resources/forums';
+import {
   InvoiceCreateParams,
   InvoiceCreateResponse,
   InvoiceListParams,
@@ -93,6 +100,13 @@ import {
   Invoices,
 } from './resources/invoices';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
+import {
+  MemberListParams,
+  MemberListResponse,
+  MemberListResponsesCursorPage,
+  MemberRetrieveResponse,
+  Members,
+} from './resources/members';
 import {
   MembershipCancelParams,
   MembershipListParams,
@@ -925,6 +939,8 @@ export class Whop {
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
+  members: API.Members = new API.Members(this);
+  forums: API.Forums = new API.Forums(this);
 }
 
 Whop.Apps = Apps;
@@ -950,6 +966,8 @@ Whop.Payments = Payments;
 Whop.SupportChannels = SupportChannels;
 Whop.Experiences = Experiences;
 Whop.Reactions = Reactions;
+Whop.Members = Members;
+Whop.Forums = Forums;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1138,6 +1156,23 @@ export declare namespace Whop {
     type ReactionListParams as ReactionListParams,
   };
 
+  export {
+    Members as Members,
+    type MemberRetrieveResponse as MemberRetrieveResponse,
+    type MemberListResponse as MemberListResponse,
+    type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type MemberListParams as MemberListParams,
+  };
+
+  export {
+    Forums as Forums,
+    type ForumListResponse as ForumListResponse,
+    type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
+    type ForumUpdateParams as ForumUpdateParams,
+    type ForumListParams as ForumListParams,
+  };
+
+  export type AccessLevel = API.AccessLevel;
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
   export type AppBuild = API.AppBuild;
@@ -1157,9 +1192,11 @@ export declare namespace Whop {
   export type CustomCta = API.CustomCta;
   export type Direction = API.Direction;
   export type DmsPostTypes = API.DmsPostTypes;
+  export type EmailNotificationPreferences = API.EmailNotificationPreferences;
   export type Entry = API.Entry;
   export type EntryStatus = API.EntryStatus;
   export type Experience = API.Experience;
+  export type Forum = API.Forum;
   export type ForumPost = API.ForumPost;
   export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
@@ -1167,6 +1204,8 @@ export declare namespace Whop {
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
   export type InvoiceStatus = API.InvoiceStatus;
+  export type MemberMostRecentActions = API.MemberMostRecentActions;
+  export type MemberStatuses = API.MemberStatuses;
   export type Membership = API.Membership;
   export type MembershipStatus = API.MembershipStatus;
   export type Message = API.Message;
@@ -1189,6 +1228,8 @@ export declare namespace Whop {
   export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;
   export type VisibilityFilter = API.VisibilityFilter;
+  export type WhoCanCommentTypes = API.WhoCanCommentTypes;
   export type WhoCanPost = API.WhoCanPost;
+  export type WhoCanPostTypes = API.WhoCanPostTypes;
   export type WhoCanReact = API.WhoCanReact;
 }
