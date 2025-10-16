@@ -1,12 +1,12 @@
 {
   "name": "@whop/sdk",
-  "version": "0.0.1",
+  "version": "0.0.1-canary.0",
   "description": "The official TypeScript library for the Whop API",
   "author": "Whop <>",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:stainless-sdks/whopsdk-typescript",
+  "repository": "github:whopio/whopsdk-typescript",
   "license": "Apache-2.0",
   "packageManager": "pnpm@10.14.0",
   "files": [
