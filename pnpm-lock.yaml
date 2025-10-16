@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      jose:
+        specifier: ^6.1.0
+        version: 6.1.0
       standardwebhooks:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1834,6 +1837,9 @@ packages:
     peerDependenciesMeta:
       node-notifier:
         optional: true
+
+  jose@6.1.0:
+    resolution: {integrity: sha512-TTQJyoEoKcC1lscpVDCSsVgYzUDg/0Bt3WE//WiTPK6uOCQC2KZS4MpugbMWt/zyjkopgZoXhZuCi00gLudfUA==}
 
   jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz:
     resolution: {tarball: https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz}
@@ -5012,6 +5018,8 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+
+  jose@6.1.0: {}
 
   jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz: {}
 

@@ -186,6 +186,7 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
+import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
@@ -925,6 +926,8 @@ export class Whop {
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
+
+  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
 }
 
 Whop.Apps = Apps;
