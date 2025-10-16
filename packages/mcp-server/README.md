@@ -542,7 +542,7 @@ The following tools are available in this MCP server.
 
 ### Resource `checkout_configurations`:
 
-- `create_checkout_configurations` (`write`): Creates a new checkout session
+- `create_checkout_configurations` (`write`): Creates a new checkout configuration
 
   Required permissions:
 
