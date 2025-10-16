@@ -31,15 +31,14 @@ export interface InvoiceCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * The timestamp in seconds since the Unix epoch that the webhook was sent at on
-   * the server
-   */
-  created_at: string;
-
-  /**
    * A statement that defines an amount due by a customer.
    */
   data: Shared.Invoice;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
 
   /**
    * The webhook event type
@@ -59,15 +58,14 @@ export interface InvoicePaidWebhookEvent {
   api_version: 'v1';
 
   /**
-   * The timestamp in seconds since the Unix epoch that the webhook was sent at on
-   * the server
-   */
-  created_at: string;
-
-  /**
    * A statement that defines an amount due by a customer.
    */
   data: Shared.Invoice;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
 
   /**
    * The webhook event type
@@ -87,15 +85,14 @@ export interface InvoicePastDueWebhookEvent {
   api_version: 'v1';
 
   /**
-   * The timestamp in seconds since the Unix epoch that the webhook was sent at on
-   * the server
-   */
-  created_at: string;
-
-  /**
    * A statement that defines an amount due by a customer.
    */
   data: Shared.Invoice;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
 
   /**
    * The webhook event type
@@ -115,15 +112,14 @@ export interface InvoiceVoidedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * The timestamp in seconds since the Unix epoch that the webhook was sent at on
-   * the server
-   */
-  created_at: string;
-
-  /**
    * A statement that defines an amount due by a customer.
    */
   data: Shared.Invoice;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
 
   /**
    * The webhook event type
