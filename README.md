@@ -11,11 +11,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:whopio/whopsdk-typescript.git
+npm install @whop/sdk
 ```
-
-> [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install @whop/sdk`
 
 ## Usage
 
