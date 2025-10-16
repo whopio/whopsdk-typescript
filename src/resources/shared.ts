@@ -389,48 +389,51 @@ export namespace ChatChannel {
 }
 
 /**
- * A checkout session
+ * A checkout configuration object.
+ *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
+ *         This configuration can be re-used by multiple users.
+ *         All successful payments and memberships resulting from a checkout will contain the passed metadata.
  */
 export interface CheckoutConfiguration {
   /**
-   * The ID of the checkout session
+   * The ID of the checkout configuration
    */
   id: string;
 
   /**
-   * The affiliate code to use for the checkout session
+   * The affiliate code to use for the checkout configuration
    */
   affiliate_code: string;
 
   /**
-   * The ID of the company to use for the checkout session
+   * The ID of the company to use for the checkout configuration
    */
   company_id: string;
 
   /**
-   * The metadata to use for the checkout session
+   * The metadata to use for the checkout configuration
    */
   metadata: { [key: string]: unknown };
 
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   plan: CheckoutConfiguration.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   purchase_url: string;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   redirect_url: string;
 }
 
 export namespace CheckoutConfiguration {
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   export interface Plan {
     /**

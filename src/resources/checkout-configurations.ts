@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class CheckoutConfigurations extends APIResource {
   /**
-   * Creates a new checkout session
+   * Creates a new checkout configuration
    *
    * Required permissions:
    *
@@ -80,48 +80,51 @@ export class CheckoutConfigurations extends APIResource {
 export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutConfigurationListResponse>;
 
 /**
- * A checkout session
+ * A checkout configuration object.
+ *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
+ *         This configuration can be re-used by multiple users.
+ *         All successful payments and memberships resulting from a checkout will contain the passed metadata.
  */
 export interface CheckoutConfigurationListResponse {
   /**
-   * The ID of the checkout session
+   * The ID of the checkout configuration
    */
   id: string;
 
   /**
-   * The affiliate code to use for the checkout session
+   * The affiliate code to use for the checkout configuration
    */
   affiliate_code: string;
 
   /**
-   * The ID of the company to use for the checkout session
+   * The ID of the company to use for the checkout configuration
    */
   company_id: string;
 
   /**
-   * The metadata to use for the checkout session
+   * The metadata to use for the checkout configuration
    */
   metadata: { [key: string]: unknown };
 
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   plan: CheckoutConfigurationListResponse.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   purchase_url: string;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   redirect_url: string;
 }
 
 export namespace CheckoutConfigurationListResponse {
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   export interface Plan {
     /**
@@ -178,34 +181,34 @@ export namespace CheckoutConfigurationListResponse {
 
 export interface CheckoutConfigurationCreateParams {
   /**
-   * The affiliate code to use for the checkout session
+   * The affiliate code to use for the checkout configuration
    */
   affiliate_code?: string | null;
 
   /**
-   * The metadata to use for the checkout session
+   * The metadata to use for the checkout configuration
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * Pass this object to create a new plan for this checkout session
+   * Pass this object to create a new plan for this checkout configuration
    */
   plan?: CheckoutConfigurationCreateParams.Plan | null;
 
   /**
-   * The ID of the plan to use for the checkout session
+   * The ID of the plan to use for the checkout configuration
    */
   plan_id?: string | null;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   redirect_url?: string | null;
 }
 
 export namespace CheckoutConfigurationCreateParams {
   /**
-   * Pass this object to create a new plan for this checkout session
+   * Pass this object to create a new plan for this checkout configuration
    */
   export interface Plan {
     /**
