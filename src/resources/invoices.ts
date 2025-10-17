@@ -206,7 +206,9 @@ export namespace InvoiceCreateParams {
     expiration_days?: number | null;
 
     /**
-     * An additional amount charged upon first purchase.
+     * An additional amount charged upon first purchase. Use only if a one time payment
+     * OR you want to charge an additional amount on top of the renewal price. Provided
+     * as a number in dollars. Eg: 10.43 for $10.43
      */
     initial_price?: number | null;
 
@@ -226,7 +228,8 @@ export namespace InvoiceCreateParams {
     release_method?: Shared.ReleaseMethod | null;
 
     /**
-     * The amount the customer is charged every billing period.
+     * The amount the customer is charged every billing period. Use only if a recurring
+     * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
      */
     renewal_price?: number | null;
 

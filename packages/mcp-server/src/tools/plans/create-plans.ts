@@ -97,7 +97,8 @@ export const tool: Tool = {
       },
       initial_price: {
         type: 'number',
-        description: 'An additional amount charged upon first purchase.',
+        description:
+          'An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in dollars. Eg: 10.43 for $10.43',
       },
       internal_notes: {
         type: 'string',
@@ -114,7 +115,8 @@ export const tool: Tool = {
       },
       renewal_price: {
         type: 'number',
-        description: 'The amount the customer is charged every billing period.',
+        description:
+          'The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in dollars. Eg: 10.43 for $10.43',
       },
       title: {
         type: 'string',
