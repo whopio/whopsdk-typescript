@@ -73,6 +73,12 @@ export interface App {
   experience_path: string | null;
 
   /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  icon: App.Icon | null;
+
+  /**
    * The name of the app
    */
   name: string;
@@ -158,6 +164,18 @@ export namespace App {
      * The username of the user from their Whop account.
      */
     username: string;
+  }
+
+  /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  export interface Icon {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
   }
 
   /**
@@ -518,9 +536,19 @@ export interface Company {
   created_at: string;
 
   /**
+   * The creator pitch for the company.
+   */
+  description: string | null;
+
+  /**
    * The different industry types a company can be in.
    */
   industry_type: IndustryTypes | null;
+
+  /**
+   * The company's logo.
+   */
+  logo: Company.Logo | null;
 
   /**
    * The number of members in the company.
@@ -564,6 +592,17 @@ export interface Company {
 }
 
 export namespace Company {
+  /**
+   * The company's logo.
+   */
+  export interface Logo {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
+
   /**
    * The user who owns this company
    */
@@ -1003,6 +1042,11 @@ export interface Experience {
   created_at: string;
 
   /**
+   * The logo for the experience.
+   */
+  image: Experience.Image | null;
+
+  /**
    * The written name of the description.
    */
   name: string;
@@ -1032,9 +1076,29 @@ export namespace Experience {
     id: string;
 
     /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    icon: App.Icon | null;
+
+    /**
      * The name of the app
      */
     name: string;
+  }
+
+  export namespace App {
+    /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    export interface Icon {
+      /**
+       * This is the URL you use to render optimized attachments on the client. This
+       * should be used for apps.
+       */
+      url: string | null;
+    }
   }
 
   /**
@@ -1055,6 +1119,17 @@ export namespace Experience {
      * The title of the company.
      */
     title: string;
+  }
+
+  /**
+   * The logo for the experience.
+   */
+  export interface Image {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
   }
 
   /**
