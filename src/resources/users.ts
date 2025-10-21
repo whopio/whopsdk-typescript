@@ -52,9 +52,27 @@ export interface UserRetrieveResponse {
   name: string | null;
 
   /**
+   * The user's profile picture
+   */
+  profile_picture: UserRetrieveResponse.ProfilePicture | null;
+
+  /**
    * The username of the user from their Whop account.
    */
   username: string;
+}
+
+export namespace UserRetrieveResponse {
+  /**
+   * The user's profile picture
+   */
+  export interface ProfilePicture {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
 }
 
 /**

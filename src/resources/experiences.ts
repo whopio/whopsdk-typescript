@@ -167,6 +167,11 @@ export interface ExperienceListResponse {
   created_at: string;
 
   /**
+   * The logo for the experience.
+   */
+  image: ExperienceListResponse.Image | null;
+
+  /**
    * The written name of the description.
    */
   name: string;
@@ -188,9 +193,29 @@ export namespace ExperienceListResponse {
     id: string;
 
     /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    icon: App.Icon | null;
+
+    /**
      * The name of the app
      */
     name: string;
+  }
+
+  export namespace App {
+    /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    export interface Icon {
+      /**
+       * This is the URL you use to render optimized attachments on the client. This
+       * should be used for apps.
+       */
+      url: string | null;
+    }
   }
 
   /**
@@ -211,6 +236,17 @@ export namespace ExperienceListResponse {
      * The title of the company.
      */
     title: string;
+  }
+
+  /**
+   * The logo for the experience.
+   */
+  export interface Image {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
   }
 }
 

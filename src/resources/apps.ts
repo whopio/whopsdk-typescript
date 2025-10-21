@@ -143,6 +143,12 @@ export interface AppListResponse {
   experience_path: string | null;
 
   /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  icon: AppListResponse.Icon | null;
+
+  /**
    * The name of the app
    */
   name: string;
@@ -197,6 +203,18 @@ export namespace AppListResponse {
      * The username of the user from their Whop account.
      */
     username: string;
+  }
+
+  /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  export interface Icon {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
   }
 }
 
