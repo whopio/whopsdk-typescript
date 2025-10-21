@@ -94,7 +94,7 @@ export interface CheckoutConfigurationListResponse {
   /**
    * The affiliate code to use for the checkout configuration
    */
-  affiliate_code: string;
+  affiliate_code: string | null;
 
   /**
    * The ID of the company to use for the checkout configuration
@@ -119,7 +119,7 @@ export interface CheckoutConfigurationListResponse {
   /**
    * The URL to redirect the user to after the checkout configuration is created
    */
-  redirect_url: string;
+  redirect_url: string | null;
 }
 
 export namespace CheckoutConfigurationListResponse {
