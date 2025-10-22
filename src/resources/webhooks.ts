@@ -183,6 +183,141 @@ export interface MembershipDeactivatedWebhookEvent {
   type: 'membership.deactivated';
 }
 
+export interface EntryCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an entry in a waitlist.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.created';
+}
+
+export interface EntryApprovedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an entry in a waitlist.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.approved';
+}
+
+export interface EntryDeniedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an entry in a waitlist.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.denied';
+}
+
+export interface EntryDeletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an entry in a waitlist.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.deleted';
+}
+
+export interface CourseLessonInteractionCompletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A lesson interaction tracking user progress in courses
+   */
+  data: Shared.CourseLessonInteraction;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'course_lesson_interaction.completed';
+}
+
 export interface PaymentSucceededWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -271,6 +406,11 @@ export type UnwrapWebhookEvent =
   | InvoiceVoidedWebhookEvent
   | MembershipActivatedWebhookEvent
   | MembershipDeactivatedWebhookEvent
+  | EntryCreatedWebhookEvent
+  | EntryApprovedWebhookEvent
+  | EntryDeniedWebhookEvent
+  | EntryDeletedWebhookEvent
+  | CourseLessonInteractionCompletedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
   | PaymentPendingWebhookEvent;
@@ -283,6 +423,11 @@ export declare namespace Webhooks {
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
+    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
+    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
+    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,

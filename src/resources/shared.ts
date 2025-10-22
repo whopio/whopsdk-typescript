@@ -659,6 +659,11 @@ export interface CourseLessonInteraction {
   completed: boolean;
 
   /**
+   * The course for this lesson interaction
+   */
+  course: CourseLessonInteraction.Course;
+
+  /**
    * When the interaction was created
    */
   created_at: string;
@@ -675,6 +680,38 @@ export interface CourseLessonInteraction {
 }
 
 export namespace CourseLessonInteraction {
+  /**
+   * The course for this lesson interaction
+   */
+  export interface Course {
+    /**
+     * The ID of the course. Looks like cors_XXX
+     */
+    id: string;
+
+    /**
+     * The experience that the course belongs to
+     */
+    experience: Course.Experience;
+
+    /**
+     * The title of the course
+     */
+    title: string | null;
+  }
+
+  export namespace Course {
+    /**
+     * The experience that the course belongs to
+     */
+    export interface Experience {
+      /**
+       * The unique ID representing this experience
+       */
+      id: string;
+    }
+  }
+
   /**
    * The lesson this interaction is for
    */
