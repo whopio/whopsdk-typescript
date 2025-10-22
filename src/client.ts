@@ -181,6 +181,11 @@ import {
   Users,
 } from './resources/users';
 import {
+  CourseLessonInteractionCompletedWebhookEvent,
+  EntryApprovedWebhookEvent,
+  EntryCreatedWebhookEvent,
+  EntryDeletedWebhookEvent,
+  EntryDeniedWebhookEvent,
   InvoiceCreatedWebhookEvent,
   InvoicePaidWebhookEvent,
   InvoicePastDueWebhookEvent,
@@ -1026,6 +1031,11 @@ export declare namespace Whop {
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
+    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
+    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
+    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
