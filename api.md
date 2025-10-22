@@ -125,6 +125,11 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">InvoicePaidWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePastDueWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipActivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipDeactivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
