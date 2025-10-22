@@ -4,6 +4,11 @@ import * as Shared from './shared';
 import { CursorPage } from '../core/pagination';
 
 /**
+ * The access level a given user (or company) has to an access pass or company.
+ */
+export type AccessLevel = 'no_access' | 'admin' | 'customer';
+
+/**
  * The different types an access pass can be.
  */
 export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
@@ -66,6 +71,12 @@ export interface App {
    * url after the base domain. Eg: /experiences/[experienceId]
    */
   experience_path: string | null;
+
+  /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  icon: App.Icon | null;
 
   /**
    * The name of the app
@@ -153,6 +164,18 @@ export namespace App {
      * The username of the user from their Whop account.
      */
     username: string;
+  }
+
+  /**
+   * The icon for the app. This icon is shown on discovery, on the product page, on
+   * checkout, and as a default icon for the experiences.
+   */
+  export interface Icon {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
   }
 
   /**
@@ -389,48 +412,51 @@ export namespace ChatChannel {
 }
 
 /**
- * A checkout session
+ * A checkout configuration object.
+ *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
+ *         This configuration can be re-used by multiple users.
+ *         All successful payments and memberships resulting from a checkout will contain the passed metadata.
  */
 export interface CheckoutConfiguration {
   /**
-   * The ID of the checkout session
+   * The ID of the checkout configuration
    */
   id: string;
 
   /**
-   * The affiliate code to use for the checkout session
+   * The affiliate code to use for the checkout configuration
    */
-  affiliate_code: string;
+  affiliate_code: string | null;
 
   /**
-   * The ID of the company to use for the checkout session
+   * The ID of the company to use for the checkout configuration
    */
   company_id: string;
 
   /**
-   * The metadata to use for the checkout session
+   * The metadata to use for the checkout configuration
    */
   metadata: { [key: string]: unknown };
 
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   plan: CheckoutConfiguration.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
   purchase_url: string;
 
   /**
-   * The URL to redirect the user to after the checkout session is created
+   * The URL to redirect the user to after the checkout configuration is created
    */
-  redirect_url: string;
+  redirect_url: string | null;
 }
 
 export namespace CheckoutConfiguration {
   /**
-   * The plan to use for the checkout session
+   * The plan to use for the checkout configuration
    */
   export interface Plan {
     /**
@@ -510,9 +536,19 @@ export interface Company {
   created_at: string;
 
   /**
+   * The creator pitch for the company.
+   */
+  description: string | null;
+
+  /**
    * The different industry types a company can be in.
    */
   industry_type: IndustryTypes | null;
+
+  /**
+   * The company's logo.
+   */
+  logo: Company.Logo | null;
 
   /**
    * The number of members in the company.
@@ -556,6 +592,17 @@ export interface Company {
 }
 
 export namespace Company {
+  /**
+   * The company's logo.
+   */
+  export interface Logo {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
+
   /**
    * The user who owns this company
    */
@@ -612,6 +659,11 @@ export interface CourseLessonInteraction {
   completed: boolean;
 
   /**
+   * The course for this lesson interaction
+   */
+  course: CourseLessonInteraction.Course;
+
+  /**
    * When the interaction was created
    */
   created_at: string;
@@ -628,6 +680,38 @@ export interface CourseLessonInteraction {
 }
 
 export namespace CourseLessonInteraction {
+  /**
+   * The course for this lesson interaction
+   */
+  export interface Course {
+    /**
+     * The ID of the course. Looks like cors_XXX
+     */
+    id: string;
+
+    /**
+     * The experience that the course belongs to
+     */
+    experience: Course.Experience;
+
+    /**
+     * The title of the course
+     */
+    title: string | null;
+  }
+
+  export namespace Course {
+    /**
+     * The experience that the course belongs to
+     */
+    export interface Experience {
+      /**
+       * The unique ID representing this experience
+       */
+      id: string;
+    }
+  }
+
   /**
    * The lesson this interaction is for
    */
@@ -849,6 +933,11 @@ export type Direction = 'asc' | 'desc';
 export type DmsPostTypes = 'regular' | 'system' | 'automated';
 
 /**
+ * Email notification preference option for a forum feed
+ */
+export type EmailNotificationPreferences = 'all_admin_posts' | 'only_weekly_summary' | 'none';
+
+/**
  * An object representing an entry in a waitlist.
  */
 export interface Entry {
@@ -990,6 +1079,11 @@ export interface Experience {
   created_at: string;
 
   /**
+   * The logo for the experience.
+   */
+  image: Experience.Image | null;
+
+  /**
    * The written name of the description.
    */
   name: string;
@@ -1019,9 +1113,29 @@ export namespace Experience {
     id: string;
 
     /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    icon: App.Icon | null;
+
+    /**
      * The name of the app
      */
     name: string;
+  }
+
+  export namespace App {
+    /**
+     * The icon for the app. This icon is shown on discovery, on the product page, on
+     * checkout, and as a default icon for the experiences.
+     */
+    export interface Icon {
+      /**
+       * This is the URL you use to render optimized attachments on the client. This
+       * should be used for apps.
+       */
+      url: string | null;
+    }
   }
 
   /**
@@ -1045,6 +1159,17 @@ export namespace Experience {
   }
 
   /**
+   * The logo for the experience.
+   */
+  export interface Image {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
+
+  /**
    * An object representing a (sanitized) access pass.
    */
   export interface Product {
@@ -1062,6 +1187,53 @@ export namespace Experience {
      * The title of the product. Use for Whop 4.0.
      */
     title: string;
+  }
+}
+
+/**
+ * Represents a forum feed
+ */
+export interface Forum {
+  /**
+   * The unique identifier for the entity
+   */
+  id: string;
+
+  /**
+   * The email notification preference for this forum
+   */
+  email_notification_preference: EmailNotificationPreferences;
+
+  /**
+   * The experience for this forum
+   */
+  experience: Forum.Experience;
+
+  /**
+   * Who can comment on this forum
+   */
+  who_can_comment: WhoCanCommentTypes;
+
+  /**
+   * Who can post on this forum
+   */
+  who_can_post: WhoCanPostTypes;
+}
+
+export namespace Forum {
+  /**
+   * The experience for this forum
+   */
+  export interface Experience {
+    /**
+     * The unique ID representing this experience
+     */
+    id: string;
+
+    /**
+     * The written name of the description.
+     */
+    name: string;
   }
 }
 
@@ -1425,6 +1597,30 @@ export namespace InvoiceListItem {
  * The different statuses an invoice can be in
  */
 export type InvoiceStatus = 'open' | 'paid' | 'past_due' | 'void';
+
+/**
+ * The different most recent actions a member can have.
+ */
+export type MemberMostRecentActions =
+  | 'canceling'
+  | 'churned'
+  | 'finished_split_pay'
+  | 'paused'
+  | 'paid_subscriber'
+  | 'paid_once'
+  | 'expiring'
+  | 'joined'
+  | 'drafted'
+  | 'left'
+  | 'trialing'
+  | 'pending_entry'
+  | 'renewing'
+  | 'past_due';
+
+/**
+ * The different statuses a Member can have.
+ */
+export type MemberStatuses = 'drafted' | 'joined' | 'left';
 
 /**
  * A membership represents a purchase between a User and a Company for a specific
@@ -3070,9 +3266,19 @@ export type VisibilityFilter =
   | 'not_archived';
 
 /**
+ * Who can comment on a forum feed
+ */
+export type WhoCanCommentTypes = 'everyone' | 'admins';
+
+/**
  * Who can post on a chat feed
  */
 export type WhoCanPost = 'everyone' | 'admins';
+
+/**
+ * Who can post on a forum feed
+ */
+export type WhoCanPostTypes = 'everyone' | 'admins';
 
 /**
  * Who can react on a chat feed

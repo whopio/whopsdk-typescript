@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
@@ -51,9 +52,27 @@ export interface UserRetrieveResponse {
   name: string | null;
 
   /**
+   * The user's profile picture
+   */
+  profile_picture: UserRetrieveResponse.ProfilePicture | null;
+
+  /**
    * The username of the user from their Whop account.
    */
   username: string;
+}
+
+export namespace UserRetrieveResponse {
+  /**
+   * The user's profile picture
+   */
+  export interface ProfilePicture {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
 }
 
 /**
@@ -63,7 +82,7 @@ export interface UserCheckAccessResponse {
   /**
    * The permission level of the user
    */
-  access_level: 'no_access' | 'admin' | 'customer';
+  access_level: Shared.AccessLevel;
 
   /**
    * Whether the user has access to the resource

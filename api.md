@@ -2,6 +2,7 @@
 
 Types:
 
+- <code><a href="./src/resources/shared.ts">AccessLevel</a></code>
 - <code><a href="./src/resources/shared.ts">AccessPassType</a></code>
 - <code><a href="./src/resources/shared.ts">App</a></code>
 - <code><a href="./src/resources/shared.ts">AppBuild</a></code>
@@ -21,9 +22,11 @@ Types:
 - <code><a href="./src/resources/shared.ts">CustomCta</a></code>
 - <code><a href="./src/resources/shared.ts">Direction</a></code>
 - <code><a href="./src/resources/shared.ts">DmsPostTypes</a></code>
+- <code><a href="./src/resources/shared.ts">EmailNotificationPreferences</a></code>
 - <code><a href="./src/resources/shared.ts">Entry</a></code>
 - <code><a href="./src/resources/shared.ts">EntryStatus</a></code>
 - <code><a href="./src/resources/shared.ts">Experience</a></code>
+- <code><a href="./src/resources/shared.ts">Forum</a></code>
 - <code><a href="./src/resources/shared.ts">ForumPost</a></code>
 - <code><a href="./src/resources/shared.ts">FriendlyReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
@@ -31,6 +34,8 @@ Types:
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
+- <code><a href="./src/resources/shared.ts">MemberMostRecentActions</a></code>
+- <code><a href="./src/resources/shared.ts">MemberStatuses</a></code>
 - <code><a href="./src/resources/shared.ts">Membership</a></code>
 - <code><a href="./src/resources/shared.ts">MembershipStatus</a></code>
 - <code><a href="./src/resources/shared.ts">Message</a></code>
@@ -53,7 +58,9 @@ Types:
 - <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
 - <code><a href="./src/resources/shared.ts">VisibilityFilter</a></code>
+- <code><a href="./src/resources/shared.ts">WhoCanCommentTypes</a></code>
 - <code><a href="./src/resources/shared.ts">WhoCanPost</a></code>
+- <code><a href="./src/resources/shared.ts">WhoCanPostTypes</a></code>
 - <code><a href="./src/resources/shared.ts">WhoCanReact</a></code>
 
 # Apps
@@ -118,6 +125,16 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">InvoicePaidWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePastDueWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipActivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipDeactivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryDeletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
@@ -341,3 +358,27 @@ Methods:
 - <code title="post /reactions">client.reactions.<a href="./src/resources/reactions.ts">create</a>({ ...params }) -> Reaction</code>
 - <code title="get /reactions/{id}">client.reactions.<a href="./src/resources/reactions.ts">retrieve</a>(id) -> Reaction</code>
 - <code title="get /reactions">client.reactions.<a href="./src/resources/reactions.ts">list</a>({ ...params }) -> ReactionListResponsesCursorPage</code>
+
+# Members
+
+Types:
+
+- <code><a href="./src/resources/members.ts">MemberRetrieveResponse</a></code>
+- <code><a href="./src/resources/members.ts">MemberListResponse</a></code>
+
+Methods:
+
+- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> MemberRetrieveResponse</code>
+- <code title="get /members">client.members.<a href="./src/resources/members.ts">list</a>({ ...params }) -> MemberListResponsesCursorPage</code>
+
+# Forums
+
+Types:
+
+- <code><a href="./src/resources/forums.ts">ForumListResponse</a></code>
+
+Methods:
+
+- <code title="get /forums/{id}">client.forums.<a href="./src/resources/forums.ts">retrieve</a>(id) -> Forum</code>
+- <code title="patch /forums/{id}">client.forums.<a href="./src/resources/forums.ts">update</a>(id, { ...params }) -> Forum</code>
+- <code title="get /forums">client.forums.<a href="./src/resources/forums.ts">list</a>({ ...params }) -> ForumListResponsesCursorPage</code>

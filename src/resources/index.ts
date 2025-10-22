@@ -68,6 +68,13 @@ export {
   type ForumPostListResponsesCursorPage,
 } from './forum-posts';
 export {
+  Forums,
+  type ForumListResponse,
+  type ForumUpdateParams,
+  type ForumListParams,
+  type ForumListResponsesCursorPage,
+} from './forums';
+export {
   Invoices,
   type InvoiceCreateResponse,
   type InvoiceVoidResponse,
@@ -75,6 +82,13 @@ export {
   type InvoiceListParams,
 } from './invoices';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
+export {
+  Members,
+  type MemberRetrieveResponse,
+  type MemberListResponse,
+  type MemberListParams,
+  type MemberListResponsesCursorPage,
+} from './members';
 export {
   Memberships,
   type MembershipListResponse,
@@ -154,5 +168,15 @@ export {
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,
+  type MembershipActivatedWebhookEvent,
+  type MembershipDeactivatedWebhookEvent,
+  type EntryCreatedWebhookEvent,
+  type EntryApprovedWebhookEvent,
+  type EntryDeniedWebhookEvent,
+  type EntryDeletedWebhookEvent,
+  type CourseLessonInteractionCompletedWebhookEvent,
+  type PaymentSucceededWebhookEvent,
+  type PaymentFailedWebhookEvent,
+  type PaymentPendingWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';

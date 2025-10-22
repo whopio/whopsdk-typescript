@@ -17,22 +17,22 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_checkout_configurations',
   description:
-    'Creates a new checkout session\n\nRequired permissions:\n - `checkout_configuration:create`\n - `plan:create`',
+    'Creates a new checkout configuration\n\nRequired permissions:\n - `checkout_configuration:create`\n - `plan:create`',
   inputSchema: {
     type: 'object',
     properties: {
       affiliate_code: {
         type: 'string',
-        description: 'The affiliate code to use for the checkout session',
+        description: 'The affiliate code to use for the checkout configuration',
       },
       metadata: {
         type: 'object',
-        description: 'The metadata to use for the checkout session',
+        description: 'The metadata to use for the checkout configuration',
         additionalProperties: true,
       },
       plan: {
         type: 'object',
-        description: 'Pass this object to create a new plan for this checkout session',
+        description: 'Pass this object to create a new plan for this checkout configuration',
         properties: {
           company_id: {
             type: 'string',
@@ -150,11 +150,11 @@ export const tool: Tool = {
       },
       plan_id: {
         type: 'string',
-        description: 'The ID of the plan to use for the checkout session',
+        description: 'The ID of the plan to use for the checkout configuration',
       },
       redirect_url: {
         type: 'string',
-        description: 'The URL to redirect the user to after the checkout session is created',
+        description: 'The URL to redirect the user to after the checkout configuration is created',
       },
     },
     required: [],
