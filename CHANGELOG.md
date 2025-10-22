@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.0.2 (2025-10-22)
+
+Full Changelog: [v0.0.1-canary.0...v0.0.2](https://github.com/whopio/whopsdk-typescript/compare/v0.0.1-canary.0...v0.0.2)
+
+### Features
+
+* **api:** api update ([390b230](https://github.com/whopio/whopsdk-typescript/commit/390b230d58e020e574a9d0a7ce73f61c9b901fbf))
+* **api:** api update ([2d0f5e5](https://github.com/whopio/whopsdk-typescript/commit/2d0f5e5db290abb31be6156e0e54a00129b33858))
+* **api:** api update ([4ca0e9b](https://github.com/whopio/whopsdk-typescript/commit/4ca0e9b86c181528fe123435850b7c356bf4011d))
+* **api:** api update ([9cb53c2](https://github.com/whopio/whopsdk-typescript/commit/9cb53c25359535db7dba6c72691996ab4455c132))
+* **api:** api update ([6ab35b3](https://github.com/whopio/whopsdk-typescript/commit/6ab35b37e2df3e008db63dc984973f3b2913ad45))
+* **api:** api update ([4883c73](https://github.com/whopio/whopsdk-typescript/commit/4883c73a18737204e83a601e9d0ae4235aaa4f96))
+* **api:** manual updates ([771606a](https://github.com/whopio/whopsdk-typescript/commit/771606a25d74aa0671c7f53b2cfe15798bf4153a))
+
+
+### Chores
+
+* **formatting:** fix ordering of custom method to not anger codegen ([119dc07](https://github.com/whopio/whopsdk-typescript/commit/119dc0740bea4321e8349f253bfdd142e58a4ad0))
+* **internal:** codegen related update ([44a2cdc](https://github.com/whopio/whopsdk-typescript/commit/44a2cdc6bb1288cf88b8d62e2331ce99c2878179))
+* **internal:** codegen related update ([1ae9f60](https://github.com/whopio/whopsdk-typescript/commit/1ae9f6041fb6f28179f6ee8fff3b9f4c4c824a59))
+
 ## 0.0.1-canary.0 (2025-10-16)
 
 Full Changelog: [v0.0.1...v0.0.1-canary.0](https://github.com/whopio/whopsdk-typescript/compare/v0.0.1...v0.0.1-canary.0)
