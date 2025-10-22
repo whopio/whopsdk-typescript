@@ -908,6 +908,8 @@ export class Whop {
     }
   }
 
+  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
+
   static Whop = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -950,13 +952,8 @@ export class Whop {
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
-
-  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this)
-;
-  members: API.Members = new API.Members(this)
-;
-  forums: API.Forums = new API.Forums(this)
-;
+  members: API.Members = new API.Members(this);
+  forums: API.Forums = new API.Forums(this);
 }
 
 Whop.Apps = Apps;
