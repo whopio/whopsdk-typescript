@@ -168,5 +168,10 @@ export {
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,
+  type MembershipActivatedWebhookEvent,
+  type MembershipDeactivatedWebhookEvent,
+  type PaymentSucceededWebhookEvent,
+  type PaymentFailedWebhookEvent,
+  type PaymentPendingWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';

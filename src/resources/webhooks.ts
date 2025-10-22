@@ -127,11 +127,153 @@ export interface InvoiceVoidedWebhookEvent {
   type: 'invoice.voided';
 }
 
+export interface MembershipActivatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents a purchase between a User and a Company for a specific
+   * Product.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.activated';
+}
+
+export interface MembershipDeactivatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents a purchase between a User and a Company for a specific
+   * Product.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.deactivated';
+}
+
+export interface PaymentSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a receipt for a membership.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.succeeded';
+}
+
+export interface PaymentFailedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a receipt for a membership.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.failed';
+}
+
+export interface PaymentPendingWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a receipt for a membership.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.pending';
+}
+
 export type UnwrapWebhookEvent =
   | InvoiceCreatedWebhookEvent
   | InvoicePaidWebhookEvent
   | InvoicePastDueWebhookEvent
-  | InvoiceVoidedWebhookEvent;
+  | InvoiceVoidedWebhookEvent
+  | MembershipActivatedWebhookEvent
+  | MembershipDeactivatedWebhookEvent
+  | PaymentSucceededWebhookEvent
+  | PaymentFailedWebhookEvent
+  | PaymentPendingWebhookEvent;
 
 export declare namespace Webhooks {
   export {
@@ -139,6 +281,11 @@ export declare namespace Webhooks {
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
+    type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
+    type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
+    type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }
