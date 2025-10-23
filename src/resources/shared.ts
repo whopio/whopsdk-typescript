@@ -2566,6 +2566,13 @@ export interface Product {
   description: string | null;
 
   /**
+   * A unique identifier used to create or update products. When provided on product
+   * creation endpoints, we’ll look up an existing product by this identifier — if it
+   * exists, we’ll update it; if not, we’ll create a new one.
+   */
+  external_identifier: string | null;
+
+  /**
    * The percentage of a transaction a user is eligible to earn from the whop
    * marketplace global affiliate program.
    */
@@ -2723,6 +2730,13 @@ export interface ProductListItem {
    * When the product was created.
    */
   created_at: string;
+
+  /**
+   * A unique identifier used to create or update products. When provided on product
+   * creation endpoints, we’ll look up an existing product by this identifier — if it
+   * exists, we’ll update it; if not, we’ll create a new one.
+   */
+  external_identifier: string | null;
 
   /**
    * The headline of the product.
