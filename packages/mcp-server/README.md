@@ -548,6 +548,8 @@ The following tools are available in this MCP server.
 
   - `checkout_configuration:create`
   - `plan:create`
+  - `access_pass:create`
+  - `access_pass:update`
 
 - `retrieve_checkout_configurations` (`read`): Retrieves a checkout configuration by ID
 
