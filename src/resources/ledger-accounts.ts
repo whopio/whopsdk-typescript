@@ -36,7 +36,19 @@ export interface LedgerAccountRetrieveResponse {
   /**
    * The different statuses a LedgerAccountAudit can be
    */
-  ledger_account_audit_status: 'reserves_imposed' | 'requested_more_information' | null;
+  ledger_account_audit_status:
+    | 'pending'
+    | 'approved'
+    | 'reserves_imposed'
+    | 'suspended'
+    | 'ignored'
+    | 'rejected'
+    | 'requested_more_information'
+    | 'information_submitted'
+    | 'requested_tos_violation_correction'
+    | 'clawback_attempted'
+    | 'awaiting_sales_review'
+    | null;
 
   /**
    * The type of ledger account.
