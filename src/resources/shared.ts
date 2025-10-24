@@ -1257,6 +1257,11 @@ export interface ForumPost {
   content: string | null;
 
   /**
+   * The timestamp when the post was created
+   */
+  created_at: string;
+
+  /**
    * Whether the forum post has been edited
    */
   is_edited: boolean;
@@ -1285,6 +1290,11 @@ export interface ForumPost {
    * The title of the forum post
    */
   title: string | null;
+
+  /**
+   * The timestamp when the post was last updated
+   */
+  updated_at: string;
 
   /**
    * The user who created this forum post
@@ -1439,7 +1449,8 @@ export interface Invoice {
   email_address: string | null;
 
   /**
-   * The token to fetch the invoice.
+   * A signed token that allows fetching the invoice data publically without being
+   * authenticated.
    */
   fetch_invoice_token: string;
 
@@ -1531,7 +1542,8 @@ export interface InvoiceListItem {
   email_address: string | null;
 
   /**
-   * The token to fetch the invoice.
+   * A signed token that allows fetching the invoice data publically without being
+   * authenticated.
    */
   fetch_invoice_token: string;
 
@@ -1695,6 +1707,11 @@ export interface Membership {
   plan: Membership.Plan;
 
   /**
+   * The Product this Membership grants access to.
+   */
+  product: Membership.Product;
+
+  /**
    * The Promo Code that is currently applied to this Membership.
    */
   promo_code: Membership.PromoCode | null;
@@ -1761,6 +1778,21 @@ export namespace Membership {
      * The internal ID of the plan.
      */
     id: string;
+  }
+
+  /**
+   * The Product this Membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public product.
+     */
+    id: string;
+
+    /**
+     * The title of the product. Use for Whop 4.0.
+     */
+    title: string;
   }
 
   /**
@@ -2102,7 +2134,7 @@ export interface Payment {
   refunded_at: string | null;
 
   /**
-   * Whether the payment can be retried.
+   * A payment can be retried if the associated membership is past due
    */
   retryable: boolean;
 
@@ -2288,7 +2320,7 @@ export namespace Payment {
     code: string | null;
 
     /**
-     * The number of billing cycles the promo is applied for.
+     * The number of months the promo is applied for.
      */
     number_of_intervals: number | null;
 
