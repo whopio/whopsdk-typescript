@@ -201,9 +201,24 @@ export interface PlanListResponse {
   renewal_price: number;
 
   /**
+   * An un-used field - do not use.
+   */
+  stock: number | null;
+
+  /**
+   * The title of the plan. This will be visible on the product page to customers.
+   */
+  title: string | null;
+
+  /**
    * The number of free trial days added before a renewal plan.
    */
   trial_period_days: number | null;
+
+  /**
+   * Limits/doesn't limit the number of units available for purchase.
+   */
+  unlimited_stock: boolean;
 
   /**
    * When the plan was last updated.
@@ -339,6 +354,11 @@ export interface PlanCreateParams {
   renewal_price?: number | null;
 
   /**
+   * The number of units available for purchase.
+   */
+  stock?: number | null;
+
+  /**
    * The price to display with a strikethrough for the initial price. Provided as a
    * number in dollars. Eg: 19.99 for $19.99
    */
@@ -359,6 +379,11 @@ export interface PlanCreateParams {
    * The number of free trial days added before a renewal plan.
    */
   trial_period_days?: number | null;
+
+  /**
+   * Limits/doesn't limit the number of units available for purchase.
+   */
+  unlimited_stock?: boolean | null;
 
   /**
    * Visibility of a resource
@@ -477,6 +502,11 @@ export interface PlanUpdateParams {
   renewal_price?: number | null;
 
   /**
+   * The number of units available for purchase.
+   */
+  stock?: number | null;
+
+  /**
    * The price to display with a strikethrough for the initial price. Provided as a
    * number in dollars. Eg: 19.99 for $19.99
    */
@@ -497,6 +527,11 @@ export interface PlanUpdateParams {
    * The number of free trial days added before a renewal plan.
    */
   trial_period_days?: number | null;
+
+  /**
+   * Limits/doesn't limit the number of units available for purchase.
+   */
+  unlimited_stock?: boolean | null;
 
   /**
    * Visibility of a resource
