@@ -109,6 +109,16 @@ export const tool: Tool = {
         type: 'number',
         description: 'The amount the customer is charged every billing period.',
       },
+      strike_through_initial_price: {
+        type: 'number',
+        description:
+          'The price to display with a strikethrough for the initial price. Provided as a number in dollars. Eg: 19.99 for $19.99',
+      },
+      strike_through_renewal_price: {
+        type: 'number',
+        description:
+          'The price to display with a strikethrough for the renewal price. Provided as a number in dollars. Eg: 19.99 for $19.99',
+      },
       title: {
         type: 'string',
         description: 'The title of the plan. This will be visible on the product page to customers.',

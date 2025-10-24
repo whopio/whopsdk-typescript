@@ -413,6 +413,11 @@ export interface ProductUpdateParams {
   route?: string | null;
 
   /**
+   * Configuration for a product on the company's store page.
+   */
+  store_page_config?: ProductUpdateParams.StorePageConfig | null;
+
+  /**
    * The title of the product.
    */
   title?: string | null;
@@ -441,6 +446,21 @@ export namespace ProductUpdateParams {
      * mediaDirectUpload mutation.
      */
     direct_upload_id?: string | null;
+  }
+
+  /**
+   * Configuration for a product on the company's store page.
+   */
+  export interface StorePageConfig {
+    /**
+     * Custom call-to-action text for the product's store page.
+     */
+    custom_cta?: string | null;
+
+    /**
+     * Whether or not to show the price on the product's store page.
+     */
+    show_price?: boolean | null;
   }
 }
 
