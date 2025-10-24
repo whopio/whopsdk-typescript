@@ -8,10 +8,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource messages', () => {
+describe('resource courseChapters', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.messages.create({ channel_id: 'channel_id', content: 'content' });
+    const responsePromise = client.courseChapters.create({ course_id: 'cors_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,17 +23,12 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.messages.create({
-      channel_id: 'channel_id',
-      content: 'content',
-      attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
-      poll: { options: [{ id: 'id', text: 'text' }] },
-    });
+    const response = await client.courseChapters.create({ course_id: 'cors_xxxxxxxxxxxxx', title: 'title' });
   });
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.messages.retrieve('id');
+    const responsePromise = client.courseChapters.retrieve('chap_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -44,8 +39,8 @@ describe('resource messages', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.messages.update('id');
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.courseChapters.update('chap_xxxxxxxxxxxxx', { title: 'title' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -56,24 +51,13 @@ describe('resource messages', () => {
   });
 
   // Prism tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.messages.update(
-        'id',
-        {
-          attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
-          content: 'content',
-          is_pinned: true,
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('update: required and optional params', async () => {
+    const response = await client.courseChapters.update('chap_xxxxxxxxxxxxx', { title: 'title' });
   });
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.messages.list({ channel_id: 'channel_id' });
+    const responsePromise = client.courseChapters.list({ course_id: 'cors_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,13 +69,24 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.messages.list({
-      channel_id: 'channel_id',
+    const response = await client.courseChapters.list({
+      course_id: 'cors_xxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
-      direction: 'asc',
       first: 42,
       last: 42,
     });
+  });
+
+  // Prism tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.courseChapters.delete('chap_xxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

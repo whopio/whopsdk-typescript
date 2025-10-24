@@ -399,6 +399,7 @@ The following tools are available in this MCP server.
 
   - `forum:read`
 
+- `update_forum_posts` (`write`): Update an existing forum post
 - `list_forum_posts` (`read`): Lists forum posts
 
   Required permissions:
@@ -577,6 +578,7 @@ The following tools are available in this MCP server.
 
   - `chat:read`
 
+- `update_messages` (`write`): Updates an existing message
 - `list_messages` (`read`): Lists messages inside a channel
 
   Required permissions:
@@ -717,6 +719,9 @@ The following tools are available in this MCP server.
 
   - `experience:detach`
 
+- `duplicate_experiences` (`write`): Required permissions:
+  - `experience:create`
+
 ### Resource `reactions`:
 
 - `create_reactions` (`write`): Creates a new reaction
@@ -774,3 +779,128 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `forum:read`
+
+### Resource `promo_codes`:
+
+- `create_promo_codes` (`write`): Create a new promo code for a product or plan
+
+  Required permissions:
+
+  - `promo_code:create`
+  - `access_pass:basic:read`
+
+- `retrieve_promo_codes` (`read`): Retrieves a promo code by ID
+
+  Required permissions:
+
+  - `promo_code:basic:read`
+  - `access_pass:basic:read`
+
+- `list_promo_codes` (`read`): Lists promo codes for a company
+
+  Required permissions:
+
+  - `promo_code:basic:read`
+  - `access_pass:basic:read`
+
+- `delete_promo_codes` (`write`): Archive a promo code, preventing further use
+
+  Required permissions:
+
+  - `promo_code:delete`
+
+### Resource `courses`:
+
+- `create_courses` (`write`): Creates a new course module in an experience
+
+  Required permissions:
+
+  - `courses:update`
+
+- `retrieve_courses` (`read`): Retrieves a course by ID
+
+  Required permissions:
+
+  - `courses:read`
+
+- `update_courses` (`write`): Updates a course
+
+  Required permissions:
+
+  - `courses:update`
+
+- `list_courses` (`read`): Lists courses for an experience or company
+
+  Required permissions:
+
+  - `courses:read`
+
+- `delete_courses` (`write`): Deletes a course
+
+  Required permissions:
+
+  - `courses:update`
+
+### Resource `course_chapters`:
+
+- `create_course_chapters` (`write`): Creates a new course chapter
+
+  Required permissions:
+
+  - `courses:update`
+
+- `retrieve_course_chapters` (`read`): Retrieves a course chapter by ID
+
+  Required permissions:
+
+  - `courses:read`
+
+- `update_course_chapters` (`write`): Updates a course chapter
+
+  Required permissions:
+
+  - `courses:update`
+
+- `list_course_chapters` (`read`): Lists chapters for a course
+
+  Required permissions:
+
+  - `courses:read`
+
+- `delete_course_chapters` (`write`): Deletes a course chapter
+
+  Required permissions:
+
+  - `courses:update`
+
+### Resource `course_lessons`:
+
+- `create_course_lessons` (`write`): Creates a new course lesson
+
+  Required permissions:
+
+  - `courses:update`
+
+- `retrieve_course_lessons` (`read`): Retrieves a course lesson by ID
+
+  Required permissions:
+
+  - `courses:read`
+
+- `update_course_lessons` (`write`): Updates a course lesson
+
+  Required permissions:
+
+  - `courses:update`
+
+- `list_course_lessons` (`read`): Lists lessons for a course or chapter
+
+  Required permissions:
+
+  - `courses:read`
+
+- `delete_course_lessons` (`write`): Deletes a course lesson
+
+  Required permissions:
+
+  - `courses:update`
