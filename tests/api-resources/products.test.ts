@@ -113,6 +113,7 @@ describe('resource products', () => {
           product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
           redirect_purchase_url: 'redirect_purchase_url',
           route: 'route',
+          store_page_config: { custom_cta: 'custom_cta', show_price: true },
           title: 'title',
           visibility: 'visible',
         },

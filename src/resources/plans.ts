@@ -339,6 +339,18 @@ export interface PlanCreateParams {
   renewal_price?: number | null;
 
   /**
+   * The price to display with a strikethrough for the initial price. Provided as a
+   * number in dollars. Eg: 19.99 for $19.99
+   */
+  strike_through_initial_price?: number | null;
+
+  /**
+   * The price to display with a strikethrough for the renewal price. Provided as a
+   * number in dollars. Eg: 19.99 for $19.99
+   */
+  strike_through_renewal_price?: number | null;
+
+  /**
    * The title of the plan. This will be visible on the product page to customers.
    */
   title?: string | null;
@@ -463,6 +475,18 @@ export interface PlanUpdateParams {
    * The amount the customer is charged every billing period.
    */
   renewal_price?: number | null;
+
+  /**
+   * The price to display with a strikethrough for the initial price. Provided as a
+   * number in dollars. Eg: 19.99 for $19.99
+   */
+  strike_through_initial_price?: number | null;
+
+  /**
+   * The price to display with a strikethrough for the renewal price. Provided as a
+   * number in dollars. Eg: 19.99 for $19.99
+   */
+  strike_through_renewal_price?: number | null;
 
   /**
    * The title of the plan. This will be visible on the product page to customers.
