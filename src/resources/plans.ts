@@ -275,7 +275,7 @@ export interface PlanCreateParams {
   product_id: string;
 
   /**
-   * The interval at which the plan charges (renewal plans).
+   * The interval in days at which the plan charges (renewal plans).
    */
   billing_period?: number | null;
 

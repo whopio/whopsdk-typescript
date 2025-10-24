@@ -89,6 +89,11 @@ export interface ForumPostListResponse {
   content: string | null;
 
   /**
+   * The timestamp when the post was created
+   */
+  created_at: string;
+
+  /**
    * Whether the forum post has been edited
    */
   is_edited: boolean;
@@ -117,6 +122,11 @@ export interface ForumPostListResponse {
    * The title of the forum post
    */
   title: string | null;
+
+  /**
+   * The timestamp when the post was last updated
+   */
+  updated_at: string;
 
   /**
    * The user who created this forum post

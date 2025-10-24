@@ -31,7 +31,7 @@ export const tool: Tool = {
       },
       billing_period: {
         type: 'integer',
-        description: 'The interval at which the plan charges (renewal plans).',
+        description: 'The interval in days at which the plan charges (renewal plans).',
       },
       currency: {
         $ref: '#/$defs/currency',

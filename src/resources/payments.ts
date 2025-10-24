@@ -262,7 +262,7 @@ export interface PaymentListResponse {
   refunded_at: string | null;
 
   /**
-   * Whether the payment can be retried.
+   * A payment can be retried if the associated membership is past due
    */
   retryable: boolean;
 
@@ -448,7 +448,7 @@ export namespace PaymentListResponse {
     code: string | null;
 
     /**
-     * The number of billing cycles the promo is applied for.
+     * The number of months the promo is applied for.
      */
     number_of_intervals: number | null;
 
