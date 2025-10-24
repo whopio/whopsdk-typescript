@@ -138,6 +138,26 @@ export class Experiences extends APIResource {
   detach(id: string, body: ExperienceDetachParams, options?: RequestOptions): APIPromise<Shared.Experience> {
     return this._client.post(path`/experiences/${id}/detach`, { body, ...options });
   }
+
+  /**
+   * Required permissions:
+   *
+   * - `experience:create`
+   *
+   * @example
+   * ```ts
+   * const experience = await client.experiences.duplicate(
+   *   'exp_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  duplicate(
+    id: string,
+    body: ExperienceDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Experience> {
+    return this._client.post(path`/experiences/${id}/duplicate`, { body, ...options });
+  }
 }
 
 export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse>;
@@ -371,6 +391,13 @@ export interface ExperienceDetachParams {
   product_id: string;
 }
 
+export interface ExperienceDuplicateParams {
+  /**
+   * The name of the new experience
+   */
+  name?: string | null;
+}
+
 export declare namespace Experiences {
   export {
     type ExperienceListResponse as ExperienceListResponse,
@@ -381,5 +408,6 @@ export declare namespace Experiences {
     type ExperienceListParams as ExperienceListParams,
     type ExperienceAttachParams as ExperienceAttachParams,
     type ExperienceDetachParams as ExperienceDetachParams,
+    type ExperienceDuplicateParams as ExperienceDuplicateParams,
   };
 }

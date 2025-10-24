@@ -57,9 +57,43 @@ import {
 } from './resources/checkout-configurations';
 import { Companies } from './resources/companies';
 import {
+  CourseChapter,
+  CourseChapterCreateParams,
+  CourseChapterDeleteResponse,
+  CourseChapterListParams,
+  CourseChapterListResponse,
+  CourseChapterListResponsesCursorPage,
+  CourseChapterUpdateParams,
+  CourseChapters,
+} from './resources/course-chapters';
+import {
   CourseLessonInteractionListParams,
   CourseLessonInteractions,
 } from './resources/course-lesson-interactions';
+import {
+  AssessmentQuestionTypes,
+  CourseLessonCreateParams,
+  CourseLessonDeleteResponse,
+  CourseLessonListParams,
+  CourseLessonListResponse,
+  CourseLessonListResponsesCursorPage,
+  CourseLessonUpdateParams,
+  CourseLessons,
+  Lesson,
+  LessonTypes,
+  LessonVisibilities,
+} from './resources/course-lessons';
+import {
+  Course,
+  CourseCreateParams,
+  CourseDeleteResponse,
+  CourseListParams,
+  CourseListResponse,
+  CourseListResponsesCursorPage,
+  CourseUpdateParams,
+  Courses,
+  Languages,
+} from './resources/courses';
 import {
   Entries,
   EntryApproveResponse,
@@ -72,6 +106,7 @@ import {
   ExperienceCreateParams,
   ExperienceDeleteResponse,
   ExperienceDetachParams,
+  ExperienceDuplicateParams,
   ExperienceListParams,
   ExperienceListResponse,
   ExperienceListResponsesCursorPage,
@@ -83,6 +118,7 @@ import {
   ForumPostListParams,
   ForumPostListResponse,
   ForumPostListResponsesCursorPage,
+  ForumPostUpdateParams,
   ForumPosts,
 } from './resources/forum-posts';
 import {
@@ -121,6 +157,7 @@ import {
   MessageListParams,
   MessageListResponse,
   MessageListResponsesCursorPage,
+  MessageUpdateParams,
   Messages,
 } from './resources/messages';
 import {
@@ -146,6 +183,17 @@ import {
   ProductUpdateParams,
   Products,
 } from './resources/products';
+import {
+  PromoCode,
+  PromoCodeCreateParams,
+  PromoCodeDeleteResponse,
+  PromoCodeListParams,
+  PromoCodeListResponse,
+  PromoCodeListResponsesCursorPage,
+  PromoCodeStatus,
+  PromoCodes,
+  PromoDuration,
+} from './resources/promo-codes';
 import {
   ReactionCreateParams,
   ReactionListParams,
@@ -951,6 +999,10 @@ export class Whop {
   reactions: API.Reactions = new API.Reactions(this);
   members: API.Members = new API.Members(this);
   forums: API.Forums = new API.Forums(this);
+  promoCodes: API.PromoCodes = new API.PromoCodes(this);
+  courses: API.Courses = new API.Courses(this);
+  courseChapters: API.CourseChapters = new API.CourseChapters(this);
+  courseLessons: API.CourseLessons = new API.CourseLessons(this);
 }
 
 Whop.Apps = Apps;
@@ -978,6 +1030,10 @@ Whop.Experiences = Experiences;
 Whop.Reactions = Reactions;
 Whop.Members = Members;
 Whop.Forums = Forums;
+Whop.PromoCodes = PromoCodes;
+Whop.Courses = Courses;
+Whop.CourseChapters = CourseChapters;
+Whop.CourseLessons = CourseLessons;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1059,6 +1115,7 @@ export declare namespace Whop {
     type ForumPostListResponse as ForumPostListResponse,
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
     type ForumPostCreateParams as ForumPostCreateParams,
+    type ForumPostUpdateParams as ForumPostUpdateParams,
     type ForumPostListParams as ForumPostListParams,
   };
 
@@ -1122,6 +1179,7 @@ export declare namespace Whop {
     type MessageListResponse as MessageListResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
     type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
     type MessageListParams as MessageListParams,
   };
 
@@ -1166,6 +1224,7 @@ export declare namespace Whop {
     type ExperienceListParams as ExperienceListParams,
     type ExperienceAttachParams as ExperienceAttachParams,
     type ExperienceDetachParams as ExperienceDetachParams,
+    type ExperienceDuplicateParams as ExperienceDuplicateParams,
   };
 
   export {
@@ -1190,6 +1249,55 @@ export declare namespace Whop {
     type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
     type ForumUpdateParams as ForumUpdateParams,
     type ForumListParams as ForumListParams,
+  };
+
+  export {
+    PromoCodes as PromoCodes,
+    type PromoCode as PromoCode,
+    type PromoCodeStatus as PromoCodeStatus,
+    type PromoDuration as PromoDuration,
+    type PromoCodeListResponse as PromoCodeListResponse,
+    type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
+    type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
+    type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeListParams as PromoCodeListParams,
+  };
+
+  export {
+    Courses as Courses,
+    type Course as Course,
+    type Languages as Languages,
+    type CourseListResponse as CourseListResponse,
+    type CourseDeleteResponse as CourseDeleteResponse,
+    type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
+    type CourseCreateParams as CourseCreateParams,
+    type CourseUpdateParams as CourseUpdateParams,
+    type CourseListParams as CourseListParams,
+  };
+
+  export {
+    CourseChapters as CourseChapters,
+    type CourseChapter as CourseChapter,
+    type CourseChapterListResponse as CourseChapterListResponse,
+    type CourseChapterDeleteResponse as CourseChapterDeleteResponse,
+    type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
+    type CourseChapterCreateParams as CourseChapterCreateParams,
+    type CourseChapterUpdateParams as CourseChapterUpdateParams,
+    type CourseChapterListParams as CourseChapterListParams,
+  };
+
+  export {
+    CourseLessons as CourseLessons,
+    type AssessmentQuestionTypes as AssessmentQuestionTypes,
+    type Lesson as Lesson,
+    type LessonTypes as LessonTypes,
+    type LessonVisibilities as LessonVisibilities,
+    type CourseLessonListResponse as CourseLessonListResponse,
+    type CourseLessonDeleteResponse as CourseLessonDeleteResponse,
+    type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
+    type CourseLessonCreateParams as CourseLessonCreateParams,
+    type CourseLessonUpdateParams as CourseLessonUpdateParams,
+    type CourseLessonListParams as CourseLessonListParams,
   };
 
   export type AccessLevel = API.AccessLevel;
