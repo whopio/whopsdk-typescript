@@ -118,6 +118,10 @@ export const tool: Tool = {
         description:
           'The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in dollars. Eg: 10.43 for $10.43',
       },
+      stock: {
+        type: 'integer',
+        description: 'The number of units available for purchase.',
+      },
       strike_through_initial_price: {
         type: 'number',
         description:
@@ -135,6 +139,10 @@ export const tool: Tool = {
       trial_period_days: {
         type: 'integer',
         description: 'The number of free trial days added before a renewal plan.',
+      },
+      unlimited_stock: {
+        type: 'boolean',
+        description: "Limits/doesn't limit the number of units available for purchase.",
       },
       visibility: {
         $ref: '#/$defs/visibility',

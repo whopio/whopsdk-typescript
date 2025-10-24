@@ -166,14 +166,38 @@ export interface PaymentListResponse {
   billing_address: PaymentListResponse.BillingAddress | null;
 
   /**
-   * The billing reason
+   * The reason why a specific payment was billed
    */
-  billing_reason: string | null;
+  billing_reason:
+    | 'subscription_create'
+    | 'subscription_cycle'
+    | 'subscription_update'
+    | 'one_time'
+    | 'manual'
+    | 'subscription'
+    | null;
 
   /**
-   * The type of card used as the payment method.
+   * Possible card brands that a payment token can have
    */
-  card_brand: string | null;
+  card_brand:
+    | 'mastercard'
+    | 'visa'
+    | 'amex'
+    | 'discover'
+    | 'unionpay'
+    | 'jcb'
+    | 'diners'
+    | 'link'
+    | 'troy'
+    | 'visadankort'
+    | 'visabancontact'
+    | 'china_union_pay'
+    | 'rupay'
+    | 'jcbrupay'
+    | 'elo'
+    | 'unknown'
+    | null;
 
   /**
    * The last 4 digits of the card used to make the payment.
@@ -226,10 +250,89 @@ export interface PaymentListResponse {
   paid_at: string | null;
 
   /**
-   * Returns the type of payment method used for the payment, if available. Ex.
-   * klarna, affirm, card, cashapp
+   * The different types of payment methods that can be used.
    */
-  payment_method_type: string | null;
+  payment_method_type:
+    | 'acss_debit'
+    | 'affirm'
+    | 'afterpay_clearpay'
+    | 'alipay'
+    | 'alma'
+    | 'amazon_pay'
+    | 'apple_pay'
+    | 'au_becs_debit'
+    | 'bacs_debit'
+    | 'bancontact'
+    | 'billie'
+    | 'blik'
+    | 'boleto'
+    | 'card'
+    | 'cashapp'
+    | 'crypto'
+    | 'eps'
+    | 'fpx'
+    | 'giropay'
+    | 'google_pay'
+    | 'grabpay'
+    | 'ideal'
+    | 'kakao_pay'
+    | 'klarna'
+    | 'konbini'
+    | 'kr_card'
+    | 'link'
+    | 'mobilepay'
+    | 'multibanco'
+    | 'naver_pay'
+    | 'nz_bank_account'
+    | 'oxxo'
+    | 'p24'
+    | 'pay_by_bank'
+    | 'payco'
+    | 'paynow'
+    | 'pix'
+    | 'promptpay'
+    | 'revolut_pay'
+    | 'samsung_pay'
+    | 'satispay'
+    | 'sepa_debit'
+    | 'sofort'
+    | 'swish'
+    | 'twint'
+    | 'us_bank_account'
+    | 'wechat_pay'
+    | 'zip'
+    | 'bizum'
+    | 'capchase_pay'
+    | 'kriya'
+    | 'mondu'
+    | 'ng_wallet'
+    | 'paypay'
+    | 'sequra'
+    | 'scalapay'
+    | 'vipps'
+    | 'custom'
+    | 'customer_balance'
+    | 'gopay'
+    | 'mb_way'
+    | 'ng_bank'
+    | 'ng_bank_transfer'
+    | 'ng_card'
+    | 'ng_market'
+    | 'ng_ussd'
+    | 'paypal'
+    | 'payto'
+    | 'qris'
+    | 'rechnung'
+    | 'south_korea_market'
+    | 'kr_market'
+    | 'shopeepay'
+    | 'upi'
+    | 'sunbit'
+    | 'netbanking'
+    | 'id_bank_transfer'
+    | 'demo_pay'
+    | 'shop_pay'
+    | null;
 
   /**
    * The plan attached to this payment.
@@ -247,7 +350,8 @@ export interface PaymentListResponse {
   promo_code: PaymentListResponse.PromoCode | null;
 
   /**
-   * Whether the payment can be refunded.
+   * True only for payments that are `paid`, have not been fully refunded, and were
+   * processed by a payment processor that allows refunds.
    */
   refundable: boolean;
 
@@ -262,7 +366,9 @@ export interface PaymentListResponse {
   refunded_at: string | null;
 
   /**
-   * A payment can be retried if the associated membership is past due
+   * True when the payment status is `open` and its membership is in one of the
+   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`);
+   * otherwise false. Used to decide if Whop can attempt the charge again.
    */
   retryable: boolean;
 
@@ -297,7 +403,8 @@ export interface PaymentListResponse {
   user: PaymentListResponse.User | null;
 
   /**
-   * Whether the payment can be voided.
+   * True when the payment is tied to a membership in `past_due`, the payment status
+   * is `open`, and the processor allows voiding payments; otherwise false.
    */
   voidable: boolean;
 }
