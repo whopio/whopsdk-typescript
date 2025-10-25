@@ -114,7 +114,8 @@ export interface CheckoutConfigurationListResponse {
   plan: CheckoutConfigurationListResponse.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout configuration is created
+   * A URL you can send to customers to complete a checkout. It looks like
+   * `/checkout/plan_xxxx?session={id}`
    */
   purchase_url: string;
 
