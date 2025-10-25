@@ -170,6 +170,11 @@ export interface MembershipListResponse {
   plan: MembershipListResponse.Plan;
 
   /**
+   * The Product this Membership grants access to.
+   */
+  product: MembershipListResponse.Product;
+
+  /**
    * The Promo Code that is currently applied to this Membership.
    */
   promo_code: MembershipListResponse.PromoCode | null;
@@ -236,6 +241,21 @@ export namespace MembershipListResponse {
      * The internal ID of the plan.
      */
     id: string;
+  }
+
+  /**
+   * The Product this Membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public product.
+     */
+    id: string;
+
+    /**
+     * The title of the product. Use for Whop 4.0.
+     */
+    title: string;
   }
 
   /**

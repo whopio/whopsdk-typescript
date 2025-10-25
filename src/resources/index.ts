@@ -39,9 +39,43 @@ export {
 } from './checkout-configurations';
 export { Companies } from './companies';
 export {
+  CourseChapters,
+  type CourseChapter,
+  type CourseChapterListResponse,
+  type CourseChapterDeleteResponse,
+  type CourseChapterCreateParams,
+  type CourseChapterUpdateParams,
+  type CourseChapterListParams,
+  type CourseChapterListResponsesCursorPage,
+} from './course-chapters';
+export {
   CourseLessonInteractions,
   type CourseLessonInteractionListParams,
 } from './course-lesson-interactions';
+export {
+  CourseLessons,
+  type AssessmentQuestionTypes,
+  type Lesson,
+  type LessonTypes,
+  type LessonVisibilities,
+  type CourseLessonListResponse,
+  type CourseLessonDeleteResponse,
+  type CourseLessonCreateParams,
+  type CourseLessonUpdateParams,
+  type CourseLessonListParams,
+  type CourseLessonListResponsesCursorPage,
+} from './course-lessons';
+export {
+  Courses,
+  type Course,
+  type Languages,
+  type CourseListResponse,
+  type CourseDeleteResponse,
+  type CourseCreateParams,
+  type CourseUpdateParams,
+  type CourseListParams,
+  type CourseListResponsesCursorPage,
+} from './courses';
 export {
   Entries,
   type EntryListResponse,
@@ -58,12 +92,14 @@ export {
   type ExperienceListParams,
   type ExperienceAttachParams,
   type ExperienceDetachParams,
+  type ExperienceDuplicateParams,
   type ExperienceListResponsesCursorPage,
 } from './experiences';
 export {
   ForumPosts,
   type ForumPostListResponse,
   type ForumPostCreateParams,
+  type ForumPostUpdateParams,
   type ForumPostListParams,
   type ForumPostListResponsesCursorPage,
 } from './forum-posts';
@@ -102,6 +138,7 @@ export {
   Messages,
   type MessageListResponse,
   type MessageCreateParams,
+  type MessageUpdateParams,
   type MessageListParams,
   type MessageListResponsesCursorPage,
 } from './messages';
@@ -128,6 +165,17 @@ export {
   type ProductUpdateParams,
   type ProductListParams,
 } from './products';
+export {
+  PromoCodes,
+  type PromoCode,
+  type PromoCodeStatus,
+  type PromoDuration,
+  type PromoCodeListResponse,
+  type PromoCodeDeleteResponse,
+  type PromoCodeCreateParams,
+  type PromoCodeListParams,
+  type PromoCodeListResponsesCursorPage,
+} from './promo-codes';
 export {
   Reactions,
   type ReactionListResponse,

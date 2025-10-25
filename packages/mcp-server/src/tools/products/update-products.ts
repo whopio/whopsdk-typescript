@@ -96,6 +96,20 @@ export const tool: Tool = {
         type: 'string',
         description: 'The route of the product.',
       },
+      store_page_config: {
+        type: 'object',
+        description: "Configuration for a product on the company's store page.",
+        properties: {
+          custom_cta: {
+            type: 'string',
+            description: "Custom call-to-action text for the product's store page.",
+          },
+          show_price: {
+            type: 'boolean',
+            description: "Whether or not to show the price on the product's store page.",
+          },
+        },
+      },
       title: {
         type: 'string',
         description: 'The title of the product.',

@@ -154,4 +154,28 @@ describe('resource experiences', () => {
       product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
+
+  // Prism tests are disabled
+  test.skip('duplicate', async () => {
+    const responsePromise = client.experiences.duplicate('exp_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('duplicate: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.experiences.duplicate(
+        'exp_xxxxxxxxxxxxxx',
+        { name: 'name' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
 });

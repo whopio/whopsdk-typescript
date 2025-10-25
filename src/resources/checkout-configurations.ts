@@ -15,6 +15,8 @@ export class CheckoutConfigurations extends APIResource {
    *
    * - `checkout_configuration:create`
    * - `plan:create`
+   * - `access_pass:create`
+   * - `access_pass:update`
    *
    * @example
    * ```ts
@@ -112,7 +114,8 @@ export interface CheckoutConfigurationListResponse {
   plan: CheckoutConfigurationListResponse.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout configuration is created
+   * A URL you can send to customers to complete a checkout. It looks like
+   * `/checkout/plan_xxxx?session={id}`
    */
   purchase_url: string;
 
@@ -274,7 +277,13 @@ export namespace CheckoutConfigurationCreateParams {
     plan_type?: Shared.PlanType | null;
 
     /**
-     * The product the plan is related to.
+     * Pass this object to create a new product for this plan. We will use the product
+     * external identifier to find or create an existing product.
+     */
+    product?: Plan.Product | null;
+
+    /**
+     * The product the plan is related to. Either this or product is required.
      */
     product_id?: string | null;
 
@@ -354,6 +363,86 @@ export namespace CheckoutConfigurationCreateParams {
        * mediaDirectUpload mutation.
        */
       direct_upload_id?: string | null;
+    }
+
+    /**
+     * Pass this object to create a new product for this plan. We will use the product
+     * external identifier to find or create an existing product.
+     */
+    export interface Product {
+      /**
+       * A unique ID used to find or create a product. When provided during creation, we
+       * will look for an existing product with this external identifier — if found, it
+       * will be updated; otherwise, a new product will be created.
+       */
+      external_identifier: string;
+
+      /**
+       * The title of the product.
+       */
+      title: string;
+
+      /**
+       * The different business types a company can be.
+       */
+      business_type?: Shared.BusinessTypes | null;
+
+      /**
+       * Whether or not to collect shipping information at checkout from the customer.
+       */
+      collect_shipping_address?: boolean | null;
+
+      /**
+       * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
+       * between 5 and 22 characters, contain at least one letter, and not contain any of
+       * the following characters: <, >, \, ', "
+       */
+      custom_statement_descriptor?: string | null;
+
+      /**
+       * A written description of the product.
+       */
+      description?: string | null;
+
+      /**
+       * The percentage of the revenue that goes to the global affiliate program.
+       */
+      global_affiliate_percentage?: number | null;
+
+      /**
+       * The different statuses of the global affiliate program for an access pass.
+       */
+      global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+      /**
+       * The headline of the product.
+       */
+      headline?: string | null;
+
+      /**
+       * The different industry types a company can be in.
+       */
+      industry_type?: Shared.IndustryTypes | null;
+
+      /**
+       * The ID of the product tax code to apply to this product.
+       */
+      product_tax_code_id?: string | null;
+
+      /**
+       * The URL to redirect the customer to after a purchase.
+       */
+      redirect_purchase_url?: string | null;
+
+      /**
+       * The route of the product.
+       */
+      route?: string | null;
+
+      /**
+       * Visibility of a resource
+       */
+      visibility?: Shared.Visibility | null;
     }
   }
 }

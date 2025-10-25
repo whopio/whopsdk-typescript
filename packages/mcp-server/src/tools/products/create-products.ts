@@ -29,25 +29,6 @@ export const tool: Tool = {
         type: 'string',
         description: 'The title of the product.',
       },
-      access_pass_type: {
-        $ref: '#/$defs/access_pass_type',
-      },
-      banner_image: {
-        type: 'object',
-        description: 'A banner image for the product in png, jpeg format',
-        properties: {
-          id: {
-            type: 'string',
-            description:
-              "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-          },
-          direct_upload_id: {
-            type: 'string',
-            description:
-              'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-          },
-        },
-      },
       business_type: {
         $ref: '#/$defs/business_types',
       },
@@ -209,11 +190,6 @@ export const tool: Tool = {
     },
     required: ['company_id', 'title'],
     $defs: {
-      access_pass_type: {
-        type: 'string',
-        description: 'The different types an access pass can be.',
-        enum: ['regular', 'app', 'experience_upsell', 'api_only'],
-      },
       business_types: {
         type: 'string',
         description: 'The different business types a company can be.',

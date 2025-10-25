@@ -26,8 +26,6 @@ describe('resource products', () => {
     const response = await client.products.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       title: 'title',
-      access_pass_type: 'regular',
-      banner_image: { id: 'id', direct_upload_id: 'direct_upload_id' },
       business_type: 'education_program',
       collect_shipping_address: true,
       custom_cta: 'get_access',
@@ -115,6 +113,7 @@ describe('resource products', () => {
           product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
           redirect_purchase_url: 'redirect_purchase_url',
           route: 'route',
+          store_page_config: { custom_cta: 'custom_cta', show_price: true },
           title: 'title',
           visibility: 'visible',
         },
