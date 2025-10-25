@@ -30,6 +30,10 @@ export const tool: Tool = {
         type: 'string',
         description: 'The title of the course',
       },
+      cover_image: {
+        type: 'string',
+        description: 'The cover image URL of the course',
+      },
       tagline: {
         type: 'string',
         description: 'The tagline of the course',

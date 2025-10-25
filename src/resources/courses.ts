@@ -375,6 +375,11 @@ export interface CourseCreateParams {
   title: string;
 
   /**
+   * The cover image URL of the course
+   */
+  cover_image?: string | null;
+
+  /**
    * The tagline of the course
    */
   tagline?: string | null;
@@ -417,6 +422,11 @@ export interface CourseUpdateParams {
    * The chapters and lessons to update
    */
   chapters?: Array<CourseUpdateParams.Chapter> | null;
+
+  /**
+   * The cover image URL of the course
+   */
+  cover_image?: string | null;
 
   /**
    * A short description of the course

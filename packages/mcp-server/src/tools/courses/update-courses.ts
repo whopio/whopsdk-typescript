@@ -80,6 +80,10 @@ export const tool: Tool = {
           required: ['id', 'order', 'title'],
         },
       },
+      cover_image: {
+        type: 'string',
+        description: 'The cover image URL of the course',
+      },
       description: {
         type: 'string',
         description: 'A short description of the course',

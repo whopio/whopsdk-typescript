@@ -26,6 +26,7 @@ describe('resource courses', () => {
     const response = await client.courses.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
       title: 'title',
+      cover_image: 'cover_image',
       tagline: 'tagline',
       thumbnail: { id: 'id', direct_upload_id: 'direct_upload_id' },
     });
@@ -71,6 +72,7 @@ describe('resource courses', () => {
               lessons: [{ id: 'id', chapter_id: 'chap_xxxxxxxxxxxxx', order: 42, title: 'title' }],
             },
           ],
+          cover_image: 'cover_image',
           description: 'description',
           language: 'en',
           require_completing_lessons_in_order: true,
