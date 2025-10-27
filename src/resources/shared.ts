@@ -2205,6 +2205,11 @@ export interface Payment {
     | 'id_bank_transfer'
     | 'demo_pay'
     | 'shop_pay'
+    | 'apple'
+    | 'sezzle'
+    | 'coinbase'
+    | 'splitit'
+    | 'unknown'
     | null;
 
   /**
