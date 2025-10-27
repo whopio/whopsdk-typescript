@@ -43,7 +43,7 @@ export class Memberships extends APIResource {
    * - `member:basic:read`
    */
   list(
-    query: MembershipListParams,
+    query: MembershipListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
     return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
@@ -298,11 +298,6 @@ export interface MembershipUpdateParams {
 
 export interface MembershipListParams extends CursorPageParams {
   /**
-   * The ID of the company to list memberships for
-   */
-  company_id: string;
-
-  /**
    * The access pass IDs to filter the memberships by
    */
   access_pass_ids?: Array<string> | null;
@@ -324,6 +319,11 @@ export interface MembershipListParams extends CursorPageParams {
     | 'other'
     | 'testing'
   > | null;
+
+  /**
+   * The ID of the company to list memberships for
+   */
+  company_id?: string | null;
 
   /**
    * The minimum creation date to filter by

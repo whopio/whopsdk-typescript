@@ -20,10 +20,6 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      company_id: {
-        type: 'string',
-        description: 'The ID of the company to list memberships for',
-      },
       access_pass_ids: {
         type: 'array',
         description: 'The access pass IDs to filter the memberships by',
@@ -57,6 +53,10 @@ export const tool: Tool = {
             'testing',
           ],
         },
+      },
+      company_id: {
+        type: 'string',
+        description: 'The ID of the company to list memberships for',
       },
       created_after: {
         type: 'string',
@@ -119,7 +119,7 @@ export const tool: Tool = {
         },
       },
     },
-    required: ['company_id'],
+    required: [],
     $defs: {
       direction: {
         type: 'string',
