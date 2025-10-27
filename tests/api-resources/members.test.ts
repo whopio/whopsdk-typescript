@@ -52,6 +52,7 @@ describe('resource members', () => {
       promo_code_ids: ['string'],
       query: 'query',
       statuses: ['drafted'],
+      user_ids: ['string'],
     });
   });
 });

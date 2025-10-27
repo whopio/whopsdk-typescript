@@ -74,6 +74,7 @@ describe('resource memberships', () => {
       plan_ids: ['string'],
       promo_code_ids: ['string'],
       statuses: ['trialing'],
+      user_ids: ['string'],
     });
   });
 

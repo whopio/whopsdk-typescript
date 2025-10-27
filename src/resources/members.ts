@@ -325,6 +325,11 @@ export interface MemberListParams extends CursorPageParams {
    * The statuses to filter the members by
    */
   statuses?: Array<Shared.MemberStatuses> | null;
+
+  /**
+   * The user IDs to filter the members by
+   */
+  user_ids?: Array<string> | null;
 }
 
 export declare namespace Members {

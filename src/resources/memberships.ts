@@ -369,6 +369,11 @@ export interface MembershipListParams extends CursorPageParams {
    * The membership status to filter the memberships by
    */
   statuses?: Array<Shared.MembershipStatus> | null;
+
+  /**
+   * Only return memberships from these whop user ids
+   */
+  user_ids?: Array<string> | null;
 }
 
 export interface MembershipCancelParams {
