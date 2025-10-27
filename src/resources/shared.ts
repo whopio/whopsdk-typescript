@@ -2559,7 +2559,7 @@ export interface Plan {
   renewal_price: number;
 
   /**
-   * An un-used field - do not use.
+   * The number of units available for purchase. Only displayed to authorized actors
    */
   stock: number | null;
 
