@@ -107,6 +107,8 @@ import retrieve_course_lessons from './course-lessons/retrieve-course-lessons';
 import update_course_lessons from './course-lessons/update-course-lessons';
 import list_course_lessons from './course-lessons/list-course-lessons';
 import delete_course_lessons from './course-lessons/delete-course-lessons';
+import retrieve_reviews from './reviews/retrieve-reviews';
+import list_reviews from './reviews/list-reviews';
 
 export const endpoints: Endpoint[] = [];
 
@@ -217,6 +219,8 @@ addEndpoint(retrieve_course_lessons);
 addEndpoint(update_course_lessons);
 addEndpoint(list_course_lessons);
 addEndpoint(delete_course_lessons);
+addEndpoint(retrieve_reviews);
+addEndpoint(list_reviews);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
