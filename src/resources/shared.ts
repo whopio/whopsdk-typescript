@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
+import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
 /**
@@ -444,7 +445,8 @@ export interface CheckoutConfiguration {
   plan: CheckoutConfiguration.Plan;
 
   /**
-   * The URL to redirect the user to after the checkout configuration is created
+   * A URL you can send to customers to complete a checkout. It looks like
+   * `/checkout/plan_xxxx?session={id}`
    */
   purchase_url: string;
 
@@ -1257,6 +1259,11 @@ export interface ForumPost {
   content: string | null;
 
   /**
+   * The timestamp when the post was created
+   */
+  created_at: string;
+
+  /**
    * Whether the forum post has been edited
    */
   is_edited: boolean;
@@ -1285,6 +1292,11 @@ export interface ForumPost {
    * The title of the forum post
    */
   title: string | null;
+
+  /**
+   * The timestamp when the post was last updated
+   */
+  updated_at: string;
 
   /**
    * The user who created this forum post
@@ -1439,7 +1451,8 @@ export interface Invoice {
   email_address: string | null;
 
   /**
-   * The token to fetch the invoice.
+   * A signed token that allows fetching the invoice data publically without being
+   * authenticated.
    */
   fetch_invoice_token: string;
 
@@ -1531,7 +1544,8 @@ export interface InvoiceListItem {
   email_address: string | null;
 
   /**
-   * The token to fetch the invoice.
+   * A signed token that allows fetching the invoice data publically without being
+   * authenticated.
    */
   fetch_invoice_token: string;
 
@@ -1695,6 +1709,11 @@ export interface Membership {
   plan: Membership.Plan;
 
   /**
+   * The Product this Membership grants access to.
+   */
+  product: Membership.Product;
+
+  /**
    * The Promo Code that is currently applied to this Membership.
    */
   promo_code: Membership.PromoCode | null;
@@ -1761,6 +1780,21 @@ export namespace Membership {
      * The internal ID of the plan.
      */
     id: string;
+  }
+
+  /**
+   * The Product this Membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public product.
+     */
+    id: string;
+
+    /**
+     * The title of the product. Use for Whop 4.0.
+     */
+    title: string;
   }
 
   /**
@@ -2006,14 +2040,14 @@ export interface Payment {
   billing_address: Payment.BillingAddress | null;
 
   /**
-   * The billing reason
+   * The reason why a specific payment was billed
    */
-  billing_reason: string | null;
+  billing_reason: PaymentsAPI.BillingReasons | null;
 
   /**
-   * The type of card used as the payment method.
+   * Possible card brands that a payment token can have
    */
-  card_brand: string | null;
+  card_brand: PaymentsAPI.CardBrands | null;
 
   /**
    * The last 4 digits of the card used to make the payment.
@@ -2066,10 +2100,9 @@ export interface Payment {
   paid_at: string | null;
 
   /**
-   * Returns the type of payment method used for the payment, if available. Ex.
-   * klarna, affirm, card, cashapp
+   * The different types of payment methods that can be used.
    */
-  payment_method_type: string | null;
+  payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
 
   /**
    * The plan attached to this payment.
@@ -2087,7 +2120,8 @@ export interface Payment {
   promo_code: Payment.PromoCode | null;
 
   /**
-   * Whether the payment can be refunded.
+   * True only for payments that are `paid`, have not been fully refunded, and were
+   * processed by a payment processor that allows refunds.
    */
   refundable: boolean;
 
@@ -2102,7 +2136,9 @@ export interface Payment {
   refunded_at: string | null;
 
   /**
-   * Whether the payment can be retried.
+   * True when the payment status is `open` and its membership is in one of the
+   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`);
+   * otherwise false. Used to decide if Whop can attempt the charge again.
    */
   retryable: boolean;
 
@@ -2137,7 +2173,8 @@ export interface Payment {
   user: Payment.User | null;
 
   /**
-   * Whether the payment can be voided.
+   * True when the payment is tied to a membership in `past_due`, the payment status
+   * is `open`, and the processor allows voiding payments; otherwise false.
    */
   voidable: boolean;
 }
@@ -2288,7 +2325,7 @@ export namespace Payment {
     code: string | null;
 
     /**
-     * The number of billing cycles the promo is applied for.
+     * The number of months the promo is applied for.
      */
     number_of_intervals: number | null;
 
@@ -2419,14 +2456,29 @@ export interface Plan {
   renewal_price: number;
 
   /**
+   * The number of units available for purchase. Only displayed to authorized actors
+   */
+  stock: number | null;
+
+  /**
    * The tax type for the plan.
    */
   tax_type: TaxType;
 
   /**
+   * The title of the plan. This will be visible on the product page to customers.
+   */
+  title: string | null;
+
+  /**
    * The number of free trial days added before a renewal plan.
    */
   trial_period_days: number | null;
+
+  /**
+   * Limits/doesn't limit the number of units available for purchase.
+   */
+  unlimited_stock: boolean;
 
   /**
    * When the plan was last updated.
@@ -2564,6 +2616,13 @@ export interface Product {
    * A short description of what the company offers or does.
    */
   description: string | null;
+
+  /**
+   * A unique identifier used to create or update products. When provided on product
+   * creation endpoints, we’ll look up an existing product by this identifier — if it
+   * exists, we’ll update it; if not, we’ll create a new one.
+   */
+  external_identifier: string | null;
 
   /**
    * The percentage of a transaction a user is eligible to earn from the whop
@@ -2723,6 +2782,13 @@ export interface ProductListItem {
    * When the product was created.
    */
   created_at: string;
+
+  /**
+   * A unique identifier used to create or update products. When provided on product
+   * creation endpoints, we’ll look up an existing product by this identifier — if it
+   * exists, we’ll update it; if not, we’ll create a new one.
+   */
+  external_identifier: string | null;
 
   /**
    * The headline of the product.

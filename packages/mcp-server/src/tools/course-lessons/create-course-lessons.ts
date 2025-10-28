@@ -1,0 +1,68 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import { maybeFilter } from '@whop/mcp/filtering';
+import { Metadata, asTextContentResult } from '@whop/mcp/tools/types';
+
+import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import Whop from '@whop/sdk';
+
+export const metadata: Metadata = {
+  resource: 'course_lessons',
+  operation: 'write',
+  tags: [],
+  httpMethod: 'post',
+  httpPath: '/course_lessons',
+  operationId: 'createCourseLesson',
+};
+
+export const tool: Tool = {
+  name: 'create_course_lessons',
+  description:
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates a new course lesson\n\nRequired permissions:\n - `courses:update`\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/lesson',\n  $defs: {\n    lesson: {\n      type: 'object',\n      description: 'A lesson from the courses app',\n      properties: {\n        id: {\n          type: 'string',\n          description: 'The ID of the lesson'\n        },\n        assessment_questions: {\n          type: 'array',\n          description: 'Assessment questions for quiz/knowledge check lessons',\n          items: {\n            type: 'object',\n            description: 'An assessment question in a course quiz or knowledge check',\n            properties: {\n              id: {\n                type: 'string',\n                description: 'The ID of the assessment question'\n              },\n              correct_answer: {\n                type: 'string',\n                description: 'The correct answer for the question. Used for short answer questions'\n              },\n              created_at: {\n                type: 'string',\n                description: 'When the question was created',\n                format: 'date-time'\n              },\n              image: {\n                type: 'object',\n                description: 'Optional image attachment for the question',\n                properties: {\n                  id: {\n                    type: 'string',\n                    description: 'The ID of the attachment'\n                  },\n                  content_type: {\n                    type: 'string',\n                    description: 'The attachment\\'s content type (e.g., image/jpg, video/mp4)'\n                  },\n                  filename: {\n                    type: 'string',\n                    description: 'The name of the file'\n                  },\n                  url: {\n                    type: 'string',\n                    description: 'This is the URL you use to render optimized attachments on the client. This should be used for apps.'\n                  }\n                },\n                required: [                  'id',\n                  'content_type',\n                  'filename',\n                  'url'\n                ]\n              },\n              options: {\n                type: 'array',\n                description: 'The answer options for multiple choice/select questions',\n                items: {\n                  type: 'object',\n                  description: 'An answer option for a multiple choice or multiple select assessment question',\n                  properties: {\n                    id: {\n                      type: 'string',\n                      description: 'The ID of the assessment question option'\n                    },\n                    is_correct: {\n                      type: 'boolean',\n                      description: 'Whether this option is a correct answer'\n                    },\n                    option_text: {\n                      type: 'string',\n                      description: 'The text of the answer option'\n                    },\n                    order: {\n                      type: 'integer',\n                      description: 'The order of this option within the question'\n                    }\n                  },\n                  required: [                    'id',\n                    'is_correct',\n                    'option_text',\n                    'order'\n                  ]\n                }\n              },\n              order: {\n                type: 'integer',\n                description: 'The order of the question within its lesson'\n              },\n              question_text: {\n                type: 'string',\n                description: 'The text of the question'\n              },\n              question_type: {\n                $ref: '#/$defs/assessment_question_types'\n              }\n            },\n            required: [              'id',\n              'correct_answer',\n              'created_at',\n              'image',\n              'options',\n              'order',\n              'question_text',\n              'question_type'\n            ]\n          }\n        },\n        attachments: {\n          type: 'array',\n          description: 'The attached files in this lesson as a flat array',\n          items: {\n            type: 'object',\n            description: 'Represents an image attachment',\n            properties: {\n              id: {\n                type: 'string',\n                description: 'The ID of the attachment'\n              },\n              content_type: {\n                type: 'string',\n                description: 'The attachment\\'s content type (e.g., image/jpg, video/mp4)'\n              },\n              filename: {\n                type: 'string',\n                description: 'The name of the file'\n              },\n              url: {\n                type: 'string',\n                description: 'This is the URL you use to render optimized attachments on the client. This should be used for apps.'\n              }\n            },\n            required: [              'id',\n              'content_type',\n              'filename',\n              'url'\n            ]\n          }\n        },\n        content: {\n          type: 'string',\n          description: 'The content of the lesson'\n        },\n        days_from_course_start_until_unlock: {\n          type: 'integer',\n          description: 'Number of days from course start until the lesson is unlocked'\n        },\n        lesson_type: {\n          $ref: '#/$defs/lesson_types'\n        },\n        main_pdf: {\n          type: 'object',\n          description: 'The main PDF file for this lesson',\n          properties: {\n            id: {\n              type: 'string',\n              description: 'The ID of the attachment'\n            },\n            content_type: {\n              type: 'string',\n              description: 'The attachment\\'s content type (e.g., image/jpg, video/mp4)'\n            },\n            filename: {\n              type: 'string',\n              description: 'The name of the file'\n            },\n            url: {\n              type: 'string',\n              description: 'This is the URL you use to render optimized attachments on the client. This should be used for apps.'\n            }\n          },\n          required: [            'id',\n            'content_type',\n            'filename',\n            'url'\n          ]\n        },\n        order: {\n          type: 'integer',\n          description: 'The order of the lesson within its chapter'\n        },\n        title: {\n          type: 'string',\n          description: 'The title of the lesson'\n        },\n        video_asset: {\n          type: 'object',\n          description: 'The associated Mux asset for video lessons',\n          properties: {\n            id: {\n              type: 'string',\n              description: 'The ID of the Mux asset'\n            },\n            asset_id: {\n              type: 'string',\n              description: 'The Mux-provided ID of the asset'\n            },\n            playback_id: {\n              type: 'string',\n              description: 'The public playback ID of the Mux asset'\n            }\n          },\n          required: [            'id',\n            'asset_id',\n            'playback_id'\n          ]\n        },\n        visibility: {\n          $ref: '#/$defs/lesson_visibilities'\n        }\n      },\n      required: [        'id',\n        'assessment_questions',\n        'attachments',\n        'content',\n        'days_from_course_start_until_unlock',\n        'lesson_type',\n        'main_pdf',\n        'order',\n        'title',\n        'video_asset',\n        'visibility'\n      ]\n    },\n    assessment_question_types: {\n      type: 'string',\n      description: 'The available types for an assessment question',\n      enum: [        'short_answer',\n        'true_false',\n        'multiple_choice',\n        'multiple_select'\n      ]\n    },\n    lesson_types: {\n      type: 'string',\n      description: 'The available types for a lesson',\n      enum: [        'text',\n        'video',\n        'pdf',\n        'multi',\n        'quiz',\n        'knowledge_check'\n      ]\n    },\n    lesson_visibilities: {\n      type: 'string',\n      description: 'The available visibilities for a lesson. Determines how / whether a lesson is visible to users.',\n      enum: [        'visible',\n        'hidden'\n      ]\n    }\n  }\n}\n```",
+  inputSchema: {
+    type: 'object',
+    properties: {
+      chapter_id: {
+        type: 'string',
+        description: 'The ID of the chapter to create the lesson in',
+      },
+      lesson_type: {
+        $ref: '#/$defs/lesson_types',
+      },
+      content: {
+        type: 'string',
+        description: 'The content of the lesson',
+      },
+      days_from_course_start_until_unlock: {
+        type: 'integer',
+        description: 'Days from course start until unlock',
+      },
+      title: {
+        type: 'string',
+        description: 'The title of the lesson',
+      },
+      jq_filter: {
+        type: 'string',
+        title: 'jq Filter',
+        description:
+          'A jq filter to apply to the response to include certain fields. Consult the output schema in the tool description to see the fields that are available.\n\nFor example: to include only the `name` field in every object of a results array, you can provide ".results[].name".\n\nFor more information, see the [jq documentation](https://jqlang.org/manual/).',
+      },
+    },
+    required: ['chapter_id', 'lesson_type'],
+    $defs: {
+      lesson_types: {
+        type: 'string',
+        description: 'The available types for a lesson',
+        enum: ['text', 'video', 'pdf', 'multi', 'quiz', 'knowledge_check'],
+      },
+    },
+  },
+  annotations: {},
+};
+
+export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
+  const { jq_filter, ...body } = args as any;
+  return asTextContentResult(await maybeFilter(jq_filter, await client.courseLessons.create(body)));
+};
+
+export default { metadata, tool, handler };

@@ -50,6 +50,35 @@ describe('resource forumPosts', () => {
   });
 
   // Prism tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.forumPosts.update('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.forumPosts.update(
+        'id',
+        {
+          attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
+          content: 'content',
+          is_pinned: true,
+          title: 'title',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.forumPosts.list({ experience_id: 'exp_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();

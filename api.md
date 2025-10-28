@@ -180,6 +180,7 @@ Methods:
 
 - <code title="post /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">create</a>({ ...params }) -> ForumPost</code>
 - <code title="get /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">retrieve</a>(id) -> ForumPost</code>
+- <code title="patch /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">update</a>(id, { ...params }) -> ForumPost</code>
 - <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>
 
 # Transfers
@@ -278,6 +279,7 @@ Methods:
 
 - <code title="post /messages">client.messages.<a href="./src/resources/messages.ts">create</a>({ ...params }) -> Message</code>
 - <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
+- <code title="patch /messages/{id}">client.messages.<a href="./src/resources/messages.ts">update</a>(id, { ...params }) -> Message</code>
 - <code title="get /messages">client.messages.<a href="./src/resources/messages.ts">list</a>({ ...params }) -> MessageListResponsesCursorPage</code>
 
 # ChatChannels
@@ -308,6 +310,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/payments.ts">BillingReasons</a></code>
+- <code><a href="./src/resources/payments.ts">CardBrands</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
 
 Methods:
@@ -346,6 +351,7 @@ Methods:
 - <code title="delete /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">delete</a>(id) -> ExperienceDeleteResponse</code>
 - <code title="post /experiences/{id}/attach">client.experiences.<a href="./src/resources/experiences.ts">attach</a>(id, { ...params }) -> Experience</code>
 - <code title="post /experiences/{id}/detach">client.experiences.<a href="./src/resources/experiences.ts">detach</a>(id, { ...params }) -> Experience</code>
+- <code title="post /experiences/{id}/duplicate">client.experiences.<a href="./src/resources/experiences.ts">duplicate</a>(id, { ...params }) -> Experience</code>
 
 # Reactions
 
@@ -382,3 +388,85 @@ Methods:
 - <code title="get /forums/{id}">client.forums.<a href="./src/resources/forums.ts">retrieve</a>(id) -> Forum</code>
 - <code title="patch /forums/{id}">client.forums.<a href="./src/resources/forums.ts">update</a>(id, { ...params }) -> Forum</code>
 - <code title="get /forums">client.forums.<a href="./src/resources/forums.ts">list</a>({ ...params }) -> ForumListResponsesCursorPage</code>
+
+# PromoCodes
+
+Types:
+
+- <code><a href="./src/resources/promo-codes.ts">PromoCode</a></code>
+- <code><a href="./src/resources/promo-codes.ts">PromoCodeStatus</a></code>
+- <code><a href="./src/resources/promo-codes.ts">PromoDuration</a></code>
+- <code><a href="./src/resources/promo-codes.ts">PromoCodeListResponse</a></code>
+- <code><a href="./src/resources/promo-codes.ts">PromoCodeDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">create</a>({ ...params }) -> PromoCode</code>
+- <code title="get /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">retrieve</a>(id) -> PromoCode</code>
+- <code title="get /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">list</a>({ ...params }) -> PromoCodeListResponsesCursorPage</code>
+- <code title="delete /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">delete</a>(id) -> PromoCodeDeleteResponse</code>
+
+# Courses
+
+Types:
+
+- <code><a href="./src/resources/courses.ts">Course</a></code>
+- <code><a href="./src/resources/courses.ts">Languages</a></code>
+- <code><a href="./src/resources/courses.ts">CourseListResponse</a></code>
+- <code><a href="./src/resources/courses.ts">CourseDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /courses">client.courses.<a href="./src/resources/courses.ts">create</a>({ ...params }) -> Course</code>
+- <code title="get /courses/{id}">client.courses.<a href="./src/resources/courses.ts">retrieve</a>(id) -> Course</code>
+- <code title="patch /courses/{id}">client.courses.<a href="./src/resources/courses.ts">update</a>(id, { ...params }) -> Course</code>
+- <code title="get /courses">client.courses.<a href="./src/resources/courses.ts">list</a>({ ...params }) -> CourseListResponsesCursorPage</code>
+- <code title="delete /courses/{id}">client.courses.<a href="./src/resources/courses.ts">delete</a>(id) -> CourseDeleteResponse</code>
+
+# CourseChapters
+
+Types:
+
+- <code><a href="./src/resources/course-chapters.ts">CourseChapter</a></code>
+- <code><a href="./src/resources/course-chapters.ts">CourseChapterListResponse</a></code>
+- <code><a href="./src/resources/course-chapters.ts">CourseChapterDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /course_chapters">client.courseChapters.<a href="./src/resources/course-chapters.ts">create</a>({ ...params }) -> CourseChapter</code>
+- <code title="get /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">retrieve</a>(id) -> CourseChapter</code>
+- <code title="patch /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">update</a>(id, { ...params }) -> CourseChapter</code>
+- <code title="get /course_chapters">client.courseChapters.<a href="./src/resources/course-chapters.ts">list</a>({ ...params }) -> CourseChapterListResponsesCursorPage</code>
+- <code title="delete /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">delete</a>(id) -> CourseChapterDeleteResponse</code>
+
+# CourseLessons
+
+Types:
+
+- <code><a href="./src/resources/course-lessons.ts">AssessmentQuestionTypes</a></code>
+- <code><a href="./src/resources/course-lessons.ts">Lesson</a></code>
+- <code><a href="./src/resources/course-lessons.ts">LessonTypes</a></code>
+- <code><a href="./src/resources/course-lessons.ts">LessonVisibilities</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonListResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">create</a>({ ...params }) -> Lesson</code>
+- <code title="get /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">retrieve</a>(id) -> Lesson</code>
+- <code title="patch /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">update</a>(id, { ...params }) -> Lesson</code>
+- <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
+- <code title="delete /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">delete</a>(id) -> CourseLessonDeleteResponse</code>
+
+# Reviews
+
+Types:
+
+- <code><a href="./src/resources/reviews.ts">ReviewStatus</a></code>
+- <code><a href="./src/resources/reviews.ts">ReviewRetrieveResponse</a></code>
+- <code><a href="./src/resources/reviews.ts">ReviewListResponse</a></code>
+
+Methods:
+
+- <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
+- <code title="get /reviews">client.reviews.<a href="./src/resources/reviews.ts">list</a>({ ...params }) -> ReviewListResponsesCursorPage</code>

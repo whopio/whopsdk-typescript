@@ -43,7 +43,7 @@ export class Memberships extends APIResource {
    * - `member:basic:read`
    */
   list(
-    query: MembershipListParams,
+    query: MembershipListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
     return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
@@ -170,6 +170,11 @@ export interface MembershipListResponse {
   plan: MembershipListResponse.Plan;
 
   /**
+   * The Product this Membership grants access to.
+   */
+  product: MembershipListResponse.Product;
+
+  /**
    * The Promo Code that is currently applied to this Membership.
    */
   promo_code: MembershipListResponse.PromoCode | null;
@@ -239,6 +244,21 @@ export namespace MembershipListResponse {
   }
 
   /**
+   * The Product this Membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The internal ID of the public product.
+     */
+    id: string;
+
+    /**
+     * The title of the product. Use for Whop 4.0.
+     */
+    title: string;
+  }
+
+  /**
    * The Promo Code that is currently applied to this Membership.
    */
   export interface PromoCode {
@@ -278,11 +298,6 @@ export interface MembershipUpdateParams {
 
 export interface MembershipListParams extends CursorPageParams {
   /**
-   * The ID of the company to list memberships for
-   */
-  company_id: string;
-
-  /**
    * The access pass IDs to filter the memberships by
    */
   access_pass_ids?: Array<string> | null;
@@ -304,6 +319,11 @@ export interface MembershipListParams extends CursorPageParams {
     | 'other'
     | 'testing'
   > | null;
+
+  /**
+   * The ID of the company to list memberships for
+   */
+  company_id?: string | null;
 
   /**
    * The minimum creation date to filter by
@@ -349,6 +369,11 @@ export interface MembershipListParams extends CursorPageParams {
    * The membership status to filter the memberships by
    */
   statuses?: Array<Shared.MembershipStatus> | null;
+
+  /**
+   * Only return memberships from these whop user ids
+   */
+  user_ids?: Array<string> | null;
 }
 
 export interface MembershipCancelParams {

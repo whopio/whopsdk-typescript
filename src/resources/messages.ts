@@ -31,6 +31,17 @@ export class Messages extends APIResource {
   }
 
   /**
+   * Updates an existing message
+   */
+  update(
+    id: string,
+    body: MessageUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Message> {
+    return this._client.patch(path`/messages/${id}`, { body, ...options });
+  }
+
+  /**
    * Lists messages inside a channel
    *
    * Required permissions:
@@ -266,6 +277,44 @@ export namespace MessageCreateParams {
   }
 }
 
+export interface MessageUpdateParams {
+  /**
+   * The attachments for this message
+   */
+  attachments?: Array<MessageUpdateParams.Attachment> | null;
+
+  /**
+   * The content of the message in Markdown format
+   */
+  content?: string | null;
+
+  /**
+   * Whether this message is pinned
+   */
+  is_pinned?: boolean | null;
+}
+
+export namespace MessageUpdateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface Attachment {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id?: string | null;
+
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id?: string | null;
+  }
+}
+
 export interface MessageListParams extends CursorPageParams {
   /**
    * The ID of the channel or the experience ID to list messages for
@@ -298,6 +347,7 @@ export declare namespace Messages {
     type MessageListResponse as MessageListResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
     type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
     type MessageListParams as MessageListParams,
   };
 }
