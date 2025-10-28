@@ -437,6 +437,11 @@ export interface CourseLessonCreateParams {
 
 export interface CourseLessonUpdateParams {
   /**
+   * Completion requirements for quiz/knowledge check lessons
+   */
+  assessment_completion_requirement?: CourseLessonUpdateParams.AssessmentCompletionRequirement | null;
+
+  /**
    * Assessment questions for quiz/knowledge check lessons. Replaces all existing
    * questions.
    */
@@ -486,6 +491,23 @@ export interface CourseLessonUpdateParams {
 }
 
 export namespace CourseLessonUpdateParams {
+  /**
+   * Completion requirements for quiz/knowledge check lessons
+   */
+  export interface AssessmentCompletionRequirement {
+    /**
+     * The minimum grade percentage required to pass (0-100). Cannot be set together
+     * with minimum_questions_correct.
+     */
+    minimum_grade_percent?: number | null;
+
+    /**
+     * The minimum number of questions that must be answered correctly. Cannot be set
+     * together with minimum_grade_percent.
+     */
+    minimum_questions_correct?: number | null;
+  }
+
   /**
    * Input for creating or updating an assessment question
    */

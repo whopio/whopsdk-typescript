@@ -23,6 +23,22 @@ export const tool: Tool = {
       id: {
         type: 'string',
       },
+      assessment_completion_requirement: {
+        type: 'object',
+        description: 'Completion requirements for quiz/knowledge check lessons',
+        properties: {
+          minimum_grade_percent: {
+            type: 'number',
+            description:
+              'The minimum grade percentage required to pass (0-100). Cannot be set together with minimum_questions_correct.',
+          },
+          minimum_questions_correct: {
+            type: 'integer',
+            description:
+              'The minimum number of questions that must be answered correctly. Cannot be set together with minimum_grade_percent.',
+          },
+        },
+      },
       assessment_questions: {
         type: 'array',
         description:

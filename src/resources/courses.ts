@@ -395,9 +395,21 @@ export interface CourseCreateParams {
   title: string;
 
   /**
+   * Whether the course will award its students a PDF certificate after completing
+   * all lessons
+   */
+  certificate_after_completion_enabled?: boolean | null;
+
+  /**
    * The cover image URL of the course
    */
   cover_image?: string | null;
+
+  /**
+   * Whether the course requires students to complete the previous lesson before
+   * moving on to the next one
+   */
+  require_completing_lessons_in_order?: boolean | null;
 
   /**
    * The tagline of the course

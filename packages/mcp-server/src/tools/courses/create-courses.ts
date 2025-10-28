@@ -30,9 +30,19 @@ export const tool: Tool = {
         type: 'string',
         description: 'The title of the course',
       },
+      certificate_after_completion_enabled: {
+        type: 'boolean',
+        description:
+          'Whether the course will award its students a PDF certificate after completing all lessons',
+      },
       cover_image: {
         type: 'string',
         description: 'The cover image URL of the course',
+      },
+      require_completing_lessons_in_order: {
+        type: 'boolean',
+        description:
+          'Whether the course requires students to complete the previous lesson before moving on to the next one',
       },
       tagline: {
         type: 'string',
