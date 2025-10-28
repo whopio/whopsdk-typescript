@@ -66,6 +66,7 @@ describe('resource courseLessons', () => {
       client.courseLessons.update(
         'lesn_xxxxxxxxxxxxx',
         {
+          assessment_completion_requirement: { minimum_grade_percent: 6.9, minimum_questions_correct: 42 },
           assessment_questions: [
             {
               correct_answer: 'correct_answer',
