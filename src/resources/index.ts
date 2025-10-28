@@ -144,6 +144,9 @@ export {
 } from './messages';
 export {
   Payments,
+  type BillingReasons,
+  type CardBrands,
+  type PaymentMethodTypes,
   type PaymentListResponse,
   type PaymentListParams,
   type PaymentRefundParams,
@@ -183,6 +186,14 @@ export {
   type ReactionListParams,
   type ReactionListResponsesCursorPage,
 } from './reactions';
+export {
+  Reviews,
+  type ReviewStatus,
+  type ReviewRetrieveResponse,
+  type ReviewListResponse,
+  type ReviewListParams,
+  type ReviewListResponsesCursorPage,
+} from './reviews';
 export {
   Shipments,
   type ShipmentListResponse,

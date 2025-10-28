@@ -909,3 +909,8 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `courses:update`
+
+### Resource `reviews`:
+
+- `retrieve_reviews` (`read`): Retrieve a review by its ID
+- `list_reviews` (`read`): List all reviews

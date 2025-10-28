@@ -37,16 +37,7 @@ export const tool: Tool = {
         type: 'array',
         description: 'The billing reason for the payment',
         items: {
-          type: 'string',
-          description: 'The reason why a specific payment was billed',
-          enum: [
-            'subscription_create',
-            'subscription_cycle',
-            'subscription_update',
-            'one_time',
-            'manual',
-            'subscription',
-          ],
+          $ref: '#/$defs/billing_reasons',
         },
       },
       created_after: {
@@ -121,6 +112,18 @@ export const tool: Tool = {
     },
     required: ['company_id'],
     $defs: {
+      billing_reasons: {
+        type: 'string',
+        description: 'The reason why a specific payment was billed',
+        enum: [
+          'subscription_create',
+          'subscription_cycle',
+          'subscription_update',
+          'one_time',
+          'manual',
+          'subscription',
+        ],
+      },
       currency: {
         type: 'string',
         description: 'The available currencies on the platform',

@@ -161,9 +161,12 @@ import {
   Messages,
 } from './resources/messages';
 import {
+  BillingReasons,
+  CardBrands,
   PaymentListParams,
   PaymentListResponse,
   PaymentListResponsesCursorPage,
+  PaymentMethodTypes,
   PaymentRefundParams,
   Payments,
 } from './resources/payments';
@@ -201,6 +204,14 @@ import {
   ReactionListResponsesCursorPage,
   Reactions,
 } from './resources/reactions';
+import {
+  ReviewListParams,
+  ReviewListResponse,
+  ReviewListResponsesCursorPage,
+  ReviewRetrieveResponse,
+  ReviewStatus,
+  Reviews,
+} from './resources/reviews';
 import {
   ShipmentCreateParams,
   ShipmentListParams,
@@ -467,7 +478,7 @@ export class Whop {
   }
 
   protected stringifyQuery(query: Record<string, unknown>): string {
-    return qs.stringify(query, { arrayFormat: 'comma' });
+    return qs.stringify(query, { arrayFormat: 'brackets' });
   }
 
   private getUserAgent(): string {
@@ -1003,6 +1014,7 @@ export class Whop {
   courses: API.Courses = new API.Courses(this);
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
+  reviews: API.Reviews = new API.Reviews(this);
 }
 
 Whop.Apps = Apps;
@@ -1034,6 +1046,7 @@ Whop.PromoCodes = PromoCodes;
 Whop.Courses = Courses;
 Whop.CourseChapters = CourseChapters;
 Whop.CourseLessons = CourseLessons;
+Whop.Reviews = Reviews;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1200,6 +1213,9 @@ export declare namespace Whop {
 
   export {
     Payments as Payments,
+    type BillingReasons as BillingReasons,
+    type CardBrands as CardBrands,
+    type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
     type PaymentListParams as PaymentListParams,
@@ -1298,6 +1314,15 @@ export declare namespace Whop {
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
     type CourseLessonListParams as CourseLessonListParams,
+  };
+
+  export {
+    Reviews as Reviews,
+    type ReviewStatus as ReviewStatus,
+    type ReviewRetrieveResponse as ReviewRetrieveResponse,
+    type ReviewListResponse as ReviewListResponse,
+    type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
+    type ReviewListParams as ReviewListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

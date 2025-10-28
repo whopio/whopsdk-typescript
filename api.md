@@ -310,6 +310,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/payments.ts">BillingReasons</a></code>
+- <code><a href="./src/resources/payments.ts">CardBrands</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
 
 Methods:
@@ -454,3 +457,16 @@ Methods:
 - <code title="patch /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">update</a>(id, { ...params }) -> Lesson</code>
 - <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
 - <code title="delete /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">delete</a>(id) -> CourseLessonDeleteResponse</code>
+
+# Reviews
+
+Types:
+
+- <code><a href="./src/resources/reviews.ts">ReviewStatus</a></code>
+- <code><a href="./src/resources/reviews.ts">ReviewRetrieveResponse</a></code>
+- <code><a href="./src/resources/reviews.ts">ReviewListResponse</a></code>
+
+Methods:
+
+- <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
+- <code title="get /reviews">client.reviews.<a href="./src/resources/reviews.ts">list</a>({ ...params }) -> ReviewListResponsesCursorPage</code>

@@ -142,6 +142,127 @@ export class Payments extends APIResource {
 export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
 
 /**
+ * The reason why a specific payment was billed
+ */
+export type BillingReasons =
+  | 'subscription_create'
+  | 'subscription_cycle'
+  | 'subscription_update'
+  | 'one_time'
+  | 'manual'
+  | 'subscription';
+
+/**
+ * Possible card brands that a payment token can have
+ */
+export type CardBrands =
+  | 'mastercard'
+  | 'visa'
+  | 'amex'
+  | 'discover'
+  | 'unionpay'
+  | 'jcb'
+  | 'diners'
+  | 'link'
+  | 'troy'
+  | 'visadankort'
+  | 'visabancontact'
+  | 'china_union_pay'
+  | 'rupay'
+  | 'jcbrupay'
+  | 'elo'
+  | 'unknown';
+
+/**
+ * The different types of payment methods that can be used.
+ */
+export type PaymentMethodTypes =
+  | 'acss_debit'
+  | 'affirm'
+  | 'afterpay_clearpay'
+  | 'alipay'
+  | 'alma'
+  | 'amazon_pay'
+  | 'apple_pay'
+  | 'au_becs_debit'
+  | 'bacs_debit'
+  | 'bancontact'
+  | 'billie'
+  | 'blik'
+  | 'boleto'
+  | 'card'
+  | 'cashapp'
+  | 'crypto'
+  | 'eps'
+  | 'fpx'
+  | 'giropay'
+  | 'google_pay'
+  | 'grabpay'
+  | 'ideal'
+  | 'kakao_pay'
+  | 'klarna'
+  | 'konbini'
+  | 'kr_card'
+  | 'link'
+  | 'mobilepay'
+  | 'multibanco'
+  | 'naver_pay'
+  | 'nz_bank_account'
+  | 'oxxo'
+  | 'p24'
+  | 'pay_by_bank'
+  | 'payco'
+  | 'paynow'
+  | 'pix'
+  | 'promptpay'
+  | 'revolut_pay'
+  | 'samsung_pay'
+  | 'satispay'
+  | 'sepa_debit'
+  | 'sofort'
+  | 'swish'
+  | 'twint'
+  | 'us_bank_account'
+  | 'wechat_pay'
+  | 'zip'
+  | 'bizum'
+  | 'capchase_pay'
+  | 'kriya'
+  | 'mondu'
+  | 'ng_wallet'
+  | 'paypay'
+  | 'sequra'
+  | 'scalapay'
+  | 'vipps'
+  | 'custom'
+  | 'customer_balance'
+  | 'gopay'
+  | 'mb_way'
+  | 'ng_bank'
+  | 'ng_bank_transfer'
+  | 'ng_card'
+  | 'ng_market'
+  | 'ng_ussd'
+  | 'paypal'
+  | 'payto'
+  | 'qris'
+  | 'rechnung'
+  | 'south_korea_market'
+  | 'kr_market'
+  | 'shopeepay'
+  | 'upi'
+  | 'sunbit'
+  | 'netbanking'
+  | 'id_bank_transfer'
+  | 'demo_pay'
+  | 'shop_pay'
+  | 'apple'
+  | 'sezzle'
+  | 'coinbase'
+  | 'splitit'
+  | 'unknown';
+
+/**
  * An object representing a receipt for a membership.
  */
 export interface PaymentListResponse {
@@ -168,36 +289,12 @@ export interface PaymentListResponse {
   /**
    * The reason why a specific payment was billed
    */
-  billing_reason:
-    | 'subscription_create'
-    | 'subscription_cycle'
-    | 'subscription_update'
-    | 'one_time'
-    | 'manual'
-    | 'subscription'
-    | null;
+  billing_reason: BillingReasons | null;
 
   /**
    * Possible card brands that a payment token can have
    */
-  card_brand:
-    | 'mastercard'
-    | 'visa'
-    | 'amex'
-    | 'discover'
-    | 'unionpay'
-    | 'jcb'
-    | 'diners'
-    | 'link'
-    | 'troy'
-    | 'visadankort'
-    | 'visabancontact'
-    | 'china_union_pay'
-    | 'rupay'
-    | 'jcbrupay'
-    | 'elo'
-    | 'unknown'
-    | null;
+  card_brand: CardBrands | null;
 
   /**
    * The last 4 digits of the card used to make the payment.
@@ -252,92 +349,7 @@ export interface PaymentListResponse {
   /**
    * The different types of payment methods that can be used.
    */
-  payment_method_type:
-    | 'acss_debit'
-    | 'affirm'
-    | 'afterpay_clearpay'
-    | 'alipay'
-    | 'alma'
-    | 'amazon_pay'
-    | 'apple_pay'
-    | 'au_becs_debit'
-    | 'bacs_debit'
-    | 'bancontact'
-    | 'billie'
-    | 'blik'
-    | 'boleto'
-    | 'card'
-    | 'cashapp'
-    | 'crypto'
-    | 'eps'
-    | 'fpx'
-    | 'giropay'
-    | 'google_pay'
-    | 'grabpay'
-    | 'ideal'
-    | 'kakao_pay'
-    | 'klarna'
-    | 'konbini'
-    | 'kr_card'
-    | 'link'
-    | 'mobilepay'
-    | 'multibanco'
-    | 'naver_pay'
-    | 'nz_bank_account'
-    | 'oxxo'
-    | 'p24'
-    | 'pay_by_bank'
-    | 'payco'
-    | 'paynow'
-    | 'pix'
-    | 'promptpay'
-    | 'revolut_pay'
-    | 'samsung_pay'
-    | 'satispay'
-    | 'sepa_debit'
-    | 'sofort'
-    | 'swish'
-    | 'twint'
-    | 'us_bank_account'
-    | 'wechat_pay'
-    | 'zip'
-    | 'bizum'
-    | 'capchase_pay'
-    | 'kriya'
-    | 'mondu'
-    | 'ng_wallet'
-    | 'paypay'
-    | 'sequra'
-    | 'scalapay'
-    | 'vipps'
-    | 'custom'
-    | 'customer_balance'
-    | 'gopay'
-    | 'mb_way'
-    | 'ng_bank'
-    | 'ng_bank_transfer'
-    | 'ng_card'
-    | 'ng_market'
-    | 'ng_ussd'
-    | 'paypal'
-    | 'payto'
-    | 'qris'
-    | 'rechnung'
-    | 'south_korea_market'
-    | 'kr_market'
-    | 'shopeepay'
-    | 'upi'
-    | 'sunbit'
-    | 'netbanking'
-    | 'id_bank_transfer'
-    | 'demo_pay'
-    | 'shop_pay'
-    | 'apple'
-    | 'sezzle'
-    | 'coinbase'
-    | 'splitit'
-    | 'unknown'
-    | null;
+  payment_method_type: PaymentMethodTypes | null;
 
   /**
    * The plan attached to this payment.
@@ -610,14 +622,7 @@ export interface PaymentListParams extends CursorPageParams {
   /**
    * The billing reason for the payment
    */
-  billing_reasons?: Array<
-    | 'subscription_create'
-    | 'subscription_cycle'
-    | 'subscription_update'
-    | 'one_time'
-    | 'manual'
-    | 'subscription'
-  > | null;
+  billing_reasons?: Array<BillingReasons> | null;
 
   /**
    * The minimum creation date to filter by
@@ -689,6 +694,9 @@ export interface PaymentRefundParams {
 
 export declare namespace Payments {
   export {
+    type BillingReasons as BillingReasons,
+    type CardBrands as CardBrands,
+    type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
     type PaymentListParams as PaymentListParams,
