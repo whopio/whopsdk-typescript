@@ -131,6 +131,11 @@ export interface Course {
   chapters: Array<Course.Chapter>;
 
   /**
+   * The timestamp of when the course was created
+   */
+  created_at: string;
+
+  /**
    * A short description of the course
    */
   description: string | null;
@@ -161,6 +166,11 @@ export interface Course {
    * The title of the course
    */
   title: string | null;
+
+  /**
+   * The timestamp of when the course was last updated
+   */
+  updated_at: string;
 }
 
 export namespace Course {
@@ -292,6 +302,11 @@ export interface CourseListResponse {
   certificate_after_completion_enabled: boolean | null;
 
   /**
+   * The timestamp of when the course was created
+   */
+  created_at: string;
+
+  /**
    * A short description of the course
    */
   description: string | null;
@@ -322,6 +337,11 @@ export interface CourseListResponse {
    * The title of the course
    */
   title: string | null;
+
+  /**
+   * The timestamp of when the course was last updated
+   */
+  updated_at: string;
 }
 
 export namespace CourseListResponse {
