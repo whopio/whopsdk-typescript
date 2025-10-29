@@ -267,15 +267,15 @@ The following tools are available in this MCP server.
 
   Required permissions:
 
-  - `course_lesson_interaction:read`
   - `courses:read`
+  - `course_analytics:read`
 
 - `list_course_lesson_interactions` (`read`): Lists course lesson interactions
 
   Required permissions:
 
-  - `course_lesson_interaction:read`
   - `courses:read`
+  - `course_analytics:read`
 
 ### Resource `products`:
 
