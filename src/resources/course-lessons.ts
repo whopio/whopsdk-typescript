@@ -190,9 +190,10 @@ export namespace Lesson {
     id: string;
 
     /**
-     * The correct answer for the question. Used for short answer questions
+     * The correct answer for the question. Used for short answer questions. Only
+     * visible to admins (users with courses:update permission)
      */
-    correct_answer: string;
+    correct_answer: string | null;
 
     /**
      * When the question was created
@@ -262,9 +263,10 @@ export namespace Lesson {
       id: string;
 
       /**
-       * Whether this option is a correct answer
+       * Whether this option is a correct answer. Only visible to admins (users with
+       * courses:update permission)
        */
-      is_correct: boolean;
+      is_correct: boolean | null;
 
       /**
        * The text of the answer option
