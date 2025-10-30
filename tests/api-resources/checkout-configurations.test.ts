@@ -50,6 +50,11 @@ describe('resource checkoutConfigurations', () => {
             initial_price: 6.9,
             internal_notes: 'internal_notes',
             override_tax_type: 'inclusive',
+            payment_method_configuration: {
+              disabled: ['acss_debit'],
+              enabled: ['acss_debit'],
+              include_platform_defaults: true,
+            },
             plan_type: 'renewal',
             product: {
               external_identifier: 'external_identifier',

@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -272,6 +273,12 @@ export namespace CheckoutConfigurationCreateParams {
     override_tax_type?: Shared.TaxType | null;
 
     /**
+     * The explicit payment method configuration for the plan. If not provided, the
+     * platform or company's defaults will apply.
+     */
+    payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+    /**
      * The type of plan that can be attached to an access pass
      */
     plan_type?: Shared.PlanType | null;
@@ -363,6 +370,33 @@ export namespace CheckoutConfigurationCreateParams {
        * mediaDirectUpload mutation.
        */
       direct_upload_id?: string | null;
+    }
+
+    /**
+     * The explicit payment method configuration for the plan. If not provided, the
+     * platform or company's defaults will apply.
+     */
+    export interface PaymentMethodConfiguration {
+      /**
+       * An array of payment method identifiers that are explicitly disabled. Only
+       * applies if the include_platform_defaults is true.
+       */
+      disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+      /**
+       * An array of payment method identifiers that are explicitly enabled. This means
+       * these payment methods will be shown on checkout. Example use case is to only
+       * enable a specific payment method like cashapp, or extending the platform
+       * defaults with additional methods.
+       */
+      enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+      /**
+       * Whether Whop's platform default payment method enablement settings are included
+       * in this configuration. The full list of default payment methods can be found in
+       * the documentation at docs.whop.com/payments.
+       */
+      include_platform_defaults: boolean;
     }
 
     /**

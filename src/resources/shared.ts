@@ -2431,6 +2431,11 @@ export interface Plan {
   member_count: number | null;
 
   /**
+   * The explicit payment method configuration for the plan, if any.
+   */
+  payment_method_configuration: Plan.PaymentMethodConfiguration | null;
+
+  /**
    * Indicates if the plan is a one time payment or recurring.
    */
   plan_type: PlanType;
@@ -2550,6 +2555,32 @@ export namespace Plan {
      * The ID of the invoice.
      */
     id: string;
+  }
+
+  /**
+   * The explicit payment method configuration for the plan, if any.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * An array of payment method identifiers that are explicitly disabled. Only
+     * applies if the include_platform_defaults is true.
+     */
+    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * An array of payment method identifiers that are explicitly enabled. This means
+     * these payment methods will be shown on checkout. Example use case is to only
+     * enable a specific payment method like cashapp, or extending the platform
+     * defaults with additional methods.
+     */
+    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * Whether Whop's platform default payment method enablement settings are included
+     * in this configuration. The full list of default payment methods can be found in
+     * the documentation at docs.whop.com/payments.
+     */
+    include_platform_defaults: boolean;
   }
 
   /**
