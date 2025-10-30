@@ -66,6 +66,13 @@ export {
   type CourseLessonListResponsesCursorPage,
 } from './course-lessons';
 export {
+  CourseStudents,
+  type CourseStudentRetrieveResponse,
+  type CourseStudentListResponse,
+  type CourseStudentListParams,
+  type CourseStudentListResponsesCursorPage,
+} from './course-students';
+export {
   Courses,
   type Course,
   type Languages,

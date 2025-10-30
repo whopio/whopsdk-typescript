@@ -470,3 +470,15 @@ Methods:
 
 - <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
 - <code title="get /reviews">client.reviews.<a href="./src/resources/reviews.ts">list</a>({ ...params }) -> ReviewListResponsesCursorPage</code>
+
+# CourseStudents
+
+Types:
+
+- <code><a href="./src/resources/course-students.ts">CourseStudentRetrieveResponse</a></code>
+- <code><a href="./src/resources/course-students.ts">CourseStudentListResponse</a></code>
+
+Methods:
+
+- <code title="get /course_students/{id}">client.courseStudents.<a href="./src/resources/course-students.ts">retrieve</a>(id) -> CourseStudentRetrieveResponse</code>
+- <code title="get /course_students">client.courseStudents.<a href="./src/resources/course-students.ts">list</a>({ ...params }) -> CourseStudentListResponsesCursorPage</code>
