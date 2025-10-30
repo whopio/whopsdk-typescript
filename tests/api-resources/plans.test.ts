@@ -40,6 +40,11 @@ describe('resource plans', () => {
       initial_price: 6.9,
       internal_notes: 'internal_notes',
       override_tax_type: 'inclusive',
+      payment_method_configuration: {
+        disabled: ['acss_debit'],
+        enabled: ['acss_debit'],
+        include_platform_defaults: true,
+      },
       plan_type: 'renewal',
       release_method: 'buy_now',
       renewal_price: 6.9,
@@ -103,6 +108,11 @@ describe('resource plans', () => {
           internal_notes: 'internal_notes',
           offer_cancel_discount: true,
           override_tax_type: 'inclusive',
+          payment_method_configuration: {
+            disabled: ['acss_debit'],
+            enabled: ['acss_debit'],
+            include_platform_defaults: true,
+          },
           renewal_price: 6.9,
           stock: 42,
           strike_through_initial_price: 6.9,
