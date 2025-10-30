@@ -84,6 +84,13 @@ import {
   LessonVisibilities,
 } from './resources/course-lessons';
 import {
+  CourseStudentListParams,
+  CourseStudentListResponse,
+  CourseStudentListResponsesCursorPage,
+  CourseStudentRetrieveResponse,
+  CourseStudents,
+} from './resources/course-students';
+import {
   Course,
   CourseCreateParams,
   CourseDeleteResponse,
@@ -1015,6 +1022,7 @@ export class Whop {
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
   reviews: API.Reviews = new API.Reviews(this);
+  courseStudents: API.CourseStudents = new API.CourseStudents(this);
 }
 
 Whop.Apps = Apps;
@@ -1047,6 +1055,7 @@ Whop.Courses = Courses;
 Whop.CourseChapters = CourseChapters;
 Whop.CourseLessons = CourseLessons;
 Whop.Reviews = Reviews;
+Whop.CourseStudents = CourseStudents;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1323,6 +1332,14 @@ export declare namespace Whop {
     type ReviewListResponse as ReviewListResponse,
     type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
     type ReviewListParams as ReviewListParams,
+  };
+
+  export {
+    CourseStudents as CourseStudents,
+    type CourseStudentRetrieveResponse as CourseStudentRetrieveResponse,
+    type CourseStudentListResponse as CourseStudentListResponse,
+    type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
+    type CourseStudentListParams as CourseStudentListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

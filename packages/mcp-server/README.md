@@ -914,3 +914,19 @@ The following tools are available in this MCP server.
 
 - `retrieve_reviews` (`read`): Retrieve a review by its ID
 - `list_reviews` (`read`): List all reviews
+
+### Resource `course_students`:
+
+- `retrieve_course_students` (`read`): Retrieves a course student by interaction ID
+
+  Required permissions:
+
+  - `courses:read`
+  - `course_analytics:read`
+
+- `list_course_students` (`read`): Lists students for a course
+
+  Required permissions:
+
+  - `courses:read`
+  - `course_analytics:read`
