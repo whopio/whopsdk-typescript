@@ -24,8 +24,7 @@ export const tool: Tool = {
     properties: {
       attachment: {
         type: 'object',
-        description:
-          'Attachment input for the app build file. This should be an upload in .zip format. The zip should contain at least one main_js_bundle.hbc file and optionally an assets folder next to it.',
+        description: 'Input for an attachment',
         properties: {
           id: {
             type: 'string',

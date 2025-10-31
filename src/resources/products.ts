@@ -333,7 +333,7 @@ export interface ProductUpdateParams {
   /**
    * A banner image for the product in png, jpeg format
    */
-  banner_image?: ProductUpdateParams.BannerImage | null;
+  banner_image?: ProductUpdateParams.BannerImage;
 
   /**
    * The different business types a company can be.
@@ -432,21 +432,7 @@ export namespace ProductUpdateParams {
   /**
    * A banner image for the product in png, jpeg format
    */
-  export interface BannerImage {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
-    /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id?: string | null;
-  }
+  export interface BannerImage {}
 
   /**
    * Configuration for a product on the company's store page.

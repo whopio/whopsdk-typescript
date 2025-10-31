@@ -50,20 +50,8 @@ export const tool: Tool = {
         description: 'The path for the hub view of the app',
       },
       icon: {
-        type: 'object',
+        allOf: [],
         description: 'The icon for the app',
-        properties: {
-          id: {
-            type: 'string',
-            description:
-              "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-          },
-          direct_upload_id: {
-            type: 'string',
-            description:
-              'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-          },
-        },
       },
       name: {
         type: 'string',
