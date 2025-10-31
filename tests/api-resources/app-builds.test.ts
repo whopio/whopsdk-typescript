@@ -12,7 +12,7 @@ describe('resource appBuilds', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.appBuilds.create({
-      attachment: { direct_upload_id: 'direct_upload_id' },
+      attachment: {},
       checksum: 'checksum',
       platform: 'ios',
     });
@@ -28,7 +28,7 @@ describe('resource appBuilds', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.appBuilds.create({
-      attachment: { direct_upload_id: 'direct_upload_id' },
+      attachment: { id: 'id', direct_upload_id: 'direct_upload_id' },
       checksum: 'checksum',
       platform: 'ios',
       app_id: 'app_xxxxxxxxxxxxxx',

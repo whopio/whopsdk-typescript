@@ -20,275 +20,235 @@ export const tool: Tool = {
     'Creates a new checkout configuration\n\nRequired permissions:\n - `checkout_configuration:create`\n - `plan:create`\n - `access_pass:create`\n - `access_pass:update`',
   inputSchema: {
     type: 'object',
-    anyOf: [
-      {
+    properties: {
+      affiliate_code: {
+        type: 'string',
+        description: 'The affiliate code to use for the checkout configuration',
+      },
+      metadata: {
         type: 'object',
+        description: 'The metadata to use for the checkout configuration',
+        additionalProperties: true,
+      },
+      plan: {
+        type: 'object',
+        description: 'Pass this object to create a new plan for this checkout configuration',
         properties: {
-          plan: {
-            type: 'object',
-            description: 'Pass this object to create a new plan for this checkout configuration',
-            properties: {
-              company_id: {
-                type: 'string',
-                description: 'The company the plan should be created for.',
-              },
-              billing_period: {
-                type: 'integer',
-                description: 'The interval at which the plan charges (renewal plans).',
-              },
-              currency: {
-                $ref: '#/$defs/currency',
-              },
-              custom_fields: {
-                type: 'array',
-                description: 'An array of custom field objects.',
-                items: {
-                  type: 'object',
-                  properties: {
-                    field_type: {
-                      type: 'string',
-                      description: 'The type of the custom field.',
-                      enum: ['text'],
-                    },
-                    name: {
-                      type: 'string',
-                      description: 'The name of the custom field.',
-                    },
-                    id: {
-                      type: 'string',
-                      description: 'The ID of the custom field (if being updated)',
-                    },
-                    order: {
-                      type: 'integer',
-                      description: 'The order of the field.',
-                    },
-                    placeholder: {
-                      type: 'string',
-                      description: 'The placeholder value of the field.',
-                    },
-                    required: {
-                      type: 'boolean',
-                      description: 'Whether or not the field is required.',
-                    },
-                  },
-                  required: ['field_type', 'name'],
+          company_id: {
+            type: 'string',
+            description: 'The company the plan should be created for.',
+          },
+          billing_period: {
+            type: 'integer',
+            description: 'The interval at which the plan charges (renewal plans).',
+          },
+          currency: {
+            $ref: '#/$defs/currency',
+          },
+          custom_fields: {
+            type: 'array',
+            description: 'An array of custom field objects.',
+            items: {
+              type: 'object',
+              properties: {
+                field_type: {
+                  type: 'string',
+                  description: 'The type of the custom field.',
+                  enum: ['text'],
+                },
+                name: {
+                  type: 'string',
+                  description: 'The name of the custom field.',
+                },
+                id: {
+                  type: 'string',
+                  description: 'The ID of the custom field (if being updated)',
+                },
+                order: {
+                  type: 'integer',
+                  description: 'The order of the field.',
+                },
+                placeholder: {
+                  type: 'string',
+                  description: 'The placeholder value of the field.',
+                },
+                required: {
+                  type: 'boolean',
+                  description: 'Whether or not the field is required.',
                 },
               },
-              description: {
+              required: ['field_type', 'name'],
+            },
+          },
+          description: {
+            type: 'string',
+            description: 'The description of the plan.',
+          },
+          expiration_days: {
+            type: 'integer',
+            description: 'The interval at which the plan charges (expiration plans).',
+          },
+          force_create_new_plan: {
+            type: 'boolean',
+            description:
+              'Whether to force the creation of a new plan even if one with the same attributes already exists.',
+          },
+          image: {
+            type: 'object',
+            description: 'An image for the plan. This will be visible on the product page to customers.',
+            properties: {
+              id: {
                 type: 'string',
-                description: 'The description of the plan.',
+                description:
+                  "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
               },
-              expiration_days: {
-                type: 'integer',
-                description: 'The interval at which the plan charges (expiration plans).',
+              direct_upload_id: {
+                type: 'string',
+                description:
+                  'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
               },
-              force_create_new_plan: {
+            },
+          },
+          initial_price: {
+            type: 'number',
+            description: 'An additional amount charged upon first purchase.',
+          },
+          internal_notes: {
+            type: 'string',
+            description: 'A personal description or notes section for the business.',
+          },
+          override_tax_type: {
+            $ref: '#/$defs/tax_type',
+          },
+          payment_method_configuration: {
+            type: 'object',
+            description:
+              "The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.",
+            properties: {
+              disabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly disabled. Only applies if the include_platform_defaults is true.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              enabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly enabled. This means these payment methods will be shown on checkout. Example use case is to only enable a specific payment method like cashapp, or extending the platform defaults with additional methods.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              include_platform_defaults: {
                 type: 'boolean',
                 description:
-                  'Whether to force the creation of a new plan even if one with the same attributes already exists.',
+                  "Whether Whop's platform default payment method enablement settings are included in this configuration. The full list of default payment methods can be found in the documentation at docs.whop.com/payments.",
               },
-              image: {
-                anyOf: [
-                  {
-                    type: 'object',
-                    title: 'AttachmentInputWithDirectUploadId',
-                    description: 'Input for an attachment',
-                    properties: {
-                      direct_upload_id: {
-                        type: 'string',
-                        description:
-                          'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-                      },
-                    },
-                    required: ['direct_upload_id'],
-                  },
-                  {
-                    type: 'object',
-                    title: 'AttachmentInputWithId',
-                    description: 'Input for an attachment',
-                    properties: {
-                      id: {
-                        type: 'string',
-                        description:
-                          "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-                      },
-                    },
-                    required: ['id'],
-                  },
-                ],
-                description: 'An image for the plan. This will be visible on the product page to customers.',
-              },
-              initial_price: {
-                type: 'number',
-                description: 'An additional amount charged upon first purchase.',
-              },
-              internal_notes: {
+            },
+            required: ['disabled', 'enabled', 'include_platform_defaults'],
+          },
+          plan_type: {
+            $ref: '#/$defs/plan_type',
+          },
+          product: {
+            type: 'object',
+            description:
+              'Pass this object to create a new product for this plan. We will use the product external identifier to find or create an existing product.',
+            properties: {
+              external_identifier: {
                 type: 'string',
-                description: 'A personal description or notes section for the business.',
-              },
-              override_tax_type: {
-                $ref: '#/$defs/tax_type',
-              },
-              payment_method_configuration: {
-                type: 'object',
                 description:
-                  "The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.",
-                properties: {
-                  disabled: {
-                    type: 'array',
-                    description:
-                      'An array of payment method identifiers that are explicitly disabled. Only applies if the include_platform_defaults is true.',
-                    items: {
-                      $ref: '#/$defs/payment_method_types',
-                    },
-                  },
-                  enabled: {
-                    type: 'array',
-                    description:
-                      'An array of payment method identifiers that are explicitly enabled. This means these payment methods will be shown on checkout. Example use case is to only enable a specific payment method like cashapp, or extending the platform defaults with additional methods.',
-                    items: {
-                      $ref: '#/$defs/payment_method_types',
-                    },
-                  },
-                  include_platform_defaults: {
-                    type: 'boolean',
-                    description:
-                      "Whether Whop's platform default payment method enablement settings are included in this configuration. The full list of default payment methods can be found in the documentation at docs.whop.com/payments.",
-                  },
-                },
-                required: ['disabled', 'enabled', 'include_platform_defaults'],
-              },
-              plan_type: {
-                $ref: '#/$defs/plan_type',
-              },
-              product: {
-                type: 'object',
-                description:
-                  'Pass this object to create a new product for this plan. We will use the product external identifier to find or create an existing product.',
-                properties: {
-                  external_identifier: {
-                    type: 'string',
-                    description:
-                      'A unique ID used to find or create a product. When provided during creation, we will look for an existing product with this external identifier — if found, it will be updated; otherwise, a new product will be created.',
-                  },
-                  title: {
-                    type: 'string',
-                    description: 'The title of the product.',
-                  },
-                  business_type: {
-                    $ref: '#/$defs/business_types',
-                  },
-                  collect_shipping_address: {
-                    type: 'boolean',
-                    description:
-                      'Whether or not to collect shipping information at checkout from the customer.',
-                  },
-                  custom_statement_descriptor: {
-                    type: 'string',
-                    description:
-                      'The custom statement descriptor for the product i.e. WHOP*SPORTS, must be between 5 and 22 characters, contain at least one letter, and not contain any of the following characters: <, >, \\, \', "',
-                  },
-                  description: {
-                    type: 'string',
-                    description: 'A written description of the product.',
-                  },
-                  global_affiliate_percentage: {
-                    type: 'number',
-                    description: 'The percentage of the revenue that goes to the global affiliate program.',
-                  },
-                  global_affiliate_status: {
-                    $ref: '#/$defs/global_affiliate_status',
-                  },
-                  headline: {
-                    type: 'string',
-                    description: 'The headline of the product.',
-                  },
-                  industry_type: {
-                    $ref: '#/$defs/industry_types',
-                  },
-                  product_tax_code_id: {
-                    type: 'string',
-                    description: 'The ID of the product tax code to apply to this product.',
-                  },
-                  redirect_purchase_url: {
-                    type: 'string',
-                    description: 'The URL to redirect the customer to after a purchase.',
-                  },
-                  route: {
-                    type: 'string',
-                    description: 'The route of the product.',
-                  },
-                  visibility: {
-                    $ref: '#/$defs/visibility',
-                  },
-                },
-                required: ['external_identifier', 'title'],
-              },
-              product_id: {
-                type: 'string',
-                description: 'The product the plan is related to. Either this or product is required.',
-              },
-              release_method: {
-                $ref: '#/$defs/release_method',
-              },
-              renewal_price: {
-                type: 'number',
-                description: 'The amount the customer is charged every billing period.',
+                  'A unique ID used to find or create a product. When provided during creation, we will look for an existing product with this external identifier — if found, it will be updated; otherwise, a new product will be created.',
               },
               title: {
                 type: 'string',
-                description: 'The title of the plan. This will be visible on the product page to customers.',
+                description: 'The title of the product.',
               },
-              trial_period_days: {
-                type: 'integer',
-                description: 'The number of free trial days added before a renewal plan.',
+              business_type: {
+                $ref: '#/$defs/business_types',
+              },
+              collect_shipping_address: {
+                type: 'boolean',
+                description: 'Whether or not to collect shipping information at checkout from the customer.',
+              },
+              custom_statement_descriptor: {
+                type: 'string',
+                description:
+                  'The custom statement descriptor for the product i.e. WHOP*SPORTS, must be between 5 and 22 characters, contain at least one letter, and not contain any of the following characters: <, >, \\, \', "',
+              },
+              description: {
+                type: 'string',
+                description: 'A written description of the product.',
+              },
+              global_affiliate_percentage: {
+                type: 'number',
+                description: 'The percentage of the revenue that goes to the global affiliate program.',
+              },
+              global_affiliate_status: {
+                $ref: '#/$defs/global_affiliate_status',
+              },
+              headline: {
+                type: 'string',
+                description: 'The headline of the product.',
+              },
+              industry_type: {
+                $ref: '#/$defs/industry_types',
+              },
+              product_tax_code_id: {
+                type: 'string',
+                description: 'The ID of the product tax code to apply to this product.',
+              },
+              redirect_purchase_url: {
+                type: 'string',
+                description: 'The URL to redirect the customer to after a purchase.',
+              },
+              route: {
+                type: 'string',
+                description: 'The route of the product.',
               },
               visibility: {
                 $ref: '#/$defs/visibility',
               },
             },
-            required: ['company_id'],
+            required: ['external_identifier', 'title'],
           },
-          affiliate_code: {
+          product_id: {
             type: 'string',
-            description: 'The affiliate code to use for the checkout configuration',
+            description: 'The product the plan is related to. Either this or product is required.',
           },
-          metadata: {
-            type: 'object',
-            description: 'The metadata to use for the checkout configuration',
-            additionalProperties: true,
+          release_method: {
+            $ref: '#/$defs/release_method',
           },
-          redirect_url: {
+          renewal_price: {
+            type: 'number',
+            description: 'The amount the customer is charged every billing period.',
+          },
+          title: {
             type: 'string',
-            description: 'The URL to redirect the user to after the checkout configuration is created',
+            description: 'The title of the plan. This will be visible on the product page to customers.',
+          },
+          trial_period_days: {
+            type: 'integer',
+            description: 'The number of free trial days added before a renewal plan.',
+          },
+          visibility: {
+            $ref: '#/$defs/visibility',
           },
         },
-        required: ['plan'],
+        required: ['company_id'],
       },
-      {
-        type: 'object',
-        properties: {
-          plan_id: {
-            type: 'string',
-            description: 'The ID of the plan to use for the checkout configuration',
-          },
-          affiliate_code: {
-            type: 'string',
-            description: 'The affiliate code to use for the checkout configuration',
-          },
-          metadata: {
-            type: 'object',
-            description: 'The metadata to use for the checkout configuration',
-            additionalProperties: true,
-          },
-          redirect_url: {
-            type: 'string',
-            description: 'The URL to redirect the user to after the checkout configuration is created',
-          },
-        },
-        required: ['plan_id'],
+      plan_id: {
+        type: 'string',
+        description: 'The ID of the plan to use for the checkout configuration',
       },
-    ],
+      redirect_url: {
+        type: 'string',
+        description: 'The URL to redirect the user to after the checkout configuration is created',
+      },
+    },
+    required: [],
     $defs: {
       currency: {
         type: 'string',

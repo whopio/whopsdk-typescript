@@ -23,9 +23,7 @@ export class Invoices extends APIResource {
    *   collection_method: 'send_invoice',
    *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   due_date: '2023-12-01T05:00:00.401Z',
-   *   member_id: 'mber_xxxxxxxxxxxxx',
    *   plan: {},
-   *   product: { title: 'title' },
    * });
    * ```
    */
@@ -40,6 +38,13 @@ export class Invoices extends APIResource {
    *
    * - `invoice:basic:read`
    * - `plan:basic:read`
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.retrieve(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice> {
     return this._client.get(path`/invoices/${id}`, options);
@@ -52,6 +57,16 @@ export class Invoices extends APIResource {
    *
    * - `invoice:basic:read`
    * - `plan:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invoiceListItem of client.invoices.list({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   * })) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: InvoiceListParams,
@@ -66,6 +81,13 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const response = await client.invoices.void(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse> {
     return this._client.post(path`/invoices/${id}/void`, options);
@@ -92,693 +114,184 @@ export interface InvoiceCreateResponse {
  */
 export type InvoiceVoidResponse = boolean;
 
-export type InvoiceCreateParams =
-  | InvoiceCreateParams.CreateInvoiceInputWithProductAndMemberID
-  | InvoiceCreateParams.CreateInvoiceInputWithProductAndEmailAddress
-  | InvoiceCreateParams.CreateInvoiceInputWithProductIDAndMemberID
-  | InvoiceCreateParams.CreateInvoiceInputWithProductIDAndEmailAddress;
+export interface InvoiceCreateParams {
+  /**
+   * The method of collection for this invoice. If using charge_automatically, you
+   * must provide a payment_token.
+   */
+  collection_method: Shared.CollectionMethod;
 
-export declare namespace InvoiceCreateParams {
-  export interface CreateInvoiceInputWithProductAndMemberID {
+  /**
+   * The company ID to create this invoice for.
+   */
+  company_id: string;
+
+  /**
+   * The date the invoice is due, if applicable.
+   */
+  due_date: string;
+
+  /**
+   * The properties of the plan to create for this invoice.
+   */
+  plan: InvoiceCreateParams.Plan;
+
+  /**
+   * Whether or not to charge the customer a buyer fee.
+   */
+  charge_buyer_fee?: boolean | null;
+
+  /**
+   * The name of the customer to create this invoice for. This is required if you
+   * want to create an invoice for a customer who does not have a member of your
+   * company yet.
+   */
+  customer_name?: string | null;
+
+  /**
+   * The email address to create this invoice for. This is required if you want to
+   * create an invoice for a user who does not have a member of your company yet.
+   */
+  email_address?: string | null;
+
+  /**
+   * The member ID to create this invoice for. Include this if you want to create an
+   * invoice for an existing member. If you do not have a member ID, you must provide
+   * an email_address and customer_name.
+   */
+  member_id?: string | null;
+
+  /**
+   * The payment token ID to use for this invoice. If using charge_automatically, you
+   * must provide a payment_token.
+   */
+  payment_token_id?: string | null;
+
+  /**
+   * The properties of the product to create for this invoice. Include this if you
+   * want to create an invoice for a new product.
+   */
+  product?: InvoiceCreateParams.Product | null;
+
+  /**
+   * The product ID to create this invoice for. Include this if you want to create an
+   * invoice for an existing product.
+   */
+  product_id?: string | null;
+}
+
+export namespace InvoiceCreateParams {
+  /**
+   * The properties of the plan to create for this invoice.
+   */
+  export interface Plan {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * The interval at which the plan charges (renewal plans).
      */
-    collection_method: Shared.CollectionMethod;
+    billing_period?: number | null;
 
     /**
-     * The company ID to create this invoice for.
+     * An array of custom field objects.
      */
-    company_id: string;
+    custom_fields?: Array<Plan.CustomField> | null;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The description of the plan.
      */
-    due_date: string;
+    description?: string | null;
 
     /**
-     * The member ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing member. If you do not have a member ID, you must provide
-     * an email_address and customer_name.
+     * The interval at which the plan charges (expiration plans).
      */
-    member_id: string;
+    expiration_days?: number | null;
 
     /**
-     * The properties of the plan to create for this invoice.
+     * An additional amount charged upon first purchase. Use only if a one time payment
+     * OR you want to charge an additional amount on top of the renewal price. Provided
+     * as a number in dollars. Eg: 10.43 for $10.43
      */
-    plan: CreateInvoiceInputWithProductAndMemberID.Plan;
+    initial_price?: number | null;
 
     /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
+     * A personal description or notes section for the business.
      */
-    product: CreateInvoiceInputWithProductAndMemberID.Product;
+    internal_notes?: string | null;
 
     /**
-     * Whether or not to charge the customer a buyer fee.
+     * The type of plan that can be attached to an access pass
      */
-    charge_buyer_fee?: boolean | null;
+    plan_type?: Shared.PlanType | null;
 
     /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
+     * The methods of how a plan can be released.
      */
-    customer_name?: string | null;
+    release_method?: Shared.ReleaseMethod | null;
 
     /**
-     * The payment token ID to use for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * The amount the customer is charged every billing period. Use only if a recurring
+     * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
      */
-    payment_token_id?: string | null;
+    renewal_price?: number | null;
+
+    /**
+     * The number of free trial days added before a renewal plan.
+     */
+    trial_period_days?: number | null;
+
+    /**
+     * Visibility of a resource
+     */
+    visibility?: Shared.Visibility | null;
   }
 
-  export namespace CreateInvoiceInputWithProductAndMemberID {
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    export interface Plan {
+  export namespace Plan {
+    export interface CustomField {
       /**
-       * The interval at which the plan charges (renewal plans).
+       * The type of the custom field.
        */
-      billing_period?: number | null;
+      field_type: 'text';
 
       /**
-       * An array of custom field objects.
+       * The name of the custom field.
        */
-      custom_fields?: Array<Plan.CustomField> | null;
+      name: string;
 
       /**
-       * The description of the plan.
+       * The ID of the custom field (if being updated)
        */
-      description?: string | null;
+      id?: string | null;
 
       /**
-       * The interval at which the plan charges (expiration plans).
+       * The order of the field.
        */
-      expiration_days?: number | null;
+      order?: number | null;
 
       /**
-       * An additional amount charged upon first purchase. Use only if a one time payment
-       * OR you want to charge an additional amount on top of the renewal price. Provided
-       * as a number in dollars. Eg: 10.43 for $10.43
+       * The placeholder value of the field.
        */
-      initial_price?: number | null;
+      placeholder?: string | null;
 
       /**
-       * A personal description or notes section for the business.
+       * Whether or not the field is required.
        */
-      internal_notes?: string | null;
-
-      /**
-       * The type of plan that can be attached to an access pass
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * The methods of how a plan can be released.
-       */
-      release_method?: Shared.ReleaseMethod | null;
-
-      /**
-       * The amount the customer is charged every billing period. Use only if a recurring
-       * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The number of units available for purchase.
-       */
-      stock?: number | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Limits/doesn't limit the number of units available for purchase.
-       */
-      unlimited_stock?: boolean | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      export interface CustomField {
-        /**
-         * The type of the custom field.
-         */
-        field_type: 'text';
-
-        /**
-         * The name of the custom field.
-         */
-        name: string;
-
-        /**
-         * The ID of the custom field (if being updated)
-         */
-        id?: string | null;
-
-        /**
-         * The order of the field.
-         */
-        order?: number | null;
-
-        /**
-         * The placeholder value of the field.
-         */
-        placeholder?: string | null;
-
-        /**
-         * Whether or not the field is required.
-         */
-        required?: boolean | null;
-      }
-    }
-
-    /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
-     */
-    export interface Product {
-      /**
-       * The title of the product.
-       */
-      title: string;
-
-      /**
-       * The ID of the product tax code to apply to this product.
-       */
-      product_tax_code_id?: string | null;
+      required?: boolean | null;
     }
   }
 
-  export interface CreateInvoiceInputWithProductAndEmailAddress {
+  /**
+   * The properties of the product to create for this invoice. Include this if you
+   * want to create an invoice for a new product.
+   */
+  export interface Product {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * The title of the product.
      */
-    collection_method: Shared.CollectionMethod;
-
-    /**
-     * The company ID to create this invoice for.
-     */
-    company_id: string;
+    title: string;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The ID of the product tax code to apply to this product.
      */
-    due_date: string;
-
-    /**
-     * The email address to create this invoice for. This is required if you want to
-     * create an invoice for a user who does not have a member of your company yet.
-     */
-    email_address: string;
-
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    plan: CreateInvoiceInputWithProductAndEmailAddress.Plan;
-
-    /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
-     */
-    product: CreateInvoiceInputWithProductAndEmailAddress.Product;
-
-    /**
-     * Whether or not to charge the customer a buyer fee.
-     */
-    charge_buyer_fee?: boolean | null;
-
-    /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
-     */
-    customer_name?: string | null;
-
-    /**
-     * The payment token ID to use for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
-     */
-    payment_token_id?: string | null;
-  }
-
-  export namespace CreateInvoiceInputWithProductAndEmailAddress {
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    export interface Plan {
-      /**
-       * The interval at which the plan charges (renewal plans).
-       */
-      billing_period?: number | null;
-
-      /**
-       * An array of custom field objects.
-       */
-      custom_fields?: Array<Plan.CustomField> | null;
-
-      /**
-       * The description of the plan.
-       */
-      description?: string | null;
-
-      /**
-       * The interval at which the plan charges (expiration plans).
-       */
-      expiration_days?: number | null;
-
-      /**
-       * An additional amount charged upon first purchase. Use only if a one time payment
-       * OR you want to charge an additional amount on top of the renewal price. Provided
-       * as a number in dollars. Eg: 10.43 for $10.43
-       */
-      initial_price?: number | null;
-
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
-
-      /**
-       * The type of plan that can be attached to an access pass
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * The methods of how a plan can be released.
-       */
-      release_method?: Shared.ReleaseMethod | null;
-
-      /**
-       * The amount the customer is charged every billing period. Use only if a recurring
-       * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The number of units available for purchase.
-       */
-      stock?: number | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Limits/doesn't limit the number of units available for purchase.
-       */
-      unlimited_stock?: boolean | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      export interface CustomField {
-        /**
-         * The type of the custom field.
-         */
-        field_type: 'text';
-
-        /**
-         * The name of the custom field.
-         */
-        name: string;
-
-        /**
-         * The ID of the custom field (if being updated)
-         */
-        id?: string | null;
-
-        /**
-         * The order of the field.
-         */
-        order?: number | null;
-
-        /**
-         * The placeholder value of the field.
-         */
-        placeholder?: string | null;
-
-        /**
-         * Whether or not the field is required.
-         */
-        required?: boolean | null;
-      }
-    }
-
-    /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
-     */
-    export interface Product {
-      /**
-       * The title of the product.
-       */
-      title: string;
-
-      /**
-       * The ID of the product tax code to apply to this product.
-       */
-      product_tax_code_id?: string | null;
-    }
-  }
-
-  export interface CreateInvoiceInputWithProductIDAndMemberID {
-    /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
-     */
-    collection_method: Shared.CollectionMethod;
-
-    /**
-     * The company ID to create this invoice for.
-     */
-    company_id: string;
-
-    /**
-     * The date the invoice is due, if applicable.
-     */
-    due_date: string;
-
-    /**
-     * The member ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing member. If you do not have a member ID, you must provide
-     * an email_address and customer_name.
-     */
-    member_id: string;
-
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    plan: CreateInvoiceInputWithProductIDAndMemberID.Plan;
-
-    /**
-     * The product ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing product.
-     */
-    product_id: string;
-
-    /**
-     * Whether or not to charge the customer a buyer fee.
-     */
-    charge_buyer_fee?: boolean | null;
-
-    /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
-     */
-    customer_name?: string | null;
-
-    /**
-     * The payment token ID to use for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
-     */
-    payment_token_id?: string | null;
-  }
-
-  export namespace CreateInvoiceInputWithProductIDAndMemberID {
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    export interface Plan {
-      /**
-       * The interval at which the plan charges (renewal plans).
-       */
-      billing_period?: number | null;
-
-      /**
-       * An array of custom field objects.
-       */
-      custom_fields?: Array<Plan.CustomField> | null;
-
-      /**
-       * The description of the plan.
-       */
-      description?: string | null;
-
-      /**
-       * The interval at which the plan charges (expiration plans).
-       */
-      expiration_days?: number | null;
-
-      /**
-       * An additional amount charged upon first purchase. Use only if a one time payment
-       * OR you want to charge an additional amount on top of the renewal price. Provided
-       * as a number in dollars. Eg: 10.43 for $10.43
-       */
-      initial_price?: number | null;
-
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
-
-      /**
-       * The type of plan that can be attached to an access pass
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * The methods of how a plan can be released.
-       */
-      release_method?: Shared.ReleaseMethod | null;
-
-      /**
-       * The amount the customer is charged every billing period. Use only if a recurring
-       * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The number of units available for purchase.
-       */
-      stock?: number | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Limits/doesn't limit the number of units available for purchase.
-       */
-      unlimited_stock?: boolean | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      export interface CustomField {
-        /**
-         * The type of the custom field.
-         */
-        field_type: 'text';
-
-        /**
-         * The name of the custom field.
-         */
-        name: string;
-
-        /**
-         * The ID of the custom field (if being updated)
-         */
-        id?: string | null;
-
-        /**
-         * The order of the field.
-         */
-        order?: number | null;
-
-        /**
-         * The placeholder value of the field.
-         */
-        placeholder?: string | null;
-
-        /**
-         * Whether or not the field is required.
-         */
-        required?: boolean | null;
-      }
-    }
-  }
-
-  export interface CreateInvoiceInputWithProductIDAndEmailAddress {
-    /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
-     */
-    collection_method: Shared.CollectionMethod;
-
-    /**
-     * The company ID to create this invoice for.
-     */
-    company_id: string;
-
-    /**
-     * The date the invoice is due, if applicable.
-     */
-    due_date: string;
-
-    /**
-     * The email address to create this invoice for. This is required if you want to
-     * create an invoice for a user who does not have a member of your company yet.
-     */
-    email_address: string;
-
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    plan: CreateInvoiceInputWithProductIDAndEmailAddress.Plan;
-
-    /**
-     * The product ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing product.
-     */
-    product_id: string;
-
-    /**
-     * Whether or not to charge the customer a buyer fee.
-     */
-    charge_buyer_fee?: boolean | null;
-
-    /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
-     */
-    customer_name?: string | null;
-
-    /**
-     * The payment token ID to use for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
-     */
-    payment_token_id?: string | null;
-  }
-
-  export namespace CreateInvoiceInputWithProductIDAndEmailAddress {
-    /**
-     * The properties of the plan to create for this invoice.
-     */
-    export interface Plan {
-      /**
-       * The interval at which the plan charges (renewal plans).
-       */
-      billing_period?: number | null;
-
-      /**
-       * An array of custom field objects.
-       */
-      custom_fields?: Array<Plan.CustomField> | null;
-
-      /**
-       * The description of the plan.
-       */
-      description?: string | null;
-
-      /**
-       * The interval at which the plan charges (expiration plans).
-       */
-      expiration_days?: number | null;
-
-      /**
-       * An additional amount charged upon first purchase. Use only if a one time payment
-       * OR you want to charge an additional amount on top of the renewal price. Provided
-       * as a number in dollars. Eg: 10.43 for $10.43
-       */
-      initial_price?: number | null;
-
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
-
-      /**
-       * The type of plan that can be attached to an access pass
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * The methods of how a plan can be released.
-       */
-      release_method?: Shared.ReleaseMethod | null;
-
-      /**
-       * The amount the customer is charged every billing period. Use only if a recurring
-       * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The number of units available for purchase.
-       */
-      stock?: number | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Limits/doesn't limit the number of units available for purchase.
-       */
-      unlimited_stock?: boolean | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      export interface CustomField {
-        /**
-         * The type of the custom field.
-         */
-        field_type: 'text';
-
-        /**
-         * The name of the custom field.
-         */
-        name: string;
-
-        /**
-         * The ID of the custom field (if being updated)
-         */
-        id?: string | null;
-
-        /**
-         * The order of the field.
-         */
-        order?: number | null;
-
-        /**
-         * The placeholder value of the field.
-         */
-        placeholder?: string | null;
-
-        /**
-         * Whether or not the field is required.
-         */
-        required?: boolean | null;
-      }
-    }
+    product_tax_code_id?: string | null;
   }
 }
 

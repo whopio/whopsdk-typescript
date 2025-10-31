@@ -558,6 +558,12 @@ export interface Company {
   member_count: number;
 
   /**
+   * A key-value store of data for the account, created/updated by the platform that
+   * made the account.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The user who owns this company
    */
   owner_user: Company.OwnerUser;
@@ -3226,6 +3232,11 @@ export interface Transfer {
    * The decimal fee of the credit transaction transfer
    */
   fee_amount: number | null;
+
+  /**
+   * A hash of metadata attached to the transfer
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The notes of the credit transaction transfer
