@@ -476,6 +476,11 @@ export interface CourseLessonUpdateParams {
   main_pdf?: CourseLessonUpdateParams.MainPdf | null;
 
   /**
+   * Maximum number of attempts allowed for assessments
+   */
+  max_attempts?: number | null;
+
+  /**
    * The ID of the Mux asset to attach to this lesson for video lessons
    */
   mux_asset_id?: string | null;

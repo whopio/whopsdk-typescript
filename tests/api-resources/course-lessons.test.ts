@@ -82,6 +82,7 @@ describe('resource courseLessons', () => {
           days_from_course_start_until_unlock: 42,
           lesson_type: 'text',
           main_pdf: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          max_attempts: 42,
           mux_asset_id: 'mux_xxxxxxxxxxxxxx',
           title: 'title',
           visibility: 'visible',

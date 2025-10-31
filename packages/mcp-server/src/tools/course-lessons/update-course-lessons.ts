@@ -155,6 +155,10 @@ export const tool: Tool = {
           },
         },
       },
+      max_attempts: {
+        type: 'integer',
+        description: 'Maximum number of attempts allowed for assessments',
+      },
       mux_asset_id: {
         type: 'string',
         description: 'The ID of the Mux asset to attach to this lesson for video lessons',
