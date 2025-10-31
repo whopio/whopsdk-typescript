@@ -221,7 +221,9 @@ export interface MessageCreateParams {
   /**
    * The attachments for this message, such as videos or images.
    */
-  attachments?: Array<MessageCreateParams.Attachment> | null;
+  attachments?: Array<
+    MessageCreateParams.AttachmentInputWithDirectUploadID | MessageCreateParams.AttachmentInputWithID
+  > | null;
 
   /**
    * The poll for this message
@@ -233,20 +235,25 @@ export namespace MessageCreateParams {
   /**
    * Input for an attachment
    */
-  export interface Attachment {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
   }
 
   /**
@@ -281,7 +288,9 @@ export interface MessageUpdateParams {
   /**
    * The attachments for this message
    */
-  attachments?: Array<MessageUpdateParams.Attachment> | null;
+  attachments?: Array<
+    MessageUpdateParams.AttachmentInputWithDirectUploadID | MessageUpdateParams.AttachmentInputWithID
+  > | null;
 
   /**
    * The content of the message in Markdown format
@@ -298,20 +307,25 @@ export namespace MessageUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface Attachment {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
   }
 }
 

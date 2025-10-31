@@ -30,20 +30,35 @@ export const tool: Tool = {
         type: 'array',
         description: 'The attachments for this post',
         items: {
-          type: 'object',
+          anyOf: [
+            {
+              type: 'object',
+              title: 'AttachmentInputWithDirectUploadId',
+              description: 'Input for an attachment',
+              properties: {
+                direct_upload_id: {
+                  type: 'string',
+                  description:
+                    'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+                },
+              },
+              required: ['direct_upload_id'],
+            },
+            {
+              type: 'object',
+              title: 'AttachmentInputWithId',
+              description: 'Input for an attachment',
+              properties: {
+                id: {
+                  type: 'string',
+                  description:
+                    "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+                },
+              },
+              required: ['id'],
+            },
+          ],
           description: 'Input for an attachment',
-          properties: {
-            id: {
-              type: 'string',
-              description:
-                "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-            },
-            direct_upload_id: {
-              type: 'string',
-              description:
-                'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-            },
-          },
         },
       },
       content: {
