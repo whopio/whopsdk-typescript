@@ -93,13 +93,13 @@ export interface InvoiceCreateResponse {
 export type InvoiceVoidResponse = boolean;
 
 export type InvoiceCreateParams =
-  | InvoiceCreateParams.Variant0
-  | InvoiceCreateParams.Variant1
-  | InvoiceCreateParams.Variant2
-  | InvoiceCreateParams.Variant3;
+  | InvoiceCreateParams.CreateInvoiceInputWithProductAndMemberID
+  | InvoiceCreateParams.CreateInvoiceInputWithProductAndEmailAddress
+  | InvoiceCreateParams.CreateInvoiceInputWithProductIDAndMemberID
+  | InvoiceCreateParams.CreateInvoiceInputWithProductIDAndEmailAddress;
 
 export declare namespace InvoiceCreateParams {
-  export interface Variant0 {
+  export interface CreateInvoiceInputWithProductAndMemberID {
     /**
      * The method of collection for this invoice. If using charge_automatically, you
      * must provide a payment_token.
@@ -126,13 +126,13 @@ export declare namespace InvoiceCreateParams {
     /**
      * The properties of the plan to create for this invoice.
      */
-    plan: Variant0.Plan;
+    plan: CreateInvoiceInputWithProductAndMemberID.Plan;
 
     /**
      * The properties of the product to create for this invoice. Include this if you
      * want to create an invoice for a new product.
      */
-    product: Variant0.Product;
+    product: CreateInvoiceInputWithProductAndMemberID.Product;
 
     /**
      * Whether or not to charge the customer a buyer fee.
@@ -153,7 +153,7 @@ export declare namespace InvoiceCreateParams {
     payment_token_id?: string | null;
   }
 
-  export namespace Variant0 {
+  export namespace CreateInvoiceInputWithProductAndMemberID {
     /**
      * The properties of the plan to create for this invoice.
      */
@@ -207,9 +207,19 @@ export declare namespace InvoiceCreateParams {
       renewal_price?: number | null;
 
       /**
+       * The number of units available for purchase.
+       */
+      stock?: number | null;
+
+      /**
        * The number of free trial days added before a renewal plan.
        */
       trial_period_days?: number | null;
+
+      /**
+       * Limits/doesn't limit the number of units available for purchase.
+       */
+      unlimited_stock?: boolean | null;
 
       /**
        * Visibility of a resource
@@ -268,7 +278,7 @@ export declare namespace InvoiceCreateParams {
     }
   }
 
-  export interface Variant1 {
+  export interface CreateInvoiceInputWithProductAndEmailAddress {
     /**
      * The method of collection for this invoice. If using charge_automatically, you
      * must provide a payment_token.
@@ -294,13 +304,13 @@ export declare namespace InvoiceCreateParams {
     /**
      * The properties of the plan to create for this invoice.
      */
-    plan: Variant1.Plan;
+    plan: CreateInvoiceInputWithProductAndEmailAddress.Plan;
 
     /**
      * The properties of the product to create for this invoice. Include this if you
      * want to create an invoice for a new product.
      */
-    product: Variant1.Product;
+    product: CreateInvoiceInputWithProductAndEmailAddress.Product;
 
     /**
      * Whether or not to charge the customer a buyer fee.
@@ -321,7 +331,7 @@ export declare namespace InvoiceCreateParams {
     payment_token_id?: string | null;
   }
 
-  export namespace Variant1 {
+  export namespace CreateInvoiceInputWithProductAndEmailAddress {
     /**
      * The properties of the plan to create for this invoice.
      */
@@ -375,9 +385,19 @@ export declare namespace InvoiceCreateParams {
       renewal_price?: number | null;
 
       /**
+       * The number of units available for purchase.
+       */
+      stock?: number | null;
+
+      /**
        * The number of free trial days added before a renewal plan.
        */
       trial_period_days?: number | null;
+
+      /**
+       * Limits/doesn't limit the number of units available for purchase.
+       */
+      unlimited_stock?: boolean | null;
 
       /**
        * Visibility of a resource
@@ -436,7 +456,7 @@ export declare namespace InvoiceCreateParams {
     }
   }
 
-  export interface Variant2 {
+  export interface CreateInvoiceInputWithProductIDAndMemberID {
     /**
      * The method of collection for this invoice. If using charge_automatically, you
      * must provide a payment_token.
@@ -463,7 +483,7 @@ export declare namespace InvoiceCreateParams {
     /**
      * The properties of the plan to create for this invoice.
      */
-    plan: Variant2.Plan;
+    plan: CreateInvoiceInputWithProductIDAndMemberID.Plan;
 
     /**
      * The product ID to create this invoice for. Include this if you want to create an
@@ -490,7 +510,7 @@ export declare namespace InvoiceCreateParams {
     payment_token_id?: string | null;
   }
 
-  export namespace Variant2 {
+  export namespace CreateInvoiceInputWithProductIDAndMemberID {
     /**
      * The properties of the plan to create for this invoice.
      */
@@ -544,9 +564,19 @@ export declare namespace InvoiceCreateParams {
       renewal_price?: number | null;
 
       /**
+       * The number of units available for purchase.
+       */
+      stock?: number | null;
+
+      /**
        * The number of free trial days added before a renewal plan.
        */
       trial_period_days?: number | null;
+
+      /**
+       * Limits/doesn't limit the number of units available for purchase.
+       */
+      unlimited_stock?: boolean | null;
 
       /**
        * Visibility of a resource
@@ -589,7 +619,7 @@ export declare namespace InvoiceCreateParams {
     }
   }
 
-  export interface Variant3 {
+  export interface CreateInvoiceInputWithProductIDAndEmailAddress {
     /**
      * The method of collection for this invoice. If using charge_automatically, you
      * must provide a payment_token.
@@ -615,7 +645,7 @@ export declare namespace InvoiceCreateParams {
     /**
      * The properties of the plan to create for this invoice.
      */
-    plan: Variant3.Plan;
+    plan: CreateInvoiceInputWithProductIDAndEmailAddress.Plan;
 
     /**
      * The product ID to create this invoice for. Include this if you want to create an
@@ -642,7 +672,7 @@ export declare namespace InvoiceCreateParams {
     payment_token_id?: string | null;
   }
 
-  export namespace Variant3 {
+  export namespace CreateInvoiceInputWithProductIDAndEmailAddress {
     /**
      * The properties of the plan to create for this invoice.
      */
@@ -696,9 +726,19 @@ export declare namespace InvoiceCreateParams {
       renewal_price?: number | null;
 
       /**
+       * The number of units available for purchase.
+       */
+      stock?: number | null;
+
+      /**
        * The number of free trial days added before a renewal plan.
        */
       trial_period_days?: number | null;
+
+      /**
+       * Limits/doesn't limit the number of units available for purchase.
+       */
+      unlimited_stock?: boolean | null;
 
       /**
        * Visibility of a resource

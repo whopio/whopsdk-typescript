@@ -349,7 +349,7 @@ export interface PlanCreateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanCreateParams.DirectUploadID | PlanCreateParams.ID | null;
+  image?: PlanCreateParams.AttachmentInputWithDirectUploadID | PlanCreateParams.AttachmentInputWithID | null;
 
   /**
    * An additional amount charged upon first purchase. Use only if a one time payment
@@ -465,7 +465,7 @@ export namespace PlanCreateParams {
   /**
    * Input for an attachment
    */
-  export interface DirectUploadID {
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
@@ -477,7 +477,7 @@ export namespace PlanCreateParams {
   /**
    * Input for an attachment
    */
-  export interface ID {
+  export interface AttachmentInputWithID {
     /**
      * The ID of an existing attachment object. Use this when updating a resource and
      * keeping a subset of the attachments. Don't use this unless you know what you're
@@ -543,7 +543,7 @@ export interface PlanUpdateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanUpdateParams.DirectUploadID | PlanUpdateParams.ID | null;
+  image?: PlanUpdateParams.AttachmentInputWithDirectUploadID | PlanUpdateParams.AttachmentInputWithID | null;
 
   /**
    * An additional amount charged upon first purchase.
@@ -651,7 +651,7 @@ export namespace PlanUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface DirectUploadID {
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
@@ -663,7 +663,7 @@ export namespace PlanUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface ID {
+  export interface AttachmentInputWithID {
     /**
      * The ID of an existing attachment object. Use this when updating a resource and
      * keeping a subset of the attachments. Don't use this unless you know what you're

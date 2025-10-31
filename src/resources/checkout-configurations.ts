@@ -168,15 +168,15 @@ export namespace CheckoutConfigurationListResponse {
 }
 
 export type CheckoutConfigurationCreateParams =
-  | CheckoutConfigurationCreateParams.Variant0
-  | CheckoutConfigurationCreateParams.Variant1;
+  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputWithPlan
+  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputWithPlanID;
 
 export declare namespace CheckoutConfigurationCreateParams {
-  export interface Variant0 {
+  export interface CreateCheckoutSessionInputWithPlan {
     /**
      * Pass this object to create a new plan for this checkout configuration
      */
-    plan: Variant0.Plan;
+    plan: CreateCheckoutSessionInputWithPlan.Plan;
 
     /**
      * The affiliate code to use for the checkout configuration
@@ -194,7 +194,7 @@ export declare namespace CheckoutConfigurationCreateParams {
     redirect_url?: string | null;
   }
 
-  export namespace Variant0 {
+  export namespace CreateCheckoutSessionInputWithPlan {
     /**
      * Pass this object to create a new plan for this checkout configuration
      */
@@ -238,7 +238,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * An image for the plan. This will be visible on the product page to customers.
        */
-      image?: Plan.DirectUploadID | Plan.ID | null;
+      image?: Plan.AttachmentInputWithDirectUploadID | Plan.AttachmentInputWithID | null;
 
       /**
        * An additional amount charged upon first purchase.
@@ -340,7 +340,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * Input for an attachment
        */
-      export interface DirectUploadID {
+      export interface AttachmentInputWithDirectUploadID {
         /**
          * This ID should be used the first time you upload an attachment. It is the ID of
          * the direct upload that was created when uploading the file to S3 via the
@@ -352,7 +352,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * Input for an attachment
        */
-      export interface ID {
+      export interface AttachmentInputWithID {
         /**
          * The ID of an existing attachment object. Use this when updating a resource and
          * keeping a subset of the attachments. Don't use this unless you know what you're
@@ -470,7 +470,7 @@ export declare namespace CheckoutConfigurationCreateParams {
     }
   }
 
-  export interface Variant1 {
+  export interface CreateCheckoutSessionInputWithPlanID {
     /**
      * The ID of the plan to use for the checkout configuration
      */

@@ -269,7 +269,7 @@ export interface AppUpdateParams {
   /**
    * The icon for the app
    */
-  icon?: AppUpdateParams.DirectUploadID | AppUpdateParams.ID | null;
+  icon?: AppUpdateParams.AttachmentInputWithDirectUploadID | AppUpdateParams.AttachmentInputWithID | null;
 
   /**
    * The name of the app
@@ -291,7 +291,7 @@ export namespace AppUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface DirectUploadID {
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
@@ -303,7 +303,7 @@ export namespace AppUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface ID {
+  export interface AttachmentInputWithID {
     /**
      * The ID of an existing attachment object. Use this when updating a resource and
      * keeping a subset of the attachments. Don't use this unless you know what you're

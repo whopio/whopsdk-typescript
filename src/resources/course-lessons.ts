@@ -453,7 +453,10 @@ export interface CourseLessonUpdateParams {
    * General attachments for the lesson (PDFs, files, etc). Replaces all existing
    * attachments.
    */
-  attachments?: Array<CourseLessonUpdateParams.DirectUploadID | CourseLessonUpdateParams.ID> | null;
+  attachments?: Array<
+    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
+    | CourseLessonUpdateParams.AttachmentInputWithID
+  > | null;
 
   /**
    * The content of the lesson
@@ -473,7 +476,10 @@ export interface CourseLessonUpdateParams {
   /**
    * The main PDF file for this lesson
    */
-  main_pdf?: CourseLessonUpdateParams.DirectUploadID | CourseLessonUpdateParams.ID | null;
+  main_pdf?:
+    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
+    | CourseLessonUpdateParams.AttachmentInputWithID
+    | null;
 
   /**
    * Maximum number of attempts allowed for assessments
@@ -543,7 +549,10 @@ export namespace CourseLessonUpdateParams {
     /**
      * Optional image attachment for the question
      */
-    image?: AssessmentQuestion.DirectUploadID | AssessmentQuestion.ID | null;
+    image?:
+      | AssessmentQuestion.AttachmentInputWithDirectUploadID
+      | AssessmentQuestion.AttachmentInputWithID
+      | null;
 
     /**
      * The answer options for multiple choice/select questions
@@ -555,7 +564,7 @@ export namespace CourseLessonUpdateParams {
     /**
      * Input for an attachment
      */
-    export interface DirectUploadID {
+    export interface AttachmentInputWithDirectUploadID {
       /**
        * This ID should be used the first time you upload an attachment. It is the ID of
        * the direct upload that was created when uploading the file to S3 via the
@@ -567,7 +576,7 @@ export namespace CourseLessonUpdateParams {
     /**
      * Input for an attachment
      */
-    export interface ID {
+    export interface AttachmentInputWithID {
       /**
        * The ID of an existing attachment object. Use this when updating a resource and
        * keeping a subset of the attachments. Don't use this unless you know what you're
@@ -601,7 +610,7 @@ export namespace CourseLessonUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface DirectUploadID {
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
@@ -613,7 +622,7 @@ export namespace CourseLessonUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface ID {
+  export interface AttachmentInputWithID {
     /**
      * The ID of an existing attachment object. Use this when updating a resource and
      * keeping a subset of the attachments. Don't use this unless you know what you're
@@ -625,7 +634,7 @@ export namespace CourseLessonUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface DirectUploadID {
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
@@ -637,7 +646,7 @@ export namespace CourseLessonUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface ID {
+  export interface AttachmentInputWithID {
     /**
      * The ID of an existing attachment object. Use this when updating a resource and
      * keeping a subset of the attachments. Don't use this unless you know what you're

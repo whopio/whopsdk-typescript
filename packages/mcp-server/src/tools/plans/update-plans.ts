@@ -78,6 +78,7 @@ export const tool: Tool = {
         anyOf: [
           {
             type: 'object',
+            title: 'AttachmentInputWithDirectUploadId',
             description: 'Input for an attachment',
             properties: {
               direct_upload_id: {
@@ -90,6 +91,7 @@ export const tool: Tool = {
           },
           {
             type: 'object',
+            title: 'AttachmentInputWithId',
             description: 'Input for an attachment',
             properties: {
               id: {
