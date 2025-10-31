@@ -419,27 +419,32 @@ export interface CourseCreateParams {
   /**
    * The thumbnail for the course in png, jpeg, or gif format
    */
-  thumbnail?: CourseCreateParams.Thumbnail | null;
+  thumbnail?: CourseCreateParams.DirectUploadID | CourseCreateParams.ID | null;
 }
 
 export namespace CourseCreateParams {
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * Input for an attachment
    */
-  export interface Thumbnail {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface DirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface ID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
   }
 }
 
@@ -484,7 +489,7 @@ export interface CourseUpdateParams {
   /**
    * The thumbnail for the course in png, jpeg, or gif format
    */
-  thumbnail?: CourseUpdateParams.Thumbnail | null;
+  thumbnail?: CourseUpdateParams.DirectUploadID | CourseUpdateParams.ID | null;
 
   /**
    * The title of the course
@@ -546,22 +551,27 @@ export namespace CourseUpdateParams {
   }
 
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * Input for an attachment
    */
-  export interface Thumbnail {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface DirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface ID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
   }
 }
 

@@ -101,20 +101,33 @@ export const tool: Tool = {
         description: 'A short tagline for the course',
       },
       thumbnail: {
-        type: 'object',
+        anyOf: [
+          {
+            type: 'object',
+            description: 'Input for an attachment',
+            properties: {
+              direct_upload_id: {
+                type: 'string',
+                description:
+                  'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+              },
+            },
+            required: ['direct_upload_id'],
+          },
+          {
+            type: 'object',
+            description: 'Input for an attachment',
+            properties: {
+              id: {
+                type: 'string',
+                description:
+                  "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+              },
+            },
+            required: ['id'],
+          },
+        ],
         description: 'The thumbnail for the course in png, jpeg, or gif format',
-        properties: {
-          id: {
-            type: 'string',
-            description:
-              "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-          },
-          direct_upload_id: {
-            type: 'string',
-            description:
-              'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-          },
-        },
       },
       title: {
         type: 'string',
