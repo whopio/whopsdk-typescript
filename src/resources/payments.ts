@@ -343,6 +343,12 @@ export interface PaymentListResponse {
   membership: PaymentListResponse.Membership | null;
 
   /**
+   * The custom metadata stored on this payment. This will be copied the checkout
+   * configuration for which this payment was made
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The datetime the payment was paid
    */
   paid_at: string | null;
