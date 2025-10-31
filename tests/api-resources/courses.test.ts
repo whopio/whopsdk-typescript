@@ -30,7 +30,7 @@ describe('resource courses', () => {
       cover_image: 'cover_image',
       require_completing_lessons_in_order: true,
       tagline: 'tagline',
-      thumbnail: { id: 'id', direct_upload_id: 'direct_upload_id' },
+      thumbnail: { direct_upload_id: 'direct_upload_id' },
     });
   });
 
@@ -79,7 +79,7 @@ describe('resource courses', () => {
           language: 'en',
           require_completing_lessons_in_order: true,
           tagline: 'tagline',
-          thumbnail: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          thumbnail: { direct_upload_id: 'direct_upload_id' },
           title: 'title',
         },
         { path: '/_stainless_unknown_path' },

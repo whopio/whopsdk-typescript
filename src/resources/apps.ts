@@ -269,7 +269,7 @@ export interface AppUpdateParams {
   /**
    * The icon for the app
    */
-  icon?: AppUpdateParams.Icon | null;
+  icon?: AppUpdateParams.DirectUploadID | AppUpdateParams.ID | null;
 
   /**
    * The name of the app
@@ -289,22 +289,27 @@ export interface AppUpdateParams {
 
 export namespace AppUpdateParams {
   /**
-   * The icon for the app
+   * Input for an attachment
    */
-  export interface Icon {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface DirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface ID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
   }
 }
 
