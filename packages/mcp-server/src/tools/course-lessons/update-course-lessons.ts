@@ -64,35 +64,20 @@ export const tool: Tool = {
                 'The ID of an existing question. If provided, the question will be updated. If not provided, a new question will be created.',
             },
             image: {
-              anyOf: [
-                {
-                  type: 'object',
-                  title: 'AttachmentInputWithDirectUploadId',
-                  description: 'Input for an attachment',
-                  properties: {
-                    direct_upload_id: {
-                      type: 'string',
-                      description:
-                        'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-                    },
-                  },
-                  required: ['direct_upload_id'],
-                },
-                {
-                  type: 'object',
-                  title: 'AttachmentInputWithId',
-                  description: 'Input for an attachment',
-                  properties: {
-                    id: {
-                      type: 'string',
-                      description:
-                        "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-                    },
-                  },
-                  required: ['id'],
-                },
-              ],
+              type: 'object',
               description: 'Optional image attachment for the question',
+              properties: {
+                id: {
+                  type: 'string',
+                  description:
+                    "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+                },
+                direct_upload_id: {
+                  type: 'string',
+                  description:
+                    'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+                },
+              },
             },
             options: {
               type: 'array',
@@ -127,35 +112,20 @@ export const tool: Tool = {
         description:
           'General attachments for the lesson (PDFs, files, etc). Replaces all existing attachments.',
         items: {
-          anyOf: [
-            {
-              type: 'object',
-              title: 'AttachmentInputWithDirectUploadId',
-              description: 'Input for an attachment',
-              properties: {
-                direct_upload_id: {
-                  type: 'string',
-                  description:
-                    'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-                },
-              },
-              required: ['direct_upload_id'],
-            },
-            {
-              type: 'object',
-              title: 'AttachmentInputWithId',
-              description: 'Input for an attachment',
-              properties: {
-                id: {
-                  type: 'string',
-                  description:
-                    "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-                },
-              },
-              required: ['id'],
-            },
-          ],
+          type: 'object',
           description: 'Input for an attachment',
+          properties: {
+            id: {
+              type: 'string',
+              description:
+                "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+            },
+            direct_upload_id: {
+              type: 'string',
+              description:
+                'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+            },
+          },
         },
       },
       content: {
@@ -170,35 +140,20 @@ export const tool: Tool = {
         $ref: '#/$defs/lesson_types',
       },
       main_pdf: {
-        anyOf: [
-          {
-            type: 'object',
-            title: 'AttachmentInputWithDirectUploadId',
-            description: 'Input for an attachment',
-            properties: {
-              direct_upload_id: {
-                type: 'string',
-                description:
-                  'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-              },
-            },
-            required: ['direct_upload_id'],
-          },
-          {
-            type: 'object',
-            title: 'AttachmentInputWithId',
-            description: 'Input for an attachment',
-            properties: {
-              id: {
-                type: 'string',
-                description:
-                  "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-              },
-            },
-            required: ['id'],
-          },
-        ],
+        type: 'object',
         description: 'The main PDF file for this lesson',
+        properties: {
+          id: {
+            type: 'string',
+            description:
+              "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+          },
+          direct_upload_id: {
+            type: 'string',
+            description:
+              'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+          },
+        },
       },
       max_attempts: {
         type: 'integer',

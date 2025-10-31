@@ -10,10 +10,8 @@ const client = new Whop({
 
 describe('resource checkoutConfigurations', () => {
   // Prism tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.create({
-      plan: { company_id: 'biz_xxxxxxxxxxxxxx' },
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.checkoutConfigurations.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,62 +22,69 @@ describe('resource checkoutConfigurations', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.checkoutConfigurations.create({
-      plan: {
-        company_id: 'biz_xxxxxxxxxxxxxx',
-        billing_period: 42,
-        currency: 'usd',
-        custom_fields: [
-          {
-            field_type: 'text',
-            name: 'name',
-            id: 'id',
-            order: 42,
-            placeholder: 'placeholder',
-            required: true,
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.checkoutConfigurations.create(
+        {
+          affiliate_code: 'affiliate_code',
+          metadata: { foo: 'bar' },
+          plan: {
+            company_id: 'biz_xxxxxxxxxxxxxx',
+            billing_period: 42,
+            currency: 'usd',
+            custom_fields: [
+              {
+                field_type: 'text',
+                name: 'name',
+                id: 'id',
+                order: 42,
+                placeholder: 'placeholder',
+                required: true,
+              },
+            ],
+            description: 'description',
+            expiration_days: 42,
+            force_create_new_plan: true,
+            image: { id: 'id', direct_upload_id: 'direct_upload_id' },
+            initial_price: 6.9,
+            internal_notes: 'internal_notes',
+            override_tax_type: 'inclusive',
+            payment_method_configuration: {
+              disabled: ['acss_debit'],
+              enabled: ['acss_debit'],
+              include_platform_defaults: true,
+            },
+            plan_type: 'renewal',
+            product: {
+              external_identifier: 'external_identifier',
+              title: 'title',
+              business_type: 'education_program',
+              collect_shipping_address: true,
+              custom_statement_descriptor: 'custom_statement_descriptor',
+              description: 'description',
+              global_affiliate_percentage: 6.9,
+              global_affiliate_status: 'enabled',
+              headline: 'headline',
+              industry_type: 'trading',
+              product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
+              redirect_purchase_url: 'redirect_purchase_url',
+              route: 'route',
+              visibility: 'visible',
+            },
+            product_id: 'prod_xxxxxxxxxxxxx',
+            release_method: 'buy_now',
+            renewal_price: 6.9,
+            title: 'title',
+            trial_period_days: 42,
+            visibility: 'visible',
           },
-        ],
-        description: 'description',
-        expiration_days: 42,
-        force_create_new_plan: true,
-        image: { direct_upload_id: 'direct_upload_id' },
-        initial_price: 6.9,
-        internal_notes: 'internal_notes',
-        override_tax_type: 'inclusive',
-        payment_method_configuration: {
-          disabled: ['acss_debit'],
-          enabled: ['acss_debit'],
-          include_platform_defaults: true,
+          plan_id: 'plan_xxxxxxxxxxxxx',
+          redirect_url: 'redirect_url',
         },
-        plan_type: 'renewal',
-        product: {
-          external_identifier: 'external_identifier',
-          title: 'title',
-          business_type: 'education_program',
-          collect_shipping_address: true,
-          custom_statement_descriptor: 'custom_statement_descriptor',
-          description: 'description',
-          global_affiliate_percentage: 6.9,
-          global_affiliate_status: 'enabled',
-          headline: 'headline',
-          industry_type: 'trading',
-          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-          redirect_purchase_url: 'redirect_purchase_url',
-          route: 'route',
-          visibility: 'visible',
-        },
-        product_id: 'prod_xxxxxxxxxxxxx',
-        release_method: 'buy_now',
-        renewal_price: 6.9,
-        title: 'title',
-        trial_period_days: 42,
-        visibility: 'visible',
-      },
-      affiliate_code: 'affiliate_code',
-      metadata: { foo: 'bar' },
-      redirect_url: 'redirect_url',
-    });
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Prism tests are disabled
