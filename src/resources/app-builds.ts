@@ -146,9 +146,7 @@ export interface AppBuildListResponse {
 
 export interface AppBuildCreateParams {
   /**
-   * Attachment input for the app build file. This should be an upload in .zip
-   * format. The zip should contain at least one main_js_bundle.hbc file and
-   * optionally an assets folder next to it.
+   * Input for an attachment
    */
   attachment: AppBuildCreateParams.Attachment;
 
@@ -179,9 +177,7 @@ export interface AppBuildCreateParams {
 
 export namespace AppBuildCreateParams {
   /**
-   * Attachment input for the app build file. This should be an upload in .zip
-   * format. The zip should contain at least one main_js_bundle.hbc file and
-   * optionally an assets folder next to it.
+   * Input for an attachment
    */
   export interface Attachment {
     /**

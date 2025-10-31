@@ -349,7 +349,7 @@ export interface PlanCreateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanCreateParams.Image | null;
+  image?: PlanCreateParams.Image;
 
   /**
    * An additional amount charged upon first purchase. Use only if a one time payment
@@ -465,21 +465,7 @@ export namespace PlanCreateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  export interface Image {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
-    /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id?: string | null;
-  }
+  export interface Image {}
 
   /**
    * The explicit payment method configuration for the plan. If not provided, the
@@ -538,7 +524,7 @@ export interface PlanUpdateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanUpdateParams.Image | null;
+  image?: PlanUpdateParams.Image;
 
   /**
    * An additional amount charged upon first purchase.
@@ -646,21 +632,7 @@ export namespace PlanUpdateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  export interface Image {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
-    /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id?: string | null;
-  }
+  export interface Image {}
 
   /**
    * The explicit payment method configuration for the plan. If sent as null, the

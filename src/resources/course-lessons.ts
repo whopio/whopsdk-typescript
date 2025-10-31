@@ -473,7 +473,7 @@ export interface CourseLessonUpdateParams {
   /**
    * The main PDF file for this lesson
    */
-  main_pdf?: CourseLessonUpdateParams.MainPdf | null;
+  main_pdf?: CourseLessonUpdateParams.MainPdf;
 
   /**
    * Maximum number of attempts allowed for assessments
@@ -543,7 +543,7 @@ export namespace CourseLessonUpdateParams {
     /**
      * Optional image attachment for the question
      */
-    image?: AssessmentQuestion.Image | null;
+    image?: AssessmentQuestion.Image;
 
     /**
      * The answer options for multiple choice/select questions
@@ -555,21 +555,7 @@ export namespace CourseLessonUpdateParams {
     /**
      * Optional image attachment for the question
      */
-    export interface Image {
-      /**
-       * The ID of an existing attachment object. Use this when updating a resource and
-       * keeping a subset of the attachments. Don't use this unless you know what you're
-       * doing.
-       */
-      id?: string | null;
-
-      /**
-       * This ID should be used the first time you upload an attachment. It is the ID of
-       * the direct upload that was created when uploading the file to S3 via the
-       * mediaDirectUpload mutation.
-       */
-      direct_upload_id?: string | null;
-    }
+    export interface Image {}
 
     /**
      * Input for creating or updating an assessment question option
@@ -615,21 +601,7 @@ export namespace CourseLessonUpdateParams {
   /**
    * The main PDF file for this lesson
    */
-  export interface MainPdf {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
-    /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id?: string | null;
-  }
+  export interface MainPdf {}
 }
 
 export interface CourseLessonListParams extends CursorPageParams {
