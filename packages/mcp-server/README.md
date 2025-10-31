@@ -313,7 +313,20 @@ The following tools are available in this MCP server.
 
 ### Resource `companies`:
 
+- `create_companies` (`write`): Create a new sub company for your platform
+
+  Required permissions:
+
+  - `company:create_child`
+  - `company:basic:read`
+
 - `retrieve_companies` (`read`): Retrieves an company by ID or its url route
+
+  Required permissions:
+
+  - `company:basic:read`
+
+- `list_companies` (`read`): Lists companies the current user has access to
 
   Required permissions:
 

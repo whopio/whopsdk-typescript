@@ -10,6 +10,32 @@ const client = new Whop({
 
 describe('resource companies', () => {
   // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.companies.create({
+      email: 'email',
+      parent_company_id: 'parent_company_id',
+      title: 'title',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.companies.create({
+      email: 'email',
+      parent_company_id: 'parent_company_id',
+      title: 'title',
+      metadata: { foo: 'bar' },
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.companies.retrieve('biz_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -19,5 +45,29 @@ describe('resource companies', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.companies.list({ parent_company_id: 'parent_company_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.companies.list({
+      parent_company_id: 'parent_company_id',
+      after: 'after',
+      before: 'before',
+      direction: 'asc',
+      first: 42,
+      last: 42,
+    });
   });
 });

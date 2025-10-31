@@ -55,7 +55,13 @@ import {
   CheckoutConfigurationListResponsesCursorPage,
   CheckoutConfigurations,
 } from './resources/checkout-configurations';
-import { Companies } from './resources/companies';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyListParams,
+  CompanyListResponse,
+  CompanyListResponsesCursorPage,
+} from './resources/companies';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -1096,7 +1102,13 @@ export declare namespace Whop {
     type ProductListParams as ProductListParams,
   };
 
-  export { Companies as Companies };
+  export {
+    Companies as Companies,
+    type CompanyListResponse as CompanyListResponse,
+    type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
+    type CompanyCreateParams as CompanyCreateParams,
+    type CompanyListParams as CompanyListParams,
+  };
 
   export {
     Webhooks as Webhooks,
