@@ -113,9 +113,15 @@ Methods:
 
 # Companies
 
+Types:
+
+- <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+
 Methods:
 
+- <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
 - <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
+- <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
 
 # Webhooks
 

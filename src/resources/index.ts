@@ -37,7 +37,13 @@ export {
   type CheckoutConfigurationListParams,
   type CheckoutConfigurationListResponsesCursorPage,
 } from './checkout-configurations';
-export { Companies } from './companies';
+export {
+  Companies,
+  type CompanyListResponse,
+  type CompanyCreateParams,
+  type CompanyListParams,
+  type CompanyListResponsesCursorPage,
+} from './companies';
 export {
   CourseChapters,
   type CourseChapter,
