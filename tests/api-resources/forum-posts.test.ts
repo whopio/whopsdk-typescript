@@ -25,7 +25,7 @@ describe('resource forumPosts', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.forumPosts.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
-      attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
+      attachments: [{ direct_upload_id: 'direct_upload_id' }],
       content: 'content',
       is_mention: true,
       parent_id: 'parent_id',
@@ -68,7 +68,7 @@ describe('resource forumPosts', () => {
       client.forumPosts.update(
         'id',
         {
-          attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
+          attachments: [{ direct_upload_id: 'direct_upload_id' }],
           content: 'content',
           is_pinned: true,
           title: 'title',

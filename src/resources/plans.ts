@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -176,6 +177,11 @@ export interface PlanListResponse {
   member_count: number | null;
 
   /**
+   * The explicit payment method configuration for the plan, if any.
+   */
+  payment_method_configuration: PlanListResponse.PaymentMethodConfiguration | null;
+
+  /**
    * Indicates if the plan is a one time payment or recurring.
    */
   plan_type: Shared.PlanType;
@@ -258,6 +264,32 @@ export namespace PlanListResponse {
   }
 
   /**
+   * The explicit payment method configuration for the plan, if any.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * An array of payment method identifiers that are explicitly disabled. Only
+     * applies if the include_platform_defaults is true.
+     */
+    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * An array of payment method identifiers that are explicitly enabled. This means
+     * these payment methods will be shown on checkout. Example use case is to only
+     * enable a specific payment method like cashapp, or extending the platform
+     * defaults with additional methods.
+     */
+    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * Whether Whop's platform default payment method enablement settings are included
+     * in this configuration. The full list of default payment methods can be found in
+     * the documentation at docs.whop.com/payments.
+     */
+    include_platform_defaults: boolean;
+  }
+
+  /**
    * The access pass for the plan.
    */
   export interface Product {
@@ -317,7 +349,7 @@ export interface PlanCreateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanCreateParams.Image | null;
+  image?: PlanCreateParams.AttachmentInputWithDirectUploadID | PlanCreateParams.AttachmentInputWithID | null;
 
   /**
    * An additional amount charged upon first purchase. Use only if a one time payment
@@ -336,6 +368,12 @@ export interface PlanCreateParams {
    * up)
    */
   override_tax_type?: Shared.TaxType | null;
+
+  /**
+   * The explicit payment method configuration for the plan. If not provided, the
+   * platform or company's defaults will apply.
+   */
+  payment_method_configuration?: PlanCreateParams.PaymentMethodConfiguration | null;
 
   /**
    * The type of plan that can be attached to an access pass
@@ -425,22 +463,54 @@ export namespace PlanCreateParams {
   }
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * Input for an attachment
    */
-  export interface Image {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
+  }
+
+  /**
+   * The explicit payment method configuration for the plan. If not provided, the
+   * platform or company's defaults will apply.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * An array of payment method identifiers that are explicitly disabled. Only
+     * applies if the include_platform_defaults is true.
+     */
+    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * An array of payment method identifiers that are explicitly enabled. This means
+     * these payment methods will be shown on checkout. Example use case is to only
+     * enable a specific payment method like cashapp, or extending the platform
+     * defaults with additional methods.
+     */
+    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * Whether Whop's platform default payment method enablement settings are included
+     * in this configuration. The full list of default payment methods can be found in
+     * the documentation at docs.whop.com/payments.
+     */
+    include_platform_defaults: boolean;
   }
 }
 
@@ -473,7 +543,7 @@ export interface PlanUpdateParams {
   /**
    * An image for the plan. This will be visible on the product page to customers.
    */
-  image?: PlanUpdateParams.Image | null;
+  image?: PlanUpdateParams.AttachmentInputWithDirectUploadID | PlanUpdateParams.AttachmentInputWithID | null;
 
   /**
    * An additional amount charged upon first purchase.
@@ -495,6 +565,12 @@ export interface PlanUpdateParams {
    * up)
    */
   override_tax_type?: Shared.TaxType | null;
+
+  /**
+   * The explicit payment method configuration for the plan. If sent as null, the
+   * custom configuration will be removed.
+   */
+  payment_method_configuration?: PlanUpdateParams.PaymentMethodConfiguration | null;
 
   /**
    * The amount the customer is charged every billing period.
@@ -573,22 +649,54 @@ export namespace PlanUpdateParams {
   }
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * Input for an attachment
    */
-  export interface Image {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
-     */
-    id?: string | null;
-
+  export interface AttachmentInputWithDirectUploadID {
     /**
      * This ID should be used the first time you upload an attachment. It is the ID of
      * the direct upload that was created when uploading the file to S3 via the
      * mediaDirectUpload mutation.
      */
-    direct_upload_id?: string | null;
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
+  }
+
+  /**
+   * The explicit payment method configuration for the plan. If sent as null, the
+   * custom configuration will be removed.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * An array of payment method identifiers that are explicitly disabled. Only
+     * applies if the include_platform_defaults is true.
+     */
+    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * An array of payment method identifiers that are explicitly enabled. This means
+     * these payment methods will be shown on checkout. Example use case is to only
+     * enable a specific payment method like cashapp, or extending the platform
+     * defaults with additional methods.
+     */
+    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * Whether Whop's platform default payment method enablement settings are included
+     * in this configuration. The full list of default payment methods can be found in
+     * the documentation at docs.whop.com/payments.
+     */
+    include_platform_defaults: boolean;
   }
 }
 

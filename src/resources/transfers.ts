@@ -107,6 +107,11 @@ export interface TransferListResponse {
   fee_amount: number | null;
 
   /**
+   * A hash of metadata attached to the transfer
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The notes of the credit transaction transfer
    */
   notes: string | null;
@@ -144,6 +149,11 @@ export interface TransferCreateParams {
    * A unique key to ensure idempotence. Use a UUID or similar.
    */
   idempotence_key?: string | null;
+
+  /**
+   * A hash of metadata to attach to the transfer.
+   */
+  metadata?: { [key: string]: unknown } | null;
 
   /**
    * Notes for the transfer. Maximum of 50 characters.

@@ -80,12 +80,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/invoices.ts">InvoiceCreateResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceVoidResponse</a></code>
 
 Methods:
 
-- <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> InvoiceCreateResponse</code>
+- <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> Invoice</code>
 - <code title="get /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">retrieve</a>(id) -> Invoice</code>
 - <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
 - <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>
@@ -113,9 +112,15 @@ Methods:
 
 # Companies
 
+Types:
+
+- <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+
 Methods:
 
+- <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
 - <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
+- <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
 
 # Webhooks
 
@@ -470,3 +475,15 @@ Methods:
 
 - <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
 - <code title="get /reviews">client.reviews.<a href="./src/resources/reviews.ts">list</a>({ ...params }) -> ReviewListResponsesCursorPage</code>
+
+# CourseStudents
+
+Types:
+
+- <code><a href="./src/resources/course-students.ts">CourseStudentRetrieveResponse</a></code>
+- <code><a href="./src/resources/course-students.ts">CourseStudentListResponse</a></code>
+
+Methods:
+
+- <code title="get /course_students/{id}">client.courseStudents.<a href="./src/resources/course-students.ts">retrieve</a>(id) -> CourseStudentRetrieveResponse</code>
+- <code title="get /course_students">client.courseStudents.<a href="./src/resources/course-students.ts">list</a>({ ...params }) -> CourseStudentListResponsesCursorPage</code>

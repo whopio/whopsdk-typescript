@@ -55,7 +55,13 @@ import {
   CheckoutConfigurationListResponsesCursorPage,
   CheckoutConfigurations,
 } from './resources/checkout-configurations';
-import { Companies } from './resources/companies';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyListParams,
+  CompanyListResponse,
+  CompanyListResponsesCursorPage,
+} from './resources/companies';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -83,6 +89,13 @@ import {
   LessonTypes,
   LessonVisibilities,
 } from './resources/course-lessons';
+import {
+  CourseStudentListParams,
+  CourseStudentListResponse,
+  CourseStudentListResponsesCursorPage,
+  CourseStudentRetrieveResponse,
+  CourseStudents,
+} from './resources/course-students';
 import {
   Course,
   CourseCreateParams,
@@ -128,13 +141,7 @@ import {
   ForumUpdateParams,
   Forums,
 } from './resources/forums';
-import {
-  InvoiceCreateParams,
-  InvoiceCreateResponse,
-  InvoiceListParams,
-  InvoiceVoidResponse,
-  Invoices,
-} from './resources/invoices';
+import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import {
   MemberListParams,
@@ -1018,6 +1025,7 @@ export class Whop {
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
   reviews: API.Reviews = new API.Reviews(this);
+  courseStudents: API.CourseStudents = new API.CourseStudents(this);
 }
 
 Whop.Apps = Apps;
@@ -1050,6 +1058,7 @@ Whop.Courses = Courses;
 Whop.CourseChapters = CourseChapters;
 Whop.CourseLessons = CourseLessons;
 Whop.Reviews = Reviews;
+Whop.CourseStudents = CourseStudents;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1068,7 +1077,6 @@ export declare namespace Whop {
 
   export {
     Invoices as Invoices,
-    type InvoiceCreateResponse as InvoiceCreateResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
@@ -1087,7 +1095,13 @@ export declare namespace Whop {
     type ProductListParams as ProductListParams,
   };
 
-  export { Companies as Companies };
+  export {
+    Companies as Companies,
+    type CompanyListResponse as CompanyListResponse,
+    type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
+    type CompanyCreateParams as CompanyCreateParams,
+    type CompanyListParams as CompanyListParams,
+  };
 
   export {
     Webhooks as Webhooks,
@@ -1326,6 +1340,14 @@ export declare namespace Whop {
     type ReviewListResponse as ReviewListResponse,
     type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
     type ReviewListParams as ReviewListParams,
+  };
+
+  export {
+    CourseStudents as CourseStudents,
+    type CourseStudentRetrieveResponse as CourseStudentRetrieveResponse,
+    type CourseStudentListResponse as CourseStudentListResponse,
+    type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
+    type CourseStudentListParams as CourseStudentListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

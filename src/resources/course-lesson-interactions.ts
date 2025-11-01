@@ -14,8 +14,8 @@ export class CourseLessonInteractions extends APIResource {
    *
    * Required permissions:
    *
-   * - `course_lesson_interaction:read`
    * - `courses:read`
+   * - `course_analytics:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
     return this._client.get(path`/course_lesson_interactions/${id}`, options);
@@ -26,8 +26,8 @@ export class CourseLessonInteractions extends APIResource {
    *
    * Required permissions:
    *
-   * - `course_lesson_interaction:read`
    * - `courses:read`
+   * - `course_analytics:read`
    */
   list(
     query: CourseLessonInteractionListParams | null | undefined = {},

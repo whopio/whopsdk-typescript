@@ -267,15 +267,15 @@ The following tools are available in this MCP server.
 
   Required permissions:
 
-  - `course_lesson_interaction:read`
   - `courses:read`
+  - `course_analytics:read`
 
 - `list_course_lesson_interactions` (`read`): Lists course lesson interactions
 
   Required permissions:
 
-  - `course_lesson_interaction:read`
   - `courses:read`
+  - `course_analytics:read`
 
 ### Resource `products`:
 
@@ -313,7 +313,20 @@ The following tools are available in this MCP server.
 
 ### Resource `companies`:
 
+- `create_companies` (`write`): Create a new sub company for your platform
+
+  Required permissions:
+
+  - `company:create_child`
+  - `company:basic:read`
+
 - `retrieve_companies` (`read`): Retrieves an company by ID or its url route
+
+  Required permissions:
+
+  - `company:basic:read`
+
+- `list_companies` (`read`): Lists companies the current user has access to
 
   Required permissions:
 
@@ -914,3 +927,19 @@ The following tools are available in this MCP server.
 
 - `retrieve_reviews` (`read`): Retrieve a review by its ID
 - `list_reviews` (`read`): List all reviews
+
+### Resource `course_students`:
+
+- `retrieve_course_students` (`read`): Retrieves a course student by interaction ID
+
+  Required permissions:
+
+  - `courses:read`
+  - `course_analytics:read`
+
+- `list_course_students` (`read`): Lists students for a course
+
+  Required permissions:
+
+  - `courses:read`
+  - `course_analytics:read`

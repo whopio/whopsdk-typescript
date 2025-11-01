@@ -37,7 +37,13 @@ export {
   type CheckoutConfigurationListParams,
   type CheckoutConfigurationListResponsesCursorPage,
 } from './checkout-configurations';
-export { Companies } from './companies';
+export {
+  Companies,
+  type CompanyListResponse,
+  type CompanyCreateParams,
+  type CompanyListParams,
+  type CompanyListResponsesCursorPage,
+} from './companies';
 export {
   CourseChapters,
   type CourseChapter,
@@ -65,6 +71,13 @@ export {
   type CourseLessonListParams,
   type CourseLessonListResponsesCursorPage,
 } from './course-lessons';
+export {
+  CourseStudents,
+  type CourseStudentRetrieveResponse,
+  type CourseStudentListResponse,
+  type CourseStudentListParams,
+  type CourseStudentListResponsesCursorPage,
+} from './course-students';
 export {
   Courses,
   type Course,
@@ -112,7 +125,6 @@ export {
 } from './forums';
 export {
   Invoices,
-  type InvoiceCreateResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,

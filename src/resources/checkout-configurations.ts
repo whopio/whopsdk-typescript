@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -21,11 +22,13 @@ export class CheckoutConfigurations extends APIResource {
    * @example
    * ```ts
    * const checkoutConfiguration =
-   *   await client.checkoutConfigurations.create();
+   *   await client.checkoutConfigurations.create({
+   *     plan_id: 'plan_xxxxxxxxxxxxx',
+   *   });
    * ```
    */
   create(
-    body: CheckoutConfigurationCreateParams | null | undefined = {},
+    body: CheckoutConfigurationCreateParams,
     options?: RequestOptions,
   ): APIPromise<Shared.CheckoutConfiguration> {
     return this._client.post('/checkout_configurations', { body, ...options });
@@ -37,14 +40,6 @@ export class CheckoutConfigurations extends APIResource {
    * Required permissions:
    *
    * - `checkout_configuration:basic:read`
-   *
-   * @example
-   * ```ts
-   * const checkoutConfiguration =
-   *   await client.checkoutConfigurations.retrieve(
-   *     'ch_xxxxxxxxxxxxxxx',
-   *   );
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CheckoutConfiguration> {
     return this._client.get(path`/checkout_configurations/${id}`, options);
@@ -56,16 +51,6 @@ export class CheckoutConfigurations extends APIResource {
    * Required permissions:
    *
    * - `checkout_configuration:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const checkoutConfigurationListResponse of client.checkoutConfigurations.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: CheckoutConfigurationListParams,
@@ -182,268 +167,329 @@ export namespace CheckoutConfigurationListResponse {
   }
 }
 
-export interface CheckoutConfigurationCreateParams {
-  /**
-   * The affiliate code to use for the checkout configuration
-   */
-  affiliate_code?: string | null;
+export type CheckoutConfigurationCreateParams =
+  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputWithPlan
+  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputWithPlanID;
 
-  /**
-   * The metadata to use for the checkout configuration
-   */
-  metadata?: { [key: string]: unknown } | null;
-
-  /**
-   * Pass this object to create a new plan for this checkout configuration
-   */
-  plan?: CheckoutConfigurationCreateParams.Plan | null;
-
-  /**
-   * The ID of the plan to use for the checkout configuration
-   */
-  plan_id?: string | null;
-
-  /**
-   * The URL to redirect the user to after the checkout configuration is created
-   */
-  redirect_url?: string | null;
-}
-
-export namespace CheckoutConfigurationCreateParams {
-  /**
-   * Pass this object to create a new plan for this checkout configuration
-   */
-  export interface Plan {
+export declare namespace CheckoutConfigurationCreateParams {
+  export interface CreateCheckoutSessionInputWithPlan {
     /**
-     * The company the plan should be created for.
+     * Pass this object to create a new plan for this checkout configuration
      */
-    company_id: string;
+    plan: CreateCheckoutSessionInputWithPlan.Plan;
 
     /**
-     * The interval at which the plan charges (renewal plans).
+     * The affiliate code to use for the checkout configuration
      */
-    billing_period?: number | null;
+    affiliate_code?: string | null;
 
     /**
-     * The available currencies on the platform
+     * The metadata to use for the checkout configuration
      */
-    currency?: Shared.Currency | null;
+    metadata?: { [key: string]: unknown } | null;
 
     /**
-     * An array of custom field objects.
+     * The URL to redirect the user to after the checkout configuration is created
      */
-    custom_fields?: Array<Plan.CustomField> | null;
-
-    /**
-     * The description of the plan.
-     */
-    description?: string | null;
-
-    /**
-     * The interval at which the plan charges (expiration plans).
-     */
-    expiration_days?: number | null;
-
-    /**
-     * Whether to force the creation of a new plan even if one with the same attributes
-     * already exists.
-     */
-    force_create_new_plan?: boolean | null;
-
-    /**
-     * An image for the plan. This will be visible on the product page to customers.
-     */
-    image?: Plan.Image | null;
-
-    /**
-     * An additional amount charged upon first purchase.
-     */
-    initial_price?: number | null;
-
-    /**
-     * A personal description or notes section for the business.
-     */
-    internal_notes?: string | null;
-
-    /**
-     * Whether or not the tax is included in a plan's price (or if it hasn't been set
-     * up)
-     */
-    override_tax_type?: Shared.TaxType | null;
-
-    /**
-     * The type of plan that can be attached to an access pass
-     */
-    plan_type?: Shared.PlanType | null;
-
-    /**
-     * Pass this object to create a new product for this plan. We will use the product
-     * external identifier to find or create an existing product.
-     */
-    product?: Plan.Product | null;
-
-    /**
-     * The product the plan is related to. Either this or product is required.
-     */
-    product_id?: string | null;
-
-    /**
-     * The methods of how a plan can be released.
-     */
-    release_method?: Shared.ReleaseMethod | null;
-
-    /**
-     * The amount the customer is charged every billing period.
-     */
-    renewal_price?: number | null;
-
-    /**
-     * The title of the plan. This will be visible on the product page to customers.
-     */
-    title?: string | null;
-
-    /**
-     * The number of free trial days added before a renewal plan.
-     */
-    trial_period_days?: number | null;
-
-    /**
-     * Visibility of a resource
-     */
-    visibility?: Shared.Visibility | null;
+    redirect_url?: string | null;
   }
 
-  export namespace Plan {
-    export interface CustomField {
-      /**
-       * The type of the custom field.
-       */
-      field_type: 'text';
-
-      /**
-       * The name of the custom field.
-       */
-      name: string;
-
-      /**
-       * The ID of the custom field (if being updated)
-       */
-      id?: string | null;
-
-      /**
-       * The order of the field.
-       */
-      order?: number | null;
-
-      /**
-       * The placeholder value of the field.
-       */
-      placeholder?: string | null;
-
-      /**
-       * Whether or not the field is required.
-       */
-      required?: boolean | null;
-    }
-
+  export namespace CreateCheckoutSessionInputWithPlan {
     /**
-     * An image for the plan. This will be visible on the product page to customers.
+     * Pass this object to create a new plan for this checkout configuration
      */
-    export interface Image {
+    export interface Plan {
       /**
-       * The ID of an existing attachment object. Use this when updating a resource and
-       * keeping a subset of the attachments. Don't use this unless you know what you're
-       * doing.
+       * The company the plan should be created for.
        */
-      id?: string | null;
+      company_id: string;
 
       /**
-       * This ID should be used the first time you upload an attachment. It is the ID of
-       * the direct upload that was created when uploading the file to S3 via the
-       * mediaDirectUpload mutation.
+       * The interval at which the plan charges (renewal plans).
        */
-      direct_upload_id?: string | null;
-    }
-
-    /**
-     * Pass this object to create a new product for this plan. We will use the product
-     * external identifier to find or create an existing product.
-     */
-    export interface Product {
-      /**
-       * A unique ID used to find or create a product. When provided during creation, we
-       * will look for an existing product with this external identifier — if found, it
-       * will be updated; otherwise, a new product will be created.
-       */
-      external_identifier: string;
+      billing_period?: number | null;
 
       /**
-       * The title of the product.
+       * The available currencies on the platform
        */
-      title: string;
+      currency?: Shared.Currency | null;
 
       /**
-       * The different business types a company can be.
+       * An array of custom field objects.
        */
-      business_type?: Shared.BusinessTypes | null;
+      custom_fields?: Array<Plan.CustomField> | null;
 
       /**
-       * Whether or not to collect shipping information at checkout from the customer.
-       */
-      collect_shipping_address?: boolean | null;
-
-      /**
-       * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-       * between 5 and 22 characters, contain at least one letter, and not contain any of
-       * the following characters: <, >, \, ', "
-       */
-      custom_statement_descriptor?: string | null;
-
-      /**
-       * A written description of the product.
+       * The description of the plan.
        */
       description?: string | null;
 
       /**
-       * The percentage of the revenue that goes to the global affiliate program.
+       * The interval at which the plan charges (expiration plans).
        */
-      global_affiliate_percentage?: number | null;
+      expiration_days?: number | null;
 
       /**
-       * The different statuses of the global affiliate program for an access pass.
+       * Whether to force the creation of a new plan even if one with the same attributes
+       * already exists.
        */
-      global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+      force_create_new_plan?: boolean | null;
 
       /**
-       * The headline of the product.
+       * An image for the plan. This will be visible on the product page to customers.
        */
-      headline?: string | null;
+      image?: Plan.AttachmentInputWithDirectUploadID | Plan.AttachmentInputWithID | null;
 
       /**
-       * The different industry types a company can be in.
+       * An additional amount charged upon first purchase.
        */
-      industry_type?: Shared.IndustryTypes | null;
+      initial_price?: number | null;
 
       /**
-       * The ID of the product tax code to apply to this product.
+       * A personal description or notes section for the business.
        */
-      product_tax_code_id?: string | null;
+      internal_notes?: string | null;
 
       /**
-       * The URL to redirect the customer to after a purchase.
+       * Whether or not the tax is included in a plan's price (or if it hasn't been set
+       * up)
        */
-      redirect_purchase_url?: string | null;
+      override_tax_type?: Shared.TaxType | null;
 
       /**
-       * The route of the product.
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
        */
-      route?: string | null;
+      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+      /**
+       * The type of plan that can be attached to an access pass
+       */
+      plan_type?: Shared.PlanType | null;
+
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      product?: Plan.Product | null;
+
+      /**
+       * The product the plan is related to. Either this or product is required.
+       */
+      product_id?: string | null;
+
+      /**
+       * The methods of how a plan can be released.
+       */
+      release_method?: Shared.ReleaseMethod | null;
+
+      /**
+       * The amount the customer is charged every billing period.
+       */
+      renewal_price?: number | null;
+
+      /**
+       * The title of the plan. This will be visible on the product page to customers.
+       */
+      title?: string | null;
+
+      /**
+       * The number of free trial days added before a renewal plan.
+       */
+      trial_period_days?: number | null;
 
       /**
        * Visibility of a resource
        */
       visibility?: Shared.Visibility | null;
     }
+
+    export namespace Plan {
+      export interface CustomField {
+        /**
+         * The type of the custom field.
+         */
+        field_type: 'text';
+
+        /**
+         * The name of the custom field.
+         */
+        name: string;
+
+        /**
+         * The ID of the custom field (if being updated)
+         */
+        id?: string | null;
+
+        /**
+         * The order of the field.
+         */
+        order?: number | null;
+
+        /**
+         * The placeholder value of the field.
+         */
+        placeholder?: string | null;
+
+        /**
+         * Whether or not the field is required.
+         */
+        required?: boolean | null;
+      }
+
+      /**
+       * Input for an attachment
+       */
+      export interface AttachmentInputWithDirectUploadID {
+        /**
+         * This ID should be used the first time you upload an attachment. It is the ID of
+         * the direct upload that was created when uploading the file to S3 via the
+         * mediaDirectUpload mutation.
+         */
+        direct_upload_id: string;
+      }
+
+      /**
+       * Input for an attachment
+       */
+      export interface AttachmentInputWithID {
+        /**
+         * The ID of an existing attachment object. Use this when updating a resource and
+         * keeping a subset of the attachments. Don't use this unless you know what you're
+         * doing.
+         */
+        id: string;
+      }
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      export interface PaymentMethodConfiguration {
+        /**
+         * An array of payment method identifiers that are explicitly disabled. Only
+         * applies if the include_platform_defaults is true.
+         */
+        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * An array of payment method identifiers that are explicitly enabled. This means
+         * these payment methods will be shown on checkout. Example use case is to only
+         * enable a specific payment method like cashapp, or extending the platform
+         * defaults with additional methods.
+         */
+        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * Whether Whop's platform default payment method enablement settings are included
+         * in this configuration. The full list of default payment methods can be found in
+         * the documentation at docs.whop.com/payments.
+         */
+        include_platform_defaults: boolean;
+      }
+
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      export interface Product {
+        /**
+         * A unique ID used to find or create a product. When provided during creation, we
+         * will look for an existing product with this external identifier — if found, it
+         * will be updated; otherwise, a new product will be created.
+         */
+        external_identifier: string;
+
+        /**
+         * The title of the product.
+         */
+        title: string;
+
+        /**
+         * The different business types a company can be.
+         */
+        business_type?: Shared.BusinessTypes | null;
+
+        /**
+         * Whether or not to collect shipping information at checkout from the customer.
+         */
+        collect_shipping_address?: boolean | null;
+
+        /**
+         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
+         * between 5 and 22 characters, contain at least one letter, and not contain any of
+         * the following characters: <, >, \, ', "
+         */
+        custom_statement_descriptor?: string | null;
+
+        /**
+         * A written description of the product.
+         */
+        description?: string | null;
+
+        /**
+         * The percentage of the revenue that goes to the global affiliate program.
+         */
+        global_affiliate_percentage?: number | null;
+
+        /**
+         * The different statuses of the global affiliate program for an access pass.
+         */
+        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+        /**
+         * The headline of the product.
+         */
+        headline?: string | null;
+
+        /**
+         * The different industry types a company can be in.
+         */
+        industry_type?: Shared.IndustryTypes | null;
+
+        /**
+         * The ID of the product tax code to apply to this product.
+         */
+        product_tax_code_id?: string | null;
+
+        /**
+         * The URL to redirect the customer to after a purchase.
+         */
+        redirect_purchase_url?: string | null;
+
+        /**
+         * The route of the product.
+         */
+        route?: string | null;
+
+        /**
+         * Visibility of a resource
+         */
+        visibility?: Shared.Visibility | null;
+      }
+    }
+  }
+
+  export interface CreateCheckoutSessionInputWithPlanID {
+    /**
+     * The ID of the plan to use for the checkout configuration
+     */
+    plan_id: string;
+
+    /**
+     * The affiliate code to use for the checkout configuration
+     */
+    affiliate_code?: string | null;
+
+    /**
+     * The metadata to use for the checkout configuration
+     */
+    metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The URL to redirect the user to after the checkout configuration is created
+     */
+    redirect_url?: string | null;
   }
 }
 

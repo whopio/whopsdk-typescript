@@ -15,7 +15,9 @@ describe('resource invoices', () => {
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
       due_date: '2023-12-01T05:00:00.401Z',
+      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {},
+      product: { title: 'title' },
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -32,6 +34,7 @@ describe('resource invoices', () => {
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
       due_date: '2023-12-01T05:00:00.401Z',
+      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {
         billing_period: 42,
         custom_fields: [
@@ -51,16 +54,15 @@ describe('resource invoices', () => {
         plan_type: 'renewal',
         release_method: 'buy_now',
         renewal_price: 6.9,
+        stock: 42,
         trial_period_days: 42,
+        unlimited_stock: true,
         visibility: 'visible',
       },
+      product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
       charge_buyer_fee: true,
       customer_name: 'customer_name',
-      email_address: 'email_address',
-      member_id: 'mber_xxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
-      product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
-      product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
 

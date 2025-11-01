@@ -97,7 +97,7 @@ describe('resource products', () => {
       client.products.update(
         'prod_xxxxxxxxxxxxx',
         {
-          banner_image: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          banner_image: { direct_upload_id: 'direct_upload_id' },
           business_type: 'education_program',
           collect_shipping_address: true,
           custom_cta: 'get_access',

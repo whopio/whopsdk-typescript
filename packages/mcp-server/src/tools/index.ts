@@ -19,7 +19,9 @@ import retrieve_products from './products/retrieve-products';
 import update_products from './products/update-products';
 import list_products from './products/list-products';
 import delete_products from './products/delete-products';
+import create_companies from './companies/create-companies';
 import retrieve_companies from './companies/retrieve-companies';
+import list_companies from './companies/list-companies';
 import create_plans from './plans/create-plans';
 import retrieve_plans from './plans/retrieve-plans';
 import update_plans from './plans/update-plans';
@@ -109,6 +111,8 @@ import list_course_lessons from './course-lessons/list-course-lessons';
 import delete_course_lessons from './course-lessons/delete-course-lessons';
 import retrieve_reviews from './reviews/retrieve-reviews';
 import list_reviews from './reviews/list-reviews';
+import retrieve_course_students from './course-students/retrieve-course-students';
+import list_course_students from './course-students/list-course-students';
 
 export const endpoints: Endpoint[] = [];
 
@@ -131,7 +135,9 @@ addEndpoint(retrieve_products);
 addEndpoint(update_products);
 addEndpoint(list_products);
 addEndpoint(delete_products);
+addEndpoint(create_companies);
 addEndpoint(retrieve_companies);
+addEndpoint(list_companies);
 addEndpoint(create_plans);
 addEndpoint(retrieve_plans);
 addEndpoint(update_plans);
@@ -221,6 +227,8 @@ addEndpoint(list_course_lessons);
 addEndpoint(delete_course_lessons);
 addEndpoint(retrieve_reviews);
 addEndpoint(list_reviews);
+addEndpoint(retrieve_course_students);
+addEndpoint(list_course_students);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
