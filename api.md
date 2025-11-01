@@ -80,12 +80,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/invoices.ts">InvoiceCreateResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceVoidResponse</a></code>
 
 Methods:
 
-- <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> InvoiceCreateResponse</code>
+- <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> Invoice</code>
 - <code title="get /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">retrieve</a>(id) -> Invoice</code>
 - <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
 - <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>

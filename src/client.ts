@@ -141,13 +141,7 @@ import {
   ForumUpdateParams,
   Forums,
 } from './resources/forums';
-import {
-  InvoiceCreateParams,
-  InvoiceCreateResponse,
-  InvoiceListParams,
-  InvoiceVoidResponse,
-  Invoices,
-} from './resources/invoices';
+import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import {
   MemberListParams,
@@ -1083,7 +1077,6 @@ export declare namespace Whop {
 
   export {
     Invoices as Invoices,
-    type InvoiceCreateResponse as InvoiceCreateResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
