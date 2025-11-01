@@ -125,7 +125,6 @@ export {
 } from './forums';
 export {
   Invoices,
-  type InvoiceCreateResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
