@@ -66,21 +66,23 @@ describe('resource courseLessons', () => {
       client.courseLessons.update(
         'lesn_xxxxxxxxxxxxx',
         {
+          assessment_completion_requirement: { minimum_grade_percent: 6.9, minimum_questions_correct: 42 },
           assessment_questions: [
             {
               correct_answer: 'correct_answer',
               question_text: 'question_text',
               question_type: 'short_answer',
               id: 'id',
-              image: { id: 'id', direct_upload_id: 'direct_upload_id' },
+              image: { direct_upload_id: 'direct_upload_id' },
               options: [{ is_correct: true, option_text: 'option_text', id: 'id' }],
             },
           ],
-          attachments: [{ id: 'id', direct_upload_id: 'direct_upload_id' }],
+          attachments: [{ direct_upload_id: 'direct_upload_id' }],
           content: 'content',
           days_from_course_start_until_unlock: 42,
           lesson_type: 'text',
-          main_pdf: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          main_pdf: { direct_upload_id: 'direct_upload_id' },
+          max_attempts: 42,
           mux_asset_id: 'mux_xxxxxxxxxxxxxx',
           title: 'title',
           visibility: 'visible',

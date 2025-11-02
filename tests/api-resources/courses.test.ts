@@ -26,9 +26,11 @@ describe('resource courses', () => {
     const response = await client.courses.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
       title: 'title',
+      certificate_after_completion_enabled: true,
       cover_image: 'cover_image',
+      require_completing_lessons_in_order: true,
       tagline: 'tagline',
-      thumbnail: { id: 'id', direct_upload_id: 'direct_upload_id' },
+      thumbnail: { direct_upload_id: 'direct_upload_id' },
     });
   });
 
@@ -77,7 +79,7 @@ describe('resource courses', () => {
           language: 'en',
           require_completing_lessons_in_order: true,
           tagline: 'tagline',
-          thumbnail: { id: 'id', direct_upload_id: 'direct_upload_id' },
+          thumbnail: { direct_upload_id: 'direct_upload_id' },
           title: 'title',
         },
         { path: '/_stainless_unknown_path' },

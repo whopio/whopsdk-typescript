@@ -34,6 +34,7 @@ describe('resource transfers', () => {
       destination_id: 'destination_id',
       origin_id: 'origin_id',
       idempotence_key: 'idempotence_key',
+      metadata: { foo: 'bar' },
       notes: 'notes',
     });
   });

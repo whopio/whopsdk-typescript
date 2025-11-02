@@ -256,10 +256,11 @@ export type PaymentMethodTypes =
   | 'id_bank_transfer'
   | 'demo_pay'
   | 'shop_pay'
-  | 'apple'
   | 'sezzle'
   | 'coinbase'
   | 'splitit'
+  | 'platform_balance'
+  | 'apple'
   | 'unknown';
 
 /**
@@ -340,6 +341,12 @@ export interface PaymentListResponse {
    * The membership attached to this payment.
    */
   membership: PaymentListResponse.Membership | null;
+
+  /**
+   * The custom metadata stored on this payment. This will be copied the checkout
+   * configuration for which this payment was made
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The datetime the payment was paid

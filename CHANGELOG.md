@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.0.4 (2025-11-02)
+
+Full Changelog: [v0.0.3...v0.0.4](https://github.com/whopio/whopsdk-typescript/compare/v0.0.3...v0.0.4)
+
+### Features
+
+* **api:** api update ([562fd10](https://github.com/whopio/whopsdk-typescript/commit/562fd10bfde5ccd4cda22535773cc397bb3f83a3))
+* **api:** api update ([3cbc7d4](https://github.com/whopio/whopsdk-typescript/commit/3cbc7d4b26ee547d250af567b0ae5f90633b289d))
+* **api:** api update ([eabc51f](https://github.com/whopio/whopsdk-typescript/commit/eabc51f1644a4cccae77796aeb685a44cfb30598))
+* **api:** api update ([8b73c6b](https://github.com/whopio/whopsdk-typescript/commit/8b73c6b528c1d9524f1a2d90a30889c538d4427b))
+* **api:** api update ([2feab13](https://github.com/whopio/whopsdk-typescript/commit/2feab13a6b9becee89ccd963058df26b997f4c64))
+* **api:** api update ([285c7c7](https://github.com/whopio/whopsdk-typescript/commit/285c7c73682de0d6ee3353a82e5963610fa734b5))
+* **api:** api update ([7dc5363](https://github.com/whopio/whopsdk-typescript/commit/7dc53638bb718405bbcf6cd43d0984721df21892))
+* **api:** api update ([a31a2e0](https://github.com/whopio/whopsdk-typescript/commit/a31a2e05ac5f0e1fdd0435c76ecb005651577a7c))
+* **api:** api update ([66b8171](https://github.com/whopio/whopsdk-typescript/commit/66b8171ba3b67e302efb87ca2b432b7b8a495e16))
+* **api:** api update ([9db424a](https://github.com/whopio/whopsdk-typescript/commit/9db424a0fd468330bf7b377b14f44f9a9a93e88b))
+* **api:** api update ([7e14b15](https://github.com/whopio/whopsdk-typescript/commit/7e14b15a6986c00d010626bd6cb9e4b884150e01))
+* **api:** api update ([f278ad1](https://github.com/whopio/whopsdk-typescript/commit/f278ad147b962a80cc56bb503ba68e6dd96267f0))
+* **api:** api update ([ebbcfc6](https://github.com/whopio/whopsdk-typescript/commit/ebbcfc639fff5a5cd7156b248e8bc96e8e794162))
+* **api:** manual updates ([ee26498](https://github.com/whopio/whopsdk-typescript/commit/ee2649820a00829c91be06bf44c03ddd50c2d04f))
+* **api:** manual updates ([395512c](https://github.com/whopio/whopsdk-typescript/commit/395512c76f8c70e41a3e31a2f9b871c26a225638))
+
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([3816feb](https://github.com/whopio/whopsdk-typescript/commit/3816feb28a6f12fefbbfb0ec3c68d6523b61ad98))
+
+
+### Chores
+
+* **internal:** codegen related update ([0759b24](https://github.com/whopio/whopsdk-typescript/commit/0759b242b6a97dc197eda3cf19c37958825195ec))
+
 ## 0.0.3 (2025-10-28)
 
 Full Changelog: [v0.0.2...v0.0.3](https://github.com/whopio/whopsdk-typescript/compare/v0.0.2...v0.0.3)
