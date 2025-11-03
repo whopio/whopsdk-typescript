@@ -38,7 +38,6 @@ describe('resource members', () => {
     const response = await client.members.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
       access_level: 'no_access',
-      access_pass_ids: ['string'],
       after: 'after',
       before: 'before',
       created_after: '2023-12-01T05:00:00.401Z',
@@ -49,6 +48,7 @@ describe('resource members', () => {
       most_recent_actions: ['canceling'],
       order: 'id',
       plan_ids: ['string'],
+      product_ids: ['string'],
       promo_code_ids: ['string'],
       query: 'query',
       statuses: ['drafted'],

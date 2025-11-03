@@ -5,12 +5,13 @@ import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
 /**
- * The access level a given user (or company) has to an access pass or company.
+ * The access level a given user (or company) has to a product or company.
  */
 export type AccessLevel = 'no_access' | 'admin' | 'customer';
 
 /**
- * The different types an access pass can be.
+ * The different types an product can be. Only use 'regular'. The rest are for
+ * internal use
  */
 export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
 
@@ -970,7 +971,7 @@ export interface Entry {
   plan: Entry.Plan | null;
 
   /**
-   * The access pass tied to this entry, if there is one.
+   * The product tied to this entry, if there is one.
    */
   product: Entry.Product | null;
 
@@ -1017,7 +1018,7 @@ export namespace Entry {
   }
 
   /**
-   * The access pass tied to this entry, if there is one.
+   * The product tied to this entry, if there is one.
    */
   export interface Product {
     /**
@@ -1102,10 +1103,9 @@ export interface Experience {
   order: string | null;
 
   /**
-   * The access passes that are associated with this experience. This should not be
-   * used unless you are trying to list all access passes the experience has, for
-   * some reason. You probably don't want to use this though and should be using
-   * accessPass.
+   * The products that this experience is attached to. This defines which set of
+   * customers have access and can view this experience. If empty, this experience is
+   * only visible to authorized users of the company
    */
   products: Array<Experience.Product>;
 }
@@ -1178,7 +1178,7 @@ export namespace Experience {
   }
 
   /**
-   * An object representing a (sanitized) access pass.
+   * Represents a product on whop. Use products to sell anything on the platform.
    */
   export interface Product {
     /**
@@ -1359,7 +1359,7 @@ export type FriendlyReceiptStatus =
   | 'canceled';
 
 /**
- * The different statuses of the global affiliate program for an access pass.
+ * The different statuses of the global affiliate program for a product.
  */
 export type GlobalAffiliateStatus = 'enabled' | 'disabled';
 
@@ -2122,7 +2122,7 @@ export interface Payment {
   plan: Payment.Plan | null;
 
   /**
-   * The access pass attached to this payment.
+   * The product this payment was made for
    */
   product: Payment.Product | null;
 
@@ -2293,7 +2293,7 @@ export namespace Payment {
   }
 
   /**
-   * The access pass attached to this payment.
+   * The product this payment was made for
    */
   export interface Product {
     /**
@@ -2374,7 +2374,9 @@ export namespace Payment {
 }
 
 /**
- * An object representing a (sanitized) plan of an access pass.
+ * A plan for an product. Plans define the core parameters that define a checkout
+ * and payment on whop. Use plans to create different ways to price your products
+ * (Eg renewal / one_time)
  */
 export interface Plan {
   /**
@@ -2453,7 +2455,7 @@ export interface Plan {
   plan_type: PlanType;
 
   /**
-   * The access pass for the plan.
+   * The product that this plan belongs to.
    */
   product: Plan.Product | null;
 
@@ -2596,7 +2598,7 @@ export namespace Plan {
   }
 
   /**
-   * The access pass for the plan.
+   * The product that this plan belongs to.
    */
   export interface Product {
     /**
@@ -2612,12 +2614,12 @@ export namespace Plan {
 }
 
 /**
- * The type of plan that can be attached to an access pass
+ * The type of plan that can be attached to a product
  */
 export type PlanType = 'renewal' | 'one_time';
 
 /**
- * An object representing a (sanitized) access pass.
+ * Represents a product on whop. Use products to sell anything on the platform.
  */
 export interface Product {
   /**
@@ -2808,7 +2810,7 @@ export namespace Product {
 }
 
 /**
- * An object representing a (sanitized) access pass.
+ * Represents a product on whop. Use products to sell anything on the platform.
  */
 export interface ProductListItem {
   /**

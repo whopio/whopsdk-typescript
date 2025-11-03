@@ -88,7 +88,7 @@ export const tool: Tool = {
       },
       plan_type: {
         type: 'string',
-        description: 'The type of plan that can be attached to an access pass',
+        description: 'The type of plan that can be attached to a product',
         enum: ['renewal', 'one_time'],
       },
       release_method: {
