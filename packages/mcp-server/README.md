@@ -441,7 +441,7 @@ The following tools are available in this MCP server.
 
 ### Resource `ledger_accounts`:
 
-- `retrieve_ledger_accounts` (`read`): Retrieves a ledger account by ID
+- `retrieve_ledger_accounts` (`read`): Retrieves a ledger account by its ID, company ID or user ID
 
   Required permissions:
 

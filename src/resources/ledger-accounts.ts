@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class LedgerAccounts extends APIResource {
   /**
-   * Retrieves a ledger account by ID
+   * Retrieves a ledger account by its ID, company ID or user ID
    *
    * Required permissions:
    *
