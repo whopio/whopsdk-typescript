@@ -164,7 +164,7 @@ export interface PromoCode {
   one_per_customer: boolean;
 
   /**
-   * The access pass associated with the promo code.
+   * The product this promo code applies to
    */
   product: PromoCode.Product | null;
 
@@ -216,7 +216,7 @@ export namespace PromoCode {
   }
 
   /**
-   * The access pass associated with the promo code.
+   * The product this promo code applies to
    */
   export interface Product {
     /**
@@ -302,7 +302,7 @@ export interface PromoCodeListResponse {
   one_per_customer: boolean;
 
   /**
-   * The access pass associated with the promo code.
+   * The product this promo code applies to
    */
   product: PromoCodeListResponse.Product | null;
 
@@ -339,7 +339,7 @@ export interface PromoCodeListResponse {
 
 export namespace PromoCodeListResponse {
   /**
-   * The access pass associated with the promo code.
+   * The product this promo code applies to
    */
   export interface Product {
     /**

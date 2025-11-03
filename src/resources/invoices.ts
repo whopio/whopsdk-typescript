@@ -176,7 +176,7 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
-       * The type of plan that can be attached to an access pass
+       * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
 
@@ -354,7 +354,7 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
-       * The type of plan that can be attached to an access pass
+       * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
 
@@ -533,7 +533,7 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
-       * The type of plan that can be attached to an access pass
+       * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
 
@@ -695,7 +695,7 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
-       * The type of plan that can be attached to an access pass
+       * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
 
@@ -779,14 +779,14 @@ export interface InvoiceListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * Filter invoices by their collection method
+   */
+  collection_methods?: Array<Shared.CollectionMethod> | null;
+
+  /**
    * The direction of the sort.
    */
   direction?: Shared.Direction | null;
-
-  /**
-   * The filters to apply to the invoices
-   */
-  filters?: InvoiceListParams.Filters | null;
 
   /**
    * Returns the first _n_ elements from the list.
@@ -802,28 +802,16 @@ export interface InvoiceListParams extends CursorPageParams {
    * Which columns can be used to sort.
    */
   order?: 'id' | 'created_at' | 'due_date' | null;
-}
 
-export namespace InvoiceListParams {
   /**
-   * The filters to apply to the invoices
+   * Return only invoices created for these specific product ids
    */
-  export interface Filters {
-    /**
-     * The access pass IDs to filter the invoices by
-     */
-    access_pass_ids?: Array<string> | null;
+  product_ids?: Array<string> | null;
 
-    /**
-     * The collection methods to filter the invoices by
-     */
-    collection_methods?: Array<Shared.CollectionMethod> | null;
-
-    /**
-     * The statuses to filter the invoices by
-     */
-    statuses?: Array<Shared.InvoiceStatus> | null;
-  }
+  /**
+   * The statuses to filter the invoices by
+   */
+  statuses?: Array<Shared.InvoiceStatus> | null;
 }
 
 export declare namespace Invoices {

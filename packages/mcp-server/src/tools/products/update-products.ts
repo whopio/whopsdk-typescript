@@ -176,7 +176,7 @@ export const tool: Tool = {
       },
       global_affiliate_status: {
         type: 'string',
-        description: 'The different statuses of the global affiliate program for an access pass.',
+        description: 'The different statuses of the global affiliate program for a product.',
         enum: ['enabled', 'disabled'],
       },
       industry_types: {

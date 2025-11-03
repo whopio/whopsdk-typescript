@@ -298,11 +298,6 @@ export interface MembershipUpdateParams {
 
 export interface MembershipListParams extends CursorPageParams {
   /**
-   * The access pass IDs to filter the memberships by
-   */
-  access_pass_ids?: Array<string> | null;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
@@ -359,6 +354,11 @@ export interface MembershipListParams extends CursorPageParams {
    * The plan IDs to filter the memberships by
    */
   plan_ids?: Array<string> | null;
+
+  /**
+   * The product IDs to filter the memberships by
+   */
+  product_ids?: Array<string> | null;
 
   /**
    * The promo code IDs to filter the memberships by

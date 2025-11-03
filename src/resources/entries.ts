@@ -82,7 +82,7 @@ export interface EntryListResponse {
   plan: EntryListResponse.Plan | null;
 
   /**
-   * The access pass tied to this entry, if there is one.
+   * The product tied to this entry, if there is one.
    */
   product: EntryListResponse.Product | null;
 
@@ -109,7 +109,7 @@ export namespace EntryListResponse {
   }
 
   /**
-   * The access pass tied to this entry, if there is one.
+   * The product tied to this entry, if there is one.
    */
   export interface Product {
     /**

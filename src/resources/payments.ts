@@ -364,7 +364,7 @@ export interface PaymentListResponse {
   plan: PaymentListResponse.Plan | null;
 
   /**
-   * The access pass attached to this payment.
+   * The product this payment was made for
    */
   product: PaymentListResponse.Product | null;
 
@@ -535,7 +535,7 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The access pass attached to this payment.
+   * The product this payment was made for
    */
   export interface Product {
     /**

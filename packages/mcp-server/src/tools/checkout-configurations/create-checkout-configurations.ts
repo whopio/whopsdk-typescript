@@ -478,7 +478,7 @@ export const tool: Tool = {
       },
       plan_type: {
         type: 'string',
-        description: 'The type of plan that can be attached to an access pass',
+        description: 'The type of plan that can be attached to a product',
         enum: ['renewal', 'one_time'],
       },
       business_types: {
@@ -503,7 +503,7 @@ export const tool: Tool = {
       },
       global_affiliate_status: {
         type: 'string',
-        description: 'The different statuses of the global affiliate program for an access pass.',
+        description: 'The different statuses of the global affiliate program for a product.',
         enum: ['enabled', 'disabled'],
       },
       industry_types: {
