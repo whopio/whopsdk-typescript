@@ -261,6 +261,7 @@ export type PaymentMethodTypes =
   | 'splitit'
   | 'platform_balance'
   | 'apple'
+  | 'afterpay'
   | 'unknown';
 
 /**
