@@ -90,7 +90,7 @@ export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>
  */
 export interface ForumPostListResponse {
   /**
-   * The unique identifier for the entity
+   * The unique identifier of the resource.
    */
   id: string;
 
