@@ -473,6 +473,7 @@ export const tool: Tool = {
           'splitit',
           'platform_balance',
           'apple',
+          'afterpay',
           'unknown',
         ],
       },
