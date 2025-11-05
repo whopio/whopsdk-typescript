@@ -1250,7 +1250,7 @@ export namespace Forum {
  */
 export interface ForumPost {
   /**
-   * The unique identifier for the entity
+   * The unique identifier of the resource.
    */
   id: string;
 
@@ -1852,7 +1852,7 @@ export type MembershipStatus =
  */
 export interface Message {
   /**
-   * The unique identifier for the entity
+   * The unique identifier of the resource.
    */
   id: string;
 
