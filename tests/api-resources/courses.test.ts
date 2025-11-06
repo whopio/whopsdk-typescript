@@ -28,9 +28,11 @@ describe('resource courses', () => {
       title: 'title',
       certificate_after_completion_enabled: true,
       cover_image: 'cover_image',
+      order: '123.45',
       require_completing_lessons_in_order: true,
       tagline: 'tagline',
       thumbnail: { direct_upload_id: 'direct_upload_id' },
+      visibility: 'visible',
     });
   });
 
@@ -77,10 +79,12 @@ describe('resource courses', () => {
           cover_image: 'cover_image',
           description: 'description',
           language: 'en',
+          order: '123.45',
           require_completing_lessons_in_order: true,
           tagline: 'tagline',
           thumbnail: { direct_upload_id: 'direct_upload_id' },
           title: 'title',
+          visibility: 'visible',
         },
         { path: '/_stainless_unknown_path' },
       ),

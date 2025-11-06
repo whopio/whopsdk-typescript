@@ -89,6 +89,11 @@ export const tool: Tool = {
       language: {
         $ref: '#/$defs/languages',
       },
+      order: {
+        type: 'string',
+        description:
+          'The decimal order position of the course within its experience. Use fractional values (e.g., 1.5) to place between existing courses.',
+      },
       require_completing_lessons_in_order: {
         type: 'boolean',
         description:
@@ -132,6 +137,12 @@ export const tool: Tool = {
       title: {
         type: 'string',
         description: 'The title of the course',
+      },
+      visibility: {
+        type: 'string',
+        description:
+          'The available visibilities for a course. Determines how / whether a course is visible to users.',
+        enum: ['visible', 'hidden'],
       },
     },
     required: ['id'],
