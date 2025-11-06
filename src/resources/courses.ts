@@ -147,6 +147,11 @@ export interface Course {
   language: Languages;
 
   /**
+   * The order of the course within its experience
+   */
+  order: string;
+
+  /**
    * Whether the course requires students to complete the previous lesson before
    * moving on to the next one
    */
@@ -171,6 +176,12 @@ export interface Course {
    * The timestamp of when the course was last updated
    */
   updated_at: string;
+
+  /**
+   * The visibility of the course. Determines how / whether this course is visible to
+   * users.
+   */
+  visibility: 'visible' | 'hidden';
 }
 
 export namespace Course {
@@ -318,6 +329,11 @@ export interface CourseListResponse {
   language: Languages;
 
   /**
+   * The order of the course within its experience
+   */
+  order: string;
+
+  /**
    * Whether the course requires students to complete the previous lesson before
    * moving on to the next one
    */
@@ -342,6 +358,12 @@ export interface CourseListResponse {
    * The timestamp of when the course was last updated
    */
   updated_at: string;
+
+  /**
+   * The visibility of the course. Determines how / whether this course is visible to
+   * users.
+   */
+  visibility: 'visible' | 'hidden';
 }
 
 export namespace CourseListResponse {
@@ -406,6 +428,13 @@ export interface CourseCreateParams {
   cover_image?: string | null;
 
   /**
+   * The decimal order position of the course within its experience. If not provided,
+   * it will be set to the next sequential order. Use fractional values (e.g., 1.5)
+   * to place between existing courses.
+   */
+  order?: string | null;
+
+  /**
    * Whether the course requires students to complete the previous lesson before
    * moving on to the next one
    */
@@ -423,6 +452,12 @@ export interface CourseCreateParams {
     | CourseCreateParams.AttachmentInputWithDirectUploadID
     | CourseCreateParams.AttachmentInputWithID
     | null;
+
+  /**
+   * The available visibilities for a course. Determines how / whether a course is
+   * visible to users.
+   */
+  visibility?: 'visible' | 'hidden' | null;
 }
 
 export namespace CourseCreateParams {
@@ -479,6 +514,12 @@ export interface CourseUpdateParams {
   language?: Languages | null;
 
   /**
+   * The decimal order position of the course within its experience. Use fractional
+   * values (e.g., 1.5) to place between existing courses.
+   */
+  order?: string | null;
+
+  /**
    * Whether the course requires students to complete the previous lesson before
    * moving on to the next one
    */
@@ -501,6 +542,12 @@ export interface CourseUpdateParams {
    * The title of the course
    */
   title?: string | null;
+
+  /**
+   * The available visibilities for a course. Determines how / whether a course is
+   * visible to users.
+   */
+  visibility?: 'visible' | 'hidden' | null;
 }
 
 export namespace CourseUpdateParams {

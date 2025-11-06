@@ -166,6 +166,15 @@ export const tool: Tool = {
         type: 'integer',
         description: 'Days from course start until unlock',
       },
+      embed_id: {
+        type: 'string',
+        description: 'ID for the embed (YouTube video ID or Loom share ID)',
+      },
+      embed_type: {
+        type: 'string',
+        description: 'The type of embed for a lesson',
+        enum: ['youtube', 'loom'],
+      },
       lesson_type: {
         $ref: '#/$defs/lesson_types',
       },
@@ -207,6 +216,37 @@ export const tool: Tool = {
       mux_asset_id: {
         type: 'string',
         description: 'The ID of the Mux asset to attach to this lesson for video lessons',
+      },
+      thumbnail: {
+        anyOf: [
+          {
+            type: 'object',
+            title: 'AttachmentInputWithDirectUploadId',
+            description: 'Input for an attachment',
+            properties: {
+              direct_upload_id: {
+                type: 'string',
+                description:
+                  'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
+              },
+            },
+            required: ['direct_upload_id'],
+          },
+          {
+            type: 'object',
+            title: 'AttachmentInputWithId',
+            description: 'Input for an attachment',
+            properties: {
+              id: {
+                type: 'string',
+                description:
+                  "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
+              },
+            },
+            required: ['id'],
+          },
+        ],
+        description: 'The thumbnail for the lesson in png, jpeg, or gif format',
       },
       title: {
         type: 'string',
