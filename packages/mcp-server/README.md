@@ -982,4 +982,4 @@ The following tools are available in this MCP server.
 
 ### Resource `access_tokens`:
 
-- `create_access_tokens` (`write`): Creates an access token for a user
+- `create_access_tokens` (`write`): Creates an access token for a user to access a specific resource. These access tokens are designed to be used with Whop's embedded components.
