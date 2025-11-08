@@ -171,9 +171,7 @@ export const tool: Tool = {
         description: 'ID for the embed (YouTube video ID or Loom share ID)',
       },
       embed_type: {
-        type: 'string',
-        description: 'The type of embed for a lesson',
-        enum: ['youtube', 'loom'],
+        $ref: '#/$defs/embed_type',
       },
       lesson_type: {
         $ref: '#/$defs/lesson_types',
@@ -262,6 +260,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The available types for an assessment question',
         enum: ['short_answer', 'true_false', 'multiple_choice', 'multiple_select'],
+      },
+      embed_type: {
+        type: 'string',
+        description: 'The type of embed for a lesson',
+        enum: ['youtube', 'loom'],
       },
       lesson_types: {
         type: 'string',

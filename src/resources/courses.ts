@@ -181,7 +181,7 @@ export interface Course {
    * The visibility of the course. Determines how / whether this course is visible to
    * users.
    */
-  visibility: 'visible' | 'hidden';
+  visibility: CourseVisibilities;
 }
 
 export namespace Course {
@@ -269,6 +269,12 @@ export namespace Course {
     source_url: string | null;
   }
 }
+
+/**
+ * The available visibilities for a course. Determines how / whether a course is
+ * visible to users.
+ */
+export type CourseVisibilities = 'visible' | 'hidden';
 
 /**
  * The available languages for a course
@@ -363,7 +369,7 @@ export interface CourseListResponse {
    * The visibility of the course. Determines how / whether this course is visible to
    * users.
    */
-  visibility: 'visible' | 'hidden';
+  visibility: CourseVisibilities;
 }
 
 export namespace CourseListResponse {
@@ -457,7 +463,7 @@ export interface CourseCreateParams {
    * The available visibilities for a course. Determines how / whether a course is
    * visible to users.
    */
-  visibility?: 'visible' | 'hidden' | null;
+  visibility?: CourseVisibilities | null;
 }
 
 export namespace CourseCreateParams {
@@ -547,7 +553,7 @@ export interface CourseUpdateParams {
    * The available visibilities for a course. Determines how / whether a course is
    * visible to users.
    */
-  visibility?: 'visible' | 'hidden' | null;
+  visibility?: CourseVisibilities | null;
 }
 
 export namespace CourseUpdateParams {
@@ -658,6 +664,7 @@ export interface CourseListParams extends CursorPageParams {
 export declare namespace Courses {
   export {
     type Course as Course,
+    type CourseVisibilities as CourseVisibilities,
     type Languages as Languages,
     type CourseListResponse as CourseListResponse,
     type CourseDeleteResponse as CourseDeleteResponse,
