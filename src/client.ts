@@ -19,6 +19,7 @@ import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
+import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import {
   AppBuildCreateParams,
   AppBuildListParams,
@@ -85,6 +86,7 @@ import {
   CourseLessonListResponsesCursorPage,
   CourseLessonUpdateParams,
   CourseLessons,
+  EmbedType,
   Lesson,
   LessonTypes,
   LessonVisibilities,
@@ -104,6 +106,7 @@ import {
   CourseListResponse,
   CourseListResponsesCursorPage,
   CourseUpdateParams,
+  CourseVisibilities,
   Courses,
   Languages,
 } from './resources/courses';
@@ -1026,6 +1029,7 @@ export class Whop {
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
   reviews: API.Reviews = new API.Reviews(this);
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
+  accessTokens: API.AccessTokens = new API.AccessTokens(this);
 }
 
 Whop.Apps = Apps;
@@ -1059,6 +1063,7 @@ Whop.CourseChapters = CourseChapters;
 Whop.CourseLessons = CourseLessons;
 Whop.Reviews = Reviews;
 Whop.CourseStudents = CourseStudents;
+Whop.AccessTokens = AccessTokens;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1299,6 +1304,7 @@ export declare namespace Whop {
   export {
     Courses as Courses,
     type Course as Course,
+    type CourseVisibilities as CourseVisibilities,
     type Languages as Languages,
     type CourseListResponse as CourseListResponse,
     type CourseDeleteResponse as CourseDeleteResponse,
@@ -1322,6 +1328,7 @@ export declare namespace Whop {
   export {
     CourseLessons as CourseLessons,
     type AssessmentQuestionTypes as AssessmentQuestionTypes,
+    type EmbedType as EmbedType,
     type Lesson as Lesson,
     type LessonTypes as LessonTypes,
     type LessonVisibilities as LessonVisibilities,
@@ -1348,6 +1355,12 @@ export declare namespace Whop {
     type CourseStudentListResponse as CourseStudentListResponse,
     type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
     type CourseStudentListParams as CourseStudentListParams,
+  };
+
+  export {
+    AccessTokens as AccessTokens,
+    type AccessTokenCreateResponse as AccessTokenCreateResponse,
+    type AccessTokenCreateParams as AccessTokenCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;

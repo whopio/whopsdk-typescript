@@ -53,9 +53,9 @@ export interface MemberRetrieveResponse {
 
   /**
    * The access level of the product member. If its admin, the member is an
-   * authorized user of the access pass. If its customer, the member has a valid
-   * membership to the access pass. If its no_access, the member does not have access
-   * to the access pass.
+   * authorized user of the company. If its customer, the member has a valid
+   * membership to any product on the company. If its no_access, the member does not
+   * have access to the product.
    */
   access_level: Shared.AccessLevel;
 
@@ -170,9 +170,9 @@ export interface MemberListResponse {
 
   /**
    * The access level of the product member. If its admin, the member is an
-   * authorized user of the access pass. If its customer, the member has a valid
-   * membership to the access pass. If its no_access, the member does not have access
-   * to the access pass.
+   * authorized user of the company. If its customer, the member has a valid
+   * membership to any product on the company. If its no_access, the member does not
+   * have access to the product.
    */
   access_level: Shared.AccessLevel;
 
@@ -256,14 +256,9 @@ export interface MemberListParams extends CursorPageParams {
   company_id: string;
 
   /**
-   * The access level a given user (or company) has to an access pass or company.
+   * The access level a given user (or company) has to a product or company.
    */
   access_level?: Shared.AccessLevel | null;
-
-  /**
-   * The access pass IDs to filter the members by
-   */
-  access_pass_ids?: Array<string> | null;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -309,6 +304,11 @@ export interface MemberListParams extends CursorPageParams {
    * The plan IDs to filter the members by
    */
   plan_ids?: Array<string> | null;
+
+  /**
+   * The product IDs to filter the members by
+   */
+  product_ids?: Array<string> | null;
 
   /**
    * The promo code IDs to filter the members by

@@ -63,7 +63,7 @@ export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>;
  */
 export interface MessageListResponse {
   /**
-   * The unique identifier for the entity
+   * The unique identifier of the resource.
    */
   id: string;
 

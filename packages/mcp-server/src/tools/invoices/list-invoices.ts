@@ -34,37 +34,15 @@ export const tool: Tool = {
         type: 'string',
         description: 'Returns the elements in the list that come before the specified cursor.',
       },
+      collection_methods: {
+        type: 'array',
+        description: 'Filter invoices by their collection method',
+        items: {
+          $ref: '#/$defs/collection_method',
+        },
+      },
       direction: {
         $ref: '#/$defs/direction',
-      },
-      filters: {
-        type: 'object',
-        description: 'The filters to apply to the invoices',
-        properties: {
-          access_pass_ids: {
-            type: 'array',
-            description: 'The access pass IDs to filter the invoices by',
-            items: {
-              type: 'string',
-              description:
-                'Represents a unique identifier that is Base64 obfuscated. It is often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`) input value will be accepted as an ID.',
-            },
-          },
-          collection_methods: {
-            type: 'array',
-            description: 'The collection methods to filter the invoices by',
-            items: {
-              $ref: '#/$defs/collection_method',
-            },
-          },
-          statuses: {
-            type: 'array',
-            description: 'The statuses to filter the invoices by',
-            items: {
-              $ref: '#/$defs/invoice_status',
-            },
-          },
-        },
       },
       first: {
         type: 'integer',
@@ -79,6 +57,22 @@ export const tool: Tool = {
         description: 'Which columns can be used to sort.',
         enum: ['id', 'created_at', 'due_date'],
       },
+      product_ids: {
+        type: 'array',
+        description: 'Return only invoices created for these specific product ids',
+        items: {
+          type: 'string',
+          description:
+            'Represents a unique identifier that is Base64 obfuscated. It is often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`) input value will be accepted as an ID.',
+        },
+      },
+      statuses: {
+        type: 'array',
+        description: 'The statuses to filter the invoices by',
+        items: {
+          $ref: '#/$defs/invoice_status',
+        },
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
@@ -88,15 +82,15 @@ export const tool: Tool = {
     },
     required: ['company_id'],
     $defs: {
-      direction: {
-        type: 'string',
-        description: 'The direction of the sort.',
-        enum: ['asc', 'desc'],
-      },
       collection_method: {
         type: 'string',
         description: 'The method of collection for an invoice.',
         enum: ['send_invoice', 'charge_automatically'],
+      },
+      direction: {
+        type: 'string',
+        description: 'The direction of the sort.',
+        enum: ['asc', 'desc'],
       },
       invoice_status: {
         type: 'string',

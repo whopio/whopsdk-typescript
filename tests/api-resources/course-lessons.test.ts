@@ -31,6 +31,9 @@ describe('resource courseLessons', () => {
       lesson_type: 'text',
       content: 'content',
       days_from_course_start_until_unlock: 42,
+      embed_id: 'embed_id',
+      embed_type: 'youtube',
+      thumbnail: { direct_upload_id: 'direct_upload_id' },
       title: 'title',
     });
   });
@@ -80,10 +83,13 @@ describe('resource courseLessons', () => {
           attachments: [{ direct_upload_id: 'direct_upload_id' }],
           content: 'content',
           days_from_course_start_until_unlock: 42,
+          embed_id: 'embed_id',
+          embed_type: 'youtube',
           lesson_type: 'text',
           main_pdf: { direct_upload_id: 'direct_upload_id' },
           max_attempts: 42,
           mux_asset_id: 'mux_xxxxxxxxxxxxxx',
+          thumbnail: { direct_upload_id: 'direct_upload_id' },
           title: 'title',
           visibility: 'visible',
         },

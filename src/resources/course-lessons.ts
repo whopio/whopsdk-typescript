@@ -119,6 +119,11 @@ export type CourseLessonListResponsesCursorPage = CursorPage<CourseLessonListRes
 export type AssessmentQuestionTypes = 'short_answer' | 'true_false' | 'multiple_choice' | 'multiple_select';
 
 /**
+ * The type of embed for a lesson
+ */
+export type EmbedType = 'youtube' | 'loom';
+
+/**
  * A lesson from the courses app
  */
 export interface Lesson {
@@ -148,6 +153,16 @@ export interface Lesson {
   days_from_course_start_until_unlock: number | null;
 
   /**
+   * ID for the embed (YouTube video ID or Loom share ID)
+   */
+  embed_id: string | null;
+
+  /**
+   * The type of embed for a lesson
+   */
+  embed_type: EmbedType | null;
+
+  /**
    * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
    */
   lesson_type: LessonTypes;
@@ -161,6 +176,11 @@ export interface Lesson {
    * The order of the lesson within its chapter
    */
   order: number;
+
+  /**
+   * The thumbnail for the lesson
+   */
+  thumbnail: Lesson.Thumbnail | null;
 
   /**
    * The title of the lesson
@@ -333,6 +353,17 @@ export namespace Lesson {
   }
 
   /**
+   * The thumbnail for the lesson
+   */
+  export interface Thumbnail {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
+
+  /**
    * The associated Mux asset for video lessons
    */
   export interface VideoAsset {
@@ -384,6 +415,16 @@ export interface CourseLessonListResponse {
   days_from_course_start_until_unlock: number | null;
 
   /**
+   * ID for the embed (YouTube video ID or Loom share ID)
+   */
+  embed_id: string | null;
+
+  /**
+   * The type of embed for a lesson
+   */
+  embed_type: EmbedType | null;
+
+  /**
    * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
    */
   lesson_type: LessonTypes;
@@ -392,6 +433,11 @@ export interface CourseLessonListResponse {
    * The order of the lesson within its chapter
    */
   order: number;
+
+  /**
+   * The thumbnail for the lesson
+   */
+  thumbnail: CourseLessonListResponse.Thumbnail | null;
 
   /**
    * The title of the lesson
@@ -403,6 +449,19 @@ export interface CourseLessonListResponse {
    * users.
    */
   visibility: LessonVisibilities;
+}
+
+export namespace CourseLessonListResponse {
+  /**
+   * The thumbnail for the lesson
+   */
+  export interface Thumbnail {
+    /**
+     * This is the URL you use to render optimized attachments on the client. This
+     * should be used for apps.
+     */
+    url: string | null;
+  }
 }
 
 /**
@@ -432,9 +491,53 @@ export interface CourseLessonCreateParams {
   days_from_course_start_until_unlock?: number | null;
 
   /**
+   * ID for the embed (YouTube video ID or Loom share ID)
+   */
+  embed_id?: string | null;
+
+  /**
+   * The type of embed for a lesson
+   */
+  embed_type?: EmbedType | null;
+
+  /**
+   * The thumbnail for the lesson in png, jpeg, or gif format
+   */
+  thumbnail?:
+    | CourseLessonCreateParams.AttachmentInputWithDirectUploadID
+    | CourseLessonCreateParams.AttachmentInputWithID
+    | null;
+
+  /**
    * The title of the lesson
    */
   title?: string | null;
+}
+
+export namespace CourseLessonCreateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithDirectUploadID {
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
+  }
 }
 
 export interface CourseLessonUpdateParams {
@@ -469,6 +572,16 @@ export interface CourseLessonUpdateParams {
   days_from_course_start_until_unlock?: number | null;
 
   /**
+   * ID for the embed (YouTube video ID or Loom share ID)
+   */
+  embed_id?: string | null;
+
+  /**
+   * The type of embed for a lesson
+   */
+  embed_type?: EmbedType | null;
+
+  /**
    * The available types for a lesson
    */
   lesson_type?: LessonTypes | null;
@@ -490,6 +603,14 @@ export interface CourseLessonUpdateParams {
    * The ID of the Mux asset to attach to this lesson for video lessons
    */
   mux_asset_id?: string | null;
+
+  /**
+   * The thumbnail for the lesson in png, jpeg, or gif format
+   */
+  thumbnail?:
+    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
+    | CourseLessonUpdateParams.AttachmentInputWithID
+    | null;
 
   /**
    * The title of the lesson
@@ -654,6 +775,30 @@ export namespace CourseLessonUpdateParams {
      */
     id: string;
   }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithDirectUploadID {
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
+  }
 }
 
 export interface CourseLessonListParams extends CursorPageParams {
@@ -686,6 +831,7 @@ export interface CourseLessonListParams extends CursorPageParams {
 export declare namespace CourseLessons {
   export {
     type AssessmentQuestionTypes as AssessmentQuestionTypes,
+    type EmbedType as EmbedType,
     type Lesson as Lesson,
     type LessonTypes as LessonTypes,
     type LessonVisibilities as LessonVisibilities,

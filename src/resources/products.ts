@@ -172,7 +172,7 @@ export interface ProductCreateParams {
   global_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The different statuses of the global affiliate program for a product.
    */
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
@@ -192,7 +192,7 @@ export interface ProductCreateParams {
   member_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The different statuses of the global affiliate program for a product.
    */
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
@@ -253,7 +253,7 @@ export namespace ProductCreateParams {
     initial_price?: number | null;
 
     /**
-     * The type of plan that can be attached to an access pass
+     * The type of plan that can be attached to a product
      */
     plan_type?: Shared.PlanType | null;
 
@@ -376,7 +376,7 @@ export interface ProductUpdateParams {
   global_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The different statuses of the global affiliate program for a product.
    */
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
@@ -396,7 +396,7 @@ export interface ProductUpdateParams {
   member_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for an access pass.
+   * The different statuses of the global affiliate program for a product.
    */
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 

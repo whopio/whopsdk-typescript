@@ -416,6 +416,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/courses.ts">Course</a></code>
+- <code><a href="./src/resources/courses.ts">CourseVisibilities</a></code>
 - <code><a href="./src/resources/courses.ts">Languages</a></code>
 - <code><a href="./src/resources/courses.ts">CourseListResponse</a></code>
 - <code><a href="./src/resources/courses.ts">CourseDeleteResponse</a></code>
@@ -449,6 +450,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/course-lessons.ts">AssessmentQuestionTypes</a></code>
+- <code><a href="./src/resources/course-lessons.ts">EmbedType</a></code>
 - <code><a href="./src/resources/course-lessons.ts">Lesson</a></code>
 - <code><a href="./src/resources/course-lessons.ts">LessonTypes</a></code>
 - <code><a href="./src/resources/course-lessons.ts">LessonVisibilities</a></code>
@@ -487,3 +489,13 @@ Methods:
 
 - <code title="get /course_students/{id}">client.courseStudents.<a href="./src/resources/course-students.ts">retrieve</a>(id) -> CourseStudentRetrieveResponse</code>
 - <code title="get /course_students">client.courseStudents.<a href="./src/resources/course-students.ts">list</a>({ ...params }) -> CourseStudentListResponsesCursorPage</code>
+
+# AccessTokens
+
+Types:
+
+- <code><a href="./src/resources/access-tokens.ts">AccessTokenCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /access_tokens">client.accessTokens.<a href="./src/resources/access-tokens.ts">create</a>({ ...params }) -> AccessTokenCreateResponse</code>

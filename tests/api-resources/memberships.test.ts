@@ -63,7 +63,6 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.list(
         {
-          access_pass_ids: ['string'],
           after: 'after',
           before: 'before',
           cancel_options: ['too_expensive'],
@@ -75,6 +74,7 @@ describe('resource memberships', () => {
           last: 42,
           order: 'id',
           plan_ids: ['string'],
+          product_ids: ['string'],
           promo_code_ids: ['string'],
           statuses: ['trialing'],
           user_ids: ['string'],

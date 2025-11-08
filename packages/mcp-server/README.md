@@ -38,12 +38,36 @@ For clients with a configuration JSON, it might look something like this:
 }
 ```
 
+### Cursor
+
+If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
+in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
+
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=@whop/mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiU2V0IHlvdXIgV0hPUF9BUElfS0VZIGhlcmUuIiwiV0hPUF9XRUJIT09LX1NFQ1JFVCI6IlNldCB5b3VyIFdIT1BfV0VCSE9PS19TRUNSRVQgaGVyZS4iLCJXSE9QX0FQUF9JRCI6IlNldCB5b3VyIFdIT1BfQVBQX0lEIGhlcmUuIn19)
+
+### VS Code
+
+If you use MCP, you can install the MCP server by clicking the link below. You will need to set your environment variables
+in VS Code's `mcp.json`, which can be found via Command Palette > MCP: Open User Configuration.
+
+[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22Set%20your%20WHOP_API_KEY%20here.%22%2C%22WHOP_WEBHOOK_SECRET%22%3A%22Set%20your%20WHOP_WEBHOOK_SECRET%20here.%22%2C%22WHOP_APP_ID%22%3A%22Set%20your%20WHOP_APP_ID%20here.%22%7D%7D)
+
+### Claude Code
+
+If you use Claude Code, you can install the MCP server by running the command below in your terminal. You will need to set your
+environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
+
+```
+claude mcp add --transport stdio whop_sdk_api --env WHOP_API_KEY="Your WHOP_API_KEY here." WHOP_WEBHOOK_SECRET="Your WHOP_WEBHOOK_SECRET here." WHOP_APP_ID="Your WHOP_APP_ID here." -- npx -y @whop/mcp
+```
+
 ## Exposing endpoints to your MCP Client
 
-There are two ways to expose endpoints as tools in the MCP server:
+There are three ways to expose endpoints as tools in the MCP server:
 
 1. Exposing one tool per endpoint, and filtering as necessary
 2. Exposing a set of tools to dynamically discover and invoke endpoints from the API
+3. Exposing a docs search tool and a code execution tool, allowing the client to write code to be executed against the TypeScript client
 
 ### Filtering endpoints and tools
 
@@ -77,6 +101,18 @@ See more information with `--help`.
 All of these command-line options can be repeated, combined together, and have corresponding exclusion versions (e.g. `--no-tool`).
 
 Use `--list` to see the list of available tools, or see below.
+
+### Code execution
+
+If you specify `--tools=code` to the MCP server, it will expose just two tools:
+
+- `search_docs` - Searches the API documentation and returns a list of markdown results
+- `execute` - Runs code against the TypeScript client
+
+This allows the LLM to implement more complex logic by chaining together many API calls without loading
+intermediary results into its context window.
+
+The code execution itself happens in a Deno sandbox that has network access only to the base URL for the API.
 
 ### Specifying the MCP Client
 
@@ -441,7 +477,7 @@ The following tools are available in this MCP server.
 
 ### Resource `ledger_accounts`:
 
-- `retrieve_ledger_accounts` (`read`): Retrieves a ledger account by ID
+- `retrieve_ledger_accounts` (`read`): Retrieves a ledger account by its ID, company ID or user ID
 
   Required permissions:
 
@@ -943,3 +979,7 @@ The following tools are available in this MCP server.
 
   - `courses:read`
   - `course_analytics:read`
+
+### Resource `access_tokens`:
+
+- `create_access_tokens` (`write`): Creates an access token for a user to access a specific resource. These access tokens are designed to be used with Whop's embedded components.

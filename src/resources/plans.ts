@@ -118,7 +118,9 @@ export class Plans extends APIResource {
 export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
 
 /**
- * An object representing a (sanitized) plan of an access pass.
+ * A plan for an product. Plans define the core parameters that define a checkout
+ * and payment on whop. Use plans to create different ways to price your products
+ * (Eg renewal / one_time)
  */
 export interface PlanListResponse {
   /**
@@ -187,7 +189,7 @@ export interface PlanListResponse {
   plan_type: Shared.PlanType;
 
   /**
-   * The access pass for the plan.
+   * The product that this plan belongs to.
    */
   product: PlanListResponse.Product | null;
 
@@ -290,7 +292,7 @@ export namespace PlanListResponse {
   }
 
   /**
-   * The access pass for the plan.
+   * The product that this plan belongs to.
    */
   export interface Product {
     /**
@@ -376,7 +378,7 @@ export interface PlanCreateParams {
   payment_method_configuration?: PlanCreateParams.PaymentMethodConfiguration | null;
 
   /**
-   * The type of plan that can be attached to an access pass
+   * The type of plan that can be attached to a product
    */
   plan_type?: Shared.PlanType | null;
 

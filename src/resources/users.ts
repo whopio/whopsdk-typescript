@@ -91,6 +91,9 @@ export interface UserCheckAccessResponse {
 }
 
 export interface UserCheckAccessParams {
+  /**
+   * The ID (user_xxx) or username of the user
+   */
   id: string;
 }
 
