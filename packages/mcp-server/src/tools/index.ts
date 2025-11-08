@@ -113,6 +113,7 @@ import retrieve_reviews from './reviews/retrieve-reviews';
 import list_reviews from './reviews/list-reviews';
 import retrieve_course_students from './course-students/retrieve-course-students';
 import list_course_students from './course-students/list-course-students';
+import create_access_tokens from './access-tokens/create-access-tokens';
 
 export const endpoints: Endpoint[] = [];
 
@@ -229,6 +230,7 @@ addEndpoint(retrieve_reviews);
 addEndpoint(list_reviews);
 addEndpoint(retrieve_course_students);
 addEndpoint(list_course_students);
+addEndpoint(create_access_tokens);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

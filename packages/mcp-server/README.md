@@ -979,3 +979,7 @@ The following tools are available in this MCP server.
 
   - `courses:read`
   - `course_analytics:read`
+
+### Resource `access_tokens`:
+
+- `create_access_tokens` (`write`): Creates an access token for a user

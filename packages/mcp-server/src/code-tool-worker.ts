@@ -152,6 +152,7 @@ const fuse = new Fuse(
     'client.reviews.retrieve',
     'client.courseStudents.list',
     'client.courseStudents.retrieve',
+    'client.accessTokens.create',
   ],
   { threshold: 1, shouldSort: true },
 );

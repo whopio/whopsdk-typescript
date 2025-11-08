@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
+export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export {
   AppBuilds,
   type AppBuildListResponse,
@@ -61,6 +62,7 @@ export {
 export {
   CourseLessons,
   type AssessmentQuestionTypes,
+  type EmbedType,
   type Lesson,
   type LessonTypes,
   type LessonVisibilities,
@@ -81,6 +83,7 @@ export {
 export {
   Courses,
   type Course,
+  type CourseVisibilities,
   type Languages,
   type CourseListResponse,
   type CourseDeleteResponse,

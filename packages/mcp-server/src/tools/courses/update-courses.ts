@@ -139,10 +139,7 @@ export const tool: Tool = {
         description: 'The title of the course',
       },
       visibility: {
-        type: 'string',
-        description:
-          'The available visibilities for a course. Determines how / whether a course is visible to users.',
-        enum: ['visible', 'hidden'],
+        $ref: '#/$defs/course_visibilities',
       },
     },
     required: ['id'],
@@ -174,6 +171,12 @@ export const tool: Tool = {
           'ro',
           'bg',
         ],
+      },
+      course_visibilities: {
+        type: 'string',
+        description:
+          'The available visibilities for a course. Determines how / whether a course is visible to users.',
+        enum: ['visible', 'hidden'],
       },
     },
   },

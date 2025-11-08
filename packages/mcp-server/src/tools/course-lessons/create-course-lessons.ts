@@ -40,9 +40,7 @@ export const tool: Tool = {
         description: 'ID for the embed (YouTube video ID or Loom share ID)',
       },
       embed_type: {
-        type: 'string',
-        description: 'The type of embed for a lesson',
-        enum: ['youtube', 'loom'],
+        $ref: '#/$defs/embed_type',
       },
       thumbnail: {
         anyOf: [
@@ -86,6 +84,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The available types for a lesson',
         enum: ['text', 'video', 'pdf', 'multi', 'quiz', 'knowledge_check'],
+      },
+      embed_type: {
+        type: 'string',
+        description: 'The type of embed for a lesson',
+        enum: ['youtube', 'loom'],
       },
     },
   },

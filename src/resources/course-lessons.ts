@@ -119,6 +119,11 @@ export type CourseLessonListResponsesCursorPage = CursorPage<CourseLessonListRes
 export type AssessmentQuestionTypes = 'short_answer' | 'true_false' | 'multiple_choice' | 'multiple_select';
 
 /**
+ * The type of embed for a lesson
+ */
+export type EmbedType = 'youtube' | 'loom';
+
+/**
  * A lesson from the courses app
  */
 export interface Lesson {
@@ -155,7 +160,7 @@ export interface Lesson {
   /**
    * The type of embed for a lesson
    */
-  embed_type: 'youtube' | 'loom' | null;
+  embed_type: EmbedType | null;
 
   /**
    * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
@@ -417,7 +422,7 @@ export interface CourseLessonListResponse {
   /**
    * The type of embed for a lesson
    */
-  embed_type: 'youtube' | 'loom' | null;
+  embed_type: EmbedType | null;
 
   /**
    * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
@@ -493,7 +498,7 @@ export interface CourseLessonCreateParams {
   /**
    * The type of embed for a lesson
    */
-  embed_type?: 'youtube' | 'loom' | null;
+  embed_type?: EmbedType | null;
 
   /**
    * The thumbnail for the lesson in png, jpeg, or gif format
@@ -574,7 +579,7 @@ export interface CourseLessonUpdateParams {
   /**
    * The type of embed for a lesson
    */
-  embed_type?: 'youtube' | 'loom' | null;
+  embed_type?: EmbedType | null;
 
   /**
    * The available types for a lesson
@@ -826,6 +831,7 @@ export interface CourseLessonListParams extends CursorPageParams {
 export declare namespace CourseLessons {
   export {
     type AssessmentQuestionTypes as AssessmentQuestionTypes,
+    type EmbedType as EmbedType,
     type Lesson as Lesson,
     type LessonTypes as LessonTypes,
     type LessonVisibilities as LessonVisibilities,
