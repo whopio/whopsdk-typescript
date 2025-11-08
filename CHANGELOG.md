@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.0.5 (2025-11-08)
+
+Full Changelog: [v0.0.4...v0.0.5](https://github.com/whopio/whopsdk-typescript/compare/v0.0.4...v0.0.5)
+
+### Features
+
+* **api:** api update ([4eba714](https://github.com/whopio/whopsdk-typescript/commit/4eba714abc082988477dfb1e18e89f8346dceee0))
+* **api:** api update ([ee599f8](https://github.com/whopio/whopsdk-typescript/commit/ee599f86042eb2513ce5ec35ea0ae1e7ddef7580))
+* **api:** api update ([9a1fae3](https://github.com/whopio/whopsdk-typescript/commit/9a1fae3c9a55c5a7739865310c7040910dd7cd2d))
+* **api:** api update ([da05714](https://github.com/whopio/whopsdk-typescript/commit/da057147644cbb894b4f6b1f86e6b39f733a9cb1))
+* **api:** api update ([75b0cf4](https://github.com/whopio/whopsdk-typescript/commit/75b0cf4c9d157e5304a359391959671fe8f72320))
+* **api:** api update ([9f37896](https://github.com/whopio/whopsdk-typescript/commit/9f37896d81bc38c068659dbee27654b1eca9ec3c))
+* **api:** api update ([79fe7fa](https://github.com/whopio/whopsdk-typescript/commit/79fe7fa39053ce924b0bfc7cffe011dd00cef085))
+* **api:** manual updates ([5e92760](https://github.com/whopio/whopsdk-typescript/commit/5e927609f3648ca7e5c5a91bea0e1077a0c99e14))
+* **mcp:** enable optional code execution tool on http mcp servers ([ad07153](https://github.com/whopio/whopsdk-typescript/commit/ad071539844126cc60bb7b3438f084c1f1a257af))
+
+
+### Chores
+
+* **internal:** codegen related update ([c98c14e](https://github.com/whopio/whopsdk-typescript/commit/c98c14e2af58af8b9e30600822c28fadb0c2fe73))
+* **internal:** grammar fix (it's -&gt; its) ([5ccb0ca](https://github.com/whopio/whopsdk-typescript/commit/5ccb0ca97bef732696c70e211471a3c32c18f05b))
+* mcp code tool explicit error message when missing a run function ([54ea119](https://github.com/whopio/whopsdk-typescript/commit/54ea1193f632ebb82ffe29b85d678947d3a9512f))
+* **mcp:** add friendlier MCP code tool errors on incorrect method invocations ([6ec0258](https://github.com/whopio/whopsdk-typescript/commit/6ec0258d7f10c70cf86202098b2d74bbe90a3a7f))
+* **mcp:** add line numbers to code tool errors ([832f040](https://github.com/whopio/whopsdk-typescript/commit/832f040bbab3f1ff752b4098391751d6e4287486))
+* use structured error when code execution tool errors ([d9e03fa](https://github.com/whopio/whopsdk-typescript/commit/d9e03fabe6e473f26379891d03b3ec60274a4da7))
+
+
+### Documentation
+
+* **mcp:** add a README button for one-click add to Cursor ([8e9eb08](https://github.com/whopio/whopsdk-typescript/commit/8e9eb088b60e29cc553c126991448518c3a344c7))
+* **mcp:** add a README link to add server to VS Code or Claude Code ([2a513d4](https://github.com/whopio/whopsdk-typescript/commit/2a513d415b0af872d6676aa0daee726aafb7170c))
+
 ## 0.0.4 (2025-11-02)
 
 Full Changelog: [v0.0.3...v0.0.4](https://github.com/whopio/whopsdk-typescript/compare/v0.0.3...v0.0.4)
