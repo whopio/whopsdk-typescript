@@ -18,13 +18,14 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_access_tokens',
   description:
-    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates an access token for a user\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/access_token_create_response',\n  $defs: {\n    access_token_create_response: {\n      type: 'object',\n      description: 'An object representing an access token used for authenticating API requests.',\n      properties: {\n        token: {\n          type: 'string',\n          description: 'The JWT access token string.'\n        },\n        expires_at: {\n          type: 'string',\n          description: 'The expiration timestamp of the access token.',\n          format: 'date-time'\n        }\n      },\n      required: [        'token',\n        'expires_at'\n      ]\n    }\n  }\n}\n```",
+    "When using this tool, always use the `jq_filter` parameter to reduce the response size and improve performance.\n\nOnly omit if you're sure you don't need the data.\n\nCreates an access token for a user to access a specific resource. These access tokens are designed to be used with Whop's embedded components.\n\n# Response Schema\n```json\n{\n  $ref: '#/$defs/access_token_create_response',\n  $defs: {\n    access_token_create_response: {\n      type: 'object',\n      description: 'An object representing an access token used for authenticating API requests.',\n      properties: {\n        token: {\n          type: 'string',\n          description: 'The JWT access token string.'\n        },\n        expires_at: {\n          type: 'string',\n          description: 'The expiration timestamp of the access token.',\n          format: 'date-time'\n        }\n      },\n      required: [        'token',\n        'expires_at'\n      ]\n    }\n  }\n}\n```",
   inputSchema: {
     type: 'object',
     properties: {
       scoped_actions: {
         type: 'array',
-        description: 'Array of desired scoped actions for the access token.',
+        description:
+          "Array of desired scoped actions for the access token. This list must be a subset of the API keys's existing permissions. Otherwise, an error will be raised.",
         items: {
           type: 'string',
           description:
@@ -34,17 +35,17 @@ export const tool: Tool = {
       target_resource_id: {
         type: 'string',
         description:
-          'The ID of the target resource (Company or User) for which the access token is being created.',
+          'The ID of the target resource (Company, User, etc.) for which the access token is being created.',
       },
       target_resource_type: {
         type: 'string',
-        description: 'The type of the target resource (Company or User).',
+        description: 'The type of the target resource (company, user, product, experience, etc.).',
         enum: ['company', 'product', 'experience', 'app', 'user'],
       },
       expires_at: {
         type: 'string',
         description:
-          'The expiration timestamp for the access token. If not provided, a default expiration time will be used.',
+          'The expiration timestamp for the access token. If not provided, a default expiration time of 1 hour will be used. The expiration can be set to a maximum of 3 hours from the current time.',
         format: 'date-time',
       },
       jq_filter: {
