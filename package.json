@@ -1,6 +1,6 @@
 {
   "name": "@whop/sdk",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "The official TypeScript library for the Whop API",
   "author": "Whop <>",
   "types": "dist/index.d.ts",
