@@ -158,6 +158,11 @@ export {
   type MessageListResponsesCursorPage,
 } from './messages';
 export {
+  Notifications,
+  type NotificationCreateResponse,
+  type NotificationCreateParams,
+} from './notifications';
+export {
   Payments,
   type BillingReasons,
   type CardBrands,

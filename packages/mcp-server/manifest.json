@@ -40,8 +40,8 @@
     },
     "WHOP_APP_ID": {
       "title": "app_id",
-      "description": "",
-      "required": true,
+      "description": "When using the SDK in app mode pass this parameter to allow verifying user tokens",
+      "required": false,
       "type": "string"
     }
   },

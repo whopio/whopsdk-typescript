@@ -7,10 +7,14 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource ledgerAccounts', () => {
+describe('resource notifications', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.ledgerAccounts.retrieve('ldgr_xxxxxxxxxxxxx');
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.notifications.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      content: 'content',
+      title: 'title',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,5 +22,18 @@ describe('resource ledgerAccounts', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.notifications.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      content: 'content',
+      title: 'title',
+      icon_user_id: 'icon_user_id',
+      rest_path: 'rest_path',
+      subtitle: 'subtitle',
+      user_ids: ['string'],
+    });
   });
 });

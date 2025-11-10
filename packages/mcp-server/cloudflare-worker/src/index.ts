@@ -37,9 +37,9 @@ const serverConfig: ServerConfig = {
     {
       key: 'appID',
       label: 'App ID',
-      description: '',
-      required: true,
-      default: undefined,
+      description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
+      required: false,
+      default: null,
       placeholder: 'app_xxxxxxxxxxxxxx',
       type: 'string',
     },

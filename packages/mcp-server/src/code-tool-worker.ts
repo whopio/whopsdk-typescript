@@ -153,6 +153,7 @@ const fuse = new Fuse(
     'client.courseStudents.list',
     'client.courseStudents.retrieve',
     'client.accessTokens.create',
+    'client.notifications.create',
   ],
   { threshold: 1, shouldSort: true },
 );
