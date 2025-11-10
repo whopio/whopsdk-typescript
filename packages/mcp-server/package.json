@@ -1,6 +1,6 @@
 {
   "name": "@whop/mcp",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "The official MCP Server for the Whop API",
   "author": "Whop <>",
   "types": "dist/index.d.ts",
