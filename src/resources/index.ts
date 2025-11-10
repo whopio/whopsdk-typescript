@@ -93,6 +93,15 @@ export {
   type CourseListResponsesCursorPage,
 } from './courses';
 export {
+  Disputes,
+  type Dispute,
+  type DisputeStatuses,
+  type DisputeListResponse,
+  type DisputeListParams,
+  type DisputeUpdateEvidenceParams,
+  type DisputeListResponsesCursorPage,
+} from './disputes';
+export {
   Entries,
   type EntryListResponse,
   type EntryApproveResponse,
