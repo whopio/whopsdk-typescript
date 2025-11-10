@@ -257,5 +257,7 @@ export {
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,
   type PaymentPendingWebhookEvent,
+  type DisputeCreatedWebhookEvent,
+  type DisputeUpdatedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
