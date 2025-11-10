@@ -256,6 +256,8 @@ import {
 } from './resources/users';
 import {
   CourseLessonInteractionCompletedWebhookEvent,
+  DisputeCreatedWebhookEvent,
+  DisputeUpdatedWebhookEvent,
   EntryApprovedWebhookEvent,
   EntryCreatedWebhookEvent,
   EntryDeletedWebhookEvent,
@@ -1123,6 +1125,8 @@ export declare namespace Whop {
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
+    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
+    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 

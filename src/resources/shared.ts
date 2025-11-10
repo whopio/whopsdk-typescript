@@ -649,7 +649,16 @@ export namespace Company {
     /**
      * The website
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
+    website:
+      | 'x'
+      | 'instagram'
+      | 'facebook'
+      | 'tiktok'
+      | 'youtube'
+      | 'linkedin'
+      | 'twitch'
+      | 'website'
+      | 'custom';
   }
 }
 
