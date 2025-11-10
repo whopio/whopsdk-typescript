@@ -171,6 +171,11 @@ import {
   Messages,
 } from './resources/messages';
 import {
+  NotificationCreateParams,
+  NotificationCreateResponse,
+  Notifications,
+} from './resources/notifications';
+import {
   BillingReasons,
   CardBrands,
   PaymentListParams,
@@ -292,9 +297,9 @@ export interface ClientOptions {
   webhookKey?: string | null | undefined;
 
   /**
-   * Defaults to process.env['WHOP_APP_ID'].
+   * When using the SDK in app mode pass this parameter to allow verifying user tokens
    */
-  appID?: string | undefined;
+  appID?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -371,7 +376,7 @@ export interface ClientOptions {
 export class Whop {
   apiKey: string;
   webhookKey: string | null;
-  appID: string;
+  appID: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -390,7 +395,7 @@ export class Whop {
    *
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
-   * @param {string | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? undefined]
+   * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -403,17 +408,12 @@ export class Whop {
     baseURL = readEnv('WHOP_BASE_URL'),
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
-    appID = readEnv('WHOP_APP_ID'),
+    appID = readEnv('WHOP_APP_ID') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.WhopError(
         "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
-      );
-    }
-    if (appID === undefined) {
-      throw new Errors.WhopError(
-        "The WHOP_APP_ID environment variable is missing or empty; either provide it, or instantiate the Whop client with an appID option, like new Whop({ appID: 'app_xxxxxxxxxxxxxx' }).",
       );
     }
 
@@ -1027,6 +1027,7 @@ export class Whop {
   reviews: API.Reviews = new API.Reviews(this);
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
+  notifications: API.Notifications = new API.Notifications(this);
 }
 
 Whop.Apps = Apps;
@@ -1061,6 +1062,7 @@ Whop.CourseLessons = CourseLessons;
 Whop.Reviews = Reviews;
 Whop.CourseStudents = CourseStudents;
 Whop.AccessTokens = AccessTokens;
+Whop.Notifications = Notifications;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1358,6 +1360,12 @@ export declare namespace Whop {
     AccessTokens as AccessTokens,
     type AccessTokenCreateResponse as AccessTokenCreateResponse,
     type AccessTokenCreateParams as AccessTokenCreateParams,
+  };
+
+  export {
+    Notifications as Notifications,
+    type NotificationCreateResponse as NotificationCreateResponse,
+    type NotificationCreateParams as NotificationCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;

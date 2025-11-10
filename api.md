@@ -499,3 +499,13 @@ Types:
 Methods:
 
 - <code title="post /access_tokens">client.accessTokens.<a href="./src/resources/access-tokens.ts">create</a>({ ...params }) -> AccessTokenCreateResponse</code>
+
+# Notifications
+
+Types:
+
+- <code><a href="./src/resources/notifications.ts">NotificationCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /notifications">client.notifications.<a href="./src/resources/notifications.ts">create</a>({ ...params }) -> NotificationCreateResponse</code>
