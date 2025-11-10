@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.0.6 (2025-11-10)
+
+Full Changelog: [v0.0.5...v0.0.6](https://github.com/whopio/whopsdk-typescript/compare/v0.0.5...v0.0.6)
+
+### Features
+
+* **api:** manual updates ([e488b28](https://github.com/whopio/whopsdk-typescript/commit/e488b28d4fac9d1e61eab21c50cf5db6999e8638))
+
+
+### Bug Fixes
+
+* **api:** allow optional app id in constructor ([#4](https://github.com/whopio/whopsdk-typescript/issues/4)) ([cd86649](https://github.com/whopio/whopsdk-typescript/commit/cd86649f640ff3aaaffb7f73acd6aeb0c2881687))
+
+
+### Chores
+
+* **internal:** codegen related update ([dcbaff2](https://github.com/whopio/whopsdk-typescript/commit/dcbaff2669848d73146731a6b9ef12fef36fb901))
+* **internal:** codegen related update ([d6ff590](https://github.com/whopio/whopsdk-typescript/commit/d6ff5906b3201f618eb5d21a7503145dc3f15e5a))
+
 ## 0.0.5 (2025-11-08)
 
 Full Changelog: [v0.0.4...v0.0.5](https://github.com/whopio/whopsdk-typescript/compare/v0.0.4...v0.0.5)
