@@ -111,6 +111,15 @@ import {
   Languages,
 } from './resources/courses';
 import {
+  Dispute,
+  DisputeListParams,
+  DisputeListResponse,
+  DisputeListResponsesCursorPage,
+  DisputeStatuses,
+  DisputeUpdateEvidenceParams,
+  Disputes,
+} from './resources/disputes';
+import {
   Entries,
   EntryApproveResponse,
   EntryListParams,
@@ -1033,6 +1042,7 @@ export class Whop {
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
   notifications: API.Notifications = new API.Notifications(this);
+  disputes: API.Disputes = new API.Disputes(this);
 }
 
 Whop.Apps = Apps;
@@ -1068,6 +1078,7 @@ Whop.Reviews = Reviews;
 Whop.CourseStudents = CourseStudents;
 Whop.AccessTokens = AccessTokens;
 Whop.Notifications = Notifications;
+Whop.Disputes = Disputes;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1373,6 +1384,16 @@ export declare namespace Whop {
     Notifications as Notifications,
     type NotificationCreateResponse as NotificationCreateResponse,
     type NotificationCreateParams as NotificationCreateParams,
+  };
+
+  export {
+    Disputes as Disputes,
+    type Dispute as Dispute,
+    type DisputeStatuses as DisputeStatuses,
+    type DisputeListResponse as DisputeListResponse,
+    type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
+    type DisputeListParams as DisputeListParams,
+    type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
   };
 
   export type AccessLevel = API.AccessLevel;

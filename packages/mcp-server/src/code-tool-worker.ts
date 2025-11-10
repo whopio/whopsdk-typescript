@@ -154,6 +154,10 @@ const fuse = new Fuse(
     'client.courseStudents.retrieve',
     'client.accessTokens.create',
     'client.notifications.create',
+    'client.disputes.list',
+    'client.disputes.retrieve',
+    'client.disputes.submitEvidence',
+    'client.disputes.updateEvidence',
   ],
   { threshold: 1, shouldSort: true },
 );
