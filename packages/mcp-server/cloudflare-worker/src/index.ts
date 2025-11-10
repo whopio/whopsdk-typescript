@@ -13,8 +13,8 @@ type MCPProps = {
  */
 const serverConfig: ServerConfig = {
   orgName: 'Whop',
-  instructionsUrl: undefined, // Set a url for where you show users how to get an API key
-  logoUrl: undefined, // Set a custom logo url to appear during the OAuth flow
+  instructionsUrl: 'https://docs.whop.com/apps/api/getting-started', // Set a url for where you show users how to get an API key
+  logoUrl: 'https://whop.com/_static/images/whop-logo-big.png', // Set a custom logo url to appear during the OAuth flow
   clientProperties: [
     {
       key: 'apiKey',
@@ -25,24 +25,24 @@ const serverConfig: ServerConfig = {
       placeholder: 'My API Key',
       type: 'password',
     },
-    {
-      key: 'webhookKey',
-      label: 'Webhook Key',
-      description: '',
-      required: false,
-      default: null,
-      placeholder: 'My Webhook Key',
-      type: 'string',
-    },
-    {
-      key: 'appID',
-      label: 'App ID',
-      description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
-      required: false,
-      default: null,
-      placeholder: 'app_xxxxxxxxxxxxxx',
-      type: 'string',
-    },
+    // {
+    //   key: 'webhookKey',
+    //   label: 'Webhook Key',
+    //   description: '',
+    //   required: false,
+    //   default: null,
+    //   placeholder: 'My Webhook Key',
+    //   type: 'string',
+    // },
+    // {
+    //   key: 'appID',
+    //   label: 'App ID',
+    //   description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
+    //   required: false,
+    //   default: null,
+    //   placeholder: 'app_xxxxxxxxxxxxxx',
+    //   type: 'string',
+    // },
   ],
 };
 
