@@ -55,13 +55,16 @@ export interface VerifyUserTokenOptions<DontThrow extends boolean = false> {
 }
 
 export function makeUserTokenVerifierFromSdk(client: Whop) {
-  const baseOptions: VerifyUserTokenOptions<false> = {
-    appId: client.appID,
-  };
   return async function verifyUserToken<DT extends boolean = false>(
     tokenOrHeadersOrRequest: string | Headers | Request | null | undefined,
     options?: Partial<VerifyUserTokenOptions<DT>>,
   ) {
+    if (!client.appID) {
+      throw Error('You must set appID in the Whop client constructor if you want to verify user tokens.');
+    }
+    const baseOptions: VerifyUserTokenOptions<false> = {
+      appId: client.appID,
+    };
     return await internalVerifyUserToken<DT>(tokenOrHeadersOrRequest, {
       ...baseOptions,
       ...options,
