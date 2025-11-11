@@ -186,6 +186,7 @@ export const tool: Tool = {
           'uzs',
           'rub',
           'btc',
+          'cny',
         ],
       },
       promo_type: {
