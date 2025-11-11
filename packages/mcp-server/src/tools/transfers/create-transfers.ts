@@ -142,6 +142,7 @@ export const tool: Tool = {
           'uzs',
           'rub',
           'btc',
+          'cny',
         ],
       },
     },

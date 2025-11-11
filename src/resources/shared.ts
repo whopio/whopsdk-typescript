@@ -920,7 +920,8 @@ export type Currency =
   | 'ttd'
   | 'uzs'
   | 'rub'
-  | 'btc';
+  | 'btc'
+  | 'cny';
 
 /**
  * The different types of custom CTAs that can be selected.
