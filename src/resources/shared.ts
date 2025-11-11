@@ -2980,7 +2980,7 @@ export interface Shipment {
   /**
    * The payment of the shipment
    */
-  payment: Shipment.Payment;
+  payment: Shipment.Payment | null;
 
   /**
    * The service of the shipment

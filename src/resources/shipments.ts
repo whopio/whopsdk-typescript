@@ -101,7 +101,7 @@ export interface ShipmentListResponse {
   /**
    * The payment of the shipment
    */
-  payment: ShipmentListResponse.Payment;
+  payment: ShipmentListResponse.Payment | null;
 
   /**
    * The service of the shipment
