@@ -40,8 +40,10 @@ export interface AccessTokenCreateResponse {
 
 export interface AccessTokenCreateParams {
   /**
-   * Array of desired scoped actions for the access token. This list must be a subset
-   * of the API keys's existing permissions. Otherwise, an error will be raised.
+   * Array of desired scoped actions for the access token. If sent as an empty array,
+   * all permissions from the API key making the request will be available on the
+   * token. If sending an explicit list, they must be a subset of the API keys's
+   * existing permissions. Otherwise, an error will be raised.
    */
   scoped_actions: Array<string>;
 
