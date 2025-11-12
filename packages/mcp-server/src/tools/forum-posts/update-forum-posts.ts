@@ -73,6 +73,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The title of the post. Only visible if paywalled.',
       },
+      visibility: {
+        type: 'string',
+        description: 'The visibility types for forum posts',
+        enum: ['members_only', 'globally_visible'],
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
