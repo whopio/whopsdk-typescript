@@ -234,6 +234,11 @@ export interface ForumPostCreateParams {
    * The title of the post. Only visible if paywalled.
    */
   title?: string | null;
+
+  /**
+   * The visibility types for forum posts
+   */
+  visibility?: 'members_only' | 'globally_visible' | null;
 }
 
 export namespace ForumPostCreateParams {
@@ -312,6 +317,11 @@ export interface ForumPostUpdateParams {
    * The title of the post. Only visible if paywalled.
    */
   title?: string | null;
+
+  /**
+   * The visibility types for forum posts
+   */
+  visibility?: 'members_only' | 'globally_visible' | null;
 }
 
 export namespace ForumPostUpdateParams {
