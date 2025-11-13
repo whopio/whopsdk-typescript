@@ -10,11 +10,7 @@ const client = new Whop({
 describe('resource accessTokens', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.accessTokens.create({
-      scoped_actions: ['string'],
-      target_resource_id: 'target_resource_id',
-      target_resource_type: 'company',
-    });
+    const responsePromise = client.accessTokens.create({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,10 +23,9 @@ describe('resource accessTokens', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.accessTokens.create({
-      scoped_actions: ['string'],
-      target_resource_id: 'target_resource_id',
-      target_resource_type: 'company',
+      company_id: 'biz_xxxxxxxxxxxxxx',
       expires_at: '2023-12-01T05:00:00.401Z',
+      scoped_actions: ['string'],
     });
   });
 });
