@@ -6516,6 +6516,8 @@ snapshots:
 
   jose@6.1.0: {}
 
+  jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.6/jq-web.tar.gz: {}
+
   jq-web@https://github.com/stainless-api/jq-web/releases/download/v0.8.8/jq-web.tar.gz: {}
 
   js-tokens@4.0.0: {}
