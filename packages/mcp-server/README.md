@@ -982,7 +982,7 @@ The following tools are available in this MCP server.
 
 ### Resource `access_tokens`:
 
-- `create_access_tokens` (`write`): Creates an access token for a user to access a specific resource. These access tokens are designed to be used with Whop's embedded components.
+- `create_access_tokens` (`write`): Create a short-lived access token to authenticate API requests on behalf of a Company or User. This token should be used with Whop's web and mobile embedded components. You must provide either a company_id or a user_id argument, but not both.
 
 ### Resource `notifications`:
 
