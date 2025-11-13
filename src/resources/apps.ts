@@ -242,6 +242,11 @@ export interface AppUpdateParams {
   app_store_description?: string | null;
 
   /**
+   * The type of end-user an app is built for
+   */
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | null;
+
+  /**
    * The base production url of the app
    */
   base_url?: string | null;
