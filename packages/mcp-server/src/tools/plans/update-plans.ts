@@ -273,6 +273,7 @@ export const tool: Tool = {
           'uzs',
           'rub',
           'btc',
+          'cny',
         ],
       },
       tax_type: {

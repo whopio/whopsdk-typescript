@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.0.7 (2025-11-13)
+
+Full Changelog: [v0.0.6...v0.0.7](https://github.com/whopio/whopsdk-typescript/compare/v0.0.6...v0.0.7)
+
+### Features
+
+* **api:** api update ([94aa6f3](https://github.com/whopio/whopsdk-typescript/commit/94aa6f39b4d4a8fc4ab1253c4deabe0b49dabbbd))
+* **api:** api update ([d80b1f9](https://github.com/whopio/whopsdk-typescript/commit/d80b1f9a8cedbba5d13be8cd962f45e47773bf48))
+* **api:** api update ([d8d5923](https://github.com/whopio/whopsdk-typescript/commit/d8d59236d5374335f89106e937a3f332ad27801d))
+* **api:** api update ([12bf700](https://github.com/whopio/whopsdk-typescript/commit/12bf700947b83354f69f6175dedd07b10d87ef40))
+* **api:** api update ([d3a79f4](https://github.com/whopio/whopsdk-typescript/commit/d3a79f4bf82bb7ae2c2cd2711898c7b2a1db7a4e))
+* **api:** api update ([36c27d1](https://github.com/whopio/whopsdk-typescript/commit/36c27d1481dedc05875b10ad4ffc22fc08de7fa1))
+* **api:** api update ([b3943f8](https://github.com/whopio/whopsdk-typescript/commit/b3943f86a92770c4ceeff912bb4ae439e7c59c59))
+* **api:** manual updates ([d8da3ce](https://github.com/whopio/whopsdk-typescript/commit/d8da3ce03dae7f1cd4ebf381af21d62b7b5a3075))
+
+
+### Bug Fixes
+
+* lockfile ([6ef4e8f](https://github.com/whopio/whopsdk-typescript/commit/6ef4e8fc649a27be8b327923798562e0bdbcc875))
+* **mcp:** fix cloudflare mcp server ([#5](https://github.com/whopio/whopsdk-typescript/issues/5)) ([1d679f1](https://github.com/whopio/whopsdk-typescript/commit/1d679f1247247d1d3b2c773b3d349b8ce0b413a6))
+* **mcp:** return tool execution error on jq failure ([61544c4](https://github.com/whopio/whopsdk-typescript/commit/61544c440b8cc0bd168bd79c7229dd6795bd124f))
+
+
+### Chores
+
+* **mcp:** clarify http auth error ([702506b](https://github.com/whopio/whopsdk-typescript/commit/702506b96ebe1adba71a753e773c1b2cc0020d99))
+* **mcp:** upgrade jq-web ([463014f](https://github.com/whopio/whopsdk-typescript/commit/463014f6e7221ec9862ca6692338633e7d0c8674))
+
 ## 0.0.6 (2025-11-10)
 
 Full Changelog: [v0.0.5...v0.0.6](https://github.com/whopio/whopsdk-typescript/compare/v0.0.5...v0.0.6)

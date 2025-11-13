@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from '@whop/mcp/filtering';
-import { Metadata, asTextContentResult } from '@whop/mcp/tools/types';
+import { isJqError, maybeFilter } from '@whop/mcp/filtering';
+import { Metadata, asErrorResult, asTextContentResult } from '@whop/mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Whop from '@whop/sdk';
@@ -118,6 +118,11 @@ export const tool: Tool = {
         type: 'string',
         description: 'The title of the post. Only visible if paywalled.',
       },
+      visibility: {
+        type: 'string',
+        description: 'The visibility types for forum posts',
+        enum: ['members_only', 'globally_visible'],
+      },
       jq_filter: {
         type: 'string',
         title: 'jq Filter',
@@ -215,6 +220,7 @@ export const tool: Tool = {
           'uzs',
           'rub',
           'btc',
+          'cny',
         ],
       },
     },
@@ -224,7 +230,14 @@ export const tool: Tool = {
 
 export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
-  return asTextContentResult(await maybeFilter(jq_filter, await client.forumPosts.create(body)));
+  try {
+    return asTextContentResult(await maybeFilter(jq_filter, await client.forumPosts.create(body)));
+  } catch (error) {
+    if (isJqError(error)) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

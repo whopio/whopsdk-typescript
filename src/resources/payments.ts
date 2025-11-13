@@ -171,6 +171,7 @@ export type CardBrands =
   | 'rupay'
   | 'jcbrupay'
   | 'elo'
+  | 'maestro'
   | 'unknown';
 
 /**

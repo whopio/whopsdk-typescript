@@ -649,7 +649,16 @@ export namespace Company {
     /**
      * The website
      */
-    website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website';
+    website:
+      | 'x'
+      | 'instagram'
+      | 'facebook'
+      | 'tiktok'
+      | 'youtube'
+      | 'linkedin'
+      | 'twitch'
+      | 'website'
+      | 'custom';
   }
 }
 
@@ -911,7 +920,8 @@ export type Currency =
   | 'ttd'
   | 'uzs'
   | 'rub'
-  | 'btc';
+  | 'btc'
+  | 'cny';
 
 /**
  * The different types of custom CTAs that can be selected.
@@ -2970,7 +2980,7 @@ export interface Shipment {
   /**
    * The payment of the shipment
    */
-  payment: Shipment.Payment;
+  payment: Shipment.Payment | null;
 
   /**
    * The service of the shipment

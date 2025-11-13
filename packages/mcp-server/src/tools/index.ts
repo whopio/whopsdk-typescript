@@ -115,6 +115,10 @@ import retrieve_course_students from './course-students/retrieve-course-students
 import list_course_students from './course-students/list-course-students';
 import create_access_tokens from './access-tokens/create-access-tokens';
 import create_notifications from './notifications/create-notifications';
+import retrieve_disputes from './disputes/retrieve-disputes';
+import list_disputes from './disputes/list-disputes';
+import submit_evidence_disputes from './disputes/submit-evidence-disputes';
+import update_evidence_disputes from './disputes/update-evidence-disputes';
 
 export const endpoints: Endpoint[] = [];
 
@@ -233,6 +237,10 @@ addEndpoint(retrieve_course_students);
 addEndpoint(list_course_students);
 addEndpoint(create_access_tokens);
 addEndpoint(create_notifications);
+addEndpoint(retrieve_disputes);
+addEndpoint(list_disputes);
+addEndpoint(submit_evidence_disputes);
+addEndpoint(update_evidence_disputes);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

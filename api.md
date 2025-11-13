@@ -140,6 +140,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DisputeCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
@@ -509,3 +511,18 @@ Types:
 Methods:
 
 - <code title="post /notifications">client.notifications.<a href="./src/resources/notifications.ts">create</a>({ ...params }) -> NotificationCreateResponse</code>
+
+# Disputes
+
+Types:
+
+- <code><a href="./src/resources/disputes.ts">Dispute</a></code>
+- <code><a href="./src/resources/disputes.ts">DisputeStatuses</a></code>
+- <code><a href="./src/resources/disputes.ts">DisputeListResponse</a></code>
+
+Methods:
+
+- <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id) -> Dispute</code>
+- <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputeListResponsesCursorPage</code>
+- <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
+- <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>

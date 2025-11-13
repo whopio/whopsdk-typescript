@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DisputesAPI from './disputes';
 import * as Shared from './shared';
 import { Webhook } from 'standardwebhooks';
 
@@ -399,6 +400,60 @@ export interface PaymentPendingWebhookEvent {
   type: 'payment.pending';
 }
 
+export interface DisputeCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a dispute against a company.
+   */
+  data: DisputesAPI.Dispute;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute.created';
+}
+
+export interface DisputeUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a dispute against a company.
+   */
+  data: DisputesAPI.Dispute;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute.updated';
+}
+
 export type UnwrapWebhookEvent =
   | InvoiceCreatedWebhookEvent
   | InvoicePaidWebhookEvent
@@ -413,7 +468,9 @@ export type UnwrapWebhookEvent =
   | CourseLessonInteractionCompletedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
-  | PaymentPendingWebhookEvent;
+  | PaymentPendingWebhookEvent
+  | DisputeCreatedWebhookEvent
+  | DisputeUpdatedWebhookEvent;
 
 export declare namespace Webhooks {
   export {
@@ -431,6 +488,8 @@ export declare namespace Webhooks {
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
+    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
+    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }

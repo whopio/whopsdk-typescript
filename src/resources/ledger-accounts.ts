@@ -38,6 +38,7 @@ export interface LedgerAccountRetrieveResponse {
    */
   ledger_account_audit_status:
     | 'pending'
+    | 'pending_ai_review'
     | 'approved'
     | 'reserves_imposed'
     | 'suspended'

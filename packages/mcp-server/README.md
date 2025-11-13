@@ -982,8 +982,59 @@ The following tools are available in this MCP server.
 
 ### Resource `access_tokens`:
 
-- `create_access_tokens` (`write`): Creates an access token for a user to access a specific resource. These access tokens are designed to be used with Whop's embedded components.
+- `create_access_tokens` (`write`): Create a short-lived access token to authenticate API requests on behalf of a Company or User. This token should be used with Whop's web and mobile embedded components. You must provide either a company_id or a user_id argument, but not both.
 
 ### Resource `notifications`:
 
 - `create_notifications` (`write`): Queues a notification to be sent to users in an experience or company team
+
+### Resource `disputes`:
+
+- `retrieve_disputes` (`read`): Retrieves a Dispute by ID
+
+  Required permissions:
+
+  - `payment:dispute:read`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `company:basic:read`
+  - `payment:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`
+
+- `list_disputes` (`read`): Lists disputes the current actor has access to
+
+  Required permissions:
+
+  - `payment:dispute:read`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `company:basic:read`
+  - `payment:basic:read`
+
+- `submit_evidence_disputes` (`write`): Submit a payment dispute to the payment processor for review. Once submitted, no further edits can be made.
+
+  Required permissions:
+
+  - `payment:dispute`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `company:basic:read`
+  - `payment:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`
+
+- `update_evidence_disputes` (`write`): Update a dispute with evidence data to attempt to win the dispute.
+
+  Required permissions:
+
+  - `payment:dispute`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `company:basic:read`
+  - `payment:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`

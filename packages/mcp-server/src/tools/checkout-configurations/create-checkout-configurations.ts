@@ -32,12 +32,12 @@ export const tool: Tool = {
                 type: 'string',
                 description: 'The company the plan should be created for.',
               },
+              currency: {
+                $ref: '#/$defs/currency',
+              },
               billing_period: {
                 type: 'integer',
                 description: 'The interval at which the plan charges (renewal plans).',
-              },
-              currency: {
-                $ref: '#/$defs/currency',
               },
               custom_fields: {
                 type: 'array',
@@ -247,7 +247,7 @@ export const tool: Tool = {
                 $ref: '#/$defs/visibility',
               },
             },
-            required: ['company_id'],
+            required: ['company_id', 'currency'],
           },
           affiliate_code: {
             type: 'string',
@@ -378,6 +378,7 @@ export const tool: Tool = {
           'uzs',
           'rub',
           'btc',
+          'cny',
         ],
       },
       tax_type: {

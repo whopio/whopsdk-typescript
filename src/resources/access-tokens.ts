@@ -6,15 +6,15 @@ import { RequestOptions } from '../internal/request-options';
 
 export class AccessTokens extends APIResource {
   /**
-   * Creates an access token for a user to access a specific resource. These access
-   * tokens are designed to be used with Whop's embedded components.
+   * Create a short-lived access token to authenticate API requests on behalf of a
+   * Company or User. This token should be used with Whop's web and mobile embedded
+   * components. You must provide either a company_id or a user_id argument, but not
+   * both.
    *
    * @example
    * ```ts
    * const accessToken = await client.accessTokens.create({
-   *   scoped_actions: ['string'],
-   *   target_resource_id: 'target_resource_id',
-   *   target_resource_type: 'company',
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
    * });
    * ```
    */
@@ -38,30 +38,57 @@ export interface AccessTokenCreateResponse {
   expires_at: string;
 }
 
-export interface AccessTokenCreateParams {
-  /**
-   * Array of desired scoped actions for the access token. This list must be a subset
-   * of the API keys's existing permissions. Otherwise, an error will be raised.
-   */
-  scoped_actions: Array<string>;
+export type AccessTokenCreateParams =
+  | AccessTokenCreateParams.CreateAccessTokenInputWithCompanyID
+  | AccessTokenCreateParams.CreateAccessTokenInputWithUserID;
 
-  /**
-   * The ID of the target resource (Company, User, etc.) for which the access token
-   * is being created.
-   */
-  target_resource_id: string;
+export declare namespace AccessTokenCreateParams {
+  export interface CreateAccessTokenInputWithCompanyID {
+    /**
+     * The ID of the Company to generate the token for. The API key must have
+     * permission to access this Company, such as the being the company the API key
+     * belongs to or a sub-merchant of it
+     */
+    company_id: string;
 
-  /**
-   * The type of the target resource (company, user, product, experience, etc.).
-   */
-  target_resource_type: 'company' | 'product' | 'experience' | 'app' | 'user';
+    /**
+     * The expiration timestamp for the access token. If not provided, a default
+     * expiration time of 1 hour will be used. The expiration can be set to a maximum
+     * of 3 hours from the current time.
+     */
+    expires_at?: string | null;
 
-  /**
-   * The expiration timestamp for the access token. If not provided, a default
-   * expiration time of 1 hour will be used. The expiration can be set to a maximum
-   * of 3 hours from the current time.
-   */
-  expires_at?: string | null;
+    /**
+     * Array of desired scoped actions for the access token. If sent as an empty array
+     * or not provided, all permissions from the API key making the request will be
+     * available on the token. If sending an explicit list, they must be a subset of
+     * the API keys's existing permissions. Otherwise, an error will be raised.
+     */
+    scoped_actions?: Array<string> | null;
+  }
+
+  export interface CreateAccessTokenInputWithUserID {
+    /**
+     * The ID of the User to generate the token for. The API key must have permission
+     * to access this User.
+     */
+    user_id: string;
+
+    /**
+     * The expiration timestamp for the access token. If not provided, a default
+     * expiration time of 1 hour will be used. The expiration can be set to a maximum
+     * of 3 hours from the current time.
+     */
+    expires_at?: string | null;
+
+    /**
+     * Array of desired scoped actions for the access token. If sent as an empty array
+     * or not provided, all permissions from the API key making the request will be
+     * available on the token. If sending an explicit list, they must be a subset of
+     * the API keys's existing permissions. Otherwise, an error will be raised.
+     */
+    scoped_actions?: Array<string> | null;
+  }
 }
 
 export declare namespace AccessTokens {

@@ -33,6 +33,7 @@ describe('resource forumPosts', () => {
       pinned: true,
       poll: { options: [{ id: 'id', text: 'text' }] },
       title: 'title',
+      visibility: 'members_only',
     });
   });
 
@@ -71,6 +72,7 @@ describe('resource forumPosts', () => {
           content: 'content',
           is_pinned: true,
           title: 'title',
+          visibility: 'members_only',
         },
         { path: '/_stainless_unknown_path' },
       ),

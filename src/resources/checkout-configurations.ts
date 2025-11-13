@@ -205,14 +205,14 @@ export declare namespace CheckoutConfigurationCreateParams {
       company_id: string;
 
       /**
+       * The respective currency identifier for the plan.
+       */
+      currency: Shared.Currency;
+
+      /**
        * The interval at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
-
-      /**
-       * The available currencies on the platform
-       */
-      currency?: Shared.Currency | null;
 
       /**
        * An array of custom field objects.
