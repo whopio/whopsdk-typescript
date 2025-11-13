@@ -61,6 +61,7 @@ describe('resource apps', () => {
         'app_xxxxxxxxxxxxxx',
         {
           app_store_description: 'app_store_description',
+          app_type: 'b2b_app',
           base_url: 'https://example.com/path',
           dashboard_path: 'dashboard_path',
           description: 'description',
