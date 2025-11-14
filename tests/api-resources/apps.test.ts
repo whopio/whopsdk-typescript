@@ -96,6 +96,7 @@ describe('resource apps', () => {
       client.apps.list(
         {
           after: 'after',
+          app_type: 'b2b_app',
           before: 'before',
           company_id: 'biz_xxxxxxxxxxxxxx',
           direction: 'asc',
