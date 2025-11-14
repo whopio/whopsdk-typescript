@@ -103,6 +103,11 @@ export interface AppListResponse {
   id: string;
 
   /**
+   * The type of end-user an app is built for
+   */
+  app_type: AppType;
+
+  /**
    * The base url of the app
    */
   base_url: string | null;
