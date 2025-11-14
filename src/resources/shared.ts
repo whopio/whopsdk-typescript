@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
+import * as AppsAPI from './apps';
 import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
@@ -28,6 +29,11 @@ export interface App {
    * The API key for the app
    */
   api_key: App.APIKey | null;
+
+  /**
+   * The type of end-user an app is built for
+   */
+  app_type: AppsAPI.AppType;
 
   /**
    * The base url of the app
