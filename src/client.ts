@@ -280,6 +280,8 @@ import {
   PaymentFailedWebhookEvent,
   PaymentPendingWebhookEvent,
   PaymentSucceededWebhookEvent,
+  RefundCreatedWebhookEvent,
+  RefundUpdatedWebhookEvent,
   UnwrapWebhookEvent,
   Webhooks,
 } from './resources/webhooks';
@@ -1141,6 +1143,8 @@ export declare namespace Whop {
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
     type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
+    type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 

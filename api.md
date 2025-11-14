@@ -142,6 +142,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">DisputeCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">RefundCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">RefundUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
