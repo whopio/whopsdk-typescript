@@ -148,6 +148,11 @@ export interface Lesson {
   content: string | null;
 
   /**
+   * The timestamp of when the lesson was created
+   */
+  created_at: string;
+
+  /**
    * Number of days from course start until the lesson is unlocked
    */
   days_from_course_start_until_unlock: number | null;
@@ -408,6 +413,11 @@ export interface CourseLessonListResponse {
    * The content of the lesson
    */
   content: string | null;
+
+  /**
+   * The timestamp of when the lesson was created
+   */
+  created_at: string;
 
   /**
    * Number of days from course start until the lesson is unlocked
