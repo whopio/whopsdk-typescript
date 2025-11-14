@@ -119,9 +119,7 @@ export const tool: Tool = {
         description: 'The title of the post. Only visible if paywalled.',
       },
       visibility: {
-        type: 'string',
-        description: 'The visibility types for forum posts',
-        enum: ['members_only', 'globally_visible'],
+        $ref: '#/$defs/forum_post_visibility_type',
       },
       jq_filter: {
         type: 'string',
@@ -222,6 +220,11 @@ export const tool: Tool = {
           'btc',
           'cny',
         ],
+      },
+      forum_post_visibility_type: {
+        type: 'string',
+        description: 'The visibility types for forum posts',
+        enum: ['members_only', 'globally_visible'],
       },
     },
   },

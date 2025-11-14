@@ -67,6 +67,7 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/apps.ts">AppType</a></code>
 - <code><a href="./src/resources/apps.ts">AppListResponse</a></code>
 
 Methods:
@@ -183,6 +184,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/forum-posts.ts">ForumPostVisibilityType</a></code>
 - <code><a href="./src/resources/forum-posts.ts">ForumPostListResponse</a></code>
 
 Methods:
@@ -528,3 +530,19 @@ Methods:
 - <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputeListResponsesCursorPage</code>
 - <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
 - <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>
+
+# Refunds
+
+Types:
+
+- <code><a href="./src/resources/refunds.ts">PaymentProvider</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundReferenceStatus</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundReferenceType</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundStatus</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundRetrieveResponse</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundListResponse</a></code>
+
+Methods:
+
+- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
+- <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>

@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
+import * as RefundsAPI from './refunds';
 import * as Shared from './shared';
 import { Webhook } from 'standardwebhooks';
 
@@ -515,15 +516,7 @@ export namespace RefundCreatedWebhookEvent {
     /**
      * The provider of the refund.
      */
-    provider:
-      | 'stripe'
-      | 'coinbase'
-      | 'paypal'
-      | 'apple'
-      | 'sezzle'
-      | 'splitit'
-      | 'platform_balance'
-      | 'multi_psp';
+    provider: RefundsAPI.PaymentProvider;
 
     /**
      * The time the refund was created by the provider.
@@ -533,16 +526,12 @@ export namespace RefundCreatedWebhookEvent {
     /**
      * The status of the refund reference.
      */
-    reference_status: 'available' | 'pending' | 'unavailable' | null;
+    reference_status: RefundsAPI.RefundReferenceStatus | null;
 
     /**
      * The type of refund reference that was made available by the payment provider.
      */
-    reference_type:
-      | 'acquirer_reference_number'
-      | 'retrieval_reference_number'
-      | 'system_trace_audit_number'
-      | null;
+    reference_type: RefundsAPI.RefundReferenceType | null;
 
     /**
      * The value of the reference.
@@ -552,7 +541,7 @@ export namespace RefundCreatedWebhookEvent {
     /**
      * The status of the refund.
      */
-    status: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+    status: RefundsAPI.RefundStatus;
   }
 
   export namespace Data {
@@ -755,15 +744,7 @@ export namespace RefundUpdatedWebhookEvent {
     /**
      * The provider of the refund.
      */
-    provider:
-      | 'stripe'
-      | 'coinbase'
-      | 'paypal'
-      | 'apple'
-      | 'sezzle'
-      | 'splitit'
-      | 'platform_balance'
-      | 'multi_psp';
+    provider: RefundsAPI.PaymentProvider;
 
     /**
      * The time the refund was created by the provider.
@@ -773,16 +754,12 @@ export namespace RefundUpdatedWebhookEvent {
     /**
      * The status of the refund reference.
      */
-    reference_status: 'available' | 'pending' | 'unavailable' | null;
+    reference_status: RefundsAPI.RefundReferenceStatus | null;
 
     /**
      * The type of refund reference that was made available by the payment provider.
      */
-    reference_type:
-      | 'acquirer_reference_number'
-      | 'retrieval_reference_number'
-      | 'system_trace_audit_number'
-      | null;
+    reference_type: RefundsAPI.RefundReferenceType | null;
 
     /**
      * The value of the reference.
@@ -792,7 +769,7 @@ export namespace RefundUpdatedWebhookEvent {
     /**
      * The status of the refund.
      */
-    status: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+    status: RefundsAPI.RefundStatus;
   }
 
   export namespace Data {

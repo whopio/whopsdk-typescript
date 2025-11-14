@@ -158,6 +158,8 @@ const fuse = new Fuse(
     'client.disputes.retrieve',
     'client.disputes.submitEvidence',
     'client.disputes.updateEvidence',
+    'client.refunds.list',
+    'client.refunds.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );
