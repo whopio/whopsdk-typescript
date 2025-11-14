@@ -320,6 +320,11 @@ export namespace AppUpdateParams {
 
 export interface AppListParams extends CursorPageParams {
   /**
+   * The type of end-user an app is built for
+   */
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | null;
+
+  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
