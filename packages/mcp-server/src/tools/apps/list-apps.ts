@@ -27,9 +27,7 @@ export const tool: Tool = {
         description: 'Returns the elements in the list that come after the specified cursor.',
       },
       app_type: {
-        type: 'string',
-        description: 'The type of end-user an app is built for',
-        enum: ['b2b_app', 'b2c_app', 'company_app', 'component'],
+        $ref: '#/$defs/app_type',
       },
       before: {
         type: 'string',
@@ -82,6 +80,11 @@ export const tool: Tool = {
     },
     required: [],
     $defs: {
+      app_type: {
+        type: 'string',
+        description: 'The type of end-user an app is built for',
+        enum: ['b2b_app', 'b2c_app', 'company_app', 'component'],
+      },
       direction: {
         type: 'string',
         description: 'The direction of the sort.',

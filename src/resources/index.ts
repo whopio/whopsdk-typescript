@@ -11,6 +11,7 @@ export {
 } from './app-builds';
 export {
   Apps,
+  type AppType,
   type AppListResponse,
   type AppCreateParams,
   type AppUpdateParams,
@@ -122,6 +123,7 @@ export {
 } from './experiences';
 export {
   ForumPosts,
+  type ForumPostVisibilityType,
   type ForumPostListResponse,
   type ForumPostCreateParams,
   type ForumPostUpdateParams,
@@ -215,6 +217,17 @@ export {
   type ReactionListParams,
   type ReactionListResponsesCursorPage,
 } from './reactions';
+export {
+  Refunds,
+  type PaymentProvider,
+  type RefundReferenceStatus,
+  type RefundReferenceType,
+  type RefundStatus,
+  type RefundRetrieveResponse,
+  type RefundListResponse,
+  type RefundListParams,
+  type RefundListResponsesCursorPage,
+} from './refunds';
 export {
   Reviews,
   type ReviewStatus,

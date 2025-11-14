@@ -86,6 +86,11 @@ export class ForumPosts extends APIResource {
 export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>;
 
 /**
+ * The visibility types for forum posts
+ */
+export type ForumPostVisibilityType = 'members_only' | 'globally_visible';
+
+/**
  * Represents a post in forum
  */
 export interface ForumPostListResponse {
@@ -238,7 +243,7 @@ export interface ForumPostCreateParams {
   /**
    * The visibility types for forum posts
    */
-  visibility?: 'members_only' | 'globally_visible' | null;
+  visibility?: ForumPostVisibilityType | null;
 }
 
 export namespace ForumPostCreateParams {
@@ -321,7 +326,7 @@ export interface ForumPostUpdateParams {
   /**
    * The visibility types for forum posts
    */
-  visibility?: 'members_only' | 'globally_visible' | null;
+  visibility?: ForumPostVisibilityType | null;
 }
 
 export namespace ForumPostUpdateParams {
@@ -384,6 +389,7 @@ export interface ForumPostListParams extends CursorPageParams {
 
 export declare namespace ForumPosts {
   export {
+    type ForumPostVisibilityType as ForumPostVisibilityType,
     type ForumPostListResponse as ForumPostListResponse,
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
     type ForumPostCreateParams as ForumPostCreateParams,

@@ -89,6 +89,11 @@ export class Apps extends APIResource {
 export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
 
 /**
+ * The type of end-user an app is built for
+ */
+export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
+
+/**
  * An object representing an app
  */
 export interface AppListResponse {
@@ -244,7 +249,7 @@ export interface AppUpdateParams {
   /**
    * The type of end-user an app is built for
    */
-  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | null;
+  app_type?: AppType | null;
 
   /**
    * The base production url of the app
@@ -322,7 +327,7 @@ export interface AppListParams extends CursorPageParams {
   /**
    * The type of end-user an app is built for
    */
-  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | null;
+  app_type?: AppType | null;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -379,6 +384,7 @@ export interface AppListParams extends CursorPageParams {
 
 export declare namespace Apps {
   export {
+    type AppType as AppType,
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppCreateParams as AppCreateParams,

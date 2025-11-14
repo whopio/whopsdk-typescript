@@ -29,9 +29,7 @@ export const tool: Tool = {
         description: 'The description of the app for the app store in-depth app view.',
       },
       app_type: {
-        type: 'string',
-        description: 'The type of end-user an app is built for',
-        enum: ['b2b_app', 'b2c_app', 'company_app', 'component'],
+        $ref: '#/$defs/app_type',
       },
       base_url: {
         type: 'string',
@@ -103,6 +101,11 @@ export const tool: Tool = {
     },
     required: ['id'],
     $defs: {
+      app_type: {
+        type: 'string',
+        description: 'The type of end-user an app is built for',
+        enum: ['b2b_app', 'b2c_app', 'company_app', 'component'],
+      },
       app_statuses: {
         type: 'string',
         description: 'The status of an experience interface',

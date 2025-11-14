@@ -32,6 +32,7 @@ import {
   AppListParams,
   AppListResponse,
   AppListResponsesCursorPage,
+  AppType,
   AppUpdateParams,
   Apps,
 } from './resources/apps';
@@ -144,6 +145,7 @@ import {
   ForumPostListResponse,
   ForumPostListResponsesCursorPage,
   ForumPostUpdateParams,
+  ForumPostVisibilityType,
   ForumPosts,
 } from './resources/forum-posts';
 import {
@@ -228,6 +230,17 @@ import {
   ReactionListResponsesCursorPage,
   Reactions,
 } from './resources/reactions';
+import {
+  PaymentProvider,
+  RefundListParams,
+  RefundListResponse,
+  RefundListResponsesCursorPage,
+  RefundReferenceStatus,
+  RefundReferenceType,
+  RefundRetrieveResponse,
+  RefundStatus,
+  Refunds,
+} from './resources/refunds';
 import {
   ReviewListParams,
   ReviewListResponse,
@@ -1045,6 +1058,7 @@ export class Whop {
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
   notifications: API.Notifications = new API.Notifications(this);
   disputes: API.Disputes = new API.Disputes(this);
+  refunds: API.Refunds = new API.Refunds(this);
 }
 
 Whop.Apps = Apps;
@@ -1081,6 +1095,7 @@ Whop.CourseStudents = CourseStudents;
 Whop.AccessTokens = AccessTokens;
 Whop.Notifications = Notifications;
 Whop.Disputes = Disputes;
+Whop.Refunds = Refunds;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1090,6 +1105,7 @@ export declare namespace Whop {
 
   export {
     Apps as Apps,
+    type AppType as AppType,
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppCreateParams as AppCreateParams,
@@ -1168,6 +1184,7 @@ export declare namespace Whop {
 
   export {
     ForumPosts as ForumPosts,
+    type ForumPostVisibilityType as ForumPostVisibilityType,
     type ForumPostListResponse as ForumPostListResponse,
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
     type ForumPostCreateParams as ForumPostCreateParams,
@@ -1398,6 +1415,18 @@ export declare namespace Whop {
     type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
     type DisputeListParams as DisputeListParams,
     type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
+  };
+
+  export {
+    Refunds as Refunds,
+    type PaymentProvider as PaymentProvider,
+    type RefundReferenceStatus as RefundReferenceStatus,
+    type RefundReferenceType as RefundReferenceType,
+    type RefundStatus as RefundStatus,
+    type RefundRetrieveResponse as RefundRetrieveResponse,
+    type RefundListResponse as RefundListResponse,
+    type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
+    type RefundListParams as RefundListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

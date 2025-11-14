@@ -1038,3 +1038,20 @@ The following tools are available in this MCP server.
   - `member:email:read`
   - `member:basic:read`
   - `member:phone:read`
+
+### Resource `refunds`:
+
+- `retrieve_refunds` (`read`): Retrieves a Refund by ID
+
+  Required permissions:
+
+  - `payment:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`
+
+- `list_refunds` (`read`): Lists Refunds for a payment.
+
+  Required permissions:
+
+  - `payment:basic:read`

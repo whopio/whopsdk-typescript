@@ -119,6 +119,8 @@ import retrieve_disputes from './disputes/retrieve-disputes';
 import list_disputes from './disputes/list-disputes';
 import submit_evidence_disputes from './disputes/submit-evidence-disputes';
 import update_evidence_disputes from './disputes/update-evidence-disputes';
+import retrieve_refunds from './refunds/retrieve-refunds';
+import list_refunds from './refunds/list-refunds';
 
 export const endpoints: Endpoint[] = [];
 
@@ -241,6 +243,8 @@ addEndpoint(retrieve_disputes);
 addEndpoint(list_disputes);
 addEndpoint(submit_evidence_disputes);
 addEndpoint(update_evidence_disputes);
+addEndpoint(retrieve_refunds);
+addEndpoint(list_refunds);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
