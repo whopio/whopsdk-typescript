@@ -131,6 +131,11 @@ export interface Course {
   chapters: Array<Course.Chapter>;
 
   /**
+   * The URL of the course's cover image, which is shown in course preview cards
+   */
+  cover_image: string | null;
+
+  /**
    * The timestamp of when the course was created
    */
   created_at: string;
@@ -317,6 +322,11 @@ export interface CourseListResponse {
    * all lessons
    */
   certificate_after_completion_enabled: boolean | null;
+
+  /**
+   * The URL of the course's cover image, which is shown in course preview cards
+   */
+  cover_image: string | null;
 
   /**
    * The timestamp of when the course was created

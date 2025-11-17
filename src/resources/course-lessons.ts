@@ -383,9 +383,59 @@ export namespace Lesson {
     asset_id: string | null;
 
     /**
+     * Whether this asset contains only audio
+     */
+    audio_only: boolean;
+
+    /**
+     * The time at which the Mux asset was created
+     */
+    created_at: string;
+
+    /**
+     * The duration of the video in seconds
+     */
+    duration_seconds: number | null;
+
+    /**
+     * The time at which the video finished uploading
+     */
+    finished_uploading_at: string | null;
+
+    /**
      * The public playback ID of the Mux asset
      */
     playback_id: string | null;
+
+    /**
+     * The signed playback ID of the Mux asset
+     */
+    signed_playback_id: string | null;
+
+    /**
+     * The signed storyboard playback token of the Mux asset
+     */
+    signed_storyboard_playback_token: string | null;
+
+    /**
+     * The signed thumbnail playback token of the Mux asset
+     */
+    signed_thumbnail_playback_token: string | null;
+
+    /**
+     * The signed video playback token of the Mux asset
+     */
+    signed_video_playback_token: string | null;
+
+    /**
+     * The status of the Mux asset
+     */
+    status: 'uploading' | 'created' | 'ready';
+
+    /**
+     * The time at which the Mux asset was last updated
+     */
+    updated_at: string;
   }
 }
 
