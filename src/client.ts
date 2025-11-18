@@ -85,6 +85,10 @@ import {
   CourseLessonListParams,
   CourseLessonListResponse,
   CourseLessonListResponsesCursorPage,
+  CourseLessonMarkAsCompletedResponse,
+  CourseLessonStartResponse,
+  CourseLessonSubmitAssessmentParams,
+  CourseLessonSubmitAssessmentResponse,
   CourseLessonUpdateParams,
   CourseLessons,
   EmbedType,
@@ -1369,10 +1373,14 @@ export declare namespace Whop {
     type LessonVisibilities as LessonVisibilities,
     type CourseLessonListResponse as CourseLessonListResponse,
     type CourseLessonDeleteResponse as CourseLessonDeleteResponse,
+    type CourseLessonMarkAsCompletedResponse as CourseLessonMarkAsCompletedResponse,
+    type CourseLessonStartResponse as CourseLessonStartResponse,
+    type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
     type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
     type CourseLessonListParams as CourseLessonListParams,
+    type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
   };
 
   export {

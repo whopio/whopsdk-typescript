@@ -69,9 +69,13 @@ export {
   type LessonVisibilities,
   type CourseLessonListResponse,
   type CourseLessonDeleteResponse,
+  type CourseLessonMarkAsCompletedResponse,
+  type CourseLessonStartResponse,
+  type CourseLessonSubmitAssessmentResponse,
   type CourseLessonCreateParams,
   type CourseLessonUpdateParams,
   type CourseLessonListParams,
+  type CourseLessonSubmitAssessmentParams,
   type CourseLessonListResponsesCursorPage,
 } from './course-lessons';
 export {

@@ -138,4 +138,49 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
+
+  // Prism tests are disabled
+  test.skip('markAsCompleted', async () => {
+    const responsePromise = client.courseLessons.markAsCompleted('lesson_id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('start', async () => {
+    const responsePromise = client.courseLessons.start('lesson_id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('submitAssessment: only required params', async () => {
+    const responsePromise = client.courseLessons.submitAssessment('lesson_id', {
+      answers: [{ question_id: 'question_id' }],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('submitAssessment: required and optional params', async () => {
+    const response = await client.courseLessons.submitAssessment('lesson_id', {
+      answers: [{ question_id: 'question_id', answer_text: 'answer_text', selected_option_ids: ['string'] }],
+    });
+  });
 });

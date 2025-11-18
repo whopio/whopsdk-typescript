@@ -462,6 +462,9 @@ Types:
 - <code><a href="./src/resources/course-lessons.ts">LessonVisibilities</a></code>
 - <code><a href="./src/resources/course-lessons.ts">CourseLessonListResponse</a></code>
 - <code><a href="./src/resources/course-lessons.ts">CourseLessonDeleteResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonMarkAsCompletedResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonStartResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonSubmitAssessmentResponse</a></code>
 
 Methods:
 
@@ -470,6 +473,9 @@ Methods:
 - <code title="patch /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">update</a>(id, { ...params }) -> Lesson</code>
 - <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
 - <code title="delete /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">delete</a>(id) -> CourseLessonDeleteResponse</code>
+- <code title="post /course_lessons/{lesson_id}/mark_as_completed">client.courseLessons.<a href="./src/resources/course-lessons.ts">markAsCompleted</a>(lessonID) -> CourseLessonMarkAsCompletedResponse</code>
+- <code title="post /course_lessons/{lesson_id}/start">client.courseLessons.<a href="./src/resources/course-lessons.ts">start</a>(lessonID) -> CourseLessonStartResponse</code>
+- <code title="post /course_lessons/{lesson_id}/submit_assessment">client.courseLessons.<a href="./src/resources/course-lessons.ts">submitAssessment</a>(lessonID, { ...params }) -> CourseLessonSubmitAssessmentResponse</code>
 
 # Reviews
 
