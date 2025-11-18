@@ -959,6 +959,10 @@ The following tools are available in this MCP server.
 
   - `courses:update`
 
+- `mark_as_completed_course_lessons` (`write`): Marks a course lesson as completed
+- `start_course_lessons` (`write`): Starts a course lesson
+- `submit_assessment_course_lessons` (`write`): Submits answers for a course assessment
+
 ### Resource `reviews`:
 
 - `retrieve_reviews` (`read`): Retrieve a review by its ID

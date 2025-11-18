@@ -109,6 +109,56 @@ export class CourseLessons extends APIResource {
   delete(id: string, options?: RequestOptions): APIPromise<CourseLessonDeleteResponse> {
     return this._client.delete(path`/course_lessons/${id}`, options);
   }
+
+  /**
+   * Marks a course lesson as completed
+   *
+   * @example
+   * ```ts
+   * const response = await client.courseLessons.markAsCompleted(
+   *   'lesson_id',
+   * );
+   * ```
+   */
+  markAsCompleted(
+    lessonID: string,
+    options?: RequestOptions,
+  ): APIPromise<CourseLessonMarkAsCompletedResponse> {
+    return this._client.post(path`/course_lessons/${lessonID}/mark_as_completed`, options);
+  }
+
+  /**
+   * Starts a course lesson
+   *
+   * @example
+   * ```ts
+   * const response = await client.courseLessons.start(
+   *   'lesson_id',
+   * );
+   * ```
+   */
+  start(lessonID: string, options?: RequestOptions): APIPromise<CourseLessonStartResponse> {
+    return this._client.post(path`/course_lessons/${lessonID}/start`, options);
+  }
+
+  /**
+   * Submits answers for a course assessment
+   *
+   * @example
+   * ```ts
+   * const response =
+   *   await client.courseLessons.submitAssessment('lesson_id', {
+   *     answers: [{ question_id: 'question_id' }],
+   *   });
+   * ```
+   */
+  submitAssessment(
+    lessonID: string,
+    body: CourseLessonSubmitAssessmentParams,
+    options?: RequestOptions,
+  ): APIPromise<CourseLessonSubmitAssessmentResponse> {
+    return this._client.post(path`/course_lessons/${lessonID}/submit_assessment`, { body, ...options });
+  }
 }
 
 export type CourseLessonListResponsesCursorPage = CursorPage<CourseLessonListResponse>;
@@ -529,6 +579,113 @@ export namespace CourseLessonListResponse {
  */
 export type CourseLessonDeleteResponse = boolean;
 
+/**
+ * Represents `true` or `false` values.
+ */
+export type CourseLessonMarkAsCompletedResponse = boolean;
+
+/**
+ * Represents `true` or `false` values.
+ */
+export type CourseLessonStartResponse = boolean;
+
+/**
+ * The result of a user's assessment attempt
+ */
+export interface CourseLessonSubmitAssessmentResponse {
+  /**
+   * The ID of the assessment result
+   */
+  id: string;
+
+  /**
+   * When the assessment was taken
+   */
+  created_at: string;
+
+  /**
+   * The lesson this assessment result is for
+   */
+  lesson: CourseLessonSubmitAssessmentResponse.Lesson;
+
+  /**
+   * The number of correct answers
+   */
+  result_correct: number;
+
+  /**
+   * The grade achieved on the assessment
+   */
+  result_grade: number;
+
+  /**
+   * Array of graded questions with details
+   */
+  result_graded_questions: { [key: string]: unknown };
+
+  /**
+   * Whether the user achieved a passing grade
+   */
+  result_passing_grade: boolean;
+
+  /**
+   * The total number of questions in the assessment
+   */
+  result_question_count: number;
+
+  /**
+   * The percentage score achieved on the assessment
+   */
+  score_percent: number;
+
+  /**
+   * When the assessment result was last updated
+   */
+  updated_at: string;
+
+  /**
+   * The user who took the assessment
+   */
+  user: CourseLessonSubmitAssessmentResponse.User;
+}
+
+export namespace CourseLessonSubmitAssessmentResponse {
+  /**
+   * The lesson this assessment result is for
+   */
+  export interface Lesson {
+    /**
+     * The ID of the lesson
+     */
+    id: string;
+
+    /**
+     * The title of the lesson
+     */
+    title: string;
+  }
+
+  /**
+   * The user who took the assessment
+   */
+  export interface User {
+    /**
+     * The internal ID of the user.
+     */
+    id: string;
+
+    /**
+     * The name of the user from their Whop account.
+     */
+    name: string | null;
+
+    /**
+     * The username of the user from their Whop account.
+     */
+    username: string;
+  }
+}
+
 export interface CourseLessonCreateParams {
   /**
    * The ID of the chapter to create the lesson in
@@ -888,6 +1045,35 @@ export interface CourseLessonListParams extends CursorPageParams {
   last?: number | null;
 }
 
+export interface CourseLessonSubmitAssessmentParams {
+  /**
+   * The answers to the assessment questions
+   */
+  answers: Array<CourseLessonSubmitAssessmentParams.Answer>;
+}
+
+export namespace CourseLessonSubmitAssessmentParams {
+  /**
+   * Input for a single question's answer in an assessment submission
+   */
+  export interface Answer {
+    /**
+     * The ID of the question being answered
+     */
+    question_id: string;
+
+    /**
+     * The text answer provided by the user (for short answer questions)
+     */
+    answer_text?: string | null;
+
+    /**
+     * The IDs of the selected options (for multiple choice/select questions)
+     */
+    selected_option_ids?: Array<string> | null;
+  }
+}
+
 export declare namespace CourseLessons {
   export {
     type AssessmentQuestionTypes as AssessmentQuestionTypes,
@@ -897,9 +1083,13 @@ export declare namespace CourseLessons {
     type LessonVisibilities as LessonVisibilities,
     type CourseLessonListResponse as CourseLessonListResponse,
     type CourseLessonDeleteResponse as CourseLessonDeleteResponse,
+    type CourseLessonMarkAsCompletedResponse as CourseLessonMarkAsCompletedResponse,
+    type CourseLessonStartResponse as CourseLessonStartResponse,
+    type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
     type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
     type CourseLessonListParams as CourseLessonListParams,
+    type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
   };
 }
