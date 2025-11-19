@@ -95,6 +95,18 @@ export interface CheckoutConfigurationListResponse {
   metadata: { [key: string]: unknown } | null;
 
   /**
+   * The mode of the checkout session.
+   */
+  mode: 'payment' | 'setup';
+
+  /**
+   * The explicit payment method configuration for the session, if any. This
+   * currently only works in 'setup' mode. Use the plan's
+   * payment_method_configuration for payment method.
+   */
+  payment_method_configuration: CheckoutConfigurationListResponse.PaymentMethodConfiguration | null;
+
+  /**
    * The plan to use for the checkout configuration
    */
   plan: CheckoutConfigurationListResponse.Plan | null;
@@ -112,6 +124,34 @@ export interface CheckoutConfigurationListResponse {
 }
 
 export namespace CheckoutConfigurationListResponse {
+  /**
+   * The explicit payment method configuration for the session, if any. This
+   * currently only works in 'setup' mode. Use the plan's
+   * payment_method_configuration for payment method.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * An array of payment method identifiers that are explicitly disabled. Only
+     * applies if the include_platform_defaults is true.
+     */
+    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * An array of payment method identifiers that are explicitly enabled. This means
+     * these payment methods will be shown on checkout. Example use case is to only
+     * enable a specific payment method like cashapp, or extending the platform
+     * defaults with additional methods.
+     */
+    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+    /**
+     * Whether Whop's platform default payment method enablement settings are included
+     * in this configuration. The full list of default payment methods can be found in
+     * the documentation at docs.whop.com/payments.
+     */
+    include_platform_defaults: boolean;
+  }
+
   /**
    * The plan to use for the checkout configuration
    */
