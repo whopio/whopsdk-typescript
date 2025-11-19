@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_checkout_configurations',
   description:
-    'Creates a new checkout configuration\n\nRequired permissions:\n - `checkout_configuration:create`\n - `plan:create`\n - `access_pass:create`\n - `access_pass:update`',
+    'Creates a new checkout configuration\n\nRequired permissions:\n - `checkout_configuration:create`\n - `plan:create`\n - `access_pass:create`\n - `access_pass:update`\n - `checkout_configuration:basic:read`',
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -258,6 +258,40 @@ export const tool: Tool = {
             description: 'The metadata to use for the checkout configuration',
             additionalProperties: true,
           },
+          mode: {
+            type: 'string',
+            description: 'The different modes a checkout can be set to.',
+            enum: ['payment', 'setup'],
+          },
+          payment_method_configuration: {
+            type: 'object',
+            description:
+              "This currently only works for configurations made in 'setup' mode. The explicit payment method configuration for the checkout session. If not provided, the platform or company's defaults will apply.",
+            properties: {
+              disabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly disabled. Only applies if the include_platform_defaults is true.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              enabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly enabled. This means these payment methods will be shown on checkout. Example use case is to only enable a specific payment method like cashapp, or extending the platform defaults with additional methods.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              include_platform_defaults: {
+                type: 'boolean',
+                description:
+                  "Whether Whop's platform default payment method enablement settings are included in this configuration. The full list of default payment methods can be found in the documentation at docs.whop.com/payments.",
+              },
+            },
+            required: ['disabled', 'enabled', 'include_platform_defaults'],
+          },
           redirect_url: {
             type: 'string',
             description: 'The URL to redirect the user to after the checkout configuration is created',
@@ -280,6 +314,40 @@ export const tool: Tool = {
             type: 'object',
             description: 'The metadata to use for the checkout configuration',
             additionalProperties: true,
+          },
+          mode: {
+            type: 'string',
+            description: 'The different modes a checkout can be set to.',
+            enum: ['payment', 'setup'],
+          },
+          payment_method_configuration: {
+            type: 'object',
+            description:
+              "This currently only works for configurations made in 'setup' mode. The explicit payment method configuration for the checkout session. If not provided, the platform or company's defaults will apply.",
+            properties: {
+              disabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly disabled. Only applies if the include_platform_defaults is true.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              enabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly enabled. This means these payment methods will be shown on checkout. Example use case is to only enable a specific payment method like cashapp, or extending the platform defaults with additional methods.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              include_platform_defaults: {
+                type: 'boolean',
+                description:
+                  "Whether Whop's platform default payment method enablement settings are included in this configuration. The full list of default payment methods can be found in the documentation at docs.whop.com/payments.",
+              },
+            },
+            required: ['disabled', 'enabled', 'include_platform_defaults'],
           },
           redirect_url: {
             type: 'string',
