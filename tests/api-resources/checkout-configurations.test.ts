@@ -77,6 +77,12 @@ describe('resource checkoutConfigurations', () => {
       },
       affiliate_code: 'affiliate_code',
       metadata: { foo: 'bar' },
+      mode: 'payment',
+      payment_method_configuration: {
+        disabled: ['acss_debit'],
+        enabled: ['acss_debit'],
+        include_platform_defaults: true,
+      },
       redirect_url: 'redirect_url',
     });
   });

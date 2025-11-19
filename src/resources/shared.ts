@@ -444,12 +444,12 @@ export interface CheckoutConfiguration {
   /**
    * The metadata to use for the checkout configuration
    */
-  metadata: { [key: string]: unknown };
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The plan to use for the checkout configuration
    */
-  plan: CheckoutConfiguration.Plan;
+  plan: CheckoutConfiguration.Plan | null;
 
   /**
    * A URL you can send to customers to complete a checkout. It looks like

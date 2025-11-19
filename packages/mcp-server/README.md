@@ -600,6 +600,7 @@ The following tools are available in this MCP server.
   - `plan:create`
   - `access_pass:create`
   - `access_pass:update`
+  - `checkout_configuration:basic:read`
 
 - `retrieve_checkout_configurations` (`read`): Retrieves a checkout configuration by ID
 
