@@ -260,8 +260,7 @@ export const tool: Tool = {
           },
           mode: {
             type: 'string',
-            description: 'The different modes a checkout can be set to.',
-            enum: ['payment', 'setup'],
+            enum: ['payment'],
           },
           payment_method_configuration: {
             type: 'object',
@@ -317,8 +316,7 @@ export const tool: Tool = {
           },
           mode: {
             type: 'string',
-            description: 'The different modes a checkout can be set to.',
-            enum: ['payment', 'setup'],
+            enum: ['payment'],
           },
           payment_method_configuration: {
             type: 'object',
@@ -355,6 +353,59 @@ export const tool: Tool = {
           },
         },
         required: ['plan_id'],
+      },
+      {
+        type: 'object',
+        properties: {
+          company_id: {
+            type: 'string',
+            description:
+              'The ID of the company for which to generate the checkout configuration. Only required in setup mode.',
+          },
+          mode: {
+            type: 'string',
+            enum: ['setup'],
+          },
+          metadata: {
+            type: 'object',
+            description: 'The metadata to use for the checkout configuration',
+            additionalProperties: true,
+          },
+          payment_method_configuration: {
+            type: 'object',
+            description:
+              "This currently only works for configurations made in 'setup' mode. The explicit payment method configuration for the checkout session. If not provided, the platform or company's defaults will apply.",
+            properties: {
+              disabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly disabled. Only applies if the include_platform_defaults is true.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              enabled: {
+                type: 'array',
+                description:
+                  'An array of payment method identifiers that are explicitly enabled. This means these payment methods will be shown on checkout. Example use case is to only enable a specific payment method like cashapp, or extending the platform defaults with additional methods.',
+                items: {
+                  $ref: '#/$defs/payment_method_types',
+                },
+              },
+              include_platform_defaults: {
+                type: 'boolean',
+                description:
+                  "Whether Whop's platform default payment method enablement settings are included in this configuration. The full list of default payment methods can be found in the documentation at docs.whop.com/payments.",
+              },
+            },
+            required: ['disabled', 'enabled', 'include_platform_defaults'],
+          },
+          redirect_url: {
+            type: 'string',
+            description: 'The URL to redirect the user to after the checkout configuration is created',
+          },
+        },
+        required: ['company_id', 'mode'],
       },
     ],
     $defs: {
