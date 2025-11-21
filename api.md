@@ -272,6 +272,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutModes</a></code>
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationListResponse</a></code>
 
 Methods:
@@ -552,3 +553,19 @@ Methods:
 
 - <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
 - <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>
+
+# Withdrawals
+
+Types:
+
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalFeeTypes</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalSpeeds</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalStatus</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalTypes</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalRetrieveResponse</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalListResponse</a></code>
+
+Methods:
+
+- <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> WithdrawalRetrieveResponse</code>
+- <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>

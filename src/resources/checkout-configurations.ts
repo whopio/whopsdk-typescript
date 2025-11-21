@@ -68,6 +68,11 @@ export class CheckoutConfigurations extends APIResource {
 export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutConfigurationListResponse>;
 
 /**
+ * The different modes a checkout can be set to.
+ */
+export type CheckoutModes = 'payment' | 'setup';
+
+/**
  * A checkout configuration object.
  *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
  *         This configuration can be re-used by multiple users.
@@ -97,7 +102,7 @@ export interface CheckoutConfigurationListResponse {
   /**
    * The mode of the checkout session.
    */
-  mode: 'payment' | 'setup';
+  mode: CheckoutModes;
 
   /**
    * The explicit payment method configuration for the session, if any. This
@@ -702,6 +707,7 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
 
 export declare namespace CheckoutConfigurations {
   export {
+    type CheckoutModes as CheckoutModes,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,

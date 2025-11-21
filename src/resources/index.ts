@@ -34,6 +34,7 @@ export {
 } from './chat-channels';
 export {
   CheckoutConfigurations,
+  type CheckoutModes,
   type CheckoutConfigurationListResponse,
   type CheckoutConfigurationCreateParams,
   type CheckoutConfigurationListParams,
@@ -289,3 +290,14 @@ export {
   type RefundUpdatedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
+export {
+  Withdrawals,
+  type WithdrawalFeeTypes,
+  type WithdrawalSpeeds,
+  type WithdrawalStatus,
+  type WithdrawalTypes,
+  type WithdrawalRetrieveResponse,
+  type WithdrawalListResponse,
+  type WithdrawalListParams,
+  type WithdrawalListResponsesCursorPage,
+} from './withdrawals';

@@ -1060,3 +1060,17 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `payment:basic:read`
+
+### Resource `withdrawals`:
+
+- `retrieve_withdrawals` (`read`): Retrieves a withdrawal by ID
+
+  Required permissions:
+
+  - `payout:withdrawal:read`
+
+- `list_withdrawals` (`read`): Lists withdrawals
+
+  Required permissions:
+
+  - `payout:withdrawal:read`
