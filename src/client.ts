@@ -56,6 +56,7 @@ import {
   CheckoutConfigurationListResponse,
   CheckoutConfigurationListResponsesCursorPage,
   CheckoutConfigurations,
+  CheckoutModes,
 } from './resources/checkout-configurations';
 import {
   Companies,
@@ -302,6 +303,17 @@ import {
   UnwrapWebhookEvent,
   Webhooks,
 } from './resources/webhooks';
+import {
+  WithdrawalFeeTypes,
+  WithdrawalListParams,
+  WithdrawalListResponse,
+  WithdrawalListResponsesCursorPage,
+  WithdrawalRetrieveResponse,
+  WithdrawalSpeeds,
+  WithdrawalStatus,
+  WithdrawalTypes,
+  Withdrawals,
+} from './resources/withdrawals';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -1063,6 +1075,7 @@ export class Whop {
   notifications: API.Notifications = new API.Notifications(this);
   disputes: API.Disputes = new API.Disputes(this);
   refunds: API.Refunds = new API.Refunds(this);
+  withdrawals: API.Withdrawals = new API.Withdrawals(this);
 }
 
 Whop.Apps = Apps;
@@ -1100,6 +1113,7 @@ Whop.AccessTokens = AccessTokens;
 Whop.Notifications = Notifications;
 Whop.Disputes = Disputes;
 Whop.Refunds = Refunds;
+Whop.Withdrawals = Withdrawals;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1245,6 +1259,7 @@ export declare namespace Whop {
 
   export {
     CheckoutConfigurations as CheckoutConfigurations,
+    type CheckoutModes as CheckoutModes,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
@@ -1435,6 +1450,18 @@ export declare namespace Whop {
     type RefundListResponse as RefundListResponse,
     type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
     type RefundListParams as RefundListParams,
+  };
+
+  export {
+    Withdrawals as Withdrawals,
+    type WithdrawalFeeTypes as WithdrawalFeeTypes,
+    type WithdrawalSpeeds as WithdrawalSpeeds,
+    type WithdrawalStatus as WithdrawalStatus,
+    type WithdrawalTypes as WithdrawalTypes,
+    type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
+    type WithdrawalListResponse as WithdrawalListResponse,
+    type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
+    type WithdrawalListParams as WithdrawalListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

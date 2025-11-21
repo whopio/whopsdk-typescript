@@ -2,6 +2,7 @@
 
 import * as Shared from './shared';
 import * as AppsAPI from './apps';
+import * as CheckoutConfigurationsAPI from './checkout-configurations';
 import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
@@ -449,7 +450,7 @@ export interface CheckoutConfiguration {
   /**
    * The mode of the checkout session.
    */
-  mode: 'payment' | 'setup';
+  mode: CheckoutConfigurationsAPI.CheckoutModes;
 
   /**
    * The explicit payment method configuration for the session, if any. This
