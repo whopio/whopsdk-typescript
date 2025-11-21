@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.0.8 (2025-11-21)
+
+Full Changelog: [v0.0.7...v0.0.8](https://github.com/whopio/whopsdk-typescript/compare/v0.0.7...v0.0.8)
+
+### Features
+
+* **api:** api update ([28b6e38](https://github.com/whopio/whopsdk-typescript/commit/28b6e38f22958a40971ce5b66d6ae951ab48ba0f))
+* **api:** api update ([890c928](https://github.com/whopio/whopsdk-typescript/commit/890c928747eb40d34c03587e9b2be6ac0807b642))
+* **api:** api update ([017a329](https://github.com/whopio/whopsdk-typescript/commit/017a32976f4be1a06c468066d5404e5a00b3fba7))
+* **api:** api update ([82dc6d4](https://github.com/whopio/whopsdk-typescript/commit/82dc6d41895f1f73dc89690569c08a6e36f235fc))
+* **api:** api update ([219287f](https://github.com/whopio/whopsdk-typescript/commit/219287f8de943052d8fca634b6f56323ec1be662))
+* **api:** api update ([96113bd](https://github.com/whopio/whopsdk-typescript/commit/96113bd3ba421a804f756a9e1b7e85062cf208ef))
+* **api:** api update ([a098a7c](https://github.com/whopio/whopsdk-typescript/commit/a098a7cf512183a33b6c55225a236c61a5965e8f))
+* **api:** api update ([72473b0](https://github.com/whopio/whopsdk-typescript/commit/72473b073c6562c43c336d7ab80f04d54027ba62))
+* **api:** api update ([d24a266](https://github.com/whopio/whopsdk-typescript/commit/d24a266e03eac2e38420beb12e47ab6e2d829ec2))
+* **api:** manual updates ([31bdc4c](https://github.com/whopio/whopsdk-typescript/commit/31bdc4cea98497125086adc9044402bd47a4bc61))
+* **api:** manual updates ([dd469e4](https://github.com/whopio/whopsdk-typescript/commit/dd469e48639ac9b826c03806a4e846da056f6d14))
+* **api:** manual updates ([49d3b86](https://github.com/whopio/whopsdk-typescript/commit/49d3b868568fdcd78545c132850a6548d032e4f5))
+
 ## 0.0.7 (2025-11-13)
 
 Full Changelog: [v0.0.6...v0.0.7](https://github.com/whopio/whopsdk-typescript/compare/v0.0.6...v0.0.7)

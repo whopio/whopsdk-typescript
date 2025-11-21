@@ -67,6 +67,7 @@ Types:
 
 Types:
 
+- <code><a href="./src/resources/apps.ts">AppType</a></code>
 - <code><a href="./src/resources/apps.ts">AppListResponse</a></code>
 
 Methods:
@@ -142,6 +143,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">DisputeCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">RefundCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">RefundUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
@@ -181,6 +184,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/forum-posts.ts">ForumPostVisibilityType</a></code>
 - <code><a href="./src/resources/forum-posts.ts">ForumPostListResponse</a></code>
 
 Methods:
@@ -268,6 +272,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutModes</a></code>
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationListResponse</a></code>
 
 Methods:
@@ -458,6 +463,9 @@ Types:
 - <code><a href="./src/resources/course-lessons.ts">LessonVisibilities</a></code>
 - <code><a href="./src/resources/course-lessons.ts">CourseLessonListResponse</a></code>
 - <code><a href="./src/resources/course-lessons.ts">CourseLessonDeleteResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonMarkAsCompletedResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonStartResponse</a></code>
+- <code><a href="./src/resources/course-lessons.ts">CourseLessonSubmitAssessmentResponse</a></code>
 
 Methods:
 
@@ -466,6 +474,9 @@ Methods:
 - <code title="patch /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">update</a>(id, { ...params }) -> Lesson</code>
 - <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
 - <code title="delete /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">delete</a>(id) -> CourseLessonDeleteResponse</code>
+- <code title="post /course_lessons/{lesson_id}/mark_as_completed">client.courseLessons.<a href="./src/resources/course-lessons.ts">markAsCompleted</a>(lessonID) -> CourseLessonMarkAsCompletedResponse</code>
+- <code title="post /course_lessons/{lesson_id}/start">client.courseLessons.<a href="./src/resources/course-lessons.ts">start</a>(lessonID) -> CourseLessonStartResponse</code>
+- <code title="post /course_lessons/{lesson_id}/submit_assessment">client.courseLessons.<a href="./src/resources/course-lessons.ts">submitAssessment</a>(lessonID, { ...params }) -> CourseLessonSubmitAssessmentResponse</code>
 
 # Reviews
 
@@ -526,3 +537,35 @@ Methods:
 - <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputeListResponsesCursorPage</code>
 - <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
 - <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>
+
+# Refunds
+
+Types:
+
+- <code><a href="./src/resources/refunds.ts">PaymentProvider</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundReferenceStatus</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundReferenceType</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundStatus</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundRetrieveResponse</a></code>
+- <code><a href="./src/resources/refunds.ts">RefundListResponse</a></code>
+
+Methods:
+
+- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
+- <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>
+
+# Withdrawals
+
+Types:
+
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalFeeTypes</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalSpeeds</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalStatus</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalTypes</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalRetrieveResponse</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalListResponse</a></code>
+
+Methods:
+
+- <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> WithdrawalRetrieveResponse</code>
+- <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>

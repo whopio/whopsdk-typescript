@@ -6,17 +6,18 @@ import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Whop from '@whop/sdk';
 
 export const metadata: Metadata = {
-  resource: 'course_lessons',
+  resource: 'refunds',
   operation: 'read',
   tags: [],
   httpMethod: 'get',
-  httpPath: '/course_lessons/{id}',
-  operationId: 'retrieveCourseLesson',
+  httpPath: '/refunds/{id}',
+  operationId: 'retrieveRefund',
 };
 
 export const tool: Tool = {
-  name: 'retrieve_course_lessons',
-  description: 'Retrieves a course lesson by ID\n\nRequired permissions:\n - `courses:read`',
+  name: 'retrieve_refunds',
+  description:
+    'Retrieves a Refund by ID\n\nRequired permissions:\n - `payment:basic:read`\n - `member:email:read`\n - `member:basic:read`\n - `member:phone:read`',
   inputSchema: {
     type: 'object',
     properties: {
@@ -33,7 +34,7 @@ export const tool: Tool = {
 
 export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
   const { id, ...body } = args as any;
-  return asTextContentResult(await client.courseLessons.retrieve(id));
+  return asTextContentResult(await client.refunds.retrieve(id));
 };
 
 export default { metadata, tool, handler };

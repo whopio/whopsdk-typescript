@@ -600,6 +600,7 @@ The following tools are available in this MCP server.
   - `plan:create`
   - `access_pass:create`
   - `access_pass:update`
+  - `checkout_configuration:basic:read`
 
 - `retrieve_checkout_configurations` (`read`): Retrieves a checkout configuration by ID
 
@@ -959,6 +960,10 @@ The following tools are available in this MCP server.
 
   - `courses:update`
 
+- `mark_as_completed_course_lessons` (`write`): Marks a course lesson as completed
+- `start_course_lessons` (`write`): Starts a course lesson
+- `submit_assessment_course_lessons` (`write`): Submits answers for a course assessment
+
 ### Resource `reviews`:
 
 - `retrieve_reviews` (`read`): Retrieve a review by its ID
@@ -1038,3 +1043,34 @@ The following tools are available in this MCP server.
   - `member:email:read`
   - `member:basic:read`
   - `member:phone:read`
+
+### Resource `refunds`:
+
+- `retrieve_refunds` (`read`): Retrieves a Refund by ID
+
+  Required permissions:
+
+  - `payment:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`
+
+- `list_refunds` (`read`): Lists Refunds for a payment.
+
+  Required permissions:
+
+  - `payment:basic:read`
+
+### Resource `withdrawals`:
+
+- `retrieve_withdrawals` (`read`): Retrieves a withdrawal by ID
+
+  Required permissions:
+
+  - `payout:withdrawal:read`
+
+- `list_withdrawals` (`read`): Lists withdrawals
+
+  Required permissions:
+
+  - `payout:withdrawal:read`

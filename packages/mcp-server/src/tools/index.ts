@@ -109,6 +109,9 @@ import retrieve_course_lessons from './course-lessons/retrieve-course-lessons';
 import update_course_lessons from './course-lessons/update-course-lessons';
 import list_course_lessons from './course-lessons/list-course-lessons';
 import delete_course_lessons from './course-lessons/delete-course-lessons';
+import mark_as_completed_course_lessons from './course-lessons/mark-as-completed-course-lessons';
+import start_course_lessons from './course-lessons/start-course-lessons';
+import submit_assessment_course_lessons from './course-lessons/submit-assessment-course-lessons';
 import retrieve_reviews from './reviews/retrieve-reviews';
 import list_reviews from './reviews/list-reviews';
 import retrieve_course_students from './course-students/retrieve-course-students';
@@ -119,6 +122,10 @@ import retrieve_disputes from './disputes/retrieve-disputes';
 import list_disputes from './disputes/list-disputes';
 import submit_evidence_disputes from './disputes/submit-evidence-disputes';
 import update_evidence_disputes from './disputes/update-evidence-disputes';
+import retrieve_refunds from './refunds/retrieve-refunds';
+import list_refunds from './refunds/list-refunds';
+import retrieve_withdrawals from './withdrawals/retrieve-withdrawals';
+import list_withdrawals from './withdrawals/list-withdrawals';
 
 export const endpoints: Endpoint[] = [];
 
@@ -231,6 +238,9 @@ addEndpoint(retrieve_course_lessons);
 addEndpoint(update_course_lessons);
 addEndpoint(list_course_lessons);
 addEndpoint(delete_course_lessons);
+addEndpoint(mark_as_completed_course_lessons);
+addEndpoint(start_course_lessons);
+addEndpoint(submit_assessment_course_lessons);
 addEndpoint(retrieve_reviews);
 addEndpoint(list_reviews);
 addEndpoint(retrieve_course_students);
@@ -241,6 +251,10 @@ addEndpoint(retrieve_disputes);
 addEndpoint(list_disputes);
 addEndpoint(submit_evidence_disputes);
 addEndpoint(update_evidence_disputes);
+addEndpoint(retrieve_refunds);
+addEndpoint(list_refunds);
+addEndpoint(retrieve_withdrawals);
+addEndpoint(list_withdrawals);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

@@ -11,6 +11,7 @@ export {
 } from './app-builds';
 export {
   Apps,
+  type AppType,
   type AppListResponse,
   type AppCreateParams,
   type AppUpdateParams,
@@ -33,6 +34,7 @@ export {
 } from './chat-channels';
 export {
   CheckoutConfigurations,
+  type CheckoutModes,
   type CheckoutConfigurationListResponse,
   type CheckoutConfigurationCreateParams,
   type CheckoutConfigurationListParams,
@@ -68,9 +70,13 @@ export {
   type LessonVisibilities,
   type CourseLessonListResponse,
   type CourseLessonDeleteResponse,
+  type CourseLessonMarkAsCompletedResponse,
+  type CourseLessonStartResponse,
+  type CourseLessonSubmitAssessmentResponse,
   type CourseLessonCreateParams,
   type CourseLessonUpdateParams,
   type CourseLessonListParams,
+  type CourseLessonSubmitAssessmentParams,
   type CourseLessonListResponsesCursorPage,
 } from './course-lessons';
 export {
@@ -122,6 +128,7 @@ export {
 } from './experiences';
 export {
   ForumPosts,
+  type ForumPostVisibilityType,
   type ForumPostListResponse,
   type ForumPostCreateParams,
   type ForumPostUpdateParams,
@@ -216,6 +223,17 @@ export {
   type ReactionListResponsesCursorPage,
 } from './reactions';
 export {
+  Refunds,
+  type PaymentProvider,
+  type RefundReferenceStatus,
+  type RefundReferenceType,
+  type RefundStatus,
+  type RefundRetrieveResponse,
+  type RefundListResponse,
+  type RefundListParams,
+  type RefundListResponsesCursorPage,
+} from './refunds';
+export {
   Reviews,
   type ReviewStatus,
   type ReviewRetrieveResponse,
@@ -268,5 +286,18 @@ export {
   type PaymentPendingWebhookEvent,
   type DisputeCreatedWebhookEvent,
   type DisputeUpdatedWebhookEvent,
+  type RefundCreatedWebhookEvent,
+  type RefundUpdatedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
+export {
+  Withdrawals,
+  type WithdrawalFeeTypes,
+  type WithdrawalSpeeds,
+  type WithdrawalStatus,
+  type WithdrawalTypes,
+  type WithdrawalRetrieveResponse,
+  type WithdrawalListResponse,
+  type WithdrawalListParams,
+  type WithdrawalListResponsesCursorPage,
+} from './withdrawals';
