@@ -48,8 +48,6 @@ describe('resource plans', () => {
       release_method: 'buy_now',
       renewal_price: 6.9,
       stock: 42,
-      strike_through_initial_price: 6.9,
-      strike_through_renewal_price: 6.9,
       title: 'title',
       trial_period_days: 42,
       unlimited_stock: true,

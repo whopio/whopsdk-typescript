@@ -24,37 +24,6 @@ export const tool: Tool = {
       id: {
         type: 'string',
       },
-      banner_image: {
-        anyOf: [
-          {
-            type: 'object',
-            title: 'AttachmentInputWithDirectUploadId',
-            description: 'Input for an attachment',
-            properties: {
-              direct_upload_id: {
-                type: 'string',
-                description:
-                  'This ID should be used the first time you upload an attachment. It is the ID of the direct upload that was created when uploading the file to S3 via the mediaDirectUpload mutation.',
-              },
-            },
-            required: ['direct_upload_id'],
-          },
-          {
-            type: 'object',
-            title: 'AttachmentInputWithId',
-            description: 'Input for an attachment',
-            properties: {
-              id: {
-                type: 'string',
-                description:
-                  "The ID of an existing attachment object. Use this when updating a resource and keeping a subset of the attachments. Don't use this unless you know what you're doing.",
-              },
-            },
-            required: ['id'],
-          },
-        ],
-        description: 'A banner image for the product in png, jpeg format',
-      },
       business_type: {
         $ref: '#/$defs/business_types',
       },
