@@ -2,6 +2,7 @@
 
 export * from './shared';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
+export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
   AppBuilds,
   type AppBuildListResponse,
