@@ -685,6 +685,16 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * The minimum creation date to filter by
+   */
+  created_after?: string | null;
+
+  /**
+   * The maximum creation date to filter by
+   */
+  created_before?: string | null;
+
+  /**
    * The direction of the sort.
    */
   direction?: Shared.Direction | null;

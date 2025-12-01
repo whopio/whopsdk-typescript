@@ -94,6 +94,8 @@ describe('resource experiences', () => {
       after: 'after',
       app_id: 'app_xxxxxxxxxxxxxx',
       before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
       first: 42,
       last: 42,
       product_id: 'prod_xxxxxxxxxxxxx',

@@ -38,6 +38,8 @@ describe('resource reviews', () => {
       product_id: 'prod_xxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
       first: 42,
       last: 42,
       max_stars: 42,

@@ -41,6 +41,16 @@ export const tool: Tool = {
           $ref: '#/$defs/collection_method',
         },
       },
+      created_after: {
+        type: 'string',
+        description: 'The minimum creation date to filter by',
+        format: 'date-time',
+      },
+      created_before: {
+        type: 'string',
+        description: 'The maximum creation date to filter by',
+        format: 'date-time',
+      },
       direction: {
         $ref: '#/$defs/direction',
       },
