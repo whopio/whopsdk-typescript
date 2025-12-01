@@ -784,6 +784,16 @@ export interface InvoiceListParams extends CursorPageParams {
   collection_methods?: Array<Shared.CollectionMethod> | null;
 
   /**
+   * The minimum creation date to filter by
+   */
+  created_after?: string | null;
+
+  /**
+   * The maximum creation date to filter by
+   */
+  created_before?: string | null;
+
+  /**
    * The direction of the sort.
    */
   direction?: Shared.Direction | null;

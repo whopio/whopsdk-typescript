@@ -70,6 +70,8 @@ describe('resource transfers', () => {
         {
           after: 'after',
           before: 'before',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
           destination_id: 'destination_id',
           direction: 'asc',
           first: 42,

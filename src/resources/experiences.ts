@@ -377,6 +377,16 @@ export interface ExperienceListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * The minimum creation date to filter by
+   */
+  created_after?: string | null;
+
+  /**
+   * The maximum creation date to filter by
+   */
+  created_before?: string | null;
+
+  /**
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;

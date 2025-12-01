@@ -64,6 +64,8 @@ describe('resource companies', () => {
       parent_company_id: 'parent_company_id',
       after: 'after',
       before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
       direction: 'asc',
       first: 42,
       last: 42,
