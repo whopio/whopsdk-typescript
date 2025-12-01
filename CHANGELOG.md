@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.9 (2025-12-01)
+
+Full Changelog: [v0.0.8...v0.0.9](https://github.com/whopio/whopsdk-typescript/compare/v0.0.8...v0.0.9)
+
+### Features
+
+* **api:** api update ([825c253](https://github.com/whopio/whopsdk-typescript/commit/825c253332b8028fe82c83235034d9640f810ad7))
+* **api:** api update ([c695b11](https://github.com/whopio/whopsdk-typescript/commit/c695b11a8f4a5f18bbe22195df663b56d6986abe))
+* **api:** api update ([654b6b4](https://github.com/whopio/whopsdk-typescript/commit/654b6b40b8184ef13447e90b86f611bccab045fe))
+* **api:** manual updates ([4c4f1a1](https://github.com/whopio/whopsdk-typescript/commit/4c4f1a1100d0602f820058f6d7ee80de632e35b2))
+* **mcp:** add detail field to docs search tool ([3008c29](https://github.com/whopio/whopsdk-typescript/commit/3008c29d60e999cb1cac7f49c500c1fd20fce7cf))
+
+
+### Chores
+
+* **internal:** codegen related update ([9f06a6d](https://github.com/whopio/whopsdk-typescript/commit/9f06a6d8a1eb309d87e3aef373179abe99738dbe))
+
 ## 0.0.8 (2025-11-21)
 
 Full Changelog: [v0.0.7...v0.0.8](https://github.com/whopio/whopsdk-typescript/compare/v0.0.7...v0.0.8)

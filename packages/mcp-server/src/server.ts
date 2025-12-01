@@ -34,7 +34,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'whop_sdk_api',
-      version: '0.0.8',
+      version: '0.0.9',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
