@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from '@whop/mcp/tools/types';
+import { Metadata, asErrorResult, asTextContentResult } from '@whop/mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import Whop from '@whop/sdk';
@@ -257,7 +257,14 @@ export const tool: Tool = {
 export const handler = async (client: Whop, args: Record<string, unknown> | undefined) => {
   const body = args as any;
   const response = await client.payments.list(body).asResponse();
-  return asTextContentResult(await response.json());
+  try {
+    return asTextContentResult(await response.json());
+  } catch (error) {
+    if (error instanceof Whop.APIError) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

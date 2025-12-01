@@ -49,7 +49,7 @@ export const handler = async (client: Whop, args: Record<string, unknown> | unde
       await maybeFilter(jq_filter, await client.users.checkAccess(resource_id, body)),
     );
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Whop.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;

@@ -175,7 +175,7 @@ export const handler = async (client: Whop, args: Record<string, unknown> | unde
   try {
     return asTextContentResult(await maybeFilter(jq_filter, await response.json()));
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Whop.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;
