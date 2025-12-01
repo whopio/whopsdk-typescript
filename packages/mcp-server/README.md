@@ -1074,3 +1074,7 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `payout:withdrawal:read`
+
+### Resource `account_links`:
+
+- `create_account_links` (`write`): Generates a url that a user can be directed to in order to access their sub-merchant account. For example, they can visit the hosted payouts portal or the hosted KYC onboarding flow.

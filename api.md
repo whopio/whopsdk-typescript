@@ -569,3 +569,13 @@ Methods:
 
 - <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> WithdrawalRetrieveResponse</code>
 - <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>
+
+# AccountLinks
+
+Types:
+
+- <code><a href="./src/resources/account-links.ts">AccountLinkCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /account_links">client.accountLinks.<a href="./src/resources/account-links.ts">create</a>({ ...params }) -> AccountLinkCreateResponse</code>

@@ -20,6 +20,7 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
+import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
   AppBuildCreateParams,
   AppBuildListParams,
@@ -1073,6 +1074,7 @@ export class Whop {
   disputes: API.Disputes = new API.Disputes(this);
   refunds: API.Refunds = new API.Refunds(this);
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
+  accountLinks: API.AccountLinks = new API.AccountLinks(this);
 }
 
 Whop.Apps = Apps;
@@ -1111,6 +1113,7 @@ Whop.Notifications = Notifications;
 Whop.Disputes = Disputes;
 Whop.Refunds = Refunds;
 Whop.Withdrawals = Withdrawals;
+Whop.AccountLinks = AccountLinks;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1459,6 +1462,12 @@ export declare namespace Whop {
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalListParams as WithdrawalListParams,
+  };
+
+  export {
+    AccountLinks as AccountLinks,
+    type AccountLinkCreateResponse as AccountLinkCreateResponse,
+    type AccountLinkCreateParams as AccountLinkCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;
