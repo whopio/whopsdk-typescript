@@ -96,7 +96,6 @@ describe('resource products', () => {
       client.products.update(
         'prod_xxxxxxxxxxxxx',
         {
-          banner_image: { direct_upload_id: 'direct_upload_id' },
           business_type: 'education_program',
           collect_shipping_address: true,
           custom_cta: 'get_access',
@@ -139,6 +138,8 @@ describe('resource products', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
       direction: 'asc',
       first: 42,
       last: 42,

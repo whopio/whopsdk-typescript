@@ -77,7 +77,7 @@ export const tool: Tool = {
       },
       expiration_days: {
         type: 'integer',
-        description: 'The interval at which the plan charges (expiration plans).',
+        description: 'The interval at which the plan expires and revokes access (expiration plans).',
       },
       image: {
         anyOf: [
@@ -165,16 +165,6 @@ export const tool: Tool = {
       stock: {
         type: 'integer',
         description: 'The number of units available for purchase.',
-      },
-      strike_through_initial_price: {
-        type: 'number',
-        description:
-          'The price to display with a strikethrough for the initial price. Provided as a number in dollars. Eg: 19.99 for $19.99',
-      },
-      strike_through_renewal_price: {
-        type: 'number',
-        description:
-          'The price to display with a strikethrough for the renewal price. Provided as a number in dollars. Eg: 19.99 for $19.99',
       },
       title: {
         type: 'string',
@@ -378,6 +368,7 @@ export const tool: Tool = {
           'splitit',
           'platform_balance',
           'apple',
+          'venmo',
           'unknown',
         ],
       },

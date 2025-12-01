@@ -54,6 +54,7 @@ export const tool: Tool = {
         enum: [
           'discoverable_at',
           'total_installs_last_30_days',
+          'total_installs_last_7_days',
           'time_spent',
           'time_spent_last_24_hours',
           'daily_active_users',

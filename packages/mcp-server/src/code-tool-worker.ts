@@ -165,6 +165,7 @@ const fuse = new Fuse(
     'client.refunds.retrieve',
     'client.withdrawals.list',
     'client.withdrawals.retrieve',
+    'client.accountLinks.create',
   ],
   { threshold: 1, shouldSort: true },
 );

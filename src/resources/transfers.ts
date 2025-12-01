@@ -168,6 +168,16 @@ export interface TransferListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * The minimum creation date to filter by
+   */
+  created_after?: string | null;
+
+  /**
+   * The maximum creation date to filter by
+   */
+  created_before?: string | null;
+
+  /**
    * Filter transfers to only those that were sent to this destination account.
    * (user_xxx, biz_xxx, ldgr_xxx)
    */

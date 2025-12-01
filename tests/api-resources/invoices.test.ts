@@ -96,6 +96,8 @@ describe('resource invoices', () => {
       after: 'after',
       before: 'before',
       collection_methods: ['send_invoice'],
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
       direction: 'asc',
       first: 42,
       last: 42,

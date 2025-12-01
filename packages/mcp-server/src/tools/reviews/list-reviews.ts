@@ -34,6 +34,16 @@ export const tool: Tool = {
         type: 'string',
         description: 'Returns the elements in the list that come before the specified cursor.',
       },
+      created_after: {
+        type: 'string',
+        description: 'The minimum creation date to filter by',
+        format: 'date-time',
+      },
+      created_before: {
+        type: 'string',
+        description: 'The maximum creation date to filter by',
+        format: 'date-time',
+      },
       first: {
         type: 'integer',
         description: 'Returns the first _n_ elements from the list.',

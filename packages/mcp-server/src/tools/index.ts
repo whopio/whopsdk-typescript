@@ -126,6 +126,7 @@ import retrieve_refunds from './refunds/retrieve-refunds';
 import list_refunds from './refunds/list-refunds';
 import retrieve_withdrawals from './withdrawals/retrieve-withdrawals';
 import list_withdrawals from './withdrawals/list-withdrawals';
+import create_account_links from './account-links/create-account-links';
 
 export const endpoints: Endpoint[] = [];
 
@@ -255,6 +256,7 @@ addEndpoint(retrieve_refunds);
 addEndpoint(list_refunds);
 addEndpoint(retrieve_withdrawals);
 addEndpoint(list_withdrawals);
+addEndpoint(create_account_links);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
