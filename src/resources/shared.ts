@@ -2174,6 +2174,11 @@ export interface Payment {
   payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
 
   /**
+   * The payment token used for the payment, if available.
+   */
+  payment_token: Payment.PaymentToken | null;
+
+  /**
    * The plan attached to this payment.
    */
   plan: Payment.Plan | null;
@@ -2337,6 +2342,60 @@ export namespace Payment {
      * The state of the membership.
      */
     status: Shared.MembershipStatus;
+  }
+
+  /**
+   * The payment token used for the payment, if available.
+   */
+  export interface PaymentToken {
+    /**
+     * The ID of the payment token
+     */
+    id: string;
+
+    /**
+     * The card data associated with the payment token, if its a debit or credit card
+     * token.
+     */
+    card: PaymentToken.Card | null;
+
+    /**
+     * The date and time the payment token was created
+     */
+    created_at: string;
+
+    /**
+     * The payment method type of the payment token
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+  }
+
+  export namespace PaymentToken {
+    /**
+     * The card data associated with the payment token, if its a debit or credit card
+     * token.
+     */
+    export interface Card {
+      /**
+       * Possible card brands that a payment token can have
+       */
+      brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * Card expiration month, like 03 for March.
+       */
+      exp_month: number | null;
+
+      /**
+       * Card expiration year, like 27 for 2027.
+       */
+      exp_year: number | null;
+
+      /**
+       * Last four digits of the card.
+       */
+      last4: string | null;
+    }
   }
 
   /**
