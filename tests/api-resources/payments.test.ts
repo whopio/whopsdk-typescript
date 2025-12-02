@@ -9,6 +9,63 @@ const client = new Whop({
 
 describe('resource payments', () => {
   // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.payments.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      member_id: 'mber_xxxxxxxxxxxxx',
+      payment_token_id: 'payt_xxxxxxxxxxxxx',
+      plan: { currency: 'usd' },
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.payments.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      member_id: 'mber_xxxxxxxxxxxxx',
+      payment_token_id: 'payt_xxxxxxxxxxxxx',
+      plan: {
+        currency: 'usd',
+        billing_period: 42,
+        description: 'description',
+        expiration_days: 42,
+        force_create_new_plan: true,
+        initial_price: 6.9,
+        internal_notes: 'internal_notes',
+        plan_type: 'renewal',
+        product: {
+          external_identifier: 'external_identifier',
+          title: 'title',
+          business_type: 'education_program',
+          collect_shipping_address: true,
+          custom_statement_descriptor: 'custom_statement_descriptor',
+          description: 'description',
+          global_affiliate_percentage: 6.9,
+          global_affiliate_status: 'enabled',
+          headline: 'headline',
+          industry_type: 'trading',
+          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
+          redirect_purchase_url: 'redirect_purchase_url',
+          route: 'route',
+          visibility: 'visible',
+        },
+        product_id: 'prod_xxxxxxxxxxxxx',
+        renewal_price: 6.9,
+        title: 'title',
+        trial_period_days: 42,
+        visibility: 'visible',
+      },
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.payments.retrieve('pay_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

@@ -105,6 +105,7 @@ const fuse = new Fuse(
     'client.chatChannels.update',
     'client.users.checkAccess',
     'client.users.retrieve',
+    'client.payments.create',
     'client.payments.list',
     'client.payments.refund',
     'client.payments.retrieve',
@@ -166,6 +167,10 @@ const fuse = new Fuse(
     'client.withdrawals.list',
     'client.withdrawals.retrieve',
     'client.accountLinks.create',
+    'client.setupIntents.list',
+    'client.setupIntents.retrieve',
+    'client.paymentTokens.list',
+    'client.paymentTokens.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );
