@@ -10,9 +10,11 @@ import { path } from '../internal/utils/path';
 
 export class Payments extends APIResource {
   /**
-   * Creates a payment. This endpoint will respond with a payment object immediately,
-   * but the payment is processed asynchronously in the background. Use webhooks to
-   * be notified when the payment succeeds or fails.
+   * Charge an existing member off-session using one of their stored payment methods.
+   * You can provide an existing plan, or create a new one in-line. This endpoint
+   * will respond with a payment object immediately, but the payment is processed
+   * asynchronously in the background. Use webhooks to be notified when the payment
+   * succeeds or fails.
    *
    * Required permissions:
    *
@@ -32,7 +34,7 @@ export class Payments extends APIResource {
    * const payment = await client.payments.create({
    *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   member_id: 'mber_xxxxxxxxxxxxx',
-   *   payment_token_id: 'payt_xxxxxxxxxxxxx',
+   *   payment_method_id: 'pmt_xxxxxxxxxxxxxx',
    *   plan: { currency: 'usd' },
    * });
    * ```
@@ -389,14 +391,14 @@ export interface PaymentListResponse {
   paid_at: string | null;
 
   /**
+   * The payment method used for the payment, if available.
+   */
+  payment_method: PaymentListResponse.PaymentMethod | null;
+
+  /**
    * The different types of payment methods that can be used.
    */
   payment_method_type: PaymentMethodTypes | null;
-
-  /**
-   * The payment token used for the payment, if available.
-   */
-  payment_token: PaymentListResponse.PaymentToken | null;
 
   /**
    * The plan attached to this payment.
@@ -565,35 +567,33 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The payment token used for the payment, if available.
+   * The payment method used for the payment, if available.
    */
-  export interface PaymentToken {
+  export interface PaymentMethod {
     /**
-     * The ID of the payment token
+     * The ID of the payment method
      */
     id: string;
 
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
-    card: PaymentToken.Card | null;
+    card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment token was created
+     * The date and time the payment method was created
      */
     created_at: string;
 
     /**
-     * The payment method type of the payment token
+     * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
   }
 
-  export namespace PaymentToken {
+  export namespace PaymentMethod {
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
     export interface Card {
       /**
@@ -726,10 +726,10 @@ export declare namespace PaymentCreateParams {
     member_id: string;
 
     /**
-     * The ID of the payment token to use for the payment. It must be connected to the
+     * The ID of the payment method to use for the payment. It must be connected to the
      * Member being charged.
      */
-    payment_token_id: string;
+    payment_method_id: string;
 
     /**
      * Pass this object to create a new plan for this payment
@@ -910,10 +910,10 @@ export declare namespace PaymentCreateParams {
     member_id: string;
 
     /**
-     * The ID of the payment token to use for the payment. It must be connected to the
+     * The ID of the payment method to use for the payment. It must be connected to the
      * Member being charged.
      */
-    payment_token_id: string;
+    payment_method_id: string;
 
     /**
      * An ID of an existing plan to use for the payment.

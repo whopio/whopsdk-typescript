@@ -193,13 +193,13 @@ import {
   Notifications,
 } from './resources/notifications';
 import {
-  PaymentTokenListParams,
-  PaymentTokenListResponse,
-  PaymentTokenListResponsesCursorPage,
-  PaymentTokenRetrieveParams,
-  PaymentTokenRetrieveResponse,
-  PaymentTokens,
-} from './resources/payment-tokens';
+  PaymentMethodListParams,
+  PaymentMethodListResponse,
+  PaymentMethodListResponsesCursorPage,
+  PaymentMethodRetrieveParams,
+  PaymentMethodRetrieveResponse,
+  PaymentMethods,
+} from './resources/payment-methods';
 import {
   BillingReasons,
   CardBrands,
@@ -1099,7 +1099,7 @@ export class Whop {
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
-  paymentTokens: API.PaymentTokens = new API.PaymentTokens(this);
+  paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
 }
 
 Whop.Apps = Apps;
@@ -1140,7 +1140,7 @@ Whop.Refunds = Refunds;
 Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
 Whop.SetupIntents = SetupIntents;
-Whop.PaymentTokens = PaymentTokens;
+Whop.PaymentMethods = PaymentMethods;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1511,12 +1511,12 @@ export declare namespace Whop {
   };
 
   export {
-    PaymentTokens as PaymentTokens,
-    type PaymentTokenRetrieveResponse as PaymentTokenRetrieveResponse,
-    type PaymentTokenListResponse as PaymentTokenListResponse,
-    type PaymentTokenListResponsesCursorPage as PaymentTokenListResponsesCursorPage,
-    type PaymentTokenRetrieveParams as PaymentTokenRetrieveParams,
-    type PaymentTokenListParams as PaymentTokenListParams,
+    PaymentMethods as PaymentMethods,
+    type PaymentMethodRetrieveResponse as PaymentMethodRetrieveResponse,
+    type PaymentMethodListResponse as PaymentMethodListResponse,
+    type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
+    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
+    type PaymentMethodListParams as PaymentMethodListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

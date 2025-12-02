@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'create_payments',
   description:
-    'Creates a payment. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.\n\nRequired permissions:\n - `payment:charge`\n - `plan:create`\n - `access_pass:create`\n - `access_pass:update`\n - `plan:basic:read`\n - `access_pass:basic:read`\n - `member:email:read`\n - `member:basic:read`\n - `member:phone:read`\n - `promo_code:basic:read`',
+    'Charge an existing member off-session using one of their stored payment methods. You can provide an existing plan, or create a new one in-line. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.\n\nRequired permissions:\n - `payment:charge`\n - `plan:create`\n - `access_pass:create`\n - `access_pass:update`\n - `plan:basic:read`\n - `access_pass:basic:read`\n - `member:email:read`\n - `member:basic:read`\n - `member:phone:read`\n - `promo_code:basic:read`',
   inputSchema: {
     type: 'object',
     anyOf: [
@@ -32,10 +32,10 @@ export const tool: Tool = {
             type: 'string',
             description: 'The ID of the member to create the payment for.',
           },
-          payment_token_id: {
+          payment_method_id: {
             type: 'string',
             description:
-              'The ID of the payment token to use for the payment. It must be connected to the Member being charged.',
+              'The ID of the payment method to use for the payment. It must be connected to the Member being charged.',
           },
           plan: {
             type: 'object',
@@ -158,7 +158,7 @@ export const tool: Tool = {
             required: ['currency'],
           },
         },
-        required: ['company_id', 'member_id', 'payment_token_id', 'plan'],
+        required: ['company_id', 'member_id', 'payment_method_id', 'plan'],
       },
       {
         type: 'object',
@@ -171,17 +171,17 @@ export const tool: Tool = {
             type: 'string',
             description: 'The ID of the member to create the payment for.',
           },
-          payment_token_id: {
+          payment_method_id: {
             type: 'string',
             description:
-              'The ID of the payment token to use for the payment. It must be connected to the Member being charged.',
+              'The ID of the payment method to use for the payment. It must be connected to the Member being charged.',
           },
           plan_id: {
             type: 'string',
             description: 'An ID of an existing plan to use for the payment.',
           },
         },
-        required: ['company_id', 'member_id', 'payment_token_id', 'plan_id'],
+        required: ['company_id', 'member_id', 'payment_method_id', 'plan_id'],
       },
     ],
     $defs: {

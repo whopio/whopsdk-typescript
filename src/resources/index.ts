@@ -180,13 +180,13 @@ export {
   type NotificationCreateParams,
 } from './notifications';
 export {
-  PaymentTokens,
-  type PaymentTokenRetrieveResponse,
-  type PaymentTokenListResponse,
-  type PaymentTokenRetrieveParams,
-  type PaymentTokenListParams,
-  type PaymentTokenListResponsesCursorPage,
-} from './payment-tokens';
+  PaymentMethods,
+  type PaymentMethodRetrieveResponse,
+  type PaymentMethodListResponse,
+  type PaymentMethodRetrieveParams,
+  type PaymentMethodListParams,
+  type PaymentMethodListResponsesCursorPage,
+} from './payment-methods';
 export {
   Payments,
   type BillingReasons,

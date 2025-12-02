@@ -597,14 +597,14 @@ Methods:
 - <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id) -> SetupIntent</code>
 - <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentListResponsesCursorPage</code>
 
-# PaymentTokens
+# PaymentMethods
 
 Types:
 
-- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenRetrieveResponse</a></code>
-- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenListResponse</a></code>
+- <code><a href="./src/resources/payment-methods.ts">PaymentMethodRetrieveResponse</a></code>
+- <code><a href="./src/resources/payment-methods.ts">PaymentMethodListResponse</a></code>
 
 Methods:
 
-- <code title="get /payment_tokens/{id}">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">retrieve</a>(id, { ...params }) -> PaymentTokenRetrieveResponse</code>
-- <code title="get /payment_tokens">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">list</a>({ ...params }) -> PaymentTokenListResponsesCursorPage</code>
+- <code title="get /payment_methods/{id}">client.paymentMethods.<a href="./src/resources/payment-methods.ts">retrieve</a>(id, { ...params }) -> PaymentMethodRetrieveResponse</code>
+- <code title="get /payment_methods">client.paymentMethods.<a href="./src/resources/payment-methods.ts">list</a>({ ...params }) -> PaymentMethodListResponsesCursorPage</code>

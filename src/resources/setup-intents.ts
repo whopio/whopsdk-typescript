@@ -10,7 +10,11 @@ import { path } from '../internal/utils/path';
 
 export class SetupIntents extends APIResource {
   /**
-   * Retrieves a Setup Intent by ID
+   * A setup intent is an object used to securely collect and store a member’s
+   * payment method for future use without charging them immediately. It handles
+   * authentication steps up front so future off-session payments can be completed
+   * smoothly. This ensures the payment method is verified and ready for later
+   * billing.
    *
    * Required permissions:
    *
@@ -23,7 +27,11 @@ export class SetupIntents extends APIResource {
   }
 
   /**
-   * Lists Setup Intents
+   * A setup intent is an object used to securely collect and store a member’s
+   * payment method for future use without charging them immediately. It handles
+   * authentication steps up front so future off-session payments can be completed
+   * smoothly. This ensures the payment method is verified and ready for later
+   * billing.
    *
    * Required permissions:
    *
@@ -85,9 +93,9 @@ export interface SetupIntent {
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The payment token created during the setup, if available.
+   * The payment method created during the setup, if available.
    */
-  payment_token: SetupIntent.PaymentToken | null;
+  payment_method: SetupIntent.PaymentMethod | null;
 
   /**
    * The status of the setup intent
@@ -159,35 +167,33 @@ export namespace SetupIntent {
   }
 
   /**
-   * The payment token created during the setup, if available.
+   * The payment method created during the setup, if available.
    */
-  export interface PaymentToken {
+  export interface PaymentMethod {
     /**
-     * The ID of the payment token
+     * The ID of the payment method
      */
     id: string;
 
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
-    card: PaymentToken.Card | null;
+    card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment token was created
+     * The date and time the payment method was created
      */
     created_at: string;
 
     /**
-     * The payment method type of the payment token
+     * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
   }
 
-  export namespace PaymentToken {
+  export namespace PaymentMethod {
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
     export interface Card {
       /**
@@ -259,9 +265,9 @@ export interface SetupIntentListResponse {
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The payment token created during the setup, if available.
+   * The payment method created during the setup, if available.
    */
-  payment_token: SetupIntentListResponse.PaymentToken | null;
+  payment_method: SetupIntentListResponse.PaymentMethod | null;
 
   /**
    * The status of the setup intent
@@ -333,35 +339,33 @@ export namespace SetupIntentListResponse {
   }
 
   /**
-   * The payment token created during the setup, if available.
+   * The payment method created during the setup, if available.
    */
-  export interface PaymentToken {
+  export interface PaymentMethod {
     /**
-     * The ID of the payment token
+     * The ID of the payment method
      */
     id: string;
 
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
-    card: PaymentToken.Card | null;
+    card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment token was created
+     * The date and time the payment method was created
      */
     created_at: string;
 
     /**
-     * The payment method type of the payment token
+     * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
   }
 
-  export namespace PaymentToken {
+  export namespace PaymentMethod {
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
     export interface Card {
       /**

@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource paymentTokens', () => {
+describe('resource paymentMethods', () => {
   // Prism tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.paymentTokens.retrieve('payt_xxxxxxxxxxxxx', {
+    const responsePromise = client.paymentMethods.retrieve('payt_xxxxxxxxxxxxx', {
       member_id: 'mber_xxxxxxxxxxxxx',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -24,14 +24,14 @@ describe('resource paymentTokens', () => {
 
   // Prism tests are disabled
   test.skip('retrieve: required and optional params', async () => {
-    const response = await client.paymentTokens.retrieve('payt_xxxxxxxxxxxxx', {
+    const response = await client.paymentMethods.retrieve('payt_xxxxxxxxxxxxx', {
       member_id: 'mber_xxxxxxxxxxxxx',
     });
   });
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.paymentTokens.list({ member_id: 'mber_xxxxxxxxxxxxx' });
+    const responsePromise = client.paymentMethods.list({ member_id: 'mber_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,7 +43,7 @@ describe('resource paymentTokens', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.paymentTokens.list({
+    const response = await client.paymentMethods.list({
       member_id: 'mber_xxxxxxxxxxxxx',
       after: 'after',
       before: 'before',

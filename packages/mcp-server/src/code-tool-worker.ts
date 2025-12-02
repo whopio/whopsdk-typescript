@@ -169,8 +169,8 @@ const fuse = new Fuse(
     'client.accountLinks.create',
     'client.setupIntents.list',
     'client.setupIntents.retrieve',
-    'client.paymentTokens.list',
-    'client.paymentTokens.retrieve',
+    'client.paymentMethods.list',
+    'client.paymentMethods.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );

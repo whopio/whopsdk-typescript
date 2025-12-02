@@ -61,6 +61,7 @@ describe('resource invoices', () => {
       product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
       charge_buyer_fee: true,
       customer_name: 'customer_name',
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
     });
   });
