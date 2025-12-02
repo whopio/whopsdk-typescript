@@ -662,7 +662,7 @@ The following tools are available in this MCP server.
 
 ### Resource `payments`:
 
-- `create_payments` (`write`): Creates a payment. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.
+- `create_payments` (`write`): Charge an existing member off-session using one of their stored payment methods. You can provide an existing plan, or create a new one in-line. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.
 
   Required permissions:
 
@@ -1096,7 +1096,7 @@ The following tools are available in this MCP server.
 
 ### Resource `setup_intents`:
 
-- `retrieve_setup_intents` (`read`): Retrieves a Setup Intent by ID
+- `retrieve_setup_intents` (`read`): A setup intent is an object used to securely collect and store a member’s payment method for future use without charging them immediately. It handles authentication steps up front so future off-session payments can be completed smoothly. This ensures the payment method is verified and ready for later billing.
 
   Required permissions:
 
@@ -1104,24 +1104,10 @@ The following tools are available in this MCP server.
   - `member:basic:read`
   - `member:email:read`
 
-- `list_setup_intents` (`read`): Lists Setup Intents
+- `list_setup_intents` (`read`): A setup intent is an object used to securely collect and store a member’s payment method for future use without charging them immediately. It handles authentication steps up front so future off-session payments can be completed smoothly. This ensures the payment method is verified and ready for later billing.
 
   Required permissions:
 
   - `payment:setup_intent:read`
   - `member:basic:read`
   - `member:email:read`
-
-### Resource `payment_tokens`:
-
-- `retrieve_payment_tokens` (`read`): Retrieves a PaymentToken by ID
-
-  Required permissions:
-
-  - `member:payment_methods:read`
-
-- `list_payment_tokens` (`read`): Lists PaymentTokens
-
-  Required permissions:
-
-  - `member:payment_methods:read`

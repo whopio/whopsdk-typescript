@@ -13,7 +13,7 @@ describe('resource payments', () => {
     const responsePromise = client.payments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       member_id: 'mber_xxxxxxxxxxxxx',
-      payment_token_id: 'payt_xxxxxxxxxxxxx',
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       plan: { currency: 'usd' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -30,7 +30,7 @@ describe('resource payments', () => {
     const response = await client.payments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       member_id: 'mber_xxxxxxxxxxxxx',
-      payment_token_id: 'payt_xxxxxxxxxxxxx',
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       plan: {
         currency: 'usd',
         billing_period: 42,

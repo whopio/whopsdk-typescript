@@ -130,8 +130,6 @@ import list_withdrawals from './withdrawals/list-withdrawals';
 import create_account_links from './account-links/create-account-links';
 import retrieve_setup_intents from './setup-intents/retrieve-setup-intents';
 import list_setup_intents from './setup-intents/list-setup-intents';
-import retrieve_payment_tokens from './payment-tokens/retrieve-payment-tokens';
-import list_payment_tokens from './payment-tokens/list-payment-tokens';
 
 export const endpoints: Endpoint[] = [];
 
@@ -265,8 +263,6 @@ addEndpoint(list_withdrawals);
 addEndpoint(create_account_links);
 addEndpoint(retrieve_setup_intents);
 addEndpoint(list_setup_intents);
-addEndpoint(retrieve_payment_tokens);
-addEndpoint(list_payment_tokens);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

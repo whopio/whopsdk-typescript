@@ -132,6 +132,12 @@ export declare namespace InvoiceCreateParams {
     customer_name?: string | null;
 
     /**
+     * The payment method ID to use for this invoice. If using charge_automatically,
+     * you must provide a payment_method_id.
+     */
+    payment_method_id?: string | null;
+
+    /**
      * The payment token ID to use for this invoice. If using charge_automatically, you
      * must provide a payment_token.
      */
@@ -308,6 +314,12 @@ export declare namespace InvoiceCreateParams {
      * company yet.
      */
     customer_name?: string | null;
+
+    /**
+     * The payment method ID to use for this invoice. If using charge_automatically,
+     * you must provide a payment_method_id.
+     */
+    payment_method_id?: string | null;
 
     /**
      * The payment token ID to use for this invoice. If using charge_automatically, you
@@ -489,6 +501,12 @@ export declare namespace InvoiceCreateParams {
     customer_name?: string | null;
 
     /**
+     * The payment method ID to use for this invoice. If using charge_automatically,
+     * you must provide a payment_method_id.
+     */
+    payment_method_id?: string | null;
+
+    /**
      * The payment token ID to use for this invoice. If using charge_automatically, you
      * must provide a payment_token.
      */
@@ -649,6 +667,12 @@ export declare namespace InvoiceCreateParams {
      * company yet.
      */
     customer_name?: string | null;
+
+    /**
+     * The payment method ID to use for this invoice. If using charge_automatically,
+     * you must provide a payment_method_id.
+     */
+    payment_method_id?: string | null;
 
     /**
      * The payment token ID to use for this invoice. If using charge_automatically, you
