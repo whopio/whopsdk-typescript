@@ -66,6 +66,7 @@ import update_chat_channels from './chat-channels/update-chat-channels';
 import list_chat_channels from './chat-channels/list-chat-channels';
 import retrieve_users from './users/retrieve-users';
 import check_access_users from './users/check-access-users';
+import create_payments from './payments/create-payments';
 import retrieve_payments from './payments/retrieve-payments';
 import list_payments from './payments/list-payments';
 import refund_payments from './payments/refund-payments';
@@ -127,6 +128,10 @@ import list_refunds from './refunds/list-refunds';
 import retrieve_withdrawals from './withdrawals/retrieve-withdrawals';
 import list_withdrawals from './withdrawals/list-withdrawals';
 import create_account_links from './account-links/create-account-links';
+import retrieve_setup_intents from './setup-intents/retrieve-setup-intents';
+import list_setup_intents from './setup-intents/list-setup-intents';
+import retrieve_payment_tokens from './payment-tokens/retrieve-payment-tokens';
+import list_payment_tokens from './payment-tokens/list-payment-tokens';
 
 export const endpoints: Endpoint[] = [];
 
@@ -196,6 +201,7 @@ addEndpoint(update_chat_channels);
 addEndpoint(list_chat_channels);
 addEndpoint(retrieve_users);
 addEndpoint(check_access_users);
+addEndpoint(create_payments);
 addEndpoint(retrieve_payments);
 addEndpoint(list_payments);
 addEndpoint(refund_payments);
@@ -257,6 +263,10 @@ addEndpoint(list_refunds);
 addEndpoint(retrieve_withdrawals);
 addEndpoint(list_withdrawals);
 addEndpoint(create_account_links);
+addEndpoint(retrieve_setup_intents);
+addEndpoint(list_setup_intents);
+addEndpoint(retrieve_payment_tokens);
+addEndpoint(list_payment_tokens);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

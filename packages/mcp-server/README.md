@@ -662,6 +662,21 @@ The following tools are available in this MCP server.
 
 ### Resource `payments`:
 
+- `create_payments` (`write`): Creates a payment. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.
+
+  Required permissions:
+
+  - `payment:charge`
+  - `plan:create`
+  - `access_pass:create`
+  - `access_pass:update`
+  - `plan:basic:read`
+  - `access_pass:basic:read`
+  - `member:email:read`
+  - `member:basic:read`
+  - `member:phone:read`
+  - `promo_code:basic:read`
+
 - `retrieve_payments` (`read`): Retrieves a payment by ID
 
   Required permissions:
@@ -1078,3 +1093,35 @@ The following tools are available in this MCP server.
 ### Resource `account_links`:
 
 - `create_account_links` (`write`): Generates a url that a user can be directed to in order to access their sub-merchant account. For example, they can visit the hosted payouts portal or the hosted KYC onboarding flow.
+
+### Resource `setup_intents`:
+
+- `retrieve_setup_intents` (`read`): Retrieves a Setup Intent by ID
+
+  Required permissions:
+
+  - `payment:setup_intent:read`
+  - `member:basic:read`
+  - `member:email:read`
+
+- `list_setup_intents` (`read`): Lists Setup Intents
+
+  Required permissions:
+
+  - `payment:setup_intent:read`
+  - `member:basic:read`
+  - `member:email:read`
+
+### Resource `payment_tokens`:
+
+- `retrieve_payment_tokens` (`read`): Retrieves a PaymentToken by ID
+
+  Required permissions:
+
+  - `member:payment_methods:read`
+
+- `list_payment_tokens` (`read`): Lists PaymentTokens
+
+  Required permissions:
+
+  - `member:payment_methods:read`

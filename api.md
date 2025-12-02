@@ -332,6 +332,7 @@ Types:
 
 Methods:
 
+- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
 - <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
@@ -582,3 +583,28 @@ Types:
 Methods:
 
 - <code title="post /account_links">client.accountLinks.<a href="./src/resources/account-links.ts">create</a>({ ...params }) -> AccountLinkCreateResponse</code>
+
+# SetupIntents
+
+Types:
+
+- <code><a href="./src/resources/setup-intents.ts">SetupIntent</a></code>
+- <code><a href="./src/resources/setup-intents.ts">SetupIntentStatus</a></code>
+- <code><a href="./src/resources/setup-intents.ts">SetupIntentListResponse</a></code>
+
+Methods:
+
+- <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id) -> SetupIntent</code>
+- <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentListResponsesCursorPage</code>
+
+# PaymentTokens
+
+Types:
+
+- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenRetrieveResponse</a></code>
+- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenListResponse</a></code>
+
+Methods:
+
+- <code title="get /payment_tokens/{id}">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">retrieve</a>(id, { ...params }) -> PaymentTokenRetrieveResponse</code>
+- <code title="get /payment_tokens">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">list</a>({ ...params }) -> PaymentTokenListResponsesCursorPage</code>
