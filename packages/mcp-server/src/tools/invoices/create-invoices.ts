@@ -153,6 +153,11 @@ export const tool: Tool = {
             description:
               'The name of the customer to create this invoice for. This is required if you want to create an invoice for a customer who does not have a member of your company yet.',
           },
+          payment_method_id: {
+            type: 'string',
+            description:
+              'The payment method ID to use for this invoice. If using charge_automatically, you must provide a payment_method_id.',
+          },
           payment_token_id: {
             type: 'string',
             description:
@@ -294,6 +299,11 @@ export const tool: Tool = {
             description:
               'The name of the customer to create this invoice for. This is required if you want to create an invoice for a customer who does not have a member of your company yet.',
           },
+          payment_method_id: {
+            type: 'string',
+            description:
+              'The payment method ID to use for this invoice. If using charge_automatically, you must provide a payment_method_id.',
+          },
           payment_token_id: {
             type: 'string',
             description:
@@ -424,6 +434,11 @@ export const tool: Tool = {
             description:
               'The name of the customer to create this invoice for. This is required if you want to create an invoice for a customer who does not have a member of your company yet.',
           },
+          payment_method_id: {
+            type: 'string',
+            description:
+              'The payment method ID to use for this invoice. If using charge_automatically, you must provide a payment_method_id.',
+          },
           payment_token_id: {
             type: 'string',
             description:
@@ -553,6 +568,11 @@ export const tool: Tool = {
             type: 'string',
             description:
               'The name of the customer to create this invoice for. This is required if you want to create an invoice for a customer who does not have a member of your company yet.',
+          },
+          payment_method_id: {
+            type: 'string',
+            description:
+              'The payment method ID to use for this invoice. If using charge_automatically, you must provide a payment_method_id.',
           },
           payment_token_id: {
             type: 'string',

@@ -192,14 +192,7 @@ import {
   NotificationCreateResponse,
   Notifications,
 } from './resources/notifications';
-import {
-  PaymentTokenListParams,
-  PaymentTokenListResponse,
-  PaymentTokenListResponsesCursorPage,
-  PaymentTokenRetrieveParams,
-  PaymentTokenRetrieveResponse,
-  PaymentTokens,
-} from './resources/payment-tokens';
+import { PaymentTokens } from './resources/payment-tokens';
 import {
   BillingReasons,
   CardBrands,
@@ -1510,14 +1503,7 @@ export declare namespace Whop {
     type SetupIntentListParams as SetupIntentListParams,
   };
 
-  export {
-    PaymentTokens as PaymentTokens,
-    type PaymentTokenRetrieveResponse as PaymentTokenRetrieveResponse,
-    type PaymentTokenListResponse as PaymentTokenListResponse,
-    type PaymentTokenListResponsesCursorPage as PaymentTokenListResponsesCursorPage,
-    type PaymentTokenRetrieveParams as PaymentTokenRetrieveParams,
-    type PaymentTokenListParams as PaymentTokenListParams,
-  };
+  export { PaymentTokens as PaymentTokens };
 
   export type AccessLevel = API.AccessLevel;
   export type AccessPassType = API.AccessPassType;

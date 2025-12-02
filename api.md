@@ -598,13 +598,3 @@ Methods:
 - <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentListResponsesCursorPage</code>
 
 # PaymentTokens
-
-Types:
-
-- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenRetrieveResponse</a></code>
-- <code><a href="./src/resources/payment-tokens.ts">PaymentTokenListResponse</a></code>
-
-Methods:
-
-- <code title="get /payment_tokens/{id}">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">retrieve</a>(id, { ...params }) -> PaymentTokenRetrieveResponse</code>
-- <code title="get /payment_tokens">client.paymentTokens.<a href="./src/resources/payment-tokens.ts">list</a>({ ...params }) -> PaymentTokenListResponsesCursorPage</code>

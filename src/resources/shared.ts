@@ -2169,14 +2169,14 @@ export interface Payment {
   paid_at: string | null;
 
   /**
+   * The payment method used for the payment, if available.
+   */
+  payment_method: Payment.PaymentMethod | null;
+
+  /**
    * The different types of payment methods that can be used.
    */
   payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
-
-  /**
-   * The payment token used for the payment, if available.
-   */
-  payment_token: Payment.PaymentToken | null;
 
   /**
    * The plan attached to this payment.
@@ -2345,35 +2345,33 @@ export namespace Payment {
   }
 
   /**
-   * The payment token used for the payment, if available.
+   * The payment method used for the payment, if available.
    */
-  export interface PaymentToken {
+  export interface PaymentMethod {
     /**
-     * The ID of the payment token
+     * The ID of the payment method
      */
     id: string;
 
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
-    card: PaymentToken.Card | null;
+    card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment token was created
+     * The date and time the payment method was created
      */
     created_at: string;
 
     /**
-     * The payment method type of the payment token
+     * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
   }
 
-  export namespace PaymentToken {
+  export namespace PaymentMethod {
     /**
-     * The card data associated with the payment token, if its a debit or credit card
-     * token.
+     * The card data associated with the payment method, if its a debit or credit card.
      */
     export interface Card {
       /**

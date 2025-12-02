@@ -179,14 +179,7 @@ export {
   type NotificationCreateResponse,
   type NotificationCreateParams,
 } from './notifications';
-export {
-  PaymentTokens,
-  type PaymentTokenRetrieveResponse,
-  type PaymentTokenListResponse,
-  type PaymentTokenRetrieveParams,
-  type PaymentTokenListParams,
-  type PaymentTokenListResponsesCursorPage,
-} from './payment-tokens';
+export { PaymentTokens } from './payment-tokens';
 export {
   Payments,
   type BillingReasons,
