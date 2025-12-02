@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.0.10 (2025-12-02)
+
+Full Changelog: [v0.0.9...v0.0.10](https://github.com/whopio/whopsdk-typescript/compare/v0.0.9...v0.0.10)
+
+### Features
+
+* **api:** api update ([6d27c4b](https://github.com/whopio/whopsdk-typescript/commit/6d27c4b8ddcac16eb9a2d5de4d6ac62026812413))
+* **api:** manual updates ([9b36482](https://github.com/whopio/whopsdk-typescript/commit/9b36482fac0d862525633acd392817a3dcdb93c8))
+* **mcp:** return logs on code tool errors ([612b91f](https://github.com/whopio/whopsdk-typescript/commit/612b91fb2e53dc13618978065bca4a7399831cb2))
+
+
+### Bug Fixes
+
+* **mcp:** return tool execution error on api error ([7544644](https://github.com/whopio/whopsdk-typescript/commit/75446440c12d278bddc956f5e4e7796d2614562b))
+
+
+### Chores
+
+* **client:** fix logger property type ([3b2a817](https://github.com/whopio/whopsdk-typescript/commit/3b2a8175e03445af54404eb56a5b5194be68447b))
+
 ## 0.0.9 (2025-12-01)
 
 Full Changelog: [v0.0.8...v0.0.9](https://github.com/whopio/whopsdk-typescript/compare/v0.0.8...v0.0.9)

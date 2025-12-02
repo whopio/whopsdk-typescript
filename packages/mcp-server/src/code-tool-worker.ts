@@ -105,6 +105,7 @@ const fuse = new Fuse(
     'client.chatChannels.update',
     'client.users.checkAccess',
     'client.users.retrieve',
+    'client.payments.create',
     'client.payments.list',
     'client.payments.refund',
     'client.payments.retrieve',
@@ -166,6 +167,10 @@ const fuse = new Fuse(
     'client.withdrawals.list',
     'client.withdrawals.retrieve',
     'client.accountLinks.create',
+    'client.setupIntents.list',
+    'client.setupIntents.retrieve',
+    'client.paymentTokens.list',
+    'client.paymentTokens.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );
@@ -266,6 +271,8 @@ const fetch = async (req: Request): Promise<Response> => {
       {
         message:
           'The code param is missing. Provide one containing a top-level `run` function. Write code within this template:\n\n```\nasync function run(client) {\n  // Fill this out\n}\n```',
+        logLines: [],
+        errLines: [],
       } satisfies WorkerError,
       { status: 400, statusText: 'Code execution error' },
     );
@@ -277,6 +284,8 @@ const fetch = async (req: Request): Promise<Response> => {
       {
         message:
           'The code is missing a top-level `run` function. Write code within this template:\n\n```\nasync function run(client) {\n  // Fill this out\n}\n```',
+        logLines: [],
+        errLines: [],
       } satisfies WorkerError,
       { status: 400, statusText: 'Code execution error' },
     );
@@ -309,6 +318,8 @@ const fetch = async (req: Request): Promise<Response> => {
     return Response.json(
       {
         message: parseError(code, e),
+        logLines,
+        errLines,
       } satisfies WorkerError,
       { status: 400, statusText: 'Code execution error' },
     );

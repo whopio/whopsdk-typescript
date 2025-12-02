@@ -167,6 +167,11 @@ export interface AppBuildCreateParams {
   platform: Shared.AppBuildPlatforms;
 
   /**
+   * The id of the ai prompt that created this build
+   */
+  ai_prompt_id?: string | null;
+
+  /**
    * The ID of the app to create a build for. By default the current app from the api
    * key is used.
    */

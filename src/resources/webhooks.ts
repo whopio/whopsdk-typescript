@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
 import * as RefundsAPI from './refunds';
+import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
 import { Webhook } from 'standardwebhooks';
 
@@ -292,6 +293,90 @@ export interface EntryDeletedWebhookEvent {
    * The webhook event type
    */
   type: 'entry.deleted';
+}
+
+export interface SetupIntentRequiresActionWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.requires_action';
+}
+
+export interface SetupIntentSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.succeeded';
+}
+
+export interface SetupIntentCanceledWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.canceled';
 }
 
 export interface CourseLessonInteractionCompletedWebhookEvent {
@@ -923,6 +1008,9 @@ export type UnwrapWebhookEvent =
   | EntryApprovedWebhookEvent
   | EntryDeniedWebhookEvent
   | EntryDeletedWebhookEvent
+  | SetupIntentRequiresActionWebhookEvent
+  | SetupIntentSucceededWebhookEvent
+  | SetupIntentCanceledWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -944,6 +1032,9 @@ export declare namespace Webhooks {
     type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
     type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
     type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,

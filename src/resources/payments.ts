@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -8,6 +9,38 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 export class Payments extends APIResource {
+  /**
+   * Creates a payment. This endpoint will respond with a payment object immediately,
+   * but the payment is processed asynchronously in the background. Use webhooks to
+   * be notified when the payment succeeds or fails.
+   *
+   * Required permissions:
+   *
+   * - `payment:charge`
+   * - `plan:create`
+   * - `access_pass:create`
+   * - `access_pass:update`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `member:phone:read`
+   * - `promo_code:basic:read`
+   *
+   * @example
+   * ```ts
+   * const payment = await client.payments.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   member_id: 'mber_xxxxxxxxxxxxx',
+   *   payment_token_id: 'payt_xxxxxxxxxxxxx',
+   *   plan: { currency: 'usd' },
+   * });
+   * ```
+   */
+  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<Shared.Payment> {
+    return this._client.post('/payments', { body, ...options });
+  }
+
   /**
    * Retrieves a payment by ID
    *
@@ -361,6 +394,11 @@ export interface PaymentListResponse {
   payment_method_type: PaymentMethodTypes | null;
 
   /**
+   * The payment token used for the payment, if available.
+   */
+  payment_token: PaymentListResponse.PaymentToken | null;
+
+  /**
    * The plan attached to this payment.
    */
   plan: PaymentListResponse.Plan | null;
@@ -527,6 +565,60 @@ export namespace PaymentListResponse {
   }
 
   /**
+   * The payment token used for the payment, if available.
+   */
+  export interface PaymentToken {
+    /**
+     * The ID of the payment token
+     */
+    id: string;
+
+    /**
+     * The card data associated with the payment token, if its a debit or credit card
+     * token.
+     */
+    card: PaymentToken.Card | null;
+
+    /**
+     * The date and time the payment token was created
+     */
+    created_at: string;
+
+    /**
+     * The payment method type of the payment token
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+  }
+
+  export namespace PaymentToken {
+    /**
+     * The card data associated with the payment token, if its a debit or credit card
+     * token.
+     */
+    export interface Card {
+      /**
+       * Possible card brands that a payment token can have
+       */
+      brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * Card expiration month, like 03 for March.
+       */
+      exp_month: number | null;
+
+      /**
+       * Card expiration year, like 27 for 2027.
+       */
+      exp_year: number | null;
+
+      /**
+       * Last four digits of the card.
+       */
+      last4: string | null;
+    }
+  }
+
+  /**
    * The plan attached to this payment.
    */
   export interface Plan {
@@ -614,6 +706,219 @@ export namespace PaymentListResponse {
      * The username of the user from their Whop account.
      */
     username: string;
+  }
+}
+
+export type PaymentCreateParams =
+  | PaymentCreateParams.CreatePaymentInputWithPlan
+  | PaymentCreateParams.CreatePaymentInputWithPlanID;
+
+export declare namespace PaymentCreateParams {
+  export interface CreatePaymentInputWithPlan {
+    /**
+     * The ID of the company to create the payment for.
+     */
+    company_id: string;
+
+    /**
+     * The ID of the member to create the payment for.
+     */
+    member_id: string;
+
+    /**
+     * The ID of the payment token to use for the payment. It must be connected to the
+     * Member being charged.
+     */
+    payment_token_id: string;
+
+    /**
+     * Pass this object to create a new plan for this payment
+     */
+    plan: CreatePaymentInputWithPlan.Plan;
+  }
+
+  export namespace CreatePaymentInputWithPlan {
+    /**
+     * Pass this object to create a new plan for this payment
+     */
+    export interface Plan {
+      /**
+       * The respective currency identifier for the plan.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The interval at which the plan charges (renewal plans).
+       */
+      billing_period?: number | null;
+
+      /**
+       * The description of the plan.
+       */
+      description?: string | null;
+
+      /**
+       * The interval at which the plan charges (expiration plans).
+       */
+      expiration_days?: number | null;
+
+      /**
+       * Whether to force the creation of a new plan even if one with the same attributes
+       * already exists.
+       */
+      force_create_new_plan?: boolean | null;
+
+      /**
+       * An additional amount charged upon first purchase.
+       */
+      initial_price?: number | null;
+
+      /**
+       * A personal description or notes section for the business.
+       */
+      internal_notes?: string | null;
+
+      /**
+       * The type of plan that can be attached to a product
+       */
+      plan_type?: Shared.PlanType | null;
+
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      product?: Plan.Product | null;
+
+      /**
+       * The product the plan is related to. Either this or product is required.
+       */
+      product_id?: string | null;
+
+      /**
+       * The amount the customer is charged every billing period.
+       */
+      renewal_price?: number | null;
+
+      /**
+       * The title of the plan. This will be visible on the product page to customers.
+       */
+      title?: string | null;
+
+      /**
+       * The number of free trial days added before a renewal plan.
+       */
+      trial_period_days?: number | null;
+
+      /**
+       * Visibility of a resource
+       */
+      visibility?: Shared.Visibility | null;
+    }
+
+    export namespace Plan {
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      export interface Product {
+        /**
+         * A unique ID used to find or create a product. When provided during creation, we
+         * will look for an existing product with this external identifier — if found, it
+         * will be updated; otherwise, a new product will be created.
+         */
+        external_identifier: string;
+
+        /**
+         * The title of the product.
+         */
+        title: string;
+
+        /**
+         * The different business types a company can be.
+         */
+        business_type?: Shared.BusinessTypes | null;
+
+        /**
+         * Whether or not to collect shipping information at checkout from the customer.
+         */
+        collect_shipping_address?: boolean | null;
+
+        /**
+         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
+         * between 5 and 22 characters, contain at least one letter, and not contain any of
+         * the following characters: <, >, \, ', "
+         */
+        custom_statement_descriptor?: string | null;
+
+        /**
+         * A written description of the product.
+         */
+        description?: string | null;
+
+        /**
+         * The percentage of the revenue that goes to the global affiliate program.
+         */
+        global_affiliate_percentage?: number | null;
+
+        /**
+         * The different statuses of the global affiliate program for a product.
+         */
+        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+        /**
+         * The headline of the product.
+         */
+        headline?: string | null;
+
+        /**
+         * The different industry types a company can be in.
+         */
+        industry_type?: Shared.IndustryTypes | null;
+
+        /**
+         * The ID of the product tax code to apply to this product.
+         */
+        product_tax_code_id?: string | null;
+
+        /**
+         * The URL to redirect the customer to after a purchase.
+         */
+        redirect_purchase_url?: string | null;
+
+        /**
+         * The route of the product.
+         */
+        route?: string | null;
+
+        /**
+         * Visibility of a resource
+         */
+        visibility?: Shared.Visibility | null;
+      }
+    }
+  }
+
+  export interface CreatePaymentInputWithPlanID {
+    /**
+     * The ID of the company to create the payment for.
+     */
+    company_id: string;
+
+    /**
+     * The ID of the member to create the payment for.
+     */
+    member_id: string;
+
+    /**
+     * The ID of the payment token to use for the payment. It must be connected to the
+     * Member being charged.
+     */
+    payment_token_id: string;
+
+    /**
+     * An ID of an existing plan to use for the payment.
+     */
+    plan_id: string;
   }
 }
 
@@ -708,6 +1013,7 @@ export declare namespace Payments {
     type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
     type PaymentRefundParams as PaymentRefundParams,
   };

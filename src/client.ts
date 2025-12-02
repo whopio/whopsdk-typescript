@@ -193,8 +193,17 @@ import {
   Notifications,
 } from './resources/notifications';
 import {
+  PaymentTokenListParams,
+  PaymentTokenListResponse,
+  PaymentTokenListResponsesCursorPage,
+  PaymentTokenRetrieveParams,
+  PaymentTokenRetrieveResponse,
+  PaymentTokens,
+} from './resources/payment-tokens';
+import {
   BillingReasons,
   CardBrands,
+  PaymentCreateParams,
   PaymentListParams,
   PaymentListResponse,
   PaymentListResponsesCursorPage,
@@ -256,6 +265,14 @@ import {
   Reviews,
 } from './resources/reviews';
 import {
+  SetupIntent,
+  SetupIntentListParams,
+  SetupIntentListResponse,
+  SetupIntentListResponsesCursorPage,
+  SetupIntentStatus,
+  SetupIntents,
+} from './resources/setup-intents';
+import {
   ShipmentCreateParams,
   ShipmentListParams,
   ShipmentListResponse,
@@ -301,6 +318,9 @@ import {
   PaymentSucceededWebhookEvent,
   RefundCreatedWebhookEvent,
   RefundUpdatedWebhookEvent,
+  SetupIntentCanceledWebhookEvent,
+  SetupIntentRequiresActionWebhookEvent,
+  SetupIntentSucceededWebhookEvent,
   UnwrapWebhookEvent,
   Webhooks,
 } from './resources/webhooks';
@@ -425,7 +445,7 @@ export class Whop {
   baseURL: string;
   maxRetries: number;
   timeout: number;
-  logger: Logger | undefined;
+  logger: Logger;
   logLevel: LogLevel | undefined;
   fetchOptions: MergedRequestInit | undefined;
 
@@ -1078,6 +1098,8 @@ export class Whop {
   refunds: API.Refunds = new API.Refunds(this);
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
+  setupIntents: API.SetupIntents = new API.SetupIntents(this);
+  paymentTokens: API.PaymentTokens = new API.PaymentTokens(this);
 }
 
 Whop.Apps = Apps;
@@ -1117,6 +1139,8 @@ Whop.Disputes = Disputes;
 Whop.Refunds = Refunds;
 Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
+Whop.SetupIntents = SetupIntents;
+Whop.PaymentTokens = PaymentTokens;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1174,6 +1198,9 @@ export declare namespace Whop {
     type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
     type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
     type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
@@ -1300,6 +1327,7 @@ export declare namespace Whop {
     type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
     type PaymentRefundParams as PaymentRefundParams,
   };
@@ -1471,6 +1499,24 @@ export declare namespace Whop {
     AccountLinks as AccountLinks,
     type AccountLinkCreateResponse as AccountLinkCreateResponse,
     type AccountLinkCreateParams as AccountLinkCreateParams,
+  };
+
+  export {
+    SetupIntents as SetupIntents,
+    type SetupIntent as SetupIntent,
+    type SetupIntentStatus as SetupIntentStatus,
+    type SetupIntentListResponse as SetupIntentListResponse,
+    type SetupIntentListResponsesCursorPage as SetupIntentListResponsesCursorPage,
+    type SetupIntentListParams as SetupIntentListParams,
+  };
+
+  export {
+    PaymentTokens as PaymentTokens,
+    type PaymentTokenRetrieveResponse as PaymentTokenRetrieveResponse,
+    type PaymentTokenListResponse as PaymentTokenListResponse,
+    type PaymentTokenListResponsesCursorPage as PaymentTokenListResponsesCursorPage,
+    type PaymentTokenRetrieveParams as PaymentTokenRetrieveParams,
+    type PaymentTokenListParams as PaymentTokenListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

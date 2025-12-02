@@ -180,11 +180,20 @@ export {
   type NotificationCreateParams,
 } from './notifications';
 export {
+  PaymentTokens,
+  type PaymentTokenRetrieveResponse,
+  type PaymentTokenListResponse,
+  type PaymentTokenRetrieveParams,
+  type PaymentTokenListParams,
+  type PaymentTokenListResponsesCursorPage,
+} from './payment-tokens';
+export {
   Payments,
   type BillingReasons,
   type CardBrands,
   type PaymentMethodTypes,
   type PaymentListResponse,
+  type PaymentCreateParams,
   type PaymentListParams,
   type PaymentRefundParams,
   type PaymentListResponsesCursorPage,
@@ -243,6 +252,14 @@ export {
   type ReviewListResponsesCursorPage,
 } from './reviews';
 export {
+  SetupIntents,
+  type SetupIntent,
+  type SetupIntentStatus,
+  type SetupIntentListResponse,
+  type SetupIntentListParams,
+  type SetupIntentListResponsesCursorPage,
+} from './setup-intents';
+export {
   Shipments,
   type ShipmentListResponse,
   type ShipmentCreateParams,
@@ -281,6 +298,9 @@ export {
   type EntryApprovedWebhookEvent,
   type EntryDeniedWebhookEvent,
   type EntryDeletedWebhookEvent,
+  type SetupIntentRequiresActionWebhookEvent,
+  type SetupIntentSucceededWebhookEvent,
+  type SetupIntentCanceledWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

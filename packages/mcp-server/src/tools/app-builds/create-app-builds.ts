@@ -62,6 +62,10 @@ export const tool: Tool = {
       platform: {
         $ref: '#/$defs/app_build_platforms',
       },
+      ai_prompt_id: {
+        type: 'string',
+        description: 'The id of the ai prompt that created this build',
+      },
       app_id: {
         type: 'string',
         description:
@@ -104,7 +108,7 @@ export const handler = async (client: Whop, args: Record<string, unknown> | unde
   try {
     return asTextContentResult(await maybeFilter(jq_filter, await client.appBuilds.create(body)));
   } catch (error) {
-    if (isJqError(error)) {
+    if (error instanceof Whop.APIError || isJqError(error)) {
       return asErrorResult(error.message);
     }
     throw error;
