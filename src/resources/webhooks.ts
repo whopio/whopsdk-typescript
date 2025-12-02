@@ -294,6 +294,603 @@ export interface EntryDeletedWebhookEvent {
   type: 'entry.deleted';
 }
 
+export interface SetupIntentRequiresActionWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentRequiresActionWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.requires_action';
+}
+
+export namespace SetupIntentRequiresActionWebhookEvent {
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  export interface Data {
+    /**
+     * The setup intent ID
+     */
+    id: string;
+
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    checkout_configuration: Data.CheckoutConfiguration | null;
+
+    /**
+     * The company of the setup intent
+     */
+    company: Data.Company | null;
+
+    /**
+     * The datetime the payment was created
+     */
+    created_at: string;
+
+    /**
+     * The error message, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The member connected to the setup intent
+     */
+    member: Data.Member | null;
+
+    /**
+     * The metadata associated with the setup intent
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    payment_token: Data.PaymentToken | null;
+
+    /**
+     * The status of the setup intent
+     */
+    status: 'processing' | 'succeeded' | 'canceled' | 'requires_action';
+  }
+
+  export namespace Data {
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    export interface CheckoutConfiguration {
+      /**
+       * The ID of the checkout configuration
+       */
+      id: string;
+    }
+
+    /**
+     * The company of the setup intent
+     */
+    export interface Company {
+      /**
+       * The ID (tag) of the company.
+       */
+      id: string;
+    }
+
+    /**
+     * The member connected to the setup intent
+     */
+    export interface Member {
+      /**
+       * The ID of the member
+       */
+      id: string;
+
+      /**
+       * The user for this member, if any.
+       */
+      user: Member.User | null;
+    }
+
+    export namespace Member {
+      /**
+       * The user for this member, if any.
+       */
+      export interface User {
+        /**
+         * The internal ID of the user account.
+         */
+        id: string;
+
+        /**
+         * The digital mailing address of the user.
+         */
+        email: string | null;
+
+        /**
+         * The user's full name.
+         */
+        name: string | null;
+
+        /**
+         * The whop username.
+         */
+        username: string;
+      }
+    }
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    export interface PaymentToken {
+      /**
+       * The ID of the payment token
+       */
+      id: string;
+
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      card: PaymentToken.Card | null;
+
+      /**
+       * The date and time the payment token was created
+       */
+      created_at: string;
+
+      /**
+       * The payment method type of the payment token
+       */
+      payment_method_type: PaymentsAPI.PaymentMethodTypes;
+    }
+
+    export namespace PaymentToken {
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      export interface Card {
+        /**
+         * Possible card brands that a payment token can have
+         */
+        brand: PaymentsAPI.CardBrands | null;
+
+        /**
+         * Card expiration month, like 03 for March.
+         */
+        exp_month: number | null;
+
+        /**
+         * Card expiration year, like 27 for 2027.
+         */
+        exp_year: number | null;
+
+        /**
+         * Last four digits of the card.
+         */
+        last4: string | null;
+      }
+    }
+  }
+}
+
+export interface SetupIntentSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentSucceededWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.succeeded';
+}
+
+export namespace SetupIntentSucceededWebhookEvent {
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  export interface Data {
+    /**
+     * The setup intent ID
+     */
+    id: string;
+
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    checkout_configuration: Data.CheckoutConfiguration | null;
+
+    /**
+     * The company of the setup intent
+     */
+    company: Data.Company | null;
+
+    /**
+     * The datetime the payment was created
+     */
+    created_at: string;
+
+    /**
+     * The error message, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The member connected to the setup intent
+     */
+    member: Data.Member | null;
+
+    /**
+     * The metadata associated with the setup intent
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    payment_token: Data.PaymentToken | null;
+
+    /**
+     * The status of the setup intent
+     */
+    status: 'processing' | 'succeeded' | 'canceled' | 'requires_action';
+  }
+
+  export namespace Data {
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    export interface CheckoutConfiguration {
+      /**
+       * The ID of the checkout configuration
+       */
+      id: string;
+    }
+
+    /**
+     * The company of the setup intent
+     */
+    export interface Company {
+      /**
+       * The ID (tag) of the company.
+       */
+      id: string;
+    }
+
+    /**
+     * The member connected to the setup intent
+     */
+    export interface Member {
+      /**
+       * The ID of the member
+       */
+      id: string;
+
+      /**
+       * The user for this member, if any.
+       */
+      user: Member.User | null;
+    }
+
+    export namespace Member {
+      /**
+       * The user for this member, if any.
+       */
+      export interface User {
+        /**
+         * The internal ID of the user account.
+         */
+        id: string;
+
+        /**
+         * The digital mailing address of the user.
+         */
+        email: string | null;
+
+        /**
+         * The user's full name.
+         */
+        name: string | null;
+
+        /**
+         * The whop username.
+         */
+        username: string;
+      }
+    }
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    export interface PaymentToken {
+      /**
+       * The ID of the payment token
+       */
+      id: string;
+
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      card: PaymentToken.Card | null;
+
+      /**
+       * The date and time the payment token was created
+       */
+      created_at: string;
+
+      /**
+       * The payment method type of the payment token
+       */
+      payment_method_type: PaymentsAPI.PaymentMethodTypes;
+    }
+
+    export namespace PaymentToken {
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      export interface Card {
+        /**
+         * Possible card brands that a payment token can have
+         */
+        brand: PaymentsAPI.CardBrands | null;
+
+        /**
+         * Card expiration month, like 03 for March.
+         */
+        exp_month: number | null;
+
+        /**
+         * Card expiration year, like 27 for 2027.
+         */
+        exp_year: number | null;
+
+        /**
+         * Last four digits of the card.
+         */
+        last4: string | null;
+      }
+    }
+  }
+}
+
+export interface SetupIntentCanceledWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  data: SetupIntentCanceledWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.canceled';
+}
+
+export namespace SetupIntentCanceledWebhookEvent {
+  /**
+   * An object representing a setup intent, which is a flow for allowing a customer
+   * to add a payment method to their account without making a purchase.
+   */
+  export interface Data {
+    /**
+     * The setup intent ID
+     */
+    id: string;
+
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    checkout_configuration: Data.CheckoutConfiguration | null;
+
+    /**
+     * The company of the setup intent
+     */
+    company: Data.Company | null;
+
+    /**
+     * The datetime the payment was created
+     */
+    created_at: string;
+
+    /**
+     * The error message, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The member connected to the setup intent
+     */
+    member: Data.Member | null;
+
+    /**
+     * The metadata associated with the setup intent
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    payment_token: Data.PaymentToken | null;
+
+    /**
+     * The status of the setup intent
+     */
+    status: 'processing' | 'succeeded' | 'canceled' | 'requires_action';
+  }
+
+  export namespace Data {
+    /**
+     * The checkout configuration associated with the setup intent
+     */
+    export interface CheckoutConfiguration {
+      /**
+       * The ID of the checkout configuration
+       */
+      id: string;
+    }
+
+    /**
+     * The company of the setup intent
+     */
+    export interface Company {
+      /**
+       * The ID (tag) of the company.
+       */
+      id: string;
+    }
+
+    /**
+     * The member connected to the setup intent
+     */
+    export interface Member {
+      /**
+       * The ID of the member
+       */
+      id: string;
+
+      /**
+       * The user for this member, if any.
+       */
+      user: Member.User | null;
+    }
+
+    export namespace Member {
+      /**
+       * The user for this member, if any.
+       */
+      export interface User {
+        /**
+         * The internal ID of the user account.
+         */
+        id: string;
+
+        /**
+         * The digital mailing address of the user.
+         */
+        email: string | null;
+
+        /**
+         * The user's full name.
+         */
+        name: string | null;
+
+        /**
+         * The whop username.
+         */
+        username: string;
+      }
+    }
+
+    /**
+     * The payment token created during the setup, if available.
+     */
+    export interface PaymentToken {
+      /**
+       * The ID of the payment token
+       */
+      id: string;
+
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      card: PaymentToken.Card | null;
+
+      /**
+       * The date and time the payment token was created
+       */
+      created_at: string;
+
+      /**
+       * The payment method type of the payment token
+       */
+      payment_method_type: PaymentsAPI.PaymentMethodTypes;
+    }
+
+    export namespace PaymentToken {
+      /**
+       * The card data associated with the payment token, if its a debit or credit card
+       * token.
+       */
+      export interface Card {
+        /**
+         * Possible card brands that a payment token can have
+         */
+        brand: PaymentsAPI.CardBrands | null;
+
+        /**
+         * Card expiration month, like 03 for March.
+         */
+        exp_month: number | null;
+
+        /**
+         * Card expiration year, like 27 for 2027.
+         */
+        exp_year: number | null;
+
+        /**
+         * Last four digits of the card.
+         */
+        last4: string | null;
+      }
+    }
+  }
+}
+
 export interface CourseLessonInteractionCompletedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -923,6 +1520,9 @@ export type UnwrapWebhookEvent =
   | EntryApprovedWebhookEvent
   | EntryDeniedWebhookEvent
   | EntryDeletedWebhookEvent
+  | SetupIntentRequiresActionWebhookEvent
+  | SetupIntentSucceededWebhookEvent
+  | SetupIntentCanceledWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -944,6 +1544,9 @@ export declare namespace Webhooks {
     type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
     type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
     type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,

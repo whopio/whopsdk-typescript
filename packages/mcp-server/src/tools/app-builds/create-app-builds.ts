@@ -62,6 +62,10 @@ export const tool: Tool = {
       platform: {
         $ref: '#/$defs/app_build_platforms',
       },
+      ai_prompt_id: {
+        type: 'string',
+        description: 'The id of the ai prompt that created this build',
+      },
       app_id: {
         type: 'string',
         description:

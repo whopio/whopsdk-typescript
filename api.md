@@ -137,6 +137,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">EntryApprovedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">EntryDeletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentRequiresActionWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentCanceledWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
