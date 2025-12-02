@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.11 (2025-12-02)
+
+Full Changelog: [v0.0.10...v0.0.11](https://github.com/whopio/whopsdk-typescript/compare/v0.0.10...v0.0.11)
+
+### Features
+
+* **api:** api update ([48a5719](https://github.com/whopio/whopsdk-typescript/commit/48a57192e063a1029e5c6cdf132f0c6aeb1bc0c6))
+* **api:** manual updates ([76d87d7](https://github.com/whopio/whopsdk-typescript/commit/76d87d72baa0700771095483e6c9133c02070084))
+
+
+### Chores
+
+* **internal:** upgrade eslint ([1f5404a](https://github.com/whopio/whopsdk-typescript/commit/1f5404adbf2bef29488808019838385f31fdf177))
+
 ## 0.0.10 (2025-12-02)
 
 Full Changelog: [v0.0.9...v0.0.10](https://github.com/whopio/whopsdk-typescript/compare/v0.0.9...v0.0.10)
