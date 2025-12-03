@@ -323,6 +323,8 @@ import {
   SetupIntentSucceededWebhookEvent,
   UnwrapWebhookEvent,
   Webhooks,
+  WithdrawalCreatedWebhookEvent,
+  WithdrawalUpdatedWebhookEvent,
 } from './resources/webhooks';
 import {
   WithdrawalFeeTypes,
@@ -1198,6 +1200,8 @@ export declare namespace Whop {
     type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
     type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
     type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
+    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
