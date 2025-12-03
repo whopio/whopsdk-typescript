@@ -6,6 +6,7 @@ import * as PaymentsAPI from './payments';
 import * as RefundsAPI from './refunds';
 import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
+import * as WithdrawalsAPI from './withdrawals';
 import { Webhook } from 'standardwebhooks';
 
 export class Webhooks extends APIResource {
@@ -377,6 +378,418 @@ export interface SetupIntentCanceledWebhookEvent {
    * The webhook event type
    */
   type: 'setup_intent.canceled';
+}
+
+export interface WithdrawalCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A withdrawal request.
+   */
+  data: WithdrawalCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'withdrawal.created';
+}
+
+export namespace WithdrawalCreatedWebhookEvent {
+  /**
+   * A withdrawal request.
+   */
+  export interface Data {
+    /**
+     * Internal ID of the withdrawal request.
+     */
+    id: string;
+
+    /**
+     * How much money was attempted to be withdrawn, in a float type.
+     */
+    amount: number;
+
+    /**
+     * When the withdrawal request was created.
+     */
+    created_at: string;
+
+    /**
+     * The currency of the withdrawal request.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The different error codes a payout can be in.
+     */
+    error_code:
+      | 'account_closed'
+      | 'account_does_not_exist'
+      | 'account_information_invalid'
+      | 'account_number_invalid_region'
+      | 'account_frozen'
+      | 'account_lookup_failed'
+      | 'account_not_found'
+      | 'amount_out_of_bounds'
+      | 'attributes_not_validated'
+      | 'b2b_payments_prohibited'
+      | 'bank_statement_required'
+      | 'compliance_review'
+      | 'currency_not_supported'
+      | 'deposit_canceled'
+      | 'deposit_failed'
+      | 'deposit_rejected'
+      | 'destination_unavailable'
+      | 'exceeded_account_limit'
+      | 'expired_quote'
+      | 'generic_payout_error'
+      | 'technical_problem'
+      | 'identification_number_invalid'
+      | 'invalid_account_number'
+      | 'invalid_bank_code'
+      | 'invalid_beneficiary'
+      | 'invalid_branch_number'
+      | 'invalid_branch_code'
+      | 'invalid_phone_number'
+      | 'invalid_routing_number'
+      | 'invalid_swift_code'
+      | 'invalid_company_details'
+      | 'manual_cancelation'
+      | 'misc_error'
+      | 'missing_city_and_country'
+      | 'missing_phone_number'
+      | 'missing_remittance_info'
+      | 'payee_name_invalid'
+      | 'receiving_account_locked'
+      | 'rejected_by_compliance'
+      | 'rtp_not_supported'
+      | 'non_transaction_account'
+      | 'source_token_insufficient_funds'
+      | 'ssn_invalid'
+      | 'wallet_screenshot_required'
+      | 'unsupported_region'
+      | null;
+
+    /**
+     * The error message for the withdrawal, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The estimated availability date for the withdrawal, if any.
+     */
+    estimated_availability: string | null;
+
+    /**
+     * The fee amount that was charged for the withdrawal. This is in the same currency
+     * as the withdrawal amount.
+     */
+    fee_amount: number;
+
+    /**
+     * The different fee types for a withdrawal.
+     */
+    fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
+
+    /**
+     * The ledger account associated with the withdrawal.
+     */
+    ledger_account: Data.LedgerAccount;
+
+    /**
+     * The payout token used for the withdrawal, if applicable.
+     */
+    payout_token: Data.PayoutToken | null;
+
+    /**
+     * The speed of the withdrawal.
+     */
+    speed: WithdrawalsAPI.WithdrawalSpeeds;
+
+    /**
+     * Status of the withdrawal.
+     */
+    status: WithdrawalsAPI.WithdrawalStatus;
+
+    /**
+     * The trace code for the payout, if applicable. Provided on ACH transactions when
+     * available.
+     */
+    trace_code: string | null;
+
+    /**
+     * The type of withdrawal.
+     */
+    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
+  }
+
+  export namespace Data {
+    /**
+     * The ledger account associated with the withdrawal.
+     */
+    export interface LedgerAccount {
+      /**
+       * The ID of the LedgerAccount.
+       */
+      id: string;
+
+      /**
+       * The ID of the company associated with this ledger account.
+       */
+      company_id: string | null;
+    }
+
+    /**
+     * The payout token used for the withdrawal, if applicable.
+     */
+    export interface PayoutToken {
+      /**
+       * The ID of the payout token
+       */
+      id: string;
+
+      /**
+       * The date and time the payout token was created
+       */
+      created_at: string;
+
+      /**
+       * The currency code of the payout destination. This is the currency that payouts
+       * will be made in for this token.
+       */
+      destination_currency_code: string;
+
+      /**
+       * An optional nickname for the payout token to help the user identify it. This is
+       * not used by the provider and is only for the user's reference.
+       */
+      nickname: string | null;
+
+      /**
+       * The name of the payer associated with the payout token.
+       */
+      payer_name: string | null;
+    }
+  }
+}
+
+export interface WithdrawalUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A withdrawal request.
+   */
+  data: WithdrawalUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'withdrawal.updated';
+}
+
+export namespace WithdrawalUpdatedWebhookEvent {
+  /**
+   * A withdrawal request.
+   */
+  export interface Data {
+    /**
+     * Internal ID of the withdrawal request.
+     */
+    id: string;
+
+    /**
+     * How much money was attempted to be withdrawn, in a float type.
+     */
+    amount: number;
+
+    /**
+     * When the withdrawal request was created.
+     */
+    created_at: string;
+
+    /**
+     * The currency of the withdrawal request.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The different error codes a payout can be in.
+     */
+    error_code:
+      | 'account_closed'
+      | 'account_does_not_exist'
+      | 'account_information_invalid'
+      | 'account_number_invalid_region'
+      | 'account_frozen'
+      | 'account_lookup_failed'
+      | 'account_not_found'
+      | 'amount_out_of_bounds'
+      | 'attributes_not_validated'
+      | 'b2b_payments_prohibited'
+      | 'bank_statement_required'
+      | 'compliance_review'
+      | 'currency_not_supported'
+      | 'deposit_canceled'
+      | 'deposit_failed'
+      | 'deposit_rejected'
+      | 'destination_unavailable'
+      | 'exceeded_account_limit'
+      | 'expired_quote'
+      | 'generic_payout_error'
+      | 'technical_problem'
+      | 'identification_number_invalid'
+      | 'invalid_account_number'
+      | 'invalid_bank_code'
+      | 'invalid_beneficiary'
+      | 'invalid_branch_number'
+      | 'invalid_branch_code'
+      | 'invalid_phone_number'
+      | 'invalid_routing_number'
+      | 'invalid_swift_code'
+      | 'invalid_company_details'
+      | 'manual_cancelation'
+      | 'misc_error'
+      | 'missing_city_and_country'
+      | 'missing_phone_number'
+      | 'missing_remittance_info'
+      | 'payee_name_invalid'
+      | 'receiving_account_locked'
+      | 'rejected_by_compliance'
+      | 'rtp_not_supported'
+      | 'non_transaction_account'
+      | 'source_token_insufficient_funds'
+      | 'ssn_invalid'
+      | 'wallet_screenshot_required'
+      | 'unsupported_region'
+      | null;
+
+    /**
+     * The error message for the withdrawal, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The estimated availability date for the withdrawal, if any.
+     */
+    estimated_availability: string | null;
+
+    /**
+     * The fee amount that was charged for the withdrawal. This is in the same currency
+     * as the withdrawal amount.
+     */
+    fee_amount: number;
+
+    /**
+     * The different fee types for a withdrawal.
+     */
+    fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
+
+    /**
+     * The ledger account associated with the withdrawal.
+     */
+    ledger_account: Data.LedgerAccount;
+
+    /**
+     * The payout token used for the withdrawal, if applicable.
+     */
+    payout_token: Data.PayoutToken | null;
+
+    /**
+     * The speed of the withdrawal.
+     */
+    speed: WithdrawalsAPI.WithdrawalSpeeds;
+
+    /**
+     * Status of the withdrawal.
+     */
+    status: WithdrawalsAPI.WithdrawalStatus;
+
+    /**
+     * The trace code for the payout, if applicable. Provided on ACH transactions when
+     * available.
+     */
+    trace_code: string | null;
+
+    /**
+     * The type of withdrawal.
+     */
+    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
+  }
+
+  export namespace Data {
+    /**
+     * The ledger account associated with the withdrawal.
+     */
+    export interface LedgerAccount {
+      /**
+       * The ID of the LedgerAccount.
+       */
+      id: string;
+
+      /**
+       * The ID of the company associated with this ledger account.
+       */
+      company_id: string | null;
+    }
+
+    /**
+     * The payout token used for the withdrawal, if applicable.
+     */
+    export interface PayoutToken {
+      /**
+       * The ID of the payout token
+       */
+      id: string;
+
+      /**
+       * The date and time the payout token was created
+       */
+      created_at: string;
+
+      /**
+       * The currency code of the payout destination. This is the currency that payouts
+       * will be made in for this token.
+       */
+      destination_currency_code: string;
+
+      /**
+       * An optional nickname for the payout token to help the user identify it. This is
+       * not used by the provider and is only for the user's reference.
+       */
+      nickname: string | null;
+
+      /**
+       * The name of the payer associated with the payout token.
+       */
+      payer_name: string | null;
+    }
+  }
 }
 
 export interface CourseLessonInteractionCompletedWebhookEvent {
@@ -1011,6 +1424,8 @@ export type UnwrapWebhookEvent =
   | SetupIntentRequiresActionWebhookEvent
   | SetupIntentSucceededWebhookEvent
   | SetupIntentCanceledWebhookEvent
+  | WithdrawalCreatedWebhookEvent
+  | WithdrawalUpdatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -1035,6 +1450,8 @@ export declare namespace Webhooks {
     type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
     type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
     type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
+    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,

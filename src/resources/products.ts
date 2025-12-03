@@ -125,7 +125,7 @@ export interface ProductCreateParams {
   company_id: string;
 
   /**
-   * The title of the product.
+   * The title of the product. It must be max 40 characters.
    */
   title: string;
 

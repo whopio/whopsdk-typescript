@@ -47,6 +47,7 @@ describe('resource plans', () => {
       plan_type: 'renewal',
       release_method: 'buy_now',
       renewal_price: 6.9,
+      split_pay_required_payments: 42,
       stock: 42,
       title: 'title',
       trial_period_days: 42,

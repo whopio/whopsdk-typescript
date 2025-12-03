@@ -140,6 +140,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">SetupIntentRequiresActionWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">SetupIntentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">SetupIntentCanceledWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">WithdrawalCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">WithdrawalUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>

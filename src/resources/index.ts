@@ -301,6 +301,8 @@ export {
   type SetupIntentRequiresActionWebhookEvent,
   type SetupIntentSucceededWebhookEvent,
   type SetupIntentCanceledWebhookEvent,
+  type WithdrawalCreatedWebhookEvent,
+  type WithdrawalUpdatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,
