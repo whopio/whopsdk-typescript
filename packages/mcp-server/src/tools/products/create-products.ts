@@ -27,7 +27,7 @@ export const tool: Tool = {
       },
       title: {
         type: 'string',
-        description: 'The title of the product.',
+        description: 'The title of the product. It must be max 40 characters.',
       },
       business_type: {
         $ref: '#/$defs/business_types',

@@ -162,6 +162,10 @@ export const tool: Tool = {
         description:
           'The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in dollars. Eg: 10.43 for $10.43',
       },
+      split_pay_required_payments: {
+        type: 'integer',
+        description: 'The number of payments required before pausing the subscription.',
+      },
       stock: {
         type: 'integer',
         description: 'The number of units available for purchase.',

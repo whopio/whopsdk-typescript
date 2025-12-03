@@ -209,6 +209,11 @@ export interface PlanListResponse {
   renewal_price: number;
 
   /**
+   * The number of payments required before pausing the subscription.
+   */
+  split_pay_required_payments: number | null;
+
+  /**
    * The number of units available for purchase. Only displayed to authorized actors
    */
   stock: number | null;
@@ -392,6 +397,11 @@ export interface PlanCreateParams {
    * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
    */
   renewal_price?: number | null;
+
+  /**
+   * The number of payments required before pausing the subscription.
+   */
+  split_pay_required_payments?: number | null;
 
   /**
    * The number of units available for purchase.

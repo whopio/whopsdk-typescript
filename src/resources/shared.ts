@@ -2589,6 +2589,11 @@ export interface Plan {
   renewal_price: number;
 
   /**
+   * The number of payments required before pausing the subscription.
+   */
+  split_pay_required_payments: number | null;
+
+  /**
    * The number of units available for purchase. Only displayed to authorized actors
    */
   stock: number | null;
