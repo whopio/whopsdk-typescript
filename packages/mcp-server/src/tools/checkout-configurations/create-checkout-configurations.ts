@@ -235,6 +235,10 @@ export const tool: Tool = {
                 type: 'number',
                 description: 'The amount the customer is charged every billing period.',
               },
+              split_pay_required_payments: {
+                type: 'integer',
+                description: 'The number of payments required before pausing the subscription.',
+              },
               title: {
                 type: 'string',
                 description: 'The title of the plan. This will be visible on the product page to customers.',

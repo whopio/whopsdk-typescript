@@ -71,6 +71,7 @@ describe('resource checkoutConfigurations', () => {
         product_id: 'prod_xxxxxxxxxxxxx',
         release_method: 'buy_now',
         renewal_price: 6.9,
+        split_pay_required_payments: 42,
         title: 'title',
         trial_period_days: 42,
         visibility: 'visible',

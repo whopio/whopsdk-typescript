@@ -345,6 +345,11 @@ export declare namespace CheckoutConfigurationCreateParams {
       renewal_price?: number | null;
 
       /**
+       * The number of payments required before pausing the subscription.
+       */
+      split_pay_required_payments?: number | null;
+
+      /**
        * The title of the plan. This will be visible on the product page to customers.
        */
       title?: string | null;
