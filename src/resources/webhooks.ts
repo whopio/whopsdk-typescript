@@ -433,6 +433,67 @@ export namespace WithdrawalCreatedWebhookEvent {
     currency: Shared.Currency;
 
     /**
+     * The different error codes a payout can be in.
+     */
+    error_code:
+      | 'account_closed'
+      | 'account_does_not_exist'
+      | 'account_information_invalid'
+      | 'account_number_invalid_region'
+      | 'account_frozen'
+      | 'account_lookup_failed'
+      | 'account_not_found'
+      | 'amount_out_of_bounds'
+      | 'attributes_not_validated'
+      | 'b2b_payments_prohibited'
+      | 'bank_statement_required'
+      | 'compliance_review'
+      | 'currency_not_supported'
+      | 'deposit_canceled'
+      | 'deposit_failed'
+      | 'deposit_rejected'
+      | 'destination_unavailable'
+      | 'exceeded_account_limit'
+      | 'expired_quote'
+      | 'generic_payout_error'
+      | 'technical_problem'
+      | 'identification_number_invalid'
+      | 'invalid_account_number'
+      | 'invalid_bank_code'
+      | 'invalid_beneficiary'
+      | 'invalid_branch_number'
+      | 'invalid_branch_code'
+      | 'invalid_phone_number'
+      | 'invalid_routing_number'
+      | 'invalid_swift_code'
+      | 'invalid_company_details'
+      | 'manual_cancelation'
+      | 'misc_error'
+      | 'missing_city_and_country'
+      | 'missing_phone_number'
+      | 'missing_remittance_info'
+      | 'payee_name_invalid'
+      | 'receiving_account_locked'
+      | 'rejected_by_compliance'
+      | 'rtp_not_supported'
+      | 'non_transaction_account'
+      | 'source_token_insufficient_funds'
+      | 'ssn_invalid'
+      | 'wallet_screenshot_required'
+      | 'unsupported_region'
+      | null;
+
+    /**
+     * The error message for the withdrawal, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The estimated availability date for the withdrawal, if any.
+     */
+    estimated_availability: string | null;
+
+    /**
      * The fee amount that was charged for the withdrawal. This is in the same currency
      * as the withdrawal amount.
      */
@@ -444,9 +505,9 @@ export namespace WithdrawalCreatedWebhookEvent {
     fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
 
     /**
-     * The latest payout associated with this withdrawal, if any.
+     * The ledger account associated with the withdrawal.
      */
-    latest_payout: Data.LatestPayout | null;
+    ledger_account: Data.LedgerAccount;
 
     /**
      * The payout token used for the withdrawal, if applicable.
@@ -464,6 +525,12 @@ export namespace WithdrawalCreatedWebhookEvent {
     status: WithdrawalsAPI.WithdrawalStatus;
 
     /**
+     * The trace code for the payout, if applicable. Provided on ACH transactions when
+     * available.
+     */
+    trace_code: string | null;
+
+    /**
      * The type of withdrawal.
      */
     withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
@@ -471,104 +538,18 @@ export namespace WithdrawalCreatedWebhookEvent {
 
   export namespace Data {
     /**
-     * The latest payout associated with this withdrawal, if any.
+     * The ledger account associated with the withdrawal.
      */
-    export interface LatestPayout {
+    export interface LedgerAccount {
       /**
-       * The internal ID of the payout.
+       * The ID of the LedgerAccount.
        */
       id: string;
 
       /**
-       * The date and time the payout was created.
+       * The ID of the company associated with this ledger account.
        */
-      created_at: string;
-
-      /**
-       * The different error codes a payout can be in.
-       */
-      error_code:
-        | 'account_closed'
-        | 'account_does_not_exist'
-        | 'account_information_invalid'
-        | 'account_number_invalid_region'
-        | 'account_frozen'
-        | 'account_lookup_failed'
-        | 'account_not_found'
-        | 'amount_out_of_bounds'
-        | 'attributes_not_validated'
-        | 'b2b_payments_prohibited'
-        | 'bank_statement_required'
-        | 'compliance_review'
-        | 'currency_not_supported'
-        | 'deposit_canceled'
-        | 'deposit_failed'
-        | 'deposit_rejected'
-        | 'destination_unavailable'
-        | 'exceeded_account_limit'
-        | 'expired_quote'
-        | 'generic_payout_error'
-        | 'technical_problem'
-        | 'identification_number_invalid'
-        | 'invalid_account_number'
-        | 'invalid_bank_code'
-        | 'invalid_beneficiary'
-        | 'invalid_branch_number'
-        | 'invalid_branch_code'
-        | 'invalid_phone_number'
-        | 'invalid_routing_number'
-        | 'invalid_swift_code'
-        | 'invalid_company_details'
-        | 'manual_cancelation'
-        | 'misc_error'
-        | 'missing_city_and_country'
-        | 'missing_phone_number'
-        | 'missing_remittance_info'
-        | 'payee_name_invalid'
-        | 'receiving_account_locked'
-        | 'rejected_by_compliance'
-        | 'rtp_not_supported'
-        | 'non_transaction_account'
-        | 'source_token_insufficient_funds'
-        | 'ssn_invalid'
-        | 'wallet_screenshot_required'
-        | 'unsupported_region'
-        | null;
-
-      /**
-       * The error message for the payout.
-       */
-      error_message: string | null;
-
-      /**
-       * The estimated availability date of the payout.
-       */
-      estimated_availability: string | null;
-
-      /**
-       * The name of the payer for the payout.
-       */
-      payer_name: string | null;
-
-      /**
-       * The status of the payout.
-       */
-      status:
-        | 'scheduled'
-        | 'pending'
-        | 'processing'
-        | 'completed'
-        | 'canceled'
-        | 'ready_for_pickup'
-        | 'hold'
-        | 'error'
-        | 'expired';
-
-      /**
-       * The trace code for the payout, if applicable. Provided on ACH transactions when
-       * available.
-       */
-      trace_code: string | null;
+      company_id: string | null;
     }
 
     /**
@@ -598,9 +579,9 @@ export namespace WithdrawalCreatedWebhookEvent {
       nickname: string | null;
 
       /**
-       * The status of the payout token.
+       * The name of the payer associated with the payout token.
        */
-      status: 'created' | 'active' | 'broken';
+      payer_name: string | null;
     }
   }
 }
@@ -658,6 +639,67 @@ export namespace WithdrawalUpdatedWebhookEvent {
     currency: Shared.Currency;
 
     /**
+     * The different error codes a payout can be in.
+     */
+    error_code:
+      | 'account_closed'
+      | 'account_does_not_exist'
+      | 'account_information_invalid'
+      | 'account_number_invalid_region'
+      | 'account_frozen'
+      | 'account_lookup_failed'
+      | 'account_not_found'
+      | 'amount_out_of_bounds'
+      | 'attributes_not_validated'
+      | 'b2b_payments_prohibited'
+      | 'bank_statement_required'
+      | 'compliance_review'
+      | 'currency_not_supported'
+      | 'deposit_canceled'
+      | 'deposit_failed'
+      | 'deposit_rejected'
+      | 'destination_unavailable'
+      | 'exceeded_account_limit'
+      | 'expired_quote'
+      | 'generic_payout_error'
+      | 'technical_problem'
+      | 'identification_number_invalid'
+      | 'invalid_account_number'
+      | 'invalid_bank_code'
+      | 'invalid_beneficiary'
+      | 'invalid_branch_number'
+      | 'invalid_branch_code'
+      | 'invalid_phone_number'
+      | 'invalid_routing_number'
+      | 'invalid_swift_code'
+      | 'invalid_company_details'
+      | 'manual_cancelation'
+      | 'misc_error'
+      | 'missing_city_and_country'
+      | 'missing_phone_number'
+      | 'missing_remittance_info'
+      | 'payee_name_invalid'
+      | 'receiving_account_locked'
+      | 'rejected_by_compliance'
+      | 'rtp_not_supported'
+      | 'non_transaction_account'
+      | 'source_token_insufficient_funds'
+      | 'ssn_invalid'
+      | 'wallet_screenshot_required'
+      | 'unsupported_region'
+      | null;
+
+    /**
+     * The error message for the withdrawal, if any.
+     */
+    error_message: string | null;
+
+    /**
+     * The estimated availability date for the withdrawal, if any.
+     */
+    estimated_availability: string | null;
+
+    /**
      * The fee amount that was charged for the withdrawal. This is in the same currency
      * as the withdrawal amount.
      */
@@ -669,9 +711,9 @@ export namespace WithdrawalUpdatedWebhookEvent {
     fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
 
     /**
-     * The latest payout associated with this withdrawal, if any.
+     * The ledger account associated with the withdrawal.
      */
-    latest_payout: Data.LatestPayout | null;
+    ledger_account: Data.LedgerAccount;
 
     /**
      * The payout token used for the withdrawal, if applicable.
@@ -689,6 +731,12 @@ export namespace WithdrawalUpdatedWebhookEvent {
     status: WithdrawalsAPI.WithdrawalStatus;
 
     /**
+     * The trace code for the payout, if applicable. Provided on ACH transactions when
+     * available.
+     */
+    trace_code: string | null;
+
+    /**
      * The type of withdrawal.
      */
     withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
@@ -696,104 +744,18 @@ export namespace WithdrawalUpdatedWebhookEvent {
 
   export namespace Data {
     /**
-     * The latest payout associated with this withdrawal, if any.
+     * The ledger account associated with the withdrawal.
      */
-    export interface LatestPayout {
+    export interface LedgerAccount {
       /**
-       * The internal ID of the payout.
+       * The ID of the LedgerAccount.
        */
       id: string;
 
       /**
-       * The date and time the payout was created.
+       * The ID of the company associated with this ledger account.
        */
-      created_at: string;
-
-      /**
-       * The different error codes a payout can be in.
-       */
-      error_code:
-        | 'account_closed'
-        | 'account_does_not_exist'
-        | 'account_information_invalid'
-        | 'account_number_invalid_region'
-        | 'account_frozen'
-        | 'account_lookup_failed'
-        | 'account_not_found'
-        | 'amount_out_of_bounds'
-        | 'attributes_not_validated'
-        | 'b2b_payments_prohibited'
-        | 'bank_statement_required'
-        | 'compliance_review'
-        | 'currency_not_supported'
-        | 'deposit_canceled'
-        | 'deposit_failed'
-        | 'deposit_rejected'
-        | 'destination_unavailable'
-        | 'exceeded_account_limit'
-        | 'expired_quote'
-        | 'generic_payout_error'
-        | 'technical_problem'
-        | 'identification_number_invalid'
-        | 'invalid_account_number'
-        | 'invalid_bank_code'
-        | 'invalid_beneficiary'
-        | 'invalid_branch_number'
-        | 'invalid_branch_code'
-        | 'invalid_phone_number'
-        | 'invalid_routing_number'
-        | 'invalid_swift_code'
-        | 'invalid_company_details'
-        | 'manual_cancelation'
-        | 'misc_error'
-        | 'missing_city_and_country'
-        | 'missing_phone_number'
-        | 'missing_remittance_info'
-        | 'payee_name_invalid'
-        | 'receiving_account_locked'
-        | 'rejected_by_compliance'
-        | 'rtp_not_supported'
-        | 'non_transaction_account'
-        | 'source_token_insufficient_funds'
-        | 'ssn_invalid'
-        | 'wallet_screenshot_required'
-        | 'unsupported_region'
-        | null;
-
-      /**
-       * The error message for the payout.
-       */
-      error_message: string | null;
-
-      /**
-       * The estimated availability date of the payout.
-       */
-      estimated_availability: string | null;
-
-      /**
-       * The name of the payer for the payout.
-       */
-      payer_name: string | null;
-
-      /**
-       * The status of the payout.
-       */
-      status:
-        | 'scheduled'
-        | 'pending'
-        | 'processing'
-        | 'completed'
-        | 'canceled'
-        | 'ready_for_pickup'
-        | 'hold'
-        | 'error'
-        | 'expired';
-
-      /**
-       * The trace code for the payout, if applicable. Provided on ACH transactions when
-       * available.
-       */
-      trace_code: string | null;
+      company_id: string | null;
     }
 
     /**
@@ -823,9 +785,9 @@ export namespace WithdrawalUpdatedWebhookEvent {
       nickname: string | null;
 
       /**
-       * The status of the payout token.
+       * The name of the payer associated with the payout token.
        */
-      status: 'created' | 'active' | 'broken';
+      payer_name: string | null;
     }
   }
 }
