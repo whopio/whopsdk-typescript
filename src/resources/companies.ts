@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Create a new sub company for your platform
+   * Create a new connected account for your platform
    *
    * Required permissions:
    *
@@ -181,7 +181,7 @@ export interface CompanyCreateParams {
 
 export interface CompanyListParams extends CursorPageParams {
   /**
-   * The ID of the parent company to list sub companies for
+   * The ID of the parent company to list connected accounts for
    */
   parent_company_id: string;
 

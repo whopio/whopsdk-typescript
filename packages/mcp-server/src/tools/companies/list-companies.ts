@@ -24,7 +24,7 @@ export const tool: Tool = {
     properties: {
       parent_company_id: {
         type: 'string',
-        description: 'The ID of the parent company to list sub companies for',
+        description: 'The ID of the parent company to list connected accounts for',
       },
       after: {
         type: 'string',

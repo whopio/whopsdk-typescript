@@ -349,7 +349,7 @@ The following tools are available in this MCP server.
 
 ### Resource `companies`:
 
-- `create_companies` (`write`): Create a new sub company for your platform
+- `create_companies` (`write`): Create a new connected account for your platform
 
   Required permissions:
 
