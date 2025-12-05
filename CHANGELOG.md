@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.0.13 (2025-12-05)
+
+Full Changelog: [v0.0.12...v0.0.13](https://github.com/whopio/whopsdk-typescript/compare/v0.0.12...v0.0.13)
+
+### Features
+
+* **api:** api update ([8be303c](https://github.com/whopio/whopsdk-typescript/commit/8be303c2b1cbad4e5b9aa9dd60d457f10ce9cbe1))
+* **api:** manual updates ([e8bdd24](https://github.com/whopio/whopsdk-typescript/commit/e8bdd244e052f568a3189f0513ec7fc6b77487c9))
+* **mcp:** add typescript check to code execution tool ([bd5cfda](https://github.com/whopio/whopsdk-typescript/commit/bd5cfda9a150944e96bf24e154bdeb7ab5ba916b))
+
+
+### Bug Fixes
+
+* package-lock ([#6](https://github.com/whopio/whopsdk-typescript/issues/6)) ([94b4d88](https://github.com/whopio/whopsdk-typescript/commit/94b4d884ce045f1d83ce6ba247e952873ce63a54))
+
+
+### Chores
+
+* use latest @modelcontextprotocol/sdk ([4a8b3f5](https://github.com/whopio/whopsdk-typescript/commit/4a8b3f504cca0292bc7012740bf0494be39bb49b))
+
 ## 0.0.12 (2025-12-03)
 
 Full Changelog: [v0.0.11...v0.0.12](https://github.com/whopio/whopsdk-typescript/compare/v0.0.11...v0.0.12)

@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Create a new sub company for your platform
+   * Create a new connected account for your platform
    *
    * Required permissions:
    *
@@ -29,6 +29,23 @@ export class Companies extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company> {
     return this._client.get(path`/companies/${id}`, options);
+  }
+
+  /**
+   * Update an existing company. Either a regular company, platform company, or one
+   * of a platform's connected accounts
+   *
+   * Required permissions:
+   *
+   * - `company:update`
+   * - `company:basic:read`
+   */
+  update(
+    id: string,
+    body: CompanyUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Company> {
+    return this._client.patch(path`/companies/${id}`, { body, ...options });
   }
 
   /**
@@ -179,9 +196,50 @@ export interface CompanyCreateParams {
   metadata?: { [key: string]: unknown } | null;
 }
 
+export interface CompanyUpdateParams {
+  /**
+   * The logo for the company in png, jpeg, or gif format
+   */
+  logo?:
+    | CompanyUpdateParams.AttachmentInputWithDirectUploadID
+    | CompanyUpdateParams.AttachmentInputWithID
+    | null;
+
+  /**
+   * The title of the company
+   */
+  title?: string | null;
+}
+
+export namespace CompanyUpdateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithDirectUploadID {
+    /**
+     * This ID should be used the first time you upload an attachment. It is the ID of
+     * the direct upload that was created when uploading the file to S3 via the
+     * mediaDirectUpload mutation.
+     */
+    direct_upload_id: string;
+  }
+
+  /**
+   * Input for an attachment
+   */
+  export interface AttachmentInputWithID {
+    /**
+     * The ID of an existing attachment object. Use this when updating a resource and
+     * keeping a subset of the attachments. Don't use this unless you know what you're
+     * doing.
+     */
+    id: string;
+  }
+}
+
 export interface CompanyListParams extends CursorPageParams {
   /**
-   * The ID of the parent company to list sub companies for
+   * The ID of the parent company to list connected accounts for
    */
   parent_company_id: string;
 
@@ -221,6 +279,7 @@ export declare namespace Companies {
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
+    type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
   };
 }

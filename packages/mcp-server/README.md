@@ -349,7 +349,7 @@ The following tools are available in this MCP server.
 
 ### Resource `companies`:
 
-- `create_companies` (`write`): Create a new sub company for your platform
+- `create_companies` (`write`): Create a new connected account for your platform
 
   Required permissions:
 
@@ -360,6 +360,13 @@ The following tools are available in this MCP server.
 
   Required permissions:
 
+  - `company:basic:read`
+
+- `update_companies` (`write`): Update an existing company. Either a regular company, platform company, or one of a platform's connected accounts
+
+  Required permissions:
+
+  - `company:update`
   - `company:basic:read`
 
 - `list_companies` (`read`): Lists companies the current user has access to
