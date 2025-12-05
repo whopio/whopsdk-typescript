@@ -127,6 +127,7 @@ const fuse = new Fuse(
     'client.companies.create',
     'client.companies.list',
     'client.companies.retrieve',
+    'client.companies.update',
     'client.webhooks.unwrap',
     'client.plans.create',
     'client.plans.delete',

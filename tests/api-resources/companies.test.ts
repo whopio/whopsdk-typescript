@@ -47,6 +47,30 @@ describe('resource companies', () => {
   });
 
   // Prism tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.companies.update('biz_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.companies.update(
+        'biz_xxxxxxxxxxxxxx',
+        { logo: { direct_upload_id: 'direct_upload_id' }, title: 'title' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.companies.list({ parent_company_id: 'parent_company_id' });
     const rawResponse = await responsePromise.asResponse();

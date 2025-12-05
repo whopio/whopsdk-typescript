@@ -65,6 +65,7 @@ import {
   CompanyListParams,
   CompanyListResponse,
   CompanyListResponsesCursorPage,
+  CompanyUpdateParams,
 } from './resources/companies';
 import {
   CourseChapter,
@@ -1185,6 +1186,7 @@ export declare namespace Whop {
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
+    type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
   };
 

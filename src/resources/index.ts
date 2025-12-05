@@ -45,6 +45,7 @@ export {
   Companies,
   type CompanyListResponse,
   type CompanyCreateParams,
+  type CompanyUpdateParams,
   type CompanyListParams,
   type CompanyListResponsesCursorPage,
 } from './companies';
