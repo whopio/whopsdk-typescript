@@ -31,6 +31,7 @@ describe('resource companies', () => {
       parent_company_id: 'parent_company_id',
       title: 'title',
       metadata: { foo: 'bar' },
+      send_customer_emails: true,
     });
   });
 
@@ -64,7 +65,7 @@ describe('resource companies', () => {
     await expect(
       client.companies.update(
         'biz_xxxxxxxxxxxxxx',
-        { logo: { direct_upload_id: 'direct_upload_id' }, title: 'title' },
+        { logo: { direct_upload_id: 'direct_upload_id' }, send_customer_emails: true, title: 'title' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

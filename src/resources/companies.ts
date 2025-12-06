@@ -126,6 +126,11 @@ export interface CompanyListResponse {
   route: string;
 
   /**
+   * Whether Whop sends transactional emails to customers on behalf of this company.
+   */
+  send_customer_emails: boolean;
+
+  /**
    * The title of the company.
    */
   title: string;
@@ -194,6 +199,14 @@ export interface CompanyCreateParams {
    * Additional metadata for the account
    */
   metadata?: { [key: string]: unknown } | null;
+
+  /**
+   * Whether Whop sends transactional emails to customers on behalf of this company.
+   * Includes: order confirmations, payment failures, refund notifications, upcoming
+   * renewals, and membership cancelations/expirations. When disabled, the platform
+   * is responsible for handling these communications.
+   */
+  send_customer_emails?: boolean | null;
 }
 
 export interface CompanyUpdateParams {
@@ -204,6 +217,14 @@ export interface CompanyUpdateParams {
     | CompanyUpdateParams.AttachmentInputWithDirectUploadID
     | CompanyUpdateParams.AttachmentInputWithID
     | null;
+
+  /**
+   * Whether Whop sends transactional emails to customers on behalf of this company.
+   * Includes: order confirmations, payment failures, refund notifications, upcoming
+   * renewals, and membership cancelations/expirations. When disabled, the platform
+   * is responsible for handling these communications.
+   */
+  send_customer_emails?: boolean | null;
 
   /**
    * The title of the company
