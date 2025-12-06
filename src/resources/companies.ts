@@ -204,7 +204,7 @@ export interface CompanyCreateParams {
    * Whether Whop sends transactional emails to customers on behalf of this company.
    * Includes: order confirmations, payment failures, refund notifications, upcoming
    * renewals, and membership cancelations/expirations. When disabled, the platform
-   * is responsible for handling these communications.
+   * is responsible for handling these communications. This is defaulted to true.
    */
   send_customer_emails?: boolean | null;
 }
