@@ -165,6 +165,13 @@ export interface WithdrawalRetrieveResponse {
   ledger_account: WithdrawalRetrieveResponse.LedgerAccount;
 
   /**
+   * The markup fee that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount. This only applies to platform accounts using Whop
+   * Rails.
+   */
+  markup_fee: number;
+
+  /**
    * The payout token used for the withdrawal, if applicable.
    */
   payout_token: WithdrawalRetrieveResponse.PayoutToken | null;
@@ -274,6 +281,13 @@ export interface WithdrawalListResponse {
    * The different fee types for a withdrawal.
    */
   fee_type: WithdrawalFeeTypes | null;
+
+  /**
+   * The markup fee that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount. This only applies to platform accounts using Whop
+   * Rails.
+   */
+  markup_fee: number;
 
   /**
    * The speed of the withdrawal.

@@ -510,6 +510,13 @@ export namespace WithdrawalCreatedWebhookEvent {
     ledger_account: Data.LedgerAccount;
 
     /**
+     * The markup fee that was charged for the withdrawal. This is in the same currency
+     * as the withdrawal amount. This only applies to platform accounts using Whop
+     * Rails.
+     */
+    markup_fee: number;
+
+    /**
      * The payout token used for the withdrawal, if applicable.
      */
     payout_token: Data.PayoutToken | null;
@@ -714,6 +721,13 @@ export namespace WithdrawalUpdatedWebhookEvent {
      * The ledger account associated with the withdrawal.
      */
     ledger_account: Data.LedgerAccount;
+
+    /**
+     * The markup fee that was charged for the withdrawal. This is in the same currency
+     * as the withdrawal amount. This only applies to platform accounts using Whop
+     * Rails.
+     */
+    markup_fee: number;
 
     /**
      * The payout token used for the withdrawal, if applicable.
