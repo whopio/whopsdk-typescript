@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.0.14 (2025-12-07)
+
+Full Changelog: [v0.0.13...v0.0.14](https://github.com/whopio/whopsdk-typescript/compare/v0.0.13...v0.0.14)
+
+### Features
+
+* **api:** api update ([be4bc87](https://github.com/whopio/whopsdk-typescript/commit/be4bc87a77dd46a702445dbc54e43d81309c636d))
+* **api:** api update ([8165b4e](https://github.com/whopio/whopsdk-typescript/commit/8165b4e5b34010f48be4aca3d4c8df8282c0e614))
+* **api:** api update ([dbdb9fd](https://github.com/whopio/whopsdk-typescript/commit/dbdb9fd46dea6c3f5aafc86c62686303f0455832))
+
 ## 0.0.13 (2025-12-05)
 
 Full Changelog: [v0.0.12...v0.0.13](https://github.com/whopio/whopsdk-typescript/compare/v0.0.12...v0.0.13)

@@ -627,6 +627,11 @@ export interface Company {
   route: string;
 
   /**
+   * Whether Whop sends transactional emails to customers on behalf of this company.
+   */
+  send_customer_emails: boolean;
+
+  /**
    * The social media accounts of the company
    */
   social_links: Array<Company.SocialLink>;
