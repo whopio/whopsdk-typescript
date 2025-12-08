@@ -147,6 +147,16 @@ import {
   Experiences,
 } from './resources/experiences';
 import {
+  FeeMarkupCreateParams,
+  FeeMarkupCreateResponse,
+  FeeMarkupDeleteResponse,
+  FeeMarkupListParams,
+  FeeMarkupListResponse,
+  FeeMarkupListResponsesCursorPage,
+  FeeMarkupType,
+  FeeMarkups,
+} from './resources/fee-markups';
+import {
   ForumPostCreateParams,
   ForumPostListParams,
   ForumPostListResponse,
@@ -1103,6 +1113,7 @@ export class Whop {
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
+  feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
 }
 
 Whop.Apps = Apps;
@@ -1144,6 +1155,7 @@ Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
+Whop.FeeMarkups = FeeMarkups;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1523,6 +1535,17 @@ export declare namespace Whop {
     type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
     type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
     type PaymentMethodListParams as PaymentMethodListParams,
+  };
+
+  export {
+    FeeMarkups as FeeMarkups,
+    type FeeMarkupType as FeeMarkupType,
+    type FeeMarkupCreateResponse as FeeMarkupCreateResponse,
+    type FeeMarkupListResponse as FeeMarkupListResponse,
+    type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
+    type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
+    type FeeMarkupCreateParams as FeeMarkupCreateParams,
+    type FeeMarkupListParams as FeeMarkupListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

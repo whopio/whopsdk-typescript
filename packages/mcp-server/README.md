@@ -1132,3 +1132,23 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `member:payment_methods:read`
+
+### Resource `fee_markups`:
+
+- `create_fee_markups` (`write`): Creates or updates a fee markup for a company.
+
+  Required permissions:
+
+  - `company:update_child_fees`
+
+- `list_fee_markups` (`read`): Lists fee markups for a company.
+
+  Required permissions:
+
+  - `company:update_child_fees`
+
+- `delete_fee_markups` (`write`): Deletes a fee markup for a company.
+
+  Required permissions:
+
+  - `company:update_child_fees`
