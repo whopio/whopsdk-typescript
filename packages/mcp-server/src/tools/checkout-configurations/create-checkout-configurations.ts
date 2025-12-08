@@ -257,6 +257,9 @@ export const tool: Tool = {
             type: 'string',
             description: 'The affiliate code to use for the checkout configuration',
           },
+          currency: {
+            $ref: '#/$defs/currency',
+          },
           metadata: {
             type: 'object',
             description: 'The metadata to use for the checkout configuration',
@@ -312,6 +315,9 @@ export const tool: Tool = {
           affiliate_code: {
             type: 'string',
             description: 'The affiliate code to use for the checkout configuration',
+          },
+          currency: {
+            $ref: '#/$defs/currency',
           },
           metadata: {
             type: 'object',
@@ -369,6 +375,9 @@ export const tool: Tool = {
           mode: {
             type: 'string',
             enum: ['setup'],
+          },
+          currency: {
+            $ref: '#/$defs/currency',
           },
           metadata: {
             type: 'object',

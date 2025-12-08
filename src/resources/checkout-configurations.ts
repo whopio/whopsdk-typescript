@@ -95,6 +95,11 @@ export interface CheckoutConfigurationListResponse {
   company_id: string;
 
   /**
+   * The available currencies on the platform
+   */
+  currency: Shared.Currency | null;
+
+  /**
    * The metadata to use for the checkout configuration
    */
   metadata: { [key: string]: unknown } | null;
@@ -229,6 +234,11 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The affiliate code to use for the checkout configuration
      */
     affiliate_code?: string | null;
+
+    /**
+     * The available currencies on the platform
+     */
+    currency?: Shared.Currency | null;
 
     /**
      * The metadata to use for the checkout configuration
@@ -571,6 +581,11 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
+     * The available currencies on the platform
+     */
+    currency?: Shared.Currency | null;
+
+    /**
      * The metadata to use for the checkout configuration
      */
     metadata?: { [key: string]: unknown } | null;
@@ -628,6 +643,11 @@ export declare namespace CheckoutConfigurationCreateParams {
     company_id: string;
 
     mode: 'setup';
+
+    /**
+     * The available currencies on the platform
+     */
+    currency?: Shared.Currency | null;
 
     /**
      * The metadata to use for the checkout configuration

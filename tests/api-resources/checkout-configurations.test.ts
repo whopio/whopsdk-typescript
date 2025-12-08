@@ -77,6 +77,7 @@ describe('resource checkoutConfigurations', () => {
         visibility: 'visible',
       },
       affiliate_code: 'affiliate_code',
+      currency: 'usd',
       metadata: { foo: 'bar' },
       mode: 'payment',
       payment_method_configuration: {
