@@ -28,6 +28,7 @@ describe('resource experiences', () => {
     const response = await client.experiences.create({
       app_id: 'app_xxxxxxxxxxxxxx',
       company_id: 'biz_xxxxxxxxxxxxxx',
+      is_public: true,
       name: 'name',
       section_id: 'section_id',
     });
@@ -65,6 +66,7 @@ describe('resource experiences', () => {
         'exp_xxxxxxxxxxxxxx',
         {
           access_level: 'public',
+          is_public: true,
           logo: { direct_upload_id: 'direct_upload_id' },
           name: 'name',
           order: '123.45',

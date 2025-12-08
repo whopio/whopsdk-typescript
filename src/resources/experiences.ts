@@ -199,6 +199,11 @@ export interface ExperienceListResponse {
   image: ExperienceListResponse.Image | null;
 
   /**
+   * Whether the experience is visible to the public
+   */
+  is_public: boolean;
+
+  /**
    * The written name of the description.
    */
   name: string;
@@ -294,6 +299,11 @@ export interface ExperienceCreateParams {
   company_id: string;
 
   /**
+   * Whether the experience is publicly accessible
+   */
+  is_public?: boolean | null;
+
+  /**
    * The name of the experience
    */
   name?: string | null;
@@ -309,6 +319,11 @@ export interface ExperienceUpdateParams {
    * The different access levels for experiences (PUBLIC IS NEVER USED ANYMORE).
    */
   access_level?: 'public' | 'private' | null;
+
+  /**
+   * Whether the experience is publicly accessible.
+   */
+  is_public?: boolean | null;
 
   /**
    * The logo for the experience
