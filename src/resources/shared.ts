@@ -1160,6 +1160,11 @@ export interface Experience {
   image: Experience.Image | null;
 
   /**
+   * Whether the experience is visible to the public
+   */
+  is_public: boolean;
+
+  /**
    * The written name of the description.
    */
   name: string;
