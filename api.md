@@ -611,3 +611,18 @@ Methods:
 
 - <code title="get /payment_methods/{id}">client.paymentMethods.<a href="./src/resources/payment-methods.ts">retrieve</a>(id, { ...params }) -> PaymentMethodRetrieveResponse</code>
 - <code title="get /payment_methods">client.paymentMethods.<a href="./src/resources/payment-methods.ts">list</a>({ ...params }) -> PaymentMethodListResponsesCursorPage</code>
+
+# FeeMarkups
+
+Types:
+
+- <code><a href="./src/resources/fee-markups.ts">FeeMarkupType</a></code>
+- <code><a href="./src/resources/fee-markups.ts">FeeMarkupCreateResponse</a></code>
+- <code><a href="./src/resources/fee-markups.ts">FeeMarkupListResponse</a></code>
+- <code><a href="./src/resources/fee-markups.ts">FeeMarkupDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">create</a>({ ...params }) -> FeeMarkupCreateResponse</code>
+- <code title="get /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">list</a>({ ...params }) -> FeeMarkupListResponsesCursorPage</code>
+- <code title="delete /fee_markups/{id}">client.feeMarkups.<a href="./src/resources/fee-markups.ts">delete</a>(id) -> FeeMarkupDeleteResponse</code>

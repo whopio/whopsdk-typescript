@@ -133,6 +133,9 @@ import retrieve_setup_intents from './setup-intents/retrieve-setup-intents';
 import list_setup_intents from './setup-intents/list-setup-intents';
 import retrieve_payment_methods from './payment-methods/retrieve-payment-methods';
 import list_payment_methods from './payment-methods/list-payment-methods';
+import create_fee_markups from './fee-markups/create-fee-markups';
+import list_fee_markups from './fee-markups/list-fee-markups';
+import delete_fee_markups from './fee-markups/delete-fee-markups';
 
 export const endpoints: Endpoint[] = [];
 
@@ -269,6 +272,9 @@ addEndpoint(retrieve_setup_intents);
 addEndpoint(list_setup_intents);
 addEndpoint(retrieve_payment_methods);
 addEndpoint(list_payment_methods);
+addEndpoint(create_fee_markups);
+addEndpoint(list_fee_markups);
+addEndpoint(delete_fee_markups);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';
