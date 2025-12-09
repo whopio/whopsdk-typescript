@@ -14,6 +14,7 @@ export class Withdrawals extends APIResource {
    * Required permissions:
    *
    * - `payout:withdrawal:read`
+   * - `payout:destination:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<WithdrawalRetrieveResponse> {
     return this._client.get(path`/withdrawals/${id}`, options);
