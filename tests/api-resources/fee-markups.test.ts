@@ -1,0 +1,72 @@
+// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+
+import Whop from '@whop/sdk';
+
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
+
+describe('resource feeMarkups', () => {
+  // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.feeMarkups.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      fee_type: 'crypto_withdrawal_markup',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.feeMarkups.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      fee_type: 'crypto_withdrawal_markup',
+      fixed_fee_usd: 6.9,
+      metadata: { foo: 'bar' },
+      notes: 'notes',
+      percentage_fee: 6.9,
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.feeMarkups.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.feeMarkups.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
+  });
+
+  // Prism tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.feeMarkups.delete('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+});

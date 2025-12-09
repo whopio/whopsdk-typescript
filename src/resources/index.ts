@@ -129,6 +129,16 @@ export {
   type ExperienceListResponsesCursorPage,
 } from './experiences';
 export {
+  FeeMarkups,
+  type FeeMarkupType,
+  type FeeMarkupCreateResponse,
+  type FeeMarkupListResponse,
+  type FeeMarkupDeleteResponse,
+  type FeeMarkupCreateParams,
+  type FeeMarkupListParams,
+  type FeeMarkupListResponsesCursorPage,
+} from './fee-markups';
+export {
   ForumPosts,
   type ForumPostVisibilityType,
   type ForumPostListResponse,

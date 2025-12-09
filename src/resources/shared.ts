@@ -443,6 +443,11 @@ export interface CheckoutConfiguration {
   company_id: string;
 
   /**
+   * The available currencies on the platform
+   */
+  currency: Currency | null;
+
+  /**
    * The metadata to use for the checkout configuration
    */
   metadata: { [key: string]: unknown } | null;
@@ -1153,6 +1158,11 @@ export interface Experience {
    * The logo for the experience.
    */
   image: Experience.Image | null;
+
+  /**
+   * Whether the experience is visible to the public
+   */
+  is_public: boolean;
 
   /**
    * The written name of the description.

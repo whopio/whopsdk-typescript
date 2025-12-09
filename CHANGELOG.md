@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.15 (2025-12-09)
+
+Full Changelog: [v0.0.14...v0.0.15](https://github.com/whopio/whopsdk-typescript/compare/v0.0.14...v0.0.15)
+
+### Features
+
+* **api:** api update ([74c9cc4](https://github.com/whopio/whopsdk-typescript/commit/74c9cc40ede70ac0880cd5acd86768550463035d))
+* **api:** api update ([dc6131a](https://github.com/whopio/whopsdk-typescript/commit/dc6131a1a8d731335b07cf43b3ca706f1a7083e5))
+* **api:** manual updates ([198e368](https://github.com/whopio/whopsdk-typescript/commit/198e3684daf5f7425ef8257126badb6128310576))
+
+
+### Chores
+
+* **internal:** configure MCP Server hosting ([42a8adc](https://github.com/whopio/whopsdk-typescript/commit/42a8adc7df9c6e7a8c24ec6b84cfd404c26719a4))
+* **internal:** escape package name in pnpm workspace file ([b34c647](https://github.com/whopio/whopsdk-typescript/commit/b34c6478178234d2b80d305cc9b034487f02dc8f))
+* **internal:** unconfigure MCP Server hosting ([dedbd71](https://github.com/whopio/whopsdk-typescript/commit/dedbd71bc0a72c5b937c74f74b55d2a6776e5b72))
+
 ## 0.0.14 (2025-12-07)
 
 Full Changelog: [v0.0.13...v0.0.14](https://github.com/whopio/whopsdk-typescript/compare/v0.0.13...v0.0.14)
