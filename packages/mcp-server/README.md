@@ -1090,6 +1090,7 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `payout:withdrawal:read`
+  - `payout:destination:read`
 
 - `list_withdrawals` (`read`): Lists withdrawals
 
