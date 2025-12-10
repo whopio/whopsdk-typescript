@@ -9,12 +9,40 @@ import { path } from '../internal/utils/path';
 
 export class Withdrawals extends APIResource {
   /**
+   * Creates a withdrawal request for a ledger account
+   *
+   * Required permissions:
+   *
+   * - `payout:withdraw_funds`
+   * - `payout:destination:read`
+   *
+   * @example
+   * ```ts
+   * const withdrawal = await client.withdrawals.create({
+   *   amount: 6.9,
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   currency: 'usd',
+   * });
+   * ```
+   */
+  create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<WithdrawalCreateResponse> {
+    return this._client.post('/withdrawals', { body, ...options });
+  }
+
+  /**
    * Retrieves a withdrawal by ID
    *
    * Required permissions:
    *
    * - `payout:withdrawal:read`
    * - `payout:destination:read`
+   *
+   * @example
+   * ```ts
+   * const withdrawal = await client.withdrawals.retrieve(
+   *   'wdrl_xxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<WithdrawalRetrieveResponse> {
     return this._client.get(path`/withdrawals/${id}`, options);
@@ -26,6 +54,16 @@ export class Withdrawals extends APIResource {
    * Required permissions:
    *
    * - `payout:withdrawal:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const withdrawalListResponse of client.withdrawals.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: WithdrawalListParams,
@@ -63,6 +101,190 @@ export type WithdrawalStatus =
  * The types of withdrawals
  */
 export type WithdrawalTypes = 'regular' | 'clawback';
+
+/**
+ * A withdrawal request.
+ */
+export interface WithdrawalCreateResponse {
+  /**
+   * Internal ID of the withdrawal request.
+   */
+  id: string;
+
+  /**
+   * How much money was attempted to be withdrawn, in a float type.
+   */
+  amount: number;
+
+  /**
+   * When the withdrawal request was created.
+   */
+  created_at: string;
+
+  /**
+   * The currency of the withdrawal request.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The different error codes a payout can be in.
+   */
+  error_code:
+    | 'account_closed'
+    | 'account_does_not_exist'
+    | 'account_information_invalid'
+    | 'account_number_invalid_region'
+    | 'account_frozen'
+    | 'account_lookup_failed'
+    | 'account_not_found'
+    | 'amount_out_of_bounds'
+    | 'attributes_not_validated'
+    | 'b2b_payments_prohibited'
+    | 'bank_statement_required'
+    | 'compliance_review'
+    | 'currency_not_supported'
+    | 'deposit_canceled'
+    | 'deposit_failed'
+    | 'deposit_rejected'
+    | 'destination_unavailable'
+    | 'exceeded_account_limit'
+    | 'expired_quote'
+    | 'generic_payout_error'
+    | 'technical_problem'
+    | 'identification_number_invalid'
+    | 'invalid_account_number'
+    | 'invalid_bank_code'
+    | 'invalid_beneficiary'
+    | 'invalid_branch_number'
+    | 'invalid_branch_code'
+    | 'invalid_phone_number'
+    | 'invalid_routing_number'
+    | 'invalid_swift_code'
+    | 'invalid_company_details'
+    | 'manual_cancelation'
+    | 'misc_error'
+    | 'missing_city_and_country'
+    | 'missing_phone_number'
+    | 'missing_remittance_info'
+    | 'payee_name_invalid'
+    | 'receiving_account_locked'
+    | 'rejected_by_compliance'
+    | 'rtp_not_supported'
+    | 'non_transaction_account'
+    | 'source_token_insufficient_funds'
+    | 'ssn_invalid'
+    | 'wallet_screenshot_required'
+    | 'unsupported_region'
+    | null;
+
+  /**
+   * The error message for the withdrawal, if any.
+   */
+  error_message: string | null;
+
+  /**
+   * The estimated availability date for the withdrawal, if any.
+   */
+  estimated_availability: string | null;
+
+  /**
+   * The fee amount that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount.
+   */
+  fee_amount: number;
+
+  /**
+   * The different fee types for a withdrawal.
+   */
+  fee_type: WithdrawalFeeTypes | null;
+
+  /**
+   * The ledger account associated with the withdrawal.
+   */
+  ledger_account: WithdrawalCreateResponse.LedgerAccount;
+
+  /**
+   * The markup fee that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount. This only applies to platform accounts using Whop
+   * Rails.
+   */
+  markup_fee: number;
+
+  /**
+   * The payout token used for the withdrawal, if applicable.
+   */
+  payout_token: WithdrawalCreateResponse.PayoutToken | null;
+
+  /**
+   * The speed of the withdrawal.
+   */
+  speed: WithdrawalSpeeds;
+
+  /**
+   * Status of the withdrawal.
+   */
+  status: WithdrawalStatus;
+
+  /**
+   * The trace code for the payout, if applicable. Provided on ACH transactions when
+   * available.
+   */
+  trace_code: string | null;
+
+  /**
+   * The type of withdrawal.
+   */
+  withdrawal_type: WithdrawalTypes;
+}
+
+export namespace WithdrawalCreateResponse {
+  /**
+   * The ledger account associated with the withdrawal.
+   */
+  export interface LedgerAccount {
+    /**
+     * The ID of the LedgerAccount.
+     */
+    id: string;
+
+    /**
+     * The ID of the company associated with this ledger account.
+     */
+    company_id: string | null;
+  }
+
+  /**
+   * The payout token used for the withdrawal, if applicable.
+   */
+  export interface PayoutToken {
+    /**
+     * The ID of the payout token
+     */
+    id: string;
+
+    /**
+     * The date and time the payout token was created
+     */
+    created_at: string;
+
+    /**
+     * The currency code of the payout destination. This is the currency that payouts
+     * will be made in for this token.
+     */
+    destination_currency_code: string;
+
+    /**
+     * An optional nickname for the payout token to help the user identify it. This is
+     * not used by the provider and is only for the user's reference.
+     */
+    nickname: string | null;
+
+    /**
+     * The name of the payer associated with the payout token.
+     */
+    payer_name: string | null;
+  }
+}
 
 /**
  * A withdrawal request.
@@ -306,6 +528,28 @@ export interface WithdrawalListResponse {
   withdrawal_type: WithdrawalTypes;
 }
 
+export interface WithdrawalCreateParams {
+  /**
+   * The amount to withdraw
+   */
+  amount: number;
+
+  /**
+   * The ID of the company to withdraw from.
+   */
+  company_id: string;
+
+  /**
+   * The currency that is being withdrawn.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The ID of the payout token to use for the withdrawal.
+   */
+  payout_method_id?: string | null;
+}
+
 export interface WithdrawalListParams extends CursorPageParams {
   /**
    * The ID of the company to list withdrawals for
@@ -349,9 +593,11 @@ export declare namespace Withdrawals {
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalTypes as WithdrawalTypes,
+    type WithdrawalCreateResponse as WithdrawalCreateResponse,
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
+    type WithdrawalCreateParams as WithdrawalCreateParams,
     type WithdrawalListParams as WithdrawalListParams,
   };
 }

@@ -70,6 +70,7 @@ import check_access_users from './users/check-access-users';
 import create_payments from './payments/create-payments';
 import retrieve_payments from './payments/retrieve-payments';
 import list_payments from './payments/list-payments';
+import list_fees_payments from './payments/list-fees-payments';
 import refund_payments from './payments/refund-payments';
 import retry_payments from './payments/retry-payments';
 import void_payments from './payments/void-payments';
@@ -126,6 +127,7 @@ import submit_evidence_disputes from './disputes/submit-evidence-disputes';
 import update_evidence_disputes from './disputes/update-evidence-disputes';
 import retrieve_refunds from './refunds/retrieve-refunds';
 import list_refunds from './refunds/list-refunds';
+import create_withdrawals from './withdrawals/create-withdrawals';
 import retrieve_withdrawals from './withdrawals/retrieve-withdrawals';
 import list_withdrawals from './withdrawals/list-withdrawals';
 import create_account_links from './account-links/create-account-links';
@@ -136,6 +138,7 @@ import list_payment_methods from './payment-methods/list-payment-methods';
 import create_fee_markups from './fee-markups/create-fee-markups';
 import list_fee_markups from './fee-markups/list-fee-markups';
 import delete_fee_markups from './fee-markups/delete-fee-markups';
+import list_payout_methods from './payout-methods/list-payout-methods';
 
 export const endpoints: Endpoint[] = [];
 
@@ -209,6 +212,7 @@ addEndpoint(check_access_users);
 addEndpoint(create_payments);
 addEndpoint(retrieve_payments);
 addEndpoint(list_payments);
+addEndpoint(list_fees_payments);
 addEndpoint(refund_payments);
 addEndpoint(retry_payments);
 addEndpoint(void_payments);
@@ -265,6 +269,7 @@ addEndpoint(submit_evidence_disputes);
 addEndpoint(update_evidence_disputes);
 addEndpoint(retrieve_refunds);
 addEndpoint(list_refunds);
+addEndpoint(create_withdrawals);
 addEndpoint(retrieve_withdrawals);
 addEndpoint(list_withdrawals);
 addEndpoint(create_account_links);
@@ -275,6 +280,7 @@ addEndpoint(list_payment_methods);
 addEndpoint(create_fee_markups);
 addEndpoint(list_fee_markups);
 addEndpoint(delete_fee_markups);
+addEndpoint(list_payout_methods);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

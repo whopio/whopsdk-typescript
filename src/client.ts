@@ -215,6 +215,9 @@ import {
   BillingReasons,
   CardBrands,
   PaymentCreateParams,
+  PaymentListFeesParams,
+  PaymentListFeesResponse,
+  PaymentListFeesResponsesCursorPage,
   PaymentListParams,
   PaymentListResponse,
   PaymentListResponsesCursorPage,
@@ -222,6 +225,12 @@ import {
   PaymentRefundParams,
   Payments,
 } from './resources/payments';
+import {
+  PayoutMethodListParams,
+  PayoutMethodListResponse,
+  PayoutMethodListResponsesCursorPage,
+  PayoutMethods,
+} from './resources/payout-methods';
 import {
   PlanCreateParams,
   PlanDeleteResponse,
@@ -338,6 +347,8 @@ import {
   WithdrawalUpdatedWebhookEvent,
 } from './resources/webhooks';
 import {
+  WithdrawalCreateParams,
+  WithdrawalCreateResponse,
   WithdrawalFeeTypes,
   WithdrawalListParams,
   WithdrawalListResponse,
@@ -1111,6 +1122,7 @@ export class Whop {
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
+  payoutMethods: API.PayoutMethods = new API.PayoutMethods(this);
 }
 
 Whop.Apps = Apps;
@@ -1153,6 +1165,7 @@ Whop.AccountLinks = AccountLinks;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
+Whop.PayoutMethods = PayoutMethods;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1341,9 +1354,12 @@ export declare namespace Whop {
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
+    type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
     type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
+    type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
   };
 
@@ -1504,9 +1520,11 @@ export declare namespace Whop {
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalTypes as WithdrawalTypes,
+    type WithdrawalCreateResponse as WithdrawalCreateResponse,
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
+    type WithdrawalCreateParams as WithdrawalCreateParams,
     type WithdrawalListParams as WithdrawalListParams,
   };
 
@@ -1543,6 +1561,13 @@ export declare namespace Whop {
     type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
     type FeeMarkupCreateParams as FeeMarkupCreateParams,
     type FeeMarkupListParams as FeeMarkupListParams,
+  };
+
+  export {
+    PayoutMethods as PayoutMethods,
+    type PayoutMethodListResponse as PayoutMethodListResponse,
+    type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
+    type PayoutMethodListParams as PayoutMethodListParams,
   };
 
   export type AccessLevel = API.AccessLevel;
