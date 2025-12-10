@@ -236,9 +236,47 @@ export namespace Course {
       order: number;
 
       /**
+       * The thumbnail for the lesson
+       */
+      thumbnail: Lesson.Thumbnail | null;
+
+      /**
        * The title of the lesson
        */
       title: string;
+
+      /**
+       * The associated Mux asset for video lessons
+       */
+      video_asset: Lesson.VideoAsset | null;
+    }
+
+    export namespace Lesson {
+      /**
+       * The thumbnail for the lesson
+       */
+      export interface Thumbnail {
+        /**
+         * This is the URL you use to render optimized attachments on the client. This
+         * should be used for apps.
+         */
+        url: string | null;
+      }
+
+      /**
+       * The associated Mux asset for video lessons
+       */
+      export interface VideoAsset {
+        /**
+         * The duration of the video in seconds
+         */
+        duration_seconds: number | null;
+
+        /**
+         * The signed thumbnail playback token of the Mux asset
+         */
+        signed_thumbnail_playback_token: string | null;
+      }
     }
   }
 
