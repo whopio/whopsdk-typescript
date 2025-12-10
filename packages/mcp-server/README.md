@@ -708,6 +708,12 @@ The following tools are available in this MCP server.
   - `member:phone:read`
   - `promo_code:basic:read`
 
+- `list_fees_payments` (`read`): Lists fees for a payment
+
+  Required permissions:
+
+  - `payment:basic:read`
+
 - `refund_payments` (`write`): Refunds a payment
 
   Required permissions:
@@ -1085,11 +1091,19 @@ The following tools are available in this MCP server.
 
 ### Resource `withdrawals`:
 
+- `create_withdrawals` (`write`): Creates a withdrawal request for a ledger account
+
+  Required permissions:
+
+  - `payout:withdraw_funds`
+  - `payout:destination:read`
+
 - `retrieve_withdrawals` (`read`): Retrieves a withdrawal by ID
 
   Required permissions:
 
   - `payout:withdrawal:read`
+  - `payout:destination:read`
 
 - `list_withdrawals` (`read`): Lists withdrawals
 
@@ -1152,3 +1166,11 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `company:update_child_fees`
+
+### Resource `payout_methods`:
+
+- `list_payout_methods` (`read`): Lists payout destinations for a company
+
+  Required permissions:
+
+  - `payout:destination:read`

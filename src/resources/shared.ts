@@ -797,9 +797,26 @@ export namespace CourseLessonInteraction {
     id: string;
 
     /**
+     * The chapter this lesson belongs to
+     */
+    chapter: Lesson.Chapter;
+
+    /**
      * The title of the lesson
      */
     title: string;
+  }
+
+  export namespace Lesson {
+    /**
+     * The chapter this lesson belongs to
+     */
+    export interface Chapter {
+      /**
+       * The ID of the chapter. Looks like chap_XXX
+       */
+      id: string;
+    }
   }
 
   /**
@@ -864,9 +881,26 @@ export namespace CourseLessonInteractionListItem {
     id: string;
 
     /**
+     * The chapter this lesson belongs to
+     */
+    chapter: Lesson.Chapter;
+
+    /**
      * The title of the lesson
      */
     title: string;
+  }
+
+  export namespace Lesson {
+    /**
+     * The chapter this lesson belongs to
+     */
+    export interface Chapter {
+      /**
+       * The ID of the chapter. Looks like chap_XXX
+       */
+      id: string;
+    }
   }
 
   /**

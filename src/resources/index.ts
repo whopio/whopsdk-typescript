@@ -204,11 +204,20 @@ export {
   type CardBrands,
   type PaymentMethodTypes,
   type PaymentListResponse,
+  type PaymentListFeesResponse,
   type PaymentCreateParams,
   type PaymentListParams,
+  type PaymentListFeesParams,
   type PaymentRefundParams,
   type PaymentListResponsesCursorPage,
+  type PaymentListFeesResponsesCursorPage,
 } from './payments';
+export {
+  PayoutMethods,
+  type PayoutMethodListResponse,
+  type PayoutMethodListParams,
+  type PayoutMethodListResponsesCursorPage,
+} from './payout-methods';
 export {
   Plans,
   type PlanListResponse,
@@ -330,8 +339,10 @@ export {
   type WithdrawalSpeeds,
   type WithdrawalStatus,
   type WithdrawalTypes,
+  type WithdrawalCreateResponse,
   type WithdrawalRetrieveResponse,
   type WithdrawalListResponse,
+  type WithdrawalCreateParams,
   type WithdrawalListParams,
   type WithdrawalListResponsesCursorPage,
 } from './withdrawals';

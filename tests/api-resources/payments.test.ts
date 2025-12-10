@@ -112,6 +112,30 @@ describe('resource payments', () => {
   });
 
   // Prism tests are disabled
+  test.skip('listFees', async () => {
+    const responsePromise = client.payments.listFees('pay_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('listFees: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.listFees(
+        'pay_xxxxxxxxxxxxxx',
+        { after: 'after', before: 'before', first: 42, last: 42 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Prism tests are disabled
   test.skip('refund', async () => {
     const responsePromise = client.payments.refund('pay_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
