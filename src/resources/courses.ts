@@ -273,6 +273,11 @@ export namespace Course {
         duration_seconds: number | null;
 
         /**
+         * The signed playback ID of the Mux asset
+         */
+        signed_playback_id: string | null;
+
+        /**
          * The signed thumbnail playback token of the Mux asset
          */
         signed_thumbnail_playback_token: string | null;
