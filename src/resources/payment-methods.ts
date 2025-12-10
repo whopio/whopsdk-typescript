@@ -63,12 +63,6 @@ export interface PaymentMethodRetrieveResponse {
   id: string;
 
   /**
-   * The bank account data associated with the payment method, if it's a bank
-   * account.
-   */
-  bank: PaymentMethodRetrieveResponse.Bank | null;
-
-  /**
    * The card data associated with the payment method, if its a debit or credit card.
    */
   card: PaymentMethodRetrieveResponse.Card | null;
@@ -85,27 +79,6 @@ export interface PaymentMethodRetrieveResponse {
 }
 
 export namespace PaymentMethodRetrieveResponse {
-  /**
-   * The bank account data associated with the payment method, if it's a bank
-   * account.
-   */
-  export interface Bank {
-    /**
-     * The type of account
-     */
-    account_type: string;
-
-    /**
-     * The name of the bank
-     */
-    bank_name: string;
-
-    /**
-     * The last 4 digits of the account number
-     */
-    last4: string;
-  }
-
   /**
    * The card data associated with the payment method, if its a debit or credit card.
    */
@@ -143,12 +116,6 @@ export interface PaymentMethodListResponse {
   id: string;
 
   /**
-   * The bank account data associated with the payment method, if it's a bank
-   * account.
-   */
-  bank: PaymentMethodListResponse.Bank | null;
-
-  /**
    * The card data associated with the payment method, if its a debit or credit card.
    */
   card: PaymentMethodListResponse.Card | null;
@@ -165,27 +132,6 @@ export interface PaymentMethodListResponse {
 }
 
 export namespace PaymentMethodListResponse {
-  /**
-   * The bank account data associated with the payment method, if it's a bank
-   * account.
-   */
-  export interface Bank {
-    /**
-     * The type of account
-     */
-    account_type: string;
-
-    /**
-     * The name of the bank
-     */
-    bank_name: string;
-
-    /**
-     * The last 4 digits of the account number
-     */
-    last4: string;
-  }
-
   /**
    * The card data associated with the payment method, if its a debit or credit card.
    */
