@@ -530,7 +530,7 @@ export interface WithdrawalListResponse {
 
 export interface WithdrawalCreateParams {
   /**
-   * The amount to withdraw
+   * The amount to withdraw in the specified currency
    */
   amount: number;
 
@@ -545,7 +545,7 @@ export interface WithdrawalCreateParams {
   currency: Shared.Currency;
 
   /**
-   * The ID of the payout token to use for the withdrawal.
+   * The ID of the payout method to use for the withdrawal.
    */
   payout_method_id?: string | null;
 }
