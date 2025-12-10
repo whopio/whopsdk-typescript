@@ -13,6 +13,7 @@ export class LedgerAccounts extends APIResource {
    * Required permissions:
    *
    * - `company:balance:read`
+   * - `payout:account:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<LedgerAccountRetrieveResponse> {
     return this._client.get(path`/ledger_accounts/${id}`, options);
@@ -65,6 +66,11 @@ export interface LedgerAccountRetrieveResponse {
    * The different approval statuses an account can have.
    */
   payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected' | null;
+
+  /**
+   * The payout account associated with the LedgerAccount, if any.
+   */
+  payout_account_details: LedgerAccountRetrieveResponse.PayoutAccountDetails | null;
 
   /**
    * The fee for transfers, if applicable.
@@ -146,6 +152,88 @@ export namespace LedgerAccountRetrieveResponse {
      * The typename of this object
      */
     typename: 'Company';
+  }
+
+  /**
+   * The payout account associated with the LedgerAccount, if any.
+   */
+  export interface PayoutAccountDetails {
+    /**
+     * Unique identifier for the object
+     */
+    id: string;
+
+    /**
+     * The physical address associated with this payout account
+     */
+    address: PayoutAccountDetails.Address | null;
+
+    /**
+     * The company's legal name
+     */
+    business_name: string | null;
+
+    /**
+     * The business representative for this payout account
+     */
+    business_representative: PayoutAccountDetails.BusinessRepresentative | null;
+  }
+
+  export namespace PayoutAccountDetails {
+    /**
+     * The physical address associated with this payout account
+     */
+    export interface Address {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * The business representative for this payout account
+     */
+    export interface BusinessRepresentative {
+      /**
+       * The first name of the business representative.
+       */
+      first_name: string | null;
+
+      /**
+       * The last name of the business representative.
+       */
+      last_name: string | null;
+
+      /**
+       * The middle name of the business representative.
+       */
+      middle_name: string | null;
+    }
   }
 }
 

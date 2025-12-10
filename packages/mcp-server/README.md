@@ -489,6 +489,7 @@ The following tools are available in this MCP server.
   Required permissions:
 
   - `company:balance:read`
+  - `payout:account:read`
 
 ### Resource `memberships`:
 
