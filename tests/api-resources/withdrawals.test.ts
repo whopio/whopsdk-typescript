@@ -9,6 +9,32 @@ const client = new Whop({
 
 describe('resource withdrawals', () => {
   // Prism tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.withdrawals.create({
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      currency: 'usd',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.withdrawals.create({
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      currency: 'usd',
+      payout_method_id: 'payout_method_id',
+    });
+  });
+
+  // Prism tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.withdrawals.retrieve('wdrl_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

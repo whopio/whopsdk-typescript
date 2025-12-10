@@ -98,6 +98,34 @@ export class Payments extends APIResource {
   }
 
   /**
+   * Lists fees for a payment
+   *
+   * Required permissions:
+   *
+   * - `payment:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const paymentListFeesResponse of client.payments.listFees(
+   *   'pay_xxxxxxxxxxxxxx',
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listFees(
+    id: string,
+    query: PaymentListFeesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
+    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Refunds a payment
    *
    * Required permissions:
@@ -175,6 +203,8 @@ export class Payments extends APIResource {
 }
 
 export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
+
+export type PaymentListFeesResponsesCursorPage = CursorPage<PaymentListFeesResponse>;
 
 /**
  * The reason why a specific payment was billed
@@ -709,6 +739,61 @@ export namespace PaymentListResponse {
   }
 }
 
+/**
+ * Represents a fee related to a payment
+ */
+export interface PaymentListFeesResponse {
+  /**
+   * The value or amount to display for the fee.
+   */
+  amount: number;
+
+  /**
+   * The currency of the fee.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The label to display for the fee.
+   */
+  name: string;
+
+  /**
+   * The specific origin of the fee, if applicable.
+   */
+  type:
+    | 'stripe_domestic_processing_fee'
+    | 'stripe_international_processing_fee'
+    | 'stripe_fixed_processing_fee'
+    | 'stripe_billing_fee'
+    | 'stripe_radar_fee'
+    | 'sales_tax_remittance'
+    | 'sales_tax_remittance_reversal'
+    | 'stripe_sales_tax_fee'
+    | 'whop_processing_fee'
+    | 'marketplace_affiliate_fee'
+    | 'affiliate_fee'
+    | 'crypto_fee'
+    | 'stripe_standard_processing_fee'
+    | 'paypal_fee'
+    | 'stripe_payout_fee'
+    | 'dispute_fee'
+    | 'dispute_alert_fee'
+    | 'apple_processing_fee'
+    | 'buyer_fee'
+    | 'sezzle_processing_fee'
+    | 'splitit_processing_fee'
+    | 'platform_balance_processing_fee'
+    | 'payment_processing_percentage_fee'
+    | 'payment_processing_fixed_fee'
+    | 'cross_border_percentage_fee'
+    | 'fx_percentage_fee'
+    | 'orchestration_percentage_fee'
+    | 'three_ds_fixed_fee'
+    | 'billing_percentage_fee'
+    | 'revshare_percentage_fee';
+}
+
 export type PaymentCreateParams =
   | PaymentCreateParams.CreatePaymentInputWithPlan
   | PaymentCreateParams.CreatePaymentInputWithPlanID;
@@ -999,6 +1084,23 @@ export interface PaymentListParams extends CursorPageParams {
   substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
 }
 
+export interface PaymentListFeesParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface PaymentRefundParams {
   /**
    * An amount if the refund is supposed to be partial.
@@ -1012,9 +1114,12 @@ export declare namespace Payments {
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
     type PaymentListResponse as PaymentListResponse,
+    type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
     type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
+    type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
   };
 }

@@ -332,12 +332,14 @@ Types:
 - <code><a href="./src/resources/payments.ts">CardBrands</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentListFeesResponse</a></code>
 
 Methods:
 
 - <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
 - <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
+- <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponsesCursorPage</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
 - <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
 - <code title="post /payments/{id}/void">client.payments.<a href="./src/resources/payments.ts">void</a>(id) -> Payment</code>
@@ -569,11 +571,13 @@ Types:
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalSpeeds</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalStatus</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalTypes</a></code>
+- <code><a href="./src/resources/withdrawals.ts">WithdrawalCreateResponse</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalRetrieveResponse</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalListResponse</a></code>
 
 Methods:
 
+- <code title="post /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">create</a>({ ...params }) -> WithdrawalCreateResponse</code>
 - <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> WithdrawalRetrieveResponse</code>
 - <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>
 
@@ -626,3 +630,13 @@ Methods:
 - <code title="post /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">create</a>({ ...params }) -> FeeMarkupCreateResponse</code>
 - <code title="get /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">list</a>({ ...params }) -> FeeMarkupListResponsesCursorPage</code>
 - <code title="delete /fee_markups/{id}">client.feeMarkups.<a href="./src/resources/fee-markups.ts">delete</a>(id) -> FeeMarkupDeleteResponse</code>
+
+# PayoutMethods
+
+Types:
+
+- <code><a href="./src/resources/payout-methods.ts">PayoutMethodListResponse</a></code>
+
+Methods:
+
+- <code title="get /payout_methods">client.payoutMethods.<a href="./src/resources/payout-methods.ts">list</a>({ ...params }) -> PayoutMethodListResponsesCursorPage</code>
