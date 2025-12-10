@@ -53,108 +53,290 @@ export class PaymentMethods extends APIResource {
 export type PaymentMethodListResponsesCursorPage = CursorPage<PaymentMethodListResponse>;
 
 /**
- * A stored payment method used to process payments. This could be a credit/debit
- * card, bank account, PayPal wallet, etc.
+ * A payment method with no additional properties
  */
-export interface PaymentMethodRetrieveResponse {
-  /**
-   * The ID of the payment method
-   */
-  id: string;
-
-  /**
-   * The card data associated with the payment method, if its a debit or credit card.
-   */
-  card: PaymentMethodRetrieveResponse.Card | null;
-
-  /**
-   * The date and time the payment method was created
-   */
-  created_at: string;
-
-  /**
-   * The payment method type of the payment method
-   */
-  payment_method_type: PaymentsAPI.PaymentMethodTypes;
-}
+export type PaymentMethodRetrieveResponse =
+  | PaymentMethodRetrieveResponse.BasePaymentMethod
+  | PaymentMethodRetrieveResponse.CardPaymentMethod
+  | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod;
 
 export namespace PaymentMethodRetrieveResponse {
   /**
-   * The card data associated with the payment method, if its a debit or credit card.
+   * A payment method with no additional properties
    */
-  export interface Card {
+  export interface BasePaymentMethod {
     /**
-     * Possible card brands that a payment token can have
+     * The ID of the payment method
      */
-    brand: PaymentsAPI.CardBrands | null;
+    id: string;
 
     /**
-     * Card expiration month, like 03 for March.
+     * When the payment method was created
      */
-    exp_month: number | null;
+    created_at: string;
 
     /**
-     * Card expiration year, like 27 for 2027.
+     * The type of the payment method
      */
-    exp_year: number | null;
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
     /**
-     * Last four digits of the card.
+     * The typename of this object
      */
-    last4: string | null;
+    typename: 'BasePaymentMethod';
+  }
+
+  /**
+   * The card for the payment method
+   */
+  export interface CardPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * The card details associated with this payment method
+     */
+    card: CardPaymentMethod.Card;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'CardPaymentMethod';
+  }
+
+  export namespace CardPaymentMethod {
+    /**
+     * The card details associated with this payment method
+     */
+    export interface Card {
+      /**
+       * Possible card brands that a payment token can have
+       */
+      brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * Card expiration month, like 03 for March.
+       */
+      exp_month: number | null;
+
+      /**
+       * Card expiration year, like 27 for 2027.
+       */
+      exp_year: number | null;
+
+      /**
+       * Last four digits of the card.
+       */
+      last4: string | null;
+    }
+  }
+
+  /**
+   * The bank account for the payment method
+   */
+  export interface UsBankAccountPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'UsBankAccountPaymentMethod';
+
+    /**
+     * The bank details associated with this payment method
+     */
+    us_bank_account: UsBankAccountPaymentMethod.UsBankAccount;
+  }
+
+  export namespace UsBankAccountPaymentMethod {
+    /**
+     * The bank details associated with this payment method
+     */
+    export interface UsBankAccount {
+      /**
+       * The type of account
+       */
+      account_type: string;
+
+      /**
+       * The name of the bank
+       */
+      bank_name: string;
+
+      /**
+       * The last 4 digits of the account number
+       */
+      last4: string;
+    }
   }
 }
 
 /**
- * A stored payment method used to process payments. This could be a credit/debit
- * card, bank account, PayPal wallet, etc.
+ * A payment method with no additional properties
  */
-export interface PaymentMethodListResponse {
-  /**
-   * The ID of the payment method
-   */
-  id: string;
-
-  /**
-   * The card data associated with the payment method, if its a debit or credit card.
-   */
-  card: PaymentMethodListResponse.Card | null;
-
-  /**
-   * The date and time the payment method was created
-   */
-  created_at: string;
-
-  /**
-   * The payment method type of the payment method
-   */
-  payment_method_type: PaymentsAPI.PaymentMethodTypes;
-}
+export type PaymentMethodListResponse =
+  | PaymentMethodListResponse.BasePaymentMethod
+  | PaymentMethodListResponse.CardPaymentMethod
+  | PaymentMethodListResponse.UsBankAccountPaymentMethod;
 
 export namespace PaymentMethodListResponse {
   /**
-   * The card data associated with the payment method, if its a debit or credit card.
+   * A payment method with no additional properties
    */
-  export interface Card {
+  export interface BasePaymentMethod {
     /**
-     * Possible card brands that a payment token can have
+     * The ID of the payment method
      */
-    brand: PaymentsAPI.CardBrands | null;
+    id: string;
 
     /**
-     * Card expiration month, like 03 for March.
+     * When the payment method was created
      */
-    exp_month: number | null;
+    created_at: string;
 
     /**
-     * Card expiration year, like 27 for 2027.
+     * The type of the payment method
      */
-    exp_year: number | null;
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
     /**
-     * Last four digits of the card.
+     * The typename of this object
      */
-    last4: string | null;
+    typename: 'BasePaymentMethod';
+  }
+
+  /**
+   * The card for the payment method
+   */
+  export interface CardPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * The card details associated with this payment method
+     */
+    card: CardPaymentMethod.Card;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'CardPaymentMethod';
+  }
+
+  export namespace CardPaymentMethod {
+    /**
+     * The card details associated with this payment method
+     */
+    export interface Card {
+      /**
+       * Possible card brands that a payment token can have
+       */
+      brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * Card expiration month, like 03 for March.
+       */
+      exp_month: number | null;
+
+      /**
+       * Card expiration year, like 27 for 2027.
+       */
+      exp_year: number | null;
+
+      /**
+       * Last four digits of the card.
+       */
+      last4: string | null;
+    }
+  }
+
+  /**
+   * The bank account for the payment method
+   */
+  export interface UsBankAccountPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'UsBankAccountPaymentMethod';
+
+    /**
+     * The bank details associated with this payment method
+     */
+    us_bank_account: UsBankAccountPaymentMethod.UsBankAccount;
+  }
+
+  export namespace UsBankAccountPaymentMethod {
+    /**
+     * The bank details associated with this payment method
+     */
+    export interface UsBankAccount {
+      /**
+       * The type of account
+       */
+      account_type: string;
+
+      /**
+       * The name of the bank
+       */
+      bank_name: string;
+
+      /**
+       * The last 4 digits of the account number
+       */
+      last4: string;
+    }
   }
 }
 
