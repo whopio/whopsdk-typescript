@@ -23,7 +23,7 @@ export const tool: Tool = {
     properties: {
       amount: {
         type: 'number',
-        description: 'The amount to withdraw',
+        description: 'The amount to withdraw in the specified currency',
       },
       company_id: {
         type: 'string',
@@ -34,7 +34,7 @@ export const tool: Tool = {
       },
       payout_method_id: {
         type: 'string',
-        description: 'The ID of the payout token to use for the withdrawal.',
+        description: 'The ID of the payout method to use for the withdrawal.',
       },
     },
     required: ['amount', 'company_id', 'currency'],
