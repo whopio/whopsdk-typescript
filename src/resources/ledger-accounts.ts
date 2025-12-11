@@ -177,6 +177,11 @@ export namespace LedgerAccountRetrieveResponse {
      * The business representative for this payout account
      */
     business_representative: PayoutAccountDetails.BusinessRepresentative | null;
+
+    /**
+     * The business representative's phone
+     */
+    phone: string | null;
   }
 
   export namespace PayoutAccountDetails {
