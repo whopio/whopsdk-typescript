@@ -65,7 +65,12 @@ describe('resource companies', () => {
     await expect(
       client.companies.update(
         'biz_xxxxxxxxxxxxxx',
-        { logo: { direct_upload_id: 'direct_upload_id' }, send_customer_emails: true, title: 'title' },
+        {
+          banner_image: { direct_upload_id: 'direct_upload_id' },
+          logo: { direct_upload_id: 'direct_upload_id' },
+          send_customer_emails: true,
+          title: 'title',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

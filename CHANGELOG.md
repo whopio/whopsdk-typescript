@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.17 (2025-12-11)
+
+Full Changelog: [v0.0.17...v0.0.17](https://github.com/whopio/whopsdk-typescript/compare/v0.0.17...v0.0.17)
+
+### Features
+
+* **api:** api update ([2e4ddf8](https://github.com/whopio/whopsdk-typescript/commit/2e4ddf89c5a2ce22f8d41767a3600ee525c70d24))
+* **api:** api update ([05c533a](https://github.com/whopio/whopsdk-typescript/commit/05c533a33d8ab0fc46ab3c810cf827715a9e4f3a))
+
+
+### Bug Fixes
+
+* **mcp:** add client instantiation options to code tool ([d79a74a](https://github.com/whopio/whopsdk-typescript/commit/d79a74a77a520057d57038ee70401b50cfd214af))
+
 ## 0.0.17 (2025-12-10)
 
 Full Changelog: [v0.0.16...v0.0.17](https://github.com/whopio/whopsdk-typescript/compare/v0.0.16...v0.0.17)
