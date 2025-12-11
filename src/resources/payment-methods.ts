@@ -58,7 +58,10 @@ export type PaymentMethodListResponsesCursorPage = CursorPage<PaymentMethodListR
 export type PaymentMethodRetrieveResponse =
   | PaymentMethodRetrieveResponse.BasePaymentMethod
   | PaymentMethodRetrieveResponse.CardPaymentMethod
-  | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod;
+  | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod
+  | PaymentMethodRetrieveResponse.CashappPaymentMethod
+  | PaymentMethodRetrieveResponse.IdealPaymentMethod
+  | PaymentMethodRetrieveResponse.SepaDebitPaymentMethod;
 
 export namespace PaymentMethodRetrieveResponse {
   /**
@@ -194,6 +197,157 @@ export namespace PaymentMethodRetrieveResponse {
       last4: string;
     }
   }
+
+  /**
+   * The Cash App details for the payment method
+   */
+  export interface CashappPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * The Cash App details associated with this payment method
+     */
+    cashapp: CashappPaymentMethod.Cashapp;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'CashappPaymentMethod';
+  }
+
+  export namespace CashappPaymentMethod {
+    /**
+     * The Cash App details associated with this payment method
+     */
+    export interface Cashapp {
+      /**
+       * A unique and immutable identifier assigned by Cash App to every buyer.
+       */
+      buyer_id: string | null;
+
+      /**
+       * A public identifier for buyers using Cash App.
+       */
+      cashtag: string | null;
+    }
+  }
+
+  /**
+   * The iDEAL details for the payment method
+   */
+  export interface IdealPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The iDEAL details associated with this payment method
+     */
+    ideal: IdealPaymentMethod.Ideal;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'IdealPaymentMethod';
+  }
+
+  export namespace IdealPaymentMethod {
+    /**
+     * The iDEAL details associated with this payment method
+     */
+    export interface Ideal {
+      /**
+       * The customer's bank.
+       */
+      bank: string | null;
+
+      /**
+       * The Bank Identifier Code of the customer's bank.
+       */
+      bic: string | null;
+    }
+  }
+
+  /**
+   * The SEPA Direct Debit details for the payment method
+   */
+  export interface SepaDebitPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The SEPA Direct Debit details associated with this payment method
+     */
+    sepa_debit: SepaDebitPaymentMethod.SepaDebit;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'SepaDebitPaymentMethod';
+  }
+
+  export namespace SepaDebitPaymentMethod {
+    /**
+     * The SEPA Direct Debit details associated with this payment method
+     */
+    export interface SepaDebit {
+      /**
+       * Bank code of the bank associated with the account.
+       */
+      bank_code: string | null;
+
+      /**
+       * Branch code of the bank associated with the account.
+       */
+      branch_code: string | null;
+
+      /**
+       * Two-letter ISO code representing the country the bank account is located in.
+       */
+      country: string | null;
+
+      /**
+       * Last four digits of the IBAN.
+       */
+      last4: string | null;
+    }
+  }
 }
 
 /**
@@ -202,7 +356,10 @@ export namespace PaymentMethodRetrieveResponse {
 export type PaymentMethodListResponse =
   | PaymentMethodListResponse.BasePaymentMethod
   | PaymentMethodListResponse.CardPaymentMethod
-  | PaymentMethodListResponse.UsBankAccountPaymentMethod;
+  | PaymentMethodListResponse.UsBankAccountPaymentMethod
+  | PaymentMethodListResponse.CashappPaymentMethod
+  | PaymentMethodListResponse.IdealPaymentMethod
+  | PaymentMethodListResponse.SepaDebitPaymentMethod;
 
 export namespace PaymentMethodListResponse {
   /**
@@ -336,6 +493,157 @@ export namespace PaymentMethodListResponse {
        * The last 4 digits of the account number
        */
       last4: string;
+    }
+  }
+
+  /**
+   * The Cash App details for the payment method
+   */
+  export interface CashappPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * The Cash App details associated with this payment method
+     */
+    cashapp: CashappPaymentMethod.Cashapp;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'CashappPaymentMethod';
+  }
+
+  export namespace CashappPaymentMethod {
+    /**
+     * The Cash App details associated with this payment method
+     */
+    export interface Cashapp {
+      /**
+       * A unique and immutable identifier assigned by Cash App to every buyer.
+       */
+      buyer_id: string | null;
+
+      /**
+       * A public identifier for buyers using Cash App.
+       */
+      cashtag: string | null;
+    }
+  }
+
+  /**
+   * The iDEAL details for the payment method
+   */
+  export interface IdealPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The iDEAL details associated with this payment method
+     */
+    ideal: IdealPaymentMethod.Ideal;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'IdealPaymentMethod';
+  }
+
+  export namespace IdealPaymentMethod {
+    /**
+     * The iDEAL details associated with this payment method
+     */
+    export interface Ideal {
+      /**
+       * The customer's bank.
+       */
+      bank: string | null;
+
+      /**
+       * The Bank Identifier Code of the customer's bank.
+       */
+      bic: string | null;
+    }
+  }
+
+  /**
+   * The SEPA Direct Debit details for the payment method
+   */
+  export interface SepaDebitPaymentMethod {
+    /**
+     * The ID of the payment method
+     */
+    id: string;
+
+    /**
+     * When the payment method was created
+     */
+    created_at: string;
+
+    /**
+     * The type of the payment method
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * The SEPA Direct Debit details associated with this payment method
+     */
+    sepa_debit: SepaDebitPaymentMethod.SepaDebit;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'SepaDebitPaymentMethod';
+  }
+
+  export namespace SepaDebitPaymentMethod {
+    /**
+     * The SEPA Direct Debit details associated with this payment method
+     */
+    export interface SepaDebit {
+      /**
+       * Bank code of the bank associated with the account.
+       */
+      bank_code: string | null;
+
+      /**
+       * Branch code of the bank associated with the account.
+       */
+      branch_code: string | null;
+
+      /**
+       * Two-letter ISO code representing the country the bank account is located in.
+       */
+      country: string | null;
+
+      /**
+       * Last four digits of the IBAN.
+       */
+      last4: string | null;
     }
   }
 }
