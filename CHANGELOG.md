@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.0.20 (2025-12-12)
+
+Full Changelog: [v0.0.19...v0.0.20](https://github.com/whopio/whopsdk-typescript/compare/v0.0.19...v0.0.20)
+
+### Features
+
+* trusted publishing ([#7](https://github.com/whopio/whopsdk-typescript/issues/7)) ([#23](https://github.com/whopio/whopsdk-typescript/issues/23)) ([a9f308d](https://github.com/whopio/whopsdk-typescript/commit/a9f308dbab3ba42322815a80c26968d1bb88f14d))
+
+
+### Bug Fixes
+
+* trusted publishing ([#24](https://github.com/whopio/whopsdk-typescript/issues/24)) ([bb23469](https://github.com/whopio/whopsdk-typescript/commit/bb23469b3d8c023ba2d6c555ac1b3d7d773e0d88))
+
 ## 0.0.19 (2025-12-12)
 
 Full Changelog: [v0.0.18...v0.0.19](https://github.com/whopio/whopsdk-typescript/compare/v0.0.18...v0.0.19)
