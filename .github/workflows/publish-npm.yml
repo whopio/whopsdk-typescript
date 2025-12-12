@@ -17,6 +17,7 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: write
 
     steps:
