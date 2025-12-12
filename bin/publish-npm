@@ -2,7 +2,9 @@
 
 set -eux
 
-npm config set '//registry.npmjs.org/:_authToken' "$NPM_TOKEN"
+# OIDC trusted publishing handles authentication automatically via npm CLI 11.5.1+
+# Do NOT set NPM_TOKEN manually - it overrides OIDC auth
+# npm config set '//registry.npmjs.org/:_authToken' "$NPM_TOKEN"
 
 pnpm build
 cd dist
