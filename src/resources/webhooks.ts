@@ -833,6 +833,33 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   type: 'course_lesson_interaction.completed';
 }
 
+export interface PaymentCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing a receipt for a membership.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.created';
+}
+
 export interface PaymentSucceededWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -1441,6 +1468,7 @@ export type UnwrapWebhookEvent =
   | WithdrawalCreatedWebhookEvent
   | WithdrawalUpdatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
+  | PaymentCreatedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
   | PaymentPendingWebhookEvent
@@ -1467,6 +1495,7 @@ export declare namespace Webhooks {
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
+    type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
