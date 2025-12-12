@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.19 (2025-12-12)
+
+Full Changelog: [v0.0.18...v0.0.19](https://github.com/whopio/whopsdk-typescript/compare/v0.0.18...v0.0.19)
+
 ## 0.0.18 (2025-12-12)
 
 Full Changelog: [v0.0.18...v0.0.18](https://github.com/whopio/whopsdk-typescript/compare/v0.0.18...v0.0.18)
