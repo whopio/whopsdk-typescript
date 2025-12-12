@@ -179,6 +179,11 @@ export namespace LedgerAccountRetrieveResponse {
     business_representative: PayoutAccountDetails.BusinessRepresentative | null;
 
     /**
+     * The email address of the representative
+     */
+    email: string | null;
+
+    /**
      * The business representative's phone
      */
     phone: string | null;
@@ -224,6 +229,12 @@ export namespace LedgerAccountRetrieveResponse {
      * The business representative for this payout account
      */
     export interface BusinessRepresentative {
+      /**
+       * The date of birth of the business representative in ISO 8601 format
+       * (YYYY-MM-DD).
+       */
+      date_of_birth: string | null;
+
       /**
        * The first name of the business representative.
        */
