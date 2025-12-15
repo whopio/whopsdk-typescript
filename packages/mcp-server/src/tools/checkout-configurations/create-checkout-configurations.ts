@@ -35,6 +35,11 @@ export const tool: Tool = {
               currency: {
                 $ref: '#/$defs/currency',
               },
+              application_fee_amount: {
+                type: 'number',
+                description:
+                  'The application fee amount collected by the platform from this connected account. Must be less than the total payment amount. Only valid for connected accounts with a parent company.',
+              },
               billing_period: {
                 type: 'integer',
                 description: 'The interval at which the plan charges (renewal plans).',
