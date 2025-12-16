@@ -196,6 +196,16 @@ export interface CompanyCreateParams {
   title: string;
 
   /**
+   * The different business types a company can be.
+   */
+  business_type?: Shared.BusinessTypes | null;
+
+  /**
+   * The different industry types a company can be in.
+   */
+  industry_type?: Shared.IndustryTypes | null;
+
+  /**
    * Additional metadata for the account
    */
   metadata?: { [key: string]: unknown } | null;
@@ -217,6 +227,16 @@ export interface CompanyUpdateParams {
     | CompanyUpdateParams.AttachmentInputWithDirectUploadID
     | CompanyUpdateParams.AttachmentInputWithID
     | null;
+
+  /**
+   * The different business types a company can be.
+   */
+  business_type?: Shared.BusinessTypes | null;
+
+  /**
+   * The different industry types a company can be in.
+   */
+  industry_type?: Shared.IndustryTypes | null;
 
   /**
    * The logo for the company in png, jpeg, or gif format
