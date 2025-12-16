@@ -276,6 +276,13 @@ export declare namespace CheckoutConfigurationCreateParams {
       currency: Shared.Currency;
 
       /**
+       * The application fee amount collected by the platform from this connected
+       * account. Must be less than the total payment amount. Only valid for connected
+       * accounts with a parent company.
+       */
+      application_fee_amount?: number | null;
+
+      /**
        * The interval at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
