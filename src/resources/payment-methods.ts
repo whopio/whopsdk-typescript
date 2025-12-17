@@ -14,7 +14,7 @@ export class PaymentMethods extends APIResource {
    * such as a card, bank account, or digital wallet. It holds the necessary billing
    * details and can be attached to a member for future one-time or recurring
    * charges. This lets you reuse the same payment credentials across multiple
-   * payments.
+   * payments. You must provide exactly one of company_id or member_id.
    *
    * Required permissions:
    *
@@ -22,7 +22,7 @@ export class PaymentMethods extends APIResource {
    */
   retrieve(
     id: string,
-    query: PaymentMethodRetrieveParams,
+    query: PaymentMethodRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<PaymentMethodRetrieveResponse> {
     return this._client.get(path`/payment_methods/${id}`, { query, ...options });
@@ -40,7 +40,7 @@ export class PaymentMethods extends APIResource {
    * - `member:payment_methods:read`
    */
   list(
-    query: PaymentMethodListParams,
+    query: PaymentMethodListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PaymentMethodListResponsesCursorPage, PaymentMethodListResponse> {
     return this._client.getAPIList('/payment_methods', CursorPage<PaymentMethodListResponse>, {
@@ -650,21 +650,26 @@ export namespace PaymentMethodListResponse {
 
 export interface PaymentMethodRetrieveParams {
   /**
-   * The ID of the Member associated with the PaymentMethod
+   * The ID of the Company. Provide either this or member_id (not both).
    */
-  member_id: string;
+  company_id?: string | null;
+
+  /**
+   * The ID of the Member. Provide either this or company_id (not both).
+   */
+  member_id?: string | null;
 }
 
 export interface PaymentMethodListParams extends CursorPageParams {
   /**
-   * The ID of the Member to list payment methods for
-   */
-  member_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The ID of the Company. Provide either this or member_id (not both).
+   */
+  company_id?: string | null;
 
   /**
    * The minimum creation date to filter by
@@ -690,6 +695,11 @@ export interface PaymentMethodListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * The ID of the Member to list payment methods for
+   */
+  member_id?: string | null;
 }
 
 export declare namespace PaymentMethods {

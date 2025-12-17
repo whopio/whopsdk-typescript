@@ -17,19 +17,23 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'retrieve_payment_methods',
   description:
-    'A payment method is a stored representation of how a customer intends to pay, such as a card, bank account, or digital wallet. It holds the necessary billing details and can be attached to a member for future one-time or recurring charges. This lets you reuse the same payment credentials across multiple payments.\n\nRequired permissions:\n - `member:payment_methods:read`',
+    'A payment method is a stored representation of how a customer intends to pay, such as a card, bank account, or digital wallet. It holds the necessary billing details and can be attached to a member for future one-time or recurring charges. This lets you reuse the same payment credentials across multiple payments. You must provide exactly one of company_id or member_id.\n\nRequired permissions:\n - `member:payment_methods:read`',
   inputSchema: {
     type: 'object',
     properties: {
       id: {
         type: 'string',
       },
+      company_id: {
+        type: 'string',
+        description: 'The ID of the Company. Provide either this or member_id (not both).',
+      },
       member_id: {
         type: 'string',
-        description: 'The ID of the Member associated with the PaymentMethod',
+        description: 'The ID of the Member. Provide either this or company_id (not both).',
       },
     },
-    required: ['id', 'member_id'],
+    required: ['id'],
   },
   annotations: {
     readOnlyHint: true,
