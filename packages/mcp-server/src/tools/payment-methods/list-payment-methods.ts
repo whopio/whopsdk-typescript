@@ -21,10 +21,6 @@ export const tool: Tool = {
   inputSchema: {
     type: 'object',
     properties: {
-      member_id: {
-        type: 'string',
-        description: 'The ID of the Member to list payment methods for',
-      },
       after: {
         type: 'string',
         description: 'Returns the elements in the list that come after the specified cursor.',
@@ -32,6 +28,10 @@ export const tool: Tool = {
       before: {
         type: 'string',
         description: 'Returns the elements in the list that come before the specified cursor.',
+      },
+      company_id: {
+        type: 'string',
+        description: 'The ID of the Company. Provide either this or member_id (not both).',
       },
       created_after: {
         type: 'string',
@@ -54,8 +54,12 @@ export const tool: Tool = {
         type: 'integer',
         description: 'Returns the last _n_ elements from the list.',
       },
+      member_id: {
+        type: 'string',
+        description: 'The ID of the Member to list payment methods for',
+      },
     },
-    required: ['member_id'],
+    required: [],
     $defs: {
       direction: {
         type: 'string',

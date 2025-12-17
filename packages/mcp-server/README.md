@@ -1136,7 +1136,7 @@ The following tools are available in this MCP server.
 
 ### Resource `payment_methods`:
 
-- `retrieve_payment_methods` (`read`): A payment method is a stored representation of how a customer intends to pay, such as a card, bank account, or digital wallet. It holds the necessary billing details and can be attached to a member for future one-time or recurring charges. This lets you reuse the same payment credentials across multiple payments.
+- `retrieve_payment_methods` (`read`): A payment method is a stored representation of how a customer intends to pay, such as a card, bank account, or digital wallet. It holds the necessary billing details and can be attached to a member for future one-time or recurring charges. This lets you reuse the same payment credentials across multiple payments. You must provide exactly one of company_id or member_id.
 
   Required permissions:
 

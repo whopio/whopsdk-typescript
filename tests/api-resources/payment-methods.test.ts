@@ -9,10 +9,8 @@ const client = new Whop({
 
 describe('resource paymentMethods', () => {
   // Prism tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.paymentMethods.retrieve('payt_xxxxxxxxxxxxx', {
-      member_id: 'mber_xxxxxxxxxxxxx',
-    });
+  test.skip('retrieve', async () => {
+    const responsePromise = client.paymentMethods.retrieve('payt_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,15 +21,20 @@ describe('resource paymentMethods', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.paymentMethods.retrieve('payt_xxxxxxxxxxxxx', {
-      member_id: 'mber_xxxxxxxxxxxxx',
-    });
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.paymentMethods.retrieve(
+        'payt_xxxxxxxxxxxxx',
+        { company_id: 'biz_xxxxxxxxxxxxxx', member_id: 'mber_xxxxxxxxxxxxx' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.paymentMethods.list({ member_id: 'mber_xxxxxxxxxxxxx' });
+  test.skip('list', async () => {
+    const responsePromise = client.paymentMethods.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -42,16 +45,23 @@ describe('resource paymentMethods', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.paymentMethods.list({
-      member_id: 'mber_xxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.paymentMethods.list(
+        {
+          after: 'after',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          member_id: 'mber_xxxxxxxxxxxxx',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });
