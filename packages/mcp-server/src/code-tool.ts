@@ -39,6 +39,7 @@ export async function codeTool() {
           WHOP_API_KEY: readEnv('WHOP_API_KEY'),
           WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET'),
           WHOP_APP_ID: readEnv('WHOP_APP_ID'),
+          WHOP_BASE_URL: readEnv('WHOP_BASE_URL'),
         }),
       },
       body: JSON.stringify({
