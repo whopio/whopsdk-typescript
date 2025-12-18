@@ -157,6 +157,11 @@ export const tool: Tool = {
             },
             required: ['currency'],
           },
+          metadata: {
+            type: 'object',
+            description: 'Custom metadata to attach to the payment.',
+            additionalProperties: true,
+          },
         },
         required: ['company_id', 'member_id', 'payment_method_id', 'plan'],
       },
@@ -179,6 +184,11 @@ export const tool: Tool = {
           plan_id: {
             type: 'string',
             description: 'An ID of an existing plan to use for the payment.',
+          },
+          metadata: {
+            type: 'object',
+            description: 'Custom metadata to attach to the payment.',
+            additionalProperties: true,
           },
         },
         required: ['company_id', 'member_id', 'payment_method_id', 'plan_id'],

@@ -62,6 +62,7 @@ describe('resource payments', () => {
         trial_period_days: 42,
         visibility: 'visible',
       },
+      metadata: { foo: 'bar' },
     });
   });
 
