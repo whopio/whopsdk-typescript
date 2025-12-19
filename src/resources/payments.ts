@@ -791,7 +791,8 @@ export interface PaymentListFeesResponse {
     | 'orchestration_percentage_fee'
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
-    | 'revshare_percentage_fee';
+    | 'revshare_percentage_fee'
+    | 'application_fee';
 }
 
 export type PaymentCreateParams =
