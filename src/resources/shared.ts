@@ -1951,7 +1951,8 @@ export type MembershipStatus =
   | 'canceled'
   | 'expired'
   | 'unresolved'
-  | 'drafted';
+  | 'drafted'
+  | 'canceling';
 
 /**
  * Represents a message in a DM channel
