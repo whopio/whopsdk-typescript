@@ -139,7 +139,7 @@ export interface SupportChannelCreateParams {
   company_id: string;
 
   /**
-   * The ID of the user to create the support chat for
+   * The ID (user_xxx) or username of the user to create the support chat for
    */
   user_id: string;
 }
