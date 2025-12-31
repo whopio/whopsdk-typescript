@@ -324,6 +324,7 @@ export {
   type WithdrawalCreatedWebhookEvent,
   type WithdrawalUpdatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
+  type PayoutMethodCreatedWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

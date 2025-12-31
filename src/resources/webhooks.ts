@@ -833,6 +833,84 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   type: 'course_lesson_interaction.completed';
 }
 
+export interface PayoutMethodCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an user's setup payout destination.
+   */
+  data: PayoutMethodCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payout_method.created';
+}
+
+export namespace PayoutMethodCreatedWebhookEvent {
+  /**
+   * An object representing an user's setup payout destination.
+   */
+  export interface Data {
+    /**
+     * The ID of the payout token
+     */
+    id: string;
+
+    /**
+     * The currency code of the payout destination. This is the currency that payouts
+     * will be made in for this token.
+     */
+    currency: string;
+
+    /**
+     * The payout destination associated with the payout token
+     */
+    destination: Data.Destination | null;
+
+    /**
+     * An optional nickname for the payout token to help the user identify it. This is
+     * not used by the provider and is only for the user's reference.
+     */
+    nickname: string | null;
+  }
+
+  export namespace Data {
+    /**
+     * The payout destination associated with the payout token
+     */
+    export interface Destination {
+      /**
+       * The category of the payout destination
+       */
+      category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
+
+      /**
+       * The country code of the payout destination
+       */
+      country_code: string;
+
+      /**
+       * The name of the payer associated with the payout destination
+       */
+      name: string;
+    }
+  }
+}
+
 export interface PaymentCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -1468,6 +1546,7 @@ export type UnwrapWebhookEvent =
   | WithdrawalCreatedWebhookEvent
   | WithdrawalUpdatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
+  | PayoutMethodCreatedWebhookEvent
   | PaymentCreatedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -1495,6 +1574,7 @@ export declare namespace Webhooks {
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
+    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
