@@ -882,6 +882,11 @@ export namespace PayoutMethodCreatedWebhookEvent {
     destination: Data.Destination | null;
 
     /**
+     * Whether this payout token is the default for the payout account
+     */
+    is_default: boolean;
+
+    /**
      * An optional nickname for the payout token to help the user identify it. This is
      * not used by the provider and is only for the user's reference.
      */
