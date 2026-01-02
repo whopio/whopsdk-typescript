@@ -871,6 +871,11 @@ export namespace PayoutMethodCreatedWebhookEvent {
     id: string;
 
     /**
+     * The company associated with the payout token
+     */
+    company: Data.Company | null;
+
+    /**
      * The currency code of the payout destination. This is the currency that payouts
      * will be made in for this token.
      */
@@ -894,6 +899,16 @@ export namespace PayoutMethodCreatedWebhookEvent {
   }
 
   export namespace Data {
+    /**
+     * The company associated with the payout token
+     */
+    export interface Company {
+      /**
+       * The ID (tag) of the company.
+       */
+      id: string;
+    }
+
     /**
      * The payout destination associated with the payout token
      */

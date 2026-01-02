@@ -35,6 +35,11 @@ export interface PayoutMethodListResponse {
   id: string;
 
   /**
+   * The company associated with the payout token
+   */
+  company: PayoutMethodListResponse.Company | null;
+
+  /**
    * The currency code of the payout destination. This is the currency that payouts
    * will be made in for this token.
    */
@@ -58,6 +63,16 @@ export interface PayoutMethodListResponse {
 }
 
 export namespace PayoutMethodListResponse {
+  /**
+   * The company associated with the payout token
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+  }
+
   /**
    * The payout destination associated with the payout token
    */
