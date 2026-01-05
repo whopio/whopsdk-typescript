@@ -43,7 +43,7 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=@whop/mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiU2V0IHlvdXIgV0hPUF9BUElfS0VZIGhlcmUuIiwiV0hPUF9XRUJIT09LX1NFQ1JFVCI6IlNldCB5b3VyIFdIT1BfV0VCSE9PS19TRUNSRVQgaGVyZS4iLCJXSE9QX0FQUF9JRCI6IlNldCB5b3VyIFdIT1BfQVBQX0lEIGhlcmUuIn19)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiU2V0IHlvdXIgV0hPUF9BUElfS0VZIGhlcmUuIiwiV0hPUF9XRUJIT09LX1NFQ1JFVCI6IlNldCB5b3VyIFdIT1BfV0VCSE9PS19TRUNSRVQgaGVyZS4iLCJXSE9QX0FQUF9JRCI6IlNldCB5b3VyIFdIT1BfQVBQX0lEIGhlcmUuIn19)
 
 ### VS Code
 
@@ -58,7 +58,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add --transport stdio whop_sdk_api --env WHOP_API_KEY="Your WHOP_API_KEY here." WHOP_WEBHOOK_SECRET="Your WHOP_WEBHOOK_SECRET here." WHOP_APP_ID="Your WHOP_APP_ID here." -- npx -y @whop/mcp
+claude mcp add whop_mcp_api --env WHOP_API_KEY="Your WHOP_API_KEY here." WHOP_WEBHOOK_SECRET="Your WHOP_WEBHOOK_SECRET here." WHOP_APP_ID="Your WHOP_APP_ID here." -- npx -y @whop/mcp
 ```
 
 ## Code Mode
