@@ -142,7 +142,9 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllPaymentListResponses(params) {
   const allPaymentListResponses = [];
   // Automatically fetches more pages as needed.
-  for await (const paymentListResponse of client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {
+  for await (const paymentListResponse of client.payments.list({
+    company_id: 'biz_xxxxxxxxxxxxxx',
+  })) {
     allPaymentListResponses.push(paymentListResponse);
   }
   return allPaymentListResponses;
