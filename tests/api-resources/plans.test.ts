@@ -31,7 +31,14 @@ describe('resource plans', () => {
       billing_period: 42,
       currency: 'usd',
       custom_fields: [
-        { field_type: 'text', name: 'name', id: 'id', order: 42, placeholder: 'placeholder', required: true },
+        {
+          field_type: 'text',
+          name: 'name',
+          id: 'id',
+          order: 42,
+          placeholder: 'placeholder',
+          required: true,
+        },
       ],
       description: 'description',
       expiration_days: 42,

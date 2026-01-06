@@ -76,7 +76,13 @@ describe('resource courseLessons', () => {
               question_type: 'short_answer',
               id: 'id',
               image: { direct_upload_id: 'direct_upload_id' },
-              options: [{ is_correct: true, option_text: 'option_text', id: 'id' }],
+              options: [
+                {
+                  is_correct: true,
+                  option_text: 'option_text',
+                  id: 'id',
+                },
+              ],
             },
           ],
           attachments: [{ direct_upload_id: 'direct_upload_id' }],
@@ -180,7 +186,13 @@ describe('resource courseLessons', () => {
   // Prism tests are disabled
   test.skip('submitAssessment: required and optional params', async () => {
     const response = await client.courseLessons.submitAssessment('lesson_id', {
-      answers: [{ question_id: 'question_id', answer_text: 'answer_text', selected_option_ids: ['string'] }],
+      answers: [
+        {
+          question_id: 'question_id',
+          answer_text: 'answer_text',
+          selected_option_ids: ['string'],
+        },
+      ],
     });
   });
 });

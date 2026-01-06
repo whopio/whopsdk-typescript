@@ -130,7 +130,12 @@ describe('resource payments', () => {
     await expect(
       client.payments.listFees(
         'pay_xxxxxxxxxxxxxx',
-        { after: 'after', before: 'before', first: 42, last: 42 },
+        {
+          after: 'after',
+          before: 'before',
+          first: 42,
+          last: 42,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

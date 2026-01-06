@@ -72,7 +72,14 @@ describe('resource courses', () => {
               id: 'id',
               order: 42,
               title: 'title',
-              lessons: [{ id: 'id', chapter_id: 'chap_xxxxxxxxxxxxx', order: 42, title: 'title' }],
+              lessons: [
+                {
+                  id: 'id',
+                  chapter_id: 'chap_xxxxxxxxxxxxx',
+                  order: 42,
+                  title: 'title',
+                },
+              ],
             },
           ],
           cover_image: 'cover_image',
