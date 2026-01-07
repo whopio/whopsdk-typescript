@@ -173,6 +173,17 @@ import {
   Forums,
 } from './resources/forums';
 import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
+import {
+  LeadCreateParams,
+  LeadCreateResponse,
+  LeadListParams,
+  LeadListResponse,
+  LeadListResponsesCursorPage,
+  LeadRetrieveResponse,
+  LeadUpdateParams,
+  LeadUpdateResponse,
+  Leads,
+} from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import {
   MemberListParams,
@@ -229,6 +240,7 @@ import {
   PayoutMethodListParams,
   PayoutMethodListResponse,
   PayoutMethodListResponsesCursorPage,
+  PayoutMethodRetrieveResponse,
   PayoutMethods,
 } from './resources/payout-methods';
 import {
@@ -306,6 +318,7 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
+import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
   TransferListParams,
@@ -319,6 +332,7 @@ import {
   UserRetrieveResponse,
   Users,
 } from './resources/users';
+import { VerificationRetrieveResponse, Verifications } from './resources/verifications';
 import {
   CourseLessonInteractionCompletedWebhookEvent,
   DisputeCreatedWebhookEvent,
@@ -1127,6 +1141,9 @@ export class Whop {
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
   payoutMethods: API.PayoutMethods = new API.PayoutMethods(this);
+  verifications: API.Verifications = new API.Verifications(this);
+  leads: API.Leads = new API.Leads(this);
+  topups: API.Topups = new API.Topups(this);
 }
 
 Whop.Apps = Apps;
@@ -1170,6 +1187,9 @@ Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
 Whop.PayoutMethods = PayoutMethods;
+Whop.Verifications = Verifications;
+Whop.Leads = Leads;
+Whop.Topups = Topups;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1573,9 +1593,33 @@ export declare namespace Whop {
 
   export {
     PayoutMethods as PayoutMethods,
+    type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
     type PayoutMethodListResponse as PayoutMethodListResponse,
     type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
     type PayoutMethodListParams as PayoutMethodListParams,
+  };
+
+  export {
+    Verifications as Verifications,
+    type VerificationRetrieveResponse as VerificationRetrieveResponse,
+  };
+
+  export {
+    Leads as Leads,
+    type LeadCreateResponse as LeadCreateResponse,
+    type LeadRetrieveResponse as LeadRetrieveResponse,
+    type LeadUpdateResponse as LeadUpdateResponse,
+    type LeadListResponse as LeadListResponse,
+    type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
+    type LeadCreateParams as LeadCreateParams,
+    type LeadUpdateParams as LeadUpdateParams,
+    type LeadListParams as LeadListParams,
+  };
+
+  export {
+    Topups as Topups,
+    type TopupCreateResponse as TopupCreateResponse,
+    type TopupCreateParams as TopupCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;
