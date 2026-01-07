@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.0.21 (2026-01-07)
+
+Full Changelog: [v0.0.20...v0.0.21](https://github.com/whopio/whopsdk-typescript/compare/v0.0.20...v0.0.21)
+
+### ⚠ BREAKING CHANGES
+
+* **mcp:** remove deprecated tool schemes
+* **mcp:** **Migration:** To migrate, simply modify the command used to invoke the MCP server. Currently, the only supported tool scheme is code mode. Now, starting the server with just `node /path/to/mcp/server` or `npx package-name` will invoke code tools: changing your command to one of these is likely all you will need to do.
+
+### Features
+
+* **api:** api update ([1edf383](https://github.com/whopio/whopsdk-typescript/commit/1edf38395b38c4159078d9ab511dd9cdce51e7ff))
+* **api:** api update ([851354e](https://github.com/whopio/whopsdk-typescript/commit/851354efcdbc4f2e0eb4bc226efcf8a874fa5a3f))
+* **api:** api update ([8963ed6](https://github.com/whopio/whopsdk-typescript/commit/8963ed688d7a8eaf8701162febc83f359d7ff3b4))
+* **api:** api update ([a35a6bb](https://github.com/whopio/whopsdk-typescript/commit/a35a6bb792edc163645e1004efc6cd432b71219b))
+* **api:** api update ([f4360e4](https://github.com/whopio/whopsdk-typescript/commit/f4360e4b356750cb595b7b404472a7d486310bbc))
+* **api:** api update ([88ed496](https://github.com/whopio/whopsdk-typescript/commit/88ed49649fa10323244b2d1de47d67009ecfdf5a))
+* **api:** api update ([9afb196](https://github.com/whopio/whopsdk-typescript/commit/9afb19610841bf74c57b35bfa2b7ea92fc0d0272))
+* **api:** api update ([296d6dc](https://github.com/whopio/whopsdk-typescript/commit/296d6dcd718d8e4ba1bf5737e66f28235eb95df4))
+* **api:** api update ([13c3d5f](https://github.com/whopio/whopsdk-typescript/commit/13c3d5f57710ff5d3aca2607e24cdcbe95e76c74))
+* **api:** api update ([691249c](https://github.com/whopio/whopsdk-typescript/commit/691249c3a8217355d720a1a4b7cd9bdfb4137546))
+* **api:** api update ([9935b0a](https://github.com/whopio/whopsdk-typescript/commit/9935b0ae7cfedb82289e184593183ba31d364088))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool api output types ([a6c413d](https://github.com/whopio/whopsdk-typescript/commit/a6c413d04162837a737ecd6086730da844b8277a))
+* **mcp:** fix env parsing ([0efde0d](https://github.com/whopio/whopsdk-typescript/commit/0efde0d6a80e9d42c26ed02c479bf98ab572feac))
+* **mcp:** fix options parsing ([53003b0](https://github.com/whopio/whopsdk-typescript/commit/53003b003ecd28fe8ac4ce22f11a007706b22202))
+* **mcp:** pass base url to code tool ([153ba08](https://github.com/whopio/whopsdk-typescript/commit/153ba08aa6aee3b6d4be7742c469cf0d1b324411))
+* **mcp:** update cloudflare worker host page ([a6c0615](https://github.com/whopio/whopsdk-typescript/commit/a6c061509351da289ae98bb690d3d353f90d21c4))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([d8c9afd](https://github.com/whopio/whopsdk-typescript/commit/d8c9afd79a6fe1b344a34ea35cf64a9815eaba39))
+* **mcp:** remove deprecated tool schemes ([ee26040](https://github.com/whopio/whopsdk-typescript/commit/ee26040ec829994318a21acbe5ae344c6d3f435f))
+
+
+### Documentation
+
+* prominently feature MCP server setup in root SDK readmes ([ba4d76f](https://github.com/whopio/whopsdk-typescript/commit/ba4d76fa465d2409eb2f81575e75eb8bfbc76b86))
+
 ## 0.0.20 (2025-12-16)
 
 Full Changelog: [v0.0.19...v0.0.20](https://github.com/whopio/whopsdk-typescript/compare/v0.0.19...v0.0.20)
