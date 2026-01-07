@@ -2,7 +2,7 @@
 
 import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult } from './types';
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import { readEnv } from './server';
+import { readEnv, readEnvOrError } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
 /**
  * A tool that runs code against a copy of the SDK.
@@ -36,7 +36,7 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          WHOP_API_KEY: readEnv('WHOP_API_KEY'),
+          WHOP_API_KEY: readEnvOrError('WHOP_API_KEY'),
           WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET'),
           WHOP_APP_ID: readEnv('WHOP_APP_ID'),
           WHOP_BASE_URL: readEnv('WHOP_BASE_URL'),
