@@ -1636,6 +1636,34 @@ export namespace RefundUpdatedWebhookEvent {
   }
 }
 
+export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents a purchase between a User and a Company for a specific
+   * Product.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.cancel_at_period_end_changed';
+}
+
 export type UnwrapWebhookEvent =
   | InvoiceCreatedWebhookEvent
   | InvoicePaidWebhookEvent
@@ -1662,7 +1690,8 @@ export type UnwrapWebhookEvent =
   | DisputeCreatedWebhookEvent
   | DisputeUpdatedWebhookEvent
   | RefundCreatedWebhookEvent
-  | RefundUpdatedWebhookEvent;
+  | RefundUpdatedWebhookEvent
+  | MembershipCancelAtPeriodEndChangedWebhookEvent;
 
 export declare namespace Webhooks {
   export {
@@ -1692,6 +1721,7 @@ export declare namespace Webhooks {
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 }
