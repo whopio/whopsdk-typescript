@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.2",
   "name": "@whop/mcp",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "The official MCP Server for the Whop API",
   "author": {
     "name": "Whop"
