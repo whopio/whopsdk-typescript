@@ -639,8 +639,46 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/payout-methods.ts">PayoutMethodRetrieveResponse</a></code>
 - <code><a href="./src/resources/payout-methods.ts">PayoutMethodListResponse</a></code>
 
 Methods:
 
+- <code title="get /payout_methods/{id}">client.payoutMethods.<a href="./src/resources/payout-methods.ts">retrieve</a>(id) -> PayoutMethodRetrieveResponse</code>
 - <code title="get /payout_methods">client.payoutMethods.<a href="./src/resources/payout-methods.ts">list</a>({ ...params }) -> PayoutMethodListResponsesCursorPage</code>
+
+# Verifications
+
+Types:
+
+- <code><a href="./src/resources/verifications.ts">VerificationRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
+
+# Leads
+
+Types:
+
+- <code><a href="./src/resources/leads.ts">LeadCreateResponse</a></code>
+- <code><a href="./src/resources/leads.ts">LeadRetrieveResponse</a></code>
+- <code><a href="./src/resources/leads.ts">LeadUpdateResponse</a></code>
+- <code><a href="./src/resources/leads.ts">LeadListResponse</a></code>
+
+Methods:
+
+- <code title="post /leads">client.leads.<a href="./src/resources/leads.ts">create</a>({ ...params }) -> LeadCreateResponse</code>
+- <code title="get /leads/{id}">client.leads.<a href="./src/resources/leads.ts">retrieve</a>(id) -> LeadRetrieveResponse</code>
+- <code title="patch /leads/{id}">client.leads.<a href="./src/resources/leads.ts">update</a>(id, { ...params }) -> LeadUpdateResponse</code>
+- <code title="get /leads">client.leads.<a href="./src/resources/leads.ts">list</a>({ ...params }) -> LeadListResponsesCursorPage</code>
+
+# Topups
+
+Types:
+
+- <code><a href="./src/resources/topups.ts">TopupCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /topups">client.topups.<a href="./src/resources/topups.ts">create</a>({ ...params }) -> TopupCreateResponse</code>

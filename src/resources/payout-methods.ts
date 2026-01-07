@@ -1,10 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class PayoutMethods extends APIResource {
+  /**
+   * Retrieves a payout method by ID
+   *
+   * Required permissions:
+   *
+   * - `payout:destination:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<PayoutMethodRetrieveResponse> {
+    return this._client.get(path`/payout_methods/${id}`, options);
+  }
+
   /**
    * Lists payout destinations for a company
    *
@@ -24,6 +37,75 @@ export class PayoutMethods extends APIResource {
 }
 
 export type PayoutMethodListResponsesCursorPage = CursorPage<PayoutMethodListResponse>;
+
+/**
+ * An object representing an user's setup payout destination.
+ */
+export interface PayoutMethodRetrieveResponse {
+  /**
+   * The ID of the payout token
+   */
+  id: string;
+
+  /**
+   * The company associated with the payout token
+   */
+  company: PayoutMethodRetrieveResponse.Company | null;
+
+  /**
+   * The currency code of the payout destination. This is the currency that payouts
+   * will be made in for this token.
+   */
+  currency: string;
+
+  /**
+   * The payout destination associated with the payout token
+   */
+  destination: PayoutMethodRetrieveResponse.Destination | null;
+
+  /**
+   * Whether this payout token is the default for the payout account
+   */
+  is_default: boolean;
+
+  /**
+   * An optional nickname for the payout token to help the user identify it. This is
+   * not used by the provider and is only for the user's reference.
+   */
+  nickname: string | null;
+}
+
+export namespace PayoutMethodRetrieveResponse {
+  /**
+   * The company associated with the payout token
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+  }
+
+  /**
+   * The payout destination associated with the payout token
+   */
+  export interface Destination {
+    /**
+     * The category of the payout destination
+     */
+    category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
+
+    /**
+     * The country code of the payout destination
+     */
+    country_code: string;
+
+    /**
+     * The name of the payer associated with the payout destination
+     */
+    name: string;
+  }
+}
 
 /**
  * An object representing an user's setup payout destination.
@@ -118,6 +200,7 @@ export interface PayoutMethodListParams extends CursorPageParams {
 
 export declare namespace PayoutMethods {
   export {
+    type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
     type PayoutMethodListResponse as PayoutMethodListResponse,
     type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
     type PayoutMethodListParams as PayoutMethodListParams,

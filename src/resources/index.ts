@@ -160,6 +160,17 @@ export {
   type InvoiceCreateParams,
   type InvoiceListParams,
 } from './invoices';
+export {
+  Leads,
+  type LeadCreateResponse,
+  type LeadRetrieveResponse,
+  type LeadUpdateResponse,
+  type LeadListResponse,
+  type LeadCreateParams,
+  type LeadUpdateParams,
+  type LeadListParams,
+  type LeadListResponsesCursorPage,
+} from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export {
   Members,
@@ -214,6 +225,7 @@ export {
 } from './payments';
 export {
   PayoutMethods,
+  type PayoutMethodRetrieveResponse,
   type PayoutMethodListResponse,
   type PayoutMethodListParams,
   type PayoutMethodListResponsesCursorPage,
@@ -293,6 +305,7 @@ export {
   type SupportChannelListParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
+export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
   type TransferListResponse,
@@ -306,6 +319,7 @@ export {
   type UserCheckAccessResponse,
   type UserCheckAccessParams,
 } from './users';
+export { Verifications, type VerificationRetrieveResponse } from './verifications';
 export {
   Webhooks,
   type InvoiceCreatedWebhookEvent,
