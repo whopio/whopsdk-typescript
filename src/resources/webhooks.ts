@@ -931,6 +931,93 @@ export namespace PayoutMethodCreatedWebhookEvent {
   }
 }
 
+export interface VerificationSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an identity verification session
+   */
+  data: VerificationSucceededWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'verification.succeeded';
+}
+
+export namespace VerificationSucceededWebhookEvent {
+  /**
+   * An object representing an identity verification session
+   */
+  export interface Data {
+    /**
+     * A unique identifier for the verification.
+     */
+    id: string;
+
+    /**
+     * An error code for a verification attempt.
+     */
+    last_error_code:
+      | 'abandoned'
+      | 'consent_declined'
+      | 'country_not_supported'
+      | 'device_not_supported'
+      | 'document_expired'
+      | 'document_type_not_supported'
+      | 'document_unverified_other'
+      | 'email_unverified_other'
+      | 'email_verification_declined'
+      | 'id_number_insufficient_document_data'
+      | 'id_number_mismatch'
+      | 'id_number_unverified_other'
+      | 'phone_unverified_other'
+      | 'phone_verification_declined'
+      | 'selfie_document_missing_photo'
+      | 'selfie_face_mismatch'
+      | 'selfie_manipulated'
+      | 'selfie_unverified_other'
+      | 'under_supported_age'
+      | null;
+
+    /**
+     * The last error reason that occurred during the verification.
+     */
+    last_error_reason: string | null;
+
+    /**
+     * The status of the verification.
+     */
+    status:
+      | 'requires_input'
+      | 'processing'
+      | 'verified'
+      | 'canceled'
+      | 'created'
+      | 'started'
+      | 'submitted'
+      | 'approved'
+      | 'declined'
+      | 'resubmission_requested'
+      | 'expired'
+      | 'abandoned'
+      | 'review';
+  }
+}
+
 export interface PaymentCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -1567,6 +1654,7 @@ export type UnwrapWebhookEvent =
   | WithdrawalUpdatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | PayoutMethodCreatedWebhookEvent
+  | VerificationSucceededWebhookEvent
   | PaymentCreatedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -1595,6 +1683,7 @@ export declare namespace Webhooks {
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
+    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
