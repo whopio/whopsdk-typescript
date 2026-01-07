@@ -334,6 +334,7 @@ export {
   type DisputeUpdatedWebhookEvent,
   type RefundCreatedWebhookEvent,
   type RefundUpdatedWebhookEvent,
+  type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
 export {

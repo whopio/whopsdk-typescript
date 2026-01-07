@@ -332,6 +332,7 @@ import {
   InvoicePastDueWebhookEvent,
   InvoiceVoidedWebhookEvent,
   MembershipActivatedWebhookEvent,
+  MembershipCancelAtPeriodEndChangedWebhookEvent,
   MembershipDeactivatedWebhookEvent,
   PaymentCreatedWebhookEvent,
   PaymentFailedWebhookEvent,
@@ -1243,6 +1244,7 @@ export declare namespace Whop {
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
   };
 

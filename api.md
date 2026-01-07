@@ -154,6 +154,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipCancelAtPeriodEndChangedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
