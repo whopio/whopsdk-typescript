@@ -60,7 +60,11 @@ describe('resource messages', () => {
     await expect(
       client.messages.update(
         'id',
-        { attachments: [{ direct_upload_id: 'direct_upload_id' }], content: 'content', is_pinned: true },
+        {
+          attachments: [{ direct_upload_id: 'direct_upload_id' }],
+          content: 'content',
+          is_pinned: true,
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

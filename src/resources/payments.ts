@@ -410,8 +410,8 @@ export interface PaymentListResponse {
   membership: PaymentListResponse.Membership | null;
 
   /**
-   * The custom metadata stored on this payment. This will be copied the checkout
-   * configuration for which this payment was made
+   * The custom metadata stored on this payment. This will be copied over to the
+   * checkout configuration for which this payment was made
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -791,7 +791,8 @@ export interface PaymentListFeesResponse {
     | 'orchestration_percentage_fee'
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
-    | 'revshare_percentage_fee';
+    | 'revshare_percentage_fee'
+    | 'application_fee';
 }
 
 export type PaymentCreateParams =
@@ -820,6 +821,11 @@ export declare namespace PaymentCreateParams {
      * Pass this object to create a new plan for this payment
      */
     plan: CreatePaymentInputWithPlan.Plan;
+
+    /**
+     * Custom metadata to attach to the payment.
+     */
+    metadata?: { [key: string]: unknown } | null;
   }
 
   export namespace CreatePaymentInputWithPlan {
@@ -1004,6 +1010,11 @@ export declare namespace PaymentCreateParams {
      * An ID of an existing plan to use for the payment.
      */
     plan_id: string;
+
+    /**
+     * Custom metadata to attach to the payment.
+     */
+    metadata?: { [key: string]: unknown } | null;
   }
 }
 

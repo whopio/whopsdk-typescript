@@ -324,6 +324,8 @@ export {
   type WithdrawalCreatedWebhookEvent,
   type WithdrawalUpdatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
+  type PayoutMethodCreatedWebhookEvent,
+  type VerificationSucceededWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,
@@ -332,6 +334,7 @@ export {
   type DisputeUpdatedWebhookEvent,
   type RefundCreatedWebhookEvent,
   type RefundUpdatedWebhookEvent,
+  type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type UnwrapWebhookEvent,
 } from './webhooks';
 export {

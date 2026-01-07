@@ -1951,7 +1951,8 @@ export type MembershipStatus =
   | 'canceled'
   | 'expired'
   | 'unresolved'
-  | 'drafted';
+  | 'drafted'
+  | 'canceling';
 
 /**
  * Represents a message in a DM channel
@@ -2207,8 +2208,8 @@ export interface Payment {
   membership: Payment.Membership | null;
 
   /**
-   * The custom metadata stored on this payment. This will be copied the checkout
-   * configuration for which this payment was made
+   * The custom metadata stored on this payment. This will be copied over to the
+   * checkout configuration for which this payment was made
    */
   metadata: { [key: string]: unknown } | null;
 

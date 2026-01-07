@@ -144,6 +144,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">WithdrawalCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
@@ -152,6 +154,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipCancelAtPeriodEndChangedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
