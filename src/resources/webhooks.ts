@@ -49,6 +49,11 @@ export interface InvoiceCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'invoice.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface InvoicePaidWebhookEvent {
@@ -76,6 +81,11 @@ export interface InvoicePaidWebhookEvent {
    * The webhook event type
    */
   type: 'invoice.paid';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface InvoicePastDueWebhookEvent {
@@ -103,6 +113,11 @@ export interface InvoicePastDueWebhookEvent {
    * The webhook event type
    */
   type: 'invoice.past_due';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface InvoiceVoidedWebhookEvent {
@@ -130,6 +145,11 @@ export interface InvoiceVoidedWebhookEvent {
    * The webhook event type
    */
   type: 'invoice.voided';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface MembershipActivatedWebhookEvent {
@@ -158,6 +178,11 @@ export interface MembershipActivatedWebhookEvent {
    * The webhook event type
    */
   type: 'membership.activated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface MembershipDeactivatedWebhookEvent {
@@ -186,6 +211,11 @@ export interface MembershipDeactivatedWebhookEvent {
    * The webhook event type
    */
   type: 'membership.deactivated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface EntryCreatedWebhookEvent {
@@ -213,6 +243,11 @@ export interface EntryCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'entry.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface EntryApprovedWebhookEvent {
@@ -240,6 +275,11 @@ export interface EntryApprovedWebhookEvent {
    * The webhook event type
    */
   type: 'entry.approved';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface EntryDeniedWebhookEvent {
@@ -267,6 +307,11 @@ export interface EntryDeniedWebhookEvent {
    * The webhook event type
    */
   type: 'entry.denied';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface EntryDeletedWebhookEvent {
@@ -294,6 +339,11 @@ export interface EntryDeletedWebhookEvent {
    * The webhook event type
    */
   type: 'entry.deleted';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface SetupIntentRequiresActionWebhookEvent {
@@ -322,6 +372,11 @@ export interface SetupIntentRequiresActionWebhookEvent {
    * The webhook event type
    */
   type: 'setup_intent.requires_action';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface SetupIntentSucceededWebhookEvent {
@@ -350,6 +405,11 @@ export interface SetupIntentSucceededWebhookEvent {
    * The webhook event type
    */
   type: 'setup_intent.succeeded';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface SetupIntentCanceledWebhookEvent {
@@ -378,6 +438,11 @@ export interface SetupIntentCanceledWebhookEvent {
    * The webhook event type
    */
   type: 'setup_intent.canceled';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface WithdrawalCreatedWebhookEvent {
@@ -405,6 +470,11 @@ export interface WithdrawalCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'withdrawal.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace WithdrawalCreatedWebhookEvent {
@@ -618,6 +688,11 @@ export interface WithdrawalUpdatedWebhookEvent {
    * The webhook event type
    */
   type: 'withdrawal.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace WithdrawalUpdatedWebhookEvent {
@@ -831,6 +906,11 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
    * The webhook event type
    */
   type: 'course_lesson_interaction.completed';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface PayoutMethodCreatedWebhookEvent {
@@ -858,6 +938,11 @@ export interface PayoutMethodCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'payout_method.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace PayoutMethodCreatedWebhookEvent {
@@ -956,6 +1041,11 @@ export interface VerificationSucceededWebhookEvent {
    * The webhook event type
    */
   type: 'verification.succeeded';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace VerificationSucceededWebhookEvent {
@@ -1043,6 +1133,11 @@ export interface PaymentCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'payment.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface PaymentSucceededWebhookEvent {
@@ -1070,6 +1165,11 @@ export interface PaymentSucceededWebhookEvent {
    * The webhook event type
    */
   type: 'payment.succeeded';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface PaymentFailedWebhookEvent {
@@ -1097,6 +1197,11 @@ export interface PaymentFailedWebhookEvent {
    * The webhook event type
    */
   type: 'payment.failed';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface PaymentPendingWebhookEvent {
@@ -1124,6 +1229,11 @@ export interface PaymentPendingWebhookEvent {
    * The webhook event type
    */
   type: 'payment.pending';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface DisputeCreatedWebhookEvent {
@@ -1151,6 +1261,11 @@ export interface DisputeCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'dispute.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface DisputeUpdatedWebhookEvent {
@@ -1178,6 +1293,11 @@ export interface DisputeUpdatedWebhookEvent {
    * The webhook event type
    */
   type: 'dispute.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export interface RefundCreatedWebhookEvent {
@@ -1205,6 +1325,11 @@ export interface RefundCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'refund.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace RefundCreatedWebhookEvent {
@@ -1433,6 +1558,11 @@ export interface RefundUpdatedWebhookEvent {
    * The webhook event type
    */
   type: 'refund.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export namespace RefundUpdatedWebhookEvent {
@@ -1662,6 +1792,11 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
    * The webhook event type
    */
   type: 'membership.cancel_at_period_end_changed';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
 }
 
 export type UnwrapWebhookEvent =
