@@ -43,7 +43,7 @@ describe('resource checkoutConfigurations', () => {
         description: 'description',
         expiration_days: 42,
         force_create_new_plan: true,
-        image: { direct_upload_id: 'direct_upload_id' },
+        image: { id: 'id' },
         initial_price: 6.9,
         internal_notes: 'internal_notes',
         override_tax_type: 'inclusive',
