@@ -156,6 +156,7 @@ import {
   FeeMarkupType,
   FeeMarkups,
 } from './resources/fee-markups';
+import { FileCreateParams, FileCreateResponse, FileRetrieveResponse, Files } from './resources/files';
 import {
   ForumPostCreateParams,
   ForumPostListParams,
@@ -360,6 +361,15 @@ import {
   SetupIntentSucceededWebhookEvent,
   UnwrapWebhookEvent,
   VerificationSucceededWebhookEvent,
+  WebhookCreateParams,
+  WebhookCreateResponse,
+  WebhookDeleteResponse,
+  WebhookListParams,
+  WebhookListResponse,
+  WebhookListResponsesCursorPage,
+  WebhookRetrieveResponse,
+  WebhookUpdateParams,
+  WebhookUpdateResponse,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
   WithdrawalUpdatedWebhookEvent,
@@ -1144,6 +1154,7 @@ export class Whop {
   verifications: API.Verifications = new API.Verifications(this);
   leads: API.Leads = new API.Leads(this);
   topups: API.Topups = new API.Topups(this);
+  files: API.Files = new API.Files(this);
 }
 
 Whop.Apps = Apps;
@@ -1190,6 +1201,7 @@ Whop.PayoutMethods = PayoutMethods;
 Whop.Verifications = Verifications;
 Whop.Leads = Leads;
 Whop.Topups = Topups;
+Whop.Files = Files;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1238,6 +1250,11 @@ export declare namespace Whop {
 
   export {
     Webhooks as Webhooks,
+    type WebhookCreateResponse as WebhookCreateResponse,
+    type WebhookRetrieveResponse as WebhookRetrieveResponse,
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookListResponse as WebhookListResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
@@ -1266,6 +1283,10 @@ export declare namespace Whop {
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
+    type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
   };
 
   export {
@@ -1620,6 +1641,13 @@ export declare namespace Whop {
     Topups as Topups,
     type TopupCreateResponse as TopupCreateResponse,
     type TopupCreateParams as TopupCreateParams,
+  };
+
+  export {
+    Files as Files,
+    type FileCreateResponse as FileCreateResponse,
+    type FileRetrieveResponse as FileRetrieveResponse,
+    type FileCreateParams as FileCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;

@@ -138,6 +138,7 @@ export {
   type FeeMarkupListParams,
   type FeeMarkupListResponsesCursorPage,
 } from './fee-markups';
+export { Files, type FileCreateResponse, type FileRetrieveResponse, type FileCreateParams } from './files';
 export {
   ForumPosts,
   type ForumPostVisibilityType,
@@ -322,6 +323,11 @@ export {
 export { Verifications, type VerificationRetrieveResponse } from './verifications';
 export {
   Webhooks,
+  type WebhookCreateResponse,
+  type WebhookRetrieveResponse,
+  type WebhookUpdateResponse,
+  type WebhookListResponse,
+  type WebhookDeleteResponse,
   type InvoiceCreatedWebhookEvent,
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
@@ -350,6 +356,10 @@ export {
   type RefundUpdatedWebhookEvent,
   type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type UnwrapWebhookEvent,
+  type WebhookCreateParams,
+  type WebhookUpdateParams,
+  type WebhookListParams,
+  type WebhookListResponsesCursorPage,
 } from './webhooks';
 export {
   Withdrawals,
