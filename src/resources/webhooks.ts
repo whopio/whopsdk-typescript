@@ -8,8 +8,112 @@ import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
 import * as WithdrawalsAPI from './withdrawals';
 import { Webhook } from 'standardwebhooks';
+import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Webhooks extends APIResource {
+  /**
+   * Creates a new webhook
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.webhooks.create({
+   *   url: 'https://example.com/path',
+   * });
+   * ```
+   */
+  create(body: WebhookCreateParams, options?: RequestOptions): APIPromise<WebhookCreateResponse> {
+    return this._client.post('/webhooks', { body, ...options });
+  }
+
+  /**
+   * Retrieves a webhook by ID
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.webhooks.retrieve(
+   *   'hook_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<WebhookRetrieveResponse> {
+    return this._client.get(path`/webhooks/${id}`, options);
+  }
+
+  /**
+   * Updates a webhook
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.webhooks.update(
+   *   'hook_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  update(
+    id: string,
+    body: WebhookUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WebhookUpdateResponse> {
+    return this._client.patch(path`/webhooks/${id}`, { body, ...options });
+  }
+
+  /**
+   * Lists webhooks for a company
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const webhookListResponse of client.webhooks.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: WebhookListParams,
+    options?: RequestOptions,
+  ): PagePromise<WebhookListResponsesCursorPage, WebhookListResponse> {
+    return this._client.getAPIList('/webhooks', CursorPage<WebhookListResponse>, { query, ...options });
+  }
+
+  /**
+   * Deletes a webhook
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * const webhook = await client.webhooks.delete(
+   *   'hook_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<WebhookDeleteResponse> {
+    return this._client.delete(path`/webhooks/${id}`, options);
+  }
+
   unwrap(
     body: string,
     { headers, key }: { headers: Record<string, string>; key?: string },
@@ -23,6 +127,412 @@ export class Webhooks extends APIResource {
     return JSON.parse(body) as UnwrapWebhookEvent;
   }
 }
+
+export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>;
+
+/**
+ * A webhook object, which can be configured to be sent updates about a company
+ */
+export interface WebhookCreateResponse {
+  /**
+   * The ID of the webhook
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1' | 'v2' | 'v5';
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events: boolean;
+
+  /**
+   * The timestamp of when the webhook was created
+   */
+  created_at: string;
+
+  /**
+   * Whether or not this webhook is turned on or not
+   */
+  enabled: boolean;
+
+  /**
+   * The number of events this webhooks is configured to receive
+   */
+  events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The resource ID
+   */
+  resource_id: string;
+
+  /**
+   * The list of events that can be tested with this webhook
+   */
+  testable_events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The URL the webhook events will be sent to
+   */
+  url: string;
+
+  /**
+   * A unique secret key that will be sent with each webhook event
+   */
+  webhook_secret: string;
+}
+
+/**
+ * A webhook object, which can be configured to be sent updates about a company
+ */
+export interface WebhookRetrieveResponse {
+  /**
+   * The ID of the webhook
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1' | 'v2' | 'v5';
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events: boolean;
+
+  /**
+   * The timestamp of when the webhook was created
+   */
+  created_at: string;
+
+  /**
+   * Whether or not this webhook is turned on or not
+   */
+  enabled: boolean;
+
+  /**
+   * The number of events this webhooks is configured to receive
+   */
+  events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The resource ID
+   */
+  resource_id: string;
+
+  /**
+   * The list of events that can be tested with this webhook
+   */
+  testable_events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The URL the webhook events will be sent to
+   */
+  url: string;
+}
+
+/**
+ * A webhook object, which can be configured to be sent updates about a company
+ */
+export interface WebhookUpdateResponse {
+  /**
+   * The ID of the webhook
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1' | 'v2' | 'v5';
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events: boolean;
+
+  /**
+   * The timestamp of when the webhook was created
+   */
+  created_at: string;
+
+  /**
+   * Whether or not this webhook is turned on or not
+   */
+  enabled: boolean;
+
+  /**
+   * The number of events this webhooks is configured to receive
+   */
+  events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The resource ID
+   */
+  resource_id: string;
+
+  /**
+   * The list of events that can be tested with this webhook
+   */
+  testable_events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The URL the webhook events will be sent to
+   */
+  url: string;
+}
+
+/**
+ * A webhook object, which can be configured to be sent updates about a company
+ */
+export interface WebhookListResponse {
+  /**
+   * The ID of the webhook
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1' | 'v2' | 'v5';
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events: boolean;
+
+  /**
+   * The timestamp of when the webhook was created
+   */
+  created_at: string;
+
+  /**
+   * Whether or not this webhook is turned on or not
+   */
+  enabled: boolean;
+
+  /**
+   * The number of events this webhooks is configured to receive
+   */
+  events: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  >;
+
+  /**
+   * The URL the webhook events will be sent to
+   */
+  url: string;
+}
+
+/**
+ * Represents `true` or `false` values.
+ */
+export type WebhookDeleteResponse = boolean;
 
 export interface InvoiceCreatedWebhookEvent {
   /**
@@ -1828,8 +2338,152 @@ export type UnwrapWebhookEvent =
   | RefundUpdatedWebhookEvent
   | MembershipCancelAtPeriodEndChangedWebhookEvent;
 
+export interface WebhookCreateParams {
+  /**
+   * The URL to send the webhook to.
+   */
+  url: string;
+
+  /**
+   * The different API versions
+   */
+  api_version?: 'v1' | 'v2' | 'v5' | null;
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events?: boolean | null;
+
+  /**
+   * Whether or not the webhook is enabled.
+   */
+  enabled?: boolean | null;
+
+  /**
+   * The events to send the webhook for.
+   */
+  events?: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  > | null;
+
+  /**
+   * The resource to create the webhook for. By default this will use current company
+   */
+  resource_id?: string | null;
+}
+
+export interface WebhookUpdateParams {
+  /**
+   * The different API versions
+   */
+  api_version?: 'v1' | 'v2' | 'v5' | null;
+
+  /**
+   * Whether or not to send events for child resources.
+   */
+  child_resource_events?: boolean | null;
+
+  /**
+   * Whether or not the webhook is enabled.
+   */
+  enabled?: boolean | null;
+
+  /**
+   * The events to send the webhook for.
+   */
+  events?: Array<
+    | 'invoice.created'
+    | 'invoice.paid'
+    | 'invoice.past_due'
+    | 'invoice.voided'
+    | 'membership.activated'
+    | 'membership.deactivated'
+    | 'entry.created'
+    | 'entry.approved'
+    | 'entry.denied'
+    | 'entry.deleted'
+    | 'setup_intent.requires_action'
+    | 'setup_intent.succeeded'
+    | 'setup_intent.canceled'
+    | 'withdrawal.created'
+    | 'withdrawal.updated'
+    | 'course_lesson_interaction.completed'
+    | 'payout_method.created'
+    | 'verification.succeeded'
+    | 'payment.created'
+    | 'payment.succeeded'
+    | 'payment.failed'
+    | 'payment.pending'
+    | 'dispute.created'
+    | 'dispute.updated'
+    | 'refund.created'
+    | 'refund.updated'
+    | 'membership.cancel_at_period_end_changed'
+  > | null;
+
+  /**
+   * The URL to send the webhook to.
+   */
+  url?: string | null;
+}
+
+export interface WebhookListParams extends CursorPageParams {
+  /**
+   * The ID of the company to list webhooks for
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export declare namespace Webhooks {
   export {
+    type WebhookCreateResponse as WebhookCreateResponse,
+    type WebhookRetrieveResponse as WebhookRetrieveResponse,
+    type WebhookUpdateResponse as WebhookUpdateResponse,
+    type WebhookListResponse as WebhookListResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
@@ -1858,5 +2512,9 @@ export declare namespace Webhooks {
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
+    type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
   };
 }
