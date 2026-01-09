@@ -48,8 +48,8 @@ describe('resource checkoutConfigurations', () => {
         internal_notes: 'internal_notes',
         override_tax_type: 'inclusive',
         payment_method_configuration: {
-          disabled: ['acss_debit'],
-          enabled: ['acss_debit'],
+          disabled: ['afterpay_clearpay'],
+          enabled: ['afterpay_clearpay'],
           include_platform_defaults: true,
         },
         plan_type: 'renewal',
@@ -82,8 +82,8 @@ describe('resource checkoutConfigurations', () => {
       metadata: { foo: 'bar' },
       mode: 'payment',
       payment_method_configuration: {
-        disabled: ['acss_debit'],
-        enabled: ['acss_debit'],
+        disabled: ['afterpay_clearpay'],
+        enabled: ['afterpay_clearpay'],
         include_platform_defaults: true,
       },
       redirect_url: 'redirect_url',

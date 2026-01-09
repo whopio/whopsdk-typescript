@@ -371,6 +371,11 @@ export interface PlanCreateParams {
   internal_notes?: string | null;
 
   /**
+   * Whether this plan uses legacy payment method controls
+   */
+  legacy_payment_method_controls?: boolean | null;
+
+  /**
    * Whether or not the tax is included in a plan's price (or if it hasn't been set
    * up)
    */
@@ -554,6 +559,11 @@ export interface PlanUpdateParams {
    * A personal description or notes section for the business.
    */
   internal_notes?: string | null;
+
+  /**
+   * Whether this plan uses legacy payment method controls
+   */
+  legacy_payment_method_controls?: boolean | null;
 
   /**
    * Whether or not to offer a discount to cancel a subscription.
