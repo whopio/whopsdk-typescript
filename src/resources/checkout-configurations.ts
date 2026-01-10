@@ -367,6 +367,11 @@ export declare namespace CheckoutConfigurationCreateParams {
       split_pay_required_payments?: number | null;
 
       /**
+       * The number of units available for purchase. If not provided, stock is unlimited.
+       */
+      stock?: number | null;
+
+      /**
        * The title of the plan. This will be visible on the product page to customers.
        */
       title?: string | null;
