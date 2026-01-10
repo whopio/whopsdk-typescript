@@ -703,10 +703,7 @@ export interface DisputeUpdateEvidenceParams {
   /**
    * A file containing the cancellation policy from the company.
    */
-  cancellation_policy_attachment?:
-    | DisputeUpdateEvidenceParams.AttachmentInputWithDirectUploadID
-    | DisputeUpdateEvidenceParams.AttachmentInputWithID
-    | null;
+  cancellation_policy_attachment?: DisputeUpdateEvidenceParams.CancellationPolicyAttachment | null;
 
   /**
    * A cancellation policy disclosure from the company.
@@ -716,10 +713,7 @@ export interface DisputeUpdateEvidenceParams {
   /**
    * A file containing the customer communication from the company (An image).
    */
-  customer_communication_attachment?:
-    | DisputeUpdateEvidenceParams.AttachmentInputWithDirectUploadID
-    | DisputeUpdateEvidenceParams.AttachmentInputWithID
-    | null;
+  customer_communication_attachment?: DisputeUpdateEvidenceParams.CustomerCommunicationAttachment | null;
 
   /**
    * The email of the customer from their payment details.
@@ -744,10 +738,7 @@ export interface DisputeUpdateEvidenceParams {
   /**
    * A file containing the refund policy from the company.
    */
-  refund_policy_attachment?:
-    | DisputeUpdateEvidenceParams.AttachmentInputWithDirectUploadID
-    | DisputeUpdateEvidenceParams.AttachmentInputWithID
-    | null;
+  refund_policy_attachment?: DisputeUpdateEvidenceParams.RefundPolicyAttachment | null;
 
   /**
    * A refund policy disclosure from the company.
@@ -767,105 +758,46 @@ export interface DisputeUpdateEvidenceParams {
   /**
    * A file that does not fit in the other categories.
    */
-  uncategorized_attachment?:
-    | DisputeUpdateEvidenceParams.AttachmentInputWithDirectUploadID
-    | DisputeUpdateEvidenceParams.AttachmentInputWithID
-    | null;
+  uncategorized_attachment?: DisputeUpdateEvidenceParams.UncategorizedAttachment | null;
 }
 
 export namespace DisputeUpdateEvidenceParams {
   /**
-   * Input for an attachment
+   * A file containing the cancellation policy from the company.
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface CancellationPolicyAttachment {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * A file containing the customer communication from the company (An image).
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface CustomerCommunicationAttachment {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * A file containing the refund policy from the company.
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface RefundPolicyAttachment {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * A file that does not fit in the other categories.
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface UncategorizedAttachment {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
