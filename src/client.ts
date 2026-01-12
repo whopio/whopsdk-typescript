@@ -384,7 +384,6 @@ import {
   WithdrawalRetrieveResponse,
   WithdrawalSpeeds,
   WithdrawalStatus,
-  WithdrawalTypes,
   Withdrawals,
 } from './resources/withdrawals';
 import { type Fetch } from './internal/builtin-types';
@@ -1568,7 +1567,6 @@ export declare namespace Whop {
     type WithdrawalFeeTypes as WithdrawalFeeTypes,
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalTypes as WithdrawalTypes,
     type WithdrawalCreateResponse as WithdrawalCreateResponse,
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
