@@ -98,11 +98,6 @@ export type WithdrawalStatus =
   | 'denied';
 
 /**
- * The types of withdrawals
- */
-export type WithdrawalTypes = 'regular' | 'clawback';
-
-/**
  * A withdrawal request.
  */
 export interface WithdrawalCreateResponse {
@@ -230,11 +225,6 @@ export interface WithdrawalCreateResponse {
    * available.
    */
   trace_code: string | null;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export namespace WithdrawalCreateResponse {
@@ -414,11 +404,6 @@ export interface WithdrawalRetrieveResponse {
    * available.
    */
   trace_code: string | null;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export namespace WithdrawalRetrieveResponse {
@@ -521,11 +506,6 @@ export interface WithdrawalListResponse {
    * Status of the withdrawal.
    */
   status: WithdrawalStatus;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export interface WithdrawalCreateParams {
@@ -592,7 +572,6 @@ export declare namespace Withdrawals {
     type WithdrawalFeeTypes as WithdrawalFeeTypes,
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalTypes as WithdrawalTypes,
     type WithdrawalCreateResponse as WithdrawalCreateResponse,
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,

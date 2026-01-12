@@ -1116,11 +1116,6 @@ export namespace WithdrawalCreatedWebhookEvent {
      * available.
      */
     trace_code: string | null;
-
-    /**
-     * The type of withdrawal.
-     */
-    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
   }
 
   export namespace Data {
@@ -1334,11 +1329,6 @@ export namespace WithdrawalUpdatedWebhookEvent {
      * available.
      */
     trace_code: string | null;
-
-    /**
-     * The type of withdrawal.
-     */
-    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
   }
 
   export namespace Data {
@@ -1469,6 +1459,11 @@ export namespace PayoutMethodCreatedWebhookEvent {
      * The company associated with the payout token
      */
     company: Data.Company | null;
+
+    /**
+     * The date and time the payout token was created
+     */
+    created_at: string;
 
     /**
      * The currency code of the payout destination. This is the currency that payouts
