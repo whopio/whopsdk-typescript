@@ -530,6 +530,12 @@ export interface WithdrawalCreateParams {
    * The ID of the payout method to use for the withdrawal.
    */
   payout_method_id?: string | null;
+
+  /**
+   * Custom statement descriptor for the withdrawal. Must be between 5 and 22
+   * characters and contain only alphanumeric characters.
+   */
+  statement_descriptor?: string | null;
 }
 
 export interface WithdrawalListParams extends CursorPageParams {
