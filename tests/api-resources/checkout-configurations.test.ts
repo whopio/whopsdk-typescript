@@ -88,6 +88,7 @@ describe('resource checkoutConfigurations', () => {
         include_platform_defaults: true,
       },
       redirect_url: 'redirect_url',
+      source_url: 'source_url',
     });
   });
 

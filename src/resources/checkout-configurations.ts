@@ -258,6 +258,11 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after the checkout configuration is created
      */
     redirect_url?: string | null;
+
+    /**
+     * The URL of the page where the checkout is being initiated from.
+     */
+    source_url?: string | null;
   }
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlan {
@@ -601,6 +606,11 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after the checkout configuration is created
      */
     redirect_url?: string | null;
+
+    /**
+     * The URL of the page where the checkout is being initiated from.
+     */
+    source_url?: string | null;
   }
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlanID {
@@ -663,6 +673,11 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after the checkout configuration is created
      */
     redirect_url?: string | null;
+
+    /**
+     * The URL of the page where the checkout is being initiated from.
+     */
+    source_url?: string | null;
   }
 
   export namespace CreateCheckoutSessionInputModeSetup {
