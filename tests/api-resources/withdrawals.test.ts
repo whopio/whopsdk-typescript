@@ -31,6 +31,7 @@ describe('resource withdrawals', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'usd',
       payout_method_id: 'payout_method_id',
+      statement_descriptor: 'statement_descriptor',
     });
   });
 

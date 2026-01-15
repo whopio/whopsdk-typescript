@@ -32,6 +32,7 @@ describe('resource companies', () => {
       title: 'title',
       business_type: 'education_program',
       industry_type: 'trading',
+      logo: { id: 'id' },
       metadata: { foo: 'bar' },
       send_customer_emails: true,
     });
@@ -68,10 +69,10 @@ describe('resource companies', () => {
       client.companies.update(
         'biz_xxxxxxxxxxxxxx',
         {
-          banner_image: { direct_upload_id: 'direct_upload_id' },
+          banner_image: { id: 'id' },
           business_type: 'education_program',
           industry_type: 'trading',
-          logo: { direct_upload_id: 'direct_upload_id' },
+          logo: { id: 'id' },
           send_customer_emails: true,
           title: 'title',
         },

@@ -26,6 +26,7 @@ describe('resource apps', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       name: 'name',
       base_url: 'base_url',
+      icon: { id: 'id' },
     });
   });
 
@@ -67,7 +68,7 @@ describe('resource apps', () => {
           description: 'description',
           discover_path: 'discover_path',
           experience_path: 'experience_path',
-          icon: { direct_upload_id: 'direct_upload_id' },
+          icon: { id: 'id' },
           name: 'name',
           required_scopes: ['read_user'],
           status: 'live',

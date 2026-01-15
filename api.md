@@ -584,7 +584,6 @@ Types:
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalFeeTypes</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalSpeeds</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalStatus</a></code>
-- <code><a href="./src/resources/withdrawals.ts">WithdrawalTypes</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalCreateResponse</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalRetrieveResponse</a></code>
 - <code><a href="./src/resources/withdrawals.ts">WithdrawalListResponse</a></code>

@@ -29,6 +29,7 @@ describe('resource experiences', () => {
       app_id: 'app_xxxxxxxxxxxxxx',
       company_id: 'biz_xxxxxxxxxxxxxx',
       is_public: true,
+      logo: { id: 'id' },
       name: 'name',
       section_id: 'section_id',
     });
@@ -67,7 +68,7 @@ describe('resource experiences', () => {
         {
           access_level: 'public',
           is_public: true,
-          logo: { direct_upload_id: 'direct_upload_id' },
+          logo: { id: 'id' },
           name: 'name',
           order: '123.45',
           section_id: 'section_id',
