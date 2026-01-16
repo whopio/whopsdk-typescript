@@ -372,6 +372,11 @@ export interface AppListParams extends CursorPageParams {
     | 'time_spent'
     | 'time_spent_last_24_hours'
     | 'daily_active_users'
+    | 'ai_prompt_count'
+    | 'total_ai_cost_usd'
+    | 'total_ai_tokens'
+    | 'last_ai_prompt_at'
+    | 'ai_average_rating'
     | null;
 
   /**
