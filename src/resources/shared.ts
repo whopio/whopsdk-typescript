@@ -1447,22 +1447,30 @@ export namespace ForumPost {
  * The friendly status of a receipt
  */
 export type FriendlyReceiptStatus =
-  | 'auto_refunded'
-  | 'refunded'
-  | 'partially_refunded'
-  | 'dispute_warning'
-  | 'open_resolution'
-  | 'open_dispute'
-  | 'failed'
-  | 'price_too_low'
-  | 'succeeded'
   | 'drafted'
-  | 'uncollectible'
-  | 'unresolved'
-  | 'past_due'
-  | 'pending'
+  | 'succeeded'
   | 'incomplete'
-  | 'canceled';
+  | 'refunded'
+  | 'price_too_low'
+  | 'uncollectible'
+  | 'canceled'
+  | 'partially_refunded'
+  | 'failed'
+  | 'open_dispute'
+  | 'past_due'
+  | 'auto_refunded'
+  | 'dispute_warning'
+  | 'unresolved'
+  | 'open_resolution'
+  | 'pending'
+  | 'dispute_needs_response'
+  | 'dispute_warning_needs_response'
+  | 'dispute_under_review'
+  | 'dispute_warning_under_review'
+  | 'dispute_lost'
+  | 'dispute_won'
+  | 'dispute_closed'
+  | 'dispute_warning_closed';
 
 /**
  * The different statuses of the global affiliate program for a product.
