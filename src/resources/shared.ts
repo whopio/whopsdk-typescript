@@ -1798,6 +1798,11 @@ export interface Membership {
   currency: Currency | null;
 
   /**
+   * The responses to custom checkout questions for this membership.
+   */
+  custom_field_responses: Array<Membership.CustomFieldResponse>;
+
+  /**
    * The license key for this Membership. This is only present if the membership
    * grants access to an instance of the Whop Software app.
    */
@@ -1883,6 +1888,26 @@ export namespace Membership {
   }
 
   /**
+   * The response from a custom field on checkout
+   */
+  export interface CustomFieldResponse {
+    /**
+     * The ID of the custom field item
+     */
+    id: string;
+
+    /**
+     * The response a user gave to the specific question or field.
+     */
+    answer: string;
+
+    /**
+     * The question asked by the custom field
+     */
+    question: string;
+  }
+
+  /**
    * The Member that this Membership belongs to.
    */
   export interface Member {
@@ -1935,6 +1960,11 @@ export namespace Membership {
      * The internal ID of the user.
      */
     id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
 
     /**
      * The name of the user from their Whop account.
