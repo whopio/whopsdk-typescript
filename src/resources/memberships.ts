@@ -14,6 +14,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:basic:read`
+   * - `member:email:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.get(path`/memberships/${id}`, options);
@@ -25,6 +26,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   update(
@@ -41,6 +43,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:basic:read`
+   * - `member:email:read`
    */
   list(
     query: MembershipListParams | null | undefined = {},
@@ -56,6 +59,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   cancel(
@@ -72,6 +76,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   pause(
@@ -88,6 +93,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
@@ -276,6 +282,11 @@ export namespace MembershipListResponse {
      * The internal ID of the user.
      */
     id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
 
     /**
      * The name of the user from their Whop account.
