@@ -1458,7 +1458,6 @@ export type FriendlyReceiptStatus =
   | 'partially_refunded'
   | 'open_resolution'
   | 'dispute_warning'
-  | 'open_dispute'
   | 'dispute_needs_response'
   | 'dispute_warning_needs_response'
   | 'dispute_under_review'
@@ -1470,7 +1469,8 @@ export type FriendlyReceiptStatus =
   | 'drafted'
   | 'incomplete'
   | 'unresolved'
-  | 'pending';
+  | 'pending'
+  | 'open_dispute';
 
 /**
  * The different statuses of the global affiliate program for a product.
