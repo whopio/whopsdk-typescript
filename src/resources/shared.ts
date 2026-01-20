@@ -1448,6 +1448,7 @@ export namespace ForumPost {
  */
 export type FriendlyReceiptStatus =
   | 'succeeded'
+  | 'pending'
   | 'failed'
   | 'past_due'
   | 'canceled'
@@ -1460,16 +1461,19 @@ export type FriendlyReceiptStatus =
   | 'dispute_warning'
   | 'dispute_needs_response'
   | 'dispute_warning_needs_response'
+  | 'resolution_needs_response'
   | 'dispute_under_review'
   | 'dispute_warning_under_review'
+  | 'resolution_under_review'
   | 'dispute_won'
+  | 'dispute_warning_closed'
+  | 'resolution_won'
   | 'dispute_lost'
   | 'dispute_closed'
-  | 'dispute_warning_closed'
+  | 'resolution_lost'
   | 'drafted'
   | 'incomplete'
   | 'unresolved'
-  | 'pending'
   | 'open_dispute';
 
 /**
