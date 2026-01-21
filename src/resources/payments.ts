@@ -432,6 +432,11 @@ export interface PaymentListResponse {
   metadata: { [key: string]: unknown } | null;
 
   /**
+   * The time of the next schedule payment retry.
+   */
+  next_payment_attempt: string | null;
+
+  /**
    * The datetime the payment was paid
    */
   paid_at: string | null;
@@ -445,6 +450,11 @@ export interface PaymentListResponse {
    * The different types of payment methods that can be used.
    */
   payment_method_type: PaymentMethodTypes | null;
+
+  /**
+   * The number of failed payment attempts for the payment.
+   */
+  payments_failed: number | null;
 
   /**
    * The plan attached to this payment.
