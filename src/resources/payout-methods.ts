@@ -48,6 +48,12 @@ export interface PayoutMethodRetrieveResponse {
   id: string;
 
   /**
+   * A reference to identify the payout destination, such as the last 4 digits of an
+   * account number or an email address.
+   */
+  account_reference: string | null;
+
+  /**
    * The company associated with the payout token
    */
   company: PayoutMethodRetrieveResponse.Company | null;
@@ -67,6 +73,11 @@ export interface PayoutMethodRetrieveResponse {
    * The payout destination associated with the payout token
    */
   destination: PayoutMethodRetrieveResponse.Destination | null;
+
+  /**
+   * The name of the bank or financial institution.
+   */
+  institution_name: string | null;
 
   /**
    * Whether this payout token is the default for the payout account
@@ -122,6 +133,12 @@ export interface PayoutMethodListResponse {
   id: string;
 
   /**
+   * A reference to identify the payout destination, such as the last 4 digits of an
+   * account number or an email address.
+   */
+  account_reference: string | null;
+
+  /**
    * The company associated with the payout token
    */
   company: PayoutMethodListResponse.Company | null;
@@ -141,6 +158,11 @@ export interface PayoutMethodListResponse {
    * The payout destination associated with the payout token
    */
   destination: PayoutMethodListResponse.Destination | null;
+
+  /**
+   * The name of the bank or financial institution.
+   */
+  institution_name: string | null;
 
   /**
    * Whether this payout token is the default for the payout account
