@@ -1458,6 +1458,12 @@ export namespace PayoutMethodCreatedWebhookEvent {
     id: string;
 
     /**
+     * A reference to identify the payout destination, such as the last 4 digits of an
+     * account number or an email address.
+     */
+    account_reference: string | null;
+
+    /**
      * The company associated with the payout token
      */
     company: Data.Company | null;
@@ -1477,6 +1483,11 @@ export namespace PayoutMethodCreatedWebhookEvent {
      * The payout destination associated with the payout token
      */
     destination: Data.Destination | null;
+
+    /**
+     * The name of the bank or financial institution.
+     */
+    institution_name: string | null;
 
     /**
      * Whether this payout token is the default for the payout account
