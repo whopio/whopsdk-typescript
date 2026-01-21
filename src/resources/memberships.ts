@@ -120,6 +120,20 @@ export interface MembershipListResponse {
   cancel_at_period_end: boolean;
 
   /**
+   * The different reasons a user can choose for why they are canceling their
+   * membership.
+   */
+  cancel_option:
+    | 'too_expensive'
+    | 'switching'
+    | 'missing_features'
+    | 'technical_issues'
+    | 'bad_experience'
+    | 'other'
+    | 'testing'
+    | null;
+
+  /**
    * The epoch timestamp of when the customer initiated a cancellation.
    */
   canceled_at: string | null;
