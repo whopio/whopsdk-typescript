@@ -48,8 +48,8 @@ describe('resource plans', () => {
       legacy_payment_method_controls: true,
       override_tax_type: 'inclusive',
       payment_method_configuration: {
-        disabled: ['afterpay_clearpay'],
-        enabled: ['afterpay_clearpay'],
+        disabled: ['acss_debit'],
+        enabled: ['acss_debit'],
         include_platform_defaults: true,
       },
       plan_type: 'renewal',
@@ -116,8 +116,8 @@ describe('resource plans', () => {
           offer_cancel_discount: true,
           override_tax_type: 'inclusive',
           payment_method_configuration: {
-            disabled: ['afterpay_clearpay'],
-            enabled: ['afterpay_clearpay'],
+            disabled: ['acss_debit'],
+            enabled: ['acss_debit'],
             include_platform_defaults: true,
           },
           renewal_price: 6.9,
