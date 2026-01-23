@@ -283,6 +283,7 @@ export type PaymentMethodTypes =
   | 'customer_balance'
   | 'demo_pay'
   | 'eps'
+  | 'eu_bank_transfer'
   | 'fpx'
   | 'giropay'
   | 'google_pay'
