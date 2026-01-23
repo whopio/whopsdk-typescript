@@ -65,6 +65,11 @@ export interface MemberRetrieveResponse {
   company: MemberRetrieveResponse.Company;
 
   /**
+   * The member's token balance for this company
+   */
+  company_token_balance: number;
+
+  /**
    * When the member was created
    */
   created_at: string;
@@ -175,6 +180,11 @@ export interface MemberListResponse {
    * have access to the product.
    */
   access_level: Shared.AccessLevel;
+
+  /**
+   * The member's token balance for this company
+   */
+  company_token_balance: number;
 
   /**
    * When the member was created
