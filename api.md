@@ -250,6 +250,7 @@ Methods:
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
+- <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> Membership</code>
 
 # AuthorizedUsers
 
