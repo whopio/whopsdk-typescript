@@ -99,6 +99,19 @@ export class Memberships extends APIResource {
   resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/resume`, options);
   }
+
+  /**
+   * Uncancels a membership that was scheduled to cancel at period end
+   *
+   * Required permissions:
+   *
+   * - `member:manage`
+   * - `member:email:read`
+   * - `member:basic:read`
+   */
+  uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/uncancel`, options);
+  }
 }
 
 export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
