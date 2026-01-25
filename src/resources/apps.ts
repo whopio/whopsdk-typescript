@@ -366,6 +366,7 @@ export interface AppListParams extends CursorPageParams {
    * The order to fetch the apps in for discovery.
    */
   order?:
+    | 'created_at'
     | 'discoverable_at'
     | 'total_installs_last_30_days'
     | 'total_installs_last_7_days'

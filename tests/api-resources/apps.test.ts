@@ -103,7 +103,7 @@ describe('resource apps', () => {
           direction: 'asc',
           first: 42,
           last: 42,
-          order: 'discoverable_at',
+          order: 'created_at',
           query: 'query',
           verified_apps_only: true,
           view_type: 'hub',
