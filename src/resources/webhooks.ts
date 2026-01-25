@@ -1041,6 +1041,7 @@ export namespace WithdrawalCreatedWebhookEvent {
       | 'invalid_account_number'
       | 'invalid_bank_code'
       | 'invalid_beneficiary'
+      | 'invalid_mailing_address'
       | 'invalid_branch_number'
       | 'invalid_branch_code'
       | 'invalid_phone_number'
@@ -1116,11 +1117,6 @@ export namespace WithdrawalCreatedWebhookEvent {
      * available.
      */
     trace_code: string | null;
-
-    /**
-     * The type of withdrawal.
-     */
-    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
   }
 
   export namespace Data {
@@ -1259,6 +1255,7 @@ export namespace WithdrawalUpdatedWebhookEvent {
       | 'invalid_account_number'
       | 'invalid_bank_code'
       | 'invalid_beneficiary'
+      | 'invalid_mailing_address'
       | 'invalid_branch_number'
       | 'invalid_branch_code'
       | 'invalid_phone_number'
@@ -1334,11 +1331,6 @@ export namespace WithdrawalUpdatedWebhookEvent {
      * available.
      */
     trace_code: string | null;
-
-    /**
-     * The type of withdrawal.
-     */
-    withdrawal_type: WithdrawalsAPI.WithdrawalTypes;
   }
 
   export namespace Data {
@@ -1469,6 +1461,11 @@ export namespace PayoutMethodCreatedWebhookEvent {
      * The company associated with the payout token
      */
     company: Data.Company | null;
+
+    /**
+     * The date and time the payout token was created
+     */
+    created_at: string;
 
     /**
      * The currency code of the payout destination. This is the currency that payouts

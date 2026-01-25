@@ -237,6 +237,22 @@ export type CardBrands =
   | 'jcbrupay'
   | 'elo'
   | 'maestro'
+  | 'tarjeta_naranja'
+  | 'cirrus'
+  | 'nspk_mir'
+  | 'verve'
+  | 'ebt'
+  | 'private_label'
+  | 'local_brand'
+  | 'uatp'
+  | 'wexcard'
+  | 'uzcard'
+  | 'meeza'
+  | 'hrg_store_card'
+  | 'girocard'
+  | 'fuel_card'
+  | 'dankort'
+  | 'carnet'
   | 'unknown';
 
 /**

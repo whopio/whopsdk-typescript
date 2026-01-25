@@ -366,7 +366,6 @@ export {
   type WithdrawalFeeTypes,
   type WithdrawalSpeeds,
   type WithdrawalStatus,
-  type WithdrawalTypes,
   type WithdrawalCreateResponse,
   type WithdrawalRetrieveResponse,
   type WithdrawalListResponse,

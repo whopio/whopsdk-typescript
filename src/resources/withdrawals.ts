@@ -98,11 +98,6 @@ export type WithdrawalStatus =
   | 'denied';
 
 /**
- * The types of withdrawals
- */
-export type WithdrawalTypes = 'regular' | 'clawback';
-
-/**
  * A withdrawal request.
  */
 export interface WithdrawalCreateResponse {
@@ -155,6 +150,7 @@ export interface WithdrawalCreateResponse {
     | 'invalid_account_number'
     | 'invalid_bank_code'
     | 'invalid_beneficiary'
+    | 'invalid_mailing_address'
     | 'invalid_branch_number'
     | 'invalid_branch_code'
     | 'invalid_phone_number'
@@ -230,11 +226,6 @@ export interface WithdrawalCreateResponse {
    * available.
    */
   trace_code: string | null;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export namespace WithdrawalCreateResponse {
@@ -339,6 +330,7 @@ export interface WithdrawalRetrieveResponse {
     | 'invalid_account_number'
     | 'invalid_bank_code'
     | 'invalid_beneficiary'
+    | 'invalid_mailing_address'
     | 'invalid_branch_number'
     | 'invalid_branch_code'
     | 'invalid_phone_number'
@@ -414,11 +406,6 @@ export interface WithdrawalRetrieveResponse {
    * available.
    */
   trace_code: string | null;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export namespace WithdrawalRetrieveResponse {
@@ -521,11 +508,6 @@ export interface WithdrawalListResponse {
    * Status of the withdrawal.
    */
   status: WithdrawalStatus;
-
-  /**
-   * The type of withdrawal.
-   */
-  withdrawal_type: WithdrawalTypes;
 }
 
 export interface WithdrawalCreateParams {
@@ -548,6 +530,12 @@ export interface WithdrawalCreateParams {
    * The ID of the payout method to use for the withdrawal.
    */
   payout_method_id?: string | null;
+
+  /**
+   * Custom statement descriptor for the withdrawal. Must be between 5 and 22
+   * characters and contain only alphanumeric characters.
+   */
+  statement_descriptor?: string | null;
 }
 
 export interface WithdrawalListParams extends CursorPageParams {
@@ -592,7 +580,6 @@ export declare namespace Withdrawals {
     type WithdrawalFeeTypes as WithdrawalFeeTypes,
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalTypes as WithdrawalTypes,
     type WithdrawalCreateResponse as WithdrawalCreateResponse,
     type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
