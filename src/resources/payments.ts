@@ -291,6 +291,7 @@ export type PaymentMethodTypes =
   | 'grabpay'
   | 'id_bank_transfer'
   | 'ideal'
+  | 'interac'
   | 'kakao_pay'
   | 'klarna'
   | 'konbini'
