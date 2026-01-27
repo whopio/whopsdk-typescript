@@ -227,6 +227,11 @@ export interface MessageCreateParams {
    * The poll for this message
    */
   poll?: MessageCreateParams.Poll | null;
+
+  /**
+   * The ID of the message this is replying to, if applicable.
+   */
+  replying_to_message_id?: string | null;
 }
 
 export namespace MessageCreateParams {
