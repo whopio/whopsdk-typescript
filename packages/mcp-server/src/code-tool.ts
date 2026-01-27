@@ -4,6 +4,7 @@ import { McpTool, Metadata, ToolCallResult, asErrorResult, asTextContentResult }
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv, readEnvOrError } from './server';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
+import { Whop } from '@whop/sdk';
 
 const prompt = `Runs JavaScript code to interact with the Whop API.
 
@@ -55,7 +56,7 @@ export function codeTool(): McpTool {
       required: ['code'],
     },
   };
-  const handler = async (_: unknown, args: any): Promise<ToolCallResult> => {
+  const handler = async (client: Whop, args: any): Promise<ToolCallResult> => {
     const code = args.code as string;
     const intent = args.intent as string | undefined;
 
@@ -71,10 +72,10 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          WHOP_API_KEY: readEnvOrError('WHOP_API_KEY'),
-          WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET'),
-          WHOP_APP_ID: readEnv('WHOP_APP_ID'),
-          WHOP_BASE_URL: readEnv('WHOP_BASE_URL'),
+          WHOP_API_KEY: readEnvOrError('WHOP_API_KEY') ?? client.apiKey ?? undefined,
+          WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET') ?? client.webhookKey ?? undefined,
+          WHOP_APP_ID: readEnv('WHOP_APP_ID') ?? client.appID ?? undefined,
+          WHOP_BASE_URL: readEnv('WHOP_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },
       body: JSON.stringify({
