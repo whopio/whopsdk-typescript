@@ -27,6 +27,7 @@ describe('resource messages', () => {
       content: 'content',
       attachments: [{ id: 'id' }],
       poll: { options: [{ id: 'id', text: 'text' }] },
+      replying_to_message_id: 'replying_to_message_id',
     });
   });
 
