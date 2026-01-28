@@ -22,7 +22,11 @@ describe('resource reactions', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.reactions.create({ resource_id: 'resource_id', emoji: 'emoji' });
+    const response = await client.reactions.create({
+      resource_id: 'resource_id',
+      emoji: 'emoji',
+      poll_option_id: 'poll_option_id',
+    });
   });
 
   // Prism tests are disabled

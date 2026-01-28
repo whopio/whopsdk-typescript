@@ -105,6 +105,12 @@ export interface ReactionCreateParams {
    * as everything will be :heart:
    */
   emoji?: string | null;
+
+  /**
+   * The ID of the poll option to vote for. Only valid for messages or posts with
+   * polls.
+   */
+  poll_option_id?: string | null;
 }
 
 export interface ReactionListParams extends CursorPageParams {
