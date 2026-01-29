@@ -1,8 +1,8 @@
 # Changelog
 
-## 0.1.0 (2026-01-29)
+## 0.0.25 (2026-01-29)
 
-Full Changelog: [v0.0.24...v0.1.0](https://github.com/whopio/whopsdk-typescript/compare/v0.0.24...v0.1.0)
+Full Changelog: [v0.0.24...v0.0.25](https://github.com/whopio/whopsdk-typescript/compare/v0.0.24...v0.0.25)
 
 ### Features
 
