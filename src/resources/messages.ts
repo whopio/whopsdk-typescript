@@ -54,6 +54,17 @@ export class Messages extends APIResource {
   ): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
     return this._client.getAPIList('/messages', CursorPage<MessageListResponse>, { query, ...options });
   }
+
+  /**
+   * Deletes a message
+   *
+   * Required permissions:
+   *
+   * - `chat:message:create`
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<MessageDeleteResponse> {
+    return this._client.delete(path`/messages/${id}`, options);
+  }
 }
 
 export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>;
@@ -207,6 +218,11 @@ export namespace MessageListResponse {
   }
 }
 
+/**
+ * Represents `true` or `false` values.
+ */
+export type MessageDeleteResponse = boolean;
+
 export interface MessageCreateParams {
   /**
    * The ID of the channel or experience to send to.
@@ -332,6 +348,7 @@ export interface MessageListParams extends CursorPageParams {
 export declare namespace Messages {
   export {
     type MessageListResponse as MessageListResponse,
+    type MessageDeleteResponse as MessageDeleteResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,

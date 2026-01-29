@@ -7,10 +7,13 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource messages', () => {
+describe('resource dmMembers', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.messages.create({ channel_id: 'channel_id', content: 'content' });
+    const responsePromise = client.dmMembers.create({
+      channel_id: 'channel_id',
+      user_id: 'user_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,18 +25,15 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.messages.create({
+    const response = await client.dmMembers.create({
       channel_id: 'channel_id',
-      content: 'content',
-      attachments: [{ id: 'id' }],
-      poll: { options: [{ id: 'id', text: 'text' }] },
-      replying_to_message_id: 'replying_to_message_id',
+      user_id: 'user_xxxxxxxxxxxxx',
     });
   });
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.messages.retrieve('id');
+    const responsePromise = client.dmMembers.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,7 +45,7 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.messages.update('id');
+    const responsePromise = client.dmMembers.update('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,13 +59,9 @@ describe('resource messages', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.messages.update(
+      client.dmMembers.update(
         'id',
-        {
-          attachments: [{ id: 'id' }],
-          content: 'content',
-          is_pinned: true,
-        },
+        { notification_preference: 'all', status: 'requested' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -73,7 +69,7 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.messages.list({ channel_id: 'channel_id' });
+    const responsePromise = client.dmMembers.list({ channel_id: 'channel_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,11 +81,10 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.messages.list({
+    const response = await client.dmMembers.list({
       channel_id: 'channel_id',
       after: 'after',
       before: 'before',
-      direction: 'asc',
       first: 42,
       last: 42,
     });
@@ -97,7 +92,7 @@ describe('resource messages', () => {
 
   // Prism tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.messages.delete('id');
+    const responsePromise = client.dmMembers.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
