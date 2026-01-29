@@ -53,6 +53,11 @@ export interface PayoutMethodRetrieveResponse {
   company: PayoutMethodRetrieveResponse.Company | null;
 
   /**
+   * The date and time the payout token was created
+   */
+  created_at: string;
+
+  /**
    * The currency code of the payout destination. This is the currency that payouts
    * will be made in for this token.
    */
@@ -120,6 +125,11 @@ export interface PayoutMethodListResponse {
    * The company associated with the payout token
    */
   company: PayoutMethodListResponse.Company | null;
+
+  /**
+   * The date and time the payout token was created
+   */
+  created_at: string;
 
   /**
    * The currency code of the payout destination. This is the currency that payouts

@@ -206,6 +206,11 @@ export interface CompanyCreateParams {
   industry_type?: Shared.IndustryTypes | null;
 
   /**
+   * The logo for the company in png, jpeg, or gif format
+   */
+  logo?: CompanyCreateParams.Logo | null;
+
+  /**
    * Additional metadata for the account
    */
   metadata?: { [key: string]: unknown } | null;
@@ -219,14 +224,23 @@ export interface CompanyCreateParams {
   send_customer_emails?: boolean | null;
 }
 
+export namespace CompanyCreateParams {
+  /**
+   * The logo for the company in png, jpeg, or gif format
+   */
+  export interface Logo {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+}
+
 export interface CompanyUpdateParams {
   /**
    * The banner image for the company in png or jpeg format
    */
-  banner_image?:
-    | CompanyUpdateParams.AttachmentInputWithDirectUploadID
-    | CompanyUpdateParams.AttachmentInputWithID
-    | null;
+  banner_image?: CompanyUpdateParams.BannerImage | null;
 
   /**
    * The different business types a company can be.
@@ -241,10 +255,7 @@ export interface CompanyUpdateParams {
   /**
    * The logo for the company in png, jpeg, or gif format
    */
-  logo?:
-    | CompanyUpdateParams.AttachmentInputWithDirectUploadID
-    | CompanyUpdateParams.AttachmentInputWithID
-    | null;
+  logo?: CompanyUpdateParams.Logo | null;
 
   /**
    * Whether Whop sends transactional emails to customers on behalf of this company.
@@ -262,49 +273,21 @@ export interface CompanyUpdateParams {
 
 export namespace CompanyUpdateParams {
   /**
-   * Input for an attachment
+   * The banner image for the company in png or jpeg format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface BannerImage {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * The logo for the company in png, jpeg, or gif format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Logo {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }

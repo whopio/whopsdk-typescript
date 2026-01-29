@@ -720,10 +720,7 @@ export interface CourseLessonCreateParams {
   /**
    * The thumbnail for the lesson in png, jpeg, or gif format
    */
-  thumbnail?:
-    | CourseLessonCreateParams.AttachmentInputWithDirectUploadID
-    | CourseLessonCreateParams.AttachmentInputWithID
-    | null;
+  thumbnail?: CourseLessonCreateParams.Thumbnail | null;
 
   /**
    * The title of the lesson
@@ -733,25 +730,11 @@ export interface CourseLessonCreateParams {
 
 export namespace CourseLessonCreateParams {
   /**
-   * Input for an attachment
+   * The thumbnail for the lesson in png, jpeg, or gif format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Thumbnail {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
@@ -773,10 +756,7 @@ export interface CourseLessonUpdateParams {
    * General attachments for the lesson (PDFs, files, etc). Replaces all existing
    * attachments.
    */
-  attachments?: Array<
-    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
-    | CourseLessonUpdateParams.AttachmentInputWithID
-  > | null;
+  attachments?: Array<CourseLessonUpdateParams.Attachment> | null;
 
   /**
    * The content of the lesson
@@ -806,10 +786,7 @@ export interface CourseLessonUpdateParams {
   /**
    * The main PDF file for this lesson
    */
-  main_pdf?:
-    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
-    | CourseLessonUpdateParams.AttachmentInputWithID
-    | null;
+  main_pdf?: CourseLessonUpdateParams.MainPdf | null;
 
   /**
    * Maximum number of attempts allowed for assessments
@@ -824,10 +801,7 @@ export interface CourseLessonUpdateParams {
   /**
    * The thumbnail for the lesson in png, jpeg, or gif format
    */
-  thumbnail?:
-    | CourseLessonUpdateParams.AttachmentInputWithDirectUploadID
-    | CourseLessonUpdateParams.AttachmentInputWithID
-    | null;
+  thumbnail?: CourseLessonUpdateParams.Thumbnail | null;
 
   /**
    * The title of the lesson
@@ -887,10 +861,7 @@ export namespace CourseLessonUpdateParams {
     /**
      * Optional image attachment for the question
      */
-    image?:
-      | AssessmentQuestion.AttachmentInputWithDirectUploadID
-      | AssessmentQuestion.AttachmentInputWithID
-      | null;
+    image?: AssessmentQuestion.Image | null;
 
     /**
      * The answer options for multiple choice/select questions
@@ -900,25 +871,11 @@ export namespace CourseLessonUpdateParams {
 
   export namespace AssessmentQuestion {
     /**
-     * Input for an attachment
+     * Optional image attachment for the question
      */
-    export interface AttachmentInputWithDirectUploadID {
+    export interface Image {
       /**
-       * This ID should be used the first time you upload an attachment. It is the ID of
-       * the direct upload that was created when uploading the file to S3 via the
-       * mediaDirectUpload mutation.
-       */
-      direct_upload_id: string;
-    }
-
-    /**
-     * Input for an attachment
-     */
-    export interface AttachmentInputWithID {
-      /**
-       * The ID of an existing attachment object. Use this when updating a resource and
-       * keeping a subset of the attachments. Don't use this unless you know what you're
-       * doing.
+       * The ID of an existing file object.
        */
       id: string;
     }
@@ -948,71 +905,29 @@ export namespace CourseLessonUpdateParams {
   /**
    * Input for an attachment
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Attachment {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * The main PDF file for this lesson
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface MainPdf {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
 
   /**
-   * Input for an attachment
+   * The thumbnail for the lesson in png, jpeg, or gif format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Thumbnail {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }

@@ -8,6 +8,10 @@ export class Notifications extends APIResource {
   /**
    * Queues a notification to be sent to users in an experience or company team
    *
+   * Required permissions:
+   *
+   * - `notification:create`
+   *
    * @example
    * ```ts
    * const notification = await client.notifications.create({

@@ -311,7 +311,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * An image for the plan. This will be visible on the product page to customers.
        */
-      image?: Plan.AttachmentInputWithDirectUploadID | Plan.AttachmentInputWithID | null;
+      image?: Plan.Image | null;
 
       /**
        * An additional amount charged upon first purchase.
@@ -367,6 +367,11 @@ export declare namespace CheckoutConfigurationCreateParams {
       split_pay_required_payments?: number | null;
 
       /**
+       * The number of units available for purchase. If not provided, stock is unlimited.
+       */
+      stock?: number | null;
+
+      /**
        * The title of the plan. This will be visible on the product page to customers.
        */
       title?: string | null;
@@ -416,25 +421,11 @@ export declare namespace CheckoutConfigurationCreateParams {
       }
 
       /**
-       * Input for an attachment
+       * An image for the plan. This will be visible on the product page to customers.
        */
-      export interface AttachmentInputWithDirectUploadID {
+      export interface Image {
         /**
-         * This ID should be used the first time you upload an attachment. It is the ID of
-         * the direct upload that was created when uploading the file to S3 via the
-         * mediaDirectUpload mutation.
-         */
-        direct_upload_id: string;
-      }
-
-      /**
-       * Input for an attachment
-       */
-      export interface AttachmentInputWithID {
-        /**
-         * The ID of an existing attachment object. Use this when updating a resource and
-         * keeping a subset of the attachments. Don't use this unless you know what you're
-         * doing.
+         * The ID of an existing file object.
          */
         id: string;
       }
