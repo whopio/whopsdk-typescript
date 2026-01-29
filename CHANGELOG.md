@@ -1,5 +1,52 @@
 # Changelog
 
+## 0.1.0 (2026-01-29)
+
+Full Changelog: [v0.0.24...v0.1.0](https://github.com/whopio/whopsdk-typescript/compare/v0.0.24...v0.1.0)
+
+### Features
+
+* **api:** api update ([7ad905c](https://github.com/whopio/whopsdk-typescript/commit/7ad905cdfaacc68b7a62ad68d70cedf901170e43))
+* **api:** api update ([9c91298](https://github.com/whopio/whopsdk-typescript/commit/9c91298492f29ccb91f4bdfdc47aaee57510ce9e))
+* **api:** api update ([4f06f21](https://github.com/whopio/whopsdk-typescript/commit/4f06f213b90caca39a3955dc43e6fbc3ca2d255d))
+* **api:** api update ([14f2f96](https://github.com/whopio/whopsdk-typescript/commit/14f2f965f1e1255516ab964b7090ddfa354ec80b))
+* **api:** api update ([1fc3d85](https://github.com/whopio/whopsdk-typescript/commit/1fc3d85468f1363306ca04c6565fb5b82f80d0d8))
+* **api:** api update ([7c74cff](https://github.com/whopio/whopsdk-typescript/commit/7c74cff11a1017ceb0d075fe1426c21bd40aa8b9))
+* **api:** api update ([94444c7](https://github.com/whopio/whopsdk-typescript/commit/94444c7cd64c0aa7d350335ab54598f7c28fe1f0))
+* **api:** api update ([7d305f1](https://github.com/whopio/whopsdk-typescript/commit/7d305f148f01e9ae83410150e69d97c37c5082c8))
+* **api:** api update ([e554483](https://github.com/whopio/whopsdk-typescript/commit/e5544834f478a9ba8548e70ffba00776c11e970b))
+* **api:** api update ([9721d62](https://github.com/whopio/whopsdk-typescript/commit/9721d626ebe41153b23ef7fd7dd9f1eb66005017))
+* **api:** api update ([9abfa10](https://github.com/whopio/whopsdk-typescript/commit/9abfa10b4f032d48d10a4ece9ef8ba3eab81deac))
+* **api:** api update ([09c532b](https://github.com/whopio/whopsdk-typescript/commit/09c532b5c03e0d8908afc5c089472e615b3875c7))
+* **api:** api update ([6aa8e6a](https://github.com/whopio/whopsdk-typescript/commit/6aa8e6a97c991309abe0cf7b11f0563c7f59841d))
+* **api:** api update ([41c62b1](https://github.com/whopio/whopsdk-typescript/commit/41c62b1b6c2a613dac478a8380497f9449d3e4dc))
+* **api:** api update ([9da01e1](https://github.com/whopio/whopsdk-typescript/commit/9da01e1da38331119805b2618f4bc068b6b991cf))
+* **api:** api update ([0d7c221](https://github.com/whopio/whopsdk-typescript/commit/0d7c2215d1d0bd6d2fde242e435ec84fd6862149))
+* **api:** api update ([4e42100](https://github.com/whopio/whopsdk-typescript/commit/4e421004cb739d7ba9ce243893cd80d412c3c5ee))
+* **api:** api update ([74831cd](https://github.com/whopio/whopsdk-typescript/commit/74831cd0c22619e0174e2ac64d7a4383f5bcb6eb))
+* **api:** api update ([e52b734](https://github.com/whopio/whopsdk-typescript/commit/e52b7342d630c8926294c23e595eb98de216769f))
+* **api:** manual updates ([5c11d45](https://github.com/whopio/whopsdk-typescript/commit/5c11d4581b5e6b7150eb99054441d5490c78590e))
+* **api:** manual updates ([0e837c0](https://github.com/whopio/whopsdk-typescript/commit/0e837c0fb11fb03578c72f0c226ba233c2664789))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([6621df8](https://github.com/whopio/whopsdk-typescript/commit/6621df8b1271f5daf457e2276cf82d5781f707d6))
+* **mcp:** allow falling back for required env variables ([f747755](https://github.com/whopio/whopsdk-typescript/commit/f74775553f1371b621c596e6e597135b92609fce))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([19fb31a](https://github.com/whopio/whopsdk-typescript/commit/19fb31a70c5622ab2193fe9ffdbcf808aeca7110))
+* **internal:** codegen related update ([82c628e](https://github.com/whopio/whopsdk-typescript/commit/82c628ed6569d61affa453cfe9060113a27c7fc7))
+* **internal:** codegen related update ([ef59051](https://github.com/whopio/whopsdk-typescript/commit/ef59051aa216855dd121255cbf8a14fde650f7d3))
+* **internal:** codegen related update ([bf44278](https://github.com/whopio/whopsdk-typescript/commit/bf44278e8677e818aa9e3b49c5048068983d0a66))
+* **internal:** update `actions/checkout` version ([4080a79](https://github.com/whopio/whopsdk-typescript/commit/4080a799c3aef5bd0f58e2b6ef46972ff81d6c66))
+* **internal:** update lock file ([8c71988](https://github.com/whopio/whopsdk-typescript/commit/8c719889a627862204218ef78f502073bbc2ab93))
+* **internal:** upgrade brace-expansion and @babel/helpers ([dd7c976](https://github.com/whopio/whopsdk-typescript/commit/dd7c9766ac6d18a8b481c7ea0bc386ff828c4952))
+* **internal:** upgrade wrangler version ([677daa4](https://github.com/whopio/whopsdk-typescript/commit/677daa401a99c0931013ed645526673b9c08b3ee))
+* **mcp:** up tsconfig lib version to es2022 ([65ef5d5](https://github.com/whopio/whopsdk-typescript/commit/65ef5d577f74f7b9cfb489a64f569a9bde83d7dd))
+
 ## 0.0.24 (2026-01-25)
 
 Full Changelog: [v0.0.23...v0.0.24](https://github.com/whopio/whopsdk-typescript/compare/v0.0.23...v0.0.24)
