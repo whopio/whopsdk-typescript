@@ -25,7 +25,7 @@ describe('resource messages', () => {
     const response = await client.messages.create({
       channel_id: 'channel_id',
       content: 'content',
-      attachments: [{ direct_upload_id: 'direct_upload_id' }],
+      attachments: [{ id: 'id' }],
       poll: { options: [{ id: 'id', text: 'text' }] },
     });
   });
@@ -61,7 +61,7 @@ describe('resource messages', () => {
       client.messages.update(
         'id',
         {
-          attachments: [{ direct_upload_id: 'direct_upload_id' }],
+          attachments: [{ id: 'id' }],
           content: 'content',
           is_pinned: true,
         },

@@ -482,11 +482,6 @@ export interface CourseCreateParams {
   certificate_after_completion_enabled?: boolean | null;
 
   /**
-   * The cover image URL of the course
-   */
-  cover_image?: string | null;
-
-  /**
    * The decimal order position of the course within its experience. If not provided,
    * it will be set to the next sequential order. Use fractional values (e.g., 1.5)
    * to place between existing courses.
@@ -507,10 +502,7 @@ export interface CourseCreateParams {
   /**
    * The thumbnail for the course in png, jpeg, or gif format
    */
-  thumbnail?:
-    | CourseCreateParams.AttachmentInputWithDirectUploadID
-    | CourseCreateParams.AttachmentInputWithID
-    | null;
+  thumbnail?: CourseCreateParams.Thumbnail | null;
 
   /**
    * The available visibilities for a course. Determines how / whether a course is
@@ -521,25 +513,11 @@ export interface CourseCreateParams {
 
 export namespace CourseCreateParams {
   /**
-   * Input for an attachment
+   * The thumbnail for the course in png, jpeg, or gif format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Thumbnail {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
@@ -556,11 +534,6 @@ export interface CourseUpdateParams {
    * The chapters and lessons to update
    */
   chapters?: Array<CourseUpdateParams.Chapter> | null;
-
-  /**
-   * The cover image URL of the course
-   */
-  cover_image?: string | null;
 
   /**
    * A short description of the course
@@ -592,10 +565,7 @@ export interface CourseUpdateParams {
   /**
    * The thumbnail for the course in png, jpeg, or gif format
    */
-  thumbnail?:
-    | CourseUpdateParams.AttachmentInputWithDirectUploadID
-    | CourseUpdateParams.AttachmentInputWithID
-    | null;
+  thumbnail?: CourseUpdateParams.Thumbnail | null;
 
   /**
    * The title of the course
@@ -663,25 +633,11 @@ export namespace CourseUpdateParams {
   }
 
   /**
-   * Input for an attachment
+   * The thumbnail for the course in png, jpeg, or gif format
    */
-  export interface AttachmentInputWithDirectUploadID {
+  export interface Thumbnail {
     /**
-     * This ID should be used the first time you upload an attachment. It is the ID of
-     * the direct upload that was created when uploading the file to S3 via the
-     * mediaDirectUpload mutation.
-     */
-    direct_upload_id: string;
-  }
-
-  /**
-   * Input for an attachment
-   */
-  export interface AttachmentInputWithID {
-    /**
-     * The ID of an existing attachment object. Use this when updating a resource and
-     * keeping a subset of the attachments. Don't use this unless you know what you're
-     * doing.
+     * The ID of an existing file object.
      */
     id: string;
   }
