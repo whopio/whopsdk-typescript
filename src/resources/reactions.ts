@@ -43,6 +43,22 @@ export class Reactions extends APIResource {
   ): PagePromise<ReactionListResponsesCursorPage, ReactionListResponse> {
     return this._client.getAPIList('/reactions', CursorPage<ReactionListResponse>, { query, ...options });
   }
+
+  /**
+   * Deletes a reaction
+   *
+   * Required permissions:
+   *
+   * - `chat:read`
+   */
+  delete(
+    id: string,
+    params: ReactionDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ReactionDeleteResponse> {
+    const { emoji } = params ?? {};
+    return this._client.delete(path`/reactions/${id}`, { query: { emoji }, ...options });
+  }
 }
 
 export type ReactionListResponsesCursorPage = CursorPage<ReactionListResponse>;
@@ -94,6 +110,11 @@ export namespace ReactionListResponse {
   }
 }
 
+/**
+ * Represents `true` or `false` values.
+ */
+export type ReactionDeleteResponse = boolean;
+
 export interface ReactionCreateParams {
   /**
    * The ID of the post or message to react to.
@@ -105,6 +126,12 @@ export interface ReactionCreateParams {
    * as everything will be :heart:
    */
   emoji?: string | null;
+
+  /**
+   * The ID of the poll option to vote for. Only valid for messages or posts with
+   * polls.
+   */
+  poll_option_id?: string | null;
 }
 
 export interface ReactionListParams extends CursorPageParams {
@@ -129,11 +156,20 @@ export interface ReactionListParams extends CursorPageParams {
   last?: number | null;
 }
 
+export interface ReactionDeleteParams {
+  /**
+   * The emoji to remove (e.g., :heart: or '😀').
+   */
+  emoji?: string | null;
+}
+
 export declare namespace Reactions {
   export {
     type ReactionListResponse as ReactionListResponse,
+    type ReactionDeleteResponse as ReactionDeleteResponse,
     type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
     type ReactionCreateParams as ReactionCreateParams,
     type ReactionListParams as ReactionListParams,
+    type ReactionDeleteParams as ReactionDeleteParams,
   };
 }

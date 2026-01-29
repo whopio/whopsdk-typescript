@@ -21,7 +21,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'whop_sdk_api',
-      version: '0.0.24',
+      version: '0.0.25',
     },
     { capabilities: { tools: {}, logging: {} } },
   );
@@ -144,4 +144,11 @@ export const readEnvOrError = (env: string): string => {
     throw new Error(`Environment variable ${env} is not set`);
   }
   return envValue;
+};
+
+export const requireValue = <T>(value: T | undefined, description: string): T => {
+  if (value === undefined) {
+    throw new Error(`Missing required value: ${description}`);
+  }
+  return value;
 };

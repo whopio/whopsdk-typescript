@@ -532,6 +532,11 @@ export interface WithdrawalCreateParams {
   payout_method_id?: string | null;
 
   /**
+   * Whether the platform covers the payout fees instead of the connected account.
+   */
+  platform_covers_fees?: boolean | null;
+
+  /**
    * Custom statement descriptor for the withdrawal. Must be between 5 and 22
    * characters and contain only alphanumeric characters.
    */

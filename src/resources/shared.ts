@@ -1447,22 +1447,34 @@ export namespace ForumPost {
  * The friendly status of a receipt
  */
 export type FriendlyReceiptStatus =
-  | 'auto_refunded'
+  | 'succeeded'
+  | 'pending'
+  | 'failed'
+  | 'past_due'
+  | 'canceled'
+  | 'price_too_low'
+  | 'uncollectible'
   | 'refunded'
+  | 'auto_refunded'
   | 'partially_refunded'
   | 'dispute_warning'
-  | 'open_resolution'
-  | 'open_dispute'
-  | 'failed'
-  | 'price_too_low'
-  | 'succeeded'
+  | 'dispute_needs_response'
+  | 'dispute_warning_needs_response'
+  | 'resolution_needs_response'
+  | 'dispute_under_review'
+  | 'dispute_warning_under_review'
+  | 'resolution_under_review'
+  | 'dispute_won'
+  | 'dispute_warning_closed'
+  | 'resolution_won'
+  | 'dispute_lost'
+  | 'dispute_closed'
+  | 'resolution_lost'
   | 'drafted'
-  | 'uncollectible'
-  | 'unresolved'
-  | 'past_due'
-  | 'pending'
   | 'incomplete'
-  | 'canceled';
+  | 'unresolved'
+  | 'open_dispute'
+  | 'open_resolution';
 
 /**
  * The different statuses of the global affiliate program for a product.
@@ -1765,6 +1777,20 @@ export interface Membership {
   cancel_at_period_end: boolean;
 
   /**
+   * The different reasons a user can choose for why they are canceling their
+   * membership.
+   */
+  cancel_option:
+    | 'too_expensive'
+    | 'switching'
+    | 'missing_features'
+    | 'technical_issues'
+    | 'bad_experience'
+    | 'other'
+    | 'testing'
+    | null;
+
+  /**
    * The epoch timestamp of when the customer initiated a cancellation.
    */
   canceled_at: string | null;
@@ -1788,6 +1814,11 @@ export interface Membership {
    * The available currencies on the platform
    */
   currency: Currency | null;
+
+  /**
+   * The responses to custom checkout questions for this membership.
+   */
+  custom_field_responses: Array<Membership.CustomFieldResponse>;
 
   /**
    * The license key for this Membership. This is only present if the membership
@@ -1875,6 +1906,26 @@ export namespace Membership {
   }
 
   /**
+   * The response from a custom field on checkout
+   */
+  export interface CustomFieldResponse {
+    /**
+     * The ID of the custom field item
+     */
+    id: string;
+
+    /**
+     * The response a user gave to the specific question or field.
+     */
+    answer: string;
+
+    /**
+     * The question asked by the custom field
+     */
+    question: string;
+  }
+
+  /**
    * The Member that this Membership belongs to.
    */
   export interface Member {
@@ -1927,6 +1978,11 @@ export namespace Membership {
      * The internal ID of the user.
      */
     id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
 
     /**
      * The name of the user from their Whop account.
@@ -2214,6 +2270,11 @@ export interface Payment {
   metadata: { [key: string]: unknown } | null;
 
   /**
+   * The time of the next schedule payment retry.
+   */
+  next_payment_attempt: string | null;
+
+  /**
    * The datetime the payment was paid
    */
   paid_at: string | null;
@@ -2227,6 +2288,11 @@ export interface Payment {
    * The different types of payment methods that can be used.
    */
   payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+  /**
+   * The number of failed payment attempts for the payment.
+   */
+  payments_failed: number | null;
 
   /**
    * The plan attached to this payment.

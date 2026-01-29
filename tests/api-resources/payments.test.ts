@@ -108,7 +108,7 @@ describe('resource payments', () => {
       plan_ids: ['string'],
       product_ids: ['string'],
       statuses: ['draft'],
-      substatuses: ['auto_refunded'],
+      substatuses: ['succeeded'],
     });
   });
 

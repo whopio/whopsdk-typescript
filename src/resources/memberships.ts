@@ -14,6 +14,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:basic:read`
+   * - `member:email:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.get(path`/memberships/${id}`, options);
@@ -25,6 +26,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   update(
@@ -41,6 +43,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:basic:read`
+   * - `member:email:read`
    */
   list(
     query: MembershipListParams | null | undefined = {},
@@ -56,6 +59,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   cancel(
@@ -72,6 +76,7 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   pause(
@@ -88,10 +93,24 @@ export class Memberships extends APIResource {
    * Required permissions:
    *
    * - `member:manage`
+   * - `member:email:read`
    * - `member:basic:read`
    */
   resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/resume`, options);
+  }
+
+  /**
+   * Uncancels a membership that was scheduled to cancel at period end
+   *
+   * Required permissions:
+   *
+   * - `member:manage`
+   * - `member:email:read`
+   * - `member:basic:read`
+   */
+  uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/uncancel`, options);
   }
 }
 
@@ -112,6 +131,20 @@ export interface MembershipListResponse {
    * cycle. Only applies for memberships that have a renewal plan.
    */
   cancel_at_period_end: boolean;
+
+  /**
+   * The different reasons a user can choose for why they are canceling their
+   * membership.
+   */
+  cancel_option:
+    | 'too_expensive'
+    | 'switching'
+    | 'missing_features'
+    | 'technical_issues'
+    | 'bad_experience'
+    | 'other'
+    | 'testing'
+    | null;
 
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
@@ -276,6 +309,11 @@ export namespace MembershipListResponse {
      * The internal ID of the user.
      */
     id: string;
+
+    /**
+     * The email of the user
+     */
+    email: string | null;
 
     /**
      * The name of the user from their Whop account.

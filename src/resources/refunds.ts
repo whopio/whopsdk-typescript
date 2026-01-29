@@ -51,7 +51,8 @@ export type PaymentProvider =
   | 'sezzle'
   | 'splitit'
   | 'platform_balance'
-  | 'multi_psp';
+  | 'multi_psp'
+  | 'adyen';
 
 /**
  * The status of the refund reference.

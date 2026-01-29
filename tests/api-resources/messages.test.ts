@@ -27,6 +27,7 @@ describe('resource messages', () => {
       content: 'content',
       attachments: [{ id: 'id' }],
       poll: { options: [{ id: 'id', text: 'text' }] },
+      replying_to_message_id: 'replying_to_message_id',
     });
   });
 
@@ -92,5 +93,17 @@ describe('resource messages', () => {
       first: 42,
       last: 42,
     });
+  });
+
+  // Prism tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.messages.delete('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

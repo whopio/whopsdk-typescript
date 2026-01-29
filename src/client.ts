@@ -22,6 +22,18 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+  AIChatCreateParams,
+  AIChatCreateResponse,
+  AIChatDeleteResponse,
+  AIChatListParams,
+  AIChatListResponse,
+  AIChatListResponsesCursorPage,
+  AIChatRetrieveResponse,
+  AIChatUpdateParams,
+  AIChatUpdateResponse,
+  AIChats,
+} from './resources/ai-chats';
+import {
   AppBuildCreateParams,
   AppBuildListParams,
   AppBuildListResponse,
@@ -67,6 +79,15 @@ import {
   CompanyListResponsesCursorPage,
   CompanyUpdateParams,
 } from './resources/companies';
+import {
+  CompanyTokenTransactionCreateParams,
+  CompanyTokenTransactionCreateResponse,
+  CompanyTokenTransactionListParams,
+  CompanyTokenTransactionListResponse,
+  CompanyTokenTransactionListResponsesCursorPage,
+  CompanyTokenTransactionRetrieveResponse,
+  CompanyTokenTransactions,
+} from './resources/company-token-transactions';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -127,6 +148,18 @@ import {
   DisputeUpdateEvidenceParams,
   Disputes,
 } from './resources/disputes';
+import {
+  DmMemberCreateParams,
+  DmMemberCreateResponse,
+  DmMemberDeleteResponse,
+  DmMemberListParams,
+  DmMemberListResponse,
+  DmMemberListResponsesCursorPage,
+  DmMemberRetrieveResponse,
+  DmMemberUpdateParams,
+  DmMemberUpdateResponse,
+  DmMembers,
+} from './resources/dm-members';
 import {
   Entries,
   EntryApproveResponse,
@@ -204,6 +237,7 @@ import {
 } from './resources/memberships';
 import {
   MessageCreateParams,
+  MessageDeleteResponse,
   MessageListParams,
   MessageListResponse,
   MessageListResponsesCursorPage,
@@ -273,6 +307,8 @@ import {
 } from './resources/promo-codes';
 import {
   ReactionCreateParams,
+  ReactionDeleteParams,
+  ReactionDeleteResponse,
   ReactionListParams,
   ReactionListResponse,
   ReactionListResponsesCursorPage,
@@ -1157,6 +1193,9 @@ export class Whop {
   leads: API.Leads = new API.Leads(this);
   topups: API.Topups = new API.Topups(this);
   files: API.Files = new API.Files(this);
+  companyTokenTransactions: API.CompanyTokenTransactions = new API.CompanyTokenTransactions(this);
+  dmMembers: API.DmMembers = new API.DmMembers(this);
+  aiChats: API.AIChats = new API.AIChats(this);
 }
 
 Whop.Apps = Apps;
@@ -1204,6 +1243,9 @@ Whop.Verifications = Verifications;
 Whop.Leads = Leads;
 Whop.Topups = Topups;
 Whop.Files = Files;
+Whop.CompanyTokenTransactions = CompanyTokenTransactions;
+Whop.DmMembers = DmMembers;
+Whop.AIChats = AIChats;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1378,6 +1420,7 @@ export declare namespace Whop {
   export {
     Messages as Messages,
     type MessageListResponse as MessageListResponse,
+    type MessageDeleteResponse as MessageDeleteResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
@@ -1438,9 +1481,11 @@ export declare namespace Whop {
   export {
     Reactions as Reactions,
     type ReactionListResponse as ReactionListResponse,
+    type ReactionDeleteResponse as ReactionDeleteResponse,
     type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
     type ReactionCreateParams as ReactionCreateParams,
     type ReactionListParams as ReactionListParams,
+    type ReactionDeleteParams as ReactionDeleteParams,
   };
 
   export {
@@ -1649,6 +1694,42 @@ export declare namespace Whop {
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
     type FileCreateParams as FileCreateParams,
+  };
+
+  export {
+    CompanyTokenTransactions as CompanyTokenTransactions,
+    type CompanyTokenTransactionCreateResponse as CompanyTokenTransactionCreateResponse,
+    type CompanyTokenTransactionRetrieveResponse as CompanyTokenTransactionRetrieveResponse,
+    type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
+    type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
+    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
+    type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams,
+  };
+
+  export {
+    DmMembers as DmMembers,
+    type DmMemberCreateResponse as DmMemberCreateResponse,
+    type DmMemberRetrieveResponse as DmMemberRetrieveResponse,
+    type DmMemberUpdateResponse as DmMemberUpdateResponse,
+    type DmMemberListResponse as DmMemberListResponse,
+    type DmMemberDeleteResponse as DmMemberDeleteResponse,
+    type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
+    type DmMemberCreateParams as DmMemberCreateParams,
+    type DmMemberUpdateParams as DmMemberUpdateParams,
+    type DmMemberListParams as DmMemberListParams,
+  };
+
+  export {
+    AIChats as AIChats,
+    type AIChatCreateResponse as AIChatCreateResponse,
+    type AIChatRetrieveResponse as AIChatRetrieveResponse,
+    type AIChatUpdateResponse as AIChatUpdateResponse,
+    type AIChatListResponse as AIChatListResponse,
+    type AIChatDeleteResponse as AIChatDeleteResponse,
+    type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
+    type AIChatCreateParams as AIChatCreateParams,
+    type AIChatUpdateParams as AIChatUpdateParams,
+    type AIChatListParams as AIChatListParams,
   };
 
   export type AccessLevel = API.AccessLevel;
