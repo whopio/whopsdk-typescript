@@ -1,6 +1,18 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export * from './shared';
+export {
+  AIChats,
+  type AIChatCreateResponse,
+  type AIChatRetrieveResponse,
+  type AIChatUpdateResponse,
+  type AIChatListResponse,
+  type AIChatDeleteResponse,
+  type AIChatCreateParams,
+  type AIChatUpdateParams,
+  type AIChatListParams,
+  type AIChatListResponsesCursorPage,
+} from './ai-chats';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
@@ -49,6 +61,15 @@ export {
   type CompanyListParams,
   type CompanyListResponsesCursorPage,
 } from './companies';
+export {
+  CompanyTokenTransactions,
+  type CompanyTokenTransactionCreateResponse,
+  type CompanyTokenTransactionRetrieveResponse,
+  type CompanyTokenTransactionListResponse,
+  type CompanyTokenTransactionCreateParams,
+  type CompanyTokenTransactionListParams,
+  type CompanyTokenTransactionListResponsesCursorPage,
+} from './company-token-transactions';
 export {
   CourseChapters,
   type CourseChapter,
@@ -109,6 +130,18 @@ export {
   type DisputeUpdateEvidenceParams,
   type DisputeListResponsesCursorPage,
 } from './disputes';
+export {
+  DmMembers,
+  type DmMemberCreateResponse,
+  type DmMemberRetrieveResponse,
+  type DmMemberUpdateResponse,
+  type DmMemberListResponse,
+  type DmMemberDeleteResponse,
+  type DmMemberCreateParams,
+  type DmMemberUpdateParams,
+  type DmMemberListParams,
+  type DmMemberListResponsesCursorPage,
+} from './dm-members';
 export {
   Entries,
   type EntryListResponse,
@@ -192,6 +225,7 @@ export {
 export {
   Messages,
   type MessageListResponse,
+  type MessageDeleteResponse,
   type MessageCreateParams,
   type MessageUpdateParams,
   type MessageListParams,
@@ -261,8 +295,10 @@ export {
 export {
   Reactions,
   type ReactionListResponse,
+  type ReactionDeleteResponse,
   type ReactionCreateParams,
   type ReactionListParams,
+  type ReactionDeleteParams,
   type ReactionListResponsesCursorPage,
 } from './reactions';
 export {

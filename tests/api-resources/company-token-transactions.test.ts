@@ -7,10 +7,16 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource reactions', () => {
+describe('resource companyTokenTransactions', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.reactions.create({ resource_id: 'resource_id' });
+    const responsePromise = client.companyTokenTransactions.create({
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      destination_user_id: 'destination_user_id',
+      transaction_type: 'transfer',
+      user_id: 'user_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,16 +28,20 @@ describe('resource reactions', () => {
 
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.reactions.create({
-      resource_id: 'resource_id',
-      emoji: 'emoji',
-      poll_option_id: 'poll_option_id',
+    const response = await client.companyTokenTransactions.create({
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      destination_user_id: 'destination_user_id',
+      transaction_type: 'transfer',
+      user_id: 'user_xxxxxxxxxxxxx',
+      description: 'description',
+      idempotency_key: 'idempotency_key',
     });
   });
 
   // Prism tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.reactions.retrieve('reac_xxxxxxxxxxxxxxxxxxxxxx');
+    const responsePromise = client.companyTokenTransactions.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -43,7 +53,7 @@ describe('resource reactions', () => {
 
   // Prism tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.reactions.list({ resource_id: 'resource_id' });
+    const responsePromise = client.companyTokenTransactions.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,36 +65,14 @@ describe('resource reactions', () => {
 
   // Prism tests are disabled
   test.skip('list: required and optional params', async () => {
-    const response = await client.reactions.list({
-      resource_id: 'resource_id',
+    const response = await client.companyTokenTransactions.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       first: 42,
       last: 42,
+      transaction_type: 'add',
+      user_id: 'user_xxxxxxxxxxxxx',
     });
-  });
-
-  // Prism tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.reactions.delete('reac_xxxxxxxxxxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('delete: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.reactions.delete(
-        'reac_xxxxxxxxxxxxxxxxxxxxxx',
-        { emoji: 'emoji' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
   });
 });
