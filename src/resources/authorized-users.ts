@@ -29,7 +29,7 @@ export class AuthorizedUsers extends APIResource {
    * - `member:email:read`
    */
   list(
-    query: AuthorizedUserListParams,
+    query: AuthorizedUserListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AuthorizedUserListResponsesCursorPage, AuthorizedUserListResponse> {
     return this._client.getAPIList('/authorized_users', CursorPage<AuthorizedUserListResponse>, {
@@ -51,6 +51,11 @@ export interface AuthorizedUserRetrieveResponse {
   id: string;
 
   /**
+   * The company associated with the authorized user.
+   */
+  company: AuthorizedUserRetrieveResponse.Company;
+
+  /**
    * The role of the authorized user in the company.
    */
   role: Shared.AuthorizedUserRoles;
@@ -62,6 +67,21 @@ export interface AuthorizedUserRetrieveResponse {
 }
 
 export namespace AuthorizedUserRetrieveResponse {
+  /**
+   * The company associated with the authorized user.
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
   /**
    * The user associated with the authorized user.
    */
@@ -98,6 +118,11 @@ export interface AuthorizedUserListResponse {
   id: string;
 
   /**
+   * The company associated with the authorized user.
+   */
+  company: AuthorizedUserListResponse.Company;
+
+  /**
    * The role of the authorized user in the company.
    */
   role: Shared.AuthorizedUserRoles;
@@ -109,6 +134,21 @@ export interface AuthorizedUserListResponse {
 }
 
 export namespace AuthorizedUserListResponse {
+  /**
+   * The company associated with the authorized user.
+   */
+  export interface Company {
+    /**
+     * The ID (tag) of the company.
+     */
+    id: string;
+
+    /**
+     * The title of the company.
+     */
+    title: string;
+  }
+
   /**
    * The user associated with the authorized user.
    */
@@ -137,14 +177,14 @@ export namespace AuthorizedUserListResponse {
 
 export interface AuthorizedUserListParams extends CursorPageParams {
   /**
-   * The ID of the company to list authorized users for
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The ID of the company to list authorized users for
+   */
+  company_id?: string | null;
 
   /**
    * The minimum creation date to filter by

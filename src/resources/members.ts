@@ -31,7 +31,7 @@ export class Members extends APIResource {
    * - `member:phone:read`
    */
   list(
-    query: MemberListParams,
+    query: MemberListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<MemberListResponsesCursorPage, MemberListResponse> {
     return this._client.getAPIList('/members', CursorPage<MemberListResponse>, { query, ...options });
@@ -261,11 +261,6 @@ export namespace MemberListResponse {
 
 export interface MemberListParams extends CursorPageParams {
   /**
-   * The ID of the company to list members for
-   */
-  company_id: string;
-
-  /**
    * The access level a given user (or company) has to a product or company.
    */
   access_level?: Shared.AccessLevel | null;
@@ -274,6 +269,11 @@ export interface MemberListParams extends CursorPageParams {
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The ID of the company to list members for
+   */
+  company_id?: string | null;
 
   /**
    * The minimum creation date to filter by
