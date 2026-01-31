@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0 (2026-01-31)
+
+Full Changelog: [v0.0.25...v0.1.0](https://github.com/whopio/whopsdk-typescript/compare/v0.0.25...v0.1.0)
+
+### Features
+
+* **api:** api update ([cbdb33e](https://github.com/whopio/whopsdk-typescript/commit/cbdb33ec60d51d1bae41f6bb58eb2cdf43b39493))
+
 ## 0.0.25 (2026-01-29)
 
 Full Changelog: [v0.0.24...v0.0.25](https://github.com/whopio/whopsdk-typescript/compare/v0.0.24...v0.0.25)
