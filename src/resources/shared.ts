@@ -2199,6 +2199,11 @@ export interface Payment {
   amount_after_fees: number;
 
   /**
+   * The application fee charged on this payment.
+   */
+  application_fee: Payment.ApplicationFee | null;
+
+  /**
    * Whether this payment was auto refunded or not
    */
   auto_refunded: boolean;
@@ -2370,6 +2375,41 @@ export interface Payment {
 }
 
 export namespace Payment {
+  /**
+   * The application fee charged on this payment.
+   */
+  export interface ApplicationFee {
+    /**
+     * The unique identifier for the application fee.
+     */
+    id: string;
+
+    /**
+     * The application fee amount.
+     */
+    amount: number;
+
+    /**
+     * The amount of the application fee that has been captured.
+     */
+    amount_captured: number;
+
+    /**
+     * The amount of the application fee that has been refunded.
+     */
+    amount_refunded: number;
+
+    /**
+     * When the application fee was created.
+     */
+    created_at: string;
+
+    /**
+     * The currency of the application fee.
+     */
+    currency: Shared.Currency;
+  }
+
   /**
    * The address of the user who made the payment.
    */
