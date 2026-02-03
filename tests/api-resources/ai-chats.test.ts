@@ -56,7 +56,11 @@ describe('resource aiChats', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.aiChats.update('aich_xxxxxxxxxxxxx', { title: 'title' }, { path: '/_stainless_unknown_path' }),
+      client.aiChats.update(
+        'aich_xxxxxxxxxxxxx',
+        { current_company_id: 'current_company_id', title: 'title' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 

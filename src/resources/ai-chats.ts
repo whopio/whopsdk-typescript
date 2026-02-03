@@ -192,6 +192,11 @@ export interface AIChatCreateParams {
 
 export interface AIChatUpdateParams {
   /**
+   * The ID of the company to set as the current company in context for the AI chat
+   */
+  current_company_id?: string | null;
+
+  /**
    * The new title for the AI chat
    */
   title?: string | null;
