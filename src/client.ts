@@ -22,15 +22,13 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+  AIChat,
   AIChatCreateParams,
-  AIChatCreateResponse,
   AIChatDeleteResponse,
   AIChatListParams,
   AIChatListResponse,
   AIChatListResponsesCursorPage,
-  AIChatRetrieveResponse,
   AIChatUpdateParams,
-  AIChatUpdateResponse,
   AIChats,
 } from './resources/ai-chats';
 import {
@@ -80,12 +78,12 @@ import {
   CompanyUpdateParams,
 } from './resources/companies';
 import {
+  BotTokenTransactionTypes,
+  CompanyTokenTransaction,
   CompanyTokenTransactionCreateParams,
-  CompanyTokenTransactionCreateResponse,
   CompanyTokenTransactionListParams,
   CompanyTokenTransactionListResponse,
   CompanyTokenTransactionListResponsesCursorPage,
-  CompanyTokenTransactionRetrieveResponse,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
 import {
@@ -149,15 +147,25 @@ import {
   Disputes,
 } from './resources/disputes';
 import {
+  DmChannel,
+  DmChannelCreateParams,
+  DmChannelDeleteResponse,
+  DmChannelListParams,
+  DmChannelListResponse,
+  DmChannelListResponsesCursorPage,
+  DmChannelUpdateParams,
+  DmChannels,
+} from './resources/dm-channels';
+import {
+  DmFeedMemberNotificationPreferences,
+  DmFeedMemberStatuses,
+  DmMember,
   DmMemberCreateParams,
-  DmMemberCreateResponse,
   DmMemberDeleteResponse,
   DmMemberListParams,
   DmMemberListResponse,
   DmMemberListResponsesCursorPage,
-  DmMemberRetrieveResponse,
   DmMemberUpdateParams,
-  DmMemberUpdateResponse,
   DmMembers,
 } from './resources/dm-members';
 import {
@@ -189,7 +197,13 @@ import {
   FeeMarkupType,
   FeeMarkups,
 } from './resources/fee-markups';
-import { FileCreateParams, FileCreateResponse, FileRetrieveResponse, Files } from './resources/files';
+import {
+  FileCreateParams,
+  FileCreateResponse,
+  FileRetrieveResponse,
+  Files,
+  UploadStatus,
+} from './resources/files';
 import {
   ForumPostCreateParams,
   ForumPostListParams,
@@ -208,14 +222,12 @@ import {
 } from './resources/forums';
 import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
 import {
+  Lead,
   LeadCreateParams,
-  LeadCreateResponse,
   LeadListParams,
   LeadListResponse,
   LeadListResponsesCursorPage,
-  LeadRetrieveResponse,
   LeadUpdateParams,
-  LeadUpdateResponse,
   Leads,
 } from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
@@ -227,6 +239,7 @@ import {
   Members,
 } from './resources/members';
 import {
+  CancelOptions,
   MembershipCancelParams,
   MembershipListParams,
   MembershipListResponse,
@@ -272,6 +285,7 @@ import {
   Payments,
 } from './resources/payments';
 import {
+  PayoutDestinationCategory,
   PayoutMethodListParams,
   PayoutMethodListResponse,
   PayoutMethodListResponsesCursorPage,
@@ -369,8 +383,14 @@ import {
   UserRetrieveResponse,
   Users,
 } from './resources/users';
-import { VerificationRetrieveResponse, Verifications } from './resources/verifications';
 import {
+  VerificationErrorCode,
+  VerificationRetrieveResponse,
+  VerificationStatus,
+  Verifications,
+} from './resources/verifications';
+import {
+  APIVersion,
   CourseLessonInteractionCompletedWebhookEvent,
   DisputeCreatedWebhookEvent,
   DisputeUpdatedWebhookEvent,
@@ -397,27 +417,26 @@ import {
   SetupIntentSucceededWebhookEvent,
   UnwrapWebhookEvent,
   VerificationSucceededWebhookEvent,
+  Webhook,
   WebhookCreateParams,
   WebhookCreateResponse,
   WebhookDeleteResponse,
+  WebhookEvent,
   WebhookListParams,
   WebhookListResponse,
   WebhookListResponsesCursorPage,
-  WebhookRetrieveResponse,
   WebhookUpdateParams,
-  WebhookUpdateResponse,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
   WithdrawalUpdatedWebhookEvent,
 } from './resources/webhooks';
 import {
+  Withdrawal,
   WithdrawalCreateParams,
-  WithdrawalCreateResponse,
   WithdrawalFeeTypes,
   WithdrawalListParams,
   WithdrawalListResponse,
   WithdrawalListResponsesCursorPage,
-  WithdrawalRetrieveResponse,
   WithdrawalSpeeds,
   WithdrawalStatus,
   Withdrawals,
@@ -920,9 +939,10 @@ export class Whop {
     controller: AbortController,
   ): Promise<Response> {
     const { signal, method, ...options } = init || {};
-    if (signal) signal.addEventListener('abort', () => controller.abort());
+    const abort = controller.abort.bind(controller);
+    if (signal) signal.addEventListener('abort', abort, { once: true });
 
-    const timeout = setTimeout(() => controller.abort(), ms);
+    const timeout = setTimeout(abort, ms);
 
     const isReadableBody =
       ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
@@ -1196,6 +1216,7 @@ export class Whop {
   companyTokenTransactions: API.CompanyTokenTransactions = new API.CompanyTokenTransactions(this);
   dmMembers: API.DmMembers = new API.DmMembers(this);
   aiChats: API.AIChats = new API.AIChats(this);
+  dmChannels: API.DmChannels = new API.DmChannels(this);
 }
 
 Whop.Apps = Apps;
@@ -1246,6 +1267,7 @@ Whop.Files = Files;
 Whop.CompanyTokenTransactions = CompanyTokenTransactions;
 Whop.DmMembers = DmMembers;
 Whop.AIChats = AIChats;
+Whop.DmChannels = DmChannels;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1294,9 +1316,10 @@ export declare namespace Whop {
 
   export {
     Webhooks as Webhooks,
+    type APIVersion as APIVersion,
+    type Webhook as Webhook,
+    type WebhookEvent as WebhookEvent,
     type WebhookCreateResponse as WebhookCreateResponse,
-    type WebhookRetrieveResponse as WebhookRetrieveResponse,
-    type WebhookUpdateResponse as WebhookUpdateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
@@ -1376,6 +1399,7 @@ export declare namespace Whop {
 
   export {
     Memberships as Memberships,
+    type CancelOptions as CancelOptions,
     type MembershipListResponse as MembershipListResponse,
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipUpdateParams as MembershipUpdateParams,
@@ -1612,11 +1636,10 @@ export declare namespace Whop {
 
   export {
     Withdrawals as Withdrawals,
+    type Withdrawal as Withdrawal,
     type WithdrawalFeeTypes as WithdrawalFeeTypes,
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalCreateResponse as WithdrawalCreateResponse,
-    type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalCreateParams as WithdrawalCreateParams,
@@ -1660,6 +1683,7 @@ export declare namespace Whop {
 
   export {
     PayoutMethods as PayoutMethods,
+    type PayoutDestinationCategory as PayoutDestinationCategory,
     type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
     type PayoutMethodListResponse as PayoutMethodListResponse,
     type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
@@ -1668,14 +1692,14 @@ export declare namespace Whop {
 
   export {
     Verifications as Verifications,
+    type VerificationErrorCode as VerificationErrorCode,
+    type VerificationStatus as VerificationStatus,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
   };
 
   export {
     Leads as Leads,
-    type LeadCreateResponse as LeadCreateResponse,
-    type LeadRetrieveResponse as LeadRetrieveResponse,
-    type LeadUpdateResponse as LeadUpdateResponse,
+    type Lead as Lead,
     type LeadListResponse as LeadListResponse,
     type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
     type LeadCreateParams as LeadCreateParams,
@@ -1691,6 +1715,7 @@ export declare namespace Whop {
 
   export {
     Files as Files,
+    type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
     type FileCreateParams as FileCreateParams,
@@ -1698,8 +1723,8 @@ export declare namespace Whop {
 
   export {
     CompanyTokenTransactions as CompanyTokenTransactions,
-    type CompanyTokenTransactionCreateResponse as CompanyTokenTransactionCreateResponse,
-    type CompanyTokenTransactionRetrieveResponse as CompanyTokenTransactionRetrieveResponse,
+    type BotTokenTransactionTypes as BotTokenTransactionTypes,
+    type CompanyTokenTransaction as CompanyTokenTransaction,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
@@ -1708,9 +1733,9 @@ export declare namespace Whop {
 
   export {
     DmMembers as DmMembers,
-    type DmMemberCreateResponse as DmMemberCreateResponse,
-    type DmMemberRetrieveResponse as DmMemberRetrieveResponse,
-    type DmMemberUpdateResponse as DmMemberUpdateResponse,
+    type DmFeedMemberNotificationPreferences as DmFeedMemberNotificationPreferences,
+    type DmFeedMemberStatuses as DmFeedMemberStatuses,
+    type DmMember as DmMember,
     type DmMemberListResponse as DmMemberListResponse,
     type DmMemberDeleteResponse as DmMemberDeleteResponse,
     type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
@@ -1721,15 +1746,24 @@ export declare namespace Whop {
 
   export {
     AIChats as AIChats,
-    type AIChatCreateResponse as AIChatCreateResponse,
-    type AIChatRetrieveResponse as AIChatRetrieveResponse,
-    type AIChatUpdateResponse as AIChatUpdateResponse,
+    type AIChat as AIChat,
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
     type AIChatCreateParams as AIChatCreateParams,
     type AIChatUpdateParams as AIChatUpdateParams,
     type AIChatListParams as AIChatListParams,
+  };
+
+  export {
+    DmChannels as DmChannels,
+    type DmChannel as DmChannel,
+    type DmChannelListResponse as DmChannelListResponse,
+    type DmChannelDeleteResponse as DmChannelDeleteResponse,
+    type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
+    type DmChannelCreateParams as DmChannelCreateParams,
+    type DmChannelUpdateParams as DmChannelUpdateParams,
+    type DmChannelListParams as DmChannelListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

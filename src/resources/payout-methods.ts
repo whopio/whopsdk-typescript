@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PayoutMethodsAPI from './payout-methods';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -37,6 +38,17 @@ export class PayoutMethods extends APIResource {
 }
 
 export type PayoutMethodListResponsesCursorPage = CursorPage<PayoutMethodListResponse>;
+
+/**
+ * The category of a payout destination.
+ */
+export type PayoutDestinationCategory =
+  | 'crypto'
+  | 'rtp'
+  | 'next_day_bank'
+  | 'bank_wire'
+  | 'digital_wallet'
+  | 'unknown';
 
 /**
  * An object representing an user's setup payout destination.
@@ -109,7 +121,7 @@ export namespace PayoutMethodRetrieveResponse {
     /**
      * The category of the payout destination
      */
-    category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
+    category: PayoutMethodsAPI.PayoutDestinationCategory;
 
     /**
      * The country code of the payout destination
@@ -194,7 +206,7 @@ export namespace PayoutMethodListResponse {
     /**
      * The category of the payout destination
      */
-    category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
+    category: PayoutMethodsAPI.PayoutDestinationCategory;
 
     /**
      * The country code of the payout destination
@@ -232,6 +244,7 @@ export interface PayoutMethodListParams extends CursorPageParams {
 
 export declare namespace PayoutMethods {
   export {
+    type PayoutDestinationCategory as PayoutDestinationCategory,
     type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
     type PayoutMethodListResponse as PayoutMethodListResponse,
     type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,

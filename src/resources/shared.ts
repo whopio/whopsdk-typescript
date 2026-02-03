@@ -3,6 +3,7 @@
 import * as Shared from './shared';
 import * as AppsAPI from './apps';
 import * as CheckoutConfigurationsAPI from './checkout-configurations';
+import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
@@ -1780,15 +1781,7 @@ export interface Membership {
    * The different reasons a user can choose for why they are canceling their
    * membership.
    */
-  cancel_option:
-    | 'too_expensive'
-    | 'switching'
-    | 'missing_features'
-    | 'technical_issues'
-    | 'bad_experience'
-    | 'other'
-    | 'testing'
-    | null;
+  cancel_option: MembershipsAPI.CancelOptions | null;
 
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
@@ -2199,6 +2192,11 @@ export interface Payment {
   amount_after_fees: number;
 
   /**
+   * The application fee charged on this payment.
+   */
+  application_fee: Payment.ApplicationFee | null;
+
+  /**
    * Whether this payment was auto refunded or not
    */
   auto_refunded: boolean;
@@ -2370,6 +2368,41 @@ export interface Payment {
 }
 
 export namespace Payment {
+  /**
+   * The application fee charged on this payment.
+   */
+  export interface ApplicationFee {
+    /**
+     * The unique identifier for the application fee.
+     */
+    id: string;
+
+    /**
+     * The application fee amount.
+     */
+    amount: number;
+
+    /**
+     * The amount of the application fee that has been captured.
+     */
+    amount_captured: number;
+
+    /**
+     * The amount of the application fee that has been refunded.
+     */
+    amount_refunded: number;
+
+    /**
+     * When the application fee was created.
+     */
+    created_at: string;
+
+    /**
+     * The currency of the application fee.
+     */
+    currency: Shared.Currency;
+  }
+
   /**
    * The address of the user who made the payment.
    */

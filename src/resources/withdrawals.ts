@@ -25,7 +25,7 @@ export class Withdrawals extends APIResource {
    * });
    * ```
    */
-  create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<WithdrawalCreateResponse> {
+  create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<Withdrawal> {
     return this._client.post('/withdrawals', { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class Withdrawals extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<WithdrawalRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Withdrawal> {
     return this._client.get(path`/withdrawals/${id}`, options);
   }
 
@@ -76,6 +76,186 @@ export class Withdrawals extends APIResource {
 export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
 
 /**
+ * A withdrawal request.
+ */
+export interface Withdrawal {
+  /**
+   * Internal ID of the withdrawal request.
+   */
+  id: string;
+
+  /**
+   * How much money was attempted to be withdrawn, in a float type.
+   */
+  amount: number;
+
+  /**
+   * When the withdrawal request was created.
+   */
+  created_at: string;
+
+  /**
+   * The currency of the withdrawal request.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The different error codes a payout can be in.
+   */
+  error_code:
+    | 'account_closed'
+    | 'account_does_not_exist'
+    | 'account_information_invalid'
+    | 'account_number_invalid_region'
+    | 'account_frozen'
+    | 'account_lookup_failed'
+    | 'account_not_found'
+    | 'amount_out_of_bounds'
+    | 'attributes_not_validated'
+    | 'b2b_payments_prohibited'
+    | 'bank_statement_required'
+    | 'compliance_review'
+    | 'currency_not_supported'
+    | 'deposit_canceled'
+    | 'deposit_failed'
+    | 'deposit_rejected'
+    | 'destination_unavailable'
+    | 'exceeded_account_limit'
+    | 'expired_quote'
+    | 'generic_payout_error'
+    | 'technical_problem'
+    | 'identification_number_invalid'
+    | 'invalid_account_number'
+    | 'invalid_bank_code'
+    | 'invalid_beneficiary'
+    | 'invalid_mailing_address'
+    | 'invalid_branch_number'
+    | 'invalid_branch_code'
+    | 'invalid_phone_number'
+    | 'invalid_routing_number'
+    | 'invalid_swift_code'
+    | 'invalid_company_details'
+    | 'manual_cancelation'
+    | 'misc_error'
+    | 'missing_city_and_country'
+    | 'missing_phone_number'
+    | 'missing_remittance_info'
+    | 'payee_name_invalid'
+    | 'receiving_account_locked'
+    | 'rejected_by_compliance'
+    | 'rtp_not_supported'
+    | 'non_transaction_account'
+    | 'source_token_insufficient_funds'
+    | 'ssn_invalid'
+    | 'wallet_screenshot_required'
+    | 'unsupported_region'
+    | null;
+
+  /**
+   * The error message for the withdrawal, if any.
+   */
+  error_message: string | null;
+
+  /**
+   * The estimated availability date for the withdrawal, if any.
+   */
+  estimated_availability: string | null;
+
+  /**
+   * The fee amount that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount.
+   */
+  fee_amount: number;
+
+  /**
+   * The different fee types for a withdrawal.
+   */
+  fee_type: WithdrawalFeeTypes | null;
+
+  /**
+   * The ledger account associated with the withdrawal.
+   */
+  ledger_account: Withdrawal.LedgerAccount;
+
+  /**
+   * The markup fee that was charged for the withdrawal. This is in the same currency
+   * as the withdrawal amount. This only applies to platform accounts using Whop
+   * Rails.
+   */
+  markup_fee: number;
+
+  /**
+   * The payout token used for the withdrawal, if applicable.
+   */
+  payout_token: Withdrawal.PayoutToken | null;
+
+  /**
+   * The speed of the withdrawal.
+   */
+  speed: WithdrawalSpeeds;
+
+  /**
+   * Status of the withdrawal.
+   */
+  status: WithdrawalStatus;
+
+  /**
+   * The trace code for the payout, if applicable. Provided on ACH transactions when
+   * available.
+   */
+  trace_code: string | null;
+}
+
+export namespace Withdrawal {
+  /**
+   * The ledger account associated with the withdrawal.
+   */
+  export interface LedgerAccount {
+    /**
+     * The ID of the LedgerAccount.
+     */
+    id: string;
+
+    /**
+     * The ID of the company associated with this ledger account.
+     */
+    company_id: string | null;
+  }
+
+  /**
+   * The payout token used for the withdrawal, if applicable.
+   */
+  export interface PayoutToken {
+    /**
+     * The ID of the payout token
+     */
+    id: string;
+
+    /**
+     * The date and time the payout token was created
+     */
+    created_at: string;
+
+    /**
+     * The currency code of the payout destination. This is the currency that payouts
+     * will be made in for this token.
+     */
+    destination_currency_code: string;
+
+    /**
+     * An optional nickname for the payout token to help the user identify it. This is
+     * not used by the provider and is only for the user's reference.
+     */
+    nickname: string | null;
+
+    /**
+     * The name of the payer associated with the payout token.
+     */
+    payer_name: string | null;
+  }
+}
+
+/**
  * The different fee types for a withdrawal.
  */
 export type WithdrawalFeeTypes = 'exclusive' | 'inclusive';
@@ -96,366 +276,6 @@ export type WithdrawalStatus =
   | 'failed'
   | 'canceled'
   | 'denied';
-
-/**
- * A withdrawal request.
- */
-export interface WithdrawalCreateResponse {
-  /**
-   * Internal ID of the withdrawal request.
-   */
-  id: string;
-
-  /**
-   * How much money was attempted to be withdrawn, in a float type.
-   */
-  amount: number;
-
-  /**
-   * When the withdrawal request was created.
-   */
-  created_at: string;
-
-  /**
-   * The currency of the withdrawal request.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The different error codes a payout can be in.
-   */
-  error_code:
-    | 'account_closed'
-    | 'account_does_not_exist'
-    | 'account_information_invalid'
-    | 'account_number_invalid_region'
-    | 'account_frozen'
-    | 'account_lookup_failed'
-    | 'account_not_found'
-    | 'amount_out_of_bounds'
-    | 'attributes_not_validated'
-    | 'b2b_payments_prohibited'
-    | 'bank_statement_required'
-    | 'compliance_review'
-    | 'currency_not_supported'
-    | 'deposit_canceled'
-    | 'deposit_failed'
-    | 'deposit_rejected'
-    | 'destination_unavailable'
-    | 'exceeded_account_limit'
-    | 'expired_quote'
-    | 'generic_payout_error'
-    | 'technical_problem'
-    | 'identification_number_invalid'
-    | 'invalid_account_number'
-    | 'invalid_bank_code'
-    | 'invalid_beneficiary'
-    | 'invalid_mailing_address'
-    | 'invalid_branch_number'
-    | 'invalid_branch_code'
-    | 'invalid_phone_number'
-    | 'invalid_routing_number'
-    | 'invalid_swift_code'
-    | 'invalid_company_details'
-    | 'manual_cancelation'
-    | 'misc_error'
-    | 'missing_city_and_country'
-    | 'missing_phone_number'
-    | 'missing_remittance_info'
-    | 'payee_name_invalid'
-    | 'receiving_account_locked'
-    | 'rejected_by_compliance'
-    | 'rtp_not_supported'
-    | 'non_transaction_account'
-    | 'source_token_insufficient_funds'
-    | 'ssn_invalid'
-    | 'wallet_screenshot_required'
-    | 'unsupported_region'
-    | null;
-
-  /**
-   * The error message for the withdrawal, if any.
-   */
-  error_message: string | null;
-
-  /**
-   * The estimated availability date for the withdrawal, if any.
-   */
-  estimated_availability: string | null;
-
-  /**
-   * The fee amount that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount.
-   */
-  fee_amount: number;
-
-  /**
-   * The different fee types for a withdrawal.
-   */
-  fee_type: WithdrawalFeeTypes | null;
-
-  /**
-   * The ledger account associated with the withdrawal.
-   */
-  ledger_account: WithdrawalCreateResponse.LedgerAccount;
-
-  /**
-   * The markup fee that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount. This only applies to platform accounts using Whop
-   * Rails.
-   */
-  markup_fee: number;
-
-  /**
-   * The payout token used for the withdrawal, if applicable.
-   */
-  payout_token: WithdrawalCreateResponse.PayoutToken | null;
-
-  /**
-   * The speed of the withdrawal.
-   */
-  speed: WithdrawalSpeeds;
-
-  /**
-   * Status of the withdrawal.
-   */
-  status: WithdrawalStatus;
-
-  /**
-   * The trace code for the payout, if applicable. Provided on ACH transactions when
-   * available.
-   */
-  trace_code: string | null;
-}
-
-export namespace WithdrawalCreateResponse {
-  /**
-   * The ledger account associated with the withdrawal.
-   */
-  export interface LedgerAccount {
-    /**
-     * The ID of the LedgerAccount.
-     */
-    id: string;
-
-    /**
-     * The ID of the company associated with this ledger account.
-     */
-    company_id: string | null;
-  }
-
-  /**
-   * The payout token used for the withdrawal, if applicable.
-   */
-  export interface PayoutToken {
-    /**
-     * The ID of the payout token
-     */
-    id: string;
-
-    /**
-     * The date and time the payout token was created
-     */
-    created_at: string;
-
-    /**
-     * The currency code of the payout destination. This is the currency that payouts
-     * will be made in for this token.
-     */
-    destination_currency_code: string;
-
-    /**
-     * An optional nickname for the payout token to help the user identify it. This is
-     * not used by the provider and is only for the user's reference.
-     */
-    nickname: string | null;
-
-    /**
-     * The name of the payer associated with the payout token.
-     */
-    payer_name: string | null;
-  }
-}
-
-/**
- * A withdrawal request.
- */
-export interface WithdrawalRetrieveResponse {
-  /**
-   * Internal ID of the withdrawal request.
-   */
-  id: string;
-
-  /**
-   * How much money was attempted to be withdrawn, in a float type.
-   */
-  amount: number;
-
-  /**
-   * When the withdrawal request was created.
-   */
-  created_at: string;
-
-  /**
-   * The currency of the withdrawal request.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The different error codes a payout can be in.
-   */
-  error_code:
-    | 'account_closed'
-    | 'account_does_not_exist'
-    | 'account_information_invalid'
-    | 'account_number_invalid_region'
-    | 'account_frozen'
-    | 'account_lookup_failed'
-    | 'account_not_found'
-    | 'amount_out_of_bounds'
-    | 'attributes_not_validated'
-    | 'b2b_payments_prohibited'
-    | 'bank_statement_required'
-    | 'compliance_review'
-    | 'currency_not_supported'
-    | 'deposit_canceled'
-    | 'deposit_failed'
-    | 'deposit_rejected'
-    | 'destination_unavailable'
-    | 'exceeded_account_limit'
-    | 'expired_quote'
-    | 'generic_payout_error'
-    | 'technical_problem'
-    | 'identification_number_invalid'
-    | 'invalid_account_number'
-    | 'invalid_bank_code'
-    | 'invalid_beneficiary'
-    | 'invalid_mailing_address'
-    | 'invalid_branch_number'
-    | 'invalid_branch_code'
-    | 'invalid_phone_number'
-    | 'invalid_routing_number'
-    | 'invalid_swift_code'
-    | 'invalid_company_details'
-    | 'manual_cancelation'
-    | 'misc_error'
-    | 'missing_city_and_country'
-    | 'missing_phone_number'
-    | 'missing_remittance_info'
-    | 'payee_name_invalid'
-    | 'receiving_account_locked'
-    | 'rejected_by_compliance'
-    | 'rtp_not_supported'
-    | 'non_transaction_account'
-    | 'source_token_insufficient_funds'
-    | 'ssn_invalid'
-    | 'wallet_screenshot_required'
-    | 'unsupported_region'
-    | null;
-
-  /**
-   * The error message for the withdrawal, if any.
-   */
-  error_message: string | null;
-
-  /**
-   * The estimated availability date for the withdrawal, if any.
-   */
-  estimated_availability: string | null;
-
-  /**
-   * The fee amount that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount.
-   */
-  fee_amount: number;
-
-  /**
-   * The different fee types for a withdrawal.
-   */
-  fee_type: WithdrawalFeeTypes | null;
-
-  /**
-   * The ledger account associated with the withdrawal.
-   */
-  ledger_account: WithdrawalRetrieveResponse.LedgerAccount;
-
-  /**
-   * The markup fee that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount. This only applies to platform accounts using Whop
-   * Rails.
-   */
-  markup_fee: number;
-
-  /**
-   * The payout token used for the withdrawal, if applicable.
-   */
-  payout_token: WithdrawalRetrieveResponse.PayoutToken | null;
-
-  /**
-   * The speed of the withdrawal.
-   */
-  speed: WithdrawalSpeeds;
-
-  /**
-   * Status of the withdrawal.
-   */
-  status: WithdrawalStatus;
-
-  /**
-   * The trace code for the payout, if applicable. Provided on ACH transactions when
-   * available.
-   */
-  trace_code: string | null;
-}
-
-export namespace WithdrawalRetrieveResponse {
-  /**
-   * The ledger account associated with the withdrawal.
-   */
-  export interface LedgerAccount {
-    /**
-     * The ID of the LedgerAccount.
-     */
-    id: string;
-
-    /**
-     * The ID of the company associated with this ledger account.
-     */
-    company_id: string | null;
-  }
-
-  /**
-   * The payout token used for the withdrawal, if applicable.
-   */
-  export interface PayoutToken {
-    /**
-     * The ID of the payout token
-     */
-    id: string;
-
-    /**
-     * The date and time the payout token was created
-     */
-    created_at: string;
-
-    /**
-     * The currency code of the payout destination. This is the currency that payouts
-     * will be made in for this token.
-     */
-    destination_currency_code: string;
-
-    /**
-     * An optional nickname for the payout token to help the user identify it. This is
-     * not used by the provider and is only for the user's reference.
-     */
-    nickname: string | null;
-
-    /**
-     * The name of the payer associated with the payout token.
-     */
-    payer_name: string | null;
-  }
-}
 
 /**
  * A withdrawal request.
@@ -582,11 +402,10 @@ export interface WithdrawalListParams extends CursorPageParams {
 
 export declare namespace Withdrawals {
   export {
+    type Withdrawal as Withdrawal,
     type WithdrawalFeeTypes as WithdrawalFeeTypes,
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalCreateResponse as WithdrawalCreateResponse,
-    type WithdrawalRetrieveResponse as WithdrawalRetrieveResponse,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalCreateParams as WithdrawalCreateParams,

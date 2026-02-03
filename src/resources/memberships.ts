@@ -117,6 +117,19 @@ export class Memberships extends APIResource {
 export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
 
 /**
+ * The different reasons a user can choose for why they are canceling their
+ * membership.
+ */
+export type CancelOptions =
+  | 'too_expensive'
+  | 'switching'
+  | 'missing_features'
+  | 'technical_issues'
+  | 'bad_experience'
+  | 'other'
+  | 'testing';
+
+/**
  * A membership represents a purchase between a User and a Company for a specific
  * Product.
  */
@@ -136,15 +149,7 @@ export interface MembershipListResponse {
    * The different reasons a user can choose for why they are canceling their
    * membership.
    */
-  cancel_option:
-    | 'too_expensive'
-    | 'switching'
-    | 'missing_features'
-    | 'technical_issues'
-    | 'bad_experience'
-    | 'other'
-    | 'testing'
-    | null;
+  cancel_option: CancelOptions | null;
 
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
@@ -343,15 +348,7 @@ export interface MembershipListParams extends CursorPageParams {
   /**
    * The cancel options to filter the memberships by
    */
-  cancel_options?: Array<
-    | 'too_expensive'
-    | 'switching'
-    | 'missing_features'
-    | 'technical_issues'
-    | 'bad_experience'
-    | 'other'
-    | 'testing'
-  > | null;
+  cancel_options?: Array<CancelOptions> | null;
 
   /**
    * The ID of the company to list memberships for
@@ -431,6 +428,7 @@ export interface MembershipPauseParams {
 
 export declare namespace Memberships {
   export {
+    type CancelOptions as CancelOptions,
     type MembershipListResponse as MembershipListResponse,
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipUpdateParams as MembershipUpdateParams,

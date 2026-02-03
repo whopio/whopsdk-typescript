@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.0.26 (2026-02-03)
+
+Full Changelog: [v0.0.25...v0.0.26](https://github.com/whopio/whopsdk-typescript/compare/v0.0.25...v0.0.26)
+
+### Features
+
+* **api:** api update ([533d067](https://github.com/whopio/whopsdk-typescript/commit/533d0675705ea6e6665cec4bd32d6facc20b50c3))
+* **api:** api update ([cbdb33e](https://github.com/whopio/whopsdk-typescript/commit/cbdb33ec60d51d1bae41f6bb58eb2cdf43b39493))
+* **api:** manual updates ([e7010da](https://github.com/whopio/whopsdk-typescript/commit/e7010daf9e02807f55446963f5ba3cd0e8a3d87e))
+
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([a14b8b5](https://github.com/whopio/whopsdk-typescript/commit/a14b8b5cf907caa8e280cb035016b39ab9f0c5e5))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([ecd3efa](https://github.com/whopio/whopsdk-typescript/commit/ecd3efaf4c086ee9e35433d545277b22e3815e84))
+* **internal:** support oauth authorization code flow for MCP servers ([4f9ac76](https://github.com/whopio/whopsdk-typescript/commit/4f9ac765cb51bf2b82c890606db5a8eb243f43e0))
+
 ## 0.0.25 (2026-01-29)
 
 Full Changelog: [v0.0.24...v0.0.25](https://github.com/whopio/whopsdk-typescript/compare/v0.0.24...v0.0.25)
