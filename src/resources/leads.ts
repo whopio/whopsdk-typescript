@@ -24,7 +24,7 @@ export class Leads extends APIResource {
    * });
    * ```
    */
-  create(body: LeadCreateParams, options?: RequestOptions): APIPromise<LeadCreateResponse> {
+  create(body: LeadCreateParams, options?: RequestOptions): APIPromise<Lead> {
     return this._client.post('/leads', { body, ...options });
   }
 
@@ -45,7 +45,7 @@ export class Leads extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<LeadRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Lead> {
     return this._client.get(path`/leads/${id}`, options);
   }
 
@@ -70,7 +70,7 @@ export class Leads extends APIResource {
     id: string,
     body: LeadUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<LeadUpdateResponse> {
+  ): APIPromise<Lead> {
     return this._client.patch(path`/leads/${id}`, { body, ...options });
   }
 
@@ -107,7 +107,7 @@ export type LeadListResponsesCursorPage = CursorPage<LeadListResponse>;
 /**
  * An object representing a lead (someone who is interested in a whop).
  */
-export interface LeadCreateResponse {
+export interface Lead {
   /**
    * The ID of the lead.
    */
@@ -121,7 +121,7 @@ export interface LeadCreateResponse {
   /**
    * The converted member, if any.
    */
-  member: LeadCreateResponse.Member | null;
+  member: Lead.Member | null;
 
   /**
    * Custom metadata for the lead.
@@ -131,7 +131,7 @@ export interface LeadCreateResponse {
   /**
    * The access pass the lead is interested in, if available.
    */
-  product: LeadCreateResponse.Product | null;
+  product: Lead.Product | null;
 
   /**
    * The referrer URL that brought this lead.
@@ -146,204 +146,10 @@ export interface LeadCreateResponse {
   /**
    * The user who is the lead.
    */
-  user: LeadCreateResponse.User;
+  user: Lead.User;
 }
 
-export namespace LeadCreateResponse {
-  /**
-   * The converted member, if any.
-   */
-  export interface Member {
-    /**
-     * The ID of the member
-     */
-    id: string;
-  }
-
-  /**
-   * The access pass the lead is interested in, if available.
-   */
-  export interface Product {
-    /**
-     * The internal ID of the public product.
-     */
-    id: string;
-
-    /**
-     * The title of the product. Use for Whop 4.0.
-     */
-    title: string;
-  }
-
-  /**
-   * The user who is the lead.
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-
-    /**
-     * The email of the user
-     */
-    email: string | null;
-
-    /**
-     * The name of the user from their Whop account.
-     */
-    name: string | null;
-
-    /**
-     * The username of the user from their Whop account.
-     */
-    username: string;
-  }
-}
-
-/**
- * An object representing a lead (someone who is interested in a whop).
- */
-export interface LeadRetrieveResponse {
-  /**
-   * The ID of the lead.
-   */
-  id: string;
-
-  /**
-   * The timestamp of when the lead was created.
-   */
-  created_at: string;
-
-  /**
-   * The converted member, if any.
-   */
-  member: LeadRetrieveResponse.Member | null;
-
-  /**
-   * Custom metadata for the lead.
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * The access pass the lead is interested in, if available.
-   */
-  product: LeadRetrieveResponse.Product | null;
-
-  /**
-   * The referrer URL that brought this lead.
-   */
-  referrer: string | null;
-
-  /**
-   * The timestamp of when the lead was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The user who is the lead.
-   */
-  user: LeadRetrieveResponse.User;
-}
-
-export namespace LeadRetrieveResponse {
-  /**
-   * The converted member, if any.
-   */
-  export interface Member {
-    /**
-     * The ID of the member
-     */
-    id: string;
-  }
-
-  /**
-   * The access pass the lead is interested in, if available.
-   */
-  export interface Product {
-    /**
-     * The internal ID of the public product.
-     */
-    id: string;
-
-    /**
-     * The title of the product. Use for Whop 4.0.
-     */
-    title: string;
-  }
-
-  /**
-   * The user who is the lead.
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-
-    /**
-     * The email of the user
-     */
-    email: string | null;
-
-    /**
-     * The name of the user from their Whop account.
-     */
-    name: string | null;
-
-    /**
-     * The username of the user from their Whop account.
-     */
-    username: string;
-  }
-}
-
-/**
- * An object representing a lead (someone who is interested in a whop).
- */
-export interface LeadUpdateResponse {
-  /**
-   * The ID of the lead.
-   */
-  id: string;
-
-  /**
-   * The timestamp of when the lead was created.
-   */
-  created_at: string;
-
-  /**
-   * The converted member, if any.
-   */
-  member: LeadUpdateResponse.Member | null;
-
-  /**
-   * Custom metadata for the lead.
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * The access pass the lead is interested in, if available.
-   */
-  product: LeadUpdateResponse.Product | null;
-
-  /**
-   * The referrer URL that brought this lead.
-   */
-  referrer: string | null;
-
-  /**
-   * The timestamp of when the lead was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The user who is the lead.
-   */
-  user: LeadUpdateResponse.User;
-}
-
-export namespace LeadUpdateResponse {
+export namespace Lead {
   /**
    * The converted member, if any.
    */
@@ -571,9 +377,7 @@ export interface LeadListParams extends CursorPageParams {
 
 export declare namespace Leads {
   export {
-    type LeadCreateResponse as LeadCreateResponse,
-    type LeadRetrieveResponse as LeadRetrieveResponse,
-    type LeadUpdateResponse as LeadUpdateResponse,
+    type Lead as Lead,
     type LeadListResponse as LeadListResponse,
     type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
     type LeadCreateParams as LeadCreateParams,

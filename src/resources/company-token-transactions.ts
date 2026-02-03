@@ -31,7 +31,7 @@ export class CompanyTokenTransactions extends APIResource {
   create(
     body: CompanyTokenTransactionCreateParams,
     options?: RequestOptions,
-  ): APIPromise<CompanyTokenTransactionCreateResponse> {
+  ): APIPromise<CompanyTokenTransaction> {
     return this._client.post('/company_token_transactions', { body, ...options });
   }
 
@@ -44,7 +44,7 @@ export class CompanyTokenTransactions extends APIResource {
    * - `member:basic:read`
    * - `company:basic:read`
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<CompanyTokenTransactionRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<CompanyTokenTransaction> {
     return this._client.get(path`/company_token_transactions/${id}`, options);
   }
 
@@ -72,116 +72,14 @@ export class CompanyTokenTransactions extends APIResource {
 export type CompanyTokenTransactionListResponsesCursorPage = CursorPage<CompanyTokenTransactionListResponse>;
 
 /**
- * A token transaction within a company
+ * The type of token transaction
  */
-export interface CompanyTokenTransactionCreateResponse {
-  /**
-   * The ID of the transaction
-   */
-  id: string;
-
-  /**
-   * The transaction amount (always positive)
-   */
-  amount: number;
-
-  /**
-   * The company
-   */
-  company: CompanyTokenTransactionCreateResponse.Company;
-
-  /**
-   * When the transaction was created
-   */
-  created_at: string;
-
-  /**
-   * Optional description
-   */
-  description: string | null;
-
-  /**
-   * Optional idempotency key to prevent duplicate transactions
-   */
-  idempotency_key: string | null;
-
-  /**
-   * For transfers, the ID of the linked transaction
-   */
-  linked_transaction_id: string | null;
-
-  /**
-   * The member
-   */
-  member: CompanyTokenTransactionCreateResponse.Member;
-
-  /**
-   * The type of transaction
-   */
-  transaction_type: 'add' | 'subtract' | 'transfer';
-
-  /**
-   * The user whose balance changed
-   */
-  user: CompanyTokenTransactionCreateResponse.User;
-}
-
-export namespace CompanyTokenTransactionCreateResponse {
-  /**
-   * The company
-   */
-  export interface Company {
-    /**
-     * The ID of the company
-     */
-    id: string;
-
-    /**
-     * The slug/route of the company on the Whop site.
-     */
-    route: string;
-
-    /**
-     * The written name of the company.
-     */
-    title: string;
-  }
-
-  /**
-   * The member
-   */
-  export interface Member {
-    /**
-     * The ID of the member
-     */
-    id: string;
-  }
-
-  /**
-   * The user whose balance changed
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-
-    /**
-     * The name of the user from their Whop account.
-     */
-    name: string | null;
-
-    /**
-     * The username of the user from their Whop account.
-     */
-    username: string;
-  }
-}
+export type BotTokenTransactionTypes = 'add' | 'subtract' | 'transfer';
 
 /**
  * A token transaction within a company
  */
-export interface CompanyTokenTransactionRetrieveResponse {
+export interface CompanyTokenTransaction {
   /**
    * The ID of the transaction
    */
@@ -195,7 +93,7 @@ export interface CompanyTokenTransactionRetrieveResponse {
   /**
    * The company
    */
-  company: CompanyTokenTransactionRetrieveResponse.Company;
+  company: CompanyTokenTransaction.Company;
 
   /**
    * When the transaction was created
@@ -220,20 +118,20 @@ export interface CompanyTokenTransactionRetrieveResponse {
   /**
    * The member
    */
-  member: CompanyTokenTransactionRetrieveResponse.Member;
+  member: CompanyTokenTransaction.Member;
 
   /**
    * The type of transaction
    */
-  transaction_type: 'add' | 'subtract' | 'transfer';
+  transaction_type: BotTokenTransactionTypes;
 
   /**
    * The user whose balance changed
    */
-  user: CompanyTokenTransactionRetrieveResponse.User;
+  user: CompanyTokenTransaction.User;
 }
 
-export namespace CompanyTokenTransactionRetrieveResponse {
+export namespace CompanyTokenTransaction {
   /**
    * The company
    */
@@ -332,7 +230,7 @@ export interface CompanyTokenTransactionListResponse {
   /**
    * The type of transaction
    */
-  transaction_type: 'add' | 'subtract' | 'transfer';
+  transaction_type: BotTokenTransactionTypes;
 
   /**
    * The user whose balance changed
@@ -515,7 +413,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
    * The type of token transaction
    */
-  transaction_type?: 'add' | 'subtract' | 'transfer' | null;
+  transaction_type?: BotTokenTransactionTypes | null;
 
   /**
    * Filter by user ID
@@ -525,8 +423,8 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
 
 export declare namespace CompanyTokenTransactions {
   export {
-    type CompanyTokenTransactionCreateResponse as CompanyTokenTransactionCreateResponse,
-    type CompanyTokenTransactionRetrieveResponse as CompanyTokenTransactionRetrieveResponse,
+    type BotTokenTransactionTypes as BotTokenTransactionTypes,
+    type CompanyTokenTransaction as CompanyTokenTransaction,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,

@@ -22,7 +22,7 @@ export class DmMembers extends APIResource {
    * });
    * ```
    */
-  create(body: DmMemberCreateParams, options?: RequestOptions): APIPromise<DmMemberCreateResponse> {
+  create(body: DmMemberCreateParams, options?: RequestOptions): APIPromise<DmMember> {
     return this._client.post('/dm_members', { body, ...options });
   }
 
@@ -38,7 +38,7 @@ export class DmMembers extends APIResource {
    * const dmMember = await client.dmMembers.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<DmMemberRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<DmMember> {
     return this._client.get(path`/dm_members/${id}`, options);
   }
 
@@ -58,7 +58,7 @@ export class DmMembers extends APIResource {
     id: string,
     body: DmMemberUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<DmMemberUpdateResponse> {
+  ): APIPromise<DmMember> {
     return this._client.patch(path`/dm_members/${id}`, { body, ...options });
   }
 
@@ -106,45 +106,19 @@ export class DmMembers extends APIResource {
 export type DmMemberListResponsesCursorPage = CursorPage<DmMemberListResponse>;
 
 /**
- * Represents a member of a DM channel
+ * The notification preferences for a DMs feed member
  */
-export interface DmMemberCreateResponse {
-  /**
-   * The unique identifier for the entity
-   */
-  id: string;
+export type DmFeedMemberNotificationPreferences = 'all' | 'mentions' | 'none';
 
-  /**
-   * The ID of the DM channel
-   */
-  channel_id: string;
-
-  /**
-   * Timestamp when the member last viewed the channel (in milliseconds since Unix
-   * epoch)
-   */
-  last_viewed_at: string | null;
-
-  /**
-   * The notification preference for this member (all, mentions, none)
-   */
-  notification_preference: 'all' | 'mentions' | 'none';
-
-  /**
-   * The status of the membership (requested, accepted, rejected)
-   */
-  status: 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
-
-  /**
-   * The ID of the user who is a member of the channel
-   */
-  user_id: string;
-}
+/**
+ * The statuses of a DMs feed member
+ */
+export type DmFeedMemberStatuses = 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
 
 /**
  * Represents a member of a DM channel
  */
-export interface DmMemberRetrieveResponse {
+export interface DmMember {
   /**
    * The unique identifier for the entity
    */
@@ -164,48 +138,12 @@ export interface DmMemberRetrieveResponse {
   /**
    * The notification preference for this member (all, mentions, none)
    */
-  notification_preference: 'all' | 'mentions' | 'none';
+  notification_preference: DmFeedMemberNotificationPreferences;
 
   /**
    * The status of the membership (requested, accepted, rejected)
    */
-  status: 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
-
-  /**
-   * The ID of the user who is a member of the channel
-   */
-  user_id: string;
-}
-
-/**
- * Represents a member of a DM channel
- */
-export interface DmMemberUpdateResponse {
-  /**
-   * The unique identifier for the entity
-   */
-  id: string;
-
-  /**
-   * The ID of the DM channel
-   */
-  channel_id: string;
-
-  /**
-   * Timestamp when the member last viewed the channel (in milliseconds since Unix
-   * epoch)
-   */
-  last_viewed_at: string | null;
-
-  /**
-   * The notification preference for this member (all, mentions, none)
-   */
-  notification_preference: 'all' | 'mentions' | 'none';
-
-  /**
-   * The status of the membership (requested, accepted, rejected)
-   */
-  status: 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
+  status: DmFeedMemberStatuses;
 
   /**
    * The ID of the user who is a member of the channel
@@ -236,7 +174,7 @@ export interface DmMemberListResponse {
   /**
    * The status of the membership (requested, accepted, rejected)
    */
-  status: 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
+  status: DmFeedMemberStatuses;
 
   /**
    * The ID of the user who is a member of the channel
@@ -265,12 +203,12 @@ export interface DmMemberUpdateParams {
   /**
    * The notification preferences for a DMs feed member
    */
-  notification_preference?: 'all' | 'mentions' | 'none' | null;
+  notification_preference?: DmFeedMemberNotificationPreferences | null;
 
   /**
    * The statuses of a DMs feed member
    */
-  status?: 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived' | null;
+  status?: DmFeedMemberStatuses | null;
 }
 
 export interface DmMemberListParams extends CursorPageParams {
@@ -297,9 +235,9 @@ export interface DmMemberListParams extends CursorPageParams {
 
 export declare namespace DmMembers {
   export {
-    type DmMemberCreateResponse as DmMemberCreateResponse,
-    type DmMemberRetrieveResponse as DmMemberRetrieveResponse,
-    type DmMemberUpdateResponse as DmMemberUpdateResponse,
+    type DmFeedMemberNotificationPreferences as DmFeedMemberNotificationPreferences,
+    type DmFeedMemberStatuses as DmFeedMemberStatuses,
+    type DmMember as DmMember,
     type DmMemberListResponse as DmMemberListResponse,
     type DmMemberDeleteResponse as DmMemberDeleteResponse,
     type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,

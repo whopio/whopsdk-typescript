@@ -37,6 +37,11 @@ export class Files extends APIResource {
 }
 
 /**
+ * The upload status of a file
+ */
+export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
+
+/**
  * A file that has been uploaded or is pending upload
  */
 export interface FileCreateResponse {
@@ -68,7 +73,7 @@ export interface FileCreateResponse {
   /**
    * The upload status of the file
    */
-  upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+  upload_status: UploadStatus;
 
   /**
    * The presigned URL to upload the file to (only on create)
@@ -108,7 +113,7 @@ export interface FileRetrieveResponse {
   /**
    * The upload status of the file
    */
-  upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+  upload_status: UploadStatus;
 
   /**
    * The URL to access the file
@@ -132,6 +137,7 @@ export interface FileUploadOptions extends RequestOptions {
 
 export declare namespace Files {
   export {
+    type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
     type FileCreateParams as FileCreateParams,
