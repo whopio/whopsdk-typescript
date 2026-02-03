@@ -3,11 +3,13 @@
 import { APIResource } from '../core/resource';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
+import * as PayoutMethodsAPI from './payout-methods';
 import * as RefundsAPI from './refunds';
 import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
+import * as VerificationsAPI from './verifications';
 import * as WithdrawalsAPI from './withdrawals';
-import { Webhook } from 'standardwebhooks';
+import { Webhook as Webhook_ } from 'standardwebhooks';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -46,7 +48,7 @@ export class Webhooks extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<WebhookRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Webhook> {
     return this._client.get(path`/webhooks/${id}`, options);
   }
 
@@ -68,7 +70,7 @@ export class Webhooks extends APIResource {
     id: string,
     body: WebhookUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<WebhookUpdateResponse> {
+  ): APIPromise<Webhook> {
     return this._client.patch(path`/webhooks/${id}`, { body, ...options });
   }
 
@@ -121,7 +123,7 @@ export class Webhooks extends APIResource {
     if (headers !== undefined) {
       const keyStr: string | null = key === undefined ? this._client.webhookKey : key;
       if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
-      const wh = new Webhook(keyStr);
+      const wh = new Webhook_(keyStr);
       wh.verify(body, headers);
     }
     return JSON.parse(body) as UnwrapWebhookEvent;
@@ -131,9 +133,14 @@ export class Webhooks extends APIResource {
 export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>;
 
 /**
+ * The different API versions
+ */
+export type APIVersion = 'v1' | 'v2' | 'v5';
+
+/**
  * A webhook object, which can be configured to be sent updates about a company
  */
-export interface WebhookCreateResponse {
+export interface Webhook {
   /**
    * The ID of the webhook
    */
@@ -142,7 +149,7 @@ export interface WebhookCreateResponse {
   /**
    * The API version for this webhook
    */
-  api_version: 'v1' | 'v2' | 'v5';
+  api_version: APIVersion;
 
   /**
    * Whether or not to send events for child resources. For example, if the webhook
@@ -164,35 +171,7 @@ export interface WebhookCreateResponse {
   /**
    * The number of events this webhooks is configured to receive
    */
-  events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
+  events: Array<WebhookEvent>;
 
   /**
    * The resource ID
@@ -202,35 +181,91 @@ export interface WebhookCreateResponse {
   /**
    * The list of events that can be tested with this webhook
    */
-  testable_events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
+  testable_events: Array<WebhookEvent>;
+
+  /**
+   * The URL the webhook events will be sent to
+   */
+  url: string;
+}
+
+/**
+ * The different event types available
+ */
+export type WebhookEvent =
+  | 'invoice.created'
+  | 'invoice.paid'
+  | 'invoice.past_due'
+  | 'invoice.voided'
+  | 'membership.activated'
+  | 'membership.deactivated'
+  | 'entry.created'
+  | 'entry.approved'
+  | 'entry.denied'
+  | 'entry.deleted'
+  | 'setup_intent.requires_action'
+  | 'setup_intent.succeeded'
+  | 'setup_intent.canceled'
+  | 'withdrawal.created'
+  | 'withdrawal.updated'
+  | 'course_lesson_interaction.completed'
+  | 'payout_method.created'
+  | 'verification.succeeded'
+  | 'payment.created'
+  | 'payment.succeeded'
+  | 'payment.failed'
+  | 'payment.pending'
+  | 'dispute.created'
+  | 'dispute.updated'
+  | 'refund.created'
+  | 'refund.updated'
+  | 'membership.cancel_at_period_end_changed';
+
+/**
+ * A webhook object, which can be configured to be sent updates about a company
+ */
+export interface WebhookCreateResponse {
+  /**
+   * The ID of the webhook
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: APIVersion;
+
+  /**
+   * Whether or not to send events for child resources. For example, if the webhook
+   * is created for a Company, enabling this will only send events from the Company's
+   * sub-merchants (child companies).
+   */
+  child_resource_events: boolean;
+
+  /**
+   * The timestamp of when the webhook was created
+   */
+  created_at: string;
+
+  /**
+   * Whether or not this webhook is turned on or not
+   */
+  enabled: boolean;
+
+  /**
+   * The number of events this webhooks is configured to receive
+   */
+  events: Array<WebhookEvent>;
+
+  /**
+   * The resource ID
+   */
+  resource_id: string;
+
+  /**
+   * The list of events that can be tested with this webhook
+   */
+  testable_events: Array<WebhookEvent>;
 
   /**
    * The URL the webhook events will be sent to
@@ -246,222 +281,6 @@ export interface WebhookCreateResponse {
 /**
  * A webhook object, which can be configured to be sent updates about a company
  */
-export interface WebhookRetrieveResponse {
-  /**
-   * The ID of the webhook
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1' | 'v2' | 'v5';
-
-  /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
-   */
-  child_resource_events: boolean;
-
-  /**
-   * The timestamp of when the webhook was created
-   */
-  created_at: string;
-
-  /**
-   * Whether or not this webhook is turned on or not
-   */
-  enabled: boolean;
-
-  /**
-   * The number of events this webhooks is configured to receive
-   */
-  events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
-
-  /**
-   * The resource ID
-   */
-  resource_id: string;
-
-  /**
-   * The list of events that can be tested with this webhook
-   */
-  testable_events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
-
-  /**
-   * The URL the webhook events will be sent to
-   */
-  url: string;
-}
-
-/**
- * A webhook object, which can be configured to be sent updates about a company
- */
-export interface WebhookUpdateResponse {
-  /**
-   * The ID of the webhook
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1' | 'v2' | 'v5';
-
-  /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
-   */
-  child_resource_events: boolean;
-
-  /**
-   * The timestamp of when the webhook was created
-   */
-  created_at: string;
-
-  /**
-   * Whether or not this webhook is turned on or not
-   */
-  enabled: boolean;
-
-  /**
-   * The number of events this webhooks is configured to receive
-   */
-  events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
-
-  /**
-   * The resource ID
-   */
-  resource_id: string;
-
-  /**
-   * The list of events that can be tested with this webhook
-   */
-  testable_events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
-
-  /**
-   * The URL the webhook events will be sent to
-   */
-  url: string;
-}
-
-/**
- * A webhook object, which can be configured to be sent updates about a company
- */
 export interface WebhookListResponse {
   /**
    * The ID of the webhook
@@ -471,7 +290,7 @@ export interface WebhookListResponse {
   /**
    * The API version for this webhook
    */
-  api_version: 'v1' | 'v2' | 'v5';
+  api_version: APIVersion;
 
   /**
    * Whether or not to send events for child resources. For example, if the webhook
@@ -493,35 +312,7 @@ export interface WebhookListResponse {
   /**
    * The number of events this webhooks is configured to receive
    */
-  events: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  >;
+  events: Array<WebhookEvent>;
 
   /**
    * The URL the webhook events will be sent to
@@ -969,7 +760,7 @@ export interface WithdrawalCreatedWebhookEvent {
   /**
    * A withdrawal request.
    */
-  data: WithdrawalCreatedWebhookEvent.Data;
+  data: WithdrawalsAPI.Withdrawal;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -987,188 +778,6 @@ export interface WithdrawalCreatedWebhookEvent {
   company_id?: string | null;
 }
 
-export namespace WithdrawalCreatedWebhookEvent {
-  /**
-   * A withdrawal request.
-   */
-  export interface Data {
-    /**
-     * Internal ID of the withdrawal request.
-     */
-    id: string;
-
-    /**
-     * How much money was attempted to be withdrawn, in a float type.
-     */
-    amount: number;
-
-    /**
-     * When the withdrawal request was created.
-     */
-    created_at: string;
-
-    /**
-     * The currency of the withdrawal request.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * The different error codes a payout can be in.
-     */
-    error_code:
-      | 'account_closed'
-      | 'account_does_not_exist'
-      | 'account_information_invalid'
-      | 'account_number_invalid_region'
-      | 'account_frozen'
-      | 'account_lookup_failed'
-      | 'account_not_found'
-      | 'amount_out_of_bounds'
-      | 'attributes_not_validated'
-      | 'b2b_payments_prohibited'
-      | 'bank_statement_required'
-      | 'compliance_review'
-      | 'currency_not_supported'
-      | 'deposit_canceled'
-      | 'deposit_failed'
-      | 'deposit_rejected'
-      | 'destination_unavailable'
-      | 'exceeded_account_limit'
-      | 'expired_quote'
-      | 'generic_payout_error'
-      | 'technical_problem'
-      | 'identification_number_invalid'
-      | 'invalid_account_number'
-      | 'invalid_bank_code'
-      | 'invalid_beneficiary'
-      | 'invalid_mailing_address'
-      | 'invalid_branch_number'
-      | 'invalid_branch_code'
-      | 'invalid_phone_number'
-      | 'invalid_routing_number'
-      | 'invalid_swift_code'
-      | 'invalid_company_details'
-      | 'manual_cancelation'
-      | 'misc_error'
-      | 'missing_city_and_country'
-      | 'missing_phone_number'
-      | 'missing_remittance_info'
-      | 'payee_name_invalid'
-      | 'receiving_account_locked'
-      | 'rejected_by_compliance'
-      | 'rtp_not_supported'
-      | 'non_transaction_account'
-      | 'source_token_insufficient_funds'
-      | 'ssn_invalid'
-      | 'wallet_screenshot_required'
-      | 'unsupported_region'
-      | null;
-
-    /**
-     * The error message for the withdrawal, if any.
-     */
-    error_message: string | null;
-
-    /**
-     * The estimated availability date for the withdrawal, if any.
-     */
-    estimated_availability: string | null;
-
-    /**
-     * The fee amount that was charged for the withdrawal. This is in the same currency
-     * as the withdrawal amount.
-     */
-    fee_amount: number;
-
-    /**
-     * The different fee types for a withdrawal.
-     */
-    fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
-
-    /**
-     * The ledger account associated with the withdrawal.
-     */
-    ledger_account: Data.LedgerAccount;
-
-    /**
-     * The markup fee that was charged for the withdrawal. This is in the same currency
-     * as the withdrawal amount. This only applies to platform accounts using Whop
-     * Rails.
-     */
-    markup_fee: number;
-
-    /**
-     * The payout token used for the withdrawal, if applicable.
-     */
-    payout_token: Data.PayoutToken | null;
-
-    /**
-     * The speed of the withdrawal.
-     */
-    speed: WithdrawalsAPI.WithdrawalSpeeds;
-
-    /**
-     * Status of the withdrawal.
-     */
-    status: WithdrawalsAPI.WithdrawalStatus;
-
-    /**
-     * The trace code for the payout, if applicable. Provided on ACH transactions when
-     * available.
-     */
-    trace_code: string | null;
-  }
-
-  export namespace Data {
-    /**
-     * The ledger account associated with the withdrawal.
-     */
-    export interface LedgerAccount {
-      /**
-       * The ID of the LedgerAccount.
-       */
-      id: string;
-
-      /**
-       * The ID of the company associated with this ledger account.
-       */
-      company_id: string | null;
-    }
-
-    /**
-     * The payout token used for the withdrawal, if applicable.
-     */
-    export interface PayoutToken {
-      /**
-       * The ID of the payout token
-       */
-      id: string;
-
-      /**
-       * The date and time the payout token was created
-       */
-      created_at: string;
-
-      /**
-       * The currency code of the payout destination. This is the currency that payouts
-       * will be made in for this token.
-       */
-      destination_currency_code: string;
-
-      /**
-       * An optional nickname for the payout token to help the user identify it. This is
-       * not used by the provider and is only for the user's reference.
-       */
-      nickname: string | null;
-
-      /**
-       * The name of the payer associated with the payout token.
-       */
-      payer_name: string | null;
-    }
-  }
-}
-
 export interface WithdrawalUpdatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -1183,7 +792,7 @@ export interface WithdrawalUpdatedWebhookEvent {
   /**
    * A withdrawal request.
    */
-  data: WithdrawalUpdatedWebhookEvent.Data;
+  data: WithdrawalsAPI.Withdrawal;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -1199,188 +808,6 @@ export interface WithdrawalUpdatedWebhookEvent {
    * The company ID that this webhook event is associated with
    */
   company_id?: string | null;
-}
-
-export namespace WithdrawalUpdatedWebhookEvent {
-  /**
-   * A withdrawal request.
-   */
-  export interface Data {
-    /**
-     * Internal ID of the withdrawal request.
-     */
-    id: string;
-
-    /**
-     * How much money was attempted to be withdrawn, in a float type.
-     */
-    amount: number;
-
-    /**
-     * When the withdrawal request was created.
-     */
-    created_at: string;
-
-    /**
-     * The currency of the withdrawal request.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * The different error codes a payout can be in.
-     */
-    error_code:
-      | 'account_closed'
-      | 'account_does_not_exist'
-      | 'account_information_invalid'
-      | 'account_number_invalid_region'
-      | 'account_frozen'
-      | 'account_lookup_failed'
-      | 'account_not_found'
-      | 'amount_out_of_bounds'
-      | 'attributes_not_validated'
-      | 'b2b_payments_prohibited'
-      | 'bank_statement_required'
-      | 'compliance_review'
-      | 'currency_not_supported'
-      | 'deposit_canceled'
-      | 'deposit_failed'
-      | 'deposit_rejected'
-      | 'destination_unavailable'
-      | 'exceeded_account_limit'
-      | 'expired_quote'
-      | 'generic_payout_error'
-      | 'technical_problem'
-      | 'identification_number_invalid'
-      | 'invalid_account_number'
-      | 'invalid_bank_code'
-      | 'invalid_beneficiary'
-      | 'invalid_mailing_address'
-      | 'invalid_branch_number'
-      | 'invalid_branch_code'
-      | 'invalid_phone_number'
-      | 'invalid_routing_number'
-      | 'invalid_swift_code'
-      | 'invalid_company_details'
-      | 'manual_cancelation'
-      | 'misc_error'
-      | 'missing_city_and_country'
-      | 'missing_phone_number'
-      | 'missing_remittance_info'
-      | 'payee_name_invalid'
-      | 'receiving_account_locked'
-      | 'rejected_by_compliance'
-      | 'rtp_not_supported'
-      | 'non_transaction_account'
-      | 'source_token_insufficient_funds'
-      | 'ssn_invalid'
-      | 'wallet_screenshot_required'
-      | 'unsupported_region'
-      | null;
-
-    /**
-     * The error message for the withdrawal, if any.
-     */
-    error_message: string | null;
-
-    /**
-     * The estimated availability date for the withdrawal, if any.
-     */
-    estimated_availability: string | null;
-
-    /**
-     * The fee amount that was charged for the withdrawal. This is in the same currency
-     * as the withdrawal amount.
-     */
-    fee_amount: number;
-
-    /**
-     * The different fee types for a withdrawal.
-     */
-    fee_type: WithdrawalsAPI.WithdrawalFeeTypes | null;
-
-    /**
-     * The ledger account associated with the withdrawal.
-     */
-    ledger_account: Data.LedgerAccount;
-
-    /**
-     * The markup fee that was charged for the withdrawal. This is in the same currency
-     * as the withdrawal amount. This only applies to platform accounts using Whop
-     * Rails.
-     */
-    markup_fee: number;
-
-    /**
-     * The payout token used for the withdrawal, if applicable.
-     */
-    payout_token: Data.PayoutToken | null;
-
-    /**
-     * The speed of the withdrawal.
-     */
-    speed: WithdrawalsAPI.WithdrawalSpeeds;
-
-    /**
-     * Status of the withdrawal.
-     */
-    status: WithdrawalsAPI.WithdrawalStatus;
-
-    /**
-     * The trace code for the payout, if applicable. Provided on ACH transactions when
-     * available.
-     */
-    trace_code: string | null;
-  }
-
-  export namespace Data {
-    /**
-     * The ledger account associated with the withdrawal.
-     */
-    export interface LedgerAccount {
-      /**
-       * The ID of the LedgerAccount.
-       */
-      id: string;
-
-      /**
-       * The ID of the company associated with this ledger account.
-       */
-      company_id: string | null;
-    }
-
-    /**
-     * The payout token used for the withdrawal, if applicable.
-     */
-    export interface PayoutToken {
-      /**
-       * The ID of the payout token
-       */
-      id: string;
-
-      /**
-       * The date and time the payout token was created
-       */
-      created_at: string;
-
-      /**
-       * The currency code of the payout destination. This is the currency that payouts
-       * will be made in for this token.
-       */
-      destination_currency_code: string;
-
-      /**
-       * An optional nickname for the payout token to help the user identify it. This is
-       * not used by the provider and is only for the user's reference.
-       */
-      nickname: string | null;
-
-      /**
-       * The name of the payer associated with the payout token.
-       */
-      payer_name: string | null;
-    }
-  }
 }
 
 export interface CourseLessonInteractionCompletedWebhookEvent {
@@ -1519,7 +946,7 @@ export namespace PayoutMethodCreatedWebhookEvent {
       /**
        * The category of the payout destination
        */
-      category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
+      category: PayoutMethodsAPI.PayoutDestinationCategory;
 
       /**
        * The country code of the payout destination
@@ -1579,27 +1006,7 @@ export namespace VerificationSucceededWebhookEvent {
     /**
      * An error code for a verification attempt.
      */
-    last_error_code:
-      | 'abandoned'
-      | 'consent_declined'
-      | 'country_not_supported'
-      | 'device_not_supported'
-      | 'document_expired'
-      | 'document_type_not_supported'
-      | 'document_unverified_other'
-      | 'email_unverified_other'
-      | 'email_verification_declined'
-      | 'id_number_insufficient_document_data'
-      | 'id_number_mismatch'
-      | 'id_number_unverified_other'
-      | 'phone_unverified_other'
-      | 'phone_verification_declined'
-      | 'selfie_document_missing_photo'
-      | 'selfie_face_mismatch'
-      | 'selfie_manipulated'
-      | 'selfie_unverified_other'
-      | 'under_supported_age'
-      | null;
+    last_error_code: VerificationsAPI.VerificationErrorCode | null;
 
     /**
      * The last error reason that occurred during the verification.
@@ -1609,20 +1016,7 @@ export namespace VerificationSucceededWebhookEvent {
     /**
      * The status of the verification.
      */
-    status:
-      | 'requires_input'
-      | 'processing'
-      | 'verified'
-      | 'canceled'
-      | 'created'
-      | 'started'
-      | 'submitted'
-      | 'approved'
-      | 'declined'
-      | 'resubmission_requested'
-      | 'expired'
-      | 'abandoned'
-      | 'review';
+    status: VerificationsAPI.VerificationStatus;
   }
 }
 
@@ -2355,7 +1749,7 @@ export interface WebhookCreateParams {
   /**
    * The different API versions
    */
-  api_version?: 'v1' | 'v2' | 'v5' | null;
+  api_version?: APIVersion | null;
 
   /**
    * Whether or not to send events for child resources. For example, if the webhook
@@ -2372,35 +1766,7 @@ export interface WebhookCreateParams {
   /**
    * The events to send the webhook for.
    */
-  events?: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  > | null;
+  events?: Array<WebhookEvent> | null;
 
   /**
    * The resource to create the webhook for. By default this will use current company
@@ -2412,7 +1778,7 @@ export interface WebhookUpdateParams {
   /**
    * The different API versions
    */
-  api_version?: 'v1' | 'v2' | 'v5' | null;
+  api_version?: APIVersion | null;
 
   /**
    * Whether or not to send events for child resources.
@@ -2427,35 +1793,7 @@ export interface WebhookUpdateParams {
   /**
    * The events to send the webhook for.
    */
-  events?: Array<
-    | 'invoice.created'
-    | 'invoice.paid'
-    | 'invoice.past_due'
-    | 'invoice.voided'
-    | 'membership.activated'
-    | 'membership.deactivated'
-    | 'entry.created'
-    | 'entry.approved'
-    | 'entry.denied'
-    | 'entry.deleted'
-    | 'setup_intent.requires_action'
-    | 'setup_intent.succeeded'
-    | 'setup_intent.canceled'
-    | 'withdrawal.created'
-    | 'withdrawal.updated'
-    | 'course_lesson_interaction.completed'
-    | 'payout_method.created'
-    | 'verification.succeeded'
-    | 'payment.created'
-    | 'payment.succeeded'
-    | 'payment.failed'
-    | 'payment.pending'
-    | 'dispute.created'
-    | 'dispute.updated'
-    | 'refund.created'
-    | 'refund.updated'
-    | 'membership.cancel_at_period_end_changed'
-  > | null;
+  events?: Array<WebhookEvent> | null;
 
   /**
    * The URL to send the webhook to.
@@ -2487,9 +1825,10 @@ export interface WebhookListParams extends CursorPageParams {
 
 export declare namespace Webhooks {
   export {
+    type APIVersion as APIVersion,
+    type Webhook as Webhook,
+    type WebhookEvent as WebhookEvent,
     type WebhookCreateResponse as WebhookCreateResponse,
-    type WebhookRetrieveResponse as WebhookRetrieveResponse,
-    type WebhookUpdateResponse as WebhookUpdateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,

@@ -14,17 +14,14 @@ export class AIChats extends APIResource {
    *
    * - `ai_chat:create`
    */
-  create(
-    body: AIChatCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AIChatCreateResponse> {
+  create(body: AIChatCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AIChat> {
     return this._client.post('/ai_chats', { body, ...options });
   }
 
   /**
    * Fetches a single AI chat by ID
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AIChatRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<AIChat> {
     return this._client.get(path`/ai_chats/${id}`, options);
   }
 
@@ -39,7 +36,7 @@ export class AIChats extends APIResource {
     id: string,
     body: AIChatUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AIChatUpdateResponse> {
+  ): APIPromise<AIChat> {
     return this._client.patch(path`/ai_chats/${id}`, { body, ...options });
   }
 
@@ -70,7 +67,7 @@ export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>;
 /**
  * An AI chat conversation belonging to a user
  */
-export interface AIChatCreateResponse {
+export interface AIChat {
   /**
    * The unique identifier for the AI chat
    */
@@ -109,124 +106,10 @@ export interface AIChatCreateResponse {
   /**
    * The user who owns the AI chat
    */
-  user: AIChatCreateResponse.User;
+  user: AIChat.User;
 }
 
-export namespace AIChatCreateResponse {
-  /**
-   * The user who owns the AI chat
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-  }
-}
-
-/**
- * An AI chat conversation belonging to a user
- */
-export interface AIChatRetrieveResponse {
-  /**
-   * The unique identifier for the AI chat
-   */
-  id: string;
-
-  /**
-   * The total number of tokens used in the chat
-   */
-  blended_token_usage: string;
-
-  /**
-   * When the AI chat was created
-   */
-  created_at: string;
-
-  /**
-   * When the last message was sent
-   */
-  last_message_at: string | null;
-
-  /**
-   * The number of messages in the chat
-   */
-  message_count: number;
-
-  /**
-   * The title of the AI chat
-   */
-  title: string | null;
-
-  /**
-   * When the AI chat was last updated
-   */
-  updated_at: string;
-
-  /**
-   * The user who owns the AI chat
-   */
-  user: AIChatRetrieveResponse.User;
-}
-
-export namespace AIChatRetrieveResponse {
-  /**
-   * The user who owns the AI chat
-   */
-  export interface User {
-    /**
-     * The internal ID of the user.
-     */
-    id: string;
-  }
-}
-
-/**
- * An AI chat conversation belonging to a user
- */
-export interface AIChatUpdateResponse {
-  /**
-   * The unique identifier for the AI chat
-   */
-  id: string;
-
-  /**
-   * The total number of tokens used in the chat
-   */
-  blended_token_usage: string;
-
-  /**
-   * When the AI chat was created
-   */
-  created_at: string;
-
-  /**
-   * When the last message was sent
-   */
-  last_message_at: string | null;
-
-  /**
-   * The number of messages in the chat
-   */
-  message_count: number;
-
-  /**
-   * The title of the AI chat
-   */
-  title: string | null;
-
-  /**
-   * When the AI chat was last updated
-   */
-  updated_at: string;
-
-  /**
-   * The user who owns the AI chat
-   */
-  user: AIChatUpdateResponse.User;
-}
-
-export namespace AIChatUpdateResponse {
+export namespace AIChat {
   /**
    * The user who owns the AI chat
    */
@@ -333,9 +216,7 @@ export interface AIChatListParams extends CursorPageParams {
 
 export declare namespace AIChats {
   export {
-    type AIChatCreateResponse as AIChatCreateResponse,
-    type AIChatRetrieveResponse as AIChatRetrieveResponse,
-    type AIChatUpdateResponse as AIChatUpdateResponse,
+    type AIChat as AIChat,
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,

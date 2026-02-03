@@ -3,9 +3,7 @@
 export * from './shared';
 export {
   AIChats,
-  type AIChatCreateResponse,
-  type AIChatRetrieveResponse,
-  type AIChatUpdateResponse,
+  type AIChat,
   type AIChatListResponse,
   type AIChatDeleteResponse,
   type AIChatCreateParams,
@@ -63,8 +61,8 @@ export {
 } from './companies';
 export {
   CompanyTokenTransactions,
-  type CompanyTokenTransactionCreateResponse,
-  type CompanyTokenTransactionRetrieveResponse,
+  type BotTokenTransactionTypes,
+  type CompanyTokenTransaction,
   type CompanyTokenTransactionListResponse,
   type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListParams,
@@ -131,10 +129,20 @@ export {
   type DisputeListResponsesCursorPage,
 } from './disputes';
 export {
+  DmChannels,
+  type DmChannel,
+  type DmChannelListResponse,
+  type DmChannelDeleteResponse,
+  type DmChannelCreateParams,
+  type DmChannelUpdateParams,
+  type DmChannelListParams,
+  type DmChannelListResponsesCursorPage,
+} from './dm-channels';
+export {
   DmMembers,
-  type DmMemberCreateResponse,
-  type DmMemberRetrieveResponse,
-  type DmMemberUpdateResponse,
+  type DmFeedMemberNotificationPreferences,
+  type DmFeedMemberStatuses,
+  type DmMember,
   type DmMemberListResponse,
   type DmMemberDeleteResponse,
   type DmMemberCreateParams,
@@ -171,7 +179,13 @@ export {
   type FeeMarkupListParams,
   type FeeMarkupListResponsesCursorPage,
 } from './fee-markups';
-export { Files, type FileCreateResponse, type FileRetrieveResponse, type FileCreateParams } from './files';
+export {
+  Files,
+  type UploadStatus,
+  type FileCreateResponse,
+  type FileRetrieveResponse,
+  type FileCreateParams,
+} from './files';
 export {
   ForumPosts,
   type ForumPostVisibilityType,
@@ -196,9 +210,7 @@ export {
 } from './invoices';
 export {
   Leads,
-  type LeadCreateResponse,
-  type LeadRetrieveResponse,
-  type LeadUpdateResponse,
+  type Lead,
   type LeadListResponse,
   type LeadCreateParams,
   type LeadUpdateParams,
@@ -215,6 +227,7 @@ export {
 } from './members';
 export {
   Memberships,
+  type CancelOptions,
   type MembershipListResponse,
   type MembershipUpdateParams,
   type MembershipListParams,
@@ -260,6 +273,7 @@ export {
 } from './payments';
 export {
   PayoutMethods,
+  type PayoutDestinationCategory,
   type PayoutMethodRetrieveResponse,
   type PayoutMethodListResponse,
   type PayoutMethodListParams,
@@ -356,12 +370,18 @@ export {
   type UserCheckAccessResponse,
   type UserCheckAccessParams,
 } from './users';
-export { Verifications, type VerificationRetrieveResponse } from './verifications';
+export {
+  Verifications,
+  type VerificationErrorCode,
+  type VerificationStatus,
+  type VerificationRetrieveResponse,
+} from './verifications';
 export {
   Webhooks,
+  type APIVersion,
+  type Webhook,
+  type WebhookEvent,
   type WebhookCreateResponse,
-  type WebhookRetrieveResponse,
-  type WebhookUpdateResponse,
   type WebhookListResponse,
   type WebhookDeleteResponse,
   type InvoiceCreatedWebhookEvent,
@@ -399,11 +419,10 @@ export {
 } from './webhooks';
 export {
   Withdrawals,
+  type Withdrawal,
   type WithdrawalFeeTypes,
   type WithdrawalSpeeds,
   type WithdrawalStatus,
-  type WithdrawalCreateResponse,
-  type WithdrawalRetrieveResponse,
   type WithdrawalListResponse,
   type WithdrawalCreateParams,
   type WithdrawalListParams,

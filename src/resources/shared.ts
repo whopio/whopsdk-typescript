@@ -3,6 +3,7 @@
 import * as Shared from './shared';
 import * as AppsAPI from './apps';
 import * as CheckoutConfigurationsAPI from './checkout-configurations';
+import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
 
@@ -1780,15 +1781,7 @@ export interface Membership {
    * The different reasons a user can choose for why they are canceling their
    * membership.
    */
-  cancel_option:
-    | 'too_expensive'
-    | 'switching'
-    | 'missing_features'
-    | 'technical_issues'
-    | 'bad_experience'
-    | 'other'
-    | 'testing'
-    | null;
+  cancel_option: MembershipsAPI.CancelOptions | null;
 
   /**
    * The epoch timestamp of when the customer initiated a cancellation.
