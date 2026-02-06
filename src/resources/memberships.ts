@@ -177,6 +177,11 @@ export interface MembershipListResponse {
   currency: Shared.Currency | null;
 
   /**
+   * When the member joined the company.
+   */
+  joined_at: string | null;
+
+  /**
    * The license key for this Membership. This is only present if the membership
    * grants access to an instance of the Whop Software app.
    */
