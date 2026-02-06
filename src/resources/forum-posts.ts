@@ -213,8 +213,8 @@ export interface ForumPostCreateParams {
   parent_id?: string | null;
 
   /**
-   * The amount to paywall this post by. A paywalled post requires the user to
-   * purchase it in order to view its content.
+   * The price in paywall_currency to unlock this post (e.g., 5.00 for $5.00). If
+   * set, users must purchase access to view the post content.
    */
   paywall_amount?: number | null;
 

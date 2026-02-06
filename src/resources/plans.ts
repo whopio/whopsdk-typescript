@@ -129,7 +129,7 @@ export interface PlanListResponse {
   id: string;
 
   /**
-   * The interval at which the plan charges (renewal plans).
+   * The interval in days at which the plan charges (renewal plans).
    */
   billing_period: number | null;
 
@@ -154,12 +154,15 @@ export interface PlanListResponse {
   description: string | null;
 
   /**
-   * The interval at which the plan charges (expiration plans).
+   * The number of days until the membership expires (for expiration-based plans).
+   * For example, 365 for a one-year access pass.
    */
   expiration_days: number | null;
 
   /**
-   * The price a person has to pay for a plan on the initial purchase.
+   * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+   * For one-time plans, this is the full price. For renewal plans, this is charged
+   * on top of the first renewal_price.
    */
   initial_price: number;
 
@@ -204,7 +207,8 @@ export interface PlanListResponse {
   release_method: Shared.ReleaseMethod;
 
   /**
-   * The price a person has to pay for a plan on the renewal purchase.
+   * The recurring price charged every billing_period in the plan's base_currency
+   * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
    */
   renewal_price: number;
 
@@ -229,7 +233,8 @@ export interface PlanListResponse {
   trial_period_days: number | null;
 
   /**
-   * Limits/doesn't limit the number of units available for purchase.
+   * When true, the plan has unlimited stock (stock field is ignored). When false,
+   * purchases are limited by the stock field.
    */
   unlimited_stock: boolean;
 
@@ -361,7 +366,7 @@ export interface PlanCreateParams {
   /**
    * An additional amount charged upon first purchase. Use only if a one time payment
    * OR you want to charge an additional amount on top of the renewal price. Provided
-   * as a number in dollars. Eg: 10.43 for $10.43
+   * as a number in the specified currency. Eg: 10.43 for $10.43
    */
   initial_price?: number | null;
 
@@ -399,7 +404,7 @@ export interface PlanCreateParams {
 
   /**
    * The amount the customer is charged every billing period. Use only if a recurring
-   * payment. Provided as a number in dollars. Eg: 10.43 for $10.43
+   * payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43
    */
   renewal_price?: number | null;
 
@@ -424,7 +429,8 @@ export interface PlanCreateParams {
   trial_period_days?: number | null;
 
   /**
-   * Limits/doesn't limit the number of units available for purchase.
+   * When true, the plan has unlimited stock (stock field is ignored). When false,
+   * purchases are limited by the stock field.
    */
   unlimited_stock?: boolean | null;
 
@@ -507,7 +513,7 @@ export namespace PlanCreateParams {
 
 export interface PlanUpdateParams {
   /**
-   * The interval at which the plan charges (renewal plans).
+   * The interval in days at which the plan charges (renewal plans).
    */
   billing_period?: number | null;
 
@@ -527,7 +533,8 @@ export interface PlanUpdateParams {
   description?: string | null;
 
   /**
-   * The interval at which the plan charges (expiration plans).
+   * The number of days until the membership expires (for expiration-based plans).
+   * For example, 365 for a one-year access pass.
    */
   expiration_days?: number | null;
 
@@ -537,7 +544,8 @@ export interface PlanUpdateParams {
   image?: PlanUpdateParams.Image | null;
 
   /**
-   * An additional amount charged upon first purchase.
+   * An additional amount charged upon first purchase. Provided as a number in the
+   * specified currency. Eg: 10.43 for $10.43 USD.
    */
   initial_price?: number | null;
 
@@ -569,7 +577,8 @@ export interface PlanUpdateParams {
   payment_method_configuration?: PlanUpdateParams.PaymentMethodConfiguration | null;
 
   /**
-   * The amount the customer is charged every billing period.
+   * The amount the customer is charged every billing period. Provided as a number in
+   * the specified currency. Eg: 10.43 for $10.43 USD.
    */
   renewal_price?: number | null;
 
@@ -580,13 +589,13 @@ export interface PlanUpdateParams {
 
   /**
    * The price to display with a strikethrough for the initial price. Provided as a
-   * number in dollars. Eg: 19.99 for $19.99
+   * number in the specified currency. Eg: 19.99 for $19.99
    */
   strike_through_initial_price?: number | null;
 
   /**
    * The price to display with a strikethrough for the renewal price. Provided as a
-   * number in dollars. Eg: 19.99 for $19.99
+   * number in the specified currency. Eg: 19.99 for $19.99
    */
   strike_through_renewal_price?: number | null;
 
@@ -601,7 +610,8 @@ export interface PlanUpdateParams {
   trial_period_days?: number | null;
 
   /**
-   * Limits/doesn't limit the number of units available for purchase.
+   * When true, the plan has unlimited stock (stock field is ignored). When false,
+   * purchases are limited by the stock field.
    */
   unlimited_stock?: boolean | null;
 

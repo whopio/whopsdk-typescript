@@ -521,7 +521,7 @@ export namespace CheckoutConfiguration {
     id: string;
 
     /**
-     * The interval at which the plan charges (renewal plans).
+     * The interval in days at which the plan charges (renewal plans).
      */
     billing_period: number | null;
 
@@ -531,12 +531,15 @@ export namespace CheckoutConfiguration {
     currency: Shared.Currency;
 
     /**
-     * The interval at which the plan charges (expiration plans).
+     * The number of days until the membership expires (for expiration-based plans).
+     * For example, 365 for a one-year access pass.
      */
     expiration_days: number | null;
 
     /**
-     * The price a person has to pay for a plan on the initial purchase.
+     * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+     * For one-time plans, this is the full price. For renewal plans, this is charged
+     * on top of the first renewal_price.
      */
     initial_price: number;
 
@@ -551,7 +554,8 @@ export namespace CheckoutConfiguration {
     release_method: Shared.ReleaseMethod;
 
     /**
-     * The price a person has to pay for a plan on the renewal purchase.
+     * The recurring price charged every billing_period in the plan's base_currency
+     * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
      */
     renewal_price: number;
 
@@ -1445,7 +1449,9 @@ export namespace ForumPost {
 }
 
 /**
- * The friendly status of a receipt
+ * The friendly status of a payment. This is a derived status that provides a
+ * human-readable summary of the payment state, combining the underlying status and
+ * substatus fields.
  */
 export type FriendlyReceiptStatus =
   | 'succeeded'
@@ -1830,7 +1836,8 @@ export interface Membership {
   member: Membership.Member | null;
 
   /**
-   * A JSON object used to store software licensing information. Ex. HWID
+   * Custom key-value pairs for the membership (commonly used for software licensing,
+   * e.g., HWID). Max 50 keys, 500 chars per key, 5000 chars per value.
    */
   metadata: { [key: string]: unknown };
 
@@ -2585,7 +2592,9 @@ export namespace Payment {
     id: string;
 
     /**
-     * The amount off (% or flat amount) for the promo.
+     * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+     * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+     * off (e.g., 10.00 means $10.00 off).
      */
     amount_off: number;
 
@@ -2648,7 +2657,7 @@ export interface Plan {
   id: string;
 
   /**
-   * The interval at which the plan charges (renewal plans).
+   * The interval in days at which the plan charges (renewal plans).
    */
   billing_period: number | null;
 
@@ -2683,12 +2692,15 @@ export interface Plan {
   description: string | null;
 
   /**
-   * The interval at which the plan charges (expiration plans).
+   * The number of days until the membership expires (for expiration-based plans).
+   * For example, 365 for a one-year access pass.
    */
   expiration_days: number | null;
 
   /**
-   * The price a person has to pay for a plan on the initial purchase.
+   * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+   * For one-time plans, this is the full price. For renewal plans, this is charged
+   * on top of the first renewal_price.
    */
   initial_price: number;
 
@@ -2733,7 +2745,8 @@ export interface Plan {
   release_method: ReleaseMethod;
 
   /**
-   * The price a person has to pay for a plan on the renewal purchase.
+   * The recurring price charged every billing_period in the plan's base_currency
+   * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
    */
   renewal_price: number;
 
@@ -2763,7 +2776,8 @@ export interface Plan {
   trial_period_days: number | null;
 
   /**
-   * Limits/doesn't limit the number of units available for purchase.
+   * When true, the plan has unlimited stock (stock field is ignored). When false,
+   * purchases are limited by the stock field.
    */
   unlimited_stock: boolean;
 
@@ -3480,7 +3494,8 @@ export interface Transfer {
   id: string;
 
   /**
-   * The amount of the credit transaction transfer
+   * The amount of the transfer. Provided as a number in the specified currency. Eg:
+   * 10.43 for $10.43 USD.
    */
   amount: number;
 
@@ -3510,7 +3525,8 @@ export interface Transfer {
   fee_amount: number | null;
 
   /**
-   * A hash of metadata attached to the transfer
+   * Custom key-value pairs attached to the transfer. Max 50 keys, 500 chars per key,
+   * 5000 chars per value.
    */
   metadata: { [key: string]: unknown } | null;
 
