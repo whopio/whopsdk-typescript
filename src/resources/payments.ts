@@ -253,6 +253,8 @@ export type CardBrands =
   | 'fuel_card'
   | 'dankort'
   | 'carnet'
+  | 'atm_card'
+  | 'china_union_payuzcard'
   | 'unknown';
 
 /**
