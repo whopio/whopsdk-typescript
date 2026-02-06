@@ -1820,6 +1820,11 @@ export interface Membership {
   custom_field_responses: Array<Membership.CustomFieldResponse>;
 
   /**
+   * When the member joined the company.
+   */
+  joined_at: string | null;
+
+  /**
    * The license key for this Membership. This is only present if the membership
    * grants access to an instance of the Whop Software app.
    */
