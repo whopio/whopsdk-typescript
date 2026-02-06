@@ -70,7 +70,8 @@ export interface TopupCreateResponse {
 
 export interface TopupCreateParams {
   /**
-   * The amount to add to the balance.
+   * The amount to add to the balance. Provided as a number in the specified
+   * currency. Eg: 50.00 for $50.00 USD.
    */
   amount: number;
 

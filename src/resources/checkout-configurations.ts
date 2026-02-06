@@ -172,7 +172,7 @@ export namespace CheckoutConfigurationListResponse {
     id: string;
 
     /**
-     * The interval at which the plan charges (renewal plans).
+     * The interval in days at which the plan charges (renewal plans).
      */
     billing_period: number | null;
 
@@ -182,12 +182,15 @@ export namespace CheckoutConfigurationListResponse {
     currency: Shared.Currency;
 
     /**
-     * The interval at which the plan charges (expiration plans).
+     * The number of days until the membership expires (for expiration-based plans).
+     * For example, 365 for a one-year access pass.
      */
     expiration_days: number | null;
 
     /**
-     * The price a person has to pay for a plan on the initial purchase.
+     * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+     * For one-time plans, this is the full price. For renewal plans, this is charged
+     * on top of the first renewal_price.
      */
     initial_price: number;
 
@@ -202,7 +205,8 @@ export namespace CheckoutConfigurationListResponse {
     release_method: Shared.ReleaseMethod;
 
     /**
-     * The price a person has to pay for a plan on the renewal purchase.
+     * The recurring price charged every billing_period in the plan's base_currency
+     * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
      */
     renewal_price: number;
 
@@ -282,13 +286,15 @@ export declare namespace CheckoutConfigurationCreateParams {
 
       /**
        * The application fee amount collected by the platform from this connected
-       * account. Must be less than the total payment amount. Only valid for connected
-       * accounts with a parent company.
+       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
+       * than the total payment amount. Only valid for connected accounts with a parent
+       * company.
        */
       application_fee_amount?: number | null;
 
       /**
-       * The interval at which the plan charges (renewal plans).
+       * The interval in days at which the plan charges (renewal plans). For example, 30
+       * for monthly billing.
        */
       billing_period?: number | null;
 
@@ -303,7 +309,8 @@ export declare namespace CheckoutConfigurationCreateParams {
       description?: string | null;
 
       /**
-       * The interval at which the plan charges (expiration plans).
+       * The number of days until the membership expires (for expiration-based plans).
+       * For example, 365 for a one-year access pass.
        */
       expiration_days?: number | null;
 
@@ -319,7 +326,8 @@ export declare namespace CheckoutConfigurationCreateParams {
       image?: Plan.Image | null;
 
       /**
-       * An additional amount charged upon first purchase.
+       * An additional amount charged upon first purchase. Provided as a number in
+       * dollars (e.g., 10.00 for $10.00).
        */
       initial_price?: number | null;
 
@@ -362,7 +370,8 @@ export declare namespace CheckoutConfigurationCreateParams {
       release_method?: Shared.ReleaseMethod | null;
 
       /**
-       * The amount the customer is charged every billing period.
+       * The amount the customer is charged every billing period. Provided as a number in
+       * dollars (e.g., 9.99 for $9.99/period).
        */
       renewal_price?: number | null;
 

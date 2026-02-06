@@ -108,7 +108,9 @@ export interface PromoCode {
   id: string;
 
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 
@@ -251,7 +253,9 @@ export interface PromoCodeListResponse {
   id: string;
 
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 
@@ -361,7 +365,9 @@ export type PromoCodeDeleteResponse = boolean;
 
 export interface PromoCodeCreateParams {
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 

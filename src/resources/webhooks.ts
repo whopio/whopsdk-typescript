@@ -1255,7 +1255,8 @@ export namespace RefundCreatedWebhookEvent {
     id: string;
 
     /**
-     * The amount of the refund.
+     * The amount of the refund. Provided as a number in the specified currency. Eg:
+     * 10.43 for $10.43 USD.
      */
     amount: number;
 
@@ -1488,7 +1489,8 @@ export namespace RefundUpdatedWebhookEvent {
     id: string;
 
     /**
-     * The amount of the refund.
+     * The amount of the refund. Provided as a number in the specified currency. Eg:
+     * 10.43 for $10.43 USD.
      */
     amount: number;
 

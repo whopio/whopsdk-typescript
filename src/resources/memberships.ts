@@ -193,7 +193,8 @@ export interface MembershipListResponse {
   member: MembershipListResponse.Member | null;
 
   /**
-   * A JSON object used to store software licensing information. Ex. HWID
+   * Custom key-value pairs for the membership (commonly used for software licensing,
+   * e.g., HWID). Max 50 keys, 500 chars per key, 5000 chars per value.
    */
   metadata: { [key: string]: unknown };
 
