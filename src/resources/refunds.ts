@@ -52,7 +52,8 @@ export type PaymentProvider =
   | 'splitit'
   | 'platform_balance'
   | 'multi_psp'
-  | 'adyen';
+  | 'adyen'
+  | 'claritypay';
 
 /**
  * The status of the refund reference.

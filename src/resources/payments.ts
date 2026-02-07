@@ -279,6 +279,7 @@ export type PaymentMethodTypes =
   | 'capchase_pay'
   | 'card'
   | 'cashapp'
+  | 'claritypay'
   | 'coinbase'
   | 'crypto'
   | 'custom'
