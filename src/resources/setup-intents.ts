@@ -53,12 +53,11 @@ export class SetupIntents extends APIResource {
 export type SetupIntentListResponsesCursorPage = CursorPage<SetupIntentListResponse>;
 
 /**
- * An object representing a setup intent, which is a flow for allowing a customer
- * to add a payment method to their account without making a purchase.
+ * A setup intent allows a user to save a payment method without making a purchase.
  */
 export interface SetupIntent {
   /**
-   * The setup intent ID
+   * The unique identifier for the setup intent.
    */
   id: string;
 
@@ -73,7 +72,7 @@ export interface SetupIntent {
   company: SetupIntent.Company | null;
 
   /**
-   * The datetime the payment was created
+   * The datetime the setup intent was created.
    */
   created_at: string;
 
@@ -109,7 +108,7 @@ export namespace SetupIntent {
    */
   export interface CheckoutConfiguration {
     /**
-     * The ID of the checkout configuration
+     * The unique identifier for the checkout session.
      */
     id: string;
   }
@@ -119,7 +118,7 @@ export namespace SetupIntent {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
   }
@@ -129,7 +128,7 @@ export namespace SetupIntent {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
 
@@ -145,7 +144,7 @@ export namespace SetupIntent {
      */
     export interface User {
       /**
-       * The internal ID of the user account.
+       * The unique identifier for the company member user.
        */
       id: string;
 
@@ -171,7 +170,7 @@ export namespace SetupIntent {
    */
   export interface PaymentMethod {
     /**
-     * The ID of the payment method
+     * The unique identifier for the payment token.
      */
     id: string;
 
@@ -181,7 +180,7 @@ export namespace SetupIntent {
     card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment method was created
+     * The datetime the payment token was created.
      */
     created_at: string;
 
@@ -225,12 +224,11 @@ export namespace SetupIntent {
 export type SetupIntentStatus = 'processing' | 'succeeded' | 'canceled' | 'requires_action';
 
 /**
- * An object representing a setup intent, which is a flow for allowing a customer
- * to add a payment method to their account without making a purchase.
+ * A setup intent allows a user to save a payment method without making a purchase.
  */
 export interface SetupIntentListResponse {
   /**
-   * The setup intent ID
+   * The unique identifier for the setup intent.
    */
   id: string;
 
@@ -245,7 +243,7 @@ export interface SetupIntentListResponse {
   company: SetupIntentListResponse.Company | null;
 
   /**
-   * The datetime the payment was created
+   * The datetime the setup intent was created.
    */
   created_at: string;
 
@@ -281,7 +279,7 @@ export namespace SetupIntentListResponse {
    */
   export interface CheckoutConfiguration {
     /**
-     * The ID of the checkout configuration
+     * The unique identifier for the checkout session.
      */
     id: string;
   }
@@ -291,7 +289,7 @@ export namespace SetupIntentListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
   }
@@ -301,7 +299,7 @@ export namespace SetupIntentListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
 
@@ -317,7 +315,7 @@ export namespace SetupIntentListResponse {
      */
     export interface User {
       /**
-       * The internal ID of the user account.
+       * The unique identifier for the company member user.
        */
       id: string;
 
@@ -343,7 +341,7 @@ export namespace SetupIntentListResponse {
    */
   export interface PaymentMethod {
     /**
-     * The ID of the payment method
+     * The unique identifier for the payment token.
      */
     id: string;
 
@@ -353,7 +351,7 @@ export namespace SetupIntentListResponse {
     card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment method was created
+     * The datetime the payment token was created.
      */
     created_at: string;
 

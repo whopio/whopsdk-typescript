@@ -47,7 +47,7 @@ export type MemberListResponsesCursorPage = CursorPage<MemberListResponse>;
  */
 export interface MemberRetrieveResponse {
   /**
-   * The ID of the member
+   * The unique identifier for the company member.
    */
   id: string;
 
@@ -70,7 +70,7 @@ export interface MemberRetrieveResponse {
   company_token_balance: number;
 
   /**
-   * When the member was created
+   * The datetime the company member was created.
    */
   created_at: string;
 
@@ -100,7 +100,7 @@ export interface MemberRetrieveResponse {
   status: Shared.MemberStatuses;
 
   /**
-   * The timestamp of when this member was last updated
+   * The datetime the company member was last updated.
    */
   updated_at: string;
 
@@ -121,7 +121,7 @@ export namespace MemberRetrieveResponse {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -141,7 +141,7 @@ export namespace MemberRetrieveResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user account.
+     * The unique identifier for the company member user.
      */
     id: string;
 
@@ -169,7 +169,7 @@ export namespace MemberRetrieveResponse {
  */
 export interface MemberListResponse {
   /**
-   * The ID of the member
+   * The unique identifier for the company member.
    */
   id: string;
 
@@ -187,7 +187,7 @@ export interface MemberListResponse {
   company_token_balance: number;
 
   /**
-   * When the member was created
+   * The datetime the company member was created.
    */
   created_at: string;
 
@@ -217,7 +217,7 @@ export interface MemberListResponse {
   status: Shared.MemberStatuses;
 
   /**
-   * The timestamp of when this member was last updated
+   * The datetime the company member was last updated.
    */
   updated_at: string;
 
@@ -238,7 +238,7 @@ export namespace MemberListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user account.
+     * The unique identifier for the company member user.
      */
     id: string;
 

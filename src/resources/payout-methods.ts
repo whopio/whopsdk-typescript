@@ -55,7 +55,7 @@ export type PayoutDestinationCategory =
  */
 export interface PayoutMethodRetrieveResponse {
   /**
-   * The ID of the payout token
+   * The unique identifier for the payout token.
    */
   id: string;
 
@@ -71,7 +71,7 @@ export interface PayoutMethodRetrieveResponse {
   company: PayoutMethodRetrieveResponse.Company | null;
 
   /**
-   * The date and time the payout token was created
+   * The datetime the payout token was created.
    */
   created_at: string;
 
@@ -109,7 +109,7 @@ export namespace PayoutMethodRetrieveResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
   }
@@ -140,7 +140,7 @@ export namespace PayoutMethodRetrieveResponse {
  */
 export interface PayoutMethodListResponse {
   /**
-   * The ID of the payout token
+   * The unique identifier for the payout token.
    */
   id: string;
 
@@ -156,7 +156,7 @@ export interface PayoutMethodListResponse {
   company: PayoutMethodListResponse.Company | null;
 
   /**
-   * The date and time the payout token was created
+   * The datetime the payout token was created.
    */
   created_at: string;
 
@@ -194,7 +194,7 @@ export namespace PayoutMethodListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
   }

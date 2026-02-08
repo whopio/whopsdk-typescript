@@ -46,7 +46,7 @@ export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserLis
  */
 export interface AuthorizedUserRetrieveResponse {
   /**
-   * A unique ID representing the authorized user object.
+   * The unique identifier for the authorized user.
    */
   id: string;
 
@@ -72,7 +72,7 @@ export namespace AuthorizedUserRetrieveResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -87,7 +87,7 @@ export namespace AuthorizedUserRetrieveResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -113,7 +113,7 @@ export namespace AuthorizedUserRetrieveResponse {
  */
 export interface AuthorizedUserListResponse {
   /**
-   * A unique ID representing the authorized user object.
+   * The unique identifier for the authorized user.
    */
   id: string;
 
@@ -139,7 +139,7 @@ export namespace AuthorizedUserListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -154,7 +154,7 @@ export namespace AuthorizedUserListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

@@ -90,11 +90,12 @@ export class Disputes extends APIResource {
 export type DisputeListResponsesCursorPage = CursorPage<DisputeListResponse>;
 
 /**
- * An object representing a dispute against a company.
+ * A dispute is a chargeback or payment challenge filed against a company,
+ * including evidence and response status.
  */
 export interface Dispute {
   /**
-   * The internal ID of the dispute.
+   * The unique identifier for the dispute.
    */
   id: string;
 
@@ -129,7 +130,7 @@ export interface Dispute {
   company: Dispute.Company | null;
 
   /**
-   * When it was made.
+   * The datetime the dispute was created.
    */
   created_at: string | null;
 
@@ -265,7 +266,7 @@ export namespace Dispute {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -306,7 +307,7 @@ export namespace Dispute {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
 
@@ -326,7 +327,7 @@ export namespace Dispute {
     card_last4: string | null;
 
     /**
-     * The datetime the payment was created
+     * The datetime the payment was created.
      */
     created_at: string;
 
@@ -387,7 +388,7 @@ export namespace Dispute {
      */
     export interface Member {
       /**
-       * The ID of the member
+       * The unique identifier for the company member.
        */
       id: string;
 
@@ -402,7 +403,7 @@ export namespace Dispute {
      */
     export interface Membership {
       /**
-       * The internal ID of the membership.
+       * The unique identifier for the membership.
        */
       id: string;
 
@@ -417,7 +418,7 @@ export namespace Dispute {
      */
     export interface User {
       /**
-       * The internal ID of the user.
+       * The unique identifier for the user.
        */
       id: string;
 
@@ -443,7 +444,7 @@ export namespace Dispute {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -453,7 +454,7 @@ export namespace Dispute {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -531,11 +532,12 @@ export type DisputeStatuses =
   | 'other';
 
 /**
- * An object representing a dispute against a company.
+ * A dispute is a chargeback or payment challenge filed against a company,
+ * including evidence and response status.
  */
 export interface DisputeListResponse {
   /**
-   * The internal ID of the dispute.
+   * The unique identifier for the dispute.
    */
   id: string;
 
@@ -550,7 +552,7 @@ export interface DisputeListResponse {
   company: DisputeListResponse.Company | null;
 
   /**
-   * When it was made.
+   * The datetime the dispute was created.
    */
   created_at: string | null;
 
@@ -606,7 +608,7 @@ export namespace DisputeListResponse {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -621,7 +623,7 @@ export namespace DisputeListResponse {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
   }
@@ -631,7 +633,7 @@ export namespace DisputeListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -641,7 +643,7 @@ export namespace DisputeListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 

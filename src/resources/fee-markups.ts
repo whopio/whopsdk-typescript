@@ -84,12 +84,12 @@ export type FeeMarkupType =
  */
 export interface FeeMarkupCreateResponse {
   /**
-   * The unique identifier of the fee markup.
+   * The unique identifier for the fee markup.
    */
   id: string;
 
   /**
-   * When this fee markup was created.
+   * The datetime the fee markup was created.
    */
   created_at: string;
 
@@ -114,7 +114,7 @@ export interface FeeMarkupCreateResponse {
   percentage_fee: number | null;
 
   /**
-   * When this fee markup was last updated.
+   * The datetime the fee markup was last updated.
    */
   updated_at: string;
 }
@@ -124,12 +124,12 @@ export interface FeeMarkupCreateResponse {
  */
 export interface FeeMarkupListResponse {
   /**
-   * The unique identifier of the fee markup.
+   * The unique identifier for the fee markup.
    */
   id: string;
 
   /**
-   * When this fee markup was created.
+   * The datetime the fee markup was created.
    */
   created_at: string;
 
@@ -154,7 +154,7 @@ export interface FeeMarkupListResponse {
   percentage_fee: number | null;
 
   /**
-   * When this fee markup was last updated.
+   * The datetime the fee markup was last updated.
    */
   updated_at: string;
 }

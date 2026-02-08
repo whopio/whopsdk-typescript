@@ -19,11 +19,12 @@ export type AccessLevel = 'no_access' | 'admin' | 'customer';
 export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
 
 /**
- * An object representing an app
+ * An app is an integration built on Whop. Apps can serve consumers as experiences
+ * within products, or serve companies as business tools.
  */
 export interface App {
   /**
-   * The ID of the app
+   * The unique identifier for the app.
    */
   id: string;
 
@@ -126,7 +127,7 @@ export namespace App {
    */
   export interface APIKey {
     /**
-     * The ID of this API key
+     * The unique identifier for the private api key.
      */
     id: string;
 
@@ -136,7 +137,7 @@ export namespace App {
     token: string;
 
     /**
-     * When this API key was created at
+     * The datetime the private api key was created.
      */
     created_at: string;
   }
@@ -146,7 +147,7 @@ export namespace App {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -161,7 +162,7 @@ export namespace App {
    */
   export interface Creator {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -260,7 +261,7 @@ export namespace App {
  */
 export interface AppBuild {
   /**
-   * The ID of the app build. It will look like apbu_xxxxx.
+   * The unique identifier for the app build.
    */
   id: string;
 
@@ -271,7 +272,7 @@ export interface AppBuild {
   checksum: string;
 
   /**
-   * When this app build was created.
+   * The datetime the app build was created.
    */
   created_at: string;
 
@@ -410,7 +411,7 @@ export namespace ChatChannel {
    */
   export interface Experience {
     /**
-     * The unique ID representing this experience
+     * The unique identifier for the experience.
      */
     id: string;
 
@@ -422,14 +423,13 @@ export namespace ChatChannel {
 }
 
 /**
- * A checkout configuration object.
- *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
- *         This configuration can be re-used by multiple users.
- *         All successful payments and memberships resulting from a checkout will contain the passed metadata.
+ * A checkout session is a reusable configuration for a checkout, including the
+ * plan, affiliate, and custom metadata. Payments and memberships created from a
+ * checkout session inherit its metadata.
  */
 export interface CheckoutConfiguration {
   /**
-   * The ID of the checkout configuration
+   * The unique identifier for the checkout session.
    */
   id: string;
 
@@ -516,12 +516,12 @@ export namespace CheckoutConfiguration {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
 
     /**
-     * The interval at which the plan charges (renewal plans).
+     * The interval in days at which the plan charges (renewal plans).
      */
     billing_period: number | null;
 
@@ -531,12 +531,15 @@ export namespace CheckoutConfiguration {
     currency: Shared.Currency;
 
     /**
-     * The interval at which the plan charges (expiration plans).
+     * The number of days until the membership expires (for expiration-based plans).
+     * For example, 365 for a one-year access pass.
      */
     expiration_days: number | null;
 
     /**
-     * The price a person has to pay for a plan on the initial purchase.
+     * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+     * For one-time plans, this is the full price. For renewal plans, this is charged
+     * on top of the first renewal_price.
      */
     initial_price: number;
 
@@ -551,7 +554,8 @@ export namespace CheckoutConfiguration {
     release_method: Shared.ReleaseMethod;
 
     /**
-     * The price a person has to pay for a plan on the renewal purchase.
+     * The recurring price charged every billing_period in the plan's base_currency
+     * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
      */
     renewal_price: number;
 
@@ -573,11 +577,12 @@ export namespace CheckoutConfiguration {
 export type CollectionMethod = 'send_invoice' | 'charge_automatically';
 
 /**
- * An object representing a (sanitized) company.
+ * A company is a seller on Whop. Companies own products, manage members, and
+ * receive payouts.
  */
 export interface Company {
   /**
-   * The ID (tag) of the company.
+   * The unique identifier for the company.
    */
   id: string;
 
@@ -587,7 +592,7 @@ export interface Company {
   business_type: BusinessTypes | null;
 
   /**
-   * When the company was created (signed up)
+   * The datetime the company was created.
    */
   created_at: string;
 
@@ -648,7 +653,7 @@ export interface Company {
   title: string;
 
   /**
-   * The time the company was last updated.
+   * The datetime the company was last updated.
    */
   updated_at: string;
 
@@ -675,7 +680,7 @@ export namespace Company {
    */
   export interface OwnerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -695,7 +700,7 @@ export namespace Company {
    */
   export interface SocialLink {
     /**
-     * The ID
+     * The unique identifier for the social link.
      */
     id: string;
 
@@ -725,7 +730,7 @@ export namespace Company {
  */
 export interface CourseLessonInteraction {
   /**
-   * The ID of the lesson interaction
+   * The unique identifier for the lesson interaction.
    */
   id: string;
 
@@ -740,7 +745,7 @@ export interface CourseLessonInteraction {
   course: CourseLessonInteraction.Course;
 
   /**
-   * When the interaction was created
+   * The datetime the lesson interaction was created.
    */
   created_at: string;
 
@@ -761,7 +766,7 @@ export namespace CourseLessonInteraction {
    */
   export interface Course {
     /**
-     * The ID of the course. Looks like cors_XXX
+     * The unique identifier for the course.
      */
     id: string;
 
@@ -782,7 +787,7 @@ export namespace CourseLessonInteraction {
      */
     export interface Experience {
       /**
-       * The unique ID representing this experience
+       * The unique identifier for the experience.
        */
       id: string;
     }
@@ -793,7 +798,7 @@ export namespace CourseLessonInteraction {
    */
   export interface Lesson {
     /**
-     * The ID of the lesson
+     * The unique identifier for the lesson.
      */
     id: string;
 
@@ -814,7 +819,7 @@ export namespace CourseLessonInteraction {
      */
     export interface Chapter {
       /**
-       * The ID of the chapter. Looks like chap_XXX
+       * The unique identifier for the chapter.
        */
       id: string;
     }
@@ -825,7 +830,7 @@ export namespace CourseLessonInteraction {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -846,7 +851,7 @@ export namespace CourseLessonInteraction {
  */
 export interface CourseLessonInteractionListItem {
   /**
-   * The ID of the lesson interaction
+   * The unique identifier for the lesson interaction.
    */
   id: string;
 
@@ -856,7 +861,7 @@ export interface CourseLessonInteractionListItem {
   completed: boolean;
 
   /**
-   * When the interaction was created
+   * The datetime the lesson interaction was created.
    */
   created_at: string;
 
@@ -877,7 +882,7 @@ export namespace CourseLessonInteractionListItem {
    */
   export interface Lesson {
     /**
-     * The ID of the lesson
+     * The unique identifier for the lesson.
      */
     id: string;
 
@@ -898,7 +903,7 @@ export namespace CourseLessonInteractionListItem {
      */
     export interface Chapter {
       /**
-       * The ID of the chapter. Looks like chap_XXX
+       * The unique identifier for the chapter.
        */
       id: string;
     }
@@ -909,7 +914,7 @@ export namespace CourseLessonInteractionListItem {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -1049,16 +1054,16 @@ export type DmsPostTypes = 'regular' | 'system' | 'automated';
 export type EmailNotificationPreferences = 'all_admin_posts' | 'only_weekly_summary' | 'none';
 
 /**
- * An object representing an entry in a waitlist.
+ * An entry represents a user's signup for a waitlisted plan.
  */
 export interface Entry {
   /**
-   * The internal ID of the entry.
+   * The unique identifier for the entry.
    */
   id: string;
 
   /**
-   * When the entry was created.
+   * The datetime the entry was created.
    */
   created_at: string | null;
 
@@ -1094,7 +1099,7 @@ export namespace Entry {
    */
   export interface CustomFieldResponse {
     /**
-     * The ID of the custom field item
+     * The unique identifier for the custom field response.
      */
     id: string;
 
@@ -1114,7 +1119,7 @@ export namespace Entry {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -1124,7 +1129,7 @@ export namespace Entry {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -1139,7 +1144,7 @@ export namespace Entry {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -1166,11 +1171,12 @@ export namespace Entry {
 export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
 
 /**
- * An object representing an experience belonging to a company.
+ * An experience is a feature or content module within a product, such as a chat,
+ * course, or app.
  */
 export interface Experience {
   /**
-   * The unique ID representing this experience
+   * The unique identifier for the experience.
    */
   id: string;
 
@@ -1185,7 +1191,7 @@ export interface Experience {
   company: Experience.Company;
 
   /**
-   * The timestamp of when this experience was created.
+   * The datetime the experience was created.
    */
   created_at: string;
 
@@ -1223,7 +1229,7 @@ export namespace Experience {
    */
   export interface App {
     /**
-     * The ID of the app
+     * The unique identifier for the app.
      */
     id: string;
 
@@ -1258,7 +1264,7 @@ export namespace Experience {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -1285,11 +1291,12 @@ export namespace Experience {
   }
 
   /**
-   * Represents a product on whop. Use products to sell anything on the platform.
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -1341,7 +1348,7 @@ export namespace Forum {
    */
   export interface Experience {
     /**
-     * The unique ID representing this experience
+     * The unique identifier for the experience.
      */
     id: string;
 
@@ -1357,7 +1364,11 @@ export namespace Forum {
  */
 export interface ForumPost {
   /**
-   * The unique identifier of the resource.
+   * Represents a unique identifier that is Base64 obfuscated. It is often used to
+   * refetch an object or as key for a cache. The ID type appears in a JSON response
+   * as a String; however, it is not intended to be human-readable. When expected as
+   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+   * input value will be accepted as an ID.
    */
   id: string;
 
@@ -1428,7 +1439,7 @@ export namespace ForumPost {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -1445,7 +1456,9 @@ export namespace ForumPost {
 }
 
 /**
- * The friendly status of a receipt
+ * The friendly status of a payment. This is a derived status that provides a
+ * human-readable summary of the payment state, combining the underlying status and
+ * substatus fields.
  */
 export type FriendlyReceiptStatus =
   | 'succeeded'
@@ -1551,12 +1564,12 @@ export type IndustryTypes =
  */
 export interface Invoice {
   /**
-   * The ID of the invoice.
+   * The unique identifier for the invoice.
    */
   id: string;
 
   /**
-   * The date the invoice was created.
+   * The datetime the invoice was created.
    */
   created_at: string;
 
@@ -1603,7 +1616,7 @@ export namespace Invoice {
    */
   export interface CurrentPlan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
 
@@ -1623,7 +1636,7 @@ export namespace Invoice {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -1644,12 +1657,12 @@ export namespace Invoice {
  */
 export interface InvoiceListItem {
   /**
-   * The ID of the invoice.
+   * The unique identifier for the invoice.
    */
   id: string;
 
   /**
-   * The date the invoice was created.
+   * The datetime the invoice was created.
    */
   created_at: string;
 
@@ -1696,7 +1709,7 @@ export namespace InvoiceListItem {
    */
   export interface CurrentPlan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
 
@@ -1716,7 +1729,7 @@ export namespace InvoiceListItem {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -1762,12 +1775,12 @@ export type MemberMostRecentActions =
 export type MemberStatuses = 'drafted' | 'joined' | 'left';
 
 /**
- * A membership represents a purchase between a User and a Company for a specific
- * Product.
+ * A membership represents an active relationship between a user and a product. It
+ * tracks the user's access, billing status, and renewal schedule.
  */
 export interface Membership {
   /**
-   * The ID of the membership
+   * The unique identifier for the membership.
    */
   id: string;
 
@@ -1799,7 +1812,7 @@ export interface Membership {
   company: Membership.Company;
 
   /**
-   * The timestamp, in seconds, that this Membership was created at.
+   * The datetime the membership was created.
    */
   created_at: string;
 
@@ -1812,6 +1825,11 @@ export interface Membership {
    * The responses to custom checkout questions for this membership.
    */
   custom_field_responses: Array<Membership.CustomFieldResponse>;
+
+  /**
+   * When the member joined the company.
+   */
+  joined_at: string | null;
 
   /**
    * The license key for this Membership. This is only present if the membership
@@ -1830,7 +1848,8 @@ export interface Membership {
   member: Membership.Member | null;
 
   /**
-   * A JSON object used to store software licensing information. Ex. HWID
+   * Custom key-value pairs for the membership (commonly used for software licensing,
+   * e.g., HWID). Max 50 keys, 500 chars per key, 5000 chars per value.
    */
   metadata: { [key: string]: unknown };
 
@@ -1872,7 +1891,7 @@ export interface Membership {
   status: MembershipStatus;
 
   /**
-   * A timestamp of when the membership was last updated
+   * The datetime the membership was last updated.
    */
   updated_at: string;
 
@@ -1888,7 +1907,7 @@ export namespace Membership {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -1903,7 +1922,7 @@ export namespace Membership {
    */
   export interface CustomFieldResponse {
     /**
-     * The ID of the custom field item
+     * The unique identifier for the custom field response.
      */
     id: string;
 
@@ -1923,7 +1942,7 @@ export namespace Membership {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the member.
      */
     id: string;
   }
@@ -1933,7 +1952,7 @@ export namespace Membership {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -1943,7 +1962,7 @@ export namespace Membership {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -1958,7 +1977,7 @@ export namespace Membership {
    */
   export interface PromoCode {
     /**
-     * The ID of the promo.
+     * The unique identifier for the promo code.
      */
     id: string;
   }
@@ -1968,7 +1987,7 @@ export namespace Membership {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -2008,7 +2027,11 @@ export type MembershipStatus =
  */
 export interface Message {
   /**
-   * The unique identifier of the resource.
+   * Represents a unique identifier that is Base64 obfuscated. It is often used to
+   * refetch an object or as key for a cache. The ID type appears in a JSON response
+   * as a String; however, it is not intended to be human-readable. When expected as
+   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+   * input value will be accepted as an ID.
    */
   id: string;
 
@@ -2090,7 +2113,7 @@ export namespace Message {
      */
     export interface Option {
       /**
-       * The ID of the poll option
+       * The unique identifier for the poll option.
        */
       id: string;
 
@@ -2136,7 +2159,7 @@ export namespace Message {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -2178,11 +2201,12 @@ export interface PageInfo {
 }
 
 /**
- * An object representing a receipt for a membership.
+ * A payment represents a completed or attempted charge for a membership. Payments
+ * track the amount, status, currency, and payment method used.
  */
 export interface Payment {
   /**
-   * The payment ID
+   * The unique identifier for the payment.
    */
   id: string;
 
@@ -2227,7 +2251,7 @@ export interface Payment {
   company: Payment.Company | null;
 
   /**
-   * The datetime the payment was created
+   * The datetime the payment was created.
    */
   created_at: string;
 
@@ -2393,7 +2417,7 @@ export namespace Payment {
     amount_refunded: number;
 
     /**
-     * When the application fee was created.
+     * The datetime the application fee was created.
      */
     created_at: string;
 
@@ -2448,7 +2472,7 @@ export namespace Payment {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -2468,7 +2492,7 @@ export namespace Payment {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
 
@@ -2483,7 +2507,7 @@ export namespace Payment {
    */
   export interface Membership {
     /**
-     * The internal ID of the membership.
+     * The unique identifier for the membership.
      */
     id: string;
 
@@ -2498,7 +2522,7 @@ export namespace Payment {
    */
   export interface PaymentMethod {
     /**
-     * The ID of the payment method
+     * The unique identifier for the payment token.
      */
     id: string;
 
@@ -2508,7 +2532,7 @@ export namespace Payment {
     card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment method was created
+     * The datetime the payment token was created.
      */
     created_at: string;
 
@@ -2550,7 +2574,7 @@ export namespace Payment {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -2560,7 +2584,7 @@ export namespace Payment {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -2580,12 +2604,14 @@ export namespace Payment {
    */
   export interface PromoCode {
     /**
-     * The ID of the promo.
+     * The unique identifier for the promo code.
      */
     id: string;
 
     /**
-     * The amount off (% or flat amount) for the promo.
+     * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+     * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+     * off (e.g., 10.00 means $10.00 off).
      */
     amount_off: number;
 
@@ -2615,7 +2641,7 @@ export namespace Payment {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -2637,18 +2663,18 @@ export namespace Payment {
 }
 
 /**
- * A plan for an product. Plans define the core parameters that define a checkout
- * and payment on whop. Use plans to create different ways to price your products
- * (Eg renewal / one_time)
+ * A plan defines pricing and billing terms for a product. Each product can have
+ * multiple plans representing different pricing options, such as one-time
+ * payments, recurring subscriptions, or free trials.
  */
 export interface Plan {
   /**
-   * The internal ID of the plan.
+   * The unique identifier for the plan.
    */
   id: string;
 
   /**
-   * The interval at which the plan charges (renewal plans).
+   * The interval in days at which the plan charges (renewal plans).
    */
   billing_period: number | null;
 
@@ -2663,7 +2689,7 @@ export interface Plan {
   company: Plan.Company | null;
 
   /**
-   * When the plan was created.
+   * The datetime the plan was created.
    */
   created_at: string;
 
@@ -2683,12 +2709,15 @@ export interface Plan {
   description: string | null;
 
   /**
-   * The interval at which the plan charges (expiration plans).
+   * The number of days until the membership expires (for expiration-based plans).
+   * For example, 365 for a one-year access pass.
    */
   expiration_days: number | null;
 
   /**
-   * The price a person has to pay for a plan on the initial purchase.
+   * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
+   * For one-time plans, this is the full price. For renewal plans, this is charged
+   * on top of the first renewal_price.
    */
   initial_price: number;
 
@@ -2733,7 +2762,8 @@ export interface Plan {
   release_method: ReleaseMethod;
 
   /**
-   * The price a person has to pay for a plan on the renewal purchase.
+   * The recurring price charged every billing_period in the plan's base_currency
+   * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
    */
   renewal_price: number;
 
@@ -2763,12 +2793,13 @@ export interface Plan {
   trial_period_days: number | null;
 
   /**
-   * Limits/doesn't limit the number of units available for purchase.
+   * When true, the plan has unlimited stock (stock field is ignored). When false,
+   * purchases are limited by the stock field.
    */
   unlimited_stock: boolean;
 
   /**
-   * When the plan was last updated.
+   * The datetime the plan was last updated.
    */
   updated_at: string;
 
@@ -2784,7 +2815,7 @@ export namespace Plan {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -2799,7 +2830,7 @@ export namespace Plan {
    */
   export interface CustomField {
     /**
-     * The internal ID of the given custom field
+     * The unique identifier for the custom field.
      */
     id: string;
 
@@ -2834,7 +2865,7 @@ export namespace Plan {
    */
   export interface Invoice {
     /**
-     * The ID of the invoice.
+     * The unique identifier for the invoice.
      */
     id: string;
   }
@@ -2870,7 +2901,7 @@ export namespace Plan {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -2887,11 +2918,12 @@ export namespace Plan {
 export type PlanType = 'renewal' | 'one_time';
 
 /**
- * Represents a product on whop. Use products to sell anything on the platform.
+ * A product is a digital good or service sold on Whop. Products contain plans for
+ * pricing and experiences for content delivery.
  */
 export interface Product {
   /**
-   * The internal ID of the public product.
+   * The unique identifier for the product.
    */
   id: string;
 
@@ -2906,7 +2938,7 @@ export interface Product {
   company: Product.Company;
 
   /**
-   * When the product was created.
+   * The datetime the product was created.
    */
   created_at: string;
 
@@ -3000,7 +3032,7 @@ export interface Product {
   title: string;
 
   /**
-   * When the product was updated.
+   * The datetime the product was last updated.
    */
   updated_at: string;
 
@@ -3021,7 +3053,7 @@ export namespace Product {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -3041,7 +3073,7 @@ export namespace Product {
    */
   export interface OwnerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -3061,7 +3093,7 @@ export namespace Product {
    */
   export interface ProductTaxCode {
     /**
-     * The internal ID of the product tax code.
+     * The unique identifier for the product tax code.
      */
     id: string;
 
@@ -3078,11 +3110,12 @@ export namespace Product {
 }
 
 /**
- * Represents a product on whop. Use products to sell anything on the platform.
+ * A product is a digital good or service sold on Whop. Products contain plans for
+ * pricing and experiences for content delivery.
  */
 export interface ProductListItem {
   /**
-   * The internal ID of the public product.
+   * The unique identifier for the product.
    */
   id: string;
 
@@ -3092,7 +3125,7 @@ export interface ProductListItem {
   business_type: BusinessTypes | null;
 
   /**
-   * When the product was created.
+   * The datetime the product was created.
    */
   created_at: string;
 
@@ -3134,7 +3167,7 @@ export interface ProductListItem {
   title: string;
 
   /**
-   * When the product was updated.
+   * The datetime the product was last updated.
    */
   updated_at: string;
 
@@ -3185,7 +3218,7 @@ export namespace Reaction {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -3216,7 +3249,7 @@ export type ReleaseMethod = 'buy_now' | 'waitlist';
  */
 export interface Shipment {
   /**
-   * The ID of the shipment
+   * The unique identifier for the shipment.
    */
   id: string;
 
@@ -3226,7 +3259,7 @@ export interface Shipment {
   carrier: ShipmentCarrier;
 
   /**
-   * The date and time the shipment was created
+   * The datetime the shipment was created.
    */
   created_at: string;
 
@@ -3261,7 +3294,7 @@ export interface Shipment {
   tracking_code: string;
 
   /**
-   * The date and time the shipment was last updated
+   * The datetime the shipment was last updated.
    */
   updated_at: string;
 }
@@ -3272,7 +3305,7 @@ export namespace Shipment {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
   }
@@ -3448,7 +3481,7 @@ export namespace SupportChannel {
    */
   export interface CustomerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -3475,17 +3508,18 @@ export type TaxType = 'inclusive' | 'exclusive' | 'unspecified';
  */
 export interface Transfer {
   /**
-   * The unique identifier of the credit transaction transfer
+   * The unique identifier for the credit transaction transfer.
    */
   id: string;
 
   /**
-   * The amount of the credit transaction transfer
+   * The amount of the transfer. Provided as a number in the specified currency. Eg:
+   * 10.43 for $10.43 USD.
    */
   amount: number;
 
   /**
-   * The timestamp when the credit transaction transfer was created
+   * The datetime the credit transaction transfer was created.
    */
   created_at: string;
 
@@ -3510,7 +3544,8 @@ export interface Transfer {
   fee_amount: number | null;
 
   /**
-   * A hash of metadata attached to the transfer
+   * Custom key-value pairs attached to the transfer. Max 50 keys, 500 chars per key,
+   * 5000 chars per value.
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -3532,11 +3567,12 @@ export interface Transfer {
 
 export namespace Transfer {
   /**
-   * An object representing a (sanitized) user of the site.
+   * A user account on Whop. Contains profile information, identity details, and
+   * social connections.
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -3557,11 +3593,12 @@ export namespace Transfer {
   }
 
   /**
-   * An object representing a (sanitized) company.
+   * A company is a seller on Whop. Companies own products, manage members, and
+   * receive payouts.
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -3582,11 +3619,12 @@ export namespace Transfer {
   }
 
   /**
-   * An object representing a (sanitized) user of the site.
+   * A user account on Whop. Contains profile information, identity details, and
+   * social connections.
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -3607,11 +3645,12 @@ export namespace Transfer {
   }
 
   /**
-   * An object representing a (sanitized) company.
+   * A company is a seller on Whop. Companies own products, manage members, and
+   * receive payouts.
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 

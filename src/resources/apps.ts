@@ -94,11 +94,12 @@ export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
 export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
 
 /**
- * An object representing an app
+ * An app is an integration built on Whop. Apps can serve consumers as experiences
+ * within products, or serve companies as business tools.
  */
 export interface AppListResponse {
   /**
-   * The ID of the app
+   * The unique identifier for the app.
    */
   id: string;
 
@@ -185,7 +186,7 @@ export namespace AppListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -200,7 +201,7 @@ export namespace AppListResponse {
    */
   export interface Creator {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

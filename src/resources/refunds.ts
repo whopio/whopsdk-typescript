@@ -52,7 +52,8 @@ export type PaymentProvider =
   | 'splitit'
   | 'platform_balance'
   | 'multi_psp'
-  | 'adyen';
+  | 'adyen'
+  | 'claritypay';
 
 /**
  * The status of the refund reference.
@@ -73,21 +74,23 @@ export type RefundReferenceType =
 export type RefundStatus = 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
 
 /**
- * An object representing a refund made on a payment.
+ * A refund represents a full or partial reversal of a payment, including the
+ * amount, status, and payment provider.
  */
 export interface RefundRetrieveResponse {
   /**
-   * The ID of the refund.
+   * The unique identifier for the refund.
    */
   id: string;
 
   /**
-   * The amount of the refund.
+   * The amount of the refund. Provided as a number in the specified currency. Eg:
+   * 10.43 for $10.43 USD.
    */
   amount: number;
 
   /**
-   * The time the refund was created.
+   * The datetime the refund was created.
    */
   created_at: string;
 
@@ -138,7 +141,7 @@ export namespace RefundRetrieveResponse {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
 
@@ -158,7 +161,7 @@ export namespace RefundRetrieveResponse {
     card_last4: string | null;
 
     /**
-     * The datetime the payment was created
+     * The datetime the payment was created.
      */
     created_at: string;
 
@@ -219,7 +222,7 @@ export namespace RefundRetrieveResponse {
      */
     export interface Member {
       /**
-       * The ID of the member
+       * The unique identifier for the company member.
        */
       id: string;
 
@@ -234,7 +237,7 @@ export namespace RefundRetrieveResponse {
      */
     export interface Membership {
       /**
-       * The internal ID of the membership.
+       * The unique identifier for the membership.
        */
       id: string;
 
@@ -249,7 +252,7 @@ export namespace RefundRetrieveResponse {
      */
     export interface User {
       /**
-       * The internal ID of the user.
+       * The unique identifier for the user.
        */
       id: string;
 
@@ -272,21 +275,23 @@ export namespace RefundRetrieveResponse {
 }
 
 /**
- * An object representing a refund made on a payment.
+ * A refund represents a full or partial reversal of a payment, including the
+ * amount, status, and payment provider.
  */
 export interface RefundListResponse {
   /**
-   * The ID of the refund.
+   * The unique identifier for the refund.
    */
   id: string;
 
   /**
-   * The amount of the refund.
+   * The amount of the refund. Provided as a number in the specified currency. Eg:
+   * 10.43 for $10.43 USD.
    */
   amount: number;
 
   /**
-   * The time the refund was created.
+   * The datetime the refund was created.
    */
   created_at: string;
 
@@ -337,7 +342,7 @@ export namespace RefundListResponse {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
   }

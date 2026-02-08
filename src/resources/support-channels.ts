@@ -116,7 +116,7 @@ export namespace SupportChannelListResponse {
    */
   export interface CustomerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

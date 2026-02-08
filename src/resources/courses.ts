@@ -115,7 +115,7 @@ export type CourseListResponsesCursorPage = CursorPage<CourseListResponse>;
  */
 export interface Course {
   /**
-   * The ID of the course. Looks like cors_XXX
+   * The unique identifier for the course.
    */
   id: string;
 
@@ -136,7 +136,7 @@ export interface Course {
   cover_image: string | null;
 
   /**
-   * The timestamp of when the course was created
+   * The datetime the course was created.
    */
   created_at: string;
 
@@ -178,7 +178,7 @@ export interface Course {
   title: string | null;
 
   /**
-   * The timestamp of when the course was last updated
+   * The datetime the course was last updated.
    */
   updated_at: string;
 
@@ -195,7 +195,7 @@ export namespace Course {
    */
   export interface Chapter {
     /**
-     * The ID of the chapter. Looks like chap_XXX
+     * The unique identifier for the chapter.
      */
     id: string;
 
@@ -221,7 +221,7 @@ export namespace Course {
      */
     export interface Lesson {
       /**
-       * The ID of the lesson
+       * The unique identifier for the lesson.
        */
       id: string;
 
@@ -356,7 +356,7 @@ export type Languages =
  */
 export interface CourseListResponse {
   /**
-   * The ID of the course. Looks like cors_XXX
+   * The unique identifier for the course.
    */
   id: string;
 
@@ -372,7 +372,7 @@ export interface CourseListResponse {
   cover_image: string | null;
 
   /**
-   * The timestamp of when the course was created
+   * The datetime the course was created.
    */
   created_at: string;
 
@@ -414,7 +414,7 @@ export interface CourseListResponse {
   title: string | null;
 
   /**
-   * The timestamp of when the course was last updated
+   * The datetime the course was last updated.
    */
   updated_at: string;
 

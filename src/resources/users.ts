@@ -28,11 +28,12 @@ export class Users extends APIResource {
 }
 
 /**
- * An object representing a (sanitized) user of the site.
+ * A user account on Whop. Contains profile information, identity details, and
+ * social connections.
  */
 export interface UserRetrieveResponse {
   /**
-   * The internal ID of the user.
+   * The unique identifier for the user.
    */
   id: string;
 
@@ -42,7 +43,7 @@ export interface UserRetrieveResponse {
   bio: string | null;
 
   /**
-   * When the user was created.
+   * The datetime the user was created.
    */
   created_at: string;
 

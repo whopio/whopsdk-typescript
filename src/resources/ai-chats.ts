@@ -14,7 +14,7 @@ export class AIChats extends APIResource {
    *
    * - `ai_chat:create`
    */
-  create(body: AIChatCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AIChat> {
+  create(body: AIChatCreateParams, options?: RequestOptions): APIPromise<AIChat> {
     return this._client.post('/ai_chats', { body, ...options });
   }
 
@@ -69,7 +69,7 @@ export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>;
  */
 export interface AIChat {
   /**
-   * The unique identifier for the AI chat
+   * The unique identifier for the ai chat.
    */
   id: string;
 
@@ -79,7 +79,7 @@ export interface AIChat {
   blended_token_usage: string;
 
   /**
-   * When the AI chat was created
+   * The datetime the ai chat was created.
    */
   created_at: string;
 
@@ -99,7 +99,7 @@ export interface AIChat {
   title: string | null;
 
   /**
-   * When the AI chat was last updated
+   * The datetime the ai chat was last updated.
    */
   updated_at: string;
 
@@ -115,7 +115,7 @@ export namespace AIChat {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
   }
@@ -126,7 +126,7 @@ export namespace AIChat {
  */
 export interface AIChatListResponse {
   /**
-   * The unique identifier for the AI chat
+   * The unique identifier for the ai chat.
    */
   id: string;
 
@@ -136,7 +136,7 @@ export interface AIChatListResponse {
   blended_token_usage: string;
 
   /**
-   * When the AI chat was created
+   * The datetime the ai chat was created.
    */
   created_at: string;
 
@@ -156,7 +156,7 @@ export interface AIChatListResponse {
   title: string | null;
 
   /**
-   * When the AI chat was last updated
+   * The datetime the ai chat was last updated.
    */
   updated_at: string;
 
@@ -172,7 +172,7 @@ export namespace AIChatListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
   }
@@ -185,12 +185,45 @@ export type AIChatDeleteResponse = boolean;
 
 export interface AIChatCreateParams {
   /**
+   * The text content of the first message sent in the chat
+   */
+  message_text: string;
+
+  /**
+   * The ID of the company to set as the current company in context for the AI chat
+   */
+  current_company_id?: string | null;
+
+  /**
+   * The IDs of existing uploaded attachments to include in the first message to the
+   * agent
+   */
+  message_attachments?: Array<AIChatCreateParams.MessageAttachment> | null;
+
+  /**
    * The title of the AI chat
    */
   title?: string | null;
 }
 
+export namespace AIChatCreateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface MessageAttachment {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+}
+
 export interface AIChatUpdateParams {
+  /**
+   * The ID of the company to set as the current company in context for the AI chat
+   */
+  current_company_id?: string | null;
+
   /**
    * The new title for the AI chat
    */

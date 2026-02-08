@@ -178,7 +178,7 @@ export type EmbedType = 'youtube' | 'loom';
  */
 export interface Lesson {
   /**
-   * The ID of the lesson
+   * The unique identifier for the lesson.
    */
   id: string;
 
@@ -198,7 +198,7 @@ export interface Lesson {
   content: string | null;
 
   /**
-   * The timestamp of when the lesson was created
+   * The datetime the lesson was created.
    */
   created_at: string;
 
@@ -260,7 +260,7 @@ export namespace Lesson {
    */
   export interface AssessmentQuestion {
     /**
-     * The ID of the assessment question
+     * The unique identifier for the assessment question.
      */
     id: string;
 
@@ -271,7 +271,7 @@ export namespace Lesson {
     correct_answer: string | null;
 
     /**
-     * When the question was created
+     * The datetime the assessment question was created.
      */
     created_at: string;
 
@@ -333,7 +333,7 @@ export namespace Lesson {
      */
     export interface Option {
       /**
-       * The ID of the assessment question option
+       * The unique identifier for the assessment question option.
        */
       id: string;
 
@@ -423,7 +423,7 @@ export namespace Lesson {
    */
   export interface VideoAsset {
     /**
-     * The ID of the Mux asset
+     * The unique identifier for the mux asset.
      */
     id: string;
 
@@ -438,7 +438,7 @@ export namespace Lesson {
     audio_only: boolean;
 
     /**
-     * The time at which the Mux asset was created
+     * The datetime the mux asset was created.
      */
     created_at: string;
 
@@ -483,7 +483,7 @@ export namespace Lesson {
     status: 'uploading' | 'created' | 'ready';
 
     /**
-     * The time at which the Mux asset was last updated
+     * The datetime the mux asset was last updated.
      */
     updated_at: string;
   }
@@ -505,7 +505,7 @@ export type LessonVisibilities = 'visible' | 'hidden';
  */
 export interface CourseLessonListResponse {
   /**
-   * The ID of the lesson
+   * The unique identifier for the lesson.
    */
   id: string;
 
@@ -515,7 +515,7 @@ export interface CourseLessonListResponse {
   content: string | null;
 
   /**
-   * The timestamp of when the lesson was created
+   * The datetime the lesson was created.
    */
   created_at: string;
 
@@ -594,12 +594,12 @@ export type CourseLessonStartResponse = boolean;
  */
 export interface CourseLessonSubmitAssessmentResponse {
   /**
-   * The ID of the assessment result
+   * The unique identifier for the assessment result.
    */
   id: string;
 
   /**
-   * When the assessment was taken
+   * The datetime the assessment result was created.
    */
   created_at: string;
 
@@ -639,7 +639,7 @@ export interface CourseLessonSubmitAssessmentResponse {
   score_percent: number;
 
   /**
-   * When the assessment result was last updated
+   * The datetime the assessment result was last updated.
    */
   updated_at: string;
 
@@ -655,7 +655,7 @@ export namespace CourseLessonSubmitAssessmentResponse {
    */
   export interface Lesson {
     /**
-     * The ID of the lesson
+     * The unique identifier for the lesson.
      */
     id: string;
 
@@ -670,7 +670,7 @@ export namespace CourseLessonSubmitAssessmentResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

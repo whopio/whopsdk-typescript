@@ -248,7 +248,8 @@ export namespace ProductCreateParams {
     custom_fields?: Array<PlanOptions.CustomField> | null;
 
     /**
-     * An additional amount charged upon first purchase.
+     * An additional amount charged upon first purchase. Provided as a number in the
+     * specified currency. Eg: 10.43 for $10.43 USD.
      */
     initial_price?: number | null;
 
@@ -263,7 +264,8 @@ export namespace ProductCreateParams {
     release_method?: Shared.ReleaseMethod | null;
 
     /**
-     * The amount the customer is charged every billing period.
+     * The amount the customer is charged every billing period. Provided as a number in
+     * the specified currency. Eg: 10.43 for $10.43 USD.
      */
     renewal_price?: number | null;
 

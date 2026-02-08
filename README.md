@@ -31,9 +31,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Whop();
 
 const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
 const paymentListResponse = page.data[0];
@@ -49,9 +47,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
-});
+const client = new Whop();
 
 const params: Whop.PaymentListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
 const [paymentListResponse]: [Whop.PaymentListResponse] = await client.payments.list(params);

@@ -109,12 +109,12 @@ export type LeadListResponsesCursorPage = CursorPage<LeadListResponse>;
  */
 export interface Lead {
   /**
-   * The ID of the lead.
+   * The unique identifier for the lead.
    */
   id: string;
 
   /**
-   * The timestamp of when the lead was created.
+   * The datetime the lead was created.
    */
   created_at: string;
 
@@ -139,7 +139,7 @@ export interface Lead {
   referrer: string | null;
 
   /**
-   * The timestamp of when the lead was last updated.
+   * The datetime the lead was last updated.
    */
   updated_at: string;
 
@@ -155,7 +155,7 @@ export namespace Lead {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
   }
@@ -165,7 +165,7 @@ export namespace Lead {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -180,7 +180,7 @@ export namespace Lead {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -206,12 +206,12 @@ export namespace Lead {
  */
 export interface LeadListResponse {
   /**
-   * The ID of the lead.
+   * The unique identifier for the lead.
    */
   id: string;
 
   /**
-   * The timestamp of when the lead was created.
+   * The datetime the lead was created.
    */
   created_at: string;
 
@@ -236,7 +236,7 @@ export interface LeadListResponse {
   referrer: string | null;
 
   /**
-   * The timestamp of when the lead was last updated.
+   * The datetime the lead was last updated.
    */
   updated_at: string;
 
@@ -252,7 +252,7 @@ export namespace LeadListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
   }
@@ -262,7 +262,7 @@ export namespace LeadListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -277,7 +277,7 @@ export namespace LeadListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

@@ -81,7 +81,7 @@ export type BotTokenTransactionTypes = 'add' | 'subtract' | 'transfer';
  */
 export interface CompanyTokenTransaction {
   /**
-   * The ID of the transaction
+   * The unique identifier for the company token transaction.
    */
   id: string;
 
@@ -96,7 +96,7 @@ export interface CompanyTokenTransaction {
   company: CompanyTokenTransaction.Company;
 
   /**
-   * When the transaction was created
+   * The datetime the company token transaction was created.
    */
   created_at: string;
 
@@ -137,7 +137,7 @@ export namespace CompanyTokenTransaction {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -157,7 +157,7 @@ export namespace CompanyTokenTransaction {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
   }
@@ -167,7 +167,7 @@ export namespace CompanyTokenTransaction {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -188,7 +188,7 @@ export namespace CompanyTokenTransaction {
  */
 export interface CompanyTokenTransactionListResponse {
   /**
-   * The ID of the transaction
+   * The unique identifier for the company token transaction.
    */
   id: string;
 
@@ -203,7 +203,7 @@ export interface CompanyTokenTransactionListResponse {
   company: CompanyTokenTransactionListResponse.Company;
 
   /**
-   * When the transaction was created
+   * The datetime the company token transaction was created.
    */
   created_at: string;
 
@@ -244,7 +244,7 @@ export namespace CompanyTokenTransactionListResponse {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -264,7 +264,7 @@ export namespace CompanyTokenTransactionListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
   }
@@ -274,7 +274,7 @@ export namespace CompanyTokenTransactionListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

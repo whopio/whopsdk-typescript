@@ -9,8 +9,8 @@ const client = new Whop({
 
 describe('resource aiChats', () => {
   // Prism tests are disabled
-  test.skip('create', async () => {
-    const responsePromise = client.aiChats.create();
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.aiChats.create({ message_text: 'message_text' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,13 @@ describe('resource aiChats', () => {
   });
 
   // Prism tests are disabled
-  test.skip('create: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.aiChats.create({ title: 'title' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('create: required and optional params', async () => {
+    const response = await client.aiChats.create({
+      message_text: 'message_text',
+      current_company_id: 'current_company_id',
+      message_attachments: [{ id: 'id' }],
+      title: 'title',
+    });
   });
 
   // Prism tests are disabled
@@ -56,7 +58,11 @@ describe('resource aiChats', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.aiChats.update('aich_xxxxxxxxxxxxx', { title: 'title' }, { path: '/_stainless_unknown_path' }),
+      client.aiChats.update(
+        'aich_xxxxxxxxxxxxx',
+        { current_company_id: 'current_company_id', title: 'title' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 

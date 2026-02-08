@@ -45,7 +45,7 @@ export type CourseStudentListResponsesCursorPage = CursorPage<CourseStudentListR
  */
 export interface CourseStudentRetrieveResponse {
   /**
-   * The ID of the course student. Looks like crsi_XXX
+   * The unique identifier for the course student type.
    */
   id: string;
 
@@ -91,7 +91,7 @@ export namespace CourseStudentRetrieveResponse {
    */
   export interface Course {
     /**
-     * The ID of the course. Looks like cors_XXX
+     * The unique identifier for the course.
      */
     id: string;
 
@@ -112,7 +112,7 @@ export namespace CourseStudentRetrieveResponse {
      */
     export interface Experience {
       /**
-       * The unique ID representing this experience
+       * The unique identifier for the experience.
        */
       id: string;
     }
@@ -123,7 +123,7 @@ export namespace CourseStudentRetrieveResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -144,7 +144,7 @@ export namespace CourseStudentRetrieveResponse {
  */
 export interface CourseStudentListResponse {
   /**
-   * The ID of the course student. Looks like crsi_XXX
+   * The unique identifier for the course student type.
    */
   id: string;
 
@@ -185,7 +185,7 @@ export namespace CourseStudentListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
