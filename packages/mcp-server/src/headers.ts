@@ -20,8 +20,8 @@ export const parseAuthHeaders = (req: IncomingMessage, required?: boolean): Part
   }
 
   const apiKey =
-    Array.isArray(req.headers['x-whopsdk-api-key']) ?
-      req.headers['x-whopsdk-api-key'][0]
-    : req.headers['x-whopsdk-api-key'];
+    Array.isArray(req.headers['x-whop-api-key']) ?
+      req.headers['x-whop-api-key'][0]
+    : req.headers['x-whop-api-key'];
   return { apiKey };
 };

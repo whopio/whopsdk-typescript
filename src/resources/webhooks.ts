@@ -9,6 +9,7 @@ import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
 import * as VerificationsAPI from './verifications';
 import * as WithdrawalsAPI from './withdrawals';
+import { Webhook as Webhook_ } from 'standardwebhooks';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -115,7 +116,16 @@ export class Webhooks extends APIResource {
     return this._client.delete(path`/webhooks/${id}`, options);
   }
 
-  unwrap(body: string): UnwrapWebhookEvent {
+  unwrap(
+    body: string,
+    { headers, key }: { headers: Record<string, string>; key?: string },
+  ): UnwrapWebhookEvent {
+    if (headers !== undefined) {
+      const keyStr: string | null = key === undefined ? this._client.webhookKey : key;
+      if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
+      const wh = new Webhook_(keyStr);
+      wh.verify(body, headers);
+    }
     return JSON.parse(body) as UnwrapWebhookEvent;
   }
 }

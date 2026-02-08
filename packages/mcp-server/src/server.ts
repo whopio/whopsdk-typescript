@@ -92,6 +92,7 @@ export async function initMcpServer(params: {
   };
 
   let client = new Whop({
+    ...{ webhookKey: readEnv('WHOP_WEBHOOK_KEY') },
     logger,
     ...params.clientOptions,
     defaultHeaders: {

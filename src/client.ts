@@ -462,6 +462,13 @@ export interface ClientOptions {
   apiKey?: string | undefined;
 
   /**
+   * When using the SDK in app mode pass this parameter to allow verifying user tokens
+   */
+  appID?: string | null | undefined;
+
+  webhookKey?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['WHOP_BASE_URL'].
@@ -535,6 +542,8 @@ export interface ClientOptions {
  */
 export class Whop {
   apiKey: string;
+  appID: string | null;
+  webhookKey: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -551,7 +560,9 @@ export class Whop {
   /**
    * API Client for interfacing with the Whop API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['WHOPSDK_API_KEY'] ?? undefined]
+   * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
+   * @param {string | null | undefined} [opts.webhookKey]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -562,17 +573,21 @@ export class Whop {
    */
   constructor({
     baseURL = readEnv('WHOP_BASE_URL'),
-    apiKey = readEnv('WHOPSDK_API_KEY'),
+    apiKey = readEnv('WHOP_API_KEY'),
+    appID = readEnv('WHOP_APP_ID') ?? null,
+    webhookKey = null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.WhopError(
-        "The WHOPSDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
+        "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
       );
     }
 
     const options: ClientOptions = {
       apiKey,
+      appID,
+      webhookKey,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -595,6 +610,8 @@ export class Whop {
     this._options = options;
 
     this.apiKey = apiKey;
+    this.appID = appID;
+    this.webhookKey = webhookKey;
   }
 
   /**
@@ -611,6 +628,8 @@ export class Whop {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
+      appID: this.appID,
+      webhookKey: this.webhookKey,
       ...options,
     });
     return client;

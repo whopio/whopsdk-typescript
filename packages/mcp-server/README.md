@@ -9,7 +9,9 @@ It is generated with [Stainless](https://www.stainless.com/).
 You can run the MCP Server directly via `npx`:
 
 ```sh
-export WHOPSDK_API_KEY="My API Key"
+export WHOP_API_KEY="My API Key"
+export WHOP_APP_ID="My App ID"
+export WHOP_WEBHOOK_KEY="My Webhook Key"
 npx -y @whop/mcp@latest
 ```
 
@@ -27,7 +29,9 @@ For clients with a configuration JSON, it might look something like this:
       "command": "npx",
       "args": ["-y", "@whop/mcp"],
       "env": {
-        "WHOPSDK_API_KEY": "My API Key"
+        "WHOP_API_KEY": "My API Key",
+        "WHOP_APP_ID": "My App ID",
+        "WHOP_WEBHOOK_KEY": "My Webhook Key"
       }
     }
   }
@@ -39,14 +43,14 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUFNES19BUElfS0VZIjoiTXkgQVBJIEtleSJ9fQ)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfQVBQX0lEIjoiTXkgQXBwIElEIiwiV0hPUF9XRUJIT09LX0tFWSI6Ik15IFdlYmhvb2sgS2V5In19)
 
 ### VS Code
 
 If you use MCP, you can install the MCP server by clicking the link below. You will need to set your environment variables
 in VS Code's `mcp.json`, which can be found via Command Palette > MCP: Open User Configuration.
 
-[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOPSDK_API_KEY%22%3A%22My%20API%20Key%22%7D%7D)
+[Open VS Code](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22My%20API%20Key%22%2C%22WHOP_APP_ID%22%3A%22My%20App%20ID%22%2C%22WHOP_WEBHOOK_KEY%22%3A%22My%20Webhook%20Key%22%7D%7D)
 
 ### Claude Code
 
@@ -54,7 +58,7 @@ If you use Claude Code, you can install the MCP server by running the command be
 environment variables in Claude Code's `.claude.json`, which can be found in your home directory.
 
 ```
-claude mcp add whop_mcp_api --env WHOPSDK_API_KEY="My API Key" -- npx -y @whop/mcp
+claude mcp add whop_mcp_api --env WHOP_API_KEY="My API Key" WHOP_APP_ID="My App ID" WHOP_WEBHOOK_KEY="My Webhook Key" -- npx -y @whop/mcp
 ```
 
 ## Code Mode
@@ -82,8 +86,8 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
-| ------------------- | ------------------------ | --------------- |
-| `x-whopsdk-api-key` | `apiKey` | bearerAuth |
+| ---------------- | ------------------------ | --------------- |
+| `x-whop-api-key` | `apiKey` | bearerAuth |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:
 

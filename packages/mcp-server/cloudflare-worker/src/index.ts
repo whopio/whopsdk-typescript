@@ -27,6 +27,24 @@ const serverConfig: ServerConfig = {
       placeholder: 'My API Key',
       type: 'password',
     },
+    {
+      key: 'appID',
+      label: 'App ID',
+      description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
+      required: false,
+      default: null,
+      placeholder: 'My App ID',
+      type: 'string',
+    },
+    {
+      key: 'webhookKey',
+      label: 'Webhook Key',
+      description: '',
+      required: false,
+      default: null,
+      placeholder: 'My Webhook Key',
+      type: 'string',
+    },
   ],
 };
 
