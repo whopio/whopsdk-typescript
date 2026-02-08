@@ -31,7 +31,8 @@ For clients with a configuration JSON, it might look something like this:
       "env": {
         "WHOP_API_KEY": "My API Key",
         "WHOP_WEBHOOK_SECRET": "My Webhook Key",
-        "WHOP_APP_ID": "app_xxxxxxxxxxxxxx"
+        "WHOP_APP_ID": "app_xxxxxxxxxxxxxx",
+        "WHOP_WEBHOOK_KEY": "My Webhook Key"
       }
     }
   }
@@ -43,7 +44,7 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUFNES19BUElfS0VZIjoiTXkgQVBJIEtleSJ9fQ)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfQVBQX0lEIjoiTXkgQXBwIElEIiwiV0hPUF9XRUJIT09LX0tFWSI6Ik15IFdlYmhvb2sgS2V5In19)
 
 ### VS Code
 

@@ -548,7 +548,6 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
-
   baseURL: string;
   maxRetries: number;
   timeout: number;
