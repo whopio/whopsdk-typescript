@@ -378,9 +378,10 @@ import {
   Transfers,
 } from './resources/transfers';
 import {
+  User,
   UserCheckAccessParams,
   UserCheckAccessResponse,
-  UserRetrieveResponse,
+  UserUpdateProfileParams,
   Users,
 } from './resources/users';
 import {
@@ -456,19 +457,9 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * The app API key from an app from the /dashboard/developer page
+   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`
    */
   apiKey?: string | undefined;
-
-  /**
-   * Defaults to process.env['WHOP_WEBHOOK_SECRET'].
-   */
-  webhookKey?: string | null | undefined;
-
-  /**
-   * When using the SDK in app mode pass this parameter to allow verifying user tokens
-   */
-  appID?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -544,8 +535,6 @@ export interface ClientOptions {
  */
 export class Whop {
   apiKey: string;
-  webhookKey: string | null;
-  appID: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -562,9 +551,7 @@ export class Whop {
   /**
    * API Client for interfacing with the Whop API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
-   * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
-   * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
+   * @param {string | undefined} [opts.apiKey=process.env['WHOPSDK_API_KEY'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -575,21 +562,17 @@ export class Whop {
    */
   constructor({
     baseURL = readEnv('WHOP_BASE_URL'),
-    apiKey = readEnv('WHOP_API_KEY'),
-    webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
-    appID = readEnv('WHOP_APP_ID') ?? null,
+    apiKey = readEnv('WHOPSDK_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.WhopError(
-        "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
+        "The WHOPSDK_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
       );
     }
 
     const options: ClientOptions = {
       apiKey,
-      webhookKey,
-      appID,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -612,8 +595,6 @@ export class Whop {
     this._options = options;
 
     this.apiKey = apiKey;
-    this.webhookKey = webhookKey;
-    this.appID = appID;
   }
 
   /**
@@ -630,8 +611,6 @@ export class Whop {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
-      webhookKey: this.webhookKey,
-      appID: this.appID,
       ...options,
     });
     return client;
@@ -1101,7 +1080,6 @@ export class Whop {
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
-        'X-Whop-App-Id': this.appID,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
@@ -1469,9 +1447,10 @@ export declare namespace Whop {
 
   export {
     Users as Users,
-    type UserRetrieveResponse as UserRetrieveResponse,
+    type User as User,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserCheckAccessParams as UserCheckAccessParams,
+    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 
   export {
