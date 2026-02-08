@@ -1,4 +1,4 @@
 configured_endpoints: 170
-openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/frostedinc%2Fwhopsdk-8d01ec8edabb284a647f76658ee09c31a8bddf6975ce4047b5be70dbf6955d81.yml
-openapi_spec_hash: 8a431ce0a86ec406ff89fc0f0f6b6c97
+openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/frostedinc%2Fwhopsdk-3ba74c646df9ffa2d45f859972de7ad256d83cc06c56848457833d63475f1934.yml
+openapi_spec_hash: eecea8a0cb561bad9c7dee07e362f331
 config_hash: 48e5bec0f5659595abb38814aa0d9cc2

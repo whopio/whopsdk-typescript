@@ -130,12 +130,12 @@ export type CancelOptions =
   | 'testing';
 
 /**
- * A membership represents a purchase between a User and a Company for a specific
- * Product.
+ * A membership represents an active relationship between a user and a product. It
+ * tracks the user's access, billing status, and renewal schedule.
  */
 export interface MembershipListResponse {
   /**
-   * The ID of the membership
+   * The unique identifier for the membership.
    */
   id: string;
 
@@ -167,7 +167,7 @@ export interface MembershipListResponse {
   company: MembershipListResponse.Company;
 
   /**
-   * The timestamp, in seconds, that this Membership was created at.
+   * The datetime the membership was created.
    */
   created_at: string;
 
@@ -241,7 +241,7 @@ export interface MembershipListResponse {
   status: Shared.MembershipStatus;
 
   /**
-   * A timestamp of when the membership was last updated
+   * The datetime the membership was last updated.
    */
   updated_at: string;
 
@@ -257,7 +257,7 @@ export namespace MembershipListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -272,7 +272,7 @@ export namespace MembershipListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the member.
      */
     id: string;
   }
@@ -282,7 +282,7 @@ export namespace MembershipListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -292,7 +292,7 @@ export namespace MembershipListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -307,7 +307,7 @@ export namespace MembershipListResponse {
    */
   export interface PromoCode {
     /**
-     * The ID of the promo.
+     * The unique identifier for the promo code.
      */
     id: string;
   }
@@ -317,7 +317,7 @@ export namespace MembershipListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

@@ -96,7 +96,7 @@ export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse>;
  */
 export interface AppBuildListResponse {
   /**
-   * The ID of the app build. It will look like apbu_xxxxx.
+   * The unique identifier for the app build.
    */
   id: string;
 
@@ -107,7 +107,7 @@ export interface AppBuildListResponse {
   checksum: string;
 
   /**
-   * When this app build was created.
+   * The datetime the app build was created.
    */
   created_at: string;
 

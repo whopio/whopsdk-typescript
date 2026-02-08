@@ -66,11 +66,12 @@ export class Companies extends APIResource {
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
 
 /**
- * An object representing a (sanitized) company.
+ * A company is a seller on Whop. Companies own products, manage members, and
+ * receive payouts.
  */
 export interface CompanyListResponse {
   /**
-   * The ID (tag) of the company.
+   * The unique identifier for the company.
    */
   id: string;
 
@@ -80,7 +81,7 @@ export interface CompanyListResponse {
   business_type: Shared.BusinessTypes | null;
 
   /**
-   * When the company was created (signed up)
+   * The datetime the company was created.
    */
   created_at: string;
 
@@ -136,7 +137,7 @@ export interface CompanyListResponse {
   title: string;
 
   /**
-   * The time the company was last updated.
+   * The datetime the company was last updated.
    */
   updated_at: string;
 
@@ -163,7 +164,7 @@ export namespace CompanyListResponse {
    */
   export interface OwnerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

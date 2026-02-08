@@ -73,14 +73,13 @@ export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutCo
 export type CheckoutModes = 'payment' | 'setup';
 
 /**
- * A checkout configuration object.
- *         Can be used to create a reusable custom configuration for a checkout, including attaching plans, affiliates and custom metadata to the checkout.
- *         This configuration can be re-used by multiple users.
- *         All successful payments and memberships resulting from a checkout will contain the passed metadata.
+ * A checkout session is a reusable configuration for a checkout, including the
+ * plan, affiliate, and custom metadata. Payments and memberships created from a
+ * checkout session inherit its metadata.
  */
 export interface CheckoutConfigurationListResponse {
   /**
-   * The ID of the checkout configuration
+   * The unique identifier for the checkout session.
    */
   id: string;
 
@@ -167,7 +166,7 @@ export namespace CheckoutConfigurationListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
 

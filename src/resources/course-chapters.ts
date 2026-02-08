@@ -115,7 +115,7 @@ export type CourseChapterListResponsesCursorPage = CursorPage<CourseChapterListR
  */
 export interface CourseChapter {
   /**
-   * The ID of the chapter. Looks like chap_XXX
+   * The unique identifier for the chapter.
    */
   id: string;
 
@@ -141,7 +141,7 @@ export namespace CourseChapter {
    */
   export interface Lesson {
     /**
-     * The ID of the lesson
+     * The unique identifier for the lesson.
      */
     id: string;
 
@@ -162,7 +162,7 @@ export namespace CourseChapter {
  */
 export interface CourseChapterListResponse {
   /**
-   * The ID of the chapter. Looks like chap_XXX
+   * The unique identifier for the chapter.
    */
   id: string;
 

@@ -87,7 +87,7 @@ export namespace ForumListResponse {
    */
   export interface Experience {
     /**
-     * The unique ID representing this experience
+     * The unique identifier for the experience.
      */
     id: string;
 
