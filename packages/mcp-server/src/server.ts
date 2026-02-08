@@ -57,7 +57,7 @@ export const newMcpServer = async () =>
   new McpServer(
     {
       name: 'whop_sdk_api',
-      version: '0.0.26',
+      version: '0.1.0',
     },
     {
       instructions: await getInstructions(),
