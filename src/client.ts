@@ -378,9 +378,10 @@ import {
   Transfers,
 } from './resources/transfers';
 import {
+  User,
   UserCheckAccessParams,
   UserCheckAccessResponse,
-  UserRetrieveResponse,
+  UserUpdateProfileParams,
   Users,
 } from './resources/users';
 import {
@@ -457,7 +458,7 @@ import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
-   * The app API key from an app from the /dashboard/developer page
+   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`
    */
   apiKey?: string | undefined;
 
@@ -1472,9 +1473,10 @@ export declare namespace Whop {
 
   export {
     Users as Users,
-    type UserRetrieveResponse as UserRetrieveResponse,
+    type User as User,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserCheckAccessParams as UserCheckAccessParams,
+    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 
   export {

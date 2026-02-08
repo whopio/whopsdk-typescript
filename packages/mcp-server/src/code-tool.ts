@@ -76,8 +76,6 @@ export function codeTool(): McpTool {
             readEnv('WHOP_API_KEY') ?? client.apiKey,
             'set WHOP_API_KEY environment variable or provide apiKey client option',
           ),
-          WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET') ?? client.webhookKey ?? undefined,
-          WHOP_APP_ID: readEnv('WHOP_APP_ID') ?? client.appID ?? undefined,
           WHOP_BASE_URL: readEnv('WHOP_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },
