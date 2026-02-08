@@ -10,7 +10,7 @@ export class Users extends APIResource {
   /**
    * Retrieves a user by ID or username
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<UserRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, options);
   }
 
@@ -25,13 +25,27 @@ export class Users extends APIResource {
     const { id } = params;
     return this._client.get(path`/users/${id}/access/${resourceID}`, options);
   }
+
+  /**
+   * Updates the current user's profile
+   *
+   * Required permissions:
+   *
+   * - `user:profile:update`
+   */
+  updateProfile(
+    body: UserUpdateProfileParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<User> {
+    return this._client.patch('/users/me', { body, ...options });
+  }
 }
 
 /**
  * A user account on Whop. Contains profile information, identity details, and
  * social connections.
  */
-export interface UserRetrieveResponse {
+export interface User {
   /**
    * The unique identifier for the user.
    */
@@ -55,7 +69,7 @@ export interface UserRetrieveResponse {
   /**
    * The user's profile picture
    */
-  profile_picture: UserRetrieveResponse.ProfilePicture | null;
+  profile_picture: User.ProfilePicture | null;
 
   /**
    * The username of the user from their Whop account.
@@ -63,7 +77,7 @@ export interface UserRetrieveResponse {
   username: string;
 }
 
-export namespace UserRetrieveResponse {
+export namespace User {
   /**
    * The user's profile picture
    */
@@ -98,10 +112,45 @@ export interface UserCheckAccessParams {
   id: string;
 }
 
+export interface UserUpdateProfileParams {
+  /**
+   * User biography
+   */
+  bio?: string | null;
+
+  /**
+   * Display name
+   */
+  name?: string | null;
+
+  /**
+   * Profile picture
+   */
+  profile_picture?: UserUpdateProfileParams.ProfilePicture | null;
+
+  /**
+   * Username (alphanumeric and hyphens)
+   */
+  username?: string | null;
+}
+
+export namespace UserUpdateProfileParams {
+  /**
+   * Profile picture
+   */
+  export interface ProfilePicture {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+}
+
 export declare namespace Users {
   export {
-    type UserRetrieveResponse as UserRetrieveResponse,
+    type User as User,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserCheckAccessParams as UserCheckAccessParams,
+    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 }

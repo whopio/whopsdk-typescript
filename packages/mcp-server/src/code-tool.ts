@@ -72,12 +72,10 @@ export function codeTool(): McpTool {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
         client_envs: JSON.stringify({
-          WHOP_API_KEY: requireValue(
-            readEnv('WHOP_API_KEY') ?? client.apiKey,
-            'set WHOP_API_KEY environment variable or provide apiKey client option',
+          WHOPSDK_API_KEY: requireValue(
+            readEnv('WHOPSDK_API_KEY') ?? client.apiKey,
+            'set WHOPSDK_API_KEY environment variable or provide apiKey client option',
           ),
-          WHOP_WEBHOOK_SECRET: readEnv('WHOP_WEBHOOK_SECRET') ?? client.webhookKey ?? undefined,
-          WHOP_APP_ID: readEnv('WHOP_APP_ID') ?? client.appID ?? undefined,
           WHOP_BASE_URL: readEnv('WHOP_BASE_URL') ?? client.baseURL ?? undefined,
         }),
       },

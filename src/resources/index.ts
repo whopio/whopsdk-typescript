@@ -366,9 +366,10 @@ export {
 } from './transfers';
 export {
   Users,
-  type UserRetrieveResponse,
+  type User,
   type UserCheckAccessResponse,
   type UserCheckAccessParams,
+  type UserUpdateProfileParams,
 } from './users';
 export {
   Verifications,

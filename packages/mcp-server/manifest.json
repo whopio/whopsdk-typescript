@@ -19,29 +19,15 @@
       "command": "node",
       "args": ["${__dirname}/index.js"],
       "env": {
-        "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
-        "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}",
-        "WHOP_APP_ID": "${user_config.WHOP_APP_ID}"
+        "WHOPSDK_API_KEY": "${user_config.WHOPSDK_API_KEY}"
       }
     }
   },
   "user_config": {
-    "WHOP_API_KEY": {
+    "WHOPSDK_API_KEY": {
       "title": "api_key",
-      "description": "The app API key from an app from the /dashboard/developer page",
+      "description": "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`",
       "required": true,
-      "type": "string"
-    },
-    "WHOP_WEBHOOK_SECRET": {
-      "title": "webhook_key",
-      "description": "",
-      "required": false,
-      "type": "string"
-    },
-    "WHOP_APP_ID": {
-      "title": "app_id",
-      "description": "When using the SDK in app mode pass this parameter to allow verifying user tokens",
-      "required": false,
       "type": "string"
     }
   },
