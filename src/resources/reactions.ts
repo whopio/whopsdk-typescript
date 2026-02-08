@@ -94,7 +94,7 @@ export namespace ReactionListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

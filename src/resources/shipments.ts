@@ -79,7 +79,7 @@ export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>;
  */
 export interface ShipmentListResponse {
   /**
-   * The ID of the shipment
+   * The unique identifier for the shipment.
    */
   id: string;
 
@@ -89,7 +89,7 @@ export interface ShipmentListResponse {
   carrier: Shared.ShipmentCarrier;
 
   /**
-   * The date and time the shipment was created
+   * The datetime the shipment was created.
    */
   created_at: string;
 
@@ -124,7 +124,7 @@ export interface ShipmentListResponse {
   tracking_code: string;
 
   /**
-   * The date and time the shipment was last updated
+   * The datetime the shipment was last updated.
    */
   updated_at: string;
 }
@@ -135,7 +135,7 @@ export namespace ShipmentListResponse {
    */
   export interface Payment {
     /**
-     * The payment ID
+     * The unique identifier for the payment.
      */
     id: string;
   }

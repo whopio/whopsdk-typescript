@@ -138,11 +138,12 @@ export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>;
 export type APIVersion = 'v1' | 'v2' | 'v5';
 
 /**
- * A webhook object, which can be configured to be sent updates about a company
+ * A webhook endpoint that receives event notifications for a company via HTTP
+ * POST.
  */
 export interface Webhook {
   /**
-   * The ID of the webhook
+   * The unique identifier for the webhook.
    */
   id: string;
 
@@ -159,7 +160,7 @@ export interface Webhook {
   child_resource_events: boolean;
 
   /**
-   * The timestamp of when the webhook was created
+   * The datetime the webhook was created.
    */
   created_at: string;
 
@@ -222,11 +223,12 @@ export type WebhookEvent =
   | 'membership.cancel_at_period_end_changed';
 
 /**
- * A webhook object, which can be configured to be sent updates about a company
+ * A webhook endpoint that receives event notifications for a company via HTTP
+ * POST.
  */
 export interface WebhookCreateResponse {
   /**
-   * The ID of the webhook
+   * The unique identifier for the webhook.
    */
   id: string;
 
@@ -243,7 +245,7 @@ export interface WebhookCreateResponse {
   child_resource_events: boolean;
 
   /**
-   * The timestamp of when the webhook was created
+   * The datetime the webhook was created.
    */
   created_at: string;
 
@@ -279,11 +281,12 @@ export interface WebhookCreateResponse {
 }
 
 /**
- * A webhook object, which can be configured to be sent updates about a company
+ * A webhook endpoint that receives event notifications for a company via HTTP
+ * POST.
  */
 export interface WebhookListResponse {
   /**
-   * The ID of the webhook
+   * The unique identifier for the webhook.
    */
   id: string;
 
@@ -300,7 +303,7 @@ export interface WebhookListResponse {
   child_resource_events: boolean;
 
   /**
-   * The timestamp of when the webhook was created
+   * The datetime the webhook was created.
    */
   created_at: string;
 
@@ -465,8 +468,8 @@ export interface MembershipActivatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A membership represents a purchase between a User and a Company for a specific
-   * Product.
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
    */
   data: Shared.Membership;
 
@@ -498,8 +501,8 @@ export interface MembershipDeactivatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A membership represents a purchase between a User and a Company for a specific
-   * Product.
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
    */
   data: Shared.Membership;
 
@@ -531,7 +534,7 @@ export interface EntryCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an entry in a waitlist.
+   * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
 
@@ -563,7 +566,7 @@ export interface EntryApprovedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an entry in a waitlist.
+   * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
 
@@ -595,7 +598,7 @@ export interface EntryDeniedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an entry in a waitlist.
+   * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
 
@@ -627,7 +630,7 @@ export interface EntryDeletedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an entry in a waitlist.
+   * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
 
@@ -659,8 +662,7 @@ export interface SetupIntentRequiresActionWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a setup intent, which is a flow for allowing a customer
-   * to add a payment method to their account without making a purchase.
+   * A setup intent allows a user to save a payment method without making a purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -692,8 +694,7 @@ export interface SetupIntentSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a setup intent, which is a flow for allowing a customer
-   * to add a payment method to their account without making a purchase.
+   * A setup intent allows a user to save a payment method without making a purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -725,8 +726,7 @@ export interface SetupIntentCanceledWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a setup intent, which is a flow for allowing a customer
-   * to add a payment method to their account without making a purchase.
+   * A setup intent allows a user to save a payment method without making a purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -758,7 +758,8 @@ export interface WithdrawalCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A withdrawal request.
+   * A withdrawal represents a request to transfer funds from a company's ledger
+   * account to an external payout method.
    */
   data: WithdrawalsAPI.Withdrawal;
 
@@ -790,7 +791,8 @@ export interface WithdrawalUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A withdrawal request.
+   * A withdrawal represents a request to transfer funds from a company's ledger
+   * account to an external payout method.
    */
   data: WithdrawalsAPI.Withdrawal;
 
@@ -880,7 +882,7 @@ export namespace PayoutMethodCreatedWebhookEvent {
    */
   export interface Data {
     /**
-     * The ID of the payout token
+     * The unique identifier for the payout token.
      */
     id: string;
 
@@ -896,7 +898,7 @@ export namespace PayoutMethodCreatedWebhookEvent {
     company: Data.Company | null;
 
     /**
-     * The date and time the payout token was created
+     * The datetime the payout token was created.
      */
     created_at: string;
 
@@ -934,7 +936,7 @@ export namespace PayoutMethodCreatedWebhookEvent {
      */
     export interface Company {
       /**
-       * The ID (tag) of the company.
+       * The unique identifier for the company.
        */
       id: string;
     }
@@ -999,7 +1001,7 @@ export namespace VerificationSucceededWebhookEvent {
    */
   export interface Data {
     /**
-     * A unique identifier for the verification.
+     * The unique identifier for the verification.
      */
     id: string;
 
@@ -1032,7 +1034,8 @@ export interface PaymentCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a receipt for a membership.
+   * A payment represents a completed or attempted charge for a membership. Payments
+   * track the amount, status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1064,7 +1067,8 @@ export interface PaymentSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a receipt for a membership.
+   * A payment represents a completed or attempted charge for a membership. Payments
+   * track the amount, status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1096,7 +1100,8 @@ export interface PaymentFailedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a receipt for a membership.
+   * A payment represents a completed or attempted charge for a membership. Payments
+   * track the amount, status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1128,7 +1133,8 @@ export interface PaymentPendingWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a receipt for a membership.
+   * A payment represents a completed or attempted charge for a membership. Payments
+   * track the amount, status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1160,7 +1166,8 @@ export interface DisputeCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a dispute against a company.
+   * A dispute is a chargeback or payment challenge filed against a company,
+   * including evidence and response status.
    */
   data: DisputesAPI.Dispute;
 
@@ -1192,7 +1199,8 @@ export interface DisputeUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a dispute against a company.
+   * A dispute is a chargeback or payment challenge filed against a company,
+   * including evidence and response status.
    */
   data: DisputesAPI.Dispute;
 
@@ -1224,7 +1232,8 @@ export interface RefundCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a refund made on a payment.
+   * A refund represents a full or partial reversal of a payment, including the
+   * amount, status, and payment provider.
    */
   data: RefundCreatedWebhookEvent.Data;
 
@@ -1246,11 +1255,12 @@ export interface RefundCreatedWebhookEvent {
 
 export namespace RefundCreatedWebhookEvent {
   /**
-   * An object representing a refund made on a payment.
+   * A refund represents a full or partial reversal of a payment, including the
+   * amount, status, and payment provider.
    */
   export interface Data {
     /**
-     * The ID of the refund.
+     * The unique identifier for the refund.
      */
     id: string;
 
@@ -1261,7 +1271,7 @@ export namespace RefundCreatedWebhookEvent {
     amount: number;
 
     /**
-     * The time the refund was created.
+     * The datetime the refund was created.
      */
     created_at: string;
 
@@ -1312,7 +1322,7 @@ export namespace RefundCreatedWebhookEvent {
      */
     export interface Payment {
       /**
-       * The payment ID
+       * The unique identifier for the payment.
        */
       id: string;
 
@@ -1332,7 +1342,7 @@ export namespace RefundCreatedWebhookEvent {
       card_last4: string | null;
 
       /**
-       * The datetime the payment was created
+       * The datetime the payment was created.
        */
       created_at: string;
 
@@ -1393,7 +1403,7 @@ export namespace RefundCreatedWebhookEvent {
        */
       export interface Member {
         /**
-         * The ID of the member
+         * The unique identifier for the company member.
          */
         id: string;
 
@@ -1408,7 +1418,7 @@ export namespace RefundCreatedWebhookEvent {
        */
       export interface Membership {
         /**
-         * The internal ID of the membership.
+         * The unique identifier for the membership.
          */
         id: string;
 
@@ -1423,7 +1433,7 @@ export namespace RefundCreatedWebhookEvent {
        */
       export interface User {
         /**
-         * The internal ID of the user.
+         * The unique identifier for the user.
          */
         id: string;
 
@@ -1458,7 +1468,8 @@ export interface RefundUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing a refund made on a payment.
+   * A refund represents a full or partial reversal of a payment, including the
+   * amount, status, and payment provider.
    */
   data: RefundUpdatedWebhookEvent.Data;
 
@@ -1480,11 +1491,12 @@ export interface RefundUpdatedWebhookEvent {
 
 export namespace RefundUpdatedWebhookEvent {
   /**
-   * An object representing a refund made on a payment.
+   * A refund represents a full or partial reversal of a payment, including the
+   * amount, status, and payment provider.
    */
   export interface Data {
     /**
-     * The ID of the refund.
+     * The unique identifier for the refund.
      */
     id: string;
 
@@ -1495,7 +1507,7 @@ export namespace RefundUpdatedWebhookEvent {
     amount: number;
 
     /**
-     * The time the refund was created.
+     * The datetime the refund was created.
      */
     created_at: string;
 
@@ -1546,7 +1558,7 @@ export namespace RefundUpdatedWebhookEvent {
      */
     export interface Payment {
       /**
-       * The payment ID
+       * The unique identifier for the payment.
        */
       id: string;
 
@@ -1566,7 +1578,7 @@ export namespace RefundUpdatedWebhookEvent {
       card_last4: string | null;
 
       /**
-       * The datetime the payment was created
+       * The datetime the payment was created.
        */
       created_at: string;
 
@@ -1627,7 +1639,7 @@ export namespace RefundUpdatedWebhookEvent {
        */
       export interface Member {
         /**
-         * The ID of the member
+         * The unique identifier for the company member.
          */
         id: string;
 
@@ -1642,7 +1654,7 @@ export namespace RefundUpdatedWebhookEvent {
        */
       export interface Membership {
         /**
-         * The internal ID of the membership.
+         * The unique identifier for the membership.
          */
         id: string;
 
@@ -1657,7 +1669,7 @@ export namespace RefundUpdatedWebhookEvent {
        */
       export interface User {
         /**
-         * The internal ID of the user.
+         * The unique identifier for the user.
          */
         id: string;
 
@@ -1692,8 +1704,8 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A membership represents a purchase between a User and a Company for a specific
-   * Product.
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
    */
   data: Shared.Membership;
 

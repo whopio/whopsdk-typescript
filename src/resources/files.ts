@@ -31,7 +31,7 @@ export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
  */
 export interface FileCreateResponse {
   /**
-   * The ID of the file
+   * The unique identifier for the file.
    */
   id: string;
 
@@ -76,7 +76,7 @@ export interface FileCreateResponse {
  */
 export interface FileRetrieveResponse {
   /**
-   * The ID of the file
+   * The unique identifier for the file.
    */
   id: string;
 

@@ -77,7 +77,7 @@ export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
  */
 export interface TransferListResponse {
   /**
-   * The unique identifier of the credit transaction transfer
+   * The unique identifier for the credit transaction transfer.
    */
   id: string;
 
@@ -88,7 +88,7 @@ export interface TransferListResponse {
   amount: number;
 
   /**
-   * The timestamp when the credit transaction transfer was created
+   * The datetime the credit transaction transfer was created.
    */
   created_at: string;
 

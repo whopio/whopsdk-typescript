@@ -352,11 +352,12 @@ export type PaymentMethodTypes =
   | 'unknown';
 
 /**
- * An object representing a receipt for a membership.
+ * A payment represents a completed or attempted charge for a membership. Payments
+ * track the amount, status, currency, and payment method used.
  */
 export interface PaymentListResponse {
   /**
-   * The payment ID
+   * The unique identifier for the payment.
    */
   id: string;
 
@@ -401,7 +402,7 @@ export interface PaymentListResponse {
   company: PaymentListResponse.Company | null;
 
   /**
-   * The datetime the payment was created
+   * The datetime the payment was created.
    */
   created_at: string;
 
@@ -567,7 +568,7 @@ export namespace PaymentListResponse {
     amount_refunded: number;
 
     /**
-     * When the application fee was created.
+     * The datetime the application fee was created.
      */
     created_at: string;
 
@@ -622,7 +623,7 @@ export namespace PaymentListResponse {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -642,7 +643,7 @@ export namespace PaymentListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
 
@@ -657,7 +658,7 @@ export namespace PaymentListResponse {
    */
   export interface Membership {
     /**
-     * The internal ID of the membership.
+     * The unique identifier for the membership.
      */
     id: string;
 
@@ -672,7 +673,7 @@ export namespace PaymentListResponse {
    */
   export interface PaymentMethod {
     /**
-     * The ID of the payment method
+     * The unique identifier for the payment token.
      */
     id: string;
 
@@ -682,7 +683,7 @@ export namespace PaymentListResponse {
     card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment method was created
+     * The datetime the payment token was created.
      */
     created_at: string;
 
@@ -724,7 +725,7 @@ export namespace PaymentListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -734,7 +735,7 @@ export namespace PaymentListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -754,7 +755,7 @@ export namespace PaymentListResponse {
    */
   export interface PromoCode {
     /**
-     * The ID of the promo.
+     * The unique identifier for the promo code.
      */
     id: string;
 
@@ -791,7 +792,7 @@ export namespace PaymentListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

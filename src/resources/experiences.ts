@@ -170,11 +170,12 @@ export class Experiences extends APIResource {
 export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse>;
 
 /**
- * An object representing an experience belonging to a company.
+ * An experience is a feature or content module within a product, such as a chat,
+ * course, or app.
  */
 export interface ExperienceListResponse {
   /**
-   * The unique ID representing this experience
+   * The unique identifier for the experience.
    */
   id: string;
 
@@ -189,7 +190,7 @@ export interface ExperienceListResponse {
   company: ExperienceListResponse.Company;
 
   /**
-   * The timestamp of when this experience was created.
+   * The datetime the experience was created.
    */
   created_at: string;
 
@@ -220,7 +221,7 @@ export namespace ExperienceListResponse {
    */
   export interface App {
     /**
-     * The ID of the app
+     * The unique identifier for the app.
      */
     id: string;
 
@@ -255,7 +256,7 @@ export namespace ExperienceListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 

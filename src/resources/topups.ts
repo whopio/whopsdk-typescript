@@ -29,16 +29,17 @@ export class Topups extends APIResource {
 }
 
 /**
- * An object representing a receipt for a membership.
+ * A payment represents a completed or attempted charge for a membership. Payments
+ * track the amount, status, currency, and payment method used.
  */
 export interface TopupCreateResponse {
   /**
-   * The payment ID
+   * The unique identifier for the payment.
    */
   id: string;
 
   /**
-   * The datetime the payment was created
+   * The datetime the payment was created.
    */
   created_at: string;
 

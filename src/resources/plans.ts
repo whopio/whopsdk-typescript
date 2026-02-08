@@ -118,13 +118,13 @@ export class Plans extends APIResource {
 export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
 
 /**
- * A plan for an product. Plans define the core parameters that define a checkout
- * and payment on whop. Use plans to create different ways to price your products
- * (Eg renewal / one_time)
+ * A plan defines pricing and billing terms for a product. Each product can have
+ * multiple plans representing different pricing options, such as one-time
+ * payments, recurring subscriptions, or free trials.
  */
 export interface PlanListResponse {
   /**
-   * The internal ID of the plan.
+   * The unique identifier for the plan.
    */
   id: string;
 
@@ -139,7 +139,7 @@ export interface PlanListResponse {
   company: PlanListResponse.Company | null;
 
   /**
-   * When the plan was created.
+   * The datetime the plan was created.
    */
   created_at: string;
 
@@ -239,7 +239,7 @@ export interface PlanListResponse {
   unlimited_stock: boolean;
 
   /**
-   * When the plan was last updated.
+   * The datetime the plan was last updated.
    */
   updated_at: string;
 
@@ -255,7 +255,7 @@ export namespace PlanListResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -270,7 +270,7 @@ export namespace PlanListResponse {
    */
   export interface Invoice {
     /**
-     * The ID of the invoice.
+     * The unique identifier for the invoice.
      */
     id: string;
   }
@@ -306,7 +306,7 @@ export namespace PlanListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 

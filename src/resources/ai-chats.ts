@@ -69,7 +69,7 @@ export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>;
  */
 export interface AIChat {
   /**
-   * The unique identifier for the AI chat
+   * The unique identifier for the ai chat.
    */
   id: string;
 
@@ -79,7 +79,7 @@ export interface AIChat {
   blended_token_usage: string;
 
   /**
-   * When the AI chat was created
+   * The datetime the ai chat was created.
    */
   created_at: string;
 
@@ -99,7 +99,7 @@ export interface AIChat {
   title: string | null;
 
   /**
-   * When the AI chat was last updated
+   * The datetime the ai chat was last updated.
    */
   updated_at: string;
 
@@ -115,7 +115,7 @@ export namespace AIChat {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
   }
@@ -126,7 +126,7 @@ export namespace AIChat {
  */
 export interface AIChatListResponse {
   /**
-   * The unique identifier for the AI chat
+   * The unique identifier for the ai chat.
    */
   id: string;
 
@@ -136,7 +136,7 @@ export interface AIChatListResponse {
   blended_token_usage: string;
 
   /**
-   * When the AI chat was created
+   * The datetime the ai chat was created.
    */
   created_at: string;
 
@@ -156,7 +156,7 @@ export interface AIChatListResponse {
   title: string | null;
 
   /**
-   * When the AI chat was last updated
+   * The datetime the ai chat was last updated.
    */
   updated_at: string;
 
@@ -172,7 +172,7 @@ export namespace AIChatListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
   }
