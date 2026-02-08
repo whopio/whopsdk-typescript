@@ -10,11 +10,7 @@ const client = new Whop({
 describe('resource companies', () => {
   // Prism tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.companies.create({
-      email: 'email',
-      parent_company_id: 'parent_company_id',
-      title: 'title',
-    });
+    const responsePromise = client.companies.create({ title: 'title' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,13 +23,14 @@ describe('resource companies', () => {
   // Prism tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.companies.create({
-      email: 'email',
-      parent_company_id: 'parent_company_id',
       title: 'title',
       business_type: 'education_program',
+      description: 'description',
+      email: 'email',
       industry_type: 'trading',
       logo: { id: 'id' },
       metadata: { foo: 'bar' },
+      parent_company_id: 'parent_company_id',
       send_customer_emails: true,
     });
   });
@@ -71,6 +68,7 @@ describe('resource companies', () => {
         {
           banner_image: { id: 'id' },
           business_type: 'education_program',
+          description: 'description',
           industry_type: 'trading',
           logo: { id: 'id' },
           send_customer_emails: true,
@@ -82,8 +80,8 @@ describe('resource companies', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.companies.list({ parent_company_id: 'parent_company_id' });
+  test.skip('list', async () => {
+    const responsePromise = client.companies.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -94,16 +92,22 @@ describe('resource companies', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.companies.list({
-      parent_company_id: 'parent_company_id',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.companies.list(
+        {
+          after: 'after',
+          before: 'before',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          parent_company_id: 'parent_company_id',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });
