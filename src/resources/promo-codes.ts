@@ -99,16 +99,20 @@ export class PromoCodes extends APIResource {
 export type PromoCodeListResponsesCursorPage = CursorPage<PromoCodeListResponse>;
 
 /**
- * An object representing a promo code for a plan.
+ * A promo code applies a discount to a plan during checkout. Promo codes can be
+ * percentage-based or fixed-amount, and can have usage limits and expiration
+ * dates.
  */
 export interface PromoCode {
   /**
-   * The ID of the promo.
+   * The unique identifier for the promo code.
    */
   id: string;
 
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 
@@ -128,7 +132,7 @@ export interface PromoCode {
   company: PromoCode.Company;
 
   /**
-   * The timestamp of when the promo was created.
+   * The datetime the promo code was created.
    */
   created_at: string;
 
@@ -205,7 +209,7 @@ export namespace PromoCode {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -220,7 +224,7 @@ export namespace PromoCode {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -242,16 +246,20 @@ export type PromoCodeStatus = 'active' | 'inactive' | 'archived';
 export type PromoDuration = 'forever' | 'once' | 'repeating';
 
 /**
- * An object representing a promo code for a plan.
+ * A promo code applies a discount to a plan during checkout. Promo codes can be
+ * percentage-based or fixed-amount, and can have usage limits and expiration
+ * dates.
  */
 export interface PromoCodeListResponse {
   /**
-   * The ID of the promo.
+   * The unique identifier for the promo code.
    */
   id: string;
 
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 
@@ -266,7 +274,7 @@ export interface PromoCodeListResponse {
   code: string | null;
 
   /**
-   * The timestamp of when the promo was created.
+   * The datetime the promo code was created.
    */
   created_at: string;
 
@@ -343,7 +351,7 @@ export namespace PromoCodeListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -361,7 +369,9 @@ export type PromoCodeDeleteResponse = boolean;
 
 export interface PromoCodeCreateParams {
   /**
-   * The amount off (% or flat amount) for the promo.
+   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+   * off (e.g., 10.00 means $10.00 off).
    */
   amount_off: number;
 

@@ -378,9 +378,10 @@ import {
   Transfers,
 } from './resources/transfers';
 import {
+  User,
   UserCheckAccessParams,
   UserCheckAccessResponse,
-  UserRetrieveResponse,
+  UserUpdateProfileParams,
   Users,
 } from './resources/users';
 import {
@@ -457,7 +458,7 @@ import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
-   * The app API key from an app from the /dashboard/developer page
+   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`
    */
   apiKey?: string | undefined;
 
@@ -547,7 +548,6 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
-
   baseURL: string;
   maxRetries: number;
   timeout: number;
@@ -916,9 +916,14 @@ export class Whop {
   getAPIList<Item, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
     path: string,
     Page: new (...args: any[]) => PageClass,
-    opts?: RequestOptions,
+    opts?: PromiseOrValue<RequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
-    return this.requestAPIList(Page, { method: 'get', path, ...opts });
+    return this.requestAPIList(
+      Page,
+      opts && 'then' in opts ?
+        opts.then((opts) => ({ method: 'get', path, ...opts }))
+      : { method: 'get', path, ...opts },
+    );
   }
 
   requestAPIList<
@@ -926,7 +931,7 @@ export class Whop {
     PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
   >(
     Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
-    options: FinalRequestOptions,
+    options: PromiseOrValue<FinalRequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
     const request = this.makeRequest(options, null, undefined);
     return new Pagination.PagePromise<PageClass, Item>(this as any as Whop, request, Page);
@@ -939,7 +944,7 @@ export class Whop {
     controller: AbortController,
   ): Promise<Response> {
     const { signal, method, ...options } = init || {};
-    const abort = controller.abort.bind(controller);
+    const abort = this._makeAbort(controller);
     if (signal) signal.addEventListener('abort', abort, { once: true });
 
     const timeout = setTimeout(abort, ms);
@@ -1108,6 +1113,12 @@ export class Whop {
     this.validateHeaders(headers);
 
     return headers.values;
+  }
+
+  private _makeAbort(controller: AbortController) {
+    // note: we can't just inline this method inside `fetchWithTimeout()` because then the closure
+    //       would capture all request options, and cause a memory leak.
+    return () => controller.abort();
   }
 
   private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
@@ -1461,9 +1472,10 @@ export declare namespace Whop {
 
   export {
     Users as Users,
-    type UserRetrieveResponse as UserRetrieveResponse,
+    type User as User,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserCheckAccessParams as UserCheckAccessParams,
+    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 
   export {

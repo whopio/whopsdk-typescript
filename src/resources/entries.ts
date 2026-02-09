@@ -63,16 +63,16 @@ export class Entries extends APIResource {
 export type EntryListResponsesCursorPage = CursorPage<EntryListResponse>;
 
 /**
- * An object representing an entry in a waitlist.
+ * An entry represents a user's signup for a waitlisted plan.
  */
 export interface EntryListResponse {
   /**
-   * The internal ID of the entry.
+   * The unique identifier for the entry.
    */
   id: string;
 
   /**
-   * When the entry was created.
+   * The datetime the entry was created.
    */
   created_at: string | null;
 
@@ -103,7 +103,7 @@ export namespace EntryListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -113,7 +113,7 @@ export namespace EntryListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -128,7 +128,7 @@ export namespace EntryListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 

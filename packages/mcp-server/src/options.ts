@@ -4,6 +4,7 @@ import { hideBin } from 'yargs/helpers';
 import z from 'zod';
 
 export type CLIOptions = McpOptions & {
+  debug: boolean;
   transport: 'stdio' | 'http';
   port: number | undefined;
   socket: string | undefined;
@@ -11,21 +12,48 @@ export type CLIOptions = McpOptions & {
 
 export type McpOptions = {
   includeDocsTools?: boolean | undefined;
+  codeAllowHttpGets?: boolean | undefined;
+  codeAllowedMethods?: string[] | undefined;
+  codeBlockedMethods?: string[] | undefined;
 };
 
 export function parseCLIOptions(): CLIOptions {
   const opts = yargs(hideBin(process.argv))
-    .option('tools', {
+    .option('code-allow-http-gets', {
+      type: 'boolean',
+      description:
+        'Allow all code tool methods that map to HTTP GET operations. If all code-allow-* flags are unset, then everything is allowed.',
+    })
+    .option('code-allowed-methods', {
       type: 'string',
       array: true,
-      choices: ['code', 'docs'],
-      description: 'Use dynamic tools or all tools',
+      description:
+        'Methods to explicitly allow for code tool. Evaluated as regular expressions against method fully qualified names. If all code-allow-* flags are unset, then everything is allowed.',
     })
+    .option('code-blocked-methods', {
+      type: 'string',
+      array: true,
+      description:
+        'Methods to explicitly block for code tool. Evaluated as regular expressions against method fully qualified names. If all code-allow-* flags are unset, then everything is allowed.',
+    })
+    .option('debug', { type: 'boolean', description: 'Enable debug logging' })
     .option('no-tools', {
       type: 'string',
       array: true,
       choices: ['code', 'docs'],
-      description: 'Do not use any dynamic or all tools',
+      description: 'Tools to explicitly disable',
+    })
+    .option('port', {
+      type: 'number',
+      default: 3000,
+      description: 'Port to serve on if using http transport',
+    })
+    .option('socket', { type: 'string', description: 'Unix socket to serve on if using http transport' })
+    .option('tools', {
+      type: 'string',
+      array: true,
+      choices: ['code', 'docs'],
+      description: 'Tools to explicitly enable',
     })
     .option('transport', {
       type: 'string',
@@ -33,15 +61,8 @@ export function parseCLIOptions(): CLIOptions {
       default: 'stdio',
       description: 'What transport to use; stdio for local servers or http for remote servers',
     })
-    .option('port', {
-      type: 'number',
-      default: 3000,
-      description: 'Port to serve on if using http transport',
-    })
-    .option('socket', {
-      type: 'string',
-      description: 'Unix socket to serve on if using http transport',
-    })
+    .env('MCP_SERVER')
+    .version(true)
     .help();
 
   const argv = opts.parseSync();
@@ -57,6 +78,10 @@ export function parseCLIOptions(): CLIOptions {
 
   return {
     ...(includeDocsTools !== undefined && { includeDocsTools }),
+    debug: !!argv.debug,
+    codeAllowHttpGets: argv.codeAllowHttpGets,
+    codeAllowedMethods: argv.codeAllowedMethods,
+    codeBlockedMethods: argv.codeBlockedMethods,
     transport,
     port: argv.port,
     socket: argv.socket,

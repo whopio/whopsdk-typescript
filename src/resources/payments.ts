@@ -253,6 +253,8 @@ export type CardBrands =
   | 'fuel_card'
   | 'dankort'
   | 'carnet'
+  | 'atm_card'
+  | 'china_union_payuzcard'
   | 'unknown';
 
 /**
@@ -277,6 +279,7 @@ export type PaymentMethodTypes =
   | 'capchase_pay'
   | 'card'
   | 'cashapp'
+  | 'claritypay'
   | 'coinbase'
   | 'crypto'
   | 'custom'
@@ -349,11 +352,12 @@ export type PaymentMethodTypes =
   | 'unknown';
 
 /**
- * An object representing a receipt for a membership.
+ * A payment represents a completed or attempted charge for a membership. Payments
+ * track the amount, status, currency, and payment method used.
  */
 export interface PaymentListResponse {
   /**
-   * The payment ID
+   * The unique identifier for the payment.
    */
   id: string;
 
@@ -398,7 +402,7 @@ export interface PaymentListResponse {
   company: PaymentListResponse.Company | null;
 
   /**
-   * The datetime the payment was created
+   * The datetime the payment was created.
    */
   created_at: string;
 
@@ -564,7 +568,7 @@ export namespace PaymentListResponse {
     amount_refunded: number;
 
     /**
-     * When the application fee was created.
+     * The datetime the application fee was created.
      */
     created_at: string;
 
@@ -619,7 +623,7 @@ export namespace PaymentListResponse {
    */
   export interface Company {
     /**
-     * The ID of the company
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -639,7 +643,7 @@ export namespace PaymentListResponse {
    */
   export interface Member {
     /**
-     * The ID of the member
+     * The unique identifier for the company member.
      */
     id: string;
 
@@ -654,7 +658,7 @@ export namespace PaymentListResponse {
    */
   export interface Membership {
     /**
-     * The internal ID of the membership.
+     * The unique identifier for the membership.
      */
     id: string;
 
@@ -669,7 +673,7 @@ export namespace PaymentListResponse {
    */
   export interface PaymentMethod {
     /**
-     * The ID of the payment method
+     * The unique identifier for the payment token.
      */
     id: string;
 
@@ -679,7 +683,7 @@ export namespace PaymentListResponse {
     card: PaymentMethod.Card | null;
 
     /**
-     * The date and time the payment method was created
+     * The datetime the payment token was created.
      */
     created_at: string;
 
@@ -721,7 +725,7 @@ export namespace PaymentListResponse {
    */
   export interface Plan {
     /**
-     * The internal ID of the plan.
+     * The unique identifier for the plan.
      */
     id: string;
   }
@@ -731,7 +735,7 @@ export namespace PaymentListResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -751,12 +755,14 @@ export namespace PaymentListResponse {
    */
   export interface PromoCode {
     /**
-     * The ID of the promo.
+     * The unique identifier for the promo code.
      */
     id: string;
 
     /**
-     * The amount off (% or flat amount) for the promo.
+     * The discount amount. Interpretation depends on promo_type: if 'percentage', this
+     * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
+     * off (e.g., 10.00 means $10.00 off).
      */
     amount_off: number;
 
@@ -786,7 +792,7 @@ export namespace PaymentListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -907,7 +913,8 @@ export declare namespace PaymentCreateParams {
       currency: Shared.Currency;
 
       /**
-       * The interval at which the plan charges (renewal plans).
+       * The interval in days at which the plan charges (renewal plans). For example, 30
+       * for monthly billing.
        */
       billing_period?: number | null;
 
@@ -917,7 +924,8 @@ export declare namespace PaymentCreateParams {
       description?: string | null;
 
       /**
-       * The interval at which the plan charges (expiration plans).
+       * The number of days until the membership expires and revokes access (expiration
+       * plans). For example, 365 for one year.
        */
       expiration_days?: number | null;
 
@@ -928,7 +936,8 @@ export declare namespace PaymentCreateParams {
       force_create_new_plan?: boolean | null;
 
       /**
-       * An additional amount charged upon first purchase.
+       * An additional amount charged upon first purchase. Provided as a number in the
+       * specified currency. Eg: 10.43 for $10.43 USD.
        */
       initial_price?: number | null;
 
@@ -954,7 +963,8 @@ export declare namespace PaymentCreateParams {
       product_id?: string | null;
 
       /**
-       * The amount the customer is charged every billing period.
+       * The amount the customer is charged every billing period. Provided as a number in
+       * the specified currency. Eg: 10.43 for $10.43 USD.
        */
       renewal_price?: number | null;
 

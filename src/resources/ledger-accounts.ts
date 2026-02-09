@@ -26,7 +26,7 @@ export class LedgerAccounts extends APIResource {
  */
 export interface LedgerAccountRetrieveResponse {
   /**
-   * The ID of the LedgerAccount.
+   * The unique identifier for the ledger account.
    */
   id: string;
 
@@ -88,11 +88,12 @@ export namespace LedgerAccountRetrieveResponse {
   }
 
   /**
-   * An object representing a (sanitized) user of the site.
+   * A user account on Whop. Contains profile information, identity details, and
+   * social connections.
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -113,11 +114,12 @@ export namespace LedgerAccountRetrieveResponse {
   }
 
   /**
-   * An object representing a (sanitized) company.
+   * A company is a seller on Whop. Companies own products, manage members, and
+   * receive payouts.
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -142,7 +144,7 @@ export namespace LedgerAccountRetrieveResponse {
    */
   export interface PayoutAccountDetails {
     /**
-     * Unique identifier for the object
+     * The unique identifier for the payout account.
      */
     id: string;
 
@@ -244,7 +246,7 @@ export namespace LedgerAccountRetrieveResponse {
      */
     export interface LatestVerification {
       /**
-       * A unique identifier for the verification.
+       * The unique identifier for the verification.
        */
       id: string;
 

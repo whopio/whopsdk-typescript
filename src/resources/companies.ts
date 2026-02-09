@@ -9,11 +9,12 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Create a new connected account for your platform
+   * Create a new company. Pass parent_company_id to create a sub-company under a
+   * platform, or omit it to create a company for the current user.
    *
    * Required permissions:
    *
-   * - `company:create_child`
+   * - `company:create`
    * - `company:basic:read`
    */
   create(body: CompanyCreateParams, options?: RequestOptions): APIPromise<Shared.Company> {
@@ -49,14 +50,16 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Lists companies the current user has access to
+   * Lists companies. When parent_company_id is provided, lists connected accounts
+   * under that company. When omitted, lists companies the current user has access
+   * to.
    *
    * Required permissions:
    *
    * - `company:basic:read`
    */
   list(
-    query: CompanyListParams,
+    query: CompanyListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
     return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
@@ -66,11 +69,12 @@ export class Companies extends APIResource {
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
 
 /**
- * An object representing a (sanitized) company.
+ * A company is a seller on Whop. Companies own products, manage members, and
+ * receive payouts.
  */
 export interface CompanyListResponse {
   /**
-   * The ID (tag) of the company.
+   * The unique identifier for the company.
    */
   id: string;
 
@@ -80,7 +84,7 @@ export interface CompanyListResponse {
   business_type: Shared.BusinessTypes | null;
 
   /**
-   * When the company was created (signed up)
+   * The datetime the company was created.
    */
   created_at: string;
 
@@ -136,7 +140,7 @@ export interface CompanyListResponse {
   title: string;
 
   /**
-   * The time the company was last updated.
+   * The datetime the company was last updated.
    */
   updated_at: string;
 
@@ -163,7 +167,7 @@ export namespace CompanyListResponse {
    */
   export interface OwnerUser {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -181,16 +185,6 @@ export namespace CompanyListResponse {
 
 export interface CompanyCreateParams {
   /**
-   * The email of the user who the company will belong to.
-   */
-  email: string;
-
-  /**
-   * The company ID of the platform creating this company.
-   */
-  parent_company_id: string;
-
-  /**
    * The name of the company being created.
    */
   title: string;
@@ -199,6 +193,17 @@ export interface CompanyCreateParams {
    * The different business types a company can be.
    */
   business_type?: Shared.BusinessTypes | null;
+
+  /**
+   * A description of what the company offers or does.
+   */
+  description?: string | null;
+
+  /**
+   * The email of the user who the sub-company will belong to. Required when
+   * parent_company_id is provided.
+   */
+  email?: string | null;
 
   /**
    * The different industry types a company can be in.
@@ -211,15 +216,19 @@ export interface CompanyCreateParams {
   logo?: CompanyCreateParams.Logo | null;
 
   /**
-   * Additional metadata for the account
+   * Additional metadata for the company
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
+   * The company ID of the platform creating this sub-company. If omitted, the
+   * company is created for the current user.
+   */
+  parent_company_id?: string | null;
+
+  /**
    * Whether Whop sends transactional emails to customers on behalf of this company.
-   * Includes: order confirmations, payment failures, refund notifications, upcoming
-   * renewals, and membership cancelations/expirations. When disabled, the platform
-   * is responsible for handling these communications. This is defaulted to true.
+   * Only used when parent_company_id is provided.
    */
   send_customer_emails?: boolean | null;
 }
@@ -246,6 +255,11 @@ export interface CompanyUpdateParams {
    * The different business types a company can be.
    */
   business_type?: Shared.BusinessTypes | null;
+
+  /**
+   * A description of what the company offers or does.
+   */
+  description?: string | null;
 
   /**
    * The different industry types a company can be in.
@@ -295,11 +309,6 @@ export namespace CompanyUpdateParams {
 
 export interface CompanyListParams extends CursorPageParams {
   /**
-   * The ID of the parent company to list connected accounts for
-   */
-  parent_company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
@@ -328,6 +337,12 @@ export interface CompanyListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * The ID of the parent company to list connected accounts for. Omit to list the
+   * current user's own companies.
+   */
+  parent_company_id?: string | null;
 }
 
 export declare namespace Companies {

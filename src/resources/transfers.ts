@@ -77,17 +77,18 @@ export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
  */
 export interface TransferListResponse {
   /**
-   * The unique identifier of the credit transaction transfer
+   * The unique identifier for the credit transaction transfer.
    */
   id: string;
 
   /**
-   * The amount of the credit transaction transfer
+   * The amount of the transfer. Provided as a number in the specified currency. Eg:
+   * 10.43 for $10.43 USD.
    */
   amount: number;
 
   /**
-   * The timestamp when the credit transaction transfer was created
+   * The datetime the credit transaction transfer was created.
    */
   created_at: string;
 
@@ -107,7 +108,8 @@ export interface TransferListResponse {
   fee_amount: number | null;
 
   /**
-   * A hash of metadata attached to the transfer
+   * Custom key-value pairs attached to the transfer. Max 50 keys, 500 chars per key,
+   * 5000 chars per value.
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -124,7 +126,8 @@ export interface TransferListResponse {
 
 export interface TransferCreateParams {
   /**
-   * The amount to withdraw
+   * The amount to transfer. Provided as a number in the specified currency. Eg:
+   * 25.00 for $25.00 USD.
    */
   amount: number;
 

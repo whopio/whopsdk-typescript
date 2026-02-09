@@ -76,21 +76,23 @@ export class Withdrawals extends APIResource {
 export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
 
 /**
- * A withdrawal request.
+ * A withdrawal represents a request to transfer funds from a company's ledger
+ * account to an external payout method.
  */
 export interface Withdrawal {
   /**
-   * Internal ID of the withdrawal request.
+   * The unique identifier for the withdrawal.
    */
   id: string;
 
   /**
-   * How much money was attempted to be withdrawn, in a float type.
+   * The withdrawal amount. Provided as a number in the specified currency. Eg:
+   * 100.00 for $100.00 USD.
    */
   amount: number;
 
   /**
-   * When the withdrawal request was created.
+   * The datetime the withdrawal was created.
    */
   created_at: string;
 
@@ -212,7 +214,7 @@ export namespace Withdrawal {
    */
   export interface LedgerAccount {
     /**
-     * The ID of the LedgerAccount.
+     * The unique identifier for the ledger account.
      */
     id: string;
 
@@ -227,12 +229,12 @@ export namespace Withdrawal {
    */
   export interface PayoutToken {
     /**
-     * The ID of the payout token
+     * The unique identifier for the payout token.
      */
     id: string;
 
     /**
-     * The date and time the payout token was created
+     * The datetime the payout token was created.
      */
     created_at: string;
 
@@ -278,21 +280,23 @@ export type WithdrawalStatus =
   | 'denied';
 
 /**
- * A withdrawal request.
+ * A withdrawal represents a request to transfer funds from a company's ledger
+ * account to an external payout method.
  */
 export interface WithdrawalListResponse {
   /**
-   * Internal ID of the withdrawal request.
+   * The unique identifier for the withdrawal.
    */
   id: string;
 
   /**
-   * How much money was attempted to be withdrawn, in a float type.
+   * The withdrawal amount. Provided as a number in the specified currency. Eg:
+   * 100.00 for $100.00 USD.
    */
   amount: number;
 
   /**
-   * When the withdrawal request was created.
+   * The datetime the withdrawal was created.
    */
   created_at: string;
 

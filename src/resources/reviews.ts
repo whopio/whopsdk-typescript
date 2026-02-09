@@ -37,7 +37,7 @@ export type ReviewStatus = 'pending' | 'published' | 'removed';
  */
 export interface ReviewRetrieveResponse {
   /**
-   * The internal ID of the review.
+   * The unique identifier for the review.
    */
   id: string;
 
@@ -52,7 +52,7 @@ export interface ReviewRetrieveResponse {
   company: ReviewRetrieveResponse.Company;
 
   /**
-   * The timestamp of when the review was created.
+   * The datetime the review was created.
    */
   created_at: string;
 
@@ -98,7 +98,7 @@ export interface ReviewRetrieveResponse {
   title: string | null;
 
   /**
-   * The timestamp of when the review was last updated.
+   * The datetime the review was last updated.
    */
   updated_at: string;
 
@@ -140,7 +140,7 @@ export namespace ReviewRetrieveResponse {
    */
   export interface Company {
     /**
-     * The ID (tag) of the company.
+     * The unique identifier for the company.
      */
     id: string;
 
@@ -160,7 +160,7 @@ export namespace ReviewRetrieveResponse {
    */
   export interface Product {
     /**
-     * The internal ID of the public product.
+     * The unique identifier for the product.
      */
     id: string;
 
@@ -175,7 +175,7 @@ export namespace ReviewRetrieveResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
@@ -196,7 +196,7 @@ export namespace ReviewRetrieveResponse {
  */
 export interface ReviewListResponse {
   /**
-   * The internal ID of the review.
+   * The unique identifier for the review.
    */
   id: string;
 
@@ -206,7 +206,7 @@ export interface ReviewListResponse {
   attachments: Array<ReviewListResponse.Attachment>;
 
   /**
-   * The timestamp of when the review was created.
+   * The datetime the review was created.
    */
   created_at: string;
 
@@ -247,7 +247,7 @@ export interface ReviewListResponse {
   title: string | null;
 
   /**
-   * The timestamp of when the review was last updated.
+   * The datetime the review was last updated.
    */
   updated_at: string;
 
@@ -289,7 +289,7 @@ export namespace ReviewListResponse {
    */
   export interface User {
     /**
-     * The internal ID of the user.
+     * The unique identifier for the user.
      */
     id: string;
 
