@@ -462,11 +462,14 @@ export interface ClientOptions {
   apiKey?: string | undefined;
 
   /**
+   * Defaults to process.env['WHOP_WEBHOOK_SECRET'].
+   */
+  webhookKey?: string | null | undefined;
+
+  /**
    * When using the SDK in app mode pass this parameter to allow verifying user tokens
    */
   appID?: string | null | undefined;
-
-  webhookKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -542,8 +545,8 @@ export interface ClientOptions {
  */
 export class Whop {
   apiKey: string;
-  appID: string | null;
   webhookKey: string | null;
+  appID: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -561,8 +564,8 @@ export class Whop {
    * API Client for interfacing with the Whop API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.webhookKey]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -574,8 +577,8 @@ export class Whop {
   constructor({
     baseURL = readEnv('WHOP_BASE_URL'),
     apiKey = readEnv('WHOP_API_KEY'),
+    webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    webhookKey = null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -586,8 +589,8 @@ export class Whop {
 
     const options: ClientOptions = {
       apiKey,
-      appID,
       webhookKey,
+      appID,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -610,8 +613,8 @@ export class Whop {
     this._options = options;
 
     this.apiKey = apiKey;
-    this.appID = appID;
     this.webhookKey = webhookKey;
+    this.appID = appID;
   }
 
   /**
@@ -628,8 +631,8 @@ export class Whop {
       fetch: this.fetch,
       fetchOptions: this.fetchOptions,
       apiKey: this.apiKey,
-      appID: this.appID,
       webhookKey: this.webhookKey,
+      appID: this.appID,
       ...options,
     });
     return client;
@@ -1099,6 +1102,7 @@ export class Whop {
         'X-Stainless-Retry-Count': String(retryCount),
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
+        'X-Whop-App-Id': this.appID,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
