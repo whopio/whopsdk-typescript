@@ -175,12 +175,12 @@ export namespace ForumPostListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }

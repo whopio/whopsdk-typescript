@@ -260,7 +260,7 @@ export namespace PlanListResponse {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -311,7 +311,8 @@ export namespace PlanListResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }

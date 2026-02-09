@@ -98,7 +98,7 @@ export namespace LedgerAccountRetrieveResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
@@ -108,7 +108,7 @@ export namespace LedgerAccountRetrieveResponse {
     typename: 'User';
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -124,12 +124,12 @@ export namespace LedgerAccountRetrieveResponse {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
 

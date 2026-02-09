@@ -170,7 +170,8 @@ export namespace Lead {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -185,17 +186,18 @@ export namespace Lead {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -267,7 +269,8 @@ export namespace LeadListResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -282,17 +285,18 @@ export namespace LeadListResponse {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }

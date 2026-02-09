@@ -9,8 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Companies extends APIResource {
   /**
-   * Create a new company. Pass parent_company_id to create a sub-company under a
-   * platform, or omit it to create a company for the current user.
+   * Create a new company. Pass parent_company_id to create a connected account under
+   * a platform, or omit it to create a company for the current user.
    *
    * Required permissions:
    *
@@ -22,7 +22,7 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Retrieves an company by ID or its url route
+   * Retrieve a single company by its unique identifier or route slug.
    *
    * Required permissions:
    *
@@ -50,8 +50,8 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Lists companies. When parent_company_id is provided, lists connected accounts
-   * under that company. When omitted, lists companies the current user has access
+   * List companies. When parent_company_id is provided, lists connected accounts
+   * under that platform. When omitted, lists companies the current user has access
    * to.
    *
    * Required permissions:
@@ -89,7 +89,8 @@ export interface CompanyListResponse {
   created_at: string;
 
   /**
-   * The creator pitch for the company.
+   * A promotional pitch written by the company creator, displayed to potential
+   * customers on the store page.
    */
   description: string | null;
 
@@ -104,38 +105,41 @@ export interface CompanyListResponse {
   logo: CompanyListResponse.Logo | null;
 
   /**
-   * The number of members in the company.
+   * The total number of users who currently hold active memberships across all of
+   * this company's products.
    */
   member_count: number;
 
   /**
-   * A key-value store of data for the account, created/updated by the platform that
-   * made the account.
+   * A key-value JSON object of custom metadata for this company, managed by the
+   * platform that created the account.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The user who owns this company
+   * The user who owns and has full administrative control over this company.
    */
   owner_user: CompanyListResponse.OwnerUser;
 
   /**
-   * The number of reviews that have been published for the company.
+   * The total number of published customer reviews across all products for this
+   * company.
    */
   published_reviews_count: number;
 
   /**
-   * The slug/route of the company on the Whop site.
+   * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
    */
   route: string;
 
   /**
-   * Whether Whop sends transactional emails to customers on behalf of this company.
+   * Whether Whop sends transactional emails (receipts, updates) to customers on
+   * behalf of this company.
    */
   send_customer_emails: boolean;
 
   /**
-   * The title of the company.
+   * The display name of the company shown to customers.
    */
   title: string;
 
@@ -145,7 +149,7 @@ export interface CompanyListResponse {
   updated_at: string;
 
   /**
-   * If the company is Whop Verified
+   * Whether this company has been verified by Whop's trust and safety team.
    */
   verified: boolean;
 }
@@ -156,14 +160,14 @@ export namespace CompanyListResponse {
    */
   export interface Logo {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
 
   /**
-   * The user who owns this company
+   * The user who owns and has full administrative control over this company.
    */
   export interface OwnerUser {
     /**
@@ -172,12 +176,12 @@ export namespace CompanyListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -185,7 +189,7 @@ export namespace CompanyListResponse {
 
 export interface CompanyCreateParams {
   /**
-   * The name of the company being created.
+   * The display name of the company shown to customers.
    */
   title: string;
 
@@ -195,12 +199,13 @@ export interface CompanyCreateParams {
   business_type?: Shared.BusinessTypes | null;
 
   /**
-   * A description of what the company offers or does.
+   * A promotional pitch displayed to potential customers on the company's store
+   * page.
    */
   description?: string | null;
 
   /**
-   * The email of the user who the sub-company will belong to. Required when
+   * The email address of the user who will own the connected account. Required when
    * parent_company_id is provided.
    */
   email?: string | null;
@@ -211,31 +216,32 @@ export interface CompanyCreateParams {
   industry_type?: Shared.IndustryTypes | null;
 
   /**
-   * The logo for the company in png, jpeg, or gif format
+   * The company's logo image. Accepts PNG, JPEG, or GIF format.
    */
   logo?: CompanyCreateParams.Logo | null;
 
   /**
-   * Additional metadata for the company
+   * A key-value JSON object of custom metadata to store on the company.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * The company ID of the platform creating this sub-company. If omitted, the
-   * company is created for the current user.
+   * The unique identifier of the parent platform company. When provided, creates a
+   * connected account under that platform. Omit to create a company for the current
+   * user.
    */
   parent_company_id?: string | null;
 
   /**
    * Whether Whop sends transactional emails to customers on behalf of this company.
-   * Only used when parent_company_id is provided.
+   * Only applies when creating a connected account.
    */
   send_customer_emails?: boolean | null;
 }
 
 export namespace CompanyCreateParams {
   /**
-   * The logo for the company in png, jpeg, or gif format
+   * The company's logo image. Accepts PNG, JPEG, or GIF format.
    */
   export interface Logo {
     /**
@@ -247,7 +253,7 @@ export namespace CompanyCreateParams {
 
 export interface CompanyUpdateParams {
   /**
-   * The banner image for the company in png or jpeg format
+   * The company's banner image. Accepts PNG or JPEG format.
    */
   banner_image?: CompanyUpdateParams.BannerImage | null;
 
@@ -257,7 +263,8 @@ export interface CompanyUpdateParams {
   business_type?: Shared.BusinessTypes | null;
 
   /**
-   * A description of what the company offers or does.
+   * A promotional pitch displayed to potential customers on the company's store
+   * page.
    */
   description?: string | null;
 
@@ -267,27 +274,25 @@ export interface CompanyUpdateParams {
   industry_type?: Shared.IndustryTypes | null;
 
   /**
-   * The logo for the company in png, jpeg, or gif format
+   * The company's logo image. Accepts PNG, JPEG, or GIF format.
    */
   logo?: CompanyUpdateParams.Logo | null;
 
   /**
-   * Whether Whop sends transactional emails to customers on behalf of this company.
-   * Includes: order confirmations, payment failures, refund notifications, upcoming
-   * renewals, and membership cancelations/expirations. When disabled, the platform
-   * is responsible for handling these communications.
+   * Whether Whop sends transactional emails (receipts, renewals, cancelations) to
+   * customers on behalf of this company.
    */
   send_customer_emails?: boolean | null;
 
   /**
-   * The title of the company
+   * The display name of the company shown to customers.
    */
   title?: string | null;
 }
 
 export namespace CompanyUpdateParams {
   /**
-   * The banner image for the company in png or jpeg format
+   * The company's banner image. Accepts PNG or JPEG format.
    */
   export interface BannerImage {
     /**
@@ -297,7 +302,7 @@ export namespace CompanyUpdateParams {
   }
 
   /**
-   * The logo for the company in png, jpeg, or gif format
+   * The company's logo image. Accepts PNG, JPEG, or GIF format.
    */
   export interface Logo {
     /**
@@ -314,12 +319,12 @@ export interface CompanyListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return companies created after this datetime.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return companies created before this datetime.
    */
   created_before?: string | null;
 
@@ -339,8 +344,9 @@ export interface CompanyListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the parent company to list connected accounts for. Omit to list the
-   * current user's own companies.
+   * The unique identifier of the parent platform company. When provided, lists
+   * connected accounts under that platform. Omit to list the current user's own
+   * companies.
    */
   parent_company_id?: string | null;
 }

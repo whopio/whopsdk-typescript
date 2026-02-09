@@ -191,7 +191,7 @@ export namespace AppListResponse {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -206,12 +206,12 @@ export namespace AppListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -222,8 +222,8 @@ export namespace AppListResponse {
    */
   export interface Icon {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }

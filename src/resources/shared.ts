@@ -152,7 +152,7 @@ export namespace App {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -167,12 +167,12 @@ export namespace App {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -183,8 +183,8 @@ export namespace App {
    */
   export interface Icon {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -597,7 +597,8 @@ export interface Company {
   created_at: string;
 
   /**
-   * The creator pitch for the company.
+   * A promotional pitch written by the company creator, displayed to potential
+   * customers on the store page.
    */
   description: string | null;
 
@@ -612,43 +613,47 @@ export interface Company {
   logo: Company.Logo | null;
 
   /**
-   * The number of members in the company.
+   * The total number of users who currently hold active memberships across all of
+   * this company's products.
    */
   member_count: number;
 
   /**
-   * A key-value store of data for the account, created/updated by the platform that
-   * made the account.
+   * A key-value JSON object of custom metadata for this company, managed by the
+   * platform that created the account.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The user who owns this company
+   * The user who owns and has full administrative control over this company.
    */
   owner_user: Company.OwnerUser;
 
   /**
-   * The number of reviews that have been published for the company.
+   * The total number of published customer reviews across all products for this
+   * company.
    */
   published_reviews_count: number;
 
   /**
-   * The slug/route of the company on the Whop site.
+   * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
    */
   route: string;
 
   /**
-   * Whether Whop sends transactional emails to customers on behalf of this company.
+   * Whether Whop sends transactional emails (receipts, updates) to customers on
+   * behalf of this company.
    */
   send_customer_emails: boolean;
 
   /**
-   * The social media accounts of the company
+   * The list of social media accounts and external links associated with this
+   * company.
    */
   social_links: Array<Company.SocialLink>;
 
   /**
-   * The title of the company.
+   * The display name of the company shown to customers.
    */
   title: string;
 
@@ -658,7 +663,7 @@ export interface Company {
   updated_at: string;
 
   /**
-   * If the company is Whop Verified
+   * Whether this company has been verified by Whop's trust and safety team.
    */
   verified: boolean;
 }
@@ -669,14 +674,14 @@ export namespace Company {
    */
   export interface Logo {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
 
   /**
-   * The user who owns this company
+   * The user who owns and has full administrative control over this company.
    */
   export interface OwnerUser {
     /**
@@ -685,12 +690,12 @@ export namespace Company {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -705,7 +710,7 @@ export namespace Company {
     id: string;
 
     /**
-     * The URL
+     * The URL of the social media profile or external link.
      */
     url: string;
 
@@ -835,12 +840,12 @@ export namespace CourseLessonInteraction {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -919,12 +924,12 @@ export namespace CourseLessonInteractionListItem {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1134,7 +1139,8 @@ export namespace Entry {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -1149,17 +1155,18 @@ export namespace Entry {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1252,8 +1259,8 @@ export namespace Experience {
      */
     export interface Icon {
       /**
-       * This is the URL you use to render optimized attachments on the client. This
-       * should be used for apps.
+       * A pre-optimized URL for rendering this attachment on the client. This should be
+       * used for displaying attachments in apps.
        */
       url: string | null;
     }
@@ -1269,12 +1276,12 @@ export namespace Experience {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -1284,8 +1291,8 @@ export namespace Experience {
    */
   export interface Image {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -1301,12 +1308,14 @@ export namespace Experience {
     id: string;
 
     /**
-     * The route of the product.
+     * The URL slug used in the product's public link (e.g., 'my-product' in
+     * whop.com/company/my-product).
      */
     route: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -1444,12 +1453,12 @@ export namespace ForumPost {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1641,12 +1650,12 @@ export namespace Invoice {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1734,12 +1743,12 @@ export namespace InvoiceListItem {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1912,7 +1921,7 @@ export namespace Membership {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -1967,7 +1976,8 @@ export namespace Membership {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -1992,17 +2002,18 @@ export namespace Membership {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -2164,12 +2175,12 @@ export namespace Message {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -2589,12 +2600,14 @@ export namespace Payment {
     id: string;
 
     /**
-     * The route of the product.
+     * The URL slug used in the product's public link (e.g., 'my-product' in
+     * whop.com/company/my-product).
      */
     route: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -2646,17 +2659,18 @@ export namespace Payment {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -2820,7 +2834,7 @@ export namespace Plan {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -2906,7 +2920,8 @@ export namespace Plan {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -2933,7 +2948,7 @@ export interface Product {
   business_type: BusinessTypes | null;
 
   /**
-   * A short type of the company that this product belongs to.
+   * The company this product belongs to.
    */
   company: Product.Company;
 
@@ -2943,45 +2958,51 @@ export interface Product {
   created_at: string;
 
   /**
-   * The custom call to action for the product.
+   * The call-to-action button label displayed on the product's purchase page (e.g.,
+   * 'join', 'buy', 'subscribe').
    */
   custom_cta: CustomCta;
 
   /**
-   * The custom call to action URL for the product, if any.
+   * An optional URL that the call-to-action button links to instead of the default
+   * checkout flow. Null if no custom URL is set.
    */
   custom_cta_url: string | null;
 
   /**
-   * The custom statement descriptor for the product.
+   * A custom text label that appears on the customer's bank or credit card statement
+   * for purchases of this product. Maximum 22 characters, including the required
+   * prefix WHOP\*.
    */
   custom_statement_descriptor: string | null;
 
   /**
-   * A short description of what the company offers or does.
+   * A brief summary of what the product offers, displayed on product pages and
+   * search results.
    */
   description: string | null;
 
   /**
-   * A unique identifier used to create or update products. When provided on product
-   * creation endpoints, we’ll look up an existing product by this identifier — if it
-   * exists, we’ll update it; if not, we’ll create a new one.
+   * A unique identifier used to create or update products via the API. When provided
+   * on product creation endpoints, an existing product with this identifier will be
+   * updated instead of creating a new one.
    */
   external_identifier: string | null;
 
   /**
-   * The percentage of a transaction a user is eligible to earn from the whop
-   * marketplace global affiliate program.
+   * The commission rate (as a percentage) that affiliates earn on sales through the
+   * Whop marketplace global affiliate program. Null if the program is not active.
    */
   global_affiliate_percentage: number | null;
 
   /**
-   * The status of the global affiliate program for this product.
+   * The enrollment status of this product in the Whop marketplace global affiliate
+   * program.
    */
   global_affiliate_status: GlobalAffiliateStatus;
 
   /**
-   * The headline of the product.
+   * A short marketing headline displayed prominently on the product's product page.
    */
   headline: string | null;
 
@@ -2991,43 +3012,48 @@ export interface Product {
   industry_type: IndustryTypes | null;
 
   /**
-   * The percentage of a transaction a user is eligible to earn from the whop
-   * marketplace member affiliate program.
+   * The commission rate (as a percentage) that existing members earn when referring
+   * new customers through the member affiliate program. Null if the program is not
+   * active.
    */
   member_affiliate_percentage: number | null;
 
   /**
-   * The status of the member affiliate program for this product.
+   * The enrollment status of this product in the member affiliate program.
    */
   member_affiliate_status: GlobalAffiliateStatus;
 
   /**
-   * The number of active users for this product.
+   * The number of users who currently hold an active membership to this product.
+   * Returns 0 if the company has disabled public member counts.
    */
   member_count: number;
 
   /**
-   * The user that owns the product (company owner).
+   * The user who owns the company that sells this product.
    */
   owner_user: Product.OwnerUser;
 
   /**
-   * The product tax code for the product, if any.
+   * The tax classification code applied to purchases of this product for sales tax
+   * calculation. Null if no tax code is assigned.
    */
   product_tax_code: Product.ProductTaxCode | null;
 
   /**
-   * The number of reviews that have been published for the product.
+   * The total number of published customer reviews for this product's company.
    */
   published_reviews_count: number;
 
   /**
-   * The route of the product.
+   * The URL slug used in the product's public link (e.g., 'my-product' in
+   * whop.com/company/my-product).
    */
   route: string;
 
   /**
-   * The title of the product. Use for Whop 4.0.
+   * The display name of the product shown to customers on the product page and in
+   * search results.
    */
   title: string;
 
@@ -3037,19 +3063,20 @@ export interface Product {
   updated_at: string;
 
   /**
-   * Whether this product is Whop verified.
+   * Whether this company has been verified by Whop's trust and safety team.
    */
   verified: boolean;
 
   /**
-   * This product will/will not be displayed publicly.
+   * Controls whether the product is visible to customers. When set to 'hidden', the
+   * product is only accessible via direct link.
    */
   visibility: Visibility;
 }
 
 export namespace Product {
   /**
-   * A short type of the company that this product belongs to.
+   * The company this product belongs to.
    */
   export interface Company {
     /**
@@ -3058,18 +3085,18 @@ export namespace Product {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
 
   /**
-   * The user that owns the product (company owner).
+   * The user who owns the company that sells this product.
    */
   export interface OwnerUser {
     /**
@@ -3078,18 +3105,19 @@ export namespace Product {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
 
   /**
-   * The product tax code for the product, if any.
+   * The tax classification code applied to purchases of this product for sales tax
+   * calculation. Null if no tax code is assigned.
    */
   export interface ProductTaxCode {
     /**
@@ -3098,12 +3126,13 @@ export namespace Product {
     id: string;
 
     /**
-     * The name of the product tax code.
+     * The human-readable name of this tax classification (e.g., 'Digital - SaaS').
      */
     name: string;
 
     /**
-     * The type of product this tax code applies to.
+     * The broad product category this tax code covers (e.g., physical goods, digital
+     * services).
      */
     product_type: 'physical' | 'digital' | 'services';
   }
@@ -3130,14 +3159,14 @@ export interface ProductListItem {
   created_at: string;
 
   /**
-   * A unique identifier used to create or update products. When provided on product
-   * creation endpoints, we’ll look up an existing product by this identifier — if it
-   * exists, we’ll update it; if not, we’ll create a new one.
+   * A unique identifier used to create or update products via the API. When provided
+   * on product creation endpoints, an existing product with this identifier will be
+   * updated instead of creating a new one.
    */
   external_identifier: string | null;
 
   /**
-   * The headline of the product.
+   * A short marketing headline displayed prominently on the product's product page.
    */
   headline: string | null;
 
@@ -3147,22 +3176,25 @@ export interface ProductListItem {
   industry_type: IndustryTypes | null;
 
   /**
-   * The number of active users for this product.
+   * The number of users who currently hold an active membership to this product.
+   * Returns 0 if the company has disabled public member counts.
    */
   member_count: number;
 
   /**
-   * The number of reviews that have been published for the product.
+   * The total number of published customer reviews for this product's company.
    */
   published_reviews_count: number;
 
   /**
-   * The route of the product.
+   * The URL slug used in the product's public link (e.g., 'my-product' in
+   * whop.com/company/my-product).
    */
   route: string;
 
   /**
-   * The title of the product. Use for Whop 4.0.
+   * The display name of the product shown to customers on the product page and in
+   * search results.
    */
   title: string;
 
@@ -3172,12 +3204,13 @@ export interface ProductListItem {
   updated_at: string;
 
   /**
-   * Whether this product is Whop verified.
+   * Whether this company has been verified by Whop's trust and safety team.
    */
   verified: boolean;
 
   /**
-   * This product will/will not be displayed publicly.
+   * Controls whether the product is visible to customers. When set to 'hidden', the
+   * product is only accessible via direct link.
    */
   visibility: Visibility;
 }
@@ -3223,12 +3256,12 @@ export namespace Reaction {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -3486,12 +3519,12 @@ export namespace SupportChannel {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -3577,7 +3610,7 @@ export namespace Transfer {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
@@ -3587,7 +3620,7 @@ export namespace Transfer {
     typename: 'User';
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -3603,12 +3636,12 @@ export namespace Transfer {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
 
@@ -3629,7 +3662,7 @@ export namespace Transfer {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
@@ -3639,7 +3672,7 @@ export namespace Transfer {
     typename: 'User';
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -3655,12 +3688,12 @@ export namespace Transfer {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
 
