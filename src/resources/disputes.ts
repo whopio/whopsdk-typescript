@@ -240,23 +240,23 @@ export namespace Dispute {
    */
   export interface CancellationPolicyAttachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -281,23 +281,23 @@ export namespace Dispute {
    */
   export interface CustomerCommunicationAttachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -423,17 +423,18 @@ export namespace Dispute {
       id: string;
 
       /**
-       * The email of the user
+       * The user's email address. Requires the member:email:read permission to access.
+       * Null if not authorized.
        */
       email: string | null;
 
       /**
-       * The name of the user from their Whop account.
+       * The user's display name shown on their public profile.
        */
       name: string | null;
 
       /**
-       * The username of the user from their Whop account.
+       * The user's unique username shown on their public profile.
        */
       username: string;
     }
@@ -459,7 +460,8 @@ export namespace Dispute {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -469,23 +471,23 @@ export namespace Dispute {
    */
   export interface RefundPolicyAttachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -495,23 +497,23 @@ export namespace Dispute {
    */
   export interface UncategorizedAttachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -648,7 +650,8 @@ export namespace DisputeListResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }

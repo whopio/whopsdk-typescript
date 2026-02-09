@@ -114,23 +114,23 @@ export namespace ReviewRetrieveResponse {
    */
   export interface Attachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -145,12 +145,12 @@ export namespace ReviewRetrieveResponse {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -165,7 +165,8 @@ export namespace ReviewRetrieveResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -180,12 +181,12 @@ export namespace ReviewRetrieveResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -263,23 +264,23 @@ export namespace ReviewListResponse {
    */
   export interface Attachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -294,12 +295,12 @@ export namespace ReviewListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }

@@ -244,8 +244,8 @@ export namespace ExperienceListResponse {
      */
     export interface Icon {
       /**
-       * This is the URL you use to render optimized attachments on the client. This
-       * should be used for apps.
+       * A pre-optimized URL for rendering this attachment on the client. This should be
+       * used for displaying attachments in apps.
        */
       url: string | null;
     }
@@ -261,12 +261,12 @@ export namespace ExperienceListResponse {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
@@ -276,8 +276,8 @@ export namespace ExperienceListResponse {
    */
   export interface Image {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }

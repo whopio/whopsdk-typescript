@@ -307,23 +307,23 @@ export namespace Lesson {
      */
     export interface Image {
       /**
-       * The ID of the attachment
+       * The unique identifier of the attachment.
        */
       id: string;
 
       /**
-       * The attachment's content type (e.g., image/jpg, video/mp4)
+       * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
        */
       content_type: string | null;
 
       /**
-       * The name of the file
+       * The original filename of the uploaded attachment, including its file extension.
        */
       filename: string | null;
 
       /**
-       * This is the URL you use to render optimized attachments on the client. This
-       * should be used for apps.
+       * A pre-optimized URL for rendering this attachment on the client. This should be
+       * used for displaying attachments in apps.
        */
       url: string | null;
     }
@@ -360,23 +360,23 @@ export namespace Lesson {
    */
   export interface Attachment {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -386,23 +386,23 @@ export namespace Lesson {
    */
   export interface MainPdf {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -412,8 +412,8 @@ export namespace Lesson {
    */
   export interface Thumbnail {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -567,8 +567,8 @@ export namespace CourseLessonListResponse {
    */
   export interface Thumbnail {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -675,12 +675,12 @@ export namespace CourseLessonSubmitAssessmentResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }

@@ -8,14 +8,15 @@ import { path } from '../internal/utils/path';
 
 export class Users extends APIResource {
   /**
-   * Retrieves a user by ID or username
+   * Retrieve a single user by their unique identifier or username.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, options);
   }
 
   /**
-   * Check if a user has access (and their access level) to a resource
+   * Check whether a user has access to a specific resource, and return their access
+   * level.
    */
   checkAccess(
     resourceID: string,
@@ -27,7 +28,7 @@ export class Users extends APIResource {
   }
 
   /**
-   * Updates the current user's profile
+   * Update the currently authenticated user's profile.
    *
    * Required permissions:
    *
@@ -52,7 +53,7 @@ export interface User {
   id: string;
 
   /**
-   * The user's bio
+   * A short biography written by the user, displayed on their public profile.
    */
   bio: string | null;
 
@@ -62,29 +63,31 @@ export interface User {
   created_at: string;
 
   /**
-   * The name of the user from their Whop account.
+   * The user's display name shown on their public profile.
    */
   name: string | null;
 
   /**
-   * The user's profile picture
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
    */
   profile_picture: User.ProfilePicture | null;
 
   /**
-   * The username of the user from their Whop account.
+   * The user's unique username shown on their public profile.
    */
   username: string;
 }
 
 export namespace User {
   /**
-   * The user's profile picture
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
    */
   export interface ProfilePicture {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -107,36 +110,37 @@ export interface UserCheckAccessResponse {
 
 export interface UserCheckAccessParams {
   /**
-   * The ID (user_xxx) or username of the user
+   * The unique identifier or username of the user.
    */
   id: string;
 }
 
 export interface UserUpdateProfileParams {
   /**
-   * User biography
+   * A short biography displayed on the user's public profile.
    */
   bio?: string | null;
 
   /**
-   * Display name
+   * The user's display name shown on their public profile. Maximum 100 characters.
    */
   name?: string | null;
 
   /**
-   * Profile picture
+   * The user's profile picture image attachment.
    */
   profile_picture?: UserUpdateProfileParams.ProfilePicture | null;
 
   /**
-   * Username (alphanumeric and hyphens)
+   * The user's unique username. Alphanumeric characters and hyphens only. Maximum 42
+   * characters.
    */
   username?: string | null;
 }
 
 export namespace UserUpdateProfileParams {
   /**
-   * Profile picture
+   * The user's profile picture image attachment.
    */
   export interface ProfilePicture {
     /**

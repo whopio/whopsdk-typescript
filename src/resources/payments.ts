@@ -740,12 +740,14 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * The route of the product.
+     * The URL slug used in the product's public link (e.g., 'my-product' in
+     * whop.com/company/my-product).
      */
     route: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -797,17 +799,18 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }

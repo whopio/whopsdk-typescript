@@ -257,8 +257,8 @@ export namespace Course {
        */
       export interface Thumbnail {
         /**
-         * This is the URL you use to render optimized attachments on the client. This
-         * should be used for apps.
+         * A pre-optimized URL for rendering this attachment on the client. This should be
+         * used for displaying attachments in apps.
          */
         url: string | null;
       }
@@ -290,29 +290,30 @@ export namespace Course {
    */
   export interface Thumbnail {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     optimized_url: string | null;
 
     /**
-     * The original URL of the attachment, such as a direct link to S3. This should
-     * never be displayed on the client and always passed to an Imgproxy transformer.
+     * The original source URL of the attachment, such as a direct link to S3. This
+     * should never be displayed on the client and should always be passed through an
+     * Imgproxy transformer.
      */
     source_url: string | null;
   }
@@ -431,29 +432,30 @@ export namespace CourseListResponse {
    */
   export interface Thumbnail {
     /**
-     * The ID of the attachment
+     * The unique identifier of the attachment.
      */
     id: string;
 
     /**
-     * The attachment's content type (e.g., image/jpg, video/mp4)
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
      */
     content_type: string | null;
 
     /**
-     * The name of the file
+     * The original filename of the uploaded attachment, including its file extension.
      */
     filename: string | null;
 
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     optimized_url: string | null;
 
     /**
-     * The original URL of the attachment, such as a direct link to S3. This should
-     * never be displayed on the client and always passed to an Imgproxy transformer.
+     * The original source URL of the attachment, such as a direct link to S3. This
+     * should never be displayed on the client and should always be passed through an
+     * Imgproxy transformer.
      */
     source_url: string | null;
   }
