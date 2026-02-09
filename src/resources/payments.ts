@@ -255,6 +255,8 @@ export type CardBrands =
   | 'carnet'
   | 'atm_card'
   | 'china_union_payuzcard'
+  | 'codensa'
+  | 'cabal'
   | 'unknown';
 
 /**
