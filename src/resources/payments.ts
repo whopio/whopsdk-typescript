@@ -68,8 +68,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Returns a paginated list of payments for a company, with optional filtering by
-   * product, plan, status, billing reason, currency, and creation date.
+   * Returns a paginated list of payments for the actor in context, with optional
+   * filtering by product, plan, status, billing reason, currency, and creation date.
    *
    * Required permissions:
    *
@@ -84,15 +84,13 @@ export class Payments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const paymentListResponse of client.payments.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
+   * for await (const paymentListResponse of client.payments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: PaymentListParams,
+    query: PaymentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
     return this._client.getAPIList('/payments', CursorPage<PaymentListResponse>, { query, ...options });
@@ -1245,11 +1243,6 @@ export declare namespace PaymentCreateParams {
 
 export interface PaymentListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list payments for.
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
@@ -1258,6 +1251,11 @@ export interface PaymentListParams extends CursorPageParams {
    * Filter payments by their billing reason.
    */
   billing_reasons?: Array<BillingReasons> | null;
+
+  /**
+   * The unique identifier of the company to list payments for.
+   */
+  company_id?: string | null;
 
   /**
    * Only return payments created after this timestamp.
