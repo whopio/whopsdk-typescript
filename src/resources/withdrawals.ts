@@ -152,6 +152,7 @@ export interface Withdrawal {
     | 'ssn_invalid'
     | 'wallet_screenshot_required'
     | 'unsupported_region'
+    | 'payout_provider_timeout'
     | null;
 
   /**
