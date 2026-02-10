@@ -63,6 +63,7 @@ describe('resource checkoutConfigurations', () => {
           global_affiliate_percentage: 6.9,
           global_affiliate_status: 'enabled',
           headline: 'headline',
+          industry_group: 'academic_and_test_prep',
           industry_type: 'trading',
           product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
           redirect_purchase_url: 'redirect_purchase_url',
