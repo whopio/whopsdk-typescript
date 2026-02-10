@@ -10,7 +10,7 @@ import { path } from '../internal/utils/path';
 
 export class CourseLessonInteractions extends APIResource {
   /**
-   * Retrieves a course lesson interaction by ID
+   * Retrieves the details of an existing course lesson interaction.
    *
    * Required permissions:
    *
@@ -22,7 +22,8 @@ export class CourseLessonInteractions extends APIResource {
   }
 
   /**
-   * Lists course lesson interactions
+   * Returns a paginated list of lesson interactions, filtered by lesson, course,
+   * user, or completion status.
    *
    * Required permissions:
    *
@@ -48,12 +49,12 @@ export interface CourseLessonInteractionListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * Whether the lesson has been completed by the user
+   * Whether to filter for completed or in-progress lesson interactions.
    */
   completed?: boolean | null;
 
   /**
-   * The ID of the course to list course lesson interactions for
+   * The unique identifier of the course to filter interactions for.
    */
   course_id?: string | null;
 
@@ -68,12 +69,12 @@ export interface CourseLessonInteractionListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the lesson to list course lesson interactions for
+   * The unique identifier of the lesson to filter interactions for.
    */
   lesson_id?: string | null;
 
   /**
-   * The ID of the user to list course lesson interactions for
+   * The unique identifier of the user to filter lesson interactions for.
    */
   user_id?: string | null;
 }

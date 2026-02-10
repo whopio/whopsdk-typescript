@@ -9,8 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class SupportChannels extends APIResource {
   /**
-   * Create a new support channel for a user in a company. If one already exists, it
-   * will return the existing one.
+   * Open a new support channel between a company team member and a customer. Returns
+   * the existing channel if one already exists for that user.
    *
    * Required permissions:
    *
@@ -29,7 +29,7 @@ export class SupportChannels extends APIResource {
   }
 
   /**
-   * Retrieves a support channel
+   * Retrieves the details of an existing support channel.
    *
    * Required permissions:
    *
@@ -46,7 +46,8 @@ export class SupportChannels extends APIResource {
   }
 
   /**
-   * Lists chat channels inside a company
+   * Returns a paginated list of support channels for a specific company, with
+   * optional filtering by resolution status and custom sorting.
    *
    * Required permissions:
    *
@@ -76,7 +77,8 @@ export class SupportChannels extends APIResource {
 export type SupportChannelListResponsesCursorPage = CursorPage<SupportChannelListResponse>;
 
 /**
- * Represents a DM channel
+ * A messaging channel that can be a one-on-one DM, group chat, company support
+ * conversation, or platform-level direct message.
  */
 export interface SupportChannelListResponse {
   /**
@@ -85,34 +87,40 @@ export interface SupportChannelListResponse {
   id: string;
 
   /**
-   * The bot ID if this is a support chat
+   * The unique identifier of the company associated with this channel. Null if this
+   * is not a support or company-scoped conversation.
    */
   company_id: string | null;
 
   /**
-   * The custom name of the DM channel, if any
+   * A custom display name assigned to this channel by the user. Null if no custom
+   * name has been set.
    */
   custom_name: string | null;
 
   /**
-   * The customer user if this is a support chat
+   * The customer who initiated this support conversation. Null if this is not a
+   * support chat.
    */
   customer_user: SupportChannelListResponse.CustomerUser | null;
 
   /**
-   * When the last message was sent
+   * The timestamp when the most recent message was sent in this channel. Null if no
+   * messages have been sent.
    */
   last_message_at: string | null;
 
   /**
-   * When the support ticket was resolved (null if unresolved)
+   * The timestamp when the linked support ticket was marked as resolved. Null if
+   * unresolved or not a support chat.
    */
   resolved_at: string | null;
 }
 
 export namespace SupportChannelListResponse {
   /**
-   * The customer user if this is a support chat
+   * The customer who initiated this support conversation. Null if this is not a
+   * support chat.
    */
   export interface CustomerUser {
     /**
@@ -134,19 +142,20 @@ export namespace SupportChannelListResponse {
 
 export interface SupportChannelCreateParams {
   /**
-   * The ID of the company to create the support chat in
+   * The unique identifier of the company to create the support channel in.
    */
   company_id: string;
 
   /**
-   * The ID (user_xxx) or username of the user to create the support chat for
+   * The user ID (e.g. 'user_xxxxx') or username of the customer to open a support
+   * channel for.
    */
   user_id: string;
 }
 
 export interface SupportChannelListParams extends CursorPageParams {
   /**
-   * The ID of the company to list chat channels for
+   * The unique identifier of the company to list support channels for.
    */
   company_id: string;
 
@@ -171,9 +180,8 @@ export interface SupportChannelListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * Filter for tickets where customer sent the last message (needs response) AND not
-   * resolved. Set to true to only return open channels, false to only return
-   * resolved channels.
+   * Whether to filter by open or resolved support channels. Set to true to only
+   * return channels awaiting a response, or false for resolved channels.
    */
   open?: boolean | null;
 

@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class CourseLessons extends APIResource {
   /**
-   * Creates a new course lesson
+   * Create a new lesson within a course chapter. Lessons can contain video, text, or
+   * assessment content.
    *
    * Required permissions:
    *
@@ -28,7 +29,7 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Retrieves a course lesson by ID
+   * Retrieves the details of an existing course lesson.
    *
    * Required permissions:
    *
@@ -46,7 +47,8 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Updates a course lesson
+   * Update a lesson's content, type, visibility, assessment questions, or media
+   * attachments.
    *
    * Required permissions:
    *
@@ -68,7 +70,8 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Lists lessons for a course or chapter
+   * Returns a paginated list of lessons within a course or chapter, ordered by
+   * position.
    *
    * Required permissions:
    *
@@ -93,7 +96,7 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Deletes a course lesson
+   * Permanently delete a lesson and remove it from its chapter.
    *
    * Required permissions:
    *
@@ -111,7 +114,7 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Marks a course lesson as completed
+   * Mark a lesson as completed for the current user after they finish the content.
    *
    * @example
    * ```ts
@@ -128,7 +131,8 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Starts a course lesson
+   * Record that the current user has started viewing a lesson, creating progress
+   * tracking records.
    *
    * @example
    * ```ts
@@ -142,7 +146,7 @@ export class CourseLessons extends APIResource {
   }
 
   /**
-   * Submits answers for a course assessment
+   * Submit answers for a quiz or knowledge check lesson and receive a graded result.
    *
    * @example
    * ```ts
@@ -174,7 +178,8 @@ export type AssessmentQuestionTypes = 'short_answer' | 'true_false' | 'multiple_
 export type EmbedType = 'youtube' | 'loom';
 
 /**
- * A lesson from the courses app
+ * An individual learning unit within a chapter, which can contain text, video,
+ * PDF, or assessment content.
  */
 export interface Lesson {
   /**
@@ -183,17 +188,20 @@ export interface Lesson {
   id: string;
 
   /**
-   * Assessment questions for quiz/knowledge check lessons
+   * The list of questions for quiz or knowledge check lessons. Empty for
+   * non-assessment lesson types.
    */
   assessment_questions: Array<Lesson.AssessmentQuestion>;
 
   /**
-   * The attached files in this lesson as a flat array
+   * All supplementary files attached to this lesson returned as a flat array rather
+   * than a paginated connection.
    */
   attachments: Array<Lesson.Attachment>;
 
   /**
-   * The content of the lesson
+   * The text body of the lesson in plain text format. Null if the lesson has no text
+   * content.
    */
   content: string | null;
 
@@ -203,12 +211,14 @@ export interface Lesson {
   created_at: string;
 
   /**
-   * Number of days from course start until the lesson is unlocked
+   * The number of days after a student starts the course before this lesson becomes
+   * accessible. Null if the lesson is available immediately.
    */
   days_from_course_start_until_unlock: number | null;
 
   /**
-   * ID for the embed (YouTube video ID or Loom share ID)
+   * The external video identifier for embedded video lessons, such as a YouTube
+   * video ID or Loom share ID. Null if the lesson has no embed.
    */
   embed_id: string | null;
 
@@ -218,38 +228,42 @@ export interface Lesson {
   embed_type: EmbedType | null;
 
   /**
-   * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
+   * The content format of this lesson. One of: text, video, pdf, multi, quiz,
+   * knowledge_check.
    */
   lesson_type: LessonTypes;
 
   /**
-   * The main PDF file for this lesson
+   * The primary PDF document for PDF-type lessons. Null if this lesson is not a PDF
+   * lesson or no PDF has been uploaded.
    */
   main_pdf: Lesson.MainPdf | null;
 
   /**
-   * The order of the lesson within its chapter
+   * The sort position of this lesson within its parent chapter, starting from zero.
    */
   order: number;
 
   /**
-   * The thumbnail for the lesson
+   * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   thumbnail: Lesson.Thumbnail | null;
 
   /**
-   * The title of the lesson
+   * The display name of the lesson shown to students. Maximum 120 characters.
    */
   title: string;
 
   /**
-   * The associated Mux asset for video lessons
+   * The Mux video asset for video-type lessons, used for streaming playback. Null if
+   * this lesson has no hosted video.
    */
   video_asset: Lesson.VideoAsset | null;
 
   /**
-   * The visibility of the lesson. Determines how / whether this lesson is visible to
-   * users.
+   * The visibility setting that controls whether this lesson appears to students.
+   * One of: visible, hidden.
    */
   visibility: LessonVisibilities;
 }
@@ -307,7 +321,11 @@ export namespace Lesson {
      */
     export interface Image {
       /**
-       * The unique identifier of the attachment.
+       * Represents a unique identifier that is Base64 obfuscated. It is often used to
+       * refetch an object or as key for a cache. The ID type appears in a JSON response
+       * as a String; however, it is not intended to be human-readable. When expected as
+       * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+       * input value will be accepted as an ID.
        */
       id: string;
 
@@ -360,7 +378,11 @@ export namespace Lesson {
    */
   export interface Attachment {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -382,11 +404,16 @@ export namespace Lesson {
   }
 
   /**
-   * The main PDF file for this lesson
+   * The primary PDF document for PDF-type lessons. Null if this lesson is not a PDF
+   * lesson or no PDF has been uploaded.
    */
   export interface MainPdf {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -408,7 +435,8 @@ export namespace Lesson {
   }
 
   /**
-   * The thumbnail for the lesson
+   * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   export interface Thumbnail {
     /**
@@ -419,7 +447,8 @@ export namespace Lesson {
   }
 
   /**
-   * The associated Mux asset for video lessons
+   * The Mux video asset for video-type lessons, used for streaming playback. Null if
+   * this lesson has no hosted video.
    */
   export interface VideoAsset {
     /**
@@ -501,7 +530,8 @@ export type LessonTypes = 'text' | 'video' | 'pdf' | 'multi' | 'quiz' | 'knowled
 export type LessonVisibilities = 'visible' | 'hidden';
 
 /**
- * A lesson from the courses app
+ * An individual learning unit within a chapter, which can contain text, video,
+ * PDF, or assessment content.
  */
 export interface CourseLessonListResponse {
   /**
@@ -510,7 +540,8 @@ export interface CourseLessonListResponse {
   id: string;
 
   /**
-   * The content of the lesson
+   * The text body of the lesson in plain text format. Null if the lesson has no text
+   * content.
    */
   content: string | null;
 
@@ -520,12 +551,14 @@ export interface CourseLessonListResponse {
   created_at: string;
 
   /**
-   * Number of days from course start until the lesson is unlocked
+   * The number of days after a student starts the course before this lesson becomes
+   * accessible. Null if the lesson is available immediately.
    */
   days_from_course_start_until_unlock: number | null;
 
   /**
-   * ID for the embed (YouTube video ID or Loom share ID)
+   * The external video identifier for embedded video lessons, such as a YouTube
+   * video ID or Loom share ID. Null if the lesson has no embed.
    */
   embed_id: string | null;
 
@@ -535,35 +568,38 @@ export interface CourseLessonListResponse {
   embed_type: EmbedType | null;
 
   /**
-   * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
+   * The content format of this lesson. One of: text, video, pdf, multi, quiz,
+   * knowledge_check.
    */
   lesson_type: LessonTypes;
 
   /**
-   * The order of the lesson within its chapter
+   * The sort position of this lesson within its parent chapter, starting from zero.
    */
   order: number;
 
   /**
-   * The thumbnail for the lesson
+   * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   thumbnail: CourseLessonListResponse.Thumbnail | null;
 
   /**
-   * The title of the lesson
+   * The display name of the lesson shown to students. Maximum 120 characters.
    */
   title: string;
 
   /**
-   * The visibility of the lesson. Determines how / whether this lesson is visible to
-   * users.
+   * The visibility setting that controls whether this lesson appears to students.
+   * One of: visible, hidden.
    */
   visibility: LessonVisibilities;
 }
 
 export namespace CourseLessonListResponse {
   /**
-   * The thumbnail for the lesson
+   * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   export interface Thumbnail {
     /**
@@ -660,7 +696,7 @@ export namespace CourseLessonSubmitAssessmentResponse {
     id: string;
 
     /**
-     * The title of the lesson
+     * The display name of the lesson shown to students. Maximum 120 characters.
      */
     title: string;
   }
@@ -688,27 +724,30 @@ export namespace CourseLessonSubmitAssessmentResponse {
 
 export interface CourseLessonCreateParams {
   /**
-   * The ID of the chapter to create the lesson in
+   * The unique identifier of the chapter to create the lesson in (e.g.,
+   * "chap_XXXXX").
    */
   chapter_id: string;
 
   /**
-   * The type of the lesson
+   * The content type of the lesson, such as video, text, quiz, or knowledge check.
    */
   lesson_type: LessonTypes;
 
   /**
-   * The content of the lesson
+   * The rich text or HTML content body of the lesson.
    */
   content?: string | null;
 
   /**
-   * Days from course start until unlock
+   * The number of days after a student starts the course before this lesson becomes
+   * accessible.
    */
   days_from_course_start_until_unlock?: number | null;
 
   /**
-   * ID for the embed (YouTube video ID or Loom share ID)
+   * The external video identifier for embedded content (e.g., a YouTube video ID or
+   * Loom share ID).
    */
   embed_id?: string | null;
 
@@ -718,19 +757,19 @@ export interface CourseLessonCreateParams {
   embed_type?: EmbedType | null;
 
   /**
-   * The thumbnail for the lesson in png, jpeg, or gif format
+   * The thumbnail image for the lesson in PNG, JPEG, or GIF format.
    */
   thumbnail?: CourseLessonCreateParams.Thumbnail | null;
 
   /**
-   * The title of the lesson
+   * The display title of the lesson (e.g., "Getting Started with APIs").
    */
   title?: string | null;
 }
 
 export namespace CourseLessonCreateParams {
   /**
-   * The thumbnail for the lesson in png, jpeg, or gif format
+   * The thumbnail image for the lesson in PNG, JPEG, or GIF format.
    */
   export interface Thumbnail {
     /**
@@ -742,34 +781,37 @@ export namespace CourseLessonCreateParams {
 
 export interface CourseLessonUpdateParams {
   /**
-   * Completion requirements for quiz/knowledge check lessons
+   * The passing criteria for quiz or knowledge check lessons, such as minimum grade
+   * or correct answers.
    */
   assessment_completion_requirement?: CourseLessonUpdateParams.AssessmentCompletionRequirement | null;
 
   /**
-   * Assessment questions for quiz/knowledge check lessons. Replaces all existing
-   * questions.
+   * The full list of assessment questions for quiz or knowledge check lessons.
+   * Replaces all existing questions.
    */
   assessment_questions?: Array<CourseLessonUpdateParams.AssessmentQuestion> | null;
 
   /**
-   * General attachments for the lesson (PDFs, files, etc). Replaces all existing
+   * File attachments for the lesson such as PDFs or documents. Replaces all existing
    * attachments.
    */
   attachments?: Array<CourseLessonUpdateParams.Attachment> | null;
 
   /**
-   * The content of the lesson
+   * The rich text or HTML content body of the lesson.
    */
   content?: string | null;
 
   /**
-   * Days from course start until unlock
+   * The number of days after a student starts the course before this lesson becomes
+   * accessible.
    */
   days_from_course_start_until_unlock?: number | null;
 
   /**
-   * ID for the embed (YouTube video ID or Loom share ID)
+   * The external video identifier for embedded content (e.g., a YouTube video ID or
+   * Loom share ID).
    */
   embed_id?: string | null;
 
@@ -784,27 +826,28 @@ export interface CourseLessonUpdateParams {
   lesson_type?: LessonTypes | null;
 
   /**
-   * The main PDF file for this lesson
+   * The primary PDF document attached to this lesson for student reference.
    */
   main_pdf?: CourseLessonUpdateParams.MainPdf | null;
 
   /**
-   * Maximum number of attempts allowed for assessments
+   * The maximum number of attempts a student is allowed for assessment lessons.
    */
   max_attempts?: number | null;
 
   /**
-   * The ID of the Mux asset to attach to this lesson for video lessons
+   * The identifier of a Mux video asset to attach to this lesson (e.g.,
+   * "mux_XXXXX").
    */
   mux_asset_id?: string | null;
 
   /**
-   * The thumbnail for the lesson in png, jpeg, or gif format
+   * The thumbnail image for the lesson in PNG, JPEG, or GIF format.
    */
   thumbnail?: CourseLessonUpdateParams.Thumbnail | null;
 
   /**
-   * The title of the lesson
+   * The display title of the lesson (e.g., "Getting Started with APIs").
    */
   title?: string | null;
 
@@ -817,7 +860,8 @@ export interface CourseLessonUpdateParams {
 
 export namespace CourseLessonUpdateParams {
   /**
-   * Completion requirements for quiz/knowledge check lessons
+   * The passing criteria for quiz or knowledge check lessons, such as minimum grade
+   * or correct answers.
    */
   export interface AssessmentCompletionRequirement {
     /**
@@ -913,7 +957,7 @@ export namespace CourseLessonUpdateParams {
   }
 
   /**
-   * The main PDF file for this lesson
+   * The primary PDF document attached to this lesson for student reference.
    */
   export interface MainPdf {
     /**
@@ -923,7 +967,7 @@ export namespace CourseLessonUpdateParams {
   }
 
   /**
-   * The thumbnail for the lesson in png, jpeg, or gif format
+   * The thumbnail image for the lesson in PNG, JPEG, or GIF format.
    */
   export interface Thumbnail {
     /**
@@ -940,12 +984,12 @@ export interface CourseLessonListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the chapter (returns lessons only for this chapter)
+   * The unique identifier of a chapter to return only its lessons.
    */
   chapter_id?: string | null;
 
   /**
-   * The ID of the course (returns all lessons across all chapters)
+   * The unique identifier of the course to return all lessons across all chapters.
    */
   course_id?: string | null;
 
@@ -962,7 +1006,7 @@ export interface CourseLessonListParams extends CursorPageParams {
 
 export interface CourseLessonSubmitAssessmentParams {
   /**
-   * The answers to the assessment questions
+   * The list of answers to submit for each assessment question.
    */
   answers: Array<CourseLessonSubmitAssessmentParams.Answer>;
 }

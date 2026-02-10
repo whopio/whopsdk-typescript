@@ -6,9 +6,8 @@ import { RequestOptions } from '../internal/request-options';
 
 export class AccountLinks extends APIResource {
   /**
-   * Generates a url that a user can be directed to in order to access their
-   * sub-merchant account. For example, they can visit the hosted payouts portal or
-   * the hosted KYC onboarding flow.
+   * Generate a URL that directs a sub-merchant to their account portal, such as the
+   * hosted payouts dashboard or the KYC onboarding flow.
    *
    * @example
    * ```ts
@@ -26,41 +25,44 @@ export class AccountLinks extends APIResource {
 }
 
 /**
- * An object representing a url that a user can be directed to to access their
- * account.
+ * A temporary, time-limited URL that grants a user access to an external account
+ * management page.
  */
 export interface AccountLinkCreateResponse {
   /**
-   * The expiration timestamp of the url.
+   * The timestamp after which this account link URL is no longer valid.
    */
   expires_at: string;
 
   /**
-   * The URL to navigate the user to.
+   * The temporary URL to redirect the user to for account access. Expires at the
+   * time specified by expires_at.
    */
   url: string;
 }
 
 export interface AccountLinkCreateParams {
   /**
-   * The ID of the Company to generate the url for. The company must be a
-   * sub-merchant of the API key's company.
+   * The unique identifier of the company to generate the link for, starting with
+   * 'biz\_'. Must be a sub-merchant of the API key's company.
    */
   company_id: string;
 
   /**
-   * The URL to redirect to if the session expires and needs to be re-authenticated
-   * due to the token expiring.
+   * The URL to redirect the user to if the session expires and needs to be
+   * re-authenticated, such as 'https://example.com/refresh'.
    */
   refresh_url: string;
 
   /**
-   * The URL to redirect to when the customer wants to return to your site.
+   * The URL to redirect the user to when they want to return to your site, such as
+   * 'https://example.com/return'.
    */
   return_url: string;
 
   /**
-   * The use case for which the link will be used.
+   * The purpose of the account link, such as hosted payouts portal or hosted KYC
+   * onboarding.
    */
   use_case: 'account_onboarding' | 'payouts_portal';
 }

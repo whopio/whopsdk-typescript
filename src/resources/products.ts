@@ -10,7 +10,8 @@ import { path } from '../internal/utils/path';
 
 export class Products extends APIResource {
   /**
-   * Create a new product for a company.
+   * Create a new product for a company. The product serves as the top-level
+   * container for plans and experiences.
    *
    * Required permissions:
    *
@@ -30,7 +31,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Retrieve a single product by its unique identifier or route slug.
+   * Retrieves the details of an existing product.
    *
    * Required permissions:
    *
@@ -48,7 +49,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Update an existing product.
+   * Update a product's title, description, visibility, and other settings.
    *
    * Required permissions:
    *
@@ -71,7 +72,8 @@ export class Products extends APIResource {
   }
 
   /**
-   * List products belonging to a company, with optional filtering and sorting.
+   * Returns a paginated list of products belonging to a company, with optional
+   * filtering by type, visibility, and creation date.
    *
    * Required permissions:
    *
@@ -95,7 +97,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Delete a product by its unique identifier.
+   * Permanently delete a product and remove it from the company's catalog.
    *
    * Required permissions:
    *
@@ -460,12 +462,12 @@ export interface ProductListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * Only return products created after this datetime.
+   * Only return products created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * Only return products created before this datetime.
+   * Only return products created before this timestamp.
    */
   created_before?: string | null;
 

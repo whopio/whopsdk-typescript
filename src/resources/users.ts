@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class Users extends APIResource {
   /**
-   * Retrieve a single user by their unique identifier or username.
+   * Retrieves the details of an existing user.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, options);

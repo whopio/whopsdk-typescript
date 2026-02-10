@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Shipments extends APIResource {
   /**
-   * Creates a new shipment
+   * Create a new shipment with a tracking code for a specific payment within a
+   * company.
    *
    * Required permissions:
    *
@@ -30,7 +31,7 @@ export class Shipments extends APIResource {
   }
 
   /**
-   * Retrieves a shipment by ID
+   * Retrieves the details of an existing shipment.
    *
    * Required permissions:
    *
@@ -49,7 +50,8 @@ export class Shipments extends APIResource {
   }
 
   /**
-   * Lists shipments for a payment
+   * Returns a paginated list of shipments, with optional filtering by payment,
+   * company, or user.
    *
    * Required permissions:
    *
@@ -75,7 +77,8 @@ export class Shipments extends APIResource {
 export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>;
 
 /**
- * A shipment
+ * A physical shipment associated with a payment, including carrier details and
+ * tracking information.
  */
 export interface ShipmentListResponse {
   /**
@@ -84,7 +87,7 @@ export interface ShipmentListResponse {
   id: string;
 
   /**
-   * The carrier of the shipment
+   * The shipping carrier responsible for delivering this shipment.
    */
   carrier: Shared.ShipmentCarrier;
 
@@ -94,22 +97,25 @@ export interface ShipmentListResponse {
   created_at: string;
 
   /**
-   * The delivery estimate of the shipment
+   * The estimated delivery date for this shipment. Null if the carrier has not
+   * provided an estimate.
    */
   delivery_estimate: string | null;
 
   /**
-   * The payment of the shipment
+   * The payment associated with this shipment. Null if the payment has been deleted
+   * or is inaccessible.
    */
   payment: ShipmentListResponse.Payment | null;
 
   /**
-   * The service of the shipment
+   * The shipping service level used for this shipment. Null if the carrier does not
+   * specify a service tier.
    */
   service: string | null;
 
   /**
-   * The status of the shipment
+   * The current delivery status of this shipment.
    */
   status: Shared.ShipmentStatus;
 
@@ -119,7 +125,7 @@ export interface ShipmentListResponse {
   substatus: Shared.ShipmentSubstatus | null;
 
   /**
-   * The tracking code of the shipment
+   * The carrier-assigned tracking number used to look up shipment progress.
    */
   tracking_code: string;
 
@@ -131,7 +137,8 @@ export interface ShipmentListResponse {
 
 export namespace ShipmentListResponse {
   /**
-   * The payment of the shipment
+   * The payment associated with this shipment. Null if the payment has been deleted
+   * or is inaccessible.
    */
   export interface Payment {
     /**
@@ -143,17 +150,19 @@ export namespace ShipmentListResponse {
 
 export interface ShipmentCreateParams {
   /**
-   * The ID of the company to create the shipment for
+   * The unique identifier of the company to create the shipment for, starting with
+   * 'biz\_'.
    */
   company_id: string;
 
   /**
-   * The ID of the payment to create the shipment for
+   * The unique identifier of the payment to associate the shipment with.
    */
   payment_id: string;
 
   /**
-   * The tracking code for the shipment
+   * The carrier tracking code for the shipment, such as a USPS, UPS, or FedEx
+   * tracking number.
    */
   tracking_code: string;
 }
@@ -165,7 +174,7 @@ export interface ShipmentListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the company
+   * Filter shipments to only those belonging to this company.
    */
   company_id?: string | null;
 
@@ -180,12 +189,12 @@ export interface ShipmentListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the payment
+   * Filter shipments to only those associated with this specific payment.
    */
   payment_id?: string | null;
 
   /**
-   * The ID of the user
+   * Filter shipments to only those for this specific user.
    */
   user_id?: string | null;
 }

@@ -8,7 +8,8 @@ import { path } from '../internal/utils/path';
 
 export class FeeMarkups extends APIResource {
   /**
-   * Creates or updates a fee markup for a company.
+   * Create or update a fee markup for a company. If a markup for the specified fee
+   * type already exists, it will be updated with the new values.
    *
    * Required permissions:
    *
@@ -27,7 +28,8 @@ export class FeeMarkups extends APIResource {
   }
 
   /**
-   * Lists fee markups for a company.
+   * Returns a paginated list of fee markups configured for a company. If the company
+   * is a platform account, returns the platform default markups.
    *
    * Required permissions:
    *
@@ -51,7 +53,8 @@ export class FeeMarkups extends APIResource {
   }
 
   /**
-   * Deletes a fee markup for a company.
+   * Delete a fee markup configuration for a company. This removes the custom fee
+   * override and reverts to the parent company's default fees.
    *
    * Required permissions:
    *
@@ -80,7 +83,8 @@ export type FeeMarkupType =
   | 'digital_wallet_withdrawal_markup';
 
 /**
- * Represents a fee markup configuration for a company
+ * A fee markup configuration that defines additional charges applied to
+ * transactions for a company.
  */
 export interface FeeMarkupCreateResponse {
   /**
@@ -94,22 +98,25 @@ export interface FeeMarkupCreateResponse {
   created_at: string;
 
   /**
-   * The type of fee this markup applies to.
+   * The category of fee this markup applies to.
    */
   fee_type: FeeMarkupType;
 
   /**
-   * The fixed fee in USD to charge (0-50).
+   * A flat fee charged per transaction, in USD. Ranges from 0 to 50. Null if no
+   * fixed fee is configured.
    */
   fixed_fee_usd: number | null;
 
   /**
-   * Internal notes about this fee markup.
+   * Internal notes about this fee markup, visible only to administrators. Null if no
+   * notes have been added.
    */
   notes: string | null;
 
   /**
-   * The percentage fee to charge (0-25).
+   * A percentage-based fee charged per transaction. Ranges from 0 to 25. Null if no
+   * percentage fee is configured.
    */
   percentage_fee: number | null;
 
@@ -120,7 +127,8 @@ export interface FeeMarkupCreateResponse {
 }
 
 /**
- * Represents a fee markup configuration for a company
+ * A fee markup configuration that defines additional charges applied to
+ * transactions for a company.
  */
 export interface FeeMarkupListResponse {
   /**
@@ -134,22 +142,25 @@ export interface FeeMarkupListResponse {
   created_at: string;
 
   /**
-   * The type of fee this markup applies to.
+   * The category of fee this markup applies to.
    */
   fee_type: FeeMarkupType;
 
   /**
-   * The fixed fee in USD to charge (0-50).
+   * A flat fee charged per transaction, in USD. Ranges from 0 to 50. Null if no
+   * fixed fee is configured.
    */
   fixed_fee_usd: number | null;
 
   /**
-   * Internal notes about this fee markup.
+   * Internal notes about this fee markup, visible only to administrators. Null if no
+   * notes have been added.
    */
   notes: string | null;
 
   /**
-   * The percentage fee to charge (0-25).
+   * A percentage-based fee charged per transaction. Ranges from 0 to 25. Null if no
+   * percentage fee is configured.
    */
   percentage_fee: number | null;
 
@@ -166,40 +177,40 @@ export type FeeMarkupDeleteResponse = boolean;
 
 export interface FeeMarkupCreateParams {
   /**
-   * The ID (tag) of the company you want to update the fee markup for.
+   * The unique identifier of the company to create or update the fee markup for.
    */
   company_id: string;
 
   /**
-   * The type of fee this markup applies to.
+   * The type of fee this markup applies to, such as processing or platform fees.
    */
   fee_type: FeeMarkupType;
 
   /**
-   * The fixed fee in USD to charge (0-50).
+   * The fixed fee amount in USD to charge per transaction. Must be between 0 and 50.
    */
   fixed_fee_usd?: number | null;
 
   /**
-   * Custom metadata to attach to this fee markup.
+   * Custom key-value metadata to attach to this fee markup.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * Internal notes about this fee markup.
+   * Internal notes about this fee markup for record-keeping purposes.
    */
   notes?: string | null;
 
   /**
-   * The percentage fee to charge (0-25).
+   * The percentage fee to charge per transaction. Must be between 0 and 25.
    */
   percentage_fee?: number | null;
 }
 
 export interface FeeMarkupListParams extends CursorPageParams {
   /**
-   * The ID (tag) of the company you want to list the fee markups for. If you pass
-   * your platform account, you will get the platform default markups.
+   * The unique identifier of the company to list fee markups for. Pass a platform
+   * account identifier to retrieve platform default markups.
    */
   company_id: string;
 

@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class AuthorizedUsers extends APIResource {
   /**
-   * Retrieves a authorized user by ID
+   * Retrieves the details of an existing authorized user.
    *
    * Required permissions:
    *
@@ -21,7 +21,8 @@ export class AuthorizedUsers extends APIResource {
   }
 
   /**
-   * Lists authorized users
+   * Returns a paginated list of authorized team members for a company, with optional
+   * filtering by user, role, and creation date.
    *
    * Required permissions:
    *
@@ -42,7 +43,8 @@ export class AuthorizedUsers extends APIResource {
 export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse>;
 
 /**
- * A user who has elevated security privileges for a company
+ * A user who has been granted administrative access to manage a company's
+ * dashboard and settings.
  */
 export interface AuthorizedUserRetrieveResponse {
   /**
@@ -51,24 +53,24 @@ export interface AuthorizedUserRetrieveResponse {
   id: string;
 
   /**
-   * The company associated with the authorized user.
+   * The company this authorized user has access to.
    */
   company: AuthorizedUserRetrieveResponse.Company;
 
   /**
-   * The role of the authorized user in the company.
+   * The permission role assigned to this authorized user within the company.
    */
   role: Shared.AuthorizedUserRoles;
 
   /**
-   * The user associated with the authorized user.
+   * The user account linked to this authorized user record.
    */
   user: AuthorizedUserRetrieveResponse.User;
 }
 
 export namespace AuthorizedUserRetrieveResponse {
   /**
-   * The company associated with the authorized user.
+   * The company this authorized user has access to.
    */
   export interface Company {
     /**
@@ -83,7 +85,7 @@ export namespace AuthorizedUserRetrieveResponse {
   }
 
   /**
-   * The user associated with the authorized user.
+   * The user account linked to this authorized user record.
    */
   export interface User {
     /**
@@ -110,7 +112,8 @@ export namespace AuthorizedUserRetrieveResponse {
 }
 
 /**
- * A user who has elevated security privileges for a company
+ * A user who has been granted administrative access to manage a company's
+ * dashboard and settings.
  */
 export interface AuthorizedUserListResponse {
   /**
@@ -119,24 +122,24 @@ export interface AuthorizedUserListResponse {
   id: string;
 
   /**
-   * The company associated with the authorized user.
+   * The company this authorized user has access to.
    */
   company: AuthorizedUserListResponse.Company;
 
   /**
-   * The role of the authorized user in the company.
+   * The permission role assigned to this authorized user within the company.
    */
   role: Shared.AuthorizedUserRoles;
 
   /**
-   * The user associated with the authorized user.
+   * The user account linked to this authorized user record.
    */
   user: AuthorizedUserListResponse.User;
 }
 
 export namespace AuthorizedUserListResponse {
   /**
-   * The company associated with the authorized user.
+   * The company this authorized user has access to.
    */
   export interface Company {
     /**
@@ -151,7 +154,7 @@ export namespace AuthorizedUserListResponse {
   }
 
   /**
-   * The user associated with the authorized user.
+   * The user account linked to this authorized user record.
    */
   export interface User {
     /**
@@ -184,17 +187,17 @@ export interface AuthorizedUserListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the company to list authorized users for
+   * The unique identifier of the company to list authorized users for.
    */
   company_id?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return authorized users created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return authorized users created before this timestamp.
    */
   created_before?: string | null;
 
@@ -214,7 +217,8 @@ export interface AuthorizedUserListParams extends CursorPageParams {
   role?: Shared.AuthorizedUserRoles | null;
 
   /**
-   * Filter by the user ID to check if the user is an authorized user
+   * Filter results to a specific user to check if they are an authorized team
+   * member.
    */
   user_id?: string | null;
 }

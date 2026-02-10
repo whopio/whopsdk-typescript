@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Members extends APIResource {
   /**
-   * Retrieves a member of a company by ID
+   * Retrieves the details of an existing member.
    *
    * Required permissions:
    *
@@ -22,7 +22,8 @@ export class Members extends APIResource {
   }
 
   /**
-   * List the members of a company
+   * Returns a paginated list of members for a company, with extensive filtering by
+   * product, plan, status, access level, and more.
    *
    * Required permissions:
    *
@@ -271,17 +272,17 @@ export interface MemberListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the company to list members for
+   * The unique identifier of the company to list members for.
    */
   company_id?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return members created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return members created before this timestamp.
    */
   created_before?: string | null;
 
@@ -301,7 +302,7 @@ export interface MemberListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The most recent actions to filter the members by
+   * Filter members by their most recent activity type.
    */
   most_recent_actions?: Array<Shared.MemberMostRecentActions> | null;
 
@@ -311,33 +312,33 @@ export interface MemberListParams extends CursorPageParams {
   order?: 'id' | 'usd_total_spent' | 'created_at' | 'joined_at' | 'most_recent_action' | null;
 
   /**
-   * The plan IDs to filter the members by
+   * Filter members to only those subscribed to these specific plans.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * The product IDs to filter the members by
+   * Filter members to only those belonging to these specific products.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The promo code IDs to filter the members by
+   * Filter members to only those who used these specific promo codes.
    */
   promo_code_ids?: Array<string> | null;
 
   /**
-   * The name, username, or email to filter the members by. The email filter will
-   * only apply if the current actor has the `member:email:read` permission.
+   * Search members by name, username, or email. Email filtering requires the
+   * member:email:read permission.
    */
   query?: string | null;
 
   /**
-   * The statuses to filter the members by
+   * Filter members by their current subscription status.
    */
   statuses?: Array<Shared.MemberStatuses> | null;
 
   /**
-   * The user IDs to filter the members by
+   * Filter members to only those matching these specific user identifiers.
    */
   user_ids?: Array<string> | null;
 }

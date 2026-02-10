@@ -8,7 +8,8 @@ import { path } from '../internal/utils/path';
 
 export class DmMembers extends APIResource {
   /**
-   * Adds a user to a DM channel
+   * Add a new user to an existing DM channel. Only an admin of the channel can add
+   * members.
    *
    * Required permissions:
    *
@@ -27,7 +28,7 @@ export class DmMembers extends APIResource {
   }
 
   /**
-   * Retrieves a DM channel member
+   * Retrieves the details of an existing DM member.
    *
    * Required permissions:
    *
@@ -43,7 +44,8 @@ export class DmMembers extends APIResource {
   }
 
   /**
-   * Updates a DM channel member's settings
+   * Update a DM channel member's settings, such as their notification preferences or
+   * membership status.
    *
    * Required permissions:
    *
@@ -63,7 +65,8 @@ export class DmMembers extends APIResource {
   }
 
   /**
-   * Lists members of a DM channel
+   * Returns a paginated list of members in a specific DM channel, sorted by the date
+   * they were added.
    *
    * Required permissions:
    *
@@ -87,7 +90,8 @@ export class DmMembers extends APIResource {
   }
 
   /**
-   * Removes a user from a DM channel
+   * Remove a user from a DM channel. An admin can remove any member, and a member
+   * can remove themselves.
    *
    * Required permissions:
    *
@@ -116,7 +120,8 @@ export type DmFeedMemberNotificationPreferences = 'all' | 'mentions' | 'none';
 export type DmFeedMemberStatuses = 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
 
 /**
- * Represents a member of a DM channel
+ * A user's membership record in a messaging channel, including notification
+ * preferences and read state.
  */
 export interface DmMember {
   /**
@@ -125,34 +130,36 @@ export interface DmMember {
   id: string;
 
   /**
-   * The ID of the DM channel
+   * The unique identifier of the messaging channel this membership belongs to.
    */
   channel_id: string;
 
   /**
-   * Timestamp when the member last viewed the channel (in milliseconds since Unix
-   * epoch)
+   * The timestamp when this member last viewed the channel, as a Unix timestamp in
+   * milliseconds. Null if the member has never viewed the channel.
    */
   last_viewed_at: string | null;
 
   /**
-   * The notification preference for this member (all, mentions, none)
+   * The notification level for this channel: all, mentions, or none.
    */
   notification_preference: DmFeedMemberNotificationPreferences;
 
   /**
-   * The status of the membership (requested, accepted, rejected)
+   * The current state of this membership: requested, accepted, hidden, closed, or
+   * archived.
    */
   status: DmFeedMemberStatuses;
 
   /**
-   * The ID of the user who is a member of the channel
+   * The unique identifier of the user who holds this channel membership.
    */
   user_id: string;
 }
 
 /**
- * Represents a member of a DM channel
+ * A user's membership record in a messaging channel, including notification
+ * preferences and read state.
  */
 export interface DmMemberListResponse {
   /**
@@ -161,23 +168,24 @@ export interface DmMemberListResponse {
   id: string;
 
   /**
-   * The ID of the DM channel
+   * The unique identifier of the messaging channel this membership belongs to.
    */
   channel_id: string;
 
   /**
-   * Timestamp when the member last viewed the channel (in milliseconds since Unix
-   * epoch)
+   * The timestamp when this member last viewed the channel, as a Unix timestamp in
+   * milliseconds. Null if the member has never viewed the channel.
    */
   last_viewed_at: string | null;
 
   /**
-   * The status of the membership (requested, accepted, rejected)
+   * The current state of this membership: requested, accepted, hidden, closed, or
+   * archived.
    */
   status: DmFeedMemberStatuses;
 
   /**
-   * The ID of the user who is a member of the channel
+   * The unique identifier of the user who holds this channel membership.
    */
   user_id: string;
 }
@@ -189,12 +197,13 @@ export type DmMemberDeleteResponse = boolean;
 
 export interface DmMemberCreateParams {
   /**
-   * The ID of the DM channel to add the member to
+   * The unique identifier of the DM channel to add the new member to.
    */
   channel_id: string;
 
   /**
-   * The ID of the user to add to the channel
+   * The unique identifier of the user to add to the DM channel. For example,
+   * 'user_xxxxx'.
    */
   user_id: string;
 }
@@ -213,7 +222,7 @@ export interface DmMemberUpdateParams {
 
 export interface DmMemberListParams extends CursorPageParams {
   /**
-   * The ID of the DM channel to list members for
+   * The unique identifier of the DM channel to list members for.
    */
   channel_id: string;
 

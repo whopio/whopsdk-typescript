@@ -35,7 +35,7 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Retrieves a webhook by ID
+   * Retrieves the details of an existing webhook.
    *
    * Required permissions:
    *
@@ -75,7 +75,8 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Lists webhooks for a company
+   * Returns a paginated list of webhook endpoints configured for a company, ordered
+   * by most recently created.
    *
    * Required permissions:
    *
@@ -148,14 +149,14 @@ export interface Webhook {
   id: string;
 
   /**
-   * The API version for this webhook
+   * The API version used to format payloads sent to this webhook endpoint.
    */
   api_version: APIVersion;
 
   /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
+   * Whether events are sent for child resources. For example, if the webhook is on a
+   * company, enabling this sends events only from the company's sub-merchants (child
+   * companies).
    */
   child_resource_events: boolean;
 
@@ -165,27 +166,27 @@ export interface Webhook {
   created_at: string;
 
   /**
-   * Whether or not this webhook is turned on or not
+   * Whether this webhook endpoint is currently active and receiving events.
    */
   enabled: boolean;
 
   /**
-   * The number of events this webhooks is configured to receive
+   * The list of event types this webhook is subscribed to.
    */
   events: Array<WebhookEvent>;
 
   /**
-   * The resource ID
+   * The ID of the resource (company or product) this webhook is attached to.
    */
   resource_id: string;
 
   /**
-   * The list of events that can be tested with this webhook
+   * The subset of subscribed event types that support sending test payloads.
    */
   testable_events: Array<WebhookEvent>;
 
   /**
-   * The URL the webhook events will be sent to
+   * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 }
@@ -233,14 +234,14 @@ export interface WebhookCreateResponse {
   id: string;
 
   /**
-   * The API version for this webhook
+   * The API version used to format payloads sent to this webhook endpoint.
    */
   api_version: APIVersion;
 
   /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
+   * Whether events are sent for child resources. For example, if the webhook is on a
+   * company, enabling this sends events only from the company's sub-merchants (child
+   * companies).
    */
   child_resource_events: boolean;
 
@@ -250,32 +251,33 @@ export interface WebhookCreateResponse {
   created_at: string;
 
   /**
-   * Whether or not this webhook is turned on or not
+   * Whether this webhook endpoint is currently active and receiving events.
    */
   enabled: boolean;
 
   /**
-   * The number of events this webhooks is configured to receive
+   * The list of event types this webhook is subscribed to.
    */
   events: Array<WebhookEvent>;
 
   /**
-   * The resource ID
+   * The ID of the resource (company or product) this webhook is attached to.
    */
   resource_id: string;
 
   /**
-   * The list of events that can be tested with this webhook
+   * The subset of subscribed event types that support sending test payloads.
    */
   testable_events: Array<WebhookEvent>;
 
   /**
-   * The URL the webhook events will be sent to
+   * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 
   /**
-   * A unique secret key that will be sent with each webhook event
+   * The secret key used to sign webhook payloads for verification. Include this in
+   * your HMAC validation logic.
    */
   webhook_secret: string;
 }
@@ -291,14 +293,14 @@ export interface WebhookListResponse {
   id: string;
 
   /**
-   * The API version for this webhook
+   * The API version used to format payloads sent to this webhook endpoint.
    */
   api_version: APIVersion;
 
   /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
+   * Whether events are sent for child resources. For example, if the webhook is on a
+   * company, enabling this sends events only from the company's sub-merchants (child
+   * companies).
    */
   child_resource_events: boolean;
 
@@ -308,17 +310,17 @@ export interface WebhookListResponse {
   created_at: string;
 
   /**
-   * Whether or not this webhook is turned on or not
+   * Whether this webhook endpoint is currently active and receiving events.
    */
   enabled: boolean;
 
   /**
-   * The number of events this webhooks is configured to receive
+   * The list of event types this webhook is subscribed to.
    */
   events: Array<WebhookEvent>;
 
   /**
-   * The URL the webhook events will be sent to
+   * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 }
@@ -340,7 +342,9 @@ export interface InvoiceCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A statement that defines an amount due by a customer.
+   * An invoice represents an itemized bill sent by a company to a customer for a
+   * specific product and plan, tracking the amount owed, due date, and payment
+   * status.
    */
   data: Shared.Invoice;
 
@@ -372,7 +376,9 @@ export interface InvoicePaidWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A statement that defines an amount due by a customer.
+   * An invoice represents an itemized bill sent by a company to a customer for a
+   * specific product and plan, tracking the amount owed, due date, and payment
+   * status.
    */
   data: Shared.Invoice;
 
@@ -404,7 +410,9 @@ export interface InvoicePastDueWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A statement that defines an amount due by a customer.
+   * An invoice represents an itemized bill sent by a company to a customer for a
+   * specific product and plan, tracking the amount owed, due date, and payment
+   * status.
    */
   data: Shared.Invoice;
 
@@ -436,7 +444,9 @@ export interface InvoiceVoidedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A statement that defines an amount due by a customer.
+   * An invoice represents an itemized bill sent by a company to a customer for a
+   * specific product and plan, tracking the amount owed, due date, and payment
+   * status.
    */
   data: Shared.Invoice;
 
@@ -662,7 +672,8 @@ export interface SetupIntentRequiresActionWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A setup intent allows a user to save a payment method without making a purchase.
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -694,7 +705,8 @@ export interface SetupIntentSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A setup intent allows a user to save a payment method without making a purchase.
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -726,7 +738,8 @@ export interface SetupIntentCanceledWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A setup intent allows a user to save a payment method without making a purchase.
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
    */
   data: SetupIntentsAPI.SetupIntent;
 
@@ -824,7 +837,8 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A lesson interaction tracking user progress in courses
+   * A record of a user's progress on a specific lesson, tracking whether they have
+   * completed it.
    */
   data: Shared.CourseLessonInteraction;
 
@@ -856,7 +870,8 @@ export interface PayoutMethodCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an user's setup payout destination.
+   * A configured payout destination where a user receives earned funds, such as a
+   * bank account or digital wallet.
    */
   data: PayoutMethodCreatedWebhookEvent.Data;
 
@@ -878,7 +893,8 @@ export interface PayoutMethodCreatedWebhookEvent {
 
 export namespace PayoutMethodCreatedWebhookEvent {
   /**
-   * An object representing an user's setup payout destination.
+   * A configured payout destination where a user receives earned funds, such as a
+   * bank account or digital wallet.
    */
   export interface Data {
     /**
@@ -887,13 +903,14 @@ export namespace PayoutMethodCreatedWebhookEvent {
     id: string;
 
     /**
-     * A reference to identify the payout destination, such as the last 4 digits of an
-     * account number or an email address.
+     * A masked identifier for the payout destination, such as the last four digits of
+     * a bank account or an email address. Null if no reference is available.
      */
     account_reference: string | null;
 
     /**
-     * The company associated with the payout token
+     * The company associated with this payout destination. Null if not linked to a
+     * specific company.
      */
     company: Data.Company | null;
 
@@ -903,36 +920,40 @@ export namespace PayoutMethodCreatedWebhookEvent {
     created_at: string;
 
     /**
-     * The currency code of the payout destination. This is the currency that payouts
-     * will be made in for this token.
+     * The three-letter ISO currency code that payouts are delivered in for this
+     * destination.
      */
     currency: string;
 
     /**
-     * The payout destination associated with the payout token
+     * The payout destination configuration linked to this token. Null if not yet
+     * configured.
      */
     destination: Data.Destination | null;
 
     /**
-     * The name of the bank or financial institution.
+     * The name of the bank or financial institution receiving payouts. Null if not
+     * applicable or not provided.
      */
     institution_name: string | null;
 
     /**
-     * Whether this payout token is the default for the payout account
+     * Whether this is the default payout destination for the associated payout
+     * account.
      */
     is_default: boolean;
 
     /**
-     * An optional nickname for the payout token to help the user identify it. This is
-     * not used by the provider and is only for the user's reference.
+     * A user-defined label to help identify this payout destination. Not sent to the
+     * provider. Null if no nickname has been set.
      */
     nickname: string | null;
   }
 
   export namespace Data {
     /**
-     * The company associated with the payout token
+     * The company associated with this payout destination. Null if not linked to a
+     * specific company.
      */
     export interface Company {
       /**
@@ -942,7 +963,8 @@ export namespace PayoutMethodCreatedWebhookEvent {
     }
 
     /**
-     * The payout destination associated with the payout token
+     * The payout destination configuration linked to this token. Null if not yet
+     * configured.
      */
     export interface Destination {
       /**
@@ -975,7 +997,8 @@ export interface VerificationSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An object representing an identity verification session
+   * An identity verification session used to confirm a user's identity for payout
+   * account eligibility.
    */
   data: VerificationSucceededWebhookEvent.Data;
 
@@ -997,7 +1020,8 @@ export interface VerificationSucceededWebhookEvent {
 
 export namespace VerificationSucceededWebhookEvent {
   /**
-   * An object representing an identity verification session
+   * An identity verification session used to confirm a user's identity for payout
+   * account eligibility.
    */
   export interface Data {
     /**
@@ -1011,12 +1035,13 @@ export namespace VerificationSucceededWebhookEvent {
     last_error_code: VerificationsAPI.VerificationErrorCode | null;
 
     /**
-     * The last error reason that occurred during the verification.
+     * A human-readable explanation of the most recent verification error. Null if no
+     * error has occurred.
      */
     last_error_reason: string | null;
 
     /**
-     * The status of the verification.
+     * The current status of this verification session.
      */
     status: VerificationsAPI.VerificationStatus;
   }
@@ -1265,8 +1290,8 @@ export namespace RefundCreatedWebhookEvent {
     id: string;
 
     /**
-     * The amount of the refund. Provided as a number in the specified currency. Eg:
-     * 10.43 for $10.43 USD.
+     * The refunded amount as a decimal in the specified currency, such as 10.43 for
+     * $10.43 USD.
      */
     amount: number;
 
@@ -1276,22 +1301,24 @@ export namespace RefundCreatedWebhookEvent {
     created_at: string;
 
     /**
-     * The currency of the refund.
+     * The three-letter ISO currency code for the refunded amount.
      */
     currency: Shared.Currency;
 
     /**
-     * The payment associated with the refund.
+     * The original payment that this refund was issued against. Null if the payment is
+     * no longer available.
      */
     payment: Data.Payment | null;
 
     /**
-     * The provider of the refund.
+     * The payment provider that processed the refund.
      */
     provider: RefundsAPI.PaymentProvider;
 
     /**
-     * The time the refund was created by the provider.
+     * The timestamp when the refund was created in the payment provider's system. Null
+     * if not available from the provider.
      */
     provider_created_at: string | null;
 
@@ -1306,19 +1333,22 @@ export namespace RefundCreatedWebhookEvent {
     reference_type: RefundsAPI.RefundReferenceType | null;
 
     /**
-     * The value of the reference.
+     * The tracking reference value from the payment processor, used to trace the
+     * refund through banking networks. Null if no reference was provided.
      */
     reference_value: string | null;
 
     /**
-     * The status of the refund.
+     * The current processing status of the refund, such as pending, succeeded, or
+     * failed.
      */
     status: RefundsAPI.RefundStatus;
   }
 
   export namespace Data {
     /**
-     * The payment associated with the refund.
+     * The original payment that this refund was issued against. Null if the payment is
+     * no longer available.
      */
     export interface Payment {
       /**
@@ -1337,7 +1367,8 @@ export namespace RefundCreatedWebhookEvent {
       card_brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * The last 4 digits of the card used to make the payment.
+       * The last four digits of the card used to make this payment. Null if the payment
+       * was not made with a card.
        */
       card_last4: string | null;
 
@@ -1367,7 +1398,8 @@ export namespace RefundCreatedWebhookEvent {
       membership: Payment.Membership | null;
 
       /**
-       * The datetime the payment was paid
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
        */
       paid_at: string | null;
 
@@ -1502,8 +1534,8 @@ export namespace RefundUpdatedWebhookEvent {
     id: string;
 
     /**
-     * The amount of the refund. Provided as a number in the specified currency. Eg:
-     * 10.43 for $10.43 USD.
+     * The refunded amount as a decimal in the specified currency, such as 10.43 for
+     * $10.43 USD.
      */
     amount: number;
 
@@ -1513,22 +1545,24 @@ export namespace RefundUpdatedWebhookEvent {
     created_at: string;
 
     /**
-     * The currency of the refund.
+     * The three-letter ISO currency code for the refunded amount.
      */
     currency: Shared.Currency;
 
     /**
-     * The payment associated with the refund.
+     * The original payment that this refund was issued against. Null if the payment is
+     * no longer available.
      */
     payment: Data.Payment | null;
 
     /**
-     * The provider of the refund.
+     * The payment provider that processed the refund.
      */
     provider: RefundsAPI.PaymentProvider;
 
     /**
-     * The time the refund was created by the provider.
+     * The timestamp when the refund was created in the payment provider's system. Null
+     * if not available from the provider.
      */
     provider_created_at: string | null;
 
@@ -1543,19 +1577,22 @@ export namespace RefundUpdatedWebhookEvent {
     reference_type: RefundsAPI.RefundReferenceType | null;
 
     /**
-     * The value of the reference.
+     * The tracking reference value from the payment processor, used to trace the
+     * refund through banking networks. Null if no reference was provided.
      */
     reference_value: string | null;
 
     /**
-     * The status of the refund.
+     * The current processing status of the refund, such as pending, succeeded, or
+     * failed.
      */
     status: RefundsAPI.RefundStatus;
   }
 
   export namespace Data {
     /**
-     * The payment associated with the refund.
+     * The original payment that this refund was issued against. Null if the payment is
+     * no longer available.
      */
     export interface Payment {
       /**
@@ -1574,7 +1611,8 @@ export namespace RefundUpdatedWebhookEvent {
       card_brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * The last 4 digits of the card used to make the payment.
+       * The last four digits of the card used to make this payment. Null if the payment
+       * was not made with a card.
        */
       card_last4: string | null;
 
@@ -1604,7 +1642,8 @@ export namespace RefundUpdatedWebhookEvent {
       membership: Payment.Membership | null;
 
       /**
-       * The datetime the payment was paid
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
        */
       paid_at: string | null;
 
@@ -1819,7 +1858,7 @@ export interface WebhookUpdateParams {
 
 export interface WebhookListParams extends CursorPageParams {
   /**
-   * The ID of the company to list webhooks for
+   * The unique identifier of the company to list webhooks for.
    */
   company_id: string;
 

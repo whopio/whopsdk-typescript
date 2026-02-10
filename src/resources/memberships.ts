@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Memberships extends APIResource {
   /**
-   * Retrieves a membership by ID or license key
+   * Retrieves the details of an existing membership.
    *
    * Required permissions:
    *
@@ -21,7 +21,7 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Update a membership
+   * Update a membership's metadata or other mutable properties.
    *
    * Required permissions:
    *
@@ -38,7 +38,8 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Lists memberships
+   * Returns a paginated list of memberships, with optional filtering by product,
+   * plan, status, and user.
    *
    * Required permissions:
    *
@@ -53,8 +54,8 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Cancels a membership either immediately or at the end of the current billing
-   * period
+   * Cancel a membership either immediately or at the end of the current billing
+   * period. Immediate cancellation revokes access right away.
    *
    * Required permissions:
    *
@@ -71,7 +72,8 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Pauses a membership's payments
+   * Pause a membership's recurring payments. The customer retains access but will
+   * not be charged until the membership is resumed.
    *
    * Required permissions:
    *
@@ -88,7 +90,8 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Resumes a membership's payments
+   * Resume a previously paused membership's recurring payments. Billing resumes on
+   * the next cycle.
    *
    * Required permissions:
    *
@@ -101,7 +104,8 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Uncancels a membership that was scheduled to cancel at period end
+   * Reverse a pending cancellation for a membership that was scheduled to cancel at
+   * period end.
    *
    * Required permissions:
    *
@@ -140,8 +144,8 @@ export interface MembershipListResponse {
   id: string;
 
   /**
-   * Whether this Membership is set to cancel at the end of the current billing
-   * cycle. Only applies for memberships that have a renewal plan.
+   * Whether this membership is set to cancel at the end of the current billing
+   * cycle. Only applies to memberships with a recurring plan.
    */
   cancel_at_period_end: boolean;
 
@@ -152,17 +156,19 @@ export interface MembershipListResponse {
   cancel_option: CancelOptions | null;
 
   /**
-   * The epoch timestamp of when the customer initiated a cancellation.
+   * The time the customer initiated cancellation of this membership. As a Unix
+   * timestamp. Null if the membership has not been canceled.
    */
   canceled_at: string | null;
 
   /**
-   * The reason that the member canceled the membership (filled out by the member).
+   * Free-text explanation provided by the customer when canceling. Null if the
+   * customer did not provide a reason.
    */
   cancellation_reason: string | null;
 
   /**
-   * The Company this Membership belongs to.
+   * The company this membership belongs to.
    */
   company: MembershipListResponse.Company;
 
@@ -177,23 +183,26 @@ export interface MembershipListResponse {
   currency: Shared.Currency | null;
 
   /**
-   * When the member joined the company.
+   * The time the user first joined the company associated with this membership. As a
+   * Unix timestamp. Null if the member record does not exist.
    */
   joined_at: string | null;
 
   /**
-   * The license key for this Membership. This is only present if the membership
-   * grants access to an instance of the Whop Software app.
+   * The software license key associated with this membership. Only present if the
+   * product includes a Whop Software Licensing experience. Null otherwise.
    */
   license_key: string | null;
 
   /**
-   * The URL for the customer to manage their membership.
+   * The URL where the customer can view and manage this membership, including
+   * cancellation and plan changes. Null if no member record exists.
    */
   manage_url: string | null;
 
   /**
-   * The Member that this Membership belongs to.
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
    */
   member: MembershipListResponse.Member | null;
 
@@ -204,39 +213,42 @@ export interface MembershipListResponse {
   metadata: { [key: string]: unknown };
 
   /**
-   * Whether the membership's payments are currently paused.
+   * Whether recurring payment collection for this membership is temporarily paused
+   * by the company.
    */
   payment_collection_paused: boolean;
 
   /**
-   * The Plan this Membership is for.
+   * The plan the customer purchased to create this membership.
    */
   plan: MembershipListResponse.Plan;
 
   /**
-   * The Product this Membership grants access to.
+   * The product this membership grants access to.
    */
   product: MembershipListResponse.Product;
 
   /**
-   * The Promo Code that is currently applied to this Membership.
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
    */
   promo_code: MembershipListResponse.PromoCode | null;
 
   /**
-   * The timestamp in seconds at which the current billing cycle for this
-   * subscription ends. Only applies for memberships that have a renewal plan.
+   * The end of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
    */
   renewal_period_end: string | null;
 
   /**
-   * The timestamp in seconds at which the current billing cycle for this
-   * subscription start. Only applies for memberships that have a renewal plan.
+   * The start of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
    */
   renewal_period_start: string | null;
 
   /**
-   * The status of the membership.
+   * The current lifecycle status of the membership (e.g., active, trialing,
+   * past_due, canceled, expired, completed).
    */
   status: Shared.MembershipStatus;
 
@@ -246,14 +258,14 @@ export interface MembershipListResponse {
   updated_at: string;
 
   /**
-   * The user this membership belongs to
+   * The user who owns this membership. Null if the user account has been deleted.
    */
   user: MembershipListResponse.User | null;
 }
 
 export namespace MembershipListResponse {
   /**
-   * The Company this Membership belongs to.
+   * The company this membership belongs to.
    */
   export interface Company {
     /**
@@ -268,7 +280,8 @@ export namespace MembershipListResponse {
   }
 
   /**
-   * The Member that this Membership belongs to.
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
    */
   export interface Member {
     /**
@@ -278,7 +291,7 @@ export namespace MembershipListResponse {
   }
 
   /**
-   * The Plan this Membership is for.
+   * The plan the customer purchased to create this membership.
    */
   export interface Plan {
     /**
@@ -288,7 +301,7 @@ export namespace MembershipListResponse {
   }
 
   /**
-   * The Product this Membership grants access to.
+   * The product this membership grants access to.
    */
   export interface Product {
     /**
@@ -304,7 +317,8 @@ export namespace MembershipListResponse {
   }
 
   /**
-   * The Promo Code that is currently applied to this Membership.
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
    */
   export interface PromoCode {
     /**
@@ -314,7 +328,7 @@ export namespace MembershipListResponse {
   }
 
   /**
-   * The user this membership belongs to
+   * The user who owns this membership. Null if the user account has been deleted.
    */
   export interface User {
     /**
@@ -342,7 +356,8 @@ export namespace MembershipListResponse {
 
 export interface MembershipUpdateParams {
   /**
-   * The metadata to update the membership with.
+   * A JSON object of key-value pairs to store on the membership. Replaces any
+   * existing metadata.
    */
   metadata?: { [key: string]: unknown } | null;
 }
@@ -354,22 +369,23 @@ export interface MembershipListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The cancel options to filter the memberships by
+   * Filter to only memberships matching these cancellation reasons.
    */
   cancel_options?: Array<CancelOptions> | null;
 
   /**
-   * The ID of the company to list memberships for
+   * The unique identifier of the company to list memberships for. Required when
+   * using an API key.
    */
   company_id?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return memberships created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return memberships created before this timestamp.
    */
   created_before?: string | null;
 
@@ -394,27 +410,27 @@ export interface MembershipListParams extends CursorPageParams {
   order?: 'id' | 'created_at' | 'status' | 'canceled_at' | 'date_joined' | 'total_spend' | null;
 
   /**
-   * The plan IDs to filter the memberships by
+   * Filter to only memberships belonging to these plan identifiers.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * The product IDs to filter the memberships by
+   * Filter to only memberships belonging to these product identifiers.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The promo code IDs to filter the memberships by
+   * Filter to only memberships that used these promo code identifiers.
    */
   promo_code_ids?: Array<string> | null;
 
   /**
-   * The membership status to filter the memberships by
+   * Filter to only memberships matching these statuses.
    */
   statuses?: Array<Shared.MembershipStatus> | null;
 
   /**
-   * Only return memberships from these whop user ids
+   * Filter to only memberships belonging to these user identifiers.
    */
   user_ids?: Array<string> | null;
 }
@@ -428,8 +444,8 @@ export interface MembershipCancelParams {
 
 export interface MembershipPauseParams {
   /**
-   * Whether to void past_due payments associated with the membership to prevent
-   * future payment attempts.
+   * Whether to void any outstanding past-due payments on this membership, preventing
+   * future collection attempts.
    */
   void_payments?: boolean | null;
 }

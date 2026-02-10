@@ -7,7 +7,7 @@ import { path } from '../internal/utils/path';
 
 export class Verifications extends APIResource {
   /**
-   * Retrieves a verification by ID
+   * Retrieves the details of an existing verification.
    *
    * Required permissions:
    *
@@ -61,7 +61,8 @@ export type VerificationStatus =
   | 'review';
 
 /**
- * An object representing an identity verification session
+ * An identity verification session used to confirm a user's identity for payout
+ * account eligibility.
  */
 export interface VerificationRetrieveResponse {
   /**
@@ -75,12 +76,13 @@ export interface VerificationRetrieveResponse {
   last_error_code: VerificationErrorCode | null;
 
   /**
-   * The last error reason that occurred during the verification.
+   * A human-readable explanation of the most recent verification error. Null if no
+   * error has occurred.
    */
   last_error_reason: string | null;
 
   /**
-   * The status of the verification.
+   * The current status of this verification session.
    */
   status: VerificationStatus;
 }

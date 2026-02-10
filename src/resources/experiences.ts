@@ -26,7 +26,7 @@ export class Experiences extends APIResource {
   }
 
   /**
-   * Retrieves an experience by ID
+   * Retrieves the details of an existing experience.
    *
    * @example
    * ```ts
@@ -60,7 +60,8 @@ export class Experiences extends APIResource {
   }
 
   /**
-   * Lists experiences for a company
+   * Returns a paginated list of experiences belonging to a company, with optional
+   * filtering by product and app.
    *
    * Required permissions:
    *
@@ -100,7 +101,7 @@ export class Experiences extends APIResource {
   }
 
   /**
-   * Adds an experience to an product, making it accessible to the product's
+   * Attach an experience to a product, making it accessible to the product's
    * customers.
    *
    * Required permissions:
@@ -120,8 +121,8 @@ export class Experiences extends APIResource {
   }
 
   /**
-   * Removes an experience from an product, making it inaccessible to the product's
-   * customers.
+   * Detach an experience from a product, removing customer access to it through that
+   * product.
    *
    * Required permissions:
    *
@@ -180,7 +181,7 @@ export interface ExperienceListResponse {
   id: string;
 
   /**
-   * The experience interface for this experience.
+   * The app that powers this experience, defining its interface and behavior.
    */
   app: ExperienceListResponse.App;
 
@@ -195,29 +196,33 @@ export interface ExperienceListResponse {
   created_at: string;
 
   /**
-   * The logo for the experience.
+   * The custom logo image for this experience. Null if no custom logo has been
+   * uploaded.
    */
   image: ExperienceListResponse.Image | null;
 
   /**
-   * Whether the experience is visible to the public
+   * Whether this experience is publicly visible to all users, including those
+   * without a membership.
    */
   is_public: boolean;
 
   /**
-   * The written name of the description.
+   * The display name of this experience shown to users in the product navigation.
+   * Maximum 255 characters.
    */
   name: string;
 
   /**
-   * The order of the experience in the section
+   * The sort position of this experience within its section. Lower values appear
+   * first. Null if no position has been set.
    */
   order: string | null;
 }
 
 export namespace ExperienceListResponse {
   /**
-   * The experience interface for this experience.
+   * The app that powers this experience, defining its interface and behavior.
    */
   export interface App {
     /**
@@ -226,21 +231,22 @@ export namespace ExperienceListResponse {
     id: string;
 
     /**
-     * The icon for the app. This icon is shown on discovery, on the product page, on
-     * checkout, and as a default icon for the experiences.
+     * The icon image for this app, displayed on the app store, product pages,
+     * checkout, and as the default icon for experiences using this app.
      */
     icon: App.Icon | null;
 
     /**
-     * The name of the app
+     * The display name of this app shown on the app store and in experience
+     * navigation. Maximum 30 characters.
      */
     name: string;
   }
 
   export namespace App {
     /**
-     * The icon for the app. This icon is shown on discovery, on the product page, on
-     * checkout, and as a default icon for the experiences.
+     * The icon image for this app, displayed on the app store, product pages,
+     * checkout, and as the default icon for experiences using this app.
      */
     export interface Icon {
       /**
@@ -272,7 +278,8 @@ export namespace ExperienceListResponse {
   }
 
   /**
-   * The logo for the experience.
+   * The custom logo image for this experience. Null if no custom logo has been
+   * uploaded.
    */
   export interface Image {
     /**
@@ -290,39 +297,39 @@ export type ExperienceDeleteResponse = boolean;
 
 export interface ExperienceCreateParams {
   /**
-   * The ID of the app to create the experience for
+   * The unique identifier of the app that powers this experience.
    */
   app_id: string;
 
   /**
-   * The ID of the company to create the experience for
+   * The unique identifier of the company to create this experience for.
    */
   company_id: string;
 
   /**
-   * Whether the experience is publicly accessible
+   * Whether the experience is publicly accessible without a membership.
    */
   is_public?: boolean | null;
 
   /**
-   * The logo for the experience
+   * A logo image displayed alongside the experience name.
    */
   logo?: ExperienceCreateParams.Logo | null;
 
   /**
-   * The name of the experience
+   * The display name of the experience. Defaults to the app's name if not provided.
    */
   name?: string | null;
 
   /**
-   * The ID of the section to create the experience in
+   * The unique identifier of the section to place the experience in.
    */
   section_id?: string | null;
 }
 
 export namespace ExperienceCreateParams {
   /**
-   * The logo for the experience
+   * A logo image displayed alongside the experience name.
    */
   export interface Logo {
     /**
@@ -339,34 +346,34 @@ export interface ExperienceUpdateParams {
   access_level?: 'public' | 'private' | null;
 
   /**
-   * Whether the experience is publicly accessible.
+   * Whether the experience is publicly accessible without a membership.
    */
   is_public?: boolean | null;
 
   /**
-   * The logo for the experience
+   * A logo image displayed alongside the experience name.
    */
   logo?: ExperienceUpdateParams.Logo | null;
 
   /**
-   * The name of the experience.
+   * The display name of the experience.
    */
   name?: string | null;
 
   /**
-   * The order of the experience in the section.
+   * The position of the experience within its section for display ordering.
    */
   order?: string | null;
 
   /**
-   * The ID of the section to update.
+   * The unique identifier of the section to move the experience into.
    */
   section_id?: string | null;
 }
 
 export namespace ExperienceUpdateParams {
   /**
-   * The logo for the experience
+   * A logo image displayed alongside the experience name.
    */
   export interface Logo {
     /**
@@ -378,12 +385,12 @@ export namespace ExperienceUpdateParams {
 
 export interface ExperienceListParams extends CursorPageParams {
   /**
-   * The ID of the company to filter experiences by
+   * The unique identifier of the company to list experiences for.
    */
   company_id: string;
 
   /**
-   * The ID of the app to filter experiences by
+   * Filter to only experiences powered by this app identifier.
    */
   app_id?: string | null;
 
@@ -393,12 +400,12 @@ export interface ExperienceListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return experiences created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return experiences created before this timestamp.
    */
   created_before?: string | null;
 
@@ -413,28 +420,29 @@ export interface ExperienceListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the product to filter experiences by
+   * Filter to only experiences attached to this product identifier.
    */
   product_id?: string | null;
 }
 
 export interface ExperienceAttachParams {
   /**
-   * The ID of the Access Pass to add the Experience to.
+   * The unique identifier of the product to attach the experience to.
    */
   product_id: string;
 }
 
 export interface ExperienceDetachParams {
   /**
-   * The ID of the Access Pass to add the Experience to.
+   * The unique identifier of the product to detach the experience from.
    */
   product_id: string;
 }
 
 export interface ExperienceDuplicateParams {
   /**
-   * The name of the new experience
+   * The display name for the duplicated experience. Defaults to the original
+   * experience's name.
    */
   name?: string | null;
 }
