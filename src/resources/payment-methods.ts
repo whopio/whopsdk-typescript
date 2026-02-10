@@ -10,11 +10,7 @@ import { path } from '../internal/utils/path';
 
 export class PaymentMethods extends APIResource {
   /**
-   * A payment method is a stored representation of how a customer intends to pay,
-   * such as a card, bank account, or digital wallet. It holds the necessary billing
-   * details and can be attached to a member for future one-time or recurring
-   * charges. This lets you reuse the same payment credentials across multiple
-   * payments. You must provide exactly one of company_id or member_id.
+   * Retrieves the details of an existing payment method.
    *
    * Required permissions:
    *
@@ -29,11 +25,10 @@ export class PaymentMethods extends APIResource {
   }
 
   /**
-   * A payment method is a stored representation of how a customer intends to pay,
-   * such as a card, bank account, or digital wallet. It holds the necessary billing
-   * details and can be attached to a member for future one-time or recurring
-   * charges. This lets you reuse the same payment credentials across multiple
-   * payments.
+   * Returns a paginated list of payment methods for a member or company, with
+   * optional filtering by creation date. A payment method is a stored representation
+   * of how a customer intends to pay, such as a card, bank account, or digital
+   * wallet.
    *
    * Required permissions:
    *
@@ -53,7 +48,7 @@ export class PaymentMethods extends APIResource {
 export type PaymentMethodListResponsesCursorPage = CursorPage<PaymentMethodListResponse>;
 
 /**
- * A payment method with no additional properties
+ * A saved payment method with no type-specific details available.
  */
 export type PaymentMethodRetrieveResponse =
   | PaymentMethodRetrieveResponse.BasePaymentMethod
@@ -65,21 +60,26 @@ export type PaymentMethodRetrieveResponse =
 
 export namespace PaymentMethodRetrieveResponse {
   /**
-   * A payment method with no additional properties
+   * A saved payment method with no type-specific details available.
    */
   export interface BasePaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -90,26 +90,33 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   /**
-   * The card for the payment method
+   * A saved card payment method, including brand, last four digits, and expiration
+   * details.
    */
   export interface CardPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * The card details associated with this payment method
+     * The card-specific details for this payment method, including brand, last four
+     * digits, and expiration.
      */
     card: CardPaymentMethod.Card;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -121,7 +128,8 @@ export namespace PaymentMethodRetrieveResponse {
 
   export namespace CardPaymentMethod {
     /**
-     * The card details associated with this payment method
+     * The card-specific details for this payment method, including brand, last four
+     * digits, and expiration.
      */
     export interface Card {
       /**
@@ -130,38 +138,45 @@ export namespace PaymentMethodRetrieveResponse {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
   }
 
   /**
-   * The bank account for the payment method
+   * A saved US bank account payment method, including bank name, last four digits,
+   * and account type.
    */
   export interface UsBankAccountPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -171,54 +186,63 @@ export namespace PaymentMethodRetrieveResponse {
     typename: 'UsBankAccountPaymentMethod';
 
     /**
-     * The bank details associated with this payment method
+     * The bank account-specific details for this payment method, including bank name
+     * and last four digits.
      */
     us_bank_account: UsBankAccountPaymentMethod.UsBankAccount;
   }
 
   export namespace UsBankAccountPaymentMethod {
     /**
-     * The bank details associated with this payment method
+     * The bank account-specific details for this payment method, including bank name
+     * and last four digits.
      */
     export interface UsBankAccount {
       /**
-       * The type of account
+       * The type of bank account (e.g., checking, savings).
        */
       account_type: string;
 
       /**
-       * The name of the bank
+       * The name of the financial institution holding the account.
        */
       bank_name: string;
 
       /**
-       * The last 4 digits of the account number
+       * The last four digits of the bank account number.
        */
       last4: string;
     }
   }
 
   /**
-   * The Cash App details for the payment method
+   * A saved Cash App payment method, including the buyer's cashtag and unique
+   * identifier.
    */
   export interface CashappPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * The Cash App details associated with this payment method
+     * The Cash App-specific details for this payment method, including cashtag and
+     * buyer ID.
      */
     cashapp: CashappPaymentMethod.Cashapp;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -230,42 +254,49 @@ export namespace PaymentMethodRetrieveResponse {
 
   export namespace CashappPaymentMethod {
     /**
-     * The Cash App details associated with this payment method
+     * The Cash App-specific details for this payment method, including cashtag and
+     * buyer ID.
      */
     export interface Cashapp {
       /**
-       * A unique and immutable identifier assigned by Cash App to every buyer.
+       * The unique and immutable identifier assigned by Cash App to the buyer. Null if
+       * not available.
        */
       buyer_id: string | null;
 
       /**
-       * A public identifier for buyers using Cash App.
+       * The public cashtag handle of the buyer on Cash App. Null if not available.
        */
       cashtag: string | null;
     }
   }
 
   /**
-   * The iDEAL details for the payment method
+   * A saved iDEAL payment method, including the customer's bank name and BIC code.
    */
   export interface IdealPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The iDEAL details associated with this payment method
+     * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     ideal: IdealPaymentMethod.Ideal;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -277,42 +308,51 @@ export namespace PaymentMethodRetrieveResponse {
 
   export namespace IdealPaymentMethod {
     /**
-     * The iDEAL details associated with this payment method
+     * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     export interface Ideal {
       /**
-       * The customer's bank.
+       * The name of the customer's bank used for the iDEAL transaction. Null if not
+       * available.
        */
       bank: string | null;
 
       /**
-       * The Bank Identifier Code of the customer's bank.
+       * The Bank Identifier Code (BIC/SWIFT) of the customer's bank. Null if not
+       * available.
        */
       bic: string | null;
     }
   }
 
   /**
-   * The SEPA Direct Debit details for the payment method
+   * A saved SEPA Direct Debit payment method, including the bank code, country, and
+   * last four IBAN digits.
    */
   export interface SepaDebitPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
     /**
-     * The SEPA Direct Debit details associated with this payment method
+     * The SEPA Direct Debit-specific details for this payment method, including bank
+     * code and last four IBAN digits.
      */
     sepa_debit: SepaDebitPaymentMethod.SepaDebit;
 
@@ -324,26 +364,31 @@ export namespace PaymentMethodRetrieveResponse {
 
   export namespace SepaDebitPaymentMethod {
     /**
-     * The SEPA Direct Debit details associated with this payment method
+     * The SEPA Direct Debit-specific details for this payment method, including bank
+     * code and last four IBAN digits.
      */
     export interface SepaDebit {
       /**
-       * Bank code of the bank associated with the account.
+       * The bank code of the financial institution associated with this SEPA account.
+       * Null if not available.
        */
       bank_code: string | null;
 
       /**
-       * Branch code of the bank associated with the account.
+       * The branch code of the financial institution associated with this SEPA account.
+       * Null if not available.
        */
       branch_code: string | null;
 
       /**
-       * Two-letter ISO code representing the country the bank account is located in.
+       * The two-letter ISO country code where the bank account is located. Null if not
+       * available.
        */
       country: string | null;
 
       /**
-       * Last four digits of the IBAN.
+       * The last four digits of the IBAN associated with this SEPA account. Null if not
+       * available.
        */
       last4: string | null;
     }
@@ -351,7 +396,7 @@ export namespace PaymentMethodRetrieveResponse {
 }
 
 /**
- * A payment method with no additional properties
+ * A saved payment method with no type-specific details available.
  */
 export type PaymentMethodListResponse =
   | PaymentMethodListResponse.BasePaymentMethod
@@ -363,21 +408,26 @@ export type PaymentMethodListResponse =
 
 export namespace PaymentMethodListResponse {
   /**
-   * A payment method with no additional properties
+   * A saved payment method with no type-specific details available.
    */
   export interface BasePaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -388,26 +438,33 @@ export namespace PaymentMethodListResponse {
   }
 
   /**
-   * The card for the payment method
+   * A saved card payment method, including brand, last four digits, and expiration
+   * details.
    */
   export interface CardPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * The card details associated with this payment method
+     * The card-specific details for this payment method, including brand, last four
+     * digits, and expiration.
      */
     card: CardPaymentMethod.Card;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -419,7 +476,8 @@ export namespace PaymentMethodListResponse {
 
   export namespace CardPaymentMethod {
     /**
-     * The card details associated with this payment method
+     * The card-specific details for this payment method, including brand, last four
+     * digits, and expiration.
      */
     export interface Card {
       /**
@@ -428,38 +486,45 @@ export namespace PaymentMethodListResponse {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
   }
 
   /**
-   * The bank account for the payment method
+   * A saved US bank account payment method, including bank name, last four digits,
+   * and account type.
    */
   export interface UsBankAccountPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -469,54 +534,63 @@ export namespace PaymentMethodListResponse {
     typename: 'UsBankAccountPaymentMethod';
 
     /**
-     * The bank details associated with this payment method
+     * The bank account-specific details for this payment method, including bank name
+     * and last four digits.
      */
     us_bank_account: UsBankAccountPaymentMethod.UsBankAccount;
   }
 
   export namespace UsBankAccountPaymentMethod {
     /**
-     * The bank details associated with this payment method
+     * The bank account-specific details for this payment method, including bank name
+     * and last four digits.
      */
     export interface UsBankAccount {
       /**
-       * The type of account
+       * The type of bank account (e.g., checking, savings).
        */
       account_type: string;
 
       /**
-       * The name of the bank
+       * The name of the financial institution holding the account.
        */
       bank_name: string;
 
       /**
-       * The last 4 digits of the account number
+       * The last four digits of the bank account number.
        */
       last4: string;
     }
   }
 
   /**
-   * The Cash App details for the payment method
+   * A saved Cash App payment method, including the buyer's cashtag and unique
+   * identifier.
    */
   export interface CashappPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * The Cash App details associated with this payment method
+     * The Cash App-specific details for this payment method, including cashtag and
+     * buyer ID.
      */
     cashapp: CashappPaymentMethod.Cashapp;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -528,42 +602,49 @@ export namespace PaymentMethodListResponse {
 
   export namespace CashappPaymentMethod {
     /**
-     * The Cash App details associated with this payment method
+     * The Cash App-specific details for this payment method, including cashtag and
+     * buyer ID.
      */
     export interface Cashapp {
       /**
-       * A unique and immutable identifier assigned by Cash App to every buyer.
+       * The unique and immutable identifier assigned by Cash App to the buyer. Null if
+       * not available.
        */
       buyer_id: string | null;
 
       /**
-       * A public identifier for buyers using Cash App.
+       * The public cashtag handle of the buyer on Cash App. Null if not available.
        */
       cashtag: string | null;
     }
   }
 
   /**
-   * The iDEAL details for the payment method
+   * A saved iDEAL payment method, including the customer's bank name and BIC code.
    */
   export interface IdealPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The iDEAL details associated with this payment method
+     * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     ideal: IdealPaymentMethod.Ideal;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
@@ -575,42 +656,51 @@ export namespace PaymentMethodListResponse {
 
   export namespace IdealPaymentMethod {
     /**
-     * The iDEAL details associated with this payment method
+     * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     export interface Ideal {
       /**
-       * The customer's bank.
+       * The name of the customer's bank used for the iDEAL transaction. Null if not
+       * available.
        */
       bank: string | null;
 
       /**
-       * The Bank Identifier Code of the customer's bank.
+       * The Bank Identifier Code (BIC/SWIFT) of the customer's bank. Null if not
+       * available.
        */
       bic: string | null;
     }
   }
 
   /**
-   * The SEPA Direct Debit details for the payment method
+   * A saved SEPA Direct Debit payment method, including the bank code, country, and
+   * last four IBAN digits.
    */
   export interface SepaDebitPaymentMethod {
     /**
-     * The ID of the payment method
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
     /**
-     * When the payment method was created
+     * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
 
     /**
-     * The type of the payment method
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
 
     /**
-     * The SEPA Direct Debit details associated with this payment method
+     * The SEPA Direct Debit-specific details for this payment method, including bank
+     * code and last four IBAN digits.
      */
     sepa_debit: SepaDebitPaymentMethod.SepaDebit;
 
@@ -622,26 +712,31 @@ export namespace PaymentMethodListResponse {
 
   export namespace SepaDebitPaymentMethod {
     /**
-     * The SEPA Direct Debit details associated with this payment method
+     * The SEPA Direct Debit-specific details for this payment method, including bank
+     * code and last four IBAN digits.
      */
     export interface SepaDebit {
       /**
-       * Bank code of the bank associated with the account.
+       * The bank code of the financial institution associated with this SEPA account.
+       * Null if not available.
        */
       bank_code: string | null;
 
       /**
-       * Branch code of the bank associated with the account.
+       * The branch code of the financial institution associated with this SEPA account.
+       * Null if not available.
        */
       branch_code: string | null;
 
       /**
-       * Two-letter ISO code representing the country the bank account is located in.
+       * The two-letter ISO country code where the bank account is located. Null if not
+       * available.
        */
       country: string | null;
 
       /**
-       * Last four digits of the IBAN.
+       * The last four digits of the IBAN associated with this SEPA account. Null if not
+       * available.
        */
       last4: string | null;
     }
@@ -650,12 +745,14 @@ export namespace PaymentMethodListResponse {
 
 export interface PaymentMethodRetrieveParams {
   /**
-   * The ID of the Company. Provide either this or member_id (not both).
+   * The unique identifier of the company. Provide either this or member_id, not
+   * both.
    */
   company_id?: string | null;
 
   /**
-   * The ID of the Member. Provide either this or company_id (not both).
+   * The unique identifier of the member. Provide either this or company_id, not
+   * both.
    */
   member_id?: string | null;
 }
@@ -667,17 +764,18 @@ export interface PaymentMethodListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the Company. Provide either this or member_id (not both).
+   * The unique identifier of the company. Provide either this or member_id, not
+   * both.
    */
   company_id?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return payment methods created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return payment methods created before this timestamp.
    */
   created_before?: string | null;
 
@@ -697,7 +795,7 @@ export interface PaymentMethodListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the Member to list payment methods for
+   * The unique identifier of the member to list payment methods for.
    */
   member_id?: string | null;
 }

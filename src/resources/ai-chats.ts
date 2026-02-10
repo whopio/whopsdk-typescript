@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class AIChats extends APIResource {
   /**
-   * Creates a new AI chat
+   * Create a new AI chat thread and send the first message to the AI agent.
    *
    * Required permissions:
    *
@@ -19,14 +19,14 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Fetches a single AI chat by ID
+   * Retrieves the details of an existing AI chat.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<AIChat> {
     return this._client.get(path`/ai_chats/${id}`, options);
   }
 
   /**
-   * Updates an AI chat
+   * Update an AI chat's title or associated company context.
    *
    * Required permissions:
    *
@@ -41,7 +41,7 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Fetches all AI chats for the current user
+   * Returns a paginated list of AI chat threads for the current authenticated user.
    */
   list(
     query: AIChatListParams | null | undefined = {},
@@ -51,7 +51,7 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Deletes an AI chat
+   * Delete an AI chat thread so it no longer appears in the user's chat list.
    *
    * Required permissions:
    *
@@ -65,7 +65,8 @@ export class AIChats extends APIResource {
 export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>;
 
 /**
- * An AI chat conversation belonging to a user
+ * An AI-powered chat conversation belonging to a user, with optional scheduled
+ * automation.
  */
 export interface AIChat {
   /**
@@ -74,7 +75,7 @@ export interface AIChat {
   id: string;
 
   /**
-   * The total number of tokens used in the chat
+   * The total number of tokens consumed across all messages in this conversation.
    */
   blended_token_usage: string;
 
@@ -84,17 +85,19 @@ export interface AIChat {
   created_at: string;
 
   /**
-   * When the last message was sent
+   * The timestamp of the most recent message in this conversation. Null if no
+   * messages have been sent yet.
    */
   last_message_at: string | null;
 
   /**
-   * The number of messages in the chat
+   * The total number of messages exchanged in this conversation.
    */
   message_count: number;
 
   /**
-   * The title of the AI chat
+   * A short descriptive title for this AI chat conversation. Null if no title has
+   * been set.
    */
   title: string | null;
 
@@ -104,14 +107,14 @@ export interface AIChat {
   updated_at: string;
 
   /**
-   * The user who owns the AI chat
+   * The user who owns this AI chat conversation.
    */
   user: AIChat.User;
 }
 
 export namespace AIChat {
   /**
-   * The user who owns the AI chat
+   * The user who owns this AI chat conversation.
    */
   export interface User {
     /**
@@ -122,7 +125,8 @@ export namespace AIChat {
 }
 
 /**
- * An AI chat conversation belonging to a user
+ * An AI-powered chat conversation belonging to a user, with optional scheduled
+ * automation.
  */
 export interface AIChatListResponse {
   /**
@@ -131,7 +135,7 @@ export interface AIChatListResponse {
   id: string;
 
   /**
-   * The total number of tokens used in the chat
+   * The total number of tokens consumed across all messages in this conversation.
    */
   blended_token_usage: string;
 
@@ -141,17 +145,19 @@ export interface AIChatListResponse {
   created_at: string;
 
   /**
-   * When the last message was sent
+   * The timestamp of the most recent message in this conversation. Null if no
+   * messages have been sent yet.
    */
   last_message_at: string | null;
 
   /**
-   * The number of messages in the chat
+   * The total number of messages exchanged in this conversation.
    */
   message_count: number;
 
   /**
-   * The title of the AI chat
+   * A short descriptive title for this AI chat conversation. Null if no title has
+   * been set.
    */
   title: string | null;
 
@@ -161,14 +167,14 @@ export interface AIChatListResponse {
   updated_at: string;
 
   /**
-   * The user who owns the AI chat
+   * The user who owns this AI chat conversation.
    */
   user: AIChatListResponse.User;
 }
 
 export namespace AIChatListResponse {
   /**
-   * The user who owns the AI chat
+   * The user who owns this AI chat conversation.
    */
   export interface User {
     /**
@@ -185,23 +191,24 @@ export type AIChatDeleteResponse = boolean;
 
 export interface AIChatCreateParams {
   /**
-   * The text content of the first message sent in the chat
+   * The text content of the first message to send to the AI agent.
    */
   message_text: string;
 
   /**
-   * The ID of the company to set as the current company in context for the AI chat
+   * The unique identifier of the company to set as context for the AI chat (e.g.,
+   * "biz_XXXXX").
    */
   current_company_id?: string | null;
 
   /**
-   * The IDs of existing uploaded attachments to include in the first message to the
-   * agent
+   * A list of previously uploaded file attachments to include with the first
+   * message.
    */
   message_attachments?: Array<AIChatCreateParams.MessageAttachment> | null;
 
   /**
-   * The title of the AI chat
+   * An optional display title for the AI chat thread (e.g., "Help with billing").
    */
   title?: string | null;
 }
@@ -220,12 +227,13 @@ export namespace AIChatCreateParams {
 
 export interface AIChatUpdateParams {
   /**
-   * The ID of the company to set as the current company in context for the AI chat
+   * The unique identifier of the company to set as context for the AI chat (e.g.,
+   * "biz_XXXXX").
    */
   current_company_id?: string | null;
 
   /**
-   * The new title for the AI chat
+   * The new display title for the AI chat thread (e.g., "Help with billing").
    */
   title?: string | null;
 }

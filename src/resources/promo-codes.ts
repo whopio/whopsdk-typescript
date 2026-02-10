@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class PromoCodes extends APIResource {
   /**
-   * Create a new promo code for a product or plan
+   * Create a new promo code that applies a discount at checkout. Can be scoped to
+   * specific products or plans.
    *
    * Required permissions:
    *
@@ -34,7 +35,7 @@ export class PromoCodes extends APIResource {
   }
 
   /**
-   * Retrieves a promo code by ID
+   * Retrieves the details of an existing promo code.
    *
    * Required permissions:
    *
@@ -53,7 +54,8 @@ export class PromoCodes extends APIResource {
   }
 
   /**
-   * Lists promo codes for a company
+   * Returns a paginated list of promo codes belonging to a company, with optional
+   * filtering by product, plan, and status.
    *
    * Required permissions:
    *
@@ -78,7 +80,8 @@ export class PromoCodes extends APIResource {
   }
 
   /**
-   * Archive a promo code, preventing further use
+   * Archive a promo code, preventing it from being used in future checkouts.
+   * Existing memberships are not affected.
    *
    * Required permissions:
    *
@@ -371,89 +374,94 @@ export type PromoCodeDeleteResponse = boolean;
 
 export interface PromoCodeCreateParams {
   /**
-   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
-   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
-   * off (e.g., 10.00 means $10.00 off).
+   * The discount amount. When promo_type is percentage, this is the percent off
+   * (e.g., 20 for 20% off). When promo_type is flat_amount, this is the currency
+   * amount off (e.g., 10.00 for $10.00 off).
    */
   amount_off: number;
 
   /**
-   * The monetary currency of the promo code.
+   * The three-letter ISO currency code for the promo code discount.
    */
   base_currency: Shared.Currency;
 
   /**
-   * The specific code used to apply the promo at checkout.
+   * The alphanumeric code customers enter at checkout to apply the discount.
    */
   code: string;
 
   /**
-   * The id of the company to create the promo code for.
+   * The unique identifier of the company to create this promo code for.
    */
   company_id: string;
 
   /**
-   * Restricts promo use to only users who have never purchased from the company
-   * before.
+   * Whether to restrict this promo code to only users who have never purchased from
+   * the company before.
    */
   new_users_only: boolean;
 
   /**
-   * The number of months this promo code is applied and valid for.
+   * The number of billing months the discount remains active. For example, 3 means
+   * the discount applies to the first 3 billing cycles.
    */
   promo_duration_months: number;
 
   /**
-   * The type (% or flat amount) of the promo.
+   * The discount type, either percentage or flat_amount.
    */
   promo_type: Shared.PromoType;
 
   /**
-   * Restricts promo use to only users who have churned from the company before.
+   * Whether to restrict this promo code to only users who have previously churned
+   * from the company.
    */
   churned_users_only?: boolean | null;
 
   /**
-   * Whether this promo code is for existing memberships only (cancelations)
+   * Whether this promo code can only be applied to existing memberships, such as for
+   * cancellation retention offers.
    */
   existing_memberships_only?: boolean | null;
 
   /**
-   * The date/time of when the promo expires.
+   * The datetime when the promo code expires and can no longer be used. Null means
+   * it never expires.
    */
   expires_at?: string | null;
 
   /**
-   * Restricts promo use to only be applied once per customer.
+   * Whether each customer can only use this promo code once.
    */
   one_per_customer?: boolean | null;
 
   /**
-   * The IDs of the plans that the promo code applies to. If product_id is provided,
-   * it will only apply to plans attached to that product
+   * The identifiers of plans this promo code applies to. When product_id is also
+   * provided, only plans attached to that product are included.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * The product to lock the promo code to, if any. If provided will filter out any
-   * plan ids not attached to this product
+   * The identifier of the product to scope this promo code to. When provided, the
+   * promo code only applies to plans attached to this product.
    */
   product_id?: string | null;
 
   /**
-   * The quantity limit on the number of uses.
+   * The maximum number of times this promo code can be used. Ignored when
+   * unlimited_stock is true.
    */
   stock?: number | null;
 
   /**
-   * Whether or not the promo code should have unlimited stock.
+   * Whether the promo code can be used an unlimited number of times.
    */
   unlimited_stock?: boolean | null;
 }
 
 export interface PromoCodeListParams extends CursorPageParams {
   /**
-   * The ID of the company to list promo codes for
+   * The unique identifier of the company to list promo codes for.
    */
   company_id: string;
 
@@ -463,12 +471,12 @@ export interface PromoCodeListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return promo codes created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return promo codes created before this timestamp.
    */
   created_before?: string | null;
 
@@ -483,12 +491,12 @@ export interface PromoCodeListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * Filter promo codes by plan ID(s)
+   * Filter to only promo codes scoped to these plan identifiers.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * Filter promo codes by product ID(s)
+   * Filter to only promo codes scoped to these product identifiers.
    */
   product_ids?: Array<string> | null;
 

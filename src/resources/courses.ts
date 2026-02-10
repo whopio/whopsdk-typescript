@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Courses extends APIResource {
   /**
-   * Creates a new course module in an experience
+   * Create a new course within an experience, with optional chapters, lessons, and a
+   * certificate.
    *
    * Required permissions:
    *
@@ -28,7 +29,7 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Retrieves a course by ID
+   * Retrieves the details of an existing course.
    *
    * Required permissions:
    *
@@ -46,7 +47,8 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Updates a course
+   * Update a course's title, description, visibility, thumbnail, or chapter
+   * ordering.
    *
    * Required permissions:
    *
@@ -68,7 +70,8 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Lists courses for an experience or company
+   * Returns a paginated list of courses, filtered by either an experience or a
+   * company.
    *
    * Required permissions:
    *
@@ -90,7 +93,8 @@ export class Courses extends APIResource {
   }
 
   /**
-   * Deletes a course
+   * Permanently delete a course and all of its chapters, lessons, and student
+   * progress.
    *
    * Required permissions:
    *
@@ -111,7 +115,8 @@ export class Courses extends APIResource {
 export type CourseListResponsesCursorPage = CursorPage<CourseListResponse>;
 
 /**
- * A course from the courses app
+ * A structured learning module containing chapters and lessons, belonging to an
+ * experience.
  */
 export interface Course {
   /**
@@ -120,18 +125,20 @@ export interface Course {
   id: string;
 
   /**
-   * Whether the course will award its students a PDF certificate after completing
-   * all lessons
+   * Whether students receive a PDF certificate after completing all lessons in this
+   * course. Null if the setting has not been configured.
    */
   certificate_after_completion_enabled: boolean | null;
 
   /**
-   * The chapters in this course
+   * An ordered list of all chapters in this course, sorted by their display
+   * position.
    */
   chapters: Array<Course.Chapter>;
 
   /**
-   * The URL of the course's cover image, which is shown in course preview cards
+   * The URL of the course cover image shown on preview cards. Null if no cover image
+   * has been uploaded.
    */
   cover_image: string | null;
 
@@ -141,39 +148,44 @@ export interface Course {
   created_at: string;
 
   /**
-   * A short description of the course
+   * A brief summary of the course content and objectives. Null if no description has
+   * been set.
    */
   description: string | null;
 
   /**
-   * The language spoken in the video content of the course, used to generate closed
-   * captions in the right language
+   * The spoken language of the video content, used to generate accurate closed
+   * captions. One of: en, es, it, pt, de, fr, pl, ru, nl, ca, tr, sv, uk, no, fi,
+   * sk, el, cs, hr, da, ro, bg.
    */
   language: Languages;
 
   /**
-   * The order of the course within its experience
+   * The sort position of this course within its parent experience, as a decimal for
+   * flexible ordering.
    */
   order: string;
 
   /**
-   * Whether the course requires students to complete the previous lesson before
-   * moving on to the next one
+   * Whether students must complete each lesson sequentially before advancing to the
+   * next one.
    */
   require_completing_lessons_in_order: boolean;
 
   /**
-   * A short tagline for the course. It is displayed under the course title in the UI
+   * A short marketing tagline displayed beneath the course title. Null if no tagline
+   * has been set.
    */
   tagline: string | null;
 
   /**
-   * The thumbnail for the course
+   * The thumbnail image displayed on course cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   thumbnail: Course.Thumbnail | null;
 
   /**
-   * The title of the course
+   * The display name of the course shown to students. Null if no title has been set.
    */
   title: string | null;
 
@@ -183,15 +195,16 @@ export interface Course {
   updated_at: string;
 
   /**
-   * The visibility of the course. Determines how / whether this course is visible to
-   * users.
+   * The visibility setting that controls whether this course appears to students.
+   * One of: visible, hidden.
    */
   visibility: CourseVisibilities;
 }
 
 export namespace Course {
   /**
-   * A chapter from the courses app
+   * A grouping of related lessons within a course, used to organize content into
+   * sections.
    */
   export interface Chapter {
     /**
@@ -200,24 +213,26 @@ export namespace Course {
     id: string;
 
     /**
-     * The lessons in this chapter
+     * An ordered list of lessons in this chapter, sorted by display position. Hidden
+     * lessons are excluded for non-admin users.
      */
     lessons: Array<Chapter.Lesson>;
 
     /**
-     * The order of the chapter within its course
+     * The sort position of this chapter within its parent course, starting from zero.
      */
     order: number;
 
     /**
-     * The title of the chapter
+     * The display name of the chapter shown to students. Maximum 150 characters.
      */
     title: string;
   }
 
   export namespace Chapter {
     /**
-     * A lesson from the courses app
+     * An individual learning unit within a chapter, which can contain text, video,
+     * PDF, or assessment content.
      */
     export interface Lesson {
       /**
@@ -226,34 +241,38 @@ export namespace Course {
       id: string;
 
       /**
-       * The type of the lesson (text, video, pdf, multi, quiz, knowledge_check)
+       * The content format of this lesson. One of: text, video, pdf, multi, quiz,
+       * knowledge_check.
        */
       lesson_type: CourseLessonsAPI.LessonTypes;
 
       /**
-       * The order of the lesson within its chapter
+       * The sort position of this lesson within its parent chapter, starting from zero.
        */
       order: number;
 
       /**
-       * The thumbnail for the lesson
+       * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+       * has been uploaded.
        */
       thumbnail: Lesson.Thumbnail | null;
 
       /**
-       * The title of the lesson
+       * The display name of the lesson shown to students. Maximum 120 characters.
        */
       title: string;
 
       /**
-       * The associated Mux asset for video lessons
+       * The Mux video asset for video-type lessons, used for streaming playback. Null if
+       * this lesson has no hosted video.
        */
       video_asset: Lesson.VideoAsset | null;
     }
 
     export namespace Lesson {
       /**
-       * The thumbnail for the lesson
+       * The thumbnail image displayed on lesson cards and previews. Null if no thumbnail
+       * has been uploaded.
        */
       export interface Thumbnail {
         /**
@@ -264,7 +283,8 @@ export namespace Course {
       }
 
       /**
-       * The associated Mux asset for video lessons
+       * The Mux video asset for video-type lessons, used for streaming playback. Null if
+       * this lesson has no hosted video.
        */
       export interface VideoAsset {
         /**
@@ -286,11 +306,16 @@ export namespace Course {
   }
 
   /**
-   * The thumbnail for the course
+   * The thumbnail image displayed on course cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   export interface Thumbnail {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -353,7 +378,8 @@ export type Languages =
   | 'bg';
 
 /**
- * A course from the courses app
+ * A structured learning module containing chapters and lessons, belonging to an
+ * experience.
  */
 export interface CourseListResponse {
   /**
@@ -362,13 +388,14 @@ export interface CourseListResponse {
   id: string;
 
   /**
-   * Whether the course will award its students a PDF certificate after completing
-   * all lessons
+   * Whether students receive a PDF certificate after completing all lessons in this
+   * course. Null if the setting has not been configured.
    */
   certificate_after_completion_enabled: boolean | null;
 
   /**
-   * The URL of the course's cover image, which is shown in course preview cards
+   * The URL of the course cover image shown on preview cards. Null if no cover image
+   * has been uploaded.
    */
   cover_image: string | null;
 
@@ -378,39 +405,44 @@ export interface CourseListResponse {
   created_at: string;
 
   /**
-   * A short description of the course
+   * A brief summary of the course content and objectives. Null if no description has
+   * been set.
    */
   description: string | null;
 
   /**
-   * The language spoken in the video content of the course, used to generate closed
-   * captions in the right language
+   * The spoken language of the video content, used to generate accurate closed
+   * captions. One of: en, es, it, pt, de, fr, pl, ru, nl, ca, tr, sv, uk, no, fi,
+   * sk, el, cs, hr, da, ro, bg.
    */
   language: Languages;
 
   /**
-   * The order of the course within its experience
+   * The sort position of this course within its parent experience, as a decimal for
+   * flexible ordering.
    */
   order: string;
 
   /**
-   * Whether the course requires students to complete the previous lesson before
-   * moving on to the next one
+   * Whether students must complete each lesson sequentially before advancing to the
+   * next one.
    */
   require_completing_lessons_in_order: boolean;
 
   /**
-   * A short tagline for the course. It is displayed under the course title in the UI
+   * A short marketing tagline displayed beneath the course title. Null if no tagline
+   * has been set.
    */
   tagline: string | null;
 
   /**
-   * The thumbnail for the course
+   * The thumbnail image displayed on course cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   thumbnail: CourseListResponse.Thumbnail | null;
 
   /**
-   * The title of the course
+   * The display name of the course shown to students. Null if no title has been set.
    */
   title: string | null;
 
@@ -420,19 +452,24 @@ export interface CourseListResponse {
   updated_at: string;
 
   /**
-   * The visibility of the course. Determines how / whether this course is visible to
-   * users.
+   * The visibility setting that controls whether this course appears to students.
+   * One of: visible, hidden.
    */
   visibility: CourseVisibilities;
 }
 
 export namespace CourseListResponse {
   /**
-   * The thumbnail for the course
+   * The thumbnail image displayed on course cards and previews. Null if no thumbnail
+   * has been uploaded.
    */
   export interface Thumbnail {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -468,41 +505,42 @@ export type CourseDeleteResponse = boolean;
 
 export interface CourseCreateParams {
   /**
-   * The ID of the experience to create the course in
+   * The unique identifier of the experience to create the course in (e.g.,
+   * "exp_XXXXX").
    */
   experience_id: string;
 
   /**
-   * The title of the course
+   * The display title of the course (e.g., "Introduction to Web Development").
    */
   title: string;
 
   /**
-   * Whether the course will award its students a PDF certificate after completing
-   * all lessons
+   * Whether the course awards students a PDF certificate after completing all
+   * lessons.
    */
   certificate_after_completion_enabled?: boolean | null;
 
   /**
-   * The decimal order position of the course within its experience. If not provided,
-   * it will be set to the next sequential order. Use fractional values (e.g., 1.5)
-   * to place between existing courses.
+   * The decimal order position of the course within its experience. Use fractional
+   * values (e.g., "1.5") to place between existing courses.
    */
   order?: string | null;
 
   /**
-   * Whether the course requires students to complete the previous lesson before
-   * moving on to the next one
+   * Whether students must complete each lesson sequentially before advancing to the
+   * next one.
    */
   require_completing_lessons_in_order?: boolean | null;
 
   /**
-   * The tagline of the course
+   * A short tagline displayed beneath the course title (e.g., "Master the
+   * fundamentals of design").
    */
   tagline?: string | null;
 
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * The thumbnail image for the course in PNG, JPEG, or GIF format.
    */
   thumbnail?: CourseCreateParams.Thumbnail | null;
 
@@ -515,7 +553,7 @@ export interface CourseCreateParams {
 
 export namespace CourseCreateParams {
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * The thumbnail image for the course in PNG, JPEG, or GIF format.
    */
   export interface Thumbnail {
     /**
@@ -527,18 +565,18 @@ export namespace CourseCreateParams {
 
 export interface CourseUpdateParams {
   /**
-   * Whether the course will award its students a PDF certificate after completing
-   * all lessons
+   * Whether the course awards students a PDF certificate after completing all
+   * lessons.
    */
   certificate_after_completion_enabled?: boolean | null;
 
   /**
-   * The chapters and lessons to update
+   * A list of chapters with nested lessons to reorder or rename in bulk.
    */
   chapters?: Array<CourseUpdateParams.Chapter> | null;
 
   /**
-   * A short description of the course
+   * A short description of the course displayed to students on the course page.
    */
   description?: string | null;
 
@@ -549,28 +587,29 @@ export interface CourseUpdateParams {
 
   /**
    * The decimal order position of the course within its experience. Use fractional
-   * values (e.g., 1.5) to place between existing courses.
+   * values (e.g., "1.5") to place between existing courses.
    */
   order?: string | null;
 
   /**
-   * Whether the course requires students to complete the previous lesson before
-   * moving on to the next one
+   * Whether students must complete each lesson sequentially before advancing to the
+   * next one.
    */
   require_completing_lessons_in_order?: boolean | null;
 
   /**
-   * A short tagline for the course
+   * A short tagline displayed beneath the course title (e.g., "Master the
+   * fundamentals of design").
    */
   tagline?: string | null;
 
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * The thumbnail image for the course in PNG, JPEG, or GIF format.
    */
   thumbnail?: CourseUpdateParams.Thumbnail | null;
 
   /**
-   * The title of the course
+   * The display title of the course (e.g., "Introduction to Web Development").
    */
   title?: string | null;
 
@@ -635,7 +674,7 @@ export namespace CourseUpdateParams {
   }
 
   /**
-   * The thumbnail for the course in png, jpeg, or gif format
+   * The thumbnail image for the course in PNG, JPEG, or GIF format.
    */
   export interface Thumbnail {
     /**
@@ -652,12 +691,12 @@ export interface CourseListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the company
+   * The unique identifier of the company to list courses for.
    */
   company_id?: string | null;
 
   /**
-   * The ID of the experience
+   * The unique identifier of the experience to list courses for.
    */
   experience_id?: string | null;
 

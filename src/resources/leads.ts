@@ -8,7 +8,8 @@ import { path } from '../internal/utils/path';
 
 export class Leads extends APIResource {
   /**
-   * Creates a new lead
+   * Record a new lead for a company, capturing a potential customer's interest in a
+   * specific product.
    *
    * Required permissions:
    *
@@ -29,7 +30,7 @@ export class Leads extends APIResource {
   }
 
   /**
-   * Retrieves a lead by ID
+   * Retrieves the details of an existing lead.
    *
    * Required permissions:
    *
@@ -50,7 +51,7 @@ export class Leads extends APIResource {
   }
 
   /**
-   * Updates a lead
+   * Update the metadata or referrer information on an existing lead record.
    *
    * Required permissions:
    *
@@ -75,7 +76,8 @@ export class Leads extends APIResource {
   }
 
   /**
-   * Lists leads for a company
+   * Returns a paginated list of leads for a company, with optional filtering by
+   * product and creation date.
    *
    * Required permissions:
    *
@@ -105,7 +107,8 @@ export class Leads extends APIResource {
 export type LeadListResponsesCursorPage = CursorPage<LeadListResponse>;
 
 /**
- * An object representing a lead (someone who is interested in a whop).
+ * A prospective customer who has expressed interest in a company or product but
+ * has not yet purchased.
  */
 export interface Lead {
   /**
@@ -119,22 +122,25 @@ export interface Lead {
   created_at: string;
 
   /**
-   * The converted member, if any.
+   * The company member record if this lead has converted into a paying customer.
+   * Null if the lead has not converted.
    */
   member: Lead.Member | null;
 
   /**
-   * Custom metadata for the lead.
+   * Custom key-value pairs attached to this lead. Null if no metadata was provided.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The access pass the lead is interested in, if available.
+   * The product the lead expressed interest in. Null if the lead is not associated
+   * with a specific product.
    */
   product: Lead.Product | null;
 
   /**
-   * The referrer URL that brought this lead.
+   * The URL of the page that referred this lead to the company. Null if no referrer
+   * was captured.
    */
   referrer: string | null;
 
@@ -144,14 +150,15 @@ export interface Lead {
   updated_at: string;
 
   /**
-   * The user who is the lead.
+   * The user account associated with this lead.
    */
   user: Lead.User;
 }
 
 export namespace Lead {
   /**
-   * The converted member, if any.
+   * The company member record if this lead has converted into a paying customer.
+   * Null if the lead has not converted.
    */
   export interface Member {
     /**
@@ -161,7 +168,8 @@ export namespace Lead {
   }
 
   /**
-   * The access pass the lead is interested in, if available.
+   * The product the lead expressed interest in. Null if the lead is not associated
+   * with a specific product.
    */
   export interface Product {
     /**
@@ -177,7 +185,7 @@ export namespace Lead {
   }
 
   /**
-   * The user who is the lead.
+   * The user account associated with this lead.
    */
   export interface User {
     /**
@@ -204,7 +212,8 @@ export namespace Lead {
 }
 
 /**
- * An object representing a lead (someone who is interested in a whop).
+ * A prospective customer who has expressed interest in a company or product but
+ * has not yet purchased.
  */
 export interface LeadListResponse {
   /**
@@ -218,22 +227,25 @@ export interface LeadListResponse {
   created_at: string;
 
   /**
-   * The converted member, if any.
+   * The company member record if this lead has converted into a paying customer.
+   * Null if the lead has not converted.
    */
   member: LeadListResponse.Member | null;
 
   /**
-   * Custom metadata for the lead.
+   * Custom key-value pairs attached to this lead. Null if no metadata was provided.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The access pass the lead is interested in, if available.
+   * The product the lead expressed interest in. Null if the lead is not associated
+   * with a specific product.
    */
   product: LeadListResponse.Product | null;
 
   /**
-   * The referrer URL that brought this lead.
+   * The URL of the page that referred this lead to the company. Null if no referrer
+   * was captured.
    */
   referrer: string | null;
 
@@ -243,14 +255,15 @@ export interface LeadListResponse {
   updated_at: string;
 
   /**
-   * The user who is the lead.
+   * The user account associated with this lead.
    */
   user: LeadListResponse.User;
 }
 
 export namespace LeadListResponse {
   /**
-   * The converted member, if any.
+   * The company member record if this lead has converted into a paying customer.
+   * Null if the lead has not converted.
    */
   export interface Member {
     /**
@@ -260,7 +273,8 @@ export namespace LeadListResponse {
   }
 
   /**
-   * The access pass the lead is interested in, if available.
+   * The product the lead expressed interest in. Null if the lead is not associated
+   * with a specific product.
    */
   export interface Product {
     /**
@@ -276,7 +290,7 @@ export namespace LeadListResponse {
   }
 
   /**
-   * The user who is the lead.
+   * The user account associated with this lead.
    */
   export interface User {
     /**
@@ -304,47 +318,51 @@ export namespace LeadListResponse {
 
 export interface LeadCreateParams {
   /**
-   * The ID of the company to create a lead for.
+   * The unique identifier of the company to create the lead for, starting with
+   * 'biz\_'.
    */
   company_id: string;
 
   /**
-   * Custom metadata for the lead.
+   * A JSON object of custom metadata to attach to the lead for tracking purposes.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * The ID of the product the lead is interested in.
+   * The unique identifier of the product the lead is interested in, starting with
+   * 'prod\_'.
    */
   product_id?: string | null;
 
   /**
-   * The url referrer of the lead, if any.
+   * The referral URL that brought the lead to the company, such as
+   * 'https://example.com/landing'.
    */
   referrer?: string | null;
 
   /**
-   * The ID of the user to create a lead for. If the request is made by a user, that
-   * user will be used.
+   * The unique identifier of the user to record as the lead. If authenticated as a
+   * user, that user is used automatically.
    */
   user_id?: string | null;
 }
 
 export interface LeadUpdateParams {
   /**
-   * Custom metadata for the lead.
+   * A JSON object of custom metadata to set on the lead, replacing any existing
+   * metadata.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * The url referrer of the lead.
+   * The updated referral URL for the lead, such as 'https://example.com/landing'.
    */
   referrer?: string | null;
 }
 
 export interface LeadListParams extends CursorPageParams {
   /**
-   * The ID of the company to list leads for
+   * The unique identifier of the company to list leads for.
    */
   company_id: string;
 
@@ -354,12 +372,12 @@ export interface LeadListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return leads created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return leads created before this timestamp.
    */
   created_before?: string | null;
 
@@ -374,7 +392,7 @@ export interface LeadListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The product IDs to filter the leads by
+   * Filter leads to only those associated with these specific product identifiers.
    */
   product_ids?: Array<string> | null;
 }

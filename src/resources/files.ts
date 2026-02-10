@@ -7,14 +7,15 @@ import { path } from '../internal/utils/path';
 
 export class Files extends APIResource {
   /**
-   * Creates a file and returns a presigned URL for upload
+   * Create a new file record and receive a presigned URL for uploading content to
+   * S3.
    */
   create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
     return this._client.post('/files', { body, ...options });
   }
 
   /**
-   * Retrieves a file by its ID
+   * Retrieves the details of an existing file.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
     return this._client.get(path`/files/${id}`, options);
@@ -110,7 +111,8 @@ export interface FileRetrieveResponse {
 
 export interface FileCreateParams {
   /**
-   * The filename of the file
+   * The name of the file including its extension (e.g., "photo.png" or
+   * "document.pdf").
    */
   filename: string;
 }

@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Forums extends APIResource {
   /**
-   * Retrieves a forum
+   * Retrieves the details of an existing forum.
    *
    * Required permissions:
    *
@@ -20,7 +20,8 @@ export class Forums extends APIResource {
   }
 
   /**
-   * Updates a forum
+   * Update moderation and notification settings for a forum, such as who can post,
+   * who can comment, and email notification preferences.
    *
    * Required permissions:
    *
@@ -35,7 +36,8 @@ export class Forums extends APIResource {
   }
 
   /**
-   * Lists forums inside a company
+   * Returns a paginated list of forums within a specific company, with optional
+   * filtering by product.
    *
    * Required permissions:
    *
@@ -52,7 +54,8 @@ export class Forums extends APIResource {
 export type ForumListResponsesCursorPage = CursorPage<ForumListResponse>;
 
 /**
- * Represents a forum feed
+ * A discussion forum where members can create posts, comment, and react, belonging
+ * to an experience.
  */
 export interface ForumListResponse {
   /**
@@ -61,29 +64,32 @@ export interface ForumListResponse {
   id: string;
 
   /**
-   * The email notification preference for this forum
+   * The email notification setting that controls which posts trigger email alerts.
+   * One of: all_admin_posts, only_weekly_summary, none.
    */
   email_notification_preference: Shared.EmailNotificationPreferences;
 
   /**
-   * The experience for this forum
+   * The parent experience that this forum belongs to.
    */
   experience: ForumListResponse.Experience;
 
   /**
-   * Who can comment on this forum
+   * The permission level controlling who can comment on posts. One of: everyone,
+   * admins.
    */
   who_can_comment: Shared.WhoCanCommentTypes;
 
   /**
-   * Who can post on this forum
+   * The permission level controlling who can create new posts. One of: everyone,
+   * admins.
    */
   who_can_post: Shared.WhoCanPostTypes;
 }
 
 export namespace ForumListResponse {
   /**
-   * The experience for this forum
+   * The parent experience that this forum belongs to.
    */
   export interface Experience {
     /**
@@ -92,7 +98,8 @@ export namespace ForumListResponse {
     id: string;
 
     /**
-     * The written name of the description.
+     * The display name of this experience shown to users in the product navigation.
+     * Maximum 255 characters.
      */
     name: string;
   }
@@ -117,7 +124,7 @@ export interface ForumUpdateParams {
 
 export interface ForumListParams extends CursorPageParams {
   /**
-   * The ID of the company to list forums for
+   * The unique identifier of the company to list forums for.
    */
   company_id: string;
 
@@ -137,7 +144,8 @@ export interface ForumListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * If provided, only forums connected to this product are returned
+   * The unique identifier of a product to filter by. When set, only forums connected
+   * to this product are returned.
    */
   product_id?: string | null;
 }

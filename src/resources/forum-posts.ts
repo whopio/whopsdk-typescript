@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class ForumPosts extends APIResource {
   /**
-   * Create a new forum post
+   * Create a new forum post or comment within an experience. Supports text content,
+   * attachments, polls, paywalling, and pinning.
    *
    * Required permissions:
    *
@@ -27,7 +28,7 @@ export class ForumPosts extends APIResource {
   }
 
   /**
-   * Retrieves a forum post by ID
+   * Retrieves the details of an existing forum post.
    *
    * Required permissions:
    *
@@ -43,7 +44,8 @@ export class ForumPosts extends APIResource {
   }
 
   /**
-   * Update an existing forum post
+   * Edit the content, attachments, pinned status, or visibility of an existing forum
+   * post or comment.
    *
    * @example
    * ```ts
@@ -59,7 +61,8 @@ export class ForumPosts extends APIResource {
   }
 
   /**
-   * Lists forum posts
+   * Returns a paginated list of forum posts within a specific experience, with
+   * optional filtering by parent post or pinned status.
    *
    * Required permissions:
    *
@@ -91,7 +94,8 @@ export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>
 export type ForumPostVisibilityType = 'members_only' | 'globally_visible';
 
 /**
- * Represents a post in forum
+ * A post or comment in a forum feed, supporting rich text, attachments, polls, and
+ * reactions.
  */
 export interface ForumPostListResponse {
   /**
@@ -104,69 +108,70 @@ export interface ForumPostListResponse {
   id: string;
 
   /**
-   * The amount of comments on this post
+   * The total number of direct comments on this post.
    */
   comment_count: number;
 
   /**
-   * The content of the forum post in Markdown format
+   * The body of the forum post in Markdown format. Null if the post is paywalled and
+   * the current user does not have access.
    */
   content: string | null;
 
   /**
-   * The timestamp when the post was created
+   * The time this post was created, as a Unix timestamp.
    */
   created_at: string;
 
   /**
-   * Whether the forum post has been edited
+   * Whether this post has been edited after its initial creation.
    */
   is_edited: boolean;
 
   /**
-   * Whether this forum post is pinned
+   * Whether this post is pinned to the top of the forum feed.
    */
   is_pinned: boolean;
 
   /**
-   * Whether the user that sent the post is an admin of the company
+   * Whether the author of this post is an admin of the company that owns the forum.
    */
   is_poster_admin: boolean;
 
   /**
-   * The number of likes this post has received
+   * The total number of like reactions this post has received.
    */
   like_count: number | null;
 
   /**
-   * The ID of the parent forum post, if applicable
+   * The unique identifier of the parent post. Null if this is a top-level post.
    */
   parent_id: string | null;
 
   /**
-   * The title of the forum post
+   * The headline of the forum post. Null if the post has no title.
    */
   title: string | null;
 
   /**
-   * The timestamp when the post was last updated
+   * The time this post was last updated, as a Unix timestamp.
    */
   updated_at: string;
 
   /**
-   * The user who created this forum post
+   * The user who authored this forum post.
    */
   user: ForumPostListResponse.User;
 
   /**
-   * The number of times this message has been viewed
+   * The total number of times this post has been viewed by users.
    */
   view_count: number | null;
 }
 
 export namespace ForumPostListResponse {
   /**
-   * The user who created this forum post
+   * The user who authored this forum post.
    */
   export interface User {
     /**
@@ -188,37 +193,38 @@ export namespace ForumPostListResponse {
 
 export interface ForumPostCreateParams {
   /**
-   * The experience to create this post in
+   * The unique identifier of the experience to create this post in. For example,
+   * 'exp_xxxxx'.
    */
   experience_id: string;
 
   /**
-   * The attachments for this post
+   * A list of file attachments to include with the post, such as images or videos.
    */
   attachments?: Array<ForumPostCreateParams.Attachment> | null;
 
   /**
-   * This is the main body of the post in Markdown format. Hidden if paywalled and
-   * user hasn't purchased access to it.
+   * The main body of the post in Markdown format. For example, 'Check out this
+   * **update**'. Hidden if the post is paywalled and the viewer has not purchased
+   * access.
    */
   content?: string | null;
 
   /**
-   * This is used to determine if the post should be sent as a 'mention' notification
-   * to all of the users who are in the experience. This means that anyone with
-   * 'mentions' enabled will receive a notification about this post.
+   * Whether to send this post as a mention notification to all users in the
+   * experience who have mentions enabled.
    */
   is_mention?: boolean | null;
 
   /**
-   * The ID of the parent post. Set it to the ID of the post you want to comment on
-   * or don't include it if its a top level post.
+   * The unique identifier of the parent post to comment on. Omit this field to
+   * create a top-level post.
    */
   parent_id?: string | null;
 
   /**
-   * The price in paywall_currency to unlock this post (e.g., 5.00 for $5.00). If
-   * set, users must purchase access to view the post content.
+   * The price to unlock this post in the specified paywall currency. For example,
+   * 5.00 for $5.00. When set, users must purchase access to view the post content.
    */
   paywall_amount?: number | null;
 
@@ -228,17 +234,18 @@ export interface ForumPostCreateParams {
   paywall_currency?: Shared.Currency | null;
 
   /**
-   * Whether the post should be pinned
+   * Whether this post should be pinned to the top of the forum.
    */
   pinned?: boolean | null;
 
   /**
-   * The poll for this post
+   * A poll to attach to this post, allowing members to vote on options.
    */
   poll?: ForumPostCreateParams.Poll | null;
 
   /**
-   * The title of the post. Only visible if paywalled.
+   * The title of the post, displayed prominently at the top. Required for paywalled
+   * posts as it remains visible to non-purchasers.
    */
   title?: string | null;
 
@@ -260,7 +267,7 @@ export namespace ForumPostCreateParams {
   }
 
   /**
-   * The poll for this post
+   * A poll to attach to this post, allowing members to vote on options.
    */
   export interface Poll {
     /**
@@ -289,23 +296,26 @@ export namespace ForumPostCreateParams {
 
 export interface ForumPostUpdateParams {
   /**
-   * The attachments for this post
+   * A replacement list of file attachments for this post, such as images or videos.
    */
   attachments?: Array<ForumPostUpdateParams.Attachment> | null;
 
   /**
-   * This is the main body of the post in Markdown format. Hidden if paywalled and
-   * user hasn't purchased access to it.
+   * The updated body of the post in Markdown format. For example, 'Check out this
+   * **update**'. Hidden if the post is paywalled and the viewer has not purchased
+   * access.
    */
   content?: string | null;
 
   /**
-   * Whether the post is pinned. You can only pin a top level posts (not comments).
+   * Whether this post should be pinned to the top of the forum. Only top-level posts
+   * can be pinned, not comments.
    */
   is_pinned?: boolean | null;
 
   /**
-   * The title of the post. Only visible if paywalled.
+   * The updated title of the post, displayed prominently at the top. Required for
+   * paywalled posts as it remains visible to non-purchasers.
    */
   title?: string | null;
 
@@ -329,7 +339,7 @@ export namespace ForumPostUpdateParams {
 
 export interface ForumPostListParams extends CursorPageParams {
   /**
-   * The ID of the experience to list forum posts for
+   * The unique identifier of the experience to list forum posts for.
    */
   experience_id: string;
 
@@ -349,12 +359,14 @@ export interface ForumPostListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the parent post to list forum post comments for
+   * The unique identifier of a parent post to list comments for. When set, returns
+   * replies to that post.
    */
   parent_id?: string | null;
 
   /**
-   * Set to true to only return pinned posts
+   * Whether to filter for only pinned posts. Set to true to return only pinned
+   * posts.
    */
   pinned?: boolean | null;
 }

@@ -8,7 +8,8 @@ import { path } from '../internal/utils/path';
 
 export class CompanyTokenTransactions extends APIResource {
   /**
-   * Create a token transaction (add/subtract/transfer) for a member
+   * Create a token transaction to add, subtract, or transfer tokens for a member
+   * within a company.
    *
    * Required permissions:
    *
@@ -36,7 +37,7 @@ export class CompanyTokenTransactions extends APIResource {
   }
 
   /**
-   * Retrieves a token transaction by ID
+   * Retrieves the details of an existing company token transaction.
    *
    * Required permissions:
    *
@@ -49,7 +50,9 @@ export class CompanyTokenTransactions extends APIResource {
   }
 
   /**
-   * Lists token transactions for a company
+   * Returns a paginated list of token transactions for a user or company, depending
+   * on the authenticated actor, with optional filtering by user and transaction
+   * type.
    *
    * Required permissions:
    *
@@ -77,7 +80,8 @@ export type CompanyTokenTransactionListResponsesCursorPage = CursorPage<CompanyT
 export type BotTokenTransactionTypes = 'add' | 'subtract' | 'transfer';
 
 /**
- * A token transaction within a company
+ * A token transaction records a credit or debit to a member's token balance within
+ * a company, including transfers between members.
  */
 export interface CompanyTokenTransaction {
   /**
@@ -86,12 +90,13 @@ export interface CompanyTokenTransaction {
   id: string;
 
   /**
-   * The transaction amount (always positive)
+   * The token amount for this transaction. Always a positive value regardless of
+   * transaction type.
    */
   amount: number;
 
   /**
-   * The company
+   * The company whose token balance this transaction affects.
    */
   company: CompanyTokenTransaction.Company;
 
@@ -101,39 +106,42 @@ export interface CompanyTokenTransaction {
   created_at: string;
 
   /**
-   * Optional description
+   * Free-text description explaining the reason for this token transaction. Null if
+   * no description was provided.
    */
   description: string | null;
 
   /**
-   * Optional idempotency key to prevent duplicate transactions
+   * A unique key used to prevent duplicate transactions when retrying API requests.
+   * Null if no idempotency key was provided.
    */
   idempotency_key: string | null;
 
   /**
-   * For transfers, the ID of the linked transaction
+   * The ID of the corresponding transaction on the other side of a transfer. Null if
+   * this is not a transfer transaction.
    */
   linked_transaction_id: string | null;
 
   /**
-   * The member
+   * The member whose token balance was affected by this transaction.
    */
   member: CompanyTokenTransaction.Member;
 
   /**
-   * The type of transaction
+   * The direction of this token transaction (add, subtract, or transfer).
    */
   transaction_type: BotTokenTransactionTypes;
 
   /**
-   * The user whose balance changed
+   * The user whose token balance was affected by this transaction.
    */
   user: CompanyTokenTransaction.User;
 }
 
 export namespace CompanyTokenTransaction {
   /**
-   * The company
+   * The company whose token balance this transaction affects.
    */
   export interface Company {
     /**
@@ -153,7 +161,7 @@ export namespace CompanyTokenTransaction {
   }
 
   /**
-   * The member
+   * The member whose token balance was affected by this transaction.
    */
   export interface Member {
     /**
@@ -163,7 +171,7 @@ export namespace CompanyTokenTransaction {
   }
 
   /**
-   * The user whose balance changed
+   * The user whose token balance was affected by this transaction.
    */
   export interface User {
     /**
@@ -184,7 +192,8 @@ export namespace CompanyTokenTransaction {
 }
 
 /**
- * A token transaction within a company
+ * A token transaction records a credit or debit to a member's token balance within
+ * a company, including transfers between members.
  */
 export interface CompanyTokenTransactionListResponse {
   /**
@@ -193,12 +202,13 @@ export interface CompanyTokenTransactionListResponse {
   id: string;
 
   /**
-   * The transaction amount (always positive)
+   * The token amount for this transaction. Always a positive value regardless of
+   * transaction type.
    */
   amount: number;
 
   /**
-   * The company
+   * The company whose token balance this transaction affects.
    */
   company: CompanyTokenTransactionListResponse.Company;
 
@@ -208,39 +218,42 @@ export interface CompanyTokenTransactionListResponse {
   created_at: string;
 
   /**
-   * Optional description
+   * Free-text description explaining the reason for this token transaction. Null if
+   * no description was provided.
    */
   description: string | null;
 
   /**
-   * Optional idempotency key to prevent duplicate transactions
+   * A unique key used to prevent duplicate transactions when retrying API requests.
+   * Null if no idempotency key was provided.
    */
   idempotency_key: string | null;
 
   /**
-   * For transfers, the ID of the linked transaction
+   * The ID of the corresponding transaction on the other side of a transfer. Null if
+   * this is not a transfer transaction.
    */
   linked_transaction_id: string | null;
 
   /**
-   * The member
+   * The member whose token balance was affected by this transaction.
    */
   member: CompanyTokenTransactionListResponse.Member;
 
   /**
-   * The type of transaction
+   * The direction of this token transaction (add, subtract, or transfer).
    */
   transaction_type: BotTokenTransactionTypes;
 
   /**
-   * The user whose balance changed
+   * The user whose token balance was affected by this transaction.
    */
   user: CompanyTokenTransactionListResponse.User;
 }
 
 export namespace CompanyTokenTransactionListResponse {
   /**
-   * The company
+   * The company whose token balance this transaction affects.
    */
   export interface Company {
     /**
@@ -260,7 +273,7 @@ export namespace CompanyTokenTransactionListResponse {
   }
 
   /**
-   * The member
+   * The member whose token balance was affected by this transaction.
    */
   export interface Member {
     /**
@@ -270,7 +283,7 @@ export namespace CompanyTokenTransactionListResponse {
   }
 
   /**
-   * The user whose balance changed
+   * The user whose token balance was affected by this transaction.
    */
   export interface User {
     /**
@@ -298,92 +311,102 @@ export type CompanyTokenTransactionCreateParams =
 export declare namespace CompanyTokenTransactionCreateParams {
   export interface CreateCompanyTokenTransactionInputTransactionTypeTransfer {
     /**
-     * The positive amount of tokens
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
      */
     amount: number;
 
     /**
-     * The company ID
+     * The unique identifier of the company to create the transaction in, starting with
+     * 'biz\_'.
      */
     company_id: string;
 
     /**
-     * Required for transfers - the user to receive tokens
+     * The unique identifier of the user receiving the tokens. Required when the
+     * transaction type is 'transfer'.
      */
     destination_user_id: string;
 
     transaction_type: 'transfer';
 
     /**
-     * The user ID whose balance will change
+     * The unique identifier of the user whose token balance will be affected, starting
+     * with 'user\_'.
      */
     user_id: string;
 
     /**
-     * Optional description for the transaction
+     * A human-readable description of why the transaction was created.
      */
     description?: string | null;
 
     /**
-     * Optional key to prevent duplicate transactions
+     * A unique key to prevent duplicate transactions. Use a UUID or similar unique
+     * string.
      */
     idempotency_key?: string | null;
   }
 
   export interface CreateCompanyTokenTransactionInputTransactionTypeAdd {
     /**
-     * The positive amount of tokens
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
      */
     amount: number;
 
     /**
-     * The company ID
+     * The unique identifier of the company to create the transaction in, starting with
+     * 'biz\_'.
      */
     company_id: string;
 
     transaction_type: 'add';
 
     /**
-     * The user ID whose balance will change
+     * The unique identifier of the user whose token balance will be affected, starting
+     * with 'user\_'.
      */
     user_id: string;
 
     /**
-     * Optional description for the transaction
+     * A human-readable description of why the transaction was created.
      */
     description?: string | null;
 
     /**
-     * Optional key to prevent duplicate transactions
+     * A unique key to prevent duplicate transactions. Use a UUID or similar unique
+     * string.
      */
     idempotency_key?: string | null;
   }
 
   export interface CreateCompanyTokenTransactionInputTransactionTypeSubtract {
     /**
-     * The positive amount of tokens
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
      */
     amount: number;
 
     /**
-     * The company ID
+     * The unique identifier of the company to create the transaction in, starting with
+     * 'biz\_'.
      */
     company_id: string;
 
     transaction_type: 'subtract';
 
     /**
-     * The user ID whose balance will change
+     * The unique identifier of the user whose token balance will be affected, starting
+     * with 'user\_'.
      */
     user_id: string;
 
     /**
-     * Optional description for the transaction
+     * A human-readable description of why the transaction was created.
      */
     description?: string | null;
 
     /**
-     * Optional key to prevent duplicate transactions
+     * A unique key to prevent duplicate transactions. Use a UUID or similar unique
+     * string.
      */
     idempotency_key?: string | null;
   }
@@ -391,7 +414,7 @@ export declare namespace CompanyTokenTransactionCreateParams {
 
 export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
-   * The ID of the company
+   * The unique identifier of the company to list token transactions for.
    */
   company_id: string;
 
@@ -416,7 +439,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   transaction_type?: BotTokenTransactionTypes | null;
 
   /**
-   * Filter by user ID
+   * Filter transactions to only those involving this specific user.
    */
   user_id?: string | null;
 }

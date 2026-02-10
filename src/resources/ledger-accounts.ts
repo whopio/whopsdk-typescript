@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class LedgerAccounts extends APIResource {
   /**
-   * Retrieves a ledger account by its ID, company ID or user ID
+   * Retrieves the details of an existing ledger account.
    *
    * Required permissions:
    *
@@ -256,12 +256,13 @@ export namespace LedgerAccountRetrieveResponse {
       last_error_code: VerificationsAPI.VerificationErrorCode | null;
 
       /**
-       * The last error reason that occurred during the verification.
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
        */
       last_error_reason: string | null;
 
       /**
-       * The status of the verification.
+       * The current status of this verification session.
        */
       status: VerificationsAPI.VerificationStatus;
     }

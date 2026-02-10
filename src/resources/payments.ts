@@ -44,7 +44,7 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Retrieves a payment by ID
+   * Retrieves the details of an existing payment.
    *
    * Required permissions:
    *
@@ -68,7 +68,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Lists payments
+   * Returns a paginated list of payments for a company, with optional filtering by
+   * product, plan, status, billing reason, currency, and creation date.
    *
    * Required permissions:
    *
@@ -98,7 +99,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Lists fees for a payment
+   * Returns the list of fees associated with a specific payment, including platform
+   * fees and processing fees.
    *
    * Required permissions:
    *
@@ -126,7 +128,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Refunds a payment
+   * Issue a full or partial refund for a payment. The refund is processed through
+   * the original payment processor and the membership status is updated accordingly.
    *
    * Required permissions:
    *
@@ -154,7 +157,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Retries a payment
+   * Retry a failed or pending payment. This re-attempts the charge using the
+   * original payment method and plan details.
    *
    * Required permissions:
    *
@@ -178,7 +182,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Voids a payment
+   * Void a payment that has not yet been settled. Voiding cancels the payment before
+   * it is captured by the payment processor.
    *
    * Required permissions:
    *
@@ -394,7 +399,8 @@ export interface PaymentListResponse {
   card_brand: CardBrands | null;
 
   /**
-   * The last 4 digits of the card used to make the payment.
+   * The last four digits of the card used to make this payment. Null if the payment
+   * was not made with a card.
    */
   card_last4: string | null;
 
@@ -450,12 +456,14 @@ export interface PaymentListResponse {
   next_payment_attempt: string | null;
 
   /**
-   * The datetime the payment was paid
+   * The time at which this payment was successfully collected. Null if the payment
+   * has not yet succeeded. As a Unix timestamp.
    */
   paid_at: string | null;
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   payment_method: PaymentListResponse.PaymentMethod | null;
 
@@ -671,7 +679,8 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   export interface PaymentMethod {
     /**
@@ -706,17 +715,18 @@ export namespace PaymentListResponse {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
@@ -1103,7 +1113,7 @@ export declare namespace PaymentCreateParams {
 
 export interface PaymentListParams extends CursorPageParams {
   /**
-   * The ID of the company to list payments for
+   * The unique identifier of the company to list payments for.
    */
   company_id: string;
 
@@ -1113,22 +1123,22 @@ export interface PaymentListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The billing reason for the payment
+   * Filter payments by their billing reason.
    */
   billing_reasons?: Array<BillingReasons> | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return payments created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return payments created before this timestamp.
    */
   created_before?: string | null;
 
   /**
-   * The currency of the payment.
+   * Filter payments by their currency code.
    */
   currencies?: Array<Shared.Currency> | null;
 
@@ -1143,7 +1153,7 @@ export interface PaymentListParams extends CursorPageParams {
   first?: number | null;
 
   /**
-   * Whether to include free payments.
+   * Whether to include payments with a zero amount.
    */
   include_free?: boolean | null;
 
@@ -1158,22 +1168,23 @@ export interface PaymentListParams extends CursorPageParams {
   order?: 'final_amount' | 'created_at' | 'paid_at' | null;
 
   /**
-   * A specific plan.
+   * Filter payments to only those associated with these specific plan identifiers.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * A specific product.
+   * Filter payments to only those associated with these specific product
+   * identifiers.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The status of the payment.
+   * Filter payments by their current status.
    */
   statuses?: Array<Shared.ReceiptStatus> | null;
 
   /**
-   * The substatus of the payment.
+   * Filter payments by their current substatus for more granular filtering.
    */
   substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
 }
@@ -1197,7 +1208,8 @@ export interface PaymentListFeesParams extends CursorPageParams {
 
 export interface PaymentRefundParams {
   /**
-   * An amount if the refund is supposed to be partial.
+   * The amount to refund in the payment currency. If omitted, the full payment
+   * amount is refunded.
    */
   partial_amount?: number | null;
 }

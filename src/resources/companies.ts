@@ -22,7 +22,7 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Retrieve a single company by its unique identifier or route slug.
+   * Retrieves the details of an existing company.
    *
    * Required permissions:
    *
@@ -33,8 +33,7 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Update an existing company. Either a regular company, platform company, or one
-   * of a platform's connected accounts
+   * Update a company's title, description, logo, and other settings.
    *
    * Required permissions:
    *
@@ -50,9 +49,9 @@ export class Companies extends APIResource {
   }
 
   /**
-   * List companies. When parent_company_id is provided, lists connected accounts
-   * under that platform. When omitted, lists companies the current user has access
-   * to.
+   * Returns a paginated list of companies. When parent_company_id is provided, lists
+   * connected accounts under that platform. When omitted, lists companies the
+   * current user has access to.
    *
    * Required permissions:
    *
@@ -319,12 +318,12 @@ export interface CompanyListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * Only return companies created after this datetime.
+   * Only return companies created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * Only return companies created before this datetime.
+   * Only return companies created before this timestamp.
    */
   created_before?: string | null;
 

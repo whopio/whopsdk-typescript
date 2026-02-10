@@ -29,101 +29,108 @@ export interface App {
   id: string;
 
   /**
-   * The API key for the app
+   * The API key used to authenticate requests on behalf of this app. Null if no API
+   * key has been generated. Requires the 'developer:manage_api_key' permission.
    */
   api_key: App.APIKey | null;
 
   /**
-   * The type of end-user an app is built for
+   * The target audience classification for this app (e.g., 'b2b_app', 'b2c_app',
+   * 'company_app', 'component').
    */
   app_type: AppsAPI.AppType;
 
   /**
-   * The base url of the app
+   * The production base URL where the app is hosted. Null if no base URL is
+   * configured.
    */
   base_url: string | null;
 
   /**
-   * The company that owns the app
+   * The company that owns and publishes this app.
    */
   company: App.Company;
 
   /**
-   * The creator of the app
+   * The user who created and owns the company that published this app.
    */
   creator: App.Creator;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   dashboard_path: string | null;
 
   /**
-   * The description of the app
+   * A written description of what this app does, displayed on the app store listing
+   * page. Null if no description has been set.
    */
   description: string | null;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   discover_path: string | null;
 
   /**
-   * The unique part of the proxied domain for this app. Used to generate the base
-   * url used to display the app inside the whop platform. Refers to the id part in
-   * the final url: https://{domain_id}.apps.whop.com
+   * The unique subdomain identifier for this app's proxied URL on the Whop platform.
+   * Forms the URL pattern https://{domain_id}.apps.whop.com.
    */
   domain_id: string;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   experience_path: string | null;
 
   /**
-   * The icon for the app. This icon is shown on discovery, on the product page, on
-   * checkout, and as a default icon for the experiences.
+   * The icon image for this app, displayed on the app store, product pages,
+   * checkout, and as the default icon for experiences using this app.
    */
   icon: App.Icon | null;
 
   /**
-   * The name of the app
+   * The display name of this app shown on the app store and in experience
+   * navigation. Maximum 30 characters.
    */
   name: string;
 
   /**
-   * The set of permissions that an app requests to be granted when a user installs
-   * the app.
+   * The list of permissions this app requests when installed, including both
+   * required and optional permissions with justifications.
    */
   requested_permissions: Array<App.RequestedPermission>;
 
   /**
-   * A collection of stats for the app.
+   * Aggregate usage statistics for this app, including daily, weekly, and monthly
+   * active user counts.
    */
   stats: App.Stats | null;
 
   /**
-   * If the status is live, the app is visible on Whop discovery. In order to be
-   * live, you need to set the name, icon, and description. Being unlisted or hidden
-   * means it's not visible on Whop but you can still install the app via direct
-   * link. To remove the app from whop discovery, you should set the status to
-   * unlisted.
+   * The current visibility status of this app on the Whop app store. 'live' means
+   * publicly discoverable, 'unlisted' means accessible only via direct link, and
+   * 'hidden' means not visible anywhere.
    */
   status: AppStatuses;
 
   /**
-   * Whether this app has been verified by Whop. Verified apps are endorsed by whop
-   * and are shown in the 'featured apps' section of the app store.
+   * Whether this app has been verified by Whop. Verified apps are endorsed by Whop
+   * and displayed in the featured apps section of the app store.
    */
   verified: boolean;
 }
 
 export namespace App {
   /**
-   * The API key for the app
+   * The API key used to authenticate requests on behalf of this app. Null if no API
+   * key has been generated. Requires the 'developer:manage_api_key' permission.
    */
   export interface APIKey {
     /**
@@ -143,7 +150,7 @@ export namespace App {
   }
 
   /**
-   * The company that owns the app
+   * The company that owns and publishes this app.
    */
   export interface Company {
     /**
@@ -158,7 +165,7 @@ export namespace App {
   }
 
   /**
-   * The creator of the app
+   * The user who created and owns the company that published this app.
    */
   export interface Creator {
     /**
@@ -178,8 +185,8 @@ export namespace App {
   }
 
   /**
-   * The icon for the app. This icon is shown on discovery, on the product page, on
-   * checkout, and as a default icon for the experiences.
+   * The icon image for this app, displayed on the app store, product pages,
+   * checkout, and as the default icon for experiences using this app.
    */
   export interface Icon {
     /**
@@ -228,36 +235,39 @@ export namespace App {
   }
 
   /**
-   * A collection of stats for the app.
+   * Aggregate usage statistics for this app, including daily, weekly, and monthly
+   * active user counts.
    */
   export interface Stats {
     /**
-     * This is the number of users that have spent time in this app in the last 24
-     * hours.
+     * The number of unique users who have spent time in this app in the last 24 hours.
+     * Returns 0 if no usage data is available.
      */
     dau: number;
 
     /**
-     * This is the number of users that have spent time in this app in the last 28
-     * days.
+     * The number of unique users who have spent time in this app in the last 28 days.
+     * Returns 0 if no usage data is available.
      */
     mau: number;
 
     /**
-     * This how much time, in seconds, users have spent in this app in the last 24
-     * hours.
+     * The total time, in seconds, that all users have spent in this app over the last
+     * 24 hours. Returns 0 if no usage data is available.
      */
     time_spent_last24_hours: number;
 
     /**
-     * This is the number of users that have spent time in this app in the last 7 days.
+     * The number of unique users who have spent time in this app in the last 7 days.
+     * Returns 0 if no usage data is available.
      */
     wau: number;
   }
 }
 
 /**
- * An App Build object representing a build of an application
+ * A versioned build artifact for a Whop React Native App, submitted for review and
+ * deployment to a specific platform.
  */
 export interface AppBuild {
   /**
@@ -266,8 +276,8 @@ export interface AppBuild {
   id: string;
 
   /**
-   * This is generated by the client and used to verify the integrity of the file
-   * that is submitted. It is a SHA256 hash of the app build file.
+   * A SHA-256 hash of the uploaded build file, generated by the client and used to
+   * verify file integrity.
    */
   checksum: string;
 
@@ -277,34 +287,33 @@ export interface AppBuild {
   created_at: string;
 
   /**
-   * The URL to download the app build .zip file.
+   * A URL to download the app build as a .zip archive.
    */
   file_url: string;
 
   /**
-   * Whether this app build is currently being used in production.
+   * Whether this build is the currently active production build for its platform.
    */
   is_production: boolean;
 
   /**
-   * The platform of the app build (ios, android, web)
+   * The target platform for this build.
    */
   platform: AppBuildPlatforms;
 
   /**
-   * The review message for the app build, if any. This is populated when the build
-   * is rejected and there is a reason specified by the reviewer.
+   * Feedback from the reviewer explaining why the build was rejected. Null if the
+   * build has not been reviewed or was approved.
    */
   review_message: string | null;
 
   /**
-   * The status of the app build (draft, approved, rejected, pending, etc)
+   * The current review status of this build.
    */
   status: AppBuildStatuses;
 
   /**
-   * The supported app view types for the app build. These are the views that the
-   * developer has specified that this build supports.
+   * The list of view types this build supports, as declared by the developer.
    */
   supported_app_view_types: Array<AppViewType>;
 }
@@ -361,7 +370,8 @@ export type BusinessTypes =
   | 'community';
 
 /**
- * Represents a Chat feed
+ * A real-time chat feed attached to an experience, with configurable moderation
+ * and posting permissions.
  */
 export interface ChatChannel {
   /**
@@ -370,44 +380,45 @@ export interface ChatChannel {
   id: string;
 
   /**
-   * Whether or not media is banned in this chat
+   * Whether media uploads such as images and videos are blocked in this chat.
    */
   ban_media: boolean;
 
   /**
-   * Whether or not URLs are banned in this chat
+   * Whether URL links are blocked from being posted in this chat.
    */
   ban_urls: boolean;
 
   /**
-   * List of banned words in this chat
+   * A list of words that are automatically filtered from messages in this chat.
    */
   banned_words: Array<string>;
 
   /**
-   * The experience for this chat
+   * The experience this chat feed is attached to.
    */
   experience: ChatChannel.Experience;
 
   /**
-   * The number of seconds a user needs to wait before posting again, if any
+   * The minimum number of seconds a user must wait between consecutive messages.
+   * Null if no cooldown is enforced.
    */
   user_posts_cooldown_seconds: number | null;
 
   /**
-   * Who can post on this chat
+   * The permission level controlling which users can send messages in this chat.
    */
   who_can_post: WhoCanPost;
 
   /**
-   * Who can react on this chat
+   * The permission level controlling which users can add reactions in this chat.
    */
   who_can_react: WhoCanReact;
 }
 
 export namespace ChatChannel {
   /**
-   * The experience for this chat
+   * The experience this chat feed is attached to.
    */
   export interface Experience {
     /**
@@ -416,16 +427,17 @@ export namespace ChatChannel {
     id: string;
 
     /**
-     * The written name of the description.
+     * The display name of this experience shown to users in the product navigation.
+     * Maximum 255 characters.
      */
     name: string;
   }
 }
 
 /**
- * A checkout session is a reusable configuration for a checkout, including the
- * plan, affiliate, and custom metadata. Payments and memberships created from a
- * checkout session inherit its metadata.
+ * A checkout configuration is a reusable configuration for a checkout, including
+ * the plan, affiliate, and custom metadata. Payments and memberships created from
+ * a checkout session inherit its metadata.
  */
 export interface CheckoutConfiguration {
   /**
@@ -521,12 +533,14 @@ export namespace CheckoutConfiguration {
     id: string;
 
     /**
-     * The interval in days at which the plan charges (renewal plans).
+     * The number of days between each recurring charge. Null for one-time plans. For
+     * example, 30 for monthly or 365 for annual billing.
      */
     billing_period: number | null;
 
     /**
-     * The respective currency identifier for the plan.
+     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+     * amounts on the plan are denominated in this currency.
      */
     currency: Shared.Currency;
 
@@ -544,12 +558,14 @@ export namespace CheckoutConfiguration {
     initial_price: number;
 
     /**
-     * Indicates if the plan is a one time payment or recurring.
+     * The billing model for this plan: 'renewal' for recurring subscriptions or
+     * 'one_time' for single payments.
      */
     plan_type: Shared.PlanType;
 
     /**
-     * This is the release method the business uses to sell this plan.
+     * The method used to sell this plan: 'buy_now' for immediate purchase or
+     * 'waitlist' for waitlist-based access.
      */
     release_method: Shared.ReleaseMethod;
 
@@ -560,12 +576,15 @@ export namespace CheckoutConfiguration {
     renewal_price: number;
 
     /**
-     * The number of free trial days added before a renewal plan.
+     * The number of free trial days before the first charge on a renewal plan. Null if
+     * no trial is configured or the current user has already used a trial for this
+     * plan.
      */
     trial_period_days: number | null;
 
     /**
-     * Shows or hides the plan from public/business view.
+     * Controls whether the plan is visible to customers. When set to 'hidden', the
+     * plan is only accessible via direct link.
      */
     visibility: Shared.Visibility;
   }
@@ -731,7 +750,8 @@ export namespace Company {
 }
 
 /**
- * A lesson interaction tracking user progress in courses
+ * A record of a user's progress on a specific lesson, tracking whether they have
+ * completed it.
  */
 export interface CourseLessonInteraction {
   /**
@@ -740,12 +760,12 @@ export interface CourseLessonInteraction {
   id: string;
 
   /**
-   * Whether the lesson has been completed by the user
+   * Whether the user has finished this lesson.
    */
   completed: boolean;
 
   /**
-   * The course for this lesson interaction
+   * The course that contains the tracked lesson.
    */
   course: CourseLessonInteraction.Course;
 
@@ -755,19 +775,19 @@ export interface CourseLessonInteraction {
   created_at: string;
 
   /**
-   * The lesson this interaction is for
+   * The lesson that this progress record belongs to.
    */
   lesson: CourseLessonInteraction.Lesson;
 
   /**
-   * The user who interacted with the lesson
+   * The user whose progress is being tracked.
    */
   user: CourseLessonInteraction.User;
 }
 
 export namespace CourseLessonInteraction {
   /**
-   * The course for this lesson interaction
+   * The course that contains the tracked lesson.
    */
   export interface Course {
     /**
@@ -776,19 +796,19 @@ export namespace CourseLessonInteraction {
     id: string;
 
     /**
-     * The experience that the course belongs to
+     * The parent experience that this course belongs to.
      */
     experience: Course.Experience;
 
     /**
-     * The title of the course
+     * The display name of the course shown to students. Null if no title has been set.
      */
     title: string | null;
   }
 
   export namespace Course {
     /**
-     * The experience that the course belongs to
+     * The parent experience that this course belongs to.
      */
     export interface Experience {
       /**
@@ -799,7 +819,7 @@ export namespace CourseLessonInteraction {
   }
 
   /**
-   * The lesson this interaction is for
+   * The lesson that this progress record belongs to.
    */
   export interface Lesson {
     /**
@@ -808,19 +828,19 @@ export namespace CourseLessonInteraction {
     id: string;
 
     /**
-     * The chapter this lesson belongs to
+     * The parent chapter that contains this lesson.
      */
     chapter: Lesson.Chapter;
 
     /**
-     * The title of the lesson
+     * The display name of the lesson shown to students. Maximum 120 characters.
      */
     title: string;
   }
 
   export namespace Lesson {
     /**
-     * The chapter this lesson belongs to
+     * The parent chapter that contains this lesson.
      */
     export interface Chapter {
       /**
@@ -831,7 +851,7 @@ export namespace CourseLessonInteraction {
   }
 
   /**
-   * The user who interacted with the lesson
+   * The user whose progress is being tracked.
    */
   export interface User {
     /**
@@ -852,7 +872,8 @@ export namespace CourseLessonInteraction {
 }
 
 /**
- * A lesson interaction tracking user progress in courses
+ * A record of a user's progress on a specific lesson, tracking whether they have
+ * completed it.
  */
 export interface CourseLessonInteractionListItem {
   /**
@@ -861,7 +882,7 @@ export interface CourseLessonInteractionListItem {
   id: string;
 
   /**
-   * Whether the lesson has been completed by the user
+   * Whether the user has finished this lesson.
    */
   completed: boolean;
 
@@ -871,19 +892,19 @@ export interface CourseLessonInteractionListItem {
   created_at: string;
 
   /**
-   * The lesson this interaction is for
+   * The lesson that this progress record belongs to.
    */
   lesson: CourseLessonInteractionListItem.Lesson;
 
   /**
-   * The user who interacted with the lesson
+   * The user whose progress is being tracked.
    */
   user: CourseLessonInteractionListItem.User;
 }
 
 export namespace CourseLessonInteractionListItem {
   /**
-   * The lesson this interaction is for
+   * The lesson that this progress record belongs to.
    */
   export interface Lesson {
     /**
@@ -892,19 +913,19 @@ export namespace CourseLessonInteractionListItem {
     id: string;
 
     /**
-     * The chapter this lesson belongs to
+     * The parent chapter that contains this lesson.
      */
     chapter: Lesson.Chapter;
 
     /**
-     * The title of the lesson
+     * The display name of the lesson shown to students. Maximum 120 characters.
      */
     title: string;
   }
 
   export namespace Lesson {
     /**
-     * The chapter this lesson belongs to
+     * The parent chapter that contains this lesson.
      */
     export interface Chapter {
       /**
@@ -915,7 +936,7 @@ export namespace CourseLessonInteractionListItem {
   }
 
   /**
-   * The user who interacted with the lesson
+   * The user whose progress is being tracked.
    */
   export interface User {
     /**
@@ -1073,27 +1094,30 @@ export interface Entry {
   created_at: string | null;
 
   /**
-   * Responses collected from the user when submitting their entry.
+   * The list of responses collected from the user when submitting their waitlist
+   * entry.
    */
   custom_field_responses: Array<Entry.CustomFieldResponse> | null;
 
   /**
-   * The waitlist plan the entry if for.
+   * The waitlisted plan that this entry is a signup for.
    */
   plan: Entry.Plan | null;
 
   /**
-   * The product tied to this entry, if there is one.
+   * The product associated with this entry's waitlisted plan. Null if the plan is
+   * not tied to a product.
    */
   product: Entry.Product | null;
 
   /**
-   * The status of the entry.
+   * The current status of the waitlist entry (e.g., drafted, pending, approved,
+   * denied).
    */
   status: EntryStatus;
 
   /**
-   * The user who created the entry.
+   * The user who submitted this waitlist entry.
    */
   user: Entry.User;
 }
@@ -1120,7 +1144,7 @@ export namespace Entry {
   }
 
   /**
-   * The waitlist plan the entry if for.
+   * The waitlisted plan that this entry is a signup for.
    */
   export interface Plan {
     /**
@@ -1130,7 +1154,8 @@ export namespace Entry {
   }
 
   /**
-   * The product tied to this entry, if there is one.
+   * The product associated with this entry's waitlisted plan. Null if the plan is
+   * not tied to a product.
    */
   export interface Product {
     /**
@@ -1146,7 +1171,7 @@ export namespace Entry {
   }
 
   /**
-   * The user who created the entry.
+   * The user who submitted this waitlist entry.
    */
   export interface User {
     /**
@@ -1188,7 +1213,7 @@ export interface Experience {
   id: string;
 
   /**
-   * The experience interface for this experience.
+   * The app that powers this experience, defining its interface and behavior.
    */
   app: Experience.App;
 
@@ -1203,36 +1228,40 @@ export interface Experience {
   created_at: string;
 
   /**
-   * The logo for the experience.
+   * The custom logo image for this experience. Null if no custom logo has been
+   * uploaded.
    */
   image: Experience.Image | null;
 
   /**
-   * Whether the experience is visible to the public
+   * Whether this experience is publicly visible to all users, including those
+   * without a membership.
    */
   is_public: boolean;
 
   /**
-   * The written name of the description.
+   * The display name of this experience shown to users in the product navigation.
+   * Maximum 255 characters.
    */
   name: string;
 
   /**
-   * The order of the experience in the section
+   * The sort position of this experience within its section. Lower values appear
+   * first. Null if no position has been set.
    */
   order: string | null;
 
   /**
-   * The products that this experience is attached to. This defines which set of
-   * customers have access and can view this experience. If empty, this experience is
-   * only visible to authorized users of the company
+   * The list of products this experience is attached to, which determines which
+   * customers have access. Empty if the experience is only visible to authorized
+   * company team members.
    */
   products: Array<Experience.Product>;
 }
 
 export namespace Experience {
   /**
-   * The experience interface for this experience.
+   * The app that powers this experience, defining its interface and behavior.
    */
   export interface App {
     /**
@@ -1241,21 +1270,22 @@ export namespace Experience {
     id: string;
 
     /**
-     * The icon for the app. This icon is shown on discovery, on the product page, on
-     * checkout, and as a default icon for the experiences.
+     * The icon image for this app, displayed on the app store, product pages,
+     * checkout, and as the default icon for experiences using this app.
      */
     icon: App.Icon | null;
 
     /**
-     * The name of the app
+     * The display name of this app shown on the app store and in experience
+     * navigation. Maximum 30 characters.
      */
     name: string;
   }
 
   export namespace App {
     /**
-     * The icon for the app. This icon is shown on discovery, on the product page, on
-     * checkout, and as a default icon for the experiences.
+     * The icon image for this app, displayed on the app store, product pages,
+     * checkout, and as the default icon for experiences using this app.
      */
     export interface Icon {
       /**
@@ -1287,7 +1317,8 @@ export namespace Experience {
   }
 
   /**
-   * The logo for the experience.
+   * The custom logo image for this experience. Null if no custom logo has been
+   * uploaded.
    */
   export interface Image {
     /**
@@ -1322,7 +1353,8 @@ export namespace Experience {
 }
 
 /**
- * Represents a forum feed
+ * A discussion forum where members can create posts, comment, and react, belonging
+ * to an experience.
  */
 export interface Forum {
   /**
@@ -1331,29 +1363,32 @@ export interface Forum {
   id: string;
 
   /**
-   * The email notification preference for this forum
+   * The email notification setting that controls which posts trigger email alerts.
+   * One of: all_admin_posts, only_weekly_summary, none.
    */
   email_notification_preference: EmailNotificationPreferences;
 
   /**
-   * The experience for this forum
+   * The parent experience that this forum belongs to.
    */
   experience: Forum.Experience;
 
   /**
-   * Who can comment on this forum
+   * The permission level controlling who can comment on posts. One of: everyone,
+   * admins.
    */
   who_can_comment: WhoCanCommentTypes;
 
   /**
-   * Who can post on this forum
+   * The permission level controlling who can create new posts. One of: everyone,
+   * admins.
    */
   who_can_post: WhoCanPostTypes;
 }
 
 export namespace Forum {
   /**
-   * The experience for this forum
+   * The parent experience that this forum belongs to.
    */
   export interface Experience {
     /**
@@ -1362,14 +1397,16 @@ export namespace Forum {
     id: string;
 
     /**
-     * The written name of the description.
+     * The display name of this experience shown to users in the product navigation.
+     * Maximum 255 characters.
      */
     name: string;
   }
 }
 
 /**
- * Represents a post in forum
+ * A post or comment in a forum feed, supporting rich text, attachments, polls, and
+ * reactions.
  */
 export interface ForumPost {
   /**
@@ -1382,69 +1419,70 @@ export interface ForumPost {
   id: string;
 
   /**
-   * The amount of comments on this post
+   * The total number of direct comments on this post.
    */
   comment_count: number;
 
   /**
-   * The content of the forum post in Markdown format
+   * The body of the forum post in Markdown format. Null if the post is paywalled and
+   * the current user does not have access.
    */
   content: string | null;
 
   /**
-   * The timestamp when the post was created
+   * The time this post was created, as a Unix timestamp.
    */
   created_at: string;
 
   /**
-   * Whether the forum post has been edited
+   * Whether this post has been edited after its initial creation.
    */
   is_edited: boolean;
 
   /**
-   * Whether this forum post is pinned
+   * Whether this post is pinned to the top of the forum feed.
    */
   is_pinned: boolean;
 
   /**
-   * Whether the user that sent the post is an admin of the company
+   * Whether the author of this post is an admin of the company that owns the forum.
    */
   is_poster_admin: boolean;
 
   /**
-   * The number of likes this post has received
+   * The total number of like reactions this post has received.
    */
   like_count: number | null;
 
   /**
-   * The ID of the parent forum post, if applicable
+   * The unique identifier of the parent post. Null if this is a top-level post.
    */
   parent_id: string | null;
 
   /**
-   * The title of the forum post
+   * The headline of the forum post. Null if the post has no title.
    */
   title: string | null;
 
   /**
-   * The timestamp when the post was last updated
+   * The time this post was last updated, as a Unix timestamp.
    */
   updated_at: string;
 
   /**
-   * The user who created this forum post
+   * The user who authored this forum post.
    */
   user: ForumPost.User;
 
   /**
-   * The number of times this message has been viewed
+   * The total number of times this post has been viewed by users.
    */
   view_count: number | null;
 }
 
 export namespace ForumPost {
   /**
-   * The user who created this forum post
+   * The user who authored this forum post.
    */
   export interface User {
     /**
@@ -1569,7 +1607,9 @@ export type IndustryTypes =
   | 'parties';
 
 /**
- * A statement that defines an amount due by a customer.
+ * An invoice represents an itemized bill sent by a company to a customer for a
+ * specific product and plan, tracking the amount owed, due date, and payment
+ * status.
  */
 export interface Invoice {
   /**
@@ -1583,45 +1623,48 @@ export interface Invoice {
   created_at: string;
 
   /**
-   * The plan that the invoice was created for.
+   * The plan that this invoice charges for.
    */
   current_plan: Invoice.CurrentPlan;
 
   /**
-   * The date the invoice is due.
+   * The deadline by which payment is expected. Null if the invoice is collected
+   * automatically.
    */
   due_date: string | null;
 
   /**
-   * The email address that the invoice was created for.
+   * The email address of the customer this invoice is addressed to. Null if no email
+   * is on file.
    */
   email_address: string | null;
 
   /**
-   * A signed token that allows fetching the invoice data publically without being
-   * authenticated.
+   * A signed token that allows fetching invoice data publicly without
+   * authentication.
    */
   fetch_invoice_token: string;
 
   /**
-   * The number of the invoice.
+   * The sequential invoice number for display purposes.
    */
   number: string;
 
   /**
-   * The status of the invoice.
+   * The current payment status of the invoice, such as draft, open, paid, or void.
    */
   status: InvoiceStatus;
 
   /**
-   * The user that the invoice was created for.
+   * The user this invoice is addressed to. Null if the user account has been
+   * removed.
    */
   user: Invoice.User | null;
 }
 
 export namespace Invoice {
   /**
-   * The plan that the invoice was created for.
+   * The plan that this invoice charges for.
    */
   export interface CurrentPlan {
     /**
@@ -1630,7 +1673,8 @@ export namespace Invoice {
     id: string;
 
     /**
-     * The respective currency identifier for the plan.
+     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+     * amounts on the plan are denominated in this currency.
      */
     currency: Shared.Currency;
 
@@ -1641,7 +1685,8 @@ export namespace Invoice {
   }
 
   /**
-   * The user that the invoice was created for.
+   * The user this invoice is addressed to. Null if the user account has been
+   * removed.
    */
   export interface User {
     /**
@@ -1662,7 +1707,9 @@ export namespace Invoice {
 }
 
 /**
- * A statement that defines an amount due by a customer.
+ * An invoice represents an itemized bill sent by a company to a customer for a
+ * specific product and plan, tracking the amount owed, due date, and payment
+ * status.
  */
 export interface InvoiceListItem {
   /**
@@ -1676,45 +1723,48 @@ export interface InvoiceListItem {
   created_at: string;
 
   /**
-   * The plan that the invoice was created for.
+   * The plan that this invoice charges for.
    */
   current_plan: InvoiceListItem.CurrentPlan;
 
   /**
-   * The date the invoice is due.
+   * The deadline by which payment is expected. Null if the invoice is collected
+   * automatically.
    */
   due_date: string | null;
 
   /**
-   * The email address that the invoice was created for.
+   * The email address of the customer this invoice is addressed to. Null if no email
+   * is on file.
    */
   email_address: string | null;
 
   /**
-   * A signed token that allows fetching the invoice data publically without being
-   * authenticated.
+   * A signed token that allows fetching invoice data publicly without
+   * authentication.
    */
   fetch_invoice_token: string;
 
   /**
-   * The number of the invoice.
+   * The sequential invoice number for display purposes.
    */
   number: string;
 
   /**
-   * The status of the invoice.
+   * The current payment status of the invoice, such as draft, open, paid, or void.
    */
   status: InvoiceStatus;
 
   /**
-   * The user that the invoice was created for.
+   * The user this invoice is addressed to. Null if the user account has been
+   * removed.
    */
   user: InvoiceListItem.User | null;
 }
 
 export namespace InvoiceListItem {
   /**
-   * The plan that the invoice was created for.
+   * The plan that this invoice charges for.
    */
   export interface CurrentPlan {
     /**
@@ -1723,7 +1773,8 @@ export namespace InvoiceListItem {
     id: string;
 
     /**
-     * The respective currency identifier for the plan.
+     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+     * amounts on the plan are denominated in this currency.
      */
     currency: Shared.Currency;
 
@@ -1734,7 +1785,8 @@ export namespace InvoiceListItem {
   }
 
   /**
-   * The user that the invoice was created for.
+   * The user this invoice is addressed to. Null if the user account has been
+   * removed.
    */
   export interface User {
     /**
@@ -1794,8 +1846,8 @@ export interface Membership {
   id: string;
 
   /**
-   * Whether this Membership is set to cancel at the end of the current billing
-   * cycle. Only applies for memberships that have a renewal plan.
+   * Whether this membership is set to cancel at the end of the current billing
+   * cycle. Only applies to memberships with a recurring plan.
    */
   cancel_at_period_end: boolean;
 
@@ -1806,17 +1858,19 @@ export interface Membership {
   cancel_option: MembershipsAPI.CancelOptions | null;
 
   /**
-   * The epoch timestamp of when the customer initiated a cancellation.
+   * The time the customer initiated cancellation of this membership. As a Unix
+   * timestamp. Null if the membership has not been canceled.
    */
   canceled_at: string | null;
 
   /**
-   * The reason that the member canceled the membership (filled out by the member).
+   * Free-text explanation provided by the customer when canceling. Null if the
+   * customer did not provide a reason.
    */
   cancellation_reason: string | null;
 
   /**
-   * The Company this Membership belongs to.
+   * The company this membership belongs to.
    */
   company: Membership.Company;
 
@@ -1831,28 +1885,32 @@ export interface Membership {
   currency: Currency | null;
 
   /**
-   * The responses to custom checkout questions for this membership.
+   * The customer's responses to custom checkout questions configured on the product
+   * at the time of purchase.
    */
   custom_field_responses: Array<Membership.CustomFieldResponse>;
 
   /**
-   * When the member joined the company.
+   * The time the user first joined the company associated with this membership. As a
+   * Unix timestamp. Null if the member record does not exist.
    */
   joined_at: string | null;
 
   /**
-   * The license key for this Membership. This is only present if the membership
-   * grants access to an instance of the Whop Software app.
+   * The software license key associated with this membership. Only present if the
+   * product includes a Whop Software Licensing experience. Null otherwise.
    */
   license_key: string | null;
 
   /**
-   * The URL for the customer to manage their membership.
+   * The URL where the customer can view and manage this membership, including
+   * cancellation and plan changes. Null if no member record exists.
    */
   manage_url: string | null;
 
   /**
-   * The Member that this Membership belongs to.
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
    */
   member: Membership.Member | null;
 
@@ -1863,39 +1921,42 @@ export interface Membership {
   metadata: { [key: string]: unknown };
 
   /**
-   * Whether the membership's payments are currently paused.
+   * Whether recurring payment collection for this membership is temporarily paused
+   * by the company.
    */
   payment_collection_paused: boolean;
 
   /**
-   * The Plan this Membership is for.
+   * The plan the customer purchased to create this membership.
    */
   plan: Membership.Plan;
 
   /**
-   * The Product this Membership grants access to.
+   * The product this membership grants access to.
    */
   product: Membership.Product;
 
   /**
-   * The Promo Code that is currently applied to this Membership.
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
    */
   promo_code: Membership.PromoCode | null;
 
   /**
-   * The timestamp in seconds at which the current billing cycle for this
-   * subscription ends. Only applies for memberships that have a renewal plan.
+   * The end of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
    */
   renewal_period_end: string | null;
 
   /**
-   * The timestamp in seconds at which the current billing cycle for this
-   * subscription start. Only applies for memberships that have a renewal plan.
+   * The start of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
    */
   renewal_period_start: string | null;
 
   /**
-   * The status of the membership.
+   * The current lifecycle status of the membership (e.g., active, trialing,
+   * past_due, canceled, expired, completed).
    */
   status: MembershipStatus;
 
@@ -1905,14 +1966,14 @@ export interface Membership {
   updated_at: string;
 
   /**
-   * The user this membership belongs to
+   * The user who owns this membership. Null if the user account has been deleted.
    */
   user: Membership.User | null;
 }
 
 export namespace Membership {
   /**
-   * The Company this Membership belongs to.
+   * The company this membership belongs to.
    */
   export interface Company {
     /**
@@ -1947,7 +2008,8 @@ export namespace Membership {
   }
 
   /**
-   * The Member that this Membership belongs to.
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
    */
   export interface Member {
     /**
@@ -1957,7 +2019,7 @@ export namespace Membership {
   }
 
   /**
-   * The Plan this Membership is for.
+   * The plan the customer purchased to create this membership.
    */
   export interface Plan {
     /**
@@ -1967,7 +2029,7 @@ export namespace Membership {
   }
 
   /**
-   * The Product this Membership grants access to.
+   * The product this membership grants access to.
    */
   export interface Product {
     /**
@@ -1983,7 +2045,8 @@ export namespace Membership {
   }
 
   /**
-   * The Promo Code that is currently applied to this Membership.
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
    */
   export interface PromoCode {
     /**
@@ -1993,7 +2056,7 @@ export namespace Membership {
   }
 
   /**
-   * The user this membership belongs to
+   * The user who owns this membership. Null if the user account has been deleted.
    */
   export interface User {
     /**
@@ -2034,7 +2097,7 @@ export type MembershipStatus =
   | 'canceling';
 
 /**
- * Represents a message in a DM channel
+ * A message sent within an experience chat, direct message, or group chat.
  */
 export interface Message {
   /**
@@ -2047,69 +2110,74 @@ export interface Message {
   id: string;
 
   /**
-   * The content of the message in Markdown format
+   * The message content formatted as Markdown. Null if the message has no text
+   * content.
    */
   content: string | null;
 
   /**
-   * The timestamp when the post was created
+   * The timestamp when this message was originally created.
    */
   created_at: string;
 
   /**
-   * Whether the message has been edited
+   * Whether the message content has been edited after it was originally sent.
    */
   is_edited: boolean;
 
   /**
-   * Whether this message is pinned
+   * Whether this message is pinned to the top of the channel for easy access.
    */
   is_pinned: boolean;
 
   /**
-   * The type of post
+   * The classification of this message: regular, system, or automated.
    */
   message_type: DmsPostTypes;
 
   /**
-   * The poll for this message
+   * A poll attached to this message. Null if the message does not contain a poll.
    */
   poll: Message.Poll | null;
 
   /**
-   * The reaction counts for this message
+   * Aggregated reaction counts on this message, filtered to a specific reaction
+   * type.
    */
   poll_votes: Array<Message.PollVote>;
 
   /**
-   * The reaction counts for this message
+   * Aggregated reaction counts on this message, filtered to a specific reaction
+   * type.
    */
   reaction_counts: Array<Message.ReactionCount>;
 
   /**
-   * The ID of the message this is replying to, if applicable
+   * The unique identifier of the message this post is replying to. Null if this is
+   * not a reply.
    */
   replying_to_message_id: string | null;
 
   /**
-   * The timestamp when the post was last updated
+   * The timestamp when this message was last modified.
    */
   updated_at: string;
 
   /**
-   * The user who sent this message
+   * The user who authored this message.
    */
   user: Message.User;
 
   /**
-   * The number of times this message has been viewed
+   * The number of unique views this message has received. Null if view tracking is
+   * not enabled for this channel.
    */
   view_count: number | null;
 }
 
 export namespace Message {
   /**
-   * The poll for this message
+   * A poll attached to this message. Null if the message does not contain a poll.
    */
   export interface Poll {
     /**
@@ -2166,7 +2234,7 @@ export namespace Message {
   }
 
   /**
-   * The user who sent this message
+   * The user who authored this message.
    */
   export interface User {
     /**
@@ -2252,7 +2320,8 @@ export interface Payment {
   card_brand: PaymentsAPI.CardBrands | null;
 
   /**
-   * The last 4 digits of the card used to make the payment.
+   * The last four digits of the card used to make this payment. Null if the payment
+   * was not made with a card.
    */
   card_last4: string | null;
 
@@ -2308,12 +2377,14 @@ export interface Payment {
   next_payment_attempt: string | null;
 
   /**
-   * The datetime the payment was paid
+   * The time at which this payment was successfully collected. Null if the payment
+   * has not yet succeeded. As a Unix timestamp.
    */
   paid_at: string | null;
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   payment_method: Payment.PaymentMethod | null;
 
@@ -2529,7 +2600,8 @@ export namespace Payment {
   }
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   export interface PaymentMethod {
     /**
@@ -2564,17 +2636,18 @@ export namespace Payment {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
@@ -2688,17 +2761,20 @@ export interface Plan {
   id: string;
 
   /**
-   * The interval in days at which the plan charges (renewal plans).
+   * The number of days between each recurring charge. Null for one-time plans. For
+   * example, 30 for monthly or 365 for annual billing.
    */
   billing_period: number | null;
 
   /**
-   * Whether or not the plan collects tax.
+   * Whether tax is collected on purchases of this plan, based on the company's tax
+   * configuration.
    */
   collect_tax: boolean;
 
   /**
-   * The company for the plan.
+   * The company that sells this plan. Null for standalone invoice plans not linked
+   * to a company.
    */
   company: Plan.Company | null;
 
@@ -2708,17 +2784,20 @@ export interface Plan {
   created_at: string;
 
   /**
-   * The respective currency identifier for the plan.
+   * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+   * amounts on the plan are denominated in this currency.
    */
   currency: Currency;
 
   /**
-   * The custom fields for the plan.
+   * Custom input fields displayed on the checkout form that collect additional
+   * information from the buyer.
    */
   custom_fields: Array<Plan.CustomField>;
 
   /**
-   * The description of the plan.
+   * A text description of the plan visible to customers. Maximum 500 characters.
+   * Null if no description is set.
    */
   description: string | null;
 
@@ -2736,42 +2815,50 @@ export interface Plan {
   initial_price: number;
 
   /**
-   * A personal description or notes section for the business.
+   * Private notes visible only to the company owner and team members. Not shown to
+   * customers. Null if no notes have been added.
    */
   internal_notes: string | null;
 
   /**
-   * The invoice associated with this plan.
+   * The invoice this plan was generated for. Null if the plan was not created for a
+   * specific invoice.
    */
   invoice: Plan.Invoice | null;
 
   /**
-   * The number of members for the plan.
+   * The number of users who currently hold an active membership through this plan.
+   * Only visible to authorized team members.
    */
   member_count: number | null;
 
   /**
-   * The explicit payment method configuration for the plan, if any.
+   * The explicit payment method configuration specifying which payment methods are
+   * enabled or disabled for this plan. Null if the plan uses default settings.
    */
   payment_method_configuration: Plan.PaymentMethodConfiguration | null;
 
   /**
-   * Indicates if the plan is a one time payment or recurring.
+   * The billing model for this plan: 'renewal' for recurring subscriptions or
+   * 'one_time' for single payments.
    */
   plan_type: PlanType;
 
   /**
-   * The product that this plan belongs to.
+   * The product that this plan belongs to. Null for standalone one-off purchases not
+   * linked to a product.
    */
   product: Plan.Product | null;
 
   /**
-   * The direct link to purchase the product.
+   * The full URL where customers can purchase this plan directly, bypassing the
+   * product page.
    */
   purchase_url: string;
 
   /**
-   * This is the release method the business uses to sell this plan.
+   * The method used to sell this plan: 'buy_now' for immediate purchase or
+   * 'waitlist' for waitlist-based access.
    */
   release_method: ReleaseMethod;
 
@@ -2782,27 +2869,33 @@ export interface Plan {
   renewal_price: number;
 
   /**
-   * The number of payments required before pausing the subscription.
+   * The total number of installment payments required before the subscription
+   * pauses. Null if split pay is not configured. Must be greater than 1.
    */
   split_pay_required_payments: number | null;
 
   /**
-   * The number of units available for purchase. Only displayed to authorized actors
+   * The number of units available for purchase. Only visible to authorized team
+   * members. Null if the requester lacks permission.
    */
   stock: number | null;
 
   /**
-   * The tax type for the plan.
+   * How tax is handled for this plan: 'inclusive' (tax included in price),
+   * 'exclusive' (tax added at checkout), or 'unspecified' (tax not configured).
    */
   tax_type: TaxType;
 
   /**
-   * The title of the plan. This will be visible on the product page to customers.
+   * The display name of the plan shown to customers on the product page and at
+   * checkout. Maximum 30 characters. Null if no title has been set.
    */
   title: string | null;
 
   /**
-   * The number of free trial days added before a renewal plan.
+   * The number of free trial days before the first charge on a renewal plan. Null if
+   * no trial is configured or the current user has already used a trial for this
+   * plan.
    */
   trial_period_days: number | null;
 
@@ -2818,14 +2911,16 @@ export interface Plan {
   updated_at: string;
 
   /**
-   * Shows or hides the plan from public/business view.
+   * Controls whether the plan is visible to customers. When set to 'hidden', the
+   * plan is only accessible via direct link.
    */
   visibility: Visibility;
 }
 
 export namespace Plan {
   /**
-   * The company for the plan.
+   * The company that sells this plan. Null for standalone invoice plans not linked
+   * to a company.
    */
   export interface Company {
     /**
@@ -2875,7 +2970,8 @@ export namespace Plan {
   }
 
   /**
-   * The invoice associated with this plan.
+   * The invoice this plan was generated for. Null if the plan was not created for a
+   * specific invoice.
    */
   export interface Invoice {
     /**
@@ -2885,7 +2981,8 @@ export namespace Plan {
   }
 
   /**
-   * The explicit payment method configuration for the plan, if any.
+   * The explicit payment method configuration specifying which payment methods are
+   * enabled or disabled for this plan. Null if the plan uses default settings.
    */
   export interface PaymentMethodConfiguration {
     /**
@@ -2911,7 +3008,8 @@ export namespace Plan {
   }
 
   /**
-   * The product that this plan belongs to.
+   * The product that this plan belongs to. Null for standalone one-off purchases not
+   * linked to a product.
    */
   export interface Product {
     /**
@@ -3221,7 +3319,7 @@ export interface ProductListItem {
 export type PromoType = 'percentage' | 'flat_amount';
 
 /**
- * Represents a reaction to a feed post
+ * A single reaction left by a user on a feed post, such as a like or emoji.
  */
 export interface Reaction {
   /**
@@ -3230,24 +3328,25 @@ export interface Reaction {
   id: string;
 
   /**
-   * The emoji that was used in shortcode format (:heart:)
+   * The emoji used for this reaction in shortcode format. Null if the reaction type
+   * is not emoji.
    */
   emoji: string | null;
 
   /**
-   * The ID of the post this reaction belongs to
+   * The unique identifier of the post this reaction was left on.
    */
   resource_id: string;
 
   /**
-   * The user who reacted to the post
+   * The user who left this reaction on the post.
    */
   user: Reaction.User;
 }
 
 export namespace Reaction {
   /**
-   * The user who reacted to the post
+   * The user who left this reaction on the post.
    */
   export interface User {
     /**
@@ -3278,7 +3377,8 @@ export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectib
 export type ReleaseMethod = 'buy_now' | 'waitlist';
 
 /**
- * A shipment
+ * A physical shipment associated with a payment, including carrier details and
+ * tracking information.
  */
 export interface Shipment {
   /**
@@ -3287,7 +3387,7 @@ export interface Shipment {
   id: string;
 
   /**
-   * The carrier of the shipment
+   * The shipping carrier responsible for delivering this shipment.
    */
   carrier: ShipmentCarrier;
 
@@ -3297,22 +3397,25 @@ export interface Shipment {
   created_at: string;
 
   /**
-   * The delivery estimate of the shipment
+   * The estimated delivery date for this shipment. Null if the carrier has not
+   * provided an estimate.
    */
   delivery_estimate: string | null;
 
   /**
-   * The payment of the shipment
+   * The payment associated with this shipment. Null if the payment has been deleted
+   * or is inaccessible.
    */
   payment: Shipment.Payment | null;
 
   /**
-   * The service of the shipment
+   * The shipping service level used for this shipment. Null if the carrier does not
+   * specify a service tier.
    */
   service: string | null;
 
   /**
-   * The status of the shipment
+   * The current delivery status of this shipment.
    */
   status: ShipmentStatus;
 
@@ -3322,7 +3425,7 @@ export interface Shipment {
   substatus: ShipmentSubstatus | null;
 
   /**
-   * The tracking code of the shipment
+   * The carrier-assigned tracking number used to look up shipment progress.
    */
   tracking_code: string;
 
@@ -3334,7 +3437,8 @@ export interface Shipment {
 
 export namespace Shipment {
   /**
-   * The payment of the shipment
+   * The payment associated with this shipment. Null if the payment has been deleted
+   * or is inaccessible.
    */
   export interface Payment {
     /**
@@ -3474,7 +3578,8 @@ export type ShipmentSubstatus =
   | 'weather_delay';
 
 /**
- * Represents a DM channel
+ * A messaging channel that can be a one-on-one DM, group chat, company support
+ * conversation, or platform-level direct message.
  */
 export interface SupportChannel {
   /**
@@ -3483,34 +3588,40 @@ export interface SupportChannel {
   id: string;
 
   /**
-   * The bot ID if this is a support chat
+   * The unique identifier of the company associated with this channel. Null if this
+   * is not a support or company-scoped conversation.
    */
   company_id: string | null;
 
   /**
-   * The custom name of the DM channel, if any
+   * A custom display name assigned to this channel by the user. Null if no custom
+   * name has been set.
    */
   custom_name: string | null;
 
   /**
-   * The customer user if this is a support chat
+   * The customer who initiated this support conversation. Null if this is not a
+   * support chat.
    */
   customer_user: SupportChannel.CustomerUser | null;
 
   /**
-   * When the last message was sent
+   * The timestamp when the most recent message was sent in this channel. Null if no
+   * messages have been sent.
    */
   last_message_at: string | null;
 
   /**
-   * When the support ticket was resolved (null if unresolved)
+   * The timestamp when the linked support ticket was marked as resolved. Null if
+   * unresolved or not a support chat.
    */
   resolved_at: string | null;
 }
 
 export namespace SupportChannel {
   /**
-   * The customer user if this is a support chat
+   * The customer who initiated this support conversation. Null if this is not a
+   * support chat.
    */
   export interface CustomerUser {
     /**
@@ -3537,7 +3648,7 @@ export namespace SupportChannel {
 export type TaxType = 'inclusive' | 'exclusive' | 'unspecified';
 
 /**
- * Credit Transaction Transfer
+ * A transfer of credit between two ledger accounts.
  */
 export interface Transfer {
   /**
@@ -3546,8 +3657,8 @@ export interface Transfer {
   id: string;
 
   /**
-   * The amount of the transfer. Provided as a number in the specified currency. Eg:
-   * 10.43 for $10.43 USD.
+   * The transfer amount in the currency specified by the currency field. For
+   * example, 10.43 represents $10.43 USD.
    */
   amount: number;
 
@@ -3557,43 +3668,45 @@ export interface Transfer {
   created_at: string;
 
   /**
-   * The currency of the credit transaction transfer
+   * The currency in which this transfer amount is denominated.
    */
   currency: Currency;
 
   /**
-   * The recipient of the credit transaction transfer
+   * The entity receiving the transferred funds.
    */
   destination: Transfer.User | null | Transfer.Company | null;
 
   /**
-   * The ID of the destination ledger account
+   * The unique identifier of the ledger account receiving the funds.
    */
   destination_ledger_account_id: string;
 
   /**
-   * The decimal fee of the credit transaction transfer
+   * The flat fee amount deducted from this transfer, in the transfer's currency.
+   * Null if no flat fee was applied.
    */
   fee_amount: number | null;
 
   /**
-   * Custom key-value pairs attached to the transfer. Max 50 keys, 500 chars per key,
-   * 5000 chars per value.
+   * Custom key-value pairs attached to this transfer. Maximum 50 keys, 500
+   * characters per key, 5000 characters per value.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The notes of the credit transaction transfer
+   * A free-text note attached to this transfer by the sender. Null if no note was
+   * provided.
    */
   notes: string | null;
 
   /**
-   * The sender of the credit transaction transfer
+   * The entity that sent the transferred funds.
    */
   origin: Transfer.User | null | Transfer.Company | null;
 
   /**
-   * The ID of the origin ledger account
+   * The unique identifier of the ledger account that sent the funds.
    */
   origin_ledger_account_id: string;
 }

@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Messages extends APIResource {
   /**
-   * Creates a new message
+   * Send a new message in an experience chat, DM, or group chat channel. Supports
+   * text content, attachments, polls, and replies.
    *
    * Required permissions:
    *
@@ -20,7 +21,7 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Retrieves a message
+   * Retrieves the details of an existing message.
    *
    * Required permissions:
    *
@@ -31,7 +32,8 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Updates an existing message
+   * Edit the content, attachments, or pinned status of an existing message in an
+   * experience chat, DM, or group chat channel.
    */
   update(
     id: string,
@@ -42,7 +44,8 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Lists messages inside a channel
+   * Returns a paginated list of messages within a specific experience chat, DM, or
+   * group chat channel, sorted by creation time.
    *
    * Required permissions:
    *
@@ -56,7 +59,8 @@ export class Messages extends APIResource {
   }
 
   /**
-   * Deletes a message
+   * Permanently delete a message from an experience chat, DM, or group chat channel.
+   * Only the message author or a channel admin can delete a message.
    *
    * Required permissions:
    *
@@ -70,7 +74,7 @@ export class Messages extends APIResource {
 export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>;
 
 /**
- * Represents a message in a DM channel
+ * A message sent within an experience chat, direct message, or group chat.
  */
 export interface MessageListResponse {
   /**
@@ -83,69 +87,74 @@ export interface MessageListResponse {
   id: string;
 
   /**
-   * The content of the message in Markdown format
+   * The message content formatted as Markdown. Null if the message has no text
+   * content.
    */
   content: string | null;
 
   /**
-   * The timestamp when the post was created
+   * The timestamp when this message was originally created.
    */
   created_at: string;
 
   /**
-   * Whether the message has been edited
+   * Whether the message content has been edited after it was originally sent.
    */
   is_edited: boolean;
 
   /**
-   * Whether this message is pinned
+   * Whether this message is pinned to the top of the channel for easy access.
    */
   is_pinned: boolean;
 
   /**
-   * The type of post
+   * The classification of this message: regular, system, or automated.
    */
   message_type: Shared.DmsPostTypes;
 
   /**
-   * The poll for this message
+   * A poll attached to this message. Null if the message does not contain a poll.
    */
   poll: MessageListResponse.Poll | null;
 
   /**
-   * The reaction counts for this message
+   * Aggregated reaction counts on this message, filtered to a specific reaction
+   * type.
    */
   poll_votes: Array<MessageListResponse.PollVote>;
 
   /**
-   * The reaction counts for this message
+   * Aggregated reaction counts on this message, filtered to a specific reaction
+   * type.
    */
   reaction_counts: Array<MessageListResponse.ReactionCount>;
 
   /**
-   * The ID of the message this is replying to, if applicable
+   * The unique identifier of the message this post is replying to. Null if this is
+   * not a reply.
    */
   replying_to_message_id: string | null;
 
   /**
-   * The timestamp when the post was last updated
+   * The timestamp when this message was last modified.
    */
   updated_at: string;
 
   /**
-   * The user who sent this message
+   * The user who authored this message.
    */
   user: MessageListResponse.User;
 
   /**
-   * The number of times this message has been viewed
+   * The number of unique views this message has received. Null if view tracking is
+   * not enabled for this channel.
    */
   view_count: number | null;
 }
 
 export namespace MessageListResponse {
   /**
-   * The poll for this message
+   * A poll attached to this message. Null if the message does not contain a poll.
    */
   export interface Poll {
     /**
@@ -202,7 +211,7 @@ export namespace MessageListResponse {
   }
 
   /**
-   * The user who sent this message
+   * The user who authored this message.
    */
   export interface User {
     /**
@@ -229,27 +238,30 @@ export type MessageDeleteResponse = boolean;
 
 export interface MessageCreateParams {
   /**
-   * The ID of the channel or experience to send to.
+   * The unique identifier of the channel or experience to send the message in. For
+   * example, 'exp_xxxxx' or 'feed_xxxxx'.
    */
   channel_id: string;
 
   /**
-   * The content of the message in Markdown format.
+   * The body of the message in Markdown format. For example, 'Hello **world**'.
    */
   content: string;
 
   /**
-   * The attachments for this message, such as videos or images.
+   * A list of file attachments to include with the message, such as images or
+   * videos.
    */
   attachments?: Array<MessageCreateParams.Attachment> | null;
 
   /**
-   * The poll for this message
+   * A poll to attach to this message, allowing recipients to vote on options.
    */
   poll?: MessageCreateParams.Poll | null;
 
   /**
-   * The ID of the message this is replying to, if applicable.
+   * The unique identifier of the message this is replying to, creating a threaded
+   * reply.
    */
   replying_to_message_id?: string | null;
 }
@@ -266,7 +278,7 @@ export namespace MessageCreateParams {
   }
 
   /**
-   * The poll for this message
+   * A poll to attach to this message, allowing recipients to vote on options.
    */
   export interface Poll {
     /**
@@ -295,17 +307,19 @@ export namespace MessageCreateParams {
 
 export interface MessageUpdateParams {
   /**
-   * The attachments for this message
+   * A replacement list of file attachments for this message, such as images or
+   * videos.
    */
   attachments?: Array<MessageUpdateParams.Attachment> | null;
 
   /**
-   * The content of the message in Markdown format
+   * The updated body of the message in Markdown format. For example, 'Hello
+   * **world**'.
    */
   content?: string | null;
 
   /**
-   * Whether this message is pinned
+   * Whether this message should be pinned to the top of the channel.
    */
   is_pinned?: boolean | null;
 }
@@ -324,7 +338,7 @@ export namespace MessageUpdateParams {
 
 export interface MessageListParams extends CursorPageParams {
   /**
-   * The ID of the channel or the experience ID to list messages for
+   * The unique identifier of the channel or experience to list messages for.
    */
   channel_id: string;
 

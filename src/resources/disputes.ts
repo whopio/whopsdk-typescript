@@ -10,7 +10,7 @@ import { path } from '../internal/utils/path';
 
 export class Disputes extends APIResource {
   /**
-   * Retrieves a Dispute by ID
+   * Retrieves the details of an existing dispute.
    *
    * Required permissions:
    *
@@ -28,7 +28,9 @@ export class Disputes extends APIResource {
   }
 
   /**
-   * Lists disputes the current actor has access to
+   * Returns a paginated list of disputes for a company, with optional filtering by
+   * creation date. A dispute represents a chargeback or inquiry filed by a customer
+   * against a payment.
    *
    * Required permissions:
    *
@@ -100,32 +102,36 @@ export interface Dispute {
   id: string;
 
   /**
-   * An IP access log for the user from Whop.
+   * A log of IP-based access activity for the customer on Whop, submitted as
+   * evidence in the dispute.
    */
   access_activity_log: string | null;
 
   /**
-   * The amount of the dispute (formatted).
+   * The disputed amount in the specified currency, formatted as a decimal.
    */
   amount: number;
 
   /**
-   * The billing address of the user from their payment details.
+   * The customer's billing address from their payment details, submitted as evidence
+   * in the dispute.
    */
   billing_address: string | null;
 
   /**
-   * The cancellation policy for this dispute
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
    */
   cancellation_policy_attachment: Dispute.CancellationPolicyAttachment | null;
 
   /**
-   * A cancellation policy disclosure from the company.
+   * A text disclosure describing the company's cancellation policy, submitted as
+   * dispute evidence.
    */
   cancellation_policy_disclosure: string | null;
 
   /**
-   * The company the dispute is against.
+   * The company that the dispute was filed against.
    */
   company: Dispute.Company | null;
 
@@ -135,112 +141,128 @@ export interface Dispute {
   created_at: string | null;
 
   /**
-   * The currency of the dispute.
+   * The three-letter ISO currency code for the disputed amount.
    */
   currency: Shared.Currency;
 
   /**
-   * The customer communication for this dispute
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
    */
   customer_communication_attachment: Dispute.CustomerCommunicationAttachment | null;
 
   /**
-   * The email of the customer from their payment details. This is submitted in the
-   * evidence packet to the payment processor. You can change it before submitting
-   * the dispute.
+   * The customer's email address from their payment details, included in the
+   * evidence packet sent to the payment processor. Editable before submission.
    */
   customer_email_address: string | null;
 
   /**
-   * The name of the customer from their payment details. This is submitted in the
-   * evidence packet to the payment processor. You can change it before submitting
-   * the dispute.
+   * The customer's full name from their payment details, included in the evidence
+   * packet sent to the payment processor. Editable before submission.
    */
   customer_name: string | null;
 
   /**
-   * Whether or not the dispute data can be edited.
+   * Whether the dispute evidence can still be edited and submitted. Returns true
+   * only when the dispute status requires a response.
    */
   editable: boolean | null;
 
   /**
-   * The last date the dispute is allow to be submitted by.
+   * The deadline by which dispute evidence must be submitted. Null if no response
+   * deadline is set.
    */
   needs_response_by: string | null;
 
   /**
-   * Additional notes the company chooses to submit regarding the dispute.
+   * Additional freeform notes submitted by the company as part of the dispute
+   * evidence.
    */
   notes: string | null;
 
   /**
-   * The payment that got disputed
+   * The original payment that was disputed.
    */
   payment: Dispute.Payment | null;
 
   /**
-   * The plan that got disputed
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
    */
   plan: Dispute.Plan | null;
 
   /**
-   * The product that got disputed
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
    */
   product: Dispute.Product | null;
 
   /**
-   * The description of the product from the company.
+   * A description of the product or service provided, submitted as dispute evidence.
    */
   product_description: string | null;
 
   /**
-   * The reason for the dispute
+   * A human-readable reason for the dispute.
    */
   reason: string | null;
 
   /**
-   * The refund policy for this dispute
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
    */
   refund_policy_attachment: Dispute.RefundPolicyAttachment | null;
 
   /**
-   * A refund policy disclosure from the company.
+   * A text disclosure describing the company's refund policy, submitted as dispute
+   * evidence.
    */
   refund_policy_disclosure: string | null;
 
   /**
-   * A description on why the refund is being refused by the company.
+   * An explanation from the company for why a refund was refused, submitted as
+   * dispute evidence.
    */
   refund_refusal_explanation: string | null;
 
   /**
-   * When the product was delivered by the company.
+   * The date when the product or service was delivered to the customer, submitted as
+   * dispute evidence.
    */
   service_date: string | null;
 
   /**
-   * The status of the dispute (mimics stripe's dispute status).
+   * The current status of the dispute lifecycle, such as needs_response,
+   * under_review, won, or lost.
    */
   status: DisputeStatuses;
 
   /**
-   * An attachment that did not fit into the other categories
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
    */
   uncategorized_attachment: Dispute.UncategorizedAttachment | null;
 
   /**
-   * Whether or not the dispute is a Visa Rapid Dispute Resolution.
+   * Whether the dispute was automatically resolved through Visa Rapid Dispute
+   * Resolution (RDR).
    */
   visa_rdr: boolean;
 }
 
 export namespace Dispute {
   /**
-   * The cancellation policy for this dispute
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
    */
   export interface CancellationPolicyAttachment {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -262,7 +284,7 @@ export namespace Dispute {
   }
 
   /**
-   * The company the dispute is against.
+   * The company that the dispute was filed against.
    */
   export interface Company {
     /**
@@ -277,11 +299,16 @@ export namespace Dispute {
   }
 
   /**
-   * The customer communication for this dispute
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
    */
   export interface CustomerCommunicationAttachment {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -303,7 +330,7 @@ export namespace Dispute {
   }
 
   /**
-   * The payment that got disputed
+   * The original payment that was disputed.
    */
   export interface Payment {
     /**
@@ -322,7 +349,8 @@ export namespace Dispute {
     card_brand: PaymentsAPI.CardBrands | null;
 
     /**
-     * The last 4 digits of the card used to make the payment.
+     * The last four digits of the card used to make this payment. Null if the payment
+     * was not made with a card.
      */
     card_last4: string | null;
 
@@ -352,7 +380,8 @@ export namespace Dispute {
     membership: Payment.Membership | null;
 
     /**
-     * The datetime the payment was paid
+     * The time at which this payment was successfully collected. Null if the payment
+     * has not yet succeeded. As a Unix timestamp.
      */
     paid_at: string | null;
 
@@ -441,7 +470,8 @@ export namespace Dispute {
   }
 
   /**
-   * The plan that got disputed
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
    */
   export interface Plan {
     /**
@@ -451,7 +481,8 @@ export namespace Dispute {
   }
 
   /**
-   * The product that got disputed
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
    */
   export interface Product {
     /**
@@ -467,11 +498,16 @@ export namespace Dispute {
   }
 
   /**
-   * The refund policy for this dispute
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
    */
   export interface RefundPolicyAttachment {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -493,11 +529,16 @@ export namespace Dispute {
   }
 
   /**
-   * An attachment that did not fit into the other categories
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
    */
   export interface UncategorizedAttachment {
     /**
-     * The unique identifier of the attachment.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     id: string;
 
@@ -544,12 +585,12 @@ export interface DisputeListResponse {
   id: string;
 
   /**
-   * The amount of the dispute (formatted).
+   * The disputed amount in the specified currency, formatted as a decimal.
    */
   amount: number;
 
   /**
-   * The company the dispute is against.
+   * The company that the dispute was filed against.
    */
   company: DisputeListResponse.Company | null;
 
@@ -559,54 +600,60 @@ export interface DisputeListResponse {
   created_at: string | null;
 
   /**
-   * The currency of the dispute.
+   * The three-letter ISO currency code for the disputed amount.
    */
   currency: Shared.Currency;
 
   /**
-   * Whether or not the dispute data can be edited.
+   * Whether the dispute evidence can still be edited and submitted. Returns true
+   * only when the dispute status requires a response.
    */
   editable: boolean | null;
 
   /**
-   * The last date the dispute is allow to be submitted by.
+   * The deadline by which dispute evidence must be submitted. Null if no response
+   * deadline is set.
    */
   needs_response_by: string | null;
 
   /**
-   * The payment that got disputed
+   * The original payment that was disputed.
    */
   payment: DisputeListResponse.Payment | null;
 
   /**
-   * The plan that got disputed
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
    */
   plan: DisputeListResponse.Plan | null;
 
   /**
-   * The product that got disputed
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
    */
   product: DisputeListResponse.Product | null;
 
   /**
-   * The reason for the dispute
+   * A human-readable reason for the dispute.
    */
   reason: string | null;
 
   /**
-   * The status of the dispute (mimics stripe's dispute status).
+   * The current status of the dispute lifecycle, such as needs_response,
+   * under_review, won, or lost.
    */
   status: DisputeStatuses;
 
   /**
-   * Whether or not the dispute is a Visa Rapid Dispute Resolution.
+   * Whether the dispute was automatically resolved through Visa Rapid Dispute
+   * Resolution (RDR).
    */
   visa_rdr: boolean;
 }
 
 export namespace DisputeListResponse {
   /**
-   * The company the dispute is against.
+   * The company that the dispute was filed against.
    */
   export interface Company {
     /**
@@ -621,7 +668,7 @@ export namespace DisputeListResponse {
   }
 
   /**
-   * The payment that got disputed
+   * The original payment that was disputed.
    */
   export interface Payment {
     /**
@@ -631,7 +678,8 @@ export namespace DisputeListResponse {
   }
 
   /**
-   * The plan that got disputed
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
    */
   export interface Plan {
     /**
@@ -641,7 +689,8 @@ export namespace DisputeListResponse {
   }
 
   /**
-   * The product that got disputed
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
    */
   export interface Product {
     /**
@@ -659,7 +708,7 @@ export namespace DisputeListResponse {
 
 export interface DisputeListParams extends CursorPageParams {
   /**
-   * The ID of the company to list disputes for
+   * The unique identifier of the company to list disputes for.
    */
   company_id: string;
 
@@ -669,12 +718,12 @@ export interface DisputeListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return disputes created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return disputes created before this timestamp.
    */
   created_before?: string | null;
 
@@ -696,79 +745,80 @@ export interface DisputeListParams extends CursorPageParams {
 
 export interface DisputeUpdateEvidenceParams {
   /**
-   * An IP access log for the user from Whop.
+   * An IP access activity log showing the customer used the service.
    */
   access_activity_log?: string | null;
 
   /**
-   * The billing address of the user from their payment details.
+   * The billing address associated with the customer's payment method.
    */
   billing_address?: string | null;
 
   /**
-   * A file containing the cancellation policy from the company.
+   * A file upload containing the company's cancellation policy document.
    */
   cancellation_policy_attachment?: DisputeUpdateEvidenceParams.CancellationPolicyAttachment | null;
 
   /**
-   * A cancellation policy disclosure from the company.
+   * The company's cancellation policy text to submit as evidence.
    */
   cancellation_policy_disclosure?: string | null;
 
   /**
-   * A file containing the customer communication from the company (An image).
+   * A file upload containing evidence of customer communication. Must be a JPEG,
+   * PNG, GIF, or PDF.
    */
   customer_communication_attachment?: DisputeUpdateEvidenceParams.CustomerCommunicationAttachment | null;
 
   /**
-   * The email of the customer from their payment details.
+   * The email address of the customer associated with the disputed payment.
    */
   customer_email_address?: string | null;
 
   /**
-   * The name of the customer from their payment details.
+   * The full name of the customer associated with the disputed payment.
    */
   customer_name?: string | null;
 
   /**
-   * Additional notes the company chooses to submit regarding the dispute.
+   * Additional notes or context to submit as part of the dispute evidence.
    */
   notes?: string | null;
 
   /**
-   * The description of the product from the company.
+   * A description of the product or service that was provided to the customer.
    */
   product_description?: string | null;
 
   /**
-   * A file containing the refund policy from the company.
+   * A file upload containing the company's refund policy document.
    */
   refund_policy_attachment?: DisputeUpdateEvidenceParams.RefundPolicyAttachment | null;
 
   /**
-   * A refund policy disclosure from the company.
+   * The company's refund policy text to submit as evidence.
    */
   refund_policy_disclosure?: string | null;
 
   /**
-   * A description on why the refund is being refused by the company.
+   * An explanation of why the refund request was refused.
    */
   refund_refusal_explanation?: string | null;
 
   /**
-   * When the product was delivered by the company.
+   * The date when the product or service was delivered to the customer.
    */
   service_date?: string | null;
 
   /**
-   * A file that does not fit in the other categories.
+   * A file upload for evidence that does not fit into the other categories.
    */
   uncategorized_attachment?: DisputeUpdateEvidenceParams.UncategorizedAttachment | null;
 }
 
 export namespace DisputeUpdateEvidenceParams {
   /**
-   * A file containing the cancellation policy from the company.
+   * A file upload containing the company's cancellation policy document.
    */
   export interface CancellationPolicyAttachment {
     /**
@@ -778,7 +828,8 @@ export namespace DisputeUpdateEvidenceParams {
   }
 
   /**
-   * A file containing the customer communication from the company (An image).
+   * A file upload containing evidence of customer communication. Must be a JPEG,
+   * PNG, GIF, or PDF.
    */
   export interface CustomerCommunicationAttachment {
     /**
@@ -788,7 +839,7 @@ export namespace DisputeUpdateEvidenceParams {
   }
 
   /**
-   * A file containing the refund policy from the company.
+   * A file upload containing the company's refund policy document.
    */
   export interface RefundPolicyAttachment {
     /**
@@ -798,7 +849,7 @@ export namespace DisputeUpdateEvidenceParams {
   }
 
   /**
-   * A file that does not fit in the other categories.
+   * A file upload for evidence that does not fit into the other categories.
    */
   export interface UncategorizedAttachment {
     /**
