@@ -339,11 +339,6 @@ export interface ProductCreateParams {
   plan_options?: ProductCreateParams.PlanOptions | null;
 
   /**
-   * Key features and benefits to display on the product page.
-   */
-  product_highlights?: Array<ProductCreateParams.ProductHighlight> | null;
-
-  /**
    * The unique identifier of the tax classification code to apply to this product.
    */
   product_tax_code_id?: string | null;
@@ -444,27 +439,6 @@ export namespace ProductCreateParams {
        */
       required?: boolean | null;
     }
-  }
-
-  /**
-   * Input for creating a product highlight
-   */
-  export interface ProductHighlight {
-    /**
-     * Text to display to describe the product highlight (max length 250 for
-     * qualification or benefits, 170 for who this is for, 140 for pricing features).
-     */
-    content: string;
-
-    /**
-     * The type of this highlight.
-     */
-    highlight_type: 'qualification' | 'benefit' | 'who_this_is_for' | 'pricing_feature';
-
-    /**
-     * The title of the product highlight, if applicable.
-     */
-    title?: string | null;
   }
 }
 
