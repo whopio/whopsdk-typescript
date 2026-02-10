@@ -200,8 +200,7 @@ export interface Lesson {
   attachments: Array<Lesson.Attachment>;
 
   /**
-   * The text body of the lesson in plain text format. Null if the lesson has no text
-   * content.
+   * The Markdown content body of the lesson. Null if the lesson has no text content.
    */
   content: string | null;
 
@@ -540,8 +539,7 @@ export interface CourseLessonListResponse {
   id: string;
 
   /**
-   * The text body of the lesson in plain text format. Null if the lesson has no text
-   * content.
+   * The Markdown content body of the lesson. Null if the lesson has no text content.
    */
   content: string | null;
 
@@ -735,7 +733,7 @@ export interface CourseLessonCreateParams {
   lesson_type: LessonTypes;
 
   /**
-   * The rich text or HTML content body of the lesson.
+   * The Markdown content body of the lesson.
    */
   content?: string | null;
 
@@ -799,7 +797,7 @@ export interface CourseLessonUpdateParams {
   attachments?: Array<CourseLessonUpdateParams.Attachment> | null;
 
   /**
-   * The rich text or HTML content body of the lesson.
+   * The Markdown content body of the lesson.
    */
   content?: string | null;
 
