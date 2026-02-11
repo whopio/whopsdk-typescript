@@ -258,6 +258,12 @@ export interface AppCreateParams {
    * The icon image for the app in PNG, JPEG, or GIF format.
    */
   icon?: AppCreateParams.Icon | null;
+
+  /**
+   * The whitelisted OAuth callback URLs that users are redirected to after
+   * authorizing the app.
+   */
+  redirect_uris?: Array<string> | null;
 }
 
 export namespace AppCreateParams {
@@ -319,6 +325,12 @@ export interface AppUpdateParams {
    * The display name for the app, shown to users on the app store and product pages.
    */
   name?: string | null;
+
+  /**
+   * The whitelisted OAuth callback URLs that users are redirected to after
+   * authorizing the app
+   */
+  redirect_uris?: Array<string> | null;
 
   /**
    * The permission scopes the app will request from users when they install it.
