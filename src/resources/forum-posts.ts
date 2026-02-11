@@ -10,7 +10,8 @@ import { path } from '../internal/utils/path';
 export class ForumPosts extends APIResource {
   /**
    * Create a new forum post or comment within an experience. Supports text content,
-   * attachments, polls, paywalling, and pinning.
+   * attachments, polls, paywalling, and pinning. Pass experience_id 'public' with a
+   * company_id to post to a company's public forum.
    *
    * Required permissions:
    *
@@ -194,7 +195,8 @@ export namespace ForumPostListResponse {
 export interface ForumPostCreateParams {
   /**
    * The unique identifier of the experience to create this post in. For example,
-   * 'exp_xxxxx'.
+   * 'exp_xxxxx'. Pass 'public' along with company_id to automatically use the
+   * company's public forum.
    */
   experience_id: string;
 
@@ -202,6 +204,12 @@ export interface ForumPostCreateParams {
    * A list of file attachments to include with the post, such as images or videos.
    */
   attachments?: Array<ForumPostCreateParams.Attachment> | null;
+
+  /**
+   * The unique identifier of the company whose public forum to post in. Required
+   * when experience_id is 'public'. For example, 'biz_xxxxx'.
+   */
+  company_id?: string | null;
 
   /**
    * The main body of the post in Markdown format. For example, 'Check out this
