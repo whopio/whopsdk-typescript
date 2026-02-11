@@ -172,7 +172,7 @@ export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListRespons
 
 /**
  * An experience is a feature or content module within a product, such as a chat,
- * course, or app.
+ * course, or custom app.
  */
 export interface ExperienceListResponse {
   /**

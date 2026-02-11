@@ -25,8 +25,8 @@ export class AccessTokens extends APIResource {
 }
 
 /**
- * A short-lived access token used to authenticate API requests on behalf of a user
- * or application.
+ * A short-lived access token used to authenticate API requests on behalf of a
+ * user.
  */
 export interface AccessTokenCreateResponse {
   /**

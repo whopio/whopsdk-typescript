@@ -1204,7 +1204,7 @@ export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
 
 /**
  * An experience is a feature or content module within a product, such as a chat,
- * course, or app.
+ * course, or custom app.
  */
 export interface Experience {
   /**
@@ -2280,8 +2280,8 @@ export interface PageInfo {
 }
 
 /**
- * A payment represents a completed or attempted charge for a membership. Payments
- * track the amount, status, currency, and payment method used.
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
  */
 export interface Payment {
   /**
@@ -2750,9 +2750,9 @@ export namespace Payment {
 }
 
 /**
- * A plan defines pricing and billing terms for a product. Each product can have
- * multiple plans representing different pricing options, such as one-time
- * payments, recurring subscriptions, or free trials.
+ * A plan defines pricing and billing terms for a checkout. Plans can optionally
+ * belong to a product, where they represent different pricing options such as
+ * one-time payments, recurring subscriptions, or free trials.
  */
 export interface Plan {
   /**

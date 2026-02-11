@@ -77,8 +77,8 @@ export class Withdrawals extends APIResource {
 export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
 
 /**
- * A withdrawal represents a request to transfer funds from a company's ledger
- * account to an external payout method.
+ * A withdrawal represents a request to transfer funds from a ledger account to an
+ * external payout method.
  */
 export interface Withdrawal {
   /**
@@ -290,8 +290,8 @@ export type WithdrawalStatus =
   | 'denied';
 
 /**
- * A withdrawal represents a request to transfer funds from a company's ledger
- * account to an external payout method.
+ * A withdrawal represents a request to transfer funds from a ledger account to an
+ * external payout method.
  */
 export interface WithdrawalListResponse {
   /**

@@ -84,7 +84,7 @@ export type FeeMarkupType =
 
 /**
  * A fee markup configuration that defines additional charges applied to
- * transactions for a company.
+ * transactions for a platform's connected accounts.
  */
 export interface FeeMarkupCreateResponse {
   /**
@@ -128,7 +128,7 @@ export interface FeeMarkupCreateResponse {
 
 /**
  * A fee markup configuration that defines additional charges applied to
- * transactions for a company.
+ * transactions for a platform's connected accounts.
  */
 export interface FeeMarkupListResponse {
   /**

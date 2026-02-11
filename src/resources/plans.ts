@@ -122,9 +122,9 @@ export class Plans extends APIResource {
 export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
 
 /**
- * A plan defines pricing and billing terms for a product. Each product can have
- * multiple plans representing different pricing options, such as one-time
- * payments, recurring subscriptions, or free trials.
+ * A plan defines pricing and billing terms for a checkout. Plans can optionally
+ * belong to a product, where they represent different pricing options such as
+ * one-time payments, recurring subscriptions, or free trials.
  */
 export interface PlanListResponse {
   /**

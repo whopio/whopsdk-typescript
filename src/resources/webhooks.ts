@@ -771,8 +771,8 @@ export interface WithdrawalCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A withdrawal represents a request to transfer funds from a company's ledger
-   * account to an external payout method.
+   * A withdrawal represents a request to transfer funds from a ledger account to an
+   * external payout method.
    */
   data: WithdrawalsAPI.Withdrawal;
 
@@ -804,8 +804,8 @@ export interface WithdrawalUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A withdrawal represents a request to transfer funds from a company's ledger
-   * account to an external payout method.
+   * A withdrawal represents a request to transfer funds from a ledger account to an
+   * external payout method.
    */
   data: WithdrawalsAPI.Withdrawal;
 
@@ -997,8 +997,8 @@ export interface VerificationSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An identity verification session used to confirm a user's identity for payout
-   * account eligibility.
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
    */
   data: VerificationSucceededWebhookEvent.Data;
 
@@ -1020,8 +1020,8 @@ export interface VerificationSucceededWebhookEvent {
 
 export namespace VerificationSucceededWebhookEvent {
   /**
-   * An identity verification session used to confirm a user's identity for payout
-   * account eligibility.
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
    */
   export interface Data {
     /**
@@ -1059,8 +1059,8 @@ export interface PaymentCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A payment represents a completed or attempted charge for a membership. Payments
-   * track the amount, status, currency, and payment method used.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1092,8 +1092,8 @@ export interface PaymentSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A payment represents a completed or attempted charge for a membership. Payments
-   * track the amount, status, currency, and payment method used.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1125,8 +1125,8 @@ export interface PaymentFailedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A payment represents a completed or attempted charge for a membership. Payments
-   * track the amount, status, currency, and payment method used.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
   data: Shared.Payment;
 
@@ -1158,8 +1158,8 @@ export interface PaymentPendingWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A payment represents a completed or attempted charge for a membership. Payments
-   * track the amount, status, currency, and payment method used.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
   data: Shared.Payment;
 
