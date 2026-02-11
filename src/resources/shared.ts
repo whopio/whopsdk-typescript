@@ -102,6 +102,12 @@ export interface App {
   name: string;
 
   /**
+   * The whitelisted OAuth callback URLs that users are redirected to after
+   * authorizing the app.
+   */
+  redirect_uris: Array<string>;
+
+  /**
    * The list of permissions this app requests when installed, including both
    * required and optional permissions with justifications.
    */
