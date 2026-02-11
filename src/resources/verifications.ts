@@ -61,8 +61,8 @@ export type VerificationStatus =
   | 'review';
 
 /**
- * An identity verification session used to confirm a user's identity for payout
- * account eligibility.
+ * An identity verification session used to confirm a person or entity's identity
+ * for payout account eligibility.
  */
 export interface VerificationRetrieveResponse {
   /**

@@ -22,7 +22,8 @@ export class LedgerAccounts extends APIResource {
 }
 
 /**
- * Represents a LedgerAccount.
+ * A ledger account represents a financial account on Whop that can hold many
+ * balances.
  */
 export interface LedgerAccountRetrieveResponse {
   /**

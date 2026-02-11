@@ -42,9 +42,8 @@ export class Members extends APIResource {
 export type MemberListResponsesCursorPage = CursorPage<MemberListResponse>;
 
 /**
- * An object representing a connection between a creator and a user/company_buyer.
- * This type should only be made visible to the user/company_buyer who is a part of
- * the connection.
+ * A member represents a user's relationship with a company on Whop, including
+ * their access level, status, and spending history.
  */
 export interface MemberRetrieveResponse {
   /**
@@ -164,9 +163,8 @@ export namespace MemberRetrieveResponse {
 }
 
 /**
- * An object representing a connection between a creator and a user/company_buyer.
- * This type should only be made visible to the user/company_buyer who is a part of
- * the connection.
+ * A member represents a user's relationship with a company on Whop, including
+ * their access level, status, and spending history.
  */
 export interface MemberListResponse {
   /**

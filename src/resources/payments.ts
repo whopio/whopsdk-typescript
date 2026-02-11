@@ -357,8 +357,8 @@ export type PaymentMethodTypes =
   | 'unknown';
 
 /**
- * A payment represents a completed or attempted charge for a membership. Payments
- * track the amount, status, currency, and payment method used.
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
  */
 export interface PaymentListResponse {
   /**
