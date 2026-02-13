@@ -75,11 +75,6 @@ export class CompanyTokenTransactions extends APIResource {
 export type CompanyTokenTransactionListResponsesCursorPage = CursorPage<CompanyTokenTransactionListResponse>;
 
 /**
- * The type of token transaction
- */
-export type BotTokenTransactionTypes = 'add' | 'subtract' | 'transfer';
-
-/**
  * A token transaction records a credit or debit to a member's token balance within
  * a company, including transfers between members.
  */
@@ -131,7 +126,7 @@ export interface CompanyTokenTransaction {
   /**
    * The direction of this token transaction (add, subtract, or transfer).
    */
-  transaction_type: BotTokenTransactionTypes;
+  transaction_type: 'add' | 'subtract' | 'transfer';
 
   /**
    * The user whose token balance was affected by this transaction.
@@ -243,7 +238,7 @@ export interface CompanyTokenTransactionListResponse {
   /**
    * The direction of this token transaction (add, subtract, or transfer).
    */
-  transaction_type: BotTokenTransactionTypes;
+  transaction_type: 'add' | 'subtract' | 'transfer';
 
   /**
    * The user whose token balance was affected by this transaction.
@@ -436,7 +431,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
    * The type of token transaction
    */
-  transaction_type?: BotTokenTransactionTypes | null;
+  transaction_type?: 'add' | 'subtract' | 'transfer' | null;
 
   /**
    * Filter transactions to only those involving this specific user.
@@ -446,7 +441,6 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
 
 export declare namespace CompanyTokenTransactions {
   export {
-    type BotTokenTransactionTypes as BotTokenTransactionTypes,
     type CompanyTokenTransaction as CompanyTokenTransaction,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
