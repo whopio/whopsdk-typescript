@@ -59,6 +59,7 @@ describe('resource invoices', () => {
         visibility: 'visible',
       },
       product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
+      automatically_finalizes_at: '2023-12-01T05:00:00.401Z',
       charge_buyer_fee: true,
       customer_name: 'customer_name',
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
@@ -104,7 +105,7 @@ describe('resource invoices', () => {
       last: 42,
       order: 'id',
       product_ids: ['string'],
-      statuses: ['open'],
+      statuses: ['draft'],
     });
   });
 
