@@ -123,6 +123,13 @@ export declare namespace InvoiceCreateParams {
     product: CreateInvoiceInputWithProductAndMemberID.Product;
 
     /**
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -308,6 +315,13 @@ export declare namespace InvoiceCreateParams {
      * a new product inline.
      */
     product: CreateInvoiceInputWithProductAndEmailAddress.Product;
+
+    /**
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
 
     /**
      * Whether to charge the customer a buyer fee on this invoice.
@@ -496,6 +510,13 @@ export declare namespace InvoiceCreateParams {
     product_id: string;
 
     /**
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -664,6 +685,13 @@ export declare namespace InvoiceCreateParams {
      * The unique identifier of an existing product to create this invoice for.
      */
     product_id: string;
+
+    /**
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
 
     /**
      * Whether to charge the customer a buyer fee on this invoice.
