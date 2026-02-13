@@ -717,7 +717,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/company-token-transactions.ts">BotTokenTransactionTypes</a></code>
 - <code><a href="./src/resources/company-token-transactions.ts">CompanyTokenTransaction</a></code>
 - <code><a href="./src/resources/company-token-transactions.ts">CompanyTokenTransactionListResponse</a></code>
 

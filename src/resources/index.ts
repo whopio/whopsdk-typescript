@@ -61,7 +61,6 @@ export {
 } from './companies';
 export {
   CompanyTokenTransactions,
-  type BotTokenTransactionTypes,
   type CompanyTokenTransaction,
   type CompanyTokenTransactionListResponse,
   type CompanyTokenTransactionCreateParams,

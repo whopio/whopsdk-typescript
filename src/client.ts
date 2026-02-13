@@ -78,7 +78,6 @@ import {
   CompanyUpdateParams,
 } from './resources/companies';
 import {
-  BotTokenTransactionTypes,
   CompanyTokenTransaction,
   CompanyTokenTransactionCreateParams,
   CompanyTokenTransactionListParams,
@@ -1735,7 +1734,6 @@ export declare namespace Whop {
 
   export {
     CompanyTokenTransactions as CompanyTokenTransactions,
-    type BotTokenTransactionTypes as BotTokenTransactionTypes,
     type CompanyTokenTransaction as CompanyTokenTransaction,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
