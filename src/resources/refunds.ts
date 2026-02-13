@@ -54,7 +54,8 @@ export type PaymentProvider =
   | 'platform_balance'
   | 'multi_psp'
   | 'adyen'
-  | 'claritypay';
+  | 'claritypay'
+  | 'checkout_dot_com';
 
 /**
  * The status of the refund reference.

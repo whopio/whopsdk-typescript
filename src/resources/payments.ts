@@ -347,6 +347,7 @@ export type PaymentMethodTypes =
   | 'splitit'
   | 'sunbit'
   | 'swish'
+  | 'tamara'
   | 'twint'
   | 'upi'
   | 'us_bank_account'
