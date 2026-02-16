@@ -327,6 +327,11 @@ export interface AppUpdateParams {
   name?: string | null;
 
   /**
+   * How this app authenticates at the OAuth token endpoint.
+   */
+  oauth_client_type?: 'public' | 'confidential' | null;
+
+  /**
    * The whitelisted OAuth callback URLs that users are redirected to after
    * authorizing the app
    */
