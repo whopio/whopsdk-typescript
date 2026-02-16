@@ -4971,6 +4971,11 @@ export interface Product {
   external_identifier: string | null;
 
   /**
+   * The gallery images for this product, ordered by position.
+   */
+  gallery_images: Array<Product.GalleryImage>;
+
+  /**
    * The commission rate (as a percentage) that affiliates earn on sales through the
    * Whop marketplace global affiliate program. Null if the program is not active.
    */
@@ -5074,6 +5079,26 @@ export namespace Product {
      * The display name of the company shown to customers.
      */
     title: string;
+  }
+
+  /**
+   * Represents an image attachment
+   */
+  export interface GalleryImage {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
   }
 
   /**

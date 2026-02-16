@@ -102,6 +102,7 @@ describe('resource products', () => {
           custom_cta_url: 'custom_cta_url',
           custom_statement_descriptor: 'custom_statement_descriptor',
           description: 'description',
+          gallery_images: [{ id: 'id' }],
           global_affiliate_percentage: 6.9,
           global_affiliate_status: 'enabled',
           headline: 'headline',
