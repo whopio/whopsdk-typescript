@@ -485,6 +485,11 @@ export interface ProductUpdateParams {
   description?: string | null;
 
   /**
+   * The gallery images for the product.
+   */
+  gallery_images?: Array<ProductUpdateParams.GalleryImage> | null;
+
+  /**
    * The commission rate as a percentage that affiliates earn through the global
    * affiliate program.
    */
@@ -688,6 +693,16 @@ export interface ProductUpdateParams {
 }
 
 export namespace ProductUpdateParams {
+  /**
+   * Input for an attachment
+   */
+  export interface GalleryImage {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+
   /**
    * Layout and display configuration for this product on the company's store page.
    */
