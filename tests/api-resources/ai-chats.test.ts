@@ -26,6 +26,7 @@ describe('resource aiChats', () => {
       message_text: 'message_text',
       current_company_id: 'current_company_id',
       message_attachments: [{ id: 'id' }],
+      message_source: 'manual',
       title: 'title',
     });
   });

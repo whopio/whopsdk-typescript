@@ -28,6 +28,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -55,6 +57,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -138,6 +142,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -167,6 +173,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -192,6 +200,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -1316,6 +1326,12 @@ export interface PaymentListParams extends CursorPageParams {
    * identifiers.
    */
   product_ids?: Array<string> | null;
+
+  /**
+   * Search payments by user ID, membership ID, user email, name, or username. Email
+   * filtering requires the member:email:read permission.
+   */
+  query?: string | null;
 
   /**
    * Filter payments by their current status.

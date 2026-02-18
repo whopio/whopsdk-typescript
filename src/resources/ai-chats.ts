@@ -208,6 +208,11 @@ export interface AIChatCreateParams {
   message_attachments?: Array<AIChatCreateParams.MessageAttachment> | null;
 
   /**
+   * The source of an AI chat message
+   */
+  message_source?: 'manual' | 'suggestion' | 'link' | null;
+
+  /**
    * An optional display title for the AI chat thread (e.g., "Help with billing").
    */
   title?: string | null;

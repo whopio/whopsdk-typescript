@@ -111,6 +111,7 @@ describe('resource payments', () => {
           order: 'final_amount',
           plan_ids: ['string'],
           product_ids: ['string'],
+          query: 'query',
           statuses: ['draft'],
           substatuses: ['succeeded'],
         },

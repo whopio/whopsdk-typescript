@@ -3,6 +3,7 @@
 import * as Shared from './shared';
 import * as AppsAPI from './apps';
 import * as CheckoutConfigurationsAPI from './checkout-configurations';
+import * as DisputesAPI from './disputes';
 import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
 import { CursorPage } from '../core/pagination';
@@ -4229,9 +4230,27 @@ export interface Payment {
   dispute_alerted_at: string | null;
 
   /**
+   * The disputes attached to this payment. Null if the actor in context does not
+   * have the payment:dispute:read permission.
+   */
+  disputes: Array<Payment.Dispute> | null;
+
+  /**
    * If the payment failed, the reason for the failure.
    */
   failure_message: string | null;
+
+  /**
+   * The number of financing installments for the payment. Present if the payment is
+   * a financing payment (e.g. Splitit, Klarna, etc.).
+   */
+  financing_installments_count: number | null;
+
+  /**
+   * The financing transactions attached to this payment. Present if the payment is a
+   * financing payment (e.g. Splitit, Klarna, etc.).
+   */
+  financing_transactions: Array<Payment.FinancingTransaction>;
 
   /**
    * The time of the last payment attempt.
@@ -4311,6 +4330,13 @@ export interface Payment {
    * When the payment was refunded (if applicable).
    */
   refunded_at: string | null;
+
+  /**
+   * The resolution center cases opened by the customer on this payment. Null if the
+   * actor in context does not have the payment:resolution_center_case:read
+   * permission.
+   */
+  resolutions: Array<Payment.Resolution> | null;
 
   /**
    * True when the payment status is `open` and its membership is in one of the
@@ -4450,6 +4476,107 @@ export namespace Payment {
      * The written name of the company.
      */
     title: string;
+  }
+
+  /**
+   * A dispute is a chargeback or payment challenge filed against a company,
+   * including evidence and response status.
+   */
+  export interface Dispute {
+    /**
+     * The unique identifier for the dispute.
+     */
+    id: string;
+
+    /**
+     * The disputed amount in the specified currency, formatted as a decimal.
+     */
+    amount: number;
+
+    /**
+     * The three-letter ISO currency code for the disputed amount.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * Whether the dispute evidence can still be edited and submitted. Returns true
+     * only when the dispute status requires a response.
+     */
+    editable: boolean | null;
+
+    /**
+     * The deadline by which dispute evidence must be submitted. Null if no response
+     * deadline is set.
+     */
+    needs_response_by: string | null;
+
+    /**
+     * Additional freeform notes submitted by the company as part of the dispute
+     * evidence.
+     */
+    notes: string | null;
+
+    /**
+     * A human-readable reason for the dispute.
+     */
+    reason: string | null;
+
+    /**
+     * The current status of the dispute lifecycle, such as needs_response,
+     * under_review, won, or lost.
+     */
+    status: DisputesAPI.DisputeStatuses;
+  }
+
+  /**
+   * A payment transaction.
+   */
+  export interface FinancingTransaction {
+    /**
+     * The unique identifier for the payment transaction.
+     */
+    id: string;
+
+    /**
+     * The amount of the payment transaction.
+     */
+    amount: number;
+
+    /**
+     * The date and time the payment transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The status of the payment transaction.
+     */
+    status:
+      | 'succeeded'
+      | 'declined'
+      | 'error'
+      | 'pending'
+      | 'created'
+      | 'expired'
+      | 'won'
+      | 'rejected'
+      | 'lost'
+      | 'prevented';
+
+    /**
+     * The type of the payment transaction.
+     */
+    transaction_type:
+      | 'purchase'
+      | 'authorize'
+      | 'capture'
+      | 'refund'
+      | 'cancel'
+      | 'verify'
+      | 'chargeback'
+      | 'three_d_secure'
+      | 'fraud_screening'
+      | 'authorization'
+      | 'installment';
   }
 
   /**
@@ -4603,6 +4730,75 @@ export namespace Payment {
      * The type (% or flat amount) of the promo.
      */
     promo_type: Shared.PromoType;
+  }
+
+  /**
+   * A resolution is a dispute or support case between a buyer and seller, tracking
+   * the issue, status, and outcome.
+   */
+  export interface Resolution {
+    /**
+     * The unique identifier for the resolution.
+     */
+    id: string;
+
+    /**
+     * Whether the customer has filed an appeal after the initial resolution decision.
+     */
+    customer_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the customer.
+     */
+    customer_response_actions: Array<'respond' | 'appeal' | 'withdraw'>;
+
+    /**
+     * The deadline by which the next response is required. Null if no deadline is
+     * currently active. As a Unix timestamp.
+     */
+    due_date: string | null;
+
+    /**
+     * The category of the dispute.
+     */
+    issue:
+      | 'forgot_to_cancel'
+      | 'item_not_received'
+      | 'significantly_not_as_described'
+      | 'unauthorized_transaction'
+      | 'product_unacceptable';
+
+    /**
+     * Whether the merchant has filed an appeal after the initial resolution decision.
+     */
+    merchant_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the merchant.
+     */
+    merchant_response_actions: Array<'accept' | 'deny' | 'request_more_info' | 'appeal' | 'respond'>;
+
+    /**
+     * The list of actions currently available to the Whop platform for moderating this
+     * resolution.
+     */
+    platform_response_actions: Array<
+      'request_buyer_info' | 'request_merchant_info' | 'merchant_wins' | 'platform_refund' | 'merchant_refund'
+    >;
+
+    /**
+     * The current status of the resolution case, indicating which party needs to
+     * respond or if the case is closed.
+     */
+    status:
+      | 'merchant_response_needed'
+      | 'customer_response_needed'
+      | 'merchant_info_needed'
+      | 'customer_info_needed'
+      | 'under_platform_review'
+      | 'customer_won'
+      | 'merchant_won'
+      | 'customer_withdrew';
   }
 
   /**
