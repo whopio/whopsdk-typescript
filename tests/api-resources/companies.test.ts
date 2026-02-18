@@ -74,6 +74,7 @@ describe('resource companies', () => {
           industry_type: 'trading',
           logo: { id: 'id' },
           send_customer_emails: true,
+          target_audience: 'target_audience',
           title: 'title',
         },
         { path: '/_stainless_unknown_path' },
