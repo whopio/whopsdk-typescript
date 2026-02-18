@@ -564,6 +564,12 @@ export interface CompanyUpdateParams {
   send_customer_emails?: boolean | null;
 
   /**
+   * The target audience for this company (e.g., 'beginner day traders aged 18-25
+   * looking to learn options').
+   */
+  target_audience?: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title?: string | null;
