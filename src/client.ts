@@ -84,6 +84,7 @@ import {
   CompanyTokenTransactionListResponse,
   CompanyTokenTransactionListResponsesCursorPage,
   CompanyTokenTransactions,
+  TransactionType,
 } from './resources/company-token-transactions';
 import {
   CourseChapter,
@@ -301,6 +302,7 @@ import {
   Plans,
 } from './resources/plans';
 import {
+  IndustryGroups,
   ProductCreateParams,
   ProductDeleteResponse,
   ProductListParams,
@@ -1317,6 +1319,7 @@ export declare namespace Whop {
 
   export {
     Products as Products,
+    type IndustryGroups as IndustryGroups,
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
@@ -1743,6 +1746,7 @@ export declare namespace Whop {
   export {
     CompanyTokenTransactions as CompanyTokenTransactions,
     type CompanyTokenTransaction as CompanyTokenTransaction,
+    type TransactionType as TransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
