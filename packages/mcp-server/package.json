@@ -1,5 +1,5 @@
 {
-  "name": "@whop/sdk-mcp",
+  "name": "@whop/mcp",
   "version": "0.0.27",
   "description": "The official MCP Server for the Whop API",
   "author": "Whop <>",
@@ -73,8 +73,8 @@
     "tsconfig-paths": "^4.0.0"
   },
   "imports": {
-    "@whop/sdk-mcp": ".",
-    "@whop/sdk-mcp/*": "./src/*"
+    "@whop/mcp": ".",
+    "@whop/mcp/*": "./src/*"
   },
   "exports": {
     ".": {
