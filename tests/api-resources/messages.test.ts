@@ -26,6 +26,7 @@ describe('resource messages', () => {
       channel_id: 'channel_id',
       content: 'content',
       attachments: [{ id: 'id' }],
+      auto_detect_links: true,
       poll: { options: [{ id: 'id', text: 'text' }] },
       replying_to_message_id: 'replying_to_message_id',
     });
