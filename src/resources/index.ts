@@ -62,7 +62,7 @@ export {
 export {
   CompanyTokenTransactions,
   type CompanyTokenTransaction,
-  type TransactionType,
+  type CompanyTokenTransactionType,
   type CompanyTokenTransactionListResponse,
   type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListParams,
