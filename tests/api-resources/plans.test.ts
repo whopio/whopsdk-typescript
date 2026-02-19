@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource plans', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.plans.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -23,7 +23,7 @@ describe('resource plans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.plans.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -64,7 +64,7 @@ describe('resource plans', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.plans.retrieve('plan_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -76,7 +76,7 @@ describe('resource plans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.plans.update('plan_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -88,7 +88,7 @@ describe('resource plans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -134,7 +134,7 @@ describe('resource plans', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.plans.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -146,7 +146,7 @@ describe('resource plans', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.plans.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -165,7 +165,7 @@ describe('resource plans', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.plans.delete('plan_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

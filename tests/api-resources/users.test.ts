@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource users', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.users.retrieve('user_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('checkAccess: only required params', async () => {
     const responsePromise = client.users.checkAccess('resource_id', { id: 'user_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -32,12 +32,12 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('checkAccess: required and optional params', async () => {
     const response = await client.users.checkAccess('resource_id', { id: 'user_xxxxxxxxxxxxx' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateProfile', async () => {
     const responsePromise = client.users.updateProfile();
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource users', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateProfile: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource shipments', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.shipments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -24,7 +24,7 @@ describe('resource shipments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.shipments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -33,7 +33,7 @@ describe('resource shipments', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.shipments.retrieve('ship_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -45,7 +45,7 @@ describe('resource shipments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.shipments.list();
     const rawResponse = await responsePromise.asResponse();
@@ -57,7 +57,7 @@ describe('resource shipments', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

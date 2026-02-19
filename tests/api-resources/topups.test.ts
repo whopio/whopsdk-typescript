@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource topups', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.topups.create({
       amount: 6.9,
@@ -25,7 +25,7 @@ describe('resource topups', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.topups.create({
       amount: 6.9,

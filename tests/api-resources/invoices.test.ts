@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource invoices', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
@@ -27,7 +27,7 @@ describe('resource invoices', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
@@ -67,7 +67,7 @@ describe('resource invoices', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.invoices.retrieve('inv_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -79,7 +79,7 @@ describe('resource invoices', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -91,7 +91,7 @@ describe('resource invoices', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.invoices.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -109,7 +109,7 @@ describe('resource invoices', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('void', async () => {
     const responsePromise = client.invoices.void('inv_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

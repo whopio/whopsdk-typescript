@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource ledgerAccounts', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.ledgerAccounts.retrieve('ldgr_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
