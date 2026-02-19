@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource accountLinks', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.accountLinks.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -25,7 +25,7 @@ describe('resource accountLinks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.accountLinks.create({
       company_id: 'biz_xxxxxxxxxxxxxx',

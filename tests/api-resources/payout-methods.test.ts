@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource payoutMethods', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.payoutMethods.retrieve('potk_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource payoutMethods', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.payoutMethods.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource payoutMethods', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.payoutMethods.list({
       company_id: 'biz_xxxxxxxxxxxxxx',

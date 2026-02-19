@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource disputes', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.disputes.retrieve('dspt_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource disputes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.disputes.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource disputes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.disputes.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -46,7 +46,7 @@ describe('resource disputes', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('submitEvidence', async () => {
     const responsePromise = client.disputes.submitEvidence('dspt_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -58,7 +58,7 @@ describe('resource disputes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateEvidence', async () => {
     const responsePromise = client.disputes.updateEvidence('dspt_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -70,7 +70,7 @@ describe('resource disputes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('updateEvidence: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

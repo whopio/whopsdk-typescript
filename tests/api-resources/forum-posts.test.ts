@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource forumPosts', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.forumPosts.create({ experience_id: 'exp_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource forumPosts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.forumPosts.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
@@ -38,7 +38,7 @@ describe('resource forumPosts', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.forumPosts.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
@@ -50,7 +50,7 @@ describe('resource forumPosts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.forumPosts.update('id');
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource forumPosts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -80,7 +80,7 @@ describe('resource forumPosts', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.forumPosts.list({ experience_id: 'exp_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -92,7 +92,7 @@ describe('resource forumPosts', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.forumPosts.list({
       experience_id: 'exp_xxxxxxxxxxxxxx',

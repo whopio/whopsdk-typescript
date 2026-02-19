@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource withdrawals', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.withdrawals.create({
       amount: 6.9,
@@ -24,7 +24,7 @@ describe('resource withdrawals', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.withdrawals.create({
       amount: 6.9,
@@ -36,7 +36,7 @@ describe('resource withdrawals', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.withdrawals.retrieve('wdrl_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource withdrawals', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.withdrawals.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -60,7 +60,7 @@ describe('resource withdrawals', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.withdrawals.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
