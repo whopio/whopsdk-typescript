@@ -255,6 +255,11 @@ export interface MessageCreateParams {
   attachments?: Array<MessageCreateParams.Attachment> | null;
 
   /**
+   * Automatically detect URLs in the message and generate link previews.
+   */
+  auto_detect_links?: boolean | null;
+
+  /**
    * A poll to attach to this message, allowing recipients to vote on options.
    */
   poll?: MessageCreateParams.Poll | null;
