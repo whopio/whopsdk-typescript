@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Reactions extends APIResource {
   /**
-   * Creates a new reaction
+   * Add an emoji reaction or poll vote to a message or forum post. In forums, the
+   * reaction is always a like.
    *
    * Required permissions:
    *
@@ -20,7 +21,7 @@ export class Reactions extends APIResource {
   }
 
   /**
-   * Retrieves a reaction
+   * Retrieves the details of an existing reaction.
    *
    * Required permissions:
    *
@@ -31,7 +32,8 @@ export class Reactions extends APIResource {
   }
 
   /**
-   * Lists reactions for a post or a message
+   * Returns a paginated list of emoji reactions on a specific message or forum post,
+   * sorted by most recent.
    *
    * Required permissions:
    *
@@ -45,7 +47,8 @@ export class Reactions extends APIResource {
   }
 
   /**
-   * Deletes a reaction
+   * Remove an emoji reaction from a message or forum post. Only the reaction author
+   * or a channel admin can remove a reaction.
    *
    * Required permissions:
    *
@@ -64,7 +67,7 @@ export class Reactions extends APIResource {
 export type ReactionListResponsesCursorPage = CursorPage<ReactionListResponse>;
 
 /**
- * Represents a reaction to a feed post
+ * A single reaction left by a user on a feed post, such as a like or emoji.
  */
 export interface ReactionListResponse {
   /**
@@ -73,24 +76,25 @@ export interface ReactionListResponse {
   id: string;
 
   /**
-   * The emoji that was used in shortcode format (:heart:)
+   * The emoji used for this reaction in shortcode format. Null if the reaction type
+   * is not emoji.
    */
   emoji: string | null;
 
   /**
-   * The ID of the post this reaction belongs to
+   * The unique identifier of the post this reaction was left on.
    */
   resource_id: string;
 
   /**
-   * The user who reacted to the post
+   * The user who left this reaction on the post.
    */
   user: ReactionListResponse.User;
 }
 
 export namespace ReactionListResponse {
   /**
-   * The user who reacted to the post
+   * The user who left this reaction on the post.
    */
   export interface User {
     /**
@@ -99,12 +103,12 @@ export namespace ReactionListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -117,26 +121,26 @@ export type ReactionDeleteResponse = boolean;
 
 export interface ReactionCreateParams {
   /**
-   * The ID of the post or message to react to.
+   * The unique identifier of the message or forum post to react to.
    */
   resource_id: string;
 
   /**
-   * The emoji to react with (e.g., :heart: or '😀'). It will be ignored in forums,
-   * as everything will be :heart:
+   * The emoji to react with, in shortcode or unicode format. For example, ':heart:'
+   * or a unicode emoji. Ignored in forums where reactions are always likes.
    */
   emoji?: string | null;
 
   /**
-   * The ID of the poll option to vote for. Only valid for messages or posts with
-   * polls.
+   * The unique identifier of a poll option to vote for. Only valid when the target
+   * message or post contains a poll.
    */
   poll_option_id?: string | null;
 }
 
 export interface ReactionListParams extends CursorPageParams {
   /**
-   * The ID of the post or message to list reactions for
+   * The unique identifier of the message or forum post to list reactions for.
    */
   resource_id: string;
 
@@ -158,7 +162,9 @@ export interface ReactionListParams extends CursorPageParams {
 
 export interface ReactionDeleteParams {
   /**
-   * The emoji to remove (e.g., :heart: or '😀').
+   * The emoji to remove, in shortcode or unicode format. For example, ':heart:' or a
+   * unicode emoji. Required when the id refers to a message or post instead of a
+   * reaction.
    */
   emoji?: string | null;
 }

@@ -61,8 +61,8 @@ export {
 } from './companies';
 export {
   CompanyTokenTransactions,
-  type BotTokenTransactionTypes,
   type CompanyTokenTransaction,
+  type CompanyTokenTransactionType,
   type CompanyTokenTransactionListResponse,
   type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListParams,
@@ -290,6 +290,7 @@ export {
 } from './plans';
 export {
   Products,
+  type IndustryGroups,
   type ProductDeleteResponse,
   type ProductCreateParams,
   type ProductUpdateParams,

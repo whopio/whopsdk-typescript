@@ -11,57 +11,19 @@ import { ClientOptions } from '@whop/sdk';
 import Whop from '@whop/sdk';
 import { codeTool } from './code-tool';
 import docsSearchTool from './docs-search-tool';
+import { getInstructions } from './instructions';
 import { McpOptions } from './options';
 import { blockedMethodsForCodeTool } from './methods';
-import { HandlerFunction, McpTool } from './types';
+import { HandlerFunction, McpRequestContext, ToolCallResult, McpTool } from './types';
 
-export { McpOptions } from './options';
-export { ClientOptions } from '@whop/sdk';
-
-async function getInstructions() {
-  // This API key is optional; providing it allows the server to fetch instructions for unreleased versions.
-  const stainlessAPIKey = readEnv('STAINLESS_API_KEY');
-  const response = await fetch(
-    readEnv('CODE_MODE_INSTRUCTIONS_URL') ?? 'https://api.stainless.com/api/ai/instructions/whopsdk',
-    {
-      method: 'GET',
-      headers: { ...(stainlessAPIKey && { Authorization: stainlessAPIKey }) },
-    },
-  );
-
-  let instructions: string | undefined;
-  if (!response.ok) {
-    console.warn(
-      'Warning: failed to retrieve MCP server instructions. Proceeding with default instructions...',
-    );
-
-    instructions = `
-      This is the whopsdk MCP server. You will use Code Mode to help the user perform
-      actions. You can use search_docs tool to learn about how to take action with this server. Then,
-      you will write TypeScript code using the execute tool take action. It is CRITICAL that you be
-      thoughtful and deliberate when executing code. Always try to entirely solve the problem in code
-      block: it can be as long as you need to get the job done!
-    `;
-  }
-
-  instructions ??= ((await response.json()) as { instructions: string }).instructions;
-  instructions = `
-    The current time in Unix timestamps is ${Date.now()}.
-
-    ${instructions}
-  `;
-
-  return instructions;
-}
-
-export const newMcpServer = async () =>
+export const newMcpServer = async (stainlessApiKey: string | undefined) =>
   new McpServer(
     {
       name: 'whop_sdk_api',
-      version: '0.0.27',
+      version: '0.0.28',
     },
     {
-      instructions: await getInstructions(),
+      instructions: await getInstructions(stainlessApiKey),
       capabilities: { tools: {}, logging: {} },
     },
   );
@@ -74,6 +36,7 @@ export async function initMcpServer(params: {
   server: Server | McpServer;
   clientOptions?: ClientOptions;
   mcpOptions?: McpOptions;
+  stainlessApiKey?: string | undefined;
 }) {
   const server = params.server instanceof McpServer ? params.server.server : params.server;
 
@@ -117,7 +80,14 @@ export async function initMcpServer(params: {
       throw new Error(`Unknown tool: ${name}`);
     }
 
-    return executeHandler(mcpTool.handler, client, args);
+    return executeHandler({
+      handler: mcpTool.handler,
+      reqContext: {
+        client,
+        stainlessApiKey: params.stainlessApiKey ?? params.mcpOptions?.stainlessApiKey,
+      },
+      args,
+    });
   });
 
   server.setRequestHandler(SetLevelRequestSchema, async (request) => {
@@ -162,34 +132,14 @@ export function selectTools(options?: McpOptions): McpTool[] {
 /**
  * Runs the provided handler with the given client and arguments.
  */
-export async function executeHandler(
-  handler: HandlerFunction,
-  client: Whop,
-  args: Record<string, unknown> | undefined,
-) {
-  return await handler(client, args || {});
+export async function executeHandler({
+  handler,
+  reqContext,
+  args,
+}: {
+  handler: HandlerFunction;
+  reqContext: McpRequestContext;
+  args: Record<string, unknown> | undefined;
+}): Promise<ToolCallResult> {
+  return await handler({ reqContext, args: args || {} });
 }
-
-export const readEnv = (env: string): string | undefined => {
-  if (typeof (globalThis as any).process !== 'undefined') {
-    return (globalThis as any).process.env?.[env]?.trim();
-  } else if (typeof (globalThis as any).Deno !== 'undefined') {
-    return (globalThis as any).Deno.env?.get?.(env)?.trim();
-  }
-  return;
-};
-
-export const readEnvOrError = (env: string): string => {
-  let envValue = readEnv(env);
-  if (envValue === undefined) {
-    throw new Error(`Environment variable ${env} is not set`);
-  }
-  return envValue;
-};
-
-export const requireValue = <T>(value: T | undefined, description: string): T => {
-  if (value === undefined) {
-    throw new Error(`Missing required value: ${description}`);
-  }
-  return value;
-};

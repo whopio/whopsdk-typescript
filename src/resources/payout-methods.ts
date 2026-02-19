@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class PayoutMethods extends APIResource {
   /**
-   * Retrieves a payout method by ID
+   * Retrieves the details of an existing payout method.
    *
    * Required permissions:
    *
@@ -20,7 +20,8 @@ export class PayoutMethods extends APIResource {
   }
 
   /**
-   * Lists payout destinations for a company
+   * Returns a list of active payout methods configured for a company, ordered by
+   * most recently created.
    *
    * Required permissions:
    *
@@ -51,7 +52,8 @@ export type PayoutDestinationCategory =
   | 'unknown';
 
 /**
- * An object representing an user's setup payout destination.
+ * A configured payout destination where a user receives earned funds, such as a
+ * bank account or digital wallet.
  */
 export interface PayoutMethodRetrieveResponse {
   /**
@@ -60,13 +62,14 @@ export interface PayoutMethodRetrieveResponse {
   id: string;
 
   /**
-   * A reference to identify the payout destination, such as the last 4 digits of an
-   * account number or an email address.
+   * A masked identifier for the payout destination, such as the last four digits of
+   * a bank account or an email address. Null if no reference is available.
    */
   account_reference: string | null;
 
   /**
-   * The company associated with the payout token
+   * The company associated with this payout destination. Null if not linked to a
+   * specific company.
    */
   company: PayoutMethodRetrieveResponse.Company | null;
 
@@ -76,36 +79,40 @@ export interface PayoutMethodRetrieveResponse {
   created_at: string;
 
   /**
-   * The currency code of the payout destination. This is the currency that payouts
-   * will be made in for this token.
+   * The three-letter ISO currency code that payouts are delivered in for this
+   * destination.
    */
   currency: string;
 
   /**
-   * The payout destination associated with the payout token
+   * The payout destination configuration linked to this token. Null if not yet
+   * configured.
    */
   destination: PayoutMethodRetrieveResponse.Destination | null;
 
   /**
-   * The name of the bank or financial institution.
+   * The name of the bank or financial institution receiving payouts. Null if not
+   * applicable or not provided.
    */
   institution_name: string | null;
 
   /**
-   * Whether this payout token is the default for the payout account
+   * Whether this is the default payout destination for the associated payout
+   * account.
    */
   is_default: boolean;
 
   /**
-   * An optional nickname for the payout token to help the user identify it. This is
-   * not used by the provider and is only for the user's reference.
+   * A user-defined label to help identify this payout destination. Not sent to the
+   * provider. Null if no nickname has been set.
    */
   nickname: string | null;
 }
 
 export namespace PayoutMethodRetrieveResponse {
   /**
-   * The company associated with the payout token
+   * The company associated with this payout destination. Null if not linked to a
+   * specific company.
    */
   export interface Company {
     /**
@@ -115,7 +122,8 @@ export namespace PayoutMethodRetrieveResponse {
   }
 
   /**
-   * The payout destination associated with the payout token
+   * The payout destination configuration linked to this token. Null if not yet
+   * configured.
    */
   export interface Destination {
     /**
@@ -136,7 +144,8 @@ export namespace PayoutMethodRetrieveResponse {
 }
 
 /**
- * An object representing an user's setup payout destination.
+ * A configured payout destination where a user receives earned funds, such as a
+ * bank account or digital wallet.
  */
 export interface PayoutMethodListResponse {
   /**
@@ -145,13 +154,14 @@ export interface PayoutMethodListResponse {
   id: string;
 
   /**
-   * A reference to identify the payout destination, such as the last 4 digits of an
-   * account number or an email address.
+   * A masked identifier for the payout destination, such as the last four digits of
+   * a bank account or an email address. Null if no reference is available.
    */
   account_reference: string | null;
 
   /**
-   * The company associated with the payout token
+   * The company associated with this payout destination. Null if not linked to a
+   * specific company.
    */
   company: PayoutMethodListResponse.Company | null;
 
@@ -161,36 +171,40 @@ export interface PayoutMethodListResponse {
   created_at: string;
 
   /**
-   * The currency code of the payout destination. This is the currency that payouts
-   * will be made in for this token.
+   * The three-letter ISO currency code that payouts are delivered in for this
+   * destination.
    */
   currency: string;
 
   /**
-   * The payout destination associated with the payout token
+   * The payout destination configuration linked to this token. Null if not yet
+   * configured.
    */
   destination: PayoutMethodListResponse.Destination | null;
 
   /**
-   * The name of the bank or financial institution.
+   * The name of the bank or financial institution receiving payouts. Null if not
+   * applicable or not provided.
    */
   institution_name: string | null;
 
   /**
-   * Whether this payout token is the default for the payout account
+   * Whether this is the default payout destination for the associated payout
+   * account.
    */
   is_default: boolean;
 
   /**
-   * An optional nickname for the payout token to help the user identify it. This is
-   * not used by the provider and is only for the user's reference.
+   * A user-defined label to help identify this payout destination. Not sent to the
+   * provider. Null if no nickname has been set.
    */
   nickname: string | null;
 }
 
 export namespace PayoutMethodListResponse {
   /**
-   * The company associated with the payout token
+   * The company associated with this payout destination. Null if not linked to a
+   * specific company.
    */
   export interface Company {
     /**
@@ -200,7 +214,8 @@ export namespace PayoutMethodListResponse {
   }
 
   /**
-   * The payout destination associated with the payout token
+   * The payout destination configuration linked to this token. Null if not yet
+   * configured.
    */
   export interface Destination {
     /**
@@ -222,7 +237,7 @@ export namespace PayoutMethodListResponse {
 
 export interface PayoutMethodListParams extends CursorPageParams {
   /**
-   * The company ID to list payout methods for.
+   * The unique identifier of the company to list payout methods for.
    */
   company_id: string;
 

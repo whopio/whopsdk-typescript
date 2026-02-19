@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class LedgerAccounts extends APIResource {
   /**
-   * Retrieves a ledger account by its ID, company ID or user ID
+   * Retrieves the details of an existing ledger account.
    *
    * Required permissions:
    *
@@ -22,7 +22,8 @@ export class LedgerAccounts extends APIResource {
 }
 
 /**
- * Represents a LedgerAccount.
+ * A ledger account represents a financial account on Whop that can hold many
+ * balances.
  */
 export interface LedgerAccountRetrieveResponse {
   /**
@@ -98,7 +99,7 @@ export namespace LedgerAccountRetrieveResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
@@ -108,7 +109,7 @@ export namespace LedgerAccountRetrieveResponse {
     typename: 'User';
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -124,12 +125,12 @@ export namespace LedgerAccountRetrieveResponse {
     id: string;
 
     /**
-     * The slug/route of the company on the Whop site.
+     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
      */
     route: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
 
@@ -256,12 +257,13 @@ export namespace LedgerAccountRetrieveResponse {
       last_error_code: VerificationsAPI.VerificationErrorCode | null;
 
       /**
-       * The last error reason that occurred during the verification.
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
        */
       last_error_reason: string | null;
 
       /**
-       * The status of the verification.
+       * The current status of this verification session.
        */
       status: VerificationsAPI.VerificationStatus;
     }

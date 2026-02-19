@@ -25,6 +25,7 @@ describe('resource forumPosts', () => {
     const response = await client.forumPosts.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
       attachments: [{ id: 'id' }],
+      company_id: 'biz_xxxxxxxxxxxxxx',
       content: 'content',
       is_mention: true,
       parent_id: 'parent_id',

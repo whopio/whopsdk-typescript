@@ -9,14 +9,15 @@ import { uploadFile } from '../lib/upload-file';
 
 export class Files extends APIResource {
   /**
-   * Creates a file and returns a presigned URL for upload
+   * Create a new file record and receive a presigned URL for uploading content to
+   * S3.
    */
   create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
     return this._client.post('/files', { body, ...options });
   }
 
   /**
-   * Retrieves a file by its ID
+   * Retrieves the details of an existing file.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
     return this._client.get(path`/files/${id}`, options);
@@ -42,7 +43,7 @@ export class Files extends APIResource {
 export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
 
 /**
- * A file that has been uploaded or is pending upload
+ * A file that has been uploaded or is pending upload.
  */
 export interface FileCreateResponse {
   /**
@@ -51,43 +52,45 @@ export interface FileCreateResponse {
   id: string;
 
   /**
-   * The MIME type of the file (e.g., image/jpeg, video/mp4)
+   * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
    */
   content_type: string | null;
 
   /**
-   * The name of the file
+   * The original filename of the uploaded file, including its file extension.
    */
   filename: string | null;
 
   /**
-   * The size of the file in bytes
+   * The file size in bytes. Null if the file has not finished uploading.
    */
   size: string | null;
 
   /**
-   * Headers to include in the upload request (only on create)
+   * Headers to include in the upload request. Only present in the response from the
+   * create mutation.
    */
   upload_headers: { [key: string]: unknown } | null;
 
   /**
-   * The upload status of the file
+   * The current upload status of the file (e.g., pending, ready).
    */
   upload_status: UploadStatus;
 
   /**
-   * The presigned URL to upload the file to (only on create)
+   * The presigned URL to upload the file contents to. Only present in the response
+   * from the create mutation.
    */
   upload_url: string | null;
 
   /**
-   * The URL to access the file
+   * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
 }
 
 /**
- * A file that has been uploaded or is pending upload
+ * A file that has been uploaded or is pending upload.
  */
 export interface FileRetrieveResponse {
   /**
@@ -96,34 +99,35 @@ export interface FileRetrieveResponse {
   id: string;
 
   /**
-   * The MIME type of the file (e.g., image/jpeg, video/mp4)
+   * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
    */
   content_type: string | null;
 
   /**
-   * The name of the file
+   * The original filename of the uploaded file, including its file extension.
    */
   filename: string | null;
 
   /**
-   * The size of the file in bytes
+   * The file size in bytes. Null if the file has not finished uploading.
    */
   size: string | null;
 
   /**
-   * The upload status of the file
+   * The current upload status of the file (e.g., pending, ready).
    */
   upload_status: UploadStatus;
 
   /**
-   * The URL to access the file
+   * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
 }
 
 export interface FileCreateParams {
   /**
-   * The filename of the file
+   * The name of the file including its extension (e.g., "photo.png" or
+   * "document.pdf").
    */
   filename: string;
 }

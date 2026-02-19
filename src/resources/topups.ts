@@ -7,7 +7,8 @@ import { RequestOptions } from '../internal/request-options';
 
 export class Topups extends APIResource {
   /**
-   * Add funds to your platform balance by charging a stored payment method.
+   * Add funds to a company's platform balance by charging a stored payment method.
+   * Top-ups have no fees or taxes and do not count as revenue.
    *
    * Required permissions:
    *
@@ -29,8 +30,8 @@ export class Topups extends APIResource {
 }
 
 /**
- * A payment represents a completed or attempted charge for a membership. Payments
- * track the amount, status, currency, and payment method used.
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
  */
 export interface TopupCreateResponse {
   /**
@@ -54,7 +55,8 @@ export interface TopupCreateResponse {
   failure_message: string | null;
 
   /**
-   * The datetime the payment was paid
+   * The time at which this payment was successfully collected. Null if the payment
+   * has not yet succeeded. As a Unix timestamp.
    */
   paid_at: string | null;
 
@@ -71,23 +73,23 @@ export interface TopupCreateResponse {
 
 export interface TopupCreateParams {
   /**
-   * The amount to add to the balance. Provided as a number in the specified
-   * currency. Eg: 50.00 for $50.00 USD.
+   * The amount to add to the balance in the specified currency. For example, 50.00
+   * for $50.00 USD.
    */
   amount: number;
 
   /**
-   * The ID of the company to add funds to.
+   * The unique identifier of the company to add funds to, starting with 'biz\_'.
    */
   company_id: string;
 
   /**
-   * The currency of the top-up.
+   * The currency for the top-up amount, such as 'usd'.
    */
   currency: Shared.Currency;
 
   /**
-   * The ID of the payment method to charge for the top-up.
+   * The unique identifier of the stored payment method to charge for the top-up.
    */
   payment_method_id: string;
 }

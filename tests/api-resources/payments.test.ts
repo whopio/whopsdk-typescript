@@ -50,6 +50,7 @@ describe('resource payments', () => {
           global_affiliate_percentage: 6.9,
           global_affiliate_status: 'enabled',
           headline: 'headline',
+          industry_group: 'academic_and_test_prep',
           industry_type: 'trading',
           product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
           redirect_purchase_url: 'redirect_purchase_url',
@@ -79,8 +80,8 @@ describe('resource payments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+  test.skip('list', async () => {
+    const responsePromise = client.payments.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -91,25 +92,32 @@ describe('resource payments', () => {
   });
 
   // Prism tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.payments.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      billing_reasons: ['subscription_create'],
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      currencies: ['usd'],
-      direction: 'asc',
-      first: 42,
-      include_free: true,
-      last: 42,
-      order: 'final_amount',
-      plan_ids: ['string'],
-      product_ids: ['string'],
-      statuses: ['draft'],
-      substatuses: ['succeeded'],
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.list(
+        {
+          after: 'after',
+          before: 'before',
+          billing_reasons: ['subscription_create'],
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          currencies: ['usd'],
+          direction: 'asc',
+          first: 42,
+          include_free: true,
+          last: 42,
+          order: 'final_amount',
+          plan_ids: ['string'],
+          product_ids: ['string'],
+          query: 'query',
+          statuses: ['draft'],
+          substatuses: ['succeeded'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Prism tests are disabled

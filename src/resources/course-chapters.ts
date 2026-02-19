@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class CourseChapters extends APIResource {
   /**
-   * Creates a new course chapter
+   * Create a new chapter within a course to organize lessons into sections.
    *
    * Required permissions:
    *
@@ -26,7 +26,7 @@ export class CourseChapters extends APIResource {
   }
 
   /**
-   * Retrieves a course chapter by ID
+   * Retrieves the details of an existing course chapter.
    *
    * Required permissions:
    *
@@ -44,7 +44,7 @@ export class CourseChapters extends APIResource {
   }
 
   /**
-   * Updates a course chapter
+   * Update a chapter's title within a course.
    *
    * Required permissions:
    *
@@ -63,7 +63,7 @@ export class CourseChapters extends APIResource {
   }
 
   /**
-   * Lists chapters for a course
+   * Returns a paginated list of chapters within a course, ordered by position.
    *
    * Required permissions:
    *
@@ -90,7 +90,7 @@ export class CourseChapters extends APIResource {
   }
 
   /**
-   * Deletes a course chapter
+   * Permanently delete a chapter and all of its lessons from a course.
    *
    * Required permissions:
    *
@@ -111,7 +111,8 @@ export class CourseChapters extends APIResource {
 export type CourseChapterListResponsesCursorPage = CursorPage<CourseChapterListResponse>;
 
 /**
- * A chapter from the courses app
+ * A grouping of related lessons within a course, used to organize content into
+ * sections.
  */
 export interface CourseChapter {
   /**
@@ -120,24 +121,26 @@ export interface CourseChapter {
   id: string;
 
   /**
-   * The lessons in this chapter
+   * An ordered list of lessons in this chapter, sorted by display position. Hidden
+   * lessons are excluded for non-admin users.
    */
   lessons: Array<CourseChapter.Lesson>;
 
   /**
-   * The order of the chapter within its course
+   * The sort position of this chapter within its parent course, starting from zero.
    */
   order: number;
 
   /**
-   * The title of the chapter
+   * The display name of the chapter shown to students. Maximum 150 characters.
    */
   title: string;
 }
 
 export namespace CourseChapter {
   /**
-   * A lesson from the courses app
+   * An individual learning unit within a chapter, which can contain text, video,
+   * PDF, or assessment content.
    */
   export interface Lesson {
     /**
@@ -146,19 +149,20 @@ export namespace CourseChapter {
     id: string;
 
     /**
-     * The order of the lesson within its chapter
+     * The sort position of this lesson within its parent chapter, starting from zero.
      */
     order: number;
 
     /**
-     * The title of the lesson
+     * The display name of the lesson shown to students. Maximum 120 characters.
      */
     title: string;
   }
 }
 
 /**
- * A chapter from the courses app
+ * A grouping of related lessons within a course, used to organize content into
+ * sections.
  */
 export interface CourseChapterListResponse {
   /**
@@ -167,12 +171,12 @@ export interface CourseChapterListResponse {
   id: string;
 
   /**
-   * The order of the chapter within its course
+   * The sort position of this chapter within its parent course, starting from zero.
    */
   order: number;
 
   /**
-   * The title of the chapter
+   * The display name of the chapter shown to students. Maximum 150 characters.
    */
   title: string;
 }
@@ -184,26 +188,27 @@ export type CourseChapterDeleteResponse = boolean;
 
 export interface CourseChapterCreateParams {
   /**
-   * The ID of the course to create the chapter in
+   * The unique identifier of the course to create the chapter in (e.g.,
+   * "course_XXXXX").
    */
   course_id: string;
 
   /**
-   * The title of the chapter
+   * The display title of the chapter (e.g., "Module 1: Introduction").
    */
   title?: string | null;
 }
 
 export interface CourseChapterUpdateParams {
   /**
-   * The title of the chapter
+   * The new display title of the chapter (e.g., "Module 1: Introduction").
    */
   title: string;
 }
 
 export interface CourseChapterListParams extends CursorPageParams {
   /**
-   * The ID of the course
+   * The unique identifier of the course to list chapters for.
    */
   course_id: string;
 

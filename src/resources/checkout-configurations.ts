@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as PaymentsAPI from './payments';
+import * as ProductsAPI from './products';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -36,7 +37,7 @@ export class CheckoutConfigurations extends APIResource {
   }
 
   /**
-   * Retrieves a checkout configuration by ID
+   * Retrieves the details of an existing checkout configuration.
    *
    * Required permissions:
    *
@@ -47,7 +48,8 @@ export class CheckoutConfigurations extends APIResource {
   }
 
   /**
-   * Lists checkout configurations
+   * Returns a paginated list of checkout configurations for a company, with optional
+   * filtering by plan and creation date.
    *
    * Required permissions:
    *
@@ -73,9 +75,9 @@ export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutCo
 export type CheckoutModes = 'payment' | 'setup';
 
 /**
- * A checkout session is a reusable configuration for a checkout, including the
- * plan, affiliate, and custom metadata. Payments and memberships created from a
- * checkout session inherit its metadata.
+ * A checkout configuration is a reusable configuration for a checkout, including
+ * the plan, affiliate, and custom metadata. Payments and memberships created from
+ * a checkout session inherit its metadata.
  */
 export interface CheckoutConfigurationListResponse {
   /**
@@ -171,12 +173,14 @@ export namespace CheckoutConfigurationListResponse {
     id: string;
 
     /**
-     * The interval in days at which the plan charges (renewal plans).
+     * The number of days between each recurring charge. Null for one-time plans. For
+     * example, 30 for monthly or 365 for annual billing.
      */
     billing_period: number | null;
 
     /**
-     * The respective currency identifier for the plan.
+     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+     * amounts on the plan are denominated in this currency.
      */
     currency: Shared.Currency;
 
@@ -194,12 +198,14 @@ export namespace CheckoutConfigurationListResponse {
     initial_price: number;
 
     /**
-     * Indicates if the plan is a one time payment or recurring.
+     * The billing model for this plan: 'renewal' for recurring subscriptions or
+     * 'one_time' for single payments.
      */
     plan_type: Shared.PlanType;
 
     /**
-     * This is the release method the business uses to sell this plan.
+     * The method used to sell this plan: 'buy_now' for immediate purchase or
+     * 'waitlist' for waitlist-based access.
      */
     release_method: Shared.ReleaseMethod;
 
@@ -210,12 +216,15 @@ export namespace CheckoutConfigurationListResponse {
     renewal_price: number;
 
     /**
-     * The number of free trial days added before a renewal plan.
+     * The number of free trial days before the first charge on a renewal plan. Null if
+     * no trial is configured or the current user has already used a trial for this
+     * plan.
      */
     trial_period_days: number | null;
 
     /**
-     * Shows or hides the plan from public/business view.
+     * Controls whether the plan is visible to customers. When set to 'hidden', the
+     * plan is only accessible via direct link.
      */
     visibility: Shared.Visibility;
   }
@@ -229,12 +238,12 @@ export type CheckoutConfigurationCreateParams =
 export declare namespace CheckoutConfigurationCreateParams {
   export interface CreateCheckoutSessionInputModePaymentWithPlan {
     /**
-     * Pass this object to create a new plan for this checkout configuration
+     * The plan attributes to create a new plan inline for this checkout configuration.
      */
     plan: CreateCheckoutSessionInputModePaymentWithPlan.Plan;
 
     /**
-     * The affiliate code to use for the checkout configuration
+     * An affiliate tracking code to attribute the checkout to a specific affiliate.
      */
     affiliate_code?: string | null;
 
@@ -244,21 +253,20 @@ export declare namespace CheckoutConfigurationCreateParams {
     currency?: Shared.Currency | null;
 
     /**
-     * The metadata to use for the checkout configuration
+     * Custom key-value metadata to attach to the checkout configuration.
      */
     metadata?: { [key: string]: unknown } | null;
 
     mode?: 'payment';
 
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     payment_method_configuration?: CreateCheckoutSessionInputModePaymentWithPlan.PaymentMethodConfiguration | null;
 
     /**
-     * The URL to redirect the user to after the checkout configuration is created
+     * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
 
@@ -270,7 +278,7 @@ export declare namespace CheckoutConfigurationCreateParams {
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlan {
     /**
-     * Pass this object to create a new plan for this checkout configuration
+     * The plan attributes to create a new plan inline for this checkout configuration.
      */
     export interface Plan {
       /**
@@ -525,6 +533,11 @@ export declare namespace CheckoutConfigurationCreateParams {
         headline?: string | null;
 
         /**
+         * The different industry groups a company can be in.
+         */
+        industry_group?: ProductsAPI.IndustryGroups | null;
+
+        /**
          * The different industry types a company can be in.
          */
         industry_type?: Shared.IndustryTypes | null;
@@ -552,9 +565,8 @@ export declare namespace CheckoutConfigurationCreateParams {
     }
 
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     export interface PaymentMethodConfiguration {
       /**
@@ -582,12 +594,13 @@ export declare namespace CheckoutConfigurationCreateParams {
 
   export interface CreateCheckoutSessionInputModePaymentWithPlanID {
     /**
-     * The ID of the plan to use for the checkout configuration
+     * The unique identifier of an existing plan to use for this checkout
+     * configuration.
      */
     plan_id: string;
 
     /**
-     * The affiliate code to use for the checkout configuration
+     * An affiliate tracking code to attribute the checkout to a specific affiliate.
      */
     affiliate_code?: string | null;
 
@@ -597,21 +610,20 @@ export declare namespace CheckoutConfigurationCreateParams {
     currency?: Shared.Currency | null;
 
     /**
-     * The metadata to use for the checkout configuration
+     * Custom key-value metadata to attach to the checkout configuration.
      */
     metadata?: { [key: string]: unknown } | null;
 
     mode?: 'payment';
 
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     payment_method_configuration?: CreateCheckoutSessionInputModePaymentWithPlanID.PaymentMethodConfiguration | null;
 
     /**
-     * The URL to redirect the user to after the checkout configuration is created
+     * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
 
@@ -623,9 +635,8 @@ export declare namespace CheckoutConfigurationCreateParams {
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlanID {
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     export interface PaymentMethodConfiguration {
       /**
@@ -653,8 +664,8 @@ export declare namespace CheckoutConfigurationCreateParams {
 
   export interface CreateCheckoutSessionInputModeSetup {
     /**
-     * The ID of the company for which to generate the checkout configuration. Only
-     * required in setup mode.
+     * The unique identifier of the company to create the checkout configuration for.
+     * Only required in setup mode.
      */
     company_id: string;
 
@@ -666,19 +677,18 @@ export declare namespace CheckoutConfigurationCreateParams {
     currency?: Shared.Currency | null;
 
     /**
-     * The metadata to use for the checkout configuration
+     * Custom key-value metadata to attach to the checkout configuration.
      */
     metadata?: { [key: string]: unknown } | null;
 
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     payment_method_configuration?: CreateCheckoutSessionInputModeSetup.PaymentMethodConfiguration | null;
 
     /**
-     * The URL to redirect the user to after the checkout configuration is created
+     * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
 
@@ -690,9 +700,8 @@ export declare namespace CheckoutConfigurationCreateParams {
 
   export namespace CreateCheckoutSessionInputModeSetup {
     /**
-     * This currently only works for configurations made in 'setup' mode. The explicit
-     * payment method configuration for the checkout session. If not provided, the
-     * platform or company's defaults will apply.
+     * The explicit payment method configuration for the checkout session. Only applies
+     * to setup mode. If not provided, the platform or company defaults will apply.
      */
     export interface PaymentMethodConfiguration {
       /**
@@ -721,7 +730,7 @@ export declare namespace CheckoutConfigurationCreateParams {
 
 export interface CheckoutConfigurationListParams extends CursorPageParams {
   /**
-   * The ID of the company to list checkout configurations for
+   * The unique identifier of the company to list checkout configurations for.
    */
   company_id: string;
 
@@ -731,12 +740,12 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return checkout configurations created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return checkout configurations created before this timestamp.
    */
   created_before?: string | null;
 
@@ -756,7 +765,8 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The ID of the plan to filter checkout configurations by
+   * Filter checkout configurations to only those associated with this plan
+   * identifier.
    */
   plan_id?: string | null;
 }

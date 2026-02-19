@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as PaymentsAPI from './payments';
+import * as ProductsAPI from './products';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -28,6 +29,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -44,7 +47,7 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Retrieves a payment by ID
+   * Retrieves the details of an existing payment.
    *
    * Required permissions:
    *
@@ -55,6 +58,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -68,7 +73,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Lists payments
+   * Returns a paginated list of payments for the actor in context, with optional
+   * filtering by product, plan, status, billing reason, currency, and creation date.
    *
    * Required permissions:
    *
@@ -83,22 +89,21 @@ export class Payments extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const paymentListResponse of client.payments.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
+   * for await (const paymentListResponse of client.payments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: PaymentListParams,
+    query: PaymentListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
     return this._client.getAPIList('/payments', CursorPage<PaymentListResponse>, { query, ...options });
   }
 
   /**
-   * Lists fees for a payment
+   * Returns the list of fees associated with a specific payment, including platform
+   * fees and processing fees.
    *
    * Required permissions:
    *
@@ -126,7 +131,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Refunds a payment
+   * Issue a full or partial refund for a payment. The refund is processed through
+   * the original payment processor and the membership status is updated accordingly.
    *
    * Required permissions:
    *
@@ -137,6 +143,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -154,7 +162,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Retries a payment
+   * Retry a failed or pending payment. This re-attempts the charge using the
+   * original payment method and plan details.
    *
    * Required permissions:
    *
@@ -165,6 +174,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -178,7 +189,8 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Voids a payment
+   * Void a payment that has not yet been settled. Voiding cancels the payment before
+   * it is captured by the payment processor.
    *
    * Required permissions:
    *
@@ -189,6 +201,8 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
@@ -255,6 +269,8 @@ export type CardBrands =
   | 'carnet'
   | 'atm_card'
   | 'china_union_payuzcard'
+  | 'codensa'
+  | 'cabal'
   | 'unknown';
 
 /**
@@ -342,6 +358,7 @@ export type PaymentMethodTypes =
   | 'splitit'
   | 'sunbit'
   | 'swish'
+  | 'tamara'
   | 'twint'
   | 'upi'
   | 'us_bank_account'
@@ -352,8 +369,8 @@ export type PaymentMethodTypes =
   | 'unknown';
 
 /**
- * A payment represents a completed or attempted charge for a membership. Payments
- * track the amount, status, currency, and payment method used.
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
  */
 export interface PaymentListResponse {
   /**
@@ -392,7 +409,8 @@ export interface PaymentListResponse {
   card_brand: CardBrands | null;
 
   /**
-   * The last 4 digits of the card used to make the payment.
+   * The last four digits of the card used to make this payment. Null if the payment
+   * was not made with a card.
    */
   card_last4: string | null;
 
@@ -448,12 +466,14 @@ export interface PaymentListResponse {
   next_payment_attempt: string | null;
 
   /**
-   * The datetime the payment was paid
+   * The time at which this payment was successfully collected. Null if the payment
+   * has not yet succeeded. As a Unix timestamp.
    */
   paid_at: string | null;
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   payment_method: PaymentListResponse.PaymentMethod | null;
 
@@ -669,7 +689,8 @@ export namespace PaymentListResponse {
   }
 
   /**
-   * The payment method used for the payment, if available.
+   * The tokenized payment method reference used for this payment. Null if no token
+   * was used.
    */
   export interface PaymentMethod {
     /**
@@ -704,17 +725,18 @@ export namespace PaymentListResponse {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
@@ -740,12 +762,14 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * The route of the product.
+     * The URL slug used in the product's public link (e.g., 'my-product' in
+     * whop.com/company/my-product).
      */
     route: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -797,17 +821,18 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -1040,6 +1065,11 @@ export declare namespace PaymentCreateParams {
         headline?: string | null;
 
         /**
+         * The different industry groups a company can be in.
+         */
+        industry_group?: ProductsAPI.IndustryGroups | null;
+
+        /**
          * The different industry types a company can be in.
          */
         industry_type?: Shared.IndustryTypes | null;
@@ -1098,32 +1128,32 @@ export declare namespace PaymentCreateParams {
 
 export interface PaymentListParams extends CursorPageParams {
   /**
-   * The ID of the company to list payments for
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
 
   /**
-   * The billing reason for the payment
+   * Filter payments by their billing reason.
    */
   billing_reasons?: Array<BillingReasons> | null;
 
   /**
-   * The minimum creation date to filter by
+   * The unique identifier of the company to list payments for.
+   */
+  company_id?: string | null;
+
+  /**
+   * Only return payments created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return payments created before this timestamp.
    */
   created_before?: string | null;
 
   /**
-   * The currency of the payment.
+   * Filter payments by their currency code.
    */
   currencies?: Array<Shared.Currency> | null;
 
@@ -1138,7 +1168,7 @@ export interface PaymentListParams extends CursorPageParams {
   first?: number | null;
 
   /**
-   * Whether to include free payments.
+   * Whether to include payments with a zero amount.
    */
   include_free?: boolean | null;
 
@@ -1153,22 +1183,29 @@ export interface PaymentListParams extends CursorPageParams {
   order?: 'final_amount' | 'created_at' | 'paid_at' | null;
 
   /**
-   * A specific plan.
+   * Filter payments to only those associated with these specific plan identifiers.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * A specific product.
+   * Filter payments to only those associated with these specific product
+   * identifiers.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The status of the payment.
+   * Search payments by user ID, membership ID, user email, name, or username. Email
+   * filtering requires the member:email:read permission.
+   */
+  query?: string | null;
+
+  /**
+   * Filter payments by their current status.
    */
   statuses?: Array<Shared.ReceiptStatus> | null;
 
   /**
-   * The substatus of the payment.
+   * Filter payments by their current substatus for more granular filtering.
    */
   substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
 }
@@ -1192,7 +1229,8 @@ export interface PaymentListFeesParams extends CursorPageParams {
 
 export interface PaymentRefundParams {
   /**
-   * An amount if the refund is supposed to be partial.
+   * The amount to refund in the payment currency. If omitted, the full payment
+   * amount is refunded.
    */
   partial_amount?: number | null;
 }

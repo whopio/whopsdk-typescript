@@ -30,7 +30,7 @@ export class Withdrawals extends APIResource {
   }
 
   /**
-   * Retrieves a withdrawal by ID
+   * Retrieves the details of an existing withdrawal.
    *
    * Required permissions:
    *
@@ -49,7 +49,8 @@ export class Withdrawals extends APIResource {
   }
 
   /**
-   * Lists withdrawals
+   * Returns a paginated list of withdrawals for a company, with optional sorting and
+   * date filtering.
    *
    * Required permissions:
    *
@@ -76,8 +77,8 @@ export class Withdrawals extends APIResource {
 export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
 
 /**
- * A withdrawal represents a request to transfer funds from a company's ledger
- * account to an external payout method.
+ * A withdrawal represents a request to transfer funds from a ledger account to an
+ * external payout method.
  */
 export interface Withdrawal {
   /**
@@ -86,8 +87,8 @@ export interface Withdrawal {
   id: string;
 
   /**
-   * The withdrawal amount. Provided as a number in the specified currency. Eg:
-   * 100.00 for $100.00 USD.
+   * The withdrawal amount as a decimal number in the specified currency (e.g.,
+   * 100.00 for $100.00 USD).
    */
   amount: number;
 
@@ -97,7 +98,7 @@ export interface Withdrawal {
   created_at: string;
 
   /**
-   * The currency of the withdrawal request.
+   * The three-letter ISO currency code for this withdrawal (e.g., 'usd', 'eur').
    */
   currency: Shared.Currency;
 
@@ -151,21 +152,24 @@ export interface Withdrawal {
     | 'ssn_invalid'
     | 'wallet_screenshot_required'
     | 'unsupported_region'
+    | 'payout_provider_timeout'
     | null;
 
   /**
-   * The error message for the withdrawal, if any.
+   * A human-readable message describing why the payout failed. Null if no error
+   * occurred.
    */
   error_message: string | null;
 
   /**
-   * The estimated availability date for the withdrawal, if any.
+   * The estimated time at which the funds become available in the destination
+   * account. Null if no estimate is available. As a Unix timestamp.
    */
   estimated_availability: string | null;
 
   /**
-   * The fee amount that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount.
+   * The fee charged for processing this withdrawal, in the same currency as the
+   * withdrawal amount.
    */
   fee_amount: number;
 
@@ -175,42 +179,43 @@ export interface Withdrawal {
   fee_type: WithdrawalFeeTypes | null;
 
   /**
-   * The ledger account associated with the withdrawal.
+   * The ledger account from which the withdrawal funds are sourced.
    */
   ledger_account: Withdrawal.LedgerAccount;
 
   /**
-   * The markup fee that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount. This only applies to platform accounts using Whop
-   * Rails.
+   * An additional markup fee charged for the withdrawal, in the same currency as the
+   * withdrawal amount. Only applies to platform accounts using Whop Rails.
    */
   markup_fee: number;
 
   /**
-   * The payout token used for the withdrawal, if applicable.
+   * The saved payout destination used for this withdrawal (e.g., a bank account or
+   * PayPal address). Null if no payout token was used.
    */
   payout_token: Withdrawal.PayoutToken | null;
 
   /**
-   * The speed of the withdrawal.
+   * The processing speed selected for this withdrawal ('standard' or 'instant').
    */
   speed: WithdrawalSpeeds;
 
   /**
-   * Status of the withdrawal.
+   * The computed lifecycle status of the withdrawal, accounting for the state of
+   * associated payouts (e.g., 'requested', 'in_transit', 'completed', 'failed').
    */
   status: WithdrawalStatus;
 
   /**
-   * The trace code for the payout, if applicable. Provided on ACH transactions when
-   * available.
+   * The ACH trace number for tracking the payout through the banking network. Null
+   * if not available or not an ACH transaction.
    */
   trace_code: string | null;
 }
 
 export namespace Withdrawal {
   /**
-   * The ledger account associated with the withdrawal.
+   * The ledger account from which the withdrawal funds are sourced.
    */
   export interface LedgerAccount {
     /**
@@ -219,13 +224,18 @@ export namespace Withdrawal {
     id: string;
 
     /**
-     * The ID of the company associated with this ledger account.
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
      */
     company_id: string | null;
   }
 
   /**
-   * The payout token used for the withdrawal, if applicable.
+   * The saved payout destination used for this withdrawal (e.g., a bank account or
+   * PayPal address). Null if no payout token was used.
    */
   export interface PayoutToken {
     /**
@@ -239,19 +249,19 @@ export namespace Withdrawal {
     created_at: string;
 
     /**
-     * The currency code of the payout destination. This is the currency that payouts
-     * will be made in for this token.
+     * The three-letter ISO currency code that payouts are delivered in for this
+     * destination.
      */
     destination_currency_code: string;
 
     /**
-     * An optional nickname for the payout token to help the user identify it. This is
-     * not used by the provider and is only for the user's reference.
+     * A user-defined label to help identify this payout destination. Not sent to the
+     * provider. Null if no nickname has been set.
      */
     nickname: string | null;
 
     /**
-     * The name of the payer associated with the payout token.
+     * The legal name of the account holder receiving payouts. Null if not provided.
      */
     payer_name: string | null;
   }
@@ -280,8 +290,8 @@ export type WithdrawalStatus =
   | 'denied';
 
 /**
- * A withdrawal represents a request to transfer funds from a company's ledger
- * account to an external payout method.
+ * A withdrawal represents a request to transfer funds from a ledger account to an
+ * external payout method.
  */
 export interface WithdrawalListResponse {
   /**
@@ -290,8 +300,8 @@ export interface WithdrawalListResponse {
   id: string;
 
   /**
-   * The withdrawal amount. Provided as a number in the specified currency. Eg:
-   * 100.00 for $100.00 USD.
+   * The withdrawal amount as a decimal number in the specified currency (e.g.,
+   * 100.00 for $100.00 USD).
    */
   amount: number;
 
@@ -301,13 +311,13 @@ export interface WithdrawalListResponse {
   created_at: string;
 
   /**
-   * The currency of the withdrawal request.
+   * The three-letter ISO currency code for this withdrawal (e.g., 'usd', 'eur').
    */
   currency: Shared.Currency;
 
   /**
-   * The fee amount that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount.
+   * The fee charged for processing this withdrawal, in the same currency as the
+   * withdrawal amount.
    */
   fee_amount: number;
 
@@ -317,19 +327,19 @@ export interface WithdrawalListResponse {
   fee_type: WithdrawalFeeTypes | null;
 
   /**
-   * The markup fee that was charged for the withdrawal. This is in the same currency
-   * as the withdrawal amount. This only applies to platform accounts using Whop
-   * Rails.
+   * An additional markup fee charged for the withdrawal, in the same currency as the
+   * withdrawal amount. Only applies to platform accounts using Whop Rails.
    */
   markup_fee: number;
 
   /**
-   * The speed of the withdrawal.
+   * The processing speed selected for this withdrawal ('standard' or 'instant').
    */
   speed: WithdrawalSpeeds;
 
   /**
-   * Status of the withdrawal.
+   * The computed lifecycle status of the withdrawal, accounting for the state of
+   * associated payouts (e.g., 'requested', 'in_transit', 'completed', 'failed').
    */
   status: WithdrawalStatus;
 }
@@ -369,7 +379,7 @@ export interface WithdrawalCreateParams {
 
 export interface WithdrawalListParams extends CursorPageParams {
   /**
-   * The ID of the company to list withdrawals for
+   * The unique identifier of the company to list withdrawals for.
    */
   company_id: string;
 
@@ -379,12 +389,12 @@ export interface WithdrawalListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return withdrawals created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return withdrawals created before this timestamp.
    */
   created_before?: string | null;
 

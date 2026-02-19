@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Transfers extends APIResource {
   /**
-   * Creates a new transfer between ledger accounts
+   * Transfer funds between two ledger accounts, such as from a company balance to a
+   * user balance.
    *
    * Required permissions:
    *
@@ -30,7 +31,7 @@ export class Transfers extends APIResource {
   }
 
   /**
-   * Retrieves a transfer by ID
+   * Retrieves the details of an existing transfer.
    *
    * Required permissions:
    *
@@ -48,7 +49,8 @@ export class Transfers extends APIResource {
   }
 
   /**
-   * Lists transfers
+   * Returns a paginated list of fund transfers, filtered by origin or destination
+   * account, with optional sorting and date filtering.
    *
    * Required permissions:
    *
@@ -73,7 +75,7 @@ export class Transfers extends APIResource {
 export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
 
 /**
- * Credit Transaction Transfer
+ * A transfer of credit between two ledger accounts.
  */
 export interface TransferListResponse {
   /**
@@ -82,8 +84,8 @@ export interface TransferListResponse {
   id: string;
 
   /**
-   * The amount of the transfer. Provided as a number in the specified currency. Eg:
-   * 10.43 for $10.43 USD.
+   * The transfer amount in the currency specified by the currency field. For
+   * example, 10.43 represents $10.43 USD.
    */
   amount: number;
 
@@ -93,73 +95,77 @@ export interface TransferListResponse {
   created_at: string;
 
   /**
-   * The currency of the credit transaction transfer
+   * The currency in which this transfer amount is denominated.
    */
   currency: Shared.Currency;
 
   /**
-   * The ID of the destination ledger account
+   * The unique identifier of the ledger account receiving the funds.
    */
   destination_ledger_account_id: string;
 
   /**
-   * The decimal fee of the credit transaction transfer
+   * The flat fee amount deducted from this transfer, in the transfer's currency.
+   * Null if no flat fee was applied.
    */
   fee_amount: number | null;
 
   /**
-   * Custom key-value pairs attached to the transfer. Max 50 keys, 500 chars per key,
-   * 5000 chars per value.
+   * Custom key-value pairs attached to this transfer. Maximum 50 keys, 500
+   * characters per key, 5000 characters per value.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The notes of the credit transaction transfer
+   * A free-text note attached to this transfer by the sender. Null if no note was
+   * provided.
    */
   notes: string | null;
 
   /**
-   * The ID of the origin ledger account
+   * The unique identifier of the ledger account that sent the funds.
    */
   origin_ledger_account_id: string;
 }
 
 export interface TransferCreateParams {
   /**
-   * The amount to transfer. Provided as a number in the specified currency. Eg:
-   * 25.00 for $25.00 USD.
+   * The amount to transfer in the specified currency. For example, 25.00 for $25.00
+   * USD.
    */
   amount: number;
 
   /**
-   * The currency that is being withdrawn.
+   * The currency of the transfer amount, such as 'usd'.
    */
   currency: Shared.Currency;
 
   /**
-   * The ID of the destination account which will receive the funds (either a User
-   * ID, Company ID, or LedgerAccount ID)
+   * The identifier of the account receiving the funds. Accepts a user ID
+   * ('user_xxx'), company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
    */
   destination_id: string;
 
   /**
-   * The ID of the origin account which will send the funds (either a User ID,
-   * Company ID, or LedgerAccount ID)
+   * The identifier of the account sending the funds. Accepts a user ID ('user_xxx'),
+   * company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
    */
   origin_id: string;
 
   /**
-   * A unique key to ensure idempotence. Use a UUID or similar.
+   * A unique key to prevent duplicate transfers. Use a UUID or similar unique
+   * string.
    */
   idempotence_key?: string | null;
 
   /**
-   * A hash of metadata to attach to the transfer.
+   * A JSON object of custom metadata to attach to the transfer for tracking
+   * purposes.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * Notes for the transfer. Maximum of 50 characters.
+   * A short note describing the transfer, up to 50 characters.
    */
   notes?: string | null;
 }
@@ -171,18 +177,18 @@ export interface TransferListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return transfers created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return transfers created before this timestamp.
    */
   created_before?: string | null;
 
   /**
-   * Filter transfers to only those that were sent to this destination account.
-   * (user_xxx, biz_xxx, ldgr_xxx)
+   * Filter to transfers received by this account. Accepts a user, company, or ledger
+   * account ID.
    */
   destination_id?: string | null;
 
@@ -207,8 +213,8 @@ export interface TransferListParams extends CursorPageParams {
   order?: 'amount' | 'created_at' | null;
 
   /**
-   * Filter transfers to only those that were sent from this origin account.
-   * (user_xxx, biz_xxx, ldgr_xxx)
+   * Filter to transfers sent from this account. Accepts a user, company, or ledger
+   * account ID.
    */
   origin_id?: string | null;
 }

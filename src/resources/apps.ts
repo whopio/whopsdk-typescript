@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 
 export class Apps extends APIResource {
   /**
-   * Create a new App
+   * Register a new app on the Whop developer platform. Apps provide custom
+   * experiences that can be added to products.
    *
    * Required permissions:
    *
@@ -29,7 +30,7 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Retrieves an app by ID
+   * Retrieves the details of an existing app.
    *
    * Required permissions:
    *
@@ -47,7 +48,8 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Update an existing App
+   * Update the settings, metadata, or status of an existing app on the Whop
+   * developer platform.
    *
    * Required permissions:
    *
@@ -68,7 +70,8 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Fetches a list of apps
+   * Returns a paginated list of apps on the Whop platform, with optional filtering
+   * by company, type, view support, and search query.
    *
    * @example
    * ```ts
@@ -104,85 +107,89 @@ export interface AppListResponse {
   id: string;
 
   /**
-   * The type of end-user an app is built for
+   * The target audience classification for this app (e.g., 'b2b_app', 'b2c_app',
+   * 'company_app', 'component').
    */
   app_type: AppType;
 
   /**
-   * The base url of the app
+   * The production base URL where the app is hosted. Null if no base URL is
+   * configured.
    */
   base_url: string | null;
 
   /**
-   * The company that owns the app
+   * The company that owns and publishes this app.
    */
   company: AppListResponse.Company;
 
   /**
-   * The creator of the app
+   * The user who created and owns the company that published this app.
    */
   creator: AppListResponse.Creator;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   dashboard_path: string | null;
 
   /**
-   * The description of the app
+   * A written description of what this app does, displayed on the app store listing
+   * page. Null if no description has been set.
    */
   description: string | null;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   discover_path: string | null;
 
   /**
-   * The unique part of the proxied domain for this app. Used to generate the base
-   * url used to display the app inside the whop platform. Refers to the id part in
-   * the final url: https://{domain_id}.apps.whop.com
+   * The unique subdomain identifier for this app's proxied URL on the Whop platform.
+   * Forms the URL pattern https://{domain_id}.apps.whop.com.
    */
   domain_id: string;
 
   /**
-   * The path part for a specific view of the app. This is the template part of the
-   * url after the base domain. Eg: /experiences/[experienceId]
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
    */
   experience_path: string | null;
 
   /**
-   * The icon for the app. This icon is shown on discovery, on the product page, on
-   * checkout, and as a default icon for the experiences.
+   * The icon image for this app, displayed on the app store, product pages,
+   * checkout, and as the default icon for experiences using this app.
    */
   icon: AppListResponse.Icon | null;
 
   /**
-   * The name of the app
+   * The display name of this app shown on the app store and in experience
+   * navigation. Maximum 30 characters.
    */
   name: string;
 
   /**
-   * If the status is live, the app is visible on Whop discovery. In order to be
-   * live, you need to set the name, icon, and description. Being unlisted or hidden
-   * means it's not visible on Whop but you can still install the app via direct
-   * link. To remove the app from whop discovery, you should set the status to
-   * unlisted.
+   * The current visibility status of this app on the Whop app store. 'live' means
+   * publicly discoverable, 'unlisted' means accessible only via direct link, and
+   * 'hidden' means not visible anywhere.
    */
   status: Shared.AppStatuses;
 
   /**
-   * Whether this app has been verified by Whop. Verified apps are endorsed by whop
-   * and are shown in the 'featured apps' section of the app store.
+   * Whether this app has been verified by Whop. Verified apps are endorsed by Whop
+   * and displayed in the featured apps section of the app store.
    */
   verified: boolean;
 }
 
 export namespace AppListResponse {
   /**
-   * The company that owns the app
+   * The company that owns and publishes this app.
    */
   export interface Company {
     /**
@@ -191,13 +198,13 @@ export namespace AppListResponse {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
 
   /**
-   * The creator of the app
+   * The user who created and owns the company that published this app.
    */
   export interface Creator {
     /**
@@ -206,24 +213,24 @@ export namespace AppListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
 
   /**
-   * The icon for the app. This icon is shown on discovery, on the product page, on
-   * checkout, and as a default icon for the experiences.
+   * The icon image for this app, displayed on the app store, product pages,
+   * checkout, and as the default icon for experiences using this app.
    */
   export interface Icon {
     /**
-     * This is the URL you use to render optimized attachments on the client. This
-     * should be used for apps.
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
      */
     url: string | null;
   }
@@ -231,29 +238,37 @@ export namespace AppListResponse {
 
 export interface AppCreateParams {
   /**
-   * The ID of the company to create the app for
+   * The unique identifier of the company to create the app for, starting with
+   * 'biz\_'.
    */
   company_id: string;
 
   /**
-   * The name of the app to be created
+   * The display name for the app, shown to users on the app store and product pages.
    */
   name: string;
 
   /**
-   * The base URL of the app to be created
+   * The base production URL where the app is hosted, such as
+   * 'https://myapp.example.com'.
    */
   base_url?: string | null;
 
   /**
-   * The icon for the app in png, jpeg, or gif format
+   * The icon image for the app in PNG, JPEG, or GIF format.
    */
   icon?: AppCreateParams.Icon | null;
+
+  /**
+   * The whitelisted OAuth callback URLs that users are redirected to after
+   * authorizing the app.
+   */
+  redirect_uris?: Array<string> | null;
 }
 
 export namespace AppCreateParams {
   /**
-   * The icon for the app in png, jpeg, or gif format
+   * The icon image for the app in PNG, JPEG, or GIF format.
    */
   export interface Icon {
     /**
@@ -265,7 +280,7 @@ export namespace AppCreateParams {
 
 export interface AppUpdateParams {
   /**
-   * The description of the app for the app store in-depth app view.
+   * The detailed description shown on the app store's in-depth app view page.
    */
   app_store_description?: string | null;
 
@@ -275,42 +290,55 @@ export interface AppUpdateParams {
   app_type?: AppType | null;
 
   /**
-   * The base production url of the app
+   * The base production URL where the app is hosted, such as
+   * 'https://myapp.example.com'.
    */
   base_url?: string | null;
 
   /**
-   * The path for the dashboard view of the app
+   * The URL path for the company dashboard view of the app, such as '/dashboard'.
    */
   dashboard_path?: string | null;
 
   /**
-   * The description of the app
+   * A short description of the app shown in listings and search results.
    */
   description?: string | null;
 
   /**
-   * The path for the discover view of the app
+   * The URL path for the discover view of the app, such as '/discover'.
    */
   discover_path?: string | null;
 
   /**
-   * The path for the hub view of the app
+   * The URL path for the member-facing hub view of the app, such as
+   * '/experiences/[experienceId]'.
    */
   experience_path?: string | null;
 
   /**
-   * The icon for the app
+   * The icon image for the app, used in listings and navigation.
    */
   icon?: AppUpdateParams.Icon | null;
 
   /**
-   * The name of the app
+   * The display name for the app, shown to users on the app store and product pages.
    */
   name?: string | null;
 
   /**
-   * The scopes that the app will request off of users when a user installs the app.
+   * How this app authenticates at the OAuth token endpoint.
+   */
+  oauth_client_type?: 'public' | 'confidential' | null;
+
+  /**
+   * The whitelisted OAuth callback URLs that users are redirected to after
+   * authorizing the app
+   */
+  redirect_uris?: Array<string> | null;
+
+  /**
+   * The permission scopes the app will request from users when they install it.
    */
   required_scopes?: Array<'read_user'> | null;
 
@@ -322,7 +350,7 @@ export interface AppUpdateParams {
 
 export namespace AppUpdateParams {
   /**
-   * The icon for the app
+   * The icon image for the app, used in listings and navigation.
    */
   export interface Icon {
     /**
@@ -344,7 +372,7 @@ export interface AppListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The ID of the company to filter apps by
+   * Filter apps to only those created by this company, starting with 'biz\_'.
    */
   company_id?: string | null;
 
@@ -382,13 +410,13 @@ export interface AppListParams extends CursorPageParams {
     | null;
 
   /**
-   * The query to search for apps by name.
+   * A search string to filter apps by name, such as 'chat' or 'analytics'.
    */
   query?: string | null;
 
   /**
-   * If true, you will only get apps that are verified by Whop. Use this to populate
-   * a 'featured apps' section on the app store.
+   * Whether to only return apps that have been verified by Whop. Useful for
+   * populating a featured apps section.
    */
   verified_apps_only?: boolean | null;
 

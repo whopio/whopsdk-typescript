@@ -10,7 +10,8 @@ import { path } from '../internal/utils/path';
 
 export class Products extends APIResource {
   /**
-   * Creates a new Product
+   * Create a new product for a company. The product serves as the top-level
+   * container for plans and experiences.
    *
    * Required permissions:
    *
@@ -30,7 +31,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Retrieves a product by ID or route
+   * Retrieves the details of an existing product.
    *
    * Required permissions:
    *
@@ -48,7 +49,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Updates an existing Product
+   * Update a product's title, description, visibility, and other settings.
    *
    * Required permissions:
    *
@@ -71,7 +72,8 @@ export class Products extends APIResource {
   }
 
   /**
-   * Lists products for a company
+   * Returns a paginated list of products belonging to a company, with optional
+   * filtering by type, visibility, and creation date.
    *
    * Required permissions:
    *
@@ -95,7 +97,7 @@ export class Products extends APIResource {
   }
 
   /**
-   * Deletes an existing Product
+   * Permanently delete a product and remove it from the company's catalog.
    *
    * Required permissions:
    *
@@ -114,18 +116,157 @@ export class Products extends APIResource {
 }
 
 /**
+ * The different industry groups a company can be in.
+ */
+export type IndustryGroups =
+  | 'academic_and_test_prep'
+  | 'accessories'
+  | 'agriculture_and_farming'
+  | 'ai_and_automation_agencies'
+  | 'ai_and_automation_software'
+  | 'arts_and_crafts'
+  | 'automotive'
+  | 'b2b_and_professional_marketplaces'
+  | 'baby_and_kids'
+  | 'beauty_and_personal_care'
+  | 'beauty_and_wellness'
+  | 'business_and_entrepreneurship'
+  | 'business_and_money_groups'
+  | 'career_and_professional'
+  | 'charity_and_cause_events'
+  | 'class_action_settlement'
+  | 'clothing_and_apparel'
+  | 'communication_and_messaging_software'
+  | 'community_and_education_software'
+  | 'consulting'
+  | 'content_and_clipping_agencies'
+  | 'creative_and_content_creation'
+  | 'creative_and_content_groups'
+  | 'creative_and_education'
+  | 'creative_gigs'
+  | 'creative_services'
+  | 'customer_support_agencies'
+  | 'dating_and_relationships'
+  | 'delivery_and_logistics'
+  | 'dental_and_vision'
+  | 'dermatology_and_skin'
+  | 'design_and_creative_agencies'
+  | 'developer_and_technical_tools'
+  | 'development_agencies'
+  | 'digital_and_education_marketplaces'
+  | 'digital_goods_and_accounts'
+  | 'e_commerce_software'
+  | 'education_and_business_events'
+  | 'education_and_childcare'
+  | 'electronics_and_gadgets'
+  | 'entertainment_and_leisure'
+  | 'entertainment_events'
+  | 'family_and_community_events'
+  | 'finance_and_investing'
+  | 'fitness_and_athletics'
+  | 'fitness_and_health_groups'
+  | 'fitness_and_recreation'
+  | 'fitness_equipment_and_gear'
+  | 'food_and_beverage'
+  | 'food_and_beverages'
+  | 'food_and_hospitality_marketplaces'
+  | 'funeral_and_death_care'
+  | 'gaming_and_entertainment_software'
+  | 'gaming_groups'
+  | 'genetic_and_specialized'
+  | 'government_and_public'
+  | 'health_and_wellness'
+  | 'health_and_wellness_services'
+  | 'healthcare'
+  | 'healthcare_and_wellness_software'
+  | 'hobbies_and_lifestyle'
+  | 'hobby_and_interest_groups'
+  | 'home_and_living'
+  | 'home_and_trade_services'
+  | 'home_and_trade_storefronts'
+  | 'home_improvement_and_tools'
+  | 'home_services_gigs'
+  | 'hospitality_and_lodging'
+  | 'industrial_and_manufacturing'
+  | 'industry_specific_software'
+  | 'language_and_communication'
+  | 'legal_and_compliance'
+  | 'lifestyle_and_culture'
+  | 'lifestyle_and_personal_growth_groups'
+  | 'lifestyle_and_wellness_events'
+  | 'logistics_and_transportation_services'
+  | 'marketing_agencies'
+  | 'marketing_and_advertising'
+  | 'marketing_and_sales_software'
+  | 'media_and_publishing_companies'
+  | 'mental_health_and_behavioral'
+  | 'miscellaneous'
+  | 'music_and_performing_arts'
+  | 'news_and_politics'
+  | 'nonprofit_and_charity'
+  | 'office_and_business_supplies'
+  | 'outdoor_and_sports'
+  | 'personal_development'
+  | 'personal_finance'
+  | 'personal_services'
+  | 'pet_services'
+  | 'pets_and_animals'
+  | 'primary_and_general_care'
+  | 'product_marketplaces'
+  | 'productivity_and_business_ops'
+  | 'professional_gigs'
+  | 'professional_services'
+  | 'professional_services_storefront'
+  | 'publishing_and_info_products'
+  | 'real_estate'
+  | 'real_estate_software'
+  | 'recruiting_and_staffing'
+  | 'rehabilitation_and_therapy'
+  | 'rental_marketplaces'
+  | 'retail'
+  | 'sales_agencies'
+  | 'sales_and_revenue'
+  | 'security_and_investigations'
+  | 'security_and_privacy_software'
+  | 'service_marketplaces'
+  | 'sleep_and_chronic_conditions'
+  | 'social_and_networking_events'
+  | 'specialized_gigs'
+  | 'specialty_medical_care'
+  | 'spirituality_and_mindfulness'
+  | 'spirituality_and_personal_growth'
+  | 'sports_and_fitness_events'
+  | 'sports_betting_and_gambling'
+  | 'sports_betting_groups'
+  | 'supplements_and_nutrition'
+  | 'sustainability_and_eco_products'
+  | 'task_and_errands'
+  | 'tech_and_ai'
+  | 'tech_and_dev_groups'
+  | 'tech_and_development'
+  | 'trading_and_finance_software'
+  | 'trading_and_investing'
+  | 'trading_and_investing_groups'
+  | 'transportation'
+  | 'veterinary'
+  | 'video_games_and_esports'
+  | 'weight_and_metabolic_health'
+  | 'wellness_and_alternative'
+  | 'womens_and_mens_health';
+
+/**
  * Represents `true` or `false` values.
  */
 export type ProductDeleteResponse = boolean;
 
 export interface ProductCreateParams {
   /**
-   * The ID of the company to create the product for.
+   * The unique identifier of the company to create this product for.
    */
   company_id: string;
 
   /**
-   * The title of the product. It must be max 40 characters.
+   * The display name of the product. Maximum 40 characters.
    */
   title: string;
 
@@ -135,7 +276,7 @@ export interface ProductCreateParams {
   business_type?: Shared.BusinessTypes | null;
 
   /**
-   * Whether or not to collect shipping information at checkout from the customer.
+   * Whether the checkout flow collects a shipping address from the customer.
    */
   collect_shipping_address?: boolean | null;
 
@@ -145,29 +286,31 @@ export interface ProductCreateParams {
   custom_cta?: Shared.CustomCta | null;
 
   /**
-   * The custom call to action URL for the product.
+   * A URL that the call-to-action button links to instead of the default checkout
+   * flow.
    */
   custom_cta_url?: string | null;
 
   /**
-   * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-   * between 5 and 22 characters, contain at least one letter, and not contain any of
-   * the following characters: <, >, \, ', "
+   * A custom text label that appears on the customer's bank statement. Must be 5-22
+   * characters, contain at least one letter, and not contain <, >, \, ', or "
+   * characters.
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the product.
+   * A written description of the product displayed on its product page.
    */
   description?: string | null;
 
   /**
-   * An array of experience IDs that this pass has
+   * The unique identifiers of experiences to connect to this product.
    */
   experience_ids?: Array<string> | null;
 
   /**
-   * The percentage of the revenue that goes to the global affiliate program.
+   * The commission rate as a percentage that affiliates earn through the global
+   * affiliate program.
    */
   global_affiliate_percentage?: number | null;
 
@@ -177,9 +320,14 @@ export interface ProductCreateParams {
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The headline of the product.
+   * A short marketing headline displayed prominently on the product page.
    */
   headline?: string | null;
+
+  /**
+   * The different industry groups a company can be in.
+   */
+  industry_group?: IndustryGroups | null;
 
   /**
    * The different industry types a company can be in.
@@ -187,7 +335,8 @@ export interface ProductCreateParams {
   industry_type?: Shared.IndustryTypes | null;
 
   /**
-   * The percentage of the revenue that goes to the member affiliate program.
+   * The commission rate as a percentage that members earn through the member
+   * affiliate program.
    */
   member_affiliate_percentage?: number | null;
 
@@ -197,27 +346,22 @@ export interface ProductCreateParams {
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The details to assign an autogenerated plan.
+   * Configuration for an automatically generated plan to attach to this product.
    */
   plan_options?: ProductCreateParams.PlanOptions | null;
 
   /**
-   * The product highlights for the product.
-   */
-  product_highlights?: Array<ProductCreateParams.ProductHighlight> | null;
-
-  /**
-   * The ID of the product tax code to apply to this product.
+   * The unique identifier of the tax classification code to apply to this product.
    */
   product_tax_code_id?: string | null;
 
   /**
-   * The URL to redirect the customer to after a purchase.
+   * A URL to redirect the customer to after completing a purchase.
    */
   redirect_purchase_url?: string | null;
 
   /**
-   * The route of the product.
+   * The URL slug for the product's public link.
    */
   route?: string | null;
 
@@ -229,7 +373,7 @@ export interface ProductCreateParams {
 
 export namespace ProductCreateParams {
   /**
-   * The details to assign an autogenerated plan.
+   * Configuration for an automatically generated plan to attach to this product.
    */
   export interface PlanOptions {
     /**
@@ -308,27 +452,6 @@ export namespace ProductCreateParams {
       required?: boolean | null;
     }
   }
-
-  /**
-   * Input for creating a product highlight
-   */
-  export interface ProductHighlight {
-    /**
-     * Text to display to describe the product highlight (max length 250 for
-     * qualification or benefits, 170 for who this is for, 140 for pricing features).
-     */
-    content: string;
-
-    /**
-     * The type of this highlight.
-     */
-    highlight_type: 'qualification' | 'benefit' | 'who_this_is_for' | 'pricing_feature';
-
-    /**
-     * The title of the product highlight, if applicable.
-     */
-    title?: string | null;
-  }
 }
 
 export interface ProductUpdateParams {
@@ -338,7 +461,7 @@ export interface ProductUpdateParams {
   business_type?: Shared.BusinessTypes | null;
 
   /**
-   * Whether or not to collect shipping information at checkout from the customer.
+   * Whether the checkout flow collects a shipping address from the customer.
    */
   collect_shipping_address?: boolean | null;
 
@@ -348,24 +471,31 @@ export interface ProductUpdateParams {
   custom_cta?: Shared.CustomCta | null;
 
   /**
-   * The custom call to action URL for the product.
+   * A URL that the call-to-action button links to instead of the default checkout
+   * flow.
    */
   custom_cta_url?: string | null;
 
   /**
-   * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-   * between 5 and 22 characters, contain at least one letter, and not contain any of
-   * the following characters: <, >, \, ', "
+   * A custom text label that appears on the customer's bank statement. Must be 5-22
+   * characters, contain at least one letter, and not contain <, >, \, ', or "
+   * characters.
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the product.
+   * A written description of the product displayed on its product page.
    */
   description?: string | null;
 
   /**
-   * The percentage of the revenue that goes to the global affiliate program.
+   * The gallery images for the product.
+   */
+  gallery_images?: Array<ProductUpdateParams.GalleryImage> | null;
+
+  /**
+   * The commission rate as a percentage that affiliates earn through the global
+   * affiliate program.
    */
   global_affiliate_percentage?: number | null;
 
@@ -375,9 +505,14 @@ export interface ProductUpdateParams {
   global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The headline of the product.
+   * A short marketing headline displayed prominently on the product page.
    */
   headline?: string | null;
+
+  /**
+   * The different industry groups a company can be in.
+   */
+  industry_group?: IndustryGroups | null;
 
   /**
    * The different industry types a company can be in.
@@ -385,7 +520,8 @@ export interface ProductUpdateParams {
   industry_type?: Shared.IndustryTypes | null;
 
   /**
-   * The percentage of the revenue that goes to the member affiliate program.
+   * The commission rate as a percentage that members earn through the member
+   * affiliate program.
    */
   member_affiliate_percentage?: number | null;
 
@@ -395,27 +531,27 @@ export interface ProductUpdateParams {
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
-   * The ID of the product tax code to apply to this product.
+   * The unique identifier of the tax classification code to apply to this product.
    */
   product_tax_code_id?: string | null;
 
   /**
-   * The URL to redirect the customer to after a purchase.
+   * A URL to redirect the customer to after completing a purchase.
    */
   redirect_purchase_url?: string | null;
 
   /**
-   * The route of the product.
+   * The URL slug for the product's public link.
    */
   route?: string | null;
 
   /**
-   * Configuration for a product on the company's store page.
+   * Layout and display configuration for this product on the company's store page.
    */
   store_page_config?: ProductUpdateParams.StorePageConfig | null;
 
   /**
-   * The title of the product.
+   * The display name of the product. Maximum 40 characters.
    */
   title?: string | null;
 
@@ -427,7 +563,17 @@ export interface ProductUpdateParams {
 
 export namespace ProductUpdateParams {
   /**
-   * Configuration for a product on the company's store page.
+   * Input for an attachment
+   */
+  export interface GalleryImage {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+
+  /**
+   * Layout and display configuration for this product on the company's store page.
    */
   export interface StorePageConfig {
     /**
@@ -444,7 +590,7 @@ export namespace ProductUpdateParams {
 
 export interface ProductListParams extends CursorPageParams {
   /**
-   * The ID of the company to filter products by
+   * The unique identifier of the company to list products for.
    */
   company_id: string;
 
@@ -454,12 +600,12 @@ export interface ProductListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return products created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return products created before this timestamp.
    */
   created_before?: string | null;
 
@@ -484,18 +630,19 @@ export interface ProductListParams extends CursorPageParams {
   order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
 
   /**
-   * The type of products to filter by
+   * Filter to only products matching these type classifications.
    */
   product_types?: Array<Shared.AccessPassType> | null;
 
   /**
-   * The visibility of the products to filter by
+   * Filter to only products matching these visibility states.
    */
   visibilities?: Array<Shared.VisibilityFilter> | null;
 }
 
 export declare namespace Products {
   export {
+    type IndustryGroups as IndustryGroups,
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,

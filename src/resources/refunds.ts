@@ -10,7 +10,7 @@ import { path } from '../internal/utils/path';
 
 export class Refunds extends APIResource {
   /**
-   * Retrieves a Refund by ID
+   * Retrieves the details of an existing refund.
    *
    * Required permissions:
    *
@@ -24,7 +24,8 @@ export class Refunds extends APIResource {
   }
 
   /**
-   * Lists Refunds for a payment.
+   * Returns a paginated list of refunds for a specific payment, with optional
+   * filtering by creation date.
    *
    * Required permissions:
    *
@@ -53,7 +54,8 @@ export type PaymentProvider =
   | 'platform_balance'
   | 'multi_psp'
   | 'adyen'
-  | 'claritypay';
+  | 'claritypay'
+  | 'checkout_dot_com';
 
 /**
  * The status of the refund reference.
@@ -84,8 +86,8 @@ export interface RefundRetrieveResponse {
   id: string;
 
   /**
-   * The amount of the refund. Provided as a number in the specified currency. Eg:
-   * 10.43 for $10.43 USD.
+   * The refunded amount as a decimal in the specified currency, such as 10.43 for
+   * $10.43 USD.
    */
   amount: number;
 
@@ -95,22 +97,24 @@ export interface RefundRetrieveResponse {
   created_at: string;
 
   /**
-   * The currency of the refund.
+   * The three-letter ISO currency code for the refunded amount.
    */
   currency: Shared.Currency;
 
   /**
-   * The payment associated with the refund.
+   * The original payment that this refund was issued against. Null if the payment is
+   * no longer available.
    */
   payment: RefundRetrieveResponse.Payment | null;
 
   /**
-   * The provider of the refund.
+   * The payment provider that processed the refund.
    */
   provider: PaymentProvider;
 
   /**
-   * The time the refund was created by the provider.
+   * The timestamp when the refund was created in the payment provider's system. Null
+   * if not available from the provider.
    */
   provider_created_at: string | null;
 
@@ -125,19 +129,22 @@ export interface RefundRetrieveResponse {
   reference_type: RefundReferenceType | null;
 
   /**
-   * The value of the reference.
+   * The tracking reference value from the payment processor, used to trace the
+   * refund through banking networks. Null if no reference was provided.
    */
   reference_value: string | null;
 
   /**
-   * The status of the refund.
+   * The current processing status of the refund, such as pending, succeeded, or
+   * failed.
    */
   status: RefundStatus;
 }
 
 export namespace RefundRetrieveResponse {
   /**
-   * The payment associated with the refund.
+   * The original payment that this refund was issued against. Null if the payment is
+   * no longer available.
    */
   export interface Payment {
     /**
@@ -156,7 +163,8 @@ export namespace RefundRetrieveResponse {
     card_brand: PaymentsAPI.CardBrands | null;
 
     /**
-     * The last 4 digits of the card used to make the payment.
+     * The last four digits of the card used to make this payment. Null if the payment
+     * was not made with a card.
      */
     card_last4: string | null;
 
@@ -186,7 +194,8 @@ export namespace RefundRetrieveResponse {
     membership: Payment.Membership | null;
 
     /**
-     * The datetime the payment was paid
+     * The time at which this payment was successfully collected. Null if the payment
+     * has not yet succeeded. As a Unix timestamp.
      */
     paid_at: string | null;
 
@@ -257,17 +266,18 @@ export namespace RefundRetrieveResponse {
       id: string;
 
       /**
-       * The email of the user
+       * The user's email address. Requires the member:email:read permission to access.
+       * Null if not authorized.
        */
       email: string | null;
 
       /**
-       * The name of the user from their Whop account.
+       * The user's display name shown on their public profile.
        */
       name: string | null;
 
       /**
-       * The username of the user from their Whop account.
+       * The user's unique username shown on their public profile.
        */
       username: string;
     }
@@ -285,8 +295,8 @@ export interface RefundListResponse {
   id: string;
 
   /**
-   * The amount of the refund. Provided as a number in the specified currency. Eg:
-   * 10.43 for $10.43 USD.
+   * The refunded amount as a decimal in the specified currency, such as 10.43 for
+   * $10.43 USD.
    */
   amount: number;
 
@@ -296,22 +306,24 @@ export interface RefundListResponse {
   created_at: string;
 
   /**
-   * The currency of the refund.
+   * The three-letter ISO currency code for the refunded amount.
    */
   currency: Shared.Currency;
 
   /**
-   * The payment associated with the refund.
+   * The original payment that this refund was issued against. Null if the payment is
+   * no longer available.
    */
   payment: RefundListResponse.Payment | null;
 
   /**
-   * The provider of the refund.
+   * The payment provider that processed the refund.
    */
   provider: PaymentProvider;
 
   /**
-   * The time the refund was created by the provider.
+   * The timestamp when the refund was created in the payment provider's system. Null
+   * if not available from the provider.
    */
   provider_created_at: string | null;
 
@@ -326,19 +338,22 @@ export interface RefundListResponse {
   reference_type: RefundReferenceType | null;
 
   /**
-   * The value of the reference.
+   * The tracking reference value from the payment processor, used to trace the
+   * refund through banking networks. Null if no reference was provided.
    */
   reference_value: string | null;
 
   /**
-   * The status of the refund.
+   * The current processing status of the refund, such as pending, succeeded, or
+   * failed.
    */
   status: RefundStatus;
 }
 
 export namespace RefundListResponse {
   /**
-   * The payment associated with the refund.
+   * The original payment that this refund was issued against. Null if the payment is
+   * no longer available.
    */
   export interface Payment {
     /**
@@ -350,7 +365,7 @@ export namespace RefundListResponse {
 
 export interface RefundListParams extends CursorPageParams {
   /**
-   * The ID of the payment to list refunds for
+   * The unique identifier of the payment to list refunds for.
    */
   payment_id: string;
 
@@ -360,12 +375,12 @@ export interface RefundListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return refunds created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return refunds created before this timestamp.
    */
   created_before?: string | null;
 

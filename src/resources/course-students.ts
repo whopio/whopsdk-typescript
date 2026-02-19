@@ -8,7 +8,7 @@ import { path } from '../internal/utils/path';
 
 export class CourseStudents extends APIResource {
   /**
-   * Retrieves a course student by interaction ID
+   * Retrieves the details of an existing course student.
    *
    * Required permissions:
    *
@@ -20,7 +20,8 @@ export class CourseStudents extends APIResource {
   }
 
   /**
-   * Lists students for a course
+   * Returns a paginated list of students enrolled in a course, with optional name
+   * filtering.
    *
    * Required permissions:
    *
@@ -41,7 +42,8 @@ export class CourseStudents extends APIResource {
 export type CourseStudentListResponsesCursorPage = CursorPage<CourseStudentListResponse>;
 
 /**
- * A course student (enrollment of a student in a course)
+ * An enrollment record for a student in a course, including progress and
+ * completion metrics.
  */
 export interface CourseStudentRetrieveResponse {
   /**
@@ -50,44 +52,47 @@ export interface CourseStudentRetrieveResponse {
   id: string;
 
   /**
-   * The number of lessons the student has completed
+   * The total number of lessons this student has marked as completed in the course.
    */
   completed_lessons_count: number;
 
   /**
-   * The percentage of lessons completed (0-100)
+   * The percentage of available lessons the student has completed, as a value from 0
+   * to 100 rounded to two decimal places.
    */
   completion_rate: number;
 
   /**
-   * The course the student is enrolled in
+   * The course this student is enrolled in.
    */
   course: CourseStudentRetrieveResponse.Course;
 
   /**
-   * When the student first interacted with the course
+   * The timestamp when the student first interacted with this course, as a Unix
+   * timestamp.
    */
   first_interaction_at: string;
 
   /**
-   * When the student last interacted with the course
+   * The timestamp when the student most recently interacted with this course, as a
+   * Unix timestamp.
    */
   last_interaction_at: string;
 
   /**
-   * The total number of lessons the student has access to
+   * The total number of visible lessons available to this student in the course.
    */
   total_lessons_count: number;
 
   /**
-   * The user who is enrolled in the course
+   * The user profile of the enrolled student.
    */
   user: CourseStudentRetrieveResponse.User;
 }
 
 export namespace CourseStudentRetrieveResponse {
   /**
-   * The course the student is enrolled in
+   * The course this student is enrolled in.
    */
   export interface Course {
     /**
@@ -96,19 +101,19 @@ export namespace CourseStudentRetrieveResponse {
     id: string;
 
     /**
-     * The experience that the course belongs to
+     * The parent experience that this course belongs to.
      */
     experience: Course.Experience;
 
     /**
-     * The title of the course
+     * The display name of the course shown to students. Null if no title has been set.
      */
     title: string | null;
   }
 
   export namespace Course {
     /**
-     * The experience that the course belongs to
+     * The parent experience that this course belongs to.
      */
     export interface Experience {
       /**
@@ -119,7 +124,7 @@ export namespace CourseStudentRetrieveResponse {
   }
 
   /**
-   * The user who is enrolled in the course
+   * The user profile of the enrolled student.
    */
   export interface User {
     /**
@@ -128,19 +133,20 @@ export namespace CourseStudentRetrieveResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
 }
 
 /**
- * A course student (enrollment of a student in a course)
+ * An enrollment record for a student in a course, including progress and
+ * completion metrics.
  */
 export interface CourseStudentListResponse {
   /**
@@ -149,39 +155,42 @@ export interface CourseStudentListResponse {
   id: string;
 
   /**
-   * The number of lessons the student has completed
+   * The total number of lessons this student has marked as completed in the course.
    */
   completed_lessons_count: number;
 
   /**
-   * The percentage of lessons completed (0-100)
+   * The percentage of available lessons the student has completed, as a value from 0
+   * to 100 rounded to two decimal places.
    */
   completion_rate: number;
 
   /**
-   * When the student first interacted with the course
+   * The timestamp when the student first interacted with this course, as a Unix
+   * timestamp.
    */
   first_interaction_at: string;
 
   /**
-   * When the student last interacted with the course
+   * The timestamp when the student most recently interacted with this course, as a
+   * Unix timestamp.
    */
   last_interaction_at: string;
 
   /**
-   * The total number of lessons the student has access to
+   * The total number of visible lessons available to this student in the course.
    */
   total_lessons_count: number;
 
   /**
-   * The user who is enrolled in the course
+   * The user profile of the enrolled student.
    */
   user: CourseStudentListResponse.User;
 }
 
 export namespace CourseStudentListResponse {
   /**
-   * The user who is enrolled in the course
+   * The user profile of the enrolled student.
    */
   export interface User {
     /**
@@ -190,12 +199,12 @@ export namespace CourseStudentListResponse {
     id: string;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -203,7 +212,7 @@ export namespace CourseStudentListResponse {
 
 export interface CourseStudentListParams extends CursorPageParams {
   /**
-   * The ID of the course
+   * The unique identifier of the course to list enrolled students for.
    */
   course_id: string;
 
@@ -218,7 +227,7 @@ export interface CourseStudentListParams extends CursorPageParams {
   first?: number | null;
 
   /**
-   * Filter students by name - returns students whose names match the keyword
+   * A search term to filter students by name or username.
    */
   keyword?: string | null;
 

@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class ChatChannels extends APIResource {
   /**
-   * Retrieves a chat channel
+   * Retrieves the details of an existing chat channel.
    *
    * Required permissions:
    *
@@ -27,7 +27,8 @@ export class ChatChannels extends APIResource {
   }
 
   /**
-   * Updates a chat channel
+   * Update moderation settings for a chat channel, such as who can post, banned
+   * words, and media restrictions.
    *
    * Required permissions:
    *
@@ -47,7 +48,8 @@ export class ChatChannels extends APIResource {
   }
 
   /**
-   * Lists chat channels inside a company
+   * Returns a paginated list of chat channels within a specific company, with
+   * optional filtering by product.
    *
    * Required permissions:
    *
@@ -77,7 +79,8 @@ export class ChatChannels extends APIResource {
 export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse>;
 
 /**
- * Represents a Chat feed
+ * A real-time chat feed attached to an experience, with configurable moderation
+ * and posting permissions.
  */
 export interface ChatChannelListResponse {
   /**
@@ -86,44 +89,45 @@ export interface ChatChannelListResponse {
   id: string;
 
   /**
-   * Whether or not media is banned in this chat
+   * Whether media uploads such as images and videos are blocked in this chat.
    */
   ban_media: boolean;
 
   /**
-   * Whether or not URLs are banned in this chat
+   * Whether URL links are blocked from being posted in this chat.
    */
   ban_urls: boolean;
 
   /**
-   * List of banned words in this chat
+   * A list of words that are automatically filtered from messages in this chat.
    */
   banned_words: Array<string>;
 
   /**
-   * The experience for this chat
+   * The experience this chat feed is attached to.
    */
   experience: ChatChannelListResponse.Experience;
 
   /**
-   * The number of seconds a user needs to wait before posting again, if any
+   * The minimum number of seconds a user must wait between consecutive messages.
+   * Null if no cooldown is enforced.
    */
   user_posts_cooldown_seconds: number | null;
 
   /**
-   * Who can post on this chat
+   * The permission level controlling which users can send messages in this chat.
    */
   who_can_post: Shared.WhoCanPost;
 
   /**
-   * Who can react on this chat
+   * The permission level controlling which users can add reactions in this chat.
    */
   who_can_react: Shared.WhoCanReact;
 }
 
 export namespace ChatChannelListResponse {
   /**
-   * The experience for this chat
+   * The experience this chat feed is attached to.
    */
   export interface Experience {
     /**
@@ -132,7 +136,8 @@ export namespace ChatChannelListResponse {
     id: string;
 
     /**
-     * The written name of the description.
+     * The display name of this experience shown to users in the product navigation.
+     * Maximum 255 characters.
      */
     name: string;
   }
@@ -140,22 +145,24 @@ export namespace ChatChannelListResponse {
 
 export interface ChatChannelUpdateParams {
   /**
-   * Whether media uploads are banned in this chat
+   * Whether media uploads such as images and videos are banned in this chat channel.
    */
   ban_media?: boolean | null;
 
   /**
-   * Whether URLs are banned in this chat
+   * Whether URLs and links are banned from being posted in this chat channel.
    */
   ban_urls?: boolean | null;
 
   /**
-   * List of banned words for this chat
+   * A list of words that are automatically blocked from messages in this chat
+   * channel. For example, ['spam', 'scam'].
    */
   banned_words?: Array<string> | null;
 
   /**
-   * The cooldown period in seconds between user posts
+   * The minimum number of seconds a user must wait between sending messages in this
+   * chat channel.
    */
   user_posts_cooldown_seconds?: number | null;
 
@@ -172,7 +179,7 @@ export interface ChatChannelUpdateParams {
 
 export interface ChatChannelListParams extends CursorPageParams {
   /**
-   * The ID of the company to list chat channels for
+   * The unique identifier of the company to list chat channels for.
    */
   company_id: string;
 
@@ -192,7 +199,8 @@ export interface ChatChannelListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * If provided, only chat channels connected to this product are returned
+   * The unique identifier of a product to filter by. When set, only chat channels
+   * connected to this product are returned.
    */
   product_id?: string | null;
 }

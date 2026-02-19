@@ -27,6 +27,7 @@ describe('resource apps', () => {
       name: 'name',
       base_url: 'base_url',
       icon: { id: 'id' },
+      redirect_uris: ['string'],
     });
   });
 
@@ -70,6 +71,8 @@ describe('resource apps', () => {
           experience_path: 'experience_path',
           icon: { id: 'id' },
           name: 'name',
+          oauth_client_type: 'public',
+          redirect_uris: ['string'],
           required_scopes: ['read_user'],
           status: 'live',
         },

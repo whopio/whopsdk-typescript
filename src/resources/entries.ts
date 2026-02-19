@@ -9,7 +9,7 @@ import { path } from '../internal/utils/path';
 
 export class Entries extends APIResource {
   /**
-   * Retrieves an entry by ID
+   * Retrieves the details of an existing waitlist entry.
    *
    * Required permissions:
    *
@@ -21,7 +21,8 @@ export class Entries extends APIResource {
   }
 
   /**
-   * Lists entries for a company
+   * Returns a paginated list of waitlist entries for a company, with optional
+   * filtering by product, plan, status, and creation date.
    *
    * Required permissions:
    *
@@ -36,7 +37,8 @@ export class Entries extends APIResource {
   }
 
   /**
-   * Approve an entry
+   * Approve a pending waitlist entry, triggering the checkout process to grant the
+   * user access to the plan.
    *
    * Required permissions:
    *
@@ -47,7 +49,8 @@ export class Entries extends APIResource {
   }
 
   /**
-   * Deny an entry
+   * Deny a pending waitlist entry, preventing the user from gaining access to the
+   * plan.
    *
    * Required permissions:
    *
@@ -77,29 +80,31 @@ export interface EntryListResponse {
   created_at: string | null;
 
   /**
-   * The waitlist plan the entry if for.
+   * The waitlisted plan that this entry is a signup for.
    */
   plan: EntryListResponse.Plan | null;
 
   /**
-   * The product tied to this entry, if there is one.
+   * The product associated with this entry's waitlisted plan. Null if the plan is
+   * not tied to a product.
    */
   product: EntryListResponse.Product | null;
 
   /**
-   * The status of the entry.
+   * The current status of the waitlist entry (e.g., drafted, pending, approved,
+   * denied).
    */
   status: Shared.EntryStatus;
 
   /**
-   * The user who created the entry.
+   * The user who submitted this waitlist entry.
    */
   user: EntryListResponse.User;
 }
 
 export namespace EntryListResponse {
   /**
-   * The waitlist plan the entry if for.
+   * The waitlisted plan that this entry is a signup for.
    */
   export interface Plan {
     /**
@@ -109,7 +114,8 @@ export namespace EntryListResponse {
   }
 
   /**
-   * The product tied to this entry, if there is one.
+   * The product associated with this entry's waitlisted plan. Null if the plan is
+   * not tied to a product.
    */
   export interface Product {
     /**
@@ -118,13 +124,14 @@ export namespace EntryListResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
 
   /**
-   * The user who created the entry.
+   * The user who submitted this waitlist entry.
    */
   export interface User {
     /**
@@ -133,17 +140,18 @@ export namespace EntryListResponse {
     id: string;
 
     /**
-     * The email of the user
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
      */
     email: string | null;
 
     /**
-     * The name of the user from their Whop account.
+     * The user's display name shown on their public profile.
      */
     name: string | null;
 
     /**
-     * The username of the user from their Whop account.
+     * The user's unique username shown on their public profile.
      */
     username: string;
   }
@@ -161,7 +169,7 @@ export interface EntryApproveResponse {
 
 export interface EntryListParams extends CursorPageParams {
   /**
-   * The ID of the company
+   * The unique identifier of the company to list waitlist entries for.
    */
   company_id: string;
 
@@ -171,12 +179,12 @@ export interface EntryListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return entries created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return entries created before this timestamp.
    */
   created_before?: string | null;
 
@@ -201,17 +209,17 @@ export interface EntryListParams extends CursorPageParams {
   order?: 'id' | 'created_at' | null;
 
   /**
-   * The plan IDs to filter the entries by
+   * Filter entries to only those for specific plans.
    */
   plan_ids?: Array<string> | null;
 
   /**
-   * The product IDs to filter the entries by
+   * Filter entries to only those for specific products.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The statuses to filter the entries by
+   * Filter entries by their current status.
    */
   statuses?: Array<Shared.EntryStatus> | null;
 }

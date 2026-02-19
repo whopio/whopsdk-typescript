@@ -8,7 +8,8 @@ import { path } from '../internal/utils/path';
 
 export class DmChannels extends APIResource {
   /**
-   * Creates a DM channel
+   * Create a new DM channel between two or more users, optionally scoped to a
+   * specific company. Returns the existing channel if one already exists.
    *
    * @example
    * ```ts
@@ -22,7 +23,7 @@ export class DmChannels extends APIResource {
   }
 
   /**
-   * Retrieves a DM channel
+   * Retrieves the details of an existing DM channel.
    *
    * Required permissions:
    *
@@ -38,7 +39,8 @@ export class DmChannels extends APIResource {
   }
 
   /**
-   * Updates a DM channel
+   * Update the settings of an existing DM channel, such as its display name. Only an
+   * admin of the channel can perform this action.
    *
    * Required permissions:
    *
@@ -58,7 +60,8 @@ export class DmChannels extends APIResource {
   }
 
   /**
-   * Lists DM channels for the current user
+   * Returns a paginated list of DM channels for the currently authenticated user,
+   * sorted by most recently active.
    *
    * Required permissions:
    *
@@ -80,7 +83,8 @@ export class DmChannels extends APIResource {
   }
 
   /**
-   * Deletes a DM channel
+   * Permanently delete a DM channel and all of its messages. Only an admin of the
+   * channel can perform this action.
    *
    * Required permissions:
    *
@@ -99,7 +103,8 @@ export class DmChannels extends APIResource {
 export type DmChannelListResponsesCursorPage = CursorPage<DmChannelListResponse>;
 
 /**
- * Represents a DM channel
+ * A messaging channel that can be a one-on-one DM, group chat, company support
+ * conversation, or platform-level direct message.
  */
 export interface DmChannel {
   /**
@@ -113,18 +118,21 @@ export interface DmChannel {
   created_at: string;
 
   /**
-   * When the last message was sent
+   * The timestamp when the most recent message was sent in this channel. Null if no
+   * messages have been sent.
    */
   last_message_at: string | null;
 
   /**
-   * The custom name of the DM channel, if any
+   * A custom display name assigned to this channel by the user. Null if no custom
+   * name has been set.
    */
   name: string | null;
 }
 
 /**
- * Represents a DM channel
+ * A messaging channel that can be a one-on-one DM, group chat, company support
+ * conversation, or platform-level direct message.
  */
 export interface DmChannelListResponse {
   /**
@@ -138,12 +146,14 @@ export interface DmChannelListResponse {
   created_at: string;
 
   /**
-   * When the last message was sent
+   * The timestamp when the most recent message was sent in this channel. Null if no
+   * messages have been sent.
    */
   last_message_at: string | null;
 
   /**
-   * The custom name of the DM channel, if any
+   * A custom display name assigned to this channel by the user. Null if no custom
+   * name has been set.
    */
   name: string | null;
 }
@@ -155,24 +165,26 @@ export type DmChannelDeleteResponse = boolean;
 
 export interface DmChannelCreateParams {
   /**
-   * The user ids to create a DM with. Can be email, username or user_id (tag)
+   * The list of user identifiers to include in the DM channel. Each entry can be an
+   * email, username, or user ID (e.g. 'user_xxxxx').
    */
   with_user_ids: Array<string>;
 
   /**
-   * The ID of the company to scope this DM channel to.
+   * The unique identifier of the company to scope this DM channel to. When set, the
+   * channel is visible only within that company context.
    */
   company_id?: string | null;
 
   /**
-   * The custom name for the DM channel
+   * A custom display name for the DM channel. For example, 'Project Discussion'.
    */
   custom_name?: string | null;
 }
 
 export interface DmChannelUpdateParams {
   /**
-   * The custom name for the DM channel
+   * A new custom display name for the DM channel. For example, 'Project Discussion'.
    */
   custom_name?: string | null;
 }
@@ -184,7 +196,8 @@ export interface DmChannelListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * Filter DM channels scoped to a specific company
+   * The unique identifier of a company to filter DM channels by. Only returns
+   * channels scoped to this company.
    */
   company_id?: string | null;
 

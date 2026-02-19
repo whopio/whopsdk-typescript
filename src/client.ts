@@ -78,12 +78,12 @@ import {
   CompanyUpdateParams,
 } from './resources/companies';
 import {
-  BotTokenTransactionTypes,
   CompanyTokenTransaction,
   CompanyTokenTransactionCreateParams,
   CompanyTokenTransactionListParams,
   CompanyTokenTransactionListResponse,
   CompanyTokenTransactionListResponsesCursorPage,
+  CompanyTokenTransactionType,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
 import {
@@ -302,6 +302,7 @@ import {
   Plans,
 } from './resources/plans';
 import {
+  IndustryGroups,
   ProductCreateParams,
   ProductDeleteResponse,
   ProductListParams,
@@ -879,7 +880,7 @@ export class Whop {
       loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
 
       const errText = await response.text().catch((err: any) => castToError(err).message);
-      const errJSON = safeJSON(errText);
+      const errJSON = safeJSON(errText) as any;
       const errMessage = errJSON ? undefined : errText;
 
       loggerFor(this).debug(
@@ -1153,6 +1154,14 @@ export class Whop {
         (Symbol.iterator in body && 'next' in body && typeof body.next === 'function'))
     ) {
       return { bodyHeaders: undefined, body: Shims.ReadableStreamFrom(body as AsyncIterable<Uint8Array>) };
+    } else if (
+      typeof body === 'object' &&
+      headers.values.get('content-type') === 'application/x-www-form-urlencoded'
+    ) {
+      return {
+        bodyHeaders: { 'content-type': 'application/x-www-form-urlencoded' },
+        body: this.stringifyQuery(body as Record<string, unknown>),
+      };
     } else {
       return this.#encoder({ body, headers });
     }
@@ -1310,6 +1319,7 @@ export declare namespace Whop {
 
   export {
     Products as Products,
+    type IndustryGroups as IndustryGroups,
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
@@ -1735,8 +1745,8 @@ export declare namespace Whop {
 
   export {
     CompanyTokenTransactions as CompanyTokenTransactions,
-    type BotTokenTransactionTypes as BotTokenTransactionTypes,
     type CompanyTokenTransaction as CompanyTokenTransaction,
+    type CompanyTokenTransactionType as CompanyTokenTransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,

@@ -10,11 +10,7 @@ import { path } from '../internal/utils/path';
 
 export class SetupIntents extends APIResource {
   /**
-   * A setup intent is an object used to securely collect and store a member’s
-   * payment method for future use without charging them immediately. It handles
-   * authentication steps up front so future off-session payments can be completed
-   * smoothly. This ensures the payment method is verified and ready for later
-   * billing.
+   * Retrieves the details of an existing setup intent.
    *
    * Required permissions:
    *
@@ -27,11 +23,9 @@ export class SetupIntents extends APIResource {
   }
 
   /**
-   * A setup intent is an object used to securely collect and store a member’s
-   * payment method for future use without charging them immediately. It handles
-   * authentication steps up front so future off-session payments can be completed
-   * smoothly. This ensures the payment method is verified and ready for later
-   * billing.
+   * Returns a paginated list of setup intents for a company, with optional filtering
+   * by creation date. A setup intent securely collects and stores a member's payment
+   * method for future use without charging them immediately.
    *
    * Required permissions:
    *
@@ -53,7 +47,8 @@ export class SetupIntents extends APIResource {
 export type SetupIntentListResponsesCursorPage = CursorPage<SetupIntentListResponse>;
 
 /**
- * A setup intent allows a user to save a payment method without making a purchase.
+ * A setup intent allows a user to save a payment method for future use without
+ * making an immediate purchase.
  */
 export interface SetupIntent {
   /**
@@ -62,12 +57,14 @@ export interface SetupIntent {
   id: string;
 
   /**
-   * The checkout configuration associated with the setup intent
+   * The checkout session configuration associated with this setup intent. Null if no
+   * checkout session was used.
    */
   checkout_configuration: SetupIntent.CheckoutConfiguration | null;
 
   /**
-   * The company of the setup intent
+   * The company that initiated this setup intent. Null if the company has been
+   * deleted.
    */
   company: SetupIntent.Company | null;
 
@@ -77,34 +74,39 @@ export interface SetupIntent {
   created_at: string;
 
   /**
-   * The error message, if any.
+   * A human-readable error message explaining why the setup intent failed. Null if
+   * no error occurred.
    */
   error_message: string | null;
 
   /**
-   * The member connected to the setup intent
+   * The company member associated with this setup intent. Null if the user is not a
+   * member.
    */
   member: SetupIntent.Member | null;
 
   /**
-   * The metadata associated with the setup intent
+   * Custom key-value pairs attached to this setup intent. Null if no metadata was
+   * provided.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The payment method created during the setup, if available.
+   * The saved payment method created by this setup intent. Null if the setup has not
+   * completed successfully.
    */
   payment_method: SetupIntent.PaymentMethod | null;
 
   /**
-   * The status of the setup intent
+   * The current status of the setup intent.
    */
   status: SetupIntentStatus;
 }
 
 export namespace SetupIntent {
   /**
-   * The checkout configuration associated with the setup intent
+   * The checkout session configuration associated with this setup intent. Null if no
+   * checkout session was used.
    */
   export interface CheckoutConfiguration {
     /**
@@ -114,7 +116,8 @@ export namespace SetupIntent {
   }
 
   /**
-   * The company of the setup intent
+   * The company that initiated this setup intent. Null if the company has been
+   * deleted.
    */
   export interface Company {
     /**
@@ -124,7 +127,8 @@ export namespace SetupIntent {
   }
 
   /**
-   * The member connected to the setup intent
+   * The company member associated with this setup intent. Null if the user is not a
+   * member.
    */
   export interface Member {
     /**
@@ -166,7 +170,8 @@ export namespace SetupIntent {
   }
 
   /**
-   * The payment method created during the setup, if available.
+   * The saved payment method created by this setup intent. Null if the setup has not
+   * completed successfully.
    */
   export interface PaymentMethod {
     /**
@@ -201,17 +206,18 @@ export namespace SetupIntent {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
@@ -224,7 +230,8 @@ export namespace SetupIntent {
 export type SetupIntentStatus = 'processing' | 'succeeded' | 'canceled' | 'requires_action';
 
 /**
- * A setup intent allows a user to save a payment method without making a purchase.
+ * A setup intent allows a user to save a payment method for future use without
+ * making an immediate purchase.
  */
 export interface SetupIntentListResponse {
   /**
@@ -233,12 +240,14 @@ export interface SetupIntentListResponse {
   id: string;
 
   /**
-   * The checkout configuration associated with the setup intent
+   * The checkout session configuration associated with this setup intent. Null if no
+   * checkout session was used.
    */
   checkout_configuration: SetupIntentListResponse.CheckoutConfiguration | null;
 
   /**
-   * The company of the setup intent
+   * The company that initiated this setup intent. Null if the company has been
+   * deleted.
    */
   company: SetupIntentListResponse.Company | null;
 
@@ -248,34 +257,39 @@ export interface SetupIntentListResponse {
   created_at: string;
 
   /**
-   * The error message, if any.
+   * A human-readable error message explaining why the setup intent failed. Null if
+   * no error occurred.
    */
   error_message: string | null;
 
   /**
-   * The member connected to the setup intent
+   * The company member associated with this setup intent. Null if the user is not a
+   * member.
    */
   member: SetupIntentListResponse.Member | null;
 
   /**
-   * The metadata associated with the setup intent
+   * Custom key-value pairs attached to this setup intent. Null if no metadata was
+   * provided.
    */
   metadata: { [key: string]: unknown } | null;
 
   /**
-   * The payment method created during the setup, if available.
+   * The saved payment method created by this setup intent. Null if the setup has not
+   * completed successfully.
    */
   payment_method: SetupIntentListResponse.PaymentMethod | null;
 
   /**
-   * The status of the setup intent
+   * The current status of the setup intent.
    */
   status: SetupIntentStatus;
 }
 
 export namespace SetupIntentListResponse {
   /**
-   * The checkout configuration associated with the setup intent
+   * The checkout session configuration associated with this setup intent. Null if no
+   * checkout session was used.
    */
   export interface CheckoutConfiguration {
     /**
@@ -285,7 +299,8 @@ export namespace SetupIntentListResponse {
   }
 
   /**
-   * The company of the setup intent
+   * The company that initiated this setup intent. Null if the company has been
+   * deleted.
    */
   export interface Company {
     /**
@@ -295,7 +310,8 @@ export namespace SetupIntentListResponse {
   }
 
   /**
-   * The member connected to the setup intent
+   * The company member associated with this setup intent. Null if the user is not a
+   * member.
    */
   export interface Member {
     /**
@@ -337,7 +353,8 @@ export namespace SetupIntentListResponse {
   }
 
   /**
-   * The payment method created during the setup, if available.
+   * The saved payment method created by this setup intent. Null if the setup has not
+   * completed successfully.
    */
   export interface PaymentMethod {
     /**
@@ -372,17 +389,18 @@ export namespace SetupIntentListResponse {
       brand: PaymentsAPI.CardBrands | null;
 
       /**
-       * Card expiration month, like 03 for March.
+       * The two-digit expiration month of the card (1-12). Null if not available.
        */
       exp_month: number | null;
 
       /**
-       * Card expiration year, like 27 for 2027.
+       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
+       * available.
        */
       exp_year: number | null;
 
       /**
-       * Last four digits of the card.
+       * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
     }
@@ -391,7 +409,7 @@ export namespace SetupIntentListResponse {
 
 export interface SetupIntentListParams extends CursorPageParams {
   /**
-   * The ID of the company to list setup intents for
+   * The unique identifier of the company to list setup intents for.
    */
   company_id: string;
 
@@ -401,12 +419,12 @@ export interface SetupIntentListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return setup intents created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return setup intents created before this timestamp.
    */
   created_before?: string | null;
 

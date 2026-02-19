@@ -10,7 +10,8 @@ import { path } from '../internal/utils/path';
 
 export class Invoices extends APIResource {
   /**
-   * Creates an invoice
+   * Create an invoice for a customer. The invoice can be charged automatically using
+   * a stored payment method, or sent to the customer for manual payment.
    *
    * Required permissions:
    *
@@ -34,7 +35,7 @@ export class Invoices extends APIResource {
   }
 
   /**
-   * Retrieves an invoice by ID or token
+   * Retrieves the details of an existing invoice.
    *
    * Required permissions:
    *
@@ -46,7 +47,8 @@ export class Invoices extends APIResource {
   }
 
   /**
-   * Lists invoices
+   * Returns a paginated list of invoices for a company, with optional filtering by
+   * product, status, collection method, and creation date.
    *
    * Required permissions:
    *
@@ -61,7 +63,8 @@ export class Invoices extends APIResource {
   }
 
   /**
-   * Void an invoice
+   * Void an open invoice so it can no longer be paid. Voiding is permanent and
+   * cannot be undone.
    *
    * Required permissions:
    *
@@ -86,54 +89,60 @@ export type InvoiceCreateParams =
 export declare namespace InvoiceCreateParams {
   export interface CreateInvoiceInputWithProductAndMemberID {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * How the invoice should be collected. Use charge_automatically to charge a stored
+     * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
 
     /**
-     * The company ID to create this invoice for.
+     * The unique identifier of the company to create this invoice for.
      */
     company_id: string;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The date by which the invoice must be paid.
      */
     due_date: string;
 
     /**
-     * The member ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing member. If you do not have a member ID, you must provide
-     * an email_address and customer_name.
+     * The unique identifier of an existing member to create this invoice for. If not
+     * provided, you must supply an email_address and customer_name.
      */
     member_id: string;
 
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     plan: CreateInvoiceInputWithProductAndMemberID.Plan;
 
     /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
+     * The properties of the product to create for this invoice. Provide this to create
+     * a new product inline.
      */
     product: CreateInvoiceInputWithProductAndMemberID.Product;
 
     /**
-     * Whether or not to charge the customer a buyer fee.
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
+     * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
 
     /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
+     * The name of the customer. Required when creating an invoice for a customer who
+     * is not yet a member of the company.
      */
     customer_name?: string | null;
 
     /**
-     * The payment method ID to use for this invoice. If using charge_automatically,
-     * you must provide a payment_method_id.
+     * The unique identifier of the payment method to charge. Required when
+     * collection_method is charge_automatically.
      */
     payment_method_id?: string | null;
 
@@ -146,7 +155,8 @@ export declare namespace InvoiceCreateParams {
 
   export namespace CreateInvoiceInputWithProductAndMemberID {
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     export interface Plan {
       /**
@@ -255,8 +265,8 @@ export declare namespace InvoiceCreateParams {
     }
 
     /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
+     * The properties of the product to create for this invoice. Provide this to create
+     * a new product inline.
      */
     export interface Product {
       /**
@@ -273,53 +283,60 @@ export declare namespace InvoiceCreateParams {
 
   export interface CreateInvoiceInputWithProductAndEmailAddress {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * How the invoice should be collected. Use charge_automatically to charge a stored
+     * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
 
     /**
-     * The company ID to create this invoice for.
+     * The unique identifier of the company to create this invoice for.
      */
     company_id: string;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The date by which the invoice must be paid.
      */
     due_date: string;
 
     /**
-     * The email address to create this invoice for. This is required if you want to
-     * create an invoice for a user who does not have a member of your company yet.
+     * The email address of the customer. Required when creating an invoice for a
+     * customer who is not yet a member of the company.
      */
     email_address: string;
 
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     plan: CreateInvoiceInputWithProductAndEmailAddress.Plan;
 
     /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
+     * The properties of the product to create for this invoice. Provide this to create
+     * a new product inline.
      */
     product: CreateInvoiceInputWithProductAndEmailAddress.Product;
 
     /**
-     * Whether or not to charge the customer a buyer fee.
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
+     * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
 
     /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
+     * The name of the customer. Required when creating an invoice for a customer who
+     * is not yet a member of the company.
      */
     customer_name?: string | null;
 
     /**
-     * The payment method ID to use for this invoice. If using charge_automatically,
-     * you must provide a payment_method_id.
+     * The unique identifier of the payment method to charge. Required when
+     * collection_method is charge_automatically.
      */
     payment_method_id?: string | null;
 
@@ -332,7 +349,8 @@ export declare namespace InvoiceCreateParams {
 
   export namespace CreateInvoiceInputWithProductAndEmailAddress {
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     export interface Plan {
       /**
@@ -441,8 +459,8 @@ export declare namespace InvoiceCreateParams {
     }
 
     /**
-     * The properties of the product to create for this invoice. Include this if you
-     * want to create an invoice for a new product.
+     * The properties of the product to create for this invoice. Provide this to create
+     * a new product inline.
      */
     export interface Product {
       /**
@@ -459,54 +477,59 @@ export declare namespace InvoiceCreateParams {
 
   export interface CreateInvoiceInputWithProductIDAndMemberID {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * How the invoice should be collected. Use charge_automatically to charge a stored
+     * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
 
     /**
-     * The company ID to create this invoice for.
+     * The unique identifier of the company to create this invoice for.
      */
     company_id: string;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The date by which the invoice must be paid.
      */
     due_date: string;
 
     /**
-     * The member ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing member. If you do not have a member ID, you must provide
-     * an email_address and customer_name.
+     * The unique identifier of an existing member to create this invoice for. If not
+     * provided, you must supply an email_address and customer_name.
      */
     member_id: string;
 
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     plan: CreateInvoiceInputWithProductIDAndMemberID.Plan;
 
     /**
-     * The product ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing product.
+     * The unique identifier of an existing product to create this invoice for.
      */
     product_id: string;
 
     /**
-     * Whether or not to charge the customer a buyer fee.
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
+     * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
 
     /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
+     * The name of the customer. Required when creating an invoice for a customer who
+     * is not yet a member of the company.
      */
     customer_name?: string | null;
 
     /**
-     * The payment method ID to use for this invoice. If using charge_automatically,
-     * you must provide a payment_method_id.
+     * The unique identifier of the payment method to charge. Required when
+     * collection_method is charge_automatically.
      */
     payment_method_id?: string | null;
 
@@ -519,7 +542,8 @@ export declare namespace InvoiceCreateParams {
 
   export namespace CreateInvoiceInputWithProductIDAndMemberID {
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     export interface Plan {
       /**
@@ -630,53 +654,59 @@ export declare namespace InvoiceCreateParams {
 
   export interface CreateInvoiceInputWithProductIDAndEmailAddress {
     /**
-     * The method of collection for this invoice. If using charge_automatically, you
-     * must provide a payment_token.
+     * How the invoice should be collected. Use charge_automatically to charge a stored
+     * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
 
     /**
-     * The company ID to create this invoice for.
+     * The unique identifier of the company to create this invoice for.
      */
     company_id: string;
 
     /**
-     * The date the invoice is due, if applicable.
+     * The date by which the invoice must be paid.
      */
     due_date: string;
 
     /**
-     * The email address to create this invoice for. This is required if you want to
-     * create an invoice for a user who does not have a member of your company yet.
+     * The email address of the customer. Required when creating an invoice for a
+     * customer who is not yet a member of the company.
      */
     email_address: string;
 
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     plan: CreateInvoiceInputWithProductIDAndEmailAddress.Plan;
 
     /**
-     * The product ID to create this invoice for. Include this if you want to create an
-     * invoice for an existing product.
+     * The unique identifier of an existing product to create this invoice for.
      */
     product_id: string;
 
     /**
-     * Whether or not to charge the customer a buyer fee.
+     * The date and time when the invoice will be automatically finalized and charged.
+     * Only valid when collection_method is charge_automatically. If not provided, the
+     * charge will be processed immediately.
+     */
+    automatically_finalizes_at?: string | null;
+
+    /**
+     * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
 
     /**
-     * The name of the customer to create this invoice for. This is required if you
-     * want to create an invoice for a customer who does not have a member of your
-     * company yet.
+     * The name of the customer. Required when creating an invoice for a customer who
+     * is not yet a member of the company.
      */
     customer_name?: string | null;
 
     /**
-     * The payment method ID to use for this invoice. If using charge_automatically,
-     * you must provide a payment_method_id.
+     * The unique identifier of the payment method to charge. Required when
+     * collection_method is charge_automatically.
      */
     payment_method_id?: string | null;
 
@@ -689,7 +719,8 @@ export declare namespace InvoiceCreateParams {
 
   export namespace CreateInvoiceInputWithProductIDAndEmailAddress {
     /**
-     * The properties of the plan to create for this invoice.
+     * The plan attributes defining the price, currency, and billing interval for this
+     * invoice.
      */
     export interface Plan {
       /**
@@ -801,7 +832,7 @@ export declare namespace InvoiceCreateParams {
 
 export interface InvoiceListParams extends CursorPageParams {
   /**
-   * The ID of the company to list invoices for
+   * The unique identifier of the company to list invoices for.
    */
   company_id: string;
 
@@ -811,17 +842,17 @@ export interface InvoiceListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * Filter invoices by their collection method
+   * Filter invoices by their collection method.
    */
   collection_methods?: Array<Shared.CollectionMethod> | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return invoices created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return invoices created before this timestamp.
    */
   created_before?: string | null;
 
@@ -846,12 +877,13 @@ export interface InvoiceListParams extends CursorPageParams {
   order?: 'id' | 'created_at' | 'due_date' | null;
 
   /**
-   * Return only invoices created for these specific product ids
+   * Filter invoices to only those associated with these specific product
+   * identifiers.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The statuses to filter the invoices by
+   * Filter invoices by their current status.
    */
   statuses?: Array<Shared.InvoiceStatus> | null;
 }

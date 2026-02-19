@@ -10,7 +10,8 @@ import { path } from '../internal/utils/path';
 
 export class Plans extends APIResource {
   /**
-   * Create a new Plan
+   * Create a new pricing plan for a product. The plan defines the billing interval,
+   * price, and availability for customers.
    *
    * Required permissions:
    *
@@ -31,7 +32,7 @@ export class Plans extends APIResource {
   }
 
   /**
-   * Retrieves a plan by ID
+   * Retrieves the details of an existing plan.
    *
    * Required permissions:
    *
@@ -49,7 +50,8 @@ export class Plans extends APIResource {
   }
 
   /**
-   * Update an existing Plan
+   * Update a plan's pricing, billing interval, visibility, stock, and other
+   * settings.
    *
    * Required permissions:
    *
@@ -73,7 +75,8 @@ export class Plans extends APIResource {
   }
 
   /**
-   * Lists plans for a company
+   * Returns a paginated list of plans belonging to a company, with optional
+   * filtering by visibility, type, release method, and product.
    *
    * Required permissions:
    *
@@ -97,7 +100,8 @@ export class Plans extends APIResource {
   }
 
   /**
-   * Delete an existing Plan
+   * Permanently delete a plan from a product. Existing memberships on this plan will
+   * not be affected.
    *
    * Required permissions:
    *
@@ -118,9 +122,9 @@ export class Plans extends APIResource {
 export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
 
 /**
- * A plan defines pricing and billing terms for a product. Each product can have
- * multiple plans representing different pricing options, such as one-time
- * payments, recurring subscriptions, or free trials.
+ * A plan defines pricing and billing terms for a checkout. Plans can optionally
+ * belong to a product, where they represent different pricing options such as
+ * one-time payments, recurring subscriptions, or free trials.
  */
 export interface PlanListResponse {
   /**
@@ -129,12 +133,14 @@ export interface PlanListResponse {
   id: string;
 
   /**
-   * The interval in days at which the plan charges (renewal plans).
+   * The number of days between each recurring charge. Null for one-time plans. For
+   * example, 30 for monthly or 365 for annual billing.
    */
   billing_period: number | null;
 
   /**
-   * The company for the plan.
+   * The company that sells this plan. Null for standalone invoice plans not linked
+   * to a company.
    */
   company: PlanListResponse.Company | null;
 
@@ -144,12 +150,14 @@ export interface PlanListResponse {
   created_at: string;
 
   /**
-   * The respective currency identifier for the plan.
+   * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
+   * amounts on the plan are denominated in this currency.
    */
   currency: Shared.Currency;
 
   /**
-   * The description of the plan.
+   * A text description of the plan visible to customers. Maximum 500 characters.
+   * Null if no description is set.
    */
   description: string | null;
 
@@ -167,42 +175,50 @@ export interface PlanListResponse {
   initial_price: number;
 
   /**
-   * A personal description or notes section for the business.
+   * Private notes visible only to the company owner and team members. Not shown to
+   * customers. Null if no notes have been added.
    */
   internal_notes: string | null;
 
   /**
-   * The invoice associated with this plan.
+   * The invoice this plan was generated for. Null if the plan was not created for a
+   * specific invoice.
    */
   invoice: PlanListResponse.Invoice | null;
 
   /**
-   * The number of members for the plan.
+   * The number of users who currently hold an active membership through this plan.
+   * Only visible to authorized team members.
    */
   member_count: number | null;
 
   /**
-   * The explicit payment method configuration for the plan, if any.
+   * The explicit payment method configuration specifying which payment methods are
+   * enabled or disabled for this plan. Null if the plan uses default settings.
    */
   payment_method_configuration: PlanListResponse.PaymentMethodConfiguration | null;
 
   /**
-   * Indicates if the plan is a one time payment or recurring.
+   * The billing model for this plan: 'renewal' for recurring subscriptions or
+   * 'one_time' for single payments.
    */
   plan_type: Shared.PlanType;
 
   /**
-   * The product that this plan belongs to.
+   * The product that this plan belongs to. Null for standalone one-off purchases not
+   * linked to a product.
    */
   product: PlanListResponse.Product | null;
 
   /**
-   * The direct link to purchase the product.
+   * The full URL where customers can purchase this plan directly, bypassing the
+   * product page.
    */
   purchase_url: string;
 
   /**
-   * This is the release method the business uses to sell this plan.
+   * The method used to sell this plan: 'buy_now' for immediate purchase or
+   * 'waitlist' for waitlist-based access.
    */
   release_method: Shared.ReleaseMethod;
 
@@ -213,22 +229,27 @@ export interface PlanListResponse {
   renewal_price: number;
 
   /**
-   * The number of payments required before pausing the subscription.
+   * The total number of installment payments required before the subscription
+   * pauses. Null if split pay is not configured. Must be greater than 1.
    */
   split_pay_required_payments: number | null;
 
   /**
-   * The number of units available for purchase. Only displayed to authorized actors
+   * The number of units available for purchase. Only visible to authorized team
+   * members. Null if the requester lacks permission.
    */
   stock: number | null;
 
   /**
-   * The title of the plan. This will be visible on the product page to customers.
+   * The display name of the plan shown to customers on the product page and at
+   * checkout. Maximum 30 characters. Null if no title has been set.
    */
   title: string | null;
 
   /**
-   * The number of free trial days added before a renewal plan.
+   * The number of free trial days before the first charge on a renewal plan. Null if
+   * no trial is configured or the current user has already used a trial for this
+   * plan.
    */
   trial_period_days: number | null;
 
@@ -244,14 +265,16 @@ export interface PlanListResponse {
   updated_at: string;
 
   /**
-   * Shows or hides the plan from public/business view.
+   * Controls whether the plan is visible to customers. When set to 'hidden', the
+   * plan is only accessible via direct link.
    */
   visibility: Shared.Visibility;
 }
 
 export namespace PlanListResponse {
   /**
-   * The company for the plan.
+   * The company that sells this plan. Null for standalone invoice plans not linked
+   * to a company.
    */
   export interface Company {
     /**
@@ -260,13 +283,14 @@ export namespace PlanListResponse {
     id: string;
 
     /**
-     * The title of the company.
+     * The display name of the company shown to customers.
      */
     title: string;
   }
 
   /**
-   * The invoice associated with this plan.
+   * The invoice this plan was generated for. Null if the plan was not created for a
+   * specific invoice.
    */
   export interface Invoice {
     /**
@@ -276,7 +300,8 @@ export namespace PlanListResponse {
   }
 
   /**
-   * The explicit payment method configuration for the plan, if any.
+   * The explicit payment method configuration specifying which payment methods are
+   * enabled or disabled for this plan. Null if the plan uses default settings.
    */
   export interface PaymentMethodConfiguration {
     /**
@@ -302,7 +327,8 @@ export namespace PlanListResponse {
   }
 
   /**
-   * The product that this plan belongs to.
+   * The product that this plan belongs to. Null for standalone one-off purchases not
+   * linked to a product.
    */
   export interface Product {
     /**
@@ -311,7 +337,8 @@ export namespace PlanListResponse {
     id: string;
 
     /**
-     * The title of the product. Use for Whop 4.0.
+     * The display name of the product shown to customers on the product page and in
+     * search results.
      */
     title: string;
   }
@@ -324,17 +351,18 @@ export type PlanDeleteResponse = boolean;
 
 export interface PlanCreateParams {
   /**
-   * The company the plan should be created for.
+   * The unique identifier of the company to create this plan for.
    */
   company_id: string;
 
   /**
-   * The product the plan is related to.
+   * The unique identifier of the product to attach this plan to.
    */
   product_id: string;
 
   /**
-   * The interval in days at which the plan charges (renewal plans).
+   * The number of days between recurring charges. For example, 30 for monthly or 365
+   * for yearly.
    */
   billing_period?: number | null;
 
@@ -344,39 +372,40 @@ export interface PlanCreateParams {
   currency?: Shared.Currency | null;
 
   /**
-   * An array of custom field objects.
+   * An array of custom field definitions to collect from customers at checkout.
    */
   custom_fields?: Array<PlanCreateParams.CustomField> | null;
 
   /**
-   * The description of the plan.
+   * A text description of the plan displayed to customers on the product page.
    */
   description?: string | null;
 
   /**
-   * The interval at which the plan expires and revokes access (expiration plans).
+   * The number of days until the membership expires and access is revoked. Used for
+   * expiration-based plans.
    */
   expiration_days?: number | null;
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * An image displayed on the product page to represent this plan.
    */
   image?: PlanCreateParams.Image | null;
 
   /**
-   * An additional amount charged upon first purchase. Use only if a one time payment
-   * OR you want to charge an additional amount on top of the renewal price. Provided
-   * as a number in the specified currency. Eg: 10.43 for $10.43
+   * The amount charged on the first purchase. For one-time plans, this is the full
+   * price. For recurring plans, this is an additional charge on top of the renewal
+   * price. Provided in the plan's currency (e.g., 10.43 for $10.43).
    */
   initial_price?: number | null;
 
   /**
-   * A personal description or notes section for the business.
+   * Private notes visible only to the business owner. Not shown to customers.
    */
   internal_notes?: string | null;
 
   /**
-   * Whether this plan uses legacy payment method controls
+   * Whether this plan uses legacy payment method controls.
    */
   legacy_payment_method_controls?: boolean | null;
 
@@ -387,8 +416,8 @@ export interface PlanCreateParams {
   override_tax_type?: Shared.TaxType | null;
 
   /**
-   * The explicit payment method configuration for the plan. If not provided, the
-   * platform or company's defaults will apply.
+   * Explicit payment method configuration for the plan. When not provided, the
+   * company's defaults apply.
    */
   payment_method_configuration?: PlanCreateParams.PaymentMethodConfiguration | null;
 
@@ -403,34 +432,35 @@ export interface PlanCreateParams {
   release_method?: Shared.ReleaseMethod | null;
 
   /**
-   * The amount the customer is charged every billing period. Use only if a recurring
-   * payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43
+   * The amount charged each billing period for recurring plans. Provided in the
+   * plan's currency (e.g., 10.43 for $10.43).
    */
   renewal_price?: number | null;
 
   /**
-   * The number of payments required before pausing the subscription.
+   * The number of installment payments required before the subscription pauses.
    */
   split_pay_required_payments?: number | null;
 
   /**
-   * The number of units available for purchase.
+   * The maximum number of units available for purchase. Ignored when unlimited_stock
+   * is true.
    */
   stock?: number | null;
 
   /**
-   * The title of the plan. This will be visible on the product page to customers.
+   * The display name of the plan shown to customers on the product page.
    */
   title?: string | null;
 
   /**
-   * The number of free trial days added before a renewal plan.
+   * The number of free trial days before the first charge on a recurring plan.
    */
   trial_period_days?: number | null;
 
   /**
-   * When true, the plan has unlimited stock (stock field is ignored). When false,
-   * purchases are limited by the stock field.
+   * Whether the plan has unlimited stock. When true, the stock field is ignored.
+   * Defaults to true.
    */
   unlimited_stock?: boolean | null;
 
@@ -474,7 +504,7 @@ export namespace PlanCreateParams {
   }
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * An image displayed on the product page to represent this plan.
    */
   export interface Image {
     /**
@@ -484,8 +514,8 @@ export namespace PlanCreateParams {
   }
 
   /**
-   * The explicit payment method configuration for the plan. If not provided, the
-   * platform or company's defaults will apply.
+   * Explicit payment method configuration for the plan. When not provided, the
+   * company's defaults apply.
    */
   export interface PaymentMethodConfiguration {
     /**
@@ -513,7 +543,8 @@ export namespace PlanCreateParams {
 
 export interface PlanUpdateParams {
   /**
-   * The interval in days at which the plan charges (renewal plans).
+   * The number of days between recurring charges. For example, 30 for monthly or 365
+   * for yearly.
    */
   billing_period?: number | null;
 
@@ -523,44 +554,44 @@ export interface PlanUpdateParams {
   currency?: Shared.Currency | null;
 
   /**
-   * An array of custom field objects.
+   * An array of custom field definitions to collect from customers at checkout.
    */
   custom_fields?: Array<PlanUpdateParams.CustomField> | null;
 
   /**
-   * The description of the plan.
+   * A text description of the plan displayed to customers on the product page.
    */
   description?: string | null;
 
   /**
-   * The number of days until the membership expires (for expiration-based plans).
-   * For example, 365 for a one-year access pass.
+   * The number of days until the membership expires and access is revoked. For
+   * example, 365 for one-year access.
    */
   expiration_days?: number | null;
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * An image displayed on the product page to represent this plan.
    */
   image?: PlanUpdateParams.Image | null;
 
   /**
-   * An additional amount charged upon first purchase. Provided as a number in the
-   * specified currency. Eg: 10.43 for $10.43 USD.
+   * The amount charged on the first purchase. Provided in the plan's currency (e.g.,
+   * 10.43 for $10.43).
    */
   initial_price?: number | null;
 
   /**
-   * A personal description or notes section for the business.
+   * Private notes visible only to the business owner. Not shown to customers.
    */
   internal_notes?: string | null;
 
   /**
-   * Whether this plan uses legacy payment method controls
+   * Whether this plan uses legacy payment method controls.
    */
   legacy_payment_method_controls?: boolean | null;
 
   /**
-   * Whether or not to offer a discount to cancel a subscription.
+   * Whether to offer a retention discount when a customer attempts to cancel.
    */
   offer_cancel_discount?: boolean | null;
 
@@ -571,47 +602,47 @@ export interface PlanUpdateParams {
   override_tax_type?: Shared.TaxType | null;
 
   /**
-   * The explicit payment method configuration for the plan. If sent as null, the
-   * custom configuration will be removed.
+   * Explicit payment method configuration for the plan. Sending null removes any
+   * custom configuration.
    */
   payment_method_configuration?: PlanUpdateParams.PaymentMethodConfiguration | null;
 
   /**
-   * The amount the customer is charged every billing period. Provided as a number in
-   * the specified currency. Eg: 10.43 for $10.43 USD.
+   * The amount charged each billing period for recurring plans. Provided in the
+   * plan's currency (e.g., 10.43 for $10.43).
    */
   renewal_price?: number | null;
 
   /**
-   * The number of units available for purchase.
+   * The maximum number of units available for purchase. Ignored when unlimited_stock
+   * is true.
    */
   stock?: number | null;
 
   /**
-   * The price to display with a strikethrough for the initial price. Provided as a
-   * number in the specified currency. Eg: 19.99 for $19.99
+   * A comparison price displayed with a strikethrough for the initial price.
+   * Provided in the plan's currency (e.g., 19.99 for $19.99).
    */
   strike_through_initial_price?: number | null;
 
   /**
-   * The price to display with a strikethrough for the renewal price. Provided as a
-   * number in the specified currency. Eg: 19.99 for $19.99
+   * A comparison price displayed with a strikethrough for the renewal price.
+   * Provided in the plan's currency (e.g., 19.99 for $19.99).
    */
   strike_through_renewal_price?: number | null;
 
   /**
-   * The title of the plan. This will be visible on the product page to customers.
+   * The display name of the plan shown to customers on the product page.
    */
   title?: string | null;
 
   /**
-   * The number of free trial days added before a renewal plan.
+   * The number of free trial days before the first charge on a recurring plan.
    */
   trial_period_days?: number | null;
 
   /**
-   * When true, the plan has unlimited stock (stock field is ignored). When false,
-   * purchases are limited by the stock field.
+   * Whether the plan has unlimited stock. When true, the stock field is ignored.
    */
   unlimited_stock?: boolean | null;
 
@@ -655,7 +686,7 @@ export namespace PlanUpdateParams {
   }
 
   /**
-   * An image for the plan. This will be visible on the product page to customers.
+   * An image displayed on the product page to represent this plan.
    */
   export interface Image {
     /**
@@ -665,8 +696,8 @@ export namespace PlanUpdateParams {
   }
 
   /**
-   * The explicit payment method configuration for the plan. If sent as null, the
-   * custom configuration will be removed.
+   * Explicit payment method configuration for the plan. Sending null removes any
+   * custom configuration.
    */
   export interface PaymentMethodConfiguration {
     /**
@@ -694,7 +725,7 @@ export namespace PlanUpdateParams {
 
 export interface PlanListParams extends CursorPageParams {
   /**
-   * The ID of the company
+   * The unique identifier of the company to list plans for.
    */
   company_id: string;
 
@@ -704,12 +735,12 @@ export interface PlanListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The minimum creation date to filter by
+   * Only return plans created after this timestamp.
    */
   created_after?: string | null;
 
   /**
-   * The maximum creation date to filter by
+   * Only return plans created before this timestamp.
    */
   created_before?: string | null;
 
@@ -734,22 +765,22 @@ export interface PlanListParams extends CursorPageParams {
   order?: 'id' | 'active_members_count' | 'created_at' | 'internal_notes' | 'expires_at' | null;
 
   /**
-   * The plan type to filter the plans by
+   * Filter to only plans matching these billing types.
    */
   plan_types?: Array<Shared.PlanType> | null;
 
   /**
-   * The product IDs to filter the plans by
+   * Filter to only plans belonging to these product identifiers.
    */
   product_ids?: Array<string> | null;
 
   /**
-   * The release method to filter the plans by
+   * Filter to only plans matching these release methods.
    */
   release_methods?: Array<Shared.ReleaseMethod> | null;
 
   /**
-   * The visibility to filter the plans by
+   * Filter to only plans matching these visibility states.
    */
   visibilities?: Array<Shared.VisibilityFilter> | null;
 }
