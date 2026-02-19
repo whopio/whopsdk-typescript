@@ -719,7 +719,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/company-token-transactions.ts">CompanyTokenTransaction</a></code>
-- <code><a href="./src/resources/company-token-transactions.ts">TransactionType</a></code>
+- <code><a href="./src/resources/company-token-transactions.ts">CompanyTokenTransactionType</a></code>
 - <code><a href="./src/resources/company-token-transactions.ts">CompanyTokenTransactionListResponse</a></code>
 
 Methods:

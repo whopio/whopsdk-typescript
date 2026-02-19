@@ -83,8 +83,8 @@ import {
   CompanyTokenTransactionListParams,
   CompanyTokenTransactionListResponse,
   CompanyTokenTransactionListResponsesCursorPage,
+  CompanyTokenTransactionType,
   CompanyTokenTransactions,
-  TransactionType,
 } from './resources/company-token-transactions';
 import {
   CourseChapter,
@@ -1746,7 +1746,7 @@ export declare namespace Whop {
   export {
     CompanyTokenTransactions as CompanyTokenTransactions,
     type CompanyTokenTransaction as CompanyTokenTransaction,
-    type TransactionType as TransactionType,
+    type CompanyTokenTransactionType as CompanyTokenTransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,

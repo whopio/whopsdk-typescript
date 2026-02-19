@@ -126,7 +126,7 @@ export interface CompanyTokenTransaction {
   /**
    * The direction of this token transaction (add, subtract, or transfer).
    */
-  transaction_type: TransactionType;
+  transaction_type: CompanyTokenTransactionType;
 
   /**
    * The user whose token balance was affected by this transaction.
@@ -189,7 +189,7 @@ export namespace CompanyTokenTransaction {
 /**
  * The type of token transaction
  */
-export type TransactionType = 'add' | 'subtract' | 'transfer';
+export type CompanyTokenTransactionType = 'add' | 'subtract' | 'transfer';
 
 /**
  * A token transaction records a credit or debit to a member's token balance within
@@ -243,7 +243,7 @@ export interface CompanyTokenTransactionListResponse {
   /**
    * The direction of this token transaction (add, subtract, or transfer).
    */
-  transaction_type: TransactionType;
+  transaction_type: CompanyTokenTransactionType;
 
   /**
    * The user whose token balance was affected by this transaction.
@@ -436,7 +436,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
    * The type of token transaction
    */
-  transaction_type?: TransactionType | null;
+  transaction_type?: CompanyTokenTransactionType | null;
 
   /**
    * Filter transactions to only those involving this specific user.
@@ -447,7 +447,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
 export declare namespace CompanyTokenTransactions {
   export {
     type CompanyTokenTransaction as CompanyTokenTransaction,
-    type TransactionType as TransactionType,
+    type CompanyTokenTransactionType as CompanyTokenTransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
