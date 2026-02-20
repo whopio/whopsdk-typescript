@@ -412,6 +412,7 @@ export {
   type DisputeUpdatedWebhookEvent,
   type RefundCreatedWebhookEvent,
   type RefundUpdatedWebhookEvent,
+  type DisputeAlertCreatedWebhookEvent,
   type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type UnwrapWebhookEvent,
   type WebhookCreateParams,
