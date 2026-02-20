@@ -120,6 +120,14 @@ export {
   type CourseListResponsesCursorPage,
 } from './courses';
 export {
+  DisputeAlerts,
+  type DisputeAlertType,
+  type DisputeAlertRetrieveResponse,
+  type DisputeAlertListResponse,
+  type DisputeAlertListParams,
+  type DisputeAlertListResponsesCursorPage,
+} from './dispute-alerts';
+export {
   Disputes,
   type Dispute,
   type DisputeStatuses,

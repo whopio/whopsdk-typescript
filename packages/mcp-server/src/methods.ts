@@ -1037,6 +1037,18 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'delete',
     httpPath: '/dm_channels/{id}',
   },
+  {
+    clientCallName: 'client.disputeAlerts.retrieve',
+    fullyQualifiedName: 'disputeAlerts.retrieve',
+    httpMethod: 'get',
+    httpPath: '/dispute_alerts/{id}',
+  },
+  {
+    clientCallName: 'client.disputeAlerts.list',
+    fullyQualifiedName: 'disputeAlerts.list',
+    httpMethod: 'get',
+    httpPath: '/dispute_alerts',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {

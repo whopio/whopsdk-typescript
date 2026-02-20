@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DisputeAlertsAPI from './dispute-alerts';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
 import * as PayoutMethodsAPI from './payout-methods';
@@ -1781,7 +1782,7 @@ export namespace DisputeAlertCreatedWebhookEvent {
     /**
      * The type of the dispute alert.
      */
-    alert_type: 'dispute' | 'dispute_rdr' | 'fraud';
+    alert_type: DisputeAlertsAPI.DisputeAlertType;
 
     /**
      * The alerted amount in the specified currency.
