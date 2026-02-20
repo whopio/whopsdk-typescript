@@ -394,6 +394,7 @@ import {
 import {
   APIVersion,
   CourseLessonInteractionCompletedWebhookEvent,
+  DisputeAlertCreatedWebhookEvent,
   DisputeCreatedWebhookEvent,
   DisputeUpdatedWebhookEvent,
   EntryApprovedWebhookEvent,
@@ -1367,6 +1368,7 @@ export declare namespace Whop {
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
