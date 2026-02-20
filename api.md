@@ -778,3 +778,16 @@ Methods:
 - <code title="patch /dm_channels/{id}">client.dmChannels.<a href="./src/resources/dm-channels.ts">update</a>(id, { ...params }) -> DmChannel</code>
 - <code title="get /dm_channels">client.dmChannels.<a href="./src/resources/dm-channels.ts">list</a>({ ...params }) -> DmChannelListResponsesCursorPage</code>
 - <code title="delete /dm_channels/{id}">client.dmChannels.<a href="./src/resources/dm-channels.ts">delete</a>(id) -> DmChannelDeleteResponse</code>
+
+# DisputeAlerts
+
+Types:
+
+- <code><a href="./src/resources/dispute-alerts.ts">DisputeAlertType</a></code>
+- <code><a href="./src/resources/dispute-alerts.ts">DisputeAlertRetrieveResponse</a></code>
+- <code><a href="./src/resources/dispute-alerts.ts">DisputeAlertListResponse</a></code>
+
+Methods:
+
+- <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id) -> DisputeAlertRetrieveResponse</code>
+- <code title="get /dispute_alerts">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">list</a>({ ...params }) -> DisputeAlertListResponsesCursorPage</code>
