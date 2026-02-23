@@ -55,7 +55,8 @@ export type PaymentProvider =
   | 'multi_psp'
   | 'adyen'
   | 'claritypay'
-  | 'checkout_dot_com';
+  | 'checkout_dot_com'
+  | 'airwallex';
 
 /**
  * The status of the refund reference.
