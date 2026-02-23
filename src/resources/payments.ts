@@ -271,6 +271,7 @@ export type CardBrands =
   | 'china_union_payuzcard'
   | 'codensa'
   | 'cabal'
+  | 'hipercard'
   | 'unknown';
 
 /**
