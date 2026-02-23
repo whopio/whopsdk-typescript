@@ -60,7 +60,7 @@ $ yarn link @whop/sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global @whop/sdk
+$ pnpm link --global @whop/sdk
 ```
 
 ## Running tests
