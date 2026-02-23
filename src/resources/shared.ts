@@ -1057,7 +1057,8 @@ export type Currency =
   | 'uzs'
   | 'rub'
   | 'btc'
-  | 'cny';
+  | 'cny'
+  | 'usdt';
 
 /**
  * The different types of custom CTAs that can be selected.
