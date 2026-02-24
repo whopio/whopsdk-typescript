@@ -73,6 +73,7 @@ describe('resource companies', () => {
           industry_group: 'academic_and_test_prep',
           industry_type: 'trading',
           logo: { id: 'id' },
+          route: 'route',
           send_customer_emails: true,
           target_audience: 'target_audience',
           title: 'title',
