@@ -289,6 +289,13 @@ export interface CompanyUpdateParams {
   logo?: CompanyUpdateParams.Logo | null;
 
   /**
+   * The unique URL slug for the company's store page. Must be lowercase and can
+   * include hyphens (e.g., 'my-company'). If not provided, the route will remain
+   * unchanged.
+   */
+  route?: string | null;
+
+  /**
    * Whether Whop sends transactional emails (receipts, renewals, cancelations) to
    * customers on behalf of this company.
    */
