@@ -151,6 +151,11 @@ export interface SupportChannelCreateParams {
    * channel for.
    */
   user_id: string;
+
+  /**
+   * Optional custom display name for the support channel.
+   */
+  custom_name?: string | null;
 }
 
 export interface SupportChannelListParams extends CursorPageParams {
