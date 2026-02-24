@@ -28,6 +28,7 @@ describe('resource supportChannels', () => {
     const response = await client.supportChannels.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       user_id: 'user_xxxxxxxxxxxxx',
+      custom_name: 'custom_name',
     });
   });
 
