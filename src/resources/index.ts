@@ -298,7 +298,6 @@ export {
 } from './plans';
 export {
   Products,
-  type IndustryGroups,
   type ProductDeleteResponse,
   type ProductCreateParams,
   type ProductUpdateParams,

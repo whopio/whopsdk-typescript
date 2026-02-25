@@ -11,7 +11,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">AppStatuses</a></code>
 - <code><a href="./src/resources/shared.ts">AppViewType</a></code>
 - <code><a href="./src/resources/shared.ts">AuthorizedUserRoles</a></code>
-- <code><a href="./src/resources/shared.ts">BusinessTypes</a></code>
 - <code><a href="./src/resources/shared.ts">ChatChannel</a></code>
 - <code><a href="./src/resources/shared.ts">CheckoutConfiguration</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
@@ -30,7 +29,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">ForumPost</a></code>
 - <code><a href="./src/resources/shared.ts">FriendlyReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">GlobalAffiliateStatus</a></code>
-- <code><a href="./src/resources/shared.ts">IndustryTypes</a></code>
 - <code><a href="./src/resources/shared.ts">Invoice</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceListItem</a></code>
 - <code><a href="./src/resources/shared.ts">InvoiceStatus</a></code>
@@ -101,7 +99,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/products.ts">IndustryGroups</a></code>
 - <code><a href="./src/resources/products.ts">ProductDeleteResponse</a></code>
 
 Methods:

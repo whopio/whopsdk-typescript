@@ -25,7 +25,6 @@ describe('resource products', () => {
     const response = await client.products.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       title: 'title',
-      business_type: 'education_program',
       collect_shipping_address: true,
       custom_cta: 'get_access',
       custom_cta_url: 'custom_cta_url',
@@ -35,8 +34,6 @@ describe('resource products', () => {
       global_affiliate_percentage: 6.9,
       global_affiliate_status: 'enabled',
       headline: 'headline',
-      industry_group: 'academic_and_test_prep',
-      industry_type: 'trading',
       member_affiliate_percentage: 6.9,
       member_affiliate_status: 'enabled',
       plan_options: {
@@ -96,7 +93,6 @@ describe('resource products', () => {
       client.products.update(
         'prod_xxxxxxxxxxxxx',
         {
-          business_type: 'education_program',
           collect_shipping_address: true,
           custom_cta: 'get_access',
           custom_cta_url: 'custom_cta_url',
@@ -106,8 +102,6 @@ describe('resource products', () => {
           global_affiliate_percentage: 6.9,
           global_affiliate_status: 'enabled',
           headline: 'headline',
-          industry_group: 'academic_and_test_prep',
-          industry_type: 'trading',
           member_affiliate_percentage: 6.9,
           member_affiliate_status: 'enabled',
           product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',

@@ -310,7 +310,6 @@ import {
   Plans,
 } from './resources/plans';
 import {
-  IndustryGroups,
   ProductCreateParams,
   ProductDeleteResponse,
   ProductListParams,
@@ -1328,7 +1327,6 @@ export declare namespace Whop {
 
   export {
     Products as Products,
-    type IndustryGroups as IndustryGroups,
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
@@ -1816,7 +1814,6 @@ export declare namespace Whop {
   export type AppStatuses = API.AppStatuses;
   export type AppViewType = API.AppViewType;
   export type AuthorizedUserRoles = API.AuthorizedUserRoles;
-  export type BusinessTypes = API.BusinessTypes;
   export type ChatChannel = API.ChatChannel;
   export type CheckoutConfiguration = API.CheckoutConfiguration;
   export type CollectionMethod = API.CollectionMethod;
@@ -1835,7 +1832,6 @@ export declare namespace Whop {
   export type ForumPost = API.ForumPost;
   export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
   export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
-  export type IndustryTypes = API.IndustryTypes;
   export type Invoice = API.Invoice;
   export type InvoiceListItem = API.InvoiceListItem;
   export type InvoiceStatus = API.InvoiceStatus;
