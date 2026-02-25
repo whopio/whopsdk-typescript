@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as ProductsAPI from './products';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -79,11 +78,6 @@ export interface CompanyListResponse {
   id: string;
 
   /**
-   * The different business types a company can be.
-   */
-  business_type: Shared.BusinessTypes | null;
-
-  /**
    * The datetime the company was created.
    */
   created_at: string;
@@ -93,11 +87,6 @@ export interface CompanyListResponse {
    * customers on the store page.
    */
   description: string | null;
-
-  /**
-   * The different industry types a company can be in.
-   */
-  industry_type: Shared.IndustryTypes | null;
 
   /**
    * The company's logo.
@@ -194,11 +183,6 @@ export interface CompanyCreateParams {
   title: string;
 
   /**
-   * The different business types a company can be.
-   */
-  business_type?: Shared.BusinessTypes | null;
-
-  /**
    * A promotional pitch displayed to potential customers on the company's store
    * page.
    */
@@ -209,16 +193,6 @@ export interface CompanyCreateParams {
    * parent_company_id is provided.
    */
   email?: string | null;
-
-  /**
-   * The different industry groups a company can be in.
-   */
-  industry_group?: ProductsAPI.IndustryGroups | null;
-
-  /**
-   * The different industry types a company can be in.
-   */
-  industry_type?: Shared.IndustryTypes | null;
 
   /**
    * The company's logo image. Accepts PNG, JPEG, or GIF format.
@@ -263,25 +237,10 @@ export interface CompanyUpdateParams {
   banner_image?: CompanyUpdateParams.BannerImage | null;
 
   /**
-   * The different business types a company can be.
-   */
-  business_type?: Shared.BusinessTypes | null;
-
-  /**
    * A promotional pitch displayed to potential customers on the company's store
    * page.
    */
   description?: string | null;
-
-  /**
-   * The different industry groups a company can be in.
-   */
-  industry_group?: ProductsAPI.IndustryGroups | null;
-
-  /**
-   * The different industry types a company can be in.
-   */
-  industry_type?: Shared.IndustryTypes | null;
 
   /**
    * The company's logo image. Accepts PNG, JPEG, or GIF format.

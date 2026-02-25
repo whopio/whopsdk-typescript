@@ -24,11 +24,8 @@ describe('resource companies', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.companies.create({
       title: 'title',
-      business_type: 'education_program',
       description: 'description',
       email: 'email',
-      industry_group: 'academic_and_test_prep',
-      industry_type: 'trading',
       logo: { id: 'id' },
       metadata: { foo: 'bar' },
       parent_company_id: 'parent_company_id',
@@ -68,10 +65,7 @@ describe('resource companies', () => {
         'biz_xxxxxxxxxxxxxx',
         {
           banner_image: { id: 'id' },
-          business_type: 'education_program',
           description: 'description',
-          industry_group: 'academic_and_test_prep',
-          industry_type: 'trading',
           logo: { id: 'id' },
           route: 'route',
           send_customer_emails: true,
