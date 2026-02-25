@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource checkoutConfigurations', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.checkoutConfigurations.create({
       plan: { company_id: 'biz_xxxxxxxxxxxxxx', currency: 'usd' },
@@ -22,7 +22,7 @@ describe('resource checkoutConfigurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.checkoutConfigurations.create({
       plan: {
@@ -93,7 +93,7 @@ describe('resource checkoutConfigurations', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.checkoutConfigurations.retrieve('ch_xxxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -105,7 +105,7 @@ describe('resource checkoutConfigurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.checkoutConfigurations.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -117,7 +117,7 @@ describe('resource checkoutConfigurations', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.checkoutConfigurations.list({
       company_id: 'biz_xxxxxxxxxxxxxx',

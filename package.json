@@ -1,6 +1,6 @@
 {
   "name": "@whop/sdk",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "The official TypeScript library for the Whop API",
   "author": "Whop <>",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
   "type": "commonjs",
   "repository": "github:whopio/whopsdk-typescript",
   "license": "Apache-2.0",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.30.1",
   "files": [
     "**/*"
   ],

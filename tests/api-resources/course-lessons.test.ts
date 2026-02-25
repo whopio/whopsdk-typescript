@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource courseLessons', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.courseLessons.create({
       chapter_id: 'chap_xxxxxxxxxxxxx',
@@ -23,7 +23,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.courseLessons.create({
       chapter_id: 'chap_xxxxxxxxxxxxx',
@@ -37,7 +37,7 @@ describe('resource courseLessons', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.courseLessons.retrieve('lesn_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -49,7 +49,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.courseLessons.update('lesn_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -103,7 +103,7 @@ describe('resource courseLessons', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.courseLessons.list();
     const rawResponse = await responsePromise.asResponse();
@@ -115,7 +115,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -133,7 +133,7 @@ describe('resource courseLessons', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.courseLessons.delete('lesn_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -145,7 +145,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('markAsCompleted', async () => {
     const responsePromise = client.courseLessons.markAsCompleted('lesson_id');
     const rawResponse = await responsePromise.asResponse();
@@ -157,7 +157,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('start', async () => {
     const responsePromise = client.courseLessons.start('lesson_id');
     const rawResponse = await responsePromise.asResponse();
@@ -169,7 +169,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('submitAssessment: only required params', async () => {
     const responsePromise = client.courseLessons.submitAssessment('lesson_id', {
       answers: [{ question_id: 'question_id' }],
@@ -183,7 +183,7 @@ describe('resource courseLessons', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('submitAssessment: required and optional params', async () => {
     const response = await client.courseLessons.submitAssessment('lesson_id', {
       answers: [

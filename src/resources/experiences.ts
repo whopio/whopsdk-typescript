@@ -63,10 +63,6 @@ export class Experiences extends APIResource {
    * Returns a paginated list of experiences belonging to a company, with optional
    * filtering by product and app.
    *
-   * Required permissions:
-   *
-   * - `experience:hidden_experience:read`
-   *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.

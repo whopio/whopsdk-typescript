@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource entries', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.entries.retrieve('entry_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource entries', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.entries.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -32,7 +32,7 @@ describe('resource entries', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.entries.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -50,7 +50,7 @@ describe('resource entries', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('approve', async () => {
     const responsePromise = client.entries.approve('entry_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -62,7 +62,7 @@ describe('resource entries', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('deny', async () => {
     const responsePromise = client.entries.deny('entry_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource experiences', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.experiences.create({
       app_id: 'app_xxxxxxxxxxxxxx',
@@ -23,7 +23,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.experiences.create({
       app_id: 'app_xxxxxxxxxxxxxx',
@@ -35,7 +35,7 @@ describe('resource experiences', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.experiences.retrieve('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -47,7 +47,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.experiences.update('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -59,7 +59,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -78,7 +78,7 @@ describe('resource experiences', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.experiences.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -90,7 +90,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.experiences.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -105,7 +105,7 @@ describe('resource experiences', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.experiences.delete('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -117,7 +117,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attach: only required params', async () => {
     const responsePromise = client.experiences.attach('exp_xxxxxxxxxxxxxx', {
       product_id: 'prod_xxxxxxxxxxxxx',
@@ -131,14 +131,14 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('attach: required and optional params', async () => {
     const response = await client.experiences.attach('exp_xxxxxxxxxxxxxx', {
       product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('detach: only required params', async () => {
     const responsePromise = client.experiences.detach('exp_xxxxxxxxxxxxxx', {
       product_id: 'prod_xxxxxxxxxxxxx',
@@ -152,14 +152,14 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('detach: required and optional params', async () => {
     const response = await client.experiences.detach('exp_xxxxxxxxxxxxxx', {
       product_id: 'prod_xxxxxxxxxxxxx',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('duplicate', async () => {
     const responsePromise = client.experiences.duplicate('exp_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -171,7 +171,7 @@ describe('resource experiences', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('duplicate: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(

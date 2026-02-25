@@ -138,6 +138,14 @@ import {
   Languages,
 } from './resources/courses';
 import {
+  DisputeAlertListParams,
+  DisputeAlertListResponse,
+  DisputeAlertListResponsesCursorPage,
+  DisputeAlertRetrieveResponse,
+  DisputeAlertType,
+  DisputeAlerts,
+} from './resources/dispute-alerts';
+import {
   Dispute,
   DisputeListParams,
   DisputeListResponse,
@@ -394,6 +402,7 @@ import {
 import {
   APIVersion,
   CourseLessonInteractionCompletedWebhookEvent,
+  DisputeAlertCreatedWebhookEvent,
   DisputeCreatedWebhookEvent,
   DisputeUpdatedWebhookEvent,
   EntryApprovedWebhookEvent,
@@ -1237,6 +1246,7 @@ export class Whop {
   dmMembers: API.DmMembers = new API.DmMembers(this);
   aiChats: API.AIChats = new API.AIChats(this);
   dmChannels: API.DmChannels = new API.DmChannels(this);
+  disputeAlerts: API.DisputeAlerts = new API.DisputeAlerts(this);
 }
 
 Whop.Apps = Apps;
@@ -1288,6 +1298,7 @@ Whop.CompanyTokenTransactions = CompanyTokenTransactions;
 Whop.DmMembers = DmMembers;
 Whop.AIChats = AIChats;
 Whop.DmChannels = DmChannels;
+Whop.DisputeAlerts = DisputeAlerts;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1369,6 +1380,7 @@ export declare namespace Whop {
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
@@ -1786,6 +1798,15 @@ export declare namespace Whop {
     type DmChannelCreateParams as DmChannelCreateParams,
     type DmChannelUpdateParams as DmChannelUpdateParams,
     type DmChannelListParams as DmChannelListParams,
+  };
+
+  export {
+    DisputeAlerts as DisputeAlerts,
+    type DisputeAlertType as DisputeAlertType,
+    type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
+    type DisputeAlertListResponse as DisputeAlertListResponse,
+    type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
+    type DisputeAlertListParams as DisputeAlertListParams,
   };
 
   export type AccessLevel = API.AccessLevel;

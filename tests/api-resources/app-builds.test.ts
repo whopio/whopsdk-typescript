@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource appBuilds', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.appBuilds.create({
       attachment: { id: 'id' },
@@ -24,7 +24,7 @@ describe('resource appBuilds', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.appBuilds.create({
       attachment: { id: 'id' },
@@ -36,7 +36,7 @@ describe('resource appBuilds', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.appBuilds.retrieve('apbu_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -48,7 +48,7 @@ describe('resource appBuilds', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.appBuilds.list({ app_id: 'app_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -60,7 +60,7 @@ describe('resource appBuilds', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.appBuilds.list({
       app_id: 'app_xxxxxxxxxxxxxx',
@@ -75,7 +75,7 @@ describe('resource appBuilds', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('promote', async () => {
     const responsePromise = client.appBuilds.promote('apbu_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

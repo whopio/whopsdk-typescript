@@ -1,5 +1,39 @@
 # Changelog
 
+## 0.0.29 (2026-02-25)
+
+Full Changelog: [v0.0.28...v0.0.29](https://github.com/whopio/whopsdk-typescript/compare/v0.0.28...v0.0.29)
+
+### Features
+
+* **api:** api update ([0e614b3](https://github.com/whopio/whopsdk-typescript/commit/0e614b308699d7c20b40bb6fb92064c3ede7a30d))
+* **api:** api update ([ca270c1](https://github.com/whopio/whopsdk-typescript/commit/ca270c171bfa7a26713fb8610bfdc7e4b30948b0))
+* **api:** api update ([5ad3c6a](https://github.com/whopio/whopsdk-typescript/commit/5ad3c6a6de2db7fa1eebe29f7f1d6ad139307695))
+* **api:** api update ([51c11a0](https://github.com/whopio/whopsdk-typescript/commit/51c11a04ccf880a3d92fe4c283954d786b9f1b7d))
+* **api:** api update ([6aaca80](https://github.com/whopio/whopsdk-typescript/commit/6aaca8008531b175d40b48bb44cece3ef001b4b0))
+* **api:** api update ([57f887f](https://github.com/whopio/whopsdk-typescript/commit/57f887f76e0413a1f124ff2d406be252569d4350))
+* **api:** api update ([48b2fbc](https://github.com/whopio/whopsdk-typescript/commit/48b2fbc2ba3b3fff6a9a526d299fbb1911a3e591))
+* **api:** api update ([04af952](https://github.com/whopio/whopsdk-typescript/commit/04af95215269570a2a1b34b9a86efea08f6699c2))
+* **api:** manual updates ([6f799e4](https://github.com/whopio/whopsdk-typescript/commit/6f799e4fa86b26e4efaa785040bc4b02536117d2))
+
+
+### Bug Fixes
+
+* **docs/contributing:** correct pnpm link command ([4f2feaa](https://github.com/whopio/whopsdk-typescript/commit/4f2feaa583331ec3a3fab808616858646181c277))
+* **mcp:** initialize SDK lazily to avoid failing the connection on init errors ([363646f](https://github.com/whopio/whopsdk-typescript/commit/363646fe83665d48bc5602189827ab16aa742fac))
+
+
+### Chores
+
+* **internal:** codegen related update ([c31edcb](https://github.com/whopio/whopsdk-typescript/commit/c31edcb67d7bc1a0d281f6af871a456b841976bf))
+* **internal:** make MCP code execution location configurable via a flag ([8293e00](https://github.com/whopio/whopsdk-typescript/commit/8293e006a9717886714b244e23dfedd6afb02cd8))
+* **internal:** remove mock server code ([be2f43b](https://github.com/whopio/whopsdk-typescript/commit/be2f43b7aeced5f88513a483a444767e020931fb))
+* **internal:** update agents version ([60497fc](https://github.com/whopio/whopsdk-typescript/commit/60497fccda8056361c2931763efcea27bea04c68))
+* **internal:** upgrade @modelcontextprotocol/sdk and hono ([c96891f](https://github.com/whopio/whopsdk-typescript/commit/c96891fb4606efcf8454505fca866ca05e3f7f9c))
+* **internal:** upgrade pnpm version ([acda8ed](https://github.com/whopio/whopsdk-typescript/commit/acda8edb9416d3f482377397126792d4a928c22a))
+* **mcp:** correctly update version in sync with sdk ([d717ee1](https://github.com/whopio/whopsdk-typescript/commit/d717ee1258e5f23c8686719a4e1404d96a3fb881))
+* update mock server docs ([7661e50](https://github.com/whopio/whopsdk-typescript/commit/7661e502987a3b71282bb86a55f5a7cc67b963e9))
+
 ## 0.0.28 (2026-02-19)
 
 Full Changelog: [v0.0.27...v0.0.28](https://github.com/whopio/whopsdk-typescript/compare/v0.0.27...v0.0.28)

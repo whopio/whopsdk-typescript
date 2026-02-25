@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource promoCodes', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.promoCodes.create({
       amount_off: 6.9,
@@ -28,7 +28,7 @@ describe('resource promoCodes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.promoCodes.create({
       amount_off: 6.9,
@@ -49,7 +49,7 @@ describe('resource promoCodes', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.promoCodes.retrieve('promo_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -61,7 +61,7 @@ describe('resource promoCodes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.promoCodes.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -73,7 +73,7 @@ describe('resource promoCodes', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.promoCodes.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -89,7 +89,7 @@ describe('resource promoCodes', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.promoCodes.delete('promo_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

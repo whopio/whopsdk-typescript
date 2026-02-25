@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource courseChapters', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.courseChapters.create({ course_id: 'cors_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,12 +20,12 @@ describe('resource courseChapters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.courseChapters.create({ course_id: 'cors_xxxxxxxxxxxxx', title: 'title' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.courseChapters.retrieve('chap_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -37,7 +37,7 @@ describe('resource courseChapters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: only required params', async () => {
     const responsePromise = client.courseChapters.update('chap_xxxxxxxxxxxxx', { title: 'title' });
     const rawResponse = await responsePromise.asResponse();
@@ -49,12 +49,12 @@ describe('resource courseChapters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.courseChapters.update('chap_xxxxxxxxxxxxx', { title: 'title' });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.courseChapters.list({ course_id: 'cors_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -66,7 +66,7 @@ describe('resource courseChapters', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.courseChapters.list({
       course_id: 'cors_xxxxxxxxxxxxx',
@@ -77,7 +77,7 @@ describe('resource courseChapters', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.courseChapters.delete('chap_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

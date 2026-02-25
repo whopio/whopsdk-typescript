@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as DisputeAlertsAPI from './dispute-alerts';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
 import * as PayoutMethodsAPI from './payout-methods';
@@ -221,6 +222,7 @@ export type WebhookEvent =
   | 'dispute.updated'
   | 'refund.created'
   | 'refund.updated'
+  | 'dispute_alert.created'
   | 'membership.cancel_at_period_end_changed';
 
 /**
@@ -1733,6 +1735,270 @@ export namespace RefundUpdatedWebhookEvent {
   }
 }
 
+export interface DisputeAlertCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A dispute alert represents an early warning notification from a payment
+   * processor about a potential dispute or chargeback.
+   */
+  data: DisputeAlertCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute_alert.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace DisputeAlertCreatedWebhookEvent {
+  /**
+   * A dispute alert represents an early warning notification from a payment
+   * processor about a potential dispute or chargeback.
+   */
+  export interface Data {
+    /**
+     * The unique identifier of the dispute alert.
+     */
+    id: string;
+
+    /**
+     * The type of the dispute alert.
+     */
+    alert_type: DisputeAlertsAPI.DisputeAlertType;
+
+    /**
+     * The alerted amount in the specified currency.
+     */
+    amount: number;
+
+    /**
+     * Whether this alert incurs a charge.
+     */
+    charge_for_alert: boolean;
+
+    /**
+     * The time the dispute alert was created.
+     */
+    created_at: string;
+
+    /**
+     * The three-letter ISO currency code for the alerted amount.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The dispute associated with the dispute alert.
+     */
+    dispute: Data.Dispute | null;
+
+    /**
+     * The payment associated with the dispute alert.
+     */
+    payment: Data.Payment | null;
+
+    /**
+     * The date of the original transaction.
+     */
+    transaction_date: string | null;
+  }
+
+  export namespace Data {
+    /**
+     * The dispute associated with the dispute alert.
+     */
+    export interface Dispute {
+      /**
+       * The unique identifier for the dispute.
+       */
+      id: string;
+
+      /**
+       * The disputed amount in the specified currency, formatted as a decimal.
+       */
+      amount: number;
+
+      /**
+       * The datetime the dispute was created.
+       */
+      created_at: string | null;
+
+      /**
+       * The three-letter ISO currency code for the disputed amount.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * A human-readable reason for the dispute.
+       */
+      reason: string | null;
+
+      /**
+       * The current status of the dispute lifecycle, such as needs_response,
+       * under_review, won, or lost.
+       */
+      status: DisputesAPI.DisputeStatuses;
+    }
+
+    /**
+     * The payment associated with the dispute alert.
+     */
+    export interface Payment {
+      /**
+       * The unique identifier for the payment.
+       */
+      id: string;
+
+      /**
+       * The reason why a specific payment was billed
+       */
+      billing_reason: PaymentsAPI.BillingReasons | null;
+
+      /**
+       * Possible card brands that a payment token can have
+       */
+      card_brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * The last four digits of the card used to make this payment. Null if the payment
+       * was not made with a card.
+       */
+      card_last4: string | null;
+
+      /**
+       * The datetime the payment was created.
+       */
+      created_at: string;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency: Shared.Currency | null;
+
+      /**
+       * When an alert came in that this transaction will be disputed
+       */
+      dispute_alerted_at: string | null;
+
+      /**
+       * The member attached to this payment.
+       */
+      member: Payment.Member | null;
+
+      /**
+       * The membership attached to this payment.
+       */
+      membership: Payment.Membership | null;
+
+      /**
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
+       */
+      paid_at: string | null;
+
+      /**
+       * The different types of payment methods that can be used.
+       */
+      payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+      /**
+       * The subtotal to show to the creator (excluding buyer fees).
+       */
+      subtotal: number | null;
+
+      /**
+       * The total to show to the creator (excluding buyer fees).
+       */
+      total: number | null;
+
+      /**
+       * The total in USD to show to the creator (excluding buyer fees).
+       */
+      usd_total: number | null;
+
+      /**
+       * The user that made this payment.
+       */
+      user: Payment.User | null;
+    }
+
+    export namespace Payment {
+      /**
+       * The member attached to this payment.
+       */
+      export interface Member {
+        /**
+         * The unique identifier for the company member.
+         */
+        id: string;
+
+        /**
+         * The phone number for the member, if available.
+         */
+        phone: string | null;
+      }
+
+      /**
+       * The membership attached to this payment.
+       */
+      export interface Membership {
+        /**
+         * The unique identifier for the membership.
+         */
+        id: string;
+
+        /**
+         * The state of the membership.
+         */
+        status: Shared.MembershipStatus;
+      }
+
+      /**
+       * The user that made this payment.
+       */
+      export interface User {
+        /**
+         * The unique identifier for the user.
+         */
+        id: string;
+
+        /**
+         * The user's email address. Requires the member:email:read permission to access.
+         * Null if not authorized.
+         */
+        email: string | null;
+
+        /**
+         * The user's display name shown on their public profile.
+         */
+        name: string | null;
+
+        /**
+         * The user's unique username shown on their public profile.
+         */
+        username: string;
+      }
+    }
+  }
+}
+
 export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -1793,6 +2059,7 @@ export type UnwrapWebhookEvent =
   | DisputeUpdatedWebhookEvent
   | RefundCreatedWebhookEvent
   | RefundUpdatedWebhookEvent
+  | DisputeAlertCreatedWebhookEvent
   | MembershipCancelAtPeriodEndChangedWebhookEvent;
 
 export interface WebhookCreateParams {
@@ -1912,6 +2179,7 @@ export declare namespace Webhooks {
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,

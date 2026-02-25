@@ -8,7 +8,7 @@ const client = new Whop({
 });
 
 describe('resource messages', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.messages.create({ channel_id: 'channel_id', content: 'content' });
     const rawResponse = await responsePromise.asResponse();
@@ -20,18 +20,19 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.messages.create({
       channel_id: 'channel_id',
       content: 'content',
       attachments: [{ id: 'id' }],
+      auto_detect_links: true,
       poll: { options: [{ id: 'id', text: 'text' }] },
       replying_to_message_id: 'replying_to_message_id',
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.messages.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
@@ -43,7 +44,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.messages.update('id');
     const rawResponse = await responsePromise.asResponse();
@@ -55,7 +56,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -71,7 +72,7 @@ describe('resource messages', () => {
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.messages.list({ channel_id: 'channel_id' });
     const rawResponse = await responsePromise.asResponse();
@@ -83,7 +84,7 @@ describe('resource messages', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.messages.list({
       channel_id: 'channel_id',
@@ -95,7 +96,7 @@ describe('resource messages', () => {
     });
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.messages.delete('id');
     const rawResponse = await responsePromise.asResponse();
