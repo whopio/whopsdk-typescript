@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.2",
   "name": "@whop/mcp",
-  "version": "0.0.1",
+  "version": "0.0.29",
   "description": "The official MCP Server for the Whop API",
   "author": {
     "name": "Whop"
@@ -17,7 +17,9 @@
     "entry_point": "index.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/index.js"],
+      "args": [
+        "${__dirname}/index.js"
+      ],
       "env": {
         "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
         "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}",
@@ -52,5 +54,7 @@
       "node": ">=18.0.0"
     }
   },
-  "keywords": ["api"]
+  "keywords": [
+    "api"
+  ]
 }
