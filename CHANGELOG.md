@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.0.30 (2026-02-26)
+
+Full Changelog: [v0.0.29...v0.0.30](https://github.com/whopio/whopsdk-typescript/compare/v0.0.29...v0.0.30)
+
+### Features
+
+* **api:** api update ([b8bad0c](https://github.com/whopio/whopsdk-typescript/commit/b8bad0c30a1369d49c62e471020b351b1be6f62c))
+
+
+### Chores
+
+* **internal:** codegen related update ([32b9771](https://github.com/whopio/whopsdk-typescript/commit/32b9771f4a0226c6ed035cdff8515c0f75f700ed))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([0d3c5bf](https://github.com/whopio/whopsdk-typescript/commit/0d3c5bf84a540a4b9a0f0b3db55832e2668392ec))
+* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([a948b77](https://github.com/whopio/whopsdk-typescript/commit/a948b779b343cfc0a0455090bf76942ab10e8568))
+
 ## 0.0.29 (2026-02-25)
 
 Full Changelog: [v0.0.28...v0.0.29](https://github.com/whopio/whopsdk-typescript/compare/v0.0.28...v0.0.29)

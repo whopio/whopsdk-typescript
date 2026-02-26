@@ -2,7 +2,6 @@
 
 import { APIResource } from '../core/resource';
 import * as PaymentsAPI from './payments';
-import * as ProductsAPI from './products';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -1029,11 +1028,6 @@ export declare namespace PaymentCreateParams {
         title: string;
 
         /**
-         * The different business types a company can be.
-         */
-        business_type?: Shared.BusinessTypes | null;
-
-        /**
          * Whether or not to collect shipping information at checkout from the customer.
          */
         collect_shipping_address?: boolean | null;
@@ -1064,16 +1058,6 @@ export declare namespace PaymentCreateParams {
          * The headline of the product.
          */
         headline?: string | null;
-
-        /**
-         * The different industry groups a company can be in.
-         */
-        industry_group?: ProductsAPI.IndustryGroups | null;
-
-        /**
-         * The different industry types a company can be in.
-         */
-        industry_type?: Shared.IndustryTypes | null;
 
         /**
          * The ID of the product tax code to apply to this product.
