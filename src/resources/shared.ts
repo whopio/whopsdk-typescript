@@ -2046,6 +2046,17 @@ export interface Message {
   is_pinned: boolean;
 
   /**
+   * A list of user IDs that are explicitly mentioned in this message.
+   */
+  mentions: Array<string>;
+
+  /**
+   * Whether the message includes an @everyone mention that notifies all channel
+   * members.
+   */
+  mentions_everyone: boolean;
+
+  /**
    * The classification of this message: regular, system, or automated.
    */
   message_type: DmsPostTypes;
