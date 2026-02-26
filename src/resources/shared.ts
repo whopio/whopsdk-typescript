@@ -2392,6 +2392,22 @@ export interface Payment {
   subtotal: number | null;
 
   /**
+   * The calculated amount of the sales/VAT tax (if applicable).
+   */
+  tax_amount: number | null;
+
+  /**
+   * The type of tax inclusivity applied to the receipt, for determining whether the
+   * tax is included in the final price, or paid on top.
+   */
+  tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+
+  /**
+   * The amount of tax that has been refunded (if applicable).
+   */
+  tax_refunded_amount: number | null;
+
+  /**
    * The total to show to the creator (excluding buyer fees).
    */
   total: number | null;
