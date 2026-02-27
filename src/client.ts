@@ -1196,55 +1196,205 @@ export class Whop {
 
   static toFile = Uploads.toFile;
 
+  /**
+   * Apps
+   */
   apps: API.Apps = new API.Apps(this);
+  /**
+   * Invoices
+   */
   invoices: API.Invoices = new API.Invoices(this);
+  /**
+   * Course lesson interactions
+   */
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
+  /**
+   * Products
+   */
   products: API.Products = new API.Products(this);
+  /**
+   * Companies
+   */
   companies: API.Companies = new API.Companies(this);
+  /**
+   * Webhooks
+   */
   webhooks: API.Webhooks = new API.Webhooks(this);
+  /**
+   * Plans
+   */
   plans: API.Plans = new API.Plans(this);
+  /**
+   * Entries
+   */
   entries: API.Entries = new API.Entries(this);
+  /**
+   * Forum posts
+   */
   forumPosts: API.ForumPosts = new API.ForumPosts(this);
+  /**
+   * Transfers
+   */
   transfers: API.Transfers = new API.Transfers(this);
+  /**
+   * Ledger accounts
+   */
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
+  /**
+   * Memberships
+   */
   memberships: API.Memberships = new API.Memberships(this);
+  /**
+   * Authorized users
+   */
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
+  /**
+   * App builds
+   */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
+  /**
+   * Shipments
+   */
   shipments: API.Shipments = new API.Shipments(this);
+  /**
+   * Checkout configurations
+   */
   checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
+  /**
+   * Messages
+   */
   messages: API.Messages = new API.Messages(this);
+  /**
+   * Chat channels
+   */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
+  /**
+   * Users
+   */
   users: API.Users = new API.Users(this);
+  /**
+   * Payments
+   */
   payments: API.Payments = new API.Payments(this);
+  /**
+   * Support channels
+   */
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
+  /**
+   * Experiences
+   */
   experiences: API.Experiences = new API.Experiences(this);
+  /**
+   * Reactions
+   */
   reactions: API.Reactions = new API.Reactions(this);
+  /**
+   * Members
+   */
   members: API.Members = new API.Members(this);
+  /**
+   * Forums
+   */
   forums: API.Forums = new API.Forums(this);
+  /**
+   * Promo codes
+   */
   promoCodes: API.PromoCodes = new API.PromoCodes(this);
+  /**
+   * Courses
+   */
   courses: API.Courses = new API.Courses(this);
+  /**
+   * Course chapters
+   */
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
+  /**
+   * Course lessons
+   */
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
+  /**
+   * Reviews
+   */
   reviews: API.Reviews = new API.Reviews(this);
+  /**
+   * Course students
+   */
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
+  /**
+   * Access tokens
+   */
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
+  /**
+   * Notifications
+   */
   notifications: API.Notifications = new API.Notifications(this);
+  /**
+   * Disputes
+   */
   disputes: API.Disputes = new API.Disputes(this);
+  /**
+   * Refunds
+   */
   refunds: API.Refunds = new API.Refunds(this);
+  /**
+   * Withdrawals
+   */
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
+  /**
+   * Account links
+   */
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
+  /**
+   * Setup intents
+   */
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
+  /**
+   * Payment methods
+   */
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
+  /**
+   * Fee markups
+   */
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
+  /**
+   * Payout methods
+   */
   payoutMethods: API.PayoutMethods = new API.PayoutMethods(this);
+  /**
+   * Verifications
+   */
   verifications: API.Verifications = new API.Verifications(this);
+  /**
+   * Leads
+   */
   leads: API.Leads = new API.Leads(this);
+  /**
+   * Topups
+   */
   topups: API.Topups = new API.Topups(this);
+  /**
+   * Files
+   */
   files: API.Files = new API.Files(this);
+  /**
+   * Company token transactions
+   */
   companyTokenTransactions: API.CompanyTokenTransactions = new API.CompanyTokenTransactions(this);
+  /**
+   * Dm members
+   */
   dmMembers: API.DmMembers = new API.DmMembers(this);
+  /**
+   * Ai chats
+   */
   aiChats: API.AIChats = new API.AIChats(this);
+  /**
+   * Dm channels
+   */
   dmChannels: API.DmChannels = new API.DmChannels(this);
+  /**
+   * Dispute alerts
+   */
   disputeAlerts: API.DisputeAlerts = new API.DisputeAlerts(this);
 }
 

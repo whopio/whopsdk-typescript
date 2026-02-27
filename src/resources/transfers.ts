@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Transfers
+ */
 export class Transfers extends APIResource {
   /**
    * Transfer funds between two ledger accounts, such as from a company balance to a

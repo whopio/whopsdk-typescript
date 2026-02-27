@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Dm members
+ */
 export class DmMembers extends APIResource {
   /**
    * Add a new user to an existing DM channel. Only an admin of the channel can add

@@ -16,6 +16,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Webhooks
+ */
 export class Webhooks extends APIResource {
   /**
    * Creates a new webhook

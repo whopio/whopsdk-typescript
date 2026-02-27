@@ -5,6 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Verifications
+ */
 export class Verifications extends APIResource {
   /**
    * Retrieves the details of an existing verification.
