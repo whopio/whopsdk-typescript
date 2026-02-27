@@ -7,6 +7,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Ledger accounts
+ */
 export class LedgerAccounts extends APIResource {
   /**
    * Retrieves the details of an existing ledger account.

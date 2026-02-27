@@ -5,6 +5,9 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Topups
+ */
 export class Topups extends APIResource {
   /**
    * Add funds to a company's platform balance by charging a stored payment method.

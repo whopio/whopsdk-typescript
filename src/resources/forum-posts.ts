@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Forum posts
+ */
 export class ForumPosts extends APIResource {
   /**
    * Create a new forum post or comment within an experience. Supports text content,

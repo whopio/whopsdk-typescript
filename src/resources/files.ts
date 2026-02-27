@@ -5,6 +5,9 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Files
+ */
 export class Files extends APIResource {
   /**
    * Create a new file record and receive a presigned URL for uploading content to

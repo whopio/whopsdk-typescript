@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Reactions
+ */
 export class Reactions extends APIResource {
   /**
    * Add an emoji reaction or poll vote to a message or forum post. In forums, the

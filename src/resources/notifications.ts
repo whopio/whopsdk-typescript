@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Notifications
+ */
 export class Notifications extends APIResource {
   /**
    * Send a push notification to users in an experience or company team. The

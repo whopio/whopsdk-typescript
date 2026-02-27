@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Invoices
+ */
 export class Invoices extends APIResource {
   /**
    * Create an invoice for a customer. The invoice can be charged automatically using

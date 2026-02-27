@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Setup intents
+ */
 export class SetupIntents extends APIResource {
   /**
    * Retrieves the details of an existing setup intent.

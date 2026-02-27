@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Payments
+ */
 export class Payments extends APIResource {
   /**
    * Charge an existing member off-session using one of their stored payment methods.
