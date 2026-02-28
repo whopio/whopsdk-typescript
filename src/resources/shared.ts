@@ -355,7 +355,8 @@ export type AuthorizedUserRoles =
   | 'moderator'
   | 'app_manager'
   | 'support'
-  | 'manager';
+  | 'manager'
+  | 'custom';
 
 /**
  * A real-time chat feed attached to an experience, with configurable moderation
