@@ -17,13 +17,14 @@ import {
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { readEnv, requireValue } from './util';
 import { WorkerInput, WorkerOutput } from './code-tool-types';
+import { getLogger } from './logger';
 import { SdkMethod } from './methods';
 import { McpCodeExecutionMode } from './options';
 import { ClientOptions } from '@whop/sdk';
 
 const prompt = `Runs JavaScript code to interact with the Whop API.
 
-You are a skilled programmer writing code to interface with the service.
+You are a skilled TypeScript programmer writing code to interface with the service.
 Define an async function named "run" that takes a single parameter of an initialized SDK client and it will be run.
 For example:
 
@@ -40,7 +41,9 @@ You will be returned anything that your function returns, plus the results of an
 Do not add try-catch blocks for single API calls. The tool will handle errors for you.
 Do not add comments unless necessary for generating better code.
 Code will run in a container, and cannot interact with the network outside of the given SDK client.
-Variables will not persist between calls, so make sure to return or log any data you might need later.`;
+Variables will not persist between calls, so make sure to return or log any data you might need later.
+Remember that you are writing TypeScript code, so you need to be careful with your types.
+Always type dynamic key-value stores explicitly as Record<string, YourValueType> instead of {}.`;
 
 /**
  * A tool that runs code against a copy of the SDK.
@@ -82,6 +85,8 @@ export function codeTool({
     },
   };
 
+  const logger = getLogger();
+
   const handler = async ({
     reqContext,
     args,
@@ -106,11 +111,27 @@ export function codeTool({
       }
     }
 
+    let result: ToolCallResult;
+    const startTime = Date.now();
+
     if (codeExecutionMode === 'local') {
-      return await localDenoHandler({ reqContext, args });
+      logger.debug('Executing code in local Deno environment');
+      result = await localDenoHandler({ reqContext, args });
     } else {
-      return await remoteStainlessHandler({ reqContext, args });
+      logger.debug('Executing code in remote Stainless environment');
+      result = await remoteStainlessHandler({ reqContext, args });
     }
+
+    logger.info(
+      {
+        codeExecutionMode,
+        durationMs: Date.now() - startTime,
+        isError: result.isError,
+        contentRows: result.content?.length ?? 0,
+      },
+      'Got code tool execution result',
+    );
+    return result;
   };
 
   return { metadata, tool, handler };

@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Course chapters
+ */
 export class CourseChapters extends APIResource {
   /**
    * Create a new chapter within a course to organize lessons into sections.

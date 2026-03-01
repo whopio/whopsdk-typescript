@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Products
+ */
 export class Products extends APIResource {
   /**
    * Create a new product for a company. The product serves as the top-level

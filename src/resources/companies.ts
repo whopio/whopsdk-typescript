@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Companies
+ */
 export class Companies extends APIResource {
   /**
    * Create a new company. Pass parent_company_id to create a connected account under

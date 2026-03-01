@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Shipments
+ */
 export class Shipments extends APIResource {
   /**
    * Create a new shipment with a tracking code for a specific payment within a

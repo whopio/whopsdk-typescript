@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Withdrawals
+ */
 export class Withdrawals extends APIResource {
   /**
    * Creates a withdrawal request for a ledger account

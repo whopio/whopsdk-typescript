@@ -355,7 +355,8 @@ export type AuthorizedUserRoles =
   | 'moderator'
   | 'app_manager'
   | 'support'
-  | 'manager';
+  | 'manager'
+  | 'custom';
 
 /**
  * A real-time chat feed attached to an experience, with configurable moderation
@@ -2046,6 +2047,17 @@ export interface Message {
   is_pinned: boolean;
 
   /**
+   * A list of user IDs that are explicitly mentioned in this message.
+   */
+  mentions: Array<string>;
+
+  /**
+   * Whether the message includes an @everyone mention that notifies all channel
+   * members.
+   */
+  mentions_everyone: boolean;
+
+  /**
    * The classification of this message: regular, system, or automated.
    */
   message_type: DmsPostTypes;
@@ -2390,6 +2402,22 @@ export interface Payment {
    * The subtotal to show to the creator (excluding buyer fees).
    */
   subtotal: number | null;
+
+  /**
+   * The calculated amount of the sales/VAT tax (if applicable).
+   */
+  tax_amount: number | null;
+
+  /**
+   * The type of tax inclusivity applied to the receipt, for determining whether the
+   * tax is included in the final price, or paid on top.
+   */
+  tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+
+  /**
+   * The amount of tax that has been refunded (if applicable).
+   */
+  tax_refunded_amount: number | null;
 
   /**
    * The total to show to the creator (excluding buyer fees).

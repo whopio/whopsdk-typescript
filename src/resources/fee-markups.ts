@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Fee markups
+ */
 export class FeeMarkups extends APIResource {
   /**
    * Create or update a fee markup for a company. If a markup for the specified fee

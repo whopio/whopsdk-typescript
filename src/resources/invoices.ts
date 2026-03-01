@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { InvoiceListItemsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
@@ -8,6 +9,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Invoices
+ */
 export class Invoices extends APIResource {
   /**
    * Create an invoice for a customer. The invoice can be charged automatically using
@@ -193,6 +197,17 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
+       * Whether this plan uses legacy payment method controls
+       */
+      legacy_payment_method_controls?: boolean | null;
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+      /**
        * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
@@ -261,6 +276,33 @@ export declare namespace InvoiceCreateParams {
          * Whether or not the field is required.
          */
         required?: boolean | null;
+      }
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      export interface PaymentMethodConfiguration {
+        /**
+         * An array of payment method identifiers that are explicitly disabled. Only
+         * applies if the include_platform_defaults is true.
+         */
+        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * An array of payment method identifiers that are explicitly enabled. This means
+         * these payment methods will be shown on checkout. Example use case is to only
+         * enable a specific payment method like cashapp, or extending the platform
+         * defaults with additional methods.
+         */
+        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * Whether Whop's platform default payment method enablement settings are included
+         * in this configuration. The full list of default payment methods can be found in
+         * the documentation at docs.whop.com/payments.
+         */
+        include_platform_defaults: boolean;
       }
     }
 
@@ -387,6 +429,17 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
+       * Whether this plan uses legacy payment method controls
+       */
+      legacy_payment_method_controls?: boolean | null;
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+      /**
        * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
@@ -455,6 +508,33 @@ export declare namespace InvoiceCreateParams {
          * Whether or not the field is required.
          */
         required?: boolean | null;
+      }
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      export interface PaymentMethodConfiguration {
+        /**
+         * An array of payment method identifiers that are explicitly disabled. Only
+         * applies if the include_platform_defaults is true.
+         */
+        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * An array of payment method identifiers that are explicitly enabled. This means
+         * these payment methods will be shown on checkout. Example use case is to only
+         * enable a specific payment method like cashapp, or extending the platform
+         * defaults with additional methods.
+         */
+        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * Whether Whop's platform default payment method enablement settings are included
+         * in this configuration. The full list of default payment methods can be found in
+         * the documentation at docs.whop.com/payments.
+         */
+        include_platform_defaults: boolean;
       }
     }
 
@@ -580,6 +660,17 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
+       * Whether this plan uses legacy payment method controls
+       */
+      legacy_payment_method_controls?: boolean | null;
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+      /**
        * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
@@ -648,6 +739,33 @@ export declare namespace InvoiceCreateParams {
          * Whether or not the field is required.
          */
         required?: boolean | null;
+      }
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      export interface PaymentMethodConfiguration {
+        /**
+         * An array of payment method identifiers that are explicitly disabled. Only
+         * applies if the include_platform_defaults is true.
+         */
+        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * An array of payment method identifiers that are explicitly enabled. This means
+         * these payment methods will be shown on checkout. Example use case is to only
+         * enable a specific payment method like cashapp, or extending the platform
+         * defaults with additional methods.
+         */
+        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * Whether Whop's platform default payment method enablement settings are included
+         * in this configuration. The full list of default payment methods can be found in
+         * the documentation at docs.whop.com/payments.
+         */
+        include_platform_defaults: boolean;
       }
     }
   }
@@ -757,6 +875,17 @@ export declare namespace InvoiceCreateParams {
       internal_notes?: string | null;
 
       /**
+       * Whether this plan uses legacy payment method controls
+       */
+      legacy_payment_method_controls?: boolean | null;
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+      /**
        * The type of plan that can be attached to a product
        */
       plan_type?: Shared.PlanType | null;
@@ -825,6 +954,33 @@ export declare namespace InvoiceCreateParams {
          * Whether or not the field is required.
          */
         required?: boolean | null;
+      }
+
+      /**
+       * The explicit payment method configuration for the plan. If not provided, the
+       * platform or company's defaults will apply.
+       */
+      export interface PaymentMethodConfiguration {
+        /**
+         * An array of payment method identifiers that are explicitly disabled. Only
+         * applies if the include_platform_defaults is true.
+         */
+        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * An array of payment method identifiers that are explicitly enabled. This means
+         * these payment methods will be shown on checkout. Example use case is to only
+         * enable a specific payment method like cashapp, or extending the platform
+         * defaults with additional methods.
+         */
+        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+        /**
+         * Whether Whop's platform default payment method enablement settings are included
+         * in this configuration. The full list of default payment methods can be found in
+         * the documentation at docs.whop.com/payments.
+         */
+        include_platform_defaults: boolean;
       }
     }
   }

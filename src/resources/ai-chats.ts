@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Ai chats
+ */
 export class AIChats extends APIResource {
   /**
    * Create a new AI chat thread and send the first message to the AI agent.

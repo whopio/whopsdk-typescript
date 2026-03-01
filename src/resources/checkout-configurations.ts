@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Checkout configurations
+ */
 export class CheckoutConfigurations extends APIResource {
   /**
    * Creates a new checkout configuration
