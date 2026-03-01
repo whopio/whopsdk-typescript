@@ -50,6 +50,12 @@ describe('resource invoices', () => {
         expiration_days: 42,
         initial_price: 6.9,
         internal_notes: 'internal_notes',
+        legacy_payment_method_controls: true,
+        payment_method_configuration: {
+          disabled: ['acss_debit'],
+          enabled: ['acss_debit'],
+          include_platform_defaults: true,
+        },
         plan_type: 'renewal',
         release_method: 'buy_now',
         renewal_price: 6.9,
