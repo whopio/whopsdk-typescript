@@ -1,5 +1,31 @@
 # Changelog
 
+## 0.1.0 (2026-03-01)
+
+Full Changelog: [v0.0.30...v0.1.0](https://github.com/whopio/whopsdk-typescript/compare/v0.0.30...v0.1.0)
+
+### Features
+
+* **api:** api update ([f35634d](https://github.com/whopio/whopsdk-typescript/commit/f35634d229745b747f40e9297c27210d4a00edb4))
+* **api:** api update ([49da217](https://github.com/whopio/whopsdk-typescript/commit/49da21730e30ffcf9d190fd609c0e2de6c87e45d))
+* **api:** api update ([55bd5ca](https://github.com/whopio/whopsdk-typescript/commit/55bd5ca4b7df5d1b2e7a1737e4d77ae8d6c5f46a))
+* **api:** api update ([444f17a](https://github.com/whopio/whopsdk-typescript/commit/444f17a02cb7c7e1eb7fa117e2f41273a3fa6746))
+* **api:** api update ([a7d4e0c](https://github.com/whopio/whopsdk-typescript/commit/a7d4e0c0aacb6abd76ec11ad90443129903a9e07))
+* **mcp:** add an option to disable code tool ([dfe37d9](https://github.com/whopio/whopsdk-typescript/commit/dfe37d9f49e176c767948a06b27bfab7668f2cc6))
+
+
+### Bug Fixes
+
+* **mcp:** update prompt ([70602c9](https://github.com/whopio/whopsdk-typescript/commit/70602c99004a3ae6328bb1d50ea67761b74cd1c6))
+
+
+### Chores
+
+* **docs:** add missing descriptions ([e84f7a7](https://github.com/whopio/whopsdk-typescript/commit/e84f7a7a9c4798c41da9de4f6a6b56c6f97ff9e3))
+* **internal:** codegen related update ([1fafcee](https://github.com/whopio/whopsdk-typescript/commit/1fafceedb85f014e7a965edb52657a7e7a516566))
+* **internal:** move stringifyQuery implementation to internal function ([24680c0](https://github.com/whopio/whopsdk-typescript/commit/24680c02acdd86ffa2874feab243572a4ff7935e))
+* **internal:** switch MCP servers to use pino for logging ([a59274e](https://github.com/whopio/whopsdk-typescript/commit/a59274ed2c518d69d5fda046cfc7fcc72867e1dc))
+
 ## 0.0.30 (2026-02-26)
 
 Full Changelog: [v0.0.29...v0.0.30](https://github.com/whopio/whopsdk-typescript/compare/v0.0.29...v0.0.30)
