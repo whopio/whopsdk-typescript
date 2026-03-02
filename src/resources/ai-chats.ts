@@ -216,6 +216,12 @@ export interface AIChatCreateParams {
   message_source?: 'manual' | 'suggestion' | 'link' | null;
 
   /**
+   * The type of suggestion prompt that was clicked, when message_source is
+   * 'suggestion'.
+   */
+  suggestion_type?: string | null;
+
+  /**
    * An optional display title for the AI chat thread (e.g., "Help with billing").
    */
   title?: string | null;
