@@ -290,6 +290,12 @@ export interface ForumPostCreateParams {
   poll?: ForumPostCreateParams.Poll | null;
 
   /**
+   * The rich content of the post in Tiptap JSON format. When provided, takes
+   * priority over the markdown content field for rendering.
+   */
+  rich_content?: string | null;
+
+  /**
    * The title of the post, displayed prominently at the top. Required for paywalled
    * posts as it remains visible to non-purchasers.
    */
