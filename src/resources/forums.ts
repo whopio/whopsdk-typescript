@@ -110,6 +110,12 @@ export namespace ForumListResponse {
 
 export interface ForumUpdateParams {
   /**
+   * The banner image displayed at the top of the forum page. Pass null to remove the
+   * existing banner.
+   */
+  banner_image?: ForumUpdateParams.BannerImage | null;
+
+  /**
    * Email notification preference option for a forum feed
    */
   email_notification_preference?: Shared.EmailNotificationPreferences | null;
@@ -123,6 +129,19 @@ export interface ForumUpdateParams {
    * Who can post on a forum feed
    */
   who_can_post?: Shared.WhoCanPostTypes | null;
+}
+
+export namespace ForumUpdateParams {
+  /**
+   * The banner image displayed at the top of the forum page. Pass null to remove the
+   * existing banner.
+   */
+  export interface BannerImage {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
 }
 
 export interface ForumListParams extends CursorPageParams {
