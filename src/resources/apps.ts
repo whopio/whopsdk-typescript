@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Apps
+ */
 export class Apps extends APIResource {
   /**
    * Register a new app on the Whop developer platform. Apps provide custom

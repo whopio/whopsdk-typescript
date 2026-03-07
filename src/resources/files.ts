@@ -7,6 +7,9 @@ import { path } from '../internal/utils/path';
 import type { ToFileInput, Uploadable } from '../core/uploads';
 import { uploadFile } from '../lib/upload-file';
 
+/**
+ * Files
+ */
 export class Files extends APIResource {
   /**
    * Create a new file record and receive a presigned URL for uploading content to

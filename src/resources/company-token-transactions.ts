@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Company token transactions
+ */
 export class CompanyTokenTransactions extends APIResource {
   /**
    * Create a token transaction to add, subtract, or transfer tokens for a member

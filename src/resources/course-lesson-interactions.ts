@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Course lesson interactions
+ */
 export class CourseLessonInteractions extends APIResource {
   /**
    * Retrieves the details of an existing course lesson interaction.

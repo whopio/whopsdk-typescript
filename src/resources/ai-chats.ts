@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Ai chats
+ */
 export class AIChats extends APIResource {
   /**
    * Create a new AI chat thread and send the first message to the AI agent.
@@ -211,6 +214,12 @@ export interface AIChatCreateParams {
    * The source of an AI chat message
    */
   message_source?: 'manual' | 'suggestion' | 'link' | null;
+
+  /**
+   * The type of suggestion prompt that was clicked, when message_source is
+   * 'suggestion'.
+   */
+  suggestion_type?: string | null;
 
   /**
    * An optional display title for the AI chat thread (e.g., "Help with billing").

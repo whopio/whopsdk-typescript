@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Messages
+ */
 export class Messages extends APIResource {
   /**
    * Send a new message in an experience chat, DM, or group chat channel. Supports
@@ -106,6 +109,17 @@ export interface MessageListResponse {
    * Whether this message is pinned to the top of the channel for easy access.
    */
   is_pinned: boolean;
+
+  /**
+   * A list of user IDs that are explicitly mentioned in this message.
+   */
+  mentions: Array<string>;
+
+  /**
+   * Whether the message includes an @everyone mention that notifies all channel
+   * members.
+   */
+  mentions_everyone: boolean;
 
   /**
    * The classification of this message: regular, system, or automated.

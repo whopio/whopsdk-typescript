@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Courses
+ */
 export class Courses extends APIResource {
   /**
    * Create a new course within an experience, with optional chapters, lessons, and a

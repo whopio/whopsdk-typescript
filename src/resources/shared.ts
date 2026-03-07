@@ -355,7 +355,8 @@ export type AuthorizedUserRoles =
   | 'moderator'
   | 'app_manager'
   | 'support'
-  | 'manager';
+  | 'manager'
+  | 'custom';
 
 /**
  * A real-time chat feed attached to an experience, with configurable moderation
@@ -1398,6 +1399,11 @@ export interface ForumPost {
   id: string;
 
   /**
+   * All file attachments on this post, such as images, documents, and videos.
+   */
+  attachments: Array<ForumPost.Attachment>;
+
+  /**
    * The total number of direct comments on this post.
    */
   comment_count: number;
@@ -1460,6 +1466,36 @@ export interface ForumPost {
 }
 
 export namespace ForumPost {
+  /**
+   * Represents an image attachment
+   */
+  export interface Attachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
   /**
    * The user who authored this forum post.
    */
@@ -2046,6 +2082,17 @@ export interface Message {
   is_pinned: boolean;
 
   /**
+   * A list of user IDs that are explicitly mentioned in this message.
+   */
+  mentions: Array<string>;
+
+  /**
+   * Whether the message includes an @everyone mention that notifies all channel
+   * members.
+   */
+  mentions_everyone: boolean;
+
+  /**
    * The classification of this message: regular, system, or automated.
    */
   message_type: DmsPostTypes;
@@ -2390,6 +2437,22 @@ export interface Payment {
    * The subtotal to show to the creator (excluding buyer fees).
    */
   subtotal: number | null;
+
+  /**
+   * The calculated amount of the sales/VAT tax (if applicable).
+   */
+  tax_amount: number | null;
+
+  /**
+   * The type of tax inclusivity applied to the receipt, for determining whether the
+   * tax is included in the final price, or paid on top.
+   */
+  tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+
+  /**
+   * The amount of tax that has been refunded (if applicable).
+   */
+  tax_refunded_amount: number | null;
 
   /**
    * The total to show to the creator (excluding buyer fees).
