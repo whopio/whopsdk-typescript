@@ -4,6 +4,9 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
+/**
+ * Access tokens
+ */
 export class AccessTokens extends APIResource {
   /**
    * Create a short-lived access token for authenticating API requests. When using

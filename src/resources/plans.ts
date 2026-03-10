@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Plans
+ */
 export class Plans extends APIResource {
   /**
    * Create a new pricing plan for a product. The plan defines the billing interval,

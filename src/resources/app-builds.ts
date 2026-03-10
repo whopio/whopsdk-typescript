@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * App builds
+ */
 export class AppBuilds extends APIResource {
   /**
    * Upload a new build artifact for an app. The build must include a compiled code

@@ -8,6 +8,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Payments
+ */
 export class Payments extends APIResource {
   /**
    * Charge an existing member off-session using one of their stored payment methods.
@@ -297,6 +300,7 @@ export type PaymentMethodTypes =
   | 'cashapp'
   | 'claritypay'
   | 'coinbase'
+  | 'coinflow'
   | 'crypto'
   | 'custom'
   | 'customer_balance'
@@ -367,6 +371,12 @@ export type PaymentMethodTypes =
   | 'wechat_pay'
   | 'zip'
   | 'unknown';
+
+/**
+ * The type of tax inclusivity applied to the receipt, for determining whether the
+ * tax is included in the final price, or paid on top.
+ */
+export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect';
 
 /**
  * A payment represents a completed or attempted charge. Payments track the amount,
@@ -539,6 +549,17 @@ export interface PaymentListResponse {
    * The subtotal to show to the creator (excluding buyer fees).
    */
   subtotal: number | null;
+
+  /**
+   * The calculated amount of the sales/VAT tax (if applicable).
+   */
+  tax_amount: number | null;
+
+  /**
+   * The type of tax inclusivity applied to the receipt, for determining whether the
+   * tax is included in the final price, or paid on top.
+   */
+  tax_behavior: ReceiptTaxBehavior | null;
 
   /**
    * The total to show to the creator (excluding buyer fees).
@@ -1225,6 +1246,7 @@ export declare namespace Payments {
     type BillingReasons as BillingReasons,
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
+    type ReceiptTaxBehavior as ReceiptTaxBehavior,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,

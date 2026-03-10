@@ -7,7 +7,34 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Authorized users
+ */
 export class AuthorizedUsers extends APIResource {
+  /**
+   * Add a new authorized user to a company.
+   *
+   * Required permissions:
+   *
+   * - `authorized_user:create`
+   * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * const authorizedUser = await client.authorizedUsers.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   role: 'owner',
+   *   user_id: 'user_xxxxxxxxxxxxx',
+   * });
+   * ```
+   */
+  create(
+    body: AuthorizedUserCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<AuthorizedUserCreateResponse> {
+    return this._client.post('/authorized_users', { body, ...options });
+  }
+
   /**
    * Retrieves the details of an existing authorized user.
    *
@@ -15,6 +42,14 @@ export class AuthorizedUsers extends APIResource {
    *
    * - `company:authorized_user:read`
    * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * const authorizedUser =
+   *   await client.authorizedUsers.retrieve(
+   *     'ausr_xxxxxxxxxxxxx',
+   *   );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<AuthorizedUserRetrieveResponse> {
     return this._client.get(path`/authorized_users/${id}`, options);
@@ -28,6 +63,14 @@ export class AuthorizedUsers extends APIResource {
    *
    * - `company:authorized_user:read`
    * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const authorizedUserListResponse of client.authorizedUsers.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: AuthorizedUserListParams | null | undefined = {},
@@ -38,9 +81,101 @@ export class AuthorizedUsers extends APIResource {
       ...options,
     });
   }
+
+  /**
+   * Remove an authorized user from a company.
+   *
+   * Required permissions:
+   *
+   * - `authorized_user:delete`
+   *
+   * @example
+   * ```ts
+   * const authorizedUser = await client.authorizedUsers.delete(
+   *   'ausr_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  delete(
+    id: string,
+    params: AuthorizedUserDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AuthorizedUserDeleteResponse> {
+    const { company_id } = params ?? {};
+    return this._client.delete(path`/authorized_users/${id}`, { query: { company_id }, ...options });
+  }
 }
 
 export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse>;
+
+/**
+ * A user who has been granted administrative access to manage a company's
+ * dashboard and settings.
+ */
+export interface AuthorizedUserCreateResponse {
+  /**
+   * The unique identifier for the authorized user.
+   */
+  id: string;
+
+  /**
+   * The company this authorized user has access to.
+   */
+  company: AuthorizedUserCreateResponse.Company;
+
+  /**
+   * The permission role assigned to this authorized user within the company.
+   */
+  role: Shared.AuthorizedUserRoles;
+
+  /**
+   * The user account linked to this authorized user record.
+   */
+  user: AuthorizedUserCreateResponse.User;
+}
+
+export namespace AuthorizedUserCreateResponse {
+  /**
+   * The company this authorized user has access to.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+
+    /**
+     * The display name of the company shown to customers.
+     */
+    title: string;
+  }
+
+  /**
+   * The user account linked to this authorized user record.
+   */
+  export interface User {
+    /**
+     * The unique identifier for the user.
+     */
+    id: string;
+
+    /**
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
+     */
+    email: string | null;
+
+    /**
+     * The user's display name shown on their public profile.
+     */
+    name: string | null;
+
+    /**
+     * The user's unique username shown on their public profile.
+     */
+    username: string;
+  }
+}
 
 /**
  * A user who has been granted administrative access to manage a company's
@@ -180,6 +315,34 @@ export namespace AuthorizedUserListResponse {
   }
 }
 
+/**
+ * Represents `true` or `false` values.
+ */
+export type AuthorizedUserDeleteResponse = boolean;
+
+export interface AuthorizedUserCreateParams {
+  /**
+   * The ID of the company to add the authorized user to.
+   */
+  company_id: string;
+
+  /**
+   * The role to assign to the authorized user within the company. Supported roles:
+   * 'moderator', 'sales_manager'.
+   */
+  role: Shared.AuthorizedUserRoles;
+
+  /**
+   * The ID of the user to add as an authorized user.
+   */
+  user_id: string;
+
+  /**
+   * Whether to send notification emails to the user on creation.
+   */
+  send_emails?: boolean | null;
+}
+
 export interface AuthorizedUserListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -223,11 +386,23 @@ export interface AuthorizedUserListParams extends CursorPageParams {
   user_id?: string | null;
 }
 
+export interface AuthorizedUserDeleteParams {
+  /**
+   * The ID of the company the authorized user belongs to. Optional if the authorized
+   * user ID is provided.
+   */
+  company_id?: string | null;
+}
+
 export declare namespace AuthorizedUsers {
   export {
+    type AuthorizedUserCreateResponse as AuthorizedUserCreateResponse,
     type AuthorizedUserRetrieveResponse as AuthorizedUserRetrieveResponse,
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
+    type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
+    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserListParams as AuthorizedUserListParams,
+    type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
   };
 }

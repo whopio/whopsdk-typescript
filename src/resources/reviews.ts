@@ -6,6 +6,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Reviews
+ */
 export class Reviews extends APIResource {
   /**
    * Retrieves the details of an existing review.

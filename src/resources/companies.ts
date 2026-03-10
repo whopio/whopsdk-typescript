@@ -1,12 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CompaniesAPI from './companies';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Companies
+ */
 export class Companies extends APIResource {
   /**
    * Create a new company. Pass parent_company_id to create a connected account under
@@ -66,6 +70,20 @@ export class Companies extends APIResource {
 }
 
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
+
+/**
+ * The different websites you can have social links for
+ */
+export type SocialLinkWebsites =
+  | 'x'
+  | 'instagram'
+  | 'facebook'
+  | 'tiktok'
+  | 'youtube'
+  | 'linkedin'
+  | 'twitch'
+  | 'website'
+  | 'custom';
 
 /**
  * A company is a seller on Whop. Companies own products, manage members, and
@@ -261,6 +279,12 @@ export interface CompanyUpdateParams {
   send_customer_emails?: boolean | null;
 
   /**
+   * The social media links to display on the company's store page. Pass the full
+   * list of desired social links — any existing links not included will be removed.
+   */
+  social_links?: Array<CompanyUpdateParams.SocialLink> | null;
+
+  /**
    * The target audience for this company (e.g., 'beginner day traders aged 18-25
    * looking to learn options').
    */
@@ -291,6 +315,53 @@ export namespace CompanyUpdateParams {
      * The ID of an existing file object.
      */
     id: string;
+  }
+
+  /**
+   * Input for creating a social link for a company
+   */
+  export interface SocialLink {
+    /**
+     * The URL of the social link
+     */
+    url: string;
+
+    /**
+     * The website this link is for
+     */
+    website: CompaniesAPI.SocialLinkWebsites;
+
+    /**
+     * The custom image for the social link
+     */
+    image?: SocialLink.Image | null;
+
+    /**
+     * The order of the social link
+     */
+    order?: string | null;
+
+    /**
+     * The title of the social link
+     */
+    title?: string | null;
+
+    /**
+     * The order of the website social link
+     */
+    website_order?: string | null;
+  }
+
+  export namespace SocialLink {
+    /**
+     * The custom image for the social link
+     */
+    export interface Image {
+      /**
+       * The ID of an existing file object.
+       */
+      id: string;
+    }
   }
 }
 
@@ -335,6 +406,7 @@ export interface CompanyListParams extends CursorPageParams {
 
 export declare namespace Companies {
   export {
+    type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,

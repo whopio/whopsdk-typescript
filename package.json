@@ -1,6 +1,6 @@
 {
   "name": "@whop/sdk",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "The official TypeScript library for the Whop API",
   "author": "Whop <>",
   "types": "dist/index.d.ts",
@@ -52,6 +52,17 @@
     "tslib": "^2.8.1",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
+  },
+  "overrides": {
+    "minimatch": "^9.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "minimatch": "^9.0.5"
+    }
+  },
+  "resolutions": {
+    "minimatch": "^9.0.5"
   },
   "exports": {
     ".": {

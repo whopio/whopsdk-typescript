@@ -31,9 +31,13 @@ export {
 } from './apps';
 export {
   AuthorizedUsers,
+  type AuthorizedUserCreateResponse,
   type AuthorizedUserRetrieveResponse,
   type AuthorizedUserListResponse,
+  type AuthorizedUserDeleteResponse,
+  type AuthorizedUserCreateParams,
   type AuthorizedUserListParams,
+  type AuthorizedUserDeleteParams,
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
@@ -53,6 +57,7 @@ export {
 } from './checkout-configurations';
 export {
   Companies,
+  type SocialLinkWebsites,
   type CompanyListResponse,
   type CompanyCreateParams,
   type CompanyUpdateParams,
@@ -239,6 +244,7 @@ export {
   type MembershipListResponse,
   type MembershipUpdateParams,
   type MembershipListParams,
+  type MembershipAddFreeDaysParams,
   type MembershipCancelParams,
   type MembershipPauseParams,
   type MembershipListResponsesCursorPage,
@@ -270,6 +276,7 @@ export {
   type BillingReasons,
   type CardBrands,
   type PaymentMethodTypes,
+  type ReceiptTaxBehavior,
   type PaymentListResponse,
   type PaymentListFeesResponse,
   type PaymentCreateParams,

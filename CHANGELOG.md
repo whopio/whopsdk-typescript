@@ -1,131 +1,65 @@
 # Changelog
 
-## 0.0.30 (2026-02-26)
+## 0.0.31 (2026-03-10)
 
-Full Changelog: [v0.0.29...v0.0.30](https://github.com/whopio/whopsdk-typescript/compare/v0.0.29...v0.0.30)
-
-### Features
-
-* **api:** api update ([b8bad0c](https://github.com/whopio/whopsdk-typescript/commit/b8bad0c30a1369d49c62e471020b351b1be6f62c))
-
-
-### Chores
-
-* **internal:** codegen related update ([32b9771](https://github.com/whopio/whopsdk-typescript/commit/32b9771f4a0226c6ed035cdff8515c0f75f700ed))
-* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([0d3c5bf](https://github.com/whopio/whopsdk-typescript/commit/0d3c5bf84a540a4b9a0f0b3db55832e2668392ec))
-* **internal:** fix MCP Dockerfiles so they can be built without buildkit ([a948b77](https://github.com/whopio/whopsdk-typescript/commit/a948b779b343cfc0a0455090bf76942ab10e8568))
-
-## 0.0.29 (2026-02-25)
-
-Full Changelog: [v0.0.28...v0.0.29](https://github.com/whopio/whopsdk-typescript/compare/v0.0.28...v0.0.29)
+Full Changelog: [v0.0.30...v0.0.31](https://github.com/whopio/whopsdk-typescript/compare/v0.0.30...v0.0.31)
 
 ### Features
 
-* **api:** api update ([0e614b3](https://github.com/whopio/whopsdk-typescript/commit/0e614b308699d7c20b40bb6fb92064c3ede7a30d))
-* **api:** api update ([ca270c1](https://github.com/whopio/whopsdk-typescript/commit/ca270c171bfa7a26713fb8610bfdc7e4b30948b0))
-* **api:** api update ([5ad3c6a](https://github.com/whopio/whopsdk-typescript/commit/5ad3c6a6de2db7fa1eebe29f7f1d6ad139307695))
-* **api:** api update ([51c11a0](https://github.com/whopio/whopsdk-typescript/commit/51c11a04ccf880a3d92fe4c283954d786b9f1b7d))
-* **api:** api update ([6aaca80](https://github.com/whopio/whopsdk-typescript/commit/6aaca8008531b175d40b48bb44cece3ef001b4b0))
-* **api:** api update ([57f887f](https://github.com/whopio/whopsdk-typescript/commit/57f887f76e0413a1f124ff2d406be252569d4350))
-* **api:** api update ([48b2fbc](https://github.com/whopio/whopsdk-typescript/commit/48b2fbc2ba3b3fff6a9a526d299fbb1911a3e591))
-* **api:** api update ([04af952](https://github.com/whopio/whopsdk-typescript/commit/04af95215269570a2a1b34b9a86efea08f6699c2))
-* **api:** manual updates ([6f799e4](https://github.com/whopio/whopsdk-typescript/commit/6f799e4fa86b26e4efaa785040bc4b02536117d2))
+* **api:** api update ([8eab038](https://github.com/whopio/whopsdk-typescript/commit/8eab038725006afe5f68df460f3a5d5f9a703406))
+* **api:** api update ([9382a00](https://github.com/whopio/whopsdk-typescript/commit/9382a0088ab47222a0edb0ca94baef6800fc178b))
+* **api:** api update ([ee936b5](https://github.com/whopio/whopsdk-typescript/commit/ee936b5618a409a916950a898199e03d81aa27cc))
+* **api:** api update ([54ccb4c](https://github.com/whopio/whopsdk-typescript/commit/54ccb4c62efe0a2c0942b64745b2fe76fc1d6675))
+* **api:** api update ([53999b0](https://github.com/whopio/whopsdk-typescript/commit/53999b0ee4549d455673cd85b04db4c9159dc6b8))
+* **api:** api update ([ef67bfe](https://github.com/whopio/whopsdk-typescript/commit/ef67bfe7426c487803880fe194aef7ba108cda69))
+* **api:** api update ([2664ee3](https://github.com/whopio/whopsdk-typescript/commit/2664ee3ffbba7572d7916fd02bacd442c70e78d6))
+* **api:** api update ([f35634d](https://github.com/whopio/whopsdk-typescript/commit/f35634d229745b747f40e9297c27210d4a00edb4))
+* **api:** api update ([49da217](https://github.com/whopio/whopsdk-typescript/commit/49da21730e30ffcf9d190fd609c0e2de6c87e45d))
+* **api:** api update ([55bd5ca](https://github.com/whopio/whopsdk-typescript/commit/55bd5ca4b7df5d1b2e7a1737e4d77ae8d6c5f46a))
+* **api:** api update ([444f17a](https://github.com/whopio/whopsdk-typescript/commit/444f17a02cb7c7e1eb7fa117e2f41273a3fa6746))
+* **api:** api update ([a7d4e0c](https://github.com/whopio/whopsdk-typescript/commit/a7d4e0c0aacb6abd76ec11ad90443129903a9e07))
+* **api:** manual updates ([4c1b8b1](https://github.com/whopio/whopsdk-typescript/commit/4c1b8b1ec12c5786d0fad4bcfe88b0de03504363))
+* **mcp:** add an option to disable code tool ([dfe37d9](https://github.com/whopio/whopsdk-typescript/commit/dfe37d9f49e176c767948a06b27bfab7668f2cc6))
 
 
 ### Bug Fixes
 
-* **docs/contributing:** correct pnpm link command ([4f2feaa](https://github.com/whopio/whopsdk-typescript/commit/4f2feaa583331ec3a3fab808616858646181c277))
-* **mcp:** initialize SDK lazily to avoid failing the connection on init errors ([363646f](https://github.com/whopio/whopsdk-typescript/commit/363646fe83665d48bc5602189827ab16aa742fac))
+* **client:** preserve URL params already embedded in path ([d142a1e](https://github.com/whopio/whopsdk-typescript/commit/d142a1ee7e9b9989573dddac81cb347c615d425c))
+* fix request delays for retrying to be more respectful of high requested delays ([6957833](https://github.com/whopio/whopsdk-typescript/commit/695783388e94bc78d68894fae35adf699b6adbfd))
+* **mcp:** update prompt ([70602c9](https://github.com/whopio/whopsdk-typescript/commit/70602c99004a3ae6328bb1d50ea67761b74cd1c6))
 
 
 ### Chores
 
-* **internal:** codegen related update ([c31edcb](https://github.com/whopio/whopsdk-typescript/commit/c31edcb67d7bc1a0d281f6af871a456b841976bf))
-* **internal:** make MCP code execution location configurable via a flag ([8293e00](https://github.com/whopio/whopsdk-typescript/commit/8293e006a9717886714b244e23dfedd6afb02cd8))
-* **internal:** remove mock server code ([be2f43b](https://github.com/whopio/whopsdk-typescript/commit/be2f43b7aeced5f88513a483a444767e020931fb))
-* **internal:** update agents version ([60497fc](https://github.com/whopio/whopsdk-typescript/commit/60497fccda8056361c2931763efcea27bea04c68))
-* **internal:** upgrade @modelcontextprotocol/sdk and hono ([c96891f](https://github.com/whopio/whopsdk-typescript/commit/c96891fb4606efcf8454505fca866ca05e3f7f9c))
-* **internal:** upgrade pnpm version ([acda8ed](https://github.com/whopio/whopsdk-typescript/commit/acda8edb9416d3f482377397126792d4a928c22a))
-* **mcp:** correctly update version in sync with sdk ([d717ee1](https://github.com/whopio/whopsdk-typescript/commit/d717ee1258e5f23c8686719a4e1404d96a3fb881))
-* update mock server docs ([7661e50](https://github.com/whopio/whopsdk-typescript/commit/7661e502987a3b71282bb86a55f5a7cc67b963e9))
-
-## 0.0.28 (2026-02-19)
-
-Full Changelog: [v0.0.27...v0.0.28](https://github.com/whopio/whopsdk-typescript/compare/v0.0.27...v0.0.28)
-
-### Features
-
-* **api:** api update ([1e806b4](https://github.com/whopio/whopsdk-typescript/commit/1e806b4b0c41a5055587135044d2b0483dd8dbc6))
-* **api:** api update ([110bb69](https://github.com/whopio/whopsdk-typescript/commit/110bb693d66bb936f26059e39afa703768385e6b))
-* **api:** api update ([d5e3706](https://github.com/whopio/whopsdk-typescript/commit/d5e3706df88abd3bad4bd6dcf4600f5a336cfb5f))
-* **api:** api update ([959652e](https://github.com/whopio/whopsdk-typescript/commit/959652e748aa5f04b1a34b8c1d9d4848f3502b81))
-* **api:** api update ([e66e299](https://github.com/whopio/whopsdk-typescript/commit/e66e299e2e5305845e848d1e8ee58d6b5cfc3f14))
-* **api:** api update ([f38cb7b](https://github.com/whopio/whopsdk-typescript/commit/f38cb7bb37a83e0d94ea63a8a5d4a3fda6e419ac))
-* **api:** api update ([8b4feef](https://github.com/whopio/whopsdk-typescript/commit/8b4feef17d63622b30e0a806fee31573c1983322))
-* **api:** api update ([6c93adc](https://github.com/whopio/whopsdk-typescript/commit/6c93adc54f554007a3312be752bf071e0549d502))
-* **api:** api update ([e9b1b22](https://github.com/whopio/whopsdk-typescript/commit/e9b1b22e8c055380d72ead90ac981eda514059d9))
-* **api:** api update ([1acb005](https://github.com/whopio/whopsdk-typescript/commit/1acb0056c42ec8b309d25b3ce920e292809df514))
-* **api:** api update ([6cc5221](https://github.com/whopio/whopsdk-typescript/commit/6cc522129e6a0b908a1ac2099f5a10c24c0f811e))
-* **api:** api update ([e44036d](https://github.com/whopio/whopsdk-typescript/commit/e44036d0a92dc4a324fa4ccb48a47301cce2f7ff))
-* **api:** api update ([d22e4e5](https://github.com/whopio/whopsdk-typescript/commit/d22e4e55546c099f7e6ccd33fdbc69f93bb583c5))
-* **api:** api update ([30c71a4](https://github.com/whopio/whopsdk-typescript/commit/30c71a48c41bfb319280bb16fce44316a5b4da57))
-* **api:** api update ([5aae5b7](https://github.com/whopio/whopsdk-typescript/commit/5aae5b7cedacdf081f68d3b99ac63d757e793ddb))
-* **api:** api update ([a41fb1a](https://github.com/whopio/whopsdk-typescript/commit/a41fb1a880744e20184c1843563c6dbadd0de933))
-* **api:** api update ([32a027a](https://github.com/whopio/whopsdk-typescript/commit/32a027a7e22151417b304520d1ce15bac1260030))
-* **api:** api update ([108dc1b](https://github.com/whopio/whopsdk-typescript/commit/108dc1ba0c436741840370d9e882349a50aa3398))
-* **api:** api update ([fa23a2b](https://github.com/whopio/whopsdk-typescript/commit/fa23a2b2f04cb70fd1c830ebd5aa443034f1e52b))
-* **api:** manual updates ([fe4b627](https://github.com/whopio/whopsdk-typescript/commit/fe4b627e9380eb9ba6fd4ed5d821950538916a40))
-* **api:** manual updates ([c0b0d45](https://github.com/whopio/whopsdk-typescript/commit/c0b0d458094672ea582770be2e7a4bf335d3f515))
-* **api:** manual updates ([7dbd9f3](https://github.com/whopio/whopsdk-typescript/commit/7dbd9f3cdb59927f1154af06267c2512032ff96f))
+* **ci:** skip uploading artifacts on stainless-internal branches ([88fef72](https://github.com/whopio/whopsdk-typescript/commit/88fef7231b531c51dae8d653d3f2c958e5eef991))
+* **docs:** add missing descriptions ([e84f7a7](https://github.com/whopio/whopsdk-typescript/commit/e84f7a7a9c4798c41da9de4f6a6b56c6f97ff9e3))
+* **internal:** codegen related update ([5c4ccde](https://github.com/whopio/whopsdk-typescript/commit/5c4ccdeb351dc1b3c2c5bf372a3886db33866d3b))
+* **internal:** codegen related update ([2f63fd6](https://github.com/whopio/whopsdk-typescript/commit/2f63fd6f1dc87a3c6c6dc9f68ba439e9803336c1))
+* **internal:** codegen related update ([037fcba](https://github.com/whopio/whopsdk-typescript/commit/037fcba9217f849694ef419de9f2e8530b7bf7b3))
+* **internal:** codegen related update ([819851a](https://github.com/whopio/whopsdk-typescript/commit/819851a575a9fe13fc82442d79f0346a1e5e0397))
+* **internal:** codegen related update ([8a1137b](https://github.com/whopio/whopsdk-typescript/commit/8a1137bd5ba9fe290858714d2139946c1649070e))
+* **internal:** codegen related update ([c919bcf](https://github.com/whopio/whopsdk-typescript/commit/c919bcf9b97dea4132f6c5d92753c574b25a31b3))
+* **internal:** codegen related update ([79113de](https://github.com/whopio/whopsdk-typescript/commit/79113de4c14a961d89d6dc11416f16728c52e886))
+* **internal:** codegen related update ([7742909](https://github.com/whopio/whopsdk-typescript/commit/77429099d62baf7e1903e3dd99d4f06cfad184e8))
+* **internal:** codegen related update ([ce925d0](https://github.com/whopio/whopsdk-typescript/commit/ce925d0d3721769c0bf7ef17c4cebf13c18f63d6))
+* **internal:** codegen related update ([805721e](https://github.com/whopio/whopsdk-typescript/commit/805721e3c59eb1a90b37fac0cbf638c4d5b38a80))
+* **internal:** codegen related update ([5b42534](https://github.com/whopio/whopsdk-typescript/commit/5b4253464fc1a9dd3659b888676d6caf4b8eb9b6))
+* **internal:** codegen related update ([a340882](https://github.com/whopio/whopsdk-typescript/commit/a340882155db3f1e58654a23010befc9f14c8bc0))
+* **internal:** codegen related update ([fd6a34c](https://github.com/whopio/whopsdk-typescript/commit/fd6a34c8e9b1b91623ec28293df6e22a91e367de))
+* **internal:** codegen related update ([badf381](https://github.com/whopio/whopsdk-typescript/commit/badf381ad8e5a5d6f948969406e23daf37d83a47))
+* **internal:** codegen related update ([1fafcee](https://github.com/whopio/whopsdk-typescript/commit/1fafceedb85f014e7a965edb52657a7e7a516566))
+* **internal:** move stringifyQuery implementation to internal function ([24680c0](https://github.com/whopio/whopsdk-typescript/commit/24680c02acdd86ffa2874feab243572a4ff7935e))
+* **internal:** switch MCP servers to use pino for logging ([a59274e](https://github.com/whopio/whopsdk-typescript/commit/a59274ed2c518d69d5fda046cfc7fcc72867e1dc))
+* **internal:** update dependencies to address dependabot vulnerabilities ([53be8e6](https://github.com/whopio/whopsdk-typescript/commit/53be8e6df5758c7fda9b7c1b0462271b89f79471))
+* **internal:** use x-stainless-mcp-client-envs header for MCP remote code tool calls ([fcf0e96](https://github.com/whopio/whopsdk-typescript/commit/fcf0e967e5907e28df9e3cf3da7b93895ba410bc))
+* **mcp-server:** improve instructions ([361354a](https://github.com/whopio/whopsdk-typescript/commit/361354afeeb7a91e4afa26fc6c2ee0aa3161503d))
+* **mcp-server:** return access instructions for 404 without API key ([6d447ee](https://github.com/whopio/whopsdk-typescript/commit/6d447eecd05f04c1cb6ba6845c1cf687b095d6c3))
+* **tests:** update webhook tests ([16084de](https://github.com/whopio/whopsdk-typescript/commit/16084de07a6744c4473289d7529930397051fadb))
 
 
-### Chores
+### Refactors
 
-* configure new SDK language ([bf8e117](https://github.com/whopio/whopsdk-typescript/commit/bf8e117539ad9015dcd5253b819cfe789503f66f))
-* **internal/client:** fix form-urlencoded requests ([2eacbf8](https://github.com/whopio/whopsdk-typescript/commit/2eacbf80c1fdd5d94b3d368b8fce9a26ada677c9))
-* **internal:** allow setting x-stainless-api-key header on mcp server requests ([be74cc8](https://github.com/whopio/whopsdk-typescript/commit/be74cc867c420d701a1efd8dd5263902e22348e3))
-* **internal:** avoid type checking errors with ts-reset ([f9ba9cb](https://github.com/whopio/whopsdk-typescript/commit/f9ba9cb307ebb8ccde9e69248cbfeae49d0daa73))
-* **internal:** cache fetch instruction calls in MCP server ([6bacaa5](https://github.com/whopio/whopsdk-typescript/commit/6bacaa502b4fd5d76dce54d5f2b0124d204f3ab6))
-* **internal:** improve layout of generated MCP server files ([a8a92e1](https://github.com/whopio/whopsdk-typescript/commit/a8a92e1a8b86c54d1983a1617e820c91e2be0cab))
-* **internal:** improve reliability of MCP servers when using local code mode execution ([732b4ed](https://github.com/whopio/whopsdk-typescript/commit/732b4edf8a01978970ce32d2225b41a2351765b9))
-* **mcp:** forward STAINLESS_API_KEY to docs search endpoint ([5008ec0](https://github.com/whopio/whopsdk-typescript/commit/5008ec026fa232efe58dfcb5bcb52271c76398df))
-
-## 0.0.27 (2026-02-09)
-
-Full Changelog: [v0.0.26...v0.0.27](https://github.com/whopio/whopsdk-typescript/compare/v0.0.26...v0.0.27)
-
-### Features
-
-* **api:** api update ([5354fea](https://github.com/whopio/whopsdk-typescript/commit/5354fea1cd68a830fa768245581a51ad5c967ab3))
-* **api:** api update ([a3413a3](https://github.com/whopio/whopsdk-typescript/commit/a3413a34874626a37dcaa3fd301b5c6da910d0e1))
-* **api:** api update ([84f777f](https://github.com/whopio/whopsdk-typescript/commit/84f777f93a84933d5ea8f5761e8791b598da5b36))
-* **api:** api update ([5fe25bb](https://github.com/whopio/whopsdk-typescript/commit/5fe25bb0770feb73d6c3db70432fe65248d4f9e7))
-* **api:** api update ([9cf81bb](https://github.com/whopio/whopsdk-typescript/commit/9cf81bb06254c216302a343b9ca5340483b62af7))
-* **api:** api update ([b74f460](https://github.com/whopio/whopsdk-typescript/commit/b74f4606dda37a7728429bf9e8fcc6c0024f9fbb))
-* **api:** api update ([a9668c3](https://github.com/whopio/whopsdk-typescript/commit/a9668c3d68cdbf669dcef9f09e5addcc3842ed07))
-* **api:** api update ([d3e37dc](https://github.com/whopio/whopsdk-typescript/commit/d3e37dcc3f1fbadc86b4bf96752bc1c70d4d0fd7))
-* **api:** api update ([e50f228](https://github.com/whopio/whopsdk-typescript/commit/e50f228fc22eb5025fb3917b712d5bb7a2f38f86))
-* **api:** manual updates ([ec4fcaf](https://github.com/whopio/whopsdk-typescript/commit/ec4fcaf4a78a30755a1abdec31b2b47b33f35c45))
-* **api:** manual updates ([12d8464](https://github.com/whopio/whopsdk-typescript/commit/12d8464e3841add210c25ed3506eeff2c39f952a))
-* **api:** manual updates ([6c7a1bb](https://github.com/whopio/whopsdk-typescript/commit/6c7a1bb147497c8a11a238db1c54b978fb654626))
-* **mcp:** add initial server instructions ([b63028c](https://github.com/whopio/whopsdk-typescript/commit/b63028c67065be16078363d5209f0e593b2ebb80))
-
-
-### Bug Fixes
-
-* **client:** avoid removing abort listener too early ([1a156c3](https://github.com/whopio/whopsdk-typescript/commit/1a156c3a8f6cbbd14f8ee33dbffa032ee66f8050))
-
-
-### Chores
-
-* **client:** restructure abort controller binding ([8b42719](https://github.com/whopio/whopsdk-typescript/commit/8b427193fb0dea7bd15e8daa8fe4eefe73dfa3f2))
-* **internal:** add health check to MCP server when running in HTTP mode ([c18e259](https://github.com/whopio/whopsdk-typescript/commit/c18e259dd1848bab298e614bb52c7b2516e7a209))
-* **internal:** allow basic filtering of methods allowed for MCP code mode ([962a869](https://github.com/whopio/whopsdk-typescript/commit/962a8695f5679b102df8a039137a16e21a9246a4))
-* **internal:** always generate MCP server dockerfiles and upgrade associated dependencies ([0036cce](https://github.com/whopio/whopsdk-typescript/commit/0036cce8c3bcb6e8e85fccb6bda7f622d3f0442c))
-* **internal:** fix pagination internals not accepting option promises ([57724fa](https://github.com/whopio/whopsdk-typescript/commit/57724fa8679beae0fcb607f5f87317a38f8d63e2))
-* **internal:** refactor flag parsing for MCP servers and add debug flag ([69b83ee](https://github.com/whopio/whopsdk-typescript/commit/69b83ee1bf557a52185ebdafb0ea99df9800837a))
-* **internal:** upgrade hono ([434ac07](https://github.com/whopio/whopsdk-typescript/commit/434ac075820f7d8090b167b2ac86b9a07543bcfd))
-* **internal:** upgrade pnpm ([e370222](https://github.com/whopio/whopsdk-typescript/commit/e370222bedff51611e98894c30ef3a0957015dab))
+* update sdk ([2da31dc](https://github.com/whopio/whopsdk-typescript/commit/2da31dc2061cc6311e74043e343c4df490d745c0))
 
 ## 0.0.26 (2026-02-03)
 

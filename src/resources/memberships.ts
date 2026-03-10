@@ -7,6 +7,9 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Memberships
+ */
 export class Memberships extends APIResource {
   /**
    * Retrieves the details of an existing membership.
@@ -15,6 +18,13 @@ export class Memberships extends APIResource {
    *
    * - `member:basic:read`
    * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.retrieve(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.get(path`/memberships/${id}`, options);
@@ -28,6 +38,13 @@ export class Memberships extends APIResource {
    * - `member:manage`
    * - `member:email:read`
    * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.update(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   update(
     id: string,
@@ -45,6 +62,14 @@ export class Memberships extends APIResource {
    *
    * - `member:basic:read`
    * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const membershipListResponse of client.memberships.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: MembershipListParams | null | undefined = {},
@@ -54,14 +79,47 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Cancel a membership either immediately or at the end of the current billing
-   * period. Immediate cancellation revokes access right away.
+   * Add free days to extend a membership's current billing period, expiration date,
+   * or Stripe trial.
    *
    * Required permissions:
    *
    * - `member:manage`
    * - `member:email:read`
    * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.addFreeDays(
+   *   'mem_xxxxxxxxxxxxxx',
+   *   { free_days: 42 },
+   * );
+   * ```
+   */
+  addFreeDays(
+    id: string,
+    body: MembershipAddFreeDaysParams,
+    options?: RequestOptions,
+  ): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
+  }
+
+  /**
+   * Cancel a membership either immediately or at the end of the current billing
+   * period. Immediate cancellation revokes access right away.
+   *
+   * Required permissions:
+   *
+   * - `membership:cancel`
+   * - `member:email:read`
+   * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.cancel(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   cancel(
     id: string,
@@ -80,6 +138,13 @@ export class Memberships extends APIResource {
    * - `member:manage`
    * - `member:email:read`
    * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.pause(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   pause(
     id: string,
@@ -98,6 +163,13 @@ export class Memberships extends APIResource {
    * - `member:manage`
    * - `member:email:read`
    * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.resume(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/resume`, options);
@@ -112,6 +184,13 @@ export class Memberships extends APIResource {
    * - `member:manage`
    * - `member:email:read`
    * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.uncancel(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/uncancel`, options);
@@ -435,6 +514,14 @@ export interface MembershipListParams extends CursorPageParams {
   user_ids?: Array<string> | null;
 }
 
+export interface MembershipAddFreeDaysParams {
+  /**
+   * The number of free days to add (1-1095). Extends the billing period, expiration
+   * date, or Stripe trial depending on plan type.
+   */
+  free_days: number;
+}
+
 export interface MembershipCancelParams {
   /**
    * The mode of cancellation for a membership
@@ -457,6 +544,7 @@ export declare namespace Memberships {
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
+    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
   };
