@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as CompaniesAPI from './companies';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -69,6 +70,20 @@ export class Companies extends APIResource {
 }
 
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
+
+/**
+ * The different websites you can have social links for
+ */
+export type SocialLinkWebsites =
+  | 'x'
+  | 'instagram'
+  | 'facebook'
+  | 'tiktok'
+  | 'youtube'
+  | 'linkedin'
+  | 'twitch'
+  | 'website'
+  | 'custom';
 
 /**
  * A company is a seller on Whop. Companies own products, manage members, and
@@ -314,16 +329,7 @@ export namespace CompanyUpdateParams {
     /**
      * The website this link is for
      */
-    website:
-      | 'x'
-      | 'instagram'
-      | 'facebook'
-      | 'tiktok'
-      | 'youtube'
-      | 'linkedin'
-      | 'twitch'
-      | 'website'
-      | 'custom';
+    website: CompaniesAPI.SocialLinkWebsites;
 
     /**
      * The custom image for the social link
@@ -400,6 +406,7 @@ export interface CompanyListParams extends CursorPageParams {
 
 export declare namespace Companies {
   export {
+    type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,

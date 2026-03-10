@@ -1427,7 +1427,7 @@ export namespace RefundCreatedWebhookEvent {
        * The type of tax inclusivity applied to the receipt, for determining whether the
        * tax is included in the final price, or paid on top.
        */
-      tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+      tax_behavior: PaymentsAPI.ReceiptTaxBehavior | null;
 
       /**
        * The amount of tax that has been refunded (if applicable).
@@ -1687,7 +1687,7 @@ export namespace RefundUpdatedWebhookEvent {
        * The type of tax inclusivity applied to the receipt, for determining whether the
        * tax is included in the final price, or paid on top.
        */
-      tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+      tax_behavior: PaymentsAPI.ReceiptTaxBehavior | null;
 
       /**
        * The amount of tax that has been refunded (if applicable).

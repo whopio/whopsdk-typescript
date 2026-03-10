@@ -373,6 +373,12 @@ export type PaymentMethodTypes =
   | 'unknown';
 
 /**
+ * The type of tax inclusivity applied to the receipt, for determining whether the
+ * tax is included in the final price, or paid on top.
+ */
+export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect';
+
+/**
  * A payment represents a completed or attempted charge. Payments track the amount,
  * status, currency, and payment method used.
  */
@@ -553,7 +559,7 @@ export interface PaymentListResponse {
    * The type of tax inclusivity applied to the receipt, for determining whether the
    * tax is included in the final price, or paid on top.
    */
-  tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+  tax_behavior: ReceiptTaxBehavior | null;
 
   /**
    * The total to show to the creator (excluding buyer fees).
@@ -1240,6 +1246,7 @@ export declare namespace Payments {
     type BillingReasons as BillingReasons,
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
+    type ReceiptTaxBehavior as ReceiptTaxBehavior,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
