@@ -59,7 +59,8 @@ export type PaymentProvider =
   | 'adyen'
   | 'claritypay'
   | 'checkout_dot_com'
-  | 'airwallex';
+  | 'airwallex'
+  | 'coinflow';
 
 /**
  * The status of the refund reference.
