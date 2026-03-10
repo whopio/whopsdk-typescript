@@ -300,6 +300,7 @@ export type PaymentMethodTypes =
   | 'cashapp'
   | 'claritypay'
   | 'coinbase'
+  | 'coinflow'
   | 'crypto'
   | 'custom'
   | 'customer_balance'
