@@ -20,7 +20,6 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:create`
-   * - `plan:basic:read`
    *
    * @example
    * ```ts
@@ -44,7 +43,6 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:basic:read`
-   * - `plan:basic:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice> {
     return this._client.get(path`/invoices/${id}`, options);
@@ -57,10 +55,9 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:basic:read`
-   * - `plan:basic:read`
    */
   list(
-    query: InvoiceListParams,
+    query: InvoiceListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
     return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem>, { query, ...options });
@@ -988,11 +985,6 @@ export declare namespace InvoiceCreateParams {
 
 export interface InvoiceListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list invoices for.
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
@@ -1001,6 +993,11 @@ export interface InvoiceListParams extends CursorPageParams {
    * Filter invoices by their collection method.
    */
   collection_methods?: Array<Shared.CollectionMethod> | null;
+
+  /**
+   * The unique identifier of the company to list invoices for.
+   */
+  company_id?: string | null;
 
   /**
    * Only return invoices created after this timestamp.
