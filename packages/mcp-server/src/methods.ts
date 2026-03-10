@@ -276,6 +276,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/memberships',
   },
   {
+    clientCallName: 'client.memberships.addFreeDays',
+    fullyQualifiedName: 'memberships.addFreeDays',
+    httpMethod: 'post',
+    httpPath: '/memberships/{id}/add_free_days',
+  },
+  {
     clientCallName: 'client.memberships.cancel',
     fullyQualifiedName: 'memberships.cancel',
     httpMethod: 'post',
@@ -300,6 +306,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/memberships/{id}/uncancel',
   },
   {
+    clientCallName: 'client.authorizedUsers.create',
+    fullyQualifiedName: 'authorizedUsers.create',
+    httpMethod: 'post',
+    httpPath: '/authorized_users',
+  },
+  {
     clientCallName: 'client.authorizedUsers.retrieve',
     fullyQualifiedName: 'authorizedUsers.retrieve',
     httpMethod: 'get',
@@ -310,6 +322,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'authorizedUsers.list',
     httpMethod: 'get',
     httpPath: '/authorized_users',
+  },
+  {
+    clientCallName: 'client.authorizedUsers.delete',
+    fullyQualifiedName: 'authorizedUsers.delete',
+    httpMethod: 'delete',
+    httpPath: '/authorized_users/{id}',
   },
   {
     clientCallName: 'client.appBuilds.create',

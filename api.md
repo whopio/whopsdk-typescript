@@ -113,6 +113,7 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/companies.ts">SocialLinkWebsites</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
 
 Methods:
@@ -248,6 +249,7 @@ Methods:
 - <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
+- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
@@ -257,13 +259,17 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserCreateResponse</a></code>
 - <code><a href="./src/resources/authorized-users.ts">AuthorizedUserRetrieveResponse</a></code>
 - <code><a href="./src/resources/authorized-users.ts">AuthorizedUserListResponse</a></code>
+- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserDeleteResponse</a></code>
 
 Methods:
 
+- <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUserCreateResponse</code>
 - <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUserRetrieveResponse</code>
 - <code title="get /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">list</a>({ ...params }) -> AuthorizedUserListResponsesCursorPage</code>
+- <code title="delete /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">delete</a>(id, { ...params }) -> AuthorizedUserDeleteResponse</code>
 
 # AppBuilds
 
@@ -350,6 +356,7 @@ Types:
 - <code><a href="./src/resources/payments.ts">BillingReasons</a></code>
 - <code><a href="./src/resources/payments.ts">CardBrands</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
+- <code><a href="./src/resources/payments.ts">ReceiptTaxBehavior</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListFeesResponse</a></code>
 

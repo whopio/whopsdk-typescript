@@ -84,6 +84,23 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('addFreeDays: only required params', async () => {
+    const responsePromise = client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('addFreeDays: required and optional params', async () => {
+    const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+  });
+
+  // Mock server tests are disabled
   test.skip('cancel', async () => {
     const responsePromise = client.memberships.cancel('mem_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

@@ -48,6 +48,10 @@ import {
   Apps,
 } from './resources/apps';
 import {
+  AuthorizedUserCreateParams,
+  AuthorizedUserCreateResponse,
+  AuthorizedUserDeleteParams,
+  AuthorizedUserDeleteResponse,
   AuthorizedUserListParams,
   AuthorizedUserListResponse,
   AuthorizedUserListResponsesCursorPage,
@@ -76,6 +80,7 @@ import {
   CompanyListResponse,
   CompanyListResponsesCursorPage,
   CompanyUpdateParams,
+  SocialLinkWebsites,
 } from './resources/companies';
 import {
   CompanyTokenTransaction,
@@ -248,6 +253,7 @@ import {
 } from './resources/members';
 import {
   CancelOptions,
+  MembershipAddFreeDaysParams,
   MembershipCancelParams,
   MembershipListParams,
   MembershipListResponse,
@@ -291,6 +297,7 @@ import {
   PaymentMethodTypes,
   PaymentRefundParams,
   Payments,
+  ReceiptTaxBehavior,
 } from './resources/payments';
 import {
   PayoutDestinationCategory,
@@ -1486,6 +1493,7 @@ export declare namespace Whop {
 
   export {
     Companies as Companies,
+    type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
@@ -1584,16 +1592,21 @@ export declare namespace Whop {
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
+    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
   };
 
   export {
     AuthorizedUsers as AuthorizedUsers,
+    type AuthorizedUserCreateResponse as AuthorizedUserCreateResponse,
     type AuthorizedUserRetrieveResponse as AuthorizedUserRetrieveResponse,
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
+    type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
+    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserListParams as AuthorizedUserListParams,
+    type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
   };
 
   export {
@@ -1652,6 +1665,7 @@ export declare namespace Whop {
     type BillingReasons as BillingReasons,
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
+    type ReceiptTaxBehavior as ReceiptTaxBehavior,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,

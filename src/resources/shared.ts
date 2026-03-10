@@ -3,6 +3,7 @@
 import * as Shared from './shared';
 import * as AppsAPI from './apps';
 import * as CheckoutConfigurationsAPI from './checkout-configurations';
+import * as CompaniesAPI from './companies';
 import * as DisputesAPI from './disputes';
 import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
@@ -715,16 +716,7 @@ export namespace Company {
     /**
      * The website
      */
-    website:
-      | 'x'
-      | 'instagram'
-      | 'facebook'
-      | 'tiktok'
-      | 'youtube'
-      | 'linkedin'
-      | 'twitch'
-      | 'website'
-      | 'custom';
+    website: CompaniesAPI.SocialLinkWebsites;
   }
 }
 
@@ -2447,7 +2439,7 @@ export interface Payment {
    * The type of tax inclusivity applied to the receipt, for determining whether the
    * tax is included in the final price, or paid on top.
    */
-  tax_behavior: 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect' | null;
+  tax_behavior: PaymentsAPI.ReceiptTaxBehavior | null;
 
   /**
    * The amount of tax that has been refunded (if applicable).
