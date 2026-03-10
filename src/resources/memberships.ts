@@ -62,7 +62,7 @@ export class Memberships extends APIResource {
    *
    * Required permissions:
    *
-   * - `member:manage`
+   * - `membership:cancel`
    * - `member:email:read`
    * - `member:basic:read`
    */
