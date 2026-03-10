@@ -86,8 +86,8 @@ describe('resource invoices', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.invoices.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+  test.skip('list', async () => {
+    const responsePromise = client.invoices.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -98,21 +98,27 @@ describe('resource invoices', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.invoices.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      collection_methods: ['send_invoice'],
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-      order: 'id',
-      product_ids: ['string'],
-      statuses: ['draft'],
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.invoices.list(
+        {
+          after: 'after',
+          before: 'before',
+          collection_methods: ['send_invoice'],
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          order: 'id',
+          product_ids: ['string'],
+          statuses: ['draft'],
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
