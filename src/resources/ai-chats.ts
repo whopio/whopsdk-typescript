@@ -267,6 +267,11 @@ export interface AIChatListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * When true, returns only chats with an active cron schedule
+   */
+  only_active_crons?: boolean | null;
 }
 
 export declare namespace AIChats {
