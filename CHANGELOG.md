@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.0.32 (2026-03-11)
+
+Full Changelog: [v0.0.31...v0.0.32](https://github.com/whopio/whopsdk-typescript/compare/v0.0.31...v0.0.32)
+
+### Features
+
+* **api:** api update ([df048c5](https://github.com/whopio/whopsdk-typescript/commit/df048c57c7be84faae49a4a12e53fbdca1f17e92))
+* **api:** api update ([fcdda79](https://github.com/whopio/whopsdk-typescript/commit/fcdda79e8aa277660d032a6100e5d7bba539547c))
+* **api:** api update ([b106067](https://github.com/whopio/whopsdk-typescript/commit/b1060670723451cff6d44f1dc199ce086bb66d35))
+* **api:** manual updates ([6409e32](https://github.com/whopio/whopsdk-typescript/commit/6409e328c8d907dd5f1e743d9d2013e2ee5e838a))
+
+
+### Chores
+
+* **internal:** codegen related update ([3a1e41f](https://github.com/whopio/whopsdk-typescript/commit/3a1e41f07c7a027dc43523a6a338c342c3b2ca4e))
+* **internal:** codegen related update ([f7cce0c](https://github.com/whopio/whopsdk-typescript/commit/f7cce0c2aa5810951b65867a2b3dc56a725124cc))
+* **internal:** update lock file ([6fdbdd0](https://github.com/whopio/whopsdk-typescript/commit/6fdbdd00e57d950e37346b08813daf61c7317ed7))
+
 ## 0.0.31 (2026-03-10)
 
 Full Changelog: [v0.0.30...v0.0.31](https://github.com/whopio/whopsdk-typescript/compare/v0.0.30...v0.0.31)
