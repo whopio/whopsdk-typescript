@@ -31,8 +31,7 @@ export {
 } from './apps';
 export {
   AuthorizedUsers,
-  type AuthorizedUserCreateResponse,
-  type AuthorizedUserRetrieveResponse,
+  type AuthorizedUser,
   type AuthorizedUserListResponse,
   type AuthorizedUserDeleteResponse,
   type AuthorizedUserCreateParams,
@@ -341,6 +340,18 @@ export {
   type RefundListParams,
   type RefundListResponsesCursorPage,
 } from './refunds';
+export {
+  ResolutionCenterCases,
+  type ResolutionCenterCaseCustomerResponse,
+  type ResolutionCenterCaseIssueType,
+  type ResolutionCenterCaseMerchantResponse,
+  type ResolutionCenterCasePlatformResponse,
+  type ResolutionCenterCaseStatus,
+  type ResolutionCenterCaseRetrieveResponse,
+  type ResolutionCenterCaseListResponse,
+  type ResolutionCenterCaseListParams,
+  type ResolutionCenterCaseListResponsesCursorPage,
+} from './resolution-center-cases';
 export {
   Reviews,
   type ReviewStatus,

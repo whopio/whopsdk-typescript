@@ -28,10 +28,7 @@ export class AuthorizedUsers extends APIResource {
    * });
    * ```
    */
-  create(
-    body: AuthorizedUserCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<AuthorizedUserCreateResponse> {
+  create(body: AuthorizedUserCreateParams, options?: RequestOptions): APIPromise<AuthorizedUser> {
     return this._client.post('/authorized_users', { body, ...options });
   }
 
@@ -51,7 +48,7 @@ export class AuthorizedUsers extends APIResource {
    *   );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AuthorizedUserRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<AuthorizedUser> {
     return this._client.get(path`/authorized_users/${id}`, options);
   }
 
@@ -112,7 +109,7 @@ export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserLis
  * A user who has been granted administrative access to manage a company's
  * dashboard and settings.
  */
-export interface AuthorizedUserCreateResponse {
+export interface AuthorizedUser {
   /**
    * The unique identifier for the authorized user.
    */
@@ -121,7 +118,7 @@ export interface AuthorizedUserCreateResponse {
   /**
    * The company this authorized user has access to.
    */
-  company: AuthorizedUserCreateResponse.Company;
+  company: AuthorizedUser.Company;
 
   /**
    * The permission role assigned to this authorized user within the company.
@@ -131,79 +128,10 @@ export interface AuthorizedUserCreateResponse {
   /**
    * The user account linked to this authorized user record.
    */
-  user: AuthorizedUserCreateResponse.User;
+  user: AuthorizedUser.User;
 }
 
-export namespace AuthorizedUserCreateResponse {
-  /**
-   * The company this authorized user has access to.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The display name of the company shown to customers.
-     */
-    title: string;
-  }
-
-  /**
-   * The user account linked to this authorized user record.
-   */
-  export interface User {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-}
-
-/**
- * A user who has been granted administrative access to manage a company's
- * dashboard and settings.
- */
-export interface AuthorizedUserRetrieveResponse {
-  /**
-   * The unique identifier for the authorized user.
-   */
-  id: string;
-
-  /**
-   * The company this authorized user has access to.
-   */
-  company: AuthorizedUserRetrieveResponse.Company;
-
-  /**
-   * The permission role assigned to this authorized user within the company.
-   */
-  role: Shared.AuthorizedUserRoles;
-
-  /**
-   * The user account linked to this authorized user record.
-   */
-  user: AuthorizedUserRetrieveResponse.User;
-}
-
-export namespace AuthorizedUserRetrieveResponse {
+export namespace AuthorizedUser {
   /**
    * The company this authorized user has access to.
    */
@@ -396,8 +324,7 @@ export interface AuthorizedUserDeleteParams {
 
 export declare namespace AuthorizedUsers {
   export {
-    type AuthorizedUserCreateResponse as AuthorizedUserCreateResponse,
-    type AuthorizedUserRetrieveResponse as AuthorizedUserRetrieveResponse,
+    type AuthorizedUser as AuthorizedUser,
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
     type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
