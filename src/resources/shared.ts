@@ -7,6 +7,7 @@ import * as CompaniesAPI from './companies';
 import * as DisputesAPI from './disputes';
 import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
+import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import { CursorPage } from '../core/pagination';
 
 /**
@@ -2836,7 +2837,7 @@ export namespace Payment {
     /**
      * The list of actions currently available to the customer.
      */
-    customer_response_actions: Array<'respond' | 'appeal' | 'withdraw'>;
+    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
 
     /**
      * The deadline by which the next response is required. Null if no deadline is
@@ -2847,12 +2848,7 @@ export namespace Payment {
     /**
      * The category of the dispute.
      */
-    issue:
-      | 'forgot_to_cancel'
-      | 'item_not_received'
-      | 'significantly_not_as_described'
-      | 'unauthorized_transaction'
-      | 'product_unacceptable';
+    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
 
     /**
      * Whether the merchant has filed an appeal after the initial resolution decision.
@@ -2862,29 +2858,19 @@ export namespace Payment {
     /**
      * The list of actions currently available to the merchant.
      */
-    merchant_response_actions: Array<'accept' | 'deny' | 'request_more_info' | 'appeal' | 'respond'>;
+    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
 
     /**
      * The list of actions currently available to the Whop platform for moderating this
      * resolution.
      */
-    platform_response_actions: Array<
-      'request_buyer_info' | 'request_merchant_info' | 'merchant_wins' | 'platform_refund' | 'merchant_refund'
-    >;
+    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
 
     /**
      * The current status of the resolution case, indicating which party needs to
      * respond or if the case is closed.
      */
-    status:
-      | 'merchant_response_needed'
-      | 'customer_response_needed'
-      | 'merchant_info_needed'
-      | 'customer_info_needed'
-      | 'under_platform_review'
-      | 'customer_won'
-      | 'merchant_won'
-      | 'customer_withdrew';
+    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
   }
 
   /**

@@ -281,6 +281,8 @@ const fuse = new Fuse(
     'client.dmChannels.update',
     'client.disputeAlerts.list',
     'client.disputeAlerts.retrieve',
+    'client.resolutionCenterCases.list',
+    'client.resolutionCenterCases.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );

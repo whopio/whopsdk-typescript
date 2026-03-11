@@ -48,14 +48,13 @@ import {
   Apps,
 } from './resources/apps';
 import {
+  AuthorizedUser,
   AuthorizedUserCreateParams,
-  AuthorizedUserCreateResponse,
   AuthorizedUserDeleteParams,
   AuthorizedUserDeleteResponse,
   AuthorizedUserListParams,
   AuthorizedUserListResponse,
   AuthorizedUserListResponsesCursorPage,
-  AuthorizedUserRetrieveResponse,
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
@@ -354,6 +353,18 @@ import {
   RefundStatus,
   Refunds,
 } from './resources/refunds';
+import {
+  ResolutionCenterCaseCustomerResponse,
+  ResolutionCenterCaseIssueType,
+  ResolutionCenterCaseListParams,
+  ResolutionCenterCaseListResponse,
+  ResolutionCenterCaseListResponsesCursorPage,
+  ResolutionCenterCaseMerchantResponse,
+  ResolutionCenterCasePlatformResponse,
+  ResolutionCenterCaseRetrieveResponse,
+  ResolutionCenterCaseStatus,
+  ResolutionCenterCases,
+} from './resources/resolution-center-cases';
 import {
   ReviewListParams,
   ReviewListResponse,
@@ -1402,6 +1413,10 @@ export class Whop {
    * Dispute alerts
    */
   disputeAlerts: API.DisputeAlerts = new API.DisputeAlerts(this);
+  /**
+   * Resolution center cases
+   */
+  resolutionCenterCases: API.ResolutionCenterCases = new API.ResolutionCenterCases(this);
 }
 
 Whop.Apps = Apps;
@@ -1454,6 +1469,7 @@ Whop.DmMembers = DmMembers;
 Whop.AIChats = AIChats;
 Whop.DmChannels = DmChannels;
 Whop.DisputeAlerts = DisputeAlerts;
+Whop.ResolutionCenterCases = ResolutionCenterCases;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1599,8 +1615,7 @@ export declare namespace Whop {
 
   export {
     AuthorizedUsers as AuthorizedUsers,
-    type AuthorizedUserCreateResponse as AuthorizedUserCreateResponse,
-    type AuthorizedUserRetrieveResponse as AuthorizedUserRetrieveResponse,
+    type AuthorizedUser as AuthorizedUser,
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
     type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
@@ -1968,6 +1983,19 @@ export declare namespace Whop {
     type DisputeAlertListResponse as DisputeAlertListResponse,
     type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
     type DisputeAlertListParams as DisputeAlertListParams,
+  };
+
+  export {
+    ResolutionCenterCases as ResolutionCenterCases,
+    type ResolutionCenterCaseCustomerResponse as ResolutionCenterCaseCustomerResponse,
+    type ResolutionCenterCaseIssueType as ResolutionCenterCaseIssueType,
+    type ResolutionCenterCaseMerchantResponse as ResolutionCenterCaseMerchantResponse,
+    type ResolutionCenterCasePlatformResponse as ResolutionCenterCasePlatformResponse,
+    type ResolutionCenterCaseStatus as ResolutionCenterCaseStatus,
+    type ResolutionCenterCaseRetrieveResponse as ResolutionCenterCaseRetrieveResponse,
+    type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
+    type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
+    type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams,
   };
 
   export type AccessLevel = API.AccessLevel;
