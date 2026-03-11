@@ -259,15 +259,14 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserCreateResponse</a></code>
-- <code><a href="./src/resources/authorized-users.ts">AuthorizedUserRetrieveResponse</a></code>
+- <code><a href="./src/resources/authorized-users.ts">AuthorizedUser</a></code>
 - <code><a href="./src/resources/authorized-users.ts">AuthorizedUserListResponse</a></code>
 - <code><a href="./src/resources/authorized-users.ts">AuthorizedUserDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUserCreateResponse</code>
-- <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUserRetrieveResponse</code>
+- <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUser</code>
+- <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUser</code>
 - <code title="get /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">list</a>({ ...params }) -> AuthorizedUserListResponsesCursorPage</code>
 - <code title="delete /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">delete</a>(id, { ...params }) -> AuthorizedUserDeleteResponse</code>
 
@@ -795,3 +794,20 @@ Methods:
 
 - <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id) -> DisputeAlertRetrieveResponse</code>
 - <code title="get /dispute_alerts">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">list</a>({ ...params }) -> DisputeAlertListResponsesCursorPage</code>
+
+# ResolutionCenterCases
+
+Types:
+
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseCustomerResponse</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseIssueType</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseMerchantResponse</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCasePlatformResponse</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseStatus</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseRetrieveResponse</a></code>
+- <code><a href="./src/resources/resolution-center-cases.ts">ResolutionCenterCaseListResponse</a></code>
+
+Methods:
+
+- <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id) -> ResolutionCenterCaseRetrieveResponse</code>
+- <code title="get /resolution_center_cases">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">list</a>({ ...params }) -> ResolutionCenterCaseListResponsesCursorPage</code>

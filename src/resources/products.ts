@@ -215,6 +215,12 @@ export interface ProductCreateParams {
   route?: string | null;
 
   /**
+   * Whether to send an automated welcome message via support chat when a user joins
+   * this product. Defaults to true.
+   */
+  send_welcome_message?: boolean | null;
+
+  /**
    * Visibility of a resource
    */
   visibility?: Shared.Visibility | null;
@@ -378,6 +384,12 @@ export interface ProductUpdateParams {
    * The URL slug for the product's public link.
    */
   route?: string | null;
+
+  /**
+   * Whether to send an automated welcome message via support chat when a user joins
+   * this product.
+   */
+  send_welcome_message?: boolean | null;
 
   /**
    * Layout and display configuration for this product on the company's store page.

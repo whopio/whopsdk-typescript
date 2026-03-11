@@ -90,6 +90,7 @@ describe('resource aiChats', () => {
           before: 'before',
           first: 42,
           last: 42,
+          only_active_crons: true,
         },
         { path: '/_stainless_unknown_path' },
       ),

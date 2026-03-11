@@ -1067,6 +1067,18 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'get',
     httpPath: '/dispute_alerts',
   },
+  {
+    clientCallName: 'client.resolutionCenterCases.retrieve',
+    fullyQualifiedName: 'resolutionCenterCases.retrieve',
+    httpMethod: 'get',
+    httpPath: '/resolution_center_cases/{id}',
+  },
+  {
+    clientCallName: 'client.resolutionCenterCases.list',
+    fullyQualifiedName: 'resolutionCenterCases.list',
+    httpMethod: 'get',
+    httpPath: '/resolution_center_cases',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {
