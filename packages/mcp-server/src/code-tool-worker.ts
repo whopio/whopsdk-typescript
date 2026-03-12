@@ -253,6 +253,7 @@ const fuse = new Fuse(
     'client.feeMarkups.list',
     'client.payoutMethods.list',
     'client.payoutMethods.retrieve',
+    'client.verifications.list',
     'client.verifications.retrieve',
     'client.leads.create',
     'client.leads.list',
@@ -283,6 +284,7 @@ const fuse = new Fuse(
     'client.disputeAlerts.retrieve',
     'client.resolutionCenterCases.list',
     'client.resolutionCenterCases.retrieve',
+    'client.payoutAccounts.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );

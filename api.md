@@ -677,10 +677,12 @@ Types:
 - <code><a href="./src/resources/verifications.ts">VerificationErrorCode</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationStatus</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationRetrieveResponse</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationListResponse</a></code>
 
 Methods:
 
 - <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
+- <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
 
 # Leads
 
@@ -812,3 +814,14 @@ Methods:
 
 - <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id) -> ResolutionCenterCaseRetrieveResponse</code>
 - <code title="get /resolution_center_cases">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">list</a>({ ...params }) -> ResolutionCenterCaseListResponsesCursorPage</code>
+
+# PayoutAccounts
+
+Types:
+
+- <code><a href="./src/resources/payout-accounts.ts">PayoutAccountCalculatedStatuses</a></code>
+- <code><a href="./src/resources/payout-accounts.ts">PayoutAccountRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /payout_accounts/{id}">client.payoutAccounts.<a href="./src/resources/payout-accounts.ts">retrieve</a>(id) -> PayoutAccountRetrieveResponse</code>

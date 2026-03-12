@@ -19,4 +19,27 @@ describe('resource verifications', () => {
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
   });
+
+  // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.verifications.list({ payout_account_id: 'poact_xxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.verifications.list({
+      payout_account_id: 'poact_xxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
+  });
 });

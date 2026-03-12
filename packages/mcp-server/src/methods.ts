@@ -906,6 +906,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/verifications/{id}',
   },
   {
+    clientCallName: 'client.verifications.list',
+    fullyQualifiedName: 'verifications.list',
+    httpMethod: 'get',
+    httpPath: '/verifications',
+  },
+  {
     clientCallName: 'client.leads.create',
     fullyQualifiedName: 'leads.create',
     httpMethod: 'post',
@@ -1078,6 +1084,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'resolutionCenterCases.list',
     httpMethod: 'get',
     httpPath: '/resolution_center_cases',
+  },
+  {
+    clientCallName: 'client.payoutAccounts.retrieve',
+    fullyQualifiedName: 'payoutAccounts.retrieve',
+    httpMethod: 'get',
+    httpPath: '/payout_accounts/{id}',
   },
 ];
 

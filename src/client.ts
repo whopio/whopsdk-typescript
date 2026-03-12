@@ -299,6 +299,11 @@ import {
   ReceiptTaxBehavior,
 } from './resources/payments';
 import {
+  PayoutAccountCalculatedStatuses,
+  PayoutAccountRetrieveResponse,
+  PayoutAccounts,
+} from './resources/payout-accounts';
+import {
   PayoutDestinationCategory,
   PayoutMethodListParams,
   PayoutMethodListResponse,
@@ -412,6 +417,9 @@ import {
 } from './resources/users';
 import {
   VerificationErrorCode,
+  VerificationListParams,
+  VerificationListResponse,
+  VerificationListResponsesCursorPage,
   VerificationRetrieveResponse,
   VerificationStatus,
   Verifications,
@@ -1418,6 +1426,10 @@ export class Whop {
    * Resolution center cases
    */
   resolutionCenterCases: API.ResolutionCenterCases = new API.ResolutionCenterCases(this);
+  /**
+   * Payout accounts
+   */
+  payoutAccounts: API.PayoutAccounts = new API.PayoutAccounts(this);
 }
 
 Whop.Apps = Apps;
@@ -1471,6 +1483,7 @@ Whop.AIChats = AIChats;
 Whop.DmChannels = DmChannels;
 Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
+Whop.PayoutAccounts = PayoutAccounts;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1907,6 +1920,9 @@ export declare namespace Whop {
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
+    type VerificationListResponse as VerificationListResponse,
+    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
+    type VerificationListParams as VerificationListParams,
   };
 
   export {
@@ -1998,6 +2014,12 @@ export declare namespace Whop {
     type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
     type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
     type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams,
+  };
+
+  export {
+    PayoutAccounts as PayoutAccounts,
+    type PayoutAccountCalculatedStatuses as PayoutAccountCalculatedStatuses,
+    type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse,
   };
 
   export type AccessLevel = API.AccessLevel;
