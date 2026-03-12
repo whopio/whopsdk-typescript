@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.33 (2026-03-12)
+
+Full Changelog: [v0.0.32...v0.0.33](https://github.com/whopio/whopsdk-typescript/compare/v0.0.32...v0.0.33)
+
+### Features
+
+* **api:** api update ([e5e70c8](https://github.com/whopio/whopsdk-typescript/commit/e5e70c88553b30ea7304cd725ffb77cb12e85843))
+* **api:** manual updates ([3297cf5](https://github.com/whopio/whopsdk-typescript/commit/3297cf5a57c870c88b7395cbfaf0b98a7ee1fb28))
+
+
+### Chores
+
+* use proper capitalization for WebSockets ([c5f2135](https://github.com/whopio/whopsdk-typescript/commit/c5f2135220abb32a526575744b57a8f910121e5a))
+
 ## 0.0.32 (2026-03-11)
 
 Full Changelog: [v0.0.31...v0.0.32](https://github.com/whopio/whopsdk-typescript/compare/v0.0.31...v0.0.32)
