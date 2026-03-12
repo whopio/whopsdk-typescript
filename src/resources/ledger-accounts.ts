@@ -181,6 +181,19 @@ export namespace LedgerAccountRetrieveResponse {
      * The business representative's phone
      */
     phone: string | null;
+
+    /**
+     * The granular calculated statuses reflecting payout account KYC and withdrawal
+     * readiness.
+     */
+    status:
+      | 'connected'
+      | 'disabled'
+      | 'action_required'
+      | 'pending_verification'
+      | 'verification_failed'
+      | 'not_started'
+      | null;
   }
 
   export namespace PayoutAccountDetails {
