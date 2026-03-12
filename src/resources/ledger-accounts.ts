@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PayoutAccountsAPI from './payout-accounts';
 import * as Shared from './shared';
 import * as VerificationsAPI from './verifications';
 import { APIPromise } from '../core/api-promise';
@@ -181,6 +182,12 @@ export namespace LedgerAccountRetrieveResponse {
      * The business representative's phone
      */
     phone: string | null;
+
+    /**
+     * The granular calculated statuses reflecting payout account KYC and withdrawal
+     * readiness.
+     */
+    status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
   }
 
   export namespace PayoutAccountDetails {

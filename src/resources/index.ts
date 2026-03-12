@@ -286,6 +286,11 @@ export {
   type PaymentListFeesResponsesCursorPage,
 } from './payments';
 export {
+  PayoutAccounts,
+  type PayoutAccountCalculatedStatuses,
+  type PayoutAccountRetrieveResponse,
+} from './payout-accounts';
+export {
   PayoutMethods,
   type PayoutDestinationCategory,
   type PayoutMethodRetrieveResponse,
@@ -402,6 +407,9 @@ export {
   type VerificationErrorCode,
   type VerificationStatus,
   type VerificationRetrieveResponse,
+  type VerificationListResponse,
+  type VerificationListParams,
+  type VerificationListResponsesCursorPage,
 } from './verifications';
 export {
   Webhooks,
@@ -429,6 +437,7 @@ export {
   type CourseLessonInteractionCompletedWebhookEvent,
   type PayoutMethodCreatedWebhookEvent,
   type VerificationSucceededWebhookEvent,
+  type PayoutAccountStatusUpdatedWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

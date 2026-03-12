@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as DisputeAlertsAPI from './dispute-alerts';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
+import * as PayoutAccountsAPI from './payout-accounts';
 import * as PayoutMethodsAPI from './payout-methods';
 import * as RefundsAPI from './refunds';
 import * as SetupIntentsAPI from './setup-intents';
@@ -217,6 +218,7 @@ export type WebhookEvent =
   | 'course_lesson_interaction.completed'
   | 'payout_method.created'
   | 'verification.succeeded'
+  | 'payout_account.status_updated'
   | 'payment.created'
   | 'payment.succeeded'
   | 'payment.failed'
@@ -1049,6 +1051,175 @@ export namespace VerificationSucceededWebhookEvent {
      * The current status of this verification session.
      */
     status: VerificationsAPI.VerificationStatus;
+  }
+}
+
+export interface PayoutAccountStatusUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An object representing an account used for payouts.
+   */
+  data: PayoutAccountStatusUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payout_account.status_updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace PayoutAccountStatusUpdatedWebhookEvent {
+  /**
+   * An object representing an account used for payouts.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the payout account.
+     */
+    id: string;
+
+    /**
+     * The physical address associated with this payout account
+     */
+    address: Data.Address | null;
+
+    /**
+     * The company's legal name
+     */
+    business_name: string | null;
+
+    /**
+     * The business representative for this payout account
+     */
+    business_representative: Data.BusinessRepresentative | null;
+
+    /**
+     * The email address of the representative
+     */
+    email: string | null;
+
+    /**
+     * The latest verification for the connected account.
+     */
+    latest_verification: Data.LatestVerification | null;
+
+    /**
+     * The business representative's phone
+     */
+    phone: string | null;
+
+    /**
+     * The granular calculated statuses reflecting payout account KYC and withdrawal
+     * readiness.
+     */
+    status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
+  }
+
+  export namespace Data {
+    /**
+     * The physical address associated with this payout account
+     */
+    export interface Address {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * The business representative for this payout account
+     */
+    export interface BusinessRepresentative {
+      /**
+       * The date of birth of the business representative in ISO 8601 format
+       * (YYYY-MM-DD).
+       */
+      date_of_birth: string | null;
+
+      /**
+       * The first name of the business representative.
+       */
+      first_name: string | null;
+
+      /**
+       * The last name of the business representative.
+       */
+      last_name: string | null;
+
+      /**
+       * The middle name of the business representative.
+       */
+      middle_name: string | null;
+    }
+
+    /**
+     * The latest verification for the connected account.
+     */
+    export interface LatestVerification {
+      /**
+       * The unique identifier for the verification.
+       */
+      id: string;
+
+      /**
+       * An error code for a verification attempt.
+       */
+      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+      /**
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
+       */
+      last_error_reason: string | null;
+
+      /**
+       * The current status of this verification session.
+       */
+      status: VerificationsAPI.VerificationStatus;
+    }
   }
 }
 
@@ -2086,6 +2257,7 @@ export type UnwrapWebhookEvent =
   | CourseLessonInteractionCompletedWebhookEvent
   | PayoutMethodCreatedWebhookEvent
   | VerificationSucceededWebhookEvent
+  | PayoutAccountStatusUpdatedWebhookEvent
   | PaymentCreatedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -2206,6 +2378,7 @@ export declare namespace Webhooks {
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
+    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
