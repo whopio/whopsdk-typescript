@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as DisputeAlertsAPI from './dispute-alerts';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
+import * as PayoutAccountsAPI from './payout-accounts';
 import * as PayoutMethodsAPI from './payout-methods';
 import * as RefundsAPI from './refunds';
 import * as SetupIntentsAPI from './setup-intents';
@@ -1129,14 +1130,7 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
      * The granular calculated statuses reflecting payout account KYC and withdrawal
      * readiness.
      */
-    status:
-      | 'connected'
-      | 'disabled'
-      | 'action_required'
-      | 'pending_verification'
-      | 'verification_failed'
-      | 'not_started'
-      | null;
+    status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
   }
 
   export namespace Data {

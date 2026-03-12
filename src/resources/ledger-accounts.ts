@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PayoutAccountsAPI from './payout-accounts';
 import * as Shared from './shared';
 import * as VerificationsAPI from './verifications';
 import { APIPromise } from '../core/api-promise';
@@ -186,14 +187,7 @@ export namespace LedgerAccountRetrieveResponse {
      * The granular calculated statuses reflecting payout account KYC and withdrawal
      * readiness.
      */
-    status:
-      | 'connected'
-      | 'disabled'
-      | 'action_required'
-      | 'pending_verification'
-      | 'verification_failed'
-      | 'not_started'
-      | null;
+    status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
   }
 
   export namespace PayoutAccountDetails {
