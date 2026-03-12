@@ -429,6 +429,7 @@ export {
   type CourseLessonInteractionCompletedWebhookEvent,
   type PayoutMethodCreatedWebhookEvent,
   type VerificationSucceededWebhookEvent,
+  type PayoutAccountStatusUpdatedWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

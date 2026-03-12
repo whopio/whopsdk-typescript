@@ -151,6 +151,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutAccountStatusUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
