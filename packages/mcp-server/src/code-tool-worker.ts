@@ -177,6 +177,7 @@ const fuse = new Fuse(
     'client.chatChannels.retrieve',
     'client.chatChannels.update',
     'client.users.checkAccess',
+    'client.users.list',
     'client.users.retrieve',
     'client.users.updateProfile',
     'client.payments.create',
