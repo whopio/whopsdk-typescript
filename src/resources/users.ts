@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -15,6 +16,17 @@ export class Users extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, options);
+  }
+
+  /**
+   * Search for users by name or username, ranked by social proximity to the
+   * authenticated user.
+   */
+  list(
+    query: UserListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<UserListResponsesCursorPage, UserListResponse> {
+    return this._client.getAPIList('/users', CursorPage<UserListResponse>, { query, ...options });
   }
 
   /**
@@ -44,6 +56,8 @@ export class Users extends APIResource {
     return this._client.patch('/users/me', { body, ...options });
   }
 }
+
+export type UserListResponsesCursorPage = CursorPage<UserListResponse>;
 
 /**
  * A user account on Whop. Contains profile information, identity details, and
@@ -97,6 +111,57 @@ export namespace User {
 }
 
 /**
+ * A user account on Whop. Contains profile information, identity details, and
+ * social connections.
+ */
+export interface UserListResponse {
+  /**
+   * The unique identifier for the user.
+   */
+  id: string;
+
+  /**
+   * A short biography written by the user, displayed on their public profile.
+   */
+  bio: string | null;
+
+  /**
+   * The datetime the user was created.
+   */
+  created_at: string;
+
+  /**
+   * The user's display name shown on their public profile.
+   */
+  name: string | null;
+
+  /**
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
+   */
+  profile_picture: UserListResponse.ProfilePicture | null;
+
+  /**
+   * The user's unique username shown on their public profile.
+   */
+  username: string;
+}
+
+export namespace UserListResponse {
+  /**
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
+   */
+  export interface ProfilePicture {
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+}
+
+/**
  * The result of a has access check for the developer API
  */
 export interface UserCheckAccessResponse {
@@ -109,6 +174,28 @@ export interface UserCheckAccessResponse {
    * Whether the user has access to the resource
    */
   has_access: boolean;
+}
+
+export interface UserListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Search term to filter by name or username.
+   */
+  query?: string | null;
 }
 
 export interface UserCheckAccessParams {
@@ -156,7 +243,10 @@ export namespace UserUpdateProfileParams {
 export declare namespace Users {
   export {
     type User as User,
+    type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UserListParams as UserListParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateProfileParams as UserUpdateProfileParams,
   };

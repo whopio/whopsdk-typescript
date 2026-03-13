@@ -341,11 +341,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/users.ts">User</a></code>
+- <code><a href="./src/resources/users.ts">UserListResponse</a></code>
 - <code><a href="./src/resources/users.ts">UserCheckAccessResponse</a></code>
 
 Methods:
 
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id) -> User</code>
+- <code title="get /users">client.users.<a href="./src/resources/users.ts">list</a>({ ...params }) -> UserListResponsesCursorPage</code>
 - <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 - <code title="patch /users/me">client.users.<a href="./src/resources/users.ts">updateProfile</a>({ ...params }) -> User</code>
 

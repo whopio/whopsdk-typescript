@@ -398,9 +398,12 @@ export {
 export {
   Users,
   type User,
+  type UserListResponse,
   type UserCheckAccessResponse,
+  type UserListParams,
   type UserCheckAccessParams,
   type UserUpdateProfileParams,
+  type UserListResponsesCursorPage,
 } from './users';
 export {
   Verifications,

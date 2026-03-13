@@ -412,6 +412,9 @@ import {
   User,
   UserCheckAccessParams,
   UserCheckAccessResponse,
+  UserListParams,
+  UserListResponse,
+  UserListResponsesCursorPage,
   UserUpdateProfileParams,
   Users,
 } from './resources/users';
@@ -1685,7 +1688,10 @@ export declare namespace Whop {
   export {
     Users as Users,
     type User as User,
+    type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UserListParams as UserListParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateProfileParams as UserUpdateProfileParams,
   };
