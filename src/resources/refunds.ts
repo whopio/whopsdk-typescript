@@ -27,15 +27,15 @@ export class Refunds extends APIResource {
   }
 
   /**
-   * Returns a paginated list of refunds for a specific payment, with optional
-   * filtering by creation date.
+   * Returns a paginated list of refunds, with optional filtering by payment,
+   * company, user, and creation date.
    *
    * Required permissions:
    *
    * - `payment:basic:read`
    */
   list(
-    query: RefundListParams,
+    query: RefundListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RefundListResponsesCursorPage, RefundListResponse> {
     return this._client.getAPIList('/refunds', CursorPage<RefundListResponse>, { query, ...options });
@@ -386,14 +386,14 @@ export namespace RefundListResponse {
 
 export interface RefundListParams extends CursorPageParams {
   /**
-   * The unique identifier of the payment to list refunds for.
-   */
-  payment_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * Filter refunds to only those belonging to this company.
+   */
+  company_id?: string | null;
 
   /**
    * Only return refunds created after this timestamp.
@@ -419,6 +419,16 @@ export interface RefundListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * Filter refunds to only those associated with this specific payment.
+   */
+  payment_id?: string | null;
+
+  /**
+   * Filter refunds to only those associated with this specific user.
+   */
+  user_id?: string | null;
 }
 
 export declare namespace Refunds {

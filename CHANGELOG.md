@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.0.34 (2026-03-13)
+
+Full Changelog: [v0.0.33...v0.0.34](https://github.com/whopio/whopsdk-typescript/compare/v0.0.33...v0.0.34)
+
+### Features
+
+* **api:** api update ([ec78a7f](https://github.com/whopio/whopsdk-typescript/commit/ec78a7f1e3ef92a6421d9042148029e0749edd23))
+* **api:** manual updates ([3cc31d8](https://github.com/whopio/whopsdk-typescript/commit/3cc31d8b7491e6ddf00811c3f62092d2b6e8511c))
+
+
+### Chores
+
+* **internal:** make generated MCP servers compatible with Cloudflare worker environments ([5526bec](https://github.com/whopio/whopsdk-typescript/commit/5526bec2a4018b8c660855d3a18460945cc8b10c))
+* **internal:** support x-stainless-mcp-client-envs header in MCP servers ([c228baf](https://github.com/whopio/whopsdk-typescript/commit/c228baf926b56923321a45c8b89e0261af952642))
+* **internal:** update lockfile ([027faa0](https://github.com/whopio/whopsdk-typescript/commit/027faa0ef8c1986bcc73eecf0f75c54ad0a52482))
+
 ## 0.0.33 (2026-03-12)
 
 Full Changelog: [v0.0.32...v0.0.33](https://github.com/whopio/whopsdk-typescript/compare/v0.0.32...v0.0.33)

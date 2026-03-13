@@ -444,6 +444,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/users/{id}',
   },
   {
+    clientCallName: 'client.users.list',
+    fullyQualifiedName: 'users.list',
+    httpMethod: 'get',
+    httpPath: '/users',
+  },
+  {
     clientCallName: 'client.users.checkAccess',
     fullyQualifiedName: 'users.checkAccess',
     httpMethod: 'get',
