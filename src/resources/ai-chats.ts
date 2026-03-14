@@ -29,7 +29,8 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Update an AI chat's title or associated company context.
+   * Update an AI chat's title, notification preferences, or associated company
+   * context.
    *
    * Required permissions:
    *
@@ -99,6 +100,12 @@ export interface AIChat {
   message_count: number;
 
   /**
+   * The notification preference for this AI chat. `all` delivers AI chat
+   * notifications and badges, while `none` mutes them.
+   */
+  notification_preference: 'all' | 'none';
+
+  /**
    * A short descriptive title for this AI chat conversation. Null if no title has
    * been set.
    */
@@ -157,6 +164,12 @@ export interface AIChatListResponse {
    * The total number of messages exchanged in this conversation.
    */
   message_count: number;
+
+  /**
+   * The notification preference for this AI chat. `all` delivers AI chat
+   * notifications and badges, while `none` mutes them.
+   */
+  notification_preference: 'all' | 'none';
 
   /**
    * A short descriptive title for this AI chat conversation. Null if no title has
@@ -245,6 +258,11 @@ export interface AIChatUpdateParams {
    * "biz_XXXXX").
    */
   current_company_id?: string | null;
+
+  /**
+   * The notification preference for an AI chat
+   */
+  notification_preference?: 'all' | 'none' | null;
 
   /**
    * The new display title for the AI chat thread (e.g., "Help with billing").

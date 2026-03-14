@@ -62,7 +62,11 @@ describe('resource aiChats', () => {
     await expect(
       client.aiChats.update(
         'aich_xxxxxxxxxxxxx',
-        { current_company_id: 'current_company_id', title: 'title' },
+        {
+          current_company_id: 'current_company_id',
+          notification_preference: 'all',
+          title: 'title',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
