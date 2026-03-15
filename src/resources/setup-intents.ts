@@ -193,6 +193,11 @@ export namespace SetupIntent {
     created_at: string;
 
     /**
+     * The mailing address associated with the payment method's user
+     */
+    mailing_address: PaymentMethod.MailingAddress | null;
+
+    /**
      * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
@@ -223,6 +228,46 @@ export namespace SetupIntent {
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
+    }
+
+    /**
+     * The mailing address associated with the payment method's user
+     */
+    export interface MailingAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
     }
   }
 }
@@ -376,6 +421,11 @@ export namespace SetupIntentListResponse {
     created_at: string;
 
     /**
+     * The mailing address associated with the payment method's user
+     */
+    mailing_address: PaymentMethod.MailingAddress | null;
+
+    /**
      * The payment method type of the payment method
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes;
@@ -406,6 +456,46 @@ export namespace SetupIntentListResponse {
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
+    }
+
+    /**
+     * The mailing address associated with the payment method's user
+     */
+    export interface MailingAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
     }
   }
 }
