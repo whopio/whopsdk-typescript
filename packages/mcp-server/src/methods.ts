@@ -1097,6 +1097,66 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'get',
     httpPath: '/payout_accounts/{id}',
   },
+  {
+    clientCallName: 'client.affiliates.create',
+    fullyQualifiedName: 'affiliates.create',
+    httpMethod: 'post',
+    httpPath: '/affiliates',
+  },
+  {
+    clientCallName: 'client.affiliates.retrieve',
+    fullyQualifiedName: 'affiliates.retrieve',
+    httpMethod: 'get',
+    httpPath: '/affiliates/{id}',
+  },
+  {
+    clientCallName: 'client.affiliates.list',
+    fullyQualifiedName: 'affiliates.list',
+    httpMethod: 'get',
+    httpPath: '/affiliates',
+  },
+  {
+    clientCallName: 'client.affiliates.archive',
+    fullyQualifiedName: 'affiliates.archive',
+    httpMethod: 'post',
+    httpPath: '/affiliates/{id}/archive',
+  },
+  {
+    clientCallName: 'client.affiliates.unarchive',
+    fullyQualifiedName: 'affiliates.unarchive',
+    httpMethod: 'post',
+    httpPath: '/affiliates/{id}/unarchive',
+  },
+  {
+    clientCallName: 'client.affiliates.overrides.create',
+    fullyQualifiedName: 'affiliates.overrides.create',
+    httpMethod: 'post',
+    httpPath: '/affiliates/{id}/overrides',
+  },
+  {
+    clientCallName: 'client.affiliates.overrides.retrieve',
+    fullyQualifiedName: 'affiliates.overrides.retrieve',
+    httpMethod: 'get',
+    httpPath: '/affiliates/{id}/overrides/{override_id}',
+  },
+  {
+    clientCallName: 'client.affiliates.overrides.update',
+    fullyQualifiedName: 'affiliates.overrides.update',
+    httpMethod: 'patch',
+    httpPath: '/affiliates/{id}/overrides/{override_id}',
+  },
+  {
+    clientCallName: 'client.affiliates.overrides.list',
+    fullyQualifiedName: 'affiliates.overrides.list',
+    httpMethod: 'get',
+    httpPath: '/affiliates/{id}/overrides',
+  },
+  {
+    clientCallName: 'client.affiliates.overrides.delete',
+    fullyQualifiedName: 'affiliates.overrides.delete',
+    httpMethod: 'delete',
+    httpPath: '/affiliates/{id}/overrides/{override_id}',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {
