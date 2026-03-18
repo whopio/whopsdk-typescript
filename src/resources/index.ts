@@ -4,6 +4,7 @@ export * from './shared';
 export {
   AIChats,
   type AIChat,
+  type NotificationPreferences,
   type AIChatListResponse,
   type AIChatDeleteResponse,
   type AIChatCreateParams,
@@ -13,6 +14,17 @@ export {
 } from './ai-chats';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
+export {
+  Affiliates,
+  type Affiliate,
+  type Status,
+  type AffiliateListResponse,
+  type AffiliateArchiveResponse,
+  type AffiliateUnarchiveResponse,
+  type AffiliateCreateParams,
+  type AffiliateListParams,
+  type AffiliateListResponsesCursorPage,
+} from './affiliates/affiliates';
 export {
   AppBuilds,
   type AppBuildListResponse,

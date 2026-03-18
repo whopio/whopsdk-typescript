@@ -103,7 +103,7 @@ export interface AIChat {
    * The notification preference for this AI chat. `all` delivers AI chat
    * notifications and badges, while `none` mutes them.
    */
-  notification_preference: 'all' | 'none';
+  notification_preference: NotificationPreferences;
 
   /**
    * A short descriptive title for this AI chat conversation. Null if no title has
@@ -133,6 +133,11 @@ export namespace AIChat {
     id: string;
   }
 }
+
+/**
+ * The notification preference for an AI chat
+ */
+export type NotificationPreferences = 'all' | 'none';
 
 /**
  * An AI-powered chat conversation belonging to a user, with optional scheduled
@@ -169,7 +174,7 @@ export interface AIChatListResponse {
    * The notification preference for this AI chat. `all` delivers AI chat
    * notifications and badges, while `none` mutes them.
    */
-  notification_preference: 'all' | 'none';
+  notification_preference: NotificationPreferences;
 
   /**
    * A short descriptive title for this AI chat conversation. Null if no title has
@@ -262,7 +267,7 @@ export interface AIChatUpdateParams {
   /**
    * The notification preference for an AI chat
    */
-  notification_preference?: 'all' | 'none' | null;
+  notification_preference?: NotificationPreferences | null;
 
   /**
    * The new display title for the AI chat thread (e.g., "Help with billing").
@@ -295,6 +300,7 @@ export interface AIChatListParams extends CursorPageParams {
 export declare namespace AIChats {
   export {
     type AIChat as AIChat,
+    type NotificationPreferences as NotificationPreferences,
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,

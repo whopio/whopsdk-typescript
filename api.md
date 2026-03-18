@@ -760,6 +760,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/ai-chats.ts">AIChat</a></code>
+- <code><a href="./src/resources/ai-chats.ts">NotificationPreferences</a></code>
 - <code><a href="./src/resources/ai-chats.ts">AIChatListResponse</a></code>
 - <code><a href="./src/resources/ai-chats.ts">AIChatDeleteResponse</a></code>
 
@@ -827,3 +828,44 @@ Types:
 Methods:
 
 - <code title="get /payout_accounts/{id}">client.payoutAccounts.<a href="./src/resources/payout-accounts.ts">retrieve</a>(id) -> PayoutAccountRetrieveResponse</code>
+
+# Affiliates
+
+Types:
+
+- <code><a href="./src/resources/affiliates/affiliates.ts">Affiliate</a></code>
+- <code><a href="./src/resources/affiliates/affiliates.ts">Status</a></code>
+- <code><a href="./src/resources/affiliates/affiliates.ts">AffiliateListResponse</a></code>
+- <code><a href="./src/resources/affiliates/affiliates.ts">AffiliateArchiveResponse</a></code>
+- <code><a href="./src/resources/affiliates/affiliates.ts">AffiliateUnarchiveResponse</a></code>
+
+Methods:
+
+- <code title="post /affiliates">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">create</a>({ ...params }) -> Affiliate</code>
+- <code title="get /affiliates/{id}">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">retrieve</a>(id) -> Affiliate</code>
+- <code title="get /affiliates">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">list</a>({ ...params }) -> AffiliateListResponsesCursorPage</code>
+- <code title="post /affiliates/{id}/archive">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">archive</a>(id) -> AffiliateArchiveResponse</code>
+- <code title="post /affiliates/{id}/unarchive">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">unarchive</a>(id) -> AffiliateUnarchiveResponse</code>
+
+## Overrides
+
+Types:
+
+- <code><a href="./src/resources/affiliates/overrides.ts">AffiliateAppliesToPayments</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">AffiliateAppliesToProducts</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">AffiliateOverrideRoles</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">AffiliatePayoutTypes</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">AffiliateRevenueBases</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">OverrideCreateResponse</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">OverrideRetrieveResponse</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">OverrideUpdateResponse</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">OverrideListResponse</a></code>
+- <code><a href="./src/resources/affiliates/overrides.ts">OverrideDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">create</a>(id, { ...params }) -> OverrideCreateResponse</code>
+- <code title="get /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">retrieve</a>(overrideID, { ...params }) -> OverrideRetrieveResponse</code>
+- <code title="patch /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">update</a>(overrideID, { ...params }) -> OverrideUpdateResponse</code>
+- <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
+- <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>

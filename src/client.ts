@@ -30,6 +30,7 @@ import {
   AIChatListResponsesCursorPage,
   AIChatUpdateParams,
   AIChats,
+  NotificationPreferences,
 } from './resources/ai-chats';
 import {
   AppBuildCreateParams,
@@ -481,6 +482,17 @@ import {
   WithdrawalStatus,
   Withdrawals,
 } from './resources/withdrawals';
+import {
+  Affiliate,
+  AffiliateArchiveResponse,
+  AffiliateCreateParams,
+  AffiliateListParams,
+  AffiliateListResponse,
+  AffiliateListResponsesCursorPage,
+  AffiliateUnarchiveResponse,
+  Affiliates,
+  Status,
+} from './resources/affiliates/affiliates';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -1433,6 +1445,10 @@ export class Whop {
    * Payout accounts
    */
   payoutAccounts: API.PayoutAccounts = new API.PayoutAccounts(this);
+  /**
+   * Affiliates
+   */
+  affiliates: API.Affiliates = new API.Affiliates(this);
 }
 
 Whop.Apps = Apps;
@@ -1487,6 +1503,7 @@ Whop.DmChannels = DmChannels;
 Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
+Whop.Affiliates = Affiliates;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1981,6 +1998,7 @@ export declare namespace Whop {
   export {
     AIChats as AIChats,
     type AIChat as AIChat,
+    type NotificationPreferences as NotificationPreferences,
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
@@ -2026,6 +2044,18 @@ export declare namespace Whop {
     PayoutAccounts as PayoutAccounts,
     type PayoutAccountCalculatedStatuses as PayoutAccountCalculatedStatuses,
     type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse,
+  };
+
+  export {
+    Affiliates as Affiliates,
+    type Affiliate as Affiliate,
+    type Status as Status,
+    type AffiliateListResponse as AffiliateListResponse,
+    type AffiliateArchiveResponse as AffiliateArchiveResponse,
+    type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
+    type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
+    type AffiliateCreateParams as AffiliateCreateParams,
+    type AffiliateListParams as AffiliateListParams,
   };
 
   export type AccessLevel = API.AccessLevel;
