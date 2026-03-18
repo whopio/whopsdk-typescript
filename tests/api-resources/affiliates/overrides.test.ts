@@ -7,10 +7,15 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource aiChats', () => {
+describe('resource overrides', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.aiChats.create({ message_text: 'message_text' });
+    const responsePromise = client.affiliates.overrides.create('aff_xxxxxxxxxxxxxx', {
+      id: 'id',
+      commission_value: 6.9,
+      override_type: 'standard',
+      plan_id: 'plan_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,19 +27,19 @@ describe('resource aiChats', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.aiChats.create({
-      message_text: 'message_text',
-      current_company_id: 'current_company_id',
-      message_attachments: [{ id: 'id' }],
-      message_source: 'manual',
-      suggestion_type: 'suggestion_type',
-      title: 'title',
+    const response = await client.affiliates.overrides.create('aff_xxxxxxxxxxxxxx', {
+      id: 'id',
+      commission_value: 6.9,
+      override_type: 'standard',
+      plan_id: 'plan_xxxxxxxxxxxxx',
+      applies_to_payments: 'first_payment',
+      commission_type: 'percentage',
     });
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.aiChats.retrieve('aich_xxxxxxxxxxxxx');
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.affiliates.overrides.retrieve('override_id', { id: 'aff_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,8 +50,13 @@ describe('resource aiChats', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.aiChats.update('aich_xxxxxxxxxxxxx');
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.affiliates.overrides.retrieve('override_id', { id: 'aff_xxxxxxxxxxxxxx' });
+  });
+
+  // Mock server tests are disabled
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.affiliates.overrides.update('override_id', { id: 'aff_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,24 +67,19 @@ describe('resource aiChats', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.aiChats.update(
-        'aich_xxxxxxxxxxxxx',
-        {
-          current_company_id: 'current_company_id',
-          notification_preference: 'all',
-          title: 'title',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('update: required and optional params', async () => {
+    const response = await client.affiliates.overrides.update('override_id', {
+      id: 'aff_xxxxxxxxxxxxxx',
+      applies_to_payments: 'first_payment',
+      commission_type: 'percentage',
+      commission_value: 6.9,
+      revenue_basis: 'pre_fees',
+    });
   });
 
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.aiChats.list();
+    const responsePromise = client.affiliates.overrides.list('aff_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -88,13 +93,14 @@ describe('resource aiChats', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.aiChats.list(
+      client.affiliates.overrides.list(
+        'aff_xxxxxxxxxxxxxx',
         {
           after: 'after',
           before: 'before',
           first: 42,
           last: 42,
-          only_active_crons: true,
+          override_type: 'standard',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -102,8 +108,8 @@ describe('resource aiChats', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('delete', async () => {
-    const responsePromise = client.aiChats.delete('aich_xxxxxxxxxxxxx');
+  test.skip('delete: only required params', async () => {
+    const responsePromise = client.affiliates.overrides.delete('override_id', { id: 'aff_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,5 +117,10 @@ describe('resource aiChats', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delete: required and optional params', async () => {
+    const response = await client.affiliates.overrides.delete('override_id', { id: 'aff_xxxxxxxxxxxxxx' });
   });
 });

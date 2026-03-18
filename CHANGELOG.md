@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.35 (2026-03-18)
+
+Full Changelog: [v0.0.34...v0.0.35](https://github.com/whopio/whopsdk-typescript/compare/v0.0.34...v0.0.35)
+
+### Features
+
+* **api:** api update ([4e9f70b](https://github.com/whopio/whopsdk-typescript/commit/4e9f70b8a2bb2c933ce1a8e4b1113398bab3c86d))
+* **api:** api update ([63ed187](https://github.com/whopio/whopsdk-typescript/commit/63ed18796850d05dbc4e58bbfcf82e130036a38c))
+* **api:** api update ([1014062](https://github.com/whopio/whopsdk-typescript/commit/1014062c721c5bb76010f2668097c2fba66b261a))
+* **api:** manual updates ([eea8aa6](https://github.com/whopio/whopsdk-typescript/commit/eea8aa6b6b8bde2cb6de4bbbc7c7c843f38e8618))
+
+
+### Chores
+
+* **internal:** support x-stainless-mcp-client-permissions headers in MCP servers ([ef7d699](https://github.com/whopio/whopsdk-typescript/commit/ef7d6992d9f9d88f9b595191b9896965993d3e50))
+* **internal:** tweak CI branches ([1d278d4](https://github.com/whopio/whopsdk-typescript/commit/1d278d4750942d81112c4ca579f341d8bc711fd8))
+
 ## 0.0.34 (2026-03-13)
 
 Full Changelog: [v0.0.33...v0.0.34](https://github.com/whopio/whopsdk-typescript/compare/v0.0.33...v0.0.34)

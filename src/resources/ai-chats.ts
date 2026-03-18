@@ -29,7 +29,8 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Update an AI chat's title or associated company context.
+   * Update an AI chat's title, notification preferences, or associated company
+   * context.
    *
    * Required permissions:
    *
@@ -99,6 +100,12 @@ export interface AIChat {
   message_count: number;
 
   /**
+   * The notification preference for this AI chat. `all` delivers AI chat
+   * notifications and badges, while `none` mutes them.
+   */
+  notification_preference: NotificationPreferences;
+
+  /**
    * A short descriptive title for this AI chat conversation. Null if no title has
    * been set.
    */
@@ -126,6 +133,11 @@ export namespace AIChat {
     id: string;
   }
 }
+
+/**
+ * The notification preference for an AI chat
+ */
+export type NotificationPreferences = 'all' | 'none';
 
 /**
  * An AI-powered chat conversation belonging to a user, with optional scheduled
@@ -157,6 +169,12 @@ export interface AIChatListResponse {
    * The total number of messages exchanged in this conversation.
    */
   message_count: number;
+
+  /**
+   * The notification preference for this AI chat. `all` delivers AI chat
+   * notifications and badges, while `none` mutes them.
+   */
+  notification_preference: NotificationPreferences;
 
   /**
    * A short descriptive title for this AI chat conversation. Null if no title has
@@ -247,6 +265,11 @@ export interface AIChatUpdateParams {
   current_company_id?: string | null;
 
   /**
+   * The notification preference for an AI chat
+   */
+  notification_preference?: NotificationPreferences | null;
+
+  /**
    * The new display title for the AI chat thread (e.g., "Help with billing").
    */
   title?: string | null;
@@ -277,6 +300,7 @@ export interface AIChatListParams extends CursorPageParams {
 export declare namespace AIChats {
   export {
     type AIChat as AIChat,
+    type NotificationPreferences as NotificationPreferences,
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
