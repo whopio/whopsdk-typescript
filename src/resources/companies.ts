@@ -146,6 +146,11 @@ export interface CompanyListResponse {
   send_customer_emails: boolean;
 
   /**
+   * The target audience for the company. Null if not set.
+   */
+  target_audience: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title: string;
