@@ -597,6 +597,12 @@ export interface Company {
   id: string;
 
   /**
+   * Guidelines and instructions provided to affiliates explaining how to promote
+   * this company's products.
+   */
+  affiliate_instructions: string | null;
+
+  /**
    * The datetime the company was created.
    */
   created_at: string;
@@ -606,6 +612,12 @@ export interface Company {
    * customers on the store page.
    */
   description: string | null;
+
+  /**
+   * The product featured for affiliates to promote on this company's affiliate page.
+   * Null if none is configured.
+   */
+  featured_affiliate_product: Company.FeaturedAffiliateProduct | null;
 
   /**
    * The company's logo.
@@ -653,6 +665,11 @@ export interface Company {
   social_links: Array<Company.SocialLink>;
 
   /**
+   * The target audience for the company. Null if not set.
+   */
+  target_audience: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title: string;
@@ -669,6 +686,22 @@ export interface Company {
 }
 
 export namespace Company {
+  /**
+   * The product featured for affiliates to promote on this company's affiliate page.
+   * Null if none is configured.
+   */
+  export interface FeaturedAffiliateProduct {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * The display name of the product shown to customers. Maximum 50 characters.
+     */
+    name: string;
+  }
+
   /**
    * The company's logo.
    */
