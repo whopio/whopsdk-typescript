@@ -665,6 +665,11 @@ export interface Company {
   social_links: Array<Company.SocialLink>;
 
   /**
+   * The target audience for the company. Null if not set.
+   */
+  target_audience: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title: string;
