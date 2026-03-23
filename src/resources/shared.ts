@@ -105,6 +105,19 @@ export interface App {
   name: string;
 
   /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  openapi_path: string | null;
+
+  /**
+   * The full origin URL for this app's proxied domain (e.g.,
+   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   */
+  origin: string | null;
+
+  /**
    * The whitelisted OAuth callback URLs that users are redirected to after
    * authorizing the app.
    */
@@ -115,6 +128,13 @@ export interface App {
    * required and optional permissions with justifications.
    */
   requested_permissions: Array<App.RequestedPermission>;
+
+  /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  skills_path: string | null;
 
   /**
    * Aggregate usage statistics for this app, including daily, weekly, and monthly
@@ -345,7 +365,7 @@ export type AppStatuses = 'live' | 'unlisted' | 'hidden';
 /**
  * The different types of an app view
  */
-export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics';
+export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi';
 
 /**
  * Possible roles an authorized user can have
