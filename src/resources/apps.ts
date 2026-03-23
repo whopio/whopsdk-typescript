@@ -177,6 +177,26 @@ export interface AppListResponse {
   name: string;
 
   /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  openapi_path: string | null;
+
+  /**
+   * The full origin URL for this app's proxied domain (e.g.,
+   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   */
+  origin: string | null;
+
+  /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  skills_path: string | null;
+
+  /**
    * The current visibility status of this app on the Whop app store. 'live' means
    * publicly discoverable, 'unlisted' means accessible only via direct link, and
    * 'hidden' means not visible anywhere.
@@ -335,6 +355,12 @@ export interface AppUpdateParams {
   oauth_client_type?: 'public' | 'confidential' | null;
 
   /**
+   * The URL path to the OpenAPI spec file of the app, such as
+   * '/assets/openapi.json'.
+   */
+  openapi_path?: string | null;
+
+  /**
    * The whitelisted OAuth callback URLs that users are redirected to after
    * authorizing the app
    */
@@ -344,6 +370,11 @@ export interface AppUpdateParams {
    * The permission scopes the app will request from users when they install it.
    */
   required_scopes?: Array<'read_user'> | null;
+
+  /**
+   * The URL path to the skills directory of the app, such as '/assets/skills/'.
+   */
+  skills_path?: string | null;
 
   /**
    * The status of an experience interface
