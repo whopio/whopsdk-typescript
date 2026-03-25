@@ -131,6 +131,12 @@ export declare namespace InvoiceCreateParams {
     automatically_finalizes_at?: string | null;
 
     /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    billing_address?: CreateInvoiceInputWithProductAndMemberID.BillingAddress | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -140,6 +146,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * The unique identifier of an existing mailing address to attach to this invoice.
+     * Cannot be used together with billing_address.
+     */
+    mailing_address_id?: string | null;
 
     /**
      * The unique identifier of the payment method to charge. Required when
@@ -318,6 +330,174 @@ export declare namespace InvoiceCreateParams {
        */
       product_tax_code_id?: string | null;
     }
+
+    /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    export interface BillingAddress {
+      /**
+       * The city of the address.
+       */
+      city?: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country?: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1?: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2?: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name?: string | null;
+
+      /**
+       * The phone number of the customer.
+       */
+      phone?: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code?: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state?: string | null;
+
+      /**
+       * The type of tax identifier
+       */
+      tax_id_type?:
+        | 'ad_nrt'
+        | 'ao_tin'
+        | 'ar_cuit'
+        | 'am_tin'
+        | 'aw_tin'
+        | 'au_abn'
+        | 'au_arn'
+        | 'eu_vat'
+        | 'az_tin'
+        | 'bs_tin'
+        | 'bh_vat'
+        | 'bd_bin'
+        | 'bb_tin'
+        | 'by_tin'
+        | 'bj_ifu'
+        | 'bo_tin'
+        | 'ba_tin'
+        | 'br_cnpj'
+        | 'br_cpf'
+        | 'bg_uic'
+        | 'bf_ifu'
+        | 'kh_tin'
+        | 'cm_niu'
+        | 'ca_bn'
+        | 'ca_gst_hst'
+        | 'ca_pst_bc'
+        | 'ca_pst_mb'
+        | 'ca_pst_sk'
+        | 'ca_qst'
+        | 'cv_nif'
+        | 'cl_tin'
+        | 'cn_tin'
+        | 'co_nit'
+        | 'cd_nif'
+        | 'cr_tin'
+        | 'hr_oib'
+        | 'do_rcn'
+        | 'ec_ruc'
+        | 'eg_tin'
+        | 'sv_nit'
+        | 'et_tin'
+        | 'eu_oss_vat'
+        | 'ge_vat'
+        | 'de_stn'
+        | 'gb_vat'
+        | 'gn_nif'
+        | 'hk_br'
+        | 'hu_tin'
+        | 'is_vat'
+        | 'in_gst'
+        | 'id_npwp'
+        | 'il_vat'
+        | 'jp_cn'
+        | 'jp_rn'
+        | 'jp_trn'
+        | 'kz_bin'
+        | 'ke_pin'
+        | 'kg_tin'
+        | 'la_tin'
+        | 'li_uid'
+        | 'li_vat'
+        | 'my_frp'
+        | 'my_itn'
+        | 'my_sst'
+        | 'mr_nif'
+        | 'mx_rfc'
+        | 'md_vat'
+        | 'me_pib'
+        | 'ma_vat'
+        | 'np_pan'
+        | 'nz_gst'
+        | 'ng_tin'
+        | 'mk_vat'
+        | 'no_vat'
+        | 'no_voec'
+        | 'om_vat'
+        | 'pe_ruc'
+        | 'ph_tin'
+        | 'pl_nip'
+        | 'ro_tin'
+        | 'ru_inn'
+        | 'ru_kpp'
+        | 'sa_vat'
+        | 'sn_ninea'
+        | 'rs_pib'
+        | 'sg_gst'
+        | 'sg_uen'
+        | 'si_tin'
+        | 'za_vat'
+        | 'kr_brn'
+        | 'es_cif'
+        | 'ch_uid'
+        | 'ch_vat'
+        | 'tw_vat'
+        | 'tj_tin'
+        | 'tz_vat'
+        | 'th_vat'
+        | 'tr_tin'
+        | 'ug_tin'
+        | 'ua_vat'
+        | 'ae_trn'
+        | 'us_ein'
+        | 'uy_ruc'
+        | 'uz_tin'
+        | 'uz_vat'
+        | 've_rif'
+        | 'vn_tin'
+        | 'zm_tin'
+        | 'zw_tin'
+        | 'sr_fin'
+        | 'xi_vat'
+        | null;
+
+      /**
+       * The value of the tax identifier.
+       */
+      tax_id_value?: string | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductAndEmailAddress {
@@ -363,6 +543,12 @@ export declare namespace InvoiceCreateParams {
     automatically_finalizes_at?: string | null;
 
     /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    billing_address?: CreateInvoiceInputWithProductAndEmailAddress.BillingAddress | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -372,6 +558,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * The unique identifier of an existing mailing address to attach to this invoice.
+     * Cannot be used together with billing_address.
+     */
+    mailing_address_id?: string | null;
 
     /**
      * The unique identifier of the payment method to charge. Required when
@@ -550,6 +742,174 @@ export declare namespace InvoiceCreateParams {
        */
       product_tax_code_id?: string | null;
     }
+
+    /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    export interface BillingAddress {
+      /**
+       * The city of the address.
+       */
+      city?: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country?: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1?: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2?: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name?: string | null;
+
+      /**
+       * The phone number of the customer.
+       */
+      phone?: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code?: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state?: string | null;
+
+      /**
+       * The type of tax identifier
+       */
+      tax_id_type?:
+        | 'ad_nrt'
+        | 'ao_tin'
+        | 'ar_cuit'
+        | 'am_tin'
+        | 'aw_tin'
+        | 'au_abn'
+        | 'au_arn'
+        | 'eu_vat'
+        | 'az_tin'
+        | 'bs_tin'
+        | 'bh_vat'
+        | 'bd_bin'
+        | 'bb_tin'
+        | 'by_tin'
+        | 'bj_ifu'
+        | 'bo_tin'
+        | 'ba_tin'
+        | 'br_cnpj'
+        | 'br_cpf'
+        | 'bg_uic'
+        | 'bf_ifu'
+        | 'kh_tin'
+        | 'cm_niu'
+        | 'ca_bn'
+        | 'ca_gst_hst'
+        | 'ca_pst_bc'
+        | 'ca_pst_mb'
+        | 'ca_pst_sk'
+        | 'ca_qst'
+        | 'cv_nif'
+        | 'cl_tin'
+        | 'cn_tin'
+        | 'co_nit'
+        | 'cd_nif'
+        | 'cr_tin'
+        | 'hr_oib'
+        | 'do_rcn'
+        | 'ec_ruc'
+        | 'eg_tin'
+        | 'sv_nit'
+        | 'et_tin'
+        | 'eu_oss_vat'
+        | 'ge_vat'
+        | 'de_stn'
+        | 'gb_vat'
+        | 'gn_nif'
+        | 'hk_br'
+        | 'hu_tin'
+        | 'is_vat'
+        | 'in_gst'
+        | 'id_npwp'
+        | 'il_vat'
+        | 'jp_cn'
+        | 'jp_rn'
+        | 'jp_trn'
+        | 'kz_bin'
+        | 'ke_pin'
+        | 'kg_tin'
+        | 'la_tin'
+        | 'li_uid'
+        | 'li_vat'
+        | 'my_frp'
+        | 'my_itn'
+        | 'my_sst'
+        | 'mr_nif'
+        | 'mx_rfc'
+        | 'md_vat'
+        | 'me_pib'
+        | 'ma_vat'
+        | 'np_pan'
+        | 'nz_gst'
+        | 'ng_tin'
+        | 'mk_vat'
+        | 'no_vat'
+        | 'no_voec'
+        | 'om_vat'
+        | 'pe_ruc'
+        | 'ph_tin'
+        | 'pl_nip'
+        | 'ro_tin'
+        | 'ru_inn'
+        | 'ru_kpp'
+        | 'sa_vat'
+        | 'sn_ninea'
+        | 'rs_pib'
+        | 'sg_gst'
+        | 'sg_uen'
+        | 'si_tin'
+        | 'za_vat'
+        | 'kr_brn'
+        | 'es_cif'
+        | 'ch_uid'
+        | 'ch_vat'
+        | 'tw_vat'
+        | 'tj_tin'
+        | 'tz_vat'
+        | 'th_vat'
+        | 'tr_tin'
+        | 'ug_tin'
+        | 'ua_vat'
+        | 'ae_trn'
+        | 'us_ein'
+        | 'uy_ruc'
+        | 'uz_tin'
+        | 'uz_vat'
+        | 've_rif'
+        | 'vn_tin'
+        | 'zm_tin'
+        | 'zw_tin'
+        | 'sr_fin'
+        | 'xi_vat'
+        | null;
+
+      /**
+       * The value of the tax identifier.
+       */
+      tax_id_value?: string | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductIDAndMemberID {
@@ -594,6 +954,12 @@ export declare namespace InvoiceCreateParams {
     automatically_finalizes_at?: string | null;
 
     /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    billing_address?: CreateInvoiceInputWithProductIDAndMemberID.BillingAddress | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -603,6 +969,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * The unique identifier of an existing mailing address to attach to this invoice.
+     * Cannot be used together with billing_address.
+     */
+    mailing_address_id?: string | null;
 
     /**
      * The unique identifier of the payment method to charge. Required when
@@ -765,6 +1137,174 @@ export declare namespace InvoiceCreateParams {
         include_platform_defaults: boolean;
       }
     }
+
+    /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    export interface BillingAddress {
+      /**
+       * The city of the address.
+       */
+      city?: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country?: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1?: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2?: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name?: string | null;
+
+      /**
+       * The phone number of the customer.
+       */
+      phone?: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code?: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state?: string | null;
+
+      /**
+       * The type of tax identifier
+       */
+      tax_id_type?:
+        | 'ad_nrt'
+        | 'ao_tin'
+        | 'ar_cuit'
+        | 'am_tin'
+        | 'aw_tin'
+        | 'au_abn'
+        | 'au_arn'
+        | 'eu_vat'
+        | 'az_tin'
+        | 'bs_tin'
+        | 'bh_vat'
+        | 'bd_bin'
+        | 'bb_tin'
+        | 'by_tin'
+        | 'bj_ifu'
+        | 'bo_tin'
+        | 'ba_tin'
+        | 'br_cnpj'
+        | 'br_cpf'
+        | 'bg_uic'
+        | 'bf_ifu'
+        | 'kh_tin'
+        | 'cm_niu'
+        | 'ca_bn'
+        | 'ca_gst_hst'
+        | 'ca_pst_bc'
+        | 'ca_pst_mb'
+        | 'ca_pst_sk'
+        | 'ca_qst'
+        | 'cv_nif'
+        | 'cl_tin'
+        | 'cn_tin'
+        | 'co_nit'
+        | 'cd_nif'
+        | 'cr_tin'
+        | 'hr_oib'
+        | 'do_rcn'
+        | 'ec_ruc'
+        | 'eg_tin'
+        | 'sv_nit'
+        | 'et_tin'
+        | 'eu_oss_vat'
+        | 'ge_vat'
+        | 'de_stn'
+        | 'gb_vat'
+        | 'gn_nif'
+        | 'hk_br'
+        | 'hu_tin'
+        | 'is_vat'
+        | 'in_gst'
+        | 'id_npwp'
+        | 'il_vat'
+        | 'jp_cn'
+        | 'jp_rn'
+        | 'jp_trn'
+        | 'kz_bin'
+        | 'ke_pin'
+        | 'kg_tin'
+        | 'la_tin'
+        | 'li_uid'
+        | 'li_vat'
+        | 'my_frp'
+        | 'my_itn'
+        | 'my_sst'
+        | 'mr_nif'
+        | 'mx_rfc'
+        | 'md_vat'
+        | 'me_pib'
+        | 'ma_vat'
+        | 'np_pan'
+        | 'nz_gst'
+        | 'ng_tin'
+        | 'mk_vat'
+        | 'no_vat'
+        | 'no_voec'
+        | 'om_vat'
+        | 'pe_ruc'
+        | 'ph_tin'
+        | 'pl_nip'
+        | 'ro_tin'
+        | 'ru_inn'
+        | 'ru_kpp'
+        | 'sa_vat'
+        | 'sn_ninea'
+        | 'rs_pib'
+        | 'sg_gst'
+        | 'sg_uen'
+        | 'si_tin'
+        | 'za_vat'
+        | 'kr_brn'
+        | 'es_cif'
+        | 'ch_uid'
+        | 'ch_vat'
+        | 'tw_vat'
+        | 'tj_tin'
+        | 'tz_vat'
+        | 'th_vat'
+        | 'tr_tin'
+        | 'ug_tin'
+        | 'ua_vat'
+        | 'ae_trn'
+        | 'us_ein'
+        | 'uy_ruc'
+        | 'uz_tin'
+        | 'uz_vat'
+        | 've_rif'
+        | 'vn_tin'
+        | 'zm_tin'
+        | 'zw_tin'
+        | 'sr_fin'
+        | 'xi_vat'
+        | null;
+
+      /**
+       * The value of the tax identifier.
+       */
+      tax_id_value?: string | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductIDAndEmailAddress {
@@ -809,6 +1349,12 @@ export declare namespace InvoiceCreateParams {
     automatically_finalizes_at?: string | null;
 
     /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    billing_address?: CreateInvoiceInputWithProductIDAndEmailAddress.BillingAddress | null;
+
+    /**
      * Whether to charge the customer a buyer fee on this invoice.
      */
     charge_buyer_fee?: boolean | null;
@@ -818,6 +1364,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * The unique identifier of an existing mailing address to attach to this invoice.
+     * Cannot be used together with billing_address.
+     */
+    mailing_address_id?: string | null;
 
     /**
      * The unique identifier of the payment method to charge. Required when
@@ -979,6 +1531,174 @@ export declare namespace InvoiceCreateParams {
          */
         include_platform_defaults: boolean;
       }
+    }
+
+    /**
+     * Inline billing address to create a new mailing address for this invoice. Cannot
+     * be used together with mailing_address_id.
+     */
+    export interface BillingAddress {
+      /**
+       * The city of the address.
+       */
+      city?: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country?: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1?: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2?: string | null;
+
+      /**
+       * The name of the customer.
+       */
+      name?: string | null;
+
+      /**
+       * The phone number of the customer.
+       */
+      phone?: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code?: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state?: string | null;
+
+      /**
+       * The type of tax identifier
+       */
+      tax_id_type?:
+        | 'ad_nrt'
+        | 'ao_tin'
+        | 'ar_cuit'
+        | 'am_tin'
+        | 'aw_tin'
+        | 'au_abn'
+        | 'au_arn'
+        | 'eu_vat'
+        | 'az_tin'
+        | 'bs_tin'
+        | 'bh_vat'
+        | 'bd_bin'
+        | 'bb_tin'
+        | 'by_tin'
+        | 'bj_ifu'
+        | 'bo_tin'
+        | 'ba_tin'
+        | 'br_cnpj'
+        | 'br_cpf'
+        | 'bg_uic'
+        | 'bf_ifu'
+        | 'kh_tin'
+        | 'cm_niu'
+        | 'ca_bn'
+        | 'ca_gst_hst'
+        | 'ca_pst_bc'
+        | 'ca_pst_mb'
+        | 'ca_pst_sk'
+        | 'ca_qst'
+        | 'cv_nif'
+        | 'cl_tin'
+        | 'cn_tin'
+        | 'co_nit'
+        | 'cd_nif'
+        | 'cr_tin'
+        | 'hr_oib'
+        | 'do_rcn'
+        | 'ec_ruc'
+        | 'eg_tin'
+        | 'sv_nit'
+        | 'et_tin'
+        | 'eu_oss_vat'
+        | 'ge_vat'
+        | 'de_stn'
+        | 'gb_vat'
+        | 'gn_nif'
+        | 'hk_br'
+        | 'hu_tin'
+        | 'is_vat'
+        | 'in_gst'
+        | 'id_npwp'
+        | 'il_vat'
+        | 'jp_cn'
+        | 'jp_rn'
+        | 'jp_trn'
+        | 'kz_bin'
+        | 'ke_pin'
+        | 'kg_tin'
+        | 'la_tin'
+        | 'li_uid'
+        | 'li_vat'
+        | 'my_frp'
+        | 'my_itn'
+        | 'my_sst'
+        | 'mr_nif'
+        | 'mx_rfc'
+        | 'md_vat'
+        | 'me_pib'
+        | 'ma_vat'
+        | 'np_pan'
+        | 'nz_gst'
+        | 'ng_tin'
+        | 'mk_vat'
+        | 'no_vat'
+        | 'no_voec'
+        | 'om_vat'
+        | 'pe_ruc'
+        | 'ph_tin'
+        | 'pl_nip'
+        | 'ro_tin'
+        | 'ru_inn'
+        | 'ru_kpp'
+        | 'sa_vat'
+        | 'sn_ninea'
+        | 'rs_pib'
+        | 'sg_gst'
+        | 'sg_uen'
+        | 'si_tin'
+        | 'za_vat'
+        | 'kr_brn'
+        | 'es_cif'
+        | 'ch_uid'
+        | 'ch_vat'
+        | 'tw_vat'
+        | 'tj_tin'
+        | 'tz_vat'
+        | 'th_vat'
+        | 'tr_tin'
+        | 'ug_tin'
+        | 'ua_vat'
+        | 'ae_trn'
+        | 'us_ein'
+        | 'uy_ruc'
+        | 'uz_tin'
+        | 'uz_vat'
+        | 've_rif'
+        | 'vn_tin'
+        | 'zm_tin'
+        | 'zw_tin'
+        | 'sr_fin'
+        | 'xi_vat'
+        | null;
+
+      /**
+       * The value of the tax identifier.
+       */
+      tax_id_value?: string | null;
     }
   }
 }
