@@ -2710,7 +2710,7 @@ export namespace Payment {
       | 'authorize'
       | 'capture'
       | 'refund'
-      | 'cancel'
+      | 'canceled'
       | 'verify'
       | 'chargeback'
       | 'pre_chargeback'
