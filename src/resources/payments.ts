@@ -301,7 +301,6 @@ export type PaymentMethodTypes =
   | 'cashapp'
   | 'claritypay'
   | 'coinbase'
-  | 'coinflow'
   | 'crypto'
   | 'custom'
   | 'customer_balance'
@@ -371,6 +370,7 @@ export type PaymentMethodTypes =
   | 'vipps'
   | 'wechat_pay'
   | 'zip'
+  | 'coinflow'
   | 'unknown';
 
 /**
