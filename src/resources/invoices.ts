@@ -148,6 +148,12 @@ export declare namespace InvoiceCreateParams {
     customer_name?: string | null;
 
     /**
+     * Optional line items that break down the invoice total. When provided, the sum of
+     * (quantity \* unit_price) for all items must equal the plan price.
+     */
+    line_items?: Array<CreateInvoiceInputWithProductAndMemberID.LineItem> | null;
+
+    /**
      * The unique identifier of an existing mailing address to attach to this invoice.
      * Cannot be used together with billing_address.
      */
@@ -498,6 +504,28 @@ export declare namespace InvoiceCreateParams {
        */
       tax_id_value?: string | null;
     }
+
+    /**
+     * A single line item to include on the invoice, with a label, quantity, and unit
+     * price.
+     */
+    export interface LineItem {
+      /**
+       * The label or description for this line item.
+       */
+      label: string;
+
+      /**
+       * The unit price for this line item. Provided as a number in the specified
+       * currency. Eg: 10.43 for $10.43
+       */
+      unit_price: number;
+
+      /**
+       * The quantity of this line item. Defaults to 1.
+       */
+      quantity?: number | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductAndEmailAddress {
@@ -558,6 +586,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * Optional line items that break down the invoice total. When provided, the sum of
+     * (quantity \* unit_price) for all items must equal the plan price.
+     */
+    line_items?: Array<CreateInvoiceInputWithProductAndEmailAddress.LineItem> | null;
 
     /**
      * The unique identifier of an existing mailing address to attach to this invoice.
@@ -910,6 +944,28 @@ export declare namespace InvoiceCreateParams {
        */
       tax_id_value?: string | null;
     }
+
+    /**
+     * A single line item to include on the invoice, with a label, quantity, and unit
+     * price.
+     */
+    export interface LineItem {
+      /**
+       * The label or description for this line item.
+       */
+      label: string;
+
+      /**
+       * The unit price for this line item. Provided as a number in the specified
+       * currency. Eg: 10.43 for $10.43
+       */
+      unit_price: number;
+
+      /**
+       * The quantity of this line item. Defaults to 1.
+       */
+      quantity?: number | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductIDAndMemberID {
@@ -969,6 +1025,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * Optional line items that break down the invoice total. When provided, the sum of
+     * (quantity \* unit_price) for all items must equal the plan price.
+     */
+    line_items?: Array<CreateInvoiceInputWithProductIDAndMemberID.LineItem> | null;
 
     /**
      * The unique identifier of an existing mailing address to attach to this invoice.
@@ -1305,6 +1367,28 @@ export declare namespace InvoiceCreateParams {
        */
       tax_id_value?: string | null;
     }
+
+    /**
+     * A single line item to include on the invoice, with a label, quantity, and unit
+     * price.
+     */
+    export interface LineItem {
+      /**
+       * The label or description for this line item.
+       */
+      label: string;
+
+      /**
+       * The unit price for this line item. Provided as a number in the specified
+       * currency. Eg: 10.43 for $10.43
+       */
+      unit_price: number;
+
+      /**
+       * The quantity of this line item. Defaults to 1.
+       */
+      quantity?: number | null;
+    }
   }
 
   export interface CreateInvoiceInputWithProductIDAndEmailAddress {
@@ -1364,6 +1448,12 @@ export declare namespace InvoiceCreateParams {
      * is not yet a member of the company.
      */
     customer_name?: string | null;
+
+    /**
+     * Optional line items that break down the invoice total. When provided, the sum of
+     * (quantity \* unit_price) for all items must equal the plan price.
+     */
+    line_items?: Array<CreateInvoiceInputWithProductIDAndEmailAddress.LineItem> | null;
 
     /**
      * The unique identifier of an existing mailing address to attach to this invoice.
@@ -1699,6 +1789,28 @@ export declare namespace InvoiceCreateParams {
        * The value of the tax identifier.
        */
       tax_id_value?: string | null;
+    }
+
+    /**
+     * A single line item to include on the invoice, with a label, quantity, and unit
+     * price.
+     */
+    export interface LineItem {
+      /**
+       * The label or description for this line item.
+       */
+      label: string;
+
+      /**
+       * The unit price for this line item. Provided as a number in the specified
+       * currency. Eg: 10.43 for $10.43
+       */
+      unit_price: number;
+
+      /**
+       * The quantity of this line item. Defaults to 1.
+       */
+      quantity?: number | null;
     }
   }
 }
