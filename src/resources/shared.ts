@@ -2700,7 +2700,8 @@ export namespace Payment {
       | 'won'
       | 'rejected'
       | 'lost'
-      | 'prevented';
+      | 'prevented'
+      | 'canceled';
 
     /**
      * The type of the payment transaction.
