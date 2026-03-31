@@ -275,6 +275,7 @@ export type CardBrands =
   | 'cabal'
   | 'hipercard'
   | 'jcblankapay'
+  | 'cmi'
   | 'unknown';
 
 /**
