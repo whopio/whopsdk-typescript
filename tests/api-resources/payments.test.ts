@@ -111,6 +111,8 @@ describe('resource payments', () => {
           query: 'query',
           statuses: ['draft'],
           substatuses: ['succeeded'],
+          updated_after: '2023-12-01T05:00:00.401Z',
+          updated_before: '2023-12-01T05:00:00.401Z',
         },
         { path: '/_stainless_unknown_path' },
       ),
