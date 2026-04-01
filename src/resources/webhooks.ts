@@ -202,6 +202,7 @@ export interface Webhook {
  */
 export type WebhookEvent =
   | 'invoice.created'
+  | 'invoice.marked_uncollectible'
   | 'invoice.paid'
   | 'invoice.past_due'
   | 'invoice.voided'
@@ -368,6 +369,40 @@ export interface InvoiceCreatedWebhookEvent {
    * The webhook event type
    */
   type: 'invoice.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface InvoiceMarkedUncollectibleWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An invoice represents an itemized bill sent by a company to a customer for a
+   * specific product and plan, tracking the amount owed, due date, and payment
+   * status.
+   */
+  data: Shared.Invoice;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'invoice.marked_uncollectible';
 
   /**
    * The company ID that this webhook event is associated with
@@ -3015,6 +3050,7 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
 
 export type UnwrapWebhookEvent =
   | InvoiceCreatedWebhookEvent
+  | InvoiceMarkedUncollectibleWebhookEvent
   | InvoicePaidWebhookEvent
   | InvoicePastDueWebhookEvent
   | InvoiceVoidedWebhookEvent
@@ -3139,6 +3175,7 @@ export declare namespace Webhooks {
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
+    type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
