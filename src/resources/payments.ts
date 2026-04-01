@@ -966,6 +966,14 @@ export declare namespace PaymentCreateParams {
       currency: Shared.Currency;
 
       /**
+       * The application fee amount collected by the platform from this connected
+       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
+       * than the total payment amount. Only valid for connected accounts with a parent
+       * company.
+       */
+      application_fee_amount?: number | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans). For example, 30
        * for monthly billing.
        */
