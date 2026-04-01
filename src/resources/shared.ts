@@ -2506,6 +2506,11 @@ export interface Payment {
   total: number | null;
 
   /**
+   * The datetime the payment was last updated.
+   */
+  updated_at: string;
+
+  /**
    * The total in USD to show to the creator (excluding buyer fees).
    */
   usd_total: number | null;

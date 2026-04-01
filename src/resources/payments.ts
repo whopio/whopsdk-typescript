@@ -569,6 +569,11 @@ export interface PaymentListResponse {
   total: number | null;
 
   /**
+   * The datetime the payment was last updated.
+   */
+  updated_at: string;
+
+  /**
    * The total in USD to show to the creator (excluding buyer fees).
    */
   usd_total: number | null;
@@ -1216,6 +1221,16 @@ export interface PaymentListParams extends CursorPageParams {
    * Filter payments by their current substatus for more granular filtering.
    */
   substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
+
+  /**
+   * Only return payments last updated after this timestamp.
+   */
+  updated_after?: string | null;
+
+  /**
+   * Only return payments last updated before this timestamp.
+   */
+  updated_before?: string | null;
 }
 
 export interface PaymentListFeesParams extends CursorPageParams {
