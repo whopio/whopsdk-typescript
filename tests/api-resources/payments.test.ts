@@ -33,6 +33,7 @@ describe('resource payments', () => {
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       plan: {
         currency: 'usd',
+        application_fee_amount: 6.9,
         billing_period: 42,
         description: 'description',
         expiration_days: 42,
