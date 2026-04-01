@@ -435,6 +435,7 @@ export {
   type WebhookListResponse,
   type WebhookDeleteResponse,
   type InvoiceCreatedWebhookEvent,
+  type InvoiceMarkedUncollectibleWebhookEvent,
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,

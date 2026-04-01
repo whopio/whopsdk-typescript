@@ -134,6 +134,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">InvoiceMarkedUncollectibleWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePaidWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePastDueWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>

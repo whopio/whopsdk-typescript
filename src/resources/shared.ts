@@ -1806,7 +1806,7 @@ export namespace InvoiceListItem {
 /**
  * The different statuses an invoice can be in
  */
-export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'void';
+export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void';
 
 /**
  * The different most recent actions a member can have.
