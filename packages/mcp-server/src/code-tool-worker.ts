@@ -114,6 +114,8 @@ const fuse = new Fuse(
     'client.apps.update',
     'client.invoices.create',
     'client.invoices.list',
+    'client.invoices.markPaid',
+    'client.invoices.markUncollectible',
     'client.invoices.retrieve',
     'client.invoices.void',
     'client.courseLessonInteractions.list',

@@ -228,6 +228,9 @@ export {
 } from './forums';
 export {
   Invoices,
+  type TaxIdentifierType,
+  type InvoiceMarkPaidResponse,
+  type InvoiceMarkUncollectibleResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
