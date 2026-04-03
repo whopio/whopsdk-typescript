@@ -250,6 +250,12 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    checkout_styling?: CreateCheckoutSessionInputModePaymentWithPlan.CheckoutStyling | null;
+
+    /**
      * The available currencies on the platform
      */
     currency?: Shared.Currency | null;
@@ -552,6 +558,27 @@ export declare namespace CheckoutConfigurationCreateParams {
     }
 
     /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    export interface CheckoutStyling {
+      /**
+       * The hex color code for the accent color on checkout pages.
+       */
+      accent_color?: string | null;
+
+      /**
+       * The different font families available for checkout pages.
+       */
+      font?: 'system' | 'roboto' | 'open_sans' | null;
+
+      /**
+       * The different border-radius styles available for checkout pages.
+       */
+      shape?: 'rounded' | 'pill' | 'rectangular' | null;
+    }
+
+    /**
      * The explicit payment method configuration for the checkout session. Only applies
      * to setup mode. If not provided, the platform or company defaults will apply.
      */
@@ -592,6 +619,12 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    checkout_styling?: CreateCheckoutSessionInputModePaymentWithPlanID.CheckoutStyling | null;
+
+    /**
      * The available currencies on the platform
      */
     currency?: Shared.Currency | null;
@@ -621,6 +654,27 @@ export declare namespace CheckoutConfigurationCreateParams {
   }
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlanID {
+    /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    export interface CheckoutStyling {
+      /**
+       * The hex color code for the accent color on checkout pages.
+       */
+      accent_color?: string | null;
+
+      /**
+       * The different font families available for checkout pages.
+       */
+      font?: 'system' | 'roboto' | 'open_sans' | null;
+
+      /**
+       * The different border-radius styles available for checkout pages.
+       */
+      shape?: 'rounded' | 'pill' | 'rectangular' | null;
+    }
+
     /**
      * The explicit payment method configuration for the checkout session. Only applies
      * to setup mode. If not provided, the platform or company defaults will apply.
@@ -659,6 +713,12 @@ export declare namespace CheckoutConfigurationCreateParams {
     mode: 'setup';
 
     /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    checkout_styling?: CreateCheckoutSessionInputModeSetup.CheckoutStyling | null;
+
+    /**
      * The available currencies on the platform
      */
     currency?: Shared.Currency | null;
@@ -686,6 +746,27 @@ export declare namespace CheckoutConfigurationCreateParams {
   }
 
   export namespace CreateCheckoutSessionInputModeSetup {
+    /**
+     * Checkout styling overrides for this session. Overrides plan and company
+     * defaults.
+     */
+    export interface CheckoutStyling {
+      /**
+       * The hex color code for the accent color on checkout pages.
+       */
+      accent_color?: string | null;
+
+      /**
+       * The different font families available for checkout pages.
+       */
+      font?: 'system' | 'roboto' | 'open_sans' | null;
+
+      /**
+       * The different border-radius styles available for checkout pages.
+       */
+      shape?: 'rounded' | 'pill' | 'rectangular' | null;
+    }
+
     /**
      * The explicit payment method configuration for the checkout session. Only applies
      * to setup mode. If not provided, the platform or company defaults will apply.

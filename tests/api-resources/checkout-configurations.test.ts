@@ -77,6 +77,11 @@ describe('resource checkoutConfigurations', () => {
         visibility: 'visible',
       },
       affiliate_code: 'affiliate_code',
+      checkout_styling: {
+        accent_color: 'accent_color',
+        font: 'system',
+        shape: 'rounded',
+      },
       currency: 'usd',
       metadata: { foo: 'bar' },
       mode: 'payment',

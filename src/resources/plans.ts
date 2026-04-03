@@ -370,6 +370,12 @@ export interface PlanCreateParams {
   billing_period?: number | null;
 
   /**
+   * Checkout styling overrides for this plan. Pass null to inherit from the company
+   * default.
+   */
+  checkout_styling?: PlanCreateParams.CheckoutStyling | null;
+
+  /**
    * The available currencies on the platform
    */
   currency?: Shared.Currency | null;
@@ -474,6 +480,27 @@ export interface PlanCreateParams {
 }
 
 export namespace PlanCreateParams {
+  /**
+   * Checkout styling overrides for this plan. Pass null to inherit from the company
+   * default.
+   */
+  export interface CheckoutStyling {
+    /**
+     * The hex color code for the accent color on checkout pages.
+     */
+    accent_color?: string | null;
+
+    /**
+     * The different font families available for checkout pages.
+     */
+    font?: 'system' | 'roboto' | 'open_sans' | null;
+
+    /**
+     * The different border-radius styles available for checkout pages.
+     */
+    shape?: 'rounded' | 'pill' | 'rectangular' | null;
+  }
+
   export interface CustomField {
     /**
      * The type of the custom field.
@@ -550,6 +577,12 @@ export interface PlanUpdateParams {
    * for yearly.
    */
   billing_period?: number | null;
+
+  /**
+   * Checkout styling overrides for this plan. Pass null to remove all overrides and
+   * inherit from the company default.
+   */
+  checkout_styling?: PlanUpdateParams.CheckoutStyling | null;
 
   /**
    * The available currencies on the platform
@@ -656,6 +689,27 @@ export interface PlanUpdateParams {
 }
 
 export namespace PlanUpdateParams {
+  /**
+   * Checkout styling overrides for this plan. Pass null to remove all overrides and
+   * inherit from the company default.
+   */
+  export interface CheckoutStyling {
+    /**
+     * The hex color code for the accent color on checkout pages.
+     */
+    accent_color?: string | null;
+
+    /**
+     * The different font families available for checkout pages.
+     */
+    font?: 'system' | 'roboto' | 'open_sans' | null;
+
+    /**
+     * The different border-radius styles available for checkout pages.
+     */
+    shape?: 'rounded' | 'pill' | 'rectangular' | null;
+  }
+
   export interface CustomField {
     /**
      * The type of the custom field.
