@@ -142,6 +142,30 @@ describe('resource invoices', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('markPaid', async () => {
+    const responsePromise = client.invoices.markPaid('inv_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('markUncollectible', async () => {
+    const responsePromise = client.invoices.markUncollectible('inv_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('void', async () => {
     const responsePromise = client.invoices.void('inv_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();

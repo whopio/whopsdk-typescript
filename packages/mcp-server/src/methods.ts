@@ -53,6 +53,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/invoices',
   },
   {
+    clientCallName: 'client.invoices.markPaid',
+    fullyQualifiedName: 'invoices.markPaid',
+    httpMethod: 'post',
+    httpPath: '/invoices/{id}/mark_paid',
+  },
+  {
+    clientCallName: 'client.invoices.markUncollectible',
+    fullyQualifiedName: 'invoices.markUncollectible',
+    httpMethod: 'post',
+    httpPath: '/invoices/{id}/mark_uncollectible',
+  },
+  {
     clientCallName: 'client.invoices.void',
     fullyQualifiedName: 'invoices.void',
     httpMethod: 'post',

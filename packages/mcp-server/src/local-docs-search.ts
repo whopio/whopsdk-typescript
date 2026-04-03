@@ -383,6 +383,76 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'mark_paid',
+    endpoint: '/invoices/{id}/mark_paid',
+    httpMethod: 'post',
+    summary: 'Mark paid invoice',
+    description:
+      'Mark an open invoice as paid when payment was collected outside of Whop.\n\nRequired permissions:\n - `invoice:update`',
+    stainlessPath: '(resource) invoices > (method) mark_paid',
+    qualified: 'client.invoices.markPaid',
+    params: ['id: string;'],
+    response: 'boolean',
+    markdown:
+      "## mark_paid\n\n`client.invoices.markPaid(id: string): boolean`\n\n**post** `/invoices/{id}/mark_paid`\n\nMark an open invoice as paid when payment was collected outside of Whop.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `boolean`\n  Represents `true` or `false` values.\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.invoices.markPaid('inv_xxxxxxxxxxxxxx');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/invoices/$ID/mark_paid \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+      python: {
+        method: 'invoices.mark_paid',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.invoices.mark_paid(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(response)',
+      },
+      ruby: {
+        method: 'invoices.mark_paid',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.invoices.mark_paid("inv_xxxxxxxxxxxxxx")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.invoices.markPaid',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.invoices.markPaid('inv_xxxxxxxxxxxxxx');\n\nconsole.log(response);",
+      },
+    },
+  },
+  {
+    name: 'mark_uncollectible',
+    endpoint: '/invoices/{id}/mark_uncollectible',
+    httpMethod: 'post',
+    summary: 'Mark uncollectible invoice',
+    description:
+      'Mark an open invoice as uncollectible when payment is not expected.\n\nRequired permissions:\n - `invoice:update`',
+    stainlessPath: '(resource) invoices > (method) mark_uncollectible',
+    qualified: 'client.invoices.markUncollectible',
+    params: ['id: string;'],
+    response: 'boolean',
+    markdown:
+      "## mark_uncollectible\n\n`client.invoices.markUncollectible(id: string): boolean`\n\n**post** `/invoices/{id}/mark_uncollectible`\n\nMark an open invoice as uncollectible when payment is not expected.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `boolean`\n  Represents `true` or `false` values.\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.invoices.markUncollectible('inv_xxxxxxxxxxxxxx');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/invoices/$ID/mark_uncollectible \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+      python: {
+        method: 'invoices.mark_uncollectible',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.invoices.mark_uncollectible(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(response)',
+      },
+      ruby: {
+        method: 'invoices.mark_uncollectible',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.invoices.mark_uncollectible("inv_xxxxxxxxxxxxxx")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.invoices.markUncollectible',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.invoices.markUncollectible('inv_xxxxxxxxxxxxxx');\n\nconsole.log(response);",
+      },
+    },
+  },
+  {
     name: 'list',
     endpoint: '/course_lesson_interactions',
     httpMethod: 'get',

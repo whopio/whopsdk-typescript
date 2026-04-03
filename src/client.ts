@@ -233,7 +233,15 @@ import {
   ForumUpdateParams,
   Forums,
 } from './resources/forums';
-import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
+import {
+  InvoiceCreateParams,
+  InvoiceListParams,
+  InvoiceMarkPaidResponse,
+  InvoiceMarkUncollectibleResponse,
+  InvoiceVoidResponse,
+  Invoices,
+  TaxIdentifierType,
+} from './resources/invoices';
 import {
   Lead,
   LeadCreateParams,
@@ -1529,6 +1537,9 @@ export declare namespace Whop {
 
   export {
     Invoices as Invoices,
+    type TaxIdentifierType as TaxIdentifierType,
+    type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
+    type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
