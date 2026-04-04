@@ -486,19 +486,19 @@ export namespace PlanCreateParams {
    */
   export interface CheckoutStyling {
     /**
-     * The hex color code for the accent color on checkout pages.
+     * The different border-radius styles available for checkout pages.
      */
-    accent_color?: string | null;
+    border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+
+    /**
+     * A hex color code for the button color (e.g. #FF5733).
+     */
+    button_color?: string | null;
 
     /**
      * The different font families available for checkout pages.
      */
-    font?: 'system' | 'roboto' | 'open_sans' | null;
-
-    /**
-     * The different border-radius styles available for checkout pages.
-     */
-    shape?: 'rounded' | 'pill' | 'rectangular' | null;
+    font_family?: 'system' | 'roboto' | 'open_sans' | null;
   }
 
   export interface CustomField {
@@ -695,19 +695,19 @@ export namespace PlanUpdateParams {
    */
   export interface CheckoutStyling {
     /**
-     * The hex color code for the accent color on checkout pages.
+     * The different border-radius styles available for checkout pages.
      */
-    accent_color?: string | null;
+    border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+
+    /**
+     * A hex color code for the button color (e.g. #FF5733).
+     */
+    button_color?: string | null;
 
     /**
      * The different font families available for checkout pages.
      */
-    font?: 'system' | 'roboto' | 'open_sans' | null;
-
-    /**
-     * The different border-radius styles available for checkout pages.
-     */
-    shape?: 'rounded' | 'pill' | 'rectangular' | null;
+    font_family?: 'system' | 'roboto' | 'open_sans' | null;
   }
 
   export interface CustomField {
