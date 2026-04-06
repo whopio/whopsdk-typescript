@@ -29,6 +29,11 @@ describe('resource plans', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       product_id: 'prod_xxxxxxxxxxxxx',
       billing_period: 42,
+      checkout_styling: {
+        border_style: 'rounded',
+        button_color: 'button_color',
+        font_family: 'system',
+      },
       currency: 'usd',
       custom_fields: [
         {
@@ -96,6 +101,11 @@ describe('resource plans', () => {
         'plan_xxxxxxxxxxxxx',
         {
           billing_period: 42,
+          checkout_styling: {
+            border_style: 'rounded',
+            button_color: 'button_color',
+            font_family: 'system',
+          },
           currency: 'usd',
           custom_fields: [
             {

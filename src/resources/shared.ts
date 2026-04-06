@@ -105,6 +105,19 @@ export interface App {
   name: string;
 
   /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  openapi_path: string | null;
+
+  /**
+   * The full origin URL for this app's proxied domain (e.g.,
+   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   */
+  origin: string | null;
+
+  /**
    * The whitelisted OAuth callback URLs that users are redirected to after
    * authorizing the app.
    */
@@ -115,6 +128,13 @@ export interface App {
    * required and optional permissions with justifications.
    */
   requested_permissions: Array<App.RequestedPermission>;
+
+  /**
+   * The URL path template for a specific view of this app, appended to the base
+   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
+   * not configured.
+   */
+  skills_path: string | null;
 
   /**
    * Aggregate usage statistics for this app, including daily, weekly, and monthly
@@ -345,7 +365,7 @@ export type AppStatuses = 'live' | 'unlisted' | 'hidden';
 /**
  * The different types of an app view
  */
-export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics';
+export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi';
 
 /**
  * Possible roles an authorized user can have
@@ -597,6 +617,12 @@ export interface Company {
   id: string;
 
   /**
+   * Guidelines and instructions provided to affiliates explaining how to promote
+   * this company's products.
+   */
+  affiliate_instructions: string | null;
+
+  /**
    * The datetime the company was created.
    */
   created_at: string;
@@ -606,6 +632,12 @@ export interface Company {
    * customers on the store page.
    */
   description: string | null;
+
+  /**
+   * The product featured for affiliates to promote on this company's affiliate page.
+   * Null if none is configured.
+   */
+  featured_affiliate_product: Company.FeaturedAffiliateProduct | null;
 
   /**
    * The company's logo.
@@ -653,6 +685,11 @@ export interface Company {
   social_links: Array<Company.SocialLink>;
 
   /**
+   * The target audience for the company. Null if not set.
+   */
+  target_audience: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title: string;
@@ -669,6 +706,22 @@ export interface Company {
 }
 
 export namespace Company {
+  /**
+   * The product featured for affiliates to promote on this company's affiliate page.
+   * Null if none is configured.
+   */
+  export interface FeaturedAffiliateProduct {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * The display name of the product shown to customers. Maximum 50 characters.
+     */
+    name: string;
+  }
+
   /**
    * The company's logo.
    */
@@ -1753,7 +1806,7 @@ export namespace InvoiceListItem {
 /**
  * The different statuses an invoice can be in
  */
-export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'void';
+export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void';
 
 /**
  * The different most recent actions a member can have.
@@ -2453,6 +2506,11 @@ export interface Payment {
   total: number | null;
 
   /**
+   * The datetime the payment was last updated.
+   */
+  updated_at: string;
+
+  /**
    * The total in USD to show to the creator (excluding buyer fees).
    */
   usd_total: number | null;
@@ -2647,7 +2705,8 @@ export namespace Payment {
       | 'won'
       | 'rejected'
       | 'lost'
-      | 'prevented';
+      | 'prevented'
+      | 'canceled';
 
     /**
      * The type of the payment transaction.
@@ -2657,7 +2716,7 @@ export namespace Payment {
       | 'authorize'
       | 'capture'
       | 'refund'
-      | 'cancel'
+      | 'canceled'
       | 'verify'
       | 'chargeback'
       | 'pre_chargeback'
