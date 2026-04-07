@@ -13,8 +13,6 @@ describe('resource invoices', () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: '2023-12-01T05:00:00.401Z',
-      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {},
       product: { title: 'title' },
     });
@@ -32,8 +30,6 @@ describe('resource invoices', () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: '2023-12-01T05:00:00.401Z',
-      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {
         billing_period: 42,
         custom_fields: [
@@ -80,6 +76,8 @@ describe('resource invoices', () => {
       },
       charge_buyer_fee: true,
       customer_name: 'customer_name',
+      due_date: '2023-12-01T05:00:00.401Z',
+      email_address: 'email_address',
       line_items: [
         {
           label: 'label',
@@ -88,8 +86,10 @@ describe('resource invoices', () => {
         },
       ],
       mailing_address_id: 'ma_xxxxxxxxxxxxxxx',
+      member_id: 'mber_xxxxxxxxxxxxx',
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
+      save_as_draft: true,
     });
   });
 
