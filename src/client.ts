@@ -233,7 +233,15 @@ import {
   ForumUpdateParams,
   Forums,
 } from './resources/forums';
-import { InvoiceCreateParams, InvoiceListParams, InvoiceVoidResponse, Invoices } from './resources/invoices';
+import {
+  InvoiceCreateParams,
+  InvoiceListParams,
+  InvoiceMarkPaidResponse,
+  InvoiceMarkUncollectibleResponse,
+  InvoiceVoidResponse,
+  Invoices,
+  TaxIdentifierType,
+} from './resources/invoices';
 import {
   Lead,
   LeadCreateParams,
@@ -439,6 +447,7 @@ import {
   EntryDeletedWebhookEvent,
   EntryDeniedWebhookEvent,
   InvoiceCreatedWebhookEvent,
+  InvoiceMarkedUncollectibleWebhookEvent,
   InvoicePaidWebhookEvent,
   InvoicePastDueWebhookEvent,
   InvoiceVoidedWebhookEvent,
@@ -453,6 +462,9 @@ import {
   PayoutMethodCreatedWebhookEvent,
   RefundCreatedWebhookEvent,
   RefundUpdatedWebhookEvent,
+  ResolutionCenterCaseCreatedWebhookEvent,
+  ResolutionCenterCaseDecidedWebhookEvent,
+  ResolutionCenterCaseUpdatedWebhookEvent,
   SetupIntentCanceledWebhookEvent,
   SetupIntentRequiresActionWebhookEvent,
   SetupIntentSucceededWebhookEvent,
@@ -1525,6 +1537,9 @@ export declare namespace Whop {
 
   export {
     Invoices as Invoices,
+    type TaxIdentifierType as TaxIdentifierType,
+    type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
+    type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceListParams as InvoiceListParams,
@@ -1562,6 +1577,7 @@ export declare namespace Whop {
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
+    type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
@@ -1580,6 +1596,9 @@ export declare namespace Whop {
     type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
     type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
+    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
+    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
+    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,

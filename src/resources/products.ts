@@ -130,7 +130,7 @@ export interface ProductCreateParams {
   company_id: string;
 
   /**
-   * The display name of the product. Maximum 40 characters.
+   * The display name of the product. Maximum 80 characters.
    */
   title: string;
 
@@ -397,7 +397,7 @@ export interface ProductUpdateParams {
   store_page_config?: ProductUpdateParams.StorePageConfig | null;
 
   /**
-   * The display name of the product. Maximum 40 characters.
+   * The display name of the product. Maximum 80 characters.
    */
   title?: string | null;
 

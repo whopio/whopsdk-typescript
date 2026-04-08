@@ -228,6 +228,9 @@ export {
 } from './forums';
 export {
   Invoices,
+  type TaxIdentifierType,
+  type InvoiceMarkPaidResponse,
+  type InvoiceMarkUncollectibleResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
   type InvoiceListParams,
@@ -435,6 +438,7 @@ export {
   type WebhookListResponse,
   type WebhookDeleteResponse,
   type InvoiceCreatedWebhookEvent,
+  type InvoiceMarkedUncollectibleWebhookEvent,
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,
@@ -453,6 +457,9 @@ export {
   type PayoutMethodCreatedWebhookEvent,
   type VerificationSucceededWebhookEvent,
   type PayoutAccountStatusUpdatedWebhookEvent,
+  type ResolutionCenterCaseCreatedWebhookEvent,
+  type ResolutionCenterCaseUpdatedWebhookEvent,
+  type ResolutionCenterCaseDecidedWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

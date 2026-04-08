@@ -33,6 +33,7 @@ describe('resource payments', () => {
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       plan: {
         currency: 'usd',
+        application_fee_amount: 6.9,
         billing_period: 42,
         description: 'description',
         expiration_days: 42,
@@ -111,6 +112,8 @@ describe('resource payments', () => {
           query: 'query',
           statuses: ['draft'],
           substatuses: ['succeeded'],
+          updated_after: '2023-12-01T05:00:00.401Z',
+          updated_before: '2023-12-01T05:00:00.401Z',
         },
         { path: '/_stainless_unknown_path' },
       ),

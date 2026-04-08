@@ -167,7 +167,8 @@ export type AffiliatePayoutTypes = 'percentage' | 'flat_fee';
 export type AffiliateRevenueBases = 'pre_fees' | 'post_fees';
 
 /**
- * An object storing information about the affiliate
+ * A commission configuration for an affiliate, defining payout terms for a
+ * specific plan or revenue share
  */
 export interface OverrideCreateResponse {
   /**
@@ -196,7 +197,8 @@ export interface OverrideCreateResponse {
   commission_type: AffiliatePayoutTypes;
 
   /**
-   * The commission value (percentage 1-100 or flat fee in dollars).
+   * The commission amount. A percentage (1-100) when commission_type is percentage,
+   * or a dollar amount when flat_fee.
    */
   commission_value: number;
 
@@ -233,7 +235,8 @@ export interface OverrideCreateResponse {
 }
 
 /**
- * An object storing information about the affiliate
+ * A commission configuration for an affiliate, defining payout terms for a
+ * specific plan or revenue share
  */
 export interface OverrideRetrieveResponse {
   /**
@@ -262,7 +265,8 @@ export interface OverrideRetrieveResponse {
   commission_type: AffiliatePayoutTypes;
 
   /**
-   * The commission value (percentage 1-100 or flat fee in dollars).
+   * The commission amount. A percentage (1-100) when commission_type is percentage,
+   * or a dollar amount when flat_fee.
    */
   commission_value: number;
 
@@ -299,7 +303,8 @@ export interface OverrideRetrieveResponse {
 }
 
 /**
- * An object storing information about the affiliate
+ * A commission configuration for an affiliate, defining payout terms for a
+ * specific plan or revenue share
  */
 export interface OverrideUpdateResponse {
   /**
@@ -328,7 +333,8 @@ export interface OverrideUpdateResponse {
   commission_type: AffiliatePayoutTypes;
 
   /**
-   * The commission value (percentage 1-100 or flat fee in dollars).
+   * The commission amount. A percentage (1-100) when commission_type is percentage,
+   * or a dollar amount when flat_fee.
    */
   commission_value: number;
 
@@ -365,7 +371,8 @@ export interface OverrideUpdateResponse {
 }
 
 /**
- * An object storing information about the affiliate
+ * A commission configuration for an affiliate, defining payout terms for a
+ * specific plan or revenue share
  */
 export interface OverrideListResponse {
   /**
@@ -394,7 +401,8 @@ export interface OverrideListResponse {
   commission_type: AffiliatePayoutTypes;
 
   /**
-   * The commission value (percentage 1-100 or flat fee in dollars).
+   * The commission amount. A percentage (1-100) when commission_type is percentage,
+   * or a dollar amount when flat_fee.
    */
   commission_value: number;
 

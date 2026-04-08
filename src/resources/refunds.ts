@@ -60,7 +60,8 @@ export type PaymentProvider =
   | 'claritypay'
   | 'checkout_dot_com'
   | 'airwallex'
-  | 'coinflow';
+  | 'coinflow'
+  | 'sequra';
 
 /**
  * The status of the refund reference.

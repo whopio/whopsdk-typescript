@@ -79,6 +79,9 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/invoices.ts">TaxIdentifierType</a></code>
+- <code><a href="./src/resources/invoices.ts">InvoiceMarkPaidResponse</a></code>
+- <code><a href="./src/resources/invoices.ts">InvoiceMarkUncollectibleResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceVoidResponse</a></code>
 
 Methods:
@@ -86,6 +89,8 @@ Methods:
 - <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> Invoice</code>
 - <code title="get /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">retrieve</a>(id) -> Invoice</code>
 - <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
+- <code title="post /invoices/{id}/mark_paid">client.invoices.<a href="./src/resources/invoices.ts">markPaid</a>(id) -> InvoiceMarkPaidResponse</code>
+- <code title="post /invoices/{id}/mark_uncollectible">client.invoices.<a href="./src/resources/invoices.ts">markUncollectible</a>(id) -> InvoiceMarkUncollectibleResponse</code>
 - <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>
 
 # CourseLessonInteractions
@@ -134,6 +139,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">InvoiceMarkedUncollectibleWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePaidWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePastDueWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
@@ -152,6 +158,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutAccountStatusUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseDecidedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>

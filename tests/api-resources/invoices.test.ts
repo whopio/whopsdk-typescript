@@ -13,8 +13,6 @@ describe('resource invoices', () => {
     const responsePromise = client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: '2023-12-01T05:00:00.401Z',
-      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {},
       product: { title: 'title' },
     });
@@ -32,8 +30,6 @@ describe('resource invoices', () => {
     const response = await client.invoices.create({
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
-      due_date: '2023-12-01T05:00:00.401Z',
-      member_id: 'mber_xxxxxxxxxxxxx',
       plan: {
         billing_period: 42,
         custom_fields: [
@@ -66,10 +62,34 @@ describe('resource invoices', () => {
       },
       product: { title: 'title', product_tax_code_id: 'ptc_xxxxxxxxxxxxxx' },
       automatically_finalizes_at: '2023-12-01T05:00:00.401Z',
+      billing_address: {
+        city: 'city',
+        country: 'country',
+        line1: 'line1',
+        line2: 'line2',
+        name: 'name',
+        phone: 'phone',
+        postal_code: 'postal_code',
+        state: 'state',
+        tax_id_type: 'ad_nrt',
+        tax_id_value: 'tax_id_value',
+      },
       charge_buyer_fee: true,
       customer_name: 'customer_name',
+      due_date: '2023-12-01T05:00:00.401Z',
+      email_address: 'email_address',
+      line_items: [
+        {
+          label: 'label',
+          unit_price: 6.9,
+          quantity: 6.9,
+        },
+      ],
+      mailing_address_id: 'ma_xxxxxxxxxxxxxxx',
+      member_id: 'mber_xxxxxxxxxxxxx',
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
+      save_as_draft: true,
     });
   });
 
@@ -119,6 +139,30 @@ describe('resource invoices', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('markPaid', async () => {
+    const responsePromise = client.invoices.markPaid('inv_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('markUncollectible', async () => {
+    const responsePromise = client.invoices.markUncollectible('inv_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled

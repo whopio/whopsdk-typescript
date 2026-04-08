@@ -275,6 +275,7 @@ export type CardBrands =
   | 'cabal'
   | 'hipercard'
   | 'jcblankapay'
+  | 'cmi'
   | 'unknown';
 
 /**
@@ -301,7 +302,6 @@ export type PaymentMethodTypes =
   | 'cashapp'
   | 'claritypay'
   | 'coinbase'
-  | 'coinflow'
   | 'crypto'
   | 'custom'
   | 'customer_balance'
@@ -371,6 +371,7 @@ export type PaymentMethodTypes =
   | 'vipps'
   | 'wechat_pay'
   | 'zip'
+  | 'coinflow'
   | 'unknown';
 
 /**
@@ -566,6 +567,11 @@ export interface PaymentListResponse {
    * The total to show to the creator (excluding buyer fees).
    */
   total: number | null;
+
+  /**
+   * The datetime the payment was last updated.
+   */
+  updated_at: string;
 
   /**
    * The total in USD to show to the creator (excluding buyer fees).
@@ -960,6 +966,14 @@ export declare namespace PaymentCreateParams {
       currency: Shared.Currency;
 
       /**
+       * The application fee amount collected by the platform from this connected
+       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
+       * than the total payment amount. Only valid for connected accounts with a parent
+       * company.
+       */
+      application_fee_amount?: number | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans). For example, 30
        * for monthly billing.
        */
@@ -1215,6 +1229,16 @@ export interface PaymentListParams extends CursorPageParams {
    * Filter payments by their current substatus for more granular filtering.
    */
   substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
+
+  /**
+   * Only return payments last updated after this timestamp.
+   */
+  updated_after?: string | null;
+
+  /**
+   * Only return payments last updated before this timestamp.
+   */
+  updated_before?: string | null;
 }
 
 export interface PaymentListFeesParams extends CursorPageParams {

@@ -146,6 +146,11 @@ export interface CompanyListResponse {
   send_customer_emails: boolean;
 
   /**
+   * The target audience for the company. Null if not set.
+   */
+  target_audience: string | null;
+
+  /**
    * The display name of the company shown to customers.
    */
   title: string;
@@ -250,6 +255,18 @@ export namespace CompanyCreateParams {
 
 export interface CompanyUpdateParams {
   /**
+   * Whether prospective affiliates must submit an application before they can
+   * promote this company.
+   */
+  affiliate_application_required?: boolean | null;
+
+  /**
+   * Guidelines and instructions shown to affiliates explaining how to promote this
+   * company's products.
+   */
+  affiliate_instructions?: string | null;
+
+  /**
    * The company's banner image. Accepts PNG or JPEG format.
    */
   banner_image?: CompanyUpdateParams.BannerImage | null;
@@ -259,6 +276,12 @@ export interface CompanyUpdateParams {
    * page.
    */
   description?: string | null;
+
+  /**
+   * The ID of the product to feature on this company's affiliate page. Pass null to
+   * clear.
+   */
+  featured_affiliate_product_id?: string | null;
 
   /**
    * The company's logo image. Accepts PNG, JPEG, or GIF format.
