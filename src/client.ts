@@ -235,9 +235,11 @@ import {
 } from './resources/forums';
 import {
   InvoiceCreateParams,
+  InvoiceDeleteResponse,
   InvoiceListParams,
   InvoiceMarkPaidResponse,
   InvoiceMarkUncollectibleResponse,
+  InvoiceUpdateParams,
   InvoiceVoidResponse,
   Invoices,
   TaxIdentifierType,
@@ -321,6 +323,8 @@ import {
   PayoutMethods,
 } from './resources/payout-methods';
 import {
+  CheckoutFont,
+  CheckoutShape,
   PlanCreateParams,
   PlanDeleteResponse,
   PlanListParams,
@@ -1536,10 +1540,12 @@ export declare namespace Whop {
   export {
     Invoices as Invoices,
     type TaxIdentifierType as TaxIdentifierType,
+    type InvoiceDeleteResponse as InvoiceDeleteResponse,
     type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
     type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceUpdateParams as InvoiceUpdateParams,
     type InvoiceListParams as InvoiceListParams,
   };
 
@@ -1616,6 +1622,8 @@ export declare namespace Whop {
 
   export {
     Plans as Plans,
+    type CheckoutFont as CheckoutFont,
+    type CheckoutShape as CheckoutShape,
     type PlanListResponse as PlanListResponse,
     type PlanDeleteResponse as PlanDeleteResponse,
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,

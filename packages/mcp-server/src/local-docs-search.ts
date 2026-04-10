@@ -453,6 +453,89 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'update',
+    endpoint: '/invoices/{id}',
+    httpMethod: 'patch',
+    summary: 'Update invoice',
+    description: "Update a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`",
+    stainlessPath: '(resource) invoices > (method) update',
+    qualified: 'client.invoices.update',
+    params: [
+      'id: string;',
+      'automatically_finalizes_at?: string;',
+      'billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; };',
+      'charge_buyer_fee?: boolean;',
+      "collection_method?: 'send_invoice' | 'charge_automatically';",
+      'customer_name?: string;',
+      'due_date?: string;',
+      'email_address?: string;',
+      'line_items?: { label: string; unit_price: number; quantity?: number; }[];',
+      'mailing_address_id?: string;',
+      'member_id?: string;',
+      'payment_method_id?: string;',
+      "plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; };",
+    ],
+    response:
+      "{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }",
+    markdown:
+      "## update\n\n`client.invoices.update(id: string, automatically_finalizes_at?: string, billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }, charge_buyer_fee?: boolean, collection_method?: 'send_invoice' | 'charge_automatically', customer_name?: string, due_date?: string, email_address?: string, line_items?: { label: string; unit_price: number; quantity?: number; }[], mailing_address_id?: string, member_id?: string, payment_method_id?: string, plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: payment_method_types[]; enabled: payment_method_types[]; include_platform_defaults: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }): { id: string; created_at: string; current_plan: object; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: invoice_status; user: object; }`\n\n**patch** `/invoices/{id}`\n\nUpdate a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n- `automatically_finalizes_at?: string`\n  The date and time when the invoice will be automatically finalized and charged.\n\n- `billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }`\n  Inline billing address to create or update a mailing address for this invoice.\n  - `city?: string`\n    The city of the address.\n  - `country?: string`\n    The country of the address.\n  - `line1?: string`\n    The line 1 of the address.\n  - `line2?: string`\n    The line 2 of the address.\n  - `name?: string`\n    The name of the customer.\n  - `phone?: string`\n    The phone number of the customer.\n  - `postal_code?: string`\n    The postal code of the address.\n  - `state?: string`\n    The state of the address.\n  - `tax_id_type?: string`\n    The type of tax identifier\n  - `tax_id_value?: string`\n    The value of the tax identifier.\n\n- `charge_buyer_fee?: boolean`\n  Whether to charge the customer a buyer fee on this invoice.\n\n- `collection_method?: 'send_invoice' | 'charge_automatically'`\n  The method of collection for an invoice.\n\n- `customer_name?: string`\n  The name of the customer.\n\n- `due_date?: string`\n  The date by which the invoice must be paid.\n\n- `email_address?: string`\n  The email address of the customer.\n\n- `line_items?: { label: string; unit_price: number; quantity?: number; }[]`\n  Line items that break down the invoice total.\n\n- `mailing_address_id?: string`\n  The unique identifier of an existing mailing address to attach.\n\n- `member_id?: string`\n  The unique identifier of a member to assign as the customer.\n\n- `payment_method_id?: string`\n  The unique identifier of the payment method to charge.\n\n- `plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }`\n  Updated plan attributes.\n  - `billing_period?: number`\n    The interval in days at which the plan charges (renewal plans).\n  - `custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]`\n    An array of custom field objects.\n  - `description?: string`\n    The description of the plan.\n  - `expiration_days?: number`\n    The number of days until the membership expires and revokes access (expiration plans). For example, 365 for a one-year access period.\n  - `initial_price?: number`\n    An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `internal_notes?: string`\n    A personal description or notes section for the business.\n  - `legacy_payment_method_controls?: boolean`\n    Whether this plan uses legacy payment method controls\n  - `payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults: boolean; }`\n    The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.\n  - `plan_type?: 'renewal' | 'one_time'`\n    The type of plan that can be attached to a product\n  - `release_method?: 'buy_now' | 'waitlist'`\n    The methods of how a plan can be released.\n  - `renewal_price?: number`\n    The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `stock?: number`\n    The number of units available for purchase.\n  - `trial_period_days?: number`\n    The number of free trial days added before a renewal plan.\n  - `unlimited_stock?: boolean`\n    When true, the plan has unlimited stock (stock field is ignored). When false, purchases are limited by the stock field.\n  - `visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'`\n    Visibility of a resource\n\n### Returns\n\n- `{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }`\n  An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.\n\n  - `id: string`\n  - `created_at: string`\n  - `current_plan: { id: string; currency: string; formatted_price: string; }`\n  - `due_date: string`\n  - `email_address: string`\n  - `fetch_invoice_token: string`\n  - `number: string`\n  - `status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'`\n  - `user: { id: string; name: string; username: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/invoices/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+      python: {
+        method: 'invoices.update',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.update(\n    id="inv_xxxxxxxxxxxxxx",\n)\nprint(invoice.id)',
+      },
+      ruby: {
+        method: 'invoices.update',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.update("inv_xxxxxxxxxxxxxx")\n\nputs(invoice)',
+      },
+      typescript: {
+        method: 'client.invoices.update',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice.id);",
+      },
+    },
+  },
+  {
+    name: 'delete',
+    endpoint: '/invoices/{id}',
+    httpMethod: 'delete',
+    summary: 'Delete invoice',
+    description: 'Delete a draft invoice.\n\nRequired permissions:\n - `invoice:update`',
+    stainlessPath: '(resource) invoices > (method) delete',
+    qualified: 'client.invoices.delete',
+    params: ['id: string;'],
+    response: 'boolean',
+    markdown:
+      "## delete\n\n`client.invoices.delete(id: string): boolean`\n\n**delete** `/invoices/{id}`\n\nDelete a draft invoice.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `boolean`\n  Represents `true` or `false` values.\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.delete('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/invoices/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+      python: {
+        method: 'invoices.delete',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.delete(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(invoice)',
+      },
+      ruby: {
+        method: 'invoices.delete',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.delete("inv_xxxxxxxxxxxxxx")\n\nputs(invoice)',
+      },
+      typescript: {
+        method: 'client.invoices.delete',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst invoice = await client.invoices.delete('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);",
+      },
+    },
+  },
+  {
     name: 'list',
     endpoint: '/course_lesson_interactions',
     httpMethod: 'get',

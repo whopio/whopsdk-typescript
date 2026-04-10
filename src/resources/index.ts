@@ -229,10 +229,12 @@ export {
 export {
   Invoices,
   type TaxIdentifierType,
+  type InvoiceDeleteResponse,
   type InvoiceMarkPaidResponse,
   type InvoiceMarkUncollectibleResponse,
   type InvoiceVoidResponse,
   type InvoiceCreateParams,
+  type InvoiceUpdateParams,
   type InvoiceListParams,
 } from './invoices';
 export {
@@ -315,6 +317,8 @@ export {
 } from './payout-methods';
 export {
   Plans,
+  type CheckoutFont,
+  type CheckoutShape,
   type PlanListResponse,
   type PlanDeleteResponse,
   type PlanCreateParams,

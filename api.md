@@ -80,6 +80,7 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/invoices.ts">TaxIdentifierType</a></code>
+- <code><a href="./src/resources/invoices.ts">InvoiceDeleteResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceMarkPaidResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceMarkUncollectibleResponse</a></code>
 - <code><a href="./src/resources/invoices.ts">InvoiceVoidResponse</a></code>
@@ -88,7 +89,9 @@ Methods:
 
 - <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> Invoice</code>
 - <code title="get /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">retrieve</a>(id) -> Invoice</code>
+- <code title="patch /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">update</a>(id, { ...params }) -> Invoice</code>
 - <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
+- <code title="delete /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">delete</a>(id) -> InvoiceDeleteResponse</code>
 - <code title="post /invoices/{id}/mark_paid">client.invoices.<a href="./src/resources/invoices.ts">markPaid</a>(id) -> InvoiceMarkPaidResponse</code>
 - <code title="post /invoices/{id}/mark_uncollectible">client.invoices.<a href="./src/resources/invoices.ts">markUncollectible</a>(id) -> InvoiceMarkUncollectibleResponse</code>
 - <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>
@@ -186,6 +189,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/plans.ts">CheckoutFont</a></code>
+- <code><a href="./src/resources/plans.ts">CheckoutShape</a></code>
 - <code><a href="./src/resources/plans.ts">PlanListResponse</a></code>
 - <code><a href="./src/resources/plans.ts">PlanDeleteResponse</a></code>
 
