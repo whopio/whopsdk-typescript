@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as PaymentsAPI from './payments';
+import * as PlansAPI from './plans';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -565,7 +566,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different border-radius styles available for checkout pages.
        */
-      border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+      border_style?: PlansAPI.CheckoutShape | null;
 
       /**
        * A hex color code for the button color (e.g. #FF5733).
@@ -575,7 +576,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different font families available for checkout pages.
        */
-      font_family?: 'system' | 'roboto' | 'open_sans' | null;
+      font_family?: PlansAPI.CheckoutFont | null;
     }
 
     /**
@@ -662,7 +663,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different border-radius styles available for checkout pages.
        */
-      border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+      border_style?: PlansAPI.CheckoutShape | null;
 
       /**
        * A hex color code for the button color (e.g. #FF5733).
@@ -672,7 +673,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different font families available for checkout pages.
        */
-      font_family?: 'system' | 'roboto' | 'open_sans' | null;
+      font_family?: PlansAPI.CheckoutFont | null;
     }
 
     /**
@@ -754,7 +755,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different border-radius styles available for checkout pages.
        */
-      border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+      border_style?: PlansAPI.CheckoutShape | null;
 
       /**
        * A hex color code for the button color (e.g. #FF5733).
@@ -764,7 +765,7 @@ export declare namespace CheckoutConfigurationCreateParams {
       /**
        * The different font families available for checkout pages.
        */
-      font_family?: 'system' | 'roboto' | 'open_sans' | null;
+      font_family?: PlansAPI.CheckoutFont | null;
     }
 
     /**

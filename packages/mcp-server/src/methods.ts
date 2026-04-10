@@ -47,10 +47,22 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/invoices/{id}',
   },
   {
+    clientCallName: 'client.invoices.update',
+    fullyQualifiedName: 'invoices.update',
+    httpMethod: 'patch',
+    httpPath: '/invoices/{id}',
+  },
+  {
     clientCallName: 'client.invoices.list',
     fullyQualifiedName: 'invoices.list',
     httpMethod: 'get',
     httpPath: '/invoices',
+  },
+  {
+    clientCallName: 'client.invoices.delete',
+    fullyQualifiedName: 'invoices.delete',
+    httpMethod: 'delete',
+    httpPath: '/invoices/{id}',
   },
   {
     clientCallName: 'client.invoices.markPaid',
