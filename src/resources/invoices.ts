@@ -42,9 +42,38 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:basic:read`
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.retrieve(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Invoice> {
     return this._client.get(path`/invoices/${id}`, options);
+  }
+
+  /**
+   * Update a draft invoice's details.
+   *
+   * Required permissions:
+   *
+   * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.update(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  update(
+    id: string,
+    body: InvoiceUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Invoice> {
+    return this._client.patch(path`/invoices/${id}`, { body, ...options });
   }
 
   /**
@@ -54,6 +83,14 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invoiceListItem of client.invoices.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: InvoiceListParams | null | undefined = {},
@@ -63,11 +100,36 @@ export class Invoices extends APIResource {
   }
 
   /**
+   * Delete a draft invoice.
+   *
+   * Required permissions:
+   *
+   * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.delete(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<InvoiceDeleteResponse> {
+    return this._client.delete(path`/invoices/${id}`, options);
+  }
+
+  /**
    * Mark an open invoice as paid when payment was collected outside of Whop.
    *
    * Required permissions:
    *
    * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const response = await client.invoices.markPaid(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   markPaid(id: string, options?: RequestOptions): APIPromise<InvoiceMarkPaidResponse> {
     return this._client.post(path`/invoices/${id}/mark_paid`, options);
@@ -79,6 +141,13 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const response = await client.invoices.markUncollectible(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   markUncollectible(id: string, options?: RequestOptions): APIPromise<InvoiceMarkUncollectibleResponse> {
     return this._client.post(path`/invoices/${id}/mark_uncollectible`, options);
@@ -91,6 +160,13 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const response = await client.invoices.void(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
    */
   void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse> {
     return this._client.post(path`/invoices/${id}/void`, options);
@@ -212,6 +288,11 @@ export type TaxIdentifierType =
   | 'zw_tin'
   | 'sr_fin'
   | 'xi_vat';
+
+/**
+ * Represents `true` or `false` values.
+ */
+export type InvoiceDeleteResponse = boolean;
 
 /**
  * Represents `true` or `false` values.
@@ -899,6 +980,294 @@ export declare namespace InvoiceCreateParams {
   }
 }
 
+export interface InvoiceUpdateParams {
+  /**
+   * The date and time when the invoice will be automatically finalized and charged.
+   */
+  automatically_finalizes_at?: string | null;
+
+  /**
+   * Inline billing address to create or update a mailing address for this invoice.
+   */
+  billing_address?: InvoiceUpdateParams.BillingAddress | null;
+
+  /**
+   * Whether to charge the customer a buyer fee on this invoice.
+   */
+  charge_buyer_fee?: boolean | null;
+
+  /**
+   * The method of collection for an invoice.
+   */
+  collection_method?: Shared.CollectionMethod | null;
+
+  /**
+   * The name of the customer.
+   */
+  customer_name?: string | null;
+
+  /**
+   * The date by which the invoice must be paid.
+   */
+  due_date?: string | null;
+
+  /**
+   * The email address of the customer.
+   */
+  email_address?: string | null;
+
+  /**
+   * Line items that break down the invoice total.
+   */
+  line_items?: Array<InvoiceUpdateParams.LineItem> | null;
+
+  /**
+   * The unique identifier of an existing mailing address to attach.
+   */
+  mailing_address_id?: string | null;
+
+  /**
+   * The unique identifier of a member to assign as the customer.
+   */
+  member_id?: string | null;
+
+  /**
+   * The unique identifier of the payment method to charge.
+   */
+  payment_method_id?: string | null;
+
+  /**
+   * Updated plan attributes.
+   */
+  plan?: InvoiceUpdateParams.Plan | null;
+}
+
+export namespace InvoiceUpdateParams {
+  /**
+   * Inline billing address to create or update a mailing address for this invoice.
+   */
+  export interface BillingAddress {
+    /**
+     * The city of the address.
+     */
+    city?: string | null;
+
+    /**
+     * The country of the address.
+     */
+    country?: string | null;
+
+    /**
+     * The line 1 of the address.
+     */
+    line1?: string | null;
+
+    /**
+     * The line 2 of the address.
+     */
+    line2?: string | null;
+
+    /**
+     * The name of the customer.
+     */
+    name?: string | null;
+
+    /**
+     * The phone number of the customer.
+     */
+    phone?: string | null;
+
+    /**
+     * The postal code of the address.
+     */
+    postal_code?: string | null;
+
+    /**
+     * The state of the address.
+     */
+    state?: string | null;
+
+    /**
+     * The type of tax identifier
+     */
+    tax_id_type?: InvoicesAPI.TaxIdentifierType | null;
+
+    /**
+     * The value of the tax identifier.
+     */
+    tax_id_value?: string | null;
+  }
+
+  /**
+   * A single line item to include on the invoice, with a label, quantity, and unit
+   * price.
+   */
+  export interface LineItem {
+    /**
+     * The label or description for this line item.
+     */
+    label: string;
+
+    /**
+     * The unit price for this line item. Provided as a number in the specified
+     * currency. Eg: 10.43 for $10.43
+     */
+    unit_price: number;
+
+    /**
+     * The quantity of this line item. Defaults to 1.
+     */
+    quantity?: number | null;
+  }
+
+  /**
+   * Updated plan attributes.
+   */
+  export interface Plan {
+    /**
+     * The interval in days at which the plan charges (renewal plans).
+     */
+    billing_period?: number | null;
+
+    /**
+     * An array of custom field objects.
+     */
+    custom_fields?: Array<Plan.CustomField> | null;
+
+    /**
+     * The description of the plan.
+     */
+    description?: string | null;
+
+    /**
+     * The number of days until the membership expires and revokes access (expiration
+     * plans). For example, 365 for a one-year access period.
+     */
+    expiration_days?: number | null;
+
+    /**
+     * An additional amount charged upon first purchase. Use only if a one time payment
+     * OR you want to charge an additional amount on top of the renewal price. Provided
+     * as a number in the specified currency. Eg: 10.43 for $10.43
+     */
+    initial_price?: number | null;
+
+    /**
+     * A personal description or notes section for the business.
+     */
+    internal_notes?: string | null;
+
+    /**
+     * Whether this plan uses legacy payment method controls
+     */
+    legacy_payment_method_controls?: boolean | null;
+
+    /**
+     * The explicit payment method configuration for the plan. If not provided, the
+     * platform or company's defaults will apply.
+     */
+    payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+    /**
+     * The type of plan that can be attached to a product
+     */
+    plan_type?: Shared.PlanType | null;
+
+    /**
+     * The methods of how a plan can be released.
+     */
+    release_method?: Shared.ReleaseMethod | null;
+
+    /**
+     * The amount the customer is charged every billing period. Use only if a recurring
+     * payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43
+     */
+    renewal_price?: number | null;
+
+    /**
+     * The number of units available for purchase.
+     */
+    stock?: number | null;
+
+    /**
+     * The number of free trial days added before a renewal plan.
+     */
+    trial_period_days?: number | null;
+
+    /**
+     * When true, the plan has unlimited stock (stock field is ignored). When false,
+     * purchases are limited by the stock field.
+     */
+    unlimited_stock?: boolean | null;
+
+    /**
+     * Visibility of a resource
+     */
+    visibility?: Shared.Visibility | null;
+  }
+
+  export namespace Plan {
+    export interface CustomField {
+      /**
+       * The type of the custom field.
+       */
+      field_type: 'text';
+
+      /**
+       * The name of the custom field.
+       */
+      name: string;
+
+      /**
+       * The ID of the custom field (if being updated)
+       */
+      id?: string | null;
+
+      /**
+       * The order of the field.
+       */
+      order?: number | null;
+
+      /**
+       * The placeholder value of the field.
+       */
+      placeholder?: string | null;
+
+      /**
+       * Whether or not the field is required.
+       */
+      required?: boolean | null;
+    }
+
+    /**
+     * The explicit payment method configuration for the plan. If not provided, the
+     * platform or company's defaults will apply.
+     */
+    export interface PaymentMethodConfiguration {
+      /**
+       * An array of payment method identifiers that are explicitly disabled. Only
+       * applies if the include_platform_defaults is true.
+       */
+      disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+      /**
+       * An array of payment method identifiers that are explicitly enabled. This means
+       * these payment methods will be shown on checkout. Example use case is to only
+       * enable a specific payment method like cashapp, or extending the platform
+       * defaults with additional methods.
+       */
+      enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+
+      /**
+       * Whether Whop's platform default payment method enablement settings are included
+       * in this configuration. The full list of default payment methods can be found in
+       * the documentation at docs.whop.com/payments.
+       */
+      include_platform_defaults: boolean;
+    }
+  }
+}
+
 export interface InvoiceListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -960,10 +1329,12 @@ export interface InvoiceListParams extends CursorPageParams {
 export declare namespace Invoices {
   export {
     type TaxIdentifierType as TaxIdentifierType,
+    type InvoiceDeleteResponse as InvoiceDeleteResponse,
     type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
     type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceUpdateParams as InvoiceUpdateParams,
     type InvoiceListParams as InvoiceListParams,
   };
 }

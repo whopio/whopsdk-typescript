@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PlansAPI from './plans';
 import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
@@ -123,6 +124,16 @@ export class Plans extends APIResource {
 }
 
 export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
+
+/**
+ * The different font families available for checkout pages.
+ */
+export type CheckoutFont = 'system' | 'roboto' | 'open_sans';
+
+/**
+ * The different border-radius styles available for checkout pages.
+ */
+export type CheckoutShape = 'rounded' | 'pill' | 'rectangular';
 
 /**
  * A plan defines pricing and billing terms for a checkout. Plans can optionally
@@ -488,7 +499,7 @@ export namespace PlanCreateParams {
     /**
      * The different border-radius styles available for checkout pages.
      */
-    border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+    border_style?: PlansAPI.CheckoutShape | null;
 
     /**
      * A hex color code for the button color (e.g. #FF5733).
@@ -498,7 +509,7 @@ export namespace PlanCreateParams {
     /**
      * The different font families available for checkout pages.
      */
-    font_family?: 'system' | 'roboto' | 'open_sans' | null;
+    font_family?: PlansAPI.CheckoutFont | null;
   }
 
   export interface CustomField {
@@ -697,7 +708,7 @@ export namespace PlanUpdateParams {
     /**
      * The different border-radius styles available for checkout pages.
      */
-    border_style?: 'rounded' | 'pill' | 'rectangular' | null;
+    border_style?: PlansAPI.CheckoutShape | null;
 
     /**
      * A hex color code for the button color (e.g. #FF5733).
@@ -707,7 +718,7 @@ export namespace PlanUpdateParams {
     /**
      * The different font families available for checkout pages.
      */
-    font_family?: 'system' | 'roboto' | 'open_sans' | null;
+    font_family?: PlansAPI.CheckoutFont | null;
   }
 
   export interface CustomField {
@@ -844,6 +855,8 @@ export interface PlanListParams extends CursorPageParams {
 
 export declare namespace Plans {
   export {
+    type CheckoutFont as CheckoutFont,
+    type CheckoutShape as CheckoutShape,
     type PlanListResponse as PlanListResponse,
     type PlanDeleteResponse as PlanDeleteResponse,
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,

@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.37 (2026-04-10)
+
+Full Changelog: [v0.0.36...v0.0.37](https://github.com/whopio/whopsdk-typescript/compare/v0.0.36...v0.0.37)
+
+### Features
+
+* **api:** api update ([8a21bdb](https://github.com/whopio/whopsdk-typescript/commit/8a21bdbf1781f0648dab879d60525264a14cb1f2))
+* **api:** manual updates ([415a345](https://github.com/whopio/whopsdk-typescript/commit/415a34513f334fb848a16c306d48c5806b8ef80e))
+
+
+### Chores
+
+* **internal:** show error causes in MCP servers when running in local mode ([b6e0e4d](https://github.com/whopio/whopsdk-typescript/commit/b6e0e4d1ab23a07baed3f8c738871f29c844836d))
+
 ## 0.0.36 (2026-04-08)
 
 Full Changelog: [v0.0.35...v0.0.36](https://github.com/whopio/whopsdk-typescript/compare/v0.0.35...v0.0.36)

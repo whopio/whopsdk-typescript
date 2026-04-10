@@ -113,10 +113,12 @@ const fuse = new Fuse(
     'client.apps.retrieve',
     'client.apps.update',
     'client.invoices.create',
+    'client.invoices.delete',
     'client.invoices.list',
     'client.invoices.markPaid',
     'client.invoices.markUncollectible',
     'client.invoices.retrieve',
+    'client.invoices.update',
     'client.invoices.void',
     'client.courseLessonInteractions.list',
     'client.courseLessonInteractions.retrieve',
@@ -378,7 +380,8 @@ function makeSdkProxy<T extends object>(obj: T, { path, isBelievedBad = false }:
 
 function parseError(code: string, error: unknown): string | undefined {
   if (!(error instanceof Error)) return;
-  const message = error.name ? `${error.name}: ${error.message}` : error.message;
+  const cause = error.cause instanceof Error ? `: ${error.cause.message}` : '';
+  const message = error.name ? `${error.name}: ${error.message}${cause}` : `${error.message}${cause}`;
   try {
     // Deno uses V8; the first "<anonymous>:LINE:COLUMN" is the top of stack.
     const lineNumber = error.stack?.match(/<anonymous>:([0-9]+):[0-9]+/)?.[1];
