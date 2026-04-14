@@ -94,6 +94,12 @@ export interface CheckoutConfigurationListResponse {
   affiliate_code: string | null;
 
   /**
+   * Whether the checkout configuration allows promo codes. When false, the promo
+   * code input is hidden and promo codes are rejected.
+   */
+  allow_promo_codes: boolean;
+
+  /**
    * The ID of the company to use for the checkout configuration
    */
   company_id: string;
@@ -249,6 +255,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      * An affiliate tracking code to attribute the checkout to a specific affiliate.
      */
     affiliate_code?: string | null;
+
+    /**
+     * Whether the checkout should show the promo code input field and accept promo
+     * codes. Defaults to true.
+     */
+    allow_promo_codes?: boolean | null;
 
     /**
      * Checkout styling overrides for this session. Overrides plan and company
@@ -620,6 +632,12 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
+     * Whether the checkout should show the promo code input field and accept promo
+     * codes. Defaults to true.
+     */
+    allow_promo_codes?: boolean | null;
+
+    /**
      * Checkout styling overrides for this session. Overrides plan and company
      * defaults.
      */
@@ -712,6 +730,12 @@ export declare namespace CheckoutConfigurationCreateParams {
     company_id: string;
 
     mode: 'setup';
+
+    /**
+     * Whether the checkout should show the promo code input field and accept promo
+     * codes. Defaults to true.
+     */
+    allow_promo_codes?: boolean | null;
 
     /**
      * Checkout styling overrides for this session. Overrides plan and company
