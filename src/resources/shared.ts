@@ -462,6 +462,12 @@ export interface CheckoutConfiguration {
   affiliate_code: string | null;
 
   /**
+   * Whether the checkout configuration allows promo codes. When false, the promo
+   * code input is hidden and promo codes are rejected.
+   */
+  allow_promo_codes: boolean;
+
+  /**
    * The ID of the company to use for the checkout configuration
    */
   company_id: string;
