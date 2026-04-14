@@ -82,7 +82,8 @@ export type VerificationStatus =
   | 'resubmission_requested'
   | 'expired'
   | 'abandoned'
-  | 'review';
+  | 'review'
+  | 'action_required';
 
 /**
  * An identity verification session used to confirm a person or entity's identity
