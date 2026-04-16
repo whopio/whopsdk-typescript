@@ -110,6 +110,12 @@ export namespace ForumListResponse {
 
 export interface ForumUpdateParams {
   /**
+   * A list of words that are automatically blocked from posts in this forum. For
+   * example, ['spam', 'scam'].
+   */
+  banned_words?: Array<string> | null;
+
+  /**
    * The banner image displayed at the top of the forum page. Pass null to remove the
    * existing banner.
    */
