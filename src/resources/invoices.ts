@@ -339,9 +339,9 @@ export declare namespace InvoiceCreateParams {
     product: CreateInvoiceInputWithProduct.Product;
 
     /**
-     * The date and time when the invoice will be automatically finalized and charged.
-     * Only valid when collection_method is charge_automatically. If not provided, the
-     * charge will be processed immediately.
+     * The date and time when the invoice will be automatically finalized. For
+     * charge_automatically, triggers an automatic charge. For send_invoice, sends the
+     * invoice email to the customer at the specified time.
      */
     automatically_finalizes_at?: string | null;
 
@@ -409,6 +409,12 @@ export declare namespace InvoiceCreateParams {
      * customer and due date requirements.
      */
     save_as_draft?: boolean | null;
+
+    /**
+     * The date that defines when the subscription billing cycle should start. When set
+     * on a renewal plan invoice, this anchors all future billing periods to this date.
+     */
+    subscription_billing_anchor_at?: string | null;
   }
 
   export namespace CreateInvoiceInputWithProduct {
@@ -679,9 +685,9 @@ export declare namespace InvoiceCreateParams {
     product_id: string;
 
     /**
-     * The date and time when the invoice will be automatically finalized and charged.
-     * Only valid when collection_method is charge_automatically. If not provided, the
-     * charge will be processed immediately.
+     * The date and time when the invoice will be automatically finalized. For
+     * charge_automatically, triggers an automatic charge. For send_invoice, sends the
+     * invoice email to the customer at the specified time.
      */
     automatically_finalizes_at?: string | null;
 
@@ -749,6 +755,12 @@ export declare namespace InvoiceCreateParams {
      * customer and due date requirements.
      */
     save_as_draft?: boolean | null;
+
+    /**
+     * The date that defines when the subscription billing cycle should start. When set
+     * on a renewal plan invoice, this anchors all future billing periods to this date.
+     */
+    subscription_billing_anchor_at?: string | null;
   }
 
   export namespace CreateInvoiceInputWithProductID {
@@ -982,7 +994,9 @@ export declare namespace InvoiceCreateParams {
 
 export interface InvoiceUpdateParams {
   /**
-   * The date and time when the invoice will be automatically finalized and charged.
+   * The date and time when the invoice will be automatically finalized. For
+   * charge_automatically, triggers an automatic charge. For send_invoice, sends the
+   * invoice email at the specified time.
    */
   automatically_finalizes_at?: string | null;
 
@@ -1040,6 +1054,11 @@ export interface InvoiceUpdateParams {
    * Updated plan attributes.
    */
   plan?: InvoiceUpdateParams.Plan | null;
+
+  /**
+   * The date that defines when the subscription billing cycle should start.
+   */
+  subscription_billing_anchor_at?: string | null;
 }
 
 export namespace InvoiceUpdateParams {
