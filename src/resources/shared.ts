@@ -2824,6 +2824,11 @@ export namespace Payment {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * A personal description or notes section for the business.
+     */
+    internal_notes: string | null;
   }
 
   /**
@@ -3013,7 +3018,7 @@ export interface Plan {
   custom_fields: Array<Plan.CustomField>;
 
   /**
-   * A text description of the plan visible to customers. Maximum 500 characters.
+   * A text description of the plan visible to customers. Maximum 1000 characters.
    * Null if no description is set.
    */
   description: string | null;

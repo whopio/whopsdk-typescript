@@ -39,6 +39,7 @@ describe('resource forums', () => {
       client.forums.update(
         'id',
         {
+          banned_words: ['string'],
           banner_image: { id: 'id' },
           email_notification_preference: 'all_admin_posts',
           who_can_comment: 'everyone',

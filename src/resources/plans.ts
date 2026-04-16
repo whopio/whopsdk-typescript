@@ -170,7 +170,7 @@ export interface PlanListResponse {
   currency: Shared.Currency;
 
   /**
-   * A text description of the plan visible to customers. Maximum 500 characters.
+   * A text description of the plan visible to customers. Maximum 1000 characters.
    * Null if no description is set.
    */
   description: string | null;

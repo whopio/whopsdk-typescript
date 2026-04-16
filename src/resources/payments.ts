@@ -784,6 +784,11 @@ export namespace PaymentListResponse {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * A personal description or notes section for the business.
+     */
+    internal_notes: string | null;
   }
 
   /**
