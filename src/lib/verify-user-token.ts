@@ -1,9 +1,26 @@
-import { importJWK, jwtVerify } from 'jose';
+import { createRemoteJWKSet, importJWK, jwtVerify } from 'jose';
 import type { Whop } from '../client';
 
 const USER_TOKEN_HEADER_NAME = 'x-whop-user-token';
-const USER_TOKEN_VERIFICATION_KEY =
-  '{"kty":"EC","x":"rz8a8vxvexHC0TLT91g7llOdDOsNuYiGEfic4Qhni-E","y":"zH0QblKYToexd5PEIMGXPVJS9AB5smKrW4S_TbiXrOs","crv":"P-256"}';
+const DEFAULT_JWKS_URL = 'https://api.whop.com/.well-known/jwks.json';
+
+// Module-level cache: one RemoteJWKSet per URL. jose's remote set handles
+// HTTP caching (respecting the endpoint's Cache-Control), a cooldown to
+// prevent tight-loop refetches on unknown kids, and thread-safe in-flight
+// deduplication. Reusing the same instance across calls is what makes the
+// verify path effectively free after the first lookup.
+const jwksCache = new Map<string, ReturnType<typeof createRemoteJWKSet>>();
+
+function getRemoteJwks(url: string): ReturnType<typeof createRemoteJWKSet> {
+  let existing = jwksCache.get(url);
+  if (existing) return existing;
+  existing = createRemoteJWKSet(new URL(url), {
+    cacheMaxAge: 12 * 60 * 60 * 1000,
+    cooldownDuration: 30_000,
+  });
+  jwksCache.set(url, existing);
+  return existing;
+}
 
 export interface GetUserTokenOptions {
   headerName?: string | null | undefined;
@@ -43,8 +60,16 @@ export interface VerifyUserTokenOptions<DontThrow extends boolean = false> {
   /// This is the app id of your app. You can find it in the app settings dashboard.
   appId: string;
 
-  /// The public key used to verify the user token. You don't need to provide this by default.
+  /// Static JWK (JSON string) used to verify the user token. When set, the
+  /// SDK skips the remote JWKS fetch entirely — useful for self-hosted or
+  /// test setups where you know the signing key. Prefer leaving this unset
+  /// and using `jwksUrl` instead so key rotation is handled automatically.
   publicKey?: string;
+
+  /// URL of a JWKS endpoint to verify the user token against. Defaults to
+  /// Whop's canonical JWKS. Override this when pointing at a local Whop
+  /// backend (for example during local development).
+  jwksUrl?: string;
 
   /// If true, the function will instead return null if the user token is invalid.
   /// Otherwise, it will throw an error. Defaults to `false`, meaning on validation failure, an error will be thrown.
@@ -62,9 +87,9 @@ export function makeUserTokenVerifierFromSdk(client: Whop) {
     if (!client.appID) {
       throw Error('You must set appID in the Whop client constructor if you want to verify user tokens.');
     }
-    const baseOptions: VerifyUserTokenOptions<false> = {
-      appId: client.appID,
-    };
+    const baseOptions: VerifyUserTokenOptions<false> = { appId: client.appID };
+    if (client.userTokenPublicKey) baseOptions.publicKey = client.userTokenPublicKey;
+    if (client.userTokenJwksUrl) baseOptions.jwksUrl = client.userTokenJwksUrl;
     return await internalVerifyUserToken<DT>(tokenOrHeadersOrRequest, {
       ...baseOptions,
       ...options,
@@ -96,15 +121,23 @@ async function internalVerifyUserToken<DontThrow extends boolean = false>(
       );
     }
 
-    const jwkString = options.publicKey ?? USER_TOKEN_VERIFICATION_KEY;
-    const key = await importJWK(JSON.parse(jwkString), 'ES256').catch(() => {
-      throw new Error('Invalid public key provided to verifyUserToken');
-    });
-    const token = await jwtVerify(tokenString, key, {
-      issuer: 'urn:whopcom:exp-proxy',
-    }).catch((_e: any) => {
-      throw new Error('Invalid user token provided to verifyUserToken');
-    });
+    const verifyOptions = { issuer: 'urn:whopcom:exp-proxy', algorithms: ['ES256'] };
+
+    let token;
+    if (options.publicKey) {
+      const key = await importJWK(JSON.parse(options.publicKey), 'ES256').catch(() => {
+        throw new Error('Invalid public key provided to verifyUserToken');
+      });
+      token = await jwtVerify(tokenString, key, verifyOptions).catch(() => {
+        throw new Error('Invalid user token provided to verifyUserToken');
+      });
+    } else {
+      const jwks = getRemoteJwks(options.jwksUrl ?? DEFAULT_JWKS_URL);
+      token = await jwtVerify(tokenString, jwks, verifyOptions).catch(() => {
+        throw new Error('Invalid user token provided to verifyUserToken');
+      });
+    }
+
     if (!(token.payload.sub && token.payload.aud) || Array.isArray(token.payload.aud)) {
       throw new Error('Invalid user token provided to verifyUserToken');
     }
