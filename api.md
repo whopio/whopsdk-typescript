@@ -361,6 +361,7 @@ Types:
 Methods:
 
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id, { ...params }) -> User</code>
+- <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
 - <code title="get /users">client.users.<a href="./src/resources/users.ts">list</a>({ ...params }) -> UserListResponsesCursorPage</code>
 - <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 

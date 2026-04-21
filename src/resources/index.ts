@@ -420,6 +420,7 @@ export {
   type UserListResponse,
   type UserCheckAccessResponse,
   type UserRetrieveParams,
+  type UserUpdateParams,
   type UserListParams,
   type UserCheckAccessParams,
   type UserListResponsesCursorPage,
