@@ -3211,6 +3211,48 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'update',
+    endpoint: '/users/{id}',
+    httpMethod: 'patch',
+    summary: 'Update user',
+    description: "Update a user's profile by their ID.\n\nRequired permissions:\n - `user:profile:update`",
+    stainlessPath: '(resource) users > (method) update',
+    qualified: 'client.users.update',
+    params: [
+      'id: string;',
+      'bio?: string;',
+      'company_id?: string;',
+      'name?: string;',
+      'profile_picture?: { id: string; };',
+      'username?: string;',
+    ],
+    response:
+      '{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }',
+    markdown:
+      "## update\n\n`client.users.update(id: string, bio?: string, company_id?: string, name?: string, profile_picture?: { id: string; }, username?: string): { id: string; bio: string; created_at: string; name: string; profile_picture: object; username: string; }`\n\n**patch** `/users/{id}`\n\nUpdate a user's profile by their ID.\n\nRequired permissions:\n - `user:profile:update`\n\n### Parameters\n\n- `id: string`\n\n- `bio?: string`\n  A short biography displayed on the user's public profile.\n\n- `company_id?: string`\n  When provided, updates the user's profile overrides for this company instead of the global profile. Pass name and profile_picture to set overrides, or null to clear them.\n\n- `name?: string`\n  The user's display name shown on their public profile. Maximum 100 characters.\n\n- `profile_picture?: { id: string; }`\n  The user's profile picture image attachment.\n  - `id: string`\n    The ID of an existing file object.\n\n- `username?: string`\n  The user's unique username. Alphanumeric characters and hyphens only. Maximum 42 characters.\n\n### Returns\n\n- `{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }`\n  A user account on Whop. Contains profile information, identity details, and social connections.\n\n  - `id: string`\n  - `bio: string`\n  - `created_at: string`\n  - `name: string`\n  - `profile_picture: { url: string; }`\n  - `username: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst user = await client.users.update('user_xxxxxxxxxxxxx');\n\nconsole.log(user);\n```",
+    perLanguage: {
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/users/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+      python: {
+        method: 'users.update',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.update(\n    id="user_xxxxxxxxxxxxx",\n)\nprint(user.id)',
+      },
+      ruby: {
+        method: 'users.update',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nuser = whop.users.update("user_xxxxxxxxxxxxx")\n\nputs(user)',
+      },
+      typescript: {
+        method: 'client.users.update',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst user = await client.users.update('user_xxxxxxxxxxxxx');\n\nconsole.log(user.id);",
+      },
+    },
+  },
+  {
     name: 'list',
     endpoint: '/users',
     httpMethod: 'get',
