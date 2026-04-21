@@ -90,6 +90,7 @@ describe('resource invoices', () => {
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       payment_token_id: 'payt_xxxxxxxxxxxxx',
       save_as_draft: true,
+      subscription_billing_anchor_at: '2023-12-01T05:00:00.401Z',
     });
   });
 
@@ -182,6 +183,7 @@ describe('resource invoices', () => {
             unlimited_stock: true,
             visibility: 'visible',
           },
+          subscription_billing_anchor_at: '2023-12-01T05:00:00.401Z',
         },
         { path: '/_stainless_unknown_path' },
       ),

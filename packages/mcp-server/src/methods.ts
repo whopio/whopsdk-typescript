@@ -468,6 +468,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/users/{id}',
   },
   {
+    clientCallName: 'client.users.update',
+    fullyQualifiedName: 'users.update',
+    httpMethod: 'patch',
+    httpPath: '/users/{id}',
+  },
+  {
     clientCallName: 'client.users.list',
     fullyQualifiedName: 'users.list',
     httpMethod: 'get',
@@ -478,12 +484,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'users.checkAccess',
     httpMethod: 'get',
     httpPath: '/users/{id}/access/{resource_id}',
-  },
-  {
-    clientCallName: 'client.users.updateProfile',
-    fullyQualifiedName: 'users.updateProfile',
-    httpMethod: 'patch',
-    httpPath: '/users/me',
   },
   {
     clientCallName: 'client.payments.create',

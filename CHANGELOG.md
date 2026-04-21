@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.0.38 (2026-04-21)
+
+Full Changelog: [v0.0.37...v0.0.38](https://github.com/whopio/whopsdk-typescript/compare/v0.0.37...v0.0.38)
+
+### Features
+
+* **api:** api update ([740ae43](https://github.com/whopio/whopsdk-typescript/commit/740ae43b442a2648bcd335b7105d29ca65c7c294))
+* **api:** api update ([a202830](https://github.com/whopio/whopsdk-typescript/commit/a20283061ae74c423b29aef5f64570b4c6c9cfc7))
+* **api:** api update ([c47b6d2](https://github.com/whopio/whopsdk-typescript/commit/c47b6d2573fbb0183d836774bc0cb5c14489ca7a))
+* **api:** api update ([35b0467](https://github.com/whopio/whopsdk-typescript/commit/35b0467186b6a6fd6c1ef88d4a196e3fbe4ab4dc))
+* **api:** api update ([3e5fdf1](https://github.com/whopio/whopsdk-typescript/commit/3e5fdf1fe33aaaedae1faca69f26b955e47b84a9))
+* **api:** api update ([49b990f](https://github.com/whopio/whopsdk-typescript/commit/49b990fa4edf3a7e78c8d0423ffe0a724ac0966c))
+* **api:** manual updates ([8707a8f](https://github.com/whopio/whopsdk-typescript/commit/8707a8f3af2ef5feadb59389924560a1c8ac4150))
+
+
+### Bug Fixes
+
+* **lib:** verify_user_token uses remote JWKS with module-level caching ([#44](https://github.com/whopio/whopsdk-typescript/issues/44)) ([5cb827f](https://github.com/whopio/whopsdk-typescript/commit/5cb827fee150efef975fea7e39d09c40f80ba3a4))
+
 ## 0.0.37 (2026-04-10)
 
 Full Changelog: [v0.0.36...v0.0.37](https://github.com/whopio/whopsdk-typescript/compare/v0.0.36...v0.0.37)

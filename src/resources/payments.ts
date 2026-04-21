@@ -290,6 +290,7 @@ export type PaymentMethodTypes =
   | 'amazon_pay'
   | 'apple'
   | 'apple_pay'
+  | 'au_bank_transfer'
   | 'au_becs_debit'
   | 'bacs_debit'
   | 'bancolombia'
@@ -311,6 +312,7 @@ export type PaymentMethodTypes =
   | 'eps'
   | 'eu_bank_transfer'
   | 'fpx'
+  | 'gb_bank_transfer'
   | 'giropay'
   | 'google_pay'
   | 'gopay'
@@ -326,6 +328,7 @@ export type PaymentMethodTypes =
   | 'kriya'
   | 'link'
   | 'mb_way'
+  | 'm_pesa'
   | 'mercado_pago'
   | 'mobilepay'
   | 'mondu'
@@ -373,6 +376,7 @@ export type PaymentMethodTypes =
   | 'twint'
   | 'upi'
   | 'us_bank_account'
+  | 'us_bank_transfer'
   | 'venmo'
   | 'vipps'
   | 'wechat_pay'
@@ -784,6 +788,11 @@ export namespace PaymentListResponse {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * A personal description or notes section for the business.
+     */
+    internal_notes: string | null;
   }
 
   /**

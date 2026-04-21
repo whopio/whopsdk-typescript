@@ -428,7 +428,8 @@ import {
   UserListParams,
   UserListResponse,
   UserListResponsesCursorPage,
-  UserUpdateProfileParams,
+  UserRetrieveParams,
+  UserUpdateParams,
   Users,
 } from './resources/users';
 import {
@@ -540,6 +541,19 @@ export interface ClientOptions {
   appID?: string | null | undefined;
 
   /**
+   * Static JWK (JSON string) used by `verifyUserToken` to verify user tokens.
+   * When set, the SDK skips remote JWKS fetching. Prefer `userTokenJwksUrl`
+   * (or the default) so key rotation is handled automatically.
+   */
+  userTokenPublicKey?: string | null | undefined;
+
+  /**
+   * URL of the JWKS endpoint used by `verifyUserToken`. Defaults to the
+   * canonical Whop JWKS. Override when pointing at a non-production backend.
+   */
+  userTokenJwksUrl?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['WHOP_BASE_URL'].
@@ -615,6 +629,8 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
+  userTokenPublicKey: string | null;
+  userTokenJwksUrl: string | null;
   baseURL: string;
   maxRetries: number;
   timeout: number;
@@ -646,6 +662,8 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
+    userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
+    userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -658,6 +676,8 @@ export class Whop {
       apiKey,
       webhookKey,
       appID,
+      userTokenPublicKey,
+      userTokenJwksUrl,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -682,6 +702,8 @@ export class Whop {
     this.apiKey = apiKey;
     this.webhookKey = webhookKey;
     this.appID = appID;
+    this.userTokenPublicKey = userTokenPublicKey;
+    this.userTokenJwksUrl = userTokenJwksUrl;
   }
 
   /**
@@ -700,6 +722,8 @@ export class Whop {
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
       appID: this.appID,
+      userTokenPublicKey: this.userTokenPublicKey,
+      userTokenJwksUrl: this.userTokenJwksUrl,
       ...options,
     });
     return client;
@@ -1737,9 +1761,10 @@ export declare namespace Whop {
     type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UserRetrieveParams as UserRetrieveParams,
+    type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
     type UserCheckAccessParams as UserCheckAccessParams,
-    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 
   export {
