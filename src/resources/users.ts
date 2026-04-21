@@ -14,8 +14,12 @@ export class Users extends APIResource {
   /**
    * Retrieves the details of an existing user.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<User> {
-    return this._client.get(path`/users/${id}`, options);
+  retrieve(
+    id: string,
+    query: UserRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<User> {
+    return this._client.get(path`/users/${id}`, { query, ...options });
   }
 
   /**
@@ -40,20 +44,6 @@ export class Users extends APIResource {
   ): APIPromise<UserCheckAccessResponse> {
     const { id } = params;
     return this._client.get(path`/users/${id}/access/${resourceID}`, options);
-  }
-
-  /**
-   * Update the currently authenticated user's profile.
-   *
-   * Required permissions:
-   *
-   * - `user:profile:update`
-   */
-  updateProfile(
-    body: UserUpdateProfileParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<User> {
-    return this._client.patch('/users/me', { body, ...options });
   }
 }
 
@@ -176,6 +166,14 @@ export interface UserCheckAccessResponse {
   has_access: boolean;
 }
 
+export interface UserRetrieveParams {
+  /**
+   * When provided, returns the user's company-specific profile overrides (name,
+   * profile picture) instead of their global profile.
+   */
+  company_id?: string | null;
+}
+
 export interface UserListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -205,49 +203,14 @@ export interface UserCheckAccessParams {
   id: string;
 }
 
-export interface UserUpdateProfileParams {
-  /**
-   * A short biography displayed on the user's public profile.
-   */
-  bio?: string | null;
-
-  /**
-   * The user's display name shown on their public profile. Maximum 100 characters.
-   */
-  name?: string | null;
-
-  /**
-   * The user's profile picture image attachment.
-   */
-  profile_picture?: UserUpdateProfileParams.ProfilePicture | null;
-
-  /**
-   * The user's unique username. Alphanumeric characters and hyphens only. Maximum 42
-   * characters.
-   */
-  username?: string | null;
-}
-
-export namespace UserUpdateProfileParams {
-  /**
-   * The user's profile picture image attachment.
-   */
-  export interface ProfilePicture {
-    /**
-     * The ID of an existing file object.
-     */
-    id: string;
-  }
-}
-
 export declare namespace Users {
   export {
     type User as User,
     type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UserRetrieveParams as UserRetrieveParams,
     type UserListParams as UserListParams,
     type UserCheckAccessParams as UserCheckAccessParams,
-    type UserUpdateProfileParams as UserUpdateProfileParams,
   };
 }

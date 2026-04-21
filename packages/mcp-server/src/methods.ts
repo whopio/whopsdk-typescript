@@ -480,12 +480,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/users/{id}/access/{resource_id}',
   },
   {
-    clientCallName: 'client.users.updateProfile',
-    fullyQualifiedName: 'users.updateProfile',
-    httpMethod: 'patch',
-    httpPath: '/users/me',
-  },
-  {
     clientCallName: 'client.payments.create',
     fullyQualifiedName: 'payments.create',
     httpMethod: 'post',
