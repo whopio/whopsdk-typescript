@@ -3149,11 +3149,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     description: 'Retrieves the details of an existing user.',
     stainlessPath: '(resource) users > (method) retrieve',
     qualified: 'client.users.retrieve',
-    params: ['id: string;'],
+    params: ['id: string;', 'company_id?: string;'],
     response:
       '{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }',
     markdown:
-      "## retrieve\n\n`client.users.retrieve(id: string): { id: string; bio: string; created_at: string; name: string; profile_picture: object; username: string; }`\n\n**get** `/users/{id}`\n\nRetrieves the details of an existing user.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }`\n  A user account on Whop. Contains profile information, identity details, and social connections.\n\n  - `id: string`\n  - `bio: string`\n  - `created_at: string`\n  - `name: string`\n  - `profile_picture: { url: string; }`\n  - `username: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst user = await client.users.retrieve('user_xxxxxxxxxxxxx');\n\nconsole.log(user);\n```",
+      "## retrieve\n\n`client.users.retrieve(id: string, company_id?: string): { id: string; bio: string; created_at: string; name: string; profile_picture: object; username: string; }`\n\n**get** `/users/{id}`\n\nRetrieves the details of an existing user.\n\n### Parameters\n\n- `id: string`\n\n- `company_id?: string`\n  When provided, returns the user's company-specific profile overrides (name, profile picture) instead of their global profile.\n\n### Returns\n\n- `{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }`\n  A user account on Whop. Contains profile information, identity details, and social connections.\n\n  - `id: string`\n  - `bio: string`\n  - `created_at: string`\n  - `name: string`\n  - `profile_picture: { url: string; }`\n  - `username: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst user = await client.users.retrieve('user_xxxxxxxxxxxxx');\n\nconsole.log(user);\n```",
     perLanguage: {
       http: {
         example:
@@ -3162,7 +3162,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       python: {
         method: 'users.retrieve',
         example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.retrieve(\n    "user_xxxxxxxxxxxxx",\n)\nprint(user.id)',
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.retrieve(\n    id="user_xxxxxxxxxxxxx",\n)\nprint(user.id)',
       },
       ruby: {
         method: 'users.retrieve',
@@ -3207,42 +3207,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.users.checkAccess',
         example:
           "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.users.checkAccess('resource_id', { id: 'user_xxxxxxxxxxxxx' });\n\nconsole.log(response.access_level);",
-      },
-    },
-  },
-  {
-    name: 'update_profile',
-    endpoint: '/users/me',
-    httpMethod: 'patch',
-    summary: 'Update user',
-    description:
-      "Update the currently authenticated user's profile.\n\nRequired permissions:\n - `user:profile:update`",
-    stainlessPath: '(resource) users > (method) update_profile',
-    qualified: 'client.users.updateProfile',
-    params: ['bio?: string;', 'name?: string;', 'profile_picture?: { id: string; };', 'username?: string;'],
-    response:
-      '{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }',
-    markdown:
-      "## update_profile\n\n`client.users.updateProfile(bio?: string, name?: string, profile_picture?: { id: string; }, username?: string): { id: string; bio: string; created_at: string; name: string; profile_picture: object; username: string; }`\n\n**patch** `/users/me`\n\nUpdate the currently authenticated user's profile.\n\nRequired permissions:\n - `user:profile:update`\n\n### Parameters\n\n- `bio?: string`\n  A short biography displayed on the user's public profile.\n\n- `name?: string`\n  The user's display name shown on their public profile. Maximum 100 characters.\n\n- `profile_picture?: { id: string; }`\n  The user's profile picture image attachment.\n  - `id: string`\n    The ID of an existing file object.\n\n- `username?: string`\n  The user's unique username. Alphanumeric characters and hyphens only. Maximum 42 characters.\n\n### Returns\n\n- `{ id: string; bio: string; created_at: string; name: string; profile_picture: { url: string; }; username: string; }`\n  A user account on Whop. Contains profile information, identity details, and social connections.\n\n  - `id: string`\n  - `bio: string`\n  - `created_at: string`\n  - `name: string`\n  - `profile_picture: { url: string; }`\n  - `username: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst user = await client.users.updateProfile();\n\nconsole.log(user);\n```",
-    perLanguage: {
-      http: {
-        example:
-          'curl https://api.whop.com/api/v1/users/me \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'users.update_profile',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.update_profile()\nprint(user.id)',
-      },
-      ruby: {
-        method: 'users.update_profile',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nuser = whop.users.update_profile\n\nputs(user)',
-      },
-      typescript: {
-        method: 'client.users.updateProfile',
-        example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst user = await client.users.updateProfile();\n\nconsole.log(user.id);",
       },
     },
   },

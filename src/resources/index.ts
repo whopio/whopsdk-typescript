@@ -419,9 +419,9 @@ export {
   type User,
   type UserListResponse,
   type UserCheckAccessResponse,
+  type UserRetrieveParams,
   type UserListParams,
   type UserCheckAccessParams,
-  type UserUpdateProfileParams,
   type UserListResponsesCursorPage,
 } from './users';
 export {
