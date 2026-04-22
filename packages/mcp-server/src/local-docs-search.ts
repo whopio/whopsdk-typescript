@@ -3567,19 +3567,20 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) support_channels > (method) list',
     qualified: 'client.supportChannels.list',
     params: [
-      'company_id: string;',
       'after?: string;',
       'before?: string;',
+      'company_id?: string;',
       "direction?: 'asc' | 'desc';",
       'first?: number;',
       'last?: number;',
       'open?: boolean;',
       "order?: 'created_at' | 'last_post_sent_at';",
+      "view?: 'all' | 'admin' | 'customer';",
     ],
     response:
       '{ id: string; company_id: string; custom_name: string; customer_user: { id: string; name: string; username: string; }; last_message_at: string; resolved_at: string; }',
     markdown:
-      "## list\n\n`client.supportChannels.list(company_id: string, after?: string, before?: string, direction?: 'asc' | 'desc', first?: number, last?: number, open?: boolean, order?: 'created_at' | 'last_post_sent_at'): { id: string; company_id: string; custom_name: string; customer_user: object; last_message_at: string; resolved_at: string; }`\n\n**get** `/support_channels`\n\nReturns a paginated list of support channels for a specific company, with optional filtering by resolution status and custom sorting.\n\nRequired permissions:\n - `support_chat:read`\n\n### Parameters\n\n- `company_id: string`\n  The unique identifier of the company to list support channels for.\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `direction?: 'asc' | 'desc'`\n  The direction of the sort.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `open?: boolean`\n  Whether to filter by open or resolved support channels. Set to true to only return channels awaiting a response, or false for resolved channels.\n\n- `order?: 'created_at' | 'last_post_sent_at'`\n  Sort options for message channels\n\n### Returns\n\n- `{ id: string; company_id: string; custom_name: string; customer_user: { id: string; name: string; username: string; }; last_message_at: string; resolved_at: string; }`\n  A messaging channel that can be a one-on-one DM, group chat, company support conversation, or platform-level direct message.\n\n  - `id: string`\n  - `company_id: string`\n  - `custom_name: string`\n  - `customer_user: { id: string; name: string; username: string; }`\n  - `last_message_at: string`\n  - `resolved_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const supportChannelListResponse of client.supportChannels.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {\n  console.log(supportChannelListResponse);\n}\n```",
+      "## list\n\n`client.supportChannels.list(after?: string, before?: string, company_id?: string, direction?: 'asc' | 'desc', first?: number, last?: number, open?: boolean, order?: 'created_at' | 'last_post_sent_at', view?: 'all' | 'admin' | 'customer'): { id: string; company_id: string; custom_name: string; customer_user: object; last_message_at: string; resolved_at: string; }`\n\n**get** `/support_channels`\n\nReturns a paginated list of support channels for a specific company, with optional filtering by resolution status and custom sorting.\n\nRequired permissions:\n - `support_chat:read`\n\n### Parameters\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `company_id?: string`\n  The unique identifier of the company to list support channels for. When omitted, returns support channels across all companies the user has access to.\n\n- `direction?: 'asc' | 'desc'`\n  The direction of the sort.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `open?: boolean`\n  Whether to filter by open or resolved support channels. Set to true to only return channels awaiting a response, or false for resolved channels.\n\n- `order?: 'created_at' | 'last_post_sent_at'`\n  Sort options for message channels\n\n- `view?: 'all' | 'admin' | 'customer'`\n  The perspective to filter support channels by.\n\n### Returns\n\n- `{ id: string; company_id: string; custom_name: string; customer_user: { id: string; name: string; username: string; }; last_message_at: string; resolved_at: string; }`\n  A messaging channel that can be a one-on-one DM, group chat, company support conversation, or platform-level direct message.\n\n  - `id: string`\n  - `company_id: string`\n  - `custom_name: string`\n  - `customer_user: { id: string; name: string; username: string; }`\n  - `last_message_at: string`\n  - `resolved_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const supportChannelListResponse of client.supportChannels.list()) {\n  console.log(supportChannelListResponse);\n}\n```",
     perLanguage: {
       http: {
         example:
@@ -3588,17 +3589,17 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       python: {
         method: 'support_channels.list',
         example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.support_channels.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.support_channels.list()\npage = page.data[0]\nprint(page.id)',
       },
       ruby: {
         method: 'support_channels.list',
         example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.support_channels.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.support_channels.list\n\nputs(page)',
       },
       typescript: {
         method: 'client.supportChannels.list',
         example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const supportChannelListResponse of client.supportChannels.list({\n  company_id: 'biz_xxxxxxxxxxxxxx',\n})) {\n  console.log(supportChannelListResponse.id);\n}",
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const supportChannelListResponse of client.supportChannels.list()) {\n  console.log(supportChannelListResponse.id);\n}",
       },
     },
   },
