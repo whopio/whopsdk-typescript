@@ -438,6 +438,12 @@ export interface PaymentListResponse {
   card_last4: string | null;
 
   /**
+   * The ID of the checkout session/configuration that produced this payment, if any.
+   * Use this to map payments back to the checkout configuration that created them.
+   */
+  checkout_configuration_id: string | null;
+
+  /**
    * The company for the payment.
    */
   company: PaymentListResponse.Company | null;
