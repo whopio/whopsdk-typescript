@@ -59,15 +59,13 @@ export class SupportChannels extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const supportChannelListResponse of client.supportChannels.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
+   * for await (const supportChannelListResponse of client.supportChannels.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: SupportChannelListParams,
+    query: SupportChannelListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<SupportChannelListResponsesCursorPage, SupportChannelListResponse> {
     return this._client.getAPIList('/support_channels', CursorPage<SupportChannelListResponse>, {
@@ -163,14 +161,15 @@ export interface SupportChannelCreateParams {
 
 export interface SupportChannelListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list support channels for.
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The unique identifier of the company to list support channels for. When omitted,
+   * returns support channels across all companies the user has access to.
+   */
+  company_id?: string | null;
 
   /**
    * The direction of the sort.
@@ -197,6 +196,11 @@ export interface SupportChannelListParams extends CursorPageParams {
    * Sort options for message channels
    */
   order?: 'created_at' | 'last_post_sent_at' | null;
+
+  /**
+   * The perspective to filter support channels by.
+   */
+  view?: 'all' | 'admin' | 'customer' | null;
 }
 
 export declare namespace SupportChannels {
