@@ -496,7 +496,7 @@ export declare namespace CheckoutConfigurationCreateParams {
          * in this configuration. The full list of default payment methods can be found in
          * the documentation at docs.whop.com/payments.
          */
-        include_platform_defaults: boolean;
+        include_platform_defaults?: boolean | null;
       }
 
       /**
@@ -615,7 +615,7 @@ export declare namespace CheckoutConfigurationCreateParams {
        * in this configuration. The full list of default payment methods can be found in
        * the documentation at docs.whop.com/payments.
        */
-      include_platform_defaults: boolean;
+      include_platform_defaults?: boolean | null;
     }
   }
 
@@ -718,7 +718,7 @@ export declare namespace CheckoutConfigurationCreateParams {
        * in this configuration. The full list of default payment methods can be found in
        * the documentation at docs.whop.com/payments.
        */
-      include_platform_defaults: boolean;
+      include_platform_defaults?: boolean | null;
     }
   }
 
@@ -816,7 +816,7 @@ export declare namespace CheckoutConfigurationCreateParams {
        * in this configuration. The full list of default payment methods can be found in
        * the documentation at docs.whop.com/payments.
        */
-      include_platform_defaults: boolean;
+      include_platform_defaults?: boolean | null;
     }
   }
 }
