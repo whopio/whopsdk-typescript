@@ -36,21 +36,14 @@ export class AIChats extends APIResource {
    *
    * - `ai_chat:update`
    */
-  update(
-    id: string,
-    body: AIChatUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AIChat> {
+  update(id: string, body: AIChatUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AIChat> {
     return this._client.patch(path`/ai_chats/${id}`, { body, ...options });
   }
 
   /**
    * Returns a paginated list of AI chat threads for the current authenticated user.
    */
-  list(
-    query: AIChatListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AIChatListResponsesCursorPage, AIChatListResponse> {
+  list(query: AIChatListParams | null | undefined = {}, options?: RequestOptions): PagePromise<AIChatListResponsesCursorPage, AIChatListResponse> {
     return this._client.getAPIList('/ai_chats', CursorPage<AIChatListResponse>, { query, ...options });
   }
 
@@ -66,7 +59,7 @@ export class AIChats extends APIResource {
   }
 }
 
-export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>;
+export type AIChatListResponsesCursorPage = CursorPage<AIChatListResponse>
 
 /**
  * An AI-powered chat conversation belonging to a user, with optional scheduled
@@ -137,7 +130,7 @@ export namespace AIChat {
 /**
  * The notification preference for an AI chat
  */
-export type NotificationPreferences = 'all' | 'none';
+export type NotificationPreferences = 'all' | 'none'
 
 /**
  * An AI-powered chat conversation belonging to a user, with optional scheduled
@@ -208,7 +201,7 @@ export namespace AIChatListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type AIChatDeleteResponse = boolean;
+export type AIChatDeleteResponse = boolean
 
 export interface AIChatCreateParams {
   /**
@@ -306,6 +299,6 @@ export declare namespace AIChats {
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
     type AIChatCreateParams as AIChatCreateParams,
     type AIChatUpdateParams as AIChatUpdateParams,
-    type AIChatListParams as AIChatListParams,
+    type AIChatListParams as AIChatListParams
   };
 }

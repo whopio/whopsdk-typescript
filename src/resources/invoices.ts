@@ -68,11 +68,7 @@ export class Invoices extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: InvoiceUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Invoice> {
+  update(id: string, body: InvoiceUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Invoice> {
     return this._client.patch(path`/invoices/${id}`, { body, ...options });
   }
 
@@ -92,10 +88,7 @@ export class Invoices extends APIResource {
    * }
    * ```
    */
-  list(
-    query: InvoiceListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
+  list(query: InvoiceListParams | null | undefined = {}, options?: RequestOptions): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
     return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem>, { query, ...options });
   }
 
@@ -176,142 +169,29 @@ export class Invoices extends APIResource {
 /**
  * The type of tax identifier
  */
-export type TaxIdentifierType =
-  | 'ad_nrt'
-  | 'ao_tin'
-  | 'ar_cuit'
-  | 'am_tin'
-  | 'aw_tin'
-  | 'au_abn'
-  | 'au_arn'
-  | 'eu_vat'
-  | 'az_tin'
-  | 'bs_tin'
-  | 'bh_vat'
-  | 'bd_bin'
-  | 'bb_tin'
-  | 'by_tin'
-  | 'bj_ifu'
-  | 'bo_tin'
-  | 'ba_tin'
-  | 'br_cnpj'
-  | 'br_cpf'
-  | 'bg_uic'
-  | 'bf_ifu'
-  | 'kh_tin'
-  | 'cm_niu'
-  | 'ca_bn'
-  | 'ca_gst_hst'
-  | 'ca_pst_bc'
-  | 'ca_pst_mb'
-  | 'ca_pst_sk'
-  | 'ca_qst'
-  | 'cv_nif'
-  | 'cl_tin'
-  | 'cn_tin'
-  | 'co_nit'
-  | 'cd_nif'
-  | 'cr_tin'
-  | 'hr_oib'
-  | 'do_rcn'
-  | 'ec_ruc'
-  | 'eg_tin'
-  | 'sv_nit'
-  | 'et_tin'
-  | 'eu_oss_vat'
-  | 'ge_vat'
-  | 'de_stn'
-  | 'gb_vat'
-  | 'gn_nif'
-  | 'hk_br'
-  | 'hu_tin'
-  | 'is_vat'
-  | 'in_gst'
-  | 'id_npwp'
-  | 'il_vat'
-  | 'jp_cn'
-  | 'jp_rn'
-  | 'jp_trn'
-  | 'kz_bin'
-  | 'ke_pin'
-  | 'kg_tin'
-  | 'la_tin'
-  | 'li_uid'
-  | 'li_vat'
-  | 'my_frp'
-  | 'my_itn'
-  | 'my_sst'
-  | 'mr_nif'
-  | 'mx_rfc'
-  | 'md_vat'
-  | 'me_pib'
-  | 'ma_vat'
-  | 'np_pan'
-  | 'nz_gst'
-  | 'ng_tin'
-  | 'mk_vat'
-  | 'no_vat'
-  | 'no_voec'
-  | 'om_vat'
-  | 'pe_ruc'
-  | 'ph_tin'
-  | 'pl_nip'
-  | 'ro_tin'
-  | 'ru_inn'
-  | 'ru_kpp'
-  | 'sa_vat'
-  | 'sn_ninea'
-  | 'rs_pib'
-  | 'sg_gst'
-  | 'sg_uen'
-  | 'si_tin'
-  | 'za_vat'
-  | 'kr_brn'
-  | 'es_cif'
-  | 'ch_uid'
-  | 'ch_vat'
-  | 'tw_vat'
-  | 'tj_tin'
-  | 'tz_vat'
-  | 'th_vat'
-  | 'tr_tin'
-  | 'ug_tin'
-  | 'ua_vat'
-  | 'ae_trn'
-  | 'us_ein'
-  | 'uy_ruc'
-  | 'uz_tin'
-  | 'uz_vat'
-  | 've_rif'
-  | 'vn_tin'
-  | 'zm_tin'
-  | 'zw_tin'
-  | 'sr_fin'
-  | 'xi_vat';
+export type TaxIdentifierType = 'ad_nrt' | 'ao_tin' | 'ar_cuit' | 'am_tin' | 'aw_tin' | 'au_abn' | 'au_arn' | 'eu_vat' | 'az_tin' | 'bs_tin' | 'bh_vat' | 'bd_bin' | 'bb_tin' | 'by_tin' | 'bj_ifu' | 'bo_tin' | 'ba_tin' | 'br_cnpj' | 'br_cpf' | 'bg_uic' | 'bf_ifu' | 'kh_tin' | 'cm_niu' | 'ca_bn' | 'ca_gst_hst' | 'ca_pst_bc' | 'ca_pst_mb' | 'ca_pst_sk' | 'ca_qst' | 'cv_nif' | 'cl_tin' | 'cn_tin' | 'co_nit' | 'cd_nif' | 'cr_tin' | 'hr_oib' | 'do_rcn' | 'ec_ruc' | 'eg_tin' | 'sv_nit' | 'et_tin' | 'eu_oss_vat' | 'ge_vat' | 'de_stn' | 'gb_vat' | 'gn_nif' | 'hk_br' | 'hu_tin' | 'is_vat' | 'in_gst' | 'id_npwp' | 'il_vat' | 'jp_cn' | 'jp_rn' | 'jp_trn' | 'kz_bin' | 'ke_pin' | 'kg_tin' | 'la_tin' | 'li_uid' | 'li_vat' | 'my_frp' | 'my_itn' | 'my_sst' | 'mr_nif' | 'mx_rfc' | 'md_vat' | 'me_pib' | 'ma_vat' | 'np_pan' | 'nz_gst' | 'ng_tin' | 'mk_vat' | 'no_vat' | 'no_voec' | 'om_vat' | 'pe_ruc' | 'ph_tin' | 'pl_nip' | 'ro_tin' | 'ru_inn' | 'ru_kpp' | 'sa_vat' | 'sn_ninea' | 'rs_pib' | 'sg_gst' | 'sg_uen' | 'si_tin' | 'za_vat' | 'kr_brn' | 'es_cif' | 'ch_uid' | 'ch_vat' | 'tw_vat' | 'tj_tin' | 'tz_vat' | 'th_vat' | 'tr_tin' | 'ug_tin' | 'ua_vat' | 'ae_trn' | 'us_ein' | 'uy_ruc' | 'uz_tin' | 'uz_vat' | 've_rif' | 'vn_tin' | 'zm_tin' | 'zw_tin' | 'sr_fin' | 'xi_vat'
 
 /**
  * Represents `true` or `false` values.
  */
-export type InvoiceDeleteResponse = boolean;
+export type InvoiceDeleteResponse = boolean
 
 /**
  * Represents `true` or `false` values.
  */
-export type InvoiceMarkPaidResponse = boolean;
+export type InvoiceMarkPaidResponse = boolean
 
 /**
  * Represents `true` or `false` values.
  */
-export type InvoiceMarkUncollectibleResponse = boolean;
+export type InvoiceMarkUncollectibleResponse = boolean
 
 /**
  * Represents `true` or `false` values.
  */
-export type InvoiceVoidResponse = boolean;
+export type InvoiceVoidResponse = boolean
 
-export type InvoiceCreateParams =
-  | InvoiceCreateParams.CreateInvoiceInputWithProduct
-  | InvoiceCreateParams.CreateInvoiceInputWithProductID;
+export type InvoiceCreateParams = InvoiceCreateParams.CreateInvoiceInputWithProduct | InvoiceCreateParams.CreateInvoiceInputWithProductID
 
 export declare namespace InvoiceCreateParams {
   export interface CreateInvoiceInputWithProduct {
@@ -1354,8 +1234,8 @@ export declare namespace Invoices {
     type InvoiceVoidResponse as InvoiceVoidResponse,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceUpdateParams as InvoiceUpdateParams,
-    type InvoiceListParams as InvoiceListParams,
+    type InvoiceListParams as InvoiceListParams
   };
 }
 
-export { type InvoiceListItemsCursorPage };
+export { type InvoiceListItemsCursorPage }

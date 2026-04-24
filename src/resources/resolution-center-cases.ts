@@ -30,66 +30,37 @@ export class ResolutionCenterCases extends APIResource {
    *
    * - `payment:resolution_center_case:read`
    */
-  list(
-    query: ResolutionCenterCaseListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<ResolutionCenterCaseListResponsesCursorPage, ResolutionCenterCaseListResponse> {
-    return this._client.getAPIList('/resolution_center_cases', CursorPage<ResolutionCenterCaseListResponse>, {
-      query,
-      ...options,
-    });
+  list(query: ResolutionCenterCaseListParams | null | undefined = {}, options?: RequestOptions): PagePromise<ResolutionCenterCaseListResponsesCursorPage, ResolutionCenterCaseListResponse> {
+    return this._client.getAPIList('/resolution_center_cases', CursorPage<ResolutionCenterCaseListResponse>, { query, ...options });
   }
 }
 
-export type ResolutionCenterCaseListResponsesCursorPage = CursorPage<ResolutionCenterCaseListResponse>;
+export type ResolutionCenterCaseListResponsesCursorPage = CursorPage<ResolutionCenterCaseListResponse>
 
 /**
  * The types of responses a customer can make to a resolution.
  */
-export type ResolutionCenterCaseCustomerResponse = 'respond' | 'appeal' | 'withdraw';
+export type ResolutionCenterCaseCustomerResponse = 'respond' | 'appeal' | 'withdraw'
 
 /**
  * The different types of issues a resolution can be
  */
-export type ResolutionCenterCaseIssueType =
-  | 'forgot_to_cancel'
-  | 'item_not_received'
-  | 'significantly_not_as_described'
-  | 'unauthorized_transaction'
-  | 'product_unacceptable';
+export type ResolutionCenterCaseIssueType = 'forgot_to_cancel' | 'item_not_received' | 'significantly_not_as_described' | 'unauthorized_transaction' | 'product_unacceptable'
 
 /**
  * The types of responses a merchant can make to a resolution.
  */
-export type ResolutionCenterCaseMerchantResponse =
-  | 'accept'
-  | 'deny'
-  | 'request_more_info'
-  | 'appeal'
-  | 'respond';
+export type ResolutionCenterCaseMerchantResponse = 'accept' | 'deny' | 'request_more_info' | 'appeal' | 'respond'
 
 /**
  * The types of responses the platform can make to a resolution.
  */
-export type ResolutionCenterCasePlatformResponse =
-  | 'request_buyer_info'
-  | 'request_merchant_info'
-  | 'merchant_wins'
-  | 'platform_refund'
-  | 'merchant_refund';
+export type ResolutionCenterCasePlatformResponse = 'request_buyer_info' | 'request_merchant_info' | 'merchant_wins' | 'platform_refund' | 'merchant_refund'
 
 /**
  * The statuses a resolution object can have
  */
-export type ResolutionCenterCaseStatus =
-  | 'merchant_response_needed'
-  | 'customer_response_needed'
-  | 'merchant_info_needed'
-  | 'customer_info_needed'
-  | 'under_platform_review'
-  | 'customer_won'
-  | 'merchant_won'
-  | 'customer_withdrew';
+export type ResolutionCenterCaseStatus = 'merchant_response_needed' | 'customer_response_needed' | 'merchant_info_needed' | 'customer_info_needed' | 'under_platform_review' | 'customer_won' | 'merchant_won' | 'customer_withdrew'
 
 /**
  * A resolution center case is a dispute or support case between a user and a
@@ -262,18 +233,7 @@ export namespace ResolutionCenterCaseRetrieveResponse {
     /**
      * The type of action recorded in this event.
      */
-    action:
-      | 'created'
-      | 'responded'
-      | 'accepted'
-      | 'denied'
-      | 'appealed'
-      | 'withdrew'
-      | 'requested_more_info'
-      | 'escalated'
-      | 'dispute_opened'
-      | 'dispute_customer_won'
-      | 'dispute_merchant_won';
+    action: 'created' | 'responded' | 'accepted' | 'denied' | 'appealed' | 'withdrew' | 'requested_more_info' | 'escalated' | 'dispute_opened' | 'dispute_customer_won' | 'dispute_merchant_won';
 
     /**
      * The datetime the resolution event was created.
@@ -487,6 +447,6 @@ export declare namespace ResolutionCenterCases {
     type ResolutionCenterCaseRetrieveResponse as ResolutionCenterCaseRetrieveResponse,
     type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
     type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
-    type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams,
+    type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams
   };
 }

@@ -43,10 +43,7 @@ export class Disputes extends APIResource {
    * - `company:basic:read`
    * - `payment:basic:read`
    */
-  list(
-    query: DisputeListParams,
-    options?: RequestOptions,
-  ): PagePromise<DisputeListResponsesCursorPage, DisputeListResponse> {
+  list(query: DisputeListParams, options?: RequestOptions): PagePromise<DisputeListResponsesCursorPage, DisputeListResponse> {
     return this._client.getAPIList('/disputes', CursorPage<DisputeListResponse>, { query, ...options });
   }
 
@@ -83,16 +80,12 @@ export class Disputes extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    */
-  updateEvidence(
-    id: string,
-    body: DisputeUpdateEvidenceParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Dispute> {
+  updateEvidence(id: string, body: DisputeUpdateEvidenceParams | null | undefined = {}, options?: RequestOptions): APIPromise<Dispute> {
     return this._client.post(path`/disputes/${id}/update_evidence`, { body, ...options });
   }
 }
 
-export type DisputeListResponsesCursorPage = CursorPage<DisputeListResponse>;
+export type DisputeListResponsesCursorPage = CursorPage<DisputeListResponse>
 
 /**
  * A dispute is a chargeback or payment challenge filed against a company,
@@ -566,16 +559,7 @@ export namespace Dispute {
 /**
  * The possible statuses of a dispute
  */
-export type DisputeStatuses =
-  | 'warning_needs_response'
-  | 'warning_under_review'
-  | 'warning_closed'
-  | 'needs_response'
-  | 'under_review'
-  | 'won'
-  | 'lost'
-  | 'closed'
-  | 'other';
+export type DisputeStatuses = 'warning_needs_response' | 'warning_under_review' | 'warning_closed' | 'needs_response' | 'under_review' | 'won' | 'lost' | 'closed' | 'other'
 
 /**
  * A dispute is a chargeback or payment challenge filed against a company,
@@ -869,6 +853,6 @@ export declare namespace Disputes {
     type DisputeListResponse as DisputeListResponse,
     type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
     type DisputeListParams as DisputeListParams,
-    type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
+    type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams
   };
 }

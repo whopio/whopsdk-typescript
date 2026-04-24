@@ -2,10 +2,7 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource leads', () => {
   // Mock server tests are disabled
@@ -23,12 +20,12 @@ describe('resource leads', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.leads.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      metadata: { foo: 'bar' },
-      product_id: 'prod_xxxxxxxxxxxxx',
-      referrer: 'referrer',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    metadata: { foo: 'bar' },
+    product_id: 'prod_xxxxxxxxxxxxx',
+    referrer: 'referrer',
+    user_id: 'user_xxxxxxxxxxxxx',
+  });
   });
 
   // Mock server tests are disabled
@@ -58,16 +55,12 @@ describe('resource leads', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.leads.update(
-        'lead_xxxxxxxxxxxxx',
-        {
-          metadata: { foo: 'bar' },
-          referrer: 'referrer',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.leads.update('lead_xxxxxxxxxxxxx', {
+    metadata: { foo: 'bar' },
+    referrer: 'referrer',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -85,14 +78,14 @@ describe('resource leads', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.leads.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      first: 42,
-      last: 42,
-      product_ids: ['string'],
-    });
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    after: 'after',
+    before: 'before',
+    created_after: '2023-12-01T05:00:00.401Z',
+    created_before: '2023-12-01T05:00:00.401Z',
+    first: 42,
+    last: 42,
+    product_ids: ['string'],
+  });
   });
 });

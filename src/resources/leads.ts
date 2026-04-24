@@ -70,11 +70,7 @@ export class Leads extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: LeadUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Lead> {
+  update(id: string, body: LeadUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Lead> {
     return this._client.patch(path`/leads/${id}`, { body, ...options });
   }
 
@@ -99,15 +95,12 @@ export class Leads extends APIResource {
    * }
    * ```
    */
-  list(
-    query: LeadListParams,
-    options?: RequestOptions,
-  ): PagePromise<LeadListResponsesCursorPage, LeadListResponse> {
+  list(query: LeadListParams, options?: RequestOptions): PagePromise<LeadListResponsesCursorPage, LeadListResponse> {
     return this._client.getAPIList('/leads', CursorPage<LeadListResponse>, { query, ...options });
   }
 }
 
-export type LeadListResponsesCursorPage = CursorPage<LeadListResponse>;
+export type LeadListResponsesCursorPage = CursorPage<LeadListResponse>
 
 /**
  * A prospective customer who has expressed interest in a company or product but
@@ -407,6 +400,6 @@ export declare namespace Leads {
     type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
     type LeadCreateParams as LeadCreateParams,
     type LeadUpdateParams as LeadUpdateParams,
-    type LeadListParams as LeadListParams,
+    type LeadListParams as LeadListParams
   };
 }

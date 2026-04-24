@@ -59,11 +59,7 @@ export class DmMembers extends APIResource {
    * const dmMember = await client.dmMembers.update('id');
    * ```
    */
-  update(
-    id: string,
-    body: DmMemberUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DmMember> {
+  update(id: string, body: DmMemberUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<DmMember> {
     return this._client.patch(path`/dm_members/${id}`, { body, ...options });
   }
 
@@ -85,10 +81,7 @@ export class DmMembers extends APIResource {
    * }
    * ```
    */
-  list(
-    query: DmMemberListParams,
-    options?: RequestOptions,
-  ): PagePromise<DmMemberListResponsesCursorPage, DmMemberListResponse> {
+  list(query: DmMemberListParams, options?: RequestOptions): PagePromise<DmMemberListResponsesCursorPage, DmMemberListResponse> {
     return this._client.getAPIList('/dm_members', CursorPage<DmMemberListResponse>, { query, ...options });
   }
 
@@ -110,17 +103,17 @@ export class DmMembers extends APIResource {
   }
 }
 
-export type DmMemberListResponsesCursorPage = CursorPage<DmMemberListResponse>;
+export type DmMemberListResponsesCursorPage = CursorPage<DmMemberListResponse>
 
 /**
  * The notification preferences for a DMs feed member
  */
-export type DmFeedMemberNotificationPreferences = 'all' | 'mentions' | 'none';
+export type DmFeedMemberNotificationPreferences = 'all' | 'mentions' | 'none'
 
 /**
  * The statuses of a DMs feed member
  */
-export type DmFeedMemberStatuses = 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived';
+export type DmFeedMemberStatuses = 'requested' | 'accepted' | 'hidden' | 'closed' | 'archived'
 
 /**
  * A user's membership record in a messaging channel, including notification
@@ -196,7 +189,7 @@ export interface DmMemberListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type DmMemberDeleteResponse = boolean;
+export type DmMemberDeleteResponse = boolean
 
 export interface DmMemberCreateParams {
   /**
@@ -255,6 +248,6 @@ export declare namespace DmMembers {
     type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
     type DmMemberCreateParams as DmMemberCreateParams,
     type DmMemberUpdateParams as DmMemberUpdateParams,
-    type DmMemberListParams as DmMemberListParams,
+    type DmMemberListParams as DmMemberListParams
   };
 }

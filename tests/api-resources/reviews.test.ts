@@ -2,10 +2,7 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource reviews', () => {
   // Mock server tests are disabled
@@ -35,15 +32,15 @@ describe('resource reviews', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.reviews.list({
-      product_id: 'prod_xxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      first: 42,
-      last: 42,
-      max_stars: 42,
-      min_stars: 42,
-    });
+    product_id: 'prod_xxxxxxxxxxxxx',
+    after: 'after',
+    before: 'before',
+    created_after: '2023-12-01T05:00:00.401Z',
+    created_before: '2023-12-01T05:00:00.401Z',
+    first: 42,
+    last: 42,
+    max_stars: 42,
+    min_stars: 42,
+  });
   });
 });
