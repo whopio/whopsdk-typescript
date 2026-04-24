@@ -26,13 +26,7 @@ export class PayoutAccounts extends APIResource {
  * The granular calculated statuses reflecting payout account KYC and withdrawal
  * readiness.
  */
-export type PayoutAccountCalculatedStatuses =
-  | 'connected'
-  | 'disabled'
-  | 'action_required'
-  | 'pending_verification'
-  | 'verification_failed'
-  | 'not_started';
+export type PayoutAccountCalculatedStatuses = 'connected' | 'disabled' | 'action_required' | 'pending_verification' | 'verification_failed' | 'not_started'
 
 /**
  * An object representing an account used for payouts.
@@ -172,6 +166,6 @@ export namespace PayoutAccountRetrieveResponse {
 export declare namespace PayoutAccounts {
   export {
     type PayoutAccountCalculatedStatuses as PayoutAccountCalculatedStatuses,
-    type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse,
+    type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse
   };
 }

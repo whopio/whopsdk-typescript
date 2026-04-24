@@ -32,10 +32,7 @@ export class CheckoutConfigurations extends APIResource {
    *   });
    * ```
    */
-  create(
-    body: CheckoutConfigurationCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<Shared.CheckoutConfiguration> {
+  create(body: CheckoutConfigurationCreateParams, options?: RequestOptions): APIPromise<Shared.CheckoutConfiguration> {
     return this._client.post('/checkout_configurations', { body, ...options });
   }
 
@@ -58,24 +55,17 @@ export class CheckoutConfigurations extends APIResource {
    *
    * - `checkout_configuration:basic:read`
    */
-  list(
-    query: CheckoutConfigurationListParams,
-    options?: RequestOptions,
-  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
-    return this._client.getAPIList(
-      '/checkout_configurations',
-      CursorPage<CheckoutConfigurationListResponse>,
-      { query, ...options },
-    );
+  list(query: CheckoutConfigurationListParams, options?: RequestOptions): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
+    return this._client.getAPIList('/checkout_configurations', CursorPage<CheckoutConfigurationListResponse>, { query, ...options });
   }
 }
 
-export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutConfigurationListResponse>;
+export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutConfigurationListResponse>
 
 /**
  * The different modes a checkout can be set to.
  */
-export type CheckoutModes = 'payment' | 'setup';
+export type CheckoutModes = 'payment' | 'setup'
 
 /**
  * A checkout configuration is a reusable configuration for a checkout, including
@@ -239,10 +229,7 @@ export namespace CheckoutConfigurationListResponse {
   }
 }
 
-export type CheckoutConfigurationCreateParams =
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlan
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlanID
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModeSetup;
+export type CheckoutConfigurationCreateParams = CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlan | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlanID | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModeSetup
 
 export declare namespace CheckoutConfigurationCreateParams {
   export interface CreateCheckoutSessionInputModePaymentWithPlan {
@@ -870,6 +857,6 @@ export declare namespace CheckoutConfigurations {
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
-    type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+    type CheckoutConfigurationListParams as CheckoutConfigurationListParams
   };
 }

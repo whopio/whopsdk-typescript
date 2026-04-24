@@ -46,11 +46,7 @@ export class Memberships extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: MembershipUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
+  update(id: string, body: MembershipUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.patch(path`/memberships/${id}`, { body, ...options });
   }
 
@@ -71,10 +67,7 @@ export class Memberships extends APIResource {
    * }
    * ```
    */
-  list(
-    query: MembershipListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
+  list(query: MembershipListParams | null | undefined = {}, options?: RequestOptions): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
     return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
   }
 
@@ -96,11 +89,7 @@ export class Memberships extends APIResource {
    * );
    * ```
    */
-  addFreeDays(
-    id: string,
-    body: MembershipAddFreeDaysParams,
-    options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
+  addFreeDays(id: string, body: MembershipAddFreeDaysParams, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
   }
 
@@ -121,11 +110,7 @@ export class Memberships extends APIResource {
    * );
    * ```
    */
-  cancel(
-    id: string,
-    body: MembershipCancelParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
+  cancel(id: string, body: MembershipCancelParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/cancel`, { body, ...options });
   }
 
@@ -146,11 +131,7 @@ export class Memberships extends APIResource {
    * );
    * ```
    */
-  pause(
-    id: string,
-    body: MembershipPauseParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
+  pause(id: string, body: MembershipPauseParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/pause`, { body, ...options });
   }
 
@@ -197,20 +178,13 @@ export class Memberships extends APIResource {
   }
 }
 
-export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
+export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>
 
 /**
  * The different reasons a user can choose for why they are canceling their
  * membership.
  */
-export type CancelOptions =
-  | 'too_expensive'
-  | 'switching'
-  | 'missing_features'
-  | 'technical_issues'
-  | 'bad_experience'
-  | 'other'
-  | 'testing';
+export type CancelOptions = 'too_expensive' | 'switching' | 'missing_features' | 'technical_issues' | 'bad_experience' | 'other' | 'testing'
 
 /**
  * A membership represents an active relationship between a user and a product. It
@@ -553,6 +527,6 @@ export declare namespace Memberships {
     type MembershipListParams as MembershipListParams,
     type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
     type MembershipCancelParams as MembershipCancelParams,
-    type MembershipPauseParams as MembershipPauseParams,
+    type MembershipPauseParams as MembershipPauseParams
   };
 }

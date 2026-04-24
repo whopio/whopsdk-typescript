@@ -2,10 +2,7 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource users', () => {
   // Mock server tests are disabled
@@ -23,13 +20,9 @@ describe('resource users', () => {
   // Mock server tests are disabled
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.users.retrieve(
-        'user_xxxxxxxxxxxxx',
-        { company_id: 'biz_xxxxxxxxxxxxxx' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.users.retrieve('user_xxxxxxxxxxxxx', { company_id: 'biz_xxxxxxxxxxxxxx' }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -47,19 +40,15 @@ describe('resource users', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.users.update(
-        'user_xxxxxxxxxxxxx',
-        {
-          bio: 'bio',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          name: 'name',
-          profile_picture: { id: 'id' },
-          username: 'username',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.users.update('user_xxxxxxxxxxxxx', {
+    bio: 'bio',
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    name: 'name',
+    profile_picture: { id: 'id' },
+    username: 'username',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -77,18 +66,15 @@ describe('resource users', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.users.list(
-        {
-          after: 'after',
-          before: 'before',
-          first: 42,
-          last: 42,
-          query: 'query',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.users.list({
+    after: 'after',
+    before: 'before',
+    first: 42,
+    last: 42,
+    query: 'query',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled

@@ -16,37 +16,32 @@ const serverConfig: ServerConfig = {
   orgName: 'Whop',
   instructionsUrl: 'https://docs.whop.com/apps/api/getting-started', // Set a url for where you show users how to get an API key
   logoUrl: 'https://whop.com/_static/images/whop-logo-big.png', // Set a custom logo url to appear during the OAuth flow
-  clientProperties: [
-    {
-      key: 'apiKey',
-      label: 'API Key',
-      description:
-        "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`",
-      required: true,
-      default: undefined,
-      placeholder: 'My API Key',
-      type: 'password',
-    },
-    {
-      key: 'webhookKey',
-      label: 'Webhook Key',
-      description: '',
-      required: false,
-      default: null,
-      placeholder: 'My Webhook Key',
-      type: 'string',
-    },
-    {
-      key: 'appID',
-      label: 'App ID',
-      description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
-      required: false,
-      default: null,
-      placeholder: 'app_xxxxxxxxxxxxxx',
-      type: 'string',
-    },
-  ],
-};
+  clientProperties: [{
+  key: 'apiKey',
+  label: 'API Key',
+  description: 'A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word \'Bearer\', which will look like `Bearer ***************************`',
+  required: true,
+  default: undefined,
+  placeholder: 'My API Key',
+  type: 'password',
+}, {
+  key: 'webhookKey',
+  label: 'Webhook Key',
+  description: '',
+  required: false,
+  default: null,
+  placeholder: 'My Webhook Key',
+  type: 'string',
+}, {
+  key: 'appID',
+  label: 'App ID',
+  description: 'When using the SDK in app mode pass this parameter to allow verifying user tokens',
+  required: false,
+  default: null,
+  placeholder: 'app_xxxxxxxxxxxxxx',
+  type: 'string',
+}],
+};;
 
 export class MyMCP extends McpAgent<Env, unknown, MCPProps> {
   server = server;

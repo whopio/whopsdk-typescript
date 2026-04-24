@@ -13,13 +13,13 @@ import { CursorPage } from '../core/pagination';
 /**
  * The access level a given user (or company) has to a product or company.
  */
-export type AccessLevel = 'no_access' | 'admin' | 'customer';
+export type AccessLevel = 'no_access' | 'admin' | 'customer'
 
 /**
  * The different types an product can be. Only use 'regular'. The rest are for
  * internal use
  */
-export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
+export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only'
 
 /**
  * An app is an integration built on Whop. Apps can serve consumers as experiences
@@ -350,35 +350,27 @@ export interface AppBuild {
 /**
  * The different platforms an app build can target.
  */
-export type AppBuildPlatforms = 'ios' | 'android' | 'web';
+export type AppBuildPlatforms = 'ios' | 'android' | 'web'
 
 /**
  * The different statuses an AppBuild can be in.
  */
-export type AppBuildStatuses = 'draft' | 'pending' | 'approved' | 'rejected';
+export type AppBuildStatuses = 'draft' | 'pending' | 'approved' | 'rejected'
 
 /**
  * The status of an experience interface
  */
-export type AppStatuses = 'live' | 'unlisted' | 'hidden';
+export type AppStatuses = 'live' | 'unlisted' | 'hidden'
 
 /**
  * The different types of an app view
  */
-export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi';
+export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi'
 
 /**
  * Possible roles an authorized user can have
  */
-export type AuthorizedUserRoles =
-  | 'owner'
-  | 'admin'
-  | 'sales_manager'
-  | 'moderator'
-  | 'app_manager'
-  | 'support'
-  | 'manager'
-  | 'custom';
+export type AuthorizedUserRoles = 'owner' | 'admin' | 'sales_manager' | 'moderator' | 'app_manager' | 'support' | 'manager' | 'custom'
 
 /**
  * A real-time chat feed attached to an experience, with configurable moderation
@@ -610,7 +602,7 @@ export namespace CheckoutConfiguration {
 /**
  * The method of collection for an invoice.
  */
-export type CollectionMethod = 'send_invoice' | 'charge_automatically';
+export type CollectionMethod = 'send_invoice' | 'charge_automatically'
 
 /**
  * A company is a seller on Whop. Companies own products, manage members, and
@@ -990,126 +982,27 @@ export namespace CourseLessonInteractionListItem {
 /**
  * The available currencies on the platform
  */
-export type Currency =
-  | 'usd'
-  | 'sgd'
-  | 'inr'
-  | 'aud'
-  | 'brl'
-  | 'cad'
-  | 'dkk'
-  | 'eur'
-  | 'nok'
-  | 'gbp'
-  | 'sek'
-  | 'chf'
-  | 'hkd'
-  | 'huf'
-  | 'jpy'
-  | 'mxn'
-  | 'myr'
-  | 'pln'
-  | 'czk'
-  | 'nzd'
-  | 'aed'
-  | 'eth'
-  | 'ape'
-  | 'cop'
-  | 'ron'
-  | 'thb'
-  | 'bgn'
-  | 'idr'
-  | 'dop'
-  | 'php'
-  | 'try'
-  | 'krw'
-  | 'twd'
-  | 'vnd'
-  | 'pkr'
-  | 'clp'
-  | 'uyu'
-  | 'ars'
-  | 'zar'
-  | 'dzd'
-  | 'tnd'
-  | 'mad'
-  | 'kes'
-  | 'kwd'
-  | 'jod'
-  | 'all'
-  | 'xcd'
-  | 'amd'
-  | 'bsd'
-  | 'bhd'
-  | 'bob'
-  | 'bam'
-  | 'khr'
-  | 'crc'
-  | 'xof'
-  | 'egp'
-  | 'etb'
-  | 'gmd'
-  | 'ghs'
-  | 'gtq'
-  | 'gyd'
-  | 'ils'
-  | 'jmd'
-  | 'mop'
-  | 'mga'
-  | 'mur'
-  | 'mdl'
-  | 'mnt'
-  | 'nad'
-  | 'ngn'
-  | 'mkd'
-  | 'omr'
-  | 'pyg'
-  | 'pen'
-  | 'qar'
-  | 'rwf'
-  | 'sar'
-  | 'rsd'
-  | 'lkr'
-  | 'tzs'
-  | 'ttd'
-  | 'uzs'
-  | 'rub'
-  | 'btc'
-  | 'cny'
-  | 'usdt';
+export type Currency = 'usd' | 'sgd' | 'inr' | 'aud' | 'brl' | 'cad' | 'dkk' | 'eur' | 'nok' | 'gbp' | 'sek' | 'chf' | 'hkd' | 'huf' | 'jpy' | 'mxn' | 'myr' | 'pln' | 'czk' | 'nzd' | 'aed' | 'eth' | 'ape' | 'cop' | 'ron' | 'thb' | 'bgn' | 'idr' | 'dop' | 'php' | 'try' | 'krw' | 'twd' | 'vnd' | 'pkr' | 'clp' | 'uyu' | 'ars' | 'zar' | 'dzd' | 'tnd' | 'mad' | 'kes' | 'kwd' | 'jod' | 'all' | 'xcd' | 'amd' | 'bsd' | 'bhd' | 'bob' | 'bam' | 'khr' | 'crc' | 'xof' | 'egp' | 'etb' | 'gmd' | 'ghs' | 'gtq' | 'gyd' | 'ils' | 'jmd' | 'mop' | 'mga' | 'mur' | 'mdl' | 'mnt' | 'nad' | 'ngn' | 'mkd' | 'omr' | 'pyg' | 'pen' | 'qar' | 'rwf' | 'sar' | 'rsd' | 'lkr' | 'tzs' | 'ttd' | 'uzs' | 'rub' | 'btc' | 'cny' | 'usdt'
 
 /**
  * The different types of custom CTAs that can be selected.
  */
-export type CustomCta =
-  | 'get_access'
-  | 'join'
-  | 'order_now'
-  | 'shop_now'
-  | 'call_now'
-  | 'donate_now'
-  | 'contact_us'
-  | 'sign_up'
-  | 'subscribe'
-  | 'purchase'
-  | 'get_offer'
-  | 'apply_now'
-  | 'complete_order';
+export type CustomCta = 'get_access' | 'join' | 'order_now' | 'shop_now' | 'call_now' | 'donate_now' | 'contact_us' | 'sign_up' | 'subscribe' | 'purchase' | 'get_offer' | 'apply_now' | 'complete_order'
 
 /**
  * The direction of the sort.
  */
-export type Direction = 'asc' | 'desc';
+export type Direction = 'asc' | 'desc'
 
 /**
  * The types of post
  */
-export type DmsPostTypes = 'regular' | 'system' | 'automated';
+export type DmsPostTypes = 'regular' | 'system' | 'automated'
 
 /**
  * Email notification preference option for a forum feed
  */
-export type EmailNotificationPreferences = 'all_admin_posts' | 'only_weekly_summary' | 'none';
+export type EmailNotificationPreferences = 'all_admin_posts' | 'only_weekly_summary' | 'none'
 
 /**
  * An entry represents a user's signup for a waitlisted plan.
@@ -1232,7 +1125,7 @@ export namespace Entry {
 /**
  * The status of an entry to a waitlist.
  */
-export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any';
+export type EntryStatus = 'drafted' | 'pending' | 'approved' | 'denied' | 'any'
 
 /**
  * An experience is a feature or content module within a product, such as a chat,
@@ -1574,40 +1467,12 @@ export namespace ForumPost {
  * human-readable summary of the payment state, combining the underlying status and
  * substatus fields.
  */
-export type FriendlyReceiptStatus =
-  | 'succeeded'
-  | 'pending'
-  | 'failed'
-  | 'past_due'
-  | 'canceled'
-  | 'price_too_low'
-  | 'uncollectible'
-  | 'refunded'
-  | 'auto_refunded'
-  | 'partially_refunded'
-  | 'dispute_warning'
-  | 'dispute_needs_response'
-  | 'dispute_warning_needs_response'
-  | 'resolution_needs_response'
-  | 'dispute_under_review'
-  | 'dispute_warning_under_review'
-  | 'resolution_under_review'
-  | 'dispute_won'
-  | 'dispute_warning_closed'
-  | 'resolution_won'
-  | 'dispute_lost'
-  | 'dispute_closed'
-  | 'resolution_lost'
-  | 'drafted'
-  | 'incomplete'
-  | 'unresolved'
-  | 'open_dispute'
-  | 'open_resolution';
+export type FriendlyReceiptStatus = 'succeeded' | 'pending' | 'failed' | 'past_due' | 'canceled' | 'price_too_low' | 'uncollectible' | 'refunded' | 'auto_refunded' | 'partially_refunded' | 'dispute_warning' | 'dispute_needs_response' | 'dispute_warning_needs_response' | 'resolution_needs_response' | 'dispute_under_review' | 'dispute_warning_under_review' | 'resolution_under_review' | 'dispute_won' | 'dispute_warning_closed' | 'resolution_won' | 'dispute_lost' | 'dispute_closed' | 'resolution_lost' | 'drafted' | 'incomplete' | 'unresolved' | 'open_dispute' | 'open_resolution'
 
 /**
  * The different statuses of the global affiliate program for a product.
  */
-export type GlobalAffiliateStatus = 'enabled' | 'disabled';
+export type GlobalAffiliateStatus = 'enabled' | 'disabled'
 
 /**
  * An invoice represents an itemized bill sent by a company to a customer for a
@@ -1812,31 +1677,17 @@ export namespace InvoiceListItem {
 /**
  * The different statuses an invoice can be in
  */
-export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void';
+export type InvoiceStatus = 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'
 
 /**
  * The different most recent actions a member can have.
  */
-export type MemberMostRecentActions =
-  | 'canceling'
-  | 'churned'
-  | 'finished_split_pay'
-  | 'paused'
-  | 'paid_subscriber'
-  | 'paid_once'
-  | 'expiring'
-  | 'joined'
-  | 'drafted'
-  | 'left'
-  | 'trialing'
-  | 'pending_entry'
-  | 'renewing'
-  | 'past_due';
+export type MemberMostRecentActions = 'canceling' | 'churned' | 'finished_split_pay' | 'paused' | 'paid_subscriber' | 'paid_once' | 'expiring' | 'joined' | 'drafted' | 'left' | 'trialing' | 'pending_entry' | 'renewing' | 'past_due'
 
 /**
  * The different statuses a Member can have.
  */
-export type MemberStatuses = 'drafted' | 'joined' | 'left';
+export type MemberStatuses = 'drafted' | 'joined' | 'left'
 
 /**
  * A membership represents an active relationship between a user and a product. It
@@ -2095,16 +1946,7 @@ export namespace Membership {
 /**
  * The status of a membership
  */
-export type MembershipStatus =
-  | 'trialing'
-  | 'active'
-  | 'past_due'
-  | 'completed'
-  | 'canceled'
-  | 'expired'
-  | 'unresolved'
-  | 'drafted'
-  | 'canceling';
+export type MembershipStatus = 'trialing' | 'active' | 'past_due' | 'completed' | 'canceled' | 'expired' | 'unresolved' | 'drafted' | 'canceling'
 
 /**
  * A message sent within an experience chat, direct message, or group chat.
@@ -2714,35 +2556,12 @@ export namespace Payment {
     /**
      * The status of the payment transaction.
      */
-    status:
-      | 'succeeded'
-      | 'declined'
-      | 'error'
-      | 'pending'
-      | 'created'
-      | 'expired'
-      | 'won'
-      | 'rejected'
-      | 'lost'
-      | 'prevented'
-      | 'canceled';
+    status: 'succeeded' | 'declined' | 'error' | 'pending' | 'created' | 'expired' | 'won' | 'rejected' | 'lost' | 'prevented' | 'canceled';
 
     /**
      * The type of the payment transaction.
      */
-    transaction_type:
-      | 'purchase'
-      | 'authorize'
-      | 'capture'
-      | 'refund'
-      | 'canceled'
-      | 'verify'
-      | 'chargeback'
-      | 'pre_chargeback'
-      | 'three_d_secure'
-      | 'fraud_screening'
-      | 'authorization'
-      | 'installment';
+    transaction_type: 'purchase' | 'authorize' | 'capture' | 'refund' | 'canceled' | 'verify' | 'chargeback' | 'pre_chargeback' | 'three_d_secure' | 'fraud_screening' | 'authorization' | 'installment';
   }
 
   /**
@@ -3263,7 +3082,7 @@ export namespace Plan {
 /**
  * The type of plan that can be attached to a product
  */
-export type PlanType = 'renewal' | 'one_time';
+export type PlanType = 'renewal' | 'one_time'
 
 /**
  * A product is a digital good or service sold on Whop. Products contain plans for
@@ -3556,7 +3375,7 @@ export interface ProductListItem {
 /**
  * The type of promo code used to discount a plan
  */
-export type PromoType = 'percentage' | 'flat_amount';
+export type PromoType = 'percentage' | 'flat_amount'
 
 /**
  * A single reaction left by a user on a feed post, such as a like or emoji.
@@ -3609,12 +3428,12 @@ export namespace Reaction {
 /**
  * The status of a receipt
  */
-export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void';
+export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void'
 
 /**
  * The methods of how a plan can be released.
  */
-export type ReleaseMethod = 'buy_now' | 'waitlist';
+export type ReleaseMethod = 'buy_now' | 'waitlist'
 
 /**
  * A physical shipment associated with a payment, including carrier details and
@@ -3691,131 +3510,17 @@ export namespace Shipment {
 /**
  * The carrier of a shipment
  */
-export type ShipmentCarrier =
-  | 'accurate'
-  | 'amazon_mws'
-  | 'amazon_shipping'
-  | 'apc'
-  | 'asendia_usa'
-  | 'australia_post'
-  | 'axlehire_v3'
-  | 'better_trucks'
-  | 'canada_post'
-  | 'canpar'
-  | 'columbus_last_mile'
-  | 'chronopost'
-  | 'cloud_sort'
-  | 'courier_express'
-  | 'couriers_please'
-  | 'cs_logistics'
-  | 'dai_post'
-  | 'deutsche_post_uk'
-  | 'deutsche_post'
-  | 'dhl_ecommerce_asia'
-  | 'dhl_ecs'
-  | 'dhl_express'
-  | 'dhl_paket'
-  | 'door_dash'
-  | 'dpd_nl'
-  | 'dpd_uk'
-  | 'dpd'
-  | 'epost_global'
-  | 'estafeta'
-  | 'evri'
-  | 'fastway'
-  | 'fedex_cross_border'
-  | 'fedex_default'
-  | 'fedex_mailview'
-  | 'fedex_smartpost'
-  | 'fedex'
-  | 'first_choice'
-  | 'first_mile'
-  | 'flexport'
-  | 'gio'
-  | 'gio_express'
-  | 'gso'
-  | 'hailify'
-  | 'henry'
-  | 'interlink_express'
-  | 'jet'
-  | 'kuroneko_yamato'
-  | 'la_post'
-  | 'lasership_v2'
-  | 'loomis_express'
-  | 'lso'
-  | 'ontrac'
-  | 'optima'
-  | 'osm_worldwide'
-  | 'parcelforce'
-  | 'parcll'
-  | 'passport_global'
-  | 'post_nl'
-  | 'purolator'
-  | 'quick'
-  | 'royal_mail'
-  | 'omni_parcel'
-  | 'sendle'
-  | 'sf_express'
-  | 'smart_kargo'
-  | 'sonic'
-  | 'spee_dee'
-  | 'swyft'
-  | 'tforce'
-  | 'uds'
-  | 'ups_iparcel'
-  | 'ups_mail_innovations'
-  | 'ups'
-  | 'usps'
-  | 'veho'
-  | 'yanwen';
+export type ShipmentCarrier = 'accurate' | 'amazon_mws' | 'amazon_shipping' | 'apc' | 'asendia_usa' | 'australia_post' | 'axlehire_v3' | 'better_trucks' | 'canada_post' | 'canpar' | 'columbus_last_mile' | 'chronopost' | 'cloud_sort' | 'courier_express' | 'couriers_please' | 'cs_logistics' | 'dai_post' | 'deutsche_post_uk' | 'deutsche_post' | 'dhl_ecommerce_asia' | 'dhl_ecs' | 'dhl_express' | 'dhl_paket' | 'door_dash' | 'dpd_nl' | 'dpd_uk' | 'dpd' | 'epost_global' | 'estafeta' | 'evri' | 'fastway' | 'fedex_cross_border' | 'fedex_default' | 'fedex_mailview' | 'fedex_smartpost' | 'fedex' | 'first_choice' | 'first_mile' | 'flexport' | 'gio' | 'gio_express' | 'gso' | 'hailify' | 'henry' | 'interlink_express' | 'jet' | 'kuroneko_yamato' | 'la_post' | 'lasership_v2' | 'loomis_express' | 'lso' | 'ontrac' | 'optima' | 'osm_worldwide' | 'parcelforce' | 'parcll' | 'passport_global' | 'post_nl' | 'purolator' | 'quick' | 'royal_mail' | 'omni_parcel' | 'sendle' | 'sf_express' | 'smart_kargo' | 'sonic' | 'spee_dee' | 'swyft' | 'tforce' | 'uds' | 'ups_iparcel' | 'ups_mail_innovations' | 'ups' | 'usps' | 'veho' | 'yanwen'
 
 /**
  * The status of a shipment
  */
-export type ShipmentStatus =
-  | 'unknown'
-  | 'pre_transit'
-  | 'in_transit'
-  | 'out_for_delivery'
-  | 'delivered'
-  | 'available_for_pickup'
-  | 'return_to_sender'
-  | 'failure'
-  | 'cancelled'
-  | 'error';
+export type ShipmentStatus = 'unknown' | 'pre_transit' | 'in_transit' | 'out_for_delivery' | 'delivered' | 'available_for_pickup' | 'return_to_sender' | 'failure' | 'cancelled' | 'error'
 
 /**
  * The substatus of a shipment
  */
-export type ShipmentSubstatus =
-  | 'address_correction'
-  | 'arrived_at_destination'
-  | 'arrived_at_facility'
-  | 'arrived_at_pickup_location'
-  | 'awaiting_information'
-  | 'substatus_cancelled'
-  | 'damaged'
-  | 'delayed'
-  | 'delivery_exception'
-  | 'departed_facility'
-  | 'departed_origin_facility'
-  | 'expired'
-  | 'substatus_failure'
-  | 'held'
-  | 'substatus_in_transit'
-  | 'label_created'
-  | 'lost'
-  | 'missorted'
-  | 'substatus_out_for_delivery'
-  | 'received_at_destination_facility'
-  | 'received_at_origin_facility'
-  | 'refused'
-  | 'return'
-  | 'status_update'
-  | 'transferred_to_destination_carrier'
-  | 'transit_exception'
-  | 'substatus_unknown'
-  | 'weather_delay';
+export type ShipmentSubstatus = 'address_correction' | 'arrived_at_destination' | 'arrived_at_facility' | 'arrived_at_pickup_location' | 'awaiting_information' | 'substatus_cancelled' | 'damaged' | 'delayed' | 'delivery_exception' | 'departed_facility' | 'departed_origin_facility' | 'expired' | 'substatus_failure' | 'held' | 'substatus_in_transit' | 'label_created' | 'lost' | 'missorted' | 'substatus_out_for_delivery' | 'received_at_destination_facility' | 'received_at_origin_facility' | 'refused' | 'return' | 'status_update' | 'transferred_to_destination_carrier' | 'transit_exception' | 'substatus_unknown' | 'weather_delay'
 
 /**
  * A messaging channel that can be a one-on-one DM, group chat, company support
@@ -3885,7 +3590,7 @@ export namespace SupportChannel {
  * Whether or not the tax is included in a plan's price (or if it hasn't been set
  * up)
  */
-export type TaxType = 'inclusive' | 'exclusive' | 'unspecified';
+export type TaxType = 'inclusive' | 'exclusive' | 'unspecified'
 
 /**
  * A transfer of credit between two ledger accounts.
@@ -4060,42 +3765,35 @@ export namespace Transfer {
 /**
  * Visibility of a resource
  */
-export type Visibility = 'visible' | 'hidden' | 'archived' | 'quick_link';
+export type Visibility = 'visible' | 'hidden' | 'archived' | 'quick_link'
 
 /**
  * The different levels of visibility for resources
  */
-export type VisibilityFilter =
-  | 'visible'
-  | 'hidden'
-  | 'archived'
-  | 'quick_link'
-  | 'all'
-  | 'not_quick_link'
-  | 'not_archived';
+export type VisibilityFilter = 'visible' | 'hidden' | 'archived' | 'quick_link' | 'all' | 'not_quick_link' | 'not_archived'
 
 /**
  * Who can comment on a forum feed
  */
-export type WhoCanCommentTypes = 'everyone' | 'admins';
+export type WhoCanCommentTypes = 'everyone' | 'admins'
 
 /**
  * Who can post on a chat feed
  */
-export type WhoCanPost = 'everyone' | 'admins';
+export type WhoCanPost = 'everyone' | 'admins'
 
 /**
  * Who can post on a forum feed
  */
-export type WhoCanPostTypes = 'everyone' | 'admins';
+export type WhoCanPostTypes = 'everyone' | 'admins'
 
 /**
  * Who can react on a chat feed
  */
-export type WhoCanReact = 'everyone' | 'no_one';
+export type WhoCanReact = 'everyone' | 'no_one'
 
-export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
+export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>
 
-export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
+export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>
 
-export type ProductListItemsCursorPage = CursorPage<ProductListItem>;
+export type ProductListItemsCursorPage = CursorPage<ProductListItem>

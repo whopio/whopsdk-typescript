@@ -21,11 +21,7 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  retrieve(
-    id: string,
-    query: UserRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<User> {
+  retrieve(id: string, query: UserRetrieveParams | null | undefined = {}, options?: RequestOptions): APIPromise<User> {
     return this._client.get(path`/users/${id}`, { query, ...options });
   }
 
@@ -43,11 +39,7 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: UserUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<User> {
+  update(id: string, body: UserUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<User> {
     return this._client.patch(path`/users/${id}`, { body, ...options });
   }
 
@@ -63,10 +55,7 @@ export class Users extends APIResource {
    * }
    * ```
    */
-  list(
-    query: UserListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<UserListResponsesCursorPage, UserListResponse> {
+  list(query: UserListParams | null | undefined = {}, options?: RequestOptions): PagePromise<UserListResponsesCursorPage, UserListResponse> {
     return this._client.getAPIList('/users', CursorPage<UserListResponse>, { query, ...options });
   }
 
@@ -82,17 +71,13 @@ export class Users extends APIResource {
    * );
    * ```
    */
-  checkAccess(
-    resourceID: string,
-    params: UserCheckAccessParams,
-    options?: RequestOptions,
-  ): APIPromise<UserCheckAccessResponse> {
-    const { id } = params;
+  checkAccess(resourceID: string, params: UserCheckAccessParams, options?: RequestOptions): APIPromise<UserCheckAccessResponse> {
+    const { id } = params
     return this._client.get(path`/users/${id}/access/${resourceID}`, options);
   }
 }
 
-export type UserListResponsesCursorPage = CursorPage<UserListResponse>;
+export type UserListResponsesCursorPage = CursorPage<UserListResponse>
 
 /**
  * A user account on Whop. Contains profile information, identity details, and
@@ -299,6 +284,6 @@ export declare namespace Users {
     type UserRetrieveParams as UserRetrieveParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserCheckAccessParams as UserCheckAccessParams,
+    type UserCheckAccessParams as UserCheckAccessParams
   };
 }

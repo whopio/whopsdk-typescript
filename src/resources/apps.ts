@@ -64,11 +64,7 @@ export class Apps extends APIResource {
    * const app = await client.apps.update('app_xxxxxxxxxxxxxx');
    * ```
    */
-  update(
-    id: string,
-    body: AppUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.App> {
+  update(id: string, body: AppUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.App> {
     return this._client.patch(path`/apps/${id}`, { body, ...options });
   }
 
@@ -84,20 +80,17 @@ export class Apps extends APIResource {
    * }
    * ```
    */
-  list(
-    query: AppListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AppListResponsesCursorPage, AppListResponse> {
+  list(query: AppListParams | null | undefined = {}, options?: RequestOptions): PagePromise<AppListResponsesCursorPage, AppListResponse> {
     return this._client.getAPIList('/apps', CursorPage<AppListResponse>, { query, ...options });
   }
 }
 
-export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
+export type AppListResponsesCursorPage = CursorPage<AppListResponse>
 
 /**
  * The type of end-user an app is built for
  */
-export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
+export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component'
 
 /**
  * An app is an integration built on Whop. Apps can serve consumers as experiences
@@ -428,20 +421,7 @@ export interface AppListParams extends CursorPageParams {
   /**
    * The order to fetch the apps in for discovery.
    */
-  order?:
-    | 'created_at'
-    | 'discoverable_at'
-    | 'total_installs_last_30_days'
-    | 'total_installs_last_7_days'
-    | 'time_spent'
-    | 'time_spent_last_24_hours'
-    | 'daily_active_users'
-    | 'ai_prompt_count'
-    | 'total_ai_cost_usd'
-    | 'total_ai_tokens'
-    | 'last_ai_prompt_at'
-    | 'ai_average_rating'
-    | null;
+  order?: 'created_at' | 'discoverable_at' | 'total_installs_last_30_days' | 'total_installs_last_7_days' | 'time_spent' | 'time_spent_last_24_hours' | 'daily_active_users' | 'ai_prompt_count' | 'total_ai_cost_usd' | 'total_ai_tokens' | 'last_ai_prompt_at' | 'ai_average_rating' | null;
 
   /**
    * A search string to filter apps by name, such as 'chat' or 'analytics'.
@@ -467,6 +447,6 @@ export declare namespace Apps {
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
-    type AppListParams as AppListParams,
+    type AppListParams as AppListParams
   };
 }

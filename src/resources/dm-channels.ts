@@ -54,11 +54,7 @@ export class DmChannels extends APIResource {
    * const dmChannel = await client.dmChannels.update('id');
    * ```
    */
-  update(
-    id: string,
-    body: DmChannelUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<DmChannel> {
+  update(id: string, body: DmChannelUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<DmChannel> {
     return this._client.patch(path`/dm_channels/${id}`, { body, ...options });
   }
 
@@ -78,10 +74,7 @@ export class DmChannels extends APIResource {
    * }
    * ```
    */
-  list(
-    query: DmChannelListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<DmChannelListResponsesCursorPage, DmChannelListResponse> {
+  list(query: DmChannelListParams | null | undefined = {}, options?: RequestOptions): PagePromise<DmChannelListResponsesCursorPage, DmChannelListResponse> {
     return this._client.getAPIList('/dm_channels', CursorPage<DmChannelListResponse>, { query, ...options });
   }
 
@@ -103,7 +96,7 @@ export class DmChannels extends APIResource {
   }
 }
 
-export type DmChannelListResponsesCursorPage = CursorPage<DmChannelListResponse>;
+export type DmChannelListResponsesCursorPage = CursorPage<DmChannelListResponse>
 
 /**
  * A messaging channel that can be a one-on-one DM, group chat, company support
@@ -164,7 +157,7 @@ export interface DmChannelListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type DmChannelDeleteResponse = boolean;
+export type DmChannelDeleteResponse = boolean
 
 export interface DmChannelCreateParams {
   /**
@@ -223,6 +216,6 @@ export declare namespace DmChannels {
     type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
     type DmChannelCreateParams as DmChannelCreateParams,
     type DmChannelUpdateParams as DmChannelUpdateParams,
-    type DmChannelListParams as DmChannelListParams,
+    type DmChannelListParams as DmChannelListParams
   };
 }

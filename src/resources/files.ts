@@ -43,7 +43,7 @@ export class Files extends APIResource {
 /**
  * The upload status of a file
  */
-export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
+export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed'
 
 /**
  * A file that has been uploaded or is pending upload.

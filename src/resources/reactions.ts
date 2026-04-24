@@ -42,10 +42,7 @@ export class Reactions extends APIResource {
    *
    * - `chat:read`
    */
-  list(
-    query: ReactionListParams,
-    options?: RequestOptions,
-  ): PagePromise<ReactionListResponsesCursorPage, ReactionListResponse> {
+  list(query: ReactionListParams, options?: RequestOptions): PagePromise<ReactionListResponsesCursorPage, ReactionListResponse> {
     return this._client.getAPIList('/reactions', CursorPage<ReactionListResponse>, { query, ...options });
   }
 
@@ -57,17 +54,13 @@ export class Reactions extends APIResource {
    *
    * - `chat:read`
    */
-  delete(
-    id: string,
-    params: ReactionDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<ReactionDeleteResponse> {
-    const { emoji } = params ?? {};
+  delete(id: string, params: ReactionDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<ReactionDeleteResponse> {
+    const { emoji } = params ?? {}
     return this._client.delete(path`/reactions/${id}`, { query: { emoji }, ...options });
   }
 }
 
-export type ReactionListResponsesCursorPage = CursorPage<ReactionListResponse>;
+export type ReactionListResponsesCursorPage = CursorPage<ReactionListResponse>
 
 /**
  * A single reaction left by a user on a feed post, such as a like or emoji.
@@ -120,7 +113,7 @@ export namespace ReactionListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type ReactionDeleteResponse = boolean;
+export type ReactionDeleteResponse = boolean
 
 export interface ReactionCreateParams {
   /**
@@ -179,6 +172,6 @@ export declare namespace Reactions {
     type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
     type ReactionCreateParams as ReactionCreateParams,
     type ReactionListParams as ReactionListParams,
-    type ReactionDeleteParams as ReactionDeleteParams,
+    type ReactionDeleteParams as ReactionDeleteParams
   };
 }

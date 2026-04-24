@@ -34,53 +34,32 @@ export class Refunds extends APIResource {
    *
    * - `payment:basic:read`
    */
-  list(
-    query: RefundListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<RefundListResponsesCursorPage, RefundListResponse> {
+  list(query: RefundListParams | null | undefined = {}, options?: RequestOptions): PagePromise<RefundListResponsesCursorPage, RefundListResponse> {
     return this._client.getAPIList('/refunds', CursorPage<RefundListResponse>, { query, ...options });
   }
 }
 
-export type RefundListResponsesCursorPage = CursorPage<RefundListResponse>;
+export type RefundListResponsesCursorPage = CursorPage<RefundListResponse>
 
 /**
  * The different payment providers.
  */
-export type PaymentProvider =
-  | 'stripe'
-  | 'coinbase'
-  | 'paypal'
-  | 'apple'
-  | 'sezzle'
-  | 'splitit'
-  | 'platform_balance'
-  | 'multi_psp'
-  | 'adyen'
-  | 'claritypay'
-  | 'checkout_dot_com'
-  | 'airwallex'
-  | 'coinflow'
-  | 'sequra'
-  | 'dlocal';
+export type PaymentProvider = 'stripe' | 'coinbase' | 'paypal' | 'apple' | 'sezzle' | 'splitit' | 'platform_balance' | 'multi_psp' | 'adyen' | 'claritypay' | 'checkout_dot_com' | 'airwallex' | 'coinflow' | 'sequra' | 'dlocal'
 
 /**
  * The status of the refund reference.
  */
-export type RefundReferenceStatus = 'available' | 'pending' | 'unavailable';
+export type RefundReferenceStatus = 'available' | 'pending' | 'unavailable'
 
 /**
  * The type of refund reference that was made available by the payment provider.
  */
-export type RefundReferenceType =
-  | 'acquirer_reference_number'
-  | 'retrieval_reference_number'
-  | 'system_trace_audit_number';
+export type RefundReferenceType = 'acquirer_reference_number' | 'retrieval_reference_number' | 'system_trace_audit_number'
 
 /**
  * The different statuses for a Refund object
  */
-export type RefundStatus = 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+export type RefundStatus = 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled'
 
 /**
  * A refund represents a full or partial reversal of a payment, including the
@@ -442,6 +421,6 @@ export declare namespace Refunds {
     type RefundRetrieveResponse as RefundRetrieveResponse,
     type RefundListResponse as RefundListResponse,
     type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
-    type RefundListParams as RefundListParams,
+    type RefundListParams as RefundListParams
   };
 }

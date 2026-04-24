@@ -68,10 +68,7 @@ export class AppBuilds extends APIResource {
    * }
    * ```
    */
-  list(
-    query: AppBuildListParams,
-    options?: RequestOptions,
-  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
+  list(query: AppBuildListParams, options?: RequestOptions): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
     return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse>, { query, ...options });
   }
 
@@ -95,7 +92,7 @@ export class AppBuilds extends APIResource {
   }
 }
 
-export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse>;
+export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse>
 
 /**
  * A versioned build artifact for a Whop React Native App, submitted for review and
@@ -248,6 +245,6 @@ export declare namespace AppBuilds {
     type AppBuildListResponse as AppBuildListResponse,
     type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildCreateParams as AppBuildCreateParams,
-    type AppBuildListParams as AppBuildListParams,
+    type AppBuildListParams as AppBuildListParams
   };
 }

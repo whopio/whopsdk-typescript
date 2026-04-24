@@ -66,11 +66,7 @@ export class Products extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: ProductUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Product> {
+  update(id: string, body: ProductUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.patch(path`/products/${id}`, { body, ...options });
   }
 
@@ -92,10 +88,7 @@ export class Products extends APIResource {
    * }
    * ```
    */
-  list(
-    query: ProductListParams,
-    options?: RequestOptions,
-  ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
+  list(query: ProductListParams, options?: RequestOptions): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
     return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, { query, ...options });
   }
 
@@ -121,7 +114,7 @@ export class Products extends APIResource {
 /**
  * Represents `true` or `false` values.
  */
-export type ProductDeleteResponse = boolean;
+export type ProductDeleteResponse = boolean
 
 export interface ProductCreateParams {
   /**
@@ -491,8 +484,8 @@ export declare namespace Products {
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
-    type ProductListParams as ProductListParams,
+    type ProductListParams as ProductListParams
   };
 }
 
-export { type ProductListItemsCursorPage };
+export { type ProductListItemsCursorPage }

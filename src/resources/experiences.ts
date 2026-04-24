@@ -54,11 +54,7 @@ export class Experiences extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: ExperienceUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Experience> {
+  update(id: string, body: ExperienceUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Experience> {
     return this._client.patch(path`/experiences/${id}`, { body, ...options });
   }
 
@@ -76,10 +72,7 @@ export class Experiences extends APIResource {
    * }
    * ```
    */
-  list(
-    query: ExperienceListParams,
-    options?: RequestOptions,
-  ): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse> {
+  list(query: ExperienceListParams, options?: RequestOptions): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse> {
     return this._client.getAPIList('/experiences', CursorPage<ExperienceListResponse>, { query, ...options });
   }
 
@@ -158,16 +151,12 @@ export class Experiences extends APIResource {
    * );
    * ```
    */
-  duplicate(
-    id: string,
-    body: ExperienceDuplicateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Experience> {
+  duplicate(id: string, body: ExperienceDuplicateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Experience> {
     return this._client.post(path`/experiences/${id}/duplicate`, { body, ...options });
   }
 }
 
-export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse>;
+export type ExperienceListResponsesCursorPage = CursorPage<ExperienceListResponse>
 
 /**
  * An experience is a feature or content module within a product, such as a chat,
@@ -292,7 +281,7 @@ export namespace ExperienceListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type ExperienceDeleteResponse = boolean;
+export type ExperienceDeleteResponse = boolean
 
 export interface ExperienceCreateParams {
   /**
@@ -456,6 +445,6 @@ export declare namespace Experiences {
     type ExperienceListParams as ExperienceListParams,
     type ExperienceAttachParams as ExperienceAttachParams,
     type ExperienceDetachParams as ExperienceDetachParams,
-    type ExperienceDuplicateParams as ExperienceDuplicateParams,
+    type ExperienceDuplicateParams as ExperienceDuplicateParams
   };
 }

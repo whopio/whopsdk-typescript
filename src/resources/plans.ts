@@ -70,11 +70,7 @@ export class Plans extends APIResource {
    * );
    * ```
    */
-  update(
-    id: string,
-    body: PlanUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Plan> {
+  update(id: string, body: PlanUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.patch(path`/plans/${id}`, { body, ...options });
   }
 
@@ -96,10 +92,7 @@ export class Plans extends APIResource {
    * }
    * ```
    */
-  list(
-    query: PlanListParams,
-    options?: RequestOptions,
-  ): PagePromise<PlanListResponsesCursorPage, PlanListResponse> {
+  list(query: PlanListParams, options?: RequestOptions): PagePromise<PlanListResponsesCursorPage, PlanListResponse> {
     return this._client.getAPIList('/plans', CursorPage<PlanListResponse>, { query, ...options });
   }
 
@@ -123,17 +116,17 @@ export class Plans extends APIResource {
   }
 }
 
-export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>;
+export type PlanListResponsesCursorPage = CursorPage<PlanListResponse>
 
 /**
  * The different font families available for checkout pages.
  */
-export type CheckoutFont = 'system' | 'roboto' | 'open_sans';
+export type CheckoutFont = 'system' | 'roboto' | 'open_sans'
 
 /**
  * The different border-radius styles available for checkout pages.
  */
-export type CheckoutShape = 'rounded' | 'pill' | 'rectangular';
+export type CheckoutShape = 'rounded' | 'pill' | 'rectangular'
 
 /**
  * A plan defines pricing and billing terms for a checkout. Plans can optionally
@@ -361,7 +354,7 @@ export namespace PlanListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type PlanDeleteResponse = boolean;
+export type PlanDeleteResponse = boolean
 
 export interface PlanCreateParams {
   /**
@@ -862,6 +855,6 @@ export declare namespace Plans {
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
-    type PlanListParams as PlanListParams,
+    type PlanListParams as PlanListParams
   };
 }

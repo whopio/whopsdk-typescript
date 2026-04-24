@@ -19,11 +19,7 @@ export class PaymentMethods extends APIResource {
    *
    * - `member:payment_methods:read`
    */
-  retrieve(
-    id: string,
-    query: PaymentMethodRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<PaymentMethodRetrieveResponse> {
+  retrieve(id: string, query: PaymentMethodRetrieveParams | null | undefined = {}, options?: RequestOptions): APIPromise<PaymentMethodRetrieveResponse> {
     return this._client.get(path`/payment_methods/${id}`, { query, ...options });
   }
 
@@ -37,29 +33,17 @@ export class PaymentMethods extends APIResource {
    *
    * - `member:payment_methods:read`
    */
-  list(
-    query: PaymentMethodListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PaymentMethodListResponsesCursorPage, PaymentMethodListResponse> {
-    return this._client.getAPIList('/payment_methods', CursorPage<PaymentMethodListResponse>, {
-      query,
-      ...options,
-    });
+  list(query: PaymentMethodListParams | null | undefined = {}, options?: RequestOptions): PagePromise<PaymentMethodListResponsesCursorPage, PaymentMethodListResponse> {
+    return this._client.getAPIList('/payment_methods', CursorPage<PaymentMethodListResponse>, { query, ...options });
   }
 }
 
-export type PaymentMethodListResponsesCursorPage = CursorPage<PaymentMethodListResponse>;
+export type PaymentMethodListResponsesCursorPage = CursorPage<PaymentMethodListResponse>
 
 /**
  * A saved payment method with no type-specific details available.
  */
-export type PaymentMethodRetrieveResponse =
-  | PaymentMethodRetrieveResponse.BasePaymentMethod
-  | PaymentMethodRetrieveResponse.CardPaymentMethod
-  | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod
-  | PaymentMethodRetrieveResponse.CashappPaymentMethod
-  | PaymentMethodRetrieveResponse.IdealPaymentMethod
-  | PaymentMethodRetrieveResponse.SepaDebitPaymentMethod;
+export type PaymentMethodRetrieveResponse = PaymentMethodRetrieveResponse.BasePaymentMethod | PaymentMethodRetrieveResponse.CardPaymentMethod | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod | PaymentMethodRetrieveResponse.CashappPaymentMethod | PaymentMethodRetrieveResponse.IdealPaymentMethod | PaymentMethodRetrieveResponse.SepaDebitPaymentMethod
 
 export namespace PaymentMethodRetrieveResponse {
   /**
@@ -401,13 +385,7 @@ export namespace PaymentMethodRetrieveResponse {
 /**
  * A saved payment method with no type-specific details available.
  */
-export type PaymentMethodListResponse =
-  | PaymentMethodListResponse.BasePaymentMethod
-  | PaymentMethodListResponse.CardPaymentMethod
-  | PaymentMethodListResponse.UsBankAccountPaymentMethod
-  | PaymentMethodListResponse.CashappPaymentMethod
-  | PaymentMethodListResponse.IdealPaymentMethod
-  | PaymentMethodListResponse.SepaDebitPaymentMethod;
+export type PaymentMethodListResponse = PaymentMethodListResponse.BasePaymentMethod | PaymentMethodListResponse.CardPaymentMethod | PaymentMethodListResponse.UsBankAccountPaymentMethod | PaymentMethodListResponse.CashappPaymentMethod | PaymentMethodListResponse.IdealPaymentMethod | PaymentMethodListResponse.SepaDebitPaymentMethod
 
 export namespace PaymentMethodListResponse {
   /**
@@ -809,6 +787,6 @@ export declare namespace PaymentMethods {
     type PaymentMethodListResponse as PaymentMethodListResponse,
     type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
     type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
-    type PaymentMethodListParams as PaymentMethodListParams,
+    type PaymentMethodListParams as PaymentMethodListParams
   };
 }

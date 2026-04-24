@@ -96,10 +96,7 @@ export class Payments extends APIResource {
    * }
    * ```
    */
-  list(
-    query: PaymentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
+  list(query: PaymentListParams | null | undefined = {}, options?: RequestOptions): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
     return this._client.getAPIList('/payments', CursorPage<PaymentListResponse>, { query, ...options });
   }
 
@@ -121,15 +118,8 @@ export class Payments extends APIResource {
    * }
    * ```
    */
-  listFees(
-    id: string,
-    query: PaymentListFeesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
-    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, {
-      query,
-      ...options,
-    });
+  listFees(id: string, query: PaymentListFeesParams | null | undefined = {}, options?: RequestOptions): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
+    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, { query, ...options });
   }
 
   /**
@@ -155,11 +145,7 @@ export class Payments extends APIResource {
    * );
    * ```
    */
-  refund(
-    id: string,
-    body: PaymentRefundParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Payment> {
+  refund(id: string, body: PaymentRefundParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Payment> {
     return this._client.post(path`/payments/${id}/refund`, { body, ...options });
   }
 
@@ -218,178 +204,30 @@ export class Payments extends APIResource {
   }
 }
 
-export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
+export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>
 
-export type PaymentListFeesResponsesCursorPage = CursorPage<PaymentListFeesResponse>;
+export type PaymentListFeesResponsesCursorPage = CursorPage<PaymentListFeesResponse>
 
 /**
  * The reason why a specific payment was billed
  */
-export type BillingReasons =
-  | 'subscription_create'
-  | 'subscription_cycle'
-  | 'subscription_update'
-  | 'one_time'
-  | 'manual'
-  | 'subscription';
+export type BillingReasons = 'subscription_create' | 'subscription_cycle' | 'subscription_update' | 'one_time' | 'manual' | 'subscription'
 
 /**
  * Possible card brands that a payment token can have
  */
-export type CardBrands =
-  | 'mastercard'
-  | 'visa'
-  | 'amex'
-  | 'discover'
-  | 'unionpay'
-  | 'jcb'
-  | 'diners'
-  | 'link'
-  | 'troy'
-  | 'visadankort'
-  | 'visabancontact'
-  | 'china_union_pay'
-  | 'rupay'
-  | 'jcbrupay'
-  | 'elo'
-  | 'maestro'
-  | 'tarjeta_naranja'
-  | 'cirrus'
-  | 'nspk_mir'
-  | 'verve'
-  | 'ebt'
-  | 'private_label'
-  | 'local_brand'
-  | 'uatp'
-  | 'wexcard'
-  | 'uzcard'
-  | 'meeza'
-  | 'hrg_store_card'
-  | 'girocard'
-  | 'fuel_card'
-  | 'dankort'
-  | 'carnet'
-  | 'atm_card'
-  | 'china_union_payuzcard'
-  | 'codensa'
-  | 'cabal'
-  | 'hipercard'
-  | 'jcblankapay'
-  | 'cmi'
-  | 'unknown';
+export type CardBrands = 'mastercard' | 'visa' | 'amex' | 'discover' | 'unionpay' | 'jcb' | 'diners' | 'link' | 'troy' | 'visadankort' | 'visabancontact' | 'china_union_pay' | 'rupay' | 'jcbrupay' | 'elo' | 'maestro' | 'tarjeta_naranja' | 'cirrus' | 'nspk_mir' | 'verve' | 'ebt' | 'private_label' | 'local_brand' | 'uatp' | 'wexcard' | 'uzcard' | 'meeza' | 'hrg_store_card' | 'girocard' | 'fuel_card' | 'dankort' | 'carnet' | 'atm_card' | 'china_union_payuzcard' | 'codensa' | 'cabal' | 'hipercard' | 'jcblankapay' | 'cmi' | 'unknown'
 
 /**
  * The different types of payment methods that can be used.
  */
-export type PaymentMethodTypes =
-  | 'acss_debit'
-  | 'affirm'
-  | 'afterpay_clearpay'
-  | 'alipay'
-  | 'alma'
-  | 'amazon_pay'
-  | 'apple'
-  | 'apple_pay'
-  | 'au_bank_transfer'
-  | 'au_becs_debit'
-  | 'bacs_debit'
-  | 'bancolombia'
-  | 'bancontact'
-  | 'billie'
-  | 'bizum'
-  | 'blik'
-  | 'boleto'
-  | 'capchase_pay'
-  | 'card'
-  | 'cashapp'
-  | 'claritypay'
-  | 'coinbase'
-  | 'crypto'
-  | 'custom'
-  | 'customer_balance'
-  | 'demo_pay'
-  | 'efecty'
-  | 'eps'
-  | 'eu_bank_transfer'
-  | 'fpx'
-  | 'gb_bank_transfer'
-  | 'giropay'
-  | 'google_pay'
-  | 'gopay'
-  | 'grabpay'
-  | 'id_bank_transfer'
-  | 'ideal'
-  | 'interac'
-  | 'kakao_pay'
-  | 'klarna'
-  | 'klarna_pay_now'
-  | 'konbini'
-  | 'kr_card'
-  | 'kr_market'
-  | 'kriya'
-  | 'link'
-  | 'mb_way'
-  | 'm_pesa'
-  | 'mercado_pago'
-  | 'mobilepay'
-  | 'mondu'
-  | 'multibanco'
-  | 'naver_pay'
-  | 'nequi'
-  | 'netbanking'
-  | 'ng_bank'
-  | 'ng_bank_transfer'
-  | 'ng_card'
-  | 'ng_market'
-  | 'ng_ussd'
-  | 'ng_wallet'
-  | 'nz_bank_account'
-  | 'oxxo'
-  | 'p24'
-  | 'pse'
-  | 'pay_by_bank'
-  | 'payco'
-  | 'paynow'
-  | 'paypal'
-  | 'paypay'
-  | 'payto'
-  | 'pix'
-  | 'platform_balance'
-  | 'promptpay'
-  | 'qris'
-  | 'rechnung'
-  | 'revolut_pay'
-  | 'samsung_pay'
-  | 'satispay'
-  | 'scalapay'
-  | 'sepa_debit'
-  | 'sequra'
-  | 'sezzle'
-  | 'shop_pay'
-  | 'shopeepay'
-  | 'sofort'
-  | 'south_korea_market'
-  | 'spei'
-  | 'splitit'
-  | 'sunbit'
-  | 'swish'
-  | 'tamara'
-  | 'twint'
-  | 'upi'
-  | 'us_bank_account'
-  | 'us_bank_transfer'
-  | 'venmo'
-  | 'vipps'
-  | 'wechat_pay'
-  | 'zip'
-  | 'coinflow'
-  | 'unknown';
+export type PaymentMethodTypes = 'acss_debit' | 'affirm' | 'afterpay_clearpay' | 'alipay' | 'alma' | 'amazon_pay' | 'apple' | 'apple_pay' | 'au_bank_transfer' | 'au_becs_debit' | 'bacs_debit' | 'bancolombia' | 'bancontact' | 'billie' | 'bizum' | 'blik' | 'boleto' | 'capchase_pay' | 'card' | 'cashapp' | 'claritypay' | 'coinbase' | 'crypto' | 'custom' | 'customer_balance' | 'demo_pay' | 'efecty' | 'eps' | 'eu_bank_transfer' | 'fpx' | 'gb_bank_transfer' | 'giropay' | 'google_pay' | 'gopay' | 'grabpay' | 'id_bank_transfer' | 'ideal' | 'interac' | 'kakao_pay' | 'klarna' | 'klarna_pay_now' | 'konbini' | 'kr_card' | 'kr_market' | 'kriya' | 'link' | 'mb_way' | 'm_pesa' | 'mercado_pago' | 'mobilepay' | 'mondu' | 'multibanco' | 'naver_pay' | 'nequi' | 'netbanking' | 'ng_bank' | 'ng_bank_transfer' | 'ng_card' | 'ng_market' | 'ng_ussd' | 'ng_wallet' | 'nz_bank_account' | 'oxxo' | 'p24' | 'pse' | 'pay_by_bank' | 'payco' | 'paynow' | 'paypal' | 'paypay' | 'payto' | 'pix' | 'platform_balance' | 'promptpay' | 'qris' | 'rechnung' | 'revolut_pay' | 'samsung_pay' | 'satispay' | 'scalapay' | 'sepa_debit' | 'sequra' | 'sezzle' | 'shop_pay' | 'shopeepay' | 'sofort' | 'south_korea_market' | 'spei' | 'splitit' | 'sunbit' | 'swish' | 'tamara' | 'twint' | 'upi' | 'us_bank_account' | 'us_bank_transfer' | 'venmo' | 'vipps' | 'wechat_pay' | 'zip' | 'coinflow' | 'unknown'
 
 /**
  * The type of tax inclusivity applied to the receipt, for determining whether the
  * tax is included in the final price, or paid on top.
  */
-export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect';
+export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect'
 
 /**
  * A payment represents a completed or attempted charge. Payments track the amount,
@@ -910,43 +748,10 @@ export interface PaymentListFeesResponse {
   /**
    * The specific origin of the fee, if applicable.
    */
-  type:
-    | 'stripe_domestic_processing_fee'
-    | 'stripe_international_processing_fee'
-    | 'stripe_fixed_processing_fee'
-    | 'stripe_billing_fee'
-    | 'stripe_radar_fee'
-    | 'sales_tax_remittance'
-    | 'sales_tax_remittance_reversal'
-    | 'stripe_sales_tax_fee'
-    | 'whop_processing_fee'
-    | 'marketplace_affiliate_fee'
-    | 'affiliate_fee'
-    | 'crypto_fee'
-    | 'stripe_standard_processing_fee'
-    | 'paypal_fee'
-    | 'stripe_payout_fee'
-    | 'dispute_fee'
-    | 'dispute_alert_fee'
-    | 'apple_processing_fee'
-    | 'buyer_fee'
-    | 'sezzle_processing_fee'
-    | 'splitit_processing_fee'
-    | 'platform_balance_processing_fee'
-    | 'payment_processing_percentage_fee'
-    | 'payment_processing_fixed_fee'
-    | 'cross_border_percentage_fee'
-    | 'fx_percentage_fee'
-    | 'orchestration_percentage_fee'
-    | 'three_ds_fixed_fee'
-    | 'billing_percentage_fee'
-    | 'revshare_percentage_fee'
-    | 'application_fee';
+  type: 'stripe_domestic_processing_fee' | 'stripe_international_processing_fee' | 'stripe_fixed_processing_fee' | 'stripe_billing_fee' | 'stripe_radar_fee' | 'sales_tax_remittance' | 'sales_tax_remittance_reversal' | 'stripe_sales_tax_fee' | 'whop_processing_fee' | 'marketplace_affiliate_fee' | 'affiliate_fee' | 'crypto_fee' | 'stripe_standard_processing_fee' | 'paypal_fee' | 'stripe_payout_fee' | 'dispute_fee' | 'dispute_alert_fee' | 'apple_processing_fee' | 'buyer_fee' | 'sezzle_processing_fee' | 'splitit_processing_fee' | 'platform_balance_processing_fee' | 'payment_processing_percentage_fee' | 'payment_processing_fixed_fee' | 'cross_border_percentage_fee' | 'fx_percentage_fee' | 'orchestration_percentage_fee' | 'three_ds_fixed_fee' | 'billing_percentage_fee' | 'revshare_percentage_fee' | 'application_fee';
 }
 
-export type PaymentCreateParams =
-  | PaymentCreateParams.CreatePaymentInputWithPlan
-  | PaymentCreateParams.CreatePaymentInputWithPlanID;
+export type PaymentCreateParams = PaymentCreateParams.CreatePaymentInputWithPlan | PaymentCreateParams.CreatePaymentInputWithPlanID
 
 export declare namespace PaymentCreateParams {
   export interface CreatePaymentInputWithPlan {
@@ -1301,6 +1106,6 @@ export declare namespace Payments {
     type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
     type PaymentListFeesParams as PaymentListFeesParams,
-    type PaymentRefundParams as PaymentRefundParams,
+    type PaymentRefundParams as PaymentRefundParams
   };
 }

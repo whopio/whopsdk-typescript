@@ -33,15 +33,8 @@ export class CourseLessonInteractions extends APIResource {
    * - `courses:read`
    * - `course_analytics:read`
    */
-  list(
-    query: CourseLessonInteractionListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CourseLessonInteractionListItemsCursorPage, Shared.CourseLessonInteractionListItem> {
-    return this._client.getAPIList(
-      '/course_lesson_interactions',
-      CursorPage<Shared.CourseLessonInteractionListItem>,
-      { query, ...options },
-    );
+  list(query: CourseLessonInteractionListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CourseLessonInteractionListItemsCursorPage, Shared.CourseLessonInteractionListItem> {
+    return this._client.getAPIList('/course_lesson_interactions', CursorPage<Shared.CourseLessonInteractionListItem>, { query, ...options });
   }
 }
 
@@ -83,7 +76,9 @@ export interface CourseLessonInteractionListParams extends CursorPageParams {
 }
 
 export declare namespace CourseLessonInteractions {
-  export { type CourseLessonInteractionListParams as CourseLessonInteractionListParams };
+  export {
+    type CourseLessonInteractionListParams as CourseLessonInteractionListParams
+  };
 }
 
-export { type CourseLessonInteractionListItemsCursorPage };
+export { type CourseLessonInteractionListItemsCursorPage }
