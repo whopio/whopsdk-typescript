@@ -45,8 +45,8 @@ describe('resource supportChannels', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.supportChannels.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+  test.skip('list', async () => {
+    const responsePromise = client.supportChannels.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,16 +57,23 @@ describe('resource supportChannels', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.supportChannels.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-      open: true,
-      order: 'created_at',
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.supportChannels.list(
+        {
+          after: 'after',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          open: true,
+          order: 'created_at',
+          view: 'all',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

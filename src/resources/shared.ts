@@ -1873,6 +1873,13 @@ export interface Membership {
   cancellation_reason: string | null;
 
   /**
+   * The ID of the checkout session/configuration that produced this membership, if
+   * any. Use this to map memberships back to the checkout configuration that created
+   * them.
+   */
+  checkout_configuration_id: string | null;
+
+  /**
    * The company this membership belongs to.
    */
   company: Membership.Company;
@@ -2338,6 +2345,12 @@ export interface Payment {
    * was not made with a card.
    */
   card_last4: string | null;
+
+  /**
+   * The ID of the checkout session/configuration that produced this payment, if any.
+   * Use this to map payments back to the checkout configuration that created them.
+   */
+  checkout_configuration_id: string | null;
 
   /**
    * The company for the payment.
