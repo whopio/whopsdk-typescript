@@ -32,10 +32,7 @@ export class CompanyTokenTransactions extends APIResource {
    *   });
    * ```
    */
-  create(
-    body: CompanyTokenTransactionCreateParams,
-    options?: RequestOptions,
-  ): APIPromise<CompanyTokenTransaction> {
+  create(body: CompanyTokenTransactionCreateParams, options?: RequestOptions): APIPromise<CompanyTokenTransaction> {
     return this._client.post('/company_token_transactions', { body, ...options });
   }
 
@@ -63,19 +60,12 @@ export class CompanyTokenTransactions extends APIResource {
    * - `member:basic:read`
    * - `company:basic:read`
    */
-  list(
-    query: CompanyTokenTransactionListParams,
-    options?: RequestOptions,
-  ): PagePromise<CompanyTokenTransactionListResponsesCursorPage, CompanyTokenTransactionListResponse> {
-    return this._client.getAPIList(
-      '/company_token_transactions',
-      CursorPage<CompanyTokenTransactionListResponse>,
-      { query, ...options },
-    );
+  list(query: CompanyTokenTransactionListParams, options?: RequestOptions): PagePromise<CompanyTokenTransactionListResponsesCursorPage, CompanyTokenTransactionListResponse> {
+    return this._client.getAPIList('/company_token_transactions', CursorPage<CompanyTokenTransactionListResponse>, { query, ...options });
   }
 }
 
-export type CompanyTokenTransactionListResponsesCursorPage = CursorPage<CompanyTokenTransactionListResponse>;
+export type CompanyTokenTransactionListResponsesCursorPage = CursorPage<CompanyTokenTransactionListResponse>
 
 /**
  * A token transaction records a credit or debit to a member's token balance within
@@ -192,7 +182,7 @@ export namespace CompanyTokenTransaction {
 /**
  * The type of token transaction
  */
-export type CompanyTokenTransactionType = 'add' | 'subtract' | 'transfer';
+export type CompanyTokenTransactionType = 'add' | 'subtract' | 'transfer'
 
 /**
  * A token transaction records a credit or debit to a member's token balance within
@@ -306,10 +296,7 @@ export namespace CompanyTokenTransactionListResponse {
   }
 }
 
-export type CompanyTokenTransactionCreateParams =
-  | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeTransfer
-  | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeAdd
-  | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeSubtract;
+export type CompanyTokenTransactionCreateParams = CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeTransfer | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeAdd | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeSubtract
 
 export declare namespace CompanyTokenTransactionCreateParams {
   export interface CreateCompanyTokenTransactionInputTransactionTypeTransfer {
@@ -454,6 +441,6 @@ export declare namespace CompanyTokenTransactions {
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
     type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
-    type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams,
+    type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams
   };
 }

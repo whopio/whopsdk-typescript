@@ -2,19 +2,16 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource shipments', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.shipments.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      payment_id: 'pay_xxxxxxxxxxxxxx',
-      tracking_code: 'tracking_code',
-    });
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    payment_id: 'pay_xxxxxxxxxxxxxx',
+    tracking_code: 'tracking_code',
+  });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,10 +24,10 @@ describe('resource shipments', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.shipments.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      payment_id: 'pay_xxxxxxxxxxxxxx',
-      tracking_code: 'tracking_code',
-    });
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    payment_id: 'pay_xxxxxxxxxxxxxx',
+    tracking_code: 'tracking_code',
+  });
   });
 
   // Mock server tests are disabled
@@ -60,19 +57,16 @@ describe('resource shipments', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.shipments.list(
-        {
-          after: 'after',
-          before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          first: 42,
-          last: 42,
-          payment_id: 'pay_xxxxxxxxxxxxxx',
-          user_id: 'user_xxxxxxxxxxxxx',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.shipments.list({
+    after: 'after',
+    before: 'before',
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    first: 42,
+    last: 42,
+    payment_id: 'pay_xxxxxxxxxxxxxx',
+    user_id: 'user_xxxxxxxxxxxxx',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 });

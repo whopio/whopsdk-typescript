@@ -98,5 +98,8 @@ export interface TopupCreateParams {
 }
 
 export declare namespace Topups {
-  export { type TopupCreateResponse as TopupCreateResponse, type TopupCreateParams as TopupCreateParams };
+  export {
+    type TopupCreateResponse as TopupCreateResponse,
+    type TopupCreateParams as TopupCreateParams
+  };
 }

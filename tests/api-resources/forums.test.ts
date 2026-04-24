@@ -2,10 +2,7 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource forums', () => {
   // Mock server tests are disabled
@@ -35,19 +32,15 @@ describe('resource forums', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.forums.update(
-        'id',
-        {
-          banned_words: ['string'],
-          banner_image: { id: 'id' },
-          email_notification_preference: 'all_admin_posts',
-          who_can_comment: 'everyone',
-          who_can_post: 'everyone',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.forums.update('id', {
+    banned_words: ['string'],
+    banner_image: { id: 'id' },
+    email_notification_preference: 'all_admin_posts',
+    who_can_comment: 'everyone',
+    who_can_post: 'everyone',
+  }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -65,12 +58,12 @@ describe('resource forums', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.forums.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-      product_id: 'prod_xxxxxxxxxxxxx',
-    });
+    company_id: 'biz_xxxxxxxxxxxxxx',
+    after: 'after',
+    before: 'before',
+    first: 42,
+    last: 42,
+    product_id: 'prod_xxxxxxxxxxxxx',
+  });
   });
 });

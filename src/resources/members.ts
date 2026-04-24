@@ -34,15 +34,12 @@ export class Members extends APIResource {
    * - `member:email:read`
    * - `member:phone:read`
    */
-  list(
-    query: MemberListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<MemberListResponsesCursorPage, MemberListResponse> {
+  list(query: MemberListParams | null | undefined = {}, options?: RequestOptions): PagePromise<MemberListResponsesCursorPage, MemberListResponse> {
     return this._client.getAPIList('/members', CursorPage<MemberListResponse>, { query, ...options });
   }
 }
 
-export type MemberListResponsesCursorPage = CursorPage<MemberListResponse>;
+export type MemberListResponsesCursorPage = CursorPage<MemberListResponse>
 
 /**
  * A member represents a user's relationship with a company on Whop, including
@@ -349,6 +346,6 @@ export declare namespace Members {
     type MemberRetrieveResponse as MemberRetrieveResponse,
     type MemberListResponse as MemberListResponse,
     type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
-    type MemberListParams as MemberListParams,
+    type MemberListParams as MemberListParams
   };
 }

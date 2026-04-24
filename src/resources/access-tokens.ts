@@ -19,10 +19,7 @@ export class AccessTokens extends APIResource {
    * const accessToken = await client.accessTokens.create();
    * ```
    */
-  create(
-    body: AccessTokenCreateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AccessTokenCreateResponse> {
+  create(body: AccessTokenCreateParams | null | undefined = {}, options?: RequestOptions): APIPromise<AccessTokenCreateResponse> {
     return this._client.post('/access_tokens', { body, ...options });
   }
 }
@@ -75,6 +72,6 @@ export interface AccessTokenCreateParams {
 export declare namespace AccessTokens {
   export {
     type AccessTokenCreateResponse as AccessTokenCreateResponse,
-    type AccessTokenCreateParams as AccessTokenCreateParams,
+    type AccessTokenCreateParams as AccessTokenCreateParams
   };
 }

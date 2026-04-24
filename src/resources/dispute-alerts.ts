@@ -39,23 +39,17 @@ export class DisputeAlerts extends APIResource {
    * - `payment:basic:read`
    * - `payment:dispute:read`
    */
-  list(
-    query: DisputeAlertListParams,
-    options?: RequestOptions,
-  ): PagePromise<DisputeAlertListResponsesCursorPage, DisputeAlertListResponse> {
-    return this._client.getAPIList('/dispute_alerts', CursorPage<DisputeAlertListResponse>, {
-      query,
-      ...options,
-    });
+  list(query: DisputeAlertListParams, options?: RequestOptions): PagePromise<DisputeAlertListResponsesCursorPage, DisputeAlertListResponse> {
+    return this._client.getAPIList('/dispute_alerts', CursorPage<DisputeAlertListResponse>, { query, ...options });
   }
 }
 
-export type DisputeAlertListResponsesCursorPage = CursorPage<DisputeAlertListResponse>;
+export type DisputeAlertListResponsesCursorPage = CursorPage<DisputeAlertListResponse>
 
 /**
  * The type of dispute alert.
  */
-export type DisputeAlertType = 'dispute' | 'dispute_rdr' | 'fraud';
+export type DisputeAlertType = 'dispute' | 'dispute_rdr' | 'fraud'
 
 /**
  * A dispute alert represents an early warning notification from a payment
@@ -402,6 +396,6 @@ export declare namespace DisputeAlerts {
     type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
     type DisputeAlertListResponse as DisputeAlertListResponse,
     type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
-    type DisputeAlertListParams as DisputeAlertListParams,
+    type DisputeAlertListParams as DisputeAlertListParams
   };
 }

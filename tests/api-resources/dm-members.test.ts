@@ -2,18 +2,12 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({
-  apiKey: 'My API Key',
-  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
-});
+const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
 
 describe('resource dmMembers', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.dmMembers.create({
-      channel_id: 'channel_id',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
+    const responsePromise = client.dmMembers.create({ channel_id: 'channel_id', user_id: 'user_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,10 +19,7 @@ describe('resource dmMembers', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.dmMembers.create({
-      channel_id: 'channel_id',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
+    const response = await client.dmMembers.create({ channel_id: 'channel_id', user_id: 'user_xxxxxxxxxxxxx' });
   });
 
   // Mock server tests are disabled
@@ -58,13 +49,9 @@ describe('resource dmMembers', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.dmMembers.update(
-        'id',
-        { notification_preference: 'all', status: 'requested' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+    await expect(client.dmMembers.update('id', { notification_preference: 'all', status: 'requested' }, { path: '/_stainless_unknown_path' }))
+      .rejects
+      .toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -82,12 +69,12 @@ describe('resource dmMembers', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.dmMembers.list({
-      channel_id: 'channel_id',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-    });
+    channel_id: 'channel_id',
+    after: 'after',
+    before: 'before',
+    first: 42,
+    last: 42,
+  });
   });
 
   // Mock server tests are disabled

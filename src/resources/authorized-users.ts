@@ -69,14 +69,8 @@ export class AuthorizedUsers extends APIResource {
    * }
    * ```
    */
-  list(
-    query: AuthorizedUserListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AuthorizedUserListResponsesCursorPage, AuthorizedUserListResponse> {
-    return this._client.getAPIList('/authorized_users', CursorPage<AuthorizedUserListResponse>, {
-      query,
-      ...options,
-    });
+  list(query: AuthorizedUserListParams | null | undefined = {}, options?: RequestOptions): PagePromise<AuthorizedUserListResponsesCursorPage, AuthorizedUserListResponse> {
+    return this._client.getAPIList('/authorized_users', CursorPage<AuthorizedUserListResponse>, { query, ...options });
   }
 
   /**
@@ -93,17 +87,13 @@ export class AuthorizedUsers extends APIResource {
    * );
    * ```
    */
-  delete(
-    id: string,
-    params: AuthorizedUserDeleteParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AuthorizedUserDeleteResponse> {
-    const { company_id } = params ?? {};
+  delete(id: string, params: AuthorizedUserDeleteParams | null | undefined = {}, options?: RequestOptions): APIPromise<AuthorizedUserDeleteResponse> {
+    const { company_id } = params ?? {}
     return this._client.delete(path`/authorized_users/${id}`, { query: { company_id }, ...options });
   }
 }
 
-export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse>;
+export type AuthorizedUserListResponsesCursorPage = CursorPage<AuthorizedUserListResponse>
 
 /**
  * A user who has been granted administrative access to manage a company's
@@ -246,7 +236,7 @@ export namespace AuthorizedUserListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type AuthorizedUserDeleteResponse = boolean;
+export type AuthorizedUserDeleteResponse = boolean
 
 export interface AuthorizedUserCreateParams {
   /**
@@ -330,6 +320,6 @@ export declare namespace AuthorizedUsers {
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
     type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserListParams as AuthorizedUserListParams,
-    type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
+    type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams
   };
 }
