@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.0.39 (2026-04-24)
+
+Full Changelog: [v0.0.38...v0.0.39](https://github.com/whopio/whopsdk-typescript/compare/v0.0.38...v0.0.39)
+
+### Features
+
+* **api:** api update ([3ac6a98](https://github.com/whopio/whopsdk-typescript/commit/3ac6a98b694040322f61c630581dc0159a659ea4))
+* **api:** api update ([1f364f6](https://github.com/whopio/whopsdk-typescript/commit/1f364f6b0cebde876124559be6e4c4a79c29e78a))
+* **api:** api update ([074b056](https://github.com/whopio/whopsdk-typescript/commit/074b056d88fb3edc01f5bbd101df67ccfd7e7b74))
+* **api:** api update ([0512f56](https://github.com/whopio/whopsdk-typescript/commit/0512f56e8eb3fbf57f036cf8279e0633aa1d4dfc))
+
+
+### Chores
+
+* **internal:** more robust bootstrap script ([1ec3c82](https://github.com/whopio/whopsdk-typescript/commit/1ec3c82dc92d6ebdbdaac9e3f691501cfdf03f3b))
+* **internal:** update docs ordering ([78d8211](https://github.com/whopio/whopsdk-typescript/commit/78d82119c54349db9210913899b79732fe832cbb))
+* restructure docs search code ([4efd2ef](https://github.com/whopio/whopsdk-typescript/commit/4efd2ef0ffd7c0b1ea72ceff90a590bb83d5df46))
+
 ## 0.0.38 (2026-04-21)
 
 Full Changelog: [v0.0.37...v0.0.38](https://github.com/whopio/whopsdk-typescript/compare/v0.0.37...v0.0.38)
