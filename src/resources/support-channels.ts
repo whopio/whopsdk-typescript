@@ -166,8 +166,9 @@ export interface SupportChannelListParams extends CursorPageParams {
   before?: string | null;
 
   /**
-   * The unique identifier of the company to list support channels for. When omitted,
-   * returns support channels across all companies the user has access to.
+   * The unique identifier of the company to list support channels for. Includes
+   * channels of child companies. When omitted, returns support channels across all
+   * companies the user has access to.
    */
   company_id?: string | null;
 
