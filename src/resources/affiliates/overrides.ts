@@ -30,7 +30,11 @@ export class Overrides extends APIResource {
    * );
    * ```
    */
-  create(id: string, body: OverrideCreateParams, options?: RequestOptions): APIPromise<OverrideCreateResponse> {
+  create(
+    id: string,
+    body: OverrideCreateParams,
+    options?: RequestOptions,
+  ): APIPromise<OverrideCreateResponse> {
     return this._client.post(path`/affiliates/${id}/overrides`, { body, ...options });
   }
 
@@ -49,8 +53,12 @@ export class Overrides extends APIResource {
    * );
    * ```
    */
-  retrieve(overrideID: string, params: OverrideRetrieveParams, options?: RequestOptions): APIPromise<OverrideRetrieveResponse> {
-    const { id } = params
+  retrieve(
+    overrideID: string,
+    params: OverrideRetrieveParams,
+    options?: RequestOptions,
+  ): APIPromise<OverrideRetrieveResponse> {
+    const { id } = params;
     return this._client.get(path`/affiliates/${id}/overrides/${overrideID}`, options);
   }
 
@@ -69,8 +77,12 @@ export class Overrides extends APIResource {
    * );
    * ```
    */
-  update(overrideID: string, params: OverrideUpdateParams, options?: RequestOptions): APIPromise<OverrideUpdateResponse> {
-    const { id, ...body } = params
+  update(
+    overrideID: string,
+    params: OverrideUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<OverrideUpdateResponse> {
+    const { id, ...body } = params;
     return this._client.patch(path`/affiliates/${id}/overrides/${overrideID}`, { body, ...options });
   }
 
@@ -91,8 +103,15 @@ export class Overrides extends APIResource {
    * }
    * ```
    */
-  list(id: string, query: OverrideListParams | null | undefined = {}, options?: RequestOptions): PagePromise<OverrideListResponsesCursorPage, OverrideListResponse> {
-    return this._client.getAPIList(path`/affiliates/${id}/overrides`, CursorPage<OverrideListResponse>, { query, ...options });
+  list(
+    id: string,
+    query: OverrideListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<OverrideListResponsesCursorPage, OverrideListResponse> {
+    return this._client.getAPIList(path`/affiliates/${id}/overrides`, CursorPage<OverrideListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -110,38 +129,42 @@ export class Overrides extends APIResource {
    * );
    * ```
    */
-  delete(overrideID: string, params: OverrideDeleteParams, options?: RequestOptions): APIPromise<OverrideDeleteResponse> {
-    const { id } = params
+  delete(
+    overrideID: string,
+    params: OverrideDeleteParams,
+    options?: RequestOptions,
+  ): APIPromise<OverrideDeleteResponse> {
+    const { id } = params;
     return this._client.delete(path`/affiliates/${id}/overrides/${overrideID}`, options);
   }
 }
 
-export type OverrideListResponsesCursorPage = CursorPage<OverrideListResponse>
+export type OverrideListResponsesCursorPage = CursorPage<OverrideListResponse>;
 
 /**
  * Whether the affiliate commission applies to the first payment or all payments
  */
-export type AffiliateAppliesToPayments = 'first_payment' | 'all_payments'
+export type AffiliateAppliesToPayments = 'first_payment' | 'all_payments';
 
 /**
  * Whether a rev-share override applies to a single product or all products
  */
-export type AffiliateAppliesToProducts = 'single_product' | 'all_products'
+export type AffiliateAppliesToProducts = 'single_product' | 'all_products';
 
 /**
  * The role of an affiliate override (standard or rev_share)
  */
-export type AffiliateOverrideRoles = 'standard' | 'rev_share'
+export type AffiliateOverrideRoles = 'standard' | 'rev_share';
 
 /**
  * The types of payouts an affiliate can have
  */
-export type AffiliatePayoutTypes = 'percentage' | 'flat_fee'
+export type AffiliatePayoutTypes = 'percentage' | 'flat_fee';
 
 /**
  * The calculation method for affiliate rev-share percentages
  */
-export type AffiliateRevenueBases = 'pre_fees' | 'post_fees'
+export type AffiliateRevenueBases = 'pre_fees' | 'post_fees';
 
 /**
  * A commission configuration for an affiliate, defining payout terms for a
@@ -418,9 +441,11 @@ export interface OverrideListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type OverrideDeleteResponse = boolean
+export type OverrideDeleteResponse = boolean;
 
-export type OverrideCreateParams = OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeStandard | OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeRevShare
+export type OverrideCreateParams =
+  | OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeStandard
+  | OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeRevShare;
 
 export declare namespace OverrideCreateParams {
   export interface CreateAffiliateOverrideInputOverrideTypeStandard {
@@ -563,6 +588,6 @@ export declare namespace Overrides {
     type OverrideRetrieveParams as OverrideRetrieveParams,
     type OverrideUpdateParams as OverrideUpdateParams,
     type OverrideListParams as OverrideListParams,
-    type OverrideDeleteParams as OverrideDeleteParams
+    type OverrideDeleteParams as OverrideDeleteParams,
   };
 }

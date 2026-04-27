@@ -75,7 +75,10 @@ export class PromoCodes extends APIResource {
    * }
    * ```
    */
-  list(query: PromoCodeListParams, options?: RequestOptions): PagePromise<PromoCodeListResponsesCursorPage, PromoCodeListResponse> {
+  list(
+    query: PromoCodeListParams,
+    options?: RequestOptions,
+  ): PagePromise<PromoCodeListResponsesCursorPage, PromoCodeListResponse> {
     return this._client.getAPIList('/promo_codes', CursorPage<PromoCodeListResponse>, { query, ...options });
   }
 
@@ -99,7 +102,7 @@ export class PromoCodes extends APIResource {
   }
 }
 
-export type PromoCodeListResponsesCursorPage = CursorPage<PromoCodeListResponse>
+export type PromoCodeListResponsesCursorPage = CursorPage<PromoCodeListResponse>;
 
 /**
  * A promo code applies a discount to a plan during checkout. Promo codes can be
@@ -242,12 +245,12 @@ export namespace PromoCode {
 /**
  * Statuses for promo codes
  */
-export type PromoCodeStatus = 'active' | 'inactive' | 'archived'
+export type PromoCodeStatus = 'active' | 'inactive' | 'archived';
 
 /**
  * The duration setting for the promo code
  */
-export type PromoDuration = 'forever' | 'once' | 'repeating'
+export type PromoDuration = 'forever' | 'once' | 'repeating';
 
 /**
  * A promo code applies a discount to a plan during checkout. Promo codes can be
@@ -370,7 +373,7 @@ export namespace PromoCodeListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type PromoCodeDeleteResponse = boolean
+export type PromoCodeDeleteResponse = boolean;
 
 export interface PromoCodeCreateParams {
   /**
@@ -515,6 +518,6 @@ export declare namespace PromoCodes {
     type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
     type PromoCodeCreateParams as PromoCodeCreateParams,
-    type PromoCodeListParams as PromoCodeListParams
+    type PromoCodeListParams as PromoCodeListParams,
   };
 }

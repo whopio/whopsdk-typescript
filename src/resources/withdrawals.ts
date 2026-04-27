@@ -69,12 +69,15 @@ export class Withdrawals extends APIResource {
    * }
    * ```
    */
-  list(query: WithdrawalListParams, options?: RequestOptions): PagePromise<WithdrawalListResponsesCursorPage, WithdrawalListResponse> {
+  list(
+    query: WithdrawalListParams,
+    options?: RequestOptions,
+  ): PagePromise<WithdrawalListResponsesCursorPage, WithdrawalListResponse> {
     return this._client.getAPIList('/withdrawals', CursorPage<WithdrawalListResponse>, { query, ...options });
   }
 }
 
-export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>
+export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
 
 /**
  * A withdrawal represents a request to transfer funds from a ledger account to an
@@ -105,7 +108,55 @@ export interface Withdrawal {
   /**
    * The different error codes a payout can be in.
    */
-  error_code: 'account_closed' | 'account_does_not_exist' | 'account_information_invalid' | 'account_number_invalid_region' | 'account_frozen' | 'account_lookup_failed' | 'account_not_found' | 'amount_out_of_bounds' | 'attributes_not_validated' | 'b2b_payments_prohibited' | 'bank_statement_required' | 'compliance_review' | 'currency_not_supported' | 'deposit_canceled' | 'deposit_failed' | 'deposit_rejected' | 'destination_unavailable' | 'exceeded_account_limit' | 'expired_quote' | 'generic_payout_error' | 'technical_problem' | 'identification_number_invalid' | 'invalid_account_number' | 'invalid_bank_code' | 'invalid_beneficiary' | 'invalid_mailing_address' | 'invalid_branch_number' | 'invalid_branch_code' | 'invalid_phone_number' | 'invalid_routing_number' | 'invalid_swift_code' | 'invalid_company_details' | 'manual_cancelation' | 'misc_error' | 'missing_city_and_country' | 'missing_phone_number' | 'missing_remittance_info' | 'payee_name_invalid' | 'receiving_account_locked' | 'rejected_by_compliance' | 'rtp_not_supported' | 'non_transaction_account' | 'source_token_insufficient_funds' | 'ssn_invalid' | 'wallet_screenshot_required' | 'unsupported_region' | 'payout_provider_timeout' | null;
+  error_code:
+    | 'account_closed'
+    | 'account_does_not_exist'
+    | 'account_information_invalid'
+    | 'account_number_invalid_region'
+    | 'account_frozen'
+    | 'account_lookup_failed'
+    | 'account_not_found'
+    | 'amount_out_of_bounds'
+    | 'attributes_not_validated'
+    | 'b2b_payments_prohibited'
+    | 'bank_statement_required'
+    | 'compliance_review'
+    | 'currency_not_supported'
+    | 'deposit_canceled'
+    | 'deposit_failed'
+    | 'deposit_rejected'
+    | 'destination_unavailable'
+    | 'exceeded_account_limit'
+    | 'expired_quote'
+    | 'generic_payout_error'
+    | 'technical_problem'
+    | 'identification_number_invalid'
+    | 'invalid_account_number'
+    | 'invalid_bank_code'
+    | 'invalid_beneficiary'
+    | 'invalid_mailing_address'
+    | 'invalid_branch_number'
+    | 'invalid_branch_code'
+    | 'invalid_phone_number'
+    | 'invalid_routing_number'
+    | 'invalid_swift_code'
+    | 'invalid_company_details'
+    | 'manual_cancelation'
+    | 'misc_error'
+    | 'missing_city_and_country'
+    | 'missing_phone_number'
+    | 'missing_remittance_info'
+    | 'payee_name_invalid'
+    | 'receiving_account_locked'
+    | 'rejected_by_compliance'
+    | 'rtp_not_supported'
+    | 'non_transaction_account'
+    | 'source_token_insufficient_funds'
+    | 'ssn_invalid'
+    | 'wallet_screenshot_required'
+    | 'unsupported_region'
+    | 'payout_provider_timeout'
+    | null;
 
   /**
    * A human-readable message describing why the payout failed. Null if no error
@@ -222,17 +273,24 @@ export namespace Withdrawal {
 /**
  * The different fee types for a withdrawal.
  */
-export type WithdrawalFeeTypes = 'exclusive' | 'inclusive'
+export type WithdrawalFeeTypes = 'exclusive' | 'inclusive';
 
 /**
  * The different speeds of withdrawals
  */
-export type WithdrawalSpeeds = 'standard' | 'instant'
+export type WithdrawalSpeeds = 'standard' | 'instant';
 
 /**
  * The status of a withdrawal request
  */
-export type WithdrawalStatus = 'requested' | 'awaiting_payment' | 'in_transit' | 'completed' | 'failed' | 'canceled' | 'denied'
+export type WithdrawalStatus =
+  | 'requested'
+  | 'awaiting_payment'
+  | 'in_transit'
+  | 'completed'
+  | 'failed'
+  | 'canceled'
+  | 'denied';
 
 /**
  * A withdrawal represents a request to transfer funds from a ledger account to an
@@ -368,6 +426,6 @@ export declare namespace Withdrawals {
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalCreateParams as WithdrawalCreateParams,
-    type WithdrawalListParams as WithdrawalListParams
+    type WithdrawalListParams as WithdrawalListParams,
   };
 }

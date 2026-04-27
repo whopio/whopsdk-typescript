@@ -31,12 +31,18 @@ export class CourseStudents extends APIResource {
    * - `courses:read`
    * - `course_analytics:read`
    */
-  list(query: CourseStudentListParams, options?: RequestOptions): PagePromise<CourseStudentListResponsesCursorPage, CourseStudentListResponse> {
-    return this._client.getAPIList('/course_students', CursorPage<CourseStudentListResponse>, { query, ...options });
+  list(
+    query: CourseStudentListParams,
+    options?: RequestOptions,
+  ): PagePromise<CourseStudentListResponsesCursorPage, CourseStudentListResponse> {
+    return this._client.getAPIList('/course_students', CursorPage<CourseStudentListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type CourseStudentListResponsesCursorPage = CursorPage<CourseStudentListResponse>
+export type CourseStudentListResponsesCursorPage = CursorPage<CourseStudentListResponse>;
 
 /**
  * An enrollment record for a student in a course, including progress and
@@ -239,6 +245,6 @@ export declare namespace CourseStudents {
     type CourseStudentRetrieveResponse as CourseStudentRetrieveResponse,
     type CourseStudentListResponse as CourseStudentListResponse,
     type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
-    type CourseStudentListParams as CourseStudentListParams
+    type CourseStudentListParams as CourseStudentListParams,
   };
 }

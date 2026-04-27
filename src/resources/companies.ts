@@ -44,7 +44,11 @@ export class Companies extends APIResource {
    * - `company:update`
    * - `company:basic:read`
    */
-  update(id: string, body: CompanyUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Company> {
+  update(
+    id: string,
+    body: CompanyUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Company> {
     return this._client.patch(path`/companies/${id}`, { body, ...options });
   }
 
@@ -57,17 +61,29 @@ export class Companies extends APIResource {
    *
    * - `company:basic:read`
    */
-  list(query: CompanyListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
+  list(
+    query: CompanyListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
     return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
   }
 }
 
-export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>
+export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
 
 /**
  * The different websites you can have social links for
  */
-export type SocialLinkWebsites = 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'
+export type SocialLinkWebsites =
+  | 'x'
+  | 'instagram'
+  | 'facebook'
+  | 'tiktok'
+  | 'youtube'
+  | 'linkedin'
+  | 'twitch'
+  | 'website'
+  | 'custom';
 
 /**
  * A company is a seller on Whop. Companies own products, manage members, and
@@ -418,6 +434,6 @@ export declare namespace Companies {
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
-    type CompanyListParams as CompanyListParams
+    type CompanyListParams as CompanyListParams,
   };
 }

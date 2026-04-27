@@ -21,17 +21,20 @@ export class Reviews extends APIResource {
    * Returns a paginated list of customer reviews for a specific product, with
    * optional filtering by star rating and creation date.
    */
-  list(query: ReviewListParams, options?: RequestOptions): PagePromise<ReviewListResponsesCursorPage, ReviewListResponse> {
+  list(
+    query: ReviewListParams,
+    options?: RequestOptions,
+  ): PagePromise<ReviewListResponsesCursorPage, ReviewListResponse> {
     return this._client.getAPIList('/reviews', CursorPage<ReviewListResponse>, { query, ...options });
   }
 }
 
-export type ReviewListResponsesCursorPage = CursorPage<ReviewListResponse>
+export type ReviewListResponsesCursorPage = CursorPage<ReviewListResponse>;
 
 /**
  * The statuses a review can have
  */
-export type ReviewStatus = 'pending' | 'published' | 'removed'
+export type ReviewStatus = 'pending' | 'published' | 'removed';
 
 /**
  * A user-submitted review of a company, including a star rating and optional text
@@ -369,6 +372,6 @@ export declare namespace Reviews {
     type ReviewRetrieveResponse as ReviewRetrieveResponse,
     type ReviewListResponse as ReviewListResponse,
     type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
-    type ReviewListParams as ReviewListParams
+    type ReviewListParams as ReviewListParams,
   };
 }

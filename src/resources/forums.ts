@@ -30,7 +30,11 @@ export class Forums extends APIResource {
    *
    * - `forum:moderate`
    */
-  update(id: string, body: ForumUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Forum> {
+  update(
+    id: string,
+    body: ForumUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Forum> {
     return this._client.patch(path`/forums/${id}`, { body, ...options });
   }
 
@@ -42,12 +46,15 @@ export class Forums extends APIResource {
    *
    * - `forum:read`
    */
-  list(query: ForumListParams, options?: RequestOptions): PagePromise<ForumListResponsesCursorPage, ForumListResponse> {
+  list(
+    query: ForumListParams,
+    options?: RequestOptions,
+  ): PagePromise<ForumListResponsesCursorPage, ForumListResponse> {
     return this._client.getAPIList('/forums', CursorPage<ForumListResponse>, { query, ...options });
   }
 }
 
-export type ForumListResponsesCursorPage = CursorPage<ForumListResponse>
+export type ForumListResponsesCursorPage = CursorPage<ForumListResponse>;
 
 /**
  * A discussion forum where members can create posts, comment, and react, belonging
@@ -176,6 +183,6 @@ export declare namespace Forums {
     type ForumListResponse as ForumListResponse,
     type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
     type ForumUpdateParams as ForumUpdateParams,
-    type ForumListParams as ForumListParams
+    type ForumListParams as ForumListParams,
   };
 }

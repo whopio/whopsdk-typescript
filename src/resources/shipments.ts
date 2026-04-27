@@ -69,12 +69,15 @@ export class Shipments extends APIResource {
    * }
    * ```
    */
-  list(query: ShipmentListParams | null | undefined = {}, options?: RequestOptions): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
+  list(
+    query: ShipmentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
     return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse>, { query, ...options });
   }
 }
 
-export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>
+export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>;
 
 /**
  * A physical shipment associated with a payment, including carrier details and
@@ -204,6 +207,6 @@ export declare namespace Shipments {
     type ShipmentListResponse as ShipmentListResponse,
     type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
     type ShipmentCreateParams as ShipmentCreateParams,
-    type ShipmentListParams as ShipmentListParams
+    type ShipmentListParams as ShipmentListParams,
   };
 }

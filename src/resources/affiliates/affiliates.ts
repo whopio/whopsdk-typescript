@@ -3,7 +3,25 @@
 import { APIResource } from '../../core/resource';
 import * as Shared from '../shared';
 import * as OverridesAPI from './overrides';
-import { AffiliateAppliesToPayments, AffiliateAppliesToProducts, AffiliateOverrideRoles, AffiliatePayoutTypes, AffiliateRevenueBases, OverrideCreateParams, OverrideCreateResponse, OverrideDeleteParams, OverrideDeleteResponse, OverrideListParams, OverrideListResponse, OverrideListResponsesCursorPage, OverrideRetrieveParams, OverrideRetrieveResponse, OverrideUpdateParams, OverrideUpdateResponse, Overrides } from './overrides';
+import {
+  AffiliateAppliesToPayments,
+  AffiliateAppliesToProducts,
+  AffiliateOverrideRoles,
+  AffiliatePayoutTypes,
+  AffiliateRevenueBases,
+  OverrideCreateParams,
+  OverrideCreateResponse,
+  OverrideDeleteParams,
+  OverrideDeleteResponse,
+  OverrideListParams,
+  OverrideListResponse,
+  OverrideListResponsesCursorPage,
+  OverrideRetrieveParams,
+  OverrideRetrieveResponse,
+  OverrideUpdateParams,
+  OverrideUpdateResponse,
+  Overrides,
+} from './overrides';
 import { APIPromise } from '../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
 import { RequestOptions } from '../../internal/request-options';
@@ -70,7 +88,10 @@ export class Affiliates extends APIResource {
    * }
    * ```
    */
-  list(query: AffiliateListParams, options?: RequestOptions): PagePromise<AffiliateListResponsesCursorPage, AffiliateListResponse> {
+  list(
+    query: AffiliateListParams,
+    options?: RequestOptions,
+  ): PagePromise<AffiliateListResponsesCursorPage, AffiliateListResponse> {
     return this._client.getAPIList('/affiliates', CursorPage<AffiliateListResponse>, { query, ...options });
   }
 
@@ -111,7 +132,7 @@ export class Affiliates extends APIResource {
   }
 }
 
-export type AffiliateListResponsesCursorPage = CursorPage<AffiliateListResponse>
+export type AffiliateListResponsesCursorPage = CursorPage<AffiliateListResponse>;
 
 /**
  * An affiliate tracks a user's referral performance and commission earnings for a
@@ -234,7 +255,7 @@ export namespace Affiliate {
 /**
  * Statuses for resources
  */
-export type Status = 'active' | 'archived' | 'deleted'
+export type Status = 'active' | 'archived' | 'deleted';
 
 /**
  * An affiliate tracks a user's referral performance and commission earnings for a
@@ -357,12 +378,12 @@ export namespace AffiliateListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type AffiliateArchiveResponse = boolean
+export type AffiliateArchiveResponse = boolean;
 
 /**
  * Represents `true` or `false` values.
  */
-export type AffiliateUnarchiveResponse = boolean
+export type AffiliateUnarchiveResponse = boolean;
 
 export interface AffiliateCreateParams {
   /**
@@ -429,7 +450,7 @@ export declare namespace Affiliates {
     type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
     type AffiliateCreateParams as AffiliateCreateParams,
-    type AffiliateListParams as AffiliateListParams
+    type AffiliateListParams as AffiliateListParams,
   };
 
   export {
@@ -449,6 +470,6 @@ export declare namespace Affiliates {
     type OverrideRetrieveParams as OverrideRetrieveParams,
     type OverrideUpdateParams as OverrideUpdateParams,
     type OverrideListParams as OverrideListParams,
-    type OverrideDeleteParams as OverrideDeleteParams
+    type OverrideDeleteParams as OverrideDeleteParams,
   };
 }

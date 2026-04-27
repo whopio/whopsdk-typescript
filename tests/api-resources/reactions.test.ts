@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource reactions', () => {
   // Mock server tests are disabled
@@ -20,10 +23,10 @@ describe('resource reactions', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.reactions.create({
-    resource_id: 'resource_id',
-    emoji: 'emoji',
-    poll_option_id: 'poll_option_id',
-  });
+      resource_id: 'resource_id',
+      emoji: 'emoji',
+      poll_option_id: 'poll_option_id',
+    });
   });
 
   // Mock server tests are disabled
@@ -53,12 +56,12 @@ describe('resource reactions', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.reactions.list({
-    resource_id: 'resource_id',
-    after: 'after',
-    before: 'before',
-    first: 42,
-    last: 42,
-  });
+      resource_id: 'resource_id',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
   });
 
   // Mock server tests are disabled
@@ -76,8 +79,12 @@ describe('resource reactions', () => {
   // Mock server tests are disabled
   test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.reactions.delete('reac_xxxxxxxxxxxxxxxxxxxxxx', { emoji: 'emoji' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.reactions.delete(
+        'reac_xxxxxxxxxxxxxxxxxxxxxx',
+        { emoji: 'emoji' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

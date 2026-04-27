@@ -64,7 +64,11 @@ export class Courses extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: CourseUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Course> {
+  update(
+    id: string,
+    body: CourseUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Course> {
     return this._client.patch(path`/courses/${id}`, { body, ...options });
   }
 
@@ -84,7 +88,10 @@ export class Courses extends APIResource {
    * }
    * ```
    */
-  list(query: CourseListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CourseListResponsesCursorPage, CourseListResponse> {
+  list(
+    query: CourseListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CourseListResponsesCursorPage, CourseListResponse> {
     return this._client.getAPIList('/courses', CursorPage<CourseListResponse>, { query, ...options });
   }
 
@@ -108,7 +115,7 @@ export class Courses extends APIResource {
   }
 }
 
-export type CourseListResponsesCursorPage = CursorPage<CourseListResponse>
+export type CourseListResponsesCursorPage = CursorPage<CourseListResponse>;
 
 /**
  * A structured learning module containing chapters and lessons, belonging to an
@@ -344,12 +351,34 @@ export namespace Course {
  * The available visibilities for a course. Determines how / whether a course is
  * visible to users.
  */
-export type CourseVisibilities = 'visible' | 'hidden'
+export type CourseVisibilities = 'visible' | 'hidden';
 
 /**
  * The available languages for a course
  */
-export type Languages = 'en' | 'es' | 'it' | 'pt' | 'de' | 'fr' | 'pl' | 'ru' | 'nl' | 'ca' | 'tr' | 'sv' | 'uk' | 'no' | 'fi' | 'sk' | 'el' | 'cs' | 'hr' | 'da' | 'ro' | 'bg'
+export type Languages =
+  | 'en'
+  | 'es'
+  | 'it'
+  | 'pt'
+  | 'de'
+  | 'fr'
+  | 'pl'
+  | 'ru'
+  | 'nl'
+  | 'ca'
+  | 'tr'
+  | 'sv'
+  | 'uk'
+  | 'no'
+  | 'fi'
+  | 'sk'
+  | 'el'
+  | 'cs'
+  | 'hr'
+  | 'da'
+  | 'ro'
+  | 'bg';
 
 /**
  * A structured learning module containing chapters and lessons, belonging to an
@@ -475,7 +504,7 @@ export namespace CourseListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type CourseDeleteResponse = boolean
+export type CourseDeleteResponse = boolean;
 
 export interface CourseCreateParams {
   /**
@@ -695,6 +724,6 @@ export declare namespace Courses {
     type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
     type CourseCreateParams as CourseCreateParams,
     type CourseUpdateParams as CourseUpdateParams,
-    type CourseListParams as CourseListParams
+    type CourseListParams as CourseListParams,
   };
 }

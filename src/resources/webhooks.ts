@@ -72,7 +72,11 @@ export class Webhooks extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: WebhookUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Webhook> {
+  update(
+    id: string,
+    body: WebhookUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Webhook> {
     return this._client.patch(path`/webhooks/${id}`, { body, ...options });
   }
 
@@ -94,7 +98,10 @@ export class Webhooks extends APIResource {
    * }
    * ```
    */
-  list(query: WebhookListParams, options?: RequestOptions): PagePromise<WebhookListResponsesCursorPage, WebhookListResponse> {
+  list(
+    query: WebhookListParams,
+    options?: RequestOptions,
+  ): PagePromise<WebhookListResponsesCursorPage, WebhookListResponse> {
     return this._client.getAPIList('/webhooks', CursorPage<WebhookListResponse>, { query, ...options });
   }
 
@@ -116,7 +123,10 @@ export class Webhooks extends APIResource {
     return this._client.delete(path`/webhooks/${id}`, options);
   }
 
-  unwrap(body: string, { headers, key }: { headers: Record<string, string>; key?: string }): UnwrapWebhookEvent {
+  unwrap(
+    body: string,
+    { headers, key }: { headers: Record<string, string>; key?: string },
+  ): UnwrapWebhookEvent {
     if (headers !== undefined) {
       const keyStr: string | null = key === undefined ? this._client.webhookKey : key;
       if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
@@ -127,12 +137,12 @@ export class Webhooks extends APIResource {
   }
 }
 
-export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>
+export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>;
 
 /**
  * The different API versions
  */
-export type APIVersion = 'v1' | 'v2' | 'v5'
+export type APIVersion = 'v1' | 'v2' | 'v5';
 
 /**
  * A webhook endpoint that receives event notifications for a company via HTTP
@@ -190,7 +200,40 @@ export interface Webhook {
 /**
  * The different event types available
  */
-export type WebhookEvent = 'invoice.created' | 'invoice.marked_uncollectible' | 'invoice.paid' | 'invoice.past_due' | 'invoice.voided' | 'membership.activated' | 'membership.deactivated' | 'entry.created' | 'entry.approved' | 'entry.denied' | 'entry.deleted' | 'setup_intent.requires_action' | 'setup_intent.succeeded' | 'setup_intent.canceled' | 'withdrawal.created' | 'withdrawal.updated' | 'course_lesson_interaction.completed' | 'payout_method.created' | 'verification.succeeded' | 'payout_account.status_updated' | 'resolution_center_case.created' | 'resolution_center_case.updated' | 'resolution_center_case.decided' | 'payment.created' | 'payment.succeeded' | 'payment.failed' | 'payment.pending' | 'dispute.created' | 'dispute.updated' | 'refund.created' | 'refund.updated' | 'dispute_alert.created' | 'membership.cancel_at_period_end_changed'
+export type WebhookEvent =
+  | 'invoice.created'
+  | 'invoice.marked_uncollectible'
+  | 'invoice.paid'
+  | 'invoice.past_due'
+  | 'invoice.voided'
+  | 'membership.activated'
+  | 'membership.deactivated'
+  | 'entry.created'
+  | 'entry.approved'
+  | 'entry.denied'
+  | 'entry.deleted'
+  | 'setup_intent.requires_action'
+  | 'setup_intent.succeeded'
+  | 'setup_intent.canceled'
+  | 'withdrawal.created'
+  | 'withdrawal.updated'
+  | 'course_lesson_interaction.completed'
+  | 'payout_method.created'
+  | 'verification.succeeded'
+  | 'payout_account.status_updated'
+  | 'resolution_center_case.created'
+  | 'resolution_center_case.updated'
+  | 'resolution_center_case.decided'
+  | 'payment.created'
+  | 'payment.succeeded'
+  | 'payment.failed'
+  | 'payment.pending'
+  | 'dispute.created'
+  | 'dispute.updated'
+  | 'refund.created'
+  | 'refund.updated'
+  | 'dispute_alert.created'
+  | 'membership.cancel_at_period_end_changed';
 
 /**
  * A webhook endpoint that receives event notifications for a company via HTTP
@@ -297,7 +340,7 @@ export interface WebhookListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type WebhookDeleteResponse = boolean
+export type WebhookDeleteResponse = boolean;
 
 export interface InvoiceCreatedWebhookEvent {
   /**
@@ -1424,7 +1467,18 @@ export namespace ResolutionCenterCaseCreatedWebhookEvent {
       /**
        * The type of action recorded in this event.
        */
-      action: 'created' | 'responded' | 'accepted' | 'denied' | 'appealed' | 'withdrew' | 'requested_more_info' | 'escalated' | 'dispute_opened' | 'dispute_customer_won' | 'dispute_merchant_won';
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
 
       /**
        * The datetime the resolution event was created.
@@ -1670,7 +1724,18 @@ export namespace ResolutionCenterCaseUpdatedWebhookEvent {
       /**
        * The type of action recorded in this event.
        */
-      action: 'created' | 'responded' | 'accepted' | 'denied' | 'appealed' | 'withdrew' | 'requested_more_info' | 'escalated' | 'dispute_opened' | 'dispute_customer_won' | 'dispute_merchant_won';
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
 
       /**
        * The datetime the resolution event was created.
@@ -1916,7 +1981,18 @@ export namespace ResolutionCenterCaseDecidedWebhookEvent {
       /**
        * The type of action recorded in this event.
        */
-      action: 'created' | 'responded' | 'accepted' | 'denied' | 'appealed' | 'withdrew' | 'requested_more_info' | 'escalated' | 'dispute_opened' | 'dispute_customer_won' | 'dispute_merchant_won';
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
 
       /**
        * The datetime the resolution event was created.
@@ -2972,7 +3048,40 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   company_id?: string | null;
 }
 
-export type UnwrapWebhookEvent = InvoiceCreatedWebhookEvent | InvoiceMarkedUncollectibleWebhookEvent | InvoicePaidWebhookEvent | InvoicePastDueWebhookEvent | InvoiceVoidedWebhookEvent | MembershipActivatedWebhookEvent | MembershipDeactivatedWebhookEvent | EntryCreatedWebhookEvent | EntryApprovedWebhookEvent | EntryDeniedWebhookEvent | EntryDeletedWebhookEvent | SetupIntentRequiresActionWebhookEvent | SetupIntentSucceededWebhookEvent | SetupIntentCanceledWebhookEvent | WithdrawalCreatedWebhookEvent | WithdrawalUpdatedWebhookEvent | CourseLessonInteractionCompletedWebhookEvent | PayoutMethodCreatedWebhookEvent | VerificationSucceededWebhookEvent | PayoutAccountStatusUpdatedWebhookEvent | ResolutionCenterCaseCreatedWebhookEvent | ResolutionCenterCaseUpdatedWebhookEvent | ResolutionCenterCaseDecidedWebhookEvent | PaymentCreatedWebhookEvent | PaymentSucceededWebhookEvent | PaymentFailedWebhookEvent | PaymentPendingWebhookEvent | DisputeCreatedWebhookEvent | DisputeUpdatedWebhookEvent | RefundCreatedWebhookEvent | RefundUpdatedWebhookEvent | DisputeAlertCreatedWebhookEvent | MembershipCancelAtPeriodEndChangedWebhookEvent
+export type UnwrapWebhookEvent =
+  | InvoiceCreatedWebhookEvent
+  | InvoiceMarkedUncollectibleWebhookEvent
+  | InvoicePaidWebhookEvent
+  | InvoicePastDueWebhookEvent
+  | InvoiceVoidedWebhookEvent
+  | MembershipActivatedWebhookEvent
+  | MembershipDeactivatedWebhookEvent
+  | EntryCreatedWebhookEvent
+  | EntryApprovedWebhookEvent
+  | EntryDeniedWebhookEvent
+  | EntryDeletedWebhookEvent
+  | SetupIntentRequiresActionWebhookEvent
+  | SetupIntentSucceededWebhookEvent
+  | SetupIntentCanceledWebhookEvent
+  | WithdrawalCreatedWebhookEvent
+  | WithdrawalUpdatedWebhookEvent
+  | CourseLessonInteractionCompletedWebhookEvent
+  | PayoutMethodCreatedWebhookEvent
+  | VerificationSucceededWebhookEvent
+  | PayoutAccountStatusUpdatedWebhookEvent
+  | ResolutionCenterCaseCreatedWebhookEvent
+  | ResolutionCenterCaseUpdatedWebhookEvent
+  | ResolutionCenterCaseDecidedWebhookEvent
+  | PaymentCreatedWebhookEvent
+  | PaymentSucceededWebhookEvent
+  | PaymentFailedWebhookEvent
+  | PaymentPendingWebhookEvent
+  | DisputeCreatedWebhookEvent
+  | DisputeUpdatedWebhookEvent
+  | RefundCreatedWebhookEvent
+  | RefundUpdatedWebhookEvent
+  | DisputeAlertCreatedWebhookEvent
+  | MembershipCancelAtPeriodEndChangedWebhookEvent;
 
 export interface WebhookCreateParams {
   /**
@@ -3102,6 +3211,6 @@ export declare namespace Webhooks {
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
-    type WebhookListParams as WebhookListParams
+    type WebhookListParams as WebhookListParams,
   };
 }

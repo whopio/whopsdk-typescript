@@ -48,7 +48,10 @@ export class FeeMarkups extends APIResource {
    * }
    * ```
    */
-  list(query: FeeMarkupListParams, options?: RequestOptions): PagePromise<FeeMarkupListResponsesCursorPage, FeeMarkupListResponse> {
+  list(
+    query: FeeMarkupListParams,
+    options?: RequestOptions,
+  ): PagePromise<FeeMarkupListResponsesCursorPage, FeeMarkupListResponse> {
     return this._client.getAPIList('/fee_markups', CursorPage<FeeMarkupListResponse>, { query, ...options });
   }
 
@@ -70,12 +73,17 @@ export class FeeMarkups extends APIResource {
   }
 }
 
-export type FeeMarkupListResponsesCursorPage = CursorPage<FeeMarkupListResponse>
+export type FeeMarkupListResponsesCursorPage = CursorPage<FeeMarkupListResponse>;
 
 /**
  * The types of fee markups that can be configured
  */
-export type FeeMarkupType = 'crypto_withdrawal_markup' | 'rtp_withdrawal_markup' | 'next_day_bank_withdrawal_markup' | 'bank_wire_withdrawal_markup' | 'digital_wallet_withdrawal_markup'
+export type FeeMarkupType =
+  | 'crypto_withdrawal_markup'
+  | 'rtp_withdrawal_markup'
+  | 'next_day_bank_withdrawal_markup'
+  | 'bank_wire_withdrawal_markup'
+  | 'digital_wallet_withdrawal_markup';
 
 /**
  * A fee markup configuration that defines additional charges applied to
@@ -168,7 +176,7 @@ export interface FeeMarkupListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type FeeMarkupDeleteResponse = boolean
+export type FeeMarkupDeleteResponse = boolean;
 
 export interface FeeMarkupCreateParams {
   /**
@@ -233,6 +241,6 @@ export declare namespace FeeMarkups {
     type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
     type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
     type FeeMarkupCreateParams as FeeMarkupCreateParams,
-    type FeeMarkupListParams as FeeMarkupListParams
+    type FeeMarkupListParams as FeeMarkupListParams,
   };
 }

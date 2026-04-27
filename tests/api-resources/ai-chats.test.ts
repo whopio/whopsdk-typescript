@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource aiChats', () => {
   // Mock server tests are disabled
@@ -20,13 +23,13 @@ describe('resource aiChats', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.aiChats.create({
-    message_text: 'message_text',
-    current_company_id: 'current_company_id',
-    message_attachments: [{ id: 'id' }],
-    message_source: 'manual',
-    suggestion_type: 'suggestion_type',
-    title: 'title',
-  });
+      message_text: 'message_text',
+      current_company_id: 'current_company_id',
+      message_attachments: [{ id: 'id' }],
+      message_source: 'manual',
+      suggestion_type: 'suggestion_type',
+      title: 'title',
+    });
   });
 
   // Mock server tests are disabled
@@ -56,13 +59,17 @@ describe('resource aiChats', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.aiChats.update('aich_xxxxxxxxxxxxx', {
-    current_company_id: 'current_company_id',
-    notification_preference: 'all',
-    title: 'title',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.aiChats.update(
+        'aich_xxxxxxxxxxxxx',
+        {
+          current_company_id: 'current_company_id',
+          notification_preference: 'all',
+          title: 'title',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -80,15 +87,18 @@ describe('resource aiChats', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.aiChats.list({
-    after: 'after',
-    before: 'before',
-    first: 42,
-    last: 42,
-    only_active_crons: true,
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.aiChats.list(
+        {
+          after: 'after',
+          before: 'before',
+          first: 42,
+          last: 42,
+          only_active_crons: true,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled

@@ -281,7 +281,5 @@ export namespace LedgerAccountRetrieveResponse {
 }
 
 export declare namespace LedgerAccounts {
-  export {
-    type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse
-  };
+  export { type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse };
 }

@@ -42,7 +42,11 @@ export class ChatChannels extends APIResource {
    * const chatChannel = await client.chatChannels.update('id');
    * ```
    */
-  update(id: string, body: ChatChannelUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.ChatChannel> {
+  update(
+    id: string,
+    body: ChatChannelUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.ChatChannel> {
     return this._client.patch(path`/chat_channels/${id}`, { body, ...options });
   }
 
@@ -64,12 +68,18 @@ export class ChatChannels extends APIResource {
    * }
    * ```
    */
-  list(query: ChatChannelListParams, options?: RequestOptions): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse> {
-    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse>, { query, ...options });
+  list(
+    query: ChatChannelListParams,
+    options?: RequestOptions,
+  ): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse> {
+    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse>
+export type ChatChannelListResponsesCursorPage = CursorPage<ChatChannelListResponse>;
 
 /**
  * A real-time chat feed attached to an experience, with configurable moderation
@@ -203,6 +213,6 @@ export declare namespace ChatChannels {
     type ChatChannelListResponse as ChatChannelListResponse,
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
     type ChatChannelUpdateParams as ChatChannelUpdateParams,
-    type ChatChannelListParams as ChatChannelListParams
+    type ChatChannelListParams as ChatChannelListParams,
   };
 }

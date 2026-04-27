@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource disputes', () => {
   // Mock server tests are disabled
@@ -32,15 +35,15 @@ describe('resource disputes', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.disputes.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    after: 'after',
-    before: 'before',
-    created_after: '2023-12-01T05:00:00.401Z',
-    created_before: '2023-12-01T05:00:00.401Z',
-    direction: 'asc',
-    first: 42,
-    last: 42,
-  });
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      direction: 'asc',
+      first: 42,
+      last: 42,
+    });
   });
 
   // Mock server tests are disabled
@@ -70,23 +73,27 @@ describe('resource disputes', () => {
   // Mock server tests are disabled
   test.skip('updateEvidence: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.disputes.updateEvidence('dspt_xxxxxxxxxxxxx', {
-    access_activity_log: 'access_activity_log',
-    billing_address: 'billing_address',
-    cancellation_policy_attachment: { id: 'id' },
-    cancellation_policy_disclosure: 'cancellation_policy_disclosure',
-    customer_communication_attachment: { id: 'id' },
-    customer_email_address: 'customer_email_address',
-    customer_name: 'customer_name',
-    notes: 'notes',
-    product_description: 'product_description',
-    refund_policy_attachment: { id: 'id' },
-    refund_policy_disclosure: 'refund_policy_disclosure',
-    refund_refusal_explanation: 'refund_refusal_explanation',
-    service_date: 'service_date',
-    uncategorized_attachment: { id: 'id' },
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.disputes.updateEvidence(
+        'dspt_xxxxxxxxxxxxx',
+        {
+          access_activity_log: 'access_activity_log',
+          billing_address: 'billing_address',
+          cancellation_policy_attachment: { id: 'id' },
+          cancellation_policy_disclosure: 'cancellation_policy_disclosure',
+          customer_communication_attachment: { id: 'id' },
+          customer_email_address: 'customer_email_address',
+          customer_name: 'customer_name',
+          notes: 'notes',
+          product_description: 'product_description',
+          refund_policy_attachment: { id: 'id' },
+          refund_policy_disclosure: 'refund_policy_disclosure',
+          refund_refusal_explanation: 'refund_refusal_explanation',
+          service_date: 'service_date',
+          uncategorized_attachment: { id: 'id' },
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

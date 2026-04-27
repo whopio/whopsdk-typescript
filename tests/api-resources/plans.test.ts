@@ -2,12 +2,18 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.plans.create({ company_id: 'biz_xxxxxxxxxxxxxx', product_id: 'prod_xxxxxxxxxxxxx' });
+    const responsePromise = client.plans.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,45 +26,47 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.plans.create({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    product_id: 'prod_xxxxxxxxxxxxx',
-    billing_period: 42,
-    checkout_styling: {
-    border_style: 'rounded',
-    button_color: 'button_color',
-    font_family: 'system',
-  },
-    currency: 'usd',
-    custom_fields: [{
-    field_type: 'text',
-    name: 'name',
-    id: 'id',
-    order: 42,
-    placeholder: 'placeholder',
-    required: true,
-  }],
-    description: 'description',
-    expiration_days: 42,
-    image: { id: 'id' },
-    initial_price: 6.9,
-    internal_notes: 'internal_notes',
-    legacy_payment_method_controls: true,
-    override_tax_type: 'inclusive',
-    payment_method_configuration: {
-    disabled: ['acss_debit'],
-    enabled: ['acss_debit'],
-    include_platform_defaults: true,
-  },
-    plan_type: 'renewal',
-    release_method: 'buy_now',
-    renewal_price: 6.9,
-    split_pay_required_payments: 42,
-    stock: 42,
-    title: 'title',
-    trial_period_days: 42,
-    unlimited_stock: true,
-    visibility: 'visible',
-  });
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      product_id: 'prod_xxxxxxxxxxxxx',
+      billing_period: 42,
+      checkout_styling: {
+        border_style: 'rounded',
+        button_color: 'button_color',
+        font_family: 'system',
+      },
+      currency: 'usd',
+      custom_fields: [
+        {
+          field_type: 'text',
+          name: 'name',
+          id: 'id',
+          order: 42,
+          placeholder: 'placeholder',
+          required: true,
+        },
+      ],
+      description: 'description',
+      expiration_days: 42,
+      image: { id: 'id' },
+      initial_price: 6.9,
+      internal_notes: 'internal_notes',
+      legacy_payment_method_controls: true,
+      override_tax_type: 'inclusive',
+      payment_method_configuration: {
+        disabled: ['acss_debit'],
+        enabled: ['acss_debit'],
+        include_platform_defaults: true,
+      },
+      plan_type: 'renewal',
+      release_method: 'buy_now',
+      renewal_price: 6.9,
+      split_pay_required_payments: 42,
+      stock: 42,
+      title: 'title',
+      trial_period_days: 42,
+      unlimited_stock: true,
+      visibility: 'visible',
+    });
   });
 
   // Mock server tests are disabled
@@ -88,46 +96,52 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.plans.update('plan_xxxxxxxxxxxxx', {
-    billing_period: 42,
-    checkout_styling: {
-    border_style: 'rounded',
-    button_color: 'button_color',
-    font_family: 'system',
-  },
-    currency: 'usd',
-    custom_fields: [{
-    field_type: 'text',
-    name: 'name',
-    id: 'id',
-    order: 42,
-    placeholder: 'placeholder',
-    required: true,
-  }],
-    description: 'description',
-    expiration_days: 42,
-    image: { id: 'id' },
-    initial_price: 6.9,
-    internal_notes: 'internal_notes',
-    legacy_payment_method_controls: true,
-    offer_cancel_discount: true,
-    override_tax_type: 'inclusive',
-    payment_method_configuration: {
-    disabled: ['acss_debit'],
-    enabled: ['acss_debit'],
-    include_platform_defaults: true,
-  },
-    renewal_price: 6.9,
-    stock: 42,
-    strike_through_initial_price: 6.9,
-    strike_through_renewal_price: 6.9,
-    title: 'title',
-    trial_period_days: 42,
-    unlimited_stock: true,
-    visibility: 'visible',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.plans.update(
+        'plan_xxxxxxxxxxxxx',
+        {
+          billing_period: 42,
+          checkout_styling: {
+            border_style: 'rounded',
+            button_color: 'button_color',
+            font_family: 'system',
+          },
+          currency: 'usd',
+          custom_fields: [
+            {
+              field_type: 'text',
+              name: 'name',
+              id: 'id',
+              order: 42,
+              placeholder: 'placeholder',
+              required: true,
+            },
+          ],
+          description: 'description',
+          expiration_days: 42,
+          image: { id: 'id' },
+          initial_price: 6.9,
+          internal_notes: 'internal_notes',
+          legacy_payment_method_controls: true,
+          offer_cancel_discount: true,
+          override_tax_type: 'inclusive',
+          payment_method_configuration: {
+            disabled: ['acss_debit'],
+            enabled: ['acss_debit'],
+            include_platform_defaults: true,
+          },
+          renewal_price: 6.9,
+          stock: 42,
+          strike_through_initial_price: 6.9,
+          strike_through_renewal_price: 6.9,
+          title: 'title',
+          trial_period_days: 42,
+          unlimited_stock: true,
+          visibility: 'visible',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -145,20 +159,20 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.plans.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    after: 'after',
-    before: 'before',
-    created_after: '2023-12-01T05:00:00.401Z',
-    created_before: '2023-12-01T05:00:00.401Z',
-    direction: 'asc',
-    first: 42,
-    last: 42,
-    order: 'id',
-    plan_types: ['renewal'],
-    product_ids: ['string'],
-    release_methods: ['buy_now'],
-    visibilities: ['visible'],
-  });
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      direction: 'asc',
+      first: 42,
+      last: 42,
+      order: 'id',
+      plan_types: ['renewal'],
+      product_ids: ['string'],
+      release_methods: ['buy_now'],
+      visibilities: ['visible'],
+    });
   });
 
   // Mock server tests are disabled

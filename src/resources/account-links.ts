@@ -73,6 +73,6 @@ export interface AccountLinkCreateParams {
 export declare namespace AccountLinks {
   export {
     type AccountLinkCreateResponse as AccountLinkCreateResponse,
-    type AccountLinkCreateParams as AccountLinkCreateParams
+    type AccountLinkCreateParams as AccountLinkCreateParams,
   };
 }

@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource companies', () => {
   // Mock server tests are disabled
@@ -20,14 +23,14 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.companies.create({
-    title: 'title',
-    description: 'description',
-    email: 'email',
-    logo: { id: 'id' },
-    metadata: { foo: 'bar' },
-    parent_company_id: 'parent_company_id',
-    send_customer_emails: true,
-  });
+      title: 'title',
+      description: 'description',
+      email: 'email',
+      logo: { id: 'id' },
+      metadata: { foo: 'bar' },
+      parent_company_id: 'parent_company_id',
+      send_customer_emails: true,
+    });
   });
 
   // Mock server tests are disabled
@@ -57,28 +60,34 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.update('biz_xxxxxxxxxxxxxx', {
-    affiliate_application_required: true,
-    affiliate_instructions: 'affiliate_instructions',
-    banner_image: { id: 'id' },
-    description: 'description',
-    featured_affiliate_product_id: 'featured_affiliate_product_id',
-    logo: { id: 'id' },
-    route: 'route',
-    send_customer_emails: true,
-    social_links: [{
-    url: 'https://example.com/path',
-    website: 'x',
-    image: { id: 'id' },
-    order: '123.45',
-    title: 'title',
-    website_order: '123.45',
-  }],
-    target_audience: 'target_audience',
-    title: 'title',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.companies.update(
+        'biz_xxxxxxxxxxxxxx',
+        {
+          affiliate_application_required: true,
+          affiliate_instructions: 'affiliate_instructions',
+          banner_image: { id: 'id' },
+          description: 'description',
+          featured_affiliate_product_id: 'featured_affiliate_product_id',
+          logo: { id: 'id' },
+          route: 'route',
+          send_customer_emails: true,
+          social_links: [
+            {
+              url: 'https://example.com/path',
+              website: 'x',
+              image: { id: 'id' },
+              order: '123.45',
+              title: 'title',
+              website_order: '123.45',
+            },
+          ],
+          target_audience: 'target_audience',
+          title: 'title',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -96,17 +105,20 @@ describe('resource companies', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.companies.list({
-    after: 'after',
-    before: 'before',
-    created_after: '2023-12-01T05:00:00.401Z',
-    created_before: '2023-12-01T05:00:00.401Z',
-    direction: 'asc',
-    first: 42,
-    last: 42,
-    parent_company_id: 'parent_company_id',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.companies.list(
+        {
+          after: 'after',
+          before: 'before',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          parent_company_id: 'parent_company_id',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });
