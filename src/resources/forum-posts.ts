@@ -56,7 +56,11 @@ export class ForumPosts extends APIResource {
    * const forumPost = await client.forumPosts.update('id');
    * ```
    */
-  update(id: string, body: ForumPostUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.ForumPost> {
+  update(
+    id: string,
+    body: ForumPostUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.ForumPost> {
     return this._client.patch(path`/forum_posts/${id}`, { body, ...options });
   }
 
@@ -78,17 +82,20 @@ export class ForumPosts extends APIResource {
    * }
    * ```
    */
-  list(query: ForumPostListParams, options?: RequestOptions): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse> {
+  list(
+    query: ForumPostListParams,
+    options?: RequestOptions,
+  ): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse> {
     return this._client.getAPIList('/forum_posts', CursorPage<ForumPostListResponse>, { query, ...options });
   }
 }
 
-export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>
+export type ForumPostListResponsesCursorPage = CursorPage<ForumPostListResponse>;
 
 /**
  * The visibility types for forum posts
  */
-export type ForumPostVisibilityType = 'members_only' | 'globally_visible'
+export type ForumPostVisibilityType = 'members_only' | 'globally_visible';
 
 /**
  * A post or comment in a forum feed, supporting rich text, attachments, polls, and
@@ -423,6 +430,6 @@ export declare namespace ForumPosts {
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
     type ForumPostCreateParams as ForumPostCreateParams,
     type ForumPostUpdateParams as ForumPostUpdateParams,
-    type ForumPostListParams as ForumPostListParams
+    type ForumPostListParams as ForumPostListParams,
   };
 }

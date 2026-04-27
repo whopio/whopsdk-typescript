@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource courseChapters', () => {
   // Mock server tests are disabled
@@ -66,12 +69,12 @@ describe('resource courseChapters', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.courseChapters.list({
-    course_id: 'cors_xxxxxxxxxxxxx',
-    after: 'after',
-    before: 'before',
-    first: 42,
-    last: 42,
-  });
+      course_id: 'cors_xxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
   });
 
   // Mock server tests are disabled

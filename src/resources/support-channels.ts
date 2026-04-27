@@ -64,12 +64,18 @@ export class SupportChannels extends APIResource {
    * }
    * ```
    */
-  list(query: SupportChannelListParams | null | undefined = {}, options?: RequestOptions): PagePromise<SupportChannelListResponsesCursorPage, SupportChannelListResponse> {
-    return this._client.getAPIList('/support_channels', CursorPage<SupportChannelListResponse>, { query, ...options });
+  list(
+    query: SupportChannelListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<SupportChannelListResponsesCursorPage, SupportChannelListResponse> {
+    return this._client.getAPIList('/support_channels', CursorPage<SupportChannelListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type SupportChannelListResponsesCursorPage = CursorPage<SupportChannelListResponse>
+export type SupportChannelListResponsesCursorPage = CursorPage<SupportChannelListResponse>;
 
 /**
  * A messaging channel that can be a one-on-one DM, group chat, company support
@@ -202,6 +208,6 @@ export declare namespace SupportChannels {
     type SupportChannelListResponse as SupportChannelListResponse,
     type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
     type SupportChannelCreateParams as SupportChannelCreateParams,
-    type SupportChannelListParams as SupportChannelListParams
+    type SupportChannelListParams as SupportChannelListParams,
   };
 }

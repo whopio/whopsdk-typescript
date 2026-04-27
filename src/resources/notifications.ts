@@ -40,7 +40,9 @@ export interface NotificationCreateResponse {
   success: boolean;
 }
 
-export type NotificationCreateParams = NotificationCreateParams.SendNotificationV2InputWithCompanyID | NotificationCreateParams.SendNotificationV2InputWithExperienceID
+export type NotificationCreateParams =
+  | NotificationCreateParams.SendNotificationV2InputWithCompanyID
+  | NotificationCreateParams.SendNotificationV2InputWithExperienceID;
 
 export declare namespace NotificationCreateParams {
   export interface SendNotificationV2InputWithCompanyID {
@@ -139,6 +141,6 @@ export declare namespace NotificationCreateParams {
 export declare namespace Notifications {
   export {
     type NotificationCreateResponse as NotificationCreateResponse,
-    type NotificationCreateParams as NotificationCreateParams
+    type NotificationCreateParams as NotificationCreateParams,
   };
 }

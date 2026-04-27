@@ -67,12 +67,15 @@ export class Transfers extends APIResource {
    * }
    * ```
    */
-  list(query: TransferListParams | null | undefined = {}, options?: RequestOptions): PagePromise<TransferListResponsesCursorPage, TransferListResponse> {
+  list(
+    query: TransferListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<TransferListResponsesCursorPage, TransferListResponse> {
     return this._client.getAPIList('/transfers', CursorPage<TransferListResponse>, { query, ...options });
   }
 }
 
-export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>
+export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
 
 /**
  * A transfer of credit between two ledger accounts.
@@ -224,6 +227,6 @@ export declare namespace Transfers {
     type TransferListResponse as TransferListResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
     type TransferCreateParams as TransferCreateParams,
-    type TransferListParams as TransferListParams
+    type TransferListParams as TransferListParams,
   };
 }

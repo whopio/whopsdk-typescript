@@ -2,16 +2,19 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.appBuilds.create({
-    attachment: { id: 'id' },
-    checksum: 'checksum',
-    platform: 'ios',
-  });
+      attachment: { id: 'id' },
+      checksum: 'checksum',
+      platform: 'ios',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,13 +27,13 @@ describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.appBuilds.create({
-    attachment: { id: 'id' },
-    checksum: 'checksum',
-    platform: 'ios',
-    ai_prompt_id: 'prmt_xxxxxxxxxxxxx',
-    app_id: 'app_xxxxxxxxxxxxxx',
-    supported_app_view_types: ['hub'],
-  });
+      attachment: { id: 'id' },
+      checksum: 'checksum',
+      platform: 'ios',
+      ai_prompt_id: 'prmt_xxxxxxxxxxxxx',
+      app_id: 'app_xxxxxxxxxxxxxx',
+      supported_app_view_types: ['hub'],
+    });
   });
 
   // Mock server tests are disabled
@@ -60,16 +63,16 @@ describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.appBuilds.list({
-    app_id: 'app_xxxxxxxxxxxxxx',
-    after: 'after',
-    before: 'before',
-    created_after: '2023-12-01T05:00:00.401Z',
-    created_before: '2023-12-01T05:00:00.401Z',
-    first: 42,
-    last: 42,
-    platform: 'ios',
-    status: 'draft',
-  });
+      app_id: 'app_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      first: 42,
+      last: 42,
+      platform: 'ios',
+      status: 'draft',
+    });
   });
 
   // Mock server tests are disabled

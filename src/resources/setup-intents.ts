@@ -36,12 +36,18 @@ export class SetupIntents extends APIResource {
    * - `member:basic:read`
    * - `member:email:read`
    */
-  list(query: SetupIntentListParams, options?: RequestOptions): PagePromise<SetupIntentListResponsesCursorPage, SetupIntentListResponse> {
-    return this._client.getAPIList('/setup_intents', CursorPage<SetupIntentListResponse>, { query, ...options });
+  list(
+    query: SetupIntentListParams,
+    options?: RequestOptions,
+  ): PagePromise<SetupIntentListResponsesCursorPage, SetupIntentListResponse> {
+    return this._client.getAPIList('/setup_intents', CursorPage<SetupIntentListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type SetupIntentListResponsesCursorPage = CursorPage<SetupIntentListResponse>
+export type SetupIntentListResponsesCursorPage = CursorPage<SetupIntentListResponse>;
 
 /**
  * A setup intent allows a user to save a payment method for future use without
@@ -269,7 +275,7 @@ export namespace SetupIntent {
 /**
  * The status of the setup intent.
  */
-export type SetupIntentStatus = 'processing' | 'succeeded' | 'canceled' | 'requires_action'
+export type SetupIntentStatus = 'processing' | 'succeeded' | 'canceled' | 'requires_action';
 
 /**
  * A setup intent allows a user to save a payment method for future use without
@@ -537,6 +543,6 @@ export declare namespace SetupIntents {
     type SetupIntentStatus as SetupIntentStatus,
     type SetupIntentListResponse as SetupIntentListResponse,
     type SetupIntentListResponsesCursorPage as SetupIntentListResponsesCursorPage,
-    type SetupIntentListParams as SetupIntentListParams
+    type SetupIntentListParams as SetupIntentListParams,
   };
 }

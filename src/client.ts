@@ -21,62 +21,506 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
-import { AIChat, AIChatCreateParams, AIChatDeleteResponse, AIChatListParams, AIChatListResponse, AIChatListResponsesCursorPage, AIChatUpdateParams, AIChats, NotificationPreferences } from './resources/ai-chats';
-import { AppBuildCreateParams, AppBuildListParams, AppBuildListResponse, AppBuildListResponsesCursorPage, AppBuilds } from './resources/app-builds';
-import { AppCreateParams, AppListParams, AppListResponse, AppListResponsesCursorPage, AppType, AppUpdateParams, Apps } from './resources/apps';
-import { AuthorizedUser, AuthorizedUserCreateParams, AuthorizedUserDeleteParams, AuthorizedUserDeleteResponse, AuthorizedUserListParams, AuthorizedUserListResponse, AuthorizedUserListResponsesCursorPage, AuthorizedUsers } from './resources/authorized-users';
-import { ChatChannelListParams, ChatChannelListResponse, ChatChannelListResponsesCursorPage, ChatChannelUpdateParams, ChatChannels } from './resources/chat-channels';
-import { CheckoutConfigurationCreateParams, CheckoutConfigurationListParams, CheckoutConfigurationListResponse, CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurations, CheckoutModes } from './resources/checkout-configurations';
-import { Companies, CompanyCreateParams, CompanyListParams, CompanyListResponse, CompanyListResponsesCursorPage, CompanyUpdateParams, SocialLinkWebsites } from './resources/companies';
-import { CompanyTokenTransaction, CompanyTokenTransactionCreateParams, CompanyTokenTransactionListParams, CompanyTokenTransactionListResponse, CompanyTokenTransactionListResponsesCursorPage, CompanyTokenTransactionType, CompanyTokenTransactions } from './resources/company-token-transactions';
-import { CourseChapter, CourseChapterCreateParams, CourseChapterDeleteResponse, CourseChapterListParams, CourseChapterListResponse, CourseChapterListResponsesCursorPage, CourseChapterUpdateParams, CourseChapters } from './resources/course-chapters';
-import { CourseLessonInteractionListParams, CourseLessonInteractions } from './resources/course-lesson-interactions';
-import { AssessmentQuestionTypes, CourseLessonCreateParams, CourseLessonDeleteResponse, CourseLessonListParams, CourseLessonListResponse, CourseLessonListResponsesCursorPage, CourseLessonMarkAsCompletedResponse, CourseLessonStartResponse, CourseLessonSubmitAssessmentParams, CourseLessonSubmitAssessmentResponse, CourseLessonUpdateParams, CourseLessons, EmbedType, Lesson, LessonTypes, LessonVisibilities } from './resources/course-lessons';
-import { CourseStudentListParams, CourseStudentListResponse, CourseStudentListResponsesCursorPage, CourseStudentRetrieveResponse, CourseStudents } from './resources/course-students';
-import { Course, CourseCreateParams, CourseDeleteResponse, CourseListParams, CourseListResponse, CourseListResponsesCursorPage, CourseUpdateParams, CourseVisibilities, Courses, Languages } from './resources/courses';
-import { DisputeAlertListParams, DisputeAlertListResponse, DisputeAlertListResponsesCursorPage, DisputeAlertRetrieveResponse, DisputeAlertType, DisputeAlerts } from './resources/dispute-alerts';
-import { Dispute, DisputeListParams, DisputeListResponse, DisputeListResponsesCursorPage, DisputeStatuses, DisputeUpdateEvidenceParams, Disputes } from './resources/disputes';
-import { DmChannel, DmChannelCreateParams, DmChannelDeleteResponse, DmChannelListParams, DmChannelListResponse, DmChannelListResponsesCursorPage, DmChannelUpdateParams, DmChannels } from './resources/dm-channels';
-import { DmFeedMemberNotificationPreferences, DmFeedMemberStatuses, DmMember, DmMemberCreateParams, DmMemberDeleteResponse, DmMemberListParams, DmMemberListResponse, DmMemberListResponsesCursorPage, DmMemberUpdateParams, DmMembers } from './resources/dm-members';
-import { Entries, EntryApproveResponse, EntryListParams, EntryListResponse, EntryListResponsesCursorPage } from './resources/entries';
-import { ExperienceAttachParams, ExperienceCreateParams, ExperienceDeleteResponse, ExperienceDetachParams, ExperienceDuplicateParams, ExperienceListParams, ExperienceListResponse, ExperienceListResponsesCursorPage, ExperienceUpdateParams, Experiences } from './resources/experiences';
-import { FeeMarkupCreateParams, FeeMarkupCreateResponse, FeeMarkupDeleteResponse, FeeMarkupListParams, FeeMarkupListResponse, FeeMarkupListResponsesCursorPage, FeeMarkupType, FeeMarkups } from './resources/fee-markups';
-import { FileCreateParams, FileCreateResponse, FileRetrieveResponse, Files, UploadStatus } from './resources/files';
-import { ForumPostCreateParams, ForumPostListParams, ForumPostListResponse, ForumPostListResponsesCursorPage, ForumPostUpdateParams, ForumPostVisibilityType, ForumPosts } from './resources/forum-posts';
-import { ForumListParams, ForumListResponse, ForumListResponsesCursorPage, ForumUpdateParams, Forums } from './resources/forums';
-import { InvoiceCreateParams, InvoiceDeleteResponse, InvoiceListParams, InvoiceMarkPaidResponse, InvoiceMarkUncollectibleResponse, InvoiceUpdateParams, InvoiceVoidResponse, Invoices, TaxIdentifierType } from './resources/invoices';
-import { Lead, LeadCreateParams, LeadListParams, LeadListResponse, LeadListResponsesCursorPage, LeadUpdateParams, Leads } from './resources/leads';
+import {
+  AIChat,
+  AIChatCreateParams,
+  AIChatDeleteResponse,
+  AIChatListParams,
+  AIChatListResponse,
+  AIChatListResponsesCursorPage,
+  AIChatUpdateParams,
+  AIChats,
+  NotificationPreferences,
+} from './resources/ai-chats';
+import {
+  AppBuildCreateParams,
+  AppBuildListParams,
+  AppBuildListResponse,
+  AppBuildListResponsesCursorPage,
+  AppBuilds,
+} from './resources/app-builds';
+import {
+  AppCreateParams,
+  AppListParams,
+  AppListResponse,
+  AppListResponsesCursorPage,
+  AppType,
+  AppUpdateParams,
+  Apps,
+} from './resources/apps';
+import {
+  AuthorizedUser,
+  AuthorizedUserCreateParams,
+  AuthorizedUserDeleteParams,
+  AuthorizedUserDeleteResponse,
+  AuthorizedUserListParams,
+  AuthorizedUserListResponse,
+  AuthorizedUserListResponsesCursorPage,
+  AuthorizedUsers,
+} from './resources/authorized-users';
+import {
+  ChatChannelListParams,
+  ChatChannelListResponse,
+  ChatChannelListResponsesCursorPage,
+  ChatChannelUpdateParams,
+  ChatChannels,
+} from './resources/chat-channels';
+import {
+  CheckoutConfigurationCreateParams,
+  CheckoutConfigurationListParams,
+  CheckoutConfigurationListResponse,
+  CheckoutConfigurationListResponsesCursorPage,
+  CheckoutConfigurations,
+  CheckoutModes,
+} from './resources/checkout-configurations';
+import {
+  Companies,
+  CompanyCreateParams,
+  CompanyListParams,
+  CompanyListResponse,
+  CompanyListResponsesCursorPage,
+  CompanyUpdateParams,
+  SocialLinkWebsites,
+} from './resources/companies';
+import {
+  CompanyTokenTransaction,
+  CompanyTokenTransactionCreateParams,
+  CompanyTokenTransactionListParams,
+  CompanyTokenTransactionListResponse,
+  CompanyTokenTransactionListResponsesCursorPage,
+  CompanyTokenTransactionType,
+  CompanyTokenTransactions,
+} from './resources/company-token-transactions';
+import {
+  CourseChapter,
+  CourseChapterCreateParams,
+  CourseChapterDeleteResponse,
+  CourseChapterListParams,
+  CourseChapterListResponse,
+  CourseChapterListResponsesCursorPage,
+  CourseChapterUpdateParams,
+  CourseChapters,
+} from './resources/course-chapters';
+import {
+  CourseLessonInteractionListParams,
+  CourseLessonInteractions,
+} from './resources/course-lesson-interactions';
+import {
+  AssessmentQuestionTypes,
+  CourseLessonCreateParams,
+  CourseLessonDeleteResponse,
+  CourseLessonListParams,
+  CourseLessonListResponse,
+  CourseLessonListResponsesCursorPage,
+  CourseLessonMarkAsCompletedResponse,
+  CourseLessonStartResponse,
+  CourseLessonSubmitAssessmentParams,
+  CourseLessonSubmitAssessmentResponse,
+  CourseLessonUpdateParams,
+  CourseLessons,
+  EmbedType,
+  Lesson,
+  LessonTypes,
+  LessonVisibilities,
+} from './resources/course-lessons';
+import {
+  CourseStudentListParams,
+  CourseStudentListResponse,
+  CourseStudentListResponsesCursorPage,
+  CourseStudentRetrieveResponse,
+  CourseStudents,
+} from './resources/course-students';
+import {
+  Course,
+  CourseCreateParams,
+  CourseDeleteResponse,
+  CourseListParams,
+  CourseListResponse,
+  CourseListResponsesCursorPage,
+  CourseUpdateParams,
+  CourseVisibilities,
+  Courses,
+  Languages,
+} from './resources/courses';
+import {
+  DisputeAlertListParams,
+  DisputeAlertListResponse,
+  DisputeAlertListResponsesCursorPage,
+  DisputeAlertRetrieveResponse,
+  DisputeAlertType,
+  DisputeAlerts,
+} from './resources/dispute-alerts';
+import {
+  Dispute,
+  DisputeListParams,
+  DisputeListResponse,
+  DisputeListResponsesCursorPage,
+  DisputeStatuses,
+  DisputeUpdateEvidenceParams,
+  Disputes,
+} from './resources/disputes';
+import {
+  DmChannel,
+  DmChannelCreateParams,
+  DmChannelDeleteResponse,
+  DmChannelListParams,
+  DmChannelListResponse,
+  DmChannelListResponsesCursorPage,
+  DmChannelUpdateParams,
+  DmChannels,
+} from './resources/dm-channels';
+import {
+  DmFeedMemberNotificationPreferences,
+  DmFeedMemberStatuses,
+  DmMember,
+  DmMemberCreateParams,
+  DmMemberDeleteResponse,
+  DmMemberListParams,
+  DmMemberListResponse,
+  DmMemberListResponsesCursorPage,
+  DmMemberUpdateParams,
+  DmMembers,
+} from './resources/dm-members';
+import {
+  Entries,
+  EntryApproveResponse,
+  EntryListParams,
+  EntryListResponse,
+  EntryListResponsesCursorPage,
+} from './resources/entries';
+import {
+  ExperienceAttachParams,
+  ExperienceCreateParams,
+  ExperienceDeleteResponse,
+  ExperienceDetachParams,
+  ExperienceDuplicateParams,
+  ExperienceListParams,
+  ExperienceListResponse,
+  ExperienceListResponsesCursorPage,
+  ExperienceUpdateParams,
+  Experiences,
+} from './resources/experiences';
+import {
+  FeeMarkupCreateParams,
+  FeeMarkupCreateResponse,
+  FeeMarkupDeleteResponse,
+  FeeMarkupListParams,
+  FeeMarkupListResponse,
+  FeeMarkupListResponsesCursorPage,
+  FeeMarkupType,
+  FeeMarkups,
+} from './resources/fee-markups';
+import {
+  FileCreateParams,
+  FileCreateResponse,
+  FileRetrieveResponse,
+  Files,
+  UploadStatus,
+} from './resources/files';
+import {
+  ForumPostCreateParams,
+  ForumPostListParams,
+  ForumPostListResponse,
+  ForumPostListResponsesCursorPage,
+  ForumPostUpdateParams,
+  ForumPostVisibilityType,
+  ForumPosts,
+} from './resources/forum-posts';
+import {
+  ForumListParams,
+  ForumListResponse,
+  ForumListResponsesCursorPage,
+  ForumUpdateParams,
+  Forums,
+} from './resources/forums';
+import {
+  InvoiceCreateParams,
+  InvoiceDeleteResponse,
+  InvoiceListParams,
+  InvoiceMarkPaidResponse,
+  InvoiceMarkUncollectibleResponse,
+  InvoiceUpdateParams,
+  InvoiceVoidResponse,
+  Invoices,
+  TaxIdentifierType,
+} from './resources/invoices';
+import {
+  Lead,
+  LeadCreateParams,
+  LeadListParams,
+  LeadListResponse,
+  LeadListResponsesCursorPage,
+  LeadUpdateParams,
+  Leads,
+} from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
-import { MemberListParams, MemberListResponse, MemberListResponsesCursorPage, MemberRetrieveResponse, Members } from './resources/members';
-import { CancelOptions, MembershipAddFreeDaysParams, MembershipCancelParams, MembershipListParams, MembershipListResponse, MembershipListResponsesCursorPage, MembershipPauseParams, MembershipUpdateParams, Memberships } from './resources/memberships';
-import { MessageCreateParams, MessageDeleteResponse, MessageListParams, MessageListResponse, MessageListResponsesCursorPage, MessageUpdateParams, Messages } from './resources/messages';
-import { NotificationCreateParams, NotificationCreateResponse, Notifications } from './resources/notifications';
-import { PaymentMethodListParams, PaymentMethodListResponse, PaymentMethodListResponsesCursorPage, PaymentMethodRetrieveParams, PaymentMethodRetrieveResponse, PaymentMethods } from './resources/payment-methods';
-import { BillingReasons, CardBrands, PaymentCreateParams, PaymentListFeesParams, PaymentListFeesResponse, PaymentListFeesResponsesCursorPage, PaymentListParams, PaymentListResponse, PaymentListResponsesCursorPage, PaymentMethodTypes, PaymentRefundParams, Payments, ReceiptTaxBehavior } from './resources/payments';
-import { PayoutAccountCalculatedStatuses, PayoutAccountRetrieveResponse, PayoutAccounts } from './resources/payout-accounts';
-import { PayoutDestinationCategory, PayoutMethodListParams, PayoutMethodListResponse, PayoutMethodListResponsesCursorPage, PayoutMethodRetrieveResponse, PayoutMethods } from './resources/payout-methods';
-import { CheckoutFont, CheckoutShape, PlanCreateParams, PlanDeleteResponse, PlanListParams, PlanListResponse, PlanListResponsesCursorPage, PlanUpdateParams, Plans } from './resources/plans';
-import { ProductCreateParams, ProductDeleteResponse, ProductListParams, ProductUpdateParams, Products } from './resources/products';
-import { PromoCode, PromoCodeCreateParams, PromoCodeDeleteResponse, PromoCodeListParams, PromoCodeListResponse, PromoCodeListResponsesCursorPage, PromoCodeStatus, PromoCodes, PromoDuration } from './resources/promo-codes';
-import { ReactionCreateParams, ReactionDeleteParams, ReactionDeleteResponse, ReactionListParams, ReactionListResponse, ReactionListResponsesCursorPage, Reactions } from './resources/reactions';
-import { PaymentProvider, RefundListParams, RefundListResponse, RefundListResponsesCursorPage, RefundReferenceStatus, RefundReferenceType, RefundRetrieveResponse, RefundStatus, Refunds } from './resources/refunds';
-import { ResolutionCenterCaseCustomerResponse, ResolutionCenterCaseIssueType, ResolutionCenterCaseListParams, ResolutionCenterCaseListResponse, ResolutionCenterCaseListResponsesCursorPage, ResolutionCenterCaseMerchantResponse, ResolutionCenterCasePlatformResponse, ResolutionCenterCaseRetrieveResponse, ResolutionCenterCaseStatus, ResolutionCenterCases } from './resources/resolution-center-cases';
-import { ReviewListParams, ReviewListResponse, ReviewListResponsesCursorPage, ReviewRetrieveResponse, ReviewStatus, Reviews } from './resources/reviews';
-import { SetupIntent, SetupIntentListParams, SetupIntentListResponse, SetupIntentListResponsesCursorPage, SetupIntentStatus, SetupIntents } from './resources/setup-intents';
-import { ShipmentCreateParams, ShipmentListParams, ShipmentListResponse, ShipmentListResponsesCursorPage, Shipments } from './resources/shipments';
-import { SupportChannelCreateParams, SupportChannelListParams, SupportChannelListResponse, SupportChannelListResponsesCursorPage, SupportChannels } from './resources/support-channels';
+import {
+  MemberListParams,
+  MemberListResponse,
+  MemberListResponsesCursorPage,
+  MemberRetrieveResponse,
+  Members,
+} from './resources/members';
+import {
+  CancelOptions,
+  MembershipAddFreeDaysParams,
+  MembershipCancelParams,
+  MembershipListParams,
+  MembershipListResponse,
+  MembershipListResponsesCursorPage,
+  MembershipPauseParams,
+  MembershipUpdateParams,
+  Memberships,
+} from './resources/memberships';
+import {
+  MessageCreateParams,
+  MessageDeleteResponse,
+  MessageListParams,
+  MessageListResponse,
+  MessageListResponsesCursorPage,
+  MessageUpdateParams,
+  Messages,
+} from './resources/messages';
+import {
+  NotificationCreateParams,
+  NotificationCreateResponse,
+  Notifications,
+} from './resources/notifications';
+import {
+  PaymentMethodListParams,
+  PaymentMethodListResponse,
+  PaymentMethodListResponsesCursorPage,
+  PaymentMethodRetrieveParams,
+  PaymentMethodRetrieveResponse,
+  PaymentMethods,
+} from './resources/payment-methods';
+import {
+  BillingReasons,
+  CardBrands,
+  PaymentCreateParams,
+  PaymentListFeesParams,
+  PaymentListFeesResponse,
+  PaymentListFeesResponsesCursorPage,
+  PaymentListParams,
+  PaymentListResponse,
+  PaymentListResponsesCursorPage,
+  PaymentMethodTypes,
+  PaymentRefundParams,
+  Payments,
+  ReceiptTaxBehavior,
+} from './resources/payments';
+import {
+  PayoutAccountCalculatedStatuses,
+  PayoutAccountRetrieveResponse,
+  PayoutAccounts,
+} from './resources/payout-accounts';
+import {
+  PayoutDestinationCategory,
+  PayoutMethodListParams,
+  PayoutMethodListResponse,
+  PayoutMethodListResponsesCursorPage,
+  PayoutMethodRetrieveResponse,
+  PayoutMethods,
+} from './resources/payout-methods';
+import {
+  CheckoutFont,
+  CheckoutShape,
+  PlanCreateParams,
+  PlanDeleteResponse,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesCursorPage,
+  PlanUpdateParams,
+  Plans,
+} from './resources/plans';
+import {
+  ProductCreateParams,
+  ProductDeleteResponse,
+  ProductListParams,
+  ProductUpdateParams,
+  Products,
+} from './resources/products';
+import {
+  PromoCode,
+  PromoCodeCreateParams,
+  PromoCodeDeleteResponse,
+  PromoCodeListParams,
+  PromoCodeListResponse,
+  PromoCodeListResponsesCursorPage,
+  PromoCodeStatus,
+  PromoCodes,
+  PromoDuration,
+} from './resources/promo-codes';
+import {
+  ReactionCreateParams,
+  ReactionDeleteParams,
+  ReactionDeleteResponse,
+  ReactionListParams,
+  ReactionListResponse,
+  ReactionListResponsesCursorPage,
+  Reactions,
+} from './resources/reactions';
+import {
+  PaymentProvider,
+  RefundListParams,
+  RefundListResponse,
+  RefundListResponsesCursorPage,
+  RefundReferenceStatus,
+  RefundReferenceType,
+  RefundRetrieveResponse,
+  RefundStatus,
+  Refunds,
+} from './resources/refunds';
+import {
+  ResolutionCenterCaseCustomerResponse,
+  ResolutionCenterCaseIssueType,
+  ResolutionCenterCaseListParams,
+  ResolutionCenterCaseListResponse,
+  ResolutionCenterCaseListResponsesCursorPage,
+  ResolutionCenterCaseMerchantResponse,
+  ResolutionCenterCasePlatformResponse,
+  ResolutionCenterCaseRetrieveResponse,
+  ResolutionCenterCaseStatus,
+  ResolutionCenterCases,
+} from './resources/resolution-center-cases';
+import {
+  ReviewListParams,
+  ReviewListResponse,
+  ReviewListResponsesCursorPage,
+  ReviewRetrieveResponse,
+  ReviewStatus,
+  Reviews,
+} from './resources/reviews';
+import {
+  SetupIntent,
+  SetupIntentListParams,
+  SetupIntentListResponse,
+  SetupIntentListResponsesCursorPage,
+  SetupIntentStatus,
+  SetupIntents,
+} from './resources/setup-intents';
+import {
+  ShipmentCreateParams,
+  ShipmentListParams,
+  ShipmentListResponse,
+  ShipmentListResponsesCursorPage,
+  Shipments,
+} from './resources/shipments';
+import {
+  SupportChannelCreateParams,
+  SupportChannelListParams,
+  SupportChannelListResponse,
+  SupportChannelListResponsesCursorPage,
+  SupportChannels,
+} from './resources/support-channels';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
-import { TransferCreateParams, TransferListParams, TransferListResponse, TransferListResponsesCursorPage, Transfers } from './resources/transfers';
-import { User, UserCheckAccessParams, UserCheckAccessResponse, UserListParams, UserListResponse, UserListResponsesCursorPage, UserRetrieveParams, UserUpdateParams, Users } from './resources/users';
-import { VerificationErrorCode, VerificationListParams, VerificationListResponse, VerificationListResponsesCursorPage, VerificationRetrieveResponse, VerificationStatus, Verifications } from './resources/verifications';
-import { APIVersion, CourseLessonInteractionCompletedWebhookEvent, DisputeAlertCreatedWebhookEvent, DisputeCreatedWebhookEvent, DisputeUpdatedWebhookEvent, EntryApprovedWebhookEvent, EntryCreatedWebhookEvent, EntryDeletedWebhookEvent, EntryDeniedWebhookEvent, InvoiceCreatedWebhookEvent, InvoiceMarkedUncollectibleWebhookEvent, InvoicePaidWebhookEvent, InvoicePastDueWebhookEvent, InvoiceVoidedWebhookEvent, MembershipActivatedWebhookEvent, MembershipCancelAtPeriodEndChangedWebhookEvent, MembershipDeactivatedWebhookEvent, PaymentCreatedWebhookEvent, PaymentFailedWebhookEvent, PaymentPendingWebhookEvent, PaymentSucceededWebhookEvent, PayoutAccountStatusUpdatedWebhookEvent, PayoutMethodCreatedWebhookEvent, RefundCreatedWebhookEvent, RefundUpdatedWebhookEvent, ResolutionCenterCaseCreatedWebhookEvent, ResolutionCenterCaseDecidedWebhookEvent, ResolutionCenterCaseUpdatedWebhookEvent, SetupIntentCanceledWebhookEvent, SetupIntentRequiresActionWebhookEvent, SetupIntentSucceededWebhookEvent, UnwrapWebhookEvent, VerificationSucceededWebhookEvent, Webhook, WebhookCreateParams, WebhookCreateResponse, WebhookDeleteResponse, WebhookEvent, WebhookListParams, WebhookListResponse, WebhookListResponsesCursorPage, WebhookUpdateParams, Webhooks, WithdrawalCreatedWebhookEvent, WithdrawalUpdatedWebhookEvent } from './resources/webhooks';
-import { Withdrawal, WithdrawalCreateParams, WithdrawalFeeTypes, WithdrawalListParams, WithdrawalListResponse, WithdrawalListResponsesCursorPage, WithdrawalSpeeds, WithdrawalStatus, Withdrawals } from './resources/withdrawals';
-import { Affiliate, AffiliateArchiveResponse, AffiliateCreateParams, AffiliateListParams, AffiliateListResponse, AffiliateListResponsesCursorPage, AffiliateUnarchiveResponse, Affiliates, Status } from './resources/affiliates/affiliates';
+import {
+  TransferCreateParams,
+  TransferListParams,
+  TransferListResponse,
+  TransferListResponsesCursorPage,
+  Transfers,
+} from './resources/transfers';
+import {
+  User,
+  UserCheckAccessParams,
+  UserCheckAccessResponse,
+  UserListParams,
+  UserListResponse,
+  UserListResponsesCursorPage,
+  UserRetrieveParams,
+  UserUpdateParams,
+  Users,
+} from './resources/users';
+import {
+  VerificationErrorCode,
+  VerificationListParams,
+  VerificationListResponse,
+  VerificationListResponsesCursorPage,
+  VerificationRetrieveResponse,
+  VerificationStatus,
+  Verifications,
+} from './resources/verifications';
+import {
+  APIVersion,
+  CourseLessonInteractionCompletedWebhookEvent,
+  DisputeAlertCreatedWebhookEvent,
+  DisputeCreatedWebhookEvent,
+  DisputeUpdatedWebhookEvent,
+  EntryApprovedWebhookEvent,
+  EntryCreatedWebhookEvent,
+  EntryDeletedWebhookEvent,
+  EntryDeniedWebhookEvent,
+  InvoiceCreatedWebhookEvent,
+  InvoiceMarkedUncollectibleWebhookEvent,
+  InvoicePaidWebhookEvent,
+  InvoicePastDueWebhookEvent,
+  InvoiceVoidedWebhookEvent,
+  MembershipActivatedWebhookEvent,
+  MembershipCancelAtPeriodEndChangedWebhookEvent,
+  MembershipDeactivatedWebhookEvent,
+  PaymentCreatedWebhookEvent,
+  PaymentFailedWebhookEvent,
+  PaymentPendingWebhookEvent,
+  PaymentSucceededWebhookEvent,
+  PayoutAccountStatusUpdatedWebhookEvent,
+  PayoutMethodCreatedWebhookEvent,
+  RefundCreatedWebhookEvent,
+  RefundUpdatedWebhookEvent,
+  ResolutionCenterCaseCreatedWebhookEvent,
+  ResolutionCenterCaseDecidedWebhookEvent,
+  ResolutionCenterCaseUpdatedWebhookEvent,
+  SetupIntentCanceledWebhookEvent,
+  SetupIntentRequiresActionWebhookEvent,
+  SetupIntentSucceededWebhookEvent,
+  UnwrapWebhookEvent,
+  VerificationSucceededWebhookEvent,
+  Webhook,
+  WebhookCreateParams,
+  WebhookCreateResponse,
+  WebhookDeleteResponse,
+  WebhookEvent,
+  WebhookListParams,
+  WebhookListResponse,
+  WebhookListResponsesCursorPage,
+  WebhookUpdateParams,
+  Webhooks,
+  WithdrawalCreatedWebhookEvent,
+  WithdrawalUpdatedWebhookEvent,
+} from './resources/webhooks';
+import {
+  Withdrawal,
+  WithdrawalCreateParams,
+  WithdrawalFeeTypes,
+  WithdrawalListParams,
+  WithdrawalListResponse,
+  WithdrawalListResponsesCursorPage,
+  WithdrawalSpeeds,
+  WithdrawalStatus,
+  Withdrawals,
+} from './resources/withdrawals';
+import {
+  Affiliate,
+  AffiliateArchiveResponse,
+  AffiliateCreateParams,
+  AffiliateListParams,
+  AffiliateListResponse,
+  AffiliateListResponsesCursorPage,
+  AffiliateUnarchiveResponse,
+  Affiliates,
+  Status,
+} from './resources/affiliates/affiliates';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
 import { readEnv } from './internal/utils/env';
-import { type LogLevel, type Logger, formatRequestDetails, loggerFor, parseLogLevel } from './internal/utils/log';
+import {
+  type LogLevel,
+  type Logger,
+  formatRequestDetails,
+  loggerFor,
+  parseLogLevel,
+} from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
@@ -165,7 +609,7 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Whop API. 
+ * API Client for interfacing with the Whop API.
  */
 export class Whop {
   apiKey: string;
@@ -207,7 +651,7 @@ export class Whop {
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.WhopError(
-        'The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: \'My API Key\' }).'
+        "The WHOP_API_KEY environment variable is missing or empty; either provide it, or instantiate the Whop client with an apiKey option, like new Whop({ apiKey: 'My API Key' }).",
       );
     }
 
@@ -225,7 +669,10 @@ export class Whop {
     const defaultLogLevel = 'warn';
     // Set default logLevel early so that we can log a warning in parseLogLevel.
     this.logLevel = defaultLogLevel;
-    this.logLevel = parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ?? parseLogLevel(readEnv('WHOP_LOG'), 'process.env[\'WHOP_LOG\']', this) ?? defaultLogLevel;
+    this.logLevel =
+      parseLogLevel(options.logLevel, 'ClientOptions.logLevel', this) ??
+      parseLogLevel(readEnv('WHOP_LOG'), "process.env['WHOP_LOG']", this) ??
+      defaultLogLevel;
     this.fetchOptions = options.fetchOptions;
     this.maxRetries = options.maxRetries ?? 2;
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
@@ -254,7 +701,7 @@ export class Whop {
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
       appID: this.appID,
-      ...options
+      ...options,
     });
     return client;
   }
@@ -267,7 +714,7 @@ export class Whop {
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {
-    return this._options.defaultQuery
+    return this._options.defaultQuery;
   }
 
   protected validateHeaders({ values, nulls }: NullableHeaders) {
@@ -299,7 +746,11 @@ export class Whop {
     return Errors.APIError.generate(status, error, message, headers);
   }
 
-  buildURL(path: string, query: Record<string, unknown> | null | undefined, defaultBaseURL?: string | undefined): string {
+  buildURL(
+    path: string,
+    query: Record<string, unknown> | null | undefined,
+    defaultBaseURL?: string | undefined,
+  ): string {
     const baseURL = (!this.#baseURLOverridden() && defaultBaseURL) || this.baseURL;
     const url =
       isAbsoluteURL(path) ?
@@ -387,7 +838,9 @@ export class Whop {
 
     await this.prepareOptions(options);
 
-    const { req, url, timeout } = await this.buildRequest(options, { retryCount: maxRetries - retriesRemaining });
+    const { req, url, timeout } = await this.buildRequest(options, {
+      retryCount: maxRetries - retriesRemaining,
+    });
 
     await this.prepareRequest(req, { url, options });
 
@@ -396,7 +849,16 @@ export class Whop {
     const retryLogStr = retryOfRequestLogID === undefined ? '' : `, retryOf: ${retryOfRequestLogID}`;
     const startTime = Date.now();
 
-    loggerFor(this).debug(`[${requestLogID}] sending request`, formatRequestDetails({ retryOfRequestLogID, method: options.method, url, options, headers: req.headers }));
+    loggerFor(this).debug(
+      `[${requestLogID}] sending request`,
+      formatRequestDetails({
+        retryOfRequestLogID,
+        method: options.method,
+        url,
+        options,
+        headers: req.headers,
+      }),
+    );
 
     if (options.signal?.aborted) {
       throw new Errors.APIUserAbortError();
@@ -415,21 +877,45 @@ export class Whop {
       // deno throws "TypeError: error sending request for url (https://example/): client error (Connect): tcp connect error: Operation timed out (os error 60): Operation timed out (os error 60)"
       // undici throws "TypeError: fetch failed" with cause "ConnectTimeoutError: Connect Timeout Error (attempted address: example:443, timeout: 1ms)"
       // others do not provide enough information to distinguish timeouts from other connection errors
-      const isTimeout = isAbortError(response) || /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''))
+      const isTimeout =
+        isAbortError(response) ||
+        /timed? ?out/i.test(String(response) + ('cause' in response ? String(response.cause) : ''));
       if (retriesRemaining) {
-        loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`)
-        loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
+        loggerFor(this).info(
+          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - ${retryMessage}`,
+        );
+        loggerFor(this).debug(
+          `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (${retryMessage})`,
+          formatRequestDetails({
+            retryOfRequestLogID,
+            url,
+            durationMs: headersTime - startTime,
+            message: response.message,
+          }),
+        );
         return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID);
       }
-      loggerFor(this).info(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`)
-      loggerFor(this).debug(`[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`, formatRequestDetails({ retryOfRequestLogID, url, durationMs: headersTime - startTime, message: response.message }));
+      loggerFor(this).info(
+        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} - error; no more retries left`,
+      );
+      loggerFor(this).debug(
+        `[${requestLogID}] connection ${isTimeout ? 'timed out' : 'failed'} (error; no more retries left)`,
+        formatRequestDetails({
+          retryOfRequestLogID,
+          url,
+          durationMs: headersTime - startTime,
+          message: response.message,
+        }),
+      );
       if (isTimeout) {
         throw new Errors.APIConnectionTimeoutError();
       }
       throw new Errors.APIConnectionError({ cause: response });
     }
 
-    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${response.ok ? 'succeeded' : 'failed'} with status ${response.status} in ${headersTime - startTime}ms`;
+    const responseInfo = `[${requestLogID}${retryLogStr}] ${req.method} ${url} ${
+      response.ok ? 'succeeded' : 'failed'
+    } with status ${response.status} in ${headersTime - startTime}ms`;
 
     if (!response.ok) {
       const shouldRetry = await this.shouldRetry(response);
@@ -438,27 +924,60 @@ export class Whop {
 
         // We don't need the body of this response.
         await Shims.CancelReadableStream(response.body);
-        loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
-        loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
-        return this.retryRequest(options, retriesRemaining, retryOfRequestLogID ?? requestLogID, response.headers);
+        loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
+        loggerFor(this).debug(
+          `[${requestLogID}] response error (${retryMessage})`,
+          formatRequestDetails({
+            retryOfRequestLogID,
+            url: response.url,
+            status: response.status,
+            headers: response.headers,
+            durationMs: headersTime - startTime,
+          }),
+        );
+        return this.retryRequest(
+          options,
+          retriesRemaining,
+          retryOfRequestLogID ?? requestLogID,
+          response.headers,
+        );
       }
 
       const retryMessage = shouldRetry ? `error; no more retries left` : `error; not retryable`;
 
-      loggerFor(this).info(`${responseInfo} - ${retryMessage}`)
+      loggerFor(this).info(`${responseInfo} - ${retryMessage}`);
 
       const errText = await response.text().catch((err: any) => castToError(err).message);
       const errJSON = safeJSON(errText) as any;
       const errMessage = errJSON ? undefined : errText;
 
-      loggerFor(this).debug(`[${requestLogID}] response error (${retryMessage})`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, message: errMessage, durationMs: Date.now() - startTime }));
+      loggerFor(this).debug(
+        `[${requestLogID}] response error (${retryMessage})`,
+        formatRequestDetails({
+          retryOfRequestLogID,
+          url: response.url,
+          status: response.status,
+          headers: response.headers,
+          message: errMessage,
+          durationMs: Date.now() - startTime,
+        }),
+      );
 
       const err = this.makeStatusError(response.status, errJSON, errMessage, response.headers);
       throw err;
     }
 
-    loggerFor(this).info(responseInfo)
-    loggerFor(this).debug(`[${requestLogID}] response start`, formatRequestDetails({ retryOfRequestLogID, url: response.url, status: response.status, headers: response.headers, durationMs: headersTime - startTime }));
+    loggerFor(this).info(responseInfo);
+    loggerFor(this).debug(
+      `[${requestLogID}] response start`,
+      formatRequestDetails({
+        retryOfRequestLogID,
+        url: response.url,
+        status: response.status,
+        headers: response.headers,
+        durationMs: headersTime - startTime,
+      }),
+    );
 
     return { response, options, controller, requestLogID, retryOfRequestLogID, startTime };
   }
@@ -476,7 +995,10 @@ export class Whop {
     );
   }
 
-  requestAPIList<Item = unknown, PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>>(
+  requestAPIList<
+    Item = unknown,
+    PageClass extends Pagination.AbstractPage<Item> = Pagination.AbstractPage<Item>,
+  >(
     Page: new (...args: ConstructorParameters<typeof Pagination.AbstractPage>) => PageClass,
     options: PromiseOrValue<FinalRequestOptions>,
   ): Pagination.PagePromise<PageClass, Item> {
@@ -496,7 +1018,9 @@ export class Whop {
 
     const timeout = setTimeout(abort, ms);
 
-    const isReadableBody = ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) || (typeof options.body === "object" && options.body !== null && Symbol.asyncIterator in options.body);
+    const isReadableBody =
+      ((globalThis as any).ReadableStream && options.body instanceof (globalThis as any).ReadableStream) ||
+      (typeof options.body === 'object' && options.body !== null && Symbol.asyncIterator in options.body);
 
     const fetchOptions: RequestInit = {
       signal: controller.signal as any,
@@ -511,7 +1035,6 @@ export class Whop {
     }
 
     try {
-
       // use undefined this binding; fetch errors if bound to something else in browser/cloudflare
       return await this.fetch.call(undefined, url, fetchOptions);
     } finally {
@@ -612,11 +1135,12 @@ export class Whop {
     const req: FinalizedRequestInit = {
       method,
       headers: reqHeaders,
-      ...(options.signal && { signal: options.signal}),
-      ...((globalThis as any).ReadableStream && body instanceof (globalThis as any).ReadableStream && { duplex: "half" }),
+      ...(options.signal && { signal: options.signal }),
+      ...((globalThis as any).ReadableStream &&
+        body instanceof (globalThis as any).ReadableStream && { duplex: 'half' }),
       ...(body && { body }),
-      ...(this.fetchOptions as any ?? {}),
-      ...(options.fetchOptions as any ?? {}),
+      ...((this.fetchOptions as any) ?? {}),
+      ...((options.fetchOptions as any) ?? {}),
     };
 
     return { req, url, timeout: options.timeout };
@@ -641,16 +1165,18 @@ export class Whop {
 
     const headers = buildHeaders([
       idempotencyHeaders,
-      {Accept: 'application/json',
-      'User-Agent': this.getUserAgent(),
-      'X-Stainless-Retry-Count': String(retryCount),
-      ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
-      ...getPlatformHeaders(),
-      'X-Whop-App-Id': this.appID},
+      {
+        Accept: 'application/json',
+        'User-Agent': this.getUserAgent(),
+        'X-Stainless-Retry-Count': String(retryCount),
+        ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
+        ...getPlatformHeaders(),
+        'X-Whop-App-Id': this.appID,
+      },
       await this.authHeaders(options),
       this._options.defaultHeaders,
       bodyHeaders,
-      options.headers
+      options.headers,
     ]);
 
     this.validateHeaders(headers);
@@ -677,11 +1203,9 @@ export class Whop {
       ArrayBuffer.isView(body) ||
       body instanceof ArrayBuffer ||
       body instanceof DataView ||
-      (
-        typeof body === 'string' &&
+      (typeof body === 'string' &&
         // Preserve legacy string encoding behavior for now
-        headers.values.has('content-type')
-      ) ||
+        headers.values.has('content-type')) ||
       // `Blob` is superset of `File`
       ((globalThis as any).Blob && body instanceof (globalThis as any).Blob) ||
       // `FormData` -> `multipart/form-data`
@@ -712,7 +1236,7 @@ export class Whop {
   }
 
   static Whop = this;
-  static DEFAULT_TIMEOUT = 60000 // 1 minute
+  static DEFAULT_TIMEOUT = 60000; // 1 minute
 
   static WhopError = Errors.WhopError;
   static APIError = Errors.APIError;
@@ -999,629 +1523,626 @@ Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
 
 export declare namespace Whop {
-      export type RequestOptions = Opts.RequestOptions;
+  export type RequestOptions = Opts.RequestOptions;
 
-      export import CursorPage = Pagination.CursorPage;
-export {
-  type CursorPageParams as CursorPageParams,
-  type CursorPageResponse as CursorPageResponse
-};
+  export import CursorPage = Pagination.CursorPage;
+  export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
 
-export {
-  Apps as Apps,
-  type AppType as AppType,
-  type AppListResponse as AppListResponse,
-  type AppListResponsesCursorPage as AppListResponsesCursorPage,
-  type AppCreateParams as AppCreateParams,
-  type AppUpdateParams as AppUpdateParams,
-  type AppListParams as AppListParams
-};
+  export {
+    Apps as Apps,
+    type AppType as AppType,
+    type AppListResponse as AppListResponse,
+    type AppListResponsesCursorPage as AppListResponsesCursorPage,
+    type AppCreateParams as AppCreateParams,
+    type AppUpdateParams as AppUpdateParams,
+    type AppListParams as AppListParams,
+  };
 
-export {
-  Invoices as Invoices,
-  type TaxIdentifierType as TaxIdentifierType,
-  type InvoiceDeleteResponse as InvoiceDeleteResponse,
-  type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
-  type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
-  type InvoiceVoidResponse as InvoiceVoidResponse,
-  type InvoiceCreateParams as InvoiceCreateParams,
-  type InvoiceUpdateParams as InvoiceUpdateParams,
-  type InvoiceListParams as InvoiceListParams
-};
+  export {
+    Invoices as Invoices,
+    type TaxIdentifierType as TaxIdentifierType,
+    type InvoiceDeleteResponse as InvoiceDeleteResponse,
+    type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
+    type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
+    type InvoiceVoidResponse as InvoiceVoidResponse,
+    type InvoiceCreateParams as InvoiceCreateParams,
+    type InvoiceUpdateParams as InvoiceUpdateParams,
+    type InvoiceListParams as InvoiceListParams,
+  };
 
-export {
-  CourseLessonInteractions as CourseLessonInteractions,
-  type CourseLessonInteractionListParams as CourseLessonInteractionListParams
-};
+  export {
+    CourseLessonInteractions as CourseLessonInteractions,
+    type CourseLessonInteractionListParams as CourseLessonInteractionListParams,
+  };
 
-export {
-  Products as Products,
-  type ProductDeleteResponse as ProductDeleteResponse,
-  type ProductCreateParams as ProductCreateParams,
-  type ProductUpdateParams as ProductUpdateParams,
-  type ProductListParams as ProductListParams
-};
+  export {
+    Products as Products,
+    type ProductDeleteResponse as ProductDeleteResponse,
+    type ProductCreateParams as ProductCreateParams,
+    type ProductUpdateParams as ProductUpdateParams,
+    type ProductListParams as ProductListParams,
+  };
 
-export {
-  Companies as Companies,
-  type SocialLinkWebsites as SocialLinkWebsites,
-  type CompanyListResponse as CompanyListResponse,
-  type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
-  type CompanyCreateParams as CompanyCreateParams,
-  type CompanyUpdateParams as CompanyUpdateParams,
-  type CompanyListParams as CompanyListParams
-};
+  export {
+    Companies as Companies,
+    type SocialLinkWebsites as SocialLinkWebsites,
+    type CompanyListResponse as CompanyListResponse,
+    type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
+    type CompanyCreateParams as CompanyCreateParams,
+    type CompanyUpdateParams as CompanyUpdateParams,
+    type CompanyListParams as CompanyListParams,
+  };
 
-export {
-  Webhooks as Webhooks,
-  type APIVersion as APIVersion,
-  type Webhook as Webhook,
-  type WebhookEvent as WebhookEvent,
-  type WebhookCreateResponse as WebhookCreateResponse,
-  type WebhookListResponse as WebhookListResponse,
-  type WebhookDeleteResponse as WebhookDeleteResponse,
-  type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
-  type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
-  type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
-  type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
-  type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
-  type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
-  type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
-  type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
-  type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
-  type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
-  type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
-  type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
-  type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
-  type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
-  type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
-  type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
-  type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
-  type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
-  type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
-  type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
-  type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
-  type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
-  type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
-  type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
-  type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
-  type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
-  type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
-  type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
-  type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
-  type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
-  type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
-  type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
-  type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
-  type UnwrapWebhookEvent as UnwrapWebhookEvent,
-  type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
-  type WebhookCreateParams as WebhookCreateParams,
-  type WebhookUpdateParams as WebhookUpdateParams,
-  type WebhookListParams as WebhookListParams
-};
+  export {
+    Webhooks as Webhooks,
+    type APIVersion as APIVersion,
+    type Webhook as Webhook,
+    type WebhookEvent as WebhookEvent,
+    type WebhookCreateResponse as WebhookCreateResponse,
+    type WebhookListResponse as WebhookListResponse,
+    type WebhookDeleteResponse as WebhookDeleteResponse,
+    type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
+    type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
+    type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
+    type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
+    type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
+    type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
+    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
+    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
+    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
+    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
+    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
+    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
+    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
+    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
+    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
+    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
+    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
+    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
+    type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
+    type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
+    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
+    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
+    type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
+    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
+    type UnwrapWebhookEvent as UnwrapWebhookEvent,
+    type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookCreateParams as WebhookCreateParams,
+    type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookListParams as WebhookListParams,
+  };
 
-export {
-  Plans as Plans,
-  type CheckoutFont as CheckoutFont,
-  type CheckoutShape as CheckoutShape,
-  type PlanListResponse as PlanListResponse,
-  type PlanDeleteResponse as PlanDeleteResponse,
-  type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
-  type PlanCreateParams as PlanCreateParams,
-  type PlanUpdateParams as PlanUpdateParams,
-  type PlanListParams as PlanListParams
-};
+  export {
+    Plans as Plans,
+    type CheckoutFont as CheckoutFont,
+    type CheckoutShape as CheckoutShape,
+    type PlanListResponse as PlanListResponse,
+    type PlanDeleteResponse as PlanDeleteResponse,
+    type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
+    type PlanCreateParams as PlanCreateParams,
+    type PlanUpdateParams as PlanUpdateParams,
+    type PlanListParams as PlanListParams,
+  };
 
-export {
-  Entries as Entries,
-  type EntryListResponse as EntryListResponse,
-  type EntryApproveResponse as EntryApproveResponse,
-  type EntryListResponsesCursorPage as EntryListResponsesCursorPage,
-  type EntryListParams as EntryListParams
-};
+  export {
+    Entries as Entries,
+    type EntryListResponse as EntryListResponse,
+    type EntryApproveResponse as EntryApproveResponse,
+    type EntryListResponsesCursorPage as EntryListResponsesCursorPage,
+    type EntryListParams as EntryListParams,
+  };
 
-export {
-  ForumPosts as ForumPosts,
-  type ForumPostVisibilityType as ForumPostVisibilityType,
-  type ForumPostListResponse as ForumPostListResponse,
-  type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
-  type ForumPostCreateParams as ForumPostCreateParams,
-  type ForumPostUpdateParams as ForumPostUpdateParams,
-  type ForumPostListParams as ForumPostListParams
-};
+  export {
+    ForumPosts as ForumPosts,
+    type ForumPostVisibilityType as ForumPostVisibilityType,
+    type ForumPostListResponse as ForumPostListResponse,
+    type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
+    type ForumPostCreateParams as ForumPostCreateParams,
+    type ForumPostUpdateParams as ForumPostUpdateParams,
+    type ForumPostListParams as ForumPostListParams,
+  };
 
-export {
-  Transfers as Transfers,
-  type TransferListResponse as TransferListResponse,
-  type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
-  type TransferCreateParams as TransferCreateParams,
-  type TransferListParams as TransferListParams
-};
+  export {
+    Transfers as Transfers,
+    type TransferListResponse as TransferListResponse,
+    type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferCreateParams as TransferCreateParams,
+    type TransferListParams as TransferListParams,
+  };
 
-export {
-  LedgerAccounts as LedgerAccounts,
-  type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse
-};
+  export {
+    LedgerAccounts as LedgerAccounts,
+    type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse,
+  };
 
-export {
-  Memberships as Memberships,
-  type CancelOptions as CancelOptions,
-  type MembershipListResponse as MembershipListResponse,
-  type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
-  type MembershipUpdateParams as MembershipUpdateParams,
-  type MembershipListParams as MembershipListParams,
-  type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
-  type MembershipCancelParams as MembershipCancelParams,
-  type MembershipPauseParams as MembershipPauseParams
-};
+  export {
+    Memberships as Memberships,
+    type CancelOptions as CancelOptions,
+    type MembershipListResponse as MembershipListResponse,
+    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
+    type MembershipUpdateParams as MembershipUpdateParams,
+    type MembershipListParams as MembershipListParams,
+    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipCancelParams as MembershipCancelParams,
+    type MembershipPauseParams as MembershipPauseParams,
+  };
 
-export {
-  AuthorizedUsers as AuthorizedUsers,
-  type AuthorizedUser as AuthorizedUser,
-  type AuthorizedUserListResponse as AuthorizedUserListResponse,
-  type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
-  type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
-  type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
-  type AuthorizedUserListParams as AuthorizedUserListParams,
-  type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams
-};
+  export {
+    AuthorizedUsers as AuthorizedUsers,
+    type AuthorizedUser as AuthorizedUser,
+    type AuthorizedUserListResponse as AuthorizedUserListResponse,
+    type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
+    type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
+    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
+    type AuthorizedUserListParams as AuthorizedUserListParams,
+    type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
+  };
 
-export {
-  AppBuilds as AppBuilds,
-  type AppBuildListResponse as AppBuildListResponse,
-  type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
-  type AppBuildCreateParams as AppBuildCreateParams,
-  type AppBuildListParams as AppBuildListParams
-};
+  export {
+    AppBuilds as AppBuilds,
+    type AppBuildListResponse as AppBuildListResponse,
+    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
+    type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildListParams as AppBuildListParams,
+  };
 
-export {
-  Shipments as Shipments,
-  type ShipmentListResponse as ShipmentListResponse,
-  type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
-  type ShipmentCreateParams as ShipmentCreateParams,
-  type ShipmentListParams as ShipmentListParams
-};
+  export {
+    Shipments as Shipments,
+    type ShipmentListResponse as ShipmentListResponse,
+    type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
+    type ShipmentCreateParams as ShipmentCreateParams,
+    type ShipmentListParams as ShipmentListParams,
+  };
 
-export {
-  CheckoutConfigurations as CheckoutConfigurations,
-  type CheckoutModes as CheckoutModes,
-  type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
-  type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
-  type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
-  type CheckoutConfigurationListParams as CheckoutConfigurationListParams
-};
+  export {
+    CheckoutConfigurations as CheckoutConfigurations,
+    type CheckoutModes as CheckoutModes,
+    type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
+    type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
+    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
+    type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+  };
 
-export {
-  Messages as Messages,
-  type MessageListResponse as MessageListResponse,
-  type MessageDeleteResponse as MessageDeleteResponse,
-  type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
-  type MessageCreateParams as MessageCreateParams,
-  type MessageUpdateParams as MessageUpdateParams,
-  type MessageListParams as MessageListParams
-};
+  export {
+    Messages as Messages,
+    type MessageListResponse as MessageListResponse,
+    type MessageDeleteResponse as MessageDeleteResponse,
+    type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageCreateParams as MessageCreateParams,
+    type MessageUpdateParams as MessageUpdateParams,
+    type MessageListParams as MessageListParams,
+  };
 
-export {
-  ChatChannels as ChatChannels,
-  type ChatChannelListResponse as ChatChannelListResponse,
-  type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
-  type ChatChannelUpdateParams as ChatChannelUpdateParams,
-  type ChatChannelListParams as ChatChannelListParams
-};
+  export {
+    ChatChannels as ChatChannels,
+    type ChatChannelListResponse as ChatChannelListResponse,
+    type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
+    type ChatChannelUpdateParams as ChatChannelUpdateParams,
+    type ChatChannelListParams as ChatChannelListParams,
+  };
 
-export {
-  Users as Users,
-  type User as User,
-  type UserListResponse as UserListResponse,
-  type UserCheckAccessResponse as UserCheckAccessResponse,
-  type UserListResponsesCursorPage as UserListResponsesCursorPage,
-  type UserRetrieveParams as UserRetrieveParams,
-  type UserUpdateParams as UserUpdateParams,
-  type UserListParams as UserListParams,
-  type UserCheckAccessParams as UserCheckAccessParams
-};
+  export {
+    Users as Users,
+    type User as User,
+    type UserListResponse as UserListResponse,
+    type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UserRetrieveParams as UserRetrieveParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
+    type UserCheckAccessParams as UserCheckAccessParams,
+  };
 
-export {
-  Payments as Payments,
-  type BillingReasons as BillingReasons,
-  type CardBrands as CardBrands,
-  type PaymentMethodTypes as PaymentMethodTypes,
-  type ReceiptTaxBehavior as ReceiptTaxBehavior,
-  type PaymentListResponse as PaymentListResponse,
-  type PaymentListFeesResponse as PaymentListFeesResponse,
-  type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
-  type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
-  type PaymentCreateParams as PaymentCreateParams,
-  type PaymentListParams as PaymentListParams,
-  type PaymentListFeesParams as PaymentListFeesParams,
-  type PaymentRefundParams as PaymentRefundParams
-};
+  export {
+    Payments as Payments,
+    type BillingReasons as BillingReasons,
+    type CardBrands as CardBrands,
+    type PaymentMethodTypes as PaymentMethodTypes,
+    type ReceiptTaxBehavior as ReceiptTaxBehavior,
+    type PaymentListResponse as PaymentListResponse,
+    type PaymentListFeesResponse as PaymentListFeesResponse,
+    type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
+    type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
+    type PaymentCreateParams as PaymentCreateParams,
+    type PaymentListParams as PaymentListParams,
+    type PaymentListFeesParams as PaymentListFeesParams,
+    type PaymentRefundParams as PaymentRefundParams,
+  };
 
-export {
-  SupportChannels as SupportChannels,
-  type SupportChannelListResponse as SupportChannelListResponse,
-  type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
-  type SupportChannelCreateParams as SupportChannelCreateParams,
-  type SupportChannelListParams as SupportChannelListParams
-};
+  export {
+    SupportChannels as SupportChannels,
+    type SupportChannelListResponse as SupportChannelListResponse,
+    type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
+    type SupportChannelCreateParams as SupportChannelCreateParams,
+    type SupportChannelListParams as SupportChannelListParams,
+  };
 
-export {
-  Experiences as Experiences,
-  type ExperienceListResponse as ExperienceListResponse,
-  type ExperienceDeleteResponse as ExperienceDeleteResponse,
-  type ExperienceListResponsesCursorPage as ExperienceListResponsesCursorPage,
-  type ExperienceCreateParams as ExperienceCreateParams,
-  type ExperienceUpdateParams as ExperienceUpdateParams,
-  type ExperienceListParams as ExperienceListParams,
-  type ExperienceAttachParams as ExperienceAttachParams,
-  type ExperienceDetachParams as ExperienceDetachParams,
-  type ExperienceDuplicateParams as ExperienceDuplicateParams
-};
+  export {
+    Experiences as Experiences,
+    type ExperienceListResponse as ExperienceListResponse,
+    type ExperienceDeleteResponse as ExperienceDeleteResponse,
+    type ExperienceListResponsesCursorPage as ExperienceListResponsesCursorPage,
+    type ExperienceCreateParams as ExperienceCreateParams,
+    type ExperienceUpdateParams as ExperienceUpdateParams,
+    type ExperienceListParams as ExperienceListParams,
+    type ExperienceAttachParams as ExperienceAttachParams,
+    type ExperienceDetachParams as ExperienceDetachParams,
+    type ExperienceDuplicateParams as ExperienceDuplicateParams,
+  };
 
-export {
-  Reactions as Reactions,
-  type ReactionListResponse as ReactionListResponse,
-  type ReactionDeleteResponse as ReactionDeleteResponse,
-  type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
-  type ReactionCreateParams as ReactionCreateParams,
-  type ReactionListParams as ReactionListParams,
-  type ReactionDeleteParams as ReactionDeleteParams
-};
+  export {
+    Reactions as Reactions,
+    type ReactionListResponse as ReactionListResponse,
+    type ReactionDeleteResponse as ReactionDeleteResponse,
+    type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
+    type ReactionCreateParams as ReactionCreateParams,
+    type ReactionListParams as ReactionListParams,
+    type ReactionDeleteParams as ReactionDeleteParams,
+  };
 
-export {
-  Members as Members,
-  type MemberRetrieveResponse as MemberRetrieveResponse,
-  type MemberListResponse as MemberListResponse,
-  type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
-  type MemberListParams as MemberListParams
-};
+  export {
+    Members as Members,
+    type MemberRetrieveResponse as MemberRetrieveResponse,
+    type MemberListResponse as MemberListResponse,
+    type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type MemberListParams as MemberListParams,
+  };
 
-export {
-  Forums as Forums,
-  type ForumListResponse as ForumListResponse,
-  type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
-  type ForumUpdateParams as ForumUpdateParams,
-  type ForumListParams as ForumListParams
-};
+  export {
+    Forums as Forums,
+    type ForumListResponse as ForumListResponse,
+    type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
+    type ForumUpdateParams as ForumUpdateParams,
+    type ForumListParams as ForumListParams,
+  };
 
-export {
-  PromoCodes as PromoCodes,
-  type PromoCode as PromoCode,
-  type PromoCodeStatus as PromoCodeStatus,
-  type PromoDuration as PromoDuration,
-  type PromoCodeListResponse as PromoCodeListResponse,
-  type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
-  type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
-  type PromoCodeCreateParams as PromoCodeCreateParams,
-  type PromoCodeListParams as PromoCodeListParams
-};
+  export {
+    PromoCodes as PromoCodes,
+    type PromoCode as PromoCode,
+    type PromoCodeStatus as PromoCodeStatus,
+    type PromoDuration as PromoDuration,
+    type PromoCodeListResponse as PromoCodeListResponse,
+    type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
+    type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
+    type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeListParams as PromoCodeListParams,
+  };
 
-export {
-  Courses as Courses,
-  type Course as Course,
-  type CourseVisibilities as CourseVisibilities,
-  type Languages as Languages,
-  type CourseListResponse as CourseListResponse,
-  type CourseDeleteResponse as CourseDeleteResponse,
-  type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
-  type CourseCreateParams as CourseCreateParams,
-  type CourseUpdateParams as CourseUpdateParams,
-  type CourseListParams as CourseListParams
-};
+  export {
+    Courses as Courses,
+    type Course as Course,
+    type CourseVisibilities as CourseVisibilities,
+    type Languages as Languages,
+    type CourseListResponse as CourseListResponse,
+    type CourseDeleteResponse as CourseDeleteResponse,
+    type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
+    type CourseCreateParams as CourseCreateParams,
+    type CourseUpdateParams as CourseUpdateParams,
+    type CourseListParams as CourseListParams,
+  };
 
-export {
-  CourseChapters as CourseChapters,
-  type CourseChapter as CourseChapter,
-  type CourseChapterListResponse as CourseChapterListResponse,
-  type CourseChapterDeleteResponse as CourseChapterDeleteResponse,
-  type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
-  type CourseChapterCreateParams as CourseChapterCreateParams,
-  type CourseChapterUpdateParams as CourseChapterUpdateParams,
-  type CourseChapterListParams as CourseChapterListParams
-};
+  export {
+    CourseChapters as CourseChapters,
+    type CourseChapter as CourseChapter,
+    type CourseChapterListResponse as CourseChapterListResponse,
+    type CourseChapterDeleteResponse as CourseChapterDeleteResponse,
+    type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
+    type CourseChapterCreateParams as CourseChapterCreateParams,
+    type CourseChapterUpdateParams as CourseChapterUpdateParams,
+    type CourseChapterListParams as CourseChapterListParams,
+  };
 
-export {
-  CourseLessons as CourseLessons,
-  type AssessmentQuestionTypes as AssessmentQuestionTypes,
-  type EmbedType as EmbedType,
-  type Lesson as Lesson,
-  type LessonTypes as LessonTypes,
-  type LessonVisibilities as LessonVisibilities,
-  type CourseLessonListResponse as CourseLessonListResponse,
-  type CourseLessonDeleteResponse as CourseLessonDeleteResponse,
-  type CourseLessonMarkAsCompletedResponse as CourseLessonMarkAsCompletedResponse,
-  type CourseLessonStartResponse as CourseLessonStartResponse,
-  type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
-  type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
-  type CourseLessonCreateParams as CourseLessonCreateParams,
-  type CourseLessonUpdateParams as CourseLessonUpdateParams,
-  type CourseLessonListParams as CourseLessonListParams,
-  type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams
-};
+  export {
+    CourseLessons as CourseLessons,
+    type AssessmentQuestionTypes as AssessmentQuestionTypes,
+    type EmbedType as EmbedType,
+    type Lesson as Lesson,
+    type LessonTypes as LessonTypes,
+    type LessonVisibilities as LessonVisibilities,
+    type CourseLessonListResponse as CourseLessonListResponse,
+    type CourseLessonDeleteResponse as CourseLessonDeleteResponse,
+    type CourseLessonMarkAsCompletedResponse as CourseLessonMarkAsCompletedResponse,
+    type CourseLessonStartResponse as CourseLessonStartResponse,
+    type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
+    type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
+    type CourseLessonCreateParams as CourseLessonCreateParams,
+    type CourseLessonUpdateParams as CourseLessonUpdateParams,
+    type CourseLessonListParams as CourseLessonListParams,
+    type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
+  };
 
-export {
-  Reviews as Reviews,
-  type ReviewStatus as ReviewStatus,
-  type ReviewRetrieveResponse as ReviewRetrieveResponse,
-  type ReviewListResponse as ReviewListResponse,
-  type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
-  type ReviewListParams as ReviewListParams
-};
+  export {
+    Reviews as Reviews,
+    type ReviewStatus as ReviewStatus,
+    type ReviewRetrieveResponse as ReviewRetrieveResponse,
+    type ReviewListResponse as ReviewListResponse,
+    type ReviewListResponsesCursorPage as ReviewListResponsesCursorPage,
+    type ReviewListParams as ReviewListParams,
+  };
 
-export {
-  CourseStudents as CourseStudents,
-  type CourseStudentRetrieveResponse as CourseStudentRetrieveResponse,
-  type CourseStudentListResponse as CourseStudentListResponse,
-  type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
-  type CourseStudentListParams as CourseStudentListParams
-};
+  export {
+    CourseStudents as CourseStudents,
+    type CourseStudentRetrieveResponse as CourseStudentRetrieveResponse,
+    type CourseStudentListResponse as CourseStudentListResponse,
+    type CourseStudentListResponsesCursorPage as CourseStudentListResponsesCursorPage,
+    type CourseStudentListParams as CourseStudentListParams,
+  };
 
-export {
-  AccessTokens as AccessTokens,
-  type AccessTokenCreateResponse as AccessTokenCreateResponse,
-  type AccessTokenCreateParams as AccessTokenCreateParams
-};
+  export {
+    AccessTokens as AccessTokens,
+    type AccessTokenCreateResponse as AccessTokenCreateResponse,
+    type AccessTokenCreateParams as AccessTokenCreateParams,
+  };
 
-export {
-  Notifications as Notifications,
-  type NotificationCreateResponse as NotificationCreateResponse,
-  type NotificationCreateParams as NotificationCreateParams
-};
+  export {
+    Notifications as Notifications,
+    type NotificationCreateResponse as NotificationCreateResponse,
+    type NotificationCreateParams as NotificationCreateParams,
+  };
 
-export {
-  Disputes as Disputes,
-  type Dispute as Dispute,
-  type DisputeStatuses as DisputeStatuses,
-  type DisputeListResponse as DisputeListResponse,
-  type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
-  type DisputeListParams as DisputeListParams,
-  type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams
-};
+  export {
+    Disputes as Disputes,
+    type Dispute as Dispute,
+    type DisputeStatuses as DisputeStatuses,
+    type DisputeListResponse as DisputeListResponse,
+    type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
+    type DisputeListParams as DisputeListParams,
+    type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
+  };
 
-export {
-  Refunds as Refunds,
-  type PaymentProvider as PaymentProvider,
-  type RefundReferenceStatus as RefundReferenceStatus,
-  type RefundReferenceType as RefundReferenceType,
-  type RefundStatus as RefundStatus,
-  type RefundRetrieveResponse as RefundRetrieveResponse,
-  type RefundListResponse as RefundListResponse,
-  type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
-  type RefundListParams as RefundListParams
-};
+  export {
+    Refunds as Refunds,
+    type PaymentProvider as PaymentProvider,
+    type RefundReferenceStatus as RefundReferenceStatus,
+    type RefundReferenceType as RefundReferenceType,
+    type RefundStatus as RefundStatus,
+    type RefundRetrieveResponse as RefundRetrieveResponse,
+    type RefundListResponse as RefundListResponse,
+    type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
+    type RefundListParams as RefundListParams,
+  };
 
-export {
-  Withdrawals as Withdrawals,
-  type Withdrawal as Withdrawal,
-  type WithdrawalFeeTypes as WithdrawalFeeTypes,
-  type WithdrawalSpeeds as WithdrawalSpeeds,
-  type WithdrawalStatus as WithdrawalStatus,
-  type WithdrawalListResponse as WithdrawalListResponse,
-  type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
-  type WithdrawalCreateParams as WithdrawalCreateParams,
-  type WithdrawalListParams as WithdrawalListParams
-};
+  export {
+    Withdrawals as Withdrawals,
+    type Withdrawal as Withdrawal,
+    type WithdrawalFeeTypes as WithdrawalFeeTypes,
+    type WithdrawalSpeeds as WithdrawalSpeeds,
+    type WithdrawalStatus as WithdrawalStatus,
+    type WithdrawalListResponse as WithdrawalListResponse,
+    type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
+    type WithdrawalCreateParams as WithdrawalCreateParams,
+    type WithdrawalListParams as WithdrawalListParams,
+  };
 
-export {
-  AccountLinks as AccountLinks,
-  type AccountLinkCreateResponse as AccountLinkCreateResponse,
-  type AccountLinkCreateParams as AccountLinkCreateParams
-};
+  export {
+    AccountLinks as AccountLinks,
+    type AccountLinkCreateResponse as AccountLinkCreateResponse,
+    type AccountLinkCreateParams as AccountLinkCreateParams,
+  };
 
-export {
-  SetupIntents as SetupIntents,
-  type SetupIntent as SetupIntent,
-  type SetupIntentStatus as SetupIntentStatus,
-  type SetupIntentListResponse as SetupIntentListResponse,
-  type SetupIntentListResponsesCursorPage as SetupIntentListResponsesCursorPage,
-  type SetupIntentListParams as SetupIntentListParams
-};
+  export {
+    SetupIntents as SetupIntents,
+    type SetupIntent as SetupIntent,
+    type SetupIntentStatus as SetupIntentStatus,
+    type SetupIntentListResponse as SetupIntentListResponse,
+    type SetupIntentListResponsesCursorPage as SetupIntentListResponsesCursorPage,
+    type SetupIntentListParams as SetupIntentListParams,
+  };
 
-export {
-  PaymentMethods as PaymentMethods,
-  type PaymentMethodRetrieveResponse as PaymentMethodRetrieveResponse,
-  type PaymentMethodListResponse as PaymentMethodListResponse,
-  type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
-  type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
-  type PaymentMethodListParams as PaymentMethodListParams
-};
+  export {
+    PaymentMethods as PaymentMethods,
+    type PaymentMethodRetrieveResponse as PaymentMethodRetrieveResponse,
+    type PaymentMethodListResponse as PaymentMethodListResponse,
+    type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
+    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
+    type PaymentMethodListParams as PaymentMethodListParams,
+  };
 
-export {
-  FeeMarkups as FeeMarkups,
-  type FeeMarkupType as FeeMarkupType,
-  type FeeMarkupCreateResponse as FeeMarkupCreateResponse,
-  type FeeMarkupListResponse as FeeMarkupListResponse,
-  type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
-  type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
-  type FeeMarkupCreateParams as FeeMarkupCreateParams,
-  type FeeMarkupListParams as FeeMarkupListParams
-};
+  export {
+    FeeMarkups as FeeMarkups,
+    type FeeMarkupType as FeeMarkupType,
+    type FeeMarkupCreateResponse as FeeMarkupCreateResponse,
+    type FeeMarkupListResponse as FeeMarkupListResponse,
+    type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
+    type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
+    type FeeMarkupCreateParams as FeeMarkupCreateParams,
+    type FeeMarkupListParams as FeeMarkupListParams,
+  };
 
-export {
-  PayoutMethods as PayoutMethods,
-  type PayoutDestinationCategory as PayoutDestinationCategory,
-  type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
-  type PayoutMethodListResponse as PayoutMethodListResponse,
-  type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
-  type PayoutMethodListParams as PayoutMethodListParams
-};
+  export {
+    PayoutMethods as PayoutMethods,
+    type PayoutDestinationCategory as PayoutDestinationCategory,
+    type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
+    type PayoutMethodListResponse as PayoutMethodListResponse,
+    type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
+    type PayoutMethodListParams as PayoutMethodListParams,
+  };
 
-export {
-  Verifications as Verifications,
-  type VerificationErrorCode as VerificationErrorCode,
-  type VerificationStatus as VerificationStatus,
-  type VerificationRetrieveResponse as VerificationRetrieveResponse,
-  type VerificationListResponse as VerificationListResponse,
-  type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
-  type VerificationListParams as VerificationListParams
-};
+  export {
+    Verifications as Verifications,
+    type VerificationErrorCode as VerificationErrorCode,
+    type VerificationStatus as VerificationStatus,
+    type VerificationRetrieveResponse as VerificationRetrieveResponse,
+    type VerificationListResponse as VerificationListResponse,
+    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
+    type VerificationListParams as VerificationListParams,
+  };
 
-export {
-  Leads as Leads,
-  type Lead as Lead,
-  type LeadListResponse as LeadListResponse,
-  type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
-  type LeadCreateParams as LeadCreateParams,
-  type LeadUpdateParams as LeadUpdateParams,
-  type LeadListParams as LeadListParams
-};
+  export {
+    Leads as Leads,
+    type Lead as Lead,
+    type LeadListResponse as LeadListResponse,
+    type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
+    type LeadCreateParams as LeadCreateParams,
+    type LeadUpdateParams as LeadUpdateParams,
+    type LeadListParams as LeadListParams,
+  };
 
-export {
-  Topups as Topups,
-  type TopupCreateResponse as TopupCreateResponse,
-  type TopupCreateParams as TopupCreateParams
-};
+  export {
+    Topups as Topups,
+    type TopupCreateResponse as TopupCreateResponse,
+    type TopupCreateParams as TopupCreateParams,
+  };
 
-export {
-  Files as Files,
-  type UploadStatus as UploadStatus,
-  type FileCreateResponse as FileCreateResponse,
-  type FileRetrieveResponse as FileRetrieveResponse,
-  type FileCreateParams as FileCreateParams
-};
+  export {
+    Files as Files,
+    type UploadStatus as UploadStatus,
+    type FileCreateResponse as FileCreateResponse,
+    type FileRetrieveResponse as FileRetrieveResponse,
+    type FileCreateParams as FileCreateParams,
+  };
 
-export {
-  CompanyTokenTransactions as CompanyTokenTransactions,
-  type CompanyTokenTransaction as CompanyTokenTransaction,
-  type CompanyTokenTransactionType as CompanyTokenTransactionType,
-  type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
-  type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
-  type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
-  type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams
-};
+  export {
+    CompanyTokenTransactions as CompanyTokenTransactions,
+    type CompanyTokenTransaction as CompanyTokenTransaction,
+    type CompanyTokenTransactionType as CompanyTokenTransactionType,
+    type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
+    type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
+    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
+    type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams,
+  };
 
-export {
-  DmMembers as DmMembers,
-  type DmFeedMemberNotificationPreferences as DmFeedMemberNotificationPreferences,
-  type DmFeedMemberStatuses as DmFeedMemberStatuses,
-  type DmMember as DmMember,
-  type DmMemberListResponse as DmMemberListResponse,
-  type DmMemberDeleteResponse as DmMemberDeleteResponse,
-  type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
-  type DmMemberCreateParams as DmMemberCreateParams,
-  type DmMemberUpdateParams as DmMemberUpdateParams,
-  type DmMemberListParams as DmMemberListParams
-};
+  export {
+    DmMembers as DmMembers,
+    type DmFeedMemberNotificationPreferences as DmFeedMemberNotificationPreferences,
+    type DmFeedMemberStatuses as DmFeedMemberStatuses,
+    type DmMember as DmMember,
+    type DmMemberListResponse as DmMemberListResponse,
+    type DmMemberDeleteResponse as DmMemberDeleteResponse,
+    type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
+    type DmMemberCreateParams as DmMemberCreateParams,
+    type DmMemberUpdateParams as DmMemberUpdateParams,
+    type DmMemberListParams as DmMemberListParams,
+  };
 
-export {
-  AIChats as AIChats,
-  type AIChat as AIChat,
-  type NotificationPreferences as NotificationPreferences,
-  type AIChatListResponse as AIChatListResponse,
-  type AIChatDeleteResponse as AIChatDeleteResponse,
-  type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
-  type AIChatCreateParams as AIChatCreateParams,
-  type AIChatUpdateParams as AIChatUpdateParams,
-  type AIChatListParams as AIChatListParams
-};
+  export {
+    AIChats as AIChats,
+    type AIChat as AIChat,
+    type NotificationPreferences as NotificationPreferences,
+    type AIChatListResponse as AIChatListResponse,
+    type AIChatDeleteResponse as AIChatDeleteResponse,
+    type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
+    type AIChatCreateParams as AIChatCreateParams,
+    type AIChatUpdateParams as AIChatUpdateParams,
+    type AIChatListParams as AIChatListParams,
+  };
 
-export {
-  DmChannels as DmChannels,
-  type DmChannel as DmChannel,
-  type DmChannelListResponse as DmChannelListResponse,
-  type DmChannelDeleteResponse as DmChannelDeleteResponse,
-  type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
-  type DmChannelCreateParams as DmChannelCreateParams,
-  type DmChannelUpdateParams as DmChannelUpdateParams,
-  type DmChannelListParams as DmChannelListParams
-};
+  export {
+    DmChannels as DmChannels,
+    type DmChannel as DmChannel,
+    type DmChannelListResponse as DmChannelListResponse,
+    type DmChannelDeleteResponse as DmChannelDeleteResponse,
+    type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
+    type DmChannelCreateParams as DmChannelCreateParams,
+    type DmChannelUpdateParams as DmChannelUpdateParams,
+    type DmChannelListParams as DmChannelListParams,
+  };
 
-export {
-  DisputeAlerts as DisputeAlerts,
-  type DisputeAlertType as DisputeAlertType,
-  type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
-  type DisputeAlertListResponse as DisputeAlertListResponse,
-  type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
-  type DisputeAlertListParams as DisputeAlertListParams
-};
+  export {
+    DisputeAlerts as DisputeAlerts,
+    type DisputeAlertType as DisputeAlertType,
+    type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
+    type DisputeAlertListResponse as DisputeAlertListResponse,
+    type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
+    type DisputeAlertListParams as DisputeAlertListParams,
+  };
 
-export {
-  ResolutionCenterCases as ResolutionCenterCases,
-  type ResolutionCenterCaseCustomerResponse as ResolutionCenterCaseCustomerResponse,
-  type ResolutionCenterCaseIssueType as ResolutionCenterCaseIssueType,
-  type ResolutionCenterCaseMerchantResponse as ResolutionCenterCaseMerchantResponse,
-  type ResolutionCenterCasePlatformResponse as ResolutionCenterCasePlatformResponse,
-  type ResolutionCenterCaseStatus as ResolutionCenterCaseStatus,
-  type ResolutionCenterCaseRetrieveResponse as ResolutionCenterCaseRetrieveResponse,
-  type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
-  type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
-  type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams
-};
+  export {
+    ResolutionCenterCases as ResolutionCenterCases,
+    type ResolutionCenterCaseCustomerResponse as ResolutionCenterCaseCustomerResponse,
+    type ResolutionCenterCaseIssueType as ResolutionCenterCaseIssueType,
+    type ResolutionCenterCaseMerchantResponse as ResolutionCenterCaseMerchantResponse,
+    type ResolutionCenterCasePlatformResponse as ResolutionCenterCasePlatformResponse,
+    type ResolutionCenterCaseStatus as ResolutionCenterCaseStatus,
+    type ResolutionCenterCaseRetrieveResponse as ResolutionCenterCaseRetrieveResponse,
+    type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
+    type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
+    type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams,
+  };
 
-export {
-  PayoutAccounts as PayoutAccounts,
-  type PayoutAccountCalculatedStatuses as PayoutAccountCalculatedStatuses,
-  type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse
-};
+  export {
+    PayoutAccounts as PayoutAccounts,
+    type PayoutAccountCalculatedStatuses as PayoutAccountCalculatedStatuses,
+    type PayoutAccountRetrieveResponse as PayoutAccountRetrieveResponse,
+  };
 
-export {
-  Affiliates as Affiliates,
-  type Affiliate as Affiliate,
-  type Status as Status,
-  type AffiliateListResponse as AffiliateListResponse,
-  type AffiliateArchiveResponse as AffiliateArchiveResponse,
-  type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
-  type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
-  type AffiliateCreateParams as AffiliateCreateParams,
-  type AffiliateListParams as AffiliateListParams
-};
+  export {
+    Affiliates as Affiliates,
+    type Affiliate as Affiliate,
+    type Status as Status,
+    type AffiliateListResponse as AffiliateListResponse,
+    type AffiliateArchiveResponse as AffiliateArchiveResponse,
+    type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
+    type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
+    type AffiliateCreateParams as AffiliateCreateParams,
+    type AffiliateListParams as AffiliateListParams,
+  };
 
-export type AccessLevel = API.AccessLevel;
-export type AccessPassType = API.AccessPassType;
-export type App = API.App;
-export type AppBuild = API.AppBuild;
-export type AppBuildPlatforms = API.AppBuildPlatforms;
-export type AppBuildStatuses = API.AppBuildStatuses;
-export type AppStatuses = API.AppStatuses;
-export type AppViewType = API.AppViewType;
-export type AuthorizedUserRoles = API.AuthorizedUserRoles;
-export type ChatChannel = API.ChatChannel;
-export type CheckoutConfiguration = API.CheckoutConfiguration;
-export type CollectionMethod = API.CollectionMethod;
-export type Company = API.Company;
-export type CourseLessonInteraction = API.CourseLessonInteraction;
-export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
-export type Currency = API.Currency;
-export type CustomCta = API.CustomCta;
-export type Direction = API.Direction;
-export type DmsPostTypes = API.DmsPostTypes;
-export type EmailNotificationPreferences = API.EmailNotificationPreferences;
-export type Entry = API.Entry;
-export type EntryStatus = API.EntryStatus;
-export type Experience = API.Experience;
-export type Forum = API.Forum;
-export type ForumPost = API.ForumPost;
-export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
-export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
-export type Invoice = API.Invoice;
-export type InvoiceListItem = API.InvoiceListItem;
-export type InvoiceStatus = API.InvoiceStatus;
-export type MemberMostRecentActions = API.MemberMostRecentActions;
-export type MemberStatuses = API.MemberStatuses;
-export type Membership = API.Membership;
-export type MembershipStatus = API.MembershipStatus;
-export type Message = API.Message;
-export type PageInfo = API.PageInfo;
-export type Payment = API.Payment;
-export type Plan = API.Plan;
-export type PlanType = API.PlanType;
-export type Product = API.Product;
-export type ProductListItem = API.ProductListItem;
-export type PromoType = API.PromoType;
-export type Reaction = API.Reaction;
-export type ReceiptStatus = API.ReceiptStatus;
-export type ReleaseMethod = API.ReleaseMethod;
-export type Shipment = API.Shipment;
-export type ShipmentCarrier = API.ShipmentCarrier;
-export type ShipmentStatus = API.ShipmentStatus;
-export type ShipmentSubstatus = API.ShipmentSubstatus;
-export type SupportChannel = API.SupportChannel;
-export type TaxType = API.TaxType;
-export type Transfer = API.Transfer;
-export type Visibility = API.Visibility;
-export type VisibilityFilter = API.VisibilityFilter;
-export type WhoCanCommentTypes = API.WhoCanCommentTypes;
-export type WhoCanPost = API.WhoCanPost;
-export type WhoCanPostTypes = API.WhoCanPostTypes;
-export type WhoCanReact = API.WhoCanReact;
-    }
+  export type AccessLevel = API.AccessLevel;
+  export type AccessPassType = API.AccessPassType;
+  export type App = API.App;
+  export type AppBuild = API.AppBuild;
+  export type AppBuildPlatforms = API.AppBuildPlatforms;
+  export type AppBuildStatuses = API.AppBuildStatuses;
+  export type AppStatuses = API.AppStatuses;
+  export type AppViewType = API.AppViewType;
+  export type AuthorizedUserRoles = API.AuthorizedUserRoles;
+  export type ChatChannel = API.ChatChannel;
+  export type CheckoutConfiguration = API.CheckoutConfiguration;
+  export type CollectionMethod = API.CollectionMethod;
+  export type Company = API.Company;
+  export type CourseLessonInteraction = API.CourseLessonInteraction;
+  export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
+  export type Currency = API.Currency;
+  export type CustomCta = API.CustomCta;
+  export type Direction = API.Direction;
+  export type DmsPostTypes = API.DmsPostTypes;
+  export type EmailNotificationPreferences = API.EmailNotificationPreferences;
+  export type Entry = API.Entry;
+  export type EntryStatus = API.EntryStatus;
+  export type Experience = API.Experience;
+  export type Forum = API.Forum;
+  export type ForumPost = API.ForumPost;
+  export type FriendlyReceiptStatus = API.FriendlyReceiptStatus;
+  export type GlobalAffiliateStatus = API.GlobalAffiliateStatus;
+  export type Invoice = API.Invoice;
+  export type InvoiceListItem = API.InvoiceListItem;
+  export type InvoiceStatus = API.InvoiceStatus;
+  export type MemberMostRecentActions = API.MemberMostRecentActions;
+  export type MemberStatuses = API.MemberStatuses;
+  export type Membership = API.Membership;
+  export type MembershipStatus = API.MembershipStatus;
+  export type Message = API.Message;
+  export type PageInfo = API.PageInfo;
+  export type Payment = API.Payment;
+  export type Plan = API.Plan;
+  export type PlanType = API.PlanType;
+  export type Product = API.Product;
+  export type ProductListItem = API.ProductListItem;
+  export type PromoType = API.PromoType;
+  export type Reaction = API.Reaction;
+  export type ReceiptStatus = API.ReceiptStatus;
+  export type ReleaseMethod = API.ReleaseMethod;
+  export type Shipment = API.Shipment;
+  export type ShipmentCarrier = API.ShipmentCarrier;
+  export type ShipmentStatus = API.ShipmentStatus;
+  export type ShipmentSubstatus = API.ShipmentSubstatus;
+  export type SupportChannel = API.SupportChannel;
+  export type TaxType = API.TaxType;
+  export type Transfer = API.Transfer;
+  export type Visibility = API.Visibility;
+  export type VisibilityFilter = API.VisibilityFilter;
+  export type WhoCanCommentTypes = API.WhoCanCommentTypes;
+  export type WhoCanPost = API.WhoCanPost;
+  export type WhoCanPostTypes = API.WhoCanPostTypes;
+  export type WhoCanReact = API.WhoCanReact;
+}

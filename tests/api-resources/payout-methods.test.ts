@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource payoutMethods', () => {
   // Mock server tests are disabled
@@ -32,11 +35,11 @@ describe('resource payoutMethods', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.payoutMethods.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    after: 'after',
-    before: 'before',
-    first: 42,
-    last: 42,
-  });
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
   });
 });

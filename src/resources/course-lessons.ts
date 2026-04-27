@@ -64,7 +64,11 @@ export class CourseLessons extends APIResource {
    * );
    * ```
    */
-  update(id: string, body: CourseLessonUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Lesson> {
+  update(
+    id: string,
+    body: CourseLessonUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Lesson> {
     return this._client.patch(path`/course_lessons/${id}`, { body, ...options });
   }
 
@@ -84,8 +88,14 @@ export class CourseLessons extends APIResource {
    * }
    * ```
    */
-  list(query: CourseLessonListParams | null | undefined = {}, options?: RequestOptions): PagePromise<CourseLessonListResponsesCursorPage, CourseLessonListResponse> {
-    return this._client.getAPIList('/course_lessons', CursorPage<CourseLessonListResponse>, { query, ...options });
+  list(
+    query: CourseLessonListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CourseLessonListResponsesCursorPage, CourseLessonListResponse> {
+    return this._client.getAPIList('/course_lessons', CursorPage<CourseLessonListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -116,7 +126,10 @@ export class CourseLessons extends APIResource {
    * );
    * ```
    */
-  markAsCompleted(lessonID: string, options?: RequestOptions): APIPromise<CourseLessonMarkAsCompletedResponse> {
+  markAsCompleted(
+    lessonID: string,
+    options?: RequestOptions,
+  ): APIPromise<CourseLessonMarkAsCompletedResponse> {
     return this._client.post(path`/course_lessons/${lessonID}/mark_as_completed`, options);
   }
 
@@ -146,22 +159,26 @@ export class CourseLessons extends APIResource {
    *   });
    * ```
    */
-  submitAssessment(lessonID: string, body: CourseLessonSubmitAssessmentParams, options?: RequestOptions): APIPromise<CourseLessonSubmitAssessmentResponse> {
+  submitAssessment(
+    lessonID: string,
+    body: CourseLessonSubmitAssessmentParams,
+    options?: RequestOptions,
+  ): APIPromise<CourseLessonSubmitAssessmentResponse> {
     return this._client.post(path`/course_lessons/${lessonID}/submit_assessment`, { body, ...options });
   }
 }
 
-export type CourseLessonListResponsesCursorPage = CursorPage<CourseLessonListResponse>
+export type CourseLessonListResponsesCursorPage = CursorPage<CourseLessonListResponse>;
 
 /**
  * The available types for an assessment question
  */
-export type AssessmentQuestionTypes = 'short_answer' | 'true_false' | 'multiple_choice' | 'multiple_select'
+export type AssessmentQuestionTypes = 'short_answer' | 'true_false' | 'multiple_choice' | 'multiple_select';
 
 /**
  * The type of embed for a lesson
  */
-export type EmbedType = 'youtube' | 'loom'
+export type EmbedType = 'youtube' | 'loom';
 
 /**
  * An individual learning unit within a chapter, which can contain text, video,
@@ -506,13 +523,13 @@ export namespace Lesson {
 /**
  * The available types for a lesson
  */
-export type LessonTypes = 'text' | 'video' | 'pdf' | 'multi' | 'quiz' | 'knowledge_check'
+export type LessonTypes = 'text' | 'video' | 'pdf' | 'multi' | 'quiz' | 'knowledge_check';
 
 /**
  * The available visibilities for a lesson. Determines how / whether a lesson is
  * visible to users.
  */
-export type LessonVisibilities = 'visible' | 'hidden'
+export type LessonVisibilities = 'visible' | 'hidden';
 
 /**
  * An individual learning unit within a chapter, which can contain text, video,
@@ -597,17 +614,17 @@ export namespace CourseLessonListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type CourseLessonDeleteResponse = boolean
+export type CourseLessonDeleteResponse = boolean;
 
 /**
  * Represents `true` or `false` values.
  */
-export type CourseLessonMarkAsCompletedResponse = boolean
+export type CourseLessonMarkAsCompletedResponse = boolean;
 
 /**
  * Represents `true` or `false` values.
  */
-export type CourseLessonStartResponse = boolean
+export type CourseLessonStartResponse = boolean;
 
 /**
  * The result of a user's assessment attempt
@@ -1033,6 +1050,6 @@ export declare namespace CourseLessons {
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
     type CourseLessonListParams as CourseLessonListParams,
-    type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams
+    type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
   };
 }

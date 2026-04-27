@@ -2,7 +2,10 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource dmChannels', () => {
   // Mock server tests are disabled
@@ -20,10 +23,10 @@ describe('resource dmChannels', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.dmChannels.create({
-    with_user_ids: ['string'],
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    custom_name: 'custom_name',
-  });
+      with_user_ids: ['string'],
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      custom_name: 'custom_name',
+    });
   });
 
   // Mock server tests are disabled
@@ -53,9 +56,9 @@ describe('resource dmChannels', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.dmChannels.update('id', { custom_name: 'custom_name' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.dmChannels.update('id', { custom_name: 'custom_name' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -73,15 +76,18 @@ describe('resource dmChannels', () => {
   // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.dmChannels.list({
-    after: 'after',
-    before: 'before',
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    first: 42,
-    last: 42,
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.dmChannels.list(
+        {
+          after: 'after',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          first: 42,
+          last: 42,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled

@@ -2,12 +2,18 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.experiences.create({ app_id: 'app_xxxxxxxxxxxxxx', company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.experiences.create({
+      app_id: 'app_xxxxxxxxxxxxxx',
+      company_id: 'biz_xxxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,13 +26,13 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.experiences.create({
-    app_id: 'app_xxxxxxxxxxxxxx',
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    is_public: true,
-    logo: { id: 'id' },
-    name: 'name',
-    section_id: 'section_id',
-  });
+      app_id: 'app_xxxxxxxxxxxxxx',
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      is_public: true,
+      logo: { id: 'id' },
+      name: 'name',
+      section_id: 'section_id',
+    });
   });
 
   // Mock server tests are disabled
@@ -56,16 +62,20 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.experiences.update('exp_xxxxxxxxxxxxxx', {
-    access_level: 'public',
-    is_public: true,
-    logo: { id: 'id' },
-    name: 'name',
-    order: '123.45',
-    section_id: 'section_id',
-  }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.experiences.update(
+        'exp_xxxxxxxxxxxxxx',
+        {
+          access_level: 'public',
+          is_public: true,
+          logo: { id: 'id' },
+          name: 'name',
+          order: '123.45',
+          section_id: 'section_id',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -83,16 +93,16 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.experiences.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    after: 'after',
-    app_id: 'app_xxxxxxxxxxxxxx',
-    before: 'before',
-    created_after: '2023-12-01T05:00:00.401Z',
-    created_before: '2023-12-01T05:00:00.401Z',
-    first: 42,
-    last: 42,
-    product_id: 'prod_xxxxxxxxxxxxx',
-  });
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      app_id: 'app_xxxxxxxxxxxxxx',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      first: 42,
+      last: 42,
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
   });
 
   // Mock server tests are disabled
@@ -109,7 +119,9 @@ describe('resource experiences', () => {
 
   // Mock server tests are disabled
   test.skip('attach: only required params', async () => {
-    const responsePromise = client.experiences.attach('exp_xxxxxxxxxxxxxx', { product_id: 'prod_xxxxxxxxxxxxx' });
+    const responsePromise = client.experiences.attach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -121,12 +133,16 @@ describe('resource experiences', () => {
 
   // Mock server tests are disabled
   test.skip('attach: required and optional params', async () => {
-    const response = await client.experiences.attach('exp_xxxxxxxxxxxxxx', { product_id: 'prod_xxxxxxxxxxxxx' });
+    const response = await client.experiences.attach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
   });
 
   // Mock server tests are disabled
   test.skip('detach: only required params', async () => {
-    const responsePromise = client.experiences.detach('exp_xxxxxxxxxxxxxx', { product_id: 'prod_xxxxxxxxxxxxx' });
+    const responsePromise = client.experiences.detach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -138,7 +154,9 @@ describe('resource experiences', () => {
 
   // Mock server tests are disabled
   test.skip('detach: required and optional params', async () => {
-    const response = await client.experiences.detach('exp_xxxxxxxxxxxxxx', { product_id: 'prod_xxxxxxxxxxxxx' });
+    const response = await client.experiences.detach('exp_xxxxxxxxxxxxxx', {
+      product_id: 'prod_xxxxxxxxxxxxx',
+    });
   });
 
   // Mock server tests are disabled
@@ -156,8 +174,12 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('duplicate: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.experiences.duplicate('exp_xxxxxxxxxxxxxx', { name: 'name' }, { path: '/_stainless_unknown_path' }))
-      .rejects
-      .toThrow(Whop.NotFoundError);
+    await expect(
+      client.experiences.duplicate(
+        'exp_xxxxxxxxxxxxxx',
+        { name: 'name' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

@@ -32,7 +32,10 @@ export class Entries extends APIResource {
    * - `plan:waitlist:read`
    * - `member:email:read`
    */
-  list(query: EntryListParams, options?: RequestOptions): PagePromise<EntryListResponsesCursorPage, EntryListResponse> {
+  list(
+    query: EntryListParams,
+    options?: RequestOptions,
+  ): PagePromise<EntryListResponsesCursorPage, EntryListResponse> {
     return this._client.getAPIList('/entries', CursorPage<EntryListResponse>, { query, ...options });
   }
 
@@ -63,7 +66,7 @@ export class Entries extends APIResource {
   }
 }
 
-export type EntryListResponsesCursorPage = CursorPage<EntryListResponse>
+export type EntryListResponsesCursorPage = CursorPage<EntryListResponse>;
 
 /**
  * An entry represents a user's signup for a waitlisted plan.
@@ -229,6 +232,6 @@ export declare namespace Entries {
     type EntryListResponse as EntryListResponse,
     type EntryApproveResponse as EntryApproveResponse,
     type EntryListResponsesCursorPage as EntryListResponsesCursorPage,
-    type EntryListParams as EntryListParams
+    type EntryListParams as EntryListParams,
   };
 }

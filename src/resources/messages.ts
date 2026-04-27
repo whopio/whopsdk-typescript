@@ -38,7 +38,11 @@ export class Messages extends APIResource {
    * Edit the content, attachments, or pinned status of an existing message in an
    * experience chat, DM, or group chat channel.
    */
-  update(id: string, body: MessageUpdateParams | null | undefined = {}, options?: RequestOptions): APIPromise<Shared.Message> {
+  update(
+    id: string,
+    body: MessageUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Message> {
     return this._client.patch(path`/messages/${id}`, { body, ...options });
   }
 
@@ -50,7 +54,10 @@ export class Messages extends APIResource {
    *
    * - `chat:read`
    */
-  list(query: MessageListParams, options?: RequestOptions): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
+  list(
+    query: MessageListParams,
+    options?: RequestOptions,
+  ): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
     return this._client.getAPIList('/messages', CursorPage<MessageListResponse>, { query, ...options });
   }
 
@@ -67,7 +74,7 @@ export class Messages extends APIResource {
   }
 }
 
-export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>
+export type MessageListResponsesCursorPage = CursorPage<MessageListResponse>;
 
 /**
  * A message sent within an experience chat, direct message, or group chat.
@@ -241,7 +248,7 @@ export namespace MessageListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type MessageDeleteResponse = boolean
+export type MessageDeleteResponse = boolean;
 
 export interface MessageCreateParams {
   /**
@@ -382,6 +389,6 @@ export declare namespace Messages {
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
-    type MessageListParams as MessageListParams
+    type MessageListParams as MessageListParams,
   };
 }

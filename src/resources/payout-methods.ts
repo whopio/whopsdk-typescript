@@ -30,17 +30,29 @@ export class PayoutMethods extends APIResource {
    *
    * - `payout:destination:read`
    */
-  list(query: PayoutMethodListParams, options?: RequestOptions): PagePromise<PayoutMethodListResponsesCursorPage, PayoutMethodListResponse> {
-    return this._client.getAPIList('/payout_methods', CursorPage<PayoutMethodListResponse>, { query, ...options });
+  list(
+    query: PayoutMethodListParams,
+    options?: RequestOptions,
+  ): PagePromise<PayoutMethodListResponsesCursorPage, PayoutMethodListResponse> {
+    return this._client.getAPIList('/payout_methods', CursorPage<PayoutMethodListResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
-export type PayoutMethodListResponsesCursorPage = CursorPage<PayoutMethodListResponse>
+export type PayoutMethodListResponsesCursorPage = CursorPage<PayoutMethodListResponse>;
 
 /**
  * The category of a payout destination.
  */
-export type PayoutDestinationCategory = 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown'
+export type PayoutDestinationCategory =
+  | 'crypto'
+  | 'rtp'
+  | 'next_day_bank'
+  | 'bank_wire'
+  | 'digital_wallet'
+  | 'unknown';
 
 /**
  * A configured payout destination where a user receives earned funds, such as a
@@ -254,6 +266,6 @@ export declare namespace PayoutMethods {
     type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
     type PayoutMethodListResponse as PayoutMethodListResponse,
     type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
-    type PayoutMethodListParams as PayoutMethodListParams
+    type PayoutMethodListParams as PayoutMethodListParams,
   };
 }

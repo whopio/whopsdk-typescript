@@ -82,8 +82,14 @@ export class CourseChapters extends APIResource {
    * }
    * ```
    */
-  list(query: CourseChapterListParams, options?: RequestOptions): PagePromise<CourseChapterListResponsesCursorPage, CourseChapterListResponse> {
-    return this._client.getAPIList('/course_chapters', CursorPage<CourseChapterListResponse>, { query, ...options });
+  list(
+    query: CourseChapterListParams,
+    options?: RequestOptions,
+  ): PagePromise<CourseChapterListResponsesCursorPage, CourseChapterListResponse> {
+    return this._client.getAPIList('/course_chapters', CursorPage<CourseChapterListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -105,7 +111,7 @@ export class CourseChapters extends APIResource {
   }
 }
 
-export type CourseChapterListResponsesCursorPage = CursorPage<CourseChapterListResponse>
+export type CourseChapterListResponsesCursorPage = CursorPage<CourseChapterListResponse>;
 
 /**
  * A grouping of related lessons within a course, used to organize content into
@@ -181,7 +187,7 @@ export interface CourseChapterListResponse {
 /**
  * Represents `true` or `false` values.
  */
-export type CourseChapterDeleteResponse = boolean
+export type CourseChapterDeleteResponse = boolean;
 
 export interface CourseChapterCreateParams {
   /**
@@ -233,6 +239,6 @@ export declare namespace CourseChapters {
     type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
     type CourseChapterCreateParams as CourseChapterCreateParams,
     type CourseChapterUpdateParams as CourseChapterUpdateParams,
-    type CourseChapterListParams as CourseChapterListParams
+    type CourseChapterListParams as CourseChapterListParams,
   };
 }

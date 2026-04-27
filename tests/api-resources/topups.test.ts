@@ -2,17 +2,20 @@
 
 import Whop from '@whop/sdk';
 
-const client = new Whop({ apiKey: 'My API Key', baseURL: process.env["TEST_API_BASE_URL"] ?? 'http://127.0.0.1:4010' });
+const client = new Whop({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource topups', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.topups.create({
-    amount: 6.9,
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    currency: 'usd',
-    payment_method_id: 'pmt_xxxxxxxxxxxxxx',
-  });
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      currency: 'usd',
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,10 +28,10 @@ describe('resource topups', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.topups.create({
-    amount: 6.9,
-    company_id: 'biz_xxxxxxxxxxxxxx',
-    currency: 'usd',
-    payment_method_id: 'pmt_xxxxxxxxxxxxxx',
-  });
+      amount: 6.9,
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      currency: 'usd',
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+    });
   });
 });
