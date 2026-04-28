@@ -79,6 +79,7 @@ describe('resource checkoutConfigurations', () => {
       affiliate_code: 'affiliate_code',
       allow_promo_codes: true,
       checkout_styling: {
+        background_color: 'background_color',
         border_style: 'rounded',
         button_color: 'button_color',
         font_family: 'system',

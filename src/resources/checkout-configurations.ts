@@ -576,6 +576,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -679,6 +685,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -776,6 +788,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      * defaults.
      */
     export interface CheckoutStyling {
+      /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
       /**
        * The different border-radius styles available for checkout pages.
        */
