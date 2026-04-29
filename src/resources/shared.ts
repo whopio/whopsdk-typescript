@@ -375,6 +375,7 @@ export type AuthorizedUserRoles =
   | 'admin'
   | 'sales_manager'
   | 'moderator'
+  | 'advertiser'
   | 'app_manager'
   | 'support'
   | 'manager'
