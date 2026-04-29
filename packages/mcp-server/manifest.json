@@ -17,7 +17,9 @@
     "entry_point": "index.js",
     "mcp_config": {
       "command": "node",
-      "args": ["${__dirname}/index.js"],
+      "args": [
+        "${__dirname}/index.js"
+      ],
       "env": {
         "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
         "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}",
@@ -28,7 +30,7 @@
   "user_config": {
     "WHOP_API_KEY": {
       "title": "api_key",
-      "description": "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`",
+      "description": "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word \'Bearer\', which will look like `Bearer ***************************`",
       "required": true,
       "type": "string"
     },
@@ -52,5 +54,7 @@
       "node": ">=18.0.0"
     }
   },
-  "keywords": ["api"]
+  "keywords": [
+    "api"
+  ]
 }
