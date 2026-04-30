@@ -100,6 +100,7 @@ describe('resource forumPosts', () => {
       after: 'after',
       before: 'before',
       first: 42,
+      include_bounty_anchors: true,
       last: 42,
       parent_id: 'parent_id',
       pinned: true,

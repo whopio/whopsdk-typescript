@@ -406,6 +406,11 @@ export interface ForumPostListParams extends CursorPageParams {
   first?: number | null;
 
   /**
+   * Whether to include top-level bounty discussion anchors as rich forum items.
+   */
+  include_bounty_anchors?: boolean | null;
+
+  /**
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
