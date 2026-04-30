@@ -72,9 +72,16 @@ export interface FileCreateResponse {
   upload_url: string | null;
 
   /**
-   * The CDN URL for accessing the file. Null if the file has not finished uploading.
+   * The URL for accessing the file. For public files, this is a permanent CDN URL.
+   * For private files, this is a signed URL that expires. Null if the file has not
+   * finished uploading.
    */
   url: string | null;
+
+  /**
+   * Whether the file is publicly accessible or requires authentication.
+   */
+  visibility: 'public' | 'private';
 }
 
 /**
@@ -107,9 +114,16 @@ export interface FileRetrieveResponse {
   upload_status: UploadStatus;
 
   /**
-   * The CDN URL for accessing the file. Null if the file has not finished uploading.
+   * The URL for accessing the file. For public files, this is a permanent CDN URL.
+   * For private files, this is a signed URL that expires. Null if the file has not
+   * finished uploading.
    */
   url: string | null;
+
+  /**
+   * Whether the file is publicly accessible or requires authentication.
+   */
+  visibility: 'public' | 'private';
 }
 
 export interface FileCreateParams {
@@ -118,6 +132,12 @@ export interface FileCreateParams {
    * "document.pdf").
    */
   filename: string;
+
+  /**
+   * Controls whether an uploaded file is publicly accessible or requires
+   * authentication to access.
+   */
+  visibility?: 'public' | 'private' | null;
 }
 
 export declare namespace Files {
