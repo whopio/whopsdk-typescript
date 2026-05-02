@@ -28,6 +28,7 @@ describe('resource plans', () => {
     const response = await client.plans.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
       product_id: 'prod_xxxxxxxxxxxxx',
+      adaptive_pricing_enabled: true,
       billing_period: 42,
       checkout_styling: {
         background_color: 'background_color',
@@ -101,6 +102,7 @@ describe('resource plans', () => {
       client.plans.update(
         'plan_xxxxxxxxxxxxx',
         {
+          adaptive_pricing_enabled: true,
           billing_period: 42,
           checkout_styling: {
             background_color: 'background_color',

@@ -555,6 +555,13 @@ export interface PaymentListResponse {
   retryable: boolean;
 
   /**
+   * The currency in which the creator receives payouts and fees are charged (e.g.,
+   * 'usd', 'eur'). For multi-currency payments this differs from the payment
+   * currency.
+   */
+  settlement_currency: string;
+
+  /**
    * The status of a receipt
    */
   status: Shared.ReceiptStatus | null;
@@ -1282,8 +1289,9 @@ export interface PaymentListFeesParams extends CursorPageParams {
 
 export interface PaymentRefundParams {
   /**
-   * The amount to refund in the payment currency. If omitted, the full payment
-   * amount is refunded.
+   * The amount to refund. For multi-currency payments, this is in the charge
+   * currency (what the buyer paid). For single-currency, this is in the payment
+   * currency. If omitted, the full payment amount is refunded.
    */
   partial_amount?: number | null;
 }

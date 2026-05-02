@@ -28,6 +28,7 @@ describe('resource checkoutConfigurations', () => {
       plan: {
         company_id: 'biz_xxxxxxxxxxxxxx',
         currency: 'usd',
+        adaptive_pricing_enabled: true,
         application_fee_amount: 6.9,
         billing_period: 42,
         custom_fields: [

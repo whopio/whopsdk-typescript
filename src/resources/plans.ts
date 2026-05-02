@@ -147,6 +147,12 @@ export interface PlanListResponse {
   id: string;
 
   /**
+   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+   * does not check processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
+
+  /**
    * The number of days between each recurring charge. Null for one-time plans. For
    * example, 30 for monthly or 365 for annual billing.
    */
@@ -375,6 +381,11 @@ export interface PlanCreateParams {
   product_id: string;
 
   /**
+   * Whether this plan accepts local currency payments via adaptive pricing.
+   */
+  adaptive_pricing_enabled?: boolean | null;
+
+  /**
    * The number of days between recurring charges. For example, 30 for monthly or 365
    * for yearly.
    */
@@ -589,6 +600,11 @@ export namespace PlanCreateParams {
 }
 
 export interface PlanUpdateParams {
+  /**
+   * Whether this plan accepts local currency payments via adaptive pricing.
+   */
+  adaptive_pricing_enabled?: boolean | null;
+
   /**
    * The number of days between recurring charges. For example, 30 for monthly or 365
    * for yearly.

@@ -551,6 +551,12 @@ export namespace CheckoutConfiguration {
     id: string;
 
     /**
+     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+     * does not check processor compatibility or feature flags.
+     */
+    adaptive_pricing_enabled: boolean;
+
+    /**
      * The number of days between each recurring charge. Null for one-time plans. For
      * example, 30 for monthly or 365 for annual billing.
      */
@@ -2491,6 +2497,25 @@ export interface Payment {
   retryable: boolean;
 
   /**
+   * The payment amount in the creator's settlement currency (what the creator priced
+   * in). Equal to final_amount for single-currency payments.
+   */
+  settlement_amount: number;
+
+  /**
+   * The currency in which the creator receives payouts and fees are charged (e.g.,
+   * 'usd', 'eur'). For multi-currency payments this differs from the payment
+   * currency.
+   */
+  settlement_currency: string;
+
+  /**
+   * The locked exchange rate used to convert from the buyer's payment currency to
+   * the creator's settlement currency. Null for single-currency payments.
+   */
+  settlement_exchange_rate: number | null;
+
+  /**
    * The status of a receipt
    */
   status: ReceiptStatus | null;
@@ -2996,6 +3021,12 @@ export interface Plan {
    * The unique identifier for the plan.
    */
   id: string;
+
+  /**
+   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+   * does not check processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
 
   /**
    * The number of days between each recurring charge. Null for one-time plans. For
