@@ -158,6 +158,7 @@ export namespace AdCreateResponse {
       | 'SEE_MENU'
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
+      | 'SEE_DETAILS'
       | null;
 
     /**
@@ -408,6 +409,7 @@ export namespace AdRetrieveResponse {
       | 'SEE_MENU'
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
+      | 'SEE_DETAILS'
       | null;
 
     /**
@@ -618,6 +620,7 @@ export namespace AdListResponse {
       | 'SEE_MENU'
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
+      | 'SEE_DETAILS'
       | null;
 
     /**
@@ -847,6 +850,7 @@ export namespace AdCreateParams {
         | 'SEE_MENU'
         | 'REQUEST_TIME'
         | 'EVENT_RSVP'
+        | 'SEE_DETAILS'
         | null;
 
       /**
