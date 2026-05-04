@@ -7,10 +7,15 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource companies', () => {
+describe('resource adCampaigns', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.companies.create({ title: 'title' });
+    const responsePromise = client.adCampaigns.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      config: {},
+      platform: 'meta',
+      title: 'title',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,20 +27,33 @@ describe('resource companies', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.companies.create({
+    const response = await client.adCampaigns.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      config: {
+        bid_amount: 42,
+        bid_strategy: 'lowest_cost',
+        budget_optimization: true,
+        end_time: 'end_time',
+        lifetime_budget: 42,
+        objective: 'awareness',
+        special_categories: ['string'],
+        start_time: 'start_time',
+        status: 'active',
+      },
+      platform: 'meta',
       title: 'title',
-      description: 'description',
-      email: 'email',
-      logo: { id: 'id' },
-      metadata: { foo: 'bar' },
-      parent_company_id: 'parent_company_id',
-      send_customer_emails: true,
+      ad_creative_set_ids: ['string'],
+      budget: 6.9,
+      budget_type: 'daily',
+      daily_budget: 6.9,
+      product_id: 'prod_xxxxxxxxxxxxx',
+      target_country_codes: ['string'],
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.companies.retrieve('biz_xxxxxxxxxxxxxx');
+    const responsePromise = client.adCampaigns.retrieve('adcamp_xxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -47,7 +65,7 @@ describe('resource companies', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.companies.update('biz_xxxxxxxxxxxxxx');
+    const responsePromise = client.adCampaigns.update('adcamp_xxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,28 +79,26 @@ describe('resource companies', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.companies.update(
-        'biz_xxxxxxxxxxxxxx',
+      client.adCampaigns.update(
+        'adcamp_xxxxxxxxxxx',
         {
-          affiliate_application_required: true,
-          affiliate_instructions: 'affiliate_instructions',
-          banner_image: { id: 'id' },
-          description: 'description',
-          featured_affiliate_product_id: 'featured_affiliate_product_id',
-          logo: { id: 'id' },
-          route: 'route',
-          send_customer_emails: true,
-          social_links: [
-            {
-              url: 'https://example.com/path',
-              website: 'x',
-              image: { id: 'id' },
-              order: '123.45',
-              title: 'title',
-              website_order: '123.45',
-            },
-          ],
-          target_audience: 'target_audience',
+          ad_creative_set_ids: ['string'],
+          budget: 6.9,
+          budget_type: 'daily',
+          config: {
+            bid_amount: 42,
+            bid_strategy: 'lowest_cost',
+            budget_optimization: true,
+            end_time: 'end_time',
+            lifetime_budget: 42,
+            objective: 'awareness',
+            special_categories: ['string'],
+            start_time: 'start_time',
+            status: 'active',
+          },
+          daily_budget: 6.9,
+          product_id: 'prod_xxxxxxxxxxxxx',
+          target_country_codes: ['string'],
           title: 'title',
         },
         { path: '/_stainless_unknown_path' },
@@ -91,8 +107,8 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.companies.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.adCampaigns.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -103,30 +119,23 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.companies.list(
-        {
-          after: 'after',
-          before: 'before',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          direction: 'asc',
-          first: 42,
-          last: 42,
-          parent_company_id: 'parent_company_id',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.adCampaigns.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      first: 42,
+      last: 42,
+      query: 'query',
+      status: 'active',
+    });
   });
 
   // Mock server tests are disabled
-  test.skip('createAPIKey: only required params', async () => {
-    const responsePromise = client.companies.createAPIKey('parent_company_id', {
-      child_company_id: 'child_company_id',
-    });
+  test.skip('pause', async () => {
+    const responsePromise = client.adCampaigns.pause('adcamp_xxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -137,18 +146,14 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createAPIKey: required and optional params', async () => {
-    const response = await client.companies.createAPIKey('parent_company_id', {
-      child_company_id: 'child_company_id',
-      name: 'name',
-      permissions: [
-        {
-          actions: ['string'],
-          grant: true,
-          resources: ['string'],
-        },
-      ],
-      role: 'owner',
-    });
+  test.skip('unpause', async () => {
+    const responsePromise = client.adCampaigns.unpause('adcamp_xxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

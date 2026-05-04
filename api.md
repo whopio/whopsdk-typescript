@@ -123,6 +123,7 @@ Types:
 
 - <code><a href="./src/resources/companies.ts">SocialLinkWebsites</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyCreateAPIKeyResponse</a></code>
 
 Methods:
 
@@ -130,6 +131,7 @@ Methods:
 - <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
 - <code title="patch /companies/{id}">client.companies.<a href="./src/resources/companies.ts">update</a>(id, { ...params }) -> Company</code>
 - <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
+- <code title="post /companies/{parent_company_id}/api_keys">client.companies.<a href="./src/resources/companies.ts">createAPIKey</a>(parentCompanyID, { ...params }) -> CompanyCreateAPIKeyResponse</code>
 
 # Webhooks
 
@@ -883,3 +885,95 @@ Methods:
 - <code title="patch /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">update</a>(overrideID, { ...params }) -> OverrideUpdateResponse</code>
 - <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
 - <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>
+
+# Bounties
+
+Types:
+
+- <code><a href="./src/resources/bounties.ts">BountyCreateResponse</a></code>
+- <code><a href="./src/resources/bounties.ts">BountyRetrieveResponse</a></code>
+- <code><a href="./src/resources/bounties.ts">BountyListResponse</a></code>
+
+Methods:
+
+- <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> BountyCreateResponse</code>
+- <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> BountyRetrieveResponse</code>
+- <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
+
+# Stats
+
+Types:
+
+- <code><a href="./src/resources/stats.ts">StatDescribeResponse</a></code>
+- <code><a href="./src/resources/stats.ts">StatQueryMetricResponse</a></code>
+- <code><a href="./src/resources/stats.ts">StatQueryRawResponse</a></code>
+- <code><a href="./src/resources/stats.ts">StatRunSqlResponse</a></code>
+
+Methods:
+
+- <code title="get /stats/describe">client.stats.<a href="./src/resources/stats.ts">describe</a>({ ...params }) -> StatDescribeResponse</code>
+- <code title="get /stats/metric">client.stats.<a href="./src/resources/stats.ts">queryMetric</a>({ ...params }) -> StatQueryMetricResponse</code>
+- <code title="get /stats/raw">client.stats.<a href="./src/resources/stats.ts">queryRaw</a>({ ...params }) -> StatQueryRawResponse</code>
+- <code title="get /stats/sql">client.stats.<a href="./src/resources/stats.ts">runSql</a>({ ...params }) -> StatRunSqlResponse</code>
+
+# AdCampaigns
+
+Types:
+
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignCreateResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignRetrieveResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignUpdateResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignListResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignPauseResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignUnpauseResponse</a></code>
+
+Methods:
+
+- <code title="post /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">create</a>({ ...params }) -> AdCampaignCreateResponse</code>
+- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id) -> AdCampaignRetrieveResponse</code>
+- <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaignUpdateResponse</code>
+- <code title="get /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">list</a>({ ...params }) -> AdCampaignListResponsesCursorPage</code>
+- <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id) -> AdCampaignPauseResponse</code>
+- <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id) -> AdCampaignUnpauseResponse</code>
+
+# AdGroups
+
+Types:
+
+- <code><a href="./src/resources/ad-groups.ts">AdGroupCreateResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupRetrieveResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupListResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">create</a>({ ...params }) -> AdGroupCreateResponse</code>
+- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id) -> AdGroupRetrieveResponse</code>
+- <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroupUpdateResponse</code>
+- <code title="get /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">list</a>({ ...params }) -> AdGroupListResponsesCursorPage</code>
+- <code title="delete /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">delete</a>(id) -> AdGroupDeleteResponse</code>
+
+# Ads
+
+Types:
+
+- <code><a href="./src/resources/ads.ts">AdCreateResponse</a></code>
+- <code><a href="./src/resources/ads.ts">AdRetrieveResponse</a></code>
+- <code><a href="./src/resources/ads.ts">AdListResponse</a></code>
+
+Methods:
+
+- <code title="post /ads">client.ads.<a href="./src/resources/ads.ts">create</a>({ ...params }) -> AdCreateResponse</code>
+- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id) -> AdRetrieveResponse</code>
+- <code title="get /ads">client.ads.<a href="./src/resources/ads.ts">list</a>({ ...params }) -> AdListResponsesCursorPage</code>
+
+# Conversions
+
+Types:
+
+- <code><a href="./src/resources/conversions.ts">ConversionCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /conversions">client.conversions.<a href="./src/resources/conversions.ts">create</a>({ ...params }) -> ConversionCreateResponse</code>

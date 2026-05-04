@@ -15,6 +15,40 @@ export {
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
+  AdCampaigns,
+  type AdCampaignCreateResponse,
+  type AdCampaignRetrieveResponse,
+  type AdCampaignUpdateResponse,
+  type AdCampaignListResponse,
+  type AdCampaignPauseResponse,
+  type AdCampaignUnpauseResponse,
+  type AdCampaignCreateParams,
+  type AdCampaignUpdateParams,
+  type AdCampaignListParams,
+  type AdCampaignListResponsesCursorPage,
+} from './ad-campaigns';
+export {
+  AdGroups,
+  type AdGroupCreateResponse,
+  type AdGroupRetrieveResponse,
+  type AdGroupUpdateResponse,
+  type AdGroupListResponse,
+  type AdGroupDeleteResponse,
+  type AdGroupCreateParams,
+  type AdGroupUpdateParams,
+  type AdGroupListParams,
+  type AdGroupListResponsesCursorPage,
+} from './ad-groups';
+export {
+  Ads,
+  type AdCreateResponse,
+  type AdRetrieveResponse,
+  type AdListResponse,
+  type AdCreateParams,
+  type AdListParams,
+  type AdListResponsesCursorPage,
+} from './ads';
+export {
   Affiliates,
   type Affiliate,
   type Status,
@@ -52,6 +86,15 @@ export {
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
+  Bounties,
+  type BountyCreateResponse,
+  type BountyRetrieveResponse,
+  type BountyListResponse,
+  type BountyCreateParams,
+  type BountyListParams,
+  type BountyListResponsesCursorPage,
+} from './bounties';
+export {
   ChatChannels,
   type ChatChannelListResponse,
   type ChatChannelUpdateParams,
@@ -70,9 +113,11 @@ export {
   Companies,
   type SocialLinkWebsites,
   type CompanyListResponse,
+  type CompanyCreateAPIKeyResponse,
   type CompanyCreateParams,
   type CompanyUpdateParams,
   type CompanyListParams,
+  type CompanyCreateAPIKeyParams,
   type CompanyListResponsesCursorPage,
 } from './companies';
 export {
@@ -84,6 +129,7 @@ export {
   type CompanyTokenTransactionListParams,
   type CompanyTokenTransactionListResponsesCursorPage,
 } from './company-token-transactions';
+export { Conversions, type ConversionCreateResponse, type ConversionCreateParams } from './conversions';
 export {
   CourseChapters,
   type CourseChapter,
@@ -399,6 +445,17 @@ export {
   type ShipmentListParams,
   type ShipmentListResponsesCursorPage,
 } from './shipments';
+export {
+  Stats,
+  type StatDescribeResponse,
+  type StatQueryMetricResponse,
+  type StatQueryRawResponse,
+  type StatRunSqlResponse,
+  type StatDescribeParams,
+  type StatQueryMetricParams,
+  type StatQueryRawParams,
+  type StatRunSqlParams,
+} from './stats';
 export {
   SupportChannels,
   type SupportChannelListResponse,

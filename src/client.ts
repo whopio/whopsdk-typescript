@@ -22,6 +22,40 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+  AdCampaignCreateParams,
+  AdCampaignCreateResponse,
+  AdCampaignListParams,
+  AdCampaignListResponse,
+  AdCampaignListResponsesCursorPage,
+  AdCampaignPauseResponse,
+  AdCampaignRetrieveResponse,
+  AdCampaignUnpauseResponse,
+  AdCampaignUpdateParams,
+  AdCampaignUpdateResponse,
+  AdCampaigns,
+} from './resources/ad-campaigns';
+import {
+  AdGroupCreateParams,
+  AdGroupCreateResponse,
+  AdGroupDeleteResponse,
+  AdGroupListParams,
+  AdGroupListResponse,
+  AdGroupListResponsesCursorPage,
+  AdGroupRetrieveResponse,
+  AdGroupUpdateParams,
+  AdGroupUpdateResponse,
+  AdGroups,
+} from './resources/ad-groups';
+import {
+  AdCreateParams,
+  AdCreateResponse,
+  AdListParams,
+  AdListResponse,
+  AdListResponsesCursorPage,
+  AdRetrieveResponse,
+  Ads,
+} from './resources/ads';
+import {
   AIChat,
   AIChatCreateParams,
   AIChatDeleteResponse,
@@ -59,6 +93,15 @@ import {
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
+  Bounties,
+  BountyCreateParams,
+  BountyCreateResponse,
+  BountyListParams,
+  BountyListResponse,
+  BountyListResponsesCursorPage,
+  BountyRetrieveResponse,
+} from './resources/bounties';
+import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
@@ -75,6 +118,8 @@ import {
 } from './resources/checkout-configurations';
 import {
   Companies,
+  CompanyCreateAPIKeyParams,
+  CompanyCreateAPIKeyResponse,
   CompanyCreateParams,
   CompanyListParams,
   CompanyListResponse,
@@ -91,6 +136,7 @@ import {
   CompanyTokenTransactionType,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
+import { ConversionCreateParams, ConversionCreateResponse, Conversions } from './resources/conversions';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -406,6 +452,17 @@ import {
   ShipmentListResponsesCursorPage,
   Shipments,
 } from './resources/shipments';
+import {
+  StatDescribeParams,
+  StatDescribeResponse,
+  StatQueryMetricParams,
+  StatQueryMetricResponse,
+  StatQueryRawParams,
+  StatQueryRawResponse,
+  StatRunSqlParams,
+  StatRunSqlResponse,
+  Stats,
+} from './resources/stats';
 import {
   SupportChannelCreateParams,
   SupportChannelListParams,
@@ -1478,6 +1535,30 @@ export class Whop {
    * Affiliates
    */
   affiliates: API.Affiliates = new API.Affiliates(this);
+  /**
+   * Bounties
+   */
+  bounties: API.Bounties = new API.Bounties(this);
+  /**
+   * Stats
+   */
+  stats: API.Stats = new API.Stats(this);
+  /**
+   * Ad campaigns
+   */
+  adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
+  /**
+   * Ad groups
+   */
+  adGroups: API.AdGroups = new API.AdGroups(this);
+  /**
+   * Ads
+   */
+  ads: API.Ads = new API.Ads(this);
+  /**
+   * Conversions
+   */
+  conversions: API.Conversions = new API.Conversions(this);
 }
 
 Whop.Apps = Apps;
@@ -1533,6 +1614,12 @@ Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
+Whop.Bounties = Bounties;
+Whop.Stats = Stats;
+Whop.AdCampaigns = AdCampaigns;
+Whop.AdGroups = AdGroups;
+Whop.Ads = Ads;
+Whop.Conversions = Conversions;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1579,10 +1666,12 @@ export declare namespace Whop {
     Companies as Companies,
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
+    type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
   };
 
   export {
@@ -2097,6 +2186,71 @@ export declare namespace Whop {
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
     type AffiliateCreateParams as AffiliateCreateParams,
     type AffiliateListParams as AffiliateListParams,
+  };
+
+  export {
+    Bounties as Bounties,
+    type BountyCreateResponse as BountyCreateResponse,
+    type BountyRetrieveResponse as BountyRetrieveResponse,
+    type BountyListResponse as BountyListResponse,
+    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
+    type BountyCreateParams as BountyCreateParams,
+    type BountyListParams as BountyListParams,
+  };
+
+  export {
+    Stats as Stats,
+    type StatDescribeResponse as StatDescribeResponse,
+    type StatQueryMetricResponse as StatQueryMetricResponse,
+    type StatQueryRawResponse as StatQueryRawResponse,
+    type StatRunSqlResponse as StatRunSqlResponse,
+    type StatDescribeParams as StatDescribeParams,
+    type StatQueryMetricParams as StatQueryMetricParams,
+    type StatQueryRawParams as StatQueryRawParams,
+    type StatRunSqlParams as StatRunSqlParams,
+  };
+
+  export {
+    AdCampaigns as AdCampaigns,
+    type AdCampaignCreateResponse as AdCampaignCreateResponse,
+    type AdCampaignRetrieveResponse as AdCampaignRetrieveResponse,
+    type AdCampaignUpdateResponse as AdCampaignUpdateResponse,
+    type AdCampaignListResponse as AdCampaignListResponse,
+    type AdCampaignPauseResponse as AdCampaignPauseResponse,
+    type AdCampaignUnpauseResponse as AdCampaignUnpauseResponse,
+    type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
+    type AdCampaignCreateParams as AdCampaignCreateParams,
+    type AdCampaignUpdateParams as AdCampaignUpdateParams,
+    type AdCampaignListParams as AdCampaignListParams,
+  };
+
+  export {
+    AdGroups as AdGroups,
+    type AdGroupCreateResponse as AdGroupCreateResponse,
+    type AdGroupRetrieveResponse as AdGroupRetrieveResponse,
+    type AdGroupUpdateResponse as AdGroupUpdateResponse,
+    type AdGroupListResponse as AdGroupListResponse,
+    type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
+    type AdGroupCreateParams as AdGroupCreateParams,
+    type AdGroupUpdateParams as AdGroupUpdateParams,
+    type AdGroupListParams as AdGroupListParams,
+  };
+
+  export {
+    Ads as Ads,
+    type AdCreateResponse as AdCreateResponse,
+    type AdRetrieveResponse as AdRetrieveResponse,
+    type AdListResponse as AdListResponse,
+    type AdListResponsesCursorPage as AdListResponsesCursorPage,
+    type AdCreateParams as AdCreateParams,
+    type AdListParams as AdListParams,
+  };
+
+  export {
+    Conversions as Conversions,
+    type ConversionCreateResponse as ConversionCreateResponse,
+    type ConversionCreateParams as ConversionCreateParams,
   };
 
   export type AccessLevel = API.AccessLevel;

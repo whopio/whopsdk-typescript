@@ -67,6 +67,18 @@ export class Companies extends APIResource {
   ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
     return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
   }
+
+  /**
+   * Create an API key for a connected account (child company) owned by a parent
+   * company.
+   */
+  createAPIKey(
+    parentCompanyID: string,
+    body: CompanyCreateAPIKeyParams,
+    options?: RequestOptions,
+  ): APIPromise<CompanyCreateAPIKeyResponse> {
+    return this._client.post(path`/companies/${parentCompanyID}/api_keys`, { body, ...options });
+  }
 }
 
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
@@ -197,6 +209,26 @@ export namespace CompanyListResponse {
      */
     username: string;
   }
+}
+
+/**
+ * An API key created for a child company, including the one-time secret key.
+ */
+export interface CompanyCreateAPIKeyResponse {
+  /**
+   * The unique identifier for the authorized api key.
+   */
+  id: string;
+
+  /**
+   * A user set name to identify an API key
+   */
+  name: string | null;
+
+  /**
+   * The secret key used to authenticate requests. Only returned at creation time.
+   */
+  secret_key: string;
 }
 
 export interface CompanyCreateParams {
@@ -427,13 +459,63 @@ export interface CompanyListParams extends CursorPageParams {
   parent_company_id?: string | null;
 }
 
+export interface CompanyCreateAPIKeyParams {
+  /**
+   * The unique identifier of the connected account to create the API key for (e.g.
+   * 'biz_xxx').
+   */
+  child_company_id: string;
+
+  /**
+   * A human-readable name for the API key, such as 'Production API Key'.
+   */
+  name?: string | null;
+
+  /**
+   * Granular permission statements defining which actions this API key can perform.
+   * Either permissions or role must be provided.
+   */
+  permissions?: Array<CompanyCreateAPIKeyParams.Permission> | null;
+
+  /**
+   * The different system roles that can be assigned.
+   */
+  role?: 'owner' | 'admin' | 'moderator' | 'sales_manager' | 'advertiser' | null;
+}
+
+export namespace CompanyCreateAPIKeyParams {
+  /**
+   * Input for a single permissions statement
+   */
+  export interface Permission {
+    /**
+     * Actions covered by this statement
+     */
+    actions: Array<string>;
+
+    /**
+     * Whether the actions are granted or denied
+     */
+    grant: boolean;
+
+    /**
+     * Resource identifiers. Can look like 'biz*xxxx' or 'biz_xxx|pass*_|exp*xxx' or
+     * 'biz_xxx|app_xxx' or 'biz_xxx|pass_xxx|exp_xxx' or 'biz_xxx|pass_xxx' or
+     * 'biz_xxx|pass*_'
+     */
+    resources: Array<string>;
+  }
+}
+
 export declare namespace Companies {
   export {
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
     type CompanyListParams as CompanyListParams,
+    type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
   };
 }
