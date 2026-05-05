@@ -159,6 +159,7 @@ export namespace AdCreateResponse {
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
       | 'SEE_DETAILS'
+      | 'VIEW_INSTAGRAM_PROFILE'
       | null;
 
     /**
@@ -410,6 +411,7 @@ export namespace AdRetrieveResponse {
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
       | 'SEE_DETAILS'
+      | 'VIEW_INSTAGRAM_PROFILE'
       | null;
 
     /**
@@ -621,6 +623,7 @@ export namespace AdListResponse {
       | 'REQUEST_TIME'
       | 'EVENT_RSVP'
       | 'SEE_DETAILS'
+      | 'VIEW_INSTAGRAM_PROFILE'
       | null;
 
     /**
@@ -851,6 +854,7 @@ export namespace AdCreateParams {
         | 'REQUEST_TIME'
         | 'EVENT_RSVP'
         | 'SEE_DETAILS'
+        | 'VIEW_INSTAGRAM_PROFILE'
         | null;
 
       /**
