@@ -1056,6 +1056,12 @@ export interface InvoiceUpdateParams {
   plan?: InvoiceUpdateParams.Plan | null;
 
   /**
+   * The unique identifier of an existing product to attach to this invoice. Only
+   * allowed while the invoice is still a draft.
+   */
+  product_id?: string | null;
+
+  /**
    * The date that defines when the subscription billing cycle should start.
    */
   subscription_billing_anchor_at?: string | null;

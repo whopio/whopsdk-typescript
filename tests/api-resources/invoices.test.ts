@@ -183,6 +183,7 @@ describe('resource invoices', () => {
             unlimited_stock: true,
             visibility: 'visible',
           },
+          product_id: 'prod_xxxxxxxxxxxxx',
           subscription_billing_anchor_at: '2023-12-01T05:00:00.401Z',
         },
         { path: '/_stainless_unknown_path' },
