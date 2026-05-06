@@ -36,6 +36,8 @@ describe('resource bounties', () => {
       allowed_country_codes: ['string'],
       experience_id: 'exp_xxxxxxxxxxxxxx',
       origin_account_id: 'origin_account_id',
+      post_markdown_content: 'post_markdown_content',
+      post_title: 'post_title',
     });
   });
 

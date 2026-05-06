@@ -294,6 +294,18 @@ export interface BountyCreateParams {
    * the user themself or an owner/admin of the company.
    */
   origin_account_id?: string | null;
+
+  /**
+   * Optional markdown body for the anchor forum post. Falls back to the bounty
+   * description when omitted.
+   */
+  post_markdown_content?: string | null;
+
+  /**
+   * Optional title for the anchor forum post. Falls back to the bounty title when
+   * omitted.
+   */
+  post_title?: string | null;
 }
 
 export interface BountyListParams extends CursorPageParams {
