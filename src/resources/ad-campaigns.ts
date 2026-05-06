@@ -268,7 +268,8 @@ export interface AdCampaignCreateResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -858,7 +859,8 @@ export interface AdCampaignRetrieveResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -1448,7 +1450,8 @@ export interface AdCampaignUpdateResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2004,7 +2007,8 @@ export interface AdCampaignListResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2180,7 +2184,8 @@ export interface AdCampaignPauseResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2770,7 +2775,8 @@ export interface AdCampaignUnpauseResponse {
     | 'payment_failed'
     | 'draft'
     | 'in_review'
-    | 'flagged';
+    | 'flagged'
+    | 'importing';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -3496,6 +3502,7 @@ export interface AdCampaignListParams extends CursorPageParams {
     | 'draft'
     | 'in_review'
     | 'flagged'
+    | 'importing'
     | null;
 }
 

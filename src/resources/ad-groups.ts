@@ -196,7 +196,8 @@ export namespace AdGroupCreateResponse {
       | 'payment_failed'
       | 'draft'
       | 'in_review'
-      | 'flagged';
+      | 'flagged'
+      | 'importing';
 
     /**
      * The title of the ad campaign
@@ -693,7 +694,8 @@ export namespace AdGroupRetrieveResponse {
       | 'payment_failed'
       | 'draft'
       | 'in_review'
-      | 'flagged';
+      | 'flagged'
+      | 'importing';
 
     /**
      * The title of the ad campaign
@@ -1190,7 +1192,8 @@ export namespace AdGroupUpdateResponse {
       | 'payment_failed'
       | 'draft'
       | 'in_review'
-      | 'flagged';
+      | 'flagged'
+      | 'importing';
 
     /**
      * The title of the ad campaign
