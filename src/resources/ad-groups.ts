@@ -98,7 +98,7 @@ export class AdGroups extends APIResource {
    *
    * Required permissions:
    *
-   * - `ad_campaign:delete`
+   * - `ad_campaign:update`
    *
    * @example
    * ```ts

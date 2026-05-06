@@ -8584,13 +8584,13 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     endpoint: '/ad_groups/{id}',
     httpMethod: 'delete',
     summary: 'Delete ad group',
-    description: 'Soft-deletes an ad group.\n\nRequired permissions:\n - `ad_campaign:delete`',
+    description: 'Soft-deletes an ad group.\n\nRequired permissions:\n - `ad_campaign:update`',
     stainlessPath: '(resource) ad_groups > (method) delete',
     qualified: 'client.adGroups.delete',
     params: ['id: string;'],
     response: 'boolean',
     markdown:
-      "## delete\n\n`client.adGroups.delete(id: string): boolean`\n\n**delete** `/ad_groups/{id}`\n\nSoft-deletes an ad group.\n\nRequired permissions:\n - `ad_campaign:delete`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `boolean`\n  Represents `true` or `false` values.\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst adGroup = await client.adGroups.delete('adgrp_xxxxxxxxxxxx');\n\nconsole.log(adGroup);\n```",
+      "## delete\n\n`client.adGroups.delete(id: string): boolean`\n\n**delete** `/ad_groups/{id}`\n\nSoft-deletes an ad group.\n\nRequired permissions:\n - `ad_campaign:update`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `boolean`\n  Represents `true` or `false` values.\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst adGroup = await client.adGroups.delete('adgrp_xxxxxxxxxxxx');\n\nconsole.log(adGroup);\n```",
     perLanguage: {
       typescript: {
         method: 'client.adGroups.delete',
