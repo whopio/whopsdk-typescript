@@ -197,7 +197,8 @@ export namespace AdGroupCreateResponse {
       | 'draft'
       | 'in_review'
       | 'flagged'
-      | 'importing';
+      | 'importing'
+      | 'imported';
 
     /**
      * The title of the ad campaign
@@ -695,7 +696,8 @@ export namespace AdGroupRetrieveResponse {
       | 'draft'
       | 'in_review'
       | 'flagged'
-      | 'importing';
+      | 'importing'
+      | 'imported';
 
     /**
      * The title of the ad campaign
@@ -1193,7 +1195,8 @@ export namespace AdGroupUpdateResponse {
       | 'draft'
       | 'in_review'
       | 'flagged'
-      | 'importing';
+      | 'importing'
+      | 'imported';
 
     /**
      * The title of the ad campaign

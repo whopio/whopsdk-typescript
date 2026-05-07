@@ -269,7 +269,8 @@ export interface AdCampaignCreateResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -860,7 +861,8 @@ export interface AdCampaignRetrieveResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -1451,7 +1453,8 @@ export interface AdCampaignUpdateResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2008,7 +2011,8 @@ export interface AdCampaignListResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2185,7 +2189,8 @@ export interface AdCampaignPauseResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -2776,7 +2781,8 @@ export interface AdCampaignUnpauseResponse {
     | 'draft'
     | 'in_review'
     | 'flagged'
-    | 'importing';
+    | 'importing'
+    | 'imported';
 
   /**
    * Array of ISO3166 country codes for territory targeting
@@ -3503,6 +3509,7 @@ export interface AdCampaignListParams extends CursorPageParams {
     | 'in_review'
     | 'flagged'
     | 'importing'
+    | 'imported'
     | null;
 }
 
