@@ -115,1958 +115,234 @@ export class AdGroups extends APIResource {
 export type AdGroupListResponsesCursorPage = CursorPage<AdGroupListResponse>;
 
 /**
- * An external ad group (ad set) belonging to an ad campaign
+ * An ad group (ad set) belonging to an ad campaign.
  */
 export interface AdGroupCreateResponse {
   /**
-   * The unique identifier for the external ad group.
+   * The unique identifier for this ad group.
    */
   id: string;
 
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   ad_campaign: AdGroupCreateResponse.AdCampaign;
 
   /**
-   * Unified ad group configuration (platform-agnostic)
+   * Budget amount in dollars.
    */
-  config: AdGroupCreateResponse.Config | null;
+  budget: number | null;
 
   /**
-   * The datetime the external ad group was created.
+   * The budget type for an ad campaign or ad group.
+   */
+  budget_type: 'daily' | 'lifetime' | null;
+
+  /**
+   * When the ad group was created.
    */
   created_at: string;
 
   /**
-   * Daily budget in dollars (nil for lifetime budgets)
+   * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  daily_budget: number | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * Human-readable ad group name
-   */
-  name: string | null;
-
-  /**
-   * Typed platform-specific configuration. Use inline fragments (... on
-   * MetaAdGroupPlatformConfigType).
-   */
-  platform_config:
-    | AdGroupCreateResponse.MetaAdGroupPlatformConfigType
-    | null
-    | AdGroupCreateResponse.TiktokAdGroupPlatformConfigType
-    | null;
-
-  /**
-   * Current operational status of the ad group
+   * Current operational status of the ad group.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
 
   /**
-   * The datetime the external ad group was last updated.
+   * Human-readable name shown on the external platform.
+   */
+  title: string | null;
+
+  /**
+   * When the ad group was last updated.
    */
   updated_at: string;
 }
 
 export namespace AdGroupCreateResponse {
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   export interface AdCampaign {
     /**
-     * The unique identifier for the ad campaign.
+     * The unique identifier for this ad campaign.
      */
     id: string;
-
-    /**
-     * The platforms where an ad campaign can run.
-     */
-    platform: 'meta' | 'tiktok' | null;
-
-    /**
-     * Current status of the campaign (active, paused, or inactive)
-     */
-    status:
-      | 'active'
-      | 'paused'
-      | 'inactive'
-      | 'stale'
-      | 'pending_refund'
-      | 'payment_failed'
-      | 'draft'
-      | 'in_review'
-      | 'flagged'
-      | 'importing'
-      | 'imported';
-
-    /**
-     * The title of the ad campaign
-     */
-    title: string;
-  }
-
-  /**
-   * Unified ad group configuration (platform-agnostic)
-   */
-  export interface Config {
-    /**
-     * Bid cap amount in cents. Used when bid_strategy is bid_cap or cost_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * Bid strategy: lowest_cost, bid_cap, or cost_cap.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * How you are billed (e.g., impressions, clicks).
-     */
-    billing_event: 'impressions' | 'clicks' | 'optimized_cpm' | 'video_views' | null;
-
-    /**
-     * Scheduled end time (ISO8601). Required for lifetime budgets.
-     */
-    end_time: string | null;
-
-    /**
-     * Maximum number of times to show ads to each person in the frequency interval.
-     */
-    frequency_cap: number | null;
-
-    /**
-     * Number of days for the frequency cap interval.
-     */
-    frequency_cap_interval_days: number | null;
-
-    /**
-     * What the ad group optimizes for (e.g., conversions, link_clicks, reach).
-     */
-    optimization_goal:
-      | 'conversions'
-      | 'link_clicks'
-      | 'landing_page_views'
-      | 'reach'
-      | 'impressions'
-      | 'app_installs'
-      | 'video_views'
-      | 'lead_generation'
-      | 'value'
-      | 'page_likes'
-      | 'conversations'
-      | 'ad_recall_lift'
-      | 'two_second_continuous_video_views'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'reminders_set'
-      | 'quality_lead'
-      | null;
-
-    /**
-     * Budget pacing: standard (even) or accelerated (fast).
-     */
-    pacing: 'standard' | 'accelerated' | null;
-
-    /**
-     * Scheduled start time (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    targeting: Config.Targeting | null;
-  }
-
-  export namespace Config {
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    export interface Targeting {
-      /**
-       * Maximum age for demographic targeting.
-       */
-      age_max: number | null;
-
-      /**
-       * Minimum age for demographic targeting.
-       */
-      age_min: number | null;
-
-      /**
-       * ISO 3166-1 alpha-2 country codes targeted.
-       */
-      countries: Array<string> | null;
-
-      /**
-       * Device platforms targeted.
-       */
-      device_platforms: Array<'mobile' | 'desktop'> | null;
-
-      /**
-       * Platform audience IDs excluded.
-       */
-      exclude_audience_ids: Array<string> | null;
-
-      /**
-       * Genders targeted.
-       */
-      genders: Array<'male' | 'female' | 'all'> | null;
-
-      /**
-       * Platform audience IDs included.
-       */
-      include_audience_ids: Array<string> | null;
-
-      /**
-       * Platform-specific interest IDs targeted.
-       */
-      interest_ids: Array<string> | null;
-
-      /**
-       * Language codes targeted.
-       */
-      languages: Array<string> | null;
-
-      /**
-       * Placement strategy for ad delivery.
-       */
-      placement_type: 'automatic' | 'manual' | null;
-    }
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad set configuration.
-   */
-  export interface MetaAdGroupPlatformConfigType {
-    attribution_spec: Array<{ [key: string]: unknown }> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    bid_amount: number | null;
-
-    bid_strategy:
-      | 'LOWEST_COST_WITHOUT_CAP'
-      | 'LOWEST_COST_WITH_BID_CAP'
-      | 'COST_CAP'
-      | 'LOWEST_COST_WITH_MIN_ROAS'
-      | null;
-
-    billing_event:
-      | 'APP_INSTALLS'
-      | 'CLICKS'
-      | 'IMPRESSIONS'
-      | 'LINK_CLICKS'
-      | 'NONE'
-      | 'OFFER_CLAIMS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'THRUPLAY'
-      | 'PURCHASE'
-      | 'LISTING_INTERACTION'
-      | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    daily_budget: number | null;
-
-    destination_type:
-      | 'UNDEFINED'
-      | 'WEBSITE'
-      | 'APP'
-      | 'FACEBOOK'
-      | 'MESSENGER'
-      | 'WHATSAPP'
-      | 'INSTAGRAM_DIRECT'
-      | 'INSTAGRAM_PROFILE'
-      | 'PHONE_CALL'
-      | 'SHOP_AUTOMATIC'
-      | 'APPLINKS_AUTOMATIC'
-      | 'ON_AD'
-      | 'ON_POST'
-      | 'ON_VIDEO'
-      | 'ON_PAGE'
-      | 'ON_EVENT'
-      | 'MESSAGING_MESSENGER_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER'
-      | 'MESSAGING_INSTAGRAM_DIRECT_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP'
-      | 'INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE'
-      | 'FACEBOOK_PAGE'
-      | 'INSTAGRAM_LIVE'
-      | 'FACEBOOK_LIVE'
-      | 'IMAGINE'
-      | 'LEAD_FROM_IG_DIRECT'
-      | 'LEAD_FROM_MESSENGER'
-      | 'WEBSITE_AND_LEAD_FORM'
-      | 'WEBSITE_AND_PHONE_CALL'
-      | 'BROADCAST_CHANNEL'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    end_time: string | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    excluded_geo_locations: { [key: string]: unknown } | null;
-
-    facebook_positions: Array<string> | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    geo_locations: { [key: string]: unknown } | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    instagram_positions: Array<string> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    lifetime_budget: number | null;
-
-    optimization_goal:
-      | 'NONE'
-      | 'APP_INSTALLS'
-      | 'AD_RECALL_LIFT'
-      | 'ENGAGED_USERS'
-      | 'EVENT_RESPONSES'
-      | 'IMPRESSIONS'
-      | 'LEAD_GENERATION'
-      | 'QUALITY_LEAD'
-      | 'LINK_CLICKS'
-      | 'OFFSITE_CONVERSIONS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'QUALITY_CALL'
-      | 'REACH'
-      | 'LANDING_PAGE_VIEWS'
-      | 'VISIT_INSTAGRAM_PROFILE'
-      | 'VALUE'
-      | 'THRUPLAY'
-      | 'DERIVED_EVENTS'
-      | 'APP_INSTALLS_AND_OFFSITE_CONVERSIONS'
-      | 'CONVERSATIONS'
-      | 'IN_APP_VALUE'
-      | 'MESSAGING_PURCHASE_CONVERSION'
-      | 'SUBSCRIBERS'
-      | 'REMINDERS_SET'
-      | 'MEANINGFUL_CALL_ATTEMPT'
-      | 'PROFILE_VISIT'
-      | 'PROFILE_AND_PAGE_ENGAGEMENT'
-      | 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS'
-      | 'ENGAGED_REACH'
-      | 'ENGAGED_PAGE_VIEWS'
-      | 'MESSAGING_DEEP_CONVERSATION_AND_FOLLOW'
-      | 'ADVERTISER_SILOED_VALUE'
-      | 'AUTOMATIC_OBJECTIVE'
-      | 'MESSAGING_APPOINTMENT_CONVERSION'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents untyped JSON
-     */
-    promoted_object: { [key: string]: unknown } | null;
-
-    publisher_platforms: Array<string> | null;
-
-    status: 'ACTIVE' | 'PAUSED' | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    targeting_automation: { [key: string]: unknown } | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdGroupPlatformConfigType';
-  }
-
-  /**
-   * TikTok ad group configuration.
-   */
-  export interface TiktokAdGroupPlatformConfigType {
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    bid_price: number | null;
-
-    bid_type: 'BID_TYPE_NO_BID' | 'BID_TYPE_CUSTOM' | null;
-
-    billing_event: 'CPC' | 'CPM' | 'OCPM' | 'CPV' | null;
-
-    budget_mode: 'BUDGET_MODE_DAY' | 'BUDGET_MODE_TOTAL' | 'BUDGET_MODE_DYNAMIC_DAILY_BUDGET' | null;
-
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    conversion_bid_price: number | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_type: string | null;
-
-    operation_status: 'ENABLE' | 'DISABLE' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    optimization_event: string | null;
-
-    optimization_goal:
-      | 'CLICK'
-      | 'CONVERT'
-      | 'INSTALL'
-      | 'IN_APP_EVENT'
-      | 'REACH'
-      | 'SHOW'
-      | 'VIDEO_VIEW'
-      | 'ENGAGED_VIEW'
-      | 'ENGAGED_VIEW_FIFTEEN'
-      | 'LEAD_GENERATION'
-      | 'PREFERRED_LEAD'
-      | 'CONVERSATION'
-      | 'FOLLOWERS'
-      | 'PROFILE_VIEWS'
-      | 'PAGE_VISIT'
-      | 'VALUE'
-      | 'AUTOMATIC_VALUE_OPTIMIZATION'
-      | 'TRAFFIC_LANDING_PAGE_VIEW'
-      | 'DESTINATION_VISIT'
-      | 'MT_LIVE_ROOM'
-      | 'PRODUCT_CLICK_IN_LIVE'
-      | null;
-
-    pacing: 'PACING_MODE_SMOOTH' | 'PACING_MODE_FAST' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    pixel_id: string | null;
-
-    placement_type: 'PLACEMENT_TYPE_AUTOMATIC' | 'PLACEMENT_TYPE_NORMAL' | null;
-
-    placements: Array<string> | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_end_time: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_start_time: string | null;
-
-    schedule_type: 'SCHEDULE_START_END' | 'SCHEDULE_FROM_NOW' | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdGroupPlatformConfigType';
   }
 }
 
 /**
- * An external ad group (ad set) belonging to an ad campaign
+ * An ad group (ad set) belonging to an ad campaign.
  */
 export interface AdGroupRetrieveResponse {
   /**
-   * The unique identifier for the external ad group.
+   * The unique identifier for this ad group.
    */
   id: string;
 
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   ad_campaign: AdGroupRetrieveResponse.AdCampaign;
 
   /**
-   * Unified ad group configuration (platform-agnostic)
+   * Budget amount in dollars.
    */
-  config: AdGroupRetrieveResponse.Config | null;
+  budget: number | null;
 
   /**
-   * The datetime the external ad group was created.
+   * The budget type for an ad campaign or ad group.
+   */
+  budget_type: 'daily' | 'lifetime' | null;
+
+  /**
+   * When the ad group was created.
    */
   created_at: string;
 
   /**
-   * Daily budget in dollars (nil for lifetime budgets)
+   * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  daily_budget: number | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * Human-readable ad group name
-   */
-  name: string | null;
-
-  /**
-   * Typed platform-specific configuration. Use inline fragments (... on
-   * MetaAdGroupPlatformConfigType).
-   */
-  platform_config:
-    | AdGroupRetrieveResponse.MetaAdGroupPlatformConfigType
-    | null
-    | AdGroupRetrieveResponse.TiktokAdGroupPlatformConfigType
-    | null;
-
-  /**
-   * Current operational status of the ad group
+   * Current operational status of the ad group.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
 
   /**
-   * The datetime the external ad group was last updated.
+   * Human-readable name shown on the external platform.
+   */
+  title: string | null;
+
+  /**
+   * When the ad group was last updated.
    */
   updated_at: string;
 }
 
 export namespace AdGroupRetrieveResponse {
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   export interface AdCampaign {
     /**
-     * The unique identifier for the ad campaign.
+     * The unique identifier for this ad campaign.
      */
     id: string;
-
-    /**
-     * The platforms where an ad campaign can run.
-     */
-    platform: 'meta' | 'tiktok' | null;
-
-    /**
-     * Current status of the campaign (active, paused, or inactive)
-     */
-    status:
-      | 'active'
-      | 'paused'
-      | 'inactive'
-      | 'stale'
-      | 'pending_refund'
-      | 'payment_failed'
-      | 'draft'
-      | 'in_review'
-      | 'flagged'
-      | 'importing'
-      | 'imported';
-
-    /**
-     * The title of the ad campaign
-     */
-    title: string;
-  }
-
-  /**
-   * Unified ad group configuration (platform-agnostic)
-   */
-  export interface Config {
-    /**
-     * Bid cap amount in cents. Used when bid_strategy is bid_cap or cost_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * Bid strategy: lowest_cost, bid_cap, or cost_cap.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * How you are billed (e.g., impressions, clicks).
-     */
-    billing_event: 'impressions' | 'clicks' | 'optimized_cpm' | 'video_views' | null;
-
-    /**
-     * Scheduled end time (ISO8601). Required for lifetime budgets.
-     */
-    end_time: string | null;
-
-    /**
-     * Maximum number of times to show ads to each person in the frequency interval.
-     */
-    frequency_cap: number | null;
-
-    /**
-     * Number of days for the frequency cap interval.
-     */
-    frequency_cap_interval_days: number | null;
-
-    /**
-     * What the ad group optimizes for (e.g., conversions, link_clicks, reach).
-     */
-    optimization_goal:
-      | 'conversions'
-      | 'link_clicks'
-      | 'landing_page_views'
-      | 'reach'
-      | 'impressions'
-      | 'app_installs'
-      | 'video_views'
-      | 'lead_generation'
-      | 'value'
-      | 'page_likes'
-      | 'conversations'
-      | 'ad_recall_lift'
-      | 'two_second_continuous_video_views'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'reminders_set'
-      | 'quality_lead'
-      | null;
-
-    /**
-     * Budget pacing: standard (even) or accelerated (fast).
-     */
-    pacing: 'standard' | 'accelerated' | null;
-
-    /**
-     * Scheduled start time (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    targeting: Config.Targeting | null;
-  }
-
-  export namespace Config {
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    export interface Targeting {
-      /**
-       * Maximum age for demographic targeting.
-       */
-      age_max: number | null;
-
-      /**
-       * Minimum age for demographic targeting.
-       */
-      age_min: number | null;
-
-      /**
-       * ISO 3166-1 alpha-2 country codes targeted.
-       */
-      countries: Array<string> | null;
-
-      /**
-       * Device platforms targeted.
-       */
-      device_platforms: Array<'mobile' | 'desktop'> | null;
-
-      /**
-       * Platform audience IDs excluded.
-       */
-      exclude_audience_ids: Array<string> | null;
-
-      /**
-       * Genders targeted.
-       */
-      genders: Array<'male' | 'female' | 'all'> | null;
-
-      /**
-       * Platform audience IDs included.
-       */
-      include_audience_ids: Array<string> | null;
-
-      /**
-       * Platform-specific interest IDs targeted.
-       */
-      interest_ids: Array<string> | null;
-
-      /**
-       * Language codes targeted.
-       */
-      languages: Array<string> | null;
-
-      /**
-       * Placement strategy for ad delivery.
-       */
-      placement_type: 'automatic' | 'manual' | null;
-    }
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad set configuration.
-   */
-  export interface MetaAdGroupPlatformConfigType {
-    attribution_spec: Array<{ [key: string]: unknown }> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    bid_amount: number | null;
-
-    bid_strategy:
-      | 'LOWEST_COST_WITHOUT_CAP'
-      | 'LOWEST_COST_WITH_BID_CAP'
-      | 'COST_CAP'
-      | 'LOWEST_COST_WITH_MIN_ROAS'
-      | null;
-
-    billing_event:
-      | 'APP_INSTALLS'
-      | 'CLICKS'
-      | 'IMPRESSIONS'
-      | 'LINK_CLICKS'
-      | 'NONE'
-      | 'OFFER_CLAIMS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'THRUPLAY'
-      | 'PURCHASE'
-      | 'LISTING_INTERACTION'
-      | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    daily_budget: number | null;
-
-    destination_type:
-      | 'UNDEFINED'
-      | 'WEBSITE'
-      | 'APP'
-      | 'FACEBOOK'
-      | 'MESSENGER'
-      | 'WHATSAPP'
-      | 'INSTAGRAM_DIRECT'
-      | 'INSTAGRAM_PROFILE'
-      | 'PHONE_CALL'
-      | 'SHOP_AUTOMATIC'
-      | 'APPLINKS_AUTOMATIC'
-      | 'ON_AD'
-      | 'ON_POST'
-      | 'ON_VIDEO'
-      | 'ON_PAGE'
-      | 'ON_EVENT'
-      | 'MESSAGING_MESSENGER_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER'
-      | 'MESSAGING_INSTAGRAM_DIRECT_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP'
-      | 'INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE'
-      | 'FACEBOOK_PAGE'
-      | 'INSTAGRAM_LIVE'
-      | 'FACEBOOK_LIVE'
-      | 'IMAGINE'
-      | 'LEAD_FROM_IG_DIRECT'
-      | 'LEAD_FROM_MESSENGER'
-      | 'WEBSITE_AND_LEAD_FORM'
-      | 'WEBSITE_AND_PHONE_CALL'
-      | 'BROADCAST_CHANNEL'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    end_time: string | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    excluded_geo_locations: { [key: string]: unknown } | null;
-
-    facebook_positions: Array<string> | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    geo_locations: { [key: string]: unknown } | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    instagram_positions: Array<string> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    lifetime_budget: number | null;
-
-    optimization_goal:
-      | 'NONE'
-      | 'APP_INSTALLS'
-      | 'AD_RECALL_LIFT'
-      | 'ENGAGED_USERS'
-      | 'EVENT_RESPONSES'
-      | 'IMPRESSIONS'
-      | 'LEAD_GENERATION'
-      | 'QUALITY_LEAD'
-      | 'LINK_CLICKS'
-      | 'OFFSITE_CONVERSIONS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'QUALITY_CALL'
-      | 'REACH'
-      | 'LANDING_PAGE_VIEWS'
-      | 'VISIT_INSTAGRAM_PROFILE'
-      | 'VALUE'
-      | 'THRUPLAY'
-      | 'DERIVED_EVENTS'
-      | 'APP_INSTALLS_AND_OFFSITE_CONVERSIONS'
-      | 'CONVERSATIONS'
-      | 'IN_APP_VALUE'
-      | 'MESSAGING_PURCHASE_CONVERSION'
-      | 'SUBSCRIBERS'
-      | 'REMINDERS_SET'
-      | 'MEANINGFUL_CALL_ATTEMPT'
-      | 'PROFILE_VISIT'
-      | 'PROFILE_AND_PAGE_ENGAGEMENT'
-      | 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS'
-      | 'ENGAGED_REACH'
-      | 'ENGAGED_PAGE_VIEWS'
-      | 'MESSAGING_DEEP_CONVERSATION_AND_FOLLOW'
-      | 'ADVERTISER_SILOED_VALUE'
-      | 'AUTOMATIC_OBJECTIVE'
-      | 'MESSAGING_APPOINTMENT_CONVERSION'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents untyped JSON
-     */
-    promoted_object: { [key: string]: unknown } | null;
-
-    publisher_platforms: Array<string> | null;
-
-    status: 'ACTIVE' | 'PAUSED' | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    targeting_automation: { [key: string]: unknown } | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdGroupPlatformConfigType';
-  }
-
-  /**
-   * TikTok ad group configuration.
-   */
-  export interface TiktokAdGroupPlatformConfigType {
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    bid_price: number | null;
-
-    bid_type: 'BID_TYPE_NO_BID' | 'BID_TYPE_CUSTOM' | null;
-
-    billing_event: 'CPC' | 'CPM' | 'OCPM' | 'CPV' | null;
-
-    budget_mode: 'BUDGET_MODE_DAY' | 'BUDGET_MODE_TOTAL' | 'BUDGET_MODE_DYNAMIC_DAILY_BUDGET' | null;
-
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    conversion_bid_price: number | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_type: string | null;
-
-    operation_status: 'ENABLE' | 'DISABLE' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    optimization_event: string | null;
-
-    optimization_goal:
-      | 'CLICK'
-      | 'CONVERT'
-      | 'INSTALL'
-      | 'IN_APP_EVENT'
-      | 'REACH'
-      | 'SHOW'
-      | 'VIDEO_VIEW'
-      | 'ENGAGED_VIEW'
-      | 'ENGAGED_VIEW_FIFTEEN'
-      | 'LEAD_GENERATION'
-      | 'PREFERRED_LEAD'
-      | 'CONVERSATION'
-      | 'FOLLOWERS'
-      | 'PROFILE_VIEWS'
-      | 'PAGE_VISIT'
-      | 'VALUE'
-      | 'AUTOMATIC_VALUE_OPTIMIZATION'
-      | 'TRAFFIC_LANDING_PAGE_VIEW'
-      | 'DESTINATION_VISIT'
-      | 'MT_LIVE_ROOM'
-      | 'PRODUCT_CLICK_IN_LIVE'
-      | null;
-
-    pacing: 'PACING_MODE_SMOOTH' | 'PACING_MODE_FAST' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    pixel_id: string | null;
-
-    placement_type: 'PLACEMENT_TYPE_AUTOMATIC' | 'PLACEMENT_TYPE_NORMAL' | null;
-
-    placements: Array<string> | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_end_time: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_start_time: string | null;
-
-    schedule_type: 'SCHEDULE_START_END' | 'SCHEDULE_FROM_NOW' | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdGroupPlatformConfigType';
   }
 }
 
 /**
- * An external ad group (ad set) belonging to an ad campaign
+ * An ad group (ad set) belonging to an ad campaign.
  */
 export interface AdGroupUpdateResponse {
   /**
-   * The unique identifier for the external ad group.
+   * The unique identifier for this ad group.
    */
   id: string;
 
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   ad_campaign: AdGroupUpdateResponse.AdCampaign;
 
   /**
-   * Unified ad group configuration (platform-agnostic)
+   * Budget amount in dollars.
    */
-  config: AdGroupUpdateResponse.Config | null;
+  budget: number | null;
 
   /**
-   * The datetime the external ad group was created.
+   * The budget type for an ad campaign or ad group.
+   */
+  budget_type: 'daily' | 'lifetime' | null;
+
+  /**
+   * When the ad group was created.
    */
   created_at: string;
 
   /**
-   * Daily budget in dollars (nil for lifetime budgets)
+   * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  daily_budget: number | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * Human-readable ad group name
-   */
-  name: string | null;
-
-  /**
-   * Typed platform-specific configuration. Use inline fragments (... on
-   * MetaAdGroupPlatformConfigType).
-   */
-  platform_config:
-    | AdGroupUpdateResponse.MetaAdGroupPlatformConfigType
-    | null
-    | AdGroupUpdateResponse.TiktokAdGroupPlatformConfigType
-    | null;
-
-  /**
-   * Current operational status of the ad group
+   * Current operational status of the ad group.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
 
   /**
-   * The datetime the external ad group was last updated.
+   * Human-readable name shown on the external platform.
+   */
+  title: string | null;
+
+  /**
+   * When the ad group was last updated.
    */
   updated_at: string;
 }
 
 export namespace AdGroupUpdateResponse {
   /**
-   * The parent ad campaign
+   * The ad campaign this ad group belongs to.
    */
   export interface AdCampaign {
     /**
-     * The unique identifier for the ad campaign.
+     * The unique identifier for this ad campaign.
      */
     id: string;
-
-    /**
-     * The platforms where an ad campaign can run.
-     */
-    platform: 'meta' | 'tiktok' | null;
-
-    /**
-     * Current status of the campaign (active, paused, or inactive)
-     */
-    status:
-      | 'active'
-      | 'paused'
-      | 'inactive'
-      | 'stale'
-      | 'pending_refund'
-      | 'payment_failed'
-      | 'draft'
-      | 'in_review'
-      | 'flagged'
-      | 'importing'
-      | 'imported';
-
-    /**
-     * The title of the ad campaign
-     */
-    title: string;
-  }
-
-  /**
-   * Unified ad group configuration (platform-agnostic)
-   */
-  export interface Config {
-    /**
-     * Bid cap amount in cents. Used when bid_strategy is bid_cap or cost_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * Bid strategy: lowest_cost, bid_cap, or cost_cap.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * How you are billed (e.g., impressions, clicks).
-     */
-    billing_event: 'impressions' | 'clicks' | 'optimized_cpm' | 'video_views' | null;
-
-    /**
-     * Scheduled end time (ISO8601). Required for lifetime budgets.
-     */
-    end_time: string | null;
-
-    /**
-     * Maximum number of times to show ads to each person in the frequency interval.
-     */
-    frequency_cap: number | null;
-
-    /**
-     * Number of days for the frequency cap interval.
-     */
-    frequency_cap_interval_days: number | null;
-
-    /**
-     * What the ad group optimizes for (e.g., conversions, link_clicks, reach).
-     */
-    optimization_goal:
-      | 'conversions'
-      | 'link_clicks'
-      | 'landing_page_views'
-      | 'reach'
-      | 'impressions'
-      | 'app_installs'
-      | 'video_views'
-      | 'lead_generation'
-      | 'value'
-      | 'page_likes'
-      | 'conversations'
-      | 'ad_recall_lift'
-      | 'two_second_continuous_video_views'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'reminders_set'
-      | 'quality_lead'
-      | null;
-
-    /**
-     * Budget pacing: standard (even) or accelerated (fast).
-     */
-    pacing: 'standard' | 'accelerated' | null;
-
-    /**
-     * Scheduled start time (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    targeting: Config.Targeting | null;
-  }
-
-  export namespace Config {
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    export interface Targeting {
-      /**
-       * Maximum age for demographic targeting.
-       */
-      age_max: number | null;
-
-      /**
-       * Minimum age for demographic targeting.
-       */
-      age_min: number | null;
-
-      /**
-       * ISO 3166-1 alpha-2 country codes targeted.
-       */
-      countries: Array<string> | null;
-
-      /**
-       * Device platforms targeted.
-       */
-      device_platforms: Array<'mobile' | 'desktop'> | null;
-
-      /**
-       * Platform audience IDs excluded.
-       */
-      exclude_audience_ids: Array<string> | null;
-
-      /**
-       * Genders targeted.
-       */
-      genders: Array<'male' | 'female' | 'all'> | null;
-
-      /**
-       * Platform audience IDs included.
-       */
-      include_audience_ids: Array<string> | null;
-
-      /**
-       * Platform-specific interest IDs targeted.
-       */
-      interest_ids: Array<string> | null;
-
-      /**
-       * Language codes targeted.
-       */
-      languages: Array<string> | null;
-
-      /**
-       * Placement strategy for ad delivery.
-       */
-      placement_type: 'automatic' | 'manual' | null;
-    }
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad set configuration.
-   */
-  export interface MetaAdGroupPlatformConfigType {
-    attribution_spec: Array<{ [key: string]: unknown }> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    bid_amount: number | null;
-
-    bid_strategy:
-      | 'LOWEST_COST_WITHOUT_CAP'
-      | 'LOWEST_COST_WITH_BID_CAP'
-      | 'COST_CAP'
-      | 'LOWEST_COST_WITH_MIN_ROAS'
-      | null;
-
-    billing_event:
-      | 'APP_INSTALLS'
-      | 'CLICKS'
-      | 'IMPRESSIONS'
-      | 'LINK_CLICKS'
-      | 'NONE'
-      | 'OFFER_CLAIMS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'THRUPLAY'
-      | 'PURCHASE'
-      | 'LISTING_INTERACTION'
-      | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    daily_budget: number | null;
-
-    destination_type:
-      | 'UNDEFINED'
-      | 'WEBSITE'
-      | 'APP'
-      | 'FACEBOOK'
-      | 'MESSENGER'
-      | 'WHATSAPP'
-      | 'INSTAGRAM_DIRECT'
-      | 'INSTAGRAM_PROFILE'
-      | 'PHONE_CALL'
-      | 'SHOP_AUTOMATIC'
-      | 'APPLINKS_AUTOMATIC'
-      | 'ON_AD'
-      | 'ON_POST'
-      | 'ON_VIDEO'
-      | 'ON_PAGE'
-      | 'ON_EVENT'
-      | 'MESSAGING_MESSENGER_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER'
-      | 'MESSAGING_INSTAGRAM_DIRECT_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP'
-      | 'INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE'
-      | 'FACEBOOK_PAGE'
-      | 'INSTAGRAM_LIVE'
-      | 'FACEBOOK_LIVE'
-      | 'IMAGINE'
-      | 'LEAD_FROM_IG_DIRECT'
-      | 'LEAD_FROM_MESSENGER'
-      | 'WEBSITE_AND_LEAD_FORM'
-      | 'WEBSITE_AND_PHONE_CALL'
-      | 'BROADCAST_CHANNEL'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    end_time: string | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    excluded_geo_locations: { [key: string]: unknown } | null;
-
-    facebook_positions: Array<string> | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    geo_locations: { [key: string]: unknown } | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    instagram_positions: Array<string> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    lifetime_budget: number | null;
-
-    optimization_goal:
-      | 'NONE'
-      | 'APP_INSTALLS'
-      | 'AD_RECALL_LIFT'
-      | 'ENGAGED_USERS'
-      | 'EVENT_RESPONSES'
-      | 'IMPRESSIONS'
-      | 'LEAD_GENERATION'
-      | 'QUALITY_LEAD'
-      | 'LINK_CLICKS'
-      | 'OFFSITE_CONVERSIONS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'QUALITY_CALL'
-      | 'REACH'
-      | 'LANDING_PAGE_VIEWS'
-      | 'VISIT_INSTAGRAM_PROFILE'
-      | 'VALUE'
-      | 'THRUPLAY'
-      | 'DERIVED_EVENTS'
-      | 'APP_INSTALLS_AND_OFFSITE_CONVERSIONS'
-      | 'CONVERSATIONS'
-      | 'IN_APP_VALUE'
-      | 'MESSAGING_PURCHASE_CONVERSION'
-      | 'SUBSCRIBERS'
-      | 'REMINDERS_SET'
-      | 'MEANINGFUL_CALL_ATTEMPT'
-      | 'PROFILE_VISIT'
-      | 'PROFILE_AND_PAGE_ENGAGEMENT'
-      | 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS'
-      | 'ENGAGED_REACH'
-      | 'ENGAGED_PAGE_VIEWS'
-      | 'MESSAGING_DEEP_CONVERSATION_AND_FOLLOW'
-      | 'ADVERTISER_SILOED_VALUE'
-      | 'AUTOMATIC_OBJECTIVE'
-      | 'MESSAGING_APPOINTMENT_CONVERSION'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents untyped JSON
-     */
-    promoted_object: { [key: string]: unknown } | null;
-
-    publisher_platforms: Array<string> | null;
-
-    status: 'ACTIVE' | 'PAUSED' | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    targeting_automation: { [key: string]: unknown } | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdGroupPlatformConfigType';
-  }
-
-  /**
-   * TikTok ad group configuration.
-   */
-  export interface TiktokAdGroupPlatformConfigType {
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    bid_price: number | null;
-
-    bid_type: 'BID_TYPE_NO_BID' | 'BID_TYPE_CUSTOM' | null;
-
-    billing_event: 'CPC' | 'CPM' | 'OCPM' | 'CPV' | null;
-
-    budget_mode: 'BUDGET_MODE_DAY' | 'BUDGET_MODE_TOTAL' | 'BUDGET_MODE_DYNAMIC_DAILY_BUDGET' | null;
-
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    conversion_bid_price: number | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_type: string | null;
-
-    operation_status: 'ENABLE' | 'DISABLE' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    optimization_event: string | null;
-
-    optimization_goal:
-      | 'CLICK'
-      | 'CONVERT'
-      | 'INSTALL'
-      | 'IN_APP_EVENT'
-      | 'REACH'
-      | 'SHOW'
-      | 'VIDEO_VIEW'
-      | 'ENGAGED_VIEW'
-      | 'ENGAGED_VIEW_FIFTEEN'
-      | 'LEAD_GENERATION'
-      | 'PREFERRED_LEAD'
-      | 'CONVERSATION'
-      | 'FOLLOWERS'
-      | 'PROFILE_VIEWS'
-      | 'PAGE_VISIT'
-      | 'VALUE'
-      | 'AUTOMATIC_VALUE_OPTIMIZATION'
-      | 'TRAFFIC_LANDING_PAGE_VIEW'
-      | 'DESTINATION_VISIT'
-      | 'MT_LIVE_ROOM'
-      | 'PRODUCT_CLICK_IN_LIVE'
-      | null;
-
-    pacing: 'PACING_MODE_SMOOTH' | 'PACING_MODE_FAST' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    pixel_id: string | null;
-
-    placement_type: 'PLACEMENT_TYPE_AUTOMATIC' | 'PLACEMENT_TYPE_NORMAL' | null;
-
-    placements: Array<string> | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_end_time: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_start_time: string | null;
-
-    schedule_type: 'SCHEDULE_START_END' | 'SCHEDULE_FROM_NOW' | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdGroupPlatformConfigType';
   }
 }
 
 /**
- * An external ad group (ad set) belonging to an ad campaign
+ * An ad group (ad set) belonging to an ad campaign.
  */
 export interface AdGroupListResponse {
   /**
-   * The unique identifier for the external ad group.
+   * The unique identifier for this ad group.
    */
   id: string;
 
   /**
-   * Unified ad group configuration (platform-agnostic)
+   * Budget amount in dollars.
    */
-  config: AdGroupListResponse.Config | null;
+  budget: number | null;
 
   /**
-   * The datetime the external ad group was created.
+   * The budget type for an ad campaign or ad group.
+   */
+  budget_type: 'daily' | 'lifetime' | null;
+
+  /**
+   * When the ad group was created.
    */
   created_at: string;
 
   /**
-   * Daily budget in dollars (nil for lifetime budgets)
+   * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  daily_budget: number | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * Human-readable ad group name
-   */
-  name: string | null;
-
-  /**
-   * Typed platform-specific configuration. Use inline fragments (... on
-   * MetaAdGroupPlatformConfigType).
-   */
-  platform_config:
-    | AdGroupListResponse.MetaAdGroupPlatformConfigType
-    | null
-    | AdGroupListResponse.TiktokAdGroupPlatformConfigType
-    | null;
-
-  /**
-   * Current operational status of the ad group
+   * Current operational status of the ad group.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
 
   /**
-   * The datetime the external ad group was last updated.
+   * Human-readable name shown on the external platform.
+   */
+  title: string | null;
+
+  /**
+   * When the ad group was last updated.
    */
   updated_at: string;
-}
-
-export namespace AdGroupListResponse {
-  /**
-   * Unified ad group configuration (platform-agnostic)
-   */
-  export interface Config {
-    /**
-     * Bid cap amount in cents. Used when bid_strategy is bid_cap or cost_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * Bid strategy: lowest_cost, bid_cap, or cost_cap.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * How you are billed (e.g., impressions, clicks).
-     */
-    billing_event: 'impressions' | 'clicks' | 'optimized_cpm' | 'video_views' | null;
-
-    /**
-     * Scheduled end time (ISO8601). Required for lifetime budgets.
-     */
-    end_time: string | null;
-
-    /**
-     * Maximum number of times to show ads to each person in the frequency interval.
-     */
-    frequency_cap: number | null;
-
-    /**
-     * Number of days for the frequency cap interval.
-     */
-    frequency_cap_interval_days: number | null;
-
-    /**
-     * What the ad group optimizes for (e.g., conversions, link_clicks, reach).
-     */
-    optimization_goal:
-      | 'conversions'
-      | 'link_clicks'
-      | 'landing_page_views'
-      | 'reach'
-      | 'impressions'
-      | 'app_installs'
-      | 'video_views'
-      | 'lead_generation'
-      | 'value'
-      | 'page_likes'
-      | 'conversations'
-      | 'ad_recall_lift'
-      | 'two_second_continuous_video_views'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'reminders_set'
-      | 'quality_lead'
-      | null;
-
-    /**
-     * Budget pacing: standard (even) or accelerated (fast).
-     */
-    pacing: 'standard' | 'accelerated' | null;
-
-    /**
-     * Scheduled start time (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    targeting: Config.Targeting | null;
-  }
-
-  export namespace Config {
-    /**
-     * Audience targeting settings (demographics, geo, interests, audiences, devices).
-     */
-    export interface Targeting {
-      /**
-       * Maximum age for demographic targeting.
-       */
-      age_max: number | null;
-
-      /**
-       * Minimum age for demographic targeting.
-       */
-      age_min: number | null;
-
-      /**
-       * ISO 3166-1 alpha-2 country codes targeted.
-       */
-      countries: Array<string> | null;
-
-      /**
-       * Device platforms targeted.
-       */
-      device_platforms: Array<'mobile' | 'desktop'> | null;
-
-      /**
-       * Platform audience IDs excluded.
-       */
-      exclude_audience_ids: Array<string> | null;
-
-      /**
-       * Genders targeted.
-       */
-      genders: Array<'male' | 'female' | 'all'> | null;
-
-      /**
-       * Platform audience IDs included.
-       */
-      include_audience_ids: Array<string> | null;
-
-      /**
-       * Platform-specific interest IDs targeted.
-       */
-      interest_ids: Array<string> | null;
-
-      /**
-       * Language codes targeted.
-       */
-      languages: Array<string> | null;
-
-      /**
-       * Placement strategy for ad delivery.
-       */
-      placement_type: 'automatic' | 'manual' | null;
-    }
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad set configuration.
-   */
-  export interface MetaAdGroupPlatformConfigType {
-    attribution_spec: Array<{ [key: string]: unknown }> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    bid_amount: number | null;
-
-    bid_strategy:
-      | 'LOWEST_COST_WITHOUT_CAP'
-      | 'LOWEST_COST_WITH_BID_CAP'
-      | 'COST_CAP'
-      | 'LOWEST_COST_WITH_MIN_ROAS'
-      | null;
-
-    billing_event:
-      | 'APP_INSTALLS'
-      | 'CLICKS'
-      | 'IMPRESSIONS'
-      | 'LINK_CLICKS'
-      | 'NONE'
-      | 'OFFER_CLAIMS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'THRUPLAY'
-      | 'PURCHASE'
-      | 'LISTING_INTERACTION'
-      | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    daily_budget: number | null;
-
-    destination_type:
-      | 'UNDEFINED'
-      | 'WEBSITE'
-      | 'APP'
-      | 'FACEBOOK'
-      | 'MESSENGER'
-      | 'WHATSAPP'
-      | 'INSTAGRAM_DIRECT'
-      | 'INSTAGRAM_PROFILE'
-      | 'PHONE_CALL'
-      | 'SHOP_AUTOMATIC'
-      | 'APPLINKS_AUTOMATIC'
-      | 'ON_AD'
-      | 'ON_POST'
-      | 'ON_VIDEO'
-      | 'ON_PAGE'
-      | 'ON_EVENT'
-      | 'MESSAGING_MESSENGER_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER'
-      | 'MESSAGING_INSTAGRAM_DIRECT_WHATSAPP'
-      | 'MESSAGING_INSTAGRAM_DIRECT_MESSENGER_WHATSAPP'
-      | 'INSTAGRAM_PROFILE_AND_FACEBOOK_PAGE'
-      | 'FACEBOOK_PAGE'
-      | 'INSTAGRAM_LIVE'
-      | 'FACEBOOK_LIVE'
-      | 'IMAGINE'
-      | 'LEAD_FROM_IG_DIRECT'
-      | 'LEAD_FROM_MESSENGER'
-      | 'WEBSITE_AND_LEAD_FORM'
-      | 'WEBSITE_AND_PHONE_CALL'
-      | 'BROADCAST_CHANNEL'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    end_time: string | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    excluded_geo_locations: { [key: string]: unknown } | null;
-
-    facebook_positions: Array<string> | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    geo_locations: { [key: string]: unknown } | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    instagram_positions: Array<string> | null;
-
-    /**
-     * Represents non-fractional signed whole numeric values. Int can represent values
-     * between -(2^31) and 2^31 - 1.
-     */
-    lifetime_budget: number | null;
-
-    optimization_goal:
-      | 'NONE'
-      | 'APP_INSTALLS'
-      | 'AD_RECALL_LIFT'
-      | 'ENGAGED_USERS'
-      | 'EVENT_RESPONSES'
-      | 'IMPRESSIONS'
-      | 'LEAD_GENERATION'
-      | 'QUALITY_LEAD'
-      | 'LINK_CLICKS'
-      | 'OFFSITE_CONVERSIONS'
-      | 'PAGE_LIKES'
-      | 'POST_ENGAGEMENT'
-      | 'QUALITY_CALL'
-      | 'REACH'
-      | 'LANDING_PAGE_VIEWS'
-      | 'VISIT_INSTAGRAM_PROFILE'
-      | 'VALUE'
-      | 'THRUPLAY'
-      | 'DERIVED_EVENTS'
-      | 'APP_INSTALLS_AND_OFFSITE_CONVERSIONS'
-      | 'CONVERSATIONS'
-      | 'IN_APP_VALUE'
-      | 'MESSAGING_PURCHASE_CONVERSION'
-      | 'SUBSCRIBERS'
-      | 'REMINDERS_SET'
-      | 'MEANINGFUL_CALL_ATTEMPT'
-      | 'PROFILE_VISIT'
-      | 'PROFILE_AND_PAGE_ENGAGEMENT'
-      | 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS'
-      | 'ENGAGED_REACH'
-      | 'ENGAGED_PAGE_VIEWS'
-      | 'MESSAGING_DEEP_CONVERSATION_AND_FOLLOW'
-      | 'ADVERTISER_SILOED_VALUE'
-      | 'AUTOMATIC_OBJECTIVE'
-      | 'MESSAGING_APPOINTMENT_CONVERSION'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents untyped JSON
-     */
-    promoted_object: { [key: string]: unknown } | null;
-
-    publisher_platforms: Array<string> | null;
-
-    status: 'ACTIVE' | 'PAUSED' | null;
-
-    /**
-     * Represents untyped JSON
-     */
-    targeting_automation: { [key: string]: unknown } | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdGroupPlatformConfigType';
-  }
-
-  /**
-   * TikTok ad group configuration.
-   */
-  export interface TiktokAdGroupPlatformConfigType {
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    bid_price: number | null;
-
-    bid_type: 'BID_TYPE_NO_BID' | 'BID_TYPE_CUSTOM' | null;
-
-    billing_event: 'CPC' | 'CPM' | 'OCPM' | 'CPV' | null;
-
-    budget_mode: 'BUDGET_MODE_DAY' | 'BUDGET_MODE_TOTAL' | 'BUDGET_MODE_DYNAMIC_DAILY_BUDGET' | null;
-
-    /**
-     * Represents signed double-precision fractional values as specified by
-     * [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-     */
-    conversion_bid_price: number | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_type: string | null;
-
-    operation_status: 'ENABLE' | 'DISABLE' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    optimization_event: string | null;
-
-    optimization_goal:
-      | 'CLICK'
-      | 'CONVERT'
-      | 'INSTALL'
-      | 'IN_APP_EVENT'
-      | 'REACH'
-      | 'SHOW'
-      | 'VIDEO_VIEW'
-      | 'ENGAGED_VIEW'
-      | 'ENGAGED_VIEW_FIFTEEN'
-      | 'LEAD_GENERATION'
-      | 'PREFERRED_LEAD'
-      | 'CONVERSATION'
-      | 'FOLLOWERS'
-      | 'PROFILE_VIEWS'
-      | 'PAGE_VISIT'
-      | 'VALUE'
-      | 'AUTOMATIC_VALUE_OPTIMIZATION'
-      | 'TRAFFIC_LANDING_PAGE_VIEW'
-      | 'DESTINATION_VISIT'
-      | 'MT_LIVE_ROOM'
-      | 'PRODUCT_CLICK_IN_LIVE'
-      | null;
-
-    pacing: 'PACING_MODE_SMOOTH' | 'PACING_MODE_FAST' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    pixel_id: string | null;
-
-    placement_type: 'PLACEMENT_TYPE_AUTOMATIC' | 'PLACEMENT_TYPE_NORMAL' | null;
-
-    placements: Array<string> | null;
-
-    /**
-     * The ad platform (meta, tiktok).
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_end_time: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    schedule_start_time: string | null;
-
-    schedule_type: 'SCHEDULE_START_END' | 'SCHEDULE_FROM_NOW' | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdGroupPlatformConfigType';
-  }
 }
 
 /**

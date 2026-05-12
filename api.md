@@ -920,7 +920,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignCreateResponse</a></code>
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaignRetrieveResponse</a></code>
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaignUpdateResponse</a></code>
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaignListResponse</a></code>
@@ -929,7 +928,6 @@ Types:
 
 Methods:
 
-- <code title="post /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">create</a>({ ...params }) -> AdCampaignCreateResponse</code>
 - <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id) -> AdCampaignRetrieveResponse</code>
 - <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaignUpdateResponse</code>
 - <code title="get /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">list</a>({ ...params }) -> AdCampaignListResponsesCursorPage</code>

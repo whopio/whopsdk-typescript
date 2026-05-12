@@ -22,8 +22,6 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
-  AdCampaignCreateParams,
-  AdCampaignCreateResponse,
   AdCampaignListParams,
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
@@ -2212,14 +2210,12 @@ export declare namespace Whop {
 
   export {
     AdCampaigns as AdCampaigns,
-    type AdCampaignCreateResponse as AdCampaignCreateResponse,
     type AdCampaignRetrieveResponse as AdCampaignRetrieveResponse,
     type AdCampaignUpdateResponse as AdCampaignUpdateResponse,
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignPauseResponse as AdCampaignPauseResponse,
     type AdCampaignUnpauseResponse as AdCampaignUnpauseResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
-    type AdCampaignCreateParams as AdCampaignCreateParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignListParams as AdCampaignListParams,
   };

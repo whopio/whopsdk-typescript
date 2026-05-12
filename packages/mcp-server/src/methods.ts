@@ -1230,12 +1230,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/stats/sql',
   },
   {
-    clientCallName: 'client.adCampaigns.create',
-    fullyQualifiedName: 'adCampaigns.create',
-    httpMethod: 'post',
-    httpPath: '/ad_campaigns',
-  },
-  {
     clientCallName: 'client.adCampaigns.retrieve',
     fullyQualifiedName: 'adCampaigns.retrieve',
     httpMethod: 'get',

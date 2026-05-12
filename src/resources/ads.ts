@@ -16,6 +16,7 @@ export class Ads extends APIResource {
    * Required permissions:
    *
    * - `ad_campaign:create`
+   * - `ad_campaign:basic:read`
    */
   create(body: AdCreateParams, options?: RequestOptions): APIPromise<AdCreateResponse> {
     return this._client.post('/ads', { body, ...options });
@@ -50,13 +51,23 @@ export class Ads extends APIResource {
 export type AdListResponsesCursorPage = CursorPage<AdListResponse>;
 
 /**
- * An ad belonging to an ad group
+ * An ad belonging to an ad group.
  */
 export interface AdCreateResponse {
   /**
-   * Unique identifier for the ad.
+   * The unique identifier for this ad.
    */
   id: string;
+
+  /**
+   * The ad campaign this ad belongs to.
+   */
+  ad_campaign: AdCreateResponse.AdCampaign;
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  ad_group: AdCreateResponse.AdGroup;
 
   /**
    * When the ad was created.
@@ -64,28 +75,19 @@ export interface AdCreateResponse {
   created_at: string;
 
   /**
-   * The creative set used by this ad.
+   * The external ad platform this ad is running on (e.g., meta, tiktok).
    */
-  external_ad_creative_set: AdCreateResponse.ExternalAdCreativeSet | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * The parent ad group.
-   */
-  external_ad_group: AdCreateResponse.ExternalAdGroup;
-
-  /**
-   * Typed platform-specific configuration.
-   */
-  platform_config:
-    | AdCreateResponse.MetaAdPlatformConfigType
-    | null
-    | AdCreateResponse.TiktokAdPlatformConfigType
-    | null;
-
-  /**
-   * Current status of the ad.
+   * Current delivery status of the ad.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+
+  /**
+   * The display title of the ad. Falls back to the creative set caption when unset.
+   */
+  title: string | null;
 
   /**
    * When the ad was last updated.
@@ -95,220 +97,44 @@ export interface AdCreateResponse {
 
 export namespace AdCreateResponse {
   /**
-   * The creative set used by this ad.
+   * The ad campaign this ad belongs to.
    */
-  export interface ExternalAdCreativeSet {
+  export interface AdCampaign {
     /**
-     * The unique identifier for the external ad creative set.
+     * The unique identifier for this ad campaign.
      */
     id: string;
   }
 
   /**
-   * The parent ad group.
+   * The parent ad group this ad belongs to.
    */
-  export interface ExternalAdGroup {
+  export interface AdGroup {
     /**
-     * The unique identifier for the external ad group.
+     * The unique identifier for this ad group.
      */
     id: string;
-
-    /**
-     * Human-readable ad group name
-     */
-    name: string | null;
-
-    /**
-     * Current operational status of the ad group
-     */
-    status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad configuration.
-   */
-  export interface MetaAdPlatformConfigType {
-    call_to_action_type:
-      | 'LEARN_MORE'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'SUBSCRIBE'
-      | 'GET_STARTED'
-      | 'BOOK_NOW'
-      | 'APPLY_NOW'
-      | 'CONTACT_US'
-      | 'DOWNLOAD'
-      | 'ORDER_NOW'
-      | 'BUY_NOW'
-      | 'GET_QUOTE'
-      | 'MESSAGE_PAGE'
-      | 'WHATSAPP_MESSAGE'
-      | 'INSTAGRAM_MESSAGE'
-      | 'CALL_NOW'
-      | 'GET_DIRECTIONS'
-      | 'SEND_UPDATES'
-      | 'GET_OFFER'
-      | 'WATCH_MORE'
-      | 'LISTEN_NOW'
-      | 'PLAY_GAME'
-      | 'OPEN_LINK'
-      | 'NO_BUTTON'
-      | 'GET_OFFER_VIEW'
-      | 'GET_EVENT_TICKETS'
-      | 'SEE_MENU'
-      | 'REQUEST_TIME'
-      | 'EVENT_RSVP'
-      | 'SEE_DETAILS'
-      | 'VIEW_INSTAGRAM_PROFILE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    headline: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    link_url: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    primary_text: string | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    url_tags: string | null;
-  }
-
-  /**
-   * TikTok ad configuration.
-   */
-  export interface TiktokAdPlatformConfigType {
-    ad_format: 'SINGLE_IMAGE' | 'SINGLE_VIDEO' | 'CAROUSEL_ADS' | 'CATALOG_CAROUSEL' | 'LIVE_CONTENT' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_text: string | null;
-
-    /**
-     * TikTok call-to-action button text. See docs/tiktok_api/ad.md § call_to_action.
-     */
-    call_to_action:
-      | 'LEARN_MORE'
-      | 'DOWNLOAD'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'CONTACT_US'
-      | 'APPLY_NOW'
-      | 'BOOK_NOW'
-      | 'PLAY_GAME'
-      | 'WATCH_NOW'
-      | 'READ_MORE'
-      | 'VIEW_NOW'
-      | 'GET_QUOTE'
-      | 'ORDER_NOW'
-      | 'INSTALL_NOW'
-      | 'GET_SHOWTIMES'
-      | 'LISTEN_NOW'
-      | 'INTERESTED'
-      | 'SUBSCRIBE'
-      | 'GET_TICKETS_NOW'
-      | 'EXPERIENCE_NOW'
-      | 'PRE_ORDER_NOW'
-      | 'VISIT_STORE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_authorized_bc_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    identity_type: 'CUSTOMIZED_USER' | 'AUTH_CODE' | 'TT_USER' | 'BC_AUTH_TT' | null;
-
-    image_ids: Array<string> | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    landing_page_url: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    video_id: string | null;
   }
 }
 
 /**
- * An ad belonging to an ad group
+ * An ad belonging to an ad group.
  */
 export interface AdRetrieveResponse {
   /**
-   * Unique identifier for the ad.
+   * The unique identifier for this ad.
    */
   id: string;
+
+  /**
+   * The ad campaign this ad belongs to.
+   */
+  ad_campaign: AdRetrieveResponse.AdCampaign;
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  ad_group: AdRetrieveResponse.AdGroup;
 
   /**
    * When the ad was created.
@@ -316,28 +142,19 @@ export interface AdRetrieveResponse {
   created_at: string;
 
   /**
-   * The creative set used by this ad.
+   * The external ad platform this ad is running on (e.g., meta, tiktok).
    */
-  external_ad_creative_set: AdRetrieveResponse.ExternalAdCreativeSet | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * The parent ad group.
-   */
-  external_ad_group: AdRetrieveResponse.ExternalAdGroup;
-
-  /**
-   * Typed platform-specific configuration.
-   */
-  platform_config:
-    | AdRetrieveResponse.MetaAdPlatformConfigType
-    | null
-    | AdRetrieveResponse.TiktokAdPlatformConfigType
-    | null;
-
-  /**
-   * Current status of the ad.
+   * Current delivery status of the ad.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+
+  /**
+   * The display title of the ad. Falls back to the creative set caption when unset.
+   */
+  title: string | null;
 
   /**
    * When the ad was last updated.
@@ -347,218 +164,32 @@ export interface AdRetrieveResponse {
 
 export namespace AdRetrieveResponse {
   /**
-   * The creative set used by this ad.
+   * The ad campaign this ad belongs to.
    */
-  export interface ExternalAdCreativeSet {
+  export interface AdCampaign {
     /**
-     * The unique identifier for the external ad creative set.
+     * The unique identifier for this ad campaign.
      */
     id: string;
   }
 
   /**
-   * The parent ad group.
+   * The parent ad group this ad belongs to.
    */
-  export interface ExternalAdGroup {
+  export interface AdGroup {
     /**
-     * The unique identifier for the external ad group.
+     * The unique identifier for this ad group.
      */
     id: string;
-
-    /**
-     * Human-readable ad group name
-     */
-    name: string | null;
-
-    /**
-     * Current operational status of the ad group
-     */
-    status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
-  }
-
-  /**
-   * Meta (Facebook/Instagram) ad configuration.
-   */
-  export interface MetaAdPlatformConfigType {
-    call_to_action_type:
-      | 'LEARN_MORE'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'SUBSCRIBE'
-      | 'GET_STARTED'
-      | 'BOOK_NOW'
-      | 'APPLY_NOW'
-      | 'CONTACT_US'
-      | 'DOWNLOAD'
-      | 'ORDER_NOW'
-      | 'BUY_NOW'
-      | 'GET_QUOTE'
-      | 'MESSAGE_PAGE'
-      | 'WHATSAPP_MESSAGE'
-      | 'INSTAGRAM_MESSAGE'
-      | 'CALL_NOW'
-      | 'GET_DIRECTIONS'
-      | 'SEND_UPDATES'
-      | 'GET_OFFER'
-      | 'WATCH_MORE'
-      | 'LISTEN_NOW'
-      | 'PLAY_GAME'
-      | 'OPEN_LINK'
-      | 'NO_BUTTON'
-      | 'GET_OFFER_VIEW'
-      | 'GET_EVENT_TICKETS'
-      | 'SEE_MENU'
-      | 'REQUEST_TIME'
-      | 'EVENT_RSVP'
-      | 'SEE_DETAILS'
-      | 'VIEW_INSTAGRAM_PROFILE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    headline: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    link_url: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    primary_text: string | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    url_tags: string | null;
-  }
-
-  /**
-   * TikTok ad configuration.
-   */
-  export interface TiktokAdPlatformConfigType {
-    ad_format: 'SINGLE_IMAGE' | 'SINGLE_VIDEO' | 'CAROUSEL_ADS' | 'CATALOG_CAROUSEL' | 'LIVE_CONTENT' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_text: string | null;
-
-    /**
-     * TikTok call-to-action button text. See docs/tiktok_api/ad.md § call_to_action.
-     */
-    call_to_action:
-      | 'LEARN_MORE'
-      | 'DOWNLOAD'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'CONTACT_US'
-      | 'APPLY_NOW'
-      | 'BOOK_NOW'
-      | 'PLAY_GAME'
-      | 'WATCH_NOW'
-      | 'READ_MORE'
-      | 'VIEW_NOW'
-      | 'GET_QUOTE'
-      | 'ORDER_NOW'
-      | 'INSTALL_NOW'
-      | 'GET_SHOWTIMES'
-      | 'LISTEN_NOW'
-      | 'INTERESTED'
-      | 'SUBSCRIBE'
-      | 'GET_TICKETS_NOW'
-      | 'EXPERIENCE_NOW'
-      | 'PRE_ORDER_NOW'
-      | 'VISIT_STORE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_authorized_bc_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    identity_type: 'CUSTOMIZED_USER' | 'AUTH_CODE' | 'TT_USER' | 'BC_AUTH_TT' | null;
-
-    image_ids: Array<string> | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    landing_page_url: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    video_id: string | null;
   }
 }
 
 /**
- * An ad belonging to an ad group
+ * An ad belonging to an ad group.
  */
 export interface AdListResponse {
   /**
-   * Unique identifier for the ad.
+   * The unique identifier for this ad.
    */
   id: string;
 
@@ -568,201 +199,24 @@ export interface AdListResponse {
   created_at: string;
 
   /**
-   * Typed platform-specific configuration.
+   * The external ad platform this ad is running on (e.g., meta, tiktok).
    */
-  platform_config:
-    | AdListResponse.MetaAdPlatformConfigType
-    | null
-    | AdListResponse.TiktokAdPlatformConfigType
-    | null;
+  platform: 'meta' | 'tiktok';
 
   /**
-   * Current status of the ad.
+   * Current delivery status of the ad.
    */
   status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+
+  /**
+   * The display title of the ad. Falls back to the creative set caption when unset.
+   */
+  title: string | null;
 
   /**
    * When the ad was last updated.
    */
   updated_at: string;
-}
-
-export namespace AdListResponse {
-  /**
-   * Meta (Facebook/Instagram) ad configuration.
-   */
-  export interface MetaAdPlatformConfigType {
-    call_to_action_type:
-      | 'LEARN_MORE'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'SUBSCRIBE'
-      | 'GET_STARTED'
-      | 'BOOK_NOW'
-      | 'APPLY_NOW'
-      | 'CONTACT_US'
-      | 'DOWNLOAD'
-      | 'ORDER_NOW'
-      | 'BUY_NOW'
-      | 'GET_QUOTE'
-      | 'MESSAGE_PAGE'
-      | 'WHATSAPP_MESSAGE'
-      | 'INSTAGRAM_MESSAGE'
-      | 'CALL_NOW'
-      | 'GET_DIRECTIONS'
-      | 'SEND_UPDATES'
-      | 'GET_OFFER'
-      | 'WATCH_MORE'
-      | 'LISTEN_NOW'
-      | 'PLAY_GAME'
-      | 'OPEN_LINK'
-      | 'NO_BUTTON'
-      | 'GET_OFFER_VIEW'
-      | 'GET_EVENT_TICKETS'
-      | 'SEE_MENU'
-      | 'REQUEST_TIME'
-      | 'EVENT_RSVP'
-      | 'SEE_DETAILS'
-      | 'VIEW_INSTAGRAM_PROFILE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    headline: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    instagram_actor_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    link_url: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    page_id: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    primary_text: string | null;
-
-    /**
-     * The typename of this object
-     */
-    typename: 'MetaAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    url_tags: string | null;
-  }
-
-  /**
-   * TikTok ad configuration.
-   */
-  export interface TiktokAdPlatformConfigType {
-    ad_format: 'SINGLE_IMAGE' | 'SINGLE_VIDEO' | 'CAROUSEL_ADS' | 'CATALOG_CAROUSEL' | 'LIVE_CONTENT' | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_name: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    ad_text: string | null;
-
-    /**
-     * TikTok call-to-action button text. See docs/tiktok_api/ad.md § call_to_action.
-     */
-    call_to_action:
-      | 'LEARN_MORE'
-      | 'DOWNLOAD'
-      | 'SHOP_NOW'
-      | 'SIGN_UP'
-      | 'CONTACT_US'
-      | 'APPLY_NOW'
-      | 'BOOK_NOW'
-      | 'PLAY_GAME'
-      | 'WATCH_NOW'
-      | 'READ_MORE'
-      | 'VIEW_NOW'
-      | 'GET_QUOTE'
-      | 'ORDER_NOW'
-      | 'INSTALL_NOW'
-      | 'GET_SHOWTIMES'
-      | 'LISTEN_NOW'
-      | 'INTERESTED'
-      | 'SUBSCRIBE'
-      | 'GET_TICKETS_NOW'
-      | 'EXPERIENCE_NOW'
-      | 'PRE_ORDER_NOW'
-      | 'VISIT_STORE'
-      | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_authorized_bc_id: string | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    identity_id: string | null;
-
-    identity_type: 'CUSTOMIZED_USER' | 'AUTH_CODE' | 'TT_USER' | 'BC_AUTH_TT' | null;
-
-    image_ids: Array<string> | null;
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    landing_page_url: string | null;
-
-    /**
-     * The ad platform.
-     */
-    platform: 'meta' | 'tiktok';
-
-    /**
-     * The typename of this object
-     */
-    typename: 'TiktokAdPlatformConfigType';
-
-    /**
-     * Represents textual data as UTF-8 character sequences. This type is most often
-     * used by GraphQL to represent free-form human-readable text.
-     */
-    video_id: string | null;
-  }
 }
 
 export interface AdCreateParams {

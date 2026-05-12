@@ -312,7 +312,6 @@ const fuse = new Fuse(
     'client.stats.queryMetric',
     'client.stats.queryRaw',
     'client.stats.runSql',
-    'client.adCampaigns.create',
     'client.adCampaigns.list',
     'client.adCampaigns.pause',
     'client.adCampaigns.retrieve',

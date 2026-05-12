@@ -16,13 +16,11 @@ export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreatePar
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
   AdCampaigns,
-  type AdCampaignCreateResponse,
   type AdCampaignRetrieveResponse,
   type AdCampaignUpdateResponse,
   type AdCampaignListResponse,
   type AdCampaignPauseResponse,
   type AdCampaignUnpauseResponse,
-  type AdCampaignCreateParams,
   type AdCampaignUpdateParams,
   type AdCampaignListParams,
   type AdCampaignListResponsesCursorPage,

@@ -9,49 +9,6 @@ const client = new Whop({
 
 describe('resource adCampaigns', () => {
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.adCampaigns.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      config: {},
-      platform: 'meta',
-      title: 'title',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.adCampaigns.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      config: {
-        bid_amount: 42,
-        bid_strategy: 'lowest_cost',
-        budget_optimization: true,
-        end_time: 'end_time',
-        lifetime_budget: 42,
-        objective: 'awareness',
-        special_categories: ['string'],
-        start_time: 'start_time',
-        status: 'active',
-      },
-      platform: 'meta',
-      title: 'title',
-      ad_creative_set_ids: ['string'],
-      budget: 6.9,
-      budget_type: 'daily',
-      daily_budget: 6.9,
-      product_id: 'prod_xxxxxxxxxxxxx',
-      target_country_codes: ['string'],
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.adCampaigns.retrieve('adcamp_xxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -79,30 +36,7 @@ describe('resource adCampaigns', () => {
   test.skip('update: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.adCampaigns.update(
-        'adcamp_xxxxxxxxxxx',
-        {
-          ad_creative_set_ids: ['string'],
-          budget: 6.9,
-          budget_type: 'daily',
-          config: {
-            bid_amount: 42,
-            bid_strategy: 'lowest_cost',
-            budget_optimization: true,
-            end_time: 'end_time',
-            lifetime_budget: 42,
-            objective: 'awareness',
-            special_categories: ['string'],
-            start_time: 'start_time',
-            status: 'active',
-          },
-          daily_budget: 6.9,
-          product_id: 'prod_xxxxxxxxxxxxx',
-          target_country_codes: ['string'],
-          title: 'title',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.adCampaigns.update('adcamp_xxxxxxxxxxx', { budget: 6.9 }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
