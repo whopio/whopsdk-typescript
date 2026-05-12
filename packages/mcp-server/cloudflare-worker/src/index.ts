@@ -68,7 +68,7 @@ const INSTRUCTIONS_FETCH_TIMEOUT_MS = 5000;
 
 function fallbackMcpServer(): McpServer {
   return new McpServer(
-    { name: 'whop_sdk_api', version: '0.0.38' },
+    { name: 'whop_sdk_api', version: '0.0.39' },
     { capabilities: { tools: {}, logging: {} } },
   );
 }
