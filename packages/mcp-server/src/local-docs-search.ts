@@ -8728,6 +8728,50 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
     },
   },
+  {
+    name: 'retrieve',
+    endpoint: '/ad_reports',
+    httpMethod: 'get',
+    summary: 'Retrieve ad report',
+    description:
+      'Performance report for an ad campaign, ad group, or ad. Returns aggregate totals and an optional per-day breakdown. Exactly one of `adCampaignId`, `adGroupId`, or `adId` must be provided.\n\nRequired permissions:\n - `ad_campaign:stats:read`',
+    stainlessPath: '(resource) ad_reports > (method) retrieve',
+    qualified: 'client.adReports.retrieve',
+    params: [
+      'from: string;',
+      'to: string;',
+      'ad_campaign_id?: string;',
+      'ad_group_id?: string;',
+      'ad_id?: string;',
+      'currency?: string;',
+      'include_daily?: boolean;',
+    ],
+    response:
+      '{ daily: { clicks: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; spend: number; spend_currency: string; stat_date: string; }[]; summary: { clicks: number; cost_per_result: number; cpc: number; cpm: number; ctr: number; frequency: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; roas: number; spend: number; spend_currency: string; }; }',
+    markdown:
+      "## retrieve\n\n`client.adReports.retrieve(from: string, to: string, ad_campaign_id?: string, ad_group_id?: string, ad_id?: string, currency?: string, include_daily?: boolean): { daily: object[]; summary: object; }`\n\n**get** `/ad_reports`\n\nPerformance report for an ad campaign, ad group, or ad. Returns aggregate totals and an optional per-day breakdown. Exactly one of `adCampaignId`, `adGroupId`, or `adId` must be provided.\n\nRequired permissions:\n - `ad_campaign:stats:read`\n\n### Parameters\n\n- `from: string`\n  Inclusive start of the reporting window.\n\n- `to: string`\n  Inclusive end of the reporting window.\n\n- `ad_campaign_id?: string`\n  The unique identifier of an ad campaign. Mutually exclusive with `adGroupId` and `adId`.\n\n- `ad_group_id?: string`\n  The unique identifier of an ad group. Mutually exclusive with `adCampaignId` and `adId`.\n\n- `ad_id?: string`\n  The unique identifier of an ad. Mutually exclusive with `adCampaignId` and `adGroupId`.\n\n- `currency?: string`\n  ISO 4217 currency code to report `spend` in. Defaults to the company's ads reporting currency.\n\n- `include_daily?: boolean`\n  When true, includes a per-day breakdown alongside the summary.\n\n### Returns\n\n- `{ daily: { clicks: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; spend: number; spend_currency: string; stat_date: string; }[]; summary: { clicks: number; cost_per_result: number; cpc: number; cpm: number; ctr: number; frequency: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; roas: number; spend: number; spend_currency: string; }; }`\n  An ads performance report. Returns a summary; daily breakdown is included when `includeDaily` is true.\n\n  - `daily: { clicks: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; spend: number; spend_currency: string; stat_date: string; }[]`\n  - `summary: { clicks: number; cost_per_result: number; cpc: number; cpm: number; ctr: number; frequency: number; impressions: number; reach: number; result_count: number; result_label_key: string; result_label_override: string; roas: number; spend: number; spend_currency: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst adReport = await client.adReports.retrieve({ from: '2023-12-01T05:00:00.401Z', to: '2023-12-01T05:00:00.401Z' });\n\nconsole.log(adReport);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.adReports.retrieve',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst adReport = await client.adReports.retrieve({\n  from: '2023-12-01T05:00:00.401Z',\n  to: '2023-12-01T05:00:00.401Z',\n});\n\nconsole.log(adReport.daily);",
+      },
+      python: {
+        method: 'ad_reports.retrieve',
+        example:
+          'import os\nfrom datetime import datetime\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_report = client.ad_reports.retrieve(\n    from_=datetime.fromisoformat("2023-12-01T05:00:00.401"),\n    to=datetime.fromisoformat("2023-12-01T05:00:00.401"),\n)\nprint(ad_report.daily)',
+      },
+      ruby: {
+        method: 'ad_reports.retrieve',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_report = whop.ad_reports.retrieve(from: "2023-12-01T05:00:00.401Z", to: "2023-12-01T05:00:00.401Z")\n\nputs(ad_report)',
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/ad_reports \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
 ];
 
 const EMBEDDED_READMES: { language: string; content: string }[] = [

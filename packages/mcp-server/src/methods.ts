@@ -1313,6 +1313,12 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'post',
     httpPath: '/conversions',
   },
+  {
+    clientCallName: 'client.adReports.retrieve',
+    fullyQualifiedName: 'adReports.retrieve',
+    httpMethod: 'get',
+    httpPath: '/ad_reports',
+  },
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {

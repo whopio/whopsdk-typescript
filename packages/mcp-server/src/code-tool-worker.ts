@@ -326,6 +326,7 @@ const fuse = new Fuse(
     'client.ads.list',
     'client.ads.retrieve',
     'client.conversions.create',
+    'client.adReports.retrieve',
   ],
   { threshold: 1, shouldSort: true },
 );

@@ -44,6 +44,7 @@ import {
   AdGroupUpdateResponse,
   AdGroups,
 } from './resources/ad-groups';
+import { AdReportRetrieveParams, AdReportRetrieveResponse, AdReports } from './resources/ad-reports';
 import {
   AdCreateParams,
   AdCreateResponse,
@@ -1557,6 +1558,10 @@ export class Whop {
    * Conversions
    */
   conversions: API.Conversions = new API.Conversions(this);
+  /**
+   * Ad reports
+   */
+  adReports: API.AdReports = new API.AdReports(this);
 }
 
 Whop.Apps = Apps;
@@ -1618,6 +1623,7 @@ Whop.AdCampaigns = AdCampaigns;
 Whop.AdGroups = AdGroups;
 Whop.Ads = Ads;
 Whop.Conversions = Conversions;
+Whop.AdReports = AdReports;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -2247,6 +2253,12 @@ export declare namespace Whop {
     Conversions as Conversions,
     type ConversionCreateResponse as ConversionCreateResponse,
     type ConversionCreateParams as ConversionCreateParams,
+  };
+
+  export {
+    AdReports as AdReports,
+    type AdReportRetrieveResponse as AdReportRetrieveResponse,
+    type AdReportRetrieveParams as AdReportRetrieveParams,
   };
 
   export type AccessLevel = API.AccessLevel;

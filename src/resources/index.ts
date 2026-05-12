@@ -37,6 +37,7 @@ export {
   type AdGroupListParams,
   type AdGroupListResponsesCursorPage,
 } from './ad-groups';
+export { AdReports, type AdReportRetrieveResponse, type AdReportRetrieveParams } from './ad-reports';
 export {
   Ads,
   type AdCreateResponse,

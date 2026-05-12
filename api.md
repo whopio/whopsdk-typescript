@@ -975,3 +975,13 @@ Types:
 Methods:
 
 - <code title="post /conversions">client.conversions.<a href="./src/resources/conversions.ts">create</a>({ ...params }) -> ConversionCreateResponse</code>
+
+# AdReports
+
+Types:
+
+- <code><a href="./src/resources/ad-reports.ts">AdReportRetrieveResponse</a></code>
+
+Methods:
+
+- <code title="get /ad_reports">client.adReports.<a href="./src/resources/ad-reports.ts">retrieve</a>({ ...params }) -> AdReportRetrieveResponse</code>
