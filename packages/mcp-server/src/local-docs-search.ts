@@ -7861,6 +7861,131 @@ const EMBEDDED_METHODS: MethodEntry[] = [
   },
   {
     name: 'list',
+    endpoint: '/bounties',
+    httpMethod: 'get',
+    summary: 'List bounties',
+    description:
+      'Returns a paginated list of workforce bounties. When experienceId is provided, returns bounties scoped to that experience. When omitted, returns bounties with no experience.',
+    stainlessPath: '(resource) bounties > (method) list',
+    qualified: 'client.bounties.list',
+    params: [
+      'after?: string;',
+      'before?: string;',
+      "direction?: 'asc' | 'desc';",
+      'experience_id?: string;',
+      'first?: number;',
+      'last?: number;',
+      "status?: 'published' | 'archived';",
+    ],
+    response:
+      "{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }",
+    markdown:
+      "## list\n\n`client.bounties.list(after?: string, before?: string, direction?: 'asc' | 'desc', experience_id?: string, first?: number, last?: number, status?: 'published' | 'archived'): { id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: currency; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n\n**get** `/bounties`\n\nReturns a paginated list of workforce bounties. When experienceId is provided, returns bounties scoped to that experience. When omitted, returns bounties with no experience.\n\n### Parameters\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `direction?: 'asc' | 'desc'`\n  The direction of the sort.\n\n- `experience_id?: string`\n  The experience to list bounties for. When omitted, returns bounties with no experience.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `status?: 'published' | 'archived'`\n  The available bounty statuses to choose from.\n\n### Returns\n\n- `{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n  A privately accessible bounty.\n\n  - `id: string`\n  - `bounty_type: 'classic' | 'user_funded' | 'workforce'`\n  - `created_at: string`\n  - `currency: string`\n  - `description: string`\n  - `status: 'published' | 'archived'`\n  - `title: string`\n  - `total_available: number`\n  - `total_paid: number`\n  - `updated_at: string`\n  - `vote_threshold: number`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const bountyListResponse of client.bounties.list()) {\n  console.log(bountyListResponse);\n}\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.bounties.list',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const bountyListResponse of client.bounties.list()) {\n  console.log(bountyListResponse.id);\n}",
+      },
+      python: {
+        method: 'bounties.list',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.bounties.list()\npage = page.data[0]\nprint(page.id)',
+      },
+      ruby: {
+        method: 'bounties.list',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.bounties.list\n\nputs(page)',
+      },
+      http: {
+        example: 'curl https://api.whop.com/api/v1/bounties \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'create',
+    endpoint: '/bounties',
+    httpMethod: 'post',
+    summary: 'Create bounty',
+    description:
+      'Create a new workforce bounty by funding a dedicated bounty pool.\n\nRequired permissions:\n - `bounty:create`',
+    stainlessPath: '(resource) bounties > (method) create',
+    qualified: 'client.bounties.create',
+    params: [
+      'base_unit_amount: number;',
+      'currency: string;',
+      'description: string;',
+      'title: string;',
+      'accepted_submissions_limit?: number;',
+      'allowed_country_codes?: string[];',
+      'experience_id?: string;',
+      'origin_account_id?: string;',
+      'post_markdown_content?: string;',
+      'post_title?: string;',
+    ],
+    response:
+      "{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }",
+    markdown:
+      "## create\n\n`client.bounties.create(base_unit_amount: number, currency: string, description: string, title: string, accepted_submissions_limit?: number, allowed_country_codes?: string[], experience_id?: string, origin_account_id?: string, post_markdown_content?: string, post_title?: string): { id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: currency; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n\n**post** `/bounties`\n\nCreate a new workforce bounty by funding a dedicated bounty pool.\n\nRequired permissions:\n - `bounty:create`\n\n### Parameters\n\n- `base_unit_amount: number`\n  The amount paid to each approved submission. The total bounty pool funded is this amount times accepted_submissions_limit.\n\n- `currency: string`\n  The currency for the bounty pool funding amount.\n\n- `description: string`\n  The description of the bounty.\n\n- `title: string`\n  The title of the bounty.\n\n- `accepted_submissions_limit?: number`\n  The number of submissions that can be approved before the bounty closes. Defaults to 1.\n\n- `allowed_country_codes?: string[]`\n  The ISO3166 country codes where this bounty should be visible. Empty means globally visible.\n\n- `experience_id?: string`\n  An optional experience to scope the bounty to.\n\n- `origin_account_id?: string`\n  The user (user_*) or company (biz_*) tag whose balance funds this bounty pool. Defaults to the requester's personal balance when omitted. The requester must be the user themself or an owner/admin of the company.\n\n- `post_markdown_content?: string`\n  Optional markdown body for the anchor forum post. Falls back to the bounty description when omitted.\n\n- `post_title?: string`\n  Optional title for the anchor forum post. Falls back to the bounty title when omitted.\n\n### Returns\n\n- `{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n  A privately accessible bounty.\n\n  - `id: string`\n  - `bounty_type: 'classic' | 'user_funded' | 'workforce'`\n  - `created_at: string`\n  - `currency: string`\n  - `description: string`\n  - `status: 'published' | 'archived'`\n  - `title: string`\n  - `total_available: number`\n  - `total_paid: number`\n  - `updated_at: string`\n  - `vote_threshold: number`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst bounty = await client.bounties.create({\n  base_unit_amount: 6.9,\n  currency: 'usd',\n  description: 'description',\n  title: 'title',\n});\n\nconsole.log(bounty);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.bounties.create',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst bounty = await client.bounties.create({\n  base_unit_amount: 6.9,\n  currency: 'usd',\n  description: 'description',\n  title: 'title',\n});\n\nconsole.log(bounty.id);",
+      },
+      python: {
+        method: 'bounties.create',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nbounty = client.bounties.create(\n    base_unit_amount=6.9,\n    currency="usd",\n    description="description",\n    title="title",\n)\nprint(bounty.id)',
+      },
+      ruby: {
+        method: 'bounties.create',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nbounty = whop.bounties.create(base_unit_amount: 6.9, currency: :usd, description: "description", title: "title")\n\nputs(bounty)',
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/bounties \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "base_unit_amount": 6.9,\n          "currency": "usd",\n          "description": "description",\n          "title": "title",\n          "accepted_submissions_limit": 42,\n          "experience_id": "exp_xxxxxxxxxxxxxx"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/bounties/{id}',
+    httpMethod: 'get',
+    summary: 'Retrieve bounty',
+    description: 'Retrieves a workforce bounty for the current authenticated user.',
+    stainlessPath: '(resource) bounties > (method) retrieve',
+    qualified: 'client.bounties.retrieve',
+    params: ['id: string;'],
+    response:
+      "{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }",
+    markdown:
+      "## retrieve\n\n`client.bounties.retrieve(id: string): { id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: currency; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n\n**get** `/bounties/{id}`\n\nRetrieves a workforce bounty for the current authenticated user.\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ id: string; bounty_type: 'classic' | 'user_funded' | 'workforce'; created_at: string; currency: string; description: string; status: 'published' | 'archived'; title: string; total_available: number; total_paid: number; updated_at: string; vote_threshold: number; }`\n  A privately accessible bounty.\n\n  - `id: string`\n  - `bounty_type: 'classic' | 'user_funded' | 'workforce'`\n  - `created_at: string`\n  - `currency: string`\n  - `description: string`\n  - `status: 'published' | 'archived'`\n  - `title: string`\n  - `total_available: number`\n  - `total_paid: number`\n  - `updated_at: string`\n  - `vote_threshold: number`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst bounty = await client.bounties.retrieve('bnty_xxxxxxxxxxxxx');\n\nconsole.log(bounty);\n```",
+    perLanguage: {
+      typescript: {
+        method: 'client.bounties.retrieve',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst bounty = await client.bounties.retrieve('bnty_xxxxxxxxxxxxx');\n\nconsole.log(bounty.id);",
+      },
+      python: {
+        method: 'bounties.retrieve',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nbounty = client.bounties.retrieve(\n    "bnty_xxxxxxxxxxxxx",\n)\nprint(bounty.id)',
+      },
+      ruby: {
+        method: 'bounties.retrieve',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nbounty = whop.bounties.retrieve("bnty_xxxxxxxxxxxxx")\n\nputs(bounty)',
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/bounties/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'list',
     endpoint: '/ad_campaigns',
     httpMethod: 'get',
     summary: 'List ad campaigns',

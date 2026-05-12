@@ -886,6 +886,20 @@ Methods:
 - <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
 - <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>
 
+# Bounties
+
+Types:
+
+- <code><a href="./src/resources/bounties.ts">BountyCreateResponse</a></code>
+- <code><a href="./src/resources/bounties.ts">BountyRetrieveResponse</a></code>
+- <code><a href="./src/resources/bounties.ts">BountyListResponse</a></code>
+
+Methods:
+
+- <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> BountyCreateResponse</code>
+- <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> BountyRetrieveResponse</code>
+- <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
+
 # AdCampaigns
 
 Types:

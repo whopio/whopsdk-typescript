@@ -85,6 +85,15 @@ export {
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
+  Bounties,
+  type BountyCreateResponse,
+  type BountyRetrieveResponse,
+  type BountyListResponse,
+  type BountyCreateParams,
+  type BountyListParams,
+  type BountyListResponsesCursorPage,
+} from './bounties';
+export {
   ChatChannels,
   type ChatChannelListResponse,
   type ChatChannelUpdateParams,

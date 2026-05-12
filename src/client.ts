@@ -92,6 +92,15 @@ import {
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
+  Bounties,
+  BountyCreateParams,
+  BountyCreateResponse,
+  BountyListParams,
+  BountyListResponse,
+  BountyListResponsesCursorPage,
+  BountyRetrieveResponse,
+} from './resources/bounties';
+import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
@@ -1515,6 +1524,10 @@ export class Whop {
    */
   affiliates: API.Affiliates = new API.Affiliates(this);
   /**
+   * Bounties
+   */
+  bounties: API.Bounties = new API.Bounties(this);
+  /**
    * Ad campaigns
    */
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
@@ -1589,6 +1602,7 @@ Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
+Whop.Bounties = Bounties;
 Whop.AdCampaigns = AdCampaigns;
 Whop.AdGroups = AdGroups;
 Whop.Ads = Ads;
@@ -2160,6 +2174,16 @@ export declare namespace Whop {
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
     type AffiliateCreateParams as AffiliateCreateParams,
     type AffiliateListParams as AffiliateListParams,
+  };
+
+  export {
+    Bounties as Bounties,
+    type BountyCreateResponse as BountyCreateResponse,
+    type BountyRetrieveResponse as BountyRetrieveResponse,
+    type BountyListResponse as BountyListResponse,
+    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
+    type BountyCreateParams as BountyCreateParams,
+    type BountyListParams as BountyListParams,
   };
 
   export {
