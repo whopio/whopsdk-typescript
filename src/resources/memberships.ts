@@ -247,6 +247,13 @@ export interface MembershipListResponse {
   cancellation_reason: string | null;
 
   /**
+   * The ID of the checkout session/configuration that produced this membership, if
+   * any. Use this to map memberships back to the checkout configuration that created
+   * them.
+   */
+  checkout_configuration_id: string | null;
+
+  /**
    * The company this membership belongs to.
    */
   company: MembershipListResponse.Company;

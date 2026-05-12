@@ -578,7 +578,7 @@ export namespace PlanCreateParams {
      * in this configuration. The full list of default payment methods can be found in
      * the documentation at docs.whop.com/payments.
      */
-    include_platform_defaults: boolean;
+    include_platform_defaults?: boolean | null;
   }
 }
 
@@ -787,7 +787,7 @@ export namespace PlanUpdateParams {
      * in this configuration. The full list of default payment methods can be found in
      * the documentation at docs.whop.com/payments.
      */
-    include_platform_defaults: boolean;
+    include_platform_defaults?: boolean | null;
   }
 }
 

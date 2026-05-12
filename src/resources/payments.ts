@@ -322,6 +322,7 @@ export type PaymentMethodTypes =
   | 'interac'
   | 'kakao_pay'
   | 'klarna'
+  | 'klarna_pay_now'
   | 'konbini'
   | 'kr_card'
   | 'kr_market'
@@ -435,6 +436,12 @@ export interface PaymentListResponse {
    * was not made with a card.
    */
   card_last4: string | null;
+
+  /**
+   * The ID of the checkout session/configuration that produced this payment, if any.
+   * Use this to map payments back to the checkout configuration that created them.
+   */
+  checkout_configuration_id: string | null;
 
   /**
    * The company for the payment.
