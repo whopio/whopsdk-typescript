@@ -85,15 +85,6 @@ export {
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
-  Bounties,
-  type BountyCreateResponse,
-  type BountyRetrieveResponse,
-  type BountyListResponse,
-  type BountyCreateParams,
-  type BountyListParams,
-  type BountyListResponsesCursorPage,
-} from './bounties';
-export {
   ChatChannels,
   type ChatChannelListResponse,
   type ChatChannelUpdateParams,
@@ -444,17 +435,6 @@ export {
   type ShipmentListParams,
   type ShipmentListResponsesCursorPage,
 } from './shipments';
-export {
-  Stats,
-  type StatDescribeResponse,
-  type StatQueryMetricResponse,
-  type StatQueryRawResponse,
-  type StatRunSqlResponse,
-  type StatDescribeParams,
-  type StatQueryMetricParams,
-  type StatQueryRawParams,
-  type StatRunSqlParams,
-} from './stats';
 export {
   SupportChannels,
   type SupportChannelListResponse,

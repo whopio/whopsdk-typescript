@@ -1188,48 +1188,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/affiliates/{id}/overrides/{override_id}',
   },
   {
-    clientCallName: 'client.bounties.create',
-    fullyQualifiedName: 'bounties.create',
-    httpMethod: 'post',
-    httpPath: '/bounties',
-  },
-  {
-    clientCallName: 'client.bounties.retrieve',
-    fullyQualifiedName: 'bounties.retrieve',
-    httpMethod: 'get',
-    httpPath: '/bounties/{id}',
-  },
-  {
-    clientCallName: 'client.bounties.list',
-    fullyQualifiedName: 'bounties.list',
-    httpMethod: 'get',
-    httpPath: '/bounties',
-  },
-  {
-    clientCallName: 'client.stats.describe',
-    fullyQualifiedName: 'stats.describe',
-    httpMethod: 'get',
-    httpPath: '/stats/describe',
-  },
-  {
-    clientCallName: 'client.stats.queryMetric',
-    fullyQualifiedName: 'stats.queryMetric',
-    httpMethod: 'get',
-    httpPath: '/stats/metric',
-  },
-  {
-    clientCallName: 'client.stats.queryRaw',
-    fullyQualifiedName: 'stats.queryRaw',
-    httpMethod: 'get',
-    httpPath: '/stats/raw',
-  },
-  {
-    clientCallName: 'client.stats.runSql',
-    fullyQualifiedName: 'stats.runSql',
-    httpMethod: 'get',
-    httpPath: '/stats/sql',
-  },
-  {
     clientCallName: 'client.adCampaigns.retrieve',
     fullyQualifiedName: 'adCampaigns.retrieve',
     httpMethod: 'get',

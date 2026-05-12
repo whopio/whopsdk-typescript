@@ -92,15 +92,6 @@ import {
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
-  Bounties,
-  BountyCreateParams,
-  BountyCreateResponse,
-  BountyListParams,
-  BountyListResponse,
-  BountyListResponsesCursorPage,
-  BountyRetrieveResponse,
-} from './resources/bounties';
-import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
@@ -451,17 +442,6 @@ import {
   ShipmentListResponsesCursorPage,
   Shipments,
 } from './resources/shipments';
-import {
-  StatDescribeParams,
-  StatDescribeResponse,
-  StatQueryMetricParams,
-  StatQueryMetricResponse,
-  StatQueryRawParams,
-  StatQueryRawResponse,
-  StatRunSqlParams,
-  StatRunSqlResponse,
-  Stats,
-} from './resources/stats';
 import {
   SupportChannelCreateParams,
   SupportChannelListParams,
@@ -1535,14 +1515,6 @@ export class Whop {
    */
   affiliates: API.Affiliates = new API.Affiliates(this);
   /**
-   * Bounties
-   */
-  bounties: API.Bounties = new API.Bounties(this);
-  /**
-   * Stats
-   */
-  stats: API.Stats = new API.Stats(this);
-  /**
    * Ad campaigns
    */
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
@@ -1617,8 +1589,6 @@ Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
-Whop.Bounties = Bounties;
-Whop.Stats = Stats;
 Whop.AdCampaigns = AdCampaigns;
 Whop.AdGroups = AdGroups;
 Whop.Ads = Ads;
@@ -2190,28 +2160,6 @@ export declare namespace Whop {
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
     type AffiliateCreateParams as AffiliateCreateParams,
     type AffiliateListParams as AffiliateListParams,
-  };
-
-  export {
-    Bounties as Bounties,
-    type BountyCreateResponse as BountyCreateResponse,
-    type BountyRetrieveResponse as BountyRetrieveResponse,
-    type BountyListResponse as BountyListResponse,
-    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
-    type BountyCreateParams as BountyCreateParams,
-    type BountyListParams as BountyListParams,
-  };
-
-  export {
-    Stats as Stats,
-    type StatDescribeResponse as StatDescribeResponse,
-    type StatQueryMetricResponse as StatQueryMetricResponse,
-    type StatQueryRawResponse as StatQueryRawResponse,
-    type StatRunSqlResponse as StatRunSqlResponse,
-    type StatDescribeParams as StatDescribeParams,
-    type StatQueryMetricParams as StatQueryMetricParams,
-    type StatQueryRawParams as StatQueryRawParams,
-    type StatRunSqlParams as StatRunSqlParams,
   };
 
   export {

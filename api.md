@@ -886,36 +886,6 @@ Methods:
 - <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
 - <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>
 
-# Bounties
-
-Types:
-
-- <code><a href="./src/resources/bounties.ts">BountyCreateResponse</a></code>
-- <code><a href="./src/resources/bounties.ts">BountyRetrieveResponse</a></code>
-- <code><a href="./src/resources/bounties.ts">BountyListResponse</a></code>
-
-Methods:
-
-- <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> BountyCreateResponse</code>
-- <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> BountyRetrieveResponse</code>
-- <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
-
-# Stats
-
-Types:
-
-- <code><a href="./src/resources/stats.ts">StatDescribeResponse</a></code>
-- <code><a href="./src/resources/stats.ts">StatQueryMetricResponse</a></code>
-- <code><a href="./src/resources/stats.ts">StatQueryRawResponse</a></code>
-- <code><a href="./src/resources/stats.ts">StatRunSqlResponse</a></code>
-
-Methods:
-
-- <code title="get /stats/describe">client.stats.<a href="./src/resources/stats.ts">describe</a>({ ...params }) -> StatDescribeResponse</code>
-- <code title="get /stats/metric">client.stats.<a href="./src/resources/stats.ts">queryMetric</a>({ ...params }) -> StatQueryMetricResponse</code>
-- <code title="get /stats/raw">client.stats.<a href="./src/resources/stats.ts">queryRaw</a>({ ...params }) -> StatQueryRawResponse</code>
-- <code title="get /stats/sql">client.stats.<a href="./src/resources/stats.ts">runSql</a>({ ...params }) -> StatRunSqlResponse</code>
-
 # AdCampaigns
 
 Types:
