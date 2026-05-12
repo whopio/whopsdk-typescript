@@ -1236,12 +1236,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ad_campaigns/{id}/unpause',
   },
   {
-    clientCallName: 'client.adGroups.create',
-    fullyQualifiedName: 'adGroups.create',
-    httpMethod: 'post',
-    httpPath: '/ad_groups',
-  },
-  {
     clientCallName: 'client.adGroups.retrieve',
     fullyQualifiedName: 'adGroups.retrieve',
     httpMethod: 'get',
@@ -1264,12 +1258,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'adGroups.delete',
     httpMethod: 'delete',
     httpPath: '/ad_groups/{id}',
-  },
-  {
-    clientCallName: 'client.ads.create',
-    fullyQualifiedName: 'ads.create',
-    httpMethod: 'post',
-    httpPath: '/ads',
   },
   {
     clientCallName: 'client.ads.retrieve',

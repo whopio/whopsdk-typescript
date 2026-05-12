@@ -27,12 +27,10 @@ export {
 } from './ad-campaigns';
 export {
   AdGroups,
-  type AdGroupCreateResponse,
   type AdGroupRetrieveResponse,
   type AdGroupUpdateResponse,
   type AdGroupListResponse,
   type AdGroupDeleteResponse,
-  type AdGroupCreateParams,
   type AdGroupUpdateParams,
   type AdGroupListParams,
   type AdGroupListResponsesCursorPage,
@@ -40,10 +38,8 @@ export {
 export { AdReports, type AdReportRetrieveResponse, type AdReportRetrieveParams } from './ad-reports';
 export {
   Ads,
-  type AdCreateResponse,
   type AdRetrieveResponse,
   type AdListResponse,
-  type AdCreateParams,
   type AdListParams,
   type AdListResponsesCursorPage,
 } from './ads';

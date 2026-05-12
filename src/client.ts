@@ -33,8 +33,6 @@ import {
   AdCampaigns,
 } from './resources/ad-campaigns';
 import {
-  AdGroupCreateParams,
-  AdGroupCreateResponse,
   AdGroupDeleteResponse,
   AdGroupListParams,
   AdGroupListResponse,
@@ -46,8 +44,6 @@ import {
 } from './resources/ad-groups';
 import { AdReportRetrieveParams, AdReportRetrieveResponse, AdReports } from './resources/ad-reports';
 import {
-  AdCreateParams,
-  AdCreateResponse,
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
@@ -2200,24 +2196,20 @@ export declare namespace Whop {
 
   export {
     AdGroups as AdGroups,
-    type AdGroupCreateResponse as AdGroupCreateResponse,
     type AdGroupRetrieveResponse as AdGroupRetrieveResponse,
     type AdGroupUpdateResponse as AdGroupUpdateResponse,
     type AdGroupListResponse as AdGroupListResponse,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
-    type AdGroupCreateParams as AdGroupCreateParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupListParams as AdGroupListParams,
   };
 
   export {
     Ads as Ads,
-    type AdCreateResponse as AdCreateResponse,
     type AdRetrieveResponse as AdRetrieveResponse,
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
-    type AdCreateParams as AdCreateParams,
     type AdListParams as AdListParams,
   };
 

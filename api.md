@@ -922,7 +922,6 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ad-groups.ts">AdGroupCreateResponse</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupRetrieveResponse</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupUpdateResponse</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupListResponse</a></code>
@@ -930,7 +929,6 @@ Types:
 
 Methods:
 
-- <code title="post /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">create</a>({ ...params }) -> AdGroupCreateResponse</code>
 - <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id) -> AdGroupRetrieveResponse</code>
 - <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroupUpdateResponse</code>
 - <code title="get /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">list</a>({ ...params }) -> AdGroupListResponsesCursorPage</code>
@@ -940,13 +938,11 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/ads.ts">AdCreateResponse</a></code>
 - <code><a href="./src/resources/ads.ts">AdRetrieveResponse</a></code>
 - <code><a href="./src/resources/ads.ts">AdListResponse</a></code>
 
 Methods:
 
-- <code title="post /ads">client.ads.<a href="./src/resources/ads.ts">create</a>({ ...params }) -> AdCreateResponse</code>
 - <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id) -> AdRetrieveResponse</code>
 - <code title="get /ads">client.ads.<a href="./src/resources/ads.ts">list</a>({ ...params }) -> AdListResponsesCursorPage</code>
 
