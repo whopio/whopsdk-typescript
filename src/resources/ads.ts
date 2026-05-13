@@ -145,6 +145,16 @@ export interface AdListResponse {
   id: string;
 
   /**
+   * The ad campaign this ad belongs to.
+   */
+  ad_campaign: AdListResponse.AdCampaign;
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  ad_group: AdListResponse.AdGroup;
+
+  /**
    * When the ad was created.
    */
   created_at: string;
@@ -168,6 +178,28 @@ export interface AdListResponse {
    * When the ad was last updated.
    */
   updated_at: string;
+}
+
+export namespace AdListResponse {
+  /**
+   * The ad campaign this ad belongs to.
+   */
+  export interface AdCampaign {
+    /**
+     * The unique identifier for this ad campaign.
+     */
+    id: string;
+  }
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  export interface AdGroup {
+    /**
+     * The unique identifier for this ad group.
+     */
+    id: string;
+  }
 }
 
 export interface AdListParams extends CursorPageParams {

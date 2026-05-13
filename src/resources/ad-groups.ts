@@ -216,6 +216,11 @@ export interface AdGroupListResponse {
   id: string;
 
   /**
+   * The ad campaign this ad group belongs to.
+   */
+  ad_campaign: AdGroupListResponse.AdCampaign;
+
+  /**
    * Budget amount in dollars.
    */
   budget: number | null;
@@ -249,6 +254,18 @@ export interface AdGroupListResponse {
    * When the ad group was last updated.
    */
   updated_at: string;
+}
+
+export namespace AdGroupListResponse {
+  /**
+   * The ad campaign this ad group belongs to.
+   */
+  export interface AdCampaign {
+    /**
+     * The unique identifier for this ad campaign.
+     */
+    id: string;
+  }
 }
 
 /**

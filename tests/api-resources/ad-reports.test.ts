@@ -31,8 +31,10 @@ describe('resource adReports', () => {
       ad_campaign_id: 'ad_campaign_id',
       ad_group_id: 'ad_group_id',
       ad_id: 'ad_id',
-      breakdown: 'daily',
+      breakdown: 'campaign',
+      company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'currency',
+      granularity: 'daily',
     });
   });
 });
