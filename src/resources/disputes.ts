@@ -167,8 +167,7 @@ export interface Dispute {
   customer_name: string | null;
 
   /**
-   * Whether the dispute evidence can still be edited and submitted. Returns true
-   * only when the dispute status requires a response.
+   * Whether the dispute evidence can still be edited and submitted.
    */
   editable: boolean | null;
 
@@ -608,8 +607,7 @@ export interface DisputeListResponse {
   currency: Shared.Currency;
 
   /**
-   * Whether the dispute evidence can still be edited and submitted. Returns true
-   * only when the dispute status requires a response.
+   * Whether the dispute evidence can still be edited and submitted.
    */
   editable: boolean | null;
 
