@@ -465,9 +465,9 @@ export interface PaymentListResponse {
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  currency: Shared.Currency | null;
+  currency: Shared.Currency;
 
   /**
    * When an alert came in that this transaction will be disputed
@@ -566,11 +566,9 @@ export interface PaymentListResponse {
   retryable: boolean;
 
   /**
-   * The currency in which the creator receives payouts and fees are charged (e.g.,
-   * 'usd', 'eur'). For multi-currency payments this differs from the payment
-   * currency.
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  settlement_currency: string;
+  settlement_currency: Shared.Currency;
 
   /**
    * The status of a receipt

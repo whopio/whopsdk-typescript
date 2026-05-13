@@ -2371,9 +2371,9 @@ export interface Payment {
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  currency: Currency | null;
+  currency: Currency;
 
   /**
    * When an alert came in that this transaction will be disputed
@@ -2497,21 +2497,18 @@ export interface Payment {
   retryable: boolean;
 
   /**
-   * The payment amount in the creator's settlement currency (what the creator priced
-   * in). Equal to final_amount for single-currency payments.
+   * The total amount charged to the customer for this payment, including taxes and
+   * after any discounts. In the currency specified by the currency field.
    */
   settlement_amount: number;
 
   /**
-   * The currency in which the creator receives payouts and fees are charged (e.g.,
-   * 'usd', 'eur'). For multi-currency payments this differs from the payment
-   * currency.
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  settlement_currency: string;
+  settlement_currency: Currency;
 
   /**
-   * The locked exchange rate used to convert from the buyer's payment currency to
-   * the creator's settlement currency. Null for single-currency payments.
+   * Deprecated. Always returns null.
    */
   settlement_exchange_rate: number | null;
 

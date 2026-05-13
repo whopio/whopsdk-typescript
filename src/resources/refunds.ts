@@ -181,9 +181,9 @@ export namespace RefundRetrieveResponse {
     created_at: string;
 
     /**
-     * The available currencies on the platform
+     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * When an alert came in that this transaction will be disputed
