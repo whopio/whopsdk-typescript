@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AdGroupsAPI from './ad-groups';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -24,7 +25,7 @@ export class AdCampaigns extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AdCampaignRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.get(path`/ad_campaigns/${id}`, options);
   }
 
@@ -46,7 +47,7 @@ export class AdCampaigns extends APIResource {
     id: string,
     body: AdCampaignUpdateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<AdCampaignUpdateResponse> {
+  ): APIPromise<AdCampaign> {
     return this._client.patch(path`/ad_campaigns/${id}`, { body, ...options });
   }
 
@@ -87,12 +88,12 @@ export class AdCampaigns extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.adCampaigns.pause(
+   * const adCampaign = await client.adCampaigns.pause(
    *   'adcamp_xxxxxxxxxxx',
    * );
    * ```
    */
-  pause(id: string, options?: RequestOptions): APIPromise<AdCampaignPauseResponse> {
+  pause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.post(path`/ad_campaigns/${id}/pause`, options);
   }
 
@@ -105,12 +106,12 @@ export class AdCampaigns extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.adCampaigns.unpause(
+   * const adCampaign = await client.adCampaigns.unpause(
    *   'adcamp_xxxxxxxxxxx',
    * );
    * ```
    */
-  unpause(id: string, options?: RequestOptions): APIPromise<AdCampaignUnpauseResponse> {
+  unpause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.post(path`/ad_campaigns/${id}/unpause`, options);
   }
 }
@@ -120,7 +121,7 @@ export type AdCampaignListResponsesCursorPage = CursorPage<AdCampaignListRespons
 /**
  * An advertising campaign running on an external platform or within Whop.
  */
-export interface AdCampaignRetrieveResponse {
+export interface AdCampaign {
   /**
    * The unique identifier for this ad campaign.
    */
@@ -134,7 +135,7 @@ export interface AdCampaignRetrieveResponse {
   /**
    * The budget type for an ad campaign or ad group.
    */
-  budget_type: 'daily' | 'lifetime' | null;
+  budget_type: AdGroupsAPI.AdBudgetType | null;
 
   /**
    * When the ad campaign was created.
@@ -144,23 +145,23 @@ export interface AdCampaignRetrieveResponse {
   /**
    * The user who created this ad campaign.
    */
-  created_by_user: AdCampaignRetrieveResponse.CreatedByUser;
+  created_by_user: AdCampaign.CreatedByUser;
 
   /**
    * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
    * non-Meta campaigns.
    */
-  meta_config: AdCampaignRetrieveResponse.MetaConfig | null;
+  meta_config: AdCampaign.MetaConfig | null;
 
   /**
    * The external ad platform this campaign is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignPlatform;
 
   /**
    * Current status of the campaign (active, paused, or inactive).
    */
-  status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
+  status: AdCampaignStatus;
 
   /**
    * The campaign name shown in the Whop dashboard.
@@ -178,7 +179,7 @@ export interface AdCampaignRetrieveResponse {
   updated_at: string;
 }
 
-export namespace AdCampaignRetrieveResponse {
+export namespace AdCampaign {
   /**
    * The user who created this ad campaign.
    */
@@ -255,141 +256,14 @@ export namespace AdCampaignRetrieveResponse {
 }
 
 /**
- * An advertising campaign running on an external platform or within Whop.
+ * The platforms where an ad campaign can run.
  */
-export interface AdCampaignUpdateResponse {
-  /**
-   * The unique identifier for this ad campaign.
-   */
-  id: string;
+export type AdCampaignPlatform = 'meta' | 'tiktok';
 
-  /**
-   * Total budget in dollars.
-   */
-  budget: number | null;
-
-  /**
-   * The budget type for an ad campaign or ad group.
-   */
-  budget_type: 'daily' | 'lifetime' | null;
-
-  /**
-   * When the ad campaign was created.
-   */
-  created_at: string;
-
-  /**
-   * The user who created this ad campaign.
-   */
-  created_by_user: AdCampaignUpdateResponse.CreatedByUser;
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  meta_config: AdCampaignUpdateResponse.MetaConfig | null;
-
-  /**
-   * The external ad platform this campaign is running on (e.g., meta, tiktok).
-   */
-  platform: 'meta' | 'tiktok';
-
-  /**
-   * Current status of the campaign (active, paused, or inactive).
-   */
-  status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
-
-  /**
-   * The campaign name shown in the Whop dashboard.
-   */
-  title: string;
-
-  /**
-   * Total amount spent in dollars.
-   */
-  total_spend: number;
-
-  /**
-   * When the ad campaign was last updated.
-   */
-  updated_at: string;
-}
-
-export namespace AdCampaignUpdateResponse {
-  /**
-   * The user who created this ad campaign.
-   */
-  export interface CreatedByUser {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  export interface MetaConfig {
-    /**
-     * Bid cap amount in cents. Only used when bid_strategy is bid_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * The bidding strategy used to optimize spend for this campaign.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * Whether campaign budget optimization (CBO) is enabled, allowing the platform to
-     * distribute budget across ad groups.
-     */
-    budget_optimization: boolean | null;
-
-    /**
-     * The actual delivery status, accounting for platform overrides (e.g., in_review,
-     * rejected).
-     */
-    effective_status: 'active' | 'paused' | 'deleted' | 'in_review' | 'rejected' | 'with_issues' | null;
-
-    /**
-     * The scheduled end time of the campaign (ISO8601).
-     */
-    end_time: string | null;
-
-    /**
-     * The campaign objective that determines how Meta optimizes delivery.
-     */
-    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
-
-    /**
-     * Special ad categories required by the platform (e.g., housing, employment,
-     * credit).
-     */
-    special_categories: Array<string> | null;
-
-    /**
-     * The scheduled start time of the campaign (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * The campaign status as set by the advertiser (active or paused).
-     */
-    status: 'active' | 'paused' | null;
-  }
-}
+/**
+ * The status of an ad campaign.
+ */
+export type AdCampaignStatus = 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
 
 /**
  * An advertising campaign running on an external platform or within Whop.
@@ -408,7 +282,7 @@ export interface AdCampaignListResponse {
   /**
    * The budget type for an ad campaign or ad group.
    */
-  budget_type: 'daily' | 'lifetime' | null;
+  budget_type: AdGroupsAPI.AdBudgetType | null;
 
   /**
    * When the ad campaign was created.
@@ -418,12 +292,12 @@ export interface AdCampaignListResponse {
   /**
    * The external ad platform this campaign is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignPlatform;
 
   /**
    * Current status of the campaign (active, paused, or inactive).
    */
-  status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
+  status: AdCampaignStatus;
 
   /**
    * The campaign name shown in the Whop dashboard.
@@ -439,280 +313,6 @@ export interface AdCampaignListResponse {
    * When the ad campaign was last updated.
    */
   updated_at: string;
-}
-
-/**
- * An advertising campaign running on an external platform or within Whop.
- */
-export interface AdCampaignPauseResponse {
-  /**
-   * The unique identifier for this ad campaign.
-   */
-  id: string;
-
-  /**
-   * Total budget in dollars.
-   */
-  budget: number | null;
-
-  /**
-   * The budget type for an ad campaign or ad group.
-   */
-  budget_type: 'daily' | 'lifetime' | null;
-
-  /**
-   * When the ad campaign was created.
-   */
-  created_at: string;
-
-  /**
-   * The user who created this ad campaign.
-   */
-  created_by_user: AdCampaignPauseResponse.CreatedByUser;
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  meta_config: AdCampaignPauseResponse.MetaConfig | null;
-
-  /**
-   * The external ad platform this campaign is running on (e.g., meta, tiktok).
-   */
-  platform: 'meta' | 'tiktok';
-
-  /**
-   * Current status of the campaign (active, paused, or inactive).
-   */
-  status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
-
-  /**
-   * The campaign name shown in the Whop dashboard.
-   */
-  title: string;
-
-  /**
-   * Total amount spent in dollars.
-   */
-  total_spend: number;
-
-  /**
-   * When the ad campaign was last updated.
-   */
-  updated_at: string;
-}
-
-export namespace AdCampaignPauseResponse {
-  /**
-   * The user who created this ad campaign.
-   */
-  export interface CreatedByUser {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  export interface MetaConfig {
-    /**
-     * Bid cap amount in cents. Only used when bid_strategy is bid_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * The bidding strategy used to optimize spend for this campaign.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * Whether campaign budget optimization (CBO) is enabled, allowing the platform to
-     * distribute budget across ad groups.
-     */
-    budget_optimization: boolean | null;
-
-    /**
-     * The actual delivery status, accounting for platform overrides (e.g., in_review,
-     * rejected).
-     */
-    effective_status: 'active' | 'paused' | 'deleted' | 'in_review' | 'rejected' | 'with_issues' | null;
-
-    /**
-     * The scheduled end time of the campaign (ISO8601).
-     */
-    end_time: string | null;
-
-    /**
-     * The campaign objective that determines how Meta optimizes delivery.
-     */
-    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
-
-    /**
-     * Special ad categories required by the platform (e.g., housing, employment,
-     * credit).
-     */
-    special_categories: Array<string> | null;
-
-    /**
-     * The scheduled start time of the campaign (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * The campaign status as set by the advertiser (active or paused).
-     */
-    status: 'active' | 'paused' | null;
-  }
-}
-
-/**
- * An advertising campaign running on an external platform or within Whop.
- */
-export interface AdCampaignUnpauseResponse {
-  /**
-   * The unique identifier for this ad campaign.
-   */
-  id: string;
-
-  /**
-   * Total budget in dollars.
-   */
-  budget: number | null;
-
-  /**
-   * The budget type for an ad campaign or ad group.
-   */
-  budget_type: 'daily' | 'lifetime' | null;
-
-  /**
-   * When the ad campaign was created.
-   */
-  created_at: string;
-
-  /**
-   * The user who created this ad campaign.
-   */
-  created_by_user: AdCampaignUnpauseResponse.CreatedByUser;
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  meta_config: AdCampaignUnpauseResponse.MetaConfig | null;
-
-  /**
-   * The external ad platform this campaign is running on (e.g., meta, tiktok).
-   */
-  platform: 'meta' | 'tiktok';
-
-  /**
-   * Current status of the campaign (active, paused, or inactive).
-   */
-  status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
-
-  /**
-   * The campaign name shown in the Whop dashboard.
-   */
-  title: string;
-
-  /**
-   * Total amount spent in dollars.
-   */
-  total_spend: number;
-
-  /**
-   * When the ad campaign was last updated.
-   */
-  updated_at: string;
-}
-
-export namespace AdCampaignUnpauseResponse {
-  /**
-   * The user who created this ad campaign.
-   */
-  export interface CreatedByUser {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  export interface MetaConfig {
-    /**
-     * Bid cap amount in cents. Only used when bid_strategy is bid_cap.
-     */
-    bid_amount: number | null;
-
-    /**
-     * The bidding strategy used to optimize spend for this campaign.
-     */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * Whether campaign budget optimization (CBO) is enabled, allowing the platform to
-     * distribute budget across ad groups.
-     */
-    budget_optimization: boolean | null;
-
-    /**
-     * The actual delivery status, accounting for platform overrides (e.g., in_review,
-     * rejected).
-     */
-    effective_status: 'active' | 'paused' | 'deleted' | 'in_review' | 'rejected' | 'with_issues' | null;
-
-    /**
-     * The scheduled end time of the campaign (ISO8601).
-     */
-    end_time: string | null;
-
-    /**
-     * The campaign objective that determines how Meta optimizes delivery.
-     */
-    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
-
-    /**
-     * Special ad categories required by the platform (e.g., housing, employment,
-     * credit).
-     */
-    special_categories: Array<string> | null;
-
-    /**
-     * The scheduled start time of the campaign (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * The campaign status as set by the advertiser (active or paused).
-     */
-    status: 'active' | 'paused' | null;
-  }
 }
 
 export interface AdCampaignUpdateParams {
@@ -762,16 +362,15 @@ export interface AdCampaignListParams extends CursorPageParams {
   /**
    * The status of an ad campaign.
    */
-  status?: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged' | null;
+  status?: AdCampaignStatus | null;
 }
 
 export declare namespace AdCampaigns {
   export {
-    type AdCampaignRetrieveResponse as AdCampaignRetrieveResponse,
-    type AdCampaignUpdateResponse as AdCampaignUpdateResponse,
+    type AdCampaign as AdCampaign,
+    type AdCampaignPlatform as AdCampaignPlatform,
+    type AdCampaignStatus as AdCampaignStatus,
     type AdCampaignListResponse as AdCampaignListResponse,
-    type AdCampaignPauseResponse as AdCampaignPauseResponse,
-    type AdCampaignUnpauseResponse as AdCampaignUnpauseResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignListParams as AdCampaignListParams,

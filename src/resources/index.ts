@@ -16,29 +16,36 @@ export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreatePar
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
   AdCampaigns,
-  type AdCampaignRetrieveResponse,
-  type AdCampaignUpdateResponse,
+  type AdCampaign,
+  type AdCampaignPlatform,
+  type AdCampaignStatus,
   type AdCampaignListResponse,
-  type AdCampaignPauseResponse,
-  type AdCampaignUnpauseResponse,
   type AdCampaignUpdateParams,
   type AdCampaignListParams,
   type AdCampaignListResponsesCursorPage,
 } from './ad-campaigns';
 export {
   AdGroups,
-  type AdGroupRetrieveResponse,
-  type AdGroupUpdateResponse,
+  type AdBudgetType,
+  type AdGroup,
+  type AdGroupStatus,
   type AdGroupListResponse,
   type AdGroupDeleteResponse,
   type AdGroupUpdateParams,
   type AdGroupListParams,
   type AdGroupListResponsesCursorPage,
 } from './ad-groups';
-export { AdReports, type AdReportRetrieveResponse, type AdReportRetrieveParams } from './ad-reports';
+export {
+  AdReports,
+  type Granularities,
+  type ResultLabelKeys,
+  type AdReportRetrieveResponse,
+  type AdReportRetrieveParams,
+} from './ad-reports';
 export {
   Ads,
-  type AdRetrieveResponse,
+  type Ad,
+  type ExternalAdStatus,
   type AdListResponse,
   type AdListParams,
   type AdListResponsesCursorPage,
@@ -246,6 +253,7 @@ export {
 } from './fee-markups';
 export {
   Files,
+  type FileVisibility,
   type UploadStatus,
   type FileCreateResponse,
   type FileRetrieveResponse,

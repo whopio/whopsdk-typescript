@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AdReportsAPI from './ad-reports';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
@@ -22,6 +23,40 @@ export class AdReports extends APIResource {
     return this._client.get('/ad_reports', { query, ...options });
   }
 }
+
+/**
+ * Bucket size for external ad stat rows.
+ */
+export type Granularities = 'daily' | 'hourly';
+
+/**
+ * Types of optimization results tracked from external ad platforms
+ */
+export type ResultLabelKeys =
+  | 'app_installs'
+  | 'messaging_conversations_started'
+  | 'post_engagement'
+  | 'event_responses'
+  | 'impressions'
+  | 'website_purchases'
+  | 'landing_page_views'
+  | 'leads'
+  | 'link_clicks'
+  | 'quality_calls'
+  | 'appointments_booked'
+  | 'messaging_purchases'
+  | 'page_likes'
+  | 'instagram_profile_visits'
+  | 'reach'
+  | 'reminders_set'
+  | 'new_subscribers'
+  | 'video_views'
+  | 'registrations'
+  | 'content_views'
+  | 'searches'
+  | 'website_schedules'
+  | 'website_submit_applications'
+  | 'custom';
 
 /**
  * An ads performance report. Returns a summary; the time-series breakdown is
@@ -62,7 +97,7 @@ export namespace AdReportRetrieveResponse {
     /**
      * The bucket size of this row (`daily` or `hourly`).
      */
-    granularity: 'daily' | 'hourly';
+    granularity: AdReportsAPI.Granularities;
 
     /**
      * Impressions in this bucket.
@@ -83,32 +118,7 @@ export namespace AdReportRetrieveResponse {
     /**
      * Types of optimization results tracked from external ad platforms
      */
-    result_label_key:
-      | 'app_installs'
-      | 'messaging_conversations_started'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'impressions'
-      | 'website_purchases'
-      | 'landing_page_views'
-      | 'leads'
-      | 'link_clicks'
-      | 'quality_calls'
-      | 'appointments_booked'
-      | 'messaging_purchases'
-      | 'page_likes'
-      | 'instagram_profile_visits'
-      | 'reach'
-      | 'reminders_set'
-      | 'new_subscribers'
-      | 'video_views'
-      | 'registrations'
-      | 'content_views'
-      | 'searches'
-      | 'website_schedules'
-      | 'website_submit_applications'
-      | 'custom'
-      | null;
+    result_label_key: AdReportsAPI.ResultLabelKeys | null;
 
     /**
      * Advertiser-defined label for the result when `resultLabelKey` is `custom`.
@@ -192,32 +202,7 @@ export namespace AdReportRetrieveResponse {
     /**
      * Types of optimization results tracked from external ad platforms
      */
-    result_label_key:
-      | 'app_installs'
-      | 'messaging_conversations_started'
-      | 'post_engagement'
-      | 'event_responses'
-      | 'impressions'
-      | 'website_purchases'
-      | 'landing_page_views'
-      | 'leads'
-      | 'link_clicks'
-      | 'quality_calls'
-      | 'appointments_booked'
-      | 'messaging_purchases'
-      | 'page_likes'
-      | 'instagram_profile_visits'
-      | 'reach'
-      | 'reminders_set'
-      | 'new_subscribers'
-      | 'video_views'
-      | 'registrations'
-      | 'content_views'
-      | 'searches'
-      | 'website_schedules'
-      | 'website_submit_applications'
-      | 'custom'
-      | null;
+    result_label_key: AdReportsAPI.ResultLabelKeys | null;
 
     /**
      * Advertiser-defined label for the result when `resultLabelKey` is `custom`.
@@ -274,7 +259,7 @@ export interface AdReportRetrieveParams {
   /**
    * Bucket size for external ad stat rows.
    */
-  breakdown?: 'daily' | 'hourly' | null;
+  breakdown?: Granularities | null;
 
   /**
    * ISO 4217 currency code to report `spend` in. Defaults to the company's ads
@@ -285,6 +270,8 @@ export interface AdReportRetrieveParams {
 
 export declare namespace AdReports {
   export {
+    type Granularities as Granularities,
+    type ResultLabelKeys as ResultLabelKeys,
     type AdReportRetrieveResponse as AdReportRetrieveResponse,
     type AdReportRetrieveParams as AdReportRetrieveParams,
   };

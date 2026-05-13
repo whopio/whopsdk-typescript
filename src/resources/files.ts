@@ -26,6 +26,12 @@ export class Files extends APIResource {
 }
 
 /**
+ * Controls whether an uploaded file is publicly accessible or requires
+ * authentication to access.
+ */
+export type FileVisibility = 'public' | 'private';
+
+/**
  * The upload status of a file
  */
 export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
@@ -81,7 +87,7 @@ export interface FileCreateResponse {
   /**
    * Whether the file is publicly accessible or requires authentication.
    */
-  visibility: 'public' | 'private';
+  visibility: FileVisibility;
 }
 
 /**
@@ -123,7 +129,7 @@ export interface FileRetrieveResponse {
   /**
    * Whether the file is publicly accessible or requires authentication.
    */
-  visibility: 'public' | 'private';
+  visibility: FileVisibility;
 }
 
 export interface FileCreateParams {
@@ -137,11 +143,12 @@ export interface FileCreateParams {
    * Controls whether an uploaded file is publicly accessible or requires
    * authentication to access.
    */
-  visibility?: 'public' | 'private' | null;
+  visibility?: FileVisibility | null;
 }
 
 export declare namespace Files {
   export {
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,

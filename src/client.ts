@@ -22,33 +22,40 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+  AdCampaign,
   AdCampaignListParams,
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
-  AdCampaignPauseResponse,
-  AdCampaignRetrieveResponse,
-  AdCampaignUnpauseResponse,
+  AdCampaignPlatform,
+  AdCampaignStatus,
   AdCampaignUpdateParams,
-  AdCampaignUpdateResponse,
   AdCampaigns,
 } from './resources/ad-campaigns';
 import {
+  AdBudgetType,
+  AdGroup,
   AdGroupDeleteResponse,
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
-  AdGroupRetrieveResponse,
+  AdGroupStatus,
   AdGroupUpdateParams,
-  AdGroupUpdateResponse,
   AdGroups,
 } from './resources/ad-groups';
-import { AdReportRetrieveParams, AdReportRetrieveResponse, AdReports } from './resources/ad-reports';
 import {
+  AdReportRetrieveParams,
+  AdReportRetrieveResponse,
+  AdReports,
+  Granularities,
+  ResultLabelKeys,
+} from './resources/ad-reports';
+import {
+  Ad,
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
-  AdRetrieveResponse,
   Ads,
+  ExternalAdStatus,
 } from './resources/ads';
 import {
   AIChat,
@@ -255,6 +262,7 @@ import {
   FileCreateParams,
   FileCreateResponse,
   FileRetrieveResponse,
+  FileVisibility,
   Files,
   UploadStatus,
 } from './resources/files';
@@ -2080,6 +2088,7 @@ export declare namespace Whop {
 
   export {
     Files as Files,
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
@@ -2184,11 +2193,10 @@ export declare namespace Whop {
 
   export {
     AdCampaigns as AdCampaigns,
-    type AdCampaignRetrieveResponse as AdCampaignRetrieveResponse,
-    type AdCampaignUpdateResponse as AdCampaignUpdateResponse,
+    type AdCampaign as AdCampaign,
+    type AdCampaignPlatform as AdCampaignPlatform,
+    type AdCampaignStatus as AdCampaignStatus,
     type AdCampaignListResponse as AdCampaignListResponse,
-    type AdCampaignPauseResponse as AdCampaignPauseResponse,
-    type AdCampaignUnpauseResponse as AdCampaignUnpauseResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignListParams as AdCampaignListParams,
@@ -2196,8 +2204,9 @@ export declare namespace Whop {
 
   export {
     AdGroups as AdGroups,
-    type AdGroupRetrieveResponse as AdGroupRetrieveResponse,
-    type AdGroupUpdateResponse as AdGroupUpdateResponse,
+    type AdBudgetType as AdBudgetType,
+    type AdGroup as AdGroup,
+    type AdGroupStatus as AdGroupStatus,
     type AdGroupListResponse as AdGroupListResponse,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
@@ -2207,7 +2216,8 @@ export declare namespace Whop {
 
   export {
     Ads as Ads,
-    type AdRetrieveResponse as AdRetrieveResponse,
+    type Ad as Ad,
+    type ExternalAdStatus as ExternalAdStatus,
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,
@@ -2221,6 +2231,8 @@ export declare namespace Whop {
 
   export {
     AdReports as AdReports,
+    type Granularities as Granularities,
+    type ResultLabelKeys as ResultLabelKeys,
     type AdReportRetrieveResponse as AdReportRetrieveResponse,
     type AdReportRetrieveParams as AdReportRetrieveParams,
   };
