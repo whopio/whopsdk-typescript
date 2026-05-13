@@ -384,6 +384,12 @@ export namespace MembershipListResponse {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown };
   }
 
   /**
@@ -394,6 +400,12 @@ export namespace MembershipListResponse {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown };
 
     /**
      * The display name of the product shown to customers on the product page and in

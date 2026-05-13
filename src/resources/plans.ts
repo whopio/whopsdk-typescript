@@ -441,6 +441,13 @@ export interface PlanCreateParams {
   legacy_payment_method_controls?: boolean | null;
 
   /**
+   * Custom key-value pairs to store on the plan. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
    * Whether or not the tax is included in a plan's price (or if it hasn't been set
    * up)
    */
@@ -658,6 +665,13 @@ export interface PlanUpdateParams {
    * Whether this plan uses legacy payment method controls.
    */
   legacy_payment_method_controls?: boolean | null;
+
+  /**
+   * Custom key-value pairs to store on the plan. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
 
   /**
    * Whether to offer a retention discount when a customer attempts to cancel.

@@ -816,6 +816,12 @@ export namespace PaymentListResponse {
      * A personal description or notes section for the business.
      */
     internal_notes: string | null;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown };
   }
 
   /**
@@ -826,6 +832,12 @@ export namespace PaymentListResponse {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown };
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in

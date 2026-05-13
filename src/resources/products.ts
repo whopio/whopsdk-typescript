@@ -195,6 +195,13 @@ export interface ProductCreateParams {
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
+   * Custom key-value pairs to store on the product. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
    * Configuration for an automatically generated plan to attach to this product.
    */
   plan_options?: ProductCreateParams.PlanOptions | null;
@@ -369,6 +376,13 @@ export interface ProductUpdateParams {
    * The different statuses of the global affiliate program for a product.
    */
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+  /**
+   * Custom key-value pairs to store on the product. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
 
   /**
    * The unique identifier of the tax classification code to apply to this product.

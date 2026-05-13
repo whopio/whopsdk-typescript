@@ -18,6 +18,8 @@ export class Refunds extends APIResource {
    * Required permissions:
    *
    * - `payment:basic:read`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
    * - `member:email:read`
    * - `member:basic:read`
    * - `member:phone:read`
@@ -201,6 +203,12 @@ export namespace RefundRetrieveResponse {
     membership: Payment.Membership | null;
 
     /**
+     * The custom metadata stored on this payment. This will be copied over to the
+     * checkout configuration for which this payment was made
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
      * The time at which this payment was successfully collected. Null if the payment
      * has not yet succeeded. As a Unix timestamp.
      */
@@ -210,6 +218,16 @@ export namespace RefundRetrieveResponse {
      * The different types of payment methods that can be used.
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+    /**
+     * The plan attached to this payment.
+     */
+    plan: Payment.Plan | null;
+
+    /**
+     * The product this payment was made for
+     */
+    product: Payment.Product | null;
 
     /**
      * The subtotal to show to the creator (excluding buyer fees).
@@ -277,6 +295,38 @@ export namespace RefundRetrieveResponse {
        * The state of the membership.
        */
       status: Shared.MembershipStatus;
+    }
+
+    /**
+     * The plan attached to this payment.
+     */
+    export interface Plan {
+      /**
+       * The unique identifier for the plan.
+       */
+      id: string;
+
+      /**
+       * Custom key-value pairs stored on the plan. Included in webhook payloads for
+       * payment and membership events.
+       */
+      metadata: { [key: string]: unknown };
+    }
+
+    /**
+     * The product this payment was made for
+     */
+    export interface Product {
+      /**
+       * The unique identifier for the product.
+       */
+      id: string;
+
+      /**
+       * Custom key-value pairs stored on the product. Included in webhook payloads for
+       * payment and membership events.
+       */
+      metadata: { [key: string]: unknown };
     }
 
     /**

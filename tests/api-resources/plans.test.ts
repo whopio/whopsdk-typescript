@@ -53,6 +53,7 @@ describe('resource plans', () => {
       initial_price: 6.9,
       internal_notes: 'internal_notes',
       legacy_payment_method_controls: true,
+      metadata: { foo: 'bar' },
       override_tax_type: 'inclusive',
       payment_method_configuration: {
         disabled: ['acss_debit'],
@@ -127,6 +128,7 @@ describe('resource plans', () => {
           initial_price: 6.9,
           internal_notes: 'internal_notes',
           legacy_payment_method_controls: true,
+          metadata: { foo: 'bar' },
           offer_cancel_discount: true,
           override_tax_type: 'inclusive',
           payment_method_configuration: {
