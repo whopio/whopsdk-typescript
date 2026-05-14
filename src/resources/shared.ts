@@ -2049,7 +2049,7 @@ export namespace Membership {
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2065,7 +2065,7 @@ export namespace Membership {
      * Custom key-value pairs stored on the product. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The display name of the product shown to customers on the product page and in
@@ -2882,7 +2882,7 @@ export namespace Payment {
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2898,7 +2898,7 @@ export namespace Payment {
      * Custom key-value pairs stored on the product. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in
@@ -3119,6 +3119,12 @@ export interface Plan {
    * Only visible to authorized team members.
    */
   member_count: number | null;
+
+  /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The explicit payment method configuration specifying which payment methods are
@@ -3411,6 +3417,12 @@ export interface Product {
   member_count: number;
 
   /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The user who owns the company that sells this product.
    */
   owner_user: Product.OwnerUser;
@@ -3571,6 +3583,12 @@ export interface ProductListItem {
    * Returns 0 if the company has disabled public member counts.
    */
   member_count: number;
+
+  /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The total number of published customer reviews for this product's company.

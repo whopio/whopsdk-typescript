@@ -213,6 +213,12 @@ export interface PlanListResponse {
   member_count: number | null;
 
   /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The explicit payment method configuration specifying which payment methods are
    * enabled or disabled for this plan. Null if the plan uses default settings.
    */

@@ -821,7 +821,7 @@ export namespace PaymentListResponse {
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -837,7 +837,7 @@ export namespace PaymentListResponse {
      * Custom key-value pairs stored on the product. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in

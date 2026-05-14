@@ -389,7 +389,7 @@ export namespace MembershipListResponse {
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -405,7 +405,7 @@ export namespace MembershipListResponse {
      * Custom key-value pairs stored on the product. Included in webhook payloads for
      * payment and membership events.
      */
-    metadata: { [key: string]: unknown };
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The display name of the product shown to customers on the product page and in
