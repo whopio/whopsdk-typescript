@@ -75,7 +75,6 @@ export type ResolutionCenterCasePlatformResponse =
   | 'request_buyer_info'
   | 'request_merchant_info'
   | 'merchant_wins'
-  | 'platform_refund'
   | 'merchant_refund';
 
 /**
