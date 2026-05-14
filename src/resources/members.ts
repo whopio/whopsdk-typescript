@@ -68,7 +68,8 @@ export interface MemberRetrieveResponse {
   company: MemberRetrieveResponse.Company;
 
   /**
-   * The member's token balance for this company
+   * The member's token balance for this company. Computed live from the ledger, not
+   * from a cache.
    */
   company_token_balance: number;
 
@@ -184,7 +185,8 @@ export interface MemberListResponse {
   access_level: Shared.AccessLevel;
 
   /**
-   * The member's token balance for this company
+   * The member's token balance for this company. Computed live from the ledger, not
+   * from a cache.
    */
   company_token_balance: number;
 

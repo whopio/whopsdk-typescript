@@ -98,6 +98,13 @@ export namespace AdReportRetrieveResponse {
     id: string;
 
     /**
+     * Per-bucket time series for this entity over the date range, ordered ascending by
+     * `bucketStart`. `null` when the `granularity` arg on `adReport` is omitted;
+     * otherwise contains rows at the requested grain (`daily` or `hourly`).
+     */
+    granularity: Array<Breakdown.Granularity> | null;
+
+    /**
      * The entity level of this row — matches the `breakdown` arg.
      */
     level: 'campaign' | 'ad_group' | 'ad';
@@ -114,6 +121,78 @@ export namespace AdReportRetrieveResponse {
   }
 
   export namespace Breakdown {
+    /**
+     * Per-bucket ad performance for an ad campaign, ad group, or ad. Bucket grain is
+     * set by the `ad_report` query's `granularity` argument.
+     */
+    export interface Granularity {
+      /**
+       * The bucket's start time as a real UTC instant. `(statDate, statHour)` resolved
+       * in the ad account's reporting timezone — render this in the viewer's local
+       * timezone.
+       */
+      bucket_start: string;
+
+      /**
+       * Clicks in this bucket.
+       */
+      clicks: number;
+
+      /**
+       * The bucket size of this row (`daily` or `hourly`).
+       */
+      granularity: AdReportsAPI.Granularities;
+
+      /**
+       * Impressions in this bucket.
+       */
+      impressions: number;
+
+      /**
+       * Unique users reached in this bucket. Always `0` for hourly rows (Meta does not
+       * return reach at hourly grain).
+       */
+      reach: number;
+
+      /**
+       * Count of the primary optimization result in this bucket.
+       */
+      result_count: number | null;
+
+      /**
+       * Types of optimization results tracked from external ad platforms
+       */
+      result_label_key: AdReportsAPI.ResultLabelKeys | null;
+
+      /**
+       * Advertiser-defined label for the result when `resultLabelKey` is `custom`.
+       */
+      result_label_override: string | null;
+
+      /**
+       * Charged spend in this bucket in the requested reporting currency — the amount
+       * billed including platform fees, not the platform-side net spend.
+       */
+      spend: number;
+
+      /**
+       * Currency of the `spend` value.
+       */
+      spend_currency: Shared.Currency;
+
+      /**
+       * The date these stats cover (midnight UTC). For hourly rows, see `statHour` and
+       * `bucketStart`.
+       */
+      stat_date: string;
+
+      /**
+       * Hour of the day in the ad account's reporting timezone (0-23). `null` for daily
+       * rows.
+       */
+      stat_hour: number | null;
+    }
+
     /**
      * Aggregate totals and rates for this entity over the date range.
      */
