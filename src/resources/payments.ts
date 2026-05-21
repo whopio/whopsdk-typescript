@@ -1209,6 +1209,11 @@ export interface PaymentListParams extends CursorPageParams {
   billing_reasons?: Array<BillingReasons> | null;
 
   /**
+   * Only return payments from these checkout configurations.
+   */
+  checkout_configuration_ids?: Array<string> | null;
+
+  /**
    * The unique identifier of the company to list payments for.
    */
   company_id?: string | null;

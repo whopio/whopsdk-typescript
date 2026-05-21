@@ -98,6 +98,7 @@ describe('resource payments', () => {
           after: 'after',
           before: 'before',
           billing_reasons: ['subscription_create'],
+          checkout_configuration_ids: ['string'],
           company_id: 'biz_xxxxxxxxxxxxxx',
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
