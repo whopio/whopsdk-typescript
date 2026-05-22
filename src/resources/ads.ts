@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as AdCampaignsAPI from './ad-campaigns';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -245,6 +246,26 @@ export interface AdListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * Columns that the listAds query can sort by.
+   */
+  order_by?: 'spend' | 'roas' | null;
+
+  /**
+   * The direction of the sort.
+   */
+  order_direction?: Shared.Direction | null;
+
+  /**
+   * Start of the stats date range used when order_by is a stats column.
+   */
+  stats_from?: string | null;
+
+  /**
+   * End of the stats date range used when order_by is a stats column.
+   */
+  stats_to?: string | null;
 
   /**
    * The status of an external ad.
