@@ -9,6 +9,32 @@ const client = new Whop({
 
 describe('resource forumPosts', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.forumPosts.list({ experience_id: 'exp_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.forumPosts.list({
+      experience_id: 'exp_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      include_bounty_anchors: true,
+      last: 42,
+      parent_id: 'parent_id',
+      pinned: true,
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.forumPosts.create({ experience_id: 'exp_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -80,6 +106,8 @@ describe('resource forumPosts', () => {
       ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
+<<<<<<< HEAD
+=======
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
@@ -105,4 +133,5 @@ describe('resource forumPosts', () => {
       pinned: true,
     });
   });
+>>>>>>> f27bf84 (Apply custom code)
 });
