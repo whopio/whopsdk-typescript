@@ -10,20 +10,26 @@ import { path } from '../internal/utils/path';
  */
 export class Files extends APIResource {
   /**
+   * Retrieves the details of an existing file.
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
+    return this._client.get(path`/files/${id}`, options);
+  }
+
+  /**
    * Create a new file record and receive a presigned URL for uploading content to
    * S3.
    */
   create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
     return this._client.post('/files', { body, ...options });
   }
-
-  /**
-   * Retrieves the details of an existing file.
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
-    return this._client.get(path`/files/${id}`, options);
-  }
 }
+
+/**
+ * Controls whether an uploaded file is publicly accessible or requires
+ * authentication to access.
+ */
+export type FileVisibility = 'public' | 'private';
 
 /**
  * The upload status of a file
@@ -81,7 +87,7 @@ export interface FileCreateResponse {
   /**
    * Whether the file is publicly accessible or requires authentication.
    */
-  visibility: 'public' | 'private';
+  visibility: FileVisibility;
 }
 
 /**
@@ -123,7 +129,7 @@ export interface FileRetrieveResponse {
   /**
    * Whether the file is publicly accessible or requires authentication.
    */
-  visibility: 'public' | 'private';
+  visibility: FileVisibility;
 }
 
 export interface FileCreateParams {
@@ -137,11 +143,12 @@ export interface FileCreateParams {
    * Controls whether an uploaded file is publicly accessible or requires
    * authentication to access.
    */
-  visibility?: 'public' | 'private' | null;
+  visibility?: FileVisibility | null;
 }
 
 export declare namespace Files {
   export {
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,

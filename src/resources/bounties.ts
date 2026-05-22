@@ -12,6 +12,26 @@ import { path } from '../internal/utils/path';
  */
 export class Bounties extends APIResource {
   /**
+   * Returns a paginated list of workforce bounties. When experienceId is provided,
+   * returns bounties scoped to that experience. When omitted, returns bounties with
+   * no experience.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const bountyListResponse of client.bounties.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: BountyListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<BountyListResponsesCursorPage, BountyListResponse> {
+    return this._client.getAPIList('/bounties', CursorPage<BountyListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new workforce bounty by funding a dedicated bounty pool.
    *
    * Required permissions:
@@ -44,26 +64,6 @@ export class Bounties extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<BountyRetrieveResponse> {
     return this._client.get(path`/bounties/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of workforce bounties. When experienceId is provided,
-   * returns bounties scoped to that experience. When omitted, returns bounties with
-   * no experience.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const bountyListResponse of client.bounties.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: BountyListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<BountyListResponsesCursorPage, BountyListResponse> {
-    return this._client.getAPIList('/bounties', CursorPage<BountyListResponse>, { query, ...options });
   }
 }
 
@@ -249,6 +249,39 @@ export interface BountyListResponse {
   vote_threshold: number;
 }
 
+export interface BountyListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * The experience to list bounties for. When omitted, returns bounties with no
+   * experience.
+   */
+  experience_id?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The available bounty statuses to choose from.
+   */
+  status?: 'published' | 'archived' | null;
+}
+
 export interface BountyCreateParams {
   /**
    * The amount paid to each approved submission. The total bounty pool funded is
@@ -308,46 +341,13 @@ export interface BountyCreateParams {
   post_title?: string | null;
 }
 
-export interface BountyListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * The experience to list bounties for. When omitted, returns bounties with no
-   * experience.
-   */
-  experience_id?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The available bounty statuses to choose from.
-   */
-  status?: 'published' | 'archived' | null;
-}
-
 export declare namespace Bounties {
   export {
     type BountyCreateResponse as BountyCreateResponse,
     type BountyRetrieveResponse as BountyRetrieveResponse,
     type BountyListResponse as BountyListResponse,
     type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
-    type BountyCreateParams as BountyCreateParams,
     type BountyListParams as BountyListParams,
+    type BountyCreateParams as BountyCreateParams,
   };
 }

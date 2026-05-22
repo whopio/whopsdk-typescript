@@ -14,6 +14,31 @@ import { path } from '../internal/utils/path';
  */
 export class Plans extends APIResource {
   /**
+   * Returns a paginated list of plans belonging to a company, with optional
+   * filtering by visibility, type, release method, and product.
+   *
+   * Required permissions:
+   *
+   * - `plan:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const planListResponse of client.plans.list({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   * })) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: PlanListParams,
+    options?: RequestOptions,
+  ): PagePromise<PlanListResponsesCursorPage, PlanListResponse> {
+    return this._client.getAPIList('/plans', CursorPage<PlanListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new pricing plan for a product. The plan defines the billing interval,
    * price, and availability for customers.
    *
@@ -76,31 +101,6 @@ export class Plans extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.Plan> {
     return this._client.patch(path`/plans/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of plans belonging to a company, with optional
-   * filtering by visibility, type, release method, and product.
-   *
-   * Required permissions:
-   *
-   * - `plan:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const planListResponse of client.plans.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: PlanListParams,
-    options?: RequestOptions,
-  ): PagePromise<PlanListResponsesCursorPage, PlanListResponse> {
-    return this._client.getAPIList('/plans', CursorPage<PlanListResponse>, { query, ...options });
   }
 
   /**
@@ -211,6 +211,12 @@ export interface PlanListResponse {
    * Only visible to authorized team members.
    */
   member_count: number | null;
+
+  /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The explicit payment method configuration specifying which payment methods are
@@ -369,6 +375,68 @@ export namespace PlanListResponse {
  */
 export type PlanDeleteResponse = boolean;
 
+export interface PlanListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list plans for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return plans created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return plans created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The ways a relation of Plans can be ordered
+   */
+  order?: 'id' | 'active_members_count' | 'created_at' | 'internal_notes' | 'expires_at' | null;
+
+  /**
+   * Filter to only plans matching these billing types.
+   */
+  plan_types?: Array<Shared.PlanType> | null;
+
+  /**
+   * Filter to only plans belonging to these product identifiers.
+   */
+  product_ids?: Array<string> | null;
+
+  /**
+   * Filter to only plans matching these release methods.
+   */
+  release_methods?: Array<Shared.ReleaseMethod> | null;
+
+  /**
+   * Filter to only plans matching these visibility states.
+   */
+  visibilities?: Array<Shared.VisibilityFilter> | null;
+}
+
 export interface PlanCreateParams {
   /**
    * The unique identifier of the company to create this plan for.
@@ -439,6 +507,13 @@ export interface PlanCreateParams {
    * Whether this plan uses legacy payment method controls.
    */
   legacy_payment_method_controls?: boolean | null;
+
+  /**
+   * Custom key-value pairs to store on the plan. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
 
   /**
    * Whether or not the tax is included in a plan's price (or if it hasn't been set
@@ -660,6 +735,13 @@ export interface PlanUpdateParams {
   legacy_payment_method_controls?: boolean | null;
 
   /**
+   * Custom key-value pairs to store on the plan. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
    * Whether to offer a retention discount when a customer attempts to cancel.
    */
   offer_cancel_discount?: boolean | null;
@@ -819,68 +901,6 @@ export namespace PlanUpdateParams {
   }
 }
 
-export interface PlanListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list plans for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return plans created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return plans created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The ways a relation of Plans can be ordered
-   */
-  order?: 'id' | 'active_members_count' | 'created_at' | 'internal_notes' | 'expires_at' | null;
-
-  /**
-   * Filter to only plans matching these billing types.
-   */
-  plan_types?: Array<Shared.PlanType> | null;
-
-  /**
-   * Filter to only plans belonging to these product identifiers.
-   */
-  product_ids?: Array<string> | null;
-
-  /**
-   * Filter to only plans matching these release methods.
-   */
-  release_methods?: Array<Shared.ReleaseMethod> | null;
-
-  /**
-   * Filter to only plans matching these visibility states.
-   */
-  visibilities?: Array<Shared.VisibilityFilter> | null;
-}
-
 export declare namespace Plans {
   export {
     type CheckoutFont as CheckoutFont,
@@ -888,8 +908,8 @@ export declare namespace Plans {
     type PlanListResponse as PlanListResponse,
     type PlanDeleteResponse as PlanDeleteResponse,
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
+    type PlanListParams as PlanListParams,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
-    type PlanListParams as PlanListParams,
   };
 }

@@ -14,6 +14,25 @@ import { path } from '../internal/utils/path';
  */
 export class CheckoutConfigurations extends APIResource {
   /**
+   * Returns a paginated list of checkout configurations for a company, with optional
+   * filtering by plan and creation date.
+   *
+   * Required permissions:
+   *
+   * - `checkout_configuration:basic:read`
+   */
+  list(
+    query: CheckoutConfigurationListParams,
+    options?: RequestOptions,
+  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
+    return this._client.getAPIList(
+      '/checkout_configurations',
+      CursorPage<CheckoutConfigurationListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Creates a new checkout configuration
    *
    * Required permissions:
@@ -48,25 +67,6 @@ export class CheckoutConfigurations extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CheckoutConfiguration> {
     return this._client.get(path`/checkout_configurations/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of checkout configurations for a company, with optional
-   * filtering by plan and creation date.
-   *
-   * Required permissions:
-   *
-   * - `checkout_configuration:basic:read`
-   */
-  list(
-    query: CheckoutConfigurationListParams,
-    options?: RequestOptions,
-  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
-    return this._client.getAPIList(
-      '/checkout_configurations',
-      CursorPage<CheckoutConfigurationListResponse>,
-      { query, ...options },
-    );
   }
 }
 
@@ -243,6 +243,49 @@ export namespace CheckoutConfigurationListResponse {
      */
     visibility: Shared.Visibility;
   }
+}
+
+export interface CheckoutConfigurationListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list checkout configurations for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return checkout configurations created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return checkout configurations created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Filter checkout configurations to only those associated with this plan
+   * identifier.
+   */
+  plan_id?: string | null;
 }
 
 export type CheckoutConfigurationCreateParams =
@@ -850,55 +893,12 @@ export declare namespace CheckoutConfigurationCreateParams {
   }
 }
 
-export interface CheckoutConfigurationListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list checkout configurations for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return checkout configurations created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return checkout configurations created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Filter checkout configurations to only those associated with this plan
-   * identifier.
-   */
-  plan_id?: string | null;
-}
-
 export declare namespace CheckoutConfigurations {
   export {
     type CheckoutModes as CheckoutModes,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
-    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
   };
 }

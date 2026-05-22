@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AdCampaignsAPI from './ad-campaigns';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -10,47 +11,6 @@ import { path } from '../internal/utils/path';
  * Ad groups
  */
 export class AdGroups extends APIResource {
-  /**
-   * Retrieves a single ad group by its unique identifier.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:basic:read`
-   *
-   * @example
-   * ```ts
-   * const adGroup = await client.adGroups.retrieve(
-   *   'adgrp_xxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AdGroupRetrieveResponse> {
-    return this._client.get(path`/ad_groups/${id}`, options);
-  }
-
-  /**
-   * Updates an existing ad group.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:update`
-   * - `ad_campaign:basic:read`
-   *
-   * @example
-   * ```ts
-   * const adGroup = await client.adGroups.update(
-   *   'adgrp_xxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  update(
-    id: string,
-    body: AdGroupUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<AdGroupUpdateResponse> {
-    return this._client.patch(path`/ad_groups/${id}`, { body, ...options });
-  }
-
   /**
    * Returns a paginated list of ad groups scoped by campaign or company, with
    * optional filtering by status and creation date.
@@ -75,6 +35,47 @@ export class AdGroups extends APIResource {
   }
 
   /**
+   * Retrieves a single ad group by its unique identifier.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:basic:read`
+   *
+   * @example
+   * ```ts
+   * const adGroup = await client.adGroups.retrieve(
+   *   'adgrp_xxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<AdGroup> {
+    return this._client.get(path`/ad_groups/${id}`, options);
+  }
+
+  /**
+   * Updates an existing ad group.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:update`
+   * - `ad_campaign:basic:read`
+   *
+   * @example
+   * ```ts
+   * const adGroup = await client.adGroups.update(
+   *   'adgrp_xxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  update(
+    id: string,
+    body: AdGroupUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdGroup> {
+    return this._client.patch(path`/ad_groups/${id}`, { body, ...options });
+  }
+
+  /**
    * Soft-deletes an ad group.
    *
    * Required permissions:
@@ -91,14 +92,57 @@ export class AdGroups extends APIResource {
   delete(id: string, options?: RequestOptions): APIPromise<AdGroupDeleteResponse> {
     return this._client.delete(path`/ad_groups/${id}`, options);
   }
+
+  /**
+   * Pauses an ad group.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:update`
+   * - `ad_campaign:basic:read`
+   *
+   * @example
+   * ```ts
+   * const adGroup = await client.adGroups.pause(
+   *   'adgrp_xxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  pause(id: string, options?: RequestOptions): APIPromise<AdGroup> {
+    return this._client.post(path`/ad_groups/${id}/pause`, options);
+  }
+
+  /**
+   * Resumes a paused ad group.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:update`
+   * - `ad_campaign:basic:read`
+   *
+   * @example
+   * ```ts
+   * const adGroup = await client.adGroups.unpause(
+   *   'adgrp_xxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  unpause(id: string, options?: RequestOptions): APIPromise<AdGroup> {
+    return this._client.post(path`/ad_groups/${id}/unpause`, options);
+  }
 }
 
 export type AdGroupListResponsesCursorPage = CursorPage<AdGroupListResponse>;
 
 /**
+ * The budget type for an ad campaign or ad group.
+ */
+export type AdBudgetType = 'daily' | 'lifetime';
+
+/**
  * An ad group (ad set) belonging to an ad campaign.
  */
-export interface AdGroupRetrieveResponse {
+export interface AdGroup {
   /**
    * The unique identifier for this ad group.
    */
@@ -107,7 +151,7 @@ export interface AdGroupRetrieveResponse {
   /**
    * The ad campaign this ad group belongs to.
    */
-  ad_campaign: AdGroupRetrieveResponse.AdCampaign;
+  ad_campaign: AdGroup.AdCampaign;
 
   /**
    * Budget amount in dollars.
@@ -117,7 +161,7 @@ export interface AdGroupRetrieveResponse {
   /**
    * The budget type for an ad campaign or ad group.
    */
-  budget_type: 'daily' | 'lifetime' | null;
+  budget_type: AdBudgetType | null;
 
   /**
    * When the ad group was created.
@@ -127,12 +171,12 @@ export interface AdGroupRetrieveResponse {
   /**
    * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignsAPI.AdCampaignPlatform;
 
   /**
    * Current operational status of the ad group.
    */
-  status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+  status: AdGroupStatus;
 
   /**
    * Human-readable name shown on the external platform.
@@ -145,7 +189,7 @@ export interface AdGroupRetrieveResponse {
   updated_at: string;
 }
 
-export namespace AdGroupRetrieveResponse {
+export namespace AdGroup {
   /**
    * The ad campaign this ad group belongs to.
    */
@@ -158,66 +202,9 @@ export namespace AdGroupRetrieveResponse {
 }
 
 /**
- * An ad group (ad set) belonging to an ad campaign.
+ * The status of an external ad group.
  */
-export interface AdGroupUpdateResponse {
-  /**
-   * The unique identifier for this ad group.
-   */
-  id: string;
-
-  /**
-   * The ad campaign this ad group belongs to.
-   */
-  ad_campaign: AdGroupUpdateResponse.AdCampaign;
-
-  /**
-   * Budget amount in dollars.
-   */
-  budget: number | null;
-
-  /**
-   * The budget type for an ad campaign or ad group.
-   */
-  budget_type: 'daily' | 'lifetime' | null;
-
-  /**
-   * When the ad group was created.
-   */
-  created_at: string;
-
-  /**
-   * The external ad platform this ad group is running on (e.g., meta, tiktok).
-   */
-  platform: 'meta' | 'tiktok';
-
-  /**
-   * Current operational status of the ad group.
-   */
-  status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
-
-  /**
-   * Human-readable name shown on the external platform.
-   */
-  title: string | null;
-
-  /**
-   * When the ad group was last updated.
-   */
-  updated_at: string;
-}
-
-export namespace AdGroupUpdateResponse {
-  /**
-   * The ad campaign this ad group belongs to.
-   */
-  export interface AdCampaign {
-    /**
-     * The unique identifier for this ad campaign.
-     */
-    id: string;
-  }
-}
+export type AdGroupStatus = 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
 
 /**
  * An ad group (ad set) belonging to an ad campaign.
@@ -229,6 +216,11 @@ export interface AdGroupListResponse {
   id: string;
 
   /**
+   * The ad campaign this ad group belongs to.
+   */
+  ad_campaign: AdGroupListResponse.AdCampaign;
+
+  /**
    * Budget amount in dollars.
    */
   budget: number | null;
@@ -236,7 +228,7 @@ export interface AdGroupListResponse {
   /**
    * The budget type for an ad campaign or ad group.
    */
-  budget_type: 'daily' | 'lifetime' | null;
+  budget_type: AdBudgetType | null;
 
   /**
    * When the ad group was created.
@@ -246,12 +238,12 @@ export interface AdGroupListResponse {
   /**
    * The external ad platform this ad group is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignsAPI.AdCampaignPlatform;
 
   /**
    * Current operational status of the ad group.
    */
-  status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+  status: AdGroupStatus;
 
   /**
    * Human-readable name shown on the external platform.
@@ -264,10 +256,69 @@ export interface AdGroupListResponse {
   updated_at: string;
 }
 
+export namespace AdGroupListResponse {
+  /**
+   * The ad campaign this ad group belongs to.
+   */
+  export interface AdCampaign {
+    /**
+     * The unique identifier for this ad campaign.
+     */
+    id: string;
+  }
+}
+
 /**
  * Represents `true` or `false` values.
  */
 export type AdGroupDeleteResponse = boolean;
+
+export interface AdGroupListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Filter by campaign. Provide exactly one of campaign_id or company_id.
+   */
+  campaign_id?: string | null;
+
+  /**
+   * Filter by company. Provide exactly one of campaign_id or company_id.
+   */
+  company_id?: string | null;
+
+  /**
+   * Only return ad groups created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return ad groups created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Case-insensitive substring match against the ad group name.
+   */
+  query?: string | null;
+
+  /**
+   * The status of an external ad group.
+   */
+  status?: AdGroupStatus | null;
+}
 
 export interface AdGroupUpdateParams {
   /**
@@ -278,7 +329,7 @@ export interface AdGroupUpdateParams {
   /**
    * The budget type for an ad campaign or ad group.
    */
-  budget_type?: 'daily' | 'lifetime' | null;
+  budget_type?: AdBudgetType | null;
 
   /**
    * Unified ad group configuration (bidding, optimization, targeting).
@@ -303,7 +354,7 @@ export interface AdGroupUpdateParams {
   /**
    * The status of an external ad group.
    */
-  status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged' | null;
+  status?: AdGroupStatus | null;
 }
 
 export namespace AdGroupUpdateParams {
@@ -1885,61 +1936,15 @@ export namespace AdGroupUpdateParams {
   }
 }
 
-export interface AdGroupListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Filter by campaign. Provide exactly one of campaign_id or company_id.
-   */
-  campaign_id?: string | null;
-
-  /**
-   * Filter by company. Provide exactly one of campaign_id or company_id.
-   */
-  company_id?: string | null;
-
-  /**
-   * Only return ad groups created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return ad groups created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Case-insensitive substring match against the ad group name.
-   */
-  query?: string | null;
-
-  /**
-   * The status of an external ad group.
-   */
-  status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged' | null;
-}
-
 export declare namespace AdGroups {
   export {
-    type AdGroupRetrieveResponse as AdGroupRetrieveResponse,
-    type AdGroupUpdateResponse as AdGroupUpdateResponse,
+    type AdBudgetType as AdBudgetType,
+    type AdGroup as AdGroup,
+    type AdGroupStatus as AdGroupStatus,
     type AdGroupListResponse as AdGroupListResponse,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
-    type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupUpdateParams as AdGroupUpdateParams,
   };
 }

@@ -12,43 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class SupportChannels extends APIResource {
   /**
-   * Open a new support channel between a company team member and a customer. Returns
-   * the existing channel if one already exists for that user.
-   *
-   * Required permissions:
-   *
-   * - `support_chat:create`
-   *
-   * @example
-   * ```ts
-   * const supportChannel = await client.supportChannels.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   user_id: 'user_xxxxxxxxxxxxx',
-   * });
-   * ```
-   */
-  create(body: SupportChannelCreateParams, options?: RequestOptions): APIPromise<Shared.SupportChannel> {
-    return this._client.post('/support_channels', { body, ...options });
-  }
-
-  /**
-   * Retrieves the details of an existing support channel.
-   *
-   * Required permissions:
-   *
-   * - `support_chat:read`
-   *
-   * @example
-   * ```ts
-   * const supportChannel =
-   *   await client.supportChannels.retrieve('id');
-   * ```
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.SupportChannel> {
-    return this._client.get(path`/support_channels/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of support channels for a specific company, with
    * optional filtering by resolution status and custom sorting.
    *
@@ -72,6 +35,43 @@ export class SupportChannels extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing support channel.
+   *
+   * Required permissions:
+   *
+   * - `support_chat:read`
+   *
+   * @example
+   * ```ts
+   * const supportChannel =
+   *   await client.supportChannels.retrieve('id');
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.SupportChannel> {
+    return this._client.get(path`/support_channels/${id}`, options);
+  }
+
+  /**
+   * Open a new support channel between a company team member and a customer. Returns
+   * the existing channel if one already exists for that user.
+   *
+   * Required permissions:
+   *
+   * - `support_chat:create`
+   *
+   * @example
+   * ```ts
+   * const supportChannel = await client.supportChannels.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   user_id: 'user_xxxxxxxxxxxxx',
+   * });
+   * ```
+   */
+  create(body: SupportChannelCreateParams, options?: RequestOptions): APIPromise<Shared.SupportChannel> {
+    return this._client.post('/support_channels', { body, ...options });
   }
 }
 
@@ -141,24 +141,6 @@ export namespace SupportChannelListResponse {
   }
 }
 
-export interface SupportChannelCreateParams {
-  /**
-   * The unique identifier of the company to create the support channel in.
-   */
-  company_id: string;
-
-  /**
-   * The user ID (e.g. 'user_xxxxx') or username of the customer to open a support
-   * channel for.
-   */
-  user_id: string;
-
-  /**
-   * Optional custom display name for the support channel.
-   */
-  custom_name?: string | null;
-}
-
 export interface SupportChannelListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -204,11 +186,29 @@ export interface SupportChannelListParams extends CursorPageParams {
   view?: 'all' | 'admin' | 'customer' | null;
 }
 
+export interface SupportChannelCreateParams {
+  /**
+   * The unique identifier of the company to create the support channel in.
+   */
+  company_id: string;
+
+  /**
+   * The user ID (e.g. 'user_xxxxx') or username of the customer to open a support
+   * channel for.
+   */
+  user_id: string;
+
+  /**
+   * Optional custom display name for the support channel.
+   */
+  custom_name?: string | null;
+}
+
 export declare namespace SupportChannels {
   export {
     type SupportChannelListResponse as SupportChannelListResponse,
     type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
-    type SupportChannelCreateParams as SupportChannelCreateParams,
     type SupportChannelListParams as SupportChannelListParams,
+    type SupportChannelCreateParams as SupportChannelCreateParams,
   };
 }

@@ -70,10 +70,10 @@ Types:
 
 Methods:
 
+- <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponsesCursorPage</code>
 - <code title="post /apps">client.apps.<a href="./src/resources/apps.ts">create</a>({ ...params }) -> App</code>
 - <code title="get /apps/{id}">client.apps.<a href="./src/resources/apps.ts">retrieve</a>(id) -> App</code>
 - <code title="patch /apps/{id}">client.apps.<a href="./src/resources/apps.ts">update</a>(id, { ...params }) -> App</code>
-- <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponsesCursorPage</code>
 
 # Invoices
 
@@ -87,21 +87,21 @@ Types:
 
 Methods:
 
+- <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
 - <code title="post /invoices">client.invoices.<a href="./src/resources/invoices.ts">create</a>({ ...params }) -> Invoice</code>
 - <code title="get /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">retrieve</a>(id) -> Invoice</code>
-- <code title="patch /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">update</a>(id, { ...params }) -> Invoice</code>
-- <code title="get /invoices">client.invoices.<a href="./src/resources/invoices.ts">list</a>({ ...params }) -> InvoiceListItemsCursorPage</code>
-- <code title="delete /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">delete</a>(id) -> InvoiceDeleteResponse</code>
+- <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>
 - <code title="post /invoices/{id}/mark_paid">client.invoices.<a href="./src/resources/invoices.ts">markPaid</a>(id) -> InvoiceMarkPaidResponse</code>
 - <code title="post /invoices/{id}/mark_uncollectible">client.invoices.<a href="./src/resources/invoices.ts">markUncollectible</a>(id) -> InvoiceMarkUncollectibleResponse</code>
-- <code title="post /invoices/{id}/void">client.invoices.<a href="./src/resources/invoices.ts">void</a>(id) -> InvoiceVoidResponse</code>
+- <code title="patch /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">update</a>(id, { ...params }) -> Invoice</code>
+- <code title="delete /invoices/{id}">client.invoices.<a href="./src/resources/invoices.ts">delete</a>(id) -> InvoiceDeleteResponse</code>
 
 # CourseLessonInteractions
 
 Methods:
 
-- <code title="get /course_lesson_interactions/{id}">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">retrieve</a>(id) -> CourseLessonInteraction</code>
 - <code title="get /course_lesson_interactions">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">list</a>({ ...params }) -> CourseLessonInteractionListItemsCursorPage</code>
+- <code title="get /course_lesson_interactions/{id}">client.courseLessonInteractions.<a href="./src/resources/course-lesson-interactions.ts">retrieve</a>(id) -> CourseLessonInteraction</code>
 
 # Products
 
@@ -111,10 +111,10 @@ Types:
 
 Methods:
 
-- <code title="post /products">client.products.<a href="./src/resources/products.ts">create</a>({ ...params }) -> Product</code>
-- <code title="get /products/{id}">client.products.<a href="./src/resources/products.ts">retrieve</a>(id) -> Product</code>
-- <code title="patch /products/{id}">client.products.<a href="./src/resources/products.ts">update</a>(id, { ...params }) -> Product</code>
 - <code title="get /products">client.products.<a href="./src/resources/products.ts">list</a>({ ...params }) -> ProductListItemsCursorPage</code>
+- <code title="get /products/{id}">client.products.<a href="./src/resources/products.ts">retrieve</a>(id) -> Product</code>
+- <code title="post /products">client.products.<a href="./src/resources/products.ts">create</a>({ ...params }) -> Product</code>
+- <code title="patch /products/{id}">client.products.<a href="./src/resources/products.ts">update</a>(id, { ...params }) -> Product</code>
 - <code title="delete /products/{id}">client.products.<a href="./src/resources/products.ts">delete</a>(id) -> ProductDeleteResponse</code>
 
 # Companies
@@ -127,10 +127,10 @@ Types:
 
 Methods:
 
-- <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
 - <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
-- <code title="patch /companies/{id}">client.companies.<a href="./src/resources/companies.ts">update</a>(id, { ...params }) -> Company</code>
 - <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
+- <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
+- <code title="patch /companies/{id}">client.companies.<a href="./src/resources/companies.ts">update</a>(id, { ...params }) -> Company</code>
 - <code title="post /companies/{parent_company_id}/api_keys">client.companies.<a href="./src/resources/companies.ts">createAPIKey</a>(parentCompanyID, { ...params }) -> CompanyCreateAPIKeyResponse</code>
 
 # Webhooks
@@ -180,10 +180,10 @@ Types:
 
 Methods:
 
+- <code title="get /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>({ ...params }) -> WebhookListResponsesCursorPage</code>
 - <code title="post /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">create</a>({ ...params }) -> WebhookCreateResponse</code>
 - <code title="get /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">retrieve</a>(id) -> Webhook</code>
 - <code title="patch /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">update</a>(id, { ...params }) -> Webhook</code>
-- <code title="get /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>({ ...params }) -> WebhookListResponsesCursorPage</code>
 - <code title="delete /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(id) -> WebhookDeleteResponse</code>
 - <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>
 
@@ -198,10 +198,10 @@ Types:
 
 Methods:
 
+- <code title="get /plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> PlanListResponsesCursorPage</code>
 - <code title="post /plans">client.plans.<a href="./src/resources/plans.ts">create</a>({ ...params }) -> Plan</code>
 - <code title="get /plans/{id}">client.plans.<a href="./src/resources/plans.ts">retrieve</a>(id) -> Plan</code>
 - <code title="patch /plans/{id}">client.plans.<a href="./src/resources/plans.ts">update</a>(id, { ...params }) -> Plan</code>
-- <code title="get /plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> PlanListResponsesCursorPage</code>
 - <code title="delete /plans/{id}">client.plans.<a href="./src/resources/plans.ts">delete</a>(id) -> PlanDeleteResponse</code>
 
 # Entries
@@ -213,8 +213,8 @@ Types:
 
 Methods:
 
-- <code title="get /entries/{id}">client.entries.<a href="./src/resources/entries.ts">retrieve</a>(id) -> Entry</code>
 - <code title="get /entries">client.entries.<a href="./src/resources/entries.ts">list</a>({ ...params }) -> EntryListResponsesCursorPage</code>
+- <code title="get /entries/{id}">client.entries.<a href="./src/resources/entries.ts">retrieve</a>(id) -> Entry</code>
 - <code title="post /entries/{id}/approve">client.entries.<a href="./src/resources/entries.ts">approve</a>(id) -> EntryApproveResponse</code>
 - <code title="post /entries/{id}/deny">client.entries.<a href="./src/resources/entries.ts">deny</a>(id) -> Entry</code>
 
@@ -227,10 +227,10 @@ Types:
 
 Methods:
 
+- <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>
 - <code title="post /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">create</a>({ ...params }) -> ForumPost</code>
 - <code title="get /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">retrieve</a>(id) -> ForumPost</code>
 - <code title="patch /forum_posts/{id}">client.forumPosts.<a href="./src/resources/forum-posts.ts">update</a>(id, { ...params }) -> ForumPost</code>
-- <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>
 
 # Transfers
 
@@ -240,9 +240,9 @@ Types:
 
 Methods:
 
+- <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
 - <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> Transfer</code>
 - <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id) -> Transfer</code>
-- <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
 
 # LedgerAccounts
 
@@ -263,14 +263,14 @@ Types:
 
 Methods:
 
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
 - <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
-- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
-- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
 - <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> Membership</code>
+- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
 
 # AuthorizedUsers
 
@@ -282,9 +282,9 @@ Types:
 
 Methods:
 
-- <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUser</code>
-- <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUser</code>
 - <code title="get /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">list</a>({ ...params }) -> AuthorizedUserListResponsesCursorPage</code>
+- <code title="get /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">retrieve</a>(id) -> AuthorizedUser</code>
+- <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUser</code>
 - <code title="delete /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">delete</a>(id, { ...params }) -> AuthorizedUserDeleteResponse</code>
 
 # AppBuilds
@@ -295,9 +295,9 @@ Types:
 
 Methods:
 
+- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
 - <code title="post /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">create</a>({ ...params }) -> AppBuild</code>
 - <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id) -> AppBuild</code>
-- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
 - <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id) -> AppBuild</code>
 
 # Shipments
@@ -308,9 +308,9 @@ Types:
 
 Methods:
 
+- <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentListResponsesCursorPage</code>
 - <code title="post /shipments">client.shipments.<a href="./src/resources/shipments.ts">create</a>({ ...params }) -> Shipment</code>
 - <code title="get /shipments/{id}">client.shipments.<a href="./src/resources/shipments.ts">retrieve</a>(id) -> Shipment</code>
-- <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentListResponsesCursorPage</code>
 
 # CheckoutConfigurations
 
@@ -321,9 +321,9 @@ Types:
 
 Methods:
 
+- <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>
 - <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfiguration</code>
 - <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id) -> CheckoutConfiguration</code>
-- <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>
 
 # Messages
 
@@ -334,10 +334,10 @@ Types:
 
 Methods:
 
-- <code title="post /messages">client.messages.<a href="./src/resources/messages.ts">create</a>({ ...params }) -> Message</code>
-- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
-- <code title="patch /messages/{id}">client.messages.<a href="./src/resources/messages.ts">update</a>(id, { ...params }) -> Message</code>
 - <code title="get /messages">client.messages.<a href="./src/resources/messages.ts">list</a>({ ...params }) -> MessageListResponsesCursorPage</code>
+- <code title="get /messages/{id}">client.messages.<a href="./src/resources/messages.ts">retrieve</a>(id) -> Message</code>
+- <code title="post /messages">client.messages.<a href="./src/resources/messages.ts">create</a>({ ...params }) -> Message</code>
+- <code title="patch /messages/{id}">client.messages.<a href="./src/resources/messages.ts">update</a>(id, { ...params }) -> Message</code>
 - <code title="delete /messages/{id}">client.messages.<a href="./src/resources/messages.ts">delete</a>(id) -> MessageDeleteResponse</code>
 
 # ChatChannels
@@ -348,9 +348,9 @@ Types:
 
 Methods:
 
+- <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>
 - <code title="get /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">retrieve</a>(id) -> ChatChannel</code>
 - <code title="patch /chat_channels/{id}">client.chatChannels.<a href="./src/resources/chat-channels.ts">update</a>(id, { ...params }) -> ChatChannel</code>
-- <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>
 
 # Users
 
@@ -363,9 +363,9 @@ Types:
 Methods:
 
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id, { ...params }) -> User</code>
+- <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 - <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
 - <code title="get /users">client.users.<a href="./src/resources/users.ts">list</a>({ ...params }) -> UserListResponsesCursorPage</code>
-- <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 
 # Payments
 
@@ -380,13 +380,13 @@ Types:
 
 Methods:
 
-- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
-- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
-- <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponsesCursorPage</code>
+- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
 - <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
 - <code title="post /payments/{id}/void">client.payments.<a href="./src/resources/payments.ts">void</a>(id) -> Payment</code>
+- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
+- <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponsesCursorPage</code>
 
 # SupportChannels
 
@@ -396,9 +396,9 @@ Types:
 
 Methods:
 
-- <code title="post /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">create</a>({ ...params }) -> SupportChannel</code>
-- <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannel</code>
 - <code title="get /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">list</a>({ ...params }) -> SupportChannelListResponsesCursorPage</code>
+- <code title="get /support_channels/{id}">client.supportChannels.<a href="./src/resources/support-channels.ts">retrieve</a>(id) -> SupportChannel</code>
+- <code title="post /support_channels">client.supportChannels.<a href="./src/resources/support-channels.ts">create</a>({ ...params }) -> SupportChannel</code>
 
 # Experiences
 
@@ -409,10 +409,10 @@ Types:
 
 Methods:
 
+- <code title="get /experiences">client.experiences.<a href="./src/resources/experiences.ts">list</a>({ ...params }) -> ExperienceListResponsesCursorPage</code>
 - <code title="post /experiences">client.experiences.<a href="./src/resources/experiences.ts">create</a>({ ...params }) -> Experience</code>
 - <code title="get /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">retrieve</a>(id) -> Experience</code>
 - <code title="patch /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">update</a>(id, { ...params }) -> Experience</code>
-- <code title="get /experiences">client.experiences.<a href="./src/resources/experiences.ts">list</a>({ ...params }) -> ExperienceListResponsesCursorPage</code>
 - <code title="delete /experiences/{id}">client.experiences.<a href="./src/resources/experiences.ts">delete</a>(id) -> ExperienceDeleteResponse</code>
 - <code title="post /experiences/{id}/attach">client.experiences.<a href="./src/resources/experiences.ts">attach</a>(id, { ...params }) -> Experience</code>
 - <code title="post /experiences/{id}/detach">client.experiences.<a href="./src/resources/experiences.ts">detach</a>(id, { ...params }) -> Experience</code>
@@ -427,9 +427,9 @@ Types:
 
 Methods:
 
+- <code title="get /reactions">client.reactions.<a href="./src/resources/reactions.ts">list</a>({ ...params }) -> ReactionListResponsesCursorPage</code>
 - <code title="post /reactions">client.reactions.<a href="./src/resources/reactions.ts">create</a>({ ...params }) -> Reaction</code>
 - <code title="get /reactions/{id}">client.reactions.<a href="./src/resources/reactions.ts">retrieve</a>(id) -> Reaction</code>
-- <code title="get /reactions">client.reactions.<a href="./src/resources/reactions.ts">list</a>({ ...params }) -> ReactionListResponsesCursorPage</code>
 - <code title="delete /reactions/{id}">client.reactions.<a href="./src/resources/reactions.ts">delete</a>(id, { ...params }) -> ReactionDeleteResponse</code>
 
 # Members
@@ -441,8 +441,8 @@ Types:
 
 Methods:
 
-- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> MemberRetrieveResponse</code>
 - <code title="get /members">client.members.<a href="./src/resources/members.ts">list</a>({ ...params }) -> MemberListResponsesCursorPage</code>
+- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> MemberRetrieveResponse</code>
 
 # Forums
 
@@ -452,9 +452,9 @@ Types:
 
 Methods:
 
+- <code title="get /forums">client.forums.<a href="./src/resources/forums.ts">list</a>({ ...params }) -> ForumListResponsesCursorPage</code>
 - <code title="get /forums/{id}">client.forums.<a href="./src/resources/forums.ts">retrieve</a>(id) -> Forum</code>
 - <code title="patch /forums/{id}">client.forums.<a href="./src/resources/forums.ts">update</a>(id, { ...params }) -> Forum</code>
-- <code title="get /forums">client.forums.<a href="./src/resources/forums.ts">list</a>({ ...params }) -> ForumListResponsesCursorPage</code>
 
 # PromoCodes
 
@@ -468,9 +468,9 @@ Types:
 
 Methods:
 
+- <code title="get /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">list</a>({ ...params }) -> PromoCodeListResponsesCursorPage</code>
 - <code title="post /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">create</a>({ ...params }) -> PromoCode</code>
 - <code title="get /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">retrieve</a>(id) -> PromoCode</code>
-- <code title="get /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">list</a>({ ...params }) -> PromoCodeListResponsesCursorPage</code>
 - <code title="delete /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">delete</a>(id) -> PromoCodeDeleteResponse</code>
 
 # Courses
@@ -485,10 +485,10 @@ Types:
 
 Methods:
 
+- <code title="get /courses">client.courses.<a href="./src/resources/courses.ts">list</a>({ ...params }) -> CourseListResponsesCursorPage</code>
 - <code title="post /courses">client.courses.<a href="./src/resources/courses.ts">create</a>({ ...params }) -> Course</code>
 - <code title="get /courses/{id}">client.courses.<a href="./src/resources/courses.ts">retrieve</a>(id) -> Course</code>
 - <code title="patch /courses/{id}">client.courses.<a href="./src/resources/courses.ts">update</a>(id, { ...params }) -> Course</code>
-- <code title="get /courses">client.courses.<a href="./src/resources/courses.ts">list</a>({ ...params }) -> CourseListResponsesCursorPage</code>
 - <code title="delete /courses/{id}">client.courses.<a href="./src/resources/courses.ts">delete</a>(id) -> CourseDeleteResponse</code>
 
 # CourseChapters
@@ -501,10 +501,10 @@ Types:
 
 Methods:
 
+- <code title="get /course_chapters">client.courseChapters.<a href="./src/resources/course-chapters.ts">list</a>({ ...params }) -> CourseChapterListResponsesCursorPage</code>
 - <code title="post /course_chapters">client.courseChapters.<a href="./src/resources/course-chapters.ts">create</a>({ ...params }) -> CourseChapter</code>
 - <code title="get /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">retrieve</a>(id) -> CourseChapter</code>
 - <code title="patch /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">update</a>(id, { ...params }) -> CourseChapter</code>
-- <code title="get /course_chapters">client.courseChapters.<a href="./src/resources/course-chapters.ts">list</a>({ ...params }) -> CourseChapterListResponsesCursorPage</code>
 - <code title="delete /course_chapters/{id}">client.courseChapters.<a href="./src/resources/course-chapters.ts">delete</a>(id) -> CourseChapterDeleteResponse</code>
 
 # CourseLessons
@@ -524,10 +524,10 @@ Types:
 
 Methods:
 
+- <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
 - <code title="post /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">create</a>({ ...params }) -> Lesson</code>
 - <code title="get /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">retrieve</a>(id) -> Lesson</code>
 - <code title="patch /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">update</a>(id, { ...params }) -> Lesson</code>
-- <code title="get /course_lessons">client.courseLessons.<a href="./src/resources/course-lessons.ts">list</a>({ ...params }) -> CourseLessonListResponsesCursorPage</code>
 - <code title="delete /course_lessons/{id}">client.courseLessons.<a href="./src/resources/course-lessons.ts">delete</a>(id) -> CourseLessonDeleteResponse</code>
 - <code title="post /course_lessons/{lesson_id}/mark_as_completed">client.courseLessons.<a href="./src/resources/course-lessons.ts">markAsCompleted</a>(lessonID) -> CourseLessonMarkAsCompletedResponse</code>
 - <code title="post /course_lessons/{lesson_id}/start">client.courseLessons.<a href="./src/resources/course-lessons.ts">start</a>(lessonID) -> CourseLessonStartResponse</code>
@@ -543,8 +543,8 @@ Types:
 
 Methods:
 
-- <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
 - <code title="get /reviews">client.reviews.<a href="./src/resources/reviews.ts">list</a>({ ...params }) -> ReviewListResponsesCursorPage</code>
+- <code title="get /reviews/{id}">client.reviews.<a href="./src/resources/reviews.ts">retrieve</a>(id) -> ReviewRetrieveResponse</code>
 
 # CourseStudents
 
@@ -555,8 +555,8 @@ Types:
 
 Methods:
 
-- <code title="get /course_students/{id}">client.courseStudents.<a href="./src/resources/course-students.ts">retrieve</a>(id) -> CourseStudentRetrieveResponse</code>
 - <code title="get /course_students">client.courseStudents.<a href="./src/resources/course-students.ts">list</a>({ ...params }) -> CourseStudentListResponsesCursorPage</code>
+- <code title="get /course_students/{id}">client.courseStudents.<a href="./src/resources/course-students.ts">retrieve</a>(id) -> CourseStudentRetrieveResponse</code>
 
 # AccessTokens
 
@@ -588,8 +588,8 @@ Types:
 
 Methods:
 
-- <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id) -> Dispute</code>
 - <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputeListResponsesCursorPage</code>
+- <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id) -> Dispute</code>
 - <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
 - <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>
 
@@ -606,8 +606,8 @@ Types:
 
 Methods:
 
-- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
 - <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>
+- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
 
 # Withdrawals
 
@@ -621,9 +621,9 @@ Types:
 
 Methods:
 
-- <code title="post /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">create</a>({ ...params }) -> Withdrawal</code>
-- <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> Withdrawal</code>
 - <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>
+- <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> Withdrawal</code>
+- <code title="post /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">create</a>({ ...params }) -> Withdrawal</code>
 
 # AccountLinks
 
@@ -645,8 +645,8 @@ Types:
 
 Methods:
 
-- <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id) -> SetupIntent</code>
 - <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentListResponsesCursorPage</code>
+- <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id) -> SetupIntent</code>
 
 # PaymentMethods
 
@@ -657,8 +657,8 @@ Types:
 
 Methods:
 
-- <code title="get /payment_methods/{id}">client.paymentMethods.<a href="./src/resources/payment-methods.ts">retrieve</a>(id, { ...params }) -> PaymentMethodRetrieveResponse</code>
 - <code title="get /payment_methods">client.paymentMethods.<a href="./src/resources/payment-methods.ts">list</a>({ ...params }) -> PaymentMethodListResponsesCursorPage</code>
+- <code title="get /payment_methods/{id}">client.paymentMethods.<a href="./src/resources/payment-methods.ts">retrieve</a>(id, { ...params }) -> PaymentMethodRetrieveResponse</code>
 
 # FeeMarkups
 
@@ -671,8 +671,8 @@ Types:
 
 Methods:
 
-- <code title="post /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">create</a>({ ...params }) -> FeeMarkupCreateResponse</code>
 - <code title="get /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">list</a>({ ...params }) -> FeeMarkupListResponsesCursorPage</code>
+- <code title="post /fee_markups">client.feeMarkups.<a href="./src/resources/fee-markups.ts">create</a>({ ...params }) -> FeeMarkupCreateResponse</code>
 - <code title="delete /fee_markups/{id}">client.feeMarkups.<a href="./src/resources/fee-markups.ts">delete</a>(id) -> FeeMarkupDeleteResponse</code>
 
 # PayoutMethods
@@ -685,8 +685,8 @@ Types:
 
 Methods:
 
-- <code title="get /payout_methods/{id}">client.payoutMethods.<a href="./src/resources/payout-methods.ts">retrieve</a>(id) -> PayoutMethodRetrieveResponse</code>
 - <code title="get /payout_methods">client.payoutMethods.<a href="./src/resources/payout-methods.ts">list</a>({ ...params }) -> PayoutMethodListResponsesCursorPage</code>
+- <code title="get /payout_methods/{id}">client.payoutMethods.<a href="./src/resources/payout-methods.ts">retrieve</a>(id) -> PayoutMethodRetrieveResponse</code>
 
 # Verifications
 
@@ -711,10 +711,10 @@ Types:
 
 Methods:
 
+- <code title="get /leads">client.leads.<a href="./src/resources/leads.ts">list</a>({ ...params }) -> LeadListResponsesCursorPage</code>
 - <code title="post /leads">client.leads.<a href="./src/resources/leads.ts">create</a>({ ...params }) -> Lead</code>
 - <code title="get /leads/{id}">client.leads.<a href="./src/resources/leads.ts">retrieve</a>(id) -> Lead</code>
 - <code title="patch /leads/{id}">client.leads.<a href="./src/resources/leads.ts">update</a>(id, { ...params }) -> Lead</code>
-- <code title="get /leads">client.leads.<a href="./src/resources/leads.ts">list</a>({ ...params }) -> LeadListResponsesCursorPage</code>
 
 # Topups
 
@@ -730,14 +730,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/files.ts">FileVisibility</a></code>
 - <code><a href="./src/resources/files.ts">UploadStatus</a></code>
 - <code><a href="./src/resources/files.ts">FileCreateResponse</a></code>
 - <code><a href="./src/resources/files.ts">FileRetrieveResponse</a></code>
 
 Methods:
 
-- <code title="post /files">client.files.<a href="./src/resources/files.ts">create</a>({ ...params }) -> FileCreateResponse</code>
 - <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id) -> FileRetrieveResponse</code>
+- <code title="post /files">client.files.<a href="./src/resources/files.ts">create</a>({ ...params }) -> FileCreateResponse</code>
 
 # CompanyTokenTransactions
 
@@ -749,9 +750,9 @@ Types:
 
 Methods:
 
+- <code title="get /company_token_transactions">client.companyTokenTransactions.<a href="./src/resources/company-token-transactions.ts">list</a>({ ...params }) -> CompanyTokenTransactionListResponsesCursorPage</code>
 - <code title="post /company_token_transactions">client.companyTokenTransactions.<a href="./src/resources/company-token-transactions.ts">create</a>({ ...params }) -> CompanyTokenTransaction</code>
 - <code title="get /company_token_transactions/{id}">client.companyTokenTransactions.<a href="./src/resources/company-token-transactions.ts">retrieve</a>(id) -> CompanyTokenTransaction</code>
-- <code title="get /company_token_transactions">client.companyTokenTransactions.<a href="./src/resources/company-token-transactions.ts">list</a>({ ...params }) -> CompanyTokenTransactionListResponsesCursorPage</code>
 
 # DmMembers
 
@@ -765,10 +766,10 @@ Types:
 
 Methods:
 
+- <code title="get /dm_members">client.dmMembers.<a href="./src/resources/dm-members.ts">list</a>({ ...params }) -> DmMemberListResponsesCursorPage</code>
 - <code title="post /dm_members">client.dmMembers.<a href="./src/resources/dm-members.ts">create</a>({ ...params }) -> DmMember</code>
 - <code title="get /dm_members/{id}">client.dmMembers.<a href="./src/resources/dm-members.ts">retrieve</a>(id) -> DmMember</code>
 - <code title="patch /dm_members/{id}">client.dmMembers.<a href="./src/resources/dm-members.ts">update</a>(id, { ...params }) -> DmMember</code>
-- <code title="get /dm_members">client.dmMembers.<a href="./src/resources/dm-members.ts">list</a>({ ...params }) -> DmMemberListResponsesCursorPage</code>
 - <code title="delete /dm_members/{id}">client.dmMembers.<a href="./src/resources/dm-members.ts">delete</a>(id) -> DmMemberDeleteResponse</code>
 
 # AIChats
@@ -782,10 +783,10 @@ Types:
 
 Methods:
 
+- <code title="get /ai_chats">client.aiChats.<a href="./src/resources/ai-chats.ts">list</a>({ ...params }) -> AIChatListResponsesCursorPage</code>
 - <code title="post /ai_chats">client.aiChats.<a href="./src/resources/ai-chats.ts">create</a>({ ...params }) -> AIChat</code>
 - <code title="get /ai_chats/{id}">client.aiChats.<a href="./src/resources/ai-chats.ts">retrieve</a>(id) -> AIChat</code>
 - <code title="patch /ai_chats/{id}">client.aiChats.<a href="./src/resources/ai-chats.ts">update</a>(id, { ...params }) -> AIChat</code>
-- <code title="get /ai_chats">client.aiChats.<a href="./src/resources/ai-chats.ts">list</a>({ ...params }) -> AIChatListResponsesCursorPage</code>
 - <code title="delete /ai_chats/{id}">client.aiChats.<a href="./src/resources/ai-chats.ts">delete</a>(id) -> AIChatDeleteResponse</code>
 
 # DmChannels
@@ -798,10 +799,10 @@ Types:
 
 Methods:
 
+- <code title="get /dm_channels">client.dmChannels.<a href="./src/resources/dm-channels.ts">list</a>({ ...params }) -> DmChannelListResponsesCursorPage</code>
 - <code title="post /dm_channels">client.dmChannels.<a href="./src/resources/dm-channels.ts">create</a>({ ...params }) -> DmChannel</code>
 - <code title="get /dm_channels/{id}">client.dmChannels.<a href="./src/resources/dm-channels.ts">retrieve</a>(id) -> DmChannel</code>
 - <code title="patch /dm_channels/{id}">client.dmChannels.<a href="./src/resources/dm-channels.ts">update</a>(id, { ...params }) -> DmChannel</code>
-- <code title="get /dm_channels">client.dmChannels.<a href="./src/resources/dm-channels.ts">list</a>({ ...params }) -> DmChannelListResponsesCursorPage</code>
 - <code title="delete /dm_channels/{id}">client.dmChannels.<a href="./src/resources/dm-channels.ts">delete</a>(id) -> DmChannelDeleteResponse</code>
 
 # DisputeAlerts
@@ -814,8 +815,8 @@ Types:
 
 Methods:
 
-- <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id) -> DisputeAlertRetrieveResponse</code>
 - <code title="get /dispute_alerts">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">list</a>({ ...params }) -> DisputeAlertListResponsesCursorPage</code>
+- <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id) -> DisputeAlertRetrieveResponse</code>
 
 # ResolutionCenterCases
 
@@ -831,8 +832,8 @@ Types:
 
 Methods:
 
-- <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id) -> ResolutionCenterCaseRetrieveResponse</code>
 - <code title="get /resolution_center_cases">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">list</a>({ ...params }) -> ResolutionCenterCaseListResponsesCursorPage</code>
+- <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id) -> ResolutionCenterCaseRetrieveResponse</code>
 
 # PayoutAccounts
 
@@ -857,9 +858,9 @@ Types:
 
 Methods:
 
+- <code title="get /affiliates">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">list</a>({ ...params }) -> AffiliateListResponsesCursorPage</code>
 - <code title="post /affiliates">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">create</a>({ ...params }) -> Affiliate</code>
 - <code title="get /affiliates/{id}">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">retrieve</a>(id) -> Affiliate</code>
-- <code title="get /affiliates">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">list</a>({ ...params }) -> AffiliateListResponsesCursorPage</code>
 - <code title="post /affiliates/{id}/archive">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">archive</a>(id) -> AffiliateArchiveResponse</code>
 - <code title="post /affiliates/{id}/unarchive">client.affiliates.<a href="./src/resources/affiliates/affiliates.ts">unarchive</a>(id) -> AffiliateUnarchiveResponse</code>
 
@@ -880,10 +881,10 @@ Types:
 
 Methods:
 
+- <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
 - <code title="post /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">create</a>(id, { ...params }) -> OverrideCreateResponse</code>
 - <code title="get /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">retrieve</a>(overrideID, { ...params }) -> OverrideRetrieveResponse</code>
 - <code title="patch /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">update</a>(overrideID, { ...params }) -> OverrideUpdateResponse</code>
-- <code title="get /affiliates/{id}/overrides">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">list</a>(id, { ...params }) -> OverrideListResponsesCursorPage</code>
 - <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>
 
 # Bounties
@@ -896,55 +897,60 @@ Types:
 
 Methods:
 
+- <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
 - <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> BountyCreateResponse</code>
 - <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> BountyRetrieveResponse</code>
-- <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
 
 # AdCampaigns
 
 Types:
 
-- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignRetrieveResponse</a></code>
-- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignUpdateResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaign</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignPlatform</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignStatus</a></code>
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaignListResponse</a></code>
-- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignPauseResponse</a></code>
-- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignUnpauseResponse</a></code>
 
 Methods:
 
-- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id) -> AdCampaignRetrieveResponse</code>
-- <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaignUpdateResponse</code>
 - <code title="get /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">list</a>({ ...params }) -> AdCampaignListResponsesCursorPage</code>
-- <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id) -> AdCampaignPauseResponse</code>
-- <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id) -> AdCampaignUnpauseResponse</code>
+- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id) -> AdCampaign</code>
+- <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaign</code>
+- <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id) -> AdCampaign</code>
+- <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id) -> AdCampaign</code>
 
 # AdGroups
 
 Types:
 
-- <code><a href="./src/resources/ad-groups.ts">AdGroupRetrieveResponse</a></code>
-- <code><a href="./src/resources/ad-groups.ts">AdGroupUpdateResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdBudgetType</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroup</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupStatus</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupListResponse</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id) -> AdGroupRetrieveResponse</code>
-- <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroupUpdateResponse</code>
 - <code title="get /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">list</a>({ ...params }) -> AdGroupListResponsesCursorPage</code>
+- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id) -> AdGroup</code>
+- <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroup</code>
 - <code title="delete /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">delete</a>(id) -> AdGroupDeleteResponse</code>
+- <code title="post /ad_groups/{id}/pause">client.adGroups.<a href="./src/resources/ad-groups.ts">pause</a>(id) -> AdGroup</code>
+- <code title="post /ad_groups/{id}/unpause">client.adGroups.<a href="./src/resources/ad-groups.ts">unpause</a>(id) -> AdGroup</code>
 
 # Ads
 
 Types:
 
-- <code><a href="./src/resources/ads.ts">AdRetrieveResponse</a></code>
+- <code><a href="./src/resources/ads.ts">Ad</a></code>
+- <code><a href="./src/resources/ads.ts">ExternalAdStatus</a></code>
 - <code><a href="./src/resources/ads.ts">AdListResponse</a></code>
 
 Methods:
 
-- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id) -> AdRetrieveResponse</code>
 - <code title="get /ads">client.ads.<a href="./src/resources/ads.ts">list</a>({ ...params }) -> AdListResponsesCursorPage</code>
+- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id) -> Ad</code>
+- <code title="post /ads/{id}/pause">client.ads.<a href="./src/resources/ads.ts">pause</a>(id) -> Ad</code>
+- <code title="post /ads/{id}/unpause">client.ads.<a href="./src/resources/ads.ts">unpause</a>(id) -> Ad</code>
 
 # Conversions
 
@@ -960,6 +966,8 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/ad-reports.ts">Granularities</a></code>
+- <code><a href="./src/resources/ad-reports.ts">ResultLabelKeys</a></code>
 - <code><a href="./src/resources/ad-reports.ts">AdReportRetrieveResponse</a></code>
 
 Methods:

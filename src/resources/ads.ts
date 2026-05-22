@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AdCampaignsAPI from './ad-campaigns';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -10,17 +11,6 @@ import { path } from '../internal/utils/path';
  * Ads
  */
 export class Ads extends APIResource {
-  /**
-   * Retrieve an ad by its unique identifier.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:basic:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AdRetrieveResponse> {
-    return this._client.get(path`/ads/${id}`, options);
-  }
-
   /**
    * List ads scoped by ad group, campaign, or company.
    *
@@ -34,6 +24,41 @@ export class Ads extends APIResource {
   ): PagePromise<AdListResponsesCursorPage, AdListResponse> {
     return this._client.getAPIList('/ads', CursorPage<AdListResponse>, { query, ...options });
   }
+
+  /**
+   * Retrieve an ad by its unique identifier.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:basic:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Ad> {
+    return this._client.get(path`/ads/${id}`, options);
+  }
+
+  /**
+   * Pauses an ad.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:update`
+   * - `ad_campaign:basic:read`
+   */
+  pause(id: string, options?: RequestOptions): APIPromise<Ad> {
+    return this._client.post(path`/ads/${id}/pause`, options);
+  }
+
+  /**
+   * Resumes a paused ad.
+   *
+   * Required permissions:
+   *
+   * - `ad_campaign:update`
+   * - `ad_campaign:basic:read`
+   */
+  unpause(id: string, options?: RequestOptions): APIPromise<Ad> {
+    return this._client.post(path`/ads/${id}/unpause`, options);
+  }
 }
 
 export type AdListResponsesCursorPage = CursorPage<AdListResponse>;
@@ -41,7 +66,7 @@ export type AdListResponsesCursorPage = CursorPage<AdListResponse>;
 /**
  * An ad belonging to an ad group.
  */
-export interface AdRetrieveResponse {
+export interface Ad {
   /**
    * The unique identifier for this ad.
    */
@@ -50,12 +75,12 @@ export interface AdRetrieveResponse {
   /**
    * The ad campaign this ad belongs to.
    */
-  ad_campaign: AdRetrieveResponse.AdCampaign;
+  ad_campaign: Ad.AdCampaign;
 
   /**
    * The parent ad group this ad belongs to.
    */
-  ad_group: AdRetrieveResponse.AdGroup;
+  ad_group: Ad.AdGroup;
 
   /**
    * When the ad was created.
@@ -65,12 +90,12 @@ export interface AdRetrieveResponse {
   /**
    * The external ad platform this ad is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignsAPI.AdCampaignPlatform;
 
   /**
    * Current delivery status of the ad.
    */
-  status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+  status: ExternalAdStatus;
 
   /**
    * The display title of the ad. Falls back to the creative set caption when unset.
@@ -83,7 +108,7 @@ export interface AdRetrieveResponse {
   updated_at: string;
 }
 
-export namespace AdRetrieveResponse {
+export namespace Ad {
   /**
    * The ad campaign this ad belongs to.
    */
@@ -106,6 +131,11 @@ export namespace AdRetrieveResponse {
 }
 
 /**
+ * The status of an external ad.
+ */
+export type ExternalAdStatus = 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+
+/**
  * An ad belonging to an ad group.
  */
 export interface AdListResponse {
@@ -115,6 +145,16 @@ export interface AdListResponse {
   id: string;
 
   /**
+   * The ad campaign this ad belongs to.
+   */
+  ad_campaign: AdListResponse.AdCampaign;
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  ad_group: AdListResponse.AdGroup;
+
+  /**
    * When the ad was created.
    */
   created_at: string;
@@ -122,12 +162,12 @@ export interface AdListResponse {
   /**
    * The external ad platform this ad is running on (e.g., meta, tiktok).
    */
-  platform: 'meta' | 'tiktok';
+  platform: AdCampaignsAPI.AdCampaignPlatform;
 
   /**
    * Current delivery status of the ad.
    */
-  status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';
+  status: ExternalAdStatus;
 
   /**
    * The display title of the ad. Falls back to the creative set caption when unset.
@@ -138,6 +178,28 @@ export interface AdListResponse {
    * When the ad was last updated.
    */
   updated_at: string;
+}
+
+export namespace AdListResponse {
+  /**
+   * The ad campaign this ad belongs to.
+   */
+  export interface AdCampaign {
+    /**
+     * The unique identifier for this ad campaign.
+     */
+    id: string;
+  }
+
+  /**
+   * The parent ad group this ad belongs to.
+   */
+  export interface AdGroup {
+    /**
+     * The unique identifier for this ad group.
+     */
+    id: string;
+  }
 }
 
 export interface AdListParams extends CursorPageParams {
@@ -187,12 +249,13 @@ export interface AdListParams extends CursorPageParams {
   /**
    * The status of an external ad.
    */
-  status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged' | null;
+  status?: ExternalAdStatus | null;
 }
 
 export declare namespace Ads {
   export {
-    type AdRetrieveResponse as AdRetrieveResponse,
+    type Ad as Ad,
+    type ExternalAdStatus as ExternalAdStatus,
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,

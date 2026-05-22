@@ -2044,6 +2044,12 @@ export namespace Membership {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2054,6 +2060,12 @@ export namespace Membership {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The display name of the product shown to customers on the product page and in
@@ -2371,9 +2383,9 @@ export interface Payment {
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  currency: Currency | null;
+  currency: Currency;
 
   /**
    * When an alert came in that this transaction will be disputed
@@ -2497,21 +2509,18 @@ export interface Payment {
   retryable: boolean;
 
   /**
-   * The payment amount in the creator's settlement currency (what the creator priced
-   * in). Equal to final_amount for single-currency payments.
+   * The total amount charged to the customer for this payment, including taxes and
+   * after any discounts. In the currency specified by the currency field.
    */
   settlement_amount: number;
 
   /**
-   * The currency in which the creator receives payouts and fees are charged (e.g.,
-   * 'usd', 'eur'). For multi-currency payments this differs from the payment
-   * currency.
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  settlement_currency: string;
+  settlement_currency: Currency;
 
   /**
-   * The locked exchange rate used to convert from the buyer's payment currency to
-   * the creator's settlement currency. Null for single-currency payments.
+   * Deprecated. Always returns null.
    */
   settlement_exchange_rate: number | null;
 
@@ -2690,8 +2699,7 @@ export namespace Payment {
     currency: Shared.Currency;
 
     /**
-     * Whether the dispute evidence can still be edited and submitted. Returns true
-     * only when the dispute status requires a response.
+     * Whether the dispute evidence can still be edited and submitted.
      */
     editable: boolean | null;
 
@@ -2869,6 +2877,12 @@ export namespace Payment {
      * A personal description or notes section for the business.
      */
     internal_notes: string | null;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2879,6 +2893,12 @@ export namespace Payment {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in
@@ -3099,6 +3119,12 @@ export interface Plan {
    * Only visible to authorized team members.
    */
   member_count: number | null;
+
+  /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The explicit payment method configuration specifying which payment methods are
@@ -3391,6 +3417,12 @@ export interface Product {
   member_count: number;
 
   /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The user who owns the company that sells this product.
    */
   owner_user: Product.OwnerUser;
@@ -3551,6 +3583,12 @@ export interface ProductListItem {
    * Returns 0 if the company has disabled public member counts.
    */
   member_count: number;
+
+  /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The total number of published customer reviews for this product's company.

@@ -22,6 +22,44 @@ import { path } from '../internal/utils/path';
  * Webhooks
  */
 export class Webhooks extends APIResource {
+  unwrap(
+    body: string,
+    { headers, key }: { headers: Record<string, string>; key?: string },
+  ): UnwrapWebhookEvent {
+    if (headers !== undefined) {
+      const keyStr: string | null = key === undefined ? this._client.webhookKey : key;
+      if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
+      const wh = new Webhook_(keyStr);
+      wh.verify(body, headers);
+    }
+    return JSON.parse(body) as UnwrapWebhookEvent;
+  }
+
+  /**
+   * Returns a paginated list of webhook endpoints configured for a company, ordered
+   * by most recently created.
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_webhook`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const webhookListResponse of client.webhooks.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: WebhookListParams,
+    options?: RequestOptions,
+  ): PagePromise<WebhookListResponsesCursorPage, WebhookListResponse> {
+    return this._client.getAPIList('/webhooks', CursorPage<WebhookListResponse>, { query, ...options });
+  }
+
   /**
    * Creates a new webhook
    *
@@ -81,31 +119,6 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Returns a paginated list of webhook endpoints configured for a company, ordered
-   * by most recently created.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const webhookListResponse of client.webhooks.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: WebhookListParams,
-    options?: RequestOptions,
-  ): PagePromise<WebhookListResponsesCursorPage, WebhookListResponse> {
-    return this._client.getAPIList('/webhooks', CursorPage<WebhookListResponse>, { query, ...options });
-  }
-
-  /**
    * Deletes a webhook
    *
    * Required permissions:
@@ -121,19 +134,6 @@ export class Webhooks extends APIResource {
    */
   delete(id: string, options?: RequestOptions): APIPromise<WebhookDeleteResponse> {
     return this._client.delete(path`/webhooks/${id}`, options);
-  }
-
-  unwrap(
-    body: string,
-    { headers, key }: { headers: Record<string, string>; key?: string },
-  ): UnwrapWebhookEvent {
-    if (headers !== undefined) {
-      const keyStr: string | null = key === undefined ? this._client.webhookKey : key;
-      if (keyStr === null) throw new Error('Webhook key must not be null in order to unwrap');
-      const wh = new Webhook_(keyStr);
-      wh.verify(body, headers);
-    }
-    return JSON.parse(body) as UnwrapWebhookEvent;
   }
 }
 
@@ -2364,9 +2364,9 @@ export namespace RefundCreatedWebhookEvent {
       created_at: string;
 
       /**
-       * The available currencies on the platform
+       * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
        */
-      currency: Shared.Currency | null;
+      currency: Shared.Currency;
 
       /**
        * When an alert came in that this transaction will be disputed
@@ -2384,6 +2384,12 @@ export namespace RefundCreatedWebhookEvent {
       membership: Payment.Membership | null;
 
       /**
+       * The custom metadata stored on this payment. This will be copied over to the
+       * checkout configuration for which this payment was made
+       */
+      metadata: { [key: string]: unknown } | null;
+
+      /**
        * The time at which this payment was successfully collected. Null if the payment
        * has not yet succeeded. As a Unix timestamp.
        */
@@ -2393,6 +2399,16 @@ export namespace RefundCreatedWebhookEvent {
        * The different types of payment methods that can be used.
        */
       payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+      /**
+       * The plan attached to this payment.
+       */
+      plan: Payment.Plan | null;
+
+      /**
+       * The product this payment was made for
+       */
+      product: Payment.Product | null;
 
       /**
        * The subtotal to show to the creator (excluding buyer fees).
@@ -2460,6 +2476,38 @@ export namespace RefundCreatedWebhookEvent {
          * The state of the membership.
          */
         status: Shared.MembershipStatus;
+      }
+
+      /**
+       * The plan attached to this payment.
+       */
+      export interface Plan {
+        /**
+         * The unique identifier for the plan.
+         */
+        id: string;
+
+        /**
+         * Custom key-value pairs stored on the plan. Included in webhook payloads for
+         * payment and membership events.
+         */
+        metadata: { [key: string]: unknown } | null;
+      }
+
+      /**
+       * The product this payment was made for
+       */
+      export interface Product {
+        /**
+         * The unique identifier for the product.
+         */
+        id: string;
+
+        /**
+         * Custom key-value pairs stored on the product. Included in webhook payloads for
+         * payment and membership events.
+         */
+        metadata: { [key: string]: unknown } | null;
       }
 
       /**
@@ -2624,9 +2672,9 @@ export namespace RefundUpdatedWebhookEvent {
       created_at: string;
 
       /**
-       * The available currencies on the platform
+       * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
        */
-      currency: Shared.Currency | null;
+      currency: Shared.Currency;
 
       /**
        * When an alert came in that this transaction will be disputed
@@ -2644,6 +2692,12 @@ export namespace RefundUpdatedWebhookEvent {
       membership: Payment.Membership | null;
 
       /**
+       * The custom metadata stored on this payment. This will be copied over to the
+       * checkout configuration for which this payment was made
+       */
+      metadata: { [key: string]: unknown } | null;
+
+      /**
        * The time at which this payment was successfully collected. Null if the payment
        * has not yet succeeded. As a Unix timestamp.
        */
@@ -2653,6 +2707,16 @@ export namespace RefundUpdatedWebhookEvent {
        * The different types of payment methods that can be used.
        */
       payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+      /**
+       * The plan attached to this payment.
+       */
+      plan: Payment.Plan | null;
+
+      /**
+       * The product this payment was made for
+       */
+      product: Payment.Product | null;
 
       /**
        * The subtotal to show to the creator (excluding buyer fees).
@@ -2720,6 +2784,38 @@ export namespace RefundUpdatedWebhookEvent {
          * The state of the membership.
          */
         status: Shared.MembershipStatus;
+      }
+
+      /**
+       * The plan attached to this payment.
+       */
+      export interface Plan {
+        /**
+         * The unique identifier for the plan.
+         */
+        id: string;
+
+        /**
+         * Custom key-value pairs stored on the plan. Included in webhook payloads for
+         * payment and membership events.
+         */
+        metadata: { [key: string]: unknown } | null;
+      }
+
+      /**
+       * The product this payment was made for
+       */
+      export interface Product {
+        /**
+         * The unique identifier for the product.
+         */
+        id: string;
+
+        /**
+         * Custom key-value pairs stored on the product. Included in webhook payloads for
+         * payment and membership events.
+         */
+        metadata: { [key: string]: unknown } | null;
       }
 
       /**
@@ -2904,9 +3000,9 @@ export namespace DisputeAlertCreatedWebhookEvent {
       created_at: string;
 
       /**
-       * The available currencies on the platform
+       * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
        */
-      currency: Shared.Currency | null;
+      currency: Shared.Currency;
 
       /**
        * When an alert came in that this transaction will be disputed
@@ -3083,6 +3179,28 @@ export type UnwrapWebhookEvent =
   | DisputeAlertCreatedWebhookEvent
   | MembershipCancelAtPeriodEndChangedWebhookEvent;
 
+export interface WebhookListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list webhooks for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface WebhookCreateParams {
   /**
    * The URL to send the webhook to.
@@ -3144,28 +3262,6 @@ export interface WebhookUpdateParams {
   url?: string | null;
 }
 
-export interface WebhookListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list webhooks for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace Webhooks {
   export {
     type APIVersion as APIVersion,
@@ -3209,8 +3305,8 @@ export declare namespace Webhooks {
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
-    type WebhookListParams as WebhookListParams,
   };
 }
