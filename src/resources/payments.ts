@@ -13,68 +13,6 @@ import { path } from '../internal/utils/path';
  */
 export class Payments extends APIResource {
   /**
-   * Charge an existing member off-session using one of their stored payment methods.
-   * You can provide an existing plan, or create a new one in-line. This endpoint
-   * will respond with a payment object immediately, but the payment is processed
-   * asynchronously in the background. Use webhooks to be notified when the payment
-   * succeeds or fails.
-   *
-   * Required permissions:
-   *
-   * - `payment:charge`
-   * - `plan:create`
-   * - `access_pass:create`
-   * - `access_pass:update`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
-   *
-   * @example
-   * ```ts
-   * const payment = await client.payments.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   member_id: 'mber_xxxxxxxxxxxxx',
-   *   payment_method_id: 'pmt_xxxxxxxxxxxxxx',
-   *   plan: { currency: 'usd' },
-   * });
-   * ```
-   */
-  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<Shared.Payment> {
-    return this._client.post('/payments', { body, ...options });
-  }
-
-  /**
-   * Retrieves the details of an existing payment.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
-   *
-   * @example
-   * ```ts
-   * const payment = await client.payments.retrieve(
-   *   'pay_xxxxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
-    return this._client.get(path`/payments/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of payments for the actor in context, with optional
    * filtering by product, plan, status, billing reason, currency, and creation date.
    *
@@ -104,32 +42,29 @@ export class Payments extends APIResource {
   }
 
   /**
-   * Returns the list of fees associated with a specific payment, including platform
-   * fees and processing fees.
+   * Retrieves the details of an existing payment.
    *
    * Required permissions:
    *
    * - `payment:basic:read`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `member:phone:read`
+   * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
    *
    * @example
    * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const paymentListFeesResponse of client.payments.listFees(
+   * const payment = await client.payments.retrieve(
    *   'pay_xxxxxxxxxxxxxx',
-   * )) {
-   *   // ...
-   * }
+   * );
    * ```
    */
-  listFees(
-    id: string,
-    query: PaymentListFeesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
-    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, {
-      query,
-      ...options,
-    });
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
+    return this._client.get(path`/payments/${id}`, options);
   }
 
   /**
@@ -215,6 +150,71 @@ export class Payments extends APIResource {
    */
   void(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
     return this._client.post(path`/payments/${id}/void`, options);
+  }
+
+  /**
+   * Charge an existing member off-session using one of their stored payment methods.
+   * You can provide an existing plan, or create a new one in-line. This endpoint
+   * will respond with a payment object immediately, but the payment is processed
+   * asynchronously in the background. Use webhooks to be notified when the payment
+   * succeeds or fails.
+   *
+   * Required permissions:
+   *
+   * - `payment:charge`
+   * - `plan:create`
+   * - `access_pass:create`
+   * - `access_pass:update`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `member:phone:read`
+   * - `promo_code:basic:read`
+   * - `payment:dispute:read`
+   * - `payment:resolution_center_case:read`
+   *
+   * @example
+   * ```ts
+   * const payment = await client.payments.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   member_id: 'mber_xxxxxxxxxxxxx',
+   *   payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+   *   plan: { currency: 'usd' },
+   * });
+   * ```
+   */
+  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<Shared.Payment> {
+    return this._client.post('/payments', { body, ...options });
+  }
+
+  /**
+   * Returns the list of fees associated with a specific payment, including platform
+   * fees and processing fees.
+   *
+   * Required permissions:
+   *
+   * - `payment:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const paymentListFeesResponse of client.payments.listFees(
+   *   'pay_xxxxxxxxxxxxxx',
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listFees(
+    id: string,
+    query: PaymentListFeesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
+    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -454,9 +454,9 @@ export interface PaymentListResponse {
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  currency: Shared.Currency | null;
+  currency: Shared.Currency;
 
   /**
    * When an alert came in that this transaction will be disputed
@@ -555,6 +555,14 @@ export interface PaymentListResponse {
   retryable: boolean;
 
   /**
+<<<<<<< HEAD
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+   */
+  settlement_currency: Shared.Currency;
+
+  /**
+=======
+>>>>>>> f27bf84 (Apply custom code)
    * The status of a receipt
    */
   status: Shared.ReceiptStatus | null;
@@ -800,6 +808,12 @@ export namespace PaymentListResponse {
      * A personal description or notes section for the business.
      */
     internal_notes: string | null;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -810,6 +824,12 @@ export namespace PaymentListResponse {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in
@@ -942,6 +962,114 @@ export interface PaymentListFeesResponse {
     | 'billing_percentage_fee'
     | 'revshare_percentage_fee'
     | 'application_fee';
+}
+
+export interface PaymentListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Filter payments by their billing reason.
+   */
+  billing_reasons?: Array<BillingReasons> | null;
+
+  /**
+   * Only return payments from these checkout configurations.
+   */
+  checkout_configuration_ids?: Array<string> | null;
+
+  /**
+   * The unique identifier of the company to list payments for.
+   */
+  company_id?: string | null;
+
+  /**
+   * Only return payments created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return payments created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Filter payments by their currency code.
+   */
+  currencies?: Array<Shared.Currency> | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Whether to include payments with a zero amount.
+   */
+  include_free?: boolean | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The order to sort the results by.
+   */
+  order?: 'final_amount' | 'created_at' | 'paid_at' | null;
+
+  /**
+   * Filter payments to only those associated with these specific plan identifiers.
+   */
+  plan_ids?: Array<string> | null;
+
+  /**
+   * Filter payments to only those associated with these specific product
+   * identifiers.
+   */
+  product_ids?: Array<string> | null;
+
+  /**
+   * Search payments by user ID, membership ID, user email, name, or username. Email
+   * filtering requires the member:email:read permission.
+   */
+  query?: string | null;
+
+  /**
+   * Filter payments by their current status.
+   */
+  statuses?: Array<Shared.ReceiptStatus> | null;
+
+  /**
+   * Filter payments by their current substatus for more granular filtering.
+   */
+  substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
+
+  /**
+   * Only return payments last updated after this timestamp.
+   */
+  updated_after?: string | null;
+
+  /**
+   * Only return payments last updated before this timestamp.
+   */
+  updated_before?: string | null;
+}
+
+export interface PaymentRefundParams {
+  /**
+   * The amount to refund. For multi-currency payments, this is in the charge
+   * currency (what the buyer paid). For single-currency, this is in the payment
+   * currency. If omitted, the full payment amount is refunded.
+   */
+  partial_amount?: number | null;
 }
 
 export type PaymentCreateParams =
@@ -1169,100 +1297,6 @@ export declare namespace PaymentCreateParams {
   }
 }
 
-export interface PaymentListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Filter payments by their billing reason.
-   */
-  billing_reasons?: Array<BillingReasons> | null;
-
-  /**
-   * The unique identifier of the company to list payments for.
-   */
-  company_id?: string | null;
-
-  /**
-   * Only return payments created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return payments created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Filter payments by their currency code.
-   */
-  currencies?: Array<Shared.Currency> | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Whether to include payments with a zero amount.
-   */
-  include_free?: boolean | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The order to sort the results by.
-   */
-  order?: 'final_amount' | 'created_at' | 'paid_at' | null;
-
-  /**
-   * Filter payments to only those associated with these specific plan identifiers.
-   */
-  plan_ids?: Array<string> | null;
-
-  /**
-   * Filter payments to only those associated with these specific product
-   * identifiers.
-   */
-  product_ids?: Array<string> | null;
-
-  /**
-   * Search payments by user ID, membership ID, user email, name, or username. Email
-   * filtering requires the member:email:read permission.
-   */
-  query?: string | null;
-
-  /**
-   * Filter payments by their current status.
-   */
-  statuses?: Array<Shared.ReceiptStatus> | null;
-
-  /**
-   * Filter payments by their current substatus for more granular filtering.
-   */
-  substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
-
-  /**
-   * Only return payments last updated after this timestamp.
-   */
-  updated_after?: string | null;
-
-  /**
-   * Only return payments last updated before this timestamp.
-   */
-  updated_before?: string | null;
-}
-
 export interface PaymentListFeesParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -1280,6 +1314,8 @@ export interface PaymentListFeesParams extends CursorPageParams {
   last?: number | null;
 }
 
+<<<<<<< HEAD
+=======
 export interface PaymentRefundParams {
   /**
    * The amount to refund in the payment currency. If omitted, the full payment
@@ -1288,6 +1324,7 @@ export interface PaymentRefundParams {
   partial_amount?: number | null;
 }
 
+>>>>>>> f27bf84 (Apply custom code)
 export declare namespace Payments {
   export {
     type BillingReasons as BillingReasons,
@@ -1298,9 +1335,9 @@ export declare namespace Payments {
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
     type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
-    type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
-    type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
+    type PaymentCreateParams as PaymentCreateParams,
+    type PaymentListFeesParams as PaymentListFeesParams,
   };
 }

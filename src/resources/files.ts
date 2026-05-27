@@ -12,12 +12,21 @@ import { uploadFile } from '../lib/upload-file';
  */
 export class Files extends APIResource {
   /**
+   * Retrieves the details of an existing file.
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
+    return this._client.get(path`/files/${id}`, options);
+  }
+
+  /**
    * Create a new file record and receive a presigned URL for uploading content to
    * S3.
    */
   create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
     return this._client.post('/files', { body, ...options });
   }
+<<<<<<< HEAD
+=======
 
   /**
    * Retrieves the details of an existing file.
@@ -38,7 +47,14 @@ export class Files extends APIResource {
       requestOptions,
     });
   }
+>>>>>>> f27bf84 (Apply custom code)
 }
+
+/**
+ * Controls whether an uploaded file is publicly accessible or requires
+ * authentication to access.
+ */
+export type FileVisibility = 'public' | 'private';
 
 /**
  * The upload status of a file
@@ -90,6 +106,14 @@ export interface FileCreateResponse {
    * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
+<<<<<<< HEAD
+
+  /**
+   * Whether the file is publicly accessible or requires authentication.
+   */
+  visibility: FileVisibility;
+=======
+>>>>>>> f27bf84 (Apply custom code)
 }
 
 /**
@@ -125,6 +149,14 @@ export interface FileRetrieveResponse {
    * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
+<<<<<<< HEAD
+
+  /**
+   * Whether the file is publicly accessible or requires authentication.
+   */
+  visibility: FileVisibility;
+=======
+>>>>>>> f27bf84 (Apply custom code)
 }
 
 export interface FileCreateParams {
@@ -139,11 +171,16 @@ export interface FileUploadOptions extends RequestOptions {
   /**
    * Override the filename used when creating the file.
    */
+<<<<<<< HEAD
+  visibility?: FileVisibility | null;
+=======
   filename?: string | null | undefined;
+>>>>>>> f27bf84 (Apply custom code)
 }
 
 export declare namespace Files {
   export {
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,

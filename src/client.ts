@@ -22,6 +22,45 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+<<<<<<< HEAD
+  AdCampaign,
+  AdCampaignListParams,
+  AdCampaignListResponse,
+  AdCampaignListResponsesCursorPage,
+  AdCampaignPlatform,
+  AdCampaignStatus,
+  AdCampaignUpdateParams,
+  AdCampaigns,
+} from './resources/ad-campaigns';
+import {
+  AdBudgetType,
+  AdGroup,
+  AdGroupDeleteResponse,
+  AdGroupListParams,
+  AdGroupListResponse,
+  AdGroupListResponsesCursorPage,
+  AdGroupStatus,
+  AdGroupUpdateParams,
+  AdGroups,
+} from './resources/ad-groups';
+import {
+  AdReportRetrieveParams,
+  AdReportRetrieveResponse,
+  AdReports,
+  Granularities,
+  ResultLabelKeys,
+} from './resources/ad-reports';
+import {
+  Ad,
+  AdListParams,
+  AdListResponse,
+  AdListResponsesCursorPage,
+  Ads,
+  ExternalAdStatus,
+} from './resources/ads';
+import {
+=======
+>>>>>>> f27bf84 (Apply custom code)
   AIChat,
   AIChatCreateParams,
   AIChatDeleteResponse,
@@ -214,6 +253,7 @@ import {
   FileCreateParams,
   FileCreateResponse,
   FileRetrieveResponse,
+  FileVisibility,
   Files,
   UploadStatus,
 } from './resources/files';
@@ -1558,9 +1598,9 @@ export declare namespace Whop {
     type AppType as AppType,
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
+    type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
-    type AppListParams as AppListParams,
   };
 
   export {
@@ -1570,9 +1610,9 @@ export declare namespace Whop {
     type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
     type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
+    type InvoiceListParams as InvoiceListParams,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceUpdateParams as InvoiceUpdateParams,
-    type InvoiceListParams as InvoiceListParams,
   };
 
   export {
@@ -1583,9 +1623,9 @@ export declare namespace Whop {
   export {
     Products as Products,
     type ProductDeleteResponse as ProductDeleteResponse,
+    type ProductListParams as ProductListParams,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
-    type ProductListParams as ProductListParams,
   };
 
   export {
@@ -1593,9 +1633,14 @@ export declare namespace Whop {
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
+    type CompanyListParams as CompanyListParams,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
+<<<<<<< HEAD
+    type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
+=======
     type CompanyListParams as CompanyListParams,
+>>>>>>> f27bf84 (Apply custom code)
   };
 
   export {
@@ -1641,9 +1686,9 @@ export declare namespace Whop {
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
-    type WebhookListParams as WebhookListParams,
   };
 
   export {
@@ -1653,9 +1698,9 @@ export declare namespace Whop {
     type PlanListResponse as PlanListResponse,
     type PlanDeleteResponse as PlanDeleteResponse,
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
+    type PlanListParams as PlanListParams,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
-    type PlanListParams as PlanListParams,
   };
 
   export {
@@ -1671,17 +1716,17 @@ export declare namespace Whop {
     type ForumPostVisibilityType as ForumPostVisibilityType,
     type ForumPostListResponse as ForumPostListResponse,
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
+    type ForumPostListParams as ForumPostListParams,
     type ForumPostCreateParams as ForumPostCreateParams,
     type ForumPostUpdateParams as ForumPostUpdateParams,
-    type ForumPostListParams as ForumPostListParams,
   };
 
   export {
     Transfers as Transfers,
     type TransferListResponse as TransferListResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
-    type TransferCreateParams as TransferCreateParams,
     type TransferListParams as TransferListParams,
+    type TransferCreateParams as TransferCreateParams,
   };
 
   export {
@@ -1694,11 +1739,11 @@ export declare namespace Whop {
     type CancelOptions as CancelOptions,
     type MembershipListResponse as MembershipListResponse,
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
-    type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
+    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
   };
 
   export {
@@ -1707,8 +1752,8 @@ export declare namespace Whop {
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
     type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
-    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserListParams as AuthorizedUserListParams,
+    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
   };
 
@@ -1716,16 +1761,16 @@ export declare namespace Whop {
     AppBuilds as AppBuilds,
     type AppBuildListResponse as AppBuildListResponse,
     type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
-    type AppBuildCreateParams as AppBuildCreateParams,
     type AppBuildListParams as AppBuildListParams,
+    type AppBuildCreateParams as AppBuildCreateParams,
   };
 
   export {
     Shipments as Shipments,
     type ShipmentListResponse as ShipmentListResponse,
     type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
-    type ShipmentCreateParams as ShipmentCreateParams,
     type ShipmentListParams as ShipmentListParams,
+    type ShipmentCreateParams as ShipmentCreateParams,
   };
 
   export {
@@ -1733,8 +1778,8 @@ export declare namespace Whop {
     type CheckoutModes as CheckoutModes,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
-    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
   };
 
   export {
@@ -1742,17 +1787,17 @@ export declare namespace Whop {
     type MessageListResponse as MessageListResponse,
     type MessageDeleteResponse as MessageDeleteResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageListParams as MessageListParams,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
-    type MessageListParams as MessageListParams,
   };
 
   export {
     ChatChannels as ChatChannels,
     type ChatChannelListResponse as ChatChannelListResponse,
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
-    type ChatChannelUpdateParams as ChatChannelUpdateParams,
     type ChatChannelListParams as ChatChannelListParams,
+    type ChatChannelUpdateParams as ChatChannelUpdateParams,
   };
 
   export {
@@ -1762,9 +1807,9 @@ export declare namespace Whop {
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserListResponsesCursorPage as UserListResponsesCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
+    type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserCheckAccessParams as UserCheckAccessParams,
   };
 
   export {
@@ -1777,18 +1822,18 @@ export declare namespace Whop {
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
     type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
-    type PaymentCreateParams as PaymentCreateParams,
     type PaymentListParams as PaymentListParams,
-    type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
+    type PaymentCreateParams as PaymentCreateParams,
+    type PaymentListFeesParams as PaymentListFeesParams,
   };
 
   export {
     SupportChannels as SupportChannels,
     type SupportChannelListResponse as SupportChannelListResponse,
     type SupportChannelListResponsesCursorPage as SupportChannelListResponsesCursorPage,
-    type SupportChannelCreateParams as SupportChannelCreateParams,
     type SupportChannelListParams as SupportChannelListParams,
+    type SupportChannelCreateParams as SupportChannelCreateParams,
   };
 
   export {
@@ -1796,9 +1841,9 @@ export declare namespace Whop {
     type ExperienceListResponse as ExperienceListResponse,
     type ExperienceDeleteResponse as ExperienceDeleteResponse,
     type ExperienceListResponsesCursorPage as ExperienceListResponsesCursorPage,
+    type ExperienceListParams as ExperienceListParams,
     type ExperienceCreateParams as ExperienceCreateParams,
     type ExperienceUpdateParams as ExperienceUpdateParams,
-    type ExperienceListParams as ExperienceListParams,
     type ExperienceAttachParams as ExperienceAttachParams,
     type ExperienceDetachParams as ExperienceDetachParams,
     type ExperienceDuplicateParams as ExperienceDuplicateParams,
@@ -1809,8 +1854,8 @@ export declare namespace Whop {
     type ReactionListResponse as ReactionListResponse,
     type ReactionDeleteResponse as ReactionDeleteResponse,
     type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
-    type ReactionCreateParams as ReactionCreateParams,
     type ReactionListParams as ReactionListParams,
+    type ReactionCreateParams as ReactionCreateParams,
     type ReactionDeleteParams as ReactionDeleteParams,
   };
 
@@ -1826,8 +1871,8 @@ export declare namespace Whop {
     Forums as Forums,
     type ForumListResponse as ForumListResponse,
     type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
-    type ForumUpdateParams as ForumUpdateParams,
     type ForumListParams as ForumListParams,
+    type ForumUpdateParams as ForumUpdateParams,
   };
 
   export {
@@ -1838,8 +1883,8 @@ export declare namespace Whop {
     type PromoCodeListResponse as PromoCodeListResponse,
     type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
-    type PromoCodeCreateParams as PromoCodeCreateParams,
     type PromoCodeListParams as PromoCodeListParams,
+    type PromoCodeCreateParams as PromoCodeCreateParams,
   };
 
   export {
@@ -1850,9 +1895,9 @@ export declare namespace Whop {
     type CourseListResponse as CourseListResponse,
     type CourseDeleteResponse as CourseDeleteResponse,
     type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
+    type CourseListParams as CourseListParams,
     type CourseCreateParams as CourseCreateParams,
     type CourseUpdateParams as CourseUpdateParams,
-    type CourseListParams as CourseListParams,
   };
 
   export {
@@ -1861,9 +1906,9 @@ export declare namespace Whop {
     type CourseChapterListResponse as CourseChapterListResponse,
     type CourseChapterDeleteResponse as CourseChapterDeleteResponse,
     type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
+    type CourseChapterListParams as CourseChapterListParams,
     type CourseChapterCreateParams as CourseChapterCreateParams,
     type CourseChapterUpdateParams as CourseChapterUpdateParams,
-    type CourseChapterListParams as CourseChapterListParams,
   };
 
   export {
@@ -1879,9 +1924,9 @@ export declare namespace Whop {
     type CourseLessonStartResponse as CourseLessonStartResponse,
     type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
     type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
+    type CourseLessonListParams as CourseLessonListParams,
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
-    type CourseLessonListParams as CourseLessonListParams,
     type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
   };
 
@@ -1944,8 +1989,8 @@ export declare namespace Whop {
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
-    type WithdrawalCreateParams as WithdrawalCreateParams,
     type WithdrawalListParams as WithdrawalListParams,
+    type WithdrawalCreateParams as WithdrawalCreateParams,
   };
 
   export {
@@ -1968,8 +2013,8 @@ export declare namespace Whop {
     type PaymentMethodRetrieveResponse as PaymentMethodRetrieveResponse,
     type PaymentMethodListResponse as PaymentMethodListResponse,
     type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
-    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
     type PaymentMethodListParams as PaymentMethodListParams,
+    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
   };
 
   export {
@@ -1979,8 +2024,8 @@ export declare namespace Whop {
     type FeeMarkupListResponse as FeeMarkupListResponse,
     type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
     type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
-    type FeeMarkupCreateParams as FeeMarkupCreateParams,
     type FeeMarkupListParams as FeeMarkupListParams,
+    type FeeMarkupCreateParams as FeeMarkupCreateParams,
   };
 
   export {
@@ -2007,9 +2052,9 @@ export declare namespace Whop {
     type Lead as Lead,
     type LeadListResponse as LeadListResponse,
     type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
+    type LeadListParams as LeadListParams,
     type LeadCreateParams as LeadCreateParams,
     type LeadUpdateParams as LeadUpdateParams,
-    type LeadListParams as LeadListParams,
   };
 
   export {
@@ -2020,6 +2065,7 @@ export declare namespace Whop {
 
   export {
     Files as Files,
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
@@ -2032,8 +2078,8 @@ export declare namespace Whop {
     type CompanyTokenTransactionType as CompanyTokenTransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
-    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
     type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams,
+    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
   };
 
   export {
@@ -2044,9 +2090,9 @@ export declare namespace Whop {
     type DmMemberListResponse as DmMemberListResponse,
     type DmMemberDeleteResponse as DmMemberDeleteResponse,
     type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
+    type DmMemberListParams as DmMemberListParams,
     type DmMemberCreateParams as DmMemberCreateParams,
     type DmMemberUpdateParams as DmMemberUpdateParams,
-    type DmMemberListParams as DmMemberListParams,
   };
 
   export {
@@ -2056,9 +2102,9 @@ export declare namespace Whop {
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
+    type AIChatListParams as AIChatListParams,
     type AIChatCreateParams as AIChatCreateParams,
     type AIChatUpdateParams as AIChatUpdateParams,
-    type AIChatListParams as AIChatListParams,
   };
 
   export {
@@ -2067,9 +2113,9 @@ export declare namespace Whop {
     type DmChannelListResponse as DmChannelListResponse,
     type DmChannelDeleteResponse as DmChannelDeleteResponse,
     type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
+    type DmChannelListParams as DmChannelListParams,
     type DmChannelCreateParams as DmChannelCreateParams,
     type DmChannelUpdateParams as DmChannelUpdateParams,
-    type DmChannelListParams as DmChannelListParams,
   };
 
   export {
@@ -2108,10 +2154,69 @@ export declare namespace Whop {
     type AffiliateArchiveResponse as AffiliateArchiveResponse,
     type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
-    type AffiliateCreateParams as AffiliateCreateParams,
     type AffiliateListParams as AffiliateListParams,
+    type AffiliateCreateParams as AffiliateCreateParams,
   };
 
+<<<<<<< HEAD
+  export {
+    Bounties as Bounties,
+    type BountyCreateResponse as BountyCreateResponse,
+    type BountyRetrieveResponse as BountyRetrieveResponse,
+    type BountyListResponse as BountyListResponse,
+    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
+    type BountyListParams as BountyListParams,
+    type BountyCreateParams as BountyCreateParams,
+  };
+
+  export {
+    AdCampaigns as AdCampaigns,
+    type AdCampaign as AdCampaign,
+    type AdCampaignPlatform as AdCampaignPlatform,
+    type AdCampaignStatus as AdCampaignStatus,
+    type AdCampaignListResponse as AdCampaignListResponse,
+    type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
+    type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignUpdateParams as AdCampaignUpdateParams,
+  };
+
+  export {
+    AdGroups as AdGroups,
+    type AdBudgetType as AdBudgetType,
+    type AdGroup as AdGroup,
+    type AdGroupStatus as AdGroupStatus,
+    type AdGroupListResponse as AdGroupListResponse,
+    type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
+    type AdGroupListParams as AdGroupListParams,
+    type AdGroupUpdateParams as AdGroupUpdateParams,
+  };
+
+  export {
+    Ads as Ads,
+    type Ad as Ad,
+    type ExternalAdStatus as ExternalAdStatus,
+    type AdListResponse as AdListResponse,
+    type AdListResponsesCursorPage as AdListResponsesCursorPage,
+    type AdListParams as AdListParams,
+  };
+
+  export {
+    Conversions as Conversions,
+    type ConversionCreateResponse as ConversionCreateResponse,
+    type ConversionCreateParams as ConversionCreateParams,
+  };
+
+  export {
+    AdReports as AdReports,
+    type Granularities as Granularities,
+    type ResultLabelKeys as ResultLabelKeys,
+    type AdReportRetrieveResponse as AdReportRetrieveResponse,
+    type AdReportRetrieveParams as AdReportRetrieveParams,
+  };
+
+=======
+>>>>>>> f27bf84 (Apply custom code)
   export type AccessLevel = API.AccessLevel;
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;
