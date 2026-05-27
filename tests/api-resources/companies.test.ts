@@ -123,15 +123,10 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-<<<<<<< HEAD
   test.skip('createAPIKey: only required params', async () => {
     const responsePromise = client.companies.createAPIKey('parent_company_id', {
       child_company_id: 'child_company_id',
     });
-=======
-  test.skip('list', async () => {
-    const responsePromise = client.companies.list();
->>>>>>> f27bf84 (Apply custom code)
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -142,7 +137,6 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-<<<<<<< HEAD
   test.skip('createAPIKey: required and optional params', async () => {
     const response = await client.companies.createAPIKey('parent_company_id', {
       child_company_id: 'child_company_id',
@@ -156,24 +150,5 @@ describe('resource companies', () => {
       ],
       role: 'owner',
     });
-=======
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.companies.list(
-        {
-          after: 'after',
-          before: 'before',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          direction: 'asc',
-          first: 42,
-          last: 42,
-          parent_company_id: 'parent_company_id',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
->>>>>>> f27bf84 (Apply custom code)
   });
 });

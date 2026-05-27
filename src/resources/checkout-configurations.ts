@@ -182,6 +182,12 @@ export namespace CheckoutConfigurationListResponse {
     id: string;
 
     /**
+     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+     * does not check processor compatibility or feature flags.
+     */
+    adaptive_pricing_enabled: boolean;
+
+    /**
      * The number of days between each recurring charge. Null for one-time plans. For
      * example, 30 for monthly or 365 for annual billing.
      */
@@ -354,6 +360,11 @@ export declare namespace CheckoutConfigurationCreateParams {
        * The respective currency identifier for the plan.
        */
       currency: Shared.Currency;
+
+      /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
 
       /**
        * The application fee amount collected by the platform from this connected
@@ -619,6 +630,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -722,6 +739,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -819,6 +842,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      * defaults.
      */
     export interface CheckoutStyling {
+      /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
       /**
        * The different border-radius styles available for checkout pages.
        */

@@ -34,10 +34,6 @@ describe('resource files', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-<<<<<<< HEAD
     const response = await client.files.create({ filename: 'filename', visibility: 'public' });
-=======
-    const response = await client.files.create({ filename: 'filename' });
->>>>>>> f27bf84 (Apply custom code)
   });
 });

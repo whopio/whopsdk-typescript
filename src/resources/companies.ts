@@ -38,7 +38,6 @@ export class Companies extends APIResource {
   ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
     return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
   }
-<<<<<<< HEAD
 
   /**
    * Create a new company. Pass parent_company_id to create a connected account under
@@ -80,8 +79,6 @@ export class Companies extends APIResource {
   ): APIPromise<CompanyCreateAPIKeyResponse> {
     return this._client.post(path`/companies/${parentCompanyID}/api_keys`, { body, ...options });
   }
-=======
->>>>>>> f27bf84 (Apply custom code)
 }
 
 export type CompanyListResponsesCursorPage = CursorPage<CompanyListResponse>;
@@ -214,7 +211,6 @@ export namespace CompanyListResponse {
   }
 }
 
-<<<<<<< HEAD
 /**
  * An API key created for a child company, including the one-time secret key.
  */
@@ -274,8 +270,6 @@ export interface CompanyListParams extends CursorPageParams {
   parent_company_id?: string | null;
 }
 
-=======
->>>>>>> f27bf84 (Apply custom code)
 export interface CompanyCreateParams {
   /**
    * The display name of the company shown to customers.
@@ -465,7 +459,6 @@ export namespace CompanyUpdateParams {
   }
 }
 
-<<<<<<< HEAD
 export interface CompanyCreateAPIKeyParams {
   /**
    * The unique identifier of the connected account to create the API key for (e.g.
@@ -512,59 +505,17 @@ export namespace CompanyCreateAPIKeyParams {
      */
     resources: Array<string>;
   }
-=======
-export interface CompanyListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return companies created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return companies created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The unique identifier of the parent platform company. When provided, lists
-   * connected accounts under that platform. Omit to list the current user's own
-   * companies.
-   */
-  parent_company_id?: string | null;
->>>>>>> f27bf84 (Apply custom code)
 }
 
 export declare namespace Companies {
   export {
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyListParams as CompanyListParams,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
-<<<<<<< HEAD
     type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
-=======
-    type CompanyListParams as CompanyListParams,
->>>>>>> f27bf84 (Apply custom code)
   };
 }

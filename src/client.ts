@@ -22,7 +22,6 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
-<<<<<<< HEAD
   AdCampaign,
   AdCampaignListParams,
   AdCampaignListResponse,
@@ -59,8 +58,6 @@ import {
   ExternalAdStatus,
 } from './resources/ads';
 import {
-=======
->>>>>>> f27bf84 (Apply custom code)
   AIChat,
   AIChatCreateParams,
   AIChatDeleteResponse,
@@ -98,6 +95,15 @@ import {
   AuthorizedUsers,
 } from './resources/authorized-users';
 import {
+  Bounties,
+  BountyCreateParams,
+  BountyCreateResponse,
+  BountyListParams,
+  BountyListResponse,
+  BountyListResponsesCursorPage,
+  BountyRetrieveResponse,
+} from './resources/bounties';
+import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
@@ -114,6 +120,8 @@ import {
 } from './resources/checkout-configurations';
 import {
   Companies,
+  CompanyCreateAPIKeyParams,
+  CompanyCreateAPIKeyResponse,
   CompanyCreateParams,
   CompanyListParams,
   CompanyListResponse,
@@ -130,6 +138,7 @@ import {
   CompanyTokenTransactionType,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
+import { ConversionCreateParams, ConversionCreateResponse, Conversions } from './resources/conversions';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -562,7 +571,6 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
@@ -579,19 +587,6 @@ export interface ClientOptions {
    * When using the SDK in app mode pass this parameter to allow verifying user tokens
    */
   appID?: string | null | undefined;
-
-  /**
-   * Static JWK (JSON string) used by `verifyUserToken` to verify user tokens.
-   * When set, the SDK skips remote JWKS fetching. Prefer `userTokenJwksUrl`
-   * (or the default) so key rotation is handled automatically.
-   */
-  userTokenPublicKey?: string | null | undefined;
-
-  /**
-   * URL of the JWKS endpoint used by `verifyUserToken`. Defaults to the
-   * canonical Whop JWKS. Override when pointing at a non-production backend.
-   */
-  userTokenJwksUrl?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -669,8 +664,7 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
-  userTokenPublicKey: string | null;
-  userTokenJwksUrl: string | null;
+
   baseURL: string;
   maxRetries: number;
   timeout: number;
@@ -702,8 +696,6 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
-    userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -716,8 +708,6 @@ export class Whop {
       apiKey,
       webhookKey,
       appID,
-      userTokenPublicKey,
-      userTokenJwksUrl,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -737,13 +727,23 @@ export class Whop {
     this.fetch = options.fetch ?? Shims.getDefaultFetch();
     this.#encoder = Opts.FallbackEncoder;
 
+    const customHeadersEnv = readEnv('WHOP_CUSTOM_HEADERS');
+    if (customHeadersEnv) {
+      const parsed: Record<string, string> = {};
+      for (const line of customHeadersEnv.split('\n')) {
+        const colon = line.indexOf(':');
+        if (colon >= 0) {
+          parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+        }
+      }
+      options.defaultHeaders = { ...parsed, ...options.defaultHeaders };
+    }
+
     this._options = options;
 
     this.apiKey = apiKey;
     this.webhookKey = webhookKey;
     this.appID = appID;
-    this.userTokenPublicKey = userTokenPublicKey;
-    this.userTokenJwksUrl = userTokenJwksUrl;
   }
 
   /**
@@ -762,8 +762,6 @@ export class Whop {
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
       appID: this.appID,
-      userTokenPublicKey: this.userTokenPublicKey,
-      userTokenJwksUrl: this.userTokenJwksUrl,
       ...options,
     });
     return client;
@@ -1298,8 +1296,6 @@ export class Whop {
     }
   }
 
-  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
-
   static Whop = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -1531,6 +1527,30 @@ export class Whop {
    * Affiliates
    */
   affiliates: API.Affiliates = new API.Affiliates(this);
+  /**
+   * Bounties
+   */
+  bounties: API.Bounties = new API.Bounties(this);
+  /**
+   * Ad campaigns
+   */
+  adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
+  /**
+   * Ad groups
+   */
+  adGroups: API.AdGroups = new API.AdGroups(this);
+  /**
+   * Ads
+   */
+  ads: API.Ads = new API.Ads(this);
+  /**
+   * Conversions
+   */
+  conversions: API.Conversions = new API.Conversions(this);
+  /**
+   * Ad reports
+   */
+  adReports: API.AdReports = new API.AdReports(this);
 }
 
 Whop.Apps = Apps;
@@ -1586,6 +1606,12 @@ Whop.DisputeAlerts = DisputeAlerts;
 Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
+Whop.Bounties = Bounties;
+Whop.AdCampaigns = AdCampaigns;
+Whop.AdGroups = AdGroups;
+Whop.Ads = Ads;
+Whop.Conversions = Conversions;
+Whop.AdReports = AdReports;
 
 export declare namespace Whop {
   export type RequestOptions = Opts.RequestOptions;
@@ -1632,15 +1658,12 @@ export declare namespace Whop {
     Companies as Companies,
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
     type CompanyListParams as CompanyListParams,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
-<<<<<<< HEAD
     type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
-=======
-    type CompanyListParams as CompanyListParams,
->>>>>>> f27bf84 (Apply custom code)
   };
 
   export {
@@ -2158,7 +2181,6 @@ export declare namespace Whop {
     type AffiliateCreateParams as AffiliateCreateParams,
   };
 
-<<<<<<< HEAD
   export {
     Bounties as Bounties,
     type BountyCreateResponse as BountyCreateResponse,
@@ -2215,8 +2237,6 @@ export declare namespace Whop {
     type AdReportRetrieveParams as AdReportRetrieveParams,
   };
 
-=======
->>>>>>> f27bf84 (Apply custom code)
   export type AccessLevel = API.AccessLevel;
   export type AccessPassType = API.AccessPassType;
   export type App = API.App;

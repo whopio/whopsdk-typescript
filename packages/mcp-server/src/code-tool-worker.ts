@@ -128,6 +128,7 @@ const fuse = new Fuse(
     'client.products.retrieve',
     'client.products.update',
     'client.companies.create',
+    'client.companies.createAPIKey',
     'client.companies.list',
     'client.companies.retrieve',
     'client.companies.update',
@@ -304,7 +305,6 @@ const fuse = new Fuse(
     'client.affiliates.overrides.list',
     'client.affiliates.overrides.retrieve',
     'client.affiliates.overrides.update',
-<<<<<<< HEAD
     'client.bounties.create',
     'client.bounties.list',
     'client.bounties.retrieve',
@@ -325,8 +325,6 @@ const fuse = new Fuse(
     'client.ads.unpause',
     'client.conversions.create',
     'client.adReports.retrieve',
-=======
->>>>>>> f27bf84 (Apply custom code)
   ],
   { threshold: 1, shouldSort: true },
 );

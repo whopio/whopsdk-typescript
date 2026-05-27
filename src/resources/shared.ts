@@ -375,6 +375,7 @@ export type AuthorizedUserRoles =
   | 'admin'
   | 'sales_manager'
   | 'moderator'
+  | 'advertiser'
   | 'app_manager'
   | 'support'
   | 'manager'
@@ -548,6 +549,12 @@ export namespace CheckoutConfiguration {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+     * does not check processor compatibility or feature flags.
+     */
+    adaptive_pricing_enabled: boolean;
 
     /**
      * The number of days between each recurring charge. Null for one-time plans. For
@@ -1076,7 +1083,8 @@ export type Currency =
   | 'rub'
   | 'btc'
   | 'cny'
-  | 'usdt';
+  | 'usdt'
+  | 'kzt';
 
 /**
  * The different types of custom CTAs that can be selected.
@@ -2501,7 +2509,6 @@ export interface Payment {
   retryable: boolean;
 
   /**
-<<<<<<< HEAD
    * The total amount charged to the customer for this payment, including taxes and
    * after any discounts. In the currency specified by the currency field.
    */
@@ -2518,8 +2525,6 @@ export interface Payment {
   settlement_exchange_rate: number | null;
 
   /**
-=======
->>>>>>> f27bf84 (Apply custom code)
    * The status of a receipt
    */
   status: ReceiptStatus | null;
@@ -3036,6 +3041,12 @@ export interface Plan {
    * The unique identifier for the plan.
    */
   id: string;
+
+  /**
+   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+   * does not check processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
 
   /**
    * The number of days between each recurring charge. Null for one-time plans. For

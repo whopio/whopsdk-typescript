@@ -15,7 +15,6 @@ export {
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
-<<<<<<< HEAD
   AdCampaigns,
   type AdCampaign,
   type AdCampaignPlatform,
@@ -52,8 +51,6 @@ export {
   type AdListResponsesCursorPage,
 } from './ads';
 export {
-=======
->>>>>>> f27bf84 (Apply custom code)
   Affiliates,
   type Affiliate,
   type Status,
@@ -91,7 +88,6 @@ export {
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
-<<<<<<< HEAD
   Bounties,
   type BountyCreateResponse,
   type BountyRetrieveResponse,
@@ -101,8 +97,6 @@ export {
   type BountyListResponsesCursorPage,
 } from './bounties';
 export {
-=======
->>>>>>> f27bf84 (Apply custom code)
   ChatChannels,
   type ChatChannelListResponse,
   type ChatChannelListParams,
@@ -121,17 +115,11 @@ export {
   Companies,
   type SocialLinkWebsites,
   type CompanyListResponse,
-<<<<<<< HEAD
   type CompanyCreateAPIKeyResponse,
   type CompanyListParams,
   type CompanyCreateParams,
   type CompanyUpdateParams,
   type CompanyCreateAPIKeyParams,
-=======
-  type CompanyCreateParams,
-  type CompanyUpdateParams,
-  type CompanyListParams,
->>>>>>> f27bf84 (Apply custom code)
   type CompanyListResponsesCursorPage,
 } from './companies';
 export {
@@ -143,6 +131,7 @@ export {
   type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListResponsesCursorPage,
 } from './company-token-transactions';
+export { Conversions, type ConversionCreateResponse, type ConversionCreateParams } from './conversions';
 export {
   CourseChapters,
   type CourseChapter,

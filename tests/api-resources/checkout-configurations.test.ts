@@ -55,6 +55,7 @@ describe('resource checkoutConfigurations', () => {
       plan: {
         company_id: 'biz_xxxxxxxxxxxxxx',
         currency: 'usd',
+        adaptive_pricing_enabled: true,
         application_fee_amount: 6.9,
         billing_period: 42,
         custom_fields: [
@@ -106,6 +107,7 @@ describe('resource checkoutConfigurations', () => {
       affiliate_code: 'affiliate_code',
       allow_promo_codes: true,
       checkout_styling: {
+        background_color: 'background_color',
         border_style: 'rounded',
         button_color: 'button_color',
         font_family: 'system',

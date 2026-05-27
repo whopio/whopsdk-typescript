@@ -123,17 +123,15 @@ Types:
 
 - <code><a href="./src/resources/companies.ts">SocialLinkWebsites</a></code>
 - <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
+- <code><a href="./src/resources/companies.ts">CompanyCreateAPIKeyResponse</a></code>
 
 Methods:
 
 - <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
 - <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
-<<<<<<< HEAD
 - <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
 - <code title="patch /companies/{id}">client.companies.<a href="./src/resources/companies.ts">update</a>(id, { ...params }) -> Company</code>
 - <code title="post /companies/{parent_company_id}/api_keys">client.companies.<a href="./src/resources/companies.ts">createAPIKey</a>(parentCompanyID, { ...params }) -> CompanyCreateAPIKeyResponse</code>
-=======
->>>>>>> f27bf84 (Apply custom code)
 
 # Webhooks
 
@@ -888,7 +886,6 @@ Methods:
 - <code title="get /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">retrieve</a>(overrideID, { ...params }) -> OverrideRetrieveResponse</code>
 - <code title="patch /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">update</a>(overrideID, { ...params }) -> OverrideUpdateResponse</code>
 - <code title="delete /affiliates/{id}/overrides/{override_id}">client.affiliates.overrides.<a href="./src/resources/affiliates/overrides.ts">delete</a>(overrideID, { ...params }) -> OverrideDeleteResponse</code>
-<<<<<<< HEAD
 
 # Bounties
 
@@ -976,5 +973,3 @@ Types:
 Methods:
 
 - <code title="get /ad_reports">client.adReports.<a href="./src/resources/ad-reports.ts">retrieve</a>({ ...params }) -> AdReportRetrieveResponse</code>
-=======
->>>>>>> f27bf84 (Apply custom code)

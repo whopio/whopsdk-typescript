@@ -299,8 +299,13 @@ export type PaymentMethodTypes =
   | 'bizum'
   | 'blik'
   | 'boleto'
+  | 'bre_b'
+  | 'ca_bank_transfer'
   | 'capchase_pay'
   | 'card'
+  | 'card_installments_three'
+  | 'card_installments_six'
+  | 'card_installments_twelve'
   | 'cashapp'
   | 'claritypay'
   | 'coinbase'
@@ -327,6 +332,7 @@ export type PaymentMethodTypes =
   | 'kr_card'
   | 'kr_market'
   | 'kriya'
+  | 'kueski'
   | 'link'
   | 'mb_way'
   | 'm_pesa'
@@ -346,6 +352,7 @@ export type PaymentMethodTypes =
   | 'nz_bank_account'
   | 'oxxo'
   | 'p24'
+  | 'pago_efectivo'
   | 'pse'
   | 'pay_by_bank'
   | 'payco'
@@ -362,8 +369,10 @@ export type PaymentMethodTypes =
   | 'samsung_pay'
   | 'satispay'
   | 'scalapay'
+  | 'sencillito'
   | 'sepa_debit'
   | 'sequra'
+  | 'servipag'
   | 'sezzle'
   | 'shop_pay'
   | 'shopeepay'
@@ -380,7 +389,9 @@ export type PaymentMethodTypes =
   | 'us_bank_transfer'
   | 'venmo'
   | 'vipps'
+  | 'webpay'
   | 'wechat_pay'
+  | 'yape'
   | 'zip'
   | 'coinflow'
   | 'unknown';
@@ -555,14 +566,11 @@ export interface PaymentListResponse {
   retryable: boolean;
 
   /**
-<<<<<<< HEAD
    * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
   settlement_currency: Shared.Currency;
 
   /**
-=======
->>>>>>> f27bf84 (Apply custom code)
    * The status of a receipt
    */
   status: Shared.ReceiptStatus | null;
@@ -1314,17 +1322,6 @@ export interface PaymentListFeesParams extends CursorPageParams {
   last?: number | null;
 }
 
-<<<<<<< HEAD
-=======
-export interface PaymentRefundParams {
-  /**
-   * The amount to refund in the payment currency. If omitted, the full payment
-   * amount is refunded.
-   */
-  partial_amount?: number | null;
-}
-
->>>>>>> f27bf84 (Apply custom code)
 export declare namespace Payments {
   export {
     type BillingReasons as BillingReasons,

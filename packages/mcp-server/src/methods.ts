@@ -137,7 +137,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/companies',
   },
   {
-<<<<<<< HEAD
     clientCallName: 'client.companies.create',
     fullyQualifiedName: 'companies.create',
     httpMethod: 'post',
@@ -163,8 +162,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/webhooks',
   },
   {
-=======
->>>>>>> f27bf84 (Apply custom code)
     clientCallName: 'client.webhooks.create',
     fullyQualifiedName: 'webhooks.create',
     httpMethod: 'post',
@@ -1190,7 +1187,6 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'delete',
     httpPath: '/affiliates/{id}/overrides/{override_id}',
   },
-<<<<<<< HEAD
   {
     clientCallName: 'client.bounties.list',
     fullyQualifiedName: 'bounties.list',
@@ -1311,8 +1307,6 @@ export const sdkMethods: SdkMethod[] = [
     httpMethod: 'get',
     httpPath: '/ad_reports',
   },
-=======
->>>>>>> f27bf84 (Apply custom code)
 ];
 
 function allowedMethodsForCodeTool(options: McpOptions | undefined): SdkMethod[] | undefined {

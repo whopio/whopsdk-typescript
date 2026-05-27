@@ -1380,7 +1380,7 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
      */
     export interface LatestVerification {
       /**
-       * The unique identifier for the verification.
+       * The numeric id of the verification record.
        */
       id: string;
 

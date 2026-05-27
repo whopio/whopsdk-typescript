@@ -428,43 +428,6 @@ export namespace ForumPostUpdateParams {
   }
 }
 
-<<<<<<< HEAD
-=======
-export interface ForumPostListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the experience to list forum posts for.
-   */
-  experience_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The unique identifier of a parent post to list comments for. When set, returns
-   * replies to that post.
-   */
-  parent_id?: string | null;
-
-  /**
-   * Whether to filter for only pinned posts. Set to true to return only pinned
-   * posts.
-   */
-  pinned?: boolean | null;
-}
-
->>>>>>> f27bf84 (Apply custom code)
 export declare namespace ForumPosts {
   export {
     type ForumPostVisibilityType as ForumPostVisibilityType,

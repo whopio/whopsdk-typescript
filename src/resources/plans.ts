@@ -147,6 +147,12 @@ export interface PlanListResponse {
   id: string;
 
   /**
+   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+   * does not check processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
+
+  /**
    * The number of days between each recurring charge. Null for one-time plans. For
    * example, 30 for monthly or 365 for annual billing.
    */
@@ -443,6 +449,11 @@ export interface PlanCreateParams {
   product_id: string;
 
   /**
+   * Whether this plan accepts local currency payments via adaptive pricing.
+   */
+  adaptive_pricing_enabled?: boolean | null;
+
+  /**
    * The number of days between recurring charges. For example, 30 for monthly or 365
    * for yearly.
    */
@@ -572,6 +583,12 @@ export namespace PlanCreateParams {
    */
   export interface CheckoutStyling {
     /**
+     * A hex color code for the checkout page background, applied to the order summary
+     * panel (e.g. #F4F4F5).
+     */
+    background_color?: string | null;
+
+    /**
      * The different border-radius styles available for checkout pages.
      */
     border_style?: PlansAPI.CheckoutShape | null;
@@ -658,6 +675,11 @@ export namespace PlanCreateParams {
 }
 
 export interface PlanUpdateParams {
+  /**
+   * Whether this plan accepts local currency payments via adaptive pricing.
+   */
+  adaptive_pricing_enabled?: boolean | null;
+
   /**
    * The number of days between recurring charges. For example, 30 for monthly or 365
    * for yearly.
@@ -787,6 +809,12 @@ export namespace PlanUpdateParams {
    * inherit from the company default.
    */
   export interface CheckoutStyling {
+    /**
+     * A hex color code for the checkout page background, applied to the order summary
+     * panel (e.g. #F4F4F5).
+     */
+    background_color?: string | null;
+
     /**
      * The different border-radius styles available for checkout pages.
      */

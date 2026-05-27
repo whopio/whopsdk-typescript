@@ -13,24 +13,15 @@ jobs:
     name: publish
     runs-on: ubuntu-latest
     permissions:
-      id-token: write
       contents: write
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Node
-<<<<<<< HEAD
         uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
-=======
-        uses: actions/setup-node@v4
->>>>>>> f27bf84 (Apply custom code)
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Update npm for OIDC trusted publishing
-        run: npm install -g npm@latest
 
       - name: Set up pnpm
         uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1 # v4.3.0
