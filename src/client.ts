@@ -574,7 +574,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`
+   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`
    */
   apiKey?: string | undefined;
 

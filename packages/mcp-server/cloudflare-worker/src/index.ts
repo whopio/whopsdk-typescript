@@ -31,7 +31,7 @@ const serverConfig: ServerConfig = {
       key: 'apiKey',
       label: 'API Key',
       description:
-        "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word 'Bearer', which will look like `Bearer ***************************`",
+        'A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`',
       required: true,
       default: undefined,
       placeholder: 'My API Key',
