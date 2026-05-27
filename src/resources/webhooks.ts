@@ -342,6 +342,497 @@ export interface WebhookListResponse {
  */
 export type WebhookDeleteResponse = boolean;
 
+export interface CourseLessonInteractionCompletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A record of a user's progress on a specific lesson, tracking whether they have
+   * completed it.
+   */
+  data: Shared.CourseLessonInteraction;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'course_lesson_interaction.completed';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface DisputeCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A dispute is a chargeback or payment challenge filed against a company,
+   * including evidence and response status.
+   */
+  data: DisputesAPI.Dispute;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface DisputeUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A dispute is a chargeback or payment challenge filed against a company,
+   * including evidence and response status.
+   */
+  data: DisputesAPI.Dispute;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface DisputeAlertCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A dispute alert represents an early warning notification from a payment
+   * processor about a potential dispute or chargeback.
+   */
+  data: DisputeAlertCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'dispute_alert.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace DisputeAlertCreatedWebhookEvent {
+  /**
+   * A dispute alert represents an early warning notification from a payment
+   * processor about a potential dispute or chargeback.
+   */
+  export interface Data {
+    /**
+     * The unique identifier of the dispute alert.
+     */
+    id: string;
+
+    /**
+     * The type of the dispute alert.
+     */
+    alert_type: DisputeAlertsAPI.DisputeAlertType;
+
+    /**
+     * The alerted amount in the specified currency.
+     */
+    amount: number;
+
+    /**
+     * Whether this alert incurs a charge.
+     */
+    charge_for_alert: boolean;
+
+    /**
+     * The time the dispute alert was created.
+     */
+    created_at: string;
+
+    /**
+     * The three-letter ISO currency code for the alerted amount.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The dispute associated with the dispute alert.
+     */
+    dispute: Data.Dispute | null;
+
+    /**
+     * The payment associated with the dispute alert.
+     */
+    payment: Data.Payment | null;
+
+    /**
+     * The date of the original transaction.
+     */
+    transaction_date: string | null;
+  }
+
+  export namespace Data {
+    /**
+     * The dispute associated with the dispute alert.
+     */
+    export interface Dispute {
+      /**
+       * The unique identifier for the dispute.
+       */
+      id: string;
+
+      /**
+       * The disputed amount in the specified currency, formatted as a decimal.
+       */
+      amount: number;
+
+      /**
+       * The datetime the dispute was created.
+       */
+      created_at: string | null;
+
+      /**
+       * The three-letter ISO currency code for the disputed amount.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * A human-readable reason for the dispute.
+       */
+      reason: string | null;
+
+      /**
+       * The current status of the dispute lifecycle, such as needs_response,
+       * under_review, won, or lost.
+       */
+      status: DisputesAPI.DisputeStatuses;
+    }
+
+    /**
+     * The payment associated with the dispute alert.
+     */
+    export interface Payment {
+      /**
+       * The unique identifier for the payment.
+       */
+      id: string;
+
+      /**
+       * The reason why a specific payment was billed
+       */
+      billing_reason: PaymentsAPI.BillingReasons | null;
+
+      /**
+       * Possible card brands that a payment token can have
+       */
+      card_brand: PaymentsAPI.CardBrands | null;
+
+      /**
+       * The last four digits of the card used to make this payment. Null if the payment
+       * was not made with a card.
+       */
+      card_last4: string | null;
+
+      /**
+       * The datetime the payment was created.
+       */
+      created_at: string;
+
+      /**
+       * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+       */
+      currency: Shared.Currency;
+
+      /**
+       * When an alert came in that this transaction will be disputed
+       */
+      dispute_alerted_at: string | null;
+
+      /**
+       * The member attached to this payment.
+       */
+      member: Payment.Member | null;
+
+      /**
+       * The membership attached to this payment.
+       */
+      membership: Payment.Membership | null;
+
+      /**
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
+       */
+      paid_at: string | null;
+
+      /**
+       * The different types of payment methods that can be used.
+       */
+      payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+      /**
+       * The subtotal to show to the creator (excluding buyer fees).
+       */
+      subtotal: number | null;
+
+      /**
+       * The total to show to the creator (excluding buyer fees).
+       */
+      total: number | null;
+
+      /**
+       * The total in USD to show to the creator (excluding buyer fees).
+       */
+      usd_total: number | null;
+
+      /**
+       * The user that made this payment.
+       */
+      user: Payment.User | null;
+    }
+
+    export namespace Payment {
+      /**
+       * The member attached to this payment.
+       */
+      export interface Member {
+        /**
+         * The unique identifier for the company member.
+         */
+        id: string;
+
+        /**
+         * The phone number for the member, if available.
+         */
+        phone: string | null;
+      }
+
+      /**
+       * The membership attached to this payment.
+       */
+      export interface Membership {
+        /**
+         * The unique identifier for the membership.
+         */
+        id: string;
+
+        /**
+         * The state of the membership.
+         */
+        status: Shared.MembershipStatus;
+      }
+
+      /**
+       * The user that made this payment.
+       */
+      export interface User {
+        /**
+         * The unique identifier for the user.
+         */
+        id: string;
+
+        /**
+         * The user's email address. Requires the member:email:read permission to access.
+         * Null if not authorized.
+         */
+        email: string | null;
+
+        /**
+         * The user's display name shown on their public profile.
+         */
+        name: string | null;
+
+        /**
+         * The user's unique username shown on their public profile.
+         */
+        username: string;
+      }
+    }
+  }
+}
+
+export interface EntryApprovedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An entry represents a user's signup for a waitlisted plan.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.approved';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface EntryCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An entry represents a user's signup for a waitlisted plan.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface EntryDeletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An entry represents a user's signup for a waitlisted plan.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.deleted';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface EntryDeniedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An entry represents a user's signup for a waitlisted plan.
+   */
+  data: Shared.Entry;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'entry.denied';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
 export interface InvoiceCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -545,6 +1036,39 @@ export interface MembershipActivatedWebhookEvent {
   company_id?: string | null;
 }
 
+export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.cancel_at_period_end_changed';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
 export interface MembershipDeactivatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -578,7 +1102,7 @@ export interface MembershipDeactivatedWebhookEvent {
   company_id?: string | null;
 }
 
-export interface EntryCreatedWebhookEvent {
+export interface PaymentCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -590,9 +1114,10 @@ export interface EntryCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An entry represents a user's signup for a waitlisted plan.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
-  data: Shared.Entry;
+  data: Shared.Payment;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -602,7 +1127,7 @@ export interface EntryCreatedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'entry.created';
+  type: 'payment.created';
 
   /**
    * The company ID that this webhook event is associated with
@@ -610,7 +1135,7 @@ export interface EntryCreatedWebhookEvent {
   company_id?: string | null;
 }
 
-export interface EntryApprovedWebhookEvent {
+export interface PaymentFailedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -622,9 +1147,10 @@ export interface EntryApprovedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An entry represents a user's signup for a waitlisted plan.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
-  data: Shared.Entry;
+  data: Shared.Payment;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -634,7 +1160,7 @@ export interface EntryApprovedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'entry.approved';
+  type: 'payment.failed';
 
   /**
    * The company ID that this webhook event is associated with
@@ -642,7 +1168,7 @@ export interface EntryApprovedWebhookEvent {
   company_id?: string | null;
 }
 
-export interface EntryDeniedWebhookEvent {
+export interface PaymentPendingWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -654,9 +1180,10 @@ export interface EntryDeniedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An entry represents a user's signup for a waitlisted plan.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
-  data: Shared.Entry;
+  data: Shared.Payment;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -666,7 +1193,7 @@ export interface EntryDeniedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'entry.denied';
+  type: 'payment.pending';
 
   /**
    * The company ID that this webhook event is associated with
@@ -674,7 +1201,7 @@ export interface EntryDeniedWebhookEvent {
   company_id?: string | null;
 }
 
-export interface EntryDeletedWebhookEvent {
+export interface PaymentSucceededWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -686,9 +1213,10 @@ export interface EntryDeletedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * An entry represents a user's signup for a waitlisted plan.
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
    */
-  data: Shared.Entry;
+  data: Shared.Payment;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -698,399 +1226,12 @@ export interface EntryDeletedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'entry.deleted';
+  type: 'payment.succeeded';
 
   /**
    * The company ID that this webhook event is associated with
    */
   company_id?: string | null;
-}
-
-export interface SetupIntentRequiresActionWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
-  data: SetupIntentsAPI.SetupIntent;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'setup_intent.requires_action';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface SetupIntentSucceededWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
-  data: SetupIntentsAPI.SetupIntent;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'setup_intent.succeeded';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface SetupIntentCanceledWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
-  data: SetupIntentsAPI.SetupIntent;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'setup_intent.canceled';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface WithdrawalCreatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A withdrawal represents a request to transfer funds from a ledger account to an
-   * external payout method.
-   */
-  data: WithdrawalsAPI.Withdrawal;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'withdrawal.created';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface WithdrawalUpdatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A withdrawal represents a request to transfer funds from a ledger account to an
-   * external payout method.
-   */
-  data: WithdrawalsAPI.Withdrawal;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'withdrawal.updated';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface CourseLessonInteractionCompletedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A record of a user's progress on a specific lesson, tracking whether they have
-   * completed it.
-   */
-  data: Shared.CourseLessonInteraction;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'course_lesson_interaction.completed';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface PayoutMethodCreatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A configured payout destination where a user receives earned funds, such as a
-   * bank account or digital wallet.
-   */
-  data: PayoutMethodCreatedWebhookEvent.Data;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'payout_method.created';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export namespace PayoutMethodCreatedWebhookEvent {
-  /**
-   * A configured payout destination where a user receives earned funds, such as a
-   * bank account or digital wallet.
-   */
-  export interface Data {
-    /**
-     * The unique identifier for the payout token.
-     */
-    id: string;
-
-    /**
-     * A masked identifier for the payout destination, such as the last four digits of
-     * a bank account or an email address. Null if no reference is available.
-     */
-    account_reference: string | null;
-
-    /**
-     * The company associated with this payout destination. Null if not linked to a
-     * specific company.
-     */
-    company: Data.Company | null;
-
-    /**
-     * The datetime the payout token was created.
-     */
-    created_at: string;
-
-    /**
-     * The three-letter ISO currency code that payouts are delivered in for this
-     * destination.
-     */
-    currency: string;
-
-    /**
-     * The payout destination configuration linked to this token. Null if not yet
-     * configured.
-     */
-    destination: Data.Destination | null;
-
-    /**
-     * The name of the bank or financial institution receiving payouts. Null if not
-     * applicable or not provided.
-     */
-    institution_name: string | null;
-
-    /**
-     * Whether this is the default payout destination for the associated payout
-     * account.
-     */
-    is_default: boolean;
-
-    /**
-     * A user-defined label to help identify this payout destination. Not sent to the
-     * provider. Null if no nickname has been set.
-     */
-    nickname: string | null;
-  }
-
-  export namespace Data {
-    /**
-     * The company associated with this payout destination. Null if not linked to a
-     * specific company.
-     */
-    export interface Company {
-      /**
-       * The unique identifier for the company.
-       */
-      id: string;
-    }
-
-    /**
-     * The payout destination configuration linked to this token. Null if not yet
-     * configured.
-     */
-    export interface Destination {
-      /**
-       * The category of the payout destination
-       */
-      category: PayoutMethodsAPI.PayoutDestinationCategory;
-
-      /**
-       * The country code of the payout destination
-       */
-      country_code: string;
-
-      /**
-       * The name of the payer associated with the payout destination
-       */
-      name: string;
-    }
-  }
-}
-
-export interface VerificationSucceededWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * An identity verification session used to confirm a person or entity's identity
-   * for payout account eligibility.
-   */
-  data: VerificationSucceededWebhookEvent.Data;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'verification.succeeded';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export namespace VerificationSucceededWebhookEvent {
-  /**
-   * An identity verification session used to confirm a person or entity's identity
-   * for payout account eligibility.
-   */
-  export interface Data {
-    /**
-     * The numeric id of the verification record.
-     */
-    id: string;
-
-    /**
-     * An error code for a verification attempt.
-     */
-    last_error_code: VerificationsAPI.VerificationErrorCode | null;
-
-    /**
-     * A human-readable explanation of the most recent verification error. Null if no
-     * error has occurred.
-     */
-    last_error_reason: string | null;
-
-    /**
-     * The current status of this verification session.
-     */
-    status: VerificationsAPI.VerificationStatus;
-  }
 }
 
 export interface PayoutAccountStatusUpdatedWebhookEvent {
@@ -1262,7 +1403,7 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
   }
 }
 
-export interface ResolutionCenterCaseCreatedWebhookEvent {
+export interface PayoutMethodCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -1274,10 +1415,10 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
+   * A configured payout destination where a user receives earned funds, such as a
+   * bank account or digital wallet.
    */
-  data: ResolutionCenterCaseCreatedWebhookEvent.Data;
+  data: PayoutMethodCreatedWebhookEvent.Data;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -1287,7 +1428,7 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'resolution_center_case.created';
+  type: 'payout_method.created';
 
   /**
    * The company ID that this webhook event is associated with
@@ -1295,940 +1436,98 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
   company_id?: string | null;
 }
 
-export namespace ResolutionCenterCaseCreatedWebhookEvent {
+export namespace PayoutMethodCreatedWebhookEvent {
   /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
+   * A configured payout destination where a user receives earned funds, such as a
+   * bank account or digital wallet.
    */
   export interface Data {
     /**
-     * The unique identifier for the resolution.
+     * The unique identifier for the payout token.
      */
     id: string;
 
     /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
+     * A masked identifier for the payout destination, such as the last four digits of
+     * a bank account or an email address. Null if no reference is available.
+     */
+    account_reference: string | null;
+
+    /**
+     * The company associated with this payout destination. Null if not linked to a
+     * specific company.
      */
     company: Data.Company | null;
 
     /**
-     * The datetime the resolution was created.
+     * The datetime the payout token was created.
      */
     created_at: string;
 
     /**
-     * Whether the customer has filed an appeal after the initial resolution decision.
+     * The three-letter ISO currency code that payouts are delivered in for this
+     * destination.
      */
-    customer_appealed: boolean;
+    currency: string;
 
     /**
-     * The list of actions currently available to the customer.
+     * The payout destination configuration linked to this token. Null if not yet
+     * configured.
      */
-    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
+    destination: Data.Destination | null;
 
     /**
-     * The deadline by which the next response is required. Null if no deadline is
-     * currently active. As a Unix timestamp.
+     * The name of the bank or financial institution receiving payouts. Null if not
+     * applicable or not provided.
      */
-    due_date: string | null;
+    institution_name: string | null;
 
     /**
-     * The category of the dispute.
+     * Whether this is the default payout destination for the associated payout
+     * account.
      */
-    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
+    is_default: boolean;
 
     /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
+     * A user-defined label to help identify this payout destination. Not sent to the
+     * provider. Null if no nickname has been set.
      */
-    member: Data.Member | null;
-
-    /**
-     * Whether the merchant has filed an appeal after the initial resolution decision.
-     */
-    merchant_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the merchant.
-     */
-    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    payment: Data.Payment;
-
-    /**
-     * The list of actions currently available to the Whop platform for moderating this
-     * resolution.
-     */
-    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
-
-    /**
-     * The most recent 50 messages, actions, and status changes that have occurred
-     * during this resolution case.
-     */
-    resolution_events: Array<Data.ResolutionEvent>;
-
-    /**
-     * The current status of the resolution case, indicating which party needs to
-     * respond or if the case is closed.
-     */
-    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
-
-    /**
-     * The datetime the resolution was last updated.
-     */
-    updated_at: string;
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    user: Data.User;
+    nickname: string | null;
   }
 
   export namespace Data {
     /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
+     * The company associated with this payout destination. Null if not linked to a
+     * specific company.
      */
     export interface Company {
       /**
        * The unique identifier for the company.
        */
       id: string;
-
-      /**
-       * The display name of the company shown to customers.
-       */
-      title: string;
     }
 
     /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
+     * The payout destination configuration linked to this token. Null if not yet
+     * configured.
      */
-    export interface Member {
+    export interface Destination {
       /**
-       * The unique identifier for the extra public member.
+       * The category of the payout destination
        */
-      id: string;
-    }
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    export interface Payment {
-      /**
-       * The unique identifier for the payment.
-       */
-      id: string;
+      category: PayoutMethodsAPI.PayoutDestinationCategory;
 
       /**
-       * The datetime the payment was created.
+       * The country code of the payout destination
        */
-      created_at: string;
+      country_code: string;
 
       /**
-       * The available currencies on the platform
+       * The name of the payer associated with the payout destination
        */
-      currency: Shared.Currency | null;
-
-      /**
-       * The time at which this payment was successfully collected. Null if the payment
-       * has not yet succeeded. As a Unix timestamp.
-       */
-      paid_at: string | null;
-
-      /**
-       * The payment amount before taxes and discounts are applied. In the currency
-       * specified by the currency field.
-       */
-      subtotal: number | null;
-
-      /**
-       * The total amount charged to the customer for this payment, including taxes and
-       * after any discounts. In the currency specified by the currency field.
-       */
-      total: number;
-    }
-
-    /**
-     * A resolution event is a message or action within a resolution case, such as a
-     * response, escalation, or status change.
-     */
-    export interface ResolutionEvent {
-      /**
-       * The unique identifier for the resolution event.
-       */
-      id: string;
-
-      /**
-       * The type of action recorded in this event.
-       */
-      action:
-        | 'created'
-        | 'responded'
-        | 'accepted'
-        | 'denied'
-        | 'appealed'
-        | 'withdrew'
-        | 'requested_more_info'
-        | 'escalated'
-        | 'dispute_opened'
-        | 'dispute_customer_won'
-        | 'dispute_merchant_won';
-
-      /**
-       * The datetime the resolution event was created.
-       */
-      created_at: string;
-
-      /**
-       * The message body or additional context provided with this resolution event. Null
-       * if no details were included.
-       */
-      details: string | null;
-
-      /**
-       * The party who performed this action.
-       */
-      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
-    }
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    export interface User {
-      /**
-       * The unique identifier for the user.
-       */
-      id: string;
-
-      /**
-       * The user's display name shown on their public profile.
-       */
-      name: string | null;
-
-      /**
-       * The user's unique username shown on their public profile.
-       */
-      username: string;
+      name: string;
     }
   }
-}
-
-export interface ResolutionCenterCaseUpdatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
-   */
-  data: ResolutionCenterCaseUpdatedWebhookEvent.Data;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'resolution_center_case.updated';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export namespace ResolutionCenterCaseUpdatedWebhookEvent {
-  /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
-   */
-  export interface Data {
-    /**
-     * The unique identifier for the resolution.
-     */
-    id: string;
-
-    /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
-     */
-    company: Data.Company | null;
-
-    /**
-     * The datetime the resolution was created.
-     */
-    created_at: string;
-
-    /**
-     * Whether the customer has filed an appeal after the initial resolution decision.
-     */
-    customer_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the customer.
-     */
-    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
-
-    /**
-     * The deadline by which the next response is required. Null if no deadline is
-     * currently active. As a Unix timestamp.
-     */
-    due_date: string | null;
-
-    /**
-     * The category of the dispute.
-     */
-    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
-
-    /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
-     */
-    member: Data.Member | null;
-
-    /**
-     * Whether the merchant has filed an appeal after the initial resolution decision.
-     */
-    merchant_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the merchant.
-     */
-    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    payment: Data.Payment;
-
-    /**
-     * The list of actions currently available to the Whop platform for moderating this
-     * resolution.
-     */
-    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
-
-    /**
-     * The most recent 50 messages, actions, and status changes that have occurred
-     * during this resolution case.
-     */
-    resolution_events: Array<Data.ResolutionEvent>;
-
-    /**
-     * The current status of the resolution case, indicating which party needs to
-     * respond or if the case is closed.
-     */
-    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
-
-    /**
-     * The datetime the resolution was last updated.
-     */
-    updated_at: string;
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    user: Data.User;
-  }
-
-  export namespace Data {
-    /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
-     */
-    export interface Company {
-      /**
-       * The unique identifier for the company.
-       */
-      id: string;
-
-      /**
-       * The display name of the company shown to customers.
-       */
-      title: string;
-    }
-
-    /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
-     */
-    export interface Member {
-      /**
-       * The unique identifier for the extra public member.
-       */
-      id: string;
-    }
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    export interface Payment {
-      /**
-       * The unique identifier for the payment.
-       */
-      id: string;
-
-      /**
-       * The datetime the payment was created.
-       */
-      created_at: string;
-
-      /**
-       * The available currencies on the platform
-       */
-      currency: Shared.Currency | null;
-
-      /**
-       * The time at which this payment was successfully collected. Null if the payment
-       * has not yet succeeded. As a Unix timestamp.
-       */
-      paid_at: string | null;
-
-      /**
-       * The payment amount before taxes and discounts are applied. In the currency
-       * specified by the currency field.
-       */
-      subtotal: number | null;
-
-      /**
-       * The total amount charged to the customer for this payment, including taxes and
-       * after any discounts. In the currency specified by the currency field.
-       */
-      total: number;
-    }
-
-    /**
-     * A resolution event is a message or action within a resolution case, such as a
-     * response, escalation, or status change.
-     */
-    export interface ResolutionEvent {
-      /**
-       * The unique identifier for the resolution event.
-       */
-      id: string;
-
-      /**
-       * The type of action recorded in this event.
-       */
-      action:
-        | 'created'
-        | 'responded'
-        | 'accepted'
-        | 'denied'
-        | 'appealed'
-        | 'withdrew'
-        | 'requested_more_info'
-        | 'escalated'
-        | 'dispute_opened'
-        | 'dispute_customer_won'
-        | 'dispute_merchant_won';
-
-      /**
-       * The datetime the resolution event was created.
-       */
-      created_at: string;
-
-      /**
-       * The message body or additional context provided with this resolution event. Null
-       * if no details were included.
-       */
-      details: string | null;
-
-      /**
-       * The party who performed this action.
-       */
-      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
-    }
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    export interface User {
-      /**
-       * The unique identifier for the user.
-       */
-      id: string;
-
-      /**
-       * The user's display name shown on their public profile.
-       */
-      name: string | null;
-
-      /**
-       * The user's unique username shown on their public profile.
-       */
-      username: string;
-    }
-  }
-}
-
-export interface ResolutionCenterCaseDecidedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
-   */
-  data: ResolutionCenterCaseDecidedWebhookEvent.Data;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'resolution_center_case.decided';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export namespace ResolutionCenterCaseDecidedWebhookEvent {
-  /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
-   */
-  export interface Data {
-    /**
-     * The unique identifier for the resolution.
-     */
-    id: string;
-
-    /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
-     */
-    company: Data.Company | null;
-
-    /**
-     * The datetime the resolution was created.
-     */
-    created_at: string;
-
-    /**
-     * Whether the customer has filed an appeal after the initial resolution decision.
-     */
-    customer_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the customer.
-     */
-    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
-
-    /**
-     * The deadline by which the next response is required. Null if no deadline is
-     * currently active. As a Unix timestamp.
-     */
-    due_date: string | null;
-
-    /**
-     * The category of the dispute.
-     */
-    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
-
-    /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
-     */
-    member: Data.Member | null;
-
-    /**
-     * Whether the merchant has filed an appeal after the initial resolution decision.
-     */
-    merchant_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the merchant.
-     */
-    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    payment: Data.Payment;
-
-    /**
-     * The list of actions currently available to the Whop platform for moderating this
-     * resolution.
-     */
-    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
-
-    /**
-     * The most recent 50 messages, actions, and status changes that have occurred
-     * during this resolution case.
-     */
-    resolution_events: Array<Data.ResolutionEvent>;
-
-    /**
-     * The current status of the resolution case, indicating which party needs to
-     * respond or if the case is closed.
-     */
-    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
-
-    /**
-     * The datetime the resolution was last updated.
-     */
-    updated_at: string;
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    user: Data.User;
-  }
-
-  export namespace Data {
-    /**
-     * The company involved in this resolution case. Null if the company no longer
-     * exists.
-     */
-    export interface Company {
-      /**
-       * The unique identifier for the company.
-       */
-      id: string;
-
-      /**
-       * The display name of the company shown to customers.
-       */
-      title: string;
-    }
-
-    /**
-     * The membership record associated with the disputed payment. Null if the
-     * membership no longer exists.
-     */
-    export interface Member {
-      /**
-       * The unique identifier for the extra public member.
-       */
-      id: string;
-    }
-
-    /**
-     * The payment record that is the subject of this resolution case.
-     */
-    export interface Payment {
-      /**
-       * The unique identifier for the payment.
-       */
-      id: string;
-
-      /**
-       * The datetime the payment was created.
-       */
-      created_at: string;
-
-      /**
-       * The available currencies on the platform
-       */
-      currency: Shared.Currency | null;
-
-      /**
-       * The time at which this payment was successfully collected. Null if the payment
-       * has not yet succeeded. As a Unix timestamp.
-       */
-      paid_at: string | null;
-
-      /**
-       * The payment amount before taxes and discounts are applied. In the currency
-       * specified by the currency field.
-       */
-      subtotal: number | null;
-
-      /**
-       * The total amount charged to the customer for this payment, including taxes and
-       * after any discounts. In the currency specified by the currency field.
-       */
-      total: number;
-    }
-
-    /**
-     * A resolution event is a message or action within a resolution case, such as a
-     * response, escalation, or status change.
-     */
-    export interface ResolutionEvent {
-      /**
-       * The unique identifier for the resolution event.
-       */
-      id: string;
-
-      /**
-       * The type of action recorded in this event.
-       */
-      action:
-        | 'created'
-        | 'responded'
-        | 'accepted'
-        | 'denied'
-        | 'appealed'
-        | 'withdrew'
-        | 'requested_more_info'
-        | 'escalated'
-        | 'dispute_opened'
-        | 'dispute_customer_won'
-        | 'dispute_merchant_won';
-
-      /**
-       * The datetime the resolution event was created.
-       */
-      created_at: string;
-
-      /**
-       * The message body or additional context provided with this resolution event. Null
-       * if no details were included.
-       */
-      details: string | null;
-
-      /**
-       * The party who performed this action.
-       */
-      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
-    }
-
-    /**
-     * The customer (buyer) who filed this resolution case.
-     */
-    export interface User {
-      /**
-       * The unique identifier for the user.
-       */
-      id: string;
-
-      /**
-       * The user's display name shown on their public profile.
-       */
-      name: string | null;
-
-      /**
-       * The user's unique username shown on their public profile.
-       */
-      username: string;
-    }
-  }
-}
-
-export interface PaymentCreatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A payment represents a completed or attempted charge. Payments track the amount,
-   * status, currency, and payment method used.
-   */
-  data: Shared.Payment;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'payment.created';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface PaymentSucceededWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A payment represents a completed or attempted charge. Payments track the amount,
-   * status, currency, and payment method used.
-   */
-  data: Shared.Payment;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'payment.succeeded';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface PaymentFailedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A payment represents a completed or attempted charge. Payments track the amount,
-   * status, currency, and payment method used.
-   */
-  data: Shared.Payment;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'payment.failed';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface PaymentPendingWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A payment represents a completed or attempted charge. Payments track the amount,
-   * status, currency, and payment method used.
-   */
-  data: Shared.Payment;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'payment.pending';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface DisputeCreatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A dispute is a chargeback or payment challenge filed against a company,
-   * including evidence and response status.
-   */
-  data: DisputesAPI.Dispute;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'dispute.created';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
-}
-
-export interface DisputeUpdatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * A dispute is a chargeback or payment challenge filed against a company,
-   * including evidence and response status.
-   */
-  data: DisputesAPI.Dispute;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'dispute.updated';
-
-  /**
-   * The company ID that this webhook event is associated with
-   */
-  company_id?: string | null;
 }
 
 export interface RefundCreatedWebhookEvent {
@@ -2847,7 +2146,7 @@ export namespace RefundUpdatedWebhookEvent {
   }
 }
 
-export interface DisputeAlertCreatedWebhookEvent {
+export interface ResolutionCenterCaseCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -2859,10 +2158,10 @@ export interface DisputeAlertCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A dispute alert represents an early warning notification from a payment
-   * processor about a potential dispute or chargeback.
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
    */
-  data: DisputeAlertCreatedWebhookEvent.Data;
+  data: ResolutionCenterCaseCreatedWebhookEvent.Data;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -2872,7 +2171,7 @@ export interface DisputeAlertCreatedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'dispute_alert.created';
+  type: 'resolution_center_case.created';
 
   /**
    * The company ID that this webhook event is associated with
@@ -2880,97 +2179,129 @@ export interface DisputeAlertCreatedWebhookEvent {
   company_id?: string | null;
 }
 
-export namespace DisputeAlertCreatedWebhookEvent {
+export namespace ResolutionCenterCaseCreatedWebhookEvent {
   /**
-   * A dispute alert represents an early warning notification from a payment
-   * processor about a potential dispute or chargeback.
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
    */
   export interface Data {
     /**
-     * The unique identifier of the dispute alert.
+     * The unique identifier for the resolution.
      */
     id: string;
 
     /**
-     * The type of the dispute alert.
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
      */
-    alert_type: DisputeAlertsAPI.DisputeAlertType;
+    company: Data.Company | null;
 
     /**
-     * The alerted amount in the specified currency.
-     */
-    amount: number;
-
-    /**
-     * Whether this alert incurs a charge.
-     */
-    charge_for_alert: boolean;
-
-    /**
-     * The time the dispute alert was created.
+     * The datetime the resolution was created.
      */
     created_at: string;
 
     /**
-     * The three-letter ISO currency code for the alerted amount.
+     * Whether the customer has filed an appeal after the initial resolution decision.
      */
-    currency: Shared.Currency;
+    customer_appealed: boolean;
 
     /**
-     * The dispute associated with the dispute alert.
+     * The list of actions currently available to the customer.
      */
-    dispute: Data.Dispute | null;
+    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
 
     /**
-     * The payment associated with the dispute alert.
+     * The deadline by which the next response is required. Null if no deadline is
+     * currently active. As a Unix timestamp.
      */
-    payment: Data.Payment | null;
+    due_date: string | null;
 
     /**
-     * The date of the original transaction.
+     * The category of the dispute.
      */
-    transaction_date: string | null;
+    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
+
+    /**
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    member: Data.Member | null;
+
+    /**
+     * Whether the merchant has filed an appeal after the initial resolution decision.
+     */
+    merchant_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the merchant.
+     */
+    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
+
+    /**
+     * The payment record that is the subject of this resolution case.
+     */
+    payment: Data.Payment;
+
+    /**
+     * The list of actions currently available to the Whop platform for moderating this
+     * resolution.
+     */
+    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
+
+    /**
+     * The most recent 50 messages, actions, and status changes that have occurred
+     * during this resolution case.
+     */
+    resolution_events: Array<Data.ResolutionEvent>;
+
+    /**
+     * The current status of the resolution case, indicating which party needs to
+     * respond or if the case is closed.
+     */
+    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
+
+    /**
+     * The datetime the resolution was last updated.
+     */
+    updated_at: string;
+
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    user: Data.User;
   }
 
   export namespace Data {
     /**
-     * The dispute associated with the dispute alert.
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
      */
-    export interface Dispute {
+    export interface Company {
       /**
-       * The unique identifier for the dispute.
+       * The unique identifier for the company.
        */
       id: string;
 
       /**
-       * The disputed amount in the specified currency, formatted as a decimal.
+       * The display name of the company shown to customers.
        */
-      amount: number;
-
-      /**
-       * The datetime the dispute was created.
-       */
-      created_at: string | null;
-
-      /**
-       * The three-letter ISO currency code for the disputed amount.
-       */
-      currency: Shared.Currency;
-
-      /**
-       * A human-readable reason for the dispute.
-       */
-      reason: string | null;
-
-      /**
-       * The current status of the dispute lifecycle, such as needs_response,
-       * under_review, won, or lost.
-       */
-      status: DisputesAPI.DisputeStatuses;
+      title: string;
     }
 
     /**
-     * The payment associated with the dispute alert.
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    export interface Member {
+      /**
+       * The unique identifier for the extra public member.
+       */
+      id: string;
+    }
+
+    /**
+     * The payment record that is the subject of this resolution case.
      */
     export interface Payment {
       /**
@@ -2979,45 +2310,14 @@ export namespace DisputeAlertCreatedWebhookEvent {
       id: string;
 
       /**
-       * The reason why a specific payment was billed
-       */
-      billing_reason: PaymentsAPI.BillingReasons | null;
-
-      /**
-       * Possible card brands that a payment token can have
-       */
-      card_brand: PaymentsAPI.CardBrands | null;
-
-      /**
-       * The last four digits of the card used to make this payment. Null if the payment
-       * was not made with a card.
-       */
-      card_last4: string | null;
-
-      /**
        * The datetime the payment was created.
        */
       created_at: string;
 
       /**
-       * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+       * The available currencies on the platform
        */
-      currency: Shared.Currency;
-
-      /**
-       * When an alert came in that this transaction will be disputed
-       */
-      dispute_alerted_at: string | null;
-
-      /**
-       * The member attached to this payment.
-       */
-      member: Payment.Member | null;
-
-      /**
-       * The membership attached to this payment.
-       */
-      membership: Payment.Membership | null;
+      currency: Shared.Currency | null;
 
       /**
        * The time at which this payment was successfully collected. Null if the payment
@@ -3026,92 +2326,84 @@ export namespace DisputeAlertCreatedWebhookEvent {
       paid_at: string | null;
 
       /**
-       * The different types of payment methods that can be used.
-       */
-      payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
-
-      /**
-       * The subtotal to show to the creator (excluding buyer fees).
+       * The payment amount before taxes and discounts are applied. In the currency
+       * specified by the currency field.
        */
       subtotal: number | null;
 
       /**
-       * The total to show to the creator (excluding buyer fees).
+       * The total amount charged to the customer for this payment, including taxes and
+       * after any discounts. In the currency specified by the currency field.
        */
-      total: number | null;
-
-      /**
-       * The total in USD to show to the creator (excluding buyer fees).
-       */
-      usd_total: number | null;
-
-      /**
-       * The user that made this payment.
-       */
-      user: Payment.User | null;
+      total: number;
     }
 
-    export namespace Payment {
+    /**
+     * A resolution event is a message or action within a resolution case, such as a
+     * response, escalation, or status change.
+     */
+    export interface ResolutionEvent {
       /**
-       * The member attached to this payment.
+       * The unique identifier for the resolution event.
        */
-      export interface Member {
-        /**
-         * The unique identifier for the company member.
-         */
-        id: string;
-
-        /**
-         * The phone number for the member, if available.
-         */
-        phone: string | null;
-      }
+      id: string;
 
       /**
-       * The membership attached to this payment.
+       * The type of action recorded in this event.
        */
-      export interface Membership {
-        /**
-         * The unique identifier for the membership.
-         */
-        id: string;
-
-        /**
-         * The state of the membership.
-         */
-        status: Shared.MembershipStatus;
-      }
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
 
       /**
-       * The user that made this payment.
+       * The datetime the resolution event was created.
        */
-      export interface User {
-        /**
-         * The unique identifier for the user.
-         */
-        id: string;
+      created_at: string;
 
-        /**
-         * The user's email address. Requires the member:email:read permission to access.
-         * Null if not authorized.
-         */
-        email: string | null;
+      /**
+       * The message body or additional context provided with this resolution event. Null
+       * if no details were included.
+       */
+      details: string | null;
 
-        /**
-         * The user's display name shown on their public profile.
-         */
-        name: string | null;
+      /**
+       * The party who performed this action.
+       */
+      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
+    }
 
-        /**
-         * The user's unique username shown on their public profile.
-         */
-        username: string;
-      }
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
     }
   }
 }
 
-export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
+export interface ResolutionCenterCaseDecidedWebhookEvent {
   /**
    * A unique ID for every single webhook request
    */
@@ -3123,10 +2415,10 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   api_version: 'v1';
 
   /**
-   * A membership represents an active relationship between a user and a product. It
-   * tracks the user's access, billing status, and renewal schedule.
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
    */
-  data: Shared.Membership;
+  data: ResolutionCenterCaseDecidedWebhookEvent.Data;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -3136,7 +2428,715 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   /**
    * The webhook event type
    */
-  type: 'membership.cancel_at_period_end_changed';
+  type: 'resolution_center_case.decided';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ResolutionCenterCaseDecidedWebhookEvent {
+  /**
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the resolution.
+     */
+    id: string;
+
+    /**
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
+     */
+    company: Data.Company | null;
+
+    /**
+     * The datetime the resolution was created.
+     */
+    created_at: string;
+
+    /**
+     * Whether the customer has filed an appeal after the initial resolution decision.
+     */
+    customer_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the customer.
+     */
+    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
+
+    /**
+     * The deadline by which the next response is required. Null if no deadline is
+     * currently active. As a Unix timestamp.
+     */
+    due_date: string | null;
+
+    /**
+     * The category of the dispute.
+     */
+    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
+
+    /**
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    member: Data.Member | null;
+
+    /**
+     * Whether the merchant has filed an appeal after the initial resolution decision.
+     */
+    merchant_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the merchant.
+     */
+    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
+
+    /**
+     * The payment record that is the subject of this resolution case.
+     */
+    payment: Data.Payment;
+
+    /**
+     * The list of actions currently available to the Whop platform for moderating this
+     * resolution.
+     */
+    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
+
+    /**
+     * The most recent 50 messages, actions, and status changes that have occurred
+     * during this resolution case.
+     */
+    resolution_events: Array<Data.ResolutionEvent>;
+
+    /**
+     * The current status of the resolution case, indicating which party needs to
+     * respond or if the case is closed.
+     */
+    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
+
+    /**
+     * The datetime the resolution was last updated.
+     */
+    updated_at: string;
+
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    user: Data.User;
+  }
+
+  export namespace Data {
+    /**
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
+     */
+    export interface Company {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    export interface Member {
+      /**
+       * The unique identifier for the extra public member.
+       */
+      id: string;
+    }
+
+    /**
+     * The payment record that is the subject of this resolution case.
+     */
+    export interface Payment {
+      /**
+       * The unique identifier for the payment.
+       */
+      id: string;
+
+      /**
+       * The datetime the payment was created.
+       */
+      created_at: string;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency: Shared.Currency | null;
+
+      /**
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
+       */
+      paid_at: string | null;
+
+      /**
+       * The payment amount before taxes and discounts are applied. In the currency
+       * specified by the currency field.
+       */
+      subtotal: number | null;
+
+      /**
+       * The total amount charged to the customer for this payment, including taxes and
+       * after any discounts. In the currency specified by the currency field.
+       */
+      total: number;
+    }
+
+    /**
+     * A resolution event is a message or action within a resolution case, such as a
+     * response, escalation, or status change.
+     */
+    export interface ResolutionEvent {
+      /**
+       * The unique identifier for the resolution event.
+       */
+      id: string;
+
+      /**
+       * The type of action recorded in this event.
+       */
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
+
+      /**
+       * The datetime the resolution event was created.
+       */
+      created_at: string;
+
+      /**
+       * The message body or additional context provided with this resolution event. Null
+       * if no details were included.
+       */
+      details: string | null;
+
+      /**
+       * The party who performed this action.
+       */
+      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
+    }
+
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+  }
+}
+
+export interface ResolutionCenterCaseUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
+   */
+  data: ResolutionCenterCaseUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'resolution_center_case.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ResolutionCenterCaseUpdatedWebhookEvent {
+  /**
+   * A resolution center case is a dispute or support case between a user and a
+   * company, tracking the issue, status, and outcome.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the resolution.
+     */
+    id: string;
+
+    /**
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
+     */
+    company: Data.Company | null;
+
+    /**
+     * The datetime the resolution was created.
+     */
+    created_at: string;
+
+    /**
+     * Whether the customer has filed an appeal after the initial resolution decision.
+     */
+    customer_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the customer.
+     */
+    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
+
+    /**
+     * The deadline by which the next response is required. Null if no deadline is
+     * currently active. As a Unix timestamp.
+     */
+    due_date: string | null;
+
+    /**
+     * The category of the dispute.
+     */
+    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
+
+    /**
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    member: Data.Member | null;
+
+    /**
+     * Whether the merchant has filed an appeal after the initial resolution decision.
+     */
+    merchant_appealed: boolean;
+
+    /**
+     * The list of actions currently available to the merchant.
+     */
+    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
+
+    /**
+     * The payment record that is the subject of this resolution case.
+     */
+    payment: Data.Payment;
+
+    /**
+     * The list of actions currently available to the Whop platform for moderating this
+     * resolution.
+     */
+    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
+
+    /**
+     * The most recent 50 messages, actions, and status changes that have occurred
+     * during this resolution case.
+     */
+    resolution_events: Array<Data.ResolutionEvent>;
+
+    /**
+     * The current status of the resolution case, indicating which party needs to
+     * respond or if the case is closed.
+     */
+    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
+
+    /**
+     * The datetime the resolution was last updated.
+     */
+    updated_at: string;
+
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    user: Data.User;
+  }
+
+  export namespace Data {
+    /**
+     * The company involved in this resolution case. Null if the company no longer
+     * exists.
+     */
+    export interface Company {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * The membership record associated with the disputed payment. Null if the
+     * membership no longer exists.
+     */
+    export interface Member {
+      /**
+       * The unique identifier for the extra public member.
+       */
+      id: string;
+    }
+
+    /**
+     * The payment record that is the subject of this resolution case.
+     */
+    export interface Payment {
+      /**
+       * The unique identifier for the payment.
+       */
+      id: string;
+
+      /**
+       * The datetime the payment was created.
+       */
+      created_at: string;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency: Shared.Currency | null;
+
+      /**
+       * The time at which this payment was successfully collected. Null if the payment
+       * has not yet succeeded. As a Unix timestamp.
+       */
+      paid_at: string | null;
+
+      /**
+       * The payment amount before taxes and discounts are applied. In the currency
+       * specified by the currency field.
+       */
+      subtotal: number | null;
+
+      /**
+       * The total amount charged to the customer for this payment, including taxes and
+       * after any discounts. In the currency specified by the currency field.
+       */
+      total: number;
+    }
+
+    /**
+     * A resolution event is a message or action within a resolution case, such as a
+     * response, escalation, or status change.
+     */
+    export interface ResolutionEvent {
+      /**
+       * The unique identifier for the resolution event.
+       */
+      id: string;
+
+      /**
+       * The type of action recorded in this event.
+       */
+      action:
+        | 'created'
+        | 'responded'
+        | 'accepted'
+        | 'denied'
+        | 'appealed'
+        | 'withdrew'
+        | 'requested_more_info'
+        | 'escalated'
+        | 'dispute_opened'
+        | 'dispute_customer_won'
+        | 'dispute_merchant_won';
+
+      /**
+       * The datetime the resolution event was created.
+       */
+      created_at: string;
+
+      /**
+       * The message body or additional context provided with this resolution event. Null
+       * if no details were included.
+       */
+      details: string | null;
+
+      /**
+       * The party who performed this action.
+       */
+      reporter_type: 'merchant' | 'customer' | 'platform' | 'system';
+    }
+
+    /**
+     * The customer (buyer) who filed this resolution case.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+  }
+}
+
+export interface SetupIntentCanceledWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.canceled';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface SetupIntentRequiresActionWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.requires_action';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface SetupIntentSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A setup intent allows a user to save a payment method for future use without
+   * making an immediate purchase.
+   */
+  data: SetupIntentsAPI.SetupIntent;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'setup_intent.succeeded';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface VerificationSucceededWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
+   */
+  data: VerificationSucceededWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'verification.succeeded';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace VerificationSucceededWebhookEvent {
+  /**
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
+   */
+  export interface Data {
+    /**
+     * The numeric id of the verification record.
+     */
+    id: string;
+
+    /**
+     * An error code for a verification attempt.
+     */
+    last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+    /**
+     * A human-readable explanation of the most recent verification error. Null if no
+     * error has occurred.
+     */
+    last_error_reason: string | null;
+
+    /**
+     * The current status of this verification session.
+     */
+    status: VerificationsAPI.VerificationStatus;
+  }
+}
+
+export interface WithdrawalCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A withdrawal represents a request to transfer funds from a ledger account to an
+   * external payout method.
+   */
+  data: WithdrawalsAPI.Withdrawal;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'withdrawal.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface WithdrawalUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A withdrawal represents a request to transfer funds from a ledger account to an
+   * external payout method.
+   */
+  data: WithdrawalsAPI.Withdrawal;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'withdrawal.updated';
 
   /**
    * The company ID that this webhook event is associated with
@@ -3145,39 +3145,39 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
 }
 
 export type UnwrapWebhookEvent =
+  | CourseLessonInteractionCompletedWebhookEvent
+  | DisputeCreatedWebhookEvent
+  | DisputeUpdatedWebhookEvent
+  | DisputeAlertCreatedWebhookEvent
+  | EntryApprovedWebhookEvent
+  | EntryCreatedWebhookEvent
+  | EntryDeletedWebhookEvent
+  | EntryDeniedWebhookEvent
   | InvoiceCreatedWebhookEvent
   | InvoiceMarkedUncollectibleWebhookEvent
   | InvoicePaidWebhookEvent
   | InvoicePastDueWebhookEvent
   | InvoiceVoidedWebhookEvent
   | MembershipActivatedWebhookEvent
+  | MembershipCancelAtPeriodEndChangedWebhookEvent
   | MembershipDeactivatedWebhookEvent
-  | EntryCreatedWebhookEvent
-  | EntryApprovedWebhookEvent
-  | EntryDeniedWebhookEvent
-  | EntryDeletedWebhookEvent
-  | SetupIntentRequiresActionWebhookEvent
-  | SetupIntentSucceededWebhookEvent
-  | SetupIntentCanceledWebhookEvent
-  | WithdrawalCreatedWebhookEvent
-  | WithdrawalUpdatedWebhookEvent
-  | CourseLessonInteractionCompletedWebhookEvent
-  | PayoutMethodCreatedWebhookEvent
-  | VerificationSucceededWebhookEvent
-  | PayoutAccountStatusUpdatedWebhookEvent
-  | ResolutionCenterCaseCreatedWebhookEvent
-  | ResolutionCenterCaseUpdatedWebhookEvent
-  | ResolutionCenterCaseDecidedWebhookEvent
   | PaymentCreatedWebhookEvent
-  | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
   | PaymentPendingWebhookEvent
-  | DisputeCreatedWebhookEvent
-  | DisputeUpdatedWebhookEvent
+  | PaymentSucceededWebhookEvent
+  | PayoutAccountStatusUpdatedWebhookEvent
+  | PayoutMethodCreatedWebhookEvent
   | RefundCreatedWebhookEvent
   | RefundUpdatedWebhookEvent
-  | DisputeAlertCreatedWebhookEvent
-  | MembershipCancelAtPeriodEndChangedWebhookEvent;
+  | ResolutionCenterCaseCreatedWebhookEvent
+  | ResolutionCenterCaseDecidedWebhookEvent
+  | ResolutionCenterCaseUpdatedWebhookEvent
+  | SetupIntentCanceledWebhookEvent
+  | SetupIntentRequiresActionWebhookEvent
+  | SetupIntentSucceededWebhookEvent
+  | VerificationSucceededWebhookEvent
+  | WithdrawalCreatedWebhookEvent
+  | WithdrawalUpdatedWebhookEvent;
 
 export interface WebhookListParams extends CursorPageParams {
   /**
@@ -3270,39 +3270,39 @@ export declare namespace Webhooks {
     type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
+    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
+    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
+    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
+    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
+    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
     type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
+    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
-    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
-    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
-    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
-    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
-    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
-    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
-    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
-    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
-    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
-    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
-    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
-    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
-    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
-    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
-    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
-    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
-    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
-    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
-    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
+    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
+    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
-    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
-    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
+    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
+    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
+    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
+    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
     type WebhookListParams as WebhookListParams,
