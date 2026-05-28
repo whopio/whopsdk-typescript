@@ -62,15 +62,13 @@ export class AdCampaigns extends APIResource {
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const adCampaignListResponse of client.adCampaigns.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
+   * for await (const adCampaignListResponse of client.adCampaigns.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: AdCampaignListParams,
+    query: AdCampaignListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AdCampaignListResponsesCursorPage, AdCampaignListResponse> {
     return this._client.getAPIList('/ad_campaigns', CursorPage<AdCampaignListResponse>, {
@@ -325,14 +323,14 @@ export interface AdCampaignUpdateParams {
 
 export interface AdCampaignListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list ad campaigns for.
-   */
-  company_id: string;
-
-  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string | null;
+
+  /**
+   * The unique identifier of the company to list ad campaigns for.
+   */
+  company_id?: string | null;
 
   /**
    * Only return ad campaigns created after this timestamp.

@@ -1084,7 +1084,8 @@ export type Currency =
   | 'btc'
   | 'cny'
   | 'usdt'
-  | 'kzt';
+  | 'kzt'
+  | 'awg';
 
 /**
  * The different types of custom CTAs that can be selected.

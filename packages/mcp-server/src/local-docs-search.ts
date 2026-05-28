@@ -7999,9 +7999,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) ad_campaigns > (method) list',
     qualified: 'client.adCampaigns.list',
     params: [
-      'company_id: string;',
       'after?: string;',
       'before?: string;',
+      'company_id?: string;',
       'created_after?: string;',
       'created_before?: string;',
       'first?: number;',
@@ -8012,22 +8012,22 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ id: string; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'; title: string; total_spend: number; updated_at: string; }",
     markdown:
-      "## list\n\n`client.adCampaigns.list(company_id: string, after?: string, before?: string, created_after?: string, created_before?: string, first?: number, last?: number, query?: string, status?: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'): { id: string; budget: number; budget_type: ad_budget_type; created_at: string; platform: ad_campaign_platform; status: ad_campaign_status; title: string; total_spend: number; updated_at: string; }`\n\n**get** `/ad_campaigns`\n\nReturns a paginated list of ad campaigns for a company, with optional filtering by status, and creation date.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `company_id: string`\n  The unique identifier of the company to list ad campaigns for.\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `created_after?: string`\n  Only return ad campaigns created after this timestamp.\n\n- `created_before?: string`\n  Only return ad campaigns created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `query?: string`\n  Case-insensitive substring match against the campaign title.\n\n- `status?: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'`\n  The status of an ad campaign.\n\n### Returns\n\n- `{ id: string; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'; title: string; total_spend: number; updated_at: string; }`\n  An advertising campaign running on an external platform or within Whop.\n\n  - `id: string`\n  - `budget: number`\n  - `budget_type: 'daily' | 'lifetime'`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'`\n  - `title: string`\n  - `total_spend: number`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adCampaignListResponse of client.adCampaigns.list({ company_id: 'biz_xxxxxxxxxxxxxx' })) {\n  console.log(adCampaignListResponse);\n}\n```",
+      "## list\n\n`client.adCampaigns.list(after?: string, before?: string, company_id?: string, created_after?: string, created_before?: string, first?: number, last?: number, query?: string, status?: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'): { id: string; budget: number; budget_type: ad_budget_type; created_at: string; platform: ad_campaign_platform; status: ad_campaign_status; title: string; total_spend: number; updated_at: string; }`\n\n**get** `/ad_campaigns`\n\nReturns a paginated list of ad campaigns for a company, with optional filtering by status, and creation date.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `company_id?: string`\n  The unique identifier of the company to list ad campaigns for.\n\n- `created_after?: string`\n  Only return ad campaigns created after this timestamp.\n\n- `created_before?: string`\n  Only return ad campaigns created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `query?: string`\n  Case-insensitive substring match against the campaign title.\n\n- `status?: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'`\n  The status of an ad campaign.\n\n### Returns\n\n- `{ id: string; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'; title: string; total_spend: number; updated_at: string; }`\n  An advertising campaign running on an external platform or within Whop.\n\n  - `id: string`\n  - `budget: number`\n  - `budget_type: 'daily' | 'lifetime'`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged'`\n  - `title: string`\n  - `total_spend: number`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adCampaignListResponse of client.adCampaigns.list()) {\n  console.log(adCampaignListResponse);\n}\n```",
     perLanguage: {
       typescript: {
         method: 'client.adCampaigns.list',
         example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const adCampaignListResponse of client.adCampaigns.list({\n  company_id: 'biz_xxxxxxxxxxxxxx',\n})) {\n  console.log(adCampaignListResponse.id);\n}",
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const adCampaignListResponse of client.adCampaigns.list()) {\n  console.log(adCampaignListResponse.id);\n}",
       },
       python: {
         method: 'ad_campaigns.list',
         example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ad_campaigns.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ad_campaigns.list()\npage = page.data[0]\nprint(page.id)',
       },
       ruby: {
         method: 'ad_campaigns.list',
         example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ad_campaigns.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ad_campaigns.list\n\nputs(page)',
       },
       http: {
         example:
