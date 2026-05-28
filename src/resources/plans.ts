@@ -267,6 +267,11 @@ export interface PlanListResponse {
   stock: number | null;
 
   /**
+   * The 3D Secure behavior for a plan.
+   */
+  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+  /**
    * The display name of the plan shown to customers on the product page and at
    * checkout. Maximum 30 characters. Null if no title has been set.
    */
@@ -491,6 +496,11 @@ export interface PlanCreateParams {
    * is true.
    */
   stock?: number | null;
+
+  /**
+   * The 3D Secure behavior for a plan.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
 
   /**
    * The display name of the plan shown to customers on the product page.
@@ -719,6 +729,11 @@ export interface PlanUpdateParams {
    * Provided in the plan's currency (e.g., 19.99 for $19.99).
    */
   strike_through_renewal_price?: number | null;
+
+  /**
+   * The 3D Secure behavior for a plan.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
 
   /**
    * The display name of the plan shown to customers on the product page.

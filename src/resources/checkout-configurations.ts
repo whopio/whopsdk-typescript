@@ -231,6 +231,11 @@ export namespace CheckoutConfigurationListResponse {
     renewal_price: number;
 
     /**
+     * The 3D Secure behavior for a plan.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
      * The number of free trial days before the first charge on a renewal plan. Null if
      * no trial is configured or the current user has already used a trial for this
      * plan.

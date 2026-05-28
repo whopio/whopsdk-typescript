@@ -600,6 +600,11 @@ export namespace CheckoutConfiguration {
     renewal_price: number;
 
     /**
+     * The 3D Secure behavior for a plan.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
      * The number of free trial days before the first charge on a renewal plan. Null if
      * no trial is configured or the current user has already used a trial for this
      * plan.
@@ -3180,6 +3185,11 @@ export interface Plan {
    * 'exclusive' (tax added at checkout), or 'unspecified' (tax not configured).
    */
   tax_type: TaxType;
+
+  /**
+   * The 3D Secure behavior for a plan.
+   */
+  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
   /**
    * The display name of the plan shown to customers on the product page and at
