@@ -581,6 +581,7 @@ export namespace AdGroupUpdateParams {
         | 'IMAGINE'
         | 'LEAD_FROM_IG_DIRECT'
         | 'LEAD_FROM_MESSENGER'
+        | 'LEAD_FORM_MESSENGER'
         | 'WEBSITE_AND_LEAD_FORM'
         | 'WEBSITE_AND_PHONE_CALL'
         | 'BROADCAST_CHANNEL'
@@ -662,6 +663,7 @@ export namespace AdGroupUpdateParams {
       lead_conversion_location?:
         | 'website'
         | 'instant_forms'
+        | 'website_and_instant_forms'
         | 'messenger'
         | 'instagram'
         | 'calls'
