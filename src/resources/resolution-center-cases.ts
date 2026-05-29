@@ -12,17 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class ResolutionCenterCases extends APIResource {
   /**
-   * Retrieves the details of an existing resolution center case.
-   *
-   * Required permissions:
-   *
-   * - `payment:resolution_center_case:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<ResolutionCenterCaseRetrieveResponse> {
-    return this._client.get(path`/resolution_center_cases/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of resolution center cases, with optional filtering by
    * company, status, and creation date.
    *
@@ -38,6 +27,17 @@ export class ResolutionCenterCases extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing resolution center case.
+   *
+   * Required permissions:
+   *
+   * - `payment:resolution_center_case:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<ResolutionCenterCaseRetrieveResponse> {
+    return this._client.get(path`/resolution_center_cases/${id}`, options);
   }
 }
 
@@ -75,7 +75,6 @@ export type ResolutionCenterCasePlatformResponse =
   | 'request_buyer_info'
   | 'request_merchant_info'
   | 'merchant_wins'
-  | 'platform_refund'
   | 'merchant_refund';
 
 /**

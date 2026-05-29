@@ -375,6 +375,7 @@ export type AuthorizedUserRoles =
   | 'admin'
   | 'sales_manager'
   | 'moderator'
+  | 'advertiser'
   | 'app_manager'
   | 'support'
   | 'manager'
@@ -550,6 +551,12 @@ export namespace CheckoutConfiguration {
     id: string;
 
     /**
+     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+     * does not check processor compatibility or feature flags.
+     */
+    adaptive_pricing_enabled: boolean;
+
+    /**
      * The number of days between each recurring charge. Null for one-time plans. For
      * example, 30 for monthly or 365 for annual billing.
      */
@@ -591,6 +598,11 @@ export namespace CheckoutConfiguration {
      * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
      */
     renewal_price: number;
+
+    /**
+     * The 3D Secure behavior for a plan.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
     /**
      * The number of free trial days before the first charge on a renewal plan. Null if
@@ -1076,7 +1088,9 @@ export type Currency =
   | 'rub'
   | 'btc'
   | 'cny'
-  | 'usdt';
+  | 'usdt'
+  | 'kzt'
+  | 'awg';
 
 /**
  * The different types of custom CTAs that can be selected.
@@ -2036,6 +2050,12 @@ export namespace Membership {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2046,6 +2066,12 @@ export namespace Membership {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The display name of the product shown to customers on the product page and in
@@ -2363,9 +2389,9 @@ export interface Payment {
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
-  currency: Currency | null;
+  currency: Currency;
 
   /**
    * When an alert came in that this transaction will be disputed
@@ -2487,6 +2513,22 @@ export interface Payment {
    * otherwise false. Used to decide if Whop can attempt the charge again.
    */
   retryable: boolean;
+
+  /**
+   * The total amount charged to the customer for this payment, including taxes and
+   * after any discounts. In the currency specified by the currency field.
+   */
+  settlement_amount: number;
+
+  /**
+   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+   */
+  settlement_currency: Currency;
+
+  /**
+   * Deprecated. Always returns null.
+   */
+  settlement_exchange_rate: number | null;
 
   /**
    * The status of a receipt
@@ -2663,8 +2705,7 @@ export namespace Payment {
     currency: Shared.Currency;
 
     /**
-     * Whether the dispute evidence can still be edited and submitted. Returns true
-     * only when the dispute status requires a response.
+     * Whether the dispute evidence can still be edited and submitted.
      */
     editable: boolean | null;
 
@@ -2770,6 +2811,11 @@ export namespace Payment {
     id: string;
 
     /**
+     * The phone number associated with this membership.
+     */
+    phone_number: string | null;
+
+    /**
      * The state of the membership.
      */
     status: Shared.MembershipStatus;
@@ -2842,6 +2888,12 @@ export namespace Payment {
      * A personal description or notes section for the business.
      */
     internal_notes: string | null;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -2852,6 +2904,12 @@ export namespace Payment {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The URL slug used in the product's public link (e.g., 'my-product' in
@@ -2996,6 +3054,12 @@ export interface Plan {
   id: string;
 
   /**
+   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+   * does not check processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
+
+  /**
    * The number of days between each recurring charge. Null for one-time plans. For
    * example, 30 for monthly or 365 for annual billing.
    */
@@ -3068,6 +3132,12 @@ export interface Plan {
   member_count: number | null;
 
   /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The explicit payment method configuration specifying which payment methods are
    * enabled or disabled for this plan. Null if the plan uses default settings.
    */
@@ -3120,6 +3190,11 @@ export interface Plan {
    * 'exclusive' (tax added at checkout), or 'unspecified' (tax not configured).
    */
   tax_type: TaxType;
+
+  /**
+   * The 3D Secure behavior for a plan.
+   */
+  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
   /**
    * The display name of the plan shown to customers on the product page and at
@@ -3358,6 +3433,12 @@ export interface Product {
   member_count: number;
 
   /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
    * The user who owns the company that sells this product.
    */
   owner_user: Product.OwnerUser;
@@ -3518,6 +3599,12 @@ export interface ProductListItem {
    * Returns 0 if the company has disabled public member counts.
    */
   member_count: number;
+
+  /**
+   * Custom key-value pairs stored on the product. Included in webhook payloads for
+   * payment and membership events.
+   */
+  metadata: { [key: string]: unknown } | null;
 
   /**
    * The total number of published customer reviews for this product's company.
