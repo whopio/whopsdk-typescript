@@ -220,6 +220,10 @@ export type WebhookEvent =
   | 'course_lesson_interaction.completed'
   | 'payout_method.created'
   | 'verification.succeeded'
+  | 'identity_profile.approved'
+  | 'identity_profile.rejected'
+  | 'identity_profile.needs_action'
+  | 'identity_profile.updated'
   | 'payout_account.status_updated'
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
@@ -1090,6 +1094,1070 @@ export namespace VerificationSucceededWebhookEvent {
      * The current status of this verification session.
      */
     status: VerificationsAPI.VerificationStatus;
+  }
+}
+
+export interface IdentityProfileApprovedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  data: IdentityProfileApprovedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'identity_profile.approved';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace IdentityProfileApprovedWebhookEvent {
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  export interface Data {
+    /**
+     * The tag of the identity profile (idpf_xxx).
+     */
+    id: string;
+
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    business_address: Data.BusinessAddress | null;
+
+    /**
+     * Business entity name. Present on `business` profiles.
+     */
+    business_name: string | null;
+
+    /**
+     * Reported legal structure of a business profile (e.g. `corp`, `llc`).
+     * Provider-specific values; present on `business` profiles.
+     */
+    business_structure: string | null;
+
+    /**
+     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * country of citizenship or residence reported by the identity provider; for
+     * businesses this is the country of incorporation.
+     */
+    country: string | null;
+
+    /**
+     * When the identity profile was first created.
+     */
+    created_at: string;
+
+    /**
+     * ISO date (`YYYY-MM-DD`) reported by the identity provider. Present on
+     * `individual` profiles.
+     */
+    date_of_birth: string | null;
+
+    /**
+     * Email address reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    email: string | null;
+
+    /**
+     * Individual's first name.
+     */
+    first_name: string | null;
+
+    /**
+     * Individual's last name.
+     */
+    last_name: string | null;
+
+    /**
+     * The companies this identity profile is currently linked to. Only populated for
+     * direct Whop user sessions; always empty when authenticated via API key, app, or
+     * OAuth scope (a single identity can be linked to companies the calling platform
+     * is not entitled to see).
+     */
+    linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    personal_address: Data.PersonalAddress | null;
+
+    /**
+     * Phone number reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    phone: string | null;
+
+    /**
+     * Whether this is an 'individual' or 'business' profile.
+     */
+    profile_type: string;
+
+    /**
+     * Derived verification status across all linked verifications.
+     */
+    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+
+    /**
+     * When the identity profile was last synced from a verification.
+     */
+    updated_at: string;
+
+    /**
+     * All verification attempts attached to this identity profile, ordered most-recent
+     * first.
+     */
+    verifications: Array<Data.Verification>;
+  }
+
+  export namespace Data {
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    export interface BusinessAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface LinkedCompany {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    export interface PersonalAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * An identity verification session used to confirm a person or entity's identity
+     * for payout account eligibility.
+     */
+    export interface Verification {
+      /**
+       * The numeric id of the verification record.
+       */
+      id: string;
+
+      /**
+       * When the verification record was created.
+       */
+      created_at: string;
+
+      /**
+       * An error code for a verification attempt.
+       */
+      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+      /**
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
+       */
+      last_error_reason: string | null;
+
+      /**
+       * A URL the user can visit to complete the verification process. Null if the
+       * session does not require user interaction.
+       */
+      session_url: string | null;
+
+      /**
+       * The current status of this verification session.
+       */
+      status: VerificationsAPI.VerificationStatus;
+    }
+  }
+}
+
+export interface IdentityProfileRejectedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  data: IdentityProfileRejectedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'identity_profile.rejected';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace IdentityProfileRejectedWebhookEvent {
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  export interface Data {
+    /**
+     * The tag of the identity profile (idpf_xxx).
+     */
+    id: string;
+
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    business_address: Data.BusinessAddress | null;
+
+    /**
+     * Business entity name. Present on `business` profiles.
+     */
+    business_name: string | null;
+
+    /**
+     * Reported legal structure of a business profile (e.g. `corp`, `llc`).
+     * Provider-specific values; present on `business` profiles.
+     */
+    business_structure: string | null;
+
+    /**
+     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * country of citizenship or residence reported by the identity provider; for
+     * businesses this is the country of incorporation.
+     */
+    country: string | null;
+
+    /**
+     * When the identity profile was first created.
+     */
+    created_at: string;
+
+    /**
+     * ISO date (`YYYY-MM-DD`) reported by the identity provider. Present on
+     * `individual` profiles.
+     */
+    date_of_birth: string | null;
+
+    /**
+     * Email address reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    email: string | null;
+
+    /**
+     * Individual's first name.
+     */
+    first_name: string | null;
+
+    /**
+     * Individual's last name.
+     */
+    last_name: string | null;
+
+    /**
+     * The companies this identity profile is currently linked to. Only populated for
+     * direct Whop user sessions; always empty when authenticated via API key, app, or
+     * OAuth scope (a single identity can be linked to companies the calling platform
+     * is not entitled to see).
+     */
+    linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    personal_address: Data.PersonalAddress | null;
+
+    /**
+     * Phone number reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    phone: string | null;
+
+    /**
+     * Whether this is an 'individual' or 'business' profile.
+     */
+    profile_type: string;
+
+    /**
+     * Derived verification status across all linked verifications.
+     */
+    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+
+    /**
+     * When the identity profile was last synced from a verification.
+     */
+    updated_at: string;
+
+    /**
+     * All verification attempts attached to this identity profile, ordered most-recent
+     * first.
+     */
+    verifications: Array<Data.Verification>;
+  }
+
+  export namespace Data {
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    export interface BusinessAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface LinkedCompany {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    export interface PersonalAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * An identity verification session used to confirm a person or entity's identity
+     * for payout account eligibility.
+     */
+    export interface Verification {
+      /**
+       * The numeric id of the verification record.
+       */
+      id: string;
+
+      /**
+       * When the verification record was created.
+       */
+      created_at: string;
+
+      /**
+       * An error code for a verification attempt.
+       */
+      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+      /**
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
+       */
+      last_error_reason: string | null;
+
+      /**
+       * A URL the user can visit to complete the verification process. Null if the
+       * session does not require user interaction.
+       */
+      session_url: string | null;
+
+      /**
+       * The current status of this verification session.
+       */
+      status: VerificationsAPI.VerificationStatus;
+    }
+  }
+}
+
+export interface IdentityProfileNeedsActionWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  data: IdentityProfileNeedsActionWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'identity_profile.needs_action';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace IdentityProfileNeedsActionWebhookEvent {
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  export interface Data {
+    /**
+     * The tag of the identity profile (idpf_xxx).
+     */
+    id: string;
+
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    business_address: Data.BusinessAddress | null;
+
+    /**
+     * Business entity name. Present on `business` profiles.
+     */
+    business_name: string | null;
+
+    /**
+     * Reported legal structure of a business profile (e.g. `corp`, `llc`).
+     * Provider-specific values; present on `business` profiles.
+     */
+    business_structure: string | null;
+
+    /**
+     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * country of citizenship or residence reported by the identity provider; for
+     * businesses this is the country of incorporation.
+     */
+    country: string | null;
+
+    /**
+     * When the identity profile was first created.
+     */
+    created_at: string;
+
+    /**
+     * ISO date (`YYYY-MM-DD`) reported by the identity provider. Present on
+     * `individual` profiles.
+     */
+    date_of_birth: string | null;
+
+    /**
+     * Email address reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    email: string | null;
+
+    /**
+     * Individual's first name.
+     */
+    first_name: string | null;
+
+    /**
+     * Individual's last name.
+     */
+    last_name: string | null;
+
+    /**
+     * The companies this identity profile is currently linked to. Only populated for
+     * direct Whop user sessions; always empty when authenticated via API key, app, or
+     * OAuth scope (a single identity can be linked to companies the calling platform
+     * is not entitled to see).
+     */
+    linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    personal_address: Data.PersonalAddress | null;
+
+    /**
+     * Phone number reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    phone: string | null;
+
+    /**
+     * Whether this is an 'individual' or 'business' profile.
+     */
+    profile_type: string;
+
+    /**
+     * Derived verification status across all linked verifications.
+     */
+    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+
+    /**
+     * When the identity profile was last synced from a verification.
+     */
+    updated_at: string;
+
+    /**
+     * All verification attempts attached to this identity profile, ordered most-recent
+     * first.
+     */
+    verifications: Array<Data.Verification>;
+  }
+
+  export namespace Data {
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    export interface BusinessAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface LinkedCompany {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    export interface PersonalAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * An identity verification session used to confirm a person or entity's identity
+     * for payout account eligibility.
+     */
+    export interface Verification {
+      /**
+       * The numeric id of the verification record.
+       */
+      id: string;
+
+      /**
+       * When the verification record was created.
+       */
+      created_at: string;
+
+      /**
+       * An error code for a verification attempt.
+       */
+      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+      /**
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
+       */
+      last_error_reason: string | null;
+
+      /**
+       * A URL the user can visit to complete the verification process. Null if the
+       * session does not require user interaction.
+       */
+      session_url: string | null;
+
+      /**
+       * The current status of this verification session.
+       */
+      status: VerificationsAPI.VerificationStatus;
+    }
+  }
+}
+
+export interface IdentityProfileUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  data: IdentityProfileUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'identity_profile.updated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace IdentityProfileUpdatedWebhookEvent {
+  /**
+   * A consolidated identity or business profile synced from verification provider
+   * data.
+   */
+  export interface Data {
+    /**
+     * The tag of the identity profile (idpf_xxx).
+     */
+    id: string;
+
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    business_address: Data.BusinessAddress | null;
+
+    /**
+     * Business entity name. Present on `business` profiles.
+     */
+    business_name: string | null;
+
+    /**
+     * Reported legal structure of a business profile (e.g. `corp`, `llc`).
+     * Provider-specific values; present on `business` profiles.
+     */
+    business_structure: string | null;
+
+    /**
+     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * country of citizenship or residence reported by the identity provider; for
+     * businesses this is the country of incorporation.
+     */
+    country: string | null;
+
+    /**
+     * When the identity profile was first created.
+     */
+    created_at: string;
+
+    /**
+     * ISO date (`YYYY-MM-DD`) reported by the identity provider. Present on
+     * `individual` profiles.
+     */
+    date_of_birth: string | null;
+
+    /**
+     * Email address reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    email: string | null;
+
+    /**
+     * Individual's first name.
+     */
+    first_name: string | null;
+
+    /**
+     * Individual's last name.
+     */
+    last_name: string | null;
+
+    /**
+     * The companies this identity profile is currently linked to. Only populated for
+     * direct Whop user sessions; always empty when authenticated via API key, app, or
+     * OAuth scope (a single identity can be linked to companies the calling platform
+     * is not entitled to see).
+     */
+    linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    personal_address: Data.PersonalAddress | null;
+
+    /**
+     * Phone number reported by the identity provider. Typically present on
+     * `individual` profiles.
+     */
+    phone: string | null;
+
+    /**
+     * Whether this is an 'individual' or 'business' profile.
+     */
+    profile_type: string;
+
+    /**
+     * Derived verification status across all linked verifications.
+     */
+    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+
+    /**
+     * When the identity profile was last synced from a verification.
+     */
+    updated_at: string;
+
+    /**
+     * All verification attempts attached to this identity profile, ordered most-recent
+     * first.
+     */
+    verifications: Array<Data.Verification>;
+  }
+
+  export namespace Data {
+    /**
+     * Registered business address reported by the identity provider. Present on
+     * `business` profiles.
+     */
+    export interface BusinessAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface LinkedCompany {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+    }
+
+    /**
+     * Residential address reported by the identity provider. Present on `individual`
+     * profiles.
+     */
+    export interface PersonalAddress {
+      /**
+       * The city of the address.
+       */
+      city: string | null;
+
+      /**
+       * The country of the address.
+       */
+      country: string | null;
+
+      /**
+       * The line 1 of the address.
+       */
+      line1: string | null;
+
+      /**
+       * The line 2 of the address.
+       */
+      line2: string | null;
+
+      /**
+       * The postal code of the address.
+       */
+      postal_code: string | null;
+
+      /**
+       * The state of the address.
+       */
+      state: string | null;
+    }
+
+    /**
+     * An identity verification session used to confirm a person or entity's identity
+     * for payout account eligibility.
+     */
+    export interface Verification {
+      /**
+       * The numeric id of the verification record.
+       */
+      id: string;
+
+      /**
+       * When the verification record was created.
+       */
+      created_at: string;
+
+      /**
+       * An error code for a verification attempt.
+       */
+      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+      /**
+       * A human-readable explanation of the most recent verification error. Null if no
+       * error has occurred.
+       */
+      last_error_reason: string | null;
+
+      /**
+       * A URL the user can visit to complete the verification process. Null if the
+       * session does not require user interaction.
+       */
+      session_url: string | null;
+
+      /**
+       * The current status of this verification session.
+       */
+      status: VerificationsAPI.VerificationStatus;
+    }
   }
 }
 
@@ -3164,6 +4232,10 @@ export type UnwrapWebhookEvent =
   | CourseLessonInteractionCompletedWebhookEvent
   | PayoutMethodCreatedWebhookEvent
   | VerificationSucceededWebhookEvent
+  | IdentityProfileApprovedWebhookEvent
+  | IdentityProfileRejectedWebhookEvent
+  | IdentityProfileNeedsActionWebhookEvent
+  | IdentityProfileUpdatedWebhookEvent
   | PayoutAccountStatusUpdatedWebhookEvent
   | ResolutionCenterCaseCreatedWebhookEvent
   | ResolutionCenterCaseUpdatedWebhookEvent
@@ -3289,6 +4361,10 @@ export declare namespace Webhooks {
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
+    type IdentityProfileApprovedWebhookEvent as IdentityProfileApprovedWebhookEvent,
+    type IdentityProfileRejectedWebhookEvent as IdentityProfileRejectedWebhookEvent,
+    type IdentityProfileNeedsActionWebhookEvent as IdentityProfileNeedsActionWebhookEvent,
+    type IdentityProfileUpdatedWebhookEvent as IdentityProfileUpdatedWebhookEvent,
     type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
     type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
     type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,

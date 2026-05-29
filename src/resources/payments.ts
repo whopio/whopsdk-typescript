@@ -744,6 +744,11 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
+     * The phone number associated with this membership.
+     */
+    phone_number: string | null;
+
+    /**
      * The state of the membership.
      */
     status: Shared.MembershipStatus;
