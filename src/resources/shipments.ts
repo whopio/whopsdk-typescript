@@ -12,6 +12,30 @@ import { path } from '../internal/utils/path';
  */
 export class Shipments extends APIResource {
   /**
+   * Returns a paginated list of shipments, with optional filtering by payment,
+   * company, or user.
+   *
+   * Required permissions:
+   *
+   * - `shipment:basic:read`
+   * - `payment:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const shipmentListResponse of client.shipments.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: ShipmentListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
+    return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new shipment with a tracking code for a specific payment within a
    * company.
    *
@@ -50,30 +74,6 @@ export class Shipments extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Shipment> {
     return this._client.get(path`/shipments/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of shipments, with optional filtering by payment,
-   * company, or user.
-   *
-   * Required permissions:
-   *
-   * - `shipment:basic:read`
-   * - `payment:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const shipmentListResponse of client.shipments.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: ShipmentListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
-    return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse>, { query, ...options });
   }
 }
 
@@ -151,25 +151,6 @@ export namespace ShipmentListResponse {
   }
 }
 
-export interface ShipmentCreateParams {
-  /**
-   * The unique identifier of the company to create the shipment for, starting with
-   * 'biz\_'.
-   */
-  company_id: string;
-
-  /**
-   * The unique identifier of the payment to associate the shipment with.
-   */
-  payment_id: string;
-
-  /**
-   * The carrier tracking code for the shipment, such as a USPS, UPS, or FedEx
-   * tracking number.
-   */
-  tracking_code: string;
-}
-
 export interface ShipmentListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -202,11 +183,30 @@ export interface ShipmentListParams extends CursorPageParams {
   user_id?: string | null;
 }
 
+export interface ShipmentCreateParams {
+  /**
+   * The unique identifier of the company to create the shipment for, starting with
+   * 'biz\_'.
+   */
+  company_id: string;
+
+  /**
+   * The unique identifier of the payment to associate the shipment with.
+   */
+  payment_id: string;
+
+  /**
+   * The carrier tracking code for the shipment, such as a USPS, UPS, or FedEx
+   * tracking number.
+   */
+  tracking_code: string;
+}
+
 export declare namespace Shipments {
   export {
     type ShipmentListResponse as ShipmentListResponse,
     type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
-    type ShipmentCreateParams as ShipmentCreateParams,
     type ShipmentListParams as ShipmentListParams,
+    type ShipmentCreateParams as ShipmentCreateParams,
   };
 }
