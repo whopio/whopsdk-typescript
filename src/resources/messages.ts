@@ -12,15 +12,18 @@ import { path } from '../internal/utils/path';
  */
 export class Messages extends APIResource {
   /**
-   * Send a new message in an experience chat, DM, or group chat channel. Supports
-   * text content, attachments, polls, and replies.
+   * Returns a paginated list of messages within a specific experience chat, DM, or
+   * group chat channel, sorted by creation time.
    *
    * Required permissions:
    *
-   * - `chat:message:create`
+   * - `chat:read`
    */
-  create(body: MessageCreateParams, options?: RequestOptions): APIPromise<Shared.Message> {
-    return this._client.post('/messages', { body, ...options });
+  list(
+    query: MessageListParams,
+    options?: RequestOptions,
+  ): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
+    return this._client.getAPIList('/messages', CursorPage<MessageListResponse>, { query, ...options });
   }
 
   /**
@@ -35,6 +38,18 @@ export class Messages extends APIResource {
   }
 
   /**
+   * Send a new message in an experience chat, DM, or group chat channel. Supports
+   * text content, attachments, polls, and replies.
+   *
+   * Required permissions:
+   *
+   * - `chat:message:create`
+   */
+  create(body: MessageCreateParams, options?: RequestOptions): APIPromise<Shared.Message> {
+    return this._client.post('/messages', { body, ...options });
+  }
+
+  /**
    * Edit the content, attachments, or pinned status of an existing message in an
    * experience chat, DM, or group chat channel.
    */
@@ -44,21 +59,6 @@ export class Messages extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.Message> {
     return this._client.patch(path`/messages/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of messages within a specific experience chat, DM, or
-   * group chat channel, sorted by creation time.
-   *
-   * Required permissions:
-   *
-   * - `chat:read`
-   */
-  list(
-    query: MessageListParams,
-    options?: RequestOptions,
-  ): PagePromise<MessageListResponsesCursorPage, MessageListResponse> {
-    return this._client.getAPIList('/messages', CursorPage<MessageListResponse>, { query, ...options });
   }
 
   /**
@@ -250,6 +250,33 @@ export namespace MessageListResponse {
  */
 export type MessageDeleteResponse = boolean;
 
+export interface MessageListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the channel or experience to list messages for.
+   */
+  channel_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface MessageCreateParams {
   /**
    * The unique identifier of the channel or experience to send the message in. For
@@ -355,40 +382,13 @@ export namespace MessageUpdateParams {
   }
 }
 
-export interface MessageListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the channel or experience to list messages for.
-   */
-  channel_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace Messages {
   export {
     type MessageListResponse as MessageListResponse,
     type MessageDeleteResponse as MessageDeleteResponse,
     type MessageListResponsesCursorPage as MessageListResponsesCursorPage,
+    type MessageListParams as MessageListParams,
     type MessageCreateParams as MessageCreateParams,
     type MessageUpdateParams as MessageUpdateParams,
-    type MessageListParams as MessageListParams,
   };
 }

@@ -12,47 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class AuthorizedUsers extends APIResource {
   /**
-   * Add a new authorized user to a company.
-   *
-   * Required permissions:
-   *
-   * - `authorized_user:create`
-   * - `member:email:read`
-   *
-   * @example
-   * ```ts
-   * const authorizedUser = await client.authorizedUsers.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   role: 'owner',
-   *   user_id: 'user_xxxxxxxxxxxxx',
-   * });
-   * ```
-   */
-  create(body: AuthorizedUserCreateParams, options?: RequestOptions): APIPromise<AuthorizedUser> {
-    return this._client.post('/authorized_users', { body, ...options });
-  }
-
-  /**
-   * Retrieves the details of an existing authorized user.
-   *
-   * Required permissions:
-   *
-   * - `company:authorized_user:read`
-   * - `member:email:read`
-   *
-   * @example
-   * ```ts
-   * const authorizedUser =
-   *   await client.authorizedUsers.retrieve(
-   *     'ausr_xxxxxxxxxxxxx',
-   *   );
-   * ```
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AuthorizedUser> {
-    return this._client.get(path`/authorized_users/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of authorized team members for a company, with optional
    * filtering by user, role, and creation date.
    *
@@ -77,6 +36,47 @@ export class AuthorizedUsers extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing authorized user.
+   *
+   * Required permissions:
+   *
+   * - `company:authorized_user:read`
+   * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * const authorizedUser =
+   *   await client.authorizedUsers.retrieve(
+   *     'ausr_xxxxxxxxxxxxx',
+   *   );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<AuthorizedUser> {
+    return this._client.get(path`/authorized_users/${id}`, options);
+  }
+
+  /**
+   * Add a new authorized user to a company.
+   *
+   * Required permissions:
+   *
+   * - `authorized_user:create`
+   * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * const authorizedUser = await client.authorizedUsers.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   role: 'owner',
+   *   user_id: 'user_xxxxxxxxxxxxx',
+   * });
+   * ```
+   */
+  create(body: AuthorizedUserCreateParams, options?: RequestOptions): APIPromise<AuthorizedUser> {
+    return this._client.post('/authorized_users', { body, ...options });
   }
 
   /**
@@ -248,29 +248,6 @@ export namespace AuthorizedUserListResponse {
  */
 export type AuthorizedUserDeleteResponse = boolean;
 
-export interface AuthorizedUserCreateParams {
-  /**
-   * The ID of the company to add the authorized user to.
-   */
-  company_id: string;
-
-  /**
-   * The role to assign to the authorized user within the company. Supported roles:
-   * 'moderator', 'sales_manager'.
-   */
-  role: Shared.AuthorizedUserRoles;
-
-  /**
-   * The ID of the user to add as an authorized user.
-   */
-  user_id: string;
-
-  /**
-   * Whether to send notification emails to the user on creation.
-   */
-  send_emails?: boolean | null;
-}
-
 export interface AuthorizedUserListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -314,6 +291,29 @@ export interface AuthorizedUserListParams extends CursorPageParams {
   user_id?: string | null;
 }
 
+export interface AuthorizedUserCreateParams {
+  /**
+   * The ID of the company to add the authorized user to.
+   */
+  company_id: string;
+
+  /**
+   * The role to assign to the authorized user within the company. Supported roles:
+   * 'moderator', 'sales_manager'.
+   */
+  role: Shared.AuthorizedUserRoles;
+
+  /**
+   * The ID of the user to add as an authorized user.
+   */
+  user_id: string;
+
+  /**
+   * Whether to send notification emails to the user on creation.
+   */
+  send_emails?: boolean | null;
+}
+
 export interface AuthorizedUserDeleteParams {
   /**
    * The ID of the company the authorized user belongs to. Optional if the authorized
@@ -328,8 +328,8 @@ export declare namespace AuthorizedUsers {
     type AuthorizedUserListResponse as AuthorizedUserListResponse,
     type AuthorizedUserDeleteResponse as AuthorizedUserDeleteResponse,
     type AuthorizedUserListResponsesCursorPage as AuthorizedUserListResponsesCursorPage,
-    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserListParams as AuthorizedUserListParams,
+    type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
   };
 }
