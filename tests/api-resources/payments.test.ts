@@ -9,6 +9,110 @@ const client = new Whop({
 
 describe('resource payments', () => {
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.payments.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.list(
+        {
+          after: 'after',
+          before: 'before',
+          billing_reasons: ['subscription_create'],
+          checkout_configuration_ids: ['string'],
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          currencies: ['usd'],
+          direction: 'asc',
+          first: 42,
+          include_free: true,
+          last: 42,
+          order: 'final_amount',
+          plan_ids: ['string'],
+          product_ids: ['string'],
+          query: 'query',
+          statuses: ['draft'],
+          substatuses: ['succeeded'],
+          updated_after: '2023-12-01T05:00:00.401Z',
+          updated_before: '2023-12-01T05:00:00.401Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.payments.retrieve('pay_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('refund', async () => {
+    const responsePromise = client.payments.refund('pay_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('refund: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.refund(
+        'pay_xxxxxxxxxxxxxx',
+        { partial_amount: 6.9 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retry', async () => {
+    const responsePromise = client.payments.retry('pay_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('void', async () => {
+    const responsePromise = client.payments.void('pay_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.payments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -66,61 +170,6 @@ describe('resource payments', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.payments.retrieve('pay_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.payments.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.payments.list(
-        {
-          after: 'after',
-          before: 'before',
-          billing_reasons: ['subscription_create'],
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          currencies: ['usd'],
-          direction: 'asc',
-          first: 42,
-          include_free: true,
-          last: 42,
-          order: 'final_amount',
-          plan_ids: ['string'],
-          product_ids: ['string'],
-          query: 'query',
-          statuses: ['draft'],
-          substatuses: ['succeeded'],
-          updated_after: '2023-12-01T05:00:00.401Z',
-          updated_before: '2023-12-01T05:00:00.401Z',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('listFees', async () => {
     const responsePromise = client.payments.listFees('pay_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -147,53 +196,5 @@ describe('resource payments', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('refund', async () => {
-    const responsePromise = client.payments.refund('pay_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('refund: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.payments.refund(
-        'pay_xxxxxxxxxxxxxx',
-        { partial_amount: 6.9 },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('retry', async () => {
-    const responsePromise = client.payments.retry('pay_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('void', async () => {
-    const responsePromise = client.payments.void('pay_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });
