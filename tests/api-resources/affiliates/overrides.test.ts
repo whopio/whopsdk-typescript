@@ -9,6 +9,36 @@ const client = new Whop({
 
 describe('resource overrides', () => {
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.affiliates.overrides.list('aff_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.affiliates.overrides.list(
+        'aff_xxxxxxxxxxxxxx',
+        {
+          after: 'after',
+          before: 'before',
+          first: 42,
+          last: 42,
+          override_type: 'standard',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.affiliates.overrides.create('aff_xxxxxxxxxxxxxx', {
       id: 'id',
@@ -75,36 +105,6 @@ describe('resource overrides', () => {
       commission_value: 6.9,
       revenue_basis: 'pre_fees',
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.affiliates.overrides.list('aff_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.affiliates.overrides.list(
-        'aff_xxxxxxxxxxxxxx',
-        {
-          after: 'after',
-          before: 'before',
-          first: 42,
-          last: 42,
-          override_type: 'standard',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
