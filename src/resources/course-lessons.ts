@@ -12,6 +12,32 @@ import { path } from '../internal/utils/path';
  */
 export class CourseLessons extends APIResource {
   /**
+   * Returns a paginated list of lessons within a course or chapter, ordered by
+   * position.
+   *
+   * Required permissions:
+   *
+   * - `courses:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const courseLessonListResponse of client.courseLessons.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: CourseLessonListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CourseLessonListResponsesCursorPage, CourseLessonListResponse> {
+    return this._client.getAPIList('/course_lessons', CursorPage<CourseLessonListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Create a new lesson within a course chapter. Lessons can contain video, text, or
    * assessment content.
    *
@@ -70,32 +96,6 @@ export class CourseLessons extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Lesson> {
     return this._client.patch(path`/course_lessons/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of lessons within a course or chapter, ordered by
-   * position.
-   *
-   * Required permissions:
-   *
-   * - `courses:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const courseLessonListResponse of client.courseLessons.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: CourseLessonListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CourseLessonListResponsesCursorPage, CourseLessonListResponse> {
-    return this._client.getAPIList('/course_lessons', CursorPage<CourseLessonListResponse>, {
-      query,
-      ...options,
-    });
   }
 
   /**
@@ -723,6 +723,33 @@ export namespace CourseLessonSubmitAssessmentResponse {
   }
 }
 
+export interface CourseLessonListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * The unique identifier of a chapter to return only its lessons.
+   */
+  chapter_id?: string | null;
+
+  /**
+   * The unique identifier of the course to return all lessons across all chapters.
+   */
+  course_id?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface CourseLessonCreateParams {
   /**
    * The unique identifier of the chapter to create the lesson in (e.g.,
@@ -978,33 +1005,6 @@ export namespace CourseLessonUpdateParams {
   }
 }
 
-export interface CourseLessonListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The unique identifier of a chapter to return only its lessons.
-   */
-  chapter_id?: string | null;
-
-  /**
-   * The unique identifier of the course to return all lessons across all chapters.
-   */
-  course_id?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export interface CourseLessonSubmitAssessmentParams {
   /**
    * The list of answers to submit for each assessment question.
@@ -1047,9 +1047,9 @@ export declare namespace CourseLessons {
     type CourseLessonStartResponse as CourseLessonStartResponse,
     type CourseLessonSubmitAssessmentResponse as CourseLessonSubmitAssessmentResponse,
     type CourseLessonListResponsesCursorPage as CourseLessonListResponsesCursorPage,
+    type CourseLessonListParams as CourseLessonListParams,
     type CourseLessonCreateParams as CourseLessonCreateParams,
     type CourseLessonUpdateParams as CourseLessonUpdateParams,
-    type CourseLessonListParams as CourseLessonListParams,
     type CourseLessonSubmitAssessmentParams as CourseLessonSubmitAssessmentParams,
   };
 }

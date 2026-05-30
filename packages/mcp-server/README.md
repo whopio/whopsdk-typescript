@@ -86,7 +86,7 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
-| ------------------- | ------------------------ | --------------- |
+| ---------------- | ------------------------ | --------------- |
 | `x-whop-api-key` | `apiKey` | bearerAuth |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:
