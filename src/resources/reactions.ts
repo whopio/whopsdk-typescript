@@ -12,6 +12,21 @@ import { path } from '../internal/utils/path';
  */
 export class Reactions extends APIResource {
   /**
+   * Returns a paginated list of emoji reactions on a specific message or forum post,
+   * sorted by most recent.
+   *
+   * Required permissions:
+   *
+   * - `chat:read`
+   */
+  list(
+    query: ReactionListParams,
+    options?: RequestOptions,
+  ): PagePromise<ReactionListResponsesCursorPage, ReactionListResponse> {
+    return this._client.getAPIList('/reactions', CursorPage<ReactionListResponse>, { query, ...options });
+  }
+
+  /**
    * Add an emoji reaction or poll vote to a message or forum post. In forums, the
    * reaction is always a like.
    *
@@ -32,21 +47,6 @@ export class Reactions extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Reaction> {
     return this._client.get(path`/reactions/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of emoji reactions on a specific message or forum post,
-   * sorted by most recent.
-   *
-   * Required permissions:
-   *
-   * - `chat:read`
-   */
-  list(
-    query: ReactionListParams,
-    options?: RequestOptions,
-  ): PagePromise<ReactionListResponsesCursorPage, ReactionListResponse> {
-    return this._client.getAPIList('/reactions', CursorPage<ReactionListResponse>, { query, ...options });
   }
 
   /**
@@ -122,25 +122,6 @@ export namespace ReactionListResponse {
  */
 export type ReactionDeleteResponse = boolean;
 
-export interface ReactionCreateParams {
-  /**
-   * The unique identifier of the message or forum post to react to.
-   */
-  resource_id: string;
-
-  /**
-   * The emoji to react with, in shortcode or unicode format. For example, ':heart:'
-   * or a unicode emoji. Ignored in forums where reactions are always likes.
-   */
-  emoji?: string | null;
-
-  /**
-   * The unique identifier of a poll option to vote for. Only valid when the target
-   * message or post contains a poll.
-   */
-  poll_option_id?: string | null;
-}
-
 export interface ReactionListParams extends CursorPageParams {
   /**
    * The unique identifier of the message or forum post to list reactions for.
@@ -163,6 +144,25 @@ export interface ReactionListParams extends CursorPageParams {
   last?: number | null;
 }
 
+export interface ReactionCreateParams {
+  /**
+   * The unique identifier of the message or forum post to react to.
+   */
+  resource_id: string;
+
+  /**
+   * The emoji to react with, in shortcode or unicode format. For example, ':heart:'
+   * or a unicode emoji. Ignored in forums where reactions are always likes.
+   */
+  emoji?: string | null;
+
+  /**
+   * The unique identifier of a poll option to vote for. Only valid when the target
+   * message or post contains a poll.
+   */
+  poll_option_id?: string | null;
+}
+
 export interface ReactionDeleteParams {
   /**
    * The emoji to remove, in shortcode or unicode format. For example, ':heart:' or a
@@ -177,8 +177,8 @@ export declare namespace Reactions {
     type ReactionListResponse as ReactionListResponse,
     type ReactionDeleteResponse as ReactionDeleteResponse,
     type ReactionListResponsesCursorPage as ReactionListResponsesCursorPage,
-    type ReactionCreateParams as ReactionCreateParams,
     type ReactionListParams as ReactionListParams,
+    type ReactionCreateParams as ReactionCreateParams,
     type ReactionDeleteParams as ReactionDeleteParams,
   };
 }
