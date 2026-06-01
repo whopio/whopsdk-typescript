@@ -7,8 +7,8 @@ export {
   type AffiliateListResponse,
   type AffiliateArchiveResponse,
   type AffiliateUnarchiveResponse,
-  type AffiliateCreateParams,
   type AffiliateListParams,
+  type AffiliateCreateParams,
   type AffiliateListResponsesCursorPage,
 } from './affiliates';
 export {
@@ -23,10 +23,10 @@ export {
   type OverrideUpdateResponse,
   type OverrideListResponse,
   type OverrideDeleteResponse,
+  type OverrideListParams,
   type OverrideCreateParams,
   type OverrideRetrieveParams,
   type OverrideUpdateParams,
-  type OverrideListParams,
   type OverrideDeleteParams,
   type OverrideListResponsesCursorPage,
 } from './overrides';
