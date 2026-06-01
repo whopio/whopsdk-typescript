@@ -11,6 +11,28 @@ import { path } from '../internal/utils/path';
  */
 export class CompanyTokenTransactions extends APIResource {
   /**
+   * Returns a paginated list of token transactions for a user or company, depending
+   * on the authenticated actor, with optional filtering by user and transaction
+   * type.
+   *
+   * Required permissions:
+   *
+   * - `company_token_transaction:read`
+   * - `member:basic:read`
+   * - `company:basic:read`
+   */
+  list(
+    query: CompanyTokenTransactionListParams,
+    options?: RequestOptions,
+  ): PagePromise<CompanyTokenTransactionListResponsesCursorPage, CompanyTokenTransactionListResponse> {
+    return this._client.getAPIList(
+      '/company_token_transactions',
+      CursorPage<CompanyTokenTransactionListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Create a token transaction to add, subtract, or transfer tokens for a member
    * within a company.
    *
@@ -50,28 +72,6 @@ export class CompanyTokenTransactions extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<CompanyTokenTransaction> {
     return this._client.get(path`/company_token_transactions/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of token transactions for a user or company, depending
-   * on the authenticated actor, with optional filtering by user and transaction
-   * type.
-   *
-   * Required permissions:
-   *
-   * - `company_token_transaction:read`
-   * - `member:basic:read`
-   * - `company:basic:read`
-   */
-  list(
-    query: CompanyTokenTransactionListParams,
-    options?: RequestOptions,
-  ): PagePromise<CompanyTokenTransactionListResponsesCursorPage, CompanyTokenTransactionListResponse> {
-    return this._client.getAPIList(
-      '/company_token_transactions',
-      CursorPage<CompanyTokenTransactionListResponse>,
-      { query, ...options },
-    );
   }
 }
 
@@ -306,6 +306,38 @@ export namespace CompanyTokenTransactionListResponse {
   }
 }
 
+export interface CompanyTokenTransactionListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list token transactions for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The type of token transaction
+   */
+  transaction_type?: CompanyTokenTransactionType | null;
+
+  /**
+   * Filter transactions to only those involving this specific user.
+   */
+  user_id?: string | null;
+}
+
 export type CompanyTokenTransactionCreateParams =
   | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeTransfer
   | CompanyTokenTransactionCreateParams.CreateCompanyTokenTransactionInputTransactionTypeAdd
@@ -415,45 +447,13 @@ export declare namespace CompanyTokenTransactionCreateParams {
   }
 }
 
-export interface CompanyTokenTransactionListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list token transactions for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The type of token transaction
-   */
-  transaction_type?: CompanyTokenTransactionType | null;
-
-  /**
-   * Filter transactions to only those involving this specific user.
-   */
-  user_id?: string | null;
-}
-
 export declare namespace CompanyTokenTransactions {
   export {
     type CompanyTokenTransaction as CompanyTokenTransaction,
     type CompanyTokenTransactionType as CompanyTokenTransactionType,
     type CompanyTokenTransactionListResponse as CompanyTokenTransactionListResponse,
     type CompanyTokenTransactionListResponsesCursorPage as CompanyTokenTransactionListResponsesCursorPage,
-    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
     type CompanyTokenTransactionListParams as CompanyTokenTransactionListParams,
+    type CompanyTokenTransactionCreateParams as CompanyTokenTransactionCreateParams,
   };
 }

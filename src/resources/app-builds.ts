@@ -12,6 +12,31 @@ import { path } from '../internal/utils/path';
  */
 export class AppBuilds extends APIResource {
   /**
+   * Returns a paginated list of build artifacts for a given app, with optional
+   * filtering by platform, status, and creation date.
+   *
+   * Required permissions:
+   *
+   * - `developer:manage_builds`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const appBuildListResponse of client.appBuilds.list(
+   *   { app_id: 'app_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: AppBuildListParams,
+    options?: RequestOptions,
+  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
+    return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse>, { query, ...options });
+  }
+
+  /**
    * Upload a new build artifact for an app. The build must include a compiled code
    * bundle for the specified platform.
    *
@@ -48,31 +73,6 @@ export class AppBuilds extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.AppBuild> {
     return this._client.get(path`/app_builds/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of build artifacts for a given app, with optional
-   * filtering by platform, status, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_builds`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const appBuildListResponse of client.appBuilds.list(
-   *   { app_id: 'app_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: AppBuildListParams,
-    options?: RequestOptions,
-  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
-    return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse>, { query, ...options });
   }
 
   /**
@@ -150,6 +150,48 @@ export interface AppBuildListResponse {
   supported_app_view_types: Array<Shared.AppViewType>;
 }
 
+export interface AppBuildListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the app to list builds for.
+   */
+  app_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return builds created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return builds created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The different platforms an app build can target.
+   */
+  platform?: Shared.AppBuildPlatforms | null;
+
+  /**
+   * The different statuses an AppBuild can be in.
+   */
+  status?: Shared.AppBuildStatuses | null;
+}
+
 export interface AppBuildCreateParams {
   /**
    * The build file to upload. For iOS and Android, this should be a .zip archive
@@ -201,53 +243,11 @@ export namespace AppBuildCreateParams {
   }
 }
 
-export interface AppBuildListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the app to list builds for.
-   */
-  app_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return builds created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return builds created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The different platforms an app build can target.
-   */
-  platform?: Shared.AppBuildPlatforms | null;
-
-  /**
-   * The different statuses an AppBuild can be in.
-   */
-  status?: Shared.AppBuildStatuses | null;
-}
-
 export declare namespace AppBuilds {
   export {
     type AppBuildListResponse as AppBuildListResponse,
     type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
-    type AppBuildCreateParams as AppBuildCreateParams,
     type AppBuildListParams as AppBuildListParams,
+    type AppBuildCreateParams as AppBuildCreateParams,
   };
 }
