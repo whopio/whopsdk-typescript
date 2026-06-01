@@ -10,6 +10,81 @@ const client = new Whop({
 });
 
 describe('resource webhooks', () => {
+  test.skip('unwrap', () => {
+    const key = 'whsec_c2VjcmV0Cg==';
+    const payload =
+      '{"id":"msg_xxxxxxxxxxxxxxxxxxxxxxxx","api_version":"v1","data":{"id":"crsli_xxxxxxxxxxxx","completed":true,"course":{"id":"cors_xxxxxxxxxxxxx","experience":{"id":"exp_xxxxxxxxxxxxxx"},"title":"Introduction to Technical Analysis"},"created_at":"2023-12-01T05:00:00.401Z","lesson":{"id":"lesn_xxxxxxxxxxxxx","chapter":{"id":"chap_xxxxxxxxxxxxx"},"title":"Understanding Candlestick Patterns"},"user":{"id":"user_xxxxxxxxxxxxx","name":"John Doe","username":"johndoe42"}},"timestamp":"2025-01-01T00:00:00.000Z","type":"course_lesson_interaction.completed","company_id":"biz_xxxxxxxxxxxxxx"}';
+    const msgID = '1';
+    const timestamp = new Date();
+    const wh = new Webhook('whsec_c2VjcmV0Cg==');
+    const signature = wh.sign(msgID, timestamp, payload);
+    const headers: Record<string, string> = {
+      'webhook-signature': signature,
+      'webhook-id': msgID,
+      'webhook-timestamp': String(Math.floor(timestamp.getTime() / 1000)),
+    };
+    client.webhooks.unwrap(payload, { headers, key });
+    client.withOptions({ webhookKey: key }).webhooks.unwrap(payload, { headers });
+    client.withOptions({ webhookKey: 'whsec_aaaaaaaaaa==' }).webhooks.unwrap(payload, { headers, key });
+    expect(() => {
+      const wrongKey = 'whsec_aaaaaaaaaa==';
+      client.webhooks.unwrap(payload, { headers, key: wrongKey });
+    }).toThrow('No matching signature found');
+    expect(() => {
+      const wrongKey = 'whsec_aaaaaaaaaa==';
+      client.withOptions({ webhookKey: wrongKey }).webhooks.unwrap(payload, { headers });
+    }).toThrow('No matching signature found');
+    expect(() => {
+      const badSig = wh.sign(msgID, timestamp, 'some other payload');
+      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-signature': badSig }, key });
+    }).toThrow('No matching signature found');
+    expect(() => {
+      const badSig = wh.sign(msgID, timestamp, 'some other payload');
+      client
+        .withOptions({ webhookKey: key })
+        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-signature': badSig } });
+    }).toThrow('No matching signature found');
+    expect(() => {
+      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-timestamp': '5' }, key });
+    }).toThrow('Message timestamp too old');
+    expect(() => {
+      client
+        .withOptions({ webhookKey: key })
+        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-timestamp': '5' } });
+    }).toThrow('Message timestamp too old');
+    expect(() => {
+      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-id': 'wrong' }, key });
+    }).toThrow('No matching signature found');
+    expect(() => {
+      client
+        .withOptions({ webhookKey: key })
+        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-id': 'wrong' } });
+    }).toThrow('No matching signature found');
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.webhooks.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.webhooks.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
+  });
+
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.webhooks.create({ url: 'https://example.com/path' });
@@ -77,29 +152,6 @@ describe('resource webhooks', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.webhooks.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.webhooks.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.webhooks.delete('hook_xxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -109,57 +161,5 @@ describe('resource webhooks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test.skip('unwrap', () => {
-    const key = 'whsec_c2VjcmV0Cg==';
-    const payload =
-      '{"id":"msg_xxxxxxxxxxxxxxxxxxxxxxxx","api_version":"v1","data":{"id":"inv_xxxxxxxxxxxxxx","created_at":"2023-12-01T05:00:00.401Z","current_plan":{"id":"plan_xxxxxxxxxxxxx","currency":"usd","formatted_price":"$10.00"},"due_date":"2023-12-01T05:00:00.401Z","email_address":"customer@example.com","fetch_invoice_token":"eyJhbGciOiJIUzI1NiJ9...","number":"#0001","status":"draft","user":{"id":"user_xxxxxxxxxxxxx","name":"John Doe","username":"johndoe42"}},"timestamp":"2025-01-01T00:00:00.000Z","type":"invoice.created","company_id":"biz_xxxxxxxxxxxxxx"}';
-    const msgID = '1';
-    const timestamp = new Date();
-    const wh = new Webhook('whsec_c2VjcmV0Cg==');
-    const signature = wh.sign(msgID, timestamp, payload);
-    const headers: Record<string, string> = {
-      'webhook-signature': signature,
-      'webhook-id': msgID,
-      'webhook-timestamp': String(Math.floor(timestamp.getTime() / 1000)),
-    };
-    client.webhooks.unwrap(payload, { headers, key });
-    client.withOptions({ webhookKey: key }).webhooks.unwrap(payload, { headers });
-    client.withOptions({ webhookKey: 'whsec_aaaaaaaaaa==' }).webhooks.unwrap(payload, { headers, key });
-    expect(() => {
-      const wrongKey = 'whsec_aaaaaaaaaa==';
-      client.webhooks.unwrap(payload, { headers, key: wrongKey });
-    }).toThrow('No matching signature found');
-    expect(() => {
-      const wrongKey = 'whsec_aaaaaaaaaa==';
-      client.withOptions({ webhookKey: wrongKey }).webhooks.unwrap(payload, { headers });
-    }).toThrow('No matching signature found');
-    expect(() => {
-      const badSig = wh.sign(msgID, timestamp, 'some other payload');
-      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-signature': badSig }, key });
-    }).toThrow('No matching signature found');
-    expect(() => {
-      const badSig = wh.sign(msgID, timestamp, 'some other payload');
-      client
-        .withOptions({ webhookKey: key })
-        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-signature': badSig } });
-    }).toThrow('No matching signature found');
-    expect(() => {
-      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-timestamp': '5' }, key });
-    }).toThrow('Message timestamp too old');
-    expect(() => {
-      client
-        .withOptions({ webhookKey: key })
-        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-timestamp': '5' } });
-    }).toThrow('Message timestamp too old');
-    expect(() => {
-      client.webhooks.unwrap(payload, { headers: { ...headers, 'webhook-id': 'wrong' }, key });
-    }).toThrow('No matching signature found');
-    expect(() => {
-      client
-        .withOptions({ webhookKey: key })
-        .webhooks.unwrap(payload, { headers: { ...headers, 'webhook-id': 'wrong' } });
-    }).toThrow('No matching signature found');
   });
 });
