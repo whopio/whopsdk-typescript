@@ -12,6 +12,29 @@ import { path } from '../internal/utils/path';
  */
 export class Courses extends APIResource {
   /**
+   * Returns a paginated list of courses, filtered by either an experience or a
+   * company.
+   *
+   * Required permissions:
+   *
+   * - `courses:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const courseListResponse of client.courses.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: CourseListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CourseListResponsesCursorPage, CourseListResponse> {
+    return this._client.getAPIList('/courses', CursorPage<CourseListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new course within an experience, with optional chapters, lessons, and a
    * certificate.
    *
@@ -70,29 +93,6 @@ export class Courses extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Course> {
     return this._client.patch(path`/courses/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of courses, filtered by either an experience or a
-   * company.
-   *
-   * Required permissions:
-   *
-   * - `courses:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const courseListResponse of client.courses.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: CourseListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CourseListResponsesCursorPage, CourseListResponse> {
-    return this._client.getAPIList('/courses', CursorPage<CourseListResponse>, { query, ...options });
   }
 
   /**
@@ -506,6 +506,33 @@ export namespace CourseListResponse {
  */
 export type CourseDeleteResponse = boolean;
 
+export interface CourseListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * The unique identifier of the company to list courses for.
+   */
+  company_id?: string | null;
+
+  /**
+   * The unique identifier of the experience to list courses for.
+   */
+  experience_id?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface CourseCreateParams {
   /**
    * The unique identifier of the experience to create the course in (e.g.,
@@ -687,33 +714,6 @@ export namespace CourseUpdateParams {
   }
 }
 
-export interface CourseListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The unique identifier of the company to list courses for.
-   */
-  company_id?: string | null;
-
-  /**
-   * The unique identifier of the experience to list courses for.
-   */
-  experience_id?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace Courses {
   export {
     type Course as Course,
@@ -722,8 +722,8 @@ export declare namespace Courses {
     type CourseListResponse as CourseListResponse,
     type CourseDeleteResponse as CourseDeleteResponse,
     type CourseListResponsesCursorPage as CourseListResponsesCursorPage,
+    type CourseListParams as CourseListParams,
     type CourseCreateParams as CourseCreateParams,
     type CourseUpdateParams as CourseUpdateParams,
-    type CourseListParams as CourseListParams,
   };
 }
