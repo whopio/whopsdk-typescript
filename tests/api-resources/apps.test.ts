@@ -9,6 +9,41 @@ const client = new Whop({
 
 describe('resource apps', () => {
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.apps.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.apps.list(
+        {
+          after: 'after',
+          app_type: 'b2b_app',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          order: 'created_at',
+          query: 'query',
+          verified_apps_only: true,
+          view_type: 'hub',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.apps.create({ company_id: 'biz_xxxxxxxxxxxxxx', name: 'name' });
     const rawResponse = await responsePromise.asResponse();
@@ -77,41 +112,6 @@ describe('resource apps', () => {
           required_scopes: ['read_user'],
           skills_path: 'skills_path',
           status: 'live',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.apps.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.list(
-        {
-          after: 'after',
-          app_type: 'b2b_app',
-          before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          direction: 'asc',
-          first: 42,
-          last: 42,
-          order: 'created_at',
-          query: 'query',
-          verified_apps_only: true,
-          view_type: 'hub',
         },
         { path: '/_stainless_unknown_path' },
       ),
