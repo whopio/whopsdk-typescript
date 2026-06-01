@@ -13,19 +13,6 @@ import { path } from '../internal/utils/path';
  */
 export class SetupIntents extends APIResource {
   /**
-   * Retrieves the details of an existing setup intent.
-   *
-   * Required permissions:
-   *
-   * - `payment:setup_intent:read`
-   * - `member:basic:read`
-   * - `member:email:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<SetupIntent> {
-    return this._client.get(path`/setup_intents/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of setup intents for a company, with optional filtering
    * by creation date. A setup intent securely collects and stores a member's payment
    * method for future use without charging them immediately.
@@ -44,6 +31,19 @@ export class SetupIntents extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing setup intent.
+   *
+   * Required permissions:
+   *
+   * - `payment:setup_intent:read`
+   * - `member:basic:read`
+   * - `member:email:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<SetupIntent> {
+    return this._client.get(path`/setup_intents/${id}`, options);
   }
 }
 
