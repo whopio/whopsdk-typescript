@@ -15,6 +15,29 @@ import { path } from '../internal/utils/path';
  */
 export class Invoices extends APIResource {
   /**
+   * Returns a paginated list of invoices for a company, with optional filtering by
+   * product, status, collection method, and creation date.
+   *
+   * Required permissions:
+   *
+   * - `invoice:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const invoiceListItem of client.invoices.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: InvoiceListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
+    return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem>, { query, ...options });
+  }
+
+  /**
    * Create an invoice for a customer. The invoice can be charged automatically using
    * a stored payment method, or sent to the customer for manual payment.
    *
@@ -55,7 +78,8 @@ export class Invoices extends APIResource {
   }
 
   /**
-   * Update a draft invoice's details.
+   * Void an open invoice so it can no longer be paid. Voiding is permanent and
+   * cannot be undone.
    *
    * Required permissions:
    *
@@ -63,58 +87,13 @@ export class Invoices extends APIResource {
    *
    * @example
    * ```ts
-   * const invoice = await client.invoices.update(
+   * const response = await client.invoices.void(
    *   'inv_xxxxxxxxxxxxxx',
    * );
    * ```
    */
-  update(
-    id: string,
-    body: InvoiceUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Invoice> {
-    return this._client.patch(path`/invoices/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of invoices for a company, with optional filtering by
-   * product, status, collection method, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `invoice:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const invoiceListItem of client.invoices.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: InvoiceListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<InvoiceListItemsCursorPage, Shared.InvoiceListItem> {
-    return this._client.getAPIList('/invoices', CursorPage<Shared.InvoiceListItem>, { query, ...options });
-  }
-
-  /**
-   * Delete a draft invoice.
-   *
-   * Required permissions:
-   *
-   * - `invoice:update`
-   *
-   * @example
-   * ```ts
-   * const invoice = await client.invoices.delete(
-   *   'inv_xxxxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  delete(id: string, options?: RequestOptions): APIPromise<InvoiceDeleteResponse> {
-    return this._client.delete(path`/invoices/${id}`, options);
+  void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse> {
+    return this._client.post(path`/invoices/${id}/void`, options);
   }
 
   /**
@@ -154,8 +133,7 @@ export class Invoices extends APIResource {
   }
 
   /**
-   * Void an open invoice so it can no longer be paid. Voiding is permanent and
-   * cannot be undone.
+   * Update a draft invoice's details.
    *
    * Required permissions:
    *
@@ -163,13 +141,35 @@ export class Invoices extends APIResource {
    *
    * @example
    * ```ts
-   * const response = await client.invoices.void(
+   * const invoice = await client.invoices.update(
    *   'inv_xxxxxxxxxxxxxx',
    * );
    * ```
    */
-  void(id: string, options?: RequestOptions): APIPromise<InvoiceVoidResponse> {
-    return this._client.post(path`/invoices/${id}/void`, options);
+  update(
+    id: string,
+    body: InvoiceUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Invoice> {
+    return this._client.patch(path`/invoices/${id}`, { body, ...options });
+  }
+
+  /**
+   * Delete a draft invoice.
+   *
+   * Required permissions:
+   *
+   * - `invoice:update`
+   *
+   * @example
+   * ```ts
+   * const invoice = await client.invoices.delete(
+   *   'inv_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<InvoiceDeleteResponse> {
+    return this._client.delete(path`/invoices/${id}`, options);
   }
 }
 
@@ -287,7 +287,13 @@ export type TaxIdentifierType =
   | 'zm_tin'
   | 'zw_tin'
   | 'sr_fin'
-  | 'xi_vat';
+  | 'xi_vat'
+  | 'al_tin'
+  | 'ci_tin'
+  | 'gh_tin'
+  | 'mo_tin'
+  | 'ne_nif'
+  | 'py_ruc';
 
 /**
  * Represents `true` or `false` values.
@@ -308,6 +314,64 @@ export type InvoiceMarkUncollectibleResponse = boolean;
  * Represents `true` or `false` values.
  */
 export type InvoiceVoidResponse = boolean;
+
+export interface InvoiceListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Filter invoices by their collection method.
+   */
+  collection_methods?: Array<Shared.CollectionMethod> | null;
+
+  /**
+   * The unique identifier of the company to list invoices for.
+   */
+  company_id?: string | null;
+
+  /**
+   * Only return invoices created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return invoices created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Which columns can be used to sort.
+   */
+  order?: 'id' | 'created_at' | 'due_date' | null;
+
+  /**
+   * Filter invoices to only those associated with these specific product
+   * identifiers.
+   */
+  product_ids?: Array<string> | null;
+
+  /**
+   * Filter invoices by their current status.
+   */
+  statuses?: Array<Shared.InvoiceStatus> | null;
+}
 
 export type InvoiceCreateParams =
   | InvoiceCreateParams.CreateInvoiceInputWithProduct
@@ -1056,6 +1120,12 @@ export interface InvoiceUpdateParams {
   plan?: InvoiceUpdateParams.Plan | null;
 
   /**
+   * The unique identifier of an existing product to attach to this invoice. Only
+   * allowed while the invoice is still a draft.
+   */
+  product_id?: string | null;
+
+  /**
    * The date that defines when the subscription billing cycle should start.
    */
   subscription_billing_anchor_at?: string | null;
@@ -1287,64 +1357,6 @@ export namespace InvoiceUpdateParams {
   }
 }
 
-export interface InvoiceListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Filter invoices by their collection method.
-   */
-  collection_methods?: Array<Shared.CollectionMethod> | null;
-
-  /**
-   * The unique identifier of the company to list invoices for.
-   */
-  company_id?: string | null;
-
-  /**
-   * Only return invoices created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return invoices created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Which columns can be used to sort.
-   */
-  order?: 'id' | 'created_at' | 'due_date' | null;
-
-  /**
-   * Filter invoices to only those associated with these specific product
-   * identifiers.
-   */
-  product_ids?: Array<string> | null;
-
-  /**
-   * Filter invoices by their current status.
-   */
-  statuses?: Array<Shared.InvoiceStatus> | null;
-}
-
 export declare namespace Invoices {
   export {
     type TaxIdentifierType as TaxIdentifierType,
@@ -1352,9 +1364,9 @@ export declare namespace Invoices {
     type InvoiceMarkPaidResponse as InvoiceMarkPaidResponse,
     type InvoiceMarkUncollectibleResponse as InvoiceMarkUncollectibleResponse,
     type InvoiceVoidResponse as InvoiceVoidResponse,
+    type InvoiceListParams as InvoiceListParams,
     type InvoiceCreateParams as InvoiceCreateParams,
     type InvoiceUpdateParams as InvoiceUpdateParams,
-    type InvoiceListParams as InvoiceListParams,
   };
 }
 
