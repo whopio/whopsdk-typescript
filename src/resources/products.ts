@@ -13,24 +13,28 @@ import { path } from '../internal/utils/path';
  */
 export class Products extends APIResource {
   /**
-   * Create a new product for a company. The product serves as the top-level
-   * container for plans and experiences.
+   * Returns a paginated list of products belonging to a company, with optional
+   * filtering by type, visibility, and creation date.
    *
    * Required permissions:
    *
-   * - `access_pass:create`
    * - `access_pass:basic:read`
    *
    * @example
    * ```ts
-   * const product = await client.products.create({
+   * // Automatically fetches more pages as needed.
+   * for await (const productListItem of client.products.list({
    *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   title: 'title',
-   * });
+   * })) {
+   *   // ...
+   * }
    * ```
    */
-  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
-    return this._client.post('/products', { body, ...options });
+  list(
+    query: ProductListParams,
+    options?: RequestOptions,
+  ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
+    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, { query, ...options });
   }
 
   /**
@@ -49,6 +53,27 @@ export class Products extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.get(path`/products/${id}`, options);
+  }
+
+  /**
+   * Create a new product for a company. The product serves as the top-level
+   * container for plans and experiences.
+   *
+   * Required permissions:
+   *
+   * - `access_pass:create`
+   * - `access_pass:basic:read`
+   *
+   * @example
+   * ```ts
+   * const product = await client.products.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   title: 'title',
+   * });
+   * ```
+   */
+  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
+    return this._client.post('/products', { body, ...options });
   }
 
   /**
@@ -75,31 +100,6 @@ export class Products extends APIResource {
   }
 
   /**
-   * Returns a paginated list of products belonging to a company, with optional
-   * filtering by type, visibility, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const productListItem of client.products.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: ProductListParams,
-    options?: RequestOptions,
-  ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
-    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, { query, ...options });
-  }
-
-  /**
    * Permanently delete a product and remove it from the company's catalog.
    *
    * Required permissions:
@@ -122,6 +122,58 @@ export class Products extends APIResource {
  * Represents `true` or `false` values.
  */
 export type ProductDeleteResponse = boolean;
+
+export interface ProductListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list products for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return products created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return products created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The ways a relation of AccessPasses can be ordered
+   */
+  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
+
+  /**
+   * Filter to only products matching these type classifications.
+   */
+  product_types?: Array<Shared.AccessPassType> | null;
+
+  /**
+   * Filter to only products matching these visibility states.
+   */
+  visibilities?: Array<Shared.VisibilityFilter> | null;
+}
 
 export interface ProductCreateParams {
   /**
@@ -193,6 +245,13 @@ export interface ProductCreateParams {
    * The different statuses of the global affiliate program for a product.
    */
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+  /**
+   * Custom key-value pairs to store on the product. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
 
   /**
    * Configuration for an automatically generated plan to attach to this product.
@@ -371,6 +430,13 @@ export interface ProductUpdateParams {
   member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
 
   /**
+   * Custom key-value pairs to store on the product. Included in webhook payloads for
+   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
+   * value.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
    * The unique identifier of the tax classification code to apply to this product.
    */
   product_tax_code_id?: string | null;
@@ -434,64 +500,12 @@ export namespace ProductUpdateParams {
   }
 }
 
-export interface ProductListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list products for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return products created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return products created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The ways a relation of AccessPasses can be ordered
-   */
-  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
-
-  /**
-   * Filter to only products matching these type classifications.
-   */
-  product_types?: Array<Shared.AccessPassType> | null;
-
-  /**
-   * Filter to only products matching these visibility states.
-   */
-  visibilities?: Array<Shared.VisibilityFilter> | null;
-}
-
 export declare namespace Products {
   export {
     type ProductDeleteResponse as ProductDeleteResponse,
+    type ProductListParams as ProductListParams,
     type ProductCreateParams as ProductCreateParams,
     type ProductUpdateParams as ProductUpdateParams,
-    type ProductListParams as ProductListParams,
   };
 }
 
