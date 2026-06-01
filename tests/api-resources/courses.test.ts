@@ -9,6 +9,36 @@ const client = new Whop({
 
 describe('resource courses', () => {
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.courses.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.courses.list(
+        {
+          after: 'after',
+          before: 'before',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          experience_id: 'exp_xxxxxxxxxxxxxx',
+          first: 42,
+          last: 42,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.courses.create({ experience_id: 'exp_xxxxxxxxxxxxxx', title: 'title' });
     const rawResponse = await responsePromise.asResponse();
@@ -89,36 +119,6 @@ describe('resource courses', () => {
           thumbnail: { id: 'id' },
           title: 'title',
           visibility: 'visible',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.courses.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.courses.list(
-        {
-          after: 'after',
-          before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          experience_id: 'exp_xxxxxxxxxxxxxx',
-          first: 42,
-          last: 42,
         },
         { path: '/_stainless_unknown_path' },
       ),
