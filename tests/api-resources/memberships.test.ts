@@ -9,42 +9,6 @@ const client = new Whop({
 
 describe('resource memberships', () => {
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.memberships.retrieve('mem_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('update', async () => {
-    const responsePromise = client.memberships.update('mem_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.memberships.update(
-        'mem_xxxxxxxxxxxxxx',
-        { metadata: { foo: 'bar' } },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.memberships.list();
     const rawResponse = await responsePromise.asResponse();
@@ -84,8 +48,8 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('addFreeDays: only required params', async () => {
-    const responsePromise = client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+  test.skip('retrieve', async () => {
+    const responsePromise = client.memberships.retrieve('mem_xxxxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -96,8 +60,27 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('addFreeDays: required and optional params', async () => {
-    const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+  test.skip('update', async () => {
+    const responsePromise = client.memberships.update('mem_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.memberships.update(
+        'mem_xxxxxxxxxxxxxx',
+        { metadata: { foo: 'bar' } },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -170,5 +153,22 @@ describe('resource memberships', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('addFreeDays: only required params', async () => {
+    const responsePromise = client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('addFreeDays: required and optional params', async () => {
+    const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
   });
 });

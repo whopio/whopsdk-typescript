@@ -13,6 +13,33 @@ import { path } from '../internal/utils/path';
  */
 export class Companies extends APIResource {
   /**
+   * Retrieves the details of an existing company.
+   *
+   * Required permissions:
+   *
+   * - `company:basic:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company> {
+    return this._client.get(path`/companies/${id}`, options);
+  }
+
+  /**
+   * Returns a paginated list of companies. When parent_company_id is provided, lists
+   * connected accounts under that platform. When omitted, lists companies the
+   * current user has access to.
+   *
+   * Required permissions:
+   *
+   * - `company:basic:read`
+   */
+  list(
+    query: CompanyListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
+    return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new company. Pass parent_company_id to create a connected account under
    * a platform, or omit it to create a company for the current user.
    *
@@ -23,17 +50,6 @@ export class Companies extends APIResource {
    */
   create(body: CompanyCreateParams, options?: RequestOptions): APIPromise<Shared.Company> {
     return this._client.post('/companies', { body, ...options });
-  }
-
-  /**
-   * Retrieves the details of an existing company.
-   *
-   * Required permissions:
-   *
-   * - `company:basic:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Company> {
-    return this._client.get(path`/companies/${id}`, options);
   }
 
   /**
@@ -53,19 +69,15 @@ export class Companies extends APIResource {
   }
 
   /**
-   * Returns a paginated list of companies. When parent_company_id is provided, lists
-   * connected accounts under that platform. When omitted, lists companies the
-   * current user has access to.
-   *
-   * Required permissions:
-   *
-   * - `company:basic:read`
+   * Create an API key for a connected account (child company) owned by a parent
+   * company.
    */
-  list(
-    query: CompanyListParams | null | undefined = {},
+  createAPIKey(
+    parentCompanyID: string,
+    body: CompanyCreateAPIKeyParams,
     options?: RequestOptions,
-  ): PagePromise<CompanyListResponsesCursorPage, CompanyListResponse> {
-    return this._client.getAPIList('/companies', CursorPage<CompanyListResponse>, { query, ...options });
+  ): APIPromise<CompanyCreateAPIKeyResponse> {
+    return this._client.post(path`/companies/${parentCompanyID}/api_keys`, { body, ...options });
   }
 }
 
@@ -197,6 +209,65 @@ export namespace CompanyListResponse {
      */
     username: string;
   }
+}
+
+/**
+ * An API key created for a child company, including the one-time secret key.
+ */
+export interface CompanyCreateAPIKeyResponse {
+  /**
+   * The unique identifier for the authorized api key.
+   */
+  id: string;
+
+  /**
+   * A user set name to identify an API key
+   */
+  name: string | null;
+
+  /**
+   * The secret key used to authenticate requests. Only returned at creation time.
+   */
+  secret_key: string;
+}
+
+export interface CompanyListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return companies created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return companies created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The unique identifier of the parent platform company. When provided, lists
+   * connected accounts under that platform. Omit to list the current user's own
+   * companies.
+   */
+  parent_company_id?: string | null;
 }
 
 export interface CompanyCreateParams {
@@ -388,52 +459,63 @@ export namespace CompanyUpdateParams {
   }
 }
 
-export interface CompanyListParams extends CursorPageParams {
+export interface CompanyCreateAPIKeyParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * The unique identifier of the connected account to create the API key for (e.g.
+   * 'biz_xxx').
    */
-  before?: string | null;
+  child_company_id: string;
 
   /**
-   * Only return companies created after this timestamp.
+   * A human-readable name for the API key, such as 'Production API Key'.
    */
-  created_after?: string | null;
+  name?: string | null;
 
   /**
-   * Only return companies created before this timestamp.
+   * Granular permission statements defining which actions this API key can perform.
+   * Either permissions or role must be provided.
    */
-  created_before?: string | null;
+  permissions?: Array<CompanyCreateAPIKeyParams.Permission> | null;
 
   /**
-   * The direction of the sort.
+   * The different system roles that can be assigned.
    */
-  direction?: Shared.Direction | null;
+  role?: 'owner' | 'admin' | 'moderator' | 'sales_manager' | 'advertiser' | null;
+}
 
+export namespace CompanyCreateAPIKeyParams {
   /**
-   * Returns the first _n_ elements from the list.
+   * Input for a single permissions statement
    */
-  first?: number | null;
+  export interface Permission {
+    /**
+     * Actions covered by this statement
+     */
+    actions: Array<string>;
 
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
+    /**
+     * Whether the actions are granted or denied
+     */
+    grant: boolean;
 
-  /**
-   * The unique identifier of the parent platform company. When provided, lists
-   * connected accounts under that platform. Omit to list the current user's own
-   * companies.
-   */
-  parent_company_id?: string | null;
+    /**
+     * Resource identifiers. Can look like 'biz*xxxx' or 'biz_xxx|pass*_|exp*xxx' or
+     * 'biz_xxx|app_xxx' or 'biz_xxx|pass_xxx|exp_xxx' or 'biz_xxx|pass_xxx' or
+     * 'biz_xxx|pass*_'
+     */
+    resources: Array<string>;
+  }
 }
 
 export declare namespace Companies {
   export {
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
+    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
     type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
+    type CompanyListParams as CompanyListParams,
     type CompanyCreateParams as CompanyCreateParams,
     type CompanyUpdateParams as CompanyUpdateParams,
-    type CompanyListParams as CompanyListParams,
+    type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
   };
 }
