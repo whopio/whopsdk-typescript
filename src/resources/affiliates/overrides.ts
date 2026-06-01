@@ -11,6 +11,34 @@ import { path } from '../../internal/utils/path';
  */
 export class Overrides extends APIResource {
   /**
+   * Returns a paginated list of overrides for an affiliate.
+   *
+   * Required permissions:
+   *
+   * - `affiliate:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const overrideListResponse of client.affiliates.overrides.list(
+   *   'aff_xxxxxxxxxxxxxx',
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    id: string,
+    query: OverrideListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<OverrideListResponsesCursorPage, OverrideListResponse> {
+    return this._client.getAPIList(path`/affiliates/${id}/overrides`, CursorPage<OverrideListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Creates a commission override for an affiliate.
    *
    * Required permissions:
@@ -84,34 +112,6 @@ export class Overrides extends APIResource {
   ): APIPromise<OverrideUpdateResponse> {
     const { id, ...body } = params;
     return this._client.patch(path`/affiliates/${id}/overrides/${overrideID}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of overrides for an affiliate.
-   *
-   * Required permissions:
-   *
-   * - `affiliate:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const overrideListResponse of client.affiliates.overrides.list(
-   *   'aff_xxxxxxxxxxxxxx',
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    id: string,
-    query: OverrideListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<OverrideListResponsesCursorPage, OverrideListResponse> {
-    return this._client.getAPIList(path`/affiliates/${id}/overrides`, CursorPage<OverrideListResponse>, {
-      query,
-      ...options,
-    });
   }
 
   /**
@@ -443,6 +443,28 @@ export interface OverrideListResponse {
  */
 export type OverrideDeleteResponse = boolean;
 
+export interface OverrideListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The role of an affiliate override (standard or rev_share)
+   */
+  override_type?: AffiliateOverrideRoles | null;
+}
+
 export type OverrideCreateParams =
   | OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeStandard
   | OverrideCreateParams.CreateAffiliateOverrideInputOverrideTypeRevShare;
@@ -542,28 +564,6 @@ export interface OverrideUpdateParams {
   revenue_basis?: AffiliateRevenueBases | null;
 }
 
-export interface OverrideListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The role of an affiliate override (standard or rev_share)
-   */
-  override_type?: AffiliateOverrideRoles | null;
-}
-
 export interface OverrideDeleteParams {
   /**
    * The affiliate ID.
@@ -584,10 +584,10 @@ export declare namespace Overrides {
     type OverrideListResponse as OverrideListResponse,
     type OverrideDeleteResponse as OverrideDeleteResponse,
     type OverrideListResponsesCursorPage as OverrideListResponsesCursorPage,
+    type OverrideListParams as OverrideListParams,
     type OverrideCreateParams as OverrideCreateParams,
     type OverrideRetrieveParams as OverrideRetrieveParams,
     type OverrideUpdateParams as OverrideUpdateParams,
-    type OverrideListParams as OverrideListParams,
     type OverrideDeleteParams as OverrideDeleteParams,
   };
 }
