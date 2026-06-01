@@ -12,6 +12,34 @@ import { path } from '../internal/utils/path';
  */
 export class ChatChannels extends APIResource {
   /**
+   * Returns a paginated list of chat channels within a specific company, with
+   * optional filtering by product.
+   *
+   * Required permissions:
+   *
+   * - `chat:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const chatChannelListResponse of client.chatChannels.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: ChatChannelListParams,
+    options?: RequestOptions,
+  ): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse> {
+    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Retrieves the details of an existing chat channel.
    *
    * Required permissions:
@@ -48,34 +76,6 @@ export class ChatChannels extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.ChatChannel> {
     return this._client.patch(path`/chat_channels/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of chat channels within a specific company, with
-   * optional filtering by product.
-   *
-   * Required permissions:
-   *
-   * - `chat:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const chatChannelListResponse of client.chatChannels.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: ChatChannelListParams,
-    options?: RequestOptions,
-  ): PagePromise<ChatChannelListResponsesCursorPage, ChatChannelListResponse> {
-    return this._client.getAPIList('/chat_channels', CursorPage<ChatChannelListResponse>, {
-      query,
-      ...options,
-    });
   }
 }
 
@@ -146,6 +146,34 @@ export namespace ChatChannelListResponse {
   }
 }
 
+export interface ChatChannelListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list chat channels for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The unique identifier of a product to filter by. When set, only chat channels
+   * connected to this product are returned.
+   */
+  product_id?: string | null;
+}
+
 export interface ChatChannelUpdateParams {
   /**
    * Whether media uploads such as images and videos are banned in this chat channel.
@@ -180,39 +208,11 @@ export interface ChatChannelUpdateParams {
   who_can_react?: Shared.WhoCanReact | null;
 }
 
-export interface ChatChannelListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list chat channels for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The unique identifier of a product to filter by. When set, only chat channels
-   * connected to this product are returned.
-   */
-  product_id?: string | null;
-}
-
 export declare namespace ChatChannels {
   export {
     type ChatChannelListResponse as ChatChannelListResponse,
     type ChatChannelListResponsesCursorPage as ChatChannelListResponsesCursorPage,
-    type ChatChannelUpdateParams as ChatChannelUpdateParams,
     type ChatChannelListParams as ChatChannelListParams,
+    type ChatChannelUpdateParams as ChatChannelUpdateParams,
   };
 }
