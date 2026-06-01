@@ -14,6 +14,25 @@ import { path } from '../internal/utils/path';
  */
 export class CheckoutConfigurations extends APIResource {
   /**
+   * Returns a paginated list of checkout configurations for a company, with optional
+   * filtering by plan and creation date.
+   *
+   * Required permissions:
+   *
+   * - `checkout_configuration:basic:read`
+   */
+  list(
+    query: CheckoutConfigurationListParams,
+    options?: RequestOptions,
+  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
+    return this._client.getAPIList(
+      '/checkout_configurations',
+      CursorPage<CheckoutConfigurationListResponse>,
+      { query, ...options },
+    );
+  }
+
+  /**
    * Creates a new checkout configuration
    *
    * Required permissions:
@@ -48,25 +67,6 @@ export class CheckoutConfigurations extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CheckoutConfiguration> {
     return this._client.get(path`/checkout_configurations/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of checkout configurations for a company, with optional
-   * filtering by plan and creation date.
-   *
-   * Required permissions:
-   *
-   * - `checkout_configuration:basic:read`
-   */
-  list(
-    query: CheckoutConfigurationListParams,
-    options?: RequestOptions,
-  ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
-    return this._client.getAPIList(
-      '/checkout_configurations',
-      CursorPage<CheckoutConfigurationListResponse>,
-      { query, ...options },
-    );
   }
 }
 
@@ -182,6 +182,12 @@ export namespace CheckoutConfigurationListResponse {
     id: string;
 
     /**
+     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
+     * does not check processor compatibility or feature flags.
+     */
+    adaptive_pricing_enabled: boolean;
+
+    /**
      * The number of days between each recurring charge. Null for one-time plans. For
      * example, 30 for monthly or 365 for annual billing.
      */
@@ -225,6 +231,11 @@ export namespace CheckoutConfigurationListResponse {
     renewal_price: number;
 
     /**
+     * The 3D Secure behavior for a plan.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
      * The number of free trial days before the first charge on a renewal plan. Null if
      * no trial is configured or the current user has already used a trial for this
      * plan.
@@ -237,6 +248,49 @@ export namespace CheckoutConfigurationListResponse {
      */
     visibility: Shared.Visibility;
   }
+}
+
+export interface CheckoutConfigurationListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list checkout configurations for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return checkout configurations created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return checkout configurations created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Filter checkout configurations to only those associated with this plan
+   * identifier.
+   */
+  plan_id?: string | null;
 }
 
 export type CheckoutConfigurationCreateParams =
@@ -311,6 +365,11 @@ export declare namespace CheckoutConfigurationCreateParams {
        * The respective currency identifier for the plan.
        */
       currency: Shared.Currency;
+
+      /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
 
       /**
        * The application fee amount collected by the platform from this connected
@@ -576,6 +635,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -679,6 +744,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -777,6 +848,12 @@ export declare namespace CheckoutConfigurationCreateParams {
      */
     export interface CheckoutStyling {
       /**
+       * A hex color code for the checkout page background, applied to the order summary
+       * panel (e.g. #F4F4F5).
+       */
+      background_color?: string | null;
+
+      /**
        * The different border-radius styles available for checkout pages.
        */
       border_style?: PlansAPI.CheckoutShape | null;
@@ -821,55 +898,12 @@ export declare namespace CheckoutConfigurationCreateParams {
   }
 }
 
-export interface CheckoutConfigurationListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list checkout configurations for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return checkout configurations created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return checkout configurations created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Filter checkout configurations to only those associated with this plan
-   * identifier.
-   */
-  plan_id?: string | null;
-}
-
 export declare namespace CheckoutConfigurations {
   export {
     type CheckoutModes as CheckoutModes,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
-    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
+    type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
   };
 }
