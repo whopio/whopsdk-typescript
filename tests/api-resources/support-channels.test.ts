@@ -9,42 +9,6 @@ const client = new Whop({
 
 describe('resource supportChannels', () => {
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.supportChannels.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.supportChannels.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      user_id: 'user_xxxxxxxxxxxxx',
-      custom_name: 'custom_name',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.supportChannels.retrieve('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.supportChannels.list();
     const rawResponse = await responsePromise.asResponse();
@@ -75,5 +39,41 @@ describe('resource supportChannels', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.supportChannels.retrieve('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.supportChannels.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      user_id: 'user_xxxxxxxxxxxxx',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.supportChannels.create({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      user_id: 'user_xxxxxxxxxxxxx',
+      custom_name: 'custom_name',
+    });
   });
 });

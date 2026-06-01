@@ -12,17 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class PayoutMethods extends APIResource {
   /**
-   * Retrieves the details of an existing payout method.
-   *
-   * Required permissions:
-   *
-   * - `payout:destination:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<PayoutMethodRetrieveResponse> {
-    return this._client.get(path`/payout_methods/${id}`, options);
-  }
-
-  /**
    * Returns a list of active payout methods configured for a company, ordered by
    * most recently created.
    *
@@ -38,6 +27,17 @@ export class PayoutMethods extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing payout method.
+   *
+   * Required permissions:
+   *
+   * - `payout:destination:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<PayoutMethodRetrieveResponse> {
+    return this._client.get(path`/payout_methods/${id}`, options);
   }
 }
 
