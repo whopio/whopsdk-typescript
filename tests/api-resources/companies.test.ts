@@ -9,6 +9,50 @@ const client = new Whop({
 
 describe('resource companies', () => {
   // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.companies.retrieve('biz_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.companies.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.companies.list(
+        {
+          after: 'after',
+          before: 'before',
+          created_after: '2023-12-01T05:00:00.401Z',
+          created_before: '2023-12-01T05:00:00.401Z',
+          direction: 'asc',
+          first: 42,
+          last: 42,
+          parent_company_id: 'parent_company_id',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.companies.create({ title: 'title' });
     const rawResponse = await responsePromise.asResponse();
@@ -31,18 +75,6 @@ describe('resource companies', () => {
       parent_company_id: 'parent_company_id',
       send_customer_emails: true,
     });
-  });
-
-  // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.companies.retrieve('biz_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -91,8 +123,10 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.companies.list();
+  test.skip('createAPIKey: only required params', async () => {
+    const responsePromise = client.companies.createAPIKey('parent_company_id', {
+      child_company_id: 'child_company_id',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -103,22 +137,18 @@ describe('resource companies', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.companies.list(
+  test.skip('createAPIKey: required and optional params', async () => {
+    const response = await client.companies.createAPIKey('parent_company_id', {
+      child_company_id: 'child_company_id',
+      name: 'name',
+      permissions: [
         {
-          after: 'after',
-          before: 'before',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          direction: 'asc',
-          first: 42,
-          last: 42,
-          parent_company_id: 'parent_company_id',
+          actions: ['string'],
+          grant: true,
+          resources: ['string'],
         },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+      ],
+      role: 'owner',
+    });
   });
 });
