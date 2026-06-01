@@ -12,6 +12,32 @@ import { path } from '../internal/utils/path';
  */
 export class PromoCodes extends APIResource {
   /**
+   * Returns a paginated list of promo codes belonging to a company, with optional
+   * filtering by product, plan, and status.
+   *
+   * Required permissions:
+   *
+   * - `promo_code:basic:read`
+   * - `access_pass:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const promoCodeListResponse of client.promoCodes.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: PromoCodeListParams,
+    options?: RequestOptions,
+  ): PagePromise<PromoCodeListResponsesCursorPage, PromoCodeListResponse> {
+    return this._client.getAPIList('/promo_codes', CursorPage<PromoCodeListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new promo code that applies a discount at checkout. Can be scoped to
    * specific products or plans.
    *
@@ -54,32 +80,6 @@ export class PromoCodes extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<PromoCode> {
     return this._client.get(path`/promo_codes/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of promo codes belonging to a company, with optional
-   * filtering by product, plan, and status.
-   *
-   * Required permissions:
-   *
-   * - `promo_code:basic:read`
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const promoCodeListResponse of client.promoCodes.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: PromoCodeListParams,
-    options?: RequestOptions,
-  ): PagePromise<PromoCodeListResponsesCursorPage, PromoCodeListResponse> {
-    return this._client.getAPIList('/promo_codes', CursorPage<PromoCodeListResponse>, { query, ...options });
   }
 
   /**
@@ -375,6 +375,53 @@ export namespace PromoCodeListResponse {
  */
 export type PromoCodeDeleteResponse = boolean;
 
+export interface PromoCodeListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list promo codes for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return promo codes created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return promo codes created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Filter to only promo codes scoped to these plan identifiers.
+   */
+  plan_ids?: Array<string> | null;
+
+  /**
+   * Filter to only promo codes scoped to these product identifiers.
+   */
+  product_ids?: Array<string> | null;
+
+  /**
+   * Statuses for promo codes
+   */
+  status?: PromoCodeStatus | null;
+}
+
 export interface PromoCodeCreateParams {
   /**
    * The discount amount. When promo_type is percentage, this is the percent off
@@ -462,53 +509,6 @@ export interface PromoCodeCreateParams {
   unlimited_stock?: boolean | null;
 }
 
-export interface PromoCodeListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list promo codes for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return promo codes created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return promo codes created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Filter to only promo codes scoped to these plan identifiers.
-   */
-  plan_ids?: Array<string> | null;
-
-  /**
-   * Filter to only promo codes scoped to these product identifiers.
-   */
-  product_ids?: Array<string> | null;
-
-  /**
-   * Statuses for promo codes
-   */
-  status?: PromoCodeStatus | null;
-}
-
 export declare namespace PromoCodes {
   export {
     type PromoCode as PromoCode,
@@ -517,7 +517,7 @@ export declare namespace PromoCodes {
     type PromoCodeListResponse as PromoCodeListResponse,
     type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
-    type PromoCodeCreateParams as PromoCodeCreateParams,
     type PromoCodeListParams as PromoCodeListParams,
+    type PromoCodeCreateParams as PromoCodeCreateParams,
   };
 }
