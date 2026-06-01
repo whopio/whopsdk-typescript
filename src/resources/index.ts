@@ -7,13 +7,49 @@ export {
   type NotificationPreferences,
   type AIChatListResponse,
   type AIChatDeleteResponse,
+  type AIChatListParams,
   type AIChatCreateParams,
   type AIChatUpdateParams,
-  type AIChatListParams,
   type AIChatListResponsesCursorPage,
 } from './ai-chats';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
+export {
+  AdCampaigns,
+  type AdCampaign,
+  type AdCampaignPlatform,
+  type AdCampaignStatus,
+  type AdCampaignListResponse,
+  type AdCampaignListParams,
+  type AdCampaignUpdateParams,
+  type AdCampaignListResponsesCursorPage,
+} from './ad-campaigns';
+export {
+  AdGroups,
+  type AdBudgetType,
+  type AdGroup,
+  type AdGroupStatus,
+  type AdGroupListResponse,
+  type AdGroupDeleteResponse,
+  type AdGroupListParams,
+  type AdGroupUpdateParams,
+  type AdGroupListResponsesCursorPage,
+} from './ad-groups';
+export {
+  AdReports,
+  type Granularities,
+  type ResultLabelKeys,
+  type AdReportRetrieveResponse,
+  type AdReportRetrieveParams,
+} from './ad-reports';
+export {
+  Ads,
+  type Ad,
+  type ExternalAdStatus,
+  type AdListResponse,
+  type AdListParams,
+  type AdListResponsesCursorPage,
+} from './ads';
 export {
   Affiliates,
   type Affiliate,
@@ -21,24 +57,24 @@ export {
   type AffiliateListResponse,
   type AffiliateArchiveResponse,
   type AffiliateUnarchiveResponse,
-  type AffiliateCreateParams,
   type AffiliateListParams,
+  type AffiliateCreateParams,
   type AffiliateListResponsesCursorPage,
 } from './affiliates/affiliates';
 export {
   AppBuilds,
   type AppBuildListResponse,
-  type AppBuildCreateParams,
   type AppBuildListParams,
+  type AppBuildCreateParams,
   type AppBuildListResponsesCursorPage,
 } from './app-builds';
 export {
   Apps,
   type AppType,
   type AppListResponse,
+  type AppListParams,
   type AppCreateParams,
   type AppUpdateParams,
-  type AppListParams,
   type AppListResponsesCursorPage,
 } from './apps';
 export {
@@ -46,33 +82,44 @@ export {
   type AuthorizedUser,
   type AuthorizedUserListResponse,
   type AuthorizedUserDeleteResponse,
-  type AuthorizedUserCreateParams,
   type AuthorizedUserListParams,
+  type AuthorizedUserCreateParams,
   type AuthorizedUserDeleteParams,
   type AuthorizedUserListResponsesCursorPage,
 } from './authorized-users';
 export {
+  Bounties,
+  type BountyCreateResponse,
+  type BountyRetrieveResponse,
+  type BountyListResponse,
+  type BountyListParams,
+  type BountyCreateParams,
+  type BountyListResponsesCursorPage,
+} from './bounties';
+export {
   ChatChannels,
   type ChatChannelListResponse,
-  type ChatChannelUpdateParams,
   type ChatChannelListParams,
+  type ChatChannelUpdateParams,
   type ChatChannelListResponsesCursorPage,
 } from './chat-channels';
 export {
   CheckoutConfigurations,
   type CheckoutModes,
   type CheckoutConfigurationListResponse,
-  type CheckoutConfigurationCreateParams,
   type CheckoutConfigurationListParams,
+  type CheckoutConfigurationCreateParams,
   type CheckoutConfigurationListResponsesCursorPage,
 } from './checkout-configurations';
 export {
   Companies,
   type SocialLinkWebsites,
   type CompanyListResponse,
+  type CompanyCreateAPIKeyResponse,
+  type CompanyListParams,
   type CompanyCreateParams,
   type CompanyUpdateParams,
-  type CompanyListParams,
+  type CompanyCreateAPIKeyParams,
   type CompanyListResponsesCursorPage,
 } from './companies';
 export {
@@ -80,18 +127,19 @@ export {
   type CompanyTokenTransaction,
   type CompanyTokenTransactionType,
   type CompanyTokenTransactionListResponse,
-  type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListParams,
+  type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListResponsesCursorPage,
 } from './company-token-transactions';
+export { Conversions, type ConversionCreateResponse, type ConversionCreateParams } from './conversions';
 export {
   CourseChapters,
   type CourseChapter,
   type CourseChapterListResponse,
   type CourseChapterDeleteResponse,
+  type CourseChapterListParams,
   type CourseChapterCreateParams,
   type CourseChapterUpdateParams,
-  type CourseChapterListParams,
   type CourseChapterListResponsesCursorPage,
 } from './course-chapters';
 export {
@@ -110,9 +158,9 @@ export {
   type CourseLessonMarkAsCompletedResponse,
   type CourseLessonStartResponse,
   type CourseLessonSubmitAssessmentResponse,
+  type CourseLessonListParams,
   type CourseLessonCreateParams,
   type CourseLessonUpdateParams,
-  type CourseLessonListParams,
   type CourseLessonSubmitAssessmentParams,
   type CourseLessonListResponsesCursorPage,
 } from './course-lessons';
@@ -130,9 +178,9 @@ export {
   type Languages,
   type CourseListResponse,
   type CourseDeleteResponse,
+  type CourseListParams,
   type CourseCreateParams,
   type CourseUpdateParams,
-  type CourseListParams,
   type CourseListResponsesCursorPage,
 } from './courses';
 export {
@@ -157,9 +205,9 @@ export {
   type DmChannel,
   type DmChannelListResponse,
   type DmChannelDeleteResponse,
+  type DmChannelListParams,
   type DmChannelCreateParams,
   type DmChannelUpdateParams,
-  type DmChannelListParams,
   type DmChannelListResponsesCursorPage,
 } from './dm-channels';
 export {
@@ -169,9 +217,9 @@ export {
   type DmMember,
   type DmMemberListResponse,
   type DmMemberDeleteResponse,
+  type DmMemberListParams,
   type DmMemberCreateParams,
   type DmMemberUpdateParams,
-  type DmMemberListParams,
   type DmMemberListResponsesCursorPage,
 } from './dm-members';
 export {
@@ -185,9 +233,9 @@ export {
   Experiences,
   type ExperienceListResponse,
   type ExperienceDeleteResponse,
+  type ExperienceListParams,
   type ExperienceCreateParams,
   type ExperienceUpdateParams,
-  type ExperienceListParams,
   type ExperienceAttachParams,
   type ExperienceDetachParams,
   type ExperienceDuplicateParams,
@@ -199,12 +247,13 @@ export {
   type FeeMarkupCreateResponse,
   type FeeMarkupListResponse,
   type FeeMarkupDeleteResponse,
-  type FeeMarkupCreateParams,
   type FeeMarkupListParams,
+  type FeeMarkupCreateParams,
   type FeeMarkupListResponsesCursorPage,
 } from './fee-markups';
 export {
   Files,
+  type FileVisibility,
   type UploadStatus,
   type FileCreateResponse,
   type FileRetrieveResponse,
@@ -214,16 +263,16 @@ export {
   ForumPosts,
   type ForumPostVisibilityType,
   type ForumPostListResponse,
+  type ForumPostListParams,
   type ForumPostCreateParams,
   type ForumPostUpdateParams,
-  type ForumPostListParams,
   type ForumPostListResponsesCursorPage,
 } from './forum-posts';
 export {
   Forums,
   type ForumListResponse,
-  type ForumUpdateParams,
   type ForumListParams,
+  type ForumUpdateParams,
   type ForumListResponsesCursorPage,
 } from './forums';
 export {
@@ -233,17 +282,17 @@ export {
   type InvoiceMarkPaidResponse,
   type InvoiceMarkUncollectibleResponse,
   type InvoiceVoidResponse,
+  type InvoiceListParams,
   type InvoiceCreateParams,
   type InvoiceUpdateParams,
-  type InvoiceListParams,
 } from './invoices';
 export {
   Leads,
   type Lead,
   type LeadListResponse,
+  type LeadListParams,
   type LeadCreateParams,
   type LeadUpdateParams,
-  type LeadListParams,
   type LeadListResponsesCursorPage,
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
@@ -258,20 +307,20 @@ export {
   Memberships,
   type CancelOptions,
   type MembershipListResponse,
-  type MembershipUpdateParams,
   type MembershipListParams,
-  type MembershipAddFreeDaysParams,
+  type MembershipUpdateParams,
   type MembershipCancelParams,
   type MembershipPauseParams,
+  type MembershipAddFreeDaysParams,
   type MembershipListResponsesCursorPage,
 } from './memberships';
 export {
   Messages,
   type MessageListResponse,
   type MessageDeleteResponse,
+  type MessageListParams,
   type MessageCreateParams,
   type MessageUpdateParams,
-  type MessageListParams,
   type MessageListResponsesCursorPage,
 } from './messages';
 export {
@@ -283,8 +332,8 @@ export {
   PaymentMethods,
   type PaymentMethodRetrieveResponse,
   type PaymentMethodListResponse,
-  type PaymentMethodRetrieveParams,
   type PaymentMethodListParams,
+  type PaymentMethodRetrieveParams,
   type PaymentMethodListResponsesCursorPage,
 } from './payment-methods';
 export {
@@ -295,10 +344,10 @@ export {
   type ReceiptTaxBehavior,
   type PaymentListResponse,
   type PaymentListFeesResponse,
-  type PaymentCreateParams,
   type PaymentListParams,
-  type PaymentListFeesParams,
   type PaymentRefundParams,
+  type PaymentCreateParams,
+  type PaymentListFeesParams,
   type PaymentListResponsesCursorPage,
   type PaymentListFeesResponsesCursorPage,
 } from './payments';
@@ -321,17 +370,17 @@ export {
   type CheckoutShape,
   type PlanListResponse,
   type PlanDeleteResponse,
+  type PlanListParams,
   type PlanCreateParams,
   type PlanUpdateParams,
-  type PlanListParams,
   type PlanListResponsesCursorPage,
 } from './plans';
 export {
   Products,
   type ProductDeleteResponse,
+  type ProductListParams,
   type ProductCreateParams,
   type ProductUpdateParams,
-  type ProductListParams,
 } from './products';
 export {
   PromoCodes,
@@ -340,16 +389,16 @@ export {
   type PromoDuration,
   type PromoCodeListResponse,
   type PromoCodeDeleteResponse,
-  type PromoCodeCreateParams,
   type PromoCodeListParams,
+  type PromoCodeCreateParams,
   type PromoCodeListResponsesCursorPage,
 } from './promo-codes';
 export {
   Reactions,
   type ReactionListResponse,
   type ReactionDeleteResponse,
-  type ReactionCreateParams,
   type ReactionListParams,
+  type ReactionCreateParams,
   type ReactionDeleteParams,
   type ReactionListResponsesCursorPage,
 } from './reactions';
@@ -395,23 +444,23 @@ export {
 export {
   Shipments,
   type ShipmentListResponse,
-  type ShipmentCreateParams,
   type ShipmentListParams,
+  type ShipmentCreateParams,
   type ShipmentListResponsesCursorPage,
 } from './shipments';
 export {
   SupportChannels,
   type SupportChannelListResponse,
-  type SupportChannelCreateParams,
   type SupportChannelListParams,
+  type SupportChannelCreateParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
   type TransferListResponse,
-  type TransferCreateParams,
   type TransferListParams,
+  type TransferCreateParams,
   type TransferListResponsesCursorPage,
 } from './transfers';
 export {
@@ -420,9 +469,9 @@ export {
   type UserListResponse,
   type UserCheckAccessResponse,
   type UserRetrieveParams,
+  type UserCheckAccessParams,
   type UserUpdateParams,
   type UserListParams,
-  type UserCheckAccessParams,
   type UserListResponsesCursorPage,
 } from './users';
 export {
@@ -442,43 +491,47 @@ export {
   type WebhookCreateResponse,
   type WebhookListResponse,
   type WebhookDeleteResponse,
+  type CourseLessonInteractionCompletedWebhookEvent,
+  type DisputeCreatedWebhookEvent,
+  type DisputeUpdatedWebhookEvent,
+  type DisputeAlertCreatedWebhookEvent,
+  type EntryApprovedWebhookEvent,
+  type EntryCreatedWebhookEvent,
+  type EntryDeletedWebhookEvent,
+  type EntryDeniedWebhookEvent,
+  type IdentityProfileApprovedWebhookEvent,
+  type IdentityProfileNeedsActionWebhookEvent,
+  type IdentityProfileRejectedWebhookEvent,
+  type IdentityProfileUpdatedWebhookEvent,
   type InvoiceCreatedWebhookEvent,
   type InvoiceMarkedUncollectibleWebhookEvent,
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,
   type MembershipActivatedWebhookEvent,
+  type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type MembershipDeactivatedWebhookEvent,
-  type EntryCreatedWebhookEvent,
-  type EntryApprovedWebhookEvent,
-  type EntryDeniedWebhookEvent,
-  type EntryDeletedWebhookEvent,
-  type SetupIntentRequiresActionWebhookEvent,
-  type SetupIntentSucceededWebhookEvent,
-  type SetupIntentCanceledWebhookEvent,
-  type WithdrawalCreatedWebhookEvent,
-  type WithdrawalUpdatedWebhookEvent,
-  type CourseLessonInteractionCompletedWebhookEvent,
-  type PayoutMethodCreatedWebhookEvent,
-  type VerificationSucceededWebhookEvent,
-  type PayoutAccountStatusUpdatedWebhookEvent,
-  type ResolutionCenterCaseCreatedWebhookEvent,
-  type ResolutionCenterCaseUpdatedWebhookEvent,
-  type ResolutionCenterCaseDecidedWebhookEvent,
   type PaymentCreatedWebhookEvent,
-  type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,
   type PaymentPendingWebhookEvent,
-  type DisputeCreatedWebhookEvent,
-  type DisputeUpdatedWebhookEvent,
+  type PaymentSucceededWebhookEvent,
+  type PayoutAccountStatusUpdatedWebhookEvent,
+  type PayoutMethodCreatedWebhookEvent,
   type RefundCreatedWebhookEvent,
   type RefundUpdatedWebhookEvent,
-  type DisputeAlertCreatedWebhookEvent,
-  type MembershipCancelAtPeriodEndChangedWebhookEvent,
+  type ResolutionCenterCaseCreatedWebhookEvent,
+  type ResolutionCenterCaseDecidedWebhookEvent,
+  type ResolutionCenterCaseUpdatedWebhookEvent,
+  type SetupIntentCanceledWebhookEvent,
+  type SetupIntentRequiresActionWebhookEvent,
+  type SetupIntentSucceededWebhookEvent,
+  type VerificationSucceededWebhookEvent,
+  type WithdrawalCreatedWebhookEvent,
+  type WithdrawalUpdatedWebhookEvent,
   type UnwrapWebhookEvent,
+  type WebhookListParams,
   type WebhookCreateParams,
   type WebhookUpdateParams,
-  type WebhookListParams,
   type WebhookListResponsesCursorPage,
 } from './webhooks';
 export {
@@ -488,7 +541,7 @@ export {
   type WithdrawalSpeeds,
   type WithdrawalStatus,
   type WithdrawalListResponse,
-  type WithdrawalCreateParams,
   type WithdrawalListParams,
+  type WithdrawalCreateParams,
   type WithdrawalListResponsesCursorPage,
 } from './withdrawals';
