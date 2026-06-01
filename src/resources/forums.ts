@@ -12,6 +12,21 @@ import { path } from '../internal/utils/path';
  */
 export class Forums extends APIResource {
   /**
+   * Returns a paginated list of forums within a specific company, with optional
+   * filtering by product.
+   *
+   * Required permissions:
+   *
+   * - `forum:read`
+   */
+  list(
+    query: ForumListParams,
+    options?: RequestOptions,
+  ): PagePromise<ForumListResponsesCursorPage, ForumListResponse> {
+    return this._client.getAPIList('/forums', CursorPage<ForumListResponse>, { query, ...options });
+  }
+
+  /**
    * Retrieves the details of an existing forum.
    *
    * Required permissions:
@@ -36,21 +51,6 @@ export class Forums extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.Forum> {
     return this._client.patch(path`/forums/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of forums within a specific company, with optional
-   * filtering by product.
-   *
-   * Required permissions:
-   *
-   * - `forum:read`
-   */
-  list(
-    query: ForumListParams,
-    options?: RequestOptions,
-  ): PagePromise<ForumListResponsesCursorPage, ForumListResponse> {
-    return this._client.getAPIList('/forums', CursorPage<ForumListResponse>, { query, ...options });
   }
 }
 
@@ -108,6 +108,34 @@ export namespace ForumListResponse {
   }
 }
 
+export interface ForumListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list forums for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The unique identifier of a product to filter by. When set, only forums connected
+   * to this product are returned.
+   */
+  product_id?: string | null;
+}
+
 export interface ForumUpdateParams {
   /**
    * A list of words that are automatically blocked from posts in this forum. For
@@ -150,39 +178,11 @@ export namespace ForumUpdateParams {
   }
 }
 
-export interface ForumListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list forums for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The unique identifier of a product to filter by. When set, only forums connected
-   * to this product are returned.
-   */
-  product_id?: string | null;
-}
-
 export declare namespace Forums {
   export {
     type ForumListResponse as ForumListResponse,
     type ForumListResponsesCursorPage as ForumListResponsesCursorPage,
-    type ForumUpdateParams as ForumUpdateParams,
     type ForumListParams as ForumListParams,
+    type ForumUpdateParams as ForumUpdateParams,
   };
 }
