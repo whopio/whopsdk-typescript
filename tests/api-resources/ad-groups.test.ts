@@ -401,6 +401,7 @@ describe('resource adGroups', () => {
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
           first: 42,
+          include_paused: true,
           last: 42,
           query: 'query',
           status: 'active',
