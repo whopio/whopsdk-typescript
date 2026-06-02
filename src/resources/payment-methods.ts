@@ -13,21 +13,6 @@ import { path } from '../internal/utils/path';
  */
 export class PaymentMethods extends APIResource {
   /**
-   * Retrieves the details of an existing payment method.
-   *
-   * Required permissions:
-   *
-   * - `member:payment_methods:read`
-   */
-  retrieve(
-    id: string,
-    query: PaymentMethodRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<PaymentMethodRetrieveResponse> {
-    return this._client.get(path`/payment_methods/${id}`, { query, ...options });
-  }
-
-  /**
    * Returns a paginated list of payment methods for a member or company, with
    * optional filtering by creation date. A payment method is a stored representation
    * of how a customer intends to pay, such as a card, bank account, or digital
@@ -45,6 +30,21 @@ export class PaymentMethods extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing payment method.
+   *
+   * Required permissions:
+   *
+   * - `member:payment_methods:read`
+   */
+  retrieve(
+    id: string,
+    query: PaymentMethodRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PaymentMethodRetrieveResponse> {
+    return this._client.get(path`/payment_methods/${id}`, { query, ...options });
   }
 }
 
@@ -746,20 +746,6 @@ export namespace PaymentMethodListResponse {
   }
 }
 
-export interface PaymentMethodRetrieveParams {
-  /**
-   * The unique identifier of the company. Provide either this or member_id, not
-   * both.
-   */
-  company_id?: string | null;
-
-  /**
-   * The unique identifier of the member. Provide either this or company_id, not
-   * both.
-   */
-  member_id?: string | null;
-}
-
 export interface PaymentMethodListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -803,12 +789,26 @@ export interface PaymentMethodListParams extends CursorPageParams {
   member_id?: string | null;
 }
 
+export interface PaymentMethodRetrieveParams {
+  /**
+   * The unique identifier of the company. Provide either this or member_id, not
+   * both.
+   */
+  company_id?: string | null;
+
+  /**
+   * The unique identifier of the member. Provide either this or company_id, not
+   * both.
+   */
+  member_id?: string | null;
+}
+
 export declare namespace PaymentMethods {
   export {
     type PaymentMethodRetrieveResponse as PaymentMethodRetrieveResponse,
     type PaymentMethodListResponse as PaymentMethodListResponse,
     type PaymentMethodListResponsesCursorPage as PaymentMethodListResponsesCursorPage,
-    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
     type PaymentMethodListParams as PaymentMethodListParams,
+    type PaymentMethodRetrieveParams as PaymentMethodRetrieveParams,
   };
 }
