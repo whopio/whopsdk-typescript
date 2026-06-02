@@ -30,6 +30,27 @@ export class Users extends APIResource {
   }
 
   /**
+   * Check whether a user has access to a specific resource, and return their access
+   * level.
+   *
+   * @example
+   * ```ts
+   * const response = await client.users.checkAccess(
+   *   'resource_id',
+   *   { id: 'user_xxxxxxxxxxxxx' },
+   * );
+   * ```
+   */
+  checkAccess(
+    resourceID: string,
+    params: UserCheckAccessParams,
+    options?: RequestOptions,
+  ): APIPromise<UserCheckAccessResponse> {
+    const { id } = params;
+    return this._client.get(path`/users/${id}/access/${resourceID}`, options);
+  }
+
+  /**
    * Update a user's profile by their ID.
    *
    * Required permissions:
@@ -68,27 +89,6 @@ export class Users extends APIResource {
     options?: RequestOptions,
   ): PagePromise<UserListResponsesCursorPage, UserListResponse> {
     return this._client.getAPIList('/users', CursorPage<UserListResponse>, { query, ...options });
-  }
-
-  /**
-   * Check whether a user has access to a specific resource, and return their access
-   * level.
-   *
-   * @example
-   * ```ts
-   * const response = await client.users.checkAccess(
-   *   'resource_id',
-   *   { id: 'user_xxxxxxxxxxxxx' },
-   * );
-   * ```
-   */
-  checkAccess(
-    resourceID: string,
-    params: UserCheckAccessParams,
-    options?: RequestOptions,
-  ): APIPromise<UserCheckAccessResponse> {
-    const { id } = params;
-    return this._client.get(path`/users/${id}/access/${resourceID}`, options);
   }
 }
 
@@ -219,6 +219,13 @@ export interface UserRetrieveParams {
   company_id?: string | null;
 }
 
+export interface UserCheckAccessParams {
+  /**
+   * The unique identifier or username of the user.
+   */
+  id: string;
+}
+
 export interface UserUpdateParams {
   /**
    * A short biography displayed on the user's public profile.
@@ -283,13 +290,6 @@ export interface UserListParams extends CursorPageParams {
   query?: string | null;
 }
 
-export interface UserCheckAccessParams {
-  /**
-   * The unique identifier or username of the user.
-   */
-  id: string;
-}
-
 export declare namespace Users {
   export {
     type User as User,
@@ -297,8 +297,8 @@ export declare namespace Users {
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserListResponsesCursorPage as UserListResponsesCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
+    type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
     type UserListParams as UserListParams,
-    type UserCheckAccessParams as UserCheckAccessParams,
   };
 }
