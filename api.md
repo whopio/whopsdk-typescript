@@ -639,6 +639,59 @@ Methods:
 
 - <code title="post /account_links">client.accountLinks.<a href="./src/resources/account-links.ts">create</a>({ ...params }) -> AccountLinkCreateResponse</code>
 
+# Accounts
+
+Types:
+
+- <code><a href="./src/resources/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountSocialLink</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountListResponse</a></code>
+
+Methods:
+
+- <code title="get /accounts">client.accounts.<a href="./src/resources/accounts.ts">list</a>({ ...params }) -> AccountListResponse</code>
+- <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="get /accounts/me">client.accounts.<a href="./src/resources/accounts.ts">me</a>() -> Account</code>
+- <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">retrieve</a>(accountID) -> Account</code>
+- <code title="patch /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(accountID, { ...params }) -> Account</code>
+
+# Wallets
+
+Types:
+
+- <code><a href="./src/resources/wallets.ts">AccountWallet</a></code>
+- <code><a href="./src/resources/wallets.ts">WalletListResponse</a></code>
+- <code><a href="./src/resources/wallets.ts">WalletBalanceResponse</a></code>
+- <code><a href="./src/resources/wallets.ts">WalletPingResponse</a></code>
+- <code><a href="./src/resources/wallets.ts">WalletSendResponse</a></code>
+
+Methods:
+
+- <code title="get /wallets">client.wallets.<a href="./src/resources/wallets.ts">list</a>() -> WalletListResponse</code>
+- <code title="get /wallets/ping">client.wallets.<a href="./src/resources/wallets.ts">ping</a>() -> WalletPingResponse</code>
+- <code title="get /wallets/{account_id}/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>(accountID) -> WalletBalanceResponse</code>
+- <code title="post /wallets/{account_id}/sends">client.wallets.<a href="./src/resources/wallets.ts">send</a>(accountID, { ...params }) -> WalletSendResponse</code>
+
+# Swaps
+
+Types:
+
+- <code><a href="./src/resources/swaps.ts">SwapCreateQuoteResponse</a></code>
+
+Methods:
+
+- <code title="post /swaps/quote">client.swaps.<a href="./src/resources/swaps.ts">createQuote</a>({ ...params }) -> SwapCreateQuoteResponse</code>
+
+# Deposits
+
+Types:
+
+- <code><a href="./src/resources/deposits.ts">DepositCreateResponse</a></code>
+
+Methods:
+
+- <code title="post /deposits">client.deposits.<a href="./src/resources/deposits.ts">create</a>({ ...params }) -> DepositCreateResponse</code>
+
 # SetupIntents
 
 Types:
