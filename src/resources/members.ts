@@ -12,19 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class Members extends APIResource {
   /**
-   * Retrieves the details of an existing member.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   * - `member:phone:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<MemberRetrieveResponse> {
-    return this._client.get(path`/members/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of members for a company, with extensive filtering by
    * product, plan, status, access level, and more.
    *
@@ -39,6 +26,19 @@ export class Members extends APIResource {
     options?: RequestOptions,
   ): PagePromise<MemberListResponsesCursorPage, MemberListResponse> {
     return this._client.getAPIList('/members', CursorPage<MemberListResponse>, { query, ...options });
+  }
+
+  /**
+   * Retrieves the details of an existing member.
+   *
+   * Required permissions:
+   *
+   * - `member:basic:read`
+   * - `member:email:read`
+   * - `member:phone:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<MemberRetrieveResponse> {
+    return this._client.get(path`/members/${id}`, options);
   }
 }
 
@@ -68,7 +68,8 @@ export interface MemberRetrieveResponse {
   company: MemberRetrieveResponse.Company;
 
   /**
-   * The member's token balance for this company
+   * The member's token balance for this company. Computed live from the ledger, not
+   * from a cache.
    */
   company_token_balance: number;
 
@@ -184,7 +185,8 @@ export interface MemberListResponse {
   access_level: Shared.AccessLevel;
 
   /**
-   * The member's token balance for this company
+   * The member's token balance for this company. Computed live from the ledger, not
+   * from a cache.
    */
   company_token_balance: number;
 
