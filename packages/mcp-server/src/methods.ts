@@ -894,6 +894,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/accounts',
   },
   {
+    clientCallName: 'client.accounts.me',
+    fullyQualifiedName: 'accounts.me',
+    httpMethod: 'get',
+    httpPath: '/accounts/me',
+  },
+  {
     clientCallName: 'client.accounts.retrieve',
     fullyQualifiedName: 'accounts.retrieve',
     httpMethod: 'get',

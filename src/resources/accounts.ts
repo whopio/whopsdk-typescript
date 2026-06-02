@@ -9,7 +9,8 @@ import { path } from '../internal/utils/path';
 export class Accounts extends APIResource {
   /**
    * Lists accounts visible to the credential. User tokens return the user's business
-   * accounts; business account API keys return connected accounts.
+   * accounts; business account API keys return the requesting business account and
+   * its connected accounts.
    */
   list(
     query: AccountListParams | null | undefined = {},
@@ -24,6 +25,14 @@ export class Accounts extends APIResource {
    */
   create(body: AccountCreateParams, options?: RequestOptions): APIPromise<Account> {
     return this._client.post('/accounts', { body, ...options });
+  }
+
+  /**
+   * Retrieves the business account associated with the current business account API
+   * key.
+   */
+  me(options?: RequestOptions): APIPromise<Account> {
+    return this._client.get('/accounts/me', options);
   }
 
   /**
@@ -50,9 +59,24 @@ export interface Account {
   id: string;
 
   /**
+   * The URL of the account banner image
+   */
+  banner_image_url: string | null;
+
+  /**
+   * The high-level business category for the account
+   */
+  business_type: string | null;
+
+  /**
    * When the account was created, as an ISO 8601 timestamp
    */
   created_at: string;
+
+  /**
+   * A promotional description for the account
+   */
+  description: string | null;
 
   /**
    * The email address of the account owner
@@ -60,14 +84,87 @@ export interface Account {
   email: string | null;
 
   /**
+   * The industry group the account belongs to
+   */
+  industry_group: string | null;
+
+  /**
+   * The specific industry vertical the account operates in
+   */
+  industry_type: string | null;
+
+  /**
+   * The URL of the account logo image
+   */
+  logo_url: string | null;
+
+  /**
    * Arbitrary key/value metadata supplied when the account was created
    */
   metadata: unknown;
 
   /**
+   * The parent account ID for connected accounts
+   */
+  parent_account_id: string | null;
+
+  /**
+   * The account's public route identifier
+   */
+  route: string;
+
+  /**
+   * Whether Whop sends transactional emails to customers on behalf of this account
+   */
+  send_customer_emails: boolean;
+
+  social_links: Array<AccountSocialLink>;
+
+  /**
+   * The target audience for this account
+   */
+  target_audience: string | null;
+
+  /**
+   * The display name of the account
+   */
+  title: string;
+
+  /**
    * The account's primary crypto wallet, or null if none has been provisioned
    */
   wallet: WalletsAPI.AccountWallet | null;
+}
+
+export interface AccountSocialLink {
+  /**
+   * The ID of the social link
+   */
+  id: string;
+
+  /**
+   * The optional display title for the social link
+   */
+  title: string | null;
+
+  /**
+   * The social link URL
+   */
+  url: string;
+
+  /**
+   * The social platform for this link
+   */
+  website:
+    | 'x'
+    | 'instagram'
+    | 'facebook'
+    | 'tiktok'
+    | 'youtube'
+    | 'linkedin'
+    | 'twitch'
+    | 'website'
+    | 'custom';
 }
 
 export interface AccountListResponse {
@@ -212,6 +309,7 @@ export interface AccountUpdateParams {
 export declare namespace Accounts {
   export {
     type Account as Account,
+    type AccountSocialLink as AccountSocialLink,
     type AccountListResponse as AccountListResponse,
     type AccountListParams as AccountListParams,
     type AccountCreateParams as AccountCreateParams,

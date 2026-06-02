@@ -26,6 +26,7 @@ import {
   AccountCreateParams,
   AccountListParams,
   AccountListResponse,
+  AccountSocialLink,
   AccountUpdateParams,
   Accounts,
 } from './resources/accounts';
@@ -2060,6 +2061,7 @@ export declare namespace Whop {
   export {
     Accounts as Accounts,
     type Account as Account,
+    type AccountSocialLink as AccountSocialLink,
     type AccountListResponse as AccountListResponse,
     type AccountListParams as AccountListParams,
     type AccountCreateParams as AccountCreateParams,

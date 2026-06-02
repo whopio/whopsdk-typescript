@@ -256,6 +256,7 @@ const fuse = new Fuse(
     'client.accountLinks.create',
     'client.accounts.create',
     'client.accounts.list',
+    'client.accounts.me',
     'client.accounts.retrieve',
     'client.accounts.update',
     'client.wallets.balance',

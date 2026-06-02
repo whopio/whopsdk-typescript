@@ -644,12 +644,14 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/accounts.ts">Account</a></code>
+- <code><a href="./src/resources/accounts.ts">AccountSocialLink</a></code>
 - <code><a href="./src/resources/accounts.ts">AccountListResponse</a></code>
 
 Methods:
 
 - <code title="get /accounts">client.accounts.<a href="./src/resources/accounts.ts">list</a>({ ...params }) -> AccountListResponse</code>
 - <code title="post /accounts">client.accounts.<a href="./src/resources/accounts.ts">create</a>({ ...params }) -> Account</code>
+- <code title="get /accounts/me">client.accounts.<a href="./src/resources/accounts.ts">me</a>() -> Account</code>
 - <code title="get /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">retrieve</a>(accountID) -> Account</code>
 - <code title="patch /accounts/{account_id}">client.accounts.<a href="./src/resources/accounts.ts">update</a>(accountID, { ...params }) -> Account</code>
 

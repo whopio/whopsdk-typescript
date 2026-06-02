@@ -17,6 +17,7 @@ export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreatePar
 export {
   Accounts,
   type Account,
+  type AccountSocialLink,
   type AccountListResponse,
   type AccountListParams,
   type AccountCreateParams,
