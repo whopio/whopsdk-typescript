@@ -34,6 +34,31 @@ export class Affiliates extends APIResource {
   overrides: OverridesAPI.Overrides = new OverridesAPI.Overrides(this._client);
 
   /**
+   * Returns a paginated list of affiliates for the actor in context, with optional
+   * filtering by status, search, and sorting.
+   *
+   * Required permissions:
+   *
+   * - `affiliate:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const affiliateListResponse of client.affiliates.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: AffiliateListParams,
+    options?: RequestOptions,
+  ): PagePromise<AffiliateListResponsesCursorPage, AffiliateListResponse> {
+    return this._client.getAPIList('/affiliates', CursorPage<AffiliateListResponse>, { query, ...options });
+  }
+
+  /**
    * Creates or finds an affiliate for a company and user.
    *
    * Required permissions:
@@ -68,31 +93,6 @@ export class Affiliates extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Affiliate> {
     return this._client.get(path`/affiliates/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of affiliates for the actor in context, with optional
-   * filtering by status, search, and sorting.
-   *
-   * Required permissions:
-   *
-   * - `affiliate:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const affiliateListResponse of client.affiliates.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: AffiliateListParams,
-    options?: RequestOptions,
-  ): PagePromise<AffiliateListResponsesCursorPage, AffiliateListResponse> {
-    return this._client.getAPIList('/affiliates', CursorPage<AffiliateListResponse>, { query, ...options });
   }
 
   /**
@@ -385,18 +385,6 @@ export type AffiliateArchiveResponse = boolean;
  */
 export type AffiliateUnarchiveResponse = boolean;
 
-export interface AffiliateCreateParams {
-  /**
-   * The ID of the company to create the affiliate for.
-   */
-  company_id: string;
-
-  /**
-   * The user identifier (username, email, user ID, or Discord ID).
-   */
-  user_identifier: string;
-}
-
 export interface AffiliateListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list affiliates for.
@@ -439,6 +427,18 @@ export interface AffiliateListParams extends CursorPageParams {
   status?: Status | null;
 }
 
+export interface AffiliateCreateParams {
+  /**
+   * The ID of the company to create the affiliate for.
+   */
+  company_id: string;
+
+  /**
+   * The user identifier (username, email, user ID, or Discord ID).
+   */
+  user_identifier: string;
+}
+
 Affiliates.Overrides = Overrides;
 
 export declare namespace Affiliates {
@@ -449,8 +449,8 @@ export declare namespace Affiliates {
     type AffiliateArchiveResponse as AffiliateArchiveResponse,
     type AffiliateUnarchiveResponse as AffiliateUnarchiveResponse,
     type AffiliateListResponsesCursorPage as AffiliateListResponsesCursorPage,
-    type AffiliateCreateParams as AffiliateCreateParams,
     type AffiliateListParams as AffiliateListParams,
+    type AffiliateCreateParams as AffiliateCreateParams,
   };
 
   export {
@@ -466,10 +466,10 @@ export declare namespace Affiliates {
     type OverrideListResponse as OverrideListResponse,
     type OverrideDeleteResponse as OverrideDeleteResponse,
     type OverrideListResponsesCursorPage as OverrideListResponsesCursorPage,
+    type OverrideListParams as OverrideListParams,
     type OverrideCreateParams as OverrideCreateParams,
     type OverrideRetrieveParams as OverrideRetrieveParams,
     type OverrideUpdateParams as OverrideUpdateParams,
-    type OverrideListParams as OverrideListParams,
     type OverrideDeleteParams as OverrideDeleteParams,
   };
 }

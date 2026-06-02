@@ -11,26 +11,6 @@ import { path } from '../internal/utils/path';
  */
 export class FeeMarkups extends APIResource {
   /**
-   * Create or update a fee markup for a company. If a markup for the specified fee
-   * type already exists, it will be updated with the new values.
-   *
-   * Required permissions:
-   *
-   * - `company:update_child_fees`
-   *
-   * @example
-   * ```ts
-   * const feeMarkup = await client.feeMarkups.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   fee_type: 'crypto_withdrawal_markup',
-   * });
-   * ```
-   */
-  create(body: FeeMarkupCreateParams, options?: RequestOptions): APIPromise<FeeMarkupCreateResponse> {
-    return this._client.post('/fee_markups', { body, ...options });
-  }
-
-  /**
    * Returns a paginated list of fee markups configured for a company. If the company
    * is a platform account, returns the platform default markups.
    *
@@ -53,6 +33,26 @@ export class FeeMarkups extends APIResource {
     options?: RequestOptions,
   ): PagePromise<FeeMarkupListResponsesCursorPage, FeeMarkupListResponse> {
     return this._client.getAPIList('/fee_markups', CursorPage<FeeMarkupListResponse>, { query, ...options });
+  }
+
+  /**
+   * Create or update a fee markup for a company. If a markup for the specified fee
+   * type already exists, it will be updated with the new values.
+   *
+   * Required permissions:
+   *
+   * - `company:update_child_fees`
+   *
+   * @example
+   * ```ts
+   * const feeMarkup = await client.feeMarkups.create({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   fee_type: 'crypto_withdrawal_markup',
+   * });
+   * ```
+   */
+  create(body: FeeMarkupCreateParams, options?: RequestOptions): APIPromise<FeeMarkupCreateResponse> {
+    return this._client.post('/fee_markups', { body, ...options });
   }
 
   /**
@@ -178,6 +178,29 @@ export interface FeeMarkupListResponse {
  */
 export type FeeMarkupDeleteResponse = boolean;
 
+export interface FeeMarkupListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list fee markups for. Pass a platform
+   * account identifier to retrieve platform default markups.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface FeeMarkupCreateParams {
   /**
    * The unique identifier of the company to create or update the fee markup for.
@@ -210,29 +233,6 @@ export interface FeeMarkupCreateParams {
   percentage_fee?: number | null;
 }
 
-export interface FeeMarkupListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list fee markups for. Pass a platform
-   * account identifier to retrieve platform default markups.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace FeeMarkups {
   export {
     type FeeMarkupType as FeeMarkupType,
@@ -240,7 +240,7 @@ export declare namespace FeeMarkups {
     type FeeMarkupListResponse as FeeMarkupListResponse,
     type FeeMarkupDeleteResponse as FeeMarkupDeleteResponse,
     type FeeMarkupListResponsesCursorPage as FeeMarkupListResponsesCursorPage,
-    type FeeMarkupCreateParams as FeeMarkupCreateParams,
     type FeeMarkupListParams as FeeMarkupListParams,
+    type FeeMarkupCreateParams as FeeMarkupCreateParams,
   };
 }

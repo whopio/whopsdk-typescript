@@ -11,6 +11,34 @@ import { path } from '../internal/utils/path';
  */
 export class Leads extends APIResource {
   /**
+   * Returns a paginated list of leads for a company, with optional filtering by
+   * product and creation date.
+   *
+   * Required permissions:
+   *
+   * - `lead:basic:read`
+   * - `member:email:read`
+   * - `access_pass:basic:read`
+   * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const leadListResponse of client.leads.list({
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   * })) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: LeadListParams,
+    options?: RequestOptions,
+  ): PagePromise<LeadListResponsesCursorPage, LeadListResponse> {
+    return this._client.getAPIList('/leads', CursorPage<LeadListResponse>, { query, ...options });
+  }
+
+  /**
    * Record a new lead for a company, capturing a potential customer's interest in a
    * specific product.
    *
@@ -76,34 +104,6 @@ export class Leads extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Lead> {
     return this._client.patch(path`/leads/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of leads for a company, with optional filtering by
-   * product and creation date.
-   *
-   * Required permissions:
-   *
-   * - `lead:basic:read`
-   * - `member:email:read`
-   * - `access_pass:basic:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const leadListResponse of client.leads.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: LeadListParams,
-    options?: RequestOptions,
-  ): PagePromise<LeadListResponsesCursorPage, LeadListResponse> {
-    return this._client.getAPIList('/leads', CursorPage<LeadListResponse>, { query, ...options });
   }
 }
 
@@ -319,6 +319,43 @@ export namespace LeadListResponse {
   }
 }
 
+export interface LeadListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list leads for.
+   */
+  company_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return leads created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return leads created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Filter leads to only those associated with these specific product identifiers.
+   */
+  product_ids?: Array<string> | null;
+}
+
 export interface LeadCreateParams {
   /**
    * The unique identifier of the company to create the lead for, starting with
@@ -363,50 +400,13 @@ export interface LeadUpdateParams {
   referrer?: string | null;
 }
 
-export interface LeadListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list leads for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return leads created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return leads created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Filter leads to only those associated with these specific product identifiers.
-   */
-  product_ids?: Array<string> | null;
-}
-
 export declare namespace Leads {
   export {
     type Lead as Lead,
     type LeadListResponse as LeadListResponse,
     type LeadListResponsesCursorPage as LeadListResponsesCursorPage,
+    type LeadListParams as LeadListParams,
     type LeadCreateParams as LeadCreateParams,
     type LeadUpdateParams as LeadUpdateParams,
-    type LeadListParams as LeadListParams,
   };
 }
