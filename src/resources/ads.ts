@@ -243,6 +243,12 @@ export interface AdListParams extends CursorPageParams {
   first?: number | null;
 
   /**
+   * When false, excludes paused ads so pagination matches the dashboard's
+   * hide-paused toggle.
+   */
+  include_paused?: boolean | null;
+
+  /**
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
@@ -256,6 +262,11 @@ export interface AdListParams extends CursorPageParams {
    * The direction of the sort.
    */
   order_direction?: Shared.Direction | null;
+
+  /**
+   * Case-insensitive substring match against the ad title or tag.
+   */
+  query?: string | null;
 
   /**
    * Start of the stats date range used when order_by is a stats column.
