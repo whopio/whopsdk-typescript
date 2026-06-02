@@ -11,6 +11,29 @@ import { path } from '../internal/utils/path';
  */
 export class DmChannels extends APIResource {
   /**
+   * Returns a paginated list of DM channels for the currently authenticated user,
+   * sorted by most recently active.
+   *
+   * Required permissions:
+   *
+   * - `dms:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dmChannelListResponse of client.dmChannels.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: DmChannelListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<DmChannelListResponsesCursorPage, DmChannelListResponse> {
+    return this._client.getAPIList('/dm_channels', CursorPage<DmChannelListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new DM channel between two or more users, optionally scoped to a
    * specific company. Returns the existing channel if one already exists.
    *
@@ -60,29 +83,6 @@ export class DmChannels extends APIResource {
     options?: RequestOptions,
   ): APIPromise<DmChannel> {
     return this._client.patch(path`/dm_channels/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of DM channels for the currently authenticated user,
-   * sorted by most recently active.
-   *
-   * Required permissions:
-   *
-   * - `dms:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const dmChannelListResponse of client.dmChannels.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: DmChannelListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<DmChannelListResponsesCursorPage, DmChannelListResponse> {
-    return this._client.getAPIList('/dm_channels', CursorPage<DmChannelListResponse>, { query, ...options });
   }
 
   /**
@@ -166,6 +166,29 @@ export interface DmChannelListResponse {
  */
 export type DmChannelDeleteResponse = boolean;
 
+export interface DmChannelListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * The unique identifier of a company to filter DM channels by. Only returns
+   * channels scoped to this company.
+   */
+  company_id?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface DmChannelCreateParams {
   /**
    * The list of user identifiers to include in the DM channel. Each entry can be an
@@ -192,37 +215,14 @@ export interface DmChannelUpdateParams {
   custom_name?: string | null;
 }
 
-export interface DmChannelListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The unique identifier of a company to filter DM channels by. Only returns
-   * channels scoped to this company.
-   */
-  company_id?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace DmChannels {
   export {
     type DmChannel as DmChannel,
     type DmChannelListResponse as DmChannelListResponse,
     type DmChannelDeleteResponse as DmChannelDeleteResponse,
     type DmChannelListResponsesCursorPage as DmChannelListResponsesCursorPage,
+    type DmChannelListParams as DmChannelListParams,
     type DmChannelCreateParams as DmChannelCreateParams,
     type DmChannelUpdateParams as DmChannelUpdateParams,
-    type DmChannelListParams as DmChannelListParams,
   };
 }

@@ -13,24 +13,6 @@ import { path } from '../internal/utils/path';
  */
 export class Disputes extends APIResource {
   /**
-   * Retrieves the details of an existing dispute.
-   *
-   * Required permissions:
-   *
-   * - `payment:dispute:read`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `company:basic:read`
-   * - `payment:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Dispute> {
-    return this._client.get(path`/disputes/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of disputes for a company, with optional filtering by
    * creation date. A dispute represents a chargeback or inquiry filed by a customer
    * against a payment.
@@ -48,6 +30,24 @@ export class Disputes extends APIResource {
     options?: RequestOptions,
   ): PagePromise<DisputeListResponsesCursorPage, DisputeListResponse> {
     return this._client.getAPIList('/disputes', CursorPage<DisputeListResponse>, { query, ...options });
+  }
+
+  /**
+   * Retrieves the details of an existing dispute.
+   *
+   * Required permissions:
+   *
+   * - `payment:dispute:read`
+   * - `plan:basic:read`
+   * - `access_pass:basic:read`
+   * - `company:basic:read`
+   * - `payment:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `member:phone:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Dispute> {
+    return this._client.get(path`/disputes/${id}`, options);
   }
 
   /**
@@ -167,8 +167,7 @@ export interface Dispute {
   customer_name: string | null;
 
   /**
-   * Whether the dispute evidence can still be edited and submitted. Returns true
-   * only when the dispute status requires a response.
+   * Whether the dispute evidence can still be edited and submitted.
    */
   editable: boolean | null;
 
@@ -363,9 +362,9 @@ export namespace Dispute {
     created_at: string;
 
     /**
-     * The available currencies on the platform
+     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * When an alert came in that this transaction will be disputed
@@ -608,8 +607,7 @@ export interface DisputeListResponse {
   currency: Shared.Currency;
 
   /**
-   * Whether the dispute evidence can still be edited and submitted. Returns true
-   * only when the dispute status requires a response.
+   * Whether the dispute evidence can still be edited and submitted.
    */
   editable: boolean | null;
 
