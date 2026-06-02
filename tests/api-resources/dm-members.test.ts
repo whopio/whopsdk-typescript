@@ -9,6 +9,29 @@ const client = new Whop({
 
 describe('resource dmMembers', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.dmMembers.list({ channel_id: 'channel_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.dmMembers.list({
+      channel_id: 'channel_id',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.dmMembers.create({
       channel_id: 'channel_id',
@@ -65,29 +88,6 @@ describe('resource dmMembers', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.dmMembers.list({ channel_id: 'channel_id' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.dmMembers.list({
-      channel_id: 'channel_id',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-    });
   });
 
   // Mock server tests are disabled
