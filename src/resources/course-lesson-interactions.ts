@@ -13,18 +13,6 @@ import { path } from '../internal/utils/path';
  */
 export class CourseLessonInteractions extends APIResource {
   /**
-   * Retrieves the details of an existing course lesson interaction.
-   *
-   * Required permissions:
-   *
-   * - `courses:read`
-   * - `course_analytics:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
-    return this._client.get(path`/course_lesson_interactions/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of lesson interactions, filtered by lesson, course,
    * user, or completion status.
    *
@@ -42,6 +30,18 @@ export class CourseLessonInteractions extends APIResource {
       CursorPage<Shared.CourseLessonInteractionListItem>,
       { query, ...options },
     );
+  }
+
+  /**
+   * Retrieves the details of an existing course lesson interaction.
+   *
+   * Required permissions:
+   *
+   * - `courses:read`
+   * - `course_analytics:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CourseLessonInteraction> {
+    return this._client.get(path`/course_lesson_interactions/${id}`, options);
   }
 }
 

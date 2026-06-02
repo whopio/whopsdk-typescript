@@ -91,7 +91,7 @@ export type VerificationStatus =
  */
 export interface VerificationRetrieveResponse {
   /**
-   * The unique identifier for the verification.
+   * The numeric id of the verification record.
    */
   id: string;
 
@@ -118,7 +118,7 @@ export interface VerificationRetrieveResponse {
  */
 export interface VerificationListResponse {
   /**
-   * The unique identifier for the verification.
+   * The numeric id of the verification record.
    */
   id: string;
 
