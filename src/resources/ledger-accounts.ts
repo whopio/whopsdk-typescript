@@ -64,6 +64,11 @@ export interface LedgerAccountRetrieveResponse {
    * The fee for transfers, if applicable.
    */
   transfer_fee: number | null;
+
+  /**
+   * The balance cache associated with the account by currency.
+   */
+  treasury_balance: LedgerAccountRetrieveResponse.TreasuryBalance | null;
 }
 
 export namespace LedgerAccountRetrieveResponse {
@@ -257,7 +262,7 @@ export namespace LedgerAccountRetrieveResponse {
      */
     export interface LatestVerification {
       /**
-       * The unique identifier for the verification.
+       * The numeric id of the verification record.
        */
       id: string;
 
@@ -277,6 +282,41 @@ export namespace LedgerAccountRetrieveResponse {
        */
       status: VerificationsAPI.VerificationStatus;
     }
+  }
+
+  /**
+   * The balance cache associated with the account by currency.
+   */
+  export interface TreasuryBalance {
+    /**
+     * The amount of the balance.
+     */
+    balance: number;
+
+    /**
+     * The balance converted to USD.
+     */
+    balance_usd: number;
+
+    /**
+     * The currency of the balance.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The amount of the balance that is pending.
+     */
+    pending_balance: number;
+
+    /**
+     * The amount of the balance that is reserved.
+     */
+    reserve_balance: number;
+
+    /**
+     * The amount of the balance that is withdrawable.
+     */
+    total_withdrawable_balance: number;
   }
 }
 
