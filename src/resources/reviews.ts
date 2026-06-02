@@ -11,13 +11,6 @@ import { path } from '../internal/utils/path';
  */
 export class Reviews extends APIResource {
   /**
-   * Retrieves the details of an existing review.
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<ReviewRetrieveResponse> {
-    return this._client.get(path`/reviews/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of customer reviews for a specific product, with
    * optional filtering by star rating and creation date.
    */
@@ -26,6 +19,13 @@ export class Reviews extends APIResource {
     options?: RequestOptions,
   ): PagePromise<ReviewListResponsesCursorPage, ReviewListResponse> {
     return this._client.getAPIList('/reviews', CursorPage<ReviewListResponse>, { query, ...options });
+  }
+
+  /**
+   * Retrieves the details of an existing review.
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<ReviewRetrieveResponse> {
+    return this._client.get(path`/reviews/${id}`, options);
   }
 }
 
