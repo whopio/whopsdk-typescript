@@ -14,13 +14,6 @@ export class Wallets extends APIResource {
   }
 
   /**
-   * Unauthenticated health check for the native wallet routes.
-   */
-  ping(options?: RequestOptions): APIPromise<WalletPingResponse> {
-    return this._client.get('/wallets/ping', options);
-  }
-
-  /**
    * Returns per-token balances held in an account's wallet.
    */
   balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
@@ -92,10 +85,6 @@ export namespace WalletBalanceResponse {
   }
 }
 
-export interface WalletPingResponse {
-  status: 'ok';
-}
-
 export interface WalletSendResponse {
   amount: string;
 
@@ -141,7 +130,6 @@ export declare namespace Wallets {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
-    type WalletPingResponse as WalletPingResponse,
     type WalletSendResponse as WalletSendResponse,
     type WalletSendParams as WalletSendParams,
   };

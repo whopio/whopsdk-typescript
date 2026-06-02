@@ -6136,39 +6136,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
-    name: 'ping',
-    endpoint: '/wallets/ping',
-    httpMethod: 'get',
-    summary: 'Ping Wallets',
-    description: 'Unauthenticated health check for the native wallet routes.',
-    stainlessPath: '(resource) wallets > (method) ping',
-    qualified: 'client.wallets.ping',
-    response: "{ status: 'ok'; }",
-    markdown:
-      "## ping\n\n`client.wallets.ping(): { status: 'ok'; }`\n\n**get** `/wallets/ping`\n\nUnauthenticated health check for the native wallet routes.\n\n### Returns\n\n- `{ status: 'ok'; }`\n\n  - `status: 'ok'`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.wallets.ping();\n\nconsole.log(response);\n```",
-    perLanguage: {
-      python: {
-        method: 'wallets.ping',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.ping()\nprint(response.status)',
-      },
-      ruby: {
-        method: 'wallets.ping',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.ping\n\nputs(response)',
-      },
-      typescript: {
-        method: 'client.wallets.ping',
-        example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.wallets.ping();\n\nconsole.log(response.status);",
-      },
-      http: {
-        example:
-          'curl https://api.whop.com/api/v1/wallets/ping \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-    },
-  },
-  {
     name: 'balance',
     endpoint: '/wallets/{account_id}/balance',
     httpMethod: 'get',

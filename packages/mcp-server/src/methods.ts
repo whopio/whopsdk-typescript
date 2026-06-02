@@ -918,12 +918,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets',
   },
   {
-    clientCallName: 'client.wallets.ping',
-    fullyQualifiedName: 'wallets.ping',
-    httpMethod: 'get',
-    httpPath: '/wallets/ping',
-  },
-  {
     clientCallName: 'client.wallets.balance',
     fullyQualifiedName: 'wallets.balance',
     httpMethod: 'get',
