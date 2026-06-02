@@ -305,6 +305,12 @@ export interface AdGroupListParams extends CursorPageParams {
   first?: number | null;
 
   /**
+   * When false, excludes paused ad groups so pagination matches the dashboard's
+   * hide-paused toggle.
+   */
+  include_paused?: boolean | null;
+
+  /**
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
