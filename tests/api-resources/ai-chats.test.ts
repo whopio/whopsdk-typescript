@@ -9,6 +9,35 @@ const client = new Whop({
 
 describe('resource aiChats', () => {
   // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.aiChats.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.aiChats.list(
+        {
+          after: 'after',
+          before: 'before',
+          first: 42,
+          last: 42,
+          only_active_crons: true,
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.aiChats.create({ message_text: 'message_text' });
     const rawResponse = await responsePromise.asResponse();
@@ -66,35 +95,6 @@ describe('resource aiChats', () => {
           current_company_id: 'current_company_id',
           notification_preference: 'all',
           title: 'title',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.aiChats.list();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.aiChats.list(
-        {
-          after: 'after',
-          before: 'before',
-          first: 42,
-          last: 42,
-          only_active_crons: true,
         },
         { path: '/_stainless_unknown_path' },
       ),
