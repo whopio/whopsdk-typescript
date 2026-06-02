@@ -482,6 +482,11 @@ export declare namespace InvoiceCreateParams {
      */
     export interface Plan {
       /**
+       * The available currencies on the platform
+       */
+      base_currency?: Shared.Currency | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
@@ -827,6 +832,11 @@ export declare namespace InvoiceCreateParams {
      * invoice.
      */
     export interface Plan {
+      /**
+       * The available currencies on the platform
+       */
+      base_currency?: Shared.Currency | null;
+
       /**
        * The interval in days at which the plan charges (renewal plans).
        */
@@ -1207,6 +1217,11 @@ export namespace InvoiceUpdateParams {
    * Updated plan attributes.
    */
   export interface Plan {
+    /**
+     * The available currencies on the platform
+     */
+    base_currency?: Shared.Currency | null;
+
     /**
      * The interval in days at which the plan charges (renewal plans).
      */

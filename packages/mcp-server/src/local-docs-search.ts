@@ -285,7 +285,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) invoices > (method) create',
     qualified: 'client.invoices.create',
     params: [
-      "{ collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product: { title: string; product_tax_code_id?: string; }; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; } | { collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id: string; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; };",
+      "{ collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { base_currency?: string; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product: { title: string; product_tax_code_id?: string; }; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; } | { collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { base_currency?: string; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id: string; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; };",
     ],
     response:
       "{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }",
@@ -473,14 +473,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'mailing_address_id?: string;',
       'member_id?: string;',
       'payment_method_id?: string;',
-      "plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; };",
+      "plan?: { base_currency?: string; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; };",
       'product_id?: string;',
       'subscription_billing_anchor_at?: string;',
     ],
     response:
       "{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }",
     markdown:
-      "## update\n\n`client.invoices.update(id: string, automatically_finalizes_at?: string, billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }, charge_buyer_fee?: boolean, collection_method?: 'send_invoice' | 'charge_automatically', customer_name?: string, due_date?: string, email_address?: string, line_items?: { label: string; unit_price: number; quantity?: number; }[], mailing_address_id?: string, member_id?: string, payment_method_id?: string, plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: payment_method_types[]; enabled: payment_method_types[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }, product_id?: string, subscription_billing_anchor_at?: string): { id: string; created_at: string; current_plan: object; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: invoice_status; user: object; }`\n\n**patch** `/invoices/{id}`\n\nUpdate a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n- `automatically_finalizes_at?: string`\n  The date and time when the invoice will be automatically finalized. For charge_automatically, triggers an automatic charge. For send_invoice, sends the invoice email at the specified time.\n\n- `billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }`\n  Inline billing address to create or update a mailing address for this invoice.\n  - `city?: string`\n    The city of the address.\n  - `country?: string`\n    The country of the address.\n  - `line1?: string`\n    The line 1 of the address.\n  - `line2?: string`\n    The line 2 of the address.\n  - `name?: string`\n    The name of the customer.\n  - `phone?: string`\n    The phone number of the customer.\n  - `postal_code?: string`\n    The postal code of the address.\n  - `state?: string`\n    The state of the address.\n  - `tax_id_type?: string`\n    The type of tax identifier\n  - `tax_id_value?: string`\n    The value of the tax identifier.\n\n- `charge_buyer_fee?: boolean`\n  Whether to charge the customer a buyer fee on this invoice.\n\n- `collection_method?: 'send_invoice' | 'charge_automatically'`\n  The method of collection for an invoice.\n\n- `customer_name?: string`\n  The name of the customer.\n\n- `due_date?: string`\n  The date by which the invoice must be paid.\n\n- `email_address?: string`\n  The email address of the customer.\n\n- `line_items?: { label: string; unit_price: number; quantity?: number; }[]`\n  Line items that break down the invoice total.\n\n- `mailing_address_id?: string`\n  The unique identifier of an existing mailing address to attach.\n\n- `member_id?: string`\n  The unique identifier of a member to assign as the customer.\n\n- `payment_method_id?: string`\n  The unique identifier of the payment method to charge.\n\n- `plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }`\n  Updated plan attributes.\n  - `billing_period?: number`\n    The interval in days at which the plan charges (renewal plans).\n  - `custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]`\n    An array of custom field objects.\n  - `description?: string`\n    The description of the plan.\n  - `expiration_days?: number`\n    The number of days until the membership expires and revokes access (expiration plans). For example, 365 for a one-year access period.\n  - `initial_price?: number`\n    An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `internal_notes?: string`\n    A personal description or notes section for the business.\n  - `legacy_payment_method_controls?: boolean`\n    Whether this plan uses legacy payment method controls\n  - `payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }`\n    The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.\n  - `plan_type?: 'renewal' | 'one_time'`\n    The type of plan that can be attached to a product\n  - `release_method?: 'buy_now' | 'waitlist'`\n    The methods of how a plan can be released.\n  - `renewal_price?: number`\n    The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `stock?: number`\n    The number of units available for purchase.\n  - `trial_period_days?: number`\n    The number of free trial days added before a renewal plan.\n  - `unlimited_stock?: boolean`\n    When true, the plan has unlimited stock (stock field is ignored). When false, purchases are limited by the stock field.\n  - `visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'`\n    Visibility of a resource\n\n- `product_id?: string`\n  The unique identifier of an existing product to attach to this invoice. Only allowed while the invoice is still a draft.\n\n- `subscription_billing_anchor_at?: string`\n  The date that defines when the subscription billing cycle should start.\n\n### Returns\n\n- `{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }`\n  An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.\n\n  - `id: string`\n  - `created_at: string`\n  - `current_plan: { id: string; currency: string; formatted_price: string; }`\n  - `due_date: string`\n  - `email_address: string`\n  - `fetch_invoice_token: string`\n  - `number: string`\n  - `status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'`\n  - `user: { id: string; name: string; username: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
+      "## update\n\n`client.invoices.update(id: string, automatically_finalizes_at?: string, billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }, charge_buyer_fee?: boolean, collection_method?: 'send_invoice' | 'charge_automatically', customer_name?: string, due_date?: string, email_address?: string, line_items?: { label: string; unit_price: number; quantity?: number; }[], mailing_address_id?: string, member_id?: string, payment_method_id?: string, plan?: { base_currency?: string; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: payment_method_types[]; enabled: payment_method_types[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }, product_id?: string, subscription_billing_anchor_at?: string): { id: string; created_at: string; current_plan: object; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: invoice_status; user: object; }`\n\n**patch** `/invoices/{id}`\n\nUpdate a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n- `automatically_finalizes_at?: string`\n  The date and time when the invoice will be automatically finalized. For charge_automatically, triggers an automatic charge. For send_invoice, sends the invoice email at the specified time.\n\n- `billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }`\n  Inline billing address to create or update a mailing address for this invoice.\n  - `city?: string`\n    The city of the address.\n  - `country?: string`\n    The country of the address.\n  - `line1?: string`\n    The line 1 of the address.\n  - `line2?: string`\n    The line 2 of the address.\n  - `name?: string`\n    The name of the customer.\n  - `phone?: string`\n    The phone number of the customer.\n  - `postal_code?: string`\n    The postal code of the address.\n  - `state?: string`\n    The state of the address.\n  - `tax_id_type?: string`\n    The type of tax identifier\n  - `tax_id_value?: string`\n    The value of the tax identifier.\n\n- `charge_buyer_fee?: boolean`\n  Whether to charge the customer a buyer fee on this invoice.\n\n- `collection_method?: 'send_invoice' | 'charge_automatically'`\n  The method of collection for an invoice.\n\n- `customer_name?: string`\n  The name of the customer.\n\n- `due_date?: string`\n  The date by which the invoice must be paid.\n\n- `email_address?: string`\n  The email address of the customer.\n\n- `line_items?: { label: string; unit_price: number; quantity?: number; }[]`\n  Line items that break down the invoice total.\n\n- `mailing_address_id?: string`\n  The unique identifier of an existing mailing address to attach.\n\n- `member_id?: string`\n  The unique identifier of a member to assign as the customer.\n\n- `payment_method_id?: string`\n  The unique identifier of the payment method to charge.\n\n- `plan?: { base_currency?: string; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }`\n  Updated plan attributes.\n  - `base_currency?: string`\n    The available currencies on the platform\n  - `billing_period?: number`\n    The interval in days at which the plan charges (renewal plans).\n  - `custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]`\n    An array of custom field objects.\n  - `description?: string`\n    The description of the plan.\n  - `expiration_days?: number`\n    The number of days until the membership expires and revokes access (expiration plans). For example, 365 for a one-year access period.\n  - `initial_price?: number`\n    An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `internal_notes?: string`\n    A personal description or notes section for the business.\n  - `legacy_payment_method_controls?: boolean`\n    Whether this plan uses legacy payment method controls\n  - `payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }`\n    The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.\n  - `plan_type?: 'renewal' | 'one_time'`\n    The type of plan that can be attached to a product\n  - `release_method?: 'buy_now' | 'waitlist'`\n    The methods of how a plan can be released.\n  - `renewal_price?: number`\n    The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `stock?: number`\n    The number of units available for purchase.\n  - `trial_period_days?: number`\n    The number of free trial days added before a renewal plan.\n  - `unlimited_stock?: boolean`\n    When true, the plan has unlimited stock (stock field is ignored). When false, purchases are limited by the stock field.\n  - `visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'`\n    Visibility of a resource\n\n- `product_id?: string`\n  The unique identifier of an existing product to attach to this invoice. Only allowed while the invoice is still a draft.\n\n- `subscription_billing_anchor_at?: string`\n  The date that defines when the subscription billing cycle should start.\n\n### Returns\n\n- `{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }`\n  An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.\n\n  - `id: string`\n  - `created_at: string`\n  - `current_plan: { id: string; currency: string; formatted_price: string; }`\n  - `due_date: string`\n  - `email_address: string`\n  - `fetch_invoice_token: string`\n  - `number: string`\n  - `status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'`\n  - `user: { id: string; name: string; username: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
     perLanguage: {
       python: {
         method: 'invoices.update',
@@ -1995,9 +1995,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.ledgerAccounts.retrieve',
     params: ['id: string;'],
     response:
-      "{ id: string; balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]; ledger_type: 'primary' | 'pool'; owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: verification_error_code; last_error_reason: string; status: verification_status; }; phone: string; status: string; }; transfer_fee: number; }",
+      "{ id: string; balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]; ledger_type: 'primary' | 'pool'; owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: verification_error_code; last_error_reason: string; status: verification_status; }; phone: string; status: string; }; transfer_fee: number; treasury_balance: { balance: number; balance_usd: number; currency: string; pending_balance: number; reserve_balance: number; total_withdrawable_balance: number; }; }",
     markdown:
-      "## retrieve\n\n`client.ledgerAccounts.retrieve(id: string): { id: string; balances: object[]; ledger_type: 'primary' | 'pool'; owner: object | object; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: object; transfer_fee: number; }`\n\n**get** `/ledger_accounts/{id}`\n\nRetrieves the details of an existing ledger account.\n\nRequired permissions:\n - `company:balance:read`\n - `payout:account:read`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ id: string; balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]; ledger_type: 'primary' | 'pool'; owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: verification_error_code; last_error_reason: string; status: verification_status; }; phone: string; status: string; }; transfer_fee: number; }`\n  A ledger account represents a financial account on Whop that can hold many balances.\n\n  - `id: string`\n  - `balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]`\n  - `ledger_type: 'primary' | 'pool'`\n  - `owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }`\n  - `payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'`\n  - `payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: string; last_error_reason: string; status: string; }; phone: string; status: string; }`\n  - `transfer_fee: number`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst ledgerAccount = await client.ledgerAccounts.retrieve('ldgr_xxxxxxxxxxxxx');\n\nconsole.log(ledgerAccount);\n```",
+      "## retrieve\n\n`client.ledgerAccounts.retrieve(id: string): { id: string; balances: object[]; ledger_type: 'primary' | 'pool'; owner: object | object; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: object; transfer_fee: number; treasury_balance: object; }`\n\n**get** `/ledger_accounts/{id}`\n\nRetrieves the details of an existing ledger account.\n\nRequired permissions:\n - `company:balance:read`\n - `payout:account:read`\n\n### Parameters\n\n- `id: string`\n\n### Returns\n\n- `{ id: string; balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]; ledger_type: 'primary' | 'pool'; owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }; payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'; payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: verification_error_code; last_error_reason: string; status: verification_status; }; phone: string; status: string; }; transfer_fee: number; treasury_balance: { balance: number; balance_usd: number; currency: string; pending_balance: number; reserve_balance: number; total_withdrawable_balance: number; }; }`\n  A ledger account represents a financial account on Whop that can hold many balances.\n\n  - `id: string`\n  - `balances: { balance: number; currency: string; pending_balance: number; reserve_balance: number; }[]`\n  - `ledger_type: 'primary' | 'pool'`\n  - `owner: { id: string; name: string; typename: 'User'; username: string; } | { id: string; route: string; title: string; typename: 'Company'; }`\n  - `payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected'`\n  - `payout_account_details: { id: string; address: { city: string; country: string; line1: string; line2: string; postal_code: string; state: string; }; business_name: string; business_representative: { date_of_birth: string; first_name: string; last_name: string; middle_name: string; }; email: string; latest_verification: { id: string; last_error_code: string; last_error_reason: string; status: string; }; phone: string; status: string; }`\n  - `transfer_fee: number`\n  - `treasury_balance: { balance: number; balance_usd: number; currency: string; pending_balance: number; reserve_balance: number; total_withdrawable_balance: number; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst ledgerAccount = await client.ledgerAccounts.retrieve('ldgr_xxxxxxxxxxxxx');\n\nconsole.log(ledgerAccount);\n```",
     perLanguage: {
       python: {
         method: 'ledger_accounts.retrieve',
@@ -5912,6 +5912,419 @@ const EMBEDDED_METHODS: MethodEntry[] = [
   },
   {
     name: 'list',
+    endpoint: '/accounts',
+    httpMethod: 'get',
+    summary: 'List Accounts',
+    description:
+      "Lists accounts visible to the credential. User tokens return the user's business accounts; business account API keys return the requesting business account and its connected accounts.",
+    stainlessPath: '(resource) accounts > (method) list',
+    qualified: 'client.accounts.list',
+    params: ['page?: number;', 'per?: number;'],
+    response:
+      '{ accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }',
+    markdown:
+      "## list\n\n`client.accounts.list(page?: number, per?: number): { accounts: account[]; pagination: object; }`\n\n**get** `/accounts`\n\nLists accounts visible to the credential. User tokens return the user's business accounts; business account API keys return the requesting business account and its connected accounts.\n\n### Parameters\n\n- `page?: number`\n  The page number to retrieve\n\n- `per?: number`\n  The number of resources to return per page. There is a limit of 50 results per page.\n\n### Returns\n\n- `{ accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }`\n\n  - `accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }[]`\n  - `pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst accounts = await client.accounts.list();\n\nconsole.log(accounts);\n```",
+    perLanguage: {
+      python: {
+        method: 'accounts.list',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccounts = client.accounts.list()\nprint(accounts.accounts)',
+      },
+      ruby: {
+        method: 'accounts.list',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccounts = whop.accounts.list\n\nputs(accounts)',
+      },
+      typescript: {
+        method: 'client.accounts.list',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst accounts = await client.accounts.list();\n\nconsole.log(accounts.accounts);",
+      },
+      http: {
+        example: 'curl https://api.whop.com/api/v1/accounts \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'create',
+    endpoint: '/accounts',
+    httpMethod: 'post',
+    summary: 'Create Account',
+    description:
+      'Creates an account. User tokens create business accounts; business account API keys create connected accounts.',
+    stainlessPath: '(resource) accounts > (method) create',
+    qualified: 'client.accounts.create',
+    params: ['email?: string;', 'metadata?: object;'],
+    response:
+      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+    markdown:
+      "## create\n\n`client.accounts.create(email?: string, metadata?: object): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**post** `/accounts`\n\nCreates an account. User tokens create business accounts; business account API keys create connected accounts.\n\n### Parameters\n\n- `email?: string`\n  The email address of the account owner. Required for business account API key requests.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.create();\n\nconsole.log(account);\n```",
+    perLanguage: {
+      python: {
+        method: 'accounts.create',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.create()\nprint(account.id)',
+      },
+      ruby: {
+        method: 'accounts.create',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.create\n\nputs(account)',
+      },
+      typescript: {
+        method: 'client.accounts.create',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.accounts.create();\n\nconsole.log(account.id);",
+      },
+      http: {
+        example:
+          "curl https://api.whop.com/api/v1/accounts \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $WHOP_API_KEY\" \\\n    -d '{}'",
+      },
+    },
+  },
+  {
+    name: 'me',
+    endpoint: '/accounts/me',
+    httpMethod: 'get',
+    summary: 'Retrieve Requesting Account',
+    description: 'Retrieves the business account associated with the current business account API key.',
+    stainlessPath: '(resource) accounts > (method) me',
+    qualified: 'client.accounts.me',
+    response:
+      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+    markdown:
+      "## me\n\n`client.accounts.me(): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**get** `/accounts/me`\n\nRetrieves the business account associated with the current business account API key.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.me();\n\nconsole.log(account);\n```",
+    perLanguage: {
+      python: {
+        method: 'accounts.me',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.me()\nprint(account.id)',
+      },
+      ruby: {
+        method: 'accounts.me',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.me\n\nputs(account)',
+      },
+      typescript: {
+        method: 'client.accounts.me',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.accounts.me();\n\nconsole.log(account.id);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/accounts/me \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/accounts/{account_id}',
+    httpMethod: 'get',
+    summary: 'Retrieve Account',
+    description: 'Retrieves a single account visible to the credential, including its crypto wallet.',
+    stainlessPath: '(resource) accounts > (method) retrieve',
+    qualified: 'client.accounts.retrieve',
+    params: ['account_id: string;'],
+    response:
+      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+    markdown:
+      "## retrieve\n\n`client.accounts.retrieve(account_id: string): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**get** `/accounts/{account_id}`\n\nRetrieves a single account visible to the credential, including its crypto wallet.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.retrieve('account_id');\n\nconsole.log(account);\n```",
+    perLanguage: {
+      python: {
+        method: 'accounts.retrieve',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.retrieve(\n    "account_id",\n)\nprint(account.id)',
+      },
+      ruby: {
+        method: 'accounts.retrieve',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.retrieve("account_id")\n\nputs(account)',
+      },
+      typescript: {
+        method: 'client.accounts.retrieve',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.accounts.retrieve('account_id');\n\nconsole.log(account.id);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/accounts/$ACCOUNT_ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'update',
+    endpoint: '/accounts/{account_id}',
+    httpMethod: 'patch',
+    summary: 'Update Account',
+    description:
+      'Updates an account. User tokens can update business accounts; business account API keys can update connected accounts.',
+    stainlessPath: '(resource) accounts > (method) update',
+    qualified: 'client.accounts.update',
+    params: [
+      'account_id: string;',
+      'affiliate_application_required?: boolean;',
+      'affiliate_instructions?: string;',
+      'banner_image?: object;',
+      'business_type?: string;',
+      'description?: string;',
+      'featured_affiliate_product_id?: string;',
+      'industry_group?: string;',
+      'industry_type?: string;',
+      'logo?: object;',
+      'metadata?: object;',
+      'route?: string;',
+      'send_customer_emails?: boolean;',
+      'social_links?: object[];',
+      'target_audience?: string;',
+      'title?: string;',
+    ],
+    response:
+      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+    markdown:
+      "## update\n\n`client.accounts.update(account_id: string, affiliate_application_required?: boolean, affiliate_instructions?: string, banner_image?: object, business_type?: string, description?: string, featured_affiliate_product_id?: string, industry_group?: string, industry_type?: string, logo?: object, metadata?: object, route?: string, send_customer_emails?: boolean, social_links?: object[], target_audience?: string, title?: string): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**patch** `/accounts/{account_id}`\n\nUpdates an account. User tokens can update business accounts; business account API keys can update connected accounts.\n\n### Parameters\n\n- `account_id: string`\n\n- `affiliate_application_required?: boolean`\n  Whether prospective affiliates must submit an application before promoting this account.\n\n- `affiliate_instructions?: string`\n  Guidelines shown to affiliates promoting this account.\n\n- `banner_image?: object`\n  Attachment input for the account banner image.\n\n- `business_type?: string`\n  The high-level business category for the account.\n\n- `description?: string`\n  A promotional description for the account.\n\n- `featured_affiliate_product_id?: string`\n  The ID of the product to feature for affiliates. Pass null to clear.\n\n- `industry_group?: string`\n  The industry group the account belongs to.\n\n- `industry_type?: string`\n  The specific industry vertical the account operates in.\n\n- `logo?: object`\n  Attachment input for the account logo.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n- `route?: string`\n  The unique URL slug for the account.\n\n- `send_customer_emails?: boolean`\n  Whether Whop sends transactional emails to customers on behalf of this account.\n\n- `social_links?: object[]`\n  The full list of social links to display for the account.\n\n- `target_audience?: string`\n  The target audience for this account.\n\n- `title?: string`\n  The display name of the account.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.update('account_id');\n\nconsole.log(account);\n```",
+    perLanguage: {
+      python: {
+        method: 'accounts.update',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.update(\n    account_id="account_id",\n)\nprint(account.id)',
+      },
+      ruby: {
+        method: 'accounts.update',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.update("account_id")\n\nputs(account)',
+      },
+      typescript: {
+        method: 'client.accounts.update',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst account = await client.accounts.update('account_id');\n\nconsole.log(account.id);",
+      },
+      http: {
+        example:
+          "curl https://api.whop.com/api/v1/accounts/$ACCOUNT_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $WHOP_API_KEY\" \\\n    -d '{}'",
+      },
+    },
+  },
+  {
+    name: 'list',
+    endpoint: '/wallets',
+    httpMethod: 'get',
+    summary: 'List Wallets',
+    description: 'Lists every crypto wallet linked to the authenticated resource.',
+    stainlessPath: '(resource) wallets > (method) list',
+    qualified: 'client.wallets.list',
+    response: '{ wallets: { address: string; balance_usd: string; network: string; }[]; }',
+    markdown:
+      "## list\n\n`client.wallets.list(): { wallets: object[]; }`\n\n**get** `/wallets`\n\nLists every crypto wallet linked to the authenticated resource.\n\n### Returns\n\n- `{ wallets: { address: string; balance_usd: string; network: string; }[]; }`\n\n  - `wallets: { address: string; balance_usd: string; network: string; }[]`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst wallets = await client.wallets.list();\n\nconsole.log(wallets);\n```",
+    perLanguage: {
+      python: {
+        method: 'wallets.list',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwallets = client.wallets.list()\nprint(wallets.wallets)',
+      },
+      ruby: {
+        method: 'wallets.list',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwallets = whop.wallets.list\n\nputs(wallets)',
+      },
+      typescript: {
+        method: 'client.wallets.list',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst wallets = await client.wallets.list();\n\nconsole.log(wallets.wallets);",
+      },
+      http: {
+        example: 'curl https://api.whop.com/api/v1/wallets \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'ping',
+    endpoint: '/wallets/ping',
+    httpMethod: 'get',
+    summary: 'Ping Wallets',
+    description: 'Unauthenticated health check for the native wallet routes.',
+    stainlessPath: '(resource) wallets > (method) ping',
+    qualified: 'client.wallets.ping',
+    response: "{ status: 'ok'; }",
+    markdown:
+      "## ping\n\n`client.wallets.ping(): { status: 'ok'; }`\n\n**get** `/wallets/ping`\n\nUnauthenticated health check for the native wallet routes.\n\n### Returns\n\n- `{ status: 'ok'; }`\n\n  - `status: 'ok'`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.wallets.ping();\n\nconsole.log(response);\n```",
+    perLanguage: {
+      python: {
+        method: 'wallets.ping',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.ping()\nprint(response.status)',
+      },
+      ruby: {
+        method: 'wallets.ping',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.ping\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.wallets.ping',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.wallets.ping();\n\nconsole.log(response.status);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/wallets/ping \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'balance',
+    endpoint: '/wallets/{account_id}/balance',
+    httpMethod: 'get',
+    summary: 'Retrieve Wallet Balance',
+    description: "Returns per-token balances held in an account's wallet.",
+    stainlessPath: '(resource) wallets > (method) balance',
+    qualified: 'client.wallets.balance',
+    params: ['account_id: string;'],
+    response:
+      "{ object: 'balance'; tokens: { balance: string; icon_url: string; name: string; price_usd: number; symbol: string; token_address: string; value_usd: string; }[]; total_usd: string; }",
+    markdown:
+      "## balance\n\n`client.wallets.balance(account_id: string): { object: 'balance'; tokens: object[]; total_usd: string; }`\n\n**get** `/wallets/{account_id}/balance`\n\nReturns per-token balances held in an account's wallet.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ object: 'balance'; tokens: { balance: string; icon_url: string; name: string; price_usd: number; symbol: string; token_address: string; value_usd: string; }[]; total_usd: string; }`\n\n  - `object: 'balance'`\n  - `tokens: { balance: string; icon_url: string; name: string; price_usd: number; symbol: string; token_address: string; value_usd: string; }[]`\n  - `total_usd: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.wallets.balance('account_id');\n\nconsole.log(response);\n```",
+    perLanguage: {
+      python: {
+        method: 'wallets.balance',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.balance(\n    "account_id",\n)\nprint(response.object)',
+      },
+      ruby: {
+        method: 'wallets.balance',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.balance("account_id")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.wallets.balance',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.wallets.balance('account_id');\n\nconsole.log(response.object);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/wallets/$ACCOUNT_ID/balance \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'send',
+    endpoint: '/wallets/{account_id}/sends',
+    httpMethod: 'post',
+    summary: 'Create Wallet Send',
+    description: "Sends USDT from an account's wallet to another Whop user or business.",
+    stainlessPath: '(resource) wallets > (method) send',
+    qualified: 'client.wallets.send',
+    params: ['account_id: string;', 'amount: string;', 'to: string;'],
+    response:
+      "{ amount: string; currency: string; destination: { account_id: string; address: string; }; object: 'send'; source: { account_id: string; address: string; }; tx_hash: string; }",
+    markdown:
+      "## send\n\n`client.wallets.send(account_id: string, amount: string, to: string): { amount: string; currency: string; destination: object; object: 'send'; source: object; tx_hash: string; }`\n\n**post** `/wallets/{account_id}/sends`\n\nSends USDT from an account's wallet to another Whop user or business.\n\n### Parameters\n\n- `account_id: string`\n\n- `amount: string`\n  USDT amount to send.\n\n- `to: string`\n  Recipient user ID, business account ID, ledger account ID, or email.\n\n### Returns\n\n- `{ amount: string; currency: string; destination: { account_id: string; address: string; }; object: 'send'; source: { account_id: string; address: string; }; tx_hash: string; }`\n\n  - `amount: string`\n  - `currency: string`\n  - `destination: { account_id: string; address: string; }`\n  - `object: 'send'`\n  - `source: { account_id: string; address: string; }`\n  - `tx_hash: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.wallets.send('account_id', { amount: 'amount', to: 'to' });\n\nconsole.log(response);\n```",
+    perLanguage: {
+      python: {
+        method: 'wallets.send',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.send(\n    account_id="account_id",\n    amount="amount",\n    to="to",\n)\nprint(response.amount)',
+      },
+      ruby: {
+        method: 'wallets.send_',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.send_("account_id", amount: "amount", to: "to")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.wallets.send',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.wallets.send('account_id', { amount: 'amount', to: 'to' });\n\nconsole.log(response.amount);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/wallets/$ACCOUNT_ID/sends \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": "amount",\n          "to": "to"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'create_quote',
+    endpoint: '/swaps/quote',
+    httpMethod: 'post',
+    summary: 'Create Swap Quote',
+    description: 'Returns a stateless swap price preview. No funds move and nothing is persisted.',
+    stainlessPath: '(resource) swaps > (method) create_quote',
+    qualified: 'client.swaps.createQuote',
+    params: [
+      'amount: string;',
+      'from_token: string;',
+      'to_token: string;',
+      'from_address?: string;',
+      'from_chain?: string | number;',
+      'metadata?: object;',
+      'slippage_bps?: number;',
+      'to_address?: string;',
+      'to_chain?: string | number;',
+    ],
+    response:
+      "{ amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }",
+    markdown:
+      "## create_quote\n\n`client.swaps.createQuote(amount: string, from_token: string, to_token: string, from_address?: string, from_chain?: string | number, metadata?: object, slippage_bps?: number, to_address?: string, to_chain?: string | number): { amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n**post** `/swaps/quote`\n\nReturns a stateless swap price preview. No funds move and nothing is persisted.\n\n### Parameters\n\n- `amount: string`\n  Input token amount.\n\n- `from_token: string`\n  Source token contract address.\n\n- `to_token: string`\n  Destination token contract address.\n\n- `from_address?: string`\n\n- `from_chain?: string | number`\n\n- `metadata?: object`\n\n- `slippage_bps?: number`\n\n- `to_address?: string`\n\n- `to_chain?: string | number`\n\n### Returns\n\n- `{ amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n  - `amount_in: string`\n  - `amount_out: string`\n  - `cross_chain: boolean`\n  - `fee_bps: number`\n  - `from_token: object`\n  - `metadata: object`\n  - `object: 'swap_quote'`\n  - `rate: string`\n  - `to_token: object`\n  - `amount_out_min?: string`\n  - `bridge_fee?: string`\n  - `estimated_duration_seconds?: number`\n  - `from_address?: string`\n  - `requires_token_approval?: boolean`\n  - `to_address?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response);\n```",
+    perLanguage: {
+      python: {
+        method: 'swaps.create_quote',
+        example:
+          'from whop_sdk import Whop\n\nclient = Whop()\nresponse = client.swaps.create_quote(\n    amount="amount",\n    from_token="from_token",\n    to_token="to_token",\n)\nprint(response.bridge_fee)',
+      },
+      ruby: {
+        method: 'swaps.create_quote',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.swaps.create_quote(amount: "amount", from_token: "from_token", to_token: "to_token")\n\nputs(response)',
+      },
+      typescript: {
+        method: 'client.swaps.createQuote',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response.bridge_fee);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/swaps/quote \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": "amount",\n          "from_token": "from_token",\n          "to_token": "to_token"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'create',
+    endpoint: '/deposits',
+    httpMethod: 'post',
+    summary: 'Create Deposit',
+    description: 'Resolves a deposit destination and returns the on-chain addresses that can fund it.',
+    stainlessPath: '(resource) deposits > (method) create',
+    qualified: 'client.deposits.create',
+    params: [
+      'amount: number;',
+      'destination: string | { account_id?: string; address?: string; network?: string; };',
+      'metadata?: object;',
+      'network?: string;',
+    ],
+    response:
+      "{ amount: string; deposit_address: { evm: string; solana: string; }; destination: { address: string; currency: string; network: string; account_id?: string; }; hosted_url: string; metadata: object; object: 'deposit'; }",
+    markdown:
+      "## create\n\n`client.deposits.create(amount: number, destination: string | { account_id?: string; address?: string; network?: string; }, metadata?: object, network?: string): { amount: string; deposit_address: object; destination: object; hosted_url: string; metadata: object; object: 'deposit'; }`\n\n**post** `/deposits`\n\nResolves a deposit destination and returns the on-chain addresses that can fund it.\n\n### Parameters\n\n- `amount: number`\n  Amount to deposit.\n\n- `destination: string | { account_id?: string; address?: string; network?: string; }`\n  Destination account ID or wallet address. Object form is supported for compatibility.\n\n- `metadata?: object`\n  Arbitrary metadata echoed in the response.\n\n- `network?: string`\n  Optional destination network override.\n\n### Returns\n\n- `{ amount: string; deposit_address: { evm: string; solana: string; }; destination: { address: string; currency: string; network: string; account_id?: string; }; hosted_url: string; metadata: object; object: 'deposit'; }`\n\n  - `amount: string`\n  - `deposit_address: { evm: string; solana: string; }`\n  - `destination: { address: string; currency: string; network: string; account_id?: string; }`\n  - `hosted_url: string`\n  - `metadata: object`\n  - `object: 'deposit'`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst deposit = await client.deposits.create({ amount: 0, destination: 'string' });\n\nconsole.log(deposit);\n```",
+    perLanguage: {
+      python: {
+        method: 'deposits.create',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndeposit = client.deposits.create(\n    amount=0,\n    destination="string",\n)\nprint(deposit.amount)',
+      },
+      ruby: {
+        method: 'deposits.create',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndeposit = whop.deposits.create(amount: 0, destination: "string")\n\nputs(deposit)',
+      },
+      typescript: {
+        method: 'client.deposits.create',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst deposit = await client.deposits.create({ amount: 0, destination: 'string' });\n\nconsole.log(deposit.amount);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/deposits \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "destination": "string"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'list',
     endpoint: '/setup_intents',
     httpMethod: 'get',
     summary: 'List setup intents',
@@ -8196,6 +8609,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'created_after?: string;',
       'created_before?: string;',
       'first?: number;',
+      'include_paused?: boolean;',
       'last?: number;',
       'query?: string;',
       "status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';",
@@ -8203,7 +8617,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ id: string; ad_campaign: { id: string; }; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }",
     markdown:
-      "## list\n\n`client.adGroups.list(after?: string, before?: string, campaign_id?: string, company_id?: string, created_after?: string, created_before?: string, first?: number, last?: number, query?: string, status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'): { id: string; ad_campaign: object; budget: number; budget_type: ad_budget_type; created_at: string; platform: ad_campaign_platform; status: ad_group_status; title: string; updated_at: string; }`\n\n**get** `/ad_groups`\n\nReturns a paginated list of ad groups scoped by campaign or company, with optional filtering by status and creation date.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `campaign_id?: string`\n  Filter by campaign. Provide exactly one of campaign_id or company_id.\n\n- `company_id?: string`\n  Filter by company. Provide exactly one of campaign_id or company_id.\n\n- `created_after?: string`\n  Only return ad groups created after this timestamp.\n\n- `created_before?: string`\n  Only return ad groups created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `query?: string`\n  Case-insensitive substring match against the ad group name.\n\n- `status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  The status of an external ad group.\n\n### Returns\n\n- `{ id: string; ad_campaign: { id: string; }; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }`\n  An ad group (ad set) belonging to an ad campaign.\n\n  - `id: string`\n  - `ad_campaign: { id: string; }`\n  - `budget: number`\n  - `budget_type: 'daily' | 'lifetime'`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  - `title: string`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adGroupListResponse of client.adGroups.list()) {\n  console.log(adGroupListResponse);\n}\n```",
+      "## list\n\n`client.adGroups.list(after?: string, before?: string, campaign_id?: string, company_id?: string, created_after?: string, created_before?: string, first?: number, include_paused?: boolean, last?: number, query?: string, status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'): { id: string; ad_campaign: object; budget: number; budget_type: ad_budget_type; created_at: string; platform: ad_campaign_platform; status: ad_group_status; title: string; updated_at: string; }`\n\n**get** `/ad_groups`\n\nReturns a paginated list of ad groups scoped by campaign or company, with optional filtering by status and creation date.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `campaign_id?: string`\n  Filter by campaign. Provide exactly one of campaign_id or company_id.\n\n- `company_id?: string`\n  Filter by company. Provide exactly one of campaign_id or company_id.\n\n- `created_after?: string`\n  Only return ad groups created after this timestamp.\n\n- `created_before?: string`\n  Only return ad groups created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `include_paused?: boolean`\n  When false, excludes paused ad groups so pagination matches the dashboard's hide-paused toggle.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `query?: string`\n  Case-insensitive substring match against the ad group name.\n\n- `status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  The status of an external ad group.\n\n### Returns\n\n- `{ id: string; ad_campaign: { id: string; }; budget: number; budget_type: 'daily' | 'lifetime'; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }`\n  An ad group (ad set) belonging to an ad campaign.\n\n  - `id: string`\n  - `ad_campaign: { id: string; }`\n  - `budget: number`\n  - `budget_type: 'daily' | 'lifetime'`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  - `title: string`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adGroupListResponse of client.adGroups.list()) {\n  console.log(adGroupListResponse);\n}\n```",
     perLanguage: {
       python: {
         method: 'ad_groups.list',
@@ -8431,9 +8845,11 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'created_after?: string;',
       'created_before?: string;',
       'first?: number;',
+      'include_paused?: boolean;',
       'last?: number;',
       "order_by?: 'spend' | 'roas';",
       "order_direction?: 'asc' | 'desc';",
+      'query?: string;',
       'stats_from?: string;',
       'stats_to?: string;',
       "status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged';",
@@ -8441,7 +8857,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     response:
       "{ id: string; ad_campaign: { id: string; }; ad_group: { id: string; }; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }",
     markdown:
-      "## list\n\n`client.ads.list(ad_group_id?: string, after?: string, before?: string, campaign_id?: string, company_id?: string, created_after?: string, created_before?: string, first?: number, last?: number, order_by?: 'spend' | 'roas', order_direction?: 'asc' | 'desc', stats_from?: string, stats_to?: string, status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'): { id: string; ad_campaign: object; ad_group: object; created_at: string; platform: ad_campaign_platform; status: external_ad_status; title: string; updated_at: string; }`\n\n**get** `/ads`\n\nList ads scoped by ad group, campaign, or company.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `ad_group_id?: string`\n  Filter by ad group. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `campaign_id?: string`\n  Filter by campaign. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `company_id?: string`\n  Filter by company. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `created_after?: string`\n  Only return ads created after this timestamp.\n\n- `created_before?: string`\n  Only return ads created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `order_by?: 'spend' | 'roas'`\n  Columns that the listAds query can sort by.\n\n- `order_direction?: 'asc' | 'desc'`\n  The direction of the sort.\n\n- `stats_from?: string`\n  Start of the stats date range used when order_by is a stats column.\n\n- `stats_to?: string`\n  End of the stats date range used when order_by is a stats column.\n\n- `status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  The status of an external ad.\n\n### Returns\n\n- `{ id: string; ad_campaign: { id: string; }; ad_group: { id: string; }; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }`\n  An ad belonging to an ad group.\n\n  - `id: string`\n  - `ad_campaign: { id: string; }`\n  - `ad_group: { id: string; }`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  - `title: string`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adListResponse of client.ads.list()) {\n  console.log(adListResponse);\n}\n```",
+      "## list\n\n`client.ads.list(ad_group_id?: string, after?: string, before?: string, campaign_id?: string, company_id?: string, created_after?: string, created_before?: string, first?: number, include_paused?: boolean, last?: number, order_by?: 'spend' | 'roas', order_direction?: 'asc' | 'desc', query?: string, stats_from?: string, stats_to?: string, status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'): { id: string; ad_campaign: object; ad_group: object; created_at: string; platform: ad_campaign_platform; status: external_ad_status; title: string; updated_at: string; }`\n\n**get** `/ads`\n\nList ads scoped by ad group, campaign, or company.\n\nRequired permissions:\n - `ad_campaign:basic:read`\n\n### Parameters\n\n- `ad_group_id?: string`\n  Filter by ad group. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `after?: string`\n  Returns the elements in the list that come after the specified cursor.\n\n- `before?: string`\n  Returns the elements in the list that come before the specified cursor.\n\n- `campaign_id?: string`\n  Filter by campaign. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `company_id?: string`\n  Filter by company. Provide exactly one of ad_group_id, campaign_id, or company_id.\n\n- `created_after?: string`\n  Only return ads created after this timestamp.\n\n- `created_before?: string`\n  Only return ads created before this timestamp.\n\n- `first?: number`\n  Returns the first _n_ elements from the list.\n\n- `include_paused?: boolean`\n  When false, excludes paused ads so pagination matches the dashboard's hide-paused toggle.\n\n- `last?: number`\n  Returns the last _n_ elements from the list.\n\n- `order_by?: 'spend' | 'roas'`\n  Columns that the listAds query can sort by.\n\n- `order_direction?: 'asc' | 'desc'`\n  The direction of the sort.\n\n- `query?: string`\n  Case-insensitive substring match against the ad title or tag.\n\n- `stats_from?: string`\n  Start of the stats date range used when order_by is a stats column.\n\n- `stats_to?: string`\n  End of the stats date range used when order_by is a stats column.\n\n- `status?: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  The status of an external ad.\n\n### Returns\n\n- `{ id: string; ad_campaign: { id: string; }; ad_group: { id: string; }; created_at: string; platform: 'meta' | 'tiktok'; status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'; title: string; updated_at: string; }`\n  An ad belonging to an ad group.\n\n  - `id: string`\n  - `ad_campaign: { id: string; }`\n  - `ad_group: { id: string; }`\n  - `created_at: string`\n  - `platform: 'meta' | 'tiktok'`\n  - `status: 'active' | 'paused' | 'inactive' | 'in_review' | 'rejected' | 'flagged'`\n  - `title: string`\n  - `updated_at: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const adListResponse of client.ads.list()) {\n  console.log(adListResponse);\n}\n```",
     perLanguage: {
       python: {
         method: 'ads.list',

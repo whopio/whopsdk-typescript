@@ -67,6 +67,7 @@ describe('resource invoices', () => {
       collection_method: 'send_invoice',
       company_id: 'biz_xxxxxxxxxxxxxx',
       plan: {
+        base_currency: 'usd',
         billing_period: 42,
         custom_fields: [
           {
@@ -226,6 +227,7 @@ describe('resource invoices', () => {
           member_id: 'mber_xxxxxxxxxxxxx',
           payment_method_id: 'pmt_xxxxxxxxxxxxxx',
           plan: {
+            base_currency: 'usd',
             billing_period: 42,
             custom_fields: [
               {
