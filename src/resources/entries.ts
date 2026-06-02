@@ -12,18 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class Entries extends APIResource {
   /**
-   * Retrieves the details of an existing waitlist entry.
-   *
-   * Required permissions:
-   *
-   * - `plan:waitlist:read`
-   * - `member:email:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Entry> {
-    return this._client.get(path`/entries/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of waitlist entries for a company, with optional
    * filtering by product, plan, status, and creation date.
    *
@@ -37,6 +25,18 @@ export class Entries extends APIResource {
     options?: RequestOptions,
   ): PagePromise<EntryListResponsesCursorPage, EntryListResponse> {
     return this._client.getAPIList('/entries', CursorPage<EntryListResponse>, { query, ...options });
+  }
+
+  /**
+   * Retrieves the details of an existing waitlist entry.
+   *
+   * Required permissions:
+   *
+   * - `plan:waitlist:read`
+   * - `member:email:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Entry> {
+    return this._client.get(path`/entries/${id}`, options);
   }
 
   /**

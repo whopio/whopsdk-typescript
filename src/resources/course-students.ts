@@ -11,18 +11,6 @@ import { path } from '../internal/utils/path';
  */
 export class CourseStudents extends APIResource {
   /**
-   * Retrieves the details of an existing course student.
-   *
-   * Required permissions:
-   *
-   * - `courses:read`
-   * - `course_analytics:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<CourseStudentRetrieveResponse> {
-    return this._client.get(path`/course_students/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of students enrolled in a course, with optional name
    * filtering.
    *
@@ -39,6 +27,18 @@ export class CourseStudents extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing course student.
+   *
+   * Required permissions:
+   *
+   * - `courses:read`
+   * - `course_analytics:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<CourseStudentRetrieveResponse> {
+    return this._client.get(path`/course_students/${id}`, options);
   }
 }
 
