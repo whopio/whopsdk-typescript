@@ -22,6 +22,14 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
+  Account,
+  AccountCreateParams,
+  AccountListParams,
+  AccountListResponse,
+  AccountUpdateParams,
+  Accounts,
+} from './resources/accounts';
+import {
   AdCampaign,
   AdCampaignListParams,
   AdCampaignListResponse,
@@ -190,6 +198,7 @@ import {
   Courses,
   Languages,
 } from './resources/courses';
+import { DepositCreateParams, DepositCreateResponse, Deposits } from './resources/deposits';
 import {
   DisputeAlertListParams,
   DisputeAlertListResponse,
@@ -462,6 +471,7 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
+import { SwapCreateQuoteParams, SwapCreateQuoteResponse, Swaps } from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -490,6 +500,15 @@ import {
   VerificationStatus,
   Verifications,
 } from './resources/verifications';
+import {
+  AccountWallet,
+  WalletBalanceResponse,
+  WalletListResponse,
+  WalletPingResponse,
+  WalletSendParams,
+  WalletSendResponse,
+  Wallets,
+} from './resources/wallets';
 import {
   APIVersion,
   CourseLessonInteractionCompletedWebhookEvent,
@@ -1467,6 +1486,10 @@ export class Whop {
    * Account links
    */
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
+  accounts: API.Accounts = new API.Accounts(this);
+  wallets: API.Wallets = new API.Wallets(this);
+  swaps: API.Swaps = new API.Swaps(this);
+  deposits: API.Deposits = new API.Deposits(this);
   /**
    * Setup intents
    */
@@ -1594,6 +1617,10 @@ Whop.Disputes = Disputes;
 Whop.Refunds = Refunds;
 Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
+Whop.Accounts = Accounts;
+Whop.Wallets = Wallets;
+Whop.Swaps = Swaps;
+Whop.Deposits = Deposits;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
@@ -2028,6 +2055,37 @@ export declare namespace Whop {
     AccountLinks as AccountLinks,
     type AccountLinkCreateResponse as AccountLinkCreateResponse,
     type AccountLinkCreateParams as AccountLinkCreateParams,
+  };
+
+  export {
+    Accounts as Accounts,
+    type Account as Account,
+    type AccountListResponse as AccountListResponse,
+    type AccountListParams as AccountListParams,
+    type AccountCreateParams as AccountCreateParams,
+    type AccountUpdateParams as AccountUpdateParams,
+  };
+
+  export {
+    Wallets as Wallets,
+    type AccountWallet as AccountWallet,
+    type WalletListResponse as WalletListResponse,
+    type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletPingResponse as WalletPingResponse,
+    type WalletSendResponse as WalletSendResponse,
+    type WalletSendParams as WalletSendParams,
+  };
+
+  export {
+    Swaps as Swaps,
+    type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
+    type SwapCreateQuoteParams as SwapCreateQuoteParams,
+  };
+
+  export {
+    Deposits as Deposits,
+    type DepositCreateResponse as DepositCreateResponse,
+    type DepositCreateParams as DepositCreateParams,
   };
 
   export {
