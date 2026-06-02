@@ -11,6 +11,16 @@ import { path } from '../internal/utils/path';
  */
 export class AIChats extends APIResource {
   /**
+   * Returns a paginated list of AI chat threads for the current authenticated user.
+   */
+  list(
+    query: AIChatListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AIChatListResponsesCursorPage, AIChatListResponse> {
+    return this._client.getAPIList('/ai_chats', CursorPage<AIChatListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new AI chat thread and send the first message to the AI agent.
    *
    * Required permissions:
@@ -42,16 +52,6 @@ export class AIChats extends APIResource {
     options?: RequestOptions,
   ): APIPromise<AIChat> {
     return this._client.patch(path`/ai_chats/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of AI chat threads for the current authenticated user.
-   */
-  list(
-    query: AIChatListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AIChatListResponsesCursorPage, AIChatListResponse> {
-    return this._client.getAPIList('/ai_chats', CursorPage<AIChatListResponse>, { query, ...options });
   }
 
   /**
@@ -210,6 +210,28 @@ export namespace AIChatListResponse {
  */
 export type AIChatDeleteResponse = boolean;
 
+export interface AIChatListParams extends CursorPageParams {
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * When true, returns only chats with an active cron schedule
+   */
+  only_active_crons?: boolean | null;
+}
+
 export interface AIChatCreateParams {
   /**
    * The text content of the first message to send to the AI agent.
@@ -275,28 +297,6 @@ export interface AIChatUpdateParams {
   title?: string | null;
 }
 
-export interface AIChatListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * When true, returns only chats with an active cron schedule
-   */
-  only_active_crons?: boolean | null;
-}
-
 export declare namespace AIChats {
   export {
     type AIChat as AIChat,
@@ -304,8 +304,8 @@ export declare namespace AIChats {
     type AIChatListResponse as AIChatListResponse,
     type AIChatDeleteResponse as AIChatDeleteResponse,
     type AIChatListResponsesCursorPage as AIChatListResponsesCursorPage,
+    type AIChatListParams as AIChatListParams,
     type AIChatCreateParams as AIChatCreateParams,
     type AIChatUpdateParams as AIChatUpdateParams,
-    type AIChatListParams as AIChatListParams,
   };
 }
