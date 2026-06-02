@@ -12,46 +12,6 @@ import { path } from '../internal/utils/path';
  */
 export class Withdrawals extends APIResource {
   /**
-   * Creates a withdrawal request for a ledger account
-   *
-   * Required permissions:
-   *
-   * - `payout:withdraw_funds`
-   * - `payout:destination:read`
-   *
-   * @example
-   * ```ts
-   * const withdrawal = await client.withdrawals.create({
-   *   amount: 6.9,
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   currency: 'usd',
-   * });
-   * ```
-   */
-  create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<Withdrawal> {
-    return this._client.post('/withdrawals', { body, ...options });
-  }
-
-  /**
-   * Retrieves the details of an existing withdrawal.
-   *
-   * Required permissions:
-   *
-   * - `payout:withdrawal:read`
-   * - `payout:destination:read`
-   *
-   * @example
-   * ```ts
-   * const withdrawal = await client.withdrawals.retrieve(
-   *   'wdrl_xxxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Withdrawal> {
-    return this._client.get(path`/withdrawals/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of withdrawals for a company, with optional sorting and
    * date filtering.
    *
@@ -74,6 +34,46 @@ export class Withdrawals extends APIResource {
     options?: RequestOptions,
   ): PagePromise<WithdrawalListResponsesCursorPage, WithdrawalListResponse> {
     return this._client.getAPIList('/withdrawals', CursorPage<WithdrawalListResponse>, { query, ...options });
+  }
+
+  /**
+   * Retrieves the details of an existing withdrawal.
+   *
+   * Required permissions:
+   *
+   * - `payout:withdrawal:read`
+   * - `payout:destination:read`
+   *
+   * @example
+   * ```ts
+   * const withdrawal = await client.withdrawals.retrieve(
+   *   'wdrl_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<Withdrawal> {
+    return this._client.get(path`/withdrawals/${id}`, options);
+  }
+
+  /**
+   * Creates a withdrawal request for a ledger account
+   *
+   * Required permissions:
+   *
+   * - `payout:withdraw_funds`
+   * - `payout:destination:read`
+   *
+   * @example
+   * ```ts
+   * const withdrawal = await client.withdrawals.create({
+   *   amount: 6.9,
+   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   currency: 'usd',
+   * });
+   * ```
+   */
+  create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<Withdrawal> {
+    return this._client.post('/withdrawals', { body, ...options });
   }
 }
 
@@ -347,39 +347,6 @@ export interface WithdrawalListResponse {
   status: WithdrawalStatus;
 }
 
-export interface WithdrawalCreateParams {
-  /**
-   * The amount to withdraw in the specified currency
-   */
-  amount: number;
-
-  /**
-   * The ID of the company to withdraw from.
-   */
-  company_id: string;
-
-  /**
-   * The currency that is being withdrawn.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The ID of the payout method to use for the withdrawal.
-   */
-  payout_method_id?: string | null;
-
-  /**
-   * Whether the platform covers the payout fees instead of the connected account.
-   */
-  platform_covers_fees?: boolean | null;
-
-  /**
-   * Custom statement descriptor for the withdrawal. Must be between 5 and 22
-   * characters and contain only alphanumeric characters.
-   */
-  statement_descriptor?: string | null;
-}
-
 export interface WithdrawalListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list withdrawals for.
@@ -417,6 +384,39 @@ export interface WithdrawalListParams extends CursorPageParams {
   last?: number | null;
 }
 
+export interface WithdrawalCreateParams {
+  /**
+   * The amount to withdraw in the specified currency
+   */
+  amount: number;
+
+  /**
+   * The ID of the company to withdraw from.
+   */
+  company_id: string;
+
+  /**
+   * The currency that is being withdrawn.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The ID of the payout method to use for the withdrawal.
+   */
+  payout_method_id?: string | null;
+
+  /**
+   * Whether the platform covers the payout fees instead of the connected account.
+   */
+  platform_covers_fees?: boolean | null;
+
+  /**
+   * Custom statement descriptor for the withdrawal. Must be between 5 and 22
+   * characters and contain only alphanumeric characters.
+   */
+  statement_descriptor?: string | null;
+}
+
 export declare namespace Withdrawals {
   export {
     type Withdrawal as Withdrawal,
@@ -425,7 +425,7 @@ export declare namespace Withdrawals {
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalListResponse as WithdrawalListResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
-    type WithdrawalCreateParams as WithdrawalCreateParams,
     type WithdrawalListParams as WithdrawalListParams,
+    type WithdrawalCreateParams as WithdrawalCreateParams,
   };
 }

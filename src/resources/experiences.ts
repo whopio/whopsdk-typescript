@@ -12,6 +12,27 @@ import { path } from '../internal/utils/path';
  */
 export class Experiences extends APIResource {
   /**
+   * Returns a paginated list of experiences belonging to a company, with optional
+   * filtering by product and app.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const experienceListResponse of client.experiences.list(
+   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: ExperienceListParams,
+    options?: RequestOptions,
+  ): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse> {
+    return this._client.getAPIList('/experiences', CursorPage<ExperienceListResponse>, { query, ...options });
+  }
+
+  /**
    * Required permissions:
    *
    * - `experience:create`
@@ -60,27 +81,6 @@ export class Experiences extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.Experience> {
     return this._client.patch(path`/experiences/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of experiences belonging to a company, with optional
-   * filtering by product and app.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const experienceListResponse of client.experiences.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: ExperienceListParams,
-    options?: RequestOptions,
-  ): PagePromise<ExperienceListResponsesCursorPage, ExperienceListResponse> {
-    return this._client.getAPIList('/experiences', CursorPage<ExperienceListResponse>, { query, ...options });
   }
 
   /**
@@ -294,6 +294,48 @@ export namespace ExperienceListResponse {
  */
 export type ExperienceDeleteResponse = boolean;
 
+export interface ExperienceListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company to list experiences for.
+   */
+  company_id: string;
+
+  /**
+   * Filter to only experiences powered by this app identifier.
+   */
+  app_id?: string | null;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Only return experiences created after this timestamp.
+   */
+  created_after?: string | null;
+
+  /**
+   * Only return experiences created before this timestamp.
+   */
+  created_before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * Filter to only experiences attached to this product identifier.
+   */
+  product_id?: string | null;
+}
+
 export interface ExperienceCreateParams {
   /**
    * The unique identifier of the app that powers this experience.
@@ -382,48 +424,6 @@ export namespace ExperienceUpdateParams {
   }
 }
 
-export interface ExperienceListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list experiences for.
-   */
-  company_id: string;
-
-  /**
-   * Filter to only experiences powered by this app identifier.
-   */
-  app_id?: string | null;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Only return experiences created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return experiences created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Filter to only experiences attached to this product identifier.
-   */
-  product_id?: string | null;
-}
-
 export interface ExperienceAttachParams {
   /**
    * The unique identifier of the product to attach the experience to.
@@ -451,9 +451,9 @@ export declare namespace Experiences {
     type ExperienceListResponse as ExperienceListResponse,
     type ExperienceDeleteResponse as ExperienceDeleteResponse,
     type ExperienceListResponsesCursorPage as ExperienceListResponsesCursorPage,
+    type ExperienceListParams as ExperienceListParams,
     type ExperienceCreateParams as ExperienceCreateParams,
     type ExperienceUpdateParams as ExperienceUpdateParams,
-    type ExperienceListParams as ExperienceListParams,
     type ExperienceAttachParams as ExperienceAttachParams,
     type ExperienceDetachParams as ExperienceDetachParams,
     type ExperienceDuplicateParams as ExperienceDuplicateParams,
