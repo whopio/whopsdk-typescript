@@ -12,6 +12,30 @@ import { path } from '../internal/utils/path';
  */
 export class Memberships extends APIResource {
   /**
+   * Returns a paginated list of memberships, with optional filtering by product,
+   * plan, status, and user.
+   *
+   * Required permissions:
+   *
+   * - `member:basic:read`
+   * - `member:email:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const membershipListResponse of client.memberships.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: MembershipListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
+    return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
+  }
+
+  /**
    * Retrieves the details of an existing membership.
    *
    * Required permissions:
@@ -52,56 +76,6 @@ export class Memberships extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.Membership> {
     return this._client.patch(path`/memberships/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of memberships, with optional filtering by product,
-   * plan, status, and user.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const membershipListResponse of client.memberships.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: MembershipListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
-    return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
-  }
-
-  /**
-   * Add free days to extend a membership's current billing period, expiration date,
-   * or Stripe trial.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.addFreeDays(
-   *   'mem_xxxxxxxxxxxxxx',
-   *   { free_days: 42 },
-   * );
-   * ```
-   */
-  addFreeDays(
-    id: string,
-    body: MembershipAddFreeDaysParams,
-    options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
   }
 
   /**
@@ -194,6 +168,32 @@ export class Memberships extends APIResource {
    */
   uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/uncancel`, options);
+  }
+
+  /**
+   * Add free days to extend a membership's current billing period, expiration date,
+   * or Stripe trial.
+   *
+   * Required permissions:
+   *
+   * - `member:manage`
+   * - `member:email:read`
+   * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.addFreeDays(
+   *   'mem_xxxxxxxxxxxxxx',
+   *   { free_days: 42 },
+   * );
+   * ```
+   */
+  addFreeDays(
+    id: string,
+    body: MembershipAddFreeDaysParams,
+    options?: RequestOptions,
+  ): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
   }
 }
 
@@ -384,6 +384,12 @@ export namespace MembershipListResponse {
      * The unique identifier for the plan.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
   }
 
   /**
@@ -394,6 +400,12 @@ export namespace MembershipListResponse {
      * The unique identifier for the product.
      */
     id: string;
+
+    /**
+     * Custom key-value pairs stored on the product. Included in webhook payloads for
+     * payment and membership events.
+     */
+    metadata: { [key: string]: unknown } | null;
 
     /**
      * The display name of the product shown to customers on the product page and in
@@ -438,14 +450,6 @@ export namespace MembershipListResponse {
      */
     username: string;
   }
-}
-
-export interface MembershipUpdateParams {
-  /**
-   * A JSON object of key-value pairs to store on the membership. Replaces any
-   * existing metadata.
-   */
-  metadata?: { [key: string]: unknown } | null;
 }
 
 export interface MembershipListParams extends CursorPageParams {
@@ -521,12 +525,12 @@ export interface MembershipListParams extends CursorPageParams {
   user_ids?: Array<string> | null;
 }
 
-export interface MembershipAddFreeDaysParams {
+export interface MembershipUpdateParams {
   /**
-   * The number of free days to add (1-1095). Extends the billing period, expiration
-   * date, or Stripe trial depending on plan type.
+   * A JSON object of key-value pairs to store on the membership. Replaces any
+   * existing metadata.
    */
-  free_days: number;
+  metadata?: { [key: string]: unknown } | null;
 }
 
 export interface MembershipCancelParams {
@@ -544,15 +548,23 @@ export interface MembershipPauseParams {
   void_payments?: boolean | null;
 }
 
+export interface MembershipAddFreeDaysParams {
+  /**
+   * The number of free days to add (1-1095). Extends the billing period, expiration
+   * date, or Stripe trial depending on plan type.
+   */
+  free_days: number;
+}
+
 export declare namespace Memberships {
   export {
     type CancelOptions as CancelOptions,
     type MembershipListResponse as MembershipListResponse,
     type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
-    type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
+    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
   };
 }
