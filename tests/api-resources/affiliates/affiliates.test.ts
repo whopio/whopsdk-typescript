@@ -9,6 +9,33 @@ const client = new Whop({
 
 describe('resource affiliates', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.affiliates.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.affiliates.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      direction: 'asc',
+      first: 42,
+      last: 42,
+      order: 'id',
+      query: 'query',
+      status: 'active',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.affiliates.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
@@ -41,33 +68,6 @@ describe('resource affiliates', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.affiliates.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.affiliates.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-      order: 'id',
-      query: 'query',
-      status: 'active',
-    });
   });
 
   // Mock server tests are disabled

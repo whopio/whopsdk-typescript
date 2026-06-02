@@ -11,6 +11,33 @@ import { path } from '../internal/utils/path';
  */
 export class CourseChapters extends APIResource {
   /**
+   * Returns a paginated list of chapters within a course, ordered by position.
+   *
+   * Required permissions:
+   *
+   * - `courses:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const courseChapterListResponse of client.courseChapters.list(
+   *   { course_id: 'cors_xxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: CourseChapterListParams,
+    options?: RequestOptions,
+  ): PagePromise<CourseChapterListResponsesCursorPage, CourseChapterListResponse> {
+    return this._client.getAPIList('/course_chapters', CursorPage<CourseChapterListResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Create a new chapter within a course to organize lessons into sections.
    *
    * Required permissions:
@@ -63,33 +90,6 @@ export class CourseChapters extends APIResource {
    */
   update(id: string, body: CourseChapterUpdateParams, options?: RequestOptions): APIPromise<CourseChapter> {
     return this._client.patch(path`/course_chapters/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of chapters within a course, ordered by position.
-   *
-   * Required permissions:
-   *
-   * - `courses:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const courseChapterListResponse of client.courseChapters.list(
-   *   { course_id: 'cors_xxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: CourseChapterListParams,
-    options?: RequestOptions,
-  ): PagePromise<CourseChapterListResponsesCursorPage, CourseChapterListResponse> {
-    return this._client.getAPIList('/course_chapters', CursorPage<CourseChapterListResponse>, {
-      query,
-      ...options,
-    });
   }
 
   /**
@@ -189,26 +189,6 @@ export interface CourseChapterListResponse {
  */
 export type CourseChapterDeleteResponse = boolean;
 
-export interface CourseChapterCreateParams {
-  /**
-   * The unique identifier of the course to create the chapter in (e.g.,
-   * "course_XXXXX").
-   */
-  course_id: string;
-
-  /**
-   * The display title of the chapter (e.g., "Module 1: Introduction").
-   */
-  title?: string | null;
-}
-
-export interface CourseChapterUpdateParams {
-  /**
-   * The new display title of the chapter (e.g., "Module 1: Introduction").
-   */
-  title: string;
-}
-
 export interface CourseChapterListParams extends CursorPageParams {
   /**
    * The unique identifier of the course to list chapters for.
@@ -231,14 +211,34 @@ export interface CourseChapterListParams extends CursorPageParams {
   last?: number | null;
 }
 
+export interface CourseChapterCreateParams {
+  /**
+   * The unique identifier of the course to create the chapter in (e.g.,
+   * "course_XXXXX").
+   */
+  course_id: string;
+
+  /**
+   * The display title of the chapter (e.g., "Module 1: Introduction").
+   */
+  title?: string | null;
+}
+
+export interface CourseChapterUpdateParams {
+  /**
+   * The new display title of the chapter (e.g., "Module 1: Introduction").
+   */
+  title: string;
+}
+
 export declare namespace CourseChapters {
   export {
     type CourseChapter as CourseChapter,
     type CourseChapterListResponse as CourseChapterListResponse,
     type CourseChapterDeleteResponse as CourseChapterDeleteResponse,
     type CourseChapterListResponsesCursorPage as CourseChapterListResponsesCursorPage,
+    type CourseChapterListParams as CourseChapterListParams,
     type CourseChapterCreateParams as CourseChapterCreateParams,
     type CourseChapterUpdateParams as CourseChapterUpdateParams,
-    type CourseChapterListParams as CourseChapterListParams,
   };
 }
