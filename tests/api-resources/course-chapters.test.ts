@@ -9,6 +9,29 @@ const client = new Whop({
 
 describe('resource courseChapters', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.courseChapters.list({ course_id: 'cors_xxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.courseChapters.list({
+      course_id: 'cors_xxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.courseChapters.create({ course_id: 'cors_xxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
@@ -52,29 +75,6 @@ describe('resource courseChapters', () => {
   // Mock server tests are disabled
   test.skip('update: required and optional params', async () => {
     const response = await client.courseChapters.update('chap_xxxxxxxxxxxxx', { title: 'title' });
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.courseChapters.list({ course_id: 'cors_xxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.courseChapters.list({
-      course_id: 'cors_xxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-    });
   });
 
   // Mock server tests are disabled
