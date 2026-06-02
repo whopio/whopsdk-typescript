@@ -12,6 +12,25 @@ import { path } from '../internal/utils/path';
  */
 export class Apps extends APIResource {
   /**
+   * Returns a paginated list of apps on the Whop platform, with optional filtering
+   * by company, type, view support, and search query.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const appListResponse of client.apps.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: AppListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<AppListResponsesCursorPage, AppListResponse> {
+    return this._client.getAPIList('/apps', CursorPage<AppListResponse>, { query, ...options });
+  }
+
+  /**
    * Register a new app on the Whop developer platform. Apps provide custom
    * experiences that can be added to products.
    *
@@ -70,25 +89,6 @@ export class Apps extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.App> {
     return this._client.patch(path`/apps/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of apps on the Whop platform, with optional filtering
-   * by company, type, view support, and search query.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const appListResponse of client.apps.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: AppListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<AppListResponsesCursorPage, AppListResponse> {
-    return this._client.getAPIList('/apps', CursorPage<AppListResponse>, { query, ...options });
   }
 }
 
@@ -259,6 +259,72 @@ export namespace AppListResponse {
   }
 }
 
+export interface AppListParams extends CursorPageParams {
+  /**
+   * The type of end-user an app is built for
+   */
+  app_type?: AppType | null;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Filter apps to only those created by this company, starting with 'biz\_'.
+   */
+  company_id?: string | null;
+
+  /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The order to fetch the apps in for discovery.
+   */
+  order?:
+    | 'created_at'
+    | 'discoverable_at'
+    | 'total_installs_last_30_days'
+    | 'total_installs_last_7_days'
+    | 'time_spent'
+    | 'time_spent_last_24_hours'
+    | 'daily_active_users'
+    | 'ai_prompt_count'
+    | 'total_ai_cost_usd'
+    | 'total_ai_tokens'
+    | 'last_ai_prompt_at'
+    | 'ai_average_rating'
+    | null;
+
+  /**
+   * A search string to filter apps by name, such as 'chat' or 'analytics'.
+   */
+  query?: string | null;
+
+  /**
+   * Whether to only return apps that have been verified by Whop. Useful for
+   * populating a featured apps section.
+   */
+  verified_apps_only?: boolean | null;
+
+  /**
+   * The different types of an app view
+   */
+  view_type?: Shared.AppViewType | null;
+}
+
 export interface AppCreateParams {
   /**
    * The unique identifier of the company to create the app for, starting with
@@ -394,79 +460,13 @@ export namespace AppUpdateParams {
   }
 }
 
-export interface AppListParams extends CursorPageParams {
-  /**
-   * The type of end-user an app is built for
-   */
-  app_type?: AppType | null;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Filter apps to only those created by this company, starting with 'biz\_'.
-   */
-  company_id?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The order to fetch the apps in for discovery.
-   */
-  order?:
-    | 'created_at'
-    | 'discoverable_at'
-    | 'total_installs_last_30_days'
-    | 'total_installs_last_7_days'
-    | 'time_spent'
-    | 'time_spent_last_24_hours'
-    | 'daily_active_users'
-    | 'ai_prompt_count'
-    | 'total_ai_cost_usd'
-    | 'total_ai_tokens'
-    | 'last_ai_prompt_at'
-    | 'ai_average_rating'
-    | null;
-
-  /**
-   * A search string to filter apps by name, such as 'chat' or 'analytics'.
-   */
-  query?: string | null;
-
-  /**
-   * Whether to only return apps that have been verified by Whop. Useful for
-   * populating a featured apps section.
-   */
-  verified_apps_only?: boolean | null;
-
-  /**
-   * The different types of an app view
-   */
-  view_type?: Shared.AppViewType | null;
-}
-
 export declare namespace Apps {
   export {
     type AppType as AppType,
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
+    type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
-    type AppListParams as AppListParams,
   };
 }
