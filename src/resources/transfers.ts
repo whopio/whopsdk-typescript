@@ -12,6 +12,29 @@ import { path } from '../internal/utils/path';
  */
 export class Transfers extends APIResource {
   /**
+   * Returns a paginated list of fund transfers, filtered by origin or destination
+   * account, with optional sorting and date filtering.
+   *
+   * Required permissions:
+   *
+   * - `payout:transfer:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const transferListResponse of client.transfers.list()) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: TransferListParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<TransferListResponsesCursorPage, TransferListResponse> {
+    return this._client.getAPIList('/transfers', CursorPage<TransferListResponse>, { query, ...options });
+  }
+
+  /**
    * Transfer funds between two ledger accounts, such as from a company balance to a
    * user balance.
    *
@@ -49,29 +72,6 @@ export class Transfers extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Transfer> {
     return this._client.get(path`/transfers/${id}`, options);
-  }
-
-  /**
-   * Returns a paginated list of fund transfers, filtered by origin or destination
-   * account, with optional sorting and date filtering.
-   *
-   * Required permissions:
-   *
-   * - `payout:transfer:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const transferListResponse of client.transfers.list()) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: TransferListParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<TransferListResponsesCursorPage, TransferListResponse> {
-    return this._client.getAPIList('/transfers', CursorPage<TransferListResponse>, { query, ...options });
   }
 }
 
@@ -131,48 +131,6 @@ export interface TransferListResponse {
   origin_ledger_account_id: string;
 }
 
-export interface TransferCreateParams {
-  /**
-   * The amount to transfer in the specified currency. For example, 25.00 for $25.00
-   * USD.
-   */
-  amount: number;
-
-  /**
-   * The currency of the transfer amount, such as 'usd'.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The identifier of the account receiving the funds. Accepts a user ID
-   * ('user_xxx'), company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
-   */
-  destination_id: string;
-
-  /**
-   * The identifier of the account sending the funds. Accepts a user ID ('user_xxx'),
-   * company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
-   */
-  origin_id: string;
-
-  /**
-   * A unique key to prevent duplicate transfers. Use a UUID or similar unique
-   * string.
-   */
-  idempotence_key?: string | null;
-
-  /**
-   * A JSON object of custom metadata to attach to the transfer for tracking
-   * purposes.
-   */
-  metadata?: { [key: string]: unknown } | null;
-
-  /**
-   * A short note describing the transfer, up to 50 characters.
-   */
-  notes?: string | null;
-}
-
 export interface TransferListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
@@ -222,11 +180,55 @@ export interface TransferListParams extends CursorPageParams {
   origin_id?: string | null;
 }
 
+export interface TransferCreateParams {
+  /**
+   * The amount to transfer in the specified currency. For example, 25.00 for $25.00
+   * USD.
+   */
+  amount: number;
+
+  /**
+   * The currency of the transfer amount, such as 'usd'.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * The identifier of the account receiving the funds. Accepts a user ID
+   * ('user_xxx'), company ID ('biz_xxx'), ledger account ID ('ldgr_xxx'), or an
+   * email address — emails without an existing Whop user trigger a placeholder-user
+   * signup.
+   */
+  destination_id: string;
+
+  /**
+   * The identifier of the account sending the funds. Accepts a user ID ('user_xxx'),
+   * company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
+   */
+  origin_id: string;
+
+  /**
+   * A unique key to prevent duplicate transfers. Use a UUID or similar unique
+   * string.
+   */
+  idempotence_key?: string | null;
+
+  /**
+   * A JSON object of custom metadata to attach to the transfer for tracking
+   * purposes.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
+   * A short note describing the transfer, up to 50 characters.
+   */
+  notes?: string | null;
+}
+
 export declare namespace Transfers {
   export {
     type TransferListResponse as TransferListResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
-    type TransferCreateParams as TransferCreateParams,
     type TransferListParams as TransferListParams,
+    type TransferCreateParams as TransferCreateParams,
   };
 }
