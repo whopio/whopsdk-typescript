@@ -147,7 +147,7 @@ export namespace PayoutAccountRetrieveResponse {
    */
   export interface LatestVerification {
     /**
-     * The unique identifier for the verification.
+     * The identifier of the verification (verf_xxx).
      */
     id: string;
 

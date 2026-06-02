@@ -11,6 +11,31 @@ import { path } from '../internal/utils/path';
  */
 export class DmMembers extends APIResource {
   /**
+   * Returns a paginated list of members in a specific DM channel, sorted by the date
+   * they were added.
+   *
+   * Required permissions:
+   *
+   * - `dms:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const dmMemberListResponse of client.dmMembers.list(
+   *   { channel_id: 'channel_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: DmMemberListParams,
+    options?: RequestOptions,
+  ): PagePromise<DmMemberListResponsesCursorPage, DmMemberListResponse> {
+    return this._client.getAPIList('/dm_members', CursorPage<DmMemberListResponse>, { query, ...options });
+  }
+
+  /**
    * Add a new user to an existing DM channel. Only an admin of the channel can add
    * members.
    *
@@ -65,31 +90,6 @@ export class DmMembers extends APIResource {
     options?: RequestOptions,
   ): APIPromise<DmMember> {
     return this._client.patch(path`/dm_members/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of members in a specific DM channel, sorted by the date
-   * they were added.
-   *
-   * Required permissions:
-   *
-   * - `dms:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const dmMemberListResponse of client.dmMembers.list(
-   *   { channel_id: 'channel_id' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: DmMemberListParams,
-    options?: RequestOptions,
-  ): PagePromise<DmMemberListResponsesCursorPage, DmMemberListResponse> {
-    return this._client.getAPIList('/dm_members', CursorPage<DmMemberListResponse>, { query, ...options });
   }
 
   /**
@@ -198,6 +198,28 @@ export interface DmMemberListResponse {
  */
 export type DmMemberDeleteResponse = boolean;
 
+export interface DmMemberListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the DM channel to list members for.
+   */
+  channel_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+}
+
 export interface DmMemberCreateParams {
   /**
    * The unique identifier of the DM channel to add the new member to.
@@ -223,28 +245,6 @@ export interface DmMemberUpdateParams {
   status?: DmFeedMemberStatuses | null;
 }
 
-export interface DmMemberListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the DM channel to list members for.
-   */
-  channel_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-}
-
 export declare namespace DmMembers {
   export {
     type DmFeedMemberNotificationPreferences as DmFeedMemberNotificationPreferences,
@@ -253,8 +253,8 @@ export declare namespace DmMembers {
     type DmMemberListResponse as DmMemberListResponse,
     type DmMemberDeleteResponse as DmMemberDeleteResponse,
     type DmMemberListResponsesCursorPage as DmMemberListResponsesCursorPage,
+    type DmMemberListParams as DmMemberListParams,
     type DmMemberCreateParams as DmMemberCreateParams,
     type DmMemberUpdateParams as DmMemberUpdateParams,
-    type DmMemberListParams as DmMemberListParams,
   };
 }
