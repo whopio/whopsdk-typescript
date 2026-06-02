@@ -1090,7 +1090,9 @@ export type Currency =
   | 'cny'
   | 'usdt'
   | 'kzt'
-  | 'awg';
+  | 'awg'
+  | 'whop_usd'
+  | 'xau';
 
 /**
  * The different types of custom CTAs that can be selected.
