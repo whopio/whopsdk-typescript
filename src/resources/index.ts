@@ -15,6 +15,14 @@ export {
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
+  Accounts,
+  type Account,
+  type AccountListResponse,
+  type AccountListParams,
+  type AccountCreateParams,
+  type AccountUpdateParams,
+} from './accounts';
+export {
   AdCampaigns,
   type AdCampaign,
   type AdCampaignPlatform,
@@ -183,6 +191,7 @@ export {
   type CourseUpdateParams,
   type CourseListResponsesCursorPage,
 } from './courses';
+export { Deposits, type DepositCreateResponse, type DepositCreateParams } from './deposits';
 export {
   DisputeAlerts,
   type DisputeAlertType,
@@ -455,6 +464,7 @@ export {
   type SupportChannelCreateParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
+export { Swaps, type SwapCreateQuoteResponse, type SwapCreateQuoteParams } from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
@@ -483,6 +493,15 @@ export {
   type VerificationListParams,
   type VerificationListResponsesCursorPage,
 } from './verifications';
+export {
+  Wallets,
+  type AccountWallet,
+  type WalletListResponse,
+  type WalletBalanceResponse,
+  type WalletPingResponse,
+  type WalletSendResponse,
+  type WalletSendParams,
+} from './wallets';
 export {
   Webhooks,
   type APIVersion,
