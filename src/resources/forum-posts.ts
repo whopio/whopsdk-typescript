@@ -12,6 +12,31 @@ import { path } from '../internal/utils/path';
  */
 export class ForumPosts extends APIResource {
   /**
+   * Returns a paginated list of forum posts within a specific experience, with
+   * optional filtering by parent post or pinned status.
+   *
+   * Required permissions:
+   *
+   * - `forum:read`
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const forumPostListResponse of client.forumPosts.list(
+   *   { experience_id: 'exp_xxxxxxxxxxxxxx' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: ForumPostListParams,
+    options?: RequestOptions,
+  ): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse> {
+    return this._client.getAPIList('/forum_posts', CursorPage<ForumPostListResponse>, { query, ...options });
+  }
+
+  /**
    * Create a new forum post or comment within an experience. Supports text content,
    * attachments, polls, paywalling, and pinning. Pass experience_id 'public' with a
    * company_id to post to a company's public forum.
@@ -62,31 +87,6 @@ export class ForumPosts extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.ForumPost> {
     return this._client.patch(path`/forum_posts/${id}`, { body, ...options });
-  }
-
-  /**
-   * Returns a paginated list of forum posts within a specific experience, with
-   * optional filtering by parent post or pinned status.
-   *
-   * Required permissions:
-   *
-   * - `forum:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const forumPostListResponse of client.forumPosts.list(
-   *   { experience_id: 'exp_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  list(
-    query: ForumPostListParams,
-    options?: RequestOptions,
-  ): PagePromise<ForumPostListResponsesCursorPage, ForumPostListResponse> {
-    return this._client.getAPIList('/forum_posts', CursorPage<ForumPostListResponse>, { query, ...options });
   }
 }
 
@@ -228,6 +228,45 @@ export namespace ForumPostListResponse {
      */
     username: string;
   }
+}
+
+export interface ForumPostListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the experience to list forum posts for.
+   */
+  experience_id: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string | null;
+
+  /**
+   * Returns the first _n_ elements from the list.
+   */
+  first?: number | null;
+
+  /**
+   * Whether to include top-level bounty discussion anchors as rich forum items.
+   */
+  include_bounty_anchors?: boolean | null;
+
+  /**
+   * Returns the last _n_ elements from the list.
+   */
+  last?: number | null;
+
+  /**
+   * The unique identifier of a parent post to list comments for. When set, returns
+   * replies to that post.
+   */
+  parent_id?: string | null;
+
+  /**
+   * Whether to filter for only pinned posts. Set to true to return only pinned
+   * posts.
+   */
+  pinned?: boolean | null;
 }
 
 export interface ForumPostCreateParams {
@@ -389,47 +428,13 @@ export namespace ForumPostUpdateParams {
   }
 }
 
-export interface ForumPostListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the experience to list forum posts for.
-   */
-  experience_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The unique identifier of a parent post to list comments for. When set, returns
-   * replies to that post.
-   */
-  parent_id?: string | null;
-
-  /**
-   * Whether to filter for only pinned posts. Set to true to return only pinned
-   * posts.
-   */
-  pinned?: boolean | null;
-}
-
 export declare namespace ForumPosts {
   export {
     type ForumPostVisibilityType as ForumPostVisibilityType,
     type ForumPostListResponse as ForumPostListResponse,
     type ForumPostListResponsesCursorPage as ForumPostListResponsesCursorPage,
+    type ForumPostListParams as ForumPostListParams,
     type ForumPostCreateParams as ForumPostCreateParams,
     type ForumPostUpdateParams as ForumPostUpdateParams,
-    type ForumPostListParams as ForumPostListParams,
   };
 }
