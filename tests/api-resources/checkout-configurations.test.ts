@@ -9,6 +9,33 @@ const client = new Whop({
 
 describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.checkoutConfigurations.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.checkoutConfigurations.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      created_after: '2023-12-01T05:00:00.401Z',
+      created_before: '2023-12-01T05:00:00.401Z',
+      direction: 'asc',
+      first: 42,
+      last: 42,
+      plan_id: 'plan_xxxxxxxxxxxxx',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.checkoutConfigurations.create({
       plan: { company_id: 'biz_xxxxxxxxxxxxxx', currency: 'usd' },
@@ -28,6 +55,7 @@ describe('resource checkoutConfigurations', () => {
       plan: {
         company_id: 'biz_xxxxxxxxxxxxxx',
         currency: 'usd',
+        adaptive_pricing_enabled: true,
         application_fee_amount: 6.9,
         billing_period: 42,
         custom_fields: [
@@ -79,6 +107,7 @@ describe('resource checkoutConfigurations', () => {
       affiliate_code: 'affiliate_code',
       allow_promo_codes: true,
       checkout_styling: {
+        background_color: 'background_color',
         border_style: 'rounded',
         button_color: 'button_color',
         font_family: 'system',
@@ -106,32 +135,5 @@ describe('resource checkoutConfigurations', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.checkoutConfigurations.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-      plan_id: 'plan_xxxxxxxxxxxxx',
-    });
   });
 });
