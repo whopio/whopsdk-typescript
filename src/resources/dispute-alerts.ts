@@ -14,22 +14,6 @@ import { path } from '../internal/utils/path';
  */
 export class DisputeAlerts extends APIResource {
   /**
-   * Retrieves the details of an existing dispute alert.
-   *
-   * Required permissions:
-   *
-   * - `payment:dispute_alert:read`
-   * - `payment:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `payment:dispute:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<DisputeAlertRetrieveResponse> {
-    return this._client.get(path`/dispute_alerts/${id}`, options);
-  }
-
-  /**
    * Returns a paginated list of dispute alerts for a company, with optional
    * filtering by creation date.
    *
@@ -47,6 +31,22 @@ export class DisputeAlerts extends APIResource {
       query,
       ...options,
     });
+  }
+
+  /**
+   * Retrieves the details of an existing dispute alert.
+   *
+   * Required permissions:
+   *
+   * - `payment:dispute_alert:read`
+   * - `payment:basic:read`
+   * - `member:email:read`
+   * - `member:basic:read`
+   * - `member:phone:read`
+   * - `payment:dispute:read`
+   */
+  retrieve(id: string, options?: RequestOptions): APIPromise<DisputeAlertRetrieveResponse> {
+    return this._client.get(path`/dispute_alerts/${id}`, options);
   }
 }
 
@@ -176,9 +176,9 @@ export namespace DisputeAlertRetrieveResponse {
     created_at: string;
 
     /**
-     * The available currencies on the platform
+     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
      */
-    currency: Shared.Currency | null;
+    currency: Shared.Currency;
 
     /**
      * When an alert came in that this transaction will be disputed
