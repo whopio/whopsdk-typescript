@@ -1,24 +1,5 @@
 # Changelog
 
-## 0.0.40 (2026-06-03)
-
-Full Changelog: [v0.0.39...v0.0.40](https://github.com/whopio/whopsdk-typescript/compare/v0.0.39...v0.0.40)
-
-### Features
-
-* **api:** extend response for accounts endpoint and add `/me` support ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-* **api:** make swap quote public and remove bearer auth ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-
-### Bug Fixes
-
-* **backend:** Carry a 3DS level on setup intents for card enrollment ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-* **backend:** remove wallets ping ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-
-### Chores
-
-* restore TypeScript custom helpers for file uploads and user token verification ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-* restore changelog after Stainless migration ([#47](https://github.com/whopio/whopsdk-typescript/issues/47)) ([61c354a](https://github.com/whopio/whopsdk-typescript/commit/61c354a27ce1c09b770b32c6497fa145be5d26a7))
-
 ## 0.0.39 (2026-05-12)
 
 Full Changelog: [v0.0.38...v0.0.39](https://github.com/whopio/whopsdk-typescript/compare/v0.0.38...v0.0.39)
