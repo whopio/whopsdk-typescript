@@ -18,8 +18,6 @@ export interface SwapCreateQuoteResponse {
 
   amount_out: string;
 
-  cross_chain: boolean;
-
   fee_bps: number;
 
   from_token: { [key: string]: unknown };
