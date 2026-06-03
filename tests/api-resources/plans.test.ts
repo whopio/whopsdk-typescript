@@ -67,6 +67,7 @@ describe('resource plans', () => {
         button_color: 'button_color',
         font_family: 'system',
       },
+      collect_phone_number: true,
       currency: 'usd',
       custom_fields: [
         {
@@ -143,6 +144,7 @@ describe('resource plans', () => {
             button_color: 'button_color',
             font_family: 'system',
           },
+          collect_phone_number: true,
           currency: 'usd',
           custom_fields: [
             {
