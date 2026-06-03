@@ -28,7 +28,7 @@ export const newMcpServer = async ({
   new McpServer(
     {
       name: 'whop_sdk_api',
-      version: '0.0.39',
+      version: '0.0.40',
     },
     {
       instructions: await getInstructions({ stainlessApiKey, customInstructionsPath }),
