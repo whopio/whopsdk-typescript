@@ -9,6 +9,31 @@ const client = new Whop({
 
 describe('resource companyTokenTransactions', () => {
   // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.companyTokenTransactions.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.companyTokenTransactions.list({
+      company_id: 'biz_xxxxxxxxxxxxxx',
+      after: 'after',
+      before: 'before',
+      first: 42,
+      last: 42,
+      transaction_type: 'add',
+      user_id: 'user_xxxxxxxxxxxxx',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.companyTokenTransactions.create({
       amount: 6.9,
@@ -49,30 +74,5 @@ describe('resource companyTokenTransactions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.companyTokenTransactions.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.companyTokenTransactions.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
-      transaction_type: 'add',
-      user_id: 'user_xxxxxxxxxxxxx',
-    });
   });
 });
