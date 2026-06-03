@@ -471,6 +471,11 @@ export interface PlanCreateParams {
   checkout_styling?: PlanCreateParams.CheckoutStyling | null;
 
   /**
+   * Whether to collect the buyer's phone number at checkout for this plan.
+   */
+  collect_phone_number?: boolean | null;
+
+  /**
    * The available currencies on the platform
    */
   currency?: Shared.Currency | null;
@@ -701,6 +706,11 @@ export interface PlanUpdateParams {
    * inherit from the company default.
    */
   checkout_styling?: PlanUpdateParams.CheckoutStyling | null;
+
+  /**
+   * Whether to collect the buyer's phone number at checkout for this plan.
+   */
+  collect_phone_number?: boolean | null;
 
   /**
    * The available currencies on the platform
