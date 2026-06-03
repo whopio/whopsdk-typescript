@@ -67,6 +67,7 @@ describe('resource conversions', () => {
         first_name: 'first_name',
         gender: 'male',
         last_name: 'last_name',
+        linked_anonymous_id: 'linked_anonymous_id',
         member_id: 'mber_xxxxxxxxxxxxx',
         membership_id: 'mem_xxxxxxxxxxxxxx',
         name: 'name',
