@@ -142,6 +142,11 @@ export namespace ConversionCreateParams {
     ad_set_id?: string | null;
 
     /**
+     * Facebook click cookie (\_fbc, format fb.1.{timestamp}.{fbclid}).
+     */
+    fbc?: string | null;
+
+    /**
      * Facebook click ID.
      */
     fbclid?: string | null;
@@ -265,6 +270,12 @@ export namespace ConversionCreateParams {
      * Last name.
      */
     last_name?: string | null;
+
+    /**
+     * A second anonymous identifier to link to this user (e.g. captured across an
+     * iframe boundary).
+     */
+    linked_anonymous_id?: string | null;
 
     /**
      * The Whop member ID.
