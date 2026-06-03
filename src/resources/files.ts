@@ -4,6 +4,8 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
+import type { ToFileInput, Uploadable } from '../core/uploads';
+import { uploadFile } from '../lib/upload-file';
 
 /**
  * Files
@@ -14,6 +16,19 @@ export class Files extends APIResource {
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<FileRetrieveResponse> {
     return this._client.get(path`/files/${id}`, options);
+  }
+
+  /**
+   * Upload a file (create -> upload to presigned URL -> poll retrieve until ready).
+   *
+   * Polls for up to 2 minutes by default.
+   */
+  upload(file: Uploadable | ToFileInput, options?: FileUploadOptions): Promise<FileRetrieveResponse> {
+    const { filename, ...requestOptions } = options ?? {};
+    return uploadFile(this._client, file, {
+      filename,
+      requestOptions,
+    });
   }
 
   /**
@@ -144,6 +159,13 @@ export interface FileCreateParams {
    * authentication to access.
    */
   visibility?: FileVisibility | null;
+}
+
+export interface FileUploadOptions extends RequestOptions {
+  /**
+   * Override the filename used when creating the file.
+   */
+  filename?: string | null | undefined;
 }
 
 export declare namespace Files {
