@@ -41,9 +41,15 @@ export class Files extends APIResource {
 }
 
 /**
+ * Visibility controls whether the file can be accessed publicly or only by
+ * authorized requests.
+ */
+export type FileVisibility = 'public' | 'private';
+
+/**
  * The upload status of a file
  */
-export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed'
+export type UploadStatus = 'pending' | 'processing' | 'ready' | 'failed';
 
 /**
  * A file that has been uploaded or is pending upload.
@@ -90,6 +96,11 @@ export interface FileCreateResponse {
    * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
+
+  /**
+   * Whether the file is public or private.
+   */
+  visibility: FileVisibility;
 }
 
 /**
@@ -125,6 +136,11 @@ export interface FileRetrieveResponse {
    * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
+
+  /**
+   * Whether the file is public or private.
+   */
+  visibility: FileVisibility;
 }
 
 export interface FileCreateParams {
@@ -133,6 +149,11 @@ export interface FileCreateParams {
    * "document.pdf").
    */
   filename: string;
+
+  /**
+   * Whether the file should be public or private.
+   */
+  visibility?: FileVisibility | null;
 }
 
 export interface FileUploadOptions extends RequestOptions {
@@ -144,6 +165,7 @@ export interface FileUploadOptions extends RequestOptions {
 
 export declare namespace Files {
   export {
+    type FileVisibility as FileVisibility,
     type UploadStatus as UploadStatus,
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
