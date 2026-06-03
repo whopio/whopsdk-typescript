@@ -839,11 +839,6 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL of the page where the checkout is being initiated from.
      */
     source_url?: string | null;
-
-    /**
-     * The 3D Secure behavior for a plan.
-     */
-    three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
   }
 
   export namespace CreateCheckoutSessionInputModeSetup {
