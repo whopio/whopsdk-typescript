@@ -61,11 +61,6 @@ export interface SwapCreateQuoteParams {
    */
   to_token: string;
 
-  /**
-   * Caller-owned account whose wallet address should be used.
-   */
-  account_id?: string | null;
-
   from_address?: string | null;
 
   from_chain?: string | number | null;
