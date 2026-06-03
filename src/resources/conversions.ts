@@ -267,6 +267,12 @@ export namespace ConversionCreateParams {
     last_name?: string | null;
 
     /**
+     * A second anonymous identifier to link to this user (e.g. captured across an
+     * iframe boundary).
+     */
+    linked_anonymous_id?: string | null;
+
+    /**
      * The Whop member ID.
      */
     member_id?: string | null;
