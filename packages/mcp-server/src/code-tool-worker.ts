@@ -274,7 +274,6 @@ const fuse = new Fuse(
     'client.payoutMethods.list',
     'client.payoutMethods.retrieve',
     'client.verifications.list',
-    'client.verifications.retrieve',
     'client.leads.create',
     'client.leads.list',
     'client.leads.retrieve',
