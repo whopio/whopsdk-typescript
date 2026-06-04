@@ -499,8 +499,10 @@ export {
   type AccountWallet,
   type WalletListResponse,
   type WalletBalanceResponse,
+  type WalletCreateWithdrawalResponse,
   type WalletSendResponse,
   type WalletSendParams,
+  type WalletCreateWithdrawalParams,
 } from './wallets';
 export {
   Webhooks,

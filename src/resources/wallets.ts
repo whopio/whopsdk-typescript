@@ -26,6 +26,18 @@ export class Wallets extends APIResource {
   send(accountID: string, body: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
     return this._client.post(path`/wallets/${accountID}/sends`, { body, ...options });
   }
+
+  /**
+   * Withdraws from an account's ledger balance to a linked payout method (bank,
+   * card, or external crypto wallet).
+   */
+  createWithdrawal(
+    accountID: string,
+    body: WalletCreateWithdrawalParams,
+    options?: RequestOptions,
+  ): APIPromise<WalletCreateWithdrawalResponse> {
+    return this._client.post(path`/wallets/${accountID}/withdrawals`, { body, ...options });
+  }
 }
 
 export interface AccountWallet {
@@ -85,6 +97,28 @@ export namespace WalletBalanceResponse {
   }
 }
 
+export interface WalletCreateWithdrawalResponse {
+  id: string;
+
+  amount: string;
+
+  asset: string;
+
+  created_at: string;
+
+  object: 'withdrawal';
+
+  payout_method_id: string;
+
+  status: string;
+
+  fee_amount?: string | null;
+
+  fee_type?: string | null;
+
+  speed?: string | null;
+}
+
 export interface WalletSendResponse {
   amount: string;
 
@@ -125,12 +159,31 @@ export interface WalletSendParams {
   to: string;
 }
 
+export interface WalletCreateWithdrawalParams {
+  /**
+   * Amount to withdraw, as a decimal string in the given asset (e.g. "100.00").
+   */
+  amount: string;
+
+  /**
+   * A payout method already linked to the account.
+   */
+  payout_method_id: string;
+
+  /**
+   * Currency to withdraw. Defaults to usd.
+   */
+  asset?: string;
+}
+
 export declare namespace Wallets {
   export {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletCreateWithdrawalResponse as WalletCreateWithdrawalResponse,
     type WalletSendResponse as WalletSendResponse,
     type WalletSendParams as WalletSendParams,
+    type WalletCreateWithdrawalParams as WalletCreateWithdrawalParams,
   };
 }
