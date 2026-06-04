@@ -9,18 +9,6 @@ const client = new Whop({
 
 describe('resource verifications', () => {
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.verifications.retrieve('verf_xxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
     const responsePromise = client.verifications.list({ payout_account_id: 'poact_xxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
