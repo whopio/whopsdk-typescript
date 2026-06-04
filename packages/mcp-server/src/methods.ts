@@ -930,6 +930,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets/{account_id}/sends',
   },
   {
+    clientCallName: 'client.wallets.signMessage',
+    fullyQualifiedName: 'wallets.signMessage',
+    httpMethod: 'post',
+    httpPath: '/wallets/{account_id}/sign-message',
+  },
+  {
+    clientCallName: 'client.wallets.signTransaction',
+    fullyQualifiedName: 'wallets.signTransaction',
+    httpMethod: 'post',
+    httpPath: '/wallets/{account_id}/sign-transaction',
+  },
+  {
     clientCallName: 'client.swaps.createQuote',
     fullyQualifiedName: 'swaps.createQuote',
     httpMethod: 'post',

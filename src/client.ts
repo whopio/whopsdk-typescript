@@ -507,6 +507,10 @@ import {
   WalletListResponse,
   WalletSendParams,
   WalletSendResponse,
+  WalletSignMessageParams,
+  WalletSignMessageResponse,
+  WalletSignTransactionParams,
+  WalletSignTransactionResponse,
   Wallets,
 } from './resources/wallets';
 import {
@@ -2073,7 +2077,11 @@ export declare namespace Whop {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletSignMessageResponse as WalletSignMessageResponse,
+    type WalletSignTransactionResponse as WalletSignTransactionResponse,
     type WalletSendParams as WalletSendParams,
+    type WalletSignMessageParams as WalletSignMessageParams,
+    type WalletSignTransactionParams as WalletSignTransactionParams,
   };
 
   export {
