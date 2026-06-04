@@ -30,7 +30,6 @@ describe('resource swaps', () => {
       amount: 'amount',
       from_token: 'from_token',
       to_token: 'to_token',
-      account_id: 'account_id',
       from_address: 'from_address',
       from_chain: 'string',
       metadata: { foo: 'bar' },
@@ -38,5 +37,47 @@ describe('resource swaps', () => {
       to_address: 'to_address',
       to_chain: 'string',
     });
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: only required params', async () => {
+    const responsePromise = client.swaps.create({
+      account_id: 'account_id',
+      amount: 'amount',
+      from_token: 'from_token',
+      to_token: 'to_token',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('create: required and optional params', async () => {
+    const response = await client.swaps.create({
+      account_id: 'account_id',
+      amount: 'amount',
+      from_token: 'from_token',
+      to_token: 'to_token',
+      from_chain: 'string',
+      slippage_bps: 0,
+      to_chain: 'string',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.swaps.retrieve('account_id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });
