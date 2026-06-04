@@ -918,6 +918,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets',
   },
   {
+    clientCallName: 'client.wallets.depositAddress',
+    fullyQualifiedName: 'wallets.depositAddress',
+    httpMethod: 'get',
+    httpPath: '/wallets/{account_id}/deposit-address',
+  },
+  {
     clientCallName: 'client.wallets.balance',
     fullyQualifiedName: 'wallets.balance',
     httpMethod: 'get',

@@ -14,6 +14,18 @@ export class Wallets extends APIResource {
   }
 
   /**
+   * Returns the account's wallet address for receiving crypto, plus the EVM networks
+   * that share that address.
+   */
+  depositAddress(
+    accountID: string,
+    query: WalletDepositAddressParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WalletDepositAddressResponse> {
+    return this._client.get(path`/wallets/${accountID}/deposit-address`, { query, ...options });
+  }
+
+  /**
    * Returns per-token balances held in an account's wallet.
    */
   balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
@@ -85,6 +97,32 @@ export namespace WalletBalanceResponse {
   }
 }
 
+export interface WalletDepositAddressResponse {
+  address: string;
+
+  object: 'deposit_address';
+
+  supported_networks: Array<WalletDepositAddressResponse.SupportedNetwork>;
+
+  /**
+   * Echo of the validated asset filter, present when the caller passed ?asset=.
+   */
+  asset?: string;
+
+  /**
+   * Echo of the validated network filter, present when the caller passed ?network=.
+   */
+  network?: string;
+}
+
+export namespace WalletDepositAddressResponse {
+  export interface SupportedNetwork {
+    chain_id: number;
+
+    name: string;
+  }
+}
+
 export interface WalletSendResponse {
   amount: string;
 
@@ -113,6 +151,20 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletDepositAddressParams {
+  /**
+   * Optional asset symbol the caller intends to deposit (e.g. USDT). Unsupported
+   * assets are rejected with a 400 rather than silently ignored.
+   */
+  asset?: string;
+
+  /**
+   * Optional network the caller intends to deposit on (e.g. plasma). Unsupported
+   * networks are rejected with a 400 rather than silently ignored.
+   */
+  network?: 'plasma' | 'base' | 'ethereum';
+}
+
 export interface WalletSendParams {
   /**
    * USDT amount to send.
@@ -130,7 +182,9 @@ export declare namespace Wallets {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletDepositAddressResponse as WalletDepositAddressResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletDepositAddressParams as WalletDepositAddressParams,
     type WalletSendParams as WalletSendParams,
   };
 }

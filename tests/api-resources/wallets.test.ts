@@ -21,6 +21,30 @@ describe('resource wallets', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('depositAddress', async () => {
+    const responsePromise = client.wallets.depositAddress('account_id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('depositAddress: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.wallets.depositAddress(
+        'account_id',
+        { asset: 'asset', network: 'plasma' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('balance', async () => {
     const responsePromise = client.wallets.balance('account_id');
     const rawResponse = await responsePromise.asResponse();
