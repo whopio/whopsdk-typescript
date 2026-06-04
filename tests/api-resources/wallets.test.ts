@@ -48,4 +48,29 @@ describe('resource wallets', () => {
   test.skip('send: required and optional params', async () => {
     const response = await client.wallets.send('account_id', { amount: 'amount', to: 'to' });
   });
+
+  // Mock server tests are disabled
+  test.skip('signMessage: only required params', async () => {
+    const responsePromise = client.wallets.signMessage('account_id', {
+      chain_id: 0,
+      message: {},
+      type: 'personal_sign',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('signMessage: required and optional params', async () => {
+    const response = await client.wallets.signMessage('account_id', {
+      chain_id: 0,
+      message: {},
+      type: 'personal_sign',
+    });
+  });
 });
