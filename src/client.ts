@@ -472,7 +472,14 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
-import { SwapCreateQuoteParams, SwapCreateQuoteResponse, Swaps } from './resources/swaps';
+import {
+  SwapCreateParams,
+  SwapCreateQuoteParams,
+  SwapCreateQuoteResponse,
+  SwapCreateResponse,
+  SwapRetrieveResponse,
+  Swaps,
+} from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -2104,8 +2111,11 @@ export declare namespace Whop {
 
   export {
     Swaps as Swaps,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
+    type SwapCreateParams as SwapCreateParams,
   };
 
   export {
