@@ -500,7 +500,11 @@ export {
   type WalletListResponse,
   type WalletBalanceResponse,
   type WalletSendResponse,
+  type WalletSignMessageResponse,
+  type WalletSignTransactionResponse,
   type WalletSendParams,
+  type WalletSignMessageParams,
+  type WalletSignTransactionParams,
 } from './wallets';
 export {
   Webhooks,
