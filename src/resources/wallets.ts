@@ -14,6 +14,14 @@ export class Wallets extends APIResource {
   }
 
   /**
+   * Returns the platform catalog of swap-enabled tokens (from TokenRegistry). Public
+   * — no API key required.
+   */
+  supportedAssets(options?: RequestOptions): APIPromise<WalletSupportedAssetsResponse> {
+    return this._client.get('/wallets/supported-assets', options);
+  }
+
+  /**
    * Returns per-token balances held in an account's wallet.
    */
   balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
@@ -113,6 +121,30 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletSupportedAssetsResponse {
+  assets: Array<WalletSupportedAssetsResponse.Asset>;
+
+  object: 'supported_assets';
+}
+
+export namespace WalletSupportedAssetsResponse {
+  export interface Asset {
+    chain_id: number;
+
+    decimals: number;
+
+    name: string;
+
+    network: string;
+
+    symbol: string;
+
+    token_address: string;
+
+    tradable: boolean;
+  }
+}
+
 export interface WalletSendParams {
   /**
    * USDT amount to send.
@@ -131,6 +163,7 @@ export declare namespace Wallets {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletSupportedAssetsResponse as WalletSupportedAssetsResponse,
     type WalletSendParams as WalletSendParams,
   };
 }

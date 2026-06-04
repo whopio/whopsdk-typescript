@@ -507,6 +507,7 @@ import {
   WalletListResponse,
   WalletSendParams,
   WalletSendResponse,
+  WalletSupportedAssetsResponse,
   Wallets,
 } from './resources/wallets';
 import {
@@ -2099,6 +2100,7 @@ export declare namespace Whop {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletSupportedAssetsResponse as WalletSupportedAssetsResponse,
     type WalletSendParams as WalletSendParams,
   };
 
