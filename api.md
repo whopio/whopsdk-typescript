@@ -663,10 +663,12 @@ Types:
 - <code><a href="./src/resources/wallets.ts">WalletListResponse</a></code>
 - <code><a href="./src/resources/wallets.ts">WalletBalanceResponse</a></code>
 - <code><a href="./src/resources/wallets.ts">WalletSendResponse</a></code>
+- <code><a href="./src/resources/wallets.ts">WalletSupportedAssetsResponse</a></code>
 
 Methods:
 
 - <code title="get /wallets">client.wallets.<a href="./src/resources/wallets.ts">list</a>() -> WalletListResponse</code>
+- <code title="get /wallets/supported-assets">client.wallets.<a href="./src/resources/wallets.ts">supportedAssets</a>() -> WalletSupportedAssetsResponse</code>
 - <code title="get /wallets/{account_id}/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>(accountID) -> WalletBalanceResponse</code>
 - <code title="post /wallets/{account_id}/sends">client.wallets.<a href="./src/resources/wallets.ts">send</a>(accountID, { ...params }) -> WalletSendResponse</code>
 
