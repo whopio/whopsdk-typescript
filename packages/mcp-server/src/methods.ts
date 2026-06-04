@@ -996,12 +996,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/payout_methods/{id}',
   },
   {
-    clientCallName: 'client.verifications.retrieve',
-    fullyQualifiedName: 'verifications.retrieve',
-    httpMethod: 'get',
-    httpPath: '/verifications/{id}',
-  },
-  {
     clientCallName: 'client.verifications.list',
     fullyQualifiedName: 'verifications.list',
     httpMethod: 'get',
