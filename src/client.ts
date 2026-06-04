@@ -497,7 +497,6 @@ import {
   VerificationListParams,
   VerificationListResponse,
   VerificationListResponsesCursorPage,
-  VerificationRetrieveResponse,
   VerificationStatus,
   Verifications,
 } from './resources/verifications';
@@ -2156,7 +2155,6 @@ export declare namespace Whop {
     Verifications as Verifications,
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
-    type VerificationRetrieveResponse as VerificationRetrieveResponse,
     type VerificationListResponse as VerificationListResponse,
     type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
     type VerificationListParams as VerificationListParams,
