@@ -2813,6 +2813,12 @@ export namespace Payment {
     id: string;
 
     /**
+     * The customer's responses to custom checkout questions configured on the product
+     * at the time of purchase.
+     */
+    custom_field_responses: Array<Membership.CustomFieldResponse>;
+
+    /**
      * The phone number associated with this membership.
      */
     phone_number: string | null;
@@ -2821,6 +2827,28 @@ export namespace Payment {
      * The state of the membership.
      */
     status: Shared.MembershipStatus;
+  }
+
+  export namespace Membership {
+    /**
+     * The response from a custom field on checkout
+     */
+    export interface CustomFieldResponse {
+      /**
+       * The unique identifier for the custom field response.
+       */
+      id: string;
+
+      /**
+       * The response a user gave to the specific question or field.
+       */
+      answer: string;
+
+      /**
+       * The question asked by the custom field
+       */
+      question: string;
+    }
   }
 
   /**
