@@ -14,6 +14,14 @@ export class Wallets extends APIResource {
   }
 
   /**
+   * Returns the account's wallet address for receiving crypto, plus the EVM networks
+   * that share that address.
+   */
+  depositAddress(accountID: string, options?: RequestOptions): APIPromise<WalletDepositAddressResponse> {
+    return this._client.get(path`/wallets/${accountID}/deposit-address`, options);
+  }
+
+  /**
    * Returns per-token balances held in an account's wallet.
    */
   balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
@@ -85,6 +93,22 @@ export namespace WalletBalanceResponse {
   }
 }
 
+export interface WalletDepositAddressResponse {
+  address: string;
+
+  object: 'deposit_address';
+
+  supported_networks: Array<WalletDepositAddressResponse.SupportedNetwork>;
+}
+
+export namespace WalletDepositAddressResponse {
+  export interface SupportedNetwork {
+    chain_id: number;
+
+    name: string;
+  }
+}
+
 export interface WalletSendResponse {
   amount: string;
 
@@ -130,6 +154,7 @@ export declare namespace Wallets {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletDepositAddressResponse as WalletDepositAddressResponse,
     type WalletSendResponse as WalletSendResponse,
     type WalletSendParams as WalletSendParams,
   };

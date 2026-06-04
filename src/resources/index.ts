@@ -499,6 +499,7 @@ export {
   type AccountWallet,
   type WalletListResponse,
   type WalletBalanceResponse,
+  type WalletDepositAddressResponse,
   type WalletSendResponse,
   type WalletSendParams,
 } from './wallets';

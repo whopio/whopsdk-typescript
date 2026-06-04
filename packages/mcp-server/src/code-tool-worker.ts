@@ -260,6 +260,7 @@ const fuse = new Fuse(
     'client.accounts.retrieve',
     'client.accounts.update',
     'client.wallets.balance',
+    'client.wallets.depositAddress',
     'client.wallets.list',
     'client.wallets.send',
     'client.swaps.createQuote',
