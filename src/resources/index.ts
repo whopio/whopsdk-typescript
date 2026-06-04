@@ -500,6 +500,7 @@ export {
   type WalletListResponse,
   type WalletBalanceResponse,
   type WalletSendResponse,
+  type WalletSupportedAssetsResponse,
   type WalletSendParams,
 } from './wallets';
 export {
