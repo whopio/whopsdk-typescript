@@ -489,7 +489,6 @@ export {
   Verifications,
   type VerificationErrorCode,
   type VerificationStatus,
-  type VerificationRetrieveResponse,
   type VerificationListResponse,
   type VerificationListParams,
   type VerificationListResponsesCursorPage,
