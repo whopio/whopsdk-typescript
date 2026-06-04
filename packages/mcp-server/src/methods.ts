@@ -288,6 +288,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ledger_accounts/{id}',
   },
   {
+    clientCallName: 'client.ledgerLines.list',
+    fullyQualifiedName: 'ledgerLines.list',
+    httpMethod: 'get',
+    httpPath: '/ledger_lines',
+  },
+  {
     clientCallName: 'client.memberships.list',
     fullyQualifiedName: 'memberships.list',
     httpMethod: 'get',
