@@ -286,6 +286,22 @@ export {
   type ForumListResponsesCursorPage,
 } from './forums';
 export {
+  IdentityProfiles,
+  type IdentityProfile,
+  type IdentityProfileKind,
+  type IdentityProfileStatus,
+  type IdentityProfileCreateResponse,
+  type IdentityProfileListResponse,
+  type IdentityProfileListVerificationsResponse,
+  type IdentityProfileListParams,
+  type IdentityProfileCreateParams,
+  type IdentityProfileAttachParams,
+  type IdentityProfileUnlinkParams,
+  type IdentityProfileListVerificationsParams,
+  type IdentityProfileListResponsesCursorPage,
+  type IdentityProfileListVerificationsResponsesCursorPage,
+} from './identity-profiles';
+export {
   Invoices,
   type TaxIdentifierType,
   type InvoiceDeleteResponse,

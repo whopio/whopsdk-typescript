@@ -757,6 +757,26 @@ Methods:
 - <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
 - <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
 
+# IdentityProfiles
+
+Types:
+
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfile</a></code>
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfileKind</a></code>
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfileStatus</a></code>
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfileCreateResponse</a></code>
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfileListResponse</a></code>
+- <code><a href="./src/resources/identity-profiles.ts">IdentityProfileListVerificationsResponse</a></code>
+
+Methods:
+
+- <code title="get /identity_profiles">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">list</a>({ ...params }) -> IdentityProfileListResponsesCursorPage</code>
+- <code title="get /identity_profiles/{id}">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">retrieve</a>(id) -> IdentityProfile</code>
+- <code title="post /identity_profiles">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">create</a>({ ...params }) -> IdentityProfileCreateResponse</code>
+- <code title="post /identity_profiles/{identity_profile_id}/attach">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">attach</a>(identityProfileID, { ...params }) -> IdentityProfile</code>
+- <code title="delete /identity_profiles/{id}">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">unlink</a>(id, { ...params }) -> IdentityProfile</code>
+- <code title="get /identity_profiles/{id}/verifications">client.identityProfiles.<a href="./src/resources/identity-profiles.ts">listVerifications</a>(id, { ...params }) -> IdentityProfileListVerificationsResponsesCursorPage</code>
+
 # Leads
 
 Types:
