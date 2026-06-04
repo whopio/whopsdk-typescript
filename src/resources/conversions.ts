@@ -48,7 +48,16 @@ export interface ConversionCreateParams {
   /**
    * The type of event.
    */
-  event_name: 'lead' | 'submit_application' | 'contact' | 'complete_registration' | 'schedule' | 'custom';
+  event_name:
+    | 'lead'
+    | 'submit_application'
+    | 'contact'
+    | 'complete_registration'
+    | 'schedule'
+    | 'custom'
+    | 'page'
+    | 'leave'
+    | 'identify';
 
   /**
    * The channel where an event originated
@@ -81,6 +90,11 @@ export interface ConversionCreateParams {
   custom_name?: string | null;
 
   /**
+   * For 'leave' events: milliseconds the visitor spent on the page.
+   */
+  duration?: number | null;
+
+  /**
    * Client-provided identifier for deduplication. Generated if omitted.
    */
   event_id?: string | null;
@@ -104,6 +118,22 @@ export interface ConversionCreateParams {
    * The referring URL.
    */
   referrer_url?: string | null;
+
+  /**
+   * For 'page' events: true when the page was restored from the back/forward cache.
+   */
+  resumed?: boolean | null;
+
+  /**
+   * For 'identify' events: where the identity was captured (url, form, manual,
+   * iframe).
+   */
+  source?: string | null;
+
+  /**
+   * For 'page' events: the document title.
+   */
+  title?: string | null;
 
   /**
    * The URL where the event occurred.
@@ -142,6 +172,11 @@ export namespace ConversionCreateParams {
     ad_set_id?: string | null;
 
     /**
+     * Facebook click cookie (\_fbc, format fb.1.{timestamp}.{fbclid}).
+     */
+    fbc?: string | null;
+
+    /**
      * Facebook click ID.
      */
     fbclid?: string | null;
@@ -150,6 +185,16 @@ export namespace ConversionCreateParams {
      * Facebook browser pixel ID.
      */
     fbp?: string | null;
+
+    /**
+     * Client-side device fingerprint.
+     */
+    fingerprint?: string | null;
+
+    /**
+     * Confidence score (0-1) for the device fingerprint.
+     */
+    fingerprint_confidence?: number | null;
 
     /**
      * Google Analytics client ID.
@@ -170,6 +215,21 @@ export namespace ConversionCreateParams {
      * IP address.
      */
     ip_address?: string | null;
+
+    /**
+     * Browser language (e.g. en-US).
+     */
+    language?: string | null;
+
+    /**
+     * Screen resolution (e.g. 1920x1080).
+     */
+    screen_resolution?: string | null;
+
+    /**
+     * IANA timezone (e.g. America/New_York).
+     */
+    timezone?: string | null;
 
     /**
      * TikTok click ID.
@@ -265,6 +325,17 @@ export namespace ConversionCreateParams {
      * Last name.
      */
     last_name?: string | null;
+
+    /**
+     * A second anonymous identifier to link to this user (e.g. captured across an
+     * iframe boundary).
+     */
+    linked_anonymous_id?: string | null;
+
+    /**
+     * A wuid from a linked frame, captured across an iframe boundary.
+     */
+    linked_wuid?: string | null;
 
     /**
      * The Whop member ID.
