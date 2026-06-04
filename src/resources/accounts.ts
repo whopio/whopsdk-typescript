@@ -69,6 +69,11 @@ export interface Account {
   business_type: string | null;
 
   /**
+   * The country the account is located in
+   */
+  country: string | null;
+
+  /**
    * When the account was created, as an ISO 8601 timestamp
    */
   created_at: string;
@@ -83,6 +88,8 @@ export interface Account {
    */
   email: string | null;
 
+  home_preferences: Array<string>;
+
   /**
    * The industry group the account belongs to
    */
@@ -92,6 +99,11 @@ export interface Account {
    * The specific industry vertical the account operates in
    */
   industry_type: string | null;
+
+  /**
+   * The prefix used for account invoices
+   */
+  invoice_prefix: string | null;
 
   /**
    * The URL of the account logo image
@@ -104,9 +116,40 @@ export interface Account {
   metadata: unknown;
 
   /**
+   * The type of onboarding the account has completed
+   */
+  onboarding_type: string | null;
+
+  /**
+   * The URL of the account Open Graph image
+   */
+  opengraph_image_url: string | null;
+
+  /**
+   * The account Open Graph image variant
+   */
+  opengraph_image_variant: string | null;
+
+  /**
+   * The description of the business type when business_type is other
+   */
+  other_business_description: string | null;
+
+  /**
+   * The description of the industry type when industry_type is other
+   */
+  other_industry_description: string | null;
+
+  /**
    * The parent account ID for connected accounts
    */
   parent_account_id: string | null;
+
+  /**
+   * Whether the account requires authorized users to have two-factor authentication
+   * enabled
+   */
+  require_2fa: boolean;
 
   /**
    * The account's public route identifier
@@ -118,7 +161,27 @@ export interface Account {
    */
   send_customer_emails: boolean;
 
+  /**
+   * Whether the account appears in joined whops on other accounts
+   */
+  show_joined_whops: boolean;
+
+  /**
+   * Whether reviews are displayed on direct-to-consumer product pages
+   */
+  show_reviews_dtc: boolean;
+
+  /**
+   * Whether the account shows users in the user directory
+   */
+  show_user_directory: boolean;
+
   social_links: Array<AccountSocialLink>;
+
+  /**
+   * Store page display configuration for the account
+   */
+  store_page_config: unknown;
 
   /**
    * The target audience for this account
@@ -129,6 +192,11 @@ export interface Account {
    * The display name of the account
    */
   title: string;
+
+  /**
+   * Whether the account uses its logo as the fallback Open Graph image
+   */
+  use_logo_as_opengraph_image_fallback: boolean;
 
   /**
    * The account's primary crypto wallet, or null if none has been provisioned
@@ -251,6 +319,11 @@ export interface AccountUpdateParams {
   business_type?: string | null;
 
   /**
+   * The country the account is located in.
+   */
+  country?: string | null;
+
+  /**
    * A promotional description for the account.
    */
   description?: string | null;
@@ -259,6 +332,11 @@ export interface AccountUpdateParams {
    * The ID of the product to feature for affiliates. Pass null to clear.
    */
   featured_affiliate_product_id?: string | null;
+
+  /**
+   * Preferences for the public business home page.
+   */
+  home_preferences?: Array<string>;
 
   /**
    * The industry group the account belongs to.
@@ -271,6 +349,11 @@ export interface AccountUpdateParams {
   industry_type?: string | null;
 
   /**
+   * The prefix to use for account invoices.
+   */
+  invoice_prefix?: string | null;
+
+  /**
    * Attachment input for the account logo.
    */
   logo?: { [key: string]: unknown } | null;
@@ -279,6 +362,37 @@ export interface AccountUpdateParams {
    * Arbitrary key/value metadata to store on the account.
    */
   metadata?: { [key: string]: unknown };
+
+  /**
+   * The type of onboarding the account has completed.
+   */
+  onboarding_type?: string | null;
+
+  /**
+   * Attachment input for the account Open Graph image.
+   */
+  opengraph_image?: { [key: string]: unknown } | null;
+
+  /**
+   * The account Open Graph image variant.
+   */
+  opengraph_image_variant?: string | null;
+
+  /**
+   * The description of the business type when business_type is other.
+   */
+  other_business_description?: string | null;
+
+  /**
+   * The description of the industry type when industry_type is other.
+   */
+  other_industry_description?: string | null;
+
+  /**
+   * Whether the account requires authorized users to have two-factor authentication
+   * enabled.
+   */
+  require_2fa?: boolean;
 
   /**
    * The unique URL slug for the account.
@@ -291,9 +405,29 @@ export interface AccountUpdateParams {
   send_customer_emails?: boolean;
 
   /**
+   * Whether the account appears in joined whops on other accounts.
+   */
+  show_joined_whops?: boolean;
+
+  /**
+   * Whether reviews are displayed on direct-to-consumer product pages.
+   */
+  show_reviews_dtc?: boolean;
+
+  /**
+   * Whether the account shows users in the user directory.
+   */
+  show_user_directory?: boolean;
+
+  /**
    * The full list of social links to display for the account.
    */
   social_links?: Array<{ [key: string]: unknown }>;
+
+  /**
+   * Store page display configuration for the account.
+   */
+  store_page_config?: { [key: string]: unknown } | null;
 
   /**
    * The target audience for this account.
@@ -304,6 +438,11 @@ export interface AccountUpdateParams {
    * The display name of the account.
    */
   title?: string | null;
+
+  /**
+   * Whether the account uses its logo as the fallback Open Graph image.
+   */
+  use_logo_as_opengraph_image_fallback?: boolean;
 }
 
 export declare namespace Accounts {
