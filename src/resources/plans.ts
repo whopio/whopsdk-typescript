@@ -279,8 +279,7 @@ export interface PlanListResponse {
 
   /**
    * The number of free trial days before the first charge on a renewal plan. Null if
-   * no trial is configured or the current user has already used a trial for this
-   * plan.
+   * no trial is configured or the current user previously paid for this plan.
    */
   trial_period_days: number | null;
 
