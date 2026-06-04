@@ -258,6 +258,16 @@ Methods:
 
 - <code title="get /ledger_accounts/{id}">client.ledgerAccounts.<a href="./src/resources/ledger-accounts.ts">retrieve</a>(id) -> LedgerAccountRetrieveResponse</code>
 
+# LedgerLines
+
+Types:
+
+- <code><a href="./src/resources/ledger-lines.ts">LedgerLine</a></code>
+
+Methods:
+
+- <code title="get /ledger_lines">client.ledgerLines.<a href="./src/resources/ledger-lines.ts">list</a>({ ...params }) -> LedgerLinesCursorPage</code>
+
 # Memberships
 
 Types:

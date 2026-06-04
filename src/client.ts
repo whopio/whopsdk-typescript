@@ -314,6 +314,12 @@ import {
 } from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import {
+  LedgerLine,
+  LedgerLineListParams,
+  LedgerLines,
+  LedgerLinesCursorPage,
+} from './resources/ledger-lines';
+import {
   MemberListParams,
   MemberListResponse,
   MemberListResponsesCursorPage,
@@ -1409,6 +1415,10 @@ export class Whop {
    */
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
   /**
+   * Ledger lines
+   */
+  ledgerLines: API.LedgerLines = new API.LedgerLines(this);
+  /**
    * Memberships
    */
   memberships: API.Memberships = new API.Memberships(this);
@@ -1617,6 +1627,7 @@ Whop.Entries = Entries;
 Whop.ForumPosts = ForumPosts;
 Whop.Transfers = Transfers;
 Whop.LedgerAccounts = LedgerAccounts;
+Whop.LedgerLines = LedgerLines;
 Whop.Memberships = Memberships;
 Whop.AuthorizedUsers = AuthorizedUsers;
 Whop.AppBuilds = AppBuilds;
@@ -1816,6 +1827,13 @@ export declare namespace Whop {
   export {
     LedgerAccounts as LedgerAccounts,
     type LedgerAccountRetrieveResponse as LedgerAccountRetrieveResponse,
+  };
+
+  export {
+    LedgerLines as LedgerLines,
+    type LedgerLine as LedgerLine,
+    type LedgerLinesCursorPage as LedgerLinesCursorPage,
+    type LedgerLineListParams as LedgerLineListParams,
   };
 
   export {

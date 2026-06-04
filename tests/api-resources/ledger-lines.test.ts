@@ -7,14 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource swaps', () => {
+describe('resource ledgerLines', () => {
   // Mock server tests are disabled
-  test.skip('createQuote: only required params', async () => {
-    const responsePromise = client.swaps.createQuote({
-      amount: 'amount',
-      from_token: 'from_token',
-      to_token: 'to_token',
-    });
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.ledgerLines.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,17 +21,16 @@ describe('resource swaps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('createQuote: required and optional params', async () => {
-    const response = await client.swaps.createQuote({
-      amount: 'amount',
-      from_token: 'from_token',
-      to_token: 'to_token',
-      from_address: 'from_address',
-      from_chain: 'string',
-      metadata: { foo: 'bar' },
-      slippage_bps: 0,
-      to_address: 'to_address',
-      to_chain: 'string',
+  test.skip('list: required and optional params', async () => {
+    const response = await client.ledgerLines.list({
+      account_id: 'account_id',
+      after: 'after',
+      before: 'before',
+      currency: 'currency',
+      first: 42,
+      line_category: 'line_category',
+      posted_after: '2023-12-01T05:00:00.401Z',
+      posted_before: '2023-12-01T05:00:00.401Z',
     });
   });
 });
