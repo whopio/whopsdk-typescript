@@ -307,6 +307,12 @@ export {
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export {
+  LedgerLines,
+  type LedgerLine,
+  type LedgerLineListParams,
+  type LedgerLinesCursorPage,
+} from './ledger-lines';
+export {
   Members,
   type MemberRetrieveResponse,
   type MemberListResponse,

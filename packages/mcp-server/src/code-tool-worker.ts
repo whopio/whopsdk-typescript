@@ -155,6 +155,7 @@ const fuse = new Fuse(
     'client.transfers.list',
     'client.transfers.retrieve',
     'client.ledgerAccounts.retrieve',
+    'client.ledgerLines.list',
     'client.memberships.addFreeDays',
     'client.memberships.cancel',
     'client.memberships.list',
