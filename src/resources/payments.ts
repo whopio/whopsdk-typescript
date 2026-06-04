@@ -974,7 +974,8 @@ export interface PaymentListFeesResponse {
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
     | 'revshare_percentage_fee'
-    | 'application_fee';
+    | 'application_fee'
+    | 'whop_tax_service_fee';
 }
 
 export interface PaymentListParams extends CursorPageParams {
