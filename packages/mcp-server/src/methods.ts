@@ -1008,6 +1008,42 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/verifications',
   },
   {
+    clientCallName: 'client.identityProfiles.list',
+    fullyQualifiedName: 'identityProfiles.list',
+    httpMethod: 'get',
+    httpPath: '/identity_profiles',
+  },
+  {
+    clientCallName: 'client.identityProfiles.retrieve',
+    fullyQualifiedName: 'identityProfiles.retrieve',
+    httpMethod: 'get',
+    httpPath: '/identity_profiles/{id}',
+  },
+  {
+    clientCallName: 'client.identityProfiles.create',
+    fullyQualifiedName: 'identityProfiles.create',
+    httpMethod: 'post',
+    httpPath: '/identity_profiles',
+  },
+  {
+    clientCallName: 'client.identityProfiles.attach',
+    fullyQualifiedName: 'identityProfiles.attach',
+    httpMethod: 'post',
+    httpPath: '/identity_profiles/{identity_profile_id}/attach',
+  },
+  {
+    clientCallName: 'client.identityProfiles.unlink',
+    fullyQualifiedName: 'identityProfiles.unlink',
+    httpMethod: 'delete',
+    httpPath: '/identity_profiles/{id}',
+  },
+  {
+    clientCallName: 'client.identityProfiles.listVerifications',
+    fullyQualifiedName: 'identityProfiles.listVerifications',
+    httpMethod: 'get',
+    httpPath: '/identity_profiles/{id}/verifications',
+  },
+  {
     clientCallName: 'client.leads.list',
     fullyQualifiedName: 'leads.list',
     httpMethod: 'get',

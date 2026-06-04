@@ -293,6 +293,22 @@ import {
   Forums,
 } from './resources/forums';
 import {
+  IdentityProfile,
+  IdentityProfileAttachParams,
+  IdentityProfileCreateParams,
+  IdentityProfileCreateResponse,
+  IdentityProfileKind,
+  IdentityProfileListParams,
+  IdentityProfileListResponse,
+  IdentityProfileListResponsesCursorPage,
+  IdentityProfileListVerificationsParams,
+  IdentityProfileListVerificationsResponse,
+  IdentityProfileListVerificationsResponsesCursorPage,
+  IdentityProfileStatus,
+  IdentityProfileUnlinkParams,
+  IdentityProfiles,
+} from './resources/identity-profiles';
+import {
   InvoiceCreateParams,
   InvoiceDeleteResponse,
   InvoiceListParams,
@@ -1511,6 +1527,10 @@ export class Whop {
    */
   verifications: API.Verifications = new API.Verifications(this);
   /**
+   * Identity profiles
+   */
+  identityProfiles: API.IdentityProfiles = new API.IdentityProfiles(this);
+  /**
    * Leads
    */
   leads: API.Leads = new API.Leads(this);
@@ -1626,6 +1646,7 @@ Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
 Whop.PayoutMethods = PayoutMethods;
 Whop.Verifications = Verifications;
+Whop.IdentityProfiles = IdentityProfiles;
 Whop.Leads = Leads;
 Whop.Topups = Topups;
 Whop.Files = Files;
@@ -2134,6 +2155,23 @@ export declare namespace Whop {
     type VerificationListResponse as VerificationListResponse,
     type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
     type VerificationListParams as VerificationListParams,
+  };
+
+  export {
+    IdentityProfiles as IdentityProfiles,
+    type IdentityProfile as IdentityProfile,
+    type IdentityProfileKind as IdentityProfileKind,
+    type IdentityProfileStatus as IdentityProfileStatus,
+    type IdentityProfileCreateResponse as IdentityProfileCreateResponse,
+    type IdentityProfileListResponse as IdentityProfileListResponse,
+    type IdentityProfileListVerificationsResponse as IdentityProfileListVerificationsResponse,
+    type IdentityProfileListResponsesCursorPage as IdentityProfileListResponsesCursorPage,
+    type IdentityProfileListVerificationsResponsesCursorPage as IdentityProfileListVerificationsResponsesCursorPage,
+    type IdentityProfileListParams as IdentityProfileListParams,
+    type IdentityProfileCreateParams as IdentityProfileCreateParams,
+    type IdentityProfileAttachParams as IdentityProfileAttachParams,
+    type IdentityProfileUnlinkParams as IdentityProfileUnlinkParams,
+    type IdentityProfileListVerificationsParams as IdentityProfileListVerificationsParams,
   };
 
   export {
