@@ -672,6 +672,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/promo_codes/{id}',
   },
   {
+    clientCallName: 'client.promoCodes.update',
+    fullyQualifiedName: 'promoCodes.update',
+    httpMethod: 'patch',
+    httpPath: '/promo_codes/{id}',
+  },
+  {
     clientCallName: 'client.promoCodes.delete',
     fullyQualifiedName: 'promoCodes.delete',
     httpMethod: 'delete',

@@ -475,6 +475,7 @@ Methods:
 - <code title="get /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">list</a>({ ...params }) -> PromoCodeListResponsesCursorPage</code>
 - <code title="post /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">create</a>({ ...params }) -> PromoCode</code>
 - <code title="get /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">retrieve</a>(id) -> PromoCode</code>
+- <code title="patch /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">update</a>(id, { ...params }) -> PromoCode</code>
 - <code title="delete /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">delete</a>(id) -> PromoCodeDeleteResponse</code>
 
 # Courses

@@ -401,6 +401,7 @@ export {
   type PromoCodeDeleteResponse,
   type PromoCodeListParams,
   type PromoCodeCreateParams,
+  type PromoCodeUpdateParams,
   type PromoCodeListResponsesCursorPage,
 } from './promo-codes';
 export {

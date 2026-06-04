@@ -220,6 +220,7 @@ const fuse = new Fuse(
     'client.promoCodes.delete',
     'client.promoCodes.list',
     'client.promoCodes.retrieve',
+    'client.promoCodes.update',
     'client.courses.create',
     'client.courses.delete',
     'client.courses.list',

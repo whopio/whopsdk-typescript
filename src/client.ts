@@ -407,6 +407,7 @@ import {
   PromoCodeListResponse,
   PromoCodeListResponsesCursorPage,
   PromoCodeStatus,
+  PromoCodeUpdateParams,
   PromoCodes,
   PromoDuration,
 } from './resources/promo-codes';
@@ -1969,6 +1970,7 @@ export declare namespace Whop {
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
     type PromoCodeListParams as PromoCodeListParams,
     type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeUpdateParams as PromoCodeUpdateParams,
   };
 
   export {
