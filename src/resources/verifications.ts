@@ -1,26 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
 
 /**
  * Verifications
  */
 export class Verifications extends APIResource {
-  /**
-   * Retrieves the details of an existing verification.
-   *
-   * Required permissions:
-   *
-   * - `payout:account:read`
-   */
-  retrieve(id: string, options?: RequestOptions): APIPromise<VerificationRetrieveResponse> {
-    return this._client.get(path`/verifications/${id}`, options);
-  }
-
   /**
    * Returns a list of identity verifications for a payout account, ordered by most
    * recent first.
@@ -89,33 +76,6 @@ export type VerificationStatus =
  * An identity verification session used to confirm a person or entity's identity
  * for payout account eligibility.
  */
-export interface VerificationRetrieveResponse {
-  /**
-   * The numeric id of the verification record.
-   */
-  id: string;
-
-  /**
-   * An error code for a verification attempt.
-   */
-  last_error_code: VerificationErrorCode | null;
-
-  /**
-   * A human-readable explanation of the most recent verification error. Null if no
-   * error has occurred.
-   */
-  last_error_reason: string | null;
-
-  /**
-   * The current status of this verification session.
-   */
-  status: VerificationStatus;
-}
-
-/**
- * An identity verification session used to confirm a person or entity's identity
- * for payout account eligibility.
- */
 export interface VerificationListResponse {
   /**
    * The numeric id of the verification record.
@@ -165,7 +125,6 @@ export declare namespace Verifications {
   export {
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
-    type VerificationRetrieveResponse as VerificationRetrieveResponse,
     type VerificationListResponse as VerificationListResponse,
     type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
     type VerificationListParams as VerificationListParams,

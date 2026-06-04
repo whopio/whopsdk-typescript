@@ -749,12 +749,10 @@ Types:
 
 - <code><a href="./src/resources/verifications.ts">VerificationErrorCode</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationStatus</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationRetrieveResponse</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationListResponse</a></code>
 
 Methods:
 
-- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
 - <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
 
 # Leads

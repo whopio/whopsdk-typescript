@@ -30,7 +30,6 @@ describe('resource swaps', () => {
       amount: 'amount',
       from_token: 'from_token',
       to_token: 'to_token',
-      account_id: 'account_id',
       from_address: 'from_address',
       from_chain: 'string',
       metadata: { foo: 'bar' },
