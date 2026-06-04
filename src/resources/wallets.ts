@@ -26,6 +26,18 @@ export class Wallets extends APIResource {
   send(accountID: string, body: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
     return this._client.post(path`/wallets/${accountID}/sends`, { body, ...options });
   }
+
+  /**
+   * Produces a personal_sign or EIP-712 signature from the account's wallet. Nothing
+   * is broadcast on-chain.
+   */
+  signMessage(
+    params: WalletSignMessageParams,
+    options?: RequestOptions,
+  ): APIPromise<WalletSignMessageResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post('/wallets/sign-message', { query: { account_id }, body, ...options });
+  }
 }
 
 export interface AccountWallet {
@@ -113,6 +125,18 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletSignMessageResponse {
+  address: string;
+
+  chain_id: number;
+
+  object: 'signature';
+
+  signature: string;
+
+  type: string;
+}
+
 export interface WalletSendParams {
   /**
    * USDT amount to send.
@@ -125,12 +149,38 @@ export interface WalletSendParams {
   to: string;
 }
 
+export interface WalletSignMessageParams {
+  /**
+   * Query param: The business or user account ID whose wallet signs.
+   */
+  account_id: string;
+
+  /**
+   * Body param: EIP-155 chain ID the signature is intended for (e.g. 9745 for
+   * Plasma).
+   */
+  chain_id: number;
+
+  /**
+   * Body param: A UTF-8 string for personal_sign, or an EIP-712 object (domain,
+   * types, primaryType, message) for typed_data.
+   */
+  message: unknown;
+
+  /**
+   * Body param: Signature scheme.
+   */
+  type: 'personal_sign' | 'typed_data';
+}
+
 export declare namespace Wallets {
   export {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletSignMessageResponse as WalletSignMessageResponse,
     type WalletSendParams as WalletSendParams,
+    type WalletSignMessageParams as WalletSignMessageParams,
   };
 }
