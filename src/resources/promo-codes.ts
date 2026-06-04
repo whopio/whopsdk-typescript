@@ -83,6 +83,26 @@ export class PromoCodes extends APIResource {
   }
 
   /**
+   * Update whether a promo code can be used at checkout.
+   *
+   * Required permissions:
+   *
+   * - `promo_code:update`
+   * - `access_pass:basic:read`
+   *
+   * @example
+   * ```ts
+   * const promoCode = await client.promoCodes.update(
+   *   'promo_xxxxxxxxxxxx',
+   *   { status: 'active' },
+   * );
+   * ```
+   */
+  update(id: string, body: PromoCodeUpdateParams, options?: RequestOptions): APIPromise<PromoCode> {
+    return this._client.patch(path`/promo_codes/${id}`, { body, ...options });
+  }
+
+  /**
    * Archive a promo code, preventing it from being used in future checkouts.
    * Existing memberships are not affected.
    *
@@ -509,6 +529,13 @@ export interface PromoCodeCreateParams {
   unlimited_stock?: boolean | null;
 }
 
+export interface PromoCodeUpdateParams {
+  /**
+   * The status to apply to the promo code.
+   */
+  status: 'active' | 'inactive';
+}
+
 export declare namespace PromoCodes {
   export {
     type PromoCode as PromoCode,
@@ -519,5 +546,6 @@ export declare namespace PromoCodes {
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
     type PromoCodeListParams as PromoCodeListParams,
     type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeUpdateParams as PromoCodeUpdateParams,
   };
 }
