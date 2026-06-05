@@ -6266,6 +6266,84 @@ const EMBEDDED_METHODS: MethodEntry[] = [
   },
   {
     name: 'create',
+    endpoint: '/swaps',
+    httpMethod: 'post',
+    summary: 'Create Swap',
+    description:
+      "Executes a swap from the account's wallet. Runs asynchronously — poll GET /swaps/{account_id} for status.",
+    stainlessPath: '(resource) swaps > (method) create',
+    qualified: 'client.swaps.create',
+    params: [
+      'account_id: string;',
+      'amount: string;',
+      'from_token: string;',
+      'to_token: string;',
+      'from_chain?: string | number;',
+      'slippage_bps?: number;',
+      'to_chain?: string | number;',
+    ],
+    response:
+      "{ account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }",
+    markdown:
+      "## create\n\n`client.swaps.create(account_id: string, amount: string, from_token: string, to_token: string, from_chain?: string | number, slippage_bps?: number, to_chain?: string | number): { account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }`\n\n**post** `/swaps`\n\nExecutes a swap from the account's wallet. Runs asynchronously — poll GET /swaps/{account_id} for status.\n\n### Parameters\n\n- `account_id: string`\n  Business or user account ID (biz_* / user_*).\n\n- `amount: string`\n  Input token amount.\n\n- `from_token: string`\n  Source token contract address.\n\n- `to_token: string`\n  Destination token contract address.\n\n- `from_chain?: string | number`\n\n- `slippage_bps?: number`\n\n- `to_chain?: string | number`\n\n### Returns\n\n- `{ account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }`\n\n  - `account_id: string`\n  - `object: 'swap'`\n  - `status: string`\n  - `amount_out_expected?: string`\n  - `amount_out_min?: string`\n  - `rate?: string`\n  - `to_chain?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap);\n```",
+    perLanguage: {
+      python: {
+        method: 'swaps.create',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nswap = client.swaps.create(\n    account_id="account_id",\n    amount="amount",\n    from_token="from_token",\n    to_token="to_token",\n)\nprint(swap.account_id)',
+      },
+      ruby: {
+        method: 'swaps.create',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nswap = whop.swaps.create(\n  account_id: "account_id",\n  amount: "amount",\n  from_token: "from_token",\n  to_token: "to_token"\n)\n\nputs(swap)',
+      },
+      typescript: {
+        method: 'client.swaps.create',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap.account_id);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/swaps \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "amount": "amount",\n          "from_token": "from_token",\n          "to_token": "to_token"\n        }\'',
+      },
+    },
+  },
+  {
+    name: 'retrieve',
+    endpoint: '/swaps/{account_id}',
+    httpMethod: 'get',
+    summary: 'Retrieve Swap',
+    description: "Returns the status of the account's in-flight or most recent swap.",
+    stainlessPath: '(resource) swaps > (method) retrieve',
+    qualified: 'client.swaps.retrieve',
+    params: ['account_id: string;'],
+    response: "{ account_id: string; object: 'swap'; status: string; tx_hashes: string[]; error?: string; }",
+    markdown:
+      "## retrieve\n\n`client.swaps.retrieve(account_id: string): { account_id: string; object: 'swap'; status: string; tx_hashes: string[]; error?: string; }`\n\n**get** `/swaps/{account_id}`\n\nReturns the status of the account's in-flight or most recent swap.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ account_id: string; object: 'swap'; status: string; tx_hashes: string[]; error?: string; }`\n\n  - `account_id: string`\n  - `object: 'swap'`\n  - `status: string`\n  - `tx_hashes: string[]`\n  - `error?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst swap = await client.swaps.retrieve('account_id');\n\nconsole.log(swap);\n```",
+    perLanguage: {
+      python: {
+        method: 'swaps.retrieve',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nswap = client.swaps.retrieve(\n    "account_id",\n)\nprint(swap.account_id)',
+      },
+      ruby: {
+        method: 'swaps.retrieve',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nswap = whop.swaps.retrieve("account_id")\n\nputs(swap)',
+      },
+      typescript: {
+        method: 'client.swaps.retrieve',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst swap = await client.swaps.retrieve('account_id');\n\nconsole.log(swap.account_id);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/swaps/$ACCOUNT_ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
+    name: 'create',
     endpoint: '/deposits',
     httpMethod: 'post',
     summary: 'Create Deposit',

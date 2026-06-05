@@ -674,11 +674,15 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/swaps.ts">SwapCreateResponse</a></code>
+- <code><a href="./src/resources/swaps.ts">SwapRetrieveResponse</a></code>
 - <code><a href="./src/resources/swaps.ts">SwapCreateQuoteResponse</a></code>
 
 Methods:
 
 - <code title="post /swaps/quote">client.swaps.<a href="./src/resources/swaps.ts">createQuote</a>({ ...params }) -> SwapCreateQuoteResponse</code>
+- <code title="post /swaps">client.swaps.<a href="./src/resources/swaps.ts">create</a>({ ...params }) -> SwapCreateResponse</code>
+- <code title="get /swaps/{account_id}">client.swaps.<a href="./src/resources/swaps.ts">retrieve</a>(accountID) -> SwapRetrieveResponse</code>
 
 # Deposits
 
