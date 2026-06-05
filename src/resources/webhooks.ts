@@ -224,6 +224,7 @@ export type WebhookEvent =
   | 'identity_profile.rejected'
   | 'identity_profile.needs_action'
   | 'identity_profile.updated'
+  | 'verification.rfi_created'
   | 'payout_account.status_updated'
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
@@ -4084,6 +4085,68 @@ export interface SetupIntentSucceededWebhookEvent {
   company_id?: string | null;
 }
 
+export interface VerificationRfiCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
+   */
+  data: VerificationRfiCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'verification.rfi_created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace VerificationRfiCreatedWebhookEvent {
+  /**
+   * An identity verification session used to confirm a person or entity's identity
+   * for payout account eligibility.
+   */
+  export interface Data {
+    /**
+     * The numeric id of the verification record.
+     */
+    id: string;
+
+    /**
+     * An error code for a verification attempt.
+     */
+    last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+    /**
+     * A human-readable explanation of the most recent verification error. Null if no
+     * error has occurred.
+     */
+    last_error_reason: string | null;
+
+    /**
+     * The current status of this verification session.
+     */
+    status: VerificationsAPI.VerificationStatus;
+  }
+}
+
 export interface VerificationSucceededWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -4247,6 +4310,7 @@ export type UnwrapWebhookEvent =
   | SetupIntentCanceledWebhookEvent
   | SetupIntentRequiresActionWebhookEvent
   | SetupIntentSucceededWebhookEvent
+  | VerificationRfiCreatedWebhookEvent
   | VerificationSucceededWebhookEvent
   | WithdrawalCreatedWebhookEvent
   | WithdrawalUpdatedWebhookEvent;
@@ -4376,6 +4440,7 @@ export declare namespace Webhooks {
     type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
     type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
     type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type VerificationRfiCreatedWebhookEvent as VerificationRfiCreatedWebhookEvent,
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
