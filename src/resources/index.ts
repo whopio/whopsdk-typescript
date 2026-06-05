@@ -30,6 +30,7 @@ export {
   type AdCampaignStatus,
   type AdCampaignListResponse,
   type AdCampaignListParams,
+  type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
   type AdCampaignListResponsesCursorPage,
 } from './ad-campaigns';
@@ -41,6 +42,7 @@ export {
   type AdGroupListResponse,
   type AdGroupDeleteResponse,
   type AdGroupListParams,
+  type AdGroupRetrieveParams,
   type AdGroupUpdateParams,
   type AdGroupListResponsesCursorPage,
 } from './ad-groups';
@@ -57,6 +59,7 @@ export {
   type ExternalAdStatus,
   type AdListResponse,
   type AdListParams,
+  type AdRetrieveParams,
   type AdListResponsesCursorPage,
 } from './ads';
 export {
@@ -307,6 +310,12 @@ export {
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export {
+  LedgerLines,
+  type LedgerLine,
+  type LedgerLineListParams,
+  type LedgerLinesCursorPage,
+} from './ledger-lines';
+export {
   Members,
   type MemberRetrieveResponse,
   type MemberListResponse,
@@ -465,7 +474,14 @@ export {
   type SupportChannelCreateParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
-export { Swaps, type SwapCreateQuoteResponse, type SwapCreateQuoteParams } from './swaps';
+export {
+  Swaps,
+  type SwapCreateResponse,
+  type SwapRetrieveResponse,
+  type SwapCreateQuoteResponse,
+  type SwapCreateQuoteParams,
+  type SwapCreateParams,
+} from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,

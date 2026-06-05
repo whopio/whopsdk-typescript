@@ -288,6 +288,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ledger_accounts/{id}',
   },
   {
+    clientCallName: 'client.ledgerLines.list',
+    fullyQualifiedName: 'ledgerLines.list',
+    httpMethod: 'get',
+    httpPath: '/ledger_lines',
+  },
+  {
     clientCallName: 'client.memberships.list',
     fullyQualifiedName: 'memberships.list',
     httpMethod: 'get',
@@ -934,6 +940,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'swaps.createQuote',
     httpMethod: 'post',
     httpPath: '/swaps/quote',
+  },
+  {
+    clientCallName: 'client.swaps.create',
+    fullyQualifiedName: 'swaps.create',
+    httpMethod: 'post',
+    httpPath: '/swaps',
+  },
+  {
+    clientCallName: 'client.swaps.retrieve',
+    fullyQualifiedName: 'swaps.retrieve',
+    httpMethod: 'get',
+    httpPath: '/swaps/{account_id}',
   },
   {
     clientCallName: 'client.deposits.create',
