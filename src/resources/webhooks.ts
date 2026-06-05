@@ -10,7 +10,6 @@ import * as RefundsAPI from './refunds';
 import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
-import * as VerificationsAPI from './verifications';
 import * as WithdrawalsAPI from './withdrawals';
 import { Webhook as Webhook_ } from 'standardwebhooks';
 import { APIPromise } from '../core/api-promise';
@@ -1081,7 +1080,27 @@ export namespace IdentityProfileApprovedWebhookEvent {
       /**
        * An error code for a verification attempt.
        */
-      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+      last_error_code:
+        | 'abandoned'
+        | 'consent_declined'
+        | 'country_not_supported'
+        | 'device_not_supported'
+        | 'document_expired'
+        | 'document_type_not_supported'
+        | 'document_unverified_other'
+        | 'email_unverified_other'
+        | 'email_verification_declined'
+        | 'id_number_insufficient_document_data'
+        | 'id_number_mismatch'
+        | 'id_number_unverified_other'
+        | 'phone_unverified_other'
+        | 'phone_verification_declined'
+        | 'selfie_document_missing_photo'
+        | 'selfie_face_mismatch'
+        | 'selfie_manipulated'
+        | 'selfie_unverified_other'
+        | 'under_supported_age'
+        | null;
 
       /**
        * A human-readable explanation of the most recent verification error. Null if no
@@ -1098,7 +1117,21 @@ export namespace IdentityProfileApprovedWebhookEvent {
       /**
        * The current status of this verification session.
        */
-      status: VerificationsAPI.VerificationStatus;
+      status:
+        | 'requires_input'
+        | 'processing'
+        | 'verified'
+        | 'canceled'
+        | 'created'
+        | 'started'
+        | 'submitted'
+        | 'approved'
+        | 'declined'
+        | 'resubmission_requested'
+        | 'expired'
+        | 'abandoned'
+        | 'review'
+        | 'action_required';
     }
   }
 }
@@ -1347,7 +1380,27 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
       /**
        * An error code for a verification attempt.
        */
-      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+      last_error_code:
+        | 'abandoned'
+        | 'consent_declined'
+        | 'country_not_supported'
+        | 'device_not_supported'
+        | 'document_expired'
+        | 'document_type_not_supported'
+        | 'document_unverified_other'
+        | 'email_unverified_other'
+        | 'email_verification_declined'
+        | 'id_number_insufficient_document_data'
+        | 'id_number_mismatch'
+        | 'id_number_unverified_other'
+        | 'phone_unverified_other'
+        | 'phone_verification_declined'
+        | 'selfie_document_missing_photo'
+        | 'selfie_face_mismatch'
+        | 'selfie_manipulated'
+        | 'selfie_unverified_other'
+        | 'under_supported_age'
+        | null;
 
       /**
        * A human-readable explanation of the most recent verification error. Null if no
@@ -1364,7 +1417,21 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
       /**
        * The current status of this verification session.
        */
-      status: VerificationsAPI.VerificationStatus;
+      status:
+        | 'requires_input'
+        | 'processing'
+        | 'verified'
+        | 'canceled'
+        | 'created'
+        | 'started'
+        | 'submitted'
+        | 'approved'
+        | 'declined'
+        | 'resubmission_requested'
+        | 'expired'
+        | 'abandoned'
+        | 'review'
+        | 'action_required';
     }
   }
 }
@@ -1613,7 +1680,27 @@ export namespace IdentityProfileRejectedWebhookEvent {
       /**
        * An error code for a verification attempt.
        */
-      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+      last_error_code:
+        | 'abandoned'
+        | 'consent_declined'
+        | 'country_not_supported'
+        | 'device_not_supported'
+        | 'document_expired'
+        | 'document_type_not_supported'
+        | 'document_unverified_other'
+        | 'email_unverified_other'
+        | 'email_verification_declined'
+        | 'id_number_insufficient_document_data'
+        | 'id_number_mismatch'
+        | 'id_number_unverified_other'
+        | 'phone_unverified_other'
+        | 'phone_verification_declined'
+        | 'selfie_document_missing_photo'
+        | 'selfie_face_mismatch'
+        | 'selfie_manipulated'
+        | 'selfie_unverified_other'
+        | 'under_supported_age'
+        | null;
 
       /**
        * A human-readable explanation of the most recent verification error. Null if no
@@ -1630,7 +1717,21 @@ export namespace IdentityProfileRejectedWebhookEvent {
       /**
        * The current status of this verification session.
        */
-      status: VerificationsAPI.VerificationStatus;
+      status:
+        | 'requires_input'
+        | 'processing'
+        | 'verified'
+        | 'canceled'
+        | 'created'
+        | 'started'
+        | 'submitted'
+        | 'approved'
+        | 'declined'
+        | 'resubmission_requested'
+        | 'expired'
+        | 'abandoned'
+        | 'review'
+        | 'action_required';
     }
   }
 }
@@ -1879,7 +1980,27 @@ export namespace IdentityProfileUpdatedWebhookEvent {
       /**
        * An error code for a verification attempt.
        */
-      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+      last_error_code:
+        | 'abandoned'
+        | 'consent_declined'
+        | 'country_not_supported'
+        | 'device_not_supported'
+        | 'document_expired'
+        | 'document_type_not_supported'
+        | 'document_unverified_other'
+        | 'email_unverified_other'
+        | 'email_verification_declined'
+        | 'id_number_insufficient_document_data'
+        | 'id_number_mismatch'
+        | 'id_number_unverified_other'
+        | 'phone_unverified_other'
+        | 'phone_verification_declined'
+        | 'selfie_document_missing_photo'
+        | 'selfie_face_mismatch'
+        | 'selfie_manipulated'
+        | 'selfie_unverified_other'
+        | 'under_supported_age'
+        | null;
 
       /**
        * A human-readable explanation of the most recent verification error. Null if no
@@ -1896,7 +2017,21 @@ export namespace IdentityProfileUpdatedWebhookEvent {
       /**
        * The current status of this verification session.
        */
-      status: VerificationsAPI.VerificationStatus;
+      status:
+        | 'requires_input'
+        | 'processing'
+        | 'verified'
+        | 'canceled'
+        | 'created'
+        | 'started'
+        | 'submitted'
+        | 'approved'
+        | 'declined'
+        | 'resubmission_requested'
+        | 'expired'
+        | 'abandoned'
+        | 'review'
+        | 'action_required';
     }
   }
 }
@@ -2455,7 +2590,27 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
       /**
        * An error code for a verification attempt.
        */
-      last_error_code: VerificationsAPI.VerificationErrorCode | null;
+      last_error_code:
+        | 'abandoned'
+        | 'consent_declined'
+        | 'country_not_supported'
+        | 'device_not_supported'
+        | 'document_expired'
+        | 'document_type_not_supported'
+        | 'document_unverified_other'
+        | 'email_unverified_other'
+        | 'email_verification_declined'
+        | 'id_number_insufficient_document_data'
+        | 'id_number_mismatch'
+        | 'id_number_unverified_other'
+        | 'phone_unverified_other'
+        | 'phone_verification_declined'
+        | 'selfie_document_missing_photo'
+        | 'selfie_face_mismatch'
+        | 'selfie_manipulated'
+        | 'selfie_unverified_other'
+        | 'under_supported_age'
+        | null;
 
       /**
        * A human-readable explanation of the most recent verification error. Null if no
@@ -2466,7 +2621,21 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
       /**
        * The current status of this verification session.
        */
-      status: VerificationsAPI.VerificationStatus;
+      status:
+        | 'requires_input'
+        | 'processing'
+        | 'verified'
+        | 'canceled'
+        | 'created'
+        | 'started'
+        | 'submitted'
+        | 'approved'
+        | 'declined'
+        | 'resubmission_requested'
+        | 'expired'
+        | 'abandoned'
+        | 'review'
+        | 'action_required';
     }
   }
 }
@@ -4131,7 +4300,27 @@ export namespace VerificationSucceededWebhookEvent {
     /**
      * An error code for a verification attempt.
      */
-    last_error_code: VerificationsAPI.VerificationErrorCode | null;
+    last_error_code:
+      | 'abandoned'
+      | 'consent_declined'
+      | 'country_not_supported'
+      | 'device_not_supported'
+      | 'document_expired'
+      | 'document_type_not_supported'
+      | 'document_unverified_other'
+      | 'email_unverified_other'
+      | 'email_verification_declined'
+      | 'id_number_insufficient_document_data'
+      | 'id_number_mismatch'
+      | 'id_number_unverified_other'
+      | 'phone_unverified_other'
+      | 'phone_verification_declined'
+      | 'selfie_document_missing_photo'
+      | 'selfie_face_mismatch'
+      | 'selfie_manipulated'
+      | 'selfie_unverified_other'
+      | 'under_supported_age'
+      | null;
 
     /**
      * A human-readable explanation of the most recent verification error. Null if no
@@ -4142,7 +4331,21 @@ export namespace VerificationSucceededWebhookEvent {
     /**
      * The current status of this verification session.
      */
-    status: VerificationsAPI.VerificationStatus;
+    status:
+      | 'requires_input'
+      | 'processing'
+      | 'verified'
+      | 'canceled'
+      | 'created'
+      | 'started'
+      | 'submitted'
+      | 'approved'
+      | 'declined'
+      | 'resubmission_requested'
+      | 'expired'
+      | 'abandoned'
+      | 'review'
+      | 'action_required';
   }
 }
 

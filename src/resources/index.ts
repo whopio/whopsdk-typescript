@@ -487,12 +487,14 @@ export {
 } from './users';
 export {
   Verifications,
-  type VerificationErrorCode,
-  type VerificationStatus,
+  type VerificationCreateResponse,
   type VerificationRetrieveResponse,
+  type VerificationUpdateResponse,
   type VerificationListResponse,
+  type VerificationDeleteResponse,
   type VerificationListParams,
-  type VerificationListResponsesCursorPage,
+  type VerificationCreateParams,
+  type VerificationUpdateParams,
 } from './verifications';
 export {
   Wallets,
