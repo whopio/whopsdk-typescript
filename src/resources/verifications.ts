@@ -2,7 +2,6 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -11,36 +10,49 @@ import { path } from '../internal/utils/path';
  */
 export class Verifications extends APIResource {
   /**
-   * Retrieves the details of an existing verification.
-   *
-   * Required permissions:
-   *
-   * - `payout:account:read`
+   * Retrieves a single identity verification profile by ID, including verification
+   * sessions and outstanding RFIs.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<VerificationRetrieveResponse> {
-    return this._client.get(path`/verifications/${id}`, options);
+  retrieve(verificationID: string, options?: RequestOptions): APIPromise<VerificationRetrieveResponse> {
+    return this._client.get(path`/verifications/${verificationID}`, options);
   }
 
   /**
-   * Returns a list of identity verifications for a payout account, ordered by most
-   * recent first.
-   *
-   * Required permissions:
-   *
-   * - `payout:account:read`
+   * Lists identity verification profiles visible to the credential.
    */
   list(
-    query: VerificationListParams,
+    query: VerificationListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<VerificationListResponsesCursorPage, VerificationListResponse> {
-    return this._client.getAPIList('/verifications', CursorPage<VerificationListResponse>, {
-      query,
-      ...options,
-    });
+  ): APIPromise<VerificationListResponse> {
+    return this._client.get('/verifications', { query, ...options });
+  }
+
+  /**
+   * Creates or resumes a verification session for an account.
+   */
+  create(body: VerificationCreateParams, options?: RequestOptions): APIPromise<VerificationCreateResponse> {
+    return this._client.post('/verifications', { body, ...options });
+  }
+
+  /**
+   * Updates fields on an identity verification profile, or responds to outstanding
+   * RFIs.
+   */
+  update(
+    verificationID: string,
+    body: VerificationUpdateParams,
+    options?: RequestOptions,
+  ): APIPromise<VerificationUpdateResponse> {
+    return this._client.patch(path`/verifications/${verificationID}`, { body, ...options });
+  }
+
+  /**
+   * Soft-deletes an identity verification profile and unlinks it from all accounts.
+   */
+  delete(verificationID: string, options?: RequestOptions): APIPromise<VerificationDeleteResponse> {
+    return this._client.delete(path`/verifications/${verificationID}`, options);
   }
 }
-
-export type VerificationListResponsesCursorPage = CursorPage<VerificationListResponse>;
 
 /**
  * An error code for a verification attempt.
@@ -85,89 +97,448 @@ export type VerificationStatus =
   | 'review'
   | 'action_required';
 
-/**
- * An identity verification session used to confirm a person or entity's identity
- * for payout account eligibility.
- */
+export interface VerificationCreateResponse {
+  /**
+   * The identity profile ID, e.g. idpf\_\*
+   */
+  id: string;
+
+  created_at: string;
+
+  kind: 'individual' | 'business';
+
+  session_url: string | null;
+
+  status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  updated_at: string;
+
+  address?: unknown | null;
+
+  business_name?: string | null;
+
+  business_structure?: string | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  last_name?: string | null;
+
+  rfis?: Array<VerificationCreateResponse.Rfi>;
+}
+
+export namespace VerificationCreateResponse {
+  export interface Rfi {
+    id?: string;
+
+    created_at?: string;
+
+    description?: string;
+
+    error_message?: string | null;
+
+    status?: 'outstanding' | 'invalid';
+
+    type?: string | null;
+  }
+}
+
 export interface VerificationRetrieveResponse {
   /**
-   * The numeric id of the verification record.
+   * The identity profile ID, e.g. idpf\_\*
    */
   id: string;
 
-  /**
-   * An error code for a verification attempt.
-   */
-  last_error_code: VerificationErrorCode | null;
+  created_at: string;
 
-  /**
-   * A human-readable explanation of the most recent verification error. Null if no
-   * error has occurred.
-   */
-  last_error_reason: string | null;
+  kind: 'individual' | 'business';
 
-  /**
-   * The current status of this verification session.
-   */
-  status: VerificationStatus;
+  rfis: Array<VerificationRetrieveResponse.Rfi>;
+
+  status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  updated_at: string;
+
+  address?: unknown | null;
+
+  business_name?: string | null;
+
+  business_structure?: string | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  last_name?: string | null;
+
+  session_url?: string | null;
 }
 
-/**
- * An identity verification session used to confirm a person or entity's identity
- * for payout account eligibility.
- */
+export namespace VerificationRetrieveResponse {
+  export interface Rfi {
+    id?: string;
+
+    created_at?: string;
+
+    description?: string;
+
+    error_message?: string | null;
+
+    status?: 'outstanding' | 'invalid';
+
+    type?: string | null;
+  }
+}
+
+export interface VerificationUpdateResponse {
+  /**
+   * The identity profile ID, e.g. idpf\_\*
+   */
+  id: string;
+
+  created_at: string;
+
+  kind: 'individual' | 'business';
+
+  rfis: Array<VerificationUpdateResponse.Rfi>;
+
+  status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  updated_at: string;
+
+  address?: unknown | null;
+
+  business_name?: string | null;
+
+  business_structure?: string | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  last_name?: string | null;
+
+  session_url?: string | null;
+}
+
+export namespace VerificationUpdateResponse {
+  export interface Rfi {
+    id?: string;
+
+    created_at?: string;
+
+    description?: string;
+
+    error_message?: string | null;
+
+    status?: 'outstanding' | 'invalid';
+
+    type?: string | null;
+  }
+}
+
 export interface VerificationListResponse {
+  data: Array<VerificationListResponse.Data>;
+
+  pagination: VerificationListResponse.Pagination;
+}
+
+export namespace VerificationListResponse {
+  export interface Data {
+    /**
+     * The identity profile ID, e.g. idpf\_\*
+     */
+    id: string;
+
+    created_at: string;
+
+    kind: 'individual' | 'business';
+
+    rfis: Array<Data.Rfi>;
+
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+    updated_at: string;
+
+    address?: unknown | null;
+
+    business_name?: string | null;
+
+    business_structure?: string | null;
+
+    country?: string | null;
+
+    date_of_birth?: string | null;
+
+    first_name?: string | null;
+
+    last_name?: string | null;
+
+    session_url?: string | null;
+  }
+
+  export namespace Data {
+    export interface Rfi {
+      id?: string;
+
+      created_at?: string;
+
+      description?: string;
+
+      error_message?: string | null;
+
+      status?: 'outstanding' | 'invalid';
+
+      type?: string | null;
+    }
+  }
+
+  export interface Pagination {
+    /**
+     * Current page number
+     */
+    current_page: number;
+
+    /**
+     * Next page number
+     */
+    next_page: number | null;
+
+    /**
+     * Previous page number
+     */
+    prev_page: number | null;
+
+    /**
+     * Total number of records
+     */
+    total_count: number;
+
+    /**
+     * Total number of pages
+     */
+    total_pages: number;
+  }
+}
+
+export interface VerificationDeleteResponse {
   /**
-   * The numeric id of the verification record.
+   * The identity profile ID, e.g. idpf\_\*
    */
   id: string;
 
-  /**
-   * An error code for a verification attempt.
-   */
-  last_error_code: VerificationErrorCode | null;
+  created_at: string;
 
-  /**
-   * A human-readable explanation of the most recent verification error. Null if no
-   * error has occurred.
-   */
-  last_error_reason: string | null;
+  kind: 'individual' | 'business';
 
-  /**
-   * The current status of this verification session.
-   */
-  status: VerificationStatus;
+  rfis: Array<VerificationDeleteResponse.Rfi>;
+
+  status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  updated_at: string;
+
+  address?: unknown | null;
+
+  business_name?: string | null;
+
+  business_structure?: string | null;
+
+  country?: string | null;
+
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  last_name?: string | null;
+
+  session_url?: string | null;
 }
 
-export interface VerificationListParams extends CursorPageParams {
+export namespace VerificationDeleteResponse {
+  export interface Rfi {
+    id?: string;
+
+    created_at?: string;
+
+    description?: string;
+
+    error_message?: string | null;
+
+    status?: 'outstanding' | 'invalid';
+
+    type?: string | null;
+  }
+}
+
+export interface VerificationListParams {
   /**
-   * The unique identifier of the payout account to list verifications for.
+   * Filter verifications to a specific account.
    */
-  payout_account_id: string;
+  account_id?: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * The page number to retrieve.
    */
-  before?: string | null;
+  page?: number;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * The number of resources to return per page.
    */
-  first?: number | null;
+  per?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Filter by profile type.
    */
-  last?: number | null;
+  profile_type?: 'individual' | 'business';
+
+  /**
+   * Filter by derived verification status.
+   */
+  status?: 'not_started' | 'pending' | 'approved' | 'rejected';
+}
+
+export interface VerificationCreateParams {
+  /**
+   * The account ID to verify.
+   */
+  account_id: string;
+
+  /**
+   * Pre-fill address (line1, city, state, postal_code).
+   */
+  address?: { [key: string]: unknown };
+
+  /**
+   * Pre-fill the country.
+   */
+  country?: string;
+
+  /**
+   * Pre-fill the date of birth.
+   */
+  date_of_birth?: string;
+
+  /**
+   * Pre-fill the first name.
+   */
+  first_name?: string;
+
+  /**
+   * The verification type. Defaults to individual.
+   */
+  kind?: 'individual' | 'business';
+
+  /**
+   * Pre-fill the last name.
+   */
+  last_name?: string;
+
+  /**
+   * Pre-fill the phone number.
+   */
+  phone?: string;
+
+  /**
+   * Whether to restart an in-flight verification.
+   */
+  restart?: boolean;
+}
+
+export interface VerificationUpdateParams {
+  /**
+   * The business address.
+   */
+  business_address?: { [key: string]: unknown };
+
+  /**
+   * The business name.
+   */
+  business_name?: string;
+
+  /**
+   * The business structure.
+   */
+  business_structure?: string;
+
+  /**
+   * The country code.
+   */
+  country?: string;
+
+  /**
+   * The date of birth.
+   */
+  date_of_birth?: string;
+
+  /**
+   * The first name on the verification.
+   */
+  first_name?: string;
+
+  /**
+   * The last name on the verification.
+   */
+  last_name?: string;
+
+  /**
+   * The personal address.
+   */
+  personal_address?: { [key: string]: unknown };
+
+  /**
+   * RFI responses. Each entry must include id and a value, address, or files
+   * payload.
+   */
+  rfis?: Array<VerificationUpdateParams.Rfi>;
+}
+
+export namespace VerificationUpdateParams {
+  export interface Rfi {
+    /**
+     * The RFI tag (paa\_\*).
+     */
+    id: string;
+
+    /**
+     * Address payload for address RFIs.
+     */
+    address?: { [key: string]: unknown };
+
+    /**
+     * File upload payload for document RFIs.
+     */
+    files?: Array<unknown>;
+
+    /**
+     * The value for text/date/phone RFIs.
+     */
+    value?: string;
+
+    /**
+     * Defaults to raw.
+     */
+    value_type?: 'raw' | 'vault_token';
+  }
 }
 
 export declare namespace Verifications {
   export {
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
+    type VerificationCreateResponse as VerificationCreateResponse,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
+    type VerificationUpdateResponse as VerificationUpdateResponse,
     type VerificationListResponse as VerificationListResponse,
-    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
+    type VerificationDeleteResponse as VerificationDeleteResponse,
     type VerificationListParams as VerificationListParams,
+    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationUpdateParams as VerificationUpdateParams,
   };
 }
