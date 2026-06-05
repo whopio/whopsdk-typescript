@@ -3,8 +3,24 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 export class Swaps extends APIResource {
+  /**
+   * Executes a swap from an account's wallet. The swap runs asynchronously; poll GET
+   * /swaps/{account_id} for status.
+   */
+  create(body: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
+    return this._client.post('/swaps', { body, ...options });
+  }
+
+  /**
+   * Returns the status of an account's in-flight or most recent swap.
+   */
+  retrieve(accountID: string, options?: RequestOptions): APIPromise<SwapRetrieveResponse> {
+    return this._client.get(path`/swaps/${accountID}`, options);
+  }
+
   /**
    * Returns a stateless swap price preview. No funds move and nothing is persisted.
    */
@@ -13,12 +29,38 @@ export class Swaps extends APIResource {
   }
 }
 
+export interface SwapCreateResponse {
+  account_id: string;
+
+  object: 'swap';
+
+  status: string;
+
+  amount_out_expected?: string;
+
+  amount_out_min?: string;
+
+  rate?: string;
+
+  to_chain?: string;
+}
+
+export interface SwapRetrieveResponse {
+  account_id: string;
+
+  object: 'swap';
+
+  status: string;
+
+  tx_hashes: Array<string>;
+
+  error?: string | null;
+}
+
 export interface SwapCreateQuoteResponse {
   amount_in: string;
 
   amount_out: string;
-
-  cross_chain: boolean;
 
   fee_bps: number;
 
@@ -45,6 +87,34 @@ export interface SwapCreateQuoteResponse {
   to_address?: string | null;
 }
 
+export interface SwapCreateParams {
+  /**
+   * The business or user account ID whose wallet should execute the swap.
+   */
+  account_id: string;
+
+  /**
+   * Input token amount.
+   */
+  amount: string;
+
+  /**
+   * Source token contract address.
+   */
+  from_token: string;
+
+  /**
+   * Destination token contract address.
+   */
+  to_token: string;
+
+  from_chain?: string | number | null;
+
+  slippage_bps?: number | null;
+
+  to_chain?: string | number | null;
+}
+
 export interface SwapCreateQuoteParams {
   /**
    * Input token amount.
@@ -61,11 +131,6 @@ export interface SwapCreateQuoteParams {
    */
   to_token: string;
 
-  /**
-   * Caller-owned account whose wallet address should be used.
-   */
-  account_id?: string | null;
-
   from_address?: string | null;
 
   from_chain?: string | number | null;
@@ -81,7 +146,10 @@ export interface SwapCreateQuoteParams {
 
 export declare namespace Swaps {
   export {
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
+    type SwapCreateParams as SwapCreateParams,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
   };
 }

@@ -465,7 +465,14 @@ export {
   type SupportChannelCreateParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
-export { Swaps, type SwapCreateQuoteResponse, type SwapCreateQuoteParams } from './swaps';
+export {
+  Swaps,
+  type SwapCreateResponse,
+  type SwapRetrieveResponse,
+  type SwapCreateQuoteResponse,
+  type SwapCreateParams,
+  type SwapCreateQuoteParams,
+} from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
