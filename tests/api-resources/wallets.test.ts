@@ -21,6 +21,27 @@ describe('resource wallets', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('depositAddress: only required params', async () => {
+    const responsePromise = client.wallets.depositAddress({ account_id: 'account_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('depositAddress: required and optional params', async () => {
+    const response = await client.wallets.depositAddress({
+      account_id: 'account_id',
+      asset: 'asset',
+      network: 'plasma',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('balance', async () => {
     const responsePromise = client.wallets.balance('account_id');
     const rawResponse = await responsePromise.asResponse();
