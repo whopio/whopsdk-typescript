@@ -20,6 +20,7 @@ export {
   type AdCampaignPlatform,
   type AdCampaignStatus,
   type AdCampaignListResponse,
+  type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
   type AdCampaignListParams,
   type AdCampaignListResponsesCursorPage,
@@ -31,6 +32,7 @@ export {
   type AdGroupStatus,
   type AdGroupListResponse,
   type AdGroupDeleteResponse,
+  type AdGroupRetrieveParams,
   type AdGroupUpdateParams,
   type AdGroupListParams,
   type AdGroupListResponsesCursorPage,
@@ -47,6 +49,7 @@ export {
   type Ad,
   type ExternalAdStatus,
   type AdListResponse,
+  type AdRetrieveParams,
   type AdListParams,
   type AdListResponsesCursorPage,
 } from './ads';

@@ -21,6 +21,18 @@ describe('resource adGroups', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adGroups.retrieve(
+        'adgrp_xxxxxxxxxxxx',
+        { stats_from: '2023-12-01T05:00:00.401Z', stats_to: '2023-12-01T05:00:00.401Z' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.adGroups.update('adgrp_xxxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -394,6 +406,8 @@ describe('resource adGroups', () => {
     await expect(
       client.adGroups.list(
         {
+          ad_campaign_id: 'ad_campaign_id',
+          ad_campaign_ids: ['string'],
           after: 'after',
           before: 'before',
           campaign_id: 'campaign_id',
@@ -401,9 +415,10 @@ describe('resource adGroups', () => {
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
           first: 42,
-          include_paused: true,
           last: 42,
           query: 'query',
+          stats_from: '2023-12-01T05:00:00.401Z',
+          stats_to: '2023-12-01T05:00:00.401Z',
           status: 'active',
         },
         { path: '/_stainless_unknown_path' },

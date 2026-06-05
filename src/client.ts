@@ -27,6 +27,7 @@ import {
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
   AdCampaignPlatform,
+  AdCampaignRetrieveParams,
   AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
@@ -38,6 +39,7 @@ import {
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
+  AdGroupRetrieveParams,
   AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
@@ -54,6 +56,7 @@ import {
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
+  AdRetrieveParams,
   Ads,
   ExternalAdStatus,
 } from './resources/ads';
@@ -2206,6 +2209,7 @@ export declare namespace Whop {
     type AdCampaignStatus as AdCampaignStatus,
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignListParams as AdCampaignListParams,
   };
@@ -2218,6 +2222,7 @@ export declare namespace Whop {
     type AdGroupListResponse as AdGroupListResponse,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupListParams as AdGroupListParams,
   };
@@ -2228,6 +2233,7 @@ export declare namespace Whop {
     type ExternalAdStatus as ExternalAdStatus,
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
+    type AdRetrieveParams as AdRetrieveParams,
     type AdListParams as AdListParams,
   };
 

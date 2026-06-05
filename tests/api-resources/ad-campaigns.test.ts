@@ -21,6 +21,18 @@ describe('resource adCampaigns', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adCampaigns.retrieve(
+        'adcamp_xxxxxxxxxxx',
+        { stats_from: '2023-12-01T05:00:00.401Z', stats_to: '2023-12-01T05:00:00.401Z' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('update', async () => {
     const responsePromise = client.adCampaigns.update('adcamp_xxxxxxxxxxx');
     const rawResponse = await responsePromise.asResponse();
@@ -66,6 +78,8 @@ describe('resource adCampaigns', () => {
           first: 42,
           last: 42,
           query: 'query',
+          stats_from: '2023-12-01T05:00:00.401Z',
+          stats_to: '2023-12-01T05:00:00.401Z',
           status: 'active',
         },
         { path: '/_stainless_unknown_path' },
