@@ -198,29 +198,29 @@ export namespace AdReportRetrieveResponse {
      */
     export interface Summary {
       /**
+       * Click-through rate (clicks / impressions).
+       */
+      click_through_rate: number;
+
+      /**
        * Total clicks over the date range.
        */
       clicks: number;
 
       /**
-       * Spend divided by `resultCount`. Null when there are no results.
-       */
-      cost_per_result: number | null;
-
-      /**
        * Cost per click in the requested reporting currency.
        */
-      cpc: number;
+      cost_per_click: number;
 
       /**
        * Cost per thousand impressions in the requested reporting currency.
        */
-      cpm: number | null;
+      cost_per_mille: number | null;
 
       /**
-       * Click-through rate (clicks / impressions).
+       * Spend divided by `resultCount`. Null when there are no results.
        */
-      ctr: number;
+      cost_per_result: number | null;
 
       /**
        * Average number of times each reached user saw an ad.
@@ -254,10 +254,10 @@ export namespace AdReportRetrieveResponse {
       result_label_override: string | null;
 
       /**
-       * Alias for `purchaseRoas` — return on ad spend for purchases, as reported by the
-       * external ad platform.
+       * Alias for `purchaseReturnOnAdSpend` — return on ad spend for purchases, as
+       * reported by the external ad platform.
        */
-      roas: number | null;
+      return_on_ad_spend: number | null;
 
       /**
        * Total spend over the date range in the requested reporting currency.
@@ -348,29 +348,29 @@ export namespace AdReportRetrieveResponse {
    */
   export interface Summary {
     /**
+     * Click-through rate (clicks / impressions).
+     */
+    click_through_rate: number;
+
+    /**
      * Total clicks over the date range.
      */
     clicks: number;
 
     /**
-     * Spend divided by `resultCount`. Null when there are no results.
-     */
-    cost_per_result: number | null;
-
-    /**
      * Cost per click in the requested reporting currency.
      */
-    cpc: number;
+    cost_per_click: number;
 
     /**
      * Cost per thousand impressions in the requested reporting currency.
      */
-    cpm: number | null;
+    cost_per_mille: number | null;
 
     /**
-     * Click-through rate (clicks / impressions).
+     * Spend divided by `resultCount`. Null when there are no results.
      */
-    ctr: number;
+    cost_per_result: number | null;
 
     /**
      * Average number of times each reached user saw an ad.
@@ -404,10 +404,10 @@ export namespace AdReportRetrieveResponse {
     result_label_override: string | null;
 
     /**
-     * Alias for `purchaseRoas` — return on ad spend for purchases, as reported by the
-     * external ad platform.
+     * Alias for `purchaseReturnOnAdSpend` — return on ad spend for purchases, as
+     * reported by the external ad platform.
      */
-    roas: number | null;
+    return_on_ad_spend: number | null;
 
     /**
      * Total spend over the date range in the requested reporting currency.
