@@ -493,12 +493,14 @@ import {
   Users,
 } from './resources/users';
 import {
+  VerificationCreateParams,
+  VerificationCreateResponse,
+  VerificationDeleteResponse,
   VerificationErrorCode,
-  VerificationListParams,
-  VerificationListResponse,
-  VerificationListResponsesCursorPage,
   VerificationRetrieveResponse,
   VerificationStatus,
+  VerificationUpdateParams,
+  VerificationUpdateResponse,
   Verifications,
 } from './resources/verifications';
 import {
@@ -2156,10 +2158,12 @@ export declare namespace Whop {
     Verifications as Verifications,
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
+    type VerificationCreateResponse as VerificationCreateResponse,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
-    type VerificationListResponse as VerificationListResponse,
-    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
-    type VerificationListParams as VerificationListParams,
+    type VerificationUpdateResponse as VerificationUpdateResponse,
+    type VerificationDeleteResponse as VerificationDeleteResponse,
+    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationUpdateParams as VerificationUpdateParams,
   };
 
   export {

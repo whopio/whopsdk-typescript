@@ -489,10 +489,12 @@ export {
   Verifications,
   type VerificationErrorCode,
   type VerificationStatus,
+  type VerificationCreateResponse,
   type VerificationRetrieveResponse,
-  type VerificationListResponse,
-  type VerificationListParams,
-  type VerificationListResponsesCursorPage,
+  type VerificationUpdateResponse,
+  type VerificationDeleteResponse,
+  type VerificationCreateParams,
+  type VerificationUpdateParams,
 } from './verifications';
 export {
   Wallets,
