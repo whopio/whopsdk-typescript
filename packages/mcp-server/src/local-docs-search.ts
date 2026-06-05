@@ -85,16 +85,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/apps \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'apps.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.apps.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'apps.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.apps.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -127,16 +117,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/apps \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "name": "name"\n        }\'',
       },
-      python: {
-        method: 'apps.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp = client.apps.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    name="name",\n)\nprint(app.id)',
-      },
-      ruby: {
-        method: 'apps.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp = whop.apps.create(company_id: "biz_xxxxxxxxxxxxxx", name: "name")\n\nputs(app)',
-      },
     },
   },
   {
@@ -161,16 +141,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/apps/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'apps.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp = client.apps.retrieve(\n    "app_xxxxxxxxxxxxxx",\n)\nprint(app.id)',
-      },
-      ruby: {
-        method: 'apps.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp = whop.apps.retrieve("app_xxxxxxxxxxxxxx")\n\nputs(app)',
       },
     },
   },
@@ -215,16 +185,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/apps/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'apps.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp = client.apps.update(\n    id="app_xxxxxxxxxxxxxx",\n)\nprint(app.id)',
-      },
-      ruby: {
-        method: 'apps.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp = whop.apps.update("app_xxxxxxxxxxxxxx")\n\nputs(app)',
-      },
     },
   },
   {
@@ -263,16 +223,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/invoices \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'invoices.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.invoices.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'invoices.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.invoices.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -285,7 +235,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) invoices > (method) create',
     qualified: 'client.invoices.create',
     params: [
-      "{ collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product: { title: string; product_tax_code_id?: string; }; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; } | { collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id: string; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; };",
+      "{ collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; currency?: string; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product: { title: string; product_tax_code_id?: string; }; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; } | { collection_method: 'send_invoice' | 'charge_automatically'; company_id: string; plan: { billing_period?: number; currency?: string; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id: string; automatically_finalizes_at?: string; billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }; charge_buyer_fee?: boolean; customer_name?: string; due_date?: string; email_address?: string; line_items?: { label: string; unit_price: number; quantity?: number; }[]; mailing_address_id?: string; member_id?: string; payment_method_id?: string; payment_token_id?: string; save_as_draft?: boolean; subscription_billing_anchor_at?: string; };",
     ],
     response:
       "{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }",
@@ -298,16 +248,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/invoices \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "collection_method": "send_invoice",\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "plan": {},\n          "product": {\n            "title": "title"\n          },\n          "automatically_finalizes_at": "2023-12-01T05:00:00.401Z",\n          "due_date": "2023-12-01T05:00:00.401Z",\n          "mailing_address_id": "ma_xxxxxxxxxxxxxxx",\n          "member_id": "mber_xxxxxxxxxxxxx",\n          "payment_method_id": "pmt_xxxxxxxxxxxxxx",\n          "payment_token_id": "payt_xxxxxxxxxxxxx",\n          "subscription_billing_anchor_at": "2023-12-01T05:00:00.401Z"\n        }\'',
-      },
-      python: {
-        method: 'invoices.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.create(\n    collection_method="send_invoice",\n    company_id="biz_xxxxxxxxxxxxxx",\n    plan={},\n    product={\n        "title": "title"\n    },\n)\nprint(invoice.id)',
-      },
-      ruby: {
-        method: 'invoices.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.create(\n  body: {collection_method: :send_invoice, company_id: "biz_xxxxxxxxxxxxxx", plan: {}, product: {title: "title"}}\n)\n\nputs(invoice)',
       },
     },
   },
@@ -335,16 +275,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'invoices.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.retrieve(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(invoice.id)',
-      },
-      ruby: {
-        method: 'invoices.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.retrieve("inv_xxxxxxxxxxxxxx")\n\nputs(invoice)',
-      },
     },
   },
   {
@@ -369,16 +299,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID/void \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'invoices.void',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.invoices.void(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'invoices.void',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.invoices.void("inv_xxxxxxxxxxxxxx")\n\nputs(response)',
       },
     },
   },
@@ -405,16 +325,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID/mark_paid \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'invoices.mark_paid',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.invoices.mark_paid(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'invoices.mark_paid',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.invoices.mark_paid("inv_xxxxxxxxxxxxxx")\n\nputs(response)',
-      },
     },
   },
   {
@@ -440,16 +350,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID/mark_uncollectible \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'invoices.mark_uncollectible',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.invoices.mark_uncollectible(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'invoices.mark_uncollectible',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.invoices.mark_uncollectible("inv_xxxxxxxxxxxxxx")\n\nputs(response)',
-      },
     },
   },
   {
@@ -473,14 +373,14 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'mailing_address_id?: string;',
       'member_id?: string;',
       'payment_method_id?: string;',
-      "plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; };",
+      "plan?: { billing_period?: number; currency?: string; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; };",
       'product_id?: string;',
       'subscription_billing_anchor_at?: string;',
     ],
     response:
       "{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }",
     markdown:
-      "## update\n\n`client.invoices.update(id: string, automatically_finalizes_at?: string, billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }, charge_buyer_fee?: boolean, collection_method?: 'send_invoice' | 'charge_automatically', customer_name?: string, due_date?: string, email_address?: string, line_items?: { label: string; unit_price: number; quantity?: number; }[], mailing_address_id?: string, member_id?: string, payment_method_id?: string, plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: payment_method_types[]; enabled: payment_method_types[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }, product_id?: string, subscription_billing_anchor_at?: string): { id: string; created_at: string; current_plan: object; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: invoice_status; user: object; }`\n\n**patch** `/invoices/{id}`\n\nUpdate a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n- `automatically_finalizes_at?: string`\n  The date and time when the invoice will be automatically finalized. For charge_automatically, triggers an automatic charge. For send_invoice, sends the invoice email at the specified time.\n\n- `billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }`\n  Inline billing address to create or update a mailing address for this invoice.\n  - `city?: string`\n    The city of the address.\n  - `country?: string`\n    The country of the address.\n  - `line1?: string`\n    The line 1 of the address.\n  - `line2?: string`\n    The line 2 of the address.\n  - `name?: string`\n    The name of the customer.\n  - `phone?: string`\n    The phone number of the customer.\n  - `postal_code?: string`\n    The postal code of the address.\n  - `state?: string`\n    The state of the address.\n  - `tax_id_type?: string`\n    The type of tax identifier\n  - `tax_id_value?: string`\n    The value of the tax identifier.\n\n- `charge_buyer_fee?: boolean`\n  Whether to charge the customer a buyer fee on this invoice.\n\n- `collection_method?: 'send_invoice' | 'charge_automatically'`\n  The method of collection for an invoice.\n\n- `customer_name?: string`\n  The name of the customer.\n\n- `due_date?: string`\n  The date by which the invoice must be paid.\n\n- `email_address?: string`\n  The email address of the customer.\n\n- `line_items?: { label: string; unit_price: number; quantity?: number; }[]`\n  Line items that break down the invoice total.\n\n- `mailing_address_id?: string`\n  The unique identifier of an existing mailing address to attach.\n\n- `member_id?: string`\n  The unique identifier of a member to assign as the customer.\n\n- `payment_method_id?: string`\n  The unique identifier of the payment method to charge.\n\n- `plan?: { billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }`\n  Updated plan attributes.\n  - `billing_period?: number`\n    The interval in days at which the plan charges (renewal plans).\n  - `custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]`\n    An array of custom field objects.\n  - `description?: string`\n    The description of the plan.\n  - `expiration_days?: number`\n    The number of days until the membership expires and revokes access (expiration plans). For example, 365 for a one-year access period.\n  - `initial_price?: number`\n    An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `internal_notes?: string`\n    A personal description or notes section for the business.\n  - `legacy_payment_method_controls?: boolean`\n    Whether this plan uses legacy payment method controls\n  - `payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }`\n    The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.\n  - `plan_type?: 'renewal' | 'one_time'`\n    The type of plan that can be attached to a product\n  - `release_method?: 'buy_now' | 'waitlist'`\n    The methods of how a plan can be released.\n  - `renewal_price?: number`\n    The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `stock?: number`\n    The number of units available for purchase.\n  - `trial_period_days?: number`\n    The number of free trial days added before a renewal plan.\n  - `unlimited_stock?: boolean`\n    When true, the plan has unlimited stock (stock field is ignored). When false, purchases are limited by the stock field.\n  - `visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'`\n    Visibility of a resource\n\n- `product_id?: string`\n  The unique identifier of an existing product to attach to this invoice. Only allowed while the invoice is still a draft.\n\n- `subscription_billing_anchor_at?: string`\n  The date that defines when the subscription billing cycle should start.\n\n### Returns\n\n- `{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }`\n  An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.\n\n  - `id: string`\n  - `created_at: string`\n  - `current_plan: { id: string; currency: string; formatted_price: string; }`\n  - `due_date: string`\n  - `email_address: string`\n  - `fetch_invoice_token: string`\n  - `number: string`\n  - `status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'`\n  - `user: { id: string; name: string; username: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
+      "## update\n\n`client.invoices.update(id: string, automatically_finalizes_at?: string, billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }, charge_buyer_fee?: boolean, collection_method?: 'send_invoice' | 'charge_automatically', customer_name?: string, due_date?: string, email_address?: string, line_items?: { label: string; unit_price: number; quantity?: number; }[], mailing_address_id?: string, member_id?: string, payment_method_id?: string, plan?: { billing_period?: number; currency?: string; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: payment_method_types[]; enabled: payment_method_types[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }, product_id?: string, subscription_billing_anchor_at?: string): { id: string; created_at: string; current_plan: object; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: invoice_status; user: object; }`\n\n**patch** `/invoices/{id}`\n\nUpdate a draft invoice's details.\n\nRequired permissions:\n - `invoice:update`\n\n### Parameters\n\n- `id: string`\n\n- `automatically_finalizes_at?: string`\n  The date and time when the invoice will be automatically finalized. For charge_automatically, triggers an automatic charge. For send_invoice, sends the invoice email at the specified time.\n\n- `billing_address?: { city?: string; country?: string; line1?: string; line2?: string; name?: string; phone?: string; postal_code?: string; state?: string; tax_id_type?: string; tax_id_value?: string; }`\n  Inline billing address to create or update a mailing address for this invoice.\n  - `city?: string`\n    The city of the address.\n  - `country?: string`\n    The country of the address.\n  - `line1?: string`\n    The line 1 of the address.\n  - `line2?: string`\n    The line 2 of the address.\n  - `name?: string`\n    The name of the customer.\n  - `phone?: string`\n    The phone number of the customer.\n  - `postal_code?: string`\n    The postal code of the address.\n  - `state?: string`\n    The state of the address.\n  - `tax_id_type?: string`\n    The type of tax identifier\n  - `tax_id_value?: string`\n    The value of the tax identifier.\n\n- `charge_buyer_fee?: boolean`\n  Whether to charge the customer a buyer fee on this invoice.\n\n- `collection_method?: 'send_invoice' | 'charge_automatically'`\n  The method of collection for an invoice.\n\n- `customer_name?: string`\n  The name of the customer.\n\n- `due_date?: string`\n  The date by which the invoice must be paid.\n\n- `email_address?: string`\n  The email address of the customer.\n\n- `line_items?: { label: string; unit_price: number; quantity?: number; }[]`\n  Line items that break down the invoice total.\n\n- `mailing_address_id?: string`\n  The unique identifier of an existing mailing address to attach.\n\n- `member_id?: string`\n  The unique identifier of a member to assign as the customer.\n\n- `payment_method_id?: string`\n  The unique identifier of the payment method to charge.\n\n- `plan?: { billing_period?: number; currency?: string; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; initial_price?: number; internal_notes?: string; legacy_payment_method_controls?: boolean; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; stock?: number; trial_period_days?: number; unlimited_stock?: boolean; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }`\n  Updated plan attributes.\n  - `billing_period?: number`\n    The interval in days at which the plan charges (renewal plans).\n  - `currency?: string`\n    The available currencies on the platform\n  - `custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]`\n    An array of custom field objects.\n  - `description?: string`\n    The description of the plan.\n  - `expiration_days?: number`\n    The number of days until the membership expires and revokes access (expiration plans). For example, 365 for a one-year access period.\n  - `initial_price?: number`\n    An additional amount charged upon first purchase. Use only if a one time payment OR you want to charge an additional amount on top of the renewal price. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `internal_notes?: string`\n    A personal description or notes section for the business.\n  - `legacy_payment_method_controls?: boolean`\n    Whether this plan uses legacy payment method controls\n  - `payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }`\n    The explicit payment method configuration for the plan. If not provided, the platform or company's defaults will apply.\n  - `plan_type?: 'renewal' | 'one_time'`\n    The type of plan that can be attached to a product\n  - `release_method?: 'buy_now' | 'waitlist'`\n    The methods of how a plan can be released.\n  - `renewal_price?: number`\n    The amount the customer is charged every billing period. Use only if a recurring payment. Provided as a number in the specified currency. Eg: 10.43 for $10.43\n  - `stock?: number`\n    The number of units available for purchase.\n  - `trial_period_days?: number`\n    The number of free trial days added before a renewal plan.\n  - `unlimited_stock?: boolean`\n    When true, the plan has unlimited stock (stock field is ignored). When false, purchases are limited by the stock field.\n  - `visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'`\n    Visibility of a resource\n\n- `product_id?: string`\n  The unique identifier of an existing product to attach to this invoice. Only allowed while the invoice is still a draft.\n\n- `subscription_billing_anchor_at?: string`\n  The date that defines when the subscription billing cycle should start.\n\n### Returns\n\n- `{ id: string; created_at: string; current_plan: { id: string; currency: string; formatted_price: string; }; due_date: string; email_address: string; fetch_invoice_token: string; number: string; status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'; user: { id: string; name: string; username: string; }; }`\n  An invoice represents an itemized bill sent by a company to a customer for a specific product and plan, tracking the amount owed, due date, and payment status.\n\n  - `id: string`\n  - `created_at: string`\n  - `current_plan: { id: string; currency: string; formatted_price: string; }`\n  - `due_date: string`\n  - `email_address: string`\n  - `fetch_invoice_token: string`\n  - `number: string`\n  - `status: 'draft' | 'open' | 'paid' | 'past_due' | 'uncollectible' | 'void'`\n  - `user: { id: string; name: string; username: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst invoice = await client.invoices.update('inv_xxxxxxxxxxxxxx');\n\nconsole.log(invoice);\n```",
     perLanguage: {
       typescript: {
         method: 'client.invoices.update',
@@ -490,16 +390,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'invoices.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.update(\n    id="inv_xxxxxxxxxxxxxx",\n)\nprint(invoice.id)',
-      },
-      ruby: {
-        method: 'invoices.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.update("inv_xxxxxxxxxxxxxx")\n\nputs(invoice)',
       },
     },
   },
@@ -524,16 +414,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/invoices/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'invoices.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ninvoice = client.invoices.delete(\n    "inv_xxxxxxxxxxxxxx",\n)\nprint(invoice)',
-      },
-      ruby: {
-        method: 'invoices.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ninvoice = whop.invoices.delete("inv_xxxxxxxxxxxxxx")\n\nputs(invoice)',
       },
     },
   },
@@ -570,16 +450,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_lesson_interactions \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_lesson_interactions.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.course_lesson_interactions.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'course_lesson_interactions.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.course_lesson_interactions.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -605,16 +475,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lesson_interactions/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_lesson_interactions.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_lesson_interaction = client.course_lesson_interactions.retrieve(\n    "crsli_xxxxxxxxxxxx",\n)\nprint(course_lesson_interaction.id)',
-      },
-      ruby: {
-        method: 'course_lesson_interactions.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_lesson_interaction = whop.course_lesson_interactions.retrieve("crsli_xxxxxxxxxxxx")\n\nputs(course_lesson_interaction)',
       },
     },
   },
@@ -653,16 +513,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/products \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'products.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.products.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'products.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.products.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -688,16 +538,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/products/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'products.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.products.retrieve(\n    "prod_xxxxxxxxxxxxx",\n)\nprint(product.id)',
-      },
-      ruby: {
-        method: 'products.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nproduct = whop.products.retrieve("prod_xxxxxxxxxxxxx")\n\nputs(product)',
       },
     },
   },
@@ -746,16 +586,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/products \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "title": "title",\n          "global_affiliate_percentage": 6.9,\n          "member_affiliate_percentage": 6.9,\n          "product_tax_code_id": "ptc_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'products.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.products.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    title="title",\n)\nprint(product.id)',
-      },
-      ruby: {
-        method: 'products.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nproduct = whop.products.create(company_id: "biz_xxxxxxxxxxxxxx", title: "title")\n\nputs(product)',
-      },
     },
   },
   {
@@ -803,16 +633,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/products/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'products.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.products.update(\n    id="prod_xxxxxxxxxxxxx",\n)\nprint(product.id)',
-      },
-      ruby: {
-        method: 'products.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nproduct = whop.products.update("prod_xxxxxxxxxxxxx")\n\nputs(product)',
-      },
     },
   },
   {
@@ -837,16 +657,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/products/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'products.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nproduct = client.products.delete(\n    "prod_xxxxxxxxxxxxx",\n)\nprint(product)',
-      },
-      ruby: {
-        method: 'products.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nproduct = whop.products.delete("prod_xxxxxxxxxxxxx")\n\nputs(product)',
       },
     },
   },
@@ -873,16 +683,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/companies/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'companies.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncompany = client.companies.retrieve(\n    "biz_xxxxxxxxxxxxxx",\n)\nprint(company.id)',
-      },
-      ruby: {
-        method: 'companies.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncompany = whop.companies.retrieve("biz_xxxxxxxxxxxxxx")\n\nputs(company)',
       },
     },
   },
@@ -919,16 +719,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/companies \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'companies.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.companies.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'companies.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.companies.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -962,16 +752,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/companies \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "title": "title"\n        }\'',
-      },
-      python: {
-        method: 'companies.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncompany = client.companies.create(\n    title="title",\n)\nprint(company.id)',
-      },
-      ruby: {
-        method: 'companies.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncompany = whop.companies.create(title: "title")\n\nputs(company)',
       },
     },
   },
@@ -1012,16 +792,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/companies/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'companies.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncompany = client.companies.update(\n    id="biz_xxxxxxxxxxxxxx",\n)\nprint(company.id)',
-      },
-      ruby: {
-        method: 'companies.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncompany = whop.companies.update("biz_xxxxxxxxxxxxxx")\n\nputs(company)',
-      },
     },
   },
   {
@@ -1052,16 +822,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/companies/$PARENT_COMPANY_ID/api_keys \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "child_company_id": "child_company_id"\n        }\'',
       },
-      python: {
-        method: 'companies.create_api_key',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.companies.create_api_key(\n    parent_company_id="parent_company_id",\n    child_company_id="child_company_id",\n)\nprint(response.id)',
-      },
-      ruby: {
-        method: 'companies.create_api_key',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.companies.create_api_key("parent_company_id", child_company_id: "child_company_id")\n\nputs(response)',
-      },
     },
   },
   {
@@ -1077,16 +837,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         method: 'client.webhooks.unwrap',
         example:
           "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nawait client.webhooks.unwrap();",
-      },
-      python: {
-        method: 'webhooks.unwrap',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nclient.webhooks.unwrap()',
-      },
-      ruby: {
-        method: 'webhooks.unwrap',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresult = whop.webhooks.unwrap\n\nputs(result)',
       },
     },
   },
@@ -1118,16 +868,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/webhooks \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'webhooks.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.webhooks.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'webhooks.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.webhooks.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -1161,16 +901,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/webhooks \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "url": "https://example.com/path"\n        }\'',
       },
-      python: {
-        method: 'webhooks.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwebhook = client.webhooks.create(\n    url="https://example.com/path",\n)\nprint(webhook.id)',
-      },
-      ruby: {
-        method: 'webhooks.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwebhook = whop.webhooks.create(url: "https://example.com/path")\n\nputs(webhook)',
-      },
     },
   },
   {
@@ -1196,16 +926,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/webhooks/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'webhooks.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwebhook = client.webhooks.retrieve(\n    "hook_xxxxxxxxxxxxx",\n)\nprint(webhook.id)',
-      },
-      ruby: {
-        method: 'webhooks.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwebhook = whop.webhooks.retrieve("hook_xxxxxxxxxxxxx")\n\nputs(webhook)',
       },
     },
   },
@@ -1239,16 +959,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/webhooks/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'webhooks.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwebhook = client.webhooks.update(\n    id="hook_xxxxxxxxxxxxx",\n)\nprint(webhook.id)',
-      },
-      ruby: {
-        method: 'webhooks.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwebhook = whop.webhooks.update("hook_xxxxxxxxxxxxx")\n\nputs(webhook)',
-      },
     },
   },
   {
@@ -1272,16 +982,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/webhooks/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'webhooks.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwebhook = client.webhooks.delete(\n    "hook_xxxxxxxxxxxxx",\n)\nprint(webhook)',
-      },
-      ruby: {
-        method: 'webhooks.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwebhook = whop.webhooks.delete("hook_xxxxxxxxxxxxx")\n\nputs(webhook)',
       },
     },
   },
@@ -1321,16 +1021,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/plans \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'plans.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.plans.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'plans.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.plans.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -1385,16 +1075,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/plans \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "product_id": "prod_xxxxxxxxxxxxx",\n          "billing_period": 42,\n          "expiration_days": 42,\n          "initial_price": 6.9,\n          "renewal_price": 6.9,\n          "split_pay_required_payments": 42,\n          "stock": 42,\n          "trial_period_days": 42\n        }\'',
       },
-      python: {
-        method: 'plans.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.plans.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    product_id="prod_xxxxxxxxxxxxx",\n)\nprint(plan.id)',
-      },
-      ruby: {
-        method: 'plans.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nplan = whop.plans.create(company_id: "biz_xxxxxxxxxxxxxx", product_id: "prod_xxxxxxxxxxxxx")\n\nputs(plan)',
-      },
     },
   },
   {
@@ -1419,16 +1099,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/plans/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'plans.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.plans.retrieve(\n    "plan_xxxxxxxxxxxxx",\n)\nprint(plan.id)',
-      },
-      ruby: {
-        method: 'plans.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nplan = whop.plans.retrieve("plan_xxxxxxxxxxxxx")\n\nputs(plan)',
       },
     },
   },
@@ -1482,16 +1152,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/plans/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'plans.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.plans.update(\n    id="plan_xxxxxxxxxxxxx",\n)\nprint(plan.id)',
-      },
-      ruby: {
-        method: 'plans.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nplan = whop.plans.update("plan_xxxxxxxxxxxxx")\n\nputs(plan)',
-      },
     },
   },
   {
@@ -1516,16 +1176,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/plans/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'plans.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nplan = client.plans.delete(\n    "plan_xxxxxxxxxxxxx",\n)\nprint(plan)',
-      },
-      ruby: {
-        method: 'plans.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nplan = whop.plans.delete("plan_xxxxxxxxxxxxx")\n\nputs(plan)',
       },
     },
   },
@@ -1565,16 +1215,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/entries \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'entries.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.entries.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'entries.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.entries.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -1601,16 +1241,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/entries/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'entries.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nentry = client.entries.retrieve(\n    "entry_xxxxxxxxxxxx",\n)\nprint(entry.id)',
-      },
-      ruby: {
-        method: 'entries.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nentry = whop.entries.retrieve("entry_xxxxxxxxxxxx")\n\nputs(entry)',
-      },
     },
   },
   {
@@ -1635,16 +1265,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/entries/$ID/approve \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'entries.approve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.entries.approve(\n    "entry_xxxxxxxxxxxx",\n)\nprint(response.job_id)',
-      },
-      ruby: {
-        method: 'entries.approve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.entries.approve("entry_xxxxxxxxxxxx")\n\nputs(response)',
       },
     },
   },
@@ -1671,16 +1291,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/entries/$ID/deny \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'entries.deny',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nentry = client.entries.deny(\n    "entry_xxxxxxxxxxxx",\n)\nprint(entry.id)',
-      },
-      ruby: {
-        method: 'entries.deny',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nentry = whop.entries.deny("entry_xxxxxxxxxxxx")\n\nputs(entry)',
       },
     },
   },
@@ -1716,16 +1326,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/forum_posts \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'forum_posts.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.forum_posts.list(\n    experience_id="exp_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'forum_posts.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.forum_posts.list(experience_id: "exp_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -1767,16 +1367,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/forum_posts \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "experience_id": "exp_xxxxxxxxxxxxxx",\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "paywall_amount": 6.9\n        }\'',
       },
-      python: {
-        method: 'forum_posts.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nforum_post = client.forum_posts.create(\n    experience_id="exp_xxxxxxxxxxxxxx",\n)\nprint(forum_post.id)',
-      },
-      ruby: {
-        method: 'forum_posts.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nforum_post = whop.forum_posts.create(experience_id: "exp_xxxxxxxxxxxxxx")\n\nputs(forum_post)',
-      },
     },
   },
   {
@@ -1801,16 +1391,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/forum_posts/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'forum_posts.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nforum_post = client.forum_posts.retrieve(\n    "id",\n)\nprint(forum_post.id)',
-      },
-      ruby: {
-        method: 'forum_posts.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nforum_post = whop.forum_posts.retrieve("id")\n\nputs(forum_post)',
       },
     },
   },
@@ -1844,16 +1424,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/forum_posts/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'forum_posts.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nforum_post = client.forum_posts.update(\n    id="id",\n)\nprint(forum_post.id)',
-      },
-      ruby: {
-        method: 'forum_posts.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nforum_post = whop.forum_posts.update("id")\n\nputs(forum_post)',
       },
     },
   },
@@ -1892,16 +1462,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/transfers \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'transfers.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.transfers.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'transfers.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.transfers.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -1936,16 +1496,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/transfers \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 6.9,\n          "currency": "usd",\n          "destination_id": "destination_id",\n          "origin_id": "origin_id"\n        }\'',
       },
-      python: {
-        method: 'transfers.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ntransfer = client.transfers.create(\n    amount=6.9,\n    currency="usd",\n    destination_id="destination_id",\n    origin_id="origin_id",\n)\nprint(transfer.id)',
-      },
-      ruby: {
-        method: 'transfers.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ntransfer = whop.transfers.create(\n  amount: 6.9,\n  currency: :usd,\n  destination_id: "destination_id",\n  origin_id: "origin_id"\n)\n\nputs(transfer)',
-      },
     },
   },
   {
@@ -1972,16 +1522,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/transfers/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'transfers.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ntransfer = client.transfers.retrieve(\n    "ctt_xxxxxxxxxxxxxx",\n)\nprint(transfer.id)',
-      },
-      ruby: {
-        method: 'transfers.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ntransfer = whop.transfers.retrieve("ctt_xxxxxxxxxxxxxx")\n\nputs(transfer)',
-      },
     },
   },
   {
@@ -2007,16 +1547,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ledger_accounts/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ledger_accounts.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nledger_account = client.ledger_accounts.retrieve(\n    "ldgr_xxxxxxxxxxxxx",\n)\nprint(ledger_account.id)',
-      },
-      ruby: {
-        method: 'ledger_accounts.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nledger_account = whop.ledger_accounts.retrieve("ldgr_xxxxxxxxxxxxx")\n\nputs(ledger_account)',
       },
     },
   },
@@ -2060,16 +1590,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/memberships \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'memberships.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.memberships.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'memberships.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.memberships.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -2095,16 +1615,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'memberships.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.retrieve(\n    "mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.retrieve("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
       },
     },
   },
@@ -2132,16 +1642,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'memberships.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.update(\n    id="mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.update("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
-      },
     },
   },
   {
@@ -2167,16 +1667,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID/cancel \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'memberships.cancel',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.cancel(\n    id="mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.cancel',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.cancel("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
       },
     },
   },
@@ -2204,16 +1694,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID/pause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'memberships.pause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.pause(\n    id="mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.pause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.pause("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
-      },
     },
   },
   {
@@ -2239,16 +1719,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID/resume \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'memberships.resume',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.resume(\n    "mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.resume',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.resume("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
       },
     },
   },
@@ -2276,16 +1746,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID/uncancel \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'memberships.uncancel',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.uncancel(\n    "mem_xxxxxxxxxxxxxx",\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.uncancel',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.uncancel("mem_xxxxxxxxxxxxxx")\n\nputs(membership)',
-      },
     },
   },
   {
@@ -2311,16 +1771,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/memberships/$ID/add_free_days \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "free_days": 42\n        }\'',
-      },
-      python: {
-        method: 'memberships.add_free_days',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmembership = client.memberships.add_free_days(\n    id="mem_xxxxxxxxxxxxxx",\n    free_days=42,\n)\nprint(membership.id)',
-      },
-      ruby: {
-        method: 'memberships.add_free_days',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmembership = whop.memberships.add_free_days("mem_xxxxxxxxxxxxxx", free_days: 42)\n\nputs(membership)',
       },
     },
   },
@@ -2358,16 +1808,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/authorized_users \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'authorized_users.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.authorized_users.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'authorized_users.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.authorized_users.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -2393,16 +1833,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/authorized_users/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'authorized_users.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nauthorized_user = client.authorized_users.retrieve(\n    "ausr_xxxxxxxxxxxxx",\n)\nprint(authorized_user.id)',
-      },
-      ruby: {
-        method: 'authorized_users.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nauthorized_user = whop.authorized_users.retrieve("ausr_xxxxxxxxxxxxx")\n\nputs(authorized_user)',
       },
     },
   },
@@ -2430,16 +1860,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/authorized_users \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "role": "owner",\n          "user_id": "user_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'authorized_users.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nauthorized_user = client.authorized_users.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    role="owner",\n    user_id="user_xxxxxxxxxxxxx",\n)\nprint(authorized_user.id)',
-      },
-      ruby: {
-        method: 'authorized_users.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nauthorized_user = whop.authorized_users.create(\n  company_id: "biz_xxxxxxxxxxxxxx",\n  role: :owner,\n  user_id: "user_xxxxxxxxxxxxx"\n)\n\nputs(authorized_user)',
-      },
     },
   },
   {
@@ -2464,16 +1884,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/authorized_users/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'authorized_users.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nauthorized_user = client.authorized_users.delete(\n    id="ausr_xxxxxxxxxxxxx",\n)\nprint(authorized_user)',
-      },
-      ruby: {
-        method: 'authorized_users.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nauthorized_user = whop.authorized_users.delete("ausr_xxxxxxxxxxxxx")\n\nputs(authorized_user)',
       },
     },
   },
@@ -2511,16 +1921,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/app_builds \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'app_builds.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.app_builds.list(\n    app_id="app_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'app_builds.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.app_builds.list(app_id: "app_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -2554,16 +1954,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/app_builds \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "attachment": {\n            "id": "id"\n          },\n          "checksum": "checksum",\n          "platform": "ios",\n          "ai_prompt_id": "prmt_xxxxxxxxxxxxx",\n          "app_id": "app_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'app_builds.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp_build = client.app_builds.create(\n    attachment={\n        "id": "id"\n    },\n    checksum="checksum",\n    platform="ios",\n)\nprint(app_build.id)',
-      },
-      ruby: {
-        method: 'app_builds.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp_build = whop.app_builds.create(attachment: {id: "id"}, checksum: "checksum", platform: :ios)\n\nputs(app_build)',
-      },
     },
   },
   {
@@ -2590,16 +1980,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/app_builds/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'app_builds.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp_build = client.app_builds.retrieve(\n    "apbu_xxxxxxxxxxxxx",\n)\nprint(app_build.id)',
-      },
-      ruby: {
-        method: 'app_builds.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp_build = whop.app_builds.retrieve("apbu_xxxxxxxxxxxxx")\n\nputs(app_build)',
-      },
     },
   },
   {
@@ -2625,16 +2005,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/app_builds/$ID/promote \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'app_builds.promote',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\napp_build = client.app_builds.promote(\n    "apbu_xxxxxxxxxxxxx",\n)\nprint(app_build.id)',
-      },
-      ruby: {
-        method: 'app_builds.promote',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\napp_build = whop.app_builds.promote("apbu_xxxxxxxxxxxxx")\n\nputs(app_build)',
       },
     },
   },
@@ -2670,16 +2040,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/shipments \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'shipments.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.shipments.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'shipments.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.shipments.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -2706,16 +2066,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/shipments \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "payment_id": "pay_xxxxxxxxxxxxxx",\n          "tracking_code": "tracking_code"\n        }\'',
       },
-      python: {
-        method: 'shipments.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nshipment = client.shipments.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    payment_id="pay_xxxxxxxxxxxxxx",\n    tracking_code="tracking_code",\n)\nprint(shipment.id)',
-      },
-      ruby: {
-        method: 'shipments.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nshipment = whop.shipments.create(\n  company_id: "biz_xxxxxxxxxxxxxx",\n  payment_id: "pay_xxxxxxxxxxxxxx",\n  tracking_code: "tracking_code"\n)\n\nputs(shipment)',
-      },
     },
   },
   {
@@ -2741,16 +2091,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/shipments/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'shipments.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nshipment = client.shipments.retrieve(\n    "ship_xxxxxxxxxxxxx",\n)\nprint(shipment.id)',
-      },
-      ruby: {
-        method: 'shipments.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nshipment = whop.shipments.retrieve("ship_xxxxxxxxxxxxx")\n\nputs(shipment)',
       },
     },
   },
@@ -2788,16 +2128,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/checkout_configurations \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'checkout_configurations.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.checkout_configurations.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'checkout_configurations.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.checkout_configurations.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -2810,7 +2140,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) checkout_configurations > (method) create',
     qualified: 'client.checkoutConfigurations.create',
     params: [
-      "{ plan: { company_id: string; currency: string; adaptive_pricing_enabled?: boolean; application_fee_amount?: number; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; force_create_new_plan?: boolean; image?: { id: string; }; initial_price?: number; internal_notes?: string; override_tax_type?: 'inclusive' | 'exclusive' | 'unspecified'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; product?: { external_identifier: string; title: string; collect_shipping_address?: boolean; custom_statement_descriptor?: string; description?: string; global_affiliate_percentage?: number; global_affiliate_status?: 'enabled' | 'disabled'; headline?: string; product_tax_code_id?: string; redirect_purchase_url?: string; route?: string; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id?: string; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; split_pay_required_payments?: number; stock?: number; title?: string; trial_period_days?: number; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; affiliate_code?: string; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; mode?: 'payment'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; } | { plan_id: string; affiliate_code?: string; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; mode?: 'payment'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; } | { company_id: string; mode: 'setup'; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; };",
+      "{ plan: { company_id: string; currency: string; adaptive_pricing_enabled?: boolean; application_fee_amount?: number; billing_period?: number; custom_fields?: { field_type: 'text'; name: string; id?: string; order?: number; placeholder?: string; required?: boolean; }[]; description?: string; expiration_days?: number; force_create_new_plan?: boolean; image?: { id: string; }; initial_price?: number; internal_notes?: string; override_tax_type?: 'inclusive' | 'exclusive' | 'unspecified'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; plan_type?: 'renewal' | 'one_time'; product?: { external_identifier: string; title: string; collect_shipping_address?: boolean; custom_statement_descriptor?: string; description?: string; global_affiliate_percentage?: number; global_affiliate_status?: 'enabled' | 'disabled'; headline?: string; product_tax_code_id?: string; redirect_purchase_url?: string; route?: string; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id?: string; release_method?: 'buy_now' | 'waitlist'; renewal_price?: number; split_pay_required_payments?: number; stock?: number; title?: string; trial_period_days?: number; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; affiliate_code?: string; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; mode?: 'payment'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; } | { plan_id: string; affiliate_code?: string; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; mode?: 'payment'; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; } | { company_id: string; mode: 'setup'; allow_promo_codes?: boolean; checkout_styling?: { background_color?: string; border_style?: 'rounded' | 'pill' | 'rectangular'; button_color?: string; font_family?: 'system' | 'roboto' | 'open_sans'; }; currency?: string; metadata?: object; payment_method_configuration?: { disabled: string[]; enabled: string[]; include_platform_defaults?: boolean; }; redirect_url?: string; source_url?: string; three_ds_level?: 'mandate_challenge' | 'frictionless'; };",
     ],
     response:
       "{ id: string; affiliate_code: string; allow_promo_codes: boolean; company_id: string; currency: string; metadata: object; mode: 'payment' | 'setup'; payment_method_configuration: { disabled: string[]; enabled: string[]; include_platform_defaults: boolean; }; plan: { id: string; adaptive_pricing_enabled: boolean; billing_period: number; currency: string; expiration_days: number; initial_price: number; plan_type: 'renewal' | 'one_time'; release_method: 'buy_now' | 'waitlist'; renewal_price: number; three_ds_level: 'mandate_challenge' | 'frictionless'; trial_period_days: number; visibility: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; purchase_url: string; redirect_url: string; }",
@@ -2823,16 +2153,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/checkout_configurations \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "plan": {\n            "company_id": "biz_xxxxxxxxxxxxxx",\n            "currency": "usd"\n          }\n        }\'',
-      },
-      python: {
-        method: 'checkout_configurations.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncheckout_configuration = client.checkout_configurations.create(\n    plan={\n        "company_id": "biz_xxxxxxxxxxxxxx",\n        "currency": "usd",\n    },\n)\nprint(checkout_configuration.id)',
-      },
-      ruby: {
-        method: 'checkout_configurations.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncheckout_configuration = whop.checkout_configurations.create(body: {plan: {company_id: "biz_xxxxxxxxxxxxxx", currency: :usd}})\n\nputs(checkout_configuration)',
       },
     },
   },
@@ -2859,16 +2179,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/checkout_configurations/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'checkout_configurations.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncheckout_configuration = client.checkout_configurations.retrieve(\n    "ch_xxxxxxxxxxxxxxx",\n)\nprint(checkout_configuration.id)',
-      },
-      ruby: {
-        method: 'checkout_configurations.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncheckout_configuration = whop.checkout_configurations.retrieve("ch_xxxxxxxxxxxxxxx")\n\nputs(checkout_configuration)',
       },
     },
   },
@@ -2902,16 +2212,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/messages \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'messages.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.messages.list(\n    channel_id="channel_id",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'messages.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.messages.list(channel_id: "channel_id")\n\nputs(page)',
-      },
     },
   },
   {
@@ -2936,16 +2236,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/messages/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'messages.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmessage = client.messages.retrieve(\n    "id",\n)\nprint(message.id)',
-      },
-      ruby: {
-        method: 'messages.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmessage = whop.messages.retrieve("id")\n\nputs(message)',
       },
     },
   },
@@ -2980,16 +2270,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/messages \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "channel_id": "channel_id",\n          "content": "content"\n        }\'',
       },
-      python: {
-        method: 'messages.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmessage = client.messages.create(\n    channel_id="channel_id",\n    content="content",\n)\nprint(message.id)',
-      },
-      ruby: {
-        method: 'messages.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmessage = whop.messages.create(channel_id: "channel_id", content: "content")\n\nputs(message)',
-      },
     },
   },
   {
@@ -3016,16 +2296,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/messages/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'messages.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmessage = client.messages.update(\n    id="id",\n)\nprint(message.id)',
-      },
-      ruby: {
-        method: 'messages.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmessage = whop.messages.update("id")\n\nputs(message)',
-      },
     },
   },
   {
@@ -3050,16 +2320,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/messages/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'messages.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmessage = client.messages.delete(\n    "id",\n)\nprint(message)',
-      },
-      ruby: {
-        method: 'messages.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmessage = whop.messages.delete("id")\n\nputs(message)',
       },
     },
   },
@@ -3094,16 +2354,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/chat_channels \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'chat_channels.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.chat_channels.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'chat_channels.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.chat_channels.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -3129,16 +2379,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/chat_channels/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'chat_channels.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nchat_channel = client.chat_channels.retrieve(\n    "id",\n)\nprint(chat_channel.id)',
-      },
-      ruby: {
-        method: 'chat_channels.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nchat_channel = whop.chat_channels.retrieve("id")\n\nputs(chat_channel)',
       },
     },
   },
@@ -3174,16 +2414,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/chat_channels/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'chat_channels.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nchat_channel = client.chat_channels.update(\n    id="id",\n)\nprint(chat_channel.id)',
-      },
-      ruby: {
-        method: 'chat_channels.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nchat_channel = whop.chat_channels.update("id")\n\nputs(chat_channel)',
-      },
     },
   },
   {
@@ -3209,16 +2439,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/users/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'users.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.retrieve(\n    id="user_xxxxxxxxxxxxx",\n)\nprint(user.id)',
-      },
-      ruby: {
-        method: 'users.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nuser = whop.users.retrieve("user_xxxxxxxxxxxxx")\n\nputs(user)',
-      },
     },
   },
   {
@@ -3242,16 +2462,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/users/$ID/access/$RESOURCE_ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'users.check_access',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.users.check_access(\n    resource_id="resource_id",\n    id="user_xxxxxxxxxxxxx",\n)\nprint(response.access_level)',
-      },
-      ruby: {
-        method: 'users.check_access',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.users.check_access("resource_id", id: "user_xxxxxxxxxxxxx")\n\nputs(response)',
       },
     },
   },
@@ -3285,16 +2495,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/users/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'users.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nuser = client.users.update(\n    id="user_xxxxxxxxxxxxx",\n)\nprint(user.id)',
-      },
-      ruby: {
-        method: 'users.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nuser = whop.users.update("user_xxxxxxxxxxxxx")\n\nputs(user)',
-      },
     },
   },
   {
@@ -3319,16 +2519,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/users \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'users.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.users.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'users.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.users.list\n\nputs(page)',
       },
     },
   },
@@ -3376,16 +2566,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/payments \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payments.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.payments.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'payments.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.payments.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -3411,16 +2591,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/payments/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'payments.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment = client.payments.retrieve(\n    "pay_xxxxxxxxxxxxxx",\n)\nprint(payment.id)',
-      },
-      ruby: {
-        method: 'payments.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment = whop.payments.retrieve("pay_xxxxxxxxxxxxxx")\n\nputs(payment)',
       },
     },
   },
@@ -3448,16 +2618,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payments/$ID/refund \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payments.refund',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment = client.payments.refund(\n    id="pay_xxxxxxxxxxxxxx",\n)\nprint(payment.id)',
-      },
-      ruby: {
-        method: 'payments.refund',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment = whop.payments.refund("pay_xxxxxxxxxxxxxx")\n\nputs(payment)',
-      },
     },
   },
   {
@@ -3483,16 +2643,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/payments/$ID/retry \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'payments.retry',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment = client.payments.retry(\n    "pay_xxxxxxxxxxxxxx",\n)\nprint(payment.id)',
-      },
-      ruby: {
-        method: 'payments.retry_',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment = whop.payments.retry_("pay_xxxxxxxxxxxxxx")\n\nputs(payment)',
       },
     },
   },
@@ -3520,16 +2670,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payments/$ID/void \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payments.void',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment = client.payments.void(\n    "pay_xxxxxxxxxxxxxx",\n)\nprint(payment.id)',
-      },
-      ruby: {
-        method: 'payments.void',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment = whop.payments.void("pay_xxxxxxxxxxxxxx")\n\nputs(payment)',
-      },
     },
   },
   {
@@ -3556,16 +2696,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payments \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "member_id": "mber_xxxxxxxxxxxxx",\n          "payment_method_id": "pmt_xxxxxxxxxxxxxx",\n          "plan": {\n            "currency": "usd"\n          }\n        }\'',
       },
-      python: {
-        method: 'payments.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment = client.payments.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    member_id="mber_xxxxxxxxxxxxx",\n    payment_method_id="pmt_xxxxxxxxxxxxxx",\n    plan={\n        "currency": "usd"\n    },\n)\nprint(payment.id)',
-      },
-      ruby: {
-        method: 'payments.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment = whop.payments.create(\n  body: {\n    company_id: "biz_xxxxxxxxxxxxxx",\n    member_id: "mber_xxxxxxxxxxxxx",\n    payment_method_id: "pmt_xxxxxxxxxxxxxx",\n    plan: {currency: :usd}\n  }\n)\n\nputs(payment)',
-      },
     },
   },
   {
@@ -3590,16 +2720,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/payments/$ID/fees \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'payments.list_fees',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.payments.list_fees(\n    id="pay_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.amount)',
-      },
-      ruby: {
-        method: 'payments.list_fees',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.payments.list_fees("pay_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -3637,16 +2757,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/support_channels \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'support_channels.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.support_channels.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'support_channels.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.support_channels.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -3673,16 +2783,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/support_channels/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'support_channels.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nsupport_channel = client.support_channels.retrieve(\n    "id",\n)\nprint(support_channel.id)',
-      },
-      ruby: {
-        method: 'support_channels.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nsupport_channel = whop.support_channels.retrieve("id")\n\nputs(support_channel)',
-      },
     },
   },
   {
@@ -3708,16 +2808,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/support_channels \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "user_id": "user_xxxxxxxxxxxxx"\n        }\'',
-      },
-      python: {
-        method: 'support_channels.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nsupport_channel = client.support_channels.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    user_id="user_xxxxxxxxxxxxx",\n)\nprint(support_channel.id)',
-      },
-      ruby: {
-        method: 'support_channels.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nsupport_channel = whop.support_channels.create(company_id: "biz_xxxxxxxxxxxxxx", user_id: "user_xxxxxxxxxxxxx")\n\nputs(support_channel)',
       },
     },
   },
@@ -3755,16 +2845,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/experiences \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'experiences.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.experiences.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'experiences.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.experiences.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -3797,16 +2877,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/experiences \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "app_id": "app_xxxxxxxxxxxxxx",\n          "company_id": "biz_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'experiences.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.create(\n    app_id="app_xxxxxxxxxxxxxx",\n    company_id="biz_xxxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.create(app_id: "app_xxxxxxxxxxxxxx", company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(experience)',
-      },
     },
   },
   {
@@ -3831,16 +2901,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'experiences.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.retrieve(\n    "exp_xxxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.retrieve("exp_xxxxxxxxxxxxxx")\n\nputs(experience)',
       },
     },
   },
@@ -3875,16 +2935,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'experiences.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.update(\n    id="exp_xxxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.update("exp_xxxxxxxxxxxxxx")\n\nputs(experience)',
-      },
     },
   },
   {
@@ -3908,16 +2958,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'experiences.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.delete(\n    "exp_xxxxxxxxxxxxxx",\n)\nprint(experience)',
-      },
-      ruby: {
-        method: 'experiences.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.delete("exp_xxxxxxxxxxxxxx")\n\nputs(experience)',
       },
     },
   },
@@ -3945,16 +2985,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID/attach \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "product_id": "prod_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'experiences.attach',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.attach(\n    id="exp_xxxxxxxxxxxxxx",\n    product_id="prod_xxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.attach',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.attach("exp_xxxxxxxxxxxxxx", product_id: "prod_xxxxxxxxxxxxx")\n\nputs(experience)',
-      },
     },
   },
   {
@@ -3981,16 +3011,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID/detach \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "product_id": "prod_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'experiences.detach',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.detach(\n    id="exp_xxxxxxxxxxxxxx",\n    product_id="prod_xxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.detach',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.detach("exp_xxxxxxxxxxxxxx", product_id: "prod_xxxxxxxxxxxxx")\n\nputs(experience)',
-      },
     },
   },
   {
@@ -4016,16 +3036,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/experiences/$ID/duplicate \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'experiences.duplicate',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nexperience = client.experiences.duplicate(\n    id="exp_xxxxxxxxxxxxxx",\n)\nprint(experience.id)',
-      },
-      ruby: {
-        method: 'experiences.duplicate',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nexperience = whop.experiences.duplicate("exp_xxxxxxxxxxxxxx")\n\nputs(experience)',
       },
     },
   },
@@ -4059,16 +3069,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/reactions \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'reactions.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.reactions.list(\n    resource_id="resource_id",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'reactions.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.reactions.list(resource_id: "resource_id")\n\nputs(page)',
-      },
     },
   },
   {
@@ -4095,16 +3095,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/reactions \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "resource_id": "resource_id"\n        }\'',
       },
-      python: {
-        method: 'reactions.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nreaction = client.reactions.create(\n    resource_id="resource_id",\n)\nprint(reaction.id)',
-      },
-      ruby: {
-        method: 'reactions.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nreaction = whop.reactions.create(resource_id: "resource_id")\n\nputs(reaction)',
-      },
     },
   },
   {
@@ -4130,16 +3120,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/reactions/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'reactions.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nreaction = client.reactions.retrieve(\n    "reac_xxxxxxxxxxxxxxxxxxxxxx",\n)\nprint(reaction.id)',
-      },
-      ruby: {
-        method: 'reactions.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nreaction = whop.reactions.retrieve("reac_xxxxxxxxxxxxxxxxxxxxxx")\n\nputs(reaction)',
-      },
     },
   },
   {
@@ -4164,16 +3144,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/reactions/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'reactions.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nreaction = client.reactions.delete(\n    id="reac_xxxxxxxxxxxxxxxxxxxxxx",\n)\nprint(reaction)',
-      },
-      ruby: {
-        method: 'reactions.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nreaction = whop.reactions.delete("reac_xxxxxxxxxxxxxxxxxxxxxx")\n\nputs(reaction)',
       },
     },
   },
@@ -4218,16 +3188,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/members \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'members.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.members.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'members.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.members.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -4253,16 +3213,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/members/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'members.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nmember = client.members.retrieve(\n    "id",\n)\nprint(member.id)',
-      },
-      ruby: {
-        method: 'members.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nmember = whop.members.retrieve("id")\n\nputs(member)',
       },
     },
   },
@@ -4296,16 +3246,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/forums \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'forums.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.forums.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'forums.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.forums.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -4330,16 +3270,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/forums/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'forums.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nforum = client.forums.retrieve(\n    "id",\n)\nprint(forum.id)',
-      },
-      ruby: {
-        method: 'forums.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nforum = whop.forums.retrieve("id")\n\nputs(forum)',
       },
     },
   },
@@ -4373,16 +3303,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/forums/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'forums.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nforum = client.forums.update(\n    id="id",\n)\nprint(forum.id)',
-      },
-      ruby: {
-        method: 'forums.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nforum = whop.forums.update("id")\n\nputs(forum)',
       },
     },
   },
@@ -4420,16 +3340,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/promo_codes \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'promo_codes.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.promo_codes.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'promo_codes.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.promo_codes.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -4473,16 +3383,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/promo_codes \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount_off": 6.9,\n          "base_currency": "usd",\n          "code": "code",\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "new_users_only": true,\n          "promo_duration_months": 42,\n          "promo_type": "percentage",\n          "expires_at": "2023-12-01T05:00:00.401Z",\n          "product_id": "prod_xxxxxxxxxxxxx",\n          "stock": 42\n        }\'',
       },
-      python: {
-        method: 'promo_codes.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npromo_code = client.promo_codes.create(\n    amount_off=6.9,\n    base_currency="usd",\n    code="code",\n    company_id="biz_xxxxxxxxxxxxxx",\n    new_users_only=True,\n    promo_duration_months=42,\n    promo_type="percentage",\n)\nprint(promo_code.id)',
-      },
-      ruby: {
-        method: 'promo_codes.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npromo_code = whop.promo_codes.create(\n  amount_off: 6.9,\n  base_currency: :usd,\n  code: "code",\n  company_id: "biz_xxxxxxxxxxxxxx",\n  new_users_only: true,\n  promo_duration_months: 42,\n  promo_type: :percentage\n)\n\nputs(promo_code)',
-      },
     },
   },
   {
@@ -4509,16 +3409,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/promo_codes/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'promo_codes.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npromo_code = client.promo_codes.retrieve(\n    "promo_xxxxxxxxxxxx",\n)\nprint(promo_code.id)',
-      },
-      ruby: {
-        method: 'promo_codes.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npromo_code = whop.promo_codes.retrieve("promo_xxxxxxxxxxxx")\n\nputs(promo_code)',
-      },
     },
   },
   {
@@ -4543,16 +3433,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/promo_codes/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'promo_codes.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npromo_code = client.promo_codes.delete(\n    "promo_xxxxxxxxxxxx",\n)\nprint(promo_code)',
-      },
-      ruby: {
-        method: 'promo_codes.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npromo_code = whop.promo_codes.delete("promo_xxxxxxxxxxxx")\n\nputs(promo_code)',
       },
     },
   },
@@ -4585,16 +3465,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/courses \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'courses.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.courses.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'courses.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.courses.list\n\nputs(page)',
       },
     },
   },
@@ -4631,16 +3501,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/courses \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "experience_id": "exp_xxxxxxxxxxxxxx",\n          "title": "title",\n          "order": "123.45"\n        }\'',
       },
-      python: {
-        method: 'courses.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse = client.courses.create(\n    experience_id="exp_xxxxxxxxxxxxxx",\n    title="title",\n)\nprint(course.id)',
-      },
-      ruby: {
-        method: 'courses.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse = whop.courses.create(experience_id: "exp_xxxxxxxxxxxxxx", title: "title")\n\nputs(course)',
-      },
     },
   },
   {
@@ -4665,16 +3525,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/courses/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'courses.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse = client.courses.retrieve(\n    "cors_xxxxxxxxxxxxx",\n)\nprint(course.id)',
-      },
-      ruby: {
-        method: 'courses.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse = whop.courses.retrieve("cors_xxxxxxxxxxxxx")\n\nputs(course)',
       },
     },
   },
@@ -4714,16 +3564,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/courses/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'courses.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse = client.courses.update(\n    id="cors_xxxxxxxxxxxxx",\n)\nprint(course.id)',
-      },
-      ruby: {
-        method: 'courses.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse = whop.courses.update("cors_xxxxxxxxxxxxx")\n\nputs(course)',
-      },
     },
   },
   {
@@ -4748,16 +3588,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/courses/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'courses.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse = client.courses.delete(\n    "cors_xxxxxxxxxxxxx",\n)\nprint(course)',
-      },
-      ruby: {
-        method: 'courses.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse = whop.courses.delete("cors_xxxxxxxxxxxxx")\n\nputs(course)',
       },
     },
   },
@@ -4790,16 +3620,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_chapters \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_chapters.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.course_chapters.list(\n    course_id="cors_xxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'course_chapters.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.course_chapters.list(course_id: "cors_xxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -4825,16 +3645,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_chapters \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "course_id": "cors_xxxxxxxxxxxxx"\n        }\'',
-      },
-      python: {
-        method: 'course_chapters.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_chapter = client.course_chapters.create(\n    course_id="cors_xxxxxxxxxxxxx",\n)\nprint(course_chapter.id)',
-      },
-      ruby: {
-        method: 'course_chapters.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_chapter = whop.course_chapters.create(course_id: "cors_xxxxxxxxxxxxx")\n\nputs(course_chapter)',
       },
     },
   },
@@ -4862,16 +3672,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_chapters/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_chapters.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_chapter = client.course_chapters.retrieve(\n    "chap_xxxxxxxxxxxxx",\n)\nprint(course_chapter.id)',
-      },
-      ruby: {
-        method: 'course_chapters.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_chapter = whop.course_chapters.retrieve("chap_xxxxxxxxxxxxx")\n\nputs(course_chapter)',
-      },
     },
   },
   {
@@ -4897,16 +3697,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_chapters/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "title": "title"\n        }\'',
       },
-      python: {
-        method: 'course_chapters.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_chapter = client.course_chapters.update(\n    id="chap_xxxxxxxxxxxxx",\n    title="title",\n)\nprint(course_chapter.id)',
-      },
-      ruby: {
-        method: 'course_chapters.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_chapter = whop.course_chapters.update("chap_xxxxxxxxxxxxx", title: "title")\n\nputs(course_chapter)',
-      },
     },
   },
   {
@@ -4931,16 +3721,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_chapters/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_chapters.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_chapter = client.course_chapters.delete(\n    "chap_xxxxxxxxxxxxx",\n)\nprint(course_chapter)',
-      },
-      ruby: {
-        method: 'course_chapters.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_chapter = whop.course_chapters.delete("chap_xxxxxxxxxxxxx")\n\nputs(course_chapter)',
       },
     },
   },
@@ -4974,16 +3754,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lessons \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_lessons.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.course_lessons.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'course_lessons.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.course_lessons.list\n\nputs(page)',
       },
     },
   },
@@ -5020,16 +3790,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_lessons \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "chapter_id": "chap_xxxxxxxxxxxxx",\n          "lesson_type": "text",\n          "days_from_course_start_until_unlock": 42\n        }\'',
       },
-      python: {
-        method: 'course_lessons.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlesson = client.course_lessons.create(\n    chapter_id="chap_xxxxxxxxxxxxx",\n    lesson_type="text",\n)\nprint(lesson.id)',
-      },
-      ruby: {
-        method: 'course_lessons.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlesson = whop.course_lessons.create(chapter_id: "chap_xxxxxxxxxxxxx", lesson_type: :text)\n\nputs(lesson)',
-      },
     },
   },
   {
@@ -5055,16 +3815,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_lessons.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlesson = client.course_lessons.retrieve(\n    "lesn_xxxxxxxxxxxxx",\n)\nprint(lesson.id)',
-      },
-      ruby: {
-        method: 'course_lessons.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlesson = whop.course_lessons.retrieve("lesn_xxxxxxxxxxxxx")\n\nputs(lesson)',
       },
     },
   },
@@ -5108,16 +3858,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_lessons.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlesson = client.course_lessons.update(\n    id="lesn_xxxxxxxxxxxxx",\n)\nprint(lesson.id)',
-      },
-      ruby: {
-        method: 'course_lessons.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlesson = whop.course_lessons.update("lesn_xxxxxxxxxxxxx")\n\nputs(lesson)',
-      },
     },
   },
   {
@@ -5143,16 +3883,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_lessons.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_lesson = client.course_lessons.delete(\n    "lesn_xxxxxxxxxxxxx",\n)\nprint(course_lesson)',
-      },
-      ruby: {
-        method: 'course_lessons.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_lesson = whop.course_lessons.delete("lesn_xxxxxxxxxxxxx")\n\nputs(course_lesson)',
-      },
     },
   },
   {
@@ -5176,16 +3906,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$LESSON_ID/mark_as_completed \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_lessons.mark_as_completed',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.course_lessons.mark_as_completed(\n    "lesson_id",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'course_lessons.mark_as_completed',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.course_lessons.mark_as_completed("lesson_id")\n\nputs(response)',
       },
     },
   },
@@ -5211,16 +3931,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$LESSON_ID/start \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_lessons.start',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.course_lessons.start(\n    "lesson_id",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'course_lessons.start',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.course_lessons.start("lesson_id")\n\nputs(response)',
       },
     },
   },
@@ -5249,16 +3959,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_lessons/$LESSON_ID/submit_assessment \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "answers": [\n            {\n              "question_id": "question_id"\n            }\n          ]\n        }\'',
-      },
-      python: {
-        method: 'course_lessons.submit_assessment',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.course_lessons.submit_assessment(\n    lesson_id="lesson_id",\n    answers=[{\n        "question_id": "question_id"\n    }],\n)\nprint(response.id)',
-      },
-      ruby: {
-        method: 'course_lessons.submit_assessment',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.course_lessons.submit_assessment("lesson_id", answers: [{question_id: "question_id"}])\n\nputs(response)',
       },
     },
   },
@@ -5295,16 +3995,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/reviews \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'reviews.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.reviews.list(\n    product_id="prod_xxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'reviews.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.reviews.list(product_id: "prod_xxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -5329,16 +4019,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/reviews/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'reviews.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nreview = client.reviews.retrieve(\n    "rev_xxxxxxxxxxxxxx",\n)\nprint(review.id)',
-      },
-      ruby: {
-        method: 'reviews.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nreview = whop.reviews.retrieve("rev_xxxxxxxxxxxxxx")\n\nputs(review)',
       },
     },
   },
@@ -5373,16 +4053,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/course_students \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'course_students.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.course_students.list(\n    course_id="cors_xxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'course_students.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.course_students.list(course_id: "cors_xxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -5408,16 +4078,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/course_students/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'course_students.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncourse_student = client.course_students.retrieve(\n    "id",\n)\nprint(course_student.id)',
-      },
-      ruby: {
-        method: 'course_students.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncourse_student = whop.course_students.retrieve("id")\n\nputs(course_student)',
       },
     },
   },
@@ -5449,16 +4109,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/access_tokens \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'access_tokens.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccess_token = client.access_tokens.create()\nprint(access_token.token)',
-      },
-      ruby: {
-        method: 'access_tokens.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccess_token = whop.access_tokens.create\n\nputs(access_token)',
-      },
     },
   },
   {
@@ -5483,16 +4133,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/notifications \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "content": "content",\n          "title": "title"\n        }\'',
-      },
-      python: {
-        method: 'notifications.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nnotification = client.notifications.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    content="content",\n    title="title",\n)\nprint(notification.success)',
-      },
-      ruby: {
-        method: 'notifications.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nnotification = whop.notifications.create(body: {company_id: "biz_xxxxxxxxxxxxxx", content: "content", title: "title"})\n\nputs(notification)',
       },
     },
   },
@@ -5528,16 +4168,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/disputes \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'disputes.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.disputes.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'disputes.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.disputes.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -5564,16 +4194,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/disputes/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'disputes.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndispute = client.disputes.retrieve(\n    "dspt_xxxxxxxxxxxxx",\n)\nprint(dispute.id)',
-      },
-      ruby: {
-        method: 'disputes.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndispute = whop.disputes.retrieve("dspt_xxxxxxxxxxxxx")\n\nputs(dispute)',
-      },
     },
   },
   {
@@ -5599,16 +4219,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/disputes/$ID/submit_evidence \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'disputes.submit_evidence',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndispute = client.disputes.submit_evidence(\n    "dspt_xxxxxxxxxxxxx",\n)\nprint(dispute.id)',
-      },
-      ruby: {
-        method: 'disputes.submit_evidence',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndispute = whop.disputes.submit_evidence("dspt_xxxxxxxxxxxxx")\n\nputs(dispute)',
       },
     },
   },
@@ -5652,16 +4262,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/disputes/$ID/update_evidence \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'disputes.update_evidence',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndispute = client.disputes.update_evidence(\n    id="dspt_xxxxxxxxxxxxx",\n)\nprint(dispute.id)',
-      },
-      ruby: {
-        method: 'disputes.update_evidence',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndispute = whop.disputes.update_evidence("dspt_xxxxxxxxxxxxx")\n\nputs(dispute)',
-      },
     },
   },
   {
@@ -5698,16 +4298,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/refunds \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'refunds.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.refunds.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'refunds.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.refunds.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -5733,16 +4323,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/refunds/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'refunds.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nrefund = client.refunds.retrieve(\n    "rf_xxxxxxxxxxxxxxx",\n)\nprint(refund.id)',
-      },
-      ruby: {
-        method: 'refunds.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nrefund = whop.refunds.retrieve("rf_xxxxxxxxxxxxxxx")\n\nputs(refund)',
       },
     },
   },
@@ -5779,16 +4359,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/withdrawals \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'withdrawals.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.withdrawals.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'withdrawals.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.withdrawals.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -5814,16 +4384,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/withdrawals/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'withdrawals.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwithdrawal = client.withdrawals.retrieve(\n    "wdrl_xxxxxxxxxxxxx",\n)\nprint(withdrawal.id)',
-      },
-      ruby: {
-        method: 'withdrawals.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwithdrawal = whop.withdrawals.retrieve("wdrl_xxxxxxxxxxxxx")\n\nputs(withdrawal)',
       },
     },
   },
@@ -5858,16 +4418,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/withdrawals \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 6.9,\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "currency": "usd"\n        }\'',
       },
-      python: {
-        method: 'withdrawals.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwithdrawal = client.withdrawals.create(\n    amount=6.9,\n    company_id="biz_xxxxxxxxxxxxxx",\n    currency="usd",\n)\nprint(withdrawal.id)',
-      },
-      ruby: {
-        method: 'withdrawals.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwithdrawal = whop.withdrawals.create(amount: 6.9, company_id: "biz_xxxxxxxxxxxxxx", currency: :usd)\n\nputs(withdrawal)',
-      },
     },
   },
   {
@@ -5898,16 +4448,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/account_links \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "refresh_url": "refresh_url",\n          "return_url": "return_url",\n          "use_case": "account_onboarding"\n        }\'',
       },
-      python: {
-        method: 'account_links.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount_link = client.account_links.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    refresh_url="refresh_url",\n    return_url="return_url",\n    use_case="account_onboarding",\n)\nprint(account_link.expires_at)',
-      },
-      ruby: {
-        method: 'account_links.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount_link = whop.account_links.create(\n  company_id: "biz_xxxxxxxxxxxxxx",\n  refresh_url: "refresh_url",\n  return_url: "return_url",\n  use_case: :account_onboarding\n)\n\nputs(account_link)',
-      },
     },
   },
   {
@@ -5921,9 +4461,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.accounts.list',
     params: ['page?: number;', 'per?: number;'],
     response:
-      '{ accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }',
+      '{ accounts: { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }',
     markdown:
-      "## list\n\n`client.accounts.list(page?: number, per?: number): { accounts: account[]; pagination: object; }`\n\n**get** `/accounts`\n\nLists accounts visible to the credential. User tokens return the user's business accounts; business account API keys return the requesting business account and its connected accounts.\n\n### Parameters\n\n- `page?: number`\n  The page number to retrieve\n\n- `per?: number`\n  The number of resources to return per page. There is a limit of 50 results per page.\n\n### Returns\n\n- `{ accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }`\n\n  - `accounts: { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }[]`\n  - `pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst accounts = await client.accounts.list();\n\nconsole.log(accounts);\n```",
+      "## list\n\n`client.accounts.list(page?: number, per?: number): { accounts: account[]; pagination: object; }`\n\n**get** `/accounts`\n\nLists accounts visible to the credential. User tokens return the user's business accounts; business account API keys return the requesting business account and its connected accounts.\n\n### Parameters\n\n- `page?: number`\n  The page number to retrieve\n\n- `per?: number`\n  The number of resources to return per page. There is a limit of 50 results per page.\n\n### Returns\n\n- `{ accounts: { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }[]; pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }; }`\n\n  - `accounts: { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }[]`\n  - `pagination: { current_page: number; next_page: number; prev_page: number; total_count: number; total_pages: number; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst accounts = await client.accounts.list();\n\nconsole.log(accounts);\n```",
     perLanguage: {
       typescript: {
         method: 'client.accounts.list',
@@ -5932,16 +4472,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/accounts \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'accounts.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccounts = client.accounts.list()\nprint(accounts.accounts)',
-      },
-      ruby: {
-        method: 'accounts.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccounts = whop.accounts.list\n\nputs(accounts)',
       },
     },
   },
@@ -5956,9 +4486,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.accounts.create',
     params: ['email?: string;', 'metadata?: object;'],
     response:
-      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+      "{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
     markdown:
-      "## create\n\n`client.accounts.create(email?: string, metadata?: object): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**post** `/accounts`\n\nCreates an account. User tokens create business accounts; business account API keys create connected accounts.\n\n### Parameters\n\n- `email?: string`\n  The email address of the account owner. Required for business account API key requests.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.create();\n\nconsole.log(account);\n```",
+      "## create\n\n`client.accounts.create(email?: string, metadata?: object): { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }`\n\n**post** `/accounts`\n\nCreates an account. User tokens create business accounts; business account API keys create connected accounts.\n\n### Parameters\n\n- `email?: string`\n  The email address of the account owner. Required for business account API key requests.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `country: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `home_preferences: string[]`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `invoice_prefix: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `onboarding_type: string`\n  - `opengraph_image_url: string`\n  - `opengraph_image_variant: string`\n  - `other_business_description: string`\n  - `other_industry_description: string`\n  - `parent_account_id: string`\n  - `require_2fa: boolean`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `show_joined_whops: boolean`\n  - `show_reviews_dtc: boolean`\n  - `show_user_directory: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `store_page_config: object`\n  - `target_audience: string`\n  - `title: string`\n  - `use_logo_as_opengraph_image_fallback: boolean`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.create();\n\nconsole.log(account);\n```",
     perLanguage: {
       typescript: {
         method: 'client.accounts.create',
@@ -5968,16 +4498,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           "curl https://api.whop.com/api/v1/accounts \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $WHOP_API_KEY\" \\\n    -d '{}'",
-      },
-      python: {
-        method: 'accounts.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.create()\nprint(account.id)',
-      },
-      ruby: {
-        method: 'accounts.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.create\n\nputs(account)',
       },
     },
   },
@@ -5990,9 +4510,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) accounts > (method) me',
     qualified: 'client.accounts.me',
     response:
-      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+      "{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
     markdown:
-      "## me\n\n`client.accounts.me(): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**get** `/accounts/me`\n\nRetrieves the business account associated with the current business account API key.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.me();\n\nconsole.log(account);\n```",
+      "## me\n\n`client.accounts.me(): { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }`\n\n**get** `/accounts/me`\n\nRetrieves the business account associated with the current business account API key.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `country: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `home_preferences: string[]`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `invoice_prefix: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `onboarding_type: string`\n  - `opengraph_image_url: string`\n  - `opengraph_image_variant: string`\n  - `other_business_description: string`\n  - `other_industry_description: string`\n  - `parent_account_id: string`\n  - `require_2fa: boolean`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `show_joined_whops: boolean`\n  - `show_reviews_dtc: boolean`\n  - `show_user_directory: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `store_page_config: object`\n  - `target_audience: string`\n  - `title: string`\n  - `use_logo_as_opengraph_image_fallback: boolean`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.me();\n\nconsole.log(account);\n```",
     perLanguage: {
       typescript: {
         method: 'client.accounts.me',
@@ -6002,16 +4522,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/accounts/me \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'accounts.me',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.me()\nprint(account.id)',
-      },
-      ruby: {
-        method: 'accounts.me',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.me\n\nputs(account)',
       },
     },
   },
@@ -6025,9 +4535,9 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     qualified: 'client.accounts.retrieve',
     params: ['account_id: string;'],
     response:
-      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+      "{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
     markdown:
-      "## retrieve\n\n`client.accounts.retrieve(account_id: string): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**get** `/accounts/{account_id}`\n\nRetrieves a single account visible to the credential, including its crypto wallet.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.retrieve('account_id');\n\nconsole.log(account);\n```",
+      "## retrieve\n\n`client.accounts.retrieve(account_id: string): { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }`\n\n**get** `/accounts/{account_id}`\n\nRetrieves a single account visible to the credential, including its crypto wallet.\n\n### Parameters\n\n- `account_id: string`\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `country: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `home_preferences: string[]`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `invoice_prefix: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `onboarding_type: string`\n  - `opengraph_image_url: string`\n  - `opengraph_image_variant: string`\n  - `other_business_description: string`\n  - `other_industry_description: string`\n  - `parent_account_id: string`\n  - `require_2fa: boolean`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `show_joined_whops: boolean`\n  - `show_reviews_dtc: boolean`\n  - `show_user_directory: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `store_page_config: object`\n  - `target_audience: string`\n  - `title: string`\n  - `use_logo_as_opengraph_image_fallback: boolean`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.retrieve('account_id');\n\nconsole.log(account);\n```",
     perLanguage: {
       typescript: {
         method: 'client.accounts.retrieve',
@@ -6037,16 +4547,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/accounts/$ACCOUNT_ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'accounts.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.retrieve(\n    "account_id",\n)\nprint(account.id)',
-      },
-      ruby: {
-        method: 'accounts.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.retrieve("account_id")\n\nputs(account)',
       },
     },
   },
@@ -6065,22 +4565,36 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'affiliate_instructions?: string;',
       'banner_image?: object;',
       'business_type?: string;',
+      'country?: string;',
       'description?: string;',
       'featured_affiliate_product_id?: string;',
+      'home_preferences?: string[];',
       'industry_group?: string;',
       'industry_type?: string;',
+      'invoice_prefix?: string;',
       'logo?: object;',
       'metadata?: object;',
+      'onboarding_type?: string;',
+      'opengraph_image?: object;',
+      'opengraph_image_variant?: string;',
+      'other_business_description?: string;',
+      'other_industry_description?: string;',
+      'require_2fa?: boolean;',
       'route?: string;',
       'send_customer_emails?: boolean;',
+      'show_joined_whops?: boolean;',
+      'show_reviews_dtc?: boolean;',
+      'show_user_directory?: boolean;',
       'social_links?: object[];',
+      'store_page_config?: object;',
       'target_audience?: string;',
       'title?: string;',
+      'use_logo_as_opengraph_image_fallback?: boolean;',
     ],
     response:
-      "{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
+      "{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }",
     markdown:
-      "## update\n\n`client.accounts.update(account_id: string, affiliate_application_required?: boolean, affiliate_instructions?: string, banner_image?: object, business_type?: string, description?: string, featured_affiliate_product_id?: string, industry_group?: string, industry_type?: string, logo?: object, metadata?: object, route?: string, send_customer_emails?: boolean, social_links?: object[], target_audience?: string, title?: string): { id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: account_social_link[]; target_audience: string; title: string; wallet: account_wallet; }`\n\n**patch** `/accounts/{account_id}`\n\nUpdates an account. User tokens can update business accounts; business account API keys can update connected accounts.\n\n### Parameters\n\n- `account_id: string`\n\n- `affiliate_application_required?: boolean`\n  Whether prospective affiliates must submit an application before promoting this account.\n\n- `affiliate_instructions?: string`\n  Guidelines shown to affiliates promoting this account.\n\n- `banner_image?: object`\n  Attachment input for the account banner image.\n\n- `business_type?: string`\n  The high-level business category for the account.\n\n- `description?: string`\n  A promotional description for the account.\n\n- `featured_affiliate_product_id?: string`\n  The ID of the product to feature for affiliates. Pass null to clear.\n\n- `industry_group?: string`\n  The industry group the account belongs to.\n\n- `industry_type?: string`\n  The specific industry vertical the account operates in.\n\n- `logo?: object`\n  Attachment input for the account logo.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n- `route?: string`\n  The unique URL slug for the account.\n\n- `send_customer_emails?: boolean`\n  Whether Whop sends transactional emails to customers on behalf of this account.\n\n- `social_links?: object[]`\n  The full list of social links to display for the account.\n\n- `target_audience?: string`\n  The target audience for this account.\n\n- `title?: string`\n  The display name of the account.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; created_at: string; description: string; email: string; industry_group: string; industry_type: string; logo_url: string; metadata: object; parent_account_id: string; route: string; send_customer_emails: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; target_audience: string; title: string; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `parent_account_id: string`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `target_audience: string`\n  - `title: string`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.update('account_id');\n\nconsole.log(account);\n```",
+      "## update\n\n`client.accounts.update(account_id: string, affiliate_application_required?: boolean, affiliate_instructions?: string, banner_image?: object, business_type?: string, country?: string, description?: string, featured_affiliate_product_id?: string, home_preferences?: string[], industry_group?: string, industry_type?: string, invoice_prefix?: string, logo?: object, metadata?: object, onboarding_type?: string, opengraph_image?: object, opengraph_image_variant?: string, other_business_description?: string, other_industry_description?: string, require_2fa?: boolean, route?: string, send_customer_emails?: boolean, show_joined_whops?: boolean, show_reviews_dtc?: boolean, show_user_directory?: boolean, social_links?: object[], store_page_config?: object, target_audience?: string, title?: string, use_logo_as_opengraph_image_fallback?: boolean): { id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: account_social_link[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: account_wallet; }`\n\n**patch** `/accounts/{account_id}`\n\nUpdates an account. User tokens can update business accounts; business account API keys can update connected accounts.\n\n### Parameters\n\n- `account_id: string`\n\n- `affiliate_application_required?: boolean`\n  Whether prospective affiliates must submit an application before promoting this account.\n\n- `affiliate_instructions?: string`\n  Guidelines shown to affiliates promoting this account.\n\n- `banner_image?: object`\n  Attachment input for the account banner image.\n\n- `business_type?: string`\n  The high-level business category for the account.\n\n- `country?: string`\n  The country the account is located in.\n\n- `description?: string`\n  A promotional description for the account.\n\n- `featured_affiliate_product_id?: string`\n  The ID of the product to feature for affiliates. Pass null to clear.\n\n- `home_preferences?: string[]`\n  Preferences for the public business home page.\n\n- `industry_group?: string`\n  The industry group the account belongs to.\n\n- `industry_type?: string`\n  The specific industry vertical the account operates in.\n\n- `invoice_prefix?: string`\n  The prefix to use for account invoices.\n\n- `logo?: object`\n  Attachment input for the account logo.\n\n- `metadata?: object`\n  Arbitrary key/value metadata to store on the account.\n\n- `onboarding_type?: string`\n  The type of onboarding the account has completed.\n\n- `opengraph_image?: object`\n  Attachment input for the account Open Graph image.\n\n- `opengraph_image_variant?: string`\n  The account Open Graph image variant.\n\n- `other_business_description?: string`\n  The description of the business type when business_type is other.\n\n- `other_industry_description?: string`\n  The description of the industry type when industry_type is other.\n\n- `require_2fa?: boolean`\n  Whether the account requires authorized users to have two-factor authentication enabled.\n\n- `route?: string`\n  The unique URL slug for the account.\n\n- `send_customer_emails?: boolean`\n  Whether Whop sends transactional emails to customers on behalf of this account.\n\n- `show_joined_whops?: boolean`\n  Whether the account appears in joined whops on other accounts.\n\n- `show_reviews_dtc?: boolean`\n  Whether reviews are displayed on direct-to-consumer product pages.\n\n- `show_user_directory?: boolean`\n  Whether the account shows users in the user directory.\n\n- `social_links?: object[]`\n  The full list of social links to display for the account.\n\n- `store_page_config?: object`\n  Store page display configuration for the account.\n\n- `target_audience?: string`\n  The target audience for this account.\n\n- `title?: string`\n  The display name of the account.\n\n- `use_logo_as_opengraph_image_fallback?: boolean`\n  Whether the account uses its logo as the fallback Open Graph image.\n\n### Returns\n\n- `{ id: string; banner_image_url: string; business_type: string; country: string; created_at: string; description: string; email: string; home_preferences: string[]; industry_group: string; industry_type: string; invoice_prefix: string; logo_url: string; metadata: object; onboarding_type: string; opengraph_image_url: string; opengraph_image_variant: string; other_business_description: string; other_industry_description: string; parent_account_id: string; require_2fa: boolean; route: string; send_customer_emails: boolean; show_joined_whops: boolean; show_reviews_dtc: boolean; show_user_directory: boolean; social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]; store_page_config: object; target_audience: string; title: string; use_logo_as_opengraph_image_fallback: boolean; wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }; }`\n\n  - `id: string`\n  - `banner_image_url: string`\n  - `business_type: string`\n  - `country: string`\n  - `created_at: string`\n  - `description: string`\n  - `email: string`\n  - `home_preferences: string[]`\n  - `industry_group: string`\n  - `industry_type: string`\n  - `invoice_prefix: string`\n  - `logo_url: string`\n  - `metadata: object`\n  - `onboarding_type: string`\n  - `opengraph_image_url: string`\n  - `opengraph_image_variant: string`\n  - `other_business_description: string`\n  - `other_industry_description: string`\n  - `parent_account_id: string`\n  - `require_2fa: boolean`\n  - `route: string`\n  - `send_customer_emails: boolean`\n  - `show_joined_whops: boolean`\n  - `show_reviews_dtc: boolean`\n  - `show_user_directory: boolean`\n  - `social_links: { id: string; title: string; url: string; website: 'x' | 'instagram' | 'facebook' | 'tiktok' | 'youtube' | 'linkedin' | 'twitch' | 'website' | 'custom'; }[]`\n  - `store_page_config: object`\n  - `target_audience: string`\n  - `title: string`\n  - `use_logo_as_opengraph_image_fallback: boolean`\n  - `wallet: { id: string; address: string; network: 'solana' | 'ethereum' | 'bitcoin'; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst account = await client.accounts.update('account_id');\n\nconsole.log(account);\n```",
     perLanguage: {
       typescript: {
         method: 'client.accounts.update',
@@ -6090,16 +4604,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           "curl https://api.whop.com/api/v1/accounts/$ACCOUNT_ID \\\n    -X PATCH \\\n    -H 'Content-Type: application/json' \\\n    -H \"Authorization: Bearer $WHOP_API_KEY\" \\\n    -d '{}'",
-      },
-      python: {
-        method: 'accounts.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naccount = client.accounts.update(\n    account_id="account_id",\n)\nprint(account.id)',
-      },
-      ruby: {
-        method: 'accounts.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naccount = whop.accounts.update("account_id")\n\nputs(account)',
       },
     },
   },
@@ -6122,16 +4626,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/wallets \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'wallets.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nwallets = client.wallets.list()\nprint(wallets.wallets)',
-      },
-      ruby: {
-        method: 'wallets.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nwallets = whop.wallets.list\n\nputs(wallets)',
       },
     },
   },
@@ -6158,16 +4652,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/wallets/$ACCOUNT_ID/balance \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'wallets.balance',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.balance(\n    "account_id",\n)\nprint(response.object)',
-      },
-      ruby: {
-        method: 'wallets.balance',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.balance("account_id")\n\nputs(response)',
-      },
     },
   },
   {
@@ -6193,16 +4677,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/wallets/$ACCOUNT_ID/sends \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": "amount",\n          "to": "to"\n        }\'',
       },
-      python: {
-        method: 'wallets.send',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.wallets.send(\n    account_id="account_id",\n    amount="amount",\n    to="to",\n)\nprint(response.amount)',
-      },
-      ruby: {
-        method: 'wallets.send_',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.wallets.send_("account_id", amount: "amount", to: "to")\n\nputs(response)',
-      },
     },
   },
   {
@@ -6217,7 +4691,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'amount: string;',
       'from_token: string;',
       'to_token: string;',
-      'account_id?: string;',
       'from_address?: string;',
       'from_chain?: string | number;',
       'metadata?: object;',
@@ -6226,28 +4699,18 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       'to_chain?: string | number;',
     ],
     response:
-      "{ amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }",
+      "{ amount_in: string; amount_out: string; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }",
     markdown:
-      "## create_quote\n\n`client.swaps.createQuote(amount: string, from_token: string, to_token: string, account_id?: string, from_address?: string, from_chain?: string | number, metadata?: object, slippage_bps?: number, to_address?: string, to_chain?: string | number): { amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n**post** `/swaps/quote`\n\nReturns a stateless swap price preview. No funds move and nothing is persisted.\n\n### Parameters\n\n- `amount: string`\n  Input token amount.\n\n- `from_token: string`\n  Source token contract address.\n\n- `to_token: string`\n  Destination token contract address.\n\n- `account_id?: string`\n  Caller-owned account whose wallet address should be used.\n\n- `from_address?: string`\n\n- `from_chain?: string | number`\n\n- `metadata?: object`\n\n- `slippage_bps?: number`\n\n- `to_address?: string`\n\n- `to_chain?: string | number`\n\n### Returns\n\n- `{ amount_in: string; amount_out: string; cross_chain: boolean; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n  - `amount_in: string`\n  - `amount_out: string`\n  - `cross_chain: boolean`\n  - `fee_bps: number`\n  - `from_token: object`\n  - `metadata: object`\n  - `object: 'swap_quote'`\n  - `rate: string`\n  - `to_token: object`\n  - `amount_out_min?: string`\n  - `bridge_fee?: string`\n  - `estimated_duration_seconds?: number`\n  - `from_address?: string`\n  - `requires_token_approval?: boolean`\n  - `to_address?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response);\n```",
+      "## create_quote\n\n`client.swaps.createQuote(amount: string, from_token: string, to_token: string, from_address?: string, from_chain?: string | number, metadata?: object, slippage_bps?: number, to_address?: string, to_chain?: string | number): { amount_in: string; amount_out: string; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n**post** `/swaps/quote`\n\nReturns a stateless swap price preview. No funds move and nothing is persisted.\n\n### Parameters\n\n- `amount: string`\n  Input token amount.\n\n- `from_token: string`\n  Source token contract address.\n\n- `to_token: string`\n  Destination token contract address.\n\n- `from_address?: string`\n\n- `from_chain?: string | number`\n\n- `metadata?: object`\n\n- `slippage_bps?: number`\n\n- `to_address?: string`\n\n- `to_chain?: string | number`\n\n### Returns\n\n- `{ amount_in: string; amount_out: string; fee_bps: number; from_token: object; metadata: object; object: 'swap_quote'; rate: string; to_token: object; amount_out_min?: string; bridge_fee?: string; estimated_duration_seconds?: number; from_address?: string; requires_token_approval?: boolean; to_address?: string; }`\n\n  - `amount_in: string`\n  - `amount_out: string`\n  - `fee_bps: number`\n  - `from_token: object`\n  - `metadata: object`\n  - `object: 'swap_quote'`\n  - `rate: string`\n  - `to_token: object`\n  - `amount_out_min?: string`\n  - `bridge_fee?: string`\n  - `estimated_duration_seconds?: number`\n  - `from_address?: string`\n  - `requires_token_approval?: boolean`\n  - `to_address?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response);\n```",
     perLanguage: {
       typescript: {
         method: 'client.swaps.createQuote',
         example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response.bridge_fee);",
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst response = await client.swaps.createQuote({\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(response.bridge_fee);",
       },
       http: {
         example:
           'curl https://api.whop.com/api/v1/swaps/quote \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": "amount",\n          "from_token": "from_token",\n          "to_token": "to_token"\n        }\'',
-      },
-      python: {
-        method: 'swaps.create_quote',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.swaps.create_quote(\n    amount="amount",\n    from_token="from_token",\n    to_token="to_token",\n)\nprint(response.bridge_fee)',
-      },
-      ruby: {
-        method: 'swaps.create_quote',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.swaps.create_quote(amount: "amount", from_token: "from_token", to_token: "to_token")\n\nputs(response)',
       },
     },
   },
@@ -6278,16 +4741,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/deposits \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 0,\n          "destination": "string"\n        }\'',
-      },
-      python: {
-        method: 'deposits.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndeposit = client.deposits.create(\n    amount=0,\n    destination="string",\n)\nprint(deposit.amount)',
-      },
-      ruby: {
-        method: 'deposits.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndeposit = whop.deposits.create(amount: 0, destination: "string")\n\nputs(deposit)',
       },
     },
   },
@@ -6324,16 +4777,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/setup_intents \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'setup_intents.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.setup_intents.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'setup_intents.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.setup_intents.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -6359,16 +4802,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/setup_intents/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'setup_intents.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nsetup_intent = client.setup_intents.retrieve(\n    "sint_xxxxxxxxxxxxx",\n)\nprint(setup_intent.id)',
-      },
-      ruby: {
-        method: 'setup_intents.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nsetup_intent = whop.setup_intents.retrieve("sint_xxxxxxxxxxxxx")\n\nputs(setup_intent)',
       },
     },
   },
@@ -6406,16 +4839,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payment_methods \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payment_methods.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.payment_methods.list()\npage = page.data[0]\nprint(page)',
-      },
-      ruby: {
-        method: 'payment_methods.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.payment_methods.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -6441,16 +4864,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/payment_methods/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'payment_methods.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayment_method = client.payment_methods.retrieve(\n    id="payt_xxxxxxxxxxxxx",\n)\nprint(payment_method)',
-      },
-      ruby: {
-        method: 'payment_methods.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayment_method = whop.payment_methods.retrieve("payt_xxxxxxxxxxxxx")\n\nputs(payment_method)',
       },
     },
   },
@@ -6483,16 +4896,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/fee_markups \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'fee_markups.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.fee_markups.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'fee_markups.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.fee_markups.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -6527,16 +4930,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/fee_markups \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "fee_type": "crypto_withdrawal_markup",\n          "fixed_fee_usd": 6.9,\n          "percentage_fee": 6.9\n        }\'',
       },
-      python: {
-        method: 'fee_markups.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nfee_markup = client.fee_markups.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    fee_type="crypto_withdrawal_markup",\n)\nprint(fee_markup.id)',
-      },
-      ruby: {
-        method: 'fee_markups.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nfee_markup = whop.fee_markups.create(company_id: "biz_xxxxxxxxxxxxxx", fee_type: :crypto_withdrawal_markup)\n\nputs(fee_markup)',
-      },
     },
   },
   {
@@ -6561,16 +4954,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/fee_markups/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'fee_markups.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nfee_markup = client.fee_markups.delete(\n    "id",\n)\nprint(fee_markup)',
-      },
-      ruby: {
-        method: 'fee_markups.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nfee_markup = whop.fee_markups.delete("id")\n\nputs(fee_markup)',
       },
     },
   },
@@ -6604,16 +4987,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payout_methods \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payout_methods.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.payout_methods.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'payout_methods.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.payout_methods.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -6640,16 +5013,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/payout_methods/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'payout_methods.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayout_method = client.payout_methods.retrieve(\n    "potk_xxxxxxxxxxxxx",\n)\nprint(payout_method.id)',
-      },
-      ruby: {
-        method: 'payout_methods.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayout_method = whop.payout_methods.retrieve("potk_xxxxxxxxxxxxx")\n\nputs(payout_method)',
-      },
     },
   },
   {
@@ -6674,16 +5037,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/verifications/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'verifications.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nverification = client.verifications.retrieve(\n    "verf_xxxxxxxxxxxxx",\n)\nprint(verification.id)',
-      },
-      ruby: {
-        method: 'verifications.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nverification = whop.verifications.retrieve("verf_xxxxxxxxxxxxx")\n\nputs(verification)',
       },
     },
   },
@@ -6715,16 +5068,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/verifications \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'verifications.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.verifications.list(\n    payout_account_id="poact_xxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'verifications.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.verifications.list(payout_account_id: "poact_xxxxxxxxxxxx")\n\nputs(page)',
       },
     },
   },
@@ -6760,16 +5103,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/leads \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'leads.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.leads.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'leads.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.leads.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -6802,16 +5135,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/leads \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "product_id": "prod_xxxxxxxxxxxxx",\n          "user_id": "user_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'leads.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlead = client.leads.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\nprint(lead.id)',
-      },
-      ruby: {
-        method: 'leads.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlead = whop.leads.create(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(lead)',
-      },
     },
   },
   {
@@ -6837,16 +5160,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/leads/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'leads.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlead = client.leads.retrieve(\n    "lead_xxxxxxxxxxxxx",\n)\nprint(lead.id)',
-      },
-      ruby: {
-        method: 'leads.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlead = whop.leads.retrieve("lead_xxxxxxxxxxxxx")\n\nputs(lead)',
       },
     },
   },
@@ -6874,16 +5187,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/leads/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'leads.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nlead = client.leads.update(\n    id="lead_xxxxxxxxxxxxx",\n)\nprint(lead.id)',
-      },
-      ruby: {
-        method: 'leads.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nlead = whop.leads.update("lead_xxxxxxxxxxxxx")\n\nputs(lead)',
-      },
     },
   },
   {
@@ -6910,16 +5213,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/topups \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 6.9,\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "currency": "usd",\n          "payment_method_id": "pmt_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'topups.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ntopup = client.topups.create(\n    amount=6.9,\n    company_id="biz_xxxxxxxxxxxxxx",\n    currency="usd",\n    payment_method_id="pmt_xxxxxxxxxxxxxx",\n)\nprint(topup.id)',
-      },
-      ruby: {
-        method: 'topups.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ntopup = whop.topups.create(\n  amount: 6.9,\n  company_id: "biz_xxxxxxxxxxxxxx",\n  currency: :usd,\n  payment_method_id: "pmt_xxxxxxxxxxxxxx"\n)\n\nputs(topup)',
-      },
     },
   },
   {
@@ -6945,16 +5238,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/files/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'files.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nfile = client.files.retrieve(\n    "file_xxxxxxxxxxxxx",\n)\nprint(file.id)',
-      },
-      ruby: {
-        method: 'files.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nfile = whop.files.retrieve("file_xxxxxxxxxxxxx")\n\nputs(file)',
-      },
     },
   },
   {
@@ -6979,16 +5262,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/files \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "filename": "filename"\n        }\'',
-      },
-      python: {
-        method: 'files.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nfile = client.files.create(\n    filename="filename",\n)\nprint(file.id)',
-      },
-      ruby: {
-        method: 'files.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nfile = whop.files.create(filename: "filename")\n\nputs(file)',
       },
     },
   },
@@ -7024,16 +5297,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/company_token_transactions \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'company_token_transactions.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.company_token_transactions.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'company_token_transactions.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.company_token_transactions.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -7060,16 +5323,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/company_token_transactions \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "amount": 6.9,\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "destination_user_id": "destination_user_id",\n          "transaction_type": "transfer",\n          "user_id": "user_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'company_token_transactions.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncompany_token_transaction = client.company_token_transactions.create(\n    amount=6.9,\n    company_id="biz_xxxxxxxxxxxxxx",\n    destination_user_id="destination_user_id",\n    transaction_type="transfer",\n    user_id="user_xxxxxxxxxxxxx",\n)\nprint(company_token_transaction.id)',
-      },
-      ruby: {
-        method: 'company_token_transactions.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncompany_token_transaction = whop.company_token_transactions.create(\n  body: {\n    amount: 6.9,\n    company_id: "biz_xxxxxxxxxxxxxx",\n    destination_user_id: "destination_user_id",\n    transaction_type: :transfer,\n    user_id: "user_xxxxxxxxxxxxx"\n  }\n)\n\nputs(company_token_transaction)',
-      },
     },
   },
   {
@@ -7095,16 +5348,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/company_token_transactions/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'company_token_transactions.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ncompany_token_transaction = client.company_token_transactions.retrieve(\n    "id",\n)\nprint(company_token_transaction.id)',
-      },
-      ruby: {
-        method: 'company_token_transactions.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ncompany_token_transaction = whop.company_token_transactions.retrieve("id")\n\nputs(company_token_transaction)',
       },
     },
   },
@@ -7138,16 +5381,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_members \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'dm_members.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.dm_members.list(\n    channel_id="channel_id",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'dm_members.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.dm_members.list(channel_id: "channel_id")\n\nputs(page)',
-      },
     },
   },
   {
@@ -7174,16 +5407,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_members \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "channel_id": "channel_id",\n          "user_id": "user_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'dm_members.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_member = client.dm_members.create(\n    channel_id="channel_id",\n    user_id="user_xxxxxxxxxxxxx",\n)\nprint(dm_member.id)',
-      },
-      ruby: {
-        method: 'dm_members.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_member = whop.dm_members.create(channel_id: "channel_id", user_id: "user_xxxxxxxxxxxxx")\n\nputs(dm_member)',
-      },
     },
   },
   {
@@ -7208,16 +5431,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/dm_members/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'dm_members.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_member = client.dm_members.retrieve(\n    "id",\n)\nprint(dm_member.id)',
-      },
-      ruby: {
-        method: 'dm_members.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_member = whop.dm_members.retrieve("id")\n\nputs(dm_member)',
       },
     },
   },
@@ -7249,16 +5462,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_members/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'dm_members.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_member = client.dm_members.update(\n    id="id",\n)\nprint(dm_member.id)',
-      },
-      ruby: {
-        method: 'dm_members.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_member = whop.dm_members.update("id")\n\nputs(dm_member)',
-      },
     },
   },
   {
@@ -7283,16 +5486,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/dm_members/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'dm_members.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_member = client.dm_members.delete(\n    "id",\n)\nprint(dm_member)',
-      },
-      ruby: {
-        method: 'dm_members.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_member = whop.dm_members.delete("id")\n\nputs(dm_member)',
       },
     },
   },
@@ -7323,16 +5516,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/ai_chats \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ai_chats.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ai_chats.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'ai_chats.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ai_chats.list\n\nputs(page)',
       },
     },
   },
@@ -7367,16 +5550,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ai_chats \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "message_text": "message_text"\n        }\'',
       },
-      python: {
-        method: 'ai_chats.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nai_chat = client.ai_chats.create(\n    message_text="message_text",\n)\nprint(ai_chat.id)',
-      },
-      ruby: {
-        method: 'ai_chats.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nai_chat = whop.ai_chats.create(message_text: "message_text")\n\nputs(ai_chat)',
-      },
     },
   },
   {
@@ -7401,16 +5574,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ai_chats/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ai_chats.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nai_chat = client.ai_chats.retrieve(\n    "aich_xxxxxxxxxxxxx",\n)\nprint(ai_chat.id)',
-      },
-      ruby: {
-        method: 'ai_chats.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nai_chat = whop.ai_chats.retrieve("aich_xxxxxxxxxxxxx")\n\nputs(ai_chat)',
       },
     },
   },
@@ -7443,16 +5606,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ai_chats/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ai_chats.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nai_chat = client.ai_chats.update(\n    id="aich_xxxxxxxxxxxxx",\n)\nprint(ai_chat.id)',
-      },
-      ruby: {
-        method: 'ai_chats.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nai_chat = whop.ai_chats.update("aich_xxxxxxxxxxxxx")\n\nputs(ai_chat)',
-      },
     },
   },
   {
@@ -7477,16 +5630,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ai_chats/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ai_chats.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nai_chat = client.ai_chats.delete(\n    "aich_xxxxxxxxxxxxx",\n)\nprint(ai_chat)',
-      },
-      ruby: {
-        method: 'ai_chats.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nai_chat = whop.ai_chats.delete("aich_xxxxxxxxxxxxx")\n\nputs(ai_chat)',
       },
     },
   },
@@ -7519,16 +5662,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_channels \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'dm_channels.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.dm_channels.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'dm_channels.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.dm_channels.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -7554,16 +5687,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_channels \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "with_user_ids": [\n            "string"\n          ],\n          "company_id": "biz_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'dm_channels.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_channel = client.dm_channels.create(\n    with_user_ids=["string"],\n)\nprint(dm_channel.id)',
-      },
-      ruby: {
-        method: 'dm_channels.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_channel = whop.dm_channels.create(with_user_ids: ["string"])\n\nputs(dm_channel)',
-      },
     },
   },
   {
@@ -7587,16 +5710,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/dm_channels/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'dm_channels.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_channel = client.dm_channels.retrieve(\n    "id",\n)\nprint(dm_channel.id)',
-      },
-      ruby: {
-        method: 'dm_channels.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_channel = whop.dm_channels.retrieve("id")\n\nputs(dm_channel)',
       },
     },
   },
@@ -7623,16 +5736,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dm_channels/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'dm_channels.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_channel = client.dm_channels.update(\n    id="id",\n)\nprint(dm_channel.id)',
-      },
-      ruby: {
-        method: 'dm_channels.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_channel = whop.dm_channels.update("id")\n\nputs(dm_channel)',
-      },
     },
   },
   {
@@ -7657,16 +5760,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/dm_channels/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'dm_channels.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndm_channel = client.dm_channels.delete(\n    "id",\n)\nprint(dm_channel)',
-      },
-      ruby: {
-        method: 'dm_channels.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndm_channel = whop.dm_channels.delete("id")\n\nputs(dm_channel)',
       },
     },
   },
@@ -7703,16 +5796,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/dispute_alerts \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'dispute_alerts.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.dispute_alerts.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'dispute_alerts.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.dispute_alerts.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -7738,16 +5821,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/dispute_alerts/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'dispute_alerts.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\ndispute_alert = client.dispute_alerts.retrieve(\n    "dspa_xxxxxxxxxxxxx",\n)\nprint(dispute_alert.id)',
-      },
-      ruby: {
-        method: 'dispute_alerts.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\ndispute_alert = whop.dispute_alerts.retrieve("dspa_xxxxxxxxxxxxx")\n\nputs(dispute_alert)',
       },
     },
   },
@@ -7785,16 +5858,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/resolution_center_cases \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'resolution_center_cases.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.resolution_center_cases.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'resolution_center_cases.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.resolution_center_cases.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -7821,16 +5884,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/resolution_center_cases/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'resolution_center_cases.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresolution_center_case = client.resolution_center_cases.retrieve(\n    "reso_xxxxxxxxxxxxx",\n)\nprint(resolution_center_case.id)',
-      },
-      ruby: {
-        method: 'resolution_center_cases.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresolution_center_case = whop.resolution_center_cases.retrieve("reso_xxxxxxxxxxxxx")\n\nputs(resolution_center_case)',
-      },
     },
   },
   {
@@ -7856,16 +5909,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/payout_accounts/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'payout_accounts.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npayout_account = client.payout_accounts.retrieve(\n    "poact_xxxxxxxxxxxx",\n)\nprint(payout_account.id)',
-      },
-      ruby: {
-        method: 'payout_accounts.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npayout_account = whop.payout_accounts.retrieve("poact_xxxxxxxxxxxx")\n\nputs(payout_account)',
       },
     },
   },
@@ -7903,16 +5946,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'affiliates.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.affiliates.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'affiliates.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.affiliates.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -7938,16 +5971,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/affiliates \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "user_identifier": "user_identifier"\n        }\'',
-      },
-      python: {
-        method: 'affiliates.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naffiliate = client.affiliates.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    user_identifier="user_identifier",\n)\nprint(affiliate.id)',
-      },
-      ruby: {
-        method: 'affiliates.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naffiliate = whop.affiliates.create(company_id: "biz_xxxxxxxxxxxxxx", user_identifier: "user_identifier")\n\nputs(affiliate)',
       },
     },
   },
@@ -7975,16 +5998,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'affiliates.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\naffiliate = client.affiliates.retrieve(\n    "aff_xxxxxxxxxxxxxx",\n)\nprint(affiliate.id)',
-      },
-      ruby: {
-        method: 'affiliates.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\naffiliate = whop.affiliates.retrieve("aff_xxxxxxxxxxxxxx")\n\nputs(affiliate)',
-      },
     },
   },
   {
@@ -8009,16 +6022,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/archive \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'affiliates.archive',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.affiliates.archive(\n    "aff_xxxxxxxxxxxxxx",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'affiliates.archive',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.affiliates.archive("aff_xxxxxxxxxxxxxx")\n\nputs(response)',
-      },
     },
   },
   {
@@ -8042,16 +6045,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/unarchive \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'affiliates.unarchive',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nresponse = client.affiliates.unarchive(\n    "aff_xxxxxxxxxxxxxx",\n)\nprint(response)',
-      },
-      ruby: {
-        method: 'affiliates.unarchive',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nresponse = whop.affiliates.unarchive("aff_xxxxxxxxxxxxxx")\n\nputs(response)',
       },
     },
   },
@@ -8086,16 +6079,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/overrides \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'affiliates.overrides.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.affiliates.overrides.list(\n    id="aff_xxxxxxxxxxxxxx",\n)\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'affiliates.overrides.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.affiliates.overrides.list("aff_xxxxxxxxxxxxxx")\n\nputs(page)',
-      },
     },
   },
   {
@@ -8123,16 +6106,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/overrides \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "id": "id",\n          "commission_value": 6.9,\n          "override_type": "standard",\n          "plan_id": "plan_xxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'affiliates.overrides.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\noverride = client.affiliates.overrides.create(\n    path_id="aff_xxxxxxxxxxxxxx",\n    body_id="id",\n    commission_value=6.9,\n    override_type="standard",\n    plan_id="plan_xxxxxxxxxxxxx",\n)\nprint(override.id)',
-      },
-      ruby: {
-        method: 'affiliates.overrides.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\noverride = whop.affiliates.overrides.create(\n  "aff_xxxxxxxxxxxxxx",\n  body: {id: "id", commission_value: 6.9, override_type: :standard, plan_id: "plan_xxxxxxxxxxxxx"}\n)\n\nputs(override)',
-      },
     },
   },
   {
@@ -8158,16 +6131,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/overrides/$OVERRIDE_ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'affiliates.overrides.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\noverride = client.affiliates.overrides.retrieve(\n    override_id="override_id",\n    id="aff_xxxxxxxxxxxxxx",\n)\nprint(override.id)',
-      },
-      ruby: {
-        method: 'affiliates.overrides.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\noverride = whop.affiliates.overrides.retrieve("override_id", id: "aff_xxxxxxxxxxxxxx")\n\nputs(override)',
       },
     },
   },
@@ -8201,16 +6164,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/overrides/$OVERRIDE_ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'affiliates.overrides.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\noverride = client.affiliates.overrides.update(\n    override_id="override_id",\n    id="aff_xxxxxxxxxxxxxx",\n)\nprint(override.id)',
-      },
-      ruby: {
-        method: 'affiliates.overrides.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\noverride = whop.affiliates.overrides.update("override_id", id: "aff_xxxxxxxxxxxxxx")\n\nputs(override)',
-      },
     },
   },
   {
@@ -8234,16 +6187,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/affiliates/$ID/overrides/$OVERRIDE_ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'affiliates.overrides.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\noverride = client.affiliates.overrides.delete(\n    override_id="override_id",\n    id="aff_xxxxxxxxxxxxxx",\n)\nprint(override)',
-      },
-      ruby: {
-        method: 'affiliates.overrides.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\noverride = whop.affiliates.overrides.delete("override_id", id: "aff_xxxxxxxxxxxxxx")\n\nputs(override)',
       },
     },
   },
@@ -8277,16 +6220,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/bounties \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'bounties.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.bounties.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'bounties.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.bounties.list\n\nputs(page)',
       },
     },
   },
@@ -8325,16 +6258,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/bounties \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "base_unit_amount": 6.9,\n          "currency": "usd",\n          "description": "description",\n          "title": "title",\n          "accepted_submissions_limit": 42,\n          "experience_id": "exp_xxxxxxxxxxxxxx"\n        }\'',
       },
-      python: {
-        method: 'bounties.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nbounty = client.bounties.create(\n    base_unit_amount=6.9,\n    currency="usd",\n    description="description",\n    title="title",\n)\nprint(bounty.id)',
-      },
-      ruby: {
-        method: 'bounties.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nbounty = whop.bounties.create(base_unit_amount: 6.9, currency: :usd, description: "description", title: "title")\n\nputs(bounty)',
-      },
     },
   },
   {
@@ -8359,16 +6282,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/bounties/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'bounties.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nbounty = client.bounties.retrieve(\n    "bnty_xxxxxxxxxxxxx",\n)\nprint(bounty.id)',
-      },
-      ruby: {
-        method: 'bounties.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nbounty = whop.bounties.retrieve("bnty_xxxxxxxxxxxxx")\n\nputs(bounty)',
       },
     },
   },
@@ -8406,16 +6319,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_campaigns \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_campaigns.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ad_campaigns.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'ad_campaigns.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ad_campaigns.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -8442,16 +6345,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_campaigns/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_campaigns.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_campaign = client.ad_campaigns.retrieve(\n    "adcamp_xxxxxxxxxxx",\n)\nprint(ad_campaign.id)',
-      },
-      ruby: {
-        method: 'ad_campaigns.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_campaign = whop.ad_campaigns.retrieve("adcamp_xxxxxxxxxxx")\n\nputs(ad_campaign)',
-      },
     },
   },
   {
@@ -8476,16 +6369,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ad_campaigns/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ad_campaigns.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_campaign = client.ad_campaigns.update(\n    id="adcamp_xxxxxxxxxxx",\n)\nprint(ad_campaign.id)',
-      },
-      ruby: {
-        method: 'ad_campaigns.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_campaign = whop.ad_campaigns.update("adcamp_xxxxxxxxxxx")\n\nputs(ad_campaign)',
       },
     },
   },
@@ -8513,16 +6396,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_campaigns/$ID/pause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_campaigns.pause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_campaign = client.ad_campaigns.pause(\n    "adcamp_xxxxxxxxxxx",\n)\nprint(ad_campaign.id)',
-      },
-      ruby: {
-        method: 'ad_campaigns.pause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_campaign = whop.ad_campaigns.pause("adcamp_xxxxxxxxxxx")\n\nputs(ad_campaign)',
-      },
     },
   },
   {
@@ -8547,16 +6420,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ad_campaigns/$ID/unpause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ad_campaigns.unpause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_campaign = client.ad_campaigns.unpause(\n    "adcamp_xxxxxxxxxxx",\n)\nprint(ad_campaign.id)',
-      },
-      ruby: {
-        method: 'ad_campaigns.unpause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_campaign = whop.ad_campaigns.unpause("adcamp_xxxxxxxxxxx")\n\nputs(ad_campaign)',
       },
     },
   },
@@ -8596,16 +6459,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_groups \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_groups.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ad_groups.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'ad_groups.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ad_groups.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -8631,16 +6484,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ad_groups/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ad_groups.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_group = client.ad_groups.retrieve(\n    "adgrp_xxxxxxxxxxxx",\n)\nprint(ad_group.id)',
-      },
-      ruby: {
-        method: 'ad_groups.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_group = whop.ad_groups.retrieve("adgrp_xxxxxxxxxxxx")\n\nputs(ad_group)',
       },
     },
   },
@@ -8677,16 +6520,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_groups/$ID \\\n    -X PATCH \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_groups.update',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_group = client.ad_groups.update(\n    id="adgrp_xxxxxxxxxxxx",\n)\nprint(ad_group.id)',
-      },
-      ruby: {
-        method: 'ad_groups.update',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_group = whop.ad_groups.update("adgrp_xxxxxxxxxxxx")\n\nputs(ad_group)',
-      },
     },
   },
   {
@@ -8710,16 +6543,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ad_groups/$ID \\\n    -X DELETE \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ad_groups.delete',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_group = client.ad_groups.delete(\n    "adgrp_xxxxxxxxxxxx",\n)\nprint(ad_group)',
-      },
-      ruby: {
-        method: 'ad_groups.delete',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_group = whop.ad_groups.delete("adgrp_xxxxxxxxxxxx")\n\nputs(ad_group)',
       },
     },
   },
@@ -8747,16 +6570,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_groups/$ID/pause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_groups.pause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_group = client.ad_groups.pause(\n    "adgrp_xxxxxxxxxxxx",\n)\nprint(ad_group.id)',
-      },
-      ruby: {
-        method: 'ad_groups.pause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_group = whop.ad_groups.pause("adgrp_xxxxxxxxxxxx")\n\nputs(ad_group)',
-      },
     },
   },
   {
@@ -8782,16 +6595,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ad_groups/$ID/unpause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ad_groups.unpause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_group = client.ad_groups.unpause(\n    "adgrp_xxxxxxxxxxxx",\n)\nprint(ad_group.id)',
-      },
-      ruby: {
-        method: 'ad_groups.unpause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_group = whop.ad_groups.unpause("adgrp_xxxxxxxxxxxx")\n\nputs(ad_group)',
       },
     },
   },
@@ -8835,16 +6638,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example: 'curl https://api.whop.com/api/v1/ads \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ads.list',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.ads.list()\npage = page.data[0]\nprint(page.id)',
-      },
-      ruby: {
-        method: 'ads.list',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.ads.list\n\nputs(page)',
-      },
     },
   },
   {
@@ -8869,16 +6662,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example: 'curl https://api.whop.com/api/v1/ads/$ID \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ads.retrieve',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad = client.ads.retrieve(\n    "ad_xxxxxxxxxxxxxxx",\n)\nprint(ad.id)',
-      },
-      ruby: {
-        method: 'ads.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad = whop.ads.retrieve("ad_xxxxxxxxxxxxxxx")\n\nputs(ad)',
       },
     },
   },
@@ -8906,16 +6689,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ads/$ID/pause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ads.pause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad = client.ads.pause(\n    "ad_xxxxxxxxxxxxxxx",\n)\nprint(ad.id)',
-      },
-      ruby: {
-        method: 'ads.pause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad = whop.ads.pause("ad_xxxxxxxxxxxxxxx")\n\nputs(ad)',
-      },
     },
   },
   {
@@ -8941,16 +6714,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       http: {
         example:
           'curl https://api.whop.com/api/v1/ads/$ID/unpause \\\n    -X POST \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
-      },
-      python: {
-        method: 'ads.unpause',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad = client.ads.unpause(\n    "ad_xxxxxxxxxxxxxxx",\n)\nprint(ad.id)',
-      },
-      ruby: {
-        method: 'ads.unpause',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad = whop.ads.unpause("ad_xxxxxxxxxxxxxxx")\n\nputs(ad)',
       },
     },
   },
@@ -8992,16 +6755,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/conversions \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "event_name": "lead",\n          "event_id": "evnt_xxxxxxxxxxxxx",\n          "event_time": "2023-12-01T05:00:00.401Z",\n          "plan_id": "plan_xxxxxxxxxxxxx",\n          "product_id": "prod_xxxxxxxxxxxxx",\n          "value": 6.9\n        }\'',
       },
-      python: {
-        method: 'conversions.create',
-        example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nconversion = client.conversions.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    event_name="lead",\n)\nprint(conversion.id)',
-      },
-      ruby: {
-        method: 'conversions.create',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nconversion = whop.conversions.create(company_id: "biz_xxxxxxxxxxxxxx", event_name: :lead)\n\nputs(conversion)',
-      },
     },
   },
   {
@@ -9038,16 +6791,6 @@ const EMBEDDED_METHODS: MethodEntry[] = [
         example:
           'curl https://api.whop.com/api/v1/ad_reports \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
       },
-      python: {
-        method: 'ad_reports.retrieve',
-        example:
-          'import os\nfrom datetime import datetime\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nad_report = client.ad_reports.retrieve(\n    from_=datetime.fromisoformat("2023-12-01T05:00:00.401"),\n    to=datetime.fromisoformat("2023-12-01T05:00:00.401"),\n)\nprint(ad_report.breakdown)',
-      },
-      ruby: {
-        method: 'ad_reports.retrieve',
-        example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nad_report = whop.ad_reports.retrieve(from: "2023-12-01T05:00:00.401Z", to: "2023-12-01T05:00:00.401Z")\n\nputs(ad_report)',
-      },
     },
   },
 ];
@@ -9057,16 +6800,6 @@ const EMBEDDED_READMES: { language: string; content: string }[] = [
     language: 'typescript',
     content:
       "# Whop TypeScript API Library\n\n[![NPM version](https://img.shields.io/npm/v/@whop/sdk.svg?label=npm%20(stable))](https://npmjs.org/package/@whop/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@whop/sdk)\n\nThis library provides convenient access to the Whop REST API from server-side TypeScript or JavaScript.\n\n\n\nThe REST API documentation can be found on [docs.whop.com](https://docs.whop.com/apps). The full API of this library can be found in [api.md](api.md).\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Whop MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfV0VCSE9PS19TRUNSRVQiOiJNeSBXZWJob29rIEtleSIsIldIT1BfQVBQX0lEIjoiYXBwX3h4eHh4eHh4eHh4eHh4In19)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22My%20API%20Key%22%2C%22WHOP_WEBHOOK_SECRET%22%3A%22My%20Webhook%20Key%22%2C%22WHOP_APP_ID%22%3A%22app_xxxxxxxxxxxxxx%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Installation\n\n```sh\nnpm install @whop/sdk\n```\n\n\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n<!-- prettier-ignore -->\n```js\nimport Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });\nconst paymentListResponse = page.data[0];\n\nconsole.log(paymentListResponse.id);\n```\n\n\n\n### Request & Response types\n\nThis library includes TypeScript definitions for all request params and response fields. You may import and use them like so:\n\n<!-- prettier-ignore -->\n```ts\nimport Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst params: Whop.PaymentListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };\nconst [paymentListResponse]: [Whop.PaymentListResponse] = await client.payments.list(params);\n```\n\nDocumentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.\n\n\n\n\n\n## Handling errors\n\nWhen the library is unable to connect to the API,\nor if the API returns a non-success status code (i.e., 4xx or 5xx response),\na subclass of `APIError` will be thrown:\n\n<!-- prettier-ignore -->\n```ts\nconst page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {\n  if (err instanceof Whop.APIError) {\n    console.log(err.status); // 400\n    console.log(err.name); // BadRequestError\n    console.log(err.headers); // {server: 'nginx', ...}\n  } else {\n    throw err;\n  }\n});\n```\n\nError codes are as follows:\n\n| Status Code | Error Type                 |\n| ----------- | -------------------------- |\n| 400         | `BadRequestError`          |\n| 401         | `AuthenticationError`      |\n| 403         | `PermissionDeniedError`    |\n| 404         | `NotFoundError`            |\n| 422         | `UnprocessableEntityError` |\n| 429         | `RateLimitError`           |\n| >=500       | `InternalServerError`      |\n| N/A         | `APIConnectionError`       |\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,\n429 Rate Limit, and >=500 Internal errors will all be retried by default.\n\nYou can use the `maxRetries` option to configure or disable this:\n\n<!-- prettier-ignore -->\n```js\n// Configure the default for all requests:\nconst client = new Whop({\n  maxRetries: 0, // default is 2\n});\n\n// Or, configure per-request:\nawait client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {\n  maxRetries: 5,\n});\n```\n\n### Timeouts\n\nRequests time out after 1 minute by default. You can configure this with a `timeout` option:\n\n<!-- prettier-ignore -->\n```ts\n// Configure the default for all requests:\nconst client = new Whop({\n  timeout: 20 * 1000, // 20 seconds (default is 1 minute)\n});\n\n// Override per-request:\nawait client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {\n  timeout: 5 * 1000,\n});\n```\n\nOn timeout, an `APIConnectionTimeoutError` is thrown.\n\nNote that requests which time out will be [retried twice by default](#retries).\n\n## Auto-pagination\n\nList methods in the Whop API are paginated.\nYou can use the `for await … of` syntax to iterate through items across all pages:\n\n```ts\nasync function fetchAllPaymentListResponses(params) {\n  const allPaymentListResponses = [];\n  // Automatically fetches more pages as needed.\n  for await (const paymentListResponse of client.payments.list({\n    company_id: 'biz_xxxxxxxxxxxxxx',\n  })) {\n    allPaymentListResponses.push(paymentListResponse);\n  }\n  return allPaymentListResponses;\n}\n```\n\nAlternatively, you can request a single page at a time:\n\n```ts\nlet page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });\nfor (const paymentListResponse of page.data) {\n  console.log(paymentListResponse);\n}\n\n// Convenience methods are provided for manually paginating:\nwhile (page.hasNextPage()) {\n  page = await page.getNextPage();\n  // ...\n}\n```\n\n\n\n## Advanced Usage\n\n### Accessing raw Response data (e.g., headers)\n\nThe \"raw\" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.\nThis method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.\n\nYou can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.\nUnlike `.asResponse()` this method consumes the body, returning once it is parsed.\n\n<!-- prettier-ignore -->\n```ts\nconst client = new Whop();\n\nconst response = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();\nconsole.log(response.headers.get('X-My-Header'));\nconsole.log(response.statusText); // access the underlying Response object\n\nconst { data: page, response: raw } = await client.payments\n  .list({ company_id: 'biz_xxxxxxxxxxxxxx' })\n  .withResponse();\nconsole.log(raw.headers.get('X-My-Header'));\nfor await (const paymentListResponse of page) {\n  console.log(paymentListResponse.id);\n}\n```\n\n### Logging\n\n> [!IMPORTANT]\n> All log messages are intended for debugging only. The format and content of log messages\n> may change between releases.\n\n#### Log levels\n\nThe log level can be configured in two ways:\n\n1. Via the `WHOP_LOG` environment variable\n2. Using the `logLevel` client option (overrides the environment variable if set)\n\n```ts\nimport Whop from '@whop/sdk';\n\nconst client = new Whop({\n  logLevel: 'debug', // Show all log messages\n});\n```\n\nAvailable log levels, from most to least verbose:\n\n- `'debug'` - Show debug messages, info, warnings, and errors\n- `'info'` - Show info messages, warnings, and errors\n- `'warn'` - Show warnings and errors (default)\n- `'error'` - Show only errors\n- `'off'` - Disable all logging\n\nAt the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.\nSome authentication-related headers are redacted, but sensitive data in request and response bodies\nmay still be visible.\n\n#### Custom logger\n\nBy default, this library logs to `globalThis.console`. You can also provide a custom logger.\nMost logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.\n\nWhen providing a custom logger, the `logLevel` option still controls which messages are emitted, messages\nbelow the configured level will not be sent to your logger.\n\n```ts\nimport Whop from '@whop/sdk';\nimport pino from 'pino';\n\nconst logger = pino();\n\nconst client = new Whop({\n  logger: logger.child({ name: 'Whop' }),\n  logLevel: 'debug', // Send all messages to pino, allowing it to filter\n});\n```\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API. If you need to access undocumented\nendpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.\nOptions on the client, such as retries, will be respected when making these requests.\n\n```ts\nawait client.post('/some/path', {\n  body: { some_prop: 'foo' },\n  query: { some_query_arg: 'bar' },\n});\n```\n\n#### Undocumented request params\n\nTo make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented\nparameter. This library doesn't validate at runtime that the request matches the type, so any extra values you\nsend will be sent as-is.\n\n```ts\nclient.payments.list({\n  // ...\n  // @ts-expect-error baz is not yet public\n  baz: 'undocumented option',\n});\n```\n\nFor requests with the `GET` verb, any extra params will be in the query, all other requests will send the\nextra param in the body.\n\nIf you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request\noptions.\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you may access the response object with `// @ts-expect-error` on\nthe response object, or cast the response object to the requisite type. Like the request params, we do not\nvalidate or strip extra properties from the response from the API.\n\n### Customizing the fetch client\n\nBy default, this library expects a global `fetch` function is defined.\n\nIf you want to use a different `fetch` function, you can either polyfill the global:\n\n```ts\nimport fetch from 'my-fetch';\n\nglobalThis.fetch = fetch;\n```\n\nOr pass it to the client:\n\n```ts\nimport Whop from '@whop/sdk';\nimport fetch from 'my-fetch';\n\nconst client = new Whop({ fetch });\n```\n\n### Fetch options\n\nIf you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)\n\n```ts\nimport Whop from '@whop/sdk';\n\nconst client = new Whop({\n  fetchOptions: {\n    // `RequestInit` options\n  },\n});\n```\n\n#### Configuring proxies\n\nTo modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy\noptions to requests:\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg\" align=\"top\" width=\"18\" height=\"21\"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>\n\n```ts\nimport Whop from '@whop/sdk';\nimport * as undici from 'undici';\n\nconst proxyAgent = new undici.ProxyAgent('http://localhost:8888');\nconst client = new Whop({\n  fetchOptions: {\n    dispatcher: proxyAgent,\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg\" align=\"top\" width=\"18\" height=\"21\"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>\n\n```ts\nimport Whop from '@whop/sdk';\n\nconst client = new Whop({\n  fetchOptions: {\n    proxy: 'http://localhost:8888',\n  },\n});\n```\n\n<img src=\"https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg\" align=\"top\" width=\"18\" height=\"21\"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>\n\n```ts\nimport Whop from 'npm:@whop/sdk';\n\nconst httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });\nconst client = new Whop({\n  fetchOptions: {\n    client: httpClient,\n  },\n});\n```\n\n## Frequently Asked Questions\n\n## Semantic versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes that only affect static types, without breaking runtime behavior.\n2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n3. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/whopio/whopsdk-typescript/issues) with questions, bugs, or suggestions.\n\n## Requirements\n\nTypeScript >= 4.9 is supported.\n\nThe following runtimes are supported:\n\n- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)\n- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.\n- Deno v1.28.0 or higher.\n- Bun 1.0 or later.\n- Cloudflare Workers.\n- Vercel Edge Runtime.\n- Jest 28 or greater with the `\"node\"` environment (`\"jsdom\"` is not supported at this time).\n- Nitro v2.6 or greater.\n\nNote that React Native is not supported at this time.\n\nIf you are interested in other runtime environments, please open or upvote an issue on GitHub.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n",
-  },
-  {
-    language: 'python',
-    content:
-      '# Whop Python API library\n\n<!-- prettier-ignore -->\n[![PyPI version](https://img.shields.io/pypi/v/whop-sdk.svg?label=pypi%20(stable))](https://pypi.org/project/whop-sdk/)\n\nThe Whop Python library provides convenient access to the Whop REST API from any Python 3.9+\napplication. The library includes type definitions for all request params and response fields,\nand offers both synchronous and asynchronous clients powered by [httpx](https://github.com/encode/httpx).\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Whop MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfV0VCSE9PS19TRUNSRVQiOiJNeSBXZWJob29rIEtleSIsIldIT1BfQVBQX0lEIjoiYXBwX3h4eHh4eHh4eHh4eHh4In19)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22My%20API%20Key%22%2C%22WHOP_WEBHOOK_SECRET%22%3A%22My%20Webhook%20Key%22%2C%22WHOP_APP_ID%22%3A%22app_xxxxxxxxxxxxxx%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Documentation\n\nThe REST API documentation can be found on [docs.whop.com](https://docs.whop.com/apps). The full API of this library can be found in [api.md](api.md).\n\n## Installation\n\n```sh\n# install from PyPI\npip install whop-sdk\n```\n\n## Usage\n\nThe full API of this library can be found in [api.md](api.md).\n\n```python\nimport os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\n\npage = client.payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\nprint(page.data)\n```\n\nWhile you can provide an `api_key` keyword argument,\nwe recommend using [python-dotenv](https://pypi.org/project/python-dotenv/)\nto add `WHOP_API_KEY="My API Key"` to your `.env` file\nso that your API Key is not stored in source control.\n\n## Async usage\n\nSimply import `AsyncWhop` instead of `Whop` and use `await` with each API call:\n\n```python\nimport os\nimport asyncio\nfrom whop_sdk import AsyncWhop\n\nclient = AsyncWhop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\n\nasync def main() -> None:\n  page = await client.payments.list(\n      company_id="biz_xxxxxxxxxxxxxx",\n  )\n  print(page.data)\n\nasyncio.run(main())\n```\n\nFunctionality between the synchronous and asynchronous clients is otherwise identical.\n\n### With aiohttp\n\nBy default, the async client uses `httpx` for HTTP requests. However, for improved concurrency performance you may also use `aiohttp` as the HTTP backend.\n\nYou can enable this by installing `aiohttp`:\n\n```sh\n# install from PyPI\npip install whop-sdk[aiohttp]\n```\n\nThen you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:\n\n```python\nimport os\nimport asyncio\nfrom whop_sdk import DefaultAioHttpClient\nfrom whop_sdk import AsyncWhop\n\nasync def main() -> None:\n  async with AsyncWhop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n    http_client=DefaultAioHttpClient(),\n) as client:\n    page = await client.payments.list(\n        company_id="biz_xxxxxxxxxxxxxx",\n    )\n    print(page.data)\n\nasyncio.run(main())\n```\n\n\n\n## Using types\n\nNested request parameters are [TypedDicts](https://docs.python.org/3/library/typing.html#typing.TypedDict). Responses are [Pydantic models](https://docs.pydantic.dev) which also provide helper methods for things like:\n\n- Serializing back into JSON, `model.to_json()`\n- Converting to a dictionary, `model.to_dict()`\n\nTyped requests and responses provide autocomplete and documentation within your editor. If you would like to see type errors in VS Code to help catch bugs earlier, set `python.analysis.typeCheckingMode` to `basic`.\n\n## Pagination\n\nList methods in the Whop API are paginated.\n\nThis library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:\n\n```python\nfrom whop_sdk import Whop\n\nclient = Whop()\n\nall_payments = []\n# Automatically fetches more pages as needed.\nfor payment in client.payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n):\n    # Do something with payment here\n    all_payments.append(payment)\nprint(all_payments)\n```\n\nOr, asynchronously:\n\n```python\nimport asyncio\nfrom whop_sdk import AsyncWhop\n\nclient = AsyncWhop()\n\nasync def main() -> None:\n    all_payments = []\n    # Iterate through items across all pages, issuing requests as needed.\n    async for payment in client.payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n):\n        all_payments.append(payment)\n    print(all_payments)\n\nasyncio.run(main())\n```\n\nAlternatively, you can use the `.has_next_page()`, `.next_page_info()`, or  `.get_next_page()` methods for more granular control working with pages:\n\n```python\nfirst_page = await client.payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\nif first_page.has_next_page():\n    print(f"will fetch next page using these details: {first_page.next_page_info()}")\n    next_page = await first_page.get_next_page()\n    print(f"number of items we just fetched: {len(next_page.data)}")\n\n# Remove `await` for non-async usage.\n```\n\nOr just work directly with the returned data:\n\n```python\nfirst_page = await client.payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\n\nprint(f"next page cursor: {first_page.page_info.end_cursor}") # => "next page cursor: ..."\nfor payment in first_page.data:\n    print(payment.id)\n\n# Remove `await` for non-async usage.\n```\n\n## Nested params\n\nNested parameters are dictionaries, typed using `TypedDict`, for example:\n\n```python\nfrom whop_sdk import Whop\n\nclient = Whop()\n\napp = client.apps.create(\n    company_id="biz_xxxxxxxxxxxxxx",\n    name="name",\n    icon={\n        "id": "id"\n    },\n)\nprint(app.icon)\n```\n\n\n\n## Handling errors\n\nWhen the library is unable to connect to the API (for example, due to network connection problems or a timeout), a subclass of `whop_sdk.APIConnectionError` is raised.\n\nWhen the API returns a non-success status code (that is, 4xx or 5xx\nresponse), a subclass of `whop_sdk.APIStatusError` is raised, containing `status_code` and `response` properties.\n\nAll errors inherit from `whop_sdk.APIError`.\n\n```python\nimport whop_sdk\nfrom whop_sdk import Whop\n\nclient = Whop()\n\ntry:\n    client.payments.list(\n        company_id="biz_xxxxxxxxxxxxxx",\n    )\nexcept whop_sdk.APIConnectionError as e:\n    print("The server could not be reached")\n    print(e.__cause__) # an underlying Exception, likely raised within httpx.\nexcept whop_sdk.RateLimitError as e:\n    print("A 429 status code was received; we should back off a bit.")\nexcept whop_sdk.APIStatusError as e:\n    print("Another non-200-range status code was received")\n    print(e.status_code)\n    print(e.response)\n```\n\nError codes are as follows:\n\n| Status Code | Error Type                 |\n| ----------- | -------------------------- |\n| 400         | `BadRequestError`          |\n| 401         | `AuthenticationError`      |\n| 403         | `PermissionDeniedError`    |\n| 404         | `NotFoundError`            |\n| 422         | `UnprocessableEntityError` |\n| 429         | `RateLimitError`           |\n| >=500       | `InternalServerError`      |\n| N/A         | `APIConnectionError`       |\n\n### Retries\n\nCertain errors are automatically retried 2 times by default, with a short exponential backoff.\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,\n429 Rate Limit, and >=500 Internal errors are all retried by default.\n\nYou can use the `max_retries` option to configure or disable retry settings:\n\n```python\nfrom whop_sdk import Whop\n\n# Configure the default for all requests:\nclient = Whop(\n    # default is 2\n    max_retries=0,\n)\n\n# Or, configure per-request:\nclient.with_options(max_retries = 5).payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\n```\n\n### Timeouts\n\nBy default requests time out after 1 minute. You can configure this with a `timeout` option,\nwhich accepts a float or an [`httpx.Timeout`](https://www.python-httpx.org/advanced/timeouts/#fine-tuning-the-configuration) object:\n\n```python\nfrom whop_sdk import Whop\n\n# Configure the default for all requests:\nclient = Whop(\n    # 20 seconds (default is 1 minute)\n    timeout=20.0,\n)\n\n# More granular control:\nclient = Whop(\n    timeout=httpx.Timeout(60.0, read=5.0, write=10.0, connect=2.0),\n)\n\n# Override per-request:\nclient.with_options(timeout = 5.0).payments.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\n```\n\nOn timeout, an `APITimeoutError` is thrown.\n\nNote that requests that time out are [retried twice by default](#retries).\n\n\n\n## Advanced\n\n### Logging\n\nWe use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.\n\nYou can enable logging by setting the environment variable `WHOP_LOG` to `info`.\n\n```shell\n$ export WHOP_LOG=info\n```\n\nOr to `debug` for more verbose logging.\n\n### How to tell whether `None` means `null` or missing\n\nIn an API response, a field may be explicitly `null`, or missing entirely; in either case, its value is `None` in this library. You can differentiate the two cases with `.model_fields_set`:\n\n```py\nif response.my_field is None:\n  if \'my_field\' not in response.model_fields_set:\n    print(\'Got json like {}, without a "my_field" key present at all.\')\n  else:\n    print(\'Got json like {"my_field": null}.\')\n```\n\n### Accessing raw response data (e.g. headers)\n\nThe "raw" Response object can be accessed by prefixing `.with_raw_response.` to any HTTP method call, e.g.,\n\n```py\nfrom whop_sdk import Whop\n\nclient = Whop()\nresponse = client.payments.with_raw_response.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n)\nprint(response.headers.get(\'X-My-Header\'))\n\npayment = response.parse()  # get the object that `payments.list()` would have returned\nprint(payment.id)\n```\n\nThese methods return an [`APIResponse`](https://github.com/whopio/whopsdk-python/tree/main/src/whop_sdk/_response.py) object.\n\nThe async client returns an [`AsyncAPIResponse`](https://github.com/whopio/whopsdk-python/tree/main/src/whop_sdk/_response.py) with the same structure, the only difference being `await`able methods for reading the response content.\n\n#### `.with_streaming_response`\n\nThe above interface eagerly reads the full response body when you make the request, which may not always be what you want.\n\nTo stream the response body, use `.with_streaming_response` instead, which requires a context manager and only reads the response body once you call `.read()`, `.text()`, `.json()`, `.iter_bytes()`, `.iter_text()`, `.iter_lines()` or `.parse()`. In the async client, these are async methods.\n\n```python\nwith client.payments.with_streaming_response.list(\n    company_id="biz_xxxxxxxxxxxxxx",\n) as response :\n    print(response.headers.get(\'X-My-Header\'))\n\n    for line in response.iter_lines():\n      print(line)\n```\n\nThe context manager is required so that the response will reliably be closed.\n\n### Making custom/undocumented requests\n\nThis library is typed for convenient access to the documented API.\n\nIf you need to access undocumented endpoints, params, or response properties, the library can still be used.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints, you can make requests using `client.get`, `client.post`, and other\nhttp verbs. Options on the client will be respected (such as retries) when making this request.\n\n```py\nimport httpx\n\nresponse = client.post(\n    "/foo",\n    cast_to=httpx.Response,\n    body={"my_param": True},\n)\n\nprint(response.headers.get("x-foo"))\n```\n\n#### Undocumented request params\n\nIf you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` request\noptions.\n\n#### Undocumented response properties\n\nTo access undocumented response properties, you can access the extra fields like `response.unknown_prop`. You\ncan also get all the extra fields on the Pydantic model as a dict with\n[`response.model_extra`](https://docs.pydantic.dev/latest/api/base_model/#pydantic.BaseModel.model_extra).\n\n### Configuring the HTTP client\n\nYou can directly override the [httpx client](https://www.python-httpx.org/api/#client) to customize it for your use case, including:\n\n- Support for [proxies](https://www.python-httpx.org/advanced/proxies/)\n- Custom [transports](https://www.python-httpx.org/advanced/transports/)\n- Additional [advanced](https://www.python-httpx.org/advanced/clients/) functionality\n\n```python\nimport httpx\nfrom whop_sdk import Whop, DefaultHttpxClient\n\nclient = Whop(\n    # Or use the `WHOP_BASE_URL` env var\n    base_url="http://my.test.server.example.com:8083",\n    http_client=DefaultHttpxClient(proxy="http://my.test.proxy.example.com", transport=httpx.HTTPTransport(local_address="0.0.0.0")),\n)\n```\n\nYou can also customize the client on a per-request basis by using `with_options()`:\n\n```python\nclient.with_options(http_client=DefaultHttpxClient(...))\n```\n\n### Managing HTTP resources\n\nBy default the library closes underlying HTTP connections whenever the client is [garbage collected](https://docs.python.org/3/reference/datamodel.html#object.__del__). You can manually close the client using the `.close()` method if desired, or with a context manager that closes when exiting.\n\n```py\nfrom whop_sdk import Whop\n\nwith Whop() as client:\n  # make requests here\n  ...\n\n# HTTP client is now closed\n```\n\n## Versioning\n\nThis package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:\n\n1. Changes that only affect static types, without breaking runtime behavior.\n2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_\n3. Changes that we do not expect to impact the vast majority of users in practice.\n\nWe take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.\n\nWe are keen for your feedback; please open an [issue](https://www.github.com/whopio/whopsdk-python/issues) with questions, bugs, or suggestions.\n\n### Determining the installed version\n\nIf you\'ve upgraded to the latest version but aren\'t seeing any new features you were expecting then your python environment is likely still using an older version.\n\nYou can determine the version that is being used at runtime with:\n\n```py\nimport whop_sdk\nprint(whop_sdk.__version__)\n```\n\n## Requirements\n\nPython 3.9 or higher.\n\n## Contributing\n\nSee [the contributing documentation](./CONTRIBUTING.md).\n',
-  },
-  {
-    language: 'ruby',
-    content:
-      '# Whop Ruby API library\n\nThe Whop Ruby library provides convenient access to the Whop REST API from any Ruby 3.2.0+ application. It ships with comprehensive types & docstrings in Yard, RBS, and RBI – [see below](https://github.com/whopio/whopsdk-ruby#Sorbet) for usage with Sorbet. The standard library\'s `net/http` is used as the HTTP transport, with connection pooling via the `connection_pool` gem.\n\n\n\nIt is generated with [Stainless](https://www.stainless.com/).\n\n## MCP Server\n\nUse the Whop MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.\n\n[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfV0VCSE9PS19TRUNSRVQiOiJNeSBXZWJob29rIEtleSIsIldIT1BfQVBQX0lEIjoiYXBwX3h4eHh4eHh4eHh4eHh4In19)\n[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22My%20API%20Key%22%2C%22WHOP_WEBHOOK_SECRET%22%3A%22My%20Webhook%20Key%22%2C%22WHOP_APP_ID%22%3A%22app_xxxxxxxxxxxxxx%22%7D%7D)\n\n> Note: You may need to set environment variables in your MCP client.\n\n## Documentation\n\nDocumentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/whop_sdk).\n\nThe REST API documentation can be found on [docs.whop.com](https://docs.whop.com/apps).\n\n## Installation\n\nTo use this gem, install via Bundler by adding the following to your application\'s `Gemfile`:\n\n<!-- x-release-please-start-version -->\n\n```ruby\ngem "whop_sdk", "~> 0.0.39"\n```\n\n<!-- x-release-please-end -->\n\n## Usage\n\n```ruby\nrequire "bundler/setup"\nrequire "whop_sdk"\n\nwhop = WhopSDK::Client.new(\n  api_key: ENV["WHOP_API_KEY"] # This is the default and can be omitted\n)\n\npage = whop.payments.list(company_id: "biz_xxxxxxxxxxxxxx")\n\nputs(page.id)\n```\n\n\n\n### Pagination\n\nList methods in the Whop API are paginated.\n\nThis library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:\n\n```ruby\npage = whop.payments.list(company_id: "biz_xxxxxxxxxxxxxx")\n\n# Fetch single item from page.\npayment = page.data[0]\nputs(payment.id)\n\n# Automatically fetches more pages as needed.\npage.auto_paging_each do |payment|\n  puts(payment.id)\nend\n```\n\nAlternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.\n\n```ruby\nif page.next_page?\n  new_page = page.next_page\n  puts(new_page.data[0].id)\nend\n```\n\n\n\n### Handling errors\n\nWhen the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `WhopSDK::Errors::APIError` will be thrown:\n\n```ruby\nbegin\n  payment = whop.payments.list(company_id: "biz_xxxxxxxxxxxxxx")\nrescue WhopSDK::Errors::APIConnectionError => e\n  puts("The server could not be reached")\n  puts(e.cause)  # an underlying Exception, likely raised within `net/http`\nrescue WhopSDK::Errors::RateLimitError => e\n  puts("A 429 status code was received; we should back off a bit.")\nrescue WhopSDK::Errors::APIStatusError => e\n  puts("Another non-200-range status code was received")\n  puts(e.status)\nend\n```\n\nError codes are as follows:\n\n| Cause            | Error Type                 |\n| ---------------- | -------------------------- |\n| HTTP 400         | `BadRequestError`          |\n| HTTP 401         | `AuthenticationError`      |\n| HTTP 403         | `PermissionDeniedError`    |\n| HTTP 404         | `NotFoundError`            |\n| HTTP 409         | `ConflictError`            |\n| HTTP 422         | `UnprocessableEntityError` |\n| HTTP 429         | `RateLimitError`           |\n| HTTP >= 500      | `InternalServerError`      |\n| Other HTTP error | `APIStatusError`           |\n| Timeout          | `APITimeoutError`          |\n| Network error    | `APIConnectionError`       |\n\n### Retries\n\nCertain errors will be automatically retried 2 times by default, with a short exponential backoff.\n\nConnection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, >=500 Internal errors, and timeouts will all be retried by default.\n\nYou can use the `max_retries` option to configure or disable this:\n\n```ruby\n# Configure the default for all requests:\nwhop = WhopSDK::Client.new(\n  max_retries: 0 # default is 2\n)\n\n# Or, configure per-request:\nwhop.payments.list(company_id: "biz_xxxxxxxxxxxxxx", request_options: {max_retries: 5})\n```\n\n### Timeouts\n\nBy default, requests will time out after 60 seconds. You can use the timeout option to configure or disable this:\n\n```ruby\n# Configure the default for all requests:\nwhop = WhopSDK::Client.new(\n  timeout: nil # default is 60\n)\n\n# Or, configure per-request:\nwhop.payments.list(company_id: "biz_xxxxxxxxxxxxxx", request_options: {timeout: 5})\n```\n\nOn timeout, `WhopSDK::Errors::APITimeoutError` is raised.\n\nNote that requests that time out are retried by default.\n\n## Advanced concepts\n\n### BaseModel\n\nAll parameter and response objects inherit from `WhopSDK::Internal::Type::BaseModel`, which provides several conveniences, including:\n\n1. All fields, including unknown ones, are accessible with `obj[:prop]` syntax, and can be destructured with `obj => {prop: prop}` or pattern-matching syntax.\n\n2. Structural equivalence for equality; if two API calls return the same values, comparing the responses with == will return true.\n\n3. Both instances and the classes themselves can be pretty-printed.\n\n4. Helpers such as `#to_h`, `#deep_to_h`, `#to_json`, and `#to_yaml`.\n\n### Making custom or undocumented requests\n\n#### Undocumented properties\n\nYou can send undocumented parameters to any endpoint, and read undocumented response properties, like so:\n\nNote: the `extra_` parameters of the same name overrides the documented parameters.\n\n```ruby\npage =\n  whop.payments.list(\n    company_id: "biz_xxxxxxxxxxxxxx",\n    request_options: {\n      extra_query: {my_query_parameter: value},\n      extra_body: {my_body_parameter: value},\n      extra_headers: {"my-header": value}\n    }\n  )\n\nputs(page[:my_undocumented_property])\n```\n\n#### Undocumented request params\n\nIf you want to explicitly send an extra param, you can do so with the `extra_query`, `extra_body`, and `extra_headers` under the `request_options:` parameter when making a request, as seen in the examples above.\n\n#### Undocumented endpoints\n\nTo make requests to undocumented endpoints while retaining the benefit of auth, retries, and so on, you can make requests using `client.request`, like so:\n\n```ruby\nresponse = client.request(\n  method: :post,\n  path: \'/undocumented/endpoint\',\n  query: {"dog": "woof"},\n  headers: {"useful-header": "interesting-value"},\n  body: {"hello": "world"}\n)\n```\n\n### Concurrency & connection pooling\n\nThe `WhopSDK::Client` instances are threadsafe, but are only are fork-safe when there are no in-flight HTTP requests.\n\nEach instance of `WhopSDK::Client` has its own HTTP connection pool with a default size of 99. As such, we recommend instantiating the client once per application in most settings.\n\nWhen all available connections from the pool are checked out, requests wait for a new connection to become available, with queue time counting towards the request timeout.\n\nUnless otherwise specified, other classes in the SDK do not have locks protecting their underlying data structure.\n\n## Sorbet\n\nThis library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitions, and has no dependency on sorbet-runtime.\n\nYou can provide typesafe request parameters like so:\n\n```ruby\nwhop.payments.list(company_id: "biz_xxxxxxxxxxxxxx")\n```\n\nOr, equivalently:\n\n```ruby\n# Hashes work, but are not typesafe:\nwhop.payments.list(company_id: "biz_xxxxxxxxxxxxxx")\n\n# You can also splat a full Params class:\nparams = WhopSDK::PaymentListParams.new(company_id: "biz_xxxxxxxxxxxxxx")\nwhop.payments.list(**params)\n```\n\n### Enums\n\nSince this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:\n\n```ruby\n# :b2b_app\nputs(WhopSDK::AppType::B2B_APP)\n\n# Revealed type: `T.all(WhopSDK::AppType, Symbol)`\nT.reveal_type(WhopSDK::AppType::B2B_APP)\n```\n\nEnum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:\n\n```ruby\n# Using the enum constants preserves the tagged type information:\nwhop.apps.list(\n  app_type: WhopSDK::AppType::B2B_APP,\n  # …\n)\n\n# Literal values are also permissible:\nwhop.apps.list(\n  app_type: :b2b_app,\n  # …\n)\n```\n\n## Versioning\n\nThis package follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions. As the library is in initial development and has a major version of `0`, APIs may change at any time.\n\nThis package considers improvements to the (non-runtime) `*.rbi` and `*.rbs` type definitions to be non-breaking changes.\n\n## Requirements\n\nRuby 3.2.0 or higher.\n\n## Contributing\n\nSee [the contributing documentation](https://github.com/whopio/whopsdk-ruby/tree/main/CONTRIBUTING.md).\n',
   },
 ];
 
