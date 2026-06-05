@@ -749,13 +749,17 @@ Types:
 
 - <code><a href="./src/resources/verifications.ts">VerificationErrorCode</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationStatus</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationCreateResponse</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationRetrieveResponse</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationListResponse</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationUpdateResponse</a></code>
+- <code><a href="./src/resources/verifications.ts">VerificationDeleteResponse</a></code>
 
 Methods:
 
-- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
-- <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
+- <code title="get /verifications/{verification_id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(verificationID) -> VerificationRetrieveResponse</code>
+- <code title="post /verifications">client.verifications.<a href="./src/resources/verifications.ts">create</a>({ ...params }) -> VerificationCreateResponse</code>
+- <code title="patch /verifications/{verification_id}">client.verifications.<a href="./src/resources/verifications.ts">update</a>(verificationID, { ...params }) -> VerificationUpdateResponse</code>
+- <code title="delete /verifications/{verification_id}">client.verifications.<a href="./src/resources/verifications.ts">delete</a>(verificationID) -> VerificationDeleteResponse</code>
 
 # Leads
 
