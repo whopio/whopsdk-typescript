@@ -36,6 +36,7 @@ import {
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
   AdCampaignPlatform,
+  AdCampaignRetrieveParams,
   AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
@@ -47,6 +48,7 @@ import {
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
+  AdGroupRetrieveParams,
   AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
@@ -63,6 +65,7 @@ import {
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
+  AdRetrieveParams,
   Ads,
   ExternalAdStatus,
 } from './resources/ads';
@@ -504,6 +507,8 @@ import {
 import {
   AccountWallet,
   WalletBalanceResponse,
+  WalletCreateWithdrawalParams,
+  WalletCreateWithdrawalResponse,
   WalletListResponse,
   WalletSendParams,
   WalletSendResponse,
@@ -2072,8 +2077,10 @@ export declare namespace Whop {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletCreateWithdrawalResponse as WalletCreateWithdrawalResponse,
     type WalletSendResponse as WalletSendResponse,
     type WalletSendParams as WalletSendParams,
+    type WalletCreateWithdrawalParams as WalletCreateWithdrawalParams,
   };
 
   export {
@@ -2265,6 +2272,7 @@ export declare namespace Whop {
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 
@@ -2277,6 +2285,7 @@ export declare namespace Whop {
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
   };
 
@@ -2287,6 +2296,7 @@ export declare namespace Whop {
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,
+    type AdRetrieveParams as AdRetrieveParams,
   };
 
   export {
