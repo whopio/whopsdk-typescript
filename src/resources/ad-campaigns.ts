@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import * as AdGroupsAPI from './ad-groups';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -51,8 +52,12 @@ export class AdCampaigns extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
-    return this._client.get(path`/ad_campaigns/${id}`, options);
+  retrieve(
+    id: string,
+    query: AdCampaignRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaign> {
+    return this._client.get(path`/ad_campaigns/${id}`, { query, ...options });
   }
 
   /**
@@ -136,20 +141,73 @@ export interface AdCampaign {
   budget_type: AdGroupsAPI.AdBudgetType | null;
 
   /**
+   * Click-through rate as a fraction of impressions (clicks / impressions, 0–1).
+   */
+  click_through_rate: number;
+
+  /**
+   * Total clicks on the campaign's ads in the stats window.
+   */
+  clicks: number;
+
+  /**
+   * Cost per click in dollars (spend / clicks). 0 when there are no clicks.
+   */
+  cost_per_click: number;
+
+  /**
+   * Cost in dollars per Whop pixel-attributed lead (spend / leads). 0 when leads are
+   * tracked but none happened yet; null when leads are not a goal and none were
+   * attributed.
+   */
+  cost_per_lead: number | null;
+
+  /**
+   * Cost per 1,000 impressions in dollars (spend / impressions × 1000). 0 when there
+   * are no impressions.
+   */
+  cost_per_mille: number;
+
+  /**
+   * Cost in dollars per Whop pixel-attributed purchase (spend / purchases). 0 when
+   * purchases are tracked but none happened yet; null when purchases are not a goal
+   * and none were attributed.
+   */
+  cost_per_purchase: number | null;
+
+  /**
+   * Cost in dollars per optimization result (spend / results). 0 when a result is
+   * being optimized for but none happened yet; null when nothing is being optimized
+   * for.
+   */
+  cost_per_result: number | null;
+
+  /**
    * When the ad campaign was created.
    */
   created_at: string;
 
   /**
-   * The user who created this ad campaign.
+   * Average number of times each person saw an ad (impressions / reach), as reported
+   * by the platform.
    */
-  created_by_user: AdCampaign.CreatedByUser;
+  frequency: number | null;
 
   /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
+   * Total impressions (views) on the campaign's ads in the stats window.
    */
-  meta_config: AdCampaign.MetaConfig | null;
+  impressions: number;
+
+  /**
+   * Open platform issues affecting this campaign and its descendant ad groups and
+   * ads, deduplicated per object. Empty when there are none.
+   */
+  issues: Array<AdCampaign.Issue>;
+
+  /**
+   * Number of Whop pixel-attributed leads (last-click) in the stats window.
+   */
+  leads: number;
 
   /**
    * The external ad platform this campaign is running on (e.g., meta, tiktok).
@@ -157,7 +215,38 @@ export interface AdCampaign {
   platform: AdCampaignPlatform;
 
   /**
-   * Current status of the campaign (active, paused, or inactive).
+   * Total USD value of Whop pixel-attributed purchases in the stats window.
+   */
+  purchase_value: number;
+
+  /**
+   * Number of Whop pixel-attributed purchases (last-click) in the stats window.
+   */
+  purchases: number;
+
+  /**
+   * Unique users reached in the stats window (deduplicated by the platform).
+   */
+  reach: number;
+
+  /**
+   * Return on ad spend as a ratio (purchaseValue / spend) — 2.5 means $2.50 of
+   * attributed purchase value per $1 spent. 0 when there is no spend.
+   */
+  return_on_ad_spend: number;
+
+  /**
+   * Amount charged in dollars in the stats window.
+   */
+  spend: number;
+
+  /**
+   * The available currencies on the platform
+   */
+  spend_currency: Shared.Currency | null;
+
+  /**
+   * Current status of the campaign.
    */
   status: AdCampaignStatus;
 
@@ -167,9 +256,15 @@ export interface AdCampaign {
   title: string;
 
   /**
-   * Total amount spent in dollars.
+   * Unique click-through rate as a fraction of impressions (unique clicks /
+   * impressions, 0–1).
    */
-  total_spend: number;
+  unique_click_through_rate: number | null;
+
+  /**
+   * Unique clicks (deduplicated by the platform) in the stats window.
+   */
+  unique_clicks: number;
 
   /**
    * When the ad campaign was last updated.
@@ -179,77 +274,45 @@ export interface AdCampaign {
 
 export namespace AdCampaign {
   /**
-   * The user who created this ad campaign.
+   * A platform-reported issue on an ad object (rejection, policy flag, etc.).
    */
-  export interface CreatedByUser {
+  export interface Issue {
     /**
-     * The unique identifier for the user.
+     * When the issue was first reported.
      */
-    id: string;
+    created_at: string;
 
     /**
-     * The user's display name shown on their public profile.
+     * Platform-specific error code.
      */
-    name: string | null;
+    error_code: string | null;
 
     /**
-     * The user's unique username shown on their public profile.
+     * Full error detail from the platform.
      */
-    username: string;
-  }
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  export interface MetaConfig {
-    /**
-     * Bid cap amount in cents. Only used when bid_strategy is bid_cap.
-     */
-    bid_amount: number | null;
+    error_message: string | null;
 
     /**
-     * The bidding strategy used to optimize spend for this campaign.
+     * Short description of the issue.
      */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
+    error_summary: string;
 
     /**
-     * Whether campaign budget optimization (CBO) is enabled, allowing the platform to
-     * distribute budget across ad groups.
+     * Current resolution status.
      */
-    budget_optimization: boolean | null;
+    resolution_status: 'open' | 'resolved' | 'acknowledged';
 
     /**
-     * The actual delivery status, accounting for platform overrides (e.g., in_review,
-     * rejected).
+     * The Whop ID of the ad object this issue is on (the ad, ad group, or campaign).
+     * Null when the issue isn't tied to a local object.
      */
-    effective_status: 'active' | 'paused' | 'deleted' | 'in_review' | 'rejected' | 'with_issues' | null;
+    resource_id: string | null;
 
     /**
-     * The scheduled end time of the campaign (ISO8601).
+     * The kind of ad object this issue is on: `ad`, `ad_group`, or `campaign`. Pairs
+     * with `resourceId`.
      */
-    end_time: string | null;
-
-    /**
-     * The campaign objective that determines how Meta optimizes delivery.
-     */
-    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
-
-    /**
-     * Special ad categories required by the platform (e.g., housing, employment,
-     * credit).
-     */
-    special_categories: Array<string> | null;
-
-    /**
-     * The scheduled start time of the campaign (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * The campaign status as set by the advertiser (active or paused).
-     */
-    status: 'active' | 'paused' | null;
+    resource_type: string;
   }
 }
 
@@ -283,9 +346,73 @@ export interface AdCampaignListResponse {
   budget_type: AdGroupsAPI.AdBudgetType | null;
 
   /**
+   * Click-through rate as a fraction of impressions (clicks / impressions, 0–1).
+   */
+  click_through_rate: number;
+
+  /**
+   * Total clicks on the campaign's ads in the stats window.
+   */
+  clicks: number;
+
+  /**
+   * Cost per click in dollars (spend / clicks). 0 when there are no clicks.
+   */
+  cost_per_click: number;
+
+  /**
+   * Cost in dollars per Whop pixel-attributed lead (spend / leads). 0 when leads are
+   * tracked but none happened yet; null when leads are not a goal and none were
+   * attributed.
+   */
+  cost_per_lead: number | null;
+
+  /**
+   * Cost per 1,000 impressions in dollars (spend / impressions × 1000). 0 when there
+   * are no impressions.
+   */
+  cost_per_mille: number;
+
+  /**
+   * Cost in dollars per Whop pixel-attributed purchase (spend / purchases). 0 when
+   * purchases are tracked but none happened yet; null when purchases are not a goal
+   * and none were attributed.
+   */
+  cost_per_purchase: number | null;
+
+  /**
+   * Cost in dollars per optimization result (spend / results). 0 when a result is
+   * being optimized for but none happened yet; null when nothing is being optimized
+   * for.
+   */
+  cost_per_result: number | null;
+
+  /**
    * When the ad campaign was created.
    */
   created_at: string;
+
+  /**
+   * Average number of times each person saw an ad (impressions / reach), as reported
+   * by the platform.
+   */
+  frequency: number | null;
+
+  /**
+   * Total impressions (views) on the campaign's ads in the stats window.
+   */
+  impressions: number;
+
+  /**
+   * Open platform issues affecting this campaign and its descendant ad groups and
+   * ads, deduplicated per object. Empty when there are none.
+   */
+  issues: Array<AdCampaignListResponse.Issue>;
+
+  /**
+   * Number of Whop pixel-attributed leads (last-click) in the stats window.
+   */
+  leads: number;
 
   /**
    * The external ad platform this campaign is running on (e.g., meta, tiktok).
@@ -293,7 +420,38 @@ export interface AdCampaignListResponse {
   platform: AdCampaignPlatform;
 
   /**
-   * Current status of the campaign (active, paused, or inactive).
+   * Total USD value of Whop pixel-attributed purchases in the stats window.
+   */
+  purchase_value: number;
+
+  /**
+   * Number of Whop pixel-attributed purchases (last-click) in the stats window.
+   */
+  purchases: number;
+
+  /**
+   * Unique users reached in the stats window (deduplicated by the platform).
+   */
+  reach: number;
+
+  /**
+   * Return on ad spend as a ratio (purchaseValue / spend) — 2.5 means $2.50 of
+   * attributed purchase value per $1 spent. 0 when there is no spend.
+   */
+  return_on_ad_spend: number;
+
+  /**
+   * Amount charged in dollars in the stats window.
+   */
+  spend: number;
+
+  /**
+   * The available currencies on the platform
+   */
+  spend_currency: Shared.Currency | null;
+
+  /**
+   * Current status of the campaign.
    */
   status: AdCampaignStatus;
 
@@ -303,14 +461,64 @@ export interface AdCampaignListResponse {
   title: string;
 
   /**
-   * Total amount spent in dollars.
+   * Unique click-through rate as a fraction of impressions (unique clicks /
+   * impressions, 0–1).
    */
-  total_spend: number;
+  unique_click_through_rate: number | null;
+
+  /**
+   * Unique clicks (deduplicated by the platform) in the stats window.
+   */
+  unique_clicks: number;
 
   /**
    * When the ad campaign was last updated.
    */
   updated_at: string;
+}
+
+export namespace AdCampaignListResponse {
+  /**
+   * A platform-reported issue on an ad object (rejection, policy flag, etc.).
+   */
+  export interface Issue {
+    /**
+     * When the issue was first reported.
+     */
+    created_at: string;
+
+    /**
+     * Platform-specific error code.
+     */
+    error_code: string | null;
+
+    /**
+     * Full error detail from the platform.
+     */
+    error_message: string | null;
+
+    /**
+     * Short description of the issue.
+     */
+    error_summary: string;
+
+    /**
+     * Current resolution status.
+     */
+    resolution_status: 'open' | 'resolved' | 'acknowledged';
+
+    /**
+     * The Whop ID of the ad object this issue is on (the ad, ad group, or campaign).
+     * Null when the issue isn't tied to a local object.
+     */
+    resource_id: string | null;
+
+    /**
+     * The kind of ad object this issue is on: `ad`, `ad_group`, or `campaign`. Pairs
+     * with `resourceId`.
+     */
+    resource_type: string;
+  }
 }
 
 export interface AdCampaignListParams extends CursorPageParams {
@@ -345,14 +553,40 @@ export interface AdCampaignListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * Case-insensitive substring match against the campaign title.
+   * Case-insensitive substring match against the campaign title or ID.
    */
   query?: string | null;
+
+  /**
+   * Inclusive start of the window for each campaign's metric fields (spend,
+   * impressions, …). Omit both statsFrom and statsTo for all-time stats.
+   */
+  stats_from?: string | null;
+
+  /**
+   * Inclusive end of the window for each campaign's metric fields. Omit both
+   * statsFrom and statsTo for all-time stats.
+   */
+  stats_to?: string | null;
 
   /**
    * The status of an ad campaign.
    */
   status?: AdCampaignStatus | null;
+}
+
+export interface AdCampaignRetrieveParams {
+  /**
+   * Inclusive start of the window for the campaign's metric fields (spend,
+   * impressions, …). Omit both statsFrom and statsTo for all-time stats.
+   */
+  stats_from?: string | null;
+
+  /**
+   * Inclusive end of the window for the campaign's metric fields. Omit both
+   * statsFrom and statsTo for all-time stats.
+   */
+  stats_to?: string | null;
 }
 
 export interface AdCampaignUpdateParams {
@@ -371,6 +605,7 @@ export declare namespace AdCampaigns {
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 }
