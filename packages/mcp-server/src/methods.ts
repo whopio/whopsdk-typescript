@@ -936,6 +936,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/swaps/quote',
   },
   {
+    clientCallName: 'client.swaps.create',
+    fullyQualifiedName: 'swaps.create',
+    httpMethod: 'post',
+    httpPath: '/swaps',
+  },
+  {
+    clientCallName: 'client.swaps.retrieve',
+    fullyQualifiedName: 'swaps.retrieve',
+    httpMethod: 'get',
+    httpPath: '/swaps/{account_id}',
+  },
+  {
     clientCallName: 'client.deposits.create',
     fullyQualifiedName: 'deposits.create',
     httpMethod: 'post',
@@ -994,18 +1006,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'payoutMethods.retrieve',
     httpMethod: 'get',
     httpPath: '/payout_methods/{id}',
-  },
-  {
-    clientCallName: 'client.verifications.retrieve',
-    fullyQualifiedName: 'verifications.retrieve',
-    httpMethod: 'get',
-    httpPath: '/verifications/{id}',
-  },
-  {
-    clientCallName: 'client.verifications.list',
-    fullyQualifiedName: 'verifications.list',
-    httpMethod: 'get',
-    httpPath: '/verifications',
   },
   {
     clientCallName: 'client.leads.list',
