@@ -999,13 +999,31 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.verifications.retrieve',
     fullyQualifiedName: 'verifications.retrieve',
     httpMethod: 'get',
-    httpPath: '/verifications/{id}',
+    httpPath: '/verifications/{verification_id}',
   },
   {
     clientCallName: 'client.verifications.list',
     fullyQualifiedName: 'verifications.list',
     httpMethod: 'get',
     httpPath: '/verifications',
+  },
+  {
+    clientCallName: 'client.verifications.create',
+    fullyQualifiedName: 'verifications.create',
+    httpMethod: 'post',
+    httpPath: '/verifications',
+  },
+  {
+    clientCallName: 'client.verifications.update',
+    fullyQualifiedName: 'verifications.update',
+    httpMethod: 'patch',
+    httpPath: '/verifications/{verification_id}',
+  },
+  {
+    clientCallName: 'client.verifications.delete',
+    fullyQualifiedName: 'verifications.delete',
+    httpMethod: 'delete',
+    httpPath: '/verifications/{verification_id}',
   },
   {
     clientCallName: 'client.leads.list',
