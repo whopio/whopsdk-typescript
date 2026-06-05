@@ -487,6 +487,11 @@ export declare namespace InvoiceCreateParams {
       billing_period?: number | null;
 
       /**
+       * The available currencies on the platform
+       */
+      currency?: Shared.Currency | null;
+
+      /**
        * An array of custom field objects.
        */
       custom_fields?: Array<Plan.CustomField> | null;
@@ -831,6 +836,11 @@ export declare namespace InvoiceCreateParams {
        * The interval in days at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency?: Shared.Currency | null;
 
       /**
        * An array of custom field objects.
@@ -1211,6 +1221,11 @@ export namespace InvoiceUpdateParams {
      * The interval in days at which the plan charges (renewal plans).
      */
     billing_period?: number | null;
+
+    /**
+     * The available currencies on the platform
+     */
+    currency?: Shared.Currency | null;
 
     /**
      * An array of custom field objects.
