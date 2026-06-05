@@ -237,8 +237,7 @@ export namespace CheckoutConfigurationListResponse {
 
     /**
      * The number of free trial days before the first charge on a renewal plan. Null if
-     * no trial is configured or the current user has already used a trial for this
-     * plan.
+     * no trial is configured or the current user previously paid for this plan.
      */
     trial_period_days: number | null;
 
@@ -839,6 +838,11 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL of the page where the checkout is being initiated from.
      */
     source_url?: string | null;
+
+    /**
+     * The 3D Secure behavior for a plan.
+     */
+    three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
   }
 
   export namespace CreateCheckoutSessionInputModeSetup {
