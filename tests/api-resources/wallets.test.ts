@@ -48,4 +48,30 @@ describe('resource wallets', () => {
   test.skip('send: required and optional params', async () => {
     const response = await client.wallets.send('account_id', { amount: 'amount', to: 'to' });
   });
+
+  // Mock server tests are disabled
+  test.skip('createWithdrawal: only required params', async () => {
+    const responsePromise = client.wallets.createWithdrawal({
+      account_id: 'account_id',
+      amount: 'amount',
+      payout_method_id: 'payout_method_id',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('createWithdrawal: required and optional params', async () => {
+    const response = await client.wallets.createWithdrawal({
+      account_id: 'account_id',
+      amount: 'amount',
+      payout_method_id: 'payout_method_id',
+      asset: 'asset',
+    });
+  });
 });
