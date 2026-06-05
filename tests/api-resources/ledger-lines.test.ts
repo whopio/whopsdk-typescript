@@ -7,13 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource adReports', () => {
+describe('resource ledgerLines', () => {
   // Mock server tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.adReports.retrieve({
-      from: '2023-12-01T05:00:00.401Z',
-      to: '2023-12-01T05:00:00.401Z',
-    });
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.ledgerLines.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,17 +21,16 @@ describe('resource adReports', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.adReports.retrieve({
-      from: '2023-12-01T05:00:00.401Z',
-      to: '2023-12-01T05:00:00.401Z',
-      ad_campaign_ids: ['string'],
-      ad_group_ids: ['string'],
-      ad_ids: ['string'],
-      breakdown: 'campaign',
-      company_id: 'biz_xxxxxxxxxxxxxx',
+  test.skip('list: required and optional params', async () => {
+    const response = await client.ledgerLines.list({
+      account_id: 'account_id',
+      after: 'after',
+      before: 'before',
       currency: 'currency',
-      granularity: 'daily',
+      first: 42,
+      line_category: 'line_category',
+      posted_after: '2023-12-01T05:00:00.401Z',
+      posted_before: '2023-12-01T05:00:00.401Z',
     });
   });
 });
