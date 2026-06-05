@@ -36,6 +36,7 @@ import {
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
   AdCampaignPlatform,
+  AdCampaignRetrieveParams,
   AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
@@ -47,6 +48,7 @@ import {
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
+  AdGroupRetrieveParams,
   AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
@@ -63,6 +65,7 @@ import {
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
+  AdRetrieveParams,
   Ads,
   ExternalAdStatus,
 } from './resources/ads';
@@ -112,6 +115,17 @@ import {
   BountyListResponsesCursorPage,
   BountyRetrieveResponse,
 } from './resources/bounties';
+import { CardAccount, CardAccountResource, CardAccountUpdateParams } from './resources/card-account';
+import {
+  Card,
+  CardAccountBalance,
+  CardCreateParams,
+  CardDepositAddress,
+  CardListParams,
+  CardListResponse,
+  CardUpdateParams,
+  Cards,
+} from './resources/cards';
 import {
   ChatChannelListParams,
   ChatChannelListResponse,
@@ -472,7 +486,14 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
-import { SwapCreateQuoteParams, SwapCreateQuoteResponse, Swaps } from './resources/swaps';
+import {
+  SwapCreateParams,
+  SwapCreateQuoteParams,
+  SwapCreateQuoteResponse,
+  SwapCreateResponse,
+  SwapRetrieveResponse,
+  Swaps,
+} from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -1490,6 +1511,8 @@ export class Whop {
   wallets: API.Wallets = new API.Wallets(this);
   swaps: API.Swaps = new API.Swaps(this);
   deposits: API.Deposits = new API.Deposits(this);
+  cards: API.Cards = new API.Cards(this);
+  cardAccount: API.CardAccountResource = new API.CardAccountResource(this);
   /**
    * Setup intents
    */
@@ -1621,6 +1644,8 @@ Whop.Accounts = Accounts;
 Whop.Wallets = Wallets;
 Whop.Swaps = Swaps;
 Whop.Deposits = Deposits;
+Whop.Cards = Cards;
+Whop.CardAccountResource = CardAccountResource;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
@@ -2078,14 +2103,34 @@ export declare namespace Whop {
 
   export {
     Swaps as Swaps,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
+    type SwapCreateParams as SwapCreateParams,
   };
 
   export {
     Deposits as Deposits,
     type DepositCreateResponse as DepositCreateResponse,
     type DepositCreateParams as DepositCreateParams,
+  };
+
+  export {
+    Cards as Cards,
+    type Card as Card,
+    type CardAccountBalance as CardAccountBalance,
+    type CardDepositAddress as CardDepositAddress,
+    type CardListResponse as CardListResponse,
+    type CardListParams as CardListParams,
+    type CardCreateParams as CardCreateParams,
+    type CardUpdateParams as CardUpdateParams,
+  };
+
+  export {
+    CardAccountResource as CardAccountResource,
+    type CardAccount as CardAccount,
+    type CardAccountUpdateParams as CardAccountUpdateParams,
   };
 
   export {
@@ -2265,6 +2310,7 @@ export declare namespace Whop {
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 
@@ -2277,6 +2323,7 @@ export declare namespace Whop {
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
   };
 
@@ -2287,6 +2334,7 @@ export declare namespace Whop {
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,
+    type AdRetrieveParams as AdRetrieveParams,
   };
 
   export {
