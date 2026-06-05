@@ -18,8 +18,6 @@ export interface SwapCreateQuoteResponse {
 
   amount_out: string;
 
-  cross_chain: boolean;
-
   fee_bps: number;
 
   from_token: { [key: string]: unknown };
@@ -60,11 +58,6 @@ export interface SwapCreateQuoteParams {
    * Destination token contract address.
    */
   to_token: string;
-
-  /**
-   * Caller-owned account whose wallet address should be used.
-   */
-  account_id?: string | null;
 
   from_address?: string | null;
 
