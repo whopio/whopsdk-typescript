@@ -7,13 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource adReports', () => {
+describe('resource cardAccount', () => {
   // Mock server tests are disabled
-  test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.adReports.retrieve({
-      from: '2023-12-01T05:00:00.401Z',
-      to: '2023-12-01T05:00:00.401Z',
-    });
+  test.skip('update: only required params', async () => {
+    const responsePromise = client.cardAccount.update({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,17 +21,12 @@ describe('resource adReports', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve: required and optional params', async () => {
-    const response = await client.adReports.retrieve({
-      from: '2023-12-01T05:00:00.401Z',
-      to: '2023-12-01T05:00:00.401Z',
-      ad_campaign_ids: ['string'],
-      ad_group_ids: ['string'],
-      ad_ids: ['string'],
-      breakdown: 'campaign',
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      currency: 'currency',
-      granularity: 'daily',
+  test.skip('update: required and optional params', async () => {
+    const response = await client.cardAccount.update({
+      account_id: 'account_id',
+      auto_topup_enabled: true,
+      auto_topup_target_usd: 'auto_topup_target_usd',
+      auto_topup_threshold_usd: 'auto_topup_threshold_usd',
     });
   });
 });
