@@ -36,6 +36,7 @@ import {
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
   AdCampaignPlatform,
+  AdCampaignRetrieveParams,
   AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
@@ -47,6 +48,7 @@ import {
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
+  AdGroupRetrieveParams,
   AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
@@ -63,6 +65,7 @@ import {
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
+  AdRetrieveParams,
   Ads,
   ExternalAdStatus,
 } from './resources/ads';
@@ -199,7 +202,6 @@ import {
   Courses,
   Languages,
 } from './resources/courses';
-import { DepositCreateParams, DepositCreateResponse, Deposits } from './resources/deposits';
 import {
   DisputeAlertListParams,
   DisputeAlertListResponse,
@@ -472,7 +474,14 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
-import { SwapCreateQuoteParams, SwapCreateQuoteResponse, Swaps } from './resources/swaps';
+import {
+  SwapCreateParams,
+  SwapCreateQuoteParams,
+  SwapCreateQuoteResponse,
+  SwapCreateResponse,
+  SwapRetrieveResponse,
+  Swaps,
+} from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -504,6 +513,8 @@ import {
 import {
   AccountWallet,
   WalletBalanceResponse,
+  WalletDepositAddressParams,
+  WalletDepositAddressResponse,
   WalletListResponse,
   WalletSendParams,
   WalletSendResponse,
@@ -1489,7 +1500,6 @@ export class Whop {
   accounts: API.Accounts = new API.Accounts(this);
   wallets: API.Wallets = new API.Wallets(this);
   swaps: API.Swaps = new API.Swaps(this);
-  deposits: API.Deposits = new API.Deposits(this);
   /**
    * Setup intents
    */
@@ -1620,7 +1630,6 @@ Whop.AccountLinks = AccountLinks;
 Whop.Accounts = Accounts;
 Whop.Wallets = Wallets;
 Whop.Swaps = Swaps;
-Whop.Deposits = Deposits;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
@@ -2072,20 +2081,19 @@ export declare namespace Whop {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletDepositAddressResponse as WalletDepositAddressResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletDepositAddressParams as WalletDepositAddressParams,
     type WalletSendParams as WalletSendParams,
   };
 
   export {
     Swaps as Swaps,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
-  };
-
-  export {
-    Deposits as Deposits,
-    type DepositCreateResponse as DepositCreateResponse,
-    type DepositCreateParams as DepositCreateParams,
+    type SwapCreateParams as SwapCreateParams,
   };
 
   export {
@@ -2265,6 +2273,7 @@ export declare namespace Whop {
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 
@@ -2277,6 +2286,7 @@ export declare namespace Whop {
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
   };
 
@@ -2287,6 +2297,7 @@ export declare namespace Whop {
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,
+    type AdRetrieveParams as AdRetrieveParams,
   };
 
   export {
