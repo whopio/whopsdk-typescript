@@ -14,6 +14,19 @@ export class Wallets extends APIResource {
   }
 
   /**
+   * Returns the account's provisioned EVM and Solana deposit addresses, the networks
+   * that auto-credit its balance, and a signed hosted onramp URL. Addresses are
+   * provisioned asynchronously — while provisioning, addresses are null and status
+   * is "provisioning"; poll until status is "ready".
+   */
+  depositAddress(
+    query: WalletDepositAddressParams,
+    options?: RequestOptions,
+  ): APIPromise<WalletDepositAddressResponse> {
+    return this._client.get('/wallets/deposit-address', { query, ...options });
+  }
+
+  /**
    * Returns per-token balances held in an account's wallet.
    */
   balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
@@ -85,6 +98,42 @@ export namespace WalletBalanceResponse {
   }
 }
 
+export interface WalletDepositAddressResponse {
+  evm_address: string | null;
+
+  hosted_url: string | null;
+
+  object: 'deposit_address';
+
+  solana_address: string | null;
+
+  status: 'ready' | 'provisioning';
+
+  supported_networks: Array<WalletDepositAddressResponse.SupportedNetwork>;
+
+  /**
+   * Echo of the validated asset filter, present when the caller passed ?asset=.
+   */
+  asset?: string;
+
+  /**
+   * Echo of the validated network filter, present when the caller passed ?network=.
+   */
+  network?: string;
+}
+
+export namespace WalletDepositAddressResponse {
+  export interface SupportedNetwork {
+    address_kind: 'evm' | 'solana';
+
+    chain_id: number | null;
+
+    network: string;
+
+    onramp_supported: boolean;
+  }
+}
+
 export interface WalletSendResponse {
   amount: string;
 
@@ -113,6 +162,26 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletDepositAddressParams {
+  /**
+   * The business, user, or ledger account ID whose deposit address should be
+   * returned.
+   */
+  account_id: string;
+
+  /**
+   * Optional asset symbol the caller intends to deposit (e.g. USDT). Unsupported
+   * assets are rejected with a 400 rather than silently ignored.
+   */
+  asset?: string;
+
+  /**
+   * Optional network the caller intends to deposit on (e.g. plasma). Unsupported
+   * networks are rejected with a 400 rather than silently ignored.
+   */
+  network?: 'plasma' | 'base' | 'ethereum' | 'solana';
+}
+
 export interface WalletSendParams {
   /**
    * USDT amount to send.
@@ -130,7 +199,9 @@ export declare namespace Wallets {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletDepositAddressResponse as WalletDepositAddressResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletDepositAddressParams as WalletDepositAddressParams,
     type WalletSendParams as WalletSendParams,
   };
 }
