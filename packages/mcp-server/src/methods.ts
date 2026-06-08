@@ -918,22 +918,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets',
   },
   {
-    clientCallName: 'client.wallets.balance',
-    fullyQualifiedName: 'wallets.balance',
-    httpMethod: 'get',
-    httpPath: '/wallets/{account_id}/balance',
-  },
-  {
-    clientCallName: 'client.wallets.send',
-    fullyQualifiedName: 'wallets.send',
-    httpMethod: 'post',
-    httpPath: '/wallets/{account_id}/sends',
-  },
-  {
     clientCallName: 'client.swaps.createQuote',
     fullyQualifiedName: 'swaps.createQuote',
     httpMethod: 'post',
     httpPath: '/swaps/quote',
+  },
+  {
+    clientCallName: 'client.swaps.create',
+    fullyQualifiedName: 'swaps.create',
+    httpMethod: 'post',
+    httpPath: '/swaps',
   },
   {
     clientCallName: 'client.deposits.create',
