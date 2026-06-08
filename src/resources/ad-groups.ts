@@ -623,6 +623,11 @@ export interface AdGroupUpdateParams {
    * The status of an external ad group.
    */
   status?: AdGroupStatus | null;
+
+  /**
+   * Human-readable ad group title.
+   */
+  title?: string | null;
 }
 
 export namespace AdGroupUpdateParams {
