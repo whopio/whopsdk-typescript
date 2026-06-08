@@ -280,6 +280,11 @@ import {
   UploadStatus,
 } from './resources/files';
 import {
+  FinancialActivity,
+  FinancialActivityListParams,
+  FinancialActivityListResponse,
+} from './resources/financial-activity';
+import {
   ForumPostCreateParams,
   ForumPostListParams,
   ForumPostListResponse,
@@ -1524,6 +1529,7 @@ export class Whop {
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
   accounts: API.Accounts = new API.Accounts(this);
   wallets: API.Wallets = new API.Wallets(this);
+  financialActivity: API.FinancialActivity = new API.FinancialActivity(this);
   swaps: API.Swaps = new API.Swaps(this);
   deposits: API.Deposits = new API.Deposits(this);
   /**
@@ -1655,6 +1661,7 @@ Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
 Whop.Accounts = Accounts;
 Whop.Wallets = Wallets;
+Whop.FinancialActivity = FinancialActivity;
 Whop.Swaps = Swaps;
 Whop.Deposits = Deposits;
 Whop.SetupIntents = SetupIntents;
@@ -2110,6 +2117,12 @@ export declare namespace Whop {
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
     type WalletSendParams as WalletSendParams,
+  };
+
+  export {
+    FinancialActivity as FinancialActivity,
+    type FinancialActivityListResponse as FinancialActivityListResponse,
+    type FinancialActivityListParams as FinancialActivityListParams,
   };
 
   export {

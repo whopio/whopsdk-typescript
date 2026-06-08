@@ -930,6 +930,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets/{account_id}/sends',
   },
   {
+    clientCallName: 'client.financialActivity.list',
+    fullyQualifiedName: 'financialActivity.list',
+    httpMethod: 'get',
+    httpPath: '/financial-activity',
+  },
+  {
     clientCallName: 'client.swaps.createQuote',
     fullyQualifiedName: 'swaps.createQuote',
     httpMethod: 'post',

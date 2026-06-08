@@ -273,6 +273,11 @@ export {
   type FileCreateParams,
 } from './files';
 export {
+  FinancialActivity,
+  type FinancialActivityListResponse,
+  type FinancialActivityListParams,
+} from './financial-activity';
+export {
   ForumPosts,
   type ForumPostVisibilityType,
   type ForumPostListResponse,

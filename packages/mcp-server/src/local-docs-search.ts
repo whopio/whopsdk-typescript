@@ -6220,6 +6220,51 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list',
+    endpoint: '/financial-activity',
+    httpMethod: 'get',
+    summary: 'List Financial Activity',
+    description:
+      "Lists financial activity rows for a ledger account. Rows are derived from ledger lines and include typed resource and source objects that clients can use for presentation and navigation. The ledger's owner is passed as exactly one of account_id (a biz_ identifier) or user_id (a user_ identifier).",
+    stainlessPath: '(resource) financial_activity > (method) list',
+    qualified: 'client.financialActivity.list',
+    params: [
+      'account_id?: string;',
+      'currency?: string;',
+      'cursor?: string;',
+      'limit?: number;',
+      'line_types?: string[];',
+      'posted_after?: string;',
+      'posted_before?: string;',
+      'user_id?: string;',
+    ],
+    response:
+      "{ data: { id: string; amount: string; currency: { code: string; precision: string; }; line_type: string; object: 'ledger_activity'; posted_at: string; resource: { id: string; logo_url: string; object: 'account'; route: string; title: string; } | { id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; object: 'ledger_account'; owner: object | object; } | { id: string; bank: object; card: object; email_identifier: string; gateway_type: string; object: 'payment_method'; payment_method_type: string; } | { id: string; account_reference: string; destination_currency_code: string; institution_name: string; nickname: string; object: 'payout_method'; provider: string; }; source: { id: string; object: string; }; }[]; page_info: { end_cursor: string; has_next_page: boolean; has_previous_page: boolean; start_cursor: string; }; }",
+    markdown:
+      "## list\n\n`client.financialActivity.list(account_id?: string, currency?: string, cursor?: string, limit?: number, line_types?: string[], posted_after?: string, posted_before?: string, user_id?: string): { data: object[]; page_info: object; }`\n\n**get** `/financial-activity`\n\nLists financial activity rows for a ledger account. Rows are derived from ledger lines and include typed resource and source objects that clients can use for presentation and navigation. The ledger's owner is passed as exactly one of account_id (a biz_ identifier) or user_id (a user_ identifier).\n\n### Parameters\n\n- `account_id?: string`\n  The owning account ID (a biz_ identifier). Provide this or user_id.\n\n- `currency?: string`\n  Optional currency code filter, for example usd.\n\n- `cursor?: string`\n  Cursor returned by the previous page.\n\n- `limit?: number`\n  Maximum number of rows to return.\n\n- `line_types?: string[]`\n  Optional ledger line categories to include.\n\n- `posted_after?: string`\n  Only include rows posted after this ISO 8601 timestamp.\n\n- `posted_before?: string`\n  Only include rows posted before this ISO 8601 timestamp.\n\n- `user_id?: string`\n  The owning user ID (a user_ identifier). Provide this or account_id.\n\n### Returns\n\n- `{ data: { id: string; amount: string; currency: { code: string; precision: string; }; line_type: string; object: 'ledger_activity'; posted_at: string; resource: { id: string; logo_url: string; object: 'account'; route: string; title: string; } | { id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; object: 'ledger_account'; owner: object | object; } | { id: string; bank: object; card: object; email_identifier: string; gateway_type: string; object: 'payment_method'; payment_method_type: string; } | { id: string; account_reference: string; destination_currency_code: string; institution_name: string; nickname: string; object: 'payout_method'; provider: string; }; source: { id: string; object: string; }; }[]; page_info: { end_cursor: string; has_next_page: boolean; has_previous_page: boolean; start_cursor: string; }; }`\n\n  - `data: { id: string; amount: string; currency: { code: string; precision: string; }; line_type: string; object: 'ledger_activity'; posted_at: string; resource: { id: string; logo_url: string; object: 'account'; route: string; title: string; } | { id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; object: 'ledger_account'; owner: { id: string; logo_url: string; object: 'account'; route: string; title: string; } | { id: string; name: string; object: 'user'; profile_picture_url: string; username: string; }; } | { id: string; bank: { account_name: string; account_type: string; bank_name: string; last4: string; }; card: { brand: string; exp_month: number; exp_year: number; last4: string; }; email_identifier: string; gateway_type: string; object: 'payment_method'; payment_method_type: string; } | { id: string; account_reference: string; destination_currency_code: string; institution_name: string; nickname: string; object: 'payout_method'; provider: string; }; source: { id: string; object: string; }; }[]`\n  - `page_info: { end_cursor: string; has_next_page: boolean; has_previous_page: boolean; start_cursor: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst financialActivities = await client.financialActivity.list();\n\nconsole.log(financialActivities);\n```",
+    perLanguage: {
+      python: {
+        method: 'financial_activity.list',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nfinancial_activities = client.financial_activity.list()\nprint(financial_activities.data)',
+      },
+      ruby: {
+        method: 'financial_activity.list',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nfinancial_activities = whop.financial_activity.list\n\nputs(financial_activities)',
+      },
+      typescript: {
+        method: 'client.financialActivity.list',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst financialActivities = await client.financialActivity.list();\n\nconsole.log(financialActivities.data);",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/financial-activity \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'create_quote',
     endpoint: '/swaps/quote',
     httpMethod: 'post',

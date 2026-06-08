@@ -670,6 +670,16 @@ Methods:
 - <code title="get /wallets/{account_id}/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>(accountID) -> WalletBalanceResponse</code>
 - <code title="post /wallets/{account_id}/sends">client.wallets.<a href="./src/resources/wallets.ts">send</a>(accountID, { ...params }) -> WalletSendResponse</code>
 
+# FinancialActivity
+
+Types:
+
+- <code><a href="./src/resources/financial-activity.ts">FinancialActivityListResponse</a></code>
+
+Methods:
+
+- <code title="get /financial-activity">client.financialActivity.<a href="./src/resources/financial-activity.ts">list</a>({ ...params }) -> FinancialActivityListResponse</code>
+
 # Swaps
 
 Types:
