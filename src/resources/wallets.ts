@@ -3,7 +3,6 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
 
 export class Wallets extends APIResource {
   /**
@@ -14,17 +13,31 @@ export class Wallets extends APIResource {
   }
 
   /**
+   * Returns the account's provisioned EVM and Solana deposit addresses, the networks
+   * that auto-credit its balance, and a signed hosted onramp URL. Addresses are
+   * provisioned asynchronously — while provisioning, addresses are null and status
+   * is "provisioning"; poll until status is "ready".
+   */
+  depositAddress(
+    query: WalletDepositAddressParams,
+    options?: RequestOptions,
+  ): APIPromise<WalletDepositAddressResponse> {
+    return this._client.get('/wallets/deposit-address', { query, ...options });
+  }
+
+  /**
    * Returns per-token balances held in an account's wallet.
    */
-  balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
-    return this._client.get(path`/wallets/${accountID}/balance`, options);
+  balance(query: WalletBalanceParams, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
+    return this._client.get('/wallets/balance', { query, ...options });
   }
 
   /**
    * Sends USDT from an account's wallet to another Whop user or business.
    */
-  send(accountID: string, body: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
-    return this._client.post(path`/wallets/${accountID}/sends`, { body, ...options });
+  send(params: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post('/wallets/send', { query: { account_id }, body, ...options });
   }
 }
 
@@ -85,6 +98,42 @@ export namespace WalletBalanceResponse {
   }
 }
 
+export interface WalletDepositAddressResponse {
+  evm_address: string | null;
+
+  hosted_url: string | null;
+
+  object: 'deposit_address';
+
+  solana_address: string | null;
+
+  status: 'ready' | 'provisioning';
+
+  supported_networks: Array<WalletDepositAddressResponse.SupportedNetwork>;
+
+  /**
+   * Echo of the validated asset filter, present when the caller passed ?asset=.
+   */
+  asset?: string;
+
+  /**
+   * Echo of the validated network filter, present when the caller passed ?network=.
+   */
+  network?: string;
+}
+
+export namespace WalletDepositAddressResponse {
+  export interface SupportedNetwork {
+    address_kind: 'evm' | 'solana';
+
+    chain_id: number | null;
+
+    network: string;
+
+    onramp_supported: boolean;
+  }
+}
+
 export interface WalletSendResponse {
   amount: string;
 
@@ -113,14 +162,45 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletDepositAddressParams {
+  /**
+   * The business or user account ID whose deposit address should be returned.
+   */
+  account_id: string;
+
+  /**
+   * Optional asset symbol the caller intends to deposit (e.g. USDT). Unsupported
+   * assets are rejected with a 400 rather than silently ignored.
+   */
+  asset?: string;
+
+  /**
+   * Optional network the caller intends to deposit on (e.g. plasma). Unsupported
+   * networks are rejected with a 400 rather than silently ignored.
+   */
+  network?: 'plasma' | 'base' | 'ethereum' | 'solana';
+}
+
+export interface WalletBalanceParams {
+  /**
+   * The business or user account ID whose wallet balance should be returned.
+   */
+  account_id: string;
+}
+
 export interface WalletSendParams {
   /**
-   * USDT amount to send.
+   * Query param: The sending account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: USDT amount to send.
    */
   amount: string;
 
   /**
-   * Recipient user ID, business account ID, ledger account ID, or email.
+   * Body param: Recipient user ID, business account ID, ledger account ID, or email.
    */
   to: string;
 }
@@ -130,7 +210,10 @@ export declare namespace Wallets {
     type AccountWallet as AccountWallet,
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
+    type WalletDepositAddressResponse as WalletDepositAddressResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletDepositAddressParams as WalletDepositAddressParams,
+    type WalletBalanceParams as WalletBalanceParams,
     type WalletSendParams as WalletSendParams,
   };
 }
