@@ -3,7 +3,6 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
 
 export class Swaps extends APIResource {
   /**
@@ -15,7 +14,7 @@ export class Swaps extends APIResource {
 
   /**
    * Executes a swap from the account's wallet. Runs asynchronously — poll GET
-   * /swaps/{account_id} for status.
+   * /swaps?account_id=... for status.
    */
   create(body: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
     return this._client.post('/swaps', { body, ...options });
@@ -24,8 +23,8 @@ export class Swaps extends APIResource {
   /**
    * Returns the status of the account's in-flight or most recent swap.
    */
-  retrieve(accountID: string, options?: RequestOptions): APIPromise<SwapRetrieveResponse> {
-    return this._client.get(path`/swaps/${accountID}`, options);
+  retrieve(query: SwapRetrieveParams, options?: RequestOptions): APIPromise<SwapRetrieveResponse> {
+    return this._client.get('/swaps', { query, ...options });
   }
 }
 
@@ -144,6 +143,13 @@ export interface SwapCreateParams {
   to_chain?: string | number | null;
 }
 
+export interface SwapRetrieveParams {
+  /**
+   * Business or user account ID (biz*\* / user*\*).
+   */
+  account_id: string;
+}
+
 export declare namespace Swaps {
   export {
     type SwapCreateResponse as SwapCreateResponse,
@@ -151,5 +157,6 @@ export declare namespace Swaps {
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
     type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
   };
 }

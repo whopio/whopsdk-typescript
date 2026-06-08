@@ -420,6 +420,7 @@ describe('resource adGroups', () => {
             },
           },
           status: 'active',
+          title: 'title',
         },
         { path: '/_stainless_unknown_path' },
       ),

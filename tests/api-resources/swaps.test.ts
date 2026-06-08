@@ -70,8 +70,8 @@ describe('resource swaps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.swaps.retrieve('account_id');
+  test.skip('retrieve: only required params', async () => {
+    const responsePromise = client.swaps.retrieve({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -79,5 +79,10 @@ describe('resource swaps', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: required and optional params', async () => {
+    const response = await client.swaps.retrieve({ account_id: 'account_id' });
   });
 });

@@ -485,6 +485,7 @@ import {
   SwapCreateQuoteParams,
   SwapCreateQuoteResponse,
   SwapCreateResponse,
+  SwapRetrieveParams,
   SwapRetrieveResponse,
   Swaps,
 } from './resources/swaps';
@@ -518,6 +519,7 @@ import {
 } from './resources/verifications';
 import {
   AccountWallet,
+  WalletBalanceParams,
   WalletBalanceResponse,
   WalletListResponse,
   WalletSendParams,
@@ -2116,6 +2118,7 @@ export declare namespace Whop {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletBalanceParams as WalletBalanceParams,
     type WalletSendParams as WalletSendParams,
   };
 
@@ -2132,6 +2135,7 @@ export declare namespace Whop {
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
     type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
   };
 
   export {

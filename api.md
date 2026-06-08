@@ -667,8 +667,8 @@ Types:
 Methods:
 
 - <code title="get /wallets">client.wallets.<a href="./src/resources/wallets.ts">list</a>() -> WalletListResponse</code>
-- <code title="get /wallets/{account_id}/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>(accountID) -> WalletBalanceResponse</code>
-- <code title="post /wallets/{account_id}/sends">client.wallets.<a href="./src/resources/wallets.ts">send</a>(accountID, { ...params }) -> WalletSendResponse</code>
+- <code title="get /wallets/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>({ ...params }) -> WalletBalanceResponse</code>
+- <code title="post /wallets/send">client.wallets.<a href="./src/resources/wallets.ts">send</a>({ ...params }) -> WalletSendResponse</code>
 
 # FinancialActivity
 
@@ -692,7 +692,7 @@ Methods:
 
 - <code title="post /swaps/quote">client.swaps.<a href="./src/resources/swaps.ts">createQuote</a>({ ...params }) -> SwapCreateQuoteResponse</code>
 - <code title="post /swaps">client.swaps.<a href="./src/resources/swaps.ts">create</a>({ ...params }) -> SwapCreateResponse</code>
-- <code title="get /swaps/{account_id}">client.swaps.<a href="./src/resources/swaps.ts">retrieve</a>(accountID) -> SwapRetrieveResponse</code>
+- <code title="get /swaps">client.swaps.<a href="./src/resources/swaps.ts">retrieve</a>({ ...params }) -> SwapRetrieveResponse</code>
 
 # Deposits
 

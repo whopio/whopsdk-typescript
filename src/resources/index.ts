@@ -480,6 +480,7 @@ export {
   type SwapCreateQuoteResponse,
   type SwapCreateQuoteParams,
   type SwapCreateParams,
+  type SwapRetrieveParams,
 } from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
@@ -515,6 +516,7 @@ export {
   type WalletListResponse,
   type WalletBalanceResponse,
   type WalletSendResponse,
+  type WalletBalanceParams,
   type WalletSendParams,
 } from './wallets';
 export {

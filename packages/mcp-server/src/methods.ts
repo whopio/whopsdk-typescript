@@ -921,13 +921,13 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.wallets.balance',
     fullyQualifiedName: 'wallets.balance',
     httpMethod: 'get',
-    httpPath: '/wallets/{account_id}/balance',
+    httpPath: '/wallets/balance',
   },
   {
     clientCallName: 'client.wallets.send',
     fullyQualifiedName: 'wallets.send',
     httpMethod: 'post',
-    httpPath: '/wallets/{account_id}/sends',
+    httpPath: '/wallets/send',
   },
   {
     clientCallName: 'client.financialActivity.list',
@@ -951,7 +951,7 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.swaps.retrieve',
     fullyQualifiedName: 'swaps.retrieve',
     httpMethod: 'get',
-    httpPath: '/swaps/{account_id}',
+    httpPath: '/swaps',
   },
   {
     clientCallName: 'client.deposits.create',
