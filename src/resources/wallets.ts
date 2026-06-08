@@ -3,7 +3,6 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
 
 export class Wallets extends APIResource {
   /**
@@ -16,15 +15,16 @@ export class Wallets extends APIResource {
   /**
    * Returns per-token balances held in an account's wallet.
    */
-  balance(accountID: string, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
-    return this._client.get(path`/wallets/${accountID}/balance`, options);
+  balance(query: WalletBalanceParams, options?: RequestOptions): APIPromise<WalletBalanceResponse> {
+    return this._client.get('/wallets/balance', { query, ...options });
   }
 
   /**
    * Sends USDT from an account's wallet to another Whop user or business.
    */
-  send(accountID: string, body: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
-    return this._client.post(path`/wallets/${accountID}/sends`, { body, ...options });
+  send(params: WalletSendParams, options?: RequestOptions): APIPromise<WalletSendResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post('/wallets/send', { query: { account_id }, body, ...options });
   }
 }
 
@@ -113,14 +113,26 @@ export namespace WalletSendResponse {
   }
 }
 
+export interface WalletBalanceParams {
+  /**
+   * The business or user account ID whose wallet balance should be returned.
+   */
+  account_id: string;
+}
+
 export interface WalletSendParams {
   /**
-   * USDT amount to send.
+   * Query param: The sending account ID.
+   */
+  account_id: string;
+
+  /**
+   * Body param: USDT amount to send.
    */
   amount: string;
 
   /**
-   * Recipient user ID, business account ID, ledger account ID, or email.
+   * Body param: Recipient user ID, business account ID, ledger account ID, or email.
    */
   to: string;
 }
@@ -131,6 +143,7 @@ export declare namespace Wallets {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletBalanceParams as WalletBalanceParams,
     type WalletSendParams as WalletSendParams,
   };
 }
