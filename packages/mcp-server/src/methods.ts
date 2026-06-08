@@ -918,16 +918,28 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/wallets',
   },
   {
+    clientCallName: 'client.wallets.depositAddress',
+    fullyQualifiedName: 'wallets.depositAddress',
+    httpMethod: 'get',
+    httpPath: '/wallets/deposit-address',
+  },
+  {
     clientCallName: 'client.wallets.balance',
     fullyQualifiedName: 'wallets.balance',
     httpMethod: 'get',
-    httpPath: '/wallets/{account_id}/balance',
+    httpPath: '/wallets/balance',
   },
   {
     clientCallName: 'client.wallets.send',
     fullyQualifiedName: 'wallets.send',
     httpMethod: 'post',
-    httpPath: '/wallets/{account_id}/sends',
+    httpPath: '/wallets/send',
+  },
+  {
+    clientCallName: 'client.financialActivity.list',
+    fullyQualifiedName: 'financialActivity.list',
+    httpMethod: 'get',
+    httpPath: '/financial-activity',
   },
   {
     clientCallName: 'client.swaps.createQuote',
@@ -936,10 +948,16 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/swaps/quote',
   },
   {
-    clientCallName: 'client.deposits.create',
-    fullyQualifiedName: 'deposits.create',
+    clientCallName: 'client.swaps.create',
+    fullyQualifiedName: 'swaps.create',
     httpMethod: 'post',
-    httpPath: '/deposits',
+    httpPath: '/swaps',
+  },
+  {
+    clientCallName: 'client.swaps.retrieve',
+    fullyQualifiedName: 'swaps.retrieve',
+    httpMethod: 'get',
+    httpPath: '/swaps',
   },
   {
     clientCallName: 'client.setupIntents.list',
