@@ -921,19 +921,37 @@ export const sdkMethods: SdkMethod[] = [
     clientCallName: 'client.wallets.balance',
     fullyQualifiedName: 'wallets.balance',
     httpMethod: 'get',
-    httpPath: '/wallets/{account_id}/balance',
+    httpPath: '/wallets/balance',
   },
   {
     clientCallName: 'client.wallets.send',
     fullyQualifiedName: 'wallets.send',
     httpMethod: 'post',
-    httpPath: '/wallets/{account_id}/sends',
+    httpPath: '/wallets/send',
+  },
+  {
+    clientCallName: 'client.financialActivity.list',
+    fullyQualifiedName: 'financialActivity.list',
+    httpMethod: 'get',
+    httpPath: '/financial-activity',
   },
   {
     clientCallName: 'client.swaps.createQuote',
     fullyQualifiedName: 'swaps.createQuote',
     httpMethod: 'post',
     httpPath: '/swaps/quote',
+  },
+  {
+    clientCallName: 'client.swaps.create',
+    fullyQualifiedName: 'swaps.create',
+    httpMethod: 'post',
+    httpPath: '/swaps',
+  },
+  {
+    clientCallName: 'client.swaps.retrieve',
+    fullyQualifiedName: 'swaps.retrieve',
+    httpMethod: 'get',
+    httpPath: '/swaps',
   },
   {
     clientCallName: 'client.deposits.create',
@@ -994,18 +1012,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'payoutMethods.retrieve',
     httpMethod: 'get',
     httpPath: '/payout_methods/{id}',
-  },
-  {
-    clientCallName: 'client.verifications.retrieve',
-    fullyQualifiedName: 'verifications.retrieve',
-    httpMethod: 'get',
-    httpPath: '/verifications/{id}',
-  },
-  {
-    clientCallName: 'client.verifications.list',
-    fullyQualifiedName: 'verifications.list',
-    httpMethod: 'get',
-    httpPath: '/verifications',
   },
   {
     clientCallName: 'client.leads.list',
