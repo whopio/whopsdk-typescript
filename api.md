@@ -667,18 +667,32 @@ Types:
 Methods:
 
 - <code title="get /wallets">client.wallets.<a href="./src/resources/wallets.ts">list</a>() -> WalletListResponse</code>
-- <code title="get /wallets/{account_id}/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>(accountID) -> WalletBalanceResponse</code>
-- <code title="post /wallets/{account_id}/sends">client.wallets.<a href="./src/resources/wallets.ts">send</a>(accountID, { ...params }) -> WalletSendResponse</code>
+- <code title="get /wallets/balance">client.wallets.<a href="./src/resources/wallets.ts">balance</a>({ ...params }) -> WalletBalanceResponse</code>
+- <code title="post /wallets/send">client.wallets.<a href="./src/resources/wallets.ts">send</a>({ ...params }) -> WalletSendResponse</code>
+
+# FinancialActivity
+
+Types:
+
+- <code><a href="./src/resources/financial-activity.ts">FinancialActivityListResponse</a></code>
+
+Methods:
+
+- <code title="get /financial-activity">client.financialActivity.<a href="./src/resources/financial-activity.ts">list</a>({ ...params }) -> FinancialActivityListResponse</code>
 
 # Swaps
 
 Types:
 
+- <code><a href="./src/resources/swaps.ts">SwapCreateResponse</a></code>
+- <code><a href="./src/resources/swaps.ts">SwapRetrieveResponse</a></code>
 - <code><a href="./src/resources/swaps.ts">SwapCreateQuoteResponse</a></code>
 
 Methods:
 
 - <code title="post /swaps/quote">client.swaps.<a href="./src/resources/swaps.ts">createQuote</a>({ ...params }) -> SwapCreateQuoteResponse</code>
+- <code title="post /swaps">client.swaps.<a href="./src/resources/swaps.ts">create</a>({ ...params }) -> SwapCreateResponse</code>
+- <code title="get /swaps">client.swaps.<a href="./src/resources/swaps.ts">retrieve</a>({ ...params }) -> SwapRetrieveResponse</code>
 
 # Deposits
 
@@ -749,13 +763,6 @@ Types:
 
 - <code><a href="./src/resources/verifications.ts">VerificationErrorCode</a></code>
 - <code><a href="./src/resources/verifications.ts">VerificationStatus</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationRetrieveResponse</a></code>
-- <code><a href="./src/resources/verifications.ts">VerificationListResponse</a></code>
-
-Methods:
-
-- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
-- <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
 
 # Leads
 
@@ -968,7 +975,7 @@ Types:
 Methods:
 
 - <code title="get /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">list</a>({ ...params }) -> AdCampaignListResponsesCursorPage</code>
-- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id) -> AdCampaign</code>
+- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id, { ...params }) -> AdCampaign</code>
 - <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaign</code>
 - <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id) -> AdCampaign</code>
 - <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id) -> AdCampaign</code>
@@ -986,7 +993,7 @@ Types:
 Methods:
 
 - <code title="get /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">list</a>({ ...params }) -> AdGroupListResponsesCursorPage</code>
-- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id) -> AdGroup</code>
+- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id, { ...params }) -> AdGroup</code>
 - <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroup</code>
 - <code title="delete /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">delete</a>(id) -> AdGroupDeleteResponse</code>
 - <code title="post /ad_groups/{id}/pause">client.adGroups.<a href="./src/resources/ad-groups.ts">pause</a>(id) -> AdGroup</code>
@@ -1003,7 +1010,7 @@ Types:
 Methods:
 
 - <code title="get /ads">client.ads.<a href="./src/resources/ads.ts">list</a>({ ...params }) -> AdListResponsesCursorPage</code>
-- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id) -> Ad</code>
+- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id, { ...params }) -> Ad</code>
 - <code title="post /ads/{id}/pause">client.ads.<a href="./src/resources/ads.ts">pause</a>(id) -> Ad</code>
 - <code title="post /ads/{id}/unpause">client.ads.<a href="./src/resources/ads.ts">unpause</a>(id) -> Ad</code>
 
