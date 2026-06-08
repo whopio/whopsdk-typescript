@@ -11,14 +11,55 @@ export class Swaps extends APIResource {
   createQuote(body: SwapCreateQuoteParams, options?: RequestOptions): APIPromise<SwapCreateQuoteResponse> {
     return this._client.post('/swaps/quote', { body, ...options });
   }
+
+  /**
+   * Executes a swap from the account's wallet. Runs asynchronously — poll GET
+   * /swaps?account_id=... for status.
+   */
+  create(body: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
+    return this._client.post('/swaps', { body, ...options });
+  }
+
+  /**
+   * Returns the status of the account's in-flight or most recent swap.
+   */
+  retrieve(query: SwapRetrieveParams, options?: RequestOptions): APIPromise<SwapRetrieveResponse> {
+    return this._client.get('/swaps', { query, ...options });
+  }
+}
+
+export interface SwapCreateResponse {
+  account_id: string;
+
+  object: 'swap';
+
+  status: string;
+
+  amount_out_expected?: string;
+
+  amount_out_min?: string;
+
+  rate?: string;
+
+  to_chain?: string;
+}
+
+export interface SwapRetrieveResponse {
+  account_id: string;
+
+  object: 'swap';
+
+  status: string;
+
+  tx_hashes: Array<string>;
+
+  error?: string | null;
 }
 
 export interface SwapCreateQuoteResponse {
   amount_in: string;
 
   amount_out: string;
-
-  cross_chain: boolean;
 
   fee_bps: number;
 
@@ -61,11 +102,6 @@ export interface SwapCreateQuoteParams {
    */
   to_token: string;
 
-  /**
-   * Caller-owned account whose wallet address should be used.
-   */
-  account_id?: string | null;
-
   from_address?: string | null;
 
   from_chain?: string | number | null;
@@ -79,9 +115,48 @@ export interface SwapCreateQuoteParams {
   to_chain?: string | number | null;
 }
 
+export interface SwapCreateParams {
+  /**
+   * Business or user account ID (biz*\* / user*\*).
+   */
+  account_id: string;
+
+  /**
+   * Input token amount.
+   */
+  amount: string;
+
+  /**
+   * Source token contract address.
+   */
+  from_token: string;
+
+  /**
+   * Destination token contract address.
+   */
+  to_token: string;
+
+  from_chain?: string | number | null;
+
+  slippage_bps?: number | null;
+
+  to_chain?: string | number | null;
+}
+
+export interface SwapRetrieveParams {
+  /**
+   * Business or user account ID (biz*\* / user*\*).
+   */
+  account_id: string;
+}
+
 export declare namespace Swaps {
   export {
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
   };
 }
