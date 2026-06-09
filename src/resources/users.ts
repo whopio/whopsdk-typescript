@@ -1,14 +1,25 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * Users
+ */
 export class Users extends APIResource {
   /**
-   * Retrieves a user's public profile by user\_ tag, username, or 'me'.
+   * Retrieves the details of an existing user.
+   *
+   * @example
+   * ```ts
+   * const user = await client.users.retrieve(
+   *   'user_xxxxxxxxxxxxx',
+   * );
+   * ```
    */
   retrieve(
     id: string,
@@ -19,8 +30,16 @@ export class Users extends APIResource {
   }
 
   /**
-   * Checks whether a user has access to a company, product, or experience the caller
-   * can reach.
+   * Check whether a user has access to a specific resource, and return their access
+   * level.
+   *
+   * @example
+   * ```ts
+   * const response = await client.users.checkAccess(
+   *   'resource_id',
+   *   { id: 'user_xxxxxxxxxxxxx' },
+   * );
+   * ```
    */
   checkAccess(
     resourceID: string,
@@ -32,87 +51,172 @@ export class Users extends APIResource {
   }
 
   /**
-   * Updates a user. A user token updates their own global profile; an API key
-   * updates the user's account-specific profile override (account_id required).
+   * Update a user's profile by their ID.
+   *
+   * Required permissions:
+   *
+   * - `user:profile:update`
+   *
+   * @example
+   * ```ts
+   * const user = await client.users.update(
+   *   'user_xxxxxxxxxxxxx',
+   * );
+   * ```
    */
-  update(id: string, params: UserUpdateParams, options?: RequestOptions): APIPromise<User> {
-    const { account_id, ...body } = params;
-    return this._client.patch(path`/users/${id}`, { query: { account_id }, body, ...options });
-  }
-
-  /**
-   * Updates the authenticated user's global profile. Not available to API keys.
-   */
-  updateMe(body: UserUpdateMeParams, options?: RequestOptions): APIPromise<User> {
-    return this._client.patch('/users/me', { body, ...options });
+  update(
+    id: string,
+    body: UserUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<User> {
+    return this._client.patch(path`/users/${id}`, { body, ...options });
   }
 
   /**
    * Search for users by name or username, ranked by social proximity to the
-   * authenticated user. Returns the user's most recently followed users when no
-   * query is given.
+   * authenticated user.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const userListResponse of client.users.list()) {
+   *   // ...
+   * }
+   * ```
    */
   list(
     query: UserListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<UsersCursorPage, User> {
-    return this._client.getAPIList('/users', CursorPage<User>, { query, ...options });
+  ): PagePromise<UserListResponsesCursorPage, UserListResponse> {
+    return this._client.getAPIList('/users', CursorPage<UserListResponse>, { query, ...options });
   }
 }
 
-export type UsersCursorPage = CursorPage<User>;
+export type UserListResponsesCursorPage = CursorPage<UserListResponse>;
 
+/**
+ * A user account on Whop. Contains profile information, identity details, and
+ * social connections.
+ */
 export interface User {
   /**
-   * The ID of the user, which will look like user\_******\*******
+   * The unique identifier for the user.
    */
   id: string;
 
   /**
-   * The user's biography
+   * A short biography written by the user, displayed on their public profile.
    */
   bio: string | null;
 
   /**
-   * When the user was created, as an ISO 8601 timestamp
+   * The datetime the user was created.
    */
   created_at: string;
 
   /**
-   * The user's display name
+   * The user's display name shown on their public profile.
    */
   name: string | null;
 
   /**
-   * The user's profile picture, an object with a url
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
    */
-  profile_picture: unknown | null;
+  profile_picture: User.ProfilePicture | null;
 
   /**
-   * The user's unique username
+   * The user's unique username shown on their public profile.
    */
   username: string;
 }
 
-export interface UserCheckAccessResponse {
-  access_level: 'no_access' | 'admin' | 'customer';
+export namespace User {
+  /**
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
+   */
+  export interface ProfilePicture {
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+}
 
+/**
+ * A user account on Whop. Contains profile information, identity details, and
+ * social connections.
+ */
+export interface UserListResponse {
+  /**
+   * The unique identifier for the user.
+   */
+  id: string;
+
+  /**
+   * A short biography written by the user, displayed on their public profile.
+   */
+  bio: string | null;
+
+  /**
+   * The datetime the user was created.
+   */
+  created_at: string;
+
+  /**
+   * The user's display name shown on their public profile.
+   */
+  name: string | null;
+
+  /**
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
+   */
+  profile_picture: UserListResponse.ProfilePicture | null;
+
+  /**
+   * The user's unique username shown on their public profile.
+   */
+  username: string;
+}
+
+export namespace UserListResponse {
+  /**
+   * The user's profile picture attachment with URL, content type, and file metadata.
+   * Null if using a legacy profile picture.
+   */
+  export interface ProfilePicture {
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+}
+
+/**
+ * The result of a has access check for the developer API
+ */
+export interface UserCheckAccessResponse {
+  /**
+   * The permission level of the user
+   */
+  access_level: Shared.AccessLevel;
+
+  /**
+   * Whether the user has access to the resource
+   */
   has_access: boolean;
 }
 
 export interface UserRetrieveParams {
   /**
-   * When set, returns the user's account-specific profile overrides for this
-   * account.
+   * When provided, returns the user's company-specific profile overrides (name,
+   * profile picture) instead of their global profile.
    */
-  account_id?: string;
-}
-
-export interface UserCheckAccessParams {
-  /**
-   * The user\_ tag or username to check access for.
-   */
-  id: string;
+  company_id?: string | null;
 }
 
 export interface UserCheckAccessParams {
@@ -124,71 +228,77 @@ export interface UserCheckAccessParams {
 
 export interface UserUpdateParams {
   /**
-   * Query param: The account whose profile override to update. Required for API key
-   * callers.
+   * A short biography displayed on the user's public profile.
    */
-  account_id?: string;
+  bio?: string | null;
 
   /**
-   * Body param
+   * When provided, updates the user's profile overrides for this company instead of
+   * the global profile. Pass name and profile_picture to set overrides, or null to
+   * clear them.
    */
-  bio?: string;
+  company_id?: string | null;
 
   /**
-   * Body param
+   * The user's display name shown on their public profile. Maximum 100 characters.
    */
-  name?: string;
+  name?: string | null;
+
+  /**
+   * The user's profile picture image attachment.
+   */
+  profile_picture?: UserUpdateParams.ProfilePicture | null;
+
+  /**
+   * The user's unique username. Alphanumeric characters and hyphens only. Maximum 42
+   * characters.
+   */
+  username?: string | null;
 }
 
-export interface UserUpdateMeParams {
-  bio?: string;
-
-  name?: string;
-
-  profile_picture?: UserUpdateMeParams.ProfilePicture;
-
-  username?: string;
-}
-
-export namespace UserUpdateMeParams {
+export namespace UserUpdateParams {
+  /**
+   * The user's profile picture image attachment.
+   */
   export interface ProfilePicture {
-    id?: string;
-
-    direct_upload_id?: string;
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
   }
 }
 
 export interface UserListParams extends CursorPageParams {
   /**
-   * A cursor; returns users before this position.
+   * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string;
+  before?: string | null;
 
   /**
-   * The number of users to return (max 50).
+   * Returns the first _n_ elements from the list.
    */
-  first?: number;
+  first?: number | null;
 
   /**
-   * The number of users to return from the end of the range.
+   * Returns the last _n_ elements from the list.
    */
-  last?: number;
+  last?: number | null;
 
   /**
-   * A search term to filter users by name or username.
+   * Search term to filter by name or username.
    */
-  query?: string;
+  query?: string | null;
 }
 
 export declare namespace Users {
   export {
     type User as User,
+    type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
-    type UsersCursorPage as UsersCursorPage,
+    type UserListResponsesCursorPage as UserListResponsesCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
-    type UserUpdateMeParams as UserUpdateMeParams,
     type UserListParams as UserListParams,
   };
 }

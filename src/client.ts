@@ -502,11 +502,11 @@ import {
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
+  UserListResponse,
+  UserListResponsesCursorPage,
   UserRetrieveParams,
-  UserUpdateMeParams,
   UserUpdateParams,
   Users,
-  UsersCursorPage,
 } from './resources/users';
 import {
   VerificationErrorCode,
@@ -611,7 +611,6 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
@@ -628,24 +627,6 @@ export interface ClientOptions {
    * When using the SDK in app mode pass this parameter to allow verifying user tokens
    */
   appID?: string | null | undefined;
-
-  /**
-   * Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.
-   */
-  version?: string | null | undefined;
-
-  /**
-   * Static JWK (JSON string) used by `verifyUserToken` to verify user tokens.
-   * When set, the SDK skips remote JWKS fetching. Prefer `userTokenJwksUrl`
-   * (or the default) so key rotation is handled automatically.
-   */
-  userTokenPublicKey?: string | null | undefined;
-
-  /**
-   * URL of the JWKS endpoint used by `verifyUserToken`. Defaults to the
-   * canonical Whop JWKS. Override when pointing at a non-production backend.
-   */
-  userTokenJwksUrl?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -723,9 +704,6 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
-  version: string | null;
-  userTokenPublicKey: string | null;
-  userTokenJwksUrl: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -745,7 +723,6 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-06-08]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -759,9 +736,6 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    version = readEnv('WHOP_API_VERSION') ?? '2026-06-08',
-    userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
-    userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -774,9 +748,6 @@ export class Whop {
       apiKey,
       webhookKey,
       appID,
-      version,
-      userTokenPublicKey,
-      userTokenJwksUrl,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -813,9 +784,6 @@ export class Whop {
     this.apiKey = apiKey;
     this.webhookKey = webhookKey;
     this.appID = appID;
-    this.version = version;
-    this.userTokenPublicKey = userTokenPublicKey;
-    this.userTokenJwksUrl = userTokenJwksUrl;
   }
 
   /**
@@ -834,9 +802,6 @@ export class Whop {
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
       appID: this.appID,
-      version: this.version,
-      userTokenPublicKey: this.userTokenPublicKey,
-      userTokenJwksUrl: this.userTokenJwksUrl,
       ...options,
     });
     return client;
@@ -1308,7 +1273,6 @@ export class Whop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
         'X-Whop-App-Id': this.appID,
-        'Api-Version-Date': this.version,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
@@ -1391,8 +1355,6 @@ export class Whop {
 
   static toFile = Uploads.toFile;
 
-  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
-
   /**
    * Apps
    */
@@ -1465,6 +1427,9 @@ export class Whop {
    * Chat channels
    */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
+  /**
+   * Users
+   */
   users: API.Users = new API.Users(this);
   /**
    * Payments
@@ -1915,12 +1880,12 @@ export declare namespace Whop {
   export {
     Users as Users,
     type User as User,
+    type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
-    type UsersCursorPage as UsersCursorPage,
+    type UserListResponsesCursorPage as UserListResponsesCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
-    type UserUpdateMeParams as UserUpdateMeParams,
     type UserListParams as UserListParams,
   };
 

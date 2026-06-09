@@ -493,13 +493,13 @@ export {
 export {
   Users,
   type User,
+  type UserListResponse,
   type UserCheckAccessResponse,
   type UserRetrieveParams,
   type UserCheckAccessParams,
   type UserUpdateParams,
-  type UserUpdateMeParams,
   type UserListParams,
-  type UsersCursorPage,
+  type UserListResponsesCursorPage,
 } from './users';
 export {
   Verifications,
