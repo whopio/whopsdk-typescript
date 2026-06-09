@@ -468,30 +468,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/chat_channels',
   },
   {
-    clientCallName: 'client.users.retrieve',
-    fullyQualifiedName: 'users.retrieve',
-    httpMethod: 'get',
-    httpPath: '/users/{id}',
-  },
-  {
-    clientCallName: 'client.users.update',
-    fullyQualifiedName: 'users.update',
-    httpMethod: 'patch',
-    httpPath: '/users/{id}',
-  },
-  {
-    clientCallName: 'client.users.list',
-    fullyQualifiedName: 'users.list',
-    httpMethod: 'get',
-    httpPath: '/users',
-  },
-  {
-    clientCallName: 'client.users.checkAccess',
-    fullyQualifiedName: 'users.checkAccess',
-    httpMethod: 'get',
-    httpPath: '/users/{id}/access/{resource_id}',
-  },
-  {
     clientCallName: 'client.payments.create',
     fullyQualifiedName: 'payments.create',
     httpMethod: 'post',

@@ -466,17 +466,7 @@ export {
   type TransferListParams,
   type TransferListResponsesCursorPage,
 } from './transfers';
-export {
-  Users,
-  type User,
-  type UserListResponse,
-  type UserCheckAccessResponse,
-  type UserRetrieveParams,
-  type UserUpdateParams,
-  type UserListParams,
-  type UserCheckAccessParams,
-  type UserListResponsesCursorPage,
-} from './users';
+export { Users } from './users';
 export {
   Verifications,
   type VerificationErrorCode,

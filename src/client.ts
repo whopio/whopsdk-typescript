@@ -473,17 +473,7 @@ import {
   TransferListResponsesCursorPage,
   Transfers,
 } from './resources/transfers';
-import {
-  User,
-  UserCheckAccessParams,
-  UserCheckAccessResponse,
-  UserListParams,
-  UserListResponse,
-  UserListResponsesCursorPage,
-  UserRetrieveParams,
-  UserUpdateParams,
-  Users,
-} from './resources/users';
+import { Users } from './resources/users';
 import {
   VerificationErrorCode,
   VerificationListParams,
@@ -1394,9 +1384,6 @@ export class Whop {
    * Chat channels
    */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
-  /**
-   * Users
-   */
   users: API.Users = new API.Users(this);
   /**
    * Payments
@@ -1834,17 +1821,7 @@ export declare namespace Whop {
     type ChatChannelListParams as ChatChannelListParams,
   };
 
-  export {
-    Users as Users,
-    type User as User,
-    type UserListResponse as UserListResponse,
-    type UserCheckAccessResponse as UserCheckAccessResponse,
-    type UserListResponsesCursorPage as UserListResponsesCursorPage,
-    type UserRetrieveParams as UserRetrieveParams,
-    type UserUpdateParams as UserUpdateParams,
-    type UserListParams as UserListParams,
-    type UserCheckAccessParams as UserCheckAccessParams,
-  };
+  export { Users as Users };
 
   export {
     Payments as Payments,
