@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.2",
   "name": "@whop/mcp",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "The official MCP Server for the Whop API",
   "author": {
     "name": "Whop"
@@ -23,7 +23,8 @@
       "env": {
         "WHOP_API_KEY": "${user_config.WHOP_API_KEY}",
         "WHOP_WEBHOOK_SECRET": "${user_config.WHOP_WEBHOOK_SECRET}",
-        "WHOP_APP_ID": "${user_config.WHOP_APP_ID}"
+        "WHOP_APP_ID": "${user_config.WHOP_APP_ID}",
+        "WHOP_API_VERSION": "${user_config.WHOP_API_VERSION}"
       }
     }
   },
@@ -43,6 +44,12 @@
     "WHOP_APP_ID": {
       "title": "app_id",
       "description": "When using the SDK in app mode pass this parameter to allow verifying user tokens",
+      "required": false,
+      "type": "string"
+    },
+    "WHOP_API_VERSION": {
+      "title": "version",
+      "description": "Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.",
       "required": false,
       "type": "string"
     }
