@@ -245,24 +245,14 @@ export namespace Ad {
    */
   export interface Issue {
     /**
+     * Whop's canonical category that a raw platform issue is bucketed into.
+     */
+    category: 'policy_rejection' | 'creative_media' | 'audience_targeting' | 'ad_volume_limit' | null;
+
+    /**
      * When the issue was first reported.
      */
     created_at: string;
-
-    /**
-     * Platform-specific error code.
-     */
-    error_code: string | null;
-
-    /**
-     * Full error detail from the platform.
-     */
-    error_message: string | null;
-
-    /**
-     * Short description of the issue.
-     */
-    error_summary: string;
 
     /**
      * Current resolution status.
@@ -280,6 +270,12 @@ export namespace Ad {
      * Pairs with `resourceId`.
      */
     resource_type: string;
+
+    /**
+     * Finer-grained sub-bucket within the category (e.g. the specific Meta policy for
+     * a rejection).
+     */
+    subtype: string | null;
   }
 }
 
@@ -465,24 +461,14 @@ export namespace AdListResponse {
    */
   export interface Issue {
     /**
+     * Whop's canonical category that a raw platform issue is bucketed into.
+     */
+    category: 'policy_rejection' | 'creative_media' | 'audience_targeting' | 'ad_volume_limit' | null;
+
+    /**
      * When the issue was first reported.
      */
     created_at: string;
-
-    /**
-     * Platform-specific error code.
-     */
-    error_code: string | null;
-
-    /**
-     * Full error detail from the platform.
-     */
-    error_message: string | null;
-
-    /**
-     * Short description of the issue.
-     */
-    error_summary: string;
 
     /**
      * Current resolution status.
@@ -500,6 +486,12 @@ export namespace AdListResponse {
      * Pairs with `resourceId`.
      */
     resource_type: string;
+
+    /**
+     * Finer-grained sub-bucket within the category (e.g. the specific Meta policy for
+     * a rejection).
+     */
+    subtype: string | null;
   }
 }
 
