@@ -30,7 +30,7 @@ export class AdReports extends APIResource {
 /**
  * Bucket size for external ad stat rows.
  */
-export type Granularities = 'daily' | 'hourly';
+export type Granularities = 'hourly' | 'daily' | 'weekly' | 'monthly';
 
 /**
  * Types of optimization results tracked from external ad platforms
@@ -140,7 +140,7 @@ export namespace AdReportRetrieveResponse {
       clicks: number;
 
       /**
-       * The bucket size of this row (`daily` or `hourly`).
+       * The bucket size of this row (`hourly`, `daily`, `weekly`, or `monthly`).
        */
       granularity: AdReportsAPI.Granularities;
 
@@ -290,7 +290,7 @@ export namespace AdReportRetrieveResponse {
     clicks: number;
 
     /**
-     * The bucket size of this row (`daily` or `hourly`).
+     * The bucket size of this row (`hourly`, `daily`, `weekly`, or `monthly`).
      */
     granularity: AdReportsAPI.Granularities;
 
