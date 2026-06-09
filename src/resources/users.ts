@@ -131,6 +131,24 @@ export interface UserUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param
+   */
+  profile_picture?: UserUpdateParams.ProfilePicture;
+
+  /**
+   * Body param
+   */
+  username?: string;
+}
+
+export namespace UserUpdateParams {
+  export interface ProfilePicture {
+    id?: string;
+
+    direct_upload_id?: string;
+  }
 }
 
 export interface UserUpdateMeParams {
