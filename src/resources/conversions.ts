@@ -85,7 +85,7 @@ export interface ConversionCreateParams {
   currency?: Shared.Currency | null;
 
   /**
-   * Custom event name when event_name is 'custom'.
+   * Custom event name when event_name is 'custom'. Maximum 35 chars for this value.
    */
   custom_name?: string | null;
 
