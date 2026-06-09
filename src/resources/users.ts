@@ -115,6 +115,13 @@ export interface UserCheckAccessParams {
   id: string;
 }
 
+export interface UserCheckAccessParams {
+  /**
+   * The unique identifier or username of the user.
+   */
+  id: string;
+}
+
 export interface UserUpdateParams {
   /**
    * Query param: The account whose profile override to update. Required for API key
