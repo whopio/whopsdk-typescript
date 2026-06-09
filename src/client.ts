@@ -36,6 +36,7 @@ import {
   AdCampaignListResponse,
   AdCampaignListResponsesCursorPage,
   AdCampaignPlatform,
+  AdCampaignRetrieveParams,
   AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
@@ -47,6 +48,7 @@ import {
   AdGroupListParams,
   AdGroupListResponse,
   AdGroupListResponsesCursorPage,
+  AdGroupRetrieveParams,
   AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
@@ -63,6 +65,7 @@ import {
   AdListParams,
   AdListResponse,
   AdListResponsesCursorPage,
+  AdRetrieveParams,
   Ads,
   ExternalAdStatus,
 } from './resources/ads';
@@ -277,6 +280,11 @@ import {
   UploadStatus,
 } from './resources/files';
 import {
+  FinancialActivity,
+  FinancialActivityListParams,
+  FinancialActivityListResponse,
+} from './resources/financial-activity';
+import {
   ForumPostCreateParams,
   ForumPostListParams,
   ForumPostListResponse,
@@ -472,7 +480,15 @@ import {
   SupportChannelListResponsesCursorPage,
   SupportChannels,
 } from './resources/support-channels';
-import { SwapCreateQuoteParams, SwapCreateQuoteResponse, Swaps } from './resources/swaps';
+import {
+  SwapCreateParams,
+  SwapCreateQuoteParams,
+  SwapCreateQuoteResponse,
+  SwapCreateResponse,
+  SwapRetrieveParams,
+  SwapRetrieveResponse,
+  Swaps,
+} from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -486,11 +502,11 @@ import {
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
-  UserListResponse,
-  UserListResponsesCursorPage,
   UserRetrieveParams,
+  UserUpdateMeParams,
   UserUpdateParams,
   Users,
+  UsersCursorPage,
 } from './resources/users';
 import {
   VerificationErrorCode,
@@ -503,6 +519,7 @@ import {
 } from './resources/verifications';
 import {
   AccountWallet,
+  WalletBalanceParams,
   WalletBalanceResponse,
   WalletListResponse,
   WalletSendParams,
@@ -612,6 +629,11 @@ export interface ClientOptions {
   appID?: string | null | undefined;
 
   /**
+   * Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.
+   */
+  version?: string | null | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['WHOP_BASE_URL'].
@@ -687,6 +709,7 @@ export class Whop {
   apiKey: string;
   webhookKey: string | null;
   appID: string | null;
+  version: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -706,6 +729,7 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
+   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-06-08]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -719,6 +743,7 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
+    version = readEnv('WHOP_API_VERSION') ?? '2026-06-08',
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -731,6 +756,7 @@ export class Whop {
       apiKey,
       webhookKey,
       appID,
+      version,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -767,6 +793,7 @@ export class Whop {
     this.apiKey = apiKey;
     this.webhookKey = webhookKey;
     this.appID = appID;
+    this.version = version;
   }
 
   /**
@@ -785,6 +812,7 @@ export class Whop {
       apiKey: this.apiKey,
       webhookKey: this.webhookKey,
       appID: this.appID,
+      version: this.version,
       ...options,
     });
     return client;
@@ -1256,6 +1284,7 @@ export class Whop {
         ...(options.timeout ? { 'X-Stainless-Timeout': String(Math.trunc(options.timeout / 1000)) } : {}),
         ...getPlatformHeaders(),
         'X-Whop-App-Id': this.appID,
+        'Api-Version-Date': this.version,
       },
       await this.authHeaders(options),
       this._options.defaultHeaders,
@@ -1410,9 +1439,6 @@ export class Whop {
    * Chat channels
    */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
-  /**
-   * Users
-   */
   users: API.Users = new API.Users(this);
   /**
    * Payments
@@ -1488,6 +1514,7 @@ export class Whop {
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
   accounts: API.Accounts = new API.Accounts(this);
   wallets: API.Wallets = new API.Wallets(this);
+  financialActivity: API.FinancialActivity = new API.FinancialActivity(this);
   swaps: API.Swaps = new API.Swaps(this);
   deposits: API.Deposits = new API.Deposits(this);
   /**
@@ -1619,6 +1646,7 @@ Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
 Whop.Accounts = Accounts;
 Whop.Wallets = Wallets;
+Whop.FinancialActivity = FinancialActivity;
 Whop.Swaps = Swaps;
 Whop.Deposits = Deposits;
 Whop.SetupIntents = SetupIntents;
@@ -1861,12 +1889,12 @@ export declare namespace Whop {
   export {
     Users as Users,
     type User as User,
-    type UserListResponse as UserListResponse,
     type UserCheckAccessResponse as UserCheckAccessResponse,
-    type UserListResponsesCursorPage as UserListResponsesCursorPage,
+    type UsersCursorPage as UsersCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
+    type UserUpdateMeParams as UserUpdateMeParams,
     type UserListParams as UserListParams,
   };
 
@@ -2073,13 +2101,24 @@ export declare namespace Whop {
     type WalletListResponse as WalletListResponse,
     type WalletBalanceResponse as WalletBalanceResponse,
     type WalletSendResponse as WalletSendResponse,
+    type WalletBalanceParams as WalletBalanceParams,
     type WalletSendParams as WalletSendParams,
   };
 
   export {
+    FinancialActivity as FinancialActivity,
+    type FinancialActivityListResponse as FinancialActivityListResponse,
+    type FinancialActivityListParams as FinancialActivityListParams,
+  };
+
+  export {
     Swaps as Swaps,
+    type SwapCreateResponse as SwapCreateResponse,
+    type SwapRetrieveResponse as SwapRetrieveResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
+    type SwapCreateParams as SwapCreateParams,
+    type SwapRetrieveParams as SwapRetrieveParams,
   };
 
   export {
@@ -2265,6 +2304,7 @@ export declare namespace Whop {
     type AdCampaignListResponse as AdCampaignListResponse,
     type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 
@@ -2277,6 +2317,7 @@ export declare namespace Whop {
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
     type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
   };
 
@@ -2287,6 +2328,7 @@ export declare namespace Whop {
     type AdListResponse as AdListResponse,
     type AdListResponsesCursorPage as AdListResponsesCursorPage,
     type AdListParams as AdListParams,
+    type AdRetrieveParams as AdRetrieveParams,
   };
 
   export {

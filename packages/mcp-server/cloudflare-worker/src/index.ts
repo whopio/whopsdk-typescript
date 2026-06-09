@@ -55,6 +55,16 @@ const serverConfig: ServerConfig = {
       placeholder: 'app_xxxxxxxxxxxxxx',
       type: 'string',
     },
+    {
+      key: 'version',
+      label: 'Version',
+      description:
+        'Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.',
+      required: false,
+      default: '2026-06-08',
+      placeholder: '2026-06-08',
+      type: 'string',
+    },
   ],
 };
 
@@ -68,7 +78,7 @@ const INSTRUCTIONS_FETCH_TIMEOUT_MS = 5000;
 
 function fallbackMcpServer(): McpServer {
   return new McpServer(
-    { name: 'whop_sdk_api', version: '0.0.39' },
+    { name: 'whop_sdk_api', version: '0.0.40' },
     { capabilities: { tools: {}, logging: {} } },
   );
 }

@@ -30,6 +30,7 @@ export {
   type AdCampaignStatus,
   type AdCampaignListResponse,
   type AdCampaignListParams,
+  type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
   type AdCampaignListResponsesCursorPage,
 } from './ad-campaigns';
@@ -41,6 +42,7 @@ export {
   type AdGroupListResponse,
   type AdGroupDeleteResponse,
   type AdGroupListParams,
+  type AdGroupRetrieveParams,
   type AdGroupUpdateParams,
   type AdGroupListResponsesCursorPage,
 } from './ad-groups';
@@ -57,6 +59,7 @@ export {
   type ExternalAdStatus,
   type AdListResponse,
   type AdListParams,
+  type AdRetrieveParams,
   type AdListResponsesCursorPage,
 } from './ads';
 export {
@@ -270,6 +273,11 @@ export {
   type FileCreateParams,
 } from './files';
 export {
+  FinancialActivity,
+  type FinancialActivityListResponse,
+  type FinancialActivityListParams,
+} from './financial-activity';
+export {
   ForumPosts,
   type ForumPostVisibilityType,
   type ForumPostListResponse,
@@ -465,7 +473,15 @@ export {
   type SupportChannelCreateParams,
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
-export { Swaps, type SwapCreateQuoteResponse, type SwapCreateQuoteParams } from './swaps';
+export {
+  Swaps,
+  type SwapCreateResponse,
+  type SwapRetrieveResponse,
+  type SwapCreateQuoteResponse,
+  type SwapCreateQuoteParams,
+  type SwapCreateParams,
+  type SwapRetrieveParams,
+} from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
@@ -477,13 +493,13 @@ export {
 export {
   Users,
   type User,
-  type UserListResponse,
   type UserCheckAccessResponse,
   type UserRetrieveParams,
   type UserCheckAccessParams,
   type UserUpdateParams,
+  type UserUpdateMeParams,
   type UserListParams,
-  type UserListResponsesCursorPage,
+  type UsersCursorPage,
 } from './users';
 export {
   Verifications,
@@ -500,6 +516,7 @@ export {
   type WalletListResponse,
   type WalletBalanceResponse,
   type WalletSendResponse,
+  type WalletBalanceParams,
   type WalletSendParams,
 } from './wallets';
 export {
