@@ -55,16 +55,6 @@ const serverConfig: ServerConfig = {
       placeholder: 'app_xxxxxxxxxxxxxx',
       type: 'string',
     },
-    {
-      key: 'version',
-      label: 'Version',
-      description:
-        'Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.',
-      required: false,
-      default: '2026-06-08',
-      placeholder: '2026-06-08',
-      type: 'string',
-    },
   ],
 };
 

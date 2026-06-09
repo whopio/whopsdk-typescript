@@ -486,12 +486,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/users/{id}',
   },
   {
-    clientCallName: 'client.users.updateMe',
-    fullyQualifiedName: 'users.updateMe',
-    httpMethod: 'patch',
-    httpPath: '/users/me',
-  },
-  {
     clientCallName: 'client.users.list',
     fullyQualifiedName: 'users.list',
     httpMethod: 'get',

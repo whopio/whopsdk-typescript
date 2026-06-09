@@ -189,7 +189,6 @@ const fuse = new Fuse(
     'client.users.list',
     'client.users.retrieve',
     'client.users.update',
-    'client.users.updateMe',
     'client.payments.create',
     'client.payments.list',
     'client.payments.listFees',
