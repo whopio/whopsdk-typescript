@@ -54,10 +54,10 @@ export interface ConversionCreateParams {
     | 'contact'
     | 'complete_registration'
     | 'schedule'
+    | 'view_content'
+    | 'add_to_cart'
     | 'custom'
-    | 'page'
-    | 'leave'
-    | 'identify';
+    | 'page';
 
   /**
    * The channel where an event originated
