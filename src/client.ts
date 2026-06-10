@@ -1417,9 +1417,6 @@ export class Whop {
    * Webhooks
    */
   webhooks: API.Webhooks = new API.Webhooks(this);
-  /**
-   * Plans
-   */
   plans: API.Plans = new API.Plans(this);
   /**
    * Entries
