@@ -367,17 +367,7 @@ export {
   type PayoutMethodListParams,
   type PayoutMethodListResponsesCursorPage,
 } from './payout-methods';
-export {
-  Plans,
-  type CheckoutFont,
-  type CheckoutShape,
-  type PlanListResponse,
-  type PlanDeleteResponse,
-  type PlanCreateParams,
-  type PlanUpdateParams,
-  type PlanListParams,
-  type PlanListResponsesCursorPage,
-} from './plans';
+export { Plans, type CheckoutFont, type CheckoutShape } from './plans';
 export {
   Products,
   type ProductDeleteResponse,

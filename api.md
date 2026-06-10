@@ -39,7 +39,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">Message</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Payment</a></code>
-- <code><a href="./src/resources/shared.ts">Plan</a></code>
 - <code><a href="./src/resources/shared.ts">PlanType</a></code>
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
@@ -197,16 +196,6 @@ Types:
 
 - <code><a href="./src/resources/plans.ts">CheckoutFont</a></code>
 - <code><a href="./src/resources/plans.ts">CheckoutShape</a></code>
-- <code><a href="./src/resources/plans.ts">PlanListResponse</a></code>
-- <code><a href="./src/resources/plans.ts">PlanDeleteResponse</a></code>
-
-Methods:
-
-- <code title="post /plans">client.plans.<a href="./src/resources/plans.ts">create</a>({ ...params }) -> Plan</code>
-- <code title="get /plans/{id}">client.plans.<a href="./src/resources/plans.ts">retrieve</a>(id) -> Plan</code>
-- <code title="patch /plans/{id}">client.plans.<a href="./src/resources/plans.ts">update</a>(id, { ...params }) -> Plan</code>
-- <code title="get /plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> PlanListResponsesCursorPage</code>
-- <code title="delete /plans/{id}">client.plans.<a href="./src/resources/plans.ts">delete</a>(id) -> PlanDeleteResponse</code>
 
 # Entries
 

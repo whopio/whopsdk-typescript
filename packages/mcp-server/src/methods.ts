@@ -186,36 +186,6 @@ export const sdkMethods: SdkMethod[] = [
   },
   { clientCallName: 'client.webhooks.unwrap', fullyQualifiedName: 'webhooks.unwrap' },
   {
-    clientCallName: 'client.plans.create',
-    fullyQualifiedName: 'plans.create',
-    httpMethod: 'post',
-    httpPath: '/plans',
-  },
-  {
-    clientCallName: 'client.plans.retrieve',
-    fullyQualifiedName: 'plans.retrieve',
-    httpMethod: 'get',
-    httpPath: '/plans/{id}',
-  },
-  {
-    clientCallName: 'client.plans.update',
-    fullyQualifiedName: 'plans.update',
-    httpMethod: 'patch',
-    httpPath: '/plans/{id}',
-  },
-  {
-    clientCallName: 'client.plans.list',
-    fullyQualifiedName: 'plans.list',
-    httpMethod: 'get',
-    httpPath: '/plans',
-  },
-  {
-    clientCallName: 'client.plans.delete',
-    fullyQualifiedName: 'plans.delete',
-    httpMethod: 'delete',
-    httpPath: '/plans/{id}',
-  },
-  {
     clientCallName: 'client.entries.retrieve',
     fullyQualifiedName: 'entries.retrieve',
     httpMethod: 'get',

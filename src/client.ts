@@ -374,17 +374,7 @@ import {
   PayoutMethodRetrieveResponse,
   PayoutMethods,
 } from './resources/payout-methods';
-import {
-  CheckoutFont,
-  CheckoutShape,
-  PlanCreateParams,
-  PlanDeleteResponse,
-  PlanListParams,
-  PlanListResponse,
-  PlanListResponsesCursorPage,
-  PlanUpdateParams,
-  Plans,
-} from './resources/plans';
+import { CheckoutFont, CheckoutShape, Plans } from './resources/plans';
 import {
   ProductCreateParams,
   ProductDeleteResponse,
@@ -1336,9 +1326,6 @@ export class Whop {
    * Webhooks
    */
   webhooks: API.Webhooks = new API.Webhooks(this);
-  /**
-   * Plans
-   */
   plans: API.Plans = new API.Plans(this);
   /**
    * Entries
@@ -1712,17 +1699,7 @@ export declare namespace Whop {
     type WebhookListParams as WebhookListParams,
   };
 
-  export {
-    Plans as Plans,
-    type CheckoutFont as CheckoutFont,
-    type CheckoutShape as CheckoutShape,
-    type PlanListResponse as PlanListResponse,
-    type PlanDeleteResponse as PlanDeleteResponse,
-    type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
-    type PlanCreateParams as PlanCreateParams,
-    type PlanUpdateParams as PlanUpdateParams,
-    type PlanListParams as PlanListParams,
-  };
+  export { Plans as Plans, type CheckoutFont as CheckoutFont, type CheckoutShape as CheckoutShape };
 
   export {
     Entries as Entries,
@@ -2265,7 +2242,6 @@ export declare namespace Whop {
   export type Message = API.Message;
   export type PageInfo = API.PageInfo;
   export type Payment = API.Payment;
-  export type Plan = API.Plan;
   export type PlanType = API.PlanType;
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;
