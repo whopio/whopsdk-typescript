@@ -3044,297 +3044,255 @@ export namespace Payment {
   }
 }
 
-/**
- * A plan defines pricing and billing terms for a checkout. Plans can optionally
- * belong to a product, where they represent different pricing options such as
- * one-time payments, recurring subscriptions, or free trials.
- */
 export interface Plan {
   /**
-   * The unique identifier for the plan.
+   * The ID of the plan, which will look like plan\_******\*******
    */
   id: string;
 
   /**
-   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
-   * does not check processor compatibility or feature flags.
+   * Whether this plan accepts local currency payments via adaptive pricing
    */
   adaptive_pricing_enabled: boolean;
 
   /**
-   * The number of days between each recurring charge. Null for one-time plans. For
-   * example, 30 for monthly or 365 for annual billing.
+   * The number of days between recurring charges. Null for one-time plans
    */
   billing_period: number | null;
 
   /**
-   * Whether tax is collected on purchases of this plan, based on the company's tax
-   * configuration.
+   * Whether tax is collected on purchases of this plan
    */
   collect_tax: boolean;
 
   /**
-   * The company that sells this plan. Null for standalone invoice plans not linked
-   * to a company.
+   * The company that sells this plan, an object with an id and title. Null for
+   * standalone invoice plans
    */
-  company: Plan.Company | null;
+  company: unknown | null;
 
   /**
-   * The datetime the plan was created.
+   * When the plan was created, as an ISO 8601 timestamp
    */
   created_at: string;
 
   /**
-   * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
-   * amounts on the plan are denominated in this currency.
+   * The three-letter ISO currency code all prices on this plan are denominated in
    */
-  currency: Currency;
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau';
 
   /**
-   * Custom input fields displayed on the checkout form that collect additional
-   * information from the buyer.
+   * Custom input fields displayed on the checkout form, objects with id, field_type,
+   * name, order, placeholder and required
    */
-  custom_fields: Array<Plan.CustomField>;
+  custom_fields: Array<unknown>;
 
   /**
-   * A text description of the plan visible to customers. Maximum 1000 characters.
-   * Null if no description is set.
+   * A text description of the plan visible to customers
    */
   description: string | null;
 
   /**
-   * The number of days until the membership expires (for expiration-based plans).
-   * For example, 365 for a one-year access pass.
+   * The number of days until the membership expires, for expiration-based plans
    */
   expiration_days: number | null;
 
   /**
-   * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
-   * For one-time plans, this is the full price. For renewal plans, this is charged
-   * on top of the first renewal_price.
+   * The initial purchase price in the plan's currency
    */
   initial_price: number;
 
   /**
-   * Private notes visible only to the company owner and team members. Not shown to
-   * customers. Null if no notes have been added.
+   * Private notes visible only to authorized team members
    */
   internal_notes: string | null;
 
   /**
-   * The invoice this plan was generated for. Null if the plan was not created for a
-   * specific invoice.
+   * The invoice this plan was generated for, an object with an id. Null unless the
+   * plan was created for an invoice
    */
-  invoice: Plan.Invoice | null;
+  invoice: unknown | null;
 
   /**
-   * The number of users who currently hold an active membership through this plan.
-   * Only visible to authorized team members.
+   * The number of active memberships on this plan. Only visible to authorized team
+   * members
    */
   member_count: number | null;
 
   /**
-   * Custom key-value pairs stored on the plan. Included in webhook payloads for
-   * payment and membership events.
+   * Custom key-value pairs stored on the plan
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown | null;
 
   /**
-   * The explicit payment method configuration specifying which payment methods are
-   * enabled or disabled for this plan. Null if the plan uses default settings.
+   * The explicit payment method configuration for the plan, an object with enabled,
+   * disabled and include_platform_defaults. Null if the plan uses default settings
    */
-  payment_method_configuration: Plan.PaymentMethodConfiguration | null;
+  payment_method_configuration: unknown | null;
 
   /**
    * The billing model for this plan: 'renewal' for recurring subscriptions or
-   * 'one_time' for single payments.
+   * 'one_time' for single payments
    */
-  plan_type: PlanType;
+  plan_type: 'renewal' | 'one_time';
 
   /**
-   * The product that this plan belongs to. Null for standalone one-off purchases not
-   * linked to a product.
+   * The product this plan belongs to, an object with an id and title. Null for
+   * standalone plans
    */
-  product: Plan.Product | null;
+  product: unknown | null;
 
   /**
-   * The full URL where customers can purchase this plan directly, bypassing the
-   * product page.
+   * The full URL where customers can purchase this plan directly
    */
   purchase_url: string;
 
   /**
-   * The method used to sell this plan: 'buy_now' for immediate purchase or
-   * 'waitlist' for waitlist-based access.
+   * The method used to sell this plan, e.g. 'buy_now' or 'waitlist'
    */
-  release_method: ReleaseMethod;
+  release_method: 'buy_now' | 'waitlist';
 
   /**
-   * The recurring price charged every billing_period in the plan's base_currency
-   * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
+   * The recurring price charged every billing period in the plan's currency
    */
   renewal_price: number;
 
   /**
-   * The total number of installment payments required before the subscription
-   * pauses. Null if split pay is not configured. Must be greater than 1.
+   * The number of installment payments required before the subscription pauses
    */
   split_pay_required_payments: number | null;
 
   /**
    * The number of units available for purchase. Only visible to authorized team
-   * members. Null if the requester lacks permission.
+   * members
    */
   stock: number | null;
 
   /**
-   * How tax is handled for this plan: 'inclusive' (tax included in price),
-   * 'exclusive' (tax added at checkout), or 'unspecified' (tax not configured).
+   * How tax is handled for this plan: 'inclusive', 'exclusive', or 'unspecified'
    */
-  tax_type: TaxType;
+  tax_type: string;
 
   /**
-   * The 3D Secure behavior for a plan.
+   * The 3D Secure behavior for this plan. Null means the plan inherits the account
+   * default
    */
   three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
   /**
-   * The display name of the plan shown to customers on the product page and at
-   * checkout. Maximum 30 characters. Null if no title has been set.
+   * The display name of the plan shown to customers
    */
   title: string | null;
 
   /**
-   * The number of free trial days before the first charge on a renewal plan. Null if
-   * no trial is configured or the current user has already used a trial for this
-   * plan.
+   * The number of free trial days before the first charge on a recurring plan
    */
   trial_period_days: number | null;
 
   /**
-   * When true, the plan has unlimited stock (stock field is ignored). When false,
-   * purchases are limited by the stock field.
+   * Whether the plan has unlimited stock
    */
   unlimited_stock: boolean;
 
   /**
-   * The datetime the plan was last updated.
+   * When the plan was last updated, as an ISO 8601 timestamp
    */
   updated_at: string;
 
   /**
-   * Controls whether the plan is visible to customers. When set to 'hidden', the
-   * plan is only accessible via direct link.
+   * Whether the plan is visible to customers or hidden from public view
    */
-  visibility: Visibility;
-}
-
-export namespace Plan {
-  /**
-   * The company that sells this plan. Null for standalone invoice plans not linked
-   * to a company.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The display name of the company shown to customers.
-     */
-    title: string;
-  }
-
-  /**
-   * An object representing a custom field for a plan.
-   */
-  export interface CustomField {
-    /**
-     * The unique identifier for the custom field.
-     */
-    id: string;
-
-    /**
-     * What type of input field to use.
-     */
-    field_type: 'text';
-
-    /**
-     * The title/header of the custom field.
-     */
-    name: string;
-
-    /**
-     * How the custom field should be ordered when rendered on the checkout page.
-     */
-    order: number | null;
-
-    /**
-     * An example response displayed in the input field.
-     */
-    placeholder: string | null;
-
-    /**
-     * Whether or not the custom field is required.
-     */
-    required: boolean;
-  }
-
-  /**
-   * The invoice this plan was generated for. Null if the plan was not created for a
-   * specific invoice.
-   */
-  export interface Invoice {
-    /**
-     * The unique identifier for the invoice.
-     */
-    id: string;
-  }
-
-  /**
-   * The explicit payment method configuration specifying which payment methods are
-   * enabled or disabled for this plan. Null if the plan uses default settings.
-   */
-  export interface PaymentMethodConfiguration {
-    /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
-     */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-    /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
-     */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-    /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
-     */
-    include_platform_defaults: boolean;
-  }
-
-  /**
-   * The product that this plan belongs to. Null for standalone one-off purchases not
-   * linked to a product.
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
+  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
 }
 
 /**
