@@ -34,6 +34,8 @@ export namespace FinancialActivityListResponse {
      */
     amount: string;
 
+    created_at: string | null;
+
     currency: Data.Currency;
 
     line_type: string;
@@ -180,7 +182,52 @@ export namespace FinancialActivityListResponse {
 
       object: string;
 
+      /**
+       * Withdrawal creation time as an ISO 8601 timestamp (withdrawal sources only;
+       * requires payout:withdrawal:read).
+       */
+      created_at?: string | null;
+
+      /**
+       * Estimated arrival as an ISO 8601 timestamp (withdrawal sources only; requires
+       * payout:withdrawal:read).
+       */
+      estimated_arrival?: string | null;
+
+      /**
+       * Name of the entity processing the payout (withdrawal sources only; requires
+       * payout:withdrawal:read).
+       */
+      payer_name?: string | null;
+
+      /**
+       * Payout destination display info (withdrawal sources only).
+       */
+      payout_destination?: Source.PayoutDestination | null;
+
+      /**
+       * Saved payout destination nickname (withdrawal sources only).
+       */
+      payout_token_nickname?: string | null;
+
+      /**
+       * Withdrawal lifecycle status (withdrawal sources only; requires
+       * payout:withdrawal:read).
+       */
+      status?: string | null;
+
       [k: string]: unknown;
+    }
+
+    export namespace Source {
+      /**
+       * Payout destination display info (withdrawal sources only).
+       */
+      export interface PayoutDestination {
+        icon_url?: string | null;
+
+        payer_name?: string | null;
+      }
     }
   }
 
