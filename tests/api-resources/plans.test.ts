@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.plans.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.plans.list({ company_id: 'company_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,28 +23,25 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.plans.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      company_id: 'company_id',
       after: 'after',
       before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
+      created_after: 'created_after',
+      created_before: 'created_before',
       direction: 'asc',
-      first: 42,
-      last: 42,
+      first: 0,
+      last: 0,
       order: 'id',
-      plan_types: ['renewal'],
+      plan_types: ['string'],
       product_ids: ['string'],
-      release_methods: ['buy_now'],
-      visibilities: ['visible'],
+      release_methods: ['string'],
+      visibilities: ['string'],
     });
   });
 
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.plans.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      product_id: 'prod_xxxxxxxxxxxxx',
-    });
+    const responsePromise = client.plans.create({ product_id: 'product_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,56 +54,51 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.plans.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      product_id: 'prod_xxxxxxxxxxxxx',
+      product_id: 'product_id',
       adaptive_pricing_enabled: true,
-      billing_period: 42,
-      checkout_styling: {
-        background_color: 'background_color',
-        border_style: 'rounded',
-        button_color: 'button_color',
-        font_family: 'system',
-      },
-      currency: 'usd',
+      billing_period: 0,
+      checkout_styling: {},
+      company_id: 'company_id',
+      currency: 'currency',
       custom_fields: [
         {
+          id: 'id',
           field_type: 'text',
           name: 'name',
-          id: 'id',
-          order: 42,
+          order: 0,
           placeholder: 'placeholder',
           required: true,
         },
       ],
       description: 'description',
-      expiration_days: 42,
-      image: { id: 'id' },
-      initial_price: 6.9,
+      expiration_days: 0,
+      image: { id: 'id', direct_upload_id: 'direct_upload_id' },
+      initial_price: 0,
       internal_notes: 'internal_notes',
       legacy_payment_method_controls: true,
-      metadata: { foo: 'bar' },
-      override_tax_type: 'inclusive',
+      metadata: {},
+      override_tax_type: 'override_tax_type',
       payment_method_configuration: {
-        disabled: ['acss_debit'],
-        enabled: ['acss_debit'],
+        disabled: ['string'],
+        enabled: ['string'],
         include_platform_defaults: true,
       },
-      plan_type: 'renewal',
-      release_method: 'buy_now',
-      renewal_price: 6.9,
-      split_pay_required_payments: 42,
-      stock: 42,
+      plan_type: 'plan_type',
+      release_method: 'release_method',
+      renewal_price: 0,
+      split_pay_required_payments: 0,
+      stock: 0,
       three_ds_level: 'mandate_challenge',
       title: 'title',
-      trial_period_days: 42,
+      trial_period_days: 0,
       unlimited_stock: true,
-      visibility: 'visible',
+      visibility: 'visibility',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.plans.retrieve('plan_xxxxxxxxxxxxx');
+    const responsePromise = client.plans.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -118,7 +110,7 @@ describe('resource plans', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.plans.update('plan_xxxxxxxxxxxxx');
+    const responsePromise = client.plans.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -129,63 +121,8 @@ describe('resource plans', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.plans.update(
-        'plan_xxxxxxxxxxxxx',
-        {
-          adaptive_pricing_enabled: true,
-          billing_period: 42,
-          checkout_styling: {
-            background_color: 'background_color',
-            border_style: 'rounded',
-            button_color: 'button_color',
-            font_family: 'system',
-          },
-          currency: 'usd',
-          custom_fields: [
-            {
-              field_type: 'text',
-              name: 'name',
-              id: 'id',
-              order: 42,
-              placeholder: 'placeholder',
-              required: true,
-            },
-          ],
-          description: 'description',
-          expiration_days: 42,
-          image: { id: 'id' },
-          initial_price: 6.9,
-          internal_notes: 'internal_notes',
-          legacy_payment_method_controls: true,
-          metadata: { foo: 'bar' },
-          offer_cancel_discount: true,
-          override_tax_type: 'inclusive',
-          payment_method_configuration: {
-            disabled: ['acss_debit'],
-            enabled: ['acss_debit'],
-            include_platform_defaults: true,
-          },
-          renewal_price: 6.9,
-          stock: 42,
-          strike_through_initial_price: 6.9,
-          strike_through_renewal_price: 6.9,
-          three_ds_level: 'mandate_challenge',
-          title: 'title',
-          trial_period_days: 42,
-          unlimited_stock: true,
-          visibility: 'visible',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.plans.delete('plan_xxxxxxxxxxxxx');
+    const responsePromise = client.plans.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
