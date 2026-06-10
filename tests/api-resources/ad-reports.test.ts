@@ -34,7 +34,7 @@ describe('resource adReports', () => {
       breakdown: 'campaign',
       company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'currency',
-      granularity: 'daily',
+      granularity: 'hourly',
     });
   });
 });
