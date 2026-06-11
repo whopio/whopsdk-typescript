@@ -284,6 +284,19 @@ export interface BountyCreateParams {
   allowed_country_codes?: Array<string> | null;
 
   /**
+   * What the poster is trying to accomplish with a workforce bounty. Used for
+   * product taxonomy and analytics, separate from the bounty's implementation type.
+   */
+  business_goal_type?:
+    | 'clipping'
+    | 'post_engagement'
+    | 'owned_account_growth'
+    | 'ugc_content'
+    | 'local_activation'
+    | 'other'
+    | null;
+
+  /**
    * An optional experience to scope the bounty to.
    */
   experience_id?: string | null;
