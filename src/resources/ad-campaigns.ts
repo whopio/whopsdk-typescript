@@ -557,6 +557,11 @@ export interface AdCampaignListParams extends CursorPageParams {
   created_before?: string | null;
 
   /**
+   * The direction of the sort.
+   */
+  direction?: Shared.Direction | null;
+
+  /**
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;
@@ -565,6 +570,26 @@ export interface AdCampaignListParams extends CursorPageParams {
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
+
+  /**
+   * The fields the ads dashboard lists (campaigns, ad sets) can be ordered by. Stat
+   * columns are computed over the provided stats date range.
+   */
+  order?:
+    | 'created_at'
+    | 'spend'
+    | 'impressions'
+    | 'clicks'
+    | 'reach'
+    | 'unique_clicks'
+    | 'results'
+    | 'click_through_rate'
+    | 'cost_per_click'
+    | 'cost_per_mille'
+    | 'cost_per_result'
+    | 'frequency'
+    | 'return_on_ad_spend'
+    | null;
 
   /**
    * Case-insensitive substring match against the campaign title or ID.

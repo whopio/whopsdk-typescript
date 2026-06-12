@@ -576,12 +576,27 @@ export interface AdListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The fields ad resources can be ordered by.
+   * The fields the ads dashboard lists (campaigns, ad sets) can be ordered by. Stat
+   * columns are computed over the provided stats date range.
    */
-  order?: 'created_at' | 'spend' | 'return_on_ad_spend' | null;
+  order?:
+    | 'created_at'
+    | 'spend'
+    | 'impressions'
+    | 'clicks'
+    | 'reach'
+    | 'unique_clicks'
+    | 'results'
+    | 'click_through_rate'
+    | 'cost_per_click'
+    | 'cost_per_mille'
+    | 'cost_per_result'
+    | 'frequency'
+    | 'return_on_ad_spend'
+    | null;
 
   /**
-   * Columns that the listAds query can sort by. Deprecated — use AdOrder.
+   * Columns that the listAds query can sort by. Deprecated — use AdStatOrder.
    */
   order_by?: 'spend' | 'return_on_ad_spend' | 'roas' | null;
 
