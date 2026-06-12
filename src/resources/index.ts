@@ -449,13 +449,7 @@ export {
   type SupportChannelListResponsesCursorPage,
 } from './support-channels';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
-export {
-  Transfers,
-  type TransferListResponse,
-  type TransferCreateParams,
-  type TransferListParams,
-  type TransferListResponsesCursorPage,
-} from './transfers';
+export { Transfers } from './transfers';
 export { Users } from './users';
 export {
   Verifications,

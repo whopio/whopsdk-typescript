@@ -456,13 +456,7 @@ import {
   SupportChannels,
 } from './resources/support-channels';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
-import {
-  TransferCreateParams,
-  TransferListParams,
-  TransferListResponse,
-  TransferListResponsesCursorPage,
-  Transfers,
-} from './resources/transfers';
+import { Transfers } from './resources/transfers';
 import { Users } from './resources/users';
 import {
   VerificationErrorCode,
@@ -1335,9 +1329,6 @@ export class Whop {
    * Forum posts
    */
   forumPosts: API.ForumPosts = new API.ForumPosts(this);
-  /**
-   * Transfers
-   */
   transfers: API.Transfers = new API.Transfers(this);
   /**
    * Ledger accounts
@@ -1719,13 +1710,7 @@ export declare namespace Whop {
     type ForumPostListParams as ForumPostListParams,
   };
 
-  export {
-    Transfers as Transfers,
-    type TransferListResponse as TransferListResponse,
-    type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
-    type TransferCreateParams as TransferCreateParams,
-    type TransferListParams as TransferListParams,
-  };
+  export { Transfers as Transfers };
 
   export {
     LedgerAccounts as LedgerAccounts,
@@ -2255,7 +2240,6 @@ export declare namespace Whop {
   export type ShipmentSubstatus = API.ShipmentSubstatus;
   export type SupportChannel = API.SupportChannel;
   export type TaxType = API.TaxType;
-  export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;
   export type VisibilityFilter = API.VisibilityFilter;
   export type WhoCanCommentTypes = API.WhoCanCommentTypes;

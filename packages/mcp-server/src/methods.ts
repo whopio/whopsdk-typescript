@@ -234,24 +234,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/forum_posts',
   },
   {
-    clientCallName: 'client.transfers.create',
-    fullyQualifiedName: 'transfers.create',
-    httpMethod: 'post',
-    httpPath: '/transfers',
-  },
-  {
-    clientCallName: 'client.transfers.retrieve',
-    fullyQualifiedName: 'transfers.retrieve',
-    httpMethod: 'get',
-    httpPath: '/transfers/{id}',
-  },
-  {
-    clientCallName: 'client.transfers.list',
-    fullyQualifiedName: 'transfers.list',
-    httpMethod: 'get',
-    httpPath: '/transfers',
-  },
-  {
     clientCallName: 'client.ledgerAccounts.retrieve',
     fullyQualifiedName: 'ledgerAccounts.retrieve',
     httpMethod: 'get',

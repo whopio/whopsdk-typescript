@@ -52,7 +52,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">ShipmentSubstatus</a></code>
 - <code><a href="./src/resources/shared.ts">SupportChannel</a></code>
 - <code><a href="./src/resources/shared.ts">TaxType</a></code>
-- <code><a href="./src/resources/shared.ts">Transfer</a></code>
 - <code><a href="./src/resources/shared.ts">Visibility</a></code>
 - <code><a href="./src/resources/shared.ts">VisibilityFilter</a></code>
 - <code><a href="./src/resources/shared.ts">WhoCanCommentTypes</a></code>
@@ -226,16 +225,6 @@ Methods:
 - <code title="get /forum_posts">client.forumPosts.<a href="./src/resources/forum-posts.ts">list</a>({ ...params }) -> ForumPostListResponsesCursorPage</code>
 
 # Transfers
-
-Types:
-
-- <code><a href="./src/resources/transfers.ts">TransferListResponse</a></code>
-
-Methods:
-
-- <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> Transfer</code>
-- <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id) -> Transfer</code>
-- <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
 
 # LedgerAccounts
 
