@@ -534,6 +534,11 @@ export interface AdCampaignUpdateParams {
    * the campaign's existing budget type.
    */
   budget?: number | null;
+
+  /**
+   * The advertiser's desired cost per result in dollars.
+   */
+  desired_cpr?: number | null;
 }
 
 export interface AdCampaignListParams extends CursorPageParams {

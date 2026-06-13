@@ -208,6 +208,7 @@ export type WebhookEvent =
   | 'invoice.voided'
   | 'membership.activated'
   | 'membership.deactivated'
+  | 'membership.trial_ending_soon'
   | 'entry.created'
   | 'entry.approved'
   | 'entry.denied'
@@ -215,6 +216,7 @@ export type WebhookEvent =
   | 'setup_intent.requires_action'
   | 'setup_intent.succeeded'
   | 'setup_intent.canceled'
+  | 'ledger_account.funds_available'
   | 'withdrawal.created'
   | 'withdrawal.updated'
   | 'course_lesson_interaction.completed'
@@ -582,6 +584,39 @@ export interface MembershipDeactivatedWebhookEvent {
   company_id?: string | null;
 }
 
+export interface MembershipTrialEndingSoonWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.trial_ending_soon';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
 export interface EntryCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -807,6 +842,336 @@ export interface SetupIntentCanceledWebhookEvent {
    * The company ID that this webhook event is associated with
    */
   company_id?: string | null;
+}
+
+export interface LedgerAccountFundsAvailableWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A ledger account represents a financial account on Whop that can hold many
+   * balances.
+   */
+  data: LedgerAccountFundsAvailableWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'ledger_account.funds_available';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace LedgerAccountFundsAvailableWebhookEvent {
+  /**
+   * A ledger account represents a financial account on Whop that can hold many
+   * balances.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the ledger account.
+     */
+    id: string;
+
+    /**
+     * The balances associated with the account.
+     */
+    balances: Array<Data.Balance>;
+
+    /**
+     * The type of ledger account.
+     */
+    ledger_type: 'primary' | 'pool';
+
+    /**
+     * The owner of the ledger account.
+     */
+    owner: Data.User | null | Data.Company | null;
+
+    /**
+     * The different approval statuses an account can have.
+     */
+    payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected' | null;
+
+    /**
+     * The payout account associated with the LedgerAccount, if any.
+     */
+    payout_account_details: Data.PayoutAccountDetails | null;
+
+    /**
+     * The fee for transfers, if applicable.
+     */
+    transfer_fee: number | null;
+
+    /**
+     * The balance cache associated with the account by currency.
+     */
+    treasury_balance: Data.TreasuryBalance | null;
+  }
+
+  export namespace Data {
+    /**
+     * A cached balance for a LedgerAccount in respect to a currency.
+     */
+    export interface Balance {
+      /**
+       * The amount of the balance.
+       */
+      balance: number;
+
+      /**
+       * The currency of the balance.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The amount of the balance that is pending.
+       */
+      pending_balance: number;
+
+      /**
+       * The amount of the balance that is reserved.
+       */
+      reserve_balance: number;
+    }
+
+    /**
+     * A user account on Whop. Contains profile information, identity details, and
+     * social connections.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The typename of this object
+       */
+      typename: 'User';
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface Company {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+       */
+      route: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+
+      /**
+       * The typename of this object
+       */
+      typename: 'Company';
+    }
+
+    /**
+     * The payout account associated with the LedgerAccount, if any.
+     */
+    export interface PayoutAccountDetails {
+      /**
+       * The unique identifier for the payout account.
+       */
+      id: string;
+
+      /**
+       * The physical address associated with this payout account
+       */
+      address: PayoutAccountDetails.Address | null;
+
+      /**
+       * The company's legal name
+       */
+      business_name: string | null;
+
+      /**
+       * The business representative for this payout account
+       */
+      business_representative: PayoutAccountDetails.BusinessRepresentative | null;
+
+      /**
+       * The email address of the representative
+       */
+      email: string | null;
+
+      /**
+       * The latest verification for the connected account.
+       */
+      latest_verification: PayoutAccountDetails.LatestVerification | null;
+
+      /**
+       * The business representative's phone
+       */
+      phone: string | null;
+
+      /**
+       * The granular calculated statuses reflecting payout account KYC and withdrawal
+       * readiness.
+       */
+      status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
+    }
+
+    export namespace PayoutAccountDetails {
+      /**
+       * The physical address associated with this payout account
+       */
+      export interface Address {
+        /**
+         * The city of the address.
+         */
+        city: string | null;
+
+        /**
+         * The country of the address.
+         */
+        country: string | null;
+
+        /**
+         * The line 1 of the address.
+         */
+        line1: string | null;
+
+        /**
+         * The line 2 of the address.
+         */
+        line2: string | null;
+
+        /**
+         * The postal code of the address.
+         */
+        postal_code: string | null;
+
+        /**
+         * The state of the address.
+         */
+        state: string | null;
+      }
+
+      /**
+       * The business representative for this payout account
+       */
+      export interface BusinessRepresentative {
+        /**
+         * The date of birth of the business representative in ISO 8601 format
+         * (YYYY-MM-DD).
+         */
+        date_of_birth: string | null;
+
+        /**
+         * The first name of the business representative.
+         */
+        first_name: string | null;
+
+        /**
+         * The last name of the business representative.
+         */
+        last_name: string | null;
+
+        /**
+         * The middle name of the business representative.
+         */
+        middle_name: string | null;
+      }
+
+      /**
+       * The latest verification for the connected account.
+       */
+      export interface LatestVerification {
+        /**
+         * The numeric id of the verification record.
+         */
+        id: string;
+
+        /**
+         * An error code for a verification attempt.
+         */
+        last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+        /**
+         * A human-readable explanation of the most recent verification error. Null if no
+         * error has occurred.
+         */
+        last_error_reason: string | null;
+
+        /**
+         * The current status of this verification session.
+         */
+        status: VerificationsAPI.VerificationStatus;
+      }
+    }
+
+    /**
+     * The balance cache associated with the account by currency.
+     */
+    export interface TreasuryBalance {
+      /**
+       * The amount of the balance.
+       */
+      balance: number;
+
+      /**
+       * The balance converted to USD.
+       */
+      balance_usd: number;
+
+      /**
+       * The currency of the balance.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The amount of the balance that is pending.
+       */
+      pending_balance: number;
+
+      /**
+       * The amount of the balance that is reserved.
+       */
+      reserve_balance: number;
+
+      /**
+       * The amount of the balance that is withdrawable.
+       */
+      total_withdrawable_balance: number;
+    }
+  }
 }
 
 export interface WithdrawalCreatedWebhookEvent {
@@ -4220,6 +4585,7 @@ export type UnwrapWebhookEvent =
   | InvoiceVoidedWebhookEvent
   | MembershipActivatedWebhookEvent
   | MembershipDeactivatedWebhookEvent
+  | MembershipTrialEndingSoonWebhookEvent
   | EntryCreatedWebhookEvent
   | EntryApprovedWebhookEvent
   | EntryDeniedWebhookEvent
@@ -4227,6 +4593,7 @@ export type UnwrapWebhookEvent =
   | SetupIntentRequiresActionWebhookEvent
   | SetupIntentSucceededWebhookEvent
   | SetupIntentCanceledWebhookEvent
+  | LedgerAccountFundsAvailableWebhookEvent
   | WithdrawalCreatedWebhookEvent
   | WithdrawalUpdatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
@@ -4349,6 +4716,7 @@ export declare namespace Webhooks {
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type MembershipTrialEndingSoonWebhookEvent as MembershipTrialEndingSoonWebhookEvent,
     type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
     type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
     type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
@@ -4356,6 +4724,7 @@ export declare namespace Webhooks {
     type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
     type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
     type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,

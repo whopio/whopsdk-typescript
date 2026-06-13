@@ -148,6 +148,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipActivatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipDeactivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipTrialEndingSoonWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">EntryCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">EntryApprovedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
@@ -155,6 +156,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">SetupIntentRequiresActionWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">SetupIntentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">SetupIntentCanceledWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
