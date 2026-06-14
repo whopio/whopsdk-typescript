@@ -589,7 +589,7 @@ export interface AdGroupUpdateParams {
   budget?: number | null;
 
   /**
-   * Human-readable ad group title.
+   * Human-readable ad group title. Max 255 characters.
    */
   title?: string | null;
 }
