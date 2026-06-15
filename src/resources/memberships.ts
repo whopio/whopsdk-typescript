@@ -294,7 +294,7 @@ export interface MembershipListResponse {
 
   /**
    * Custom key-value pairs for the membership (commonly used for software licensing,
-   * e.g., HWID). Max 50 keys, 500 chars per key, 5000 chars per value.
+   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -387,7 +387,8 @@ export namespace MembershipListResponse {
 
     /**
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events.
+     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+     * string value.
      */
     metadata: { [key: string]: unknown } | null;
   }
@@ -403,7 +404,8 @@ export namespace MembershipListResponse {
 
     /**
      * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events.
+     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+     * string value.
      */
     metadata: { [key: string]: unknown } | null;
 
