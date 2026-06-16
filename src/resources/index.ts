@@ -497,6 +497,8 @@ export {
   type ResolutionCenterCaseCreatedWebhookEvent,
   type ResolutionCenterCaseUpdatedWebhookEvent,
   type ResolutionCenterCaseDecidedWebhookEvent,
+  type ChatMessageCreatedWebhookEvent,
+  type ChatReactionCreatedWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PaymentFailedWebhookEvent,

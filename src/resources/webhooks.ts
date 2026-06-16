@@ -230,6 +230,8 @@ export type WebhookEvent =
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
   | 'resolution_center_case.decided'
+  | 'chat.message.created'
+  | 'chat.reaction.created'
   | 'payment.created'
   | 'payment.succeeded'
   | 'payment.failed'
@@ -3466,6 +3468,131 @@ export namespace ResolutionCenterCaseDecidedWebhookEvent {
   }
 }
 
+export interface ChatMessageCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  data: ChatMessageCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'chat.message.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ChatMessageCreatedWebhookEvent {
+  export interface Data {
+    audience: Data.Audience;
+
+    channel: Data.Channel;
+
+    /**
+     * A message sent within an experience chat, direct message, or group chat.
+     */
+    message: Shared.Message;
+
+    reason: string;
+  }
+
+  export namespace Data {
+    export interface Audience {
+      type: 'channel' | 'users';
+
+      user_ids?: Array<string> | null;
+    }
+
+    export interface Channel {
+      id: string;
+
+      type: 'chat' | 'direct_message' | 'support';
+
+      experience_id?: string | null;
+    }
+  }
+}
+
+export interface ChatReactionCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  data: ChatReactionCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'chat.reaction.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ChatReactionCreatedWebhookEvent {
+  export interface Data {
+    audience: Data.Audience;
+
+    channel: Data.Channel;
+
+    /**
+     * A message sent within an experience chat, direct message, or group chat.
+     */
+    message: Shared.Message;
+
+    /**
+     * A single reaction left by a user on a feed post, such as a like or emoji.
+     */
+    reaction: Shared.Reaction;
+
+    reason: string;
+  }
+
+  export namespace Data {
+    export interface Audience {
+      type: 'channel' | 'users';
+
+      user_ids?: Array<string> | null;
+    }
+
+    export interface Channel {
+      id: string;
+
+      type: 'chat' | 'direct_message' | 'support';
+
+      experience_id?: string | null;
+    }
+  }
+}
+
 export interface PaymentCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -4611,6 +4738,8 @@ export type UnwrapWebhookEvent =
   | ResolutionCenterCaseCreatedWebhookEvent
   | ResolutionCenterCaseUpdatedWebhookEvent
   | ResolutionCenterCaseDecidedWebhookEvent
+  | ChatMessageCreatedWebhookEvent
+  | ChatReactionCreatedWebhookEvent
   | PaymentCreatedWebhookEvent
   | PaymentSucceededWebhookEvent
   | PaymentFailedWebhookEvent
@@ -4742,6 +4871,8 @@ export declare namespace Webhooks {
     type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
     type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
     type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
+    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,

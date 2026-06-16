@@ -469,6 +469,8 @@ import {
 } from './resources/verifications';
 import {
   APIVersion,
+  ChatMessageCreatedWebhookEvent,
+  ChatReactionCreatedWebhookEvent,
   CourseLessonInteractionCompletedWebhookEvent,
   DisputeAlertCreatedWebhookEvent,
   DisputeCreatedWebhookEvent,
@@ -1685,6 +1687,8 @@ export declare namespace Whop {
     type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
     type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
     type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
+    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
