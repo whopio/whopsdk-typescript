@@ -101,7 +101,7 @@ export interface BountyCreateResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -161,7 +161,7 @@ export interface BountyRetrieveResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -221,7 +221,7 @@ export interface BountyListResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -319,6 +319,23 @@ export interface BountyCreateParams {
    * omitted.
    */
   post_title?: string | null;
+
+  /**
+   * How often a scheduled bounty republishes a new bounty.
+   */
+  scheduled_frequency?: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly' | null;
+
+  /**
+   * When to publish the bounty. When provided, the bounty is created as a hidden
+   * draft and published at this time instead of immediately. Must be in the future.
+   */
+  scheduled_publish_at?: string | null;
+
+  /**
+   * The IANA timezone used for recurring occurrences. Required when
+   * scheduled_publish_at is provided.
+   */
+  scheduled_timezone?: string | null;
 }
 
 export interface BountyListParams extends CursorPageParams {
@@ -351,7 +368,7 @@ export interface BountyListParams extends CursorPageParams {
   /**
    * The available bounty statuses to choose from.
    */
-  status?: 'published' | 'archived' | null;
+  status?: 'published' | 'archived' | 'scheduled' | null;
 }
 
 export declare namespace Bounties {
