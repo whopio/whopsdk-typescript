@@ -104,6 +104,12 @@ export interface SetupIntent {
    * The current status of the setup intent.
    */
   status: SetupIntentStatus;
+
+  /**
+   * Whether 3D Secure authentication was completed when this payment method was set
+   * up.
+   */
+  three_ds_verified: boolean;
 }
 
 export namespace SetupIntent {

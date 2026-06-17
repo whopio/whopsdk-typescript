@@ -2580,6 +2580,11 @@ export interface Payment {
   tax_refunded_amount: number | null;
 
   /**
+   * Whether 3D Secure authentication was completed for this payment.
+   */
+  three_ds_verified: boolean;
+
+  /**
    * The total to show to the creator (excluding buyer fees).
    */
   total: number | null;
