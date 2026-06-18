@@ -1526,7 +1526,7 @@ export namespace IdentityProfileApprovedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
      * country of citizenship or residence reported by the identity provider; for
      * businesses this is the country of incorporation.
      */
@@ -1792,7 +1792,7 @@ export namespace IdentityProfileRejectedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
      * country of citizenship or residence reported by the identity provider; for
      * businesses this is the country of incorporation.
      */
@@ -2058,7 +2058,7 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
      * country of citizenship or residence reported by the identity provider; for
      * businesses this is the country of incorporation.
      */
@@ -2324,7 +2324,7 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
+     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
      * country of citizenship or residence reported by the identity provider; for
      * businesses this is the country of incorporation.
      */
