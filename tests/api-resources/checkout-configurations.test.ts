@@ -78,7 +78,6 @@ describe('resource checkoutConfigurations', () => {
         visibility: 'visible',
       },
       affiliate_code: 'affiliate_code',
-      allow_promo_codes: true,
       checkout_styling: {
         background_color: 'background_color',
         border_style: 'rounded',
@@ -94,7 +93,6 @@ describe('resource checkoutConfigurations', () => {
         include_platform_defaults: true,
       },
       redirect_url: 'redirect_url',
-      source_url: 'source_url',
     });
   });
 

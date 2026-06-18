@@ -94,12 +94,6 @@ export interface CheckoutConfigurationListResponse {
   affiliate_code: string | null;
 
   /**
-   * Whether the checkout configuration allows promo codes. When false, the promo
-   * code input is hidden and promo codes are rejected.
-   */
-  allow_promo_codes: boolean;
-
-  /**
    * The ID of the company to use for the checkout configuration
    */
   company_id: string;
@@ -268,12 +262,6 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
-     * Whether the checkout should show the promo code input field and accept promo
-     * codes. Defaults to true.
-     */
-    allow_promo_codes?: boolean | null;
-
-    /**
      * Checkout styling overrides for this session. Overrides plan and company
      * defaults.
      */
@@ -301,11 +289,6 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
-
-    /**
-     * The URL of the page where the checkout is being initiated from.
-     */
-    source_url?: string | null;
   }
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlan {
@@ -654,12 +637,6 @@ export declare namespace CheckoutConfigurationCreateParams {
     affiliate_code?: string | null;
 
     /**
-     * Whether the checkout should show the promo code input field and accept promo
-     * codes. Defaults to true.
-     */
-    allow_promo_codes?: boolean | null;
-
-    /**
      * Checkout styling overrides for this session. Overrides plan and company
      * defaults.
      */
@@ -687,11 +664,6 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
-
-    /**
-     * The URL of the page where the checkout is being initiated from.
-     */
-    source_url?: string | null;
   }
 
   export namespace CreateCheckoutSessionInputModePaymentWithPlanID {
@@ -760,12 +732,6 @@ export declare namespace CheckoutConfigurationCreateParams {
     mode: 'setup';
 
     /**
-     * Whether the checkout should show the promo code input field and accept promo
-     * codes. Defaults to true.
-     */
-    allow_promo_codes?: boolean | null;
-
-    /**
      * Checkout styling overrides for this session. Overrides plan and company
      * defaults.
      */
@@ -791,11 +757,6 @@ export declare namespace CheckoutConfigurationCreateParams {
      * The URL to redirect the user to after checkout is completed.
      */
     redirect_url?: string | null;
-
-    /**
-     * The URL of the page where the checkout is being initiated from.
-     */
-    source_url?: string | null;
 
     /**
      * The 3D Secure behavior for a plan.
