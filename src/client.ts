@@ -21,29 +21,8 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
-import {
-  AdCampaign,
-  AdCampaignListParams,
-  AdCampaignListResponse,
-  AdCampaignListResponsesCursorPage,
-  AdCampaignPlatform,
-  AdCampaignRetrieveParams,
-  AdCampaignStatus,
-  AdCampaignUpdateParams,
-  AdCampaigns,
-} from './resources/ad-campaigns';
-import {
-  AdBudgetType,
-  AdGroup,
-  AdGroupDeleteResponse,
-  AdGroupListParams,
-  AdGroupListResponse,
-  AdGroupListResponsesCursorPage,
-  AdGroupRetrieveParams,
-  AdGroupStatus,
-  AdGroupUpdateParams,
-  AdGroups,
-} from './resources/ad-groups';
+import { AdCampaigns } from './resources/ad-campaigns';
+import { AdGroups } from './resources/ad-groups';
 import {
   AdReportRetrieveParams,
   AdReportRetrieveResponse,
@@ -51,15 +30,7 @@ import {
   Granularities,
   ResultLabelKeys,
 } from './resources/ad-reports';
-import {
-  Ad,
-  AdListParams,
-  AdListResponse,
-  AdListResponsesCursorPage,
-  AdRetrieveParams,
-  Ads,
-  ExternalAdStatus,
-} from './resources/ads';
+import { Ads } from './resources/ads';
 import {
   AIChat,
   AIChatCreateParams,
@@ -1515,17 +1486,8 @@ export class Whop {
    * Bounties
    */
   bounties: API.Bounties = new API.Bounties(this);
-  /**
-   * Ad campaigns
-   */
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
-  /**
-   * Ad groups
-   */
   adGroups: API.AdGroups = new API.AdGroups(this);
-  /**
-   * Ads
-   */
   ads: API.Ads = new API.Ads(this);
   /**
    * Conversions
@@ -2157,40 +2119,11 @@ export declare namespace Whop {
     type BountyListParams as BountyListParams,
   };
 
-  export {
-    AdCampaigns as AdCampaigns,
-    type AdCampaign as AdCampaign,
-    type AdCampaignPlatform as AdCampaignPlatform,
-    type AdCampaignStatus as AdCampaignStatus,
-    type AdCampaignListResponse as AdCampaignListResponse,
-    type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
-    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
-    type AdCampaignUpdateParams as AdCampaignUpdateParams,
-    type AdCampaignListParams as AdCampaignListParams,
-  };
+  export { AdCampaigns as AdCampaigns };
 
-  export {
-    AdGroups as AdGroups,
-    type AdBudgetType as AdBudgetType,
-    type AdGroup as AdGroup,
-    type AdGroupStatus as AdGroupStatus,
-    type AdGroupListResponse as AdGroupListResponse,
-    type AdGroupDeleteResponse as AdGroupDeleteResponse,
-    type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
-    type AdGroupRetrieveParams as AdGroupRetrieveParams,
-    type AdGroupUpdateParams as AdGroupUpdateParams,
-    type AdGroupListParams as AdGroupListParams,
-  };
+  export { AdGroups as AdGroups };
 
-  export {
-    Ads as Ads,
-    type Ad as Ad,
-    type ExternalAdStatus as ExternalAdStatus,
-    type AdListResponse as AdListResponse,
-    type AdListResponsesCursorPage as AdListResponsesCursorPage,
-    type AdRetrieveParams as AdRetrieveParams,
-    type AdListParams as AdListParams,
-  };
+  export { Ads as Ads };
 
   export {
     Conversions as Conversions,

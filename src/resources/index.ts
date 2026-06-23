@@ -14,29 +14,8 @@ export {
 } from './ai-chats';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
-export {
-  AdCampaigns,
-  type AdCampaign,
-  type AdCampaignPlatform,
-  type AdCampaignStatus,
-  type AdCampaignListResponse,
-  type AdCampaignRetrieveParams,
-  type AdCampaignUpdateParams,
-  type AdCampaignListParams,
-  type AdCampaignListResponsesCursorPage,
-} from './ad-campaigns';
-export {
-  AdGroups,
-  type AdBudgetType,
-  type AdGroup,
-  type AdGroupStatus,
-  type AdGroupListResponse,
-  type AdGroupDeleteResponse,
-  type AdGroupRetrieveParams,
-  type AdGroupUpdateParams,
-  type AdGroupListParams,
-  type AdGroupListResponsesCursorPage,
-} from './ad-groups';
+export { AdCampaigns } from './ad-campaigns';
+export { AdGroups } from './ad-groups';
 export {
   AdReports,
   type Granularities,
@@ -44,15 +23,7 @@ export {
   type AdReportRetrieveResponse,
   type AdReportRetrieveParams,
 } from './ad-reports';
-export {
-  Ads,
-  type Ad,
-  type ExternalAdStatus,
-  type AdListResponse,
-  type AdRetrieveParams,
-  type AdListParams,
-  type AdListResponsesCursorPage,
-} from './ads';
+export { Ads } from './ads';
 export {
   Affiliates,
   type Affiliate,
