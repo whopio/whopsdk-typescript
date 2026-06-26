@@ -276,6 +276,7 @@ export type CardBrands =
   | 'hipercard'
   | 'jcblankapay'
   | 'cmi'
+  | 'aura'
   | 'unknown';
 
 /**
