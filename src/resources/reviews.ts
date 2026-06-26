@@ -130,7 +130,7 @@ export namespace ReviewRetrieveResponse {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -156,7 +156,7 @@ export namespace ReviewRetrieveResponse {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 
@@ -287,7 +287,7 @@ export namespace ReviewListResponse {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 

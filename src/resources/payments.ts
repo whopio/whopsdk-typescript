@@ -841,15 +841,15 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
      */
     metadata: { [key: string]: unknown } | null;
 
     /**
-     * The URL slug used in the product's public link (e.g., 'my-product' in
-     * whop.com/company/my-product).
+     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+     * whop.com/company/pickaxe-analytics.
      */
     route: string;
 

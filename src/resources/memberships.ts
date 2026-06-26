@@ -403,9 +403,9 @@ export namespace MembershipListResponse {
     id: string;
 
     /**
-     * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
      */
     metadata: { [key: string]: unknown } | null;
 

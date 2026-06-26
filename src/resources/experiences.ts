@@ -266,7 +266,7 @@ export namespace ExperienceListResponse {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 

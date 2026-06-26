@@ -989,7 +989,7 @@ export namespace LedgerAccountFundsAvailableWebhookEvent {
       id: string;
 
       /**
-       * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+       * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
        */
       route: string;
 
@@ -1526,9 +1526,9 @@ export namespace IdentityProfileApprovedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -1792,9 +1792,9 @@ export namespace IdentityProfileRejectedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -2058,9 +2058,9 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -2324,9 +2324,9 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-2 country code (e.g. `US`, `GB`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -4065,9 +4065,9 @@ export namespace RefundCreatedWebhookEvent {
         id: string;
 
         /**
-         * Custom key-value pairs stored on the product. Included in webhook payloads for
-         * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-         * string value.
+         * Custom key-value pairs stored on the product and included in payment and
+         * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+         * per string value.
          */
         metadata: { [key: string]: unknown } | null;
       }
@@ -4375,9 +4375,9 @@ export namespace RefundUpdatedWebhookEvent {
         id: string;
 
         /**
-         * Custom key-value pairs stored on the product. Included in webhook payloads for
-         * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-         * string value.
+         * Custom key-value pairs stored on the product and included in payment and
+         * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+         * per string value.
          */
         metadata: { [key: string]: unknown } | null;
       }

@@ -269,7 +269,7 @@ export namespace Dispute {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -315,7 +315,7 @@ export namespace Dispute {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -514,7 +514,7 @@ export namespace Dispute {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -545,7 +545,7 @@ export namespace Dispute {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 

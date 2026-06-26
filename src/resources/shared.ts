@@ -551,8 +551,8 @@ export namespace CheckoutConfiguration {
     adaptive_pricing_enabled: boolean;
 
     /**
-     * The number of days between each recurring charge. Null for one-time plans. For
-     * example, 30 for monthly or 365 for annual billing.
+     * Number of days between recurring charges, such as 30 for monthly or 365 for
+     * annual. `null` for one-time plans.
      */
     billing_period: number | null;
 
@@ -563,8 +563,8 @@ export namespace CheckoutConfiguration {
     currency: Shared.Currency;
 
     /**
-     * The number of days until the membership expires (for expiration-based plans).
-     * For example, 365 for a one-year access pass.
+     * Access duration in days for expiration-based plans, such as 365 for a one-year
+     * pass.
      */
     expiration_days: number | null;
 
@@ -582,8 +582,8 @@ export namespace CheckoutConfiguration {
     plan_type: Shared.PlanType;
 
     /**
-     * The method used to sell this plan: 'buy_now' for immediate purchase or
-     * 'waitlist' for waitlist-based access.
+     * Sales method for this plan: `buy_now` for immediate purchase or `waitlist` for
+     * waitlist-based access.
      */
     release_method: Shared.ReleaseMethod;
 
@@ -599,9 +599,8 @@ export namespace CheckoutConfiguration {
     three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
     /**
-     * The number of free trial days before the first charge on a renewal plan. Null if
-     * no trial is configured or the current user has already used a trial for this
-     * plan.
+     * Free trial days before first renewal charge. `null` if no trial is configured or
+     * the user has already used a trial for this plan.
      */
     trial_period_days: number | null;
 
@@ -680,7 +679,7 @@ export interface Company {
   published_reviews_count: number;
 
   /**
-   * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+   * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
    */
   route: string;
 
@@ -1348,7 +1347,7 @@ export namespace Experience {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 
@@ -1381,8 +1380,8 @@ export namespace Experience {
     id: string;
 
     /**
-     * The URL slug used in the product's public link (e.g., 'my-product' in
-     * whop.com/company/my-product).
+     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+     * whop.com/company/pickaxe-analytics.
      */
     route: string;
 
@@ -1542,7 +1541,7 @@ export namespace ForumPost {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -2065,9 +2064,9 @@ export namespace Membership {
     id: string;
 
     /**
-     * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
      */
     metadata: { [key: string]: unknown } | null;
 
@@ -2924,15 +2923,15 @@ export namespace Payment {
     id: string;
 
     /**
-     * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
      */
     metadata: { [key: string]: unknown } | null;
 
     /**
-     * The URL slug used in the product's public link (e.g., 'my-product' in
-     * whop.com/company/my-product).
+     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+     * whop.com/company/pickaxe-analytics.
      */
     route: string;
 
@@ -3087,8 +3086,7 @@ export interface Product {
   created_at: string;
 
   /**
-   * The call-to-action button label displayed on the product's purchase page (e.g.,
-   * 'join', 'buy', 'subscribe').
+   * Call-to-action button label shown on the product purchase page.
    */
   custom_cta: CustomCta;
 
@@ -3099,9 +3097,8 @@ export interface Product {
   custom_cta_url: string | null;
 
   /**
-   * A custom text label that appears on the customer's bank or credit card statement
-   * for purchases of this product. Maximum 22 characters, including the required
-   * prefix WHOP\*.
+   * Custom bank statement descriptor for product purchases. Maximum 22 characters,
+   * including required `WHOP*` prefix.
    */
   custom_statement_descriptor: string | null;
 
@@ -3112,9 +3109,8 @@ export interface Product {
   description: string | null;
 
   /**
-   * A unique identifier used to create or update products via the API. When provided
-   * on product creation endpoints, an existing product with this identifier will be
-   * updated instead of creating a new one.
+   * External identifier for the product. Providing it on a product creation endpoint
+   * updates the existing product with this identifier instead of creating a new one.
    */
   external_identifier: string | null;
 
@@ -3124,8 +3120,8 @@ export interface Product {
   gallery_images: Array<Product.GalleryImage>;
 
   /**
-   * The commission rate (as a percentage) that affiliates earn on sales through the
-   * Whop marketplace global affiliate program. Null if the program is not active.
+   * Marketplace affiliate commission percentage for this product, or `null` if
+   * program is inactive.
    */
   global_affiliate_percentage: number | null;
 
@@ -3141,9 +3137,8 @@ export interface Product {
   headline: string | null;
 
   /**
-   * The commission rate (as a percentage) that existing members earn when referring
-   * new customers through the member affiliate program. Null if the program is not
-   * active.
+   * Member referral commission percentage for this product, or `null` if program is
+   * inactive.
    */
   member_affiliate_percentage: number | null;
 
@@ -3153,15 +3148,15 @@ export interface Product {
   member_affiliate_status: GlobalAffiliateStatus;
 
   /**
-   * The number of users who currently hold an active membership to this product.
-   * Returns 0 if the company has disabled public member counts.
+   * Active memberships for this product. Returns `0` if the account has disabled
+   * public member counts.
    */
   member_count: number;
 
   /**
-   * Custom key-value pairs stored on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-   * string value.
+   * Custom key-value pairs stored on the product and included in payment and
+   * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+   * per string value.
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -3182,8 +3177,8 @@ export interface Product {
   published_reviews_count: number;
 
   /**
-   * The URL slug used in the product's public link (e.g., 'my-product' in
-   * whop.com/company/my-product).
+   * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+   * whop.com/company/pickaxe-analytics.
    */
   route: string;
 
@@ -3221,7 +3216,7 @@ export namespace Product {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 
@@ -3282,13 +3277,13 @@ export namespace Product {
     id: string;
 
     /**
-     * The human-readable name of this tax classification (e.g., 'Digital - SaaS').
+     * Human-readable name of this tax classification, such as 'Digital - SaaS'.
      */
     name: string;
 
     /**
-     * The broad product category this tax code covers (e.g., physical goods, digital
-     * services).
+     * Broad product category this tax code covers, such as physical goods or digital
+     * services.
      */
     product_type: 'physical' | 'digital' | 'services';
   }
@@ -3310,9 +3305,8 @@ export interface ProductListItem {
   created_at: string;
 
   /**
-   * A unique identifier used to create or update products via the API. When provided
-   * on product creation endpoints, an existing product with this identifier will be
-   * updated instead of creating a new one.
+   * External identifier for the product. Providing it on a product creation endpoint
+   * updates the existing product with this identifier instead of creating a new one.
    */
   external_identifier: string | null;
 
@@ -3322,15 +3316,15 @@ export interface ProductListItem {
   headline: string | null;
 
   /**
-   * The number of users who currently hold an active membership to this product.
-   * Returns 0 if the company has disabled public member counts.
+   * Active memberships for this product. Returns `0` if the account has disabled
+   * public member counts.
    */
   member_count: number;
 
   /**
-   * Custom key-value pairs stored on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-   * string value.
+   * Custom key-value pairs stored on the product and included in payment and
+   * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+   * per string value.
    */
   metadata: { [key: string]: unknown } | null;
 
@@ -3340,8 +3334,8 @@ export interface ProductListItem {
   published_reviews_count: number;
 
   /**
-   * The URL slug used in the product's public link (e.g., 'my-product' in
-   * whop.com/company/my-product).
+   * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+   * whop.com/company/pickaxe-analytics.
    */
   route: string;
 
