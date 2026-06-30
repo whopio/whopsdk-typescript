@@ -426,6 +426,11 @@ export declare namespace InvoiceCreateParams {
      */
     export interface Plan {
       /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
@@ -776,6 +781,11 @@ export declare namespace InvoiceCreateParams {
      * invoice.
      */
     export interface Plan {
+      /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
+
       /**
        * The interval in days at which the plan charges (renewal plans).
        */
@@ -1161,6 +1171,11 @@ export namespace InvoiceUpdateParams {
    * Updated plan attributes.
    */
   export interface Plan {
+    /**
+     * Whether this plan accepts local currency payments via adaptive pricing.
+     */
+    adaptive_pricing_enabled?: boolean | null;
+
     /**
      * The interval in days at which the plan charges (renewal plans).
      */
