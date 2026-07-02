@@ -297,6 +297,11 @@ export namespace AuthorizedUserCreateParams {
     credential_id?: string | null;
 
     /**
+     * The 6-digit code emailed to the user.
+     */
+    email_code?: string | null;
+
+    /**
      * The WebAuthn signature (base64).
      */
     signature?: string | null;

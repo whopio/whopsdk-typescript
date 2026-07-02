@@ -572,6 +572,12 @@ export interface PaymentListResponse {
   settlement_currency: Shared.Currency;
 
   /**
+   * The shipping address provided by the customer for physical goods. Null if no
+   * shipping address was collected.
+   */
+  shipping_address: PaymentListResponse.ShippingAddress | null;
+
+  /**
    * The status of a receipt
    */
   status: Shared.ReceiptStatus | null;
@@ -895,6 +901,47 @@ export namespace PaymentListResponse {
      * The type (% or flat amount) of the promo.
      */
     promo_type: Shared.PromoType;
+  }
+
+  /**
+   * The shipping address provided by the customer for physical goods. Null if no
+   * shipping address was collected.
+   */
+  export interface ShippingAddress {
+    /**
+     * The city of the address.
+     */
+    city: string | null;
+
+    /**
+     * The country of the address.
+     */
+    country: string | null;
+
+    /**
+     * The line 1 of the address.
+     */
+    line1: string | null;
+
+    /**
+     * The line 2 of the address.
+     */
+    line2: string | null;
+
+    /**
+     * The name of the customer.
+     */
+    name: string | null;
+
+    /**
+     * The postal code of the address.
+     */
+    postal_code: string | null;
+
+    /**
+     * The state of the address.
+     */
+    state: string | null;
   }
 
   /**
