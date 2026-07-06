@@ -1058,6 +1058,13 @@ export declare namespace PaymentCreateParams {
      * Custom metadata to attach to the payment.
      */
     metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
   }
 
   export namespace CreatePaymentInputWithPlan {
@@ -1249,6 +1256,13 @@ export declare namespace PaymentCreateParams {
      * Custom metadata to attach to the payment.
      */
     metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
   }
 }
 

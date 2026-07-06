@@ -62,6 +62,7 @@ describe('resource payments', () => {
         visibility: 'visible',
       },
       metadata: { foo: 'bar' },
+      promo_code_id: 'promo_xxxxxxxxxxxx',
     });
   });
 

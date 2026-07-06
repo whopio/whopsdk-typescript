@@ -3027,7 +3027,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     stainlessPath: '(resource) payments > (method) create',
     qualified: 'client.payments.create',
     params: [
-      "{ company_id: string; member_id: string; payment_method_id: string; plan: { currency: string; application_fee_amount?: number; billing_period?: number; description?: string; expiration_days?: number; force_create_new_plan?: boolean; initial_price?: number; internal_notes?: string; plan_type?: 'renewal' | 'one_time'; product?: { external_identifier: string; title: string; collect_shipping_address?: boolean; custom_statement_descriptor?: string; description?: string; global_affiliate_percentage?: number; global_affiliate_status?: 'enabled' | 'disabled'; headline?: string; product_tax_code_id?: string; redirect_purchase_url?: string; route?: string; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id?: string; renewal_price?: number; title?: string; trial_period_days?: number; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; metadata?: object; } | { company_id: string; member_id: string; payment_method_id: string; plan_id: string; metadata?: object; };",
+      "{ company_id: string; member_id: string; payment_method_id: string; plan: { currency: string; application_fee_amount?: number; billing_period?: number; description?: string; expiration_days?: number; force_create_new_plan?: boolean; initial_price?: number; internal_notes?: string; plan_type?: 'renewal' | 'one_time'; product?: { external_identifier: string; title: string; collect_shipping_address?: boolean; custom_statement_descriptor?: string; description?: string; global_affiliate_percentage?: number; global_affiliate_status?: 'enabled' | 'disabled'; headline?: string; product_tax_code_id?: string; redirect_purchase_url?: string; route?: string; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; product_id?: string; renewal_price?: number; title?: string; trial_period_days?: number; visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link'; }; metadata?: object; promo_code_id?: string; } | { company_id: string; member_id: string; payment_method_id: string; plan_id: string; metadata?: object; promo_code_id?: string; };",
     ],
     response: 'object',
     perLanguage: {
@@ -3048,7 +3048,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.whop.com/api/v1/payments \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "member_id": "mber_xxxxxxxxxxxxx",\n          "payment_method_id": "pmt_xxxxxxxxxxxxxx",\n          "plan": {\n            "currency": "usd"\n          }\n        }\'',
+          'curl https://api.whop.com/api/v1/payments \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "company_id": "biz_xxxxxxxxxxxxxx",\n          "member_id": "mber_xxxxxxxxxxxxx",\n          "payment_method_id": "pmt_xxxxxxxxxxxxxx",\n          "plan": {\n            "currency": "usd"\n          },\n          "promo_code_id": "promo_xxxxxxxxxxxx"\n        }\'',
       },
     },
   },
