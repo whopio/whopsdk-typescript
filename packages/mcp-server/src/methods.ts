@@ -1134,12 +1134,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/bounties',
   },
   {
-    clientCallName: 'client.conversions.create',
-    fullyQualifiedName: 'conversions.create',
-    httpMethod: 'post',
-    httpPath: '/conversions',
-  },
-  {
     clientCallName: 'client.adReports.retrieve',
     fullyQualifiedName: 'adReports.retrieve',
     httpMethod: 'get',

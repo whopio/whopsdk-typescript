@@ -105,7 +105,7 @@ export {
   type CompanyTokenTransactionListParams,
   type CompanyTokenTransactionListResponsesCursorPage,
 } from './company-token-transactions';
-export { Conversions, type ConversionCreateResponse, type ConversionCreateParams } from './conversions';
+export { Conversions } from './conversions';
 export {
   CourseChapters,
   type CourseChapter,

@@ -882,14 +882,6 @@ Methods:
 
 # Conversions
 
-Types:
-
-- <code><a href="./src/resources/conversions.ts">ConversionCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /conversions">client.conversions.<a href="./src/resources/conversions.ts">create</a>({ ...params }) -> ConversionCreateResponse</code>
-
 # AdReports
 
 Types:

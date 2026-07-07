@@ -296,7 +296,6 @@ const fuse = new Fuse(
     'client.bounties.create',
     'client.bounties.list',
     'client.bounties.retrieve',
-    'client.conversions.create',
     'client.adReports.retrieve',
   ],
   { threshold: 1, shouldSort: true },

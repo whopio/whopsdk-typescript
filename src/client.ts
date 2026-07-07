@@ -112,7 +112,7 @@ import {
   CompanyTokenTransactionType,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
-import { ConversionCreateParams, ConversionCreateResponse, Conversions } from './resources/conversions';
+import { Conversions } from './resources/conversions';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -1489,9 +1489,6 @@ export class Whop {
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
   adGroups: API.AdGroups = new API.AdGroups(this);
   ads: API.Ads = new API.Ads(this);
-  /**
-   * Conversions
-   */
   conversions: API.Conversions = new API.Conversions(this);
   /**
    * Ad reports
@@ -2125,11 +2122,7 @@ export declare namespace Whop {
 
   export { Ads as Ads };
 
-  export {
-    Conversions as Conversions,
-    type ConversionCreateResponse as ConversionCreateResponse,
-    type ConversionCreateParams as ConversionCreateParams,
-  };
+  export { Conversions as Conversions };
 
   export {
     AdReports as AdReports,
