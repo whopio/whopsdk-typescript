@@ -154,7 +154,7 @@ export interface AppBuildCreateParams {
   /**
    * The build file to upload. For iOS and Android, this should be a .zip archive
    * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file.
+   * this should be a JavaScript file or a .zip archive of the hosted site.
    */
   attachment: AppBuildCreateParams.Attachment;
 
@@ -191,7 +191,7 @@ export namespace AppBuildCreateParams {
   /**
    * The build file to upload. For iOS and Android, this should be a .zip archive
    * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file.
+   * this should be a JavaScript file or a .zip archive of the hosted site.
    */
   export interface Attachment {
     /**

@@ -165,6 +165,12 @@ export interface AppListResponse {
   experience_path: string | null;
 
   /**
+   * The full canonical URL where this app's hosted web build is served. Null if the
+   * app has not claimed a route.
+   */
+  hosted_url: string | null;
+
+  /**
    * The icon image for this app, displayed on the app store, product pages,
    * checkout, and as the default icon for experiences using this app.
    */
@@ -188,6 +194,12 @@ export interface AppListResponse {
    * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
    */
   origin: string | null;
+
+  /**
+   * The unique subdomain route where this app's hosted web builds are served, such
+   * as 'myapp' for myapp.whop.app. Null if the app has not claimed a route.
+   */
+  route: string | null;
 
   /**
    * The URL path template for a specific view of this app, appended to the base
@@ -287,6 +299,12 @@ export interface AppCreateParams {
    * authorizing the app.
    */
   redirect_uris?: Array<string> | null;
+
+  /**
+   * The unique subdomain route where the app's hosted web builds are served, such as
+   * 'myapp' for myapp.whop.app.
+   */
+  route?: string | null;
 }
 
 export namespace AppCreateParams {
@@ -370,6 +388,12 @@ export interface AppUpdateParams {
    * The permission scopes the app will request from users when they install it.
    */
   required_scopes?: Array<'read_user'> | null;
+
+  /**
+   * The unique subdomain route where the app's hosted web builds are served, such as
+   * 'myapp' for myapp.whop.app.
+   */
+  route?: string | null;
 
   /**
    * The URL path to the skills directory of the app, such as '/assets/skills/'.
