@@ -19,6 +19,7 @@ export class Apps extends APIResource {
    *
    * - `developer:create_app`
    * - `developer:manage_api_key`
+   * - `developer:update_app`
    *
    * @example
    * ```ts
@@ -38,6 +39,7 @@ export class Apps extends APIResource {
    * Required permissions:
    *
    * - `developer:manage_api_key`
+   * - `developer:update_app`
    *
    * @example
    * ```ts
@@ -394,6 +396,14 @@ export interface AppUpdateParams {
    * 'myapp' for myapp.whop.app.
    */
   route?: string | null;
+
+  /**
+   * Secrets to add or overwrite on the app, as an object of string values (e.g.
+   * {"MAIL_API_KEY": "..."}). Keys not included are left untouched. Pass null or an
+   * empty string as the value to delete a secret. Secrets are encrypted at rest and
+   * injected into the app's hosted server runtime as environment bindings.
+   */
+  secrets?: { [key: string]: unknown } | null;
 
   /**
    * The URL path to the skills directory of the app, such as '/assets/skills/'.

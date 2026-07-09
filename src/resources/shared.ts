@@ -148,6 +148,13 @@ export interface App {
   route: string | null;
 
   /**
+   * The app's secrets as an object of string values. Encrypted at rest and injected
+   * into the app's hosted server runtime as environment bindings. Requires the
+   * 'developer:update_app' permission.
+   */
+  secrets: { [key: string]: unknown } | null;
+
+  /**
    * The URL path template for a specific view of this app, appended to the base
    * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
    * not configured.

@@ -77,6 +77,7 @@ describe('resource apps', () => {
           redirect_uris: ['string'],
           required_scopes: ['read_user'],
           route: 'route',
+          secrets: { foo: 'bar' },
           skills_path: 'skills_path',
           status: 'live',
         },
