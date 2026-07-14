@@ -41,10 +41,12 @@ export class Users extends APIResource {
   }
 
   /**
-   * Updates the authenticated user's global profile. Not available to API keys.
+   * Updates the authenticated user's global profile, or their profile override for
+   * an account when account_id is given. Not available to API keys.
    */
-  updateMe(body: UserUpdateMeParams, options?: RequestOptions): APIPromise<User> {
-    return this._client.patch('/users/me', { body, ...options });
+  updateMe(params: UserUpdateMeParams, options?: RequestOptions): APIPromise<User> {
+    const { account_id, ...body } = params;
+    return this._client.patch('/users/me', { query: { account_id }, body, ...options });
   }
 
   /**
@@ -115,6 +117,13 @@ export interface UserCheckAccessParams {
   id: string;
 }
 
+export interface UserCheckAccessParams {
+  /**
+   * The unique identifier or username of the user.
+   */
+  id: string;
+}
+
 export interface UserUpdateParams {
   /**
    * Query param: The account whose profile override to update. Required for API key
@@ -131,15 +140,51 @@ export interface UserUpdateParams {
    * Body param
    */
   name?: string;
+
+  /**
+   * Body param
+   */
+  profile_picture?: UserUpdateParams.ProfilePicture;
+
+  /**
+   * Body param
+   */
+  username?: string;
+}
+
+export namespace UserUpdateParams {
+  export interface ProfilePicture {
+    id?: string;
+
+    direct_upload_id?: string;
+  }
 }
 
 export interface UserUpdateMeParams {
+  /**
+   * Query param: When set, updates the authenticated user's profile override for
+   * this account instead of their global profile.
+   */
+  account_id?: string;
+
+  /**
+   * Body param
+   */
   bio?: string;
 
+  /**
+   * Body param
+   */
   name?: string;
 
+  /**
+   * Body param
+   */
   profile_picture?: UserUpdateMeParams.ProfilePicture;
 
+  /**
+   * Body param
+   */
   username?: string;
 }
 

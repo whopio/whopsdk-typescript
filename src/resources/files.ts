@@ -4,11 +4,21 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
+import type { ToFileInput, Uploadable } from '../core/uploads';
+import { uploadFile } from '../lib/upload-file';
 
 /**
  * Files
  */
 export class Files extends APIResource {
+  /**
+   * Create a new file record and receive a presigned URL for uploading content to
+   * S3.
+   */
+  create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
+    return this._client.post('/files', { body, ...options });
+  }
+
   /**
    * Retrieves the details of an existing file.
    */
@@ -17,17 +27,22 @@ export class Files extends APIResource {
   }
 
   /**
-   * Create a new file record and receive a presigned URL for uploading content to
-   * S3.
+   * Upload a file (create -> upload to presigned URL -> poll retrieve until ready).
+   *
+   * Polls for up to 2 minutes by default.
    */
-  create(body: FileCreateParams, options?: RequestOptions): APIPromise<FileCreateResponse> {
-    return this._client.post('/files', { body, ...options });
+  upload(file: Uploadable | ToFileInput, options?: FileUploadOptions): Promise<FileRetrieveResponse> {
+    const { filename, ...requestOptions } = options ?? {};
+    return uploadFile(this._client, file, {
+      filename,
+      requestOptions,
+    });
   }
 }
 
 /**
- * Controls whether an uploaded file is publicly accessible or requires
- * authentication to access.
+ * Visibility controls whether the file can be accessed publicly or only by
+ * authorized requests.
  */
 export type FileVisibility = 'public' | 'private';
 
@@ -78,14 +93,12 @@ export interface FileCreateResponse {
   upload_url: string | null;
 
   /**
-   * The URL for accessing the file. For public files, this is a permanent CDN URL.
-   * For private files, this is a signed URL that expires. Null if the file has not
-   * finished uploading.
+   * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
 
   /**
-   * Whether the file is publicly accessible or requires authentication.
+   * Whether the file is public or private.
    */
   visibility: FileVisibility;
 }
@@ -120,14 +133,12 @@ export interface FileRetrieveResponse {
   upload_status: UploadStatus;
 
   /**
-   * The URL for accessing the file. For public files, this is a permanent CDN URL.
-   * For private files, this is a signed URL that expires. Null if the file has not
-   * finished uploading.
+   * The CDN URL for accessing the file. Null if the file has not finished uploading.
    */
   url: string | null;
 
   /**
-   * Whether the file is publicly accessible or requires authentication.
+   * Whether the file is public or private.
    */
   visibility: FileVisibility;
 }
@@ -140,10 +151,16 @@ export interface FileCreateParams {
   filename: string;
 
   /**
-   * Controls whether an uploaded file is publicly accessible or requires
-   * authentication to access.
+   * Whether the file should be public or private.
    */
   visibility?: FileVisibility | null;
+}
+
+export interface FileUploadOptions extends RequestOptions {
+  /**
+   * Override the filename used when creating the file.
+   */
+  filename?: string | null | undefined;
 }
 
 export declare namespace Files {
@@ -153,5 +170,6 @@ export declare namespace Files {
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
     type FileCreateParams as FileCreateParams,
+    type FileUploadOptions as FileUploadOptions,
   };
 }

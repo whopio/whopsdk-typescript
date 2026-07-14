@@ -1,35 +1,16 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PlansAPI from './plans';
-import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Plans
- */
 export class Plans extends APIResource {
   /**
    * Returns a paginated list of plans belonging to a company, with optional
    * filtering by visibility, type, release method, and product.
-   *
-   * Required permissions:
-   *
-   * - `plan:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const planListResponse of client.plans.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: PlanListParams,
@@ -41,20 +22,6 @@ export class Plans extends APIResource {
   /**
    * Create a new pricing plan for a product. The plan defines the billing interval,
    * price, and availability for customers.
-   *
-   * Required permissions:
-   *
-   * - `plan:create`
-   * - `access_pass:basic:read`
-   * - `plan:basic:read`
-   *
-   * @example
-   * ```ts
-   * const plan = await client.plans.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   product_id: 'prod_xxxxxxxxxxxxx',
-   * });
-   * ```
    */
   create(body: PlanCreateParams, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.post('/plans', { body, ...options });
@@ -62,17 +29,6 @@ export class Plans extends APIResource {
 
   /**
    * Retrieves the details of an existing plan.
-   *
-   * Required permissions:
-   *
-   * - `plan:basic:read`
-   *
-   * @example
-   * ```ts
-   * const plan = await client.plans.retrieve(
-   *   'plan_xxxxxxxxxxxxx',
-   * );
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.get(path`/plans/${id}`, options);
@@ -81,42 +37,14 @@ export class Plans extends APIResource {
   /**
    * Update a plan's pricing, billing interval, visibility, stock, and other
    * settings.
-   *
-   * Required permissions:
-   *
-   * - `plan:update`
-   * - `access_pass:basic:read`
-   * - `plan:basic:read`
-   *
-   * @example
-   * ```ts
-   * const plan = await client.plans.update(
-   *   'plan_xxxxxxxxxxxxx',
-   * );
-   * ```
    */
-  update(
-    id: string,
-    body: PlanUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Plan> {
+  update(id: string, body: PlanUpdateParams, options?: RequestOptions): APIPromise<Shared.Plan> {
     return this._client.patch(path`/plans/${id}`, { body, ...options });
   }
 
   /**
    * Permanently delete a plan from a product. Existing memberships on this plan will
    * not be affected.
-   *
-   * Required permissions:
-   *
-   * - `plan:delete`
-   *
-   * @example
-   * ```ts
-   * const plan = await client.plans.delete(
-   *   'plan_xxxxxxxxxxxxx',
-   * );
-   * ```
    */
   delete(id: string, options?: RequestOptions): APIPromise<PlanDeleteResponse> {
     return this._client.delete(path`/plans/${id}`, options);
@@ -135,248 +63,153 @@ export type CheckoutFont = 'system' | 'roboto' | 'open_sans';
  */
 export type CheckoutShape = 'rounded' | 'pill' | 'rectangular';
 
-/**
- * A plan defines pricing and billing terms for a checkout. Plans can optionally
- * belong to a product, where they represent different pricing options such as
- * one-time payments, recurring subscriptions, or free trials.
- */
 export interface PlanListResponse {
   /**
-   * The unique identifier for the plan.
+   * The ID of the plan, which will look like plan\_******\*******
    */
   id: string;
 
   /**
-   * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
-   * does not check processor compatibility or feature flags.
+   * Whether this plan accepts local currency payments via adaptive pricing
    */
   adaptive_pricing_enabled: boolean;
 
   /**
-   * The number of days between each recurring charge. Null for one-time plans. For
-   * example, 30 for monthly or 365 for annual billing.
+   * The number of days between recurring charges. Null for one-time plans
    */
   billing_period: number | null;
 
   /**
-   * The company that sells this plan. Null for standalone invoice plans not linked
-   * to a company.
+   * The company that sells this plan, an object with an id and title. Null for
+   * standalone invoice plans
    */
-  company: PlanListResponse.Company | null;
+  company: unknown | null;
 
   /**
-   * The datetime the plan was created.
+   * When the plan was created, as an ISO 8601 timestamp
    */
   created_at: string;
 
   /**
-   * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
-   * amounts on the plan are denominated in this currency.
+   * The three-letter ISO currency code all prices on this plan are denominated in
    */
-  currency: Shared.Currency;
+  currency: string;
 
   /**
-   * A text description of the plan visible to customers. Maximum 1000 characters.
-   * Null if no description is set.
+   * A text description of the plan visible to customers
    */
   description: string | null;
 
   /**
-   * The number of days until the membership expires (for expiration-based plans).
-   * For example, 365 for a one-year access pass.
+   * The number of days until the membership expires, for expiration-based plans
    */
   expiration_days: number | null;
 
   /**
-   * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
-   * For one-time plans, this is the full price. For renewal plans, this is charged
-   * on top of the first renewal_price.
+   * The initial purchase price in the plan's currency
    */
   initial_price: number;
 
   /**
-   * Private notes visible only to the company owner and team members. Not shown to
-   * customers. Null if no notes have been added.
+   * Private notes visible only to authorized team members
    */
   internal_notes: string | null;
 
   /**
-   * The invoice this plan was generated for. Null if the plan was not created for a
-   * specific invoice.
+   * The invoice this plan was generated for, an object with an id. Null unless the
+   * plan was created for an invoice
    */
-  invoice: PlanListResponse.Invoice | null;
+  invoice: unknown | null;
 
   /**
-   * The number of users who currently hold an active membership through this plan.
-   * Only visible to authorized team members.
+   * The number of active memberships on this plan. Only visible to authorized team
+   * members
    */
   member_count: number | null;
 
   /**
-   * Custom key-value pairs stored on the plan. Included in webhook payloads for
-   * payment and membership events.
+   * Custom key-value pairs stored on the plan
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown | null;
 
   /**
-   * The explicit payment method configuration specifying which payment methods are
-   * enabled or disabled for this plan. Null if the plan uses default settings.
+   * The explicit payment method configuration for the plan, an object with enabled,
+   * disabled and include_platform_defaults. Null if the plan uses default settings
    */
-  payment_method_configuration: PlanListResponse.PaymentMethodConfiguration | null;
+  payment_method_configuration: unknown | null;
 
   /**
    * The billing model for this plan: 'renewal' for recurring subscriptions or
-   * 'one_time' for single payments.
+   * 'one_time' for single payments
    */
-  plan_type: Shared.PlanType;
+  plan_type: string;
 
   /**
-   * The product that this plan belongs to. Null for standalone one-off purchases not
-   * linked to a product.
+   * The product this plan belongs to, an object with an id and title. Null for
+   * standalone plans
    */
-  product: PlanListResponse.Product | null;
+  product: unknown | null;
 
   /**
-   * The full URL where customers can purchase this plan directly, bypassing the
-   * product page.
+   * The full URL where customers can purchase this plan directly
    */
   purchase_url: string;
 
   /**
-   * The method used to sell this plan: 'buy_now' for immediate purchase or
-   * 'waitlist' for waitlist-based access.
+   * The method used to sell this plan, e.g. 'buy_now' or 'waitlist'
    */
-  release_method: Shared.ReleaseMethod;
+  release_method: string;
 
   /**
-   * The recurring price charged every billing_period in the plan's base_currency
-   * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
+   * The recurring price charged every billing period in the plan's currency
    */
   renewal_price: number;
 
   /**
-   * The total number of installment payments required before the subscription
-   * pauses. Null if split pay is not configured. Must be greater than 1.
+   * The number of installment payments required before the subscription pauses
    */
   split_pay_required_payments: number | null;
 
   /**
    * The number of units available for purchase. Only visible to authorized team
-   * members. Null if the requester lacks permission.
+   * members
    */
   stock: number | null;
 
   /**
-   * The 3D Secure behavior for a plan.
+   * The 3D Secure behavior for this plan. Null means the plan inherits the account
+   * default
    */
-  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level: string | null;
 
   /**
-   * The display name of the plan shown to customers on the product page and at
-   * checkout. Maximum 30 characters. Null if no title has been set.
+   * The display name of the plan shown to customers
    */
   title: string | null;
 
   /**
-   * The number of free trial days before the first charge on a renewal plan. Null if
-   * no trial is configured or the current user has already used a trial for this
-   * plan.
+   * The number of free trial days before the first charge on a recurring plan
    */
   trial_period_days: number | null;
 
   /**
-   * When true, the plan has unlimited stock (stock field is ignored). When false,
-   * purchases are limited by the stock field.
+   * Whether the plan has unlimited stock
    */
   unlimited_stock: boolean;
 
   /**
-   * The datetime the plan was last updated.
+   * When the plan was last updated, as an ISO 8601 timestamp
    */
   updated_at: string;
 
   /**
-   * Controls whether the plan is visible to customers. When set to 'hidden', the
-   * plan is only accessible via direct link.
+   * Whether the plan is visible to customers or hidden from public view
    */
-  visibility: Shared.Visibility;
-}
-
-export namespace PlanListResponse {
-  /**
-   * The company that sells this plan. Null for standalone invoice plans not linked
-   * to a company.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The display name of the company shown to customers.
-     */
-    title: string;
-  }
-
-  /**
-   * The invoice this plan was generated for. Null if the plan was not created for a
-   * specific invoice.
-   */
-  export interface Invoice {
-    /**
-     * The unique identifier for the invoice.
-     */
-    id: string;
-  }
-
-  /**
-   * The explicit payment method configuration specifying which payment methods are
-   * enabled or disabled for this plan. Null if the plan uses default settings.
-   */
-  export interface PaymentMethodConfiguration {
-    /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
-     */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-    /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
-     */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-    /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
-     */
-    include_platform_defaults: boolean;
-  }
-
-  /**
-   * The product that this plan belongs to. Null for standalone one-off purchases not
-   * linked to a product.
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
+  visibility: string;
 }
 
 /**
- * Represents `true` or `false` values.
+ * Always true on success.
  */
 export type PlanDeleteResponse = boolean;
 
@@ -387,67 +220,62 @@ export interface PlanListParams extends CursorPageParams {
   company_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * A cursor; returns plans before this position.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return plans created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return plans created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * The number of plans to return (default and max 100).
    */
-  first?: number | null;
+  first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * The number of plans to return from the end of the range.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The ways a relation of Plans can be ordered
+   * The field to sort results by. Defaults to created_at.
    */
-  order?: 'id' | 'active_members_count' | 'created_at' | 'internal_notes' | 'expires_at' | null;
+  order?: 'id' | 'active_members_count' | 'created_at' | 'internal_notes' | 'expires_at';
 
   /**
    * Filter to only plans matching these billing types.
    */
-  plan_types?: Array<Shared.PlanType> | null;
+  plan_types?: Array<string>;
 
   /**
    * Filter to only plans belonging to these product identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
    * Filter to only plans matching these release methods.
    */
-  release_methods?: Array<Shared.ReleaseMethod> | null;
+  release_methods?: Array<string>;
 
   /**
    * Filter to only plans matching these visibility states.
    */
-  visibilities?: Array<Shared.VisibilityFilter> | null;
+  visibilities?: Array<string>;
 }
 
 export interface PlanCreateParams {
-  /**
-   * The unique identifier of the company to create this plan for.
-   */
-  company_id: string;
-
   /**
    * The unique identifier of the product to attach this plan to.
    */
@@ -465,18 +293,24 @@ export interface PlanCreateParams {
   billing_period?: number | null;
 
   /**
-   * Checkout styling overrides for this plan. Pass null to inherit from the company
-   * default.
+   * Checkout styling overrides for this plan.
    */
-  checkout_styling?: PlanCreateParams.CheckoutStyling | null;
+  checkout_styling?: unknown | null;
 
   /**
-   * The available currencies on the platform
+   * The unique identifier of the company to create this plan for. Defaults to the
+   * caller's company.
    */
-  currency?: Shared.Currency | null;
+  company_id?: string;
+
+  /**
+   * The three-letter ISO currency code for the plan's pricing. Defaults to USD.
+   */
+  currency?: string;
 
   /**
    * An array of custom field definitions to collect from customers at checkout.
+   * Omitting this field clears existing custom fields.
    */
   custom_fields?: Array<PlanCreateParams.CustomField> | null;
 
@@ -486,8 +320,7 @@ export interface PlanCreateParams {
   description?: string | null;
 
   /**
-   * The number of days until the membership expires and access is revoked. Used for
-   * expiration-based plans.
+   * The number of days until the membership expires and access is revoked.
    */
   expiration_days?: number | null;
 
@@ -497,9 +330,8 @@ export interface PlanCreateParams {
   image?: PlanCreateParams.Image | null;
 
   /**
-   * The amount charged on the first purchase. For one-time plans, this is the full
-   * price. For recurring plans, this is an additional charge on top of the renewal
-   * price. Provided in the plan's currency (e.g., 10.43 for $10.43).
+   * The amount charged on the first purchase, in the plan's currency (e.g., 10.43
+   * for $10.43).
    */
   initial_price?: number | null;
 
@@ -515,16 +347,14 @@ export interface PlanCreateParams {
 
   /**
    * Custom key-value pairs to store on the plan. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
-   * value.
+   * payment and membership events.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   /**
-   * Whether or not the tax is included in a plan's price (or if it hasn't been set
-   * up)
+   * Override the default tax classification for this specific plan.
    */
-  override_tax_type?: Shared.TaxType | null;
+  override_tax_type?: string;
 
   /**
    * Explicit payment method configuration for the plan. When not provided, the
@@ -533,18 +363,18 @@ export interface PlanCreateParams {
   payment_method_configuration?: PlanCreateParams.PaymentMethodConfiguration | null;
 
   /**
-   * The type of plan that can be attached to a product
+   * The billing type of the plan, such as one_time or renewal.
    */
-  plan_type?: Shared.PlanType | null;
+  plan_type?: string;
 
   /**
-   * The methods of how a plan can be released.
+   * The method used to sell this plan (e.g., buy_now, waitlist).
    */
-  release_method?: Shared.ReleaseMethod | null;
+  release_method?: string;
 
   /**
-   * The amount charged each billing period for recurring plans. Provided in the
-   * plan's currency (e.g., 10.43 for $10.43).
+   * The amount charged each billing period for recurring plans, in the plan's
+   * currency.
    */
   renewal_price?: number | null;
 
@@ -560,9 +390,9 @@ export interface PlanCreateParams {
   stock?: number | null;
 
   /**
-   * The 3D Secure behavior for a plan.
+   * The 3D Secure behavior for this plan. Send null to inherit the account default.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'frictionless';
 
   /**
    * The display name of the plan shown to customers on the product page.
@@ -576,84 +406,55 @@ export interface PlanCreateParams {
 
   /**
    * Whether the plan has unlimited stock. When true, the stock field is ignored.
-   * Defaults to true.
    */
   unlimited_stock?: boolean | null;
 
   /**
-   * Visibility of a resource
+   * Whether the plan is visible to customers or hidden from public view.
    */
-  visibility?: Shared.Visibility | null;
+  visibility?: string;
 }
 
 export namespace PlanCreateParams {
-  /**
-   * Checkout styling overrides for this plan. Pass null to inherit from the company
-   * default.
-   */
-  export interface CheckoutStyling {
-    /**
-     * A hex color code for the checkout page background, applied to the order summary
-     * panel (e.g. #F4F4F5).
-     */
-    background_color?: string | null;
-
-    /**
-     * The different border-radius styles available for checkout pages.
-     */
-    border_style?: PlansAPI.CheckoutShape | null;
-
-    /**
-     * A hex color code for the button color (e.g. #FF5733).
-     */
-    button_color?: string | null;
-
-    /**
-     * The different font families available for checkout pages.
-     */
-    font_family?: PlansAPI.CheckoutFont | null;
-  }
-
   export interface CustomField {
+    /**
+     * The ID of the custom field (if being updated).
+     */
+    id?: string;
+
     /**
      * The type of the custom field.
      */
-    field_type: 'text';
+    field_type?: 'text';
 
     /**
      * The name of the custom field.
      */
-    name: string;
-
-    /**
-     * The ID of the custom field (if being updated)
-     */
-    id?: string | null;
+    name?: string;
 
     /**
      * The order of the field.
      */
-    order?: number | null;
+    order?: number;
 
     /**
-     * The placeholder value of the field.
+     * An example response displayed in the input field.
      */
     placeholder?: string | null;
 
     /**
      * Whether or not the field is required.
      */
-    required?: boolean | null;
+    required?: boolean;
   }
 
   /**
    * An image displayed on the product page to represent this plan.
    */
   export interface Image {
-    /**
-     * The ID of an existing file object.
-     */
-    id: string;
+    id?: string;
+
+    direct_upload_id?: string;
   }
 
   /**
@@ -661,26 +462,11 @@ export namespace PlanCreateParams {
    * company's defaults apply.
    */
   export interface PaymentMethodConfiguration {
-    /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
-     */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    disabled?: Array<string>;
 
-    /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
-     */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    enabled?: Array<string>;
 
-    /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
-     */
-    include_platform_defaults?: boolean | null;
+    include_platform_defaults?: boolean;
   }
 }
 
@@ -697,18 +483,18 @@ export interface PlanUpdateParams {
   billing_period?: number | null;
 
   /**
-   * Checkout styling overrides for this plan. Pass null to remove all overrides and
-   * inherit from the company default.
+   * Checkout styling overrides for this plan.
    */
-  checkout_styling?: PlanUpdateParams.CheckoutStyling | null;
+  checkout_styling?: unknown | null;
 
   /**
-   * The available currencies on the platform
+   * The three-letter ISO currency code for the plan's pricing. Defaults to USD.
    */
-  currency?: Shared.Currency | null;
+  currency?: string;
 
   /**
    * An array of custom field definitions to collect from customers at checkout.
+   * Omitting this field clears existing custom fields.
    */
   custom_fields?: Array<PlanUpdateParams.CustomField> | null;
 
@@ -718,8 +504,7 @@ export interface PlanUpdateParams {
   description?: string | null;
 
   /**
-   * The number of days until the membership expires and access is revoked. For
-   * example, 365 for one-year access.
+   * The number of days until the membership expires and access is revoked.
    */
   expiration_days?: number | null;
 
@@ -729,8 +514,8 @@ export interface PlanUpdateParams {
   image?: PlanUpdateParams.Image | null;
 
   /**
-   * The amount charged on the first purchase. Provided in the plan's currency (e.g.,
-   * 10.43 for $10.43).
+   * The amount charged on the first purchase, in the plan's currency (e.g., 10.43
+   * for $10.43).
    */
   initial_price?: number | null;
 
@@ -746,10 +531,9 @@ export interface PlanUpdateParams {
 
   /**
    * Custom key-value pairs to store on the plan. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
-   * value.
+   * payment and membership events.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   /**
    * Whether to offer a retention discount when a customer attempts to cancel.
@@ -757,20 +541,19 @@ export interface PlanUpdateParams {
   offer_cancel_discount?: boolean | null;
 
   /**
-   * Whether or not the tax is included in a plan's price (or if it hasn't been set
-   * up)
+   * Override the default tax classification for this specific plan.
    */
-  override_tax_type?: Shared.TaxType | null;
+  override_tax_type?: string;
 
   /**
-   * Explicit payment method configuration for the plan. Sending null removes any
-   * custom configuration.
+   * Explicit payment method configuration for the plan. When not provided, the
+   * company's defaults apply.
    */
   payment_method_configuration?: PlanUpdateParams.PaymentMethodConfiguration | null;
 
   /**
-   * The amount charged each billing period for recurring plans. Provided in the
-   * plan's currency (e.g., 10.43 for $10.43).
+   * The amount charged each billing period for recurring plans, in the plan's
+   * currency.
    */
   renewal_price?: number | null;
 
@@ -782,20 +565,18 @@ export interface PlanUpdateParams {
 
   /**
    * A comparison price displayed with a strikethrough for the initial price.
-   * Provided in the plan's currency (e.g., 19.99 for $19.99).
    */
   strike_through_initial_price?: number | null;
 
   /**
    * A comparison price displayed with a strikethrough for the renewal price.
-   * Provided in the plan's currency (e.g., 19.99 for $19.99).
    */
   strike_through_renewal_price?: number | null;
 
   /**
-   * The 3D Secure behavior for a plan.
+   * The 3D Secure behavior for this plan. Send null to inherit the account default.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'frictionless';
 
   /**
    * The display name of the plan shown to customers on the product page.
@@ -813,106 +594,63 @@ export interface PlanUpdateParams {
   unlimited_stock?: boolean | null;
 
   /**
-   * Visibility of a resource
+   * Whether the plan is visible to customers or hidden from public view.
    */
-  visibility?: Shared.Visibility | null;
+  visibility?: string;
 }
 
 export namespace PlanUpdateParams {
-  /**
-   * Checkout styling overrides for this plan. Pass null to remove all overrides and
-   * inherit from the company default.
-   */
-  export interface CheckoutStyling {
-    /**
-     * A hex color code for the checkout page background, applied to the order summary
-     * panel (e.g. #F4F4F5).
-     */
-    background_color?: string | null;
-
-    /**
-     * The different border-radius styles available for checkout pages.
-     */
-    border_style?: PlansAPI.CheckoutShape | null;
-
-    /**
-     * A hex color code for the button color (e.g. #FF5733).
-     */
-    button_color?: string | null;
-
-    /**
-     * The different font families available for checkout pages.
-     */
-    font_family?: PlansAPI.CheckoutFont | null;
-  }
-
   export interface CustomField {
+    /**
+     * The ID of the custom field (if being updated).
+     */
+    id?: string;
+
     /**
      * The type of the custom field.
      */
-    field_type: 'text';
+    field_type?: 'text';
 
     /**
      * The name of the custom field.
      */
-    name: string;
-
-    /**
-     * The ID of the custom field (if being updated)
-     */
-    id?: string | null;
+    name?: string;
 
     /**
      * The order of the field.
      */
-    order?: number | null;
+    order?: number;
 
     /**
-     * The placeholder value of the field.
+     * An example response displayed in the input field.
      */
     placeholder?: string | null;
 
     /**
      * Whether or not the field is required.
      */
-    required?: boolean | null;
+    required?: boolean;
   }
 
   /**
    * An image displayed on the product page to represent this plan.
    */
   export interface Image {
-    /**
-     * The ID of an existing file object.
-     */
-    id: string;
+    id?: string;
+
+    direct_upload_id?: string;
   }
 
   /**
-   * Explicit payment method configuration for the plan. Sending null removes any
-   * custom configuration.
+   * Explicit payment method configuration for the plan. When not provided, the
+   * company's defaults apply.
    */
   export interface PaymentMethodConfiguration {
-    /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
-     */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    disabled?: Array<string>;
 
-    /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
-     */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    enabled?: Array<string>;
 
-    /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
-     */
-    include_platform_defaults?: boolean | null;
+    include_platform_defaults?: boolean;
   }
 }
 
