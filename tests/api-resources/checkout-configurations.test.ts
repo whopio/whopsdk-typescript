@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.checkoutConfigurations.list({ company_id: 'company_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,23 +23,20 @@ describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.checkoutConfigurations.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      company_id: 'company_id',
       after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
+      created_after: 0,
+      created_before: 0,
       direction: 'asc',
-      first: 42,
-      last: 42,
-      plan_id: 'plan_xxxxxxxxxxxxx',
+      first: 0,
+      order: 'created_at',
+      plan_id: 'plan_id',
     });
   });
 
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.create({
-      plan: { company_id: 'biz_xxxxxxxxxxxxxx', currency: 'usd' },
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.checkoutConfigurations.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,84 +47,70 @@ describe('resource checkoutConfigurations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.checkoutConfigurations.create({
-      plan: {
-        company_id: 'biz_xxxxxxxxxxxxxx',
-        currency: 'usd',
-        adaptive_pricing_enabled: true,
-        application_fee_amount: 6.9,
-        billing_period: 42,
-        custom_fields: [
-          {
-            field_type: 'text',
-            name: 'name',
-            id: 'id',
-            order: 42,
-            placeholder: 'placeholder',
-            required: true,
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.checkoutConfigurations.create(
+        {
+          affiliate_code: 'affiliate_code',
+          company_id: 'biz_xxxxxxxxxxxxxx',
+          currency: 'currency',
+          metadata: {},
+          mode: 'payment',
+          payment_method_configuration: {
+            disabled: ['string'],
+            enabled: ['string'],
+            include_platform_defaults: true,
           },
-        ],
-        description: 'description',
-        expiration_days: 42,
-        force_create_new_plan: true,
-        image: { id: 'id' },
-        initial_price: 6.9,
-        internal_notes: 'internal_notes',
-        override_tax_type: 'inclusive',
-        payment_method_configuration: {
-          disabled: ['acss_debit'],
-          enabled: ['acss_debit'],
-          include_platform_defaults: true,
+          plan: {
+            billing_period: 0,
+            company_id: 'company_id',
+            currency: 'currency',
+            description: 'description',
+            expiration_days: 0,
+            force_create_new_plan: true,
+            initial_price: 0,
+            metadata: {},
+            override_tax_type: 'override_tax_type',
+            payment_method_configuration: {
+              disabled: ['string'],
+              enabled: ['string'],
+              include_platform_defaults: true,
+            },
+            plan_type: 'plan_type',
+            product_id: 'product_id',
+            release_method: 'release_method',
+            renewal_price: 0,
+            stock: 0,
+            title: 'title',
+            trial_period_days: 0,
+            unlimited_stock: true,
+            visibility: 'visibility',
+          },
+          plan_id: 'plan_xxxxxxxxxxxxx',
+          redirect_url: 'redirect_url',
+          three_ds_level: 'three_ds_level',
         },
-        plan_type: 'renewal',
-        product: {
-          external_identifier: 'external_identifier',
-          title: 'title',
-          collect_shipping_address: true,
-          custom_statement_descriptor: 'custom_statement_descriptor',
-          description: 'description',
-          global_affiliate_percentage: 6.9,
-          global_affiliate_status: 'enabled',
-          headline: 'headline',
-          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-          redirect_purchase_url: 'redirect_purchase_url',
-          route: 'route',
-          visibility: 'visible',
-        },
-        product_id: 'prod_xxxxxxxxxxxxx',
-        release_method: 'buy_now',
-        renewal_price: 6.9,
-        split_pay_required_payments: 42,
-        stock: 42,
-        title: 'title',
-        trial_period_days: 42,
-        visibility: 'visible',
-      },
-      affiliate_code: 'affiliate_code',
-      allow_promo_codes: true,
-      checkout_styling: {
-        background_color: 'background_color',
-        border_style: 'rounded',
-        button_color: 'button_color',
-        font_family: 'system',
-      },
-      currency: 'usd',
-      metadata: { foo: 'bar' },
-      mode: 'payment',
-      payment_method_configuration: {
-        disabled: ['acss_debit'],
-        enabled: ['acss_debit'],
-        include_platform_defaults: true,
-      },
-      redirect_url: 'redirect_url',
-      source_url: 'source_url',
-    });
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.checkoutConfigurations.retrieve('ch_xxxxxxxxxxxxxxx');
+    const responsePromise = client.checkoutConfigurations.retrieve('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.checkoutConfigurations.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -27,9 +27,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagin
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-/**
- * Affiliates
- */
 export class Affiliates extends APIResource {
   overrides: OverridesAPI.Overrides = new OverridesAPI.Overrides(this._client);
 

@@ -65,10 +65,14 @@ describe('resource bounties', () => {
       title: 'title',
       accepted_submissions_limit: 42,
       allowed_country_codes: ['string'],
+      business_goal_type: 'clipping',
       experience_id: 'exp_xxxxxxxxxxxxxx',
       origin_account_id: 'origin_account_id',
       post_markdown_content: 'post_markdown_content',
       post_title: 'post_title',
+      scheduled_frequency: 'once',
+      scheduled_publish_at: '2023-12-01T05:00:00.401Z',
+      scheduled_timezone: 'scheduled_timezone',
     });
   });
 

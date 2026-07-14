@@ -8,9 +8,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Refunds
- */
 export class Refunds extends APIResource {
   /**
    * Returns a paginated list of refunds, with optional filtering by payment,
@@ -308,7 +305,8 @@ export namespace RefundRetrieveResponse {
 
       /**
        * Custom key-value pairs stored on the plan. Included in webhook payloads for
-       * payment and membership events.
+       * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+       * string value.
        */
       metadata: { [key: string]: unknown } | null;
     }
@@ -323,8 +321,9 @@ export namespace RefundRetrieveResponse {
       id: string;
 
       /**
-       * Custom key-value pairs stored on the product. Included in webhook payloads for
-       * payment and membership events.
+       * Custom key-value pairs stored on the product and included in payment and
+       * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+       * per string value.
        */
       metadata: { [key: string]: unknown } | null;
     }

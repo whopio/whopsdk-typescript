@@ -27,8 +27,11 @@ describe('resource financialActivity', () => {
       client.financialActivity.list(
         {
           account_id: 'account_id',
+          available_after: '2019-12-27',
+          available_before: '2019-12-27',
           currency: 'currency',
           cursor: 'cursor',
+          include_owned_accounts: true,
           limit: 100,
           line_types: ['string'],
           posted_after: '2019-12-27T18:11:19.117Z',

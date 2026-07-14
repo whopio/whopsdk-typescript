@@ -8,9 +8,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Payments
- */
 export class Payments extends APIResource {
   /**
    * Returns a paginated list of payments for the actor in context, with optional
@@ -276,6 +273,7 @@ export type CardBrands =
   | 'hipercard'
   | 'jcblankapay'
   | 'cmi'
+  | 'aura'
   | 'unknown';
 
 /**
@@ -571,6 +569,12 @@ export interface PaymentListResponse {
   settlement_currency: Shared.Currency;
 
   /**
+   * The shipping address provided by the customer for physical goods. Null if no
+   * shipping address was collected.
+   */
+  shipping_address: PaymentListResponse.ShippingAddress | null;
+
+  /**
    * The status of a receipt
    */
   status: Shared.ReceiptStatus | null;
@@ -824,7 +828,8 @@ export namespace PaymentListResponse {
 
     /**
      * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events.
+     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+     * string value.
      */
     metadata: { [key: string]: unknown } | null;
   }
@@ -839,14 +844,15 @@ export namespace PaymentListResponse {
     id: string;
 
     /**
-     * Custom key-value pairs stored on the product. Included in webhook payloads for
-     * payment and membership events.
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
      */
     metadata: { [key: string]: unknown } | null;
 
     /**
-     * The URL slug used in the product's public link (e.g., 'my-product' in
-     * whop.com/company/my-product).
+     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
+     * whop.com/company/pickaxe-analytics.
      */
     route: string;
 
@@ -892,6 +898,47 @@ export namespace PaymentListResponse {
      * The type (% or flat amount) of the promo.
      */
     promo_type: Shared.PromoType;
+  }
+
+  /**
+   * The shipping address provided by the customer for physical goods. Null if no
+   * shipping address was collected.
+   */
+  export interface ShippingAddress {
+    /**
+     * The city of the address.
+     */
+    city: string | null;
+
+    /**
+     * The country of the address.
+     */
+    country: string | null;
+
+    /**
+     * The line 1 of the address.
+     */
+    line1: string | null;
+
+    /**
+     * The line 2 of the address.
+     */
+    line2: string | null;
+
+    /**
+     * The name of the customer.
+     */
+    name: string | null;
+
+    /**
+     * The postal code of the address.
+     */
+    postal_code: string | null;
+
+    /**
+     * The state of the address.
+     */
+    state: string | null;
   }
 
   /**
@@ -1116,6 +1163,13 @@ export declare namespace PaymentCreateParams {
      * Custom metadata to attach to the payment.
      */
     metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
   }
 
   export namespace CreatePaymentInputWithPlan {
@@ -1307,6 +1361,13 @@ export declare namespace PaymentCreateParams {
      * Custom metadata to attach to the payment.
      */
     metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
   }
 }
 

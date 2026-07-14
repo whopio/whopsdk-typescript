@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * App builds
- */
 export class AppBuilds extends APIResource {
   /**
    * Returns a paginated list of build artifacts for a given app, with optional
@@ -196,7 +193,7 @@ export interface AppBuildCreateParams {
   /**
    * The build file to upload. For iOS and Android, this should be a .zip archive
    * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file.
+   * this should be a JavaScript file or a .zip archive of the hosted site.
    */
   attachment: AppBuildCreateParams.Attachment;
 
@@ -233,7 +230,7 @@ export namespace AppBuildCreateParams {
   /**
    * The build file to upload. For iOS and Android, this should be a .zip archive
    * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file.
+   * this should be a JavaScript file or a .zip archive of the hosted site.
    */
   export interface Attachment {
     /**

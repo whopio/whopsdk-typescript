@@ -2,45 +2,85 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Verifications
+ * A Verification represents an identity review for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
+ *
+ * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
  */
 export class Verifications extends APIResource {
   /**
-   * Retrieves the details of an existing verification.
+   * Returns verifications for an account, including their status and any required
+   * actions.
    *
-   * Required permissions:
-   *
-   * - `payout:account:read`
+   * @example
+   * ```ts
+   * const verifications = await client.verifications.list({
+   *   account_id: 'account_id',
+   * });
+   * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<VerificationRetrieveResponse> {
-    return this._client.get(path`/verifications/${id}`, options);
+  list(query: VerificationListParams, options?: RequestOptions): APIPromise<VerificationListResponse> {
+    return this._client.get('/verifications', { query, ...options });
   }
 
   /**
-   * Returns a list of identity verifications for a payout account, ordered by most
-   * recent first.
+   * Returns verifications for an account, including their status and any required
+   * actions.
    *
-   * Required permissions:
-   *
-   * - `payout:account:read`
+   * @example
+   * ```ts
+   * const verification = await client.verifications.retrieve(
+   *   'verification_id',
+   * );
+   * ```
    */
-  list(
-    query: VerificationListParams,
+  retrieve(verificationID: string, options?: RequestOptions): APIPromise<VerificationRetrieveResponse> {
+    return this._client.get(path`/verifications/${verificationID}`, options);
+  }
+
+  /**
+   * Starts a hosted verification session for an account or user, or returns the
+   * active session when one already exists. Any fields you include in the request
+   * body are used to prefill the session. Send `documents` (with `document_type`) to
+   * instead verify the person from identity documents included in this request — no
+   * hosted session involved. If the account already has an `approved` verification
+   * the request is rejected; unlink it first to start a new one.
+   *
+   * @example
+   * ```ts
+   * const verification = await client.verifications.create({
+   *   account_id: 'account_id',
+   * });
+   * ```
+   */
+  create(params: VerificationCreateParams, options?: RequestOptions): APIPromise<VerificationCreateResponse> {
+    const { account_id, ...body } = params;
+    return this._client.post('/verifications', { query: { account_id }, body, ...options });
+  }
+
+  /**
+   * Updates editable profile details or submits answers for items returned in
+   * `requested_information`. Once a verification is `approved` its profile details
+   * are locked and can no longer be edited.
+   *
+   * @example
+   * ```ts
+   * const verification = await client.verifications.update(
+   *   'verification_id',
+   * );
+   * ```
+   */
+  update(
+    verificationID: string,
+    body: VerificationUpdateParams,
     options?: RequestOptions,
-  ): PagePromise<VerificationListResponsesCursorPage, VerificationListResponse> {
-    return this._client.getAPIList('/verifications', CursorPage<VerificationListResponse>, {
-      query,
-      ...options,
-    });
+  ): APIPromise<VerificationUpdateResponse> {
+    return this._client.patch(path`/verifications/${verificationID}`, { body, ...options });
   }
 }
-
-export type VerificationListResponsesCursorPage = CursorPage<VerificationListResponse>;
 
 /**
  * An error code for a verification attempt.
@@ -85,89 +125,1397 @@ export type VerificationStatus =
   | 'review'
   | 'action_required';
 
-/**
- * An identity verification session used to confirm a person or entity's identity
- * for payout account eligibility.
- */
+export interface VerificationCreateResponse {
+  /**
+   * Verification profile ID, prefixed `idpf_`.
+   */
+  id?: string;
+
+  /**
+   * Address on the verification profile. `null` when no address is set.
+   */
+  address?: VerificationCreateResponse.Address | null;
+
+  /**
+   * Legal business name.
+   */
+  business_name?: string | null;
+
+  /**
+   * Legal entity structure of the business, such as `private_corporation` or
+   * `sole_proprietorship`. Supported values vary by country of incorporation — see
+   * [Business structures](/developer/verification/business-structures).
+   */
+  business_structure?: string | null;
+
+  /**
+   * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+   */
+  country?: string | null;
+
+  /**
+   * When the verification profile was created, as an ISO 8601 timestamp.
+   */
+  created_at?: string;
+
+  /**
+   * Formatted as `YYYY-MM-DD`.
+   */
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  kind?: 'individual' | 'business';
+
+  last_name?: string | null;
+
+  /**
+   * Fields or documents Whop still needs before review can continue. Submit answers
+   * with the Update Verification endpoint.
+   */
+  requested_information?: Array<VerificationCreateResponse.RequestedInformation>;
+
+  /**
+   * Documents for a document-upload verification and their progress. Present only on
+   * verifications created by sending `documents`. `pending_upload` documents were
+   * not accepted yet — send the full set again with another Create Verification
+   * call.
+   */
+  required_documents?: Array<VerificationCreateResponse.RequiredDocument>;
+
+  /**
+   * Hosted verification session URL for the user to complete identity checks.
+   * Expires 7 days after creation.
+   */
+  session_url?: string | null;
+
+  /**
+   * Current verification state. `not_started` before any session has been created;
+   * `pending` while a session is in progress; `action_required` when items in
+   * `requested_information` need answers before review can continue; `approved` once
+   * verification succeeds; `rejected` if it fails. Call the Create Verification
+   * endpoint again to start a new session.
+   */
+  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  /**
+   * When the verification profile was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at?: string;
+}
+
+export namespace VerificationCreateResponse {
+  /**
+   * Address on the verification profile. `null` when no address is set.
+   */
+  export interface Address {
+    city?: string | null;
+
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string | null;
+
+    /**
+     * First line of the street address.
+     */
+    line1?: string;
+
+    /**
+     * Second line of the street address.
+     */
+    line2?: string | null;
+
+    /**
+     * Postal or ZIP code.
+     */
+    postal_code?: string | null;
+
+    /**
+     * State, province, or region code, for example `CA`.
+     */
+    state?: string | null;
+  }
+
+  export interface RequestedInformation {
+    /**
+     * Requested information item ID, prefixed `inrqi_`. Include this ID when
+     * submitting an answer.
+     */
+    id?: string;
+
+    /**
+     * Additional instructions for this requested item, or `null`.
+     */
+    description?: string | null;
+
+    /**
+     * Reason a previously submitted value was rejected. `null` if no submitted value
+     * has been rejected.
+     */
+    error_message?: string | null;
+
+    /**
+     * Stable field key, such as `ssn` or `business_description`.
+     */
+    field?: string;
+
+    /**
+     * Human-readable label for the field, such as `Social Security Number`.
+     */
+    label?: string;
+
+    /**
+     * Allowed values for a `select` field (e.g. account_type, business_structure) —
+     * the submitted value must be one of these; empty for other types.
+     */
+    options?: Array<string>;
+
+    /**
+     * Document upload slots for this item. Present when `type` is `files`; upload one
+     * file for each required slot and include the slot's `category` when submitting
+     * the answer.
+     */
+    requested_files?: Array<RequestedInformation.RequestedFile>;
+
+    /**
+     * Input type expected for this item: `text`, `date`, `phone`, `address`, `files`,
+     * or `select`.
+     */
+    type?: string | null;
+  }
+
+  export namespace RequestedInformation {
+    export interface RequestedFile {
+      /**
+       * File category to include with the uploaded file so Whop can route the document
+       * correctly. `null` for a generic upload.
+       */
+      category?: string | null;
+
+      /**
+       * Whether this slot can be left empty.
+       */
+      is_optional?: boolean;
+
+      /**
+       * Specific document type requested, such as `Bank Statement`. `null` for standard
+       * identity and business document uploads.
+       */
+      kind?: string | null;
+
+      /**
+       * Label for this upload slot, such as `Front of ID Document`.
+       */
+      label?: string;
+
+      /**
+       * Whether this slot accepts more than one file.
+       */
+      multiple?: boolean;
+    }
+  }
+
+  export interface RequiredDocument {
+    /**
+     * Document slot key, such as `id_card_front`, `id_card_back`, or `selfie`.
+     */
+    document?: string;
+
+    /**
+     * Why the previous submission was rejected, when the provider requested new
+     * documents or declined the verification.
+     */
+    rejection_reason?: string | null;
+
+    /**
+     * `pending_upload` until the document has been relayed for review; `submitted`
+     * afterwards.
+     */
+    status?: 'pending_upload' | 'submitted';
+  }
+}
+
 export interface VerificationRetrieveResponse {
   /**
-   * The numeric id of the verification record.
+   * Verification profile ID, prefixed `idpf_`.
    */
-  id: string;
+  id?: string;
 
   /**
-   * An error code for a verification attempt.
+   * Address on the verification profile. `null` when no address is set.
    */
-  last_error_code: VerificationErrorCode | null;
+  address?: VerificationRetrieveResponse.Address | null;
 
   /**
-   * A human-readable explanation of the most recent verification error. Null if no
-   * error has occurred.
+   * Legal business name.
    */
-  last_error_reason: string | null;
+  business_name?: string | null;
 
   /**
-   * The current status of this verification session.
+   * Legal entity structure of the business, such as `private_corporation` or
+   * `sole_proprietorship`. Supported values vary by country of incorporation — see
+   * [Business structures](/developer/verification/business-structures).
    */
-  status: VerificationStatus;
+  business_structure?: string | null;
+
+  /**
+   * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+   */
+  country?: string | null;
+
+  /**
+   * When the verification profile was created, as an ISO 8601 timestamp.
+   */
+  created_at?: string;
+
+  /**
+   * Formatted as `YYYY-MM-DD`.
+   */
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  kind?: 'individual' | 'business';
+
+  last_name?: string | null;
+
+  /**
+   * Fields or documents Whop still needs before review can continue. Submit answers
+   * with the Update Verification endpoint.
+   */
+  requested_information?: Array<VerificationRetrieveResponse.RequestedInformation>;
+
+  /**
+   * Documents for a document-upload verification and their progress. Present only on
+   * verifications created by sending `documents`. `pending_upload` documents were
+   * not accepted yet — send the full set again with another Create Verification
+   * call.
+   */
+  required_documents?: Array<VerificationRetrieveResponse.RequiredDocument>;
+
+  /**
+   * Hosted verification session URL for the user to complete identity checks.
+   * Expires 7 days after creation.
+   */
+  session_url?: string | null;
+
+  /**
+   * Current verification state. `not_started` before any session has been created;
+   * `pending` while a session is in progress; `action_required` when items in
+   * `requested_information` need answers before review can continue; `approved` once
+   * verification succeeds; `rejected` if it fails. Call the Create Verification
+   * endpoint again to start a new session.
+   */
+  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  /**
+   * When the verification profile was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at?: string;
 }
 
-/**
- * An identity verification session used to confirm a person or entity's identity
- * for payout account eligibility.
- */
+export namespace VerificationRetrieveResponse {
+  /**
+   * Address on the verification profile. `null` when no address is set.
+   */
+  export interface Address {
+    city?: string | null;
+
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string | null;
+
+    /**
+     * First line of the street address.
+     */
+    line1?: string;
+
+    /**
+     * Second line of the street address.
+     */
+    line2?: string | null;
+
+    /**
+     * Postal or ZIP code.
+     */
+    postal_code?: string | null;
+
+    /**
+     * State, province, or region code, for example `CA`.
+     */
+    state?: string | null;
+  }
+
+  export interface RequestedInformation {
+    /**
+     * Requested information item ID, prefixed `inrqi_`. Include this ID when
+     * submitting an answer.
+     */
+    id?: string;
+
+    /**
+     * Additional instructions for this requested item, or `null`.
+     */
+    description?: string | null;
+
+    /**
+     * Reason a previously submitted value was rejected. `null` if no submitted value
+     * has been rejected.
+     */
+    error_message?: string | null;
+
+    /**
+     * Stable field key, such as `ssn` or `business_description`.
+     */
+    field?: string;
+
+    /**
+     * Human-readable label for the field, such as `Social Security Number`.
+     */
+    label?: string;
+
+    /**
+     * Allowed values for a `select` field (e.g. account_type, business_structure) —
+     * the submitted value must be one of these; empty for other types.
+     */
+    options?: Array<string>;
+
+    /**
+     * Document upload slots for this item. Present when `type` is `files`; upload one
+     * file for each required slot and include the slot's `category` when submitting
+     * the answer.
+     */
+    requested_files?: Array<RequestedInformation.RequestedFile>;
+
+    /**
+     * Input type expected for this item: `text`, `date`, `phone`, `address`, `files`,
+     * or `select`.
+     */
+    type?: string | null;
+  }
+
+  export namespace RequestedInformation {
+    export interface RequestedFile {
+      /**
+       * File category to include with the uploaded file so Whop can route the document
+       * correctly. `null` for a generic upload.
+       */
+      category?: string | null;
+
+      /**
+       * Whether this slot can be left empty.
+       */
+      is_optional?: boolean;
+
+      /**
+       * Specific document type requested, such as `Bank Statement`. `null` for standard
+       * identity and business document uploads.
+       */
+      kind?: string | null;
+
+      /**
+       * Label for this upload slot, such as `Front of ID Document`.
+       */
+      label?: string;
+
+      /**
+       * Whether this slot accepts more than one file.
+       */
+      multiple?: boolean;
+    }
+  }
+
+  export interface RequiredDocument {
+    /**
+     * Document slot key, such as `id_card_front`, `id_card_back`, or `selfie`.
+     */
+    document?: string;
+
+    /**
+     * Why the previous submission was rejected, when the provider requested new
+     * documents or declined the verification.
+     */
+    rejection_reason?: string | null;
+
+    /**
+     * `pending_upload` until the document has been relayed for review; `submitted`
+     * afterwards.
+     */
+    status?: 'pending_upload' | 'submitted';
+  }
+}
+
+export interface VerificationUpdateResponse {
+  /**
+   * Verification profile ID, prefixed `idpf_`.
+   */
+  id?: string;
+
+  /**
+   * Address on the verification profile. `null` when no address is set.
+   */
+  address?: VerificationUpdateResponse.Address | null;
+
+  /**
+   * Legal business name.
+   */
+  business_name?: string | null;
+
+  /**
+   * Legal entity structure of the business, such as `private_corporation` or
+   * `sole_proprietorship`. Supported values vary by country of incorporation — see
+   * [Business structures](/developer/verification/business-structures).
+   */
+  business_structure?: string | null;
+
+  /**
+   * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+   */
+  country?: string | null;
+
+  /**
+   * When the verification profile was created, as an ISO 8601 timestamp.
+   */
+  created_at?: string;
+
+  /**
+   * Formatted as `YYYY-MM-DD`.
+   */
+  date_of_birth?: string | null;
+
+  first_name?: string | null;
+
+  kind?: 'individual' | 'business';
+
+  last_name?: string | null;
+
+  /**
+   * Fields or documents Whop still needs before review can continue. Submit answers
+   * with the Update Verification endpoint.
+   */
+  requested_information?: Array<VerificationUpdateResponse.RequestedInformation>;
+
+  /**
+   * Documents for a document-upload verification and their progress. Present only on
+   * verifications created by sending `documents`. `pending_upload` documents were
+   * not accepted yet — send the full set again with another Create Verification
+   * call.
+   */
+  required_documents?: Array<VerificationUpdateResponse.RequiredDocument>;
+
+  /**
+   * Hosted verification session URL for the user to complete identity checks.
+   * Expires 7 days after creation.
+   */
+  session_url?: string | null;
+
+  /**
+   * Current verification state. `not_started` before any session has been created;
+   * `pending` while a session is in progress; `action_required` when items in
+   * `requested_information` need answers before review can continue; `approved` once
+   * verification succeeds; `rejected` if it fails. Call the Create Verification
+   * endpoint again to start a new session.
+   */
+  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+  /**
+   * When the verification profile was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at?: string;
+}
+
+export namespace VerificationUpdateResponse {
+  /**
+   * Address on the verification profile. `null` when no address is set.
+   */
+  export interface Address {
+    city?: string | null;
+
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string | null;
+
+    /**
+     * First line of the street address.
+     */
+    line1?: string;
+
+    /**
+     * Second line of the street address.
+     */
+    line2?: string | null;
+
+    /**
+     * Postal or ZIP code.
+     */
+    postal_code?: string | null;
+
+    /**
+     * State, province, or region code, for example `CA`.
+     */
+    state?: string | null;
+  }
+
+  export interface RequestedInformation {
+    /**
+     * Requested information item ID, prefixed `inrqi_`. Include this ID when
+     * submitting an answer.
+     */
+    id?: string;
+
+    /**
+     * Additional instructions for this requested item, or `null`.
+     */
+    description?: string | null;
+
+    /**
+     * Reason a previously submitted value was rejected. `null` if no submitted value
+     * has been rejected.
+     */
+    error_message?: string | null;
+
+    /**
+     * Stable field key, such as `ssn` or `business_description`.
+     */
+    field?: string;
+
+    /**
+     * Human-readable label for the field, such as `Social Security Number`.
+     */
+    label?: string;
+
+    /**
+     * Allowed values for a `select` field (e.g. account_type, business_structure) —
+     * the submitted value must be one of these; empty for other types.
+     */
+    options?: Array<string>;
+
+    /**
+     * Document upload slots for this item. Present when `type` is `files`; upload one
+     * file for each required slot and include the slot's `category` when submitting
+     * the answer.
+     */
+    requested_files?: Array<RequestedInformation.RequestedFile>;
+
+    /**
+     * Input type expected for this item: `text`, `date`, `phone`, `address`, `files`,
+     * or `select`.
+     */
+    type?: string | null;
+  }
+
+  export namespace RequestedInformation {
+    export interface RequestedFile {
+      /**
+       * File category to include with the uploaded file so Whop can route the document
+       * correctly. `null` for a generic upload.
+       */
+      category?: string | null;
+
+      /**
+       * Whether this slot can be left empty.
+       */
+      is_optional?: boolean;
+
+      /**
+       * Specific document type requested, such as `Bank Statement`. `null` for standard
+       * identity and business document uploads.
+       */
+      kind?: string | null;
+
+      /**
+       * Label for this upload slot, such as `Front of ID Document`.
+       */
+      label?: string;
+
+      /**
+       * Whether this slot accepts more than one file.
+       */
+      multiple?: boolean;
+    }
+  }
+
+  export interface RequiredDocument {
+    /**
+     * Document slot key, such as `id_card_front`, `id_card_back`, or `selfie`.
+     */
+    document?: string;
+
+    /**
+     * Why the previous submission was rejected, when the provider requested new
+     * documents or declined the verification.
+     */
+    rejection_reason?: string | null;
+
+    /**
+     * `pending_upload` until the document has been relayed for review; `submitted`
+     * afterwards.
+     */
+    status?: 'pending_upload' | 'submitted';
+  }
+}
+
 export interface VerificationListResponse {
-  /**
-   * The numeric id of the verification record.
-   */
-  id: string;
-
-  /**
-   * An error code for a verification attempt.
-   */
-  last_error_code: VerificationErrorCode | null;
-
-  /**
-   * A human-readable explanation of the most recent verification error. Null if no
-   * error has occurred.
-   */
-  last_error_reason: string | null;
-
-  /**
-   * The current status of this verification session.
-   */
-  status: VerificationStatus;
+  data?: Array<VerificationListResponse.Data>;
 }
 
-export interface VerificationListParams extends CursorPageParams {
+export namespace VerificationListResponse {
+  export interface Data {
+    /**
+     * Verification profile ID, prefixed `idpf_`.
+     */
+    id?: string;
+
+    /**
+     * Address on the verification profile. `null` when no address is set.
+     */
+    address?: Data.Address | null;
+
+    /**
+     * Legal business name.
+     */
+    business_name?: string | null;
+
+    /**
+     * Legal entity structure of the business, such as `private_corporation` or
+     * `sole_proprietorship`. Supported values vary by country of incorporation — see
+     * [Business structures](/developer/verification/business-structures).
+     */
+    business_structure?: string | null;
+
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string | null;
+
+    /**
+     * When the verification profile was created, as an ISO 8601 timestamp.
+     */
+    created_at?: string;
+
+    /**
+     * Formatted as `YYYY-MM-DD`.
+     */
+    date_of_birth?: string | null;
+
+    first_name?: string | null;
+
+    kind?: 'individual' | 'business';
+
+    last_name?: string | null;
+
+    /**
+     * Fields or documents Whop still needs before review can continue. Submit answers
+     * with the Update Verification endpoint.
+     */
+    requested_information?: Array<Data.RequestedInformation>;
+
+    /**
+     * Documents for a document-upload verification and their progress. Present only on
+     * verifications created by sending `documents`. `pending_upload` documents were
+     * not accepted yet — send the full set again with another Create Verification
+     * call.
+     */
+    required_documents?: Array<Data.RequiredDocument>;
+
+    /**
+     * Hosted verification session URL for the user to complete identity checks.
+     * Expires 7 days after creation.
+     */
+    session_url?: string | null;
+
+    /**
+     * Current verification state. `not_started` before any session has been created;
+     * `pending` while a session is in progress; `action_required` when items in
+     * `requested_information` need answers before review can continue; `approved` once
+     * verification succeeds; `rejected` if it fails. Call the Create Verification
+     * endpoint again to start a new session.
+     */
+    status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+
+    /**
+     * When the verification profile was last updated, as an ISO 8601 timestamp.
+     */
+    updated_at?: string;
+  }
+
+  export namespace Data {
+    /**
+     * Address on the verification profile. `null` when no address is set.
+     */
+    export interface Address {
+      city?: string | null;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+       */
+      country?: string | null;
+
+      /**
+       * First line of the street address.
+       */
+      line1?: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string | null;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code?: string | null;
+
+      /**
+       * State, province, or region code, for example `CA`.
+       */
+      state?: string | null;
+    }
+
+    export interface RequestedInformation {
+      /**
+       * Requested information item ID, prefixed `inrqi_`. Include this ID when
+       * submitting an answer.
+       */
+      id?: string;
+
+      /**
+       * Additional instructions for this requested item, or `null`.
+       */
+      description?: string | null;
+
+      /**
+       * Reason a previously submitted value was rejected. `null` if no submitted value
+       * has been rejected.
+       */
+      error_message?: string | null;
+
+      /**
+       * Stable field key, such as `ssn` or `business_description`.
+       */
+      field?: string;
+
+      /**
+       * Human-readable label for the field, such as `Social Security Number`.
+       */
+      label?: string;
+
+      /**
+       * Allowed values for a `select` field (e.g. account_type, business_structure) —
+       * the submitted value must be one of these; empty for other types.
+       */
+      options?: Array<string>;
+
+      /**
+       * Document upload slots for this item. Present when `type` is `files`; upload one
+       * file for each required slot and include the slot's `category` when submitting
+       * the answer.
+       */
+      requested_files?: Array<RequestedInformation.RequestedFile>;
+
+      /**
+       * Input type expected for this item: `text`, `date`, `phone`, `address`, `files`,
+       * or `select`.
+       */
+      type?: string | null;
+    }
+
+    export namespace RequestedInformation {
+      export interface RequestedFile {
+        /**
+         * File category to include with the uploaded file so Whop can route the document
+         * correctly. `null` for a generic upload.
+         */
+        category?: string | null;
+
+        /**
+         * Whether this slot can be left empty.
+         */
+        is_optional?: boolean;
+
+        /**
+         * Specific document type requested, such as `Bank Statement`. `null` for standard
+         * identity and business document uploads.
+         */
+        kind?: string | null;
+
+        /**
+         * Label for this upload slot, such as `Front of ID Document`.
+         */
+        label?: string;
+
+        /**
+         * Whether this slot accepts more than one file.
+         */
+        multiple?: boolean;
+      }
+    }
+
+    export interface RequiredDocument {
+      /**
+       * Document slot key, such as `id_card_front`, `id_card_back`, or `selfie`.
+       */
+      document?: string;
+
+      /**
+       * Why the previous submission was rejected, when the provider requested new
+       * documents or declined the verification.
+       */
+      rejection_reason?: string | null;
+
+      /**
+       * `pending_upload` until the document has been relayed for review; `submitted`
+       * afterwards.
+       */
+      status?: 'pending_upload' | 'submitted';
+    }
+  }
+}
+
+export interface VerificationListParams {
   /**
-   * The unique identifier of the payout account to list verifications for.
+   * Account or user ID whose verifications you want to list. Use a `biz_` account
+   * ID, or the caller's `user_` ID for personal verifications.
    */
-  payout_account_id: string;
+  account_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Sort direction for returned verifications.
    */
-  before?: string | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Field used to sort returned verifications.
    */
-  first?: number | null;
+  order?: 'updated_at' | 'created_at';
+}
 
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
+export type VerificationCreateParams =
+  | VerificationCreateParams.CreateIndividualVerification
+  | VerificationCreateParams.CreateBusinessVerification;
+
+export declare namespace VerificationCreateParams {
+  export interface CreateIndividualVerification {
+    /**
+     * Query param: Account or user ID whose identity you want to verify. Use a `biz_`
+     * account ID for account verifications, or the caller's `user_` ID for personal
+     * verification.
+     */
+    account_id: string;
+
+    /**
+     * Body param
+     */
+    address?: CreateIndividualVerification.Address;
+
+    /**
+     * Body param: Legal business name for a sole proprietor or single-member LLC.
+     */
+    business_name?: string;
+
+    /**
+     * Body param: Entity type for sole proprietors, such as `single_member_llc`.
+     * Supported values vary by country of incorporation — see
+     * [Business structures](/developer/verification/business-structures).
+     */
+    business_structure?: string;
+
+    /**
+     * Body param: Business website URL. Whop store pages are not accepted.
+     */
+    business_website?: string;
+
+    /**
+     * Body param: Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string;
+
+    /**
+     * Body param: Formatted as `YYYY-MM-DD`.
+     */
+    date_of_birth?: string;
+
+    /**
+     * Body param: Identity document being sent. Providing it (with `documents`)
+     * verifies from uploaded documents instead of a hosted session, and determines the
+     * expected `documents` keys: cards and licenses need front and back, passports
+     * only the photo page.
+     */
+    document_type?: 'ID_CARD' | 'PASSPORT' | 'DRIVERS' | 'RESIDENCE_PERMIT';
+
+    /**
+     * Body param: Identity document files, keyed by slot (`id_card_front`,
+     * `id_card_back`, `selfie`, …) with each value the file's raw bytes
+     * base64-encoded. Providing them verifies the person from these documents instead
+     * of a hosted session — individual verifications only, and the request must also
+     * carry `document_type`, `first_name`, `last_name`, `date_of_birth`, `country`,
+     * `phone`, `tax_identification_number`, and an `address` with `line1`, `city`,
+     * `state`, and `postal_code`. JPEG, PNG, and PDF are accepted (selfies must be
+     * images), up to 5MB per file before encoding. Send the complete set — a missing
+     * or rejected file fails the whole request and nothing is submitted; review starts
+     * automatically once every document is accepted.
+     */
+    documents?: { [key: string]: string };
+
+    /**
+     * Body param
+     */
+    first_name?: string;
+
+    /**
+     * Body param: Verification type. Defaults to `individual`.
+     */
+    kind?: 'individual';
+
+    /**
+     * Body param
+     */
+    last_name?: string;
+
+    /**
+     * Body param
+     */
+    phone?: string;
+
+    /**
+     * Body param: SSN or ITIN. Tokenized in transit and never stored raw.
+     */
+    tax_identification_number?: string;
+  }
+
+  export namespace CreateIndividualVerification {
+    export interface Address {
+      city?: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+       */
+      country?: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1?: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code?: string;
+
+      /**
+       * State, province, or region code, for example `CA`.
+       */
+      state?: string;
+    }
+  }
+
+  export interface CreateBusinessVerification {
+    /**
+     * Query param: Account or user ID whose identity you want to verify. Use a `biz_`
+     * account ID for account verifications, or the caller's `user_` ID for personal
+     * verification.
+     */
+    account_id: string;
+
+    /**
+     * Body param
+     */
+    address?: CreateBusinessVerification.Address;
+
+    /**
+     * Body param: Legal business name.
+     */
+    business_name?: string;
+
+    /**
+     * Body param: Legal entity structure of the business, such as
+     * `private_corporation` or `sole_proprietorship`. Supported values vary by country
+     * of incorporation — see
+     * [Business structures](/developer/verification/business-structures).
+     */
+    business_structure?: string;
+
+    /**
+     * Body param: Business website URL. Whop store pages are not accepted.
+     */
+    business_website?: string;
+
+    /**
+     * Body param: Country of incorporation as a two-letter ISO 3166-1 country code.
+     */
+    country?: string;
+
+    /**
+     * Body param: Must be `business` to start a KYB verification.
+     */
+    kind?: 'business';
+
+    /**
+     * Body param: State or region where the business is incorporated.
+     */
+    place_of_incorporation?: string;
+
+    /**
+     * Body param: EIN. Tokenized in transit and never stored raw.
+     */
+    tax_identification_number?: string;
+  }
+
+  export namespace CreateBusinessVerification {
+    export interface Address {
+      city?: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+       */
+      country?: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1?: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code?: string;
+
+      /**
+       * State, province, or region code, for example `CA`.
+       */
+      state?: string;
+    }
+  }
+}
+
+export type VerificationUpdateParams =
+  | VerificationUpdateParams.UpdateIndividualVerification
+  | VerificationUpdateParams.UpdateBusinessVerification;
+
+export declare namespace VerificationUpdateParams {
+  export interface UpdateIndividualVerification {
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string;
+
+    /**
+     * Formatted as `YYYY-MM-DD`.
+     */
+    date_of_birth?: string;
+
+    first_name?: string;
+
+    last_name?: string;
+
+    /**
+     * Personal address for the individual.
+     */
+    personal_address?: UpdateIndividualVerification.PersonalAddress;
+
+    /**
+     * Answers to items returned in `requested_information`. Each entry must include
+     * the requested item `id` and exactly one answer payload matching the item's
+     * `type`: `value` for `text`, `date`, or `phone`; `address` for `address`; `files`
+     * for `files`.
+     */
+    requested_information?: Array<UpdateIndividualVerification.RequestedInformation>;
+  }
+
+  export namespace UpdateIndividualVerification {
+    /**
+     * Personal address for the individual.
+     */
+    export interface PersonalAddress {
+      city?: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+       */
+      country?: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1?: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code?: string;
+
+      /**
+       * State, province, or region code, for example `CA`.
+       */
+      state?: string;
+    }
+
+    export interface RequestedInformation {
+      /**
+       * Requested information item ID, prefixed `inrqi_`.
+       */
+      id: string;
+
+      /**
+       * Address payload for `address` items.
+       */
+      address?: RequestedInformation.Address;
+
+      /**
+       * Uploaded file payloads for `files` items. Each file should include a
+       * `direct_upload_id` from the upload flow, plus the requested file `category` and
+       * `kind` when provided.
+       */
+      files?: Array<RequestedInformation.File>;
+
+      /**
+       * Answer value for `text`, `date`, or `phone` items.
+       */
+      value?: string;
+
+      /**
+       * Whether `value` is raw input or a vault token.
+       */
+      value_type?: 'raw' | 'vault_token';
+    }
+
+    export namespace RequestedInformation {
+      /**
+       * Address payload for `address` items.
+       */
+      export interface Address {
+        city?: string;
+
+        /**
+         * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+         */
+        country?: string;
+
+        /**
+         * First line of the street address.
+         */
+        line1?: string;
+
+        /**
+         * Second line of the street address.
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code.
+         */
+        postal_code?: string;
+
+        /**
+         * State, province, or region code, for example `CA`.
+         */
+        state?: string;
+      }
+
+      export interface File {
+        /**
+         * Existing attachment ID, when reusing an already attached document.
+         */
+        attachment_id?: string;
+
+        /**
+         * Requested file category copied from `requested_files.category`.
+         */
+        category?: string;
+
+        /**
+         * Direct upload ID for the uploaded document.
+         */
+        direct_upload_id?: string;
+
+        /**
+         * Requested document kind copied from `requested_files.kind`.
+         */
+        kind?: string;
+      }
+    }
+  }
+
+  export interface UpdateBusinessVerification {
+    /**
+     * Business address.
+     */
+    business_address?: UpdateBusinessVerification.BusinessAddress;
+
+    /**
+     * Legal business name.
+     */
+    business_name?: string;
+
+    /**
+     * Legal entity structure of the business, such as `private_corporation` or
+     * `sole_proprietorship`. Supported values vary by country of incorporation — see
+     * [Business structures](/developer/verification/business-structures).
+     */
+    business_structure?: string;
+
+    /**
+     * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+     */
+    country?: string;
+
+    /**
+     * Answers to items returned in `requested_information`. Each entry must include
+     * the requested item `id` and exactly one answer payload matching the item's
+     * `type`: `value` for `text`, `date`, or `phone`; `address` for `address`; `files`
+     * for `files`.
+     */
+    requested_information?: Array<UpdateBusinessVerification.RequestedInformation>;
+  }
+
+  export namespace UpdateBusinessVerification {
+    /**
+     * Business address.
+     */
+    export interface BusinessAddress {
+      city?: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+       */
+      country?: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1?: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code?: string;
+
+      /**
+       * State, province, or region code, for example `CA`.
+       */
+      state?: string;
+    }
+
+    export interface RequestedInformation {
+      /**
+       * Requested information item ID, prefixed `inrqi_`.
+       */
+      id: string;
+
+      /**
+       * Address payload for `address` items.
+       */
+      address?: RequestedInformation.Address;
+
+      /**
+       * Uploaded file payloads for `files` items. Each file should include a
+       * `direct_upload_id` from the upload flow, plus the requested file `category` and
+       * `kind` when provided.
+       */
+      files?: Array<RequestedInformation.File>;
+
+      /**
+       * Answer value for `text`, `date`, or `phone` items.
+       */
+      value?: string;
+
+      /**
+       * Whether `value` is raw input or a vault token.
+       */
+      value_type?: 'raw' | 'vault_token';
+    }
+
+    export namespace RequestedInformation {
+      /**
+       * Address payload for `address` items.
+       */
+      export interface Address {
+        city?: string;
+
+        /**
+         * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
+         */
+        country?: string;
+
+        /**
+         * First line of the street address.
+         */
+        line1?: string;
+
+        /**
+         * Second line of the street address.
+         */
+        line2?: string;
+
+        /**
+         * Postal or ZIP code.
+         */
+        postal_code?: string;
+
+        /**
+         * State, province, or region code, for example `CA`.
+         */
+        state?: string;
+      }
+
+      export interface File {
+        /**
+         * Existing attachment ID, when reusing an already attached document.
+         */
+        attachment_id?: string;
+
+        /**
+         * Requested file category copied from `requested_files.category`.
+         */
+        category?: string;
+
+        /**
+         * Direct upload ID for the uploaded document.
+         */
+        direct_upload_id?: string;
+
+        /**
+         * Requested document kind copied from `requested_files.kind`.
+         */
+        kind?: string;
+      }
+    }
+  }
 }
 
 export declare namespace Verifications {
   export {
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
+    type VerificationCreateResponse as VerificationCreateResponse,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
+    type VerificationUpdateResponse as VerificationUpdateResponse,
     type VerificationListResponse as VerificationListResponse,
-    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
     type VerificationListParams as VerificationListParams,
+    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationUpdateParams as VerificationUpdateParams,
   };
 }

@@ -8,9 +8,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Companies
- */
 export class Companies extends APIResource {
   /**
    * Retrieves the details of an existing company.
@@ -147,7 +144,7 @@ export interface CompanyListResponse {
   published_reviews_count: number;
 
   /**
-   * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+   * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
    */
   route: string;
 

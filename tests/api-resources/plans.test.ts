@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.plans.list({ company_id: 'company_id' });
+    const responsePromise = client.plans.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.plans.list({
-      company_id: 'company_id',
+      account_id: 'account_id',
       after: 'after',
       before: 'before',
       created_after: 'created_after',
@@ -40,8 +40,8 @@ describe('resource plans', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.plans.create({ product_id: 'product_id' });
+  test.skip('create', async () => {
+    const responsePromise = client.plans.create({});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,51 +49,6 @@ describe('resource plans', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.plans.create({
-      product_id: 'product_id',
-      adaptive_pricing_enabled: true,
-      billing_period: 0,
-      checkout_styling: {},
-      company_id: 'company_id',
-      currency: 'currency',
-      custom_fields: [
-        {
-          id: 'id',
-          field_type: 'text',
-          name: 'name',
-          order: 0,
-          placeholder: 'placeholder',
-          required: true,
-        },
-      ],
-      description: 'description',
-      expiration_days: 0,
-      image: { id: 'id', direct_upload_id: 'direct_upload_id' },
-      initial_price: 0,
-      internal_notes: 'internal_notes',
-      legacy_payment_method_controls: true,
-      metadata: {},
-      override_tax_type: 'override_tax_type',
-      payment_method_configuration: {
-        disabled: ['string'],
-        enabled: ['string'],
-        include_platform_defaults: true,
-      },
-      plan_type: 'plan_type',
-      release_method: 'release_method',
-      renewal_price: 0,
-      split_pay_required_payments: 0,
-      stock: 0,
-      three_ds_level: 'mandate_challenge',
-      title: 'title',
-      trial_period_days: 0,
-      unlimited_stock: true,
-      visibility: 'visibility',
-    });
   });
 
   // Mock server tests are disabled
@@ -123,6 +78,18 @@ describe('resource plans', () => {
   // Mock server tests are disabled
   test.skip('delete', async () => {
     const responsePromise = client.plans.delete('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('calculateTax', async () => {
+    const responsePromise = client.plans.calculateTax('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

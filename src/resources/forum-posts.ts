@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Forum posts
- */
 export class ForumPosts extends APIResource {
   /**
    * Returns a paginated list of forum posts within a specific experience, with
@@ -193,7 +190,7 @@ export namespace ForumPostListResponse {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
