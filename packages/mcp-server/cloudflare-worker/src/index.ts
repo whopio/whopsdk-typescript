@@ -31,7 +31,7 @@ const serverConfig: ServerConfig = {
       key: 'apiKey',
       label: 'API Key',
       description:
-        'A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`',
+        'An account API key, account scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`',
       required: true,
       default: undefined,
       placeholder: 'My API Key',
@@ -61,8 +61,8 @@ const serverConfig: ServerConfig = {
       description:
         'Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.',
       required: false,
-      default: '2026-06-08',
-      placeholder: '2026-06-08',
+      default: '2026-07-08-1',
+      placeholder: '2026-07-08-1',
       type: 'string',
     },
   ],

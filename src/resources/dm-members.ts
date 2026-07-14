@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Dm members
- */
 export class DmMembers extends APIResource {
   /**
    * Returns a paginated list of members in a specific DM channel, sorted by the date

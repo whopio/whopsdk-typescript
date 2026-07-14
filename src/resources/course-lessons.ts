@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Course lessons
- */
 export class CourseLessons extends APIResource {
   /**
    * Returns a paginated list of lessons within a course or chapter, ordered by
@@ -332,7 +329,7 @@ export namespace Lesson {
       id: string;
 
       /**
-       * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+       * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
        */
       content_type: string | null;
 
@@ -389,7 +386,7 @@ export namespace Lesson {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 
@@ -420,7 +417,7 @@ export namespace Lesson {
     id: string;
 
     /**
-     * The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg).
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
      */
     content_type: string | null;
 

@@ -8,9 +8,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Setup intents
- */
 export class SetupIntents extends APIResource {
   /**
    * Returns a paginated list of setup intents for a company, with optional filtering
@@ -104,6 +101,12 @@ export interface SetupIntent {
    * The current status of the setup intent.
    */
   status: SetupIntentStatus;
+
+  /**
+   * Whether 3D Secure authentication was completed when this payment method was set
+   * up.
+   */
+  three_ds_verified: boolean;
 }
 
 export namespace SetupIntent {

@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Shipments
- */
 export class Shipments extends APIResource {
   /**
    * Returns a paginated list of shipments, with optional filtering by payment,

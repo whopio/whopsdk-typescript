@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Bounties
- */
 export class Bounties extends APIResource {
   /**
    * Returns a paginated list of workforce bounties. When experienceId is provided,
@@ -101,7 +98,7 @@ export interface BountyCreateResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -161,7 +158,7 @@ export interface BountyRetrieveResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -221,7 +218,7 @@ export interface BountyListResponse {
   /**
    * The current lifecycle status of the bounty.
    */
-  status: 'published' | 'archived';
+  status: 'published' | 'archived' | 'scheduled';
 
   /**
    * The title of the bounty.
@@ -279,13 +276,14 @@ export interface BountyListParams extends CursorPageParams {
   /**
    * The available bounty statuses to choose from.
    */
-  status?: 'published' | 'archived' | null;
+  status?: 'published' | 'archived' | 'scheduled' | null;
 }
 
 export interface BountyCreateParams {
   /**
    * The amount paid to each approved submission. The total bounty pool funded is
-   * this amount times accepted_submissions_limit.
+   * this amount times accepted_submissions_limit, and must be at least 5 in the
+   * bounty's currency.
    */
   base_unit_amount: number;
 
@@ -306,7 +304,8 @@ export interface BountyCreateParams {
 
   /**
    * The number of submissions that can be approved before the bounty closes.
-   * Defaults to 1.
+   * Defaults to 1. The total pool (base_unit_amount times this limit) must be at
+   * least 5 in the bounty's currency.
    */
   accepted_submissions_limit?: number | null;
 
@@ -315,6 +314,19 @@ export interface BountyCreateParams {
    * globally visible.
    */
   allowed_country_codes?: Array<string> | null;
+
+  /**
+   * What the poster is trying to accomplish with a workforce bounty. Used for
+   * product taxonomy and analytics, separate from the bounty's implementation type.
+   */
+  business_goal_type?:
+    | 'clipping'
+    | 'post_engagement'
+    | 'owned_account_growth'
+    | 'ugc_content'
+    | 'local_activation'
+    | 'other'
+    | null;
 
   /**
    * An optional experience to scope the bounty to.
@@ -339,6 +351,23 @@ export interface BountyCreateParams {
    * omitted.
    */
   post_title?: string | null;
+
+  /**
+   * How often a scheduled bounty republishes a new bounty.
+   */
+  scheduled_frequency?: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly' | null;
+
+  /**
+   * When to publish the bounty. When provided, the bounty is created as a hidden
+   * draft and published at this time instead of immediately. Must be in the future.
+   */
+  scheduled_publish_at?: string | null;
+
+  /**
+   * The IANA timezone used for recurring occurrences. Required when
+   * scheduled_publish_at is provided.
+   */
+  scheduled_timezone?: string | null;
 }
 
 export declare namespace Bounties {

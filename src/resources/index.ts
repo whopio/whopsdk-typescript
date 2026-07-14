@@ -18,33 +18,31 @@ export {
   Accounts,
   type Account,
   type AccountSocialLink,
-  type AccountListResponse,
+  type AccountRecommendActionsResponse,
   type AccountListParams,
   type AccountCreateParams,
   type AccountUpdateParams,
-} from './accounts';
+  type AccountsCursorPage,
+} from './accounts/accounts';
 export {
   AdCampaigns,
   type AdCampaign,
-  type AdCampaignPlatform,
-  type AdCampaignStatus,
-  type AdCampaignListResponse,
+  type AdCampaignDeleteResponse,
   type AdCampaignListParams,
+  type AdCampaignCreateParams,
   type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
-  type AdCampaignListResponsesCursorPage,
+  type AdCampaignsCursorPage,
 } from './ad-campaigns';
 export {
   AdGroups,
-  type AdBudgetType,
   type AdGroup,
-  type AdGroupStatus,
-  type AdGroupListResponse,
   type AdGroupDeleteResponse,
   type AdGroupListParams,
+  type AdGroupCreateParams,
   type AdGroupRetrieveParams,
   type AdGroupUpdateParams,
-  type AdGroupListResponsesCursorPage,
+  type AdGroupsCursorPage,
 } from './ad-groups';
 export {
   AdReports,
@@ -56,11 +54,12 @@ export {
 export {
   Ads,
   type Ad,
-  type ExternalAdStatus,
-  type AdListResponse,
+  type AdDeleteResponse,
   type AdListParams,
+  type AdCreateParams,
   type AdRetrieveParams,
-  type AdListResponsesCursorPage,
+  type AdUpdateParams,
+  type AdsCursorPage,
 } from './ads';
 export {
   Affiliates,
@@ -84,11 +83,21 @@ export {
   Apps,
   type AppType,
   type AppListResponse,
+  type AppLogsResponse,
   type AppListParams,
   type AppCreateParams,
   type AppUpdateParams,
+  type AppLogsParams,
   type AppListResponsesCursorPage,
 } from './apps';
+export {
+  Audiences,
+  type Audience,
+  type AudienceDeleteResponse,
+  type AudienceListParams,
+  type AudienceCreateParams,
+  type AudiencesCursorPage,
+} from './audiences';
 export {
   AuthorizedUsers,
   type AuthorizedUser,
@@ -109,6 +118,17 @@ export {
   type BountyListResponsesCursorPage,
 } from './bounties';
 export {
+  Cards,
+  type CardCreateResponse,
+  type CardRetrieveResponse,
+  type CardUpdateResponse,
+  type CardListResponse,
+  type CardListParams,
+  type CardCreateParams,
+  type CardRetrieveParams,
+  type CardUpdateParams,
+} from './cards';
+export {
   ChatChannels,
   type ChatChannelListResponse,
   type ChatChannelListParams,
@@ -118,6 +138,8 @@ export {
 export {
   CheckoutConfigurations,
   type CheckoutModes,
+  type CheckoutConfigurationCreateResponse,
+  type CheckoutConfigurationRetrieveResponse,
   type CheckoutConfigurationListResponse,
   type CheckoutConfigurationListParams,
   type CheckoutConfigurationCreateParams,
@@ -143,7 +165,6 @@ export {
   type CompanyTokenTransactionCreateParams,
   type CompanyTokenTransactionListResponsesCursorPage,
 } from './company-token-transactions';
-export { Conversions, type ConversionCreateResponse, type ConversionCreateParams } from './conversions';
 export {
   CourseChapters,
   type CourseChapter,
@@ -195,7 +216,13 @@ export {
   type CourseUpdateParams,
   type CourseListResponsesCursorPage,
 } from './courses';
-export { Deposits, type DepositCreateResponse, type DepositCreateParams } from './deposits';
+export {
+  Deposits,
+  type DepositCreateResponse,
+  type DepositListResponse,
+  type DepositListParams,
+  type DepositCreateParams,
+} from './deposits';
 export {
   DisputeAlerts,
   type DisputeAlertType,
@@ -242,6 +269,14 @@ export {
   type EntryListParams,
   type EntryListResponsesCursorPage,
 } from './entries';
+export {
+  Events,
+  type EventCreateResponse,
+  type EventListResponse,
+  type EventListParams,
+  type EventCreateParams,
+  type EventListResponsesCursorPage,
+} from './events';
 export {
   Experiences,
   type ExperienceListResponse,
@@ -314,6 +349,7 @@ export {
   type LeadListResponsesCursorPage,
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
+export { Media, type MediaAsset, type MediaGenerateParams } from './media';
 export {
   Members,
   type MemberRetrieveResponse,
@@ -375,22 +411,32 @@ export {
   type PayoutAccountRetrieveResponse,
 } from './payout-accounts';
 export {
-  PayoutMethods,
-  type PayoutDestinationCategory,
-  type PayoutMethodRetrieveResponse,
-  type PayoutMethodListResponse,
-  type PayoutMethodListParams,
-  type PayoutMethodListResponsesCursorPage,
-} from './payout-methods';
+  Payouts,
+  type PayoutCreateResponse,
+  type PayoutListResponse,
+  type PayoutListParams,
+  type PayoutCreateParams,
+  type PayoutListResponsesCursorPage,
+} from './payouts/payouts';
+export {
+  People,
+  type PersonRetrieveResponse,
+  type PersonListResponse,
+  type PersonListParams,
+  type PersonRetrieveParams,
+  type PersonListResponsesCursorPage,
+} from './people';
 export {
   Plans,
   type CheckoutFont,
   type CheckoutShape,
   type PlanListResponse,
   type PlanDeleteResponse,
+  type PlanCalculateTaxResponse,
   type PlanListParams,
   type PlanCreateParams,
   type PlanUpdateParams,
+  type PlanCalculateTaxParams,
   type PlanListResponsesCursorPage,
 } from './plans';
 export {
@@ -420,6 +466,11 @@ export {
   type ReactionDeleteParams,
   type ReactionListResponsesCursorPage,
 } from './reactions';
+export {
+  Referrals,
+  type ReferralReferredUsersResponse,
+  type ReferralReferredUsersParams,
+} from './referrals/referrals';
 export {
   Refunds,
   type PaymentProvider,
@@ -467,6 +518,21 @@ export {
   type ShipmentListResponsesCursorPage,
 } from './shipments';
 export {
+  SocialAccounts,
+  type SocialAccount,
+  type SocialAccountPost,
+  type SocialAccountDeleteResponse,
+  type SocialAccountConnectResponse,
+  type SocialAccountPostsResponse,
+  type SocialAccountListParams,
+  type SocialAccountCreateParams,
+  type SocialAccountConnectParams,
+  type SocialAccountDeleteParams,
+  type SocialAccountPostsParams,
+  type SocialAccountsCursorPage,
+} from './social-accounts';
+export { Stats, type StatRetrieveResponse, type StatListResponse, type StatRetrieveParams } from './stats';
+export {
   SupportChannels,
   type SupportChannelListResponse,
   type SupportChannelListParams,
@@ -477,14 +543,17 @@ export {
   Swaps,
   type SwapCreateResponse,
   type SwapRetrieveResponse,
+  type SwapListResponse,
   type SwapCreateQuoteResponse,
   type SwapCreateQuoteParams,
   type SwapCreateParams,
-  type SwapRetrieveParams,
+  type SwapListParams,
 } from './swaps';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
+  type TransferCreateResponse,
+  type TransferRetrieveResponse,
   type TransferListResponse,
   type TransferListParams,
   type TransferCreateParams,
@@ -493,6 +562,7 @@ export {
 export {
   Users,
   type User,
+  type UserBalance,
   type UserCheckAccessResponse,
   type UserRetrieveParams,
   type UserCheckAccessParams,
@@ -505,20 +575,14 @@ export {
   Verifications,
   type VerificationErrorCode,
   type VerificationStatus,
+  type VerificationCreateResponse,
   type VerificationRetrieveResponse,
+  type VerificationUpdateResponse,
   type VerificationListResponse,
   type VerificationListParams,
-  type VerificationListResponsesCursorPage,
+  type VerificationCreateParams,
+  type VerificationUpdateParams,
 } from './verifications';
-export {
-  Wallets,
-  type AccountWallet,
-  type WalletListResponse,
-  type WalletBalanceResponse,
-  type WalletSendResponse,
-  type WalletBalanceParams,
-  type WalletSendParams,
-} from './wallets';
 export {
   Webhooks,
   type APIVersion,
@@ -527,6 +591,8 @@ export {
   type WebhookCreateResponse,
   type WebhookListResponse,
   type WebhookDeleteResponse,
+  type ChatMessageCreatedWebhookEvent,
+  type ChatReactionCreatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
   type DisputeCreatedWebhookEvent,
   type DisputeUpdatedWebhookEvent,
@@ -544,9 +610,11 @@ export {
   type InvoicePaidWebhookEvent,
   type InvoicePastDueWebhookEvent,
   type InvoiceVoidedWebhookEvent,
+  type LedgerAccountFundsAvailableWebhookEvent,
   type MembershipActivatedWebhookEvent,
   type MembershipCancelAtPeriodEndChangedWebhookEvent,
   type MembershipDeactivatedWebhookEvent,
+  type MembershipTrialEndingSoonWebhookEvent,
   type PaymentCreatedWebhookEvent,
   type PaymentFailedWebhookEvent,
   type PaymentPendingWebhookEvent,
@@ -581,3 +649,4 @@ export {
   type WithdrawalCreateParams,
   type WithdrawalListResponsesCursorPage,
 } from './withdrawals';
+export { Workforce } from './workforce/workforce';

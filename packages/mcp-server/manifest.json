@@ -31,7 +31,7 @@
   "user_config": {
     "WHOP_API_KEY": {
       "title": "api_key",
-      "description": "A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`",
+      "description": "An account API key, account scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`",
       "required": true,
       "type": "string"
     },

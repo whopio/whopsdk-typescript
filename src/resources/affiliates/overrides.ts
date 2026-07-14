@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagin
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
-/**
- * Affiliates
- */
 export class Overrides extends APIResource {
   /**
    * Returns a paginated list of overrides for an affiliate.

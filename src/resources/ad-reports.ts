@@ -6,9 +6,6 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-/**
- * Ad reports
- */
 export class AdReports extends APIResource {
   /**
    * Performance report for a company, ad campaigns, ad groups, or ads. Always
@@ -56,8 +53,18 @@ export type ResultLabelKeys =
   | 'registrations'
   | 'content_views'
   | 'searches'
+  | 'adds_to_cart'
+  | 'adds_to_wishlist'
+  | 'adds_of_payment_info'
+  | 'checkouts_initiated'
   | 'website_schedules'
   | 'website_submit_applications'
+  | 'website_trials_started'
+  | 'website_subscriptions'
+  | 'website_contacts'
+  | 'website_donations'
+  | 'website_find_locations'
+  | 'website_product_customizations'
   | 'custom';
 
 /**

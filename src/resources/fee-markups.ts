@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Fee markups
- */
 export class FeeMarkups extends APIResource {
   /**
    * Returns a paginated list of fee markups configured for a company. If the company
