@@ -9,26 +9,13 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Products
+ * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
+ *
+ * Use the Products API to create products, list products visible to your credentials, retrieve product details, update product metadata or merchandising fields, and delete products that should no longer be sold.
  */
 export class Products extends APIResource {
   /**
-   * Returns a paginated list of products belonging to a company, with optional
-   * filtering by type, visibility, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const productListItem of client.products.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
-   *   // ...
-   * }
-   * ```
+   * Returns a paginated list of products belonging to a company.
    */
   list(
     query: ProductListParams,
@@ -38,89 +25,36 @@ export class Products extends APIResource {
   }
 
   /**
-   * Retrieves the details of an existing product.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * const product = await client.products.retrieve(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Retrieves the details of an existing product. This endpoint is publicly
+   * accessible.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.get(path`/products/${id}`, options);
   }
 
   /**
-   * Create a new product for a company. The product serves as the top-level
-   * container for plans and experiences.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:create`
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * const product = await client.products.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   title: 'title',
-   * });
-   * ```
+   * Creates a new product for a company.
    */
   create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.post('/products', { body, ...options });
   }
 
   /**
-   * Update a product's title, description, visibility, and other settings.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:update`
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * const product = await client.products.update(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Updates an existing product.
    */
-  update(
-    id: string,
-    body: ProductUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Shared.Product> {
+  update(id: string, body: ProductUpdateParams, options?: RequestOptions): APIPromise<Shared.Product> {
     return this._client.patch(path`/products/${id}`, { body, ...options });
   }
 
   /**
-   * Permanently delete a product and remove it from the company's catalog.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:delete`
-   *
-   * @example
-   * ```ts
-   * const product = await client.products.delete(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Deletes a product. Only products with no memberships, entries, reviews, or
+   * invoices can be deleted.
    */
   delete(id: string, options?: RequestOptions): APIPromise<ProductDeleteResponse> {
     return this._client.delete(path`/products/${id}`, options);
   }
 }
 
-/**
- * Represents `true` or `false` values.
- */
 export type ProductDeleteResponse = boolean;
 
 export interface ProductListParams extends CursorPageParams {
@@ -130,141 +64,115 @@ export interface ProductListParams extends CursorPageParams {
   company_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Filter to only products matching these types.
    */
-  before?: string | null;
+  access_pass_types?: Array<string>;
 
   /**
-   * Only return products created after this timestamp.
+   * A cursor; returns products before this position.
    */
-  created_after?: string | null;
+  before?: string;
 
   /**
-   * Only return products created before this timestamp.
+   * The sort direction for results. Defaults to descending.
    */
-  created_before?: string | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * The direction of the sort.
+   * The number of products to return (default and max 100).
    */
-  direction?: Shared.Direction | null;
+  first?: number;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * The number of products to return from the end of the range.
    */
-  first?: number | null;
+  last?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * The field to sort results by. Defaults to created_at.
    */
-  last?: number | null;
-
-  /**
-   * The ways a relation of AccessPasses can be ordered
-   */
-  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
-
-  /**
-   * Filter to only products matching these type classifications.
-   */
-  product_types?: Array<Shared.AccessPassType> | null;
+  order?: string;
 
   /**
    * Filter to only products matching these visibility states.
    */
-  visibilities?: Array<Shared.VisibilityFilter> | null;
+  visibilities?: Array<string>;
 }
 
 export interface ProductCreateParams {
-  /**
-   * The unique identifier of the company to create this product for.
-   */
-  company_id: string;
-
   /**
    * The display name of the product. Maximum 80 characters.
    */
   title: string;
 
   /**
-   * Whether the checkout flow collects a shipping address from the customer.
+   * Whether to collect a shipping address at checkout.
    */
   collect_shipping_address?: boolean | null;
 
   /**
-   * The different types of custom CTAs that can be selected.
+   * The unique identifier of the company to create this product for.
    */
-  custom_cta?: Shared.CustomCta | null;
+  company_id?: string;
 
   /**
-   * A URL that the call-to-action button links to instead of the default checkout
-   * flow.
+   * The call-to-action button label.
+   */
+  custom_cta?: string | null;
+
+  /**
+   * A URL the call-to-action button links to.
    */
   custom_cta_url?: string | null;
 
   /**
-   * A custom text label that appears on the customer's bank statement. Must be 5-22
-   * characters, contain at least one letter, and not contain <, >, \, ', or "
-   * characters.
+   * Custom bank statement descriptor. Must start with WHOP\*.
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the product displayed on its product page.
+   * A written description displayed on the product page.
    */
   description?: string | null;
 
   /**
-   * The unique identifiers of experiences to connect to this product.
-   */
-  experience_ids?: Array<string> | null;
-
-  /**
-   * The commission rate as a percentage that affiliates earn through the global
-   * affiliate program.
+   * The commission rate affiliates earn.
    */
   global_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
+   * The enrollment status in the global affiliate program.
    */
-  global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+  global_affiliate_status?: string;
 
   /**
-   * A short marketing headline displayed prominently on the product page.
+   * A short marketing headline for the product page.
    */
   headline?: string | null;
 
   /**
-   * The commission rate as a percentage that members earn through the member
-   * affiliate program.
+   * The commission rate members earn.
    */
   member_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
+   * The enrollment status in the member affiliate program.
    */
-  member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+  member_affiliate_status?: string;
 
   /**
-   * Custom key-value pairs to store on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
-   * value.
+   * Custom key-value pairs to store on the product.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   /**
-   * Configuration for an automatically generated plan to attach to this product.
-   */
-  plan_options?: ProductCreateParams.PlanOptions | null;
-
-  /**
-   * The unique identifier of the tax classification code to apply to this product.
+   * The unique identifier of the tax classification code. See the available
+   * [product categories](https://docs.numeral.com/essentials/product-categories).
    */
   product_tax_code_id?: string | null;
 
   /**
-   * A URL to redirect the customer to after completing a purchase.
+   * A URL to redirect the customer to after purchase.
    */
   redirect_purchase_url?: string | null;
 
@@ -280,176 +188,32 @@ export interface ProductCreateParams {
   send_welcome_message?: boolean | null;
 
   /**
-   * Visibility of a resource
+   * Whether the product is visible to customers.
    */
-  visibility?: Shared.Visibility | null;
-}
-
-export namespace ProductCreateParams {
-  /**
-   * Configuration for an automatically generated plan to attach to this product.
-   */
-  export interface PlanOptions {
-    /**
-     * The available currencies on the platform
-     */
-    base_currency?: Shared.Currency | null;
-
-    /**
-     * The interval at which the plan charges (renewal plans).
-     */
-    billing_period?: number | null;
-
-    /**
-     * An array of custom field objects.
-     */
-    custom_fields?: Array<PlanOptions.CustomField> | null;
-
-    /**
-     * An additional amount charged upon first purchase. Provided as a number in the
-     * specified currency. Eg: 10.43 for $10.43 USD.
-     */
-    initial_price?: number | null;
-
-    /**
-     * The type of plan that can be attached to a product
-     */
-    plan_type?: Shared.PlanType | null;
-
-    /**
-     * The methods of how a plan can be released.
-     */
-    release_method?: Shared.ReleaseMethod | null;
-
-    /**
-     * The amount the customer is charged every billing period. Provided as a number in
-     * the specified currency. Eg: 10.43 for $10.43 USD.
-     */
-    renewal_price?: number | null;
-
-    /**
-     * Visibility of a resource
-     */
-    visibility?: Shared.Visibility | null;
-  }
-
-  export namespace PlanOptions {
-    export interface CustomField {
-      /**
-       * The type of the custom field.
-       */
-      field_type: 'text';
-
-      /**
-       * The name of the custom field.
-       */
-      name: string;
-
-      /**
-       * The ID of the custom field (if being updated)
-       */
-      id?: string | null;
-
-      /**
-       * The order of the field.
-       */
-      order?: number | null;
-
-      /**
-       * The placeholder value of the field.
-       */
-      placeholder?: string | null;
-
-      /**
-       * Whether or not the field is required.
-       */
-      required?: boolean | null;
-    }
-  }
+  visibility?: string;
 }
 
 export interface ProductUpdateParams {
   /**
-   * Whether the checkout flow collects a shipping address from the customer.
-   */
-  collect_shipping_address?: boolean | null;
-
-  /**
-   * The different types of custom CTAs that can be selected.
-   */
-  custom_cta?: Shared.CustomCta | null;
-
-  /**
-   * A URL that the call-to-action button links to instead of the default checkout
-   * flow.
-   */
-  custom_cta_url?: string | null;
-
-  /**
-   * A custom text label that appears on the customer's bank statement. Must be 5-22
-   * characters, contain at least one letter, and not contain <, >, \, ', or "
-   * characters.
-   */
-  custom_statement_descriptor?: string | null;
-
-  /**
-   * A written description of the product displayed on its product page.
+   * A written description displayed on the product page.
    */
   description?: string | null;
 
   /**
-   * The gallery images for the product.
-   */
-  gallery_images?: Array<ProductUpdateParams.GalleryImage> | null;
-
-  /**
-   * The commission rate as a percentage that affiliates earn through the global
-   * affiliate program.
-   */
-  global_affiliate_percentage?: number | null;
-
-  /**
-   * The different statuses of the global affiliate program for a product.
-   */
-  global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-  /**
-   * A short marketing headline displayed prominently on the product page.
+   * A short marketing headline for the product page.
    */
   headline?: string | null;
 
   /**
-   * The commission rate as a percentage that members earn through the member
-   * affiliate program.
+   * Custom key-value pairs to store on the product.
    */
-  member_affiliate_percentage?: number | null;
+  metadata?: unknown | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
-   */
-  member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-  /**
-   * Custom key-value pairs to store on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 500 chars per key, 5000 chars per
-   * value.
-   */
-  metadata?: { [key: string]: unknown } | null;
-
-  /**
-   * The unique identifier of the tax classification code to apply to this product.
+   * The unique identifier of the tax classification code. See the available
+   * [product categories](https://docs.numeral.com/essentials/product-categories).
    */
   product_tax_code_id?: string | null;
-
-  /**
-   * A URL to redirect the customer to after completing a purchase.
-   */
-  redirect_purchase_url?: string | null;
-
-  /**
-   * The URL slug for the product's public link.
-   */
-  route?: string | null;
 
   /**
    * Whether to send an automated welcome message via support chat when a user joins
@@ -458,46 +222,14 @@ export interface ProductUpdateParams {
   send_welcome_message?: boolean | null;
 
   /**
-   * Layout and display configuration for this product on the company's store page.
+   * The display name of the product.
    */
-  store_page_config?: ProductUpdateParams.StorePageConfig | null;
+  title?: string;
 
   /**
-   * The display name of the product. Maximum 80 characters.
+   * Whether the product is visible to customers.
    */
-  title?: string | null;
-
-  /**
-   * Visibility of a resource
-   */
-  visibility?: Shared.Visibility | null;
-}
-
-export namespace ProductUpdateParams {
-  /**
-   * Input for an attachment
-   */
-  export interface GalleryImage {
-    /**
-     * The ID of an existing file object.
-     */
-    id: string;
-  }
-
-  /**
-   * Layout and display configuration for this product on the company's store page.
-   */
-  export interface StorePageConfig {
-    /**
-     * Custom call-to-action text for the product's store page.
-     */
-    custom_cta?: string | null;
-
-    /**
-     * Whether or not to show the price on the product's store page.
-     */
-    show_price?: boolean | null;
-  }
+  visibility?: string;
 }
 
 export declare namespace Products {

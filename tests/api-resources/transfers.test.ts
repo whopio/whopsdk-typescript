@@ -28,13 +28,13 @@ describe('resource transfers', () => {
         {
           after: 'after',
           before: 'before',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
+          created_after: 'created_after',
+          created_before: 'created_before',
           destination_id: 'destination_id',
           direction: 'asc',
-          first: 42,
-          last: 42,
-          order: 'amount',
+          first: 50,
+          last: 50,
+          order: 'created_at',
           origin_id: 'origin_id',
         },
         { path: '/_stainless_unknown_path' },
@@ -44,12 +44,7 @@ describe('resource transfers', () => {
 
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.transfers.create({
-      amount: 6.9,
-      currency: 'usd',
-      destination_id: 'destination_id',
-      origin_id: 'origin_id',
-    });
+    const responsePromise = client.transfers.create({ amount: 0, origin_id: 'origin_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,19 +57,22 @@ describe('resource transfers', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.transfers.create({
-      amount: 6.9,
+      amount: 0,
+      origin_id: 'origin_id',
       currency: 'usd',
       destination_id: 'destination_id',
-      origin_id: 'origin_id',
+      expires_at: '2019-12-27T18:11:19.117Z',
       idempotence_key: 'idempotence_key',
       metadata: { foo: 'bar' },
       notes: 'notes',
+      redeemable_count: 0,
+      type: 'ledger',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.transfers.retrieve('ctt_xxxxxxxxxxxxxx');
+    const responsePromise = client.transfers.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

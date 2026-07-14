@@ -1,52 +1,182 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 
 /**
- * Conversions
+ * An Event records conversion or engagement activity for an account, such as page views, purchases, or leads. Each event ties the action to the [person](/api-reference/beta/people/person) who took it, so activity can be attributed to the ads and links that drove it.
+ *
+ * Use the Events API to send new tracking events and list the events recorded for a person.
  */
-export class Conversions extends APIResource {
+export class Events extends APIResource {
   /**
-   * Track a conversion or engagement event for a company.
-   *
-   * Required permissions:
-   *
-   * - `event:create`
+   * Lists pixel events for a person, most recent first. Events are shaped like the
+   * POST /events intake: attribution in context, identity in user.
    *
    * @example
    * ```ts
-   * const conversion = await client.conversions.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   * // Automatically fetches more pages as needed.
+   * for await (const eventListResponse of client.events.list({
+   *   person_id: 'person_id',
+   * })) {
+   *   // ...
+   * }
+   * ```
+   */
+  list(
+    query: EventListParams,
+    options?: RequestOptions,
+  ): PagePromise<EventListResponsesCursorPage, EventListResponse> {
+    return this._client.getAPIList('/events', CursorPage<EventListResponse>, { query, ...options });
+  }
+
+  /**
+   * Tracks a conversion or engagement event for an account.
+   *
+   * @example
+   * ```ts
+   * const event = await client.events.create({
+   *   account_id: 'account_id',
    *   event_name: 'lead',
    * });
    * ```
    */
-  create(body: ConversionCreateParams, options?: RequestOptions): APIPromise<ConversionCreateResponse> {
-    return this._client.post('/conversions', { body, ...options });
+  create(body: EventCreateParams, options?: RequestOptions): APIPromise<EventCreateResponse> {
+    return this._client.post('/events', { body, ...options });
   }
 }
 
-/**
- * A tracked conversion event
- */
-export interface ConversionCreateResponse {
-  /**
-   * The unique identifier for the conversion
-   */
+export type EventListResponsesCursorPage = CursorPage<EventListResponse>;
+
+export interface EventCreateResponse {
   id: string;
 }
 
-export interface ConversionCreateParams {
+export interface EventListResponse {
+  id: string;
+
+  event_id: string;
+
+  event_name: string;
+
+  event_time: number;
+
+  context?: EventListResponse.Context | null;
+
+  currency?: string | null;
+
+  custom_name?: string | null;
+
+  path?: string | null;
+
+  questions?: Array<EventListResponse.Question> | null;
+
+  referrer_url?: string | null;
+
+  total_usd_amount?: number | null;
+
+  url?: string | null;
+
+  user?: EventListResponse.User | null;
+
+  value?: number | null;
+}
+
+export namespace EventListResponse {
+  export interface Context {
+    ad_campaign_id?: string | null;
+
+    ad_id?: string | null;
+
+    ad_set_id?: string | null;
+
+    utm_campaign?: string | null;
+
+    utm_content?: string | null;
+
+    utm_medium?: string | null;
+
+    utm_source?: string | null;
+
+    utm_term?: string | null;
+  }
+
+  export interface Question {
+    id?: string | null;
+
+    answer?: string | null;
+
+    key?: string | null;
+
+    options?: Array<string> | null;
+
+    question?: string | null;
+
+    type?: string | null;
+  }
+
+  export interface User {
+    city?: string | null;
+
+    country?: string | null;
+
+    email?: string | null;
+
+    first_name?: string | null;
+
+    last_name?: string | null;
+
+    name?: string | null;
+
+    phone?: string | null;
+
+    state?: string | null;
+  }
+}
+
+export interface EventListParams extends CursorPageParams {
   /**
-   * The company to associate with this event.
+   * The ID of the person.
    */
-  company_id: string;
+  person_id: string;
 
   /**
-   * The type of event.
+   * The ID of the account, which will look like biz\_******\*******. Optional for
+   * account API keys; required for credentials that can access multiple accounts.
+   */
+  account_id?: string;
+
+  /**
+   * A cursor for fetching events before a later page.
+   */
+  before?: string;
+
+  /**
+   * The number of events to return.
+   */
+  first?: number;
+
+  /**
+   * Start of the time range as a Unix timestamp.
+   */
+  from?: number;
+
+  /**
+   * End of the time range as a Unix timestamp. Defaults to now.
+   */
+  to?: number;
+}
+
+export interface EventCreateParams {
+  /**
+   * The account to associate with this event.
+   */
+  account_id: string;
+
+  /**
+   * The type of conversion or engagement event
    */
   event_name:
     | 'lead'
@@ -77,12 +207,103 @@ export interface ConversionCreateParams {
   /**
    * Tracking and attribution context.
    */
-  context?: ConversionCreateParams.Context | null;
+  context?: EventCreateParams.Context | null;
 
   /**
    * The available currencies on the platform
    */
-  currency?: Shared.Currency | null;
+  currency?:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau'
+    | null;
 
   /**
    * Custom event name when event_name is 'custom'. Maximum 35 chars for this value.
@@ -143,7 +364,7 @@ export interface ConversionCreateParams {
   /**
    * User identity and profile data.
    */
-  user?: ConversionCreateParams.User | null;
+  user?: EventCreateParams.User | null;
 
   /**
    * Monetary value associated with the event.
@@ -151,7 +372,7 @@ export interface ConversionCreateParams {
   value?: number | null;
 }
 
-export namespace ConversionCreateParams {
+export namespace EventCreateParams {
   /**
    * Tracking and attribution context.
    */
@@ -414,9 +635,12 @@ export namespace ConversionCreateParams {
   }
 }
 
-export declare namespace Conversions {
+export declare namespace Events {
   export {
-    type ConversionCreateResponse as ConversionCreateResponse,
-    type ConversionCreateParams as ConversionCreateParams,
+    type EventCreateResponse as EventCreateResponse,
+    type EventListResponse as EventListResponse,
+    type EventListResponsesCursorPage as EventListResponsesCursorPage,
+    type EventListParams as EventListParams,
+    type EventCreateParams as EventCreateParams,
   };
 }

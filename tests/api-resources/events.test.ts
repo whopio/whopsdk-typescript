@@ -7,13 +7,35 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource conversions', () => {
+describe('resource events', () => {
+  // Mock server tests are disabled
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.events.list({ person_id: 'person_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: required and optional params', async () => {
+    const response = await client.events.list({
+      person_id: 'person_id',
+      account_id: 'account_id',
+      after: 'after',
+      before: 'before',
+      first: 0,
+      from: 0,
+      to: 0,
+    });
+  });
+
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.conversions.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      event_name: 'lead',
-    });
+    const responsePromise = client.events.create({ account_id: 'account_id', event_name: 'lead' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +47,8 @@ describe('resource conversions', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.conversions.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+    const response = await client.events.create({
+      account_id: 'account_id',
       event_name: 'lead',
       action_source: 'email',
       context: {

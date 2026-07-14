@@ -4,9 +4,6 @@ import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-/**
- * Account links
- */
 export class AccountLinks extends APIResource {
   /**
    * Generate a URL that directs a sub-merchant to their account portal, such as the

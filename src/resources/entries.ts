@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Entries
- */
 export class Entries extends APIResource {
   /**
    * Returns a paginated list of waitlist entries for a company, with optional

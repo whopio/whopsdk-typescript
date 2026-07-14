@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Leads
- */
 export class Leads extends APIResource {
   /**
    * Returns a paginated list of leads for a company, with optional filtering by

@@ -75,6 +75,15 @@ describe('resource authorizedUsers', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       role: 'owner',
       user_id: 'user_xxxxxxxxxxxxx',
+      elevation: {
+        authenticator_data: 'authenticator_data',
+        client_data_json: 'client_data_json',
+        credential_id: 'credential_id',
+        email_code: 'email_code',
+        signature: 'signature',
+        totp_code: 'totp_code',
+        use_finance_session: true,
+      },
       send_emails: true,
     });
   });
