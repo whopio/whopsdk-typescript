@@ -22,36 +22,24 @@ import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
 import {
-  Account,
-  AccountCreateParams,
-  AccountListParams,
-  AccountListResponse,
-  AccountSocialLink,
-  AccountUpdateParams,
-  Accounts,
-} from './resources/accounts';
-import {
   AdCampaign,
+  AdCampaignCreateParams,
+  AdCampaignDeleteResponse,
   AdCampaignListParams,
-  AdCampaignListResponse,
-  AdCampaignListResponsesCursorPage,
-  AdCampaignPlatform,
   AdCampaignRetrieveParams,
-  AdCampaignStatus,
   AdCampaignUpdateParams,
   AdCampaigns,
+  AdCampaignsCursorPage,
 } from './resources/ad-campaigns';
 import {
-  AdBudgetType,
   AdGroup,
+  AdGroupCreateParams,
   AdGroupDeleteResponse,
   AdGroupListParams,
-  AdGroupListResponse,
-  AdGroupListResponsesCursorPage,
   AdGroupRetrieveParams,
-  AdGroupStatus,
   AdGroupUpdateParams,
   AdGroups,
+  AdGroupsCursorPage,
 } from './resources/ad-groups';
 import {
   AdReportRetrieveParams,
@@ -62,12 +50,13 @@ import {
 } from './resources/ad-reports';
 import {
   Ad,
+  AdCreateParams,
+  AdDeleteResponse,
   AdListParams,
-  AdListResponse,
-  AdListResponsesCursorPage,
   AdRetrieveParams,
+  AdUpdateParams,
   Ads,
-  ExternalAdStatus,
+  AdsCursorPage,
 } from './resources/ads';
 import {
   AIChat,
@@ -92,10 +81,20 @@ import {
   AppListParams,
   AppListResponse,
   AppListResponsesCursorPage,
+  AppLogsParams,
+  AppLogsResponse,
   AppType,
   AppUpdateParams,
   Apps,
 } from './resources/apps';
+import {
+  Audience,
+  AudienceCreateParams,
+  AudienceDeleteResponse,
+  AudienceListParams,
+  Audiences,
+  AudiencesCursorPage,
+} from './resources/audiences';
 import {
   AuthorizedUser,
   AuthorizedUserCreateParams,
@@ -116,6 +115,17 @@ import {
   BountyRetrieveResponse,
 } from './resources/bounties';
 import {
+  CardCreateParams,
+  CardCreateResponse,
+  CardListParams,
+  CardListResponse,
+  CardRetrieveParams,
+  CardRetrieveResponse,
+  CardUpdateParams,
+  CardUpdateResponse,
+  Cards,
+} from './resources/cards';
+import {
   ChatChannelListParams,
   ChatChannelListResponse,
   ChatChannelListResponsesCursorPage,
@@ -124,9 +134,11 @@ import {
 } from './resources/chat-channels';
 import {
   CheckoutConfigurationCreateParams,
+  CheckoutConfigurationCreateResponse,
   CheckoutConfigurationListParams,
   CheckoutConfigurationListResponse,
   CheckoutConfigurationListResponsesCursorPage,
+  CheckoutConfigurationRetrieveResponse,
   CheckoutConfigurations,
   CheckoutModes,
 } from './resources/checkout-configurations';
@@ -150,7 +162,6 @@ import {
   CompanyTokenTransactionType,
   CompanyTokenTransactions,
 } from './resources/company-token-transactions';
-import { ConversionCreateParams, ConversionCreateResponse, Conversions } from './resources/conversions';
 import {
   CourseChapter,
   CourseChapterCreateParams,
@@ -202,7 +213,13 @@ import {
   Courses,
   Languages,
 } from './resources/courses';
-import { DepositCreateParams, DepositCreateResponse, Deposits } from './resources/deposits';
+import {
+  DepositCreateParams,
+  DepositCreateResponse,
+  DepositListParams,
+  DepositListResponse,
+  Deposits,
+} from './resources/deposits';
 import {
   DisputeAlertListParams,
   DisputeAlertListResponse,
@@ -249,6 +266,14 @@ import {
   EntryListResponse,
   EntryListResponsesCursorPage,
 } from './resources/entries';
+import {
+  EventCreateParams,
+  EventCreateResponse,
+  EventListParams,
+  EventListResponse,
+  EventListResponsesCursorPage,
+  Events,
+} from './resources/events';
 import {
   ExperienceAttachParams,
   ExperienceCreateParams,
@@ -321,6 +346,7 @@ import {
   Leads,
 } from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
+import { Media, MediaAsset, MediaGenerateParams } from './resources/media';
 import {
   MemberListParams,
   MemberListResponse,
@@ -382,16 +408,18 @@ import {
   PayoutAccounts,
 } from './resources/payout-accounts';
 import {
-  PayoutDestinationCategory,
-  PayoutMethodListParams,
-  PayoutMethodListResponse,
-  PayoutMethodListResponsesCursorPage,
-  PayoutMethodRetrieveResponse,
-  PayoutMethods,
-} from './resources/payout-methods';
+  People,
+  PersonListParams,
+  PersonListResponse,
+  PersonListResponsesCursorPage,
+  PersonRetrieveParams,
+  PersonRetrieveResponse,
+} from './resources/people';
 import {
   CheckoutFont,
   CheckoutShape,
+  PlanCalculateTaxParams,
+  PlanCalculateTaxResponse,
   PlanCreateParams,
   PlanDeleteResponse,
   PlanListParams,
@@ -474,6 +502,21 @@ import {
   Shipments,
 } from './resources/shipments';
 import {
+  SocialAccount,
+  SocialAccountConnectParams,
+  SocialAccountConnectResponse,
+  SocialAccountCreateParams,
+  SocialAccountDeleteParams,
+  SocialAccountDeleteResponse,
+  SocialAccountListParams,
+  SocialAccountPost,
+  SocialAccountPostsParams,
+  SocialAccountPostsResponse,
+  SocialAccounts,
+  SocialAccountsCursorPage,
+} from './resources/social-accounts';
+import { StatListResponse, StatRetrieveParams, StatRetrieveResponse, Stats } from './resources/stats';
+import {
   SupportChannelCreateParams,
   SupportChannelListParams,
   SupportChannelListResponse,
@@ -485,20 +528,24 @@ import {
   SwapCreateQuoteParams,
   SwapCreateQuoteResponse,
   SwapCreateResponse,
-  SwapRetrieveParams,
+  SwapListParams,
+  SwapListResponse,
   SwapRetrieveResponse,
   Swaps,
 } from './resources/swaps';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
+  TransferCreateResponse,
   TransferListParams,
   TransferListResponse,
   TransferListResponsesCursorPage,
+  TransferRetrieveResponse,
   Transfers,
 } from './resources/transfers';
 import {
   User,
+  UserBalance,
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
@@ -509,25 +556,21 @@ import {
   UsersCursorPage,
 } from './resources/users';
 import {
+  VerificationCreateParams,
+  VerificationCreateResponse,
   VerificationErrorCode,
   VerificationListParams,
   VerificationListResponse,
-  VerificationListResponsesCursorPage,
   VerificationRetrieveResponse,
   VerificationStatus,
+  VerificationUpdateParams,
+  VerificationUpdateResponse,
   Verifications,
 } from './resources/verifications';
 import {
-  AccountWallet,
-  WalletBalanceParams,
-  WalletBalanceResponse,
-  WalletListResponse,
-  WalletSendParams,
-  WalletSendResponse,
-  Wallets,
-} from './resources/wallets';
-import {
   APIVersion,
+  ChatMessageCreatedWebhookEvent,
+  ChatReactionCreatedWebhookEvent,
   CourseLessonInteractionCompletedWebhookEvent,
   DisputeAlertCreatedWebhookEvent,
   DisputeCreatedWebhookEvent,
@@ -545,9 +588,11 @@ import {
   InvoicePaidWebhookEvent,
   InvoicePastDueWebhookEvent,
   InvoiceVoidedWebhookEvent,
+  LedgerAccountFundsAvailableWebhookEvent,
   MembershipActivatedWebhookEvent,
   MembershipCancelAtPeriodEndChangedWebhookEvent,
   MembershipDeactivatedWebhookEvent,
+  MembershipTrialEndingSoonWebhookEvent,
   PaymentCreatedWebhookEvent,
   PaymentFailedWebhookEvent,
   PaymentPendingWebhookEvent,
@@ -589,6 +634,16 @@ import {
   Withdrawals,
 } from './resources/withdrawals';
 import {
+  Account,
+  AccountCreateParams,
+  AccountListParams,
+  AccountRecommendActionsResponse,
+  AccountSocialLink,
+  AccountUpdateParams,
+  Accounts,
+  AccountsCursorPage,
+} from './resources/accounts/accounts';
+import {
   Affiliate,
   AffiliateArchiveResponse,
   AffiliateCreateParams,
@@ -599,6 +654,20 @@ import {
   Affiliates,
   Status,
 } from './resources/affiliates/affiliates';
+import {
+  PayoutCreateParams,
+  PayoutCreateResponse,
+  PayoutListParams,
+  PayoutListResponse,
+  PayoutListResponsesCursorPage,
+  Payouts,
+} from './resources/payouts/payouts';
+import {
+  ReferralReferredUsersParams,
+  ReferralReferredUsersResponse,
+  Referrals,
+} from './resources/referrals/referrals';
+import { Workforce } from './resources/workforce/workforce';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -611,11 +680,10 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
-   * A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`
+   * An account API key, account scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`
    */
   apiKey?: string | undefined;
 
@@ -633,19 +701,6 @@ export interface ClientOptions {
    * Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.
    */
   version?: string | null | undefined;
-
-  /**
-   * Static JWK (JSON string) used by `verifyUserToken` to verify user tokens.
-   * When set, the SDK skips remote JWKS fetching. Prefer `userTokenJwksUrl`
-   * (or the default) so key rotation is handled automatically.
-   */
-  userTokenPublicKey?: string | null | undefined;
-
-  /**
-   * URL of the JWKS endpoint used by `verifyUserToken`. Defaults to the
-   * canonical Whop JWKS. Override when pointing at a non-production backend.
-   */
-  userTokenJwksUrl?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -724,8 +779,6 @@ export class Whop {
   webhookKey: string | null;
   appID: string | null;
   version: string | null;
-  userTokenPublicKey: string | null;
-  userTokenJwksUrl: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -745,7 +798,7 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-06-08]
+   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-08-1]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -759,9 +812,7 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    version = readEnv('WHOP_API_VERSION') ?? '2026-06-08',
-    userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
-    userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
+    version = readEnv('WHOP_API_VERSION') ?? '2026-07-08-1',
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -775,8 +826,6 @@ export class Whop {
       webhookKey,
       appID,
       version,
-      userTokenPublicKey,
-      userTokenJwksUrl,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -814,8 +863,6 @@ export class Whop {
     this.webhookKey = webhookKey;
     this.appID = appID;
     this.version = version;
-    this.userTokenPublicKey = userTokenPublicKey;
-    this.userTokenJwksUrl = userTokenJwksUrl;
   }
 
   /**
@@ -835,8 +882,6 @@ export class Whop {
       webhookKey: this.webhookKey,
       appID: this.appID,
       version: this.version,
-      userTokenPublicKey: this.userTokenPublicKey,
-      userTokenJwksUrl: this.userTokenJwksUrl,
       ...options,
     });
     return client;
@@ -1391,242 +1436,214 @@ export class Whop {
 
   static toFile = Uploads.toFile;
 
-  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
-
   /**
-   * Apps
+   * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.app` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
+   *
+   * Use the Apps API to manage app configuration and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests. Logs are retained for 7 days and can be filtered by build, level, time window, and message text.
+   *
    */
   apps: API.Apps = new API.Apps(this);
-  /**
-   * Invoices
-   */
   invoices: API.Invoices = new API.Invoices(this);
-  /**
-   * Course lesson interactions
-   */
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   /**
-   * Products
+   * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
+   *
+   * Use the Products API to create products, list products visible to your credentials, retrieve product details, update product metadata or merchandising fields, and delete products that should no longer be sold.
+   *
    */
   products: API.Products = new API.Products(this);
   /**
-   * Companies
+   * A Social Account represents an external profile connected to a Whop account or user, such as a Facebook page or Instagram account. Connecting a social account lets Whop run [ads](/api-reference/beta/ads/ad) under that profile's identity and promote its existing posts.
+   *
+   * Use the Social Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect a social account, and list a connected profile's posts.
+   *
    */
+  socialAccounts: API.SocialAccounts = new API.SocialAccounts(this);
+  /**
+   * An Audience represents a customer list uploaded to Whop for ad targeting. Audiences belong to an account and sync to supported ad platforms as custom audiences.
+   *
+   * Use the Audiences API to create audiences from CSV uploads, monitor processing status, and list or delete audiences for an account. Created audiences are usable for targeting after processing reaches `ready` or `partial`.
+   *
+   */
+  audiences: API.Audiences = new API.Audiences(this);
+  /**
+   * A Media Asset is an AI-generated image or video created from a prompt and billed from an account balance. When generation finishes, the asset includes a file that can be attached anywhere Whop accepts files.
+   *
+   * Use the Media API to start a generation job and retrieve the asset while it processes or after it is ready.
+   *
+   */
+  media: API.Media = new API.Media(this);
+  /**
+   * A Person represents a visitor or customer of an account, assembled from [pixel events](/api-reference/beta/events/event) and purchase activity — ad clicks, storefront visits, and checkouts.
+   *
+   * Use the People API to list the people of an account and retrieve a single person.
+   *
+   */
+  people: API.People = new API.People(this);
+  /**
+   * An Event records conversion or engagement activity for an account, such as page views, purchases, or leads. Each event ties the action to the [person](/api-reference/beta/people/person) who took it, so activity can be attributed to the ads and links that drove it.
+   *
+   * Use the Events API to send new tracking events and list the events recorded for a person.
+   *
+   */
+  events: API.Events = new API.Events(this);
   companies: API.Companies = new API.Companies(this);
-  /**
-   * Webhooks
-   */
   webhooks: API.Webhooks = new API.Webhooks(this);
+  /**
+   * A Plan defines how customers buy a product. It controls pricing, billing cadence, availability, tax behavior, checkout fields, and purchase visibility.
+   *
+   * Use the Plans API to create plans for products, list existing plans, retrieve or update plan configuration, calculate tax for checkout, and delete plans that should no longer be offered.
+   *
+   */
   plans: API.Plans = new API.Plans(this);
-  /**
-   * Entries
-   */
   entries: API.Entries = new API.Entries(this);
-  /**
-   * Forum posts
-   */
   forumPosts: API.ForumPosts = new API.ForumPosts(this);
   /**
-   * Transfers
+   * Transfers move value between identities on Whop. They are used for account-to-account money movement, user payouts inside Whop, crypto transfers, and claim links depending on the destination type.
+   *
+   * Use the Transfers API to create a transfer, list previous transfers, and retrieve a transfer by ID when reconciling money movement between accounts or users.
+   *
    */
   transfers: API.Transfers = new API.Transfers(this);
-  /**
-   * Ledger accounts
-   */
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
-  /**
-   * Memberships
-   */
   memberships: API.Memberships = new API.Memberships(this);
-  /**
-   * Authorized users
-   */
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
-  /**
-   * App builds
-   */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
-  /**
-   * Shipments
-   */
   shipments: API.Shipments = new API.Shipments(this);
   /**
-   * Checkout configurations
+   * A Checkout Configuration is a reusable checkout link owned by an account. In `payment` mode it sells a specific plan; in `setup` mode it collects and saves payment details without charging. Each configuration can also override which payment methods are accepted and how 3D Secure is enforced for that checkout.
+   *
+   * Use the Checkout Configurations API to create checkout links for an existing or inline plan, list configurations for an account, retrieve the configuration behind a checkout URL, and delete links that should no longer be used.
+   *
    */
   checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
-  /**
-   * Messages
-   */
   messages: API.Messages = new API.Messages(this);
-  /**
-   * Chat channels
-   */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
+  /**
+   * A User represents a person on Whop. Users have a public profile and can buy products, join accounts, and access experiences.
+   *
+   * Use the Users API to search for users, retrieve or update profiles, and check whether a user has access to an account, product, or experience.
+   *
+   */
   users: API.Users = new API.Users(this);
-  /**
-   * Payments
-   */
   payments: API.Payments = new API.Payments(this);
-  /**
-   * Support channels
-   */
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
-  /**
-   * Experiences
-   */
   experiences: API.Experiences = new API.Experiences(this);
-  /**
-   * Reactions
-   */
   reactions: API.Reactions = new API.Reactions(this);
-  /**
-   * Members
-   */
   members: API.Members = new API.Members(this);
-  /**
-   * Forums
-   */
   forums: API.Forums = new API.Forums(this);
-  /**
-   * Promo codes
-   */
   promoCodes: API.PromoCodes = new API.PromoCodes(this);
-  /**
-   * Courses
-   */
   courses: API.Courses = new API.Courses(this);
-  /**
-   * Course chapters
-   */
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
-  /**
-   * Course lessons
-   */
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
-  /**
-   * Reviews
-   */
   reviews: API.Reviews = new API.Reviews(this);
-  /**
-   * Course students
-   */
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
-  /**
-   * Access tokens
-   */
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
-  /**
-   * Notifications
-   */
   notifications: API.Notifications = new API.Notifications(this);
-  /**
-   * Disputes
-   */
   disputes: API.Disputes = new API.Disputes(this);
-  /**
-   * Refunds
-   */
   refunds: API.Refunds = new API.Refunds(this);
-  /**
-   * Withdrawals
-   */
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
-  /**
-   * Account links
-   */
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
+  /**
+   * An Account represents a person or business on Whop that can have its own profile, wallet, and account-scoped settings. Use accounts for customers, creators, merchants, sellers, or connected businesses your integration supports.
+   *
+   * Use the Accounts API to create accounts, list accounts visible to your credentials, retrieve or update an account, and retrieve the account associated with the current API key.
+   *
+   */
   accounts: API.Accounts = new API.Accounts(this);
-  wallets: API.Wallets = new API.Wallets(this);
+  /**
+   * A Ledger Activity row is a single financial event on an account's ledger — a payment, withdrawal, refund, transfer, on-chain deposit, swap, or card transaction. Each row is derived from the underlying ledger lines and carries a typed `resource` and `source` so you can present and link the event without extra lookups.
+   *
+   * Use Ledger Activity to build a statement or transaction feed for an account or user. Reconcile against your own records with `amount` (signed, in the currency's smallest precision units) and `posted_at`, and use `available_at` to know when inflows became withdrawable.
+   *
+   */
   financialActivity: API.FinancialActivity = new API.FinancialActivity(this);
+  /**
+   * Stats represent aggregated activity for an account over time. They help you understand revenue, transactions, disputes, members, referrals, and advertising performance across reporting periods like days, weeks, or months.
+   *
+   * Use the Stats API to list available metrics and their filterable properties, then retrieve time-series values for a date range.
+   *
+   */
+  stats: API.Stats = new API.Stats(this);
+  /**
+   * Payouts represent money sent from an account or user balance to an external destination, such as a bank account, wallet, or other saved payout method.
+   *
+   * Use the Payouts API to create payouts from stablecoin accounts, list payout history for accounts or users, monitor payout statuses, and show expected arrival details for funds leaving Whop.
+   *
+   */
+  payouts: API.Payouts = new API.Payouts(this);
+  /**
+   * The Referrals API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
+   *
+   * Use it to enroll as a Whop partner, list the users you referred, list your referred businesses and review their earnings, and see the partner leaderboard.
+   *
+   */
+  referrals: API.Referrals = new API.Referrals(this);
+  /**
+   * Cards represent Whop-issued virtual payment cards that spend from an account or user balance. Cards can be assigned to cardholders and configured with spending limits for controlled spending.
+   *
+   * Use the Cards API to issue cards, list cards for an account or user, and retrieve active card details such as the card number and CVC.
+   *
+   */
+  cards: API.Cards = new API.Cards(this);
+  /**
+   * Swaps convert value between supported tokens, chains, or wallet destinations for an account. A swap quote describes the expected output, fees, and approval requirements before you create the swap.
+   *
+   * Use the Swaps API to quote a conversion, create the swap, list recent swaps, and retrieve status until the transaction completes.
+   *
+   */
   swaps: API.Swaps = new API.Swaps(this);
+  /**
+   * Deposits describe ways to add funds to an account balance, including hosted deposit pages, bank deposit instructions, and supported crypto wallet addresses.
+   *
+   * Use the Deposits API to create deposit instructions for an account and retrieve existing bank deposit activity.
+   *
+   */
   deposits: API.Deposits = new API.Deposits(this);
-  /**
-   * Setup intents
-   */
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
-  /**
-   * Payment methods
-   */
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
-  /**
-   * Fee markups
-   */
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
   /**
-   * Payout methods
-   */
-  payoutMethods: API.PayoutMethods = new API.PayoutMethods(this);
-  /**
-   * Verifications
+   * A Verification represents an identity review for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
+   *
+   * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
+   *
    */
   verifications: API.Verifications = new API.Verifications(this);
-  /**
-   * Leads
-   */
   leads: API.Leads = new API.Leads(this);
-  /**
-   * Topups
-   */
   topups: API.Topups = new API.Topups(this);
-  /**
-   * Files
-   */
   files: API.Files = new API.Files(this);
-  /**
-   * Company token transactions
-   */
   companyTokenTransactions: API.CompanyTokenTransactions = new API.CompanyTokenTransactions(this);
-  /**
-   * Dm members
-   */
   dmMembers: API.DmMembers = new API.DmMembers(this);
-  /**
-   * Ai chats
-   */
   aiChats: API.AIChats = new API.AIChats(this);
-  /**
-   * Dm channels
-   */
   dmChannels: API.DmChannels = new API.DmChannels(this);
-  /**
-   * Dispute alerts
-   */
   disputeAlerts: API.DisputeAlerts = new API.DisputeAlerts(this);
-  /**
-   * Resolution center cases
-   */
   resolutionCenterCases: API.ResolutionCenterCases = new API.ResolutionCenterCases(this);
-  /**
-   * Payout accounts
-   */
   payoutAccounts: API.PayoutAccounts = new API.PayoutAccounts(this);
-  /**
-   * Affiliates
-   */
   affiliates: API.Affiliates = new API.Affiliates(this);
-  /**
-   * Bounties
-   */
   bounties: API.Bounties = new API.Bounties(this);
+  workforce: API.Workforce = new API.Workforce(this);
   /**
-   * Ad campaigns
+   * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
+   *
+   * Use the Ad Campaigns API to create campaigns, list campaigns for an account, retrieve or update campaign settings, and pause or resume campaign delivery.
+   *
    */
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
   /**
-   * Ad groups
+   * An Ad Group sits inside an [ad campaign](/api-reference/beta/ad-campaigns/ad-campaign) and controls delivery for [ads](/api-reference/beta/ads/ad). It sets the audience, placements, schedule, budget, and optimization goal for its ads.
+   *
+   * Use the Ad Groups API to create ad groups in campaigns, list or retrieve targeting and delivery settings, update budgets or targeting, delete groups that should stop running, and pause or resume delivery.
+   *
    */
   adGroups: API.AdGroups = new API.AdGroups(this);
   /**
-   * Ads
+   * An Ad is the individual creative unit delivered by an [ad group](/api-reference/beta/ad-groups/ad-group). It holds the copy, creative assets, and destination URL for one ad.
+   *
+   * Use the Ads API to list ads for an account, create ads inside ad groups, retrieve or update creative details, delete ads that should stop running, and pause or resume delivery.
+   *
    */
   ads: API.Ads = new API.Ads(this);
-  /**
-   * Conversions
-   */
-  conversions: API.Conversions = new API.Conversions(this);
-  /**
-   * Ad reports
-   */
   adReports: API.AdReports = new API.AdReports(this);
 }
 
@@ -1634,6 +1651,11 @@ Whop.Apps = Apps;
 Whop.Invoices = Invoices;
 Whop.CourseLessonInteractions = CourseLessonInteractions;
 Whop.Products = Products;
+Whop.SocialAccounts = SocialAccounts;
+Whop.Audiences = Audiences;
+Whop.Media = Media;
+Whop.People = People;
+Whop.Events = Events;
 Whop.Companies = Companies;
 Whop.Webhooks = Webhooks;
 Whop.Plans = Plans;
@@ -1668,14 +1690,16 @@ Whop.Refunds = Refunds;
 Whop.Withdrawals = Withdrawals;
 Whop.AccountLinks = AccountLinks;
 Whop.Accounts = Accounts;
-Whop.Wallets = Wallets;
 Whop.FinancialActivity = FinancialActivity;
+Whop.Stats = Stats;
+Whop.Payouts = Payouts;
+Whop.Referrals = Referrals;
+Whop.Cards = Cards;
 Whop.Swaps = Swaps;
 Whop.Deposits = Deposits;
 Whop.SetupIntents = SetupIntents;
 Whop.PaymentMethods = PaymentMethods;
 Whop.FeeMarkups = FeeMarkups;
-Whop.PayoutMethods = PayoutMethods;
 Whop.Verifications = Verifications;
 Whop.Leads = Leads;
 Whop.Topups = Topups;
@@ -1689,10 +1713,10 @@ Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
 Whop.Bounties = Bounties;
+Whop.Workforce = Workforce;
 Whop.AdCampaigns = AdCampaigns;
 Whop.AdGroups = AdGroups;
 Whop.Ads = Ads;
-Whop.Conversions = Conversions;
 Whop.AdReports = AdReports;
 
 export declare namespace Whop {
@@ -1705,10 +1729,12 @@ export declare namespace Whop {
     Apps as Apps,
     type AppType as AppType,
     type AppListResponse as AppListResponse,
+    type AppLogsResponse as AppLogsResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppLogsParams as AppLogsParams,
   };
 
   export {
@@ -1737,6 +1763,50 @@ export declare namespace Whop {
   };
 
   export {
+    SocialAccounts as SocialAccounts,
+    type SocialAccount as SocialAccount,
+    type SocialAccountPost as SocialAccountPost,
+    type SocialAccountDeleteResponse as SocialAccountDeleteResponse,
+    type SocialAccountConnectResponse as SocialAccountConnectResponse,
+    type SocialAccountPostsResponse as SocialAccountPostsResponse,
+    type SocialAccountsCursorPage as SocialAccountsCursorPage,
+    type SocialAccountListParams as SocialAccountListParams,
+    type SocialAccountCreateParams as SocialAccountCreateParams,
+    type SocialAccountConnectParams as SocialAccountConnectParams,
+    type SocialAccountDeleteParams as SocialAccountDeleteParams,
+    type SocialAccountPostsParams as SocialAccountPostsParams,
+  };
+
+  export {
+    Audiences as Audiences,
+    type Audience as Audience,
+    type AudienceDeleteResponse as AudienceDeleteResponse,
+    type AudiencesCursorPage as AudiencesCursorPage,
+    type AudienceListParams as AudienceListParams,
+    type AudienceCreateParams as AudienceCreateParams,
+  };
+
+  export { Media as Media, type MediaAsset as MediaAsset, type MediaGenerateParams as MediaGenerateParams };
+
+  export {
+    People as People,
+    type PersonRetrieveResponse as PersonRetrieveResponse,
+    type PersonListResponse as PersonListResponse,
+    type PersonListResponsesCursorPage as PersonListResponsesCursorPage,
+    type PersonListParams as PersonListParams,
+    type PersonRetrieveParams as PersonRetrieveParams,
+  };
+
+  export {
+    Events as Events,
+    type EventCreateResponse as EventCreateResponse,
+    type EventListResponse as EventListResponse,
+    type EventListResponsesCursorPage as EventListResponsesCursorPage,
+    type EventListParams as EventListParams,
+    type EventCreateParams as EventCreateParams,
+  };
+
+  export {
     Companies as Companies,
     type SocialLinkWebsites as SocialLinkWebsites,
     type CompanyListResponse as CompanyListResponse,
@@ -1756,6 +1826,8 @@ export declare namespace Whop {
     type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
+    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
@@ -1773,9 +1845,11 @@ export declare namespace Whop {
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type MembershipTrialEndingSoonWebhookEvent as MembershipTrialEndingSoonWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
@@ -1806,10 +1880,12 @@ export declare namespace Whop {
     type CheckoutShape as CheckoutShape,
     type PlanListResponse as PlanListResponse,
     type PlanDeleteResponse as PlanDeleteResponse,
+    type PlanCalculateTaxResponse as PlanCalculateTaxResponse,
     type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
     type PlanListParams as PlanListParams,
     type PlanCreateParams as PlanCreateParams,
     type PlanUpdateParams as PlanUpdateParams,
+    type PlanCalculateTaxParams as PlanCalculateTaxParams,
   };
 
   export {
@@ -1832,6 +1908,8 @@ export declare namespace Whop {
 
   export {
     Transfers as Transfers,
+    type TransferCreateResponse as TransferCreateResponse,
+    type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
     type TransferListParams as TransferListParams,
@@ -1885,6 +1963,8 @@ export declare namespace Whop {
   export {
     CheckoutConfigurations as CheckoutConfigurations,
     type CheckoutModes as CheckoutModes,
+    type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
+    type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
@@ -1912,6 +1992,7 @@ export declare namespace Whop {
   export {
     Users as Users,
     type User as User,
+    type UserBalance as UserBalance,
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UsersCursorPage as UsersCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
@@ -2112,20 +2193,11 @@ export declare namespace Whop {
     Accounts as Accounts,
     type Account as Account,
     type AccountSocialLink as AccountSocialLink,
-    type AccountListResponse as AccountListResponse,
+    type AccountRecommendActionsResponse as AccountRecommendActionsResponse,
+    type AccountsCursorPage as AccountsCursorPage,
     type AccountListParams as AccountListParams,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
-  };
-
-  export {
-    Wallets as Wallets,
-    type AccountWallet as AccountWallet,
-    type WalletListResponse as WalletListResponse,
-    type WalletBalanceResponse as WalletBalanceResponse,
-    type WalletSendResponse as WalletSendResponse,
-    type WalletBalanceParams as WalletBalanceParams,
-    type WalletSendParams as WalletSendParams,
   };
 
   export {
@@ -2135,18 +2207,55 @@ export declare namespace Whop {
   };
 
   export {
+    Stats as Stats,
+    type StatRetrieveResponse as StatRetrieveResponse,
+    type StatListResponse as StatListResponse,
+    type StatRetrieveParams as StatRetrieveParams,
+  };
+
+  export {
+    Payouts as Payouts,
+    type PayoutCreateResponse as PayoutCreateResponse,
+    type PayoutListResponse as PayoutListResponse,
+    type PayoutListResponsesCursorPage as PayoutListResponsesCursorPage,
+    type PayoutListParams as PayoutListParams,
+    type PayoutCreateParams as PayoutCreateParams,
+  };
+
+  export {
+    Referrals as Referrals,
+    type ReferralReferredUsersResponse as ReferralReferredUsersResponse,
+    type ReferralReferredUsersParams as ReferralReferredUsersParams,
+  };
+
+  export {
+    Cards as Cards,
+    type CardCreateResponse as CardCreateResponse,
+    type CardRetrieveResponse as CardRetrieveResponse,
+    type CardUpdateResponse as CardUpdateResponse,
+    type CardListResponse as CardListResponse,
+    type CardListParams as CardListParams,
+    type CardCreateParams as CardCreateParams,
+    type CardRetrieveParams as CardRetrieveParams,
+    type CardUpdateParams as CardUpdateParams,
+  };
+
+  export {
     Swaps as Swaps,
     type SwapCreateResponse as SwapCreateResponse,
     type SwapRetrieveResponse as SwapRetrieveResponse,
+    type SwapListResponse as SwapListResponse,
     type SwapCreateQuoteResponse as SwapCreateQuoteResponse,
     type SwapCreateQuoteParams as SwapCreateQuoteParams,
     type SwapCreateParams as SwapCreateParams,
-    type SwapRetrieveParams as SwapRetrieveParams,
+    type SwapListParams as SwapListParams,
   };
 
   export {
     Deposits as Deposits,
     type DepositCreateResponse as DepositCreateResponse,
+    type DepositListResponse as DepositListResponse,
+    type DepositListParams as DepositListParams,
     type DepositCreateParams as DepositCreateParams,
   };
 
@@ -2180,22 +2289,16 @@ export declare namespace Whop {
   };
 
   export {
-    PayoutMethods as PayoutMethods,
-    type PayoutDestinationCategory as PayoutDestinationCategory,
-    type PayoutMethodRetrieveResponse as PayoutMethodRetrieveResponse,
-    type PayoutMethodListResponse as PayoutMethodListResponse,
-    type PayoutMethodListResponsesCursorPage as PayoutMethodListResponsesCursorPage,
-    type PayoutMethodListParams as PayoutMethodListParams,
-  };
-
-  export {
     Verifications as Verifications,
     type VerificationErrorCode as VerificationErrorCode,
     type VerificationStatus as VerificationStatus,
+    type VerificationCreateResponse as VerificationCreateResponse,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
+    type VerificationUpdateResponse as VerificationUpdateResponse,
     type VerificationListResponse as VerificationListResponse,
-    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
     type VerificationListParams as VerificationListParams,
+    type VerificationCreateParams as VerificationCreateParams,
+    type VerificationUpdateParams as VerificationUpdateParams,
   };
 
   export {
@@ -2319,27 +2422,26 @@ export declare namespace Whop {
     type BountyCreateParams as BountyCreateParams,
   };
 
+  export { Workforce as Workforce };
+
   export {
     AdCampaigns as AdCampaigns,
     type AdCampaign as AdCampaign,
-    type AdCampaignPlatform as AdCampaignPlatform,
-    type AdCampaignStatus as AdCampaignStatus,
-    type AdCampaignListResponse as AdCampaignListResponse,
-    type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
+    type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignCreateParams as AdCampaignCreateParams,
     type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 
   export {
     AdGroups as AdGroups,
-    type AdBudgetType as AdBudgetType,
     type AdGroup as AdGroup,
-    type AdGroupStatus as AdGroupStatus,
-    type AdGroupListResponse as AdGroupListResponse,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
-    type AdGroupListResponsesCursorPage as AdGroupListResponsesCursorPage,
+    type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
+    type AdGroupCreateParams as AdGroupCreateParams,
     type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
   };
@@ -2347,17 +2449,12 @@ export declare namespace Whop {
   export {
     Ads as Ads,
     type Ad as Ad,
-    type ExternalAdStatus as ExternalAdStatus,
-    type AdListResponse as AdListResponse,
-    type AdListResponsesCursorPage as AdListResponsesCursorPage,
+    type AdDeleteResponse as AdDeleteResponse,
+    type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
+    type AdCreateParams as AdCreateParams,
     type AdRetrieveParams as AdRetrieveParams,
-  };
-
-  export {
-    Conversions as Conversions,
-    type ConversionCreateResponse as ConversionCreateResponse,
-    type ConversionCreateParams as ConversionCreateParams,
+    type AdUpdateParams as AdUpdateParams,
   };
 
   export {
@@ -2419,7 +2516,6 @@ export declare namespace Whop {
   export type ShipmentSubstatus = API.ShipmentSubstatus;
   export type SupportChannel = API.SupportChannel;
   export type TaxType = API.TaxType;
-  export type Transfer = API.Transfer;
   export type Visibility = API.Visibility;
   export type VisibilityFilter = API.VisibilityFilter;
   export type WhoCanCommentTypes = API.WhoCanCommentTypes;

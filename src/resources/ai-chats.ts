@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Ai chats
- */
 export class AIChats extends APIResource {
   /**
    * Returns a paginated list of AI chat threads for the current authenticated user.

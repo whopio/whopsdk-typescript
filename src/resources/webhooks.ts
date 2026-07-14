@@ -5,7 +5,6 @@ import * as DisputeAlertsAPI from './dispute-alerts';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
 import * as PayoutAccountsAPI from './payout-accounts';
-import * as PayoutMethodsAPI from './payout-methods';
 import * as RefundsAPI from './refunds';
 import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import * as SetupIntentsAPI from './setup-intents';
@@ -18,9 +17,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Webhooks
- */
 export class Webhooks extends APIResource {
   unwrap(
     body: string,
@@ -208,6 +204,7 @@ export type WebhookEvent =
   | 'invoice.voided'
   | 'membership.activated'
   | 'membership.deactivated'
+  | 'membership.trial_ending_soon'
   | 'entry.created'
   | 'entry.approved'
   | 'entry.denied'
@@ -215,6 +212,7 @@ export type WebhookEvent =
   | 'setup_intent.requires_action'
   | 'setup_intent.succeeded'
   | 'setup_intent.canceled'
+  | 'ledger_account.funds_available'
   | 'withdrawal.created'
   | 'withdrawal.updated'
   | 'course_lesson_interaction.completed'
@@ -228,6 +226,8 @@ export type WebhookEvent =
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
   | 'resolution_center_case.decided'
+  | 'chat.message.created'
+  | 'chat.reaction.created'
   | 'payment.created'
   | 'payment.succeeded'
   | 'payment.failed'
@@ -345,6 +345,131 @@ export interface WebhookListResponse {
  * Represents `true` or `false` values.
  */
 export type WebhookDeleteResponse = boolean;
+
+export interface ChatMessageCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  data: ChatMessageCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'chat.message.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ChatMessageCreatedWebhookEvent {
+  export interface Data {
+    audience: Data.Audience;
+
+    channel: Data.Channel;
+
+    /**
+     * A message sent within an experience chat, direct message, or group chat.
+     */
+    message: Shared.Message;
+
+    reason: string;
+  }
+
+  export namespace Data {
+    export interface Audience {
+      type: 'channel' | 'users';
+
+      user_ids?: Array<string> | null;
+    }
+
+    export interface Channel {
+      id: string;
+
+      type: 'chat' | 'direct_message' | 'support';
+
+      experience_id?: string | null;
+    }
+  }
+}
+
+export interface ChatReactionCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  data: ChatReactionCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'chat.reaction.created';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace ChatReactionCreatedWebhookEvent {
+  export interface Data {
+    audience: Data.Audience;
+
+    channel: Data.Channel;
+
+    /**
+     * A message sent within an experience chat, direct message, or group chat.
+     */
+    message: Shared.Message;
+
+    /**
+     * A single reaction left by a user on a feed post, such as a like or emoji.
+     */
+    reaction: Shared.Reaction;
+
+    reason: string;
+  }
+
+  export namespace Data {
+    export interface Audience {
+      type: 'channel' | 'users';
+
+      user_ids?: Array<string> | null;
+    }
+
+    export interface Channel {
+      id: string;
+
+      type: 'chat' | 'direct_message' | 'support';
+
+      experience_id?: string | null;
+    }
+  }
+}
 
 export interface CourseLessonInteractionCompletedWebhookEvent {
   /**
@@ -899,9 +1024,9 @@ export namespace IdentityProfileApprovedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -1165,9 +1290,9 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -1431,9 +1556,9 @@ export namespace IdentityProfileRejectedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -1697,9 +1822,9 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     business_structure: string | null;
 
     /**
-     * ISO 3166-1 alpha-3 country code (e.g. `USA`, `GBR`). For individuals this is the
-     * country of citizenship or residence reported by the identity provider; for
-     * businesses this is the country of incorporation.
+     * ISO 3166-1 alpha-2 country code reported by the identity provider, such as `US`
+     * or `GB`. For individuals this is the country of citizenship or residence; for
+     * businesses, the country of incorporation.
      */
     country: string | null;
 
@@ -2071,6 +2196,336 @@ export interface InvoiceVoidedWebhookEvent {
   company_id?: string | null;
 }
 
+export interface LedgerAccountFundsAvailableWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A ledger account represents a financial account on Whop that can hold many
+   * balances.
+   */
+  data: LedgerAccountFundsAvailableWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'ledger_account.funds_available';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace LedgerAccountFundsAvailableWebhookEvent {
+  /**
+   * A ledger account represents a financial account on Whop that can hold many
+   * balances.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the ledger account.
+     */
+    id: string;
+
+    /**
+     * The balances associated with the account.
+     */
+    balances: Array<Data.Balance>;
+
+    /**
+     * The type of ledger account.
+     */
+    ledger_type: 'primary' | 'pool';
+
+    /**
+     * The owner of the ledger account.
+     */
+    owner: Data.User | null | Data.Company | null;
+
+    /**
+     * The different approval statuses an account can have.
+     */
+    payments_approval_status: 'pending' | 'approved' | 'monitoring' | 'rejected' | null;
+
+    /**
+     * The payout account associated with the LedgerAccount, if any.
+     */
+    payout_account_details: Data.PayoutAccountDetails | null;
+
+    /**
+     * The fee for transfers, if applicable.
+     */
+    transfer_fee: number | null;
+
+    /**
+     * The balance cache associated with the account by currency.
+     */
+    treasury_balance: Data.TreasuryBalance | null;
+  }
+
+  export namespace Data {
+    /**
+     * A cached balance for a LedgerAccount in respect to a currency.
+     */
+    export interface Balance {
+      /**
+       * The amount of the balance.
+       */
+      balance: number;
+
+      /**
+       * The currency of the balance.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The amount of the balance that is pending.
+       */
+      pending_balance: number;
+
+      /**
+       * The amount of the balance that is reserved.
+       */
+      reserve_balance: number;
+    }
+
+    /**
+     * A user account on Whop. Contains profile information, identity details, and
+     * social connections.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The typename of this object
+       */
+      typename: 'User';
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+
+    /**
+     * A company is a seller on Whop. Companies own products, manage members, and
+     * receive payouts.
+     */
+    export interface Company {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
+       */
+      route: string;
+
+      /**
+       * The display name of the company shown to customers.
+       */
+      title: string;
+
+      /**
+       * The typename of this object
+       */
+      typename: 'Company';
+    }
+
+    /**
+     * The payout account associated with the LedgerAccount, if any.
+     */
+    export interface PayoutAccountDetails {
+      /**
+       * The unique identifier for the payout account.
+       */
+      id: string;
+
+      /**
+       * The physical address associated with this payout account
+       */
+      address: PayoutAccountDetails.Address | null;
+
+      /**
+       * The company's legal name
+       */
+      business_name: string | null;
+
+      /**
+       * The business representative for this payout account
+       */
+      business_representative: PayoutAccountDetails.BusinessRepresentative | null;
+
+      /**
+       * The email address of the representative
+       */
+      email: string | null;
+
+      /**
+       * The latest verification for the connected account.
+       */
+      latest_verification: PayoutAccountDetails.LatestVerification | null;
+
+      /**
+       * The business representative's phone
+       */
+      phone: string | null;
+
+      /**
+       * The granular calculated statuses reflecting payout account KYC and withdrawal
+       * readiness.
+       */
+      status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
+    }
+
+    export namespace PayoutAccountDetails {
+      /**
+       * The physical address associated with this payout account
+       */
+      export interface Address {
+        /**
+         * The city of the address.
+         */
+        city: string | null;
+
+        /**
+         * The country of the address.
+         */
+        country: string | null;
+
+        /**
+         * The line 1 of the address.
+         */
+        line1: string | null;
+
+        /**
+         * The line 2 of the address.
+         */
+        line2: string | null;
+
+        /**
+         * The postal code of the address.
+         */
+        postal_code: string | null;
+
+        /**
+         * The state of the address.
+         */
+        state: string | null;
+      }
+
+      /**
+       * The business representative for this payout account
+       */
+      export interface BusinessRepresentative {
+        /**
+         * The date of birth of the business representative in ISO 8601 format
+         * (YYYY-MM-DD).
+         */
+        date_of_birth: string | null;
+
+        /**
+         * The first name of the business representative.
+         */
+        first_name: string | null;
+
+        /**
+         * The last name of the business representative.
+         */
+        last_name: string | null;
+
+        /**
+         * The middle name of the business representative.
+         */
+        middle_name: string | null;
+      }
+
+      /**
+       * The latest verification for the connected account.
+       */
+      export interface LatestVerification {
+        /**
+         * The numeric id of the verification record.
+         */
+        id: string;
+
+        /**
+         * An error code for a verification attempt.
+         */
+        last_error_code: VerificationsAPI.VerificationErrorCode | null;
+
+        /**
+         * A human-readable explanation of the most recent verification error. Null if no
+         * error has occurred.
+         */
+        last_error_reason: string | null;
+
+        /**
+         * The current status of this verification session.
+         */
+        status: VerificationsAPI.VerificationStatus;
+      }
+    }
+
+    /**
+     * The balance cache associated with the account by currency.
+     */
+    export interface TreasuryBalance {
+      /**
+       * The amount of the balance.
+       */
+      balance: number;
+
+      /**
+       * The balance converted to USD.
+       */
+      balance_usd: number;
+
+      /**
+       * The currency of the balance.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The amount of the balance that is pending.
+       */
+      pending_balance: number;
+
+      /**
+       * The amount of the balance that is reserved.
+       */
+      reserve_balance: number;
+
+      /**
+       * The amount of the balance that is withdrawable.
+       */
+      total_withdrawable_balance: number;
+    }
+  }
+}
+
 export interface MembershipActivatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -2163,6 +2618,39 @@ export interface MembershipDeactivatedWebhookEvent {
    * The webhook event type
    */
   type: 'membership.deactivated';
+
+  /**
+   * The company ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface MembershipTrialEndingSoonWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * A membership represents an active relationship between a user and a product. It
+   * tracks the user's access, billing status, and renewal schedule.
+   */
+  data: Shared.Membership;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'membership.trial_ending_soon';
 
   /**
    * The company ID that this webhook event is associated with
@@ -2583,7 +3071,7 @@ export namespace PayoutMethodCreatedWebhookEvent {
       /**
        * The category of the payout destination
        */
-      category: PayoutMethodsAPI.PayoutDestinationCategory;
+      category: 'crypto' | 'rtp' | 'next_day_bank' | 'bank_wire' | 'digital_wallet' | 'unknown';
 
       /**
        * The country code of the payout destination
@@ -2856,7 +3344,8 @@ export namespace RefundCreatedWebhookEvent {
 
         /**
          * Custom key-value pairs stored on the plan. Included in webhook payloads for
-         * payment and membership events.
+         * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+         * string value.
          */
         metadata: { [key: string]: unknown } | null;
       }
@@ -2871,8 +3360,9 @@ export namespace RefundCreatedWebhookEvent {
         id: string;
 
         /**
-         * Custom key-value pairs stored on the product. Included in webhook payloads for
-         * payment and membership events.
+         * Custom key-value pairs stored on the product and included in payment and
+         * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+         * per string value.
          */
         metadata: { [key: string]: unknown } | null;
       }
@@ -3164,7 +3654,8 @@ export namespace RefundUpdatedWebhookEvent {
 
         /**
          * Custom key-value pairs stored on the plan. Included in webhook payloads for
-         * payment and membership events.
+         * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+         * string value.
          */
         metadata: { [key: string]: unknown } | null;
       }
@@ -3179,8 +3670,9 @@ export namespace RefundUpdatedWebhookEvent {
         id: string;
 
         /**
-         * Custom key-value pairs stored on the product. Included in webhook payloads for
-         * payment and membership events.
+         * Custom key-value pairs stored on the product and included in payment and
+         * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+         * per string value.
          */
         metadata: { [key: string]: unknown } | null;
       }
@@ -4213,6 +4705,8 @@ export interface WithdrawalUpdatedWebhookEvent {
 }
 
 export type UnwrapWebhookEvent =
+  | ChatMessageCreatedWebhookEvent
+  | ChatReactionCreatedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | DisputeCreatedWebhookEvent
   | DisputeUpdatedWebhookEvent
@@ -4230,9 +4724,11 @@ export type UnwrapWebhookEvent =
   | InvoicePaidWebhookEvent
   | InvoicePastDueWebhookEvent
   | InvoiceVoidedWebhookEvent
+  | LedgerAccountFundsAvailableWebhookEvent
   | MembershipActivatedWebhookEvent
   | MembershipCancelAtPeriodEndChangedWebhookEvent
   | MembershipDeactivatedWebhookEvent
+  | MembershipTrialEndingSoonWebhookEvent
   | PaymentCreatedWebhookEvent
   | PaymentFailedWebhookEvent
   | PaymentPendingWebhookEvent
@@ -4342,6 +4838,8 @@ export declare namespace Webhooks {
     type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
+    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
     type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
@@ -4359,9 +4857,11 @@ export declare namespace Webhooks {
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
+    type MembershipTrialEndingSoonWebhookEvent as MembershipTrialEndingSoonWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,

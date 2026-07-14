@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Support channels
- */
 export class SupportChannels extends APIResource {
   /**
    * Returns a paginated list of support channels for a specific company, with

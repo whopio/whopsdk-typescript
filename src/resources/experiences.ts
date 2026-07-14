@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Experiences
- */
 export class Experiences extends APIResource {
   /**
    * Returns a paginated list of experiences belonging to a company, with optional
@@ -266,7 +263,7 @@ export namespace ExperienceListResponse {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 

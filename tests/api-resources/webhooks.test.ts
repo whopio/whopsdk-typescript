@@ -13,7 +13,7 @@ describe('resource webhooks', () => {
   test.skip('unwrap', () => {
     const key = 'whsec_c2VjcmV0Cg==';
     const payload =
-      '{"id":"msg_xxxxxxxxxxxxxxxxxxxxxxxx","api_version":"v1","data":{"id":"crsli_xxxxxxxxxxxx","completed":true,"course":{"id":"cors_xxxxxxxxxxxxx","experience":{"id":"exp_xxxxxxxxxxxxxx"},"title":"Introduction to Technical Analysis"},"created_at":"2023-12-01T05:00:00.401Z","lesson":{"id":"lesn_xxxxxxxxxxxxx","chapter":{"id":"chap_xxxxxxxxxxxxx"},"title":"Understanding Candlestick Patterns"},"user":{"id":"user_xxxxxxxxxxxxx","name":"John Doe","username":"johndoe42"}},"timestamp":"2025-01-01T00:00:00.000Z","type":"course_lesson_interaction.completed","company_id":"biz_xxxxxxxxxxxxxx"}';
+      '{"id":"msg_xxxxxxxxxxxxxxxxxxxxxxxx","api_version":"v1","data":{"audience":{"type":"channel","user_ids":["user_xxxxxxxxxxxxxx"]},"channel":{"id":"feed_xxxxxxxxxxxxxx","type":"chat","experience_id":"exp_xxxxxxxxxxxxxx"},"message":{"id":"id","content":"Hey, are you available for a **quick call**?","created_at":"2023-12-01T05:00:00.401Z","is_edited":true,"is_pinned":true,"mentions":["string"],"mentions_everyone":true,"message_type":"regular","poll":{"options":[{"id":"id","text":"text"}]},"poll_votes":[{"count":42,"option_id":"option_id"}],"reaction_counts":[{"count":42,"emoji":"emoji"}],"replying_to_message_id":"replying_to_message_id","updated_at":"2023-12-01T05:00:00.401Z","user":{"id":"user_xxxxxxxxxxxxx","name":"John Doe","username":"johndoe42"},"view_count":42},"reason":"channel_message"},"timestamp":"2025-01-01T00:00:00.000Z","type":"chat.message.created","company_id":"biz_xxxxxxxxxxxxxx"}';
     const msgID = '1';
     const timestamp = new Date();
     const wh = new Webhook('whsec_c2VjcmV0Cg==');

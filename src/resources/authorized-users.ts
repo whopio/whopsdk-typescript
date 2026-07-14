@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Authorized users
- */
 export class AuthorizedUsers extends APIResource {
   /**
    * Returns a paginated list of authorized team members for a company, with optional
@@ -309,9 +306,56 @@ export interface AuthorizedUserCreateParams {
   user_id: string;
 
   /**
+   * Re-authentication proof required to perform this sensitive action.
+   */
+  elevation?: AuthorizedUserCreateParams.Elevation | null;
+
+  /**
    * Whether to send notification emails to the user on creation.
    */
   send_emails?: boolean | null;
+}
+
+export namespace AuthorizedUserCreateParams {
+  /**
+   * Re-authentication proof required to perform this sensitive action.
+   */
+  export interface Elevation {
+    /**
+     * The WebAuthn authenticator data (base64).
+     */
+    authenticator_data?: string | null;
+
+    /**
+     * The WebAuthn client data JSON (base64).
+     */
+    client_data_json?: string | null;
+
+    /**
+     * The WebAuthn credential ID (base64).
+     */
+    credential_id?: string | null;
+
+    /**
+     * The 6-digit code emailed to the user.
+     */
+    email_code?: string | null;
+
+    /**
+     * The WebAuthn signature (base64).
+     */
+    signature?: string | null;
+
+    /**
+     * The 6-digit code from the authenticator app or SMS.
+     */
+    totp_code?: string | null;
+
+    /**
+     * Reuse an existing elevated session (for SMS/email 2FA users).
+     */
+    use_finance_session?: boolean | null;
+  }
 }
 
 export interface AuthorizedUserDeleteParams {

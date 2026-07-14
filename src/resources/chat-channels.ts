@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Chat channels
- */
 export class ChatChannels extends APIResource {
   /**
    * Returns a paginated list of chat channels within a specific company, with

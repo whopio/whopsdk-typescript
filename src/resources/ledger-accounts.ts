@@ -8,9 +8,6 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Ledger accounts
- */
 export class LedgerAccounts extends APIResource {
   /**
    * Retrieves the details of an existing ledger account.
@@ -134,7 +131,7 @@ export namespace LedgerAccountRetrieveResponse {
     id: string;
 
     /**
-     * The URL slug for the company's store page (e.g., 'pickaxe' in whop.com/pickaxe).
+     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
      */
     route: string;
 

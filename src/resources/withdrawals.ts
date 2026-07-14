@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Withdrawals
- */
 export class Withdrawals extends APIResource {
   /**
    * Returns a paginated list of withdrawals for a company, with optional sorting and
@@ -147,6 +144,7 @@ export interface Withdrawal {
     | 'missing_phone_number'
     | 'missing_remittance_info'
     | 'payee_name_invalid'
+    | 'beneficiary_name_mismatch'
     | 'receiving_account_locked'
     | 'rejected_by_compliance'
     | 'rtp_not_supported'
@@ -406,7 +404,7 @@ export interface WithdrawalCreateParams {
   payout_method_id?: string | null;
 
   /**
-   * Whether the platform covers the payout fees instead of the connected account.
+   * Whether the platform covers the payout fees.
    */
   platform_covers_fees?: boolean | null;
 

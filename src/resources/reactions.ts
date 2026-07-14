@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Reactions
- */
 export class Reactions extends APIResource {
   /**
    * Returns a paginated list of emoji reactions on a specific message or forum post,
