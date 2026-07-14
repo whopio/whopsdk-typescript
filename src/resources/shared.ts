@@ -7,6 +7,7 @@ import * as CompaniesAPI from './companies';
 import * as DisputesAPI from './disputes';
 import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
+import * as RefundsAPI from './refunds';
 import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import { CursorPage } from '../core/pagination';
 
@@ -2550,6 +2551,12 @@ export interface Payment {
   refunded_at: string | null;
 
   /**
+   * The refunds issued against this payment, newest first, including failed and
+   * canceled refund attempts. Limited to the 100 most recent.
+   */
+  refunds: Array<Payment.Refund>;
+
+  /**
    * The resolution center cases opened by the customer on this payment. Null if the
    * actor in context does not have the payment:resolution_center_case:read
    * permission.
@@ -3035,6 +3042,39 @@ export namespace Payment {
      * The type (% or flat amount) of the promo.
      */
     promo_type: Shared.PromoType;
+  }
+
+  /**
+   * A refund represents a full or partial reversal of a payment, including the
+   * amount, status, and payment provider.
+   */
+  export interface Refund {
+    /**
+     * The unique identifier for the refund.
+     */
+    id: string;
+
+    /**
+     * The refunded amount as a decimal in the specified currency, such as 10.43 for
+     * $10.43 USD.
+     */
+    amount: number;
+
+    /**
+     * The datetime the refund was created.
+     */
+    created_at: string;
+
+    /**
+     * The three-letter ISO currency code for the refunded amount.
+     */
+    currency: Shared.Currency;
+
+    /**
+     * The current processing status of the refund, such as pending, succeeded, or
+     * failed.
+     */
+    status: RefundsAPI.RefundStatus;
   }
 
   /**
