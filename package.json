@@ -27,6 +27,7 @@
     "fix": "./scripts/format"
   },
   "dependencies": {
+    "jose": "^6.1.0",
     "standardwebhooks": "^1.0.0"
   },
   "devDependencies": {
