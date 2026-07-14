@@ -45,14 +45,16 @@ export interface Audience {
   id: string;
 
   /**
-   * Unix timestamp when the audience was created.
+   * When the audience was created, as an ISO 8601 timestamp.
    */
-  created_at: number;
+  created_at: string;
 
   /**
    * Processing error message. `null` unless processing is partial or failed.
    */
   error_message: string | null;
+
+  match_rates: Array<Audience.MatchRate>;
 
   /**
    * Rows successfully uploaded to connected ad accounts.
@@ -89,9 +91,37 @@ export interface Audience {
   total_rows: number;
 
   /**
-   * Unix timestamp when the audience was last updated.
+   * When the audience was last updated, as an ISO 8601 timestamp.
    */
-  updated_at: number;
+  updated_at: string;
+}
+
+export namespace Audience {
+  /**
+   * Estimated match rates by ad platform. Empty when the audience was not sent to a
+   * supported platform.
+   */
+  export interface MatchRate {
+    /**
+     * Lower bound of the estimated match rate percentage. `null` until available.
+     */
+    lower_bound: number | null;
+
+    /**
+     * The ad platform that provided the match-rate estimate.
+     */
+    platform: 'meta';
+
+    /**
+     * Availability of the estimated match rate.
+     */
+    status: 'calculating' | 'available' | 'unavailable' | null;
+
+    /**
+     * Upper bound of the estimated match rate percentage. `null` until available.
+     */
+    upper_bound: number | null;
+  }
 }
 
 export interface AudienceDeleteResponse {
