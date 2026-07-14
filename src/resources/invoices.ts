@@ -10,9 +10,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Invoices
- */
 export class Invoices extends APIResource {
   /**
    * Returns a paginated list of invoices for a company, with optional filtering by
@@ -180,6 +177,7 @@ export type TaxIdentifierType =
   | 'ad_nrt'
   | 'ao_tin'
   | 'ar_cuit'
+  | 'al_tin'
   | 'am_tin'
   | 'aw_tin'
   | 'au_abn'
@@ -220,6 +218,7 @@ export type TaxIdentifierType =
   | 'et_tin'
   | 'eu_oss_vat'
   | 'ge_vat'
+  | 'gh_tin'
   | 'de_stn'
   | 'gb_vat'
   | 'gn_nif'
@@ -482,9 +481,19 @@ export declare namespace InvoiceCreateParams {
      */
     export interface Plan {
       /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency?: Shared.Currency | null;
 
       /**
        * An array of custom field objects.
@@ -828,9 +837,19 @@ export declare namespace InvoiceCreateParams {
      */
     export interface Plan {
       /**
+       * Whether this plan accepts local currency payments via adaptive pricing.
+       */
+      adaptive_pricing_enabled?: boolean | null;
+
+      /**
        * The interval in days at which the plan charges (renewal plans).
        */
       billing_period?: number | null;
+
+      /**
+       * The available currencies on the platform
+       */
+      currency?: Shared.Currency | null;
 
       /**
        * An array of custom field objects.
@@ -1208,9 +1227,19 @@ export namespace InvoiceUpdateParams {
    */
   export interface Plan {
     /**
+     * Whether this plan accepts local currency payments via adaptive pricing.
+     */
+    adaptive_pricing_enabled?: boolean | null;
+
+    /**
      * The interval in days at which the plan charges (renewal plans).
      */
     billing_period?: number | null;
+
+    /**
+     * The available currencies on the platform
+     */
+    currency?: Shared.Currency | null;
 
     /**
      * An array of custom field objects.

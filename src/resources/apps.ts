@@ -8,7 +8,9 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Apps
+ * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.app` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
+ *
+ * Use the Apps API to manage app configuration and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests. Logs are retained for 7 days and can be filtered by build, level, time window, and message text.
  */
 export class Apps extends APIResource {
   /**
@@ -38,6 +40,7 @@ export class Apps extends APIResource {
    *
    * - `developer:create_app`
    * - `developer:manage_api_key`
+   * - `developer:update_app`
    *
    * @example
    * ```ts
@@ -57,6 +60,7 @@ export class Apps extends APIResource {
    * Required permissions:
    *
    * - `developer:manage_api_key`
+   * - `developer:update_app`
    *
    * @example
    * ```ts
@@ -89,6 +93,24 @@ export class Apps extends APIResource {
     options?: RequestOptions,
   ): APIPromise<Shared.App> {
     return this._client.patch(path`/apps/${id}`, { body, ...options });
+  }
+
+  /**
+   * Lists a hosted app's server runtime logs, most recent first: console output,
+   * uncaught exceptions, and failed-request summaries captured on whop.app hosting.
+   * Logs are retained for 7 days.
+   *
+   * @example
+   * ```ts
+   * const response = await client.apps.logs('id');
+   * ```
+   */
+  logs(
+    id: string,
+    query: AppLogsParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AppLogsResponse> {
+    return this._client.get(path`/apps/${id}/logs`, { query, ...options });
   }
 }
 
@@ -165,6 +187,12 @@ export interface AppListResponse {
   experience_path: string | null;
 
   /**
+   * The full canonical URL where this app's hosted web build is served. Null if the
+   * app has not claimed a route.
+   */
+  hosted_url: string | null;
+
+  /**
    * The icon image for this app, displayed on the app store, product pages,
    * checkout, and as the default icon for experiences using this app.
    */
@@ -188,6 +216,12 @@ export interface AppListResponse {
    * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
    */
   origin: string | null;
+
+  /**
+   * The unique subdomain route where this app's hosted web builds are served, such
+   * as 'myapp' for myapp.whop.app. Null if the app has not claimed a route.
+   */
+  route: string | null;
 
   /**
    * The URL path template for a specific view of this app, appended to the base
@@ -256,6 +290,56 @@ export namespace AppListResponse {
      * used for displaying attachments in apps.
      */
     url: string | null;
+  }
+}
+
+export interface AppLogsResponse {
+  data: Array<AppLogsResponse.Data>;
+
+  page_info: AppLogsResponse.PageInfo;
+}
+
+export namespace AppLogsResponse {
+  export interface Data {
+    app_build_id: string;
+
+    app_id: string;
+
+    created_at: string;
+
+    level: string;
+
+    message: string;
+
+    request_id: string;
+
+    source: 'console' | 'exception' | 'request';
+
+    cpu_time_ms?: number;
+
+    outcome?: string | null;
+
+    request_method?: string | null;
+
+    request_path?: string | null;
+
+    response_status?: number | null;
+
+    stack?: string | null;
+
+    truncated?: boolean;
+
+    wall_time_ms?: number;
+  }
+
+  export interface PageInfo {
+    has_next_page: boolean;
+
+    has_previous_page: boolean;
+
+    end_cursor?: string | null;
+
+    start_cursor?: string | null;
   }
 }
 
@@ -353,6 +437,12 @@ export interface AppCreateParams {
    * authorizing the app.
    */
   redirect_uris?: Array<string> | null;
+
+  /**
+   * The unique subdomain route where the app's hosted web builds are served, such as
+   * 'myapp' for myapp.whop.app.
+   */
+  route?: string | null;
 }
 
 export namespace AppCreateParams {
@@ -438,6 +528,20 @@ export interface AppUpdateParams {
   required_scopes?: Array<'read_user'> | null;
 
   /**
+   * The unique subdomain route where the app's hosted web builds are served, such as
+   * 'myapp' for myapp.whop.app.
+   */
+  route?: string | null;
+
+  /**
+   * Secrets to add or overwrite on the app, as an object of string values (e.g.
+   * {"MAIL_API_KEY": "..."}). Keys not included are left untouched. Pass null or an
+   * empty string as the value to delete a secret. Secrets are encrypted at rest and
+   * injected into the app's hosted server runtime as environment bindings.
+   */
+  secrets?: { [key: string]: unknown } | null;
+
+  /**
    * The URL path to the skills directory of the app, such as '/assets/skills/'.
    */
   skills_path?: string | null;
@@ -460,13 +564,58 @@ export namespace AppUpdateParams {
   }
 }
 
+export interface AppLogsParams {
+  /**
+   * A cursor for fetching logs after a previous page.
+   */
+  after?: string;
+
+  /**
+   * Only return logs from this build.
+   */
+  app_build_id?: string;
+
+  /**
+   * A cursor for fetching logs before a later page.
+   */
+  before?: string;
+
+  /**
+   * Start of the time window as an ISO 8601 timestamp. Defaults to 7 days before
+   * created_before.
+   */
+  created_after?: string;
+
+  /**
+   * End of the time window as an ISO 8601 timestamp. Defaults to now.
+   */
+  created_before?: string;
+
+  /**
+   * The number of log lines to return (max 500).
+   */
+  first?: number;
+
+  /**
+   * Only return console lines of this level.
+   */
+  level?: 'log' | 'debug' | 'info' | 'warn' | 'error';
+
+  /**
+   * Only return logs whose message contains this text (case-insensitive).
+   */
+  query?: string;
+}
+
 export declare namespace Apps {
   export {
     type AppType as AppType,
     type AppListResponse as AppListResponse,
+    type AppLogsResponse as AppLogsResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppLogsParams as AppLogsParams,
   };
 }

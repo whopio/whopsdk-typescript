@@ -31,7 +31,7 @@ const serverConfig: ServerConfig = {
       key: 'apiKey',
       label: 'API Key',
       description:
-        'A company API key, company scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`',
+        'An account API key, account scoped JWT, app API key, or user OAuth token. You must prepend your key/token with the word `Bearer`, which will look like `Bearer ***************************`',
       required: true,
       default: undefined,
       placeholder: 'My API Key',
@@ -55,6 +55,16 @@ const serverConfig: ServerConfig = {
       placeholder: 'app_xxxxxxxxxxxxxx',
       type: 'string',
     },
+    {
+      key: 'version',
+      label: 'Version',
+      description:
+        'Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.',
+      required: false,
+      default: '2026-07-08-1',
+      placeholder: '2026-07-08-1',
+      type: 'string',
+    },
   ],
 };
 
@@ -68,7 +78,7 @@ const INSTRUCTIONS_FETCH_TIMEOUT_MS = 5000;
 
 function fallbackMcpServer(): McpServer {
   return new McpServer(
-    { name: 'whop_sdk_api', version: '0.0.39' },
+    { name: 'whop_sdk_api', version: '0.0.40' },
     { capabilities: { tools: {}, logging: {} } },
   );
 }

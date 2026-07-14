@@ -1,23 +1,20 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Transfers
+ * Transfers move value between identities on Whop. They are used for account-to-account money movement, user payouts inside Whop, crypto transfers, and claim links depending on the destination type.
+ *
+ * Use the Transfers API to create a transfer, list previous transfers, and retrieve a transfer by ID when reconciling money movement between accounts or users.
  */
 export class Transfers extends APIResource {
   /**
-   * Returns a paginated list of fund transfers, filtered by origin or destination
-   * account, with optional sorting and date filtering.
-   *
-   * Required permissions:
-   *
-   * - `payout:transfer:read`
+   * Lists ledger transfers for an account. You must specify an origin_id or a
+   * destination_id.
    *
    * @example
    * ```ts
@@ -35,42 +32,33 @@ export class Transfers extends APIResource {
   }
 
   /**
-   * Transfer funds between two ledger accounts, such as from a company balance to a
-   * user balance.
-   *
-   * Required permissions:
-   *
-   * - `payout:transfer_funds`
+   * Moves funds out of an account. `type` selects the kind of movement (default
+   * `ledger`): `ledger` transfers credit between two ledger accounts and returns a
+   * Transfer; `wallet_send` sends USDT from the origin account's Ethereum wallet to
+   * a recipient; `claim_link` funds a shareable claim link anyone with the URL can
+   * redeem.
    *
    * @example
    * ```ts
    * const transfer = await client.transfers.create({
-   *   amount: 6.9,
-   *   currency: 'usd',
-   *   destination_id: 'destination_id',
+   *   amount: 0,
    *   origin_id: 'origin_id',
    * });
    * ```
    */
-  create(body: TransferCreateParams, options?: RequestOptions): APIPromise<Shared.Transfer> {
+  create(body: TransferCreateParams, options?: RequestOptions): APIPromise<TransferCreateResponse> {
     return this._client.post('/transfers', { body, ...options });
   }
 
   /**
-   * Retrieves the details of an existing transfer.
-   *
-   * Required permissions:
-   *
-   * - `payout:transfer:read`
+   * Retrieves a ledger transfer by ID.
    *
    * @example
    * ```ts
-   * const transfer = await client.transfers.retrieve(
-   *   'ctt_xxxxxxxxxxxxxx',
-   * );
+   * const transfer = await client.transfers.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Transfer> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<TransferRetrieveResponse> {
     return this._client.get(path`/transfers/${id}`, options);
   }
 }
@@ -80,152 +68,506 @@ export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
 /**
  * A transfer of credit between two ledger accounts.
  */
-export interface TransferListResponse {
+export type TransferCreateResponse =
+  | TransferCreateResponse.Transfer
+  | TransferCreateResponse.Send
+  | TransferCreateResponse.ClaimLink;
+
+export namespace TransferCreateResponse {
   /**
-   * The unique identifier for the credit transaction transfer.
+   * A transfer of credit between two ledger accounts.
+   */
+  export interface Transfer {
+    /**
+     * Transfer ID.
+     */
+    id: string;
+
+    /**
+     * Transfer amount.
+     */
+    amount: number;
+
+    /**
+     * When the transfer was created.
+     */
+    created_at: string;
+
+    /**
+     * Transfer currency.
+     */
+    currency: string;
+
+    /**
+     * Account or user receiving funds.
+     */
+    destination: Transfer.Company | Transfer.User;
+
+    /**
+     * Destination ledger account ID.
+     */
+    destination_ledger_account_id: string;
+
+    /**
+     * Account or user sending funds.
+     */
+    origin: Transfer.Company | Transfer.User;
+
+    /**
+     * Source ledger account ID.
+     */
+    origin_ledger_account_id: string;
+
+    /**
+     * Fee charged for the transfer.
+     */
+    fee_amount?: number | null;
+
+    /**
+     * Custom metadata attached to the transfer.
+     */
+    metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * Transfer note.
+     */
+    notes?: string | null;
+  }
+
+  export namespace Transfer {
+    export interface Company {
+      /**
+       * Account ID.
+       */
+      id: string;
+
+      typename: 'Company';
+
+      /**
+       * Account route.
+       */
+      route?: string | null;
+
+      /**
+       * Account display name.
+       */
+      title?: string | null;
+    }
+
+    export interface User {
+      /**
+       * User ID.
+       */
+      id: string;
+
+      typename: 'User';
+
+      /**
+       * User display name.
+       */
+      name?: string | null;
+
+      /**
+       * User's username.
+       */
+      username?: string;
+    }
+
+    export interface Company {
+      /**
+       * Account ID.
+       */
+      id: string;
+
+      typename: 'Company';
+
+      /**
+       * Account route.
+       */
+      route?: string | null;
+
+      /**
+       * Account display name.
+       */
+      title?: string | null;
+    }
+
+    export interface User {
+      /**
+       * User ID.
+       */
+      id: string;
+
+      typename: 'User';
+
+      /**
+       * User display name.
+       */
+      name?: string | null;
+
+      /**
+       * User's username.
+       */
+      username?: string;
+    }
+  }
+
+  /**
+   * Returned for a wallet_send: an onchain USDT send to a recipient.
+   */
+  export interface Send {
+    amount: string;
+
+    currency: string;
+
+    destination: Send.Destination;
+
+    object: 'send';
+
+    source: Send.Source;
+
+    tx_hash: string;
+  }
+
+  export namespace Send {
+    export interface Destination {
+      account_id: string;
+
+      address: string;
+    }
+
+    export interface Source {
+      account_id: string;
+
+      address: string;
+    }
+  }
+
+  /**
+   * Returned for a claim_link: a shareable URL anyone can open to claim the funds.
+   */
+  export interface ClaimLink {
+    id: string;
+
+    amount: string;
+
+    claim_url: string;
+
+    currency: string;
+
+    expires_at: string | null;
+
+    object: 'claim_link';
+
+    redeemable_count: number;
+
+    source: ClaimLink.Source;
+
+    status: string;
+  }
+
+  export namespace ClaimLink {
+    export interface Source {
+      account_id: string;
+    }
+  }
+}
+
+/**
+ * A transfer of credit between two ledger accounts.
+ */
+export interface TransferRetrieveResponse {
+  /**
+   * Transfer ID.
    */
   id: string;
 
   /**
-   * The transfer amount in the currency specified by the currency field. For
-   * example, 10.43 represents $10.43 USD.
+   * Transfer amount.
    */
   amount: number;
 
   /**
-   * The datetime the credit transaction transfer was created.
+   * When the transfer was created.
    */
   created_at: string;
 
   /**
-   * The currency in which this transfer amount is denominated.
+   * Transfer currency.
    */
-  currency: Shared.Currency;
+  currency: string;
 
   /**
-   * The unique identifier of the ledger account receiving the funds.
+   * Account or user receiving funds.
+   */
+  destination: TransferRetrieveResponse.Company | TransferRetrieveResponse.User;
+
+  /**
+   * Destination ledger account ID.
    */
   destination_ledger_account_id: string;
 
   /**
-   * The flat fee amount deducted from this transfer, in the transfer's currency.
-   * Null if no flat fee was applied.
+   * Account or user sending funds.
    */
-  fee_amount: number | null;
+  origin: TransferRetrieveResponse.Company | TransferRetrieveResponse.User;
 
   /**
-   * Custom key-value pairs attached to this transfer. Maximum 50 keys, 500
-   * characters per key, 5000 characters per value.
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * A free-text note attached to this transfer by the sender. Null if no note was
-   * provided.
-   */
-  notes: string | null;
-
-  /**
-   * The unique identifier of the ledger account that sent the funds.
+   * Source ledger account ID.
    */
   origin_ledger_account_id: string;
-}
 
-export interface TransferListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Fee charged for the transfer.
    */
-  before?: string | null;
+  fee_amount?: number | null;
 
   /**
-   * Only return transfers created after this timestamp.
-   */
-  created_after?: string | null;
-
-  /**
-   * Only return transfers created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Filter to transfers received by this account. Accepts a user, company, or ledger
-   * account ID.
-   */
-  destination_id?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Which columns can be used to sort.
-   */
-  order?: 'amount' | 'created_at' | null;
-
-  /**
-   * Filter to transfers sent from this account. Accepts a user, company, or ledger
-   * account ID.
-   */
-  origin_id?: string | null;
-}
-
-export interface TransferCreateParams {
-  /**
-   * The amount to transfer in the specified currency. For example, 25.00 for $25.00
-   * USD.
-   */
-  amount: number;
-
-  /**
-   * The currency of the transfer amount, such as 'usd'.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The identifier of the account receiving the funds. Accepts a user ID
-   * ('user_xxx'), company ID ('biz_xxx'), ledger account ID ('ldgr_xxx'), or an
-   * email address — emails without an existing Whop user trigger a placeholder-user
-   * signup.
-   */
-  destination_id: string;
-
-  /**
-   * The identifier of the account sending the funds. Accepts a user ID ('user_xxx'),
-   * company ID ('biz_xxx'), or ledger account ID ('ldgr_xxx').
-   */
-  origin_id: string;
-
-  /**
-   * A unique key to prevent duplicate transfers. Use a UUID or similar unique
-   * string.
-   */
-  idempotence_key?: string | null;
-
-  /**
-   * A JSON object of custom metadata to attach to the transfer for tracking
-   * purposes.
+   * Custom metadata attached to the transfer.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * A short note describing the transfer, up to 50 characters.
+   * Transfer note.
    */
   notes?: string | null;
 }
 
+export namespace TransferRetrieveResponse {
+  export interface Company {
+    /**
+     * Account ID.
+     */
+    id: string;
+
+    typename: 'Company';
+
+    /**
+     * Account route.
+     */
+    route?: string | null;
+
+    /**
+     * Account display name.
+     */
+    title?: string | null;
+  }
+
+  export interface User {
+    /**
+     * User ID.
+     */
+    id: string;
+
+    typename: 'User';
+
+    /**
+     * User display name.
+     */
+    name?: string | null;
+
+    /**
+     * User's username.
+     */
+    username?: string;
+  }
+
+  export interface Company {
+    /**
+     * Account ID.
+     */
+    id: string;
+
+    typename: 'Company';
+
+    /**
+     * Account route.
+     */
+    route?: string | null;
+
+    /**
+     * Account display name.
+     */
+    title?: string | null;
+  }
+
+  export interface User {
+    /**
+     * User ID.
+     */
+    id: string;
+
+    typename: 'User';
+
+    /**
+     * User display name.
+     */
+    name?: string | null;
+
+    /**
+     * User's username.
+     */
+    username?: string;
+  }
+}
+
+/**
+ * A transfer of credit between two ledger accounts.
+ */
+export interface TransferListResponse {
+  /**
+   * Transfer ID.
+   */
+  id: string;
+
+  /**
+   * Transfer amount.
+   */
+  amount: number;
+
+  /**
+   * When the transfer was created.
+   */
+  created_at: string;
+
+  /**
+   * Transfer currency.
+   */
+  currency: string;
+
+  /**
+   * Destination ledger account ID.
+   */
+  destination_ledger_account_id: string;
+
+  /**
+   * Source ledger account ID.
+   */
+  origin_ledger_account_id: string;
+
+  /**
+   * Fee charged for the transfer.
+   */
+  fee_amount?: number | null;
+
+  /**
+   * Custom metadata attached to the transfer.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
+   * Transfer note.
+   */
+  notes?: string | null;
+}
+
+export interface TransferListParams extends CursorPageParams {
+  /**
+   * Cursor to fetch the page before (from page_info.start_cursor).
+   */
+  before?: string;
+
+  /**
+   * Only transfers created strictly after this ISO 8601 timestamp.
+   */
+  created_after?: string;
+
+  /**
+   * Only transfers created strictly before this ISO 8601 timestamp.
+   */
+  created_before?: string;
+
+  /**
+   * Filter to transfers received by this account.
+   */
+  destination_id?: string;
+
+  /**
+   * Sort direction. Defaults to desc.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Number of transfers to return from the start of the window.
+   */
+  first?: number;
+
+  /**
+   * Number of transfers to return from the end of the window.
+   */
+  last?: number;
+
+  /**
+   * Sort column. Defaults to created_at.
+   */
+  order?: 'created_at' | 'amount';
+
+  /**
+   * Filter to transfers sent from this account.
+   */
+  origin_id?: string;
+}
+
+export interface TransferCreateParams {
+  /**
+   * The amount to move, in the transfer currency. For example 25.00.
+   */
+  amount: number;
+
+  /**
+   * The account sending the funds. A user ID (user_xxx), account ID (biz_xxx), or
+   * ledger account ID (ldgr_xxx).
+   */
+  origin_id: string;
+
+  /**
+   * Currency, such as `usd`. Required for ledger transfers.
+   */
+  currency?: string;
+
+  /**
+   * The recipient. Required for ledger and wallet*send (a user* /biz* /ldgr* ID, or —
+   * for sends — an email). Omit for claim_link.
+   */
+  destination_id?: string;
+
+  /**
+   * claim_link only. Link expiry as an ISO 8601 timestamp. Defaults to 24 hours from
+   * creation.
+   */
+  expires_at?: string | null;
+
+  /**
+   * Ledger transfers only. A unique key to prevent duplicate transfers.
+   */
+  idempotence_key?: string | null;
+
+  /**
+   * Ledger transfers only. Custom key-value pairs attached to the transfer. Max 50
+   * keys, 100 chars per key, 500 chars per string value.
+   */
+  metadata?: { [key: string]: unknown } | null;
+
+  /**
+   * Ledger transfers only. A short note describing the transfer.
+   */
+  notes?: string | null;
+
+  /**
+   * claim_link only. How many different users can claim the link. Defaults to 1.
+   */
+  redeemable_count?: number;
+
+  /**
+   * The kind of money movement. Defaults to ledger.
+   */
+  type?: 'ledger' | 'wallet_send' | 'claim_link';
+}
+
 export declare namespace Transfers {
   export {
+    type TransferCreateResponse as TransferCreateResponse,
+    type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
     type TransferListParams as TransferListParams,

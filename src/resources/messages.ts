@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Messages
- */
 export class Messages extends APIResource {
   /**
    * Returns a paginated list of messages within a specific experience chat, DM, or

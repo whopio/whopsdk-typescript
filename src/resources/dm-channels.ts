@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Dm channels
- */
 export class DmChannels extends APIResource {
   /**
    * Returns a paginated list of DM channels for the currently authenticated user,

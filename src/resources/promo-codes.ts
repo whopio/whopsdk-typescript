@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Promo codes
- */
 export class PromoCodes extends APIResource {
   /**
    * Returns a paginated list of promo codes belonging to a company, with optional

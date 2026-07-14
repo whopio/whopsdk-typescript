@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource users', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.users.retrieve('user_xxxxxxxxxxxxx');
+    const responsePromise = client.users.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -25,8 +25,15 @@ describe('resource users', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.users.retrieve(
-        'user_xxxxxxxxxxxxx',
-        { company_id: 'biz_xxxxxxxxxxxxxx' },
+        'id',
+        {
+          account_id: 'account_id',
+          from: 'from',
+          include_balance_history: true,
+          interval: 'hour',
+          time_zone: 'time_zone',
+          to: 'to',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -34,7 +41,7 @@ describe('resource users', () => {
 
   // Mock server tests are disabled
   test.skip('checkAccess: only required params', async () => {
-    const responsePromise = client.users.checkAccess('resource_id', { id: 'user_xxxxxxxxxxxxx' });
+    const responsePromise = client.users.checkAccess('resource_id', { id: 'id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -46,12 +53,12 @@ describe('resource users', () => {
 
   // Mock server tests are disabled
   test.skip('checkAccess: required and optional params', async () => {
-    const response = await client.users.checkAccess('resource_id', { id: 'user_xxxxxxxxxxxxx' });
+    const response = await client.users.checkAccess('resource_id', { id: 'id' });
   });
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.users.update('user_xxxxxxxxxxxxx');
+    const responsePromise = client.users.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,21 +69,15 @@ describe('resource users', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.users.update(
-        'user_xxxxxxxxxxxxx',
-        {
-          bio: 'bio',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          name: 'name',
-          profile_picture: { id: 'id' },
-          username: 'username',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('updateMe', async () => {
+    const responsePromise = client.users.updateMe({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 
   // Mock server tests are disabled
@@ -99,8 +100,8 @@ describe('resource users', () => {
         {
           after: 'after',
           before: 'before',
-          first: 42,
-          last: 42,
+          first: 0,
+          last: 0,
           query: 'query',
         },
         { path: '/_stainless_unknown_path' },

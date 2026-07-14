@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource wallets', () => {
+describe('resource bounties', () => {
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.wallets.list();
+    const responsePromise = client.workforce.bounties.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,32 @@ describe('resource wallets', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('balance', async () => {
-    const responsePromise = client.wallets.balance('account_id');
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.workforce.bounties.list(
+        {
+          account_id: 'account_id',
+          after: 'after',
+          before: 'before',
+          created_after: 'created_after',
+          created_before: 'created_before',
+          direction: 'asc',
+          first: 100,
+          last: 100,
+          order: 'created_at',
+          query: 'query',
+          status: 'scheduled',
+          user_id: 'user_id',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve', async () => {
+    const responsePromise = client.workforce.bounties.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -30,22 +54,5 @@ describe('resource wallets', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('send: only required params', async () => {
-    const responsePromise = client.wallets.send('account_id', { amount: 'amount', to: 'to' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('send: required and optional params', async () => {
-    const response = await client.wallets.send('account_id', { amount: 'amount', to: 'to' });
   });
 });

@@ -1,95 +1,65 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as AdGroupsAPI from './ad-groups';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Ad campaigns
+ * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
+ *
+ * Use the Ad Campaigns API to create campaigns, list campaigns for an account, retrieve or update campaign settings, and pause or resume campaign delivery.
  */
 export class AdCampaigns extends APIResource {
   /**
-   * Returns a paginated list of ad campaigns for a company, with optional filtering
-   * by status, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const adCampaignListResponse of client.adCampaigns.list()) {
-   *   // ...
-   * }
-   * ```
+   * Lists the ad campaigns for an account, with stats over the requested window.
    */
   list(
     query: AdCampaignListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<AdCampaignListResponsesCursorPage, AdCampaignListResponse> {
-    return this._client.getAPIList('/ad_campaigns', CursorPage<AdCampaignListResponse>, {
-      query,
-      ...options,
-    });
+  ): PagePromise<AdCampaignsCursorPage, AdCampaign> {
+    return this._client.getAPIList('/ad_campaigns', CursorPage<AdCampaign>, { query, ...options });
   }
 
   /**
-   * Retrieves a single ad campaign by its unique identifier.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:basic:read`
-   *
-   * @example
-   * ```ts
-   * const adCampaign = await client.adCampaigns.retrieve(
-   *   'adcamp_xxxxxxxxxxx',
-   * );
-   * ```
+   * Creates an ad campaign for an account.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
-    return this._client.get(path`/ad_campaigns/${id}`, options);
+  create(body: AdCampaignCreateParams, options?: RequestOptions): APIPromise<AdCampaign> {
+    return this._client.post('/ad_campaigns', { body, ...options });
   }
 
   /**
-   * Updates an ad campaign synchronously.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:update`
-   *
-   * @example
-   * ```ts
-   * const adCampaign = await client.adCampaigns.update(
-   *   'adcamp_xxxxxxxxxxx',
-   * );
-   * ```
+   * Retrieves a single ad campaign with stats over the requested window.
    */
-  update(
+  retrieve(
     id: string,
-    body: AdCampaignUpdateParams | null | undefined = {},
+    query: AdCampaignRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AdCampaign> {
+    return this._client.get(path`/ad_campaigns/${id}`, { query, ...options });
+  }
+
+  /**
+   * Updates an ad campaign's editable fields (title, budget, schedule, bid strategy,
+   * and — before launch — budget optimization), and launches a draft campaign by
+   * setting status to active. Objective, budget type, special ad categories and
+   * desired cost per result are fixed at creation and cannot be changed.
+   */
+  update(id: string, body: AdCampaignUpdateParams, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.patch(path`/ad_campaigns/${id}`, { body, ...options });
   }
 
   /**
-   * Pauses an ad campaign, optionally until a specific date.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:update`
-   *
-   * @example
-   * ```ts
-   * const adCampaign = await client.adCampaigns.pause(
-   *   'adcamp_xxxxxxxxxxx',
-   * );
-   * ```
+   * Deletes an ad campaign and archives it on the ad platform (cascades to ad groups
+   * and ads). Returns true on success.
+   */
+  delete(id: string, options?: RequestOptions): APIPromise<AdCampaignDeleteResponse> {
+    return this._client.delete(path`/ad_campaigns/${id}`, options);
+  }
+
+  /**
+   * Pauses an active ad campaign.
    */
   pause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.post(path`/ad_campaigns/${id}/pause`, options);
@@ -97,280 +67,553 @@ export class AdCampaigns extends APIResource {
 
   /**
    * Resumes a paused ad campaign.
-   *
-   * Required permissions:
-   *
-   * - `ad_campaign:update`
-   *
-   * @example
-   * ```ts
-   * const adCampaign = await client.adCampaigns.unpause(
-   *   'adcamp_xxxxxxxxxxx',
-   * );
-   * ```
    */
   unpause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.post(path`/ad_campaigns/${id}/unpause`, options);
   }
 }
 
-export type AdCampaignListResponsesCursorPage = CursorPage<AdCampaignListResponse>;
+export type AdCampaignsCursorPage = CursorPage<AdCampaign>;
 
-/**
- * An advertising campaign running on an external platform or within Whop.
- */
 export interface AdCampaign {
   /**
-   * The unique identifier for this ad campaign.
+   * Unique identifier for the ad campaign.
    */
   id: string;
 
   /**
-   * Total budget in dollars.
+   * Whop pixel-attributed add-to-cart events, last-click.
    */
-  budget: number | null;
+  added_to_carts: number;
 
   /**
-   * The budget type for an ad campaign or ad group.
+   * The bidding strategy the campaign uses.
    */
-  budget_type: AdGroupsAPI.AdBudgetType | null;
+  bid_type: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
 
   /**
-   * When the ad campaign was created.
+   * The campaign budget in USD. Null when budget is set at the ad group level (ABO).
+   */
+  budget_amount: number | null;
+
+  /**
+   * Which level owns the budget — the campaign (CBO) or each ad group (ABO).
+   */
+  budget_optimization: 'ad_campaign' | 'ad_group' | null;
+
+  /**
+   * Whether the budget is spent per day or over the campaign's lifetime.
+   */
+  budget_type: 'daily' | 'lifetime' | null;
+
+  /**
+   * Clicks divided by impressions, between 0 and 1.
+   */
+  click_through_rate: number;
+
+  /**
+   * The number of clicks.
+   */
+  clicks: number;
+
+  /**
+   * Whop pixel-attributed complete-registration events, last-click.
+   */
+  completed_registrations: number;
+
+  /**
+   * Whop pixel-attributed contact events, last-click.
+   */
+  contacts: number;
+
+  /**
+   * Spend divided by attributed add-to-cart events; null when they are not the goal
+   * and none are attributed.
+   */
+  cost_per_added_to_cart: number | null;
+
+  /**
+   * Spend divided by clicks; 0 when there are no clicks.
+   */
+  cost_per_click: number;
+
+  /**
+   * Spend divided by attributed complete-registration events; null when they are not
+   * the goal and none are attributed.
+   */
+  cost_per_completed_registration: number | null;
+
+  /**
+   * Spend divided by attributed contact events; null when contacts are not the goal
+   * and none are attributed.
+   */
+  cost_per_contact: number | null;
+
+  /**
+   * Spend divided by attributed leads; null when leads are not a goal and none are
+   * attributed.
+   */
+  cost_per_lead: number | null;
+
+  /**
+   * Spend per 1,000 impressions; 0 when there are no impressions.
+   */
+  cost_per_mille: number;
+
+  /**
+   * Spend divided by attributed purchases; null when purchases are not a goal and
+   * none are attributed.
+   */
+  cost_per_purchase: number | null;
+
+  /**
+   * Spend divided by Whop pixel-attributed results; null when nothing
+   * Whop-attributable is being optimized for.
+   */
+  cost_per_result: number | null;
+
+  /**
+   * Spend divided by attributed schedule events; null when schedules are not the
+   * goal and none are attributed.
+   */
+  cost_per_schedule: number | null;
+
+  /**
+   * Spend divided by attributed submit-application events; null when they are not
+   * the goal and none are attributed.
+   */
+  cost_per_submitted_application: number | null;
+
+  /**
+   * Spend divided by attributed view-content events; null when they are not the goal
+   * and none are attributed.
+   */
+  cost_per_viewed_content: number | null;
+
+  /**
+   * When the campaign was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The user who created this ad campaign.
+   * Whop pixel-attributed custom (merchant-defined) conversion events, last-click,
+   * across all custom event names.
    */
-  created_by_user: AdCampaign.CreatedByUser;
+  custom_conversions: number;
 
   /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
+   * The current delivery state, mirroring the Delivery column in the ads dashboard.
+   * When several states apply at once, the highest-precedence one is returned.
    */
-  meta_config: AdCampaign.MetaConfig | null;
+  delivery_status:
+    | 'payment_failed'
+    | 'all_ads_rejected'
+    | 'draft'
+    | 'no_ad_groups'
+    | 'no_ads'
+    | 'paused'
+    | 'processing'
+    | 'issues'
+    | 'scheduled'
+    | 'completed'
+    | 'ad_groups_off'
+    | 'active';
 
   /**
-   * The external ad platform this campaign is running on (e.g., meta, tiktok).
+   * Platform-reported impressions divided by reach.
    */
-  platform: AdCampaignPlatform;
+  frequency: number | null;
 
   /**
-   * Current status of the campaign (active, paused, or inactive).
+   * The number of impressions.
    */
-  status: AdCampaignStatus;
+  impressions: number;
+
+  issues: Array<AdCampaign.Issue>;
 
   /**
-   * The campaign name shown in the Whop dashboard.
+   * Whop pixel-attributed leads, last-click.
+   */
+  leads: number;
+
+  /**
+   * The goal the campaign optimizes toward.
+   */
+  objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
+
+  /**
+   * The specific event the campaign optimizes for. If the campaign is CBO, then all
+   * ad groups will have the same optimization goal, which will be returned here.
+   */
+  optimization_goal: string | null;
+
+  /**
+   * The ad network the campaign runs on.
+   */
+  platform: 'meta';
+
+  /**
+   * USD value of pixel-attributed purchases.
+   */
+  purchase_value: number;
+
+  /**
+   * Whop pixel-attributed purchases, last-click.
+   */
+  purchases: number;
+
+  /**
+   * The number of unique people who saw this.
+   */
+  reach: number;
+
+  /**
+   * The Whop pixel conversion event whose attributed count represents results — the
+   * optimization goal, or the highest-volume attributed event for campaigns that
+   * budget per ad group. Null when the goal isn't a Whop-attributed event.
+   */
+  result_event:
+    | 'purchase'
+    | 'lead'
+    | 'schedule'
+    | 'submit_application'
+    | 'contact'
+    | 'complete_registration'
+    | 'view_content'
+    | 'add_to_cart'
+    | 'custom'
+    | null;
+
+  /**
+   * The merchant-defined event name when result_event is custom; null for the
+   * standard events.
+   */
+  result_event_name: string | null;
+
+  /**
+   * Purchase value divided by spend, both in USD (a currency-neutral ratio); 0 when
+   * there is no spend.
+   */
+  return_on_ad_spend: number;
+
+  /**
+   * Whop pixel-attributed schedule events, last-click.
+   */
+  schedules: number;
+
+  special_ad_categories: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
+
+  /**
+   * The amount charged, in spend_currency.
+   */
+  spend: number;
+
+  /**
+   * The ISO 4217 currency code of all monetary metrics.
+   */
+  spend_currency: string | null;
+
+  /**
+   * The lifecycle status of the ad campaign.
+   */
+  status:
+    | 'active'
+    | 'paused'
+    | 'inactive'
+    | 'stale'
+    | 'pending_refund'
+    | 'payment_failed'
+    | 'draft'
+    | 'in_review'
+    | 'flagged'
+    | 'importing'
+    | 'imported';
+
+  /**
+   * Whop pixel-attributed submit-application events, last-click.
+   */
+  submitted_applications: number;
+
+  /**
+   * The title of the ad campaign.
    */
   title: string;
 
   /**
-   * Total amount spent in dollars.
+   * Unique clicks divided by impressions, between 0 and 1.
    */
-  total_spend: number;
+  unique_click_through_rate: number | null;
 
   /**
-   * When the ad campaign was last updated.
+   * The number of unique clicks.
+   */
+  unique_clicks: number;
+
+  /**
+   * When the campaign was last updated, as an ISO 8601 timestamp.
    */
   updated_at: string;
+
+  /**
+   * Whop pixel-attributed view-content events, last-click.
+   */
+  viewed_contents: number;
 }
 
 export namespace AdCampaign {
   /**
-   * The user who created this ad campaign.
+   * Open issues affecting the campaign and its descendant ad groups and ads.
    */
-  export interface CreatedByUser {
+  export interface Issue {
     /**
-     * The unique identifier for the user.
+     * Unique identifier for the issue.
      */
     id: string;
 
     /**
-     * The user's display name shown on their public profile.
+     * A description of what the issue is and how it can be resolved.
      */
-    name: string | null;
+    message: string;
 
     /**
-     * The user's unique username shown on their public profile.
+     * The ID of the campaign, ad group, or ad the issue is attached to.
      */
-    username: string;
-  }
-
-  /**
-   * Meta-specific campaign configuration (objective, budget mode, etc.). Null for
-   * non-Meta campaigns.
-   */
-  export interface MetaConfig {
-    /**
-     * Bid cap amount in cents. Only used when bid_strategy is bid_cap.
-     */
-    bid_amount: number | null;
+    resource_id: string | null;
 
     /**
-     * The bidding strategy used to optimize spend for this campaign.
+     * The type of resource the issue is attached to.
      */
-    bid_strategy: 'lowest_cost' | 'bid_cap' | 'cost_cap' | null;
-
-    /**
-     * Whether campaign budget optimization (CBO) is enabled, allowing the platform to
-     * distribute budget across ad groups.
-     */
-    budget_optimization: boolean | null;
-
-    /**
-     * The actual delivery status, accounting for platform overrides (e.g., in_review,
-     * rejected).
-     */
-    effective_status: 'active' | 'paused' | 'deleted' | 'in_review' | 'rejected' | 'with_issues' | null;
-
-    /**
-     * The scheduled end time of the campaign (ISO8601).
-     */
-    end_time: string | null;
-
-    /**
-     * The campaign objective that determines how Meta optimizes delivery.
-     */
-    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
-
-    /**
-     * Special ad categories required by the platform (e.g., housing, employment,
-     * credit).
-     */
-    special_categories: Array<string> | null;
-
-    /**
-     * The scheduled start time of the campaign (ISO8601).
-     */
-    start_time: string | null;
-
-    /**
-     * The campaign status as set by the advertiser (active or paused).
-     */
-    status: 'active' | 'paused' | null;
+    resource_type: 'ad_campaign' | 'ad_group' | 'ad';
   }
 }
 
-/**
- * The platforms where an ad campaign can run.
- */
-export type AdCampaignPlatform = 'meta' | 'tiktok';
+export type AdCampaignDeleteResponse = boolean;
 
-/**
- * The status of an ad campaign.
- */
-export type AdCampaignStatus = 'active' | 'paused' | 'payment_failed' | 'draft' | 'in_review' | 'flagged';
-
-/**
- * An advertising campaign running on an external platform or within Whop.
- */
-export interface AdCampaignListResponse {
+export interface AdCampaignListParams extends CursorPageParams {
   /**
-   * The unique identifier for this ad campaign.
+   * The account the campaigns belong to. Defaults to the account-scoped key's own
+   * account.
    */
-  id: string;
+  account_id?: string;
 
   /**
-   * Total budget in dollars.
+   * Cursor to fetch the page before (from page_info.start_cursor).
    */
-  budget: number | null;
+  before?: string;
 
   /**
-   * The budget type for an ad campaign or ad group.
+   * Only return campaigns created after this timestamp.
    */
-  budget_type: AdGroupsAPI.AdBudgetType | null;
+  created_after?: string;
 
   /**
-   * When the ad campaign was created.
+   * Only return campaigns created before this timestamp.
    */
-  created_at: string;
+  created_before?: string;
 
   /**
-   * The external ad platform this campaign is running on (e.g., meta, tiktok).
+   * The sort direction. Defaults to desc.
    */
-  platform: AdCampaignPlatform;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Current status of the campaign (active, paused, or inactive).
+   * The number of campaigns to return.
    */
-  status: AdCampaignStatus;
+  first?: number;
 
   /**
-   * The campaign name shown in the Whop dashboard.
+   * The number of campaigns to return from the end of the range.
+   */
+  last?: number;
+
+  /**
+   * The field to sort by. Defaults to created_at. Stat columns (spend, impressions,
+   * …) rank over the stats_from/stats_to window across the whole list, not just the
+   * current page. results, cost_per_result and return_on_ad_spend rank by the same
+   * Whop pixel-attributed values the response reports.
+   */
+  order?:
+    | 'created_at'
+    | 'updated_at'
+    | 'spend'
+    | 'impressions'
+    | 'reach'
+    | 'clicks'
+    | 'unique_clicks'
+    | 'frequency'
+    | 'click_through_rate'
+    | 'results'
+    | 'cost_per_mille'
+    | 'cost_per_click'
+    | 'cost_per_result'
+    | 'return_on_ad_spend';
+
+  /**
+   * Filter campaigns by a title or ID substring.
+   */
+  query?: string;
+
+  /**
+   * Start of the stats window. Defaults to all-time.
+   */
+  stats_from?: string;
+
+  /**
+   * End of the stats window. Defaults to now.
+   */
+  stats_to?: string;
+
+  /**
+   * Only return campaigns with this status.
+   */
+  status?: 'draft' | 'active' | 'paused' | 'payment_failed';
+
+  /**
+   * IANA timezone (e.g. America/New_York) the stats window is interpreted in. Bare
+   * stats_from/stats_to dates resolve to day boundaries on this clock. Defaults to
+   * UTC.
+   */
+  time_zone?: string;
+}
+
+export interface AdCampaignCreateParams {
+  /**
+   * The goal the campaign optimizes toward.
+   */
+  objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales';
+
+  /**
+   * The ad network the campaign runs on.
+   */
+  platform: 'meta';
+
+  /**
+   * The title of the campaign.
    */
   title: string;
 
   /**
-   * Total amount spent in dollars.
+   * The account to create the campaign under. Defaults to the account-scoped key's
+   * own account.
    */
-  total_spend: number;
+  account_id?: string;
 
   /**
-   * When the ad campaign was last updated.
+   * CBO bid strategy: minimum_cost (lowest cost), average_target (cost cap), or
+   * maximum_target (bid cap). CBO only.
    */
-  updated_at: string;
+  bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target';
+
+  /**
+   * The campaign budget, in USD. Required for CBO (budget_optimization:
+   * ad_campaign); omit for ABO.
+   */
+  budget_amount?: number;
+
+  /**
+   * Which level owns the budget — the campaign (CBO) or each ad group (ABO).
+   * Defaults to ad_group.
+   */
+  budget_optimization?: 'ad_campaign' | 'ad_group';
+
+  /**
+   * Whether the budget is spent per day or over the campaign's lifetime. Defaults to
+   * daily.
+   */
+  budget_type?: 'daily' | 'lifetime';
+
+  /**
+   * Target/cap cost per result in USD for average_target / maximum_target bidding.
+   * CBO only.
+   */
+  desired_cost_per_result?: number;
+
+  /**
+   * Campaign schedule end (ISO 8601). CBO only.
+   */
+  ends_at?: string;
+
+  /**
+   * Regulated categories the campaign falls under. Ads in these categories are
+   * subject to extra targeting restrictions.
+   */
+  special_ad_categories?: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
+
+  /**
+   * Campaign schedule start (ISO 8601). CBO only.
+   */
+  starts_at?: string;
 }
 
-export interface AdCampaignListParams extends CursorPageParams {
+export interface AdCampaignRetrieveParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Start of the stats window.
    */
-  before?: string | null;
+  stats_from?: string;
 
   /**
-   * The unique identifier of the company to list ad campaigns for.
+   * End of the stats window.
    */
-  company_id?: string | null;
+  stats_to?: string;
 
   /**
-   * Only return ad campaigns created after this timestamp.
+   * IANA timezone the stats window is interpreted in. Defaults to UTC.
    */
-  created_after?: string | null;
-
-  /**
-   * Only return ad campaigns created before this timestamp.
-   */
-  created_before?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * Case-insensitive substring match against the campaign title.
-   */
-  query?: string | null;
-
-  /**
-   * The status of an ad campaign.
-   */
-  status?: AdCampaignStatus | null;
+  time_zone?: string;
 }
 
 export interface AdCampaignUpdateParams {
   /**
-   * The campaign budget in dollars. The interpretation (daily or lifetime) follows
-   * the campaign's existing budget type.
+   * CBO bid strategy: minimum_cost (lowest cost), average_target (cost cap), or
+   * maximum_target (bid cap). Switching to minimum_cost clears the cap amounts
+   * stored on the campaign's ad groups. CBO only.
    */
-  budget?: number | null;
+  bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target';
+
+  /**
+   * The campaign budget, in the account's currency. Interpreted as daily or lifetime
+   * per the campaign's existing budget type.
+   */
+  budget_amount?: number;
+
+  /**
+   * Which level owns the budget — the campaign (CBO) or each ad group (ABO). Only
+   * changeable before the campaign is live on Meta; switching to ad_campaign
+   * requires budget_amount in the same request, and switching to ad_group clears the
+   * campaign budget.
+   */
+  budget_optimization?: 'ad_campaign' | 'ad_group';
+
+  /**
+   * Campaign schedule end (ISO 8601). CBO only.
+   */
+  ends_at?: string;
+
+  /**
+   * Campaign schedule start (ISO 8601). CBO only.
+   */
+  starts_at?: string;
+
+  /**
+   * Set to active to launch a draft campaign (moderates and pushes it live).
+   * Live-campaign pause and resume use the pause and unpause actions.
+   */
+  status?: 'active';
+
+  /**
+   * The name of the campaign.
+   */
+  title?: string;
 }
 
 export declare namespace AdCampaigns {
   export {
     type AdCampaign as AdCampaign,
-    type AdCampaignPlatform as AdCampaignPlatform,
-    type AdCampaignStatus as AdCampaignStatus,
-    type AdCampaignListResponse as AdCampaignListResponse,
-    type AdCampaignListResponsesCursorPage as AdCampaignListResponsesCursorPage,
+    type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignCreateParams as AdCampaignCreateParams,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
   };
 }

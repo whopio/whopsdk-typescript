@@ -26,22 +26,22 @@ describe('resource ads', () => {
     await expect(
       client.ads.list(
         {
+          account_id: 'account_id',
+          ad_campaign_id: 'ad_campaign_id',
           ad_group_id: 'ad_group_id',
           after: 'after',
           before: 'before',
-          campaign_id: 'campaign_id',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          first: 42,
-          include_paused: true,
-          last: 42,
-          order_by: 'spend',
-          order_direction: 'asc',
+          created_after: 'created_after',
+          created_before: 'created_before',
+          direction: 'asc',
+          first: 100,
+          last: 100,
+          order: 'created_at',
           query: 'query',
-          stats_from: '2023-12-01T05:00:00.401Z',
-          stats_to: '2023-12-01T05:00:00.401Z',
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
           status: 'active',
+          time_zone: 'time_zone',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -49,8 +49,60 @@ describe('resource ads', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('create', async () => {
+    const responsePromise = client.ads.create({});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.ads.retrieve('ad_xxxxxxxxxxxxxxx');
+    const responsePromise = client.ads.retrieve('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.retrieve(
+        'id',
+        {
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
+          time_zone: 'time_zone',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.ads.update('id', {});
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delete', async () => {
+    const responsePromise = client.ads.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -62,7 +114,7 @@ describe('resource ads', () => {
 
   // Mock server tests are disabled
   test.skip('pause', async () => {
-    const responsePromise = client.ads.pause('ad_xxxxxxxxxxxxxxx');
+    const responsePromise = client.ads.pause('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,7 +126,7 @@ describe('resource ads', () => {
 
   // Mock server tests are disabled
   test.skip('unpause', async () => {
-    const responsePromise = client.ads.unpause('ad_xxxxxxxxxxxxxxx');
+    const responsePromise = client.ads.unpause('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;

@@ -28,13 +28,13 @@ describe('resource adReports', () => {
     const response = await client.adReports.retrieve({
       from: '2023-12-01T05:00:00.401Z',
       to: '2023-12-01T05:00:00.401Z',
-      ad_campaign_id: 'ad_campaign_id',
-      ad_group_id: 'ad_group_id',
-      ad_id: 'ad_id',
+      ad_campaign_ids: ['string'],
+      ad_group_ids: ['string'],
+      ad_ids: ['string'],
       breakdown: 'campaign',
       company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'currency',
-      granularity: 'daily',
+      granularity: 'hourly',
     });
   });
 });

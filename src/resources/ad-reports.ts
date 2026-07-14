@@ -6,16 +6,13 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-/**
- * Ad reports
- */
 export class AdReports extends APIResource {
   /**
-   * Performance report for a company, ad campaign, ad group, or ad. Always returns
-   * aggregate `summary` totals. Set `granularity` (`daily`/`hourly`) to additionally
-   * get a time series, or set `breakdown` (`campaign`/`ad_group`/`ad`) to
-   * additionally get per-entity rows inside the requested scope. Exactly one of
-   * `companyId`, `adCampaignId`, `adGroupId`, or `adId` must be provided.
+   * Performance report for a company, ad campaigns, ad groups, or ads. Always
+   * returns aggregate `summary` totals summed across the scope. Set `granularity` to
+   * additionally get a time series, or set `breakdown` (`campaign`/`ad_group`/`ad`)
+   * to additionally get per-entity rows inside the requested scope. Exactly one of
+   * `companyId`, `adCampaignIds`, `adGroupIds`, or `adIds` must be provided.
    *
    * Required permissions:
    *
@@ -29,7 +26,7 @@ export class AdReports extends APIResource {
 /**
  * Bucket size for external ad stat rows.
  */
-export type Granularities = 'daily' | 'hourly';
+export type Granularities = 'hourly' | 'daily' | 'weekly' | 'monthly';
 
 /**
  * Types of optimization results tracked from external ad platforms
@@ -56,8 +53,18 @@ export type ResultLabelKeys =
   | 'registrations'
   | 'content_views'
   | 'searches'
+  | 'adds_to_cart'
+  | 'adds_to_wishlist'
+  | 'adds_of_payment_info'
+  | 'checkouts_initiated'
   | 'website_schedules'
   | 'website_submit_applications'
+  | 'website_trials_started'
+  | 'website_subscriptions'
+  | 'website_contacts'
+  | 'website_donations'
+  | 'website_find_locations'
+  | 'website_product_customizations'
   | 'custom';
 
 /**
@@ -139,7 +146,7 @@ export namespace AdReportRetrieveResponse {
       clicks: number;
 
       /**
-       * The bucket size of this row (`daily` or `hourly`).
+       * The bucket size of this row (`hourly`, `daily`, `weekly`, or `monthly`).
        */
       granularity: AdReportsAPI.Granularities;
 
@@ -198,29 +205,29 @@ export namespace AdReportRetrieveResponse {
      */
     export interface Summary {
       /**
+       * Click-through rate (clicks / impressions).
+       */
+      click_through_rate: number;
+
+      /**
        * Total clicks over the date range.
        */
       clicks: number;
 
       /**
-       * Spend divided by `resultCount`. Null when there are no results.
-       */
-      cost_per_result: number | null;
-
-      /**
        * Cost per click in the requested reporting currency.
        */
-      cpc: number;
+      cost_per_click: number;
 
       /**
        * Cost per thousand impressions in the requested reporting currency.
        */
-      cpm: number | null;
+      cost_per_mille: number | null;
 
       /**
-       * Click-through rate (clicks / impressions).
+       * Spend divided by `resultCount`. Null when there are no results.
        */
-      ctr: number;
+      cost_per_result: number | null;
 
       /**
        * Average number of times each reached user saw an ad.
@@ -254,10 +261,10 @@ export namespace AdReportRetrieveResponse {
       result_label_override: string | null;
 
       /**
-       * Alias for `purchaseRoas` — return on ad spend for purchases, as reported by the
-       * external ad platform.
+       * Alias for `purchaseReturnOnAdSpend` — return on ad spend for purchases, as
+       * reported by the external ad platform.
        */
-      roas: number | null;
+      return_on_ad_spend: number | null;
 
       /**
        * Total spend over the date range in the requested reporting currency.
@@ -289,7 +296,7 @@ export namespace AdReportRetrieveResponse {
     clicks: number;
 
     /**
-     * The bucket size of this row (`daily` or `hourly`).
+     * The bucket size of this row (`hourly`, `daily`, `weekly`, or `monthly`).
      */
     granularity: AdReportsAPI.Granularities;
 
@@ -348,29 +355,29 @@ export namespace AdReportRetrieveResponse {
    */
   export interface Summary {
     /**
+     * Click-through rate (clicks / impressions).
+     */
+    click_through_rate: number;
+
+    /**
      * Total clicks over the date range.
      */
     clicks: number;
 
     /**
-     * Spend divided by `resultCount`. Null when there are no results.
-     */
-    cost_per_result: number | null;
-
-    /**
      * Cost per click in the requested reporting currency.
      */
-    cpc: number;
+    cost_per_click: number;
 
     /**
      * Cost per thousand impressions in the requested reporting currency.
      */
-    cpm: number | null;
+    cost_per_mille: number | null;
 
     /**
-     * Click-through rate (clicks / impressions).
+     * Spend divided by `resultCount`. Null when there are no results.
      */
-    ctr: number;
+    cost_per_result: number | null;
 
     /**
      * Average number of times each reached user saw an ad.
@@ -404,10 +411,10 @@ export namespace AdReportRetrieveResponse {
     result_label_override: string | null;
 
     /**
-     * Alias for `purchaseRoas` — return on ad spend for purchases, as reported by the
-     * external ad platform.
+     * Alias for `purchaseReturnOnAdSpend` — return on ad spend for purchases, as
+     * reported by the external ad platform.
      */
-    roas: number | null;
+    return_on_ad_spend: number | null;
 
     /**
      * Total spend over the date range in the requested reporting currency.
@@ -433,22 +440,22 @@ export interface AdReportRetrieveParams {
   to: string;
 
   /**
-   * The unique identifier of an ad campaign. Mutually exclusive with `companyId`,
-   * `adGroupId`, and `adId`.
+   * Scope the report to these ad campaigns (max 100); stats are summed across them.
+   * Mutually exclusive with `companyId`, `adGroupIds`, and `adIds`.
    */
-  ad_campaign_id?: string | null;
+  ad_campaign_ids?: Array<string> | null;
 
   /**
-   * The unique identifier of an ad group. Mutually exclusive with `companyId`,
-   * `adCampaignId`, and `adId`.
+   * Scope the report to these ad groups (max 100); stats are summed across them.
+   * Mutually exclusive with `companyId`, `adCampaignIds`, and `adIds`.
    */
-  ad_group_id?: string | null;
+  ad_group_ids?: Array<string> | null;
 
   /**
-   * The unique identifier of an ad. Mutually exclusive with `companyId`,
-   * `adCampaignId`, and `adGroupId`.
+   * Scope the report to these ads (max 100); stats are summed across them. Mutually
+   * exclusive with `companyId`, `adCampaignIds`, and `adGroupIds`.
    */
-  ad_id?: string | null;
+  ad_ids?: Array<string> | null;
 
   /**
    * Entity level to group an ad report by.
@@ -456,9 +463,9 @@ export interface AdReportRetrieveParams {
   breakdown?: 'campaign' | 'ad_group' | 'ad' | null;
 
   /**
-   * The unique identifier of a company. Mutually exclusive with `adCampaignId`,
-   * `adGroupId`, and `adId`. Use with `breakdown` to fan out across every campaign,
-   * ad group, or ad in the company without paging.
+   * The unique identifier of a company. Mutually exclusive with `adCampaignIds`,
+   * `adGroupIds`, and `adIds`. Use with `breakdown` to fan out across every
+   * campaign, ad group, or ad in the company without paging.
    */
   company_id?: string | null;
 
