@@ -1711,6 +1711,11 @@ export interface Invoice {
   fetch_invoice_token: string;
 
   /**
+   * Optional line items that break down the invoice total into individual charges.
+   */
+  line_items: Array<Invoice.LineItem>;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
@@ -1747,6 +1752,37 @@ export namespace Invoice {
      * The formatted price (including currency) for the plan.
      */
     formatted_price: string;
+  }
+
+  /**
+   * A line item on an invoice, representing a single charge with a label, quantity,
+   * and unit price.
+   */
+  export interface LineItem {
+    /**
+     * The label or description for this line item.
+     */
+    label: string;
+
+    /**
+     * The display order of this line item within the invoice.
+     */
+    position: number;
+
+    /**
+     * The quantity of this line item.
+     */
+    quantity: number;
+
+    /**
+     * The computed total for this line item (quantity \* unit_price).
+     */
+    total: number;
+
+    /**
+     * The unit price for this line item.
+     */
+    unit_price: number;
   }
 
   /**
@@ -1811,6 +1847,11 @@ export interface InvoiceListItem {
   fetch_invoice_token: string;
 
   /**
+   * Optional line items that break down the invoice total into individual charges.
+   */
+  line_items: Array<InvoiceListItem.LineItem>;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
@@ -1847,6 +1888,37 @@ export namespace InvoiceListItem {
      * The formatted price (including currency) for the plan.
      */
     formatted_price: string;
+  }
+
+  /**
+   * A line item on an invoice, representing a single charge with a label, quantity,
+   * and unit price.
+   */
+  export interface LineItem {
+    /**
+     * The label or description for this line item.
+     */
+    label: string;
+
+    /**
+     * The display order of this line item within the invoice.
+     */
+    position: number;
+
+    /**
+     * The quantity of this line item.
+     */
+    quantity: number;
+
+    /**
+     * The computed total for this line item (quantity \* unit_price).
+     */
+    total: number;
+
+    /**
+     * The unit price for this line item.
+     */
+    unit_price: number;
   }
 
   /**
