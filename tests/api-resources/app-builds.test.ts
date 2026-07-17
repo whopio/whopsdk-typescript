@@ -32,6 +32,7 @@ describe('resource appBuilds', () => {
       platform: 'ios',
       ai_prompt_id: 'prmt_xxxxxxxxxxxxx',
       app_id: 'app_xxxxxxxxxxxxxx',
+      source_attachment: { id: 'id' },
       supported_app_view_types: ['hub'],
     });
   });

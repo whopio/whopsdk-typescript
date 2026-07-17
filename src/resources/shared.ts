@@ -273,6 +273,12 @@ export namespace App {
     file_url: string;
 
     /**
+     * A URL to download the compressed source code archive that produced this build.
+     * Null if the build was uploaded without a source archive.
+     */
+    source_url: string | null;
+
+    /**
      * The current review status of this build.
      */
     status: Shared.AppBuildStatuses;
@@ -388,6 +394,12 @@ export interface AppBuild {
    * build has not been reviewed or was approved.
    */
   review_message: string | null;
+
+  /**
+   * A URL to download the compressed source code archive that produced this build.
+   * Null if the build was uploaded without a source archive.
+   */
+  source_url: string | null;
 
   /**
    * The current review status of this build.
