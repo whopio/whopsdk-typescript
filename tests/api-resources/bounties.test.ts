@@ -36,6 +36,7 @@ describe('resource bounties', () => {
       allowed_country_codes: ['string'],
       business_goal_type: 'clipping',
       experience_id: 'exp_xxxxxxxxxxxxxx',
+      minimum_total_verified_clip_duration_seconds: 42,
       origin_account_id: 'origin_account_id',
       post_markdown_content: 'post_markdown_content',
       post_title: 'post_title',

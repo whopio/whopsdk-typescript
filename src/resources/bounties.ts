@@ -295,6 +295,7 @@ export interface BountyCreateParams {
     | 'owned_account_growth'
     | 'ugc_content'
     | 'local_activation'
+    | 'data_capture'
     | 'other'
     | null;
 
@@ -302,6 +303,12 @@ export interface BountyCreateParams {
    * An optional experience to scope the bounty to.
    */
   experience_id?: string | null;
+
+  /**
+   * Data capture bounties only: the minimum total server-verified clip duration in
+   * seconds. Defaults to 3600 and must be a whole number of hours between 1 and 12.
+   */
+  minimum_total_verified_clip_duration_seconds?: number | null;
 
   /**
    * The user (user*\*) or company (biz*\*) tag whose balance funds this bounty pool.
