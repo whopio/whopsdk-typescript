@@ -142,7 +142,7 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.pause(
         'mem_xxxxxxxxxxxxxx',
-        { void_payments: true },
+        { resumes_at: '2023-12-01T05:00:00.401Z', void_payments: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

@@ -552,6 +552,12 @@ export interface MembershipCancelParams {
 
 export interface MembershipPauseParams {
   /**
+   * When the membership should automatically resume payment collection. If not
+   * provided, the membership stays paused until manually resumed.
+   */
+  resumes_at?: string | null;
+
+  /**
    * Whether to void any outstanding past-due payments on this membership, preventing
    * future collection attempts.
    */
