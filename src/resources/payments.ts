@@ -296,6 +296,7 @@ export type PaymentMethodTypes =
   | 'bacs_debit'
   | 'bancolombia'
   | 'bancontact'
+  | 'bank_wire'
   | 'billie'
   | 'bizum'
   | 'blik'
