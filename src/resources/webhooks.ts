@@ -1568,6 +1568,21 @@ export namespace IdentityProfileApprovedWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -1832,6 +1847,21 @@ export namespace IdentityProfileRejectedWebhookEvent {
      * is not entitled to see).
      */
     linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
 
     /**
      * Residential address reported by the identity provider. Present on `individual`
@@ -2100,6 +2130,21 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -2364,6 +2409,21 @@ export namespace IdentityProfileUpdatedWebhookEvent {
      * is not entitled to see).
      */
     linked_companies: Array<Data.LinkedCompany>;
+
+    /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
 
     /**
      * Residential address reported by the identity provider. Present on `individual`
