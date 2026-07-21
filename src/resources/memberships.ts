@@ -192,6 +192,30 @@ export class Memberships extends APIResource {
   ): APIPromise<Shared.Membership> {
     return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
   }
+
+  /**
+   * Re-run access fulfillment for a membership. Recomputes the member's content
+   * access on Whop, re-validates their Discord link (re-adding them to the server
+   * and re-assigning roles if needed), and re-fulfills TradingView indicator access.
+   * Telegram access is invite-based and cannot be resynced here. The outcome is
+   * written to the membership's logs.
+   *
+   * Required permissions:
+   *
+   * - `membership:resync_access`
+   * - `member:email:read`
+   * - `member:basic:read`
+   *
+   * @example
+   * ```ts
+   * const membership = await client.memberships.resyncAccess(
+   *   'mem_xxxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  resyncAccess(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
+    return this._client.post(path`/memberships/${id}/resync_access`, options);
+  }
 }
 
 export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
@@ -540,6 +564,12 @@ export interface MembershipCancelParams {
 }
 
 export interface MembershipPauseParams {
+  /**
+   * When the membership should automatically resume payment collection. If not
+   * provided, the membership stays paused until manually resumed.
+   */
+  resumes_at?: string | null;
+
   /**
    * Whether to void any outstanding past-due payments on this membership, preventing
    * future collection attempts.

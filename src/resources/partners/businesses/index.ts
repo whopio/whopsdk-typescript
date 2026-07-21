@@ -4,9 +4,7 @@ export {
   Businesses,
   type BusinessRetrieveResponse,
   type BusinessListResponse,
-  type BusinessLeaderboardResponse,
   type BusinessListParams,
-  type BusinessLeaderboardParams,
   type BusinessListResponsesCursorPage,
 } from './businesses';
 export {

@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -46,8 +47,16 @@ export class Transfers extends APIResource {
    * });
    * ```
    */
-  create(body: TransferCreateParams, options?: RequestOptions): APIPromise<TransferCreateResponse> {
-    return this._client.post('/transfers', { body, ...options });
+  create(params: TransferCreateParams, options?: RequestOptions): APIPromise<TransferCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/transfers', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -510,58 +519,65 @@ export interface TransferListParams extends CursorPageParams {
 
 export interface TransferCreateParams {
   /**
-   * The amount to move, in the transfer currency. For example 25.00.
+   * Body param: The amount to move, in the transfer currency. For example 25.00.
    */
   amount: number;
 
   /**
-   * The account sending the funds. A user ID (user_xxx), account ID (biz_xxx), or
-   * ledger account ID (ldgr_xxx).
+   * Body param: The account sending the funds. A user ID (user_xxx), account ID
+   * (biz_xxx), or ledger account ID (ldgr_xxx).
    */
   origin_id: string;
 
   /**
-   * Currency, such as `usd`. Required for ledger transfers.
+   * Body param: Currency, such as `usd`. Required for ledger transfers.
    */
   currency?: string;
 
   /**
-   * The recipient. Required for ledger and wallet*send (a user* /biz* /ldgr* ID, or —
-   * for sends — an email). Omit for claim_link.
+   * Body param: The recipient. Required for ledger and wallet*send (a
+   * user* /biz* /ldgr* ID, or — for sends — an email). Omit for claim_link.
    */
   destination_id?: string;
 
   /**
-   * claim_link only. Link expiry as an ISO 8601 timestamp. Defaults to 24 hours from
-   * creation.
+   * Body param: claim_link only. Link expiry as an ISO 8601 timestamp. Defaults to
+   * 24 hours from creation.
    */
   expires_at?: string | null;
 
   /**
-   * Ledger transfers only. A unique key to prevent duplicate transfers.
+   * Body param: Ledger transfers only. A unique key to prevent duplicate transfers.
    */
   idempotence_key?: string | null;
 
   /**
-   * Ledger transfers only. Custom key-value pairs attached to the transfer. Max 50
-   * keys, 100 chars per key, 500 chars per string value.
+   * Body param: Ledger transfers only. Custom key-value pairs attached to the
+   * transfer. Max 50 keys, 100 chars per key, 500 chars per string value.
    */
   metadata?: { [key: string]: unknown } | null;
 
   /**
-   * Ledger transfers only. A short note describing the transfer.
+   * Body param: Ledger transfers only. A short note describing the transfer.
    */
   notes?: string | null;
 
   /**
-   * claim_link only. How many different users can claim the link. Defaults to 1.
+   * Body param: claim_link only. How many different users can claim the link.
+   * Defaults to 1.
    */
   redeemable_count?: number;
 
   /**
-   * The kind of money movement. Defaults to ledger.
+   * Body param: The kind of money movement. Defaults to ledger.
    */
   type?: 'ledger' | 'wallet_send' | 'claim_link';
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Transfers {

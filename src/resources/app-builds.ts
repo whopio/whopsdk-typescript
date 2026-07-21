@@ -137,6 +137,12 @@ export interface AppBuildListResponse {
   review_message: string | null;
 
   /**
+   * A URL to download the compressed source code archive that produced this build.
+   * Null if the build was uploaded without a source archive.
+   */
+  source_url: string | null;
+
+  /**
    * The current review status of this build.
    */
   status: Shared.AppBuildStatuses;
@@ -220,6 +226,12 @@ export interface AppBuildCreateParams {
   app_id?: string | null;
 
   /**
+   * An optional compressed archive (.zip or .gz) of the source code that produced
+   * this build, stored alongside the build so it can be downloaded later.
+   */
+  source_attachment?: AppBuildCreateParams.SourceAttachment | null;
+
+  /**
    * The view types this build supports. A build can support multiple view types but
    * should only list the ones its code implements.
    */
@@ -233,6 +245,17 @@ export namespace AppBuildCreateParams {
    * this should be a JavaScript file or a .zip archive of the hosted site.
    */
   export interface Attachment {
+    /**
+     * The ID of an existing file object.
+     */
+    id: string;
+  }
+
+  /**
+   * An optional compressed archive (.zip or .gz) of the source code that produced
+   * this build, stored alongside the build so it can be downloaded later.
+   */
+  export interface SourceAttachment {
     /**
      * The ID of an existing file object.
      */

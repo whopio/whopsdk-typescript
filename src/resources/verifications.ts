@@ -2,11 +2,12 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * A Verification represents an identity review for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
+ * A Verification represents a legal identity for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
  *
  * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
  */
@@ -57,8 +58,16 @@ export class Verifications extends APIResource {
    * ```
    */
   create(params: VerificationCreateParams, options?: RequestOptions): APIPromise<VerificationCreateResponse> {
-    const { account_id, ...body } = params;
-    return this._client.post('/verifications', { query: { account_id }, body, ...options });
+    const { account_id, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/verifications', {
+      query: { account_id },
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -191,12 +200,13 @@ export interface VerificationCreateResponse {
 
   /**
    * Current verification state. `not_started` before any session has been created;
-   * `pending` while a session is in progress; `action_required` when items in
-   * `requested_information` need answers before review can continue; `approved` once
-   * verification succeeds; `rejected` if it fails. Call the Create Verification
-   * endpoint again to start a new session.
+   * `pending` while a session is in progress and needs the user's input;
+   * `processing` while the provider reviews submitted documents — nothing to do but
+   * wait; `action_required` when items in `requested_information` need answers
+   * before review can continue; `approved` once verification succeeds; `rejected` if
+   * it fails. Call the Create Verification endpoint again to start a new session.
    */
-  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+  status?: 'not_started' | 'pending' | 'processing' | 'approved' | 'rejected' | 'action_required';
 
   /**
    * When the verification profile was last updated, as an ISO 8601 timestamp.
@@ -402,12 +412,13 @@ export interface VerificationRetrieveResponse {
 
   /**
    * Current verification state. `not_started` before any session has been created;
-   * `pending` while a session is in progress; `action_required` when items in
-   * `requested_information` need answers before review can continue; `approved` once
-   * verification succeeds; `rejected` if it fails. Call the Create Verification
-   * endpoint again to start a new session.
+   * `pending` while a session is in progress and needs the user's input;
+   * `processing` while the provider reviews submitted documents — nothing to do but
+   * wait; `action_required` when items in `requested_information` need answers
+   * before review can continue; `approved` once verification succeeds; `rejected` if
+   * it fails. Call the Create Verification endpoint again to start a new session.
    */
-  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+  status?: 'not_started' | 'pending' | 'processing' | 'approved' | 'rejected' | 'action_required';
 
   /**
    * When the verification profile was last updated, as an ISO 8601 timestamp.
@@ -613,12 +624,13 @@ export interface VerificationUpdateResponse {
 
   /**
    * Current verification state. `not_started` before any session has been created;
-   * `pending` while a session is in progress; `action_required` when items in
-   * `requested_information` need answers before review can continue; `approved` once
-   * verification succeeds; `rejected` if it fails. Call the Create Verification
-   * endpoint again to start a new session.
+   * `pending` while a session is in progress and needs the user's input;
+   * `processing` while the provider reviews submitted documents — nothing to do but
+   * wait; `action_required` when items in `requested_information` need answers
+   * before review can continue; `approved` once verification succeeds; `rejected` if
+   * it fails. Call the Create Verification endpoint again to start a new session.
    */
-  status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+  status?: 'not_started' | 'pending' | 'processing' | 'approved' | 'rejected' | 'action_required';
 
   /**
    * When the verification profile was last updated, as an ISO 8601 timestamp.
@@ -829,12 +841,13 @@ export namespace VerificationListResponse {
 
     /**
      * Current verification state. `not_started` before any session has been created;
-     * `pending` while a session is in progress; `action_required` when items in
-     * `requested_information` need answers before review can continue; `approved` once
-     * verification succeeds; `rejected` if it fails. Call the Create Verification
-     * endpoint again to start a new session.
+     * `pending` while a session is in progress and needs the user's input;
+     * `processing` while the provider reviews submitted documents — nothing to do but
+     * wait; `action_required` when items in `requested_information` need answers
+     * before review can continue; `approved` once verification succeeds; `rejected` if
+     * it fails. Call the Create Verification endpoint again to start a new session.
      */
-    status?: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+    status?: 'not_started' | 'pending' | 'processing' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the verification profile was last updated, as an ISO 8601 timestamp.
@@ -1024,6 +1037,13 @@ export declare namespace VerificationCreateParams {
     business_structure?: string;
 
     /**
+     * Body param: The business ID number of the company, as appropriate for the
+     * company's country. Examples are an Employer Identification Number (EIN) in the
+     * US, a Business Number in Canada, or a Company Number in the UK.
+     */
+    business_tax_identification_number?: string;
+
+    /**
      * Body param: Business website URL. Whop store pages are not accepted.
      */
     business_website?: string;
@@ -1039,26 +1059,29 @@ export declare namespace VerificationCreateParams {
     date_of_birth?: string;
 
     /**
-     * Body param: Identity document being sent. Providing it (with `documents`)
-     * verifies from uploaded documents instead of a hosted session, and determines the
-     * expected `documents` keys: cards and licenses need front and back, passports
-     * only the photo page.
+     * Body param: Identity document being sent, when verifying with `documents`.
+     * Decides exactly which file slots to send: `ID_CARD` → `id_card_front` +
+     * `id_card_back` + `selfie`; `DRIVERS` → `drivers_front` + `drivers_back` +
+     * `selfie`; `RESIDENCE_PERMIT` → `residence_permit_front` +
+     * `residence_permit_back` + `selfie`; `PASSPORT` → `passport_front` + `selfie`.
+     * See [Identity documents](/developer/verification/identity-documents).
      */
-    document_type?: 'ID_CARD' | 'PASSPORT' | 'DRIVERS' | 'RESIDENCE_PERMIT';
+    document_type?: 'ID_CARD' | 'DRIVERS' | 'RESIDENCE_PERMIT' | 'PASSPORT';
 
     /**
-     * Body param: Identity document files, keyed by slot (`id_card_front`,
-     * `id_card_back`, `selfie`, …) with each value the file's raw bytes
-     * base64-encoded. Providing them verifies the person from these documents instead
-     * of a hosted session — individual verifications only, and the request must also
-     * carry `document_type`, `first_name`, `last_name`, `date_of_birth`, `country`,
-     * `phone`, `tax_identification_number`, and an `address` with `line1`, `city`,
-     * `state`, and `postal_code`. JPEG, PNG, and PDF are accepted (selfies must be
-     * images), up to 5MB per file before encoding. Send the complete set — a missing
-     * or rejected file fails the whole request and nothing is submitted; review starts
-     * automatically once every document is accepted.
+     * Body param: Identity document files, each value the file's raw bytes
+     * base64-encoded (JPEG, PNG, or PDF, up to 5MB per file before encoding). Sending
+     * this object verifies the person from the files in this request instead of a
+     * hosted session — individual verifications only, and the request must also carry
+     * `document_type`, `first_name`, `last_name`, `date_of_birth`, `country`, `phone`,
+     * `tax_identification_number`, and an `address` with `line1`, `city`, `state`, and
+     * `postal_code`. Send every slot for your `document_type` — a missing or rejected
+     * file fails the whole request and nothing is submitted; review starts
+     * automatically once every document is accepted. See
+     * [Identity documents](/developer/verification/identity-documents) for a full
+     * walkthrough.
      */
-    documents?: { [key: string]: string };
+    documents?: CreateIndividualVerification.Documents;
 
     /**
      * Body param
@@ -1081,9 +1104,18 @@ export declare namespace VerificationCreateParams {
     phone?: string;
 
     /**
-     * Body param: SSN or ITIN. Tokenized in transit and never stored raw.
+     * Body param: The government-issued ID number of the person being verified — the
+     * individual for a KYC verification, or the business representative for a KYB
+     * verification — as appropriate for their country. Examples are a Social Security
+     * Number (SSN) in the US, or a Social Insurance Number in Canada.
      */
     tax_identification_number?: string;
+
+    /**
+     * Header param: A unique key that makes this request safe to retry. See
+     * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+     */
+    'Idempotency-Key'?: string;
   }
 
   export namespace CreateIndividualVerification {
@@ -1115,6 +1147,68 @@ export declare namespace VerificationCreateParams {
        */
       state?: string;
     }
+
+    /**
+     * Identity document files, each value the file's raw bytes base64-encoded (JPEG,
+     * PNG, or PDF, up to 5MB per file before encoding). Sending this object verifies
+     * the person from the files in this request instead of a hosted session —
+     * individual verifications only, and the request must also carry `document_type`,
+     * `first_name`, `last_name`, `date_of_birth`, `country`, `phone`,
+     * `tax_identification_number`, and an `address` with `line1`, `city`, `state`, and
+     * `postal_code`. Send every slot for your `document_type` — a missing or rejected
+     * file fails the whole request and nothing is submitted; review starts
+     * automatically once every document is accepted. See
+     * [Identity documents](/developer/verification/identity-documents) for a full
+     * walkthrough.
+     */
+    export interface Documents {
+      /**
+       * Back of the driver's license, base64-encoded. Required when `document_type` is
+       * `DRIVERS`.
+       */
+      drivers_back?: string;
+
+      /**
+       * Front of the driver's license, base64-encoded. Required when `document_type` is
+       * `DRIVERS`.
+       */
+      drivers_front?: string;
+
+      /**
+       * Back of the ID card, base64-encoded. Required when `document_type` is `ID_CARD`.
+       */
+      id_card_back?: string;
+
+      /**
+       * Front of the ID card, base64-encoded. Required when `document_type` is
+       * `ID_CARD`.
+       */
+      id_card_front?: string;
+
+      /**
+       * Photo page of the passport, base64-encoded. Required when `document_type` is
+       * `PASSPORT`.
+       */
+      passport_front?: string;
+
+      /**
+       * Back of the residence permit, base64-encoded. Required when `document_type` is
+       * `RESIDENCE_PERMIT`.
+       */
+      residence_permit_back?: string;
+
+      /**
+       * Front of the residence permit, base64-encoded. Required when `document_type` is
+       * `RESIDENCE_PERMIT`.
+       */
+      residence_permit_front?: string;
+
+      /**
+       * Photo of the person's face, base64-encoded. Always required, with every document
+       * type. Must be JPEG or PNG.
+       */
+      selfie?: string;
+    }
   }
 
   export interface CreateBusinessVerification {
@@ -1144,6 +1238,13 @@ export declare namespace VerificationCreateParams {
     business_structure?: string;
 
     /**
+     * Body param: The business ID number of the company, as appropriate for the
+     * company's country. Examples are an Employer Identification Number (EIN) in the
+     * US, a Business Number in Canada, or a Company Number in the UK.
+     */
+    business_tax_identification_number?: string;
+
+    /**
      * Body param: Business website URL. Whop store pages are not accepted.
      */
     business_website?: string;
@@ -1164,9 +1265,18 @@ export declare namespace VerificationCreateParams {
     place_of_incorporation?: string;
 
     /**
-     * Body param: EIN. Tokenized in transit and never stored raw.
+     * Body param: The government-issued ID number of the person being verified — the
+     * individual for a KYC verification, or the business representative for a KYB
+     * verification — as appropriate for their country. Examples are a Social Security
+     * Number (SSN) in the US, or a Social Insurance Number in Canada.
      */
     tax_identification_number?: string;
+
+    /**
+     * Header param: A unique key that makes this request safe to retry. See
+     * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+     */
+    'Idempotency-Key'?: string;
   }
 
   export namespace CreateBusinessVerification {
@@ -1208,6 +1318,13 @@ export type VerificationUpdateParams =
 export declare namespace VerificationUpdateParams {
   export interface UpdateIndividualVerification {
     /**
+     * The business ID number of the company, as appropriate for the company's country.
+     * Examples are an Employer Identification Number (EIN) in the US, a Business
+     * Number in Canada, or a Company Number in the UK.
+     */
+    business_tax_identification_number?: string;
+
+    /**
      * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
      */
     country?: string;
@@ -1233,6 +1350,14 @@ export declare namespace VerificationUpdateParams {
      * for `files`.
      */
     requested_information?: Array<UpdateIndividualVerification.RequestedInformation>;
+
+    /**
+     * The government-issued ID number of the person being verified — the individual
+     * for a KYC verification, or the business representative for a KYB verification —
+     * as appropriate for their country. Examples are a Social Security Number (SSN) in
+     * the US, or a Social Insurance Number in Canada.
+     */
+    tax_identification_number?: string;
   }
 
   export namespace UpdateIndividualVerification {
@@ -1373,6 +1498,13 @@ export declare namespace VerificationUpdateParams {
     business_structure?: string;
 
     /**
+     * The business ID number of the company, as appropriate for the company's country.
+     * Examples are an Employer Identification Number (EIN) in the US, a Business
+     * Number in Canada, or a Company Number in the UK.
+     */
+    business_tax_identification_number?: string;
+
+    /**
      * Two-letter ISO 3166-1 country code, for example `US`, `DE`, or `GB`.
      */
     country?: string;
@@ -1384,6 +1516,14 @@ export declare namespace VerificationUpdateParams {
      * for `files`.
      */
     requested_information?: Array<UpdateBusinessVerification.RequestedInformation>;
+
+    /**
+     * The government-issued ID number of the person being verified — the individual
+     * for a KYC verification, or the business representative for a KYB verification —
+     * as appropriate for their country. Examples are a Social Security Number (SSN) in
+     * the US, or a Social Insurance Number in Canada.
+     */
+    tax_identification_number?: string;
   }
 
   export namespace UpdateBusinessVerification {

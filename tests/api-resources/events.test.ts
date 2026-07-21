@@ -9,8 +9,8 @@ const client = new Whop({
 
 describe('resource events', () => {
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.events.list({ person_id: 'person_id' });
+  test.skip('list', async () => {
+    const responsePromise = client.events.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,21 +21,30 @@ describe('resource events', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.events.list({
-      person_id: 'person_id',
-      account_id: 'account_id',
-      after: 'after',
-      before: 'before',
-      first: 0,
-      from: 0,
-      to: 0,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.events.list(
+        {
+          account_id: 'account_id',
+          after: 'after',
+          before: 'before',
+          first: 0,
+          from: '2019-12-27T18:11:19.117Z',
+          identifier: 'identifier',
+          to: '2019-12-27T18:11:19.117Z',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.events.create({ account_id: 'account_id', event_name: 'lead' });
+    const responsePromise = client.events.create({
+      account_id: 'account_id',
+      event_name: 'course_completed',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,7 +58,7 @@ describe('resource events', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.events.create({
       account_id: 'account_id',
-      event_name: 'lead',
+      event_name: 'course_completed',
       action_source: 'email',
       context: {
         ad_campaign_id: 'ad_campaign_id',
@@ -118,6 +127,7 @@ describe('resource events', () => {
         username: 'username',
       },
       value: 6.9,
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 });

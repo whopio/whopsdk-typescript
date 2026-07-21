@@ -65,6 +65,17 @@ export class Users extends APIResource {
   ): PagePromise<UsersCursorPage, User> {
     return this._client.getAPIList('/users', CursorPage<User>, { query, ...options });
   }
+
+  /**
+   * Lists the recommended actions computed for the user: personal suggestions (e.g.
+   * start a business or become an affiliate) pooled with the highest-impact actions
+   * across the accounts the user owns. Business actions are tagged with their
+   * `account_id`/`account_name`; personal actions leave those `null`. Self-only:
+   * `id` must be `me` or the authenticated user's own tag/username.
+   */
+  recommendActions(id: string, options?: RequestOptions): APIPromise<UserRecommendActionsResponse> {
+    return this._client.get(path`/users/${id}/recommend_actions`, options);
+  }
 }
 
 export type UsersCursorPage = CursorPage<User>;
@@ -428,6 +439,97 @@ export interface UserCheckAccessResponse {
   has_access: boolean;
 }
 
+export interface UserRecommendActionsResponse {
+  data: Array<UserRecommendActionsResponse.Data>;
+}
+
+export namespace UserRecommendActionsResponse {
+  export interface Data {
+    /**
+     * The account (`biz_`) a business recommendation is for, or `null` for personal
+     * recommendations
+     */
+    account_id: string | null;
+
+    /**
+     * The account's display name, or `null`
+     */
+    account_name: string | null;
+
+    /**
+     * The recommendation; new values may be added, so handle unknown actions
+     * gracefully
+     */
+    action:
+      | 'create_business'
+      | 'become_affiliate'
+      | 'become_whop_partner'
+      | 'theme_business'
+      | 'create_product'
+      | 'create_plan'
+      | 'verify_identity'
+      | 'connect_affiliate_program'
+      | 'create_promotion'
+      | 'setup_tracking_pixel'
+      | 'migrate_from_stripe'
+      | 'accept_first_payment'
+      | 'launch_first_ad'
+      | 'launch_draft_campaign'
+      | 'increase_ad_budget'
+      | 'refresh_ad_creatives'
+      | 'fix_ad_billing'
+      | 'exclude_customers_from_ads'
+      | 'retarget_abandoned_checkouts'
+      | 'invite_team_member'
+      | 'enable_tax_collection'
+      | 'create_card'
+      | 'join_whop_university'
+      | 'apply_for_financing';
+
+    blocked_capabilities: Array<string>;
+
+    /**
+     * The URL the call-to-action links to
+     */
+    cta: string;
+
+    /**
+     * Button label
+     */
+    cta_label: string;
+
+    /**
+     * Supporting copy, or empty
+     */
+    description: string;
+
+    /**
+     * Illustration icon URL, or `null`
+     */
+    icon_url: string | null;
+
+    /**
+     * Estimated impact from 0-100, or `null` when not ranked
+     */
+    impact_score: number | null;
+
+    /**
+     * Why this action was recommended, or `null`
+     */
+    reasoning: string | null;
+
+    /**
+     * Always optional — never blocking
+     */
+    status: 'optional';
+
+    /**
+     * Headline for the recommendation
+     */
+    title: string;
+  }
+}
+
 export interface UserRetrieveParams {
   /**
    * When set, returns the user's account-specific profile overrides for this
@@ -573,6 +675,7 @@ export declare namespace Users {
     type User as User,
     type UserBalance as UserBalance,
     type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserRecommendActionsResponse as UserRecommendActionsResponse,
     type UsersCursorPage as UsersCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,

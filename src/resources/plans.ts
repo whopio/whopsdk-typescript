@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -43,8 +44,16 @@ export class Plans extends APIResource {
    * const plan = await client.plans.create();
    * ```
    */
-  create(body: PlanCreateParams, options?: RequestOptions): APIPromise<Shared.Plan> {
-    return this._client.post('/plans', { body, ...options });
+  create(params: PlanCreateParams, options?: RequestOptions): APIPromise<Shared.Plan> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/plans', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -95,10 +104,18 @@ export class Plans extends APIResource {
    */
   calculateTax(
     id: string,
-    body: PlanCalculateTaxParams,
+    params: PlanCalculateTaxParams,
     options?: RequestOptions,
   ): APIPromise<PlanCalculateTaxResponse> {
-    return this._client.post(path`/plans/${id}/calculate_tax`, { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post(path`/plans/${id}/calculate_tax`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -362,141 +379,155 @@ export interface PlanListParams extends CursorPageParams {
 
 export interface PlanCreateParams {
   /**
-   * The unique identifier of the account to create this plan for. Defaults to the
-   * caller's account.
+   * Body param: The unique identifier of the account to create this plan for.
+   * Defaults to the caller's account.
    */
   account_id?: string;
 
   /**
-   * Whether this plan accepts local currency payments via adaptive pricing.
+   * Body param: Whether this plan accepts local currency payments via adaptive
+   * pricing.
    */
   adaptive_pricing_enabled?: boolean | null;
 
   /**
-   * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+   * Body param: Recurring billing interval in days, such as 30 for monthly or 365
+   * for annual.
    */
   billing_period?: number | null;
 
   /**
-   * Checkout styling overrides for this plan.
+   * Body param: Checkout styling overrides for this plan.
    */
   checkout_styling?: unknown | null;
 
   /**
-   * The three-letter ISO currency code for the plan's pricing. Defaults to USD.
+   * Body param: The three-letter ISO currency code for the plan's pricing. Defaults
+   * to USD.
    */
   currency?: string;
 
   /**
-   * An array of custom field definitions to collect from customers at checkout.
-   * Omitting this field clears existing custom fields.
+   * Body param: An array of custom field definitions to collect from customers at
+   * checkout. Omitting this field clears existing custom fields.
    */
   custom_fields?: Array<PlanCreateParams.CustomField> | null;
 
   /**
-   * A text description of the plan displayed to customers on the product page.
+   * Body param: A text description of the plan displayed to customers on the product
+   * page.
    */
   description?: string | null;
 
   /**
-   * Access duration in days before the membership expires.
+   * Body param: Access duration in days before the membership expires.
    */
   expiration_days?: number | null;
 
   /**
-   * An image displayed on the product page to represent this plan.
+   * Body param: An image displayed on the product page to represent this plan.
    */
   image?: PlanCreateParams.Image | null;
 
   /**
-   * Initial amount charged in the plan's currency, e.g. 10.43 for $10.43.
+   * Body param: Initial amount charged in the plan's currency, e.g. 10.43 for
+   * $10.43.
    */
   initial_price?: number | null;
 
   /**
-   * Private notes visible only to the account owner. Not shown to customers.
+   * Body param: Private notes visible only to the account owner. Not shown to
+   * customers.
    */
   internal_notes?: string | null;
 
   /**
-   * Whether this plan uses legacy payment method controls.
+   * Body param: Whether this plan uses legacy payment method controls.
    */
   legacy_payment_method_controls?: boolean | null;
 
   /**
-   * Custom key-value pairs to store on the plan. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-   * string value.
+   * Body param: Custom key-value pairs to store on the plan. Included in webhook
+   * payloads for payment and membership events. Max 50 keys, 100 chars per key, 500
+   * chars per string value.
    */
   metadata?: unknown | null;
 
   /**
-   * Override the default tax classification for this specific plan.
+   * Body param: Override the default tax classification for this specific plan.
    */
   override_tax_type?: string;
 
   /**
-   * Explicit payment method configuration for the plan. When not provided, the
-   * account's defaults apply.
+   * Body param: Explicit payment method configuration for the plan. When not
+   * provided, the account's defaults apply.
    */
   payment_method_configuration?: PlanCreateParams.PaymentMethodConfiguration | null;
 
   /**
-   * Plan billing type, such as `one_time` or `renewal`.
+   * Body param: Plan billing type, such as `one_time` or `renewal`.
    */
   plan_type?: string;
 
   /**
-   * The unique identifier of the product to attach this plan to.
+   * Body param: The unique identifier of the product to attach this plan to.
    */
   product_id?: string;
 
   /**
-   * Sales method for this plan, such as `buy_now` or `waitlist`.
+   * Body param: Sales method for this plan, such as `buy_now` or `waitlist`.
    */
   release_method?: string;
 
   /**
-   * The amount charged each billing period for recurring plans, in the plan's
-   * currency.
+   * Body param: The amount charged each billing period for recurring plans, in the
+   * plan's currency.
    */
   renewal_price?: number | null;
 
   /**
-   * Installment payments required before the subscription pauses.
+   * Body param: Installment payments required before the subscription pauses.
    */
   split_pay_required_payments?: number | null;
 
   /**
-   * The maximum number of units available for purchase. Ignored when unlimited_stock
-   * is true.
+   * Body param: The maximum number of units available for purchase. Ignored when
+   * unlimited_stock is true.
    */
   stock?: number | null;
 
   /**
-   * 3D Secure behavior for this plan. Send `null` to inherit the account default.
+   * Body param: 3D Secure behavior for this plan. Send `null` to inherit the account
+   * default.
    */
   three_ds_level?: 'mandate_challenge' | 'frictionless';
 
   /**
-   * The display name of the plan shown to customers on the product page.
+   * Body param: The display name of the plan shown to customers on the product page.
    */
   title?: string | null;
 
   /**
-   * Free trial duration before the first recurring charge.
+   * Body param: Free trial duration before the first recurring charge.
    */
   trial_period_days?: number | null;
 
   /**
-   * Whether the plan has unlimited stock. When true, the stock field is ignored.
+   * Body param: Whether the plan has unlimited stock. When true, the stock field is
+   * ignored.
    */
   unlimited_stock?: boolean | null;
 
   /**
-   * Whether the plan is visible to customers or hidden from public view.
+   * Body param: Whether the plan is visible to customers or hidden from public view.
    */
   visibility?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace PlanCreateParams {
@@ -739,21 +770,29 @@ export namespace PlanUpdateParams {
 
 export interface PlanCalculateTaxParams {
   /**
-   * Buyer billing address used for tax calculation. Provide either `address.country`
-   * or `ip_address`; include state and postal code when available for more accurate
-   * results.
+   * Body param: Buyer billing address used for tax calculation. Provide either
+   * `address.country` or `ip_address`; include state and postal code when available
+   * for more accurate results.
    */
   address?: PlanCalculateTaxParams.Address | null;
 
   /**
-   * Buyer IP address used to infer location when no billing address is provided.
+   * Body param: Buyer IP address used to infer location when no billing address is
+   * provided.
    */
   ip_address?: string;
 
   /**
-   * Optional buyer tax ID for B2B exemptions. At most one entry is supported.
+   * Body param: Optional buyer tax ID for B2B exemptions. At most one entry is
+   * supported.
    */
   tax_ids?: Array<PlanCalculateTaxParams.TaxID> | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace PlanCalculateTaxParams {

@@ -5,6 +5,7 @@ import * as Shared from './shared';
 import { ProductListItemsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -35,8 +36,16 @@ export class Products extends APIResource {
   /**
    * Creates a new product for a company.
    */
-  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
-    return this._client.post('/products', { body, ...options });
+  create(params: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/products', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -59,9 +68,9 @@ export type ProductDeleteResponse = boolean;
 
 export interface ProductListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list products for.
+   * The unique identifier of the account to list products for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Filter to only products matching these types.
@@ -101,96 +110,103 @@ export interface ProductListParams extends CursorPageParams {
 
 export interface ProductCreateParams {
   /**
-   * The display name of the product. Maximum 80 characters.
+   * Body param: The display name of the product. Maximum 80 characters.
    */
   title: string;
 
   /**
-   * Whether to collect a shipping address at checkout.
+   * Body param: The unique identifier of the account to create this product for.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Whether to collect a shipping address at checkout.
    */
   collect_shipping_address?: boolean | null;
 
   /**
-   * The unique identifier of the company to create this product for.
-   */
-  company_id?: string;
-
-  /**
-   * The call-to-action button label.
+   * Body param: The call-to-action button label.
    */
   custom_cta?: string | null;
 
   /**
-   * A URL the call-to-action button links to.
+   * Body param: A URL the call-to-action button links to.
    */
   custom_cta_url?: string | null;
 
   /**
-   * Custom bank statement descriptor. Must start with WHOP\*.
+   * Body param: Custom bank statement descriptor. Must start with WHOP\*.
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description displayed on the product page.
+   * Body param: A written description displayed on the product page.
    */
   description?: string | null;
 
   /**
-   * The commission rate affiliates earn.
+   * Body param: The commission rate affiliates earn.
    */
   global_affiliate_percentage?: number | null;
 
   /**
-   * The enrollment status in the global affiliate program.
+   * Body param: The enrollment status in the global affiliate program.
    */
   global_affiliate_status?: string;
 
   /**
-   * A short marketing headline for the product page.
+   * Body param: A short marketing headline for the product page.
    */
   headline?: string | null;
 
   /**
-   * The commission rate members earn.
+   * Body param: The commission rate members earn.
    */
   member_affiliate_percentage?: number | null;
 
   /**
-   * The enrollment status in the member affiliate program.
+   * Body param: The enrollment status in the member affiliate program.
    */
   member_affiliate_status?: string;
 
   /**
-   * Custom key-value pairs to store on the product.
+   * Body param: Custom key-value pairs to store on the product.
    */
   metadata?: unknown | null;
 
   /**
-   * The unique identifier of the tax classification code. See the available
+   * Body param: The unique identifier of the tax classification code. See the
+   * available
    * [product categories](https://docs.numeral.com/essentials/product-categories).
    */
   product_tax_code_id?: string | null;
 
   /**
-   * A URL to redirect the customer to after purchase.
+   * Body param: A URL to redirect the customer to after purchase.
    */
   redirect_purchase_url?: string | null;
 
   /**
-   * The URL slug for the product's public link.
+   * Body param: The URL slug for the product's public link.
    */
   route?: string | null;
 
   /**
-   * Whether to send an automated welcome message via support chat when a user joins
-   * this product. Defaults to true.
+   * Body param: Whether to send an automated welcome message via support chat when a
+   * user joins this product. Defaults to true.
    */
   send_welcome_message?: boolean | null;
 
   /**
-   * Whether the product is visible to customers.
+   * Body param: Whether the product is visible to customers.
    */
   visibility?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface ProductUpdateParams {

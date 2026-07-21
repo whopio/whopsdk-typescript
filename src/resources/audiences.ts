@@ -1,8 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as AudiencesAPI from './audiences';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -21,11 +23,25 @@ export class Audiences extends APIResource {
   }
 
   /**
-   * Creates an audience from an uploaded customer identity CSV file and starts
-   * processing it.
+   * Creates an audience. Default (`audience_type` omitted or `custom`): creates one
+   * audience from an uploaded customer identity CSV file (`name`, `column_mapping`,
+   * and `file_id` required) and starts processing it; responds with the audience
+   * object. With `audience_type: lookalike`: creates a ladder of Meta lookalike
+   * audiences from an existing ready custom audience (`source_audience_id`, `count`,
+   * and `percentage` required) — `count` equal similarity bands slicing the top
+   * `percentage`% (3 audiences at 6% = 0–2%, 2–4%, 4–6%), each returned as its own
+   * audience in a `{ data: [...] }` envelope.
    */
-  create(body: AudienceCreateParams, options?: RequestOptions): APIPromise<Audience> {
-    return this._client.post('/audiences', { body, ...options });
+  create(params: AudienceCreateParams, options?: RequestOptions): APIPromise<AudienceCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/audiences', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -45,6 +61,12 @@ export interface Audience {
   id: string;
 
   /**
+   * `custom` = uploaded customer list; `lookalike` = Meta lookalike built from a
+   * custom audience.
+   */
+  audience_type: 'custom' | 'lookalike';
+
+  /**
    * When the audience was created, as an ISO 8601 timestamp.
    */
   created_at: string;
@@ -54,10 +76,22 @@ export interface Audience {
    */
   error_message: string | null;
 
+  /**
+   * For lookalikes: the upper bound of the similarity band as a fraction (0.02 = top
+   * 2%). `null` for custom audiences.
+   */
+  lookalike_ratio: number | null;
+
+  /**
+   * For lookalikes: the lower bound of the similarity band as a fraction. `null` for
+   * custom audiences and first-tier lookalikes.
+   */
+  lookalike_starting_ratio: number | null;
+
   match_rates: Array<Audience.MatchRate>;
 
   /**
-   * Rows successfully uploaded to connected ad accounts.
+   * Rows successfully uploaded to connected ad accounts. Always 0 for lookalikes.
    */
   matched_rows: number;
 
@@ -69,7 +103,7 @@ export interface Audience {
   platform_audience_ids: Array<string>;
 
   /**
-   * Rows processed from the uploaded CSV.
+   * Rows processed from the uploaded CSV. Always 0 for lookalikes.
    */
   processed_rows: number;
 
@@ -79,6 +113,12 @@ export interface Audience {
   progress_percent: number;
 
   /**
+   * For lookalikes: the audience this lookalike was built from. `null` for custom
+   * audiences.
+   */
+  source_audience_id: string | null;
+
+  /**
    * Current state of the audience import. `syncing` means Whop is sending matched
    * rows to connected ad accounts. When status is `partial` or `failed`,
    * `error_message` explains what went wrong.
@@ -86,7 +126,7 @@ export interface Audience {
   status: 'pending' | 'processing' | 'syncing' | 'ready' | 'partial' | 'failed';
 
   /**
-   * Total rows detected in the uploaded CSV.
+   * Total rows detected in the uploaded CSV. Always 0 for lookalikes.
    */
   total_rows: number;
 
@@ -124,6 +164,14 @@ export namespace Audience {
   }
 }
 
+export type AudienceCreateResponse = Audience | AudienceCreateResponse.Data;
+
+export namespace AudienceCreateResponse {
+  export interface Data {
+    data: Array<AudiencesAPI.Audience>;
+  }
+}
+
 export interface AudienceDeleteResponse {
   success: boolean;
 }
@@ -140,6 +188,11 @@ export interface AudienceListParams extends CursorPageParams {
   audience_id?: string;
 
   /**
+   * Filter by audience type: `custom` (uploaded lists) or `lookalike`.
+   */
+  audience_type?: 'custom' | 'lookalike';
+
+  /**
    * Number of audiences to return. Defaults to 20; maximum 100.
    */
   first?: number;
@@ -147,31 +200,61 @@ export interface AudienceListParams extends CursorPageParams {
 
 export interface AudienceCreateParams {
   /**
-   * Account ID, prefixed `biz_`.
+   * Body param: Account ID, prefixed `biz_`.
    */
   account_id: string;
 
   /**
-   * Maps supported identity fields to CSV column headers. Map at least one of
-   * `email` or `phone`.
+   * Body param: What to create. Defaults to `custom` (CSV upload).
    */
-  column_mapping: AudienceCreateParams.ColumnMapping;
+  audience_type?: 'custom' | 'lookalike';
 
   /**
-   * Direct upload ID from the standard media upload endpoint.
+   * Body param: Custom audiences only. Maps supported identity fields to CSV column
+   * headers. Map at least one of `email` or `phone`.
    */
-  file_id: string;
+  column_mapping?: AudienceCreateParams.ColumnMapping;
 
   /**
-   * Audience display name.
+   * Body param: Lookalikes only. Number of lookalike audiences to create (1–6).
    */
-  name: string;
+  count?: number;
+
+  /**
+   * Body param: Custom audiences only. The uploaded customer CSV — a file id
+   * (`file_...`) returned by `POST /files`.
+   */
+  file_id?: string;
+
+  /**
+   * Body param: Audience display name. Required for custom audiences; lookalike
+   * names are generated from the source audience.
+   */
+  name?: string;
+
+  /**
+   * Body param: Lookalikes only. Total similarity reach as a whole percent (1–20),
+   * sliced evenly across `count` — must be divisible by `count`.
+   */
+  percentage?: number;
+
+  /**
+   * Body param: Lookalikes only. The ready custom audience (`adaud_`) to build from;
+   * it needs at least 100 matched people.
+   */
+  source_audience_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace AudienceCreateParams {
   /**
-   * Maps supported identity fields to CSV column headers. Map at least one of
-   * `email` or `phone`.
+   * Custom audiences only. Maps supported identity fields to CSV column headers. Map
+   * at least one of `email` or `phone`.
    */
   export interface ColumnMapping {
     /**
@@ -204,6 +287,7 @@ export namespace AudienceCreateParams {
 export declare namespace Audiences {
   export {
     type Audience as Audience,
+    type AudienceCreateResponse as AudienceCreateResponse,
     type AudienceDeleteResponse as AudienceDeleteResponse,
     type AudiencesCursorPage as AudiencesCursorPage,
     type AudienceListParams as AudienceListParams,

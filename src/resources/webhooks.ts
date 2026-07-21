@@ -1066,6 +1066,21 @@ export namespace IdentityProfileApprovedWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -1083,9 +1098,12 @@ export namespace IdentityProfileApprovedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -1332,6 +1350,21 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -1349,9 +1382,12 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -1598,6 +1634,21 @@ export namespace IdentityProfileRejectedWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -1615,9 +1666,12 @@ export namespace IdentityProfileRejectedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -1864,6 +1918,21 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     linked_companies: Array<Data.LinkedCompany>;
 
     /**
+     * Progress of payout-account setup for this profile, independent of holds.
+     * `connected` means onboarding is complete; a `connected` status paired with
+     * `payouts_enabled: false` indicates an active account restriction rather than
+     * incomplete setup.
+     */
+    payout_status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses;
+
+    /**
+     * Whether this profile can receive payouts right now. True only when payout
+     * onboarding is complete and no payout holds are active on the linked account.
+     * Treat this as the single source of truth for payout readiness.
+     */
+    payouts_enabled: boolean;
+
+    /**
      * Residential address reported by the identity provider. Present on `individual`
      * profiles.
      */
@@ -1881,9 +1950,12 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.

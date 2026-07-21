@@ -26,13 +26,18 @@ describe('resource bounties', () => {
     await expect(
       client.bounties.list(
         {
+          account_id: 'account_id',
           after: 'after',
           before: 'before',
+          created_after: 'created_after',
+          created_before: 'created_before',
           direction: 'asc',
-          experience_id: 'exp_xxxxxxxxxxxxxx',
-          first: 42,
-          last: 42,
-          status: 'published',
+          first: 100,
+          last: 100,
+          order: 'created_at',
+          query: 'query',
+          status: 'scheduled',
+          user_id: 'user_id',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -42,9 +47,8 @@ describe('resource bounties', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.bounties.create({
-      base_unit_amount: 6.9,
-      currency: 'usd',
       description: 'description',
+      gross_reward_amount: 0,
       title: 'title',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -59,26 +63,23 @@ describe('resource bounties', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.bounties.create({
-      base_unit_amount: 6.9,
-      currency: 'usd',
       description: 'description',
+      gross_reward_amount: 0,
       title: 'title',
-      accepted_submissions_limit: 42,
+      accepted_submissions_limit: 0,
+      account_id: 'account_id',
       allowed_country_codes: ['string'],
-      business_goal_type: 'clipping',
-      experience_id: 'exp_xxxxxxxxxxxxxx',
-      origin_account_id: 'origin_account_id',
-      post_markdown_content: 'post_markdown_content',
-      post_title: 'post_title',
-      scheduled_frequency: 'once',
-      scheduled_publish_at: '2023-12-01T05:00:00.401Z',
-      scheduled_timezone: 'scheduled_timezone',
+      experience_id: 'experience_id',
+      frequency: 'weekly',
+      publish_at: 'publish_at',
+      publish_at_timezone: 'publish_at_timezone',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.bounties.retrieve('bnty_xxxxxxxxxxxxx');
+    const responsePromise = client.bounties.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,5 +87,38 @@ describe('resource bounties', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('update', async () => {
+    const responsePromise = client.bounties.update('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.bounties.update(
+        'id',
+        {
+          accepted_submissions_limit: 0,
+          allowed_country_codes: ['string'],
+          description: 'description',
+          frequency: 'once',
+          gross_reward_amount: 0,
+          publish_at: 'publish_at',
+          publish_at_timezone: 'publish_at_timezone',
+          title: 'title',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

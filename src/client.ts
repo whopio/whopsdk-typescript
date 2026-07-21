@@ -26,7 +26,10 @@ import {
   AdCampaignCreateParams,
   AdCampaignDeleteResponse,
   AdCampaignListParams,
+  AdCampaignPauseParams,
   AdCampaignRetrieveParams,
+  AdCampaignRetryPaymentParams,
+  AdCampaignUnpauseParams,
   AdCampaignUpdateParams,
   AdCampaigns,
   AdCampaignsCursorPage,
@@ -35,11 +38,18 @@ import {
   AdGroup,
   AdGroupCreateParams,
   AdGroupDeleteResponse,
+  AdGroupEstimateReachParams,
   AdGroupListParams,
+  AdGroupPauseParams,
   AdGroupRetrieveParams,
+  AdGroupSearchTargetingOptionsParams,
+  AdGroupSearchTargetingOptionsResponse,
+  AdGroupUnpauseParams,
   AdGroupUpdateParams,
   AdGroups,
   AdGroupsCursorPage,
+  ReachEstimate,
+  TargetingOption,
 } from './resources/ad-groups';
 import {
   AdReportRetrieveParams,
@@ -53,7 +63,9 @@ import {
   AdCreateParams,
   AdDeleteResponse,
   AdListParams,
+  AdPauseParams,
   AdRetrieveParams,
+  AdUnpauseParams,
   AdUpdateParams,
   Ads,
   AdsCursorPage,
@@ -90,6 +102,7 @@ import {
 import {
   Audience,
   AudienceCreateParams,
+  AudienceCreateResponse,
   AudienceDeleteResponse,
   AudienceListParams,
   Audiences,
@@ -107,13 +120,20 @@ import {
 } from './resources/authorized-users';
 import {
   Bounties,
+  Bounty,
   BountyCreateParams,
-  BountyCreateResponse,
+  BountyListItem,
+  BountyListItemsCursorPage,
   BountyListParams,
-  BountyListResponse,
-  BountyListResponsesCursorPage,
-  BountyRetrieveResponse,
+  BountyUpdateParams,
 } from './resources/bounties';
+import {
+  BountySubmission,
+  BountySubmissionCreateParams,
+  BountySubmissionListParams,
+  BountySubmissions,
+  BountySubmissionsCursorPage,
+} from './resources/bounty-submissions';
 import {
   CardCreateParams,
   CardCreateResponse,
@@ -213,13 +233,7 @@ import {
   Courses,
   Languages,
 } from './resources/courses';
-import {
-  DepositCreateParams,
-  DepositCreateResponse,
-  DepositListParams,
-  DepositListResponse,
-  Deposits,
-} from './resources/deposits';
+import { DepositCreateParams, DepositCreateResponse, Deposits } from './resources/deposits';
 import {
   DisputeAlertListParams,
   DisputeAlertListResponse,
@@ -508,6 +522,8 @@ import {
   SocialAccountCreateParams,
   SocialAccountDeleteParams,
   SocialAccountDeleteResponse,
+  SocialAccountLeadFormsParams,
+  SocialAccountLeadFormsResponse,
   SocialAccountListParams,
   SocialAccountPost,
   SocialAccountPostsParams,
@@ -549,6 +565,7 @@ import {
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
+  UserRecommendActionsResponse,
   UserRetrieveParams,
   UserUpdateMeParams,
   UserUpdateParams,
@@ -626,6 +643,7 @@ import {
   Withdrawal,
   WithdrawalCreateParams,
   WithdrawalFeeTypes,
+  WithdrawalGeneratePdfResponse,
   WithdrawalListParams,
   WithdrawalListResponse,
   WithdrawalListResponsesCursorPage,
@@ -638,6 +656,8 @@ import {
   AccountCreateParams,
   AccountListParams,
   AccountRecommendActionsResponse,
+  AccountRegisterLlcParams,
+  AccountRegisterLlcResponse,
   AccountSocialLink,
   AccountUpdateParams,
   Accounts,
@@ -655,6 +675,15 @@ import {
   Status,
 } from './resources/affiliates/affiliates';
 import {
+  PartnerCreateParams,
+  PartnerCreateResponse,
+  PartnerLeaderboardParams,
+  PartnerLeaderboardResponse,
+  PartnerReferredUsersParams,
+  PartnerReferredUsersResponse,
+  Partners,
+} from './resources/partners/partners';
+import {
   PayoutCreateParams,
   PayoutCreateResponse,
   PayoutListParams,
@@ -662,12 +691,6 @@ import {
   PayoutListResponsesCursorPage,
   Payouts,
 } from './resources/payouts/payouts';
-import {
-  ReferralReferredUsersParams,
-  ReferralReferredUsersResponse,
-  Referrals,
-} from './resources/referrals/referrals';
-import { Workforce } from './resources/workforce/workforce';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -814,7 +837,7 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-08-1]
+   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-20]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -828,7 +851,7 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    version = readEnv('WHOP_API_VERSION') ?? '2026-07-08-1',
+    version = readEnv('WHOP_API_VERSION') ?? '2026-07-20',
     userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
     userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
     ...opts
@@ -1396,19 +1419,11 @@ export class Whop {
     return () => controller.abort();
   }
 
-  private buildBody({ options }: { options: FinalRequestOptions }): {
+  private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
     bodyHeaders: HeadersLike;
     body: BodyInit | undefined;
   } {
-    const { body, headers: rawHeaders } = options;
     if (!body) {
-      // A resource method always passes a `body` key when its operation defines a
-      // request body, even if the caller omitted an optional body param. Keep the
-      // content-type for those, and only elide it for operations with no body at
-      // all (e.g. GET/DELETE).
-      if (body == null && 'body' in options) {
-        return this.#encoder({ body, headers: buildHeaders([rawHeaders]) });
-      }
       return { bodyHeaders: undefined, body: undefined };
     }
     const headers = buildHeaders([rawHeaders]);
@@ -1489,7 +1504,7 @@ export class Whop {
   /**
    * A Social Account represents an external profile connected to a Whop account or user, such as a Facebook page or Instagram account. Connecting a social account lets Whop run [ads](/api-reference/beta/ads/ad) under that profile's identity and promote its existing posts.
    *
-   * Use the Social Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect a social account, and list a connected profile's posts.
+   * Use the Social Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect a social account, and list a connected profile's posts or a Facebook page's lead forms.
    *
    */
   socialAccounts: API.SocialAccounts = new API.SocialAccounts(this);
@@ -1517,7 +1532,7 @@ export class Whop {
   /**
    * An Event records conversion or engagement activity for an account, such as page views, purchases, or leads. Each event ties the action to the [person](/api-reference/beta/people/person) who took it, so activity can be attributed to the ads and links that drove it.
    *
-   * Use the Events API to send new tracking events and list the events recorded for a person.
+   * Use the Events API to send new tracking events, list recent identity-linked events for an account, and inspect the events recorded for a person.
    *
    */
   events: API.Events = new API.Events(this);
@@ -1607,12 +1622,12 @@ export class Whop {
    */
   payouts: API.Payouts = new API.Payouts(this);
   /**
-   * The Referrals API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
+   * The Partners API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
    *
    * Use it to enroll as a Whop partner, list the users you referred, list your referred businesses and review their earnings, and see the partner leaderboard.
    *
    */
-  referrals: API.Referrals = new API.Referrals(this);
+  partners: API.Partners = new API.Partners(this);
   /**
    * Cards represent Whop-issued virtual payment cards that spend from an account or user balance. Cards can be assigned to cardholders and configured with spending limits for controlled spending.
    *
@@ -1630,7 +1645,7 @@ export class Whop {
   /**
    * Deposits describe ways to add funds to an account balance, including hosted deposit pages, bank deposit instructions, and supported crypto wallet addresses.
    *
-   * Use the Deposits API to create deposit instructions for an account and retrieve existing bank deposit activity.
+   * Use the Deposits API to create deposit instructions for an account.
    *
    */
   deposits: API.Deposits = new API.Deposits(this);
@@ -1638,7 +1653,7 @@ export class Whop {
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
   /**
-   * A Verification represents an identity review for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
+   * A Verification represents a legal identity for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
    *
    * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
    *
@@ -1655,8 +1670,20 @@ export class Whop {
   resolutionCenterCases: API.ResolutionCenterCases = new API.ResolutionCenterCases(this);
   payoutAccounts: API.PayoutAccounts = new API.PayoutAccounts(this);
   affiliates: API.Affiliates = new API.Affiliates(this);
+  /**
+   * A Bounty is a paid task posted by an account or user. The reward is held in escrow when the bounty publishes, workers submit proof of completed work, and each accepted submission is paid out until every winner slot fills.
+   *
+   * Use the Bounties API to create and publish a bounty, list an account's bounties for reporting or dashboards, list the bounties a user can work or has participated in, and retrieve a single bounty by ID.
+   *
+   */
   bounties: API.Bounties = new API.Bounties(this);
-  workforce: API.Workforce = new API.Workforce(this);
+  /**
+   * A Bounty Submission is one worker's attempt on a bounty. It starts as an in-progress attempt, enters the review queue when proof is submitted, and ends approved (paid from the bounty's escrowed pool) or denied.
+   *
+   * Use the Bounty Submissions API to submit proof of completed work to a bounty, list the submissions you authored, and review the submissions on your bounties — across every bounty or narrowed to one.
+   *
+   */
+  bountySubmissions: API.BountySubmissions = new API.BountySubmissions(this);
   /**
    * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
    *
@@ -1667,7 +1694,7 @@ export class Whop {
   /**
    * An Ad Group sits inside an [ad campaign](/api-reference/beta/ad-campaigns/ad-campaign) and controls delivery for [ads](/api-reference/beta/ads/ad). It sets the audience, placements, schedule, budget, and optimization goal for its ads.
    *
-   * Use the Ad Groups API to create ad groups in campaigns, list or retrieve targeting and delivery settings, update budgets or targeting, delete groups that should stop running, and pause or resume delivery.
+   * Use the Ad Groups API to create ad groups in campaigns, list or retrieve targeting and delivery settings, update budgets or targeting, delete groups that should stop running, and pause or resume delivery. It can also search the ad platform's targeting taxonomy for options to target and estimate how many people a draft targeting spec can reach.
    *
    */
   adGroups: API.AdGroups = new API.AdGroups(this);
@@ -1727,7 +1754,7 @@ Whop.Accounts = Accounts;
 Whop.FinancialActivity = FinancialActivity;
 Whop.Stats = Stats;
 Whop.Payouts = Payouts;
-Whop.Referrals = Referrals;
+Whop.Partners = Partners;
 Whop.Cards = Cards;
 Whop.Swaps = Swaps;
 Whop.Deposits = Deposits;
@@ -1747,7 +1774,7 @@ Whop.ResolutionCenterCases = ResolutionCenterCases;
 Whop.PayoutAccounts = PayoutAccounts;
 Whop.Affiliates = Affiliates;
 Whop.Bounties = Bounties;
-Whop.Workforce = Workforce;
+Whop.BountySubmissions = BountySubmissions;
 Whop.AdCampaigns = AdCampaigns;
 Whop.AdGroups = AdGroups;
 Whop.Ads = Ads;
@@ -1802,6 +1829,7 @@ export declare namespace Whop {
     type SocialAccountPost as SocialAccountPost,
     type SocialAccountDeleteResponse as SocialAccountDeleteResponse,
     type SocialAccountConnectResponse as SocialAccountConnectResponse,
+    type SocialAccountLeadFormsResponse as SocialAccountLeadFormsResponse,
     type SocialAccountPostsResponse as SocialAccountPostsResponse,
     type SocialAccountsCursorPage as SocialAccountsCursorPage,
     type SocialAccountListParams as SocialAccountListParams,
@@ -1809,11 +1837,13 @@ export declare namespace Whop {
     type SocialAccountConnectParams as SocialAccountConnectParams,
     type SocialAccountDeleteParams as SocialAccountDeleteParams,
     type SocialAccountPostsParams as SocialAccountPostsParams,
+    type SocialAccountLeadFormsParams as SocialAccountLeadFormsParams,
   };
 
   export {
     Audiences as Audiences,
     type Audience as Audience,
+    type AudienceCreateResponse as AudienceCreateResponse,
     type AudienceDeleteResponse as AudienceDeleteResponse,
     type AudiencesCursorPage as AudiencesCursorPage,
     type AudienceListParams as AudienceListParams,
@@ -2028,6 +2058,7 @@ export declare namespace Whop {
     type User as User,
     type UserBalance as UserBalance,
     type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UserRecommendActionsResponse as UserRecommendActionsResponse,
     type UsersCursorPage as UsersCursorPage,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
@@ -2212,6 +2243,7 @@ export declare namespace Whop {
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalListResponse as WithdrawalListResponse,
+    type WithdrawalGeneratePdfResponse as WithdrawalGeneratePdfResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalListParams as WithdrawalListParams,
     type WithdrawalCreateParams as WithdrawalCreateParams,
@@ -2228,10 +2260,12 @@ export declare namespace Whop {
     type Account as Account,
     type AccountSocialLink as AccountSocialLink,
     type AccountRecommendActionsResponse as AccountRecommendActionsResponse,
+    type AccountRegisterLlcResponse as AccountRegisterLlcResponse,
     type AccountsCursorPage as AccountsCursorPage,
     type AccountListParams as AccountListParams,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type AccountRegisterLlcParams as AccountRegisterLlcParams,
   };
 
   export {
@@ -2257,9 +2291,13 @@ export declare namespace Whop {
   };
 
   export {
-    Referrals as Referrals,
-    type ReferralReferredUsersResponse as ReferralReferredUsersResponse,
-    type ReferralReferredUsersParams as ReferralReferredUsersParams,
+    Partners as Partners,
+    type PartnerCreateResponse as PartnerCreateResponse,
+    type PartnerLeaderboardResponse as PartnerLeaderboardResponse,
+    type PartnerReferredUsersResponse as PartnerReferredUsersResponse,
+    type PartnerReferredUsersParams as PartnerReferredUsersParams,
+    type PartnerCreateParams as PartnerCreateParams,
+    type PartnerLeaderboardParams as PartnerLeaderboardParams,
   };
 
   export {
@@ -2288,8 +2326,6 @@ export declare namespace Whop {
   export {
     Deposits as Deposits,
     type DepositCreateResponse as DepositCreateResponse,
-    type DepositListResponse as DepositListResponse,
-    type DepositListParams as DepositListParams,
     type DepositCreateParams as DepositCreateParams,
   };
 
@@ -2448,15 +2484,21 @@ export declare namespace Whop {
 
   export {
     Bounties as Bounties,
-    type BountyCreateResponse as BountyCreateResponse,
-    type BountyRetrieveResponse as BountyRetrieveResponse,
-    type BountyListResponse as BountyListResponse,
-    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
+    type Bounty as Bounty,
+    type BountyListItem as BountyListItem,
+    type BountyListItemsCursorPage as BountyListItemsCursorPage,
     type BountyListParams as BountyListParams,
     type BountyCreateParams as BountyCreateParams,
+    type BountyUpdateParams as BountyUpdateParams,
   };
 
-  export { Workforce as Workforce };
+  export {
+    BountySubmissions as BountySubmissions,
+    type BountySubmission as BountySubmission,
+    type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
+    type BountySubmissionListParams as BountySubmissionListParams,
+    type BountySubmissionCreateParams as BountySubmissionCreateParams,
+  };
 
   export {
     AdCampaigns as AdCampaigns,
@@ -2467,17 +2509,27 @@ export declare namespace Whop {
     type AdCampaignCreateParams as AdCampaignCreateParams,
     type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
+    type AdCampaignPauseParams as AdCampaignPauseParams,
+    type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 
   export {
     AdGroups as AdGroups,
     type AdGroup as AdGroup,
+    type ReachEstimate as ReachEstimate,
+    type TargetingOption as TargetingOption,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupSearchTargetingOptionsResponse as AdGroupSearchTargetingOptionsResponse,
     type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
     type AdGroupCreateParams as AdGroupCreateParams,
     type AdGroupRetrieveParams as AdGroupRetrieveParams,
     type AdGroupUpdateParams as AdGroupUpdateParams,
+    type AdGroupPauseParams as AdGroupPauseParams,
+    type AdGroupUnpauseParams as AdGroupUnpauseParams,
+    type AdGroupSearchTargetingOptionsParams as AdGroupSearchTargetingOptionsParams,
+    type AdGroupEstimateReachParams as AdGroupEstimateReachParams,
   };
 
   export {
@@ -2489,6 +2541,8 @@ export declare namespace Whop {
     type AdCreateParams as AdCreateParams,
     type AdRetrieveParams as AdRetrieveParams,
     type AdUpdateParams as AdUpdateParams,
+    type AdPauseParams as AdPauseParams,
+    type AdUnpauseParams as AdUnpauseParams,
   };
 
   export {

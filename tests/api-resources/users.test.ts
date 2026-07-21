@@ -108,4 +108,16 @@ describe('resource users', () => {
       ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
+
+  // Mock server tests are disabled
+  test.skip('recommendActions', async () => {
+    const responsePromise = client.users.recommendActions('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
 });

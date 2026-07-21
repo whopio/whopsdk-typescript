@@ -273,6 +273,12 @@ export namespace App {
     file_url: string;
 
     /**
+     * A URL to download the compressed source code archive that produced this build.
+     * Null if the build was uploaded without a source archive.
+     */
+    source_url: string | null;
+
+    /**
      * The current review status of this build.
      */
     status: Shared.AppBuildStatuses;
@@ -388,6 +394,12 @@ export interface AppBuild {
    * build has not been reviewed or was approved.
    */
   review_message: string | null;
+
+  /**
+   * A URL to download the compressed source code archive that produced this build.
+   * Null if the build was uploaded without a source archive.
+   */
+  source_url: string | null;
 
   /**
    * The current review status of this build.
@@ -1711,6 +1723,11 @@ export interface Invoice {
   fetch_invoice_token: string;
 
   /**
+   * Optional line items that break down the invoice total into individual charges.
+   */
+  line_items: Array<Invoice.LineItem>;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
@@ -1747,6 +1764,37 @@ export namespace Invoice {
      * The formatted price (including currency) for the plan.
      */
     formatted_price: string;
+  }
+
+  /**
+   * A line item on an invoice, representing a single charge with a label, quantity,
+   * and unit price.
+   */
+  export interface LineItem {
+    /**
+     * The label or description for this line item.
+     */
+    label: string;
+
+    /**
+     * The display order of this line item within the invoice.
+     */
+    position: number;
+
+    /**
+     * The quantity of this line item.
+     */
+    quantity: number;
+
+    /**
+     * The computed total for this line item (quantity \* unit_price).
+     */
+    total: number;
+
+    /**
+     * The unit price for this line item.
+     */
+    unit_price: number;
   }
 
   /**
@@ -1811,6 +1859,11 @@ export interface InvoiceListItem {
   fetch_invoice_token: string;
 
   /**
+   * Optional line items that break down the invoice total into individual charges.
+   */
+  line_items: Array<InvoiceListItem.LineItem>;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
@@ -1847,6 +1900,37 @@ export namespace InvoiceListItem {
      * The formatted price (including currency) for the plan.
      */
     formatted_price: string;
+  }
+
+  /**
+   * A line item on an invoice, representing a single charge with a label, quantity,
+   * and unit price.
+   */
+  export interface LineItem {
+    /**
+     * The label or description for this line item.
+     */
+    label: string;
+
+    /**
+     * The display order of this line item within the invoice.
+     */
+    position: number;
+
+    /**
+     * The quantity of this line item.
+     */
+    quantity: number;
+
+    /**
+     * The computed total for this line item (quantity \* unit_price).
+     */
+    total: number;
+
+    /**
+     * The unit price for this line item.
+     */
+    unit_price: number;
   }
 
   /**
@@ -2565,8 +2649,10 @@ export interface Payment {
 
   /**
    * True when the payment status is `open` and its membership is in one of the
-   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`);
-   * otherwise false. Used to decide if Whop can attempt the charge again.
+   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or
+   * when it is a failed initial billing-engine payment on a `drafted` membership
+   * with an unlimited-stock plan; otherwise false. Used to decide if Whop can
+   * attempt the charge again.
    */
   retryable: boolean;
 
@@ -3659,6 +3745,11 @@ export namespace Product {
     id: string;
 
     /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
      * A pre-optimized URL for rendering this attachment on the client. This should be
      * used for displaying attachments in apps.
      */
@@ -3730,6 +3821,11 @@ export interface ProductListItem {
   external_identifier: string | null;
 
   /**
+   * The gallery images for this product, ordered by position.
+   */
+  gallery_images: Array<ProductListItem.GalleryImage>;
+
+  /**
    * A short marketing headline displayed prominently on the product's product page.
    */
   headline: string | null;
@@ -3779,6 +3875,33 @@ export interface ProductListItem {
    * product is only accessible via direct link.
    */
   visibility: Visibility;
+}
+
+export namespace ProductListItem {
+  /**
+   * Represents an image attachment
+   */
+  export interface GalleryImage {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
 }
 
 /**

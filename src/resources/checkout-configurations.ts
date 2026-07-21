@@ -20,7 +20,7 @@ export class CheckoutConfigurations extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const checkoutConfigurationListResponse of client.checkoutConfigurations.list(
-   *   { company_id: 'company_id' },
+   *   { account_id: 'account_id' },
    * )) {
    *   // ...
    * }
@@ -47,10 +47,18 @@ export class CheckoutConfigurations extends APIResource {
    * ```
    */
   create(
-    body: CheckoutConfigurationCreateParams | null | undefined = {},
+    params: CheckoutConfigurationCreateParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CheckoutConfigurationCreateResponse> {
-    return this._client.post('/checkout_configurations', { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post('/checkout_configurations', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -99,7 +107,7 @@ export interface CheckoutConfigurationCreateResponse {
   /**
    * Account ID, prefixed `biz_`.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * When the checkout configuration was created, as an ISO 8601 timestamp.
@@ -261,7 +269,7 @@ export interface CheckoutConfigurationRetrieveResponse {
   /**
    * Account ID, prefixed `biz_`.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * When the checkout configuration was created, as an ISO 8601 timestamp.
@@ -423,7 +431,7 @@ export interface CheckoutConfigurationListResponse {
   /**
    * Account ID, prefixed `biz_`.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * When the checkout configuration was created, as an ISO 8601 timestamp.
@@ -580,7 +588,7 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   /**
    * Account ID, prefixed `biz_`.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Only return checkout configurations created after this Unix timestamp.
@@ -615,57 +623,63 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
 
 export interface CheckoutConfigurationCreateParams {
   /**
-   * Affiliate code to apply to the checkout.
+   * Body param: Account ID, prefixed `biz_`.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Affiliate code to apply to the checkout.
    */
   affiliate_code?: string | null;
 
   /**
-   * Account ID, prefixed `biz_`.
-   */
-  company_id?: string;
-
-  /**
-   * Currency used for setup-mode payment method availability.
+   * Body param: Currency used for setup-mode payment method availability.
    */
   currency?: string | null;
 
   /**
-   * Custom key-value metadata copied to payments and memberships.
+   * Body param: Custom key-value metadata copied to payments and memberships.
    */
   metadata?: unknown | null;
 
   /**
-   * Checkout mode: `payment` collects payment for a plan now; `setup` saves payment
-   * details without charging. Defaults to `payment`.
+   * Body param: Checkout mode: `payment` collects payment for a plan now; `setup`
+   * saves payment details without charging. Defaults to `payment`.
    */
   mode?: 'payment' | 'setup';
 
   /**
-   * Payment method overrides for this checkout. `null` uses the plan or platform
-   * defaults.
+   * Body param: Payment method overrides for this checkout. `null` uses the plan or
+   * platform defaults.
    */
   payment_method_configuration?: CheckoutConfigurationCreateParams.PaymentMethodConfiguration | null;
 
   /**
-   * Plan attributes used to create or find a plan for this checkout configuration.
-   * Mutually exclusive with `plan_id`.
+   * Body param: Plan attributes used to create or find a plan for this checkout
+   * configuration. Mutually exclusive with `plan_id`.
    */
   plan?: CheckoutConfigurationCreateParams.Plan | null;
 
   /**
-   * Existing plan ID, prefixed `plan_`. Mutually exclusive with `plan`.
+   * Body param: Existing plan ID, prefixed `plan_`. Mutually exclusive with `plan`.
    */
   plan_id?: string | null;
 
   /**
-   * URL customers are sent to after checkout.
+   * Body param: URL customers are sent to after checkout.
    */
   redirect_url?: string | null;
 
   /**
-   * 3D Secure behavior for this checkout.
+   * Body param: 3D Secure behavior for this checkout.
    */
   three_ds_level?: string | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace CheckoutConfigurationCreateParams {
@@ -696,15 +710,15 @@ export namespace CheckoutConfigurationCreateParams {
    */
   export interface Plan {
     /**
-     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
-     */
-    billing_period?: number | null;
-
-    /**
      * Account ID for the inline plan, prefixed `biz_`. Defaults to the account
      * resolved from the request.
      */
-    company_id?: string | null;
+    account_id?: string | null;
+
+    /**
+     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+     */
+    billing_period?: number | null;
 
     /**
      * Three-letter ISO currency code for the plan's prices.

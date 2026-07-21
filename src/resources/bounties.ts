@@ -1,22 +1,27 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * A Bounty is a paid task posted by an account or user. The reward is held in escrow when the bounty publishes, workers submit proof of completed work, and each accepted submission is paid out until every winner slot fills.
+ *
+ * Use the Bounties API to create and publish a bounty, list an account's bounties for reporting or dashboards, list the bounties a user can work or has participated in, and retrieve a single bounty by ID.
+ */
 export class Bounties extends APIResource {
   /**
-   * Returns a paginated list of workforce bounties. When experienceId is provided,
-   * returns bounties scoped to that experience. When omitted, returns bounties with
-   * no experience.
+   * Lists bounties visible to the credential — for an account API key, the account's
+   * bounties including scheduled drafts; for a user token, the bounties the user can
+   * see and work.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const bountyListResponse of client.bounties.list()) {
+   * for await (const bountyListItem of client.bounties.list()) {
    *   // ...
    * }
    * ```
@@ -24,359 +29,727 @@ export class Bounties extends APIResource {
   list(
     query: BountyListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<BountyListResponsesCursorPage, BountyListResponse> {
-    return this._client.getAPIList('/bounties', CursorPage<BountyListResponse>, { query, ...options });
+  ): PagePromise<BountyListItemsCursorPage, BountyListItem> {
+    return this._client.getAPIList('/bounties', CursorPage<BountyListItem>, { query, ...options });
   }
 
   /**
-   * Create a new workforce bounty by funding a dedicated bounty pool.
-   *
-   * Required permissions:
-   *
-   * - `bounty:create`
+   * Creates a bounty and escrows its reward pool. Publishes immediately, or as a
+   * scheduled draft when you set `publish_at`.
    *
    * @example
    * ```ts
    * const bounty = await client.bounties.create({
-   *   base_unit_amount: 6.9,
-   *   currency: 'usd',
    *   description: 'description',
+   *   gross_reward_amount: 0,
    *   title: 'title',
    * });
    * ```
    */
-  create(body: BountyCreateParams, options?: RequestOptions): APIPromise<BountyCreateResponse> {
-    return this._client.post('/bounties', { body, ...options });
+  create(params: BountyCreateParams, options?: RequestOptions): APIPromise<Bounty> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/bounties', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves a workforce bounty for the current authenticated user.
+   * Retrieves a bounty by ID. Bounties outside the caller's scope return `404`.
    *
    * @example
    * ```ts
-   * const bounty = await client.bounties.retrieve(
-   *   'bnty_xxxxxxxxxxxxx',
-   * );
+   * const bounty = await client.bounties.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<BountyRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Bounty> {
     return this._client.get(path`/bounties/${id}`, options);
+  }
+
+  /**
+   * Updates a bounty. A published bounty accepts title, description, and country
+   * targeting while it is still open with nothing under review. A scheduled
+   * (not-yet-published) draft additionally accepts the reward, winner slots, and
+   * schedule.
+   *
+   * @example
+   * ```ts
+   * const bounty = await client.bounties.update('id');
+   * ```
+   */
+  update(
+    id: string,
+    body: BountyUpdateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Bounty> {
+    return this._client.patch(path`/bounties/${id}`, { body, ...options });
   }
 }
 
-export type BountyListResponsesCursorPage = CursorPage<BountyListResponse>;
+export type BountyListItemsCursorPage = CursorPage<BountyListItem>;
 
-/**
- * A privately accessible bounty.
- */
-export interface BountyCreateResponse {
+export interface Bounty {
   /**
-   * The unique identifier for the bounty.
+   * Bounty ID, prefixed `bnty_`.
    */
   id: string;
 
-  /**
-   * The underlying bounty implementation type.
-   */
-  bounty_type: 'classic' | 'user_funded' | 'workforce';
+  accepted_deliverable_types: Array<'content_url' | 'media'>;
 
   /**
-   * The datetime the bounty was created.
+   * Submissions accepted so far.
    */
-  created_at: string;
+  accepted_submissions_count: number;
 
   /**
-   * The currency used for the bounty funds.
+   * Number of submissions that can be accepted (winner slots).
    */
-  currency: Shared.Currency;
+  accepted_submissions_limit: number;
+
+  allowed_country_codes: Array<string>;
 
   /**
-   * The description of the bounty.
+   * Total gross budget committed to the bounty: `gross_reward_amount` times
+   * `accepted_submissions_limit`.
    */
-  description: string;
+  budget_amount: number;
 
   /**
-   * The current lifecycle status of the bounty.
+   * What the poster wants the work to achieve. Determines which deliverable types
+   * the bounty accepts through the submissions API. `null` for bounties created
+   * before the taxonomy rolled out.
    */
-  status: 'published' | 'archived' | 'scheduled';
-
-  /**
-   * The title of the bounty.
-   */
-  title: string;
-
-  /**
-   * The total amount currently funded in the bounty pool for payout.
-   */
-  total_available: number;
-
-  /**
-   * The total amount paid out for this bounty.
-   */
-  total_paid: number;
-
-  /**
-   * The datetime the bounty was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The number of watcher votes required before the submission can resolve.
-   */
-  vote_threshold: number;
-}
-
-/**
- * A privately accessible bounty.
- */
-export interface BountyRetrieveResponse {
-  /**
-   * The unique identifier for the bounty.
-   */
-  id: string;
-
-  /**
-   * The underlying bounty implementation type.
-   */
-  bounty_type: 'classic' | 'user_funded' | 'workforce';
-
-  /**
-   * The datetime the bounty was created.
-   */
-  created_at: string;
-
-  /**
-   * The currency used for the bounty funds.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The description of the bounty.
-   */
-  description: string;
-
-  /**
-   * The current lifecycle status of the bounty.
-   */
-  status: 'published' | 'archived' | 'scheduled';
-
-  /**
-   * The title of the bounty.
-   */
-  title: string;
-
-  /**
-   * The total amount currently funded in the bounty pool for payout.
-   */
-  total_available: number;
-
-  /**
-   * The total amount paid out for this bounty.
-   */
-  total_paid: number;
-
-  /**
-   * The datetime the bounty was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The number of watcher votes required before the submission can resolve.
-   */
-  vote_threshold: number;
-}
-
-/**
- * A privately accessible bounty.
- */
-export interface BountyListResponse {
-  /**
-   * The unique identifier for the bounty.
-   */
-  id: string;
-
-  /**
-   * The underlying bounty implementation type.
-   */
-  bounty_type: 'classic' | 'user_funded' | 'workforce';
-
-  /**
-   * The datetime the bounty was created.
-   */
-  created_at: string;
-
-  /**
-   * The currency used for the bounty funds.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The description of the bounty.
-   */
-  description: string;
-
-  /**
-   * The current lifecycle status of the bounty.
-   */
-  status: 'published' | 'archived' | 'scheduled';
-
-  /**
-   * The title of the bounty.
-   */
-  title: string;
-
-  /**
-   * The total amount currently funded in the bounty pool for payout.
-   */
-  total_available: number;
-
-  /**
-   * The total amount paid out for this bounty.
-   */
-  total_paid: number;
-
-  /**
-   * The datetime the bounty was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The number of watcher votes required before the submission can resolve.
-   */
-  vote_threshold: number;
-}
-
-export interface BountyListParams extends CursorPageParams {
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string | null;
-
-  /**
-   * The direction of the sort.
-   */
-  direction?: Shared.Direction | null;
-
-  /**
-   * The experience to list bounties for. When omitted, returns bounties with no
-   * experience.
-   */
-  experience_id?: string | null;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number | null;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number | null;
-
-  /**
-   * The available bounty statuses to choose from.
-   */
-  status?: 'published' | 'archived' | 'scheduled' | null;
-}
-
-export interface BountyCreateParams {
-  /**
-   * The amount paid to each approved submission. The total bounty pool funded is
-   * this amount times accepted_submissions_limit, and must be at least 5 in the
-   * bounty's currency.
-   */
-  base_unit_amount: number;
-
-  /**
-   * The currency for the bounty pool funding amount.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The description of the bounty.
-   */
-  description: string;
-
-  /**
-   * The title of the bounty.
-   */
-  title: string;
-
-  /**
-   * The number of submissions that can be approved before the bounty closes.
-   * Defaults to 1. The total pool (base_unit_amount times this limit) must be at
-   * least 5 in the bounty's currency.
-   */
-  accepted_submissions_limit?: number | null;
-
-  /**
-   * The ISO3166 country codes where this bounty should be visible. Empty means
-   * globally visible.
-   */
-  allowed_country_codes?: Array<string> | null;
-
-  /**
-   * What the poster is trying to accomplish with a workforce bounty. Used for
-   * product taxonomy and analytics, separate from the bounty's implementation type.
-   */
-  business_goal_type?:
+  business_goal_type:
     | 'clipping'
     | 'post_engagement'
     | 'owned_account_growth'
     | 'ugc_content'
     | 'local_activation'
+    | 'data_capture'
     | 'other'
     | null;
 
   /**
-   * An optional experience to scope the bounty to.
+   * When the bounty was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Currency for all amounts on the bounty, as a lowercase ISO 4217 code.
+   */
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'cny'
+    | 'kzt'
+    | 'awg';
+
+  /**
+   * Full task instructions shown to workers.
+   */
+  description: string;
+
+  /**
+   * Experience the bounty is hosted in, prefixed `exp_`. `null` for platform-wide
+   * bounties; may belong to a different account than the funder.
+   */
+  experience_id: string | null;
+
+  /**
+   * Account whose balance funds the bounty pool, or `null` when a user funds it
+   * personally. May differ from the account hosting `experience_id`.
+   */
+  funding_account: Bounty.FundingAccount | null;
+
+  /**
+   * Gross amount paid out from the bounty pool across accepted submissions — worker
+   * payouts, platform fees, and affiliate shares together. Tips and reviewer rewards
+   * are excluded.
+   */
+  gross_paid_out_amount: number;
+
+  /**
+   * Gross bounty-pool amount allocated per accepted submission, in whole currency
+   * units.
+   */
+  gross_reward_amount: number;
+
+  /**
+   * User who posted the bounty — the account owner when created with an account API
+   * key.
+   */
+  poster: Bounty.Poster;
+
+  /**
+   * How often the schedule creates a new bounty. Each occurrence is a separate
+   * bounty; the original is not republished.
+   */
+  scheduled_frequency: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly' | null;
+
+  /**
+   * When a scheduled bounty will publish, as an ISO 8601 timestamp. `null` once
+   * published, for bounties that were never scheduled, and for terminally failed
+   * drafts parked for manual rescheduling.
+   */
+  scheduled_publish_at: string | null;
+
+  /**
+   * Unfilled winner capacity: `accepted_submissions_limit` minus
+   * `accepted_submissions_count`, clamped to zero. Not a signal that the bounty
+   * currently accepts new claims.
+   */
+  spots_remaining: number;
+
+  /**
+   * Lifecycle state. `scheduled` bounties are unpublished drafts, visible to their
+   * poster and the account's authorized managers; `open` bounties accept new
+   * submissions; `closed` bounties are live but no longer accept new submissions;
+   * `completed` bounties paid out every winner slot; `canceled` bounties ended
+   * before filling their slots.
+   */
+  status: 'scheduled' | 'open' | 'closed' | 'completed' | 'canceled';
+
+  /**
+   * When new submissions were explicitly stopped, as an ISO 8601 timestamp. `null`
+   * when submissions were never explicitly stopped — including closed or completed
+   * bounties that simply filled every winner slot.
+   */
+  submissions_closed_at: string | null;
+
+  /**
+   * Short name of the task shown to workers.
+   */
+  title: string;
+
+  /**
+   * Submissions still awaiting an outcome: in progress or pending review.
+   */
+  unresolved_submissions_count: number;
+
+  /**
+   * When the bounty was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+}
+
+export namespace Bounty {
+  /**
+   * Account whose balance funds the bounty pool, or `null` when a user funds it
+   * personally. May differ from the account hosting `experience_id`.
+   */
+  export interface FundingAccount {
+    /**
+     * Account ID, prefixed `biz_`.
+     */
+    id: string;
+
+    /**
+     * Account display name.
+     */
+    title: string;
+  }
+
+  /**
+   * User who posted the bounty — the account owner when created with an account API
+   * key.
+   */
+  export interface Poster {
+    /**
+     * User ID, prefixed `user_`.
+     */
+    id: string;
+
+    /**
+     * Display name.
+     */
+    name: string | null;
+
+    /**
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    profile_picture: Poster.ProfilePicture;
+
+    /**
+     * Public username.
+     */
+    username: string;
+  }
+
+  export namespace Poster {
+    /**
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    export interface ProfilePicture {
+      /**
+       * Avatar image URL. Always present — a generated placeholder when the user set no
+       * picture.
+       */
+      url: string;
+    }
+  }
+}
+
+export interface BountyListItem {
+  /**
+   * Bounty ID, prefixed `bnty_`.
+   */
+  id: string;
+
+  accepted_deliverable_types: Array<'content_url' | 'media'>;
+
+  /**
+   * Submissions accepted so far.
+   */
+  accepted_submissions_count: number;
+
+  /**
+   * Number of submissions that can be accepted (winner slots).
+   */
+  accepted_submissions_limit: number;
+
+  allowed_country_codes: Array<string>;
+
+  /**
+   * Total gross budget committed to the bounty: `gross_reward_amount` times
+   * `accepted_submissions_limit`.
+   */
+  budget_amount: number;
+
+  /**
+   * What the poster wants the work to achieve. Determines which deliverable types
+   * the bounty accepts through the submissions API. `null` for bounties created
+   * before the taxonomy rolled out.
+   */
+  business_goal_type:
+    | 'clipping'
+    | 'post_engagement'
+    | 'owned_account_growth'
+    | 'ugc_content'
+    | 'local_activation'
+    | 'data_capture'
+    | 'other'
+    | null;
+
+  /**
+   * When the bounty was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Currency for all amounts on the bounty, as a lowercase ISO 4217 code.
+   */
+  currency: string;
+
+  /**
+   * Experience the bounty is hosted in, prefixed `exp_`. `null` for platform-wide
+   * bounties; may belong to a different account than the funder.
+   */
+  experience_id: string | null;
+
+  /**
+   * Account whose balance funds the bounty pool, or `null` when a user funds it
+   * personally. May differ from the account hosting `experience_id`.
+   */
+  funding_account: BountyListItem.FundingAccount | null;
+
+  /**
+   * Gross amount paid out from the bounty pool across accepted submissions — worker
+   * payouts, platform fees, and affiliate shares together. Tips and reviewer rewards
+   * are excluded.
+   */
+  gross_paid_out_amount: number;
+
+  /**
+   * Gross bounty-pool amount allocated per accepted submission, in whole currency
+   * units.
+   */
+  gross_reward_amount: number;
+
+  /**
+   * User who posted the bounty — the account owner when created with an account API
+   * key.
+   */
+  poster: BountyListItem.Poster;
+
+  /**
+   * How often the schedule creates a new bounty. Each occurrence is a separate
+   * bounty; the original is not republished.
+   */
+  scheduled_frequency: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly' | null;
+
+  /**
+   * When a scheduled bounty will publish, as an ISO 8601 timestamp. `null` once
+   * published, for bounties that were never scheduled, and for terminally failed
+   * drafts parked for manual rescheduling.
+   */
+  scheduled_publish_at: string | null;
+
+  /**
+   * Unfilled winner capacity: `accepted_submissions_limit` minus
+   * `accepted_submissions_count`, clamped to zero. Not a signal that the bounty
+   * currently accepts new claims.
+   */
+  spots_remaining: number;
+
+  /**
+   * Lifecycle state. `scheduled` bounties are unpublished drafts, visible to their
+   * poster and the account's authorized managers; `open` bounties accept new
+   * submissions; `closed` bounties are live but no longer accept new submissions;
+   * `completed` bounties paid out every winner slot; `canceled` bounties ended
+   * before filling their slots.
+   */
+  status: 'scheduled' | 'open' | 'closed' | 'completed' | 'canceled';
+
+  /**
+   * When new submissions were explicitly stopped, as an ISO 8601 timestamp. `null`
+   * when submissions were never explicitly stopped — including closed or completed
+   * bounties that simply filled every winner slot.
+   */
+  submissions_closed_at: string | null;
+
+  /**
+   * Short name of the task shown to workers.
+   */
+  title: string;
+
+  /**
+   * Submissions still awaiting an outcome: in progress or pending review.
+   */
+  unresolved_submissions_count: number;
+
+  /**
+   * When the bounty was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+}
+
+export namespace BountyListItem {
+  /**
+   * Account whose balance funds the bounty pool, or `null` when a user funds it
+   * personally. May differ from the account hosting `experience_id`.
+   */
+  export interface FundingAccount {
+    /**
+     * Account ID, prefixed `biz_`.
+     */
+    id: string;
+
+    /**
+     * Account display name.
+     */
+    title: string;
+  }
+
+  /**
+   * User who posted the bounty — the account owner when created with an account API
+   * key.
+   */
+  export interface Poster {
+    /**
+     * User ID, prefixed `user_`.
+     */
+    id: string;
+
+    /**
+     * Display name.
+     */
+    name: string | null;
+
+    /**
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    profile_picture: Poster.ProfilePicture;
+
+    /**
+     * Public username.
+     */
+    username: string;
+  }
+
+  export namespace Poster {
+    /**
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    export interface ProfilePicture {
+      /**
+       * Avatar image URL. Always present — a generated placeholder when the user set no
+       * picture.
+       */
+      url: string;
+    }
+  }
+}
+
+export interface BountyListParams extends CursorPageParams {
+  /**
+   * Scope the list to this account (`biz_` tag). Requires read access to the
+   * account; account API keys may pass their own account or a connected account.
+   */
+  account_id?: string;
+
+  /**
+   * Cursor to paginate backwards from.
+   */
+  before?: string;
+
+  /**
+   * Only bounties created after this ISO 8601 timestamp.
+   */
+  created_after?: string;
+
+  /**
+   * Only bounties created before this ISO 8601 timestamp.
+   */
+  created_before?: string;
+
+  /**
+   * Sort direction.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Number of bounties to return from the start of the window.
+   */
+  first?: number;
+
+  /**
+   * Number of bounties to return from the end of the window.
+   */
+  last?: number;
+
+  /**
+   * Sort field.
+   */
+  order?: 'created_at' | 'gross_paid_out_amount';
+
+  /**
+   * Substring match on the bounty title or ID.
+   */
+  query?: string;
+
+  /**
+   * Filter by lifecycle state.
+   */
+  status?: 'scheduled' | 'open' | 'closed' | 'completed' | 'canceled';
+
+  /**
+   * List the bounties this user participated in (`user_` tag). Must be the
+   * authenticated user.
+   */
+  user_id?: string;
+}
+
+export interface BountyCreateParams {
+  /**
+   * Body param: Full task instructions shown to workers.
+   */
+  description: string;
+
+  /**
+   * Body param: Gross bounty-pool amount (USD) escrowed per accepted submission, in
+   * whole dollars. Platform fees and affiliate shares are paid from this amount.
+   */
+  gross_reward_amount: number;
+
+  /**
+   * Body param: Short name of the task shown to workers.
+   */
+  title: string;
+
+  /**
+   * Body param: Number of submissions that can be accepted (winner slots). Defaults
+   * to 1. The escrowed total is `gross_reward_amount` times this limit and must be
+   * at least $5.
+   */
+  accepted_submissions_limit?: number | null;
+
+  /**
+   * Body param: Account whose balance funds the bounty pool (`biz_` tag). Defaults
+   * to the caller's personal balance. Requires permission to move the account's
+   * funds.
+   */
+  account_id?: string | null;
+
+  /**
+   * Body param: Countries whose residents can work the bounty, as ISO 3166 alpha-2
+   * codes. Empty means worldwide.
+   */
+  allowed_country_codes?: Array<string> | null;
+
+  /**
+   * Body param: Experience to host the bounty in (`exp_` tag). Any visibility —
+   * public for an open bounty, private for an invited one. Required unless
+   * account_id is set, in which case the bounty anchors in that account's public
+   * forum.
    */
   experience_id?: string | null;
 
   /**
-   * The user (user*\*) or company (biz*\*) tag whose balance funds this bounty pool.
-   * Defaults to the requester's personal balance when omitted. The requester must be
-   * the user themself or an owner/admin of the company.
+   * Body param: How often the schedule creates a new bounty. Each occurrence is a
+   * separate bounty. Defaults to `once`; only applies with `publish_at`.
    */
-  origin_account_id?: string | null;
+  frequency?: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly';
 
   /**
-   * Optional markdown body for the anchor forum post. Falls back to the bounty
-   * description when omitted.
+   * Body param: ISO 8601 time to publish the bounty. When set, the bounty is created
+   * as a hidden draft and funded + published at this time instead of immediately.
    */
-  post_markdown_content?: string | null;
+  publish_at?: string | null;
 
   /**
-   * Optional title for the anchor forum post. Falls back to the bounty title when
-   * omitted.
+   * Body param: IANA timezone for recurring occurrences. Required when publish_at is
+   * set.
    */
-  post_title?: string | null;
+  publish_at_timezone?: string | null;
 
   /**
-   * How often a scheduled bounty republishes a new bounty.
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
-  scheduled_frequency?: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly' | null;
+  'Idempotency-Key'?: string;
+}
+
+export interface BountyUpdateParams {
+  /**
+   * Scheduled drafts only. Number of submissions that can be accepted (winner
+   * slots).
+   */
+  accepted_submissions_limit?: number | null;
 
   /**
-   * When to publish the bounty. When provided, the bounty is created as a hidden
-   * draft and published at this time instead of immediately. Must be in the future.
+   * Replace the countries whose residents can work the bounty, as ISO 3166 alpha-2
+   * codes. Empty means worldwide.
    */
-  scheduled_publish_at?: string | null;
+  allowed_country_codes?: Array<string> | null;
 
   /**
-   * The IANA timezone used for recurring occurrences. Required when
-   * scheduled_publish_at is provided.
+   * New full task instructions.
    */
-  scheduled_timezone?: string | null;
+  description?: string;
+
+  /**
+   * Scheduled drafts only. How often the schedule creates a new bounty.
+   */
+  frequency?: 'once' | 'hourly' | 'daily' | 'weekly' | 'monthly';
+
+  /**
+   * Scheduled drafts only. Gross bounty-pool amount (USD) escrowed per accepted
+   * submission. The escrowed total (this times accepted_submissions_limit) must stay
+   * at least $5.
+   */
+  gross_reward_amount?: number | null;
+
+  /**
+   * Scheduled drafts only. New ISO 8601 time to publish the draft. Must be in the
+   * future.
+   */
+  publish_at?: string | null;
+
+  /**
+   * Scheduled drafts only. IANA timezone for recurring occurrences.
+   */
+  publish_at_timezone?: string | null;
+
+  /**
+   * New short name of the task.
+   */
+  title?: string;
 }
 
 export declare namespace Bounties {
   export {
-    type BountyCreateResponse as BountyCreateResponse,
-    type BountyRetrieveResponse as BountyRetrieveResponse,
-    type BountyListResponse as BountyListResponse,
-    type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
+    type Bounty as Bounty,
+    type BountyListItem as BountyListItem,
+    type BountyListItemsCursorPage as BountyListItemsCursorPage,
     type BountyListParams as BountyListParams,
     type BountyCreateParams as BountyCreateParams,
+    type BountyUpdateParams as BountyUpdateParams,
   };
 }

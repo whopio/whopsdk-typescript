@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../core/resource';
+import { APIPromise } from '../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
 /**
@@ -23,9 +25,79 @@ export class Methods extends APIResource {
   ): PagePromise<MethodListResponsesCursorPage, MethodListResponse> {
     return this._client.getAPIList('/payouts/methods', CursorPage<MethodListResponse>, { query, ...options });
   }
+
+  /**
+   * Saves a new payout method for an account or user by submitting the destination's
+   * required fields, keyed by field id (list them with GET
+   * /payouts/methods?destination_id=...). Sensitive values are vaulted in transit
+   * and never stored raw; a Basis Theory token id may be passed in place of a raw
+   * value. The created method is immediately usable as payout_method_id on POST
+   * /payouts. A field validation failure returns the destination's full
+   * required_fields schema alongside the error.
+   */
+  create(params: MethodCreateParams, options?: RequestOptions): APIPromise<MethodCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/payouts/methods', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type MethodListResponsesCursorPage = CursorPage<MethodListResponse>;
+
+export interface MethodCreateResponse {
+  /**
+   * Payout method ID, usable as payout_method_id on POST /payouts.
+   */
+  id: string;
+
+  /**
+   * Masked identifier for the destination.
+   */
+  account_reference: string | null;
+
+  created_at: string;
+
+  destination_currency: string;
+
+  institution_name: string | null;
+
+  is_default: boolean;
+
+  nickname: string | null;
+
+  object: 'payout_method';
+
+  payer_name: string | null;
+
+  payout_destination: MethodCreateResponse.PayoutDestination | null;
+
+  /**
+   * Always null on create.
+   */
+  quote: unknown | null;
+
+  status: 'created' | 'active' | 'broken';
+}
+
+export namespace MethodCreateResponse {
+  export interface PayoutDestination {
+    delivery_type: string;
+
+    icon_url: string | null;
+
+    name: string | null;
+
+    supports_instant_delivery: boolean;
+
+    supports_standard_delivery: boolean;
+  }
+}
 
 export interface MethodListResponse {
   /**
@@ -228,6 +300,19 @@ export interface MethodListParams extends CursorPageParams {
   currency?: string;
 
   /**
+   * Currency the destination would deliver payouts in. Only meaningful with
+   * destination_id; required fields vary by destination currency.
+   */
+  destination_currency?: string;
+
+  /**
+   * Narrows available*destinations to this one destination (a pd* identifier from a
+   * previous listing) and includes its required_fields — the values to collect to
+   * add it as a payout method. Implies include_available.
+   */
+  destination_id?: string;
+
+  /**
    * Number of payout methods to return from the start of the window. Capped at 25
    * when an amount is provided.
    */
@@ -258,10 +343,58 @@ export interface MethodListParams extends CursorPageParams {
   user_id?: string;
 }
 
+export interface MethodCreateParams {
+  /**
+   * Body param: The payout destination to add (a pd\_ identifier from a previous
+   * listing).
+   */
+  destination_id: string;
+
+  /**
+   * Body param: The destination's required field values, keyed by field id.
+   */
+  fields: { [key: string]: string };
+
+  /**
+   * Body param: A label for the payout method, unique per destination.
+   */
+  nickname: string;
+
+  /**
+   * Body param: The account to add the payout method for (a biz\_ identifier).
+   * Provide this or user_id.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Currency the destination delivers payouts in.
+   */
+  destination_currency?: string;
+
+  /**
+   * Body param: Whether to make this the account's default payout method.
+   */
+  is_default?: boolean;
+
+  /**
+   * Body param: The user to add the payout method for (a user\_ identifier). Provide
+   * this or account_id.
+   */
+  user_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export declare namespace Methods {
   export {
+    type MethodCreateResponse as MethodCreateResponse,
     type MethodListResponse as MethodListResponse,
     type MethodListResponsesCursorPage as MethodListResponsesCursorPage,
     type MethodListParams as MethodListParams,
+    type MethodCreateParams as MethodCreateParams,
   };
 }

@@ -3,30 +3,31 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 
 /**
  * An Event records conversion or engagement activity for an account, such as page views, purchases, or leads. Each event ties the action to the [person](/api-reference/beta/people/person) who took it, so activity can be attributed to the ads and links that drove it.
  *
- * Use the Events API to send new tracking events and list the events recorded for a person.
+ * Use the Events API to send new tracking events, list recent identity-linked events for an account, and inspect the events recorded for a person.
  */
 export class Events extends APIResource {
   /**
-   * Lists pixel events for a person, most recent first. Events are shaped like the
-   * POST /events intake: attribution in context, identity in user.
+   * Lists identity-linked events, most recent first. Pass identifier for one
+   * person's journey, or omit it to list events for an account within an explicit
+   * time range. Events are shaped like the POST /events intake: attribution in
+   * context, identity in user.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const eventListResponse of client.events.list({
-   *   person_id: 'person_id',
-   * })) {
+   * for await (const eventListResponse of client.events.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: EventListParams,
+    query: EventListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<EventListResponsesCursorPage, EventListResponse> {
     return this._client.getAPIList('/events', CursorPage<EventListResponse>, { query, ...options });
@@ -39,12 +40,20 @@ export class Events extends APIResource {
    * ```ts
    * const event = await client.events.create({
    *   account_id: 'account_id',
-   *   event_name: 'lead',
+   *   event_name: 'course_completed',
    * });
    * ```
    */
-  create(body: EventCreateParams, options?: RequestOptions): APIPromise<EventCreateResponse> {
-    return this._client.post('/events', { body, ...options });
+  create(params: EventCreateParams, options?: RequestOptions): APIPromise<EventCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/events', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -61,7 +70,9 @@ export interface EventListResponse {
 
   event_name: string;
 
-  event_time: number;
+  event_time: string;
+
+  person_id: string;
 
   context?: EventListResponse.Context | null;
 
@@ -74,6 +85,12 @@ export interface EventListResponse {
   questions?: Array<EventListResponse.Question> | null;
 
   referrer_url?: string | null;
+
+  /**
+   * Hydrated details for the records this event references. Only present keys
+   * resolved.
+   */
+  related?: EventListResponse.Related | null;
 
   total_usd_amount?: number | null;
 
@@ -117,6 +134,88 @@ export namespace EventListResponse {
     type?: string | null;
   }
 
+  /**
+   * Hydrated details for the records this event references. Only present keys
+   * resolved.
+   */
+  export interface Related {
+    account?: Related.Account | null;
+
+    app?: Related.App | null;
+
+    payment?: Related.Payment | null;
+
+    plan?: Related.Plan | null;
+
+    product?: Related.Product | null;
+
+    user?: Related.User | null;
+  }
+
+  export namespace Related {
+    export interface Account {
+      id?: string;
+
+      logo_url?: string | null;
+
+      route?: string | null;
+
+      title?: string | null;
+    }
+
+    export interface App {
+      id?: string;
+
+      domain_id?: string | null;
+
+      icon_url?: string | null;
+
+      title?: string | null;
+    }
+
+    export interface Payment {
+      id?: string;
+
+      card_brand?: string | null;
+
+      card_last4?: string | null;
+
+      provider?: string | null;
+    }
+
+    export interface Plan {
+      id?: string;
+
+      billing_period?: number | null;
+
+      currency?: string | null;
+
+      initial_price?: number | null;
+
+      renewal_price?: number | null;
+
+      title?: string | null;
+    }
+
+    export interface Product {
+      id?: string;
+
+      route?: string | null;
+
+      title?: string | null;
+    }
+
+    export interface User {
+      id?: string;
+
+      avatar_url?: string | null;
+
+      name?: string | null;
+
+      username?: string | null;
+    }
+  }
+
   export interface User {
     city?: string | null;
 
@@ -131,17 +230,10 @@ export namespace EventListResponse {
     name?: string | null;
 
     phone?: string | null;
-
-    state?: string | null;
   }
 }
 
 export interface EventListParams extends CursorPageParams {
-  /**
-   * The ID of the person.
-   */
-  person_id: string;
-
   /**
    * The ID of the account, which will look like biz\_******\*******. Optional for
    * account API keys; required for credentials that can access multiple accounts.
@@ -159,38 +251,42 @@ export interface EventListParams extends CursorPageParams {
   first?: number;
 
   /**
-   * Start of the time range as a Unix timestamp.
+   * Start of the time range as an ISO 8601 timestamp. Required when identifier is
+   * omitted.
    */
-  from?: number;
+  from?: string;
 
   /**
-   * End of the time range as a Unix timestamp. Defaults to now.
+   * Any hard identifier of the person: a person ID (prsn\_\*), user ID, email, phone
+   * number, or a tracking cookie value (wuid, anonymous ID, fbp/fbc/ttp/ga). Omit to
+   * list recent events for the account.
    */
-  to?: number;
+  identifier?: string;
+
+  /**
+   * End of the time range as an ISO 8601 timestamp. Required when identifier is
+   * omitted; otherwise defaults to now.
+   */
+  to?: string;
 }
 
 export interface EventCreateParams {
   /**
-   * The account to associate with this event.
+   * Body param: The account to associate with this event.
    */
   account_id: string;
 
   /**
-   * The type of conversion or engagement event
+   * Body param: The type of event.
+   *
+   * Use a standard event (lead, submit_application, contact, complete_registration,
+   * schedule, view_content, add_to_cart) or pass your own name directly for a custom
+   * event.
    */
-  event_name:
-    | 'lead'
-    | 'submit_application'
-    | 'contact'
-    | 'complete_registration'
-    | 'schedule'
-    | 'view_content'
-    | 'add_to_cart'
-    | 'custom'
-    | 'page';
+  event_name: string;
 
   /**
-   * The channel where an event originated
+   * Body param: The channel where an event originated
    */
   action_source?:
     | 'email'
@@ -205,12 +301,12 @@ export interface EventCreateParams {
     | null;
 
   /**
-   * Tracking and attribution context.
+   * Body param: Tracking and attribution context.
    */
   context?: EventCreateParams.Context | null;
 
   /**
-   * The available currencies on the platform
+   * Body param: The available currencies on the platform
    */
   currency?:
     | 'usd'
@@ -306,70 +402,78 @@ export interface EventCreateParams {
     | null;
 
   /**
-   * Custom event name when event_name is 'custom'. Maximum 35 chars for this value.
+   * Body param: Custom event name when event_name is 'custom'. Maximum 35 chars for
+   * this value.
    */
   custom_name?: string | null;
 
   /**
-   * For 'leave' events: milliseconds the visitor spent on the page.
+   * Body param: For 'leave' events: milliseconds the visitor spent on the page.
    */
   duration?: number | null;
 
   /**
-   * Client-provided identifier for deduplication. Generated if omitted.
+   * Body param: Client-provided identifier for deduplication. Generated if omitted.
    */
   event_id?: string | null;
 
   /**
-   * When the event occurred. Defaults to now.
+   * Body param: When the event occurred. Defaults to now.
    */
   event_time?: string | null;
 
   /**
-   * The plan associated with the event.
+   * Body param: The plan associated with the event.
    */
   plan_id?: string | null;
 
   /**
-   * The product associated with the event.
+   * Body param: The product associated with the event.
    */
   product_id?: string | null;
 
   /**
-   * The referring URL.
+   * Body param: The referring URL.
    */
   referrer_url?: string | null;
 
   /**
-   * For 'page' events: true when the page was restored from the back/forward cache.
+   * Body param: For 'page' events: true when the page was restored from the
+   * back/forward cache.
    */
   resumed?: boolean | null;
 
   /**
-   * For 'identify' events: where the identity was captured (url, form, manual,
-   * iframe).
+   * Body param: For 'identify' events: where the identity was captured (url, form,
+   * manual, iframe).
    */
   source?: string | null;
 
   /**
-   * For 'page' events: the document title.
+   * Body param: For 'page' events: the document title.
    */
   title?: string | null;
 
   /**
-   * The URL where the event occurred.
+   * Body param: The URL where the event occurred.
    */
   url?: string | null;
 
   /**
-   * User identity and profile data.
+   * Body param: User identity and profile data.
    */
   user?: EventCreateParams.User | null;
 
   /**
-   * Monetary value associated with the event.
+   * Body param: Monetary value associated with the event.
    */
   value?: number | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace EventCreateParams {

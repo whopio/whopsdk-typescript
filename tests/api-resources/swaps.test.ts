@@ -36,6 +36,7 @@ describe('resource swaps', () => {
       slippage_bps: 0,
       to_address: 'to_address',
       to_chain: 'string',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
@@ -66,6 +67,7 @@ describe('resource swaps', () => {
       from_chain: 'string',
       slippage_bps: 0,
       to_chain: 'string',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 

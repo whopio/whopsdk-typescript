@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.list({ company_id: 'company_id' });
+    const responsePromise = client.checkoutConfigurations.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.checkoutConfigurations.list({
-      company_id: 'company_id',
+      account_id: 'account_id',
       after: 'after',
       created_after: 0,
       created_before: 0,
@@ -52,8 +52,8 @@ describe('resource checkoutConfigurations', () => {
     await expect(
       client.checkoutConfigurations.create(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           affiliate_code: 'affiliate_code',
-          company_id: 'biz_xxxxxxxxxxxxxx',
           currency: 'currency',
           metadata: {},
           mode: 'payment',
@@ -63,8 +63,8 @@ describe('resource checkoutConfigurations', () => {
             include_platform_defaults: true,
           },
           plan: {
+            account_id: 'account_id',
             billing_period: 0,
-            company_id: 'company_id',
             currency: 'currency',
             description: 'description',
             expiration_days: 0,
@@ -90,6 +90,7 @@ describe('resource checkoutConfigurations', () => {
           plan_id: 'plan_xxxxxxxxxxxxx',
           redirect_url: 'redirect_url',
           three_ds_level: 'three_ds_level',
+          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
       ),
