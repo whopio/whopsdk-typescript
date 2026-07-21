@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource products', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.products.list({ company_id: 'company_id' });
+    const responsePromise = client.products.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,7 +23,7 @@ describe('resource products', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.products.list({
-      company_id: 'company_id',
+      account_id: 'account_id',
       access_pass_types: ['string'],
       after: 'after',
       before: 'before',
@@ -63,8 +63,8 @@ describe('resource products', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.products.create({
       title: 'title',
+      account_id: 'account_id',
       collect_shipping_address: true,
-      company_id: 'company_id',
       custom_cta: 'custom_cta',
       custom_cta_url: 'custom_cta_url',
       custom_statement_descriptor: 'custom_statement_descriptor',
@@ -80,6 +80,7 @@ describe('resource products', () => {
       route: 'route',
       send_welcome_message: true,
       visibility: 'visibility',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 

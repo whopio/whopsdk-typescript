@@ -10,6 +10,7 @@ import {
 } from './preferences';
 import { APIPromise } from '../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 import { path } from '../../internal/utils/path';
 
@@ -39,8 +40,16 @@ export class Accounts extends APIResource {
    * `product_tax_code_id`, `business_address`, `tax_identifiers`) are configured
    * with Update Account, not at creation.
    */
-  create(body: AccountCreateParams, options?: RequestOptions): APIPromise<Account> {
-    return this._client.post('/accounts', { body, ...options });
+  create(params: AccountCreateParams, options?: RequestOptions): APIPromise<Account> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/accounts', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -75,6 +84,29 @@ export class Accounts extends APIResource {
   recommendActions(accountID: string, options?: RequestOptions): APIPromise<AccountRecommendActionsResponse> {
     return this._client.get(path`/accounts/${accountID}/recommend_actions`, options);
   }
+
+  /**
+   * Starts an LLC formation for a business account. On submission, the application
+   * is validated and the response returns a hosted checkout URL. Once paid, the
+   * filing is submitted. Track progress through the account's
+   * [`llc_formation`](/api-reference/beta/accounts/retrieve-account) field on
+   * Retrieve Account.
+   */
+  registerLlc(
+    accountID: string,
+    params: AccountRegisterLlcParams,
+    options?: RequestOptions,
+  ): APIPromise<AccountRegisterLlcResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post(path`/accounts/${accountID}/llc`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type AccountsCursorPage = CursorPage<Account>;
@@ -99,7 +131,9 @@ export interface Account {
   business_address: unknown | null;
 
   /**
-   * High-level business category for the account.
+   * High-level business category for the account. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   business_type: string | null;
 
@@ -133,12 +167,16 @@ export interface Account {
   home_preferences: Array<string>;
 
   /**
-   * Account industry group.
+   * Account industry group. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   industry_group: string | null;
 
   /**
-   * Specific industry vertical for the account.
+   * Specific industry vertical for the account. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   industry_type: string | null;
 
@@ -146,6 +184,15 @@ export interface Account {
    * Prefix used for account invoices.
    */
   invoice_prefix: string | null;
+
+  /**
+   * LLC formation state for the account, managed through
+   * [Register LLC](/api-reference/beta/accounts/register-llc). A `draft` `status`
+   * until the formation checkout is paid, then filing progress with downloadable
+   * documents and signatures awaiting action. Empty when the formation state is
+   * temporarily unavailable.
+   */
+  llc_formation: Account.LlcFormation;
 
   /**
    * Account logo image URL.
@@ -186,6 +233,13 @@ export interface Account {
    * Parent account ID for connected accounts.
    */
   parent_account_id: string | null;
+
+  /**
+   * Payment health controls currently applied to the account. Computed only on
+   * `retrieve` and `me` for callers with `company:balance:read` scope; `null`
+   * otherwise.
+   */
+  payment_controls: Account.PaymentControls | null;
 
   /**
    * Tax classification code applied by default to the account's products, with `id`,
@@ -248,6 +302,8 @@ export interface Account {
    * Target audience for this account.
    */
   target_audience: string | null;
+
+  tax_collection_enabled_states: Array<string>;
 
   /**
    * Account tax/VAT registrations, each with `id`, `tax_id_type`, and
@@ -405,6 +461,251 @@ export namespace Account {
   }
 
   /**
+   * LLC formation state for the account, managed through
+   * [Register LLC](/api-reference/beta/accounts/register-llc). A `draft` `status`
+   * until the formation checkout is paid, then filing progress with downloadable
+   * documents and signatures awaiting action. Empty when the formation state is
+   * temporarily unavailable.
+   */
+  export interface LlcFormation {
+    documents?: Array<LlcFormation.Document>;
+
+    /**
+     * Whether the company's EIN has been issued by the IRS. Present once `status`
+     * leaves `draft`.
+     */
+    ein_registered?: boolean;
+
+    /**
+     * Registered company name including the entity ending, for example `Acme, LLC`.
+     * Present once `status` leaves `draft`.
+     */
+    legal_name?: string | null;
+
+    /**
+     * IRS forms still awaiting a founder's signature, each with a hosted signing URL.
+     * Present once `status` leaves `draft`; empty when nothing needs signing.
+     */
+    signatures?: LlcFormation.Signatures;
+
+    /**
+     * Whether the state formation filing is complete. Present once `status` leaves
+     * `draft`.
+     */
+    state_registered?: boolean;
+
+    status?: 'draft' | 'processing' | 'filed' | 'rejected' | 'completed';
+
+    [k: string]: unknown;
+  }
+
+  export namespace LlcFormation {
+    /**
+     * Formation documents available for download, such as the Articles of Organization
+     * and the EIN confirmation letter. Present once `status` leaves `draft`.
+     */
+    export interface Document {
+      /**
+       * Document ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * Human-readable document name, such as `Articles of Organization`.
+       */
+      name: string;
+
+      /**
+       * Document category: `articles_of_organization`, `operating_agreement`,
+       * `ein_letter`, `signed_ss4`, `signed_form8821`, or `mail` for postal
+       * correspondence received on the company's behalf.
+       */
+      type: string;
+
+      /**
+       * CDN URL for downloading the document.
+       */
+      url: string;
+    }
+
+    /**
+     * IRS forms still awaiting a founder's signature, each with a hosted signing URL.
+     * Present once `status` leaves `draft`; empty when nothing needs signing.
+     */
+    export interface Signatures {
+      /**
+       * Signature state for IRS Form 8821, the tax information authorization. Present
+       * only while the form still needs the founder's action.
+       */
+      form8821?: Signatures.Form8821;
+
+      /**
+       * Signature state for IRS Form SS-4, the EIN application. Present only while the
+       * form still needs the founder's action.
+       */
+      ss4?: Signatures.Ss4;
+
+      [k: string]: unknown;
+    }
+
+    export namespace Signatures {
+      /**
+       * Signature state for IRS Form 8821, the tax information authorization. Present
+       * only while the form still needs the founder's action.
+       */
+      export interface Form8821 {
+        /**
+         * `pending` when a signing session is ready for the founder; `unknown` when the
+         * signature state could not be determined.
+         */
+        status: 'pending' | 'unknown';
+
+        /**
+         * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
+         * is `pending`.
+         */
+        expires_at?: string;
+
+        /**
+         * Hosted signing URL where the founder completes the form. Present while `status`
+         * is `pending`.
+         */
+        url?: string;
+      }
+
+      /**
+       * Signature state for IRS Form SS-4, the EIN application. Present only while the
+       * form still needs the founder's action.
+       */
+      export interface Ss4 {
+        /**
+         * `pending` when a signing session is ready for the founder; `unknown` when the
+         * signature state could not be determined.
+         */
+        status: 'pending' | 'unknown';
+
+        /**
+         * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
+         * is `pending`.
+         */
+        expires_at?: string;
+
+        /**
+         * Hosted signing URL where the founder completes the form. Present while `status`
+         * is `pending`.
+         */
+        url?: string;
+      }
+    }
+  }
+
+  /**
+   * Payment health controls currently applied to the account. Computed only on
+   * `retrieve` and `me` for callers with `company:balance:read` scope; `null`
+   * otherwise.
+   */
+  export interface PaymentControls {
+    /**
+     * Automatic refund settings for pre-chargeback dispute alerts.
+     */
+    dispute_alert_auto_refund: PaymentControls.DisputeAlertAutoRefund;
+
+    /**
+     * Fee charged for each dispute alert in USD. `null` when unavailable.
+     */
+    dispute_alert_fee_usd: number | null;
+
+    /**
+     * Whether payment health controls explicitly disable financing. This is
+     * independent of financing approval in `capabilities.accept_bnpl_payments`.
+     */
+    financing_disabled: boolean;
+
+    /**
+     * Additional processing fee percentage for high-risk processing. Currently `0` for
+     * all accounts.
+     */
+    high_risk_processing_fee_percentage: number;
+
+    /**
+     * Additional days payments remain pending before becoming available.
+     */
+    pending_balance_delay_days: number;
+
+    /**
+     * Reserve currently applied to incoming payment volume.
+     */
+    reserve: PaymentControls.Reserve;
+
+    /**
+     * Automatic refund settings for resolution center cases.
+     */
+    resolution_center_auto_refund: PaymentControls.ResolutionCenterAutoRefund;
+  }
+
+  export namespace PaymentControls {
+    /**
+     * Automatic refund settings for pre-chargeback dispute alerts.
+     */
+    export interface DisputeAlertAutoRefund {
+      /**
+       * Whether the account owner is prevented from changing this threshold.
+       */
+      locked: boolean;
+
+      /**
+       * Maximum dispute alert amount automatically refunded in USD. `null` when
+       * automatic refunds are disabled.
+       */
+      threshold_usd: number | null;
+    }
+
+    /**
+     * Reserve currently applied to incoming payment volume.
+     */
+    export interface Reserve {
+      /**
+       * Number of days reserved funds are held before release.
+       */
+      hold_period_days: number;
+
+      /**
+       * Percentage of incoming payment volume held in reserve. `null` when no reserve is
+       * applied.
+       */
+      percentage: number | null;
+    }
+
+    /**
+     * Automatic refund settings for resolution center cases.
+     */
+    export interface ResolutionCenterAutoRefund {
+      /**
+       * Maximum card-funded resolution center case amount automatically refunded in USD.
+       * `null` when automatic refunds are disabled for cards.
+       */
+      card_threshold_usd: number | null;
+
+      /**
+       * Maximum financing-funded resolution center case amount automatically refunded in
+       * USD. `null` when automatic refunds are disabled for financing.
+       */
+      financing_threshold_usd: number | null;
+
+      /**
+       * Whether the account owner is prevented from changing these thresholds.
+       */
+      locked: boolean;
+
+      /**
+       * Maximum PayPal-funded resolution center case amount automatically refunded in
+       * USD. `null` when automatic refunds are disabled for PayPal.
+       */
+      paypal_threshold_usd: number | null;
+    }
+  }
+
+  /**
    * Deprecated: use the `GET /accounts/{account_id}/recommend_actions` endpoint
    * instead. Optional actions that unlock capabilities or grow the account, same
    * shape as `required_actions`. Computed only on `retrieve` and `me`; `null`
@@ -426,6 +727,12 @@ export namespace Account {
       | 'migrate_from_stripe'
       | 'accept_first_payment'
       | 'launch_first_ad'
+      | 'launch_draft_campaign'
+      | 'increase_ad_budget'
+      | 'refresh_ad_creatives'
+      | 'fix_ad_billing'
+      | 'exclude_customers_from_ads'
+      | 'retarget_abandoned_checkouts'
       | 'invite_team_member'
       | 'enable_tax_collection'
       | 'create_card'
@@ -455,13 +762,12 @@ export namespace Account {
     icon_url: string | null;
 
     /**
-     * Estimated revenue impact from 0-100, comparable across accounts, or `null` when
-     * not ranked
+     * Estimated impact from 0-100, or `null` when not ranked
      */
     impact_score: number | null;
 
     /**
-     * Why this action was recommended for this account, or `null`
+     * Why this action was recommended, or `null`
      */
     reasoning: string | null;
 
@@ -490,7 +796,8 @@ export namespace Account {
       | 'deposit_funds'
       | 'submit_information_request'
       | 'verify_identity'
-      | 'connect_fulfillment_tracker';
+      | 'connect_fulfillment_tracker'
+      | 'setup_apple_pay_domains';
 
     blocked_capabilities: Array<string>;
 
@@ -598,6 +905,12 @@ export namespace AccountRecommendActionsResponse {
       | 'migrate_from_stripe'
       | 'accept_first_payment'
       | 'launch_first_ad'
+      | 'launch_draft_campaign'
+      | 'increase_ad_budget'
+      | 'refresh_ad_creatives'
+      | 'fix_ad_billing'
+      | 'exclude_customers_from_ads'
+      | 'retarget_abandoned_checkouts'
       | 'invite_team_member'
       | 'enable_tax_collection'
       | 'create_card'
@@ -627,13 +940,12 @@ export namespace AccountRecommendActionsResponse {
     icon_url: string | null;
 
     /**
-     * Estimated revenue impact from 0-100, comparable across accounts, or `null` when
-     * not ranked
+     * Estimated impact from 0-100, or `null` when not ranked
      */
     impact_score: number | null;
 
     /**
-     * Why this action was recommended for this account, or `null`
+     * Why this action was recommended, or `null`
      */
     reasoning: string | null;
 
@@ -647,6 +959,29 @@ export namespace AccountRecommendActionsResponse {
      */
     title: string;
   }
+}
+
+export interface AccountRegisterLlcResponse {
+  /**
+   * Checkout session ID, prefixed `ch_`.
+   */
+  checkout_session_id: string;
+
+  /**
+   * Hosted checkout URL. Send the buyer here to pay for the formation; the filing is
+   * submitted once payment completes.
+   */
+  checkout_url: string;
+
+  /**
+   * Always `usd`.
+   */
+  currency: string;
+
+  /**
+   * Total due at checkout in USD cents.
+   */
+  total: number;
 }
 
 export interface AccountListParams extends CursorPageParams {
@@ -678,21 +1013,34 @@ export interface AccountListParams extends CursorPageParams {
 
 export interface AccountCreateParams {
   /**
-   * The email address of the account owner. Required for business account API key
-   * requests.
+   * Body param: The ISO 3166-1 alpha-2 country code where the account's business is
+   * located (e.g. `US`). Defaults to the parent account's country for connected
+   * accounts.
+   */
+  country?: string;
+
+  /**
+   * Body param: The email address of the account owner. Required for business
+   * account API key requests.
    */
   email?: string;
 
   /**
-   * Arbitrary key/value metadata to store on the account.
+   * Body param: Arbitrary key/value metadata to store on the account.
    */
   metadata?: { [key: string]: unknown };
 
   /**
-   * The display name of the account. Defaults to `metadata.external_id` or the
-   * owner's email when omitted.
+   * Body param: The display name of the account. Defaults to `metadata.external_id`
+   * or the owner's email when omitted.
    */
   title?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface AccountUpdateParams {
@@ -719,7 +1067,9 @@ export interface AccountUpdateParams {
   business_address?: AccountUpdateParams.BusinessAddress;
 
   /**
-   * High-level business category for the account.
+   * High-level business category for the account. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   business_type?: string | null;
 
@@ -744,12 +1094,16 @@ export interface AccountUpdateParams {
   home_preferences?: Array<string>;
 
   /**
-   * Account industry group.
+   * Account industry group. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   industry_group?: string | null;
 
   /**
-   * Specific industry vertical for the account.
+   * Specific industry vertical for the account. See the
+   * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary)
+   * for valid values.
    */
   industry_type?: string | null;
 
@@ -845,6 +1199,64 @@ export interface AccountUpdateParams {
    * The target audience for this account.
    */
   target_audience?: string | null;
+
+  /**
+   * US state codes (50 states plus `DC`) where the account collects tax. Replaces
+   * the full set on update. Only settable when `tax_remitted_by` is `self`.
+   */
+  tax_collection_enabled_states?: Array<
+    | 'AL'
+    | 'AK'
+    | 'AZ'
+    | 'AR'
+    | 'CA'
+    | 'CO'
+    | 'CT'
+    | 'DE'
+    | 'DC'
+    | 'FL'
+    | 'GA'
+    | 'HI'
+    | 'ID'
+    | 'IL'
+    | 'IN'
+    | 'IA'
+    | 'KS'
+    | 'KY'
+    | 'LA'
+    | 'ME'
+    | 'MD'
+    | 'MA'
+    | 'MI'
+    | 'MN'
+    | 'MS'
+    | 'MO'
+    | 'MT'
+    | 'NE'
+    | 'NV'
+    | 'NH'
+    | 'NJ'
+    | 'NM'
+    | 'NY'
+    | 'NC'
+    | 'ND'
+    | 'OH'
+    | 'OK'
+    | 'OR'
+    | 'PA'
+    | 'RI'
+    | 'SC'
+    | 'SD'
+    | 'TN'
+    | 'TX'
+    | 'UT'
+    | 'VT'
+    | 'VA'
+    | 'WA'
+    | 'WV'
+    | 'WI'
+    | 'WY'
+  >;
 
   /**
    * Account tax/VAT registrations to add or update. When `tax_remitted_by` is
@@ -1033,6 +1445,255 @@ export namespace AccountUpdateParams {
   }
 }
 
+export interface AccountRegisterLlcParams {
+  /**
+   * Body param: The company to form.
+   */
+  business_info: AccountRegisterLlcParams.BusinessInfo;
+
+  /**
+   * Body param: The company's founders. Exactly one must be marked `is_primary` —
+   * the responsible party for the filing.
+   */
+  founders: Array<AccountRegisterLlcParams.Founder>;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export namespace AccountRegisterLlcParams {
+  /**
+   * The company to form.
+   */
+  export interface BusinessInfo {
+    /**
+     * High-level business category, from the Whop business taxonomy. Valid values are
+     * listed on
+     * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary).
+     */
+    business_type: string;
+
+    /**
+     * Two-letter code of the US state (or `DC`) to form the LLC in.
+     */
+    formation_state:
+      | 'AL'
+      | 'AK'
+      | 'AZ'
+      | 'AR'
+      | 'CA'
+      | 'CO'
+      | 'CT'
+      | 'DE'
+      | 'DC'
+      | 'FL'
+      | 'GA'
+      | 'HI'
+      | 'ID'
+      | 'IL'
+      | 'IN'
+      | 'IA'
+      | 'KS'
+      | 'KY'
+      | 'LA'
+      | 'ME'
+      | 'MD'
+      | 'MA'
+      | 'MI'
+      | 'MN'
+      | 'MS'
+      | 'MO'
+      | 'MT'
+      | 'NE'
+      | 'NV'
+      | 'NH'
+      | 'NJ'
+      | 'NM'
+      | 'NY'
+      | 'NC'
+      | 'ND'
+      | 'OH'
+      | 'OK'
+      | 'OR'
+      | 'PA'
+      | 'RI'
+      | 'SC'
+      | 'SD'
+      | 'TN'
+      | 'TX'
+      | 'UT'
+      | 'VT'
+      | 'VA'
+      | 'WA'
+      | 'WV'
+      | 'WI'
+      | 'WY';
+
+    /**
+     * Industry group, from the Whop business taxonomy. Valid values are listed on
+     * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary).
+     */
+    industry_group: string;
+
+    /**
+     * Specific industry vertical, from the Whop business taxonomy. Valid values are
+     * listed on
+     * [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary).
+     */
+    industry_type: string;
+
+    /**
+     * Legal name for the new company.
+     */
+    legal_name: string;
+
+    /**
+     * Company mailing address. Required unless `use_registered_agent` is `true`.
+     */
+    address?: BusinessInfo.Address;
+
+    /**
+     * Legal entity ending appended to `legal_name`. Defaults to `LLC`; unrecognized
+     * values fall back to `LLC`.
+     */
+    entity_suffix?: 'LLC' | 'L.L.C' | 'L.L.C.' | 'Limited Liability Company';
+
+    /**
+     * Request expedited EIN processing for an additional fee. Available only when no
+     * founder supplies an SSN.
+     */
+    expedite_ein?: boolean;
+
+    /**
+     * Business phone number in E.164 format, for example `+12125550100`. Required
+     * unless `use_registered_agent` is `true`.
+     */
+    phone?: string;
+
+    /**
+     * Use the registered agent's address as the company address instead of `address`.
+     */
+    use_registered_agent?: boolean;
+
+    /**
+     * Company website URL.
+     */
+    website?: string;
+  }
+
+  export namespace BusinessInfo {
+    /**
+     * Company mailing address. Required unless `use_registered_agent` is `true`.
+     */
+    export interface Address {
+      city: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`.
+       */
+      country: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code: string;
+
+      /**
+       * State or region code, for example `CA`.
+       */
+      state: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+    }
+  }
+
+  export interface Founder {
+    /**
+     * Founder's personal address.
+     */
+    address: Founder.Address;
+
+    email: string;
+
+    first_name: string;
+
+    /**
+     * Marks the responsible party for the filing. Exactly one founder must be primary.
+     */
+    is_primary: boolean;
+
+    last_name: string;
+
+    /**
+     * The founder's ownership share: greater than `0`, at most `100`. Shares across
+     * founders must total `100`.
+     */
+    ownership_percentage: number;
+
+    /**
+     * Phone number in E.164 format, for example `+12125550100`.
+     */
+    phone: string;
+
+    /**
+     * Formatted as `YYYY-MM-DD`.
+     */
+    date_of_birth?: string;
+
+    /**
+     * The founder's US Social Security Number. Leave empty if the founder is not a US
+     * resident. Non-US founders can request expedited EIN processing via the
+     * `expedite_ein` option in `business_info`.
+     */
+    ssn?: string;
+  }
+
+  export namespace Founder {
+    /**
+     * Founder's personal address.
+     */
+    export interface Address {
+      city: string;
+
+      /**
+       * Two-letter ISO 3166-1 country code, for example `US`.
+       */
+      country: string;
+
+      /**
+       * First line of the street address.
+       */
+      line1: string;
+
+      /**
+       * Postal or ZIP code.
+       */
+      postal_code: string;
+
+      /**
+       * State or region code, for example `CA`.
+       */
+      state: string;
+
+      /**
+       * Second line of the street address.
+       */
+      line2?: string;
+    }
+  }
+}
+
 Accounts.Preferences = Preferences;
 
 export declare namespace Accounts {
@@ -1040,10 +1701,12 @@ export declare namespace Accounts {
     type Account as Account,
     type AccountSocialLink as AccountSocialLink,
     type AccountRecommendActionsResponse as AccountRecommendActionsResponse,
+    type AccountRegisterLlcResponse as AccountRegisterLlcResponse,
     type AccountsCursorPage as AccountsCursorPage,
     type AccountListParams as AccountListParams,
     type AccountCreateParams as AccountCreateParams,
     type AccountUpdateParams as AccountUpdateParams,
+    type AccountRegisterLlcParams as AccountRegisterLlcParams,
   };
 
   export {

@@ -4,10 +4,15 @@ export {
   Businesses,
   type BusinessRetrieveResponse,
   type BusinessListResponse,
-  type BusinessLeaderboardResponse,
   type BusinessListParams,
-  type BusinessLeaderboardParams,
   type BusinessListResponsesCursorPage,
 } from './businesses/index';
-export { Partners, type PartnerCreateResponse } from './partners';
-export { Referrals, type ReferralReferredUsersResponse, type ReferralReferredUsersParams } from './referrals';
+export {
+  Partners,
+  type PartnerCreateResponse,
+  type PartnerLeaderboardResponse,
+  type PartnerReferredUsersResponse,
+  type PartnerReferredUsersParams,
+  type PartnerCreateParams,
+  type PartnerLeaderboardParams,
+} from './partners';

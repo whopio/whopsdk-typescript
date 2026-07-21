@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -36,8 +37,16 @@ export class Cards extends APIResource {
    * of account_id (a biz* identifier) or user*id (a user* identifier). Returns the
    * newly created card resource.
    */
-  create(body: CardCreateParams, options?: RequestOptions): APIPromise<CardCreateResponse> {
-    return this._client.post('/cards', { body, ...options });
+  create(params: CardCreateParams, options?: RequestOptions): APIPromise<CardCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/cards', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -680,40 +689,47 @@ export interface CardListParams {
 
 export interface CardCreateParams {
   /**
-   * The owning account ID (a biz\_ identifier). Provide this or user_id.
+   * Body param: The owning account ID (a biz\_ identifier). Provide this or user_id.
    */
   account_id?: string;
 
   /**
-   * The company member (a user\_ identifier) to assign the card to. Required for
-   * company (business) card issuing accounts.
+   * Body param: The company member (a user\_ identifier) to assign the card to.
+   * Required for company (business) card issuing accounts.
    */
   assigned_user_id?: string;
 
   /**
-   * A display name for the card.
+   * Body param: A display name for the card.
    */
   name?: string;
 
   /**
-   * Spending limit amount, in dollars.
+   * Body param: Spending limit amount, in dollars.
    */
   spend_limit?: number;
 
   /**
-   * The spending limit window.
+   * Body param: The spending limit window.
    */
   spend_limit_frequency?: 'daily' | 'weekly' | 'monthly' | 'one_time';
 
   /**
-   * Per-transaction limit amount, in dollars.
+   * Body param: Per-transaction limit amount, in dollars.
    */
   transaction_limit?: number;
 
   /**
-   * The owning user ID (a user\_ identifier). Provide this or account_id.
+   * Body param: The owning user ID (a user\_ identifier). Provide this or
+   * account_id.
    */
   user_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface CardRetrieveParams {

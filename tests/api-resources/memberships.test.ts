@@ -125,7 +125,7 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.pause(
         'mem_xxxxxxxxxxxxxx',
-        { void_payments: true },
+        { resumes_at: '2023-12-01T05:00:00.401Z', void_payments: true },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -170,5 +170,17 @@ describe('resource memberships', () => {
   // Mock server tests are disabled
   test.skip('addFreeDays: required and optional params', async () => {
     const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+  });
+
+  // Mock server tests are disabled
+  test.skip('resyncAccess', async () => {
+    const responsePromise = client.memberships.resyncAccess('mem_xxxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

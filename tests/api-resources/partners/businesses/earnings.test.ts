@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource referrals', () => {
+describe('resource earnings', () => {
   // Mock server tests are disabled
-  test.skip('referredUsers', async () => {
-    const responsePromise = client.referrals.referredUsers();
+  test.skip('list', async () => {
+    const responsePromise = client.partners.businesses.earnings.list('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,17 +21,21 @@ describe('resource referrals', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('referredUsers: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.referrals.referredUsers(
+      client.partners.businesses.earnings.list(
+        'id',
         {
           after: 'after',
           before: 'before',
+          created_after: 'created_after',
+          created_before: 'created_before',
+          direction: 'asc',
           first: 100,
-          has_businesses: true,
-          has_earning_businesses: true,
           last: 100,
+          order: 'created_at',
+          status: 'awaiting_settlement',
         },
         { path: '/_stainless_unknown_path' },
       ),

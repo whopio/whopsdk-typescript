@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -25,8 +26,16 @@ export class AdCampaigns extends APIResource {
   /**
    * Creates an ad campaign for an account.
    */
-  create(body: AdCampaignCreateParams, options?: RequestOptions): APIPromise<AdCampaign> {
-    return this._client.post('/ad_campaigns', { body, ...options });
+  create(params: AdCampaignCreateParams, options?: RequestOptions): APIPromise<AdCampaign> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/ad_campaigns', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -42,9 +51,9 @@ export class AdCampaigns extends APIResource {
 
   /**
    * Updates an ad campaign's editable fields (title, budget, schedule, bid strategy,
-   * and — before launch — budget optimization), and launches a draft campaign by
-   * setting status to active. Objective, budget type, special ad categories and
-   * desired cost per result are fixed at creation and cannot be changed.
+   * special ad categories, and, before launch, budget optimization), and launches a
+   * draft campaign by setting status to active. Objective, budget type and desired
+   * cost per result are fixed at creation and cannot be changed.
    */
   update(id: string, body: AdCampaignUpdateParams, options?: RequestOptions): APIPromise<AdCampaign> {
     return this._client.patch(path`/ad_campaigns/${id}`, { body, ...options });
@@ -61,15 +70,55 @@ export class AdCampaigns extends APIResource {
   /**
    * Pauses an active ad campaign.
    */
-  pause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
-    return this._client.post(path`/ad_campaigns/${id}/pause`, options);
+  pause(
+    id: string,
+    params: AdCampaignPauseParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaign> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/ad_campaigns/${id}/pause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Resumes a paused ad campaign.
    */
-  unpause(id: string, options?: RequestOptions): APIPromise<AdCampaign> {
-    return this._client.post(path`/ad_campaigns/${id}/unpause`, options);
+  unpause(
+    id: string,
+    params: AdCampaignUnpauseParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaign> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/ad_campaigns/${id}/unpause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Retries billing for an ad campaign whose payment previously failed.
+   */
+  retryPayment(
+    id: string,
+    params: AdCampaignRetryPaymentParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaign> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/ad_campaigns/${id}/retry_payment`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -77,9 +126,15 @@ export type AdCampaignsCursorPage = CursorPage<AdCampaign>;
 
 export interface AdCampaign {
   /**
-   * Unique identifier for the ad campaign.
+   * Unique identifier for the ad campaign, prefixed `adcamp_`.
    */
   id: string;
+
+  /**
+   * USD value attributed to add-to-cart events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  added_to_cart_value: number;
 
   /**
    * Whop pixel-attributed add-to-cart events, last-click.
@@ -87,22 +142,27 @@ export interface AdCampaign {
   added_to_carts: number;
 
   /**
-   * The bidding strategy the campaign uses.
+   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+   * the budget, `average_target` holds an average cost per result, and
+   * `maximum_target` never bids above a cap.
    */
   bid_type: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
 
   /**
-   * The campaign budget in USD. Null when budget is set at the ad group level (ABO).
+   * The campaign's budget, in the ad account's currency. `null` when each ad group
+   * sets its own budget instead.
    */
   budget_amount: number | null;
 
   /**
-   * Which level owns the budget — the campaign (CBO) or each ad group (ABO).
+   * Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group
+   * individually (`ad_group`).
    */
   budget_optimization: 'ad_campaign' | 'ad_group' | null;
 
   /**
-   * Whether the budget is spent per day or over the campaign's lifetime.
+   * Whether `budget_amount` is spent per day (`daily`) or over the campaign's full
+   * run (`lifetime`).
    */
   budget_type: 'daily' | 'lifetime' | null;
 
@@ -117,9 +177,21 @@ export interface AdCampaign {
   clicks: number;
 
   /**
+   * USD value attributed to complete-registration events. Sums the value sent with
+   * each event, normalized to USD; events without a value contribute 0.
+   */
+  completed_registration_value: number;
+
+  /**
    * Whop pixel-attributed complete-registration events, last-click.
    */
   completed_registrations: number;
+
+  /**
+   * USD value attributed to contact events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  contact_value: number;
 
   /**
    * Whop pixel-attributed contact events, last-click.
@@ -185,6 +257,11 @@ export interface AdCampaign {
   cost_per_submitted_application: number | null;
 
   /**
+   * Spend divided by unique clicks; null when there are no unique clicks.
+   */
+  cost_per_unique_click: number | null;
+
+  /**
    * Spend divided by attributed view-content events; null when they are not the goal
    * and none are attributed.
    */
@@ -202,8 +279,23 @@ export interface AdCampaign {
   custom_conversions: number;
 
   /**
-   * The current delivery state, mirroring the Delivery column in the ads dashboard.
-   * When several states apply at once, the highest-precedence one is returned.
+   * Whop pixel-attributed custom conversions, keyed by your event name with its
+   * last-click count as the value. Empty when no named custom events are attributed.
+   * Custom events fired without a name are counted in custom_conversions but omitted
+   * here, so these values sum to at most custom_conversions.
+   */
+  custom_event_counts: unknown;
+
+  /**
+   * Conversion value attributed to each custom event, keyed by event name like
+   * custom_event_counts. Sums the value passed to whop.track, normalized to USD;
+   * events fired without a value contribute 0.
+   */
+  custom_event_values: unknown;
+
+  /**
+   * Whether the campaign's ads are delivering right now, and if not, why. When
+   * several states apply at once, the highest-precedence one is returned.
    */
   delivery_status:
     | 'payment_failed'
@@ -232,6 +324,12 @@ export interface AdCampaign {
   issues: Array<AdCampaign.Issue>;
 
   /**
+   * USD value attributed to lead events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  lead_value: number;
+
+  /**
    * Whop pixel-attributed leads, last-click.
    */
   leads: number;
@@ -242,8 +340,8 @@ export interface AdCampaign {
   objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
 
   /**
-   * The specific event the campaign optimizes for. If the campaign is CBO, then all
-   * ad groups will have the same optimization goal, which will be returned here.
+   * The event the campaign optimizes for when a single goal is set campaign-wide.
+   * `null` when each ad group sets its own optimization_goal.
    */
   optimization_goal: string | null;
 
@@ -291,10 +389,24 @@ export interface AdCampaign {
   result_event_name: string | null;
 
   /**
+   * The Whop pixel-attributed count behind result_event. When a campaign's ad groups
+   * optimize different goals there is no single result_event (it is null), and this
+   * is instead the sum of each ad group's own attributed results. Null when nothing
+   * Whop-attributable is being optimized for.
+   */
+  results: number | null;
+
+  /**
    * Purchase value divided by spend, both in USD (a currency-neutral ratio); 0 when
    * there is no spend.
    */
   return_on_ad_spend: number;
+
+  /**
+   * USD value attributed to schedule events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  schedule_value: number;
 
   /**
    * Whop pixel-attributed schedule events, last-click.
@@ -330,12 +442,18 @@ export interface AdCampaign {
     | 'imported';
 
   /**
+   * USD value attributed to submit-application events. Sums the value sent with each
+   * event, normalized to USD; events without a value contribute 0.
+   */
+  submitted_application_value: number;
+
+  /**
    * Whop pixel-attributed submit-application events, last-click.
    */
   submitted_applications: number;
 
   /**
-   * The title of the ad campaign.
+   * Display name of the ad campaign.
    */
   title: string;
 
@@ -345,7 +463,7 @@ export interface AdCampaign {
   unique_click_through_rate: number | null;
 
   /**
-   * The number of unique clicks.
+   * People who clicked, reported by the Whop pixel, counted once per person.
    */
   unique_clicks: number;
 
@@ -353,6 +471,12 @@ export interface AdCampaign {
    * When the campaign was last updated, as an ISO 8601 timestamp.
    */
   updated_at: string;
+
+  /**
+   * USD value attributed to view-content events. Sums the value sent with each
+   * event, normalized to USD; events without a value contribute 0.
+   */
+  viewed_content_value: number;
 
   /**
    * Whop pixel-attributed view-content events, last-click.
@@ -478,71 +602,81 @@ export interface AdCampaignListParams extends CursorPageParams {
 
 export interface AdCampaignCreateParams {
   /**
-   * The goal the campaign optimizes toward.
+   * Body param: The goal the campaign optimizes toward.
    */
   objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales';
 
   /**
-   * The ad network the campaign runs on.
+   * Body param: The ad network the campaign runs on.
    */
   platform: 'meta';
 
   /**
-   * The title of the campaign.
+   * Body param: The title of the campaign.
    */
   title: string;
 
   /**
-   * The account to create the campaign under. Defaults to the account-scoped key's
-   * own account.
+   * Body param: The account to create the campaign under. Defaults to the
+   * account-scoped key's own account.
    */
   account_id?: string;
 
   /**
-   * CBO bid strategy: minimum_cost (lowest cost), average_target (cost cap), or
-   * maximum_target (bid cap). CBO only.
+   * Body param: How delivery bids in the ad auction: `minimum_cost` gets the most
+   * results for the budget, `average_target` holds an average cost per result,
+   * `maximum_target` never bids above a cap. Only for campaigns that own the budget.
    */
   bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target';
 
   /**
-   * The campaign budget, in USD. Required for CBO (budget_optimization:
-   * ad_campaign); omit for ABO.
+   * Body param: The campaign's budget, in the ad account's currency. Required when
+   * budget_optimization is `ad_campaign`; omit when each ad group sets its own
+   * budget.
    */
   budget_amount?: number;
 
   /**
-   * Which level owns the budget — the campaign (CBO) or each ad group (ABO).
-   * Defaults to ad_group.
+   * Body param: Which level owns the budget: the whole campaign (`ad_campaign`) or
+   * each ad group individually (`ad_group`). Defaults to `ad_group`.
    */
   budget_optimization?: 'ad_campaign' | 'ad_group';
 
   /**
-   * Whether the budget is spent per day or over the campaign's lifetime. Defaults to
-   * daily.
+   * Body param: Whether the budget is spent per day (`daily`) or over the campaign's
+   * full run (`lifetime`). Defaults to `daily`.
    */
   budget_type?: 'daily' | 'lifetime';
 
   /**
-   * Target/cap cost per result in USD for average_target / maximum_target bidding.
-   * CBO only.
+   * Body param: Cost per result to aim for (`average_target`) or never exceed
+   * (`maximum_target`). Only for campaigns that own the budget.
    */
   desired_cost_per_result?: number;
 
   /**
-   * Campaign schedule end (ISO 8601). CBO only.
+   * Body param: When the campaign stops delivering, as an ISO 8601 timestamp. Only
+   * for campaigns that own the budget.
    */
   ends_at?: string;
 
   /**
-   * Regulated categories the campaign falls under. Ads in these categories are
-   * subject to extra targeting restrictions.
+   * Body param: Regulated categories the campaign falls under. Ads in these
+   * categories are subject to extra targeting restrictions.
    */
   special_ad_categories?: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
 
   /**
-   * Campaign schedule start (ISO 8601). CBO only.
+   * Body param: When the campaign starts delivering, as an ISO 8601 timestamp. Only
+   * for campaigns that own the budget.
    */
   starts_at?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface AdCampaignRetrieveParams {
@@ -564,9 +698,10 @@ export interface AdCampaignRetrieveParams {
 
 export interface AdCampaignUpdateParams {
   /**
-   * CBO bid strategy: minimum_cost (lowest cost), average_target (cost cap), or
-   * maximum_target (bid cap). Switching to minimum_cost clears the cap amounts
-   * stored on the campaign's ad groups. CBO only.
+   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+   * the budget, `average_target` holds an average cost per result, `maximum_target`
+   * never bids above a cap. Switching to `minimum_cost` clears the cap amounts
+   * stored on the campaign's ad groups. Only for campaigns that own the budget.
    */
   bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target';
 
@@ -577,20 +712,28 @@ export interface AdCampaignUpdateParams {
   budget_amount?: number;
 
   /**
-   * Which level owns the budget — the campaign (CBO) or each ad group (ABO). Only
-   * changeable before the campaign is live on Meta; switching to ad_campaign
-   * requires budget_amount in the same request, and switching to ad_group clears the
-   * campaign budget.
+   * Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group
+   * individually (`ad_group`). Only changeable before the campaign is live on the ad
+   * network; switching to `ad_campaign` requires budget_amount in the same request,
+   * and switching to `ad_group` clears the campaign budget.
    */
   budget_optimization?: 'ad_campaign' | 'ad_group';
 
   /**
-   * Campaign schedule end (ISO 8601). CBO only.
+   * When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns
+   * that own the budget.
    */
   ends_at?: string;
 
   /**
-   * Campaign schedule start (ISO 8601). CBO only.
+   * Regulated categories the campaign falls under. Editable on any campaign, draft
+   * or launched; pass an empty array to clear.
+   */
+  special_ad_categories?: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
+
+  /**
+   * When the campaign starts delivering, as an ISO 8601 timestamp. Only for
+   * campaigns that own the budget.
    */
   starts_at?: string;
 
@@ -606,6 +749,30 @@ export interface AdCampaignUpdateParams {
   title?: string;
 }
 
+export interface AdCampaignPauseParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface AdCampaignUnpauseParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface AdCampaignRetryPaymentParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export declare namespace AdCampaigns {
   export {
     type AdCampaign as AdCampaign,
@@ -615,5 +782,8 @@ export declare namespace AdCampaigns {
     type AdCampaignCreateParams as AdCampaignCreateParams,
     type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
+    type AdCampaignPauseParams as AdCampaignPauseParams,
+    type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 }

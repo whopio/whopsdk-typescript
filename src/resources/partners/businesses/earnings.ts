@@ -6,7 +6,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 /**
- * The Referrals API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
+ * The Partners API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
  *
  * Use it to enroll as a Whop partner, list the users you referred, list your referred businesses and review their earnings, and see the partner leaderboard.
  */
@@ -56,7 +56,14 @@ export interface EarningListResponse {
    */
   financial_activity: Array<EarningListResponse.FinancialActivity> | null;
 
-  object: 'business_referral_earning';
+  /**
+   * Which income source the commission is on: product-sales gross profit, Whop Ads
+   * spend billed to the business, platform balance transfer fees, or Whop Card
+   * interchange.
+   */
+  income_source: 'sales' | 'ad_spend' | 'transfer' | 'card_interchange';
+
+  object: 'partner_business_earning';
 
   payout_at: string | null;
 
@@ -69,9 +76,15 @@ export interface EarningListResponse {
   product: EarningListResponse.Product | null;
 
   /**
-   * The resource that generated the affiliate earning.
+   * The resource that generated the earning: the customer payment receipt for sales
+   * and ad spend earnings, the balance transfer for transfer earnings, or the card
+   * transaction for card interchange earnings.
    */
-  resource: EarningListResponse.Resource | null;
+  resource:
+    | EarningListResponse.UnionMember0
+    | null
+    | EarningListResponse.UnionMember1
+    | EarningListResponse.UnionMember2;
 
   /**
    * Whether this earning is a second-tier (grandparent) commission.
@@ -84,7 +97,7 @@ export interface EarningListResponse {
   status: 'awaiting_settlement' | 'pending' | 'completed' | 'canceled' | 'reversed';
 
   /**
-   * The sale amount the commission is calculated from, in USD.
+   * The underlying transaction amount the commission's income comes from, in USD.
    */
   transaction_amount_usd: string;
 }
@@ -152,13 +165,10 @@ export namespace EarningListResponse {
     title: string;
   }
 
-  /**
-   * The resource that generated the affiliate earning.
-   */
-  export interface Resource {
+  export interface UnionMember0 {
     id: string;
 
-    alternative_payment_method: Resource.AlternativePaymentMethod | null;
+    alternative_payment_method: UnionMember0.AlternativePaymentMethod | null;
 
     brand: string | null;
 
@@ -175,12 +185,34 @@ export namespace EarningListResponse {
     processor: string | null;
   }
 
-  export namespace Resource {
+  export namespace UnionMember0 {
     export interface AlternativePaymentMethod {
       image_url: string | null;
 
       name: string;
     }
+  }
+
+  export interface UnionMember1 {
+    id: string;
+
+    created_at: string;
+
+    currency: string;
+
+    object: 'transfer';
+  }
+
+  export interface UnionMember2 {
+    id: string;
+
+    created_at: string;
+
+    currency: string | null;
+
+    merchant_name: string | null;
+
+    object: 'card_transaction';
   }
 }
 

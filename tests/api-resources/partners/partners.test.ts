@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource transfers', () => {
+describe('resource partners', () => {
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.transfers.list();
+  test.skip('referredUsers', async () => {
+    const responsePromise = client.partners.referredUsers();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,21 +21,17 @@ describe('resource transfers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
+  test.skip('referredUsers: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.transfers.list(
+      client.partners.referredUsers(
         {
           after: 'after',
           before: 'before',
-          created_after: 'created_after',
-          created_before: 'created_before',
-          destination_id: 'destination_id',
-          direction: 'asc',
-          first: 50,
-          last: 50,
-          order: 'created_at',
-          origin_id: 'origin_id',
+          first: 100,
+          has_businesses: true,
+          has_earning_businesses: true,
+          last: 100,
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -43,8 +39,8 @@ describe('resource transfers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.transfers.create({ amount: 0, origin_id: 'origin_id' });
+  test.skip('create', async () => {
+    const responsePromise = client.partners.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,25 +51,19 @@ describe('resource transfers', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.transfers.create({
-      amount: 0,
-      origin_id: 'origin_id',
-      currency: 'usd',
-      destination_id: 'destination_id',
-      expires_at: '2019-12-27T18:11:19.117Z',
-      idempotence_key: 'idempotence_key',
-      metadata: { foo: 'bar' },
-      notes: 'notes',
-      redeemable_count: 0,
-      type: 'ledger',
-      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
-    });
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.partners.create(
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.transfers.retrieve('id');
+  test.skip('leaderboard', async () => {
+    const responsePromise = client.partners.leaderboard();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -81,5 +71,13 @@ describe('resource transfers', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('leaderboard: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.partners.leaderboard({ period: 'day' }, { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

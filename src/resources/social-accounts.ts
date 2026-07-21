@@ -3,13 +3,14 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
  * A Social Account represents an external profile connected to a Whop account or user, such as a Facebook page or Instagram account. Connecting a social account lets Whop run [ads](/api-reference/beta/ads/ad) under that profile's identity and promote its existing posts.
  *
- * Use the Social Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect a social account, and list a connected profile's posts.
+ * Use the Social Accounts API to list connected accounts, create a Whop-managed Facebook page, start an OAuth connection, disconnect a social account, and list a connected profile's posts or a Facebook page's lead forms.
  */
 export class SocialAccounts extends APIResource {
   /**
@@ -25,8 +26,16 @@ export class SocialAccounts extends APIResource {
   /**
    * Creates or returns a Whop-managed Facebook page for an account.
    */
-  create(body: SocialAccountCreateParams, options?: RequestOptions): APIPromise<SocialAccount> {
-    return this._client.post('/social_accounts', { body, ...options });
+  create(params: SocialAccountCreateParams, options?: RequestOptions): APIPromise<SocialAccount> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/social_accounts', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -34,10 +43,18 @@ export class SocialAccounts extends APIResource {
    * connect a social account.
    */
   connect(
-    body: SocialAccountConnectParams,
+    params: SocialAccountConnectParams,
     options?: RequestOptions,
   ): APIPromise<SocialAccountConnectResponse> {
-    return this._client.post('/social_accounts/connect', { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/social_accounts/connect', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -63,6 +80,20 @@ export class SocialAccounts extends APIResource {
   ): APIPromise<SocialAccountPostsResponse> {
     return this._client.get(path`/social_accounts/${id}/posts`, { query, ...options });
   }
+
+  /**
+   * Lists the active lead (instant) forms that already exist on a connected Facebook
+   * page, so an ad can reuse one as its `lead_gen_form_id` instead of authoring a
+   * new form. Every active form comes back in a single response — the list is not
+   * paginated.
+   */
+  leadForms(
+    id: string,
+    query: SocialAccountLeadFormsParams,
+    options?: RequestOptions,
+  ): APIPromise<SocialAccountLeadFormsResponse> {
+    return this._client.get(path`/social_accounts/${id}/lead_forms`, { query, ...options });
+  }
 }
 
 export type SocialAccountsCursorPage = CursorPage<SocialAccount>;
@@ -72,6 +103,12 @@ export interface SocialAccount {
    * Unique identifier for the social account.
    */
   id: string;
+
+  /**
+   * Why this social account currently can't be used for advertising — a failed share
+   * or a Meta-side restriction. Null when the account is healthy.
+   */
+  error: string | null;
 
   /**
    * The platform-specific ID for this social account.
@@ -189,6 +226,42 @@ export interface SocialAccountConnectResponse {
   authorize_url: string;
 }
 
+export interface SocialAccountLeadFormsResponse {
+  data: Array<SocialAccountLeadFormsResponse.Data>;
+}
+
+export namespace SocialAccountLeadFormsResponse {
+  export interface Data {
+    /**
+     * The ad platform's identifier for the form. Use it as lead_gen_form_id on an ad
+     * to reuse the form.
+     */
+    id: string;
+
+    /**
+     * When the form was created, as an ISO 8601 timestamp.
+     */
+    created_at: string | null;
+
+    /**
+     * Language the form is shown in, such as en_US.
+     */
+    locale: string | null;
+
+    /**
+     * Advertiser-facing form name.
+     */
+    name: string | null;
+
+    /**
+     * Privacy policy URL configured on the form.
+     */
+    privacy_policy_url: string | null;
+
+    question_labels: Array<string>;
+  }
+}
+
 export interface SocialAccountPostsResponse {
   data: Array<SocialAccountPost>;
 
@@ -259,40 +332,52 @@ export interface SocialAccountListParams extends CursorPageParams {
 
 export interface SocialAccountCreateParams {
   /**
-   * The platform to create the social account on.
+   * Body param: The platform to create the social account on.
    */
   platform: 'facebook';
 
   /**
-   * The Account (biz\_ identifier) to create the social account for. An
+   * Body param: The Account (biz\_ identifier) to create the social account for. An
    * account-scoped API key may omit this to default to its own account.
    */
   account_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface SocialAccountConnectParams {
   /**
-   * The platform to connect the social account on. Today, the supported option is
-   * `meta_business`.
+   * Body param: The platform to connect the social account on. Supported options are
+   * `meta_business` and `tiktok`.
    */
-  platform: 'meta_business';
+  platform: 'meta_business' | 'tiktok';
 
   /**
-   * The Account (biz\_ identifier) to connect the social account for. An
+   * Body param: The Account (biz\_ identifier) to connect the social account for. An
    * account-scoped API key may omit this to default to its own account.
    */
   account_id?: string;
 
   /**
-   * The Whop URL to redirect the user to after they finish connecting.
+   * Body param: The Whop URL to redirect the user to after they finish connecting.
    */
   redirect_url?: string;
 
   /**
-   * Capabilities to grant for the connected social account. Use `advertise` when
-   * connecting a Meta Business account for ads.
+   * Body param: Capabilities to grant for the connected social account. Use
+   * `advertise` when connecting a Meta Business or TikTok account for ads.
    */
   scopes?: Array<'advertise'>;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface SocialAccountDeleteParams {
@@ -331,12 +416,20 @@ export interface SocialAccountPostsParams {
   post_id?: string;
 }
 
+export interface SocialAccountLeadFormsParams {
+  /**
+   * The Account (a biz\_ identifier) the social account is connected to.
+   */
+  account_id: string;
+}
+
 export declare namespace SocialAccounts {
   export {
     type SocialAccount as SocialAccount,
     type SocialAccountPost as SocialAccountPost,
     type SocialAccountDeleteResponse as SocialAccountDeleteResponse,
     type SocialAccountConnectResponse as SocialAccountConnectResponse,
+    type SocialAccountLeadFormsResponse as SocialAccountLeadFormsResponse,
     type SocialAccountPostsResponse as SocialAccountPostsResponse,
     type SocialAccountsCursorPage as SocialAccountsCursorPage,
     type SocialAccountListParams as SocialAccountListParams,
@@ -344,5 +437,6 @@ export declare namespace SocialAccounts {
     type SocialAccountConnectParams as SocialAccountConnectParams,
     type SocialAccountDeleteParams as SocialAccountDeleteParams,
     type SocialAccountPostsParams as SocialAccountPostsParams,
+    type SocialAccountLeadFormsParams as SocialAccountLeadFormsParams,
   };
 }

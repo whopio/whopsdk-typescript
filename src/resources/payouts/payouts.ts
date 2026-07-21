@@ -2,9 +2,17 @@
 
 import { APIResource } from '../../core/resource';
 import * as MethodsAPI from './methods';
-import { MethodListParams, MethodListResponse, MethodListResponsesCursorPage, Methods } from './methods';
+import {
+  MethodCreateParams,
+  MethodCreateResponse,
+  MethodListParams,
+  MethodListResponse,
+  MethodListResponsesCursorPage,
+  Methods,
+} from './methods';
 import { APIPromise } from '../../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
+import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
 /**
@@ -36,8 +44,16 @@ export class Payouts extends APIResource {
    * support to enable it. The payout settles asynchronously; poll GET /payouts for
    * the entry whose payout_request_id matches this payout's id.
    */
-  create(body: PayoutCreateParams, options?: RequestOptions): APIPromise<PayoutCreateResponse> {
-    return this._client.post('/payouts', { body, ...options });
+  create(params: PayoutCreateParams, options?: RequestOptions): APIPromise<PayoutCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/payouts', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -95,7 +111,7 @@ export interface PayoutCreateResponse {
   /**
    * Current payout status, in the same vocabulary as GET /payouts.
    */
-  status: 'requested' | 'in_transit' | 'completed' | 'failed' | 'canceled';
+  status: 'requested' | 'in_transit' | 'denied' | 'completed' | 'failed' | 'canceled';
 }
 
 export namespace PayoutCreateResponse {
@@ -260,30 +276,30 @@ export interface PayoutListParams extends CursorPageParams {
 
 export interface PayoutCreateParams {
   /**
-   * The account to pay out from (a biz\_ identifier).
+   * Body param: The account to pay out from (a biz\_ identifier).
    */
   account_id: string;
 
   /**
-   * The amount to pay out in the specified currency.
+   * Body param: The amount to pay out in the specified currency.
    */
   amount: number;
 
   /**
-   * The saved payout method to deliver to (a potk\_ identifier).
+   * Body param: The saved payout method to deliver to (a potk\_ identifier).
    */
   payout_method_id: string;
 
   /**
-   * The payout currency. Defaults to usd.
+   * Body param: The payout currency. Defaults to usd.
    */
   currency?: string;
 
   /**
-   * A client-generated key that makes retries safe. Retrying with the same key
-   * returns the original payout instead of creating a second one.
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
-  idempotency_key?: string;
+  'Idempotency-Key'?: string;
 }
 
 Payouts.Methods = Methods;
@@ -299,8 +315,10 @@ export declare namespace Payouts {
 
   export {
     Methods as Methods,
+    type MethodCreateResponse as MethodCreateResponse,
     type MethodListResponse as MethodListResponse,
     type MethodListResponsesCursorPage as MethodListResponsesCursorPage,
     type MethodListParams as MethodListParams,
+    type MethodCreateParams as MethodCreateParams,
   };
 }

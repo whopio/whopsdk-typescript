@@ -61,7 +61,8 @@ export type PaymentProvider =
   | 'airwallex'
   | 'coinflow'
   | 'sequra'
-  | 'dlocal';
+  | 'dlocal'
+  | 'masspay';
 
 /**
  * The status of the refund reference.

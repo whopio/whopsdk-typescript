@@ -67,16 +67,27 @@ describe('resource verifications', () => {
       },
       business_name: 'business_name',
       business_structure: 'business_structure',
+      business_tax_identification_number: 'business_tax_identification_number',
       business_website: 'business_website',
       country: 'country',
       date_of_birth: 'date_of_birth',
       document_type: 'ID_CARD',
-      documents: { foo: 'string' },
+      documents: {
+        drivers_back: 'drivers_back',
+        drivers_front: 'drivers_front',
+        id_card_back: 'id_card_back',
+        id_card_front: 'id_card_front',
+        passport_front: 'passport_front',
+        residence_permit_back: 'residence_permit_back',
+        residence_permit_front: 'residence_permit_front',
+        selfie: 'selfie',
+      },
       first_name: 'first_name',
       kind: 'individual',
       last_name: 'last_name',
       phone: 'phone',
       tax_identification_number: 'tax_identification_number',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 

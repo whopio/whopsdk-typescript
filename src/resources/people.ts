@@ -48,9 +48,9 @@ export namespace PersonRetrieveResponse {
 
     account_id: string;
 
-    first_seen_at: number;
+    first_seen_at: string;
 
-    last_seen_at: number;
+    last_seen_at: string;
 
     person_id: string;
 
@@ -107,9 +107,9 @@ export interface PersonListResponse {
 
   account_id: string;
 
-  first_seen_at: number;
+  first_seen_at: string;
 
-  last_seen_at: number;
+  last_seen_at: string;
 
   person_id: string;
 
@@ -188,9 +188,10 @@ export interface PersonListParams extends CursorPageParams {
   first?: number;
 
   /**
-   * Start of the time range as a Unix timestamp. Defaults to 366 days before `to`.
+   * Start of the time range as an ISO 8601 timestamp. Defaults to 366 days before
+   * `to`.
    */
-  from?: number;
+  from?: string;
 
   /**
    * Column to sort by (e.g. last_seen_at, ltv, purchase_count). Defaults to
@@ -199,9 +200,9 @@ export interface PersonListParams extends CursorPageParams {
   sort?: string;
 
   /**
-   * End of the time range as a Unix timestamp. Defaults to now.
+   * End of the time range as an ISO 8601 timestamp. Defaults to now.
    */
-  to?: number;
+  to?: string;
 }
 
 export interface PersonRetrieveParams {
@@ -212,14 +213,14 @@ export interface PersonRetrieveParams {
   account_id?: string;
 
   /**
-   * Start of the time range as a Unix timestamp.
+   * Start of the time range as an ISO 8601 timestamp.
    */
-  from?: number;
+  from?: string;
 
   /**
-   * End of the time range as a Unix timestamp. Defaults to now.
+   * End of the time range as an ISO 8601 timestamp. Defaults to now.
    */
-  to?: number;
+  to?: string;
 }
 
 export declare namespace People {
