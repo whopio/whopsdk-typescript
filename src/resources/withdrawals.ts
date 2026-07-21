@@ -365,6 +365,12 @@ export interface WithdrawalCreateParams {
   currency: Shared.Currency;
 
   /**
+   * A client-generated key that makes retries safe. Retrying with the same key
+   * returns the original withdrawal instead of creating a second one.
+   */
+  idempotency_key?: string | null;
+
+  /**
    * The ID of the payout method to use for the withdrawal.
    */
   payout_method_id?: string | null;
