@@ -194,6 +194,12 @@ export interface Withdrawal {
   markup_fee: number;
 
   /**
+   * The id of the payout request (returned by POST /payouts) that this withdrawal
+   * settles. Null unless the withdrawal originated from a stablecoin payout.
+   */
+  payout_request_id: string | null;
+
+  /**
    * The saved payout destination used for this withdrawal (e.g., a bank account or
    * PayPal address). Null if no payout token was used.
    */
@@ -335,6 +341,12 @@ export interface WithdrawalListResponse {
    * withdrawal amount. Only applies to platform accounts using Whop Rails.
    */
   markup_fee: number;
+
+  /**
+   * The id of the payout request (returned by POST /payouts) that this withdrawal
+   * settles. Null unless the withdrawal originated from a stablecoin payout.
+   */
+  payout_request_id: string | null;
 
   /**
    * The processing speed selected for this withdrawal ('standard' or 'instant').
