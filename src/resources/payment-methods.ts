@@ -155,6 +155,12 @@ export namespace PaymentMethodRetrieveResponse {
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
+
+      /**
+       * Whether this card was verified with 3D Secure, either when it was saved or on a
+       * payment that used it.
+       */
+      three_ds_verified: boolean;
     }
   }
 
@@ -503,6 +509,12 @@ export namespace PaymentMethodListResponse {
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
+
+      /**
+       * Whether this card was verified with 3D Secure, either when it was saved or on a
+       * payment that used it.
+       */
+      three_ds_verified: boolean;
     }
   }
 
