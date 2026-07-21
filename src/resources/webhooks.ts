@@ -1600,9 +1600,12 @@ export namespace IdentityProfileApprovedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -1881,9 +1884,12 @@ export namespace IdentityProfileRejectedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -2162,9 +2168,12 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -2443,9 +2452,12 @@ export namespace IdentityProfileUpdatedWebhookEvent {
     profile_type: string;
 
     /**
-     * Derived verification status across all linked verifications.
+     * Derived verification status across all linked verifications. Returns
+     * `action_required` whenever the profile has an open request for information
+     * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
+     * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected';
+    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
