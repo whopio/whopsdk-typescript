@@ -181,11 +181,6 @@ export interface App {
   status: 'live' | 'unlisted' | 'hidden';
 
   /**
-   * Aggregate usage statistics for the app.
-   */
-  usage_stats: App.UsageStats | null;
-
-  /**
    * Whether the app has been verified by Whop and is eligible for the featured apps
    * section.
    */
@@ -415,31 +410,6 @@ export namespace App {
        */
       name: string;
     }
-  }
-
-  /**
-   * Aggregate usage statistics for the app.
-   */
-  export interface UsageStats {
-    /**
-     * Daily active users.
-     */
-    dau: number | null;
-
-    /**
-     * Monthly active users.
-     */
-    mau: number | null;
-
-    /**
-     * Total time users spent in the app over the last 24 hours, in seconds.
-     */
-    time_spent_last24_hours: number | null;
-
-    /**
-     * Weekly active users.
-     */
-    wau: number | null;
   }
 }
 
