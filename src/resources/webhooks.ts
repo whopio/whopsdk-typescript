@@ -195,6 +195,13 @@ export interface Webhook {
    * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
+
+  /**
+   * The secret key used to sign webhook payloads for verification. Include this in
+   * your HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; empty for API-key and OAuth callers on later reads.
+   */
+  webhook_secret: string;
 }
 
 /**
@@ -297,7 +304,8 @@ export interface WebhookCreateResponse {
 
   /**
    * The secret key used to sign webhook payloads for verification. Include this in
-   * your HMAC validation logic.
+   * your HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; empty for API-key and OAuth callers on later reads.
    */
   webhook_secret: string;
 }
@@ -340,9 +348,21 @@ export interface WebhookListResponse {
   events: Array<WebhookEvent>;
 
   /**
+   * The ID of the resource (company or product) this webhook is attached to.
+   */
+  resource_id: string;
+
+  /**
    * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
+
+  /**
+   * The secret key used to sign webhook payloads for verification. Include this in
+   * your HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; empty for API-key and OAuth callers on later reads.
+   */
+  webhook_secret: string;
 }
 
 /**
@@ -4889,6 +4909,12 @@ export interface WebhookListParams extends CursorPageParams {
    * The unique identifier of the company to list webhooks for.
    */
   company_id: string;
+
+  /**
+   * Only return webhooks attached to this app. Omit to list the company's own
+   * webhooks.
+   */
+  app_id?: string | null;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

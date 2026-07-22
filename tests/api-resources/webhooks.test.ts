@@ -93,6 +93,7 @@ describe('resource webhooks', () => {
     const response = await client.webhooks.list({
       company_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
+      app_id: 'app_xxxxxxxxxxxxxx',
       before: 'before',
       first: 42,
       last: 42,
