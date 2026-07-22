@@ -98,7 +98,7 @@ export interface Bounty {
    */
   id: string;
 
-  accepted_deliverable_types: Array<'content_url' | 'media'>;
+  accepted_deliverable_types: Array<'content_url' | 'media' | 'data_capture'>;
 
   /**
    * Submissions accepted so far.
@@ -119,9 +119,9 @@ export interface Bounty {
   budget_amount: number;
 
   /**
-   * What the poster wants the work to achieve. Determines which deliverable types
-   * the bounty accepts through the submissions API. `null` for bounties created
-   * before the taxonomy rolled out.
+   * What the poster wants the work to achieve, declared once at create. The server
+   * derives `accepted_deliverable_types` from it; posters never set deliverable
+   * types directly. `null` for bounties created before the taxonomy rolled out.
    */
   business_goal_type:
     | 'clipping'
@@ -132,6 +132,12 @@ export interface Bounty {
     | 'data_capture'
     | 'other'
     | null;
+
+  /**
+   * The technical contract footage must be recorded against. Present only on
+   * `data_capture` bounties; `null` for every other goal type.
+   */
+  capture_spec: Bounty.CaptureSpec | null;
 
   /**
    * When the bounty was created, as an ISO 8601 timestamp.
@@ -317,6 +323,160 @@ export interface Bounty {
 
 export namespace Bounty {
   /**
+   * The technical contract footage must be recorded against. Present only on
+   * `data_capture` bounties; `null` for every other goal type.
+   */
+  export interface CaptureSpec {
+    /**
+     * The naming convention for uploaded files, built from the required metadata
+     * fields.
+     */
+    filename_pattern: string;
+
+    /**
+     * Inertial measurement unit (IMU) recording requirements.
+     */
+    imu: CaptureSpec.Imu;
+
+    /**
+     * Schema version the client must stamp on the capture manifest it uploads.
+     */
+    manifest_schema_version: number;
+
+    /**
+     * Minimum length of a single clip, in seconds.
+     */
+    min_clip_duration_seconds: number;
+
+    required_metadata_fields: Array<string>;
+
+    /**
+     * Whether each clip must be one uninterrupted recording rather than stitched
+     * segments.
+     */
+    single_continuous_take: boolean;
+
+    /**
+     * Video recording requirements.
+     */
+    video: CaptureSpec.Video;
+  }
+
+  export namespace CaptureSpec {
+    /**
+     * Inertial measurement unit (IMU) recording requirements.
+     */
+    export interface Imu {
+      /**
+       * Units for the device-motion channels, as a compact key=unit string.
+       */
+      device_motion_units: string;
+
+      /**
+       * Units for the magnetometer channel.
+       */
+      magnetometer_units: string;
+
+      /**
+       * Minimum sustained IMU sample rate in hertz for a clip to pass validation.
+       */
+      min_rate_hz: number;
+
+      /**
+       * Target IMU sample rate in hertz.
+       */
+      target_rate_hz: number;
+
+      /**
+       * Minimum IMU sample rate in hertz tolerated during the warmup window.
+       */
+      warmup_min_rate_hz: number;
+
+      /**
+       * Startup window, in nanoseconds, during which the relaxed warmup rate applies.
+       */
+      warmup_ns: number;
+    }
+
+    /**
+     * Video recording requirements.
+     */
+    export interface Video {
+      /**
+       * Maximum acceptable average bitrate, in megabits per second.
+       */
+      bitrate_ceiling_mbps: number;
+
+      /**
+       * Minimum acceptable average bitrate, in megabits per second.
+       */
+      bitrate_floor_mbps: number;
+
+      /**
+       * Recommended average bitrate to encode at, in megabits per second.
+       */
+      bitrate_target_mbps: number;
+
+      /**
+       * Which physical lens to record with.
+       */
+      camera_lens: string;
+
+      codecs: Array<string>;
+
+      /**
+       * Whether the client must also write the camera make and model into the video
+       * container's metadata. When `false`, the capture manifest and export CSV are the
+       * metadata carrier.
+       */
+      embed_camera_metadata: boolean;
+
+      /**
+       * Target capture frame rate.
+       */
+      fps: number;
+
+      /**
+       * Required frame height in pixels — recorded footage must match exactly.
+       */
+      height: number;
+
+      /**
+       * Minimum acceptable horizontal field of view, in degrees.
+       */
+      min_fov_degrees: number;
+
+      /**
+       * Device orientation to record in.
+       */
+      orientation: string;
+
+      /**
+       * Preferred horizontal field of view, in degrees.
+       */
+      preferred_fov_degrees: number;
+
+      /**
+       * How the client must configure video stabilization: `off` disables EIS so raw
+       * motion is preserved for pose extraction, `on` requires it, `any` leaves the
+       * device default.
+       */
+      stabilization_mode: 'off' | 'on' | 'any';
+
+      /**
+       * Whether hardware/software stabilization must be enabled. True exactly when
+       * stabilization_mode is `on`.
+       */
+      stabilization_required: boolean;
+
+      /**
+       * Required frame width in pixels — recorded footage must match exactly.
+       */
+      width: number;
+    }
+  }
+
+  /**
    * Account whose balance funds the bounty pool, or `null` when a user funds it
    * personally. May differ from the account hosting `experience_id`.
    */
@@ -380,7 +540,7 @@ export interface BountyListItem {
    */
   id: string;
 
-  accepted_deliverable_types: Array<'content_url' | 'media'>;
+  accepted_deliverable_types: Array<'content_url' | 'media' | 'data_capture'>;
 
   /**
    * Submissions accepted so far.
@@ -401,9 +561,9 @@ export interface BountyListItem {
   budget_amount: number;
 
   /**
-   * What the poster wants the work to achieve. Determines which deliverable types
-   * the bounty accepts through the submissions API. `null` for bounties created
-   * before the taxonomy rolled out.
+   * What the poster wants the work to achieve, declared once at create. The server
+   * derives `accepted_deliverable_types` from it; posters never set deliverable
+   * types directly. `null` for bounties created before the taxonomy rolled out.
    */
   business_goal_type:
     | 'clipping'
@@ -664,6 +824,28 @@ export interface BountyCreateParams {
   allowed_country_codes?: Array<string> | null;
 
   /**
+   * Body param: What the poster wants the work to achieve. Declare the goal once
+   * here; the server derives `accepted_deliverable_types` from it, and each
+   * submission reports which shape it used as `deliverable_type`.
+   */
+  business_goal_type?:
+    | 'clipping'
+    | 'post_engagement'
+    | 'owned_account_growth'
+    | 'ugc_content'
+    | 'local_activation'
+    | 'data_capture'
+    | 'other';
+
+  /**
+   * Body param: Per-bounty overrides of the served capture contract. Only accepted
+   * when `business_goal_type` is `data_capture`; omitted fields keep the platform
+   * defaults, and the resulting contract is echoed back as `capture_spec` on the
+   * bounty.
+   */
+  capture_spec?: BountyCreateParams.CaptureSpec;
+
+  /**
    * Body param: Experience to host the bounty in (`exp_` tag). Any visibility —
    * public for an open bounty, private for an invited one. Required unless
    * account_id is set, in which case the bounty anchors in that account's public
@@ -696,6 +878,39 @@ export interface BountyCreateParams {
   'Idempotency-Key'?: string;
 }
 
+export namespace BountyCreateParams {
+  /**
+   * Per-bounty overrides of the served capture contract. Only accepted when
+   * `business_goal_type` is `data_capture`; omitted fields keep the platform
+   * defaults, and the resulting contract is echoed back as `capture_spec` on the
+   * bounty.
+   */
+  export interface CaptureSpec {
+    /**
+     * Average bitrate the recorder encodes at, in megabits per second. Must sit within
+     * the served floor and ceiling.
+     */
+    bitrate_target_mbps?: number;
+
+    /**
+     * Whether the recorder also writes camera make and model into the video
+     * container's metadata.
+     */
+    embed_camera_metadata?: boolean;
+
+    /**
+     * Minimum length of a single clip, in seconds.
+     */
+    min_clip_duration_seconds?: number;
+
+    /**
+     * How the recorder configures video stabilization. `off` preserves raw motion for
+     * pose extraction.
+     */
+    stabilization_mode?: 'off' | 'on' | 'any';
+  }
+}
+
 export interface BountyUpdateParams {
   /**
    * Scheduled drafts only. Number of submissions that can be accepted (winner
@@ -708,6 +923,20 @@ export interface BountyUpdateParams {
    * codes. Empty means worldwide.
    */
   allowed_country_codes?: Array<string> | null;
+
+  /**
+   * What the poster wants the work to achieve. Declare the goal once here; the
+   * server derives `accepted_deliverable_types` from it, and each submission reports
+   * which shape it used as `deliverable_type`.
+   */
+  business_goal_type?:
+    | 'clipping'
+    | 'post_engagement'
+    | 'owned_account_growth'
+    | 'ugc_content'
+    | 'local_activation'
+    | 'data_capture'
+    | 'other';
 
   /**
    * New full task instructions.

@@ -2,272 +2,216 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
+import { AppBuildsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * An App Build is a versioned artifact uploaded for an app — a hosted web archive, or an iOS/Android bundle. Builds start as drafts, go through review, and one approved build per platform is served to users as the production build.
+ *
+ * Use the App Builds API to upload a build for an app, list an app's builds with platform and status filters, retrieve a build, and promote a draft or approved build to production.
+ */
 export class AppBuilds extends APIResource {
   /**
-   * Returns a paginated list of build artifacts for a given app, with optional
-   * filtering by platform, status, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_builds`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const appBuildListResponse of client.appBuilds.list(
-   *   { app_id: 'app_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * Returns a paginated list of build artifacts for an app, newest first, with
+   * optional platform, status, and creation-date filters.
    */
   list(
     query: AppBuildListParams,
     options?: RequestOptions,
-  ): PagePromise<AppBuildListResponsesCursorPage, AppBuildListResponse> {
-    return this._client.getAPIList('/app_builds', CursorPage<AppBuildListResponse>, { query, ...options });
+  ): PagePromise<AppBuildsCursorPage, Shared.AppBuild> {
+    return this._client.getAPIList('/app_builds', CursorPage<Shared.AppBuild>, { query, ...options });
   }
 
   /**
-   * Upload a new build artifact for an app. The build must include a compiled code
-   * bundle for the specified platform.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_builds`
-   *
-   * @example
-   * ```ts
-   * const appBuild = await client.appBuilds.create({
-   *   attachment: { id: 'id' },
-   *   checksum: 'checksum',
-   *   platform: 'ios',
-   * });
-   * ```
+   * Uploads a new build artifact for an app. Upload the file first (POST /files or a
+   * direct upload), then reference it here; iOS and Android take a .zip bundle, web
+   * takes a JavaScript file or a .zip archive of the hosted site.
    */
-  create(body: AppBuildCreateParams, options?: RequestOptions): APIPromise<Shared.AppBuild> {
-    return this._client.post('/app_builds', { body, ...options });
+  create(params: AppBuildCreateParams, options?: RequestOptions): APIPromise<Shared.AppBuild> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/app_builds', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Retrieves the details of an existing app build.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_builds`
-   *
-   * @example
-   * ```ts
-   * const appBuild = await client.appBuilds.retrieve(
-   *   'apbu_xxxxxxxxxxxxx',
-   * );
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.AppBuild> {
     return this._client.get(path`/app_builds/${id}`, options);
   }
 
   /**
-   * Promote an approved or draft app build to production so it becomes the active
-   * version served to users.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_builds`
-   *
-   * @example
-   * ```ts
-   * const appBuild = await client.appBuilds.promote(
-   *   'apbu_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Promotes a draft or approved app build to production so it becomes the active
+   * version served to users. Draft builds enter review first.
    */
-  promote(id: string, options?: RequestOptions): APIPromise<Shared.AppBuild> {
-    return this._client.post(path`/app_builds/${id}/promote`, options);
+  promote(
+    id: string,
+    params: AppBuildPromoteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.AppBuild> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/app_builds/${id}/promote`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
-}
-
-export type AppBuildListResponsesCursorPage = CursorPage<AppBuildListResponse>;
-
-/**
- * A versioned build artifact for a Whop React Native App, submitted for review and
- * deployment to a specific platform.
- */
-export interface AppBuildListResponse {
-  /**
-   * The unique identifier for the app build.
-   */
-  id: string;
-
-  /**
-   * A SHA-256 hash of the uploaded build file, generated by the client and used to
-   * verify file integrity.
-   */
-  checksum: string;
-
-  /**
-   * The datetime the app build was created.
-   */
-  created_at: string;
-
-  /**
-   * A URL to download the app build as a .zip archive.
-   */
-  file_url: string;
-
-  /**
-   * Whether this build is the currently active production build for its platform.
-   */
-  is_production: boolean;
-
-  /**
-   * The target platform for this build.
-   */
-  platform: Shared.AppBuildPlatforms;
-
-  /**
-   * Feedback from the reviewer explaining why the build was rejected. Null if the
-   * build has not been reviewed or was approved.
-   */
-  review_message: string | null;
-
-  /**
-   * A URL to download the compressed source code archive that produced this build.
-   * Null if the build was uploaded without a source archive.
-   */
-  source_url: string | null;
-
-  /**
-   * The current review status of this build.
-   */
-  status: Shared.AppBuildStatuses;
-
-  /**
-   * The list of view types this build supports, as declared by the developer.
-   */
-  supported_app_view_types: Array<Shared.AppViewType>;
 }
 
 export interface AppBuildListParams extends CursorPageParams {
   /**
-   * The unique identifier of the app to list builds for.
+   * The app to list builds for, prefixed `app_`.
    */
   app_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * A cursor; returns builds before this position.
    */
-  before?: string | null;
+  before?: string;
 
   /**
-   * Only return builds created after this timestamp.
+   * Only return builds created after this ISO 8601 timestamp.
    */
-  created_after?: string | null;
+  created_after?: number | string;
 
   /**
-   * Only return builds created before this timestamp.
+   * Only return builds created before this ISO 8601 timestamp.
    */
-  created_before?: string | null;
+  created_before?: number | string;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * The number of builds to return (default 20, max 100).
    */
-  first?: number | null;
+  first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * The number of builds to return from the end of the range.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The different platforms an app build can target.
+   * Filter builds by target platform.
    */
-  platform?: Shared.AppBuildPlatforms | null;
+  platform?: 'ios' | 'android' | 'web';
 
   /**
-   * The different statuses an AppBuild can be in.
+   * Filter builds by review status.
    */
-  status?: Shared.AppBuildStatuses | null;
+  status?: 'draft' | 'pending' | 'approved' | 'rejected';
 }
 
 export interface AppBuildCreateParams {
   /**
-   * The build file to upload. For iOS and Android, this should be a .zip archive
-   * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file or a .zip archive of the hosted site.
+   * Body param: The uploaded build file: `{ id }` for an existing file or
+   * `{ direct_upload_id }` for a completed direct upload.
    */
   attachment: AppBuildCreateParams.Attachment;
 
   /**
-   * A client-generated checksum of the build file, used to verify file integrity
-   * when unpacked on a device.
+   * Body param: A client-generated checksum of the build file, used to verify file
+   * integrity when unpacked.
    */
   checksum: string;
 
   /**
-   * The target platform for the build. Accepted values: ios, android, web.
+   * Body param: The target platform for the build.
    */
-  platform: Shared.AppBuildPlatforms;
+  platform: 'ios' | 'android' | 'web';
 
   /**
-   * The identifier of the AI prompt that generated this build, if applicable.
+   * Body param: The AI prompt that generated this build, if applicable.
    */
-  ai_prompt_id?: string | null;
+  ai_prompt_id?: string;
 
   /**
-   * The unique identifier of the app to create the build for. Defaults to the app
-   * associated with the current API key.
+   * Body param: The app to create the build for, prefixed `app_`. Defaults to the
+   * app behind the presented credential.
    */
-  app_id?: string | null;
+  app_id?: string;
 
   /**
-   * An optional compressed archive (.zip or .gz) of the source code that produced
-   * this build, stored alongside the build so it can be downloaded later.
+   * Body param: An optional compressed archive (.zip or .gz) of the source code that
+   * produced this build, stored alongside the build so it can be downloaded later.
+   * Referenced like `attachment`, and must be a different file.
    */
-  source_attachment?: AppBuildCreateParams.SourceAttachment | null;
+  source_attachment?: AppBuildCreateParams.SourceAttachment;
 
   /**
-   * The view types this build supports. A build can support multiple view types but
-   * should only list the ones its code implements.
+   * Body param: The view types this build supports. Only list the ones its code
+   * implements.
    */
-  supported_app_view_types?: Array<Shared.AppViewType> | null;
+  supported_app_view_types?: Array<
+    'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi'
+  >;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace AppBuildCreateParams {
   /**
-   * The build file to upload. For iOS and Android, this should be a .zip archive
-   * containing a main_js_bundle.hbc file and an optional assets folder. For web,
-   * this should be a JavaScript file or a .zip archive of the hosted site.
+   * The uploaded build file: `{ id }` for an existing file or `{ direct_upload_id }`
+   * for a completed direct upload.
    */
   export interface Attachment {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded file.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
   }
 
   /**
    * An optional compressed archive (.zip or .gz) of the source code that produced
-   * this build, stored alongside the build so it can be downloaded later.
+   * this build, stored alongside the build so it can be downloaded later. Referenced
+   * like `attachment`, and must be a different file.
    */
   export interface SourceAttachment {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded file.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
   }
+}
+
+export interface AppBuildPromoteParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace AppBuilds {
   export {
-    type AppBuildListResponse as AppBuildListResponse,
-    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildListParams as AppBuildListParams,
     type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildPromoteParams as AppBuildPromoteParams,
   };
 }
+
+export { type AppBuildsCursorPage };
