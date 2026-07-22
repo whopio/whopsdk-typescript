@@ -370,6 +370,21 @@ Methods:
 - <code title="post /authorized_users">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">create</a>({ ...params }) -> AuthorizedUser</code>
 - <code title="delete /authorized_users/{id}">client.authorizedUsers.<a href="./src/resources/authorized-users.ts">delete</a>(id, { ...params }) -> AuthorizedUserDeleteResponse</code>
 
+# TeamMembers
+
+Types:
+
+- <code><a href="./src/resources/team-members.ts">TeamMember</a></code>
+- <code><a href="./src/resources/team-members.ts">TeamMemberDeleteResponse</a></code>
+
+Methods:
+
+- <code title="get /team_members">client.teamMembers.<a href="./src/resources/team-members.ts">list</a>({ ...params }) -> TeamMembersCursorPage</code>
+- <code title="get /team_members/{id}">client.teamMembers.<a href="./src/resources/team-members.ts">retrieve</a>(id) -> TeamMember</code>
+- <code title="post /team_members">client.teamMembers.<a href="./src/resources/team-members.ts">create</a>({ ...params }) -> TeamMember</code>
+- <code title="patch /team_members/{id}">client.teamMembers.<a href="./src/resources/team-members.ts">update</a>(id, { ...params }) -> TeamMember</code>
+- <code title="delete /team_members/{id}">client.teamMembers.<a href="./src/resources/team-members.ts">delete</a>(id) -> TeamMemberDeleteResponse</code>
+
 # AppBuilds
 
 Types:
@@ -1142,12 +1157,16 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/bounty-submissions.ts">BountyCaptureClip</a></code>
 - <code><a href="./src/resources/bounty-submissions.ts">BountySubmission</a></code>
 
 Methods:
 
 - <code title="get /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">list</a>({ ...params }) -> BountySubmissionsCursorPage</code>
 - <code title="post /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">create</a>({ ...params }) -> BountySubmission</code>
+- <code title="get /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">retrieve</a>(bountySubmissionID) -> BountySubmission</code>
+- <code title="delete /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">delete</a>(bountySubmissionID) -> void</code>
+- <code title="post /bounty_submissions/{bounty_submission_id}/submit">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">submit</a>(bountySubmissionID, { ...params }) -> BountySubmission</code>
 
 # AdCampaigns
 

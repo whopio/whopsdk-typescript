@@ -468,6 +468,36 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/authorized_users/{id}',
   },
   {
+    clientCallName: 'client.teamMembers.list',
+    fullyQualifiedName: 'teamMembers.list',
+    httpMethod: 'get',
+    httpPath: '/team_members',
+  },
+  {
+    clientCallName: 'client.teamMembers.retrieve',
+    fullyQualifiedName: 'teamMembers.retrieve',
+    httpMethod: 'get',
+    httpPath: '/team_members/{id}',
+  },
+  {
+    clientCallName: 'client.teamMembers.create',
+    fullyQualifiedName: 'teamMembers.create',
+    httpMethod: 'post',
+    httpPath: '/team_members',
+  },
+  {
+    clientCallName: 'client.teamMembers.update',
+    fullyQualifiedName: 'teamMembers.update',
+    httpMethod: 'patch',
+    httpPath: '/team_members/{id}',
+  },
+  {
+    clientCallName: 'client.teamMembers.delete',
+    fullyQualifiedName: 'teamMembers.delete',
+    httpMethod: 'delete',
+    httpPath: '/team_members/{id}',
+  },
+  {
     clientCallName: 'client.appBuilds.list',
     fullyQualifiedName: 'appBuilds.list',
     httpMethod: 'get',
@@ -1540,6 +1570,24 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'bountySubmissions.create',
     httpMethod: 'post',
     httpPath: '/bounty_submissions',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.retrieve',
+    fullyQualifiedName: 'bountySubmissions.retrieve',
+    httpMethod: 'get',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.delete',
+    fullyQualifiedName: 'bountySubmissions.delete',
+    httpMethod: 'delete',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.submit',
+    fullyQualifiedName: 'bountySubmissions.submit',
+    httpMethod: 'post',
+    httpPath: '/bounty_submissions/{bounty_submission_id}/submit',
   },
   {
     clientCallName: 'client.adCampaigns.list',

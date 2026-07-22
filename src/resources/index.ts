@@ -134,9 +134,11 @@ export {
 } from './bounties';
 export {
   BountySubmissions,
+  type BountyCaptureClip,
   type BountySubmission,
   type BountySubmissionListParams,
   type BountySubmissionCreateParams,
+  type BountySubmissionSubmitParams,
   type BountySubmissionsCursorPage,
 } from './bounty-submissions';
 export {
@@ -571,6 +573,15 @@ export {
   type SwapCreateParams,
   type SwapListParams,
 } from './swaps';
+export {
+  TeamMembers,
+  type TeamMember,
+  type TeamMemberDeleteResponse,
+  type TeamMemberListParams,
+  type TeamMemberCreateParams,
+  type TeamMemberUpdateParams,
+  type TeamMembersCursorPage,
+} from './team-members';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
