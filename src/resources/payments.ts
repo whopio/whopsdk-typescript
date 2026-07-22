@@ -469,6 +469,13 @@ export interface PaymentListResponse {
   currency: Shared.Currency;
 
   /**
+   * Phone number the customer provided at checkout, or their verified phone number
+   * when your checkout requires phone verification. `null` when no phone number was
+   * collected.
+   */
+  customer_phone: string | null;
+
+  /**
    * When an alert came in that this transaction will be disputed
    */
   dispute_alerted_at: string | null;
@@ -1024,7 +1031,8 @@ export interface PaymentListFeesResponse {
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
     | 'revshare_percentage_fee'
-    | 'application_fee';
+    | 'application_fee'
+    | 'high_risk_merchant_fee';
 }
 
 export interface PaymentListParams extends CursorPageParams {
