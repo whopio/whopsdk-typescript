@@ -82,10 +82,21 @@ import {
   NotificationPreferences,
 } from './resources/ai-chats';
 import {
+  APIKey,
+  APIKeyCreateParams,
+  APIKeyDeleteResponse,
+  APIKeyListParams,
+  APIKeyListPermissionsResponse,
+  APIKeyRotateParams,
+  APIKeyUpdateParams,
+  APIKeys,
+  APIKeysCursorPage,
+  Permission,
+} from './resources/api-keys';
+import {
   AppBuildCreateParams,
   AppBuildListParams,
-  AppBuildListResponse,
-  AppBuildListResponsesCursorPage,
+  AppBuildPromoteParams,
   AppBuilds,
 } from './resources/app-builds';
 import {
@@ -97,6 +108,7 @@ import {
   AppLogsResponse,
   AppType,
   AppUpdateParams,
+  AppUpdatePermissionsParams,
   Apps,
 } from './resources/apps';
 import {
@@ -639,12 +651,16 @@ import {
   VerificationSucceededWebhookEvent,
   Webhook,
   WebhookCreateParams,
-  WebhookCreateResponse,
   WebhookDeleteResponse,
   WebhookEvent,
+  WebhookListDeliveriesParams,
+  WebhookListDeliveriesResponse,
+  WebhookListDeliveriesResponsesCursorPage,
   WebhookListParams,
   WebhookListResponse,
   WebhookListResponsesCursorPage,
+  WebhookTestParams,
+  WebhookTestResponse,
   WebhookUpdateParams,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
@@ -1511,6 +1527,13 @@ export class Whop {
    *
    */
   apps: API.Apps = new API.Apps(this);
+  /**
+   * An API Key is a programmatic credential owned by an account or app. Each key carries its own permissions policy — explicit permission statements or an inherited system role — and can be restricted with an expiration date and an IP allowlist.
+   *
+   * Use the API Keys API to list a company or app's keys, create a key (the full secret is returned once, on creation), inspect a key's effective grants, update its name or restrictions, rotate its secret, and revoke it. These endpoints require a user session — they cannot be called with an API key.
+   *
+   */
+  apiKeys: API.APIKeys = new API.APIKeys(this);
   invoices: API.Invoices = new API.Invoices(this);
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   /**
@@ -1583,6 +1606,12 @@ export class Whop {
    *
    */
   teamMembers: API.TeamMembers = new API.TeamMembers(this);
+  /**
+   * An App Build is a versioned artifact uploaded for an app — a hosted web archive, or an iOS/Android bundle. Builds start as drafts, go through review, and one approved build per platform is served to users as the production build.
+   *
+   * Use the App Builds API to upload a build for an app, list an app's builds with platform and status filters, retrieve a build, and promote a draft or approved build to production.
+   *
+   */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
   /**
@@ -1735,6 +1764,7 @@ export class Whop {
 }
 
 Whop.Apps = Apps;
+Whop.APIKeys = APIKeys;
 Whop.Invoices = Invoices;
 Whop.CourseLessonInteractions = CourseLessonInteractions;
 Whop.Products = Products;
@@ -1822,7 +1852,21 @@ export declare namespace Whop {
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppUpdatePermissionsParams as AppUpdatePermissionsParams,
     type AppLogsParams as AppLogsParams,
+  };
+
+  export {
+    APIKeys as APIKeys,
+    type APIKey as APIKey,
+    type Permission as Permission,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyListPermissionsResponse as APIKeyListPermissionsResponse,
+    type APIKeysCursorPage as APIKeysCursorPage,
+    type APIKeyListParams as APIKeyListParams,
+    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyUpdateParams as APIKeyUpdateParams,
+    type APIKeyRotateParams as APIKeyRotateParams,
   };
 
   export {
@@ -1914,9 +1958,10 @@ export declare namespace Whop {
     type APIVersion as APIVersion,
     type Webhook as Webhook,
     type WebhookEvent as WebhookEvent,
-    type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookListDeliveriesResponse as WebhookListDeliveriesResponse,
+    type WebhookTestResponse as WebhookTestResponse,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
@@ -1960,9 +2005,12 @@ export declare namespace Whop {
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListDeliveriesResponsesCursorPage as WebhookListDeliveriesResponsesCursorPage,
     type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookTestParams as WebhookTestParams,
+    type WebhookListDeliveriesParams as WebhookListDeliveriesParams,
   };
 
   export {
@@ -2047,10 +2095,9 @@ export declare namespace Whop {
 
   export {
     AppBuilds as AppBuilds,
-    type AppBuildListResponse as AppBuildListResponse,
-    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildListParams as AppBuildListParams,
     type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildPromoteParams as AppBuildPromoteParams,
   };
 
   export {

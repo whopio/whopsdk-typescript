@@ -14,6 +14,7 @@ import * as WithdrawalsAPI from './withdrawals';
 import { Webhook as Webhook_ } from 'standardwebhooks';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -34,20 +35,6 @@ export class Webhooks extends APIResource {
   /**
    * Returns a paginated list of webhook endpoints configured for a company, ordered
    * by most recently created.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const webhookListResponse of client.webhooks.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
    */
   list(
     query: WebhookListParams,
@@ -57,83 +44,80 @@ export class Webhooks extends APIResource {
   }
 
   /**
-   * Creates a new webhook
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * const webhook = await client.webhooks.create({
-   *   url: 'https://example.com/path',
-   * });
-   * ```
+   * Creates a webhook endpoint that receives event notifications via HTTP POST.
    */
-  create(body: WebhookCreateParams, options?: RequestOptions): APIPromise<WebhookCreateResponse> {
-    return this._client.post('/webhooks', { body, ...options });
+  create(params: WebhookCreateParams, options?: RequestOptions): APIPromise<Webhook> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/webhooks', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Retrieves the details of an existing webhook.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * const webhook = await client.webhooks.retrieve(
-   *   'hook_xxxxxxxxxxxxx',
-   * );
-   * ```
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Webhook> {
     return this._client.get(path`/webhooks/${id}`, options);
   }
 
   /**
-   * Updates a webhook
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * const webhook = await client.webhooks.update(
-   *   'hook_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Updates a webhook endpoint's URL, subscribed events, API version, or enabled
+   * state.
    */
-  update(
-    id: string,
-    body: WebhookUpdateParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<Webhook> {
+  update(id: string, body: WebhookUpdateParams, options?: RequestOptions): APIPromise<Webhook> {
     return this._client.patch(path`/webhooks/${id}`, { body, ...options });
   }
 
   /**
-   * Deletes a webhook
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_webhook`
-   *
-   * @example
-   * ```ts
-   * const webhook = await client.webhooks.delete(
-   *   'hook_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * Permanently deletes a webhook endpoint. Returns `true` on success, matching the
+   * legacy proxy response.
    */
   delete(id: string, options?: RequestOptions): APIPromise<WebhookDeleteResponse> {
     return this._client.delete(path`/webhooks/${id}`, options);
   }
+
+  /**
+   * Sends a sample payload for the given event to the webhook's URL and returns the
+   * delivery result.
+   */
+  test(id: string, params: WebhookTestParams, options?: RequestOptions): APIPromise<WebhookTestResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post(path`/webhooks/${id}/test`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Returns a paginated list of delivery attempts for a webhook, ordered by most
+   * recent first. Includes the request payload, response body, response code, and
+   * timing for each attempt.
+   */
+  listDeliveries(
+    id: string,
+    query: WebhookListDeliveriesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): PagePromise<WebhookListDeliveriesResponsesCursorPage, WebhookListDeliveriesResponse> {
+    return this._client.getAPIList(
+      path`/webhooks/${id}/deliveries`,
+      CursorPage<WebhookListDeliveriesResponse>,
+      { query, ...options },
+    );
+  }
 }
 
 export type WebhookListResponsesCursorPage = CursorPage<WebhookListResponse>;
+
+export type WebhookListDeliveriesResponsesCursorPage = CursorPage<WebhookListDeliveriesResponse>;
 
 /**
  * The different API versions
@@ -191,6 +175,13 @@ export interface Webhook {
    * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
+
+  /**
+   * The secret key used to sign webhook payloads for verification. Include this in
+   * your HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; empty for API-key and OAuth callers on later reads.
+   */
+  webhook_secret: string;
 }
 
 /**
@@ -243,7 +234,7 @@ export type WebhookEvent =
  * A webhook endpoint that receives event notifications for a company via HTTP
  * POST.
  */
-export interface WebhookCreateResponse {
+export interface WebhookListResponse {
   /**
    * The unique identifier for the webhook.
    */
@@ -282,69 +273,78 @@ export interface WebhookCreateResponse {
   resource_id: string;
 
   /**
-   * The subset of subscribed event types that support sending test payloads.
-   */
-  testable_events: Array<WebhookEvent>;
-
-  /**
    * The destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 
   /**
    * The secret key used to sign webhook payloads for verification. Include this in
-   * your HMAC validation logic.
+   * your HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; empty for API-key and OAuth callers on later reads.
    */
   webhook_secret: string;
 }
 
-/**
- * A webhook endpoint that receives event notifications for a company via HTTP
- * POST.
- */
-export interface WebhookListResponse {
+export interface WebhookDeleteResponse {
   /**
-   * The unique identifier for the webhook.
+   * The ID of the deleted resource.
    */
   id: string;
 
   /**
-   * The API version used to format payloads sent to this webhook endpoint.
+   * Always `true`: the resource was deleted.
    */
-  api_version: APIVersion;
-
-  /**
-   * Whether events are sent for child resources. For example, if the webhook is on a
-   * company, enabling this sends events only from the company's sub-merchants (child
-   * companies).
-   */
-  child_resource_events: boolean;
-
-  /**
-   * The datetime the webhook was created.
-   */
-  created_at: string;
-
-  /**
-   * Whether this webhook endpoint is currently active and receiving events.
-   */
-  enabled: boolean;
-
-  /**
-   * The list of event types this webhook is subscribed to.
-   */
-  events: Array<WebhookEvent>;
-
-  /**
-   * The destination URL where webhook payloads are delivered via HTTP POST.
-   */
-  url: string;
+  deleted: boolean;
 }
 
-/**
- * Represents `true` or `false` values.
- */
-export type WebhookDeleteResponse = boolean;
+export interface WebhookListDeliveriesResponse {
+  /**
+   * Request body sent to the webhook endpoint.
+   */
+  request_body: unknown;
+
+  /**
+   * ID of the resource that triggered the webhook.
+   */
+  resource_id: string;
+
+  /**
+   * Response body received from the webhook endpoint.
+   */
+  response_body: unknown;
+
+  /**
+   * HTTP response code received from the webhook endpoint.
+   */
+  response_code: number;
+
+  /**
+   * When the webhook was sent, as an ISO 8601 timestamp.
+   */
+  sent_at: string;
+
+  /**
+   * Total time taken to send the webhook request, in seconds.
+   */
+  total_time: number;
+}
+
+export interface WebhookTestResponse {
+  /**
+   * The body of the webhook response.
+   */
+  body: unknown;
+
+  /**
+   * The HTTP response code of this request.
+   */
+  status: number;
+
+  /**
+   * Whether or not the webhook test was successful.
+   */
+  success: boolean;
+}
 
 export interface ChatMessageCreatedWebhookEvent {
   /**
@@ -4821,85 +4821,121 @@ export type UnwrapWebhookEvent =
 
 export interface WebhookListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list webhooks for.
+   * The unique identifier of the account to list webhooks for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Only return webhooks attached to this app. Omit to list the company's own
+   * webhooks.
    */
-  before?: string | null;
+  app_id?: string;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * A cursor; returns webhooks before this position.
    */
-  first?: number | null;
+  before?: string;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * The number of webhooks to return (default 20, max 100).
    */
-  last?: number | null;
+  first?: number;
+
+  /**
+   * The number of webhooks to return from the end of the range.
+   */
+  last?: number;
 }
 
 export interface WebhookCreateParams {
   /**
-   * The URL to send the webhook to.
+   * Body param: The URL to send the webhook to.
    */
   url: string;
 
   /**
-   * The different API versions
+   * Body param: The API version for this webhook. Defaults to `v2`.
    */
-  api_version?: APIVersion | null;
+  api_version?: 'v1' | 'v2' | 'v5';
 
   /**
-   * Whether or not to send events for child resources. For example, if the webhook
-   * is created for a Company, enabling this will only send events from the Company's
-   * sub-merchants (child companies).
+   * Body param: Whether or not to send events for child resources. For example, if
+   * the webhook is created for a company, enabling this will only send events from
+   * the company's sub-merchants (child companies).
    */
-  child_resource_events?: boolean | null;
+  child_resource_events?: boolean;
 
   /**
-   * Whether or not the webhook is enabled.
+   * Body param: Whether or not the webhook is enabled. Defaults to `true`.
    */
-  enabled?: boolean | null;
+  enabled?: boolean;
 
   /**
-   * The events to send the webhook for.
+   * Body param: The events to send the webhook for, in dot form (for example
+   * `payment.succeeded`).
    */
-  events?: Array<WebhookEvent> | null;
+  events?: Array<string>;
 
   /**
-   * The resource to create the webhook for. By default this will use current company
+   * Body param: The company or app to create the webhook for. Defaults to the
+   * current company.
    */
   resource_id?: string | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface WebhookUpdateParams {
   /**
-   * The different API versions
+   * The API version for this webhook.
    */
-  api_version?: APIVersion | null;
+  api_version?: 'v1' | 'v2' | 'v5';
 
   /**
    * Whether or not to send events for child resources.
    */
-  child_resource_events?: boolean | null;
+  child_resource_events?: boolean;
 
   /**
    * Whether or not the webhook is enabled.
    */
-  enabled?: boolean | null;
+  enabled?: boolean;
 
   /**
-   * The events to send the webhook for.
+   * The events to send the webhook for, in dot form (for example
+   * `payment.succeeded`).
    */
-  events?: Array<WebhookEvent> | null;
+  events?: Array<string>;
 
   /**
    * The URL to send the webhook to.
    */
-  url?: string | null;
+  url?: string;
+}
+
+export interface WebhookTestParams {
+  /**
+   * Body param: The event to test the webhook for, in dot form (for example
+   * `payment.succeeded`).
+   */
+  event: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface WebhookListDeliveriesParams extends CursorPageParams {
+  /**
+   * The number of deliveries to return (default 50, max 100).
+   */
+  first?: number;
 }
 
 export declare namespace Webhooks {
@@ -4907,9 +4943,10 @@ export declare namespace Webhooks {
     type APIVersion as APIVersion,
     type Webhook as Webhook,
     type WebhookEvent as WebhookEvent,
-    type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookListDeliveriesResponse as WebhookListDeliveriesResponse,
+    type WebhookTestResponse as WebhookTestResponse,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
@@ -4953,8 +4990,11 @@ export declare namespace Webhooks {
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListDeliveriesResponsesCursorPage as WebhookListDeliveriesResponsesCursorPage,
     type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookTestParams as WebhookTestParams,
+    type WebhookListDeliveriesParams as WebhookListDeliveriesParams,
   };
 }

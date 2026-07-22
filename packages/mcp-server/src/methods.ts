@@ -35,10 +35,58 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/apps/{id}',
   },
   {
+    clientCallName: 'client.apps.updatePermissions',
+    fullyQualifiedName: 'apps.updatePermissions',
+    httpMethod: 'patch',
+    httpPath: '/apps/{id}/permissions',
+  },
+  {
     clientCallName: 'client.apps.logs',
     fullyQualifiedName: 'apps.logs',
     httpMethod: 'get',
     httpPath: '/apps/{id}/logs',
+  },
+  {
+    clientCallName: 'client.apiKeys.list',
+    fullyQualifiedName: 'apiKeys.list',
+    httpMethod: 'get',
+    httpPath: '/api_keys',
+  },
+  {
+    clientCallName: 'client.apiKeys.create',
+    fullyQualifiedName: 'apiKeys.create',
+    httpMethod: 'post',
+    httpPath: '/api_keys',
+  },
+  {
+    clientCallName: 'client.apiKeys.retrieve',
+    fullyQualifiedName: 'apiKeys.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.update',
+    fullyQualifiedName: 'apiKeys.update',
+    httpMethod: 'patch',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.delete',
+    fullyQualifiedName: 'apiKeys.delete',
+    httpMethod: 'delete',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.rotate',
+    fullyQualifiedName: 'apiKeys.rotate',
+    httpMethod: 'post',
+    httpPath: '/api_keys/{id}/rotate',
+  },
+  {
+    clientCallName: 'client.apiKeys.listPermissions',
+    fullyQualifiedName: 'apiKeys.listPermissions',
+    httpMethod: 'get',
+    httpPath: '/api_keys/permissions',
   },
   {
     clientCallName: 'client.invoices.list',
@@ -280,6 +328,18 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'webhooks.delete',
     httpMethod: 'delete',
     httpPath: '/webhooks/{id}',
+  },
+  {
+    clientCallName: 'client.webhooks.test',
+    fullyQualifiedName: 'webhooks.test',
+    httpMethod: 'post',
+    httpPath: '/webhooks/{id}/test',
+  },
+  {
+    clientCallName: 'client.webhooks.listDeliveries',
+    fullyQualifiedName: 'webhooks.listDeliveries',
+    httpMethod: 'get',
+    httpPath: '/webhooks/{id}/deliveries',
   },
   {
     clientCallName: 'client.plans.list',

@@ -68,6 +68,13 @@ export interface App {
   dashboard_path: string | null;
 
   /**
+   * The app's default API key, used to authenticate requests on behalf of this app.
+   * Null if the app has no default key. Requires the 'developer:manage_api_key'
+   * permission.
+   */
+  default_api_key: App.DefaultAPIKey | null;
+
+  /**
    * A written description of what this app does, displayed on the app store listing
    * page. Null if no description has been set.
    */
@@ -106,10 +113,21 @@ export interface App {
   icon: App.Icon | null;
 
   /**
+   * The available marketplace statuses to choose from.
+   */
+  marketplace_status: 'not_available' | 'pending_review' | 'live_marketplace' | null;
+
+  /**
    * The display name of this app shown on the app store and in experience
    * navigation. Maximum 30 characters.
    */
   name: string;
+
+  /**
+   * How this app authenticates when exchanging OAuth authorization and refresh
+   * grants.
+   */
+  oauth_client_type: 'public' | 'confidential';
 
   /**
    * The URL path template for a specific view of this app, appended to the base
@@ -123,6 +141,15 @@ export interface App {
    * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
    */
   origin: string | null;
+
+  /**
+   * Represents a unique identifier that is Base64 obfuscated. It is often used to
+   * refetch an object or as key for a cache. The ID type appears in a JSON response
+   * as a String; however, it is not intended to be human-readable. When expected as
+   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+   * input value will be accepted as an ID.
+   */
+  product_id: string | null;
 
   /**
    * The approved app build currently served to users on web. Null if no production
@@ -237,6 +264,36 @@ export namespace App {
      * The user's unique username shown on their public profile.
      */
     username: string;
+  }
+
+  /**
+   * The app's default API key, used to authenticate requests on behalf of this app.
+   * Null if the app has no default key. Requires the 'developer:manage_api_key'
+   * permission.
+   */
+  export interface DefaultAPIKey {
+    /**
+     * The unique identifier for the authorized api key.
+     */
+    id: string;
+
+    /**
+     * A user set name to identify an API key
+     */
+    name: string | null;
+
+    /**
+     * A masked version of the secret key used to authenticate requests. This is so
+     * that the owner can easily identify which key it is without being shown the full
+     * secret.
+     */
+    obfuscated_secret_key: string;
+
+    /**
+     * The secret key used to authenticate requests. This is only available if the
+     * current actor would have been able to create this api key.
+     */
+    secret_key: string | null;
   }
 
   /**
@@ -4287,3 +4344,5 @@ export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
 
 export type ProductListItemsCursorPage = CursorPage<ProductListItem>;
+
+export type AppBuildsCursorPage = CursorPage<AppBuild>;

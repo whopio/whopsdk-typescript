@@ -74,7 +74,27 @@ Methods:
 - <code title="post /apps">client.apps.<a href="./src/resources/apps.ts">create</a>({ ...params }) -> App</code>
 - <code title="get /apps/{id}">client.apps.<a href="./src/resources/apps.ts">retrieve</a>(id) -> App</code>
 - <code title="patch /apps/{id}">client.apps.<a href="./src/resources/apps.ts">update</a>(id, { ...params }) -> App</code>
+- <code title="patch /apps/{id}/permissions">client.apps.<a href="./src/resources/apps.ts">updatePermissions</a>(id, { ...params }) -> App</code>
 - <code title="get /apps/{id}/logs">client.apps.<a href="./src/resources/apps.ts">logs</a>(id, { ...params }) -> AppLogsResponse</code>
+
+# APIKeys
+
+Types:
+
+- <code><a href="./src/resources/api-keys.ts">APIKey</a></code>
+- <code><a href="./src/resources/api-keys.ts">Permission</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyDeleteResponse</a></code>
+- <code><a href="./src/resources/api-keys.ts">APIKeyListPermissionsResponse</a></code>
+
+Methods:
+
+- <code title="get /api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">list</a>({ ...params }) -> APIKeysCursorPage</code>
+- <code title="post /api_keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKey</code>
+- <code title="get /api_keys/{id}">client.apiKeys.<a href="./src/resources/api-keys.ts">retrieve</a>(id) -> APIKey</code>
+- <code title="patch /api_keys/{id}">client.apiKeys.<a href="./src/resources/api-keys.ts">update</a>(id, { ...params }) -> APIKey</code>
+- <code title="delete /api_keys/{id}">client.apiKeys.<a href="./src/resources/api-keys.ts">delete</a>(id) -> APIKeyDeleteResponse</code>
+- <code title="post /api_keys/{id}/rotate">client.apiKeys.<a href="./src/resources/api-keys.ts">rotate</a>(id, { ...params }) -> APIKey</code>
+- <code title="get /api_keys/permissions">client.apiKeys.<a href="./src/resources/api-keys.ts">listPermissions</a>() -> APIKeyListPermissionsResponse</code>
 
 # Invoices
 
@@ -210,9 +230,10 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">APIVersion</a></code>
 - <code><a href="./src/resources/webhooks.ts">Webhook</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">WebhookCreateResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">WebhookListDeliveriesResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">WebhookTestResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatMessageCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatReactionCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
@@ -259,10 +280,12 @@ Types:
 Methods:
 
 - <code title="get /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>({ ...params }) -> WebhookListResponsesCursorPage</code>
-- <code title="post /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">create</a>({ ...params }) -> WebhookCreateResponse</code>
+- <code title="post /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">create</a>({ ...params }) -> Webhook</code>
 - <code title="get /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">retrieve</a>(id) -> Webhook</code>
 - <code title="patch /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">update</a>(id, { ...params }) -> Webhook</code>
 - <code title="delete /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(id) -> WebhookDeleteResponse</code>
+- <code title="post /webhooks/{id}/test">client.webhooks.<a href="./src/resources/webhooks.ts">test</a>(id, { ...params }) -> WebhookTestResponse</code>
+- <code title="get /webhooks/{id}/deliveries">client.webhooks.<a href="./src/resources/webhooks.ts">listDeliveries</a>(id, { ...params }) -> WebhookListDeliveriesResponsesCursorPage</code>
 - <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>
 
 # Plans
@@ -387,16 +410,12 @@ Methods:
 
 # AppBuilds
 
-Types:
-
-- <code><a href="./src/resources/app-builds.ts">AppBuildListResponse</a></code>
-
 Methods:
 
-- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
+- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildsCursorPage</code>
 - <code title="post /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">create</a>({ ...params }) -> AppBuild</code>
 - <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id) -> AppBuild</code>
-- <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id) -> AppBuild</code>
+- <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id, { ...params }) -> AppBuild</code>
 
 # Shipments
 
