@@ -25,6 +25,8 @@ import {
   AdCampaign,
   AdCampaignCreateParams,
   AdCampaignDeleteResponse,
+  AdCampaignDuplicateParams,
+  AdCampaignDuplicateResponse,
   AdCampaignListParams,
   AdCampaignPauseParams,
   AdCampaignRetrieveParams,
@@ -38,6 +40,8 @@ import {
   AdGroup,
   AdGroupCreateParams,
   AdGroupDeleteResponse,
+  AdGroupDuplicateParams,
+  AdGroupDuplicateResponse,
   AdGroupEstimateReachParams,
   AdGroupListParams,
   AdGroupPauseParams,
@@ -62,6 +66,8 @@ import {
   Ad,
   AdCreateParams,
   AdDeleteResponse,
+  AdDuplicateParams,
+  AdDuplicateResponse,
   AdListParams,
   AdPauseParams,
   AdRetrieveParams,
@@ -82,10 +88,21 @@ import {
   NotificationPreferences,
 } from './resources/ai-chats';
 import {
+  APIKey,
+  APIKeyCreateParams,
+  APIKeyDeleteResponse,
+  APIKeyListParams,
+  APIKeyListPermissionsResponse,
+  APIKeyRotateParams,
+  APIKeyUpdateParams,
+  APIKeys,
+  APIKeysCursorPage,
+  Permission,
+} from './resources/api-keys';
+import {
   AppBuildCreateParams,
   AppBuildListParams,
-  AppBuildListResponse,
-  AppBuildListResponsesCursorPage,
+  AppBuildPromoteParams,
   AppBuilds,
 } from './resources/app-builds';
 import {
@@ -97,6 +114,7 @@ import {
   AppLogsResponse,
   AppType,
   AppUpdateParams,
+  AppUpdatePermissionsParams,
   Apps,
 } from './resources/apps';
 import {
@@ -128,9 +146,11 @@ import {
   BountyUpdateParams,
 } from './resources/bounties';
 import {
+  BountyCaptureClip,
   BountySubmission,
   BountySubmissionCreateParams,
   BountySubmissionListParams,
+  BountySubmissionSubmitParams,
   BountySubmissions,
   BountySubmissionsCursorPage,
 } from './resources/bounty-submissions';
@@ -549,6 +569,15 @@ import {
   SwapRetrieveResponse,
   Swaps,
 } from './resources/swaps';
+import {
+  TeamMember,
+  TeamMemberCreateParams,
+  TeamMemberDeleteResponse,
+  TeamMemberListParams,
+  TeamMemberUpdateParams,
+  TeamMembers,
+  TeamMembersCursorPage,
+} from './resources/team-members';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -628,12 +657,16 @@ import {
   VerificationSucceededWebhookEvent,
   Webhook,
   WebhookCreateParams,
-  WebhookCreateResponse,
   WebhookDeleteResponse,
   WebhookEvent,
+  WebhookListDeliveriesParams,
+  WebhookListDeliveriesResponse,
+  WebhookListDeliveriesResponsesCursorPage,
   WebhookListParams,
   WebhookListResponse,
   WebhookListResponsesCursorPage,
+  WebhookTestParams,
+  WebhookTestResponse,
   WebhookUpdateParams,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
@@ -1395,11 +1428,19 @@ export class Whop {
     return () => controller.abort();
   }
 
-  private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
+  private buildBody({ options }: { options: FinalRequestOptions }): {
     bodyHeaders: HeadersLike;
     body: BodyInit | undefined;
   } {
+    const { body, headers: rawHeaders } = options;
     if (!body) {
+      // A resource method always passes a `body` key when its operation defines a
+      // request body, even if the caller omitted an optional body param. Keep the
+      // content-type for those, and only elide it for operations with no body at
+      // all (e.g. GET/DELETE).
+      if (body == null && 'body' in options) {
+        return this.#encoder({ body, headers: buildHeaders([rawHeaders]) });
+      }
       return { bodyHeaders: undefined, body: undefined };
     }
     const headers = buildHeaders([rawHeaders]);
@@ -1466,6 +1507,13 @@ export class Whop {
    *
    */
   apps: API.Apps = new API.Apps(this);
+  /**
+   * An API Key is a programmatic credential owned by an account or app. Each key carries its own permissions policy — explicit permission statements or an inherited system role — and can be restricted with an expiration date and an IP allowlist.
+   *
+   * Use the API Keys API to list a company or app's keys, create a key (the full secret is returned once, on creation), inspect a key's effective grants, update its name or restrictions, rotate its secret, and revoke it. These endpoints require a user session — they cannot be called with an API key.
+   *
+   */
+  apiKeys: API.APIKeys = new API.APIKeys(this);
   invoices: API.Invoices = new API.Invoices(this);
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   /**
@@ -1531,6 +1579,19 @@ export class Whop {
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
   memberships: API.Memberships = new API.Memberships(this);
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
+  /**
+   * A Team Member is a member of an account's team: the link between a user and an account, carrying the role that controls what they can do. Roles are either system roles (like `admin` or `moderator`) or `custom` roles managed from the dashboard.
+   *
+   * Use the Team Members API to list an account's team, add a user to the team with a system role, change a member's role, and remove members. Adding a user who has not yet accepted sends an invitation instead.
+   *
+   */
+  teamMembers: API.TeamMembers = new API.TeamMembers(this);
+  /**
+   * An App Build is a versioned artifact uploaded for an app — a hosted web archive, or an iOS/Android bundle. Builds start as drafts, go through review, and one approved build per platform is served to users as the production build.
+   *
+   * Use the App Builds API to upload a build for an app, list an app's builds with platform and status filters, retrieve a build, and promote a draft or approved build to production.
+   *
+   */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
   /**
@@ -1683,6 +1744,7 @@ export class Whop {
 }
 
 Whop.Apps = Apps;
+Whop.APIKeys = APIKeys;
 Whop.Invoices = Invoices;
 Whop.CourseLessonInteractions = CourseLessonInteractions;
 Whop.Products = Products;
@@ -1700,6 +1762,7 @@ Whop.Transfers = Transfers;
 Whop.LedgerAccounts = LedgerAccounts;
 Whop.Memberships = Memberships;
 Whop.AuthorizedUsers = AuthorizedUsers;
+Whop.TeamMembers = TeamMembers;
 Whop.AppBuilds = AppBuilds;
 Whop.Shipments = Shipments;
 Whop.CheckoutConfigurations = CheckoutConfigurations;
@@ -1769,7 +1832,21 @@ export declare namespace Whop {
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppUpdatePermissionsParams as AppUpdatePermissionsParams,
     type AppLogsParams as AppLogsParams,
+  };
+
+  export {
+    APIKeys as APIKeys,
+    type APIKey as APIKey,
+    type Permission as Permission,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyListPermissionsResponse as APIKeyListPermissionsResponse,
+    type APIKeysCursorPage as APIKeysCursorPage,
+    type APIKeyListParams as APIKeyListParams,
+    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyUpdateParams as APIKeyUpdateParams,
+    type APIKeyRotateParams as APIKeyRotateParams,
   };
 
   export {
@@ -1861,9 +1938,10 @@ export declare namespace Whop {
     type APIVersion as APIVersion,
     type Webhook as Webhook,
     type WebhookEvent as WebhookEvent,
-    type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookListDeliveriesResponse as WebhookListDeliveriesResponse,
+    type WebhookTestResponse as WebhookTestResponse,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
@@ -1907,9 +1985,12 @@ export declare namespace Whop {
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListDeliveriesResponsesCursorPage as WebhookListDeliveriesResponsesCursorPage,
     type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookTestParams as WebhookTestParams,
+    type WebhookListDeliveriesParams as WebhookListDeliveriesParams,
   };
 
   export {
@@ -1983,11 +2064,20 @@ export declare namespace Whop {
   };
 
   export {
+    TeamMembers as TeamMembers,
+    type TeamMember as TeamMember,
+    type TeamMemberDeleteResponse as TeamMemberDeleteResponse,
+    type TeamMembersCursorPage as TeamMembersCursorPage,
+    type TeamMemberListParams as TeamMemberListParams,
+    type TeamMemberCreateParams as TeamMemberCreateParams,
+    type TeamMemberUpdateParams as TeamMemberUpdateParams,
+  };
+
+  export {
     AppBuilds as AppBuilds,
-    type AppBuildListResponse as AppBuildListResponse,
-    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildListParams as AppBuildListParams,
     type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildPromoteParams as AppBuildPromoteParams,
   };
 
   export {
@@ -2468,16 +2558,19 @@ export declare namespace Whop {
 
   export {
     BountySubmissions as BountySubmissions,
+    type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,
+    type BountySubmissionSubmitParams as BountySubmissionSubmitParams,
   };
 
   export {
     AdCampaigns as AdCampaigns,
     type AdCampaign as AdCampaign,
     type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignDuplicateResponse as AdCampaignDuplicateResponse,
     type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
     type AdCampaignCreateParams as AdCampaignCreateParams,
@@ -2485,6 +2578,7 @@ export declare namespace Whop {
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignPauseParams as AdCampaignPauseParams,
     type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignDuplicateParams as AdCampaignDuplicateParams,
     type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 
@@ -2494,6 +2588,7 @@ export declare namespace Whop {
     type ReachEstimate as ReachEstimate,
     type TargetingOption as TargetingOption,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupDuplicateResponse as AdGroupDuplicateResponse,
     type AdGroupSearchTargetingOptionsResponse as AdGroupSearchTargetingOptionsResponse,
     type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
@@ -2502,6 +2597,7 @@ export declare namespace Whop {
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupPauseParams as AdGroupPauseParams,
     type AdGroupUnpauseParams as AdGroupUnpauseParams,
+    type AdGroupDuplicateParams as AdGroupDuplicateParams,
     type AdGroupSearchTargetingOptionsParams as AdGroupSearchTargetingOptionsParams,
     type AdGroupEstimateReachParams as AdGroupEstimateReachParams,
   };
@@ -2510,6 +2606,7 @@ export declare namespace Whop {
     Ads as Ads,
     type Ad as Ad,
     type AdDeleteResponse as AdDeleteResponse,
+    type AdDuplicateResponse as AdDuplicateResponse,
     type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
     type AdCreateParams as AdCreateParams,
@@ -2517,6 +2614,7 @@ export declare namespace Whop {
     type AdUpdateParams as AdUpdateParams,
     type AdPauseParams as AdPauseParams,
     type AdUnpauseParams as AdUnpauseParams,
+    type AdDuplicateParams as AdDuplicateParams,
   };
 
   export {

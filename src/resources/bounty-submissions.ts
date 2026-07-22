@@ -5,6 +5,7 @@ import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils/path';
 
 /**
  * A Bounty Submission is one worker's attempt on a bounty. It starts as an in-progress attempt, enters the review queue when proof is submitted, and ends approved (paid from the bounty's escrowed pool) or denied.
@@ -28,9 +29,11 @@ export class BountySubmissions extends APIResource {
   }
 
   /**
-   * Submits work to a workforce bounty. Include a `deliverable` payload matching the
-   * bounty's accepted deliverable type: `content_url` for link-based bounties,
-   * `media` for upload-based bounties. The submission lands directly in review.
+   * Creates a submission on a workforce bounty. For `content_url` and `media`
+   * bounties, include the matching `deliverable` payload and the submission goes
+   * straight to review — create is the only step. For `data_capture` bounties, omit
+   * the deliverable: this starts a claimed attempt whose proof accumulates
+   * server-side, and the separate submit endpoint sends it to review once complete.
    * Requires a user credential — account API keys cannot author submissions.
    */
   create(params: BountySubmissionCreateParams, options?: RequestOptions): APIPromise<BountySubmission> {
@@ -44,9 +47,134 @@ export class BountySubmissions extends APIResource {
       ]),
     });
   }
+
+  /**
+   * Retrieves one bounty submission the credential can see — one the caller
+   * authored, or one on a bounty they posted or their account owns.
+   */
+  retrieve(bountySubmissionID: string, options?: RequestOptions): APIPromise<BountySubmission> {
+    return this._client.get(path`/bounty_submissions/${bountySubmissionID}`, options);
+  }
+
+  /**
+   * Cancels the caller's own active attempt on a bounty and discards any accumulated
+   * capture clips. Only the worker who started the attempt can cancel it — account
+   * API keys cannot.
+   */
+  delete(bountySubmissionID: string, options?: RequestOptions): APIPromise<void> {
+    return this._client.delete(path`/bounty_submissions/${bountySubmissionID}`, {
+      ...options,
+      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
+    });
+  }
+
+  /**
+   * Submits a claimed attempt for review once its server-accumulated proof is ready.
+   * A data capture attempt needs enough validated clip time to meet the bounty's
+   * required capture duration. Only the worker who started the attempt can submit it
+   * — account API keys cannot.
+   */
+  submit(
+    bountySubmissionID: string,
+    params: BountySubmissionSubmitParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<BountySubmission> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/bounty_submissions/${bountySubmissionID}/submit`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type BountySubmissionsCursorPage = CursorPage<BountySubmission>;
+
+export interface BountyCaptureClip {
+  /**
+   * Capture clip ID, prefixed `bclip_`.
+   */
+  id: string;
+
+  /**
+   * The bounty submission (attempt) this clip belongs to, prefixed `btys_`.
+   */
+  bounty_submission_id: string;
+
+  /**
+   * When the clip was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Server-validated clip duration in whole seconds. `null` until validation
+   * completes.
+   */
+  duration_seconds: number | null;
+
+  /**
+   * Stable validation failure code. `null` unless `status` is `failed`.
+   */
+  failure_code: string | null;
+
+  /**
+   * Human-readable validation failure reason. `null` unless `status` is `failed`.
+   */
+  failure_message: string | null;
+
+  /**
+   * Temporary signed URL for the video frame timestamp log. Returned only on
+   * single-clip reads for an authorized viewer; `null` on list responses or until
+   * the artifact is attached.
+   */
+  frames_url: string | null;
+
+  /**
+   * Temporary signed URL for the IMU (accelerometer + gyroscope) log. Returned only
+   * on single-clip reads for an authorized viewer; `null` on list responses or until
+   * the artifact is attached.
+   */
+  imu_url: string | null;
+
+  /**
+   * Temporary signed URL for the capture manifest. Returned only on single-clip
+   * reads for an authorized viewer; `null` on list responses or until the artifact
+   * is attached.
+   */
+  manifest_url: string | null;
+
+  /**
+   * When server-side validation completed successfully, as an ISO 8601 timestamp.
+   * `null` until then.
+   */
+  ready_at: string | null;
+
+  /**
+   * The clip's stable order within the attempt, starting at 1.
+   */
+  sequence: number;
+
+  /**
+   * Recording and validation state. `recording` is still capturing; `verifying` is
+   * running server-side validation; `ready` passed validation and counts toward the
+   * verified-duration payout gate; `failed` did not validate.
+   */
+  status: 'recording' | 'verifying' | 'ready' | 'failed';
+
+  /**
+   * When the clip was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Temporary signed URL for the synchronized MP4 video. Returned only on
+   * single-clip reads for an authorized viewer; `null` on list responses or until
+   * the artifact is attached.
+   */
+  video_url: string | null;
+}
 
 export interface BountySubmission {
   /**
@@ -59,10 +187,42 @@ export interface BountySubmission {
    */
   bounty_id: string;
 
+  capture_clips: Array<BountyCaptureClip> | null;
+
+  /**
+   * The vendor filename stem `Country_City_Site_Station_Operator`, derived from the
+   * capture metadata. `null` until every component is present.
+   */
+  capture_filename: string | null;
+
+  /**
+   * Number of verified capture clips accepted for this submission so far. `0` for
+   * submissions whose deliverable doesn't accumulate clips.
+   */
+  captured_clip_count: number;
+
+  /**
+   * Total verified duration of accepted capture clips, in whole seconds. `0` for
+   * submissions whose deliverable doesn't accumulate clips.
+   */
+  captured_duration_seconds: number;
+
+  /**
+   * Capture metadata: city the footage was recorded in. `null` unless capture
+   * metadata was provided.
+   */
+  city: string | null;
+
   /**
    * Written proof the worker submitted with their work.
    */
   content: string | null;
+
+  /**
+   * Capture metadata: country the footage was recorded in. `null` unless capture
+   * metadata was provided.
+   */
+  country: string | null;
 
   /**
    * When the submission was created, as an ISO 8601 timestamp.
@@ -70,11 +230,12 @@ export interface BountySubmission {
   created_at: string;
 
   /**
-   * Deliverable shape the worker submitted. `content_url` is links to posted
-   * content; `media` is uploaded files. `null` on submissions authored before
+   * Which of the bounty's `accepted_deliverable_types` this submission used. Branch
+   * on it to read the work: `content_url` and `media` carry `deliverable_urls`;
+   * `data_capture` carries `capture_clips`. `null` on submissions authored before
    * deliverable types existed.
    */
-  deliverable_type: 'content_url' | 'media' | null;
+  deliverable_type: 'content_url' | 'media' | 'data_capture' | null;
 
   deliverable_urls: Array<string> | null;
 
@@ -85,10 +246,39 @@ export interface BountySubmission {
   denial_reason: string | null;
 
   /**
+   * Capture metadata: device the footage was recorded on. `null` unless capture
+   * metadata was provided.
+   */
+  device: string | null;
+
+  /**
+   * Capture metadata: horizontal field of view in degrees. `null` when not reported.
+   */
+  fov: number | null;
+
+  /**
+   * Capture metadata: identifier of the person who recorded the footage. `null`
+   * unless capture metadata was provided.
+   */
+  operator: string | null;
+
+  /**
    * When the submission was approved or denied, as an ISO 8601 timestamp. `null`
    * until then.
    */
   resolved_at: string | null;
+
+  /**
+   * Capture metadata: site or venue the footage was recorded at. `null` unless
+   * capture metadata was provided.
+   */
+  site: string | null;
+
+  /**
+   * Capture metadata: station or position within the site. `null` unless capture
+   * metadata was provided.
+   */
+  station: string | null;
 
   /**
    * Lifecycle state. `in_progress` submissions are active attempts that have not
@@ -228,6 +418,13 @@ export interface BountySubmissionCreateParams {
   deliverable?: BountySubmissionCreateParams.Deliverable | null;
 
   /**
+   * Body param: Optional capture metadata describing where and how the footage was
+   * recorded. Persisted on the submission. On a `data_capture` bounty every field
+   * except `fov` is required whenever metadata is provided.
+   */
+  metadata?: BountySubmissionCreateParams.Metadata | null;
+
+  /**
    * Header param: A unique key that makes this request safe to retry. See
    * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
@@ -242,7 +439,7 @@ export namespace BountySubmissionCreateParams {
     /**
      * Deliverable shape. Must be accepted by the bounty's goal type.
      */
-    type: 'content_url' | 'media';
+    type: 'content_url' | 'media' | 'data_capture';
 
     /**
      * Optional written context shown to reviewers.
@@ -259,13 +456,65 @@ export namespace BountySubmissionCreateParams {
      */
     urls?: Array<string>;
   }
+
+  /**
+   * Optional capture metadata describing where and how the footage was recorded.
+   * Persisted on the submission. On a `data_capture` bounty every field except `fov`
+   * is required whenever metadata is provided.
+   */
+  export interface Metadata {
+    /**
+     * City the footage was recorded in.
+     */
+    city?: string | null;
+
+    /**
+     * Country the footage was recorded in.
+     */
+    country?: string | null;
+
+    /**
+     * Device the footage was recorded on.
+     */
+    device?: string | null;
+
+    /**
+     * Horizontal field of view in degrees.
+     */
+    fov?: number | null;
+
+    /**
+     * Identifier of the person who recorded the footage.
+     */
+    operator?: string | null;
+
+    /**
+     * Site or venue the footage was recorded at.
+     */
+    site?: string | null;
+
+    /**
+     * Station or position within the site.
+     */
+    station?: string | null;
+  }
+}
+
+export interface BountySubmissionSubmitParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace BountySubmissions {
   export {
+    type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,
+    type BountySubmissionSubmitParams as BountySubmissionSubmitParams,
   };
 }

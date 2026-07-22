@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as SocialAccountsAPI from './social-accounts';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -13,7 +14,10 @@ import { path } from '../internal/utils/path';
  */
 export class Users extends APIResource {
   /**
-   * Retrieves a user's public profile by user\_ tag, username, or 'me'.
+   * Retrieves a user's public profile by user\_ tag, username, or 'me', including
+   * linked social accounts. Reading your own profile returns every linked account
+   * (Discord, X/Twitter, Telegram); other profiles only include what is public on
+   * Whop (the primary Discord and the X account).
    */
   retrieve(
     id: string,
@@ -126,6 +130,8 @@ export interface User {
    * The user's profile picture, an object with a url
    */
   profile_picture: unknown | null;
+
+  social_accounts: Array<SocialAccountsAPI.SocialAccount>;
 
   /**
    * The user's unique username
