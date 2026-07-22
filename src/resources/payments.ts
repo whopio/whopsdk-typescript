@@ -1027,7 +1027,8 @@ export interface PaymentListFeesResponse {
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
     | 'revshare_percentage_fee'
-    | 'application_fee';
+    | 'application_fee'
+    | 'high_risk_merchant_fee';
 }
 
 export type PaymentCreateParams =
