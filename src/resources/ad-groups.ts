@@ -100,6 +100,30 @@ export class AdGroups extends APIResource {
   }
 
   /**
+   * Creates copies of the ad group in `duplicating` status and returns them — into
+   * its own campaign, or into target_ad_campaign_id (which must belong to the same
+   * account and be compatible with the ad group's targeting and goals); each copy
+   * transitions to its final status (matching the source's active/paused state) once
+   * duplication completes. Poll each returned ad group until it leaves `duplicating`
+   * — a copy that could not be completed is deleted and returns 404.
+   */
+  duplicate(
+    id: string,
+    params: AdGroupDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdGroupDuplicateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/ad_groups/${id}/duplicate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Searches the ad platform's targeting taxonomy for options to target an ad group
    * with. Each result comes back in the exact shape the ad-group body accepts for
    * its `type`, so it can be used in `detailed_targeting`, `regions`, or `languages`
@@ -237,13 +261,16 @@ export interface AdGroup {
 
   /**
    * Where the result you're optimizing for happens: `website` (your site), `profile`
-   * (your social media profile), `messaging` (a direct-message conversation),
+   * (your social media profile), `instagram_and_facebook` or `instagram_profile`
+   * (visits to your Instagram profile), `messaging` (a direct-message conversation),
    * `on_ad` (engagement with the ad itself), or a lead form (`instant_forms`,
    * `instant_forms_and_messenger`, `website_and_instant_forms`).
    */
   conversion_location:
     | 'website'
     | 'profile'
+    | 'instagram_and_facebook'
+    | 'instagram_profile'
     | 'messaging'
     | 'on_ad'
     | 'instant_forms'
@@ -551,9 +578,10 @@ export interface AdGroup {
 
   /**
    * Whether the ad group is enabled. `active` and `paused` are set by you;
-   * `rejected` means it failed ad review.
+   * `rejected` means it failed ad review; `duplicating` is a copy still being filled
+   * in.
    */
-  status: 'active' | 'paused' | 'rejected';
+  status: 'active' | 'paused' | 'rejected' | 'duplicating';
 
   /**
    * USD value attributed to submit-application events. Sums the value sent with each
@@ -1067,6 +1095,10 @@ export namespace TargetingOption {
 
 export type AdGroupDeleteResponse = boolean;
 
+export interface AdGroupDuplicateResponse {
+  data: Array<AdGroup>;
+}
+
 export interface AdGroupSearchTargetingOptionsResponse {
   data: Array<TargetingOption>;
 }
@@ -1152,7 +1184,7 @@ export interface AdGroupListParams extends CursorPageParams {
   /**
    * Filter to ad groups with this status.
    */
-  status?: 'active' | 'paused' | 'rejected';
+  status?: 'active' | 'paused' | 'rejected' | 'duplicating';
 
   /**
    * IANA timezone (e.g. America/New_York) the stats window is interpreted in. Bare
@@ -1227,6 +1259,8 @@ export interface AdGroupCreateParams {
   conversion_location?:
     | 'website'
     | 'profile'
+    | 'instagram_and_facebook'
+    | 'instagram_profile'
     | 'messaging'
     | 'on_ad'
     | 'instant_forms'
@@ -1798,6 +1832,8 @@ export interface AdGroupUpdateParams {
   conversion_location?:
     | 'website'
     | 'profile'
+    | 'instagram_and_facebook'
+    | 'instagram_profile'
     | 'messaging'
     | 'on_ad'
     | 'instant_forms'
@@ -2295,6 +2331,30 @@ export interface AdGroupUnpauseParams {
   'Idempotency-Key'?: string;
 }
 
+export interface AdGroupDuplicateParams {
+  /**
+   * Body param: Number of copies to create (1-10). Defaults to 1.
+   */
+  count?: number;
+
+  /**
+   * Body param: Whether the copied ads keep the original posts' engagement (likes,
+   * comments, shares). Defaults to false.
+   */
+  preserve_engagement?: boolean;
+
+  /**
+   * Body param: Campaign to duplicate into. Defaults to the ad group's own campaign.
+   */
+  target_ad_campaign_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export interface AdGroupSearchTargetingOptionsParams {
   /**
    * The ad network whose targeting taxonomy to search.
@@ -2727,6 +2787,7 @@ export declare namespace AdGroups {
     type ReachEstimate as ReachEstimate,
     type TargetingOption as TargetingOption,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupDuplicateResponse as AdGroupDuplicateResponse,
     type AdGroupSearchTargetingOptionsResponse as AdGroupSearchTargetingOptionsResponse,
     type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
@@ -2735,6 +2796,7 @@ export declare namespace AdGroups {
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupPauseParams as AdGroupPauseParams,
     type AdGroupUnpauseParams as AdGroupUnpauseParams,
+    type AdGroupDuplicateParams as AdGroupDuplicateParams,
     type AdGroupSearchTargetingOptionsParams as AdGroupSearchTargetingOptionsParams,
     type AdGroupEstimateReachParams as AdGroupEstimateReachParams,
   };

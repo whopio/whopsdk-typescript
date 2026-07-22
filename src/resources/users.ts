@@ -13,7 +13,10 @@ import { path } from '../internal/utils/path';
  */
 export class Users extends APIResource {
   /**
-   * Retrieves a user's public profile by user\_ tag, username, or 'me'.
+   * Retrieves a user's public profile by user\_ tag, username, or 'me', including
+   * linked social accounts. Reading your own profile returns every linked account
+   * (Discord, X/Twitter, Telegram); other profiles only include what is public on
+   * Whop (the primary Discord and the X account).
    */
   retrieve(
     id: string,
@@ -126,6 +129,8 @@ export interface User {
    * The user's profile picture, an object with a url
    */
   profile_picture: unknown | null;
+
+  social_accounts: Array<User.SocialAccount>;
 
   /**
    * The user's unique username
@@ -292,6 +297,39 @@ export namespace User {
        */
       lifetime: string;
     }
+  }
+
+  /**
+   * Social accounts linked to the user (Discord, X/Twitter, Telegram), oldest first.
+   * Reading your own profile returns every linked account; other profiles only
+   * include what is public on Whop (the primary Discord and the X account). Empty
+   * when none are linked.
+   */
+  export interface SocialAccount {
+    /**
+     * The provider's account ID (Discord snowflake, Telegram user id, or X user id).
+     */
+    account_id: string;
+
+    /**
+     * Whether this is the user's default account for the provider.
+     */
+    default: boolean;
+
+    /**
+     * Avatar URL from the provider, when available.
+     */
+    image_url: string | null;
+
+    /**
+     * The social account provider.
+     */
+    service: 'discord' | 'twitter' | 'telegram';
+
+    /**
+     * The username on the provider. `null` when the provider has no username.
+     */
+    username: string | null;
   }
 }
 
