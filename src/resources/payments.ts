@@ -472,6 +472,13 @@ export interface PaymentListResponse {
   currency: Shared.Currency;
 
   /**
+   * Phone number the customer provided at checkout, or their verified phone number
+   * when your checkout requires phone verification. `null` when no phone number was
+   * collected.
+   */
+  customer_phone: string | null;
+
+  /**
    * When an alert came in that this transaction will be disputed
    */
   dispute_alerted_at: string | null;
