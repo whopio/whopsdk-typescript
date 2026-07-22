@@ -571,6 +571,15 @@ export {
   type SwapCreateParams,
   type SwapListParams,
 } from './swaps';
+export {
+  TeamMembers,
+  type TeamMember,
+  type TeamMemberDeleteResponse,
+  type TeamMemberListParams,
+  type TeamMemberCreateParams,
+  type TeamMemberUpdateParams,
+  type TeamMembersCursorPage,
+} from './team-members';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,

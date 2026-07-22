@@ -468,6 +468,36 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/authorized_users/{id}',
   },
   {
+    clientCallName: 'client.teamMembers.list',
+    fullyQualifiedName: 'teamMembers.list',
+    httpMethod: 'get',
+    httpPath: '/team_members',
+  },
+  {
+    clientCallName: 'client.teamMembers.retrieve',
+    fullyQualifiedName: 'teamMembers.retrieve',
+    httpMethod: 'get',
+    httpPath: '/team_members/{id}',
+  },
+  {
+    clientCallName: 'client.teamMembers.create',
+    fullyQualifiedName: 'teamMembers.create',
+    httpMethod: 'post',
+    httpPath: '/team_members',
+  },
+  {
+    clientCallName: 'client.teamMembers.update',
+    fullyQualifiedName: 'teamMembers.update',
+    httpMethod: 'patch',
+    httpPath: '/team_members/{id}',
+  },
+  {
+    clientCallName: 'client.teamMembers.delete',
+    fullyQualifiedName: 'teamMembers.delete',
+    httpMethod: 'delete',
+    httpPath: '/team_members/{id}',
+  },
+  {
     clientCallName: 'client.appBuilds.list',
     fullyQualifiedName: 'appBuilds.list',
     httpMethod: 'get',
