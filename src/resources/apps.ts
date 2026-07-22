@@ -92,175 +92,154 @@ export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
  */
 export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
 
-/**
- * An app is an integration built on Whop. Apps can serve consumers as experiences
- * within products, or serve companies as business tools.
- */
 export interface AppListResponse {
   /**
-   * The unique identifier for the app.
+   * App ID, prefixed `app_`.
    */
   id: string;
 
   /**
-   * The target audience classification for this app (e.g., 'b2b_app', 'b2c_app',
-   * 'company_app', 'component').
+   * The account that owns the app.
    */
-  app_type: AppType;
+  account: AppListResponse.Account;
 
   /**
-   * The production base URL where the app is hosted. Null if no base URL is
-   * configured.
+   * The type of end-user the app is built for.
+   */
+  app_type: 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
+
+  /**
+   * Production base URL where the app is hosted, or `null` if none is configured.
    */
   base_url: string | null;
 
   /**
-   * The company that owns and publishes this app.
-   */
-  company: AppListResponse.Company;
-
-  /**
-   * The user who created and owns the company that published this app.
+   * The user who owns the publishing company.
    */
   creator: AppListResponse.Creator;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the company dashboard view, or `null` when not configured.
    */
   dashboard_path: string | null;
 
   /**
-   * A written description of what this app does, displayed on the app store listing
-   * page. Null if no description has been set.
+   * Short description shown in listings and search results, or `null` if none has
+   * been set.
    */
   description: string | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the discover view, or `null` when not configured.
    */
   discover_path: string | null;
 
   /**
-   * The unique subdomain identifier for this app's proxied URL on the Whop platform.
-   * Forms the URL pattern https://{domain_id}.apps.whop.com.
+   * Subdomain identifier for the app's proxied URL, forming
+   * https://{domain_id}.apps.whop.com.
    */
   domain_id: string;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the member-facing hub view, or `null` when not configured.
    */
   experience_path: string | null;
 
   /**
-   * The full canonical URL where this app's hosted web build is served. Null if the
-   * app has not claimed a route.
+   * Full URL where the app's hosted web build is served, or `null` if no route is
+   * claimed.
    */
   hosted_url: string | null;
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
-  icon: AppListResponse.Icon | null;
+  icon: AppListResponse.Icon;
 
   /**
-   * The display name of this app shown on the app store and in experience
-   * navigation. Maximum 30 characters.
+   * Display name shown on the app store and in experience navigation.
    */
   name: string;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's OpenAPI spec file, or `null` when not configured.
    */
   openapi_path: string | null;
 
   /**
-   * The full origin URL for this app's proxied domain (e.g.,
-   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   * Full origin URL of the app's proxied domain, for example
+   * https://ab1c2d3e4f.apps.whop.com.
    */
   origin: string | null;
 
   /**
-   * The unique subdomain route where this app's hosted web builds are served, such
-   * as 'myapp' for myapp.whop.app. Null if the app has not claimed a route.
+   * Claimed subdomain route where hosted web builds are served (`myapp` for
+   * myapp.whop.app), or `null` if no route is claimed.
    */
   route: string | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's skills directory, or `null` when not configured.
    */
   skills_path: string | null;
 
   /**
-   * The current visibility status of this app on the Whop app store. 'live' means
-   * publicly discoverable, 'unlisted' means accessible only via direct link, and
-   * 'hidden' means not visible anywhere.
+   * Visibility on the Whop app store: `live` is publicly discoverable, `unlisted` is
+   * accessible only via direct link, `hidden` is not visible anywhere.
    */
-  status: Shared.AppStatuses;
+  status: 'live' | 'unlisted' | 'hidden';
 
   /**
-   * Whether this app has been verified by Whop. Verified apps are endorsed by Whop
-   * and displayed in the featured apps section of the app store.
+   * Whether the app has been verified by Whop and is eligible for the featured apps
+   * section.
    */
   verified: boolean;
 }
 
 export namespace AppListResponse {
   /**
-   * The company that owns and publishes this app.
+   * The account that owns the app.
    */
-  export interface Company {
+  export interface Account {
     /**
-     * The unique identifier for the company.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * The display name of the company shown to customers.
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The user who created and owns the company that published this app.
+   * The user who owns the publishing company.
    */
   export interface Creator {
     /**
-     * The unique identifier for the user.
+     * User ID, prefixed `user_`.
      */
     id: string;
 
     /**
-     * The user's display name shown on their public profile.
+     * Display name.
      */
     name: string | null;
 
     /**
-     * The user's unique username shown on their public profile.
+     * Public username.
      */
     username: string;
   }
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
   export interface Icon {
     /**
-     * A pre-optimized URL for rendering this attachment on the client. This should be
-     * used for displaying attachments in apps.
+     * Icon image URL. Always present — the default app icon when none is uploaded.
      */
-    url: string | null;
+    url: string;
   }
 }
 

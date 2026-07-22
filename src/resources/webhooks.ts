@@ -124,20 +124,16 @@ export type WebhookListDeliveriesResponsesCursorPage = CursorPage<WebhookListDel
  */
 export type APIVersion = 'v1' | 'v2' | 'v5';
 
-/**
- * A webhook endpoint that receives event notifications for a company via HTTP
- * POST.
- */
 export interface Webhook {
   /**
-   * The unique identifier for the webhook.
+   * Webhook ID, prefixed `hook_`.
    */
   id: string;
 
   /**
    * The API version used to format payloads sent to this webhook endpoint.
    */
-  api_version: APIVersion;
+  api_version: 'v1' | 'v2' | 'v5';
 
   /**
    * Whether events are sent for child resources. For example, if the webhook is on a
@@ -147,7 +143,7 @@ export interface Webhook {
   child_resource_events: boolean;
 
   /**
-   * The datetime the webhook was created.
+   * When the webhook was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
@@ -156,32 +152,26 @@ export interface Webhook {
    */
   enabled: boolean;
 
-  /**
-   * The list of event types this webhook is subscribed to.
-   */
-  events: Array<WebhookEvent>;
+  events: Array<string>;
 
   /**
-   * The ID of the resource (company or product) this webhook is attached to.
+   * ID of the resource (company or app) this webhook is attached to.
    */
   resource_id: string;
 
-  /**
-   * The subset of subscribed event types that support sending test payloads.
-   */
-  testable_events: Array<WebhookEvent>;
+  testable_events: Array<string>;
 
   /**
-   * The destination URL where webhook payloads are delivered via HTTP POST.
+   * Destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 
   /**
-   * The secret key used to sign webhook payloads for verification. Include this in
-   * your HMAC validation logic. Returned on the create response and to interactive
-   * dashboard sessions; empty for API-key and OAuth callers on later reads.
+   * Secret key used to sign webhook payloads for verification. Include this in your
+   * HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; `null` for API-key and OAuth callers on later reads.
    */
-  webhook_secret: string;
+  webhook_secret: string | null;
 }
 
 /**
@@ -230,20 +220,16 @@ export type WebhookEvent =
   | 'dispute_alert.created'
   | 'membership.cancel_at_period_end_changed';
 
-/**
- * A webhook endpoint that receives event notifications for a company via HTTP
- * POST.
- */
 export interface WebhookListResponse {
   /**
-   * The unique identifier for the webhook.
+   * Webhook ID, prefixed `hook_`.
    */
   id: string;
 
   /**
    * The API version used to format payloads sent to this webhook endpoint.
    */
-  api_version: APIVersion;
+  api_version: 'v1' | 'v2' | 'v5';
 
   /**
    * Whether events are sent for child resources. For example, if the webhook is on a
@@ -253,7 +239,7 @@ export interface WebhookListResponse {
   child_resource_events: boolean;
 
   /**
-   * The datetime the webhook was created.
+   * When the webhook was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
@@ -262,27 +248,24 @@ export interface WebhookListResponse {
    */
   enabled: boolean;
 
-  /**
-   * The list of event types this webhook is subscribed to.
-   */
-  events: Array<WebhookEvent>;
+  events: Array<string>;
 
   /**
-   * The ID of the resource (company or product) this webhook is attached to.
+   * ID of the resource (company or app) this webhook is attached to.
    */
   resource_id: string;
 
   /**
-   * The destination URL where webhook payloads are delivered via HTTP POST.
+   * Destination URL where webhook payloads are delivered via HTTP POST.
    */
   url: string;
 
   /**
-   * The secret key used to sign webhook payloads for verification. Include this in
-   * your HMAC validation logic. Returned on the create response and to interactive
-   * dashboard sessions; empty for API-key and OAuth callers on later reads.
+   * Secret key used to sign webhook payloads for verification. Include this in your
+   * HMAC validation logic. Returned on the create response and to interactive
+   * dashboard sessions; `null` for API-key and OAuth callers on later reads.
    */
-  webhook_secret: string;
+  webhook_secret: string | null;
 }
 
 export interface WebhookDeleteResponse {
