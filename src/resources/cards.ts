@@ -51,7 +51,9 @@ export class Cards extends APIResource {
 
   /**
    * Retrieves a single card by its icrd\_ identifier, including its secrets (full
-   * card number, CVC, and cardholder name) for active cards.
+   * card number, CVC, and cardholder name) for active cards. The card PIN is
+   * included only when the request is authenticated as the user the card is assigned
+   * to.
    */
   retrieve(
     cardID: string,
@@ -222,6 +224,12 @@ export namespace CardCreateResponse {
      * Cardholder name printed on the card.
      */
     name_on_card: string | null;
+
+    /**
+     * The card PIN. Only returned when the request is authenticated as the user the
+     * card is assigned to; `null` for all other callers, including account API keys.
+     */
+    pin: string | null;
   }
 }
 
@@ -370,6 +378,12 @@ export namespace CardRetrieveResponse {
      * Cardholder name printed on the card.
      */
     name_on_card: string | null;
+
+    /**
+     * The card PIN. Only returned when the request is authenticated as the user the
+     * card is assigned to; `null` for all other callers, including account API keys.
+     */
+    pin: string | null;
   }
 }
 
@@ -518,6 +532,12 @@ export namespace CardUpdateResponse {
      * Cardholder name printed on the card.
      */
     name_on_card: string | null;
+
+    /**
+     * The card PIN. Only returned when the request is authenticated as the user the
+     * card is assigned to; `null` for all other callers, including account API keys.
+     */
+    pin: string | null;
   }
 }
 
@@ -671,6 +691,12 @@ export namespace CardListResponse {
        * Cardholder name printed on the card.
        */
       name_on_card: string | null;
+
+      /**
+       * The card PIN. Only returned when the request is authenticated as the user the
+       * card is assigned to; `null` for all other callers, including account API keys.
+       */
+      pin: string | null;
     }
   }
 }
