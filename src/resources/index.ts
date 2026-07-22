@@ -12,6 +12,18 @@ export {
   type AIChatUpdateParams,
   type AIChatListResponsesCursorPage,
 } from './ai-chats';
+export {
+  APIKeys,
+  type APIKey,
+  type Permission,
+  type APIKeyDeleteResponse,
+  type APIKeyListPermissionsResponse,
+  type APIKeyListParams,
+  type APIKeyCreateParams,
+  type APIKeyUpdateParams,
+  type APIKeyRotateParams,
+  type APIKeysCursorPage,
+} from './api-keys';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
@@ -88,10 +100,9 @@ export {
 } from './affiliates/affiliates';
 export {
   AppBuilds,
-  type AppBuildListResponse,
   type AppBuildListParams,
   type AppBuildCreateParams,
-  type AppBuildListResponsesCursorPage,
+  type AppBuildPromoteParams,
 } from './app-builds';
 export {
   Apps,
@@ -101,6 +112,7 @@ export {
   type AppListParams,
   type AppCreateParams,
   type AppUpdateParams,
+  type AppUpdatePermissionsParams,
   type AppLogsParams,
   type AppListResponsesCursorPage,
 } from './apps';
@@ -134,9 +146,11 @@ export {
 } from './bounties';
 export {
   BountySubmissions,
+  type BountyCaptureClip,
   type BountySubmission,
   type BountySubmissionListParams,
   type BountySubmissionCreateParams,
+  type BountySubmissionSubmitParams,
   type BountySubmissionsCursorPage,
 } from './bounty-submissions';
 export {
@@ -571,6 +585,15 @@ export {
   type SwapCreateParams,
   type SwapListParams,
 } from './swaps';
+export {
+  TeamMembers,
+  type TeamMember,
+  type TeamMemberDeleteResponse,
+  type TeamMemberListParams,
+  type TeamMemberCreateParams,
+  type TeamMemberUpdateParams,
+  type TeamMembersCursorPage,
+} from './team-members';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
@@ -611,9 +634,10 @@ export {
   type APIVersion,
   type Webhook,
   type WebhookEvent,
-  type WebhookCreateResponse,
   type WebhookListResponse,
   type WebhookDeleteResponse,
+  type WebhookListDeliveriesResponse,
+  type WebhookTestResponse,
   type ChatMessageCreatedWebhookEvent,
   type ChatReactionCreatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
@@ -659,7 +683,10 @@ export {
   type WebhookListParams,
   type WebhookCreateParams,
   type WebhookUpdateParams,
+  type WebhookTestParams,
+  type WebhookListDeliveriesParams,
   type WebhookListResponsesCursorPage,
+  type WebhookListDeliveriesResponsesCursorPage,
 } from './webhooks';
 export {
   Withdrawals,
