@@ -549,6 +549,15 @@ import {
   SwapRetrieveResponse,
   Swaps,
 } from './resources/swaps';
+import {
+  TeamMember,
+  TeamMemberCreateParams,
+  TeamMemberDeleteResponse,
+  TeamMemberListParams,
+  TeamMemberUpdateParams,
+  TeamMembers,
+  TeamMembersCursorPage,
+} from './resources/team-members';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
 import {
   TransferCreateParams,
@@ -1419,11 +1428,19 @@ export class Whop {
     return () => controller.abort();
   }
 
-  private buildBody({ options: { body, headers: rawHeaders } }: { options: FinalRequestOptions }): {
+  private buildBody({ options }: { options: FinalRequestOptions }): {
     bodyHeaders: HeadersLike;
     body: BodyInit | undefined;
   } {
+    const { body, headers: rawHeaders } = options;
     if (!body) {
+      // A resource method always passes a `body` key when its operation defines a
+      // request body, even if the caller omitted an optional body param. Keep the
+      // content-type for those, and only elide it for operations with no body at
+      // all (e.g. GET/DELETE).
+      if (body == null && 'body' in options) {
+        return this.#encoder({ body, headers: buildHeaders([rawHeaders]) });
+      }
       return { bodyHeaders: undefined, body: undefined };
     }
     const headers = buildHeaders([rawHeaders]);
@@ -1557,6 +1574,13 @@ export class Whop {
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
   memberships: API.Memberships = new API.Memberships(this);
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
+  /**
+   * A Team Member is a member of an account's team: the link between a user and an account, carrying the role that controls what they can do. Roles are either system roles (like `admin` or `moderator`) or `custom` roles managed from the dashboard.
+   *
+   * Use the Team Members API to list an account's team, add a user to the team with a system role, change a member's role, and remove members. Adding a user who has not yet accepted sends an invitation instead.
+   *
+   */
+  teamMembers: API.TeamMembers = new API.TeamMembers(this);
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
   /**
@@ -1726,6 +1750,7 @@ Whop.Transfers = Transfers;
 Whop.LedgerAccounts = LedgerAccounts;
 Whop.Memberships = Memberships;
 Whop.AuthorizedUsers = AuthorizedUsers;
+Whop.TeamMembers = TeamMembers;
 Whop.AppBuilds = AppBuilds;
 Whop.Shipments = Shipments;
 Whop.CheckoutConfigurations = CheckoutConfigurations;
@@ -2006,6 +2031,16 @@ export declare namespace Whop {
     type AuthorizedUserListParams as AuthorizedUserListParams,
     type AuthorizedUserCreateParams as AuthorizedUserCreateParams,
     type AuthorizedUserDeleteParams as AuthorizedUserDeleteParams,
+  };
+
+  export {
+    TeamMembers as TeamMembers,
+    type TeamMember as TeamMember,
+    type TeamMemberDeleteResponse as TeamMemberDeleteResponse,
+    type TeamMembersCursorPage as TeamMembersCursorPage,
+    type TeamMemberListParams as TeamMemberListParams,
+    type TeamMemberCreateParams as TeamMemberCreateParams,
+    type TeamMemberUpdateParams as TeamMemberUpdateParams,
   };
 
   export {
