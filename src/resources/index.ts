@@ -134,9 +134,11 @@ export {
 } from './bounties';
 export {
   BountySubmissions,
+  type BountyCaptureClip,
   type BountySubmission,
   type BountySubmissionListParams,
   type BountySubmissionCreateParams,
+  type BountySubmissionSubmitParams,
   type BountySubmissionsCursorPage,
 } from './bounty-submissions';
 export {

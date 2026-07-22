@@ -1157,12 +1157,16 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/bounty-submissions.ts">BountyCaptureClip</a></code>
 - <code><a href="./src/resources/bounty-submissions.ts">BountySubmission</a></code>
 
 Methods:
 
 - <code title="get /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">list</a>({ ...params }) -> BountySubmissionsCursorPage</code>
 - <code title="post /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">create</a>({ ...params }) -> BountySubmission</code>
+- <code title="get /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">retrieve</a>(bountySubmissionID) -> BountySubmission</code>
+- <code title="delete /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">delete</a>(bountySubmissionID) -> void</code>
+- <code title="post /bounty_submissions/{bounty_submission_id}/submit">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">submit</a>(bountySubmissionID, { ...params }) -> BountySubmission</code>
 
 # AdCampaigns
 

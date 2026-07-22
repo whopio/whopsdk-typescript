@@ -1572,6 +1572,24 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/bounty_submissions',
   },
   {
+    clientCallName: 'client.bountySubmissions.retrieve',
+    fullyQualifiedName: 'bountySubmissions.retrieve',
+    httpMethod: 'get',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.delete',
+    fullyQualifiedName: 'bountySubmissions.delete',
+    httpMethod: 'delete',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.submit',
+    fullyQualifiedName: 'bountySubmissions.submit',
+    httpMethod: 'post',
+    httpPath: '/bounty_submissions/{bounty_submission_id}/submit',
+  },
+  {
     clientCallName: 'client.adCampaigns.list',
     fullyQualifiedName: 'adCampaigns.list',
     httpMethod: 'get',

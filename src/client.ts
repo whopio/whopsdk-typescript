@@ -128,9 +128,11 @@ import {
   BountyUpdateParams,
 } from './resources/bounties';
 import {
+  BountyCaptureClip,
   BountySubmission,
   BountySubmissionCreateParams,
   BountySubmissionListParams,
+  BountySubmissionSubmitParams,
   BountySubmissions,
   BountySubmissionsCursorPage,
 } from './resources/bounty-submissions';
@@ -2529,10 +2531,12 @@ export declare namespace Whop {
 
   export {
     BountySubmissions as BountySubmissions,
+    type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,
+    type BountySubmissionSubmitParams as BountySubmissionSubmitParams,
   };
 
   export {
