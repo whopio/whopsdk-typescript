@@ -68,9 +68,22 @@ describe('resource withdrawals', () => {
       amount: 6.9,
       company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'usd',
+      idempotency_key: 'idempotency_key',
       payout_method_id: 'payout_method_id',
       platform_covers_fees: true,
       statement_descriptor: 'statement_descriptor',
     });
+  });
+
+  // Mock server tests are disabled
+  test.skip('generatePdf', async () => {
+    const responsePromise = client.withdrawals.generatePdf('wdrl_xxxxxxxxxxxxx');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

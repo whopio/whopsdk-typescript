@@ -2,8 +2,10 @@
 
 export {
   Methods,
+  type MethodCreateResponse,
   type MethodListResponse,
   type MethodListParams,
+  type MethodCreateParams,
   type MethodListResponsesCursorPage,
 } from './methods';
 export {

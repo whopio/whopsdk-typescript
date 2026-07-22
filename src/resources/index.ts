@@ -19,9 +19,11 @@ export {
   type Account,
   type AccountSocialLink,
   type AccountRecommendActionsResponse,
+  type AccountRegisterLlcResponse,
   type AccountListParams,
   type AccountCreateParams,
   type AccountUpdateParams,
+  type AccountRegisterLlcParams,
   type AccountsCursorPage,
 } from './accounts/accounts';
 export {
@@ -32,16 +34,26 @@ export {
   type AdCampaignCreateParams,
   type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
+  type AdCampaignPauseParams,
+  type AdCampaignUnpauseParams,
+  type AdCampaignRetryPaymentParams,
   type AdCampaignsCursorPage,
 } from './ad-campaigns';
 export {
   AdGroups,
   type AdGroup,
+  type ReachEstimate,
+  type TargetingOption,
   type AdGroupDeleteResponse,
+  type AdGroupSearchTargetingOptionsResponse,
   type AdGroupListParams,
   type AdGroupCreateParams,
   type AdGroupRetrieveParams,
   type AdGroupUpdateParams,
+  type AdGroupPauseParams,
+  type AdGroupUnpauseParams,
+  type AdGroupSearchTargetingOptionsParams,
+  type AdGroupEstimateReachParams,
   type AdGroupsCursorPage,
 } from './ad-groups';
 export {
@@ -59,6 +71,8 @@ export {
   type AdCreateParams,
   type AdRetrieveParams,
   type AdUpdateParams,
+  type AdPauseParams,
+  type AdUnpauseParams,
   type AdsCursorPage,
 } from './ads';
 export {
@@ -93,6 +107,7 @@ export {
 export {
   Audiences,
   type Audience,
+  type AudienceCreateResponse,
   type AudienceDeleteResponse,
   type AudienceListParams,
   type AudienceCreateParams,
@@ -110,13 +125,20 @@ export {
 } from './authorized-users';
 export {
   Bounties,
-  type BountyCreateResponse,
-  type BountyRetrieveResponse,
-  type BountyListResponse,
+  type Bounty,
+  type BountyListItem,
   type BountyListParams,
   type BountyCreateParams,
-  type BountyListResponsesCursorPage,
+  type BountyUpdateParams,
+  type BountyListItemsCursorPage,
 } from './bounties';
+export {
+  BountySubmissions,
+  type BountySubmission,
+  type BountySubmissionListParams,
+  type BountySubmissionCreateParams,
+  type BountySubmissionsCursorPage,
+} from './bounty-submissions';
 export {
   Cards,
   type CardCreateResponse,
@@ -216,13 +238,7 @@ export {
   type CourseUpdateParams,
   type CourseListResponsesCursorPage,
 } from './courses';
-export {
-  Deposits,
-  type DepositCreateResponse,
-  type DepositListResponse,
-  type DepositListParams,
-  type DepositCreateParams,
-} from './deposits';
+export { Deposits, type DepositCreateResponse, type DepositCreateParams } from './deposits';
 export {
   DisputeAlerts,
   type DisputeAlertType,
@@ -383,6 +399,15 @@ export {
   type NotificationCreateParams,
 } from './notifications';
 export {
+  Partners,
+  type PartnerCreateResponse,
+  type PartnerLeaderboardResponse,
+  type PartnerReferredUsersResponse,
+  type PartnerReferredUsersParams,
+  type PartnerCreateParams,
+  type PartnerLeaderboardParams,
+} from './partners/partners';
+export {
   PaymentMethods,
   type PaymentMethodRetrieveResponse,
   type PaymentMethodListResponse,
@@ -467,11 +492,6 @@ export {
   type ReactionListResponsesCursorPage,
 } from './reactions';
 export {
-  Referrals,
-  type ReferralReferredUsersResponse,
-  type ReferralReferredUsersParams,
-} from './referrals/referrals';
-export {
   Refunds,
   type PaymentProvider,
   type RefundReferenceStatus,
@@ -523,12 +543,14 @@ export {
   type SocialAccountPost,
   type SocialAccountDeleteResponse,
   type SocialAccountConnectResponse,
+  type SocialAccountLeadFormsResponse,
   type SocialAccountPostsResponse,
   type SocialAccountListParams,
   type SocialAccountCreateParams,
   type SocialAccountConnectParams,
   type SocialAccountDeleteParams,
   type SocialAccountPostsParams,
+  type SocialAccountLeadFormsParams,
   type SocialAccountsCursorPage,
 } from './social-accounts';
 export { Stats, type StatRetrieveResponse, type StatListResponse, type StatRetrieveParams } from './stats';
@@ -549,6 +571,15 @@ export {
   type SwapCreateParams,
   type SwapListParams,
 } from './swaps';
+export {
+  TeamMembers,
+  type TeamMember,
+  type TeamMemberDeleteResponse,
+  type TeamMemberListParams,
+  type TeamMemberCreateParams,
+  type TeamMemberUpdateParams,
+  type TeamMembersCursorPage,
+} from './team-members';
 export { Topups, type TopupCreateResponse, type TopupCreateParams } from './topups';
 export {
   Transfers,
@@ -564,6 +595,7 @@ export {
   type User,
   type UserBalance,
   type UserCheckAccessResponse,
+  type UserRecommendActionsResponse,
   type UserRetrieveParams,
   type UserCheckAccessParams,
   type UserUpdateParams,
@@ -645,8 +677,8 @@ export {
   type WithdrawalSpeeds,
   type WithdrawalStatus,
   type WithdrawalListResponse,
+  type WithdrawalGeneratePdfResponse,
   type WithdrawalListParams,
   type WithdrawalCreateParams,
   type WithdrawalListResponsesCursorPage,
 } from './withdrawals';
-export { Workforce } from './workforce/workforce';

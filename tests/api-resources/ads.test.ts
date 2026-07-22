@@ -125,6 +125,18 @@ describe('resource ads', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('pause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.pause(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('unpause', async () => {
     const responsePromise = client.ads.unpause('id');
     const rawResponse = await responsePromise.asResponse();
@@ -134,5 +146,17 @@ describe('resource ads', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unpause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.unpause(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

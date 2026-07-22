@@ -293,6 +293,7 @@ export type PaymentMethodTypes =
   | 'bacs_debit'
   | 'bancolombia'
   | 'bancontact'
+  | 'bank_wire'
   | 'billie'
   | 'bizum'
   | 'blik'
@@ -558,8 +559,10 @@ export interface PaymentListResponse {
 
   /**
    * True when the payment status is `open` and its membership is in one of the
-   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`);
-   * otherwise false. Used to decide if Whop can attempt the charge again.
+   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or
+   * when it is a failed initial billing-engine payment on a `drafted` membership
+   * with an unlimited-stock plan; otherwise false. Used to decide if Whop can
+   * attempt the charge again.
    */
   retryable: boolean;
 
@@ -1021,7 +1024,8 @@ export interface PaymentListFeesResponse {
     | 'three_ds_fixed_fee'
     | 'billing_percentage_fee'
     | 'revshare_percentage_fee'
-    | 'application_fee';
+    | 'application_fee'
+    | 'high_risk_merchant_fee';
 }
 
 export interface PaymentListParams extends CursorPageParams {

@@ -62,7 +62,7 @@ describe('resource payouts', () => {
       amount: 0,
       payout_method_id: 'payout_method_id',
       currency: 'currency',
-      idempotency_key: 'idempotency_key',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 });

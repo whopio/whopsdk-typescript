@@ -77,6 +77,7 @@ describe('resource adCampaigns', () => {
       ends_at: 'ends_at',
       special_ad_categories: ['housing'],
       starts_at: 'starts_at',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
@@ -145,6 +146,18 @@ describe('resource adCampaigns', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('pause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adCampaigns.pause(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('unpause', async () => {
     const responsePromise = client.adCampaigns.unpause('id');
     const rawResponse = await responsePromise.asResponse();
@@ -154,5 +167,41 @@ describe('resource adCampaigns', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unpause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adCampaigns.unpause(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retryPayment', async () => {
+    const responsePromise = client.adCampaigns.retryPayment('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retryPayment: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adCampaigns.retryPayment(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

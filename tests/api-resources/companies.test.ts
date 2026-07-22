@@ -68,6 +68,7 @@ describe('resource companies', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.companies.create({
       title: 'title',
+      country: 'us',
       description: 'description',
       email: 'email',
       logo: { id: 'id' },

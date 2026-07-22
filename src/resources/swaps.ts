@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -14,16 +15,32 @@ export class Swaps extends APIResource {
   /**
    * Returns a stateless swap price preview. No funds move and nothing is persisted.
    */
-  createQuote(body: SwapCreateQuoteParams, options?: RequestOptions): APIPromise<SwapCreateQuoteResponse> {
-    return this._client.post('/swaps/quote', { body, ...options });
+  createQuote(params: SwapCreateQuoteParams, options?: RequestOptions): APIPromise<SwapCreateQuoteResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/swaps/quote', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Executes a swap from the account's wallet. Runs asynchronously; poll GET
    * /swaps/{id} for status.
    */
-  create(body: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
-    return this._client.post('/swaps', { body, ...options });
+  create(params: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/swaps', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -219,90 +236,102 @@ export interface SwapCreateQuoteResponse {
 
 export interface SwapCreateQuoteParams {
   /**
-   * Source token amount.
+   * Body param: Source token amount.
    */
   amount: string;
 
   /**
-   * Source token contract address or ticker symbol, such as "USDT".
+   * Body param: Source token contract address or ticker symbol, such as "USDT".
    */
   from_token: string;
 
   /**
-   * Destination token contract address or ticker symbol, such as "XAUT".
+   * Body param: Destination token contract address or ticker symbol, such as "XAUT".
    */
   to_token: string;
 
   /**
-   * Source wallet address used for the quote.
+   * Body param: Source wallet address used for the quote.
    */
   from_address?: string | null;
 
   /**
-   * Source chain name or chain ID. Defaults to the source token's chain when
-   * omitted.
+   * Body param: Source chain name or chain ID. Defaults to the source token's chain
+   * when omitted.
    */
   from_chain?: string | number | null;
 
   /**
-   * Metadata to include with the quote response.
+   * Body param: Metadata to include with the quote response.
    */
   metadata?: { [key: string]: unknown };
 
   /**
-   * Maximum slippage tolerance in basis points.
+   * Body param: Maximum slippage tolerance in basis points.
    */
   slippage_bps?: number | null;
 
   /**
-   * Destination wallet address used for the quote.
+   * Body param: Destination wallet address used for the quote.
    */
   to_address?: string | null;
 
   /**
-   * Destination chain name or chain ID. Defaults to the destination token's chain
-   * when omitted.
+   * Body param: Destination chain name or chain ID. Defaults to the destination
+   * token's chain when omitted.
    */
   to_chain?: string | number | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface SwapCreateParams {
   /**
-   * Business or user account ID (biz*\* / user*\*).
+   * Body param: Business or user account ID (biz*\* / user*\*).
    */
   account_id: string;
 
   /**
-   * Source token amount.
+   * Body param: Source token amount.
    */
   amount: string;
 
   /**
-   * Source token contract address or ticker symbol, such as "USDT".
+   * Body param: Source token contract address or ticker symbol, such as "USDT".
    */
   from_token: string;
 
   /**
-   * Destination token contract address or ticker symbol, such as "XAUT".
+   * Body param: Destination token contract address or ticker symbol, such as "XAUT".
    */
   to_token: string;
 
   /**
-   * Source chain name or chain ID. Defaults to the source token's chain when
-   * omitted.
+   * Body param: Source chain name or chain ID. Defaults to the source token's chain
+   * when omitted.
    */
   from_chain?: string | number | null;
 
   /**
-   * Maximum slippage tolerance in basis points.
+   * Body param: Maximum slippage tolerance in basis points.
    */
   slippage_bps?: number | null;
 
   /**
-   * Destination chain name or chain ID. Defaults to the destination token's chain
-   * when omitted.
+   * Body param: Destination chain name or chain ID. Defaults to the destination
+   * token's chain when omitted.
    */
   to_chain?: string | number | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface SwapListParams {

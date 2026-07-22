@@ -9,7 +9,7 @@ import { RequestOptions } from '../../../internal/request-options';
 import { path } from '../../../internal/utils/path';
 
 /**
- * The Referrals API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
+ * The Partners API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
  *
  * Use it to enroll as a Whop partner, list the users you referred, list your referred businesses and review their earnings, and see the partner leaderboard.
  */
@@ -36,25 +36,13 @@ export class Businesses extends APIResource {
   retrieve(id: string, options?: RequestOptions): APIPromise<BusinessRetrieveResponse> {
     return this._client.get(path`/partners/businesses/${id}`, options);
   }
-
-  /**
-   * Ranks referrers by business referral earnings — all-time by default, or over the
-   * current day, month, year, or trailing 30 days — and includes the caller's own
-   * standing.
-   */
-  leaderboard(
-    query: BusinessLeaderboardParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<BusinessLeaderboardResponse> {
-    return this._client.get('/partners/leaderboard', { query, ...options });
-  }
 }
 
 export type BusinessListResponsesCursorPage = CursorPage<BusinessListResponse>;
 
 export interface BusinessRetrieveResponse {
   /**
-   * Business referral ID.
+   * Partner business ID.
    */
   id: string;
 
@@ -64,7 +52,7 @@ export interface BusinessRetrieveResponse {
   account: BusinessRetrieveResponse.Account | null;
 
   /**
-   * When the business referral was created.
+   * When the partner business was created.
    */
   created_at: string;
 
@@ -82,7 +70,7 @@ export interface BusinessRetrieveResponse {
    */
   my_partner_tier: 'first' | 'second';
 
-  object: 'business_referral';
+  object: 'partner_business';
 
   /**
    * The owner of the referred business.
@@ -90,10 +78,10 @@ export interface BusinessRetrieveResponse {
   owner: BusinessRetrieveResponse.Owner | null;
 
   /**
-   * Referrer's share of Whop gross profit, as a fraction (0.3 = 30%). Second-tier
-   * referrals earn a flat 0.1.
+   * The referrer's commission rate for each income source, expressed as a fraction
+   * (0.3 = 30%).
    */
-  payout_percentage: number;
+  payout_percentages: BusinessRetrieveResponse.PayoutPercentages;
 
   /**
    * When the referral expires.
@@ -104,6 +92,12 @@ export interface BusinessRetrieveResponse {
    * When the referral became active.
    */
   referral_started_at: string | null;
+
+  /**
+   * The second-tier partner who earns on this business (referred the first-tier
+   * partner). Null if there is no active second-tier partner.
+   */
+  second_tier_partner: BusinessRetrieveResponse.SecondTierPartner | null;
 
   /**
    * Current referral status.
@@ -225,6 +219,12 @@ export namespace BusinessRetrieveResponse {
         | 'migrate_from_stripe'
         | 'accept_first_payment'
         | 'launch_first_ad'
+        | 'launch_draft_campaign'
+        | 'increase_ad_budget'
+        | 'refresh_ad_creatives'
+        | 'fix_ad_billing'
+        | 'exclude_customers_from_ads'
+        | 'retarget_abandoned_checkouts'
         | 'invite_team_member'
         | 'enable_tax_collection'
         | 'create_card'
@@ -254,13 +254,12 @@ export namespace BusinessRetrieveResponse {
       icon_url: string | null;
 
       /**
-       * Estimated revenue impact from 0-100, comparable across accounts, or `null` when
-       * not ranked
+       * Estimated impact from 0-100, or `null` when not ranked
        */
       impact_score: number | null;
 
       /**
-       * Why this action was recommended for this account, or `null`
+       * Why this action was recommended, or `null`
        */
       reasoning: string | null;
 
@@ -284,7 +283,8 @@ export namespace BusinessRetrieveResponse {
         | 'deposit_funds'
         | 'submit_information_request'
         | 'verify_identity'
-        | 'connect_fulfillment_tracker';
+        | 'connect_fulfillment_tracker'
+        | 'setup_apple_pay_domains';
 
       blocked_capabilities: Array<string>;
 
@@ -412,6 +412,70 @@ export namespace BusinessRetrieveResponse {
     }
   }
 
+  /**
+   * The referrer's commission rate for each income source, expressed as a fraction
+   * (0.3 = 30%).
+   */
+  export interface PayoutPercentages {
+    /**
+     * Share of the referred business's Whop Ads spend.
+     */
+    ad_spend: number | null;
+
+    /**
+     * Share of Whop's profit from card interchange.
+     */
+    card_interchange: number | null;
+
+    /**
+     * Share of Whop's profit from product sales.
+     */
+    sales: number;
+
+    /**
+     * Share of Whop's profit from platform balance transfers.
+     */
+    transfer: number | null;
+  }
+
+  /**
+   * The second-tier partner who earns on this business (referred the first-tier
+   * partner). Null if there is no active second-tier partner.
+   */
+  export interface SecondTierPartner {
+    /**
+     * User ID, prefixed `user_`.
+     */
+    id: string;
+
+    /**
+     * The user's display name.
+     */
+    name: string | null;
+
+    /**
+     * The user's profile picture.
+     */
+    profile_picture: SecondTierPartner.ProfilePicture;
+
+    /**
+     * The user's unique username.
+     */
+    username: string;
+  }
+
+  export namespace SecondTierPartner {
+    /**
+     * The user's profile picture.
+     */
+    export interface ProfilePicture {
+      /**
+       * The user's profile picture URL.
+       */
+      url: string;
+    }
+  }
+
   export interface VolumeUsd {
     /**
      * Credited GMV (awaiting_settlement + settled); excludes canceled and reversed, in
@@ -433,7 +497,7 @@ export namespace BusinessRetrieveResponse {
 
 export interface BusinessListResponse {
   /**
-   * Business referral ID.
+   * Partner business ID.
    */
   id: string;
 
@@ -443,7 +507,7 @@ export interface BusinessListResponse {
   account: BusinessListResponse.Account | null;
 
   /**
-   * When the business referral was created.
+   * When the partner business was created.
    */
   created_at: string;
 
@@ -461,7 +525,7 @@ export interface BusinessListResponse {
    */
   my_partner_tier: 'first' | 'second';
 
-  object: 'business_referral';
+  object: 'partner_business';
 
   /**
    * The owner of the referred business.
@@ -469,10 +533,10 @@ export interface BusinessListResponse {
   owner: BusinessListResponse.Owner | null;
 
   /**
-   * Referrer's share of Whop gross profit, as a fraction (0.3 = 30%). Second-tier
-   * referrals earn a flat 0.1.
+   * The referrer's commission rate for each income source, expressed as a fraction
+   * (0.3 = 30%).
    */
-  payout_percentage: number;
+  payout_percentages: BusinessListResponse.PayoutPercentages;
 
   /**
    * When the referral expires.
@@ -483,6 +547,12 @@ export interface BusinessListResponse {
    * When the referral became active.
    */
   referral_started_at: string | null;
+
+  /**
+   * The second-tier partner who earns on this business (referred the first-tier
+   * partner). Null if there is no active second-tier partner.
+   */
+  second_tier_partner: BusinessListResponse.SecondTierPartner | null;
 
   /**
    * Current referral status.
@@ -610,6 +680,70 @@ export namespace BusinessListResponse {
     }
   }
 
+  /**
+   * The referrer's commission rate for each income source, expressed as a fraction
+   * (0.3 = 30%).
+   */
+  export interface PayoutPercentages {
+    /**
+     * Share of the referred business's Whop Ads spend.
+     */
+    ad_spend: number | null;
+
+    /**
+     * Share of Whop's profit from card interchange.
+     */
+    card_interchange: number | null;
+
+    /**
+     * Share of Whop's profit from product sales.
+     */
+    sales: number;
+
+    /**
+     * Share of Whop's profit from platform balance transfers.
+     */
+    transfer: number | null;
+  }
+
+  /**
+   * The second-tier partner who earns on this business (referred the first-tier
+   * partner). Null if there is no active second-tier partner.
+   */
+  export interface SecondTierPartner {
+    /**
+     * User ID, prefixed `user_`.
+     */
+    id: string;
+
+    /**
+     * The user's display name.
+     */
+    name: string | null;
+
+    /**
+     * The user's profile picture.
+     */
+    profile_picture: SecondTierPartner.ProfilePicture;
+
+    /**
+     * The user's unique username.
+     */
+    username: string;
+  }
+
+  export namespace SecondTierPartner {
+    /**
+     * The user's profile picture.
+     */
+    export interface ProfilePicture {
+      /**
+       * The user's profile picture URL.
+       */
+      url: string;
+    }
+  }
+
   export interface VolumeUsd {
     /**
      * Credited GMV (awaiting_settlement + settled); excludes canceled and reversed, in
@@ -629,189 +763,6 @@ export namespace BusinessListResponse {
   }
 }
 
-export interface BusinessLeaderboardResponse {
-  /**
-   * The top referrers by total earnings, best first.
-   */
-  leaders: Array<BusinessLeaderboardResponse.Leader>;
-
-  /**
-   * The caller's own standing; null when the caller has no referral earnings.
-   */
-  me: BusinessLeaderboardResponse.Me | null;
-}
-
-export namespace BusinessLeaderboardResponse {
-  export interface Leader {
-    /**
-     * When the referrer's earliest business referral became active.
-     */
-    first_referral_started_at: string;
-
-    /**
-     * 1-based leaderboard position.
-     */
-    rank: number;
-
-    /**
-     * The referrer's pending + completed earnings across all referred businesses, in
-     * USD.
-     */
-    total_earnings_usd: string;
-
-    /**
-     * Credited GMV across all the referrer's referred businesses, in USD.
-     */
-    total_volume_usd: string;
-
-    /**
-     * The ranked referrer. Identity fields (id, name, username, profile_picture) are
-     * returned only on the caller's own entry; other referrers expose coarse location
-     * only.
-     */
-    user: Leader.User | null;
-  }
-
-  export namespace Leader {
-    /**
-     * The ranked referrer. Identity fields (id, name, username, profile_picture) are
-     * returned only on the caller's own entry; other referrers expose coarse location
-     * only.
-     */
-    export interface User {
-      /**
-       * The city where the referrer is located, derived from their IP address. Null if
-       * location sharing is disabled.
-       */
-      city: string | null;
-
-      /**
-       * The country where the referrer is located, derived from their IP address. Null
-       * if location sharing is disabled.
-       */
-      country: string | null;
-
-      /**
-       * User ID, prefixed `user_`. Present only on the caller's own entry.
-       */
-      id?: string;
-
-      /**
-       * The user's display name. Present only on the caller's own entry.
-       */
-      name?: string | null;
-
-      /**
-       * The user's profile picture. Present only on the caller's own entry.
-       */
-      profile_picture?: User.ProfilePicture;
-
-      /**
-       * The user's unique username. Present only on the caller's own entry.
-       */
-      username?: string;
-    }
-
-    export namespace User {
-      /**
-       * The user's profile picture. Present only on the caller's own entry.
-       */
-      export interface ProfilePicture {
-        /**
-         * The user's profile picture URL.
-         */
-        url: string;
-      }
-    }
-  }
-
-  /**
-   * The caller's own standing; null when the caller has no referral earnings.
-   */
-  export interface Me {
-    /**
-     * When the referrer's earliest business referral became active.
-     */
-    first_referral_started_at: string;
-
-    /**
-     * 1-based leaderboard position.
-     */
-    rank: number;
-
-    /**
-     * The referrer's pending + completed earnings across all referred businesses, in
-     * USD.
-     */
-    total_earnings_usd: string;
-
-    /**
-     * Credited GMV across all the referrer's referred businesses, in USD.
-     */
-    total_volume_usd: string;
-
-    /**
-     * The ranked referrer. Identity fields (id, name, username, profile_picture) are
-     * returned only on the caller's own entry; other referrers expose coarse location
-     * only.
-     */
-    user: Me.User | null;
-  }
-
-  export namespace Me {
-    /**
-     * The ranked referrer. Identity fields (id, name, username, profile_picture) are
-     * returned only on the caller's own entry; other referrers expose coarse location
-     * only.
-     */
-    export interface User {
-      /**
-       * The city where the referrer is located, derived from their IP address. Null if
-       * location sharing is disabled.
-       */
-      city: string | null;
-
-      /**
-       * The country where the referrer is located, derived from their IP address. Null
-       * if location sharing is disabled.
-       */
-      country: string | null;
-
-      /**
-       * User ID, prefixed `user_`. Present only on the caller's own entry.
-       */
-      id?: string;
-
-      /**
-       * The user's display name. Present only on the caller's own entry.
-       */
-      name?: string | null;
-
-      /**
-       * The user's profile picture. Present only on the caller's own entry.
-       */
-      profile_picture?: User.ProfilePicture;
-
-      /**
-       * The user's unique username. Present only on the caller's own entry.
-       */
-      username?: string;
-    }
-
-    export namespace User {
-      /**
-       * The user's profile picture. Present only on the caller's own entry.
-       */
-      export interface ProfilePicture {
-        /**
-         * The user's profile picture URL.
-         */
-        url: string;
-      }
-    }
-  }
-}
-
 export interface BusinessListParams extends CursorPageParams {
   /**
    * Cursor to fetch the page before (from page_info.start_cursor).
@@ -819,12 +770,12 @@ export interface BusinessListParams extends CursorPageParams {
   before?: string;
 
   /**
-   * Only return business referrals created after this timestamp.
+   * Only return partner businesses created after this timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return business referrals created before this timestamp.
+   * Only return partner businesses created before this timestamp.
    */
   created_before?: string;
 
@@ -834,7 +785,7 @@ export interface BusinessListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Number of business referrals to return from the start of the window.
+   * Number of partner businesses to return from the start of the window.
    */
   first?: number;
 
@@ -845,12 +796,12 @@ export interface BusinessListParams extends CursorPageParams {
   has_earnings?: boolean;
 
   /**
-   * Number of business referrals to return from the end of the window.
+   * Number of partner businesses to return from the end of the window.
    */
   last?: number;
 
   /**
-   * The field to sort business referrals by.
+   * The field to sort partner businesses by.
    */
   order?:
     | 'created_at'
@@ -884,25 +835,14 @@ export interface BusinessListParams extends CursorPageParams {
   tier?: 'first' | 'second';
 }
 
-export interface BusinessLeaderboardParams {
-  /**
-   * Time window for the rankings. `day`, `month`, and `year` count earnings since
-   * the start of the current calendar day, month, or year; `last_30_days` counts
-   * earnings over the trailing 30 days; `all_time` ranks lifetime earnings.
-   */
-  period?: 'day' | 'month' | 'year' | 'last_30_days' | 'all_time';
-}
-
 Businesses.Earnings = Earnings;
 
 export declare namespace Businesses {
   export {
     type BusinessRetrieveResponse as BusinessRetrieveResponse,
     type BusinessListResponse as BusinessListResponse,
-    type BusinessLeaderboardResponse as BusinessLeaderboardResponse,
     type BusinessListResponsesCursorPage as BusinessListResponsesCursorPage,
     type BusinessListParams as BusinessListParams,
-    type BusinessLeaderboardParams as BusinessLeaderboardParams,
   };
 
   export {

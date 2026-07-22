@@ -5,9 +5,11 @@ export {
   type Account,
   type AccountSocialLink,
   type AccountRecommendActionsResponse,
+  type AccountRegisterLlcResponse,
   type AccountListParams,
   type AccountCreateParams,
   type AccountUpdateParams,
+  type AccountRegisterLlcParams,
   type AccountsCursorPage,
 } from './accounts';
 export {

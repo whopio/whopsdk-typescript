@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -16,8 +17,16 @@ export class Media extends APIResource {
    * is asynchronous — poll `GET /media/{id}` until the asset is `ready`, then use
    * `file.id` anywhere attachments are accepted.
    */
-  generate(body: MediaGenerateParams, options?: RequestOptions): APIPromise<MediaAsset> {
-    return this._client.post('/media/generate', { body, ...options });
+  generate(params: MediaGenerateParams, options?: RequestOptions): APIPromise<MediaAsset> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/media/generate', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -132,37 +141,44 @@ export namespace MediaAsset {
 
 export interface MediaGenerateParams {
   /**
-   * What to generate. Up to 2,000 characters.
+   * Body param: What to generate. Up to 2,000 characters.
    */
   prompt: string;
 
   /**
-   * The kind of media to generate.
+   * Body param: The kind of media to generate.
    */
   type: 'video' | 'image';
 
   /**
-   * Account ID, prefixed `biz_`. Defaults to the account the API key belongs to.
+   * Body param: Account ID, prefixed `biz_`. Defaults to the account the API key
+   * belongs to.
    */
   account_id?: string;
 
   /**
-   * Video length in seconds. Video only; defaults to 5.
+   * Body param: Video length in seconds. Video only; defaults to 5.
    */
   duration_seconds?: 5 | 10 | 15;
 
   /**
-   * Optional reference image file IDs (`file_` prefixed), up to 4. For video, a
-   * single reference seeds the opening frame; multiple references guide subject and
-   * style instead.
+   * Body param: Optional reference image file IDs (`file_` prefixed), up to 4. For
+   * video, a single reference seeds the opening frame; multiple references guide
+   * subject and style instead.
    */
   reference_media?: Array<string>;
 
   /**
-   * Video resolution. Video only; defaults to `1080p`. `1080p` is not supported by
-   * Seedance 2.0 Fast or Mini; `4k` is only supported by Seedance 2.0.
+   * Body param: Video resolution. Video only; defaults to `1080p`. `1080p` is not
+   * supported by Seedance 2.0 Fast or Mini; `4k` is only supported by Seedance 2.0.
    */
   resolution?: '480p' | '720p' | '1080p' | '4k';
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Media {

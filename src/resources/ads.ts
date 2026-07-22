@@ -3,6 +3,7 @@
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -25,8 +26,16 @@ export class Ads extends APIResource {
   /**
    * Creates an ad in an ad group.
    */
-  create(body: AdCreateParams, options?: RequestOptions): APIPromise<Ad> {
-    return this._client.post('/ads', { body, ...options });
+  create(params: AdCreateParams, options?: RequestOptions): APIPromise<Ad> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/ads', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
@@ -57,15 +66,33 @@ export class Ads extends APIResource {
   /**
    * Pauses an active ad.
    */
-  pause(id: string, options?: RequestOptions): APIPromise<Ad> {
-    return this._client.post(path`/ads/${id}/pause`, options);
+  pause(id: string, params: AdPauseParams | null | undefined = {}, options?: RequestOptions): APIPromise<Ad> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/ads/${id}/pause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
    * Resumes a paused ad.
    */
-  unpause(id: string, options?: RequestOptions): APIPromise<Ad> {
-    return this._client.post(path`/ads/${id}/unpause`, options);
+  unpause(
+    id: string,
+    params: AdUnpauseParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Ad> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/ads/${id}/unpause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -73,19 +100,25 @@ export type AdsCursorPage = CursorPage<Ad>;
 
 export interface Ad {
   /**
-   * Unique identifier for the ad.
+   * Unique identifier for the ad, prefixed `ad_`.
    */
   id: string;
 
   /**
-   * The ad campaign this ad belongs to, an object with an id.
+   * The ad campaign this ad belongs to.
    */
   ad_campaign: Ad.AdCampaign;
 
   /**
-   * The ad group this ad belongs to, an object with an id.
+   * The ad group this ad belongs to.
    */
   ad_group: Ad.AdGroup;
+
+  /**
+   * USD value attributed to add-to-cart events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  added_to_cart_value: number;
 
   /**
    * Whop pixel-attributed add-to-cart events, last-click.
@@ -140,9 +173,21 @@ export interface Ad {
   clicks: number;
 
   /**
+   * USD value attributed to complete-registration events. Sums the value sent with
+   * each event, normalized to USD; events without a value contribute 0.
+   */
+  completed_registration_value: number;
+
+  /**
    * Whop pixel-attributed complete-registration events, last-click.
    */
   completed_registrations: number;
+
+  /**
+   * USD value attributed to contact events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  contact_value: number;
 
   /**
    * Whop pixel-attributed contact events, last-click.
@@ -208,6 +253,11 @@ export interface Ad {
   cost_per_submitted_application: number | null;
 
   /**
+   * Spend divided by unique clicks; null when there are no unique clicks.
+   */
+  cost_per_unique_click: number | null;
+
+  /**
    * Spend divided by attributed view-content events; null when they are not the goal
    * and none are attributed.
    */
@@ -227,8 +277,23 @@ export interface Ad {
   custom_conversions: number;
 
   /**
-   * The current delivery state, mirroring the Delivery column in the ads dashboard.
-   * When several states apply at once, the highest-precedence one is returned.
+   * Whop pixel-attributed custom conversions, keyed by your event name with its
+   * last-click count as the value. Empty when no named custom events are attributed.
+   * Custom events fired without a name are counted in custom_conversions but omitted
+   * here, so these values sum to at most custom_conversions.
+   */
+  custom_event_counts: unknown;
+
+  /**
+   * Conversion value attributed to each custom event, keyed by event name like
+   * custom_event_counts. Sums the value passed to whop.track, normalized to USD;
+   * events fired without a value contribute 0.
+   */
+  custom_event_values: unknown;
+
+  /**
+   * Whether the ad is delivering right now, and if not, why. When several states
+   * apply at once, the highest-precedence one is returned.
    */
   delivery_status:
     | 'rejected'
@@ -260,19 +325,23 @@ export interface Ad {
   issues: Array<Ad.Issue>;
 
   /**
-   * The instant lead form on the ad (Meta lead ads), or null when the ad group's
-   * conversion_location is not an instant-form destination. An object with name,
-   * form_type (more_volume or higher_intent), an optional intro, questions, a
-   * privacy_policy, an optional completion screen, and phone_verification.
+   * The instant lead form shown when someone taps this ad. `null` when the ad
+   * group's conversion_location is not an instant-form destination.
    */
-  lead_form: unknown | null;
+  lead_form: Ad.LeadForm | null;
 
   /**
-   * The Meta lead form the ad uses. Set when the ad references an existing form via
-   * lead_form_id, or once a form built from lead_form has been created on Meta at
-   * launch.
+   * The ad platform's ID for the instant form the ad uses. Set when the ad
+   * references an existing form via `lead_form_id`, or once a form built from
+   * `lead_form` has been created on the platform.
    */
   lead_form_id: string | null;
+
+  /**
+   * USD value attributed to lead events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  lead_value: number;
 
   /**
    * Whop pixel-attributed leads, last-click.
@@ -280,10 +349,10 @@ export interface Ad {
   leads: number;
 
   /**
-   * The click-to-message welcome copy, an object with message and keyword, or null
-   * when the ad has none.
+   * Welcome message for click-to-message ads, shown when the conversation opens.
+   * `null` when the ad has none.
    */
-  messaging_config: unknown | null;
+  messaging_config: Ad.MessagingConfig | null;
 
   /**
    * Whether the ad can appear alongside other advertisers' ads in the same unit.
@@ -292,19 +361,19 @@ export interface Ad {
   multi_advertiser_ads: boolean;
 
   /**
-   * The existing post this ad promotes (a Facebook post or Instagram media), or null
-   * when it uses uploaded creatives.
+   * The existing post this ad promotes — a Facebook post or Instagram media ID.
+   * `null` when the ad uses uploaded creatives.
    */
   post_id: string | null;
 
   /**
-   * Which network post_id refers to — facebook (a page post) or instagram (a media
-   * id) — or null when the ad uses uploaded creatives.
+   * Which network `post_id` refers to: `facebook` (a page post) or `instagram` (a
+   * media ID). `null` when the ad uses uploaded creatives.
    */
   post_source: 'facebook' | 'instagram' | null;
 
   /**
-   * Preview image of the existing post this ad promotes. Null for ads that use
+   * Preview image of the existing post this ad promotes. `null` for ads that use
    * uploaded creatives, or until the post's media has been fetched from the network.
    */
   post_thumbnail_url: string | null;
@@ -350,17 +419,31 @@ export interface Ad {
   result_event_name: string | null;
 
   /**
+   * The Whop pixel-attributed count behind result_event. When a campaign's ad groups
+   * optimize different goals there is no single result_event (it is null), and this
+   * is instead the sum of each ad group's own attributed results. Null when nothing
+   * Whop-attributable is being optimized for.
+   */
+  results: number | null;
+
+  /**
    * Purchase value divided by spend, both in USD (a currency-neutral ratio); 0 when
    * there is no spend.
    */
   return_on_ad_spend: number;
 
   /**
+   * USD value attributed to schedule events. Sums the value sent with each event,
+   * normalized to USD; events without a value contribute 0.
+   */
+  schedule_value: number;
+
+  /**
    * Whop pixel-attributed schedule events, last-click.
    */
   schedules: number;
 
-  social_accounts: Array<unknown>;
+  social_accounts: Array<Ad.SocialAccount>;
 
   /**
    * The amount charged, in spend_currency.
@@ -373,9 +456,16 @@ export interface Ad {
   spend_currency: string | null;
 
   /**
-   * The delivery status of the ad.
+   * Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and
+   * `rejected` come from ad review.
    */
   status: 'active' | 'paused' | 'in_review' | 'rejected';
+
+  /**
+   * USD value attributed to submit-application events. Sums the value sent with each
+   * event, normalized to USD; events without a value contribute 0.
+   */
+  submitted_application_value: number;
 
   /**
    * Whop pixel-attributed submit-application events, last-click.
@@ -383,7 +473,7 @@ export interface Ad {
   submitted_applications: number;
 
   /**
-   * The display title of the ad. Falls back to the creative set caption when unset.
+   * Display title of the ad.
    */
   title: string | null;
 
@@ -393,7 +483,7 @@ export interface Ad {
   unique_click_through_rate: number | null;
 
   /**
-   * The number of unique clicks.
+   * People who clicked, reported by the Whop pixel, counted once per person.
    */
   unique_clicks: number;
 
@@ -408,9 +498,15 @@ export interface Ad {
   url: string | null;
 
   /**
-   * Query parameters appended to the URL, as a string-to-string map.
+   * Query parameters appended to the URL, keyed by parameter name.
    */
   url_parameters: unknown;
+
+  /**
+   * USD value attributed to view-content events. Sums the value sent with each
+   * event, normalized to USD; events without a value contribute 0.
+   */
+  viewed_content_value: number;
 
   /**
    * Whop pixel-attributed view-content events, last-click.
@@ -420,7 +516,7 @@ export interface Ad {
 
 export namespace Ad {
   /**
-   * The ad campaign this ad belongs to, an object with an id.
+   * The ad campaign this ad belongs to.
    */
   export interface AdCampaign {
     /**
@@ -430,7 +526,7 @@ export namespace Ad {
   }
 
   /**
-   * The ad group this ad belongs to, an object with an id.
+   * The ad group this ad belongs to.
    */
   export interface AdGroup {
     /**
@@ -441,7 +537,8 @@ export namespace Ad {
 
   /**
    * The creative assets used by this ad. The original asset has a null format;
-   * square, vertical, and horizontal entries are placement-specific variants.
+   * square, vertical, and horizontal entries are placement-specific variants. A
+   * carousel ad returns one format-null entry per attachment, in order.
    */
   export interface Creative {
     /**
@@ -522,6 +619,251 @@ export namespace Ad {
      * The type of resource the issue is attached to.
      */
     resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+  }
+
+  /**
+   * The instant lead form shown when someone taps this ad. `null` when the ad
+   * group's conversion_location is not an instant-form destination.
+   */
+  export interface LeadForm {
+    /**
+     * Screen shown after the form is submitted. `null` when the form uses the default.
+     */
+    completion: LeadForm.Completion | null;
+
+    /**
+     * Custom consent disclaimer shown before submission. `null` when the form has
+     * none.
+     */
+    disclaimer: LeadForm.Disclaimer | null;
+
+    /**
+     * `more_volume` is quickest to submit; `higher_intent` adds a confirmation step
+     * before submission.
+     */
+    form_type: 'more_volume' | 'higher_intent';
+
+    /**
+     * Intro screen shown before the questions. `null` when the form has none.
+     */
+    intro: LeadForm.Intro | null;
+
+    /**
+     * Internal name of the form.
+     */
+    name: string | null;
+
+    /**
+     * Whether the phone number must be verified by SMS before submitting.
+     */
+    phone_verification: boolean;
+
+    /**
+     * Your privacy policy, linked from the form. `null` when unset.
+     */
+    privacy_policy: LeadForm.PrivacyPolicy | null;
+
+    questions: Array<LeadForm.Question>;
+  }
+
+  export namespace LeadForm {
+    /**
+     * Screen shown after the form is submitted. `null` when the form uses the default.
+     */
+    export interface Completion {
+      /**
+       * Text of the follow-up button.
+       */
+      button_text: string | null;
+
+      /**
+       * Body text under the headline.
+       */
+      description: string | null;
+
+      /**
+       * Headline of the completion screen.
+       */
+      headline: string | null;
+
+      /**
+       * Website the follow-up button opens. `null` when the screen has no button.
+       */
+      url: string | null;
+    }
+
+    /**
+     * Custom consent disclaimer shown before submission. `null` when the form has
+     * none.
+     */
+    export interface Disclaimer {
+      /**
+       * Disclaimer text.
+       */
+      body: string | null;
+
+      checkboxes: Array<Disclaimer.Checkbox>;
+
+      /**
+       * Disclaimer title.
+       */
+      title: string | null;
+    }
+
+    export namespace Disclaimer {
+      /**
+       * Consent checkboxes the person can tick. Empty when the disclaimer is text-only.
+       */
+      export interface Checkbox {
+        /**
+         * Whether the checkbox starts ticked.
+         */
+        checked_by_default: boolean | null;
+
+        /**
+         * Stable identifier consent responses are stored under.
+         */
+        key: string | null;
+
+        /**
+         * Whether the checkbox must be ticked to submit the form.
+         */
+        required: boolean | null;
+
+        /**
+         * Consent text next to the checkbox.
+         */
+        text: string;
+      }
+    }
+
+    /**
+     * Intro screen shown before the questions. `null` when the form has none.
+     */
+    export interface Intro {
+      /**
+       * Body text under the headline.
+       */
+      description: string | null;
+
+      /**
+       * Headline of the intro screen.
+       */
+      headline: string | null;
+    }
+
+    /**
+     * Your privacy policy, linked from the form. `null` when unset.
+     */
+    export interface PrivacyPolicy {
+      /**
+       * Link text shown for the policy. `null` uses the platform default.
+       */
+      link_text: string | null;
+
+      /**
+       * URL of your privacy policy.
+       */
+      url: string;
+    }
+
+    /**
+     * Questions on the form, in order.
+     */
+    export interface Question {
+      /**
+       * Question type: a standard prefill type such as `email`, `phone`, or `full_name`,
+       * or `custom` for your own question.
+       */
+      type: string;
+
+      /**
+       * Answer format for `custom` questions: `short_answer`, `multiple_choice`, or
+       * `appointment`. Absent otherwise.
+       */
+      format?: string;
+
+      /**
+       * Question text for `custom` questions. Absent for standard prefill questions.
+       */
+      label?: string;
+
+      options?: Array<Question.Option>;
+    }
+
+    export namespace Question {
+      /**
+       * Choices for `multiple_choice` questions. Absent for other formats.
+       */
+      export interface Option {
+        /**
+         * Choice text shown to the person.
+         */
+        value: string;
+
+        /**
+         * Stable identifier the choice's answers are stored under. Absent for simple
+         * choices.
+         */
+        key?: string | null;
+
+        /**
+         * Where the form goes when this choice is selected. Absent when the form just
+         * continues to the next question.
+         */
+        logic?: Option.Logic;
+      }
+
+      export namespace Option {
+        /**
+         * Where the form goes when this choice is selected. Absent when the form just
+         * continues to the next question.
+         */
+        export interface Logic {
+          /**
+           * What happens when the choice is selected.
+           */
+          action: 'go_to_question' | 'submit_form' | 'close_form';
+
+          /**
+           * Zero-based index of the ending screen to jump to.
+           */
+          target_end_page_index?: number;
+
+          /**
+           * Zero-based index of the question to jump to, for `go_to_question`.
+           */
+          target_question_index?: number;
+        }
+      }
+    }
+  }
+
+  /**
+   * Welcome message for click-to-message ads, shown when the conversation opens.
+   * `null` when the ad has none.
+   */
+  export interface MessagingConfig {
+    /**
+     * Suggested reply the person can tap to start the conversation.
+     */
+    keyword: string | null;
+
+    /**
+     * Greeting shown when the conversation opens.
+     */
+    message: string | null;
+  }
+
+  /**
+   * The social accounts the ad runs under — its Facebook page and Instagram profile
+   * — each referenced by ID, prefixed `sacc_`.
+   */
+  export interface SocialAccount {
+    /**
+     * The referenced entity's id.
+     */
+    id: string;
   }
 }
 
@@ -625,19 +967,20 @@ export interface AdListParams extends CursorPageParams {
 
 export interface AdCreateParams {
   /**
-   * An inline ad group to create (same shape as POST /ad_groups, including
-   * ad_campaign_id). Creates the ad group and the ad together. Provide this OR
-   * ad_group_id.
+   * Body param: An inline ad group to create (same shape as POST /ad_groups,
+   * including ad_campaign_id). Creates the ad group and the ad together. Provide
+   * this OR ad_group_id.
    */
   ad_group?: unknown;
 
   /**
-   * The existing ad group to create the ad in. Provide this OR ad_group, not both.
+   * Body param: The existing ad group to create the ad in. Provide this OR ad_group,
+   * not both.
    */
   ad_group_id?: string;
 
   /**
-   * The call-to-action button shown on the ad.
+   * Body param: The call-to-action button shown on the ad.
    */
   call_to_action?:
     | 'apply_now'
@@ -664,23 +1007,24 @@ export interface AdCreateParams {
     | 'watch_more';
 
   /**
-   * The ad's creative assets. Each entry is an uploaded file id with an optional
-   * format; omit format for the original asset.
+   * Body param: The ad's creative assets. Each entry is an uploaded file id with an
+   * optional format; omit format for the original asset. Two or more entries with no
+   * format become a carousel (2-10 attachments), in order, sharing the ad's copy.
    */
   creatives?: Array<AdCreateParams.Creative>;
 
   /**
-   * The description variants shown on the ad.
+   * Body param: The description variants shown on the ad.
    */
   descriptions?: Array<string>;
 
   /**
-   * The headline variants shown on the ad.
+   * Body param: The headline variants shown on the ad.
    */
   headlines?: Array<string>;
 
   /**
-   * Instant lead form for the ad. Only allowed when the ad group's
+   * Body param: Instant lead form for the ad. Only allowed when the ad group's
    * conversion_location is an instant-form destination (instant_forms,
    * instant_forms_and_messenger, website_and_instant_forms). Mutually exclusive with
    * lead_form_id.
@@ -688,65 +1032,78 @@ export interface AdCreateParams {
   lead_form?: AdCreateParams.LeadForm;
 
   /**
-   * Use an existing Meta instant form instead of creating one — the form's Meta id,
-   * from a form already on the ad's Facebook page. Only allowed when the ad group's
-   * conversion_location is an instant-form destination. Mutually exclusive with
-   * lead_form.
+   * Body param: Use an existing instant form instead of creating one — the form's
+   * platform ID, from a form already on the ad's Facebook page. Only allowed when
+   * the ad group's conversion_location is an instant-form destination. Mutually
+   * exclusive with lead_form.
    */
   lead_form_id?: string;
 
   /**
-   * Click-to-message welcome copy: the greeting (message) and the ice-breaker prompt
-   * (keyword).
+   * Body param: Click-to-message welcome copy: the greeting (message) and the
+   * ice-breaker prompt (keyword).
    */
   messaging_config?: AdCreateParams.MessagingConfig;
 
   /**
-   * Whether the ad can appear alongside other advertisers' ads in the same unit.
-   * Defaults to true.
+   * Body param: Whether the ad can appear alongside other advertisers' ads in the
+   * same unit. Defaults to true.
    */
   multi_advertiser_ads?: boolean;
 
   /**
-   * Promote an existing post instead of uploading creatives — a Facebook post or
-   * Instagram media id. Mutually exclusive with creatives. Pair with post_source.
+   * Body param: Promote an existing post instead of uploading creatives — a Facebook
+   * post or Instagram media id. Mutually exclusive with creatives. Pair with
+   * post_source.
    */
   post_id?: string;
 
   /**
-   * Which network post_id refers to — facebook (a page post) or instagram (a media
-   * id). Authoritative; when omitted the source is inferred from the id shape.
+   * Body param: Which network post_id refers to — facebook (a page post) or
+   * instagram (a media id). Authoritative; when omitted the source is inferred from
+   * the id shape.
    */
   post_source?: 'facebook' | 'instagram';
 
   /**
-   * The primary text variants shown in the ad body.
+   * Body param: The primary text variants shown in the ad body.
    */
   primary_texts?: Array<string>;
 
   /**
-   * The social accounts (Facebook page, Instagram profile) the ad runs under.
+   * Body param: The social accounts the ad runs under — a connected Facebook page
+   * and, optionally, an Instagram profile.
    */
   social_accounts?: Array<AdCreateParams.SocialAccount>;
 
   /**
-   * The display name of the ad.
+   * Body param: The display name of the ad.
    */
   title?: string;
 
   /**
-   * The URL the ad links to.
+   * Body param: The URL the ad links to.
    */
   url?: string;
 
   /**
-   * Query parameters appended to the destination URL, as a string-to-string map.
+   * Body param: Query parameters appended to the destination URL, keyed by parameter
+   * name.
    */
   url_parameters?: unknown;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace AdCreateParams {
   export interface Creative {
+    /**
+     * Uploaded file ID, prefixed `file_`.
+     */
     id?: string;
 
     /**
@@ -814,7 +1171,7 @@ export namespace AdCreateParams {
     phone_verification?: boolean;
 
     /**
-     * Your privacy policy. url is required by Meta.
+     * Your privacy policy. url is required by the ad platform.
      */
     privacy_policy?: LeadForm.PrivacyPolicy;
 
@@ -874,7 +1231,7 @@ export namespace AdCreateParams {
     }
 
     /**
-     * Your privacy policy. url is required by Meta.
+     * Your privacy policy. url is required by the ad platform.
      */
     export interface PrivacyPolicy {
       link_text?: string;
@@ -945,6 +1302,9 @@ export namespace AdCreateParams {
   }
 
   export interface SocialAccount {
+    /**
+     * Social account ID, prefixed `sacc_`.
+     */
     id?: string;
   }
 }
@@ -997,7 +1357,8 @@ export interface AdUpdateParams {
   /**
    * The ad's creative assets. Each entry is an uploaded file id with an optional
    * format; omit format for the original asset. Replaces a live ad's creative on the
-   * platform.
+   * platform. Two or more entries with no format replace it with a carousel (2-10
+   * attachments), in order, sharing the ad's copy.
    */
   creatives?: Array<AdUpdateParams.Creative>;
 
@@ -1020,7 +1381,7 @@ export interface AdUpdateParams {
   lead_form?: AdUpdateParams.LeadForm;
 
   /**
-   * Use an existing Meta instant form instead of creating one — the form's Meta id,
+   * Use an existing instant form instead of creating one — the form's platform ID,
    * from a form already on the ad's Facebook page. Only allowed when the ad group's
    * conversion_location is an instant-form destination. Mutually exclusive with
    * lead_form. Replaces a stored lead_form.
@@ -1057,7 +1418,8 @@ export interface AdUpdateParams {
   primary_texts?: Array<string>;
 
   /**
-   * The social accounts the ad runs under.
+   * The social accounts the ad runs under — a connected Facebook page and,
+   * optionally, an Instagram profile.
    */
   social_accounts?: Array<AdUpdateParams.SocialAccount>;
 
@@ -1072,13 +1434,16 @@ export interface AdUpdateParams {
   url?: string;
 
   /**
-   * Query parameters appended to the destination URL, as a string-to-string map.
+   * Query parameters appended to the destination URL, keyed by parameter name.
    */
   url_parameters?: unknown;
 }
 
 export namespace AdUpdateParams {
   export interface Creative {
+    /**
+     * Uploaded file ID, prefixed `file_`.
+     */
     id?: string;
 
     /**
@@ -1146,7 +1511,7 @@ export namespace AdUpdateParams {
     phone_verification?: boolean;
 
     /**
-     * Your privacy policy. url is required by Meta.
+     * Your privacy policy. url is required by the ad platform.
      */
     privacy_policy?: LeadForm.PrivacyPolicy;
 
@@ -1206,7 +1571,7 @@ export namespace AdUpdateParams {
     }
 
     /**
-     * Your privacy policy. url is required by Meta.
+     * Your privacy policy. url is required by the ad platform.
      */
     export interface PrivacyPolicy {
       link_text?: string;
@@ -1277,8 +1642,27 @@ export namespace AdUpdateParams {
   }
 
   export interface SocialAccount {
+    /**
+     * Social account ID, prefixed `sacc_`.
+     */
     id?: string;
   }
+}
+
+export interface AdPauseParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface AdUnpauseParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Ads {
@@ -1290,5 +1674,7 @@ export declare namespace Ads {
     type AdCreateParams as AdCreateParams,
     type AdRetrieveParams as AdRetrieveParams,
     type AdUpdateParams as AdUpdateParams,
+    type AdPauseParams as AdPauseParams,
+    type AdUnpauseParams as AdUnpauseParams,
   };
 }

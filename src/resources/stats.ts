@@ -20,7 +20,7 @@ export class Stats extends APIResource {
   }
 
   /**
-   * Retrieves a metric as a time series of points for an account over a date range.
+   * Retrieves a metric as a time series of points for an account over a time range.
    */
   retrieve(
     metric: string,
@@ -129,12 +129,14 @@ export namespace StatListResponse {
 
 export interface StatRetrieveParams {
   /**
-   * Start of the date range (YYYY-MM-DD).
+   * Start of the range — a date (YYYY-MM-DD), expanded to the start of that day, or
+   * an ISO 8601 timestamp (for example 2026-07-16T16:37:00Z), used exactly.
    */
   from: string;
 
   /**
-   * End of the date range (YYYY-MM-DD).
+   * End of the range — a date (YYYY-MM-DD), expanded to the end of that day, or an
+   * ISO 8601 timestamp (for example 2026-07-17T16:37:00Z), used exactly.
    */
   to: string;
 
@@ -197,11 +199,49 @@ export interface StatRetrieveParams {
   convert_to?: string;
 
   /**
+   * Filter traffic metrics to one visitor country (uppercase ISO 3166-1 alpha-2, for
+   * example US). Pair with breakdown_by=country_code to split by country.
+   */
+  country_code?: string;
+
+  /**
    * Filter to transactions made in this original ISO currency, for example eur —
    * reported in that currency, not converted. Pair with breakdown_by=currency to
    * split a metric by currency. Available on metrics that list currency.
    */
   currency?: string;
+
+  /**
+   * Filter the events metric to one merchant-defined custom event name. Only valid
+   * alongside event_name=pixel.custom. Pair with breakdown_by=custom_name to split
+   * custom events by name.
+   */
+  custom_name?: string;
+
+  /**
+   * Filter traffic metrics to one device type: desktop, mobile, tablet, or unknown.
+   * Pair with breakdown_by=device_type to split by device.
+   */
+  device_type?: string;
+
+  /**
+   * Filter disputes to a normalized reason, for example product_not_received. Pair
+   * with breakdown_by=dispute_reason to split dispute counts by reason.
+   */
+  dispute_reason?: string;
+
+  /**
+   * Filter the events metric to one tracked event name, for example pixel.page or
+   * pixel.custom. Pair with breakdown_by=event_name to split by event.
+   */
+  event_name?: string;
+
+  /**
+   * Filter the events metric to a canonical group of events: page_view (pixel page
+   * views plus whop.com store views), checkout_start (hosted and embedded checkout
+   * views), or other. Pair with breakdown_by=event_type to split by group.
+   */
+  event_type?: 'page_view' | 'checkout_start' | 'other';
 
   /**
    * Filter to a single fee type. Pair with breakdown_by=fee_type to split fees by
@@ -210,9 +250,22 @@ export interface StatRetrieveParams {
   fee_type?: string;
 
   /**
+   * Filter traffic metrics to one website hostname, for example shop.example.com.
+   * Pair with breakdown_by=hostname to split by website.
+   */
+  hostname?: string;
+
+  /**
    * How wide each point is. Defaults to day. Snapshot metrics are day-only.
    */
-  interval?: 'hour' | 'day' | 'week' | 'month' | 'year';
+  interval?: 'minute' | 'five_minutes' | 'thirty_minutes' | 'hour' | 'day' | 'week' | 'month' | 'year';
+
+  /**
+   * Filter to a single cashback merchant bucket, for example whop-ads. Pair with
+   * breakdown_by=merchant to split cashback by merchant. Available on metrics that
+   * list merchant.
+   */
+  merchant?: string;
 
   /**
    * Filter to a single most-recent member action. Pair with
@@ -220,6 +273,12 @@ export interface StatRetrieveParams {
    * most_recent_action.
    */
   most_recent_action?: string;
+
+  /**
+   * Filter traffic metrics to one page — a hostname plus normalized path, for
+   * example shop.example.com/pricing. Pair with breakdown_by=page to split by page.
+   */
+  page?: string;
 
   /**
    * Filter to a single payment method, for example card or crypto. Available on
@@ -248,14 +307,16 @@ export interface StatRetrieveParams {
   segment?: string;
 
   /**
-   * Trailing window for snapshot metrics. Only accepted by snapshot metrics (each
-   * lists its allowed windows in the catalog); defaults to the metric's first
-   * supported window. Only 30d today.
+   * Window used by a snapshot metric. Ordinary snapshots accept 30d as their
+   * trailing activity window. Cohorted dispute metrics accept 7d or 28d as the
+   * sales-transaction pool; their attribution window is fixed in the metric name.
+   * Each metric lists its accepted values in the catalog.
    */
-  snapshot_window?: '30d';
+  snapshot_window?: '7d' | '28d' | '30d';
 
   /**
-   * Filter to a single GMV source, for example payments. Pair with
+   * Filter to a single GMV source, for example payments — or, on the traffic
+   * metrics, a visit source (whop_ads, direct, or a utm_source value). Pair with
    * breakdown_by=source to split by source. Available on metrics that list source.
    */
   source?: string;

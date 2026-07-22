@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource businesses', () => {
   // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.referrals.businesses.list();
+    const responsePromise = client.partners.businesses.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,7 +24,7 @@ describe('resource businesses', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.referrals.businesses.list(
+      client.partners.businesses.list(
         {
           after: 'after',
           before: 'before',
@@ -47,7 +47,7 @@ describe('resource businesses', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.referrals.businesses.retrieve('id');
+    const responsePromise = client.partners.businesses.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -55,25 +55,5 @@ describe('resource businesses', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('leaderboard', async () => {
-    const responsePromise = client.referrals.businesses.leaderboard();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('leaderboard: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.referrals.businesses.leaderboard({ period: 'day' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

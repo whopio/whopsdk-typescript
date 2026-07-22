@@ -72,6 +72,24 @@ export class Withdrawals extends APIResource {
   create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<Withdrawal> {
     return this._client.post('/withdrawals', { body, ...options });
   }
+
+  /**
+   * Generates a withdrawal PDF invoice and returns a temporary download URL.
+   *
+   * Required permissions:
+   *
+   * - `payout:withdrawal:read`
+   *
+   * @example
+   * ```ts
+   * const response = await client.withdrawals.generatePdf(
+   *   'wdrl_xxxxxxxxxxxxx',
+   * );
+   * ```
+   */
+  generatePdf(id: string, options?: RequestOptions): APIPromise<WithdrawalGeneratePdfResponse> {
+    return this._client.post(path`/withdrawals/${id}/generate_pdf`, options);
+  }
 }
 
 export type WithdrawalListResponsesCursorPage = CursorPage<WithdrawalListResponse>;
@@ -189,6 +207,12 @@ export interface Withdrawal {
    * withdrawal amount. Only applies to platform accounts using Whop Rails.
    */
   markup_fee: number;
+
+  /**
+   * The id of the payout request (returned by POST /payouts) that this withdrawal
+   * settles. Null unless the withdrawal originated from a stablecoin payout.
+   */
+  payout_request_id: string | null;
 
   /**
    * The saved payout destination used for this withdrawal (e.g., a bank account or
@@ -334,6 +358,12 @@ export interface WithdrawalListResponse {
   markup_fee: number;
 
   /**
+   * The id of the payout request (returned by POST /payouts) that this withdrawal
+   * settles. Null unless the withdrawal originated from a stablecoin payout.
+   */
+  payout_request_id: string | null;
+
+  /**
    * The processing speed selected for this withdrawal ('standard' or 'instant').
    */
   speed: WithdrawalSpeeds;
@@ -343,6 +373,21 @@ export interface WithdrawalListResponse {
    * associated payouts (e.g., 'requested', 'in_transit', 'completed', 'failed').
    */
   status: WithdrawalStatus;
+}
+
+/**
+ * A temporary link to a generated withdrawal PDF invoice.
+ */
+export interface WithdrawalGeneratePdfResponse {
+  /**
+   * The timestamp after which the withdrawal PDF URL is no longer valid.
+   */
+  expires_at: string;
+
+  /**
+   * The temporary URL for downloading the withdrawal PDF invoice.
+   */
+  url: string;
 }
 
 export interface WithdrawalListParams extends CursorPageParams {
@@ -399,6 +444,12 @@ export interface WithdrawalCreateParams {
   currency: Shared.Currency;
 
   /**
+   * A client-generated key that makes retries safe. Retrying with the same key
+   * returns the original withdrawal instead of creating a second one.
+   */
+  idempotency_key?: string | null;
+
+  /**
    * The ID of the payout method to use for the withdrawal.
    */
   payout_method_id?: string | null;
@@ -422,6 +473,7 @@ export declare namespace Withdrawals {
     type WithdrawalSpeeds as WithdrawalSpeeds,
     type WithdrawalStatus as WithdrawalStatus,
     type WithdrawalListResponse as WithdrawalListResponse,
+    type WithdrawalGeneratePdfResponse as WithdrawalGeneratePdfResponse,
     type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
     type WithdrawalListParams as WithdrawalListParams,
     type WithdrawalCreateParams as WithdrawalCreateParams,

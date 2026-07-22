@@ -22,7 +22,7 @@ describe('resource stats', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve: only required params', async () => {
-    const responsePromise = client.stats.retrieve('metric', { from: '2019-12-27', to: '2019-12-27' });
+    const responsePromise = client.stats.retrieve('metric', { from: 'from', to: 'to' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -35,8 +35,8 @@ describe('resource stats', () => {
   // Mock server tests are disabled
   test.skip('retrieve: required and optional params', async () => {
     const response = await client.stats.retrieve('metric', {
-      from: '2019-12-27',
-      to: '2019-12-27',
+      from: 'from',
+      to: 'to',
       access_level: 'access_level',
       account_id: 'account_id',
       ad_campaign_ids: ['string'],
@@ -46,15 +46,24 @@ describe('resource stats', () => {
       card_network: 'card_network',
       category: 'category',
       convert_to: 'convert_to',
+      country_code: 'country_code',
       currency: 'currency',
+      custom_name: 'custom_name',
+      device_type: 'device_type',
+      dispute_reason: 'dispute_reason',
+      event_name: 'event_name',
+      event_type: 'page_view',
       fee_type: 'fee_type',
-      interval: 'hour',
+      hostname: 'hostname',
+      interval: 'minute',
+      merchant: 'merchant',
       most_recent_action: 'most_recent_action',
+      page: 'page',
       payment_method: 'payment_method',
       product: 'product',
       referred_user_id: 'referred_user_id',
       segment: 'segment',
-      snapshot_window: '30d',
+      snapshot_window: '7d',
       source: 'source',
       status: 'status',
       time_zone: 'time_zone',
