@@ -4,6 +4,7 @@ import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -14,16 +15,8 @@ import { path } from '../internal/utils/path';
  */
 export class Apps extends APIResource {
   /**
-   * Returns a paginated list of apps on the Whop platform, with optional filtering
-   * by company, type, view support, and search query.
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const appListResponse of client.apps.list()) {
-   *   // ...
-   * }
-   * ```
+   * Lists apps on the Whop platform: the app store's live apps, or — with
+   * `account_id` and developer access to that account — every app the account owns.
    */
   list(
     query: AppListParams | null | undefined = {},
@@ -33,77 +26,55 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Register a new app on the Whop developer platform. Apps provide custom
+   * Registers a new app on the Whop developer platform. Apps provide custom
    * experiences that can be added to products.
-   *
-   * Required permissions:
-   *
-   * - `developer:create_app`
-   * - `developer:manage_api_key`
-   * - `developer:update_app`
-   *
-   * @example
-   * ```ts
-   * const app = await client.apps.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   name: 'name',
-   * });
-   * ```
    */
-  create(body: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App> {
-    return this._client.post('/apps', { body, ...options });
+  create(params: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/apps', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing app.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_api_key`
-   * - `developer:update_app`
-   *
-   * @example
-   * ```ts
-   * const app = await client.apps.retrieve(
-   *   'app_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Retrieves an app by ID, claimed route, or proxy domain id. Credential fields
+   * (api_key, default_api_key, secrets) render `null` unless the caller has the
+   * corresponding developer permission on the owning company.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.App> {
     return this._client.get(path`/apps/${id}`, options);
   }
 
   /**
-   * Update the settings, metadata, or status of an existing app on the Whop
-   * developer platform.
-   *
-   * Required permissions:
-   *
-   * - `developer:update_app`
-   * - `developer:manage_api_key`
-   *
-   * @example
-   * ```ts
-   * const app = await client.apps.update('app_xxxxxxxxxxxxxx');
-   * ```
+   * Updates the settings, metadata, or status of an app. Fields that are omitted
+   * keep their current value.
    */
-  update(
+  update(id: string, body: AppUpdateParams, options?: RequestOptions): APIPromise<Shared.App> {
+    return this._client.patch(path`/apps/${id}`, { body, ...options });
+  }
+
+  /**
+   * Replaces the set of permissions the app requests from users when they install
+   * it. Requires a user session: the `developer:update_app_authorization` scope
+   * cannot be delegated to API keys.
+   */
+  updatePermissions(
     id: string,
-    body: AppUpdateParams | null | undefined = {},
+    body: AppUpdatePermissionsParams,
     options?: RequestOptions,
   ): APIPromise<Shared.App> {
-    return this._client.patch(path`/apps/${id}`, { body, ...options });
+    return this._client.patch(path`/apps/${id}/permissions`, { body, ...options });
   }
 
   /**
    * Lists a hosted app's server runtime logs, most recent first: console output,
    * uncaught exceptions, and failed-request summaries captured on whop.app hosting.
    * Logs are retained for 7 days.
-   *
-   * @example
-   * ```ts
-   * const response = await client.apps.logs('id');
-   * ```
    */
   logs(
     id: string,
@@ -345,115 +316,119 @@ export namespace AppLogsResponse {
 
 export interface AppListParams extends CursorPageParams {
   /**
-   * The type of end-user an app is built for
+   * Only return apps created by this account (`biz_` tag). With developer access to
+   * the account this includes its unlisted and hidden apps.
    */
-  app_type?: AppType | null;
+  account_id?: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Filter apps by the type of end-user they are built for.
    */
-  before?: string | null;
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
 
   /**
-   * Filter apps to only those created by this company, starting with 'biz\_'.
+   * A cursor; returns apps before this position.
    */
-  company_id?: string | null;
+  before?: string;
 
   /**
-   * The direction of the sort.
+   * Sort direction.
    */
-  direction?: Shared.Direction | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * The number of apps to return (default 20, max 100).
    */
-  first?: number | null;
+  first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * The number of apps to return from the end of the range.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The order to fetch the apps in for discovery.
+   * The field to sort apps by. Defaults to discoverable_at, showing the most
+   * recently published apps first.
    */
-  order?:
-    | 'created_at'
-    | 'discoverable_at'
-    | 'total_installs_last_30_days'
-    | 'total_installs_last_7_days'
-    | 'time_spent'
-    | 'time_spent_last_24_hours'
-    | 'daily_active_users'
-    | 'ai_prompt_count'
-    | 'total_ai_cost_usd'
-    | 'total_ai_tokens'
-    | 'last_ai_prompt_at'
-    | 'ai_average_rating'
-    | null;
+  order?: 'created_at' | 'discoverable_at' | 'total_installs_last_30_days' | 'total_installs_last_7_days';
 
   /**
-   * A search string to filter apps by name, such as 'chat' or 'analytics'.
+   * A search string matched against app names.
    */
-  query?: string | null;
+  query?: string;
 
   /**
-   * Whether to only return apps that have been verified by Whop. Useful for
-   * populating a featured apps section.
+   * Whether to only return apps verified by Whop.
    */
-  verified_apps_only?: boolean | null;
+  verified_apps_only?: boolean;
 
   /**
-   * The different types of an app view
+   * Only return apps supporting this view type, such as `dashboard` or `hub`.
    */
-  view_type?: Shared.AppViewType | null;
+  view_type?: 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi';
 }
 
 export interface AppCreateParams {
   /**
-   * The unique identifier of the company to create the app for, starting with
-   * 'biz\_'.
-   */
-  company_id: string;
-
-  /**
-   * The display name for the app, shown to users on the app store and product pages.
+   * Body param: The display name for the app, shown to users on the app store and
+   * product pages.
    */
   name: string;
 
   /**
-   * The base production URL where the app is hosted, such as
-   * 'https://myapp.example.com'.
+   * Body param: The account to create the app for (`biz_` tag). Defaults to the
+   * account behind the presented credential.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: The base production URL where the app is hosted, such as
+   * `https://myapp.example.com`.
    */
   base_url?: string | null;
 
   /**
-   * The icon image for the app in PNG, JPEG, or GIF format.
+   * Body param: The icon image for the app in PNG, JPEG, or GIF format, referencing
+   * an uploaded file: `{ id }` for an existing attachment or `{ direct_upload_id }`
+   * for a new direct upload.
    */
-  icon?: AppCreateParams.Icon | null;
+  icon?: AppCreateParams.Icon;
 
   /**
-   * The whitelisted OAuth callback URLs that users are redirected to after
-   * authorizing the app.
+   * Body param: The whitelisted OAuth callback URLs that users are redirected to
+   * after authorizing the app.
    */
-  redirect_uris?: Array<string> | null;
+  redirect_uris?: Array<string>;
 
   /**
-   * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.app.
+   * Body param: The subdomain route where the app's hosted web builds are served,
+   * such as `myapp` for myapp.whop.app.
    */
   route?: string | null;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace AppCreateParams {
   /**
-   * The icon image for the app in PNG, JPEG, or GIF format.
+   * The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded
+   * file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new
+   * direct upload.
    */
   export interface Icon {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded attachment.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
   }
 }
 
@@ -461,106 +436,161 @@ export interface AppUpdateParams {
   /**
    * The detailed description shown on the app store's in-depth app view page.
    */
-  app_store_description?: string | null;
+  app_store_description?: string;
 
   /**
-   * The type of end-user an app is built for
+   * The type of end-user the app is built for.
    */
-  app_type?: AppType | null;
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
 
   /**
-   * The base production URL where the app is hosted, such as
-   * 'https://myapp.example.com'.
+   * The base production URL where the app is hosted.
    */
-  base_url?: string | null;
+  base_url?: string;
 
   /**
-   * The URL path for the company dashboard view of the app, such as '/dashboard'.
+   * The URL path for the company dashboard view.
    */
   dashboard_path?: string | null;
 
   /**
    * A short description of the app shown in listings and search results.
    */
-  description?: string | null;
+  description?: string;
 
   /**
-   * The URL path for the discover view of the app, such as '/discover'.
+   * The URL path for the discover view.
    */
   discover_path?: string | null;
 
   /**
-   * The URL path for the member-facing hub view of the app, such as
-   * '/experiences/[experienceId]'.
+   * The URL path for the member-facing hub view, such as
+   * `/experiences/[experienceId]`.
    */
   experience_path?: string | null;
 
   /**
-   * The icon image for the app, used in listings and navigation.
+   * The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded
+   * file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new
+   * direct upload.
    */
-  icon?: AppUpdateParams.Icon | null;
+  icon?: AppUpdateParams.Icon;
 
   /**
    * The display name for the app, shown to users on the app store and product pages.
    */
-  name?: string | null;
+  name?: string;
 
   /**
-   * How this app authenticates at the OAuth token endpoint.
+   * How the app authenticates at the OAuth token endpoint.
    */
-  oauth_client_type?: 'public' | 'confidential' | null;
+  oauth_client_type?: 'public' | 'confidential';
 
   /**
-   * The URL path to the OpenAPI spec file of the app, such as
-   * '/assets/openapi.json'.
+   * The URL path to the app's OpenAPI spec file (requires the ai_chat capability).
    */
   openapi_path?: string | null;
 
   /**
-   * The whitelisted OAuth callback URLs that users are redirected to after
-   * authorizing the app
+   * The app build (`abld_` tag) to serve as the Android production build, or `null`
+   * to unassign it. Same rules as `production_web_build_id`.
    */
-  redirect_uris?: Array<string> | null;
+  production_android_build_id?: string | null;
 
   /**
-   * The permission scopes the app will request from users when they install it.
+   * The app build (`abld_` tag) to serve as the iOS production build, or `null` to
+   * unassign it. Same rules as `production_web_build_id`.
    */
-  required_scopes?: Array<'read_user'> | null;
+  production_ios_build_id?: string | null;
 
   /**
-   * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.app.
+   * The app build (`abld_` tag) to serve as the web production build, or `null` to
+   * unassign it. The build must belong to this app, target web, and be in the draft
+   * or approved status; a draft build is queued for approval and takes over once
+   * approved. Requires the `developer:manage_builds` scope.
    */
-  route?: string | null;
+  production_web_build_id?: string | null;
 
   /**
-   * Secrets to add or overwrite on the app, as an object of string values (e.g.
-   * {"MAIL_API_KEY": "..."}). Keys not included are left untouched. Pass null or an
-   * empty string as the value to delete a secret. Secrets are encrypted at rest and
-   * injected into the app's hosted server runtime as environment bindings.
+   * The whitelisted OAuth callback URLs users are redirected to after authorizing
+   * the app.
    */
-  secrets?: { [key: string]: unknown } | null;
+  redirect_uris?: Array<string>;
 
   /**
-   * The URL path to the skills directory of the app, such as '/assets/skills/'.
+   * The OAuth scopes the app requests from users when they install it.
+   */
+  required_scopes?: Array<string>;
+
+  /**
+   * The subdomain route where the app's hosted web builds are served.
+   */
+  route?: string;
+
+  /**
+   * Secrets to add or overwrite on the app, as an object of string values. Keys not
+   * included are left untouched; pass null or an empty string as the value to delete
+   * a secret. Encrypted at rest and injected into the app's hosted server runtime.
+   */
+  secrets?: unknown;
+
+  /**
+   * The URL path to the app's skills directory (requires the ai_chat capability).
    */
   skills_path?: string | null;
 
   /**
-   * The status of an experience interface
+   * Controls the app's visibility. `live` publishes on Whop discovery (requires
+   * name, icon, and description); `unlisted` hides it from discovery while keeping
+   * direct-link access.
    */
-  status?: Shared.AppStatuses | null;
+  status?: 'live' | 'unlisted' | 'hidden';
 }
 
 export namespace AppUpdateParams {
   /**
-   * The icon image for the app, used in listings and navigation.
+   * The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded
+   * file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new
+   * direct upload.
    */
   export interface Icon {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded attachment.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
+  }
+}
+
+export interface AppUpdatePermissionsParams {
+  /**
+   * The full set of permissions the app requests on install; permissions not listed
+   * are removed.
+   */
+  requested_permissions: Array<AppUpdatePermissionsParams.RequestedPermission>;
+}
+
+export namespace AppUpdatePermissionsParams {
+  export interface RequestedPermission {
+    /**
+     * The permission action, for example `company:basic:read`.
+     */
+    action: string;
+
+    /**
+     * Whether installing the app requires granting this permission.
+     */
+    is_required: boolean;
+
+    /**
+     * Why the app needs this permission (20-512 characters), shown to the installing
+     * user.
+     */
+    justification: string;
   }
 }
 
@@ -616,6 +646,7 @@ export declare namespace Apps {
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppUpdatePermissionsParams as AppUpdatePermissionsParams,
     type AppLogsParams as AppLogsParams,
   };
 }
