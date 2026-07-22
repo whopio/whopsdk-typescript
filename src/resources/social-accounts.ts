@@ -123,7 +123,7 @@ export interface SocialAccount {
   /**
    * The platform the social account exists on.
    */
-  platform: 'x' | 'instagram' | 'youtube' | 'tiktok' | 'facebook';
+  platform: 'x' | 'instagram' | 'youtube' | 'tiktok' | 'facebook' | 'discord' | 'telegram';
 
   /**
    * The URL where the profile picture of the social account can be accessed.
@@ -311,7 +311,7 @@ export interface SocialAccountListParams extends CursorPageParams {
   /**
    * Only return social accounts for the platform that is specified.
    */
-  platform?: 'x' | 'instagram' | 'youtube' | 'tiktok' | 'facebook';
+  platform?: 'x' | 'instagram' | 'youtube' | 'tiktok' | 'facebook' | 'discord' | 'telegram';
 
   /**
    * Only return social accounts that have these scopes.

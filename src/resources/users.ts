@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as SocialAccountsAPI from './social-accounts';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
@@ -130,7 +131,7 @@ export interface User {
    */
   profile_picture: unknown | null;
 
-  social_accounts: Array<User.SocialAccount>;
+  social_accounts: Array<SocialAccountsAPI.SocialAccount>;
 
   /**
    * The user's unique username
@@ -297,39 +298,6 @@ export namespace User {
        */
       lifetime: string;
     }
-  }
-
-  /**
-   * Social accounts linked to the user (Discord, X/Twitter, Telegram), oldest first.
-   * Reading your own profile returns every linked account; other profiles only
-   * include what is public on Whop (the primary Discord and the X account). Empty
-   * when none are linked.
-   */
-  export interface SocialAccount {
-    /**
-     * The provider's account ID (Discord snowflake, Telegram user id, or X user id).
-     */
-    account_id: string;
-
-    /**
-     * Whether this is the user's default account for the provider.
-     */
-    default: boolean;
-
-    /**
-     * Avatar URL from the provider, when available.
-     */
-    image_url: string | null;
-
-    /**
-     * The social account provider.
-     */
-    service: 'discord' | 'twitter' | 'telegram';
-
-    /**
-     * The username on the provider. `null` when the provider has no username.
-     */
-    username: string | null;
   }
 }
 
