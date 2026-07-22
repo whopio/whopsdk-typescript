@@ -69,6 +69,13 @@ describe('resource bounties', () => {
       accepted_submissions_limit: 0,
       account_id: 'account_id',
       allowed_country_codes: ['string'],
+      business_goal_type: 'clipping',
+      capture_spec: {
+        bitrate_target_mbps: 0,
+        embed_camera_metadata: true,
+        min_clip_duration_seconds: 0,
+        stabilization_mode: 'off',
+      },
       experience_id: 'experience_id',
       frequency: 'weekly',
       publish_at: 'publish_at',
@@ -110,6 +117,7 @@ describe('resource bounties', () => {
         {
           accepted_submissions_limit: 0,
           allowed_country_codes: ['string'],
+          business_goal_type: 'clipping',
           description: 'description',
           frequency: 'once',
           gross_reward_amount: 0,

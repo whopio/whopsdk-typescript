@@ -104,6 +104,28 @@ export class AdCampaigns extends APIResource {
   }
 
   /**
+   * Creates copies of the campaign in `duplicating` status and returns them; each
+   * copy transitions to `draft` once duplication completes. Poll each returned
+   * campaign until it leaves `duplicating` — a copy that could not be completed is
+   * deleted and returns 404.
+   */
+  duplicate(
+    id: string,
+    params: AdCampaignDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaignDuplicateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/ad_campaigns/${id}/duplicate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
    * Retries billing for an ad campaign whose payment previously failed.
    */
   retryPayment(
@@ -439,7 +461,8 @@ export interface AdCampaign {
     | 'in_review'
     | 'flagged'
     | 'importing'
-    | 'imported';
+    | 'imported'
+    | 'duplicating';
 
   /**
    * USD value attributed to submit-application events. Sums the value sent with each
@@ -512,6 +535,10 @@ export namespace AdCampaign {
 }
 
 export type AdCampaignDeleteResponse = boolean;
+
+export interface AdCampaignDuplicateResponse {
+  data: Array<AdCampaign>;
+}
 
 export interface AdCampaignListParams extends CursorPageParams {
   /**
@@ -765,6 +792,25 @@ export interface AdCampaignUnpauseParams {
   'Idempotency-Key'?: string;
 }
 
+export interface AdCampaignDuplicateParams {
+  /**
+   * Body param: Number of copies to create (1-10). Defaults to 1.
+   */
+  count?: number;
+
+  /**
+   * Body param: Whether the copied ads keep the original posts' engagement (likes,
+   * comments, shares). Defaults to false.
+   */
+  preserve_engagement?: boolean;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export interface AdCampaignRetryPaymentParams {
   /**
    * A unique key that makes this request safe to retry. See
@@ -777,6 +823,7 @@ export declare namespace AdCampaigns {
   export {
     type AdCampaign as AdCampaign,
     type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignDuplicateResponse as AdCampaignDuplicateResponse,
     type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
     type AdCampaignCreateParams as AdCampaignCreateParams,
@@ -784,6 +831,7 @@ export declare namespace AdCampaigns {
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignPauseParams as AdCampaignPauseParams,
     type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignDuplicateParams as AdCampaignDuplicateParams,
     type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 }
