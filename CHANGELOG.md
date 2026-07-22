@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.42](https://github.com/whopio/whopsdk-typescript/compare/v0.0.41...v0.0.42) (2026-07-22)
+
+
+### Bug Fixes
+
+* **ci:** point TS SDK tracking at the freshly integrated seal ([05a0c63](https://github.com/whopio/whopsdk-typescript/commit/05a0c6331322e42694a3f52adf0090ed317631be))
+
 ## 0.0.41 (2026-07-14)
 
 Full Changelog: [v0.0.40...v0.0.41](https://github.com/whopio/whopsdk-typescript/compare/v0.0.40...v0.0.41)
