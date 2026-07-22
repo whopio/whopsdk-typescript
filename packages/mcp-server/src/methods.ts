@@ -1692,6 +1692,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/ad_campaigns/{id}/unpause',
   },
   {
+    clientCallName: 'client.adCampaigns.duplicate',
+    fullyQualifiedName: 'adCampaigns.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ad_campaigns/{id}/duplicate',
+  },
+  {
     clientCallName: 'client.adCampaigns.retryPayment',
     fullyQualifiedName: 'adCampaigns.retryPayment',
     httpMethod: 'post',
@@ -1738,6 +1744,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'adGroups.unpause',
     httpMethod: 'post',
     httpPath: '/ad_groups/{id}/unpause',
+  },
+  {
+    clientCallName: 'client.adGroups.duplicate',
+    fullyQualifiedName: 'adGroups.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ad_groups/{id}/duplicate',
   },
   {
     clientCallName: 'client.adGroups.searchTargetingOptions',
@@ -1792,6 +1804,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'ads.unpause',
     httpMethod: 'post',
     httpPath: '/ads/{id}/unpause',
+  },
+  {
+    clientCallName: 'client.ads.duplicate',
+    fullyQualifiedName: 'ads.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ads/{id}/duplicate',
   },
   {
     clientCallName: 'client.adReports.retrieve',

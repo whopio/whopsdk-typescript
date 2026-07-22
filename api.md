@@ -1193,6 +1193,7 @@ Types:
 
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaign</a></code>
 - <code><a href="./src/resources/ad-campaigns.ts">AdCampaignDeleteResponse</a></code>
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaignDuplicateResponse</a></code>
 
 Methods:
 
@@ -1203,6 +1204,7 @@ Methods:
 - <code title="delete /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">delete</a>(id) -> AdCampaignDeleteResponse</code>
 - <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id, { ...params }) -> AdCampaign</code>
 - <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id, { ...params }) -> AdCampaign</code>
+- <code title="post /ad_campaigns/{id}/duplicate">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">duplicate</a>(id, { ...params }) -> AdCampaignDuplicateResponse</code>
 - <code title="post /ad_campaigns/{id}/retry_payment">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retryPayment</a>(id, { ...params }) -> AdCampaign</code>
 
 # AdGroups
@@ -1213,6 +1215,7 @@ Types:
 - <code><a href="./src/resources/ad-groups.ts">ReachEstimate</a></code>
 - <code><a href="./src/resources/ad-groups.ts">TargetingOption</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupDeleteResponse</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupDuplicateResponse</a></code>
 - <code><a href="./src/resources/ad-groups.ts">AdGroupSearchTargetingOptionsResponse</a></code>
 
 Methods:
@@ -1224,6 +1227,7 @@ Methods:
 - <code title="delete /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">delete</a>(id) -> AdGroupDeleteResponse</code>
 - <code title="post /ad_groups/{id}/pause">client.adGroups.<a href="./src/resources/ad-groups.ts">pause</a>(id, { ...params }) -> AdGroup</code>
 - <code title="post /ad_groups/{id}/unpause">client.adGroups.<a href="./src/resources/ad-groups.ts">unpause</a>(id, { ...params }) -> AdGroup</code>
+- <code title="post /ad_groups/{id}/duplicate">client.adGroups.<a href="./src/resources/ad-groups.ts">duplicate</a>(id, { ...params }) -> AdGroupDuplicateResponse</code>
 - <code title="get /ad_groups/targeting_options">client.adGroups.<a href="./src/resources/ad-groups.ts">searchTargetingOptions</a>({ ...params }) -> AdGroupSearchTargetingOptionsResponse</code>
 - <code title="post /ad_groups/estimate_reach">client.adGroups.<a href="./src/resources/ad-groups.ts">estimateReach</a>({ ...params }) -> ReachEstimate</code>
 
@@ -1233,6 +1237,7 @@ Types:
 
 - <code><a href="./src/resources/ads.ts">Ad</a></code>
 - <code><a href="./src/resources/ads.ts">AdDeleteResponse</a></code>
+- <code><a href="./src/resources/ads.ts">AdDuplicateResponse</a></code>
 
 Methods:
 
@@ -1243,6 +1248,7 @@ Methods:
 - <code title="delete /ads/{id}">client.ads.<a href="./src/resources/ads.ts">delete</a>(id) -> AdDeleteResponse</code>
 - <code title="post /ads/{id}/pause">client.ads.<a href="./src/resources/ads.ts">pause</a>(id, { ...params }) -> Ad</code>
 - <code title="post /ads/{id}/unpause">client.ads.<a href="./src/resources/ads.ts">unpause</a>(id, { ...params }) -> Ad</code>
+- <code title="post /ads/{id}/duplicate">client.ads.<a href="./src/resources/ads.ts">duplicate</a>(id, { ...params }) -> AdDuplicateResponse</code>
 
 # AdReports
 

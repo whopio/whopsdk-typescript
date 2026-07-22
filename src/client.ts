@@ -25,6 +25,8 @@ import {
   AdCampaign,
   AdCampaignCreateParams,
   AdCampaignDeleteResponse,
+  AdCampaignDuplicateParams,
+  AdCampaignDuplicateResponse,
   AdCampaignListParams,
   AdCampaignPauseParams,
   AdCampaignRetrieveParams,
@@ -38,6 +40,8 @@ import {
   AdGroup,
   AdGroupCreateParams,
   AdGroupDeleteResponse,
+  AdGroupDuplicateParams,
+  AdGroupDuplicateResponse,
   AdGroupEstimateReachParams,
   AdGroupListParams,
   AdGroupPauseParams,
@@ -62,6 +66,8 @@ import {
   Ad,
   AdCreateParams,
   AdDeleteResponse,
+  AdDuplicateParams,
+  AdDuplicateResponse,
   AdListParams,
   AdPauseParams,
   AdRetrieveParams,
@@ -2590,6 +2596,7 @@ export declare namespace Whop {
     AdCampaigns as AdCampaigns,
     type AdCampaign as AdCampaign,
     type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignDuplicateResponse as AdCampaignDuplicateResponse,
     type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
     type AdCampaignCreateParams as AdCampaignCreateParams,
@@ -2597,6 +2604,7 @@ export declare namespace Whop {
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignPauseParams as AdCampaignPauseParams,
     type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignDuplicateParams as AdCampaignDuplicateParams,
     type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 
@@ -2606,6 +2614,7 @@ export declare namespace Whop {
     type ReachEstimate as ReachEstimate,
     type TargetingOption as TargetingOption,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupDuplicateResponse as AdGroupDuplicateResponse,
     type AdGroupSearchTargetingOptionsResponse as AdGroupSearchTargetingOptionsResponse,
     type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
@@ -2614,6 +2623,7 @@ export declare namespace Whop {
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupPauseParams as AdGroupPauseParams,
     type AdGroupUnpauseParams as AdGroupUnpauseParams,
+    type AdGroupDuplicateParams as AdGroupDuplicateParams,
     type AdGroupSearchTargetingOptionsParams as AdGroupSearchTargetingOptionsParams,
     type AdGroupEstimateReachParams as AdGroupEstimateReachParams,
   };
@@ -2622,6 +2632,7 @@ export declare namespace Whop {
     Ads as Ads,
     type Ad as Ad,
     type AdDeleteResponse as AdDeleteResponse,
+    type AdDuplicateResponse as AdDuplicateResponse,
     type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
     type AdCreateParams as AdCreateParams,
@@ -2629,6 +2640,7 @@ export declare namespace Whop {
     type AdUpdateParams as AdUpdateParams,
     type AdPauseParams as AdPauseParams,
     type AdUnpauseParams as AdUnpauseParams,
+    type AdDuplicateParams as AdDuplicateParams,
   };
 
   export {
