@@ -140,13 +140,51 @@ export interface APIKey {
    */
   updated_at: string;
 
-  grants?: Array<unknown>;
+  grants?: Array<APIKey.Grant>;
 
   /**
    * The full secret used to authenticate requests. Returned only once, on create and
    * rotate responses — store it immediately.
    */
   secret_key?: string;
+}
+
+export namespace APIKey {
+  /**
+   * The key's effective permissions, grouped by resource. Present on retrieve,
+   * create, update, and rotate responses; omitted on list.
+   */
+  export interface Grant {
+    actions: Array<Grant.Action>;
+
+    /**
+     * ID of the resource the actions apply to.
+     */
+    resource_id: string;
+
+    /**
+     * The type of resource the actions apply to, such as `account`, `product`, or
+     * `app`.
+     */
+    resource_type: string;
+  }
+
+  export namespace Grant {
+    /**
+     * The actions the grant covers on the resource, each marked granted or not.
+     */
+    export interface Action {
+      /**
+       * The permission action's identifier, for example `company:basic:read`.
+       */
+      action: string;
+
+      /**
+       * Whether the key holds the action on the grant's resource.
+       */
+      granted: boolean;
+    }
+  }
 }
 
 export interface Permission {
