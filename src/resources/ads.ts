@@ -94,6 +94,27 @@ export class Ads extends APIResource {
       ]),
     });
   }
+
+  /**
+   * Copies the ad into its own ad group, or into target_ad_group_id (which must
+   * belong to the same account and be compatible with the ad). Copies keep the
+   * source ad's active/paused state.
+   */
+  duplicate(
+    id: string,
+    params: AdDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdDuplicateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/ads/${id}/duplicate`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type AdsCursorPage = CursorPage<Ad>;
@@ -868,6 +889,10 @@ export namespace Ad {
 }
 
 export type AdDeleteResponse = boolean;
+
+export interface AdDuplicateResponse {
+  data: Array<Ad>;
+}
 
 export interface AdListParams extends CursorPageParams {
   /**
@@ -1665,10 +1690,35 @@ export interface AdUnpauseParams {
   'Idempotency-Key'?: string;
 }
 
+export interface AdDuplicateParams {
+  /**
+   * Body param: Number of copies to create (1-10). Defaults to 1.
+   */
+  count?: number;
+
+  /**
+   * Body param: Whether the copies keep the original post's engagement (likes,
+   * comments, shares). Defaults to false.
+   */
+  preserve_engagement?: boolean;
+
+  /**
+   * Body param: Ad group to duplicate into. Defaults to the ad's own ad group.
+   */
+  target_ad_group_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export declare namespace Ads {
   export {
     type Ad as Ad,
     type AdDeleteResponse as AdDeleteResponse,
+    type AdDuplicateResponse as AdDuplicateResponse,
     type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
     type AdCreateParams as AdCreateParams,
@@ -1676,5 +1726,6 @@ export declare namespace Ads {
     type AdUpdateParams as AdUpdateParams,
     type AdPauseParams as AdPauseParams,
     type AdUnpauseParams as AdUnpauseParams,
+    type AdDuplicateParams as AdDuplicateParams,
   };
 }
