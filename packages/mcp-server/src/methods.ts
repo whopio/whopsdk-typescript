@@ -492,22 +492,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/memberships/{id}/resume',
   },
   {
-    clientCallName: 'client.memberships.uncancel',
-    fullyQualifiedName: 'memberships.uncancel',
+    clientCallName: 'client.memberships.extend',
+    fullyQualifiedName: 'memberships.extend',
     httpMethod: 'post',
-    httpPath: '/memberships/{id}/uncancel',
-  },
-  {
-    clientCallName: 'client.memberships.addFreeDays',
-    fullyQualifiedName: 'memberships.addFreeDays',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/add_free_days',
-  },
-  {
-    clientCallName: 'client.memberships.resyncAccess',
-    fullyQualifiedName: 'memberships.resyncAccess',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/resync_access',
+    httpPath: '/memberships/{id}/extend',
   },
   {
     clientCallName: 'client.authorizedUsers.list',
