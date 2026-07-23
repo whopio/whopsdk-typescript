@@ -3,7 +3,6 @@
 import * as Shared from './shared';
 import * as CompaniesAPI from './companies';
 import * as DisputesAPI from './disputes';
-import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
 import * as RefundsAPI from './refunds';
 import * as ResolutionCenterCasesAPI from './resolution-center-cases';
@@ -1939,271 +1938,125 @@ export type MemberMostRecentActions =
  */
 export type MemberStatuses = 'drafted' | 'joined' | 'left';
 
-/**
- * A membership represents an active relationship between a user and a product. It
- * tracks the user's access, billing status, and renewal schedule.
- */
 export interface Membership {
   /**
-   * The unique identifier for the membership.
+   * Membership ID, prefixed `mem_`.
    */
   id: string;
 
   /**
-   * Whether this membership is set to cancel at the end of the current billing
-   * cycle. Only applies to memberships with a recurring plan.
+   * The account (seller) this membership belongs to.
+   */
+  account: Membership.Account;
+
+  /**
+   * Whether the membership is set to cancel when the current billing period ends.
+   * Only meaningful for recurring plans.
    */
   cancel_at_period_end: boolean;
 
   /**
-   * The different reasons a user can choose for why they are canceling their
-   * membership.
-   */
-  cancel_option: MembershipsAPI.CancelOptions | null;
-
-  /**
-   * The time the customer initiated cancellation of this membership. As a Unix
-   * timestamp. Null if the membership has not been canceled.
-   */
-  canceled_at: string | null;
-
-  /**
-   * Free-text explanation provided by the customer when canceling. Null if the
-   * customer did not provide a reason.
-   */
-  cancellation_reason: string | null;
-
-  /**
-   * The ID of the checkout session/configuration that produced this membership, if
-   * any. Use this to map memberships back to the checkout configuration that created
-   * them.
-   */
-  checkout_configuration_id: string | null;
-
-  /**
-   * The company this membership belongs to.
-   */
-  company: Membership.Company;
-
-  /**
-   * The datetime the membership was created.
+   * When the membership was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * When the current billing period renews, or when a non-renewing membership
+   * expires, as an ISO 8601 timestamp. `null` for one-time purchases with no
+   * expiration.
    */
-  currency: Currency | null;
+  current_period_end: string | null;
 
   /**
-   * The customer's responses to custom checkout questions configured on the product
-   * at the time of purchase.
-   */
-  custom_field_responses: Array<Membership.CustomFieldResponse>;
-
-  /**
-   * The time the user first joined the company associated with this membership. As a
-   * Unix timestamp. Null if the member record does not exist.
-   */
-  joined_at: string | null;
-
-  /**
-   * The software license key associated with this membership. Only present if the
-   * product includes a Whop Software Licensing experience. Null otherwise.
+   * The software license key for this membership. Only present when the product
+   * includes a software licensing experience.
    */
   license_key: string | null;
 
   /**
-   * The URL where the customer can view and manage this membership, including
-   * cancellation and plan changes. Null if no member record exists.
-   */
-  manage_url: string | null;
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
+   * The caller's member row on the account. Present only when the membership belongs
+   * to the caller; `null` on seller-side reads.
    */
   member: Membership.Member | null;
 
   /**
-   * Custom key-value pairs for the membership (commonly used for software licensing,
-   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
+   * Custom key-value pairs stored on the membership, commonly used for software
+   * licensing.
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown;
 
   /**
-   * Whether recurring payment collection for this membership is temporarily paused
-   * by the company.
+   * The plan the buyer purchased, prefixed `plan_`.
    */
-  payment_collection_paused: boolean;
+  plan_id: string;
 
   /**
-   * The plan the customer purchased to create this membership.
+   * The product this membership grants access to, prefixed `prod_`.
    */
-  plan: Membership.Plan;
+  product_id: string;
 
   /**
-   * The product this membership grants access to.
+   * Billing state of the membership. `active`/`trialing` memberships grant access;
+   * `past_due` is the grace period after a failed payment; `completed` one-time
+   * purchases keep access; `canceled`/`expired` do not.
    */
-  product: Membership.Product;
+  status: 'trialing' | 'active' | 'past_due' | 'completed' | 'canceled' | 'expired' | 'unresolved';
 
   /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
+   * The buyer, prefixed `user_`. `null` when the buyer is another business or the
+   * membership is unclaimed.
    */
-  promo_code: Membership.PromoCode | null;
-
-  /**
-   * The end of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
-   */
-  renewal_period_end: string | null;
-
-  /**
-   * The start of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
-   */
-  renewal_period_start: string | null;
-
-  /**
-   * The current lifecycle status of the membership (e.g., active, trialing,
-   * past_due, canceled, expired, completed).
-   */
-  status: MembershipStatus;
-
-  /**
-   * The datetime the membership was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  user: Membership.User | null;
+  user_id: string | null;
 }
 
 export namespace Membership {
   /**
-   * The company this membership belongs to.
+   * The account (seller) this membership belongs to.
    */
-  export interface Company {
+  export interface Account {
     /**
-     * The unique identifier for the company.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * The display name of the company shown to customers.
+     * Account logo image URL.
+     */
+    logo_url: string | null;
+
+    /**
+     * Account public route identifier — the `whop.com/{route}` storefront path.
+     */
+    route: string;
+
+    /**
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The response from a custom field on checkout
-   */
-  export interface CustomFieldResponse {
-    /**
-     * The unique identifier for the custom field response.
-     */
-    id: string;
-
-    /**
-     * The response a user gave to the specific question or field.
-     */
-    answer: string;
-
-    /**
-     * The question asked by the custom field
-     */
-    question: string;
-  }
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
+   * The caller's member row on the account. Present only when the membership belongs
+   * to the caller; `null` on seller-side reads.
    */
   export interface Member {
     /**
-     * The unique identifier for the member.
+     * What the member can reach on the account: `customer` for paying members, `admin`
+     * for team members, `no_access` once every grant has lapsed.
      */
-    id: string;
-  }
-
-  /**
-   * The plan the customer purchased to create this membership.
-   */
-  export interface Plan {
-    /**
-     * The unique identifier for the plan.
-     */
-    id: string;
+    access_level: 'no_access' | 'admin' | 'customer';
 
     /**
-     * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
+     * When the member last opened the account's content, as an ISO 8601 timestamp.
+     * `null` if they never have.
      */
-    metadata: { [key: string]: unknown } | null;
-  }
-
-  /**
-   * The product this membership grants access to.
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
+    last_accessed_at: string | null;
 
     /**
-     * Custom key-value pairs stored on the product and included in payment and
-     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-     * per string value.
+     * The member's sort position in the buyer's own account list. `null` until they
+     * arrange it.
      */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
-
-  /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
-   */
-  export interface PromoCode {
-    /**
-     * The unique identifier for the promo code.
-     */
-    id: string;
-  }
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  export interface User {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
+    position: number | null;
   }
 }
 
@@ -4135,5 +3988,7 @@ export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
 
 export type ProductListItemsCursorPage = CursorPage<ProductListItem>;
+
+export type MembershipsCursorPage = CursorPage<Membership>;
 
 export type AppBuildsCursorPage = CursorPage<AppBuild>;
