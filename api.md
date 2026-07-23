@@ -342,11 +342,13 @@ Types:
 - <code><a href="./src/resources/transfers.ts">TransferCreateResponse</a></code>
 - <code><a href="./src/resources/transfers.ts">TransferRetrieveResponse</a></code>
 - <code><a href="./src/resources/transfers.ts">TransferListResponse</a></code>
+- <code><a href="./src/resources/transfers.ts">TransferListRecipientsResponse</a></code>
 
 Methods:
 
 - <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
 - <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> TransferCreateResponse</code>
+- <code title="get /transfers/recipients">client.transfers.<a href="./src/resources/transfers.ts">listRecipients</a>({ ...params }) -> TransferListRecipientsResponsesCursorPage</code>
 - <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id) -> TransferRetrieveResponse</code>
 
 # LedgerAccounts

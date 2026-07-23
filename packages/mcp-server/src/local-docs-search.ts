@@ -3034,6 +3034,42 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     },
   },
   {
+    name: 'list_recipients',
+    endpoint: '/transfers/recipients',
+    httpMethod: 'get',
+    summary: 'List Transfer Recipients',
+    description:
+      "Lists users and accounts that can be selected as transfer recipients. Requires `payout:withdraw_funds` and `company:authorized_user:read`. Without a query, returns the origin account's human team members followed by the authenticated user's other accounts. With a query, returns matching users and accounts in creator-dashboard relevance order and additionally requires `member:basic:read`. Email addresses are not searchable.",
+    stainlessPath: '(resource) transfers > (method) list_recipients',
+    qualified: 'client.transfers.listRecipients',
+    params: ['origin_id: string;', 'after?: string;', 'first?: number;', 'query?: string;'],
+    response:
+      "{ id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; logo_url: string; object: 'account'; route: string; title: string; }",
+    markdown:
+      "## list_recipients\n\n`client.transfers.listRecipients(origin_id: string, after?: string, first?: number, query?: string): { id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; logo_url: string; object: 'account'; route: string; title: string; }`\n\n**get** `/transfers/recipients`\n\nLists users and accounts that can be selected as transfer recipients. Requires `payout:withdraw_funds` and `company:authorized_user:read`. Without a query, returns the origin account's human team members followed by the authenticated user's other accounts. With a query, returns matching users and accounts in creator-dashboard relevance order and additionally requires `member:basic:read`. Email addresses are not searchable.\n\n### Parameters\n\n- `origin_id: string`\n  The originating account ID, prefixed `biz_`.\n\n- `after?: string`\n\n- `first?: number`\n  Number of recipients per page. Search queries preserve the dashboard's 20-result maximum.\n\n- `query?: string`\n  Search users and accounts by name, username, or ID. Complete email addresses return no matches.\n\n### Returns\n\n- `{ id: string; name: string; object: 'user'; profile_picture_url: string; username: string; } | { id: string; logo_url: string; object: 'account'; route: string; title: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\n// Automatically fetches more pages as needed.\nfor await (const transferListRecipientsResponse of client.transfers.listRecipients({ origin_id: 'origin_id' })) {\n  console.log(transferListRecipientsResponse);\n}\n```",
+    perLanguage: {
+      ruby: {
+        method: 'transfers.list_recipients',
+        example:
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\npage = whop.transfers.list_recipients(origin_id: "origin_id")\n\nputs(page)',
+      },
+      python: {
+        method: 'transfers.list_recipients',
+        example:
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\npage = client.transfers.list_recipients(\n    origin_id="origin_id",\n)\npage = page.data[0]\nprint(page)',
+      },
+      typescript: {
+        method: 'client.transfers.listRecipients',
+        example:
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\n// Automatically fetches more pages as needed.\nfor await (const transferListRecipientsResponse of client.transfers.listRecipients({\n  origin_id: 'origin_id',\n})) {\n  console.log(transferListRecipientsResponse);\n}",
+      },
+      http: {
+        example:
+          'curl https://api.whop.com/api/v1/transfers/recipients \\\n    -H "Authorization: Bearer $WHOP_API_KEY"',
+      },
+    },
+  },
+  {
     name: 'retrieve',
     endpoint: '/transfers/{id}',
     httpMethod: 'get',

@@ -180,6 +180,7 @@ const fuse = new Fuse(
     'client.forumPosts.update',
     'client.transfers.create',
     'client.transfers.list',
+    'client.transfers.listRecipients',
     'client.transfers.retrieve',
     'client.ledgerAccounts.retrieve',
     'client.memberships.addFreeDays',
