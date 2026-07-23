@@ -609,9 +609,12 @@ export {
   type TransferCreateResponse,
   type TransferRetrieveResponse,
   type TransferListResponse,
+  type TransferListRecipientsResponse,
   type TransferListParams,
   type TransferCreateParams,
+  type TransferListRecipientsParams,
   type TransferListResponsesCursorPage,
+  type TransferListRecipientsResponsesCursorPage,
 } from './transfers';
 export {
   Users,
