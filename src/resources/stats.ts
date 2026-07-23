@@ -208,7 +208,7 @@ export interface StatRetrieveParams {
   /**
    * Select the source currency or asset on metrics that list currency. For
    * transaction metrics, for example currency=eur, values are reported without
-   * conversion. For asset_price, use btc or xaut and convert_to=usd. Pair with
+   * conversion. For asset_prices, use btc or xaut and convert_to=usd. Pair with
    * breakdown_by=currency to split a metric by currency.
    */
   currency?: string;
