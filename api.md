@@ -437,13 +437,14 @@ Types:
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationCreateResponse</a></code>
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationRetrieveResponse</a></code>
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationListResponse</a></code>
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationDeleteResponse</a></code>
 
 Methods:
 
 - <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>
 - <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfigurationCreateResponse</code>
 - <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id) -> CheckoutConfigurationRetrieveResponse</code>
-- <code title="delete /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">delete</a>(id) -> void</code>
+- <code title="delete /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">delete</a>(id) -> CheckoutConfigurationDeleteResponse</code>
 
 # Messages
 
@@ -483,6 +484,7 @@ Types:
 
 Methods:
 
+- <code title="get /users/me">client.users.<a href="./src/resources/users.ts">me</a>({ ...params }) -> User</code>
 - <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id, { ...params }) -> User</code>
 - <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 - <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
@@ -1171,6 +1173,7 @@ Methods:
 - <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> Bounty</code>
 - <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> Bounty</code>
 - <code title="patch /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">update</a>(id, { ...params }) -> Bounty</code>
+- <code title="post /bounties/{id}/cancel">client.bounties.<a href="./src/resources/bounties.ts">cancel</a>(id, { ...params }) -> Bounty</code>
 
 # BountySubmissions
 
@@ -1178,13 +1181,14 @@ Types:
 
 - <code><a href="./src/resources/bounty-submissions.ts">BountyCaptureClip</a></code>
 - <code><a href="./src/resources/bounty-submissions.ts">BountySubmission</a></code>
+- <code><a href="./src/resources/bounty-submissions.ts">BountySubmissionDeleteResponse</a></code>
 
 Methods:
 
 - <code title="get /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">list</a>({ ...params }) -> BountySubmissionsCursorPage</code>
 - <code title="post /bounty_submissions">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">create</a>({ ...params }) -> BountySubmission</code>
 - <code title="get /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">retrieve</a>(bountySubmissionID) -> BountySubmission</code>
-- <code title="delete /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">delete</a>(bountySubmissionID) -> void</code>
+- <code title="delete /bounty_submissions/{bounty_submission_id}">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">delete</a>(bountySubmissionID) -> BountySubmissionDeleteResponse</code>
 - <code title="post /bounty_submissions/{bounty_submission_id}/submit">client.bountySubmissions.<a href="./src/resources/bounty-submissions.ts">submit</a>(bountySubmissionID, { ...params }) -> BountySubmission</code>
 
 # AdCampaigns

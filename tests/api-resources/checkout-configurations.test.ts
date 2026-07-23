@@ -25,8 +25,8 @@ describe('resource checkoutConfigurations', () => {
     const response = await client.checkoutConfigurations.list({
       account_id: 'account_id',
       after: 'after',
-      created_after: 0,
-      created_before: 0,
+      created_after: 'created_after',
+      created_before: 'created_before',
       direction: 'asc',
       first: 0,
       order: 'created_at',

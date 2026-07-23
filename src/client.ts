@@ -139,6 +139,7 @@ import {
 import {
   Bounties,
   Bounty,
+  BountyCancelParams,
   BountyCreateParams,
   BountyListItem,
   BountyListItemsCursorPage,
@@ -149,6 +150,7 @@ import {
   BountyCaptureClip,
   BountySubmission,
   BountySubmissionCreateParams,
+  BountySubmissionDeleteResponse,
   BountySubmissionListParams,
   BountySubmissionSubmitParams,
   BountySubmissions,
@@ -175,6 +177,7 @@ import {
 import {
   CheckoutConfigurationCreateParams,
   CheckoutConfigurationCreateResponse,
+  CheckoutConfigurationDeleteResponse,
   CheckoutConfigurationListParams,
   CheckoutConfigurationListResponse,
   CheckoutConfigurationListResponsesCursorPage,
@@ -594,6 +597,7 @@ import {
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
+  UserMeParams,
   UserRecommendActionsResponse,
   UserRetrieveParams,
   UserUpdateMeParams,
@@ -736,7 +740,6 @@ import {
   parseLogLevel,
 } from './internal/utils/log';
 import { isEmptyObj } from './internal/utils/values';
-import { makeUserTokenVerifierFromSdk } from './lib/verify-user-token';
 
 export interface ClientOptions {
   /**
@@ -758,19 +761,6 @@ export interface ClientOptions {
    * Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.
    */
   version?: string | null | undefined;
-
-  /**
-   * Static JWK (JSON string) used by `verifyUserToken` to verify user tokens.
-   * When set, the SDK skips remote JWKS fetching. Prefer `userTokenJwksUrl`
-   * (or the default) so key rotation is handled automatically.
-   */
-  userTokenPublicKey?: string | null | undefined;
-
-  /**
-   * URL of the JWKS endpoint used by `verifyUserToken`. Defaults to the
-   * canonical Whop JWKS. Override when pointing at a non-production backend.
-   */
-  userTokenJwksUrl?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -849,8 +839,6 @@ export class Whop {
   webhookKey: string | null;
   appID: string | null;
   version: string | null;
-  userTokenPublicKey: string | null;
-  userTokenJwksUrl: string | null;
 
   baseURL: string;
   maxRetries: number;
@@ -870,7 +858,7 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-20]
+   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-22]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -884,9 +872,7 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    version = readEnv('WHOP_API_VERSION') ?? '2026-07-20',
-    userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
-    userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
+    version = readEnv('WHOP_API_VERSION') ?? '2026-07-22',
     ...opts
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
@@ -900,8 +886,6 @@ export class Whop {
       webhookKey,
       appID,
       version,
-      userTokenPublicKey,
-      userTokenJwksUrl,
       ...opts,
       baseURL: baseURL || `https://api.whop.com/api/v1`,
     };
@@ -939,8 +923,6 @@ export class Whop {
     this.webhookKey = webhookKey;
     this.appID = appID;
     this.version = version;
-    this.userTokenPublicKey = userTokenPublicKey;
-    this.userTokenJwksUrl = userTokenJwksUrl;
   }
 
   /**
@@ -960,8 +942,6 @@ export class Whop {
       webhookKey: this.webhookKey,
       appID: this.appID,
       version: this.version,
-      userTokenPublicKey: this.userTokenPublicKey,
-      userTokenJwksUrl: this.userTokenJwksUrl,
       ...options,
     });
     return client;
@@ -1524,8 +1504,6 @@ export class Whop {
 
   static toFile = Uploads.toFile;
 
-  verifyUserToken: ReturnType<typeof makeUserTokenVerifierFromSdk> = makeUserTokenVerifierFromSdk(this);
-
   /**
    * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.app` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
    *
@@ -1571,9 +1549,9 @@ export class Whop {
    */
   media: API.Media = new API.Media(this);
   /**
-   * A Person represents a visitor or customer of an account, assembled from [pixel events](/api-reference/beta/events/event) and purchase activity — ad clicks, storefront visits, and checkouts.
+   * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/beta/events/event) the person generated — pixel page views, ad clicks, leads, identifies, and payments. Each profile carries the person's known identities (names, emails, phones, user IDs), purchase history and LTV, geo/device profile, traffic sources, and the first and last marketing touches that reached them.
    *
-   * Use the People API to list the people of an account and retrieve a single person.
+   * Use the People API to list and segment the people of an account — filter by activity, purchases, traffic source, location, or marketing touch, and sort by value — or retrieve one person by person ID, user ID, email address, or phone number.
    *
    */
   people: API.People = new API.People(this);
@@ -2120,6 +2098,7 @@ export declare namespace Whop {
     type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
     type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
+    type CheckoutConfigurationDeleteResponse as CheckoutConfigurationDeleteResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
@@ -2150,6 +2129,7 @@ export declare namespace Whop {
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserRecommendActionsResponse as UserRecommendActionsResponse,
     type UsersCursorPage as UsersCursorPage,
+    type UserMeParams as UserMeParams,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
@@ -2580,12 +2560,14 @@ export declare namespace Whop {
     type BountyListParams as BountyListParams,
     type BountyCreateParams as BountyCreateParams,
     type BountyUpdateParams as BountyUpdateParams,
+    type BountyCancelParams as BountyCancelParams,
   };
 
   export {
     BountySubmissions as BountySubmissions,
     type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
+    type BountySubmissionDeleteResponse as BountySubmissionDeleteResponse,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,

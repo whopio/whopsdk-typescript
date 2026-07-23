@@ -313,8 +313,7 @@ export interface MethodListParams extends CursorPageParams {
   destination_id?: string;
 
   /**
-   * Number of payout methods to return from the start of the window. Capped at 25
-   * when an amount is provided.
+   * Number of payout methods to return from the start of the window.
    */
   first?: number;
 

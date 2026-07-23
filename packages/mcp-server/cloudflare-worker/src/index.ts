@@ -61,7 +61,7 @@ const serverConfig: ServerConfig = {
       description:
         'Pins the API version (an ISO date). Defaults to the latest version the SDK was generated against.',
       required: false,
-      default: '2026-07-20',
+      default: '2026-07-22',
       placeholder: '2026-07-20',
       type: 'string',
     },

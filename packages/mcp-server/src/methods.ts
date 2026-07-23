@@ -672,6 +672,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/chat_channels/{id}',
   },
   {
+    clientCallName: 'client.users.me',
+    fullyQualifiedName: 'users.me',
+    httpMethod: 'get',
+    httpPath: '/users/me',
+  },
+  {
     clientCallName: 'client.users.retrieve',
     fullyQualifiedName: 'users.retrieve',
     httpMethod: 'get',
@@ -1618,6 +1624,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'bounties.update',
     httpMethod: 'patch',
     httpPath: '/bounties/{id}',
+  },
+  {
+    clientCallName: 'client.bounties.cancel',
+    fullyQualifiedName: 'bounties.cancel',
+    httpMethod: 'post',
+    httpPath: '/bounties/{id}/cancel',
   },
   {
     clientCallName: 'client.bountySubmissions.list',

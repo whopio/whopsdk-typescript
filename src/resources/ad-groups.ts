@@ -57,7 +57,7 @@ export class AdGroups extends APIResource {
   }
 
   /**
-   * Deletes an ad group. Returns true on success.
+   * Deletes an ad group.
    */
   delete(id: string, options?: RequestOptions): APIPromise<AdGroupDeleteResponse> {
     return this._client.delete(path`/ad_groups/${id}`, options);
@@ -1093,7 +1093,17 @@ export namespace TargetingOption {
   }
 }
 
-export type AdGroupDeleteResponse = boolean;
+export interface AdGroupDeleteResponse {
+  /**
+   * ID of the deleted ad group.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface AdGroupDuplicateResponse {
   data: Array<AdGroup>;

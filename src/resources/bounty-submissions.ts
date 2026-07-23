@@ -61,11 +61,8 @@ export class BountySubmissions extends APIResource {
    * capture clips. Only the worker who started the attempt can cancel it — account
    * API keys cannot.
    */
-  delete(bountySubmissionID: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/bounty_submissions/${bountySubmissionID}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  delete(bountySubmissionID: string, options?: RequestOptions): APIPromise<BountySubmissionDeleteResponse> {
+    return this._client.delete(path`/bounty_submissions/${bountySubmissionID}`, options);
   }
 
   /**
@@ -346,6 +343,18 @@ export namespace BountySubmission {
   }
 }
 
+export interface BountySubmissionDeleteResponse {
+  /**
+   * ID of the cancelled submission.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
+
 export interface BountySubmissionListParams extends CursorPageParams {
   /**
    * Scope the list to submissions on this account's bounties (`biz_` tag). Requires
@@ -512,6 +521,7 @@ export declare namespace BountySubmissions {
   export {
     type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
+    type BountySubmissionDeleteResponse as BountySubmissionDeleteResponse,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,

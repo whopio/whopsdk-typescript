@@ -57,7 +57,7 @@ export class Ads extends APIResource {
   }
 
   /**
-   * Deletes an ad. Returns true on success.
+   * Deletes an ad.
    */
   delete(id: string, options?: RequestOptions): APIPromise<AdDeleteResponse> {
     return this._client.delete(path`/ads/${id}`, options);
@@ -888,7 +888,17 @@ export namespace Ad {
   }
 }
 
-export type AdDeleteResponse = boolean;
+export interface AdDeleteResponse {
+  /**
+   * ID of the deleted ad.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface AdDuplicateResponse {
   data: Array<Ad>;

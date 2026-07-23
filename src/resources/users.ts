@@ -14,10 +14,22 @@ import { path } from '../internal/utils/path';
  */
 export class Users extends APIResource {
   /**
-   * Retrieves a user's public profile by user\_ tag, username, or 'me', including
-   * linked social accounts. Reading your own profile returns every linked account
-   * (Discord, X/Twitter, Telegram); other profiles only include what is public on
-   * Whop (the primary Discord and the X account).
+   * Retrieves the authenticated user — the self view of the user object. Same shape
+   * as `GET /users/{id}`, with the self-only fields populated: `email` (email-read
+   * scope), `staff` (Whop staff only, staff-read scope), `balance` and
+   * `earnings_usd` (balance-read scope), the opt-in `balance_history`, and every
+   * linked social account.
+   */
+  me(query: UserMeParams | null | undefined = {}, options?: RequestOptions): APIPromise<User> {
+    return this._client.get('/users/me', { query, ...options });
+  }
+
+  /**
+   * Retrieves a user's public profile by user\_ tag or username, including linked
+   * social accounts — reading your own profile returns every linked account, other
+   * profiles only what is public on Whop (the primary Discord and the X account).
+   * Self-only fields (`email`, `staff`, `balance`) are always `null` here; use
+   * `GET /users/me` to read them.
    */
   retrieve(
     id: string,
@@ -122,6 +134,13 @@ export interface User {
   earnings_usd: User.EarningsUsd | null;
 
   /**
+   * The user's email address. Populated only on `GET /users/me` self-view for
+   * callers with email-read scope; `null` otherwise, or while the account has no
+   * confirmed email yet.
+   */
+  email: string | null;
+
+  /**
    * The user's display name
    */
   name: string | null;
@@ -132,6 +151,13 @@ export interface User {
   profile_picture: unknown | null;
 
   social_accounts: Array<SocialAccountsAPI.SocialAccount>;
+
+  /**
+   * Whop staff access flags. Populated only on `GET /users/me` self-view for callers
+   * with staff-read scope; `null` there for every user who is not Whop staff, and
+   * always `null` elsewhere.
+   */
+  staff: User.Staff | null;
 
   /**
    * The user's unique username
@@ -298,6 +324,34 @@ export namespace User {
        */
       lifetime: string;
     }
+  }
+
+  /**
+   * Whop staff access flags. Populated only on `GET /users/me` self-view for callers
+   * with staff-read scope; `null` there for every user who is not Whop staff, and
+   * always `null` elsewhere.
+   */
+  export interface Staff {
+    /**
+     * Whether the user holds the admin staff role with a valid second factor.
+     */
+    admin: boolean;
+
+    /**
+     * Whether the user can open Whop-internal investigation tooling right now: a
+     * qualifying staff role plus their investigation toggle switched on.
+     */
+    investigation_access: boolean;
+
+    /**
+     * Whether the user holds the manager staff role with a valid second factor.
+     */
+    manager: boolean;
+
+    /**
+     * Whether the user holds the support staff role with a valid second factor.
+     */
+    support: boolean;
   }
 }
 
@@ -536,10 +590,9 @@ export namespace UserRecommendActionsResponse {
   }
 }
 
-export interface UserRetrieveParams {
+export interface UserMeParams {
   /**
-   * When set, returns the user's account-specific profile overrides for this
-   * account.
+   * When set, returns your account-specific profile overrides for this account.
    */
   account_id?: string;
 
@@ -550,9 +603,8 @@ export interface UserRetrieveParams {
   from?: string;
 
   /**
-   * On `GET /users/me`, also compute the caller's balance history (opt-in; runs a
-   * heavier query). Ignored for other users and for callers without balance-read
-   * scope.
+   * Also compute your balance history (opt-in; runs a heavier query). Ignored for
+   * callers without balance-read scope.
    */
   include_balance_history?: boolean;
 
@@ -573,6 +625,14 @@ export interface UserRetrieveParams {
    * used with `include_balance_history`.
    */
   to?: string;
+}
+
+export interface UserRetrieveParams {
+  /**
+   * When set, returns the user's account-specific profile overrides for this
+   * account.
+   */
+  account_id?: string;
 }
 
 export interface UserCheckAccessParams {
@@ -683,6 +743,7 @@ export declare namespace Users {
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserRecommendActionsResponse as UserRecommendActionsResponse,
     type UsersCursorPage as UsersCursorPage,
+    type UserMeParams as UserMeParams,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,

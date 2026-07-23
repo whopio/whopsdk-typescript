@@ -61,7 +61,7 @@ export class AdCampaigns extends APIResource {
 
   /**
    * Deletes an ad campaign and archives it on the ad platform (cascades to ad groups
-   * and ads). Returns true on success.
+   * and ads).
    */
   delete(id: string, options?: RequestOptions): APIPromise<AdCampaignDeleteResponse> {
     return this._client.delete(path`/ad_campaigns/${id}`, options);
@@ -534,7 +534,17 @@ export namespace AdCampaign {
   }
 }
 
-export type AdCampaignDeleteResponse = boolean;
+export interface AdCampaignDeleteResponse {
+  /**
+   * ID of the deleted ad campaign.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface AdCampaignDuplicateResponse {
   data: Array<AdCampaign>;

@@ -88,6 +88,32 @@ export class Bounties extends APIResource {
   ): APIPromise<Bounty> {
     return this._client.patch(path`/bounties/${id}`, { body, ...options });
   }
+
+  /**
+   * Cancels a bounty. With no in-flight work, it cancels immediately and refunds the
+   * funder. Otherwise it stops new submissions and cancels once the in-flight work
+   * resolves and pays out. Repeating the request is a no-op. A bounty that already
+   * paid out every slot returns `400`.
+   *
+   * @example
+   * ```ts
+   * const bounty = await client.bounties.cancel('id');
+   * ```
+   */
+  cancel(
+    id: string,
+    params: BountyCancelParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Bounty> {
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/bounties/${id}/cancel`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
 }
 
 export type BountyListItemsCursorPage = CursorPage<BountyListItem>;
@@ -132,6 +158,14 @@ export interface Bounty {
     | 'data_capture'
     | 'other'
     | null;
+
+  /**
+   * When cancellation was requested, as an ISO 8601 timestamp. On a `closed` bounty
+   * this means the cancel is pending: submissions are stopped and the bounty cancels
+   * once in-flight submissions resolve. On a `canceled` bounty it records when the
+   * cancellation was requested. `null` when no cancellation was ever requested.
+   */
+  cancel_requested_at: string | null;
 
   /**
    * The technical contract footage must be recorded against. Present only on
@@ -299,9 +333,11 @@ export interface Bounty {
   status: 'scheduled' | 'open' | 'closed' | 'completed' | 'canceled';
 
   /**
-   * When new submissions were explicitly stopped, as an ISO 8601 timestamp. `null`
-   * when submissions were never explicitly stopped — including closed or completed
-   * bounties that simply filled every winner slot.
+   * When new submissions stopped being accepted, as an ISO 8601 timestamp. Set when
+   * a cancellation is requested on a bounty with work in flight, so in-flight
+   * submissions can resolve before the bounty cancels. `null` when submissions were
+   * never stopped — including completed bounties that simply filled every winner
+   * slot.
    */
   submissions_closed_at: string | null;
 
@@ -576,6 +612,14 @@ export interface BountyListItem {
     | null;
 
   /**
+   * When cancellation was requested, as an ISO 8601 timestamp. On a `closed` bounty
+   * this means the cancel is pending: submissions are stopped and the bounty cancels
+   * once in-flight submissions resolve. On a `canceled` bounty it records when the
+   * cancellation was requested. `null` when no cancellation was ever requested.
+   */
+  cancel_requested_at: string | null;
+
+  /**
    * When the bounty was created, as an ISO 8601 timestamp.
    */
   created_at: string;
@@ -646,9 +690,11 @@ export interface BountyListItem {
   status: 'scheduled' | 'open' | 'closed' | 'completed' | 'canceled';
 
   /**
-   * When new submissions were explicitly stopped, as an ISO 8601 timestamp. `null`
-   * when submissions were never explicitly stopped — including closed or completed
-   * bounties that simply filled every winner slot.
+   * When new submissions stopped being accepted, as an ISO 8601 timestamp. Set when
+   * a cancellation is requested on a bounty with work in flight, so in-flight
+   * submissions can resolve before the bounty cancels. `null` when submissions were
+   * never stopped — including completed bounties that simply filled every winner
+   * slot.
    */
   submissions_closed_at: string | null;
 
@@ -972,6 +1018,14 @@ export interface BountyUpdateParams {
   title?: string;
 }
 
+export interface BountyCancelParams {
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export declare namespace Bounties {
   export {
     type Bounty as Bounty,
@@ -980,5 +1034,6 @@ export declare namespace Bounties {
     type BountyListParams as BountyListParams,
     type BountyCreateParams as BountyCreateParams,
     type BountyUpdateParams as BountyUpdateParams,
+    type BountyCancelParams as BountyCancelParams,
   };
 }

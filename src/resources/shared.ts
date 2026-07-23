@@ -3541,7 +3541,7 @@ export interface Product {
   /**
    * Account that sells this product.
    */
-  company: unknown | null;
+  account: unknown | null;
 
   /**
    * When the product was created, as an ISO 8601 timestamp.
@@ -3653,21 +3653,21 @@ export interface Product {
 
 export namespace Product {
   /**
-   * Gallery images for this product.
+   * Gallery images for this product, ordered by position.
    */
   export interface GalleryImage {
     /**
-     * Attachment ID for this gallery entry.
+     * Gallery image ID.
      */
     id: string;
 
     /**
-     * MIME type of the file, such as `image/png` or `video/mp4`.
+     * Uploaded file MIME type, such as image/jpeg.
      */
     content_type: string | null;
 
     /**
-     * CDN URL for the image or video, or `null` while the upload is still processing.
+     * Pre-optimized URL for rendering this image on the client.
      */
     url: string | null;
   }
@@ -3739,21 +3739,21 @@ export interface ProductListItem {
 
 export namespace ProductListItem {
   /**
-   * Gallery images for this product.
+   * Gallery images for this product, ordered by position.
    */
   export interface GalleryImage {
     /**
-     * Attachment ID for this gallery entry.
+     * Gallery image ID.
      */
     id: string;
 
     /**
-     * MIME type of the file, such as `image/png` or `video/mp4`.
+     * Uploaded file MIME type, such as image/jpeg.
      */
     content_type: string | null;
 
     /**
-     * CDN URL for the image or video, or `null` while the upload is still processing.
+     * Pre-optimized URL for rendering this image on the client.
      */
     url: string | null;
   }
