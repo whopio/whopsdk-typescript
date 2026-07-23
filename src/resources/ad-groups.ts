@@ -237,48 +237,6 @@ export interface AdGroup {
   contacts: number;
 
   /**
-   * The pixel event optimized for. A standard event, or any custom pixel event name.
-   */
-  conversion_event:
-    | 'purchase'
-    | 'add_to_cart'
-    | 'initiated_checkout'
-    | 'add_payment_info'
-    | 'complete_registration'
-    | 'lead'
-    | 'content_view'
-    | 'search'
-    | 'contact'
-    | 'customize_product'
-    | 'donate'
-    | 'find_location'
-    | 'schedule'
-    | 'start_trial'
-    | 'submit_application'
-    | 'subscribe'
-    | (string & {})
-    | null;
-
-  /**
-   * Where the result you're optimizing for happens: `website` (your site), `profile`
-   * (your social media profile), `instagram_and_facebook` or `instagram_profile`
-   * (visits to your Instagram profile), `messaging` (a direct-message conversation),
-   * `on_ad` (engagement with the ad itself), or a lead form (`instant_forms`,
-   * `instant_forms_and_messenger`, `website_and_instant_forms`).
-   */
-  conversion_location:
-    | 'website'
-    | 'profile'
-    | 'instagram_and_facebook'
-    | 'instagram_profile'
-    | 'messaging'
-    | 'on_ad'
-    | 'instant_forms'
-    | 'instant_forms_and_messenger'
-    | 'website_and_instant_forms'
-    | null;
-
-  /**
    * Spend divided by attributed add-to-cart events; null when they are not the goal
    * and none are attributed.
    */
@@ -405,24 +363,6 @@ export interface AdGroup {
   desired_cost_per_result: number | null;
 
   /**
-   * Interest, behavior, and demographic targeting, using categories from the ad
-   * platform's targeting taxonomy. Can't be combined with automatic audience
-   * targeting, and unavailable to campaigns with special_ad_categories.
-   */
-  detailed_targeting: AdGroup.DetailedTargeting;
-
-  /**
-   * Device platforms and operating systems targeted.
-   */
-  devices: AdGroup.Devices;
-
-  /**
-   * Whether the ad platform automatically mixes and matches this ad group's
-   * creatives and copy to find the best-performing combinations.
-   */
-  dynamic_creative: boolean;
-
-  /**
    * When the ad group stops delivering, as an ISO 8601 timestamp. `null` when it
    * runs until paused.
    */
@@ -434,19 +374,11 @@ export interface AdGroup {
   frequency: number | null;
 
   /**
-   * Cap on how often one person sees ads from this ad group. Only available with
-   * `reach` optimization; `null` when uncapped.
-   */
-  frequency_cap: AdGroup.FrequencyCap | null;
-
-  /**
    * The number of impressions.
    */
   impressions: number;
 
   issues: Array<AdGroup.Issue>;
-
-  languages: Array<string>;
 
   /**
    * USD value attributed to lead events. Sums the value sent with each event,
@@ -458,13 +390,6 @@ export interface AdGroup {
    * Whop pixel-attributed leads, last-click.
    */
   leads: number;
-
-  message_apps: Array<'messenger' | 'instagram' | 'whatsapp'>;
-
-  /**
-   * Minimum the ad group tries to spend each day. `null` when no floor is set.
-   */
-  minimum_daily_spend: number | null;
 
   /**
    * The result the ad group's delivery is optimized to get the most of.
@@ -490,8 +415,6 @@ export interface AdGroup {
     | 'profile_and_page_engagement'
     | null;
 
-  placements: Array<AdGroup.Placement>;
-
   /**
    * USD value of pixel-attributed purchases.
    */
@@ -506,11 +429,6 @@ export interface AdGroup {
    * The number of unique people who saw this.
    */
   reach: number;
-
-  /**
-   * Locations targeted and excluded.
-   */
-  regions: AdGroup.Regions;
 
   /**
    * The Whop pixel conversion event whose attributed count represents results — the
@@ -624,6 +542,88 @@ export interface AdGroup {
    * Whop pixel-attributed view-content events, last-click.
    */
   viewed_contents: number;
+
+  /**
+   * The pixel event optimized for. A standard event, or any custom pixel event name.
+   */
+  conversion_event?:
+    | 'purchase'
+    | 'add_to_cart'
+    | 'initiated_checkout'
+    | 'add_payment_info'
+    | 'complete_registration'
+    | 'lead'
+    | 'content_view'
+    | 'search'
+    | 'contact'
+    | 'customize_product'
+    | 'donate'
+    | 'find_location'
+    | 'schedule'
+    | 'start_trial'
+    | 'submit_application'
+    | 'subscribe'
+    | (string & {})
+    | null;
+
+  /**
+   * Where the result you're optimizing for happens: `website` (your site), `profile`
+   * (your social media profile), `instagram_and_facebook` or `instagram_profile`
+   * (visits to your Instagram profile), `messaging` (a direct-message conversation),
+   * `on_ad` (engagement with the ad itself), or a lead form (`instant_forms`,
+   * `instant_forms_and_messenger`, `website_and_instant_forms`).
+   */
+  conversion_location?:
+    | 'website'
+    | 'profile'
+    | 'instagram_and_facebook'
+    | 'instagram_profile'
+    | 'messaging'
+    | 'on_ad'
+    | 'instant_forms'
+    | 'instant_forms_and_messenger'
+    | 'website_and_instant_forms'
+    | null;
+
+  /**
+   * Interest, behavior, and demographic targeting, using categories from the ad
+   * platform's targeting taxonomy. Can't be combined with automatic audience
+   * targeting, and unavailable to campaigns with special_ad_categories.
+   */
+  detailed_targeting?: AdGroup.DetailedTargeting;
+
+  /**
+   * Device platforms and operating systems targeted.
+   */
+  devices?: AdGroup.Devices;
+
+  /**
+   * Whether the ad platform automatically mixes and matches this ad group's
+   * creatives and copy to find the best-performing combinations.
+   */
+  dynamic_creative?: boolean;
+
+  /**
+   * Cap on how often one person sees ads from this ad group. Only available with
+   * `reach` optimization; `null` when uncapped.
+   */
+  frequency_cap?: AdGroup.FrequencyCap | null;
+
+  languages?: Array<string>;
+
+  message_apps?: Array<'messenger' | 'instagram' | 'whatsapp'>;
+
+  /**
+   * Minimum the ad group tries to spend each day. `null` when no floor is set.
+   */
+  minimum_daily_spend?: number | null;
+
+  placements?: Array<AdGroup.Placement>;
+
+  /**
+   * Locations targeted and excluded.
+   */
+  regions?: AdGroup.Regions;
 }
 
 export namespace AdGroup {
@@ -671,6 +671,31 @@ export namespace AdGroup {
      * Youngest age targeted. `null` when no minimum is set.
      */
     minimum_age: number | null;
+  }
+
+  /**
+   * Open issues affecting this ad group and its ads. Empty when there are none.
+   */
+  export interface Issue {
+    /**
+     * Unique identifier for the issue.
+     */
+    id: string;
+
+    /**
+     * A description of what the issue is and how it can be resolved.
+     */
+    message: string;
+
+    /**
+     * The ID of the campaign, ad group, or ad the issue is attached to.
+     */
+    resource_id: string | null;
+
+    /**
+     * The type of resource the issue is attached to.
+     */
+    resource_type: 'ad_campaign' | 'ad_group' | 'ad';
   }
 
   /**
@@ -778,31 +803,6 @@ export namespace AdGroup {
      * Length of the rolling window, in days.
      */
     per_days: number | null;
-  }
-
-  /**
-   * Open issues affecting this ad group and its ads. Empty when there are none.
-   */
-  export interface Issue {
-    /**
-     * Unique identifier for the issue.
-     */
-    id: string;
-
-    /**
-     * A description of what the issue is and how it can be resolved.
-     */
-    message: string;
-
-    /**
-     * The ID of the campaign, ad group, or ad the issue is attached to.
-     */
-    resource_id: string | null;
-
-    /**
-     * The type of resource the issue is attached to.
-     */
-    resource_type: 'ad_campaign' | 'ad_group' | 'ad';
   }
 
   /**
