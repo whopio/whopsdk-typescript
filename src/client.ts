@@ -1606,7 +1606,7 @@ export class Whop {
   /**
    * A Membership is a customer's purchase of a plan: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
    *
-   * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, and manage the lifecycle: cancel immediately or at period end, reverse a pending cancellation, pause and resume payment collection, extend with free days, and update metadata.
+   * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, and update metadata.
    *
    */
   memberships: API.Memberships = new API.Memberships(this);
@@ -1647,7 +1647,7 @@ export class Whop {
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
   /**
-   * A Member is one buyer's relationship with an account — a single row per customer regardless of how many memberships they hold. It carries the relationship-level state: whether they have joined or left, what they can reach (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+   * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
    *
    * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
    *

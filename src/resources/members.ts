@@ -7,7 +7,7 @@ import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * A Member is one buyer's relationship with an account — a single row per customer regardless of how many memberships they hold. It carries the relationship-level state: whether they have joined or left, what they can reach (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+ * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
  *
  * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
  */
