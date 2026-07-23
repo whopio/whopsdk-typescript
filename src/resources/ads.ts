@@ -346,19 +346,6 @@ export interface Ad {
   issues: Array<Ad.Issue>;
 
   /**
-   * The instant lead form shown when someone taps this ad. `null` when the ad
-   * group's conversion_location is not an instant-form destination.
-   */
-  lead_form: Ad.LeadForm | null;
-
-  /**
-   * The ad platform's ID for the instant form the ad uses. Set when the ad
-   * references an existing form via `lead_form_id`, or once a form built from
-   * `lead_form` has been created on the platform.
-   */
-  lead_form_id: string | null;
-
-  /**
    * USD value attributed to lead events. Sums the value sent with each event,
    * normalized to USD; events without a value contribute 0.
    */
@@ -368,18 +355,6 @@ export interface Ad {
    * Whop pixel-attributed leads, last-click.
    */
   leads: number;
-
-  /**
-   * Welcome message for click-to-message ads, shown when the conversation opens.
-   * `null` when the ad has none.
-   */
-  messaging_config: Ad.MessagingConfig | null;
-
-  /**
-   * Whether the ad can appear alongside other advertisers' ads in the same unit.
-   * Defaults to true.
-   */
-  multi_advertiser_ads: boolean;
 
   /**
    * The existing post this ad promotes — a Facebook post or Instagram media ID.
@@ -533,6 +508,31 @@ export interface Ad {
    * Whop pixel-attributed view-content events, last-click.
    */
   viewed_contents: number;
+
+  /**
+   * The instant lead form shown when someone taps this ad. `null` when the ad
+   * group's conversion_location is not an instant-form destination.
+   */
+  lead_form?: Ad.LeadForm | null;
+
+  /**
+   * The ad platform's ID for the instant form the ad uses. Set when the ad
+   * references an existing form via `lead_form_id`, or once a form built from
+   * `lead_form` has been created on the platform.
+   */
+  lead_form_id?: string | null;
+
+  /**
+   * Welcome message for click-to-message ads, shown when the conversation opens.
+   * `null` when the ad has none.
+   */
+  messaging_config?: Ad.MessagingConfig | null;
+
+  /**
+   * Whether the ad can appear alongside other advertisers' ads in the same unit.
+   * Defaults to true.
+   */
+  multi_advertiser_ads?: boolean;
 }
 
 export namespace Ad {
@@ -640,6 +640,17 @@ export namespace Ad {
      * The type of resource the issue is attached to.
      */
     resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+  }
+
+  /**
+   * The social accounts the ad runs under — its Facebook page and Instagram profile
+   * — each referenced by ID, prefixed `sacc_`.
+   */
+  export interface SocialAccount {
+    /**
+     * The referenced entity's id.
+     */
+    id: string;
   }
 
   /**
@@ -874,17 +885,6 @@ export namespace Ad {
      * Greeting shown when the conversation opens.
      */
     message: string | null;
-  }
-
-  /**
-   * The social accounts the ad runs under — its Facebook page and Instagram profile
-   * — each referenced by ID, prefixed `sacc_`.
-   */
-  export interface SocialAccount {
-    /**
-     * The referenced entity's id.
-     */
-    id: string;
   }
 }
 

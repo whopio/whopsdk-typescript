@@ -2592,10 +2592,6 @@ export interface MembershipActivatedWebhookEvent {
    */
   api_version: 'v1';
 
-  /**
-   * A membership represents an active relationship between a user and a product. It
-   * tracks the user's access, billing status, and renewal schedule.
-   */
   data: Shared.Membership;
 
   /**
@@ -2625,10 +2621,6 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
    */
   api_version: 'v1';
 
-  /**
-   * A membership represents an active relationship between a user and a product. It
-   * tracks the user's access, billing status, and renewal schedule.
-   */
   data: Shared.Membership;
 
   /**
@@ -2658,10 +2650,6 @@ export interface MembershipDeactivatedWebhookEvent {
    */
   api_version: 'v1';
 
-  /**
-   * A membership represents an active relationship between a user and a product. It
-   * tracks the user's access, billing status, and renewal schedule.
-   */
   data: Shared.Membership;
 
   /**
@@ -2691,10 +2679,6 @@ export interface MembershipTrialEndingSoonWebhookEvent {
    */
   api_version: 'v1';
 
-  /**
-   * A membership represents an active relationship between a user and a product. It
-   * tracks the user's access, billing status, and renewal schedule.
-   */
   data: Shared.Membership;
 
   /**

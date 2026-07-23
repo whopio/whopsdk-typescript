@@ -26,21 +26,19 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.list(
         {
+          account_id: 'account_id',
           after: 'after',
           before: 'before',
-          cancel_options: ['too_expensive'],
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
+          created_after: 'created_after',
+          created_before: 'created_before',
           direction: 'asc',
-          first: 42,
-          last: 42,
-          order: 'id',
-          plan_ids: ['string'],
-          product_ids: ['string'],
-          promo_code_ids: ['string'],
-          statuses: ['trialing'],
-          user_ids: ['string'],
+          first: 100,
+          last: 100,
+          order: 'created_at',
+          plan_id: 'plan_id',
+          product_id: 'product_id',
+          status: 'active',
+          user_id: 'user_id',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -49,7 +47,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.memberships.retrieve('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.memberships.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -61,7 +59,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.memberships.update('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.memberships.update('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,8 +74,11 @@ describe('resource memberships', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.memberships.update(
-        'mem_xxxxxxxxxxxxxx',
-        { metadata: { foo: 'bar' } },
+        'id',
+        {
+          cancel_at_period_end: true,
+          metadata: {},
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -85,7 +86,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('cancel', async () => {
-    const responsePromise = client.memberships.cancel('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.memberships.cancel('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,8 +101,8 @@ describe('resource memberships', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.memberships.cancel(
-        'mem_xxxxxxxxxxxxxx',
-        { cancellation_mode: 'at_period_end' },
+        'id',
+        { reason: 'reason', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -109,7 +110,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('pause', async () => {
-    const responsePromise = client.memberships.pause('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.memberships.pause('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -124,8 +125,8 @@ describe('resource memberships', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.memberships.pause(
-        'mem_xxxxxxxxxxxxxx',
-        { resumes_at: '2023-12-01T05:00:00.401Z', void_payments: true },
+        'id',
+        { until: 'until', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -133,7 +134,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('resume', async () => {
-    const responsePromise = client.memberships.resume('mem_xxxxxxxxxxxxxx');
+    const responsePromise = client.memberships.resume('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -144,8 +145,20 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('uncancel', async () => {
-    const responsePromise = client.memberships.uncancel('mem_xxxxxxxxxxxxxx');
+  test.skip('resume: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.memberships.resume(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('extend: only required params', async () => {
+    const responsePromise = client.memberships.extend('id', { days: 1 });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -156,31 +169,10 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('addFreeDays: only required params', async () => {
-    const responsePromise = client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('addFreeDays: required and optional params', async () => {
-    const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
-  });
-
-  // Mock server tests are disabled
-  test.skip('resyncAccess', async () => {
-    const responsePromise = client.memberships.resyncAccess('mem_xxxxxxxxxxxxxx');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
+  test.skip('extend: required and optional params', async () => {
+    const response = await client.memberships.extend('id', {
+      days: 1,
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
+    });
   });
 });

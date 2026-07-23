@@ -384,21 +384,14 @@ import {
 } from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import { Media, MediaAsset, MediaGenerateParams } from './resources/media';
-import {
-  MemberListParams,
-  MemberListResponse,
-  MemberListResponsesCursorPage,
-  MemberRetrieveResponse,
-  Members,
-} from './resources/members';
+import { Member, MemberListParams, Members, MembersCursorPage } from './resources/members';
 import {
   CancelOptions,
-  MembershipAddFreeDaysParams,
   MembershipCancelParams,
+  MembershipExtendParams,
   MembershipListParams,
-  MembershipListResponse,
-  MembershipListResponsesCursorPage,
   MembershipPauseParams,
+  MembershipResumeParams,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -586,6 +579,9 @@ import {
   TransferCreateParams,
   TransferCreateResponse,
   TransferListParams,
+  TransferListRecipientsParams,
+  TransferListRecipientsResponse,
+  TransferListRecipientsResponsesCursorPage,
   TransferListResponse,
   TransferListResponsesCursorPage,
   TransferRetrieveResponse,
@@ -1581,6 +1577,12 @@ export class Whop {
    */
   transfers: API.Transfers = new API.Transfers(this);
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
+  /**
+   * A Membership is a customer's purchase of a plan: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
+   *
+   * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, and manage the lifecycle: cancel immediately or at period end, reverse a pending cancellation, pause and resume payment collection, extend with free days, and update metadata.
+   *
+   */
   memberships: API.Memberships = new API.Memberships(this);
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
   /**
@@ -1618,6 +1620,12 @@ export class Whop {
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
+  /**
+   * A Member is one buyer's relationship with an account — a single row per customer regardless of how many memberships they hold. It carries the relationship-level state: whether they have joined or left, what they can reach (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+   *
+   * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
+   *
+   */
   members: API.Members = new API.Members(this);
   forums: API.Forums = new API.Forums(this);
   promoCodes: API.PromoCodes = new API.PromoCodes(this);
@@ -2034,9 +2042,12 @@ export declare namespace Whop {
     type TransferCreateResponse as TransferCreateResponse,
     type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
+    type TransferListRecipientsResponse as TransferListRecipientsResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferListRecipientsResponsesCursorPage as TransferListRecipientsResponsesCursorPage,
     type TransferListParams as TransferListParams,
     type TransferCreateParams as TransferCreateParams,
+    type TransferListRecipientsParams as TransferListRecipientsParams,
   };
 
   export {
@@ -2047,13 +2058,12 @@ export declare namespace Whop {
   export {
     Memberships as Memberships,
     type CancelOptions as CancelOptions,
-    type MembershipListResponse as MembershipListResponse,
-    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipListParams as MembershipListParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipResumeParams as MembershipResumeParams,
+    type MembershipExtendParams as MembershipExtendParams,
   };
 
   export {
@@ -2186,9 +2196,8 @@ export declare namespace Whop {
 
   export {
     Members as Members,
-    type MemberRetrieveResponse as MemberRetrieveResponse,
-    type MemberListResponse as MemberListResponse,
-    type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type Member as Member,
+    type MembersCursorPage as MembersCursorPage,
     type MemberListParams as MemberListParams,
   };
 

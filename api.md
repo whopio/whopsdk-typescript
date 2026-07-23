@@ -342,11 +342,13 @@ Types:
 - <code><a href="./src/resources/transfers.ts">TransferCreateResponse</a></code>
 - <code><a href="./src/resources/transfers.ts">TransferRetrieveResponse</a></code>
 - <code><a href="./src/resources/transfers.ts">TransferListResponse</a></code>
+- <code><a href="./src/resources/transfers.ts">TransferListRecipientsResponse</a></code>
 
 Methods:
 
 - <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
 - <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> TransferCreateResponse</code>
+- <code title="get /transfers/recipients">client.transfers.<a href="./src/resources/transfers.ts">listRecipients</a>({ ...params }) -> TransferListRecipientsResponsesCursorPage</code>
 - <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id) -> TransferRetrieveResponse</code>
 
 # LedgerAccounts
@@ -364,19 +366,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/memberships.ts">CancelOptions</a></code>
-- <code><a href="./src/resources/memberships.ts">MembershipListResponse</a></code>
 
 Methods:
 
-- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsCursorPage</code>
 - <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
-- <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
-- <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> Membership</code>
-- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
-- <code title="post /memberships/{id}/resync_access">client.memberships.<a href="./src/resources/memberships.ts">resyncAccess</a>(id) -> Membership</code>
+- <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id, { ...params }) -> Membership</code>
+- <code title="post /memberships/{id}/extend">client.memberships.<a href="./src/resources/memberships.ts">extend</a>(id, { ...params }) -> Membership</code>
 
 # AuthorizedUsers
 
@@ -561,13 +560,12 @@ Methods:
 
 Types:
 
-- <code><a href="./src/resources/members.ts">MemberRetrieveResponse</a></code>
-- <code><a href="./src/resources/members.ts">MemberListResponse</a></code>
+- <code><a href="./src/resources/members.ts">Member</a></code>
 
 Methods:
 
-- <code title="get /members">client.members.<a href="./src/resources/members.ts">list</a>({ ...params }) -> MemberListResponsesCursorPage</code>
-- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> MemberRetrieveResponse</code>
+- <code title="get /members">client.members.<a href="./src/resources/members.ts">list</a>({ ...params }) -> MembersCursorPage</code>
+- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> Member</code>
 
 # Forums
 
