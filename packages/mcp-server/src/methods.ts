@@ -438,6 +438,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/transfers',
   },
   {
+    clientCallName: 'client.transfers.listRecipients',
+    fullyQualifiedName: 'transfers.listRecipients',
+    httpMethod: 'get',
+    httpPath: '/transfers/recipients',
+  },
+  {
     clientCallName: 'client.transfers.retrieve',
     fullyQualifiedName: 'transfers.retrieve',
     httpMethod: 'get',

@@ -586,6 +586,9 @@ import {
   TransferCreateParams,
   TransferCreateResponse,
   TransferListParams,
+  TransferListRecipientsParams,
+  TransferListRecipientsResponse,
+  TransferListRecipientsResponsesCursorPage,
   TransferListResponse,
   TransferListResponsesCursorPage,
   TransferRetrieveResponse,
@@ -2034,9 +2037,12 @@ export declare namespace Whop {
     type TransferCreateResponse as TransferCreateResponse,
     type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
+    type TransferListRecipientsResponse as TransferListRecipientsResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferListRecipientsResponsesCursorPage as TransferListRecipientsResponsesCursorPage,
     type TransferListParams as TransferListParams,
     type TransferCreateParams as TransferCreateParams,
+    type TransferListRecipientsParams as TransferListRecipientsParams,
   };
 
   export {
