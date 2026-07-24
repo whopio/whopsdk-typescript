@@ -6,7 +6,7 @@ export {
   type MethodListResponse,
   type MethodListParams,
   type MethodCreateParams,
-  type MethodListResponsesCursorPage,
+  type MethodListResponsesCursorPageWithLimits,
 } from './methods';
 export {
   Payouts,

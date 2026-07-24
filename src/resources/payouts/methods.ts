@@ -2,7 +2,7 @@
 
 import { APIResource } from '../../core/resource';
 import { APIPromise } from '../../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../../core/pagination';
+import { CursorPageWithLimits, type CursorPageWithLimitsParams, PagePromise } from '../../core/pagination';
 import { buildHeaders } from '../../internal/headers';
 import { RequestOptions } from '../../internal/request-options';
 
@@ -22,8 +22,11 @@ export class Methods extends APIResource {
   list(
     query: MethodListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<MethodListResponsesCursorPage, MethodListResponse> {
-    return this._client.getAPIList('/payouts/methods', CursorPage<MethodListResponse>, { query, ...options });
+  ): PagePromise<MethodListResponsesCursorPageWithLimits, MethodListResponse> {
+    return this._client.getAPIList('/payouts/methods', CursorPageWithLimits<MethodListResponse>, {
+      query,
+      ...options,
+    });
   }
 
   /**
@@ -48,7 +51,7 @@ export class Methods extends APIResource {
   }
 }
 
-export type MethodListResponsesCursorPage = CursorPage<MethodListResponse>;
+export type MethodListResponsesCursorPageWithLimits = CursorPageWithLimits<MethodListResponse>;
 
 export interface MethodCreateResponse {
   /**
@@ -276,7 +279,7 @@ export namespace MethodListResponse {
   }
 }
 
-export interface MethodListParams extends CursorPageParams {
+export interface MethodListParams extends CursorPageWithLimitsParams {
   /**
    * The owning account ID (a biz\_ identifier). Provide this or user_id.
    */
@@ -295,7 +298,8 @@ export interface MethodListParams extends CursorPageParams {
   before?: string;
 
   /**
-   * Currency code of the amount, for example `usd`. Only meaningful with amount.
+   * Currency code of the amount, for example `usd`. Only meaningful with amount or
+   * include_limits.
    */
   currency?: string;
 
@@ -323,6 +327,13 @@ export interface MethodListParams extends CursorPageParams {
    * amount is provided.
    */
   include_available?: boolean;
+
+  /**
+   * When true, the response also carries limits — the live per-speed payout caps the
+   * account's payout requests are validated against, in the requested currency.
+   * Requires the payout:withdrawal:read scope.
+   */
+  include_limits?: boolean;
 
   /**
    * Number of payout methods to return from the end of the window.
@@ -392,7 +403,7 @@ export declare namespace Methods {
   export {
     type MethodCreateResponse as MethodCreateResponse,
     type MethodListResponse as MethodListResponse,
-    type MethodListResponsesCursorPage as MethodListResponsesCursorPage,
+    type MethodListResponsesCursorPageWithLimits as MethodListResponsesCursorPageWithLimits,
     type MethodListParams as MethodListParams,
     type MethodCreateParams as MethodCreateParams,
   };

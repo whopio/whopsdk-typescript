@@ -389,23 +389,16 @@ export {
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export { Media, type MediaAsset, type MediaGenerateParams } from './media';
-export {
-  Members,
-  type MemberRetrieveResponse,
-  type MemberListResponse,
-  type MemberListParams,
-  type MemberListResponsesCursorPage,
-} from './members';
+export { Members, type Member, type MemberListParams, type MembersCursorPage } from './members';
 export {
   Memberships,
   type CancelOptions,
-  type MembershipListResponse,
   type MembershipListParams,
   type MembershipUpdateParams,
   type MembershipCancelParams,
   type MembershipPauseParams,
-  type MembershipAddFreeDaysParams,
-  type MembershipListResponsesCursorPage,
+  type MembershipResumeParams,
+  type MembershipExtendParams,
 } from './memberships';
 export {
   Messages,
@@ -609,9 +602,12 @@ export {
   type TransferCreateResponse,
   type TransferRetrieveResponse,
   type TransferListResponse,
+  type TransferListRecipientsResponse,
   type TransferListParams,
   type TransferCreateParams,
+  type TransferListRecipientsParams,
   type TransferListResponsesCursorPage,
+  type TransferListRecipientsResponsesCursorPage,
 } from './transfers';
 export {
   Users,
