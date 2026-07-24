@@ -164,13 +164,6 @@ export interface AdCampaign {
   added_to_carts: number;
 
   /**
-   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
-   * the budget, `average_target` holds an average cost per result, and
-   * `maximum_target` never bids above a cap.
-   */
-  bid_type: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
-
-  /**
    * The campaign's budget, in the ad account's currency. `null` when each ad group
    * sets its own budget instead.
    */
@@ -370,7 +363,7 @@ export interface AdCampaign {
   /**
    * The ad network the campaign runs on.
    */
-  platform: 'meta';
+  platform: 'meta' | 'tiktok';
 
   /**
    * USD value of pixel-attributed purchases.
@@ -505,6 +498,13 @@ export interface AdCampaign {
    * Whop pixel-attributed view-content events, last-click.
    */
   viewed_contents: number;
+
+  /**
+   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+   * the budget, `average_target` holds an average cost per result, and
+   * `maximum_target` never bids above a cap.
+   */
+  bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
 }
 
 export namespace AdCampaign {

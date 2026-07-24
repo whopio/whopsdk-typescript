@@ -7,7 +7,7 @@ import {
   MethodCreateResponse,
   MethodListParams,
   MethodListResponse,
-  MethodListResponsesCursorPage,
+  MethodListResponsesCursorPageWithLimits,
   Methods,
 } from './methods';
 import { APIPromise } from '../../core/api-promise';
@@ -317,7 +317,7 @@ export declare namespace Payouts {
     Methods as Methods,
     type MethodCreateResponse as MethodCreateResponse,
     type MethodListResponse as MethodListResponse,
-    type MethodListResponsesCursorPage as MethodListResponsesCursorPage,
+    type MethodListResponsesCursorPageWithLimits as MethodListResponsesCursorPageWithLimits,
     type MethodListParams as MethodListParams,
     type MethodCreateParams as MethodCreateParams,
   };

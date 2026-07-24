@@ -60,6 +60,34 @@ export class Transfers extends APIResource {
   }
 
   /**
+   * Lists users and accounts that can be selected as transfer recipients. Requires
+   * `payout:withdraw_funds` and `company:authorized_user:read`. Without a query,
+   * returns the origin account's human team members followed by the authenticated
+   * user's other accounts. With a query, returns matching users and accounts in
+   * creator-dashboard relevance order and additionally requires `member:basic:read`.
+   * Email addresses are not searchable.
+   *
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const transferListRecipientsResponse of client.transfers.listRecipients(
+   *   { origin_id: 'origin_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
+   */
+  listRecipients(
+    query: TransferListRecipientsParams,
+    options?: RequestOptions,
+  ): PagePromise<TransferListRecipientsResponsesCursorPage, TransferListRecipientsResponse> {
+    return this._client.getAPIList('/transfers/recipients', CursorPage<TransferListRecipientsResponse>, {
+      query,
+      ...options,
+    });
+  }
+
+  /**
    * Retrieves a ledger transfer by ID.
    *
    * @example
@@ -73,6 +101,8 @@ export class Transfers extends APIResource {
 }
 
 export type TransferListResponsesCursorPage = CursorPage<TransferListResponse>;
+
+export type TransferListRecipientsResponsesCursorPage = CursorPage<TransferListRecipientsResponse>;
 
 /**
  * A transfer of credit between two ledger accounts.
@@ -470,6 +500,60 @@ export interface TransferListResponse {
   notes?: string | null;
 }
 
+export type TransferListRecipientsResponse =
+  | TransferListRecipientsResponse.TransferRecipientUser
+  | TransferListRecipientsResponse.TransferRecipientAccount;
+
+export namespace TransferListRecipientsResponse {
+  export interface TransferRecipientUser {
+    /**
+     * User ID.
+     */
+    id: string;
+
+    /**
+     * User display name.
+     */
+    name: string | null;
+
+    object: 'user';
+
+    /**
+     * User profile image URL.
+     */
+    profile_picture_url: string | null;
+
+    /**
+     * User's username.
+     */
+    username: string | null;
+  }
+
+  export interface TransferRecipientAccount {
+    /**
+     * Account ID.
+     */
+    id: string;
+
+    /**
+     * Account logo URL.
+     */
+    logo_url: string | null;
+
+    object: 'account';
+
+    /**
+     * Account route.
+     */
+    route: string | null;
+
+    /**
+     * Account display name.
+     */
+    title: string | null;
+  }
+}
+
 export interface TransferListParams extends CursorPageParams {
   /**
    * Cursor to fetch the page before (from page_info.start_cursor).
@@ -580,13 +664,35 @@ export interface TransferCreateParams {
   'Idempotency-Key'?: string;
 }
 
+export interface TransferListRecipientsParams extends CursorPageParams {
+  /**
+   * The originating account ID, prefixed `biz_`.
+   */
+  origin_id: string;
+
+  /**
+   * Number of recipients per page. Search queries preserve the dashboard's 20-result
+   * maximum.
+   */
+  first?: number;
+
+  /**
+   * Search users and accounts by name, username, or ID. Complete email addresses
+   * return no matches.
+   */
+  query?: string;
+}
+
 export declare namespace Transfers {
   export {
     type TransferCreateResponse as TransferCreateResponse,
     type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
+    type TransferListRecipientsResponse as TransferListRecipientsResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferListRecipientsResponsesCursorPage as TransferListRecipientsResponsesCursorPage,
     type TransferListParams as TransferListParams,
     type TransferCreateParams as TransferCreateParams,
+    type TransferListRecipientsParams as TransferListRecipientsParams,
   };
 }

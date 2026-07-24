@@ -1,353 +1,190 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+ *
+ * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
+ */
 export class Members extends APIResource {
   /**
-   * Returns a paginated list of members for a company, with extensive filtering by
-   * product, plan, status, access level, and more.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   * - `member:phone:read`
+   * Lists the members of an account. A member is one buyer's relationship with the
+   * account, regardless of how many memberships they hold.
    */
   list(
     query: MemberListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<MemberListResponsesCursorPage, MemberListResponse> {
-    return this._client.getAPIList('/members', CursorPage<MemberListResponse>, { query, ...options });
+  ): PagePromise<MembersCursorPage, Member> {
+    return this._client.getAPIList('/members', CursorPage<Member>, { query, ...options });
   }
 
   /**
-   * Retrieves the details of an existing member.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   * - `member:phone:read`
+   * Retrieves a member by ID. Accessible to the account and to the member's own
+   * user.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<MemberRetrieveResponse> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<Member> {
     return this._client.get(path`/members/${id}`, options);
   }
 }
 
-export type MemberListResponsesCursorPage = CursorPage<MemberListResponse>;
+export type MembersCursorPage = CursorPage<Member>;
 
-/**
- * A member represents a user's relationship with a company on Whop, including
- * their access level, status, and spending history.
- */
-export interface MemberRetrieveResponse {
+export interface Member {
   /**
-   * The unique identifier for the company member.
+   * Member ID, prefixed `mber_`.
    */
   id: string;
 
   /**
-   * The access level of the product member. If its admin, the member is an
-   * authorized user of the company. If its customer, the member has a valid
-   * membership to any product on the company. If its no_access, the member does not
-   * have access to the product.
+   * What the member can reach on the account: `customer` for paying members, `admin`
+   * for team members, `no_access` once every grant has lapsed.
    */
-  access_level: Shared.AccessLevel;
+  access_level: 'no_access' | 'admin' | 'customer';
 
   /**
-   * The company for the member.
+   * The account this member belongs to, prefixed `biz_`.
    */
-  company: MemberRetrieveResponse.Company;
+  account_id: string;
 
   /**
-   * The member's token balance for this company. Computed live from the ledger, not
-   * from a cache.
-   */
-  company_token_balance: number;
-
-  /**
-   * The datetime the company member was created.
+   * When the member record was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * When the member joined the company
+   * When the member first joined the account, as an ISO 8601 timestamp.
    */
   joined_at: string;
 
   /**
-   * The different most recent actions a member can have.
+   * When the member last opened the account's content, as an ISO 8601 timestamp.
+   * `null` if they never have.
    */
-  most_recent_action: Shared.MemberMostRecentActions | null;
+  last_accessed_at: string | null;
 
   /**
-   * The time for the most recent action, if applicable.
+   * `joined` while the member is part of the account, `left` after they leave.
    */
-  most_recent_action_at: string | null;
+  status: 'joined' | 'left';
 
   /**
-   * The phone number for the member, if available.
+   * The user behind this member. `null` when the buyer is another business rather
+   * than a person.
    */
-  phone: string | null;
-
-  /**
-   * The status of the member
-   */
-  status: Shared.MemberStatuses;
-
-  /**
-   * The datetime the company member was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * How much money this customer has spent on the company's products and plans
-   */
-  usd_total_spent: number;
-
-  /**
-   * The user for this member, if any.
-   */
-  user: MemberRetrieveResponse.User | null;
+  user: Member.User | null;
 }
 
-export namespace MemberRetrieveResponse {
+export namespace Member {
   /**
-   * The company for the member.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The slug/route of the company on the Whop site.
-     */
-    route: string;
-
-    /**
-     * The written name of the company.
-     */
-    title: string;
-  }
-
-  /**
-   * The user for this member, if any.
+   * The user behind this member. `null` when the buyer is another business rather
+   * than a person.
    */
   export interface User {
     /**
-     * The unique identifier for the company member user.
+     * User ID, prefixed `user_`.
      */
     id: string;
 
     /**
-     * The digital mailing address of the user.
-     */
-    email: string | null;
-
-    /**
-     * The user's full name.
+     * Display name.
      */
     name: string | null;
 
     /**
-     * The whop username.
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    profile_picture: User.ProfilePicture;
+
+    /**
+     * Public username.
      */
     username: string;
   }
-}
 
-/**
- * A member represents a user's relationship with a company on Whop, including
- * their access level, status, and spending history.
- */
-export interface MemberListResponse {
-  /**
-   * The unique identifier for the company member.
-   */
-  id: string;
-
-  /**
-   * The access level of the product member. If its admin, the member is an
-   * authorized user of the company. If its customer, the member has a valid
-   * membership to any product on the company. If its no_access, the member does not
-   * have access to the product.
-   */
-  access_level: Shared.AccessLevel;
-
-  /**
-   * The member's token balance for this company. Computed live from the ledger, not
-   * from a cache.
-   */
-  company_token_balance: number;
-
-  /**
-   * The datetime the company member was created.
-   */
-  created_at: string;
-
-  /**
-   * When the member joined the company
-   */
-  joined_at: string;
-
-  /**
-   * The different most recent actions a member can have.
-   */
-  most_recent_action: Shared.MemberMostRecentActions | null;
-
-  /**
-   * The time for the most recent action, if applicable.
-   */
-  most_recent_action_at: string | null;
-
-  /**
-   * The phone number for the member, if available.
-   */
-  phone: string | null;
-
-  /**
-   * The status of the member
-   */
-  status: Shared.MemberStatuses;
-
-  /**
-   * The datetime the company member was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * How much money this customer has spent on the company's products and plans
-   */
-  usd_total_spent: number;
-
-  /**
-   * The user for this member, if any.
-   */
-  user: MemberListResponse.User | null;
-}
-
-export namespace MemberListResponse {
-  /**
-   * The user for this member, if any.
-   */
-  export interface User {
+  export namespace User {
     /**
-     * The unique identifier for the company member user.
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
      */
-    id: string;
-
-    /**
-     * The digital mailing address of the user.
-     */
-    email: string | null;
-
-    /**
-     * The user's full name.
-     */
-    name: string | null;
-
-    /**
-     * The whop username.
-     */
-    username: string;
+    export interface ProfilePicture {
+      /**
+       * Avatar image URL. Always present — a generated placeholder when the user set no
+       * picture.
+       */
+      url: string;
+    }
   }
 }
 
 export interface MemberListParams extends CursorPageParams {
   /**
-   * The access level a given user (or company) has to a product or company.
+   * Filter by what the member can reach on the account.
    */
-  access_level?: Shared.AccessLevel | null;
+  access_level?: 'no_access' | 'admin' | 'customer';
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * The account to list members for (`biz_` tag). Defaults to the account the
+   * credential acts as.
    */
-  before?: string | null;
+  account_id?: string;
 
   /**
-   * The unique identifier of the company to list members for.
+   * Cursor to paginate backwards from.
    */
-  company_id?: string | null;
+  before?: string;
 
   /**
-   * Only return members created after this timestamp.
+   * Only members who joined after this ISO 8601 timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
-   * Only return members created before this timestamp.
+   * Only members who joined before this ISO 8601 timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * Sort direction.
    */
-  direction?: Shared.Direction | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Number of members to return from the start of the window.
    */
-  first?: number | null;
+  first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Number of members to return from the end of the window.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * Filter members by their most recent activity type.
+   * Sort field.
    */
-  most_recent_actions?: Array<Shared.MemberMostRecentActions> | null;
+  order?: 'created_at' | 'joined_at' | 'last_accessed_at' | 'usd_total_spent';
 
   /**
-   * Which columns can be used to sort.
+   * Search members by name or username. An exact email address also matches when the
+   * credential holds the member:email:read scope.
    */
-  order?: 'id' | 'usd_total_spent' | 'created_at' | 'joined_at' | 'most_recent_action' | null;
+  query?: string;
 
   /**
-   * Filter members to only those subscribed to these specific plans.
+   * Filter by whether the member is still part of the account.
    */
-  plan_ids?: Array<string> | null;
-
-  /**
-   * Filter members to only those belonging to these specific products.
-   */
-  product_ids?: Array<string> | null;
-
-  /**
-   * Filter members to only those who used these specific promo codes.
-   */
-  promo_code_ids?: Array<string> | null;
-
-  /**
-   * Search members by name, username, or email. Email filtering requires the
-   * member:email:read permission.
-   */
-  query?: string | null;
-
-  /**
-   * Filter members by their current subscription status.
-   */
-  statuses?: Array<Shared.MemberStatuses> | null;
-
-  /**
-   * Filter members to only those matching these specific user identifiers.
-   */
-  user_ids?: Array<string> | null;
+  status?: 'joined' | 'left';
 }
 
 export declare namespace Members {
   export {
-    type MemberRetrieveResponse as MemberRetrieveResponse,
-    type MemberListResponse as MemberListResponse,
-    type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type Member as Member,
+    type MembersCursorPage as MembersCursorPage,
     type MemberListParams as MemberListParams,
   };
 }
