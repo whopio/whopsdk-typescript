@@ -834,7 +834,7 @@ Types:
 
 Methods:
 
-- <code title="get /payouts/methods">client.payouts.methods.<a href="./src/resources/payouts/methods.ts">list</a>({ ...params }) -> MethodListResponsesCursorPage</code>
+- <code title="get /payouts/methods">client.payouts.methods.<a href="./src/resources/payouts/methods.ts">list</a>({ ...params }) -> MethodListResponsesCursorPageWithLimits</code>
 - <code title="post /payouts/methods">client.payouts.methods.<a href="./src/resources/payouts/methods.ts">create</a>({ ...params }) -> MethodCreateResponse</code>
 
 # Partners

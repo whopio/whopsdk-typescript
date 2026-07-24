@@ -15,7 +15,13 @@ import { stringifyQuery } from './internal/utils/query';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/pagination';
+import {
+  AbstractPage,
+  type CursorPageParams,
+  CursorPageResponse,
+  type CursorPageWithLimitsParams,
+  CursorPageWithLimitsResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -1860,6 +1866,12 @@ export declare namespace Whop {
 
   export import CursorPage = Pagination.CursorPage;
   export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
+
+  export import CursorPageWithLimits = Pagination.CursorPageWithLimits;
+  export {
+    type CursorPageWithLimitsParams as CursorPageWithLimitsParams,
+    type CursorPageWithLimitsResponse as CursorPageWithLimitsResponse,
+  };
 
   export {
     Apps as Apps,
