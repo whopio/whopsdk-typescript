@@ -8556,42 +8556,42 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'post',
     summary: 'Create Swap',
     description:
-      "Executes a swap from the account's wallet. Runs asynchronously; poll GET /swaps/{id} for status.",
+      'Executes a swap from the account\'s wallet. Crypto swaps run asynchronously; poll GET /swaps/{id} for status. A pair of fiat currency codes instead converts ledger balances to repay a negative to_token balance: by default the conversion brings that balance exactly to zero, or pass amount to repay part of the debt. Fiat conversions complete synchronously, except when funding from USD on a stablecoin-rails account, which starts an asynchronous repayment (status "processing"). The id on a pending repayment is a reference to the repayment workflow; GET /swaps/{id} reports status for crypto swaps only, so watch the account balance for settlement instead of polling.',
     stainlessPath: '(resource) swaps > (method) create',
     qualified: 'client.swaps.create',
     params: [
       'account_id: string;',
-      'amount: string;',
       'from_token: string;',
       'to_token: string;',
+      'amount?: string;',
       'from_chain?: string | number;',
       'slippage_bps?: number;',
       'to_chain?: string | number;',
       'Idempotency-Key?: string;',
     ],
     response:
-      "{ id: string; account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }",
+      "{ account_id: string; object: 'swap'; status: string; id?: string; amount_in?: number; amount_out?: number; amount_out_expected?: string; amount_out_min?: string; from_token?: { symbol?: string; }; rate?: string; to_chain?: string; to_token?: { symbol?: string; }; }",
     markdown:
-      "## create\n\n`client.swaps.create(account_id: string, amount: string, from_token: string, to_token: string, from_chain?: string | number, slippage_bps?: number, to_chain?: string | number, Idempotency-Key?: string): { id: string; account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }`\n\n**post** `/swaps`\n\nExecutes a swap from the account's wallet. Runs asynchronously; poll GET /swaps/{id} for status.\n\n### Parameters\n\n- `account_id: string`\n  Business or user account ID (biz_* / user_*).\n\n- `amount: string`\n  Source token amount.\n\n- `from_token: string`\n  Source token contract address or ticker symbol, such as \"USDT\".\n\n- `to_token: string`\n  Destination token contract address or ticker symbol, such as \"XAUT\".\n\n- `from_chain?: string | number`\n  Source chain name or chain ID. Defaults to the source token's chain when omitted.\n\n- `slippage_bps?: number`\n  Maximum slippage tolerance in basis points.\n\n- `to_chain?: string | number`\n  Destination chain name or chain ID. Defaults to the destination token's chain when omitted.\n\n- `Idempotency-Key?: string`\n\n### Returns\n\n- `{ id: string; account_id: string; object: 'swap'; status: string; amount_out_expected?: string; amount_out_min?: string; rate?: string; to_chain?: string; }`\n\n  - `id: string`\n  - `account_id: string`\n  - `object: 'swap'`\n  - `status: string`\n  - `amount_out_expected?: string`\n  - `amount_out_min?: string`\n  - `rate?: string`\n  - `to_chain?: string`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap);\n```",
+      "## create\n\n`client.swaps.create(account_id: string, from_token: string, to_token: string, amount?: string, from_chain?: string | number, slippage_bps?: number, to_chain?: string | number, Idempotency-Key?: string): { account_id: string; object: 'swap'; status: string; id?: string; amount_in?: number; amount_out?: number; amount_out_expected?: string; amount_out_min?: string; from_token?: object; rate?: string; to_chain?: string; to_token?: object; }`\n\n**post** `/swaps`\n\nExecutes a swap from the account's wallet. Crypto swaps run asynchronously; poll GET /swaps/{id} for status. A pair of fiat currency codes instead converts ledger balances to repay a negative to_token balance: by default the conversion brings that balance exactly to zero, or pass amount to repay part of the debt. Fiat conversions complete synchronously, except when funding from USD on a stablecoin-rails account, which starts an asynchronous repayment (status \"processing\"). The id on a pending repayment is a reference to the repayment workflow; GET /swaps/{id} reports status for crypto swaps only, so watch the account balance for settlement instead of polling.\n\n### Parameters\n\n- `account_id: string`\n  Business or user account ID (biz_* / user_*).\n\n- `from_token: string`\n  Source token contract address or ticker symbol, such as \"USDT\".\n\n- `to_token: string`\n  Destination token contract address or ticker symbol, such as \"XAUT\".\n\n- `amount?: string`\n  Source token amount. Required for crypto swaps. Optional for fiat pairs: the portion of the negative to_token balance to repay, which must not exceed the debt; omit to repay the full debt.\n\n- `from_chain?: string | number`\n  Source chain name or chain ID. Defaults to the source token's chain when omitted.\n\n- `slippage_bps?: number`\n  Maximum slippage tolerance in basis points.\n\n- `to_chain?: string | number`\n  Destination chain name or chain ID. Defaults to the destination token's chain when omitted.\n\n- `Idempotency-Key?: string`\n\n### Returns\n\n- `{ account_id: string; object: 'swap'; status: string; id?: string; amount_in?: number; amount_out?: number; amount_out_expected?: string; amount_out_min?: string; from_token?: { symbol?: string; }; rate?: string; to_chain?: string; to_token?: { symbol?: string; }; }`\n\n  - `account_id: string`\n  - `object: 'swap'`\n  - `status: string`\n  - `id?: string`\n  - `amount_in?: number`\n  - `amount_out?: number`\n  - `amount_out_expected?: string`\n  - `amount_out_min?: string`\n  - `from_token?: { symbol?: string; }`\n  - `rate?: string`\n  - `to_chain?: string`\n  - `to_token?: { symbol?: string; }`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap);\n```",
     perLanguage: {
       ruby: {
         method: 'swaps.create',
         example:
-          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nswap = whop.swaps.create(\n  account_id: "account_id",\n  amount: "amount",\n  from_token: "from_token",\n  to_token: "to_token"\n)\n\nputs(swap)',
+          'require "whop_sdk"\n\nwhop = WhopSDK::Client.new(api_key: "My API Key")\n\nswap = whop.swaps.create(account_id: "account_id", from_token: "from_token", to_token: "to_token")\n\nputs(swap)',
       },
       python: {
         method: 'swaps.create',
         example:
-          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nswap = client.swaps.create(\n    account_id="account_id",\n    amount="amount",\n    from_token="from_token",\n    to_token="to_token",\n)\nprint(swap.id)',
+          'import os\nfrom whop_sdk import Whop\n\nclient = Whop(\n    api_key=os.environ.get("WHOP_API_KEY"),  # This is the default and can be omitted\n)\nswap = client.swaps.create(\n    account_id="account_id",\n    from_token="from_token",\n    to_token="to_token",\n)\nprint(swap.account_id)',
       },
       typescript: {
         method: 'client.swaps.create',
         example:
-          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  amount: 'amount',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap.id);",
+          "import Whop from '@whop/sdk';\n\nconst client = new Whop({\n  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted\n});\n\nconst swap = await client.swaps.create({\n  account_id: 'account_id',\n  from_token: 'from_token',\n  to_token: 'to_token',\n});\n\nconsole.log(swap.account_id);",
       },
       http: {
         example:
-          'curl https://api.whop.com/api/v1/swaps \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "amount": "amount",\n          "from_token": "from_token",\n          "to_token": "to_token"\n        }\'',
+          'curl https://api.whop.com/api/v1/swaps \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "account_id": "account_id",\n          "from_token": "from_token",\n          "to_token": "to_token"\n        }\'',
       },
     },
   },
