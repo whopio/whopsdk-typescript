@@ -47,7 +47,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">ReceiptStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ReleaseMethod</a></code>
 - <code><a href="./src/resources/shared.ts">Shipment</a></code>
-- <code><a href="./src/resources/shared.ts">ShipmentCarrier</a></code>
 - <code><a href="./src/resources/shared.ts">ShipmentStatus</a></code>
 - <code><a href="./src/resources/shared.ts">ShipmentSubstatus</a></code>
 - <code><a href="./src/resources/shared.ts">SupportChannel</a></code>

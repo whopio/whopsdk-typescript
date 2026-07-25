@@ -90,11 +90,6 @@ export interface ShipmentListResponse {
   id: string;
 
   /**
-   * The shipping carrier responsible for delivering this shipment.
-   */
-  carrier: Shared.ShipmentCarrier;
-
-  /**
    * The datetime the shipment was created.
    */
   created_at: string;

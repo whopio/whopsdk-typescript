@@ -2177,7 +2177,6 @@ export declare namespace Whop {
   export type ReceiptStatus = API.ReceiptStatus;
   export type ReleaseMethod = API.ReleaseMethod;
   export type Shipment = API.Shipment;
-  export type ShipmentCarrier = API.ShipmentCarrier;
   export type ShipmentStatus = API.ShipmentStatus;
   export type ShipmentSubstatus = API.ShipmentSubstatus;
   export type SupportChannel = API.SupportChannel;
