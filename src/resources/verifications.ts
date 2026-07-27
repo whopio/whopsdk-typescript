@@ -83,7 +83,8 @@ export type VerificationStatus =
   | 'expired'
   | 'abandoned'
   | 'review'
-  | 'action_required';
+  | 'action_required'
+  | 'manual_review';
 
 /**
  * An identity verification session used to confirm a person or entity's identity

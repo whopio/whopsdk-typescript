@@ -32,7 +32,10 @@ export type PayoutAccountCalculatedStatuses =
   | 'action_required'
   | 'pending_verification'
   | 'verification_failed'
-  | 'not_started';
+  | 'manual_review'
+  | 'denied'
+  | 'not_started'
+  | 'blocked_by_parent';
 
 /**
  * An object representing an account used for payouts.
