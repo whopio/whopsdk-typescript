@@ -235,6 +235,11 @@ export interface MembershipListResponse {
   cancel_option: CancelOptions | null;
 
   /**
+   * The state of a membership after a customer provides a cancelation reason.
+   */
+  cancelation_status: 'won_back' | 'left' | 'canceling' | null;
+
+  /**
    * The time the customer initiated cancellation of this membership. As a Unix
    * timestamp. Null if the membership has not been canceled.
    */
@@ -267,6 +272,18 @@ export interface MembershipListResponse {
    * The available currencies on the platform
    */
   currency: Shared.Currency | null;
+
+  /**
+   * The recurring renewal price for this membership, formatted with currency symbol
+   * and billing interval. Null if the membership is not recurring.
+   */
+  formatted_renewal_price: string | null;
+
+  /**
+   * The amount the customer paid when first purchasing this membership, formatted
+   * with currency symbol.
+   */
+  initial_price_paid: string;
 
   /**
    * The time the user first joined the company associated with this membership. As a
@@ -448,6 +465,12 @@ export namespace MembershipListResponse {
     name: string | null;
 
     /**
+     * The URL of the user's profile picture. Use profilePicture for the full
+     * attachment object.
+     */
+    profile_pic: string;
+
+    /**
      * The user's unique username shown on their public profile.
      */
     username: string;
@@ -474,6 +497,11 @@ export interface MembershipListParams extends CursorPageParams {
   cancel_options?: Array<CancelOptions> | null;
 
   /**
+   * The state of a membership after a customer provides a cancelation reason.
+   */
+  cancelation_status?: 'won_back' | 'left' | 'canceling' | null;
+
+  /**
    * The unique identifier of the company to list memberships for. Required when
    * using an API key.
    */
@@ -498,6 +526,18 @@ export interface MembershipListParams extends CursorPageParams {
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;
+
+  /**
+   * Filter memberships by whether they have a structured or free-text cancellation
+   * reason.
+   */
+  has_cancelation_reason?: boolean | null;
+
+  /**
+   * When filtering by the other cancellation option, also include memberships that
+   * only have a free-text cancellation reason.
+   */
+  include_text_only_cancelation_reasons?: boolean | null;
 
   /**
    * Returns the last _n_ elements from the list.

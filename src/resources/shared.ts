@@ -2064,6 +2064,11 @@ export interface Membership {
   cancel_option: MembershipsAPI.CancelOptions | null;
 
   /**
+   * The state of a membership after a customer provides a cancelation reason.
+   */
+  cancelation_status: 'won_back' | 'left' | 'canceling' | null;
+
+  /**
    * The time the customer initiated cancellation of this membership. As a Unix
    * timestamp. Null if the membership has not been canceled.
    */
@@ -2102,6 +2107,18 @@ export interface Membership {
    * at the time of purchase.
    */
   custom_field_responses: Array<Membership.CustomFieldResponse>;
+
+  /**
+   * The recurring renewal price for this membership, formatted with currency symbol
+   * and billing interval. Null if the membership is not recurring.
+   */
+  formatted_renewal_price: string | null;
+
+  /**
+   * The amount the customer paid when first purchasing this membership, formatted
+   * with currency symbol.
+   */
+  initial_price_paid: string;
 
   /**
    * The time the user first joined the company associated with this membership. As a
@@ -2301,6 +2318,12 @@ export namespace Membership {
      * The user's display name shown on their public profile.
      */
     name: string | null;
+
+    /**
+     * The URL of the user's profile picture. Use profilePicture for the full
+     * attachment object.
+     */
+    profile_pic: string;
 
     /**
      * The user's unique username shown on their public profile.
