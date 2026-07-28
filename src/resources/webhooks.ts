@@ -1625,7 +1625,7 @@ export namespace IdentityProfileApprovedWebhookEvent {
      * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
      * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+    status: 'not_started' | 'pending' | 'manual_review' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -1909,7 +1909,7 @@ export namespace IdentityProfileRejectedWebhookEvent {
      * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
      * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+    status: 'not_started' | 'pending' | 'manual_review' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -2193,7 +2193,7 @@ export namespace IdentityProfileNeedsActionWebhookEvent {
      * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
      * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+    status: 'not_started' | 'pending' | 'manual_review' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
@@ -2477,7 +2477,7 @@ export namespace IdentityProfileUpdatedWebhookEvent {
      * (whether a verification, payout, or audit RFI) — i.e. the merchant must submit
      * something before it is in good standing.
      */
-    status: 'not_started' | 'pending' | 'approved' | 'rejected' | 'action_required';
+    status: 'not_started' | 'pending' | 'manual_review' | 'approved' | 'rejected' | 'action_required';
 
     /**
      * When the identity profile was last synced from a verification.
