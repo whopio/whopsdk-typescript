@@ -211,6 +211,12 @@ export interface Dispute {
   reason: string | null;
 
   /**
+   * The card network reason code for the dispute. Null when the payment processor
+   * did not provide one.
+   */
+  reason_code: string | null;
+
+  /**
    * The refund policy document uploaded as dispute evidence. Null if no refund
    * policy has been provided.
    */
@@ -638,6 +644,12 @@ export interface DisputeListResponse {
    * A human-readable reason for the dispute.
    */
   reason: string | null;
+
+  /**
+   * The card network reason code for the dispute. Null when the payment processor
+   * did not provide one.
+   */
+  reason_code: string | null;
 
   /**
    * The current status of the dispute lifecycle, such as needs_response,
