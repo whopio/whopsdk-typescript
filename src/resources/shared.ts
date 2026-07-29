@@ -1752,6 +1752,29 @@ export interface Invoice {
   id: string;
 
   /**
+   * The date and time when the invoice will be automatically finalized. For
+   * charge_automatically, triggers an automatic charge. For send_invoice, sends the
+   * invoice email at the specified time.
+   */
+  automatically_finalizes_at: string | null;
+
+  /**
+   * Whether the invoice includes a buyer processing fee on top of the plan price.
+   */
+  charge_buyer_fee: boolean;
+
+  /**
+   * The method used to collect payment for this invoice, such as automatic charging
+   * or manual payment.
+   */
+  collection_method: CollectionMethod;
+
+  /**
+   * The company that issued this invoice.
+   */
+  company: Invoice.Company;
+
+  /**
    * The datetime the invoice was created.
    */
   created_at: string;
@@ -1760,6 +1783,12 @@ export interface Invoice {
    * The plan that this invoice charges for.
    */
   current_plan: Invoice.CurrentPlan;
+
+  /**
+   * The full name of the customer this invoice is addressed to. Null if no name is
+   * on file.
+   */
+  customer_name: string | null;
 
   /**
    * The deadline by which payment is expected. Null if the invoice is collected
@@ -1785,14 +1814,42 @@ export interface Invoice {
   line_items: Array<Invoice.LineItem>;
 
   /**
+   * The billing/mailing address associated with this invoice, if one was provided at
+   * creation time.
+   */
+  mailing_address: Invoice.MailingAddress | null;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
 
   /**
+   * The checkout URL where the customer can pay this invoice online, with their
+   * email address pre-filled and locked.
+   */
+  pay_online_url: string | null;
+
+  /**
+   * The product that this invoice was generated for.
+   */
+  product: Invoice.Product;
+
+  /**
    * The current payment status of the invoice, such as draft, open, paid, or void.
    */
   status: InvoiceStatus;
+
+  /**
+   * The date that defines when the subscription billing cycle starts. When set on a
+   * renewal plan invoice, all future billing periods anchor to this date.
+   */
+  subscription_billing_anchor_at: string | null;
+
+  /**
+   * The datetime the invoice was last updated.
+   */
+  updated_at: string;
 
   /**
    * The user this invoice is addressed to. Null if the user account has been
@@ -1802,6 +1859,16 @@ export interface Invoice {
 }
 
 export namespace Invoice {
+  /**
+   * The company that issued this invoice.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+  }
+
   /**
    * The plan that this invoice charges for.
    */
@@ -1816,6 +1883,12 @@ export namespace Invoice {
      * amounts on the plan are denominated in this currency.
      */
     currency: Shared.Currency;
+
+    /**
+     * A text description of the plan visible to customers. Maximum 1000 characters.
+     * Null if no description is set.
+     */
+    description: string | null;
 
     /**
      * The formatted price (including currency) for the plan.
@@ -1855,6 +1928,68 @@ export namespace Invoice {
   }
 
   /**
+   * The billing/mailing address associated with this invoice, if one was provided at
+   * creation time.
+   */
+  export interface MailingAddress {
+    /**
+     * The city of the address.
+     */
+    city: string | null;
+
+    /**
+     * The country of the address.
+     */
+    country: string | null;
+
+    /**
+     * The line 1 of the address.
+     */
+    line1: string | null;
+
+    /**
+     * The line 2 of the address.
+     */
+    line2: string | null;
+
+    /**
+     * The name of the customer.
+     */
+    name: string | null;
+
+    /**
+     * The phone number of the customer.
+     */
+    phone: string | null;
+
+    /**
+     * The postal code of the address.
+     */
+    postal_code: string | null;
+
+    /**
+     * The state of the address.
+     */
+    state: string | null;
+  }
+
+  /**
+   * The product that this invoice was generated for.
+   */
+  export interface Product {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * The display name of the product shown to customers on the product page and in
+     * search results.
+     */
+    title: string;
+  }
+
+  /**
    * The user this invoice is addressed to. Null if the user account has been
    * removed.
    */
@@ -1863,6 +1998,12 @@ export namespace Invoice {
      * The unique identifier for the user.
      */
     id: string;
+
+    /**
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
+     */
+    email: string | null;
 
     /**
      * The user's display name shown on their public profile.

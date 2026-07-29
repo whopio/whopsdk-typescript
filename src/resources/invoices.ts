@@ -21,6 +21,7 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:create`
+   * - `member:email:read`
    *
    * @example
    * ```ts
@@ -42,6 +43,7 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:basic:read`
+   * - `member:email:read`
    *
    * @example
    * ```ts
@@ -60,6 +62,7 @@ export class Invoices extends APIResource {
    * Required permissions:
    *
    * - `invoice:update`
+   * - `member:email:read`
    *
    * @example
    * ```ts
