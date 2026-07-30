@@ -399,7 +399,7 @@ export interface InvoiceCreatedWebhookEvent {
   type: 'invoice.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -433,7 +433,7 @@ export interface InvoiceMarkedUncollectibleWebhookEvent {
   type: 'invoice.marked_uncollectible';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -467,7 +467,7 @@ export interface InvoicePaidWebhookEvent {
   type: 'invoice.paid';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -501,7 +501,7 @@ export interface InvoicePastDueWebhookEvent {
   type: 'invoice.past_due';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -535,7 +535,7 @@ export interface InvoiceVoidedWebhookEvent {
   type: 'invoice.voided';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -568,7 +568,7 @@ export interface MembershipActivatedWebhookEvent {
   type: 'membership.activated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -601,7 +601,7 @@ export interface MembershipDeactivatedWebhookEvent {
   type: 'membership.deactivated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -634,7 +634,7 @@ export interface MembershipTrialEndingSoonWebhookEvent {
   type: 'membership.trial_ending_soon';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -666,7 +666,7 @@ export interface EntryCreatedWebhookEvent {
   type: 'entry.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -698,7 +698,7 @@ export interface EntryApprovedWebhookEvent {
   type: 'entry.approved';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -730,7 +730,7 @@ export interface EntryDeniedWebhookEvent {
   type: 'entry.denied';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -762,7 +762,7 @@ export interface EntryDeletedWebhookEvent {
   type: 'entry.deleted';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -795,7 +795,7 @@ export interface SetupIntentRequiresActionWebhookEvent {
   type: 'setup_intent.requires_action';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -828,7 +828,7 @@ export interface SetupIntentSucceededWebhookEvent {
   type: 'setup_intent.succeeded';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -861,7 +861,7 @@ export interface SetupIntentCanceledWebhookEvent {
   type: 'setup_intent.canceled';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -894,7 +894,7 @@ export interface LedgerAccountFundsAvailableWebhookEvent {
   type: 'ledger_account.funds_available';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1224,7 +1224,7 @@ export interface WithdrawalCreatedWebhookEvent {
   type: 'withdrawal.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1257,7 +1257,7 @@ export interface WithdrawalUpdatedWebhookEvent {
   type: 'withdrawal.updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1290,7 +1290,7 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   type: 'course_lesson_interaction.completed';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1323,7 +1323,7 @@ export interface PayoutMethodCreatedWebhookEvent {
   type: 'payout_method.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1450,7 +1450,7 @@ export interface VerificationSucceededWebhookEvent {
   type: 'verification.succeeded';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1512,7 +1512,7 @@ export interface IdentityProfileApprovedWebhookEvent {
   type: 'identity_profile.approved';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -1796,7 +1796,7 @@ export interface IdentityProfileRejectedWebhookEvent {
   type: 'identity_profile.rejected';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -2080,7 +2080,7 @@ export interface IdentityProfileNeedsActionWebhookEvent {
   type: 'identity_profile.needs_action';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -2364,7 +2364,7 @@ export interface IdentityProfileUpdatedWebhookEvent {
   type: 'identity_profile.updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -2647,7 +2647,7 @@ export interface PayoutAccountStatusUpdatedWebhookEvent {
   type: 'payout_account.status_updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -2817,7 +2817,7 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
   type: 'resolution_center_case.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3074,7 +3074,7 @@ export interface ResolutionCenterCaseUpdatedWebhookEvent {
   type: 'resolution_center_case.updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3331,7 +3331,7 @@ export interface ResolutionCenterCaseDecidedWebhookEvent {
   type: 'resolution_center_case.decided';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3584,7 +3584,7 @@ export interface ChatMessageCreatedWebhookEvent {
   type: 'chat.message.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3644,7 +3644,7 @@ export interface ChatReactionCreatedWebhookEvent {
   type: 'chat.reaction.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3713,7 +3713,7 @@ export interface PaymentCreatedWebhookEvent {
   type: 'payment.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3746,7 +3746,7 @@ export interface PaymentSucceededWebhookEvent {
   type: 'payment.succeeded';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3779,7 +3779,7 @@ export interface PaymentFailedWebhookEvent {
   type: 'payment.failed';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3812,7 +3812,7 @@ export interface PaymentPendingWebhookEvent {
   type: 'payment.pending';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3845,7 +3845,7 @@ export interface DisputeCreatedWebhookEvent {
   type: 'dispute.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3878,7 +3878,7 @@ export interface DisputeUpdatedWebhookEvent {
   type: 'dispute.updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -3911,7 +3911,7 @@ export interface RefundCreatedWebhookEvent {
   type: 'refund.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -4221,7 +4221,7 @@ export interface RefundUpdatedWebhookEvent {
   type: 'refund.updated';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -4531,7 +4531,7 @@ export interface DisputeAlertCreatedWebhookEvent {
   type: 'dispute_alert.created';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
@@ -4795,7 +4795,7 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   type: 'membership.cancel_at_period_end_changed';
 
   /**
-   * The company ID that this webhook event is associated with
+   * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
 }
