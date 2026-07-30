@@ -160,6 +160,14 @@ export interface Webhook {
   api_version: APIVersion;
 
   /**
+   * The dated API version (Api-Version-Date) that v1 payloads for this endpoint are
+   * pinned to: events serialize exactly like a REST read at this version (the native
+   * serializer where the resource has one). Null when unpinned — legacy (v2/v5)
+   * webhooks, and v1 webhooks on the legacy payload shape.
+   */
+  api_version_date: string | null;
+
+  /**
    * Whether events are sent for child resources. For example, if the webhook is on a
    * company, enabling this sends events only from the company's sub-merchants (child
    * companies).
@@ -266,6 +274,14 @@ export interface WebhookCreateResponse {
   api_version: APIVersion;
 
   /**
+   * The dated API version (Api-Version-Date) that v1 payloads for this endpoint are
+   * pinned to: events serialize exactly like a REST read at this version (the native
+   * serializer where the resource has one). Null when unpinned — legacy (v2/v5)
+   * webhooks, and v1 webhooks on the legacy payload shape.
+   */
+  api_version_date: string | null;
+
+  /**
    * Whether events are sent for child resources. For example, if the webhook is on a
    * company, enabling this sends events only from the company's sub-merchants (child
    * companies).
@@ -326,6 +342,14 @@ export interface WebhookListResponse {
   api_version: APIVersion;
 
   /**
+   * The dated API version (Api-Version-Date) that v1 payloads for this endpoint are
+   * pinned to: events serialize exactly like a REST read at this version (the native
+   * serializer where the resource has one). Null when unpinned — legacy (v2/v5)
+   * webhooks, and v1 webhooks on the legacy payload shape.
+   */
+  api_version_date: string | null;
+
+  /**
    * Whether events are sent for child resources. For example, if the webhook is on a
    * company, enabling this sends events only from the company's sub-merchants (child
    * companies).
@@ -382,6 +406,11 @@ export interface InvoiceCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An invoice represents an itemized bill sent by a company to a customer for a
    * specific product and plan, tracking the amount owed, due date, and payment
    * status.
@@ -414,6 +443,11 @@ export interface InvoiceMarkedUncollectibleWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * An invoice represents an itemized bill sent by a company to a customer for a
@@ -450,6 +484,11 @@ export interface InvoicePaidWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An invoice represents an itemized bill sent by a company to a customer for a
    * specific product and plan, tracking the amount owed, due date, and payment
    * status.
@@ -482,6 +521,11 @@ export interface InvoicePastDueWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * An invoice represents an itemized bill sent by a company to a customer for a
@@ -518,6 +562,11 @@ export interface InvoiceVoidedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An invoice represents an itemized bill sent by a company to a customer for a
    * specific product and plan, tracking the amount owed, due date, and payment
    * status.
@@ -550,6 +599,11 @@ export interface MembershipActivatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A membership represents an active relationship between a user and a product. It
@@ -585,6 +639,11 @@ export interface MembershipDeactivatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A membership represents an active relationship between a user and a product. It
    * tracks the user's access, billing status, and renewal schedule.
    */
@@ -616,6 +675,11 @@ export interface MembershipTrialEndingSoonWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A membership represents an active relationship between a user and a product. It
@@ -651,6 +715,11 @@ export interface EntryCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
@@ -681,6 +750,11 @@ export interface EntryApprovedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * An entry represents a user's signup for a waitlisted plan.
@@ -715,6 +789,11 @@ export interface EntryDeniedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
@@ -747,6 +826,11 @@ export interface EntryDeletedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An entry represents a user's signup for a waitlisted plan.
    */
   data: Shared.Entry;
@@ -777,6 +861,11 @@ export interface SetupIntentRequiresActionWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A setup intent allows a user to save a payment method for future use without
@@ -812,6 +901,11 @@ export interface SetupIntentSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A setup intent allows a user to save a payment method for future use without
    * making an immediate purchase.
    */
@@ -845,6 +939,11 @@ export interface SetupIntentCanceledWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A setup intent allows a user to save a payment method for future use without
    * making an immediate purchase.
    */
@@ -876,6 +975,11 @@ export interface LedgerAccountFundsAvailableWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A ledger account represents a financial account on Whop that can hold many
@@ -1208,6 +1312,11 @@ export interface WithdrawalCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A withdrawal represents a request to transfer funds from a ledger account to an
    * external payout method.
    */
@@ -1239,6 +1348,11 @@ export interface WithdrawalUpdatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A withdrawal represents a request to transfer funds from a ledger account to an
@@ -1274,6 +1388,11 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A record of a user's progress on a specific lesson, tracking whether they have
    * completed it.
    */
@@ -1305,6 +1424,11 @@ export interface PayoutMethodCreatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A configured payout destination where a user receives earned funds, such as a
@@ -1434,6 +1558,11 @@ export interface VerificationSucceededWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An identity verification session used to confirm a person or entity's identity
    * for payout account eligibility.
    */
@@ -1494,6 +1623,11 @@ export interface IdentityProfileApprovedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A consolidated identity or business profile synced from verification provider
@@ -1780,6 +1914,11 @@ export interface IdentityProfileRejectedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A consolidated identity or business profile synced from verification provider
    * data.
    */
@@ -2062,6 +2201,11 @@ export interface IdentityProfileNeedsActionWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A consolidated identity or business profile synced from verification provider
@@ -2348,6 +2492,11 @@ export interface IdentityProfileUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A consolidated identity or business profile synced from verification provider
    * data.
    */
@@ -2632,6 +2781,11 @@ export interface PayoutAccountStatusUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * An object representing an account used for payouts.
    */
   data: PayoutAccountStatusUpdatedWebhookEvent.Data;
@@ -2799,6 +2953,11 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A resolution center case is a dispute or support case between a user and a
@@ -3058,6 +3217,11 @@ export interface ResolutionCenterCaseUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A resolution center case is a dispute or support case between a user and a
    * company, tracking the issue, status, and outcome.
    */
@@ -3313,6 +3477,11 @@ export interface ResolutionCenterCaseDecidedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A resolution center case is a dispute or support case between a user and a
@@ -3571,6 +3740,11 @@ export interface ChatMessageCreatedWebhookEvent {
    */
   api_version: 'v1';
 
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
   data: ChatMessageCreatedWebhookEvent.Data;
 
   /**
@@ -3630,6 +3804,11 @@ export interface ChatReactionCreatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   data: ChatReactionCreatedWebhookEvent.Data;
 
@@ -3697,6 +3876,11 @@ export interface PaymentCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A payment represents a completed or attempted charge. Payments track the amount,
    * status, currency, and payment method used.
    */
@@ -3728,6 +3912,11 @@ export interface PaymentSucceededWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A payment represents a completed or attempted charge. Payments track the amount,
@@ -3763,6 +3952,11 @@ export interface PaymentFailedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A payment represents a completed or attempted charge. Payments track the amount,
    * status, currency, and payment method used.
    */
@@ -3794,6 +3988,11 @@ export interface PaymentPendingWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A payment represents a completed or attempted charge. Payments track the amount,
@@ -3829,6 +4028,11 @@ export interface DisputeCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A dispute is a chargeback or payment challenge filed against a company,
    * including evidence and response status.
    */
@@ -3862,6 +4066,11 @@ export interface DisputeUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A dispute is a chargeback or payment challenge filed against a company,
    * including evidence and response status.
    */
@@ -3893,6 +4102,11 @@ export interface RefundCreatedWebhookEvent {
    * The API version for this webhook
    */
   api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
 
   /**
    * A refund represents a full or partial reversal of a payment, including the
@@ -4205,6 +4419,11 @@ export interface RefundUpdatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A refund represents a full or partial reversal of a payment, including the
    * amount, status, and payment provider.
    */
@@ -4515,6 +4734,11 @@ export interface DisputeAlertCreatedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A dispute alert represents an early warning notification from a payment
    * processor about a potential dispute or chargeback.
    */
@@ -4779,6 +5003,11 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   api_version: 'v1';
 
   /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
    * A membership represents an active relationship between a user and a product. It
    * tracks the user's access, billing status, and renewal schedule.
    */
@@ -4855,6 +5084,14 @@ export interface WebhookCreateParams {
   api_version?: APIVersion | null;
 
   /**
+   * The dated API version (Api-Version-Date) the webhook's payloads are pinned to:
+   * events serialize exactly like a REST read at this version (the native serializer
+   * where the resource has one). Only applies to v1 webhooks. Omit to leave the
+   * webhook unpinned on the legacy payload shape.
+   */
+  api_version_date?: string | null;
+
+  /**
    * Whether or not to send events for child resources. For example, if the webhook
    * is created for a Company, enabling this will only send events from the Company's
    * sub-merchants (child companies).
@@ -4882,6 +5119,14 @@ export interface WebhookUpdateParams {
    * The different API versions
    */
   api_version?: APIVersion | null;
+
+  /**
+   * The dated API version (Api-Version-Date) to pin this webhook's payloads to:
+   * events serialize exactly like a REST read at this version (the native serializer
+   * where the resource has one). Only applies to v1 webhooks. Pass null to unpin,
+   * returning to the legacy payload shape.
+   */
+  api_version_date?: string | null;
 
   /**
    * Whether or not to send events for child resources.
