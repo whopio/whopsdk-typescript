@@ -159,4 +159,33 @@ describe('resource ads', () => {
       ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
+
+  // Mock server tests are disabled
+  test.skip('duplicate', async () => {
+    const responsePromise = client.ads.duplicate('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('duplicate: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.duplicate(
+        'id',
+        {
+          count: 0,
+          preserve_engagement: true,
+          target_ad_group_id: 'target_ad_group_id',
+          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
 });

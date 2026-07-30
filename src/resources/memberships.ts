@@ -2,70 +2,44 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
+import { MembershipsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * A Membership is a customer's purchase of a plan: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
+ *
+ * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, and update metadata.
+ */
 export class Memberships extends APIResource {
   /**
-   * Returns a paginated list of memberships, with optional filtering by product,
-   * plan, status, and user.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const membershipListResponse of client.memberships.list()) {
-   *   // ...
-   * }
-   * ```
+   * Lists memberships. `account_id` lists an account's memberships (seller side);
+   * `user_id` lists the caller's own memberships across every account (buyer side).
+   * With neither, an account API key lists its account's memberships and a user
+   * credential lists their own.
    */
   list(
     query: MembershipListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<MembershipListResponsesCursorPage, MembershipListResponse> {
-    return this._client.getAPIList('/memberships', CursorPage<MembershipListResponse>, { query, ...options });
+  ): PagePromise<MembershipsCursorPage, Shared.Membership> {
+    return this._client.getAPIList('/memberships', CursorPage<Shared.Membership>, { query, ...options });
   }
 
   /**
-   * Retrieves the details of an existing membership.
-   *
-   * Required permissions:
-   *
-   * - `member:basic:read`
-   * - `member:email:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.retrieve(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Retrieves a membership by ID or license key. Accessible to the account and to
+   * the membership's own user.
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
     return this._client.get(path`/memberships/${id}`, options);
   }
 
   /**
-   * Update a membership's metadata or other mutable properties.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.update(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Updates a membership: merge metadata key-value pairs, or toggle
+   * `cancel_at_period_end` — `true` schedules the cancellation for the end of the
+   * current billing period, `false` reverses a pending one.
    */
   update(
     id: string,
@@ -76,149 +50,85 @@ export class Memberships extends APIResource {
   }
 
   /**
-   * Cancel a membership either immediately or at the end of the current billing
-   * period. Immediate cancellation revokes access right away.
-   *
-   * Required permissions:
-   *
-   * - `membership:cancel`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.cancel(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Cancels a membership immediately, revoking access right away. To cancel at the
+   * end of the billing period instead, update the membership with
+   * `cancel_at_period_end: true`.
    */
   cancel(
     id: string,
-    body: MembershipCancelParams | null | undefined = {},
+    params: MembershipCancelParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/cancel`, { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/memberships/${id}/cancel`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Pause a membership's recurring payments. The customer retains access but will
-   * not be charged until the membership is resumed.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.pause(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Pauses a membership's recurring payment collection. The customer keeps access
+   * but is not charged until the membership is resumed.
    */
   pause(
     id: string,
-    body: MembershipPauseParams | null | undefined = {},
+    params: MembershipPauseParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/pause`, { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/memberships/${id}/pause`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Resume a previously paused membership's recurring payments. Billing resumes on
-   * the next cycle.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.resume(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Resumes a previously paused membership's recurring payment collection. Billing
+   * resumes on the next cycle.
    */
-  resume(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/resume`, options);
-  }
-
-  /**
-   * Reverse a pending cancellation for a membership that was scheduled to cancel at
-   * period end.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.uncancel(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/uncancel`, options);
-  }
-
-  /**
-   * Add free days to extend a membership's current billing period, expiration date,
-   * or Stripe trial.
-   *
-   * Required permissions:
-   *
-   * - `member:manage`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.addFreeDays(
-   *   'mem_xxxxxxxxxxxxxx',
-   *   { free_days: 42 },
-   * );
-   * ```
-   */
-  addFreeDays(
+  resume(
     id: string,
-    body: MembershipAddFreeDaysParams,
+    params: MembershipResumeParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
+    const { 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/memberships/${id}/resume`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Re-run access fulfillment for a membership. Recomputes the member's content
-   * access on Whop, re-validates their Discord link (re-adding them to the server
-   * and re-assigning roles if needed), and re-fulfills TradingView indicator access.
-   * Telegram access is invite-based and cannot be resynced here. The outcome is
-   * written to the membership's logs.
-   *
-   * Required permissions:
-   *
-   * - `membership:resync_access`
-   * - `member:email:read`
-   * - `member:basic:read`
-   *
-   * @example
-   * ```ts
-   * const membership = await client.memberships.resyncAccess(
-   *   'mem_xxxxxxxxxxxxxx',
-   * );
-   * ```
+   * Adds free days to a membership, extending its current billing period, expiration
+   * date, or trial depending on the plan type.
    */
-  resyncAccess(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
-    return this._client.post(path`/memberships/${id}/resync_access`, options);
+  extend(
+    id: string,
+    params: MembershipExtendParams,
+    options?: RequestOptions,
+  ): APIPromise<Shared.Membership> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post(path`/memberships/${id}/extend`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
-
-export type MembershipListResponsesCursorPage = CursorPage<MembershipListResponse>;
 
 /**
  * The different reasons a user can choose for why they are canceling their
@@ -233,367 +143,145 @@ export type CancelOptions =
   | 'other'
   | 'testing';
 
-/**
- * A membership represents an active relationship between a user and a product. It
- * tracks the user's access, billing status, and renewal schedule.
- */
-export interface MembershipListResponse {
-  /**
-   * The unique identifier for the membership.
-   */
-  id: string;
-
-  /**
-   * Whether this membership is set to cancel at the end of the current billing
-   * cycle. Only applies to memberships with a recurring plan.
-   */
-  cancel_at_period_end: boolean;
-
-  /**
-   * The different reasons a user can choose for why they are canceling their
-   * membership.
-   */
-  cancel_option: CancelOptions | null;
-
-  /**
-   * The time the customer initiated cancellation of this membership. As a Unix
-   * timestamp. Null if the membership has not been canceled.
-   */
-  canceled_at: string | null;
-
-  /**
-   * Free-text explanation provided by the customer when canceling. Null if the
-   * customer did not provide a reason.
-   */
-  cancellation_reason: string | null;
-
-  /**
-   * The ID of the checkout session/configuration that produced this membership, if
-   * any. Use this to map memberships back to the checkout configuration that created
-   * them.
-   */
-  checkout_configuration_id: string | null;
-
-  /**
-   * The company this membership belongs to.
-   */
-  company: MembershipListResponse.Company;
-
-  /**
-   * The datetime the membership was created.
-   */
-  created_at: string;
-
-  /**
-   * The available currencies on the platform
-   */
-  currency: Shared.Currency | null;
-
-  /**
-   * The time the user first joined the company associated with this membership. As a
-   * Unix timestamp. Null if the member record does not exist.
-   */
-  joined_at: string | null;
-
-  /**
-   * The software license key associated with this membership. Only present if the
-   * product includes a Whop Software Licensing experience. Null otherwise.
-   */
-  license_key: string | null;
-
-  /**
-   * The URL where the customer can view and manage this membership, including
-   * cancellation and plan changes. Null if no member record exists.
-   */
-  manage_url: string | null;
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
-   */
-  member: MembershipListResponse.Member | null;
-
-  /**
-   * Custom key-value pairs for the membership (commonly used for software licensing,
-   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * Whether recurring payment collection for this membership is temporarily paused
-   * by the company.
-   */
-  payment_collection_paused: boolean;
-
-  /**
-   * The plan the customer purchased to create this membership.
-   */
-  plan: MembershipListResponse.Plan;
-
-  /**
-   * The product this membership grants access to.
-   */
-  product: MembershipListResponse.Product;
-
-  /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
-   */
-  promo_code: MembershipListResponse.PromoCode | null;
-
-  /**
-   * The end of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
-   */
-  renewal_period_end: string | null;
-
-  /**
-   * The start of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
-   */
-  renewal_period_start: string | null;
-
-  /**
-   * The current lifecycle status of the membership (e.g., active, trialing,
-   * past_due, canceled, expired, completed).
-   */
-  status: Shared.MembershipStatus;
-
-  /**
-   * The datetime the membership was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  user: MembershipListResponse.User | null;
-}
-
-export namespace MembershipListResponse {
-  /**
-   * The company this membership belongs to.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The display name of the company shown to customers.
-     */
-    title: string;
-  }
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
-   */
-  export interface Member {
-    /**
-     * The unique identifier for the member.
-     */
-    id: string;
-  }
-
-  /**
-   * The plan the customer purchased to create this membership.
-   */
-  export interface Plan {
-    /**
-     * The unique identifier for the plan.
-     */
-    id: string;
-
-    /**
-     * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value.
-     */
-    metadata: { [key: string]: unknown } | null;
-  }
-
-  /**
-   * The product this membership grants access to.
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
-
-    /**
-     * Custom key-value pairs stored on the product and included in payment and
-     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-     * per string value.
-     */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
-
-  /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
-   */
-  export interface PromoCode {
-    /**
-     * The unique identifier for the promo code.
-     */
-    id: string;
-  }
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  export interface User {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-}
-
 export interface MembershipListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * The account to list memberships for (`biz_` tag). Requires read access to the
+   * account.
    */
-  before?: string | null;
+  account_id?: string;
 
   /**
-   * Filter to only memberships matching these cancellation reasons.
+   * Cursor to paginate backwards from.
    */
-  cancel_options?: Array<CancelOptions> | null;
+  before?: string;
 
   /**
-   * The unique identifier of the company to list memberships for. Required when
-   * using an API key.
+   * Only memberships created after this ISO 8601 timestamp.
    */
-  company_id?: string | null;
+  created_after?: string;
 
   /**
-   * Only return memberships created after this timestamp.
+   * Only memberships created before this ISO 8601 timestamp.
    */
-  created_after?: string | null;
+  created_before?: string;
 
   /**
-   * Only return memberships created before this timestamp.
+   * Sort direction.
    */
-  created_before?: string | null;
+  direction?: 'asc' | 'desc';
 
   /**
-   * The direction of the sort.
+   * Number of memberships to return from the start of the window.
    */
-  direction?: Shared.Direction | null;
+  first?: number;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Number of memberships to return from the end of the window.
    */
-  first?: number | null;
+  last?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Sort field.
    */
-  last?: number | null;
+  order?: 'created_at';
 
   /**
-   * Which columns can be used to sort.
+   * Filter to memberships of this plan (`plan_` tag). Repeat as plan_ids[] for
+   * several.
    */
-  order?: 'id' | 'created_at' | 'status' | 'canceled_at' | 'date_joined' | 'total_spend' | null;
+  plan_id?: string;
 
   /**
-   * Filter to only memberships belonging to these plan identifiers.
+   * Filter to memberships of this product (`prod_` tag). Repeat as product_ids[] for
+   * several.
    */
-  plan_ids?: Array<string> | null;
+  product_id?: string;
 
   /**
-   * Filter to only memberships belonging to these product identifiers.
+   * Filter by billing state. `canceling` matches active memberships set to cancel at
+   * period end; `paused` matches memberships with payment collection paused.
    */
-  product_ids?: Array<string> | null;
+  status?: 'active' | 'trialing' | 'past_due' | 'completed' | 'canceled' | 'expired' | 'canceling' | 'paused';
 
   /**
-   * Filter to only memberships that used these promo code identifiers.
+   * List the caller's own memberships. Must be `me` or the authenticated user's
+   * `user_` tag.
    */
-  promo_code_ids?: Array<string> | null;
-
-  /**
-   * Filter to only memberships matching these statuses.
-   */
-  statuses?: Array<Shared.MembershipStatus> | null;
-
-  /**
-   * Filter to only memberships belonging to these user identifiers.
-   */
-  user_ids?: Array<string> | null;
+  user_id?: string;
 }
 
 export interface MembershipUpdateParams {
   /**
-   * A JSON object of key-value pairs to store on the membership. Replaces any
-   * existing metadata.
+   * `true` cancels at the end of the current billing period (the customer keeps
+   * access until then); `false` reverses a pending cancellation.
    */
-  metadata?: { [key: string]: unknown } | null;
+  cancel_at_period_end?: boolean;
+
+  /**
+   * Key-value pairs to merge into the membership's metadata. Pass an empty object to
+   * clear it.
+   */
+  metadata?: unknown;
 }
 
 export interface MembershipCancelParams {
   /**
-   * The mode of cancellation for a membership
+   * Body param: Free-form note recording why the membership was canceled.
    */
-  cancellation_mode?: 'at_period_end' | 'immediate' | null;
+  reason?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export interface MembershipPauseParams {
   /**
-   * When the membership should automatically resume payment collection. If not
-   * provided, the membership stays paused until manually resumed.
+   * Body param: ISO 8601 time to automatically resume payment collection. Must be in
+   * the future; only supported for memberships billed by Whop.
    */
-  resumes_at?: string | null;
+  until?: string;
 
   /**
-   * Whether to void any outstanding past-due payments on this membership, preventing
-   * future collection attempts.
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
-  void_payments?: boolean | null;
+  'Idempotency-Key'?: string;
 }
 
-export interface MembershipAddFreeDaysParams {
+export interface MembershipResumeParams {
   /**
-   * The number of free days to add (1-1095). Extends the billing period, expiration
-   * date, or Stripe trial depending on plan type.
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
-  free_days: number;
+  'Idempotency-Key'?: string;
+}
+
+export interface MembershipExtendParams {
+  /**
+   * Body param: Number of free days to add (1-1095).
+   */
+  days: number;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Memberships {
   export {
     type CancelOptions as CancelOptions,
-    type MembershipListResponse as MembershipListResponse,
-    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipListParams as MembershipListParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipResumeParams as MembershipResumeParams,
+    type MembershipExtendParams as MembershipExtendParams,
   };
 }
+
+export { type MembershipsCursorPage };

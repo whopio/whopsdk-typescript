@@ -57,7 +57,7 @@ export class Ads extends APIResource {
   }
 
   /**
-   * Deletes an ad. Returns true on success.
+   * Deletes an ad.
    */
   delete(id: string, options?: RequestOptions): APIPromise<AdDeleteResponse> {
     return this._client.delete(path`/ads/${id}`, options);
@@ -87,6 +87,27 @@ export class Ads extends APIResource {
   ): APIPromise<Ad> {
     const { 'Idempotency-Key': idempotencyKey } = params ?? {};
     return this._client.post(path`/ads/${id}/unpause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Copies the ad into its own ad group, or into target_ad_group_id (which must
+   * belong to the same account and be compatible with the ad). Copies keep the
+   * source ad's active/paused state.
+   */
+  duplicate(
+    id: string,
+    params: AdDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdDuplicateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/ads/${id}/duplicate`, {
+      body,
       ...options,
       headers: buildHeaders([
         { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
@@ -325,19 +346,6 @@ export interface Ad {
   issues: Array<Ad.Issue>;
 
   /**
-   * The instant lead form shown when someone taps this ad. `null` when the ad
-   * group's conversion_location is not an instant-form destination.
-   */
-  lead_form: Ad.LeadForm | null;
-
-  /**
-   * The ad platform's ID for the instant form the ad uses. Set when the ad
-   * references an existing form via `lead_form_id`, or once a form built from
-   * `lead_form` has been created on the platform.
-   */
-  lead_form_id: string | null;
-
-  /**
    * USD value attributed to lead events. Sums the value sent with each event,
    * normalized to USD; events without a value contribute 0.
    */
@@ -347,18 +355,6 @@ export interface Ad {
    * Whop pixel-attributed leads, last-click.
    */
   leads: number;
-
-  /**
-   * Welcome message for click-to-message ads, shown when the conversation opens.
-   * `null` when the ad has none.
-   */
-  messaging_config: Ad.MessagingConfig | null;
-
-  /**
-   * Whether the ad can appear alongside other advertisers' ads in the same unit.
-   * Defaults to true.
-   */
-  multi_advertiser_ads: boolean;
 
   /**
    * The existing post this ad promotes — a Facebook post or Instagram media ID.
@@ -512,6 +508,31 @@ export interface Ad {
    * Whop pixel-attributed view-content events, last-click.
    */
   viewed_contents: number;
+
+  /**
+   * The instant lead form shown when someone taps this ad. `null` when the ad
+   * group's conversion_location is not an instant-form destination.
+   */
+  lead_form?: Ad.LeadForm | null;
+
+  /**
+   * The ad platform's ID for the instant form the ad uses. Set when the ad
+   * references an existing form via `lead_form_id`, or once a form built from
+   * `lead_form` has been created on the platform.
+   */
+  lead_form_id?: string | null;
+
+  /**
+   * Welcome message for click-to-message ads, shown when the conversation opens.
+   * `null` when the ad has none.
+   */
+  messaging_config?: Ad.MessagingConfig | null;
+
+  /**
+   * Whether the ad can appear alongside other advertisers' ads in the same unit.
+   * Defaults to true.
+   */
+  multi_advertiser_ads?: boolean;
 }
 
 export namespace Ad {
@@ -619,6 +640,17 @@ export namespace Ad {
      * The type of resource the issue is attached to.
      */
     resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+  }
+
+  /**
+   * The social accounts the ad runs under — its Facebook page and Instagram profile
+   * — each referenced by ID, prefixed `sacc_`.
+   */
+  export interface SocialAccount {
+    /**
+     * The referenced entity's id.
+     */
+    id: string;
   }
 
   /**
@@ -854,20 +886,23 @@ export namespace Ad {
      */
     message: string | null;
   }
-
-  /**
-   * The social accounts the ad runs under — its Facebook page and Instagram profile
-   * — each referenced by ID, prefixed `sacc_`.
-   */
-  export interface SocialAccount {
-    /**
-     * The referenced entity's id.
-     */
-    id: string;
-  }
 }
 
-export type AdDeleteResponse = boolean;
+export interface AdDeleteResponse {
+  /**
+   * ID of the deleted ad.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
+
+export interface AdDuplicateResponse {
+  data: Array<Ad>;
+}
 
 export interface AdListParams extends CursorPageParams {
   /**
@@ -1665,10 +1700,35 @@ export interface AdUnpauseParams {
   'Idempotency-Key'?: string;
 }
 
+export interface AdDuplicateParams {
+  /**
+   * Body param: Number of copies to create (1-10). Defaults to 1.
+   */
+  count?: number;
+
+  /**
+   * Body param: Whether the copies keep the original post's engagement (likes,
+   * comments, shares). Defaults to false.
+   */
+  preserve_engagement?: boolean;
+
+  /**
+   * Body param: Ad group to duplicate into. Defaults to the ad's own ad group.
+   */
+  target_ad_group_id?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export declare namespace Ads {
   export {
     type Ad as Ad,
     type AdDeleteResponse as AdDeleteResponse,
+    type AdDuplicateResponse as AdDuplicateResponse,
     type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
     type AdCreateParams as AdCreateParams,
@@ -1676,5 +1736,6 @@ export declare namespace Ads {
     type AdUpdateParams as AdUpdateParams,
     type AdPauseParams as AdPauseParams,
     type AdUnpauseParams as AdUnpauseParams,
+    type AdDuplicateParams as AdDuplicateParams,
   };
 }

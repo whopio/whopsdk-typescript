@@ -44,7 +44,6 @@ describe('resource swaps', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.swaps.create({
       account_id: 'account_id',
-      amount: 'amount',
       from_token: 'from_token',
       to_token: 'to_token',
     });
@@ -61,9 +60,9 @@ describe('resource swaps', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.swaps.create({
       account_id: 'account_id',
-      amount: 'amount',
       from_token: 'from_token',
       to_token: 'to_token',
+      amount: 'amount',
       from_chain: 'string',
       slippage_bps: 0,
       to_chain: 'string',

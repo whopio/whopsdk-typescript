@@ -80,14 +80,12 @@ export class CheckoutConfigurations extends APIResource {
    *
    * @example
    * ```ts
-   * await client.checkoutConfigurations.delete('id');
+   * const checkoutConfiguration =
+   *   await client.checkoutConfigurations.delete('id');
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<void> {
-    return this._client.delete(path`/checkout_configurations/${id}`, {
-      ...options,
-      headers: buildHeaders([{ Accept: '*/*' }, options?.headers]),
-    });
+  delete(id: string, options?: RequestOptions): APIPromise<CheckoutConfigurationDeleteResponse> {
+    return this._client.delete(path`/checkout_configurations/${id}`, options);
   }
 }
 
@@ -584,6 +582,18 @@ export namespace CheckoutConfigurationListResponse {
   }
 }
 
+export interface CheckoutConfigurationDeleteResponse {
+  /**
+   * ID of the deleted checkout configuration.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
+
 export interface CheckoutConfigurationListParams extends CursorPageParams {
   /**
    * Account ID, prefixed `biz_`.
@@ -591,14 +601,14 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   account_id: string;
 
   /**
-   * Only return checkout configurations created after this Unix timestamp.
+   * Only return checkout configurations created after this ISO 8601 timestamp.
    */
-  created_after?: number;
+  created_after?: string;
 
   /**
-   * Only return checkout configurations created before this Unix timestamp.
+   * Only return checkout configurations created before this ISO 8601 timestamp.
    */
-  created_before?: number;
+  created_before?: string;
 
   /**
    * Sort direction. Defaults to `desc`.
@@ -836,6 +846,7 @@ export declare namespace CheckoutConfigurations {
     type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
     type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
+    type CheckoutConfigurationDeleteResponse as CheckoutConfigurationDeleteResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,

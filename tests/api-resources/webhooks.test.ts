@@ -64,7 +64,7 @@ describe('resource webhooks', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.webhooks.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.webhooks.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,17 +77,18 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.webhooks.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'account_id',
       after: 'after',
+      app_id: 'app_id',
       before: 'before',
-      first: 42,
-      last: 42,
+      first: 0,
+      last: 0,
     });
   });
 
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.webhooks.create({ url: 'https://example.com/path' });
+    const responsePromise = client.webhooks.create({ url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -100,18 +101,19 @@ describe('resource webhooks', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.webhooks.create({
-      url: 'https://example.com/path',
+      url: 'url',
       api_version: 'v1',
       child_resource_events: true,
       enabled: true,
-      events: ['invoice.created'],
+      events: ['string'],
       resource_id: 'resource_id',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.webhooks.retrieve('hook_xxxxxxxxxxxxx');
+    const responsePromise = client.webhooks.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,7 +125,7 @@ describe('resource webhooks', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.webhooks.update('hook_xxxxxxxxxxxxx');
+    const responsePromise = client.webhooks.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -131,29 +133,11 @@ describe('resource webhooks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.webhooks.update(
-        'hook_xxxxxxxxxxxxx',
-        {
-          api_version: 'v1',
-          child_resource_events: true,
-          enabled: true,
-          events: ['invoice.created'],
-          url: 'https://example.com/path',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.webhooks.delete('hook_xxxxxxxxxxxxx');
+    const responsePromise = client.webhooks.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -161,5 +145,49 @@ describe('resource webhooks', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('test: only required params', async () => {
+    const responsePromise = client.webhooks.test('id', { event: 'event' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('test: required and optional params', async () => {
+    const response = await client.webhooks.test('id', {
+      event: 'event',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
+    });
+  });
+
+  // Mock server tests are disabled
+  test.skip('listDeliveries', async () => {
+    const responsePromise = client.webhooks.listDeliveries('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listDeliveries: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.webhooks.listDeliveries(
+        'id',
+        { after: 'after', first: 0 },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

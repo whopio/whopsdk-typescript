@@ -36,7 +36,7 @@ export class Accounts extends APIResource {
 
   /**
    * Creates an account. User tokens create business accounts; business account API
-   * keys create connected accounts. Tax fields (`tax_remitted_by`,
+   * keys create connected accounts. Tax fields (`tax_remitted_by`, `tax_type`,
    * `product_tax_code_id`, `business_address`, `tax_identifiers`) are configured
    * with Update Account, not at creation.
    */
@@ -143,6 +143,12 @@ export interface Account {
    * callers with `company:balance:read` scope; `null` otherwise.
    */
   capabilities: Account.Capabilities | null;
+
+  /**
+   * Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does
+   * not require a VAT ID to purchase.
+   */
+  collect_vat_id: boolean;
 
   /**
    * Country where the account is located.
@@ -318,6 +324,13 @@ export interface Account {
    * Whop tax service.
    */
   tax_remitted_by: string | null;
+
+  /**
+   * How tax is applied to the account's prices: `inclusive` (tax included in the
+   * listed price) or `exclusive` (tax added on top). Defaults to `exclusive` when
+   * unset; `null` only when the account has no payment connection.
+   */
+  tax_type: string | null;
 
   /**
    * Account display name.
@@ -1074,6 +1087,12 @@ export interface AccountUpdateParams {
   business_type?: string | null;
 
   /**
+   * Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does
+   * not require a VAT ID to purchase.
+   */
+  collect_vat_id?: boolean;
+
+  /**
    * Country where the account is located.
    */
   country?: string | null;
@@ -1272,6 +1291,12 @@ export interface AccountUpdateParams {
    * supported country.
    */
   tax_remitted_by?: 'whop' | 'self' | 'none';
+
+  /**
+   * How tax is applied to the account's prices: `inclusive` (tax included in the
+   * listed price) or `exclusive` (tax added on top).
+   */
+  tax_type?: 'inclusive' | 'exclusive';
 
   /**
    * The display name of the account.

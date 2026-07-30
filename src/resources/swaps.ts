@@ -28,8 +28,15 @@ export class Swaps extends APIResource {
   }
 
   /**
-   * Executes a swap from the account's wallet. Runs asynchronously; poll GET
-   * /swaps/{id} for status.
+   * Executes a swap from the account's wallet. Crypto swaps run asynchronously; poll
+   * GET /swaps/{id} for status. A pair of fiat currency codes instead converts
+   * ledger balances to repay a negative to_token balance: by default the conversion
+   * brings that balance exactly to zero, or pass amount to repay part of the debt.
+   * Fiat conversions complete synchronously, except when funding from USD on a
+   * stablecoin-rails account, which starts an asynchronous repayment (status
+   * "processing"). The id on a pending repayment is a reference to the repayment
+   * workflow; GET /swaps/{id} reports status for crypto swaps only, so watch the
+   * account balance for settlement instead of polling.
    */
   create(params: SwapCreateParams, options?: RequestOptions): APIPromise<SwapCreateResponse> {
     const { 'Idempotency-Key': idempotencyKey, ...body } = params;
@@ -61,11 +68,6 @@ export class Swaps extends APIResource {
 
 export interface SwapCreateResponse {
   /**
-   * Swap ID. Poll `GET /swaps/:id` for status.
-   */
-  id: string;
-
-  /**
    * Account ID that owns the wallet used for the swap.
    */
   account_id: string;
@@ -78,6 +80,23 @@ export interface SwapCreateResponse {
   status: string;
 
   /**
+   * Swap ID. Poll `GET /swaps/:id` for status.
+   */
+  id?: string;
+
+  /**
+   * Fiat pairs only: amount of the funding currency converted. Null while a
+   * stablecoin repayment is processing.
+   */
+  amount_in?: number | null;
+
+  /**
+   * Fiat pairs only: amount credited in the repaid currency. Null while a stablecoin
+   * repayment is processing.
+   */
+  amount_out?: number | null;
+
+  /**
    * Expected destination token amount.
    */
   amount_out_expected?: string;
@@ -88,6 +107,11 @@ export interface SwapCreateResponse {
   amount_out_min?: string;
 
   /**
+   * Fiat pairs only: the funding currency.
+   */
+  from_token?: SwapCreateResponse.FromToken | null;
+
+  /**
    * Quoted exchange rate used to create the swap.
    */
   rate?: string;
@@ -96,6 +120,27 @@ export interface SwapCreateResponse {
    * Destination chain for the swap.
    */
   to_chain?: string;
+
+  /**
+   * Fiat pairs only: the repaid currency.
+   */
+  to_token?: SwapCreateResponse.ToToken | null;
+}
+
+export namespace SwapCreateResponse {
+  /**
+   * Fiat pairs only: the funding currency.
+   */
+  export interface FromToken {
+    symbol?: string;
+  }
+
+  /**
+   * Fiat pairs only: the repaid currency.
+   */
+  export interface ToToken {
+    symbol?: string;
+  }
 }
 
 export interface SwapRetrieveResponse {
@@ -296,11 +341,6 @@ export interface SwapCreateParams {
   account_id: string;
 
   /**
-   * Body param: Source token amount.
-   */
-  amount: string;
-
-  /**
    * Body param: Source token contract address or ticker symbol, such as "USDT".
    */
   from_token: string;
@@ -309,6 +349,13 @@ export interface SwapCreateParams {
    * Body param: Destination token contract address or ticker symbol, such as "XAUT".
    */
   to_token: string;
+
+  /**
+   * Body param: Source token amount. Required for crypto swaps. Optional for fiat
+   * pairs: the portion of the negative to_token balance to repay, which must not
+   * exceed the debt; omit to repay the full debt.
+   */
+  amount?: string | null;
 
   /**
    * Body param: Source chain name or chain ID. Defaults to the source token's chain

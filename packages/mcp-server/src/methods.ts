@@ -35,10 +35,58 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/apps/{id}',
   },
   {
+    clientCallName: 'client.apps.updatePermissions',
+    fullyQualifiedName: 'apps.updatePermissions',
+    httpMethod: 'patch',
+    httpPath: '/apps/{id}/permissions',
+  },
+  {
     clientCallName: 'client.apps.logs',
     fullyQualifiedName: 'apps.logs',
     httpMethod: 'get',
     httpPath: '/apps/{id}/logs',
+  },
+  {
+    clientCallName: 'client.apiKeys.list',
+    fullyQualifiedName: 'apiKeys.list',
+    httpMethod: 'get',
+    httpPath: '/api_keys',
+  },
+  {
+    clientCallName: 'client.apiKeys.create',
+    fullyQualifiedName: 'apiKeys.create',
+    httpMethod: 'post',
+    httpPath: '/api_keys',
+  },
+  {
+    clientCallName: 'client.apiKeys.retrieve',
+    fullyQualifiedName: 'apiKeys.retrieve',
+    httpMethod: 'get',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.update',
+    fullyQualifiedName: 'apiKeys.update',
+    httpMethod: 'patch',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.delete',
+    fullyQualifiedName: 'apiKeys.delete',
+    httpMethod: 'delete',
+    httpPath: '/api_keys/{id}',
+  },
+  {
+    clientCallName: 'client.apiKeys.rotate',
+    fullyQualifiedName: 'apiKeys.rotate',
+    httpMethod: 'post',
+    httpPath: '/api_keys/{id}/rotate',
+  },
+  {
+    clientCallName: 'client.apiKeys.listPermissions',
+    fullyQualifiedName: 'apiKeys.listPermissions',
+    httpMethod: 'get',
+    httpPath: '/api_keys/permissions',
   },
   {
     clientCallName: 'client.invoices.list',
@@ -282,6 +330,18 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/webhooks/{id}',
   },
   {
+    clientCallName: 'client.webhooks.test',
+    fullyQualifiedName: 'webhooks.test',
+    httpMethod: 'post',
+    httpPath: '/webhooks/{id}/test',
+  },
+  {
+    clientCallName: 'client.webhooks.listDeliveries',
+    fullyQualifiedName: 'webhooks.listDeliveries',
+    httpMethod: 'get',
+    httpPath: '/webhooks/{id}/deliveries',
+  },
+  {
     clientCallName: 'client.plans.list',
     fullyQualifiedName: 'plans.list',
     httpMethod: 'get',
@@ -378,6 +438,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/transfers',
   },
   {
+    clientCallName: 'client.transfers.listRecipients',
+    fullyQualifiedName: 'transfers.listRecipients',
+    httpMethod: 'get',
+    httpPath: '/transfers/recipients',
+  },
+  {
     clientCallName: 'client.transfers.retrieve',
     fullyQualifiedName: 'transfers.retrieve',
     httpMethod: 'get',
@@ -426,22 +492,10 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/memberships/{id}/resume',
   },
   {
-    clientCallName: 'client.memberships.uncancel',
-    fullyQualifiedName: 'memberships.uncancel',
+    clientCallName: 'client.memberships.extend',
+    fullyQualifiedName: 'memberships.extend',
     httpMethod: 'post',
-    httpPath: '/memberships/{id}/uncancel',
-  },
-  {
-    clientCallName: 'client.memberships.addFreeDays',
-    fullyQualifiedName: 'memberships.addFreeDays',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/add_free_days',
-  },
-  {
-    clientCallName: 'client.memberships.resyncAccess',
-    fullyQualifiedName: 'memberships.resyncAccess',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/resync_access',
+    httpPath: '/memberships/{id}/extend',
   },
   {
     clientCallName: 'client.authorizedUsers.list',
@@ -610,6 +664,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'chatChannels.update',
     httpMethod: 'patch',
     httpPath: '/chat_channels/{id}',
+  },
+  {
+    clientCallName: 'client.users.me',
+    fullyQualifiedName: 'users.me',
+    httpMethod: 'get',
+    httpPath: '/users/me',
   },
   {
     clientCallName: 'client.users.retrieve',
@@ -1560,6 +1620,12 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/bounties/{id}',
   },
   {
+    clientCallName: 'client.bounties.cancel',
+    fullyQualifiedName: 'bounties.cancel',
+    httpMethod: 'post',
+    httpPath: '/bounties/{id}/cancel',
+  },
+  {
     clientCallName: 'client.bountySubmissions.list',
     fullyQualifiedName: 'bountySubmissions.list',
     httpMethod: 'get',
@@ -1570,6 +1636,24 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'bountySubmissions.create',
     httpMethod: 'post',
     httpPath: '/bounty_submissions',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.retrieve',
+    fullyQualifiedName: 'bountySubmissions.retrieve',
+    httpMethod: 'get',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.delete',
+    fullyQualifiedName: 'bountySubmissions.delete',
+    httpMethod: 'delete',
+    httpPath: '/bounty_submissions/{bounty_submission_id}',
+  },
+  {
+    clientCallName: 'client.bountySubmissions.submit',
+    fullyQualifiedName: 'bountySubmissions.submit',
+    httpMethod: 'post',
+    httpPath: '/bounty_submissions/{bounty_submission_id}/submit',
   },
   {
     clientCallName: 'client.adCampaigns.list',
@@ -1612,6 +1696,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'adCampaigns.unpause',
     httpMethod: 'post',
     httpPath: '/ad_campaigns/{id}/unpause',
+  },
+  {
+    clientCallName: 'client.adCampaigns.duplicate',
+    fullyQualifiedName: 'adCampaigns.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ad_campaigns/{id}/duplicate',
   },
   {
     clientCallName: 'client.adCampaigns.retryPayment',
@@ -1660,6 +1750,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'adGroups.unpause',
     httpMethod: 'post',
     httpPath: '/ad_groups/{id}/unpause',
+  },
+  {
+    clientCallName: 'client.adGroups.duplicate',
+    fullyQualifiedName: 'adGroups.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ad_groups/{id}/duplicate',
   },
   {
     clientCallName: 'client.adGroups.searchTargetingOptions',
@@ -1714,6 +1810,12 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'ads.unpause',
     httpMethod: 'post',
     httpPath: '/ads/{id}/unpause',
+  },
+  {
+    clientCallName: 'client.ads.duplicate',
+    fullyQualifiedName: 'ads.duplicate',
+    httpMethod: 'post',
+    httpPath: '/ads/{id}/duplicate',
   },
   {
     clientCallName: 'client.adReports.retrieve',

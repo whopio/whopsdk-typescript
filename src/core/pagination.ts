@@ -116,6 +116,12 @@ export interface CursorPageResponse<Item> {
 export namespace CursorPageResponse {
   export interface PageInfo {
     end_cursor?: string;
+
+    has_next_page?: boolean;
+
+    has_previous_page?: boolean;
+
+    start_cursor?: string;
   }
 }
 
@@ -137,6 +143,71 @@ export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageRe
     super(client, response, body, options);
 
     this.data = body.data || [];
+    this.page_info = body.page_info || {};
+  }
+
+  getPaginatedItems(): Item[] {
+    return this.data ?? [];
+  }
+
+  nextPageRequestOptions(): PageRequestOptions | null {
+    const cursor = this.page_info?.end_cursor;
+    if (!cursor) {
+      return null;
+    }
+
+    return {
+      ...this.options,
+      query: {
+        ...maybeObj(this.options.query),
+        after: cursor,
+      },
+    };
+  }
+}
+
+export interface CursorPageWithLimitsResponse<Item> {
+  data: Array<Item>;
+
+  limits: CursorPageWithLimitsResponse.Limits;
+
+  page_info: CursorPageWithLimitsResponse.PageInfo;
+}
+
+export namespace CursorPageWithLimitsResponse {
+  export interface Limits {
+    object?: string;
+  }
+
+  export interface PageInfo {
+    end_cursor?: string;
+  }
+}
+
+export interface CursorPageWithLimitsParams {
+  after?: string;
+}
+
+export class CursorPageWithLimits<Item>
+  extends AbstractPage<Item>
+  implements CursorPageWithLimitsResponse<Item>
+{
+  data: Array<Item>;
+
+  limits: CursorPageWithLimitsResponse.Limits;
+
+  page_info: CursorPageWithLimitsResponse.PageInfo;
+
+  constructor(
+    client: Whop,
+    response: Response,
+    body: CursorPageWithLimitsResponse<Item>,
+    options: FinalRequestOptions,
+  ) {
+    super(client, response, body, options);
+
+    this.data = body.data || [];
+    this.limits = body.limits || {};
     this.page_info = body.page_info || {};
   }
 

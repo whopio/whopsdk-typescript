@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.appBuilds.list({ app_id: 'app_xxxxxxxxxxxxxx' });
+    const responsePromise = client.appBuilds.list({ app_id: 'app_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,13 +23,13 @@ describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.appBuilds.list({
-      app_id: 'app_xxxxxxxxxxxxxx',
+      app_id: 'app_id',
       after: 'after',
       before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      first: 42,
-      last: 42,
+      created_after: 0,
+      created_before: 0,
+      first: 0,
+      last: 0,
       platform: 'ios',
       status: 'draft',
     });
@@ -38,7 +38,7 @@ describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.appBuilds.create({
-      attachment: { id: 'id' },
+      attachment: {},
       checksum: 'checksum',
       platform: 'ios',
     });
@@ -54,19 +54,20 @@ describe('resource appBuilds', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.appBuilds.create({
-      attachment: { id: 'id' },
+      attachment: { id: 'id', direct_upload_id: 'direct_upload_id' },
       checksum: 'checksum',
       platform: 'ios',
-      ai_prompt_id: 'prmt_xxxxxxxxxxxxx',
-      app_id: 'app_xxxxxxxxxxxxxx',
-      source_attachment: { id: 'id' },
+      ai_prompt_id: 'ai_prompt_id',
+      app_id: 'app_id',
+      source_attachment: { id: 'id', direct_upload_id: 'direct_upload_id' },
       supported_app_view_types: ['hub'],
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.appBuilds.retrieve('apbu_xxxxxxxxxxxxx');
+    const responsePromise = client.appBuilds.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,7 +79,7 @@ describe('resource appBuilds', () => {
 
   // Mock server tests are disabled
   test.skip('promote', async () => {
-    const responsePromise = client.appBuilds.promote('apbu_xxxxxxxxxxxxx');
+    const responsePromise = client.appBuilds.promote('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -86,5 +87,17 @@ describe('resource appBuilds', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('promote: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.appBuilds.promote(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

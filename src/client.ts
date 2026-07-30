@@ -15,7 +15,13 @@ import { stringifyQuery } from './internal/utils/query';
 import { VERSION } from './version';
 import * as Errors from './core/error';
 import * as Pagination from './core/pagination';
-import { AbstractPage, type CursorPageParams, CursorPageResponse } from './core/pagination';
+import {
+  AbstractPage,
+  type CursorPageParams,
+  CursorPageResponse,
+  type CursorPageWithLimitsParams,
+  CursorPageWithLimitsResponse,
+} from './core/pagination';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
@@ -25,6 +31,8 @@ import {
   AdCampaign,
   AdCampaignCreateParams,
   AdCampaignDeleteResponse,
+  AdCampaignDuplicateParams,
+  AdCampaignDuplicateResponse,
   AdCampaignListParams,
   AdCampaignPauseParams,
   AdCampaignRetrieveParams,
@@ -38,6 +46,8 @@ import {
   AdGroup,
   AdGroupCreateParams,
   AdGroupDeleteResponse,
+  AdGroupDuplicateParams,
+  AdGroupDuplicateResponse,
   AdGroupEstimateReachParams,
   AdGroupListParams,
   AdGroupPauseParams,
@@ -62,6 +72,8 @@ import {
   Ad,
   AdCreateParams,
   AdDeleteResponse,
+  AdDuplicateParams,
+  AdDuplicateResponse,
   AdListParams,
   AdPauseParams,
   AdRetrieveParams,
@@ -82,10 +94,21 @@ import {
   NotificationPreferences,
 } from './resources/ai-chats';
 import {
+  APIKey,
+  APIKeyCreateParams,
+  APIKeyDeleteResponse,
+  APIKeyListParams,
+  APIKeyListPermissionsResponse,
+  APIKeyRotateParams,
+  APIKeyUpdateParams,
+  APIKeys,
+  APIKeysCursorPage,
+  Permission,
+} from './resources/api-keys';
+import {
   AppBuildCreateParams,
   AppBuildListParams,
-  AppBuildListResponse,
-  AppBuildListResponsesCursorPage,
+  AppBuildPromoteParams,
   AppBuilds,
 } from './resources/app-builds';
 import {
@@ -97,6 +120,7 @@ import {
   AppLogsResponse,
   AppType,
   AppUpdateParams,
+  AppUpdatePermissionsParams,
   Apps,
 } from './resources/apps';
 import {
@@ -121,6 +145,7 @@ import {
 import {
   Bounties,
   Bounty,
+  BountyCancelParams,
   BountyCreateParams,
   BountyListItem,
   BountyListItemsCursorPage,
@@ -128,9 +153,12 @@ import {
   BountyUpdateParams,
 } from './resources/bounties';
 import {
+  BountyCaptureClip,
   BountySubmission,
   BountySubmissionCreateParams,
+  BountySubmissionDeleteResponse,
   BountySubmissionListParams,
+  BountySubmissionSubmitParams,
   BountySubmissions,
   BountySubmissionsCursorPage,
 } from './resources/bounty-submissions';
@@ -155,6 +183,7 @@ import {
 import {
   CheckoutConfigurationCreateParams,
   CheckoutConfigurationCreateResponse,
+  CheckoutConfigurationDeleteResponse,
   CheckoutConfigurationListParams,
   CheckoutConfigurationListResponse,
   CheckoutConfigurationListResponsesCursorPage,
@@ -361,21 +390,14 @@ import {
 } from './resources/leads';
 import { LedgerAccountRetrieveResponse, LedgerAccounts } from './resources/ledger-accounts';
 import { Media, MediaAsset, MediaGenerateParams } from './resources/media';
-import {
-  MemberListParams,
-  MemberListResponse,
-  MemberListResponsesCursorPage,
-  MemberRetrieveResponse,
-  Members,
-} from './resources/members';
+import { Member, MemberListParams, Members, MembersCursorPage } from './resources/members';
 import {
   CancelOptions,
-  MembershipAddFreeDaysParams,
   MembershipCancelParams,
+  MembershipExtendParams,
   MembershipListParams,
-  MembershipListResponse,
-  MembershipListResponsesCursorPage,
   MembershipPauseParams,
+  MembershipResumeParams,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -563,6 +585,9 @@ import {
   TransferCreateParams,
   TransferCreateResponse,
   TransferListParams,
+  TransferListRecipientsParams,
+  TransferListRecipientsResponse,
+  TransferListRecipientsResponsesCursorPage,
   TransferListResponse,
   TransferListResponsesCursorPage,
   TransferRetrieveResponse,
@@ -574,6 +599,7 @@ import {
   UserCheckAccessParams,
   UserCheckAccessResponse,
   UserListParams,
+  UserMeParams,
   UserRecommendActionsResponse,
   UserRetrieveParams,
   UserUpdateMeParams,
@@ -637,12 +663,16 @@ import {
   VerificationSucceededWebhookEvent,
   Webhook,
   WebhookCreateParams,
-  WebhookCreateResponse,
   WebhookDeleteResponse,
   WebhookEvent,
+  WebhookListDeliveriesParams,
+  WebhookListDeliveriesResponse,
+  WebhookListDeliveriesResponsesCursorPage,
   WebhookListParams,
   WebhookListResponse,
   WebhookListResponsesCursorPage,
+  WebhookTestParams,
+  WebhookTestResponse,
   WebhookUpdateParams,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
@@ -846,7 +876,7 @@ export class Whop {
    * @param {string | undefined} [opts.apiKey=process.env['WHOP_API_KEY'] ?? undefined]
    * @param {string | null | undefined} [opts.webhookKey=process.env['WHOP_WEBHOOK_SECRET'] ?? null]
    * @param {string | null | undefined} [opts.appID=process.env['WHOP_APP_ID'] ?? null]
-   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-20]
+   * @param {string | null | undefined} [opts.version=process.env['WHOP_API_VERSION'] ?? 2026-07-22]
    * @param {string} [opts.baseURL=process.env['WHOP_BASE_URL'] ?? https://api.whop.com/api/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
@@ -860,7 +890,7 @@ export class Whop {
     apiKey = readEnv('WHOP_API_KEY'),
     webhookKey = readEnv('WHOP_WEBHOOK_SECRET') ?? null,
     appID = readEnv('WHOP_APP_ID') ?? null,
-    version = readEnv('WHOP_API_VERSION') ?? '2026-07-20',
+    version = readEnv('WHOP_API_VERSION') ?? '2026-07-22',
     userTokenPublicKey = readEnv('WHOP_USER_TOKEN_PUBLIC_KEY') ?? null,
     userTokenJwksUrl = readEnv('WHOP_USER_TOKEN_JWKS_URL') ?? null,
     ...opts
@@ -1509,6 +1539,13 @@ export class Whop {
    *
    */
   apps: API.Apps = new API.Apps(this);
+  /**
+   * An API Key is a programmatic credential owned by an account or app. Each key carries its own permissions policy — explicit permission statements or an inherited system role — and can be restricted with an expiration date and an IP allowlist.
+   *
+   * Use the API Keys API to list a company or app's keys, create a key (the full secret is returned once, on creation), inspect a key's effective grants, update its name or restrictions, rotate its secret, and revoke it. These endpoints require a user session — they cannot be called with an API key.
+   *
+   */
+  apiKeys: API.APIKeys = new API.APIKeys(this);
   invoices: API.Invoices = new API.Invoices(this);
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   /**
@@ -1540,9 +1577,9 @@ export class Whop {
    */
   media: API.Media = new API.Media(this);
   /**
-   * A Person represents a visitor or customer of an account, assembled from [pixel events](/api-reference/beta/events/event) and purchase activity — ad clicks, storefront visits, and checkouts.
+   * A Person is an identity-linked profile of a visitor or customer of an account, assembled from every [event](/api-reference/beta/events/event) the person generated — pixel page views, ad clicks, leads, identifies, and payments. Each profile carries the person's known identities (names, emails, phones, user IDs), purchase history and LTV, geo/device profile, traffic sources, and the first and last marketing touches that reached them.
    *
-   * Use the People API to list the people of an account and retrieve a single person.
+   * Use the People API to list and segment the people of an account — filter by activity, purchases, traffic source, location, or marketing touch, and sort by value — or retrieve one person by person ID, user ID, email address, or phone number.
    *
    */
   people: API.People = new API.People(this);
@@ -1572,6 +1609,12 @@ export class Whop {
    */
   transfers: API.Transfers = new API.Transfers(this);
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
+  /**
+   * A Membership is a customer's purchase of a plan: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
+   *
+   * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, and update metadata.
+   *
+   */
   memberships: API.Memberships = new API.Memberships(this);
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
   /**
@@ -1581,6 +1624,12 @@ export class Whop {
    *
    */
   teamMembers: API.TeamMembers = new API.TeamMembers(this);
+  /**
+   * An App Build is a versioned artifact uploaded for an app — a hosted web archive, or an iOS/Android bundle. Builds start as drafts, go through review, and one approved build per platform is served to users as the production build.
+   *
+   * Use the App Builds API to upload a build for an app, list an app's builds with platform and status filters, retrieve a build, and promote a draft or approved build to production.
+   *
+   */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   shipments: API.Shipments = new API.Shipments(this);
   /**
@@ -1603,6 +1652,12 @@ export class Whop {
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
   experiences: API.Experiences = new API.Experiences(this);
   reactions: API.Reactions = new API.Reactions(this);
+  /**
+   * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+   *
+   * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
+   *
+   */
   members: API.Members = new API.Members(this);
   forums: API.Forums = new API.Forums(this);
   promoCodes: API.PromoCodes = new API.PromoCodes(this);
@@ -1733,6 +1788,7 @@ export class Whop {
 }
 
 Whop.Apps = Apps;
+Whop.APIKeys = APIKeys;
 Whop.Invoices = Invoices;
 Whop.CourseLessonInteractions = CourseLessonInteractions;
 Whop.Products = Products;
@@ -1811,6 +1867,12 @@ export declare namespace Whop {
   export import CursorPage = Pagination.CursorPage;
   export { type CursorPageParams as CursorPageParams, type CursorPageResponse as CursorPageResponse };
 
+  export import CursorPageWithLimits = Pagination.CursorPageWithLimits;
+  export {
+    type CursorPageWithLimitsParams as CursorPageWithLimitsParams,
+    type CursorPageWithLimitsResponse as CursorPageWithLimitsResponse,
+  };
+
   export {
     Apps as Apps,
     type AppType as AppType,
@@ -1820,7 +1882,21 @@ export declare namespace Whop {
     type AppListParams as AppListParams,
     type AppCreateParams as AppCreateParams,
     type AppUpdateParams as AppUpdateParams,
+    type AppUpdatePermissionsParams as AppUpdatePermissionsParams,
     type AppLogsParams as AppLogsParams,
+  };
+
+  export {
+    APIKeys as APIKeys,
+    type APIKey as APIKey,
+    type Permission as Permission,
+    type APIKeyDeleteResponse as APIKeyDeleteResponse,
+    type APIKeyListPermissionsResponse as APIKeyListPermissionsResponse,
+    type APIKeysCursorPage as APIKeysCursorPage,
+    type APIKeyListParams as APIKeyListParams,
+    type APIKeyCreateParams as APIKeyCreateParams,
+    type APIKeyUpdateParams as APIKeyUpdateParams,
+    type APIKeyRotateParams as APIKeyRotateParams,
   };
 
   export {
@@ -1912,9 +1988,10 @@ export declare namespace Whop {
     type APIVersion as APIVersion,
     type Webhook as Webhook,
     type WebhookEvent as WebhookEvent,
-    type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type WebhookListDeliveriesResponse as WebhookListDeliveriesResponse,
+    type WebhookTestResponse as WebhookTestResponse,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
@@ -1958,9 +2035,12 @@ export declare namespace Whop {
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
+    type WebhookListDeliveriesResponsesCursorPage as WebhookListDeliveriesResponsesCursorPage,
     type WebhookListParams as WebhookListParams,
     type WebhookCreateParams as WebhookCreateParams,
     type WebhookUpdateParams as WebhookUpdateParams,
+    type WebhookTestParams as WebhookTestParams,
+    type WebhookListDeliveriesParams as WebhookListDeliveriesParams,
   };
 
   export {
@@ -2000,9 +2080,12 @@ export declare namespace Whop {
     type TransferCreateResponse as TransferCreateResponse,
     type TransferRetrieveResponse as TransferRetrieveResponse,
     type TransferListResponse as TransferListResponse,
+    type TransferListRecipientsResponse as TransferListRecipientsResponse,
     type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferListRecipientsResponsesCursorPage as TransferListRecipientsResponsesCursorPage,
     type TransferListParams as TransferListParams,
     type TransferCreateParams as TransferCreateParams,
+    type TransferListRecipientsParams as TransferListRecipientsParams,
   };
 
   export {
@@ -2013,13 +2096,12 @@ export declare namespace Whop {
   export {
     Memberships as Memberships,
     type CancelOptions as CancelOptions,
-    type MembershipListResponse as MembershipListResponse,
-    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
     type MembershipListParams as MembershipListParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
+    type MembershipResumeParams as MembershipResumeParams,
+    type MembershipExtendParams as MembershipExtendParams,
   };
 
   export {
@@ -2045,10 +2127,9 @@ export declare namespace Whop {
 
   export {
     AppBuilds as AppBuilds,
-    type AppBuildListResponse as AppBuildListResponse,
-    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildListParams as AppBuildListParams,
     type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildPromoteParams as AppBuildPromoteParams,
   };
 
   export {
@@ -2065,6 +2146,7 @@ export declare namespace Whop {
     type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
     type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
+    type CheckoutConfigurationDeleteResponse as CheckoutConfigurationDeleteResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
@@ -2095,6 +2177,7 @@ export declare namespace Whop {
     type UserCheckAccessResponse as UserCheckAccessResponse,
     type UserRecommendActionsResponse as UserRecommendActionsResponse,
     type UsersCursorPage as UsersCursorPage,
+    type UserMeParams as UserMeParams,
     type UserRetrieveParams as UserRetrieveParams,
     type UserCheckAccessParams as UserCheckAccessParams,
     type UserUpdateParams as UserUpdateParams,
@@ -2151,9 +2234,8 @@ export declare namespace Whop {
 
   export {
     Members as Members,
-    type MemberRetrieveResponse as MemberRetrieveResponse,
-    type MemberListResponse as MemberListResponse,
-    type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type Member as Member,
+    type MembersCursorPage as MembersCursorPage,
     type MemberListParams as MemberListParams,
   };
 
@@ -2525,20 +2607,25 @@ export declare namespace Whop {
     type BountyListParams as BountyListParams,
     type BountyCreateParams as BountyCreateParams,
     type BountyUpdateParams as BountyUpdateParams,
+    type BountyCancelParams as BountyCancelParams,
   };
 
   export {
     BountySubmissions as BountySubmissions,
+    type BountyCaptureClip as BountyCaptureClip,
     type BountySubmission as BountySubmission,
+    type BountySubmissionDeleteResponse as BountySubmissionDeleteResponse,
     type BountySubmissionsCursorPage as BountySubmissionsCursorPage,
     type BountySubmissionListParams as BountySubmissionListParams,
     type BountySubmissionCreateParams as BountySubmissionCreateParams,
+    type BountySubmissionSubmitParams as BountySubmissionSubmitParams,
   };
 
   export {
     AdCampaigns as AdCampaigns,
     type AdCampaign as AdCampaign,
     type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignDuplicateResponse as AdCampaignDuplicateResponse,
     type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
     type AdCampaignCreateParams as AdCampaignCreateParams,
@@ -2546,6 +2633,7 @@ export declare namespace Whop {
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignPauseParams as AdCampaignPauseParams,
     type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignDuplicateParams as AdCampaignDuplicateParams,
     type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 
@@ -2555,6 +2643,7 @@ export declare namespace Whop {
     type ReachEstimate as ReachEstimate,
     type TargetingOption as TargetingOption,
     type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupDuplicateResponse as AdGroupDuplicateResponse,
     type AdGroupSearchTargetingOptionsResponse as AdGroupSearchTargetingOptionsResponse,
     type AdGroupsCursorPage as AdGroupsCursorPage,
     type AdGroupListParams as AdGroupListParams,
@@ -2563,6 +2652,7 @@ export declare namespace Whop {
     type AdGroupUpdateParams as AdGroupUpdateParams,
     type AdGroupPauseParams as AdGroupPauseParams,
     type AdGroupUnpauseParams as AdGroupUnpauseParams,
+    type AdGroupDuplicateParams as AdGroupDuplicateParams,
     type AdGroupSearchTargetingOptionsParams as AdGroupSearchTargetingOptionsParams,
     type AdGroupEstimateReachParams as AdGroupEstimateReachParams,
   };
@@ -2571,6 +2661,7 @@ export declare namespace Whop {
     Ads as Ads,
     type Ad as Ad,
     type AdDeleteResponse as AdDeleteResponse,
+    type AdDuplicateResponse as AdDuplicateResponse,
     type AdsCursorPage as AdsCursorPage,
     type AdListParams as AdListParams,
     type AdCreateParams as AdCreateParams,
@@ -2578,6 +2669,7 @@ export declare namespace Whop {
     type AdUpdateParams as AdUpdateParams,
     type AdPauseParams as AdPauseParams,
     type AdUnpauseParams as AdUnpauseParams,
+    type AdDuplicateParams as AdDuplicateParams,
   };
 
   export {

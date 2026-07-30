@@ -9,6 +9,36 @@ const client = new Whop({
 
 describe('resource users', () => {
   // Mock server tests are disabled
+  test.skip('me', async () => {
+    const responsePromise = client.users.me();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('me: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.users.me(
+        {
+          account_id: 'account_id',
+          from: 'from',
+          include_balance_history: true,
+          interval: 'hour',
+          time_zone: 'time_zone',
+          to: 'to',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.users.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
@@ -24,18 +54,7 @@ describe('resource users', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.users.retrieve(
-        'id',
-        {
-          account_id: 'account_id',
-          from: 'from',
-          include_balance_history: true,
-          interval: 'hour',
-          time_zone: 'time_zone',
-          to: 'to',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.users.retrieve('id', { account_id: 'account_id' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 

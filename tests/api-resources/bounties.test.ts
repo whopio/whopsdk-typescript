@@ -69,6 +69,13 @@ describe('resource bounties', () => {
       accepted_submissions_limit: 0,
       account_id: 'account_id',
       allowed_country_codes: ['string'],
+      business_goal_type: 'clipping',
+      capture_spec: {
+        bitrate_target_mbps: 0,
+        embed_camera_metadata: true,
+        min_clip_duration_seconds: 0,
+        stabilization_mode: 'off',
+      },
       experience_id: 'experience_id',
       frequency: 'weekly',
       publish_at: 'publish_at',
@@ -110,6 +117,7 @@ describe('resource bounties', () => {
         {
           accepted_submissions_limit: 0,
           allowed_country_codes: ['string'],
+          business_goal_type: 'clipping',
           description: 'description',
           frequency: 'once',
           gross_reward_amount: 0,
@@ -117,6 +125,30 @@ describe('resource bounties', () => {
           publish_at_timezone: 'publish_at_timezone',
           title: 'title',
         },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('cancel', async () => {
+    const responsePromise = client.bounties.cancel('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('cancel: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.bounties.cancel(
+        'id',
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

@@ -12,6 +12,18 @@ export {
   type AIChatUpdateParams,
   type AIChatListResponsesCursorPage,
 } from './ai-chats';
+export {
+  APIKeys,
+  type APIKey,
+  type Permission,
+  type APIKeyDeleteResponse,
+  type APIKeyListPermissionsResponse,
+  type APIKeyListParams,
+  type APIKeyCreateParams,
+  type APIKeyUpdateParams,
+  type APIKeyRotateParams,
+  type APIKeysCursorPage,
+} from './api-keys';
 export { AccessTokens, type AccessTokenCreateResponse, type AccessTokenCreateParams } from './access-tokens';
 export { AccountLinks, type AccountLinkCreateResponse, type AccountLinkCreateParams } from './account-links';
 export {
@@ -30,12 +42,14 @@ export {
   AdCampaigns,
   type AdCampaign,
   type AdCampaignDeleteResponse,
+  type AdCampaignDuplicateResponse,
   type AdCampaignListParams,
   type AdCampaignCreateParams,
   type AdCampaignRetrieveParams,
   type AdCampaignUpdateParams,
   type AdCampaignPauseParams,
   type AdCampaignUnpauseParams,
+  type AdCampaignDuplicateParams,
   type AdCampaignRetryPaymentParams,
   type AdCampaignsCursorPage,
 } from './ad-campaigns';
@@ -45,6 +59,7 @@ export {
   type ReachEstimate,
   type TargetingOption,
   type AdGroupDeleteResponse,
+  type AdGroupDuplicateResponse,
   type AdGroupSearchTargetingOptionsResponse,
   type AdGroupListParams,
   type AdGroupCreateParams,
@@ -52,6 +67,7 @@ export {
   type AdGroupUpdateParams,
   type AdGroupPauseParams,
   type AdGroupUnpauseParams,
+  type AdGroupDuplicateParams,
   type AdGroupSearchTargetingOptionsParams,
   type AdGroupEstimateReachParams,
   type AdGroupsCursorPage,
@@ -67,12 +83,14 @@ export {
   Ads,
   type Ad,
   type AdDeleteResponse,
+  type AdDuplicateResponse,
   type AdListParams,
   type AdCreateParams,
   type AdRetrieveParams,
   type AdUpdateParams,
   type AdPauseParams,
   type AdUnpauseParams,
+  type AdDuplicateParams,
   type AdsCursorPage,
 } from './ads';
 export {
@@ -88,10 +106,9 @@ export {
 } from './affiliates/affiliates';
 export {
   AppBuilds,
-  type AppBuildListResponse,
   type AppBuildListParams,
   type AppBuildCreateParams,
-  type AppBuildListResponsesCursorPage,
+  type AppBuildPromoteParams,
 } from './app-builds';
 export {
   Apps,
@@ -101,6 +118,7 @@ export {
   type AppListParams,
   type AppCreateParams,
   type AppUpdateParams,
+  type AppUpdatePermissionsParams,
   type AppLogsParams,
   type AppListResponsesCursorPage,
 } from './apps';
@@ -130,13 +148,17 @@ export {
   type BountyListParams,
   type BountyCreateParams,
   type BountyUpdateParams,
+  type BountyCancelParams,
   type BountyListItemsCursorPage,
 } from './bounties';
 export {
   BountySubmissions,
+  type BountyCaptureClip,
   type BountySubmission,
+  type BountySubmissionDeleteResponse,
   type BountySubmissionListParams,
   type BountySubmissionCreateParams,
+  type BountySubmissionSubmitParams,
   type BountySubmissionsCursorPage,
 } from './bounty-submissions';
 export {
@@ -163,6 +185,7 @@ export {
   type CheckoutConfigurationCreateResponse,
   type CheckoutConfigurationRetrieveResponse,
   type CheckoutConfigurationListResponse,
+  type CheckoutConfigurationDeleteResponse,
   type CheckoutConfigurationListParams,
   type CheckoutConfigurationCreateParams,
   type CheckoutConfigurationListResponsesCursorPage,
@@ -366,23 +389,16 @@ export {
 } from './leads';
 export { LedgerAccounts, type LedgerAccountRetrieveResponse } from './ledger-accounts';
 export { Media, type MediaAsset, type MediaGenerateParams } from './media';
-export {
-  Members,
-  type MemberRetrieveResponse,
-  type MemberListResponse,
-  type MemberListParams,
-  type MemberListResponsesCursorPage,
-} from './members';
+export { Members, type Member, type MemberListParams, type MembersCursorPage } from './members';
 export {
   Memberships,
   type CancelOptions,
-  type MembershipListResponse,
   type MembershipListParams,
   type MembershipUpdateParams,
   type MembershipCancelParams,
   type MembershipPauseParams,
-  type MembershipAddFreeDaysParams,
-  type MembershipListResponsesCursorPage,
+  type MembershipResumeParams,
+  type MembershipExtendParams,
 } from './memberships';
 export {
   Messages,
@@ -586,9 +602,12 @@ export {
   type TransferCreateResponse,
   type TransferRetrieveResponse,
   type TransferListResponse,
+  type TransferListRecipientsResponse,
   type TransferListParams,
   type TransferCreateParams,
+  type TransferListRecipientsParams,
   type TransferListResponsesCursorPage,
+  type TransferListRecipientsResponsesCursorPage,
 } from './transfers';
 export {
   Users,
@@ -596,6 +615,7 @@ export {
   type UserBalance,
   type UserCheckAccessResponse,
   type UserRecommendActionsResponse,
+  type UserMeParams,
   type UserRetrieveParams,
   type UserCheckAccessParams,
   type UserUpdateParams,
@@ -620,9 +640,10 @@ export {
   type APIVersion,
   type Webhook,
   type WebhookEvent,
-  type WebhookCreateResponse,
   type WebhookListResponse,
   type WebhookDeleteResponse,
+  type WebhookListDeliveriesResponse,
+  type WebhookTestResponse,
   type ChatMessageCreatedWebhookEvent,
   type ChatReactionCreatedWebhookEvent,
   type CourseLessonInteractionCompletedWebhookEvent,
@@ -668,7 +689,10 @@ export {
   type WebhookListParams,
   type WebhookCreateParams,
   type WebhookUpdateParams,
+  type WebhookTestParams,
+  type WebhookListDeliveriesParams,
   type WebhookListResponsesCursorPage,
+  type WebhookListDeliveriesResponsesCursorPage,
 } from './webhooks';
 export {
   Withdrawals,

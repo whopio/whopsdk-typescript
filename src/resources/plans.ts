@@ -272,10 +272,17 @@ export interface PlanListResponse {
   visibility: string;
 }
 
-/**
- * Always true on success.
- */
-export type PlanDeleteResponse = boolean;
+export interface PlanDeleteResponse {
+  /**
+   * ID of the deleted plan.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface PlanCalculateTaxResponse {
   /**

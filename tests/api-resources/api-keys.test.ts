@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource apps', () => {
+describe('resource apiKeys', () => {
   // Mock server tests are disabled
-  test.skip('list', async () => {
-    const responsePromise = client.apps.list();
+  test.skip('list: only required params', async () => {
+    const responsePromise = client.apiKeys.list({ resource_id: 'resource_id', resource_type: 'account' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,31 +21,29 @@ describe('resource apps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.apps.list(
-        {
-          account_id: 'account_id',
-          after: 'after',
-          app_type: 'b2b_app',
-          before: 'before',
-          direction: 'asc',
-          first: 0,
-          last: 0,
-          order: 'created_at',
-          query: 'query',
-          verified_apps_only: true,
-          view_type: 'hub',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
+  test.skip('list: required and optional params', async () => {
+    const response = await client.apiKeys.list({
+      resource_id: 'resource_id',
+      resource_type: 'account',
+      after: 'after',
+      before: 'before',
+      created_after: 0,
+      created_before: 0,
+      direction: 'asc',
+      first: 0,
+      last: 0,
+      order: 'created_at',
+    });
   });
 
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.apps.create({ name: 'name' });
+    const responsePromise = client.apiKeys.create({
+      name: 'name',
+      permissions: {},
+      resource_id: 'resource_id',
+      resource_type: 'account',
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -57,20 +55,29 @@ describe('resource apps', () => {
 
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
-    const response = await client.apps.create({
+    const response = await client.apiKeys.create({
       name: 'name',
-      account_id: 'account_id',
-      base_url: 'base_url',
-      icon: { id: 'id', direct_upload_id: 'direct_upload_id' },
-      redirect_uris: ['string'],
-      route: 'route',
+      permissions: {
+        statements: [
+          {
+            actions: ['string'],
+            grant: true,
+            resources: ['string'],
+          },
+        ],
+        system_role: 'owner',
+      },
+      resource_id: 'resource_id',
+      resource_type: 'account',
+      expires_at: 'expires_at',
+      ip_allowlist: ['string'],
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.apps.retrieve('id');
+    const responsePromise = client.apiKeys.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -82,7 +89,7 @@ describe('resource apps', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.apps.update('id', {});
+    const responsePromise = client.apiKeys.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,16 +100,8 @@ describe('resource apps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updatePermissions: only required params', async () => {
-    const responsePromise = client.apps.updatePermissions('id', {
-      requested_permissions: [
-        {
-          action: 'action',
-          is_required: true,
-          justification: 'justification',
-        },
-      ],
-    });
+  test.skip('delete', async () => {
+    const responsePromise = client.apiKeys.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -113,21 +112,8 @@ describe('resource apps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('updatePermissions: required and optional params', async () => {
-    const response = await client.apps.updatePermissions('id', {
-      requested_permissions: [
-        {
-          action: 'action',
-          is_required: true,
-          justification: 'justification',
-        },
-      ],
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('logs', async () => {
-    const responsePromise = client.apps.logs('id');
+  test.skip('rotate', async () => {
+    const responsePromise = client.apiKeys.rotate('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -138,23 +124,26 @@ describe('resource apps', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('logs: request options and params are passed correctly', async () => {
+  test.skip('rotate: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.logs(
+      client.apiKeys.rotate(
         'id',
-        {
-          after: 'after',
-          app_build_id: 'app_build_id',
-          before: 'before',
-          created_after: '2019-12-27T18:11:19.117Z',
-          created_before: '2019-12-27T18:11:19.117Z',
-          first: 0,
-          level: 'log',
-          query: 'query',
-        },
+        { 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listPermissions', async () => {
+    const responsePromise = client.apiKeys.listPermissions();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
   });
 });

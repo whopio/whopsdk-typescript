@@ -72,6 +72,28 @@ describe('resource transfers', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('listRecipients: only required params', async () => {
+    const responsePromise = client.transfers.listRecipients({ origin_id: 'origin_id' });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('listRecipients: required and optional params', async () => {
+    const response = await client.transfers.listRecipients({
+      origin_id: 'origin_id',
+      after: 'after',
+      first: 100,
+      query: 'query',
+    });
+  });
+
+  // Mock server tests are disabled
   test.skip('retrieve', async () => {
     const responsePromise = client.transfers.retrieve('id');
     const rawResponse = await responsePromise.asResponse();

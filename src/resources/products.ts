@@ -64,7 +64,17 @@ export class Products extends APIResource {
   }
 }
 
-export type ProductDeleteResponse = boolean;
+export interface ProductDeleteResponse {
+  /**
+   * ID of the deleted product.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface ProductListParams extends CursorPageParams {
   /**

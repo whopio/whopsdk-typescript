@@ -61,7 +61,7 @@ export class AdCampaigns extends APIResource {
 
   /**
    * Deletes an ad campaign and archives it on the ad platform (cascades to ad groups
-   * and ads). Returns true on success.
+   * and ads).
    */
   delete(id: string, options?: RequestOptions): APIPromise<AdCampaignDeleteResponse> {
     return this._client.delete(path`/ad_campaigns/${id}`, options);
@@ -95,6 +95,28 @@ export class AdCampaigns extends APIResource {
   ): APIPromise<AdCampaign> {
     const { 'Idempotency-Key': idempotencyKey } = params ?? {};
     return this._client.post(path`/ad_campaigns/${id}/unpause`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Creates copies of the campaign in `duplicating` status and returns them; each
+   * copy transitions to `draft` once duplication completes. Poll each returned
+   * campaign until it leaves `duplicating` — a copy that could not be completed is
+   * deleted and returns 404.
+   */
+  duplicate(
+    id: string,
+    params: AdCampaignDuplicateParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<AdCampaignDuplicateResponse> {
+    const { 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/ad_campaigns/${id}/duplicate`, {
+      body,
       ...options,
       headers: buildHeaders([
         { ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined) },
@@ -140,13 +162,6 @@ export interface AdCampaign {
    * Whop pixel-attributed add-to-cart events, last-click.
    */
   added_to_carts: number;
-
-  /**
-   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
-   * the budget, `average_target` holds an average cost per result, and
-   * `maximum_target` never bids above a cap.
-   */
-  bid_type: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
 
   /**
    * The campaign's budget, in the ad account's currency. `null` when each ad group
@@ -348,7 +363,7 @@ export interface AdCampaign {
   /**
    * The ad network the campaign runs on.
    */
-  platform: 'meta';
+  platform: 'meta' | 'tiktok';
 
   /**
    * USD value of pixel-attributed purchases.
@@ -439,7 +454,8 @@ export interface AdCampaign {
     | 'in_review'
     | 'flagged'
     | 'importing'
-    | 'imported';
+    | 'imported'
+    | 'duplicating';
 
   /**
    * USD value attributed to submit-application events. Sums the value sent with each
@@ -482,6 +498,13 @@ export interface AdCampaign {
    * Whop pixel-attributed view-content events, last-click.
    */
   viewed_contents: number;
+
+  /**
+   * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+   * the budget, `average_target` holds an average cost per result, and
+   * `maximum_target` never bids above a cap.
+   */
+  bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
 }
 
 export namespace AdCampaign {
@@ -511,7 +534,21 @@ export namespace AdCampaign {
   }
 }
 
-export type AdCampaignDeleteResponse = boolean;
+export interface AdCampaignDeleteResponse {
+  /**
+   * ID of the deleted ad campaign.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
+
+export interface AdCampaignDuplicateResponse {
+  data: Array<AdCampaign>;
+}
 
 export interface AdCampaignListParams extends CursorPageParams {
   /**
@@ -765,6 +802,25 @@ export interface AdCampaignUnpauseParams {
   'Idempotency-Key'?: string;
 }
 
+export interface AdCampaignDuplicateParams {
+  /**
+   * Body param: Number of copies to create (1-10). Defaults to 1.
+   */
+  count?: number;
+
+  /**
+   * Body param: Whether the copied ads keep the original posts' engagement (likes,
+   * comments, shares). Defaults to false.
+   */
+  preserve_engagement?: boolean;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
 export interface AdCampaignRetryPaymentParams {
   /**
    * A unique key that makes this request safe to retry. See
@@ -777,6 +833,7 @@ export declare namespace AdCampaigns {
   export {
     type AdCampaign as AdCampaign,
     type AdCampaignDeleteResponse as AdCampaignDeleteResponse,
+    type AdCampaignDuplicateResponse as AdCampaignDuplicateResponse,
     type AdCampaignsCursorPage as AdCampaignsCursorPage,
     type AdCampaignListParams as AdCampaignListParams,
     type AdCampaignCreateParams as AdCampaignCreateParams,
@@ -784,6 +841,7 @@ export declare namespace AdCampaigns {
     type AdCampaignUpdateParams as AdCampaignUpdateParams,
     type AdCampaignPauseParams as AdCampaignPauseParams,
     type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+    type AdCampaignDuplicateParams as AdCampaignDuplicateParams,
     type AdCampaignRetryPaymentParams as AdCampaignRetryPaymentParams,
   };
 }

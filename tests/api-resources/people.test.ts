@@ -28,13 +28,24 @@ describe('resource people', () => {
         {
           account_id: 'account_id',
           after: 'after',
+          audience_id: 'audience_id',
           before: 'before',
+          country: 'country',
+          custom_event: 'custom_event',
           direction: 'asc',
-          filters: 'filters',
+          email: 'email',
+          event_name: ['string'],
           first: 0,
-          from: '2019-12-27T18:11:19.117Z',
-          sort: 'sort',
-          to: '2019-12-27T18:11:19.117Z',
+          first_seen_after: '2019-12-27T18:11:19.117Z',
+          first_seen_before: '2019-12-27T18:11:19.117Z',
+          has_purchased: true,
+          last_seen_after: '2019-12-27T18:11:19.117Z',
+          last_seen_before: '2019-12-27T18:11:19.117Z',
+          order: 'first_seen_at',
+          phone: 'phone',
+          query: 'query',
+          source: ['string'],
+          user_id: 'user_id',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -57,15 +68,7 @@ describe('resource people', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.people.retrieve(
-        'person_id',
-        {
-          account_id: 'account_id',
-          from: '2019-12-27T18:11:19.117Z',
-          to: '2019-12-27T18:11:19.117Z',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.people.retrieve('person_id', { account_id: 'account_id' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 });

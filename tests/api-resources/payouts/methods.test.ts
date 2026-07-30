@@ -35,6 +35,7 @@ describe('resource methods', () => {
           destination_id: 'destination_id',
           first: 100,
           include_available: true,
+          include_limits: true,
           last: 100,
           status: 'created',
           user_id: 'user_id',
