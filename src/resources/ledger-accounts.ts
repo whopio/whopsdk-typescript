@@ -61,6 +61,13 @@ export interface LedgerAccountRetrieveResponse {
   payout_account_details: LedgerAccountRetrieveResponse.PayoutAccountDetails | null;
 
   /**
+   * The settlement batch most recently posted to this account's available balance,
+   * at midnight UTC. Every payment settling in that batch carries the same
+   * `settlement_time_at`.
+   */
+  settlement_time_at: string | null;
+
+  /**
    * The fee for transfers, if applicable.
    */
   transfer_fee: number | null;

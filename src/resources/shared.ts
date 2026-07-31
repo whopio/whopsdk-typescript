@@ -2915,6 +2915,14 @@ export interface Payment {
   settlement_exchange_rate: number | null;
 
   /**
+   * When this payment's funds post to the company's available balance, at midnight
+   * UTC. Known at payment time and never changes. The
+   * `ledger_account.funds_available` webhook carries the same `settlement_time_at`
+   * when that batch posts — match them to know these funds are now withdrawable.
+   */
+  settlement_time_at: string | null;
+
+  /**
    * The shipping address provided by the customer for physical goods. Null if no
    * shipping address was collected.
    */
