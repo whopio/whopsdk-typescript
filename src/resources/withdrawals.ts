@@ -393,6 +393,11 @@ export interface WithdrawalCreateParams {
   platform_covers_fees?: boolean | null;
 
   /**
+   * The different speeds of withdrawals
+   */
+  speed?: WithdrawalSpeeds | null;
+
+  /**
    * Custom statement descriptor for the withdrawal. Must be between 5 and 22
    * characters and contain only alphanumeric characters.
    */

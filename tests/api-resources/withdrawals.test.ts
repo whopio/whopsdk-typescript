@@ -33,6 +33,7 @@ describe('resource withdrawals', () => {
       idempotency_key: 'idempotency_key',
       payout_method_id: 'payout_method_id',
       platform_covers_fees: true,
+      speed: 'standard',
       statement_descriptor: 'statement_descriptor',
     });
   });
