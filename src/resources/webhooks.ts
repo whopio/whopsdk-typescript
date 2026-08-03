@@ -232,8 +232,14 @@ export type WebhookEvent =
   | 'setup_intent.succeeded'
   | 'setup_intent.canceled'
   | 'ledger_account.funds_available'
+  | 'deposit.succeeded'
   | 'withdrawal.created'
   | 'withdrawal.updated'
+  | 'card_transaction.created'
+  | 'card_transaction.updated'
+  | 'card_transaction.completed'
+  | 'card_transaction.declined'
+  | 'card_transaction.reversed'
   | 'course_lesson_interaction.completed'
   | 'payout_method.created'
   | 'verification.succeeded'
@@ -250,6 +256,12 @@ export type WebhookEvent =
   | 'product.deleted'
   | 'product.published'
   | 'product.unpublished'
+  | 'plan.created'
+  | 'plan.updated'
+  | 'plan.deleted'
+  | 'shipment.created'
+  | 'shipment.updated'
+  | 'member.created'
   | 'chat.message.created'
   | 'chat.reaction.created'
   | 'payment.created'
@@ -1386,6 +1398,701 @@ export interface WithdrawalUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+}
+
+export interface CardTransactionCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A card transaction record.
+   */
+  data: CardTransactionCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'card_transaction.created';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace CardTransactionCreatedWebhookEvent {
+  /**
+   * A card transaction record.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the card transaction.
+     */
+    id: string;
+
+    /**
+     * How the card was presented or authenticated for the purchase.
+     */
+    authorization_method: string | null;
+
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    card_id: string;
+
+    /**
+     * The cashback reward amount earned on this transaction, in USD.
+     */
+    cashback_usd_amount: number | null;
+
+    /**
+     * The datetime the card transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The ISO 4217 currency code for the transaction amount.
+     */
+    currency: string | null;
+
+    /**
+     * The issuer-provided reason the transaction was declined.
+     */
+    declined_reason: string | null;
+
+    /**
+     * Whether the transaction was made with a merchant outside the card's home
+     * country.
+     */
+    international: boolean;
+
+    /**
+     * The transaction amount in the merchant's local currency before conversion.
+     */
+    local_amount: number | null;
+
+    /**
+     * A user-provided note attached to the transaction.
+     */
+    memo: string | null;
+
+    /**
+     * The enriched or raw category label for the merchant.
+     */
+    merchant_category: string | null;
+
+    /**
+     * The four-digit ISO 18245 merchant category code (MCC).
+     */
+    merchant_category_code: string | null;
+
+    /**
+     * A URL to the enriched merchant logo image.
+     */
+    merchant_icon_url: string | null;
+
+    /**
+     * The enriched or raw name of the merchant where the purchase was made.
+     */
+    merchant_name: string | null;
+
+    /**
+     * When the transaction was settled by the card network.
+     */
+    posted_at: string | null;
+
+    /**
+     * The current lifecycle status of the transaction.
+     */
+    status: 'pending' | 'completed' | 'reversed' | 'declined';
+
+    /**
+     * The type of transaction.
+     */
+    transaction_type: string;
+
+    /**
+     * The transaction amount in USD.
+     */
+    usd_amount: number | null;
+  }
+}
+
+export interface CardTransactionUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A card transaction record.
+   */
+  data: CardTransactionUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'card_transaction.updated';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace CardTransactionUpdatedWebhookEvent {
+  /**
+   * A card transaction record.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the card transaction.
+     */
+    id: string;
+
+    /**
+     * How the card was presented or authenticated for the purchase.
+     */
+    authorization_method: string | null;
+
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    card_id: string;
+
+    /**
+     * The cashback reward amount earned on this transaction, in USD.
+     */
+    cashback_usd_amount: number | null;
+
+    /**
+     * The datetime the card transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The ISO 4217 currency code for the transaction amount.
+     */
+    currency: string | null;
+
+    /**
+     * The issuer-provided reason the transaction was declined.
+     */
+    declined_reason: string | null;
+
+    /**
+     * Whether the transaction was made with a merchant outside the card's home
+     * country.
+     */
+    international: boolean;
+
+    /**
+     * The transaction amount in the merchant's local currency before conversion.
+     */
+    local_amount: number | null;
+
+    /**
+     * A user-provided note attached to the transaction.
+     */
+    memo: string | null;
+
+    /**
+     * The enriched or raw category label for the merchant.
+     */
+    merchant_category: string | null;
+
+    /**
+     * The four-digit ISO 18245 merchant category code (MCC).
+     */
+    merchant_category_code: string | null;
+
+    /**
+     * A URL to the enriched merchant logo image.
+     */
+    merchant_icon_url: string | null;
+
+    /**
+     * The enriched or raw name of the merchant where the purchase was made.
+     */
+    merchant_name: string | null;
+
+    /**
+     * When the transaction was settled by the card network.
+     */
+    posted_at: string | null;
+
+    /**
+     * The current lifecycle status of the transaction.
+     */
+    status: 'pending' | 'completed' | 'reversed' | 'declined';
+
+    /**
+     * The type of transaction.
+     */
+    transaction_type: string;
+
+    /**
+     * The transaction amount in USD.
+     */
+    usd_amount: number | null;
+  }
+}
+
+export interface CardTransactionCompletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A card transaction record.
+   */
+  data: CardTransactionCompletedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'card_transaction.completed';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace CardTransactionCompletedWebhookEvent {
+  /**
+   * A card transaction record.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the card transaction.
+     */
+    id: string;
+
+    /**
+     * How the card was presented or authenticated for the purchase.
+     */
+    authorization_method: string | null;
+
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    card_id: string;
+
+    /**
+     * The cashback reward amount earned on this transaction, in USD.
+     */
+    cashback_usd_amount: number | null;
+
+    /**
+     * The datetime the card transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The ISO 4217 currency code for the transaction amount.
+     */
+    currency: string | null;
+
+    /**
+     * The issuer-provided reason the transaction was declined.
+     */
+    declined_reason: string | null;
+
+    /**
+     * Whether the transaction was made with a merchant outside the card's home
+     * country.
+     */
+    international: boolean;
+
+    /**
+     * The transaction amount in the merchant's local currency before conversion.
+     */
+    local_amount: number | null;
+
+    /**
+     * A user-provided note attached to the transaction.
+     */
+    memo: string | null;
+
+    /**
+     * The enriched or raw category label for the merchant.
+     */
+    merchant_category: string | null;
+
+    /**
+     * The four-digit ISO 18245 merchant category code (MCC).
+     */
+    merchant_category_code: string | null;
+
+    /**
+     * A URL to the enriched merchant logo image.
+     */
+    merchant_icon_url: string | null;
+
+    /**
+     * The enriched or raw name of the merchant where the purchase was made.
+     */
+    merchant_name: string | null;
+
+    /**
+     * When the transaction was settled by the card network.
+     */
+    posted_at: string | null;
+
+    /**
+     * The current lifecycle status of the transaction.
+     */
+    status: 'pending' | 'completed' | 'reversed' | 'declined';
+
+    /**
+     * The type of transaction.
+     */
+    transaction_type: string;
+
+    /**
+     * The transaction amount in USD.
+     */
+    usd_amount: number | null;
+  }
+}
+
+export interface CardTransactionDeclinedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A card transaction record.
+   */
+  data: CardTransactionDeclinedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'card_transaction.declined';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace CardTransactionDeclinedWebhookEvent {
+  /**
+   * A card transaction record.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the card transaction.
+     */
+    id: string;
+
+    /**
+     * How the card was presented or authenticated for the purchase.
+     */
+    authorization_method: string | null;
+
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    card_id: string;
+
+    /**
+     * The cashback reward amount earned on this transaction, in USD.
+     */
+    cashback_usd_amount: number | null;
+
+    /**
+     * The datetime the card transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The ISO 4217 currency code for the transaction amount.
+     */
+    currency: string | null;
+
+    /**
+     * The issuer-provided reason the transaction was declined.
+     */
+    declined_reason: string | null;
+
+    /**
+     * Whether the transaction was made with a merchant outside the card's home
+     * country.
+     */
+    international: boolean;
+
+    /**
+     * The transaction amount in the merchant's local currency before conversion.
+     */
+    local_amount: number | null;
+
+    /**
+     * A user-provided note attached to the transaction.
+     */
+    memo: string | null;
+
+    /**
+     * The enriched or raw category label for the merchant.
+     */
+    merchant_category: string | null;
+
+    /**
+     * The four-digit ISO 18245 merchant category code (MCC).
+     */
+    merchant_category_code: string | null;
+
+    /**
+     * A URL to the enriched merchant logo image.
+     */
+    merchant_icon_url: string | null;
+
+    /**
+     * The enriched or raw name of the merchant where the purchase was made.
+     */
+    merchant_name: string | null;
+
+    /**
+     * When the transaction was settled by the card network.
+     */
+    posted_at: string | null;
+
+    /**
+     * The current lifecycle status of the transaction.
+     */
+    status: 'pending' | 'completed' | 'reversed' | 'declined';
+
+    /**
+     * The type of transaction.
+     */
+    transaction_type: string;
+
+    /**
+     * The transaction amount in USD.
+     */
+    usd_amount: number | null;
+  }
+}
+
+export interface CardTransactionReversedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A card transaction record.
+   */
+  data: CardTransactionReversedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'card_transaction.reversed';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace CardTransactionReversedWebhookEvent {
+  /**
+   * A card transaction record.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the card transaction.
+     */
+    id: string;
+
+    /**
+     * How the card was presented or authenticated for the purchase.
+     */
+    authorization_method: string | null;
+
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    card_id: string;
+
+    /**
+     * The cashback reward amount earned on this transaction, in USD.
+     */
+    cashback_usd_amount: number | null;
+
+    /**
+     * The datetime the card transaction was created.
+     */
+    created_at: string;
+
+    /**
+     * The ISO 4217 currency code for the transaction amount.
+     */
+    currency: string | null;
+
+    /**
+     * The issuer-provided reason the transaction was declined.
+     */
+    declined_reason: string | null;
+
+    /**
+     * Whether the transaction was made with a merchant outside the card's home
+     * country.
+     */
+    international: boolean;
+
+    /**
+     * The transaction amount in the merchant's local currency before conversion.
+     */
+    local_amount: number | null;
+
+    /**
+     * A user-provided note attached to the transaction.
+     */
+    memo: string | null;
+
+    /**
+     * The enriched or raw category label for the merchant.
+     */
+    merchant_category: string | null;
+
+    /**
+     * The four-digit ISO 18245 merchant category code (MCC).
+     */
+    merchant_category_code: string | null;
+
+    /**
+     * A URL to the enriched merchant logo image.
+     */
+    merchant_icon_url: string | null;
+
+    /**
+     * The enriched or raw name of the merchant where the purchase was made.
+     */
+    merchant_name: string | null;
+
+    /**
+     * When the transaction was settled by the card network.
+     */
+    posted_at: string | null;
+
+    /**
+     * The current lifecycle status of the transaction.
+     */
+    status: 'pending' | 'completed' | 'reversed' | 'declined';
+
+    /**
+     * The type of transaction.
+     */
+    transaction_type: string;
+
+    /**
+     * The transaction amount in USD.
+     */
+    usd_amount: number | null;
+  }
 }
 
 export interface CourseLessonInteractionCompletedWebhookEvent {
@@ -3931,6 +4638,244 @@ export interface ProductUnpublishedWebhookEvent {
   company_id?: string | null;
 }
 
+export interface ShipmentCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A physical shipment associated with a payment, including carrier details and
+   * tracking information.
+   */
+  data: Shared.Shipment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'shipment.created';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface ShipmentUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A physical shipment associated with a payment, including carrier details and
+   * tracking information.
+   */
+  data: Shared.Shipment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'shipment.updated';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface MemberCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A member represents a user's relationship with a company on Whop, including
+   * their access level, status, and spending history.
+   */
+  data: MemberCreatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'member.created';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export namespace MemberCreatedWebhookEvent {
+  /**
+   * A member represents a user's relationship with a company on Whop, including
+   * their access level, status, and spending history.
+   */
+  export interface Data {
+    /**
+     * The unique identifier for the company member.
+     */
+    id: string;
+
+    /**
+     * The access level of the product member. If its admin, the member is an
+     * authorized user of the company. If its customer, the member has a valid
+     * membership to any product on the company. If its no_access, the member does not
+     * have access to the product.
+     */
+    access_level: Shared.AccessLevel;
+
+    /**
+     * The company for the member.
+     */
+    company: Data.Company;
+
+    /**
+     * The member's token balance for this company. Computed live from the ledger, not
+     * from a cache.
+     */
+    company_token_balance: number;
+
+    /**
+     * The datetime the company member was created.
+     */
+    created_at: string;
+
+    /**
+     * When the member joined the company
+     */
+    joined_at: string;
+
+    /**
+     * The different most recent actions a member can have.
+     */
+    most_recent_action: Shared.MemberMostRecentActions | null;
+
+    /**
+     * The time for the most recent action, if applicable.
+     */
+    most_recent_action_at: string | null;
+
+    /**
+     * The phone number for the member, if available.
+     */
+    phone: string | null;
+
+    /**
+     * The status of the member
+     */
+    status: Shared.MemberStatuses;
+
+    /**
+     * The datetime the company member was last updated.
+     */
+    updated_at: string;
+
+    /**
+     * How much money this customer has spent on the company's products and plans
+     */
+    usd_total_spent: number;
+
+    /**
+     * The user for this member, if any.
+     */
+    user: Data.User | null;
+  }
+
+  export namespace Data {
+    /**
+     * The company for the member.
+     */
+    export interface Company {
+      /**
+       * The unique identifier for the company.
+       */
+      id: string;
+
+      /**
+       * The slug/route of the company on the Whop site.
+       */
+      route: string;
+
+      /**
+       * The written name of the company.
+       */
+      title: string;
+    }
+
+    /**
+     * The user for this member, if any.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the company member user.
+       */
+      id: string;
+
+      /**
+       * The digital mailing address of the user.
+       */
+      email: string | null;
+
+      /**
+       * The user's full name.
+       */
+      name: string | null;
+
+      /**
+       * The whop username.
+       */
+      username: string;
+    }
+  }
+}
+
 export interface ChatMessageCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -5250,6 +6195,11 @@ export type UnwrapWebhookEvent =
   | LedgerAccountFundsAvailableWebhookEvent
   | WithdrawalCreatedWebhookEvent
   | WithdrawalUpdatedWebhookEvent
+  | CardTransactionCreatedWebhookEvent
+  | CardTransactionUpdatedWebhookEvent
+  | CardTransactionCompletedWebhookEvent
+  | CardTransactionDeclinedWebhookEvent
+  | CardTransactionReversedWebhookEvent
   | CourseLessonInteractionCompletedWebhookEvent
   | PayoutMethodCreatedWebhookEvent
   | VerificationSucceededWebhookEvent
@@ -5266,6 +6216,9 @@ export type UnwrapWebhookEvent =
   | ProductDeletedWebhookEvent
   | ProductPublishedWebhookEvent
   | ProductUnpublishedWebhookEvent
+  | ShipmentCreatedWebhookEvent
+  | ShipmentUpdatedWebhookEvent
+  | MemberCreatedWebhookEvent
   | ChatMessageCreatedWebhookEvent
   | ChatReactionCreatedWebhookEvent
   | PaymentCreatedWebhookEvent
@@ -5410,6 +6363,11 @@ export declare namespace Webhooks {
     type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
+    type CardTransactionCreatedWebhookEvent as CardTransactionCreatedWebhookEvent,
+    type CardTransactionUpdatedWebhookEvent as CardTransactionUpdatedWebhookEvent,
+    type CardTransactionCompletedWebhookEvent as CardTransactionCompletedWebhookEvent,
+    type CardTransactionDeclinedWebhookEvent as CardTransactionDeclinedWebhookEvent,
+    type CardTransactionReversedWebhookEvent as CardTransactionReversedWebhookEvent,
     type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
     type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
@@ -5426,6 +6384,9 @@ export declare namespace Webhooks {
     type ProductDeletedWebhookEvent as ProductDeletedWebhookEvent,
     type ProductPublishedWebhookEvent as ProductPublishedWebhookEvent,
     type ProductUnpublishedWebhookEvent as ProductUnpublishedWebhookEvent,
+    type ShipmentCreatedWebhookEvent as ShipmentCreatedWebhookEvent,
+    type ShipmentUpdatedWebhookEvent as ShipmentUpdatedWebhookEvent,
+    type MemberCreatedWebhookEvent as MemberCreatedWebhookEvent,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,

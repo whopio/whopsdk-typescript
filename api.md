@@ -158,6 +158,11 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionDeclinedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionReversedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
@@ -174,6 +179,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ProductDeletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductPublishedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductUnpublishedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ShipmentCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ShipmentUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MemberCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatMessageCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatReactionCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
