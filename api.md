@@ -169,6 +169,11 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseDecidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductDeletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductPublishedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductUnpublishedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatMessageCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ChatReactionCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>

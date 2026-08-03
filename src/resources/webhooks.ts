@@ -245,6 +245,11 @@ export type WebhookEvent =
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
   | 'resolution_center_case.decided'
+  | 'product.created'
+  | 'product.updated'
+  | 'product.deleted'
+  | 'product.published'
+  | 'product.unpublished'
   | 'chat.message.created'
   | 'chat.reaction.created'
   | 'payment.created'
@@ -3736,6 +3741,196 @@ export namespace ResolutionCenterCaseDecidedWebhookEvent {
   }
 }
 
+export interface ProductCreatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
+   */
+  data: Shared.Product;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'product.created';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface ProductUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
+   */
+  data: Shared.Product;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'product.updated';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface ProductDeletedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
+   */
+  data: Shared.Product;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'product.deleted';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface ProductPublishedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
+   */
+  data: Shared.Product;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'product.published';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
+export interface ProductUnpublishedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A product is a digital good or service sold on Whop. Products contain plans for
+   * pricing and experiences for content delivery.
+   */
+  data: Shared.Product;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'product.unpublished';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  company_id?: string | null;
+}
+
 export interface ChatMessageCreatedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -5066,6 +5261,11 @@ export type UnwrapWebhookEvent =
   | ResolutionCenterCaseCreatedWebhookEvent
   | ResolutionCenterCaseUpdatedWebhookEvent
   | ResolutionCenterCaseDecidedWebhookEvent
+  | ProductCreatedWebhookEvent
+  | ProductUpdatedWebhookEvent
+  | ProductDeletedWebhookEvent
+  | ProductPublishedWebhookEvent
+  | ProductUnpublishedWebhookEvent
   | ChatMessageCreatedWebhookEvent
   | ChatReactionCreatedWebhookEvent
   | PaymentCreatedWebhookEvent
@@ -5221,6 +5421,11 @@ export declare namespace Webhooks {
     type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
     type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
     type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type ProductCreatedWebhookEvent as ProductCreatedWebhookEvent,
+    type ProductUpdatedWebhookEvent as ProductUpdatedWebhookEvent,
+    type ProductDeletedWebhookEvent as ProductDeletedWebhookEvent,
+    type ProductPublishedWebhookEvent as ProductPublishedWebhookEvent,
+    type ProductUnpublishedWebhookEvent as ProductUnpublishedWebhookEvent,
     type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
     type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
