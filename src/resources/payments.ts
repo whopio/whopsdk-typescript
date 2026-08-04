@@ -31,6 +31,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    * - `payment:dispute:read`
    * - `payment:resolution_center_case:read`
    *
@@ -59,6 +60,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    * - `payment:dispute:read`
    * - `payment:resolution_center_case:read`
    *
@@ -86,6 +88,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    *
    * @example
    * ```ts
@@ -144,6 +147,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    * - `payment:dispute:read`
    * - `payment:resolution_center_case:read`
    *
@@ -175,6 +179,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    * - `payment:dispute:read`
    * - `payment:resolution_center_case:read`
    *
@@ -202,6 +207,7 @@ export class Payments extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    * - `promo_code:basic:read`
+   * - `shipment:basic:read`
    * - `payment:dispute:read`
    * - `payment:resolution_center_case:read`
    *
@@ -509,6 +515,12 @@ export interface PaymentListResponse {
   metadata: { [key: string]: unknown } | null;
 
   /**
+   * Whether this payment is holding funds until the order ships and has no tracking
+   * number yet.
+   */
+  needs_tracking: boolean | null;
+
+  /**
    * The time of the next schedule payment retry.
    */
   next_payment_attempt: string | null;
@@ -579,6 +591,11 @@ export interface PaymentListResponse {
    * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
    */
   settlement_currency: Shared.Currency;
+
+  /**
+   * The shipment attached to this payment.
+   */
+  shipment: PaymentListResponse.Shipment | null;
 
   /**
    * The shipping address provided by the customer for physical goods. Null if no
@@ -910,6 +927,37 @@ export namespace PaymentListResponse {
      * The type (% or flat amount) of the promo.
      */
     promo_type: Shared.PromoType;
+  }
+
+  /**
+   * The shipment attached to this payment.
+   */
+  export interface Shipment {
+    /**
+     * The unique identifier for the shipment.
+     */
+    id: string;
+
+    /**
+     * The shipping carrier detected for this shipment. Null until a tracking update
+     * identifies it.
+     */
+    carrier: string | null;
+
+    /**
+     * The current delivery status of this shipment.
+     */
+    status: Shared.ShipmentStatus;
+
+    /**
+     * The carrier-assigned tracking number used to look up shipment progress.
+     */
+    tracking_number: string;
+
+    /**
+     * A customer-facing URL to track this shipment's progress.
+     */
+    tracking_url: string;
   }
 
   /**

@@ -2805,6 +2805,12 @@ export interface Payment {
   metadata: { [key: string]: unknown } | null;
 
   /**
+   * Whether this payment is holding funds until the order ships and has no tracking
+   * number yet.
+   */
+  needs_tracking: boolean | null;
+
+  /**
    * The time of the next schedule payment retry.
    */
   next_payment_attempt: string | null;
@@ -2921,6 +2927,11 @@ export interface Payment {
    * when that batch posts — match them to know these funds are now withdrawable.
    */
   settlement_time_at: string | null;
+
+  /**
+   * The shipment attached to this payment.
+   */
+  shipment: Payment.Shipment | null;
 
   /**
    * The shipping address provided by the customer for physical goods. Null if no
@@ -3451,6 +3462,37 @@ export namespace Payment {
      * respond or if the case is closed.
      */
     status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
+  }
+
+  /**
+   * The shipment attached to this payment.
+   */
+  export interface Shipment {
+    /**
+     * The unique identifier for the shipment.
+     */
+    id: string;
+
+    /**
+     * The shipping carrier detected for this shipment. Null until a tracking update
+     * identifies it.
+     */
+    carrier: string | null;
+
+    /**
+     * The current delivery status of this shipment.
+     */
+    status: Shared.ShipmentStatus;
+
+    /**
+     * The carrier-assigned tracking number used to look up shipment progress.
+     */
+    tracking_number: string;
+
+    /**
+     * A customer-facing URL to track this shipment's progress.
+     */
+    tracking_url: string;
   }
 
   /**
