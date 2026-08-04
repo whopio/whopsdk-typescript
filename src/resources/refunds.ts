@@ -65,7 +65,8 @@ export type PaymentProvider =
   | 'coinflow'
   | 'sequra'
   | 'dlocal'
-  | 'masspay';
+  | 'masspay'
+  | 'braintree';
 
 /**
  * The status of the refund reference.
