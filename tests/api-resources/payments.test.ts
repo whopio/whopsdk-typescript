@@ -12,8 +12,7 @@ describe('resource payments', () => {
   test.skip('create: only required params', async () => {
     const responsePromise = client.payments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
-      member_id: 'mber_xxxxxxxxxxxxx',
-      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+      confirmation_token: 'confirmation_token',
       plan: { currency: 'usd' },
     });
     const rawResponse = await responsePromise.asResponse();
@@ -29,8 +28,7 @@ describe('resource payments', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.payments.create({
       company_id: 'biz_xxxxxxxxxxxxxx',
-      member_id: 'mber_xxxxxxxxxxxxx',
-      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+      confirmation_token: 'confirmation_token',
       plan: {
         currency: 'usd',
         application_fee_amount: 6.9,
@@ -61,8 +59,11 @@ describe('resource payments', () => {
         trial_period_days: 42,
         visibility: 'visible',
       },
+      email: 'buyer@example.com',
       metadata: { foo: 'bar' },
+      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
       promo_code_id: 'promo_xxxxxxxxxxxx',
+      return_url: 'https://example.com/path',
     });
   });
 

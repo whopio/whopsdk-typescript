@@ -38,8 +38,7 @@ export class Payments extends APIResource {
    * ```ts
    * const payment = await client.payments.create({
    *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   member_id: 'mber_xxxxxxxxxxxxx',
-   *   payment_method_id: 'pmt_xxxxxxxxxxxxxx',
+   *   confirmation_token: 'confirmation_token',
    *   plan: { currency: 'usd' },
    * });
    * ```
@@ -1039,31 +1038,40 @@ export interface PaymentListFeesResponse {
 }
 
 export type PaymentCreateParams =
-  | PaymentCreateParams.CreatePaymentInputWithPlan
-  | PaymentCreateParams.CreatePaymentInputWithPlanID;
+  | PaymentCreateParams.CreatePaymentInputWithPlanAndConfirmationToken
+  | PaymentCreateParams.CreatePaymentInputWithPlanAndMemberID
+  | PaymentCreateParams.CreatePaymentInputWithPlanIDAndConfirmationToken
+  | PaymentCreateParams.CreatePaymentInputWithPlanIDAndMemberID;
 
 export declare namespace PaymentCreateParams {
-  export interface CreatePaymentInputWithPlan {
+  export interface CreatePaymentInputWithPlanAndConfirmationToken {
     /**
      * The ID of the company to create the payment for.
      */
     company_id: string;
 
     /**
-     * The ID of the member to create the payment for.
+     * A confirmation token ID (ctok\_) describing a payment method the buyer just
+     * supplied. Provide this INSTEAD of member_id and payment_method_id to charge a
+     * method that is not yet on file — the buyer is resolved from the token's billing
+     * email, or from `email`. The buyer may still have a step to complete (3DS, a
+     * redirect, linking a bank); poll the payment's status endpoint for what to do
+     * next.
      */
-    member_id: string;
-
-    /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged.
-     */
-    payment_method_id: string;
+    confirmation_token: string;
 
     /**
      * Pass this object to create a new plan for this payment
      */
-    plan: CreatePaymentInputWithPlan.Plan;
+    plan: CreatePaymentInputWithPlanAndConfirmationToken.Plan;
+
+    /**
+     * Overrides the buyer email carried on the confirmation token, resolving or
+     * creating the Whop user the payment belongs to. Ignored when the confirmation
+     * token was created by a signed-in buyer, and unless confirmation_token is
+     * provided.
+     */
+    email?: string | null;
 
     /**
      * Custom metadata to attach to the payment.
@@ -1071,14 +1079,28 @@ export declare namespace PaymentCreateParams {
     metadata?: { [key: string]: unknown } | null;
 
     /**
+     * The ID of the payment method to use for the payment. It must be connected to the
+     * Member being charged. Required unless confirmation_token is provided.
+     */
+    payment_method_id?: string | null;
+
+    /**
      * The ID of an active promo code to apply to this payment. The promo code must
      * belong to the company and be valid for the plan being purchased. The plan must
      * be attached to a product — promo codes are not eligible for one-off purchases.
      */
     promo_code_id?: string | null;
+
+    /**
+     * Where the buyer continues after completing an off-site step. Must be an absolute
+     * https URL without credentials, at most 2,048 characters. Editable until they
+     * return — see the payment's update endpoint. Ignored unless confirmation_token is
+     * provided.
+     */
+    return_url?: string | null;
   }
 
-  export namespace CreatePaymentInputWithPlan {
+  export namespace CreatePaymentInputWithPlanAndConfirmationToken {
     /**
      * Pass this object to create a new plan for this payment
      */
@@ -1241,27 +1263,30 @@ export declare namespace PaymentCreateParams {
     }
   }
 
-  export interface CreatePaymentInputWithPlanID {
+  export interface CreatePaymentInputWithPlanAndMemberID {
     /**
      * The ID of the company to create the payment for.
      */
     company_id: string;
 
     /**
-     * The ID of the member to create the payment for.
+     * The ID of the member to create the payment for. Required unless
+     * confirmation_token is provided.
      */
     member_id: string;
 
     /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged.
+     * Pass this object to create a new plan for this payment
      */
-    payment_method_id: string;
+    plan: CreatePaymentInputWithPlanAndMemberID.Plan;
 
     /**
-     * An ID of an existing plan to use for the payment.
+     * Overrides the buyer email carried on the confirmation token, resolving or
+     * creating the Whop user the payment belongs to. Ignored when the confirmation
+     * token was created by a signed-in buyer, and unless confirmation_token is
+     * provided.
      */
-    plan_id: string;
+    email?: string | null;
 
     /**
      * Custom metadata to attach to the payment.
@@ -1269,11 +1294,296 @@ export declare namespace PaymentCreateParams {
     metadata?: { [key: string]: unknown } | null;
 
     /**
+     * The ID of the payment method to use for the payment. It must be connected to the
+     * Member being charged. Required unless confirmation_token is provided.
+     */
+    payment_method_id?: string | null;
+
+    /**
      * The ID of an active promo code to apply to this payment. The promo code must
      * belong to the company and be valid for the plan being purchased. The plan must
      * be attached to a product — promo codes are not eligible for one-off purchases.
      */
     promo_code_id?: string | null;
+
+    /**
+     * Where the buyer continues after completing an off-site step. Must be an absolute
+     * https URL without credentials, at most 2,048 characters. Editable until they
+     * return — see the payment's update endpoint. Ignored unless confirmation_token is
+     * provided.
+     */
+    return_url?: string | null;
+  }
+
+  export namespace CreatePaymentInputWithPlanAndMemberID {
+    /**
+     * Pass this object to create a new plan for this payment
+     */
+    export interface Plan {
+      /**
+       * The respective currency identifier for the plan.
+       */
+      currency: Shared.Currency;
+
+      /**
+       * The application fee amount collected by the platform from this connected
+       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
+       * than the total payment amount. Only valid for connected accounts with a parent
+       * company.
+       */
+      application_fee_amount?: number | null;
+
+      /**
+       * The interval in days at which the plan charges (renewal plans). For example, 30
+       * for monthly billing.
+       */
+      billing_period?: number | null;
+
+      /**
+       * The description of the plan.
+       */
+      description?: string | null;
+
+      /**
+       * The number of days until the membership expires and revokes access (expiration
+       * plans). For example, 365 for one year.
+       */
+      expiration_days?: number | null;
+
+      /**
+       * Whether to force the creation of a new plan even if one with the same attributes
+       * already exists.
+       */
+      force_create_new_plan?: boolean | null;
+
+      /**
+       * An additional amount charged upon first purchase. Provided as a number in the
+       * specified currency. Eg: 10.43 for $10.43 USD.
+       */
+      initial_price?: number | null;
+
+      /**
+       * A personal description or notes section for the business.
+       */
+      internal_notes?: string | null;
+
+      /**
+       * The type of plan that can be attached to a product
+       */
+      plan_type?: Shared.PlanType | null;
+
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      product?: Plan.Product | null;
+
+      /**
+       * The product the plan is related to. Either this or product is required.
+       */
+      product_id?: string | null;
+
+      /**
+       * The amount the customer is charged every billing period. Provided as a number in
+       * the specified currency. Eg: 10.43 for $10.43 USD.
+       */
+      renewal_price?: number | null;
+
+      /**
+       * The title of the plan. This will be visible on the product page to customers.
+       */
+      title?: string | null;
+
+      /**
+       * The number of free trial days added before a renewal plan.
+       */
+      trial_period_days?: number | null;
+
+      /**
+       * Visibility of a resource
+       */
+      visibility?: Shared.Visibility | null;
+    }
+
+    export namespace Plan {
+      /**
+       * Pass this object to create a new product for this plan. We will use the product
+       * external identifier to find or create an existing product.
+       */
+      export interface Product {
+        /**
+         * A unique ID used to find or create a product. When provided during creation, we
+         * will look for an existing product with this external identifier — if found, it
+         * will be updated; otherwise, a new product will be created.
+         */
+        external_identifier: string;
+
+        /**
+         * The title of the product.
+         */
+        title: string;
+
+        /**
+         * Whether or not to collect shipping information at checkout from the customer.
+         */
+        collect_shipping_address?: boolean | null;
+
+        /**
+         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
+         * between 5 and 22 characters, contain at least one letter, and not contain any of
+         * the following characters: <, >, \, ', "
+         */
+        custom_statement_descriptor?: string | null;
+
+        /**
+         * A written description of the product.
+         */
+        description?: string | null;
+
+        /**
+         * The percentage of the revenue that goes to the global affiliate program.
+         */
+        global_affiliate_percentage?: number | null;
+
+        /**
+         * The different statuses of the global affiliate program for a product.
+         */
+        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+
+        /**
+         * The headline of the product.
+         */
+        headline?: string | null;
+
+        /**
+         * The ID of the product tax code to apply to this product.
+         */
+        product_tax_code_id?: string | null;
+
+        /**
+         * The URL to redirect the customer to after a purchase.
+         */
+        redirect_purchase_url?: string | null;
+
+        /**
+         * The route of the product.
+         */
+        route?: string | null;
+
+        /**
+         * Visibility of a resource
+         */
+        visibility?: Shared.Visibility | null;
+      }
+    }
+  }
+
+  export interface CreatePaymentInputWithPlanIDAndConfirmationToken {
+    /**
+     * The ID of the company to create the payment for.
+     */
+    company_id: string;
+
+    /**
+     * A confirmation token ID (ctok\_) describing a payment method the buyer just
+     * supplied. Provide this INSTEAD of member_id and payment_method_id to charge a
+     * method that is not yet on file — the buyer is resolved from the token's billing
+     * email, or from `email`. The buyer may still have a step to complete (3DS, a
+     * redirect, linking a bank); poll the payment's status endpoint for what to do
+     * next.
+     */
+    confirmation_token: string;
+
+    /**
+     * An ID of an existing plan to use for the payment.
+     */
+    plan_id: string;
+
+    /**
+     * Overrides the buyer email carried on the confirmation token, resolving or
+     * creating the Whop user the payment belongs to. Ignored when the confirmation
+     * token was created by a signed-in buyer, and unless confirmation_token is
+     * provided.
+     */
+    email?: string | null;
+
+    /**
+     * Custom metadata to attach to the payment.
+     */
+    metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of the payment method to use for the payment. It must be connected to the
+     * Member being charged. Required unless confirmation_token is provided.
+     */
+    payment_method_id?: string | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
+
+    /**
+     * Where the buyer continues after completing an off-site step. Must be an absolute
+     * https URL without credentials, at most 2,048 characters. Editable until they
+     * return — see the payment's update endpoint. Ignored unless confirmation_token is
+     * provided.
+     */
+    return_url?: string | null;
+  }
+
+  export interface CreatePaymentInputWithPlanIDAndMemberID {
+    /**
+     * The ID of the company to create the payment for.
+     */
+    company_id: string;
+
+    /**
+     * The ID of the member to create the payment for. Required unless
+     * confirmation_token is provided.
+     */
+    member_id: string;
+
+    /**
+     * An ID of an existing plan to use for the payment.
+     */
+    plan_id: string;
+
+    /**
+     * Overrides the buyer email carried on the confirmation token, resolving or
+     * creating the Whop user the payment belongs to. Ignored when the confirmation
+     * token was created by a signed-in buyer, and unless confirmation_token is
+     * provided.
+     */
+    email?: string | null;
+
+    /**
+     * Custom metadata to attach to the payment.
+     */
+    metadata?: { [key: string]: unknown } | null;
+
+    /**
+     * The ID of the payment method to use for the payment. It must be connected to the
+     * Member being charged. Required unless confirmation_token is provided.
+     */
+    payment_method_id?: string | null;
+
+    /**
+     * The ID of an active promo code to apply to this payment. The promo code must
+     * belong to the company and be valid for the plan being purchased. The plan must
+     * be attached to a product — promo codes are not eligible for one-off purchases.
+     */
+    promo_code_id?: string | null;
+
+    /**
+     * Where the buyer continues after completing an off-site step. Must be an absolute
+     * https URL without credentials, at most 2,048 characters. Editable until they
+     * return — see the payment's update endpoint. Ignored unless confirmation_token is
+     * provided.
+     */
+    return_url?: string | null;
   }
 }
 
