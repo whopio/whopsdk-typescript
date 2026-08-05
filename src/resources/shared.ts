@@ -2722,6 +2722,20 @@ export interface Payment {
   card_brand: PaymentsAPI.CardBrands | null;
 
   /**
+   * The expiration month (1-12) of the card used for this payment. Falls back to the
+   * declined card on failed payments with no saved card. Null when the payment was
+   * not made with a card or the expiry is unavailable.
+   */
+  card_exp_month: number | null;
+
+  /**
+   * The four-digit expiration year of the card used for this payment. Falls back to
+   * the declined card on failed payments with no saved card. Null when the payment
+   * was not made with a card or the expiry is unavailable.
+   */
+  card_exp_year: number | null;
+
+  /**
    * The last four digits of the card used to make this payment. Null if the payment
    * was not made with a card.
    */
