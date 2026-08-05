@@ -31,6 +31,7 @@ describe('resource experiences', () => {
       is_public: true,
       logo: { id: 'id' },
       name: 'name',
+      notifications_enabled: true,
       section_id: 'section_id',
     });
   });
@@ -70,6 +71,7 @@ describe('resource experiences', () => {
           is_public: true,
           logo: { id: 'id' },
           name: 'name',
+          notifications_enabled: true,
           order: '123.45',
           section_id: 'section_id',
         },

@@ -321,6 +321,12 @@ export interface ExperienceCreateParams {
   name?: string | null;
 
   /**
+   * Whether Whop app notifications are enabled for this experience. Webhooks still
+   * fire.
+   */
+  notifications_enabled?: boolean | null;
+
+  /**
    * The unique identifier of the section to place the experience in.
    */
   section_id?: string | null;
@@ -358,6 +364,12 @@ export interface ExperienceUpdateParams {
    * The display name of the experience.
    */
   name?: string | null;
+
+  /**
+   * Whether Whop app notifications are enabled for this experience. Webhooks still
+   * fire.
+   */
+  notifications_enabled?: boolean | null;
 
   /**
    * The position of the experience within its section for display ordering.
