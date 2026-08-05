@@ -183,6 +183,12 @@ export interface DmChannelCreateParams {
    * A custom display name for the DM channel. For example, 'Project Discussion'.
    */
   custom_name?: string | null;
+
+  /**
+   * Whether Whop app notifications are enabled for this direct message channel.
+   * Webhooks still fire.
+   */
+  notifications_enabled?: boolean | null;
 }
 
 export interface DmChannelUpdateParams {

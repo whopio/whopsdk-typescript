@@ -29,6 +29,7 @@ describe('resource supportChannels', () => {
       company_id: 'biz_xxxxxxxxxxxxxx',
       user_id: 'user_xxxxxxxxxxxxx',
       custom_name: 'custom_name',
+      notifications_enabled: true,
     });
   });
 

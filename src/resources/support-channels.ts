@@ -157,6 +157,12 @@ export interface SupportChannelCreateParams {
    * Optional custom display name for the support channel.
    */
   custom_name?: string | null;
+
+  /**
+   * Whether Whop app notifications are enabled for this support channel. Webhooks
+   * still fire.
+   */
+  notifications_enabled?: boolean | null;
 }
 
 export interface SupportChannelListParams extends CursorPageParams {

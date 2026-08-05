@@ -26,6 +26,7 @@ describe('resource dmChannels', () => {
       with_user_ids: ['string'],
       company_id: 'biz_xxxxxxxxxxxxxx',
       custom_name: 'custom_name',
+      notifications_enabled: true,
     });
   });
 
