@@ -129,6 +129,7 @@ export interface Withdrawal {
     | 'exceeded_account_limit'
     | 'expired_quote'
     | 'generic_payout_error'
+    | 'junk_failure_reason'
     | 'technical_problem'
     | 'identification_number_invalid'
     | 'invalid_account_number'
