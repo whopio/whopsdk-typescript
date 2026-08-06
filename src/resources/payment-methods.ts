@@ -13,7 +13,8 @@ import { path } from '../internal/utils/path';
  */
 export class PaymentMethods extends APIResource {
   /**
-   * Retrieves the details of an existing payment method.
+   * Retrieves the details of an existing payment method. Addresses a member's wallet
+   * when member_id or company_id is given, otherwise your own.
    *
    * Required permissions:
    *
@@ -28,10 +29,10 @@ export class PaymentMethods extends APIResource {
   }
 
   /**
-   * Returns a paginated list of payment methods for a member or company, with
-   * optional filtering by creation date. A payment method is a stored representation
-   * of how a customer intends to pay, such as a card, bank account, or digital
-   * wallet.
+   * Returns a paginated list of payment methods for a member or company, or for the
+   * authenticated user when neither is given, with optional filtering by creation
+   * date. A payment method is a stored representation of how a customer intends to
+   * pay, such as a card, bank account, or digital wallet.
    *
    * Required permissions:
    *
@@ -761,13 +762,13 @@ export namespace PaymentMethodListResponse {
 export interface PaymentMethodRetrieveParams {
   /**
    * The unique identifier of the company. Provide either this or member_id, not
-   * both.
+   * both. Omit both to address your own saved payment methods.
    */
   company_id?: string | null;
 
   /**
    * The unique identifier of the member. Provide either this or company_id, not
-   * both.
+   * both. Omit both to address your own saved payment methods.
    */
   member_id?: string | null;
 }
@@ -780,7 +781,7 @@ export interface PaymentMethodListParams extends CursorPageParams {
 
   /**
    * The unique identifier of the company. Provide either this or member_id, not
-   * both.
+   * both. Omit both to address your own saved payment methods.
    */
   company_id?: string | null;
 
@@ -810,7 +811,8 @@ export interface PaymentMethodListParams extends CursorPageParams {
   last?: number | null;
 
   /**
-   * The unique identifier of the member to list payment methods for.
+   * The unique identifier of the member to list payment methods for. Omit this and
+   * company_id to list your own saved payment methods.
    */
   member_id?: string | null;
 }
