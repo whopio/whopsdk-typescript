@@ -99,7 +99,7 @@ export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
 /**
  * The type of end-user an app is built for
  */
-export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component';
+export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
 
 /**
  * An app is an integration built on Whop. Apps can serve consumers as experiences
