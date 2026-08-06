@@ -131,6 +131,7 @@ export interface Withdrawal {
     | 'generic_payout_error'
     | 'junk_failure_reason'
     | 'technical_problem'
+    | 'provider_temporarily_unavailable'
     | 'identification_number_invalid'
     | 'invalid_account_number'
     | 'invalid_bank_code'
@@ -376,6 +377,13 @@ export interface WithdrawalCreateParams {
    * The currency that is being withdrawn.
    */
   currency: Shared.Currency;
+
+  /**
+   * Set to true to continue when the bank could not confirm the account holder's
+   * name. The withdrawal is refused without it so the creator can fix the account or
+   * link their bank first.
+   */
+  acknowledge_bank_warning?: boolean | null;
 
   /**
    * A client-generated key that makes retries safe. Retrying with the same key

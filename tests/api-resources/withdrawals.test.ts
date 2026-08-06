@@ -30,6 +30,7 @@ describe('resource withdrawals', () => {
       amount: 6.9,
       company_id: 'biz_xxxxxxxxxxxxxx',
       currency: 'usd',
+      acknowledge_bank_warning: true,
       idempotency_key: 'idempotency_key',
       payout_method_id: 'payout_method_id',
       platform_covers_fees: true,
