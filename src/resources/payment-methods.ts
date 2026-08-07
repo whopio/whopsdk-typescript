@@ -60,7 +60,8 @@ export type PaymentMethodRetrieveResponse =
   | PaymentMethodRetrieveResponse.UsBankAccountPaymentMethod
   | PaymentMethodRetrieveResponse.CashappPaymentMethod
   | PaymentMethodRetrieveResponse.IdealPaymentMethod
-  | PaymentMethodRetrieveResponse.SepaDebitPaymentMethod;
+  | PaymentMethodRetrieveResponse.SepaDebitPaymentMethod
+  | PaymentMethodRetrieveResponse.PlatformBalancePaymentMethod;
 
 export namespace PaymentMethodRetrieveResponse {
   /**
@@ -403,6 +404,80 @@ export namespace PaymentMethodRetrieveResponse {
       last4: string | null;
     }
   }
+
+  /**
+   * The buyer's Whop balance, offered as a payment method. Charged by naming its
+   * ledger id on a `saved` confirmation token — it is a live wallet, not a stored
+   * credential, so it cannot be vaulted or charged off-session.
+   */
+  export interface PlatformBalancePaymentMethod {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * The time of the event in ISO 8601 UTC format with millisecond precision
+     */
+    created_at: string;
+
+    /**
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * What is available to spend, and whether the account may spend it.
+     */
+    platform_balance: PlatformBalancePaymentMethod.PlatformBalance;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'PlatformBalancePaymentMethod';
+  }
+
+  export namespace PlatformBalancePaymentMethod {
+    /**
+     * What is available to spend, and whether the account may spend it.
+     */
+    export interface PlatformBalance {
+      /**
+       * Available amount per currency. Read from the balance cache, so it is indicative
+       * — the charge revalidates against settled funds and may still refuse.
+       */
+      balances: Array<PlatformBalance.Balance>;
+
+      /**
+       * Whether this balance can pay right now, which here means only whether it holds
+       * funds — an account blocked from spending is not listed at all. A zero balance is
+       * still returned so a client can show it as an option the buyer could top up.
+       */
+      spendable: boolean;
+    }
+
+    export namespace PlatformBalance {
+      /**
+       * An available balance in one currency.
+       */
+      export interface Balance {
+        /**
+         * The available amount in this currency.
+         */
+        amount: number;
+
+        /**
+         * The currency this amount is held in.
+         */
+        currency: Shared.Currency;
+      }
+    }
+  }
 }
 
 /**
@@ -414,7 +489,8 @@ export type PaymentMethodListResponse =
   | PaymentMethodListResponse.UsBankAccountPaymentMethod
   | PaymentMethodListResponse.CashappPaymentMethod
   | PaymentMethodListResponse.IdealPaymentMethod
-  | PaymentMethodListResponse.SepaDebitPaymentMethod;
+  | PaymentMethodListResponse.SepaDebitPaymentMethod
+  | PaymentMethodListResponse.PlatformBalancePaymentMethod;
 
 export namespace PaymentMethodListResponse {
   /**
@@ -757,6 +833,80 @@ export namespace PaymentMethodListResponse {
       last4: string | null;
     }
   }
+
+  /**
+   * The buyer's Whop balance, offered as a payment method. Charged by naming its
+   * ledger id on a `saved` confirmation token — it is a live wallet, not a stored
+   * credential, so it cannot be vaulted or charged off-session.
+   */
+  export interface PlatformBalancePaymentMethod {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * The time of the event in ISO 8601 UTC format with millisecond precision
+     */
+    created_at: string;
+
+    /**
+     * The type of payment instrument stored on file (e.g., card, us_bank_account,
+     * cashapp, ideal, sepa_debit).
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes;
+
+    /**
+     * What is available to spend, and whether the account may spend it.
+     */
+    platform_balance: PlatformBalancePaymentMethod.PlatformBalance;
+
+    /**
+     * The typename of this object
+     */
+    typename: 'PlatformBalancePaymentMethod';
+  }
+
+  export namespace PlatformBalancePaymentMethod {
+    /**
+     * What is available to spend, and whether the account may spend it.
+     */
+    export interface PlatformBalance {
+      /**
+       * Available amount per currency. Read from the balance cache, so it is indicative
+       * — the charge revalidates against settled funds and may still refuse.
+       */
+      balances: Array<PlatformBalance.Balance>;
+
+      /**
+       * Whether this balance can pay right now, which here means only whether it holds
+       * funds — an account blocked from spending is not listed at all. A zero balance is
+       * still returned so a client can show it as an option the buyer could top up.
+       */
+      spendable: boolean;
+    }
+
+    export namespace PlatformBalance {
+      /**
+       * An available balance in one currency.
+       */
+      export interface Balance {
+        /**
+         * The available amount in this currency.
+         */
+        amount: number;
+
+        /**
+         * The currency this amount is held in.
+         */
+        currency: Shared.Currency;
+      }
+    }
+  }
 }
 
 export interface PaymentMethodRetrieveParams {
@@ -804,6 +954,12 @@ export interface PaymentMethodListParams extends CursorPageParams {
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;
+
+  /**
+   * How a payment method will be charged after the buyer leaves — the same
+   * vocabulary as a confirmation token's setup_future_usage.
+   */
+  future_usage?: 'off_session' | 'on_session' | null;
 
   /**
    * Returns the last _n_ elements from the list.
