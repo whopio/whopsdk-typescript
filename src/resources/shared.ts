@@ -3102,6 +3102,12 @@ export interface Payment {
   user: Payment.User | null;
 
   /**
+   * The issuer's address and card security code check results for this payment. Null
+   * when the processor returned none.
+   */
+  verification_checks: Payment.VerificationChecks | null;
+
+  /**
    * True when the payment is tied to a membership in `past_due`, the payment status
    * is `open`, and the processor allows voiding payments; otherwise false.
    */
@@ -3666,6 +3672,35 @@ export namespace Payment {
      * The user's unique username shown on their public profile.
      */
     username: string;
+  }
+
+  /**
+   * The issuer's address and card security code check results for this payment. Null
+   * when the processor returned none.
+   */
+  export interface VerificationChecks {
+    /**
+     * Whether the billing street address the customer entered matched the address the
+     * issuer has on file.
+     */
+    address_line1: string | null;
+
+    /**
+     * Whether the cardholder name the customer entered matched the name the issuer has
+     * on file.
+     */
+    card_holder_name: string | null;
+
+    /**
+     * Whether the CVV / CVC the customer entered matched the card.
+     */
+    card_security_code: string | null;
+
+    /**
+     * Whether the billing postal code the customer entered matched the postal code the
+     * issuer has on file.
+     */
+    zip_code: string | null;
   }
 }
 
