@@ -381,8 +381,9 @@ export interface WithdrawalCreateParams {
 
   /**
    * Set to true to continue when the bank could not confirm the account holder's
-   * name. The withdrawal is refused without it so the creator can fix the account or
-   * link their bank first.
+   * name, or false to be refused in that case so the creator can fix the account or
+   * link their bank first. Omitting the argument skips the warning gate — a client
+   * that cannot show the warning keeps its pre-gate behavior.
    */
   acknowledge_bank_warning?: boolean | null;
 
