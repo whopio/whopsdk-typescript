@@ -3672,10 +3672,9 @@ export namespace MemberCreatedWebhookEvent {
     id: string;
 
     /**
-     * The access level of the product member. If its admin, the member is an
-     * authorized user of the company. If its customer, the member has a valid
-     * membership to any product on the company. If its no_access, the member does not
-     * have access to the product.
+     * The member's content access level. `admin` means their team role grants
+     * administrative content access, `customer` means they hold a valid product
+     * membership, and `no_access` means they cannot access company content.
      */
     access_level: Shared.AccessLevel;
 
