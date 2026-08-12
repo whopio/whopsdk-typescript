@@ -333,8 +333,8 @@ export interface AppUpdateParams {
   app_type?: AppType | null;
 
   /**
-   * The base production URL where the app is hosted, such as
-   * 'https://myapp.example.com'.
+   * The base production URL where the app is hosted. Pass null to take the app proxy
+   * offline.
    */
   base_url?: string | null;
 
