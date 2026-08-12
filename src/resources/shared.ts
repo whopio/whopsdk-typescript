@@ -45,8 +45,9 @@ export interface App {
   app_type: AppsAPI.AppType;
 
   /**
-   * The production base URL where the app is hosted. Null if no base URL is
-   * configured.
+   * The production base URL where the app is hosted. `null` if no base URL is
+   * configured, or if the caller lacks the `developer:basic:read` permission on the
+   * app's account.
    */
   base_url: string | null;
 
@@ -501,6 +502,7 @@ export type AuthorizedUserRoles =
   | 'app_manager'
   | 'support'
   | 'manager'
+  | 'workforce'
   | 'custom';
 
 /**

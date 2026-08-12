@@ -19,6 +19,7 @@ export class Apps extends APIResource {
    *
    * - `developer:create_app`
    * - `developer:manage_api_key`
+   * - `developer:basic:read`
    * - `developer:update_app`
    *
    * @example
@@ -39,6 +40,7 @@ export class Apps extends APIResource {
    * Required permissions:
    *
    * - `developer:manage_api_key`
+   * - `developer:basic:read`
    * - `developer:update_app`
    *
    * @example
@@ -60,6 +62,7 @@ export class Apps extends APIResource {
    *
    * - `developer:update_app`
    * - `developer:manage_api_key`
+   * - `developer:basic:read`
    *
    * @example
    * ```ts
@@ -116,12 +119,6 @@ export interface AppListResponse {
    * 'company_app', 'component').
    */
   app_type: AppType;
-
-  /**
-   * The production base URL where the app is hosted. Null if no base URL is
-   * configured.
-   */
-  base_url: string | null;
 
   /**
    * The company that owns and publishes this app.
