@@ -120,6 +120,12 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Whether this card has the payer identity document required by its payment
+     * provider.
+     */
+    has_payer_document: boolean;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -547,6 +553,12 @@ export namespace PaymentMethodListResponse {
      * The time of the event in ISO 8601 UTC format with millisecond precision
      */
     created_at: string;
+
+    /**
+     * Whether this card has the payer identity document required by its payment
+     * provider.
+     */
+    has_payer_document: boolean;
 
     /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
