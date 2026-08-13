@@ -14,6 +14,10 @@ export class DmChannels extends APIResource {
    * Create a new DM channel between two or more users, optionally scoped to a
    * specific company. Returns the existing channel if one already exists.
    *
+   * Required permissions:
+   *
+   * - `dms:channel:manage`
+   *
    * @example
    * ```ts
    * const dmChannel = await client.dmChannels.create({
@@ -28,9 +32,10 @@ export class DmChannels extends APIResource {
   /**
    * Retrieves the details of an existing DM channel.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `dms:read`
+   * - `support_chat:read`
    *
    * @example
    * ```ts
@@ -45,9 +50,10 @@ export class DmChannels extends APIResource {
    * Update the settings of an existing DM channel, such as its display name. Only an
    * admin of the channel can perform this action.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `dms:channel:manage`
+   * - `support_chat:create`
    *
    * @example
    * ```ts
@@ -89,9 +95,10 @@ export class DmChannels extends APIResource {
    * Permanently delete a DM channel and all of its messages. Only an admin of the
    * channel can perform this action.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `dms:channel:manage`
+   * - `support_chat:create`
    *
    * @example
    * ```ts

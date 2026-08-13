@@ -14,9 +14,10 @@ export class DmMembers extends APIResource {
    * Add a new user to an existing DM channel. Only an admin of the channel can add
    * members.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
-   * - `dms:channel:manage`
+   * - `dms:message:manage`
+   * - `support_chat:message:create`
    *
    * @example
    * ```ts
@@ -33,9 +34,10 @@ export class DmMembers extends APIResource {
   /**
    * Retrieves the details of an existing DM member.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `dms:read`
+   * - `support_chat:read`
    *
    * @example
    * ```ts
@@ -50,9 +52,10 @@ export class DmMembers extends APIResource {
    * Update a DM channel member's settings, such as their notification preferences or
    * membership status.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
-   * - `dms:channel:manage`
+   * - `dms:read`
+   * - `support_chat:read`
    *
    * @example
    * ```ts
@@ -71,9 +74,10 @@ export class DmMembers extends APIResource {
    * Returns a paginated list of members in a specific DM channel, sorted by the date
    * they were added.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `dms:read`
+   * - `support_chat:read`
    *
    * @example
    * ```ts
@@ -96,9 +100,10 @@ export class DmMembers extends APIResource {
    * Remove a user from a DM channel. An admin can remove any member, and a member
    * can remove themselves.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
-   * - `dms:channel:manage`
+   * - `dms:read`
+   * - `support_chat:read`
    *
    * @example
    * ```ts

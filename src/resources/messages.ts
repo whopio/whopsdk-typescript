@@ -15,9 +15,12 @@ export class Messages extends APIResource {
    * Send a new message in an experience chat, DM, or group chat channel. Supports
    * text content, attachments, polls, and replies.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:message:create`
+   * - `dms:message:manage`
+   * - `livestream:chat:write`
+   * - `support_chat:message:create`
    */
   create(body: MessageCreateParams, options?: RequestOptions): APIPromise<Shared.Message> {
     return this._client.post('/messages', { body, ...options });
@@ -26,9 +29,12 @@ export class Messages extends APIResource {
   /**
    * Retrieves the details of an existing message.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `livestream:chat:read`
+   * - `support_chat:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Message> {
     return this._client.get(path`/messages/${id}`, options);
@@ -37,6 +43,13 @@ export class Messages extends APIResource {
   /**
    * Edit the content, attachments, or pinned status of an existing message in an
    * experience chat, DM, or group chat channel.
+   *
+   * Required permissions (one of):
+   *
+   * - `chat:message:create`
+   * - `dms:message:manage`
+   * - `livestream:chat:write`
+   * - `support_chat:message:create`
    */
   update(
     id: string,
@@ -50,9 +63,11 @@ export class Messages extends APIResource {
    * Returns a paginated list of messages within a specific experience chat, DM, or
    * group chat channel, sorted by creation time.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `support_chat:read`
    */
   list(
     query: MessageListParams,
@@ -65,9 +80,12 @@ export class Messages extends APIResource {
    * Permanently delete a message from an experience chat, DM, or group chat channel.
    * Only the message author or a channel admin can delete a message.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
-   * - `chat:message:create`
+   * - `chat:message:create` and `chat:read`
+   * - `dms:message:manage` and `dms:read`
+   * - `livestream:chat:write` and `livestream:chat:read`
+   * - `support_chat:message:create` and `support_chat:read`
    */
   delete(id: string, options?: RequestOptions): APIPromise<MessageDeleteResponse> {
     return this._client.delete(path`/messages/${id}`, options);

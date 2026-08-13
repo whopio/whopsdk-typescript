@@ -15,9 +15,13 @@ export class Reactions extends APIResource {
    * Add an emoji reaction or poll vote to a message or forum post. In forums, the
    * reaction is always a like.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `forum:read`
+   * - `livestream:chat:read`
+   * - `support_chat:read`
    */
   create(body: ReactionCreateParams, options?: RequestOptions): APIPromise<Shared.Reaction> {
     return this._client.post('/reactions', { body, ...options });
@@ -26,9 +30,13 @@ export class Reactions extends APIResource {
   /**
    * Retrieves the details of an existing reaction.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `forum:read`
+   * - `livestream:chat:read`
+   * - `support_chat:read`
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Reaction> {
     return this._client.get(path`/reactions/${id}`, options);
@@ -38,9 +46,13 @@ export class Reactions extends APIResource {
    * Returns a paginated list of emoji reactions on a specific message or forum post,
    * sorted by most recent.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `forum:read`
+   * - `livestream:chat:read`
+   * - `support_chat:read`
    */
   list(
     query: ReactionListParams,
@@ -53,9 +65,13 @@ export class Reactions extends APIResource {
    * Remove an emoji reaction from a message or forum post. Only the reaction author
    * or a channel admin can remove a reaction.
    *
-   * Required permissions:
+   * Required permissions (one of):
    *
    * - `chat:read`
+   * - `dms:read`
+   * - `forum:read`
+   * - `livestream:chat:read`
+   * - `support_chat:read`
    */
   delete(
     id: string,
