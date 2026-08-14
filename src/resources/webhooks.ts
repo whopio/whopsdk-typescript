@@ -275,6 +275,7 @@ export type WebhookEvent =
   | 'shipment.created'
   | 'shipment.updated'
   | 'member.created'
+  | 'ad_campaign.payment_failed'
   | 'chat.message.created'
   | 'chat.reaction.created'
   | 'payment.created'
