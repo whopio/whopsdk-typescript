@@ -140,6 +140,18 @@ export interface Course {
   chapters: Array<Course.Chapter>;
 
   /**
+   * The total number of chapters in this course, including chapters whose lessons
+   * are all hidden from the current user.
+   */
+  chapters_count: number;
+
+  /**
+   * The number of lessons in this course that the current user has marked as
+   * completed. Zero when the request is not made on behalf of a user.
+   */
+  completed_lessons_count: number;
+
+  /**
    * The URL of the course cover image shown on preview cards. Null if no cover image
    * has been uploaded.
    */
@@ -164,6 +176,19 @@ export interface Course {
   language: Languages;
 
   /**
+   * The creation timestamp of the most recently added lesson visible to the current
+   * user. Null if the course has no lessons.
+   */
+  latest_lesson_created_at: string | null;
+
+  /**
+   * The distinct drip schedules, in days after the course start, of lessons visible
+   * to the current user. Combine with startedAt to work out which have unlocked.
+   * Empty when the user has not started the course or no lesson is on a schedule.
+   */
+  lesson_unlock_days: Array<number>;
+
+  /**
    * The sort position of this course within its parent experience, as a decimal for
    * flexible ordering.
    */
@@ -174,6 +199,19 @@ export interface Course {
    * next one.
    */
   require_completing_lessons_in_order: boolean;
+
+  /**
+   * The lesson the current user should continue from: their first incomplete lesson,
+   * or the first lesson when they have finished the course, have not started it, or
+   * can edit it. Null if the course has no lessons.
+   */
+  resume_lesson: Course.ResumeLesson | null;
+
+  /**
+   * The earliest time the current user is known to have started this course. Null if
+   * they have not started it. Drip unlock schedules are measured from this point.
+   */
+  started_at: string | null;
 
   /**
    * A short marketing tagline displayed beneath the course title. Null if no tagline
@@ -191,6 +229,17 @@ export interface Course {
    * The display name of the course shown to students. Null if no title has been set.
    */
   title: string | null;
+
+  /**
+   * The combined duration in seconds of every hosted video across the lessons
+   * visible to the current user.
+   */
+  total_duration_seconds: number;
+
+  /**
+   * The number of lessons in this course visible to the current user.
+   */
+  total_lessons_count: number;
 
   /**
    * The datetime the course was last updated.
@@ -309,6 +358,18 @@ export namespace Course {
   }
 
   /**
+   * The lesson the current user should continue from: their first incomplete lesson,
+   * or the first lesson when they have finished the course, have not started it, or
+   * can edit it. Null if the course has no lessons.
+   */
+  export interface ResumeLesson {
+    /**
+     * The unique identifier for the lesson.
+     */
+    id: string;
+  }
+
+  /**
    * The thumbnail image displayed on course cards and previews. Null if no thumbnail
    * has been uploaded.
    */
@@ -397,6 +458,18 @@ export interface CourseListResponse {
   certificate_after_completion_enabled: boolean | null;
 
   /**
+   * The total number of chapters in this course, including chapters whose lessons
+   * are all hidden from the current user.
+   */
+  chapters_count: number;
+
+  /**
+   * The number of lessons in this course that the current user has marked as
+   * completed. Zero when the request is not made on behalf of a user.
+   */
+  completed_lessons_count: number;
+
+  /**
    * The URL of the course cover image shown on preview cards. Null if no cover image
    * has been uploaded.
    */
@@ -421,6 +494,19 @@ export interface CourseListResponse {
   language: Languages;
 
   /**
+   * The creation timestamp of the most recently added lesson visible to the current
+   * user. Null if the course has no lessons.
+   */
+  latest_lesson_created_at: string | null;
+
+  /**
+   * The distinct drip schedules, in days after the course start, of lessons visible
+   * to the current user. Combine with startedAt to work out which have unlocked.
+   * Empty when the user has not started the course or no lesson is on a schedule.
+   */
+  lesson_unlock_days: Array<number>;
+
+  /**
    * The sort position of this course within its parent experience, as a decimal for
    * flexible ordering.
    */
@@ -431,6 +517,19 @@ export interface CourseListResponse {
    * next one.
    */
   require_completing_lessons_in_order: boolean;
+
+  /**
+   * The lesson the current user should continue from: their first incomplete lesson,
+   * or the first lesson when they have finished the course, have not started it, or
+   * can edit it. Null if the course has no lessons.
+   */
+  resume_lesson: CourseListResponse.ResumeLesson | null;
+
+  /**
+   * The earliest time the current user is known to have started this course. Null if
+   * they have not started it. Drip unlock schedules are measured from this point.
+   */
+  started_at: string | null;
 
   /**
    * A short marketing tagline displayed beneath the course title. Null if no tagline
@@ -450,6 +549,17 @@ export interface CourseListResponse {
   title: string | null;
 
   /**
+   * The combined duration in seconds of every hosted video across the lessons
+   * visible to the current user.
+   */
+  total_duration_seconds: number;
+
+  /**
+   * The number of lessons in this course visible to the current user.
+   */
+  total_lessons_count: number;
+
+  /**
    * The datetime the course was last updated.
    */
   updated_at: string;
@@ -462,6 +572,18 @@ export interface CourseListResponse {
 }
 
 export namespace CourseListResponse {
+  /**
+   * The lesson the current user should continue from: their first incomplete lesson,
+   * or the first lesson when they have finished the course, have not started it, or
+   * can edit it. Null if the course has no lessons.
+   */
+  export interface ResumeLesson {
+    /**
+     * The unique identifier for the lesson.
+     */
+    id: string;
+  }
+
   /**
    * The thumbnail image displayed on course cards and previews. Null if no thumbnail
    * has been uploaded.
