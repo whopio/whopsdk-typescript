@@ -83,6 +83,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: BasePaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -92,6 +99,161 @@ export namespace PaymentMethodRetrieveResponse {
      * The typename of this object
      */
     typename: 'BasePaymentMethod';
+  }
+
+  export namespace BasePaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -124,6 +286,13 @@ export namespace PaymentMethodRetrieveResponse {
      * provider.
      */
     has_payer_document: boolean;
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: CardPaymentMethod.Icons;
 
     /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
@@ -170,6 +339,159 @@ export namespace PaymentMethodRetrieveResponse {
        */
       three_ds_verified: boolean;
     }
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -192,6 +514,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: UsBankAccountPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -210,6 +539,159 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   export namespace UsBankAccountPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The bank account-specific details for this payment method, including bank name
      * and last four digits.
@@ -258,6 +740,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: CashappPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -286,6 +775,159 @@ export namespace PaymentMethodRetrieveResponse {
        */
       cashtag: string | null;
     }
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -307,6 +949,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: IdealPaymentMethod.Icons;
+
+    /**
      * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     ideal: IdealPaymentMethod.Ideal;
@@ -324,6 +973,159 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   export namespace IdealPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
@@ -362,6 +1164,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: SepaDebitPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -380,6 +1189,159 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   export namespace SepaDebitPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The SEPA Direct Debit-specific details for this payment method, including bank
      * code and last four IBAN digits.
@@ -432,6 +1394,13 @@ export namespace PaymentMethodRetrieveResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: PlatformBalancePaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -449,6 +1418,159 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   export namespace PlatformBalancePaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * What is available to spend, and whether the account may spend it.
      */
@@ -518,6 +1640,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: BasePaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -527,6 +1656,161 @@ export namespace PaymentMethodListResponse {
      * The typename of this object
      */
     typename: 'BasePaymentMethod';
+  }
+
+  export namespace BasePaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -559,6 +1843,13 @@ export namespace PaymentMethodListResponse {
      * provider.
      */
     has_payer_document: boolean;
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: CardPaymentMethod.Icons;
 
     /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
@@ -605,6 +1896,159 @@ export namespace PaymentMethodListResponse {
        */
       three_ds_verified: boolean;
     }
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -627,6 +2071,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: UsBankAccountPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -645,6 +2096,159 @@ export namespace PaymentMethodListResponse {
   }
 
   export namespace UsBankAccountPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The bank account-specific details for this payment method, including bank name
      * and last four digits.
@@ -693,6 +2297,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: CashappPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -721,6 +2332,159 @@ export namespace PaymentMethodListResponse {
        */
       cashtag: string | null;
     }
+
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
@@ -742,6 +2506,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: IdealPaymentMethod.Icons;
+
+    /**
      * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
     ideal: IdealPaymentMethod.Ideal;
@@ -759,6 +2530,159 @@ export namespace PaymentMethodListResponse {
   }
 
   export namespace IdealPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The iDEAL-specific details for this payment method, including bank name and BIC.
      */
@@ -797,6 +2721,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: SepaDebitPaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -815,6 +2746,159 @@ export namespace PaymentMethodListResponse {
   }
 
   export namespace SepaDebitPaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * The SEPA Direct Debit-specific details for this payment method, including bank
      * code and last four IBAN digits.
@@ -867,6 +2951,13 @@ export namespace PaymentMethodListResponse {
     created_at: string;
 
     /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    icons: PlatformBalancePaymentMethod.Icons;
+
+    /**
      * The type of payment instrument stored on file (e.g., card, us_bank_account,
      * cashapp, ideal, sepa_debit).
      */
@@ -884,6 +2975,159 @@ export namespace PaymentMethodListResponse {
   }
 
   export namespace PlatformBalancePaymentMethod {
+    /**
+     * Every rendition of the icon to display this payment method with. A saved card
+     * carries its brand's icon (Visa, Mastercard, ...) rather than the generic card
+     * art.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
+
     /**
      * What is available to spend, and whether the account may spend it.
      */
