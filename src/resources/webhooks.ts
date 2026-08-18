@@ -216,6 +216,7 @@ export interface Webhook {
  * The different event types available
  */
 export type WebhookEvent =
+  | 'account.updated'
   | 'invoice.created'
   | 'invoice.marked_uncollectible'
   | 'invoice.paid'
@@ -463,6 +464,12 @@ export interface InvoiceCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface InvoiceMarkedUncollectibleWebhookEvent {
@@ -502,6 +509,12 @@ export interface InvoiceMarkedUncollectibleWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface InvoicePaidWebhookEvent {
@@ -541,6 +554,12 @@ export interface InvoicePaidWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface InvoicePastDueWebhookEvent {
@@ -580,6 +599,12 @@ export interface InvoicePastDueWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface InvoiceVoidedWebhookEvent {
@@ -619,6 +644,12 @@ export interface InvoiceVoidedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface MembershipActivatedWebhookEvent {
@@ -657,6 +688,12 @@ export interface MembershipActivatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface MembershipDeactivatedWebhookEvent {
@@ -695,6 +732,12 @@ export interface MembershipDeactivatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface MembershipTrialEndingSoonWebhookEvent {
@@ -733,6 +776,12 @@ export interface MembershipTrialEndingSoonWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface EntryCreatedWebhookEvent {
@@ -770,6 +819,12 @@ export interface EntryCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface EntryApprovedWebhookEvent {
@@ -807,6 +862,12 @@ export interface EntryApprovedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface EntryDeniedWebhookEvent {
@@ -844,6 +905,12 @@ export interface EntryDeniedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface EntryDeletedWebhookEvent {
@@ -881,6 +948,12 @@ export interface EntryDeletedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface SetupIntentRequiresActionWebhookEvent {
@@ -919,6 +992,12 @@ export interface SetupIntentRequiresActionWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface SetupIntentSucceededWebhookEvent {
@@ -957,6 +1036,12 @@ export interface SetupIntentSucceededWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface SetupIntentCanceledWebhookEvent {
@@ -995,6 +1080,12 @@ export interface SetupIntentCanceledWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface LedgerAccountFundsAvailableWebhookEvent {
@@ -1033,6 +1124,12 @@ export interface LedgerAccountFundsAvailableWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace LedgerAccountFundsAvailableWebhookEvent {
@@ -1375,6 +1472,12 @@ export interface WithdrawalCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface WithdrawalUpdatedWebhookEvent {
@@ -1413,6 +1516,12 @@ export interface WithdrawalUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface CardTransactionCreatedWebhookEvent {
@@ -1450,6 +1559,12 @@ export interface CardTransactionCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace CardTransactionCreatedWebhookEvent {
@@ -1589,6 +1704,12 @@ export interface CardTransactionUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace CardTransactionUpdatedWebhookEvent {
@@ -1728,6 +1849,12 @@ export interface CardTransactionCompletedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace CardTransactionCompletedWebhookEvent {
@@ -1867,6 +1994,12 @@ export interface CardTransactionDeclinedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace CardTransactionDeclinedWebhookEvent {
@@ -2006,6 +2139,12 @@ export interface CardTransactionReversedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace CardTransactionReversedWebhookEvent {
@@ -2146,6 +2285,12 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface PayoutMethodCreatedWebhookEvent {
@@ -2184,6 +2329,12 @@ export interface PayoutMethodCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace PayoutMethodCreatedWebhookEvent {
@@ -2316,6 +2467,12 @@ export interface VerificationSucceededWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace VerificationSucceededWebhookEvent {
@@ -2383,6 +2540,12 @@ export interface IdentityProfileUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace IdentityProfileUpdatedWebhookEvent {
@@ -2433,6 +2596,12 @@ export interface PayoutAccountStatusUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace PayoutAccountStatusUpdatedWebhookEvent {
@@ -2608,6 +2777,12 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace ResolutionCenterCaseCreatedWebhookEvent {
@@ -2870,6 +3045,12 @@ export interface ResolutionCenterCaseUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace ResolutionCenterCaseUpdatedWebhookEvent {
@@ -3132,6 +3313,12 @@ export interface ResolutionCenterCaseDecidedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace ResolutionCenterCaseDecidedWebhookEvent {
@@ -3394,6 +3581,12 @@ export interface ProductCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ProductUpdatedWebhookEvent {
@@ -3432,6 +3625,12 @@ export interface ProductUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ProductDeletedWebhookEvent {
@@ -3470,6 +3669,12 @@ export interface ProductDeletedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ProductPublishedWebhookEvent {
@@ -3508,6 +3713,12 @@ export interface ProductPublishedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ProductUnpublishedWebhookEvent {
@@ -3546,6 +3757,12 @@ export interface ProductUnpublishedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ShipmentCreatedWebhookEvent {
@@ -3584,6 +3801,12 @@ export interface ShipmentCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ShipmentUpdatedWebhookEvent {
@@ -3622,6 +3845,12 @@ export interface ShipmentUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface MemberCreatedWebhookEvent {
@@ -3660,6 +3889,12 @@ export interface MemberCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace MemberCreatedWebhookEvent {
@@ -3817,6 +4052,12 @@ export interface ChatMessageCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace ChatMessageCreatedWebhookEvent {
@@ -3882,6 +4123,12 @@ export interface ChatReactionCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace ChatReactionCreatedWebhookEvent {
@@ -3956,6 +4203,12 @@ export interface PaymentCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface PaymentSucceededWebhookEvent {
@@ -3994,6 +4247,12 @@ export interface PaymentSucceededWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface PaymentFailedWebhookEvent {
@@ -4032,6 +4291,12 @@ export interface PaymentFailedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface PaymentPendingWebhookEvent {
@@ -4070,6 +4335,12 @@ export interface PaymentPendingWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface DisputeCreatedWebhookEvent {
@@ -4108,6 +4379,12 @@ export interface DisputeCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface DisputeUpdatedWebhookEvent {
@@ -4146,6 +4423,12 @@ export interface DisputeUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface RefundCreatedWebhookEvent {
@@ -4184,6 +4467,12 @@ export interface RefundCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace RefundCreatedWebhookEvent {
@@ -4499,6 +4788,12 @@ export interface RefundUpdatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace RefundUpdatedWebhookEvent {
@@ -4814,6 +5109,12 @@ export interface DisputeAlertCreatedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export namespace DisputeAlertCreatedWebhookEvent {
@@ -5083,6 +5384,12 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
    * The account ID that this webhook event is associated with
    */
   company_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export type UnwrapWebhookEvent =

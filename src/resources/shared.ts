@@ -1833,6 +1833,13 @@ export interface Invoice {
   pay_online_url: string | null;
 
   /**
+   * Whether a payment on this invoice is still clearing. True while a delayed
+   * payment method such as ACH or SEPA settles, during which the invoice stays open
+   * and is not marked past due.
+   */
+  payment_processing: boolean;
+
+  /**
    * The product that this invoice was generated for.
    */
   product: Invoice.Product;
@@ -2067,6 +2074,13 @@ export interface InvoiceListItem {
    * The sequential invoice number for display purposes.
    */
   number: string;
+
+  /**
+   * Whether a payment on this invoice is still clearing. True while a delayed
+   * payment method such as ACH or SEPA settles, during which the invoice stays open
+   * and is not marked past due.
+   */
+  payment_processing: boolean;
 
   /**
    * The current payment status of the invoice, such as draft, open, paid, or void.
