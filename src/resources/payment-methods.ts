@@ -1591,18 +1591,38 @@ export namespace PaymentMethodRetrieveResponse {
 
     export namespace PlatformBalance {
       /**
-       * An available balance in one currency.
+       * An amount of money. Never a bare number, because a bare number cannot answer the
+       * two questions a client has to answer to render it: what currency is this, and
+       * how many digits do I write? The second is stated twice rather than derived,
+       * because the digits the amount CARRIES and the digits to SHOW differ in COP —
+       * charged in centavos, written in whole pesos. Formatting is deliberately left to
+       * the caller: the number belongs in the buyer's locale, and this API does not know
+       * it.
        */
       export interface Balance {
         /**
-         * The available amount in this currency.
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
          */
-        amount: number;
+        amount: string;
 
         /**
-         * The currency this amount is held in.
+         * Three-letter ISO 4217 currency code, lowercase.
          */
         currency: Shared.Currency;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
       }
     }
   }
@@ -3148,18 +3168,38 @@ export namespace PaymentMethodListResponse {
 
     export namespace PlatformBalance {
       /**
-       * An available balance in one currency.
+       * An amount of money. Never a bare number, because a bare number cannot answer the
+       * two questions a client has to answer to render it: what currency is this, and
+       * how many digits do I write? The second is stated twice rather than derived,
+       * because the digits the amount CARRIES and the digits to SHOW differ in COP —
+       * charged in centavos, written in whole pesos. Formatting is deliberately left to
+       * the caller: the number belongs in the buyer's locale, and this API does not know
+       * it.
        */
       export interface Balance {
         /**
-         * The available amount in this currency.
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
          */
-        amount: number;
+        amount: string;
 
         /**
-         * The currency this amount is held in.
+         * Three-letter ISO 4217 currency code, lowercase.
          */
         currency: Shared.Currency;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
       }
     }
   }
