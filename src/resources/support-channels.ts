@@ -169,45 +169,49 @@ export interface SupportChannelListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of the company to list support channels for. Includes
    * channels of child companies. When omitted, returns support channels across all
    * companies the user has access to.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for the results. Use 'asc' for oldest first or 'desc' for
+   * newest first.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Whether to filter by open or resolved support channels. Set to true to only
    * return channels awaiting a response, or false for resolved channels.
    */
-  open?: boolean | null;
+  open?: boolean;
 
   /**
-   * Sort options for message channels
+   * The field to sort the support channels by, such as creation date or last message
+   * time.
    */
-  order?: 'created_at' | 'last_post_sent_at' | null;
+  order?: 'created_at' | 'last_post_sent_at';
 
   /**
-   * The perspective to filter support channels by.
+   * Filter support channels by the authenticated user's role. Defaults to admin.
+   * When the caller is a company API key (no user), only admin-visible channels are
+   * returned.
    */
-  view?: 'all' | 'admin' | 'customer' | null;
+  view?: 'all' | 'admin' | 'customer';
 }
 
 export declare namespace SupportChannels {

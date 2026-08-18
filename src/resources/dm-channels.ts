@@ -209,23 +209,23 @@ export interface DmChannelListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of a company to filter DM channels by. Only returns
    * channels scoped to this company.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export declare namespace DmChannels {

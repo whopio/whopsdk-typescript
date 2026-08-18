@@ -166,17 +166,17 @@ export interface ReactionListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export interface ReactionDeleteParams {
@@ -185,7 +185,7 @@ export interface ReactionDeleteParams {
    * unicode emoji. Required when the id refers to a message or post instead of a
    * reaction.
    */
-  emoji?: string | null;
+  emoji?: string;
 }
 
 export declare namespace Reactions {

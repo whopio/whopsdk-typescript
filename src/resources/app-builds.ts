@@ -233,37 +233,37 @@ export interface AppBuildListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return builds created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return builds created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The different platforms an app build can target.
+   * Filter builds by target platform.
    */
-  platform?: Shared.AppBuildPlatforms | null;
+  platform?: Shared.AppBuildPlatforms;
 
   /**
-   * The different statuses an AppBuild can be in.
+   * Filter builds by review status.
    */
-  status?: Shared.AppBuildStatuses | null;
+  status?: Shared.AppBuildStatuses;
 }
 
 export declare namespace AppBuilds {

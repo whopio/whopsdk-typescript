@@ -1941,116 +1941,116 @@ export interface PaymentListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter payments by their billing reason.
    */
-  billing_reasons?: Array<BillingReasons> | null;
+  billing_reasons?: Array<BillingReasons>;
 
   /**
    * Only return payments from these checkout configurations.
    */
-  checkout_configuration_ids?: Array<string> | null;
+  checkout_configuration_ids?: Array<string>;
 
   /**
    * The unique identifier of the company to list payments for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return payments created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return payments created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
    * Filter payments by their currency code.
    */
-  currencies?: Array<Shared.Currency> | null;
+  currencies?: Array<Shared.Currency>;
 
   /**
-   * The direction of the sort.
+   * The sort direction for ordering results, either ascending or descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Whether to include payments with a zero amount.
    */
-  include_free?: boolean | null;
+  include_free?: boolean;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The order to sort the results by.
+   * The field to order results by, such as creation date.
    */
-  order?: 'final_amount' | 'created_at' | 'paid_at' | null;
+  order?: 'final_amount' | 'created_at' | 'paid_at';
 
   /**
    * Filter payments to only those associated with these specific plan identifiers.
    */
-  plan_ids?: Array<string> | null;
+  plan_ids?: Array<string>;
 
   /**
    * Filter payments to only those associated with these specific product
    * identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
    * Search payments by user ID, membership ID, user email, name, or username. Email
    * filtering requires the member:email:read permission.
    */
-  query?: string | null;
+  query?: string;
 
   /**
    * Filter payments by their current status.
    */
-  statuses?: Array<Shared.ReceiptStatus> | null;
+  statuses?: Array<Shared.ReceiptStatus>;
 
   /**
    * Filter payments by their current substatus for more granular filtering.
    */
-  substatuses?: Array<Shared.FriendlyReceiptStatus> | null;
+  substatuses?: Array<Shared.FriendlyReceiptStatus>;
 
   /**
    * Only return payments last updated after this timestamp.
    */
-  updated_after?: string | null;
+  updated_after?: string;
 
   /**
    * Only return payments last updated before this timestamp.
    */
-  updated_before?: string | null;
+  updated_before?: string;
 }
 
 export interface PaymentListFeesParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export interface PaymentRefundParams {

@@ -372,32 +372,32 @@ export interface LeadListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return leads created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return leads created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter leads to only those associated with these specific product identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 }
 
 export declare namespace Leads {

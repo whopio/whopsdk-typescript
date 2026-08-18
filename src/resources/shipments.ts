@@ -169,32 +169,32 @@ export interface ShipmentListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter shipments to only those belonging to this company.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter shipments to only those associated with this specific payment.
    */
-  payment_id?: string | null;
+  payment_id?: string;
 
   /**
    * Filter shipments to only those for this specific user.
    */
-  user_id?: string | null;
+  user_id?: string;
 }
 
 export declare namespace Shipments {

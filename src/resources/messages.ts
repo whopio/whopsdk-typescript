@@ -382,22 +382,23 @@ export interface MessageListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for messages by creation time. Use 'asc' for oldest first or
+   * 'desc' for newest first.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export declare namespace Messages {

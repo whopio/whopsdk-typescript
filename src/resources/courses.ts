@@ -813,27 +813,27 @@ export interface CourseListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of the company to list courses for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * The unique identifier of the experience to list courses for.
    */
-  experience_id?: string | null;
+  experience_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export declare namespace Courses {

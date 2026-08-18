@@ -3232,100 +3232,102 @@ export interface PaymentMethodRetrieveParams {
    * The unique identifier of the company. Provide either this or member_id, not
    * both. Omit both to address your own saved payment methods.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * The unique identifier of the member. Provide either this or company_id, not
    * both. Omit both to address your own saved payment methods.
    */
-  member_id?: string | null;
+  member_id?: string;
 }
 
 export interface PaymentMethodListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter by whether the stored credential has permanently stopped charging, such
    * as a vault entry its provider closed.
    */
-  broken?: boolean | null;
+  broken?: boolean;
 
   /**
    * Only return cards on these networks, such as the networks the seller accepts.
    * Payment methods that are not cards are unaffected.
    */
-  card_brands?: Array<PaymentsAPI.CardBrands> | null;
+  card_brands?: Array<PaymentsAPI.CardBrands>;
 
   /**
    * Only return cards funded this way. A card whose funding could not be determined
    * is excluded, and payment methods that are not cards are unaffected.
    */
-  card_funding_types?: Array<'credit' | 'debit' | 'prepaid'> | null;
+  card_funding_types?: Array<'credit' | 'debit' | 'prepaid'>;
 
   /**
    * The unique identifier of the company. Provide either this or member_id, not
    * both. Omit both to address your own saved payment methods.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return payment methods created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return payment methods created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for ordering results, either ascending or descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Filter by expiry. Only a card can expire, so `false` keeps every payment method
    * that is not past its expiration month and `true` returns expired cards alone.
    */
-  expired?: boolean | null;
+  expired?: boolean;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
-   * How a payment method will be charged after the buyer leaves — the same
-   * vocabulary as a confirmation token's setup_future_usage.
+   * Only return methods that can be charged this way after the buyer leaves. A
+   * checkout that renews should pass `off_session`, which drops the buyer's platform
+   * balance — a balance settles against the ledger at the time of purchase and
+   * cannot be charged later.
    */
-  future_usage?: 'off_session' | 'on_session' | null;
+  future_usage?: 'off_session' | 'on_session';
 
   /**
    * Filter cards by whether they carry the payer identity document their payment
    * provider requires. Payment methods that are not cards are unaffected.
    */
-  has_payer_document?: boolean | null;
+  has_payer_document?: boolean;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * The unique identifier of the member to list payment methods for. Omit this and
    * company_id to list your own saved payment methods.
    */
-  member_id?: string | null;
+  member_id?: string;
 
   /**
    * Only return payment methods of these types. Pass the eligible `type` values from
    * the payment method types catalogue so the list holds nothing the purchase cannot
    * take. An empty list returns no payment methods.
    */
-  payment_method_types?: Array<PaymentsAPI.PaymentMethodTypes> | null;
+  payment_method_types?: Array<PaymentsAPI.PaymentMethodTypes>;
 }
 
 export declare namespace PaymentMethods {

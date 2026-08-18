@@ -424,27 +424,27 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The type of token transaction
+   * Filter transactions by type.
    */
-  transaction_type?: CompanyTokenTransactionType | null;
+  transaction_type?: CompanyTokenTransactionType;
 
   /**
    * Filter transactions to only those involving this specific user.
    */
-  user_id?: string | null;
+  user_id?: string;
 }
 
 export declare namespace CompanyTokenTransactions {

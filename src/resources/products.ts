@@ -457,47 +457,47 @@ export interface ProductListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return products created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return products created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The ways a relation of AccessPasses can be ordered
+   * The field to sort results by. Defaults to created_at.
    */
-  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days' | null;
+  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days';
 
   /**
    * Filter to only products matching these type classifications.
    */
-  product_types?: Array<Shared.AccessPassType> | null;
+  product_types?: Array<Shared.AccessPassType>;
 
   /**
    * Filter to only products matching these visibility states.
    */
-  visibilities?: Array<Shared.VisibilityFilter> | null;
+  visibilities?: Array<Shared.VisibilityFilter>;
 }
 
 export declare namespace Products {

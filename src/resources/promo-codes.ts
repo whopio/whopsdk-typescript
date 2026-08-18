@@ -471,42 +471,42 @@ export interface PromoCodeListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return promo codes created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return promo codes created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter to only promo codes scoped to these plan identifiers.
    */
-  plan_ids?: Array<string> | null;
+  plan_ids?: Array<string>;
 
   /**
    * Filter to only promo codes scoped to these product identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
-   * Statuses for promo codes
+   * Filter to only promo codes matching this status.
    */
-  status?: PromoCodeStatus | null;
+  status?: PromoCodeStatus;
 }
 
 export declare namespace PromoCodes {

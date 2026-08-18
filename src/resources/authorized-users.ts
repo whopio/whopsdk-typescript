@@ -322,43 +322,43 @@ export interface AuthorizedUserListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of the company to list authorized users for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return authorized users created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return authorized users created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * Possible roles an authorized user can have
+   * Filter authorized users by their assigned role within the company.
    */
-  role?: Shared.AuthorizedUserRoles | null;
+  role?: Shared.AuthorizedUserRoles;
 
   /**
    * Filter results to a specific user to check if they are an authorized team
    * member.
    */
-  user_id?: string | null;
+  user_id?: string;
 }
 
 export interface AuthorizedUserDeleteParams {
@@ -366,7 +366,7 @@ export interface AuthorizedUserDeleteParams {
    * The ID of the company the authorized user belongs to. Optional if the authorized
    * user ID is provided.
    */
-  company_id?: string | null;
+  company_id?: string;
 }
 
 export declare namespace AuthorizedUsers {

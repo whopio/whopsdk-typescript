@@ -49,37 +49,37 @@ export interface CourseLessonInteractionListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Whether to filter for completed or in-progress lesson interactions.
    */
-  completed?: boolean | null;
+  completed?: boolean;
 
   /**
    * The unique identifier of the course to filter interactions for.
    */
-  course_id?: string | null;
+  course_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * The unique identifier of the lesson to filter interactions for.
    */
-  lesson_id?: string | null;
+  lesson_id?: string;
 
   /**
    * The unique identifier of the user to filter lesson interactions for.
    */
-  user_id?: string | null;
+  user_id?: string;
 }
 
 export declare namespace CourseLessonInteractions {

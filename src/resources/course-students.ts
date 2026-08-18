@@ -222,22 +222,22 @@ export interface CourseStudentListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * A search term to filter students by name or username.
    */
-  keyword?: string | null;
+  keyword?: string;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export declare namespace CourseStudents {

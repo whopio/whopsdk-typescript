@@ -159,23 +159,23 @@ export interface ForumListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * The unique identifier of a product to filter by. When set, only forums connected
    * to this product are returned.
    */
-  product_id?: string | null;
+  product_id?: string;
 }
 
 export declare namespace Forums {

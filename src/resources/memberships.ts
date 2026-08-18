@@ -489,90 +489,90 @@ export interface MembershipListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter to only memberships matching these cancellation reasons.
    */
-  cancel_options?: Array<CancelOptions> | null;
+  cancel_options?: Array<CancelOptions>;
 
   /**
-   * The state of a membership after a customer provides a cancelation reason.
+   * Filter memberships by whether the customer is canceling, left, or was won back.
    */
-  cancelation_status?: 'won_back' | 'left' | 'canceling' | null;
+  cancelation_status?: 'won_back' | 'left' | 'canceling';
 
   /**
    * The unique identifier of the company to list memberships for. Required when
    * using an API key.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return memberships created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return memberships created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Filter memberships by whether they have a structured or free-text cancellation
    * reason.
    */
-  has_cancelation_reason?: boolean | null;
+  has_cancelation_reason?: boolean;
 
   /**
    * When filtering by the other cancellation option, also include memberships that
    * only have a free-text cancellation reason.
    */
-  include_text_only_cancelation_reasons?: boolean | null;
+  include_text_only_cancelation_reasons?: boolean;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * Which columns can be used to sort.
+   * The field to sort results by. Null uses the default sort order.
    */
-  order?: 'id' | 'created_at' | 'status' | 'canceled_at' | 'date_joined' | 'total_spend' | null;
+  order?: 'id' | 'created_at' | 'status' | 'canceled_at' | 'date_joined' | 'total_spend';
 
   /**
    * Filter to only memberships belonging to these plan identifiers.
    */
-  plan_ids?: Array<string> | null;
+  plan_ids?: Array<string>;
 
   /**
    * Filter to only memberships belonging to these product identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
    * Filter to only memberships that used these promo code identifiers.
    */
-  promo_code_ids?: Array<string> | null;
+  promo_code_ids?: Array<string>;
 
   /**
    * Filter to only memberships matching these statuses.
    */
-  statuses?: Array<Shared.MembershipStatus> | null;
+  statuses?: Array<Shared.MembershipStatus>;
 
   /**
    * Filter to only memberships belonging to these user identifiers.
    */
-  user_ids?: Array<string> | null;
+  user_ids?: Array<string>;
 }
 
 export interface MembershipAddFreeDaysParams {

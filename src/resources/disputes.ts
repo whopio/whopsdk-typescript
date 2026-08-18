@@ -394,6 +394,13 @@ export namespace Dispute {
     paid_at: string | null;
 
     /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    payment_instrument: Payment.PaymentInstrument | null;
+
+    /**
      * The different types of payment methods that can be used.
      */
     payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
@@ -448,6 +455,86 @@ export namespace Dispute {
        * The state of the membership.
        */
       status: Shared.MembershipStatus;
+    }
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    export interface PaymentInstrument {
+      /**
+       * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
+       * method's own name ("Klarna").
+       */
+      display_name: string;
+
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      icons: PaymentInstrument.Icons;
+
+      /**
+       * Installment methods only: how many payments the charge splits into. Data, not
+       * copy — compose and translate the label client-side.
+       */
+      installment_count: number | null;
+
+      /**
+       * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
+       */
+      payment_method_type: string;
+    }
+
+    export namespace PaymentInstrument {
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      export interface Icons {
+        /**
+         * The square tile (32x32).
+         */
+        square: Icons.Square;
+      }
+
+      export namespace Icons {
+        /**
+         * The square tile (32x32).
+         */
+        export interface Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          dark: Square.Dark;
+
+          /**
+           * The colorway for light surfaces.
+           */
+          light: Square.Light;
+        }
+
+        export namespace Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          export interface Dark {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+
+          /**
+           * The colorway for light surfaces.
+           */
+          export interface Light {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+        }
+      }
     }
 
     /**
@@ -688,6 +775,95 @@ export namespace DisputeListResponse {
      * The unique identifier for the payment.
      */
     id: string;
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    payment_instrument: Payment.PaymentInstrument | null;
+  }
+
+  export namespace Payment {
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    export interface PaymentInstrument {
+      /**
+       * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
+       * method's own name ("Klarna").
+       */
+      display_name: string;
+
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      icons: PaymentInstrument.Icons;
+
+      /**
+       * Installment methods only: how many payments the charge splits into. Data, not
+       * copy — compose and translate the label client-side.
+       */
+      installment_count: number | null;
+
+      /**
+       * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
+       */
+      payment_method_type: string;
+    }
+
+    export namespace PaymentInstrument {
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      export interface Icons {
+        /**
+         * The square tile (32x32).
+         */
+        square: Icons.Square;
+      }
+
+      export namespace Icons {
+        /**
+         * The square tile (32x32).
+         */
+        export interface Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          dark: Square.Dark;
+
+          /**
+           * The colorway for light surfaces.
+           */
+          light: Square.Light;
+        }
+
+        export namespace Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          export interface Dark {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+
+          /**
+           * The colorway for light surfaces.
+           */
+          export interface Light {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+        }
+      }
+    }
   }
 
   /**
@@ -728,32 +904,32 @@ export interface DisputeListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Only return disputes created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return disputes created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for ordering results, either ascending or descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export interface DisputeUpdateEvidenceParams {

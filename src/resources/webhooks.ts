@@ -5225,22 +5225,22 @@ export interface WebhookListParams extends CursorPageParams {
    * Only return webhooks attached to this app. Omit to list the company's own
    * webhooks.
    */
-  app_id?: string | null;
+  app_id?: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export declare namespace Webhooks {

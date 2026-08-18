@@ -263,85 +263,85 @@ export namespace MemberListResponse {
 
 export interface MemberListParams extends CursorPageParams {
   /**
-   * The access level a given user (or company) has to a product or company.
+   * Filter members by their current access level to the product.
    */
-  access_level?: Shared.AccessLevel | null;
+  access_level?: Shared.AccessLevel;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of the company to list members for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return members created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return members created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter members by their most recent activity type.
    */
-  most_recent_actions?: Array<Shared.MemberMostRecentActions> | null;
+  most_recent_actions?: Array<Shared.MemberMostRecentActions>;
 
   /**
-   * Which columns can be used to sort.
+   * The column to sort members by, such as creation date or revenue.
    */
-  order?: 'id' | 'usd_total_spent' | 'created_at' | 'joined_at' | 'most_recent_action' | null;
+  order?: 'id' | 'usd_total_spent' | 'created_at' | 'joined_at' | 'most_recent_action';
 
   /**
    * Filter members to only those subscribed to these specific plans.
    */
-  plan_ids?: Array<string> | null;
+  plan_ids?: Array<string>;
 
   /**
    * Filter members to only those belonging to these specific products.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
    * Filter members to only those who used these specific promo codes.
    */
-  promo_code_ids?: Array<string> | null;
+  promo_code_ids?: Array<string>;
 
   /**
    * Search members by name, username, or email. Email filtering requires the
    * member:email:read permission.
    */
-  query?: string | null;
+  query?: string;
 
   /**
    * Filter members by their current subscription status.
    */
-  statuses?: Array<Shared.MemberStatuses> | null;
+  statuses?: Array<Shared.MemberStatuses>;
 
   /**
    * Filter members to only those matching these specific user identifiers.
    */
-  user_ids?: Array<string> | null;
+  user_ids?: Array<string>;
 }
 
 export declare namespace Members {

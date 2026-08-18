@@ -398,34 +398,34 @@ export interface ForumPostListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Whether to include top-level bounty discussion anchors as rich forum items.
    */
-  include_bounty_anchors?: boolean | null;
+  include_bounty_anchors?: boolean;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * The unique identifier of a parent post to list comments for. When set, returns
    * replies to that post.
    */
-  parent_id?: string | null;
+  parent_id?: string;
 
   /**
    * Whether to filter for only pinned posts. Set to true to return only pinned
    * posts.
    */
-  pinned?: boolean | null;
+  pinned?: boolean;
 }
 
 export declare namespace ForumPosts {

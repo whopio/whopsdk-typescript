@@ -427,37 +427,39 @@ export namespace AppUpdateParams {
 
 export interface AppListParams extends CursorPageParams {
   /**
-   * The type of end-user an app is built for
+   * Filter apps by the type of end-user they are built for, such as consumer or
+   * business.
    */
-  app_type?: AppType | null;
+  app_type?: AppType;
 
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter apps to only those created by this company, starting with 'biz\_'.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Accepted values: asc, desc.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The order to fetch the apps in for discovery.
+   * The field to sort apps by. Defaults to discoverable_at descending, showing the
+   * most recently published apps first.
    */
   order?:
     | 'created_at'
@@ -471,24 +473,24 @@ export interface AppListParams extends CursorPageParams {
     | 'total_ai_cost_usd'
     | 'total_ai_tokens'
     | 'last_ai_prompt_at'
-    | 'ai_average_rating'
-    | null;
+    | 'ai_average_rating';
 
   /**
    * A search string to filter apps by name, such as 'chat' or 'analytics'.
    */
-  query?: string | null;
+  query?: string;
 
   /**
    * Whether to only return apps that have been verified by Whop. Useful for
    * populating a featured apps section.
    */
-  verified_apps_only?: boolean | null;
+  verified_apps_only?: boolean;
 
   /**
-   * The different types of an app view
+   * Filter apps to only those supporting a specific view type, such as 'dashboard'
+   * or 'hub'.
    */
-  view_type?: Shared.AppViewType | null;
+  view_type?: Shared.AppViewType;
 }
 
 export declare namespace Apps {

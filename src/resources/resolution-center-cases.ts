@@ -438,42 +438,42 @@ export interface ResolutionCenterCaseListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of the company to list resolution center cases for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return cases created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return cases created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter by resolution center case status.
    */
-  statuses?: Array<ResolutionCenterCaseStatus> | null;
+  statuses?: Array<ResolutionCenterCaseStatus>;
 }
 
 export declare namespace ResolutionCenterCases {

@@ -1332,58 +1332,58 @@ export interface InvoiceListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter invoices by their collection method.
    */
-  collection_methods?: Array<Shared.CollectionMethod> | null;
+  collection_methods?: Array<Shared.CollectionMethod>;
 
   /**
    * The unique identifier of the company to list invoices for.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return invoices created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return invoices created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for ordering results, either ascending or descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * Which columns can be used to sort.
+   * The field to order results by, such as creation date or due date.
    */
-  order?: 'id' | 'created_at' | 'due_date' | null;
+  order?: 'id' | 'created_at' | 'due_date';
 
   /**
    * Filter invoices to only those associated with these specific product
    * identifiers.
    */
-  product_ids?: Array<string> | null;
+  product_ids?: Array<string>;
 
   /**
    * Filter invoices by their current status.
    */
-  statuses?: Array<Shared.InvoiceStatus> | null;
+  statuses?: Array<Shared.InvoiceStatus>;
 }
 
 export declare namespace Invoices {

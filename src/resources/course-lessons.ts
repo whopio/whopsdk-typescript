@@ -982,27 +982,27 @@ export interface CourseLessonListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * The unique identifier of a chapter to return only its lessons.
    */
-  chapter_id?: string | null;
+  chapter_id?: string;
 
   /**
    * The unique identifier of the course to return all lessons across all chapters.
    */
-  course_id?: string | null;
+  course_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 }
 
 export interface CourseLessonSubmitAssessmentParams {

@@ -444,47 +444,47 @@ export interface RefundListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Filter refunds to only those belonging to this company.
    */
-  company_id?: string | null;
+  company_id?: string;
 
   /**
    * Only return refunds created after this timestamp.
    */
-  created_after?: string | null;
+  created_after?: string;
 
   /**
    * Only return refunds created before this timestamp.
    */
-  created_before?: string | null;
+  created_before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for ordering results, either ascending or descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * Filter refunds to only those associated with this specific payment.
    */
-  payment_id?: string | null;
+  payment_id?: string;
 
   /**
    * Filter refunds to only those associated with this specific user.
    */
-  user_id?: string | null;
+  user_id?: string;
 }
 
 export declare namespace Refunds {

@@ -351,33 +351,33 @@ export interface BountyListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
-   * The direction of the sort.
+   * Sort direction. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * The experience to list bounties for. When omitted, returns bounties with no
    * experience.
    */
-  experience_id?: string | null;
+  experience_id?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The available bounty statuses to choose from.
+   * Filter bounties by status.
    */
-  status?: 'published' | 'archived' | 'scheduled' | null;
+  status?: 'published' | 'archived' | 'scheduled';
 }
 
 export declare namespace Bounties {

@@ -279,22 +279,22 @@ export interface AIChatListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
    * When true, returns only chats with an active cron schedule
    */
-  only_active_crons?: boolean | null;
+  only_active_crons?: boolean;
 }
 
 export declare namespace AIChats {

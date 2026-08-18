@@ -546,22 +546,22 @@ export interface OverrideListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * The role of an affiliate override (standard or rev_share)
+   * Filter by override type (standard or rev_share).
    */
-  override_type?: AffiliateOverrideRoles | null;
+  override_type?: AffiliateOverrideRoles;
 }
 
 export interface OverrideDeleteParams {

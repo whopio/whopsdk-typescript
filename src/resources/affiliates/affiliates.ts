@@ -406,37 +406,37 @@ export interface AffiliateListParams extends CursorPageParams {
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
-  before?: string | null;
+  before?: string;
 
   /**
-   * The direction of the sort.
+   * The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction | null;
+  direction?: Shared.Direction;
 
   /**
    * Returns the first _n_ elements from the list.
    */
-  first?: number | null;
+  first?: number;
 
   /**
    * Returns the last _n_ elements from the list.
    */
-  last?: number | null;
+  last?: number;
 
   /**
-   * Which columns can be used to sort.
+   * The field to sort results by.
    */
-  order?: 'id' | 'created_at' | 'cached_total_referrals' | 'cached_total_rewards' | null;
+  order?: 'id' | 'created_at' | 'cached_total_referrals' | 'cached_total_rewards';
 
   /**
    * Search affiliates by username.
    */
-  query?: string | null;
+  query?: string;
 
   /**
-   * Statuses for resources
+   * Filter by affiliate status (active or archived).
    */
-  status?: Status | null;
+  status?: Status;
 }
 
 Affiliates.Overrides = Overrides;
