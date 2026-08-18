@@ -329,6 +329,17 @@ export namespace PaymentMethodRetrieveResponse {
       exp_year: number | null;
 
       /**
+       * Whether the card is past its expiration month. An expired card cannot take a new
+       * charge.
+       */
+      expired: boolean;
+
+      /**
+       * The funding types of a card
+       */
+      funding_type: 'credit' | 'debit' | 'prepaid' | null;
+
+      /**
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
@@ -1906,6 +1917,17 @@ export namespace PaymentMethodListResponse {
       exp_year: number | null;
 
       /**
+       * Whether the card is past its expiration month. An expired card cannot take a new
+       * charge.
+       */
+      expired: boolean;
+
+      /**
+       * The funding types of a card
+       */
+      funding_type: 'credit' | 'debit' | 'prepaid' | null;
+
+      /**
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;
@@ -3226,6 +3248,24 @@ export interface PaymentMethodListParams extends CursorPageParams {
   before?: string | null;
 
   /**
+   * Filter by whether the stored credential has permanently stopped charging, such
+   * as a vault entry its provider closed.
+   */
+  broken?: boolean | null;
+
+  /**
+   * Only return cards on these networks, such as the networks the seller accepts.
+   * Payment methods that are not cards are unaffected.
+   */
+  card_brands?: Array<PaymentsAPI.CardBrands> | null;
+
+  /**
+   * Only return cards funded this way. A card whose funding could not be determined
+   * is excluded, and payment methods that are not cards are unaffected.
+   */
+  card_funding_types?: Array<'credit' | 'debit' | 'prepaid'> | null;
+
+  /**
    * The unique identifier of the company. Provide either this or member_id, not
    * both. Omit both to address your own saved payment methods.
    */
@@ -3247,6 +3287,12 @@ export interface PaymentMethodListParams extends CursorPageParams {
   direction?: Shared.Direction | null;
 
   /**
+   * Filter by expiry. Only a card can expire, so `false` keeps every payment method
+   * that is not past its expiration month and `true` returns expired cards alone.
+   */
+  expired?: boolean | null;
+
+  /**
    * Returns the first _n_ elements from the list.
    */
   first?: number | null;
@@ -3258,6 +3304,12 @@ export interface PaymentMethodListParams extends CursorPageParams {
   future_usage?: 'off_session' | 'on_session' | null;
 
   /**
+   * Filter cards by whether they carry the payer identity document their payment
+   * provider requires. Payment methods that are not cards are unaffected.
+   */
+  has_payer_document?: boolean | null;
+
+  /**
    * Returns the last _n_ elements from the list.
    */
   last?: number | null;
@@ -3267,6 +3319,13 @@ export interface PaymentMethodListParams extends CursorPageParams {
    * company_id to list your own saved payment methods.
    */
   member_id?: string | null;
+
+  /**
+   * Only return payment methods of these types. Pass the eligible `type` values from
+   * the payment method types catalogue so the list holds nothing the purchase cannot
+   * take. An empty list returns no payment methods.
+   */
+  payment_method_types?: Array<PaymentsAPI.PaymentMethodTypes> | null;
 }
 
 export declare namespace PaymentMethods {
