@@ -624,6 +624,13 @@ export interface PaymentListResponse {
   paid_at: string | null;
 
   /**
+   * The instrument this payment was made with, shaped for display: the method type,
+   * a buyer-facing name, the standard icon set, and the card facts when it was a
+   * card. Null when the receipt names no payment method.
+   */
+  payment_instrument: PaymentListResponse.PaymentInstrument | null;
+
+  /**
    * The tokenized payment method reference used for this payment. Null if no token
    * was used.
    */
@@ -877,6 +884,209 @@ export namespace PaymentListResponse {
      * The state of the membership.
      */
     status: Shared.MembershipStatus;
+  }
+
+  /**
+   * The instrument this payment was made with, shaped for display: the method type,
+   * a buyer-facing name, the standard icon set, and the card facts when it was a
+   * card. Null when the receipt names no payment method.
+   */
+  export interface PaymentInstrument {
+    /**
+     * Card payments only: the card's network and last four.
+     */
+    card: PaymentInstrument.Card | null;
+
+    /**
+     * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
+     * method's own name ("Klarna").
+     */
+    display_name: string;
+
+    /**
+     * The standard icon set: square and card shapes, each in light and dark colorways.
+     */
+    icons: PaymentInstrument.Icons;
+
+    /**
+     * Installment methods only: how many payments the charge splits into. Data, not
+     * copy — compose and translate the label client-side.
+     */
+    installment_count: number | null;
+
+    /**
+     * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
+     */
+    payment_method_type: string;
+  }
+
+  export namespace PaymentInstrument {
+    /**
+     * Card payments only: the card's network and last four.
+     */
+    export interface Card {
+      /**
+       * The network identifier (`visa`, `amex`, …), matching `card.networks` entries and
+       * saved card payment methods.
+       */
+      brand: string;
+
+      /**
+       * The card's last four digits, when captured.
+       */
+      last4: string | null;
+    }
+
+    /**
+     * The standard icon set: square and card shapes, each in light and dark colorways.
+     */
+    export interface Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      card: Icons.Card;
+
+      /**
+       * The square tile (32x32).
+       */
+      square: Icons.Square;
+    }
+
+    export namespace Icons {
+      /**
+       * The credit-card-proportioned tile (48x30).
+       */
+      export interface Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Card.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Card.Light;
+      }
+
+      export namespace Card {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+
+      /**
+       * The square tile (32x32).
+       */
+      export interface Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        dark: Square.Dark;
+
+        /**
+         * The colorway for light surfaces.
+         */
+        light: Square.Light;
+      }
+
+      export namespace Square {
+        /**
+         * The colorway for dark surfaces.
+         */
+        export interface Dark {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+
+        /**
+         * The colorway for light surfaces.
+         */
+        export interface Light {
+          /**
+           * Raster fallback at the shape's native size.
+           */
+          png_1x: string;
+
+          /**
+           * Raster fallback at double density.
+           */
+          png_2x: string;
+
+          /**
+           * Raster fallback at quadruple density.
+           */
+          png_4x: string;
+
+          /**
+           * The vector file. Prefer this everywhere SVG renders.
+           */
+          svg: string;
+        }
+      }
+    }
   }
 
   /**
