@@ -620,7 +620,7 @@ export interface CheckoutConfiguration {
 
   /**
    * A URL you can send to customers to complete a checkout. It looks like
-   * `/checkout/ch_xxxx`
+   * `/checkout/plan_xxxx?session={id}`
    */
   purchase_url: string;
 
