@@ -1139,6 +1139,12 @@ export namespace PaymentListResponse {
       exp_year: number | null;
 
       /**
+       * A stable identifier for the underlying card. Two payment methods with the same
+       * fingerprint are the same card. Null if not available.
+       */
+      fingerprint: string | null;
+
+      /**
        * The last four digits of the card number. Null if not available.
        */
       last4: string | null;

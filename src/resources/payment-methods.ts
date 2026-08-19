@@ -335,6 +335,12 @@ export namespace PaymentMethodRetrieveResponse {
       expired: boolean;
 
       /**
+       * A stable identifier for the underlying card. Two payment methods with the same
+       * fingerprint are the same card. Null if not available.
+       */
+      fingerprint: string | null;
+
+      /**
        * The funding types of a card
        */
       funding_type: 'credit' | 'debit' | 'prepaid' | null;
@@ -1385,9 +1391,10 @@ export namespace PaymentMethodRetrieveResponse {
   }
 
   /**
-   * The buyer's Whop balance, offered as a payment method. Charged by naming its
-   * ledger id on a `saved` confirmation token — it is a live wallet, not a stored
-   * credential, so it cannot be vaulted or charged off-session.
+   * A Whop balance the buyer can pay with — their own, or an account's they hold
+   * permission to spend. Charged by naming its ledger id on a `saved` confirmation
+   * token — it is a live wallet, not a stored credential, so it cannot be vaulted or
+   * charged off-session.
    */
   export interface PlatformBalancePaymentMethod {
     /**
@@ -1587,6 +1594,13 @@ export namespace PaymentMethodRetrieveResponse {
      */
     export interface PlatformBalance {
       /**
+       * The account whose wallet this is. Null for the buyer's own personal wallet. A
+       * buyer sees an account's balance here when they hold permission to spend it, so a
+       * list can hold several — their own and one per account they are on.
+       */
+      account: PlatformBalance.Account | null;
+
+      /**
        * Available amount per currency. Read from the balance cache, so it is indicative
        * — the charge revalidates against settled funds and may still refuse.
        */
@@ -1601,6 +1615,41 @@ export namespace PaymentMethodRetrieveResponse {
     }
 
     export namespace PlatformBalance {
+      /**
+       * The account whose wallet this is. Null for the buyer's own personal wallet. A
+       * buyer sees an account's balance here when they hold permission to spend it, so a
+       * list can hold several — their own and one per account they are on.
+       */
+      export interface Account {
+        /**
+         * The unique identifier for the company.
+         */
+        id: string;
+
+        /**
+         * The company's logo.
+         */
+        logo: Account.Logo | null;
+
+        /**
+         * The display name of the company shown to customers.
+         */
+        title: string;
+      }
+
+      export namespace Account {
+        /**
+         * The company's logo.
+         */
+        export interface Logo {
+          /**
+           * A pre-optimized URL for rendering this attachment on the client. This should be
+           * used for displaying attachments in apps.
+           */
+          url: string | null;
+        }
+      }
+
       /**
        * An amount of money. Never a bare number, because a bare number cannot answer the
        * two questions a client has to answer to render it: what currency is this, and
@@ -1923,6 +1972,12 @@ export namespace PaymentMethodListResponse {
       expired: boolean;
 
       /**
+       * A stable identifier for the underlying card. Two payment methods with the same
+       * fingerprint are the same card. Null if not available.
+       */
+      fingerprint: string | null;
+
+      /**
        * The funding types of a card
        */
       funding_type: 'credit' | 'debit' | 'prepaid' | null;
@@ -2973,9 +3028,10 @@ export namespace PaymentMethodListResponse {
   }
 
   /**
-   * The buyer's Whop balance, offered as a payment method. Charged by naming its
-   * ledger id on a `saved` confirmation token — it is a live wallet, not a stored
-   * credential, so it cannot be vaulted or charged off-session.
+   * A Whop balance the buyer can pay with — their own, or an account's they hold
+   * permission to spend. Charged by naming its ledger id on a `saved` confirmation
+   * token — it is a live wallet, not a stored credential, so it cannot be vaulted or
+   * charged off-session.
    */
   export interface PlatformBalancePaymentMethod {
     /**
@@ -3175,6 +3231,13 @@ export namespace PaymentMethodListResponse {
      */
     export interface PlatformBalance {
       /**
+       * The account whose wallet this is. Null for the buyer's own personal wallet. A
+       * buyer sees an account's balance here when they hold permission to spend it, so a
+       * list can hold several — their own and one per account they are on.
+       */
+      account: PlatformBalance.Account | null;
+
+      /**
        * Available amount per currency. Read from the balance cache, so it is indicative
        * — the charge revalidates against settled funds and may still refuse.
        */
@@ -3189,6 +3252,41 @@ export namespace PaymentMethodListResponse {
     }
 
     export namespace PlatformBalance {
+      /**
+       * The account whose wallet this is. Null for the buyer's own personal wallet. A
+       * buyer sees an account's balance here when they hold permission to spend it, so a
+       * list can hold several — their own and one per account they are on.
+       */
+      export interface Account {
+        /**
+         * The unique identifier for the company.
+         */
+        id: string;
+
+        /**
+         * The company's logo.
+         */
+        logo: Account.Logo | null;
+
+        /**
+         * The display name of the company shown to customers.
+         */
+        title: string;
+      }
+
+      export namespace Account {
+        /**
+         * The company's logo.
+         */
+        export interface Logo {
+          /**
+           * A pre-optimized URL for rendering this attachment on the client. This should be
+           * used for displaying attachments in apps.
+           */
+          url: string | null;
+        }
+      }
+
       /**
        * An amount of money. Never a bare number, because a bare number cannot answer the
        * two questions a client has to answer to render it: what currency is this, and
