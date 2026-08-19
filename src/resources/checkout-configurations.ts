@@ -127,7 +127,7 @@ export interface CheckoutConfigurationListResponse {
 
   /**
    * A URL you can send to customers to complete a checkout. It looks like
-   * `/checkout/plan_xxxx?session={id}`
+   * `/checkout/ch_xxxx`
    */
   purchase_url: string;
 
