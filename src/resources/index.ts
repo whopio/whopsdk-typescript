@@ -316,6 +316,8 @@ export {
   type CardBrands,
   type PaymentMethodTypes,
   type ReceiptTaxBehavior,
+  type PaymentCreateResponse,
+  type PaymentRetrieveResponse,
   type PaymentListResponse,
   type PaymentListFeesResponse,
   type PaymentCreateParams,

@@ -44,7 +44,7 @@ export class Payments extends APIResource {
    * });
    * ```
    */
-  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<Shared.Payment> {
+  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<PaymentCreateResponse> {
     return this._client.post('/payments', { body, ...options });
   }
 
@@ -71,7 +71,7 @@ export class Payments extends APIResource {
    * );
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
+  retrieve(id: string, options?: RequestOptions): APIPromise<PaymentRetrieveResponse> {
     return this._client.get(path`/payments/${id}`, options);
   }
 
@@ -410,6 +410,38 @@ export type PaymentMethodTypes =
  * tax is included in the final price, or paid on top.
  */
 export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect';
+
+/**
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
+ */
+export interface PaymentCreateResponse extends Shared.Payment {
+  /**
+   * The credential the buyer's surface presents to poll this payment and set its
+   * return URL. Returned when a payment created from a confirmation token is created
+   * or retrieved by a caller with the payment:charge permission. Null for payments
+   * created from a stored payment method or callers without payment:charge. It
+   * unlocks this payment and nothing else; treat it like a password for that one
+   * attempt.
+   */
+  client_secret: string | null;
+}
+
+/**
+ * A payment represents a completed or attempted charge. Payments track the amount,
+ * status, currency, and payment method used.
+ */
+export interface PaymentRetrieveResponse extends Shared.Payment {
+  /**
+   * The credential the buyer's surface presents to poll this payment and set its
+   * return URL. Returned when a payment created from a confirmation token is created
+   * or retrieved by a caller with the payment:charge permission. Null for payments
+   * created from a stored payment method or callers without payment:charge. It
+   * unlocks this payment and nothing else; treat it like a password for that one
+   * attempt.
+   */
+  client_secret: string | null;
+}
 
 /**
  * A payment represents a completed or attempted charge. Payments track the amount,
@@ -2077,6 +2109,8 @@ export declare namespace Payments {
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
     type ReceiptTaxBehavior as ReceiptTaxBehavior,
+    type PaymentCreateResponse as PaymentCreateResponse,
+    type PaymentRetrieveResponse as PaymentRetrieveResponse,
     type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
     type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,

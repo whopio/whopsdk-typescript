@@ -357,13 +357,15 @@ Types:
 - <code><a href="./src/resources/payments.ts">CardBrands</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
 - <code><a href="./src/resources/payments.ts">ReceiptTaxBehavior</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentCreateResponse</a></code>
+- <code><a href="./src/resources/payments.ts">PaymentRetrieveResponse</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListFeesResponse</a></code>
 
 Methods:
 
-- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
-- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> Payment</code>
+- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> PaymentCreateResponse</code>
+- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> PaymentRetrieveResponse</code>
 - <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
 - <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponsesCursorPage</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
