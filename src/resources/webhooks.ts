@@ -463,7 +463,7 @@ export interface InvoiceCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -508,7 +508,7 @@ export interface InvoiceMarkedUncollectibleWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -553,7 +553,7 @@ export interface InvoicePaidWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -598,7 +598,7 @@ export interface InvoicePastDueWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -643,7 +643,7 @@ export interface InvoiceVoidedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -687,7 +687,7 @@ export interface MembershipActivatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -731,7 +731,7 @@ export interface MembershipDeactivatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -775,7 +775,7 @@ export interface MembershipTrialEndingSoonWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -818,7 +818,7 @@ export interface EntryCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -861,7 +861,7 @@ export interface EntryApprovedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -904,7 +904,7 @@ export interface EntryDeniedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -947,7 +947,7 @@ export interface EntryDeletedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -991,7 +991,7 @@ export interface SetupIntentRequiresActionWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1035,7 +1035,7 @@ export interface SetupIntentSucceededWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1079,7 +1079,7 @@ export interface SetupIntentCanceledWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1123,7 +1123,7 @@ export interface LedgerAccountFundsAvailableWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1471,7 +1471,7 @@ export interface WithdrawalCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1515,7 +1515,7 @@ export interface WithdrawalUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1558,7 +1558,7 @@ export interface CardTransactionCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1703,7 +1703,7 @@ export interface CardTransactionUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1848,7 +1848,7 @@ export interface CardTransactionCompletedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -1993,7 +1993,7 @@ export interface CardTransactionDeclinedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2138,7 +2138,7 @@ export interface CardTransactionReversedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2284,7 +2284,7 @@ export interface CourseLessonInteractionCompletedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2328,7 +2328,7 @@ export interface PayoutMethodCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2466,7 +2466,7 @@ export interface VerificationSucceededWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2539,7 +2539,7 @@ export interface IdentityProfileUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2595,7 +2595,7 @@ export interface PayoutAccountStatusUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -2776,7 +2776,7 @@ export interface ResolutionCenterCaseCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3044,7 +3044,7 @@ export interface ResolutionCenterCaseUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3312,7 +3312,7 @@ export interface ResolutionCenterCaseDecidedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3580,7 +3580,7 @@ export interface ProductCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3624,7 +3624,7 @@ export interface ProductUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3668,7 +3668,7 @@ export interface ProductDeletedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3712,7 +3712,7 @@ export interface ProductPublishedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3756,7 +3756,7 @@ export interface ProductUnpublishedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3800,7 +3800,7 @@ export interface ShipmentCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3844,7 +3844,7 @@ export interface ShipmentUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -3888,7 +3888,7 @@ export interface MemberCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4051,7 +4051,7 @@ export interface ChatMessageCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4122,7 +4122,7 @@ export interface ChatReactionCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4202,7 +4202,7 @@ export interface PaymentCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4246,7 +4246,7 @@ export interface PaymentSucceededWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4290,7 +4290,7 @@ export interface PaymentFailedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4334,7 +4334,7 @@ export interface PaymentPendingWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4378,7 +4378,7 @@ export interface DisputeCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4422,7 +4422,7 @@ export interface DisputeUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4466,7 +4466,7 @@ export interface RefundCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -4788,7 +4788,7 @@ export interface RefundUpdatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -5110,7 +5110,7 @@ export interface DisputeAlertCreatedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
@@ -5385,7 +5385,7 @@ export interface MembershipCancelAtPeriodEndChangedWebhookEvent {
   /**
    * The account ID that this webhook event is associated with
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * For some `.updated` events, the old values of the payload fields that changed,
