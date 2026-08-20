@@ -311,7 +311,8 @@ export namespace RefundRetrieveResponse {
       /**
        * Custom key-value pairs stored on the plan. Included in webhook payloads for
        * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-       * string value.
+       * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
+       * override the product's checkout call to action for this plan.
        */
       metadata: { [key: string]: unknown } | null;
     }
