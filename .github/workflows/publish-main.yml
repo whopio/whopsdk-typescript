@@ -1,0 +1,65 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to publish, e.g. 1.0.0. No default — every release is a deliberate choice."
+        required: true
+
+permissions:
+  contents: write
+  # npm Trusted Publishing: @whop/sdk trusts this repo+workflow as a publisher and npm
+  # publish authenticates with the OIDC token Actions mints for the run. The trusted
+  # publisher on npmjs.com must name THIS filename.
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Set up npm and pnpm
+        run: |
+          npm install -g npm@11
+          corepack enable
+
+      - name: Validate the version
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+        run: |
+          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::'$VERSION' is not semver."
+            exit 1
+          fi
+
+          if npm view "@whop/sdk@$VERSION" version >/dev/null 2>&1; then
+            echo "::error::@whop/sdk@$VERSION is already published; npm versions are immutable."
+            exit 1
+          fi
+
+      - name: Build
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm run build
+
+      - name: Publish @whop/sdk
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+        run: |
+          npm pkg set version="$VERSION"
+          npm publish --access public
+
+      - name: Tag the release
+        env:
+          VERSION: ${{ github.event.inputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git tag "v$VERSION"
+          git push origin "v$VERSION"
+          gh release create "v$VERSION" --title "v$VERSION" --generate-notes

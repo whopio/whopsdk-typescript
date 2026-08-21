@@ -1,16 +1,10 @@
 # Files Fern must not modify or delete when regenerating this repo.
 #
-# publish-alpha.yml is the alpha channel: pushes to the alpha branch publish
-# @whop/sdk-alpha for pre-merge testing. The rest is the Stainless-generated
-# npm release machinery (release-please for versioning, publish-npm.yml for the
-# tag/release-triggered publish), protected until the post-cutover publish
-# mechanism replaces it deliberately.
+# Fern owns the SDK source and its ci.yml; these are the hand-written release paths.
+# publish-main.yml publishes @whop/sdk on a manual dispatch with an explicit version;
+# publish-alpha.yml publishes whop-sdk-alpha on every push to the alpha branch. The
+# Stainless machinery that used to be listed here (release-please, publish-npm.yml,
+# bin/, scripts/publish-packages.ts) was deleted in the cutover, so it no longer needs
+# protecting. scripts/rename-to-esm-files.js is Fern's own and is not listed.
+.github/workflows/publish-main.yml
 .github/workflows/publish-alpha.yml
-.github/workflows/publish-npm.yml
-.github/workflows/release-please.yml
-.github/workflows/release-doctor.yml
-.release-please-manifest.json
-release-please-config.json
-bin/publish-npm
-bin/check-release-environment
-scripts/publish-packages.ts
