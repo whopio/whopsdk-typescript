@@ -459,6 +459,7 @@ export {
   type LedgerAccountFundsAvailableWebhookEvent,
   type WithdrawalCreatedWebhookEvent,
   type WithdrawalUpdatedWebhookEvent,
+  type WithdrawalReversedWebhookEvent,
   type CardTransactionCreatedWebhookEvent,
   type CardTransactionUpdatedWebhookEvent,
   type CardTransactionCompletedWebhookEvent,

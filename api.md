@@ -158,6 +158,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WithdrawalUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">WithdrawalReversedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardTransactionCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardTransactionUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardTransactionCompletedWebhookEvent</a></code>

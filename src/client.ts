@@ -503,6 +503,7 @@ import {
   WebhookUpdateParams,
   Webhooks,
   WithdrawalCreatedWebhookEvent,
+  WithdrawalReversedWebhookEvent,
   WithdrawalUpdatedWebhookEvent,
 } from './resources/webhooks';
 import {
@@ -1647,6 +1648,7 @@ export declare namespace Whop {
     type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
     type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
+    type WithdrawalReversedWebhookEvent as WithdrawalReversedWebhookEvent,
     type CardTransactionCreatedWebhookEvent as CardTransactionCreatedWebhookEvent,
     type CardTransactionUpdatedWebhookEvent as CardTransactionUpdatedWebhookEvent,
     type CardTransactionCompletedWebhookEvent as CardTransactionCompletedWebhookEvent,
