@@ -1,11 +1,18 @@
 name: Publish
 
 on:
+  # A release is a one-line PR bumping "version" in package.json. Merging it lands a
+  # version that differs from the one on npm, which is the signal to publish. Fern's
+  # regeneration PRs are pinned to the published version by the monorepo train, so they
+  # never look like a release.
+  push:
+    branches: [main]
+    paths: ["package.json"]
   workflow_dispatch:
     inputs:
       version:
-        description: "Version to publish, e.g. 1.0.0. No default — every release is a deliberate choice."
-        required: true
+        description: "Override: publish this version instead of the one in package.json"
+        required: false
 
 permissions:
   contents: write
@@ -29,35 +36,45 @@ jobs:
           npm install -g npm@11
           corepack enable
 
-      - name: Validate the version
+      - name: Decide whether this is a release
+        id: decide
         env:
-          VERSION: ${{ github.event.inputs.version }}
+          OVERRIDE: ${{ github.event.inputs.version }}
         run: |
-          if ! printf '%s' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
-            echo "::error::'$VERSION' is not semver."
+          if [ -n "$OVERRIDE" ]; then
+            npm pkg set version="$OVERRIDE"
+          fi
+
+          version=$(node -p "require('./package.json').version")
+          if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$'; then
+            echo "::error::'$version' is not semver."
             exit 1
           fi
 
-          if npm view "@whop/sdk@$VERSION" version >/dev/null 2>&1; then
-            echo "::error::@whop/sdk@$VERSION is already published; npm versions are immutable."
-            exit 1
+          if npm view "@whop/sdk@$version" version >/dev/null 2>&1; then
+            echo "@whop/sdk@$version is already published — nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+
+          echo "Releasing @whop/sdk@$version"
+          echo "release=true" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
 
       - name: Build
+        if: steps.decide.outputs.release == 'true'
         run: |
           pnpm install --frozen-lockfile
           pnpm run build
 
       - name: Publish @whop/sdk
-        env:
-          VERSION: ${{ github.event.inputs.version }}
-        run: |
-          npm pkg set version="$VERSION"
-          npm publish --access public
+        if: steps.decide.outputs.release == 'true'
+        run: npm publish --access public
 
-      - name: Tag the release
+      - name: Tag and release
+        if: steps.decide.outputs.release == 'true'
         env:
-          VERSION: ${{ github.event.inputs.version }}
+          VERSION: ${{ steps.decide.outputs.version }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git tag "v$VERSION"
