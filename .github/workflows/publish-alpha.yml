@@ -21,9 +21,12 @@ jobs:
         with:
           node-version: "22"
 
-      # Trusted publishing needs a current npm; node 22 ships npm 10.
-      - name: Set up npm
-        run: npm install -g npm@11
+      # Trusted publishing needs a current npm; the Fern tree's build script delegates
+      # to pnpm (packageManager: pnpm), so corepack provides the pinned pnpm.
+      - name: Set up npm and pnpm
+        run: |
+          npm install -g npm@11
+          corepack enable
 
       # Publishes the alpha branch as whop-sdk-alpha (unscoped, so no @whop org rights
       # are needed to bootstrap it) so a Fern regeneration can be consumed and tested
@@ -42,8 +45,8 @@ jobs:
             exit 0
           fi
 
-          npm install --no-audit --no-fund
-          npm run build --if-present
+          pnpm install --frozen-lockfile
+          pnpm run build
 
           base=$(node -p "require('./package.json').version")
           npm pkg set name="whop-sdk-alpha" version="${base}-alpha.${GITHUB_RUN_NUMBER}"
