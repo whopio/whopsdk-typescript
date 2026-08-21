@@ -1,1 +1,16 @@
-# Specify files that shouldn't be modified by Fern
+# Files Fern must not modify or delete when regenerating this repo.
+#
+# This repo's npm release machinery is Stainless-generated (release-please for
+# versioning, publish-npm.yml for the tag/release-triggered publish). The Fern
+# pipeline in whop-monorepo/sdks/fern regenerates the SDK source here via PRs,
+# and without this file those PRs delete the release machinery wholesale
+# (observed on PR #59). Protect it until the post-cutover publish mechanism
+# replaces it deliberately.
+.github/workflows/publish-npm.yml
+.github/workflows/release-please.yml
+.github/workflows/release-doctor.yml
+.release-please-manifest.json
+release-please-config.json
+bin/publish-npm
+bin/check-release-environment
+scripts/publish-packages.ts
