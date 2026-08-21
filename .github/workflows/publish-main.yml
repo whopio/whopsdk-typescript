@@ -38,6 +38,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+          # packageManager in package.json makes setup-node try to prime a pnpm cache,
+          # which fails before corepack has installed pnpm. Only the build job uses it.
+          package-manager-cache: false
 
       - name: Is this a release?
         id: check
@@ -104,6 +107,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+          # packageManager in package.json makes setup-node try to prime a pnpm cache,
+          # which fails before corepack has installed pnpm. Only the build job uses it.
+          package-manager-cache: false
 
       # Fern stamps the version into four files at generate time; a one-line version bump
       # touches only package.json, so the other three would ship reporting the previous
@@ -160,6 +166,9 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+          # packageManager in package.json makes setup-node try to prime a pnpm cache,
+          # which fails before corepack has installed pnpm. Only the build job uses it.
+          package-manager-cache: false
 
       - name: Set up npm
         run: |
