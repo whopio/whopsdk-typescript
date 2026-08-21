@@ -1,11 +1,11 @@
 # Files Fern must not modify or delete when regenerating this repo.
 #
-# This repo's npm release machinery is Stainless-generated (release-please for
-# versioning, publish-npm.yml for the tag/release-triggered publish). The Fern
-# pipeline in whop-monorepo/sdks/fern regenerates the SDK source here via PRs,
-# and without this file those PRs delete the release machinery wholesale
-# (observed on PR #59). Protect it until the post-cutover publish mechanism
-# replaces it deliberately.
+# publish-alpha.yml is the alpha channel: pushes to the alpha branch publish
+# @whop/sdk-alpha for pre-merge testing. The rest is the Stainless-generated
+# npm release machinery (release-please for versioning, publish-npm.yml for the
+# tag/release-triggered publish), protected until the post-cutover publish
+# mechanism replaces it deliberately.
+.github/workflows/publish-alpha.yml
 .github/workflows/publish-npm.yml
 .github/workflows/release-please.yml
 .github/workflows/release-doctor.yml
