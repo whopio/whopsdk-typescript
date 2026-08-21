@@ -1,6 +1,6 @@
 {
     "name": "@whop/sdk",
-    "version": "0.0.43",
+    "version": "1.0.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -1111,15 +1111,14 @@
         "test:unit": "vitest --project unit",
         "test:wire": "vitest --project wire"
     },
-    "dependencies": {},
     "devDependencies": {
-        "webpack": "^5.105.4",
-        "ts-loader": "^9.5.4",
-        "vitest": "^4.1.1",
-        "msw": "2.11.2",
+        "@biomejs/biome": "2.4.10",
         "@types/node": "^20.0.0",
+        "msw": "2.11.2",
+        "ts-loader": "^9.5.4",
         "typescript": "~5.9.3",
-        "@biomejs/biome": "2.4.10"
+        "vitest": "^4.1.1",
+        "webpack": "^5.105.4"
     },
     "browser": {
         "fs": false,
