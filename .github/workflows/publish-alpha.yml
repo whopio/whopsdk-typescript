@@ -1,0 +1,38 @@
+name: Publish alpha
+
+on:
+  push:
+    branches: [alpha]
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: https://registry.npmjs.org
+
+      # Publishes the alpha branch as @whop/sdk-alpha so a Fern regeneration can be
+      # consumed and tested before it is merged to main and released as @whop/sdk.
+      # Versions are <package version>-alpha.<run number>, so repeat pushes never collide.
+      - name: Publish @whop/sdk-alpha
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "NPM_TOKEN is not set; skipping publish. Add the secret to activate the alpha channel."
+            exit 0
+          fi
+
+          npm install --no-audit --no-fund
+          npm run build --if-present
+
+          base=$(node -p "require('./package.json').version")
+          npm pkg set name="@whop/sdk-alpha" version="${base}-alpha.${GITHUB_RUN_NUMBER}"
+          npm publish --access public
