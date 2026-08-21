@@ -289,6 +289,7 @@ export type CardBrands =
  */
 export type PaymentMethodTypes =
   | 'acss_debit'
+  | 'addi'
   | 'affirm'
   | 'afterpay_clearpay'
   | 'alipay'
