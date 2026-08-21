@@ -6,7 +6,7 @@ on:
 
 permissions:
   contents: read
-  # npm Trusted Publishing: the @whop/sdk-alpha package trusts this repo+workflow as a
+  # npm Trusted Publishing: the whop-sdk-alpha package trusts this repo+workflow as a
   # publisher, and npm publish authenticates with the OIDC token Actions mints for the
   # run — the same pattern publish-npm.yml uses. No long-lived npm secret exists.
   id-token: write
@@ -25,27 +25,26 @@ jobs:
       - name: Set up npm
         run: npm install -g npm@11
 
-      # Publishes the alpha branch as @whop/sdk-alpha so a Fern regeneration can be
-      # consumed and tested before it is merged to main and released as @whop/sdk.
-      # Versions are <package version>-alpha.<run number>, so repeat pushes never collide.
-      - name: Publish @whop/sdk-alpha
+      # Publishes the alpha branch as whop-sdk-alpha (unscoped, so no @whop org rights
+      # are needed to bootstrap it) so a Fern regeneration can be consumed and tested
+      # before it is merged to main and released as @whop/sdk. Versions are
+      # <package version>-alpha.<run number>, so repeat pushes never collide.
+      - name: Publish whop-sdk-alpha
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          # Trusted publishing is configured on the npm package itself, which does not
-          # exist until the one-time bootstrap publish. Skip cleanly until then.
-          if ! npm view @whop/sdk-alpha version >/dev/null 2>&1; then
-            echo "@whop/sdk-alpha does not exist on npm yet; skipping until the bootstrap publish."
-            exit 0
-          fi
-
           if [ -n "${NPM_TOKEN:-}" ]; then
             npm config set '//registry.npmjs.org/:_authToken' "$NPM_TOKEN"
+          elif ! npm view whop-sdk-alpha version >/dev/null 2>&1; then
+            # Trusted publishing is configured on the npm package itself, which does not
+            # exist until the one-time bootstrap publish. Skip cleanly until then.
+            echo "whop-sdk-alpha does not exist on npm yet; skipping until the bootstrap publish."
+            exit 0
           fi
 
           npm install --no-audit --no-fund
           npm run build --if-present
 
           base=$(node -p "require('./package.json').version")
-          npm pkg set name="@whop/sdk-alpha" version="${base}-alpha.${GITHUB_RUN_NUMBER}"
+          npm pkg set name="whop-sdk-alpha" version="${base}-alpha.${GITHUB_RUN_NUMBER}"
           npm publish --access public
