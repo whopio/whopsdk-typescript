@@ -1,0 +1,214 @@
+name: Publish
+
+on:
+  # A release is a one-line PR bumping "version" in package.json. The decide job below
+  # checks that the push changed nothing else in package.json, so a Fern regeneration —
+  # which rewrites the whole file — can never be mistaken for one, whatever version it
+  # happens to carry. Re-dispatch from main to retry: publishing is skipped when the
+  # version is already on npm.
+  push:
+    branches: [main]
+    paths: ["package.json"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Serialize: two pushes touching package.json must not both decide a version is
+# unpublished and race each other to the registry.
+concurrency:
+  group: publish-whop-sdk
+  cancel-in-progress: false
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    # Trusted publishing matches on repo + workflow filename, not git ref, so a dispatch
+    # from any branch would authenticate. Pin it to main.
+    if: github.ref == 'refs/heads/main'
+    outputs:
+      release: ${{ steps.check.outputs.release }}
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Is this a release?
+        id: check
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          version=$(node -p "require('./package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          # Stable semver only. A prerelease would need a dist-tag decision this workflow
+          # does not make, and publishing one untagged repoints `latest` at it.
+          if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::'$version' is not stable semver; prereleases are not released from main."
+            exit 1
+          fi
+
+          if [ "$EVENT" = "push" ] && git rev-parse HEAD^ >/dev/null 2>&1; then
+            if ! git show HEAD^:package.json > /tmp/prev.json 2>/dev/null; then
+              echo "::error::could not read the previous package.json."
+              exit 1
+            fi
+
+            only_version=$(node -e '
+              const fs = require("fs");
+              const prev = JSON.parse(fs.readFileSync("/tmp/prev.json", "utf8"));
+              const next = JSON.parse(fs.readFileSync("package.json", "utf8"));
+              prev.version = next.version;
+              process.stdout.write(JSON.stringify(prev) === JSON.stringify(next) ? "yes" : "no");
+            ')
+
+            if [ "$only_version" != "yes" ]; then
+              echo "package.json changed beyond its version — this is a regeneration, not a release."
+              echo "release=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          # Distinguish "not published" from "the registry call failed": treating an
+          # outage as "not published" would attempt a publish on an existing version.
+          if out=$(npm view "@whop/sdk@$version" version 2>&1); then
+            echo "@whop/sdk@$version is already published ($out) — nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          elif printf '%s' "$out" | grep -q "E404"; then
+            echo "Releasing @whop/sdk@$version"
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::npm view failed, refusing to guess: $out"
+            exit 1
+          fi
+
+  # Deliberately separate from publish: installing and building runs third-party code
+  # (devDependencies, tsc, biome), which must not happen in a job carrying the publishing
+  # credential. This job has no id-token, so there is nothing to steal.
+  build:
+    needs: decide
+    if: needs.decide.outputs.release == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      # Fern stamps the version into four files at generate time; a one-line version bump
+      # touches only package.json, so the other three would ship reporting the previous
+      # version — in SDK_VERSION and in the X-Fern-SDK-Version / User-Agent request
+      # headers. Re-derive them from package.json before building.
+      - name: Sync the version stamps
+        env:
+          VERSION: ${{ needs.decide.outputs.version }}
+        run: |
+          set -euo pipefail
+          node -e '
+            const fs = require("fs");
+            const v = process.env.VERSION;
+            const edits = [
+              ["src/version.ts", /"[^"]*"/],
+              ["src/BaseClient.ts", /(?<="X-Fern-SDK-Version": ")[^"]*/g],
+              [".fern/metadata.json", /(?<="sdkVersion": ")[^"]*/g],
+            ];
+            fs.writeFileSync("src/version.ts", `export const SDK_VERSION = "${v}";\n`);
+            let base = fs.readFileSync("src/BaseClient.ts", "utf8");
+            base = base.replace(/("X-Fern-SDK-Version": ")[^"]*/g, `$1${v}`);
+            base = base.replace(/(@whop\/sdk\/)[0-9][^"]*/g, `$1${v}`);
+            fs.writeFileSync("src/BaseClient.ts", base);
+            const meta = JSON.parse(fs.readFileSync(".fern/metadata.json", "utf8"));
+            meta.sdkVersion = v;
+            fs.writeFileSync(".fern/metadata.json", JSON.stringify(meta, null, 2) + "\n");
+          '
+          grep -c "$VERSION" src/version.ts src/BaseClient.ts .fern/metadata.json
+
+      - name: Build, test and pack
+        run: |
+          set -euo pipefail
+          corepack enable
+          pnpm install --frozen-lockfile
+          pnpm run build
+          CI=true pnpm test
+          npm pack --pack-destination /tmp/pack
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tarball
+          path: /tmp/pack/*.tgz
+          retention-days: 7
+
+  publish:
+    needs: [decide, build]
+    runs-on: ubuntu-latest
+    permissions:
+      # npm Trusted Publishing: @whop/sdk trusts this repo+workflow as a publisher and
+      # npm authenticates with the OIDC token Actions mints for the run. The trusted
+      # publisher on npmjs.com must name THIS filename. Nothing else runs in this job.
+      id-token: write
+    steps:
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Set up npm
+        run: |
+          set -euo pipefail
+          # Pinned: this runs in the job that can publish. Trusted publishing needs >=11.5.1.
+          npm install -g npm@11.6.2
+          npm --version
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: tarball
+          path: /tmp/pack
+
+      - name: Publish @whop/sdk
+        run: npm publish /tmp/pack/*.tgz --access public
+
+  # Runs whenever the tag is missing, not only after a publish: if a publish succeeds and
+  # tagging fails, a re-run would otherwise see the version on npm, decide there is
+  # nothing to release, and never create the tag.
+  tag:
+    needs: [decide, publish]
+    if: always() && needs.decide.outputs.version != '' && needs.publish.result != 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Tag and release
+        env:
+          VERSION: ${{ needs.decide.outputs.version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if ! npm view "@whop/sdk@$VERSION" version >/dev/null 2>&1; then
+            echo "@whop/sdk@$VERSION is not on npm; nothing to tag."
+            exit 0
+          fi
+
+          git fetch --tags --quiet
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
+            echo "Tag v$VERSION already exists."
+          else
+            git tag "v$VERSION"
+            git push origin "v$VERSION"
+          fi
+
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "Release v$VERSION already exists."
+          else
+            gh release create "v$VERSION" --title "v$VERSION" --generate-notes
+          fi

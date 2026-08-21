@@ -1,0 +1,15 @@
+{
+    "cliVersion": "5.90.1",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.87.2",
+    "generatorConfig": {
+        "namespaceExport": "Whop",
+        "noSerdeLayer": true,
+        "omitUndefined": true
+    },
+    "originGitCommit": "5f87fbb959b13f194f06ab94d6fce32e07d164f4",
+    "originGitCommitIsDirty": false,
+    "invokedBy": "ci",
+    "ciProvider": "unknown",
+    "sdkVersion": "1.0.0"
+}

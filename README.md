@@ -1,63 +1,58 @@
-# Whop TypeScript API Library
+# Whop TypeScript Library
 
-[![NPM version](<https://img.shields.io/npm/v/@whop/sdk.svg?label=npm%20(stable)>)](https://npmjs.org/package/@whop/sdk) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@whop/sdk)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fwhopio%2Fwhopsdk-typescript)
+[![npm shield](https://img.shields.io/npm/v/@whop/sdk)](https://www.npmjs.com/package/@whop/sdk)
 
-This library provides convenient access to the Whop REST API from server-side TypeScript or JavaScript.
+The Whop TypeScript library provides convenient access to the Whop APIs from TypeScript.
 
-The REST API documentation can be found on [docs.whop.com](https://docs.whop.com/apps). The full API of this library can be found in [api.md](api.md).
+## Table of Contents
 
-It is generated with [Stainless](https://www.stainless.com/).
-
-## MCP Server
-
-Use the Whop MCP Server to enable AI assistants to interact with this API, allowing them to explore endpoints, make test requests, and use documentation to help integrate this SDK into your application.
-
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=%40whop%2Fmcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkB3aG9wL21jcCJdLCJlbnYiOnsiV0hPUF9BUElfS0VZIjoiTXkgQVBJIEtleSIsIldIT1BfV0VCSE9PS19TRUNSRVQiOiJNeSBXZWJob29rIEtleSIsIldIT1BfQVBQX0lEIjoiYXBwX3h4eHh4eHh4eHh4eHh4IiwiV0hPUF9BUElfVkVSU0lPTiI6IjIwMjYtMDctMjAifX0)
-[![Install in VS Code](https://img.shields.io/badge/_-Add_to_VS_Code-blue?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9Im5vbmUiIHZpZXdCb3g9IjAgMCA0MCA0MCI+PHBhdGggZmlsbD0iI0VFRSIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNMzAuMjM1IDM5Ljg4NGEyLjQ5MSAyLjQ5MSAwIDAgMS0xLjc4MS0uNzNMMTIuNyAyNC43OGwtMy40NiAyLjYyNC0zLjQwNiAyLjU4MmExLjY2NSAxLjY2NSAwIDAgMS0xLjA4Mi4zMzggMS42NjQgMS42NjQgMCAwIDEtMS4wNDYtLjQzMWwtMi4yLTJhMS42NjYgMS42NjYgMCAwIDEgMC0yLjQ2M0w3LjQ1OCAyMCA0LjY3IDE3LjQ1MyAxLjUwNyAxNC41N2ExLjY2NSAxLjY2NSAwIDAgMSAwLTIuNDYzbDIuMi0yYTEuNjY1IDEuNjY1IDAgMCAxIDIuMTMtLjA5N2w2Ljg2MyA1LjIwOUwyOC40NTIuODQ0YTIuNDg4IDIuNDg4IDAgMCAxIDEuODQxLS43MjljLjM1MS4wMDkuNjk5LjA5MSAxLjAxOS4yNDVsOC4yMzYgMy45NjFhMi41IDIuNSAwIDAgMSAxLjQxNSAyLjI1M3YuMDk5LS4wNDVWMzMuMzd2LS4wNDUuMDk1YTIuNTAxIDIuNTAxIDAgMCAxLTEuNDE2IDIuMjU3bC04LjIzNSAzLjk2MWEyLjQ5MiAyLjQ5MiAwIDAgMS0xLjA3Ny4yNDZabS43MTYtMjguOTQ3LTExLjk0OCA5LjA2MiAxMS45NTIgOS4wNjUtLjAwNC0xOC4xMjdaIi8+PC9zdmc+)](https://vscode.stainless.com/mcp/%7B%22name%22%3A%22%40whop%2Fmcp%22%2C%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40whop%2Fmcp%22%5D%2C%22env%22%3A%7B%22WHOP_API_KEY%22%3A%22My%20API%20Key%22%2C%22WHOP_WEBHOOK_SECRET%22%3A%22My%20Webhook%20Key%22%2C%22WHOP_APP_ID%22%3A%22app_xxxxxxxxxxxxxx%22%2C%22WHOP_API_VERSION%22%3A%222026-07-20%22%7D%7D)
-
-> Note: You may need to set environment variables in your MCP client.
+- [Installation](#installation)
+- [Reference](#reference)
+- [Usage](#usage)
+- [Handling Errors](#handling-errors)
+- [Auto Pagination](#auto-pagination)
+- [Advanced Usage](#advanced-usage)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Semantic Versioning](#semantic-versioning)
+- [Requirements](#requirements)
+- [Environments](#environments)
+- [Request and Response Types](#request-and-response-types)
+- [Exception Handling](#exception-handling)
+- [Pagination](#pagination)
+- [Advanced](#advanced)
+  - [Subpackage Exports](#subpackage-exports)
+  - [Additional Headers](#additional-headers)
+  - [Additional Query String Parameters](#additional-query-string-parameters)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Aborting Requests](#aborting-requests)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Logging](#logging)
+  - [Custom Fetch](#custom-fetch)
+  - [Runtime Compatibility](#runtime-compatibility)
+- [Contributing](#contributing)
 
 ## Installation
 
 ```sh
-npm install @whop/sdk
+npm i -s @whop/sdk
 ```
+
+## Reference
+
+A full reference for this library is available [here](https://github.com/whopio/whopsdk-typescript/blob/HEAD/./reference.md).
 
 ## Usage
 
-The full API of this library can be found in [api.md](api.md).
+Instantiate and use the client with the following:
 
-<!-- prettier-ignore -->
-```js
-import Whop from '@whop/sdk';
+```typescript
+import { WhopClient } from "@whop/sdk";
 
-const client = new Whop({
-  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
-});
-
-const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-const paymentListResponse = page.data[0];
-
-console.log(paymentListResponse.id);
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-13", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+await client.accessTokens.create();
 ```
-
-### Request & Response types
-
-This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
-
-<!-- prettier-ignore -->
-```ts
-import Whop from '@whop/sdk';
-
-const client = new Whop({
-  apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
-});
-
-const params: Whop.PaymentListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
-const [paymentListResponse]: [Whop.PaymentListResponse] = await client.payments.list(params);
-```
-
-Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
 
 ## Handling errors
 
@@ -401,6 +396,285 @@ Note that React Native is not supported at this time.
 
 If you are interested in other runtime environments, please open or upvote an issue on GitHub.
 
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```typescript
+import { WhopClient, WhopEnvironment } from "@whop/sdk";
+
+const client = new WhopClient({
+    environment: WhopEnvironment.Default,
+});
+```
+
+## Request and Response Types
+
+The SDK exports all request and response types as TypeScript interfaces. Simply import them with the
+following namespace:
+
+```typescript
+import { Whop } from "@whop/sdk";
+
+const request: Whop.CreateAccessTokensRequest = {
+    ...
+};
+```
+
+## Exception Handling
+
+When the API returns a non-success status code (4xx or 5xx response), a subclass of the following error
+will be thrown.
+
+```typescript
+import { WhopError } from "@whop/sdk";
+
+try {
+    await client.accessTokens.create(...);
+} catch (err) {
+    if (err instanceof WhopError) {
+        console.log(err.statusCode);
+        console.log(err.message);
+        console.log(err.body);
+        console.log(err.rawResponse);
+    }
+}
+```
+
+## Pagination
+
+List endpoints are paginated. The SDK provides an iterator so that you can simply loop over the items:
+
+```typescript
+import { WhopClient } from "@whop/sdk";
+
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-13", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+const pageableResponse = await client.accounts.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.accounts.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+```
+
+## Advanced
+
+### Subpackage Exports
+
+This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
+
+```typescript
+import { AccessTokensClient } from '@whop/sdk/accessTokens';
+
+const client = new AccessTokensClient({...});
+```
+
+### Additional Headers
+
+If you would like to send additional headers as part of the request, use the `headers` request option.
+
+```typescript
+import { WhopClient } from "@whop/sdk";
+
+const client = new WhopClient({
+    ...
+    headers: {
+        'X-Custom-Header': 'custom value'
+    }
+});
+
+const response = await client.accessTokens.create(..., {
+    headers: {
+        'X-Custom-Header': 'custom value'
+    }
+});
+```
+
+### Additional Query String Parameters
+
+If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
+
+```typescript
+const response = await client.accessTokens.create(..., {
+    queryParams: {
+        'customQueryParamKey': 'custom query param value'
+    }
+});
+```
+
+### Retries
+
+The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
+retry limit (default: 2).
+
+Which status codes are retried depends on the `retryStatusCodes` generator configuration:
+
+**`legacy`** (current default): retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [5XX](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses) (All server errors, including 500)
+
+**`recommended`**: retries on
+- [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
+- [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
+- [502](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/502) (Bad Gateway)
+- [503](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) (Service Unavailable)
+- [504](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504) (Gateway Timeout)
+
+Use the `maxRetries` request option to configure this behavior.
+
+```typescript
+const response = await client.accessTokens.create(..., {
+    maxRetries: 0 // override maxRetries at the request level
+});
+```
+
+### Timeouts
+
+The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
+
+```typescript
+const response = await client.accessTokens.create(..., {
+    timeoutInSeconds: 30 // override timeout to 30s
+});
+```
+
+### Aborting Requests
+
+The SDK allows users to abort requests at any point by passing in an abort signal.
+
+```typescript
+const controller = new AbortController();
+const response = await client.accessTokens.create(..., {
+    abortSignal: controller.signal
+});
+controller.abort(); // aborts the request
+```
+
+### Access Raw Response Data
+
+The SDK provides access to raw response data, including headers, through the `.withRawResponse()` method.
+The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
+
+```typescript
+const { data, rawResponse } = await client.accessTokens.create(...).withRawResponse();
+
+console.log(data);
+console.log(rawResponse.headers['X-My-Header']);
+```
+
+### Logging
+
+The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
+
+```typescript
+import { WhopClient, logging } from "@whop/sdk";
+
+const client = new WhopClient({
+    ...
+    logging: {
+        level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info
+        logger: new logging.ConsoleLogger(), // defaults to ConsoleLogger
+        silent: false, // defaults to true, set to false to enable logging
+    }
+});
+```
+The `logging` object can have the following properties:
+- `level`: The log level to use. Defaults to `logging.LogLevel.Info`.
+- `logger`: The logger to use. Defaults to a `logging.ConsoleLogger`.
+- `silent`: Whether to silence the logger. Defaults to `true`.
+
+The `level` property can be one of the following values:
+- `logging.LogLevel.Debug`
+- `logging.LogLevel.Info`
+- `logging.LogLevel.Warn`
+- `logging.LogLevel.Error`
+
+To provide a custom logger, you can pass in an object that implements the `logging.ILogger` interface.
+
+<details>
+<summary>Custom logger examples</summary>
+
+Here's an example using the popular `winston` logging library.
+```ts
+import winston from 'winston';
+
+const winstonLogger = winston.createLogger({...});
+
+const logger: logging.ILogger = {
+    debug: (msg, ...args) => winstonLogger.debug(msg, ...args),
+    info: (msg, ...args) => winstonLogger.info(msg, ...args),
+    warn: (msg, ...args) => winstonLogger.warn(msg, ...args),
+    error: (msg, ...args) => winstonLogger.error(msg, ...args),
+};
+```
+
+Here's an example using the popular `pino` logging library.
+
+```ts
+import pino from 'pino';
+
+const pinoLogger = pino({...});
+
+const logger: logging.ILogger = {
+  debug: (msg, ...args) => pinoLogger.debug(args, msg),
+  info: (msg, ...args) => pinoLogger.info(args, msg),
+  warn: (msg, ...args) => pinoLogger.warn(args, msg),
+  error: (msg, ...args) => pinoLogger.error(args, msg),
+};
+```
+</details>
+
+
+### Custom Fetch
+
+The SDK provides a low-level `fetch` method for making custom HTTP requests while still
+benefiting from SDK-level configuration like authentication, retries, timeouts, and logging.
+This is useful for calling API endpoints not yet supported in the SDK.
+
+```typescript
+const response = await client.fetch("/v1/custom/endpoint", {
+    method: "GET",
+}, {
+    timeoutInSeconds: 30,
+    maxRetries: 3,
+    headers: {
+        "X-Custom-Header": "custom-value",
+    },
+});
+
+const data = await response.json();
+```
+
+### Runtime Compatibility
+
+
+The SDK works in the following runtimes:
+
+
+
+- Node.js 18+
+- Vercel
+- Cloudflare Workers
+- Deno v1.25+
+- Bun 1.0+
+- React Native
+
+
 ## Contributing
 
-See [the contributing documentation](./CONTRIBUTING.md).
+While we value open-source contributions to this SDK, this library is generated programmatically.
+Additions made directly to this library would have to be moved over to our generation code,
+otherwise they would be overwritten upon the next generated release. Feel free to open a PR as
+a proof of concept, but know that we will not be able to merge it as-is. We suggest opening
+an issue first to discuss with us!
+
+On the other hand, contributions to the README are always very welcome!
