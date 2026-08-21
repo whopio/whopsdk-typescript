@@ -50,4 +50,6 @@ jobs:
 
           base=$(node -p "require('./package.json').version")
           npm pkg set name="whop-sdk-alpha" version="${base}-alpha.${GITHUB_RUN_NUMBER}"
-          npm publish --access public
+          # Every version of this package is a prerelease, so `latest` deliberately tracks
+          # the newest one — npm requires the tag to be explicit for prerelease versions.
+          npm publish --access public --tag latest
