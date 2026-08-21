@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.0.43 (2026-08-21)
+
+Full Changelog: [v0.0.42...v0.0.43](https://github.com/whopio/whopsdk-typescript/compare/v0.0.42...v0.0.43)
+
+### Chores
+
+* protect the npm release machinery from Fern regeneration ([#60](https://github.com/whopio/whopsdk-typescript/issues/60)) ([be9342b](https://github.com/whopio/whopsdk-typescript/commit/be9342b2983cf5eee0261ba69b586a102851f046))
+
 ## [0.0.42](https://github.com/whopio/whopsdk-typescript/compare/v0.0.41...v0.0.42) (2026-07-22)
 
 
