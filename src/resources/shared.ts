@@ -1822,6 +1822,12 @@ export interface Invoice {
   mailing_address: Invoice.MailingAddress | null;
 
   /**
+   * The member that the invoice was created for. Null when the invoice is addressed
+   * to an email address with no member record behind it.
+   */
+  member: Invoice.Member | null;
+
+  /**
    * The sequential invoice number for display purposes.
    */
   number: string;
@@ -1831,6 +1837,13 @@ export interface Invoice {
    * email address pre-filled and locked.
    */
   pay_online_url: string | null;
+
+  /**
+   * The payment that settled this invoice. Null while the invoice is unpaid, when
+   * the invoice was marked paid manually, and on a subscription renewal invoice,
+   * where the settling payment cannot yet be identified.
+   */
+  payment: Invoice.Payment | null;
 
   /**
    * Whether a payment on this invoice is still clearing. True while a delayed
@@ -1980,6 +1993,29 @@ export namespace Invoice {
      * The state of the address.
      */
     state: string | null;
+  }
+
+  /**
+   * The member that the invoice was created for. Null when the invoice is addressed
+   * to an email address with no member record behind it.
+   */
+  export interface Member {
+    /**
+     * The unique identifier for the company member.
+     */
+    id: string;
+  }
+
+  /**
+   * The payment that settled this invoice. Null while the invoice is unpaid, when
+   * the invoice was marked paid manually, and on a subscription renewal invoice,
+   * where the settling payment cannot yet be identified.
+   */
+  export interface Payment {
+    /**
+     * The unique identifier for the payment.
+     */
+    id: string;
   }
 
   /**

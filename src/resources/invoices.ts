@@ -22,6 +22,8 @@ export class Invoices extends APIResource {
    *
    * - `invoice:create`
    * - `member:email:read`
+   * - `member:basic:read`
+   * - `payment:basic:read`
    *
    * @example
    * ```ts
@@ -44,6 +46,8 @@ export class Invoices extends APIResource {
    *
    * - `invoice:basic:read`
    * - `member:email:read`
+   * - `member:basic:read`
+   * - `payment:basic:read`
    *
    * @example
    * ```ts
@@ -63,6 +67,8 @@ export class Invoices extends APIResource {
    *
    * - `invoice:update`
    * - `member:email:read`
+   * - `member:basic:read`
+   * - `payment:basic:read`
    *
    * @example
    * ```ts
