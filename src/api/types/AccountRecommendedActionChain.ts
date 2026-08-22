@@ -6,7 +6,7 @@ export interface AccountRecommendedActionChain {
     actions: Whop.AccountRecommendedActionChainStep[];
     /** What running the chain accomplishes */
     description: string;
-    /** Chain ID — `rac_seed_<preset>_<nonce>` for seeded chains, `rac_chain_*` for generated ones */
+    /** Chain ID — `rac_seed_<chain>_<nonce>` for seeded chains, `rac_chain_*` for generated ones */
     id: string;
     /** Why the generator proposed this chain, or `null` for seeded chains */
     reasoning: Record<string, unknown> | null;

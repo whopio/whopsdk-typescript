@@ -481,6 +481,7 @@ describe("PaymentsClient", () => {
                 zip_code: "zip_code",
             },
             voidable: true,
+            client_secret: "pay_xxxxxxxxxxxxxx_secret_v1_xxxx",
         };
 
         server
@@ -932,6 +933,7 @@ describe("PaymentsClient", () => {
                 zip_code: "zip_code",
             },
             voidable: true,
+            client_secret: "pay_xxxxxxxxxxxxxx_secret_v1_xxxx",
         };
 
         server

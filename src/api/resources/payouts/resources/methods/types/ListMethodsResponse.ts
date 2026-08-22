@@ -32,6 +32,8 @@ export namespace ListMethodsResponse {
             is_clone: boolean;
             /** Whether this is the default payout method for the account. */
             is_default: boolean;
+            /** When the most recent completed payout was delivered to this method, as an ISO 8601 timestamp. `null` when nothing has been paid out to it yet. */
+            last_paid_out_at: string | null;
             /** Whether the payer added this method by signing in to their bank rather than typing account details. */
             linked_via_plaid: boolean;
             /** Whether the bank sign-in behind this method has expired and must be redone before it counts as linked. */
@@ -43,8 +45,10 @@ export namespace ListMethodsResponse {
             payer_name: string | null;
             /** Fee and delivery estimate for withdrawing the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable. */
             quote: Item.Quote | null;
-            /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means the last payout failed. */
+            /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */
             status: Item.Status;
+            /** Machine-readable code for why the method is `broken` — the newest disabling failure recorded through it, whether a payout error or a pre-payout rejection. `null` unless the method is broken, or when it was disabled without a recorded failure. */
+            status_reason: string | null;
             /** The supported payout method this saved method was created from. */
             supported_payout_method: Item.SupportedPayoutMethod | null;
             /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
@@ -131,7 +135,7 @@ export namespace ListMethodsResponse {
                 }
             }
 
-            /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means the last payout failed. */
+            /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */
             export const Status = {
                 Created: "created",
                 Active: "active",
@@ -199,7 +203,7 @@ export namespace ListMethodsResponse {
          * Caps for instant-speed payouts, which additionally draw on pending funds.
          */
         export interface Instant {
-            /** How much of the account's daily instant allowance is left, in the requested currency. */
+            /** How much of the account's daily instant allowance is left, in the requested currency. Null when the account is exempt from the daily cap, which is not the same as 0. */
             daily_amount_remaining: number | null;
             /** Why instant payouts are unavailable for this account, or null when they are available. */
             error_code: Instant.ErrorCode | null;
@@ -207,7 +211,7 @@ export namespace ListMethodsResponse {
             error_message: string | null;
             /** The maximum amount an instant payout can move right now, in whole currency units. Already bounded by the remaining daily instant allowance; 0 while an eligibility error blocks instant payouts. */
             max_amount: number;
-            /** When the daily instant allowance resets. */
+            /** When the daily instant allowance resets, or null when the account is exempt from the daily cap. */
             resets_at: string | null;
         }
 

@@ -3,9 +3,9 @@
 import type * as Whop from "../index.js";
 
 export interface User {
-    /** The user's balance: personal cash + crypto + in-flight treasury deposits, plus account balances for accounts they own. Computed only on `GET /users/me` self-view for callers with balance-read scope; `null` otherwise. */
+    /** The user's balance: personal cash + crypto + in-flight treasury deposits, plus account balances for accounts they own. Computed only on the self view (retrieved with the reserved id `me`) for callers with balance-read scope; `null` otherwise. */
     balance: Whop.UserBalance | null;
-    /** The user's cumulative wallet balance over time (USD `{ t, v }` points plus last/min/max), for the balance chart. Opt in with `include_balance_history=true` on `GET /users/me`; populated only for callers with balance-read scope and `null` otherwise. A user with no wallet activity returns an empty series. */
+    /** The user's cumulative wallet balance over time (USD `{ t, v }` points plus last/min/max), for the balance chart. Opt in with `include_balance_history=true` when retrieving yourself with the reserved id `me`; populated only for callers with balance-read scope and `null` otherwise. A user with no wallet activity returns an empty series. */
     balance_history: Whop.UserBalanceHistory | null;
     /** The user's profile banner wrapper. `null` when the user has no banner. */
     banner: Whop.UserBanner | null;
@@ -15,7 +15,7 @@ export interface User {
     created_at: string;
     /** The user's gross USD income over time. Populated only on single-user self reads for callers with balance-read scope; `null` otherwise. */
     earnings_usd: Whop.UserEarnings | null;
-    /** The user's email address. Populated only on `GET /users/me` self-view for callers with email-read scope; `null` otherwise, or while the account has no confirmed email yet. */
+    /** The user's email address. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or while the account has no confirmed email yet. */
     email: string | null;
     /** User ID, prefixed `user_`. */
     id: string;
@@ -24,7 +24,7 @@ export interface User {
     /** Avatar wrapper; its `url` is always present, using a generated placeholder when the user set no picture. */
     profile_picture: Whop.UserProfilePicture;
     social_accounts: Whop.SocialAccount[];
-    /** Whop staff access flags. Populated only on `GET /users/me` self-view for callers with staff-read scope; `null` there for every user who is not Whop staff, and always `null` elsewhere. */
+    /** Whop staff access flags. Populated only on the self view (retrieved with the reserved id `me`) for callers with staff-read scope; `null` there for every user who is not Whop staff, and always `null` elsewhere. */
     staff: Whop.UserStaffAccess | null;
     /** The user's unique username */
     username: string;

@@ -10,34 +10,34 @@ export namespace ListPayoutsResponse {
 
     export namespace Data {
         export interface Item {
-            /** The payout amount in whole currency units. */
-            amount: number;
+            /** The payout amount in whole currency units, as a decimal string. */
+            amount: string;
             /** When the payout was created. */
             created_at: string;
             /** Payout currency. */
             currency: string;
-            /** The amount delivered in the destination currency, in whole currency units. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded conversion. */
-            destination_amount: number | null;
+            /** The amount delivered in the destination currency, as a decimal string. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded conversion. */
+            destination_amount: string | null;
             /** Currency the funds are delivered in, taken from the payout method when the payout is created. On a stablecoin payout it follows the settlement payout minted alongside it — the `GET /payouts` row carrying this payout's id as `payout_request_id` — and is `null` only when no settlement payout exists. */
             destination_currency: string | null;
             /** Estimated time the funds become available in the destination account. */
             estimated_arrival: string | null;
             /** Exchange rate from the payout currency to the destination currency. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded rate. */
             exchange_rate: number | null;
-            /** Why the payout ended without paying. Present on failed, canceled, and denied payouts; `null` otherwise. */
+            /** Why the payout ended without paying, or why it reversed after settlement. Present on failed, canceled, denied, and reversed payouts; `null` otherwise. */
             failure: Item.Failure | null;
-            /** The fee charged for the payout, in the payout currency. */
-            fee_amount: number;
+            /** The fee charged for the payout, in the payout currency, as a decimal string. */
+            fee_amount: string;
             /** Who bore the payout fee: the account itself, or its parent platform. */
             fee_paid_by: Item.FeePaidBy;
             /** Payout ID, prefixed `wdrl_`. */
             id: string;
-            /** Whop's markup on the provider fee, in the payout currency. `0.0` when none applies. */
-            markup_fee: number;
+            /** Whop's markup on the provider fee, in the payout currency, as a decimal string. `"0.0"` when none applies. */
+            markup_fee: string;
             /** Key-value data attached at creation and echoed on every read. At most 50 keys, key names up to 40 characters, string values up to 500 characters. */
             metadata: Record<string, string>;
             /** The planned net for the destination, in the payout currency: amount minus fee_amount minus markup_fee when fee_paid_by is `self`; equal to amount when the platform covers the fees. A payout that ends denied, canceled, or failed delivered nothing — most keep the planned figure and `failure` says where the funds are, but a canceled stablecoin payout can report the settled outcome instead: `amount` carries what stayed in the balance, fees are zero because none were charged, and `net_amount` is 0 because nothing was delivered. */
-            net_amount: number;
+            net_amount: string;
             /** Free-form notes attached by the payout creator, or `null` when none were provided. Maximum 255 characters. */
             notes: string | null;
             object: Item.Object_;
@@ -53,13 +53,15 @@ export namespace ListPayoutsResponse {
             speed: Item.Speed;
             /** Current payout status. */
             status: Item.Status;
+            /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the stablecoin conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */
+            status_detail: string;
             /** ACH trace number the recipient's bank can use to locate this payout. Assigned when the payout is submitted to the bank, so it is `null` before then and on payouts not sent over ACH. */
             trace_code: string | null;
         }
 
         export namespace Item {
             /**
-             * Why the payout ended without paying. Present on failed, canceled, and denied payouts; `null` otherwise.
+             * Why the payout ended without paying, or why it reversed after settlement. Present on failed, canceled, denied, and reversed payouts; `null` otherwise.
              */
             export interface Failure {
                 /** Classified failure code from the maintained error catalog. */
@@ -137,11 +139,12 @@ export namespace ListPayoutsResponse {
             /** Current payout status. */
             export const Status = {
                 Requested: "requested",
-                AwaitingPayment: "awaiting_payment",
-                InTransit: "in_transit",
+                InReview: "in_review",
+                Processing: "processing",
                 Completed: "completed",
-                Failed: "failed",
+                Reversed: "reversed",
                 Canceled: "canceled",
+                Failed: "failed",
                 Denied: "denied",
             } as const;
             export type Status = (typeof Status)[keyof typeof Status];

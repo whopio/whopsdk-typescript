@@ -9,4 +9,6 @@
 export interface RetrieveBountySubmissionsRequest {
     /** The bounty submission to act on (`btys_` tag). */
     id: string;
+    /** Read the submission as this account (`biz_` tag), scoping the lookup to its bounties rather than the caller's own work. Requires read access to the account. Without it the lookup covers only what the credential owns — the submissions the caller authored plus those on bounties they posted. */
+    account_id?: string;
 }

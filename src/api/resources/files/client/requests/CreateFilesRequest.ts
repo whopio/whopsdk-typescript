@@ -11,6 +11,6 @@ import type * as Whop from "../../../../index.js";
 export interface CreateFilesRequest {
     /** The name of the file including its extension (e.g., "photo.png" or "document.pdf"). */
     filename: string;
-    /** Controls whether the file is publicly accessible via CDN or requires authentication. Defaults to public. */
+    /** Controls whether the file is publicly accessible via CDN or requires authentication. Defaults to private. */
     visibility?: Whop.FileVisibility | null;
 }

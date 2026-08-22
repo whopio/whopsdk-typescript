@@ -3,6 +3,7 @@
 /** The different types of payment methods that can be used. */
 export const PaymentMethodTypes = {
     AcssDebit: "acss_debit",
+    Addi: "addi",
     Affirm: "affirm",
     AfterpayClearpay: "afterpay_clearpay",
     Alipay: "alipay",

@@ -7,7 +7,7 @@
  *     }
  */
 export interface UpdateUsersRequest {
-    /** User ID (prefixed `user_`) or username. */
+    /** User ID (prefixed `user_`), username, or `me` for the authenticated user. */
     id: string;
     /** The account whose profile override to update. Required for API key callers. */
     account_id?: string;

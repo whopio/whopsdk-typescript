@@ -62,11 +62,29 @@ export class PayoutsClient {
     ): Promise<core.Page<Whop.ListPayoutsResponse.Data.Item, Whop.ListPayoutsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListPayoutsRequest): Promise<core.WithRawResponse<Whop.ListPayoutsResponse>> => {
-                const { account_id: accountId, user_id: userId, currency, first, after, last, before } = request;
+                const {
+                    account_id: accountId,
+                    user_id: userId,
+                    currency,
+                    status,
+                    source,
+                    payout_method_id: payoutMethodId,
+                    created_before: createdBefore,
+                    created_after: createdAfter,
+                    first,
+                    after,
+                    last,
+                    before,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     user_id: userId,
                     currency,
+                    status: status != null ? status : undefined,
+                    source: source != null ? source : undefined,
+                    payout_method_id: payoutMethodId,
+                    created_before: createdBefore != null ? createdBefore : undefined,
+                    created_after: createdAfter != null ? createdAfter : undefined,
                     first,
                     after,
                     last,
@@ -78,7 +96,7 @@ export class PayoutsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -176,7 +194,7 @@ export class PayoutsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -229,7 +247,7 @@ export class PayoutsClient {
     }
 
     /**
-     * Fetches one payout by its `wdrl_` or `cofr_` ID. Use the `cofr_` payout request ID returned by `POST /payouts` for a stablecoin account to poll until the payout settles.
+     * Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object.
      *
      * @param {Whop.RetrievePayoutsRequest} request
      * @param {PayoutsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -267,7 +285,7 @@ export class PayoutsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

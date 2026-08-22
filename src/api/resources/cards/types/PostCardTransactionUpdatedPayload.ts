@@ -3,12 +3,12 @@
 import type * as Whop from "../../../index.js";
 
 export interface PostCardTransactionUpdatedPayload {
+    /** The account ID that this webhook event is associated with */
+    account_id?: (string | null) | undefined;
     /** The API version for this webhook */
     api_version: PostCardTransactionUpdatedPayload.ApiVersion;
     /** The dated API version (Api-Version-Date) the payload is serialized to */
     api_version_date: string | null;
-    /** The account ID that this webhook event is associated with */
-    company_id?: (string | null) | undefined;
     data: Whop.CardTransaction;
     /** A unique ID for every single webhook request */
     id: string;

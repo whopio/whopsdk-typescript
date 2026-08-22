@@ -31,7 +31,6 @@ export namespace AccountRecommendedAction {
         VerifyIdentity: "verify_identity",
         ConnectAffiliateProgram: "connect_affiliate_program",
         CreatePromotion: "create_promotion",
-        SetupTrackingPixel: "setup_tracking_pixel",
         MigrateFromStripe: "migrate_from_stripe",
         AcceptFirstPayment: "accept_first_payment",
         LaunchFirstAd: "launch_first_ad",

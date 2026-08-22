@@ -92,7 +92,7 @@ export namespace ListSupportedMethodsResponse {
 
             export namespace RequiredFields {
                 export interface Item {
-                    /** Field ID, used as the field key when creating the payout method. */
+                    /** Stable field ID (`fld_` + the semantic type), used as the field key when creating the payout method. Safe to hardcode — it never changes for a given field. */
                     id: string;
                     /** How to collect the value: `text`, `options`, or `date`. */
                     input_type: string;

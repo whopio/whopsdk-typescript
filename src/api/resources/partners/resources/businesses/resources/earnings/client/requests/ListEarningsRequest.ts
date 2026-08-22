@@ -13,6 +13,10 @@ export interface ListEarningsRequest {
     id: string;
     /** Filter by earning status. */
     status?: Whop.partners.businesses.ListEarningsRequestStatus;
+    /** Filter to earnings from these income sources. Repeat the parameter for each one (income_source=sales&income_source=ad_spend). */
+    income_source?:
+        | Whop.partners.businesses.ListEarningsRequestIncomeSourceItem
+        | Whop.partners.businesses.ListEarningsRequestIncomeSourceItem[];
     first?: number;
     after?: string;
     last?: number;

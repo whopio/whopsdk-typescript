@@ -9,12 +9,30 @@ export interface AccountRecommendedActionChainStep {
     cta_label: string;
     /** Supporting copy, or empty */
     description: string;
-    /** The filled-in request body for the step's endpoint, or `null` for seeded chains */
+    /** Why the step failed, or `null` */
+    error: string | null;
+    /** The filled-in request body for the step's endpoint, or `null` when it was not recorded */
     input: Record<string, unknown> | null;
+    /** The API response the step produced, or `null` until it succeeds */
+    output: Record<string, unknown> | null;
     /** Zero-based order of this step within the chain */
     position: number;
     /** Why the generator filled the step this way, or `null` for seeded chains */
     reasoning: Record<string, unknown> | null;
+    /** Where the run step currently stands, or `null` when the chain has not been run */
+    status: AccountRecommendedActionChainStep.Status | null;
     /** Headline for the step */
     title: string;
+}
+
+export namespace AccountRecommendedActionChainStep {
+    /** Where the run step currently stands, or `null` when the chain has not been run */
+    export const Status = {
+        Pending: "pending",
+        Redirected: "redirected",
+        Running: "running",
+        Succeeded: "succeeded",
+        Failed: "failed",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }

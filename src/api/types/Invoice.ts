@@ -32,10 +32,14 @@ export interface Invoice {
     line_items: Invoice.LineItems.Item[];
     /** The billing/mailing address associated with this invoice, if one was provided at creation time. */
     mailing_address: Invoice.MailingAddress | null;
+    /** The member that the invoice was created for. Null when the invoice is addressed to an email address with no member record behind it. */
+    member: Invoice.Member | null;
     /** The sequential invoice number for display purposes. */
     number: string;
     /** The checkout URL where the customer can pay this invoice online, with their email address pre-filled and locked. */
     pay_online_url: string | null;
+    /** The payment that settled this invoice. Null while the invoice is unpaid, when the invoice was marked paid manually, and on a subscription renewal invoice, where the settling payment cannot yet be identified. */
+    payment: Invoice.Payment | null;
     /** Whether a payment on this invoice is still clearing. True while a delayed payment method such as ACH or SEPA settles, during which the invoice stays open and is not marked past due. */
     payment_processing: boolean;
     /** The product that this invoice was generated for. */
@@ -113,6 +117,22 @@ export namespace Invoice {
         postal_code: string | null;
         /** The state of the address. */
         state: string | null;
+    }
+
+    /**
+     * The member that the invoice was created for. Null when the invoice is addressed to an email address with no member record behind it.
+     */
+    export interface Member {
+        /** The unique identifier for the company member. */
+        id: string;
+    }
+
+    /**
+     * The payment that settled this invoice. Null while the invoice is unpaid, when the invoice was marked paid manually, and on a subscription renewal invoice, where the settling payment cannot yet be identified.
+     */
+    export interface Payment {
+        /** The unique identifier for the payment. */
+        id: string;
     }
 
     /**

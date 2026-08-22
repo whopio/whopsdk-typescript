@@ -176,6 +176,7 @@ export const PermissionAction = {
     ReferralBasicRead: "referral:basic:read",
     ReferralPartnerCreate: "referral:partner:create",
     PartnerBasicRead: "partner:basic:read",
+    PartnerInviteCreate: "partner:invite:create",
     PartnerCreate: "partner:create",
     StatsRead: "stats:read",
     SupportChatRead: "support_chat:read",

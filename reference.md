@@ -338,7 +338,7 @@ await client.accounts.me();
 <dl>
 <dd>
 
-Retrieves a single account by ID or public route when it is visible to the credential, including its crypto wallet.
+Retrieves a single account by ID or public route when it is visible to the credential, including its crypto wallet. The reserved id `me` retrieves the account associated with the current Account API key; user tokens have no single account, so they must address one by ID or route.
 </dd>
 </dl>
 </dd>
@@ -403,7 +403,7 @@ await client.accounts.retrieve({
 <dl>
 <dd>
 
-Updates an account. User tokens can update business accounts; Account API keys can update connected accounts.
+Updates an account. User tokens can update business accounts; Account API keys can update connected accounts. The reserved id `me` — accepted on Retrieve Account — resolves to the requesting account, which an Account API key cannot edit, so updates must name the connected account by its `biz_` id.
 </dd>
 </dl>
 </dd>
@@ -3964,7 +3964,7 @@ await client.appBuilds.promote({
 <dl>
 <dd>
 
-Lists apps on the Whop platform: the app store's live apps, or — with `account_id` and developer access to that account — every app the account owns. Requires authentication, except for the publicly readable lists: `verified_apps_only=true`, and `app_type=website` with no `account_id`, which returns every deployed website that is not hidden.
+Lists apps on the Whop platform: the app store's live apps, or — with `account_id` and developer access to that account — every app the account owns. Requires authentication, except for the publicly readable lists: `verified_apps_only=true`, and `app_type=website` with no `account_id`, which returns every live deployed website that Whop has not verified — verified templates are the curated `verified_apps_only=true` list instead.
 </dd>
 </dl>
 </dd>
@@ -5373,7 +5373,7 @@ await client.bounties.create({
 <dl>
 <dd>
 
-Retrieves a bounty by ID. Bounties outside the caller's scope return `404`.
+Retrieves a bounty by ID. Authentication is optional: a request with no credential reads the bounty when it is publicly visible — published or completed, and not restricted to a private experience's members. Bounties outside the caller's scope, and bounties not publicly visible to an anonymous caller, return `404`.
 </dd>
 </dl>
 </dd>
@@ -5709,7 +5709,7 @@ await client.bountySubmissions.create({
 <dl>
 <dd>
 
-Retrieves one bounty submission the credential can see — one the caller authored, or one on a bounty they posted or their account owns.
+Retrieves one bounty submission the credential can see — one the caller authored, or one on a bounty they posted or their account owns. Reading another member's work on an account's bounty takes `account_id`, the same way the list does.
 </dd>
 </dl>
 </dd>
@@ -13233,6 +13233,8 @@ Create an invoice for a customer. The invoice can be charged automatically using
 Required permissions:
  - `invoice:create`
  - `member:email:read`
+ - `member:basic:read`
+ - `payment:basic:read`
 </dd>
 </dl>
 </dd>
@@ -13307,6 +13309,8 @@ Retrieves the details of an existing invoice.
 Required permissions:
  - `invoice:basic:read`
  - `member:email:read`
+ - `member:basic:read`
+ - `payment:basic:read`
 </dd>
 </dl>
 </dd>
@@ -13444,6 +13448,8 @@ Update a draft invoice's details.
 Required permissions:
  - `invoice:update`
  - `member:email:read`
+ - `member:basic:read`
+ - `payment:basic:read`
 </dd>
 </dl>
 </dd>
@@ -16801,7 +16807,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">create</a>({ ...params }) -> Whop.Payment</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">create</a>({ ...params }) -> Whop.CreatePaymentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -16885,7 +16891,7 @@ await client.payments.create({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Payment</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePaymentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17787,7 +17793,7 @@ await client.payouts.create({
 <dl>
 <dd>
 
-Fetches one payout by its `wdrl_` or `cofr_` ID. Use the `cofr_` payout request ID returned by `POST /payouts` for a stablecoin account to poll until the payout settles.
+Fetches one payout by its `wdrl_` ID, or by the `cofr_` conversion request ID a stablecoin payout carries as `payout_request_id` — both ids answer with the same payout object.
 </dd>
 </dl>
 </dd>
@@ -19740,7 +19746,7 @@ await client.recommendedActions.list();
 <dl>
 <dd>
 
-Retrieves a recommended action chain by id, including chains that have already been run. Seeded chains are reconstructed from their preset; generated chains are read from the account's stored chain, with each step's filled-in input.
+Retrieves a recommended action chain by id, including chains that have already been run. Seeded chains are reconstructed from their hard-coded chain; generated chains are read from the account's stored chain, with each step's filled-in input.
 </dd>
 </dl>
 </dd>
@@ -23794,7 +23800,7 @@ await client.users.updateMe();
 <dl>
 <dd>
 
-Retrieves a user's public profile by user_ tag or username, including linked social accounts — reading your own profile returns every linked account, other profiles only what is public on Whop (the primary Discord and the X account). Self-only fields (`email`, `staff`, `balance`) are always `null` here; use `GET /users/me` to read them.
+Retrieves a user by `user_` tag or username, or the authenticated user with the reserved id `me`. Profiles include linked social accounts — reading your own profile returns every linked account, other profiles only what is public on Whop (the primary Discord and the X account). The self-only fields are populated only when the id is `me`: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance` and `earnings_usd` (balance-read scope), and the opt-in `balance_history`. They are always `null` when addressing a user by tag or username.
 </dd>
 </dl>
 </dd>
@@ -23859,7 +23865,7 @@ await client.users.retrieve({
 <dl>
 <dd>
 
-Updates a user. A user token updates their own global profile; an API key updates the user's account-specific profile override (account_id required).
+Updates a user, addressed by `user_` tag, username, or the reserved id `me` for the authenticated user. A user token updates their own global profile; an API key updates the user's account-specific profile override (account_id required).
 </dd>
 </dl>
 </dd>

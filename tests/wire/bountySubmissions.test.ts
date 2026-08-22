@@ -65,10 +65,12 @@ describe("BountySubmissionsClient", () => {
                     fov: 120,
                     id: "btys_xxxxxxxxxxxxxx",
                     latest_proof_livestream_feed: {
+                        ended_at: "2026-01-01T12:00:00.000Z",
                         id: "lfeed_3",
                         recording_status: null,
                         recording_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        started_at: "2026-01-01T12:00:00.000Z",
                         thumbnail_url:
                             "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                         title: "Untitled Livestream",
@@ -246,10 +248,12 @@ describe("BountySubmissionsClient", () => {
             fov: 120,
             id: "btys_xxxxxxxxxxxxxx",
             latest_proof_livestream_feed: {
+                ended_at: "2026-01-01T12:00:00.000Z",
                 id: "lfeed_3",
                 recording_status: "recording",
                 recording_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                started_at: "2026-01-01T12:00:00.000Z",
                 thumbnail_url:
                     "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                 title: "Untitled Livestream",
@@ -482,10 +486,12 @@ describe("BountySubmissionsClient", () => {
             fov: 120,
             id: "btys_xxxxxxxxxxxxxx",
             latest_proof_livestream_feed: {
+                ended_at: "2026-01-01T12:00:00.000Z",
                 id: "lfeed_3",
                 recording_status: "recording",
                 recording_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                started_at: "2026-01-01T12:00:00.000Z",
                 thumbnail_url:
                     "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                 title: "Untitled Livestream",
@@ -738,10 +744,12 @@ describe("BountySubmissionsClient", () => {
             fov: 120,
             id: "btys_xxxxxxxxxxxxxx",
             latest_proof_livestream_feed: {
+                ended_at: "2026-01-01T12:00:00.000Z",
                 id: "lfeed_3",
                 recording_status: "recording",
                 recording_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                started_at: "2026-01-01T12:00:00.000Z",
                 thumbnail_url:
                     "https://img.whop.com/xxxxxxxxxxxxxxxxxxxxxxxxxxxxx_xxxxxxxxxxxxx/resize:fit/width:1000/height:500/plain/https://cdn.whop.com/livestreams/paint-correction-proof-cover.jpg",
                 title: "Untitled Livestream",

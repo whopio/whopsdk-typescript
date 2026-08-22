@@ -215,34 +215,6 @@ describe("SocialAccountsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { platform: "facebook" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/social_accounts")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.socialAccounts.create({
-                platform: "facebook",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("create (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { platform: "facebook" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server

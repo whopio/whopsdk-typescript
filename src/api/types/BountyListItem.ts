@@ -23,6 +23,14 @@ export interface BountyListItem {
     created_at: string;
     /** Currency for all amounts on the bounty, as a lowercase ISO 4217 code. */
     currency: string;
+    /** Full task instructions shown to workers. */
+    description: string;
+    /** Experience the bounty's discussion thread lives in, prefixed `exp_`. Read this — not `experience_id` — to open the thread: a platform-wide bounty has no hosting experience of its own but its discussion still lives in one. */
+    discussion_experience_id: string | null;
+    /** Forum feed containing the bounty's discussion thread. `null` for a bounty with no forum post. */
+    discussion_feed_id: string | null;
+    /** Forum post anchoring the bounty's discussion thread. Read together with `discussion_experience_id` to address the thread. `null` for a bounty with no forum post. */
+    discussion_post_id: string | null;
     /** Experience the bounty is hosted in, prefixed `exp_`. `null` for platform-wide bounties; may belong to a different account than the funder. */
     experience_id: string | null;
     /** Account whose balance funds the bounty pool, or `null` when a user funds it personally. May differ from the account hosting `experience_id`. */

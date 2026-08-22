@@ -52,6 +52,7 @@ export namespace CreateWebhooksRequest {
             TransferFailed: "transfer.failed",
             WithdrawalCreated: "withdrawal.created",
             WithdrawalUpdated: "withdrawal.updated",
+            WithdrawalReversed: "withdrawal.reversed",
             CardTransactionCreated: "card_transaction.created",
             CardTransactionUpdated: "card_transaction.updated",
             CardTransactionCompleted: "card_transaction.completed",

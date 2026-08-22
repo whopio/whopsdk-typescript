@@ -181,6 +181,7 @@ export namespace Ad {
         Paused: "paused",
         Processing: "processing",
         Issues: "issues",
+        Scheduled: "scheduled",
         LearningLimited: "learning_limited",
         Learning: "learning",
         Active: "active",
