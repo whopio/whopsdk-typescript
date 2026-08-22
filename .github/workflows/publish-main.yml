@@ -78,6 +78,15 @@ jobs:
             fi
           fi
 
+          latest=$(npm view "@whop/sdk" version 2>/dev/null || true)
+          if [ -n "$latest" ] && [ "$latest" != "$version" ]; then
+            highest=$(printf '%s\n%s\n' "$latest" "$version" | sort -V | tail -1)
+            if [ "$highest" = "$latest" ]; then
+              echo "::error::package.json is $version but npm already has $latest. A regeneration pinned to a stale version would silently downgrade main; bump past $latest instead."
+              exit 1
+            fi
+          fi
+
           if out=$(npm view "@whop/sdk@$version" version 2>&1); then
             echo "@whop/sdk@$version is already published ($out) — nothing to release."
             echo "release=false" >> "$GITHUB_OUTPUT"
