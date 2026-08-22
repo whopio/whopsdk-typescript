@@ -4,3 +4,6 @@
 # @whop/sdk when a merge to main lands a package.json version that is not yet on npm.
 # scripts/rename-to-esm-files.js is Fern's own and is deliberately not listed.
 .github/workflows/publish-main.yml
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes
