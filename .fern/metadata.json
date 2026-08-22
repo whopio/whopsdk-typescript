@@ -7,9 +7,10 @@
         "noSerdeLayer": true,
         "omitUndefined": true
     },
-    "originGitCommit": "5f87fbb959b13f194f06ab94d6fce32e07d164f4",
+    "originGitCommit": "1e00674814680ecbf1b5c2752421927f90572c3f",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
+    "requestedVersion": "0.0.42",
     "ciProvider": "unknown",
-    "sdkVersion": "0.0.43"
+    "sdkVersion": "0.0.42"
 }

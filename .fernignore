@@ -14,3 +14,6 @@ release-please-config.json
 bin/publish-npm
 bin/check-release-environment
 scripts/publish-packages.ts
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes
