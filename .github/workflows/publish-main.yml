@@ -5,6 +5,11 @@ on:
     branches: [main]
     paths: ["package.json"]
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run everything except the actual publish and tag"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -35,10 +40,17 @@ jobs:
         id: check
         env:
           EVENT: ${{ github.event_name }}
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
           version=$(node -p "require('./package.json').version")
           echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "Dry run: exercising the pipeline without publishing or tagging."
+            echo "release=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
 
           if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
             echo "::error::'$version' is not stable semver; prereleases are not released from main."
@@ -122,7 +134,9 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm run build
           CI=true pnpm test
+          mkdir -p /tmp/pack
           npm pack --pack-destination /tmp/pack
+          ls -l /tmp/pack
 
       - uses: actions/upload-artifact@v4
         with:
@@ -153,11 +167,21 @@ jobs:
           path: /tmp/pack
 
       - name: Publish @whop/sdk
-        run: npm publish /tmp/pack/*.tgz --access public
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          if [ "$DRY_RUN" = "true" ]; then
+            npm publish /tmp/pack/*.tgz --access public --dry-run
+            echo "Dry run: nothing was uploaded."
+            exit 0
+          fi
+
+          npm publish /tmp/pack/*.tgz --access public
 
   tag:
     needs: [decide, publish]
-    if: always() && needs.decide.outputs.version != '' && needs.publish.result != 'failure'
+    if: always() && inputs.dry_run != true && needs.decide.outputs.version != '' && needs.publish.result != 'failure'
     runs-on: ubuntu-latest
     permissions:
       contents: write
