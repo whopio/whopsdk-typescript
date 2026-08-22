@@ -22,7 +22,7 @@ describe("AccountLinksClient", () => {
         };
         const rawResponseBody = {
             expires_at: "2023-12-01T05:00:00Z",
-            url: "https://whop.com/payouts/biz_xxxxxxxxx/verify",
+            url: "https://whop.com/verify-identity/biz_xxxxxxxxx/",
         };
 
         server

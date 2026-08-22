@@ -53,6 +53,8 @@ export namespace ApiKey {
         TwoThousandTwentySix0810: "2026-08-10",
         TwoThousandTwentySix0812: "2026-08-12",
         TwoThousandTwentySix0813: "2026-08-13",
+        TwoThousandTwentySix0814: "2026-08-14",
+        TwoThousandTwentySix0821: "2026-08-21",
     } as const;
     export type ApiVersionDate = (typeof ApiVersionDate)[keyof typeof ApiVersionDate];
     /** System role the key inherits its permissions from, or `null` when it uses an explicit permissions policy. Only account API keys can use a system role. */

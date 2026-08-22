@@ -44,8 +44,8 @@ export interface BountySubmission {
     site: string | null;
     /** Capture metadata: station or position within the site. `null` unless capture metadata was provided. */
     station: string | null;
-    /** Lifecycle state. `in_progress` submissions are active attempts that have not submitted proof yet; `submitted` submissions await review; `approved` submissions were accepted and paid; `denied` submissions were rejected. */
-    status: BountySubmission.Status;
+    /** Lifecycle state. `in_progress` submissions are active attempts that have not submitted proof yet; `submitted` submissions await review; `approved` submissions were accepted and paid; `denied` submissions were rejected. `null` when the attempt ended without proof, taking it out of the public lifecycle — those attempts are absent from every public list and read. */
+    status: BountySubmission.Status | null;
     /** When proof was submitted for review, as an ISO 8601 timestamp. `null` while the attempt is in progress. */
     submitted_at: string | null;
     /** When the submission was last updated, as an ISO 8601 timestamp. */
@@ -62,7 +62,7 @@ export namespace BountySubmission {
         DataCapture: "data_capture",
     } as const;
     export type DeliverableType = (typeof DeliverableType)[keyof typeof DeliverableType];
-    /** Lifecycle state. `in_progress` submissions are active attempts that have not submitted proof yet; `submitted` submissions await review; `approved` submissions were accepted and paid; `denied` submissions were rejected. */
+    /** Lifecycle state. `in_progress` submissions are active attempts that have not submitted proof yet; `submitted` submissions await review; `approved` submissions were accepted and paid; `denied` submissions were rejected. `null` when the attempt ended without proof, taking it out of the public lifecycle — those attempts are absent from every public list and read. */
     export const Status = {
         InProgress: "in_progress",
         Submitted: "submitted",

@@ -11,7 +11,7 @@ export interface SummaryDisputesRequest {
     groups?: Whop.SummaryDisputesRequestGroupsItem | Whop.SummaryDisputesRequestGroupsItem[];
     /** Only disputes filed against this account (`biz_` tag). Omit it to cover every account you can read. */
     account_id?: string;
-    /** Only disputes in these statuses. Repeat the parameter to pass several. */
+    /** Only disputes in these statuses. Repeat the parameter to pass several. A `needs_response` dispute whose evidence deadline has passed reports and filters as `under_review` instead. */
     status?: Whop.SummaryDisputesRequestStatusItem | Whop.SummaryDisputesRequestStatusItem[];
     /** Only disputes in this three-letter ISO currency. */
     currency?: string;

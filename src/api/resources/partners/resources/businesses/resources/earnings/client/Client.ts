@@ -56,6 +56,7 @@ export class EarningsClient {
                 const {
                     id,
                     status,
+                    income_source: incomeSource,
                     first,
                     after,
                     last,
@@ -67,6 +68,11 @@ export class EarningsClient {
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     status: status != null ? status : undefined,
+                    income_source: Array.isArray(incomeSource)
+                        ? incomeSource.map((item) => item)
+                        : incomeSource != null
+                          ? incomeSource
+                          : undefined,
                     first,
                     after,
                     last,
@@ -82,7 +88,7 @@ export class EarningsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,

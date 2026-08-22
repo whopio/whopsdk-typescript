@@ -23,6 +23,7 @@ export namespace AccountRequiredAction {
     export const Action = {
         DepositFunds: "deposit_funds",
         SubmitInformationRequest: "submit_information_request",
+        ReauthorizePayoutMethods: "reauthorize_payout_methods",
         UpdatePayoutProfile: "update_payout_profile",
         CardUsageReview: "card_usage_review",
         VerifyIdentity: "verify_identity",

@@ -37,7 +37,7 @@ describe("SupportedMethodsClient", () => {
                     ],
                     required_fields: [
                         {
-                            id: "attr_account_number",
+                            id: "fld_bank_account_number",
                             input_type: "text",
                             label: "Account Number",
                             object: "required_field",

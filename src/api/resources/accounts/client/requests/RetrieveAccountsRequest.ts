@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveAccountsRequest {
-    /** Account ID, prefixed `biz_`, or its public route. */
+    /** Account ID, prefixed `biz_`, its public route, or `me` for the account associated with the current API key. */
     id: string;
 }

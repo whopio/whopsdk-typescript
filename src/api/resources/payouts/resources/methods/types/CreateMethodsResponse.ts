@@ -17,6 +17,8 @@ export interface CreateMethodsResponse {
     /** Whether this method is a copy of one saved on another of the payer's accounts. */
     is_clone?: boolean | undefined;
     is_default: boolean;
+    /** When the most recent completed payout was delivered to this method, as an ISO 8601 timestamp. `null` when nothing has been paid out to it yet. */
+    last_paid_out_at: string | null;
     /** Whether the payer added this method by signing in to their bank rather than typing account details. */
     linked_via_plaid?: boolean | undefined;
     /** Whether the bank sign-in behind this method has expired and must be redone before it counts as linked. */
@@ -27,7 +29,10 @@ export interface CreateMethodsResponse {
     payer_name: string | null;
     /** Always null on create. */
     quote: Record<string, unknown> | null;
+    /** Always `created` on create — no payout has used the method yet. */
     status: CreateMethodsResponse.Status;
+    /** Always `null` on create. */
+    status_reason: string | null;
     supported_payout_method: CreateMethodsResponse.SupportedPayoutMethod | null;
     /** Why this method is unavailable: `destination_retired` means the payout provider stopped offering the destination. Whop may automatically remap an eligible method that was not linked through Plaid to a compatible replacement; otherwise, the account owner must re-add it. `null` means no unavailability reason is known. */
     unavailable_reason: CreateMethodsResponse.UnavailableReason | null;
@@ -47,6 +52,7 @@ export namespace CreateMethodsResponse {
         PayoutMethod: "payout_method",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+    /** Always `created` on create — no payout has used the method yet. */
     export const Status = {
         Created: "created",
         Active: "active",

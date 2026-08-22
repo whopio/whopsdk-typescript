@@ -21,7 +21,7 @@ export interface ListDisputesRequest {
     order?: Whop.ListDisputesRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListDisputesRequestDirection;
-    /** Only disputes in these statuses. Repeat the parameter to pass several — one paginated list covers all of them. Covers both chargebacks and inquiries at each stage. */
+    /** Only disputes in these statuses. Repeat the parameter to pass several — one paginated list covers all of them. Covers both chargebacks and inquiries at each stage. A `needs_response` dispute whose evidence deadline has passed reports and filters as `under_review` instead. */
     status?: Whop.ListDisputesRequestStatusItem | Whop.ListDisputesRequestStatusItem[];
     /** Only disputes in this three-letter ISO currency. */
     currency?: string;

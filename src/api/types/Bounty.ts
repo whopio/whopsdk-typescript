@@ -27,6 +27,12 @@ export interface Bounty {
     currency: Bounty.Currency;
     /** Full task instructions shown to workers. */
     description: string;
+    /** Experience the bounty's discussion thread lives in, prefixed `exp_`. Read this — not `experience_id` — to open the thread: a platform-wide bounty has no hosting experience of its own but its discussion still lives in one. */
+    discussion_experience_id: string | null;
+    /** Forum feed containing the bounty's discussion thread. `null` for a bounty with no forum post. */
+    discussion_feed_id: string | null;
+    /** Forum post anchoring the bounty's discussion thread. Read together with `discussion_experience_id` to address the thread. `null` for a bounty with no forum post. */
+    discussion_post_id: string | null;
     /** Experience the bounty is hosted in, prefixed `exp_`. `null` for platform-wide bounties; may belong to a different account than the funder. */
     experience_id: string | null;
     /** Account whose balance funds the bounty pool, or `null` when a user funds it personally. May differ from the account hosting `experience_id`. */
@@ -35,6 +41,8 @@ export interface Bounty {
     gross_paid_out_amount: number;
     /** Gross bounty-pool amount allocated per accepted submission, in whole currency units. */
     gross_reward_amount: number;
+    /** Account hosting the bounty's forum — the one whose `route` and `experience_id` address its discussion thread, and where its submissions dashboard lives. `null` for a platform-wide bounty with no host. May differ from `funding_account`. */
+    hosting_account: Whop.StorefrontAccount | null;
     /** Bounty ID, prefixed `bnty_`. */
     id: string;
     /** What a worker is quoted per accepted submission after the platform fee, in whole currency units. The exact post-fee figure, at the standard platform fee rate — a worker who locked a different rate, or who arrived through an affiliate link, is paid a different amount. */

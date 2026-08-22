@@ -80,7 +80,7 @@ export class SupportedMethodsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,

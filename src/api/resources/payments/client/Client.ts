@@ -137,7 +137,7 @@ export class PaymentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -252,20 +252,20 @@ export class PaymentsClient {
     public create(
         request: Whop.CreatePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Payment> {
+    ): core.HttpResponsePromise<Whop.CreatePaymentsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Whop.CreatePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Payment>> {
+    ): Promise<core.WithRawResponse<Whop.CreatePaymentsResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -290,7 +290,7 @@ export class PaymentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Payment, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.CreatePaymentsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -357,21 +357,21 @@ export class PaymentsClient {
     public retrieve(
         request: Whop.RetrievePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Payment> {
+    ): core.HttpResponsePromise<Whop.RetrievePaymentsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__retrieve(request, requestOptions));
     }
 
     private async __retrieve(
         request: Whop.RetrievePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Payment>> {
+    ): Promise<core.WithRawResponse<Whop.RetrievePaymentsResponse>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -393,7 +393,7 @@ export class PaymentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Payment, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.RetrievePaymentsResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -471,7 +471,7 @@ export class PaymentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -596,7 +596,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -702,7 +702,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -805,7 +805,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -892,7 +892,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -977,7 +977,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

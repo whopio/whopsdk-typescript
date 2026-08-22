@@ -79,7 +79,7 @@ export class UsersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -181,7 +181,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -259,7 +259,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -308,7 +308,7 @@ export class UsersClient {
     }
 
     /**
-     * Retrieves a user's public profile by user_ tag or username, including linked social accounts — reading your own profile returns every linked account, other profiles only what is public on Whop (the primary Discord and the X account). Self-only fields (`email`, `staff`, `balance`) are always `null` here; use `GET /users/me` to read them.
+     * Retrieves a user by `user_` tag or username, or the authenticated user with the reserved id `me`. Profiles include linked social accounts — reading your own profile returns every linked account, other profiles only what is public on Whop (the primary Discord and the X account). The self-only fields are populated only when the id is `me`: `email` (email-read scope), `staff` (Whop staff only, staff-read scope), `balance` and `earnings_usd` (balance-read scope), and the opt-in `balance_history`. They are always `null` when addressing a user by tag or username.
      *
      * @param {Whop.RetrieveUsersRequest} request
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -333,16 +333,29 @@ export class UsersClient {
         request: Whop.RetrieveUsersRequest,
         requestOptions?: UsersClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.User>> {
-        const { id, account_id: accountId } = request;
+        const {
+            id,
+            account_id: accountId,
+            include_balance_history: includeBalanceHistory,
+            from: from_,
+            to,
+            interval,
+            time_zone: timeZone,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            include_balance_history: includeBalanceHistory,
+            from: from_,
+            to,
+            interval: interval != null ? interval : undefined,
+            time_zone: timeZone,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -388,7 +401,7 @@ export class UsersClient {
     }
 
     /**
-     * Updates a user. A user token updates their own global profile; an API key updates the user's account-specific profile override (account_id required).
+     * Updates a user, addressed by `user_` tag, username, or the reserved id `me` for the authenticated user. A user token updates their own global profile; an API key updates the user's account-specific profile override (account_id required).
      *
      * @param {Whop.UpdateUsersRequest} request
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -421,7 +434,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -496,7 +509,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -570,7 +583,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-13",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

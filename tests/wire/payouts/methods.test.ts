@@ -28,6 +28,7 @@ describe("MethodsClient", () => {
                     institution_name: "Frost Bank",
                     is_clone: false,
                     is_default: true,
+                    last_paid_out_at: "2026-08-02T15:30:00Z",
                     linked_via_plaid: false,
                     needs_plaid_reconnect: false,
                     nickname: "Business checking",
@@ -43,6 +44,7 @@ describe("MethodsClient", () => {
                         standard: { fee: 0.25, total_received: 499.75 },
                     },
                     status: "created",
+                    status_reason: "status_reason",
                     supported_payout_method: {
                         country_code: "USA",
                         delivery_type: "cash_pickup",
@@ -189,6 +191,7 @@ describe("MethodsClient", () => {
             institution_name: "Frost Bank",
             is_clone: false,
             is_default: false,
+            last_paid_out_at: "2024-01-15T09:30:00Z",
             linked_via_plaid: false,
             needs_plaid_reconnect: false,
             nickname: "Ops checking",
@@ -196,6 +199,7 @@ describe("MethodsClient", () => {
             payer_name: "ACH Bank Deposit",
             quote: { key: "value" },
             status: "created",
+            status_reason: "status_reason",
             supported_payout_method: {
                 country_code: "USA",
                 delivery_type: "cash_pickup",
@@ -491,6 +495,7 @@ describe("MethodsClient", () => {
             institution_name: "Frost Bank",
             is_clone: false,
             is_default: false,
+            last_paid_out_at: "2024-01-15T09:30:00Z",
             linked_via_plaid: false,
             needs_plaid_reconnect: false,
             nickname: "Primary checking",
@@ -498,6 +503,7 @@ describe("MethodsClient", () => {
             payer_name: "ACH Bank Deposit",
             quote: { key: "value" },
             status: "created",
+            status_reason: "status_reason",
             supported_payout_method: {
                 country_code: "USA",
                 delivery_type: "cash_pickup",
