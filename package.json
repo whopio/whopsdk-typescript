@@ -1089,6 +1089,17 @@
             },
             "default": "./dist/cjs/api/resources/users/resources/preferences/resources/notifications/resources/topics/exports.js"
         },
+        "./helpers": {
+            "import": {
+                "types": "./dist/esm/helpers/index.d.mts",
+                "default": "./dist/esm/helpers/index.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/helpers/index.d.ts",
+                "default": "./dist/cjs/helpers/index.js"
+            },
+            "default": "./dist/cjs/helpers/index.js"
+        },
         "./package.json": "./package.json"
     },
     "files": [
@@ -1111,7 +1122,9 @@
         "test:unit": "vitest --project unit",
         "test:wire": "vitest --project wire"
     },
-    "dependencies": {},
+    "dependencies": {
+        "standardwebhooks": "^1.0.0"
+    },
     "devDependencies": {
         "webpack": "^5.105.4",
         "ts-loader": "^9.5.4",
