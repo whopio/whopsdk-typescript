@@ -122,7 +122,9 @@ jobs:
           pnpm install --frozen-lockfile
           pnpm run build
           CI=true pnpm test
+          mkdir -p /tmp/pack
           npm pack --pack-destination /tmp/pack
+          ls -l /tmp/pack
 
       - uses: actions/upload-artifact@v4
         with:
