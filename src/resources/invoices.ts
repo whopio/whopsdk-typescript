@@ -387,7 +387,9 @@ export declare namespace InvoiceCreateParams {
 
     /**
      * Optional line items that break down the invoice total. When provided, the sum of
-     * (quantity \* unit_price) for all items must equal the plan price.
+     * (quantity \* unit_price) for all items must equal the plan price. Individual
+     * items may be negative to represent a credit, as long as the sum is not negative
+     * and clears the currency's minimum charge.
      */
     line_items?: Array<CreateInvoiceInputWithProduct.LineItem> | null;
 
@@ -671,7 +673,8 @@ export declare namespace InvoiceCreateParams {
 
       /**
        * The unit price for this line item. Provided as a number in the specified
-       * currency. Eg: 10.43 for $10.43
+       * currency. Eg: 10.43 for $10.43. Negative values represent a credit or deduction,
+       * as long as the line items still total a chargeable amount.
        */
       unit_price: number;
 
@@ -743,7 +746,9 @@ export declare namespace InvoiceCreateParams {
 
     /**
      * Optional line items that break down the invoice total. When provided, the sum of
-     * (quantity \* unit_price) for all items must equal the plan price.
+     * (quantity \* unit_price) for all items must equal the plan price. Individual
+     * items may be negative to represent a credit, as long as the sum is not negative
+     * and clears the currency's minimum charge.
      */
     line_items?: Array<CreateInvoiceInputWithProductID.LineItem> | null;
 
@@ -1011,7 +1016,8 @@ export declare namespace InvoiceCreateParams {
 
       /**
        * The unit price for this line item. Provided as a number in the specified
-       * currency. Eg: 10.43 for $10.43
+       * currency. Eg: 10.43 for $10.43. Negative values represent a credit or deduction,
+       * as long as the line items still total a chargeable amount.
        */
       unit_price: number;
 
@@ -1062,7 +1068,11 @@ export interface InvoiceUpdateParams {
   email_address?: string | null;
 
   /**
-   * Line items that break down the invoice total.
+   * Line items that break down the invoice total. When provided, the sum of
+   * (quantity \* unit_price) for all items must equal the plan price. Individual
+   * items may be negative to represent a credit, as long as the sum is not negative
+   * and clears the currency's minimum charge. Pass an empty list to remove the
+   * breakdown.
    */
   line_items?: Array<InvoiceUpdateParams.LineItem> | null;
 
@@ -1166,7 +1176,8 @@ export namespace InvoiceUpdateParams {
 
     /**
      * The unit price for this line item. Provided as a number in the specified
-     * currency. Eg: 10.43 for $10.43
+     * currency. Eg: 10.43 for $10.43. Negative values represent a credit or deduction,
+     * as long as the line items still total a chargeable amount.
      */
     unit_price: number;
 
