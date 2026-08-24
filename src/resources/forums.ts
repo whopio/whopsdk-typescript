@@ -101,6 +101,12 @@ export namespace ForumListResponse {
     id: string;
 
     /**
+     * Whether this experience is publicly visible to all users, including those
+     * without a membership.
+     */
+    is_public: boolean;
+
+    /**
      * The display name of this experience shown to users in the product navigation.
      * Maximum 255 characters.
      */
