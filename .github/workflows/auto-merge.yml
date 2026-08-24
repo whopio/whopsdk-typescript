@@ -22,6 +22,12 @@ jobs:
       startsWith(github.event.pull_request.head.ref, 'fern-bot/')
     runs-on: ubuntu-latest
     steps:
+      - name: Approve
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: gh pr review "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --approve
+
       - name: Enable auto-merge
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
