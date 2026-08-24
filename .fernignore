@@ -37,5 +37,8 @@
 # the copy that pull request carries.
 .github/workflows/auto-merge.yml
 .github/workflows/publish-main.yml
+.fern/replay.lock
+.fern/replay.yml
+.gitattributes
 src/helpers
 tests/unit/helpers

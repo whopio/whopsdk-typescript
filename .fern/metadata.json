@@ -7,7 +7,7 @@
         "noSerdeLayer": true,
         "omitUndefined": true
     },
-    "originGitCommit": "096c59163a0d81a78c70df87afab4af3f97a4213",
+    "originGitCommit": "a26a97d2d8ee29f78819a299712fb3b4086d634e",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "1.0.11",
