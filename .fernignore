@@ -3,7 +3,42 @@
 # Fern owns the SDK source and its ci.yml. publish-main.yml is hand-written: it releases
 # @whop/sdk when a merge to main lands a package.json version that is not yet on npm.
 # scripts/rename-to-esm-files.js is Fern's own and is deliberately not listed.
+#
+# src/helpers holds unwrapWebhook, the one hand-written helper in this SDK — the Standard
+# Webhooks signature verifier. It restores the verification half of
+# `client.webhooks.unwrap`, which the Stainless-generated package shipped through 0.0.42
+# and Fern cannot generate: Fern generates from OpenAPI paths and `unwrap` was never a
+# path. It depends only on standardwebhooks, never on generated client code, so it
+# survives the client being replaced.
+#
+# This entry only keeps the files. Two things the helper needs are in package.json, which
+# is generated, and are restored from the typescript config in whop-monorepo's
+# sdks/fern/generators.yml, not from here:
+#
+#   - the `standardwebhooks` dependency, from `extraDependencies`. The helper imports it
+#     at module load, so without the declaration the import fails to resolve for callers.
+#   - the `./helpers` subpath in `exports`, from `packageJson`, which the generator merges
+#     into the package.json it writes. src/index.ts is generated too, so re-exporting from
+#     the package root would mean forking a generated file; a subpath does not.
+#
+# The two travel together: re-emitting the export without the dependency turns a silently
+# missing helper into a resolution error for anyone who imports `@whop/sdk/helpers`.
+# tests/unit/helpers asserts both every run, alongside the verifier's own tests, so a
+# regeneration that drops either fails in CI instead of on a caller's machine. (Ruby puts
+# the equivalent guard in ci.yml, which it already keeps hand-written for an unrelated
+# security reason; this repo's ci.yml is Fern's and forking it for a guard is a worse
+# trade than putting the guard in a test.)
+#
+# auto-merge.yml is hand-written and arms Fern's own regeneration PRs. On pull_request_target
+# it enables auto-merge (squash) for a pull request opened by fern-api[bot] from an in-repo
+# fern-bot/* branch against the default branch, so the pull request merges itself once main's
+# required status checks pass. The trigger is pull_request_target rather than pull_request so
+# the workflow that arms a pull request is always the copy already on the base branch, never
+# the copy that pull request carries.
+.github/workflows/auto-merge.yml
 .github/workflows/publish-main.yml
 .fern/replay.lock
 .fern/replay.yml
 .gitattributes
+src/helpers
+tests/unit/helpers
