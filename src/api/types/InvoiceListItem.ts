@@ -58,7 +58,7 @@ export namespace InvoiceListItem {
             quantity: number;
             /** The computed total for this line item (quantity * unit_price). */
             total: number;
-            /** The unit price for this line item. */
+            /** The unit price for this line item. Negative for a credit or deduction. */
             unit_price: number;
         }
     }

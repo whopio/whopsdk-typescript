@@ -16,6 +16,11 @@ export declare namespace FilesClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A File is an uploaded document or media object, identified by a `file_` ID. Creating a file returns a presigned destination; upload the bytes there and the file becomes `ready`.
+ *
+ * Use the Files API to create a file, upload its content directly to storage (in one PUT, or in parts for large files), and retrieve it while polling for readiness. A ready file's ID can be attached wherever Whop accepts files.
+ */
 export class FilesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FilesClient.Options>;
 
@@ -24,43 +29,39 @@ export class FilesClient {
     }
 
     /**
-     * Create a new file record and receive a presigned URL for uploading content to S3.
+     * Creates a file and returns a presigned destination to upload its bytes to. PUT the bytes to `upload_url` (single-part), or to each of `multipart_upload_urls` and then call Complete File Multipart Upload. Once the bytes land the file becomes `ready`, and its ID can be attached wherever a file is accepted — account legal documents, dispute evidence documents.
      *
      * @param {Whop.CreateFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.files.create({
-     *         filename: "filename"
+     *         filename: "terms.pdf"
      *     })
      */
     public create(
         request: Whop.CreateFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.CreateFilesResponse> {
+    ): core.HttpResponsePromise<Whop.File_> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Whop.CreateFilesRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.CreateFilesResponse>> {
+    ): Promise<core.WithRawResponse<Whop.File_>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -85,7 +86,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.CreateFilesResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.File_, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -94,16 +95,8 @@ export class FilesClient {
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -117,24 +110,19 @@ export class FilesClient {
     }
 
     /**
-     * Retrieves the details of an existing file.
+     * Retrieves a file you uploaded — poll it after uploading the bytes to see `upload_status` become `ready`. Only the creator can retrieve a file this way; a file attached to another resource is read through that resource.
      *
      * @param {Whop.RetrieveFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.files.retrieve({
-     *         id: "file_xxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retrieve(
@@ -154,7 +142,7 @@ export class FilesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -181,20 +169,10 @@ export class FilesClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -205,5 +183,95 @@ export class FilesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/files/{id}");
+    }
+
+    /**
+     * Assembles the parts of a multipart upload after every part has been PUT to its presigned URL. Pass the `multipart_upload_id` from Create File and each part's `ETag` response header.
+     *
+     * @param {Whop.CompleteFilesRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.files.complete({
+     *         id: "id",
+     *         multipart_parts: [{
+     *                 etag: "etag-1",
+     *                 part_number: 1
+     *             }],
+     *         multipart_upload_id: "upload-id"
+     *     })
+     */
+    public complete(
+        request: Whop.CompleteFilesRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.File_> {
+        return core.HttpResponsePromise.fromPromise(this.__complete(request, requestOptions));
+    }
+
+    private async __complete(
+        request: Whop.CompleteFilesRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.File_>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WhopEnvironment.Default,
+                `files/${core.url.encodePathParam(id)}/complete`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.File_, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/files/{id}/complete");
     }
 }

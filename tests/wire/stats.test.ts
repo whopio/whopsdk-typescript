@@ -583,7 +583,7 @@ describe("StatsClient", () => {
         const rawResponseBody = {
             data: {
                 currency: "usd",
-                points: [{ breakdown: [{ name: "spend", value: 2.82 }], timestamp: 1767268800, value: 16.67 }],
+                points: [{ breakdown: [{ name: "spend", value: 2.82 }], timestamp: 1767268800, value: 5 }],
                 totals: [{ name: "spend", value: 2.82 }],
             },
         };

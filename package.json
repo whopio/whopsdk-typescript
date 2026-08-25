@@ -242,6 +242,17 @@
             },
             "default": "./dist/cjs/api/resources/checkoutConfigurations/exports.js"
         },
+        "./checkoutSessions": {
+            "import": {
+                "types": "./dist/esm/api/resources/checkoutSessions/exports.d.mts",
+                "default": "./dist/esm/api/resources/checkoutSessions/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/checkoutSessions/exports.d.ts",
+                "default": "./dist/cjs/api/resources/checkoutSessions/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/checkoutSessions/exports.js"
+        },
         "./companies": {
             "import": {
                 "types": "./dist/esm/api/resources/companies/exports.d.mts",
@@ -1089,6 +1100,7 @@
             },
             "default": "./dist/cjs/api/resources/users/resources/preferences/resources/notifications/resources/topics/exports.js"
         },
+        "./package.json": "./package.json",
         "./helpers": {
             "import": {
                 "types": "./dist/esm/helpers/index.d.mts",
@@ -1099,8 +1111,7 @@
                 "default": "./dist/cjs/helpers/index.js"
             },
             "default": "./dist/cjs/helpers/index.js"
-        },
-        "./package.json": "./package.json"
+        }
     },
     "files": [
         "dist",

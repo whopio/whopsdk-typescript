@@ -25,7 +25,7 @@ export interface UpdateInvoicesRequest {
     due_date?: string | null;
     /** The email address of the customer. */
     email_address?: string | null;
-    /** Line items that break down the invoice total. */
+    /** Line items that break down the invoice total. When provided, the sum of (quantity * unit_price) for all items must equal the plan price. Individual items may be negative to represent a credit, as long as the sum is not negative and clears the currency's minimum charge. Pass an empty list to remove the breakdown. */
     line_items?: UpdateInvoicesRequest.LineItems.Item[] | null;
     /** The unique identifier of an existing mailing address to attach. */
     mailing_address_id?: string | null;
@@ -79,7 +79,7 @@ export namespace UpdateInvoicesRequest {
             label: string;
             /** The quantity of this line item. Defaults to 1. */
             quantity?: (number | null) | undefined;
-            /** The unit price for this line item. Provided as a number in the specified currency. Eg: 10.43 for $10.43 */
+            /** The unit price for this line item. Provided as a number in the specified currency. Eg: 10.43 for $10.43. Negative values represent a credit or deduction, as long as the line items still total a chargeable amount. */
             unit_price: number;
         }
     }

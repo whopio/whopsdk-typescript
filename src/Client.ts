@@ -20,6 +20,7 @@ import { CardsClient } from "./api/resources/cards/client/Client.js";
 import { CardTransactionsClient } from "./api/resources/cardTransactions/client/Client.js";
 import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.js";
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
+import { CheckoutSessionsClient } from "./api/resources/checkoutSessions/client/Client.js";
 import { CompaniesClient } from "./api/resources/companies/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
 import { CourseChaptersClient } from "./api/resources/courseChapters/client/Client.js";
@@ -113,6 +114,7 @@ export class WhopClient {
     protected _cards: CardsClient | undefined;
     protected _chatChannels: ChatChannelsClient | undefined;
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
+    protected _checkoutSessions: CheckoutSessionsClient | undefined;
     protected _companies: CompaniesClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
     protected _courseChapters: CourseChaptersClient | undefined;
@@ -257,6 +259,10 @@ export class WhopClient {
 
     public get checkoutConfigurations(): CheckoutConfigurationsClient {
         return (this._checkoutConfigurations ??= new CheckoutConfigurationsClient(this._options));
+    }
+
+    public get checkoutSessions(): CheckoutSessionsClient {
+        return (this._checkoutSessions ??= new CheckoutSessionsClient(this._options));
     }
 
     public get companies(): CompaniesClient {

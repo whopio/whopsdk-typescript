@@ -34,11 +34,10 @@ export namespace ListSupportedMethodsResponse {
                 BankDeposit: "bank_deposit",
                 HomeDelivery: "home_delivery",
                 MobileWallet: "mobile_wallet",
-                MasspayCard: "masspay_card",
-                PaperCheck: "paper_check",
+                Card: "card",
+                Check: "check",
                 Bill: "bill",
                 Cryptocurrency: "cryptocurrency",
-                Unknown: "unknown",
             } as const;
             export type DeliveryType = (typeof DeliveryType)[keyof typeof DeliveryType];
             export const Object_ = {

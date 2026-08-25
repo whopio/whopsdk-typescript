@@ -18,7 +18,24 @@ describe("ProductsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        route: "biz_xxxxxxxxxxxxxx",
+                        title: "Shine Time Auto Detailing",
+                    },
                     created_at: "2026-01-01T12:00:00.000Z",
+                    default_plan: {
+                        billing_period: 30,
+                        expiration_days: null,
+                        id: "plan_xxxxxxxxxxxxxx",
+                        initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        plan_type: "renewal",
+                        renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        title: null,
+                        unlimited_stock: true,
+                        visibility: "visible",
+                    },
+                    description: "Two-stage paint correction, a three-year ceramic coating, and sealed wheel faces.",
                     external_identifier: "SHINE-CERAMIC-01",
                     gallery_images: [
                         {
@@ -58,7 +75,6 @@ describe("ProductsClient", () => {
 
         const expected = rawResponseBody;
         const page = await client.products.list({
-            account_id: "account_id",
             visibilities: ["visible"],
             access_pass_types: ["regular"],
         });
@@ -84,9 +100,7 @@ describe("ProductsClient", () => {
         server.mockEndpoint().get("/products").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.products.list({
-                account_id: "account_id",
-            });
+            return await client.products.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -105,9 +119,7 @@ describe("ProductsClient", () => {
         server.mockEndpoint().get("/products").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.products.list({
-                account_id: "account_id",
-            });
+            return await client.products.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -127,6 +139,17 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
+            default_plan: {
+                billing_period: 30,
+                expiration_days: 1.1,
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                unlimited_stock: true,
+                visibility: "visible",
+            },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
@@ -243,6 +266,17 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
+            default_plan: {
+                billing_period: 30,
+                expiration_days: 1.1,
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                unlimited_stock: true,
+                visibility: "visible",
+            },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
@@ -379,6 +413,17 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
+            default_plan: {
+                billing_period: 30,
+                expiration_days: 1.1,
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                unlimited_stock: true,
+                visibility: "visible",
+            },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
@@ -495,6 +540,17 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
+            default_plan: {
+                billing_period: 30,
+                expiration_days: 1.1,
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                unlimited_stock: true,
+                visibility: "visible",
+            },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [
@@ -635,6 +691,17 @@ describe("ProductsClient", () => {
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
             custom_statement_descriptor: "WHOP*SHINETIME",
+            default_plan: {
+                billing_period: 30,
+                expiration_days: 1.1,
+                id: "plan_xxxxxxxxxxxxxx",
+                initial_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                plan_type: "renewal",
+                renewal_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                title: "title",
+                unlimited_stock: true,
+                visibility: "visible",
+            },
             description: "Full interior extraction, leather conditioning, and an ozone odor treatment.",
             external_identifier: "SHINE-CERAMIC-01",
             gallery_images: [

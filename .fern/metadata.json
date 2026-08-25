@@ -5,12 +5,30 @@
     "generatorConfig": {
         "namespaceExport": "Whop",
         "noSerdeLayer": true,
-        "omitUndefined": true
+        "omitUndefined": true,
+        "extraDependencies": {
+            "standardwebhooks": "^1.0.0"
+        },
+        "packageJson": {
+            "exports": {
+                "./helpers": {
+                    "import": {
+                        "types": "./dist/esm/helpers/index.d.mts",
+                        "default": "./dist/esm/helpers/index.mjs"
+                    },
+                    "require": {
+                        "types": "./dist/cjs/helpers/index.d.ts",
+                        "default": "./dist/cjs/helpers/index.js"
+                    },
+                    "default": "./dist/cjs/helpers/index.js"
+                }
+            }
+        }
     },
-    "originGitCommit": "a26a97d2d8ee29f78819a299712fb3b4086d634e",
+    "originGitCommit": "ece201e2cfe67e8b10dd9627bd5e151dad29f1c5",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
-    "requestedVersion": "1.0.11",
+    "requestedVersion": "1.0.13",
     "ciProvider": "unknown",
-    "sdkVersion": "1.0.11"
+    "sdkVersion": "1.0.13"
 }

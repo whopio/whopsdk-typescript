@@ -5,15 +5,24 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         account_id: "account_id",
  *         visibilities: ["visible"],
  *         access_pass_types: ["regular"]
  *     }
  */
 export interface ListProductsRequest {
-    /** The unique identifier of the account to list products for. */
-    account_id: string;
-    /** Filter to only products matching these visibility states. */
+    /** The unique identifier of the account to list products for. Omit to search the public marketplace. */
+    account_id?: string;
+    /** Ranked search against product title and headline. Omit to browse by recency. */
+    query?: string;
+    /** Only return marketplace products assigned to this category route, such as `trading`. */
+    marketplace_category_route?: string;
+    /** Filter to products with a buyable plan of these billing models, such as `one_time` or `renewal`. */
+    plan_types?: Whop.ListProductsRequestPlanTypesItem | Whop.ListProductsRequestPlanTypesItem[];
+    /** Only return products whose advertised buyable plan has a displayed price of at least this amount. Recurring plans use renewal price. */
+    price_minimum?: number;
+    /** Only return products whose advertised buyable plan has a displayed price of at most this amount. Recurring plans use renewal price. */
+    price_maximum?: number;
+    /** Filter to only products matching these visibility states. Ignored on the public marketplace list, which only returns visible products. */
     visibilities?: string | string[];
     /** Filter to only products matching these types. */
     access_pass_types?: string | string[];
@@ -21,7 +30,7 @@ export interface ListProductsRequest {
     labels?: string | string[];
     /** The sort direction for results. Defaults to descending. */
     direction?: Whop.ListProductsRequestDirection;
-    /** The field to sort results by. Defaults to created_at. */
+    /** The field to sort results by. Account lists default to `created_at`. Marketplace lists default to `discoverable_at` and accept `created_at` or `discoverable_at`. Cannot be combined with `query`. */
     order?: string;
     /** The number of products to return (default and max 100). */
     first?: number;
@@ -31,4 +40,8 @@ export interface ListProductsRequest {
     last?: number;
     /** A cursor; returns products before this position. */
     before?: string;
+    /** Only return products created after this ISO 8601 timestamp. */
+    created_after?: string;
+    /** Only return products created before this ISO 8601 timestamp. */
+    created_before?: string;
 }

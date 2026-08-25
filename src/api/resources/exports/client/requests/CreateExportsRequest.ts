@@ -11,7 +11,7 @@ export interface CreateExportsRequest {
     account_id?: string;
     /** Column keys to include. Empty means all columns for the resource. */
     columns?: string[];
-    /** Resource-specific filters. For native REST resources (`payouts`, `transfers`, `memberships`) these are the resource's own list query params; for dashboard tables they mirror the dashboard table filters. */
+    /** Resource-specific filters. For native REST resources (`payouts`, `transfers`, `products`) these are the resource's own list query params; for dashboard tables they mirror the dashboard table filters. */
     filters?: Record<string, unknown>;
     /** The resource to export, e.g. `payouts`, `receipts`, or `members`. */
     resource: CreateExportsRequest.Resource;
@@ -34,8 +34,6 @@ export namespace CreateExportsRequest {
         Disputes: "disputes",
         Events: "events",
         FinancialActivity: "financial-activity",
-        Members: "members",
-        Memberships: "memberships",
         PayoutMethods: "payout_methods",
         Payouts: "payouts",
         People: "people",
@@ -47,8 +45,10 @@ export namespace CreateExportsRequest {
         TeamMembers: "team_members",
         Transfers: "transfers",
         Webhooks: "webhooks",
+        Members: "members",
         Receipts: "receipts",
         UnclaimedMemberships: "unclaimed_memberships",
+        Memberships: "memberships",
         TrackingLinks: "tracking_links",
         PromoCodes: "promo_codes",
         Resolutions: "resolutions",

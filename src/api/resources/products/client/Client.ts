@@ -19,7 +19,7 @@ export declare namespace ProductsClient {
 /**
  * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
  *
- * Use the Products API to create products, list products visible to your credentials, retrieve product details, update product metadata or merchandising fields, and delete products that should no longer be sold.
+ * Use the Products API to search the public marketplace, list an account's products, retrieve a product, and create, update, or delete products.
  */
 export class ProductsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ProductsClient.Options>;
@@ -29,7 +29,7 @@ export class ProductsClient {
     }
 
     /**
-     * Returns a paginated list of products belonging to an account.
+     * Returns a paginated list of products. Omit `account_id` to search the public marketplace.
      *
      * @param {Whop.ListProductsRequest} request
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -41,19 +41,23 @@ export class ProductsClient {
      *
      * @example
      *     await client.products.list({
-     *         account_id: "account_id",
      *         visibilities: ["visible"],
      *         access_pass_types: ["regular"]
      *     })
      */
     public async list(
-        request: Whop.ListProductsRequest,
+        request: Whop.ListProductsRequest = {},
         requestOptions?: ProductsClient.RequestOptions,
     ): Promise<core.Page<Whop.ProductListItem, Whop.ListProductsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListProductsRequest): Promise<core.WithRawResponse<Whop.ListProductsResponse>> => {
                 const {
                     account_id: accountId,
+                    query,
+                    marketplace_category_route: marketplaceCategoryRoute,
+                    plan_types: planTypes,
+                    price_minimum: priceMinimum,
+                    price_maximum: priceMaximum,
                     visibilities,
                     access_pass_types: accessPassTypes,
                     labels,
@@ -63,9 +67,20 @@ export class ProductsClient {
                     after,
                     last,
                     before,
+                    created_after: createdAfter,
+                    created_before: createdBefore,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
+                    query,
+                    marketplace_category_route: marketplaceCategoryRoute,
+                    plan_types: Array.isArray(planTypes)
+                        ? planTypes.map((item) => item)
+                        : planTypes != null
+                          ? planTypes
+                          : undefined,
+                    price_minimum: priceMinimum,
+                    price_maximum: priceMaximum,
                     visibilities,
                     access_pass_types: accessPassTypes,
                     labels,
@@ -75,6 +90,8 @@ export class ProductsClient {
                     after,
                     last,
                     before,
+                    created_after: createdAfter,
+                    created_before: createdBefore,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -82,7 +99,7 @@ export class ProductsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -173,7 +190,7 @@ export class ProductsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -220,7 +237,7 @@ export class ProductsClient {
     }
 
     /**
-     * Retrieves the details of an existing product. This endpoint is publicly accessible.
+     * Retrieves a product. Public — no credentials.
      *
      * @param {Whop.RetrieveProductsRequest} request
      * @param {ProductsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -249,7 +266,7 @@ export class ProductsClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -323,7 +340,7 @@ export class ProductsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -399,7 +416,7 @@ export class ProductsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -479,7 +496,7 @@ export class ProductsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -558,7 +575,7 @@ export class ProductsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

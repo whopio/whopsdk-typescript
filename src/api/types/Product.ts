@@ -13,7 +13,9 @@ export interface Product {
     custom_cta_url: string | null;
     /** Custom text label on customer's bank statement. */
     custom_statement_descriptor: string | null;
-    /** Written description displayed on product page. */
+    /** Buyable plan to show and check out with. The configured default when that plan is buyable, otherwise the first buyable plan in product-page order. `null` when none is buyable. */
+    default_plan: Whop.ProductPublicPlan | null;
+    /** Written description displayed on the product page. `null` if none is set. */
     description: string | null;
     /** External identifier stored on the product for your own reference. */
     external_identifier: string | null;

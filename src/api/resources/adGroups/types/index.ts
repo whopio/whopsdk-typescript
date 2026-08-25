@@ -8,5 +8,6 @@ export * from "./ListAdGroupsResponse.js";
 export * from "./RetrieveAdGroupsRequestAttributionModel.js";
 export * from "./SearchTargetingOptionsAdGroupsRequestLocationTypesItem.js";
 export * from "./SearchTargetingOptionsAdGroupsRequestPlatform.js";
+export * from "./SearchTargetingOptionsAdGroupsRequestSpecialAdCategoriesItem.js";
 export * from "./SearchTargetingOptionsAdGroupsRequestTypesItem.js";
 export * from "./SearchTargetingOptionsAdGroupsResponse.js";

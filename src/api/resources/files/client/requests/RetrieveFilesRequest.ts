@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "file_xxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetrieveFilesRequest {
-    /** The unique identifier of the file to retrieve. */
+    /** The unique identifier of the file, prefixed `file_`. */
     id: string;
 }

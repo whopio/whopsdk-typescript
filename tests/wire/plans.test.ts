@@ -95,7 +95,6 @@ describe("PlansClient", () => {
 
         const expected = rawResponseBody;
         const page = await client.plans.list({
-            account_id: "account_id",
             release_methods: ["buy_now"],
             visibilities: ["visible"],
             plan_types: ["renewal"],
@@ -123,9 +122,7 @@ describe("PlansClient", () => {
         server.mockEndpoint().get("/plans").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.plans.list({
-                account_id: "account_id",
-            });
+            return await client.plans.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -144,9 +141,7 @@ describe("PlansClient", () => {
         server.mockEndpoint().get("/plans").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.plans.list({
-                account_id: "account_id",
-            });
+            return await client.plans.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 

@@ -5,7 +5,6 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         account_id: "account_id",
  *         release_methods: ["buy_now"],
  *         visibilities: ["visible"],
  *         plan_types: ["renewal"],
@@ -13,8 +12,8 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface ListPlansRequest {
-    /** The unique identifier of the account to list plans for. */
-    account_id: string;
+    /** The unique identifier of the account to list plans for. Required unless `product_ids` is provided for a public product-plan read. */
+    account_id?: string;
     /** The sort direction for results. Defaults to descending. */
     direction?: Whop.ListPlansRequestDirection;
     /** The field to sort results by. Defaults to created_at. */
@@ -25,7 +24,7 @@ export interface ListPlansRequest {
     visibilities?: string | string[];
     /** Filter to only plans matching these billing types. */
     plan_types?: string | string[];
-    /** Filter to only plans belonging to these product identifiers. */
+    /** Filter to only plans belonging to these product identifiers. When `account_id` is omitted, this is required and the response is publicly readable: only visible, non-invoice plans are returned. */
     product_ids?: string | string[];
     /** Only return plans created before this timestamp. */
     created_before?: string;

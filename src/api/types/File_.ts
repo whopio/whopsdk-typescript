@@ -2,22 +2,43 @@
 
 import type * as Whop from "../index.js";
 
-/**
- * A file that has been uploaded or is pending upload.
- */
 export interface File_ {
-    /** The MIME type of the uploaded file (e.g., image/jpeg, video/mp4, audio/mpeg). */
+    /** The file's MIME type, e.g. `application/pdf`. */
     content_type: string | null;
-    /** The original filename of the uploaded file, including its file extension. */
+    /** When the file was created, as an ISO 8601 timestamp. */
+    created_at: string;
+    /** The original filename, including its extension. */
     filename: string | null;
-    /** The unique identifier for the file. */
+    /** The file's ID, prefixed `file_`. */
     id: string;
-    /** The file size in bytes. Null if the file has not finished uploading. */
-    size: string | null;
-    /** The current upload status of the file (e.g., pending, ready). */
-    upload_status: Whop.UploadStatuses;
-    /** The URL for accessing the file. For public files, this is a permanent CDN URL. For private files, this is a signed URL that expires. Null if the file has not finished uploading. */
+    /** The byte size each part (except the last) must be. Present only on create, and only for multipart uploads. */
+    multipart_chunk_size?: (number | null) | undefined;
+    /** The ID of the multipart upload, passed back to `complete`. Present only on create, and only for multipart uploads. */
+    multipart_upload_id?: (string | null) | undefined;
+    multipart_upload_urls?: (Whop.FileMultipartUrl[] | null) | undefined;
+    /** The type of this object, always `file`. */
+    object: string;
+    /** The file size in bytes. `null` until the upload has finished. */
+    size: number | null;
+    /** Headers to send with the upload PUT. Present only on create. */
+    upload_headers?: Record<string, unknown> | undefined;
+    /** Where the file is in its upload lifecycle. */
+    upload_status: File_.UploadStatus;
+    /** Presigned URL to PUT the file's bytes to. Present only on create, and only for single-part uploads. */
+    upload_url?: (string | null) | undefined;
+    /** A URL to download the file: a permanent CDN URL for public files, a signed expiring URL for private ones. `null` until the upload has finished. */
     url: string | null;
-    /** Whether the file is publicly accessible or requires authentication. */
+    /** `public` files are served via an unsigned CDN URL; `private` files via a signed, expiring URL. */
     visibility: Whop.FileVisibility;
+}
+
+export namespace File_ {
+    /** Where the file is in its upload lifecycle. */
+    export const UploadStatus = {
+        Pending: "pending",
+        Processing: "processing",
+        Ready: "ready",
+        Failed: "failed",
+    } as const;
+    export type UploadStatus = (typeof UploadStatus)[keyof typeof UploadStatus];
 }
