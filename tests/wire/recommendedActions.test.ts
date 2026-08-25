@@ -34,12 +34,12 @@ describe("RecommendedActionsClient", () => {
                         },
                     ],
                     description: "Get your product in front of buyers",
-                    id: "rac_chain_xxxxxxxxxxxx",
+                    id: "rac_chain_brand",
                     reasoning: {
                         summary:
                             "Shine Time has a connected Meta account but no active campaigns; a first campaign unlocks lead tracking.",
                     },
-                    title: "Launch an ad campaign",
+                    title: "Brand your business",
                 },
             ],
         };
@@ -133,12 +133,12 @@ describe("RecommendedActionsClient", () => {
                 },
             ],
             description: "Get your product in front of buyers",
-            id: "rac_chain_xxxxxxxxxxxx",
+            id: "rac_chain_brand",
             reasoning: {
                 summary:
                     "Shine Time has a connected Meta account but no active campaigns; a first campaign unlocks lead tracking.",
             },
-            title: "Launch an ad campaign",
+            title: "Brand your business",
         };
 
         server

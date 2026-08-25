@@ -30,6 +30,8 @@ export interface Account {
     description: string | null;
     /** Account owner email address. */
     email: string | null;
+    /** The account's end-user license agreement document, or `null` if they have not published one. */
+    eula: Whop.File_ | null;
     home_preferences: Account.HomePreferences.Item[];
     /** Account ID, prefixed `biz_`. */
     id: string;
@@ -59,6 +61,8 @@ export interface Account {
     parent_account: Whop.AccountParent | null;
     /** Payment health controls currently applied to the account. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise. */
     payment_controls: Whop.AccountPaymentControls | null;
+    /** The account's privacy policy document, or `null` if they have not published one. */
+    privacy_policy: Whop.File_ | null;
     /** Tax classification code applied by default to the account's products, with `id`, `name`, and `product_type`. `null` when no default is set. */
     product_tax_code: Record<string, unknown> | null;
     /** DEPRECATED: Use the `GET /recommended_actions?account_id={account_id}` endpoint instead. */
@@ -66,6 +70,8 @@ export interface Account {
     /** Whether authorized users must enable two-factor authentication. */
     require_2fa: boolean;
     required_actions: Whop.AccountRequiredAction[] | null;
+    /** The account's return policy document, or `null` if they have not published one. */
+    return_policy: Whop.File_ | null;
     /** Account public route identifier. */
     route: string;
     /** Whether Whop sends transactional emails to customers on behalf of this account. */
@@ -93,6 +99,8 @@ export interface Account {
     tax_remitted_by: Account.TaxRemittedBy | null;
     /** How tax is applied to the account's prices: `inclusive` (tax included in the listed price) or `exclusive` (tax added on top). Defaults to `exclusive` when unset; `null` only when the account has no payment connection. */
     tax_type: Account.TaxType | null;
+    /** The account's terms of service document, or `null` if they have not published one. */
+    terms_of_service: Whop.File_ | null;
     /** Account-level 3D Secure behavior. `mandate_challenge` requires cardholder verification on supported card payments; `null` uses the standard checkout flow. */
     three_ds_level: Account.ThreeDsLevel | null;
     /** Account display name. */

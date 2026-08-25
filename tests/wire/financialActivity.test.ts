@@ -34,6 +34,16 @@ describe("FinancialActivityClient", () => {
                     ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
                     line_type: "ad_budget_release",
                     object: "ledger_activity",
+                    payment: {
+                        amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        card_brand: null,
+                        card_last4: null,
+                        created_at: "2024-01-15T09:30:00Z",
+                        id: "id",
+                        object: "payment",
+                        payment_method_type: null,
+                        payment_processor: null,
+                    },
                     posted_at: "2026-01-01T12:00:00Z",
                     resource: {
                         id: "biz_xxxxxxxxxxxxxx",
@@ -54,6 +64,7 @@ describe("FinancialActivityClient", () => {
                         id: "airdrp_xxxxxxxxxxxxxx",
                         object: "airdrop_link",
                         payer_name: "MassPay",
+                        payment_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                         payout_destination: {
                             icon_url:
                                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-activity-icon",
@@ -71,7 +82,7 @@ describe("FinancialActivityClient", () => {
             ],
             page_info: {
                 end_cursor: "cursor_2",
-                has_next_page: true,
+                has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "cursor_1",
             },

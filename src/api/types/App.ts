@@ -32,6 +32,7 @@ export interface App {
     discover_path: string | null;
     /** Subdomain identifier for the app's proxied URL, forming https://{domain_id}.apps.whop.com. */
     domain_id: string;
+    elements_used: App.ElementsUsed.Item[];
     /** URL path for the member-facing hub view, or `null` when not configured. */
     experience_path: string | null;
     /** Full URL where the app's hosted web build is served, or `null` if no route is claimed. */
@@ -83,6 +84,50 @@ export namespace App {
         Website: "website",
     } as const;
     export type AppType = (typeof AppType)[keyof typeof AppType];
+    export type ElementsUsed = ElementsUsed.Item[];
+
+    export namespace ElementsUsed {
+        /** Whop Elements the app's production web build mounts, as `<namespace>.<element>` keys (sub-controller children take a third segment, e.g. `payments.cardFields.cardNumber`). A bare namespace means the build reaches that namespace but the individual elements could not be resolved. Empty when the build mounts none, when it has not been scanned yet, or when the app has no production web build. */
+        export const Item = {
+            Ads: "ads",
+            AdsBillingSetup: "ads.billing-setup",
+            AdsCampaignCreator: "ads.campaign-creator",
+            AdsReporting: "ads.reporting",
+            AdsReportingChart: "ads.reporting.chart",
+            AdsReportingTable: "ads.reporting.table",
+            Checkout: "checkout",
+            CheckoutCheckout: "checkout.checkout",
+            CheckoutExpressCheckout: "checkout.expressCheckout",
+            Payments: "payments",
+            PaymentsAddress: "payments.address",
+            PaymentsBranding: "payments.branding",
+            PaymentsCard: "payments.card",
+            PaymentsCardFields: "payments.cardFields",
+            PaymentsCardFieldsCardCvc: "payments.cardFields.cardCvc",
+            PaymentsCardFieldsCardExpiry: "payments.cardFields.cardExpiry",
+            PaymentsCardFieldsCardNumber: "payments.cardFields.cardNumber",
+            PaymentsEmail: "payments.email",
+            PaymentsPayment: "payments.payment",
+            PaymentsTaxId: "payments.taxId",
+            Tracking: "tracking",
+            TrackingEvents: "tracking.events",
+            TrackingPeople: "tracking.people",
+            Wallet: "wallet",
+            WalletActivity: "wallet.activity",
+            WalletBalances: "wallet.balances",
+            WalletBalancesBalance: "wallet.balances.balance",
+            WalletBalancesList: "wallet.balances.list",
+            WalletCards: "wallet.cards",
+            WalletDeposit: "wallet.deposit",
+            WalletSend: "wallet.send",
+            WalletWithdraw: "wallet.withdraw",
+            Websites: "websites",
+            WebsitesPixelSetup: "websites.pixel-setup",
+            WebsitesWebsites: "websites.websites",
+        } as const;
+        export type Item = (typeof Item)[keyof typeof Item];
+    }
+
     /** Approval status of the app's product listing on the Whop app store, or `null` when the app has no associated product. */
     export const MarketplaceStatus = {
         NotAvailable: "not_available",

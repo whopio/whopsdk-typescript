@@ -20,6 +20,8 @@ export interface LedgerActivity {
     /** The ledger line category this activity was posted under. */
     line_type: LedgerActivity.LineType;
     object: LedgerActivity.Object_;
+    /** Payment related to this ledger activity. Included when rich resource hydration is enabled and the movement is tied to a payment. */
+    payment?: (LedgerActivity.Payment | null) | undefined;
     /** When the activity posted to the ledger. */
     posted_at: string;
     /** Resource associated with this ledger activity. */
@@ -54,6 +56,8 @@ export namespace LedgerActivity {
         AirdropReversal: "airdrop_reversal",
         ApplicationFee: "application_fee",
         ApplicationFeePayout: "application_fee_payout",
+        BalanceReservation: "balance_reservation",
+        BalanceReservationReversal: "balance_reservation_reversal",
         BankTransfer: "bank_transfer",
         BillingPercentageFee: "billing_percentage_fee",
         BuyerFee: "buyer_fee",
@@ -142,6 +146,32 @@ export namespace LedgerActivity {
         LedgerActivity: "ledger_activity",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+
+    export interface Payment {
+        /** Total charged by the payment. */
+        amount: Whop.Money | null;
+        /** Card brand, when the customer paid by card. */
+        card_brand: string | null;
+        /** Last four digits of the card, when the customer paid by card. */
+        card_last4: string | null;
+        /** When the payment was created. */
+        created_at: string;
+        /** Payment ID, prefixed `pay_`. */
+        id: string;
+        object: Payment.Object_;
+        /** How the customer paid, such as `card` or `paypal`. */
+        payment_method_type: string | null;
+        /** Processor that handled the payment, such as `stripe`. */
+        payment_processor: string | null;
+    }
+
+    export namespace Payment {
+        export const Object_ = {
+            Payment: "payment",
+        } as const;
+        export type Object_ = (typeof Object_)[keyof typeof Object_];
+    }
+
     /**
      * Resource associated with this ledger activity.
      */
@@ -239,6 +269,8 @@ export namespace LedgerActivity {
     export interface Source {
         /** Withdrawal amount as a decimal number in the destination currency (withdrawal sources only; requires payout:withdrawal:read). */
         amount_float?: (number | null) | undefined;
+        /** Card brand used by the payment source. */
+        card_brand?: (string | null) | undefined;
         /** Chain the deposit landed on, for example plasma (onchain_transaction sources only). */
         chain?: (string | null) | undefined;
         /** Public claim URL for the airdrop link (airdrop_link sources only). */
@@ -255,6 +287,12 @@ export namespace LedgerActivity {
         object: string;
         /** Name of the entity processing the payout (withdrawal sources only; requires payout:withdrawal:read). */
         payer_name?: (string | null) | undefined;
+        /** Total charged by the payment source. */
+        payment_amount?: (Whop.Money | null) | undefined;
+        /** Payment method used by the payment source. */
+        payment_method_type?: (string | null) | undefined;
+        /** Processor used by the payment source. */
+        payment_processor?: (string | null) | undefined;
         /** Payout destination display info (withdrawal sources only). */
         payout_destination?: (Source.PayoutDestination | null) | undefined;
         /** Saved payout destination nickname (withdrawal sources only). */

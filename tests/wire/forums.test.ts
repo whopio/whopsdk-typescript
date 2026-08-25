@@ -19,7 +19,7 @@ describe("ForumsClient", () => {
             data: [
                 {
                     email_notification_preference: "all_admin_posts",
-                    experience: { id: "exp_xxxxxxxxxxxxxx", name: "Trading Signals Chat" },
+                    experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
                     id: "id",
                     who_can_comment: "everyone",
                     who_can_post: "everyone",
@@ -214,7 +214,7 @@ describe("ForumsClient", () => {
 
         const rawResponseBody = {
             email_notification_preference: "all_admin_posts",
-            experience: { id: "exp_xxxxxxxxxxxxxx", name: "Trading Signals Chat" },
+            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
             id: "id",
             who_can_comment: "everyone",
             who_can_post: "everyone",
@@ -387,7 +387,7 @@ describe("ForumsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             email_notification_preference: "all_admin_posts",
-            experience: { id: "exp_xxxxxxxxxxxxxx", name: "Trading Signals Chat" },
+            experience: { id: "exp_xxxxxxxxxxxxxx", is_public: true, name: "Trading Signals Chat" },
             id: "id",
             who_can_comment: "everyone",
             who_can_post: "everyone",

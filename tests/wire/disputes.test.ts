@@ -54,10 +54,21 @@ describe("DisputesClient", () => {
                         documents: [
                             {
                                 content_type: null,
+                                created_at: "2026-01-01T12:00:00.000Z",
                                 document_type: "return_policy",
                                 filename: "customer-order-history.png",
                                 id: "file_xxxxxxxxxxxxxx",
+                                multipart_upload_urls: [
+                                    {
+                                        part_number: 1,
+                                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                    },
+                                ],
+                                object: "file",
+                                size: 69,
+                                upload_status: "pending",
                                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                                visibility: "public",
                             },
                         ],
                         notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -345,10 +356,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -542,10 +564,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -788,10 +821,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -1057,10 +1101,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -1407,10 +1462,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",
@@ -1765,10 +1831,21 @@ describe("DisputesClient", () => {
                 documents: [
                     {
                         content_type: null,
+                        created_at: "2026-01-01T12:00:00.000Z",
                         document_type: "return_policy",
                         filename: "customer-order-history.png",
                         id: "file_xxxxxxxxxxxxxx",
+                        multipart_upload_urls: [
+                            {
+                                part_number: 1,
+                                url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            },
+                        ],
+                        object: "file",
+                        size: 69,
+                        upload_status: "pending",
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        visibility: "public",
                     },
                 ],
                 notes: "Two-day ceramic coating completed and collected. Before and after photos attached.",

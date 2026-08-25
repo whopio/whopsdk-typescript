@@ -27,7 +27,7 @@ describe("LedgersClient", () => {
                     account_type: "asset",
                     amount: 23750.55,
                     grouping: "advertising",
-                    line_category: "account_settlement",
+                    line_category: "accelerated_settlement_fee",
                     line_count: 214,
                     period: "2026-05",
                     profit_and_loss_section: "revenue",

@@ -10,9 +10,12 @@ export interface Bounty {
     accepted_submissions_limit: number;
     /** How many winner slots one worker can win. Defaults to `1`. Wins plus proofs awaiting review never exceed this number, and a worker runs one attempt at a time. Cannot exceed `accepted_submissions_limit`. */
     accepted_submissions_per_user_limit: number;
+    active_proof_livestream_feeds: Whop.BountyActiveLivestreamFeed[];
     /** What a referrer earns per accepted submission when the worker arrived through their affiliate link, in whole currency units, at the standard platform fee rate. Taken out of the worker's post-fee reward rather than added on top. `0` when the bounty pays no affiliate share, including bounties tied to no account, which cannot record a referral. */
     affiliate_share_amount: number;
     allowed_country_codes: string[];
+    /** Submissions delivered and waiting on review. A subset of `unresolved_submissions_count`, which also counts attempts still in progress. */
+    awaiting_review_submissions_count: number;
     /** Total gross budget committed to the bounty: `gross_reward_amount` times `accepted_submissions_limit`. */
     budget_amount: number;
     /** What the poster wants the work to achieve, declared once at create. `null` for bounties created before the taxonomy rolled out. */
@@ -25,6 +28,8 @@ export interface Bounty {
     created_at: string;
     /** Currency for all amounts on the bounty, as a lowercase ISO 4217 code. */
     currency: Bounty.Currency;
+    /** Submissions reviewed and turned down. */
+    denied_submissions_count: number;
     /** Full task instructions shown to workers. */
     description: string;
     /** Experience the bounty's discussion thread lives in, prefixed `exp_`. Read this — not `experience_id` — to open the thread: a platform-wide bounty has no hosting experience of its own but its discussion still lives in one. */

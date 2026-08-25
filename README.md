@@ -3,10 +3,12 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fwhopio%2Fwhopsdk-typescript)
 [![npm shield](https://img.shields.io/npm/v/@whop/sdk)](https://www.npmjs.com/package/@whop/sdk)
 
-The Whop TypeScript library provides convenient access to the Whop APIs from TypeScript.
+The Whop SDK gives you typed access to the Whop API. Pass your API key to the client explicitly — the SDK reads no environment variables, so a client built without a key sends unauthenticated requests and the API answers 401.
+
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
@@ -33,6 +35,10 @@ The Whop TypeScript library provides convenient access to the Whop APIs from Typ
   - [Runtime Compatibility](#runtime-compatibility)
 - [Contributing](#contributing)
 
+## Documentation
+
+API reference documentation is available [here](https://docs.whop.com/api-reference).
+
 ## Installation
 
 ```sh
@@ -50,7 +56,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { WhopClient } from "@whop/sdk";
 
-const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-21", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-21-1", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
 await client.accessTokens.create();
 ```
 
@@ -448,7 +454,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 ```typescript
 import { WhopClient } from "@whop/sdk";
 
-const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-21", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-08-21-1", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
 const pageableResponse = await client.accounts.list();
 for await (const item of pageableResponse) {
     console.log(item);

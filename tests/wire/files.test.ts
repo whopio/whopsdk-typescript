@@ -14,16 +14,27 @@ describe("FilesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { filename: "filename" };
+        const rawRequestBody = { filename: "terms.pdf" };
         const rawResponseBody = {
-            content_type: "image/jpeg",
-            filename: "document.pdf",
-            id: "file_xxxxxxxxxxxxx",
-            size: "123.45",
+            content_type: "application/pdf",
+            created_at: "2026-01-01T12:00:00.000Z",
+            filename: "evidence.pdf",
+            id: "file_xxxxxxxxxxxxxx",
+            multipart_chunk_size: 5242880,
+            multipart_upload_id: "upload-id",
+            multipart_upload_urls: [
+                {
+                    part_number: 1,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                },
+            ],
+            object: "file",
+            size: 9670,
             upload_headers: { key: "value" },
             upload_status: "pending",
-            upload_url: "https://media.whop.com/uploads/presigned",
-            url: "url",
+            upload_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             visibility: "public",
         };
 
@@ -37,7 +48,7 @@ describe("FilesClient", () => {
             .build();
 
         const response = await client.files.create({
-            filename: "filename",
+            filename: "terms.pdf",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -108,14 +119,14 @@ describe("FilesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/files")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(403)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -123,119 +134,7 @@ describe("FilesClient", () => {
             return await client.files.create({
                 filename: "filename",
             });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("create (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/files")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.files.create({
-                filename: "filename",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("create (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/files")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.files.create({
-                filename: "filename",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("create (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/files")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.files.create({
-                filename: "filename",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("create (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { filename: "filename" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/files")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.files.create({
-                filename: "filename",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -249,51 +148,37 @@ describe("FilesClient", () => {
         });
 
         const rawResponseBody = {
-            content_type: "image/jpeg",
-            filename: "document.pdf",
-            id: "file_xxxxxxxxxxxxx",
-            size: "123.45",
+            content_type: "application/pdf",
+            created_at: "2026-01-01T12:00:00.000Z",
+            filename: "evidence.pdf",
+            id: "file_xxxxxxxxxxxxxx",
+            multipart_chunk_size: 5242880,
+            multipart_upload_id: "upload-id",
+            multipart_upload_urls: [
+                {
+                    part_number: 1,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                },
+            ],
+            object: "file",
+            size: 9670,
+            upload_headers: { key: "value" },
             upload_status: "pending",
-            url: "url",
+            upload_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             visibility: "public",
         };
 
-        server
-            .mockEndpoint()
-            .get("/files/file_xxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/files/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.files.retrieve({
-            id: "file_xxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/files/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.files.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -314,28 +199,7 @@ describe("FilesClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/files/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.files.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("retrieve (5)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -356,7 +220,7 @@ describe("FilesClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("retrieve (6)", async () => {
+    test("complete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -365,19 +229,56 @@ describe("FilesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
+        const rawRequestBody = {
+            multipart_parts: [{ etag: "etag-1", part_number: 1 }],
+            multipart_upload_id: "upload-id",
+        };
+        const rawResponseBody = {
+            content_type: "application/pdf",
+            created_at: "2026-01-01T12:00:00.000Z",
+            filename: "evidence.pdf",
+            id: "file_xxxxxxxxxxxxxx",
+            multipart_chunk_size: 5242880,
+            multipart_upload_id: "upload-id",
+            multipart_upload_urls: [
+                {
+                    part_number: 1,
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                },
+            ],
+            object: "file",
+            size: 9670,
+            upload_headers: { key: "value" },
+            upload_status: "pending",
+            upload_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            visibility: "public",
+        };
 
-        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/files/id/complete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
-        server.mockEndpoint().get("/files/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.files.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
+        const response = await client.files.complete({
+            id: "id",
+            multipart_parts: [
+                {
+                    etag: "etag-1",
+                    part_number: 1,
+                },
+            ],
+            multipart_upload_id: "upload-id",
+        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("retrieve (7)", async () => {
+    test("complete (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -386,19 +287,43 @@ describe("FilesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-
+        const rawRequestBody = {
+            multipart_parts: [
+                { etag: "etag", part_number: 1 },
+                { etag: "etag", part_number: 1 },
+            ],
+            multipart_upload_id: "multipart_upload_id",
+        };
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/files/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .post("/files/id/complete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
-            return await client.files.retrieve({
+            return await client.files.complete({
                 id: "id",
+                multipart_parts: [
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                ],
+                multipart_upload_id: "multipart_upload_id",
             });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
+        }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("retrieve (8)", async () => {
+    test("complete (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -407,15 +332,129 @@ describe("FilesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-
+        const rawRequestBody = {
+            multipart_parts: [
+                { etag: "etag", part_number: 1 },
+                { etag: "etag", part_number: 1 },
+            ],
+            multipart_upload_id: "multipart_upload_id",
+        };
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/files/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .post("/files/id/complete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
-            return await client.files.retrieve({
+            return await client.files.complete({
                 id: "id",
+                multipart_parts: [
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                ],
+                multipart_upload_id: "multipart_upload_id",
             });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("complete (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            multipart_parts: [
+                { etag: "etag", part_number: 1 },
+                { etag: "etag", part_number: 1 },
+            ],
+            multipart_upload_id: "multipart_upload_id",
+        };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/files/id/complete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.files.complete({
+                id: "id",
+                multipart_parts: [
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                ],
+                multipart_upload_id: "multipart_upload_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("complete (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {
+            multipart_parts: [
+                { etag: "etag", part_number: 1 },
+                { etag: "etag", part_number: 1 },
+            ],
+            multipart_upload_id: "multipart_upload_id",
+        };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/files/id/complete")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.files.complete({
+                id: "id",
+                multipart_parts: [
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                    {
+                        etag: "etag",
+                        part_number: 1,
+                    },
+                ],
+                multipart_upload_id: "multipart_upload_id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 });

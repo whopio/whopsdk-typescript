@@ -25,4 +25,8 @@ export interface SearchTargetingOptionsAdGroupsRequest {
     country?: string;
     /** Maximum number of results per requested type. */
     limit?: number;
+    /** The campaign's declared special ad categories. Under `housing`, `employment`, or `financial_products` the ad platform allows interests only, drawn from a short approved list, so results are narrowed to what such a campaign can launch with and other kinds return nothing. Blank `query` browses that approved list instead of the usual fixed lists. */
+    special_ad_categories?:
+        | Whop.SearchTargetingOptionsAdGroupsRequestSpecialAdCategoriesItem
+        | Whop.SearchTargetingOptionsAdGroupsRequestSpecialAdCategoriesItem[];
 }

@@ -64,6 +64,7 @@ export namespace GetFinancialReportResponse {
             export type Grouping = (typeof Grouping)[keyof typeof Grouping];
             /** The ledger line category the row aggregates. Balance summary rows carry the balance bucket instead. */
             export const LineCategory = {
+                AcceleratedSettlementFee: "accelerated_settlement_fee",
                 AccountSettlement: "account_settlement",
                 AdBalanceFundingReceipt: "ad_balance_funding_receipt",
                 AdBudgetRelease: "ad_budget_release",
@@ -229,6 +230,7 @@ export namespace GetFinancialReportResponse {
                 PlatformEarningSettlement: "platform_earning_settlement",
                 PlatformEarningUnreconciledClearing: "platform_earning_unreconciled_clearing",
                 PromoReversal: "promo_reversal",
+                PspAcceleratedSettlementFee: "psp_accelerated_settlement_fee",
                 PspAccountUpdaterFee: "psp_account_updater_fee",
                 PspAdjustedProcessingFee: "psp_adjusted_processing_fee",
                 PspAuthenticationFee: "psp_authentication_fee",

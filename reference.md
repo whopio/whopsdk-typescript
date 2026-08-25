@@ -6799,6 +6799,70 @@ await client.checkoutConfigurations.delete({
 </dl>
 </details>
 
+## Checkout Sessions
+<details><summary><code>client.checkoutSessions.<a href="/src/api/resources/checkoutSessions/client/Client.ts">create</a>({ ...params }) -> Whop.CheckoutSession</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Opens a checkout session. No credentials required. Pass exactly one of `items`, `checkout_configuration`, or `link`. The response includes `client_secret` once; later calls authenticate with it.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.checkoutSessions.create();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateCheckoutSessionsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CheckoutSessionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Companies
 <details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.CompanyListItem, Whop.ListCompaniesResponse&gt;</code></summary>
 <dl>
@@ -9698,7 +9762,7 @@ await client.disputes.updateEvidenceDispute({
 <dl>
 <dd>
 
-Replaces the full set of uploaded evidence documents on a dispute, beyond the four fixed evidence slots. Send the files as multipart file parts to upload and attach in one call, or reference files already stored by `id`/`direct_upload_id`. Send every document the packet should carry — up to 10, 10MB each and 25MB in total; an empty list removes them all. Accepted content types: application/pdf, application/json, image/jpeg, image/png, image/webp — any other type is rejected.
+Replaces the full set of uploaded evidence documents on a dispute, beyond the four fixed evidence slots. Upload files through `POST /files` and reference them by `id`, or send the files as multipart file parts to upload and attach in one call. Send every document the packet should carry — up to 10, 10MB each and 25MB in total; an empty list removes them all. Accepted content types: application/pdf, application/json, image/jpeg, image/png, image/webp — any other type is rejected.
 </dd>
 </dl>
 </dd>
@@ -12044,7 +12108,7 @@ await client.feeMarkups.delete({
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">create</a>({ ...params }) -> Whop.CreateFilesResponse</code></summary>
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">create</a>({ ...params }) -> Whop.File_</code></summary>
 <dl>
 <dd>
 
@@ -12056,7 +12120,7 @@ await client.feeMarkups.delete({
 <dl>
 <dd>
 
-Create a new file record and receive a presigned URL for uploading content to S3.
+Creates a file and returns a presigned destination to upload its bytes to. PUT the bytes to `upload_url` (single-part), or to each of `multipart_upload_urls` and then call Complete File Multipart Upload. Once the bytes land the file becomes `ready`, and its ID can be attached wherever a file is accepted — account legal documents, dispute evidence documents.
 </dd>
 </dl>
 </dd>
@@ -12072,7 +12136,7 @@ Create a new file record and receive a presigned URL for uploading content to S3
 
 ```typescript
 await client.files.create({
-    filename: "filename"
+    filename: "terms.pdf"
 });
 
 ```
@@ -12121,7 +12185,7 @@ await client.files.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing file.
+Retrieves a file you uploaded — poll it after uploading the bytes to see `upload_status` become `ready`. Only the creator can retrieve a file this way; a file attached to another resource is read through that resource.
 </dd>
 </dl>
 </dd>
@@ -12137,7 +12201,7 @@ Retrieves the details of an existing file.
 
 ```typescript
 await client.files.retrieve({
-    id: "file_xxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -12155,6 +12219,76 @@ await client.files.retrieve({
 <dd>
 
 **request:** `Whop.RetrieveFilesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">complete</a>({ ...params }) -> Whop.File_</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Assembles the parts of a multipart upload after every part has been PUT to its presigned URL. Pass the `multipart_upload_id` from Create File and each part's `ETag` response header.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.complete({
+    id: "id",
+    multipart_parts: [{
+            etag: "etag-1",
+            part_number: 1
+        }],
+    multipart_upload_id: "upload-id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CompleteFilesRequest` 
     
 </dd>
 </dl>
@@ -18072,7 +18206,7 @@ await client.permissions.list({
 <dl>
 <dd>
 
-Returns a paginated list of plans belonging to an account, with optional filtering by visibility, type, release method, and product.
+Returns a paginated list of plans. Omit `account_id` and pass `product_ids` to list a product's public buyable plans.
 </dd>
 </dl>
 </dd>
@@ -18088,7 +18222,6 @@ Returns a paginated list of plans belonging to an account, with optional filteri
 
 ```typescript
 const pageableResponse = await client.plans.list({
-    account_id: "account_id",
     release_methods: ["buy_now"],
     visibilities: ["visible"],
     plan_types: ["renewal"],
@@ -18100,7 +18233,6 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.plans.list({
-    account_id: "account_id",
     release_methods: ["buy_now"],
     visibilities: ["visible"],
     plan_types: ["renewal"],
@@ -18487,7 +18619,7 @@ await client.plans.calculateTax({
 <dl>
 <dd>
 
-Returns a paginated list of products belonging to an account.
+Returns a paginated list of products. Omit `account_id` to search the public marketplace.
 </dd>
 </dl>
 </dd>
@@ -18503,7 +18635,6 @@ Returns a paginated list of products belonging to an account.
 
 ```typescript
 const pageableResponse = await client.products.list({
-    account_id: "account_id",
     visibilities: ["visible"],
     access_pass_types: ["regular"]
 });
@@ -18513,7 +18644,6 @@ for await (const item of pageableResponse) {
 
 // Or you can manually iterate page-by-page
 let page = await client.products.list({
-    account_id: "account_id",
     visibilities: ["visible"],
     access_pass_types: ["regular"]
 });
@@ -18635,7 +18765,7 @@ await client.products.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing product. This endpoint is publicly accessible.
+Retrieves a product. Public — no credentials.
 </dd>
 </dl>
 </dd>

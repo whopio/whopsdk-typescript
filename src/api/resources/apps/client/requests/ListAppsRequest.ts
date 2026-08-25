@@ -15,6 +15,8 @@ export interface ListAppsRequest {
     view_type?: Whop.ListAppsRequestViewType;
     /** Whether to only return apps verified by Whop. Verified website templates — websites with a published web build — are included, even though websites are otherwise left out of app lists. */
     verified_apps_only?: boolean;
+    /** Only return apps Whop recommends (or, with `false`, only those it does not). The community blueprints gallery is the recommended slice of the public website list. */
+    recommended?: boolean;
     /** A search string matched against app names. */
     query?: string;
     /** The field to sort apps by. Defaults to discoverable_at, showing the most recently published apps first. `template_usage` ranks Whop-verified apps first, then apps with a banner image, then by how many apps were created from each app as a template. */

@@ -3,8 +3,14 @@
 import type * as Whop from "../index.js";
 
 export interface ProductListItem {
+    /** Account that sells this product. */
+    account: Record<string, unknown> | null;
     /** When the product was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** Buyable plan to show and check out with. The configured default when that plan is buyable, otherwise the first buyable plan in product-page order. `null` when none is buyable. */
+    default_plan: Whop.ProductPublicPlan | null;
+    /** Written description displayed on the product page. `null` if none is set. */
+    description: string | null;
     /** External identifier stored on the product for your own reference. */
     external_identifier: string | null;
     gallery_images: Whop.ProductGalleryImage[];

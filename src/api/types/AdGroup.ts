@@ -70,7 +70,7 @@ export interface AdGroup {
     demographics: Whop.AdGroupDemographics;
     /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). `null` for `minimum_cost` bidding. */
     desired_cost_per_result: number | null;
-    /** Interest, behavior, and demographic targeting, using categories from the ad platform's targeting taxonomy. Entries across interests, behaviors, and demographics are OR'd together (anyone matching any entry is reached), matching Ads Manager's detailed-targeting box. Can't be combined with automatic audience targeting, and unavailable to campaigns with special_ad_categories. */
+    /** Interest, behavior, and demographic targeting, using categories from the ad platform's targeting taxonomy. Entries across interests, behaviors, and demographics are OR'd together (anyone matching any entry is reached), matching Ads Manager's detailed-targeting box. Can't be combined with automatic audience targeting. Special ad category campaigns are limited to approved interests. */
     detailed_targeting: Whop.AdGroupDetailedTargeting;
     /** Device platforms and operating systems targeted. */
     devices: Whop.AdGroupDevices;
