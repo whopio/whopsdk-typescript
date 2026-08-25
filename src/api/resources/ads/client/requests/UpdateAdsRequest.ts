@@ -15,6 +15,8 @@ export interface UpdateAdsRequest {
     creatives?: UpdateAdsRequest.Creatives.Item[];
     /** The description variants shown on the ad. */
     descriptions?: string[];
+    /** Promote a post you already published instead of uploading creatives — a Facebook post or Instagram media id. Mutually exclusive with creatives. Pair with post_source. */
+    existing_post_id?: string;
     /** The headline variants shown on the ad. */
     headlines?: string[];
     /** Instant lead form for the ad. Only allowed when the ad group's conversion_location is an instant-form destination (instant_forms, instant_forms_and_messenger, website_and_instant_forms). Mutually exclusive with lead_form_id. */
@@ -25,9 +27,7 @@ export interface UpdateAdsRequest {
     messaging_config?: UpdateAdsRequest.MessagingConfig;
     /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */
     multi_advertiser_ads?: boolean;
-    /** Promote an existing post instead of uploading creatives — a Facebook post or Instagram media id. Mutually exclusive with creatives. Pair with post_source. */
-    post_id?: string;
-    /** Identifies the network that owns `post_id`. The source is inferred from the ID shape when omitted. */
+    /** Identifies the network that owns `existing_post_id`. The source is inferred from the ID shape when omitted. */
     post_source?: UpdateAdsRequest.PostSource;
     /** The primary text variants shown in the ad body. */
     primary_texts?: string[];
@@ -257,7 +257,7 @@ export namespace UpdateAdsRequest {
         message?: string | undefined;
     }
 
-    /** Identifies the network that owns `post_id`. The source is inferred from the ID shape when omitted. */
+    /** Identifies the network that owns `existing_post_id`. The source is inferred from the ID shape when omitted. */
     export const PostSource = {
         Facebook: "facebook",
         Instagram: "instagram",

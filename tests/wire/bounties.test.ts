@@ -37,6 +37,11 @@ describe("BountiesClient", () => {
                     funding_account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     gross_paid_out_amount: 0,
                     gross_reward_amount: 15,
+                    hosting_account: {
+                        id: "biz_xxxxxxxxxxxxxx",
+                        route: "biz_xxxxxxxxxxxxxx",
+                        title: "Shine Time Auto Detailing",
+                    },
                     id: "bnty_xxxxxxxxxxxxxx",
                     net_reward_amount: 10.5,
                     poster: {
@@ -221,7 +226,7 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "shine-time-auto-detailing",
+                route: "biz_xxxxxxxxxxxxxx",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
@@ -429,7 +434,7 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "shine-time-auto-detailing",
+                route: "biz_xxxxxxxxxxxxxx",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
@@ -559,7 +564,7 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "shine-time-auto-detailing",
+                route: "biz_xxxxxxxxxxxxxx",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
@@ -703,7 +708,7 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "shine-time-auto-detailing",
+                route: "biz_xxxxxxxxxxxxxx",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",

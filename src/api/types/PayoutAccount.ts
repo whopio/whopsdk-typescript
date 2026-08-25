@@ -20,7 +20,7 @@ export interface PayoutAccount {
     latest_verification: PayoutAccount.LatestVerification | null;
     /** The business representative's phone */
     phone: string | null;
-    /** The granular calculated status of the payout account reflecting its current KYC and withdrawal readiness state. */
+    /** The granular calculated status of the payout account reflecting its current KYC and payout readiness state. */
     status: Whop.PayoutAccountCalculatedStatuses | null;
 }
 

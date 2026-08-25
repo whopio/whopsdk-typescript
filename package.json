@@ -242,17 +242,6 @@
             },
             "default": "./dist/cjs/api/resources/checkoutConfigurations/exports.js"
         },
-        "./checkoutSessions": {
-            "import": {
-                "types": "./dist/esm/api/resources/checkoutSessions/exports.d.mts",
-                "default": "./dist/esm/api/resources/checkoutSessions/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/checkoutSessions/exports.d.ts",
-                "default": "./dist/cjs/api/resources/checkoutSessions/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/checkoutSessions/exports.js"
-        },
         "./companies": {
             "import": {
                 "types": "./dist/esm/api/resources/companies/exports.d.mts",
@@ -912,17 +901,6 @@
                 "default": "./dist/cjs/api/resources/webhooks/exports.js"
             },
             "default": "./dist/cjs/api/resources/webhooks/exports.js"
-        },
-        "./withdrawals": {
-            "import": {
-                "types": "./dist/esm/api/resources/withdrawals/exports.d.mts",
-                "default": "./dist/esm/api/resources/withdrawals/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/withdrawals/exports.d.ts",
-                "default": "./dist/cjs/api/resources/withdrawals/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/withdrawals/exports.js"
         },
         "./accounts/preferences": {
             "import": {

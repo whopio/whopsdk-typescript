@@ -48,19 +48,19 @@ export namespace ListSupportedMethodsResponse {
 
             export namespace Quotes {
                 export interface Item {
-                    /** The withdrawal amount the quote is for. */
+                    /** The payout amount the quote is for. */
                     amount: number;
                     /** Currency of the quoted amount. */
                     currency: string;
                     /** Currency the funds are delivered in. */
                     destination_currency: string;
-                    /** Exchange rate from the withdrawal currency to the destination currency. */
+                    /** Exchange rate from the payout currency to the destination currency. */
                     exchange_rate: number;
                     /** Instant-delivery estimate. Null if unsupported, unavailable for the account, or the amount does not cover the fee. */
                     instant: Item.Instant | null;
-                    /** Maximum withdrawal amount, in the withdrawal currency. */
+                    /** Maximum payout amount, in the payout currency. */
                     max_limit: number | null;
-                    /** Minimum withdrawal amount, in the withdrawal currency. */
+                    /** Minimum payout amount, in the payout currency. */
                     min_limit: number;
                     /** Standard-delivery estimate. Null if unsupported or the amount does not cover the fee. */
                     standard: Item.Standard | null;

@@ -43,7 +43,7 @@ export namespace ListMethodsResponse {
             object: Item.Object_;
             /** Display name of the payout rail, such as `ACH Bank Deposit`. */
             payer_name: string | null;
-            /** Fee and delivery estimate for withdrawing the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable. */
+            /** Fee and delivery estimate for paying out the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable. */
             quote: Item.Quote | null;
             /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */
             status: Item.Status;
@@ -84,7 +84,7 @@ export namespace ListMethodsResponse {
                 currency: string;
                 /** Fixed fee charged, denominated in `currency`. */
                 fixed_amount: number;
-                /** Percentage of the withdrawal amount charged as a fee. */
+                /** Percentage of the payout amount charged as a fee. */
                 percentage: number;
             }
 
@@ -94,20 +94,20 @@ export namespace ListMethodsResponse {
             export type Object_ = (typeof Object_)[keyof typeof Object_];
 
             /**
-             * Fee and delivery estimate for withdrawing the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable.
+             * Fee and delivery estimate for paying out the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable.
              */
             export interface Quote {
-                /** The withdrawal amount the quote is for. */
+                /** The payout amount the quote is for. */
                 amount: number;
                 /** Currency of the quoted amount. */
                 currency: string;
-                /** Exchange rate from the withdrawal currency to the destination currency. */
+                /** Exchange rate from the payout currency to the destination currency. */
                 exchange_rate: number;
                 /** Instant-delivery estimate. Null if the method does not support instant delivery, instant delivery is unavailable for the account, or the amount does not cover the fee. */
                 instant: Quote.Instant | null;
-                /** Maximum withdrawal amount for this method, in the withdrawal currency. */
+                /** Maximum payout amount for this method, in the payout currency. */
                 max_limit: number | null;
-                /** Minimum withdrawal amount for this method, in the withdrawal currency. */
+                /** Minimum payout amount for this method, in the payout currency. */
                 min_limit: number;
                 /** Standard-delivery estimate. Null if the method does not support standard delivery, or the amount does not cover the fee. */
                 standard: Quote.Standard | null;
@@ -118,9 +118,9 @@ export namespace ListMethodsResponse {
                  * Instant-delivery estimate. Null if the method does not support instant delivery, instant delivery is unavailable for the account, or the amount does not cover the fee.
                  */
                 export interface Instant {
-                    /** Total fee charged, in the withdrawal currency. */
+                    /** Total fee charged, in the payout currency. */
                     fee: number;
-                    /** Amount delivered after fees, in the withdrawal currency. */
+                    /** Amount delivered after fees, in the payout currency. */
                     total_received: number;
                 }
 
@@ -128,9 +128,9 @@ export namespace ListMethodsResponse {
                  * Standard-delivery estimate. Null if the method does not support standard delivery, or the amount does not cover the fee.
                  */
                 export interface Standard {
-                    /** Total fee charged, in the withdrawal currency. */
+                    /** Total fee charged, in the payout currency. */
                     fee: number;
-                    /** Amount delivered after fees, in the withdrawal currency. */
+                    /** Amount delivered after fees, in the payout currency. */
                     total_received: number;
                 }
             }

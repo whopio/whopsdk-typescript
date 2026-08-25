@@ -7,7 +7,7 @@ export interface LedgerActivity {
     account?: Whop.LedgerActivityAccount | undefined;
     /** Signed amount in the currency's smallest precision units. */
     amount: string;
-    /** ISO 8601 timestamp these funds became (or are scheduled to become) withdrawable: the posted time for already-settled funds, or 00:00:00 UTC on the scheduled release date for pending funds. Present only on inflows entering the balance (payments, top-ups, incoming transfers/affiliate); null on withdrawals, refunds, disputes and on-chain rows. The available_after/before filters window on its UTC settlement date. */
+    /** ISO 8601 timestamp these funds became (or are scheduled to become) withdrawable: the posted time for already-settled funds, or 00:00:00 UTC on the scheduled release date for pending funds. Present only on inflows entering the balance (payments, top-ups, incoming transfers/affiliate); null on payouts, refunds, disputes and on-chain rows. The available_after/before filters window on its UTC settlement date. */
     available_at: string | null;
     /** When the activity record was created. */
     created_at: string | null;
@@ -22,12 +22,28 @@ export interface LedgerActivity {
     object: LedgerActivity.Object_;
     /** Payment related to this ledger activity. Included when rich resource hydration is enabled and the movement is tied to a payment. */
     payment?: (LedgerActivity.Payment | null) | undefined;
+    /** Payment ID for any payment-related activity, including refunds and disputes. */
+    payment_id?: (string | null) | undefined;
+    /** ID of the plan associated with the payment, when applicable. */
+    plan_id?: (string | null) | undefined;
+    /** Name of the plan associated with the payment, when applicable. */
+    plan_name?: (string | null) | undefined;
     /** When the activity posted to the ledger. */
     posted_at: string;
+    /** ID of the product associated with the payment, when applicable. */
+    product_id?: (string | null) | undefined;
+    /** Name of the product associated with the payment, when applicable. */
+    product_name?: (string | null) | undefined;
     /** Resource associated with this ledger activity. */
     resource: LedgerActivity.Resource | null;
     /** Source of this ledger activity. */
     source: LedgerActivity.Source | null;
+    /** Email of the customer associated with the payment. Requires member:email:read. */
+    user_email?: (string | null) | undefined;
+    /** ID of the customer associated with the payment. */
+    user_id?: (string | null) | undefined;
+    /** Display name of the customer associated with the payment. */
+    user_name?: (string | null) | undefined;
 }
 
 export namespace LedgerActivity {
@@ -163,6 +179,12 @@ export namespace LedgerActivity {
         payment_method_type: string | null;
         /** Processor that handled the payment, such as `stripe`. */
         payment_processor: string | null;
+        /** Plan associated with the payment, when applicable. */
+        plan: Payment.Plan | null;
+        /** Product associated with the payment, when applicable. */
+        product: Payment.Product | null;
+        /** Customer associated with the payment. Email requires member:email:read. */
+        user: Payment.User | null;
     }
 
     export namespace Payment {
@@ -170,6 +192,38 @@ export namespace LedgerActivity {
             Payment: "payment",
         } as const;
         export type Object_ = (typeof Object_)[keyof typeof Object_];
+
+        /**
+         * Plan associated with the payment, when applicable.
+         */
+        export interface Plan {
+            /** Plan ID, prefixed `plan_`. */
+            id: string;
+            /** Plan name. */
+            name: string | null;
+        }
+
+        /**
+         * Product associated with the payment, when applicable.
+         */
+        export interface Product {
+            /** Product ID, prefixed `prod_`. */
+            id: string;
+            /** Product name. */
+            name: string;
+        }
+
+        /**
+         * Customer associated with the payment. Email requires member:email:read.
+         */
+        export interface User {
+            /** Customer email, or null without member:email:read. */
+            email: string | null;
+            /** Customer ID, prefixed `user_`. */
+            id: string;
+            /** Customer display name. */
+            name: string;
+        }
     }
 
     /**
@@ -267,7 +321,7 @@ export namespace LedgerActivity {
      * Source of this ledger activity.
      */
     export interface Source {
-        /** Withdrawal amount as a decimal number in the destination currency (withdrawal sources only; requires payout:withdrawal:read). */
+        /** Payout amount as a decimal number in the destination currency (payout sources only; requires payout:withdrawal:read). */
         amount_float?: (number | null) | undefined;
         /** Card brand used by the payment source. */
         card_brand?: (string | null) | undefined;
@@ -275,9 +329,9 @@ export namespace LedgerActivity {
         chain?: (string | null) | undefined;
         /** Public claim URL for the airdrop link (airdrop_link sources only). */
         claim_url?: (string | null) | undefined;
-        /** Withdrawal creation time as an ISO 8601 timestamp (withdrawal sources only; requires payout:withdrawal:read). */
+        /** Payout creation time as an ISO 8601 timestamp (payout sources only; requires payout:withdrawal:read). */
         created_at?: (string | null) | undefined;
-        /** Estimated arrival as an ISO 8601 timestamp (withdrawal sources only; requires payout:withdrawal:read). */
+        /** Estimated arrival as an ISO 8601 timestamp (payout sources only; requires payout:withdrawal:read). */
         estimated_arrival?: (string | null) | undefined;
         /** Amount converted out of from_currency as a decimal string (swap sources only). */
         from_amount?: (string | null) | undefined;
@@ -285,7 +339,7 @@ export namespace LedgerActivity {
         from_currency?: (string | null) | undefined;
         id: string;
         object: string;
-        /** Name of the entity processing the payout (withdrawal sources only; requires payout:withdrawal:read). */
+        /** Name of the entity processing the payout (payout sources only; requires payout:withdrawal:read). */
         payer_name?: (string | null) | undefined;
         /** Total charged by the payment source. */
         payment_amount?: (Whop.Money | null) | undefined;
@@ -293,15 +347,17 @@ export namespace LedgerActivity {
         payment_method_type?: (string | null) | undefined;
         /** Processor used by the payment source. */
         payment_processor?: (string | null) | undefined;
-        /** Payout destination display info (withdrawal sources only). */
+        /** Payout destination display info (payout sources only). */
         payout_destination?: (Source.PayoutDestination | null) | undefined;
-        /** Saved payout destination nickname (withdrawal sources only). */
+        /** Saved payout destination nickname (payout sources only). */
         payout_token_nickname?: (string | null) | undefined;
-        /** Why the activity happened. On transfer sources this is the transfer reason, for example pool_top_up or bounty_return. On withdrawal sources it explains why the withdrawal was canceled, denied, or failed (requires payout:withdrawal:read); null while the withdrawal is progressing normally. */
+        /** Why the activity happened. On transfer sources this is the transfer reason, for example pool_top_up or bounty_return. On payout sources it explains why the payout was canceled, denied, or failed (requires payout:withdrawal:read); null while the payout is progressing normally. */
         reason?: (string | null) | undefined;
+        /** Whether this payout is currently held for manual risk review (payout sources only; requires payout:withdrawal:read). */
+        risk_review_hold?: (boolean | null) | undefined;
         /** Sender wallet address or onramp provider identifier (onchain_transaction sources only). */
         sender_address?: (string | null) | undefined;
-        /** Lifecycle status. On withdrawal sources this is the withdrawal status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated). */
+        /** Lifecycle status. On payout sources this is the payout status (requires payout:withdrawal:read); on airdrop_link sources it is the claim-link status (ungated); on payment and top-up sources it is the friendly payment status such as succeeded/pending/failed (ungated). */
         status?: (string | null) | undefined;
         /** Amount received in to_currency as a decimal string (swap sources only). */
         to_amount?: (string | null) | undefined;
@@ -315,7 +371,7 @@ export namespace LedgerActivity {
 
     export namespace Source {
         /**
-         * Payout destination display info (withdrawal sources only).
+         * Payout destination display info (payout sources only).
          */
         export interface PayoutDestination {
             icon_url?: (string | null) | undefined;

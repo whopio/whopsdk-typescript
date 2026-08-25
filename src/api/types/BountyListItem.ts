@@ -39,6 +39,8 @@ export interface BountyListItem {
     gross_paid_out_amount: number;
     /** Gross bounty-pool amount allocated per accepted submission, in whole currency units. */
     gross_reward_amount: number;
+    /** Account hosting the bounty's forum — the one whose `route` and `experience_id` address its discussion thread, and where its submissions dashboard lives. `null` for a platform-wide bounty with no host. May differ from `funding_account`. */
+    hosting_account: Whop.StorefrontAccount | null;
     /** Bounty ID, prefixed `bnty_`. */
     id: string;
     /** What a worker is quoted per accepted submission after the platform fee, in whole currency units. The exact post-fee figure, at the standard platform fee rate — a worker who locked a different rate, or who arrived through an affiliate link, is paid a different amount. */

@@ -11,6 +11,8 @@ export interface PaymentBankTransfer {
     amount?: Whop.Money | undefined;
     /** The kind of account receiving the transfer, such as a checking account, in the local system's own vocabulary. */
     bank_account_type?: string | undefined;
+    /** The receiving bank's address. */
+    bank_address?: string | undefined;
     /** The receiving branch, where the local system routes by branch. */
     bank_branch?: string | undefined;
     /** The receiving bank's code in the local clearing system. */
@@ -31,6 +33,8 @@ export interface PaymentBankTransfer {
     instructions?: string | undefined;
     /** The reference the buyer must attach to the transfer so it can be matched to this payment. */
     reference?: string | undefined;
+    /** The receiving bank's routing number for US transfers. */
+    routing_number?: string | undefined;
     /** A second account number, where the rail publishes the same destination in more than one format. */
     secondary_account_number?: string | undefined;
     /** What to call `secondary_account_number` when showing it. */

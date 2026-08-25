@@ -16,6 +16,6 @@ export interface UserBalance {
     pending_usd: string;
     /** The user's personal balance in USD: cash (available + pending + in-transit + reserve) + crypto + in-flight treasury deposits. Excludes account balances (see businesses_total_usd). */
     total_usd: string;
-    /** Balance-to-wallet USDT0 withdrawals still in flight, in USD. */
+    /** Balance-to-wallet USDT0 payouts still in flight, in USD. */
     treasury_pending_usd: string;
 }

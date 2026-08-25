@@ -490,4 +490,174 @@ describe("PayoutsClient", () => {
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
+
+    test("cancel (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            amount: "500.0",
+            created_at: "2026-07-29T18:22:00Z",
+            currency: "usd",
+            destination_amount: "461.7",
+            destination_currency: "eur",
+            estimated_arrival: "2026-08-03T00:00:00Z",
+            exchange_rate: 0.9234,
+            failure: {
+                code: "beneficiary_name_mismatch",
+                funds_returned_at: "2024-01-15T09:30:00Z",
+                message: "Canceled by the account owner",
+            },
+            fee_amount: "0.25",
+            fee_paid_by: "self",
+            id: "wdrl_xxxxxxxxxxxxx",
+            markup_fee: "0.0",
+            metadata: { batch_id: "2026-08-18" },
+            net_amount: "49.75",
+            notes: "Detailing supplies restock",
+            object: "payout",
+            payer_name: "ACH Bank Deposit",
+            payout_method: {
+                nickname: "Business checking",
+                supported_payout_method: {
+                    delivery_type: "cash_pickup",
+                    icon_url: "https://cdn.whop.com/payouts/ach.png",
+                    payer_name: "ACH Bank Deposit",
+                },
+            },
+            payout_request_id: "cofr_xxxxxxxxxxxxx",
+            source: "api",
+            speed: "standard",
+            status: "requested",
+            status_detail: "awaiting_provider_acceptance",
+            trace_code: "021000021234567",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/id/cancel")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payouts.cancel({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("cancel (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/id/cancel")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("cancel (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/id/cancel")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("cancel (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/id/cancel")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("cancel (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/id/cancel")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
 });

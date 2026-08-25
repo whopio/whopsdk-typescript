@@ -13,7 +13,7 @@ export interface ListMethodsRequest {
     user_id?: string;
     /** Optional status filter. `created` means saved but unused, `active` means a payout through it succeeded, `broken` means the last payout failed and the method needs fixing. */
     status?: Whop.payouts.ListMethodsRequestStatus;
-    /** Optional withdrawal amount in whole currency units, for example `250.00`. When provided, each method includes a quote with the estimated fee, amount received, and delivery date for that amount. */
+    /** Optional payout amount in whole currency units, for example `250.00`. When provided, each method includes a quote with the estimated fee, amount received, and delivery date for that amount. */
     amount?: number;
     /** Currency code of the amount, for example `usd`. Only meaningful with amount or include_limits. */
     currency?: string;

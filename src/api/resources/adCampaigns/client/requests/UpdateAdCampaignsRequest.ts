@@ -11,10 +11,12 @@ export interface UpdateAdCampaignsRequest {
     id: string;
     /** How delivery bids in the ad auction: `minimum_cost` gets the most results for the budget, `average_target` holds an average cost per result, `maximum_target` never bids above a cap. Switching to `minimum_cost` clears the cap amounts stored on the campaign's ad groups. Only for campaigns that own the budget. */
     bid_type?: UpdateAdCampaignsRequest.BidType;
-    /** The campaign budget, in the account's currency. Interpreted as daily or lifetime per the campaign's existing budget type. */
+    /** The campaign budget, in the account's currency. Interpreted as daily or lifetime per the campaign's budget type, including a budget_type sent in the same request. */
     budget_amount?: number;
     /** Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group individually (`ad_group`). Only changeable before the campaign is live on the ad network; switching to `ad_campaign` requires budget_amount in the same request, and switching to `ad_group` clears the campaign budget. */
     budget_optimization?: UpdateAdCampaignsRequest.BudgetOptimization;
+    /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). Only changeable while the campaign is a draft; send budget_amount in the same request so the amount lands on the new type. */
+    budget_type?: UpdateAdCampaignsRequest.BudgetType;
     /** When the campaign stops delivering, as an ISO 8601 timestamp. Only for campaigns that own the budget. */
     ends_at?: string;
     /** Regulated categories the campaign falls under. Editable on any campaign, draft or launched; pass an empty array to clear. */
@@ -41,6 +43,12 @@ export namespace UpdateAdCampaignsRequest {
         AdGroup: "ad_group",
     } as const;
     export type BudgetOptimization = (typeof BudgetOptimization)[keyof typeof BudgetOptimization];
+    /** Whether `budget_amount` is spent per day (`daily`) or over the campaign's full run (`lifetime`). Only changeable while the campaign is a draft; send budget_amount in the same request so the amount lands on the new type. */
+    export const BudgetType = {
+        Daily: "daily",
+        Lifetime: "lifetime",
+    } as const;
+    export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
     export type SpecialAdCategories = SpecialAdCategories.Item[];
 
     export namespace SpecialAdCategories {
