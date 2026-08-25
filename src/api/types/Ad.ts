@@ -61,6 +61,8 @@ export interface Ad {
     /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: Ad.DeliveryStatus;
     descriptions: string[];
+    /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
+    existing_post_id: string | null;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
     headlines: string[];
@@ -81,11 +83,11 @@ export interface Ad {
     messaging_config?: (Whop.AdMessagingConfig | null) | undefined;
     /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */
     multi_advertiser_ads?: boolean | undefined;
-    /** The existing post this ad promotes — a Facebook post or Instagram media ID. `null` when the ad uses uploaded creatives. */
+    /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
     post_id: string | null;
-    /** Identifies the network that owns `post_id`; `null` when the ad uses uploaded creatives. */
+    /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
     post_source: Ad.PostSource | null;
-    /** Preview image of the existing post this ad promotes. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
+    /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
     post_thumbnail_url: string | null;
     primary_texts: string[];
     /** USD value of pixel-attributed purchases. */
@@ -187,7 +189,7 @@ export namespace Ad {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
-    /** Identifies the network that owns `post_id`; `null` when the ad uses uploaded creatives. */
+    /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
     export const PostSource = {
         Facebook: "facebook",
         Instagram: "instagram",

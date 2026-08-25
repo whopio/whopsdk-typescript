@@ -20,7 +20,6 @@ import { CardsClient } from "./api/resources/cards/client/Client.js";
 import { CardTransactionsClient } from "./api/resources/cardTransactions/client/Client.js";
 import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.js";
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
-import { CheckoutSessionsClient } from "./api/resources/checkoutSessions/client/Client.js";
 import { CompaniesClient } from "./api/resources/companies/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
 import { CourseChaptersClient } from "./api/resources/courseChapters/client/Client.js";
@@ -81,7 +80,6 @@ import { TransfersClient } from "./api/resources/transfers/client/Client.js";
 import { UsersClient } from "./api/resources/users/client/Client.js";
 import { VerificationsClient } from "./api/resources/verifications/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
-import { WithdrawalsClient } from "./api/resources/withdrawals/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
@@ -114,7 +112,6 @@ export class WhopClient {
     protected _cards: CardsClient | undefined;
     protected _chatChannels: ChatChannelsClient | undefined;
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
-    protected _checkoutSessions: CheckoutSessionsClient | undefined;
     protected _companies: CompaniesClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
     protected _courseChapters: CourseChaptersClient | undefined;
@@ -175,7 +172,6 @@ export class WhopClient {
     protected _users: UsersClient | undefined;
     protected _verifications: VerificationsClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
-    protected _withdrawals: WithdrawalsClient | undefined;
 
     constructor(options: WhopClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -259,10 +255,6 @@ export class WhopClient {
 
     public get checkoutConfigurations(): CheckoutConfigurationsClient {
         return (this._checkoutConfigurations ??= new CheckoutConfigurationsClient(this._options));
-    }
-
-    public get checkoutSessions(): CheckoutSessionsClient {
-        return (this._checkoutSessions ??= new CheckoutSessionsClient(this._options));
     }
 
     public get companies(): CompaniesClient {
@@ -503,10 +495,6 @@ export class WhopClient {
 
     public get webhooks(): WebhooksClient {
         return (this._webhooks ??= new WebhooksClient(this._options));
-    }
-
-    public get withdrawals(): WithdrawalsClient {
-        return (this._withdrawals ??= new WithdrawalsClient(this._options));
     }
 
     /**

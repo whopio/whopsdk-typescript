@@ -24,7 +24,7 @@ export class MethodsClient {
     }
 
     /**
-     * Lists the bank accounts, wallets, and crypto addresses an account or user can withdraw to, newest first.
+     * Lists the bank accounts, wallets, and crypto addresses an account or user can pay out to, newest first.
      *
      * @param {Whop.payouts.ListMethodsRequest} request
      * @param {MethodsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -77,7 +77,7 @@ export class MethodsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -144,7 +144,7 @@ export class MethodsClient {
     }
 
     /**
-     * Saves a new place an account or user can withdraw to. Sensitive details are vaulted in transit and never stored raw.
+     * Saves a new place an account or user can pay out to. Sensitive details are vaulted in transit and never stored raw.
      *
      * @param {Whop.payouts.CreateMethodsRequest} request
      * @param {MethodsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -178,7 +178,7 @@ export class MethodsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -264,7 +264,7 @@ export class MethodsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -345,7 +345,7 @@ export class MethodsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-21-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

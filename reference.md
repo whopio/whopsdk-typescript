@@ -914,7 +914,7 @@ await client.adCampaigns.delete({
 <dl>
 <dd>
 
-Updates an ad campaign's editable fields (title, budget, schedule, bid strategy, special ad categories, and, before launch, budget optimization), and launches a draft campaign by setting status to active. Objective, budget type and desired cost per result are fixed at creation and cannot be changed.
+Updates an ad campaign's editable fields (title, budget, schedule, bid strategy, special ad categories, and, before launch, budget type and budget optimization), and launches a draft campaign by setting status to active. Objective and desired cost per result are fixed at creation and cannot be changed.
 </dd>
 </dl>
 </dd>
@@ -6799,70 +6799,6 @@ await client.checkoutConfigurations.delete({
 </dl>
 </details>
 
-## Checkout Sessions
-<details><summary><code>client.checkoutSessions.<a href="/src/api/resources/checkoutSessions/client/Client.ts">create</a>({ ...params }) -> Whop.CheckoutSession</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Opens a checkout session. No credentials required. Pass exactly one of `items`, `checkout_configuration`, or `link`. The response includes `client_secret` once; later calls authenticate with it.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.checkoutSessions.create();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateCheckoutSessionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CheckoutSessionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Companies
 <details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.CompanyListItem, Whop.ListCompaniesResponse&gt;</code></summary>
 <dl>
@@ -12108,6 +12044,85 @@ await client.feeMarkups.delete({
 </details>
 
 ## Files
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.File_, Whop.ListFilesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the files with the given IDs, newest first — fetch a batch in one request instead of retrieving each file individually. Only files you created are returned; IDs that do not exist, or that another credential created, are omitted. A request for up to 100 IDs answers in a single page by default; a larger batch pages at up to 100 files per response — follow `page_info` with the same `file_ids` to walk the rest.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.files.list({
+    file_ids: ["file_xxxxxxxxxxxxx"]
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.files.list({
+    file_ids: ["file_xxxxxxxxxxxxx"]
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListFilesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">create</a>({ ...params }) -> Whop.File_</code></summary>
 <dl>
 <dd>
@@ -17961,6 +17976,71 @@ await client.payouts.retrieve({
 <dd>
 
 **request:** `Whop.RetrievePayoutsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PayoutsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payouts.<a href="/src/api/resources/payouts/client/Client.ts">cancel</a>({ ...params }) -> Whop.CancelPayoutsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Cancels a payout that is still in review and returns the funds, fees included, to the balance. A payout can be canceled while its status is `in_review`. A `requested` payout is still being prepared (its funds may be converting) and answers 409 until it reaches review; from `processing` on, the money is on its way and the answer is 409 with error type `not_cancelable`. Canceling a payout that is already canceled succeeds and returns it unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payouts.cancel({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CancelPayoutsRequest` 
     
 </dd>
 </dl>
@@ -25147,305 +25227,6 @@ const response = page.response;
 </dl>
 </details>
 
-## Withdrawals
-<details><summary><code>client.withdrawals.<a href="/src/api/resources/withdrawals/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.WithdrawalListItem, Whop.ListWithdrawalsResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a paginated list of withdrawals for a company, with optional sorting and date filtering.
-
-Required permissions:
- - `payout:withdrawal:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.withdrawals.list({
-    first: 42,
-    last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.withdrawals.list({
-    first: 42,
-    last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.ListWithdrawalsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WithdrawalsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.withdrawals.<a href="/src/api/resources/withdrawals/client/Client.ts">create</a>({ ...params }) -> Whop.Withdrawal</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Creates a withdrawal request for a ledger account
-
-Required permissions:
- - `payout:withdraw_funds`
- - `payout:destination:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.withdrawals.create({
-    amount: 6.9,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    currency: "usd"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateWithdrawalsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WithdrawalsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.withdrawals.<a href="/src/api/resources/withdrawals/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Withdrawal</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieves the details of an existing withdrawal.
-
-Required permissions:
- - `payout:withdrawal:read`
- - `payout:destination:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.withdrawals.retrieve({
-    id: "wdrl_xxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.RetrieveWithdrawalsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WithdrawalsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.withdrawals.<a href="/src/api/resources/withdrawals/client/Client.ts">generatePdf</a>({ ...params }) -> Whop.GeneratePdfWithdrawalsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Generates a withdrawal PDF invoice and returns a temporary download URL.
-
-Required permissions:
- - `payout:withdrawal:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.withdrawals.generatePdf({
-    id: "wdrl_xxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.GeneratePdfWithdrawalsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WithdrawalsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Accounts Preferences
 <details><summary><code>client.accounts.preferences.<a href="/src/api/resources/accounts/resources/preferences/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePreferencesResponse</code></summary>
 <dl>
@@ -26547,7 +26328,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Lists the bank accounts, wallets, and crypto addresses an account or user can withdraw to, newest first.
+Lists the bank accounts, wallets, and crypto addresses an account or user can pay out to, newest first.
 </dd>
 </dl>
 </dd>
@@ -26622,7 +26403,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Saves a new place an account or user can withdraw to. Sensitive details are vaulted in transit and never stored raw.
+Saves a new place an account or user can pay out to. Sensitive details are vaulted in transit and never stored raw.
 </dd>
 </dl>
 </dd>

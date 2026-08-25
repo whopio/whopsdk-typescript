@@ -5,6 +5,106 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("FilesClient", () => {
+    test("list (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    content_type: "application/pdf",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    filename: "evidence.pdf",
+                    id: "file_xxxxxxxxxxxxxx",
+                    multipart_chunk_size: 5242880,
+                    multipart_upload_id: "upload-id",
+                    multipart_upload_urls: [
+                        {
+                            part_number: 1,
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                        },
+                    ],
+                    object: "file",
+                    size: 9670,
+                    upload_headers: { key: "value" },
+                    upload_status: "pending",
+                    upload_url:
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    visibility: "public",
+                },
+            ],
+            page_info: {
+                end_cursor: "WyJjdXJzb3IiLDFd",
+                has_next_page: false,
+                has_previous_page: true,
+                start_cursor: "WyJjdXJzb3IiLDFd",
+            },
+        };
+
+        server
+            .mockEndpoint({ once: false })
+            .get("/files")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = rawResponseBody;
+        const page = await client.files.list({
+            file_ids: ["file_xxxxxxxxxxxxx"],
+        });
+
+        expect(expected.data).toEqual(page.data);
+        expect(page.hasNextPage()).toBe(true);
+        const nextPage = await page.getNextPage();
+        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/files").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.files.list();
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("list (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/files").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.files.list();
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
