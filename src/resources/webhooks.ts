@@ -11,7 +11,6 @@ import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import * as SetupIntentsAPI from './setup-intents';
 import * as Shared from './shared';
 import * as VerificationsAPI from './verifications';
-import * as WithdrawalsAPI from './withdrawals';
 import { Webhook as Webhook_ } from 'standardwebhooks';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
@@ -243,6 +242,9 @@ export type WebhookEvent =
   | 'withdrawal.created'
   | 'withdrawal.updated'
   | 'withdrawal.reversed'
+  | 'payout.created'
+  | 'payout.updated'
+  | 'payout.reversed'
   | 'card_transaction.created'
   | 'card_transaction.updated'
   | 'card_transaction.completed'
@@ -1435,138 +1437,6 @@ export namespace LedgerAccountFundsAvailableWebhookEvent {
       total_withdrawable_balance: number;
     }
   }
-}
-
-export interface WithdrawalCreatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * The dated API version (Api-Version-Date) the payload is serialized to
-   */
-  api_version_date: string | null;
-
-  /**
-   * A withdrawal represents a request to transfer funds from a ledger account to an
-   * external payout method.
-   */
-  data: WithdrawalsAPI.Withdrawal;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'withdrawal.created';
-
-  /**
-   * The account ID that this webhook event is associated with
-   */
-  account_id?: string | null;
-
-  /**
-   * For some `.updated` events, the old values of the payload fields that changed,
-   * keyed by field name. Omitted when no capture is available for the event
-   */
-  previous_attributes?: unknown;
-}
-
-export interface WithdrawalUpdatedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * The dated API version (Api-Version-Date) the payload is serialized to
-   */
-  api_version_date: string | null;
-
-  /**
-   * A withdrawal represents a request to transfer funds from a ledger account to an
-   * external payout method.
-   */
-  data: WithdrawalsAPI.Withdrawal;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'withdrawal.updated';
-
-  /**
-   * The account ID that this webhook event is associated with
-   */
-  account_id?: string | null;
-
-  /**
-   * For some `.updated` events, the old values of the payload fields that changed,
-   * keyed by field name. Omitted when no capture is available for the event
-   */
-  previous_attributes?: unknown;
-}
-
-export interface WithdrawalReversedWebhookEvent {
-  /**
-   * A unique ID for every single webhook request
-   */
-  id: string;
-
-  /**
-   * The API version for this webhook
-   */
-  api_version: 'v1';
-
-  /**
-   * The dated API version (Api-Version-Date) the payload is serialized to
-   */
-  api_version_date: string | null;
-
-  /**
-   * A withdrawal represents a request to transfer funds from a ledger account to an
-   * external payout method.
-   */
-  data: WithdrawalsAPI.Withdrawal;
-
-  /**
-   * The timestamp in ISO 8601 format that the webhook was sent at on the server
-   */
-  timestamp: string;
-
-  /**
-   * The webhook event type
-   */
-  type: 'withdrawal.reversed';
-
-  /**
-   * The account ID that this webhook event is associated with
-   */
-  account_id?: string | null;
-
-  /**
-   * For some `.updated` events, the old values of the payload fields that changed,
-   * keyed by field name. Omitted when no capture is available for the event
-   */
-  previous_attributes?: unknown;
 }
 
 export interface CardTransactionCreatedWebhookEvent {
@@ -5456,9 +5326,6 @@ export type UnwrapWebhookEvent =
   | SetupIntentSucceededWebhookEvent
   | SetupIntentCanceledWebhookEvent
   | LedgerAccountFundsAvailableWebhookEvent
-  | WithdrawalCreatedWebhookEvent
-  | WithdrawalUpdatedWebhookEvent
-  | WithdrawalReversedWebhookEvent
   | CardTransactionCreatedWebhookEvent
   | CardTransactionUpdatedWebhookEvent
   | CardTransactionCompletedWebhookEvent
@@ -5622,9 +5489,6 @@ export declare namespace Webhooks {
     type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
     type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
     type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
-    type WithdrawalCreatedWebhookEvent as WithdrawalCreatedWebhookEvent,
-    type WithdrawalUpdatedWebhookEvent as WithdrawalUpdatedWebhookEvent,
-    type WithdrawalReversedWebhookEvent as WithdrawalReversedWebhookEvent,
     type CardTransactionCreatedWebhookEvent as CardTransactionCreatedWebhookEvent,
     type CardTransactionUpdatedWebhookEvent as CardTransactionUpdatedWebhookEvent,
     type CardTransactionCompletedWebhookEvent as CardTransactionCompletedWebhookEvent,
