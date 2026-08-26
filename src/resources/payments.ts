@@ -282,6 +282,10 @@ export type CardBrands =
   | 'jcblankapay'
   | 'cmi'
   | 'aura'
+  | 'accel'
+  | 'nyce'
+  | 'pulse'
+  | 'star'
   | 'unknown';
 
 /**
