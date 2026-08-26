@@ -1307,7 +1307,7 @@ export namespace LedgerAccountFundsAvailableWebhookEvent {
       phone: string | null;
 
       /**
-       * The granular calculated statuses reflecting payout account KYC and withdrawal
+       * The granular calculated statuses reflecting payout account KYC and payout
        * readiness.
        */
       status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;
@@ -2560,7 +2560,7 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
     phone: string | null;
 
     /**
-     * The granular calculated statuses reflecting payout account KYC and withdrawal
+     * The granular calculated statuses reflecting payout account KYC and payout
      * readiness.
      */
     status: PayoutAccountsAPI.PayoutAccountCalculatedStatuses | null;

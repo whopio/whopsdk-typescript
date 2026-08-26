@@ -19,14 +19,7 @@ export class Withdrawals extends APIResource {
    * - `payout:withdraw_funds`
    * - `payout:destination:read`
    *
-   * @example
-   * ```ts
-   * const withdrawal = await client.withdrawals.create({
-   *   amount: 6.9,
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   currency: 'usd',
-   * });
-   * ```
+   * @deprecated
    */
   create(body: WithdrawalCreateParams, options?: RequestOptions): APIPromise<Withdrawal> {
     return this._client.post('/withdrawals', { body, ...options });
@@ -40,12 +33,7 @@ export class Withdrawals extends APIResource {
    * - `payout:withdrawal:read`
    * - `payout:destination:read`
    *
-   * @example
-   * ```ts
-   * const withdrawal = await client.withdrawals.retrieve(
-   *   'wdrl_xxxxxxxxxxxxx',
-   * );
-   * ```
+   * @deprecated
    */
   retrieve(id: string, options?: RequestOptions): APIPromise<Withdrawal> {
     return this._client.get(path`/withdrawals/${id}`, options);
@@ -59,15 +47,7 @@ export class Withdrawals extends APIResource {
    *
    * - `payout:withdrawal:read`
    *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const withdrawalListResponse of client.withdrawals.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
-   * )) {
-   *   // ...
-   * }
-   * ```
+   * @deprecated
    */
   list(
     query: WithdrawalListParams,

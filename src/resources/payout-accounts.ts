@@ -23,7 +23,7 @@ export class PayoutAccounts extends APIResource {
 }
 
 /**
- * The granular calculated statuses reflecting payout account KYC and withdrawal
+ * The granular calculated statuses reflecting payout account KYC and payout
  * readiness.
  */
 export type PayoutAccountCalculatedStatuses =
@@ -77,7 +77,7 @@ export interface PayoutAccountRetrieveResponse {
   phone: string | null;
 
   /**
-   * The granular calculated statuses reflecting payout account KYC and withdrawal
+   * The granular calculated statuses reflecting payout account KYC and payout
    * readiness.
    */
   status: PayoutAccountCalculatedStatuses | null;
