@@ -283,6 +283,7 @@ export type CardBrands =
   | 'cmi'
   | 'aura'
   | 'accel'
+  | 'culiance'
   | 'nyce'
   | 'pulse'
   | 'star'
