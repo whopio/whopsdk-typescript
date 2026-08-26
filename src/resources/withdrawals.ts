@@ -113,6 +113,7 @@ export interface Withdrawal {
     | 'technical_problem'
     | 'provider_temporarily_unavailable'
     | 'provider_validation_failed'
+    | 'quote_below_confirmed_amount'
     | 'identification_number_invalid'
     | 'invalid_account_number'
     | 'invalid_bank_code'
