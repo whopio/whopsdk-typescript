@@ -3,6 +3,7 @@
 /** The friendly status of a payment. This is a derived status that provides a human-readable summary of the payment state, combining the underlying status and substatus fields. */
 export const FriendlyReceiptStatus = {
     Succeeded: "succeeded",
+    RequiresCapture: "requires_capture",
     Pending: "pending",
     Failed: "failed",
     PastDue: "past_due",

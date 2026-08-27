@@ -20,7 +20,7 @@ export interface AccountRecommendedActionOutcome {
     payment_at: string | null;
     /** The first `payment.completed` on that business after the chain, prefixed `pay_`, or `null` if none landed within 30 days. */
     payment_id: string | null;
-    /** Why the generator proposed this chain, or `null` for seeded chains */
+    /** Why this chain was recommended, or `null` when unavailable */
     reasoning: Record<string, unknown> | null;
     /** Headline for the chain */
     title: string;

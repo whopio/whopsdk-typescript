@@ -42,6 +42,11 @@ export const CardBrands = {
     Jcblankapay: "jcblankapay",
     Cmi: "cmi",
     Aura: "aura",
+    Accel: "accel",
+    Culiance: "culiance",
+    Nyce: "nyce",
+    Pulse: "pulse",
+    Star: "star",
     Unknown: "unknown",
 } as const;
 export type CardBrands = (typeof CardBrands)[keyof typeof CardBrands];

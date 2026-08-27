@@ -19,7 +19,7 @@ export interface CreateAppsRequest {
     name: string;
     /** The whitelisted OAuth callback URLs that users are redirected to after authorizing the app. */
     redirect_uris?: string[];
-    /** The subdomain route where the app's hosted web builds are served, such as `myapp` for myapp.whop.app. */
+    /** The subdomain route where the app's hosted web builds are served, such as `myapp` for myapp.whop.site. */
     route?: string | null;
 }
 

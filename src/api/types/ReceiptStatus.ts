@@ -4,6 +4,7 @@
 export const ReceiptStatus = {
     Draft: "draft",
     Open: "open",
+    Authorized: "authorized",
     Paid: "paid",
     Pending: "pending",
     Uncollectible: "uncollectible",

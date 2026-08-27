@@ -1097,6 +1097,157 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.InternalServerError);
     });
 
+    test("capture (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            capture_expires_at: "2026-01-01T12:00:00.000Z",
+            id: "pay_xxxxxxxxxxxxxx",
+            last_payment_error: {
+                code: "processing_error",
+                decline_code: "insufficient_funds",
+                message: "Your card was declined.",
+            },
+            next_action: {
+                type: "await_confirmation",
+                data: { expires_at: "2026-01-01T12:00:00.000Z" },
+                render: ["inline"],
+            },
+            object: "payment_status",
+            processing_details: { expected_by: "2026-01-01T12:00:00.000Z" },
+            return_url: "https://shinetime.example/checkout/done",
+            status: "requires_confirmation",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/capture")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payments.capture({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("capture (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/capture")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.capture({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("capture (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/capture")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.capture({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("capture (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/capture")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.capture({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("capture (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/payments/id/capture")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.capture({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("listFees (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -2411,6 +2562,7 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = { return_url: "https://shinetime.example/checkout/thanks" };
         const rawResponseBody = {
+            capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {
                 code: "processing_error",
@@ -2513,6 +2665,7 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
+            capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {
                 code: "processing_error",

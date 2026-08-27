@@ -33,6 +33,7 @@ export * from "./AccountStorePageConfig.js";
 export * from "./AccountSummary.js";
 export * from "./AccountTaxIdentifier.js";
 export * from "./AccountWallet.js";
+export * from "./AccountWithdrawalScheduleControl.js";
 export * from "./Ad.js";
 export * from "./AdCampaign.js";
 export * from "./AdCreative.js";

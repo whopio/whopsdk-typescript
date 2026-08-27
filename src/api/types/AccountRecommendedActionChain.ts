@@ -8,7 +8,7 @@ export interface AccountRecommendedActionChain {
     description: string;
     /** Chain ID — `rac_seed_<chain>_<nonce>` for seeded chains, `rac_chain_*` for generated ones */
     id: string;
-    /** Why the generator proposed this chain, or `null` for seeded chains */
+    /** Why this chain was recommended, or `null` when unavailable */
     reasoning: Record<string, unknown> | null;
     /** Headline for the chain */
     title: string;

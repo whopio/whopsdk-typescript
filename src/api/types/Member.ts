@@ -15,6 +15,8 @@ export interface Member {
     joined_at: string;
     /** When the member last opened the account's content, as an ISO 8601 timestamp. `null` if they never have. */
     last_accessed_at: string | null;
+    /** The member's phone number, or `null`. Their account number when they have shared one with this seller; otherwise the most recent number collected (or verified) at checkout. */
+    phone_number: string | null;
     /** `joined` while the member is part of the account, `left` after they leave. */
     status: Member.Status;
     /** The user behind this member. `null` when the buyer is another business rather than a person. */

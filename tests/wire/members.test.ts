@@ -24,6 +24,7 @@ describe("MembersClient", () => {
                     id: "mber_xxxxxxxxxxxxxx",
                     joined_at: "2026-01-01T12:00:00.000Z",
                     last_accessed_at: "2026-01-01T12:00:00.000Z",
+                    phone_number: "+xxxxxxxxxxx",
                     status: "joined",
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
@@ -132,6 +133,7 @@ describe("MembersClient", () => {
             id: "mber_xxxxxxxxxxxxxx",
             joined_at: "2026-01-01T12:00:00.000Z",
             last_accessed_at: "2026-01-01T12:00:00.000Z",
+            phone_number: "+xxxxxxxxxxx",
             status: "joined",
             user: {
                 id: "user_xxxxxxxxxxxxxx",

@@ -3,5 +3,6 @@
 export const ListBusinessesRequestTier = {
     First: "first",
     Second: "second",
+    Blueprint: "blueprint",
 } as const;
 export type ListBusinessesRequestTier = (typeof ListBusinessesRequestTier)[keyof typeof ListBusinessesRequestTier];

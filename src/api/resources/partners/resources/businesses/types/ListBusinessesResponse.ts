@@ -19,7 +19,7 @@ export namespace ListBusinessesResponse {
             first_tier_partner: Item.FirstTierPartner | null;
             /** Partner business ID. */
             id: string;
-            /** Which tier the caller earns on for this business: `first` (they referred the owner) or `second` (they referred the first-tier partner). */
+            /** Which tier the caller earns on for this business: `first` (they referred the owner), `second` (they referred the first-tier partner), or `blueprint` (the business deployed a site from their blueprint). */
             my_partner_tier: Item.MyPartnerTier;
             object: Item.Object_;
             /** The owner of the referred business. */
@@ -85,10 +85,11 @@ export namespace ListBusinessesResponse {
                 }
             }
 
-            /** Which tier the caller earns on for this business: `first` (they referred the owner) or `second` (they referred the first-tier partner). */
+            /** Which tier the caller earns on for this business: `first` (they referred the owner), `second` (they referred the first-tier partner), or `blueprint` (the business deployed a site from their blueprint). */
             export const MyPartnerTier = {
                 First: "first",
                 Second: "second",
+                Blueprint: "blueprint",
             } as const;
             export type MyPartnerTier = (typeof MyPartnerTier)[keyof typeof MyPartnerTier];
             export const Object_ = {

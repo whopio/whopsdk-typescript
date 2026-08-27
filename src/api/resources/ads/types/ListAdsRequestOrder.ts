@@ -7,6 +7,7 @@ export const ListAdsRequestOrder = {
     Impressions: "impressions",
     Reach: "reach",
     Clicks: "clicks",
+    LinkClicks: "link_clicks",
     UniqueClicks: "unique_clicks",
     Frequency: "frequency",
     ClickThroughRate: "click_through_rate",

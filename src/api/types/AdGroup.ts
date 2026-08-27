@@ -29,7 +29,7 @@ export interface AdGroup {
     contact_value: number;
     /** Whop pixel-attributed contact events, last-click. */
     contacts: number;
-    conversion_event?: (Whop.ConversionEvent | null) | undefined;
+    conversion_event: Whop.ConversionEvent | null;
     /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. */
     conversion_location?: (AdGroup.ConversionLocation | null) | undefined;
     /** Spend divided by attributed add-to-cart events; null when they are not the goal and none are attributed. */
@@ -92,6 +92,8 @@ export interface AdGroup {
     lead_value: number;
     /** Whop pixel-attributed leads, last-click. */
     leads: number;
+    /** Clicks on links in the ad that lead to your destination, as reported by the ad platform. A subset of clicks, which also counts likes, comments, and other interactions with the ad. */
+    link_clicks: number;
     message_apps?: AdGroup.MessageApps.Item[] | undefined;
     /** Minimum the ad group tries to spend each day. `null` when no floor is set. */
     minimum_daily_spend?: (number | null) | undefined;

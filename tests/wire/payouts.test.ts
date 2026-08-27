@@ -351,6 +351,160 @@ describe("PayoutsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("createQuote (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { amount: 6762.41, payout_method_id: "potk_xxxxxxxxxxxxxx" };
+        const rawResponseBody = {
+            amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            destination_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            exchange_rate: 4.13978443,
+            expires_at: "2026-01-01T12:00:00Z",
+            fee: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            id: "pout_aed_quote",
+            net_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            object: "payout_quote",
+            quote_token: "signed-payout-quote",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/quotes")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payouts.createQuote({
+            amount: 6762.41,
+            payout_method_id: "potk_xxxxxxxxxxxxxx",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("createQuote (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/quotes")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.createQuote({
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("createQuote (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/quotes")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.createQuote({
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("createQuote (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/quotes")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.createQuote({
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("createQuote (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/payouts/quotes")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payouts.createQuote({
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

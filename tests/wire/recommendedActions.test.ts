@@ -25,21 +25,19 @@ describe("RecommendedActionsClient", () => {
                             cta_label: "Create campaign",
                             description: "Pick a budget",
                             error: null,
+                            execution_type: "redirect",
                             input: { name: "Ceramic coating — Austin launch" },
                             output: null,
                             position: 0,
-                            reasoning: { summary: "Create the campaign shell first so ad groups have a parent." },
+                            reasoning: { summary: "Create the campaign first" },
                             status: null,
                             title: "Create a campaign",
                         },
                     ],
                     description: "Get your product in front of buyers",
-                    id: "rac_chain_brand",
-                    reasoning: {
-                        summary:
-                            "Shine Time has a connected Meta account but no active campaigns; a first campaign unlocks lead tracking.",
-                    },
-                    title: "Brand your business",
+                    id: "rac_chain_xxxxxxxxxxxx",
+                    reasoning: { summary: "No active campaigns yet" },
+                    title: "Launch an ad campaign",
                 },
             ],
         };
@@ -124,21 +122,19 @@ describe("RecommendedActionsClient", () => {
                     cta_label: "Create campaign",
                     description: "Pick a budget",
                     error: "error",
+                    execution_type: "redirect",
                     input: { name: "Ceramic coating — Austin launch" },
                     output: { key: "value" },
                     position: 0,
-                    reasoning: { summary: "Create the campaign shell first so ad groups have a parent." },
+                    reasoning: { summary: "Create the campaign first" },
                     status: "pending",
                     title: "Create a campaign",
                 },
             ],
             description: "Get your product in front of buyers",
-            id: "rac_chain_brand",
-            reasoning: {
-                summary:
-                    "Shine Time has a connected Meta account but no active campaigns; a first campaign unlocks lead tracking.",
-            },
-            title: "Brand your business",
+            id: "rac_chain_xxxxxxxxxxxx",
+            reasoning: { summary: "No active campaigns yet" },
+            title: "Launch an ad campaign",
         };
 
         server

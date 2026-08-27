@@ -3964,7 +3964,7 @@ await client.appBuilds.promote({
 <dl>
 <dd>
 
-Lists apps on the Whop platform: the app store's live apps, or — with `account_id` and developer access to that account — every app the account owns. Requires authentication, except for the publicly readable lists: `verified_apps_only=true`, and `app_type=website` with no `account_id`, which returns every live deployed website that Whop has not verified — verified templates are the curated `verified_apps_only=true` list instead.
+Lists apps on the Whop platform: the app store's live apps, or — with `account_id` and developer access to that account — every app the account owns. Requires authentication except for Whop's public app and website discovery lists. Public website discovery includes built official blueprints (verified apps with a product) and built, live community blueprints that Whop recommends.
 </dd>
 </dl>
 </dd>
@@ -4437,7 +4437,7 @@ await client.apps.deploy({
 <dl>
 <dd>
 
-Lists a hosted app's server runtime logs, most recent first: console output, uncaught exceptions, and failed-request summaries captured on whop.app hosting. Logs are retained for 7 days.
+Lists a hosted app's server runtime logs, most recent first: console output, uncaught exceptions, and failed-request summaries captured on whop.site hosting. Logs are retained for 7 days.
 </dd>
 </dl>
 </dd>
@@ -11701,7 +11701,7 @@ await client.exports.list();
 <dl>
 <dd>
 
-Starts an asynchronous CSV export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
+Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
 </dd>
 </dl>
 </dd>
@@ -12387,8 +12387,8 @@ await client.financialActivity.list();
 </dl>
 </details>
 
-## Ledgers
-<details><summary><code>client.ledgers.<a href="/src/api/resources/ledgers/client/Client.ts">getFinancialReport</a>({ ...params }) -> Whop.GetFinancialReportResponse</code></summary>
+## FinancialReports
+<details><summary><code>client.financialReports.<a href="/src/api/resources/financialReports/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrieveFinancialReportsResponse</code></summary>
 <dl>
 <dd>
 
@@ -12415,7 +12415,7 @@ Returns a financial report — balance activity, income statement, or balance su
 <dd>
 
 ```typescript
-await client.ledgers.getFinancialReport({
+await client.financialReports.retrieve({
     account_id: "account_id",
     report_type: "balance_summary"
 });
@@ -12434,7 +12434,7 @@ await client.ledgers.getFinancialReport({
 <dl>
 <dd>
 
-**request:** `Whop.GetFinancialReportRequest` 
+**request:** `Whop.RetrieveFinancialReportsRequest` 
     
 </dd>
 </dl>
@@ -12442,7 +12442,7 @@ await client.ledgers.getFinancialReport({
 <dl>
 <dd>
 
-**requestOptions:** `LedgersClient.RequestOptions` 
+**requestOptions:** `FinancialReportsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -17117,6 +17117,71 @@ await client.payments.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">capture</a>({ ...params }) -> Whop.PaymentStatus</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Captures the full amount of a card payment created with `capture: false`. The payment must still be in `requires_capture` before `capture_expires_at`. Partial capture, multiple captures, capturing more than the authorized amount, and tips are not supported.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.capture({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CapturePaymentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PaymentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">listFees</a>({ ...params }) -> core.Page&lt;Whop.ListFeesPaymentsResponse.Data.Item, Whop.ListFeesPaymentsResponse&gt;</code></summary>
 <dl>
 <dd>
@@ -17911,6 +17976,72 @@ await client.payouts.create({
 <dd>
 
 **request:** `Whop.CreatePayoutsRequestBody` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PayoutsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payouts.<a href="/src/api/resources/payouts/client/Client.ts">createQuote</a>({ ...params }) -> Whop.CreateQuotePayoutsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a short-lived, provider-backed quote for a payout. No funds move until the returned quote_token is submitted to POST /payouts. An Idempotency-Key header is required.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payouts.createQuote({
+    amount: 6762.41,
+    payout_method_id: "potk_xxxxxxxxxxxxxx"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateQuotePayoutsRequest` 
     
 </dd>
 </dl>

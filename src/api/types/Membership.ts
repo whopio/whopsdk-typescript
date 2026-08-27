@@ -19,6 +19,8 @@ export interface Membership {
     member: Whop.MembershipMember | null;
     /** Custom key-value pairs stored on the membership, commonly used for software licensing. */
     metadata: Record<string, unknown>;
+    /** The buyer's phone number recorded for this membership, or `null`. The number collected (or verified) at checkout when the seller's phone collection is on; falls back to the buyer's account number when they have shared one with this seller. */
+    phone_number: string | null;
     /** The plan the buyer purchased, prefixed `plan_`. */
     plan_id: string;
     /** The product this membership grants access to, prefixed `prod_`. */

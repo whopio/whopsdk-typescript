@@ -159,6 +159,8 @@ describe("AccountsClient", () => {
                             paypal_threshold_usd: 40,
                         },
                         restricted_payment_methods: ["card_visa"],
+                        undated_pending_reason: null,
+                        withdrawal_schedule: { day: null, frequency: "manual", next_payout_date: null },
                     },
                     privacy_policy: {
                         content_type: "application/pdf",
@@ -532,6 +534,8 @@ describe("AccountsClient", () => {
                     paypal_threshold_usd: 40,
                 },
                 restricted_payment_methods: ["card_visa"],
+                undated_pending_reason: "kyc_incomplete",
+                withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
             privacy_policy: {
                 content_type: "application/pdf",
@@ -933,6 +937,8 @@ describe("AccountsClient", () => {
                     paypal_threshold_usd: 40,
                 },
                 restricted_payment_methods: ["card_visa"],
+                undated_pending_reason: "kyc_incomplete",
+                withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
             privacy_policy: {
                 content_type: "application/pdf",
@@ -1261,6 +1267,8 @@ describe("AccountsClient", () => {
                     paypal_threshold_usd: 40,
                 },
                 restricted_payment_methods: ["card_visa"],
+                undated_pending_reason: "kyc_incomplete",
+                withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
             privacy_policy: {
                 content_type: "application/pdf",
@@ -1616,6 +1624,8 @@ describe("AccountsClient", () => {
                     paypal_threshold_usd: 40,
                 },
                 restricted_payment_methods: ["card_visa"],
+                undated_pending_reason: "kyc_incomplete",
+                withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
             privacy_policy: {
                 content_type: "application/pdf",

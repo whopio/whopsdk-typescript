@@ -13,9 +13,11 @@ export interface ListAppsRequest {
     app_type?: Whop.ListAppsRequestAppType;
     /** Only return apps supporting this view type, such as `dashboard` or `hub`. */
     view_type?: Whop.ListAppsRequestViewType;
-    /** Whether to only return apps verified by Whop. Verified website templates — websites with a published web build — are included, even though websites are otherwise left out of app lists. */
+    /** Only return apps whose Whop verification status matches this value. Omit this filter to include every verification status the caller can see. */
+    verified?: boolean;
+    /** Legacy compatibility filter. Use `verified` for field equality. `true` returns verified apps; clients pinned before `2026-08-25-2` retain the earlier public website discovery behavior. */
     verified_apps_only?: boolean;
-    /** Only return apps Whop recommends (or, with `false`, only those it does not). The community blueprints gallery is the recommended slice of the public website list. */
+    /** Only return apps Whop recommends (or, with `false`, only those it does not), independently of verification status. */
     recommended?: boolean;
     /** A search string matched against app names. */
     query?: string;

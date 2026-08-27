@@ -22,6 +22,10 @@ export interface AccountPaymentControls {
     /** Automatic refund settings for resolution center cases. */
     resolution_center_auto_refund: Whop.AccountResolutionCenterAutoRefundControl;
     restricted_payment_methods: AccountPaymentControls.RestrictedPaymentMethods.Item[];
+    /** Why pending funds without a settlement date aren't moving yet, when it's something the merchant can act on. `null` when there's no reason to show (still clearing, or the account is held for a reason that isn't merchant-actionable). */
+    undated_pending_reason: AccountPaymentControls.UndatedPendingReason | null;
+    /** How the account's balance automatically withdraws. */
+    withdrawal_schedule: Whop.AccountWithdrawalScheduleControl;
 }
 
 export namespace AccountPaymentControls {
@@ -37,4 +41,11 @@ export namespace AccountPaymentControls {
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
     }
+
+    /** Why pending funds without a settlement date aren't moving yet, when it's something the merchant can act on. `null` when there's no reason to show (still clearing, or the account is held for a reason that isn't merchant-actionable). */
+    export const UndatedPendingReason = {
+        KycIncomplete: "kyc_incomplete",
+        PendingInformationRequest: "pending_information_request",
+    } as const;
+    export type UndatedPendingReason = (typeof UndatedPendingReason)[keyof typeof UndatedPendingReason];
 }

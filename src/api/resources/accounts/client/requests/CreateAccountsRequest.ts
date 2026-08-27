@@ -7,6 +7,8 @@
 export interface CreateAccountsRequest {
     /** The username, if any, of the partner who referred this account */
     affiliate_code?: string | null;
+    /** The blueprint App ID, prefixed `app_`. Creates a hosted website for the account and queues its deployment asynchronously; the Account response does not report deployment completion. */
+    blueprint_id?: string | null;
     /** The ISO 3166-1 alpha-2 country code where the account's business is located (e.g. `US`). Defaults to the parent account's country for connected accounts. */
     country?: string;
     /** The email address of the account owner. Required for Account API key requests. */

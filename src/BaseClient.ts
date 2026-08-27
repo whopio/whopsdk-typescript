@@ -77,7 +77,7 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
             "User-Agent": "@whop/sdk/1.0.14",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
-            "Api-Version-Date": options?.apiVersionDate ?? "2026-08-25-1",
+            "Api-Version-Date": options?.apiVersionDate ?? "2026-08-25-2",
             "Idempotency-Key": options?.idempotencyKey,
         },
         options?.headers,
