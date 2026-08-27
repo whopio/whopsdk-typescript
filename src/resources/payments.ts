@@ -1463,6 +1463,12 @@ export declare namespace PaymentCreateParams {
     plan: CreatePaymentInputWithPlanAndConfirmationToken.Plan;
 
     /**
+     * Whether to capture the card payment immediately. Pass false to place an
+     * authorization hold that must be captured in full within five days.
+     */
+    capture?: boolean | null;
+
+    /**
      * Overrides the buyer email carried on the confirmation token, resolving or
      * creating the Whop user the payment belongs to. Ignored when the confirmation
      * token was created by a signed-in buyer, and unless confirmation_token is
@@ -1676,6 +1682,12 @@ export declare namespace PaymentCreateParams {
      * Pass this object to create a new plan for this payment
      */
     plan: CreatePaymentInputWithPlanAndMemberID.Plan;
+
+    /**
+     * Whether to capture the card payment immediately. Pass false to place an
+     * authorization hold that must be captured in full within five days.
+     */
+    capture?: boolean | null;
 
     /**
      * Overrides the buyer email carried on the confirmation token, resolving or
@@ -1897,6 +1909,12 @@ export declare namespace PaymentCreateParams {
     plan_id: string;
 
     /**
+     * Whether to capture the card payment immediately. Pass false to place an
+     * authorization hold that must be captured in full within five days.
+     */
+    capture?: boolean | null;
+
+    /**
      * Overrides the buyer email carried on the confirmation token, resolving or
      * creating the Whop user the payment belongs to. Ignored when the confirmation
      * token was created by a signed-in buyer, and unless confirmation_token is
@@ -1947,6 +1965,12 @@ export declare namespace PaymentCreateParams {
      * An ID of an existing plan to use for the payment.
      */
     plan_id: string;
+
+    /**
+     * Whether to capture the card payment immediately. Pass false to place an
+     * authorization hold that must be captured in full within five days.
+     */
+    capture?: boolean | null;
 
     /**
      * Overrides the buyer email carried on the confirmation token, resolving or

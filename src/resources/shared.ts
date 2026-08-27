@@ -1715,6 +1715,7 @@ export namespace ForumPost {
  */
 export type FriendlyReceiptStatus =
   | 'succeeded'
+  | 'requires_capture'
   | 'pending'
   | 'failed'
   | 'past_due'
@@ -4375,7 +4376,15 @@ export namespace Reaction {
 /**
  * The status of a receipt
  */
-export type ReceiptStatus = 'draft' | 'open' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void';
+export type ReceiptStatus =
+  | 'draft'
+  | 'open'
+  | 'authorized'
+  | 'paid'
+  | 'pending'
+  | 'uncollectible'
+  | 'unresolved'
+  | 'void';
 
 /**
  * The methods of how a plan can be released.

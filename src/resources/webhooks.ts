@@ -266,6 +266,8 @@ export type WebhookEvent =
   | 'identity_profile.needs_action'
   | 'identity_profile.updated'
   | 'payout_account.status_updated'
+  | 'payment.authorized'
+  | 'payment.canceled'
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
   | 'resolution_center_case.decided'
@@ -2654,6 +2656,94 @@ export namespace PayoutAccountStatusUpdatedWebhookEvent {
       status: VerificationsAPI.VerificationStatus;
     }
   }
+}
+
+export interface PaymentAuthorizedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.authorized';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
+}
+
+export interface PaymentCanceledWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  /**
+   * A payment represents a completed or attempted charge. Payments track the amount,
+   * status, currency, and payment method used.
+   */
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.canceled';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
 }
 
 export interface ResolutionCenterCaseCreatedWebhookEvent {
@@ -5336,6 +5426,8 @@ export type UnwrapWebhookEvent =
   | VerificationSucceededWebhookEvent
   | IdentityProfileUpdatedWebhookEvent
   | PayoutAccountStatusUpdatedWebhookEvent
+  | PaymentAuthorizedWebhookEvent
+  | PaymentCanceledWebhookEvent
   | ResolutionCenterCaseCreatedWebhookEvent
   | ResolutionCenterCaseUpdatedWebhookEvent
   | ResolutionCenterCaseDecidedWebhookEvent
@@ -5499,6 +5591,8 @@ export declare namespace Webhooks {
     type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
     type IdentityProfileUpdatedWebhookEvent as IdentityProfileUpdatedWebhookEvent,
     type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
+    type PaymentAuthorizedWebhookEvent as PaymentAuthorizedWebhookEvent,
+    type PaymentCanceledWebhookEvent as PaymentCanceledWebhookEvent,
     type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
     type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
     type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,

@@ -59,6 +59,7 @@ describe('resource payments', () => {
         trial_period_days: 42,
         visibility: 'visible',
       },
+      capture: true,
       email: 'buyer@example.com',
       metadata: { foo: 'bar' },
       payment_method_id: 'pmt_xxxxxxxxxxxxxx',

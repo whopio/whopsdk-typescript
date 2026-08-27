@@ -467,6 +467,8 @@ export {
   type VerificationSucceededWebhookEvent,
   type IdentityProfileUpdatedWebhookEvent,
   type PayoutAccountStatusUpdatedWebhookEvent,
+  type PaymentAuthorizedWebhookEvent,
+  type PaymentCanceledWebhookEvent,
   type ResolutionCenterCaseCreatedWebhookEvent,
   type ResolutionCenterCaseUpdatedWebhookEvent,
   type ResolutionCenterCaseDecidedWebhookEvent,

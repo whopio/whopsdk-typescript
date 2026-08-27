@@ -166,6 +166,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">IdentityProfileUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutAccountStatusUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentAuthorizedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentCanceledWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseDecidedWebhookEvent</a></code>
