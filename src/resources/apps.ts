@@ -196,7 +196,7 @@ export interface AppListResponse {
 
   /**
    * The unique subdomain route where this app's hosted web builds are served, such
-   * as 'myapp' for myapp.whop.app. Null if the app has not claimed a route.
+   * as 'myapp' for myapp.whop.site. Null if the app has not claimed a route.
    */
   route: string | null;
 
@@ -301,7 +301,7 @@ export interface AppCreateParams {
 
   /**
    * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.app.
+   * 'myapp' for myapp.whop.site.
    */
   route?: string | null;
 }
@@ -390,7 +390,7 @@ export interface AppUpdateParams {
 
   /**
    * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.app.
+   * 'myapp' for myapp.whop.site.
    */
   route?: string | null;
 

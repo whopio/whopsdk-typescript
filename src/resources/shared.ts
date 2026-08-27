@@ -172,7 +172,7 @@ export interface App {
 
   /**
    * The unique subdomain route where this app's hosted web builds are served, such
-   * as 'myapp' for myapp.whop.app. Null if the app has not claimed a route.
+   * as 'myapp' for myapp.whop.site. Null if the app has not claimed a route.
    */
   route: string | null;
 
