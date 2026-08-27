@@ -1,3 +1,4 @@
+export type { CapturePaymentsRequest } from "./CapturePaymentsRequest.js";
 export type { ListFeesPaymentsRequest } from "./ListFeesPaymentsRequest.js";
 export type { ListPaymentsRequest } from "./ListPaymentsRequest.js";
 export type { RefundPaymentsRequest } from "./RefundPaymentsRequest.js";

@@ -79,6 +79,8 @@ export interface Ad {
     lead_value: number;
     /** Whop pixel-attributed leads, last-click. */
     leads: number;
+    /** Clicks on links in the ad that lead to your destination, as reported by the ad platform. A subset of clicks, which also counts likes, comments, and other interactions with the ad. */
+    link_clicks: number;
     /** Welcome message for click-to-message ads, shown when the conversation opens. `null` when the ad has none. */
     messaging_config?: (Whop.AdMessagingConfig | null) | undefined;
     /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */

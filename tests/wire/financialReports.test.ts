@@ -4,8 +4,8 @@ import * as Whop from "../../src/api/index";
 import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("LedgersClient", () => {
-    test("getFinancialReport (1)", async () => {
+describe("FinancialReportsClient", () => {
+    test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -17,8 +17,17 @@ describe("LedgersClient", () => {
 
         const rawResponseBody = {
             beginning_balance: 11480.02,
+            currencies: ["usd"],
             ending_balance: 23750.55,
             fx_excluded_currencies: ["ngn"],
+            payment_fee_breakdown: [
+                {
+                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    category: "app_store_payments",
+                    payment_method: "payment_method",
+                    period: "period",
+                },
+            ],
             report_type: "balance_summary",
             rows: [
                 {
@@ -38,14 +47,14 @@ describe("LedgersClient", () => {
 
         server.mockEndpoint().get("/financial_reports").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.ledgers.getFinancialReport({
+        const response = await client.financialReports.retrieve({
             account_id: "account_id",
             report_type: "balance_summary",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("getFinancialReport (2)", async () => {
+    test("retrieve (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -60,14 +69,14 @@ describe("LedgersClient", () => {
         server.mockEndpoint().get("/financial_reports").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.ledgers.getFinancialReport({
+            return await client.financialReports.retrieve({
                 account_id: "account_id",
                 report_type: "balance_summary",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("getFinancialReport (3)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -82,14 +91,14 @@ describe("LedgersClient", () => {
         server.mockEndpoint().get("/financial_reports").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.ledgers.getFinancialReport({
+            return await client.financialReports.retrieve({
                 account_id: "account_id",
                 report_type: "balance_summary",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("getFinancialReport (4)", async () => {
+    test("retrieve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -104,14 +113,14 @@ describe("LedgersClient", () => {
         server.mockEndpoint().get("/financial_reports").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.ledgers.getFinancialReport({
+            return await client.financialReports.retrieve({
                 account_id: "account_id",
                 report_type: "balance_summary",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("getFinancialReport (5)", async () => {
+    test("retrieve (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -126,7 +135,7 @@ describe("LedgersClient", () => {
         server.mockEndpoint().get("/financial_reports").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.ledgers.getFinancialReport({
+            return await client.financialReports.retrieve({
                 account_id: "account_id",
                 report_type: "balance_summary",
             });

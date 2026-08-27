@@ -77,7 +77,7 @@ export class ExportsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -127,7 +127,7 @@ export class ExportsClient {
     }
 
     /**
-     * Starts an asynchronous CSV export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
+     * Starts an asynchronous export of a resource for an account. Returns the export in `pending`; poll `GET /exports/{id}` until `download_url` is set.
      *
      * @param {Whop.CreateExportsRequest} request
      * @param {ExportsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -160,7 +160,7 @@ export class ExportsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -244,7 +244,7 @@ export class ExportsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

@@ -11,13 +11,15 @@ export interface AccountRecommendedActionChainStep {
     description: string;
     /** Why the step failed, or `null` */
     error: string | null;
+    /** Whether the client should navigate to the CTA or open the programmatic execution dialog */
+    execution_type: AccountRecommendedActionChainStep.ExecutionType;
     /** The filled-in request body for the step's endpoint, or `null` when it was not recorded */
     input: Record<string, unknown> | null;
     /** The API response the step produced, or `null` until it succeeds */
     output: Record<string, unknown> | null;
     /** Zero-based order of this step within the chain */
     position: number;
-    /** Why the generator filled the step this way, or `null` for seeded chains */
+    /** Why this step was recommended, or `null` when unavailable */
     reasoning: Record<string, unknown> | null;
     /** Where the run step currently stands, or `null` when the chain has not been run */
     status: AccountRecommendedActionChainStep.Status | null;
@@ -26,6 +28,12 @@ export interface AccountRecommendedActionChainStep {
 }
 
 export namespace AccountRecommendedActionChainStep {
+    /** Whether the client should navigate to the CTA or open the programmatic execution dialog */
+    export const ExecutionType = {
+        Redirect: "redirect",
+        Programatic: "programatic",
+    } as const;
+    export type ExecutionType = (typeof ExecutionType)[keyof typeof ExecutionType];
     /** Where the run step currently stands, or `null` when the chain has not been run */
     export const Status = {
         Pending: "pending",

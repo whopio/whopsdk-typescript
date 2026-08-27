@@ -117,6 +117,7 @@ describe("AdsClient", () => {
                     lead_form_id: "1037724182084885",
                     lead_value: 1180,
                     leads: 121,
+                    link_clicks: 1071,
                     messaging_config: {
                         keyword: "Book an interior deep clean",
                         message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -319,6 +320,7 @@ describe("AdsClient", () => {
             lead_form_id: "1037724182084885",
             lead_value: 1180,
             leads: 121,
+            link_clicks: 1071,
             messaging_config: {
                 keyword: "Book an interior deep clean",
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -546,6 +548,7 @@ describe("AdsClient", () => {
             lead_form_id: "1037724182084885",
             lead_value: 1180,
             leads: 121,
+            link_clicks: 1071,
             messaging_config: {
                 keyword: "Book an interior deep clean",
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -752,6 +755,7 @@ describe("AdsClient", () => {
             lead_form_id: "1037724182084885",
             lead_value: 1180,
             leads: 121,
+            link_clicks: 1071,
             messaging_config: {
                 keyword: "Book an interior deep clean",
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -914,6 +918,7 @@ describe("AdsClient", () => {
                     lead_form_id: "1037724182084885",
                     lead_value: 1180,
                     leads: 121,
+                    link_clicks: 1071,
                     messaging_config: {
                         keyword: "Book an interior deep clean",
                         message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -1151,6 +1156,7 @@ describe("AdsClient", () => {
             lead_form_id: "1037724182084885",
             lead_value: 1180,
             leads: 121,
+            link_clicks: 1071,
             messaging_config: {
                 keyword: "Book an interior deep clean",
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
@@ -1316,6 +1322,7 @@ describe("AdsClient", () => {
             lead_form_id: "1037724182084885",
             lead_value: 1180,
             leads: 121,
+            link_clicks: 1071,
             messaging_config: {
                 keyword: "Book an interior deep clean",
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",

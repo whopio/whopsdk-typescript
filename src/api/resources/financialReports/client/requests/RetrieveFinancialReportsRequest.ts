@@ -9,11 +9,11 @@ import type * as Whop from "../../../../index.js";
  *         report_type: "balance_summary"
  *     }
  */
-export interface GetFinancialReportRequest {
+export interface RetrieveFinancialReportsRequest {
     /** The owning account ID (a biz_ identifier), or `global` for a platform-wide report across all ledger accounts (requires internal admin access). */
     account_id: string;
     /** The type of financial report to generate. */
-    report_type: Whop.GetFinancialReportRequestReportType;
+    report_type: Whop.RetrieveFinancialReportsRequestReportType;
     /** Filter rows to this currency, for example `usd`. Defaults to `usd` unless `in_currency` is provided. */
     currency?: string;
     /** Aggregate all activity into this display currency via FX conversion. */
@@ -23,11 +23,19 @@ export interface GetFinancialReportRequest {
     /** End of the report window as an ISO 8601 timestamp (UTC). Required for platform-wide (global) reports. */
     to_date?: string;
     /** Grouping granularity for report rows. */
-    group_by?: Whop.GetFinancialReportRequestGroupBy;
+    group_by?: Whop.RetrieveFinancialReportsRequestGroupBy;
     /** IANA timezone (for example `America/New_York`) used to bucket report periods and to interpret calendar-day boundaries for balance snapshots. Defaults to UTC. from_date/to_date remain exact instants regardless of this setting. */
     timezone?: string;
+    /** Account-level balance activity only: ledger line categories to include. */
+    line_types?:
+        | Whop.RetrieveFinancialReportsRequestLineTypesItem
+        | Whop.RetrieveFinancialReportsRequestLineTypesItem[];
+    /** Account-level balance activity only: include money moving in or money moving out. */
+    direction?: Whop.RetrieveFinancialReportsRequestDirection;
     /** Platform-wide (global) reports only: when true, return cumulative balances as of to_date (all history, no lower bound) instead of activity within the period. */
     cumulative?: boolean;
     /** Platform-wide (global) reports only: narrow the report to ledger lines on the ledger account owned by this account ID (a biz_ identifier). Ignored unless account_id is `global`. */
     scope_account_id?: string;
+    /** Balance activity only: include payment costs grouped by payment method and provider. */
+    include_payment_fee_breakdown?: boolean;
 }

@@ -28,7 +28,6 @@ describe("FinancialActivityClient", () => {
                     },
                     amount: "2375000000",
                     available_at: "2026-01-01T12:00:00Z",
-                    created_at: "2026-01-01T12:00:00Z",
                     currency: { code: "usd", precision: "100000000" },
                     id: "line_3",
                     ledger_account_id: "ldgr_xxxxxxxxxxxxxx",

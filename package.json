@@ -451,16 +451,16 @@
             },
             "default": "./dist/cjs/api/resources/financialActivity/exports.js"
         },
-        "./ledgers": {
+        "./financialReports": {
             "import": {
-                "types": "./dist/esm/api/resources/ledgers/exports.d.mts",
-                "default": "./dist/esm/api/resources/ledgers/exports.mjs"
+                "types": "./dist/esm/api/resources/financialReports/exports.d.mts",
+                "default": "./dist/esm/api/resources/financialReports/exports.mjs"
             },
             "require": {
-                "types": "./dist/cjs/api/resources/ledgers/exports.d.ts",
-                "default": "./dist/cjs/api/resources/ledgers/exports.js"
+                "types": "./dist/cjs/api/resources/financialReports/exports.d.ts",
+                "default": "./dist/cjs/api/resources/financialReports/exports.js"
             },
-            "default": "./dist/cjs/api/resources/ledgers/exports.js"
+            "default": "./dist/cjs/api/resources/financialReports/exports.js"
         },
         "./forumPosts": {
             "import": {

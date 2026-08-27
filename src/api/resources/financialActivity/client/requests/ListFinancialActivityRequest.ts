@@ -17,6 +17,8 @@ export interface ListFinancialActivityRequest {
     include_resource?: boolean;
     /** Optional ledger line categories to include. Some categories (for example `onchain_deposit`, which covers inbound crypto deposits such as MoonPay onramps) are only returned when explicitly requested here. */
     line_types?: Whop.ListFinancialActivityRequestLineTypesItem | Whop.ListFinancialActivityRequestLineTypesItem[];
+    /** Optional direction filter. `money_in` returns positive activity and `money_out` returns negative activity. */
+    direction?: Whop.ListFinancialActivityRequestDirection;
     /** Optional currency code filter, for example `usd`. */
     currency?: string;
     /** Only include rows posted after this ISO 8601 timestamp. */

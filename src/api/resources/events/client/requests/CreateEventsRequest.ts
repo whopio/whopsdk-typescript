@@ -12,6 +12,10 @@ export interface CreateEventsRequest {
     account_id: string;
     /** Where the event originated. */
     action_source?: CreateEventsRequest.ActionSource | null;
+    /** The build of the hosted app that served the page where the event occurred. */
+    app_build_id?: string | null;
+    /** The hosted app that served the page where the event occurred. */
+    app_id?: string | null;
     /** Tracking and attribution context. */
     context?: CreateEventsRequest.Context | null;
     /** ISO 4217 currency code. */

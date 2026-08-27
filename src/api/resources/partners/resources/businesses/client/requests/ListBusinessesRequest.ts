@@ -31,6 +31,6 @@ export interface ListBusinessesRequest {
     referred_user_id?: string;
     /** Filter by the referred user's exact username. Ignored when `referred_user_id` is present. */
     referred_username?: string;
-    /** Filter to only first-tier referrals or only second-tier referrals. */
+    /** Filter to referrals from a single tier: first, second, or blueprint. */
     tier?: Whop.partners.ListBusinessesRequestTier;
 }

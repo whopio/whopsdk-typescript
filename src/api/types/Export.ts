@@ -3,9 +3,9 @@
 export interface Export {
     /** When the export was requested, as an ISO 8601 timestamp. */
     created_at: string;
-    /** A short-lived link to download the finished CSV. `null` until `status` is `completed`, and again once the export has expired. */
+    /** A short-lived link to download the finished file. `null` until `status` is `completed`, and again once the export has expired. */
     download_url: string | null;
-    /** When the CSV is deleted and the export moves to `expired`, as an ISO 8601 timestamp. Exports are retained for 30 days. */
+    /** When the file is deleted and the export moves to `expired`, as an ISO 8601 timestamp. Exports are retained for 30 days. */
     expires_at: string;
     /** Export ID, prefixed `exprt_`. */
     id: string;
@@ -13,7 +13,7 @@ export interface Export {
     progress_percent: number | null;
     /** The resource that was exported, e.g. `receipts`, `members`, or `payouts`. */
     resource: Export.Resource;
-    /** `pending` or `processing` while the CSV is generated, `completed` when the download is ready, `failed` if it errored, `expired` once the CSV has been deleted. */
+    /** `pending` or `processing` while the file is generated, `completed` when the download is ready, `failed` if it errored, `expired` once the file has been deleted. */
     status: Export.Status;
     /** When the export last changed, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -62,7 +62,7 @@ export namespace Export {
         WithdrawalLines: "withdrawal_lines",
     } as const;
     export type Resource = (typeof Resource)[keyof typeof Resource];
-    /** `pending` or `processing` while the CSV is generated, `completed` when the download is ready, `failed` if it errored, `expired` once the CSV has been deleted. */
+    /** `pending` or `processing` while the file is generated, `completed` when the download is ready, `failed` if it errored, `expired` once the file has been deleted. */
     export const Status = {
         Pending: "pending",
         Processing: "processing",

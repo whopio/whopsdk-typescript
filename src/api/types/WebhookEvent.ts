@@ -53,6 +53,8 @@ export const WebhookEvent = {
     IdentityProfileNeedsAction: "identity_profile.needs_action",
     IdentityProfileUpdated: "identity_profile.updated",
     PayoutAccountStatusUpdated: "payout_account.status_updated",
+    PaymentAuthorized: "payment.authorized",
+    PaymentCanceled: "payment.canceled",
     ResolutionCenterCaseCreated: "resolution_center_case.created",
     ResolutionCenterCaseUpdated: "resolution_center_case.updated",
     ResolutionCenterCaseDecided: "resolution_center_case.decided",

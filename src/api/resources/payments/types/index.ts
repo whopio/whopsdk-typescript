@@ -2,6 +2,8 @@ export * from "./CreatePaymentsRequest.js";
 export * from "./CreatePaymentsResponse.js";
 export * from "./ListFeesPaymentsResponse.js";
 export * from "./ListPaymentsResponse.js";
+export * from "./PostPaymentAuthorizedPayload.js";
+export * from "./PostPaymentCanceledPayload.js";
 export * from "./PostPaymentCreatedPayload.js";
 export * from "./PostPaymentFailedPayload.js";
 export * from "./PostPaymentPendingPayload.js";

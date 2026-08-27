@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface PaymentStatus {
+    /** When the card authorization must be captured, as an ISO 8601 timestamp. `null` when this payment was not authorized for later capture. */
+    capture_expires_at: string | null;
     /** The payment this status describes, prefixed `pay_`. */
     id: string;
     /** Details of the most recent failed attempt, or `null` when the payment has not failed. */
@@ -15,15 +17,16 @@ export interface PaymentStatus {
     processing_details: Whop.PaymentProcessingDetails | null;
     /** Where to send the buyer once the payment reaches a resting state, or `null` to leave them where they are. Editable until they return — see the return_url operation. */
     return_url: string | null;
-    /** How far the payment has got. `requires_confirmation` — nothing attempted yet, or the last attempt failed and can be retried. `requires_action` — the buyer has a step outstanding; see `next_action`. `confirming` — the buyer has done their part and the processor is deciding. `processing` — the money is moving; see `processing_details`. `succeeded` — collected. `canceled` — voided or written off. */
+    /** How far the payment has got. `requires_confirmation` — nothing attempted yet, or the last attempt failed and can be retried. `requires_action` — the buyer has a step outstanding; see `next_action`. `requires_capture` — the card authorization is holding funds and must be captured. `confirming` — the buyer has done their part and the processor is deciding. `processing` — the money is moving; see `processing_details`. `succeeded` — collected. `canceled` — voided or written off. */
     status: PaymentStatus.Status;
 }
 
 export namespace PaymentStatus {
-    /** How far the payment has got. `requires_confirmation` — nothing attempted yet, or the last attempt failed and can be retried. `requires_action` — the buyer has a step outstanding; see `next_action`. `confirming` — the buyer has done their part and the processor is deciding. `processing` — the money is moving; see `processing_details`. `succeeded` — collected. `canceled` — voided or written off. */
+    /** How far the payment has got. `requires_confirmation` — nothing attempted yet, or the last attempt failed and can be retried. `requires_action` — the buyer has a step outstanding; see `next_action`. `requires_capture` — the card authorization is holding funds and must be captured. `confirming` — the buyer has done their part and the processor is deciding. `processing` — the money is moving; see `processing_details`. `succeeded` — collected. `canceled` — voided or written off. */
     export const Status = {
         RequiresConfirmation: "requires_confirmation",
         RequiresAction: "requires_action",
+        RequiresCapture: "requires_capture",
         Confirming: "confirming",
         Processing: "processing",
         Succeeded: "succeeded",

@@ -55,6 +55,7 @@ export class FinancialActivityClient {
             include_owned_accounts: includeOwnedAccounts,
             include_resource: includeResource,
             line_types: lineTypes,
+            direction,
             currency,
             posted_after: postedAfter,
             posted_before: postedBefore,
@@ -73,6 +74,7 @@ export class FinancialActivityClient {
                 : lineTypes != null
                   ? lineTypes
                   : undefined,
+            direction: direction != null ? direction : undefined,
             currency,
             posted_after: postedAfter != null ? postedAfter : undefined,
             posted_before: postedBefore != null ? postedBefore : undefined,
@@ -86,7 +88,7 @@ export class FinancialActivityClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

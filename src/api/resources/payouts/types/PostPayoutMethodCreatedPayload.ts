@@ -134,7 +134,7 @@ export namespace PostPayoutMethodCreatedPayload {
             export interface Instant {
                 /** Total fee charged, in the payout currency. */
                 fee: number;
-                /** Amount delivered after fees, in the payout currency. */
+                /** Amount remaining after fees, in the payout currency. */
                 total_received: number;
             }
 
@@ -144,7 +144,7 @@ export namespace PostPayoutMethodCreatedPayload {
             export interface Standard {
                 /** Total fee charged, in the payout currency. */
                 fee: number;
-                /** Amount delivered after fees, in the payout currency. */
+                /** Amount remaining after fees, in the payout currency. */
                 total_received: number;
             }
         }

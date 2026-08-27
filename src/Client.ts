@@ -39,13 +39,13 @@ import { ExportsClient } from "./api/resources/exports/client/Client.js";
 import { FeeMarkupsClient } from "./api/resources/feeMarkups/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
 import { FinancialActivityClient } from "./api/resources/financialActivity/client/Client.js";
+import { FinancialReportsClient } from "./api/resources/financialReports/client/Client.js";
 import { ForumPostsClient } from "./api/resources/forumPosts/client/Client.js";
 import { ForumsClient } from "./api/resources/forums/client/Client.js";
 import { IdentityProfilesClient } from "./api/resources/identityProfiles/client/Client.js";
 import { InvoicesClient } from "./api/resources/invoices/client/Client.js";
 import { LeadsClient } from "./api/resources/leads/client/Client.js";
 import { LedgerAccountsClient } from "./api/resources/ledgerAccounts/client/Client.js";
-import { LedgersClient } from "./api/resources/ledgers/client/Client.js";
 import { MediaClient } from "./api/resources/media/client/Client.js";
 import { MembersClient } from "./api/resources/members/client/Client.js";
 import { MembershipsClient } from "./api/resources/memberships/client/Client.js";
@@ -131,7 +131,7 @@ export class WhopClient {
     protected _feeMarkups: FeeMarkupsClient | undefined;
     protected _files: FilesClient | undefined;
     protected _financialActivity: FinancialActivityClient | undefined;
-    protected _ledgers: LedgersClient | undefined;
+    protected _financialReports: FinancialReportsClient | undefined;
     protected _forumPosts: ForumPostsClient | undefined;
     protected _forums: ForumsClient | undefined;
     protected _identityProfiles: IdentityProfilesClient | undefined;
@@ -333,8 +333,8 @@ export class WhopClient {
         return (this._financialActivity ??= new FinancialActivityClient(this._options));
     }
 
-    public get ledgers(): LedgersClient {
-        return (this._ledgers ??= new LedgersClient(this._options));
+    public get financialReports(): FinancialReportsClient {
+        return (this._financialReports ??= new FinancialReportsClient(this._options));
     }
 
     public get forumPosts(): ForumPostsClient {

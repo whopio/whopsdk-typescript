@@ -9,29 +9,24 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 
-export declare namespace LedgersClient {
+export declare namespace FinancialReportsClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-/**
- * A Ledger Activity row is a single financial event on an account's ledger — a payment, payout, refund, transfer, on-chain deposit, swap, or card transaction. Each row is derived from the underlying ledger lines and carries a typed `resource` and `source` so you can present and link the event without extra lookups.
- *
- * Use Ledger Activity to build a statement or transaction feed for an account or user. Reconcile against your own records with `amount` (signed, in the currency's smallest precision units) and `posted_at`, and use `available_at` to know when inflows became withdrawable.
- */
-export class LedgersClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<LedgersClient.Options>;
+export class FinancialReportsClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<FinancialReportsClient.Options>;
 
-    constructor(options: LedgersClient.Options = {}) {
+    constructor(options: FinancialReportsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
     /**
      * Returns a financial report — balance activity, income statement, or balance summary — for an account over a date range.
      *
-     * @param {Whop.GetFinancialReportRequest} request
-     * @param {LedgersClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {Whop.RetrieveFinancialReportsRequest} request
+     * @param {FinancialReportsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
@@ -41,22 +36,22 @@ export class LedgersClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.ledgers.getFinancialReport({
+     *     await client.financialReports.retrieve({
      *         account_id: "account_id",
      *         report_type: "balance_summary"
      *     })
      */
-    public getFinancialReport(
-        request: Whop.GetFinancialReportRequest,
-        requestOptions?: LedgersClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.GetFinancialReportResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getFinancialReport(request, requestOptions));
+    public retrieve(
+        request: Whop.RetrieveFinancialReportsRequest,
+        requestOptions?: FinancialReportsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.RetrieveFinancialReportsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__retrieve(request, requestOptions));
     }
 
-    private async __getFinancialReport(
-        request: Whop.GetFinancialReportRequest,
-        requestOptions?: LedgersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.GetFinancialReportResponse>> {
+    private async __retrieve(
+        request: Whop.RetrieveFinancialReportsRequest,
+        requestOptions?: FinancialReportsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.RetrieveFinancialReportsResponse>> {
         const {
             account_id: accountId,
             report_type: reportType,
@@ -66,8 +61,11 @@ export class LedgersClient {
             to_date: toDate,
             group_by: groupBy,
             timezone,
+            line_types: lineTypes,
+            direction,
             cumulative,
             scope_account_id: scopeAccountId,
+            include_payment_fee_breakdown: includePaymentFeeBreakdown,
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
@@ -78,15 +76,22 @@ export class LedgersClient {
             to_date: toDate,
             group_by: groupBy != null ? groupBy : undefined,
             timezone,
+            line_types: Array.isArray(lineTypes)
+                ? lineTypes.map((item) => item)
+                : lineTypes != null
+                  ? lineTypes
+                  : undefined,
+            direction: direction != null ? direction : undefined,
             cumulative,
             scope_account_id: scopeAccountId,
+            include_payment_fee_breakdown: includePaymentFeeBreakdown,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -112,7 +117,10 @@ export class LedgersClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.GetFinancialReportResponse, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as Whop.RetrieveFinancialReportsResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
