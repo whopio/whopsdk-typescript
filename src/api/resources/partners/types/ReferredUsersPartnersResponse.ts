@@ -19,6 +19,8 @@ export namespace ReferredUsersPartnersResponse {
             export interface User {
                 city?: (string | null) | undefined;
                 country?: (string | null) | undefined;
+                /** The referred user's email address, so a partner can follow up with someone they brought onto Whop. Requires the `partner:email:read` scope; `null` without it, or while the account has no reachable address of its own. */
+                email: string | null;
                 id: string;
                 name?: (string | null) | undefined;
                 profile_picture?: User.ProfilePicture | undefined;

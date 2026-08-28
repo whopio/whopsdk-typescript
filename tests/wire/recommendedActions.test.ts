@@ -215,7 +215,7 @@ describe("RecommendedActionsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { chain_id: "rac_seed_start_selling_xxxxxxxxxx", execution: "redirect" };
+        const rawResponseBody = { chain_id: "rac_chain_xxxxxxxxxxxx", execution: "redirect" };
 
         server
             .mockEndpoint()

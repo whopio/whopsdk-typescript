@@ -56,6 +56,7 @@ export class FinancialActivityClient {
             include_resource: includeResource,
             line_types: lineTypes,
             direction,
+            resource_id: resourceId,
             currency,
             posted_after: postedAfter,
             posted_before: postedBefore,
@@ -75,6 +76,7 @@ export class FinancialActivityClient {
                   ? lineTypes
                   : undefined,
             direction: direction != null ? direction : undefined,
+            resource_id: resourceId,
             currency,
             posted_after: postedAfter != null ? postedAfter : undefined,
             posted_before: postedBefore != null ? postedBefore : undefined,

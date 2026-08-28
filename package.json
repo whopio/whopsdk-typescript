@@ -946,6 +946,17 @@
             },
             "default": "./dist/cjs/api/resources/bounties/resources/submissions/exports.js"
         },
+        "./financialReports/breakdown": {
+            "import": {
+                "types": "./dist/esm/api/resources/financialReports/resources/breakdown/exports.d.mts",
+                "default": "./dist/esm/api/resources/financialReports/resources/breakdown/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/financialReports/resources/breakdown/exports.d.ts",
+                "default": "./dist/cjs/api/resources/financialReports/resources/breakdown/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/financialReports/resources/breakdown/exports.js"
+        },
         "./members/logs": {
             "import": {
                 "types": "./dist/esm/api/resources/members/resources/logs/exports.d.mts",
