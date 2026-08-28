@@ -331,6 +331,7 @@ export type PaymentMethodTypes =
   | 'eu_bank_transfer'
   | 'fpx'
   | 'gb_bank_transfer'
+  | 'gcash'
   | 'giropay'
   | 'google_pay'
   | 'gopay'
