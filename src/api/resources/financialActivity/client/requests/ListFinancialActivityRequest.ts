@@ -19,6 +19,8 @@ export interface ListFinancialActivityRequest {
     line_types?: Whop.ListFinancialActivityRequestLineTypesItem | Whop.ListFinancialActivityRequestLineTypesItem[];
     /** Optional direction filter. `money_in` returns positive activity and `money_out` returns negative activity. */
     direction?: Whop.ListFinancialActivityRequestDirection;
+    /** Optional prefixed resource ID. Returns activity associated with that resource. */
+    resource_id?: string;
     /** Optional currency code filter, for example `usd`. */
     currency?: string;
     /** Only include rows posted after this ISO 8601 timestamp. */

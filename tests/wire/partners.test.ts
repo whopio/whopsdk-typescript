@@ -181,6 +181,7 @@ describe("PartnersClient", () => {
                     user: {
                         city: "Austin",
                         country: "US",
+                        email: "marcus@shinetime.example",
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Tanya Cole",
                         profile_picture: { url: "https://ui-avatars.com/api/" },

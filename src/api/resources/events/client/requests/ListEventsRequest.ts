@@ -25,7 +25,7 @@ export interface ListEventsRequest {
     direction?: Whop.ListEventsRequestDirection;
     /** Full event names to filter by, comma-separated (payment.completed, pixel.lead, pixel.page, pixel.custom:<name>) — the same vocabulary the events / people metrics use. */
     event?: string;
-    /** Canonical source path, exact or with a trailing :* prefix (whop:<campaign>:*, ext:meta:*, referrer:<domain>, direct). Restricts the list to conversion targets attributed to that source — the debuggability twin of a metric cell's source parameter. */
+    /** Canonical source path, exact or with a trailing :* prefix (whop:<campaign>:*, ext:meta:*, referrer:<domain>, direct). Restricts the list to conversion targets attributed to that source — the debuggability twin of a metric cell's source parameter. A whop:... source combined with non-conversion event names (event=pixel.page) instead lists the events whose ad click resolved to that entity — the page views an ad drove. */
     source?: string;
     /** Attribution model for the source filter (defaults to last_touch). */
     attribution_model?: Whop.ListEventsRequestAttributionModel;

@@ -8,6 +8,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { BreakdownClient } from "../resources/breakdown/client/Client.js";
 
 export declare namespace FinancialReportsClient {
     export type Options = BaseClientOptions;
@@ -17,9 +18,14 @@ export declare namespace FinancialReportsClient {
 
 export class FinancialReportsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FinancialReportsClient.Options>;
+    protected _breakdown: BreakdownClient | undefined;
 
     constructor(options: FinancialReportsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get breakdown(): BreakdownClient {
+        return (this._breakdown ??= new BreakdownClient(this._options));
     }
 
     /**

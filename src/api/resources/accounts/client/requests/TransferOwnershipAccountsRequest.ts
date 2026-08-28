@@ -14,4 +14,6 @@ export interface TransferOwnershipAccountsRequest {
     as_partner?: boolean;
     /** The user to transfer ownership to: a user ID (`user_*`) or an email address. An email address with no Whop account yet is sent an invite to create one. */
     identifier: string;
+    /** A note from the partner, shown as a quote in the invite email and signed with their name. Requires `as_partner`; sending it on an ordinary transfer is a 400. Omit it and the email sends without a note. */
+    message?: string;
 }

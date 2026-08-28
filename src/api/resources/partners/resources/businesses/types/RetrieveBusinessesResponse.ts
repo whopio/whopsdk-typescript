@@ -5,6 +5,8 @@ import type * as Whop from "../../../../../index.js";
 export interface RetrieveBusinessesResponse {
     /** Referred account. */
     account: RetrieveBusinessesResponse.Account | null;
+    /** The partner whose blueprint the business deployed. Null unless this is a blueprint referral. */
+    blueprint_partner: RetrieveBusinessesResponse.BlueprintPartner | null;
     /** When the partner business was created. */
     created_at: string;
     earnings_usd: RetrieveBusinessesResponse.EarningsUsd;
@@ -48,6 +50,30 @@ export namespace RetrieveBusinessesResponse {
         route: string;
         /** Referred account display name. */
         title: string;
+    }
+
+    /**
+     * The partner whose blueprint the business deployed. Null unless this is a blueprint referral.
+     */
+    export interface BlueprintPartner {
+        /** User ID, prefixed `user_`. */
+        id: string;
+        /** The user's display name. */
+        name: string | null;
+        /** The user's profile picture. */
+        profile_picture: BlueprintPartner.ProfilePicture;
+        /** The user's unique username. */
+        username: string;
+    }
+
+    export namespace BlueprintPartner {
+        /**
+         * The user's profile picture.
+         */
+        export interface ProfilePicture {
+            /** The user's profile picture URL. */
+            url: string;
+        }
     }
 
     export interface EarningsUsd {
@@ -99,6 +125,8 @@ export namespace RetrieveBusinessesResponse {
      * The owner of the referred business.
      */
     export interface Owner {
+        /** The business owner's email address, so a partner can follow up on a referral they made. Requires the `partner:email:read` scope; `null` without it, or while the account has no reachable address of its own. */
+        email: string | null;
         /** User ID, prefixed `user_`. */
         id: string;
         /** The user's display name. */
