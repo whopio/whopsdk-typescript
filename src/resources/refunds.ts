@@ -449,7 +449,8 @@ export interface RefundListParams extends CursorPageParams {
   before?: string;
 
   /**
-   * Filter refunds to only those belonging to this company.
+   * Filter refunds to those belonging to this company. Mutually exclusive with
+   * payment_id and user_id: provide exactly one.
    */
   company_id?: string;
 
@@ -479,12 +480,15 @@ export interface RefundListParams extends CursorPageParams {
   last?: number;
 
   /**
-   * Filter refunds to only those associated with this specific payment.
+   * Filter refunds to those associated with this specific payment. Mutually
+   * exclusive with company_id and user_id: provide exactly one.
    */
   payment_id?: string;
 
   /**
-   * Filter refunds to only those associated with this specific user.
+   * Filter refunds to those associated with this specific user. Mutually exclusive
+   * with payment_id and company_id: provide exactly one. Requires a credential
+   * belonging to that user; any other credential receives 'You are not authorized'.
    */
   user_id?: string;
 }
