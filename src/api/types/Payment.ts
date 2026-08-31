@@ -42,6 +42,8 @@ export interface Payment {
     disputes: Payment.Disputes.Item[] | null;
     /** If the payment failed, the reason for the failure. */
     failure_message: string | null;
+    /** The fees associated with this specific payment. */
+    fees: Payment.Fees.Item[];
     /** The number of financing installments for the payment. Present if the payment is a financing payment (e.g. Splitit, Klarna, etc.). */
     financing_installments_count: number | null;
     /** The financing transactions attached to this payment. Present if the payment is a financing payment (e.g. Splitit, Klarna, etc.). */
@@ -206,6 +208,24 @@ export namespace Payment {
             reason: string | null;
             /** The current status of the dispute lifecycle, such as needs_response, under_review, won, or lost. */
             status: Whop.DisputeStatuses;
+        }
+    }
+
+    export type Fees = Fees.Item[];
+
+    export namespace Fees {
+        /**
+         * Represents a fee related to a payment
+         */
+        export interface Item {
+            /** The value or amount to display for the fee. */
+            amount: number;
+            /** The currency of the fee. */
+            currency: Whop.Currencies;
+            /** The label to display for the fee. */
+            name: string;
+            /** The specific origin of the fee, if applicable. */
+            type: Whop.SpecificFeeOrigins;
         }
     }
 

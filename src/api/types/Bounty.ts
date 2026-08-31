@@ -50,6 +50,8 @@ export interface Bounty {
     hosting_account: Whop.StorefrontAccount | null;
     /** Bounty ID, prefixed `bnty_`. */
     id: string;
+    /** Total verified footage a submission must accumulate before it can be submitted, in seconds. Always a whole number of hours. Present only on `data_capture` bounties — it is what `net_reward_amount` pays for, so rate displays divide by it. `null` for every other goal type. */
+    min_total_verified_duration_seconds: number | null;
     /** What a worker is quoted per accepted submission after the platform fee, in whole currency units. The exact post-fee figure, at the standard platform fee rate — a worker who locked a different rate, or who arrived through an affiliate link, is paid a different amount. */
     net_reward_amount: number;
     /** User who posted the bounty — the account owner when created with an account API key. */

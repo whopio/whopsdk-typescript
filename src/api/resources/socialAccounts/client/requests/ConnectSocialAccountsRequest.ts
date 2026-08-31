@@ -3,22 +3,23 @@
 /**
  * @example
  *     {
- *         platform: "meta_business"
+ *         platform: "meta_business",
+ *         redirect_url: "https://example.com/settings/social-accounts"
  *     }
  */
 export interface ConnectSocialAccountsRequest {
     /** The Account (biz_ identifier) to connect the social account for. An account-scoped API key may omit this to default to its own account. */
     account_id?: string;
-    /** The platform to connect the social account on. Supported options are `meta_business` and `tiktok`. */
+    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts. */
     platform: ConnectSocialAccountsRequest.Platform;
-    /** The Whop URL to redirect the user to after they finish connecting. */
-    redirect_url?: string;
-    /** Capabilities to grant for the connected social account. Use `advertise` when connecting a Meta Business or TikTok account for ads. */
+    /** Where to send the user once they finish connecting their accounts. Any `http` or `https` URL. If the connection fails, the user is redirected with a `social_account_error` query param. */
+    redirect_url: string;
+    /** Capabilities to grant for the connected social account. `advertise` is required for both `meta_business` and `tiktok` connections — it is not conditional on whether you intend to run ads, and omitting it fails the request. */
     scopes?: ConnectSocialAccountsRequest.Scopes.Item[];
 }
 
 export namespace ConnectSocialAccountsRequest {
-    /** The platform to connect the social account on. Supported options are `meta_business` and `tiktok`. */
+    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts. */
     export const Platform = {
         MetaBusiness: "meta_business",
         Tiktok: "tiktok",

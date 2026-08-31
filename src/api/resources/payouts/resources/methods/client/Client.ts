@@ -310,7 +310,7 @@ export class MethodsClient {
     }
 
     /**
-     * Changes the label used to identify a saved payout method.
+     * Changes the label used to identify a saved payout method or makes it the account's default payout method.
      *
      * @param {Whop.payouts.UpdateMethodsRequest} request
      * @param {MethodsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -324,8 +324,7 @@ export class MethodsClient {
      *
      * @example
      *     await client.payouts.methods.update({
-     *         id: "id",
-     *         nickname: "Primary checking"
+     *         id: "id"
      *     })
      */
     public update(

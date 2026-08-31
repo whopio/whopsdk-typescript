@@ -12,6 +12,7 @@ export const PaymentProviders = {
     MultiPsp: "multi_psp",
     Adyen: "adyen",
     Claritypay: "claritypay",
+    FlexPay: "flex_pay",
     CheckoutDotCom: "checkout_dot_com",
     Airwallex: "airwallex",
     Coinflow: "coinflow",

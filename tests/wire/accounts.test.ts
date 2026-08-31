@@ -2498,6 +2498,414 @@ describe("AccountsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
+    test("suspend (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            balances: [
+                {
+                    balance: "50.0",
+                    breakdown: {
+                        available: "1500.0",
+                        in_transit: "0",
+                        pending: "0",
+                        pending_settlements: [{ amount: "12.5", date: "2026-01-01" }],
+                        reserve: "0",
+                    },
+                    icon_url: "https://assets.whop.com/tokens/usd.png",
+                    name: "US Dollar",
+                    price_usd: 1,
+                    symbol: "USD",
+                    value_usd: "50.00",
+                },
+            ],
+            banner_image_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            business_address: {
+                city: "Austin",
+                country: "US",
+                line1: "4180 Burnet Rd",
+                line2: "Suite 2",
+                postal_code: "78756",
+                state: "TX",
+            },
+            business_name: "Shine Time Auto Detailing, LLC",
+            business_type: "education_program",
+            can_transfer_pending_balance_to_children: false,
+            capabilities: {
+                accept_bank_payments: "active",
+                accept_bnpl_payments: "active",
+                accept_card_payments: "active",
+                bank_deposit: "active",
+                card_deposit: "active",
+                card_issuing: "active",
+                crypto_deposit: "active",
+                crypto_payout: "active",
+                instant_payout: "active",
+                run_ads: "active",
+                standard_payout: "active",
+                transfer: "active",
+            },
+            cards: { kind: "individual", status: "approved" },
+            collect_vat_id: true,
+            company_formation: {
+                documents: [
+                    {
+                        id: "file_xxxxxxxxxxxxxx",
+                        name: "Articles of Organization",
+                        type: "articles_of_organization",
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    },
+                ],
+                ein_registered: false,
+                legal_name: "Shine Time Auto Detailing, LLC",
+                signatures: {
+                    form8821: {
+                        expires_at: "2026-01-01T12:00:00.000Z",
+                        status: "pending",
+                        url: "https://sign.doola.com/shine-time-auto-detailing/form8821",
+                    },
+                    ss4: {
+                        expires_at: "2026-01-01T12:00:00.000Z",
+                        status: "pending",
+                        url: "https://sign.doola.com/shine-time-auto-detailing/form8821",
+                    },
+                },
+                state_registered: true,
+                status: "draft",
+            },
+            country: "us",
+            created_at: "2026-01-01T12:00:00.000Z",
+            description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            email: "marcus@shinetime.example",
+            eula: {
+                content_type: "application/pdf",
+                created_at: "2026-01-01T12:00:00.000Z",
+                filename: "evidence.pdf",
+                id: "file_xxxxxxxxxxxxxx",
+                multipart_chunk_size: 5242880,
+                multipart_upload_id: "upload-id",
+                multipart_upload_urls: [
+                    {
+                        part_number: 1,
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    },
+                ],
+                object: "file",
+                size: 9670,
+                upload_headers: { key: "value" },
+                upload_status: "pending",
+                upload_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                visibility: "public",
+            },
+            home_preferences: ["hide_member_count"],
+            id: "biz_xxxxxxxxxxxxxx",
+            industry_group: "academic_and_test_prep",
+            industry_type: "other",
+            invoice_prefix: "SHINE",
+            logo_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            metadata: { external_id: "shop_4417", region: "austin" },
+            onboarding_type: "platform",
+            opengraph_image_url:
+                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+            opengraph_image_variant: "white",
+            other_business_description: "Mobile auto detailing",
+            other_industry_description: "Automotive services",
+            owner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            parent_account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-holdings",
+                title: "Shine Time Holdings",
+            },
+            payment_controls: {
+                dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
+                dispute_alert_fee_usd: 29,
+                enforce_3ds: false,
+                financing_disabled: false,
+                high_risk_processing_fee_percentage: 0,
+                pending_auto_topup_fee_percentage: 2,
+                pending_balance_delay_days: 0,
+                reserve: { hold_period_days: 14, percentage: 15 },
+                resolution_center_auto_refund: {
+                    card_threshold_usd: 50,
+                    financing_threshold_usd: 25,
+                    locked: false,
+                    paypal_threshold_usd: 40,
+                },
+                restricted_payment_methods: ["card_visa"],
+                undated_pending_reason: "kyc_incomplete",
+                withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
+            },
+            privacy_policy: {
+                content_type: "application/pdf",
+                created_at: "2026-01-01T12:00:00.000Z",
+                filename: "evidence.pdf",
+                id: "file_xxxxxxxxxxxxxx",
+                multipart_chunk_size: 5242880,
+                multipart_upload_id: "upload-id",
+                multipart_upload_urls: [
+                    {
+                        part_number: 1,
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    },
+                ],
+                object: "file",
+                size: 9670,
+                upload_headers: { key: "value" },
+                upload_status: "pending",
+                upload_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                visibility: "public",
+            },
+            product_tax_code: { id: "ptc_xxxxxxxxxxxxxx", name: "General - Digital Goods", product_type: "digital" },
+            recommended_actions: [
+                {
+                    action: "theme_business",
+                    blocked_capabilities: ["accept_bnpl_payments"],
+                    cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/settings/payments/",
+                    cta_label: "Apply",
+                    description: "Let customers pay over time with buy now, pay later.",
+                    icon_url: "https://whop.com/illustrations/orange/piggy-bank.svg",
+                    impact_score: 86,
+                    reasoning: "Financing lifts conversion on the $249 ceramic coating, the priciest job on the menu.",
+                    status: "optional",
+                    title: "Offer financing at checkout",
+                },
+            ],
+            require_2fa: true,
+            required_actions: [
+                {
+                    action: "deposit_funds",
+                    blocked_capabilities: ["standard_payout"],
+                    cta: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/balance/",
+                    cta_label: "Verify now",
+                    description: "Complete verification to withdraw your earnings.",
+                    icon_url: "https://whop.com/illustrations/orange/shield.svg",
+                    status: "required",
+                    title: "Complete your identity verification",
+                },
+            ],
+            return_policy: {
+                content_type: "application/pdf",
+                created_at: "2026-01-01T12:00:00.000Z",
+                filename: "evidence.pdf",
+                id: "file_xxxxxxxxxxxxxx",
+                multipart_chunk_size: 5242880,
+                multipart_upload_id: "upload-id",
+                multipart_upload_urls: [
+                    {
+                        part_number: 1,
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    },
+                ],
+                object: "file",
+                size: 9670,
+                upload_headers: { key: "value" },
+                upload_status: "pending",
+                upload_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                visibility: "public",
+            },
+            route: "biz_xxxxxxxxxxxxxx",
+            send_customer_emails: false,
+            show_joined_whops: false,
+            show_reviews_dtc: false,
+            show_user_directory: false,
+            social_links: [
+                {
+                    id: "social_1",
+                    title: "@shinetimedetail",
+                    url: "https://instagram.com/shinetimedetail",
+                    website: "x",
+                },
+            ],
+            stablecoin_rails: false,
+            status: "active",
+            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            store_page_config: {
+                accent_color: "ruby",
+                layout: "featured",
+                profile_variant: "personal",
+                whop_affiliate_link: true,
+            },
+            target_audience: "Owners of new and enthusiast vehicles in Austin, TX",
+            tax_collection_enabled_states: ["TX"],
+            tax_identifiers: [{ id: "txid_xxxxxxxxxxxxxx", tax_id_type: "ad_nrt", tax_id_value: "DE123456789" }],
+            tax_remitted_by: "whop",
+            tax_type: "inclusive",
+            terms_of_service: {
+                content_type: "application/pdf",
+                created_at: "2026-01-01T12:00:00.000Z",
+                filename: "evidence.pdf",
+                id: "file_xxxxxxxxxxxxxx",
+                multipart_chunk_size: 5242880,
+                multipart_upload_id: "upload-id",
+                multipart_upload_urls: [
+                    {
+                        part_number: 1,
+                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                    },
+                ],
+                object: "file",
+                size: 9670,
+                upload_headers: { key: "value" },
+                upload_status: "pending",
+                upload_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                visibility: "public",
+            },
+            three_ds_level: "mandate_challenge",
+            title: "Shine Time Auto Detailing",
+            total_earned_usd: 0,
+            total_usd: "50.00",
+            use_logo_as_opengraph_image_fallback: true,
+            verification: { business: { key: "value" }, individual: { key: "value" } },
+            volume_usd: 1.1,
+            wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+        };
+
+        server
+            .mockEndpoint()
+            .post("/accounts/id/suspend")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.accounts.suspend({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("suspend (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/accounts/id/suspend")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.accounts.suspend({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("suspend (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/accounts/id/suspend")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.accounts.suspend({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("suspend (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/accounts/id/suspend")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.accounts.suspend({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("suspend (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/accounts/id/suspend")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.accounts.suspend({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("transferOwnership (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

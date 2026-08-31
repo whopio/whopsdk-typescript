@@ -563,6 +563,71 @@ await client.accounts.formCompany({
 </dl>
 </details>
 
+<details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">suspend</a>({ ...params }) -> Whop.Account</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Suspends a connected account directly owned by the authenticated platform account. This cannot suspend the platform account itself or an account owned by another platform.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.suspend({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.SuspendAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">transferOwnership</a>({ ...params }) -> Whop.TransferOwnershipAccountsResponse</code></summary>
 <dl>
 <dd>
@@ -3674,6 +3739,82 @@ await client.apiKeys.rotate({
 </dl>
 </details>
 
+## Api Logs
+<details><summary><code>client.apiLogs.<a href="/src/api/resources/apiLogs/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListApiLogsResponse.Data.Item, Whop.ListApiLogsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists the requests served by Whop's API with the account's API keys, newest first — every surface (GraphQL, REST, and native /api/v1), reads and failed requests included.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.apiLogs.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.apiLogs.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListApiLogsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ApiLogsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## App Builds
 <details><summary><code>client.appBuilds.<a href="/src/api/resources/appBuilds/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.AppBuild, Whop.ListAppBuildsResponse&gt;</code></summary>
 <dl>
@@ -6117,7 +6258,7 @@ await client.cards.list();
 <dl>
 <dd>
 
-Issue a virtual card, or apply for card issuing.
+Issue a virtual card, or apply for card issuing. An account with no application files one here and gets back a `202`; call again to issue the card once it is approved.
 </dd>
 </dl>
 </dd>
@@ -7384,6 +7525,158 @@ await client.companyTokenTransactions.retrieve({
 <dd>
 
 **requestOptions:** `CompanyTokenTransactionsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Confirmation Tokens
+<details><summary><code>client.confirmationTokens.<a href="/src/api/resources/confirmationTokens/client/Client.ts">create</a>({ ...params }) -> Whop.ConfirmationToken</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Mints a single-use, short-lived confirmation token from what the buyer entered on your collection surface: the payment method payload, billing details, and attested save consent. Public and rate-limited — the account_id in the body scopes the token but does not authenticate. Confirm it with POST /payments from your server.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.confirmationTokens.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    billing_details: {
+        address: {
+            "city": "Austin",
+            "country": "US",
+            "line1": "123 Main St",
+            "postal_code": "78701"
+        },
+        email: "buyer@example.com",
+        name: "Buyer Name"
+    },
+    payment_method: {
+        card: {
+            brand: "visa",
+            last4: "4242",
+            token_intent: "bt_ti_123"
+        },
+        category: "card",
+        type: "card"
+    },
+    setup_future_usage: "off_session"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateConfirmationTokensRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfirmationTokensClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.confirmationTokens.<a href="/src/api/resources/confirmationTokens/client/Client.ts">retrieve</a>({ ...params }) -> Whop.ConfirmationToken</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a token's display-safe preview — never the underlying payment credential. Public and rate-limited: the account_id query param must match the account the token was minted for.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.confirmationTokens.retrieve({
+    id: "id",
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveConfirmationTokensRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ConfirmationTokensClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -16968,7 +17261,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charge an existing member off-session using one of their stored payment methods. You can provide an existing plan, or create a new one in-line. This endpoint will respond with a payment object immediately, but the payment is processed asynchronously in the background. Use webhooks to be notified when the payment succeeds or fails.
+Charge a buyer on-session with a `confirmation_token` for the method they selected, or charge an existing member off-session using a stored payment method. You can provide an existing plan or create one inline. The endpoint returns a payment immediately, but processing continues asynchronously. Use webhooks to learn whether it succeeds or fails, and poll the payment's status endpoint for any step the buyer must complete.
 
 Required permissions:
  - `payment:charge`
@@ -22149,7 +22442,8 @@ Starts an OAuth connection flow and returns an authorize_url where the user can 
 
 ```typescript
 await client.socialAccounts.connect({
-    platform: "meta_business"
+    platform: "meta_business",
+    redirect_url: "https://example.com/settings/social-accounts"
 });
 
 ```
@@ -26735,7 +27029,7 @@ await client.payouts.methods.delete({
 <dl>
 <dd>
 
-Changes the label used to identify a saved payout method.
+Changes the label used to identify a saved payout method or makes it the account's default payout method.
 </dd>
 </dl>
 </dd>
@@ -26751,8 +27045,7 @@ Changes the label used to identify a saved payout method.
 
 ```typescript
 await client.payouts.methods.update({
-    id: "id",
-    nickname: "Primary checking"
+    id: "id"
 });
 
 ```

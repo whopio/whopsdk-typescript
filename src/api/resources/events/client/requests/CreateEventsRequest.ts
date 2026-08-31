@@ -107,6 +107,8 @@ export namespace CreateEventsRequest {
         msclkid?: (string | null) | undefined;
         /** Reddit click ID. */
         rdt_cid?: (string | null) | undefined;
+        /** Whop SC identifier. */
+        sc?: (string | null) | undefined;
         /** Snapchat click ID. */
         sccid?: (string | null) | undefined;
         /** Screen resolution (e.g. 1920x1080). */

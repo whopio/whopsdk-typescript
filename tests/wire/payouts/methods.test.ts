@@ -483,7 +483,7 @@ describe("MethodsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { nickname: "Primary checking" };
+        const rawRequestBody = {};
         const rawResponseBody = {
             account_reference: "••••0472",
             bank_verification_state: "checking",
@@ -494,7 +494,7 @@ describe("MethodsClient", () => {
             id: "potk_xxxxxxxxxxxxxx",
             institution_name: "Frost Bank",
             is_clone: false,
-            is_default: false,
+            is_default: true,
             last_paid_out_at: "2024-01-15T09:30:00Z",
             linked_via_plaid: false,
             needs_plaid_reconnect: false,
@@ -527,7 +527,6 @@ describe("MethodsClient", () => {
 
         const response = await client.payouts.methods.update({
             id: "id",
-            nickname: "Primary checking",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -541,7 +540,7 @@ describe("MethodsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { nickname: "x" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -556,7 +555,6 @@ describe("MethodsClient", () => {
         await expect(async () => {
             return await client.payouts.methods.update({
                 id: "id",
-                nickname: "x",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -570,7 +568,7 @@ describe("MethodsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { nickname: "x" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -585,7 +583,6 @@ describe("MethodsClient", () => {
         await expect(async () => {
             return await client.payouts.methods.update({
                 id: "id",
-                nickname: "x",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -599,7 +596,7 @@ describe("MethodsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { nickname: "x" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -614,7 +611,6 @@ describe("MethodsClient", () => {
         await expect(async () => {
             return await client.payouts.methods.update({
                 id: "id",
-                nickname: "x",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -628,7 +624,7 @@ describe("MethodsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { nickname: "x" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -643,7 +639,6 @@ describe("MethodsClient", () => {
         await expect(async () => {
             return await client.payouts.methods.update({
                 id: "id",
-                nickname: "x",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });

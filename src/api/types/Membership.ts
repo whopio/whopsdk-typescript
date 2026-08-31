@@ -4,7 +4,7 @@ import type * as Whop from "../index.js";
 
 export interface Membership {
     /** The account (seller) this membership belongs to. */
-    account: Whop.MembershipAccount;
+    account: Whop.StorefrontAccount;
     /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring plans. */
     cancel_at_period_end: boolean;
     /** When the membership was created, as an ISO 8601 timestamp. */
