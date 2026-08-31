@@ -11,9 +11,8 @@ describe('resource notifications', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.notifications.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      content: 'content',
-      title: 'title',
+      content: 'Drop off at 4180 Burnet Rd. Plan on two days for the full coating.',
+      title: 'Your ceramic coating is booked',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,13 +26,16 @@ describe('resource notifications', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.notifications.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      content: 'content',
-      title: 'title',
-      icon_user_id: 'icon_user_id',
-      rest_path: 'rest_path',
-      subtitle: 'subtitle',
-      user_ids: ['string'],
+      content: 'Drop off at 4180 Burnet Rd. Plan on two days for the full coating.',
+      title: 'Your ceramic coating is booked',
+      account_id: 'biz_xxxxxxxxxxxxxx',
+      experience_id: 'exp_xxxxxxxxxxxxxx',
+      icon_user_id: 'user_xxxxxxxxxxxxxx',
+      rest_path: '/bookings/upcoming',
+      subtitle: 'Tuesday 9:00 AM, Bay 2',
+      user_ids: ['user_xxxxxxxxxxxxxx'],
+      'Api-Version-Date': '2026-08-25-2',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 });

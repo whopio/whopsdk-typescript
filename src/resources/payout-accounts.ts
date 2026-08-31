@@ -6,9 +6,6 @@ import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Payout accounts
- */
 export class PayoutAccounts extends APIResource {
   /**
    * Retrieves the details of an existing payout account.

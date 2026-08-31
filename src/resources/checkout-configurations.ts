@@ -1,71 +1,99 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PaymentsAPI from './payments';
-import * as PlansAPI from './plans';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Checkout configurations
+ * A Checkout Configuration is a reusable checkout link owned by an account. In `payment` mode it sells a specific plan; in `setup` mode it collects and saves payment details without charging. Each configuration can also override which payment methods are accepted and how 3D Secure is enforced for that checkout.
+ *
+ * Use the Checkout Configurations API to create checkout links for an existing or inline plan, list configurations for an account, retrieve the configuration behind a checkout URL, and delete links that should no longer be used.
  */
 export class CheckoutConfigurations extends APIResource {
   /**
-   * Creates a new checkout configuration
-   *
-   * Required permissions:
-   *
-   * - `checkout_configuration:create`
-   * - `plan:create`
-   * - `access_pass:create`
-   * - `access_pass:update`
-   * - `checkout_configuration:basic:read`
+   * Creates a reusable checkout configuration for an existing or inline plan.
    *
    * @example
    * ```ts
    * const checkoutConfiguration =
-   *   await client.checkoutConfigurations.create({
-   *     plan_id: 'plan_xxxxxxxxxxxxx',
-   *   });
+   *   await client.checkoutConfigurations.create();
    * ```
    */
   create(
-    body: CheckoutConfigurationCreateParams,
+    params: CheckoutConfigurationCreateParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Shared.CheckoutConfiguration> {
-    return this._client.post('/checkout_configurations', { body, ...options });
+  ): APIPromise<CheckoutConfigurationCreateResponse> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post('/checkout_configurations', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing checkout configuration.
+   * Retrieves a checkout configuration by ID. This endpoint is public so a checkout
+   * page can load from the configuration URL.
    *
-   * Required permissions:
-   *
-   * - `checkout_configuration:basic:read`
+   * @example
+   * ```ts
+   * const checkoutConfiguration =
+   *   await client.checkoutConfigurations.retrieve('id');
+   * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.CheckoutConfiguration> {
-    return this._client.get(path`/checkout_configurations/${id}`, options);
+  retrieve(
+    id: string,
+    params: CheckoutConfigurationRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<CheckoutConfigurationRetrieveResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/checkout_configurations/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of checkout configurations for a company, with optional
-   * filtering by plan and creation date.
+   * Lists checkout configurations for an account.
    *
-   * Required permissions:
-   *
-   * - `checkout_configuration:basic:read`
+   * @example
+   * ```ts
+   * // Automatically fetches more pages as needed.
+   * for await (const checkoutConfigurationListResponse of client.checkoutConfigurations.list(
+   *   { account_id: 'account_id' },
+   * )) {
+   *   // ...
+   * }
+   * ```
    */
   list(
-    query: CheckoutConfigurationListParams,
+    params: CheckoutConfigurationListParams,
     options?: RequestOptions,
   ): PagePromise<CheckoutConfigurationListResponsesCursorPage, CheckoutConfigurationListResponse> {
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params;
     return this._client.getAPIList(
       '/checkout_configurations',
       CursorPage<CheckoutConfigurationListResponse>,
-      { query, ...options },
+      {
+        query,
+        ...options,
+        headers: buildHeaders([
+          { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+          options?.headers,
+        ]),
+      },
     );
   }
 }
@@ -77,798 +105,873 @@ export type CheckoutConfigurationListResponsesCursorPage = CursorPage<CheckoutCo
  */
 export type CheckoutModes = 'payment' | 'setup';
 
-/**
- * A checkout configuration is a reusable configuration for a checkout, including
- * the plan, affiliate, and custom metadata. Payments and memberships created from
- * a checkout session inherit its metadata.
- */
-export interface CheckoutConfigurationListResponse {
+export interface CheckoutConfigurationCreateResponse {
   /**
-   * The unique identifier for the checkout session.
+   * Checkout configuration ID, prefixed `ch_`.
    */
   id: string;
 
   /**
-   * The affiliate code to use for the checkout configuration
+   * Account ID, prefixed `biz_`.
    */
-  affiliate_code: string | null;
+  account_id: string;
 
   /**
-   * The ID of the company to use for the checkout configuration
+   * When the checkout configuration was created, as an ISO 8601 timestamp.
    */
-  company_id: string;
+  created_at: string;
 
   /**
-   * The available currencies on the platform
+   * Controls whether checkout charges the buyer immediately or saves payment details
+   * for later.
    */
-  currency: Shared.Currency | null;
+  mode: 'payment' | 'setup';
 
   /**
-   * The metadata to use for the checkout configuration
+   * When the checkout configuration was last updated, as an ISO 8601 timestamp.
    */
-  metadata: { [key: string]: unknown } | null;
+  updated_at: string;
 
   /**
-   * The mode of the checkout session.
+   * Affiliate code applied at checkout, or `null` when none is set.
    */
-  mode: CheckoutModes;
+  affiliate_code?: string | null;
 
   /**
-   * The explicit payment method configuration for the session, if any. This
-   * currently only works in 'setup' mode. Use the plan's
-   * payment_method_configuration for payment method.
+   * Currency used for setup-mode payment method availability; defaults to `usd` when
+   * omitted.
    */
-  payment_method_configuration: CheckoutConfigurationListResponse.PaymentMethodConfiguration | null;
+  currency?: string | null;
 
   /**
-   * The plan to use for the checkout configuration
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
    */
-  plan: CheckoutConfigurationListResponse.Plan | null;
+  effective_payment_method_configuration?: CheckoutConfigurationCreateResponse.EffectivePaymentMethodConfiguration | null;
 
   /**
-   * A URL you can send to customers to complete a checkout. It looks like
-   * `/checkout/ch_xxxx/`
+   * Custom key-value metadata copied to payments and memberships. `null` without the
+   * `checkout_configuration:basic:read` scope.
    */
-  purchase_url: string;
+  metadata?: unknown | null;
 
   /**
-   * The URL to redirect the user to after the checkout configuration is created
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
    */
-  redirect_url: string | null;
+  payment_method_configuration?: CheckoutConfigurationCreateResponse.PaymentMethodConfiguration | null;
+
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
+   */
+  plan?: CheckoutConfigurationCreateResponse.Plan | null;
+
+  /**
+   * Checkout URL you can send to customers.
+   */
+  purchase_url?: string | null;
+
+  /**
+   * URL customers are sent to after checkout, or `null` when no redirect is
+   * configured.
+   */
+  redirect_url?: string | null;
+
+  /**
+   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
 }
 
-export namespace CheckoutConfigurationListResponse {
+export namespace CheckoutConfigurationCreateResponse {
   /**
-   * The explicit payment method configuration for the session, if any. This
-   * currently only works in 'setup' mode. Use the plan's
-   * payment_method_configuration for payment method.
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
    */
-  export interface PaymentMethodConfiguration {
+  export interface EffectivePaymentMethodConfiguration {
     /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
+     * Payment methods explicitly disabled.
      */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    disabled?: Array<string>;
 
     /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
+     * Payment methods explicitly enabled.
      */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    enabled?: Array<string>;
 
     /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
+     * Whether platform default payment methods are included.
      */
-    include_platform_defaults: boolean;
+    include_platform_defaults?: boolean;
   }
 
   /**
-   * The plan to use for the checkout configuration
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * Payment methods explicitly disabled for checkout.
+     */
+    disabled?: Array<string>;
+
+    /**
+     * Payment methods explicitly enabled for checkout.
+     */
+    enabled?: Array<string>;
+
+    /**
+     * Whether platform default payment methods are included.
+     */
+    include_platform_defaults?: boolean;
+  }
+
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
    */
   export interface Plan {
     /**
-     * The unique identifier for the plan.
+     * Plan ID, prefixed `plan_`.
      */
     id: string;
 
     /**
-     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
-     * does not check processor compatibility or feature flags.
+     * Whether this plan accepts local currency payments via adaptive pricing.
      */
     adaptive_pricing_enabled: boolean;
 
     /**
-     * Number of days between recurring charges, such as 30 for monthly or 365 for
-     * annual. `null` for one-time plans.
+     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+     * `null` for one-time plans.
      */
     billing_period: number | null;
 
     /**
-     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
-     * amounts on the plan are denominated in this currency.
+     * Three-letter ISO currency code for the plan's prices.
      */
-    currency: Shared.Currency;
+    currency: string;
 
     /**
-     * Access duration in days for expiration-based plans, such as 365 for a one-year
-     * pass.
+     * Access duration in days for expiration-based plans.
      */
     expiration_days: number | null;
 
     /**
-     * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
-     * For one-time plans, this is the full price. For renewal plans, this is charged
-     * on top of the first renewal_price.
+     * Initial purchase price in the plan currency.
      */
     initial_price: number;
 
     /**
-     * The billing model for this plan: 'renewal' for recurring subscriptions or
-     * 'one_time' for single payments.
+     * Billing model for the plan.
      */
-    plan_type: Shared.PlanType;
+    plan_type: 'renewal' | 'one_time';
 
     /**
-     * Sales method for this plan: `buy_now` for immediate purchase or `waitlist` for
-     * waitlist-based access.
+     * Sales method for the plan.
      */
-    release_method: Shared.ReleaseMethod;
+    release_method: 'buy_now' | 'waitlist';
 
     /**
-     * The recurring price charged every billing_period in the plan's base_currency
-     * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
+     * Recurring price charged each billing period.
      */
     renewal_price: number;
 
     /**
-     * The 3D Secure behavior for a plan.
+     * 3D Secure behavior for this plan, or `null` to use the account default.
      */
     three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
     /**
-     * Free trial days before first renewal charge. `null` if no trial is configured or
-     * the user has already used a trial for this plan.
+     * Free trial days before the first renewal charge.
      */
     trial_period_days: number | null;
 
     /**
-     * Controls whether the plan is visible to customers. When set to 'hidden', the
-     * plan is only accessible via direct link.
+     * Whether the plan is visible to customers or hidden from public view.
      */
-    visibility: Shared.Visibility;
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
   }
 }
 
-export type CheckoutConfigurationCreateParams =
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlan
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModePaymentWithPlanID
-  | CheckoutConfigurationCreateParams.CreateCheckoutSessionInputModeSetup;
+export interface CheckoutConfigurationRetrieveResponse {
+  /**
+   * Checkout configuration ID, prefixed `ch_`.
+   */
+  id: string;
 
-export declare namespace CheckoutConfigurationCreateParams {
-  export interface CreateCheckoutSessionInputModePaymentWithPlan {
+  /**
+   * Account ID, prefixed `biz_`.
+   */
+  account_id: string;
+
+  /**
+   * When the checkout configuration was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Controls whether checkout charges the buyer immediately or saves payment details
+   * for later.
+   */
+  mode: 'payment' | 'setup';
+
+  /**
+   * When the checkout configuration was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Affiliate code applied at checkout, or `null` when none is set.
+   */
+  affiliate_code?: string | null;
+
+  /**
+   * Currency used for setup-mode payment method availability; defaults to `usd` when
+   * omitted.
+   */
+  currency?: string | null;
+
+  /**
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
+   */
+  effective_payment_method_configuration?: CheckoutConfigurationRetrieveResponse.EffectivePaymentMethodConfiguration | null;
+
+  /**
+   * Custom key-value metadata copied to payments and memberships. `null` without the
+   * `checkout_configuration:basic:read` scope.
+   */
+  metadata?: unknown | null;
+
+  /**
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  payment_method_configuration?: CheckoutConfigurationRetrieveResponse.PaymentMethodConfiguration | null;
+
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
+   */
+  plan?: CheckoutConfigurationRetrieveResponse.Plan | null;
+
+  /**
+   * Checkout URL you can send to customers.
+   */
+  purchase_url?: string | null;
+
+  /**
+   * URL customers are sent to after checkout, or `null` when no redirect is
+   * configured.
+   */
+  redirect_url?: string | null;
+
+  /**
+   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+}
+
+export namespace CheckoutConfigurationRetrieveResponse {
+  /**
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
+   */
+  export interface EffectivePaymentMethodConfiguration {
     /**
-     * The plan attributes to create a new plan inline for this checkout configuration.
+     * Payment methods explicitly disabled.
      */
-    plan: CreateCheckoutSessionInputModePaymentWithPlan.Plan;
+    disabled?: Array<string>;
 
     /**
-     * An affiliate tracking code to attribute the checkout to a specific affiliate.
+     * Payment methods explicitly enabled.
      */
-    affiliate_code?: string | null;
+    enabled?: Array<string>;
 
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
+     * Whether platform default payment methods are included.
      */
-    checkout_styling?: CreateCheckoutSessionInputModePaymentWithPlan.CheckoutStyling | null;
-
-    /**
-     * The available currencies on the platform
-     */
-    currency?: Shared.Currency | null;
-
-    /**
-     * Custom key-value metadata to attach to the checkout configuration.
-     */
-    metadata?: { [key: string]: unknown } | null;
-
-    mode?: 'payment';
-
-    /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
-     */
-    payment_method_configuration?: CreateCheckoutSessionInputModePaymentWithPlan.PaymentMethodConfiguration | null;
-
-    /**
-     * The URL to redirect the user to after checkout is completed.
-     */
-    redirect_url?: string | null;
+    include_platform_defaults?: boolean;
   }
 
-  export namespace CreateCheckoutSessionInputModePaymentWithPlan {
+  /**
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  export interface PaymentMethodConfiguration {
     /**
-     * The plan attributes to create a new plan inline for this checkout configuration.
+     * Payment methods explicitly disabled for checkout.
      */
-    export interface Plan {
-      /**
-       * The company the plan should be created for.
-       */
-      company_id: string;
-
-      /**
-       * The respective currency identifier for the plan.
-       */
-      currency: Shared.Currency;
-
-      /**
-       * Whether this plan accepts local currency payments via adaptive pricing.
-       */
-      adaptive_pricing_enabled?: boolean | null;
-
-      /**
-       * The application fee amount collected by the platform from this connected
-       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
-       * than the total payment amount. Only valid for connected accounts with a parent
-       * company.
-       */
-      application_fee_amount?: number | null;
-
-      /**
-       * The interval in days at which the plan charges (renewal plans). For example, 30
-       * for monthly billing.
-       */
-      billing_period?: number | null;
-
-      /**
-       * An array of custom field objects.
-       */
-      custom_fields?: Array<Plan.CustomField> | null;
-
-      /**
-       * The description of the plan.
-       */
-      description?: string | null;
-
-      /**
-       * The number of days until the membership expires (for expiration-based plans).
-       * For example, 365 for a one-year access pass.
-       */
-      expiration_days?: number | null;
-
-      /**
-       * Whether to force the creation of a new plan even if one with the same attributes
-       * already exists.
-       */
-      force_create_new_plan?: boolean | null;
-
-      /**
-       * An image for the plan. This will be visible on the product page to customers.
-       */
-      image?: Plan.Image | null;
-
-      /**
-       * An additional amount charged upon first purchase. Provided as a number in
-       * dollars (e.g., 10.00 for $10.00).
-       */
-      initial_price?: number | null;
-
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
-
-      /**
-       * Whether or not the tax is included in a plan's price (or if it hasn't been set
-       * up)
-       */
-      override_tax_type?: Shared.TaxType | null;
-
-      /**
-       * The explicit payment method configuration for the plan. If not provided, the
-       * platform or company's defaults will apply.
-       */
-      payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
-
-      /**
-       * The type of plan that can be attached to a product
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
-       */
-      product?: Plan.Product | null;
-
-      /**
-       * The product the plan is related to. Either this or product is required.
-       */
-      product_id?: string | null;
-
-      /**
-       * The methods of how a plan can be released.
-       */
-      release_method?: Shared.ReleaseMethod | null;
-
-      /**
-       * The amount the customer is charged every billing period. Provided as a number in
-       * dollars (e.g., 9.99 for $9.99/period).
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The number of payments required before pausing the subscription.
-       */
-      split_pay_required_payments?: number | null;
-
-      /**
-       * The number of units available for purchase. If not provided, stock is unlimited.
-       */
-      stock?: number | null;
-
-      /**
-       * The title of the plan. This will be visible on the product page to customers.
-       */
-      title?: string | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      export interface CustomField {
-        /**
-         * The type of the custom field.
-         */
-        field_type: 'text';
-
-        /**
-         * The name of the custom field.
-         */
-        name: string;
-
-        /**
-         * The ID of the custom field (if being updated)
-         */
-        id?: string | null;
-
-        /**
-         * The order of the field.
-         */
-        order?: number | null;
-
-        /**
-         * The placeholder value of the field.
-         */
-        placeholder?: string | null;
-
-        /**
-         * Whether or not the field is required.
-         */
-        required?: boolean | null;
-      }
-
-      /**
-       * An image for the plan. This will be visible on the product page to customers.
-       */
-      export interface Image {
-        /**
-         * The ID of an existing file object.
-         */
-        id: string;
-      }
-
-      /**
-       * The explicit payment method configuration for the plan. If not provided, the
-       * platform or company's defaults will apply.
-       */
-      export interface PaymentMethodConfiguration {
-        /**
-         * An array of payment method identifiers that are explicitly disabled. Only
-         * applies if the include_platform_defaults is true.
-         */
-        disabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-        /**
-         * An array of payment method identifiers that are explicitly enabled. This means
-         * these payment methods will be shown on checkout. Example use case is to only
-         * enable a specific payment method like cashapp, or extending the platform
-         * defaults with additional methods.
-         */
-        enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-        /**
-         * Whether Whop's platform default payment method enablement settings are included
-         * in this configuration. The full list of default payment methods can be found in
-         * the documentation at docs.whop.com/payments.
-         */
-        include_platform_defaults?: boolean | null;
-      }
-
-      /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
-       */
-      export interface Product {
-        /**
-         * A unique ID used to find or create a product. When provided during creation, we
-         * will look for an existing product with this external identifier — if found, it
-         * will be updated; otherwise, a new product will be created.
-         */
-        external_identifier: string;
-
-        /**
-         * The title of the product.
-         */
-        title: string;
-
-        /**
-         * Whether or not to collect shipping information at checkout from the customer.
-         */
-        collect_shipping_address?: boolean | null;
-
-        /**
-         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-         * between 5 and 22 characters, contain at least one letter, and not contain any of
-         * the following characters: <, >, \, ', "
-         */
-        custom_statement_descriptor?: string | null;
-
-        /**
-         * A written description of the product.
-         */
-        description?: string | null;
-
-        /**
-         * The percentage of the revenue that goes to the global affiliate program.
-         */
-        global_affiliate_percentage?: number | null;
-
-        /**
-         * The different statuses of the global affiliate program for a product.
-         */
-        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-        /**
-         * The headline of the product.
-         */
-        headline?: string | null;
-
-        /**
-         * The ID of the product tax code to apply to this product.
-         */
-        product_tax_code_id?: string | null;
-
-        /**
-         * The URL to redirect the customer to after a purchase.
-         */
-        redirect_purchase_url?: string | null;
-
-        /**
-         * The route of the product.
-         */
-        route?: string | null;
-
-        /**
-         * Visibility of a resource
-         */
-        visibility?: Shared.Visibility | null;
-      }
-    }
+    disabled?: Array<string>;
 
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
+     * Payment methods explicitly enabled for checkout.
      */
-    export interface CheckoutStyling {
-      /**
-       * A hex color code for the checkout page background, applied to the order summary
-       * panel (e.g. #F4F4F5).
-       */
-      background_color?: string | null;
-
-      /**
-       * The different border-radius styles available for checkout pages.
-       */
-      border_style?: PlansAPI.CheckoutShape | null;
-
-      /**
-       * A hex color code for the button color (e.g. #FF5733).
-       */
-      button_color?: string | null;
-
-      /**
-       * The different font families available for checkout pages.
-       */
-      font_family?: PlansAPI.CheckoutFont | null;
-    }
+    enabled?: Array<string>;
 
     /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
+     * Whether platform default payment methods are included.
      */
-    export interface PaymentMethodConfiguration {
-      /**
-       * An array of payment method identifiers that are explicitly disabled. Only
-       * applies if the include_platform_defaults is true.
-       */
-      disabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-      /**
-       * An array of payment method identifiers that are explicitly enabled. This means
-       * these payment methods will be shown on checkout. Example use case is to only
-       * enable a specific payment method like cashapp, or extending the platform
-       * defaults with additional methods.
-       */
-      enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-      /**
-       * Whether Whop's platform default payment method enablement settings are included
-       * in this configuration. The full list of default payment methods can be found in
-       * the documentation at docs.whop.com/payments.
-       */
-      include_platform_defaults?: boolean | null;
-    }
+    include_platform_defaults?: boolean;
   }
 
-  export interface CreateCheckoutSessionInputModePaymentWithPlanID {
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
+   */
+  export interface Plan {
     /**
-     * The unique identifier of an existing plan to use for this checkout
-     * configuration.
+     * Plan ID, prefixed `plan_`.
      */
-    plan_id: string;
+    id: string;
 
     /**
-     * An affiliate tracking code to attribute the checkout to a specific affiliate.
+     * Whether this plan accepts local currency payments via adaptive pricing.
      */
-    affiliate_code?: string | null;
+    adaptive_pricing_enabled: boolean;
 
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
+     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+     * `null` for one-time plans.
      */
-    checkout_styling?: CreateCheckoutSessionInputModePaymentWithPlanID.CheckoutStyling | null;
+    billing_period: number | null;
 
     /**
-     * The available currencies on the platform
+     * Three-letter ISO currency code for the plan's prices.
      */
-    currency?: Shared.Currency | null;
+    currency: string;
 
     /**
-     * Custom key-value metadata to attach to the checkout configuration.
+     * Access duration in days for expiration-based plans.
      */
-    metadata?: { [key: string]: unknown } | null;
-
-    mode?: 'payment';
+    expiration_days: number | null;
 
     /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
+     * Initial purchase price in the plan currency.
      */
-    payment_method_configuration?: CreateCheckoutSessionInputModePaymentWithPlanID.PaymentMethodConfiguration | null;
+    initial_price: number;
 
     /**
-     * The URL to redirect the user to after checkout is completed.
+     * Billing model for the plan.
      */
-    redirect_url?: string | null;
+    plan_type: 'renewal' | 'one_time';
+
+    /**
+     * Sales method for the plan.
+     */
+    release_method: 'buy_now' | 'waitlist';
+
+    /**
+     * Recurring price charged each billing period.
+     */
+    renewal_price: number;
+
+    /**
+     * 3D Secure behavior for this plan, or `null` to use the account default.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
+     * Free trial days before the first renewal charge.
+     */
+    trial_period_days: number | null;
+
+    /**
+     * Whether the plan is visible to customers or hidden from public view.
+     */
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
+  }
+}
+
+export interface CheckoutConfigurationListResponse {
+  /**
+   * Checkout configuration ID, prefixed `ch_`.
+   */
+  id: string;
+
+  /**
+   * Account ID, prefixed `biz_`.
+   */
+  account_id: string;
+
+  /**
+   * When the checkout configuration was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Controls whether checkout charges the buyer immediately or saves payment details
+   * for later.
+   */
+  mode: 'payment' | 'setup';
+
+  /**
+   * When the checkout configuration was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Affiliate code applied at checkout, or `null` when none is set.
+   */
+  affiliate_code?: string | null;
+
+  /**
+   * Currency used for setup-mode payment method availability; defaults to `usd` when
+   * omitted.
+   */
+  currency?: string | null;
+
+  /**
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
+   */
+  effective_payment_method_configuration?: CheckoutConfigurationListResponse.EffectivePaymentMethodConfiguration | null;
+
+  /**
+   * Custom key-value metadata copied to payments and memberships. `null` without the
+   * `checkout_configuration:basic:read` scope.
+   */
+  metadata?: unknown | null;
+
+  /**
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  payment_method_configuration?: CheckoutConfigurationListResponse.PaymentMethodConfiguration | null;
+
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
+   */
+  plan?: CheckoutConfigurationListResponse.Plan | null;
+
+  /**
+   * Checkout URL you can send to customers.
+   */
+  purchase_url?: string | null;
+
+  /**
+   * URL customers are sent to after checkout, or `null` when no redirect is
+   * configured.
+   */
+  redirect_url?: string | null;
+
+  /**
+   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+}
+
+export namespace CheckoutConfigurationListResponse {
+  /**
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
+   */
+  export interface EffectivePaymentMethodConfiguration {
+    /**
+     * Payment methods explicitly disabled.
+     */
+    disabled?: Array<string>;
+
+    /**
+     * Payment methods explicitly enabled.
+     */
+    enabled?: Array<string>;
+
+    /**
+     * Whether platform default payment methods are included.
+     */
+    include_platform_defaults?: boolean;
   }
 
-  export namespace CreateCheckoutSessionInputModePaymentWithPlanID {
+  /**
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  export interface PaymentMethodConfiguration {
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
+     * Payment methods explicitly disabled for checkout.
      */
-    export interface CheckoutStyling {
-      /**
-       * A hex color code for the checkout page background, applied to the order summary
-       * panel (e.g. #F4F4F5).
-       */
-      background_color?: string | null;
-
-      /**
-       * The different border-radius styles available for checkout pages.
-       */
-      border_style?: PlansAPI.CheckoutShape | null;
-
-      /**
-       * A hex color code for the button color (e.g. #FF5733).
-       */
-      button_color?: string | null;
-
-      /**
-       * The different font families available for checkout pages.
-       */
-      font_family?: PlansAPI.CheckoutFont | null;
-    }
+    disabled?: Array<string>;
 
     /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
+     * Payment methods explicitly enabled for checkout.
      */
-    export interface PaymentMethodConfiguration {
-      /**
-       * An array of payment method identifiers that are explicitly disabled. Only
-       * applies if the include_platform_defaults is true.
-       */
-      disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+    enabled?: Array<string>;
 
-      /**
-       * An array of payment method identifiers that are explicitly enabled. This means
-       * these payment methods will be shown on checkout. Example use case is to only
-       * enable a specific payment method like cashapp, or extending the platform
-       * defaults with additional methods.
-       */
-      enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-      /**
-       * Whether Whop's platform default payment method enablement settings are included
-       * in this configuration. The full list of default payment methods can be found in
-       * the documentation at docs.whop.com/payments.
-       */
-      include_platform_defaults?: boolean | null;
-    }
+    /**
+     * Whether platform default payment methods are included.
+     */
+    include_platform_defaults?: boolean;
   }
 
-  export interface CreateCheckoutSessionInputModeSetup {
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
+   */
+  export interface Plan {
     /**
-     * The unique identifier of the company to create the checkout configuration for.
-     * Only required in setup mode.
+     * Plan ID, prefixed `plan_`.
      */
-    company_id: string;
-
-    mode: 'setup';
+    id: string;
 
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
+     * Whether this plan accepts local currency payments via adaptive pricing.
      */
-    checkout_styling?: CreateCheckoutSessionInputModeSetup.CheckoutStyling | null;
+    adaptive_pricing_enabled: boolean;
 
     /**
-     * The available currencies on the platform
+     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+     * `null` for one-time plans.
      */
-    currency?: Shared.Currency | null;
+    billing_period: number | null;
 
     /**
-     * Custom key-value metadata to attach to the checkout configuration.
+     * Three-letter ISO currency code for the plan's prices.
      */
-    metadata?: { [key: string]: unknown } | null;
+    currency: string;
 
     /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
+     * Access duration in days for expiration-based plans.
      */
-    payment_method_configuration?: CreateCheckoutSessionInputModeSetup.PaymentMethodConfiguration | null;
+    expiration_days: number | null;
 
     /**
-     * The URL to redirect the user to after checkout is completed.
+     * Initial purchase price in the plan currency.
      */
-    redirect_url?: string | null;
+    initial_price: number;
 
     /**
-     * The 3D Secure behavior for a plan.
+     * Billing model for the plan.
+     */
+    plan_type: 'renewal' | 'one_time';
+
+    /**
+     * Sales method for the plan.
+     */
+    release_method: 'buy_now' | 'waitlist';
+
+    /**
+     * Recurring price charged each billing period.
+     */
+    renewal_price: number;
+
+    /**
+     * 3D Secure behavior for this plan, or `null` to use the account default.
+     */
+    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
+     * Free trial days before the first renewal charge.
+     */
+    trial_period_days: number | null;
+
+    /**
+     * Whether the plan is visible to customers or hidden from public view.
+     */
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
+  }
+}
+
+export interface CheckoutConfigurationCreateParams {
+  /**
+   * Body param: Account ID, prefixed `biz_`.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Affiliate code to apply to the checkout.
+   */
+  affiliate_code?: string | null;
+
+  /**
+   * Body param: Currency used for setup-mode payment method availability.
+   */
+  currency?: string | null;
+
+  /**
+   * Body param: Custom key-value metadata copied to payments and memberships.
+   */
+  metadata?: unknown | null;
+
+  /**
+   * Body param: Controls whether checkout charges the buyer immediately or saves
+   * payment details for later. Defaults to `payment`.
+   */
+  mode?: 'payment' | 'setup';
+
+  /**
+   * Body param: Payment method overrides for this checkout. `null` uses the plan or
+   * platform defaults.
+   */
+  payment_method_configuration?: CheckoutConfigurationCreateParams.PaymentMethodConfiguration | null;
+
+  /**
+   * Body param: Plan attributes used to create or find a plan for this checkout
+   * configuration. Mutually exclusive with `plan_id`.
+   */
+  plan?: CheckoutConfigurationCreateParams.Plan | null;
+
+  /**
+   * Body param: Existing plan ID, prefixed `plan_`. Mutually exclusive with `plan`.
+   */
+  plan_id?: string | null;
+
+  /**
+   * Body param: URL customers are sent to after checkout.
+   */
+  redirect_url?: string | null;
+
+  /**
+   * Body param: 3D Secure behavior for this checkout.
+   */
+  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export namespace CheckoutConfigurationCreateParams {
+  /**
+   * Payment method overrides for this checkout. `null` uses the plan or platform
+   * defaults.
+   */
+  export interface PaymentMethodConfiguration {
+    /**
+     * Payment methods explicitly disabled for checkout.
+     */
+    disabled?: Array<string>;
+
+    /**
+     * Payment methods explicitly enabled for checkout.
+     */
+    enabled?: Array<string>;
+
+    /**
+     * Whether platform default payment methods are included.
+     */
+    include_platform_defaults?: boolean;
+  }
+
+  /**
+   * Plan attributes used to create or find a plan for this checkout configuration.
+   * Mutually exclusive with `plan_id`.
+   */
+  export interface Plan {
+    /**
+     * Account ID for the inline plan, prefixed `biz_`. Defaults to the account
+     * resolved from the request.
+     */
+    account_id?: string | null;
+
+    /**
+     * Recurring billing interval in days, such as 30 for monthly or 365 for annual.
+     */
+    billing_period?: number | null;
+
+    /**
+     * Three-letter ISO currency code for the plan's prices.
+     */
+    currency?: string | null;
+
+    /**
+     * Customer-visible plan description.
+     */
+    description?: string | null;
+
+    /**
+     * Access duration in days for expiration-based plans.
+     */
+    expiration_days?: number | null;
+
+    /**
+     * Whether to create a new plan instead of reusing a matching one.
+     */
+    force_create_new_plan?: boolean | null;
+
+    /**
+     * Initial purchase price in the plan currency.
+     */
+    initial_price?: number | null;
+
+    /**
+     * Custom key-value metadata stored on the plan.
+     */
+    metadata?: unknown | null;
+
+    /**
+     * Tax classification override for this plan.
+     */
+    override_tax_type?: string | null;
+
+    /**
+     * Payment method overrides for the inline plan. `null` uses platform defaults.
+     */
+    payment_method_configuration?: Plan.PaymentMethodConfiguration | null;
+
+    /**
+     * Billing model for the plan.
+     */
+    plan_type?: 'renewal' | 'one_time' | null;
+
+    /**
+     * Product ID the inline plan should belong to, prefixed `prod_`.
+     */
+    product_id?: string | null;
+
+    /**
+     * Sales method for the plan.
+     */
+    release_method?: 'buy_now' | 'waitlist' | null;
+
+    /**
+     * Recurring price charged each billing period.
+     */
+    renewal_price?: number | null;
+
+    /**
+     * Units available for purchase.
+     */
+    stock?: number | null;
+
+    /**
+     * 3D Secure behavior for the inline plan, or `null` to use the account default.
      */
     three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+
+    /**
+     * Plan display name shown to customers.
+     */
+    title?: string | null;
+
+    /**
+     * Free trial days before the first renewal charge.
+     */
+    trial_period_days?: number | null;
+
+    /**
+     * Whether the plan has unlimited stock.
+     */
+    unlimited_stock?: boolean | null;
+
+    /**
+     * Whether the plan is visible to customers or hidden from public view.
+     */
+    visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
   }
 
-  export namespace CreateCheckoutSessionInputModeSetup {
+  export namespace Plan {
     /**
-     * Checkout styling overrides for this session. Overrides plan and company
-     * defaults.
-     */
-    export interface CheckoutStyling {
-      /**
-       * A hex color code for the checkout page background, applied to the order summary
-       * panel (e.g. #F4F4F5).
-       */
-      background_color?: string | null;
-
-      /**
-       * The different border-radius styles available for checkout pages.
-       */
-      border_style?: PlansAPI.CheckoutShape | null;
-
-      /**
-       * A hex color code for the button color (e.g. #FF5733).
-       */
-      button_color?: string | null;
-
-      /**
-       * The different font families available for checkout pages.
-       */
-      font_family?: PlansAPI.CheckoutFont | null;
-    }
-
-    /**
-     * The explicit payment method configuration for the checkout session. Only applies
-     * to setup mode. If not provided, the platform or company defaults will apply.
+     * Payment method overrides for the inline plan. `null` uses platform defaults.
      */
     export interface PaymentMethodConfiguration {
       /**
-       * An array of payment method identifiers that are explicitly disabled. Only
-       * applies if the include_platform_defaults is true.
+       * Payment methods explicitly disabled for this plan.
        */
-      disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+      disabled?: Array<string>;
 
       /**
-       * An array of payment method identifiers that are explicitly enabled. This means
-       * these payment methods will be shown on checkout. Example use case is to only
-       * enable a specific payment method like cashapp, or extending the platform
-       * defaults with additional methods.
+       * Payment methods explicitly enabled for this plan.
        */
-      enabled: Array<PaymentsAPI.PaymentMethodTypes>;
+      enabled?: Array<string>;
 
       /**
-       * Whether Whop's platform default payment method enablement settings are included
-       * in this configuration. The full list of default payment methods can be found in
-       * the documentation at docs.whop.com/payments.
+       * Whether platform default payment methods are included.
        */
-      include_platform_defaults?: boolean | null;
+      include_platform_defaults?: boolean;
     }
   }
+}
+
+export interface CheckoutConfigurationRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export interface CheckoutConfigurationListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list checkout configurations for.
+   * Query param: Account ID, prefixed `biz_`.
    */
-  company_id: string;
+  account_id: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string;
-
-  /**
-   * Only return checkout configurations created after this timestamp.
+   * Query param: Only return checkout configurations created after this ISO 8601
+   * timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return checkout configurations created before this timestamp.
+   * Query param: Only return checkout configurations created before this ISO 8601
+   * timestamp.
    */
   created_before?: string;
 
   /**
-   * The sort direction for ordering results, either ascending or descending.
+   * Query param: Sort direction. Defaults to `desc`.
    */
-  direction?: Shared.Direction;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: Number of checkout configurations to return.
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: Field used to sort checkout configurations.
    */
-  last?: number;
+  order?: 'created_at';
 
   /**
-   * Filter checkout configurations to only those associated with this plan
-   * identifier.
+   * Query param: Only return checkout configurations for this plan ID, prefixed
+   * `plan_`.
    */
   plan_id?: string;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace CheckoutConfigurations {
   export {
     type CheckoutModes as CheckoutModes,
+    type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
+    type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
+    type CheckoutConfigurationRetrieveParams as CheckoutConfigurationRetrieveParams,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
   };
 }

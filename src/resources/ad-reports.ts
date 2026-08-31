@@ -6,9 +6,6 @@ import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { RequestOptions } from '../internal/request-options';
 
-/**
- * Ad reports
- */
 export class AdReports extends APIResource {
   /**
    * Performance report for a company, ad campaigns, ad groups, or ads. Always

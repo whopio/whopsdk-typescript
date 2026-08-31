@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Experiences
- */
 export class Experiences extends APIResource {
   /**
    * Required permissions:

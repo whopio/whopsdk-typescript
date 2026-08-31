@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource verifications', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.verifications.retrieve('verf_xxxxxxxxxxxxx');
+    const responsePromise = client.verifications.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,20 @@ describe('resource verifications', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.verifications.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.verifications.list({ payout_account_id: 'poact_xxxxxxxxxxxx' });
+    const responsePromise = client.verifications.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -35,11 +47,10 @@ describe('resource verifications', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.verifications.list({
-      payout_account_id: 'poact_xxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      first: 42,
-      last: 42,
+      account_id: 'account_id',
+      direction: 'asc',
+      order: 'updated_at',
+      'Api-Version-Date': '2026-08-25-2',
     });
   });
 });

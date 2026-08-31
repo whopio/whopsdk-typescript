@@ -2,206 +2,205 @@
 
 import { APIResource } from '../core/resource';
 import * as Shared from './shared';
+import { ShipmentsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Shipments
+ * A Shipment attaches a carrier tracking number to a payment and follows the package from label creation to delivery, exposing the current delivery status and a customer-facing tracking URL.
+ *
+ * Use the Shipments API to list an account's shipments, retrieve one by its id or the payment it fulfills, attach a tracking number to a payment, and update the tracking number on an existing shipment.
  */
 export class Shipments extends APIResource {
   /**
-   * Create a new shipment with a tracking code for a specific payment within a
-   * company.
-   *
-   * Required permissions:
-   *
-   * - `shipment:create`
-   * - `payment:basic:read`
+   * Attaches a carrier tracking number to a payment and begins tracking it.
    *
    * @example
    * ```ts
    * const shipment = await client.shipments.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   payment_id: 'pay_xxxxxxxxxxxxxx',
-   *   tracking_code: 'tracking_code',
+   *   tracking_number: '1Z999AA10123456784',
    * });
    * ```
    */
-  create(body: ShipmentCreateParams, options?: RequestOptions): APIPromise<Shared.Shipment> {
-    return this._client.post('/shipments', { body, ...options });
+  create(params: ShipmentCreateParams, options?: RequestOptions): APIPromise<Shared.Shipment> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/shipments', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing shipment.
-   *
-   * Required permissions:
-   *
-   * - `shipment:basic:read`
-   * - `payment:basic:read`
+   * Retrieves a shipment by its id, or by the payment id it fulfills.
    *
    * @example
    * ```ts
-   * const shipment = await client.shipments.retrieve(
-   *   'ship_xxxxxxxxxxxxx',
-   * );
+   * const shipment = await client.shipments.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Shipment> {
-    return this._client.get(path`/shipments/${id}`, options);
+  retrieve(
+    id: string,
+    params: ShipmentRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Shipment> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/shipments/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of shipments, with optional filtering by payment,
-   * company, or user.
-   *
-   * Required permissions:
-   *
-   * - `shipment:basic:read`
-   * - `payment:basic:read`
+   * Returns a paginated list of shipments for an account.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const shipmentListResponse of client.shipments.list()) {
+   * for await (const shipment of client.shipments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: ShipmentListParams | null | undefined = {},
+    params: ShipmentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<ShipmentListResponsesCursorPage, ShipmentListResponse> {
-    return this._client.getAPIList('/shipments', CursorPage<ShipmentListResponse>, { query, ...options });
-  }
-}
-
-export type ShipmentListResponsesCursorPage = CursorPage<ShipmentListResponse>;
-
-/**
- * A physical shipment associated with a payment, including carrier details and
- * tracking information.
- */
-export interface ShipmentListResponse {
-  /**
-   * The unique identifier for the shipment.
-   */
-  id: string;
-
-  /**
-   * The datetime the shipment was created.
-   */
-  created_at: string;
-
-  /**
-   * The estimated delivery date for this shipment. Null if the carrier has not
-   * provided an estimate.
-   */
-  delivery_estimate: string | null;
-
-  /**
-   * The payment associated with this shipment. Null if the payment has been deleted
-   * or is inaccessible.
-   */
-  payment: ShipmentListResponse.Payment | null;
-
-  /**
-   * The shipping service level used for this shipment. Null if the carrier does not
-   * specify a service tier.
-   */
-  service: string | null;
-
-  /**
-   * The current delivery status of this shipment.
-   */
-  status: Shared.ShipmentStatus;
-
-  /**
-   * The substatus of a shipment
-   */
-  substatus: Shared.ShipmentSubstatus | null;
-
-  /**
-   * The carrier-assigned tracking number used to look up shipment progress.
-   */
-  tracking_code: string;
-
-  /**
-   * The datetime the shipment was last updated.
-   */
-  updated_at: string;
-}
-
-export namespace ShipmentListResponse {
-  /**
-   * The payment associated with this shipment. Null if the payment has been deleted
-   * or is inaccessible.
-   */
-  export interface Payment {
-    /**
-     * The unique identifier for the payment.
-     */
-    id: string;
+  ): PagePromise<ShipmentsCursorPage, Shared.Shipment> {
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
+    return this._client.getAPIList('/shipments', CursorPage<Shared.Shipment>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
 export interface ShipmentCreateParams {
   /**
-   * The unique identifier of the company to create the shipment for, starting with
-   * 'biz\_'.
-   */
-  company_id: string;
-
-  /**
-   * The unique identifier of the payment to associate the shipment with.
+   * Body param: The payment to attach the shipment to, prefixed `pay_`.
    */
   payment_id: string;
 
   /**
-   * The carrier tracking code for the shipment, such as a USPS, UPS, or FedEx
-   * tracking number.
+   * Body param: The carrier-assigned tracking number.
    */
-  tracking_code: string;
+  tracking_number: string;
+
+  /**
+   * Body param: The unique identifier of the account, prefixed `biz_`.
+   */
+  account_id?: string;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface ShipmentRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export interface ShipmentListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: The account to list shipments for. Defaults to the acting account.
+   */
+  account_id?: string;
+
+  /**
+   * Query param: A cursor; returns shipments before this position.
    */
   before?: string;
 
   /**
-   * Filter shipments to only those belonging to this company.
+   * Query param: Return shipments created after this ISO 8601 timestamp.
    */
-  company_id?: string;
+  created_after?: string;
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: Return shipments created before this ISO 8601 timestamp.
+   */
+  created_before?: string;
+
+  /**
+   * Query param: The sort direction.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: The number of shipments to return.
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: The number of shipments to return from the end of the range.
    */
   last?: number;
 
   /**
-   * Filter shipments to only those associated with this specific payment.
+   * Query param: The field to sort by.
    */
-  payment_id?: string;
+  order?: 'created_at';
 
   /**
-   * Filter shipments to only those for this specific user.
+   * Query param: Only shipments fulfilling these payments, each prefixed `pay_`.
+   * Repeat the parameter to pass several, up to 100 per request — one paginated list
+   * covers all of them.
    */
-  user_id?: string;
+  payment_id?: Array<string>;
+
+  /**
+   * Query param: Filter to shipments with this delivery status.
+   */
+  status?:
+    | 'unknown'
+    | 'pre_transit'
+    | 'in_transit'
+    | 'out_for_delivery'
+    | 'delivered'
+    | 'available_for_pickup'
+    | 'return_to_sender'
+    | 'failure'
+    | 'cancelled'
+    | 'error';
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace Shipments {
   export {
-    type ShipmentListResponse as ShipmentListResponse,
-    type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
     type ShipmentCreateParams as ShipmentCreateParams,
+    type ShipmentRetrieveParams as ShipmentRetrieveParams,
     type ShipmentListParams as ShipmentListParams,
   };
 }
+
+export { type ShipmentsCursorPage };

@@ -39,6 +39,7 @@ Types:
 - <code><a href="./src/resources/shared.ts">Message</a></code>
 - <code><a href="./src/resources/shared.ts">PageInfo</a></code>
 - <code><a href="./src/resources/shared.ts">Payment</a></code>
+- <code><a href="./src/resources/shared.ts">Plan</a></code>
 - <code><a href="./src/resources/shared.ts">PlanType</a></code>
 - <code><a href="./src/resources/shared.ts">Product</a></code>
 - <code><a href="./src/resources/shared.ts">ProductListItem</a></code>
@@ -68,7 +69,7 @@ Types:
 Methods:
 
 - <code title="post /apps">client.apps.<a href="./src/resources/apps.ts">create</a>({ ...params }) -> App</code>
-- <code title="get /apps/{id}">client.apps.<a href="./src/resources/apps.ts">retrieve</a>(id) -> App</code>
+- <code title="get /apps/{id}">client.apps.<a href="./src/resources/apps.ts">retrieve</a>(id, { ...params }) -> App</code>
 - <code title="patch /apps/{id}">client.apps.<a href="./src/resources/apps.ts">update</a>(id, { ...params }) -> App</code>
 - <code title="get /apps">client.apps.<a href="./src/resources/apps.ts">list</a>({ ...params }) -> AppListResponsesCursorPage</code>
 
@@ -109,10 +110,10 @@ Types:
 Methods:
 
 - <code title="post /products">client.products.<a href="./src/resources/products.ts">create</a>({ ...params }) -> Product</code>
-- <code title="get /products/{id}">client.products.<a href="./src/resources/products.ts">retrieve</a>(id) -> Product</code>
+- <code title="get /products/{id}">client.products.<a href="./src/resources/products.ts">retrieve</a>(id, { ...params }) -> Product</code>
 - <code title="patch /products/{id}">client.products.<a href="./src/resources/products.ts">update</a>(id, { ...params }) -> Product</code>
 - <code title="get /products">client.products.<a href="./src/resources/products.ts">list</a>({ ...params }) -> ProductListItemsCursorPage</code>
-- <code title="delete /products/{id}">client.products.<a href="./src/resources/products.ts">delete</a>(id) -> ProductDeleteResponse</code>
+- <code title="delete /products/{id}">client.products.<a href="./src/resources/products.ts">delete</a>(id, { ...params }) -> ProductDeleteResponse</code>
 
 # Companies
 
@@ -137,69 +138,91 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">APIVersion</a></code>
 - <code><a href="./src/resources/webhooks.ts">Webhook</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">WebhookCreateResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">AccountUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">AdCampaignPaymentFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardCanceledWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardFrozenWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardApplicationApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardApplicationCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardApplicationDeniedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardApplicationUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionDeclinedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionReversedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CardTransactionUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ChatMessageCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ChatReactionCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DepositSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DisputeCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">DisputeAlertCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryDeletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ExportCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ExportFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">IdentityProfileUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceMarkedUncollectibleWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePaidWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoicePastDueWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MemberCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipActivatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MembershipCancelAtPeriodEndChangedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipDeactivatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipTrialEndingSoonWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">EntryCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">EntryApprovedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">EntryDeletedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">SetupIntentRequiresActionWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">SetupIntentSucceededWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">SetupIntentCanceledWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CardTransactionCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CardTransactionUpdatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CardTransactionCompletedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CardTransactionDeclinedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CardTransactionReversedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">CourseLessonInteractionCompletedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">IdentityProfileUpdatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PayoutAccountStatusUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentAuthorizedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentCanceledWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseUpdatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseDecidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutReversedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutAccountStatusUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PayoutMethodCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PlanCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PlanDeletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PlanUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ProductUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductDeletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductPublishedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ProductUnpublishedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ShipmentCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ShipmentUpdatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">MemberCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ChatMessageCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">ChatReactionCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">DisputeCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">DisputeUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ProductUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">RefundUpdatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">DisputeAlertCreatedWebhookEvent</a></code>
-- <code><a href="./src/resources/webhooks.ts">MembershipCancelAtPeriodEndChangedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseDecidedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ResolutionCenterCaseUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentCanceledWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentRequiresActionWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SetupIntentSucceededWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ShipmentCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">ShipmentUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">SwapCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">TransferCompletedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">TransferCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">TransferFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">VerificationSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">UnwrapWebhookEvent</a></code>
 
 Methods:
 
-- <code title="post /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">create</a>({ ...params }) -> WebhookCreateResponse</code>
-- <code title="get /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">retrieve</a>(id) -> Webhook</code>
+- <code title="post /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">create</a>({ ...params }) -> Webhook</code>
+- <code title="get /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">retrieve</a>(id, { ...params }) -> Webhook</code>
 - <code title="patch /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">update</a>(id, { ...params }) -> Webhook</code>
 - <code title="get /webhooks">client.webhooks.<a href="./src/resources/webhooks.ts">list</a>({ ...params }) -> WebhookListResponsesCursorPage</code>
-- <code title="delete /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(id) -> WebhookDeleteResponse</code>
+- <code title="delete /webhooks/{id}">client.webhooks.<a href="./src/resources/webhooks.ts">delete</a>(id, { ...params }) -> WebhookDeleteResponse</code>
 - <code>client.webhooks.<a href="./src/resources/webhooks.ts">unwrap</a>(body) -> void</code>
 
 # Plans
@@ -208,6 +231,16 @@ Types:
 
 - <code><a href="./src/resources/plans.ts">CheckoutFont</a></code>
 - <code><a href="./src/resources/plans.ts">CheckoutShape</a></code>
+- <code><a href="./src/resources/plans.ts">PlanListResponse</a></code>
+- <code><a href="./src/resources/plans.ts">PlanDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /plans">client.plans.<a href="./src/resources/plans.ts">create</a>({ ...params }) -> Plan</code>
+- <code title="get /plans/{id}">client.plans.<a href="./src/resources/plans.ts">retrieve</a>(id, { ...params }) -> Plan</code>
+- <code title="patch /plans/{id}">client.plans.<a href="./src/resources/plans.ts">update</a>(id, { ...params }) -> Plan</code>
+- <code title="get /plans">client.plans.<a href="./src/resources/plans.ts">list</a>({ ...params }) -> PlanListResponsesCursorPage</code>
+- <code title="delete /plans/{id}">client.plans.<a href="./src/resources/plans.ts">delete</a>(id, { ...params }) -> PlanDeleteResponse</code>
 
 # Entries
 
@@ -239,6 +272,18 @@ Methods:
 
 # Transfers
 
+Types:
+
+- <code><a href="./src/resources/transfers.ts">TransferCreateResponse</a></code>
+- <code><a href="./src/resources/transfers.ts">TransferRetrieveResponse</a></code>
+- <code><a href="./src/resources/transfers.ts">TransferListResponse</a></code>
+
+Methods:
+
+- <code title="post /transfers">client.transfers.<a href="./src/resources/transfers.ts">create</a>({ ...params }) -> TransferCreateResponse</code>
+- <code title="get /transfers/{id}">client.transfers.<a href="./src/resources/transfers.ts">retrieve</a>(id, { ...params }) -> TransferRetrieveResponse</code>
+- <code title="get /transfers">client.transfers.<a href="./src/resources/transfers.ts">list</a>({ ...params }) -> TransferListResponsesCursorPage</code>
+
 # LedgerAccounts
 
 Types:
@@ -254,17 +299,16 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/memberships.ts">CancelOptions</a></code>
-- <code><a href="./src/resources/memberships.ts">MembershipListResponse</a></code>
 
 Methods:
 
-- <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id) -> Membership</code>
+- <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id, { ...params }) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
-- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipListResponsesCursorPage</code>
+- <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsCursorPage</code>
 - <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
-- <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id) -> Membership</code>
+- <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> Membership</code>
 
 # AuthorizedUsers
@@ -284,40 +328,34 @@ Methods:
 
 # AppBuilds
 
-Types:
-
-- <code><a href="./src/resources/app-builds.ts">AppBuildListResponse</a></code>
-
 Methods:
 
 - <code title="post /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">create</a>({ ...params }) -> AppBuild</code>
-- <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id) -> AppBuild</code>
-- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildListResponsesCursorPage</code>
-- <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id) -> AppBuild</code>
+- <code title="get /app_builds/{id}">client.appBuilds.<a href="./src/resources/app-builds.ts">retrieve</a>(id, { ...params }) -> AppBuild</code>
+- <code title="get /app_builds">client.appBuilds.<a href="./src/resources/app-builds.ts">list</a>({ ...params }) -> AppBuildsCursorPage</code>
+- <code title="post /app_builds/{id}/promote">client.appBuilds.<a href="./src/resources/app-builds.ts">promote</a>(id, { ...params }) -> AppBuild</code>
 
 # Shipments
-
-Types:
-
-- <code><a href="./src/resources/shipments.ts">ShipmentListResponse</a></code>
 
 Methods:
 
 - <code title="post /shipments">client.shipments.<a href="./src/resources/shipments.ts">create</a>({ ...params }) -> Shipment</code>
-- <code title="get /shipments/{id}">client.shipments.<a href="./src/resources/shipments.ts">retrieve</a>(id) -> Shipment</code>
-- <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentListResponsesCursorPage</code>
+- <code title="get /shipments/{id}">client.shipments.<a href="./src/resources/shipments.ts">retrieve</a>(id, { ...params }) -> Shipment</code>
+- <code title="get /shipments">client.shipments.<a href="./src/resources/shipments.ts">list</a>({ ...params }) -> ShipmentsCursorPage</code>
 
 # CheckoutConfigurations
 
 Types:
 
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutModes</a></code>
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationCreateResponse</a></code>
+- <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationRetrieveResponse</a></code>
 - <code><a href="./src/resources/checkout-configurations.ts">CheckoutConfigurationListResponse</a></code>
 
 Methods:
 
-- <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfiguration</code>
-- <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id) -> CheckoutConfiguration</code>
+- <code title="post /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">create</a>({ ...params }) -> CheckoutConfigurationCreateResponse</code>
+- <code title="get /checkout_configurations/{id}">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">retrieve</a>(id, { ...params }) -> CheckoutConfigurationRetrieveResponse</code>
 - <code title="get /checkout_configurations">client.checkoutConfigurations.<a href="./src/resources/checkout-configurations.ts">list</a>({ ...params }) -> CheckoutConfigurationListResponsesCursorPage</code>
 
 # Messages
@@ -348,6 +386,18 @@ Methods:
 - <code title="get /chat_channels">client.chatChannels.<a href="./src/resources/chat-channels.ts">list</a>({ ...params }) -> ChatChannelListResponsesCursorPage</code>
 
 # Users
+
+Types:
+
+- <code><a href="./src/resources/users.ts">User</a></code>
+- <code><a href="./src/resources/users.ts">UserCheckAccessResponse</a></code>
+
+Methods:
+
+- <code title="get /users/{id}">client.users.<a href="./src/resources/users.ts">retrieve</a>(id, { ...params }) -> User</code>
+- <code title="patch /users/{id}">client.users.<a href="./src/resources/users.ts">update</a>(id, { ...params }) -> User</code>
+- <code title="get /users">client.users.<a href="./src/resources/users.ts">list</a>({ ...params }) -> UsersCursorPage</code>
+- <code title="get /users/{id}/access/{resource_id}">client.users.<a href="./src/resources/users.ts">checkAccess</a>(resourceID, { ...params }) -> UserCheckAccessResponse</code>
 
 # Payments
 
@@ -425,7 +475,7 @@ Types:
 
 Methods:
 
-- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id) -> MemberRetrieveResponse</code>
+- <code title="get /members/{id}">client.members.<a href="./src/resources/members.ts">retrieve</a>(id, { ...params }) -> MemberRetrieveResponse</code>
 - <code title="get /members">client.members.<a href="./src/resources/members.ts">list</a>({ ...params }) -> MemberListResponsesCursorPage</code>
 
 # Forums
@@ -453,9 +503,9 @@ Types:
 Methods:
 
 - <code title="post /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">create</a>({ ...params }) -> PromoCode</code>
-- <code title="get /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">retrieve</a>(id) -> PromoCode</code>
+- <code title="get /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">retrieve</a>(id, { ...params }) -> PromoCode</code>
 - <code title="get /promo_codes">client.promoCodes.<a href="./src/resources/promo-codes.ts">list</a>({ ...params }) -> PromoCodeListResponsesCursorPage</code>
-- <code title="delete /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">delete</a>(id) -> PromoCodeDeleteResponse</code>
+- <code title="delete /promo_codes/{id}">client.promoCodes.<a href="./src/resources/promo-codes.ts">delete</a>(id, { ...params }) -> PromoCodeDeleteResponse</code>
 
 # Courses
 
@@ -568,12 +618,11 @@ Types:
 
 - <code><a href="./src/resources/disputes.ts">Dispute</a></code>
 - <code><a href="./src/resources/disputes.ts">DisputeStatuses</a></code>
-- <code><a href="./src/resources/disputes.ts">DisputeListResponse</a></code>
 
 Methods:
 
-- <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id) -> Dispute</code>
-- <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputeListResponsesCursorPage</code>
+- <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id, { ...params }) -> Dispute</code>
+- <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputesCursorPage</code>
 - <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
 - <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>
 
@@ -594,20 +643,6 @@ Methods:
 - <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>
 
 # Withdrawals
-
-Types:
-
-- <code><a href="./src/resources/withdrawals.ts">Withdrawal</a></code>
-- <code><a href="./src/resources/withdrawals.ts">WithdrawalFeeTypes</a></code>
-- <code><a href="./src/resources/withdrawals.ts">WithdrawalSpeeds</a></code>
-- <code><a href="./src/resources/withdrawals.ts">WithdrawalStatus</a></code>
-- <code><a href="./src/resources/withdrawals.ts">WithdrawalListResponse</a></code>
-
-Methods:
-
-- <code title="post /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">create</a>({ ...params }) -> Withdrawal</code>
-- <code title="get /withdrawals/{id}">client.withdrawals.<a href="./src/resources/withdrawals.ts">retrieve</a>(id) -> Withdrawal</code>
-- <code title="get /withdrawals">client.withdrawals.<a href="./src/resources/withdrawals.ts">list</a>({ ...params }) -> WithdrawalListResponsesCursorPage</code>
 
 # AccountLinks
 
@@ -683,8 +718,8 @@ Types:
 
 Methods:
 
-- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id) -> VerificationRetrieveResponse</code>
-- <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponsesCursorPage</code>
+- <code title="get /verifications/{id}">client.verifications.<a href="./src/resources/verifications.ts">retrieve</a>(id, { ...params }) -> VerificationRetrieveResponse</code>
+- <code title="get /verifications">client.verifications.<a href="./src/resources/verifications.ts">list</a>({ ...params }) -> VerificationListResponse</code>
 
 # Leads
 
@@ -722,7 +757,7 @@ Types:
 Methods:
 
 - <code title="post /files">client.files.<a href="./src/resources/files.ts">create</a>({ ...params }) -> FileCreateResponse</code>
-- <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id) -> FileRetrieveResponse</code>
+- <code title="get /files/{id}">client.files.<a href="./src/resources/files.ts">retrieve</a>(id, { ...params }) -> FileRetrieveResponse</code>
 
 # CompanyTokenTransactions
 
@@ -799,7 +834,7 @@ Types:
 
 Methods:
 
-- <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id) -> DisputeAlertRetrieveResponse</code>
+- <code title="get /dispute_alerts/{id}">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">retrieve</a>(id, { ...params }) -> DisputeAlertRetrieveResponse</code>
 - <code title="get /dispute_alerts">client.disputeAlerts.<a href="./src/resources/dispute-alerts.ts">list</a>({ ...params }) -> DisputeAlertListResponsesCursorPage</code>
 
 # ResolutionCenterCases
@@ -816,7 +851,7 @@ Types:
 
 Methods:
 
-- <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id) -> ResolutionCenterCaseRetrieveResponse</code>
+- <code title="get /resolution_center_cases/{id}">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">retrieve</a>(id, { ...params }) -> ResolutionCenterCaseRetrieveResponse</code>
 - <code title="get /resolution_center_cases">client.resolutionCenterCases.<a href="./src/resources/resolution-center-cases.ts">list</a>({ ...params }) -> ResolutionCenterCaseListResponsesCursorPage</code>
 
 # PayoutAccounts
@@ -882,14 +917,51 @@ Types:
 Methods:
 
 - <code title="post /bounties">client.bounties.<a href="./src/resources/bounties.ts">create</a>({ ...params }) -> BountyCreateResponse</code>
-- <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id) -> BountyRetrieveResponse</code>
+- <code title="get /bounties/{id}">client.bounties.<a href="./src/resources/bounties.ts">retrieve</a>(id, { ...params }) -> BountyRetrieveResponse</code>
 - <code title="get /bounties">client.bounties.<a href="./src/resources/bounties.ts">list</a>({ ...params }) -> BountyListResponsesCursorPage</code>
 
 # AdCampaigns
 
+Types:
+
+- <code><a href="./src/resources/ad-campaigns.ts">AdCampaign</a></code>
+
+Methods:
+
+- <code title="get /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">retrieve</a>(id, { ...params }) -> AdCampaign</code>
+- <code title="patch /ad_campaigns/{id}">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">update</a>(id, { ...params }) -> AdCampaign</code>
+- <code title="get /ad_campaigns">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">list</a>({ ...params }) -> AdCampaignsCursorPage</code>
+- <code title="post /ad_campaigns/{id}/pause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">pause</a>(id, { ...params }) -> AdCampaign</code>
+- <code title="post /ad_campaigns/{id}/unpause">client.adCampaigns.<a href="./src/resources/ad-campaigns.ts">unpause</a>(id, { ...params }) -> AdCampaign</code>
+
 # AdGroups
 
+Types:
+
+- <code><a href="./src/resources/ad-groups.ts">AdGroup</a></code>
+- <code><a href="./src/resources/ad-groups.ts">AdGroupDeleteResponse</a></code>
+
+Methods:
+
+- <code title="get /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">retrieve</a>(id, { ...params }) -> AdGroup</code>
+- <code title="patch /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">update</a>(id, { ...params }) -> AdGroup</code>
+- <code title="get /ad_groups">client.adGroups.<a href="./src/resources/ad-groups.ts">list</a>({ ...params }) -> AdGroupsCursorPage</code>
+- <code title="delete /ad_groups/{id}">client.adGroups.<a href="./src/resources/ad-groups.ts">delete</a>(id, { ...params }) -> AdGroupDeleteResponse</code>
+- <code title="post /ad_groups/{id}/pause">client.adGroups.<a href="./src/resources/ad-groups.ts">pause</a>(id, { ...params }) -> AdGroup</code>
+- <code title="post /ad_groups/{id}/unpause">client.adGroups.<a href="./src/resources/ad-groups.ts">unpause</a>(id, { ...params }) -> AdGroup</code>
+
 # Ads
+
+Types:
+
+- <code><a href="./src/resources/ads.ts">Ad</a></code>
+
+Methods:
+
+- <code title="get /ads/{id}">client.ads.<a href="./src/resources/ads.ts">retrieve</a>(id, { ...params }) -> Ad</code>
+- <code title="get /ads">client.ads.<a href="./src/resources/ads.ts">list</a>({ ...params }) -> AdsCursorPage</code>
+- <code title="post /ads/{id}/pause">client.ads.<a href="./src/resources/ads.ts">pause</a>(id, { ...params }) -> Ad</code>
+- <code title="post /ads/{id}/unpause">client.ads.<a href="./src/resources/ads.ts">unpause</a>(id, { ...params }) -> Ad</code>
 
 # Conversions
 

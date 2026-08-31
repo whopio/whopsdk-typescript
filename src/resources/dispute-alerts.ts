@@ -1,51 +1,52 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as DisputesAPI from './disputes';
-import * as PaymentsAPI from './payments';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Dispute alerts
+ * A Dispute alert is an early warning from a card issuer that a settled payment is being questioned, ahead of any chargeback. `type` separates fraud reports (`early_fraud_warning`), pre-dispute notices (`dispute_alert`), and Visa RDR cases the network already closed by refunding (`rapid_dispute_resolution`).
+ *
+ * Use the Dispute alerts API to list alerts for an account, filter them by type or payment, and read `actionable` to see whether refunding can still avoid the chargeback.
  */
 export class DisputeAlerts extends APIResource {
   /**
-   * Retrieves the details of an existing dispute alert.
-   *
-   * Required permissions:
-   *
-   * - `payment:dispute_alert:read`
-   * - `payment:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `payment:dispute:read`
+   * Retrieves a single dispute alert or early fraud warning by ID.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<DisputeAlertRetrieveResponse> {
-    return this._client.get(path`/dispute_alerts/${id}`, options);
+  retrieve(
+    id: string,
+    params: DisputeAlertRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<DisputeAlertRetrieveResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/dispute_alerts/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of dispute alerts for a company, with optional
-   * filtering by creation date.
-   *
-   * Required permissions:
-   *
-   * - `payment:dispute_alert:read`
-   * - `payment:basic:read`
-   * - `payment:dispute:read`
+   * Lists the dispute alerts and early fraud warnings across the accounts you can
+   * read.
    */
   list(
-    query: DisputeAlertListParams,
+    params: DisputeAlertListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<DisputeAlertListResponsesCursorPage, DisputeAlertListResponse> {
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
     return this._client.getAPIList('/dispute_alerts', CursorPage<DisputeAlertListResponse>, {
       query,
       ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
     });
   }
 }
@@ -57,343 +58,284 @@ export type DisputeAlertListResponsesCursorPage = CursorPage<DisputeAlertListRes
  */
 export type DisputeAlertType = 'dispute' | 'dispute_rdr' | 'fraud';
 
-/**
- * A dispute alert represents an early warning notification from a payment
- * processor about a potential dispute or chargeback.
- */
 export interface DisputeAlertRetrieveResponse {
   /**
-   * The unique identifier of the dispute alert.
+   * Dispute alert ID, prefixed `dspa_`.
    */
   id: string;
 
   /**
-   * The type of the dispute alert.
+   * The account the alerted payment belongs to, prefixed `biz_`. `null` while the
+   * alert is unmatched.
    */
-  alert_type: DisputeAlertType;
+  account_id: string | null;
 
   /**
-   * The alerted amount in the specified currency.
+   * Whether refunding the payment can still avoid a chargeback. `false` once the
+   * payment has been disputed or fully refunded, or when the alert could not be
+   * matched to a payment — `not_actionable_reason` says which.
+   */
+  actionable: boolean;
+
+  /**
+   * The alerted amount, in whole units of `currency`. This is what the issuer
+   * reported, which can differ from the payment's own amount.
    */
   amount: number;
 
   /**
-   * Whether this alert incurs a charge.
+   * The card network as reported by the issuer, lowercased, such as `visa` or
+   * `mastercard`. `unknown` when the report carries neither a network nor a
+   * recognizable BIN.
    */
-  charge_for_alert: boolean;
+  card_brand: string | null;
 
   /**
-   * The time the dispute alert was created.
+   * When Whop received the alert, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The three-letter ISO currency code for the alerted amount.
+   * Three-letter ISO currency code of the alerted amount.
    */
-  currency: Shared.Currency;
+  currency: string;
 
   /**
-   * The dispute associated with the dispute alert.
+   * Whether Whop charged the account an alert fee for this one. Always `false` for
+   * `early_fraud_warning`, which Whop is not billed for and never passes on.
    */
-  dispute: DisputeAlertRetrieveResponse.Dispute | null;
+  fee_charged: boolean;
 
   /**
-   * The payment associated with the dispute alert.
+   * Name of the bank that issued the card and filed the report.
    */
-  payment: DisputeAlertRetrieveResponse.Payment | null;
+  issuer: string | null;
 
   /**
-   * The date of the original transaction.
+   * Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa
+   * RDR already closed the case, `payment_unmatched` when no payment matched,
+   * `payment_not_captured` when it never captured money, `payment_disputed` once the
+   * payment carries a dispute, `payment_refunded` once fully refunded. `null` while
+   * `actionable` is true.
    */
-  transaction_date: string | null;
+  not_actionable_reason:
+    | 'network_resolved'
+    | 'payment_unmatched'
+    | 'payment_not_captured'
+    | 'payment_disputed'
+    | 'payment_refunded'
+    | null;
+
+  /**
+   * The payment the issuer reported, prefixed `pay_`. `null` when Whop could not
+   * match the report to a payment.
+   */
+  payment_id: string | null;
+
+  /**
+   * The product the alerted payment was for, prefixed `prod_`.
+   */
+  product_id: string | null;
+
+  /**
+   * When the issuer filed the report, as an ISO 8601 timestamp. Earlier than
+   * `created_at`, which is when Whop received it.
+   */
+  reported_at: string;
+
+  /**
+   * When the reported transaction was made, as an ISO 8601 timestamp.
+   */
+  transaction_at: string | null;
+
+  /**
+   * What the issuer sent. `early_fraud_warning` is a fraud report on a settled
+   * payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback,
+   * and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice
+   * from the issuer's alert network, which Whop pays for and passes on as a fee.
+   * `rapid_dispute_resolution` is a Visa RDR case the network already closed by
+   * refunding the payment — nothing is left to act on.
+   */
+  type: 'early_fraud_warning' | 'dispute_alert' | 'rapid_dispute_resolution';
+
+  /**
+   * When the alert was last changed, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
 }
 
-export namespace DisputeAlertRetrieveResponse {
-  /**
-   * The dispute associated with the dispute alert.
-   */
-  export interface Dispute {
-    /**
-     * The unique identifier for the dispute.
-     */
-    id: string;
-
-    /**
-     * The disputed amount in the specified currency, formatted as a decimal.
-     */
-    amount: number;
-
-    /**
-     * The datetime the dispute was created.
-     */
-    created_at: string | null;
-
-    /**
-     * The three-letter ISO currency code for the disputed amount.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * A human-readable reason for the dispute.
-     */
-    reason: string | null;
-
-    /**
-     * The current status of the dispute lifecycle, such as needs_response,
-     * under_review, won, or lost.
-     */
-    status: DisputesAPI.DisputeStatuses;
-  }
-
-  /**
-   * The payment associated with the dispute alert.
-   */
-  export interface Payment {
-    /**
-     * The unique identifier for the payment.
-     */
-    id: string;
-
-    /**
-     * The reason why a specific payment was billed
-     */
-    billing_reason: PaymentsAPI.BillingReasons | null;
-
-    /**
-     * Possible card brands that a payment token can have
-     */
-    card_brand: PaymentsAPI.CardBrands | null;
-
-    /**
-     * The last four digits of the card used to make this payment. Null if the payment
-     * was not made with a card.
-     */
-    card_last4: string | null;
-
-    /**
-     * The datetime the payment was created.
-     */
-    created_at: string;
-
-    /**
-     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
-     */
-    currency: Shared.Currency;
-
-    /**
-     * When an alert came in that this transaction will be disputed
-     */
-    dispute_alerted_at: string | null;
-
-    /**
-     * The member attached to this payment.
-     */
-    member: Payment.Member | null;
-
-    /**
-     * The membership attached to this payment.
-     */
-    membership: Payment.Membership | null;
-
-    /**
-     * The time at which this payment was successfully collected. Null if the payment
-     * has not yet succeeded. As a Unix timestamp.
-     */
-    paid_at: string | null;
-
-    /**
-     * The different types of payment methods that can be used.
-     */
-    payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
-
-    /**
-     * The subtotal to show to the creator (excluding buyer fees).
-     */
-    subtotal: number | null;
-
-    /**
-     * The total to show to the creator (excluding buyer fees).
-     */
-    total: number | null;
-
-    /**
-     * The total in USD to show to the creator (excluding buyer fees).
-     */
-    usd_total: number | null;
-
-    /**
-     * The user that made this payment.
-     */
-    user: Payment.User | null;
-  }
-
-  export namespace Payment {
-    /**
-     * The member attached to this payment.
-     */
-    export interface Member {
-      /**
-       * The unique identifier for the company member.
-       */
-      id: string;
-
-      /**
-       * The phone number for the member, if available.
-       */
-      phone: string | null;
-    }
-
-    /**
-     * The membership attached to this payment.
-     */
-    export interface Membership {
-      /**
-       * The unique identifier for the membership.
-       */
-      id: string;
-
-      /**
-       * The state of the membership.
-       */
-      status: Shared.MembershipStatus;
-    }
-
-    /**
-     * The user that made this payment.
-     */
-    export interface User {
-      /**
-       * The unique identifier for the user.
-       */
-      id: string;
-
-      /**
-       * The user's email address. Requires the member:email:read permission to access.
-       * Null if not authorized.
-       */
-      email: string | null;
-
-      /**
-       * The user's display name shown on their public profile.
-       */
-      name: string | null;
-
-      /**
-       * The user's unique username shown on their public profile.
-       */
-      username: string;
-    }
-  }
-}
-
-/**
- * A dispute alert represents an early warning notification from a payment
- * processor about a potential dispute or chargeback.
- */
 export interface DisputeAlertListResponse {
   /**
-   * The unique identifier of the dispute alert.
+   * Dispute alert ID, prefixed `dspa_`.
    */
   id: string;
 
   /**
-   * The type of the dispute alert.
+   * The account the alerted payment belongs to, prefixed `biz_`. `null` while the
+   * alert is unmatched.
    */
-  alert_type: DisputeAlertType;
+  account_id: string | null;
 
   /**
-   * The alerted amount in the specified currency.
+   * Whether refunding the payment can still avoid a chargeback. `false` once the
+   * payment has been disputed or fully refunded, or when the alert could not be
+   * matched to a payment — `not_actionable_reason` says which.
+   */
+  actionable: boolean;
+
+  /**
+   * The alerted amount, in whole units of `currency`. This is what the issuer
+   * reported, which can differ from the payment's own amount.
    */
   amount: number;
 
   /**
-   * Whether this alert incurs a charge.
+   * The card network as reported by the issuer, lowercased, such as `visa` or
+   * `mastercard`. `unknown` when the report carries neither a network nor a
+   * recognizable BIN.
    */
-  charge_for_alert: boolean;
+  card_brand: string | null;
 
   /**
-   * The time the dispute alert was created.
+   * When Whop received the alert, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The three-letter ISO currency code for the alerted amount.
+   * Three-letter ISO currency code of the alerted amount.
    */
-  currency: Shared.Currency;
+  currency: string;
 
   /**
-   * The dispute associated with the dispute alert.
+   * Whether Whop charged the account an alert fee for this one. Always `false` for
+   * `early_fraud_warning`, which Whop is not billed for and never passes on.
    */
-  dispute: DisputeAlertListResponse.Dispute | null;
+  fee_charged: boolean;
 
   /**
-   * The payment associated with the dispute alert.
+   * Name of the bank that issued the card and filed the report.
    */
-  payment: DisputeAlertListResponse.Payment | null;
+  issuer: string | null;
 
   /**
-   * The date of the original transaction.
+   * Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa
+   * RDR already closed the case, `payment_unmatched` when no payment matched,
+   * `payment_not_captured` when it never captured money, `payment_disputed` once the
+   * payment carries a dispute, `payment_refunded` once fully refunded. `null` while
+   * `actionable` is true.
    */
-  transaction_date: string | null;
+  not_actionable_reason:
+    | 'network_resolved'
+    | 'payment_unmatched'
+    | 'payment_not_captured'
+    | 'payment_disputed'
+    | 'payment_refunded'
+    | null;
+
+  /**
+   * The payment the issuer reported, prefixed `pay_`. `null` when Whop could not
+   * match the report to a payment.
+   */
+  payment_id: string | null;
+
+  /**
+   * The product the alerted payment was for, prefixed `prod_`.
+   */
+  product_id: string | null;
+
+  /**
+   * When the issuer filed the report, as an ISO 8601 timestamp. Earlier than
+   * `created_at`, which is when Whop received it.
+   */
+  reported_at: string;
+
+  /**
+   * When the reported transaction was made, as an ISO 8601 timestamp.
+   */
+  transaction_at: string | null;
+
+  /**
+   * What the issuer sent. `early_fraud_warning` is a fraud report on a settled
+   * payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback,
+   * and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice
+   * from the issuer's alert network, which Whop pays for and passes on as a fee.
+   * `rapid_dispute_resolution` is a Visa RDR case the network already closed by
+   * refunding the payment — nothing is left to act on.
+   */
+  type: 'early_fraud_warning' | 'dispute_alert' | 'rapid_dispute_resolution';
+
+  /**
+   * When the alert was last changed, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
 }
 
-export namespace DisputeAlertListResponse {
+export interface DisputeAlertRetrieveParams {
   /**
-   * The dispute associated with the dispute alert.
+   * Pins the request to a dated API version.
    */
-  export interface Dispute {
-    /**
-     * The unique identifier for the dispute.
-     */
-    id: string;
-  }
-
-  /**
-   * The payment associated with the dispute alert.
-   */
-  export interface Payment {
-    /**
-     * The unique identifier for the payment.
-     */
-    id: string;
-  }
+  'Api-Version-Date'?: string;
 }
 
 export interface DisputeAlertListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list dispute alerts for.
+   * Query param: Only alerts on this account's payments (`biz_` tag). Omit it to
+   * cover every account you can read.
    */
-  company_id: string;
+  account_id?: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: A cursor; returns alerts before this position.
    */
   before?: string;
 
   /**
-   * Only return dispute alerts created after this timestamp.
+   * Query param: Only alerts Whop received after this ISO 8601 timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return dispute alerts created before this timestamp.
+   * Query param: Only alerts Whop received before this ISO 8601 timestamp.
    */
   created_before?: string;
 
   /**
-   * The sort direction for ordering results, either ascending or descending.
+   * Query param: Sort direction.
    */
-  direction?: Shared.Direction;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: The number of alerts to return (default 20, max 100).
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: The number of alerts to return from the end of the range.
    */
   last?: number;
+
+  /**
+   * Query param: The field to sort alerts by.
+   */
+  order?: 'created_at' | 'reported_at' | 'amount';
+
+  /**
+   * Query param: Only alerts on this payment (`pay_` tag). A payment can carry
+   * several.
+   */
+  payment_id?: string;
+
+  /**
+   * Query param: Only alerts of this kind. `early_fraud_warning` for issuer fraud
+   * reports, `dispute_alert` for pre-dispute notices, `rapid_dispute_resolution` for
+   * Visa RDR cases the network already closed.
+   */
+  type?: 'early_fraud_warning' | 'dispute_alert' | 'rapid_dispute_resolution';
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace DisputeAlerts {
@@ -402,6 +344,7 @@ export declare namespace DisputeAlerts {
     type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
     type DisputeAlertListResponse as DisputeAlertListResponse,
     type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
+    type DisputeAlertRetrieveParams as DisputeAlertRetrieveParams,
     type DisputeAlertListParams as DisputeAlertListParams,
   };
 }

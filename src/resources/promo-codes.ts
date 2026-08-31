@@ -1,242 +1,348 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Promo codes
- */
 export class PromoCodes extends APIResource {
   /**
-   * Create a new promo code that applies a discount at checkout. Can be scoped to
-   * specific products or plans.
-   *
-   * Required permissions:
-   *
-   * - `promo_code:create`
-   * - `access_pass:basic:read`
+   * Creates a promo code for an account. First-party sessions may attach an
+   * affiliate.
    *
    * @example
    * ```ts
    * const promoCode = await client.promoCodes.create({
-   *   amount_off: 6.9,
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
+   *   amount_off: 25,
    *   base_currency: 'usd',
-   *   code: 'code',
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   code: 'AFFILIATE25',
    *   new_users_only: true,
-   *   promo_duration_months: 42,
+   *   promo_duration_months: 3,
    *   promo_type: 'percentage',
    * });
    * ```
    */
-  create(body: PromoCodeCreateParams, options?: RequestOptions): APIPromise<PromoCode> {
-    return this._client.post('/promo_codes', { body, ...options });
+  create(params: PromoCodeCreateParams, options?: RequestOptions): APIPromise<PromoCode> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/promo_codes', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing promo code.
-   *
-   * Required permissions:
-   *
-   * - `promo_code:basic:read`
-   * - `access_pass:basic:read`
+   * Retrieves a promo code by ID.
    *
    * @example
    * ```ts
-   * const promoCode = await client.promoCodes.retrieve(
-   *   'promo_xxxxxxxxxxxx',
-   * );
+   * const promoCode = await client.promoCodes.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<PromoCode> {
-    return this._client.get(path`/promo_codes/${id}`, options);
+  retrieve(
+    id: string,
+    params: PromoCodeRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PromoCode> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/promo_codes/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of promo codes belonging to a company, with optional
-   * filtering by product, plan, and status.
-   *
-   * Required permissions:
-   *
-   * - `promo_code:basic:read`
-   * - `access_pass:basic:read`
+   * Lists promo codes for an account with cursor pagination, filters, and sorting.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const promoCodeListResponse of client.promoCodes.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   *   { account_id: 'account_id' },
    * )) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: PromoCodeListParams,
+    params: PromoCodeListParams,
     options?: RequestOptions,
   ): PagePromise<PromoCodeListResponsesCursorPage, PromoCodeListResponse> {
-    return this._client.getAPIList('/promo_codes', CursorPage<PromoCodeListResponse>, { query, ...options });
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params;
+    return this._client.getAPIList('/promo_codes', CursorPage<PromoCodeListResponse>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Archive a promo code, preventing it from being used in future checkouts.
-   * Existing memberships are not affected.
-   *
-   * Required permissions:
-   *
-   * - `promo_code:delete`
+   * Archives a promo code so it cannot be used in future checkouts.
    *
    * @example
    * ```ts
-   * const promoCode = await client.promoCodes.delete(
-   *   'promo_xxxxxxxxxxxx',
-   * );
+   * const promoCode = await client.promoCodes.delete('id');
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<PromoCodeDeleteResponse> {
-    return this._client.delete(path`/promo_codes/${id}`, options);
+  delete(
+    id: string,
+    params: PromoCodeDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PromoCodeDeleteResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.delete(path`/promo_codes/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
 export type PromoCodeListResponsesCursorPage = CursorPage<PromoCodeListResponse>;
 
-/**
- * A promo code applies a discount to a plan during checkout. Promo codes can be
- * percentage-based or fixed-amount, and can have usage limits and expiration
- * dates.
- */
 export interface PromoCode {
   /**
-   * The unique identifier for the promo code.
+   * Promo code ID, prefixed `promo_`.
    */
   id: string;
 
   /**
-   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
-   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
-   * off (e.g., 10.00 means $10.00 off).
+   * Account that owns the promo code.
+   */
+  account: PromoCode.Account;
+
+  /**
+   * Discount amount. Percentage discounts are represented as a decimal fraction.
    */
   amount_off: number;
 
   /**
-   * Restricts promo use to only users who have churned from the company before.
+   * Whether the promo code is restricted to churned customers.
    */
   churned_users_only: boolean;
 
   /**
-   * The specific code used to apply the promo at checkout.
+   * Code entered at checkout.
    */
   code: string | null;
 
   /**
-   * The company for the promo code.
-   */
-  company: PromoCode.Company;
-
-  /**
-   * The datetime the promo code was created.
+   * When the promo code was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The monetary currency of the promo code.
+   * Currency used for a fixed-amount discount.
    */
-  currency: Shared.Currency;
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau';
 
   /**
-   * The duration setting for the promo code
+   * How long the discount applies.
    */
-  duration: PromoDuration | null;
+  duration: 'forever' | 'once' | 'repeating';
 
   /**
-   * Restricts promo use to only be applied to already purchased memberships.
+   * Whether the promo code applies only to existing memberships.
    */
   existing_memberships_only: boolean;
 
   /**
-   * The date/time of when the promo expires.
+   * When the promo code expires, as an ISO 8601 timestamp.
    */
   expires_at: string | null;
 
   /**
-   * Restricts promo use to only users who have never purchased from the company
-   * before.
+   * Custom key-value metadata stored on the promo code.
+   */
+  metadata: unknown;
+
+  /**
+   * Whether the promo code is restricted to new customers.
    */
   new_users_only: boolean;
 
   /**
-   * Restricts promo use to only be applied once per customer.
+   * Whether each customer may redeem the promo code only once.
    */
   one_per_customer: boolean;
 
   /**
-   * The product this promo code applies to
+   * Product the promo code is restricted to, or `null` when it is not
+   * product-scoped.
    */
   product: PromoCode.Product | null;
 
   /**
-   * The number of months the promo is applied for.
+   * Billing intervals the discount applies to.
    */
   promo_duration_months: number | null;
 
   /**
-   * The type (% or flat amount) of the promo.
+   * Whether the discount is percentage-based or a fixed amount.
    */
-  promo_type: Shared.PromoType;
+  promo_type: 'percentage' | 'flat_amount';
 
   /**
-   * Indicates if the promo code is live or disabled.
+   * Promo code lifecycle status.
    */
-  status: PromoCodeStatus;
+  status: 'active' | 'inactive' | 'archived';
 
   /**
-   * The quantity limit on the number of uses.
+   * Maximum uses when stock is limited.
    */
   stock: number;
 
   /**
-   * Whether or not the promo code has unlimited stock.
+   * Whether the promo code has no redemption limit.
    */
   unlimited_stock: boolean;
 
   /**
-   * The amount of times the promo codes has been used.
+   * When the promo code was updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Memberships that used the promo code.
    */
   uses: number;
 }
 
 export namespace PromoCode {
   /**
-   * The company for the promo code.
+   * Account that owns the promo code.
    */
-  export interface Company {
+  export interface Account {
     /**
-     * The unique identifier for the company.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * The written name of the company.
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The product this promo code applies to
+   * Product the promo code is restricted to, or `null` when it is not
+   * product-scoped.
    */
   export interface Product {
     /**
-     * The unique identifier for the product.
+     * Product ID, prefixed `prod_`.
      */
     id: string;
 
     /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
+     * Product display name.
      */
     title: string;
   }
@@ -252,261 +358,475 @@ export type PromoCodeStatus = 'active' | 'inactive' | 'archived';
  */
 export type PromoDuration = 'forever' | 'once' | 'repeating';
 
-/**
- * A promo code applies a discount to a plan during checkout. Promo codes can be
- * percentage-based or fixed-amount, and can have usage limits and expiration
- * dates.
- */
 export interface PromoCodeListResponse {
   /**
-   * The unique identifier for the promo code.
+   * Promo code ID, prefixed `promo_`.
    */
   id: string;
 
   /**
-   * The discount amount. Interpretation depends on promo_type: if 'percentage', this
-   * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
-   * off (e.g., 10.00 means $10.00 off).
+   * Discount amount. Percentage discounts are represented as a decimal fraction.
    */
   amount_off: number;
 
   /**
-   * Restricts promo use to only users who have churned from the company before.
+   * Whether the promo code is restricted to churned customers.
    */
   churned_users_only: boolean;
 
   /**
-   * The specific code used to apply the promo at checkout.
+   * Code entered at checkout.
    */
   code: string | null;
 
   /**
-   * The datetime the promo code was created.
+   * When the promo code was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The monetary currency of the promo code.
+   * Currency used for a fixed-amount discount.
    */
-  currency: Shared.Currency;
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau';
 
   /**
-   * The duration setting for the promo code
+   * How long the discount applies.
    */
-  duration: PromoDuration | null;
+  duration: 'forever' | 'once' | 'repeating';
 
   /**
-   * Restricts promo use to only be applied to already purchased memberships.
+   * Whether the promo code applies only to existing memberships.
    */
   existing_memberships_only: boolean;
 
   /**
-   * The date/time of when the promo expires.
+   * When the promo code expires, as an ISO 8601 timestamp.
    */
   expires_at: string | null;
 
   /**
-   * Restricts promo use to only users who have never purchased from the company
-   * before.
+   * Custom key-value metadata stored on the promo code.
+   */
+  metadata: unknown;
+
+  /**
+   * Whether the promo code is restricted to new customers.
    */
   new_users_only: boolean;
 
   /**
-   * Restricts promo use to only be applied once per customer.
+   * Whether each customer may redeem the promo code only once.
    */
   one_per_customer: boolean;
 
   /**
-   * The product this promo code applies to
+   * Product the promo code is restricted to, or `null` when it is not
+   * product-scoped.
    */
   product: PromoCodeListResponse.Product | null;
 
   /**
-   * The number of months the promo is applied for.
+   * Billing intervals the discount applies to.
    */
   promo_duration_months: number | null;
 
   /**
-   * The type (% or flat amount) of the promo.
+   * Whether the discount is percentage-based or a fixed amount.
    */
-  promo_type: Shared.PromoType;
+  promo_type: 'percentage' | 'flat_amount';
 
   /**
-   * Indicates if the promo code is live or disabled.
+   * Promo code lifecycle status.
    */
-  status: PromoCodeStatus;
+  status: 'active' | 'inactive' | 'archived';
 
   /**
-   * The quantity limit on the number of uses.
+   * Maximum uses when stock is limited.
    */
   stock: number;
 
   /**
-   * Whether or not the promo code has unlimited stock.
+   * Whether the promo code has no redemption limit.
    */
   unlimited_stock: boolean;
 
   /**
-   * The amount of times the promo codes has been used.
+   * When the promo code was updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Memberships that used the promo code.
    */
   uses: number;
 }
 
 export namespace PromoCodeListResponse {
   /**
-   * The product this promo code applies to
+   * Product the promo code is restricted to, or `null` when it is not
+   * product-scoped.
    */
   export interface Product {
     /**
-     * The unique identifier for the product.
+     * Product ID, prefixed `prod_`.
      */
     id: string;
 
     /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
+     * Product display name.
      */
     title: string;
   }
 }
 
-/**
- * Represents `true` or `false` values.
- */
-export type PromoCodeDeleteResponse = boolean;
+export interface PromoCodeDeleteResponse {
+  id: string;
+
+  deleted: boolean;
+}
 
 export interface PromoCodeCreateParams {
   /**
-   * The discount amount. When promo_type is percentage, this is the percent off
-   * (e.g., 20 for 20% off). When promo_type is flat_amount, this is the currency
-   * amount off (e.g., 10.00 for $10.00 off).
+   * Body param
+   */
+  account_id: string;
+
+  /**
+   * Body param
    */
   amount_off: number;
 
   /**
-   * The three-letter ISO currency code for the promo code discount.
+   * Body param
    */
-  base_currency: Shared.Currency;
+  base_currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau';
 
   /**
-   * The alphanumeric code customers enter at checkout to apply the discount.
+   * Body param
    */
   code: string;
 
   /**
-   * The unique identifier of the company to create this promo code for.
-   */
-  company_id: string;
-
-  /**
-   * Whether to restrict this promo code to only users who have never purchased from
-   * the company before.
+   * Body param
    */
   new_users_only: boolean;
 
   /**
-   * The number of billing months the discount remains active. For example, 3 means
-   * the discount applies to the first 3 billing cycles.
+   * Body param
    */
   promo_duration_months: number;
 
   /**
-   * The discount type, either percentage or flat_amount.
+   * Body param
    */
-  promo_type: Shared.PromoType;
+  promo_type: 'percentage' | 'flat_amount';
 
   /**
-   * Whether to restrict this promo code to only users who have previously churned
-   * from the company.
+   * Body param
    */
-  churned_users_only?: boolean | null;
+  churned_users_only?: boolean;
 
   /**
-   * Whether this promo code can only be applied to existing memberships, such as for
-   * cancellation retention offers.
+   * Body param
    */
-  existing_memberships_only?: boolean | null;
+  existing_memberships_only?: boolean;
 
   /**
-   * The datetime when the promo code expires and can no longer be used. Null means
-   * it never expires.
+   * Body param
    */
   expires_at?: string | null;
 
   /**
-   * Whether each customer can only use this promo code once.
+   * Body param
    */
-  one_per_customer?: boolean | null;
+  one_per_customer?: boolean;
 
   /**
-   * The identifiers of plans this promo code applies to. When product_id is also
-   * provided, only plans attached to that product are included.
-   */
-  plan_ids?: Array<string> | null;
-
-  /**
-   * The identifier of the product to scope this promo code to. When provided, the
-   * promo code only applies to plans attached to this product.
-   */
-  product_id?: string | null;
-
-  /**
-   * The maximum number of times this promo code can be used. Ignored when
-   * unlimited_stock is true.
-   */
-  stock?: number | null;
-
-  /**
-   * Whether the promo code can be used an unlimited number of times.
-   */
-  unlimited_stock?: boolean | null;
-}
-
-export interface PromoCodeListParams extends CursorPageParams {
-  /**
-   * The unique identifier of the company to list promo codes for.
-   */
-  company_id: string;
-
-  /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string;
-
-  /**
-   * Only return promo codes created after this timestamp.
-   */
-  created_after?: string;
-
-  /**
-   * Only return promo codes created before this timestamp.
-   */
-  created_before?: string;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number;
-
-  /**
-   * Filter to only promo codes scoped to these plan identifiers.
+   * Body param
    */
   plan_ids?: Array<string>;
 
   /**
-   * Filter to only promo codes scoped to these product identifiers.
+   * Body param
+   */
+  product_id?: string | null;
+
+  /**
+   * Body param
+   */
+  stock?: number | null;
+
+  /**
+   * Body param
+   */
+  unlimited_stock?: boolean;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface PromoCodeRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+}
+
+export interface PromoCodeListParams extends CursorPageParams {
+  /**
+   * Query param: Account whose promo codes are listed (`biz_` tag).
+   */
+  account_id: string;
+
+  /**
+   * Query param: Cursor to paginate backwards from.
+   */
+  before?: string;
+
+  /**
+   * Query param: Only promo codes created after this ISO 8601 timestamp.
+   */
+  created_after?: string;
+
+  /**
+   * Query param: Only promo codes created before this ISO 8601 timestamp.
+   */
+  created_before?: string;
+
+  /**
+   * Query param: Sort direction.
+   */
+  direction?: 'asc' | 'desc';
+
+  /**
+   * Query param: Number of promo codes to return from the start of the window.
+   */
+  first?: number;
+
+  /**
+   * Query param: Number of promo codes to return from the end of the window.
+   */
+  last?: number;
+
+  /**
+   * Query param: Sort field.
+   */
+  order?: 'created_at';
+
+  /**
+   * Query param: Only promo codes scoped to these plan IDs.
+   */
+  plan_ids?: Array<string>;
+
+  /**
+   * Query param: Only promo codes scoped to these product IDs.
    */
   product_ids?: Array<string>;
 
   /**
-   * Filter to only promo codes matching this status.
+   * Query param: Promo-code status. `expired` groups inactive and archived codes.
    */
-  status?: PromoCodeStatus;
+  status?: 'active' | 'inactive' | 'archived' | 'expired';
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+}
+
+export interface PromoCodeDeleteParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace PromoCodes {
@@ -518,6 +838,8 @@ export declare namespace PromoCodes {
     type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
     type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeRetrieveParams as PromoCodeRetrieveParams,
     type PromoCodeListParams as PromoCodeListParams,
+    type PromoCodeDeleteParams as PromoCodeDeleteParams,
   };
 }

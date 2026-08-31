@@ -2,140 +2,109 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 
 /**
- * Notifications
+ * A Notification is a message delivered to a user — a new post, a payment, a mention. Every notification comes from an experience the user belongs to or a team they are on, and users control what they receive with notification preferences.
+ *
+ * Every notification belongs to a topic: the category it falls under, such as new sales or account activity. Topics carry a default, so a user only needs a preference row where they diverge from it. `GET /notifications/topics` lists the platform's visible topics, and a topic's `id` is what the notification preference endpoints take as `topic_id` — the catalog is the only place those ids come from, so read it rather than hardcoding. Each topic also carries an `identifier` such as `new-follower`, which is stable across environments and is the value to match on in code.
+ *
+ * Use the Notifications API to list the authenticated user's feed, read per-experience unread badges, mark an experience (or everything) as read, send notifications from your app to an experience's users or an account's team, and list the topic catalog.
  */
 export class Notifications extends APIResource {
   /**
-   * Send a push notification to users in an experience or company team. The
-   * notification is processed asynchronously and supports targeting specific users.
-   *
-   * Required permissions:
-   *
-   * - `notification:create`
+   * Queues a notification to every user of an experience or to an account's team,
+   * processed asynchronously. Every send is attributed to an app: use an app API
+   * key, or a credential acting on behalf of an app. Narrow the audience with
+   * `user_ids` to send a mention.
    *
    * @example
    * ```ts
    * const notification = await client.notifications.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   content: 'content',
-   *   title: 'title',
+   *   content:
+   *     'Drop off at 4180 Burnet Rd. Plan on two days for the full coating.',
+   *   title: 'Your ceramic coating is booked',
    * });
    * ```
    */
-  create(body: NotificationCreateParams, options?: RequestOptions): APIPromise<NotificationCreateResponse> {
-    return this._client.post('/notifications', { body, ...options });
+  create(params: NotificationCreateParams, options?: RequestOptions): APIPromise<NotificationCreateResponse> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/notifications', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
 
-/**
- * Response from queuing a notification
- */
 export interface NotificationCreateResponse {
-  /**
-   * Whether the notification was successfully queued for delivery
-   */
   success: boolean;
 }
 
-export type NotificationCreateParams =
-  | NotificationCreateParams.SendNotificationV2InputWithCompanyID
-  | NotificationCreateParams.SendNotificationV2InputWithExperienceID;
+export interface NotificationCreateParams {
+  /**
+   * Body param: Main body text of the notification.
+   */
+  content: string;
 
-export declare namespace NotificationCreateParams {
-  export interface SendNotificationV2InputWithCompanyID {
-    /**
-     * The unique identifier of the company to target. Only team members of this
-     * company will receive the notification. Clicking the notification opens your
-     * dashboard app view.
-     */
-    company_id: string;
+  /**
+   * Body param: Headline text of the notification.
+   */
+  title: string;
 
-    /**
-     * The main body text of the notification displayed to the user.
-     */
-    content: string;
+  /**
+   * Body param: Account whose team members receive the notification (`biz_` tag).
+   * Exactly one of `experience_id` or `account_id` is required.
+   */
+  account_id?: string;
 
-    /**
-     * The headline text of the notification, displayed prominently to the user.
-     */
-    title: string;
+  /**
+   * Body param: Experience whose users receive the notification (`exp_` tag).
+   * Exactly one of `experience_id` or `account_id` is required.
+   */
+  experience_id?: string;
 
-    /**
-     * The unique identifier of a user whose profile picture will be used as the
-     * notification icon. Defaults to the experience or company avatar when not
-     * provided.
-     */
-    icon_user_id?: string | null;
+  /**
+   * Body param: User whose profile picture is used as the notification icon.
+   * Defaults to the experience or account avatar.
+   */
+  icon_user_id?: string | null;
 
-    /**
-     * A path segment appended to the generated deep link that opens your app. Use
-     * [restPath] in your app path configuration to read this parameter. For example,
-     * '/settings/billing'.
-     */
-    rest_path?: string | null;
+  /**
+   * Body param: Path segment appended to the generated deep link that opens your
+   * app, for example `/settings/billing`.
+   */
+  rest_path?: string | null;
 
-    /**
-     * An optional secondary line of text displayed below the title in the
-     * notification.
-     */
-    subtitle?: string | null;
+  /**
+   * Body param: Optional secondary line displayed below the title.
+   */
+  subtitle?: string | null;
 
-    /**
-     * An optional list of user IDs to narrow the audience. When provided, only these
-     * users receive the notification, provided they are in the targeted experience or
-     * company.
-     */
-    user_ids?: Array<string> | null;
-  }
+  /**
+   * Body param: Optional `user_` tags narrowing the audience. When provided, only
+   * these users are notified (as a mention), provided they are in the targeted
+   * experience or account.
+   */
+  user_ids?: Array<string>;
 
-  export interface SendNotificationV2InputWithExperienceID {
-    /**
-     * The main body text of the notification displayed to the user.
-     */
-    content: string;
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 
-    /**
-     * The unique identifier of the experience to target. All users with access to this
-     * experience will receive the notification. Clicking the notification opens the
-     * experience view.
-     */
-    experience_id: string;
-
-    /**
-     * The headline text of the notification, displayed prominently to the user.
-     */
-    title: string;
-
-    /**
-     * The unique identifier of a user whose profile picture will be used as the
-     * notification icon. Defaults to the experience or company avatar when not
-     * provided.
-     */
-    icon_user_id?: string | null;
-
-    /**
-     * A path segment appended to the generated deep link that opens your app. Use
-     * [restPath] in your app path configuration to read this parameter. For example,
-     * '/settings/billing'.
-     */
-    rest_path?: string | null;
-
-    /**
-     * An optional secondary line of text displayed below the title in the
-     * notification.
-     */
-    subtitle?: string | null;
-
-    /**
-     * An optional list of user IDs to narrow the audience. When provided, only these
-     * users receive the notification, provided they are in the targeted experience or
-     * company.
-     */
-    user_ids?: Array<string> | null;
-  }
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Notifications {

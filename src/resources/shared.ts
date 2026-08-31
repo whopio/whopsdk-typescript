@@ -1,11 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import * as AppsAPI from './apps';
-import * as CheckoutConfigurationsAPI from './checkout-configurations';
 import * as CompaniesAPI from './companies';
 import * as DisputesAPI from './disputes';
-import * as MembershipsAPI from './memberships';
 import * as PaymentsAPI from './payments';
 import * as RefundsAPI from './refunds';
 import * as ResolutionCenterCasesAPI from './resolution-center-cases';
@@ -22,420 +19,598 @@ export type AccessLevel = 'no_access' | 'admin' | 'customer';
  */
 export type AccessPassType = 'regular' | 'app' | 'experience_upsell' | 'api_only';
 
-/**
- * An app is an integration built on Whop. Apps can serve consumers as experiences
- * within products, or serve companies as business tools.
- */
 export interface App {
   /**
-   * The unique identifier for the app.
+   * App ID, prefixed `app_`.
    */
   id: string;
 
   /**
-   * The API key used to authenticate requests on behalf of this app. Null if no API
-   * key has been generated. Requires the 'developer:manage_api_key' permission.
+   * The account that owns the app.
+   */
+  account: App.Account;
+
+  /**
+   * Legacy app API key used to authenticate requests on the app's behalf. `null`
+   * when no key exists or the caller lacks the `developer:manage_api_key`
+   * permission.
    */
   api_key: App.APIKey | null;
 
   /**
-   * The target audience classification for this app (e.g., 'b2b_app', 'b2c_app',
-   * 'company_app', 'component').
+   * Detailed description shown on the app store's in-depth app page, or `null` when
+   * none has been set.
    */
-  app_type: AppsAPI.AppType;
+  app_store_description: string | null;
+
+  /**
+   * The type of end-user the app is built for.
+   */
+  app_type: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
+
+  /**
+   * Banner image from the app's product listing, or `null` when none is uploaded.
+   */
+  banner_image: App.BannerImage | null;
 
   /**
    * The production base URL where the app is hosted. `null` if no base URL is
-   * configured, or if the caller lacks the `developer:basic:read` permission on the
-   * app's account.
+   * configured, if the caller lacks the `developer:basic:read` permission on the
+   * app's account, or on list responses, which never expose it.
    */
   base_url: string | null;
 
   /**
-   * The company that owns and publishes this app.
+   * Website businesses created from this app as a template.
    */
-  company: App.Company;
+  businesses_created_count: number;
+
+  businesses_created_logo_urls: Array<string>;
 
   /**
-   * The user who created and owns the company that published this app.
+   * The user who owns the publishing account.
    */
   creator: App.Creator;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the account dashboard view, or `null` when not configured.
    */
   dashboard_path: string | null;
 
   /**
-   * The app's default API key, used to authenticate requests on behalf of this app.
-   * Null if the app has no default key. Requires the 'developer:manage_api_key'
-   * permission.
+   * The app's default API key. `null` when the app has no default key or the caller
+   * lacks the `developer:manage_api_key` permission; `secret_key` is additionally
+   * `null` unless the caller could have created the key themselves.
    */
   default_api_key: App.DefaultAPIKey | null;
 
   /**
-   * A written description of what this app does, displayed on the app store listing
-   * page. Null if no description has been set.
+   * What the app has left to publish, and how a publish in flight is going —
+   * `status` is only ever `unpublished`, `publishing`, or `failed` here. `null`
+   * means there is nothing to report: the app is fully published, there is no
+   * working copy to publish from, or the caller cannot deploy this app. Tell those
+   * apart from the app's own `production_web_build`.
+   */
+  deployment: App.Deployment | null;
+
+  /**
+   * Short description shown in listings and search results, or `null` if none has
+   * been set.
    */
   description: string | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the discover view, or `null` when not configured.
    */
   discover_path: string | null;
 
   /**
-   * The unique subdomain identifier for this app's proxied URL on the Whop platform.
-   * Forms the URL pattern https://{domain_id}.apps.whop.com.
+   * Subdomain identifier for the app's proxied URL, forming
+   * https://{domain_id}.apps.whop.com.
    */
   domain_id: string;
 
+  elements_used: Array<
+    | 'ads'
+    | 'ads.billing-setup'
+    | 'ads.campaign-creator'
+    | 'ads.reporting'
+    | 'ads.reporting.chart'
+    | 'ads.reporting.table'
+    | 'checkout'
+    | 'checkout.checkout'
+    | 'checkout.expressCheckout'
+    | 'payments'
+    | 'payments.address'
+    | 'payments.branding'
+    | 'payments.card'
+    | 'payments.cardFields'
+    | 'payments.cardFields.cardCvc'
+    | 'payments.cardFields.cardExpiry'
+    | 'payments.cardFields.cardNumber'
+    | 'payments.email'
+    | 'payments.payment'
+    | 'payments.taxId'
+    | 'tracking'
+    | 'tracking.events'
+    | 'tracking.people'
+    | 'wallet'
+    | 'wallet.activity'
+    | 'wallet.balances'
+    | 'wallet.balances.balance'
+    | 'wallet.balances.list'
+    | 'wallet.cards'
+    | 'wallet.deposit'
+    | 'wallet.send'
+    | 'wallet.withdraw'
+    | 'websites'
+    | 'websites.pixel-setup'
+    | 'websites.websites'
+  >;
+
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the member-facing hub view, or `null` when not configured.
    */
   experience_path: string | null;
 
   /**
-   * The full canonical URL where this app's hosted web build is served. Null if the
-   * app has not claimed a route.
+   * Full URL where the app's hosted web build is served, or `null` if no route is
+   * claimed.
    */
   hosted_url: string | null;
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
-  icon: App.Icon | null;
+  icon: App.Icon;
 
   /**
-   * The available marketplace statuses to choose from.
+   * Approval status of the app's product listing on the Whop app store, or `null`
+   * when the app has no associated product.
    */
   marketplace_status: 'not_available' | 'pending_review' | 'live_marketplace' | null;
 
   /**
-   * The display name of this app shown on the app store and in experience
-   * navigation. Maximum 30 characters.
+   * Display name shown on the app store and in experience navigation.
    */
   name: string;
 
   /**
-   * How this app authenticates when exchanging OAuth authorization and refresh
-   * grants.
+   * How the app authenticates at the OAuth token endpoint.
    */
   oauth_client_type: 'public' | 'confidential';
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's OpenAPI spec file, or `null` when not configured.
    */
   openapi_path: string | null;
 
   /**
-   * The full origin URL for this app's proxied domain (e.g.,
-   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   * Full origin URL of the app's proxied domain, for example
+   * https://ab1c2d3e4f.apps.whop.com.
    */
   origin: string | null;
 
   /**
-   * Represents a unique identifier that is Base64 obfuscated. It is often used to
-   * refetch an object or as key for a cache. The ID type appears in a JSON response
-   * as a String; however, it is not intended to be human-readable. When expected as
-   * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-   * input value will be accepted as an ID.
+   * A short-lived signed pass scoping the caller to this app's gated preview hosts —
+   * every build preview and the live dev-server sandbox. Add it to a preview host as
+   * the `__whop_preview` query param (or `x-whop-preview-token` header). `null`
+   * unless the caller is a team member who can read the app's developer settings.
+   */
+  preview_token: string | null;
+
+  /**
+   * ID of the app's product listing on the Whop app store, or `null` when the app
+   * has no associated product.
    */
   product_id: string | null;
 
   /**
-   * The approved app build currently served to users on web. Null if no production
-   * build is deployed for web.
+   * The approved build currently served on Android, or `null` when none is deployed.
+   */
+  production_android_build: App.ProductionAndroidBuild | null;
+
+  /**
+   * The approved build currently served on iOS, or `null` when none is deployed.
+   */
+  production_ios_build: App.ProductionIosBuild | null;
+
+  /**
+   * The approved build currently served on web, or `null` when none is deployed.
    */
   production_web_build: App.ProductionWebBuild | null;
 
-  /**
-   * The whitelisted OAuth callback URLs that users are redirected to after
-   * authorizing the app.
-   */
   redirect_uris: Array<string>;
 
-  /**
-   * The list of permissions this app requests when installed, including both
-   * required and optional permissions with justifications.
-   */
   requested_permissions: Array<App.RequestedPermission>;
 
+  required_scopes: Array<'read_user'>;
+
   /**
-   * The unique subdomain route where this app's hosted web builds are served, such
-   * as 'myapp' for myapp.whop.site. Null if the app has not claimed a route.
+   * Claimed subdomain route where hosted web builds are served (`myapp` for
+   * myapp.whop.site), or `null` if no route is claimed.
    */
   route: string | null;
 
   /**
-   * The app's secrets as an object of string values. Encrypted at rest and injected
-   * into the app's hosted server runtime as environment bindings. Requires the
-   * 'developer:update_app' permission.
+   * The app's production secrets as an object of string values, injected into the
+   * hosted server runtime. `null` when the caller lacks the `developer:update_app`
+   * permission.
    */
-  secrets: { [key: string]: unknown } | null;
+  secrets: unknown | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's skills directory, or `null` when not configured.
    */
   skills_path: string | null;
 
   /**
-   * Aggregate usage statistics for this app, including daily, weekly, and monthly
-   * active user counts.
+   * Visibility on the Whop app store: `live` is publicly discoverable, `unlisted` is
+   * accessible only via direct link, `hidden` is not visible anywhere.
    */
-  stats: App.Stats | null;
+  status: 'live' | 'unlisted' | 'hidden';
 
   /**
-   * The current visibility status of this app on the Whop app store. 'live' means
-   * publicly discoverable, 'unlisted' means accessible only via direct link, and
-   * 'hidden' means not visible anywhere.
-   */
-  status: AppStatuses;
-
-  /**
-   * Whether this app has been verified by Whop. Verified apps are endorsed by Whop
-   * and displayed in the featured apps section of the app store.
+   * Whether the app has been verified by Whop and is eligible for the featured apps
+   * section.
    */
   verified: boolean;
 }
 
 export namespace App {
   /**
-   * The API key used to authenticate requests on behalf of this app. Null if no API
-   * key has been generated. Requires the 'developer:manage_api_key' permission.
+   * The account that owns the app.
    */
-  export interface APIKey {
+  export interface Account {
     /**
-     * The unique identifier for the private api key.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * This is the API key used to authenticate requests
+     * Account logo image URL.
      */
-    token: string;
+    logo_url: string | null;
 
     /**
-     * The datetime the private api key was created.
+     * Account public route identifier.
      */
-    created_at: string;
-  }
-
-  /**
-   * The company that owns and publishes this app.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
+    route: string;
 
     /**
-     * The display name of the company shown to customers.
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The user who created and owns the company that published this app.
+   * Legacy app API key used to authenticate requests on the app's behalf. `null`
+   * when no key exists or the caller lacks the `developer:manage_api_key`
+   * permission.
+   */
+  export interface APIKey {
+    /**
+     * The key's secret token, sent as a bearer token to authenticate requests on the
+     * app's behalf.
+     */
+    token: string;
+
+    /**
+     * When the key was created, as an ISO 8601 timestamp.
+     */
+    created_at: string;
+  }
+
+  /**
+   * Banner image from the app's product listing, or `null` when none is uploaded.
+   */
+  export interface BannerImage {
+    /**
+     * Banner image URL, taken from the app's product listing.
+     */
+    url: string;
+  }
+
+  /**
+   * The user who owns the publishing account.
    */
   export interface Creator {
     /**
-     * The unique identifier for the user.
+     * User ID, prefixed `user_`.
      */
     id: string;
 
     /**
-     * The user's display name shown on their public profile.
+     * Display name.
      */
     name: string | null;
 
     /**
-     * The user's unique username shown on their public profile.
+     * Public username.
      */
     username: string;
   }
 
   /**
-   * The app's default API key, used to authenticate requests on behalf of this app.
-   * Null if the app has no default key. Requires the 'developer:manage_api_key'
-   * permission.
+   * The app's default API key. `null` when the app has no default key or the caller
+   * lacks the `developer:manage_api_key` permission; `secret_key` is additionally
+   * `null` unless the caller could have created the key themselves.
    */
   export interface DefaultAPIKey {
     /**
-     * The unique identifier for the authorized api key.
+     * API key ID, prefixed `apik_`.
      */
     id: string;
 
     /**
-     * A user set name to identify an API key
+     * Human-readable name identifying the API key, or `null` when none was set.
      */
     name: string | null;
 
     /**
-     * A masked version of the secret key used to authenticate requests. This is so
-     * that the owner can easily identify which key it is without being shown the full
-     * secret.
+     * Masked version of the secret key, so the key can be recognized without revealing
+     * the full secret.
      */
     obfuscated_secret_key: string;
 
     /**
-     * The secret key used to authenticate requests. This is only available if the
-     * current actor would have been able to create this api key.
+     * The full secret used to authenticate requests. `null` unless the caller could
+     * have created the key themselves.
      */
     secret_key: string | null;
   }
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * What the app has left to publish, and how a publish in flight is going —
+   * `status` is only ever `unpublished`, `publishing`, or `failed` here. `null`
+   * means there is nothing to report: the app is fully published, there is no
+   * working copy to publish from, or the caller cannot deploy this app. Tell those
+   * apart from the app's own `production_web_build`.
    */
-  export interface Icon {
+  export interface Deployment {
     /**
-     * A pre-optimized URL for rendering this attachment on the client. This should be
-     * used for displaying attachments in apps.
+     * The app being deployed, prefixed `app_`.
+     */
+    app_id: string;
+
+    /**
+     * The build the deployment produced, prefixed `abld_`, or `null` until it
+     * succeeds.
+     */
+    build_id: string | null;
+
+    /**
+     * Whether the running or last deployment uploaded a build without making it live.
+     */
+    draft: boolean;
+
+    /**
+     * Why the deployment failed, or `null` when it did not.
+     */
+    error: string | null;
+
+    /**
+     * How long this deployment is expected to take in total, estimated from previous
+     * runs.
+     */
+    estimated_duration_ms: number | null;
+
+    /**
+     * How much longer the deployment is expected to take. Held above zero until it
+     * actually finishes.
+     */
+    estimated_remaining_ms: number | null;
+
+    /**
+     * When the deployment ended, in milliseconds since the epoch, or `null` while it
+     * is still running.
+     */
+    finished_at: number | null;
+
+    /**
+     * The stage a running deployment has reached, or `null` when none is running.
+     * Later phases dominate the wall clock: `process_archive` waits on the upload
+     * pipeline and `promote` waits for the build to go live.
+     */
+    phase:
+      | 'install'
+      | 'build'
+      | 'typecheck'
+      | 'upload_build'
+      | 'upload_source'
+      | 'process_archive'
+      | 'create_build'
+      | 'promote'
+      | null;
+
+    /**
+     * Fraction of the deployment estimated to be complete, from 0 to 1. Stops just
+     * short of 1 until the run ends.
+     */
+    progress: number | null;
+
+    /**
+     * When the deployment began, in milliseconds since the epoch, or `null` when none
+     * has run.
+     */
+    started_at: number | null;
+
+    /**
+     * Whether the app has anything to publish, and what a publish in flight is doing.
+     * `unpublished` means publishing would ship something new; `no_source` means the
+     * sandbox holds no copy of this app, so there is nothing to publish from.
+     */
+    status: 'published' | 'unpublished' | 'publishing' | 'failed' | 'no_source';
+
+    /**
+     * Where the deployed site is served, or `null` unless the deployment went live.
      */
     url: string | null;
   }
 
   /**
-   * The approved app build currently served to users on web. Null if no production
-   * build is deployed for web.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
-  export interface ProductionWebBuild {
+  export interface Icon {
     /**
-     * The unique identifier for the app build.
+     * Icon image URL. Always present — the default app icon when none is uploaded.
+     */
+    url: string;
+  }
+
+  /**
+   * The approved build currently served on Android, or `null` when none is deployed.
+   */
+  export interface ProductionAndroidBuild {
+    /**
+     * App build ID, prefixed `abld_`.
      */
     id: string;
 
     /**
-     * A SHA-256 hash of the uploaded build file, generated by the client and used to
-     * verify file integrity.
+     * Client-generated checksum of the build file, used to verify file integrity.
      */
-    checksum: string;
+    checksum: string | null;
 
     /**
-     * A URL to download the app build as a .zip archive.
+     * URL to download the uploaded build artifact.
      */
-    file_url: string;
+    file_url: string | null;
 
     /**
-     * A URL to download the compressed source code archive that produced this build.
-     * Null if the build was uploaded without a source archive.
+     * URL to download the compressed source code archive that produced this build, or
+     * `null` when the build was uploaded without a source archive.
      */
     source_url: string | null;
 
     /**
-     * The current review status of this build.
+     * The build's review status.
      */
-    status: Shared.AppBuildStatuses;
+    status: 'draft' | 'pending' | 'approved' | 'rejected';
   }
 
   /**
-   * A permission that the app requests from the admin of a company during the oauth
-   * flow.
+   * The approved build currently served on iOS, or `null` when none is deployed.
+   */
+  export interface ProductionIosBuild {
+    /**
+     * App build ID, prefixed `abld_`.
+     */
+    id: string;
+
+    /**
+     * Client-generated checksum of the build file, used to verify file integrity.
+     */
+    checksum: string | null;
+
+    /**
+     * URL to download the uploaded build artifact.
+     */
+    file_url: string | null;
+
+    /**
+     * URL to download the compressed source code archive that produced this build, or
+     * `null` when the build was uploaded without a source archive.
+     */
+    source_url: string | null;
+
+    /**
+     * The build's review status.
+     */
+    status: 'draft' | 'pending' | 'approved' | 'rejected';
+  }
+
+  /**
+   * The approved build currently served on web, or `null` when none is deployed.
+   */
+  export interface ProductionWebBuild {
+    /**
+     * App build ID, prefixed `abld_`.
+     */
+    id: string;
+
+    /**
+     * Client-generated checksum of the build file, used to verify file integrity.
+     */
+    checksum: string | null;
+
+    /**
+     * URL to download the uploaded build artifact.
+     */
+    file_url: string | null;
+
+    /**
+     * URL to download the compressed source code archive that produced this build, or
+     * `null` when the build was uploaded without a source archive.
+     */
+    source_url: string | null;
+
+    /**
+     * The build's review status.
+     */
+    status: 'draft' | 'pending' | 'approved' | 'rejected';
+  }
+
+  /**
+   * Permissions the app requests on install.
    */
   export interface RequestedPermission {
     /**
-     * Whether the action is required for the app to function.
+     * Whether the app requires the permission to be granted on install, as opposed to
+     * requesting it optionally.
      */
     is_required: boolean;
 
     /**
-     * The reason for requesting the action.
+     * The developer's explanation of why the app needs the permission, or `null` when
+     * none was provided.
      */
-    justification: string;
+    justification: string | null;
 
     /**
-     * The action that the app will request off of users when a user installs the app.
+     * The permission action the app requests.
      */
     permission_action: RequestedPermission.PermissionAction;
   }
 
   export namespace RequestedPermission {
     /**
-     * The action that the app will request off of users when a user installs the app.
+     * The permission action the app requests.
      */
     export interface PermissionAction {
       /**
-       * The identifier of the action.
+       * The permission action's identifier, for example `company:basic:read`.
        */
       action: string;
 
       /**
-       * The human readable name of the action.
+       * Human-readable name of the action.
        */
       name: string;
     }
   }
-
-  /**
-   * Aggregate usage statistics for this app, including daily, weekly, and monthly
-   * active user counts.
-   */
-  export interface Stats {
-    /**
-     * The number of unique users who have spent time in this app in the last 24 hours.
-     * Returns 0 if no usage data is available.
-     */
-    dau: number;
-
-    /**
-     * The number of unique users who have spent time in this app in the last 28 days.
-     * Returns 0 if no usage data is available.
-     */
-    mau: number;
-
-    /**
-     * The total time, in seconds, that all users have spent in this app over the last
-     * 24 hours. Returns 0 if no usage data is available.
-     */
-    time_spent_last24_hours: number;
-
-    /**
-     * The number of unique users who have spent time in this app in the last 7 days.
-     * Returns 0 if no usage data is available.
-     */
-    wau: number;
-  }
 }
 
-/**
- * A versioned build artifact for a Whop React Native App, submitted for review and
- * deployment to a specific platform.
- */
 export interface AppBuild {
   /**
-   * The unique identifier for the app build.
+   * App build ID, prefixed `abld_`.
    */
   id: string;
 
   /**
-   * A SHA-256 hash of the uploaded build file, generated by the client and used to
-   * verify file integrity.
+   * Client-generated checksum of the build file, used to verify file integrity.
    */
   checksum: string;
 
   /**
-   * The datetime the app build was created.
+   * When the build was uploaded, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * A URL to download the app build as a .zip archive.
+   * URL to download the uploaded build artifact.
    */
-  file_url: string;
+  file_url: string | null;
 
   /**
    * Whether this build is the currently active production build for its platform.
@@ -445,29 +620,28 @@ export interface AppBuild {
   /**
    * The target platform for this build.
    */
-  platform: AppBuildPlatforms;
+  platform: 'ios' | 'android' | 'web';
 
   /**
-   * Feedback from the reviewer explaining why the build was rejected. Null if the
-   * build has not been reviewed or was approved.
+   * Feedback from the reviewer explaining a rejection, or `null` if the build has
+   * not been reviewed or was approved.
    */
   review_message: string | null;
 
   /**
-   * A URL to download the compressed source code archive that produced this build.
-   * Null if the build was uploaded without a source archive.
+   * URL to download the compressed source code archive that produced this build, or
+   * `null` when the build was uploaded without a source archive.
    */
   source_url: string | null;
 
   /**
-   * The current review status of this build.
+   * The build's review status.
    */
-  status: AppBuildStatuses;
+  status: 'draft' | 'pending' | 'approved' | 'rejected';
 
-  /**
-   * The list of view types this build supports, as declared by the developer.
-   */
-  supported_app_view_types: Array<AppViewType>;
+  supported_app_view_types: Array<
+    'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi'
+  >;
 }
 
 /**
@@ -570,169 +744,260 @@ export namespace ChatChannel {
   }
 }
 
-/**
- * A checkout configuration is a reusable configuration for a checkout, including
- * the plan, affiliate, and custom metadata. Payments and memberships created from
- * a checkout session inherit its metadata.
- */
 export interface CheckoutConfiguration {
-  /**
-   * The unique identifier for the checkout session.
-   */
   id: string;
 
   /**
-   * The affiliate code to use for the checkout configuration
+   * Account ID, prefixed `biz_`.
+   */
+  account_id: string;
+
+  /**
+   * Affiliate code applied at checkout, or `null` when none is set.
    */
   affiliate_code: string | null;
 
   /**
-   * The ID of the company to use for the checkout configuration
+   * When the checkout configuration was created, as an ISO 8601 timestamp.
    */
-  company_id: string;
+  created_at: string;
 
   /**
-   * The available currencies on the platform
+   * Currency used for setup-mode payment method availability; defaults to `usd` when
+   * omitted.
    */
-  currency: Currency | null;
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau'
+    | null;
 
   /**
-   * The metadata to use for the checkout configuration
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
    */
-  metadata: { [key: string]: unknown } | null;
+  effective_payment_method_configuration: CheckoutConfiguration.EffectivePaymentMethodConfiguration | null;
 
   /**
-   * The mode of the checkout session.
+   * Custom key-value metadata copied to payments and memberships. `null` without the
+   * `checkout_configuration:basic:read` scope.
    */
-  mode: CheckoutConfigurationsAPI.CheckoutModes;
+  metadata: unknown | null;
 
   /**
-   * The explicit payment method configuration for the session, if any. This
-   * currently only works in 'setup' mode. Use the plan's
-   * payment_method_configuration for payment method.
+   * Controls whether checkout charges the buyer immediately or saves payment details
+   * for later.
    */
-  payment_method_configuration: CheckoutConfiguration.PaymentMethodConfiguration | null;
+  mode: 'payment' | 'setup';
 
   /**
-   * The plan to use for the checkout configuration
+   * Payment method overrides for this checkout. `null` when it uses the plan or
+   * platform defaults.
+   */
+  payment_method_configuration: unknown | null;
+
+  /**
+   * Plan used for payment checkout. `null` in setup mode.
    */
   plan: CheckoutConfiguration.Plan | null;
 
   /**
-   * A URL you can send to customers to complete a checkout. It looks like
-   * `/checkout/ch_xxxx/`
+   * Checkout URL you can send to customers.
    */
-  purchase_url: string;
+  purchase_url: string | null;
 
   /**
-   * The URL to redirect the user to after the checkout configuration is created
+   * URL customers are sent to after checkout, or `null` when no redirect is
+   * configured.
    */
   redirect_url: string | null;
+
+  /**
+   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   */
+  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+  /**
+   * When the checkout configuration was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
 }
 
 export namespace CheckoutConfiguration {
   /**
-   * The explicit payment method configuration for the session, if any. This
-   * currently only works in 'setup' mode. Use the plan's
-   * payment_method_configuration for payment method.
+   * The configuration governing a checkout mounted from this configuration, resolved
+   * through every layer (its own overrides, the plan's, and the account's) — the
+   * shape a session's `payment_method_configuration` carries. Apply it over the
+   * payment method types catalogue for the offerable set. `null` means platform
+   * defaults; `payment_method_configuration` stays this configuration's own editable
+   * override.
    */
-  export interface PaymentMethodConfiguration {
-    /**
-     * An array of payment method identifiers that are explicitly disabled. Only
-     * applies if the include_platform_defaults is true.
-     */
-    disabled: Array<PaymentsAPI.PaymentMethodTypes>;
+  export interface EffectivePaymentMethodConfiguration {
+    disabled: Array<string>;
+
+    enabled: Array<string>;
 
     /**
-     * An array of payment method identifiers that are explicitly enabled. This means
-     * these payment methods will be shown on checkout. Example use case is to only
-     * enable a specific payment method like cashapp, or extending the platform
-     * defaults with additional methods.
-     */
-    enabled: Array<PaymentsAPI.PaymentMethodTypes>;
-
-    /**
-     * Whether Whop's platform default payment method enablement settings are included
-     * in this configuration. The full list of default payment methods can be found in
-     * the documentation at docs.whop.com/payments.
+     * Whether Whop's default set is the starting point. When `false`, only `enabled`
+     * is offered.
      */
     include_platform_defaults: boolean;
   }
 
   /**
-   * The plan to use for the checkout configuration
+   * Plan used for payment checkout. `null` in setup mode.
    */
   export interface Plan {
     /**
-     * The unique identifier for the plan.
+     * Plan ID, prefixed `plan_`.
      */
     id: string;
 
     /**
-     * Whether the creator has turned on adaptive pricing for this plan. Raw setting —
-     * does not check processor compatibility or feature flags.
+     * Whether this plan accepts local currency payments via adaptive pricing.
      */
     adaptive_pricing_enabled: boolean;
 
     /**
-     * Number of days between recurring charges, such as 30 for monthly or 365 for
-     * annual. `null` for one-time plans.
+     * Recurring billing interval in days.
      */
     billing_period: number | null;
 
     /**
-     * The currency used for all prices on this plan (e.g., 'usd', 'eur'). All monetary
-     * amounts on the plan are denominated in this currency.
+     * Three-letter ISO currency code for the plan's prices.
      */
-    currency: Shared.Currency;
+    currency: string;
 
     /**
-     * Access duration in days for expiration-based plans, such as 365 for a one-year
-     * pass.
+     * Access duration in days for expiration-based plans.
      */
     expiration_days: number | null;
 
     /**
-     * The initial purchase price in the plan's base_currency (e.g., 49.99 for $49.99).
-     * For one-time plans, this is the full price. For renewal plans, this is charged
-     * on top of the first renewal_price.
+     * Initial purchase price in the plan currency.
      */
     initial_price: number;
 
     /**
-     * The billing model for this plan: 'renewal' for recurring subscriptions or
-     * 'one_time' for single payments.
+     * Billing model for the plan.
      */
-    plan_type: Shared.PlanType;
+    plan_type: 'renewal' | 'one_time';
 
     /**
-     * Sales method for this plan: `buy_now` for immediate purchase or `waitlist` for
-     * waitlist-based access.
+     * Sales method for the plan.
      */
-    release_method: Shared.ReleaseMethod;
+    release_method: 'buy_now' | 'waitlist';
 
     /**
-     * The recurring price charged every billing_period in the plan's base_currency
-     * (e.g., 9.99 for $9.99/period). Zero for one-time plans.
+     * Recurring price charged each billing period.
      */
     renewal_price: number;
 
     /**
-     * The 3D Secure behavior for a plan.
+     * 3D Secure behavior for this plan, or `null` to use the account default.
      */
     three_ds_level: 'mandate_challenge' | 'frictionless' | null;
 
     /**
-     * Free trial days before first renewal charge. `null` if no trial is configured or
-     * the user has already used a trial for this plan.
+     * Free trial days before the first renewal charge.
      */
     trial_period_days: number | null;
 
     /**
-     * Controls whether the plan is visible to customers. When set to 'hidden', the
-     * plan is only accessible via direct link.
+     * Whether the plan is visible to customers or hidden from public view.
      */
-    visibility: Shared.Visibility;
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
   }
 }
 
@@ -2241,295 +2506,133 @@ export type MemberMostRecentActions =
  */
 export type MemberStatuses = 'drafted' | 'joined' | 'left';
 
-/**
- * A membership represents an active relationship between a user and a product. It
- * tracks the user's access, billing status, and renewal schedule.
- */
 export interface Membership {
   /**
-   * The unique identifier for the membership.
+   * Membership ID, prefixed `mem_`.
    */
   id: string;
 
   /**
-   * Whether this membership is set to cancel at the end of the current billing
-   * cycle. Only applies to memberships with a recurring plan.
+   * The account (seller) this membership belongs to.
+   */
+  account: Membership.Account;
+
+  /**
+   * Whether the membership is set to cancel when the current billing period ends.
+   * Only meaningful for recurring plans.
    */
   cancel_at_period_end: boolean;
 
   /**
-   * The different reasons a user can choose for why they are canceling their
-   * membership.
-   */
-  cancel_option: MembershipsAPI.CancelOptions | null;
-
-  /**
-   * The state of a membership after a customer provides a cancelation reason.
-   */
-  cancelation_status: 'won_back' | 'left' | 'canceling' | null;
-
-  /**
-   * The time the customer initiated cancellation of this membership. As a Unix
-   * timestamp. Null if the membership has not been canceled.
-   */
-  canceled_at: string | null;
-
-  /**
-   * Free-text explanation provided by the customer when canceling. Null if the
-   * customer did not provide a reason.
-   */
-  cancellation_reason: string | null;
-
-  /**
-   * The ID of the checkout session/configuration that produced this membership, if
-   * any. Use this to map memberships back to the checkout configuration that created
-   * them.
-   */
-  checkout_configuration_id: string | null;
-
-  /**
-   * The company this membership belongs to.
-   */
-  company: Membership.Company;
-
-  /**
-   * The datetime the membership was created.
+   * When the membership was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The available currencies on the platform
+   * When the current billing period renews, or when a non-renewing membership
+   * expires, as an ISO 8601 timestamp. `null` for one-time purchases with no
+   * expiration.
    */
-  currency: Currency | null;
+  current_period_end: string | null;
 
   /**
-   * The customer's responses to custom checkout questions configured on the product
-   * at the time of purchase.
-   */
-  custom_field_responses: Array<Membership.CustomFieldResponse>;
-
-  /**
-   * The recurring renewal price for this membership, formatted with currency symbol
-   * and billing interval. Null if the membership is not recurring.
-   */
-  formatted_renewal_price: string | null;
-
-  /**
-   * The amount the customer paid when first purchasing this membership, formatted
-   * with currency symbol.
-   */
-  initial_price_paid: string;
-
-  /**
-   * The time the user first joined the company associated with this membership. As a
-   * Unix timestamp. Null if the member record does not exist.
-   */
-  joined_at: string | null;
-
-  /**
-   * The software license key associated with this membership. Only present if the
-   * product includes a Whop Software Licensing experience. Null otherwise.
+   * The software license key for this membership. Only present when the product
+   * includes a software licensing experience.
    */
   license_key: string | null;
 
   /**
-   * The URL where the customer can view and manage this membership, including
-   * cancellation and plan changes. Null if no member record exists.
-   */
-  manage_url: string | null;
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
+   * The caller's member row on the account. Present only when the membership belongs
+   * to the caller; `null` on seller-side reads.
    */
   member: Membership.Member | null;
 
   /**
-   * Custom key-value pairs for the membership (commonly used for software licensing,
-   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
+   * Custom key-value pairs stored on the membership, commonly used for software
+   * licensing.
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown;
 
   /**
-   * Whether recurring payment collection for this membership is temporarily paused
-   * by the company.
+   * The buyer's phone number recorded for this membership, or `null`. The number
+   * collected (or verified) at checkout when the seller's phone collection is on;
+   * falls back to the buyer's account number when they have shared one with this
+   * seller.
    */
-  payment_collection_paused: boolean;
+  phone_number: string | null;
 
   /**
-   * The plan the customer purchased to create this membership.
+   * The plan the buyer purchased, prefixed `plan_`.
    */
-  plan: Membership.Plan;
+  plan_id: string;
 
   /**
-   * The product this membership grants access to.
+   * The product this membership grants access to, prefixed `prod_`.
    */
-  product: Membership.Product;
+  product_id: string;
 
   /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
+   * Billing state of the membership. `active`/`trialing` memberships grant access;
+   * `past_due` is the grace period after a failed payment; `completed` one-time
+   * purchases keep access; `canceled`/`expired` do not.
    */
-  promo_code: Membership.PromoCode | null;
+  status: 'trialing' | 'active' | 'past_due' | 'completed' | 'canceled' | 'expired' | 'unresolved';
 
   /**
-   * The end of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
+   * The buyer, prefixed `user_`. `null` when the buyer is another business or the
+   * membership is unclaimed.
    */
-  renewal_period_end: string | null;
-
-  /**
-   * The start of the current billing period for this recurring membership. As a Unix
-   * timestamp. Null if the membership is not recurring.
-   */
-  renewal_period_start: string | null;
-
-  /**
-   * The current lifecycle status of the membership (e.g., active, trialing,
-   * past_due, canceled, expired, completed).
-   */
-  status: MembershipStatus;
-
-  /**
-   * The datetime the membership was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  user: Membership.User | null;
+  user_id: string | null;
 }
 
 export namespace Membership {
   /**
-   * The company this membership belongs to.
+   * The account (seller) this membership belongs to.
    */
-  export interface Company {
+  export interface Account {
     /**
-     * The unique identifier for the company.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * The display name of the company shown to customers.
+     * Account logo image URL. `null` when the account has not set one.
+     */
+    logo_url: string | null;
+
+    /**
+     * Account public route identifier — the `whop.com/{route}` storefront path.
+     */
+    route: string;
+
+    /**
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The response from a custom field on checkout
-   */
-  export interface CustomFieldResponse {
-    /**
-     * The unique identifier for the custom field response.
-     */
-    id: string;
-
-    /**
-     * The response a user gave to the specific question or field.
-     */
-    answer: string;
-
-    /**
-     * The question asked by the custom field
-     */
-    question: string;
-  }
-
-  /**
-   * The member record linking the user to the company for this membership. Null if
-   * the member record has not been created yet.
+   * The caller's member row on the account. Present only when the membership belongs
+   * to the caller; `null` on seller-side reads.
    */
   export interface Member {
     /**
-     * The unique identifier for the member.
+     * What the member can reach on the account: `customer` for paying members, `admin`
+     * for team members, `no_access` once every grant has lapsed.
      */
-    id: string;
-  }
-
-  /**
-   * The plan the customer purchased to create this membership.
-   */
-  export interface Plan {
-    /**
-     * The unique identifier for the plan.
-     */
-    id: string;
+    access_level: 'no_access' | 'admin' | 'customer';
 
     /**
-     * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
-     * override the product's checkout call to action for this plan.
+     * When the member last opened the account's content, as an ISO 8601 timestamp.
+     * `null` if they never have.
      */
-    metadata: { [key: string]: unknown } | null;
-  }
-
-  /**
-   * The product this membership grants access to.
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
+    last_accessed_at: string | null;
 
     /**
-     * Custom key-value pairs stored on the product and included in payment and
-     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-     * per string value.
+     * The member's sort position in the buyer's own account list. `null` until they
+     * arrange it.
      */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
-
-  /**
-   * The promotional code currently applied to this membership's billing. Null if no
-   * promo code is active.
-   */
-  export interface PromoCode {
-    /**
-     * The unique identifier for the promo code.
-     */
-    id: string;
-  }
-
-  /**
-   * The user who owns this membership. Null if the user account has been deleted.
-   */
-  export interface User {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The URL of the user's profile picture. Use profilePicture for the full
-     * attachment object.
-     */
-    profile_pic: string;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
+    position: number | null;
   }
 }
 
@@ -4043,340 +4146,908 @@ export namespace Payment {
   }
 }
 
+export interface Plan {
+  /**
+   * Plan ID, prefixed `plan_`.
+   */
+  id: string;
+
+  /**
+   * Account that sells this plan; `null` for standalone invoice plans.
+   */
+  account: Plan.Account | null;
+
+  /**
+   * Whether adaptive pricing is enabled for this plan. Raw setting — does not check
+   * processor compatibility or feature flags.
+   */
+  adaptive_pricing_enabled: boolean;
+
+  /**
+   * Number of days between recurring charges, such as 30 for monthly or 365 for
+   * annual. `null` for one-time plans.
+   */
+  billing_period: number | null;
+
+  /**
+   * Billing intervals the cancellation discount applies to (`0` forever, `1` first
+   * payment, or a month count). `null` when none is offered or the actor lacks the
+   * `plan:basic:read` scope.
+   */
+  cancel_discount_intervals: number | null;
+
+  /**
+   * Cancellation discount as a whole-number percentage. `null` when none is offered
+   * or the actor lacks the `plan:basic:read` scope.
+   */
+  cancel_discount_percentage: number | null;
+
+  /**
+   * Plan-level checkout styling (`background_color`, `button_color`, `font_family`,
+   * `border_style`); `null` inherits the account default.
+   */
+  checkout_styling: unknown | null;
+
+  /**
+   * Whether tax is collected on purchases of this plan, based on the account's tax
+   * configuration.
+   */
+  collect_tax: boolean;
+
+  /**
+   * When the plan was created, as an ISO 8601 timestamp.
+   */
+  created_at: string;
+
+  /**
+   * Three-letter ISO currency code for this plan's prices.
+   */
+  currency:
+    | 'usd'
+    | 'sgd'
+    | 'inr'
+    | 'aud'
+    | 'brl'
+    | 'cad'
+    | 'dkk'
+    | 'eur'
+    | 'nok'
+    | 'gbp'
+    | 'sek'
+    | 'chf'
+    | 'hkd'
+    | 'huf'
+    | 'jpy'
+    | 'mxn'
+    | 'myr'
+    | 'pln'
+    | 'czk'
+    | 'nzd'
+    | 'aed'
+    | 'eth'
+    | 'ape'
+    | 'cop'
+    | 'ron'
+    | 'thb'
+    | 'bgn'
+    | 'idr'
+    | 'dop'
+    | 'php'
+    | 'try'
+    | 'krw'
+    | 'twd'
+    | 'vnd'
+    | 'pkr'
+    | 'clp'
+    | 'uyu'
+    | 'ars'
+    | 'zar'
+    | 'dzd'
+    | 'tnd'
+    | 'mad'
+    | 'kes'
+    | 'kwd'
+    | 'jod'
+    | 'all'
+    | 'xcd'
+    | 'amd'
+    | 'bsd'
+    | 'bhd'
+    | 'bob'
+    | 'bam'
+    | 'khr'
+    | 'crc'
+    | 'xof'
+    | 'egp'
+    | 'etb'
+    | 'gmd'
+    | 'ghs'
+    | 'gtq'
+    | 'gyd'
+    | 'ils'
+    | 'jmd'
+    | 'mop'
+    | 'mga'
+    | 'mur'
+    | 'mdl'
+    | 'mnt'
+    | 'nad'
+    | 'ngn'
+    | 'mkd'
+    | 'omr'
+    | 'pyg'
+    | 'pen'
+    | 'qar'
+    | 'rwf'
+    | 'sar'
+    | 'rsd'
+    | 'lkr'
+    | 'tzs'
+    | 'ttd'
+    | 'uzs'
+    | 'rub'
+    | 'btc'
+    | 'cny'
+    | 'usdt'
+    | 'kzt'
+    | 'awg'
+    | 'whop_usd'
+    | 'xau';
+
+  custom_fields: Array<Plan.CustomField>;
+
+  /**
+   * Whether the plan can be deleted (it has no memberships or waitlist entries).
+   * `null` unless the actor has the `plan:basic:read` scope on the plan's account.
+   */
+  deletable: boolean | null;
+
+  /**
+   * Customer-visible plan description. Maximum 1000 characters. `null` if no
+   * description is set.
+   */
+  description: string | null;
+
+  /**
+   * The configuration governing a checkout for this plan, resolved through every
+   * layer (the plan's own and the account's) — the shape a session's
+   * `payment_method_configuration` carries. Apply it over the payment method types
+   * catalogue for the offerable set. `null` means platform defaults;
+   * `payment_method_configuration` stays the plan's own editable override.
+   */
+  effective_payment_method_configuration: Plan.EffectivePaymentMethodConfiguration | null;
+
+  /**
+   * Access duration in days for expiration-based plans, such as 365 for a one-year
+   * pass. `null` for plans without an expiration.
+   */
+  expiration_days: number | null;
+
+  /**
+   * Human-readable price for display (currency + interval), e.g. "$10 / month".
+   */
+  formatted_price: string;
+
+  /**
+   * Pricing-tier image (`url`, `blurhash`) shown on the product page; `null` when no
+   * image is set.
+   */
+  image: unknown | null;
+
+  /**
+   * Initial purchase price in plan currency.
+   */
+  initial_price: number;
+
+  /**
+   * Private notes not shown to customers. `null` unless the actor has the
+   * `plan:basic:read` scope on the plan's account.
+   */
+  internal_notes: string | null;
+
+  /**
+   * Invoice this plan was generated for; `null` unless created for an invoice.
+   */
+  invoice: unknown | null;
+
+  /**
+   * Active memberships through this plan. `null` unless the actor has the
+   * `plan:basic:read` scope on the plan's account.
+   */
+  member_count: number | null;
+
+  /**
+   * Custom key-value pairs stored on the plan. Included in webhook payloads for
+   * payment and membership events. Maximum 50 keys, 100 characters per key, 500
+   * characters per value. The reserved keys `custom_cta` and `custom_cta_url`, when
+   * set, override the product's checkout call to action for this plan.
+   */
+  metadata: unknown | null;
+
+  /**
+   * Whether a cancellation discount is offered. `null` unless the actor has the
+   * `plan:basic:read` scope on the plan's account.
+   */
+  offer_cancel_discount: boolean | null;
+
+  /**
+   * Payment method configuration (`enabled`, `disabled`,
+   * `include_platform_defaults`); `null` when plan uses default settings.
+   */
+  payment_method_configuration: unknown | null;
+
+  /**
+   * Billing model for this plan.
+   */
+  plan_type: 'renewal' | 'one_time';
+
+  /**
+   * Product this plan belongs to; `null` for standalone plans.
+   */
+  product: unknown | null;
+
+  /**
+   * URL where customers can purchase this plan directly.
+   */
+  purchase_url: string;
+
+  /**
+   * Sales method for this plan.
+   */
+  release_method: 'buy_now' | 'waitlist';
+
+  /**
+   * Recurring price charged every billing period.
+   */
+  renewal_price: number;
+
+  /**
+   * Installment payments required before the subscription pauses. Must be greater
+   * than 1. `null` if split pay is not configured.
+   */
+  split_pay_required_payments: number | null;
+
+  /**
+   * Units available for purchase. `null` unless the actor has the `plan:basic:read`
+   * scope on the plan's account.
+   */
+  stock: number | null;
+
+  /**
+   * Original initial price shown with a strikethrough, in the plan's currency.
+   * `null` when no strikethrough is set.
+   */
+  strike_through_initial_price: number | null;
+
+  /**
+   * Original renewal price shown with a strikethrough, in the plan's currency.
+   * `null` when no strikethrough is set.
+   */
+  strike_through_renewal_price: number | null;
+
+  /**
+   * How tax is handled for this plan, including whether tax is included in the
+   * price, added at checkout, or not configured.
+   */
+  tax_type: 'inclusive' | 'exclusive' | 'unspecified';
+
+  /**
+   * 3D Secure behavior for this plan; `null` inherits the account default.
+   */
+  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+
+  /**
+   * Plan display name shown to customers. Maximum 30 characters. `null` if no title
+   * has been set.
+   */
+  title: string | null;
+
+  /**
+   * Free trial days before the first renewal charge. `null` if no trial is
+   * configured or the user has already used a trial for this plan.
+   */
+  trial_period_days: number | null;
+
+  /**
+   * Whether the plan has unlimited stock. When `true`, the `stock` field is ignored;
+   * waitlist plans always report `true`.
+   */
+  unlimited_stock: boolean;
+
+  /**
+   * When the plan was last updated, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * Controls where this plan can be seen. When `hidden`, the plan is reachable only
+   * by its direct link.
+   */
+  visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
+}
+
+export namespace Plan {
+  /**
+   * Account that sells this plan; `null` for standalone invoice plans.
+   */
+  export interface Account {
+    /**
+     * Account ID, prefixed `biz_`.
+     */
+    id: string;
+
+    /**
+     * Account display name.
+     */
+    title: string;
+  }
+
+  /**
+   * Custom input fields collected on the checkout form.
+   */
+  export interface CustomField {
+    /**
+     * Custom field ID, prefixed `field_`.
+     */
+    id: string;
+
+    /**
+     * Custom field input type.
+     */
+    field_type: 'text';
+
+    /**
+     * Field label shown to customer at checkout.
+     */
+    name: string;
+
+    /**
+     * Field position on checkout form.
+     */
+    order: number;
+
+    /**
+     * Placeholder text shown in the empty field. `null` if none is set.
+     */
+    placeholder: string | null;
+
+    /**
+     * Whether the customer must complete this field to check out.
+     */
+    required: boolean;
+  }
+
+  /**
+   * The configuration governing a checkout for this plan, resolved through every
+   * layer (the plan's own and the account's) — the shape a session's
+   * `payment_method_configuration` carries. Apply it over the payment method types
+   * catalogue for the offerable set. `null` means platform defaults;
+   * `payment_method_configuration` stays the plan's own editable override.
+   */
+  export interface EffectivePaymentMethodConfiguration {
+    disabled: Array<string>;
+
+    enabled: Array<string>;
+
+    /**
+     * Whether Whop's default set is the starting point. When `false`, only `enabled`
+     * is offered.
+     */
+    include_platform_defaults: boolean;
+  }
+}
+
 /**
  * The type of plan that can be attached to a product
  */
 export type PlanType = 'renewal' | 'one_time';
 
-/**
- * A product is a digital good or service sold on Whop. Products contain plans for
- * pricing and experiences for content delivery.
- */
 export interface Product {
   /**
-   * The unique identifier for the product.
+   * Product ID, prefixed `prod_`.
    */
   id: string;
 
   /**
-   * The company this product belongs to.
+   * Account that sells this product.
    */
-  company: Product.Company;
+  account: unknown | null;
 
   /**
-   * The datetime the product was created.
+   * When the product was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
    * Call-to-action button label shown on the product purchase page.
    */
-  custom_cta: CustomCta;
+  custom_cta:
+    | 'get_access'
+    | 'join'
+    | 'order_now'
+    | 'shop_now'
+    | 'call_now'
+    | 'donate_now'
+    | 'contact_us'
+    | 'sign_up'
+    | 'subscribe'
+    | 'purchase'
+    | 'get_offer'
+    | 'apply_now'
+    | 'complete_order'
+    | null;
 
   /**
-   * An optional URL that the call-to-action button links to instead of the default
-   * checkout flow. Null if no custom URL is set.
+   * URL the call-to-action button links to instead of checkout.
    */
   custom_cta_url: string | null;
 
   /**
-   * Custom bank statement descriptor for product purchases. Maximum 22 characters,
-   * including required `WHOP*` prefix.
+   * Custom text label on customer's bank statement.
    */
   custom_statement_descriptor: string | null;
 
   /**
-   * A brief summary of what the product offers, displayed on product pages and
-   * search results.
+   * Buyable plan to show and check out with. The configured default when that plan
+   * is buyable, otherwise the first buyable plan in product-page order. `null` when
+   * none is buyable.
+   */
+  default_plan: Product.DefaultPlan | null;
+
+  /**
+   * Written description displayed on the product page. `null` if none is set.
    */
   description: string | null;
 
   /**
-   * External identifier for the product. Providing it on a product creation endpoint
-   * updates the existing product with this identifier instead of creating a new one.
+   * External identifier stored on the product for your own reference.
    */
   external_identifier: string | null;
 
-  /**
-   * The gallery images for this product, ordered by position.
-   */
   gallery_images: Array<Product.GalleryImage>;
 
   /**
-   * Marketplace affiliate commission percentage for this product, or `null` if
-   * program is inactive.
+   * Commission rate affiliates earn through the global affiliate program.
    */
   global_affiliate_percentage: number | null;
 
   /**
-   * The enrollment status of this product in the Whop marketplace global affiliate
-   * program.
+   * Enrollment status in the global affiliate program.
    */
-  global_affiliate_status: GlobalAffiliateStatus;
+  global_affiliate_status: 'enabled' | 'disabled' | null;
 
   /**
-   * A short marketing headline displayed prominently on the product's product page.
+   * Short marketing headline displayed on product page.
    */
   headline: string | null;
 
+  labels: Array<string>;
+
   /**
-   * Member referral commission percentage for this product, or `null` if program is
-   * inactive.
+   * Listing state on the whop.com marketplace. `pending_review` means submitted and
+   * awaiting review; `live_marketplace` means approved and discoverable.
+   */
+  marketplace_status: 'not_available' | 'pending_review' | 'live_marketplace';
+
+  /**
+   * Commission rate members earn through the member affiliate program.
    */
   member_affiliate_percentage: number | null;
 
   /**
-   * The enrollment status of this product in the member affiliate program.
+   * Enrollment status in the member affiliate program.
    */
-  member_affiliate_status: GlobalAffiliateStatus;
+  member_affiliate_status: 'enabled' | 'disabled' | null;
 
   /**
-   * Active memberships for this product. Returns `0` if the account has disabled
-   * public member counts.
+   * Active memberships for this product; 0 if public member counts are disabled.
    */
   member_count: number;
 
   /**
-   * Custom key-value pairs stored on the product and included in payment and
-   * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-   * per string value.
+   * Custom key-value pairs stored on the product.
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown | null;
 
   /**
-   * The user who owns the company that sells this product.
+   * User who owns the account selling this product.
    */
-  owner_user: Product.OwnerUser;
+  owner_user: unknown | null;
 
   /**
-   * The tax classification code applied to purchases of this product for sales tax
-   * calculation. Null if no tax code is assigned.
+   * Tax classification code for this product, or `null` if no tax code is set.
    */
-  product_tax_code: Product.ProductTaxCode | null;
+  product_tax_code: unknown | null;
 
   /**
-   * The total number of published customer reviews for this product's company.
+   * Published customer reviews for this product.
    */
   published_reviews_count: number;
 
   /**
-   * URL slug in the product's public link, e.g. `pickaxe-analytics` in
-   * whop.com/company/pickaxe-analytics.
+   * URL slug for the product's public link.
    */
   route: string;
 
   /**
-   * The display name of the product shown to customers on the product page and in
-   * search results.
+   * Product display name shown to customers.
    */
   title: string;
 
   /**
-   * The datetime the product was last updated.
+   * When the product was last updated, as an ISO 8601 timestamp.
    */
   updated_at: string;
 
   /**
-   * Whether this company has been verified by Whop's trust and safety team.
+   * Whether the product has been verified by Whop.
    */
   verified: boolean;
 
   /**
-   * Controls whether the product is visible to customers. When set to 'hidden', the
-   * product is only accessible via direct link.
+   * Whether the product is publicly visible, hidden, or archived.
    */
-  visibility: Visibility;
+  visibility: string | null;
 }
 
 export namespace Product {
   /**
-   * The company this product belongs to.
+   * Buyable plan to show and check out with. The configured default when that plan
+   * is buyable, otherwise the first buyable plan in product-page order. `null` when
+   * none is buyable.
    */
-  export interface Company {
+  export interface DefaultPlan {
     /**
-     * The unique identifier for the company.
+     * Plan ID, prefixed `plan_`.
      */
     id: string;
 
     /**
-     * URL slug for the account's store page, e.g. `pickaxe` in whop.com/pickaxe.
+     * Number of days between recurring charges, such as 30 for monthly or 365 for
+     * annual. `null` for one-time plans.
      */
-    route: string;
+    billing_period: number | null;
 
     /**
-     * The display name of the company shown to customers.
+     * Access duration in days for expiration-based plans. `null` for plans without an
+     * expiration.
      */
-    title: string;
+    expiration_days: number | null;
+
+    /**
+     * What checkout charges up front. `amount` is `"0.00"` when the first charge is
+     * free, such as a trial.
+     */
+    initial_price: DefaultPlan.InitialPrice;
+
+    /**
+     * Billing model for this plan: `one_time` or `renewal`.
+     */
+    plan_type: 'renewal' | 'one_time';
+
+    /**
+     * The recurring charge every `billing_period` days. `amount` is `"0.00"` for
+     * one-time plans.
+     */
+    renewal_price: DefaultPlan.RenewalPrice;
+
+    /**
+     * Plan display name shown to customers. `null` if no title has been set.
+     */
+    title: string | null;
+
+    /**
+     * Whether the plan has unlimited stock.
+     */
+    unlimited_stock: boolean;
+
+    /**
+     * Where this plan can be seen. `visible` plans appear on the product page.
+     */
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
+  }
+
+  export namespace DefaultPlan {
+    /**
+     * What checkout charges up front. `amount` is `"0.00"` when the first charge is
+     * free, such as a trial.
+     */
+    export interface InitialPrice {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
+
+    /**
+     * The recurring charge every `billing_period` days. `amount` is `"0.00"` for
+     * one-time plans.
+     */
+    export interface RenewalPrice {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
   }
 
   /**
-   * Represents an image attachment
+   * Gallery images for this product, ordered by position.
    */
   export interface GalleryImage {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * Gallery image ID.
      */
     id: string;
 
     /**
-     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     * Uploaded file MIME type, such as image/jpeg.
      */
     content_type: string | null;
 
     /**
-     * A pre-optimized URL for rendering this attachment on the client. This should be
-     * used for displaying attachments in apps.
+     * Pre-optimized URL for rendering this image on the client.
      */
     url: string | null;
   }
-
-  /**
-   * The user who owns the company that sells this product.
-   */
-  export interface OwnerUser {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-
-  /**
-   * The tax classification code applied to purchases of this product for sales tax
-   * calculation. Null if no tax code is assigned.
-   */
-  export interface ProductTaxCode {
-    /**
-     * The unique identifier for the product tax code.
-     */
-    id: string;
-
-    /**
-     * Human-readable name of this tax classification, such as 'Digital - SaaS'.
-     */
-    name: string;
-
-    /**
-     * Broad product category this tax code covers, such as physical goods or digital
-     * services.
-     */
-    product_type: 'physical' | 'digital' | 'services';
-  }
 }
 
-/**
- * A product is a digital good or service sold on Whop. Products contain plans for
- * pricing and experiences for content delivery.
- */
 export interface ProductListItem {
   /**
-   * The unique identifier for the product.
+   * Product ID, prefixed `prod_`.
    */
   id: string;
 
   /**
-   * The datetime the product was created.
+   * Account that sells this product.
+   */
+  account: unknown | null;
+
+  /**
+   * When the product was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * External identifier for the product. Providing it on a product creation endpoint
-   * updates the existing product with this identifier instead of creating a new one.
+   * Buyable plan to show and check out with. The configured default when that plan
+   * is buyable, otherwise the first buyable plan in product-page order. `null` when
+   * none is buyable.
+   */
+  default_plan: ProductListItem.DefaultPlan | null;
+
+  /**
+   * Written description displayed on the product page. `null` if none is set.
+   */
+  description: string | null;
+
+  /**
+   * External identifier stored on the product for your own reference.
    */
   external_identifier: string | null;
 
-  /**
-   * The gallery images for this product, ordered by position.
-   */
   gallery_images: Array<ProductListItem.GalleryImage>;
 
   /**
-   * A short marketing headline displayed prominently on the product's product page.
+   * Short marketing headline displayed on product page.
    */
   headline: string | null;
 
+  labels: Array<string>;
+
   /**
-   * Active memberships for this product. Returns `0` if the account has disabled
-   * public member counts.
+   * Active memberships for this product; 0 if public member counts are disabled.
    */
   member_count: number;
 
   /**
-   * Custom key-value pairs stored on the product and included in payment and
-   * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-   * per string value.
+   * Custom key-value pairs stored on the product.
    */
-  metadata: { [key: string]: unknown } | null;
+  metadata: unknown | null;
 
   /**
-   * The total number of published customer reviews for this product's company.
+   * Published customer reviews for this product.
    */
   published_reviews_count: number;
 
   /**
-   * URL slug in the product's public link, e.g. `pickaxe-analytics` in
-   * whop.com/company/pickaxe-analytics.
+   * URL slug for the product's public link.
    */
   route: string;
 
   /**
-   * The display name of the product shown to customers on the product page and in
-   * search results.
+   * Product display name shown to customers.
    */
   title: string;
 
   /**
-   * The datetime the product was last updated.
+   * When the product was last updated, as an ISO 8601 timestamp.
    */
   updated_at: string;
 
   /**
-   * Whether this company has been verified by Whop's trust and safety team.
+   * Whether the product has been verified by Whop.
    */
   verified: boolean;
 
   /**
-   * Controls whether the product is visible to customers. When set to 'hidden', the
-   * product is only accessible via direct link.
+   * Whether the product is publicly visible, hidden, or archived.
    */
-  visibility: Visibility;
+  visibility: string | null;
 }
 
 export namespace ProductListItem {
   /**
-   * Represents an image attachment
+   * Buyable plan to show and check out with. The configured default when that plan
+   * is buyable, otherwise the first buyable plan in product-page order. `null` when
+   * none is buyable.
    */
-  export interface GalleryImage {
+  export interface DefaultPlan {
     /**
-     * Represents a unique identifier that is Base64 obfuscated. It is often used to
-     * refetch an object or as key for a cache. The ID type appears in a JSON response
-     * as a String; however, it is not intended to be human-readable. When expected as
-     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
-     * input value will be accepted as an ID.
+     * Plan ID, prefixed `plan_`.
      */
     id: string;
 
     /**
-     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     * Number of days between recurring charges, such as 30 for monthly or 365 for
+     * annual. `null` for one-time plans.
+     */
+    billing_period: number | null;
+
+    /**
+     * Access duration in days for expiration-based plans. `null` for plans without an
+     * expiration.
+     */
+    expiration_days: number | null;
+
+    /**
+     * What checkout charges up front. `amount` is `"0.00"` when the first charge is
+     * free, such as a trial.
+     */
+    initial_price: DefaultPlan.InitialPrice;
+
+    /**
+     * Billing model for this plan: `one_time` or `renewal`.
+     */
+    plan_type: 'renewal' | 'one_time';
+
+    /**
+     * The recurring charge every `billing_period` days. `amount` is `"0.00"` for
+     * one-time plans.
+     */
+    renewal_price: DefaultPlan.RenewalPrice;
+
+    /**
+     * Plan display name shown to customers. `null` if no title has been set.
+     */
+    title: string | null;
+
+    /**
+     * Whether the plan has unlimited stock.
+     */
+    unlimited_stock: boolean;
+
+    /**
+     * Where this plan can be seen. `visible` plans appear on the product page.
+     */
+    visibility: 'visible' | 'hidden' | 'archived' | 'quick_link';
+  }
+
+  export namespace DefaultPlan {
+    /**
+     * What checkout charges up front. `amount` is `"0.00"` when the first charge is
+     * free, such as a trial.
+     */
+    export interface InitialPrice {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
+
+    /**
+     * The recurring charge every `billing_period` days. `amount` is `"0.00"` for
+     * one-time plans.
+     */
+    export interface RenewalPrice {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
+  }
+
+  /**
+   * Gallery images for this product, ordered by position.
+   */
+  export interface GalleryImage {
+    /**
+     * Gallery image ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg.
      */
     content_type: string | null;
 
     /**
-     * A pre-optimized URL for rendering this attachment on the client. This should be
-     * used for displaying attachments in apps.
+     * Pre-optimized URL for rendering this image on the client.
      */
     url: string | null;
   }
@@ -4453,70 +5124,104 @@ export type ReceiptStatus =
  */
 export type ReleaseMethod = 'buy_now' | 'waitlist';
 
-/**
- * A physical shipment associated with a payment, including carrier details and
- * tracking information.
- */
 export interface Shipment {
   /**
-   * The unique identifier for the shipment.
+   * Shipment ID, prefixed `ship_`.
    */
   id: string;
 
   /**
-   * The datetime the shipment was created.
+   * The account that owns this shipment, prefixed `biz_`.
+   */
+  account_id: string;
+
+  /**
+   * The shipping carrier detected for this shipment. Null until a tracking update
+   * identifies it.
+   */
+  carrier: string | null;
+
+  checkpoints: Array<Shipment.Checkpoint>;
+
+  /**
+   * The datetime the shipment was created (ISO 8601).
    */
   created_at: string;
 
   /**
-   * The estimated delivery date for this shipment. Null if the carrier has not
-   * provided an estimate.
+   * The payment this shipment fulfills, prefixed `pay_`.
    */
-  delivery_estimate: string | null;
-
-  /**
-   * The payment associated with this shipment. Null if the payment has been deleted
-   * or is inaccessible.
-   */
-  payment: Shipment.Payment | null;
-
-  /**
-   * The shipping service level used for this shipment. Null if the carrier does not
-   * specify a service tier.
-   */
-  service: string | null;
+  payment_id: string;
 
   /**
    * The current delivery status of this shipment.
    */
-  status: ShipmentStatus;
-
-  /**
-   * The substatus of a shipment
-   */
-  substatus: ShipmentSubstatus | null;
+  status:
+    | 'unknown'
+    | 'pre_transit'
+    | 'in_transit'
+    | 'out_for_delivery'
+    | 'delivered'
+    | 'available_for_pickup'
+    | 'return_to_sender'
+    | 'failure'
+    | 'cancelled'
+    | 'error';
 
   /**
    * The carrier-assigned tracking number used to look up shipment progress.
    */
-  tracking_code: string;
+  tracking_number: string;
 
   /**
-   * The datetime the shipment was last updated.
+   * A customer-facing URL to track this shipment's progress.
+   */
+  tracking_url: string;
+
+  /**
+   * The datetime the shipment was last updated (ISO 8601).
    */
   updated_at: string;
 }
 
 export namespace Shipment {
   /**
-   * The payment associated with this shipment. Null if the payment has been deleted
-   * or is inaccessible.
+   * Carrier scan history for this shipment, oldest scan first. Empty until the
+   * carrier reports its first scan.
    */
-  export interface Payment {
+  export interface Checkpoint {
     /**
-     * The unique identifier for the payment.
+     * Where the carrier recorded the scan, such as `PHILADELPHIA, PA`. Null when the
+     * carrier sent none.
      */
-    id: string;
+    location: string | null;
+
+    /**
+     * Carrier's description of the scan, such as `Departed USPS Regional Facility`.
+     * Null when the carrier sent none.
+     */
+    message: string | null;
+
+    /**
+     * Delivery status this carrier scan maps to.
+     */
+    status:
+      | 'unknown'
+      | 'pre_transit'
+      | 'in_transit'
+      | 'out_for_delivery'
+      | 'delivered'
+      | 'available_for_pickup'
+      | 'return_to_sender'
+      | 'failure'
+      | 'cancelled'
+      | 'error';
+
+    /**
+     * When the carrier recorded the scan, as an ISO 8601 timestamp. Null when the
+     * carrier sent no scan time.
+     */
+    timestamp: string | null;
   }
 }
 
@@ -4680,3 +5385,9 @@ export type InvoiceListItemsCursorPage = CursorPage<InvoiceListItem>;
 export type CourseLessonInteractionListItemsCursorPage = CursorPage<CourseLessonInteractionListItem>;
 
 export type ProductListItemsCursorPage = CursorPage<ProductListItem>;
+
+export type MembershipsCursorPage = CursorPage<Membership>;
+
+export type AppBuildsCursorPage = CursorPage<AppBuild>;
+
+export type ShipmentsCursorPage = CursorPage<Shipment>;

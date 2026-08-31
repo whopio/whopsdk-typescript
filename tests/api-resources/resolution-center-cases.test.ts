@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource resolutionCenterCases', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.resolutionCenterCases.retrieve('reso_xxxxxxxxxxxxx');
+    const responsePromise = client.resolutionCenterCases.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,6 +18,18 @@ describe('resource resolutionCenterCases', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.resolutionCenterCases.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -38,15 +50,20 @@ describe('resource resolutionCenterCases', () => {
     await expect(
       client.resolutionCenterCases.list(
         {
+          account_id: 'account_id',
           after: 'after',
           before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
+          created_after: 'created_after',
+          created_before: 'created_before',
           direction: 'asc',
-          first: 42,
-          last: 42,
-          statuses: ['merchant_response_needed'],
+          first: 0,
+          last: 0,
+          order: 'created_at',
+          outcome: ['customer_won'],
+          reason: ['fraudulent'],
+          status: ['awaiting_merchant'],
+          user_id: 'user_id',
+          'Api-Version-Date': '2026-08-25-2',
         },
         { path: '/_stainless_unknown_path' },
       ),

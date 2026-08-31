@@ -9,10 +9,8 @@ const client = new Whop({
 
 describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.create({
-      plan: { company_id: 'biz_xxxxxxxxxxxxxx', currency: 'usd' },
-    });
+  test.skip('create', async () => {
+    const responsePromise = client.checkoutConfigurations.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,82 +21,61 @@ describe('resource checkoutConfigurations', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.checkoutConfigurations.create({
-      plan: {
-        company_id: 'biz_xxxxxxxxxxxxxx',
-        currency: 'usd',
-        adaptive_pricing_enabled: true,
-        application_fee_amount: 6.9,
-        billing_period: 42,
-        custom_fields: [
-          {
-            field_type: 'text',
-            name: 'name',
-            id: 'id',
-            order: 42,
-            placeholder: 'placeholder',
-            required: true,
+  test.skip('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.checkoutConfigurations.create(
+        {
+          account_id: 'biz_xxxxxxxxxxxxxx',
+          affiliate_code: 'tanyacole',
+          currency: 'usd',
+          metadata: { booking_source: 'front_desk' },
+          mode: 'payment',
+          payment_method_configuration: {
+            disabled: ['paypal'],
+            enabled: ['card'],
+            include_platform_defaults: true,
           },
-        ],
-        description: 'description',
-        expiration_days: 42,
-        force_create_new_plan: true,
-        image: { id: 'id' },
-        initial_price: 6.9,
-        internal_notes: 'internal_notes',
-        override_tax_type: 'inclusive',
-        payment_method_configuration: {
-          disabled: ['acss_debit'],
-          enabled: ['acss_debit'],
-          include_platform_defaults: true,
+          plan: {
+            account_id: 'biz_xxxxxxxxxxxxxx',
+            billing_period: 30,
+            currency: 'usd',
+            description: 'Two hand washes a month, interior vacuum, and a quarterly sealant top-up.',
+            expiration_days: 365,
+            force_create_new_plan: true,
+            initial_price: 249,
+            metadata: { bay: '2' },
+            override_tax_type: 'inclusive',
+            payment_method_configuration: {
+              disabled: ['paypal'],
+              enabled: ['card'],
+              include_platform_defaults: true,
+            },
+            plan_type: 'one_time',
+            product_id: 'prod_xxxxxxxxxxxxxx',
+            release_method: 'buy_now',
+            renewal_price: 59,
+            stock: 25,
+            three_ds_level: 'frictionless',
+            title: 'Ceramic Coating — Full Vehicle',
+            trial_period_days: 7,
+            unlimited_stock: false,
+            visibility: 'visible',
+          },
+          plan_id: 'plan_xxxxxxxxxxxxx',
+          redirect_url: 'https://shinetime.example/thanks',
+          three_ds_level: 'frictionless',
+          'Api-Version-Date': '2026-08-25-2',
+          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
-        plan_type: 'renewal',
-        product: {
-          external_identifier: 'external_identifier',
-          title: 'title',
-          collect_shipping_address: true,
-          custom_statement_descriptor: 'custom_statement_descriptor',
-          description: 'description',
-          global_affiliate_percentage: 6.9,
-          global_affiliate_status: 'enabled',
-          headline: 'headline',
-          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-          redirect_purchase_url: 'redirect_purchase_url',
-          route: 'route',
-          visibility: 'visible',
-        },
-        product_id: 'prod_xxxxxxxxxxxxx',
-        release_method: 'buy_now',
-        renewal_price: 6.9,
-        split_pay_required_payments: 42,
-        stock: 42,
-        title: 'title',
-        trial_period_days: 42,
-        visibility: 'visible',
-      },
-      affiliate_code: 'affiliate_code',
-      checkout_styling: {
-        background_color: 'background_color',
-        border_style: 'rounded',
-        button_color: 'button_color',
-        font_family: 'system',
-      },
-      currency: 'usd',
-      metadata: { foo: 'bar' },
-      mode: 'payment',
-      payment_method_configuration: {
-        disabled: ['acss_debit'],
-        enabled: ['acss_debit'],
-        include_platform_defaults: true,
-      },
-      redirect_url: 'redirect_url',
-    });
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.checkoutConfigurations.retrieve('ch_xxxxxxxxxxxxxxx');
+    const responsePromise = client.checkoutConfigurations.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -109,8 +86,20 @@ describe('resource checkoutConfigurations', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.checkoutConfigurations.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.checkoutConfigurations.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.checkoutConfigurations.list({ account_id: 'account_id' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -123,15 +112,15 @@ describe('resource checkoutConfigurations', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.checkoutConfigurations.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'account_id',
       after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
+      created_after: 'created_after',
+      created_before: 'created_before',
       direction: 'asc',
-      first: 42,
-      last: 42,
-      plan_id: 'plan_xxxxxxxxxxxxx',
+      first: 0,
+      order: 'created_at',
+      plan_id: 'plan_id',
+      'Api-Version-Date': '2026-08-25-2',
     });
   });
 });

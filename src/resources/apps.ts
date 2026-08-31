@@ -4,82 +4,96 @@ import { APIResource } from '../core/resource';
 import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Apps
+ * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.site` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
+ *
+ * Use the Apps API to manage app configuration, deploy an app's working copy and follow the run on the app's `deployment` field, and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests. Logs are retained for 7 days and can be filtered by build, level, time window, and message text.
+ *
+ * Apps are also reusable blueprints. List official blueprints with `app_type=website&verified=true&order=template_usage`, or community blueprints with `app_type=website&verified=false&recommended=true&order=template_usage`. Pass the returned App `id` as `blueprint_id` when creating an Account.
  */
 export class Apps extends APIResource {
   /**
-   * Register a new app on the Whop developer platform. Apps provide custom
+   * Registers a new app on the Whop developer platform. Apps provide custom
    * experiences that can be added to products.
-   *
-   * Required permissions:
-   *
-   * - `developer:create_app`
-   * - `developer:manage_api_key`
-   * - `developer:basic:read`
-   * - `developer:update_app`
    *
    * @example
    * ```ts
    * const app = await client.apps.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   name: 'name',
+   *   name: 'Shine Time Booking',
    * });
    * ```
    */
-  create(body: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App> {
-    return this._client.post('/apps', { body, ...options });
+  create(params: AppCreateParams, options?: RequestOptions): APIPromise<Shared.App> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/apps', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing app.
-   *
-   * Required permissions:
-   *
-   * - `developer:manage_api_key`
-   * - `developer:basic:read`
-   * - `developer:update_app`
+   * Retrieves an app by ID, claimed route, or proxy domain id. Credential fields
+   * (api_key, default_api_key, secrets) render `null` unless the caller has the
+   * corresponding developer permission on the owning account.
    *
    * @example
    * ```ts
-   * const app = await client.apps.retrieve(
-   *   'app_xxxxxxxxxxxxxx',
-   * );
+   * const app = await client.apps.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.App> {
-    return this._client.get(path`/apps/${id}`, options);
-  }
-
-  /**
-   * Update the settings, metadata, or status of an existing app on the Whop
-   * developer platform.
-   *
-   * Required permissions:
-   *
-   * - `developer:update_app`
-   * - `developer:manage_api_key`
-   * - `developer:basic:read`
-   *
-   * @example
-   * ```ts
-   * const app = await client.apps.update('app_xxxxxxxxxxxxxx');
-   * ```
-   */
-  update(
+  retrieve(
     id: string,
-    body: AppUpdateParams | null | undefined = {},
+    params: AppRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.App> {
-    return this._client.patch(path`/apps/${id}`, { body, ...options });
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/apps/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of apps on the Whop platform, with optional filtering
-   * by company, type, view support, and search query.
+   * Updates the settings, metadata, or status of an app. Fields that are omitted
+   * keep their current value.
+   *
+   * @example
+   * ```ts
+   * const app = await client.apps.update('id');
+   * ```
+   */
+  update(id: string, params: AppUpdateParams, options?: RequestOptions): APIPromise<Shared.App> {
+    const { 'Api-Version-Date': apiVersionDate, ...body } = params;
+    return this._client.patch(path`/apps/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Lists apps on the Whop platform: the app store's live apps, or — with
+   * `account_id` and developer access to that account — every app the account owns.
+   * Requires authentication except for Whop's public app and website discovery
+   * lists. Public website discovery includes built official blueprints (verified
+   * apps with a product) and built, live community blueprints that Whop recommends.
    *
    * @example
    * ```ts
@@ -90,10 +104,18 @@ export class Apps extends APIResource {
    * ```
    */
   list(
-    query: AppListParams | null | undefined = {},
+    params: AppListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<AppListResponsesCursorPage, AppListResponse> {
-    return this._client.getAPIList('/apps', CursorPage<AppListResponse>, { query, ...options });
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
+    return this._client.getAPIList('/apps', CursorPage<AppListResponse>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -104,393 +126,497 @@ export type AppListResponsesCursorPage = CursorPage<AppListResponse>;
  */
 export type AppType = 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
 
-/**
- * An app is an integration built on Whop. Apps can serve consumers as experiences
- * within products, or serve companies as business tools.
- */
 export interface AppListResponse {
   /**
-   * The unique identifier for the app.
+   * App ID, prefixed `app_`.
    */
   id: string;
 
   /**
-   * The target audience classification for this app (e.g., 'b2b_app', 'b2c_app',
-   * 'company_app', 'component').
+   * The account that owns the app.
    */
-  app_type: AppType;
+  account: AppListResponse.Account;
 
   /**
-   * The company that owns and publishes this app.
+   * The type of end-user the app is built for.
    */
-  company: AppListResponse.Company;
+  app_type: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
 
   /**
-   * The user who created and owns the company that published this app.
+   * Banner image from the app's product listing, or `null` when none is uploaded.
+   */
+  banner_image: AppListResponse.BannerImage | null;
+
+  /**
+   * The production base URL where the app is hosted. `null` if no base URL is
+   * configured, if the caller lacks the `developer:basic:read` permission on the
+   * app's account, or on list responses, which never expose it.
+   */
+  base_url: string | null;
+
+  /**
+   * Number of businesses created from this app as a template.
+   */
+  businesses_created_count: number;
+
+  businesses_created_logo_urls: Array<string>;
+
+  /**
+   * The user who owns the publishing account.
    */
   creator: AppListResponse.Creator;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the account dashboard view, or `null` when not configured.
    */
   dashboard_path: string | null;
 
   /**
-   * A written description of what this app does, displayed on the app store listing
-   * page. Null if no description has been set.
+   * Short description shown in listings and search results, or `null` if none has
+   * been set.
    */
   description: string | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the discover view, or `null` when not configured.
    */
   discover_path: string | null;
 
   /**
-   * The unique subdomain identifier for this app's proxied URL on the Whop platform.
-   * Forms the URL pattern https://{domain_id}.apps.whop.com.
+   * Subdomain identifier for the app's proxied URL, forming
+   * https://{domain_id}.apps.whop.com.
    */
   domain_id: string;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path for the member-facing hub view, or `null` when not configured.
    */
   experience_path: string | null;
 
   /**
-   * The full canonical URL where this app's hosted web build is served. Null if the
-   * app has not claimed a route.
+   * Full URL where the app's hosted web build is served, or `null` if no route is
+   * claimed.
    */
   hosted_url: string | null;
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
-  icon: AppListResponse.Icon | null;
+  icon: AppListResponse.Icon;
 
   /**
-   * The display name of this app shown on the app store and in experience
-   * navigation. Maximum 30 characters.
+   * Display name shown on the app store and in experience navigation.
    */
   name: string;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's OpenAPI spec file, or `null` when not configured.
    */
   openapi_path: string | null;
 
   /**
-   * The full origin URL for this app's proxied domain (e.g.,
-   * 'https://myapp.apps.whop.com'). Null if no proxy domain is configured.
+   * Full origin URL of the app's proxied domain, for example
+   * https://ab1c2d3e4f.apps.whop.com.
    */
   origin: string | null;
 
   /**
-   * The unique subdomain route where this app's hosted web builds are served, such
-   * as 'myapp' for myapp.whop.site. Null if the app has not claimed a route.
+   * Claimed subdomain route where hosted web builds are served (`myapp` for
+   * myapp.whop.site), or `null` if no route is claimed.
    */
   route: string | null;
 
   /**
-   * The URL path template for a specific view of this app, appended to the base
-   * domain (e.g., '/experiences/[experienceId]'). Null if the specified view type is
-   * not configured.
+   * URL path to the app's skills directory, or `null` when not configured.
    */
   skills_path: string | null;
 
   /**
-   * The current visibility status of this app on the Whop app store. 'live' means
-   * publicly discoverable, 'unlisted' means accessible only via direct link, and
-   * 'hidden' means not visible anywhere.
+   * Visibility on the Whop app store: `live` is publicly discoverable, `unlisted` is
+   * accessible only via direct link, `hidden` is not visible anywhere.
    */
-  status: Shared.AppStatuses;
+  status: 'live' | 'unlisted' | 'hidden';
 
   /**
-   * Whether this app has been verified by Whop. Verified apps are endorsed by Whop
-   * and displayed in the featured apps section of the app store.
+   * Whether the app has been verified by Whop and is eligible for the featured apps
+   * section.
    */
   verified: boolean;
 }
 
 export namespace AppListResponse {
   /**
-   * The company that owns and publishes this app.
+   * The account that owns the app.
    */
-  export interface Company {
+  export interface Account {
     /**
-     * The unique identifier for the company.
+     * Account ID, prefixed `biz_`.
      */
     id: string;
 
     /**
-     * The display name of the company shown to customers.
+     * Account logo image URL.
+     */
+    logo_url: string | null;
+
+    /**
+     * Account public route identifier.
+     */
+    route: string;
+
+    /**
+     * Account display name.
      */
     title: string;
   }
 
   /**
-   * The user who created and owns the company that published this app.
+   * Banner image from the app's product listing, or `null` when none is uploaded.
+   */
+  export interface BannerImage {
+    /**
+     * Banner image URL, taken from the app's product listing.
+     */
+    url: string;
+  }
+
+  /**
+   * The user who owns the publishing account.
    */
   export interface Creator {
     /**
-     * The unique identifier for the user.
+     * User ID, prefixed `user_`.
      */
     id: string;
 
     /**
-     * The user's display name shown on their public profile.
+     * Display name.
      */
     name: string | null;
 
     /**
-     * The user's unique username shown on their public profile.
+     * Public username.
      */
     username: string;
   }
 
   /**
-   * The icon image for this app, displayed on the app store, product pages,
-   * checkout, and as the default icon for experiences using this app.
+   * The app's icon. Falls back to the default app icon when none is uploaded.
    */
   export interface Icon {
     /**
-     * A pre-optimized URL for rendering this attachment on the client. This should be
-     * used for displaying attachments in apps.
+     * Icon image URL. Always present — the default app icon when none is uploaded.
      */
-    url: string | null;
+    url: string;
   }
 }
 
 export interface AppCreateParams {
   /**
-   * The unique identifier of the company to create the app for, starting with
-   * 'biz\_'.
-   */
-  company_id: string;
-
-  /**
-   * The display name for the app, shown to users on the app store and product pages.
+   * Body param: The display name for the app, shown to users on the app store and
+   * product pages.
    */
   name: string;
 
   /**
-   * The base production URL where the app is hosted, such as
-   * 'https://myapp.example.com'.
+   * Body param: The account to create the app for (`biz_` tag). Defaults to the
+   * account behind the presented credential.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: The type of app to create. Defaults to `b2c_app`.
+   */
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
+
+  /**
+   * Body param: The base production URL where the app is hosted, such as
+   * `https://myapp.example.com`.
    */
   base_url?: string | null;
 
   /**
-   * The icon image for the app in PNG, JPEG, or GIF format.
+   * Body param: The icon image for the app in PNG, JPEG, or GIF format, referencing
+   * an uploaded file: `{ id }` for an existing attachment or `{ direct_upload_id }`
+   * for a new direct upload.
    */
-  icon?: AppCreateParams.Icon | null;
+  icon?: AppCreateParams.Icon;
 
   /**
-   * The whitelisted OAuth callback URLs that users are redirected to after
-   * authorizing the app.
+   * Body param: The whitelisted OAuth callback URLs that users are redirected to
+   * after authorizing the app.
    */
-  redirect_uris?: Array<string> | null;
+  redirect_uris?: Array<string>;
 
   /**
-   * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.site.
+   * Body param: The subdomain route where the app's hosted web builds are served,
+   * such as `myapp` for myapp.whop.site.
    */
   route?: string | null;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export namespace AppCreateParams {
   /**
-   * The icon image for the app in PNG, JPEG, or GIF format.
+   * The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded
+   * file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new
+   * direct upload.
    */
   export interface Icon {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded attachment.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
   }
+}
+
+export interface AppRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export interface AppUpdateParams {
   /**
-   * The detailed description shown on the app store's in-depth app view page.
+   * Body param: The detailed description shown on the app store's in-depth app view
+   * page.
    */
-  app_store_description?: string | null;
+  app_store_description?: string;
 
   /**
-   * The type of end-user an app is built for
+   * Body param: The type of end-user the app is built for. Cannot be changed on an
+   * app whose type is already `website`.
    */
-  app_type?: AppType | null;
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
 
   /**
-   * The base production URL where the app is hosted. Pass null to take the app proxy
-   * offline.
+   * Body param: The base production URL where the app is hosted. Set to `null` to
+   * take the app proxy offline.
    */
   base_url?: string | null;
 
   /**
-   * The URL path for the company dashboard view of the app, such as '/dashboard'.
+   * Body param: The URL path for the account dashboard view.
    */
   dashboard_path?: string | null;
 
   /**
-   * A short description of the app shown in listings and search results.
+   * Body param: A short description of the app shown in listings and search results.
    */
-  description?: string | null;
+  description?: string;
 
   /**
-   * The URL path for the discover view of the app, such as '/discover'.
+   * Body param: The URL path for the discover view.
    */
   discover_path?: string | null;
 
   /**
-   * The URL path for the member-facing hub view of the app, such as
-   * '/experiences/[experienceId]'.
+   * Body param: The URL path for the member-facing hub view, such as
+   * `/experiences/[experienceId]`.
    */
   experience_path?: string | null;
 
   /**
-   * The icon image for the app, used in listings and navigation.
+   * Body param: The icon image for the app in PNG, JPEG, or GIF format, referencing
+   * an uploaded file: `{ id }` for an existing attachment or `{ direct_upload_id }`
+   * for a new direct upload.
    */
-  icon?: AppUpdateParams.Icon | null;
+  icon?: AppUpdateParams.Icon;
 
   /**
-   * The display name for the app, shown to users on the app store and product pages.
+   * Body param: The display name for the app, shown to users on the app store and
+   * product pages.
    */
-  name?: string | null;
+  name?: string;
 
   /**
-   * How this app authenticates at the OAuth token endpoint.
+   * Body param: How the app authenticates at the OAuth token endpoint.
    */
-  oauth_client_type?: 'public' | 'confidential' | null;
+  oauth_client_type?: 'public' | 'confidential';
 
   /**
-   * The URL path to the OpenAPI spec file of the app, such as
-   * '/assets/openapi.json'.
+   * Body param: The URL path to the app's OpenAPI spec file (requires the ai_chat
+   * capability).
    */
   openapi_path?: string | null;
 
   /**
-   * The whitelisted OAuth callback URLs that users are redirected to after
-   * authorizing the app
+   * Body param: The app build (`abld_` tag) to serve as the Android production
+   * build, or `null` to unassign it. Same rules as `production_web_build_id`.
    */
-  redirect_uris?: Array<string> | null;
+  production_android_build_id?: string | null;
 
   /**
-   * The permission scopes the app will request from users when they install it.
+   * Body param: The app build (`abld_` tag) to serve as the iOS production build, or
+   * `null` to unassign it. Same rules as `production_web_build_id`.
    */
-  required_scopes?: Array<'read_user'> | null;
+  production_ios_build_id?: string | null;
 
   /**
-   * The unique subdomain route where the app's hosted web builds are served, such as
-   * 'myapp' for myapp.whop.site.
+   * Body param: The app build (`abld_` tag) to serve as the web production build, or
+   * `null` to unassign it. The build must belong to this app, target web, and be in
+   * the draft or approved status; a draft build is queued for approval and takes
+   * over once approved. Requires the `developer:manage_builds` scope.
    */
-  route?: string | null;
+  production_web_build_id?: string | null;
 
   /**
-   * Secrets to add or overwrite on the app, as an object of string values (e.g.
-   * {"MAIL_API_KEY": "..."}). Keys not included are left untouched. Pass null or an
-   * empty string as the value to delete a secret. Secrets are encrypted at rest and
-   * injected into the app's hosted server runtime as environment bindings.
+   * Body param: The whitelisted OAuth callback URLs users are redirected to after
+   * authorizing the app.
    */
-  secrets?: { [key: string]: unknown } | null;
+  redirect_uris?: Array<string>;
 
   /**
-   * The URL path to the skills directory of the app, such as '/assets/skills/'.
+   * Body param: The OAuth scopes the app requests from users when they install it.
+   */
+  required_scopes?: Array<string>;
+
+  /**
+   * Body param: The subdomain route where the app's hosted web builds are served.
+   */
+  route?: string;
+
+  /**
+   * Body param: Secrets to add or overwrite on the app, as an object of string
+   * values. Keys not included are left untouched; pass null or an empty string as
+   * the value to delete a secret. Encrypted at rest and injected into the app's
+   * hosted server runtime.
+   */
+  secrets?: unknown;
+
+  /**
+   * Body param: The URL path to the app's skills directory (requires the ai_chat
+   * capability).
    */
   skills_path?: string | null;
 
   /**
-   * The status of an experience interface
+   * Body param: Controls whether the app is published on Whop discovery or
+   * accessible only through its direct link. Publishing requires a name, icon, and
+   * description.
    */
-  status?: Shared.AppStatuses | null;
+  status?: 'live' | 'unlisted' | 'hidden';
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export namespace AppUpdateParams {
   /**
-   * The icon image for the app, used in listings and navigation.
+   * The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded
+   * file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new
+   * direct upload.
    */
   export interface Icon {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded attachment.
      */
-    id: string;
+    id?: string;
+
+    /**
+     * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
   }
 }
 
 export interface AppListParams extends CursorPageParams {
   /**
-   * Filter apps by the type of end-user they are built for, such as consumer or
-   * business.
+   * Query param: Only return apps created by this account (`biz_` tag). With
+   * developer access to the account this includes its unlisted and hidden apps.
    */
-  app_type?: AppType;
+  account_id?: string;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: Filter apps by the type of end-user they are built for. Apps of
+   * type `website` are left out unless you ask for them by name.
+   */
+  app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
+
+  /**
+   * Query param: A cursor; returns apps before this position.
    */
   before?: string;
 
   /**
-   * Filter apps to only those created by this company, starting with 'biz\_'.
+   * Query param: Sort direction.
    */
-  company_id?: string;
+  direction?: 'asc' | 'desc';
 
   /**
-   * The sort direction for results. Accepted values: asc, desc.
-   */
-  direction?: Shared.Direction;
-
-  /**
-   * Returns the first _n_ elements from the list.
+   * Query param: The number of apps to return (default 20, max 100).
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: The number of apps to return from the end of the range.
    */
   last?: number;
 
   /**
-   * The field to sort apps by. Defaults to discoverable_at descending, showing the
-   * most recently published apps first.
+   * Query param: The field to sort apps by. Defaults to discoverable_at, showing the
+   * most recently published apps first. `template_usage` ranks Whop-verified apps
+   * first, then by how many businesses created apps from each app as a template.
    */
   order?:
     | 'created_at'
     | 'discoverable_at'
+    | 'template_usage'
     | 'total_installs_last_30_days'
-    | 'total_installs_last_7_days'
-    | 'time_spent'
-    | 'time_spent_last_24_hours'
-    | 'daily_active_users'
-    | 'ai_prompt_count'
-    | 'total_ai_cost_usd'
-    | 'total_ai_tokens'
-    | 'last_ai_prompt_at'
-    | 'ai_average_rating';
+    | 'total_installs_last_7_days';
 
   /**
-   * A search string to filter apps by name, such as 'chat' or 'analytics'.
+   * Query param: A search string matched against app names.
    */
   query?: string;
 
   /**
-   * Whether to only return apps that have been verified by Whop. Useful for
-   * populating a featured apps section.
+   * Query param: Only return apps Whop recommends (or, with `false`, only those it
+   * does not), independently of verification status.
+   */
+  recommended?: boolean;
+
+  /**
+   * Query param: Only return apps whose Whop verification status matches this value.
+   * Omit this filter to include every verification status the caller can see.
+   */
+  verified?: boolean;
+
+  /**
+   * Query param: Legacy compatibility filter. Use `verified` for field equality.
+   * `true` returns verified apps; clients pinned before `2026-08-25-2` retain the
+   * earlier public website discovery behavior.
    */
   verified_apps_only?: boolean;
 
   /**
-   * Filter apps to only those supporting a specific view type, such as 'dashboard'
-   * or 'hub'.
+   * Query param: Only return apps supporting this view type, such as `dashboard` or
+   * `hub`.
    */
-  view_type?: Shared.AppViewType;
+  view_type?: 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics' | 'skills' | 'openapi';
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace Apps {
@@ -499,6 +625,7 @@ export declare namespace Apps {
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppCreateParams as AppCreateParams,
+    type AppRetrieveParams as AppRetrieveParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
   };

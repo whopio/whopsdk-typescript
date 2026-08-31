@@ -5,507 +5,470 @@ import * as Shared from './shared';
 import { ProductListItemsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
 /**
- * Products
+ * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
+ *
+ * Use the Products API to search the public marketplace, list an account's products, retrieve a product, and create, update, or delete products.
  */
 export class Products extends APIResource {
   /**
-   * Create a new product for a company. The product serves as the top-level
-   * container for plans and experiences.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:create`
-   * - `access_pass:basic:read`
+   * Creates a new product for an account.
    *
    * @example
    * ```ts
    * const product = await client.products.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   title: 'title',
+   *   title: 'Interior Deep Clean',
    * });
    * ```
    */
-  create(body: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
-    return this._client.post('/products', { body, ...options });
+  create(params: ProductCreateParams, options?: RequestOptions): APIPromise<Shared.Product> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/products', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing product.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:basic:read`
+   * Retrieves a product. Public — no credentials.
    *
    * @example
    * ```ts
-   * const product = await client.products.retrieve(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
+   * const product = await client.products.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<Shared.Product> {
-    return this._client.get(path`/products/${id}`, options);
-  }
-
-  /**
-   * Update a product's title, description, visibility, and other settings.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:update`
-   * - `access_pass:basic:read`
-   *
-   * @example
-   * ```ts
-   * const product = await client.products.update(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
-   * ```
-   */
-  update(
+  retrieve(
     id: string,
-    body: ProductUpdateParams | null | undefined = {},
+    params: ProductRetrieveParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.Product> {
-    return this._client.patch(path`/products/${id}`, { body, ...options });
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/products/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of products belonging to a company, with optional
-   * filtering by type, visibility, and creation date.
+   * Updates an existing product.
    *
-   * Required permissions:
-   *
-   * - `access_pass:basic:read`
+   * @example
+   * ```ts
+   * const product = await client.products.update('id');
+   * ```
+   */
+  update(id: string, params: ProductUpdateParams, options?: RequestOptions): APIPromise<Shared.Product> {
+    const { 'Api-Version-Date': apiVersionDate, ...body } = params;
+    return this._client.patch(path`/products/${id}`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Returns a paginated list of products. Omit `account_id` to search the public
+   * marketplace.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const productListItem of client.products.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   * })) {
+   * for await (const productListItem of client.products.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: ProductListParams,
+    params: ProductListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<ProductListItemsCursorPage, Shared.ProductListItem> {
-    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, { query, ...options });
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
+    return this._client.getAPIList('/products', CursorPage<Shared.ProductListItem>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Permanently delete a product and remove it from the company's catalog.
-   *
-   * Required permissions:
-   *
-   * - `access_pass:delete`
+   * Deletes a product. Only products with no memberships, entries, reviews, or
+   * invoices can be deleted.
    *
    * @example
    * ```ts
-   * const product = await client.products.delete(
-   *   'prod_xxxxxxxxxxxxx',
-   * );
+   * const product = await client.products.delete('id');
    * ```
    */
-  delete(id: string, options?: RequestOptions): APIPromise<ProductDeleteResponse> {
-    return this._client.delete(path`/products/${id}`, options);
+  delete(
+    id: string,
+    params: ProductDeleteParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<ProductDeleteResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.delete(path`/products/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
-/**
- * Represents `true` or `false` values.
- */
-export type ProductDeleteResponse = boolean;
+export interface ProductDeleteResponse {
+  /**
+   * ID of the deleted product.
+   */
+  id: string;
+
+  /**
+   * Always true.
+   */
+  deleted: boolean;
+}
 
 export interface ProductCreateParams {
   /**
-   * The unique identifier of the company to create this product for.
-   */
-  company_id: string;
-
-  /**
-   * The display name of the product. Maximum 80 characters.
+   * Body param: The display name of the product. Maximum 80 characters.
    */
   title: string;
 
   /**
-   * Whether the checkout flow collects a shipping address from the customer.
+   * Body param: The unique identifier of the account to create this product for.
+   */
+  account_id?: string;
+
+  /**
+   * Body param: Whether to collect a shipping address at checkout.
    */
   collect_shipping_address?: boolean | null;
 
   /**
-   * The different types of custom CTAs that can be selected.
+   * Body param: The call-to-action button label.
    */
-  custom_cta?: Shared.CustomCta | null;
+  custom_cta?:
+    | 'get_access'
+    | 'join'
+    | 'order_now'
+    | 'shop_now'
+    | 'call_now'
+    | 'donate_now'
+    | 'contact_us'
+    | 'sign_up'
+    | 'subscribe'
+    | 'purchase'
+    | 'get_offer'
+    | 'apply_now'
+    | 'complete_order'
+    | null;
 
   /**
-   * A URL that the call-to-action button links to instead of the default checkout
-   * flow.
+   * Body param: A URL the call-to-action button links to.
    */
   custom_cta_url?: string | null;
 
   /**
-   * A custom text label that appears on the customer's bank statement. Must be 5-22
-   * characters, contain at least one letter, and not contain <, >, \, ', or "
-   * characters.
+   * Body param: Custom bank statement descriptor. Must start with WHOP\*.
    */
   custom_statement_descriptor?: string | null;
 
   /**
-   * A written description of the product displayed on its product page.
+   * Body param: A written description displayed on the product page.
    */
   description?: string | null;
 
   /**
-   * The unique identifiers of experiences to connect to this product.
-   */
-  experience_ids?: Array<string> | null;
-
-  /**
-   * The commission rate as a percentage that affiliates earn through the global
-   * affiliate program.
+   * Body param: The commission rate affiliates earn.
    */
   global_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
+   * Body param: The enrollment status in the global affiliate program.
    */
-  global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+  global_affiliate_status?: 'enabled' | 'disabled';
 
   /**
-   * A short marketing headline displayed prominently on the product page.
+   * Body param: A short marketing headline for the product page.
    */
   headline?: string | null;
 
   /**
-   * The commission rate as a percentage that members earn through the member
-   * affiliate program.
+   * Body param: Labels used to group products into collections. Stored lowercased
+   * and de-duplicated. Maximum 20 labels, 50 characters each.
+   */
+  labels?: Array<string> | null;
+
+  /**
+   * Body param: The commission rate members earn.
    */
   member_affiliate_percentage?: number | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
+   * Body param: The enrollment status in the member affiliate program.
    */
-  member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+  member_affiliate_status?: 'enabled' | 'disabled';
 
   /**
-   * Custom key-value pairs to store on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-   * string value.
+   * Body param: Custom key-value pairs to store on the product.
    */
-  metadata?: { [key: string]: unknown } | null;
+  metadata?: unknown | null;
 
   /**
-   * Configuration for an automatically generated plan to attach to this product.
-   */
-  plan_options?: ProductCreateParams.PlanOptions | null;
-
-  /**
-   * The unique identifier of the tax classification code to apply to this product.
+   * Body param: The unique identifier of the tax classification code. See the
+   * available
+   * [product categories](https://docs.numeral.com/essentials/product-categories).
    */
   product_tax_code_id?: string | null;
 
   /**
-   * A URL to redirect the customer to after completing a purchase.
+   * Body param: A URL to redirect the customer to after purchase.
    */
   redirect_purchase_url?: string | null;
 
   /**
-   * The URL slug for the product's public link.
+   * Body param: The URL slug for the product's public link.
    */
   route?: string | null;
 
   /**
-   * Whether to send an automated welcome message via support chat when a user joins
-   * this product. Defaults to true.
+   * Body param: Whether to send an automated welcome message via support chat when a
+   * user joins this product. Defaults to true.
    */
   send_welcome_message?: boolean | null;
 
   /**
-   * Visibility of a resource
+   * Body param: Whether the product is visible to customers.
    */
-  visibility?: Shared.Visibility | null;
+  visibility?: string;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
-export namespace ProductCreateParams {
+export interface ProductRetrieveParams {
   /**
-   * Configuration for an automatically generated plan to attach to this product.
+   * Pins the request to a dated API version.
    */
-  export interface PlanOptions {
-    /**
-     * The available currencies on the platform
-     */
-    base_currency?: Shared.Currency | null;
-
-    /**
-     * The interval at which the plan charges (renewal plans).
-     */
-    billing_period?: number | null;
-
-    /**
-     * An array of custom field objects.
-     */
-    custom_fields?: Array<PlanOptions.CustomField> | null;
-
-    /**
-     * An additional amount charged upon first purchase. Provided as a number in the
-     * specified currency. Eg: 10.43 for $10.43 USD.
-     */
-    initial_price?: number | null;
-
-    /**
-     * The type of plan that can be attached to a product
-     */
-    plan_type?: Shared.PlanType | null;
-
-    /**
-     * The methods of how a plan can be released.
-     */
-    release_method?: Shared.ReleaseMethod | null;
-
-    /**
-     * The amount the customer is charged every billing period. Provided as a number in
-     * the specified currency. Eg: 10.43 for $10.43 USD.
-     */
-    renewal_price?: number | null;
-
-    /**
-     * Visibility of a resource
-     */
-    visibility?: Shared.Visibility | null;
-  }
-
-  export namespace PlanOptions {
-    export interface CustomField {
-      /**
-       * The type of the custom field.
-       */
-      field_type: 'text';
-
-      /**
-       * The name of the custom field.
-       */
-      name: string;
-
-      /**
-       * The ID of the custom field (if being updated)
-       */
-      id?: string | null;
-
-      /**
-       * The order of the field.
-       */
-      order?: number | null;
-
-      /**
-       * The placeholder value of the field.
-       */
-      placeholder?: string | null;
-
-      /**
-       * Whether or not the field is required.
-       */
-      required?: boolean | null;
-    }
-  }
+  'Api-Version-Date'?: string;
 }
 
 export interface ProductUpdateParams {
   /**
-   * Whether the checkout flow collects a shipping address from the customer.
+   * Body param: A wide image for the product, shown on the product page and on
+   * listing cards. Pass `{ id }` for an existing attachment or
+   * `{ direct_upload_id }` for a completed direct upload; `null` removes it.
    */
-  collect_shipping_address?: boolean | null;
+  banner_image?: ProductUpdateParams.BannerImage | null;
 
   /**
-   * The different types of custom CTAs that can be selected.
-   */
-  custom_cta?: Shared.CustomCta | null;
-
-  /**
-   * A URL that the call-to-action button links to instead of the default checkout
-   * flow.
-   */
-  custom_cta_url?: string | null;
-
-  /**
-   * A custom text label that appears on the customer's bank statement. Must be 5-22
-   * characters, contain at least one letter, and not contain <, >, \, ', or "
-   * characters.
-   */
-  custom_statement_descriptor?: string | null;
-
-  /**
-   * A written description of the product displayed on its product page.
+   * Body param: A written description displayed on the product page.
    */
   description?: string | null;
 
   /**
-   * The gallery images for the product.
-   */
-  gallery_images?: Array<ProductUpdateParams.GalleryImage> | null;
-
-  /**
-   * The commission rate as a percentage that affiliates earn through the global
-   * affiliate program.
-   */
-  global_affiliate_percentage?: number | null;
-
-  /**
-   * The different statuses of the global affiliate program for a product.
-   */
-  global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-  /**
-   * A short marketing headline displayed prominently on the product page.
+   * Body param: A short marketing headline for the product page.
    */
   headline?: string | null;
 
   /**
-   * The commission rate as a percentage that members earn through the member
-   * affiliate program.
+   * Body param: Labels used to group products into collections. Replaces the
+   * existing labels. Send an empty array to clear them.
    */
-  member_affiliate_percentage?: number | null;
+  labels?: Array<string> | null;
 
   /**
-   * The different statuses of the global affiliate program for a product.
+   * Body param: Custom key-value pairs to store on the product.
    */
-  member_affiliate_status?: Shared.GlobalAffiliateStatus | null;
+  metadata?: unknown | null;
 
   /**
-   * Custom key-value pairs to store on the product. Included in webhook payloads for
-   * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-   * string value.
-   */
-  metadata?: { [key: string]: unknown } | null;
-
-  /**
-   * The unique identifier of the tax classification code to apply to this product.
+   * Body param: The unique identifier of the tax classification code. See the
+   * available
+   * [product categories](https://docs.numeral.com/essentials/product-categories).
    */
   product_tax_code_id?: string | null;
 
   /**
-   * A URL to redirect the customer to after completing a purchase.
-   */
-  redirect_purchase_url?: string | null;
-
-  /**
-   * The URL slug for the product's public link.
-   */
-  route?: string | null;
-
-  /**
-   * Whether to send an automated welcome message via support chat when a user joins
-   * this product.
+   * Body param: Whether to send an automated welcome message via support chat when a
+   * user joins this product.
    */
   send_welcome_message?: boolean | null;
 
   /**
-   * Layout and display configuration for this product on the company's store page.
+   * Body param: The display name of the product.
    */
-  store_page_config?: ProductUpdateParams.StorePageConfig | null;
+  title?: string;
 
   /**
-   * The display name of the product. Maximum 80 characters.
+   * Body param: Whether the product is visible to customers.
    */
-  title?: string | null;
+  visibility?: string;
 
   /**
-   * Visibility of a resource
+   * Header param: Pins the request to a dated API version.
    */
-  visibility?: Shared.Visibility | null;
+  'Api-Version-Date'?: string;
 }
 
 export namespace ProductUpdateParams {
   /**
-   * Input for an attachment
+   * A wide image for the product, shown on the product page and on listing cards.
+   * Pass `{ id }` for an existing attachment or `{ direct_upload_id }` for a
+   * completed direct upload; `null` removes it.
    */
-  export interface GalleryImage {
+  export interface BannerImage {
     /**
-     * The ID of an existing file object.
+     * The tag of an already-uploaded attachment.
      */
-    id: string;
-  }
-
-  /**
-   * Layout and display configuration for this product on the company's store page.
-   */
-  export interface StorePageConfig {
-    /**
-     * Custom call-to-action text for the product's store page.
-     */
-    custom_cta?: string | null;
+    id?: string;
 
     /**
-     * Whether or not to show the price on the product's store page.
+     * The signed id of a completed direct upload.
      */
-    show_price?: boolean | null;
+    direct_upload_id?: string;
   }
 }
 
 export interface ProductListParams extends CursorPageParams {
   /**
-   * The unique identifier of the company to list products for.
+   * Query param: Filter to only products matching these types.
    */
-  company_id: string;
+  access_pass_types?: Array<string>;
 
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: The unique identifier of the account to list products for. Omit to
+   * search the public marketplace.
+   */
+  account_id?: string;
+
+  /**
+   * Query param: A cursor; returns products before this position.
    */
   before?: string;
 
   /**
-   * Only return products created after this timestamp.
+   * Query param: Only return products created after this ISO 8601 timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return products created before this timestamp.
+   * Query param: Only return products created before this ISO 8601 timestamp.
    */
   created_before?: string;
 
   /**
-   * The sort direction for results. Defaults to descending.
+   * Query param: The sort direction for results. Defaults to descending.
    */
-  direction?: Shared.Direction;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: The number of products to return (default and max 100).
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: Filter to only products carrying all of these labels. Labels are
+   * matched lowercased.
+   */
+  labels?: Array<string>;
+
+  /**
+   * Query param: The number of products to return from the end of the range.
    */
   last?: number;
 
   /**
-   * The field to sort results by. Defaults to created_at.
+   * Query param: Only return marketplace products assigned to this category route,
+   * such as `trading`.
    */
-  order?: 'active_memberships_count' | 'created_at' | 'usd_gmv' | 'usd_gmv_30_days';
+  marketplace_category_route?: string;
 
   /**
-   * Filter to only products matching these type classifications.
+   * Query param: The field to sort results by. Account lists default to
+   * `created_at`. Marketplace lists default to `discoverable_at` and accept
+   * `created_at` or `discoverable_at`. Cannot be combined with `query`.
    */
-  product_types?: Array<Shared.AccessPassType>;
+  order?: string;
 
   /**
-   * Filter to only products matching these visibility states.
+   * Query param: Filter to products with a buyable plan of these billing models,
+   * such as `one_time` or `renewal`.
    */
-  visibilities?: Array<Shared.VisibilityFilter>;
+  plan_types?: Array<'renewal' | 'one_time'>;
+
+  /**
+   * Query param: Only return products whose advertised buyable plan has a displayed
+   * price of at most this amount. Recurring plans use renewal price.
+   */
+  price_maximum?: number;
+
+  /**
+   * Query param: Only return products whose advertised buyable plan has a displayed
+   * price of at least this amount. Recurring plans use renewal price.
+   */
+  price_minimum?: number;
+
+  /**
+   * Query param: Ranked search against product title and headline. Omit to browse by
+   * recency.
+   */
+  query?: string;
+
+  /**
+   * Query param: Filter to only products matching these visibility states. Ignored
+   * on the public marketplace list, which only returns visible products.
+   */
+  visibilities?: Array<string>;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+}
+
+export interface ProductDeleteParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace Products {
   export {
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
+    type ProductRetrieveParams as ProductRetrieveParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
+    type ProductDeleteParams as ProductDeleteParams,
   };
 }
 

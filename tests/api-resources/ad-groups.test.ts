@@ -7,10 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource memberships', () => {
+describe('resource adGroups', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.memberships.retrieve('id');
+    const responsePromise = client.adGroups.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -24,9 +24,15 @@ describe('resource memberships', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.retrieve(
+      client.adGroups.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-25-2' },
+        {
+          attribution_model: 'last_touch',
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
+          time_zone: 'time_zone',
+          'Api-Version-Date': '2026-08-25-2',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -34,7 +40,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.memberships.update('id');
+    const responsePromise = client.adGroups.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -45,24 +51,8 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.memberships.update(
-        'id',
-        {
-          cancel_at_period_end: true,
-          metadata: { seat: '42' },
-          'Api-Version-Date': '2026-08-25-2',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
   test.skip('list', async () => {
-    const responsePromise = client.memberships.list();
+    const responsePromise = client.adGroups.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -76,10 +66,13 @@ describe('resource memberships', () => {
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.list(
+      client.adGroups.list(
         {
           account_id: 'account_id',
+          ad_campaign_id: 'ad_campaign_id',
+          ad_campaign_ids: ['adcamp_xxxxxxxxxxxxxx'],
           after: 'after',
+          attribution_model: 'last_touch',
           before: 'before',
           created_after: 'created_after',
           created_before: 'created_before',
@@ -87,10 +80,11 @@ describe('resource memberships', () => {
           first: 100,
           last: 100,
           order: 'created_at',
-          plan_id: 'plan_id',
-          product_id: 'product_id',
+          query: 'query',
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
           status: 'active',
-          user_id: 'user_id',
+          time_zone: 'time_zone',
           'Api-Version-Date': '2026-08-25-2',
         },
         { path: '/_stainless_unknown_path' },
@@ -99,8 +93,8 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('addFreeDays: only required params', async () => {
-    const responsePromise = client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
+  test.skip('delete', async () => {
+    const responsePromise = client.adGroups.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -111,34 +105,12 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('addFreeDays: required and optional params', async () => {
-    const response = await client.memberships.addFreeDays('mem_xxxxxxxxxxxxxx', { free_days: 42 });
-  });
-
-  // Mock server tests are disabled
-  test.skip('cancel', async () => {
-    const responsePromise = client.memberships.cancel('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('cancel: request options and params are passed correctly', async () => {
+  test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.cancel(
+      client.adGroups.delete(
         'id',
-        {
-          cancel_at_period_end: true,
-          reason: 'chargeback risk',
-          'Api-Version-Date': '2026-08-25-2',
-          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
-        },
+        { 'Api-Version-Date': '2026-08-25-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -146,7 +118,7 @@ describe('resource memberships', () => {
 
   // Mock server tests are disabled
   test.skip('pause', async () => {
-    const responsePromise = client.memberships.pause('id');
+    const responsePromise = client.adGroups.pause('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -160,35 +132,7 @@ describe('resource memberships', () => {
   test.skip('pause: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.memberships.pause(
-        'id',
-        {
-          until: '2026-01-01T12:00:00.000Z',
-          'Api-Version-Date': '2026-08-25-2',
-          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Whop.NotFoundError);
-  });
-
-  // Mock server tests are disabled
-  test.skip('resume', async () => {
-    const responsePromise = client.memberships.resume('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('resume: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.memberships.resume(
+      client.adGroups.pause(
         'id',
         { 'Api-Version-Date': '2026-08-25-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
@@ -197,8 +141,8 @@ describe('resource memberships', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('uncancel', async () => {
-    const responsePromise = client.memberships.uncancel('mem_xxxxxxxxxxxxxx');
+  test.skip('unpause', async () => {
+    const responsePromise = client.adGroups.unpause('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -206,5 +150,17 @@ describe('resource memberships', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unpause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.adGroups.unpause(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

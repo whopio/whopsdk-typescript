@@ -7,49 +7,10 @@ const client = new Whop({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource appBuilds', () => {
-  // Mock server tests are disabled
-  test.skip('create: only required params', async () => {
-    const responsePromise = client.appBuilds.create({
-      attachment: {},
-      checksum: 'xxxxxxxxxxxxxxx',
-      platform: 'web',
-    });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('create: required and optional params', async () => {
-    const response = await client.appBuilds.create({
-      attachment: {
-        id: 'file_xxxxxxxxxxxxxx',
-        direct_upload_id:
-          'eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-      },
-      checksum: 'xxxxxxxxxxxxxxx',
-      platform: 'web',
-      ai_prompt_id: 'prmt_xxxxxxxxxxxxxx',
-      app_id: 'app_xxxxxxxxxxxxxx',
-      source_attachment: {
-        id: 'file_xxxxxxxxxxxxxx',
-        direct_upload_id:
-          'eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-      },
-      supported_app_view_types: ['hub'],
-      'Api-Version-Date': '2026-08-25-2',
-      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
-    });
-  });
-
+describe('resource ads', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.appBuilds.retrieve('id');
+    const responsePromise = client.ads.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -63,17 +24,23 @@ describe('resource appBuilds', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.appBuilds.retrieve(
+      client.ads.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-25-2' },
+        {
+          attribution_model: 'last_touch',
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
+          time_zone: 'time_zone',
+          'Api-Version-Date': '2026-08-25-2',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.appBuilds.list({ app_id: 'app_id' });
+  test.skip('list', async () => {
+    const responsePromise = client.ads.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -84,38 +51,78 @@ describe('resource appBuilds', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.appBuilds.list({
-      app_id: 'app_id',
-      after: 'after',
-      before: 'before',
-      created_after: 0,
-      created_before: 0,
-      first: 0,
-      last: 0,
-      platform: 'ios',
-      status: 'draft',
-      'Api-Version-Date': '2026-08-25-2',
-    });
-  });
-
-  // Mock server tests are disabled
-  test.skip('promote', async () => {
-    const responsePromise = client.appBuilds.promote('id');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('promote: request options and params are passed correctly', async () => {
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.appBuilds.promote(
+      client.ads.list(
+        {
+          account_id: 'account_id',
+          ad_campaign_id: 'ad_campaign_id',
+          ad_campaign_ids: ['adcamp_xxxxxxxxxxxxxx'],
+          ad_group_id: 'ad_group_id',
+          ad_group_ids: ['adgrp_xxxxxxxxxxxxxx'],
+          after: 'after',
+          attribution_model: 'last_touch',
+          before: 'before',
+          created_after: 'created_after',
+          created_before: 'created_before',
+          direction: 'asc',
+          first: 100,
+          last: 100,
+          order: 'created_at',
+          query: 'query',
+          stats_from: 'stats_from',
+          stats_to: 'stats_to',
+          status: 'active',
+          time_zone: 'time_zone',
+          'Api-Version-Date': '2026-08-25-2',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('pause', async () => {
+    const responsePromise = client.ads.pause('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('pause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.pause(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unpause', async () => {
+    const responsePromise = client.ads.unpause('id');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('unpause: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.ads.unpause(
         'id',
         { 'Api-Version-Date': '2026-08-25-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },

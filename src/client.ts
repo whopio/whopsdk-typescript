@@ -21,8 +21,28 @@ import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import { AccessTokenCreateParams, AccessTokenCreateResponse, AccessTokens } from './resources/access-tokens';
 import { AccountLinkCreateParams, AccountLinkCreateResponse, AccountLinks } from './resources/account-links';
-import { AdCampaigns } from './resources/ad-campaigns';
-import { AdGroups } from './resources/ad-groups';
+import {
+  AdCampaign,
+  AdCampaignListParams,
+  AdCampaignPauseParams,
+  AdCampaignRetrieveParams,
+  AdCampaignUnpauseParams,
+  AdCampaignUpdateParams,
+  AdCampaigns,
+  AdCampaignsCursorPage,
+} from './resources/ad-campaigns';
+import {
+  AdGroup,
+  AdGroupDeleteParams,
+  AdGroupDeleteResponse,
+  AdGroupListParams,
+  AdGroupPauseParams,
+  AdGroupRetrieveParams,
+  AdGroupUnpauseParams,
+  AdGroupUpdateParams,
+  AdGroups,
+  AdGroupsCursorPage,
+} from './resources/ad-groups';
 import {
   AdReportRetrieveParams,
   AdReportRetrieveResponse,
@@ -30,7 +50,15 @@ import {
   Granularities,
   ResultLabelKeys,
 } from './resources/ad-reports';
-import { Ads } from './resources/ads';
+import {
+  Ad,
+  AdListParams,
+  AdPauseParams,
+  AdRetrieveParams,
+  AdUnpauseParams,
+  Ads,
+  AdsCursorPage,
+} from './resources/ads';
 import {
   AIChat,
   AIChatCreateParams,
@@ -45,8 +73,8 @@ import {
 import {
   AppBuildCreateParams,
   AppBuildListParams,
-  AppBuildListResponse,
-  AppBuildListResponsesCursorPage,
+  AppBuildPromoteParams,
+  AppBuildRetrieveParams,
   AppBuilds,
 } from './resources/app-builds';
 import {
@@ -54,6 +82,7 @@ import {
   AppListParams,
   AppListResponse,
   AppListResponsesCursorPage,
+  AppRetrieveParams,
   AppType,
   AppUpdateParams,
   Apps,
@@ -75,6 +104,7 @@ import {
   BountyListParams,
   BountyListResponse,
   BountyListResponsesCursorPage,
+  BountyRetrieveParams,
   BountyRetrieveResponse,
 } from './resources/bounties';
 import {
@@ -86,9 +116,12 @@ import {
 } from './resources/chat-channels';
 import {
   CheckoutConfigurationCreateParams,
+  CheckoutConfigurationCreateResponse,
   CheckoutConfigurationListParams,
   CheckoutConfigurationListResponse,
   CheckoutConfigurationListResponsesCursorPage,
+  CheckoutConfigurationRetrieveParams,
+  CheckoutConfigurationRetrieveResponse,
   CheckoutConfigurations,
   CheckoutModes,
 } from './resources/checkout-configurations';
@@ -168,6 +201,7 @@ import {
   DisputeAlertListParams,
   DisputeAlertListResponse,
   DisputeAlertListResponsesCursorPage,
+  DisputeAlertRetrieveParams,
   DisputeAlertRetrieveResponse,
   DisputeAlertType,
   DisputeAlerts,
@@ -175,11 +209,11 @@ import {
 import {
   Dispute,
   DisputeListParams,
-  DisputeListResponse,
-  DisputeListResponsesCursorPage,
+  DisputeRetrieveParams,
   DisputeStatuses,
   DisputeUpdateEvidenceParams,
   Disputes,
+  DisputesCursorPage,
 } from './resources/disputes';
 import {
   DmChannel,
@@ -235,6 +269,7 @@ import {
 import {
   FileCreateParams,
   FileCreateResponse,
+  FileRetrieveParams,
   FileRetrieveResponse,
   FileVisibility,
   Files,
@@ -281,6 +316,7 @@ import {
   MemberListParams,
   MemberListResponse,
   MemberListResponsesCursorPage,
+  MemberRetrieveParams,
   MemberRetrieveResponse,
   Members,
 } from './resources/members';
@@ -289,9 +325,9 @@ import {
   MembershipAddFreeDaysParams,
   MembershipCancelParams,
   MembershipListParams,
-  MembershipListResponse,
-  MembershipListResponsesCursorPage,
   MembershipPauseParams,
+  MembershipResumeParams,
+  MembershipRetrieveParams,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -347,21 +383,37 @@ import {
   PayoutMethodRetrieveResponse,
   PayoutMethods,
 } from './resources/payout-methods';
-import { CheckoutFont, CheckoutShape, Plans } from './resources/plans';
+import {
+  CheckoutFont,
+  CheckoutShape,
+  PlanCreateParams,
+  PlanDeleteParams,
+  PlanDeleteResponse,
+  PlanListParams,
+  PlanListResponse,
+  PlanListResponsesCursorPage,
+  PlanRetrieveParams,
+  PlanUpdateParams,
+  Plans,
+} from './resources/plans';
 import {
   ProductCreateParams,
+  ProductDeleteParams,
   ProductDeleteResponse,
   ProductListParams,
+  ProductRetrieveParams,
   ProductUpdateParams,
   Products,
 } from './resources/products';
 import {
   PromoCode,
   PromoCodeCreateParams,
+  PromoCodeDeleteParams,
   PromoCodeDeleteResponse,
   PromoCodeListParams,
   PromoCodeListResponse,
   PromoCodeListResponsesCursorPage,
+  PromoCodeRetrieveParams,
   PromoCodeStatus,
   PromoCodes,
   PromoDuration,
@@ -394,6 +446,7 @@ import {
   ResolutionCenterCaseListResponsesCursorPage,
   ResolutionCenterCaseMerchantResponse,
   ResolutionCenterCasePlatformResponse,
+  ResolutionCenterCaseRetrieveParams,
   ResolutionCenterCaseRetrieveResponse,
   ResolutionCenterCaseStatus,
   ResolutionCenterCases,
@@ -417,8 +470,7 @@ import {
 import {
   ShipmentCreateParams,
   ShipmentListParams,
-  ShipmentListResponse,
-  ShipmentListResponsesCursorPage,
+  ShipmentRetrieveParams,
   Shipments,
 } from './resources/shipments';
 import {
@@ -429,27 +481,56 @@ import {
   SupportChannels,
 } from './resources/support-channels';
 import { TopupCreateParams, TopupCreateResponse, Topups } from './resources/topups';
-import { Transfers } from './resources/transfers';
-import { Users } from './resources/users';
+import {
+  TransferCreateParams,
+  TransferCreateResponse,
+  TransferListParams,
+  TransferListResponse,
+  TransferListResponsesCursorPage,
+  TransferRetrieveParams,
+  TransferRetrieveResponse,
+  Transfers,
+} from './resources/transfers';
+import {
+  User,
+  UserCheckAccessParams,
+  UserCheckAccessResponse,
+  UserListParams,
+  UserRetrieveParams,
+  UserUpdateParams,
+  Users,
+  UsersCursorPage,
+} from './resources/users';
 import {
   VerificationErrorCode,
   VerificationListParams,
   VerificationListResponse,
-  VerificationListResponsesCursorPage,
+  VerificationRetrieveParams,
   VerificationRetrieveResponse,
   VerificationStatus,
   Verifications,
 } from './resources/verifications';
 import {
   APIVersion,
+  AccountUpdatedWebhookEvent,
+  AdCampaignPaymentFailedWebhookEvent,
+  CardApplicationApprovedWebhookEvent,
+  CardApplicationCreatedWebhookEvent,
+  CardApplicationDeniedWebhookEvent,
+  CardApplicationUpdatedWebhookEvent,
+  CardCanceledWebhookEvent,
+  CardCreatedWebhookEvent,
+  CardFrozenWebhookEvent,
   CardTransactionCompletedWebhookEvent,
   CardTransactionCreatedWebhookEvent,
   CardTransactionDeclinedWebhookEvent,
   CardTransactionReversedWebhookEvent,
   CardTransactionUpdatedWebhookEvent,
+  CardUpdatedWebhookEvent,
   ChatMessageCreatedWebhookEvent,
   ChatReactionCreatedWebhookEvent,
   CourseLessonInteractionCompletedWebhookEvent,
+  DepositSucceededWebhookEvent,
   DisputeAlertCreatedWebhookEvent,
   DisputeCreatedWebhookEvent,
   DisputeUpdatedWebhookEvent,
@@ -457,6 +538,8 @@ import {
   EntryCreatedWebhookEvent,
   EntryDeletedWebhookEvent,
   EntryDeniedWebhookEvent,
+  ExportCompletedWebhookEvent,
+  ExportFailedWebhookEvent,
   IdentityProfileUpdatedWebhookEvent,
   InvoiceCreatedWebhookEvent,
   InvoiceMarkedUncollectibleWebhookEvent,
@@ -476,7 +559,13 @@ import {
   PaymentPendingWebhookEvent,
   PaymentSucceededWebhookEvent,
   PayoutAccountStatusUpdatedWebhookEvent,
+  PayoutCreatedWebhookEvent,
   PayoutMethodCreatedWebhookEvent,
+  PayoutReversedWebhookEvent,
+  PayoutUpdatedWebhookEvent,
+  PlanCreatedWebhookEvent,
+  PlanDeletedWebhookEvent,
+  PlanUpdatedWebhookEvent,
   ProductCreatedWebhookEvent,
   ProductDeletedWebhookEvent,
   ProductPublishedWebhookEvent,
@@ -492,30 +581,25 @@ import {
   SetupIntentSucceededWebhookEvent,
   ShipmentCreatedWebhookEvent,
   ShipmentUpdatedWebhookEvent,
+  SwapCompletedWebhookEvent,
+  TransferCompletedWebhookEvent,
+  TransferCreatedWebhookEvent,
+  TransferFailedWebhookEvent,
   UnwrapWebhookEvent,
   VerificationSucceededWebhookEvent,
   Webhook,
   WebhookCreateParams,
-  WebhookCreateResponse,
+  WebhookDeleteParams,
   WebhookDeleteResponse,
   WebhookEvent,
   WebhookListParams,
   WebhookListResponse,
   WebhookListResponsesCursorPage,
+  WebhookRetrieveParams,
   WebhookUpdateParams,
   Webhooks,
 } from './resources/webhooks';
-import {
-  Withdrawal,
-  WithdrawalCreateParams,
-  WithdrawalFeeTypes,
-  WithdrawalListParams,
-  WithdrawalListResponse,
-  WithdrawalListResponsesCursorPage,
-  WithdrawalSpeeds,
-  WithdrawalStatus,
-  Withdrawals,
-} from './resources/withdrawals';
+import { Withdrawals } from './resources/withdrawals';
 import {
   Affiliate,
   AffiliateArchiveResponse,
@@ -1292,219 +1376,193 @@ export class Whop {
   static toFile = Uploads.toFile;
 
   /**
-   * Apps
+   * An App is software you build on Whop. It can be a hosted web app served at `<route>.whop.site` or an API integration installed as an experience, and it belongs to the account that owns its credentials, settings, builds, and runtime logs.
+   *
+   * Use the Apps API to manage app configuration, deploy an app's working copy and follow the run on the app's `deployment` field, and, for hosted apps, read server runtime logs for console output, uncaught exceptions, and failed requests. Logs are retained for 7 days and can be filtered by build, level, time window, and message text.
+   *
+   * Apps are also reusable blueprints. List official blueprints with `app_type=website&verified=true&order=template_usage`, or community blueprints with `app_type=website&verified=false&recommended=true&order=template_usage`. Pass the returned App `id` as `blueprint_id` when creating an Account.
+   *
    */
   apps: API.Apps = new API.Apps(this);
-  /**
-   * Invoices
-   */
   invoices: API.Invoices = new API.Invoices(this);
-  /**
-   * Course lesson interactions
-   */
   courseLessonInteractions: API.CourseLessonInteractions = new API.CourseLessonInteractions(this);
   /**
-   * Products
+   * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
+   *
+   * Use the Products API to search the public marketplace, list an account's products, retrieve a product, and create, update, or delete products.
+   *
    */
   products: API.Products = new API.Products(this);
-  /**
-   * Companies
-   */
   companies: API.Companies = new API.Companies(this);
-  /**
-   * Webhooks
-   */
   webhooks: API.Webhooks = new API.Webhooks(this);
+  /**
+   * A Plan defines how customers buy a product. It controls pricing, billing cadence, availability, tax behavior, checkout fields, and purchase visibility.
+   *
+   * Use the Plans API to create plans for products, list existing plans, retrieve or update plan configuration, calculate tax for checkout, and delete plans that should no longer be offered.
+   *
+   */
   plans: API.Plans = new API.Plans(this);
-  /**
-   * Entries
-   */
   entries: API.Entries = new API.Entries(this);
-  /**
-   * Forum posts
-   */
   forumPosts: API.ForumPosts = new API.ForumPosts(this);
-  transfers: API.Transfers = new API.Transfers(this);
   /**
-   * Ledger accounts
+   * Transfers move value between identities on Whop. They are used for account-to-account money movement, user payouts inside Whop, crypto transfers, and claim links depending on the destination type.
+   *
+   * Use the Transfers API to create a transfer, list previous transfers, and retrieve a transfer by ID when reconciling money movement between accounts or users.
+   *
    */
+  transfers: API.Transfers = new API.Transfers(this);
   ledgerAccounts: API.LedgerAccounts = new API.LedgerAccounts(this);
   /**
-   * Memberships
+   * A Membership is a customer's purchase of a plan: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
+   *
+   * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, invite a recipient to join through a free plan, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, generate a transfer link, and update metadata.
+   *
    */
   memberships: API.Memberships = new API.Memberships(this);
-  /**
-   * Authorized users
-   */
   authorizedUsers: API.AuthorizedUsers = new API.AuthorizedUsers(this);
   /**
-   * App builds
+   * An App Build is a versioned artifact uploaded for an app — a hosted web archive, or an iOS/Android bundle. Builds start as drafts, go through review, and one approved build per platform is served to users as the production build.
+   *
+   * Use the App Builds API to upload a build for an app, list an app's builds with platform and status filters, retrieve a build, and promote a draft or approved build to production.
+   *
    */
   appBuilds: API.AppBuilds = new API.AppBuilds(this);
   /**
-   * Shipments
+   * A Shipment attaches a carrier tracking number to a payment and follows the package from label creation to delivery, exposing the current delivery status and a customer-facing tracking URL.
+   *
+   * Use the Shipments API to list an account's shipments, retrieve one by its id or the payment it fulfills, attach a tracking number to a payment, and update the tracking number on an existing shipment.
+   *
    */
   shipments: API.Shipments = new API.Shipments(this);
   /**
-   * Checkout configurations
+   * A Checkout Configuration is a reusable checkout link owned by an account. In `payment` mode it sells a specific plan; in `setup` mode it collects and saves payment details without charging. Each configuration can also override which payment methods are accepted and how 3D Secure is enforced for that checkout.
+   *
+   * Use the Checkout Configurations API to create checkout links for an existing or inline plan, list configurations for an account, retrieve the configuration behind a checkout URL, and delete links that should no longer be used.
+   *
    */
   checkoutConfigurations: API.CheckoutConfigurations = new API.CheckoutConfigurations(this);
-  /**
-   * Messages
-   */
   messages: API.Messages = new API.Messages(this);
-  /**
-   * Chat channels
-   */
   chatChannels: API.ChatChannels = new API.ChatChannels(this);
+  /**
+   * A User represents a person on Whop. Users have a public profile and can buy products, join accounts, and access experiences.
+   *
+   * Use the Users API to search for users, retrieve or update profiles, and check whether a user has access to an account, product, or experience.
+   *
+   */
   users: API.Users = new API.Users(this);
   /**
-   * Payments
+   * A Payment is one charge against a buyer. Create an on-session payment with a `confirmation_token` for the method the buyer selected, or an off-session payment with an existing member's stored payment method.
+   *
+   * Collection runs in the background, so the create response is not the outcome. Poll [Retrieve status](/api-reference/beta/payments/retrieve-status) for how far the payment has got and, while it is `requires_action`, what the buyer must do next — follow a redirect, complete 3D Secure, display transfer instructions, or link a bank account. Use the return_url operation to change where they land afterwards, up until they come back.
+   *
    */
   payments: API.Payments = new API.Payments(this);
-  /**
-   * Support channels
-   */
   supportChannels: API.SupportChannels = new API.SupportChannels(this);
-  /**
-   * Experiences
-   */
   experiences: API.Experiences = new API.Experiences(this);
-  /**
-   * Reactions
-   */
   reactions: API.Reactions = new API.Reactions(this);
   /**
-   * Members
+   * A Member is one buyer's relationship with an account — one record per customer regardless of how many memberships they hold. It carries relationship-level state: whether they have joined or left, their access level (`customer`, `admin`, or `no_access`), when they joined, and when they last opened the account's content.
+   *
+   * Use the Members API to list an account's members with filtering by access level, status, join date, and name or username search, and to retrieve a single member. Member rows are created and maintained by the membership lifecycle; to grant or revoke access, work with memberships instead.
+   *
    */
   members: API.Members = new API.Members(this);
-  /**
-   * Forums
-   */
   forums: API.Forums = new API.Forums(this);
-  /**
-   * Promo codes
-   */
   promoCodes: API.PromoCodes = new API.PromoCodes(this);
-  /**
-   * Courses
-   */
   courses: API.Courses = new API.Courses(this);
-  /**
-   * Course chapters
-   */
   courseChapters: API.CourseChapters = new API.CourseChapters(this);
-  /**
-   * Course lessons
-   */
   courseLessons: API.CourseLessons = new API.CourseLessons(this);
-  /**
-   * Reviews
-   */
   reviews: API.Reviews = new API.Reviews(this);
-  /**
-   * Course students
-   */
   courseStudents: API.CourseStudents = new API.CourseStudents(this);
-  /**
-   * Access tokens
-   */
   accessTokens: API.AccessTokens = new API.AccessTokens(this);
   /**
-   * Notifications
+   * A Notification is a message delivered to a user — a new post, a payment, a mention. Every notification comes from an experience the user belongs to or a team they are on, and users control what they receive with notification preferences.
+   *
+   * Every notification belongs to a topic: the category it falls under, such as new sales or account activity. Topics carry a default, so a user only needs a preference row where they diverge from it. `GET /notifications/topics` lists the platform's visible topics, and a topic's `id` is what the notification preference endpoints take as `topic_id` — the catalog is the only place those ids come from, so read it rather than hardcoding. Each topic also carries an `identifier` such as `new-follower`, which is stable across environments and is the value to match on in code.
+   *
+   * Use the Notifications API to list the authenticated user's feed, read per-experience unread badges, mark an experience (or everything) as read, send notifications from your app to an experience's users or an account's team, and list the topic catalog.
+   *
    */
   notifications: API.Notifications = new API.Notifications(this);
   /**
-   * Disputes
+   * A Dispute is a chargeback a customer files against a payment through their bank, or an inquiry that may become one. It carries the disputed payment, a deadline to respond, your evidence, and the outcome once the processor rules.
+   *
+   * Use the Disputes API to list disputes, edit the evidence packet while a dispute is still contestable, and submit it for review.
+   *
    */
   disputes: API.Disputes = new API.Disputes(this);
-  /**
-   * Refunds
-   */
   refunds: API.Refunds = new API.Refunds(this);
-  /**
-   * Withdrawals
-   */
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
-  /**
-   * Account links
-   */
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
-  /**
-   * Setup intents
-   */
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
-  /**
-   * Payment methods
-   */
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
-  /**
-   * Fee markups
-   */
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
-  /**
-   * Payout methods
-   */
   payoutMethods: API.PayoutMethods = new API.PayoutMethods(this);
   /**
-   * Verifications
+   * A Verification represents a legal identity for a person or business. Accounts and users complete verification when Whop needs to confirm who they are before enabling payouts or compliance-sensitive workflows.
+   *
+   * Use the Verifications API to start or resume a hosted verification session, check review status, and submit requested details or documents. If `requested_information` contains items, submit answers with [Update Verification](/api-reference/beta/verifications/update-verification).
+   *
    */
   verifications: API.Verifications = new API.Verifications(this);
-  /**
-   * Leads
-   */
   leads: API.Leads = new API.Leads(this);
-  /**
-   * Topups
-   */
   topups: API.Topups = new API.Topups(this);
   /**
-   * Files
+   * A File is an uploaded document or media object, identified by a `file_` ID. Creating a file returns a presigned destination; upload the bytes there and the file becomes `ready`.
+   *
+   * Use the Files API to create a file, upload its content directly to storage (in one PUT, or in parts for large files), and retrieve it while polling for readiness. A ready file's ID can be attached wherever Whop accepts files.
+   *
    */
   files: API.Files = new API.Files(this);
-  /**
-   * Company token transactions
-   */
   companyTokenTransactions: API.CompanyTokenTransactions = new API.CompanyTokenTransactions(this);
-  /**
-   * Dm members
-   */
   dmMembers: API.DmMembers = new API.DmMembers(this);
-  /**
-   * Ai chats
-   */
   aiChats: API.AIChats = new API.AIChats(this);
-  /**
-   * Dm channels
-   */
   dmChannels: API.DmChannels = new API.DmChannels(this);
   /**
-   * Dispute alerts
+   * A Dispute alert is an early warning from a card issuer that a settled payment is being questioned, ahead of any chargeback. `type` separates fraud reports (`early_fraud_warning`), pre-dispute notices (`dispute_alert`), and Visa RDR cases the network already closed by refunding (`rapid_dispute_resolution`).
+   *
+   * Use the Dispute alerts API to list alerts for an account, filter them by type or payment, and read `actionable` to see whether refunding can still avoid the chargeback.
+   *
    */
   disputeAlerts: API.DisputeAlerts = new API.DisputeAlerts(this);
   /**
-   * Resolution center cases
+   * A Resolution Center Case is opened by a buyer when something is wrong with a purchase — an unwanted renewal, an item that never arrived, or a charge they don't recognize. It is the step before a chargeback: the two sides work it out directly, and Whop decides the case if they can't. Each case carries a reason, a status naming which side it is waiting on, a timeline of events, and the actions available to whoever is reading it.
+   *
+   * Use the Resolution Center Cases API from either side: as the buyer, open a case, reply, appeal a decision, or withdraw it; as the merchant, accept it (refunding the payment), deny it, or ask the buyer for more information. Both sides read the same case, page its timeline, and summarize the cases they can see.
+   *
    */
   resolutionCenterCases: API.ResolutionCenterCases = new API.ResolutionCenterCases(this);
-  /**
-   * Payout accounts
-   */
   payoutAccounts: API.PayoutAccounts = new API.PayoutAccounts(this);
-  /**
-   * Affiliates
-   */
   affiliates: API.Affiliates = new API.Affiliates(this);
   /**
-   * Bounties
+   * A Bounty is a paid task posted by an account or user. The reward is held in escrow when the bounty publishes, workers submit proof of completed work, and each accepted submission is paid out until every winner slot fills.
+   *
+   * Use the Bounties API to create and publish a bounty, list an account's bounties for reporting or dashboards, list the bounties a user can work or has participated in, and retrieve a single bounty by ID.
+   *
    */
   bounties: API.Bounties = new API.Bounties(this);
+  /**
+   * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
+   *
+   * Use the Ad Campaigns API to create campaigns, list campaigns for an account, retrieve or update campaign settings, and pause or resume campaign delivery.
+   *
+   */
   adCampaigns: API.AdCampaigns = new API.AdCampaigns(this);
+  /**
+   * An Ad Group sits inside an [ad campaign](/api-reference/beta/ad-campaigns/ad-campaign) and controls delivery for [ads](/api-reference/beta/ads/ad). It sets the audience, placements, schedule, budget, and optimization goal for its ads.
+   *
+   * Use the Ad Groups API to create ad groups in campaigns, list or retrieve targeting and delivery settings, update budgets or targeting, delete groups that should stop running, and pause or resume delivery. It can also search the ad platform's targeting taxonomy for options to target and estimate how many people a draft targeting spec can reach.
+   *
+   */
   adGroups: API.AdGroups = new API.AdGroups(this);
+  /**
+   * An Ad is the individual creative unit delivered by an [ad group](/api-reference/beta/ad-groups/ad-group). It holds the copy, creative assets, and destination URL for one ad.
+   *
+   * Use the Ads API to list ads for an account, create ads inside ad groups, retrieve or update creative details, delete ads that should stop running, and pause or resume delivery.
+   *
+   */
   ads: API.Ads = new API.Ads(this);
   conversions: API.Conversions = new API.Conversions(this);
-  /**
-   * Ad reports
-   */
   adReports: API.AdReports = new API.AdReports(this);
 }
 
@@ -1580,6 +1638,7 @@ export declare namespace Whop {
     type AppListResponse as AppListResponse,
     type AppListResponsesCursorPage as AppListResponsesCursorPage,
     type AppCreateParams as AppCreateParams,
+    type AppRetrieveParams as AppRetrieveParams,
     type AppUpdateParams as AppUpdateParams,
     type AppListParams as AppListParams,
   };
@@ -1605,8 +1664,10 @@ export declare namespace Whop {
     Products as Products,
     type ProductDeleteResponse as ProductDeleteResponse,
     type ProductCreateParams as ProductCreateParams,
+    type ProductRetrieveParams as ProductRetrieveParams,
     type ProductUpdateParams as ProductUpdateParams,
     type ProductListParams as ProductListParams,
+    type ProductDeleteParams as ProductDeleteParams,
   };
 
   export {
@@ -1626,68 +1687,104 @@ export declare namespace Whop {
     type APIVersion as APIVersion,
     type Webhook as Webhook,
     type WebhookEvent as WebhookEvent,
-    type WebhookCreateResponse as WebhookCreateResponse,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type AccountUpdatedWebhookEvent as AccountUpdatedWebhookEvent,
+    type AdCampaignPaymentFailedWebhookEvent as AdCampaignPaymentFailedWebhookEvent,
+    type CardCanceledWebhookEvent as CardCanceledWebhookEvent,
+    type CardCreatedWebhookEvent as CardCreatedWebhookEvent,
+    type CardFrozenWebhookEvent as CardFrozenWebhookEvent,
+    type CardUpdatedWebhookEvent as CardUpdatedWebhookEvent,
+    type CardApplicationApprovedWebhookEvent as CardApplicationApprovedWebhookEvent,
+    type CardApplicationCreatedWebhookEvent as CardApplicationCreatedWebhookEvent,
+    type CardApplicationDeniedWebhookEvent as CardApplicationDeniedWebhookEvent,
+    type CardApplicationUpdatedWebhookEvent as CardApplicationUpdatedWebhookEvent,
+    type CardTransactionCompletedWebhookEvent as CardTransactionCompletedWebhookEvent,
+    type CardTransactionCreatedWebhookEvent as CardTransactionCreatedWebhookEvent,
+    type CardTransactionDeclinedWebhookEvent as CardTransactionDeclinedWebhookEvent,
+    type CardTransactionReversedWebhookEvent as CardTransactionReversedWebhookEvent,
+    type CardTransactionUpdatedWebhookEvent as CardTransactionUpdatedWebhookEvent,
+    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
+    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
+    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
+    type DepositSucceededWebhookEvent as DepositSucceededWebhookEvent,
+    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
+    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
+    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
+    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
+    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
+    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
+    type ExportCompletedWebhookEvent as ExportCompletedWebhookEvent,
+    type ExportFailedWebhookEvent as ExportFailedWebhookEvent,
+    type IdentityProfileUpdatedWebhookEvent as IdentityProfileUpdatedWebhookEvent,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
     type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,
     type InvoicePaidWebhookEvent as InvoicePaidWebhookEvent,
     type InvoicePastDueWebhookEvent as InvoicePastDueWebhookEvent,
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
+    type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
+    type MemberCreatedWebhookEvent as MemberCreatedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
+    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,
     type MembershipTrialEndingSoonWebhookEvent as MembershipTrialEndingSoonWebhookEvent,
-    type EntryCreatedWebhookEvent as EntryCreatedWebhookEvent,
-    type EntryApprovedWebhookEvent as EntryApprovedWebhookEvent,
-    type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
-    type EntryDeletedWebhookEvent as EntryDeletedWebhookEvent,
-    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
-    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
-    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
-    type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
-    type CardTransactionCreatedWebhookEvent as CardTransactionCreatedWebhookEvent,
-    type CardTransactionUpdatedWebhookEvent as CardTransactionUpdatedWebhookEvent,
-    type CardTransactionCompletedWebhookEvent as CardTransactionCompletedWebhookEvent,
-    type CardTransactionDeclinedWebhookEvent as CardTransactionDeclinedWebhookEvent,
-    type CardTransactionReversedWebhookEvent as CardTransactionReversedWebhookEvent,
-    type CourseLessonInteractionCompletedWebhookEvent as CourseLessonInteractionCompletedWebhookEvent,
-    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
-    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
-    type IdentityProfileUpdatedWebhookEvent as IdentityProfileUpdatedWebhookEvent,
-    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
     type PaymentAuthorizedWebhookEvent as PaymentAuthorizedWebhookEvent,
     type PaymentCanceledWebhookEvent as PaymentCanceledWebhookEvent,
-    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
-    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
-    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
+    type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
+    type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
+    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
+    type PayoutCreatedWebhookEvent as PayoutCreatedWebhookEvent,
+    type PayoutReversedWebhookEvent as PayoutReversedWebhookEvent,
+    type PayoutUpdatedWebhookEvent as PayoutUpdatedWebhookEvent,
+    type PayoutAccountStatusUpdatedWebhookEvent as PayoutAccountStatusUpdatedWebhookEvent,
+    type PayoutMethodCreatedWebhookEvent as PayoutMethodCreatedWebhookEvent,
+    type PlanCreatedWebhookEvent as PlanCreatedWebhookEvent,
+    type PlanDeletedWebhookEvent as PlanDeletedWebhookEvent,
+    type PlanUpdatedWebhookEvent as PlanUpdatedWebhookEvent,
     type ProductCreatedWebhookEvent as ProductCreatedWebhookEvent,
-    type ProductUpdatedWebhookEvent as ProductUpdatedWebhookEvent,
     type ProductDeletedWebhookEvent as ProductDeletedWebhookEvent,
     type ProductPublishedWebhookEvent as ProductPublishedWebhookEvent,
     type ProductUnpublishedWebhookEvent as ProductUnpublishedWebhookEvent,
-    type ShipmentCreatedWebhookEvent as ShipmentCreatedWebhookEvent,
-    type ShipmentUpdatedWebhookEvent as ShipmentUpdatedWebhookEvent,
-    type MemberCreatedWebhookEvent as MemberCreatedWebhookEvent,
-    type ChatMessageCreatedWebhookEvent as ChatMessageCreatedWebhookEvent,
-    type ChatReactionCreatedWebhookEvent as ChatReactionCreatedWebhookEvent,
-    type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
-    type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
-    type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
-    type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
-    type DisputeCreatedWebhookEvent as DisputeCreatedWebhookEvent,
-    type DisputeUpdatedWebhookEvent as DisputeUpdatedWebhookEvent,
+    type ProductUpdatedWebhookEvent as ProductUpdatedWebhookEvent,
     type RefundCreatedWebhookEvent as RefundCreatedWebhookEvent,
     type RefundUpdatedWebhookEvent as RefundUpdatedWebhookEvent,
-    type DisputeAlertCreatedWebhookEvent as DisputeAlertCreatedWebhookEvent,
-    type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
+    type ResolutionCenterCaseCreatedWebhookEvent as ResolutionCenterCaseCreatedWebhookEvent,
+    type ResolutionCenterCaseDecidedWebhookEvent as ResolutionCenterCaseDecidedWebhookEvent,
+    type ResolutionCenterCaseUpdatedWebhookEvent as ResolutionCenterCaseUpdatedWebhookEvent,
+    type SetupIntentCanceledWebhookEvent as SetupIntentCanceledWebhookEvent,
+    type SetupIntentRequiresActionWebhookEvent as SetupIntentRequiresActionWebhookEvent,
+    type SetupIntentSucceededWebhookEvent as SetupIntentSucceededWebhookEvent,
+    type ShipmentCreatedWebhookEvent as ShipmentCreatedWebhookEvent,
+    type ShipmentUpdatedWebhookEvent as ShipmentUpdatedWebhookEvent,
+    type SwapCompletedWebhookEvent as SwapCompletedWebhookEvent,
+    type TransferCompletedWebhookEvent as TransferCompletedWebhookEvent,
+    type TransferCreatedWebhookEvent as TransferCreatedWebhookEvent,
+    type TransferFailedWebhookEvent as TransferFailedWebhookEvent,
+    type VerificationSucceededWebhookEvent as VerificationSucceededWebhookEvent,
     type UnwrapWebhookEvent as UnwrapWebhookEvent,
     type WebhookListResponsesCursorPage as WebhookListResponsesCursorPage,
     type WebhookCreateParams as WebhookCreateParams,
+    type WebhookRetrieveParams as WebhookRetrieveParams,
     type WebhookUpdateParams as WebhookUpdateParams,
     type WebhookListParams as WebhookListParams,
+    type WebhookDeleteParams as WebhookDeleteParams,
   };
 
-  export { Plans as Plans, type CheckoutFont as CheckoutFont, type CheckoutShape as CheckoutShape };
+  export {
+    Plans as Plans,
+    type CheckoutFont as CheckoutFont,
+    type CheckoutShape as CheckoutShape,
+    type PlanListResponse as PlanListResponse,
+    type PlanDeleteResponse as PlanDeleteResponse,
+    type PlanListResponsesCursorPage as PlanListResponsesCursorPage,
+    type PlanCreateParams as PlanCreateParams,
+    type PlanRetrieveParams as PlanRetrieveParams,
+    type PlanUpdateParams as PlanUpdateParams,
+    type PlanListParams as PlanListParams,
+    type PlanDeleteParams as PlanDeleteParams,
+  };
 
   export {
     Entries as Entries,
@@ -1707,7 +1804,16 @@ export declare namespace Whop {
     type ForumPostListParams as ForumPostListParams,
   };
 
-  export { Transfers as Transfers };
+  export {
+    Transfers as Transfers,
+    type TransferCreateResponse as TransferCreateResponse,
+    type TransferRetrieveResponse as TransferRetrieveResponse,
+    type TransferListResponse as TransferListResponse,
+    type TransferListResponsesCursorPage as TransferListResponsesCursorPage,
+    type TransferCreateParams as TransferCreateParams,
+    type TransferRetrieveParams as TransferRetrieveParams,
+    type TransferListParams as TransferListParams,
+  };
 
   export {
     LedgerAccounts as LedgerAccounts,
@@ -1717,13 +1823,13 @@ export declare namespace Whop {
   export {
     Memberships as Memberships,
     type CancelOptions as CancelOptions,
-    type MembershipListResponse as MembershipListResponse,
-    type MembershipListResponsesCursorPage as MembershipListResponsesCursorPage,
+    type MembershipRetrieveParams as MembershipRetrieveParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
     type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
+    type MembershipResumeParams as MembershipResumeParams,
   };
 
   export {
@@ -1739,26 +1845,28 @@ export declare namespace Whop {
 
   export {
     AppBuilds as AppBuilds,
-    type AppBuildListResponse as AppBuildListResponse,
-    type AppBuildListResponsesCursorPage as AppBuildListResponsesCursorPage,
     type AppBuildCreateParams as AppBuildCreateParams,
+    type AppBuildRetrieveParams as AppBuildRetrieveParams,
     type AppBuildListParams as AppBuildListParams,
+    type AppBuildPromoteParams as AppBuildPromoteParams,
   };
 
   export {
     Shipments as Shipments,
-    type ShipmentListResponse as ShipmentListResponse,
-    type ShipmentListResponsesCursorPage as ShipmentListResponsesCursorPage,
     type ShipmentCreateParams as ShipmentCreateParams,
+    type ShipmentRetrieveParams as ShipmentRetrieveParams,
     type ShipmentListParams as ShipmentListParams,
   };
 
   export {
     CheckoutConfigurations as CheckoutConfigurations,
     type CheckoutModes as CheckoutModes,
+    type CheckoutConfigurationCreateResponse as CheckoutConfigurationCreateResponse,
+    type CheckoutConfigurationRetrieveResponse as CheckoutConfigurationRetrieveResponse,
     type CheckoutConfigurationListResponse as CheckoutConfigurationListResponse,
     type CheckoutConfigurationListResponsesCursorPage as CheckoutConfigurationListResponsesCursorPage,
     type CheckoutConfigurationCreateParams as CheckoutConfigurationCreateParams,
+    type CheckoutConfigurationRetrieveParams as CheckoutConfigurationRetrieveParams,
     type CheckoutConfigurationListParams as CheckoutConfigurationListParams,
   };
 
@@ -1780,7 +1888,16 @@ export declare namespace Whop {
     type ChatChannelListParams as ChatChannelListParams,
   };
 
-  export { Users as Users };
+  export {
+    Users as Users,
+    type User as User,
+    type UserCheckAccessResponse as UserCheckAccessResponse,
+    type UsersCursorPage as UsersCursorPage,
+    type UserRetrieveParams as UserRetrieveParams,
+    type UserUpdateParams as UserUpdateParams,
+    type UserListParams as UserListParams,
+    type UserCheckAccessParams as UserCheckAccessParams,
+  };
 
   export {
     Payments as Payments,
@@ -1836,6 +1953,7 @@ export declare namespace Whop {
     type MemberRetrieveResponse as MemberRetrieveResponse,
     type MemberListResponse as MemberListResponse,
     type MemberListResponsesCursorPage as MemberListResponsesCursorPage,
+    type MemberRetrieveParams as MemberRetrieveParams,
     type MemberListParams as MemberListParams,
   };
 
@@ -1856,7 +1974,9 @@ export declare namespace Whop {
     type PromoCodeDeleteResponse as PromoCodeDeleteResponse,
     type PromoCodeListResponsesCursorPage as PromoCodeListResponsesCursorPage,
     type PromoCodeCreateParams as PromoCodeCreateParams,
+    type PromoCodeRetrieveParams as PromoCodeRetrieveParams,
     type PromoCodeListParams as PromoCodeListParams,
+    type PromoCodeDeleteParams as PromoCodeDeleteParams,
   };
 
   export {
@@ -1935,8 +2055,8 @@ export declare namespace Whop {
     Disputes as Disputes,
     type Dispute as Dispute,
     type DisputeStatuses as DisputeStatuses,
-    type DisputeListResponse as DisputeListResponse,
-    type DisputeListResponsesCursorPage as DisputeListResponsesCursorPage,
+    type DisputesCursorPage as DisputesCursorPage,
+    type DisputeRetrieveParams as DisputeRetrieveParams,
     type DisputeListParams as DisputeListParams,
     type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
   };
@@ -1953,17 +2073,7 @@ export declare namespace Whop {
     type RefundListParams as RefundListParams,
   };
 
-  export {
-    Withdrawals as Withdrawals,
-    type Withdrawal as Withdrawal,
-    type WithdrawalFeeTypes as WithdrawalFeeTypes,
-    type WithdrawalSpeeds as WithdrawalSpeeds,
-    type WithdrawalStatus as WithdrawalStatus,
-    type WithdrawalListResponse as WithdrawalListResponse,
-    type WithdrawalListResponsesCursorPage as WithdrawalListResponsesCursorPage,
-    type WithdrawalCreateParams as WithdrawalCreateParams,
-    type WithdrawalListParams as WithdrawalListParams,
-  };
+  export { Withdrawals as Withdrawals };
 
   export {
     AccountLinks as AccountLinks,
@@ -2015,7 +2125,7 @@ export declare namespace Whop {
     type VerificationStatus as VerificationStatus,
     type VerificationRetrieveResponse as VerificationRetrieveResponse,
     type VerificationListResponse as VerificationListResponse,
-    type VerificationListResponsesCursorPage as VerificationListResponsesCursorPage,
+    type VerificationRetrieveParams as VerificationRetrieveParams,
     type VerificationListParams as VerificationListParams,
   };
 
@@ -2042,6 +2152,7 @@ export declare namespace Whop {
     type FileCreateResponse as FileCreateResponse,
     type FileRetrieveResponse as FileRetrieveResponse,
     type FileCreateParams as FileCreateParams,
+    type FileRetrieveParams as FileRetrieveParams,
   };
 
   export {
@@ -2096,6 +2207,7 @@ export declare namespace Whop {
     type DisputeAlertRetrieveResponse as DisputeAlertRetrieveResponse,
     type DisputeAlertListResponse as DisputeAlertListResponse,
     type DisputeAlertListResponsesCursorPage as DisputeAlertListResponsesCursorPage,
+    type DisputeAlertRetrieveParams as DisputeAlertRetrieveParams,
     type DisputeAlertListParams as DisputeAlertListParams,
   };
 
@@ -2109,6 +2221,7 @@ export declare namespace Whop {
     type ResolutionCenterCaseRetrieveResponse as ResolutionCenterCaseRetrieveResponse,
     type ResolutionCenterCaseListResponse as ResolutionCenterCaseListResponse,
     type ResolutionCenterCaseListResponsesCursorPage as ResolutionCenterCaseListResponsesCursorPage,
+    type ResolutionCenterCaseRetrieveParams as ResolutionCenterCaseRetrieveParams,
     type ResolutionCenterCaseListParams as ResolutionCenterCaseListParams,
   };
 
@@ -2137,14 +2250,43 @@ export declare namespace Whop {
     type BountyListResponse as BountyListResponse,
     type BountyListResponsesCursorPage as BountyListResponsesCursorPage,
     type BountyCreateParams as BountyCreateParams,
+    type BountyRetrieveParams as BountyRetrieveParams,
     type BountyListParams as BountyListParams,
   };
 
-  export { AdCampaigns as AdCampaigns };
+  export {
+    AdCampaigns as AdCampaigns,
+    type AdCampaign as AdCampaign,
+    type AdCampaignsCursorPage as AdCampaignsCursorPage,
+    type AdCampaignRetrieveParams as AdCampaignRetrieveParams,
+    type AdCampaignUpdateParams as AdCampaignUpdateParams,
+    type AdCampaignListParams as AdCampaignListParams,
+    type AdCampaignPauseParams as AdCampaignPauseParams,
+    type AdCampaignUnpauseParams as AdCampaignUnpauseParams,
+  };
 
-  export { AdGroups as AdGroups };
+  export {
+    AdGroups as AdGroups,
+    type AdGroup as AdGroup,
+    type AdGroupDeleteResponse as AdGroupDeleteResponse,
+    type AdGroupsCursorPage as AdGroupsCursorPage,
+    type AdGroupRetrieveParams as AdGroupRetrieveParams,
+    type AdGroupUpdateParams as AdGroupUpdateParams,
+    type AdGroupListParams as AdGroupListParams,
+    type AdGroupDeleteParams as AdGroupDeleteParams,
+    type AdGroupPauseParams as AdGroupPauseParams,
+    type AdGroupUnpauseParams as AdGroupUnpauseParams,
+  };
 
-  export { Ads as Ads };
+  export {
+    Ads as Ads,
+    type Ad as Ad,
+    type AdsCursorPage as AdsCursorPage,
+    type AdRetrieveParams as AdRetrieveParams,
+    type AdListParams as AdListParams,
+    type AdPauseParams as AdPauseParams,
+    type AdUnpauseParams as AdUnpauseParams,
+  };
 
   export { Conversions as Conversions };
 
@@ -2193,6 +2335,7 @@ export declare namespace Whop {
   export type Message = API.Message;
   export type PageInfo = API.PageInfo;
   export type Payment = API.Payment;
+  export type Plan = API.Plan;
   export type PlanType = API.PlanType;
   export type Product = API.Product;
   export type ProductListItem = API.ProductListItem;

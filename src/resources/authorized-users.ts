@@ -7,9 +7,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Authorized users
- */
 export class AuthorizedUsers extends APIResource {
   /**
    * Add a new authorized user to a company.

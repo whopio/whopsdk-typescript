@@ -6,9 +6,6 @@ import { CursorPage, type CursorPageParams, PagePromise } from '../core/paginati
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
-/**
- * Dm channels
- */
 export class DmChannels extends APIResource {
   /**
    * Create a new DM channel between two or more users, optionally scoped to a

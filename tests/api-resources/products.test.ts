@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource products', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.products.create({ company_id: 'biz_xxxxxxxxxxxxxx', title: 'title' });
+    const responsePromise = client.products.create({ title: 'Interior Deep Clean' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,50 +23,33 @@ describe('resource products', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.products.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      title: 'title',
-      collect_shipping_address: true,
-      custom_cta: 'get_access',
-      custom_cta_url: 'custom_cta_url',
-      custom_statement_descriptor: 'custom_statement_descriptor',
-      description: 'description',
-      experience_ids: ['string'],
-      global_affiliate_percentage: 6.9,
+      title: 'Interior Deep Clean',
+      account_id: 'biz_xxxxxxxxxxxxxx',
+      collect_shipping_address: false,
+      custom_cta: 'order_now',
+      custom_cta_url: 'https://shinetime.example/book',
+      custom_statement_descriptor: 'WHOP*SHINETIME',
+      description: 'Full interior extraction, leather conditioning, and an ozone odor treatment.',
+      global_affiliate_percentage: 10,
       global_affiliate_status: 'enabled',
-      headline: 'headline',
-      member_affiliate_percentage: 6.9,
+      headline: 'Steam, shampoo, and odor removal in one visit',
+      labels: ['interior'],
+      member_affiliate_percentage: 5,
       member_affiliate_status: 'enabled',
-      metadata: { foo: 'bar' },
-      plan_options: {
-        base_currency: 'usd',
-        billing_period: 42,
-        custom_fields: [
-          {
-            field_type: 'text',
-            name: 'name',
-            id: 'id',
-            order: 42,
-            placeholder: 'placeholder',
-            required: true,
-          },
-        ],
-        initial_price: 6.9,
-        plan_type: 'renewal',
-        release_method: 'buy_now',
-        renewal_price: 6.9,
-        visibility: 'visible',
-      },
+      metadata: { bay: '1', duration_hours: '4' },
       product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-      redirect_purchase_url: 'redirect_purchase_url',
-      route: 'route',
+      redirect_purchase_url: 'https://shinetime.example/thanks',
+      route: 'interior-deep-clean',
       send_welcome_message: true,
       visibility: 'visible',
+      'Api-Version-Date': '2026-08-25-2',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.products.retrieve('prod_xxxxxxxxxxxxx');
+    const responsePromise = client.products.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -74,11 +57,23 @@ describe('resource products', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.products.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
   test.skip('update', async () => {
-    const responsePromise = client.products.update('prod_xxxxxxxxxxxxx');
+    const responsePromise = client.products.update('id', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -89,31 +84,41 @@ describe('resource products', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('update: request options and params are passed correctly', async () => {
+  test.skip('list', async () => {
+    const responsePromise = client.products.list();
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.products.update(
-        'prod_xxxxxxxxxxxxx',
+      client.products.list(
         {
-          collect_shipping_address: true,
-          custom_cta: 'get_access',
-          custom_cta_url: 'custom_cta_url',
-          custom_statement_descriptor: 'custom_statement_descriptor',
-          description: 'description',
-          gallery_images: [{ id: 'id' }],
-          global_affiliate_percentage: 6.9,
-          global_affiliate_status: 'enabled',
-          headline: 'headline',
-          member_affiliate_percentage: 6.9,
-          member_affiliate_status: 'enabled',
-          metadata: { foo: 'bar' },
-          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-          redirect_purchase_url: 'redirect_purchase_url',
-          route: 'route',
-          send_welcome_message: true,
-          store_page_config: { custom_cta: 'custom_cta', show_price: true },
-          title: 'title',
-          visibility: 'visible',
+          access_pass_types: ['regular'],
+          account_id: 'account_id',
+          after: 'after',
+          before: 'before',
+          created_after: 'created_after',
+          created_before: 'created_before',
+          direction: 'asc',
+          first: 0,
+          labels: ['string'],
+          last: 0,
+          marketplace_category_route: 'marketplace_category_route',
+          order: 'order',
+          plan_types: ['renewal'],
+          price_maximum: 0,
+          price_minimum: 0,
+          query: 'query',
+          visibilities: ['visible'],
+          'Api-Version-Date': '2026-08-25-2',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -121,37 +126,8 @@ describe('resource products', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.products.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.products.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-      order: 'active_memberships_count',
-      product_types: ['regular'],
-      visibilities: ['visible'],
-    });
-  });
-
-  // Mock server tests are disabled
   test.skip('delete', async () => {
-    const responsePromise = client.products.delete('prod_xxxxxxxxxxxxx');
+    const responsePromise = client.products.delete('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -159,5 +135,17 @@ describe('resource products', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('delete: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.products.delete(
+        'id',
+        { 'Api-Version-Date': '2026-08-25-2' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });
