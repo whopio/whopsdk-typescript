@@ -242,7 +242,10 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { platform: "meta_business" };
+        const rawRequestBody = {
+            platform: "meta_business",
+            redirect_url: "https://example.com/settings/social-accounts",
+        };
         const rawResponseBody = { authorize_url: "https://www.facebook.com/v25.0/dialog/oauth" };
 
         server
@@ -256,6 +259,7 @@ describe("SocialAccountsClient", () => {
 
         const response = await client.socialAccounts.connect({
             platform: "meta_business",
+            redirect_url: "https://example.com/settings/social-accounts",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -269,7 +273,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { platform: "meta_business" };
+        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -284,6 +288,7 @@ describe("SocialAccountsClient", () => {
         await expect(async () => {
             return await client.socialAccounts.connect({
                 platform: "meta_business",
+                redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -297,7 +302,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { platform: "meta_business" };
+        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -312,6 +317,7 @@ describe("SocialAccountsClient", () => {
         await expect(async () => {
             return await client.socialAccounts.connect({
                 platform: "meta_business",
+                redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -325,7 +331,7 @@ describe("SocialAccountsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { platform: "meta_business" };
+        const rawRequestBody = { platform: "meta_business", redirect_url: "redirect_url" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -340,6 +346,7 @@ describe("SocialAccountsClient", () => {
         await expect(async () => {
             return await client.socialAccounts.connect({
                 platform: "meta_business",
+                redirect_url: "redirect_url",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

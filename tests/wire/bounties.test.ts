@@ -39,10 +39,13 @@ describe("BountiesClient", () => {
                     gross_reward_amount: 15,
                     hosting_account: {
                         id: "biz_xxxxxxxxxxxxxx",
-                        route: "biz_xxxxxxxxxxxxxx",
+                        logo_url:
+                            "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        route: "shine-time-auto-detailing",
                         title: "Shine Time Auto Detailing",
                     },
                     id: "bnty_xxxxxxxxxxxxxx",
+                    min_total_verified_duration_seconds: 1,
                     net_reward_amount: 10.5,
                     poster: {
                         id: "user_xxxxxxxxxxxxxx",
@@ -226,10 +229,13 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
+            min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
                 id: "user_xxxxxxxxxxxxxx",
@@ -434,10 +440,13 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
+            min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
                 id: "user_xxxxxxxxxxxxxx",
@@ -564,10 +573,13 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
+            min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
                 id: "user_xxxxxxxxxxxxxx",
@@ -708,10 +720,13 @@ describe("BountiesClient", () => {
             gross_reward_amount: 40,
             hosting_account: {
                 id: "biz_xxxxxxxxxxxxxx",
-                route: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
             id: "bnty_xxxxxxxxxxxxxx",
+            min_total_verified_duration_seconds: 14400,
             net_reward_amount: 28,
             poster: {
                 id: "user_xxxxxxxxxxxxxx",

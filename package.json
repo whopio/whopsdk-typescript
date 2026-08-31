@@ -132,6 +132,17 @@
             },
             "default": "./dist/cjs/api/resources/apiKeys/exports.js"
         },
+        "./apiLogs": {
+            "import": {
+                "types": "./dist/esm/api/resources/apiLogs/exports.d.mts",
+                "default": "./dist/esm/api/resources/apiLogs/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/apiLogs/exports.d.ts",
+                "default": "./dist/cjs/api/resources/apiLogs/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/apiLogs/exports.js"
+        },
         "./appBuilds": {
             "import": {
                 "types": "./dist/esm/api/resources/appBuilds/exports.d.mts",
@@ -263,6 +274,17 @@
                 "default": "./dist/cjs/api/resources/companyTokenTransactions/exports.js"
             },
             "default": "./dist/cjs/api/resources/companyTokenTransactions/exports.js"
+        },
+        "./confirmationTokens": {
+            "import": {
+                "types": "./dist/esm/api/resources/confirmationTokens/exports.d.mts",
+                "default": "./dist/esm/api/resources/confirmationTokens/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/confirmationTokens/exports.d.ts",
+                "default": "./dist/cjs/api/resources/confirmationTokens/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/confirmationTokens/exports.js"
         },
         "./courseChapters": {
             "import": {

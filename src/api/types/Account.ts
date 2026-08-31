@@ -85,9 +85,9 @@ export interface Account {
     social_links: Whop.AccountSocialLink[];
     /** Whether the account settles on stablecoin rails — its balance is held on-chain as USDT and paid out over crypto, rather than as fiat cash. */
     stablecoin_rails: boolean;
-    /** Whether the account can operate on Whop: `active` or `suspended`. Computed on `list`, `retrieve`, and `me`; `null` otherwise. */
+    /** Whether the account can operate on Whop: `active` or `suspended`. Computed on `list`, `retrieve`, `me`, and `suspend`; `null` otherwise. */
     status: string | null;
-    /** Why the account was suspended, in language safe to show the account owner. Computed only on `retrieve` and `me`; `null` otherwise, when `status` is not `suspended`, and when the suspension was recorded without a reason. */
+    /** Why the account was suspended, in language safe to show the account owner. Computed on `retrieve`, `me`, and `suspend`; `null` otherwise, when `status` is not `suspended`, and when the suspension was recorded without a reason. */
     status_reason: string | null;
     /** Account store page display configuration. */
     store_page_config: Whop.AccountStorePageConfig;

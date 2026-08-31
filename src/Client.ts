@@ -10,6 +10,7 @@ import { AdsClient } from "./api/resources/ads/client/Client.js";
 import { AffiliatesClient } from "./api/resources/affiliates/client/Client.js";
 import { AiChatsClient } from "./api/resources/aiChats/client/Client.js";
 import { ApiKeysClient } from "./api/resources/apiKeys/client/Client.js";
+import { ApiLogsClient } from "./api/resources/apiLogs/client/Client.js";
 import { AppBuildsClient } from "./api/resources/appBuilds/client/Client.js";
 import { AppsClient } from "./api/resources/apps/client/Client.js";
 import { AudiencesClient } from "./api/resources/audiences/client/Client.js";
@@ -22,6 +23,7 @@ import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.j
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
 import { CompaniesClient } from "./api/resources/companies/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
+import { ConfirmationTokensClient } from "./api/resources/confirmationTokens/client/Client.js";
 import { CourseChaptersClient } from "./api/resources/courseChapters/client/Client.js";
 import { CourseLessonInteractionsClient } from "./api/resources/courseLessonInteractions/client/Client.js";
 import { CourseLessonsClient } from "./api/resources/courseLessons/client/Client.js";
@@ -102,6 +104,7 @@ export class WhopClient {
     protected _affiliates: AffiliatesClient | undefined;
     protected _aiChats: AiChatsClient | undefined;
     protected _apiKeys: ApiKeysClient | undefined;
+    protected _apiLogs: ApiLogsClient | undefined;
     protected _appBuilds: AppBuildsClient | undefined;
     protected _apps: AppsClient | undefined;
     protected _audiences: AudiencesClient | undefined;
@@ -114,6 +117,7 @@ export class WhopClient {
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
     protected _companies: CompaniesClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
+    protected _confirmationTokens: ConfirmationTokensClient | undefined;
     protected _courseChapters: CourseChaptersClient | undefined;
     protected _courseLessonInteractions: CourseLessonInteractionsClient | undefined;
     protected _courseLessons: CourseLessonsClient | undefined;
@@ -217,6 +221,10 @@ export class WhopClient {
         return (this._apiKeys ??= new ApiKeysClient(this._options));
     }
 
+    public get apiLogs(): ApiLogsClient {
+        return (this._apiLogs ??= new ApiLogsClient(this._options));
+    }
+
     public get appBuilds(): AppBuildsClient {
         return (this._appBuilds ??= new AppBuildsClient(this._options));
     }
@@ -263,6 +271,10 @@ export class WhopClient {
 
     public get companyTokenTransactions(): CompanyTokenTransactionsClient {
         return (this._companyTokenTransactions ??= new CompanyTokenTransactionsClient(this._options));
+    }
+
+    public get confirmationTokens(): ConfirmationTokensClient {
+        return (this._confirmationTokens ??= new ConfirmationTokensClient(this._options));
     }
 
     public get courseChapters(): CourseChaptersClient {

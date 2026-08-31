@@ -3,13 +3,14 @@
 /**
  * @example
  *     {
- *         id: "id",
- *         nickname: "Primary checking"
+ *         id: "id"
  *     }
  */
 export interface UpdateMethodsRequest {
     /** Payout method ID, prefixed `potk_`. */
     id: string;
+    /** Set to `true` to make this the account's default payout method. `false` is not accepted. */
+    is_default?: boolean;
     /** New label for the payout method, with at least one non-whitespace character and a maximum of 100 characters. */
-    nickname: string;
+    nickname?: string;
 }

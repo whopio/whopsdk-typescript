@@ -358,6 +358,7 @@ describe("PaymentsClient", () => {
                 },
             ],
             failure_message: "failure_message",
+            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
             financing_installments_count: 42,
             financing_transactions: [
                 {
@@ -810,6 +811,7 @@ describe("PaymentsClient", () => {
                 },
             ],
             failure_message: "failure_message",
+            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
             financing_installments_count: 42,
             financing_transactions: [
                 {
@@ -1491,6 +1493,7 @@ describe("PaymentsClient", () => {
                 },
             ],
             failure_message: "failure_message",
+            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
             financing_installments_count: 42,
             financing_transactions: [
                 {
@@ -1882,6 +1885,7 @@ describe("PaymentsClient", () => {
                 },
             ],
             failure_message: "failure_message",
+            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
             financing_installments_count: 42,
             financing_transactions: [
                 {
@@ -2265,6 +2269,7 @@ describe("PaymentsClient", () => {
                 },
             ],
             failure_message: "failure_message",
+            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
             financing_installments_count: 42,
             financing_transactions: [
                 {

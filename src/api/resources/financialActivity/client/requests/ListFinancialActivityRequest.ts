@@ -21,6 +21,8 @@ export interface ListFinancialActivityRequest {
     direction?: Whop.ListFinancialActivityRequestDirection;
     /** Optional prefixed resource ID. Returns activity associated with that resource. */
     resource_id?: string;
+    /** Optional ledger activity ID (for example `line_3`). Returns at most that one activity. */
+    activity_id?: string;
     /** Optional currency code filter, for example `usd`. */
     currency?: string;
     /** Only include rows posted after this ISO 8601 timestamp. */

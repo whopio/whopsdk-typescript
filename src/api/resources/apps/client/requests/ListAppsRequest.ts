@@ -21,7 +21,7 @@ export interface ListAppsRequest {
     recommended?: boolean;
     /** A search string matched against app names. */
     query?: string;
-    /** The field to sort apps by. Defaults to discoverable_at, showing the most recently published apps first. `template_usage` ranks Whop-verified apps first, then apps with a banner image, then by how many apps were created from each app as a template. */
+    /** The field to sort apps by. Defaults to discoverable_at, showing the most recently published apps first. `template_usage` ranks Whop-verified apps first, then by how many businesses created apps from each app as a template. */
     order?: Whop.ListAppsRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListAppsRequestDirection;

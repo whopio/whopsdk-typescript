@@ -71,6 +71,7 @@ export const PermissionAction = {
     CompanyTransferOwnership: "company:transfer_ownership",
     CompanyCreate: "company:create",
     CompanyCreateChild: "company:create_child",
+    CompanySuspendChild: "company:suspend_child",
     CompanyDelete: "company:delete",
     CompanyDeleteChild: "company:delete_child",
     CompanyUpdateChildFees: "company:update_child_fees",
