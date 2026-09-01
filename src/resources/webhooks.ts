@@ -10521,6 +10521,14 @@ export namespace PayoutMethodCreatedWebhookEvent {
       instant: Quote.Instant | null;
 
       /**
+       * Why instant delivery is unavailable for this method.
+       * `minimum_crypto_sales_not_met` means the account has not reached the total sales
+       * required for instant cryptocurrency payouts. `null` when this restriction does
+       * not apply.
+       */
+      instant_unavailable_reason: 'minimum_crypto_sales_not_met' | null;
+
+      /**
        * Maximum payout amount for this method, in the payout currency.
        */
       max_limit: number | null;
