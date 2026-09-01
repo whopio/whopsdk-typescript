@@ -49,7 +49,7 @@ describe('resource bounties', () => {
       frequency: 'weekly',
       publish_at: '2026-01-01T12:00:00.000Z',
       publish_at_timezone: 'America/Chicago',
-      'Api-Version-Date': '2026-08-25-2',
+      'Api-Version-Date': '2026-08-31',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -72,7 +72,7 @@ describe('resource bounties', () => {
     await expect(
       client.bounties.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-25-2' },
+        { 'Api-Version-Date': '2026-08-31' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -111,7 +111,7 @@ describe('resource bounties', () => {
           query: 'query',
           status: 'scheduled',
           user_id: 'user_id',
-          'Api-Version-Date': '2026-08-25-2',
+          'Api-Version-Date': '2026-08-31',
         },
         { path: '/_stainless_unknown_path' },
       ),

@@ -29,7 +29,7 @@ describe('resource shipments', () => {
       payment_id: 'pay_xxxxxxxxxxxxxx',
       tracking_number: '1Z999AA10123456784',
       account_id: 'biz_xxxxxxxxxxxxxx',
-      'Api-Version-Date': '2026-08-25-2',
+      'Api-Version-Date': '2026-08-31',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -52,7 +52,7 @@ describe('resource shipments', () => {
     await expect(
       client.shipments.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-25-2' },
+        { 'Api-Version-Date': '2026-08-31' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -87,7 +87,7 @@ describe('resource shipments', () => {
           order: 'created_at',
           payment_id: ['pay_xxxxxxxxxxxxxx'],
           status: 'unknown',
-          'Api-Version-Date': '2026-08-25-2',
+          'Api-Version-Date': '2026-08-31',
         },
         { path: '/_stainless_unknown_path' },
       ),

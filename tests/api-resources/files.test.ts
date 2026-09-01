@@ -27,7 +27,7 @@ describe('resource files', () => {
       byte_size: 15728640,
       multipart: true,
       visibility: 'public',
-      'Api-Version-Date': '2026-08-25-2',
+      'Api-Version-Date': '2026-08-31',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -48,11 +48,7 @@ describe('resource files', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.files.retrieve(
-        'id',
-        { 'Api-Version-Date': '2026-08-25-2' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.files.retrieve('id', { 'Api-Version-Date': '2026-08-31' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 });

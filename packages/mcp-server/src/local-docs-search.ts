@@ -1185,7 +1185,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.whop.com/api/v1/webhooks \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "url": "https://example.com/hooks",\n          "api_version_date": "2026-08-25-2",\n          "child_resource_events": true,\n          "enabled": true,\n          "resource_id": "biz_xxxxxxxxxxxxxx"\n        }\'',
+          'curl https://api.whop.com/api/v1/webhooks \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "url": "https://example.com/hooks",\n          "api_version_date": "2026-01-01",\n          "child_resource_events": true,\n          "enabled": true,\n          "resource_id": "biz_xxxxxxxxxxxxxx"\n        }\'',
       },
     },
   },
@@ -1264,7 +1264,7 @@ const EMBEDDED_METHODS: MethodEntry[] = [
       },
       http: {
         example:
-          'curl https://api.whop.com/api/v1/webhooks/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "api_version_date": "2026-08-25-2",\n          "child_resource_events": true,\n          "enabled": false,\n          "url": "https://example.com/shine-time/whop-updated"\n        }\'',
+          'curl https://api.whop.com/api/v1/webhooks/$ID \\\n    -X PATCH \\\n    -H \'Content-Type: application/json\' \\\n    -H "Authorization: Bearer $WHOP_API_KEY" \\\n    -d \'{\n          "api_version_date": "2026-01-01",\n          "child_resource_events": true,\n          "enabled": false,\n          "url": "https://example.com/shine-time/whop-updated"\n        }\'',
       },
     },
   },
