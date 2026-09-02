@@ -531,6 +531,12 @@ export interface Ad {
    * Defaults to true.
    */
   multi_advertiser_ads?: boolean;
+
+  /**
+   * The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null`
+   * elsewhere and for non-carousel ads.
+   */
+  music?: Ad.Music | null;
 }
 
 export namespace Ad {
@@ -883,6 +889,27 @@ export namespace Ad {
      * Greeting shown when the conversation opens.
      */
     message: string | null;
+  }
+
+  /**
+   * The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null`
+   * elsewhere and for non-carousel ads.
+   */
+  export interface Music {
+    /**
+     * The music attachment's file id.
+     */
+    id: string;
+
+    /**
+     * The uploaded file's name.
+     */
+    name: string | null;
+
+    /**
+     * CDN url of the MP3.
+     */
+    url: string | null;
   }
 }
 
