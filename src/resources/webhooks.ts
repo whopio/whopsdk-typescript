@@ -6630,6 +6630,7 @@ export namespace DepositSucceededWebhookEvent {
       | 'misc_purchase'
       | 'misc_refund'
       | 'misc_reversal'
+      | 'onboarding_reward'
       | 'onchain_deposit'
       | 'onchain_swap_source'
       | 'onchain_swap_target'
@@ -6720,6 +6721,15 @@ export namespace DepositSucceededWebhookEvent {
      * Source of this ledger activity.
      */
     source: Data.Source | null;
+
+    /**
+     * Dollar value of this movement as a decimal string, signed like `amount`.
+     * Converted from the posted amount at the rate that was live when the line posted
+     * — the same pricing the wallet balance chart and the financial reports use — so a
+     * crypto row carries its dollar value too. `null` for a currency Whop holds no
+     * exchange rate for.
+     */
+    usd_amount: string | null;
 
     /**
      * The viewer account that owns this row's ledger. Present only when the response
@@ -12622,6 +12632,7 @@ export namespace SwapCompletedWebhookEvent {
       | 'misc_purchase'
       | 'misc_refund'
       | 'misc_reversal'
+      | 'onboarding_reward'
       | 'onchain_deposit'
       | 'onchain_swap_source'
       | 'onchain_swap_target'
@@ -12712,6 +12723,15 @@ export namespace SwapCompletedWebhookEvent {
      * Source of this ledger activity.
      */
     source: Data.Source | null;
+
+    /**
+     * Dollar value of this movement as a decimal string, signed like `amount`.
+     * Converted from the posted amount at the rate that was live when the line posted
+     * — the same pricing the wallet balance chart and the financial reports use — so a
+     * crypto row carries its dollar value too. `null` for a currency Whop holds no
+     * exchange rate for.
+     */
+    usd_amount: string | null;
 
     /**
      * The viewer account that owns this row's ledger. Present only when the response
