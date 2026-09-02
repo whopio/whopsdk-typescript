@@ -36,13 +36,7 @@ export {
   type AdGroupUnpauseParams,
   type AdGroupsCursorPage,
 } from './ad-groups';
-export {
-  AdReports,
-  type Granularities,
-  type ResultLabelKeys,
-  type AdReportRetrieveResponse,
-  type AdReportRetrieveParams,
-} from './ad-reports';
+export { AdReports } from './ad-reports';
 export {
   Ads,
   type Ad,
@@ -118,17 +112,7 @@ export {
   type CheckoutConfigurationListParams,
   type CheckoutConfigurationListResponsesCursorPage,
 } from './checkout-configurations';
-export {
-  Companies,
-  type SocialLinkWebsites,
-  type CompanyListResponse,
-  type CompanyCreateAPIKeyResponse,
-  type CompanyCreateParams,
-  type CompanyUpdateParams,
-  type CompanyListParams,
-  type CompanyCreateAPIKeyParams,
-  type CompanyListResponsesCursorPage,
-} from './companies';
+export { Companies } from './companies';
 export {
   CompanyTokenTransactions,
   type CompanyTokenTransaction,

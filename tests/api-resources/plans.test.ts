@@ -36,7 +36,7 @@ describe('resource plans', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.plans.retrieve('id', { 'Api-Version-Date': '2026-08-31' }, { path: '/_stainless_unknown_path' }),
+      client.plans.retrieve('id', { 'Api-Version-Date': '2026-09-02' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
@@ -83,7 +83,7 @@ describe('resource plans', () => {
           product_ids: ['prod_xxxxxxxxxxxxxx'],
           release_methods: ['buy_now'],
           visibilities: ['visible'],
-          'Api-Version-Date': '2026-08-31',
+          'Api-Version-Date': '2026-09-02',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -106,7 +106,7 @@ describe('resource plans', () => {
   test.skip('delete: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.plans.delete('id', { 'Api-Version-Date': '2026-08-31' }, { path: '/_stainless_unknown_path' }),
+      client.plans.delete('id', { 'Api-Version-Date': '2026-09-02' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 });

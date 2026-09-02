@@ -26,7 +26,7 @@ describe('resource disputes', () => {
     await expect(
       client.disputes.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-31' },
+        { 'Api-Version-Date': '2026-09-02' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -61,7 +61,7 @@ describe('resource disputes', () => {
           last: 0,
           order: 'created_at',
           status: ['needs_response'],
-          'Api-Version-Date': '2026-08-31',
+          'Api-Version-Date': '2026-09-02',
         },
         { path: '/_stainless_unknown_path' },
       ),

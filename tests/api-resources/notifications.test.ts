@@ -34,7 +34,7 @@ describe('resource notifications', () => {
       rest_path: '/bookings/upcoming',
       subtitle: 'Tuesday 9:00 AM, Bay 2',
       user_ids: ['user_xxxxxxxxxxxxxx'],
-      'Api-Version-Date': '2026-08-31',
+      'Api-Version-Date': '2026-09-02',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });

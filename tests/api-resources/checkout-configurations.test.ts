@@ -65,7 +65,7 @@ describe('resource checkoutConfigurations', () => {
           plan_id: 'plan_xxxxxxxxxxxxx',
           redirect_url: 'https://shinetime.example/thanks',
           three_ds_level: 'frictionless',
-          'Api-Version-Date': '2026-08-31',
+          'Api-Version-Date': '2026-09-02',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -91,7 +91,7 @@ describe('resource checkoutConfigurations', () => {
     await expect(
       client.checkoutConfigurations.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-31' },
+        { 'Api-Version-Date': '2026-09-02' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -120,7 +120,7 @@ describe('resource checkoutConfigurations', () => {
       first: 0,
       order: 'created_at',
       plan_id: 'plan_id',
-      'Api-Version-Date': '2026-08-31',
+      'Api-Version-Date': '2026-09-02',
     });
   });
 });

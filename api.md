@@ -14,7 +14,6 @@ Types:
 - <code><a href="./src/resources/shared.ts">ChatChannel</a></code>
 - <code><a href="./src/resources/shared.ts">CheckoutConfiguration</a></code>
 - <code><a href="./src/resources/shared.ts">CollectionMethod</a></code>
-- <code><a href="./src/resources/shared.ts">Company</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteraction</a></code>
 - <code><a href="./src/resources/shared.ts">CourseLessonInteractionListItem</a></code>
 - <code><a href="./src/resources/shared.ts">Currency</a></code>
@@ -116,20 +115,6 @@ Methods:
 - <code title="delete /products/{id}">client.products.<a href="./src/resources/products.ts">delete</a>(id, { ...params }) -> ProductDeleteResponse</code>
 
 # Companies
-
-Types:
-
-- <code><a href="./src/resources/companies.ts">SocialLinkWebsites</a></code>
-- <code><a href="./src/resources/companies.ts">CompanyListResponse</a></code>
-- <code><a href="./src/resources/companies.ts">CompanyCreateAPIKeyResponse</a></code>
-
-Methods:
-
-- <code title="post /companies">client.companies.<a href="./src/resources/companies.ts">create</a>({ ...params }) -> Company</code>
-- <code title="get /companies/{id}">client.companies.<a href="./src/resources/companies.ts">retrieve</a>(id) -> Company</code>
-- <code title="patch /companies/{id}">client.companies.<a href="./src/resources/companies.ts">update</a>(id, { ...params }) -> Company</code>
-- <code title="get /companies">client.companies.<a href="./src/resources/companies.ts">list</a>({ ...params }) -> CompanyListResponsesCursorPage</code>
-- <code title="post /companies/{parent_company_id}/api_keys">client.companies.<a href="./src/resources/companies.ts">createAPIKey</a>(parentCompanyID, { ...params }) -> CompanyCreateAPIKeyResponse</code>
 
 # Webhooks
 
@@ -966,13 +951,3 @@ Methods:
 # Conversions
 
 # AdReports
-
-Types:
-
-- <code><a href="./src/resources/ad-reports.ts">Granularities</a></code>
-- <code><a href="./src/resources/ad-reports.ts">ResultLabelKeys</a></code>
-- <code><a href="./src/resources/ad-reports.ts">AdReportRetrieveResponse</a></code>
-
-Methods:
-
-- <code title="get /ad_reports">client.adReports.<a href="./src/resources/ad-reports.ts">retrieve</a>({ ...params }) -> AdReportRetrieveResponse</code>

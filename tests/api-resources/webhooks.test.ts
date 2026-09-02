@@ -31,7 +31,7 @@ describe('resource webhooks', () => {
       enabled: true,
       events: ['payment.succeeded'],
       resource_id: 'biz_xxxxxxxxxxxxxx',
-      'Api-Version-Date': '2026-08-31',
+      'Api-Version-Date': '2026-09-02',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -54,7 +54,7 @@ describe('resource webhooks', () => {
     await expect(
       client.webhooks.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-08-31' },
+        { 'Api-Version-Date': '2026-09-02' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -95,7 +95,7 @@ describe('resource webhooks', () => {
       has_failures: true,
       include_app_webhooks: true,
       last: 0,
-      'Api-Version-Date': '2026-08-31',
+      'Api-Version-Date': '2026-09-02',
     });
   });
 
@@ -117,7 +117,7 @@ describe('resource webhooks', () => {
     await expect(
       client.webhooks.delete(
         'id',
-        { 'Api-Version-Date': '2026-08-31' },
+        { 'Api-Version-Date': '2026-09-02' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

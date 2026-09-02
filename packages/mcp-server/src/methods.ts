@@ -125,36 +125,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/products/{id}',
   },
   {
-    clientCallName: 'client.companies.create',
-    fullyQualifiedName: 'companies.create',
-    httpMethod: 'post',
-    httpPath: '/companies',
-  },
-  {
-    clientCallName: 'client.companies.retrieve',
-    fullyQualifiedName: 'companies.retrieve',
-    httpMethod: 'get',
-    httpPath: '/companies/{id}',
-  },
-  {
-    clientCallName: 'client.companies.update',
-    fullyQualifiedName: 'companies.update',
-    httpMethod: 'patch',
-    httpPath: '/companies/{id}',
-  },
-  {
-    clientCallName: 'client.companies.list',
-    fullyQualifiedName: 'companies.list',
-    httpMethod: 'get',
-    httpPath: '/companies',
-  },
-  {
-    clientCallName: 'client.companies.createAPIKey',
-    fullyQualifiedName: 'companies.createAPIKey',
-    httpMethod: 'post',
-    httpPath: '/companies/{parent_company_id}/api_keys',
-  },
-  {
     clientCallName: 'client.webhooks.create',
     fullyQualifiedName: 'webhooks.create',
     httpMethod: 'post',
@@ -1276,12 +1246,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'ads.unpause',
     httpMethod: 'post',
     httpPath: '/ads/{id}/unpause',
-  },
-  {
-    clientCallName: 'client.adReports.retrieve',
-    fullyQualifiedName: 'adReports.retrieve',
-    httpMethod: 'get',
-    httpPath: '/ad_reports',
   },
 ];
 

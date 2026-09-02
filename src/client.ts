@@ -43,13 +43,7 @@ import {
   AdGroups,
   AdGroupsCursorPage,
 } from './resources/ad-groups';
-import {
-  AdReportRetrieveParams,
-  AdReportRetrieveResponse,
-  AdReports,
-  Granularities,
-  ResultLabelKeys,
-} from './resources/ad-reports';
+import { AdReports } from './resources/ad-reports';
 import {
   Ad,
   AdListParams,
@@ -125,17 +119,7 @@ import {
   CheckoutConfigurations,
   CheckoutModes,
 } from './resources/checkout-configurations';
-import {
-  Companies,
-  CompanyCreateAPIKeyParams,
-  CompanyCreateAPIKeyResponse,
-  CompanyCreateParams,
-  CompanyListParams,
-  CompanyListResponse,
-  CompanyListResponsesCursorPage,
-  CompanyUpdateParams,
-  SocialLinkWebsites,
-} from './resources/companies';
+import { Companies } from './resources/companies';
 import {
   CompanyTokenTransaction,
   CompanyTokenTransactionCreateParams,
@@ -1670,17 +1654,7 @@ export declare namespace Whop {
     type ProductDeleteParams as ProductDeleteParams,
   };
 
-  export {
-    Companies as Companies,
-    type SocialLinkWebsites as SocialLinkWebsites,
-    type CompanyListResponse as CompanyListResponse,
-    type CompanyCreateAPIKeyResponse as CompanyCreateAPIKeyResponse,
-    type CompanyListResponsesCursorPage as CompanyListResponsesCursorPage,
-    type CompanyCreateParams as CompanyCreateParams,
-    type CompanyUpdateParams as CompanyUpdateParams,
-    type CompanyListParams as CompanyListParams,
-    type CompanyCreateAPIKeyParams as CompanyCreateAPIKeyParams,
-  };
+  export { Companies as Companies };
 
   export {
     Webhooks as Webhooks,
@@ -2290,13 +2264,7 @@ export declare namespace Whop {
 
   export { Conversions as Conversions };
 
-  export {
-    AdReports as AdReports,
-    type Granularities as Granularities,
-    type ResultLabelKeys as ResultLabelKeys,
-    type AdReportRetrieveResponse as AdReportRetrieveResponse,
-    type AdReportRetrieveParams as AdReportRetrieveParams,
-  };
+  export { AdReports as AdReports };
 
   export type AccessLevel = API.AccessLevel;
   export type AccessPassType = API.AccessPassType;
@@ -2310,7 +2278,6 @@ export declare namespace Whop {
   export type ChatChannel = API.ChatChannel;
   export type CheckoutConfiguration = API.CheckoutConfiguration;
   export type CollectionMethod = API.CollectionMethod;
-  export type Company = API.Company;
   export type CourseLessonInteraction = API.CourseLessonInteraction;
   export type CourseLessonInteractionListItem = API.CourseLessonInteractionListItem;
   export type Currency = API.Currency;
