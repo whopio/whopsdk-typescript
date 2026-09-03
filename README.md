@@ -68,7 +68,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
+const page = await client.payments.list({ account_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
   if (err instanceof Whop.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -108,7 +108,7 @@ const client = new Whop({
 });
 
 // Or, configure per-request:
-await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({ account_id: 'biz_xxxxxxxxxxxxxx' }, {
   maxRetries: 5,
 });
 ```
@@ -125,7 +125,7 @@ const client = new Whop({
 });
 
 // Override per-request:
-await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({ account_id: 'biz_xxxxxxxxxxxxxx' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -144,7 +144,7 @@ async function fetchAllPaymentListResponses(params) {
   const allPaymentListResponses = [];
   // Automatically fetches more pages as needed.
   for await (const paymentListResponse of client.payments.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
+    account_id: 'biz_xxxxxxxxxxxxxx',
   })) {
     allPaymentListResponses.push(paymentListResponse);
   }
@@ -155,7 +155,7 @@ async function fetchAllPaymentListResponses(params) {
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+let page = await client.payments.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
 for (const paymentListResponse of page.data) {
   console.log(paymentListResponse);
 }
@@ -181,12 +181,12 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Whop();
 
-const response = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();
+const response = await client.payments.list({ account_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: page, response: raw } = await client.payments
-  .list({ company_id: 'biz_xxxxxxxxxxxxxx' })
+  .list({ account_id: 'biz_xxxxxxxxxxxxxx' })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 for await (const paymentListResponse of page) {
