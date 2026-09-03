@@ -10,8 +10,8 @@ import { path } from '../internal/utils/path';
 export class ForumPosts extends APIResource {
   /**
    * Create a new forum post or comment within an experience. Supports text content,
-   * attachments, polls, paywalling, and pinning. Pass experience_id 'public' with a
-   * company_id to post to a company's public forum.
+   * attachments, polls, paywalling, and pinning. Pass experience_id 'public' with an
+   * account_id to post to an account's public forum.
    *
    * Required permissions:
    *
@@ -230,8 +230,8 @@ export namespace ForumPostListResponse {
 export interface ForumPostCreateParams {
   /**
    * The unique identifier of the experience to create this post in. For example,
-   * 'exp_xxxxx'. Pass 'public' along with company_id to automatically use the
-   * company's public forum.
+   * 'exp_xxxxx'. Pass 'public' along with account_id to automatically use the
+   * account's public forum.
    */
   experience_id: string;
 

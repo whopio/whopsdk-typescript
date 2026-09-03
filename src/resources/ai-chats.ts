@@ -26,7 +26,7 @@ export class AIChats extends APIResource {
   }
 
   /**
-   * Update an AI chat's title, notification preferences, or associated company
+   * Update an AI chat's title, notification preferences, or associated account
    * context.
    *
    * Required permissions:
@@ -214,10 +214,10 @@ export interface AIChatCreateParams {
   message_text: string;
 
   /**
-   * The unique identifier of the company to set as context for the AI chat (e.g.,
+   * The unique identifier of the account to set as context for the AI chat (e.g.,
    * "biz_XXXXX").
    */
-  current_company_id?: string | null;
+  current_account_id?: string | null;
 
   /**
    * A list of previously uploaded file attachments to include with the first
@@ -256,10 +256,10 @@ export namespace AIChatCreateParams {
 
 export interface AIChatUpdateParams {
   /**
-   * The unique identifier of the company to set as context for the AI chat (e.g.,
+   * The unique identifier of the account to set as context for the AI chat (e.g.,
    * "biz_XXXXX").
    */
-  current_company_id?: string | null;
+  current_account_id?: string | null;
 
   /**
    * The notification preference for an AI chat

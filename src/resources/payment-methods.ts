@@ -11,7 +11,7 @@ import { path } from '../internal/utils/path';
 export class PaymentMethods extends APIResource {
   /**
    * Retrieves the details of an existing payment method. Addresses a member's wallet
-   * when member_id or company_id is given, otherwise your own.
+   * when member_id or account_id is given, otherwise your own.
    *
    * Required permissions:
    *
@@ -2734,7 +2734,7 @@ export interface PaymentMethodRetrieveParams {
   account_id?: string;
 
   /**
-   * The unique identifier of the member. Provide either this or company_id, not
+   * The unique identifier of the member. Provide either this or account_id, not
    * both. Omit both to address your own saved payment methods.
    */
   member_id?: string;
@@ -2817,7 +2817,7 @@ export interface PaymentMethodListParams extends CursorPageParams {
 
   /**
    * The unique identifier of the member to list payment methods for. Omit this and
-   * company_id to list your own saved payment methods.
+   * account_id to list your own saved payment methods.
    */
   member_id?: string;
 

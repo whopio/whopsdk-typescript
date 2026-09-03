@@ -24,7 +24,7 @@ describe('resource aiChats', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.aiChats.create({
       message_text: 'message_text',
-      current_company_id: 'current_company_id',
+      current_account_id: 'current_account_id',
       message_attachments: [{ id: 'id' }],
       message_source: 'manual',
       suggestion_type: 'suggestion_type',
@@ -63,7 +63,7 @@ describe('resource aiChats', () => {
       client.aiChats.update(
         'aich_xxxxxxxxxxxxx',
         {
-          current_company_id: 'current_company_id',
+          current_account_id: 'current_account_id',
           notification_preference: 'all',
           title: 'title',
         },
