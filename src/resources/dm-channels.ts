@@ -181,7 +181,7 @@ export interface DmChannelCreateParams {
    * The unique identifier of the company to scope this DM channel to. When set, the
    * channel is visible only within that company context.
    */
-  company_id?: string | null;
+  account_id?: string | null;
 
   /**
    * A custom display name for the DM channel. For example, 'Project Discussion'.
@@ -204,15 +204,15 @@ export interface DmChannelUpdateParams {
 
 export interface DmChannelListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string;
-
-  /**
    * The unique identifier of a company to filter DM channels by. Only returns
    * channels scoped to this company.
    */
-  company_id?: string;
+  account_id?: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string;
 
   /**
    * Returns the first _n_ elements from the list.

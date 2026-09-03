@@ -12,7 +12,7 @@ export class AccountLinks extends APIResource {
    * @example
    * ```ts
    * const accountLink = await client.accountLinks.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   refresh_url: 'refresh_url',
    *   return_url: 'return_url',
    *   use_case: 'account_onboarding',
@@ -46,7 +46,7 @@ export interface AccountLinkCreateParams {
    * The unique identifier of the company to generate the link for, starting with
    * 'biz\_'. Must be a sub-merchant of the API key's company.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * The URL to redirect the user to if the session expires and needs to be

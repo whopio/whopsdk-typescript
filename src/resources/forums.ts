@@ -157,7 +157,7 @@ export interface ForumListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list forums for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

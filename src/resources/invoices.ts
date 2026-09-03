@@ -25,8 +25,8 @@ export class Invoices extends APIResource {
    * @example
    * ```ts
    * const invoice = await client.invoices.create({
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   collection_method: 'send_invoice',
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   plan: {},
    *   product: { title: 'title' },
    * });
@@ -324,15 +324,15 @@ export type InvoiceCreateParams =
 export declare namespace InvoiceCreateParams {
   export interface CreateInvoiceInputWithProduct {
     /**
+     * The unique identifier of the company to create this invoice for.
+     */
+    account_id: string;
+
+    /**
      * How the invoice should be collected. Use charge_automatically to charge a stored
      * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
-
-    /**
-     * The unique identifier of the company to create this invoice for.
-     */
-    company_id: string;
 
     /**
      * The plan attributes defining the price, currency, and billing interval for this
@@ -684,15 +684,15 @@ export declare namespace InvoiceCreateParams {
 
   export interface CreateInvoiceInputWithProductID {
     /**
+     * The unique identifier of the company to create this invoice for.
+     */
+    account_id: string;
+
+    /**
      * How the invoice should be collected. Use charge_automatically to charge a stored
      * payment method, or send_invoice to email the customer.
      */
     collection_method: Shared.CollectionMethod;
-
-    /**
-     * The unique identifier of the company to create this invoice for.
-     */
-    company_id: string;
 
     /**
      * The plan attributes defining the price, currency, and billing interval for this
@@ -1344,6 +1344,11 @@ export namespace InvoiceUpdateParams {
 
 export interface InvoiceListParams extends CursorPageParams {
   /**
+   * The unique identifier of the company to list invoices for.
+   */
+  account_id?: string;
+
+  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string;
@@ -1352,11 +1357,6 @@ export interface InvoiceListParams extends CursorPageParams {
    * Filter invoices by their collection method.
    */
   collection_methods?: Array<Shared.CollectionMethod>;
-
-  /**
-   * The unique identifier of the company to list invoices for.
-   */
-  company_id?: string;
 
   /**
    * Only return invoices created after this timestamp.

@@ -113,9 +113,9 @@ describe('resource courses', () => {
     await expect(
       client.courses.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
           experience_id: 'exp_xxxxxxxxxxxxxx',
           first: 42,
           last: 42,

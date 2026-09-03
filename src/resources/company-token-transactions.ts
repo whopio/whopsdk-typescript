@@ -21,8 +21,8 @@ export class CompanyTokenTransactions extends APIResource {
    * ```ts
    * const companyTokenTransaction =
    *   await client.companyTokenTransactions.create({
+   *     account_id: 'biz_xxxxxxxxxxxxxx',
    *     amount: 6.9,
-   *     company_id: 'biz_xxxxxxxxxxxxxx',
    *     destination_user_id: 'destination_user_id',
    *     transaction_type: 'transfer',
    *     user_id: 'user_xxxxxxxxxxxxx',
@@ -311,15 +311,15 @@ export type CompanyTokenTransactionCreateParams =
 export declare namespace CompanyTokenTransactionCreateParams {
   export interface CreateCompanyTokenTransactionInputTransactionTypeTransfer {
     /**
-     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
-     */
-    amount: number;
-
-    /**
      * The unique identifier of the company to create the transaction in, starting with
      * 'biz\_'.
      */
-    company_id: string;
+    account_id: string;
+
+    /**
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
+     */
+    amount: number;
 
     /**
      * The unique identifier of the user receiving the tokens. Required when the
@@ -349,15 +349,15 @@ export declare namespace CompanyTokenTransactionCreateParams {
 
   export interface CreateCompanyTokenTransactionInputTransactionTypeAdd {
     /**
-     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
-     */
-    amount: number;
-
-    /**
      * The unique identifier of the company to create the transaction in, starting with
      * 'biz\_'.
      */
-    company_id: string;
+    account_id: string;
+
+    /**
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
+     */
+    amount: number;
 
     transaction_type: 'add';
 
@@ -381,15 +381,15 @@ export declare namespace CompanyTokenTransactionCreateParams {
 
   export interface CreateCompanyTokenTransactionInputTransactionTypeSubtract {
     /**
-     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
-     */
-    amount: number;
-
-    /**
      * The unique identifier of the company to create the transaction in, starting with
      * 'biz\_'.
      */
-    company_id: string;
+    account_id: string;
+
+    /**
+     * The positive number of tokens to transact. For example, 100.0 for 100 tokens.
+     */
+    amount: number;
 
     transaction_type: 'subtract';
 
@@ -416,7 +416,7 @@ export interface CompanyTokenTransactionListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list token transactions for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

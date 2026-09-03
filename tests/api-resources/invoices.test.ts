@@ -11,8 +11,8 @@ describe('resource invoices', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.invoices.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       collection_method: 'send_invoice',
-      company_id: 'biz_xxxxxxxxxxxxxx',
       plan: {},
       product: { title: 'title' },
     });
@@ -28,8 +28,8 @@ describe('resource invoices', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.invoices.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       collection_method: 'send_invoice',
-      company_id: 'biz_xxxxxxxxxxxxxx',
       plan: {
         adaptive_pricing_enabled: true,
         billing_period: 42,
@@ -213,10 +213,10 @@ describe('resource invoices', () => {
     await expect(
       client.invoices.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
           collection_methods: ['send_invoice'],
-          company_id: 'biz_xxxxxxxxxxxxxx',
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
           direction: 'asc',

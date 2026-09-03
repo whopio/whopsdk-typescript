@@ -21,7 +21,7 @@ export class Leads extends APIResource {
    * @example
    * ```ts
    * const lead = await client.leads.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    * });
    * ```
    */
@@ -90,7 +90,7 @@ export class Leads extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const leadListResponse of client.leads.list({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    * })) {
    *   // ...
    * }
@@ -321,7 +321,7 @@ export interface LeadCreateParams {
    * The unique identifier of the company to create the lead for, starting with
    * 'biz\_'.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * A JSON object of custom metadata to attach to the lead for tracking purposes.
@@ -364,7 +364,7 @@ export interface LeadListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list leads for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

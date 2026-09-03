@@ -19,7 +19,7 @@ export class AuthorizedUsers extends APIResource {
    * @example
    * ```ts
    * const authorizedUser = await client.authorizedUsers.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   role: 'owner',
    *   user_id: 'user_xxxxxxxxxxxxx',
    * });
@@ -95,8 +95,8 @@ export class AuthorizedUsers extends APIResource {
     params: AuthorizedUserDeleteParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<AuthorizedUserDeleteResponse> {
-    const { company_id } = params ?? {};
-    return this._client.delete(path`/authorized_users/${id}`, { query: { company_id }, ...options });
+    const { account_id } = params ?? {};
+    return this._client.delete(path`/authorized_users/${id}`, { query: { account_id }, ...options });
   }
 }
 
@@ -249,7 +249,7 @@ export interface AuthorizedUserCreateParams {
   /**
    * The ID of the company to add the authorized user to.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * The role to assign to the authorized user within the company. Supported roles:
@@ -317,14 +317,14 @@ export namespace AuthorizedUserCreateParams {
 
 export interface AuthorizedUserListParams extends CursorPageParams {
   /**
+   * The unique identifier of the company to list authorized users for.
+   */
+  account_id?: string;
+
+  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string;
-
-  /**
-   * The unique identifier of the company to list authorized users for.
-   */
-  company_id?: string;
 
   /**
    * Only return authorized users created after this timestamp.
@@ -363,7 +363,7 @@ export interface AuthorizedUserDeleteParams {
    * The ID of the company the authorized user belongs to. Optional if the authorized
    * user ID is provided.
    */
-  company_id?: string;
+  account_id?: string;
 }
 
 export declare namespace AuthorizedUsers {

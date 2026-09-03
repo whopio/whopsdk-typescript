@@ -236,15 +236,15 @@ export interface ForumPostCreateParams {
   experience_id: string;
 
   /**
-   * A list of file attachments to include with the post, such as images or videos.
-   */
-  attachments?: Array<ForumPostCreateParams.Attachment> | null;
-
-  /**
    * The unique identifier of the company whose public forum to post in. Required
    * when experience_id is 'public'. For example, 'biz_xxxxx'.
    */
-  company_id?: string | null;
+  account_id?: string | null;
+
+  /**
+   * A list of file attachments to include with the post, such as images or videos.
+   */
+  attachments?: Array<ForumPostCreateParams.Attachment> | null;
 
   /**
    * The main body of the post in Markdown format. For example, 'Check out this

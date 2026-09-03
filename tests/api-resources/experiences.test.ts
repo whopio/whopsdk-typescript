@@ -11,8 +11,8 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.experiences.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       app_id: 'app_xxxxxxxxxxxxxx',
-      company_id: 'biz_xxxxxxxxxxxxxx',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -26,8 +26,8 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.experiences.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       app_id: 'app_xxxxxxxxxxxxxx',
-      company_id: 'biz_xxxxxxxxxxxxxx',
       is_public: true,
       logo: { id: 'id' },
       name: 'name',
@@ -82,7 +82,7 @@ describe('resource experiences', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.experiences.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.experiences.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -95,7 +95,7 @@ describe('resource experiences', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.experiences.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       app_id: 'app_xxxxxxxxxxxxxx',
       before: 'before',

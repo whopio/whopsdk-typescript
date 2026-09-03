@@ -24,7 +24,7 @@ describe('resource dmChannels', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.dmChannels.create({
       with_user_ids: ['string'],
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       custom_name: 'custom_name',
       notifications_enabled: true,
     });
@@ -80,9 +80,9 @@ describe('resource dmChannels', () => {
     await expect(
       client.dmChannels.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
           first: 42,
           last: 42,
         },

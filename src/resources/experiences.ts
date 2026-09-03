@@ -16,8 +16,8 @@ export class Experiences extends APIResource {
    * @example
    * ```ts
    * const experience = await client.experiences.create({
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   app_id: 'app_xxxxxxxxxxxxxx',
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
    * });
    * ```
    */
@@ -67,7 +67,7 @@ export class Experiences extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const experienceListResponse of client.experiences.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   *   { account_id: 'biz_xxxxxxxxxxxxxx' },
    * )) {
    *   // ...
    * }
@@ -293,14 +293,14 @@ export type ExperienceDeleteResponse = boolean;
 
 export interface ExperienceCreateParams {
   /**
+   * The unique identifier of the company to create this experience for.
+   */
+  account_id: string;
+
+  /**
    * The unique identifier of the app that powers this experience.
    */
   app_id: string;
-
-  /**
-   * The unique identifier of the company to create this experience for.
-   */
-  company_id: string;
 
   /**
    * Whether the experience is publicly accessible without a membership.
@@ -395,7 +395,7 @@ export interface ExperienceListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list experiences for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Filter to only experiences powered by this app identifier.

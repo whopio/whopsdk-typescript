@@ -26,7 +26,7 @@ describe('resource paymentMethods', () => {
     await expect(
       client.paymentMethods.retrieve(
         'payt_xxxxxxxxxxxxx',
-        { company_id: 'biz_xxxxxxxxxxxxxx', member_id: 'mber_xxxxxxxxxxxxx' },
+        { account_id: 'biz_xxxxxxxxxxxxxx', member_id: 'mber_xxxxxxxxxxxxx' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -50,12 +50,12 @@ describe('resource paymentMethods', () => {
     await expect(
       client.paymentMethods.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
           broken: true,
           card_brands: ['mastercard'],
           card_funding_types: ['credit'],
-          company_id: 'biz_xxxxxxxxxxxxxx',
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
           direction: 'asc',

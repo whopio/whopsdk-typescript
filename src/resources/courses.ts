@@ -808,14 +808,14 @@ export namespace CourseUpdateParams {
 
 export interface CourseListParams extends CursorPageParams {
   /**
+   * The unique identifier of the company to list courses for.
+   */
+  account_id?: string;
+
+  /**
    * Returns the elements in the list that come before the specified cursor.
    */
   before?: string;
-
-  /**
-   * The unique identifier of the company to list courses for.
-   */
-  company_id?: string;
 
   /**
    * The unique identifier of the experience to list courses for.

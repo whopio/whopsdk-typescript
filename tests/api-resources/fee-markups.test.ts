@@ -11,7 +11,7 @@ describe('resource feeMarkups', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.feeMarkups.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       fee_type: 'crypto_withdrawal_markup',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource feeMarkups', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.feeMarkups.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       fee_type: 'crypto_withdrawal_markup',
       fixed_fee_usd: 6.9,
       metadata: { foo: 'bar' },
@@ -37,7 +37,7 @@ describe('resource feeMarkups', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.feeMarkups.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.feeMarkups.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -50,7 +50,7 @@ describe('resource feeMarkups', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.feeMarkups.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       first: 42,

@@ -26,7 +26,7 @@ describe('resource accessTokens', () => {
     await expect(
       client.accessTokens.create(
         {
-          company_id: 'biz_xxxxxxxxxxxxxx',
+          account_id: 'biz_xxxxxxxxxxxxxx',
           expires_at: '2023-12-01T05:00:00.401Z',
           scoped_actions: ['string'],
           user_id: 'user_xxxxxxxxxxxxx',

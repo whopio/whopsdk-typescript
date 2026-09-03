@@ -24,8 +24,8 @@ describe('resource forumPosts', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.forumPosts.create({
       experience_id: 'exp_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       attachments: [{ id: 'id' }],
-      company_id: 'biz_xxxxxxxxxxxxxx',
       content: 'content',
       is_mention: true,
       parent_id: 'parent_id',

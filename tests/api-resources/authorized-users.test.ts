@@ -11,7 +11,7 @@ describe('resource authorizedUsers', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.authorizedUsers.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       role: 'owner',
       user_id: 'user_xxxxxxxxxxxxx',
     });
@@ -27,7 +27,7 @@ describe('resource authorizedUsers', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.authorizedUsers.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       role: 'owner',
       user_id: 'user_xxxxxxxxxxxxx',
       elevation: {
@@ -73,9 +73,9 @@ describe('resource authorizedUsers', () => {
     await expect(
       client.authorizedUsers.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
           created_after: '2023-12-01T05:00:00.401Z',
           created_before: '2023-12-01T05:00:00.401Z',
           first: 42,
@@ -106,7 +106,7 @@ describe('resource authorizedUsers', () => {
     await expect(
       client.authorizedUsers.delete(
         'ausr_xxxxxxxxxxxxx',
-        { company_id: 'biz_xxxxxxxxxxxxxx' },
+        { account_id: 'biz_xxxxxxxxxxxxxx' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

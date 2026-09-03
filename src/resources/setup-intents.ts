@@ -507,7 +507,7 @@ export interface SetupIntentListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list setup intents for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

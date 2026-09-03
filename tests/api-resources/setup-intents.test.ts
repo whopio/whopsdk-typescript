@@ -22,7 +22,7 @@ describe('resource setupIntents', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.setupIntents.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.setupIntents.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -35,7 +35,7 @@ describe('resource setupIntents', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.setupIntents.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       created_after: '2023-12-01T05:00:00.401Z',

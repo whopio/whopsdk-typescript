@@ -11,7 +11,7 @@ describe('resource accountLinks', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.accountLinks.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       refresh_url: 'refresh_url',
       return_url: 'return_url',
       use_case: 'account_onboarding',
@@ -28,7 +28,7 @@ describe('resource accountLinks', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.accountLinks.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       refresh_url: 'refresh_url',
       return_url: 'return_url',
       use_case: 'account_onboarding',

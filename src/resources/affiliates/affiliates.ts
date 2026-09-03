@@ -40,7 +40,7 @@ export class Affiliates extends APIResource {
    * @example
    * ```ts
    * const affiliate = await client.affiliates.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   user_identifier: 'user_identifier',
    * });
    * ```
@@ -79,7 +79,7 @@ export class Affiliates extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const affiliateListResponse of client.affiliates.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   *   { account_id: 'biz_xxxxxxxxxxxxxx' },
    * )) {
    *   // ...
    * }
@@ -386,7 +386,7 @@ export interface AffiliateCreateParams {
   /**
    * The ID of the company to create the affiliate for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * The user identifier (username, email, user ID, or Discord ID).
@@ -398,7 +398,7 @@ export interface AffiliateListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list affiliates for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

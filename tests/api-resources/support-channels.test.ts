@@ -11,7 +11,7 @@ describe('resource supportChannels', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.supportChannels.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       user_id: 'user_xxxxxxxxxxxxx',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -26,7 +26,7 @@ describe('resource supportChannels', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.supportChannels.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       user_id: 'user_xxxxxxxxxxxxx',
       custom_name: 'custom_name',
       notifications_enabled: true,
@@ -63,9 +63,9 @@ describe('resource supportChannels', () => {
     await expect(
       client.supportChannels.list(
         {
+          account_id: 'biz_xxxxxxxxxxxxxx',
           after: 'after',
           before: 'before',
-          company_id: 'biz_xxxxxxxxxxxxxx',
           direction: 'asc',
           first: 42,
           last: 42,

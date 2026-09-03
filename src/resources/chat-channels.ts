@@ -59,7 +59,7 @@ export class ChatChannels extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const chatChannelListResponse of client.chatChannels.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   *   { account_id: 'biz_xxxxxxxxxxxxxx' },
    * )) {
    *   // ...
    * }
@@ -181,7 +181,7 @@ export interface ChatChannelListParams extends CursorPageParams {
   /**
    * The unique identifier of the company to list chat channels for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

@@ -11,8 +11,8 @@ describe('resource companyTokenTransactions', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.companyTokenTransactions.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       amount: 6.9,
-      company_id: 'biz_xxxxxxxxxxxxxx',
       destination_user_id: 'destination_user_id',
       transaction_type: 'transfer',
       user_id: 'user_xxxxxxxxxxxxx',
@@ -29,8 +29,8 @@ describe('resource companyTokenTransactions', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.companyTokenTransactions.create({
+      account_id: 'biz_xxxxxxxxxxxxxx',
       amount: 6.9,
-      company_id: 'biz_xxxxxxxxxxxxxx',
       destination_user_id: 'destination_user_id',
       transaction_type: 'transfer',
       user_id: 'user_xxxxxxxxxxxxx',
@@ -53,7 +53,7 @@ describe('resource companyTokenTransactions', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.companyTokenTransactions.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.companyTokenTransactions.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -66,7 +66,7 @@ describe('resource companyTokenTransactions', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.companyTokenTransactions.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       first: 42,

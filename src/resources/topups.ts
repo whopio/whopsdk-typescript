@@ -17,8 +17,8 @@ export class Topups extends APIResource {
    * @example
    * ```ts
    * const topup = await client.topups.create({
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   amount: 6.9,
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
    *   currency: 'usd',
    *   payment_method_id: 'pmt_xxxxxxxxxxxxxx',
    * });
@@ -73,15 +73,15 @@ export interface TopupCreateResponse {
 
 export interface TopupCreateParams {
   /**
+   * The unique identifier of the company to add funds to, starting with 'biz\_'.
+   */
+  account_id: string;
+
+  /**
    * The amount to add to the balance in the specified currency. For example, 50.00
    * for $50.00 USD.
    */
   amount: number;
-
-  /**
-   * The unique identifier of the company to add funds to, starting with 'biz\_'.
-   */
-  company_id: string;
 
   /**
    * The currency for the top-up amount, such as 'usd'.

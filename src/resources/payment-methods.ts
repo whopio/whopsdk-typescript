@@ -2731,7 +2731,7 @@ export interface PaymentMethodRetrieveParams {
    * The unique identifier of the company. Provide either this or member_id, not
    * both. Omit both to address your own saved payment methods.
    */
-  company_id?: string;
+  account_id?: string;
 
   /**
    * The unique identifier of the member. Provide either this or company_id, not
@@ -2741,6 +2741,12 @@ export interface PaymentMethodRetrieveParams {
 }
 
 export interface PaymentMethodListParams extends CursorPageParams {
+  /**
+   * The unique identifier of the company. Provide either this or member_id, not
+   * both. Omit both to address your own saved payment methods.
+   */
+  account_id?: string;
+
   /**
    * Returns the elements in the list that come before the specified cursor.
    */
@@ -2763,12 +2769,6 @@ export interface PaymentMethodListParams extends CursorPageParams {
    * is excluded, and payment methods that are not cards are unaffected.
    */
   card_funding_types?: Array<'credit' | 'debit' | 'prepaid'>;
-
-  /**
-   * The unique identifier of the company. Provide either this or member_id, not
-   * both. Omit both to address your own saved payment methods.
-   */
-  company_id?: string;
 
   /**
    * Only return payment methods created after this timestamp.

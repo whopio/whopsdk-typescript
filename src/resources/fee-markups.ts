@@ -18,7 +18,7 @@ export class FeeMarkups extends APIResource {
    * @example
    * ```ts
    * const feeMarkup = await client.feeMarkups.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   fee_type: 'crypto_withdrawal_markup',
    * });
    * ```
@@ -39,7 +39,7 @@ export class FeeMarkups extends APIResource {
    * ```ts
    * // Automatically fetches more pages as needed.
    * for await (const feeMarkupListResponse of client.feeMarkups.list(
-   *   { company_id: 'biz_xxxxxxxxxxxxxx' },
+   *   { account_id: 'biz_xxxxxxxxxxxxxx' },
    * )) {
    *   // ...
    * }
@@ -179,7 +179,7 @@ export interface FeeMarkupCreateParams {
   /**
    * The unique identifier of the company to create or update the fee markup for.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * The type of fee this markup applies to, such as processing or platform fees.
@@ -212,7 +212,7 @@ export interface FeeMarkupListParams extends CursorPageParams {
    * The unique identifier of the company to list fee markups for. Pass a platform
    * account identifier to retrieve platform default markups.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * Returns the elements in the list that come before the specified cursor.

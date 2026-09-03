@@ -52,7 +52,7 @@ describe('resource forums', () => {
 
   // Mock server tests are disabled
   test.skip('list: only required params', async () => {
-    const responsePromise = client.forums.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
+    const responsePromise = client.forums.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -65,7 +65,7 @@ describe('resource forums', () => {
   // Mock server tests are disabled
   test.skip('list: required and optional params', async () => {
     const response = await client.forums.list({
-      company_id: 'biz_xxxxxxxxxxxxxx',
+      account_id: 'biz_xxxxxxxxxxxxxx',
       after: 'after',
       before: 'before',
       first: 42,

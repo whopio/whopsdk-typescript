@@ -19,7 +19,7 @@ export class SupportChannels extends APIResource {
    * @example
    * ```ts
    * const supportChannel = await client.supportChannels.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
    *   user_id: 'user_xxxxxxxxxxxxx',
    * });
    * ```
@@ -142,7 +142,7 @@ export interface SupportChannelCreateParams {
   /**
    * The unique identifier of the company to create the support channel in.
    */
-  company_id: string;
+  account_id: string;
 
   /**
    * The user ID (e.g. 'user_xxxxx') or username of the customer to open a support
@@ -164,16 +164,16 @@ export interface SupportChannelCreateParams {
 
 export interface SupportChannelListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
-   */
-  before?: string;
-
-  /**
    * The unique identifier of the company to list support channels for. Includes
    * channels of child companies. When omitted, returns support channels across all
    * companies the user has access to.
    */
-  company_id?: string;
+  account_id?: string;
+
+  /**
+   * Returns the elements in the list that come before the specified cursor.
+   */
+  before?: string;
 
   /**
    * The sort direction for the results. Use 'asc' for oldest first or 'desc' for
