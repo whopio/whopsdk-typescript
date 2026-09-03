@@ -43,11 +43,11 @@ export class ExperiencesClient {
      *     await client.experiences.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         product_id: "prod_xxxxxxxxxxxxx",
      *         app_id: "app_xxxxxxxxxxxxxx",
      *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z"
+     *         created_after: "2023-12-01T05:00:00Z",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -63,22 +63,22 @@ export class ExperiencesClient {
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     product_id: productId,
                     app_id: appId,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     product_id: productId,
                     app_id: appId,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -86,7 +86,7 @@ export class ExperiencesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -177,8 +177,8 @@ export class ExperiencesClient {
      *
      * @example
      *     await client.experiences.create({
-     *         app_id: "app_xxxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx",
+     *         app_id: "app_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
@@ -197,7 +197,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -291,7 +291,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -383,7 +383,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -475,7 +475,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -573,7 +573,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -671,7 +671,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -771,7 +771,7 @@ export class ExperiencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

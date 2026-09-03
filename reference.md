@@ -92,7 +92,7 @@ Generate a URL that directs a sub-merchant to their account portal, such as the 
 
 ```typescript
 await client.accountLinks.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     refresh_url: "refresh_url",
     return_url: "return_url",
     use_case: "account_onboarding"
@@ -2526,7 +2526,7 @@ Required permissions:
 const pageableResponse = await client.affiliates.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -2536,7 +2536,7 @@ for await (const item of pageableResponse) {
 let page = await client.affiliates.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -2610,7 +2610,7 @@ Required permissions:
 
 ```typescript
 await client.affiliates.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     user_identifier: "user_identifier"
 });
 
@@ -5020,10 +5020,10 @@ Required permissions:
 const pageableResponse = await client.authorizedUsers.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     user_id: "user_xxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -5033,10 +5033,10 @@ for await (const item of pageableResponse) {
 let page = await client.authorizedUsers.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     user_id: "user_xxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -5111,7 +5111,7 @@ Required permissions:
 
 ```typescript
 await client.authorizedUsers.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     role: "owner",
     user_id: "user_xxxxxxxxxxxxx"
 });
@@ -5251,7 +5251,7 @@ Required permissions:
 ```typescript
 await client.authorizedUsers.delete({
     id: "ausr_xxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -6402,8 +6402,8 @@ Required permissions:
 const pageableResponse = await client.chatChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    product_id: "prod_xxxxxxxxxxxxx"
+    product_id: "prod_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -6413,8 +6413,8 @@ for await (const item of pageableResponse) {
 let page = await client.chatChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    product_id: "prod_xxxxxxxxxxxxx"
+    product_id: "prod_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -6905,8 +6905,8 @@ Required permissions:
 const pageableResponse = await client.companyTokenTransactions.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -6916,8 +6916,8 @@ for await (const item of pageableResponse) {
 let page = await client.companyTokenTransactions.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -6994,8 +6994,8 @@ Required permissions:
 ```typescript
 await client.companyTokenTransactions.create({
     transaction_type: "transfer",
+    account_id: "biz_xxxxxxxxxxxxxx",
     amount: 6.9,
-    company_id: "biz_xxxxxxxxxxxxxx",
     destination_user_id: "destination_user_id",
     user_id: "user_xxxxxxxxxxxxx"
 });
@@ -8529,7 +8529,7 @@ const pageableResponse = await client.courses.list({
     first: 42,
     last: 42,
     experience_id: "exp_xxxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -8540,7 +8540,7 @@ let page = await client.courses.list({
     first: 42,
     last: 42,
     experience_id: "exp_xxxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -8885,7 +8885,7 @@ Retrieve the deposit methods for an account, including crypto and bank transfer.
 
 ```typescript
 await client.deposits.create({
-    destination: "destination"
+    destination: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -9649,7 +9649,7 @@ Required permissions:
 const pageableResponse = await client.dmChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -9659,7 +9659,7 @@ for await (const item of pageableResponse) {
 let page = await client.dmChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -10377,9 +10377,9 @@ Required permissions:
 const pageableResponse = await client.entries.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -10389,9 +10389,9 @@ for await (const item of pageableResponse) {
 let page = await client.entries.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -10952,11 +10952,11 @@ Returns a paginated list of experiences belonging to a company, with optional fi
 const pageableResponse = await client.experiences.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     product_id: "prod_xxxxxxxxxxxxx",
     app_id: "app_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -10966,11 +10966,11 @@ for await (const item of pageableResponse) {
 let page = await client.experiences.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     product_id: "prod_xxxxxxxxxxxxx",
     app_id: "app_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -11042,8 +11042,8 @@ Required permissions:
 
 ```typescript
 await client.experiences.create({
-    app_id: "app_xxxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx",
+    app_id: "app_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -11714,7 +11714,7 @@ Required permissions:
 const pageableResponse = await client.feeMarkups.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -11724,7 +11724,7 @@ for await (const item of pageableResponse) {
 let page = await client.feeMarkups.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -11798,7 +11798,7 @@ Required permissions:
 
 ```typescript
 await client.feeMarkups.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     fee_type: "crypto_withdrawal_markup"
 });
 
@@ -12637,8 +12637,8 @@ Required permissions:
 const pageableResponse = await client.forums.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    product_id: "prod_xxxxxxxxxxxxx"
+    product_id: "prod_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -12648,8 +12648,8 @@ for await (const item of pageableResponse) {
 let page = await client.forums.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    product_id: "prod_xxxxxxxxxxxxx"
+    product_id: "prod_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -12862,7 +12862,7 @@ Required permissions:
 const pageableResponse = await client.identityProfiles.listIdentityProfile({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -12872,7 +12872,7 @@ for await (const item of pageableResponse) {
 let page = await client.identityProfiles.listIdentityProfile({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -13169,9 +13169,9 @@ Required permissions:
 const pageableResponse = await client.invoices.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -13181,9 +13181,9 @@ for await (const item of pageableResponse) {
 let page = await client.invoices.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -13260,8 +13260,8 @@ Required permissions:
 
 ```typescript
 await client.invoices.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
     collection_method: "send_invoice",
-    company_id: "biz_xxxxxxxxxxxxxx",
     plan: {},
     product: {
         title: "title"
@@ -13821,9 +13821,9 @@ Required permissions:
 const pageableResponse = await client.leads.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_after: "2023-12-01T05:00:00Z",
-    created_before: "2023-12-01T05:00:00Z"
+    created_before: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -13833,9 +13833,9 @@ for await (const item of pageableResponse) {
 let page = await client.leads.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_after: "2023-12-01T05:00:00Z",
-    created_before: "2023-12-01T05:00:00Z"
+    created_before: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -13912,7 +13912,7 @@ Required permissions:
 
 ```typescript
 await client.leads.create({
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -16521,9 +16521,9 @@ const pageableResponse = await client.paymentMethods.list({
     first: 42,
     last: 42,
     member_id: "mber_xxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -16534,9 +16534,9 @@ let page = await client.paymentMethods.list({
     first: 42,
     last: 42,
     member_id: "mber_xxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -16611,8 +16611,8 @@ Required permissions:
 ```typescript
 await client.paymentMethods.retrieve({
     id: "payt_xxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
-    member_id: "mber_xxxxxxxxxxxxx"
+    member_id: "mber_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -16681,8 +16681,8 @@ Required permissions:
 ```typescript
 await client.paymentMethods.deletePaymentMethod({
     id: "payt_xxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
-    member_id: "mber_xxxxxxxxxxxxx"
+    member_id: "mber_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -17485,7 +17485,7 @@ Required permissions:
 const pageableResponse = await client.payoutMethods.listPayoutMethod({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -17495,7 +17495,7 @@ for await (const item of pageableResponse) {
 let page = await client.payoutMethods.listPayoutMethod({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -21100,9 +21100,9 @@ Required permissions:
 const pageableResponse = await client.setupIntents.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -21112,9 +21112,9 @@ for await (const item of pageableResponse) {
 let page = await client.setupIntents.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
     created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
+    created_after: "2023-12-01T05:00:00Z",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -21190,7 +21190,7 @@ Required permissions:
 
 ```typescript
 await client.setupIntents.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     confirmation_token: "ctok_xxxxxxxxxxxxxx"
 });
 
@@ -22212,8 +22212,8 @@ Required permissions:
 
 ```typescript
 await client.stats.describeStats({
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -22284,8 +22284,8 @@ await client.stats.metricStats({
     resource: "resource",
     from: "2023-12-01T05:00:00Z",
     to: "2023-12-01T05:00:00Z",
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -22357,8 +22357,8 @@ await client.stats.rawStats({
     from: "2023-12-01T05:00:00Z",
     to: "2023-12-01T05:00:00Z",
     limit: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx"
+    user_id: "user_xxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -22499,7 +22499,7 @@ Required permissions:
 const pageableResponse = await client.supportChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 for await (const item of pageableResponse) {
     console.log(item);
@@ -22509,7 +22509,7 @@ for await (const item of pageableResponse) {
 let page = await client.supportChannels.list({
     first: 42,
     last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 while (page.hasNextPage()) {
     page = page.getNextPage();
@@ -22583,7 +22583,7 @@ Required permissions:
 
 ```typescript
 await client.supportChannels.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
+    account_id: "biz_xxxxxxxxxxxxxx",
     user_id: "user_xxxxxxxxxxxxx"
 });
 
@@ -23328,8 +23328,8 @@ Required permissions:
 
 ```typescript
 await client.topups.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
     amount: 6.9,
-    company_id: "biz_xxxxxxxxxxxxxx",
     currency: "usd",
     payment_method_id: "pmt_xxxxxxxxxxxxxx"
 });

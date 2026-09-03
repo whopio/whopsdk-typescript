@@ -369,6 +369,8 @@ export namespace LedgerActivity {
         /** Lowercase currency code converted from (swap sources only). */
         from_currency?: (string | null) | undefined;
         id: string;
+        /** Memo attached to the transfer source, or null when none was provided. */
+        notes?: (string | null) | undefined;
         object: string;
         /** Name of the entity processing the payout (payout sources only; requires payout:withdrawal:read). */
         payer_name?: (string | null) | undefined;

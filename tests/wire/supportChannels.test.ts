@@ -46,7 +46,7 @@ describe("SupportChannelsClient", () => {
         const page = await client.supportChannels.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -197,7 +197,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx", user_id: "user_xxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", user_id: "user_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             company_id: "company_id",
             custom_name: "Project Alpha Team",
@@ -217,7 +217,7 @@ describe("SupportChannelsClient", () => {
             .build();
 
         const response = await client.supportChannels.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
@@ -232,7 +232,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -246,7 +246,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -261,7 +261,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -275,7 +275,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -290,7 +290,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -304,7 +304,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -319,7 +319,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -333,7 +333,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
@@ -348,7 +348,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -362,7 +362,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
@@ -377,7 +377,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -391,7 +391,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
@@ -406,7 +406,7 @@ describe("SupportChannelsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -420,7 +420,7 @@ describe("SupportChannelsClient", () => {
 
         await expect(async () => {
             return await client.supportChannels.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_id: "user_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);

@@ -41,7 +41,7 @@ export class DepositsClient {
      *
      * @example
      *     await client.deposits.create({
-     *         destination: "destination"
+     *         destination: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
@@ -60,7 +60,7 @@ export class DepositsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

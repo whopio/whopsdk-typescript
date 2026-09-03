@@ -46,9 +46,9 @@ export class PaymentMethodsClient {
      *         first: 42,
      *         last: 42,
      *         member_id: "mber_xxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z"
+     *         created_after: "2023-12-01T05:00:00Z",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -65,7 +65,6 @@ export class PaymentMethodsClient {
                     first,
                     last,
                     member_id: memberId,
-                    company_id: companyId,
                     direction,
                     created_before: createdBefore,
                     created_after: createdAfter,
@@ -76,6 +75,7 @@ export class PaymentMethodsClient {
                     has_payer_document: hasPayerDocument,
                     expired,
                     broken,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
@@ -83,7 +83,6 @@ export class PaymentMethodsClient {
                     first,
                     last,
                     member_id: memberId,
-                    company_id: companyId,
                     direction: direction != null ? direction : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
@@ -106,6 +105,7 @@ export class PaymentMethodsClient {
                     has_payer_document: hasPayerDocument,
                     expired,
                     broken,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -113,7 +113,7 @@ export class PaymentMethodsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -210,8 +210,8 @@ export class PaymentMethodsClient {
      * @example
      *     await client.paymentMethods.retrieve({
      *         id: "payt_xxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         member_id: "mber_xxxxxxxxxxxxx"
+     *         member_id: "mber_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public retrieve(
@@ -225,17 +225,17 @@ export class PaymentMethodsClient {
         request: Whop.RetrievePaymentMethodsRequest,
         requestOptions?: PaymentMethodsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.PaymentMethod>> {
-        const { id, company_id: companyId, member_id: memberId } = request;
+        const { id, member_id: memberId, account_id: accountId } = request;
         const _queryParams: Record<string, unknown> = {
-            company_id: companyId,
             member_id: memberId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -314,8 +314,8 @@ export class PaymentMethodsClient {
      * @example
      *     await client.paymentMethods.deletePaymentMethod({
      *         id: "payt_xxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         member_id: "mber_xxxxxxxxxxxxx"
+     *         member_id: "mber_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public deletePaymentMethod(
@@ -329,17 +329,17 @@ export class PaymentMethodsClient {
         request: Whop.DeletePaymentMethodRequest,
         requestOptions?: PaymentMethodsClient.RequestOptions,
     ): Promise<core.WithRawResponse<boolean>> {
-        const { id, company_id: companyId, member_id: memberId } = request;
+        const { id, member_id: memberId, account_id: accountId } = request;
         const _queryParams: Record<string, unknown> = {
-            company_id: companyId,
             member_id: memberId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

@@ -5,17 +5,17 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         amount: 6.9,
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         currency: "usd",
  *         payment_method_id: "pmt_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateTopupsRequest {
+    /** The unique identifier of the company to add funds to, starting with 'biz_'. */
+    account_id: string;
     /** The amount to add to the balance in the specified currency. For example, 50.00 for $50.00 USD. */
     amount: number;
-    /** The unique identifier of the company to add funds to, starting with 'biz_'. */
-    company_id: string;
     /** The currency for the top-up amount, such as 'usd'. */
     currency: Whop.Currencies;
     /** The unique identifier of the stored payment method to charge for the top-up. */

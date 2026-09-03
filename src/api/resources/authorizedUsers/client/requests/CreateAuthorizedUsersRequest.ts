@@ -5,14 +5,14 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         role: "owner",
  *         user_id: "user_xxxxxxxxxxxxx"
  *     }
  */
 export interface CreateAuthorizedUsersRequest {
     /** The ID of the company to add the authorized user to. */
-    company_id: string;
+    account_id: string;
     /** Re-authentication proof required to perform this sensitive action. */
     elevation?: CreateAuthorizedUsersRequest.Elevation | null;
     /** The role to assign to the authorized user within the company. Supported roles: 'moderator', 'sales_manager'. */

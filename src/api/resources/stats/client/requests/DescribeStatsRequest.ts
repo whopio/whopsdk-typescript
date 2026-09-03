@@ -3,15 +3,15 @@
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         user_id: "user_xxxxxxxxxxxxx"
+ *         user_id: "user_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface DescribeStatsRequest {
     /** Resource path using : as separator (e.g., 'receipts', 'payments:membership', 'receipts:gross_revenue'). */
     resource?: string;
-    /** Scope query to a specific company. */
-    company_id?: string;
     /** Scope query to a specific user. */
     user_id?: string;
+    /** Scope query to a specific company. */
+    account_id?: string;
 }

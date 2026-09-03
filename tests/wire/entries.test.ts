@@ -51,9 +51,9 @@ describe("EntriesClient", () => {
         const page = await client.entries.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -78,7 +78,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -99,7 +99,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -120,7 +120,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -141,7 +141,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -162,7 +162,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -183,7 +183,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -204,7 +204,7 @@ describe("EntriesClient", () => {
 
         await expect(async () => {
             return await client.entries.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

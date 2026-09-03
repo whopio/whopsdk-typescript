@@ -14,12 +14,11 @@ describe("DepositsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { destination: "destination" };
+        const rawRequestBody = { destination: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: "50.00",
             hosted_url: "https://whop.com/deposit/biz_xxxxxxxxxxxxxx/",
-            metadata: { invoice: "SHINE-1042" },
             methods: {
                 bank: {
                     currencies: [
@@ -58,7 +57,7 @@ describe("DepositsClient", () => {
             .build();
 
         const response = await client.deposits.create({
-            destination: "destination",
+            destination: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });

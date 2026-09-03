@@ -11,7 +11,7 @@ export interface AccountRecommendedActionChainStep {
     description: string;
     /** Why the step failed, or `null` */
     error: string | null;
-    /** Whether the client should navigate to the CTA or open the programmatic execution dialog */
+    /** Whether the client should navigate to the CTA, open the programmatic execution dialog, or run the CTA as a Whop AI prompt */
     execution_type: AccountRecommendedActionChainStep.ExecutionType;
     /** The filled-in request body for the step's endpoint, or `null` when it was not recorded */
     input: Record<string, unknown> | null;
@@ -28,10 +28,11 @@ export interface AccountRecommendedActionChainStep {
 }
 
 export namespace AccountRecommendedActionChainStep {
-    /** Whether the client should navigate to the CTA or open the programmatic execution dialog */
+    /** Whether the client should navigate to the CTA, open the programmatic execution dialog, or run the CTA as a Whop AI prompt */
     export const ExecutionType = {
         Redirect: "redirect",
         Programatic: "programatic",
+        WhopAi: "whop_ai",
     } as const;
     export type ExecutionType = (typeof ExecutionType)[keyof typeof ExecutionType];
     /** Where the run step currently stands, or `null` when the chain has not been run */

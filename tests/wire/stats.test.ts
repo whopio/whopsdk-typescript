@@ -75,8 +75,8 @@ describe("StatsClient", () => {
         server.mockEndpoint().get("/stats/describe").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.stats.describeStats({
-            company_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -239,8 +239,8 @@ describe("StatsClient", () => {
             resource: "resource",
             from: "2023-12-01T05:00:00Z",
             to: "2023-12-01T05:00:00Z",
-            company_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -417,8 +417,8 @@ describe("StatsClient", () => {
             from: "2023-12-01T05:00:00Z",
             to: "2023-12-01T05:00:00Z",
             limit: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });

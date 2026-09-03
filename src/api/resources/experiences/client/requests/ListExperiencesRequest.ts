@@ -5,11 +5,11 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         product_id: "prod_xxxxxxxxxxxxx",
  *         app_id: "app_xxxxxxxxxxxxxx",
  *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z"
+ *         created_after: "2023-12-01T05:00:00Z",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListExperiencesRequest {
@@ -21,8 +21,6 @@ export interface ListExperiencesRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list experiences for. */
-    company_id: string;
     /** Filter to only experiences attached to this product identifier. */
     product_id?: string;
     /** Filter to only experiences powered by this app identifier. */
@@ -31,4 +29,6 @@ export interface ListExperiencesRequest {
     created_before?: string;
     /** Only return experiences created after this timestamp. */
     created_after?: string;
+    /** The unique identifier of the company to list experiences for. */
+    account_id: string;
 }

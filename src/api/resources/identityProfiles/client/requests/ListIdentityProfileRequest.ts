@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListIdentityProfileRequest {
@@ -19,8 +19,8 @@ export interface ListIdentityProfileRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to filter to. When omitted, returns IPs across all ledgers the actor can read. */
-    company_id?: string;
     profile_type?: Whop.IdentityProfileKinds;
     status?: Whop.IdentityProfileStatuses;
+    /** The unique identifier of the company to filter to. When omitted, returns IPs across all ledgers the actor can read. */
+    account_id?: string;
 }

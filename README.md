@@ -56,7 +56,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { WhopClient } from "@whop/sdk";
 
-const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-09-02-1", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-09-02-2", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
 await client.accessTokens.create();
 ```
 
@@ -454,7 +454,7 @@ List endpoints are paginated. The SDK provides an iterator so that you can simpl
 ```typescript
 import { WhopClient } from "@whop/sdk";
 
-const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-09-02-1", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
+const client = new WhopClient({ token: "YOUR_TOKEN", apiVersionDate: "2026-09-02-2", idempotencyKey: "YOUR_IDEMPOTENCY_KEY" });
 const pageableResponse = await client.accounts.list();
 for await (const item of pageableResponse) {
     console.log(item);

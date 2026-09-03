@@ -44,8 +44,8 @@ export class TopupsClient {
      *
      * @example
      *     await client.topups.create({
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         amount: 6.9,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         currency: "usd",
      *         payment_method_id: "pmt_xxxxxxxxxxxxxx"
      *     })
@@ -66,7 +66,7 @@ export class TopupsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

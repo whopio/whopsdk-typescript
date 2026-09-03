@@ -6,7 +6,7 @@
  *         first: 42,
  *         last: 42,
  *         experience_id: "exp_xxxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListCoursesRequest {
@@ -21,5 +21,5 @@ export interface ListCoursesRequest {
     /** The unique identifier of the experience to list courses for. */
     experience_id?: string;
     /** The unique identifier of the company to list courses for. */
-    company_id?: string;
+    account_id?: string;
 }

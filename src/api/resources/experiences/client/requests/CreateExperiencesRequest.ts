@@ -3,15 +3,15 @@
 /**
  * @example
  *     {
- *         app_id: "app_xxxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx",
+ *         app_id: "app_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateExperiencesRequest {
+    /** The unique identifier of the company to create this experience for. */
+    account_id: string;
     /** The unique identifier of the app that powers this experience. */
     app_id: string;
-    /** The unique identifier of the company to create this experience for. */
-    company_id: string;
     /** Whether the experience is publicly accessible without a membership. */
     is_public?: boolean | null;
     /** A logo image displayed alongside the experience name. */

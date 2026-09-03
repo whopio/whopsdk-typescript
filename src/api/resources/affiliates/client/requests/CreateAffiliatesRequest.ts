@@ -3,13 +3,13 @@
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         user_identifier: "user_identifier"
  *     }
  */
 export interface CreateAffiliatesRequest {
     /** The ID of the company to create the affiliate for. */
-    company_id: string;
+    account_id: string;
     /** The user identifier (username, email, user ID, or Discord ID). */
     user_identifier: string;
 }

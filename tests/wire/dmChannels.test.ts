@@ -39,7 +39,7 @@ describe("DmChannelsClient", () => {
         const page = await client.dmChannels.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);

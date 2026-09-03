@@ -45,7 +45,7 @@ export class IdentityProfilesClient {
      *     await client.identityProfiles.listIdentityProfile({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async listIdentityProfile(
@@ -61,18 +61,18 @@ export class IdentityProfilesClient {
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     profile_type: profileType,
                     status,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     profile_type: profileType != null ? profileType : undefined,
                     status: status != null ? status : undefined,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -80,7 +80,7 @@ export class IdentityProfilesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -196,7 +196,7 @@ export class IdentityProfilesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -291,7 +291,7 @@ export class IdentityProfilesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -400,7 +400,7 @@ export class IdentityProfilesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,

@@ -49,9 +49,9 @@ export class LeadsClient {
      *     await client.leads.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         created_after: "2023-12-01T05:00:00Z",
-     *         created_before: "2023-12-01T05:00:00Z"
+     *         created_before: "2023-12-01T05:00:00Z",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -65,20 +65,20 @@ export class LeadsClient {
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     created_after: createdAfter,
                     created_before: createdBefore,
                     product_ids: productIds,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     created_after: createdAfter != null ? createdAfter : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     product_ids: productIds,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -86,7 +86,7 @@ export class LeadsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -182,7 +182,7 @@ export class LeadsClient {
      *
      * @example
      *     await client.leads.create({
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
@@ -201,7 +201,7 @@ export class LeadsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -301,7 +301,7 @@ export class LeadsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -398,7 +398,7 @@ export class LeadsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

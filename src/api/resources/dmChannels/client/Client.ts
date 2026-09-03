@@ -46,7 +46,7 @@ export class DmChannelsClient {
      *     await client.dmChannels.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -55,13 +55,13 @@ export class DmChannelsClient {
     ): Promise<core.Page<Whop.DmChannelListItem, Whop.ListDmChannelsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListDmChannelsRequest): Promise<core.WithRawResponse<Whop.ListDmChannelsResponse>> => {
-                const { after, before, first, last, company_id: companyId } = request;
+                const { after, before, first, last, account_id: accountId } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -69,7 +69,7 @@ export class DmChannelsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -181,7 +181,7 @@ export class DmChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -279,7 +279,7 @@ export class DmChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -374,7 +374,7 @@ export class DmChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -469,7 +469,7 @@ export class DmChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

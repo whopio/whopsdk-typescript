@@ -4,12 +4,12 @@
  * @example
  *     {
  *         id: "ausr_xxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface DeleteAuthorizedUsersRequest {
     /** The ID of the authorized user or user to remove. */
     id: string;
     /** The ID of the company the authorized user belongs to. Optional if the authorized user ID is provided. */
-    company_id?: string;
+    account_id?: string;
 }

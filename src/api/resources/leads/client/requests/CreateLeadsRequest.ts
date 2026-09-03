@@ -3,12 +3,12 @@
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateLeadsRequest {
     /** The unique identifier of the company to create the lead for, starting with 'biz_'. */
-    company_id: string;
+    account_id: string;
     /** A JSON object of custom metadata to attach to the lead for tracking purposes. */
     metadata?: Record<string, unknown> | null;
     /** The unique identifier of the product the lead is interested in, starting with 'prod_'. */

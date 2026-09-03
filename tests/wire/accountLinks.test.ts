@@ -15,7 +15,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -35,7 +35,7 @@ describe("AccountLinksClient", () => {
             .build();
 
         const response = await client.accountLinks.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -53,7 +53,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -71,7 +71,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -89,7 +89,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -107,7 +107,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -125,7 +125,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -143,7 +143,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -161,7 +161,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -179,7 +179,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -197,7 +197,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -215,7 +215,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -233,7 +233,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -251,7 +251,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",
@@ -269,7 +269,7 @@ describe("AccountLinksClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
-            company_id: "company_id",
+            account_id: "account_id",
             refresh_url: "refresh_url",
             return_url: "return_url",
             use_case: "account_onboarding",
@@ -287,7 +287,7 @@ describe("AccountLinksClient", () => {
 
         await expect(async () => {
             return await client.accountLinks.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 refresh_url: "refresh_url",
                 return_url: "return_url",
                 use_case: "account_onboarding",

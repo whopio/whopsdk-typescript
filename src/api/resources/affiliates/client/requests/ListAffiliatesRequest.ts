@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListAffiliatesRequest {
@@ -19,11 +19,11 @@ export interface ListAffiliatesRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list affiliates for. */
-    company_id: string;
     direction?: Whop.Direction;
     order?: Whop.AffiliatesSortableColumns;
     /** Search affiliates by username. */
     query?: string;
     status?: Whop.Status;
+    /** The unique identifier of the company to list affiliates for. */
+    account_id: string;
 }

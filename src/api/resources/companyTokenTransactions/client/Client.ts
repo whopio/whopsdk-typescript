@@ -48,8 +48,8 @@ export class CompanyTokenTransactionsClient {
      *     await client.companyTokenTransactions.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         user_id: "user_xxxxxxxxxxxxx"
+     *         user_id: "user_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -65,18 +65,18 @@ export class CompanyTokenTransactionsClient {
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     user_id: userId,
                     transaction_type: transactionType,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     user_id: userId,
                     transaction_type: transactionType != null ? transactionType : undefined,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -84,7 +84,7 @@ export class CompanyTokenTransactionsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -188,8 +188,8 @@ export class CompanyTokenTransactionsClient {
      * @example
      *     await client.companyTokenTransactions.create({
      *         transaction_type: "transfer",
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         amount: 6.9,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         destination_user_id: "destination_user_id",
      *         user_id: "user_xxxxxxxxxxxxx"
      *     })
@@ -210,7 +210,7 @@ export class CompanyTokenTransactionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -309,7 +309,7 @@ export class CompanyTokenTransactionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

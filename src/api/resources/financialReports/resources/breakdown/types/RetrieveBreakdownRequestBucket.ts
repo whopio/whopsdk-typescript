@@ -5,6 +5,7 @@ export const RetrieveBreakdownRequestBucket = {
     Payments: "payments",
     Refunds: "refunds",
     Ads: "ads",
+    ApplicationFees: "application_fees",
     CardSpend: "card_spend",
     CardAuthorizationReleases: "card_authorization_releases",
     Withdrawals: "withdrawals",

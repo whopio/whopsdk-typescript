@@ -5,7 +5,7 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         refresh_url: "refresh_url",
  *         return_url: "return_url",
  *         use_case: "account_onboarding"
@@ -13,7 +13,7 @@ import type * as Whop from "../../../../index.js";
  */
 export interface CreateAccountLinksRequest {
     /** The unique identifier of the company to generate the link for, starting with 'biz_'. Must be a sub-merchant of the API key's company. */
-    company_id: string;
+    account_id: string;
     /** The URL to redirect the user to if the session expires and needs to be re-authenticated, such as 'https://example.com/refresh'. */
     refresh_url: string;
     /** The URL to redirect the user to when they want to return to your site, such as 'https://example.com/return'. */

@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListSupportChannelsRequest {
@@ -19,11 +19,11 @@ export interface ListSupportChannelsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list support channels for. Includes channels of child companies. When omitted, returns support channels across all companies the user has access to. */
-    company_id?: string;
     view?: Whop.SupportChannelView;
     /** Whether to filter by open or resolved support channels. Set to true to only return channels awaiting a response, or false for resolved channels. */
     open?: boolean;
     direction?: Whop.Direction;
     order?: Whop.MessageChannelOrder;
+    /** The unique identifier of the company to list support channels for. Includes channels of child companies. When omitted, returns support channels across all companies the user has access to. */
+    account_id?: string;
 }

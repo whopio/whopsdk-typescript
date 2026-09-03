@@ -55,9 +55,9 @@ describe("SetupIntentsClient", () => {
         const page = await client.setupIntents.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -82,7 +82,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -103,7 +103,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -124,7 +124,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -145,7 +145,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -166,7 +166,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -187,7 +187,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -208,7 +208,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -222,7 +222,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx", confirmation_token: "ctok_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", confirmation_token: "ctok_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             checkout_configuration: { id: "ch_xxxxxxxxxxxxxxx" },
             client_secret: "sint_xxxxxxxxxxxxxx_secret_v1_xxxx",
@@ -261,7 +261,7 @@ describe("SetupIntentsClient", () => {
             .build();
 
         const response = await client.setupIntents.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             confirmation_token: "ctok_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
@@ -276,7 +276,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -290,7 +290,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -305,7 +305,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -319,7 +319,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -334,7 +334,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -348,7 +348,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -363,7 +363,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -377,7 +377,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.NotFoundError);
@@ -392,7 +392,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -406,7 +406,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
@@ -421,7 +421,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -435,7 +435,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
@@ -450,7 +450,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -464,7 +464,7 @@ describe("SetupIntentsClient", () => {
 
         await expect(async () => {
             return await client.setupIntents.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.InternalServerError);
