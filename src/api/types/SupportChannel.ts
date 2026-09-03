@@ -4,8 +4,8 @@
  * A messaging channel that can be a one-on-one DM, group chat, company support conversation, or platform-level direct message.
  */
 export interface SupportChannel {
-    /** The unique identifier of the company associated with this channel. Null if this is not a support or company-scoped conversation. */
-    company_id: string | null;
+    /** The unique identifier of the account associated with this channel. Null if this is not a support or account-scoped conversation. */
+    account_id: string | null;
     /** A custom display name assigned to this channel by the user. Null if no custom name has been set. */
     custom_name: string | null;
     /** The customer who initiated this support conversation. Null if this is not a support chat. */

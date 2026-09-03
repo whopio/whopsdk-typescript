@@ -6,10 +6,10 @@ import type * as Whop from "../index.js";
  * A checkout configuration is a reusable configuration for a checkout, including the plan, affiliate, and custom metadata. Payments and memberships created from a checkout session inherit its metadata.
  */
 export interface CheckoutConfigurationListItem {
+    /** The ID of the account to use for the checkout configuration */
+    account_id: string;
     /** The affiliate code to use for the checkout configuration */
     affiliate_code: string | null;
-    /** The ID of the company to use for the checkout configuration */
-    company_id: string;
     /** The currency to use for the configuration when in 'setup' mode. This is used to target which currency specific payment methods are available. If not provided, it will default to 'usd' when in setup mode. */
     currency: Whop.Currencies | null;
     /** The unique identifier for the checkout session. */

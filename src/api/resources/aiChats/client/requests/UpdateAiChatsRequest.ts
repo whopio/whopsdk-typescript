@@ -11,8 +11,8 @@ import type * as Whop from "../../../../index.js";
 export interface UpdateAiChatsRequest {
     /** The unique identifier of the AI chat to update (e.g., "ai_chat_XXXXX"). */
     id: string;
-    /** The unique identifier of the company to set as context for the AI chat (e.g., "biz_XXXXX"). */
-    current_company_id?: string | null;
+    /** The unique identifier of the account to set as context for the AI chat (e.g., "biz_XXXXX"). */
+    current_account_id?: string | null;
     /** The notification preference for the AI chat. */
     notification_preference?: Whop.AiChatNotificationPreferences | null;
     /** The new display title for the AI chat thread (e.g., "Help with billing"). */
