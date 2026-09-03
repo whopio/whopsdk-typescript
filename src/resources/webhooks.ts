@@ -4051,6 +4051,7 @@ export namespace AccountUpdatedWebhookEvent {
       action:
         | 'deposit_funds'
         | 'submit_information_request'
+        | 'update_automatic_withdrawal_method'
         | 'reauthorize_payout_methods'
         | 'update_payout_profile'
         | 'card_usage_review'
@@ -6695,7 +6696,12 @@ export namespace DepositSucceededWebhookEvent {
       | 'withdrawal_markup_fee_reversal'
       | 'withdrawal_reclassification'
       | 'withdrawal_reversal'
-      | 'withdrawal_topup_adjustment';
+      | 'withdrawal_topup_adjustment'
+      | 'deposit'
+      | 'wallet_transfer_incoming'
+      | 'wallet_transfer_outgoing'
+      | 'swap_source'
+      | 'swap_target';
 
     object: 'ledger_activity';
 
@@ -12685,7 +12691,12 @@ export namespace SwapCompletedWebhookEvent {
       | 'withdrawal_markup_fee_reversal'
       | 'withdrawal_reclassification'
       | 'withdrawal_reversal'
-      | 'withdrawal_topup_adjustment';
+      | 'withdrawal_topup_adjustment'
+      | 'deposit'
+      | 'wallet_transfer_incoming'
+      | 'wallet_transfer_outgoing'
+      | 'swap_source'
+      | 'swap_target';
 
     object: 'ledger_activity';
 
