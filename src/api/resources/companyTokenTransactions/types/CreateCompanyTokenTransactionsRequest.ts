@@ -19,10 +19,10 @@ export type CreateCompanyTokenTransactionsRequest =
 export namespace CreateCompanyTokenTransactionsRequest {
     export interface Transfer {
         transaction_type: "transfer";
+        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
+        account_id: string;
         /** The positive number of tokens to transact. For example, 100.0 for 100 tokens. */
         amount: number;
-        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
-        company_id: string;
         /** A human-readable description of why the transaction was created. */
         description?: (string | null) | undefined;
         /** The unique identifier of the user receiving the tokens. Required when the transaction type is 'transfer'. */
@@ -35,10 +35,10 @@ export namespace CreateCompanyTokenTransactionsRequest {
 
     export interface Add {
         transaction_type: "add";
+        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
+        account_id: string;
         /** The positive number of tokens to transact. For example, 100.0 for 100 tokens. */
         amount: number;
-        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
-        company_id: string;
         /** A human-readable description of why the transaction was created. */
         description?: (string | null) | undefined;
         /** A unique key to prevent duplicate transactions. Use a UUID or similar unique string. */
@@ -49,10 +49,10 @@ export namespace CreateCompanyTokenTransactionsRequest {
 
     export interface Subtract {
         transaction_type: "subtract";
+        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
+        account_id: string;
         /** The positive number of tokens to transact. For example, 100.0 for 100 tokens. */
         amount: number;
-        /** The unique identifier of the company to create the transaction in, starting with 'biz_'. */
-        company_id: string;
         /** A human-readable description of why the transaction was created. */
         description?: (string | null) | undefined;
         /** A unique key to prevent duplicate transactions. Use a UUID or similar unique string. */

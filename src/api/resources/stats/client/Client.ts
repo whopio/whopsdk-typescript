@@ -52,7 +52,7 @@ export class StatsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -114,8 +114,8 @@ export class StatsClient {
      *
      * @example
      *     await client.stats.describeStats({
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         user_id: "user_xxxxxxxxxxxxx"
+     *         user_id: "user_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public describeStats(
@@ -129,18 +129,18 @@ export class StatsClient {
         request: Whop.DescribeStatsRequest = {},
         requestOptions?: StatsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.DescribeStatsResponse>> {
-        const { resource, company_id: companyId, user_id: userId } = request;
+        const { resource, user_id: userId, account_id: accountId } = request;
         const _queryParams: Record<string, unknown> = {
             resource,
-            company_id: companyId,
             user_id: userId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -221,8 +221,8 @@ export class StatsClient {
      *         resource: "resource",
      *         from: "2023-12-01T05:00:00Z",
      *         to: "2023-12-01T05:00:00Z",
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         user_id: "user_xxxxxxxxxxxxx"
+     *         user_id: "user_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public metricStats(
@@ -244,8 +244,8 @@ export class StatsClient {
             time_zone: timeZone,
             from: from_,
             to,
-            company_id: companyId,
             user_id: userId,
+            account_id: accountId,
         } = request;
         const _queryParams: Record<string, unknown> = {
             resource,
@@ -255,15 +255,15 @@ export class StatsClient {
             time_zone: timeZone,
             from: from_ != null ? from_ : undefined,
             to: to != null ? to : undefined,
-            company_id: companyId,
             user_id: userId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -345,8 +345,8 @@ export class StatsClient {
      *         from: "2023-12-01T05:00:00Z",
      *         to: "2023-12-01T05:00:00Z",
      *         limit: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         user_id: "user_xxxxxxxxxxxxx"
+     *         user_id: "user_xxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public rawStats(
@@ -368,8 +368,8 @@ export class StatsClient {
             cursor,
             sort,
             sort_direction: sortDirection,
-            company_id: companyId,
             user_id: userId,
+            account_id: accountId,
         } = request;
         const _queryParams: Record<string, unknown> = {
             resource,
@@ -379,15 +379,15 @@ export class StatsClient {
             cursor,
             sort,
             sort_direction: sortDirection != null ? sortDirection : undefined,
-            company_id: companyId,
             user_id: userId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -556,7 +556,7 @@ export class StatsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

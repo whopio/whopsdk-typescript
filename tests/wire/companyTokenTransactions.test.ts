@@ -50,8 +50,8 @@ describe("CompanyTokenTransactionsClient", () => {
         const page = await client.companyTokenTransactions.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -82,7 +82,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -109,7 +109,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -136,7 +136,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -163,7 +163,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -190,7 +190,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -217,7 +217,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -244,7 +244,7 @@ describe("CompanyTokenTransactionsClient", () => {
 
         await expect(async () => {
             return await client.companyTokenTransactions.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -260,8 +260,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "biz_xxxxxxxxxxxxxx",
             amount: 6.9,
-            company_id: "biz_xxxxxxxxxxxxxx",
             destination_user_id: "destination_user_id",
             user_id: "user_xxxxxxxxxxxxx",
         };
@@ -289,8 +289,8 @@ describe("CompanyTokenTransactionsClient", () => {
 
         const response = await client.companyTokenTransactions.create({
             transaction_type: "transfer",
+            account_id: "biz_xxxxxxxxxxxxxx",
             amount: 6.9,
-            company_id: "biz_xxxxxxxxxxxxxx",
             destination_user_id: "destination_user_id",
             user_id: "user_xxxxxxxxxxxxx",
         });
@@ -308,8 +308,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -327,8 +327,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -346,8 +346,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -365,8 +365,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -384,8 +384,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -403,8 +403,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -422,8 +422,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -441,8 +441,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -460,8 +460,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -479,8 +479,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -498,8 +498,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -517,8 +517,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });
@@ -536,8 +536,8 @@ describe("CompanyTokenTransactionsClient", () => {
         });
         const rawRequestBody = {
             transaction_type: "transfer",
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             destination_user_id: "destination_user_id",
             user_id: "user_id",
         };
@@ -555,8 +555,8 @@ describe("CompanyTokenTransactionsClient", () => {
         await expect(async () => {
             return await client.companyTokenTransactions.create({
                 transaction_type: "transfer",
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 destination_user_id: "destination_user_id",
                 user_id: "user_id",
             });

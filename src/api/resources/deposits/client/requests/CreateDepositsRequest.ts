@@ -3,37 +3,12 @@
 /**
  * @example
  *     {
- *         destination: "destination"
+ *         destination: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreateDepositsRequest {
     /** Amount to prefill on hosted deposit page. */
     amount?: number;
-    /** Destination account ID or wallet address. Object form is supported for compatibility. Any business resolves by its account ID without authentication; a user account resolves only for that same authenticated user. */
-    destination: CreateDepositsRequest.Destination;
-    /** Metadata to include with the deposit response. */
-    metadata?: Record<string, unknown>;
-    /** Destination network override. Defaults to the destination wallet's own network. */
-    network?: CreateDepositsRequest.Network | null;
-}
-
-export namespace CreateDepositsRequest {
-    /**
-     * Destination account ID or wallet address. Object form is supported for compatibility. Any business resolves by its account ID without authentication; a user account resolves only for that same authenticated user.
-     */
-    export type Destination =
-        | string
-        | {
-              account_id?: string | undefined;
-              address?: string | undefined;
-              network?: ("ethereum" | "polygon" | "base" | "solana") | undefined;
-          };
-    /** Destination network override. Defaults to the destination wallet's own network. */
-    export const Network = {
-        Ethereum: "ethereum",
-        Polygon: "polygon",
-        Base: "base",
-        Solana: "solana",
-    } as const;
-    export type Network = (typeof Network)[keyof typeof Network];
+    /** Account ID to fund, `biz_` or `user_`. Any business resolves without authentication; a user account resolves only for that same authenticated user. */
+    destination: string;
 }

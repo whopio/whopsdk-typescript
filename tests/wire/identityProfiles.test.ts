@@ -82,7 +82,7 @@ describe("IdentityProfilesClient", () => {
         const page = await client.identityProfiles.listIdentityProfile({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);

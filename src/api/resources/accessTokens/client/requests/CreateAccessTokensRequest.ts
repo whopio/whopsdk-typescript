@@ -6,7 +6,7 @@
  */
 export interface CreateAccessTokensRequest {
     /** The unique identifier of the company to generate the token for, starting with 'biz_'. The API key must have permission to access this company. */
-    company_id?: string | null;
+    account_id?: string | null;
     /** The expiration timestamp for the access token. Defaults to 1 hour from now, with a maximum of 3 hours. */
     expires_at?: string | null;
     /** An array of permission scopes to grant to the access token. If empty or omitted, all permissions from the authenticating credential are inherited. Must be a subset of the credential's permissions. */

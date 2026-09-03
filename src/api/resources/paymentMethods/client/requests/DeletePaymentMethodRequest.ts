@@ -4,15 +4,15 @@
  * @example
  *     {
  *         id: "payt_xxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         member_id: "mber_xxxxxxxxxxxxx"
+ *         member_id: "mber_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface DeletePaymentMethodRequest {
     /** The unique identifier of the payment method to delete. */
     id: string;
-    /** The unique identifier of the company. Provide either this or member_id, not both. Omit both to address your own saved payment methods. */
-    company_id?: string;
     /** The unique identifier of the member. Provide either this or company_id, not both. Omit both to address your own saved payment methods. */
     member_id?: string;
+    /** The unique identifier of the company. Provide either this or member_id, not both. Omit both to address your own saved payment methods. */
+    account_id?: string;
 }

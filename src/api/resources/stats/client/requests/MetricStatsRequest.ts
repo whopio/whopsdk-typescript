@@ -6,8 +6,8 @@
  *         resource: "resource",
  *         from: "2023-12-01T05:00:00Z",
  *         to: "2023-12-01T05:00:00Z",
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         user_id: "user_xxxxxxxxxxxxx"
+ *         user_id: "user_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface MetricStatsRequest {
@@ -25,8 +25,8 @@ export interface MetricStatsRequest {
     from?: string;
     /** End of time range (unix timestamp). */
     to?: string;
-    /** Scope query to a specific company. */
-    company_id?: string;
     /** Scope query to a specific user. */
     user_id?: string;
+    /** Scope query to a specific company. */
+    account_id?: string;
 }

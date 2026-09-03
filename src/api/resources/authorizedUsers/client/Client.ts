@@ -47,10 +47,10 @@ export class AuthorizedUsersClient {
      *     await client.authorizedUsers.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
      *         user_id: "user_xxxxxxxxxxxxx",
      *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z"
+     *         created_after: "2023-12-01T05:00:00Z",
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -66,22 +66,22 @@ export class AuthorizedUsersClient {
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     user_id: userId,
                     role,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    account_id: accountId,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     user_id: userId,
                     role: role != null ? role : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -89,7 +89,7 @@ export class AuthorizedUsersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -186,7 +186,7 @@ export class AuthorizedUsersClient {
      *
      * @example
      *     await client.authorizedUsers.create({
-     *         company_id: "biz_xxxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         role: "owner",
      *         user_id: "user_xxxxxxxxxxxxx"
      *     })
@@ -207,7 +207,7 @@ export class AuthorizedUsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -305,7 +305,7 @@ export class AuthorizedUsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -380,7 +380,7 @@ export class AuthorizedUsersClient {
      * @example
      *     await client.authorizedUsers.delete({
      *         id: "ausr_xxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public delete(
@@ -394,16 +394,16 @@ export class AuthorizedUsersClient {
         request: Whop.DeleteAuthorizedUsersRequest,
         requestOptions?: AuthorizedUsersClient.RequestOptions,
     ): Promise<core.WithRawResponse<boolean>> {
-        const { id, company_id: companyId } = request;
+        const { id, account_id: accountId } = request;
         const _queryParams: Record<string, unknown> = {
-            company_id: companyId,
+            account_id: accountId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

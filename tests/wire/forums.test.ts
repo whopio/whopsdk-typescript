@@ -45,8 +45,8 @@ describe("ForumsClient", () => {
         const page = await client.forums.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -71,7 +71,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -92,7 +92,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -113,7 +113,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -134,7 +134,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -155,7 +155,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -176,7 +176,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -197,7 +197,7 @@ describe("ForumsClient", () => {
 
         await expect(async () => {
             return await client.forums.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

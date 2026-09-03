@@ -49,7 +49,7 @@ describe("PayoutMethodsClient", () => {
         const page = await client.payoutMethods.listPayoutMethod({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -74,7 +74,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -95,7 +95,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -116,7 +116,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -137,7 +137,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -158,7 +158,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -179,7 +179,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -200,7 +200,7 @@ describe("PayoutMethodsClient", () => {
 
         await expect(async () => {
             return await client.payoutMethods.listPayoutMethod({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

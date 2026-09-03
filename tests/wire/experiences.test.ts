@@ -52,11 +52,11 @@ describe("ExperiencesClient", () => {
         const page = await client.experiences.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxx",
             app_id: "app_xxxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -81,7 +81,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -102,7 +102,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -123,7 +123,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -144,7 +144,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -165,7 +165,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -186,7 +186,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -207,7 +207,7 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -221,7 +221,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_xxxxxxxxxxxxxx", company_id: "biz_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", app_id: "app_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             app: {
                 icon: { url: "https://media.whop.com/abc123/optimized.jpg" },
@@ -248,8 +248,8 @@ describe("ExperiencesClient", () => {
             .build();
 
         const response = await client.experiences.create({
+            account_id: "biz_xxxxxxxxxxxxxx",
             app_id: "app_xxxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -263,7 +263,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -277,8 +277,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -292,7 +292,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -306,8 +306,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -321,7 +321,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -335,8 +335,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -350,7 +350,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -364,8 +364,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -379,7 +379,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -393,8 +393,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -408,7 +408,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -422,8 +422,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -437,7 +437,7 @@ describe("ExperiencesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { app_id: "app_id", company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id", app_id: "app_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -451,8 +451,8 @@ describe("ExperiencesClient", () => {
 
         await expect(async () => {
             return await client.experiences.create({
+                account_id: "account_id",
                 app_id: "app_id",
-                company_id: "company_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

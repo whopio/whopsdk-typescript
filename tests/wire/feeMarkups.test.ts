@@ -47,7 +47,7 @@ describe("FeeMarkupsClient", () => {
         const page = await client.feeMarkups.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -72,7 +72,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -93,7 +93,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -114,7 +114,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -135,7 +135,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -156,7 +156,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -177,7 +177,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -198,7 +198,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -212,7 +212,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = {
             created_at: "2023-12-01T05:00:00Z",
             fee_type: "crypto_withdrawal_markup",
@@ -233,7 +233,7 @@ describe("FeeMarkupsClient", () => {
             .build();
 
         const response = await client.feeMarkups.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             fee_type: "crypto_withdrawal_markup",
         });
         expect(response).toEqual(rawResponseBody);
@@ -248,7 +248,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -262,7 +262,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -277,7 +277,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -291,7 +291,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -306,7 +306,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -320,7 +320,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -335,7 +335,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -349,7 +349,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.NotFoundError);
@@ -364,7 +364,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -378,7 +378,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
@@ -393,7 +393,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -407,7 +407,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
@@ -422,7 +422,7 @@ describe("FeeMarkupsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", fee_type: "crypto_withdrawal_markup" };
+        const rawRequestBody = { account_id: "account_id", fee_type: "crypto_withdrawal_markup" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -436,7 +436,7 @@ describe("FeeMarkupsClient", () => {
 
         await expect(async () => {
             return await client.feeMarkups.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 fee_type: "crypto_withdrawal_markup",
             });
         }).rejects.toThrow(Whop.InternalServerError);

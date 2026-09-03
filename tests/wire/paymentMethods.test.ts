@@ -55,9 +55,9 @@ describe("PaymentMethodsClient", () => {
             first: 42,
             last: 42,
             member_id: "mber_xxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -236,8 +236,8 @@ describe("PaymentMethodsClient", () => {
 
         const response = await client.paymentMethods.retrieve({
             id: "payt_xxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
             member_id: "mber_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -453,8 +453,8 @@ describe("PaymentMethodsClient", () => {
 
         const response = await client.paymentMethods.deletePaymentMethod({
             id: "payt_xxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
             member_id: "mber_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });

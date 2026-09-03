@@ -9,8 +9,8 @@ import type * as Whop from "../../../../index.js";
  *         from: "2023-12-01T05:00:00Z",
  *         to: "2023-12-01T05:00:00Z",
  *         limit: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         user_id: "user_xxxxxxxxxxxxx"
+ *         user_id: "user_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface RawStatsRequest {
@@ -27,8 +27,8 @@ export interface RawStatsRequest {
     /** Column to sort by. */
     sort?: string;
     sort_direction?: Whop.Direction;
-    /** Scope query to a specific company. */
-    company_id?: string;
     /** Scope query to a specific user. */
     user_id?: string;
+    /** Scope query to a specific company. */
+    account_id?: string;
 }

@@ -53,9 +53,9 @@ describe("LeadsClient", () => {
         const page = await client.leads.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             created_after: "2023-12-01T05:00:00Z",
             created_before: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -80,7 +80,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -101,7 +101,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -122,7 +122,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -143,7 +143,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -164,7 +164,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -185,7 +185,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -206,7 +206,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -220,7 +220,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             created_at: "2023-12-01T05:00:00Z",
             id: "lead_xxxxxxxxxxxxx",
@@ -242,7 +242,7 @@ describe("LeadsClient", () => {
             .build();
 
         const response = await client.leads.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -256,7 +256,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -270,7 +270,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -284,7 +284,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -298,7 +298,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -312,7 +312,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -326,7 +326,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -340,7 +340,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -354,7 +354,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -368,7 +368,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -382,7 +382,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -396,7 +396,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -410,7 +410,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -424,7 +424,7 @@ describe("LeadsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -438,7 +438,7 @@ describe("LeadsClient", () => {
 
         await expect(async () => {
             return await client.leads.create({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

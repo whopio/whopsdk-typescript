@@ -7,9 +7,9 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z"
+ *         created_after: "2023-12-01T05:00:00Z",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListSetupIntentsRequest {
@@ -21,11 +21,11 @@ export interface ListSetupIntentsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list setup intents for. */
-    company_id: string;
     direction?: Whop.Direction;
     /** Only return setup intents created before this timestamp. */
     created_before?: string;
     /** Only return setup intents created after this timestamp. */
     created_after?: string;
+    /** The unique identifier of the company to list setup intents for. */
+    account_id: string;
 }

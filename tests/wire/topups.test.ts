@@ -15,8 +15,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
             amount: 6.9,
-            company_id: "biz_xxxxxxxxxxxxxx",
             currency: "usd",
             payment_method_id: "pmt_xxxxxxxxxxxxxx",
         };
@@ -40,8 +40,8 @@ describe("TopupsClient", () => {
             .build();
 
         const response = await client.topups.create({
+            account_id: "biz_xxxxxxxxxxxxxx",
             amount: 6.9,
-            company_id: "biz_xxxxxxxxxxxxxx",
             currency: "usd",
             payment_method_id: "pmt_xxxxxxxxxxxxxx",
         });
@@ -58,8 +58,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -76,8 +76,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -94,8 +94,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -112,8 +112,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -130,8 +130,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -148,8 +148,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -166,8 +166,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -184,8 +184,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -202,8 +202,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -220,8 +220,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -238,8 +238,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -256,8 +256,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });
@@ -274,8 +274,8 @@ describe("TopupsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             amount: 1.1,
-            company_id: "company_id",
             currency: "usd",
             payment_method_id: "payment_method_id",
         };
@@ -292,8 +292,8 @@ describe("TopupsClient", () => {
 
         await expect(async () => {
             return await client.topups.create({
+                account_id: "account_id",
                 amount: 1.1,
-                company_id: "company_id",
                 currency: "usd",
                 payment_method_id: "payment_method_id",
             });

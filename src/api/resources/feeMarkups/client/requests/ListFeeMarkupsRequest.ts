@@ -5,7 +5,7 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListFeeMarkupsRequest {
@@ -18,5 +18,5 @@ export interface ListFeeMarkupsRequest {
     /** Returns the last _n_ elements from the list. */
     last?: number;
     /** The unique identifier of the company to list fee markups for. Pass a platform account identifier to retrieve platform default markups. */
-    company_id: string;
+    account_id: string;
 }

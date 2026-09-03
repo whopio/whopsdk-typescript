@@ -46,7 +46,7 @@ export class FeeMarkupsClient {
      *     await client.feeMarkups.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -55,13 +55,13 @@ export class FeeMarkupsClient {
     ): Promise<core.Page<Whop.FeeMarkupListItem, Whop.ListFeeMarkupsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListFeeMarkupsRequest): Promise<core.WithRawResponse<Whop.ListFeeMarkupsResponse>> => {
-                const { after, before, first, last, company_id: companyId } = request;
+                const { after, before, first, last, account_id: accountId } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -69,7 +69,7 @@ export class FeeMarkupsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -162,7 +162,7 @@ export class FeeMarkupsClient {
      *
      * @example
      *     await client.feeMarkups.create({
-     *         company_id: "biz_xxxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         fee_type: "crypto_withdrawal_markup"
      *     })
      */
@@ -182,7 +182,7 @@ export class FeeMarkupsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -279,7 +279,7 @@ export class FeeMarkupsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

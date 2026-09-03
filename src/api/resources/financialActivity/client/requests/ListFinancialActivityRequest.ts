@@ -23,6 +23,8 @@ export interface ListFinancialActivityRequest {
     resource_id?: string;
     /** Optional ledger activity ID (for example `line_3`). Returns at most that one activity. */
     activity_id?: string;
+    /** Whether to exclude balance reservations and balanced movements between the account's own balances. */
+    exclude_internal_movements?: boolean;
     /** Optional currency code filter, for example `usd`. */
     currency?: string;
     /** Only include rows posted after this ISO 8601 timestamp. */

@@ -68,7 +68,7 @@ describe("CoursesClient", () => {
             first: 42,
             last: 42,
             experience_id: "exp_xxxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);

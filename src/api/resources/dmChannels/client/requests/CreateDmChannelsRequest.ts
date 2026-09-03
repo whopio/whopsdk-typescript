@@ -8,7 +8,7 @@
  */
 export interface CreateDmChannelsRequest {
     /** The unique identifier of the company to scope this DM channel to. When set, the channel is visible only within that company context. */
-    company_id?: string | null;
+    account_id?: string | null;
     /** A custom display name for the DM channel. For example, 'Project Discussion'. */
     custom_name?: string | null;
     /** Whether Whop app notifications are enabled for this direct message channel. Webhooks still fire. */

@@ -3,13 +3,13 @@
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         user_id: "user_xxxxxxxxxxxxx"
  *     }
  */
 export interface CreateSupportChannelsRequest {
     /** The unique identifier of the company to create the support channel in. */
-    company_id: string;
+    account_id: string;
     /** Optional custom display name for the support channel. */
     custom_name?: string | null;
     /** Whether Whop app notifications are enabled for this support channel. Webhooks still fire. */

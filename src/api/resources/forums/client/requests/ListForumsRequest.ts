@@ -5,8 +5,8 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         product_id: "prod_xxxxxxxxxxxxx"
+ *         product_id: "prod_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListForumsRequest {
@@ -18,8 +18,8 @@ export interface ListForumsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list forums for. */
-    company_id: string;
     /** The unique identifier of a product to filter by. When set, only forums connected to this product are returned. */
     product_id?: string;
+    /** The unique identifier of the company to list forums for. */
+    account_id: string;
 }

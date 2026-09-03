@@ -46,7 +46,7 @@ export class SupportChannelsClient {
      *     await client.supportChannels.list({
      *         first: 42,
      *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public async list(
@@ -57,17 +57,17 @@ export class SupportChannelsClient {
             async (
                 request: Whop.ListSupportChannelsRequest,
             ): Promise<core.WithRawResponse<Whop.ListSupportChannelsResponse>> => {
-                const { after, before, first, last, company_id: companyId, view, open, direction, order } = request;
+                const { after, before, first, last, view, open, direction, order, account_id: accountId } = request;
                 const _queryParams: Record<string, unknown> = {
                     after,
                     before,
                     first,
                     last,
-                    company_id: companyId,
                     view: view != null ? view : undefined,
                     open,
                     direction: direction != null ? direction : undefined,
                     order: order != null ? order : undefined,
+                    account_id: accountId,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -75,7 +75,7 @@ export class SupportChannelsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -171,7 +171,7 @@ export class SupportChannelsClient {
      *
      * @example
      *     await client.supportChannels.create({
-     *         company_id: "biz_xxxxxxxxxxxxxx",
+     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         user_id: "user_xxxxxxxxxxxxx"
      *     })
      */
@@ -191,7 +191,7 @@ export class SupportChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -288,7 +288,7 @@ export class SupportChannelsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

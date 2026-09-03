@@ -7,10 +7,10 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         user_id: "user_xxxxxxxxxxxxx",
  *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z"
+ *         created_after: "2023-12-01T05:00:00Z",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListAuthorizedUsersRequest {
@@ -22,8 +22,6 @@ export interface ListAuthorizedUsersRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list authorized users for. */
-    company_id?: string;
     /** Filter results to a specific user to check if they are an authorized team member. */
     user_id?: string;
     role?: Whop.AuthorizedUserRoles;
@@ -31,4 +29,6 @@ export interface ListAuthorizedUsersRequest {
     created_before?: string;
     /** Only return authorized users created after this timestamp. */
     created_after?: string;
+    /** The unique identifier of the company to list authorized users for. */
+    account_id?: string;
 }

@@ -48,8 +48,8 @@ describe("ChatChannelsClient", () => {
         const page = await client.chatChannels.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -74,7 +74,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -95,7 +95,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -116,7 +116,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -137,7 +137,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -158,7 +158,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -179,7 +179,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -200,7 +200,7 @@ describe("ChatChannelsClient", () => {
 
         await expect(async () => {
             return await client.chatChannels.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });

@@ -5,7 +5,7 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListPayoutMethodRequest {
@@ -18,5 +18,5 @@ export interface ListPayoutMethodRequest {
     /** Returns the last _n_ elements from the list. */
     last?: number;
     /** The unique identifier of the company to list payout methods for. */
-    company_id: string;
+    account_id: string;
 }

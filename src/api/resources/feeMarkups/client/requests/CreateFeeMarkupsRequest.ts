@@ -5,13 +5,13 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         company_id: "biz_xxxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx",
  *         fee_type: "crypto_withdrawal_markup"
  *     }
  */
 export interface CreateFeeMarkupsRequest {
     /** The unique identifier of the company to create or update the fee markup for. */
-    company_id: string;
+    account_id: string;
     /** The type of fee this markup applies to, such as processing or platform fees. */
     fee_type: Whop.FeeMarkupTypes;
     /** The fixed fee amount in USD to charge per transaction. Must be between 0 and 50. */

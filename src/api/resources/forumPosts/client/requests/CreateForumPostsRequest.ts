@@ -9,10 +9,10 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreateForumPostsRequest {
+    /** The unique identifier of the company whose public forum to post in. Required when experience_id is 'public'. For example, 'biz_xxxxx'. */
+    account_id?: string | null;
     /** A list of file attachments to include with the post, such as images or videos. */
     attachments?: CreateForumPostsRequest.Attachments.Item[] | null;
-    /** The unique identifier of the company whose public forum to post in. Required when experience_id is 'public'. For example, 'biz_xxxxx'. */
-    company_id?: string | null;
     /** The main body of the post in Markdown format. For example, 'Check out this **update**'. Hidden if the post is paywalled and the viewer has not purchased access. */
     content?: string | null;
     /** The unique identifier of the experience to create this post in. For example, 'exp_xxxxx'. Pass 'public' along with company_id to automatically use the company's public forum. */

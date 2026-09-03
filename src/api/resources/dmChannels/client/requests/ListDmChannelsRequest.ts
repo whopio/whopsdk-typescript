@@ -5,7 +5,7 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListDmChannelsRequest {
@@ -18,5 +18,5 @@ export interface ListDmChannelsRequest {
     /** Returns the last _n_ elements from the list. */
     last?: number;
     /** The unique identifier of a company to filter DM channels by. Only returns channels scoped to this company. */
-    company_id?: string;
+    account_id?: string;
 }

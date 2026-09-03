@@ -5,9 +5,9 @@
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         created_after: "2023-12-01T05:00:00Z",
- *         created_before: "2023-12-01T05:00:00Z"
+ *         created_before: "2023-12-01T05:00:00Z",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListLeadsRequest {
@@ -19,12 +19,12 @@ export interface ListLeadsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list leads for. */
-    company_id: string;
     /** Only return leads created after this timestamp. */
     created_after?: string;
     /** Only return leads created before this timestamp. */
     created_before?: string;
     /** Filter leads to only those associated with these specific product identifiers. */
     product_ids?: string | string[];
+    /** The unique identifier of the company to list leads for. */
+    account_id: string;
 }

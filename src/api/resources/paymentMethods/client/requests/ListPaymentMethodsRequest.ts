@@ -8,9 +8,9 @@ import type * as Whop from "../../../../index.js";
  *         first: 42,
  *         last: 42,
  *         member_id: "mber_xxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx",
  *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z"
+ *         created_after: "2023-12-01T05:00:00Z",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListPaymentMethodsRequest {
@@ -24,8 +24,6 @@ export interface ListPaymentMethodsRequest {
     last?: number;
     /** The unique identifier of the member to list payment methods for. Omit this and company_id to list your own saved payment methods. */
     member_id?: string;
-    /** The unique identifier of the company. Provide either this or member_id, not both. Omit both to address your own saved payment methods. */
-    company_id?: string;
     direction?: Whop.Direction;
     /** Only return payment methods created before this timestamp. */
     created_before?: string;
@@ -44,4 +42,6 @@ export interface ListPaymentMethodsRequest {
     expired?: boolean;
     /** Filter by whether the stored credential has permanently stopped charging, such as a vault entry its provider closed. */
     broken?: boolean;
+    /** The unique identifier of the company. Provide either this or member_id, not both. Omit both to address your own saved payment methods. */
+    account_id?: string;
 }

@@ -54,7 +54,7 @@ describe("AffiliatesClient", () => {
         const page = await client.affiliates.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -79,7 +79,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -100,7 +100,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -121,7 +121,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -142,7 +142,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -163,7 +163,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
     });
@@ -184,7 +184,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
     });
@@ -205,7 +205,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.list({
-                company_id: "company_id",
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.InternalServerError);
     });
@@ -219,7 +219,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", user_identifier: "user_identifier" };
         const rawResponseBody = {
             active_members_count: 42,
             company: { id: "biz_xxxxxxxxxxxxxx", title: "title" },
@@ -247,7 +247,7 @@ describe("AffiliatesClient", () => {
             .build();
 
         const response = await client.affiliates.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             user_identifier: "user_identifier",
         });
         expect(response).toEqual(rawResponseBody);
@@ -262,7 +262,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -276,7 +276,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.BadRequestError);
@@ -291,7 +291,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -305,7 +305,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -320,7 +320,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -334,7 +334,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -349,7 +349,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -363,7 +363,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.NotFoundError);
@@ -378,7 +378,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -392,7 +392,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.UnprocessableEntityError);
@@ -407,7 +407,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -421,7 +421,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.TooManyRequestsError);
@@ -436,7 +436,7 @@ describe("AffiliatesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", user_identifier: "user_identifier" };
+        const rawRequestBody = { account_id: "account_id", user_identifier: "user_identifier" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -450,7 +450,7 @@ describe("AffiliatesClient", () => {
 
         await expect(async () => {
             return await client.affiliates.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 user_identifier: "user_identifier",
             });
         }).rejects.toThrow(Whop.InternalServerError);

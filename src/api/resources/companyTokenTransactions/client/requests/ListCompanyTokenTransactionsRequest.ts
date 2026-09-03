@@ -7,8 +7,8 @@ import type * as Whop from "../../../../index.js";
  *     {
  *         first: 42,
  *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         user_id: "user_xxxxxxxxxxxxx"
+ *         user_id: "user_xxxxxxxxxxxxx",
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface ListCompanyTokenTransactionsRequest {
@@ -20,9 +20,9 @@ export interface ListCompanyTokenTransactionsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the company to list token transactions for. */
-    company_id: string;
     /** Filter transactions to only those involving this specific user. */
     user_id?: string;
     transaction_type?: Whop.CompanyTokenTransactionTypes;
+    /** The unique identifier of the company to list token transactions for. */
+    account_id: string;
 }

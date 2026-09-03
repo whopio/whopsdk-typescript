@@ -49,10 +49,10 @@ describe("AuthorizedUsersClient", () => {
         const page = await client.authorizedUsers.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             user_id: "user_xxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -203,7 +203,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "biz_xxxxxxxxxxxxxx", role: "owner", user_id: "user_xxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", role: "owner", user_id: "user_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
             id: "ausr_xxxxxxxxxxxxx",
@@ -221,7 +221,7 @@ describe("AuthorizedUsersClient", () => {
             .build();
 
         const response = await client.authorizedUsers.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
             role: "owner",
             user_id: "user_xxxxxxxxxxxxx",
         });
@@ -237,7 +237,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -251,7 +251,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -267,7 +267,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -281,7 +281,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -297,7 +297,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -311,7 +311,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -327,7 +327,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -341,7 +341,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -357,7 +357,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -371,7 +371,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -387,7 +387,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -401,7 +401,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -417,7 +417,7 @@ describe("AuthorizedUsersClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { company_id: "company_id", role: "owner", user_id: "user_id" };
+        const rawRequestBody = { account_id: "account_id", role: "owner", user_id: "user_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -431,7 +431,7 @@ describe("AuthorizedUsersClient", () => {
 
         await expect(async () => {
             return await client.authorizedUsers.create({
-                company_id: "company_id",
+                account_id: "account_id",
                 role: "owner",
                 user_id: "user_id",
             });
@@ -680,7 +680,7 @@ describe("AuthorizedUsersClient", () => {
 
         const response = await client.authorizedUsers.delete({
             id: "ausr_xxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });

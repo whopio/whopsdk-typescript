@@ -1,1 +1,1 @@
-export { CreateDepositsRequest } from "./CreateDepositsRequest.js";
+export type { CreateDepositsRequest } from "./CreateDepositsRequest.js";

@@ -53,9 +53,9 @@ describe("InvoicesClient", () => {
         const page = await client.invoices.list({
             first: 42,
             last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
             created_before: "2023-12-01T05:00:00Z",
             created_after: "2023-12-01T05:00:00Z",
+            account_id: "biz_xxxxxxxxxxxxxx",
         });
 
         expect(expected.data).toEqual(page.data);
@@ -207,8 +207,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
             collection_method: "send_invoice",
-            company_id: "biz_xxxxxxxxxxxxxx",
             plan: {},
             product: { title: "title" },
         };
@@ -262,8 +262,8 @@ describe("InvoicesClient", () => {
             .build();
 
         const response = await client.invoices.create({
+            account_id: "biz_xxxxxxxxxxxxxx",
             collection_method: "send_invoice",
-            company_id: "biz_xxxxxxxxxxxxxx",
             plan: {},
             product: {
                 title: "title",
@@ -282,8 +282,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -300,8 +300,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -320,8 +320,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -338,8 +338,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -358,8 +358,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -376,8 +376,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -396,8 +396,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -414,8 +414,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -434,8 +434,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -452,8 +452,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -472,8 +472,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -490,8 +490,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
@@ -510,8 +510,8 @@ describe("InvoicesClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {
+            account_id: "account_id",
             collection_method: "send_invoice",
-            company_id: "company_id",
             plan: {},
             product: { title: "title" },
         };
@@ -528,8 +528,8 @@ describe("InvoicesClient", () => {
 
         await expect(async () => {
             return await client.invoices.create({
+                account_id: "account_id",
                 collection_method: "send_invoice",
-                company_id: "company_id",
                 plan: {},
                 product: {
                     title: "title",
