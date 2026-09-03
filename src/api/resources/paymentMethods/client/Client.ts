@@ -189,7 +189,7 @@ export class PaymentMethodsClient {
     }
 
     /**
-     * Retrieves the details of an existing payment method. Addresses a member's wallet when member_id or company_id is given, otherwise your own.
+     * Retrieves the details of an existing payment method. Addresses a member's wallet when member_id or account_id is given, otherwise your own.
      *
      * Required permissions:
      *  - `member:payment_methods:read`

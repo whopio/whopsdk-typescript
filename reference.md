@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Create a short-lived access token for authenticating API requests. When using API key authentication, provide company_id or user_id. When using OAuth, the user is derived from the token. Use this token with Whop's web and mobile embedded components.
+Create a short-lived access token for authenticating API requests. When using API key authentication, provide account_id or user_id. When using OAuth, the user is derived from the token. Use this token with Whop's web and mobile embedded components.
 </dd>
 </dl>
 </dd>
@@ -3147,7 +3147,7 @@ await client.aiChats.delete({
 <dl>
 <dd>
 
-Update an AI chat's title, notification preferences, or associated company context.
+Update an AI chat's title, notification preferences, or associated account context.
 
 Required permissions:
  - `ai_chat:update`
@@ -12414,7 +12414,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning. Pass experience_id 'public' with a company_id to post to a company's public forum.
+Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning. Pass experience_id 'public' with an account_id to post to an account's public forum.
 
 Required permissions:
  - `forum:post:create`
@@ -12841,7 +12841,7 @@ await client.forums.update({
 <dl>
 <dd>
 
-Returns a paginated list of identity profiles. When company_id is provided, lists IPs currently linked to that company's ledger. When omitted, lists IPs linked to any ledger the actor can read (including child companies under a parent).
+Returns a paginated list of identity profiles. When account_id is provided, lists IPs currently linked to that account's ledger. When omitted, lists IPs linked to any ledger the actor can read (including child accounts under a parent).
 
 Required permissions:
  - `identity:read`
@@ -16591,7 +16591,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the details of an existing payment method. Addresses a member's wallet when member_id or company_id is given, otherwise your own.
+Retrieves the details of an existing payment method. Addresses a member's wallet when member_id or account_id is given, otherwise your own.
 
 Required permissions:
  - `member:payment_methods:read`

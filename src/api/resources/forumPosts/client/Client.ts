@@ -154,7 +154,7 @@ export class ForumPostsClient {
     }
 
     /**
-     * Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning. Pass experience_id 'public' with a company_id to post to a company's public forum.
+     * Create a new forum post or comment within an experience. Supports text content, attachments, polls, paywalling, and pinning. Pass experience_id 'public' with an account_id to post to an account's public forum.
      *
      * Required permissions:
      *  - `forum:post:create`

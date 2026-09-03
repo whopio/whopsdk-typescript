@@ -22,7 +22,7 @@ export interface ListPaymentMethodsRequest {
     first?: number;
     /** Returns the last _n_ elements from the list. */
     last?: number;
-    /** The unique identifier of the member to list payment methods for. Omit this and company_id to list your own saved payment methods. */
+    /** The unique identifier of the member to list payment methods for. Omit this and account_id to list your own saved payment methods. */
     member_id?: string;
     direction?: Whop.Direction;
     /** Only return payment methods created before this timestamp. */

@@ -15,7 +15,7 @@ export interface CreateForumPostsRequest {
     attachments?: CreateForumPostsRequest.Attachments.Item[] | null;
     /** The main body of the post in Markdown format. For example, 'Check out this **update**'. Hidden if the post is paywalled and the viewer has not purchased access. */
     content?: string | null;
-    /** The unique identifier of the experience to create this post in. For example, 'exp_xxxxx'. Pass 'public' along with company_id to automatically use the company's public forum. */
+    /** The unique identifier of the experience to create this post in. For example, 'exp_xxxxx'. Pass 'public' along with account_id to automatically use the account's public forum. */
     experience_id: string;
     /** Whether to send this post as a mention notification to all users in the experience who have mentions enabled. */
     is_mention?: boolean | null;

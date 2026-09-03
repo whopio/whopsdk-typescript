@@ -11,7 +11,7 @@
 export interface RetrievePaymentMethodsRequest {
     /** The unique identifier of the payment method. */
     id: string;
-    /** The unique identifier of the member. Provide either this or company_id, not both. Omit both to address your own saved payment methods. */
+    /** The unique identifier of the member. Provide either this or account_id, not both. Omit both to address your own saved payment methods. */
     member_id?: string;
     /** The unique identifier of the company. Provide either this or member_id, not both. Omit both to address your own saved payment methods. */
     account_id?: string;

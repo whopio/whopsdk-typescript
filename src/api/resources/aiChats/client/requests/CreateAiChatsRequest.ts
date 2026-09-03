@@ -9,8 +9,8 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreateAiChatsRequest {
-    /** The unique identifier of the company to set as context for the AI chat (e.g., "biz_XXXXX"). */
-    current_company_id?: string | null;
+    /** The unique identifier of the account to set as context for the AI chat (e.g., "biz_XXXXX"). */
+    current_account_id?: string | null;
     /** A list of previously uploaded file attachments to include with the first message. */
     message_attachments?: CreateAiChatsRequest.MessageAttachments.Item[] | null;
     /** The source of the message. */
