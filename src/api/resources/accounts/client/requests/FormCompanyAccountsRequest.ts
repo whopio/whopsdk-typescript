@@ -19,7 +19,7 @@
  *         entity_suffix: "LLC",
  *         entity_type: "llc",
  *         expedite_ein: true,
- *         formation_state: "TX",
+ *         formation_state: "WY",
  *         founders: [{
  *                 address: {
  *                     city: "Austin",
@@ -67,7 +67,7 @@ export interface FormCompanyAccountsRequest {
     entity_type?: FormCompanyAccountsRequest.EntityType;
     /** Request expedited EIN processing for an additional fee. Available only when no founder supplies an SSN. */
     expedite_ein?: boolean;
-    /** Two-letter code of the US state (or `DC`) to form the company in. */
+    /** Two-letter code of the US state (or `DC`) to form the company in. We recommend `WY` because Wyoming formations are completed the same day. */
     formation_state: FormCompanyAccountsRequest.FormationState;
     /** The company's founders. Exactly one must be marked `is_primary` — the responsible party for the filing. */
     founders: FormCompanyAccountsRequest.Founders.Item[];
@@ -122,7 +122,7 @@ export namespace FormCompanyAccountsRequest {
         CCorp: "c_corp",
     } as const;
     export type EntityType = (typeof EntityType)[keyof typeof EntityType];
-    /** Two-letter code of the US state (or `DC`) to form the company in. */
+    /** Two-letter code of the US state (or `DC`) to form the company in. We recommend `WY` because Wyoming formations are completed the same day. */
     export const FormationState = {
         Al: "AL",
         Ak: "AK",

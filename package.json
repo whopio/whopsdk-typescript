@@ -77,17 +77,6 @@
             },
             "default": "./dist/cjs/api/resources/adGroups/exports.js"
         },
-        "./adReports": {
-            "import": {
-                "types": "./dist/esm/api/resources/adReports/exports.d.mts",
-                "default": "./dist/esm/api/resources/adReports/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/adReports/exports.d.ts",
-                "default": "./dist/cjs/api/resources/adReports/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/adReports/exports.js"
-        },
         "./ads": {
             "import": {
                 "types": "./dist/esm/api/resources/ads/exports.d.mts",
@@ -252,17 +241,6 @@
                 "default": "./dist/cjs/api/resources/checkoutConfigurations/exports.js"
             },
             "default": "./dist/cjs/api/resources/checkoutConfigurations/exports.js"
-        },
-        "./companies": {
-            "import": {
-                "types": "./dist/esm/api/resources/companies/exports.d.mts",
-                "default": "./dist/esm/api/resources/companies/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/companies/exports.d.ts",
-                "default": "./dist/cjs/api/resources/companies/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/companies/exports.js"
         },
         "./companyTokenTransactions": {
             "import": {

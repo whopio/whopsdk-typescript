@@ -85,6 +85,8 @@ export interface Ad {
     messaging_config?: (Whop.AdMessagingConfig | null) | undefined;
     /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */
     multi_advertiser_ads?: boolean | undefined;
+    /** The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null` elsewhere and for non-carousel ads. */
+    music?: (Whop.AdMusic | null) | undefined;
     /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
     post_id: string | null;
     /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */

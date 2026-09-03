@@ -9,6 +9,7 @@ export interface RetrieveBreakdownResponse {
     direction: RetrieveBreakdownResponse.Direction;
     items: RetrieveBreakdownResponse.Items.Item[];
     other_amount: Whop.Money | null;
+    other_name: string;
 }
 
 export namespace RetrieveBreakdownResponse {
@@ -28,7 +29,10 @@ export namespace RetrieveBreakdownResponse {
     export const Bucket = {
         Transfers: "transfers",
         Payments: "payments",
+        Refunds: "refunds",
+        Ads: "ads",
         CardSpend: "card_spend",
+        CardAuthorizationReleases: "card_authorization_releases",
         Withdrawals: "withdrawals",
         Swaps: "swaps",
     } as const;
@@ -43,6 +47,8 @@ export namespace RetrieveBreakdownResponse {
     export namespace Items {
         export interface Item {
             amount: Whop.Money;
+            /** How to draw the row's icon. `null` when the row has nothing to show (balances, adjustments, ad campaigns), so clients render no icon rather than a placeholder. */
+            avatar: Item.Avatar | null;
             image_url: string | null;
             /** An opaque identifier for this grouping within the breakdown. */
             key: string;
@@ -53,12 +59,28 @@ export namespace RetrieveBreakdownResponse {
         }
 
         export namespace Item {
+            export interface Avatar {
+                shape: Avatar.Shape;
+                /** The image to show, or `null` to fall back to the row's initials. */
+                url: string | null;
+            }
+
+            export namespace Avatar {
+                export const Shape = {
+                    Circle: "circle",
+                    Square: "square",
+                } as const;
+                export type Shape = (typeof Shape)[keyof typeof Shape];
+            }
+
             export const Object_ = {
                 User: "user",
                 Account: "account",
                 Merchant: "merchant",
                 PayoutDestination: "payout_destination",
                 Balance: "balance",
+                WithdrawalAdjustment: "withdrawal_adjustment",
+                AdCampaign: "ad_campaign",
             } as const;
             export type Object_ = (typeof Object_)[keyof typeof Object_];
         }

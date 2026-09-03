@@ -3,20 +3,10 @@
 /**
  * @example
  *     {
- *         id: "pay_xxxxxxxxxxxxxx",
- *         first: 42,
- *         last: 42
+ *         id: "id"
  *     }
  */
 export interface ListFeesPaymentsRequest {
-    /** The unique identifier of the payment to list fees for. */
+    /** The payment whose fees to list, prefixed `pay_`. */
     id: string;
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
 }

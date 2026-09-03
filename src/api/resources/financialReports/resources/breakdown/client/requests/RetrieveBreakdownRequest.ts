@@ -9,8 +9,8 @@ import type * as Whop from "../../../../../../index.js";
  *         bucket: "transfers",
  *         direction: "money_in",
  *         currency: "currency",
- *         from_date: "from_date",
- *         to_date: "to_date"
+ *         from: "2024-01-15T09:30:00Z",
+ *         to: "2024-01-15T09:30:00Z"
  *     }
  */
 export interface RetrieveBreakdownRequest {
@@ -23,7 +23,11 @@ export interface RetrieveBreakdownRequest {
     /** The report currency to explain. */
     currency: string;
     /** Start of the report window as an ISO 8601 timestamp. */
-    from_date: string;
+    from: string;
     /** Exclusive end of the report window as an ISO 8601 timestamp. */
-    to_date: string;
+    to: string;
+    /** Period grouping used by the parent report. */
+    group_by?: Whop.financialReports.RetrieveBreakdownRequestGroupBy;
+    /** IANA timezone used by the parent report to bucket periods. Defaults to UTC. */
+    timezone?: string;
 }

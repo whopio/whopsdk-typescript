@@ -2,32 +2,16 @@
 
 import type * as Whop from "../../../index.js";
 
-/**
- * The connection type for Fee.
- */
 export interface ListFeesPaymentsResponse {
-    /** A list of nodes. */
-    data: ListFeesPaymentsResponse.Data.Item[];
-    /** Information to aid in pagination. */
-    page_info: Whop.PageInfo;
+    data: Whop.PaymentFee[];
+    page_info: ListFeesPaymentsResponse.PageInfo;
 }
 
 export namespace ListFeesPaymentsResponse {
-    export type Data = Data.Item[];
-
-    export namespace Data {
-        /**
-         * Represents a fee related to a payment
-         */
-        export interface Item {
-            /** The value or amount to display for the fee. */
-            amount: number;
-            /** The currency of the fee. */
-            currency: Whop.Currencies;
-            /** The label to display for the fee. */
-            name: string;
-            /** The specific origin of the fee, if applicable. */
-            type: Whop.SpecificFeeOrigins;
-        }
+    export interface PageInfo {
+        end_cursor: string | null;
+        has_next_page: boolean;
+        has_previous_page: boolean;
+        start_cursor: string | null;
     }
 }

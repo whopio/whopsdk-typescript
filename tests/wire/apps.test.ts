@@ -46,6 +46,7 @@ describe("AppsClient", () => {
                     name: "Shine Time Booking",
                     openapi_path: "/openapi.json",
                     origin: "https://whopappdomain0000001.apps.whop.com",
+                    previous_hosted_urls: ["previous_hosted_urls"],
                     route: "shine-time-booking",
                     skills_path: "/skills",
                     status: "live",
@@ -53,7 +54,7 @@ describe("AppsClient", () => {
                 },
             ],
             page_info: {
-                end_cursor: "WyJjdXJzb3IiLDFd",
+                end_cursor: "Mg",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
@@ -185,6 +186,7 @@ describe("AppsClient", () => {
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
             preview_token: "whop_preview_pass_example",
+            previous_hosted_urls: ["https://shine-time-booking.whop.site"],
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -805,6 +807,7 @@ describe("AppsClient", () => {
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
             preview_token: "whop_preview_pass_example",
+            previous_hosted_urls: ["https://shine-time-booking.whop.site"],
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -1031,6 +1034,7 @@ describe("AppsClient", () => {
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
             preview_token: "whop_preview_pass_example",
+            previous_hosted_urls: ["https://shine-time-booking.whop.site"],
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",
@@ -1496,6 +1500,7 @@ describe("AppsClient", () => {
             openapi_path: "/openapi.json",
             origin: "https://whopappdomain0000001.apps.whop.com",
             preview_token: "whop_preview_pass_example",
+            previous_hosted_urls: ["https://shine-time-booking.whop.site"],
             product_id: "prod_xxxxxxxxxxxxxx",
             production_android_build: {
                 checksum: "xxxxxxxxxxxxxxxx",

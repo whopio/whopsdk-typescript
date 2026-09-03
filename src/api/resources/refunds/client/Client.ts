@@ -15,6 +15,11 @@ export declare namespace RefundsClient {
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
+/**
+ * A Refund is one reversal of a payment, full or partial. Refunds are issued with `POST /payments/{id}/refund`; this resource is the record of each one — how much moved, through which provider, and where it stands (`pending`, `succeeded`, `failed`).
+ *
+ * List a payment's refunds with `?payment_id=`, or every refund an account issued with `?account_id=`. `amount` is stated in the payment's settlement currency so it nets against the payment's `total`; `original_amount` is what the processor moved.
+ */
 export class RefundsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<RefundsClient.Options>;
 
@@ -23,64 +28,51 @@ export class RefundsClient {
     }
 
     /**
-     * Returns a paginated list of refunds, with optional filtering by payment, company, user, and creation date.
-     *
-     * Required permissions:
-     *  - `payment:basic:read`
+     * Lists refunds, newest first. Without filters this is every refund the caller can read; narrow it to one payment with `payment_id`, one account with `account_id`, or one buyer with `user_id`.
      *
      * @param {Whop.ListRefundsRequest} request
      * @param {RefundsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.refunds.list({
-     *         first: 42,
-     *         last: 42,
-     *         payment_id: "pay_xxxxxxxxxxxxxx",
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         user_id: "user_xxxxxxxxxxxxx",
-     *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z"
-     *     })
+     *     await client.refunds.list()
      */
     public async list(
         request: Whop.ListRefundsRequest = {},
         requestOptions?: RefundsClient.RequestOptions,
-    ): Promise<core.Page<Whop.RefundListItem, Whop.ListRefundsResponse>> {
+    ): Promise<core.Page<Whop.Refund, Whop.ListRefundsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListRefundsRequest): Promise<core.WithRawResponse<Whop.ListRefundsResponse>> => {
                 const {
-                    after,
-                    before,
-                    first,
-                    last,
+                    account_id: accountId,
                     payment_id: paymentId,
-                    company_id: companyId,
                     user_id: userId,
-                    direction,
                     created_before: createdBefore,
                     created_after: createdAfter,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
+                    account_id: accountId,
                     payment_id: paymentId,
-                    company_id: companyId,
                     user_id: userId,
-                    direction: direction != null ? direction : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                    first,
+                    after,
+                    last,
+                    before,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -88,7 +80,7 @@ export class RefundsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -122,19 +114,8 @@ export class RefundsClient {
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                         case 404:
                             throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -147,7 +128,7 @@ export class RefundsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.RefundListItem, Whop.ListRefundsResponse>({
+        return new core.Page<Whop.Refund, Whop.ListRefundsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -161,32 +142,20 @@ export class RefundsClient {
     }
 
     /**
-     * Retrieves the details of an existing refund.
-     *
-     * Required permissions:
-     *  - `payment:basic:read`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
+     * Returns one refund.
      *
      * @param {Whop.RetrieveRefundsRequest} request
      * @param {RefundsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.refunds.retrieve({
-     *         id: "rf_xxxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retrieve(
@@ -206,7 +175,7 @@ export class RefundsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -233,20 +202,12 @@ export class RefundsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,

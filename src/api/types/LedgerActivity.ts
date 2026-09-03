@@ -36,6 +36,8 @@ export interface LedgerActivity {
     resource: LedgerActivity.Resource | null;
     /** Source of this ledger activity. */
     source: LedgerActivity.Source | null;
+    /** Dollar value of this movement as a decimal string, signed like `amount`. Converted from the posted amount at the rate that was live when the line posted — the same pricing the wallet balance chart and the financial reports use — so a crypto row carries its dollar value too. `null` for a currency Whop holds no exchange rate for. */
+    usd_amount: string | null;
     /** Email of the customer associated with the payment. Requires member:email:read. */
     user_email?: (string | null) | undefined;
     /** ID of the customer associated with the payment. */
@@ -119,6 +121,7 @@ export namespace LedgerActivity {
         MiscPurchase: "misc_purchase",
         MiscRefund: "misc_refund",
         MiscReversal: "misc_reversal",
+        OnboardingReward: "onboarding_reward",
         OnchainDeposit: "onchain_deposit",
         OnchainSwapSource: "onchain_swap_source",
         OnchainSwapTarget: "onchain_swap_target",

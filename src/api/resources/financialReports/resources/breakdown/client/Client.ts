@@ -40,8 +40,8 @@ export class BreakdownClient {
      *         bucket: "transfers",
      *         direction: "money_in",
      *         currency: "currency",
-     *         from_date: "from_date",
-     *         to_date: "to_date"
+     *         from: "2024-01-15T09:30:00Z",
+     *         to: "2024-01-15T09:30:00Z"
      *     })
      */
     public retrieve(
@@ -55,21 +55,32 @@ export class BreakdownClient {
         request: Whop.financialReports.RetrieveBreakdownRequest,
         requestOptions?: BreakdownClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.financialReports.RetrieveBreakdownResponse>> {
-        const { account_id: accountId, bucket, direction, currency, from_date: fromDate, to_date: toDate } = request;
+        const {
+            account_id: accountId,
+            bucket,
+            direction,
+            currency,
+            from: from_,
+            to,
+            group_by: groupBy,
+            timezone,
+        } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
             bucket,
             direction,
             currency,
-            from_date: fromDate,
-            to_date: toDate,
+            from: from_,
+            to,
+            group_by: groupBy != null ? groupBy : undefined,
+            timezone,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

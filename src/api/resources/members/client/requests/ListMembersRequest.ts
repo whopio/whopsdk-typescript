@@ -4,7 +4,9 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         user_ids: ["user_xxxxxxxxxxxxxx"]
+ *     }
  */
 export interface ListMembersRequest {
     /** The account to list members for (`biz_` tag). Defaults to the account the credential acts as. */
@@ -13,6 +15,8 @@ export interface ListMembersRequest {
     access_level?: Whop.ListMembersRequestAccessLevel;
     /** Filter by whether the member is still part of the account. */
     status?: Whop.ListMembersRequestStatus;
+    /** Only return members whose users match these `user_` identifiers. */
+    user_ids?: string | string[];
     /** Search members by name or username. An exact email address also matches when the credential holds the member:email:read scope. */
     query?: string;
     /** Only members who joined after this ISO 8601 timestamp. */

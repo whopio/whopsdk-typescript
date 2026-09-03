@@ -26,6 +26,7 @@ describe("MembersClient", () => {
                     last_accessed_at: "2026-01-01T12:00:00.000Z",
                     phone_number: "+xxxxxxxxxxx",
                     status: "joined",
+                    token_balance: 0,
                     user: {
                         id: "user_xxxxxxxxxxxxxx",
                         name: "Dana Whitfield",
@@ -35,7 +36,7 @@ describe("MembersClient", () => {
                 },
             ],
             page_info: {
-                end_cursor: "WyJjdXJzb3IiLDFd",
+                end_cursor: "end_cursor",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
@@ -51,7 +52,9 @@ describe("MembersClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.members.list();
+        const page = await client.members.list({
+            user_ids: ["user_xxxxxxxxxxxxxx"],
+        });
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -135,6 +138,7 @@ describe("MembersClient", () => {
             last_accessed_at: "2026-01-01T12:00:00.000Z",
             phone_number: "+xxxxxxxxxxx",
             status: "joined",
+            token_balance: 0,
             user: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",

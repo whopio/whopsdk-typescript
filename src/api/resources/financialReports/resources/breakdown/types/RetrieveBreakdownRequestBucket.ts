@@ -3,7 +3,10 @@
 export const RetrieveBreakdownRequestBucket = {
     Transfers: "transfers",
     Payments: "payments",
+    Refunds: "refunds",
+    Ads: "ads",
     CardSpend: "card_spend",
+    CardAuthorizationReleases: "card_authorization_releases",
     Withdrawals: "withdrawals",
     Swaps: "swaps",
 } as const;

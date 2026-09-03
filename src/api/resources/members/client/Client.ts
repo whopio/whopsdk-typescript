@@ -46,7 +46,9 @@ export class MembersClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.members.list()
+     *     await client.members.list({
+     *         user_ids: ["user_xxxxxxxxxxxxxx"]
+     *     })
      */
     public async list(
         request: Whop.ListMembersRequest = {},
@@ -58,6 +60,7 @@ export class MembersClient {
                     account_id: accountId,
                     access_level: accessLevel,
                     status,
+                    user_ids: userIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,
@@ -72,6 +75,7 @@ export class MembersClient {
                     account_id: accountId,
                     access_level: accessLevel != null ? accessLevel : undefined,
                     status: status != null ? status : undefined,
+                    user_ids: userIds,
                     query,
                     created_after: createdAfter,
                     created_before: createdBefore,
@@ -88,7 +92,7 @@ export class MembersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -182,7 +186,7 @@ export class MembersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

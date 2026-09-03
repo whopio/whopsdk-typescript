@@ -42,6 +42,8 @@ export interface CancelPayoutsResponse {
     source: CancelPayoutsResponse.Source | null;
     /** Payout delivery speed. */
     speed: CancelPayoutsResponse.Speed;
+    /** Text that appears on the recipient's bank statement, or `null` if no descriptor was set. When set, 5-22 alphanumeric characters (A-Z, a-z, 0-9). */
+    statement_descriptor: string | null;
     /** Current payout status. */
     status: CancelPayoutsResponse.Status;
     /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the stablecoin conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */

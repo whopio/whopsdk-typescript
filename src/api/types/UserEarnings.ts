@@ -7,6 +7,8 @@ export interface UserEarnings {
     first_earned_at: string | null;
     /** Gross income from accounts the user owns or is owner-authorized on. */
     owned_accounts: Whop.UserEarningsAmount;
+    /** Partner commissions posted to the user's wallet. Pending Partner payouts are excluded until they post; later reversals do not reduce gross income. */
+    partners: Whop.UserEarningsAmount;
     /** Gross income from the user's personal wallet. */
     personal: Whop.UserEarningsAmount;
     /** Gross income from the user's personal wallet plus accounts they own or are owner-authorized on. */

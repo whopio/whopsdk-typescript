@@ -30,7 +30,7 @@ export interface CreateAdGroupsRequest {
     detailed_targeting?: Whop.AdGroupDetailedTargetingBody;
     /** Device platforms and operating systems to target. */
     devices?: Whop.AdGroupDevicesBody;
-    /** Let the ad platform automatically mix and match this ad group's creatives and copy to find the best-performing combinations. Set at creation; can't be changed afterward. */
+    /** Whether the ad platform automatically mixes and matches this ad group's creatives and copy to find the best-performing combinations. Meta has deprecated it and rejects `true`; ad groups already using it keep it, and it can't be changed afterward. */
     dynamic_creative?: boolean;
     /** When the ad group stops delivering, as an ISO 8601 timestamp. Omit to run until paused. */
     ends_at?: string;

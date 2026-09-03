@@ -19,6 +19,8 @@ export interface Member {
     phone_number: string | null;
     /** `joined` while the member is part of the account, `left` after they leave. */
     status: Member.Status;
+    /** The member's current token balance for this account, computed from token transactions. */
+    token_balance: number;
     /** The user behind this member. `null` when the buyer is another business rather than a person. */
     user: Whop.UserSummary | null;
 }

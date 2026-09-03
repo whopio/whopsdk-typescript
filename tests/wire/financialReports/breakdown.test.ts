@@ -23,6 +23,7 @@ describe("BreakdownClient", () => {
             items: [
                 {
                     amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    avatar: { shape: "circle", url: null },
                     image_url: "image_url",
                     key: "key",
                     name: "name",
@@ -31,6 +32,7 @@ describe("BreakdownClient", () => {
                 },
             ],
             other_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            other_name: "Other",
         };
 
         server
@@ -46,8 +48,8 @@ describe("BreakdownClient", () => {
             bucket: "transfers",
             direction: "money_in",
             currency: "currency",
-            from_date: "from_date",
-            to_date: "to_date",
+            from: "2024-01-15T09:30:00Z",
+            to: "2024-01-15T09:30:00Z",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -78,8 +80,8 @@ describe("BreakdownClient", () => {
                 bucket: "transfers",
                 direction: "money_in",
                 currency: "currency",
-                from_date: "from_date",
-                to_date: "to_date",
+                from: "2024-01-15T09:30:00Z",
+                to: "2024-01-15T09:30:00Z",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -110,8 +112,8 @@ describe("BreakdownClient", () => {
                 bucket: "transfers",
                 direction: "money_in",
                 currency: "currency",
-                from_date: "from_date",
-                to_date: "to_date",
+                from: "2024-01-15T09:30:00Z",
+                to: "2024-01-15T09:30:00Z",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -142,8 +144,8 @@ describe("BreakdownClient", () => {
                 bucket: "transfers",
                 direction: "money_in",
                 currency: "currency",
-                from_date: "from_date",
-                to_date: "to_date",
+                from: "2024-01-15T09:30:00Z",
+                to: "2024-01-15T09:30:00Z",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });

@@ -40,6 +40,7 @@ describe("RecommendedActionsClient", () => {
                     title: "Launch an ad campaign",
                 },
             ],
+            generation_pending: false,
         };
 
         server

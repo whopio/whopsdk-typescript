@@ -4,53 +4,43 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         first: 42,
- *         last: 42,
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z",
- *         updated_before: "2023-12-01T05:00:00Z",
- *         updated_after: "2023-12-01T05:00:00Z"
- *     }
+ *     {}
  */
 export interface ListPaymentsRequest {
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
-    /** The unique identifier of the company to list payments for. */
-    company_id?: string;
-    direction?: Whop.Direction;
-    order?: Whop.ReceiptV2Order;
-    /** Filter payments to only those associated with these specific product identifiers. */
-    product_ids?: string | string[];
-    /** Filter payments by their billing reason. */
-    billing_reasons?: Whop.BillingReasons | Whop.BillingReasons[];
-    /** Filter payments by their currency code. */
-    currencies?: Whop.Currencies | Whop.Currencies[];
-    /** Filter payments to only those associated with these specific plan identifiers. */
-    plan_ids?: string | string[];
-    /** Filter payments by their current status. */
-    statuses?: Whop.ReceiptStatus | Whop.ReceiptStatus[];
-    /** Filter payments by their current substatus for more granular filtering. */
-    substatuses?: Whop.FriendlyReceiptStatus | Whop.FriendlyReceiptStatus[];
-    /** Whether to include payments with a zero amount. Defaults to false, so zero-amount payments are omitted unless you set this to true — a company whose sales are all free plans returns an empty list without it. */
-    include_free?: boolean;
-    /** Only return payments created before this timestamp. */
-    created_before?: string;
-    /** Only return payments created after this timestamp. */
-    created_after?: string;
-    /** Only return payments last updated before this timestamp. */
-    updated_before?: string;
-    /** Only return payments last updated after this timestamp. */
-    updated_after?: string;
+    /** Only payments charged by this account, prefixed `biz_`. */
+    account_id?: string;
+    /** Only payments in this lifecycle state. */
+    status?: Whop.ListPaymentsRequestStatus;
+    /** Only payments charged for this reason. */
+    billing_reason?: Whop.ListPaymentsRequestBillingReason;
+    /** Only payments presented in this three-letter currency, such as `usd`. */
+    currency?: string;
+    /** Only payments made by this buyer, prefixed `user_`. */
+    user_id?: string;
     /** Search payments by user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;
-    /** Only return payments from these checkout configurations. */
-    checkout_configuration_ids?: string | string[];
+    /** Only payments made by this member, prefixed `mber_`. */
+    member_id?: string;
+    /** Only payments billed under this membership, prefixed `mem_`. */
+    membership_id?: string;
+    /** Only payments for this product, prefixed `prod_`. */
+    product_id?: string;
+    /** Only payments priced by this plan, prefixed `plan_`. */
+    plan_id?: string;
+    /** Only payments created before this ISO 8601 timestamp. */
+    created_before?: string;
+    /** Only payments created after this ISO 8601 timestamp. */
+    created_after?: string;
+    /** The field to sort by. */
+    order?: Whop.ListPaymentsRequestOrder;
+    /** The sort direction. */
+    direction?: Whop.ListPaymentsRequestDirection;
+    /** The number of payments to return. */
+    first?: number;
+    /** A cursor; returns payments after this position. */
+    after?: string;
+    /** The number of payments to return from the end of the range. */
+    last?: number;
+    /** A cursor; returns payments before this position. */
+    before?: string;
 }

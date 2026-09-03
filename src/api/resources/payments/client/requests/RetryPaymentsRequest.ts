@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "pay_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetryPaymentsRequest {
-    /** The unique identifier of the payment to retry. */
+    /** The payment to retry, prefixed `pay_`. */
     id: string;
 }

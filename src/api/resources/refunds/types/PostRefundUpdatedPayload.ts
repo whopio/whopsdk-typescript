@@ -9,7 +9,7 @@ export interface PostRefundUpdatedPayload {
     api_version: PostRefundUpdatedPayload.ApiVersion;
     /** The dated API version (Api-Version-Date) the payload is serialized to */
     api_version_date: string | null;
-    data: Whop.Refund;
+    data: Whop.RefundLegacy;
     /** A unique ID for every single webhook request */
     id: string;
     /** For some `.updated` events, the old values of the payload fields that changed, keyed by field name. Omitted when no capture is available for the event */
