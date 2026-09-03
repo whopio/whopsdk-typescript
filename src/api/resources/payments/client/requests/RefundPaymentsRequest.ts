@@ -3,11 +3,11 @@
 /**
  * @example
  *     {
- *         id: "pay_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RefundPaymentsRequest {
-    /** The unique identifier of the payment to refund. */
+    /** The payment to refund, prefixed `pay_`. */
     id: string;
     /** The amount to refund. For multi-currency payments, this is in the charge currency (what the buyer paid). For single-currency, this is in the payment currency. If omitted, the full payment amount is refunded. */
     partial_amount?: number | null;

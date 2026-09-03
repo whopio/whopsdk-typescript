@@ -11,7 +11,7 @@ export interface CreateAdsRequest {
     ad_group_id?: string;
     /** The call-to-action button shown on the ad. */
     call_to_action?: CreateAdsRequest.CallToAction;
-    /** The ad's creative assets. Each entry is an uploaded file id with an optional format; omit format for the original asset. Two or more entries with no format become a carousel (2-10 attachments), in order, sharing the ad's copy. */
+    /** The ad's creative assets. Each entry is an uploaded file id with an optional format; omit format for the original asset. Entries with no format become a carousel's ordered cards, sharing the ad's copy — 2-10 of them on Meta, while TikTok runs even a single image as a one-card carousel. */
     creatives?: CreateAdsRequest.Creatives.Item[];
     /** The description variants shown on the ad. */
     descriptions?: string[];
@@ -27,6 +27,8 @@ export interface CreateAdsRequest {
     messaging_config?: CreateAdsRequest.MessagingConfig;
     /** Whether the ad can appear alongside other advertisers' ads in the same unit. Defaults to true. */
     multi_advertiser_ads?: boolean;
+    /** The looping track a TikTok carousel ad plays — an MP3 you uploaded, no larger than 10MB. Required for TikTok carousels (image creatives); TikTok-only. */
+    music?: CreateAdsRequest.Music | null;
     /** Identifies the network that owns `existing_post_id`. The source is inferred from the ID shape when omitted. */
     post_source?: CreateAdsRequest.PostSource;
     /** The primary text variants shown in the ad body. */
@@ -255,6 +257,14 @@ export namespace CreateAdsRequest {
     export interface MessagingConfig {
         keyword?: string | undefined;
         message?: string | undefined;
+    }
+
+    /**
+     * The looping track a TikTok carousel ad plays — an MP3 you uploaded, no larger than 10MB. Required for TikTok carousels (image creatives); TikTok-only.
+     */
+    export interface Music {
+        /** Uploaded MP3 file ID, prefixed `file_`. */
+        id: string;
     }
 
     /** Identifies the network that owns `existing_post_id`. The source is inferred from the ID shape when omitted. */

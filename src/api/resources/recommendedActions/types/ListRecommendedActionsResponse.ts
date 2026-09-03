@@ -4,4 +4,6 @@ import type * as Whop from "../../../index.js";
 
 export interface ListRecommendedActionsResponse {
     data: Whop.AccountRecommendedActionChain[];
+    /** Whether generation was queued because the account has no available action chains yet. */
+    generation_pending: boolean;
 }

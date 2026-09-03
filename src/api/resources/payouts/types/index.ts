@@ -1,5 +1,4 @@
 export * from "./CancelPayoutsResponse.js";
-export * from "./CreatePayoutsRequestBody.js";
 export * from "./CreatePayoutsResponse.js";
 export * from "./CreateQuotePayoutsResponse.js";
 export * from "./ListPayoutsRequestSource.js";

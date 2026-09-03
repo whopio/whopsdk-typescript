@@ -500,7 +500,7 @@ await client.accounts.formCompany({
     entity_suffix: "LLC",
     entity_type: "llc",
     expedite_ein: true,
-    formation_state: "TX",
+    formation_state: "WY",
     founders: [{
             address: {
                 city: "Austin",
@@ -1946,77 +1946,6 @@ await client.adGroups.unpause({
 <dd>
 
 **requestOptions:** `AdGroupsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## AdReports
-<details><summary><code>client.adReports.<a href="/src/api/resources/adReports/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AdReport</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Performance report for a company, ad campaigns, ad groups, or ads. Always returns aggregate `summary` totals summed across the scope. Set `granularity` to additionally get a time series, or set `breakdown` (`campaign`/`ad_group`/`ad`) to additionally get per-entity rows inside the requested scope. Exactly one of `companyId`, `adCampaignIds`, `adGroupIds`, or `adIds` must be provided.
-
-Required permissions:
- - `ad_campaign:stats:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.adReports.retrieve({
-    company_id: "biz_xxxxxxxxxxxxxx",
-    from: "2023-12-01T05:00:00Z",
-    to: "2023-12-01T05:00:00Z"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.RetrieveAdReportsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AdReportsClient.RequestOptions` 
     
 </dd>
 </dl>
@@ -6940,367 +6869,6 @@ await client.checkoutConfigurations.delete({
 </dl>
 </details>
 
-## Companies
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.CompanyListItem, Whop.ListCompaniesResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a paginated list of companies. When parent_company_id is provided, lists connected accounts under that platform. When omitted, lists companies the current user has access to.
-
-Required permissions:
- - `company:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.companies.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.companies.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.ListCompaniesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">create</a>({ ...params }) -> Whop.Company</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create a new company. Pass parent_company_id to create a connected account under a platform, or omit it to create a company for the current user.
-
-Required permissions:
- - `company:create`
- - `company:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.companies.create({
-    title: "title"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateCompaniesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Company</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieves the details of an existing company.
-
-Required permissions:
- - `company:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.companies.retrieve({
-    id: "biz_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.RetrieveCompaniesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">update</a>({ ...params }) -> Whop.Company</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update a company's title, description, logo, and other settings.
-
-Required permissions:
- - `company:update`
- - `company:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.companies.update({
-    id: "biz_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.UpdateCompaniesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.companies.<a href="/src/api/resources/companies/client/Client.ts">createApiKey</a>({ ...params }) -> Whop.CreateApiKeyCompaniesResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Create an API key for a connected account (child company) owned by a parent company.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.companies.createApiKey({
-    parent_company_id: "parent_company_id",
-    child_company_id: "child_company_id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.CreateApiKeyCompaniesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `CompaniesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## CompanyTokenTransactions
 <details><summary><code>client.companyTokenTransactions.<a href="/src/api/resources/companyTokenTransactions/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.CompanyTokenTransactionListItem, Whop.ListCompanyTokenTransactionsResponse&gt;</code></summary>
 <dl>
@@ -9829,7 +9397,7 @@ await client.disputes.submit({
 </dl>
 </details>
 
-<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">submitEvidenceDispute</a>({ ...params }) -> Whop.Dispute</code></summary>
+<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">submitEvidenceDispute</a>({ ...params }) -> Whop.DisputeLegacy</code></summary>
 <dl>
 <dd>
 
@@ -9904,7 +9472,7 @@ await client.disputes.submitEvidenceDispute({
 </dl>
 </details>
 
-<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">updateEvidenceDispute</a>({ ...params }) -> Whop.Dispute</code></summary>
+<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">updateEvidenceDispute</a>({ ...params }) -> Whop.DisputeLegacy</code></summary>
 <dl>
 <dd>
 
@@ -14753,13 +14321,17 @@ Lists the members of an account. A member is one buyer's relationship with the a
 <dd>
 
 ```typescript
-const pageableResponse = await client.members.list();
+const pageableResponse = await client.members.list({
+    user_ids: ["user_xxxxxxxxxxxxxx"]
+});
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.members.list();
+let page = await client.members.list({
+    user_ids: ["user_xxxxxxxxxxxxxx"]
+});
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -15138,7 +14710,7 @@ await client.memberships.update({
 </dl>
 </details>
 
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">addFreeDaysMembership</a>({ ...params }) -> Whop.Membership</code></summary>
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">addFreeDaysMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
 <dl>
 <dd>
 
@@ -15470,7 +15042,7 @@ await client.memberships.resume({
 </dl>
 </details>
 
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">resyncAccessMembership</a>({ ...params }) -> Whop.Membership</code></summary>
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">resyncAccessMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
 <dl>
 <dd>
 
@@ -15605,7 +15177,7 @@ await client.memberships.transfer({
 </dl>
 </details>
 
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">uncancelMembership</a>({ ...params }) -> Whop.Membership</code></summary>
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">uncancelMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
 <dl>
 <dd>
 
@@ -17148,7 +16720,7 @@ await client.paymentMethods.deletePaymentMethod({
 </details>
 
 ## Payments
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.PaymentListItem, Whop.ListPaymentsResponse&gt;</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Payment, Whop.ListPaymentsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -17160,17 +16732,7 @@ await client.paymentMethods.deletePaymentMethod({
 <dl>
 <dd>
 
-Returns a paginated list of payments for the actor in context, with optional filtering by product, plan, status, billing reason, currency, and creation date.
-
-Required permissions:
- - `payment:basic:read`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
+Lists payments, newest first. Without filters this is every payment the caller can read: a company credential's own account, or for a user every account they can read payments for. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
 </dd>
 </dl>
 </dd>
@@ -17185,29 +16747,13 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.payments.list({
-    first: 42,
-    last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    updated_before: "2023-12-01T05:00:00Z",
-    updated_after: "2023-12-01T05:00:00Z"
-});
+const pageableResponse = await client.payments.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.payments.list({
-    first: 42,
-    last: 42,
-    company_id: "biz_xxxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    updated_before: "2023-12-01T05:00:00Z",
-    updated_after: "2023-12-01T05:00:00Z"
-});
+let page = await client.payments.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -17249,7 +16795,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">create</a>({ ...params }) -> Whop.CreatePaymentsResponse</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">create</a>({ ...params }) -> Whop.Payment</code></summary>
 <dl>
 <dd>
 
@@ -17261,22 +16807,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charge a buyer on-session with a `confirmation_token` for the method they selected, or charge an existing member off-session using a stored payment method. You can provide an existing plan or create one inline. The endpoint returns a payment immediately, but processing continues asynchronously. Use webhooks to learn whether it succeeds or fails, and poll the payment's status endpoint for any step the buyer must complete.
-
-Required permissions:
- - `payment:charge`
- - `plan:create`
- - `access_pass:create`
- - `access_pass:update`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
- - `payment:dispute:read`
- - `payment:resolution_center_case:read`
+Charges a buyer for a plan. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. `plan_id` names the plan to charge for.
 </dd>
 </dl>
 </dd>
@@ -17292,11 +16823,8 @@ Required permissions:
 
 ```typescript
 await client.payments.create({
-    company_id: "biz_xxxxxxxxxxxxxx",
-    confirmation_token: "confirmation_token",
-    plan: {
-        currency: "usd"
-    }
+    account_id: "biz_xxxxxxxxxxxxxx",
+    plan_id: "plan_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -17333,7 +16861,7 @@ await client.payments.create({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePaymentsResponse</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Payment</code></summary>
 <dl>
 <dd>
 
@@ -17345,19 +16873,7 @@ await client.payments.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing payment.
-
-Required permissions:
- - `payment:basic:read`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
- - `payment:dispute:read`
- - `payment:resolution_center_case:read`
+Returns one payment. Related records are ids — resolve a plan, membership, member or shipment on its own endpoint, and list this payment's refunds, disputes or Resolution Center cases with `?payment_id=`.
 </dd>
 </dl>
 </dd>
@@ -17373,7 +16889,7 @@ Required permissions:
 
 ```typescript
 await client.payments.retrieve({
-    id: "pay_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -17475,7 +16991,7 @@ await client.payments.capture({
 </dl>
 </details>
 
-<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">listFees</a>({ ...params }) -> core.Page&lt;Whop.ListFeesPaymentsResponse.Data.Item, Whop.ListFeesPaymentsResponse&gt;</code></summary>
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">listFees</a>({ ...params }) -> Whop.ListFeesPaymentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -17487,10 +17003,7 @@ await client.payments.capture({
 <dl>
 <dd>
 
-Returns the list of fees associated with a specific payment, including platform fees and processing fees.
-
-Required permissions:
- - `payment:basic:read`
+Returns the fee breakdown of one payment — Whop's fee, processing, affiliate and other lines — each in the currency it was collected in and converted to the payment's settlement currency. The list is complete in one page.
 </dd>
 </dl>
 </dd>
@@ -17505,27 +17018,9 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.payments.listFees({
-    id: "pay_xxxxxxxxxxxxxx",
-    first: 42,
-    last: 42
+await client.payments.listFees({
+    id: "id"
 });
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.payments.listFees({
-    id: "pay_xxxxxxxxxxxxxx",
-    first: 42,
-    last: 42
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
 
 ```
 </dd>
@@ -17573,19 +17068,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Issue a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
-
-Required permissions:
- - `payment:manage`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
- - `payment:dispute:read`
- - `payment:resolution_center_case:read`
+Issues a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
 </dd>
 </dl>
 </dd>
@@ -17601,7 +17084,7 @@ Required permissions:
 
 ```typescript
 await client.payments.refund({
-    id: "pay_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -17650,19 +17133,7 @@ await client.payments.refund({
 <dl>
 <dd>
 
-Retry a failed or pending payment. This re-attempts the charge using the original payment method and plan details.
-
-Required permissions:
- - `payment:manage`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
- - `payment:dispute:read`
- - `payment:resolution_center_case:read`
+Retries a failed or pending payment. This re-attempts the charge using the original payment method and plan details.
 </dd>
 </dl>
 </dd>
@@ -17678,7 +17149,7 @@ Required permissions:
 
 ```typescript
 await client.payments.retry({
-    id: "pay_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -17727,19 +17198,7 @@ await client.payments.retry({
 <dl>
 <dd>
 
-Void a payment that has not yet been settled. Voiding cancels the payment before it is captured by the payment processor.
-
-Required permissions:
- - `payment:manage`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
- - `promo_code:basic:read`
- - `shipment:basic:read`
- - `payment:dispute:read`
- - `payment:resolution_center_case:read`
+Voids a payment that has not yet been settled. Voiding cancels the payment before it is captured by the payment processor.
 </dd>
 </dl>
 </dd>
@@ -17755,7 +17214,7 @@ Required permissions:
 
 ```typescript
 await client.payments.void({
-    id: "pay_xxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -18251,7 +17710,8 @@ Sends money from an account or user balance to a saved payout method for that ow
 
 ```typescript
 await client.payouts.create({
-    "key": "value"
+    amount: 50,
+    payout_method_id: "potk_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -18268,7 +17728,7 @@ await client.payouts.create({
 <dl>
 <dd>
 
-**request:** `Whop.CreatePayoutsRequestBody` 
+**request:** `Whop.CreatePayoutsRequest` 
     
 </dd>
 </dl>
@@ -20445,7 +19905,7 @@ await client.recommendedActions.retrieve({
 <dl>
 <dd>
 
-Records that the caller ran a recommended action chain. Nothing is executed server-side yet — the client follows the chain's step CTAs itself; this writes the `recommended_action_chain.executed` analytics event.
+Records that the caller ran a recommended action chain. Nothing is executed server-side yet — the client follows the chain's step CTAs itself; this writes the `recommended_action_chain.executed` analytics event and a `redirected` execution per step.
 </dd>
 </dl>
 </dd>
@@ -20564,7 +20024,7 @@ await client.recommendedActions.listExecutions({
 </details>
 
 ## Refunds
-<details><summary><code>client.refunds.<a href="/src/api/resources/refunds/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.RefundListItem, Whop.ListRefundsResponse&gt;</code></summary>
+<details><summary><code>client.refunds.<a href="/src/api/resources/refunds/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.Refund, Whop.ListRefundsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -20576,10 +20036,7 @@ await client.recommendedActions.listExecutions({
 <dl>
 <dd>
 
-Returns a paginated list of refunds, with optional filtering by payment, company, user, and creation date.
-
-Required permissions:
- - `payment:basic:read`
+Lists refunds, newest first. Without filters this is every refund the caller can read; narrow it to one payment with `payment_id`, one account with `account_id`, or one buyer with `user_id`.
 </dd>
 </dl>
 </dd>
@@ -20594,29 +20051,13 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.refunds.list({
-    first: 42,
-    last: 42,
-    payment_id: "pay_xxxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
+const pageableResponse = await client.refunds.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.refunds.list({
-    first: 42,
-    last: 42,
-    payment_id: "pay_xxxxxxxxxxxxxx",
-    company_id: "biz_xxxxxxxxxxxxxx",
-    user_id: "user_xxxxxxxxxxxxx",
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z"
-});
+let page = await client.refunds.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -20670,15 +20111,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the details of an existing refund.
-
-Required permissions:
- - `payment:basic:read`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
+Returns one refund.
 </dd>
 </dl>
 </dd>
@@ -20694,7 +20127,7 @@ Required permissions:
 
 ```typescript
 await client.refunds.retrieve({
-    id: "rf_xxxxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```
@@ -26396,8 +25829,8 @@ await client.financialReports.breakdown.retrieve({
     bucket: "transfers",
     direction: "money_in",
     currency: "currency",
-    from_date: "from_date",
-    to_date: "to_date"
+    from: "2024-01-15T09:30:00Z",
+    to: "2024-01-15T09:30:00Z"
 });
 
 ```

@@ -46,6 +46,7 @@ describe("PayoutsClient", () => {
                     payout_request_id: "cofr_xxxxxxxxxxxxx",
                     source: "api",
                     speed: "standard",
+                    statement_descriptor: "MYCOMPANY",
                     status: "requested",
                     status_detail: "awaiting_provider_acceptance",
                     trace_code: "021000021234567",
@@ -161,38 +162,43 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 50, payout_method_id: "potk_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            amount: "amount",
-            created_at: "2024-01-15T09:30:00Z",
-            currency: "currency",
+            amount: "50.0",
+            created_at: "2026-01-01T12:00:00Z",
+            currency: "usd",
             destination_amount: "destination_amount",
             destination_currency: "destination_currency",
-            estimated_arrival: "2024-01-15T09:30:00Z",
+            estimated_arrival: "2026-01-01T12:00:00Z",
             exchange_rate: 1.1,
-            failure: { code: "code", funds_returned_at: "2024-01-15T09:30:00Z", message: "message" },
-            fee_amount: "fee_amount",
+            failure: {
+                code: "beneficiary_name_mismatch",
+                funds_returned_at: "2024-01-15T09:30:00Z",
+                message: "message",
+            },
+            fee_amount: "2.5",
             fee_paid_by: "self",
-            id: "id",
-            markup_fee: "markup_fee",
-            metadata: { metadata: "metadata" },
-            net_amount: "net_amount",
-            notes: "notes",
+            id: "wdrl_xxxxxxxxxxxxx",
+            markup_fee: "0.0",
+            metadata: { batch_id: "2026-08-18" },
+            net_amount: "49.75",
+            notes: "Detailing supplies restock",
             object: "payout",
-            payer_name: "payer_name",
+            payer_name: "MassPay",
             payout_method: {
-                nickname: "nickname",
+                nickname: "Ops checking",
                 supported_payout_method: {
                     delivery_type: "cash_pickup",
-                    icon_url: "icon_url",
-                    payer_name: "payer_name",
+                    icon_url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-payout-icon",
+                    payer_name: "ACH Bank Deposit",
                 },
             },
-            payout_request_id: "payout_request_id",
+            payout_request_id: "cofr_xxxxxxxxxxxxx",
             source: "api",
             speed: "standard",
+            statement_descriptor: "MYCOMPANY",
             status: "requested",
-            status_detail: "status_detail",
+            status_detail: "pending_debit",
             trace_code: "trace_code",
         };
 
@@ -206,7 +212,8 @@ describe("PayoutsClient", () => {
             .build();
 
         const response = await client.payouts.create({
-            key: "value",
+            amount: 50,
+            payout_method_id: "potk_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -220,7 +227,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -234,7 +241,8 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.create({
-                key: "value",
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -248,7 +256,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -262,7 +270,8 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.create({
-                key: "value",
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -276,7 +285,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -290,7 +299,8 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.create({
-                key: "value",
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -304,7 +314,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -318,7 +328,8 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.create({
-                key: "value",
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -332,7 +343,7 @@ describe("PayoutsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { key: "value" };
+        const rawRequestBody = { amount: 1.1, payout_method_id: "payout_method_id" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -346,7 +357,8 @@ describe("PayoutsClient", () => {
 
         await expect(async () => {
             return await client.payouts.create({
-                key: "value",
+                amount: 1.1,
+                payout_method_id: "payout_method_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
@@ -548,6 +560,7 @@ describe("PayoutsClient", () => {
             payout_request_id: "cofr_xxxxxxxxxxxxx",
             source: "api",
             speed: "standard",
+            statement_descriptor: "MYCOMPANY",
             status: "requested",
             status_detail: "awaiting_provider_acceptance",
             trace_code: "021000021234567",
@@ -688,6 +701,7 @@ describe("PayoutsClient", () => {
             payout_request_id: "cofr_xxxxxxxxxxxxx",
             source: "api",
             speed: "standard",
+            statement_descriptor: "MYCOMPANY",
             status: "requested",
             status_detail: "awaiting_provider_acceptance",
             trace_code: "021000021234567",

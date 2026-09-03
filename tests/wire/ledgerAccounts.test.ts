@@ -48,6 +48,7 @@ describe("LedgerAccountsClient", () => {
                 phone: "phone",
                 status: "connected",
             },
+            payout_quote_required: true,
             settlement_time_at: "2023-12-01T05:00:00Z",
             transfer_fee: 6.9,
             treasury_balance: {

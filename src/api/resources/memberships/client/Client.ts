@@ -88,7 +88,7 @@ export class MembershipsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -187,7 +187,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -272,7 +272,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -348,7 +348,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -424,21 +424,21 @@ export class MembershipsClient {
     public addFreeDaysMembership(
         request: Whop.AddFreeDaysMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Membership> {
+    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
         return core.HttpResponsePromise.fromPromise(this.__addFreeDaysMembership(request, requestOptions));
     }
 
     private async __addFreeDaysMembership(
         request: Whop.AddFreeDaysMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Membership>> {
+    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
         const { id, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -463,7 +463,7 @@ export class MembershipsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -533,7 +533,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -616,7 +616,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -698,7 +698,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -780,7 +780,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -854,21 +854,21 @@ export class MembershipsClient {
     public resyncAccessMembership(
         request: Whop.ResyncAccessMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Membership> {
+    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
         return core.HttpResponsePromise.fromPromise(this.__resyncAccessMembership(request, requestOptions));
     }
 
     private async __resyncAccessMembership(
         request: Whop.ResyncAccessMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Membership>> {
+    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -890,7 +890,7 @@ export class MembershipsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -961,7 +961,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1037,21 +1037,21 @@ export class MembershipsClient {
     public uncancelMembership(
         request: Whop.UncancelMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Membership> {
+    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
         return core.HttpResponsePromise.fromPromise(this.__uncancelMembership(request, requestOptions));
     }
 
     private async __uncancelMembership(
         request: Whop.UncancelMembershipRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Membership>> {
+    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1073,7 +1073,7 @@ export class MembershipsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

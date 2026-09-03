@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "rf_xxxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetrieveRefundsRequest {
-    /** The unique identifier of the refund. */
+    /** The refund to retrieve, prefixed `rf_`. */
     id: string;
 }

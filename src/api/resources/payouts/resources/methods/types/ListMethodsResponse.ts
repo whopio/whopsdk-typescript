@@ -105,6 +105,8 @@ export namespace ListMethodsResponse {
                 exchange_rate: number;
                 /** Instant-delivery estimate. Null if the method does not support instant delivery, instant delivery is unavailable for the account, or the amount does not cover the fee. */
                 instant: Quote.Instant | null;
+                /** Why instant delivery is unavailable for this method. `minimum_crypto_sales_not_met` means the account has not reached the total sales required for instant cryptocurrency payouts. `null` when this restriction does not apply. */
+                instant_unavailable_reason: Quote.InstantUnavailableReason | null;
                 /** Maximum payout amount for this method, in the payout currency. */
                 max_limit: number | null;
                 /** Minimum payout amount for this method, in the payout currency. */
@@ -123,6 +125,13 @@ export namespace ListMethodsResponse {
                     /** Amount remaining after fees, in the payout currency. */
                     total_received: number;
                 }
+
+                /** Why instant delivery is unavailable for this method. `minimum_crypto_sales_not_met` means the account has not reached the total sales required for instant cryptocurrency payouts. `null` when this restriction does not apply. */
+                export const InstantUnavailableReason = {
+                    MinimumCryptoSalesNotMet: "minimum_crypto_sales_not_met",
+                } as const;
+                export type InstantUnavailableReason =
+                    (typeof InstantUnavailableReason)[keyof typeof InstantUnavailableReason];
 
                 /**
                  * Standard-delivery estimate. Null if the method does not support standard delivery, or the amount does not cover the fee.
@@ -235,8 +244,30 @@ export namespace ListMethodsResponse {
          * Caps for standard-speed payouts, which draw on settled funds only.
          */
         export interface Standard {
+            /** Why a standard payout cannot move funds right now, or null when the cap is above 0. */
+            error_code: Standard.ErrorCode | null;
+            /** Human-readable form of error_code, or null when a standard payout can move funds. */
+            error_message: string | null;
             /** The maximum amount a standard payout can move right now, in whole currency units. */
             max_amount: number;
+        }
+
+        export namespace Standard {
+            /** Why a standard payout cannot move funds right now, or null when the cap is above 0. */
+            export const ErrorCode = {
+                AccountSuspended: "account_suspended",
+                BlockMoveMoneyOutBecauseClawback: "block_move_money_out_because_clawback",
+                SupportabilityCheckPayoutStatusHold: "supportability_check_payout_status_hold",
+                KycCompleted: "kyc_completed",
+                RmiClear: "rmi_clear",
+                IdentityRfiClear: "identity_rfi_clear",
+                EcommerceFulfillmentConnected: "ecommerce_fulfillment_connected",
+                BlockMoveMoneyOut: "block_move_money_out",
+                BlockMoveMoneyOutSetByParent: "block_move_money_out_set_by_parent",
+                CardUsageReviewPayoutStatusHold: "card_usage_review_payout_status_hold",
+                NoAvailableBalance: "no_available_balance",
+            } as const;
+            export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
         }
     }
 

@@ -4,34 +4,29 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         first: 42,
- *         last: 42,
- *         payment_id: "pay_xxxxxxxxxxxxxx",
- *         company_id: "biz_xxxxxxxxxxxxxx",
- *         user_id: "user_xxxxxxxxxxxxx",
- *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z"
- *     }
+ *     {}
  */
 export interface ListRefundsRequest {
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
-    /** Filter refunds to those associated with this specific payment. Mutually exclusive with company_id and user_id: provide exactly one. */
+    /** Only refunds issued by this account, prefixed `biz_`. */
+    account_id?: string;
+    /** Only refunds of this payment, prefixed `pay_`. */
     payment_id?: string;
-    /** Filter refunds to those belonging to this company. Mutually exclusive with payment_id and user_id: provide exactly one. */
-    company_id?: string;
-    /** Filter refunds to those associated with this specific user. Mutually exclusive with payment_id and company_id: provide exactly one. Requires a credential belonging to that user; any other credential receives 'You are not authorized'. */
+    /** Only refunds to this buyer, prefixed `user_`. */
     user_id?: string;
-    direction?: Whop.Direction;
-    /** Only return refunds created before this timestamp. */
+    /** Only refunds requested before this ISO 8601 timestamp. */
     created_before?: string;
-    /** Only return refunds created after this timestamp. */
+    /** Only refunds requested after this ISO 8601 timestamp. */
     created_after?: string;
+    /** The field to sort by. */
+    order?: Whop.ListRefundsRequestOrder;
+    /** The sort direction. */
+    direction?: Whop.ListRefundsRequestDirection;
+    /** The number of refunds to return. */
+    first?: number;
+    /** A cursor; returns refunds after this position. */
+    after?: string;
+    /** The number of refunds to return from the end of the range. */
+    last?: number;
+    /** A cursor; returns refunds before this position. */
+    before?: string;
 }

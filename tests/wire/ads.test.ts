@@ -123,6 +123,7 @@ describe("AdsClient", () => {
                         message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
                     },
                     multi_advertiser_ads: true,
+                    music: { id: "id", name: null, url: null },
                     post_id: "xxxxxxxxxxxxxxxx_98765",
                     post_source: "facebook",
                     post_thumbnail_url:
@@ -154,7 +155,7 @@ describe("AdsClient", () => {
                 },
             ],
             page_info: {
-                end_cursor: "WyJjdXJzb3IiLDFd",
+                end_cursor: "end_cursor",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
@@ -326,6 +327,7 @@ describe("AdsClient", () => {
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
             },
             multi_advertiser_ads: true,
+            music: { id: "id", name: "name", url: "url" },
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -554,6 +556,7 @@ describe("AdsClient", () => {
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
             },
             multi_advertiser_ads: true,
+            music: { id: "id", name: "name", url: "url" },
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -761,6 +764,7 @@ describe("AdsClient", () => {
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
             },
             multi_advertiser_ads: true,
+            music: { id: "id", name: "name", url: "url" },
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -924,6 +928,7 @@ describe("AdsClient", () => {
                         message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
                     },
                     multi_advertiser_ads: true,
+                    music: { id: "id", name: null, url: null },
                     post_id: "xxxxxxxxxxxxxxxx_98765",
                     post_source: "facebook",
                     post_thumbnail_url:
@@ -1162,6 +1167,7 @@ describe("AdsClient", () => {
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
             },
             multi_advertiser_ads: true,
+            music: { id: "id", name: "name", url: "url" },
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -1328,6 +1334,7 @@ describe("AdsClient", () => {
                 message: "Hi! Tell us your vehicle and ZIP and we will send an interior deep clean quote.",
             },
             multi_advertiser_ads: true,
+            music: { id: "id", name: "name", url: "url" },
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:

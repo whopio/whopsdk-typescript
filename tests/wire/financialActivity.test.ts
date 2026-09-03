@@ -86,6 +86,7 @@ describe("FinancialActivityClient", () => {
                         to_currency: "usd",
                         tx_hash: "0x5d84a1c7e2f9b036d48c5a7e1b9f2d6c3a8e0b4f7c1d9e5a2b6f8c0d3e7a1b52",
                     },
+                    usd_amount: "23.75",
                     user_email: "user_email",
                     user_id: "user_id",
                     user_name: "user_name",

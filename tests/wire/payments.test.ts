@@ -18,126 +18,126 @@ describe("PaymentsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    amount_after_fees: 6.9,
-                    application_fee: {
-                        amount: 6.9,
-                        amount_captured: 6.9,
-                        amount_refunded: 6.9,
-                        created_at: "2023-12-01T05:00:00Z",
-                        currency: "usd",
-                        id: "apfee_xxxxxxxxxxxx",
-                    },
-                    auto_refunded: true,
+                    account_id: "biz_xxxxxxxxxxxxxx",
+                    amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    auto_refunded: false,
                     billing_address: {
-                        city: null,
-                        country: null,
-                        line1: null,
-                        line2: null,
-                        name: null,
-                        postal_code: null,
-                        state: null,
+                        city: "Austin",
+                        country: "US",
+                        line1: "1114 Bouldin Ave",
+                        line2: "Unit B",
+                        name: "Dana Whitfield",
+                        postal_code: "78704",
+                        state: "TX",
                     },
                     billing_reason: "subscription_create",
-                    card_brand: "mastercard",
-                    card_last4: "4242",
-                    checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-                    company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-                    created_at: "2023-12-01T05:00:00Z",
+                    checkout_configuration_id: "checkout_configuration_id",
+                    client_secret:
+                        "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    created_at: "2026-01-01T12:00:00.000Z",
                     currency: "usd",
-                    customer_phone: "customer_phone",
+                    customer_phone: "+xxxxxxxxxxx",
                     decline_code: "insufficient_funds",
-                    dispute_alerted_at: "2023-12-01T05:00:00Z",
+                    dispute_alerted_at: "dispute_alerted_at",
                     failure_message: "failure_message",
+                    financing_installments_count: 1.1,
                     id: "pay_xxxxxxxxxxxxxx",
-                    last_payment_attempt: "2023-12-01T05:00:00Z",
-                    member: { id: "id", phone: null },
-                    membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: null, status: "trialing" },
-                    metadata: { key: "value" },
-                    needs_tracking: true,
-                    next_payment_attempt: "2023-12-01T05:00:00Z",
-                    paid_at: "2023-12-01T05:00:00Z",
+                    last_payment_attempt_at: "last_payment_attempt_at",
+                    member_id: "mber_xxxxxxxxxxxxxx",
+                    membership_id: "mem_xxxxxxxxxxxxxx",
+                    metadata: { order_ref: "SHINE-4417" },
+                    needs_tracking: false,
+                    next_payment_attempt_at: "next_payment_attempt_at",
+                    paid_at: "2026-01-01T12:00:00.000Z",
                     payment_instrument: {
-                        card: null,
-                        display_name: "display_name",
+                        card: { brand: "visa", last4: "4242" },
+                        display_name: "Visa •••• 4242",
                         icons: {
                             card: {
-                                dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                                light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                                dark: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                                light: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
                             },
                             square: {
-                                dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                                light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                                dark: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                                light: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
                             },
                         },
-                        installment_count: 42,
-                        payment_method_type: "payment_method_type",
+                        installment_count: null,
+                        payment_method_type: "card",
                     },
-                    payment_method: {
-                        card: { brand: null, exp_month: 42, exp_year: 42, fingerprint: null, last4: "4242" },
-                        created_at: "2023-12-01T05:00:00Z",
-                        id: "payt_xxxxxxxxxxxxx",
-                        payment_method_type: "acss_debit",
-                    },
+                    payment_method_id: "payt_xxxxxxxxxxxxxx",
                     payment_method_type: "acss_debit",
-                    payments_failed: 42,
-                    plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: null, metadata: null },
-                    product: {
-                        id: "prod_xxxxxxxxxxxxx",
-                        metadata: null,
-                        route: "pickaxe-analytics",
-                        title: "Pickaxe Analytics",
-                    },
-                    promo_code: {
-                        amount_off: 6.9,
-                        base_currency: "usd",
-                        code: null,
-                        id: "promo_xxxxxxxxxxxx",
-                        number_of_intervals: 42,
-                        promo_type: "percentage",
-                    },
-                    refundable: true,
-                    refunded_amount: 6.9,
-                    refunded_at: "2023-12-01T05:00:00Z",
+                    payments_failed: 0,
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    promo_code_id: "promo_code_id",
+                    refundable: false,
+                    refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    refunded_at: "refunded_at",
                     retryable: true,
-                    settlement_currency: "usd",
-                    shipment: {
-                        carrier: "usps",
-                        id: "ship_xxxxxxxxxxxxx",
-                        status: "unknown",
-                        tracking_number: "9400111899223456789012",
-                        tracking_url: "https://track.aftership.com/9400111899223456789012",
-                    },
+                    risk_score: 1.1,
+                    risk_signals: { key: "value" },
+                    settlement_time_at: "settlement_time_at",
+                    shipment_id: "shipment_id",
                     shipping_address: {
-                        city: null,
-                        country: null,
-                        line1: null,
-                        line2: null,
-                        name: null,
-                        postal_code: null,
-                        state: null,
+                        city: "Austin",
+                        country: "US",
+                        line1: "1114 Bouldin Ave",
+                        line2: "Unit B",
+                        name: "Dana Whitfield",
+                        postal_code: "78704",
+                        state: "TX",
                     },
                     status: "draft",
                     substatus: "succeeded",
-                    subtotal: 6.9,
-                    tax_amount: 6.9,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                     tax_behavior: "exclusive",
-                    total: 6.9,
-                    updated_at: "2023-12-01T05:00:00Z",
-                    usd_total: 6.9,
+                    tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    three_ds_verified: false,
+                    total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                     user: {
-                        email: "john.doe@example.com",
-                        id: "user_xxxxxxxxxxxxx",
-                        name: "John Doe",
-                        username: "johndoe42",
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
                     },
-                    voidable: true,
+                    verification_checks: {
+                        address_line1: "PASS",
+                        card_holder_name: "PASS",
+                        card_security_code: "PASS",
+                        zip_code: "PASS",
+                    },
+                    voidable: false,
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -150,15 +150,7 @@ describe("PaymentsClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.payments.list({
-            first: 42,
-            last: 42,
-            company_id: "biz_xxxxxxxxxxxxxx",
-            created_before: "2023-12-01T05:00:00Z",
-            created_after: "2023-12-01T05:00:00Z",
-            updated_before: "2023-12-01T05:00:00Z",
-            updated_after: "2023-12-01T05:00:00Z",
-        });
+        const page = await client.payments.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -204,101 +196,6 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("list (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.list();
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("list (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.list();
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.list();
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.list();
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.list();
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -308,181 +205,121 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "biz_xxxxxxxxxxxxxx",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            amount_after_fees: 6.9,
-            application_fee: {
-                amount: 6.9,
-                amount_captured: 6.9,
-                amount_refunded: 6.9,
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                id: "apfee_xxxxxxxxxxxx",
-            },
-            auto_refunded: true,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
             billing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             billing_reason: "subscription_create",
-            card_brand: "mastercard",
-            card_exp_month: 6,
-            card_exp_year: 2027,
-            card_last4: "4242",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-            created_at: "2023-12-01T05:00:00Z",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
-            customer_phone: "customer_phone",
+            customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
-            dispute_alerted_at: "2023-12-01T05:00:00Z",
-            disputes: [
-                {
-                    amount: 6.9,
-                    currency: "usd",
-                    editable: true,
-                    id: "dspt_xxxxxxxxxxxxx",
-                    needs_response_by: "2023-12-01T05:00:00Z",
-                    notes: "Customer used the product for 3 months before disputing.",
-                    reason: "Product Not Received",
-                    status: "warning_needs_response",
-                },
-            ],
+            dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
-            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
-            financing_installments_count: 42,
-            financing_transactions: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "ptx_xxxxxxxxxxxxxx",
-                    status: "succeeded",
-                    transaction_type: "purchase",
-                },
-            ],
+            financing_installments_count: 1.1,
             id: "pay_xxxxxxxxxxxxxx",
-            last_payment_attempt: "2023-12-01T05:00:00Z",
-            member: { id: "id", phone: "phone" },
-            membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: "phone_number", status: "trialing" },
-            metadata: { key: "value" },
-            needs_tracking: true,
-            next_payment_attempt: "2023-12-01T05:00:00Z",
-            paid_at: "2023-12-01T05:00:00Z",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "brand", last4: "last4" },
-                display_name: "display_name",
+                card: { brand: "visa", last4: "4242" },
+                display_name: "Visa •••• 4242",
                 icons: {
                     card: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                     square: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                 },
-                installment_count: 42,
-                payment_method_type: "payment_method_type",
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, fingerprint: "fingerprint", last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                payment_method_type: "acss_debit",
-            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
             payment_method_type: "acss_debit",
-            payments_failed: 42,
-            plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: "internal_notes", metadata: { key: "value" } },
-            product: {
-                id: "prod_xxxxxxxxxxxxx",
-                metadata: { key: "value" },
-                route: "pickaxe-analytics",
-                title: "Pickaxe Analytics",
-            },
-            promo_code: {
-                amount_off: 6.9,
-                base_currency: "usd",
-                code: "code",
-                id: "promo_xxxxxxxxxxxx",
-                number_of_intervals: 42,
-                promo_type: "percentage",
-            },
-            refundable: true,
-            refunded_amount: 6.9,
-            refunded_at: "2023-12-01T05:00:00Z",
-            refunds: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    status: "pending",
-                },
-            ],
-            resolutions: [
-                {
-                    customer_appealed: true,
-                    customer_response_actions: ["respond"],
-                    due_date: "2023-12-01T05:00:00Z",
-                    id: "reso_xxxxxxxxxxxxx",
-                    issue: "forgot_to_cancel",
-                    merchant_appealed: true,
-                    merchant_response_actions: ["accept"],
-                    platform_response_actions: ["request_buyer_info"],
-                    status: "merchant_response_needed",
-                },
-            ],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
             retryable: true,
-            risk_score: 42,
+            risk_score: 1.1,
             risk_signals: { key: "value" },
-            settlement_amount: 6.9,
-            settlement_currency: "usd",
-            settlement_exchange_rate: 6.9,
-            settlement_time_at: "2023-12-01T05:00:00Z",
-            shipment: {
-                carrier: "usps",
-                id: "ship_xxxxxxxxxxxxx",
-                status: "unknown",
-                tracking_number: "9400111899223456789012",
-                tracking_url: "https://track.aftership.com/9400111899223456789012",
-            },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
             shipping_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             status: "draft",
             substatus: "succeeded",
-            subtotal: 6.9,
-            tax_amount: 6.9,
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
-            tax_refunded_amount: 6.9,
-            three_ds_verified: true,
-            total: 6.9,
-            updated_at: "2023-12-01T05:00:00Z",
-            usd_total: 6.9,
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            verification_checks: {
-                address_line1: "address_line1",
-                card_holder_name: "card_holder_name",
-                card_security_code: "card_security_code",
-                zip_code: "zip_code",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
             },
-            voidable: true,
-            client_secret: "pay_xxxxxxxxxxxxxx_secret_v1_xxxx",
+            verification_checks: {
+                address_line1: "PASS",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
         };
 
         server
@@ -495,11 +332,8 @@ describe("PaymentsClient", () => {
             .build();
 
         const response = await client.payments.create({
-            company_id: "biz_xxxxxxxxxxxxxx",
-            confirmation_token: "confirmation_token",
-            plan: {
-                currency: "usd",
-            },
+            account_id: "biz_xxxxxxxxxxxxxx",
+            plan_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -513,11 +347,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
+        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -531,11 +361,8 @@ describe("PaymentsClient", () => {
 
         await expect(async () => {
             return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
+                account_id: "account_id",
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -549,11 +376,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
+        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -567,11 +390,8 @@ describe("PaymentsClient", () => {
 
         await expect(async () => {
             return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
+                account_id: "account_id",
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -585,11 +405,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
+        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -603,11 +419,8 @@ describe("PaymentsClient", () => {
 
         await expect(async () => {
             return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
+                account_id: "account_id",
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -621,11 +434,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
+        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -639,11 +448,8 @@ describe("PaymentsClient", () => {
 
         await expect(async () => {
             return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
+                account_id: "account_id",
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -657,103 +463,24 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
-        const rawResponseBody = { key: "value" };
+        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/payments")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
             return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
+                account_id: "account_id",
+                plan_id: "plan_id",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("create (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("create (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {
-            company_id: "company_id",
-            confirmation_token: "confirmation_token",
-            plan: { currency: "usd" },
-        };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.create({
-                company_id: "company_id",
-                confirmation_token: "confirmation_token",
-                plan: {
-                    currency: "usd",
-                },
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -767,213 +494,130 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
-            amount_after_fees: 6.9,
-            application_fee: {
-                amount: 6.9,
-                amount_captured: 6.9,
-                amount_refunded: 6.9,
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                id: "apfee_xxxxxxxxxxxx",
-            },
-            auto_refunded: true,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
             billing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             billing_reason: "subscription_create",
-            card_brand: "mastercard",
-            card_exp_month: 6,
-            card_exp_year: 2027,
-            card_last4: "4242",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-            created_at: "2023-12-01T05:00:00Z",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
-            customer_phone: "customer_phone",
+            customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
-            dispute_alerted_at: "2023-12-01T05:00:00Z",
-            disputes: [
-                {
-                    amount: 6.9,
-                    currency: "usd",
-                    editable: true,
-                    id: "dspt_xxxxxxxxxxxxx",
-                    needs_response_by: "2023-12-01T05:00:00Z",
-                    notes: "Customer used the product for 3 months before disputing.",
-                    reason: "Product Not Received",
-                    status: "warning_needs_response",
-                },
-            ],
+            dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
-            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
-            financing_installments_count: 42,
-            financing_transactions: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "ptx_xxxxxxxxxxxxxx",
-                    status: "succeeded",
-                    transaction_type: "purchase",
-                },
-            ],
+            financing_installments_count: 1.1,
             id: "pay_xxxxxxxxxxxxxx",
-            last_payment_attempt: "2023-12-01T05:00:00Z",
-            member: { id: "id", phone: "phone" },
-            membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: "phone_number", status: "trialing" },
-            metadata: { key: "value" },
-            needs_tracking: true,
-            next_payment_attempt: "2023-12-01T05:00:00Z",
-            paid_at: "2023-12-01T05:00:00Z",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "brand", last4: "last4" },
-                display_name: "display_name",
+                card: { brand: "visa", last4: "4242" },
+                display_name: "Visa •••• 4242",
                 icons: {
                     card: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                     square: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                 },
-                installment_count: 42,
-                payment_method_type: "payment_method_type",
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, fingerprint: "fingerprint", last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                payment_method_type: "acss_debit",
-            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
             payment_method_type: "acss_debit",
-            payments_failed: 42,
-            plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: "internal_notes", metadata: { key: "value" } },
-            product: {
-                id: "prod_xxxxxxxxxxxxx",
-                metadata: { key: "value" },
-                route: "pickaxe-analytics",
-                title: "Pickaxe Analytics",
-            },
-            promo_code: {
-                amount_off: 6.9,
-                base_currency: "usd",
-                code: "code",
-                id: "promo_xxxxxxxxxxxx",
-                number_of_intervals: 42,
-                promo_type: "percentage",
-            },
-            refundable: true,
-            refunded_amount: 6.9,
-            refunded_at: "2023-12-01T05:00:00Z",
-            refunds: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    status: "pending",
-                },
-            ],
-            resolutions: [
-                {
-                    customer_appealed: true,
-                    customer_response_actions: ["respond"],
-                    due_date: "2023-12-01T05:00:00Z",
-                    id: "reso_xxxxxxxxxxxxx",
-                    issue: "forgot_to_cancel",
-                    merchant_appealed: true,
-                    merchant_response_actions: ["accept"],
-                    platform_response_actions: ["request_buyer_info"],
-                    status: "merchant_response_needed",
-                },
-            ],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
             retryable: true,
-            risk_score: 42,
+            risk_score: 1.1,
             risk_signals: { key: "value" },
-            settlement_amount: 6.9,
-            settlement_currency: "usd",
-            settlement_exchange_rate: 6.9,
-            settlement_time_at: "2023-12-01T05:00:00Z",
-            shipment: {
-                carrier: "usps",
-                id: "ship_xxxxxxxxxxxxx",
-                status: "unknown",
-                tracking_number: "9400111899223456789012",
-                tracking_url: "https://track.aftership.com/9400111899223456789012",
-            },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
             shipping_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             status: "draft",
             substatus: "succeeded",
-            subtotal: 6.9,
-            tax_amount: 6.9,
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
-            tax_refunded_amount: 6.9,
-            three_ds_verified: true,
-            total: 6.9,
-            updated_at: "2023-12-01T05:00:00Z",
-            usd_total: 6.9,
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            verification_checks: {
-                address_line1: "address_line1",
-                card_holder_name: "card_holder_name",
-                card_security_code: "card_security_code",
-                zip_code: "zip_code",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
             },
-            voidable: true,
-            client_secret: "pay_xxxxxxxxxxxxxx_secret_v1_xxxx",
+            verification_checks: {
+                address_line1: "PASS",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
         };
 
-        server
-            .mockEndpoint()
-            .get("/payments/pay_xxxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/payments/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.payments.retrieve({
-            id: "pay_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -994,7 +638,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1015,7 +659,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("retrieve (5)", async () => {
+    test("retrieve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1034,69 +678,6 @@ describe("PaymentsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("retrieve (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retrieve (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retrieve (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 
     test("capture (1)", async () => {
@@ -1261,58 +842,34 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
-            data: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
+            data: [
+                {
+                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    collected_at: "2026-01-01T12:00:00.000Z",
+                    description: "description",
+                    label: "Processing fee",
+                    origin: "stripe_domestic_processing_fee",
+                    settlement_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    type: "whop_fee",
+                },
+            ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
+                has_next_page: false,
+                has_previous_page: false,
                 start_cursor: "start_cursor",
             },
         };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/payments/pay_xxxxxxxxxxxxxx/fees")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const expected = rawResponseBody;
-        const page = await client.payments.listFees({
-            id: "pay_xxxxxxxxxxxxxx",
-            first: 42,
-            last: 42,
+        const response = await client.payments.listFees({
+            id: "id",
         });
-
-        expect(expected.data).toEqual(page.data);
-        expect(page.hasNextPage()).toBe(true);
-        const nextPage = await page.getNextPage();
-        expect(expected.data).toEqual(nextPage.data);
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("listFees (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.listFees({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("listFees (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1333,28 +890,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("listFees (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.listFees({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("listFees (5)", async () => {
+    test("listFees (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1375,69 +911,6 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("listFees (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.listFees({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("listFees (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.listFees({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("listFees (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/payments/id/fees").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.listFees({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("refund (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1449,179 +922,124 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
-            amount_after_fees: 6.9,
-            application_fee: {
-                amount: 6.9,
-                amount_captured: 6.9,
-                amount_refunded: 6.9,
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                id: "apfee_xxxxxxxxxxxx",
-            },
-            auto_refunded: true,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
             billing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             billing_reason: "subscription_create",
-            card_brand: "mastercard",
-            card_exp_month: 6,
-            card_exp_year: 2027,
-            card_last4: "4242",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-            created_at: "2023-12-01T05:00:00Z",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
-            customer_phone: "customer_phone",
+            customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
-            dispute_alerted_at: "2023-12-01T05:00:00Z",
-            disputes: [
-                {
-                    amount: 6.9,
-                    currency: "usd",
-                    editable: true,
-                    id: "dspt_xxxxxxxxxxxxx",
-                    needs_response_by: "2023-12-01T05:00:00Z",
-                    notes: "Customer used the product for 3 months before disputing.",
-                    reason: "Product Not Received",
-                    status: "warning_needs_response",
-                },
-            ],
+            dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
-            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
-            financing_installments_count: 42,
-            financing_transactions: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "ptx_xxxxxxxxxxxxxx",
-                    status: "succeeded",
-                    transaction_type: "purchase",
-                },
-            ],
+            financing_installments_count: 1.1,
             id: "pay_xxxxxxxxxxxxxx",
-            last_payment_attempt: "2023-12-01T05:00:00Z",
-            member: { id: "id", phone: "phone" },
-            membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: "phone_number", status: "trialing" },
-            metadata: { key: "value" },
-            needs_tracking: true,
-            next_payment_attempt: "2023-12-01T05:00:00Z",
-            paid_at: "2023-12-01T05:00:00Z",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "brand", last4: "last4" },
-                display_name: "display_name",
+                card: { brand: "visa", last4: "4242" },
+                display_name: "Visa •••• 4242",
                 icons: {
                     card: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                     square: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                 },
-                installment_count: 42,
-                payment_method_type: "payment_method_type",
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, fingerprint: "fingerprint", last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                payment_method_type: "acss_debit",
-            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
             payment_method_type: "acss_debit",
-            payments_failed: 42,
-            plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: "internal_notes", metadata: { key: "value" } },
-            product: {
-                id: "prod_xxxxxxxxxxxxx",
-                metadata: { key: "value" },
-                route: "pickaxe-analytics",
-                title: "Pickaxe Analytics",
-            },
-            promo_code: {
-                amount_off: 6.9,
-                base_currency: "usd",
-                code: "code",
-                id: "promo_xxxxxxxxxxxx",
-                number_of_intervals: 42,
-                promo_type: "percentage",
-            },
-            refundable: true,
-            refunded_amount: 6.9,
-            refunded_at: "2023-12-01T05:00:00Z",
-            refunds: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    status: "pending",
-                },
-            ],
-            resolutions: [
-                {
-                    customer_appealed: true,
-                    customer_response_actions: ["respond"],
-                    due_date: "2023-12-01T05:00:00Z",
-                    id: "reso_xxxxxxxxxxxxx",
-                    issue: "forgot_to_cancel",
-                    merchant_appealed: true,
-                    merchant_response_actions: ["accept"],
-                    platform_response_actions: ["request_buyer_info"],
-                    status: "merchant_response_needed",
-                },
-            ],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
             retryable: true,
-            risk_score: 42,
+            risk_score: 1.1,
             risk_signals: { key: "value" },
-            settlement_amount: 6.9,
-            settlement_currency: "usd",
-            settlement_exchange_rate: 6.9,
-            settlement_time_at: "2023-12-01T05:00:00Z",
-            shipment: {
-                carrier: "usps",
-                id: "ship_xxxxxxxxxxxxx",
-                status: "unknown",
-                tracking_number: "9400111899223456789012",
-                tracking_url: "https://track.aftership.com/9400111899223456789012",
-            },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
             shipping_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             status: "draft",
             substatus: "succeeded",
-            subtotal: 6.9,
-            tax_amount: 6.9,
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
-            tax_refunded_amount: 6.9,
-            three_ds_verified: true,
-            total: 6.9,
-            updated_at: "2023-12-01T05:00:00Z",
-            usd_total: 6.9,
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            verification_checks: {
-                address_line1: "address_line1",
-                card_holder_name: "card_holder_name",
-                card_security_code: "card_security_code",
-                zip_code: "zip_code",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
             },
-            voidable: true,
+            verification_checks: {
+                address_line1: "PASS",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
         };
 
         server
             .mockEndpoint()
-            .post("/payments/pay_xxxxxxxxxxxxxx/refund")
+            .post("/payments/id/refund")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -1629,7 +1047,7 @@ describe("PaymentsClient", () => {
             .build();
 
         const response = await client.payments.refund({
-            id: "pay_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -1756,14 +1174,14 @@ describe("PaymentsClient", () => {
             environment: server.baseUrl,
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/payments/id/refund")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -1771,63 +1189,7 @@ describe("PaymentsClient", () => {
             return await client.payments.refund({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("refund (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/refund")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.refund({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("refund (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/refund")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.refund({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retry (1)", async () => {
@@ -1841,218 +1203,136 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
-            amount_after_fees: 6.9,
-            application_fee: {
-                amount: 6.9,
-                amount_captured: 6.9,
-                amount_refunded: 6.9,
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                id: "apfee_xxxxxxxxxxxx",
-            },
-            auto_refunded: true,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
             billing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             billing_reason: "subscription_create",
-            card_brand: "mastercard",
-            card_exp_month: 6,
-            card_exp_year: 2027,
-            card_last4: "4242",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-            created_at: "2023-12-01T05:00:00Z",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
-            customer_phone: "customer_phone",
+            customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
-            dispute_alerted_at: "2023-12-01T05:00:00Z",
-            disputes: [
-                {
-                    amount: 6.9,
-                    currency: "usd",
-                    editable: true,
-                    id: "dspt_xxxxxxxxxxxxx",
-                    needs_response_by: "2023-12-01T05:00:00Z",
-                    notes: "Customer used the product for 3 months before disputing.",
-                    reason: "Product Not Received",
-                    status: "warning_needs_response",
-                },
-            ],
+            dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
-            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
-            financing_installments_count: 42,
-            financing_transactions: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "ptx_xxxxxxxxxxxxxx",
-                    status: "succeeded",
-                    transaction_type: "purchase",
-                },
-            ],
+            financing_installments_count: 1.1,
             id: "pay_xxxxxxxxxxxxxx",
-            last_payment_attempt: "2023-12-01T05:00:00Z",
-            member: { id: "id", phone: "phone" },
-            membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: "phone_number", status: "trialing" },
-            metadata: { key: "value" },
-            needs_tracking: true,
-            next_payment_attempt: "2023-12-01T05:00:00Z",
-            paid_at: "2023-12-01T05:00:00Z",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "brand", last4: "last4" },
-                display_name: "display_name",
+                card: { brand: "visa", last4: "4242" },
+                display_name: "Visa •••• 4242",
                 icons: {
                     card: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                     square: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                 },
-                installment_count: 42,
-                payment_method_type: "payment_method_type",
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, fingerprint: "fingerprint", last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                payment_method_type: "acss_debit",
-            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
             payment_method_type: "acss_debit",
-            payments_failed: 42,
-            plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: "internal_notes", metadata: { key: "value" } },
-            product: {
-                id: "prod_xxxxxxxxxxxxx",
-                metadata: { key: "value" },
-                route: "pickaxe-analytics",
-                title: "Pickaxe Analytics",
-            },
-            promo_code: {
-                amount_off: 6.9,
-                base_currency: "usd",
-                code: "code",
-                id: "promo_xxxxxxxxxxxx",
-                number_of_intervals: 42,
-                promo_type: "percentage",
-            },
-            refundable: true,
-            refunded_amount: 6.9,
-            refunded_at: "2023-12-01T05:00:00Z",
-            refunds: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    status: "pending",
-                },
-            ],
-            resolutions: [
-                {
-                    customer_appealed: true,
-                    customer_response_actions: ["respond"],
-                    due_date: "2023-12-01T05:00:00Z",
-                    id: "reso_xxxxxxxxxxxxx",
-                    issue: "forgot_to_cancel",
-                    merchant_appealed: true,
-                    merchant_response_actions: ["accept"],
-                    platform_response_actions: ["request_buyer_info"],
-                    status: "merchant_response_needed",
-                },
-            ],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
             retryable: true,
-            risk_score: 42,
+            risk_score: 1.1,
             risk_signals: { key: "value" },
-            settlement_amount: 6.9,
-            settlement_currency: "usd",
-            settlement_exchange_rate: 6.9,
-            settlement_time_at: "2023-12-01T05:00:00Z",
-            shipment: {
-                carrier: "usps",
-                id: "ship_xxxxxxxxxxxxx",
-                status: "unknown",
-                tracking_number: "9400111899223456789012",
-                tracking_url: "https://track.aftership.com/9400111899223456789012",
-            },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
             shipping_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             status: "draft",
             substatus: "succeeded",
-            subtotal: 6.9,
-            tax_amount: 6.9,
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
-            tax_refunded_amount: 6.9,
-            three_ds_verified: true,
-            total: 6.9,
-            updated_at: "2023-12-01T05:00:00Z",
-            usd_total: 6.9,
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            verification_checks: {
-                address_line1: "address_line1",
-                card_holder_name: "card_holder_name",
-                card_security_code: "card_security_code",
-                zip_code: "zip_code",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
             },
-            voidable: true,
+            verification_checks: {
+                address_line1: "PASS",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
         };
 
         server
             .mockEndpoint()
-            .post("/payments/pay_xxxxxxxxxxxxxx/retry")
+            .post("/payments/id/retry")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.payments.retry({
-            id: "pay_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retry (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/retry")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.retry({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retry (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2079,34 +1359,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retry (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/retry")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.retry({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("retry (5)", async () => {
+    test("retry (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2133,7 +1386,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("retry (6)", async () => {
+    test("retry (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2143,13 +1396,13 @@ describe("PaymentsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/payments/id/retry")
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -2157,61 +1410,7 @@ describe("PaymentsClient", () => {
             return await client.payments.retry({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retry (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/retry")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.retry({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retry (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/payments/id/retry")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.payments.retry({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("void (1)", async () => {
@@ -2225,212 +1424,130 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
-            amount_after_fees: 6.9,
-            application_fee: {
-                amount: 6.9,
-                amount_captured: 6.9,
-                amount_refunded: 6.9,
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                id: "apfee_xxxxxxxxxxxx",
-            },
-            auto_refunded: true,
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
             billing_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             billing_reason: "subscription_create",
-            card_brand: "mastercard",
-            card_exp_month: 6,
-            card_exp_year: 2027,
-            card_last4: "4242",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", route: "route", title: "title" },
-            created_at: "2023-12-01T05:00:00Z",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
-            customer_phone: "customer_phone",
+            customer_phone: "+xxxxxxxxxxx",
             decline_code: "insufficient_funds",
-            dispute_alerted_at: "2023-12-01T05:00:00Z",
-            disputes: [
-                {
-                    amount: 6.9,
-                    currency: "usd",
-                    editable: true,
-                    id: "dspt_xxxxxxxxxxxxx",
-                    needs_response_by: "2023-12-01T05:00:00Z",
-                    notes: "Customer used the product for 3 months before disputing.",
-                    reason: "Product Not Received",
-                    status: "warning_needs_response",
-                },
-            ],
+            dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
-            fees: [{ amount: 6.9, currency: "usd", name: "name", type: "stripe_domestic_processing_fee" }],
-            financing_installments_count: 42,
-            financing_transactions: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    id: "ptx_xxxxxxxxxxxxxx",
-                    status: "succeeded",
-                    transaction_type: "purchase",
-                },
-            ],
+            financing_installments_count: 1.1,
             id: "pay_xxxxxxxxxxxxxx",
-            last_payment_attempt: "2023-12-01T05:00:00Z",
-            member: { id: "id", phone: "phone" },
-            membership: { id: "mem_xxxxxxxxxxxxxx", phone_number: "phone_number", status: "trialing" },
-            metadata: { key: "value" },
-            needs_tracking: true,
-            next_payment_attempt: "2023-12-01T05:00:00Z",
-            paid_at: "2023-12-01T05:00:00Z",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "brand", last4: "last4" },
-                display_name: "display_name",
+                card: { brand: "visa", last4: "4242" },
+                display_name: "Visa •••• 4242",
                 icons: {
                     card: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                     square: {
-                        dark: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
-                        light: { png_1x: "png_1x", png_2x: "png_2x", png_4x: "png_4x", svg: "svg" },
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
                     },
                 },
-                installment_count: 42,
-                payment_method_type: "payment_method_type",
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, fingerprint: "fingerprint", last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                payment_method_type: "acss_debit",
-            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
             payment_method_type: "acss_debit",
-            payments_failed: 42,
-            plan: { id: "plan_xxxxxxxxxxxxx", internal_notes: "internal_notes", metadata: { key: "value" } },
-            product: {
-                id: "prod_xxxxxxxxxxxxx",
-                metadata: { key: "value" },
-                route: "pickaxe-analytics",
-                title: "Pickaxe Analytics",
-            },
-            promo_code: {
-                amount_off: 6.9,
-                base_currency: "usd",
-                code: "code",
-                id: "promo_xxxxxxxxxxxx",
-                number_of_intervals: 42,
-                promo_type: "percentage",
-            },
-            refundable: true,
-            refunded_amount: 6.9,
-            refunded_at: "2023-12-01T05:00:00Z",
-            refunds: [
-                {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    status: "pending",
-                },
-            ],
-            resolutions: [
-                {
-                    customer_appealed: true,
-                    customer_response_actions: ["respond"],
-                    due_date: "2023-12-01T05:00:00Z",
-                    id: "reso_xxxxxxxxxxxxx",
-                    issue: "forgot_to_cancel",
-                    merchant_appealed: true,
-                    merchant_response_actions: ["accept"],
-                    platform_response_actions: ["request_buyer_info"],
-                    status: "merchant_response_needed",
-                },
-            ],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
             retryable: true,
-            risk_score: 42,
+            risk_score: 1.1,
             risk_signals: { key: "value" },
-            settlement_amount: 6.9,
-            settlement_currency: "usd",
-            settlement_exchange_rate: 6.9,
-            settlement_time_at: "2023-12-01T05:00:00Z",
-            shipment: {
-                carrier: "usps",
-                id: "ship_xxxxxxxxxxxxx",
-                status: "unknown",
-                tracking_number: "9400111899223456789012",
-                tracking_url: "https://track.aftership.com/9400111899223456789012",
-            },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
             shipping_address: {
-                city: "city",
-                country: "country",
-                line1: "line1",
-                line2: "line2",
-                name: "name",
-                postal_code: "postal_code",
-                state: "state",
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
             },
             status: "draft",
             substatus: "succeeded",
-            subtotal: 6.9,
-            tax_amount: 6.9,
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             tax_behavior: "exclusive",
-            tax_refunded_amount: 6.9,
-            three_ds_verified: true,
-            total: 6.9,
-            updated_at: "2023-12-01T05:00:00Z",
-            usd_total: 6.9,
-            user: { email: "john.doe@example.com", id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
-            verification_checks: {
-                address_line1: "address_line1",
-                card_holder_name: "card_holder_name",
-                card_security_code: "card_security_code",
-                zip_code: "zip_code",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
             },
-            voidable: true,
+            verification_checks: {
+                address_line1: "PASS",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
         };
 
-        server
-            .mockEndpoint()
-            .post("/payments/pay_xxxxxxxxxxxxxx/void")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.payments.void({
-            id: "pay_xxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("void (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("void (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2451,28 +1568,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("void (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("void (5)", async () => {
+    test("void (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2493,7 +1589,7 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("void (6)", async () => {
+    test("void (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -2503,57 +1599,15 @@ describe("PaymentsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
-        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("void (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.payments.void({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("void (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().post("/payments/id/void").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.payments.void({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("updateReturnUrl (1)", async () => {

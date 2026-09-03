@@ -12,7 +12,7 @@ export interface CreateQuotePayoutsRequest {
     account_id?: string;
     /** The amount to pay out in the specified currency. */
     amount: number;
-    /** The balance currency to pay out. */
+    /** The currency to pay out. When omitted, uses `usd` if that balance can cover a withdrawal, otherwise the account's only other funded currency. */
     currency?: string;
     /** The saved payout method to quote (a potk_ identifier). */
     payout_method_id: string;
@@ -20,6 +20,8 @@ export interface CreateQuotePayoutsRequest {
     platform_covers_fees?: boolean;
     /** How fast the funds should arrive. */
     speed?: CreateQuotePayoutsRequest.Speed;
+    /** Text that appears on the recipient's bank statement. Must be 5-22 alphanumeric characters (A-Z, a-z, 0-9). Omit or pass `null` to use the default descriptor. */
+    statement_descriptor?: string | null;
     /** User to pay out from, prefixed `user_`. Provide exactly one of `account_id` or `user_id`. */
     user_id?: string;
 }

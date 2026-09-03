@@ -35,7 +35,7 @@ describe("TeamMembersClient", () => {
                     },
                 },
             ],
-            page_info: { end_cursor: "Mw", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
+            page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
         };
 
         server

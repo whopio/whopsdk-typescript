@@ -29,107 +29,64 @@ export class PaymentsClient {
     }
 
     /**
-     * Returns a paginated list of payments for the actor in context, with optional filtering by product, plan, status, billing reason, currency, and creation date.
-     *
-     * Required permissions:
-     *  - `payment:basic:read`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
+     * Lists payments, newest first. Without filters this is every payment the caller can read: a company credential's own account, or for a user every account they can read payments for. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
      *
      * @param {Whop.ListPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.payments.list({
-     *         first: 42,
-     *         last: 42,
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z",
-     *         updated_before: "2023-12-01T05:00:00Z",
-     *         updated_after: "2023-12-01T05:00:00Z"
-     *     })
+     *     await client.payments.list()
      */
     public async list(
         request: Whop.ListPaymentsRequest = {},
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.Page<Whop.PaymentListItem, Whop.ListPaymentsResponse>> {
+    ): Promise<core.Page<Whop.Payment, Whop.ListPaymentsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListPaymentsRequest): Promise<core.WithRawResponse<Whop.ListPaymentsResponse>> => {
                 const {
-                    after,
-                    before,
-                    first,
-                    last,
-                    company_id: companyId,
-                    direction,
-                    order,
-                    product_ids: productIds,
-                    billing_reasons: billingReasons,
-                    currencies,
-                    plan_ids: planIds,
-                    statuses,
-                    substatuses,
-                    include_free: includeFree,
+                    account_id: accountId,
+                    status,
+                    billing_reason: billingReason,
+                    currency,
+                    user_id: userId,
+                    query,
+                    member_id: memberId,
+                    membership_id: membershipId,
+                    product_id: productId,
+                    plan_id: planId,
                     created_before: createdBefore,
                     created_after: createdAfter,
-                    updated_before: updatedBefore,
-                    updated_after: updatedAfter,
-                    query,
-                    checkout_configuration_ids: checkoutConfigurationIds,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
-                    company_id: companyId,
-                    direction: direction != null ? direction : undefined,
-                    order: order != null ? order : undefined,
-                    product_ids: productIds,
-                    billing_reasons: Array.isArray(billingReasons)
-                        ? billingReasons.map((item) => item)
-                        : billingReasons != null
-                          ? billingReasons
-                          : undefined,
-                    currencies: Array.isArray(currencies)
-                        ? currencies.map((item) => item)
-                        : currencies != null
-                          ? currencies
-                          : undefined,
-                    plan_ids: planIds,
-                    statuses: Array.isArray(statuses)
-                        ? statuses.map((item) => item)
-                        : statuses != null
-                          ? statuses
-                          : undefined,
-                    substatuses: Array.isArray(substatuses)
-                        ? substatuses.map((item) => item)
-                        : substatuses != null
-                          ? substatuses
-                          : undefined,
-                    include_free: includeFree,
+                    account_id: accountId,
+                    status: status != null ? status : undefined,
+                    billing_reason: billingReason != null ? billingReason : undefined,
+                    currency,
+                    user_id: userId,
+                    query,
+                    member_id: memberId,
+                    membership_id: membershipId,
+                    product_id: productId,
+                    plan_id: planId,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
-                    updated_before: updatedBefore != null ? updatedBefore : undefined,
-                    updated_after: updatedAfter != null ? updatedAfter : undefined,
-                    query,
-                    checkout_configuration_ids: checkoutConfigurationIds,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                    first,
+                    after,
+                    last,
+                    before,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -137,7 +94,7 @@ export class PaymentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -171,19 +128,6 @@ export class PaymentsClient {
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -196,7 +140,7 @@ export class PaymentsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.PaymentListItem, Whop.ListPaymentsResponse>({
+        return new core.Page<Whop.Payment, Whop.ListPaymentsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -210,22 +154,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Charge a buyer on-session with a `confirmation_token` for the method they selected, or charge an existing member off-session using a stored payment method. You can provide an existing plan or create one inline. The endpoint returns a payment immediately, but processing continues asynchronously. Use webhooks to learn whether it succeeds or fails, and poll the payment's status endpoint for any step the buyer must complete.
-     *
-     * Required permissions:
-     *  - `payment:charge`
-     *  - `plan:create`
-     *  - `access_pass:create`
-     *  - `access_pass:update`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
-     *  - `payment:dispute:read`
-     *  - `payment:resolution_center_case:read`
+     * Charges a buyer for a plan. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. `plan_id` names the plan to charge for.
      *
      * @param {Whop.CreatePaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -234,38 +163,33 @@ export class PaymentsClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.create({
-     *         company_id: "biz_xxxxxxxxxxxxxx",
-     *         confirmation_token: "confirmation_token",
-     *         plan: {
-     *             currency: "usd"
-     *         }
+     *         account_id: "biz_xxxxxxxxxxxxxx",
+     *         plan_id: "plan_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
         request: Whop.CreatePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.CreatePaymentsResponse> {
+    ): core.HttpResponsePromise<Whop.Payment> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Whop.CreatePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.CreatePaymentsResponse>> {
+    ): Promise<core.WithRawResponse<Whop.Payment>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -290,7 +214,7 @@ export class PaymentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.CreatePaymentsResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Payment, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -303,12 +227,8 @@ export class PaymentsClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -322,56 +242,40 @@ export class PaymentsClient {
     }
 
     /**
-     * Retrieves the details of an existing payment.
-     *
-     * Required permissions:
-     *  - `payment:basic:read`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
-     *  - `payment:dispute:read`
-     *  - `payment:resolution_center_case:read`
+     * Returns one payment. Related records are ids — resolve a plan, membership, member or shipment on its own endpoint, and list this payment's refunds, disputes or Resolution Center cases with `?payment_id=`.
      *
      * @param {Whop.RetrievePaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.retrieve({
-     *         id: "pay_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retrieve(
         request: Whop.RetrievePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.RetrievePaymentsResponse> {
+    ): core.HttpResponsePromise<Whop.Payment> {
         return core.HttpResponsePromise.fromPromise(this.__retrieve(request, requestOptions));
     }
 
     private async __retrieve(
         request: Whop.RetrievePaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.RetrievePaymentsResponse>> {
+    ): Promise<core.WithRawResponse<Whop.Payment>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -393,25 +297,17 @@ export class PaymentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.RetrievePaymentsResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Payment, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -459,7 +355,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -507,141 +403,83 @@ export class PaymentsClient {
     }
 
     /**
-     * Returns the list of fees associated with a specific payment, including platform fees and processing fees.
-     *
-     * Required permissions:
-     *  - `payment:basic:read`
+     * Returns the fee breakdown of one payment — Whop's fee, processing, affiliate and other lines — each in the currency it was collected in and converted to the payment's settlement currency. The list is complete in one page.
      *
      * @param {Whop.ListFeesPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.listFees({
-     *         id: "pay_xxxxxxxxxxxxxx",
-     *         first: 42,
-     *         last: 42
+     *         id: "id"
      *     })
      */
-    public async listFees(
+    public listFees(
         request: Whop.ListFeesPaymentsRequest,
         requestOptions?: PaymentsClient.RequestOptions,
-    ): Promise<core.Page<Whop.ListFeesPaymentsResponse.Data.Item, Whop.ListFeesPaymentsResponse>> {
-        const list = core.HttpResponsePromise.interceptFunction(
-            async (
-                request: Whop.ListFeesPaymentsRequest,
-            ): Promise<core.WithRawResponse<Whop.ListFeesPaymentsResponse>> => {
-                const { id, after, before, first, last } = request;
-                const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
-                };
-                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-                    _authRequest.headers,
-                    this._options?.headers,
-                    mergeOnlyDefinedHeaders({
-                        "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
-                        "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-                    }),
-                    requestOptions?.headers,
-                );
-                const _response = await core.fetcher({
-                    url: core.url.join(
-                        (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
-                        `payments/${core.url.encodePathParam(id)}/fees`,
-                    ),
-                    method: "GET",
-                    headers: _headers,
-                    queryString: core.url
-                        .queryBuilder()
-                        .addMany(_queryParams)
-                        .mergeAdditional(requestOptions?.queryParams)
-                        .build(),
-                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                    fetchFn: this._options?.fetch,
-                    logging: this._options.logging,
-                });
-                if (_response.ok) {
-                    return {
-                        data: _response.body as Whop.ListFeesPaymentsResponse,
-                        rawResponse: _response.rawResponse,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 401:
-                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                        default:
-                            throw new errors.WhopError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
-                }
-                return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/payments/{id}/fees");
-            },
+    ): core.HttpResponsePromise<Whop.ListFeesPaymentsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listFees(request, requestOptions));
+    }
+
+    private async __listFees(
+        request: Whop.ListFeesPaymentsRequest,
+        requestOptions?: PaymentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.ListFeesPaymentsResponse>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
         );
-        const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.ListFeesPaymentsResponse.Data.Item, Whop.ListFeesPaymentsResponse>({
-            response: dataWithRawResponse.data,
-            rawResponse: dataWithRawResponse.rawResponse,
-            hasNextPage: (response) =>
-                response?.page_info.end_cursor != null &&
-                !(typeof response?.page_info.end_cursor === "string" && response?.page_info.end_cursor === ""),
-            getItems: (response) => response?.data ?? [],
-            loadPage: (response) => {
-                return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
-            },
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WhopEnvironment.Default,
+                `payments/${core.url.encodePathParam(id)}/fees`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
         });
+        if (_response.ok) {
+            return { data: _response.body as Whop.ListFeesPaymentsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/payments/{id}/fees");
     }
 
     /**
-     * Issue a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
-     *
-     * Required permissions:
-     *  - `payment:manage`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
-     *  - `payment:dispute:read`
-     *  - `payment:resolution_center_case:read`
+     * Issues a full or partial refund for a payment. The refund is processed through the original payment processor and the membership status is updated accordingly.
      *
      * @param {Whop.RefundPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -650,15 +488,13 @@ export class PaymentsClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.refund({
-     *         id: "pay_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public refund(
@@ -678,7 +514,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -716,12 +552,8 @@ export class PaymentsClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -735,36 +567,20 @@ export class PaymentsClient {
     }
 
     /**
-     * Retry a failed or pending payment. This re-attempts the charge using the original payment method and plan details.
-     *
-     * Required permissions:
-     *  - `payment:manage`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
-     *  - `payment:dispute:read`
-     *  - `payment:resolution_center_case:read`
+     * Retries a failed or pending payment. This re-attempts the charge using the original payment method and plan details.
      *
      * @param {Whop.RetryPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.retry({
-     *         id: "pay_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retry(
@@ -784,7 +600,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -811,20 +627,12 @@ export class PaymentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -838,36 +646,20 @@ export class PaymentsClient {
     }
 
     /**
-     * Void a payment that has not yet been settled. Voiding cancels the payment before it is captured by the payment processor.
-     *
-     * Required permissions:
-     *  - `payment:manage`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *  - `promo_code:basic:read`
-     *  - `shipment:basic:read`
-     *  - `payment:dispute:read`
-     *  - `payment:resolution_center_case:read`
+     * Voids a payment that has not yet been settled. Voiding cancels the payment before it is captured by the payment processor.
      *
      * @param {Whop.VoidPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.payments.void({
-     *         id: "pay_xxxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public void(
@@ -887,7 +679,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -914,20 +706,12 @@ export class PaymentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -974,7 +758,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1059,7 +843,7 @@ export class PaymentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

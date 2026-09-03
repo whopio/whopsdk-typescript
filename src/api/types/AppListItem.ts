@@ -38,6 +38,7 @@ export interface AppListItem {
     openapi_path: string | null;
     /** Full origin URL of the app's proxied domain, for example https://ab1c2d3e4f.apps.whop.com. */
     origin: string | null;
+    previous_hosted_urls: string[];
     /** Claimed subdomain route where hosted web builds are served (`myapp` for myapp.whop.site), or `null` if no route is claimed. */
     route: string | null;
     /** URL path to the app's skills directory, or `null` when not configured. */

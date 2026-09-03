@@ -2,136 +2,85 @@
 
 import type * as Whop from "../index.js";
 
-/**
- * A refund represents a full or partial reversal of a payment, including the amount, status, and payment provider.
- */
 export interface Refund {
-    /** The refunded amount as a decimal in the specified currency, such as 10.43 for $10.43 USD. */
-    amount: number;
-    /** The datetime the refund was created. */
+    /** The account that issued the refund, prefixed `biz_`. */
+    account_id: string | null;
+    /** The refunded amount as it settled, in the payment's settlement currency, so pages of refunds net against the payment's `refunded_amount`. Converted at the rate in force when the refund was issued, not the payment's original rate. Null only when no exchange rate is recorded for a legacy multi-currency payment. */
+    amount: Whop.Money | null;
+    /** When the refund was requested, as an ISO 8601 timestamp. */
     created_at: string;
-    /** The three-letter ISO currency code for the refunded amount. */
-    currency: Whop.Currencies;
-    /** The unique identifier for the refund. */
+    /** The provider's own explanation of the failure, or null. */
+    failure_message: string | null;
+    /** Why the refund failed, normalized across providers. Null unless the refund failed or was canceled. */
+    failure_reason: Refund.FailureReason | null;
+    /** Refund ID, prefixed `rf_`. */
     id: string;
-    /** The original payment that this refund was issued against. Null if the payment is no longer available. */
-    payment: Refund.Payment | null;
-    /** The payment provider that processed the refund. */
-    provider: Whop.PaymentProviders;
-    /** The timestamp when the refund was created in the payment provider's system. Null if not available from the provider. */
+    /** The refunded amount in the currency the processor moved. */
+    original_amount: Whop.Money;
+    /** The payment this refund reverses, prefixed `pay_`. */
+    payment_id: string;
+    /** The payment provider that processed the refund, such as `paypal` or `coinbase`. */
+    provider: string;
+    /** When the provider created the refund, as an ISO 8601 timestamp. */
     provider_created_at: string | null;
-    /** The availability status of the refund tracking reference from the payment processor. Null if no reference was provided. */
-    reference_status: Whop.RefundReferenceStatuses | null;
-    /** The type of tracking reference provided by the payment processor, such as an acquirer reference number. Null if no reference was provided. */
-    reference_type: Whop.RefundReferenceTypes | null;
-    /** The tracking reference value from the payment processor, used to trace the refund through banking networks. Null if no reference was provided. */
+    /** Why the refund was issued, when recorded. */
+    reason: Refund.Reason | null;
+    /** Whether a banking-network tracking reference is available for this refund. */
+    reference_status: Refund.ReferenceStatus | null;
+    /** The kind of tracking reference, such as an acquirer reference number. */
+    reference_type: Refund.ReferenceType | null;
+    /** The tracking reference the buyer's bank can trace the refund by. */
     reference_value: string | null;
-    /** The current processing status of the refund, such as pending, succeeded, or failed. */
-    status: Whop.RefundStatuses;
+    /** Where the refund stands with the processor: `pending`, `requires_action`, `succeeded`, `failed`, or `canceled`. */
+    status: Refund.Status;
+    /** When the refund last changed, as an ISO 8601 timestamp. */
+    updated_at: string;
+    /** True when the card network initiated the refund through Rapid Dispute Resolution. */
+    visa_rdr: boolean;
 }
 
 export namespace Refund {
-    /**
-     * The original payment that this refund was issued against. Null if the payment is no longer available.
-     */
-    export interface Payment {
-        /** The machine-readable reason this charge was created, such as initial subscription purchase, renewal cycle, or one-time payment. */
-        billing_reason: Whop.BillingReasons | null;
-        /** Card network reported by the processor (e.g., 'visa', 'mastercard', 'amex'). Present only when the payment method type is 'card'. */
-        card_brand: Whop.CardBrands | null;
-        /** The last four digits of the card used to make this payment. Null if the payment was not made with a card. */
-        card_last4: string | null;
-        /** The datetime the payment was created. */
-        created_at: string;
-        /** The three-letter ISO currency code for this payment (e.g., 'usd', 'eur'). */
-        currency: Whop.Currencies;
-        /** When an alert came in that this transaction will be disputed */
-        dispute_alerted_at: string | null;
-        /** The unique identifier for the payment. */
-        id: string;
-        /** The member attached to this payment. */
-        member: Payment.Member | null;
-        /** The membership attached to this payment. */
-        membership: Payment.Membership | null;
-        /** The custom metadata stored on this payment. This will be copied over to the checkout configuration for which this payment was made */
-        metadata: Record<string, unknown> | null;
-        /** The time at which this payment was successfully collected. Null if the payment has not yet succeeded. As a Unix timestamp. */
-        paid_at: string | null;
-        /** The type of payment instrument used for this payment (e.g., card, Cash App, iDEAL, Klarna, crypto). Null when the processor does not supply a type. */
-        payment_method_type: Whop.PaymentMethodTypes | null;
-        /** The plan attached to this payment. */
-        plan: Payment.Plan | null;
-        /** The product this payment was made for */
-        product: Payment.Product | null;
-        /** The subtotal to show to the creator (excluding buyer fees). */
-        subtotal: number | null;
-        /** The calculated amount of the sales/VAT tax (if applicable). */
-        tax_amount: number | null;
-        /** The type of tax inclusivity applied to the payment, for determining whether the tax is included in the final price, or paid on top. */
-        tax_behavior: Whop.ReceiptTaxBehaviors | null;
-        /** The amount of tax that has been refunded (if applicable). */
-        tax_refunded_amount: number | null;
-        /** The total to show to the creator (excluding buyer fees). */
-        total: number | null;
-        /** The total in USD to show to the creator (excluding buyer fees). */
-        usd_total: number | null;
-        /** The user that made this payment. */
-        user: Payment.User | null;
-    }
-
-    export namespace Payment {
-        /**
-         * The member attached to this payment.
-         */
-        export interface Member {
-            /** The unique identifier for the company member. */
-            id: string;
-            /** The phone number for the member, if available. */
-            phone: string | null;
-        }
-
-        /**
-         * The membership attached to this payment.
-         */
-        export interface Membership {
-            /** The unique identifier for the membership. */
-            id: string;
-            /** The state of the membership. */
-            status: Whop.MembershipStatus;
-        }
-
-        /**
-         * The plan attached to this payment.
-         */
-        export interface Plan {
-            /** The unique identifier for the plan. */
-            id: string;
-            /** Custom key-value pairs stored on the plan. Included in webhook payloads for payment and membership events. Max 50 keys, 100 chars per key, 500 chars per string value. The reserved keys `custom_cta` and `custom_cta_url`, when set, override the product's checkout call to action for this plan. */
-            metadata: Record<string, unknown> | null;
-        }
-
-        /**
-         * The product this payment was made for
-         */
-        export interface Product {
-            /** The unique identifier for the product. */
-            id: string;
-            /** Custom key-value pairs stored on the product and included in payment and membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters per string value. */
-            metadata: Record<string, unknown> | null;
-        }
-
-        /**
-         * The user that made this payment.
-         */
-        export interface User {
-            /** The user's email address. Requires the member:email:read permission to access. Null if not authorized. */
-            email: string | null;
-            /** The unique identifier for the user. */
-            id: string;
-            /** The user's display name shown on their public profile. */
-            name: string | null;
-            /** The user's unique username shown on their public profile. */
-            username: string;
-        }
-    }
+    /** Why the refund failed, normalized across providers. Null unless the refund failed or was canceled. */
+    export const FailureReason = {
+        BankDeclined: "bank_declined",
+        ExpiredOrCanceledCard: "expired_or_canceled_card",
+        LostOrStolenCard: "lost_or_stolen_card",
+        InsufficientFunds: "insufficient_funds",
+        ChargeDisputed: "charge_disputed",
+        NotRefundable: "not_refundable",
+        MerchantRequest: "merchant_request",
+        Unknown: "unknown",
+    } as const;
+    export type FailureReason = (typeof FailureReason)[keyof typeof FailureReason];
+    /** Why the refund was issued, when recorded. */
+    export const Reason = {
+        Duplicate: "duplicate",
+        Fraudulent: "fraudulent",
+        RequestedByCustomer: "requested_by_customer",
+        ExpiredUncapturedCharge: "expired_uncaptured_charge",
+    } as const;
+    export type Reason = (typeof Reason)[keyof typeof Reason];
+    /** Whether a banking-network tracking reference is available for this refund. */
+    export const ReferenceStatus = {
+        Available: "available",
+        Pending: "pending",
+        Unavailable: "unavailable",
+    } as const;
+    export type ReferenceStatus = (typeof ReferenceStatus)[keyof typeof ReferenceStatus];
+    /** The kind of tracking reference, such as an acquirer reference number. */
+    export const ReferenceType = {
+        AcquirerReferenceNumber: "acquirer_reference_number",
+        RetrievalReferenceNumber: "retrieval_reference_number",
+        SystemTraceAuditNumber: "system_trace_audit_number",
+    } as const;
+    export type ReferenceType = (typeof ReferenceType)[keyof typeof ReferenceType];
+    /** Where the refund stands with the processor: `pending`, `requires_action`, `succeeded`, `failed`, or `canceled`. */
+    export const Status = {
+        Pending: "pending",
+        RequiresAction: "requires_action",
+        Succeeded: "succeeded",
+        Failed: "failed",
+        Canceled: "canceled",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }

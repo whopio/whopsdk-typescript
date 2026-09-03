@@ -77,6 +77,12 @@ describe("UsersClient", () => {
                             last_7_days: "60.00",
                             lifetime: "4120.25",
                         },
+                        partners: {
+                            last_24_hours: "0.00",
+                            last_30_days: "260.00",
+                            last_7_days: "60.00",
+                            lifetime: "4120.25",
+                        },
                         personal: {
                             last_24_hours: "0.00",
                             last_30_days: "260.00",
@@ -123,7 +129,7 @@ describe("UsersClient", () => {
                     whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
                 },
             ],
-            page_info: { end_cursor: "MQ", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
+            page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
         };
 
         server
@@ -232,6 +238,7 @@ describe("UsersClient", () => {
                     last_7_days: "60.00",
                     lifetime: "4120.25",
                 },
+                partners: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 personal: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 total: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
             },
@@ -363,6 +370,7 @@ describe("UsersClient", () => {
                     last_7_days: "60.00",
                     lifetime: "4120.25",
                 },
+                partners: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 personal: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 total: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
             },
@@ -508,6 +516,7 @@ describe("UsersClient", () => {
                     last_7_days: "60.00",
                     lifetime: "4120.25",
                 },
+                partners: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 personal: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 total: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
             },
@@ -643,6 +652,7 @@ describe("UsersClient", () => {
                     last_7_days: "60.00",
                     lifetime: "4120.25",
                 },
+                partners: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 personal: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
                 total: { last_24_hours: "0.00", last_30_days: "260.00", last_7_days: "60.00", lifetime: "4120.25" },
             },

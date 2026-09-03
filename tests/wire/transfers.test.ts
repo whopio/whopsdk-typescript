@@ -36,7 +36,7 @@ describe("TransfersClient", () => {
                 },
             ],
             page_info: {
-                end_cursor: "WyJjdXJzb3IiLDFd",
+                end_cursor: "end_cursor",
                 has_next_page: false,
                 has_previous_page: false,
                 start_cursor: "WyJjdXJzb3IiLDFd",
@@ -271,7 +271,7 @@ describe("TransfersClient", () => {
                     username: "danawhitfield",
                 },
             ],
-            page_info: { end_cursor: "Mg", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
+            page_info: { end_cursor: "end_cursor", has_next_page: false, has_previous_page: false, start_cursor: "MQ" },
         };
 
         server

@@ -81,7 +81,7 @@ export class DisputesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -188,7 +188,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -268,7 +268,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -345,7 +345,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -428,7 +428,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -509,21 +509,21 @@ export class DisputesClient {
     public submitEvidenceDispute(
         request: Whop.SubmitEvidenceDisputeRequest,
         requestOptions?: DisputesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Dispute> {
+    ): core.HttpResponsePromise<Whop.DisputeLegacy> {
         return core.HttpResponsePromise.fromPromise(this.__submitEvidenceDispute(request, requestOptions));
     }
 
     private async __submitEvidenceDispute(
         request: Whop.SubmitEvidenceDisputeRequest,
         requestOptions?: DisputesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Dispute>> {
+    ): Promise<core.WithRawResponse<Whop.DisputeLegacy>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -545,7 +545,7 @@ export class DisputesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Dispute, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.DisputeLegacy, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -615,21 +615,21 @@ export class DisputesClient {
     public updateEvidenceDispute(
         request: Whop.UpdateEvidenceDisputeRequest,
         requestOptions?: DisputesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.Dispute> {
+    ): core.HttpResponsePromise<Whop.DisputeLegacy> {
         return core.HttpResponsePromise.fromPromise(this.__updateEvidenceDispute(request, requestOptions));
     }
 
     private async __updateEvidenceDispute(
         request: Whop.UpdateEvidenceDisputeRequest,
         requestOptions?: DisputesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.Dispute>> {
+    ): Promise<core.WithRawResponse<Whop.DisputeLegacy>> {
         const { id, ..._body } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -654,7 +654,7 @@ export class DisputesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.Dispute, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.DisputeLegacy, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -728,7 +728,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-08-25-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

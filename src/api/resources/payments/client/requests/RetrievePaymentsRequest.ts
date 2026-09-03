@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "pay_xxxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetrievePaymentsRequest {
-    /** The unique identifier of the payment. */
+    /** The payment to retrieve, prefixed `pay_`. */
     id: string;
 }

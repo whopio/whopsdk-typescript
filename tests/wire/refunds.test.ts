@@ -18,24 +18,30 @@ describe("RefundsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    amount: 6.9,
-                    created_at: "2023-12-01T05:00:00Z",
-                    currency: "usd",
-                    id: "rf_xxxxxxxxxxxxxxx",
-                    payment: { id: "pay_xxxxxxxxxxxxxx" },
+                    account_id: "biz_xxxxxxxxxxxxxx",
+                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    failure_message: "Insufficient funds on the merchant balance.",
+                    failure_reason: "bank_declined",
+                    id: "rf_xxxxxxxxxxxxxx",
+                    original_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    payment_id: "pay_xxxxxxxxxxxxxx",
                     provider: "stripe",
-                    provider_created_at: "2023-12-01T05:00:00Z",
+                    provider_created_at: "2026-01-01T12:00:00.000Z",
+                    reason: "duplicate",
                     reference_status: "available",
                     reference_type: "acquirer_reference_number",
-                    reference_value: "74850120752",
+                    reference_value: "reference_value",
                     status: "pending",
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    visa_rdr: false,
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -48,15 +54,7 @@ describe("RefundsClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.refunds.list({
-            first: 42,
-            last: 42,
-            payment_id: "pay_xxxxxxxxxxxxxx",
-            company_id: "biz_xxxxxxxxxxxxxx",
-            user_id: "user_xxxxxxxxxxxxx",
-            created_before: "2023-12-01T05:00:00Z",
-            created_after: "2023-12-01T05:00:00Z",
-        });
+        const page = await client.refunds.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -114,87 +112,11 @@ describe("RefundsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/refunds").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.list();
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("list (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().get("/refunds").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.refunds.list();
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.list();
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.list();
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.list();
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 
     test("retrieve (1)", async () => {
@@ -208,82 +130,34 @@ describe("RefundsClient", () => {
         });
 
         const rawResponseBody = {
-            amount: 6.9,
-            created_at: "2023-12-01T05:00:00Z",
-            currency: "usd",
-            id: "rf_xxxxxxxxxxxxxxx",
-            payment: {
-                billing_reason: "subscription_create",
-                card_brand: "mastercard",
-                card_last4: "4242",
-                created_at: "2023-12-01T05:00:00Z",
-                currency: "usd",
-                dispute_alerted_at: "2023-12-01T05:00:00Z",
-                id: "pay_xxxxxxxxxxxxxx",
-                member: { id: "id", phone: "phone" },
-                membership: { id: "mem_xxxxxxxxxxxxxx", status: "trialing" },
-                metadata: { key: "value" },
-                paid_at: "2023-12-01T05:00:00Z",
-                payment_method_type: "acss_debit",
-                plan: { id: "plan_xxxxxxxxxxxxx", metadata: { key: "value" } },
-                product: { id: "prod_xxxxxxxxxxxxx", metadata: { key: "value" } },
-                subtotal: 6.9,
-                tax_amount: 6.9,
-                tax_behavior: "exclusive",
-                tax_refunded_amount: 6.9,
-                total: 6.9,
-                usd_total: 6.9,
-                user: {
-                    email: "john.doe@example.com",
-                    id: "user_xxxxxxxxxxxxx",
-                    name: "John Doe",
-                    username: "johndoe42",
-                },
-            },
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            created_at: "2026-01-01T12:00:00.000Z",
+            failure_message: "Insufficient funds on the merchant balance.",
+            failure_reason: "bank_declined",
+            id: "rf_xxxxxxxxxxxxxx",
+            original_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            payment_id: "pay_xxxxxxxxxxxxxx",
             provider: "stripe",
-            provider_created_at: "2023-12-01T05:00:00Z",
+            provider_created_at: "2026-01-01T12:00:00.000Z",
+            reason: "duplicate",
             reference_status: "available",
             reference_type: "acquirer_reference_number",
-            reference_value: "74850120752",
+            reference_value: "reference_value",
             status: "pending",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            visa_rdr: false,
         };
 
-        server
-            .mockEndpoint()
-            .get("/refunds/rf_xxxxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/refunds/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.refunds.retrieve({
-            id: "rf_xxxxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -304,7 +178,7 @@ describe("RefundsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -325,7 +199,7 @@ describe("RefundsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("retrieve (5)", async () => {
+    test("retrieve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -344,68 +218,5 @@ describe("RefundsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("retrieve (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retrieve (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retrieve (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/refunds/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.refunds.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 });

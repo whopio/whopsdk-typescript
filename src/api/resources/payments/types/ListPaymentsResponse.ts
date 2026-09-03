@@ -2,12 +2,16 @@
 
 import type * as Whop from "../../../index.js";
 
-/**
- * The connection type for Receipt.
- */
 export interface ListPaymentsResponse {
-    /** A list of nodes. */
-    data: Whop.PaymentListItem[];
-    /** Information to aid in pagination. */
-    page_info: Whop.PageInfo;
+    data: Whop.Payment[];
+    page_info: ListPaymentsResponse.PageInfo;
+}
+
+export namespace ListPaymentsResponse {
+    export interface PageInfo {
+        end_cursor: string | null;
+        has_next_page: boolean;
+        has_previous_page: boolean;
+        start_cursor: string | null;
+    }
 }

@@ -13,7 +13,7 @@ export interface User {
     bio: string | null;
     /** When the user was created, as an ISO 8601 timestamp */
     created_at: string;
-    /** The user's gross USD income over time. Populated only on single-user self reads for callers with balance-read scope; `null` otherwise. */
+    /** The user's gross USD income over time, including a Partner commission breakdown. Populated only on single-user self reads for callers with balance-read scope; `null` otherwise. */
     earnings_usd: Whop.UserEarnings | null;
     /** The user's email address. Populated only on the self view (retrieved with the reserved id `me`) for callers with email-read scope; `null` otherwise, or while the account has no confirmed email yet. */
     email: string | null;
