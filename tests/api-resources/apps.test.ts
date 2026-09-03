@@ -34,7 +34,7 @@ describe('resource apps', () => {
       },
       redirect_uris: ['https://booking.shinetime.example/oauth/callback'],
       route: 'shine-time-booking-site',
-      'Api-Version-Date': '2026-09-02-1',
+      'Api-Version-Date': '2026-09-02-2',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -57,7 +57,7 @@ describe('resource apps', () => {
     await expect(
       client.apps.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1' },
+        { 'Api-Version-Date': '2026-09-02-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -106,7 +106,7 @@ describe('resource apps', () => {
           verified: true,
           verified_apps_only: true,
           view_type: 'hub',
-          'Api-Version-Date': '2026-09-02-1',
+          'Api-Version-Date': '2026-09-02-2',
         },
         { path: '/_stainless_unknown_path' },
       ),

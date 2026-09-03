@@ -7170,6 +7170,11 @@ export namespace DepositSucceededWebhookEvent {
       from_currency?: string | null;
 
       /**
+       * Memo attached to the transfer source, or null when none was provided.
+       */
+      notes?: string | null;
+
+      /**
        * Name of the entity processing the payout (payout sources only; requires
        * payout:withdrawal:read).
        */
@@ -21001,6 +21006,11 @@ export namespace SwapCompletedWebhookEvent {
        * Lowercase currency code converted from (swap sources only).
        */
       from_currency?: string | null;
+
+      /**
+       * Memo attached to the transfer source, or null when none was provided.
+       */
+      notes?: string | null;
 
       /**
        * Name of the entity processing the payout (payout sources only; requires

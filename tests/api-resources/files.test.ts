@@ -27,7 +27,7 @@ describe('resource files', () => {
       byte_size: 15728640,
       multipart: true,
       visibility: 'public',
-      'Api-Version-Date': '2026-09-02-1',
+      'Api-Version-Date': '2026-09-02-2',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -50,7 +50,7 @@ describe('resource files', () => {
     await expect(
       client.files.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1' },
+        { 'Api-Version-Date': '2026-09-02-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

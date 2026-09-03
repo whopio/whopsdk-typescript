@@ -36,7 +36,7 @@ describe('resource payments', () => {
       payment_method_id: 'payt_xxxxxxxxxxxxxx',
       promo_code_id: 'promo_xxxxxxxxxxxxxx',
       return_url: 'https://shinetime.example/checkout/done',
-      'Api-Version-Date': '2026-09-02-1',
+      'Api-Version-Date': '2026-09-02-2',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -59,7 +59,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1' },
+        { 'Api-Version-Date': '2026-09-02-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -101,7 +101,7 @@ describe('resource payments', () => {
           query: 'query',
           status: 'open',
           user_id: 'user_id',
-          'Api-Version-Date': '2026-09-02-1',
+          'Api-Version-Date': '2026-09-02-2',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -126,7 +126,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.listFees(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1' },
+        { 'Api-Version-Date': '2026-09-02-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -152,7 +152,7 @@ describe('resource payments', () => {
         'id',
         {
           partial_amount: 49,
-          'Api-Version-Date': '2026-09-02-1',
+          'Api-Version-Date': '2026-09-02-2',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -178,7 +178,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.retry(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -202,7 +202,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.void(
         'id',
-        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-2', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
