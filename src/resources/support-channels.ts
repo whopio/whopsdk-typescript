@@ -91,6 +91,12 @@ export interface SupportChannelListResponse {
   account_id: string | null;
 
   /**
+   * The unique identifier of the account associated with this channel. Null if this
+   * is not a support or account-scoped conversation.
+   */
+  company_id: string | null;
+
+  /**
    * A custom display name assigned to this channel by the user. Null if no custom
    * name has been set.
    */
