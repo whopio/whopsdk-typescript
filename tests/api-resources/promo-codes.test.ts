@@ -46,7 +46,7 @@ describe('resource promoCodes', () => {
       product_id: 'prod_xxxxxxxxxxxxxx',
       stock: 200,
       unlimited_stock: false,
-      'Api-Version-Date': '2026-09-02',
+      'Api-Version-Date': '2026-09-02-1',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -69,7 +69,7 @@ describe('resource promoCodes', () => {
     await expect(
       client.promoCodes.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02' },
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -102,7 +102,7 @@ describe('resource promoCodes', () => {
       plan_ids: ['plan_xxxxxxxxxxxxxx'],
       product_ids: ['prod_xxxxxxxxxxxxxx'],
       status: 'active',
-      'Api-Version-Date': '2026-09-02',
+      'Api-Version-Date': '2026-09-02-1',
     });
   });
 
@@ -124,7 +124,7 @@ describe('resource promoCodes', () => {
     await expect(
       client.promoCodes.delete(
         'id',
-        { 'Api-Version-Date': '2026-09-02' },
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

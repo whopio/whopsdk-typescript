@@ -106,7 +106,7 @@ export class Memberships extends APIResource {
    *
    * @example
    * ```ts
-   * const membership = await client.memberships.addFreeDays(
+   * const response = await client.memberships.addFreeDays(
    *   'mem_xxxxxxxxxxxxxx',
    *   { free_days: 42 },
    * );
@@ -116,7 +116,7 @@ export class Memberships extends APIResource {
     id: string,
     body: MembershipAddFreeDaysParams,
     options?: RequestOptions,
-  ): APIPromise<Shared.Membership> {
+  ): APIPromise<MembershipAddFreeDaysResponse> {
     return this._client.post(path`/memberships/${id}/add_free_days`, { body, ...options });
   }
 
@@ -217,12 +217,12 @@ export class Memberships extends APIResource {
    *
    * @example
    * ```ts
-   * const membership = await client.memberships.uncancel(
+   * const response = await client.memberships.uncancel(
    *   'mem_xxxxxxxxxxxxxx',
    * );
    * ```
    */
-  uncancel(id: string, options?: RequestOptions): APIPromise<Shared.Membership> {
+  uncancel(id: string, options?: RequestOptions): APIPromise<MembershipUncancelResponse> {
     return this._client.post(path`/memberships/${id}/uncancel`, options);
   }
 }
@@ -239,6 +239,590 @@ export type CancelOptions =
   | 'bad_experience'
   | 'other'
   | 'testing';
+
+/**
+ * A membership represents an active relationship between a user and a product. It
+ * tracks the user's access, billing status, and renewal schedule.
+ */
+export interface MembershipAddFreeDaysResponse {
+  /**
+   * The unique identifier for the membership.
+   */
+  id: string;
+
+  /**
+   * Whether this membership is set to cancel at the end of the current billing
+   * cycle. Only applies to memberships with a recurring plan.
+   */
+  cancel_at_period_end: boolean;
+
+  /**
+   * The different reasons a user can choose for why they are canceling their
+   * membership.
+   */
+  cancel_option: CancelOptions | null;
+
+  /**
+   * The state of a membership after a customer provides a cancelation reason.
+   */
+  cancelation_status: 'won_back' | 'left' | 'canceling' | null;
+
+  /**
+   * The time the customer initiated cancellation of this membership. As a Unix
+   * timestamp. Null if the membership has not been canceled.
+   */
+  canceled_at: string | null;
+
+  /**
+   * Free-text explanation provided by the customer when canceling. Null if the
+   * customer did not provide a reason.
+   */
+  cancellation_reason: string | null;
+
+  /**
+   * The ID of the checkout session/configuration that produced this membership, if
+   * any. Use this to map memberships back to the checkout configuration that created
+   * them.
+   */
+  checkout_configuration_id: string | null;
+
+  /**
+   * The company this membership belongs to.
+   */
+  company: MembershipAddFreeDaysResponse.Company;
+
+  /**
+   * The datetime the membership was created.
+   */
+  created_at: string;
+
+  /**
+   * The available currencies on the platform
+   */
+  currency: Shared.Currency | null;
+
+  /**
+   * The customer's responses to custom checkout questions configured on the product
+   * at the time of purchase.
+   */
+  custom_field_responses: Array<MembershipAddFreeDaysResponse.CustomFieldResponse>;
+
+  /**
+   * The recurring renewal price for this membership, formatted with currency symbol
+   * and billing interval. Null if the membership is not recurring.
+   */
+  formatted_renewal_price: string | null;
+
+  /**
+   * The amount the customer paid when first purchasing this membership, formatted
+   * with currency symbol.
+   */
+  initial_price_paid: string;
+
+  /**
+   * The time the user first joined the company associated with this membership. As a
+   * Unix timestamp. Null if the member record does not exist.
+   */
+  joined_at: string | null;
+
+  /**
+   * The software license key associated with this membership. Only present if the
+   * product includes a Whop Software Licensing experience. Null otherwise.
+   */
+  license_key: string | null;
+
+  /**
+   * The URL where the customer can view and manage this membership, including
+   * cancellation and plan changes. Null if no member record exists.
+   */
+  manage_url: string | null;
+
+  /**
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
+   */
+  member: MembershipAddFreeDaysResponse.Member | null;
+
+  /**
+   * Custom key-value pairs for the membership (commonly used for software licensing,
+   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
+   * Whether recurring payment collection for this membership is temporarily paused
+   * by the company.
+   */
+  payment_collection_paused: boolean;
+
+  /**
+   * The plan the customer purchased to create this membership.
+   */
+  plan: MembershipAddFreeDaysResponse.Plan;
+
+  /**
+   * The product this membership grants access to.
+   */
+  product: MembershipAddFreeDaysResponse.Product;
+
+  /**
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
+   */
+  promo_code: MembershipAddFreeDaysResponse.PromoCode | null;
+
+  /**
+   * The end of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
+   */
+  renewal_period_end: string | null;
+
+  /**
+   * The start of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
+   */
+  renewal_period_start: string | null;
+
+  /**
+   * The current lifecycle status of the membership (e.g., active, trialing,
+   * past_due, canceled, expired, completed).
+   */
+  status: Shared.MembershipStatus;
+
+  /**
+   * The datetime the membership was last updated.
+   */
+  updated_at: string;
+
+  /**
+   * The user who owns this membership. Null if the user account has been deleted.
+   */
+  user: MembershipAddFreeDaysResponse.User | null;
+}
+
+export namespace MembershipAddFreeDaysResponse {
+  /**
+   * The company this membership belongs to.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+
+    /**
+     * The display name of the company shown to customers.
+     */
+    title: string;
+  }
+
+  /**
+   * The response from a custom field on checkout
+   */
+  export interface CustomFieldResponse {
+    /**
+     * The unique identifier for the custom field response.
+     */
+    id: string;
+
+    /**
+     * The response a user gave to the specific question or field.
+     */
+    answer: string;
+
+    /**
+     * The question asked by the custom field
+     */
+    question: string;
+  }
+
+  /**
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
+   */
+  export interface Member {
+    /**
+     * The unique identifier for the member.
+     */
+    id: string;
+  }
+
+  /**
+   * The plan the customer purchased to create this membership.
+   */
+  export interface Plan {
+    /**
+     * The unique identifier for the plan.
+     */
+    id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+     * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
+     * override the product's checkout call to action for this plan.
+     */
+    metadata: { [key: string]: unknown } | null;
+  }
+
+  /**
+   * The product this membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
+     * The display name of the product shown to customers on the product page and in
+     * search results.
+     */
+    title: string;
+  }
+
+  /**
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
+   */
+  export interface PromoCode {
+    /**
+     * The unique identifier for the promo code.
+     */
+    id: string;
+  }
+
+  /**
+   * The user who owns this membership. Null if the user account has been deleted.
+   */
+  export interface User {
+    /**
+     * The unique identifier for the user.
+     */
+    id: string;
+
+    /**
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
+     */
+    email: string | null;
+
+    /**
+     * The user's display name shown on their public profile.
+     */
+    name: string | null;
+
+    /**
+     * The URL of the user's profile picture. Use profilePicture for the full
+     * attachment object.
+     */
+    profile_pic: string;
+
+    /**
+     * The user's unique username shown on their public profile.
+     */
+    username: string;
+  }
+}
+
+/**
+ * A membership represents an active relationship between a user and a product. It
+ * tracks the user's access, billing status, and renewal schedule.
+ */
+export interface MembershipUncancelResponse {
+  /**
+   * The unique identifier for the membership.
+   */
+  id: string;
+
+  /**
+   * Whether this membership is set to cancel at the end of the current billing
+   * cycle. Only applies to memberships with a recurring plan.
+   */
+  cancel_at_period_end: boolean;
+
+  /**
+   * The different reasons a user can choose for why they are canceling their
+   * membership.
+   */
+  cancel_option: CancelOptions | null;
+
+  /**
+   * The state of a membership after a customer provides a cancelation reason.
+   */
+  cancelation_status: 'won_back' | 'left' | 'canceling' | null;
+
+  /**
+   * The time the customer initiated cancellation of this membership. As a Unix
+   * timestamp. Null if the membership has not been canceled.
+   */
+  canceled_at: string | null;
+
+  /**
+   * Free-text explanation provided by the customer when canceling. Null if the
+   * customer did not provide a reason.
+   */
+  cancellation_reason: string | null;
+
+  /**
+   * The ID of the checkout session/configuration that produced this membership, if
+   * any. Use this to map memberships back to the checkout configuration that created
+   * them.
+   */
+  checkout_configuration_id: string | null;
+
+  /**
+   * The company this membership belongs to.
+   */
+  company: MembershipUncancelResponse.Company;
+
+  /**
+   * The datetime the membership was created.
+   */
+  created_at: string;
+
+  /**
+   * The available currencies on the platform
+   */
+  currency: Shared.Currency | null;
+
+  /**
+   * The customer's responses to custom checkout questions configured on the product
+   * at the time of purchase.
+   */
+  custom_field_responses: Array<MembershipUncancelResponse.CustomFieldResponse>;
+
+  /**
+   * The recurring renewal price for this membership, formatted with currency symbol
+   * and billing interval. Null if the membership is not recurring.
+   */
+  formatted_renewal_price: string | null;
+
+  /**
+   * The amount the customer paid when first purchasing this membership, formatted
+   * with currency symbol.
+   */
+  initial_price_paid: string;
+
+  /**
+   * The time the user first joined the company associated with this membership. As a
+   * Unix timestamp. Null if the member record does not exist.
+   */
+  joined_at: string | null;
+
+  /**
+   * The software license key associated with this membership. Only present if the
+   * product includes a Whop Software Licensing experience. Null otherwise.
+   */
+  license_key: string | null;
+
+  /**
+   * The URL where the customer can view and manage this membership, including
+   * cancellation and plan changes. Null if no member record exists.
+   */
+  manage_url: string | null;
+
+  /**
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
+   */
+  member: MembershipUncancelResponse.Member | null;
+
+  /**
+   * Custom key-value pairs for the membership (commonly used for software licensing,
+   * e.g., HWID). Max 50 keys, 100 chars per key, 500 chars per string value.
+   */
+  metadata: { [key: string]: unknown } | null;
+
+  /**
+   * Whether recurring payment collection for this membership is temporarily paused
+   * by the company.
+   */
+  payment_collection_paused: boolean;
+
+  /**
+   * The plan the customer purchased to create this membership.
+   */
+  plan: MembershipUncancelResponse.Plan;
+
+  /**
+   * The product this membership grants access to.
+   */
+  product: MembershipUncancelResponse.Product;
+
+  /**
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
+   */
+  promo_code: MembershipUncancelResponse.PromoCode | null;
+
+  /**
+   * The end of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
+   */
+  renewal_period_end: string | null;
+
+  /**
+   * The start of the current billing period for this recurring membership. As a Unix
+   * timestamp. Null if the membership is not recurring.
+   */
+  renewal_period_start: string | null;
+
+  /**
+   * The current lifecycle status of the membership (e.g., active, trialing,
+   * past_due, canceled, expired, completed).
+   */
+  status: Shared.MembershipStatus;
+
+  /**
+   * The datetime the membership was last updated.
+   */
+  updated_at: string;
+
+  /**
+   * The user who owns this membership. Null if the user account has been deleted.
+   */
+  user: MembershipUncancelResponse.User | null;
+}
+
+export namespace MembershipUncancelResponse {
+  /**
+   * The company this membership belongs to.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+
+    /**
+     * The display name of the company shown to customers.
+     */
+    title: string;
+  }
+
+  /**
+   * The response from a custom field on checkout
+   */
+  export interface CustomFieldResponse {
+    /**
+     * The unique identifier for the custom field response.
+     */
+    id: string;
+
+    /**
+     * The response a user gave to the specific question or field.
+     */
+    answer: string;
+
+    /**
+     * The question asked by the custom field
+     */
+    question: string;
+  }
+
+  /**
+   * The member record linking the user to the company for this membership. Null if
+   * the member record has not been created yet.
+   */
+  export interface Member {
+    /**
+     * The unique identifier for the member.
+     */
+    id: string;
+  }
+
+  /**
+   * The plan the customer purchased to create this membership.
+   */
+  export interface Plan {
+    /**
+     * The unique identifier for the plan.
+     */
+    id: string;
+
+    /**
+     * Custom key-value pairs stored on the plan. Included in webhook payloads for
+     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
+     * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
+     * override the product's checkout call to action for this plan.
+     */
+    metadata: { [key: string]: unknown } | null;
+  }
+
+  /**
+   * The product this membership grants access to.
+   */
+  export interface Product {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * Custom key-value pairs stored on the product and included in payment and
+     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
+     * per string value.
+     */
+    metadata: { [key: string]: unknown } | null;
+
+    /**
+     * The display name of the product shown to customers on the product page and in
+     * search results.
+     */
+    title: string;
+  }
+
+  /**
+   * The promotional code currently applied to this membership's billing. Null if no
+   * promo code is active.
+   */
+  export interface PromoCode {
+    /**
+     * The unique identifier for the promo code.
+     */
+    id: string;
+  }
+
+  /**
+   * The user who owns this membership. Null if the user account has been deleted.
+   */
+  export interface User {
+    /**
+     * The unique identifier for the user.
+     */
+    id: string;
+
+    /**
+     * The user's email address. Requires the member:email:read permission to access.
+     * Null if not authorized.
+     */
+    email: string | null;
+
+    /**
+     * The user's display name shown on their public profile.
+     */
+    name: string | null;
+
+    /**
+     * The URL of the user's profile picture. Use profilePicture for the full
+     * attachment object.
+     */
+    profile_pic: string;
+
+    /**
+     * The user's unique username shown on their public profile.
+     */
+    username: string;
+  }
+}
 
 export interface MembershipRetrieveParams {
   /**
@@ -407,6 +991,8 @@ export interface MembershipResumeParams {
 export declare namespace Memberships {
   export {
     type CancelOptions as CancelOptions,
+    type MembershipAddFreeDaysResponse as MembershipAddFreeDaysResponse,
+    type MembershipUncancelResponse as MembershipUncancelResponse,
     type MembershipRetrieveParams as MembershipRetrieveParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,

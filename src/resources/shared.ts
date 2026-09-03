@@ -1,10 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as Shared from './shared';
-import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
-import * as RefundsAPI from './refunds';
-import * as ResolutionCenterCasesAPI from './resolution-center-cases';
 import { CursorPage } from '../core/pagination';
 
 /**
@@ -197,6 +194,8 @@ export interface App {
    * unless the caller is a team member who can read the app's developer settings.
    */
   preview_token: string | null;
+
+  previous_hosted_urls: Array<string>;
 
   /**
    * ID of the app's product listing on the Whop app store, or `null` when the app
@@ -2675,33 +2674,30 @@ export interface PageInfo {
   start_cursor: string | null;
 }
 
-/**
- * A payment represents a completed or attempted charge. Payments track the amount,
- * status, currency, and payment method used.
- */
 export interface Payment {
   /**
-   * The unique identifier for the payment.
+   * Payment ID, prefixed `pay_`.
    */
   id: string;
 
   /**
-   * How much the payment is for after fees
+   * The account that received the payment, prefixed `biz_`.
    */
-  amount_after_fees: number;
+  account_id: string | null;
 
   /**
-   * The application fee charged on this payment.
+   * What the account keeps: the total less Whop's fees.
    */
-  application_fee: Payment.ApplicationFee | null;
+  amount_after_fees: Payment.AmountAfterFees;
 
   /**
-   * Whether this payment was auto refunded or not
+   * True when Whop refunded the payment automatically, for example on a dispute
+   * alert.
    */
   auto_refunded: boolean;
 
   /**
-   * The address of the user who made the payment.
+   * The billing address the buyer entered, or null.
    */
   billing_address: Payment.BillingAddress | null;
 
@@ -2711,55 +2707,30 @@ export interface Payment {
   billing_reason: PaymentsAPI.BillingReasons | null;
 
   /**
-   * Possible card brands that a payment token can have
-   */
-  card_brand: PaymentsAPI.CardBrands | null;
-
-  /**
-   * The expiration month (1-12) of the card used for this payment. Falls back to the
-   * declined card on failed payments with no saved card. Null when the payment was
-   * not made with a card or the expiry is unavailable.
-   */
-  card_exp_month: number | null;
-
-  /**
-   * The four-digit expiration year of the card used for this payment. Falls back to
-   * the declined card on failed payments with no saved card. Null when the payment
-   * was not made with a card or the expiry is unavailable.
-   */
-  card_exp_year: number | null;
-
-  /**
-   * The last four digits of the card used to make this payment. Null if the payment
-   * was not made with a card.
-   */
-  card_last4: string | null;
-
-  /**
-   * The ID of the checkout session/configuration that produced this payment, if any.
-   * Use this to map payments back to the checkout configuration that created them.
+   * The checkout configuration the buyer paid through, prefixed `ch_`, or null.
    */
   checkout_configuration_id: string | null;
 
   /**
-   * The company for the payment.
+   * The credential a buyer's surface presents to poll this payment and set its
+   * return URL. Only on payments created from a confirmation token, and always null
+   * in list responses — retrieve the payment for it.
    */
-  company: Payment.Company | null;
+  client_secret: string | null;
 
   /**
-   * The datetime the payment was created.
+   * When the payment was created, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+   * The currency the payment settles in, lowercase ISO 4217. Every money field below
+   * is stated in it unless it says otherwise.
    */
   currency: Currency;
 
   /**
-   * Phone number the customer provided at checkout, or their verified phone number
-   * when your checkout requires phone verification. `null` when no phone number was
-   * collected.
+   * The phone number the buyer gave at checkout, when one was collected.
    */
   customer_phone: string | null;
 
@@ -2856,88 +2827,69 @@ export interface Payment {
     | null;
 
   /**
-   * When an alert came in that this transaction will be disputed
+   * When an issuer warned that this payment will be disputed, or null.
    */
   dispute_alerted_at: string | null;
 
   /**
-   * The disputes attached to this payment. Null if the actor in context does not
-   * have the payment:dispute:read permission.
-   */
-  disputes: Array<Payment.Dispute> | null;
-
-  /**
-   * If the payment failed, the reason for the failure.
+   * Why the most recent attempt failed, in plain words, or null.
    */
   failure_message: string | null;
 
   /**
-   * The fees associated with this specific payment.
-   */
-  fees: Array<Payment.Fee>;
-
-  /**
-   * The number of financing installments for the payment. Present if the payment is
-   * a financing payment (e.g. Splitit, Klarna, etc.).
+   * For installment methods, how many payments the charge splits into.
    */
   financing_installments_count: number | null;
 
   /**
-   * The financing transactions attached to this payment. Present if the payment is a
-   * financing payment (e.g. Splitit, Klarna, etc.).
+   * When the most recent charge attempt ran, or null.
    */
-  financing_transactions: Array<Payment.FinancingTransaction>;
+  last_payment_attempt_at: string | null;
 
   /**
-   * The time of the last payment attempt.
+   * The buyer's member record on the account, prefixed `mber_`. Null without the
+   * member:basic:read permission.
    */
-  last_payment_attempt: string | null;
+  member_id: string | null;
 
   /**
-   * The member attached to this payment.
+   * The membership this payment is billed against, prefixed `mem_`. Null for one-off
+   * purchases or without the member:basic:read permission.
    */
-  member: Payment.Member | null;
+  membership_id: string | null;
 
   /**
-   * The membership attached to this payment.
+   * Your own key-value data attached when the payment was created.
    */
-  membership: Payment.Membership | null;
+  metadata: unknown | null;
 
   /**
-   * The custom metadata stored on this payment. This will be copied over to the
-   * checkout configuration for which this payment was made
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * Whether this payment is holding funds until the order ships and has no tracking
-   * number yet.
+   * True when funds are held until the order ships and no tracking number has been
+   * added yet. Null without the shipment:basic:read permission.
    */
   needs_tracking: boolean | null;
 
   /**
-   * The time of the next schedule payment retry.
+   * When the next automatic retry is scheduled, or null.
    */
-  next_payment_attempt: string | null;
+  next_payment_attempt_at: string | null;
 
   /**
-   * The time at which this payment was successfully collected. Null if the payment
-   * has not yet succeeded. As a Unix timestamp.
+   * When the money was collected, or null while it has not been.
    */
   paid_at: string | null;
 
   /**
-   * The instrument this payment was made with, shaped for display: the method type,
-   * a buyer-facing name, the standard icon set, and the card facts when it was a
-   * card. Null when the receipt names no payment method.
+   * The instrument shaped for display: a buyer-facing name, the standard icon set,
+   * and the card's brand and last four when it was a card.
    */
   payment_instrument: Payment.PaymentInstrument | null;
 
   /**
-   * The tokenized payment method reference used for this payment. Null if no token
-   * was used.
+   * The stored payment method that was charged, prefixed `payt_`. Null when the
+   * method was not saved.
    */
-  payment_method: Payment.PaymentMethod | null;
+  payment_method_id: string | null;
 
   /**
    * The different types of payment methods that can be used.
@@ -2945,131 +2897,101 @@ export interface Payment {
   payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
 
   /**
-   * The number of failed payment attempts for the payment.
+   * How many charge attempts have failed on this payment.
    */
-  payments_failed: number | null;
+  payments_failed: number;
 
   /**
-   * The plan attached to this payment.
+   * The plan that was charged, prefixed `plan_`.
    */
-  plan: Payment.Plan | null;
+  plan_id: string | null;
 
   /**
-   * The product this payment was made for
+   * The product the plan belongs to, prefixed `prod_`. Null for a plan with no
+   * product.
    */
-  product: Payment.Product | null;
+  product_id: string | null;
 
   /**
-   * The promo code used for this payment.
+   * The promo code applied at checkout, prefixed `promo_`, or null.
    */
-  promo_code: Payment.PromoCode | null;
+  promo_code_id: string | null;
 
   /**
-   * True only for payments that are `paid`, have not been fully refunded, and were
-   * processed by a payment processor that allows refunds.
+   * True when the payment is `paid`, not yet fully refunded, and its processor
+   * supports refunds.
    */
   refundable: boolean;
 
   /**
-   * The payment refund amount(if applicable).
+   * How much has been refunded so far, as it settled — refunds convert at the rate
+   * in force when each one was issued, not the payment's original rate.
    */
-  refunded_amount: number | null;
+  refunded_amount: Payment.RefundedAmount | null;
 
   /**
-   * When the payment was refunded (if applicable).
+   * When the payment was refunded, or null.
    */
   refunded_at: string | null;
 
   /**
-   * The refunds issued against this payment, newest first, including failed and
-   * canceled refund attempts. Limited to the 100 most recent.
-   */
-  refunds: Array<Payment.Refund>;
-
-  /**
-   * The resolution center cases opened by the customer on this payment. Null if the
-   * actor in context does not have the payment:resolution_center_case:read
-   * permission.
-   */
-  resolutions: Array<Payment.Resolution> | null;
-
-  /**
-   * True when the payment status is `open` and its membership is in one of the
-   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or
-   * when it is a failed initial billing-engine payment on a `drafted` membership
-   * with an unlimited-stock plan; otherwise false. Used to decide if Whop can
-   * attempt the charge again.
+   * True when the payment is `open` and Whop can attempt the charge again — see
+   * `POST /payments/{id}/retry`.
    */
   retryable: boolean;
 
   /**
-   * Whop's in-house fraud risk score for this payment, from 0 (lowest risk) to 100
-   * (highest risk). Null when the payment has not been scored or scoring has not yet
-   * completed.
+   * Whop's fraud risk score from 0 (lowest) to 100 (highest), or null when the
+   * payment was not scored.
    */
   risk_score: number | null;
 
   /**
-   * A curated set of factors behind the risk score, grouped by category (business
-   * transaction history, buyer, device). Each entry has a key, human-readable label,
-   * category, and value. Null when there is no risk assessment for this payment.
+   * The factors behind `risk_score`, grouped by category, or null.
    */
-  risk_signals: { [key: string]: unknown } | null;
+  risk_signals: unknown | null;
 
   /**
-   * The total amount charged to the customer for this payment, including taxes and
-   * after any discounts. In the currency specified by the currency field.
-   */
-  settlement_amount: number;
-
-  /**
-   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
-   */
-  settlement_currency: Currency;
-
-  /**
-   * Deprecated. Always returns null.
-   */
-  settlement_exchange_rate: number | null;
-
-  /**
-   * When this payment's funds post to the company's available balance, at midnight
-   * UTC. Known at payment time and never changes. The
-   * `ledger_account.funds_available` webhook carries the same `settlement_time_at`
-   * when that batch posts — match them to know these funds are now withdrawable.
+   * When the funds post to the account's available balance, at midnight UTC. The
+   * `ledger_account.funds_available` webhook carries the same value. Null until the
+   * payment is paid, and always null in list responses — retrieve the payment for
+   * it.
    */
   settlement_time_at: string | null;
 
   /**
-   * The shipment attached to this payment.
+   * The shipment fulfilling this payment, prefixed `ship_`. Null when nothing ships
+   * or without the shipment:basic:read permission.
    */
-  shipment: Payment.Shipment | null;
+  shipment_id: string | null;
 
   /**
-   * The shipping address provided by the customer for physical goods. Null if no
-   * shipping address was collected.
+   * The shipping address for physical goods, or null.
    */
   shipping_address: Payment.ShippingAddress | null;
 
   /**
-   * The status of a receipt
+   * The lifecycle state of the charge: `open` while collection is outstanding,
+   * `paid` once the money moved, `pending` while a settlement rail clears,
+   * `void`/`uncollectible` when it ended without collecting.
    */
-  status: ReceiptStatus | null;
+  status: ReceiptStatus;
 
   /**
-   * The friendly status of the payment.
+   * The dashboard's finer-grained reading of the payment, folding in refunds,
+   * disputes and Resolution Center cases.
    */
   substatus: FriendlyReceiptStatus;
 
   /**
-   * The subtotal to show to the creator (excluding buyer fees).
+   * The price before discounts, tax and fees.
    */
-  subtotal: number | null;
+  subtotal: Payment.Subtotal | null;
 
   /**
-   * The calculated amount of the sales/VAT tax (if applicable).
+   * The sales tax or VAT collected. Null when no tax applied.
    */
-  tax_amount: number | null;
+  tax_amount: Payment.TaxAmount | null;
 
   /**
    * The type of tax inclusivity applied to the receipt, for determining whether the
@@ -3078,342 +3000,126 @@ export interface Payment {
   tax_behavior: PaymentsAPI.ReceiptTaxBehavior | null;
 
   /**
-   * The amount of tax that has been refunded (if applicable).
+   * How much of the collected tax has been returned to the buyer so far. Zero when
+   * the payment carried no tax, or when nothing has been refunded.
    */
-  tax_refunded_amount: number | null;
+  tax_refunded_amount: Payment.TaxRefundedAmount;
 
   /**
-   * Whether 3D Secure authentication was completed for this payment.
+   * True when the buyer completed 3D Secure for this payment.
    */
   three_ds_verified: boolean;
 
   /**
-   * The total to show to the creator (excluding buyer fees).
+   * The account-facing total: the price after discounts, plus any tax added on top.
+   * Excludes buyer fees, which the buyer pays above this amount — so this is not
+   * necessarily what the buyer's statement shows.
    */
-  total: number | null;
+  total: Payment.Total | null;
 
   /**
-   * The datetime the payment was last updated.
+   * When the payment last changed, as an ISO 8601 timestamp.
    */
   updated_at: string;
 
   /**
-   * The total in USD to show to the creator (excluding buyer fees).
+   * The total converted to USD at the time of the charge, for reporting across
+   * currencies. Excludes the adaptive pricing FX markup, which the account does not
+   * keep.
    */
-  usd_total: number | null;
+  usd_total: Payment.UsdTotal | null;
 
   /**
-   * The user that made this payment.
+   * The buyer. Null when the payment belongs to a company buyer rather than a user.
    */
   user: Payment.User | null;
 
   /**
-   * The issuer's address and card security code check results for this payment. Null
-   * when the processor returned none.
+   * The issuer's address and security code check results, or null when the processor
+   * returned none.
    */
   verification_checks: Payment.VerificationChecks | null;
 
   /**
-   * True when the payment is tied to a membership in `past_due`, the payment status
-   * is `open`, and the processor allows voiding payments; otherwise false.
+   * True when the payment is `open` on a past-due membership and its processor
+   * supports voiding — see `POST /payments/{id}/void`.
    */
   voidable: boolean;
 }
 
 export namespace Payment {
   /**
-   * The application fee charged on this payment.
+   * What the account keeps: the total less Whop's fees.
    */
-  export interface ApplicationFee {
+  export interface AmountAfterFees {
     /**
-     * The unique identifier for the application fee.
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
      */
-    id: string;
+    amount: string;
 
     /**
-     * The application fee amount.
+     * Three-letter ISO 4217 currency code, lowercase.
      */
-    amount: number;
+    currency: string;
 
     /**
-     * The amount of the application fee that has been captured.
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
      */
-    amount_captured: number;
+    decimals: number;
 
     /**
-     * The amount of the application fee that has been refunded.
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
      */
-    amount_refunded: number;
-
-    /**
-     * The datetime the application fee was created.
-     */
-    created_at: string;
-
-    /**
-     * The currency of the application fee.
-     */
-    currency: Shared.Currency;
+    display_decimals: number;
   }
 
   /**
-   * The address of the user who made the payment.
+   * The billing address the buyer entered, or null.
    */
   export interface BillingAddress {
     /**
-     * The city of the address.
+     * The city.
      */
     city: string | null;
 
     /**
-     * The country of the address.
+     * The ISO 3166-1 alpha-2 country code.
      */
     country: string | null;
 
     /**
-     * The line 1 of the address.
+     * The first street address line.
      */
     line1: string | null;
 
     /**
-     * The line 2 of the address.
+     * The second street address line.
      */
     line2: string | null;
 
     /**
-     * The name of the customer.
+     * The name on the address.
      */
     name: string | null;
 
     /**
-     * The postal code of the address.
+     * The postal or ZIP code.
      */
     postal_code: string | null;
 
     /**
-     * The state of the address.
+     * The state, province or region.
      */
     state: string | null;
   }
 
   /**
-   * The company for the payment.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The slug/route of the company on the Whop site.
-     */
-    route: string;
-
-    /**
-     * The written name of the company.
-     */
-    title: string;
-  }
-
-  /**
-   * A dispute is a chargeback or payment challenge filed against a company,
-   * including evidence and response status.
-   */
-  export interface Dispute {
-    /**
-     * The unique identifier for the dispute.
-     */
-    id: string;
-
-    /**
-     * The disputed amount in the specified currency, formatted as a decimal.
-     */
-    amount: number;
-
-    /**
-     * The three-letter ISO currency code for the disputed amount.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * Whether the dispute evidence can still be edited and submitted.
-     */
-    editable: boolean | null;
-
-    /**
-     * The deadline by which dispute evidence must be submitted. Null if no response
-     * deadline is set.
-     */
-    needs_response_by: string | null;
-
-    /**
-     * Additional freeform notes submitted by the company as part of the dispute
-     * evidence.
-     */
-    notes: string | null;
-
-    /**
-     * A human-readable reason for the dispute.
-     */
-    reason: string | null;
-
-    /**
-     * The current status of the dispute lifecycle, such as needs_response,
-     * under_review, won, or lost.
-     */
-    status: DisputesAPI.DisputeStatuses;
-  }
-
-  /**
-   * Represents a fee related to a payment
-   */
-  export interface Fee {
-    /**
-     * The value or amount to display for the fee.
-     */
-    amount: number;
-
-    /**
-     * The currency of the fee.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * The label to display for the fee.
-     */
-    name: string;
-
-    /**
-     * The specific origin of the fee, if applicable.
-     */
-    type:
-      | 'stripe_domestic_processing_fee'
-      | 'stripe_international_processing_fee'
-      | 'stripe_fixed_processing_fee'
-      | 'stripe_billing_fee'
-      | 'stripe_radar_fee'
-      | 'sales_tax_remittance'
-      | 'sales_tax_remittance_reversal'
-      | 'stripe_sales_tax_fee'
-      | 'whop_processing_fee'
-      | 'marketplace_affiliate_fee'
-      | 'affiliate_fee'
-      | 'crypto_fee'
-      | 'stripe_standard_processing_fee'
-      | 'paypal_fee'
-      | 'stripe_payout_fee'
-      | 'dispute_fee'
-      | 'dispute_alert_fee'
-      | 'apple_processing_fee'
-      | 'buyer_fee'
-      | 'sezzle_processing_fee'
-      | 'splitit_processing_fee'
-      | 'platform_balance_processing_fee'
-      | 'payment_processing_percentage_fee'
-      | 'payment_processing_fixed_fee'
-      | 'cross_border_percentage_fee'
-      | 'fx_percentage_fee'
-      | 'orchestration_percentage_fee'
-      | 'three_ds_fixed_fee'
-      | 'billing_percentage_fee'
-      | 'revshare_percentage_fee'
-      | 'application_fee'
-      | 'high_risk_merchant_fee';
-  }
-
-  /**
-   * A payment transaction.
-   */
-  export interface FinancingTransaction {
-    /**
-     * The unique identifier for the payment transaction.
-     */
-    id: string;
-
-    /**
-     * The amount of the payment transaction.
-     */
-    amount: number;
-
-    /**
-     * The date and time the payment transaction was created.
-     */
-    created_at: string;
-
-    /**
-     * The status of the payment transaction.
-     */
-    status:
-      | 'succeeded'
-      | 'declined'
-      | 'error'
-      | 'pending'
-      | 'created'
-      | 'expired'
-      | 'won'
-      | 'rejected'
-      | 'lost'
-      | 'prevented'
-      | 'canceled';
-
-    /**
-     * The type of the payment transaction.
-     */
-    transaction_type:
-      | 'purchase'
-      | 'authorize'
-      | 'capture'
-      | 'refund'
-      | 'canceled'
-      | 'verify'
-      | 'chargeback'
-      | 'pre_chargeback'
-      | 'three_d_secure'
-      | 'fraud_screening'
-      | 'authorization'
-      | 'installment';
-  }
-
-  /**
-   * The member attached to this payment.
-   */
-  export interface Member {
-    /**
-     * The unique identifier for the company member.
-     */
-    id: string;
-
-    /**
-     * The phone number for the member, if available.
-     */
-    phone: string | null;
-  }
-
-  /**
-   * The membership attached to this payment.
-   */
-  export interface Membership {
-    /**
-     * The unique identifier for the membership.
-     */
-    id: string;
-
-    /**
-     * The phone number associated with this membership.
-     */
-    phone_number: string | null;
-
-    /**
-     * The state of the membership.
-     */
-    status: Shared.MembershipStatus;
-  }
-
-  /**
-   * The instrument this payment was made with, shaped for display: the method type,
-   * a buyer-facing name, the standard icon set, and the card facts when it was a
-   * card. Null when the receipt names no payment method.
+   * The instrument shaped for display: a buyer-facing name, the standard icon set,
+   * and the card's brand and last four when it was a card.
    */
   export interface PaymentInstrument {
     /**
@@ -3614,364 +3320,288 @@ export namespace Payment {
   }
 
   /**
-   * The tokenized payment method reference used for this payment. Null if no token
-   * was used.
+   * How much has been refunded so far, as it settled — refunds convert at the rate
+   * in force when each one was issued, not the payment's original rate.
    */
-  export interface PaymentMethod {
+  export interface RefundedAmount {
     /**
-     * The unique identifier for the payment token.
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
      */
-    id: string;
-
-    /**
-     * The card data associated with the payment method, if its a debit or credit card.
-     */
-    card: PaymentMethod.Card | null;
+    amount: string;
 
     /**
-     * The datetime the payment token was created.
+     * Three-letter ISO 4217 currency code, lowercase.
      */
-    created_at: string;
+    currency: string;
 
     /**
-     * The payment method type of the payment method
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
      */
-    payment_method_type: PaymentsAPI.PaymentMethodTypes;
-  }
+    decimals: number;
 
-  export namespace PaymentMethod {
     /**
-     * The card data associated with the payment method, if its a debit or credit card.
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
      */
-    export interface Card {
-      /**
-       * Possible card brands that a payment token can have
-       */
-      brand: PaymentsAPI.CardBrands | null;
-
-      /**
-       * The two-digit expiration month of the card (1-12). Null if not available.
-       */
-      exp_month: number | null;
-
-      /**
-       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
-       * available.
-       */
-      exp_year: number | null;
-
-      /**
-       * A stable identifier for the underlying card. Two payment methods with the same
-       * fingerprint are the same card. Null if not available.
-       */
-      fingerprint: string | null;
-
-      /**
-       * The last four digits of the card number. Null if not available.
-       */
-      last4: string | null;
-    }
+    display_decimals: number;
   }
 
   /**
-   * The plan attached to this payment.
-   */
-  export interface Plan {
-    /**
-     * The unique identifier for the plan.
-     */
-    id: string;
-
-    /**
-     * A personal description or notes section for the business.
-     */
-    internal_notes: string | null;
-
-    /**
-     * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
-     * override the product's checkout call to action for this plan.
-     */
-    metadata: { [key: string]: unknown } | null;
-  }
-
-  /**
-   * The product this payment was made for
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
-
-    /**
-     * Custom key-value pairs stored on the product and included in payment and
-     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-     * per string value.
-     */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
-     * whop.com/company/pickaxe-analytics.
-     */
-    route: string;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
-
-  /**
-   * The promo code used for this payment.
-   */
-  export interface PromoCode {
-    /**
-     * The unique identifier for the promo code.
-     */
-    id: string;
-
-    /**
-     * The discount amount. Interpretation depends on promo_type: if 'percentage', this
-     * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
-     * off (e.g., 10.00 means $10.00 off).
-     */
-    amount_off: number;
-
-    /**
-     * The monetary currency of the promo code.
-     */
-    base_currency: Shared.Currency;
-
-    /**
-     * The specific code used to apply the promo at checkout.
-     */
-    code: string | null;
-
-    /**
-     * The number of months the promo is applied for.
-     */
-    number_of_intervals: number | null;
-
-    /**
-     * The type (% or flat amount) of the promo.
-     */
-    promo_type: Shared.PromoType;
-  }
-
-  /**
-   * A refund represents a full or partial reversal of a payment, including the
-   * amount, status, and payment provider.
-   */
-  export interface Refund {
-    /**
-     * The unique identifier for the refund.
-     */
-    id: string;
-
-    /**
-     * The refunded amount as a decimal in the specified currency, such as 10.43 for
-     * $10.43 USD.
-     */
-    amount: number;
-
-    /**
-     * The datetime the refund was created.
-     */
-    created_at: string;
-
-    /**
-     * The three-letter ISO currency code for the refunded amount.
-     */
-    currency: Shared.Currency;
-
-    /**
-     * The current processing status of the refund, such as pending, succeeded, or
-     * failed.
-     */
-    status: RefundsAPI.RefundStatus;
-  }
-
-  /**
-   * A resolution center case is a dispute or support case between a user and a
-   * company, tracking the issue, status, and outcome.
-   */
-  export interface Resolution {
-    /**
-     * The unique identifier for the resolution.
-     */
-    id: string;
-
-    /**
-     * Whether the customer has filed an appeal after the initial resolution decision.
-     */
-    customer_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the customer.
-     */
-    customer_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseCustomerResponse>;
-
-    /**
-     * The deadline by which the next response is required. Null if no deadline is
-     * currently active. As a Unix timestamp.
-     */
-    due_date: string | null;
-
-    /**
-     * The category of the dispute.
-     */
-    issue: ResolutionCenterCasesAPI.ResolutionCenterCaseIssueType;
-
-    /**
-     * Whether the merchant has filed an appeal after the initial resolution decision.
-     */
-    merchant_appealed: boolean;
-
-    /**
-     * The list of actions currently available to the merchant.
-     */
-    merchant_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCaseMerchantResponse>;
-
-    /**
-     * The list of actions currently available to the Whop platform for moderating this
-     * resolution.
-     */
-    platform_response_actions: Array<ResolutionCenterCasesAPI.ResolutionCenterCasePlatformResponse>;
-
-    /**
-     * The current status of the resolution case, indicating which party needs to
-     * respond or if the case is closed.
-     */
-    status: ResolutionCenterCasesAPI.ResolutionCenterCaseStatus;
-  }
-
-  /**
-   * The shipment attached to this payment.
-   */
-  export interface Shipment {
-    /**
-     * The unique identifier for the shipment.
-     */
-    id: string;
-
-    /**
-     * The shipping carrier detected for this shipment. Null until a tracking update
-     * identifies it.
-     */
-    carrier: string | null;
-
-    /**
-     * The current delivery status of this shipment.
-     */
-    status: Shared.ShipmentStatus;
-
-    /**
-     * The carrier-assigned tracking number used to look up shipment progress.
-     */
-    tracking_number: string;
-
-    /**
-     * A customer-facing URL to track this shipment's progress.
-     */
-    tracking_url: string;
-  }
-
-  /**
-   * The shipping address provided by the customer for physical goods. Null if no
-   * shipping address was collected.
+   * The shipping address for physical goods, or null.
    */
   export interface ShippingAddress {
     /**
-     * The city of the address.
+     * The city.
      */
     city: string | null;
 
     /**
-     * The country of the address.
+     * The ISO 3166-1 alpha-2 country code.
      */
     country: string | null;
 
     /**
-     * The line 1 of the address.
+     * The first street address line.
      */
     line1: string | null;
 
     /**
-     * The line 2 of the address.
+     * The second street address line.
      */
     line2: string | null;
 
     /**
-     * The name of the customer.
+     * The name on the address.
      */
     name: string | null;
 
     /**
-     * The postal code of the address.
+     * The postal or ZIP code.
      */
     postal_code: string | null;
 
     /**
-     * The state of the address.
+     * The state, province or region.
      */
     state: string | null;
   }
 
   /**
-   * The user that made this payment.
+   * The price before discounts, tax and fees.
+   */
+  export interface Subtotal {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+
+  /**
+   * The sales tax or VAT collected. Null when no tax applied.
+   */
+  export interface TaxAmount {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+
+  /**
+   * How much of the collected tax has been returned to the buyer so far. Zero when
+   * the payment carried no tax, or when nothing has been refunded.
+   */
+  export interface TaxRefundedAmount {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+
+  /**
+   * The account-facing total: the price after discounts, plus any tax added on top.
+   * Excludes buyer fees, which the buyer pays above this amount — so this is not
+   * necessarily what the buyer's statement shows.
+   */
+  export interface Total {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+
+  /**
+   * The total converted to USD at the time of the charge, for reporting across
+   * currencies. Excludes the adaptive pricing FX markup, which the account does not
+   * keep.
+   */
+  export interface UsdTotal {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+
+  /**
+   * The buyer. Null when the payment belongs to a company buyer rather than a user.
    */
   export interface User {
     /**
-     * The unique identifier for the user.
+     * User ID, prefixed `user_`.
      */
     id: string;
 
     /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
+     * Display name.
      */
     name: string | null;
 
     /**
-     * The user's unique username shown on their public profile.
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    profile_picture: User.ProfilePicture;
+
+    /**
+     * Public username.
      */
     username: string;
   }
 
+  export namespace User {
+    /**
+     * Avatar wrapper; its `url` is always present, using a generated placeholder when
+     * the user set no picture.
+     */
+    export interface ProfilePicture {
+      /**
+       * Avatar image URL. Always present — a generated placeholder when the user set no
+       * picture.
+       */
+      url: string;
+    }
+  }
+
   /**
-   * The issuer's address and card security code check results for this payment. Null
-   * when the processor returned none.
+   * The issuer's address and security code check results, or null when the processor
+   * returned none.
    */
   export interface VerificationChecks {
     /**
-     * Whether the billing street address the customer entered matched the address the
-     * issuer has on file.
+     * Whether the billing street address the customer entered matched the issuer's
+     * records.
      */
     address_line1: string | null;
 
     /**
-     * Whether the cardholder name the customer entered matched the name the issuer has
-     * on file.
+     * Whether the cardholder name matched the issuer's records.
      */
     card_holder_name: string | null;
 
     /**
-     * Whether the CVV / CVC the customer entered matched the card.
+     * Whether the CVV / CVC matched the card.
      */
     card_security_code: string | null;
 
     /**
-     * Whether the billing postal code the customer entered matched the postal code the
-     * issuer has on file.
+     * Whether the billing postal code matched the issuer's records.
      */
     zip_code: string | null;
   }
@@ -5222,3 +4852,5 @@ export type MembershipsCursorPage = CursorPage<Membership>;
 export type AppBuildsCursorPage = CursorPage<AppBuild>;
 
 export type ShipmentsCursorPage = CursorPage<Shipment>;
+
+export type PaymentsCursorPage = CursorPage<Payment>;

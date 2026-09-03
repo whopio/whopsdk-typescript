@@ -58,6 +58,13 @@ export interface LedgerAccountRetrieveResponse {
   payout_account_details: LedgerAccountRetrieveResponse.PayoutAccountDetails | null;
 
   /**
+   * Whether a payout from this account must be confirmed against a provider-backed
+   * quote first. When true, create a quote with POST /payouts/quotes and send its
+   * quote_token when creating the payout.
+   */
+  payout_quote_required: boolean;
+
+  /**
    * The settlement batch most recently posted to this account's available balance,
    * at midnight UTC. Every payment settling in that batch carries the same
    * `settlement_time_at`.

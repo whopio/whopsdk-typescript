@@ -1,10 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PaymentsAPI from './payments';
 import * as Shared from './shared';
+import { PaymentsCursorPage } from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -15,220 +16,200 @@ import { path } from '../internal/utils/path';
  */
 export class Payments extends APIResource {
   /**
-   * Charge a buyer on-session with a `confirmation_token` for the method they
-   * selected, or charge an existing member off-session using a stored payment
-   * method. You can provide an existing plan or create one inline. The endpoint
-   * returns a payment immediately, but processing continues asynchronously. Use
-   * webhooks to learn whether it succeeds or fails, and poll the payment's status
-   * endpoint for any step the buyer must complete.
-   *
-   * Required permissions:
-   *
-   * - `payment:charge`
-   * - `plan:create`
-   * - `access_pass:create`
-   * - `access_pass:update`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
+   * Charges a buyer for a plan. Pass a payment method already on file (`member_id`
+   * and `payment_method_id`), or a `confirmation_token` describing a method the
+   * buyer just supplied. Collection runs in the background: the response is the
+   * payment as created, not its outcome — poll Retrieve status for how far it has
+   * got and, for a confirmation-token payment, what the buyer must still do.
+   * `plan_id` names the plan to charge for.
    *
    * @example
    * ```ts
    * const payment = await client.payments.create({
-   *   company_id: 'biz_xxxxxxxxxxxxxx',
-   *   confirmation_token: 'confirmation_token',
-   *   plan: { currency: 'usd' },
+   *   account_id: 'biz_xxxxxxxxxxxxxx',
+   *   plan_id: 'plan_xxxxxxxxxxxxxx',
    * });
    * ```
    */
-  create(body: PaymentCreateParams, options?: RequestOptions): APIPromise<PaymentCreateResponse> {
-    return this._client.post('/payments', { body, ...options });
+  create(params: PaymentCreateParams, options?: RequestOptions): APIPromise<Shared.Payment> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params;
+    return this._client.post('/payments', {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retrieves the details of an existing payment.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
+   * Returns one payment. Related records are ids — resolve a plan, membership,
+   * member or shipment on its own endpoint, and list this payment's refunds,
+   * disputes or Resolution Center cases with `?payment_id=`.
    *
    * @example
    * ```ts
-   * const payment = await client.payments.retrieve(
-   *   'pay_xxxxxxxxxxxxxx',
-   * );
+   * const payment = await client.payments.retrieve('id');
    * ```
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<PaymentRetrieveResponse> {
-    return this._client.get(path`/payments/${id}`, options);
+  retrieve(
+    id: string,
+    params: PaymentRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Payment> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/payments/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of payments for the actor in context, with optional
-   * filtering by product, plan, status, billing reason, currency, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
+   * Lists payments, newest first. Without filters this is every payment the caller
+   * can read: a company credential's own account, or for a user every account they
+   * can read payments for. Filters narrow by account, buyer, product, plan,
+   * membership, status, billing reason, currency, and creation window. Filtering by
+   * `billing_reason=subscription_cycle` also matches renewals recorded as
+   * `subscription_update`. `settlement_time_at` is null on list rows — retrieve the
+   * payment for it.
    *
    * @example
    * ```ts
    * // Automatically fetches more pages as needed.
-   * for await (const paymentListResponse of client.payments.list()) {
+   * for await (const payment of client.payments.list()) {
    *   // ...
    * }
    * ```
    */
   list(
-    query: PaymentListParams | null | undefined = {},
+    params: PaymentListParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<PaymentListResponsesCursorPage, PaymentListResponse> {
-    return this._client.getAPIList('/payments', CursorPage<PaymentListResponse>, { query, ...options });
-  }
-
-  /**
-   * Returns the list of fees associated with a specific payment, including platform
-   * fees and processing fees.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
-   *
-   * @example
-   * ```ts
-   * // Automatically fetches more pages as needed.
-   * for await (const paymentListFeesResponse of client.payments.listFees(
-   *   'pay_xxxxxxxxxxxxxx',
-   * )) {
-   *   // ...
-   * }
-   * ```
-   */
-  listFees(
-    id: string,
-    query: PaymentListFeesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<PaymentListFeesResponsesCursorPage, PaymentListFeesResponse> {
-    return this._client.getAPIList(path`/payments/${id}/fees`, CursorPage<PaymentListFeesResponse>, {
+  ): PagePromise<PaymentsCursorPage, Shared.Payment> {
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
+    return this._client.getAPIList('/payments', CursorPage<Shared.Payment>, {
       query,
       ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
     });
   }
 
   /**
-   * Issue a full or partial refund for a payment. The refund is processed through
-   * the original payment processor and the membership status is updated accordingly.
-   *
-   * Required permissions:
-   *
-   * - `payment:manage`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
+   * Returns the fee breakdown of one payment — Whop's fee, processing, affiliate and
+   * other lines — each in the currency it was collected in and converted to the
+   * payment's settlement currency. The list is complete in one page.
    *
    * @example
    * ```ts
-   * const payment = await client.payments.refund(
-   *   'pay_xxxxxxxxxxxxxx',
-   * );
+   * const response = await client.payments.listFees('id');
+   * ```
+   */
+  listFees(
+    id: string,
+    params: PaymentListFeesParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<PaymentListFeesResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/payments/${id}/fees`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
+  }
+
+  /**
+   * Issues a full or partial refund for a payment. The refund is processed through
+   * the original payment processor and the membership status is updated accordingly.
+   *
+   * @example
+   * ```ts
+   * const payment = await client.payments.refund('id');
    * ```
    */
   refund(
     id: string,
-    body: PaymentRefundParams | null | undefined = {},
+    params: PaymentRefundParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<Shared.Payment> {
-    return this._client.post(path`/payments/${id}/refund`, { body, ...options });
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey, ...body } = params ?? {};
+    return this._client.post(path`/payments/${id}/refund`, {
+      body,
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Retry a failed or pending payment. This re-attempts the charge using the
+   * Retries a failed or pending payment. This re-attempts the charge using the
    * original payment method and plan details.
    *
-   * Required permissions:
-   *
-   * - `payment:manage`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
-   *
    * @example
    * ```ts
-   * const payment = await client.payments.retry(
-   *   'pay_xxxxxxxxxxxxxx',
-   * );
+   * const payment = await client.payments.retry('id');
    * ```
    */
-  retry(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
-    return this._client.post(path`/payments/${id}/retry`, options);
+  retry(
+    id: string,
+    params: PaymentRetryParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Payment> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/payments/${id}/retry`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Void a payment that has not yet been settled. Voiding cancels the payment before
-   * it is captured by the payment processor.
-   *
-   * Required permissions:
-   *
-   * - `payment:manage`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
-   * - `promo_code:basic:read`
-   * - `shipment:basic:read`
-   * - `payment:dispute:read`
-   * - `payment:resolution_center_case:read`
+   * Voids a payment that has not yet been settled. Voiding cancels the payment
+   * before it is captured by the payment processor.
    *
    * @example
    * ```ts
-   * const payment = await client.payments.void(
-   *   'pay_xxxxxxxxxxxxxx',
-   * );
+   * const payment = await client.payments.void('id');
    * ```
    */
-  void(id: string, options?: RequestOptions): APIPromise<Shared.Payment> {
-    return this._client.post(path`/payments/${id}/void`, options);
+  void(
+    id: string,
+    params: PaymentVoidParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<Shared.Payment> {
+    const { 'Api-Version-Date': apiVersionDate, 'Idempotency-Key': idempotencyKey } = params ?? {};
+    return this._client.post(path`/payments/${id}/void`, {
+      ...options,
+      headers: buildHeaders([
+        {
+          ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined),
+          ...(idempotencyKey != null ? { 'Idempotency-Key': idempotencyKey } : undefined),
+        },
+        options?.headers,
+      ]),
+    });
   }
 }
-
-export type PaymentListResponsesCursorPage = CursorPage<PaymentListResponse>;
-
-export type PaymentListFeesResponsesCursorPage = CursorPage<PaymentListFeesResponse>;
 
 /**
  * The reason why a specific payment was billed
@@ -422,1722 +403,394 @@ export type PaymentMethodTypes =
  */
 export type ReceiptTaxBehavior = 'exclusive' | 'inclusive' | 'unspecified' | 'unable_to_collect';
 
-/**
- * A payment represents a completed or attempted charge. Payments track the amount,
- * status, currency, and payment method used.
- */
-export interface PaymentCreateResponse extends Shared.Payment {
-  /**
-   * The credential the buyer's surface presents to poll this payment and set its
-   * return URL. Returned when a payment created from a confirmation token is created
-   * or retrieved by a caller with the payment:charge permission. Null for payments
-   * created from a stored payment method or callers without payment:charge. It
-   * unlocks this payment and nothing else; treat it like a password for that one
-   * attempt.
-   */
-  client_secret: string | null;
-}
-
-/**
- * A payment represents a completed or attempted charge. Payments track the amount,
- * status, currency, and payment method used.
- */
-export interface PaymentRetrieveResponse extends Shared.Payment {
-  /**
-   * The credential the buyer's surface presents to poll this payment and set its
-   * return URL. Returned when a payment created from a confirmation token is created
-   * or retrieved by a caller with the payment:charge permission. Null for payments
-   * created from a stored payment method or callers without payment:charge. It
-   * unlocks this payment and nothing else; treat it like a password for that one
-   * attempt.
-   */
-  client_secret: string | null;
-}
-
-/**
- * A payment represents a completed or attempted charge. Payments track the amount,
- * status, currency, and payment method used.
- */
-export interface PaymentListResponse {
-  /**
-   * The unique identifier for the payment.
-   */
-  id: string;
-
-  /**
-   * How much the payment is for after fees
-   */
-  amount_after_fees: number;
-
-  /**
-   * The application fee charged on this payment.
-   */
-  application_fee: PaymentListResponse.ApplicationFee | null;
-
-  /**
-   * Whether this payment was auto refunded or not
-   */
-  auto_refunded: boolean;
-
-  /**
-   * The address of the user who made the payment.
-   */
-  billing_address: PaymentListResponse.BillingAddress | null;
-
-  /**
-   * The reason why a specific payment was billed
-   */
-  billing_reason: BillingReasons | null;
-
-  /**
-   * Possible card brands that a payment token can have
-   */
-  card_brand: CardBrands | null;
-
-  /**
-   * The last four digits of the card used to make this payment. Null if the payment
-   * was not made with a card.
-   */
-  card_last4: string | null;
-
-  /**
-   * The ID of the checkout session/configuration that produced this payment, if any.
-   * Use this to map payments back to the checkout configuration that created them.
-   */
-  checkout_configuration_id: string | null;
-
-  /**
-   * The company for the payment.
-   */
-  company: PaymentListResponse.Company | null;
-
-  /**
-   * The datetime the payment was created.
-   */
-  created_at: string;
-
-  /**
-   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
-   */
-  currency: Shared.Currency;
-
-  /**
-   * Phone number the customer provided at checkout, or their verified phone number
-   * when your checkout requires phone verification. `null` when no phone number was
-   * collected.
-   */
-  customer_phone: string | null;
-
-  /**
-   * The reason a payment was declined.
-   */
-  decline_code:
-    | 'insufficient_funds'
-    | 'lost_card'
-    | 'stolen_card'
-    | 'expired_card'
-    | 'suspected_fraud'
-    | 'invalid_card_number'
-    | 'invalid_cvc'
-    | 'invalid_cvc_or_expiration'
-    | 'incorrect_pin'
-    | 'authentication_required'
-    | 'card_not_supported'
-    | 'currency_not_supported'
-    | 'duplicate_transaction'
-    | 'generic_decline'
-    | 'invalid_account'
-    | 'invalid_amount'
-    | 'processing_error'
-    | 'restricted_card'
-    | 'card_velocity_exceeded'
-    | 'contact_issuer'
-    | 'bank_declined'
-    | 'regulatory_blocked'
-    | 'transaction_not_permitted'
-    | 'transaction_stopped'
-    | 'card_type_not_supported'
-    | 'issuer_not_found'
-    | 'closed_account'
-    | 'issuer_unavailable'
-    | 'invalid_zip'
-    | 'invalid_expiry_month'
-    | 'invalid_expiry_year'
-    | 'invalid_expiry'
-    | 'invalid_transaction'
-    | 'cannot_authorize'
-    | 'pin_required'
-    | 'pin_try_exceeded'
-    | 'provider_declined'
-    | 'high_risk'
-    | 'test_mode_decline'
-    | 'merchant_blacklist'
-    | 'reenter_transaction'
-    | 'invalid_pin'
-    | 'pin_required_as'
-    | 'withdrawal_count_limit_exceeded'
-    | 'invalid_country'
-    | 'issuer_error'
-    | 'invalid_card_holder_name'
-    | 'no_accounts'
-    | 'transaction_cancelled'
-    | 'three_d_secure_success'
-    | 'three_d_secure_canceled'
-    | 'three_d_secure_invalid_card_number'
-    | 'three_d_secure_generic_error'
-    | 'three_d_secure_timeout'
-    | 'three_d_secure_failed'
-    | 'three_d_secure_card_not_enrolled'
-    | 'three_d_secure_fraud'
-    | 'three_d_secure_too_many_attempts'
-    | 'three_d_secure_rejected_by_bank'
-    | 'three_d_secure_reported_lost_or_stolen'
-    | 'blocked_by_cardholder'
-    | 'test_mode_test_card'
-    | 'try_again_later'
-    | 'transaction_not_allowed'
-    | 'bank_insufficient_funds'
-    | 'bank_account_not_found'
-    | 'bank_account_closed'
-    | 'bank_account_frozen'
-    | 'bank_invalid_routing_number'
-    | 'bank_non_transaction_account'
-    | 'bank_authorization_revoked'
-    | 'bank_payment_stopped'
-    | 'bank_not_authorized'
-    | 'bank_account_holder_deceased'
-    | 'bank_duplicate'
-    | 'bank_amount_error'
-    | 'bank_regulatory_blocked'
-    | 'bank_details_invalid'
-    | 'bank_processing_error'
-    | 'bank_generic_decline'
-    | 'sepa_invalid_iban'
-    | 'sepa_no_mandate'
-    | 'sepa_mandate_data_invalid'
-    | 'sepa_disputed'
-    | 'sepa_refused_by_customer'
-    | 'sepa_generic_decline'
-    | null;
-
-  /**
-   * When an alert came in that this transaction will be disputed
-   */
-  dispute_alerted_at: string | null;
-
-  /**
-   * If the payment failed, the reason for the failure.
-   */
-  failure_message: string | null;
-
-  /**
-   * The time of the last payment attempt.
-   */
-  last_payment_attempt: string | null;
-
-  /**
-   * The member attached to this payment.
-   */
-  member: PaymentListResponse.Member | null;
-
-  /**
-   * The membership attached to this payment.
-   */
-  membership: PaymentListResponse.Membership | null;
-
-  /**
-   * The custom metadata stored on this payment. This will be copied over to the
-   * checkout configuration for which this payment was made
-   */
-  metadata: { [key: string]: unknown } | null;
-
-  /**
-   * Whether this payment is holding funds until the order ships and has no tracking
-   * number yet.
-   */
-  needs_tracking: boolean | null;
-
-  /**
-   * The time of the next schedule payment retry.
-   */
-  next_payment_attempt: string | null;
-
-  /**
-   * The time at which this payment was successfully collected. Null if the payment
-   * has not yet succeeded. As a Unix timestamp.
-   */
-  paid_at: string | null;
-
-  /**
-   * The instrument this payment was made with, shaped for display: the method type,
-   * a buyer-facing name, the standard icon set, and the card facts when it was a
-   * card. Null when the receipt names no payment method.
-   */
-  payment_instrument: PaymentListResponse.PaymentInstrument | null;
-
-  /**
-   * The tokenized payment method reference used for this payment. Null if no token
-   * was used.
-   */
-  payment_method: PaymentListResponse.PaymentMethod | null;
-
-  /**
-   * The different types of payment methods that can be used.
-   */
-  payment_method_type: PaymentMethodTypes | null;
-
-  /**
-   * The number of failed payment attempts for the payment.
-   */
-  payments_failed: number | null;
-
-  /**
-   * The plan attached to this payment.
-   */
-  plan: PaymentListResponse.Plan | null;
-
-  /**
-   * The product this payment was made for
-   */
-  product: PaymentListResponse.Product | null;
-
-  /**
-   * The promo code used for this payment.
-   */
-  promo_code: PaymentListResponse.PromoCode | null;
-
-  /**
-   * True only for payments that are `paid`, have not been fully refunded, and were
-   * processed by a payment processor that allows refunds.
-   */
-  refundable: boolean;
-
-  /**
-   * The payment refund amount(if applicable).
-   */
-  refunded_amount: number | null;
-
-  /**
-   * When the payment was refunded (if applicable).
-   */
-  refunded_at: string | null;
-
-  /**
-   * True when the payment status is `open` and its membership is in one of the
-   * retry-eligible states (`active`, `trialing`, `completed`, or `past_due`), or
-   * when it is a failed initial billing-engine payment on a `drafted` membership
-   * with an unlimited-stock plan; otherwise false. Used to decide if Whop can
-   * attempt the charge again.
-   */
-  retryable: boolean;
-
-  /**
-   * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
-   */
-  settlement_currency: Shared.Currency;
-
-  /**
-   * The shipment attached to this payment.
-   */
-  shipment: PaymentListResponse.Shipment | null;
-
-  /**
-   * The shipping address provided by the customer for physical goods. Null if no
-   * shipping address was collected.
-   */
-  shipping_address: PaymentListResponse.ShippingAddress | null;
-
-  /**
-   * The status of a receipt
-   */
-  status: Shared.ReceiptStatus | null;
-
-  /**
-   * The friendly status of the payment.
-   */
-  substatus: Shared.FriendlyReceiptStatus;
-
-  /**
-   * The subtotal to show to the creator (excluding buyer fees).
-   */
-  subtotal: number | null;
-
-  /**
-   * The calculated amount of the sales/VAT tax (if applicable).
-   */
-  tax_amount: number | null;
-
-  /**
-   * The type of tax inclusivity applied to the receipt, for determining whether the
-   * tax is included in the final price, or paid on top.
-   */
-  tax_behavior: ReceiptTaxBehavior | null;
-
-  /**
-   * The total to show to the creator (excluding buyer fees).
-   */
-  total: number | null;
-
-  /**
-   * The datetime the payment was last updated.
-   */
-  updated_at: string;
-
-  /**
-   * The total in USD to show to the creator (excluding buyer fees).
-   */
-  usd_total: number | null;
-
-  /**
-   * The user that made this payment.
-   */
-  user: PaymentListResponse.User | null;
-
-  /**
-   * True when the payment is tied to a membership in `past_due`, the payment status
-   * is `open`, and the processor allows voiding payments; otherwise false.
-   */
-  voidable: boolean;
-}
-
-export namespace PaymentListResponse {
-  /**
-   * The application fee charged on this payment.
-   */
-  export interface ApplicationFee {
-    /**
-     * The unique identifier for the application fee.
-     */
-    id: string;
-
-    /**
-     * The application fee amount.
-     */
-    amount: number;
-
-    /**
-     * The amount of the application fee that has been captured.
-     */
-    amount_captured: number;
-
-    /**
-     * The amount of the application fee that has been refunded.
-     */
-    amount_refunded: number;
-
-    /**
-     * The datetime the application fee was created.
-     */
-    created_at: string;
-
-    /**
-     * The currency of the application fee.
-     */
-    currency: Shared.Currency;
-  }
-
-  /**
-   * The address of the user who made the payment.
-   */
-  export interface BillingAddress {
-    /**
-     * The city of the address.
-     */
-    city: string | null;
-
-    /**
-     * The country of the address.
-     */
-    country: string | null;
-
-    /**
-     * The line 1 of the address.
-     */
-    line1: string | null;
-
-    /**
-     * The line 2 of the address.
-     */
-    line2: string | null;
-
-    /**
-     * The name of the customer.
-     */
-    name: string | null;
-
-    /**
-     * The postal code of the address.
-     */
-    postal_code: string | null;
-
-    /**
-     * The state of the address.
-     */
-    state: string | null;
-  }
-
-  /**
-   * The company for the payment.
-   */
-  export interface Company {
-    /**
-     * The unique identifier for the company.
-     */
-    id: string;
-
-    /**
-     * The slug/route of the company on the Whop site.
-     */
-    route: string;
-
-    /**
-     * The written name of the company.
-     */
-    title: string;
-  }
-
-  /**
-   * The member attached to this payment.
-   */
-  export interface Member {
-    /**
-     * The unique identifier for the company member.
-     */
-    id: string;
-
-    /**
-     * The phone number for the member, if available.
-     */
-    phone: string | null;
-  }
-
-  /**
-   * The membership attached to this payment.
-   */
-  export interface Membership {
-    /**
-     * The unique identifier for the membership.
-     */
-    id: string;
-
-    /**
-     * The phone number associated with this membership.
-     */
-    phone_number: string | null;
-
-    /**
-     * The state of the membership.
-     */
-    status: Shared.MembershipStatus;
-  }
-
-  /**
-   * The instrument this payment was made with, shaped for display: the method type,
-   * a buyer-facing name, the standard icon set, and the card facts when it was a
-   * card. Null when the receipt names no payment method.
-   */
-  export interface PaymentInstrument {
-    /**
-     * Card payments only: the card's network and last four.
-     */
-    card: PaymentInstrument.Card | null;
-
-    /**
-     * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
-     * method's own name ("Klarna").
-     */
-    display_name: string;
-
-    /**
-     * The standard icon set: square and card shapes, each in light and dark colorways.
-     */
-    icons: PaymentInstrument.Icons;
-
-    /**
-     * Installment methods only: how many payments the charge splits into. Data, not
-     * copy — compose and translate the label client-side.
-     */
-    installment_count: number | null;
-
-    /**
-     * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
-     */
-    payment_method_type: string;
-  }
-
-  export namespace PaymentInstrument {
-    /**
-     * Card payments only: the card's network and last four.
-     */
-    export interface Card {
-      /**
-       * The network identifier (`visa`, `amex`, …), matching `card.networks` entries and
-       * saved card payment methods.
-       */
-      brand: string;
-
-      /**
-       * The card's last four digits, when captured.
-       */
-      last4: string | null;
-    }
-
-    /**
-     * The standard icon set: square and card shapes, each in light and dark colorways.
-     */
-    export interface Icons {
-      /**
-       * The credit-card-proportioned tile (48x30).
-       */
-      card: Icons.Card;
-
-      /**
-       * The square tile (32x32).
-       */
-      square: Icons.Square;
-    }
-
-    export namespace Icons {
-      /**
-       * The credit-card-proportioned tile (48x30).
-       */
-      export interface Card {
-        /**
-         * The colorway for dark surfaces.
-         */
-        dark: Card.Dark;
-
-        /**
-         * The colorway for light surfaces.
-         */
-        light: Card.Light;
-      }
-
-      export namespace Card {
-        /**
-         * The colorway for dark surfaces.
-         */
-        export interface Dark {
-          /**
-           * Raster fallback at the shape's native size.
-           */
-          png_1x: string;
-
-          /**
-           * Raster fallback at double density.
-           */
-          png_2x: string;
-
-          /**
-           * Raster fallback at quadruple density.
-           */
-          png_4x: string;
-
-          /**
-           * The vector file. Prefer this everywhere SVG renders.
-           */
-          svg: string;
-        }
-
-        /**
-         * The colorway for light surfaces.
-         */
-        export interface Light {
-          /**
-           * Raster fallback at the shape's native size.
-           */
-          png_1x: string;
-
-          /**
-           * Raster fallback at double density.
-           */
-          png_2x: string;
-
-          /**
-           * Raster fallback at quadruple density.
-           */
-          png_4x: string;
-
-          /**
-           * The vector file. Prefer this everywhere SVG renders.
-           */
-          svg: string;
-        }
-      }
-
-      /**
-       * The square tile (32x32).
-       */
-      export interface Square {
-        /**
-         * The colorway for dark surfaces.
-         */
-        dark: Square.Dark;
-
-        /**
-         * The colorway for light surfaces.
-         */
-        light: Square.Light;
-      }
-
-      export namespace Square {
-        /**
-         * The colorway for dark surfaces.
-         */
-        export interface Dark {
-          /**
-           * Raster fallback at the shape's native size.
-           */
-          png_1x: string;
-
-          /**
-           * Raster fallback at double density.
-           */
-          png_2x: string;
-
-          /**
-           * Raster fallback at quadruple density.
-           */
-          png_4x: string;
-
-          /**
-           * The vector file. Prefer this everywhere SVG renders.
-           */
-          svg: string;
-        }
-
-        /**
-         * The colorway for light surfaces.
-         */
-        export interface Light {
-          /**
-           * Raster fallback at the shape's native size.
-           */
-          png_1x: string;
-
-          /**
-           * Raster fallback at double density.
-           */
-          png_2x: string;
-
-          /**
-           * Raster fallback at quadruple density.
-           */
-          png_4x: string;
-
-          /**
-           * The vector file. Prefer this everywhere SVG renders.
-           */
-          svg: string;
-        }
-      }
-    }
-  }
-
-  /**
-   * The tokenized payment method reference used for this payment. Null if no token
-   * was used.
-   */
-  export interface PaymentMethod {
-    /**
-     * The unique identifier for the payment token.
-     */
-    id: string;
-
-    /**
-     * The card data associated with the payment method, if its a debit or credit card.
-     */
-    card: PaymentMethod.Card | null;
-
-    /**
-     * The datetime the payment token was created.
-     */
-    created_at: string;
-
-    /**
-     * The payment method type of the payment method
-     */
-    payment_method_type: PaymentsAPI.PaymentMethodTypes;
-  }
-
-  export namespace PaymentMethod {
-    /**
-     * The card data associated with the payment method, if its a debit or credit card.
-     */
-    export interface Card {
-      /**
-       * Possible card brands that a payment token can have
-       */
-      brand: PaymentsAPI.CardBrands | null;
-
-      /**
-       * The two-digit expiration month of the card (1-12). Null if not available.
-       */
-      exp_month: number | null;
-
-      /**
-       * The two-digit expiration year of the card (e.g., 27 for 2027). Null if not
-       * available.
-       */
-      exp_year: number | null;
-
-      /**
-       * A stable identifier for the underlying card. Two payment methods with the same
-       * fingerprint are the same card. Null if not available.
-       */
-      fingerprint: string | null;
-
-      /**
-       * The last four digits of the card number. Null if not available.
-       */
-      last4: string | null;
-    }
-  }
-
-  /**
-   * The plan attached to this payment.
-   */
-  export interface Plan {
-    /**
-     * The unique identifier for the plan.
-     */
-    id: string;
-
-    /**
-     * A personal description or notes section for the business.
-     */
-    internal_notes: string | null;
-
-    /**
-     * Custom key-value pairs stored on the plan. Included in webhook payloads for
-     * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-     * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
-     * override the product's checkout call to action for this plan.
-     */
-    metadata: { [key: string]: unknown } | null;
-  }
-
-  /**
-   * The product this payment was made for
-   */
-  export interface Product {
-    /**
-     * The unique identifier for the product.
-     */
-    id: string;
-
-    /**
-     * Custom key-value pairs stored on the product and included in payment and
-     * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-     * per string value.
-     */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * URL slug in the product's public link, e.g. `pickaxe-analytics` in
-     * whop.com/company/pickaxe-analytics.
-     */
-    route: string;
-
-    /**
-     * The display name of the product shown to customers on the product page and in
-     * search results.
-     */
-    title: string;
-  }
-
-  /**
-   * The promo code used for this payment.
-   */
-  export interface PromoCode {
-    /**
-     * The unique identifier for the promo code.
-     */
-    id: string;
-
-    /**
-     * The discount amount. Interpretation depends on promo_type: if 'percentage', this
-     * is the percentage (e.g., 20 means 20% off); if 'flat_amount', this is dollars
-     * off (e.g., 10.00 means $10.00 off).
-     */
-    amount_off: number;
-
-    /**
-     * The monetary currency of the promo code.
-     */
-    base_currency: Shared.Currency;
-
-    /**
-     * The specific code used to apply the promo at checkout.
-     */
-    code: string | null;
-
-    /**
-     * The number of months the promo is applied for.
-     */
-    number_of_intervals: number | null;
-
-    /**
-     * The type (% or flat amount) of the promo.
-     */
-    promo_type: Shared.PromoType;
-  }
-
-  /**
-   * The shipment attached to this payment.
-   */
-  export interface Shipment {
-    /**
-     * The unique identifier for the shipment.
-     */
-    id: string;
-
-    /**
-     * The shipping carrier detected for this shipment. Null until a tracking update
-     * identifies it.
-     */
-    carrier: string | null;
-
-    /**
-     * The current delivery status of this shipment.
-     */
-    status: Shared.ShipmentStatus;
-
-    /**
-     * The carrier-assigned tracking number used to look up shipment progress.
-     */
-    tracking_number: string;
-
-    /**
-     * A customer-facing URL to track this shipment's progress.
-     */
-    tracking_url: string;
-  }
-
-  /**
-   * The shipping address provided by the customer for physical goods. Null if no
-   * shipping address was collected.
-   */
-  export interface ShippingAddress {
-    /**
-     * The city of the address.
-     */
-    city: string | null;
-
-    /**
-     * The country of the address.
-     */
-    country: string | null;
-
-    /**
-     * The line 1 of the address.
-     */
-    line1: string | null;
-
-    /**
-     * The line 2 of the address.
-     */
-    line2: string | null;
-
-    /**
-     * The name of the customer.
-     */
-    name: string | null;
-
-    /**
-     * The postal code of the address.
-     */
-    postal_code: string | null;
-
-    /**
-     * The state of the address.
-     */
-    state: string | null;
-  }
-
-  /**
-   * The user that made this payment.
-   */
-  export interface User {
-    /**
-     * The unique identifier for the user.
-     */
-    id: string;
-
-    /**
-     * The user's email address. Requires the member:email:read permission to access.
-     * Null if not authorized.
-     */
-    email: string | null;
-
-    /**
-     * The user's display name shown on their public profile.
-     */
-    name: string | null;
-
-    /**
-     * The user's unique username shown on their public profile.
-     */
-    username: string;
-  }
-}
-
-/**
- * Represents a fee related to a payment
- */
 export interface PaymentListFeesResponse {
-  /**
-   * The value or amount to display for the fee.
-   */
-  amount: number;
+  data: Array<PaymentListFeesResponse.Data>;
 
-  /**
-   * The currency of the fee.
-   */
-  currency: Shared.Currency;
-
-  /**
-   * The label to display for the fee.
-   */
-  name: string;
-
-  /**
-   * The specific origin of the fee, if applicable.
-   */
-  type:
-    | 'stripe_domestic_processing_fee'
-    | 'stripe_international_processing_fee'
-    | 'stripe_fixed_processing_fee'
-    | 'stripe_billing_fee'
-    | 'stripe_radar_fee'
-    | 'sales_tax_remittance'
-    | 'sales_tax_remittance_reversal'
-    | 'stripe_sales_tax_fee'
-    | 'whop_processing_fee'
-    | 'marketplace_affiliate_fee'
-    | 'affiliate_fee'
-    | 'crypto_fee'
-    | 'stripe_standard_processing_fee'
-    | 'paypal_fee'
-    | 'stripe_payout_fee'
-    | 'dispute_fee'
-    | 'dispute_alert_fee'
-    | 'apple_processing_fee'
-    | 'buyer_fee'
-    | 'sezzle_processing_fee'
-    | 'splitit_processing_fee'
-    | 'platform_balance_processing_fee'
-    | 'payment_processing_percentage_fee'
-    | 'payment_processing_fixed_fee'
-    | 'cross_border_percentage_fee'
-    | 'fx_percentage_fee'
-    | 'orchestration_percentage_fee'
-    | 'three_ds_fixed_fee'
-    | 'billing_percentage_fee'
-    | 'revshare_percentage_fee'
-    | 'application_fee'
-    | 'high_risk_merchant_fee';
+  page_info: PaymentListFeesResponse.PageInfo;
 }
 
-export type PaymentCreateParams =
-  | PaymentCreateParams.CreatePaymentInputWithPlanAndConfirmationToken
-  | PaymentCreateParams.CreatePaymentInputWithPlanAndMemberID
-  | PaymentCreateParams.CreatePaymentInputWithPlanIDAndConfirmationToken
-  | PaymentCreateParams.CreatePaymentInputWithPlanIDAndMemberID;
-
-export declare namespace PaymentCreateParams {
-  export interface CreatePaymentInputWithPlanAndConfirmationToken {
+export namespace PaymentListFeesResponse {
+  export interface Data {
     /**
-     * The ID of the company to create the payment for.
+     * The fee in the currency it was collected in.
      */
-    company_id: string;
+    amount: Data.Amount;
 
     /**
-     * A confirmation token ID (ctok\_) describing a payment method the buyer just
-     * supplied. Provide this INSTEAD of member_id and payment_method_id to charge a
-     * method that is not yet on file — the buyer is resolved from the token's billing
-     * email, or from `email`. The buyer may still have a step to complete (3DS, a
-     * redirect, linking a bank); poll the payment's status endpoint for what to do
-     * next.
+     * When the fee was collected, as an ISO 8601 timestamp, or null when it has not
+     * been.
      */
-    confirmation_token: string;
+    collected_at: string | null;
 
     /**
-     * Pass this object to create a new plan for this payment
+     * A longer explanation of the fee, when there is one.
      */
-    plan: CreatePaymentInputWithPlanAndConfirmationToken.Plan;
+    description: string | null;
 
     /**
-     * Whether to capture the card payment immediately. Pass false to place an
-     * authorization hold that must be captured in full within five days.
+     * The name the dashboard shows for this fee.
      */
-    capture?: boolean | null;
+    label: string;
 
     /**
-     * Overrides the buyer email carried on the confirmation token, resolving or
-     * creating the Whop user the payment belongs to. Ignored when the confirmation
-     * token was created by a signed-in buyer, and unless confirmation_token is
-     * provided.
+     * The specific fee this line is, such as `payment_processing_percentage_fee` or
+     * `revshare_percentage_fee`.
      */
-    email?: string | null;
+    origin:
+      | 'stripe_domestic_processing_fee'
+      | 'stripe_international_processing_fee'
+      | 'stripe_fixed_processing_fee'
+      | 'stripe_billing_fee'
+      | 'stripe_radar_fee'
+      | 'sales_tax_remittance'
+      | 'sales_tax_remittance_reversal'
+      | 'stripe_sales_tax_fee'
+      | 'whop_processing_fee'
+      | 'marketplace_affiliate_fee'
+      | 'affiliate_fee'
+      | 'crypto_fee'
+      | 'stripe_standard_processing_fee'
+      | 'paypal_fee'
+      | 'stripe_payout_fee'
+      | 'dispute_fee'
+      | 'dispute_alert_fee'
+      | 'dispute_representment_fee'
+      | 'apple_processing_fee'
+      | 'buyer_fee'
+      | 'sezzle_processing_fee'
+      | 'splitit_processing_fee'
+      | 'platform_balance_processing_fee'
+      | 'payment_processing_percentage_fee'
+      | 'payment_processing_fixed_fee'
+      | 'cross_border_percentage_fee'
+      | 'fx_percentage_fee'
+      | 'orchestration_percentage_fee'
+      | 'three_ds_fixed_fee'
+      | 'billing_percentage_fee'
+      | 'revshare_percentage_fee'
+      | 'application_fee'
+      | 'high_risk_merchant_fee';
 
     /**
-     * Custom metadata to attach to the payment.
+     * The fee converted to the payment's settlement currency, so lines can be totalled
+     * against the payment.
      */
-    metadata?: { [key: string]: unknown } | null;
+    settlement_amount: Data.SettlementAmount;
 
     /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged. Required unless confirmation_token is provided.
+     * The family the fee belongs to: `whop_fee`, `processing_fee`,
+     * `affiliate_program_fee`, or `other_fee`.
      */
-    payment_method_id?: string | null;
-
-    /**
-     * The ID of an active promo code to apply to this payment. The promo code must
-     * belong to the company and be valid for the plan being purchased. The plan must
-     * be attached to a product — promo codes are not eligible for one-off purchases.
-     */
-    promo_code_id?: string | null;
-
-    /**
-     * Where the buyer continues after completing an off-site step. Must be an absolute
-     * https URL without credentials (http is allowed for localhost), at most 2,048
-     * characters. Editable until they return — see the payment's update endpoint.
-     * Ignored unless confirmation_token is provided.
-     */
-    return_url?: string | null;
+    type: 'whop_fee' | 'processing_fee' | 'affiliate_program_fee' | 'other_fee';
   }
 
-  export namespace CreatePaymentInputWithPlanAndConfirmationToken {
+  export namespace Data {
     /**
-     * Pass this object to create a new plan for this payment
+     * The fee in the currency it was collected in.
      */
-    export interface Plan {
+    export interface Amount {
       /**
-       * The respective currency identifier for the plan.
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
        */
-      currency: Shared.Currency;
+      amount: string;
 
       /**
-       * The application fee amount collected by the platform from this connected
-       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
-       * than the total payment amount. Only valid for connected accounts with a parent
-       * company.
+       * Three-letter ISO 4217 currency code, lowercase.
        */
-      application_fee_amount?: number | null;
+      currency: string;
 
       /**
-       * The interval in days at which the plan charges (renewal plans). For example, 30
-       * for monthly billing.
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
        */
-      billing_period?: number | null;
+      decimals: number;
 
       /**
-       * The description of the plan.
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
        */
-      description?: string | null;
-
-      /**
-       * The number of days until the membership expires and revokes access (expiration
-       * plans). For example, 365 for one year.
-       */
-      expiration_days?: number | null;
-
-      /**
-       * Whether to force the creation of a new plan even if one with the same attributes
-       * already exists.
-       */
-      force_create_new_plan?: boolean | null;
-
-      /**
-       * An additional amount charged upon first purchase. Provided as a number in the
-       * specified currency. Eg: 10.43 for $10.43 USD.
-       */
-      initial_price?: number | null;
-
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
-
-      /**
-       * The type of plan that can be attached to a product
-       */
-      plan_type?: Shared.PlanType | null;
-
-      /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
-       */
-      product?: Plan.Product | null;
-
-      /**
-       * The product the plan is related to. Either this or product is required.
-       */
-      product_id?: string | null;
-
-      /**
-       * The amount the customer is charged every billing period. Provided as a number in
-       * the specified currency. Eg: 10.43 for $10.43 USD.
-       */
-      renewal_price?: number | null;
-
-      /**
-       * The title of the plan. This will be visible on the product page to customers.
-       */
-      title?: string | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
+      display_decimals: number;
     }
 
-    export namespace Plan {
+    /**
+     * The fee converted to the payment's settlement currency, so lines can be totalled
+     * against the payment.
+     */
+    export interface SettlementAmount {
       /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
        */
-      export interface Product {
-        /**
-         * A unique ID used to find or create a product. When provided during creation, we
-         * will look for an existing product with this external identifier — if found, it
-         * will be updated; otherwise, a new product will be created.
-         */
-        external_identifier: string;
+      amount: string;
 
-        /**
-         * The title of the product.
-         */
-        title: string;
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
 
-        /**
-         * Whether or not to collect shipping information at checkout from the customer.
-         */
-        collect_shipping_address?: boolean | null;
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
 
-        /**
-         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-         * between 5 and 22 characters, contain at least one letter, and not contain any of
-         * the following characters: <, >, \, ', "
-         */
-        custom_statement_descriptor?: string | null;
-
-        /**
-         * A written description of the product.
-         */
-        description?: string | null;
-
-        /**
-         * The percentage of the revenue that goes to the global affiliate program.
-         */
-        global_affiliate_percentage?: number | null;
-
-        /**
-         * The different statuses of the global affiliate program for a product.
-         */
-        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-        /**
-         * The headline of the product.
-         */
-        headline?: string | null;
-
-        /**
-         * The ID of the product tax code to apply to this product.
-         */
-        product_tax_code_id?: string | null;
-
-        /**
-         * The URL to redirect the customer to after a purchase.
-         */
-        redirect_purchase_url?: string | null;
-
-        /**
-         * The route of the product.
-         */
-        route?: string | null;
-
-        /**
-         * Visibility of a resource
-         */
-        visibility?: Shared.Visibility | null;
-      }
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
     }
   }
 
-  export interface CreatePaymentInputWithPlanAndMemberID {
-    /**
-     * The ID of the company to create the payment for.
-     */
-    company_id: string;
+  export interface PageInfo {
+    end_cursor: string | null;
 
-    /**
-     * The ID of the member to create the payment for. Required unless
-     * confirmation_token is provided.
-     */
-    member_id: string;
+    has_next_page: boolean;
 
-    /**
-     * Pass this object to create a new plan for this payment
-     */
-    plan: CreatePaymentInputWithPlanAndMemberID.Plan;
+    has_previous_page: boolean;
 
-    /**
-     * Whether to capture the card payment immediately. Pass false to place an
-     * authorization hold that must be captured in full within five days.
-     */
-    capture?: boolean | null;
-
-    /**
-     * Overrides the buyer email carried on the confirmation token, resolving or
-     * creating the Whop user the payment belongs to. Ignored when the confirmation
-     * token was created by a signed-in buyer, and unless confirmation_token is
-     * provided.
-     */
-    email?: string | null;
-
-    /**
-     * Custom metadata to attach to the payment.
-     */
-    metadata?: { [key: string]: unknown } | null;
-
-    /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged. Required unless confirmation_token is provided.
-     */
-    payment_method_id?: string | null;
-
-    /**
-     * The ID of an active promo code to apply to this payment. The promo code must
-     * belong to the company and be valid for the plan being purchased. The plan must
-     * be attached to a product — promo codes are not eligible for one-off purchases.
-     */
-    promo_code_id?: string | null;
-
-    /**
-     * Where the buyer continues after completing an off-site step. Must be an absolute
-     * https URL without credentials (http is allowed for localhost), at most 2,048
-     * characters. Editable until they return — see the payment's update endpoint.
-     * Ignored unless confirmation_token is provided.
-     */
-    return_url?: string | null;
+    start_cursor: string | null;
   }
+}
 
-  export namespace CreatePaymentInputWithPlanAndMemberID {
-    /**
-     * Pass this object to create a new plan for this payment
-     */
-    export interface Plan {
-      /**
-       * The respective currency identifier for the plan.
-       */
-      currency: Shared.Currency;
+export interface PaymentCreateParams {
+  /**
+   * Body param: The account to charge for, prefixed `biz_`.
+   */
+  account_id: string;
 
-      /**
-       * The application fee amount collected by the platform from this connected
-       * account. Provided as a number in dollars (e.g., 5.00 for $5.00). Must be less
-       * than the total payment amount. Only valid for connected accounts with a parent
-       * company.
-       */
-      application_fee_amount?: number | null;
+  /**
+   * Body param: The plan to charge for, prefixed `plan_`. It must belong to the
+   * account.
+   */
+  plan_id: string;
 
-      /**
-       * The interval in days at which the plan charges (renewal plans). For example, 30
-       * for monthly billing.
-       */
-      billing_period?: number | null;
+  /**
+   * Body param: Whether to capture a card payment immediately. Defaults to true.
+   * Pass false to place an authorization hold that must be captured in full within
+   * five days via the capture endpoint.
+   */
+  capture?: boolean | null;
 
-      /**
-       * The description of the plan.
-       */
-      description?: string | null;
+  /**
+   * Body param: A confirmation token describing a payment method the buyer just
+   * supplied. Provide this instead of `member_id` and `payment_method_id`; the buyer
+   * is resolved from the token's billing email, or from `email`. The buyer may still
+   * have a step to complete — poll the payment's status for what to do next.
+   */
+  confirmation_token?: string | null;
 
-      /**
-       * The number of days until the membership expires and revokes access (expiration
-       * plans). For example, 365 for one year.
-       */
-      expiration_days?: number | null;
+  /**
+   * Body param: Overrides the buyer email carried on the confirmation token,
+   * resolving or creating the user the payment belongs to. Ignored unless
+   * `confirmation_token` is provided, and when the token was created by a signed-in
+   * buyer.
+   */
+  email?: string | null;
 
-      /**
-       * Whether to force the creation of a new plan even if one with the same attributes
-       * already exists.
-       */
-      force_create_new_plan?: boolean | null;
+  /**
+   * Body param: The member to charge, prefixed `mber_`. Required with
+   * `payment_method_id` unless `confirmation_token` is provided.
+   */
+  member_id?: string | null;
 
-      /**
-       * An additional amount charged upon first purchase. Provided as a number in the
-       * specified currency. Eg: 10.43 for $10.43 USD.
-       */
-      initial_price?: number | null;
+  /**
+   * Body param: Custom metadata to attach to the payment.
+   */
+  metadata?: { [key: string]: string } | null;
 
-      /**
-       * A personal description or notes section for the business.
-       */
-      internal_notes?: string | null;
+  /**
+   * Body param: The stored payment method to charge, prefixed `payt_`. It must
+   * belong to the member. Required unless `confirmation_token` is provided.
+   */
+  payment_method_id?: string | null;
 
-      /**
-       * The type of plan that can be attached to a product
-       */
-      plan_type?: Shared.PlanType | null;
+  /**
+   * Body param: An active promo code to apply, prefixed `promo_`. It must belong to
+   * the account and be valid for the plan.
+   */
+  promo_code_id?: string | null;
 
-      /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
-       */
-      product?: Plan.Product | null;
+  /**
+   * Body param: Where the buyer continues after completing an off-site step. An
+   * absolute https URL without credentials, at most 2,048 characters. Ignored unless
+   * `confirmation_token` is provided.
+   */
+  return_url?: string | null;
 
-      /**
-       * The product the plan is related to. Either this or product is required.
-       */
-      product_id?: string | null;
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 
-      /**
-       * The amount the customer is charged every billing period. Provided as a number in
-       * the specified currency. Eg: 10.43 for $10.43 USD.
-       */
-      renewal_price?: number | null;
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
 
-      /**
-       * The title of the plan. This will be visible on the product page to customers.
-       */
-      title?: string | null;
-
-      /**
-       * The number of free trial days added before a renewal plan.
-       */
-      trial_period_days?: number | null;
-
-      /**
-       * Visibility of a resource
-       */
-      visibility?: Shared.Visibility | null;
-    }
-
-    export namespace Plan {
-      /**
-       * Pass this object to create a new product for this plan. We will use the product
-       * external identifier to find or create an existing product.
-       */
-      export interface Product {
-        /**
-         * A unique ID used to find or create a product. When provided during creation, we
-         * will look for an existing product with this external identifier — if found, it
-         * will be updated; otherwise, a new product will be created.
-         */
-        external_identifier: string;
-
-        /**
-         * The title of the product.
-         */
-        title: string;
-
-        /**
-         * Whether or not to collect shipping information at checkout from the customer.
-         */
-        collect_shipping_address?: boolean | null;
-
-        /**
-         * The custom statement descriptor for the product i.e. WHOP\*SPORTS, must be
-         * between 5 and 22 characters, contain at least one letter, and not contain any of
-         * the following characters: <, >, \, ', "
-         */
-        custom_statement_descriptor?: string | null;
-
-        /**
-         * A written description of the product.
-         */
-        description?: string | null;
-
-        /**
-         * The percentage of the revenue that goes to the global affiliate program.
-         */
-        global_affiliate_percentage?: number | null;
-
-        /**
-         * The different statuses of the global affiliate program for a product.
-         */
-        global_affiliate_status?: Shared.GlobalAffiliateStatus | null;
-
-        /**
-         * The headline of the product.
-         */
-        headline?: string | null;
-
-        /**
-         * The ID of the product tax code to apply to this product.
-         */
-        product_tax_code_id?: string | null;
-
-        /**
-         * The URL to redirect the customer to after a purchase.
-         */
-        redirect_purchase_url?: string | null;
-
-        /**
-         * The route of the product.
-         */
-        route?: string | null;
-
-        /**
-         * Visibility of a resource
-         */
-        visibility?: Shared.Visibility | null;
-      }
-    }
-  }
-
-  export interface CreatePaymentInputWithPlanIDAndConfirmationToken {
-    /**
-     * The ID of the company to create the payment for.
-     */
-    company_id: string;
-
-    /**
-     * A confirmation token ID (ctok\_) describing a payment method the buyer just
-     * supplied. Provide this INSTEAD of member_id and payment_method_id to charge a
-     * method that is not yet on file — the buyer is resolved from the token's billing
-     * email, or from `email`. The buyer may still have a step to complete (3DS, a
-     * redirect, linking a bank); poll the payment's status endpoint for what to do
-     * next.
-     */
-    confirmation_token: string;
-
-    /**
-     * An ID of an existing plan to use for the payment.
-     */
-    plan_id: string;
-
-    /**
-     * Whether to capture the card payment immediately. Pass false to place an
-     * authorization hold that must be captured in full within five days.
-     */
-    capture?: boolean | null;
-
-    /**
-     * Overrides the buyer email carried on the confirmation token, resolving or
-     * creating the Whop user the payment belongs to. Ignored when the confirmation
-     * token was created by a signed-in buyer, and unless confirmation_token is
-     * provided.
-     */
-    email?: string | null;
-
-    /**
-     * Custom metadata to attach to the payment.
-     */
-    metadata?: { [key: string]: unknown } | null;
-
-    /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged. Required unless confirmation_token is provided.
-     */
-    payment_method_id?: string | null;
-
-    /**
-     * The ID of an active promo code to apply to this payment. The promo code must
-     * belong to the company and be valid for the plan being purchased. The plan must
-     * be attached to a product — promo codes are not eligible for one-off purchases.
-     */
-    promo_code_id?: string | null;
-
-    /**
-     * Where the buyer continues after completing an off-site step. Must be an absolute
-     * https URL without credentials (http is allowed for localhost), at most 2,048
-     * characters. Editable until they return — see the payment's update endpoint.
-     * Ignored unless confirmation_token is provided.
-     */
-    return_url?: string | null;
-  }
-
-  export interface CreatePaymentInputWithPlanIDAndMemberID {
-    /**
-     * The ID of the company to create the payment for.
-     */
-    company_id: string;
-
-    /**
-     * The ID of the member to create the payment for. Required unless
-     * confirmation_token is provided.
-     */
-    member_id: string;
-
-    /**
-     * An ID of an existing plan to use for the payment.
-     */
-    plan_id: string;
-
-    /**
-     * Whether to capture the card payment immediately. Pass false to place an
-     * authorization hold that must be captured in full within five days.
-     */
-    capture?: boolean | null;
-
-    /**
-     * Overrides the buyer email carried on the confirmation token, resolving or
-     * creating the Whop user the payment belongs to. Ignored when the confirmation
-     * token was created by a signed-in buyer, and unless confirmation_token is
-     * provided.
-     */
-    email?: string | null;
-
-    /**
-     * Custom metadata to attach to the payment.
-     */
-    metadata?: { [key: string]: unknown } | null;
-
-    /**
-     * The ID of the payment method to use for the payment. It must be connected to the
-     * Member being charged. Required unless confirmation_token is provided.
-     */
-    payment_method_id?: string | null;
-
-    /**
-     * The ID of an active promo code to apply to this payment. The promo code must
-     * belong to the company and be valid for the plan being purchased. The plan must
-     * be attached to a product — promo codes are not eligible for one-off purchases.
-     */
-    promo_code_id?: string | null;
-
-    /**
-     * Where the buyer continues after completing an off-site step. Must be an absolute
-     * https URL without credentials (http is allowed for localhost), at most 2,048
-     * characters. Editable until they return — see the payment's update endpoint.
-     * Ignored unless confirmation_token is provided.
-     */
-    return_url?: string | null;
-  }
+export interface PaymentRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export interface PaymentListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: Only payments charged by this account, prefixed `biz_`.
+   */
+  account_id?: string;
+
+  /**
+   * Query param: A cursor; returns payments before this position.
    */
   before?: string;
 
   /**
-   * Filter payments by their billing reason.
+   * Query param: Only payments charged for this reason.
    */
-  billing_reasons?: Array<BillingReasons>;
+  billing_reason?:
+    | 'subscription_create'
+    | 'subscription_cycle'
+    | 'subscription_update'
+    | 'one_time'
+    | 'manual'
+    | 'subscription';
 
   /**
-   * Only return payments from these checkout configurations.
-   */
-  checkout_configuration_ids?: Array<string>;
-
-  /**
-   * The unique identifier of the company to list payments for.
-   */
-  company_id?: string;
-
-  /**
-   * Only return payments created after this timestamp.
+   * Query param: Only payments created after this ISO 8601 timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return payments created before this timestamp.
+   * Query param: Only payments created before this ISO 8601 timestamp.
    */
   created_before?: string;
 
   /**
-   * Filter payments by their currency code.
+   * Query param: Only payments presented in this three-letter currency, such as
+   * `usd`.
    */
-  currencies?: Array<Shared.Currency>;
+  currency?: string;
 
   /**
-   * The sort direction for ordering results, either ascending or descending.
+   * Query param: The sort direction.
    */
-  direction?: Shared.Direction;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: The number of payments to return.
    */
   first?: number;
 
   /**
-   * Whether to include payments with a zero amount. Defaults to false, so
-   * zero-amount payments are omitted unless you set this to true — a company whose
-   * sales are all free plans returns an empty list without it.
-   */
-  include_free?: boolean;
-
-  /**
-   * Returns the last _n_ elements from the list.
+   * Query param: The number of payments to return from the end of the range.
    */
   last?: number;
 
   /**
-   * The field to order results by, such as creation date.
+   * Query param: Only payments made by this member, prefixed `mber_`.
    */
-  order?: 'final_amount' | 'created_at' | 'paid_at';
+  member_id?: string;
 
   /**
-   * Filter payments to only those associated with these specific plan identifiers.
+   * Query param: Only payments billed under this membership, prefixed `mem_`.
    */
-  plan_ids?: Array<string>;
+  membership_id?: string;
 
   /**
-   * Filter payments to only those associated with these specific product
-   * identifiers.
+   * Query param: The field to sort by.
    */
-  product_ids?: Array<string>;
+  order?: 'created_at' | 'paid_at';
 
   /**
-   * Search payments by user ID, membership ID, user email, name, or username. Email
-   * filtering requires the member:email:read permission.
+   * Query param: Only payments priced by this plan, prefixed `plan_`.
+   */
+  plan_id?: string;
+
+  /**
+   * Query param: Only payments for this product, prefixed `prod_`.
+   */
+  product_id?: string;
+
+  /**
+   * Query param: Search payments by user ID, membership ID, user email, name, or
+   * username. Email filtering requires the member:email:read permission.
    */
   query?: string;
 
   /**
-   * Filter payments by their current status.
+   * Query param: Only payments in this lifecycle state.
    */
-  statuses?: Array<Shared.ReceiptStatus>;
+  status?: 'open' | 'authorized' | 'paid' | 'pending' | 'uncollectible' | 'unresolved' | 'void';
 
   /**
-   * Filter payments by their current substatus for more granular filtering.
+   * Query param: Only payments made by this buyer, prefixed `user_`.
    */
-  substatuses?: Array<Shared.FriendlyReceiptStatus>;
+  user_id?: string;
 
   /**
-   * Only return payments last updated after this timestamp.
+   * Header param: Pins the request to a dated API version.
    */
-  updated_after?: string;
-
-  /**
-   * Only return payments last updated before this timestamp.
-   */
-  updated_before?: string;
+  'Api-Version-Date'?: string;
 }
 
-export interface PaymentListFeesParams extends CursorPageParams {
+export interface PaymentListFeesParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Pins the request to a dated API version.
    */
-  before?: string;
-
-  /**
-   * Returns the first _n_ elements from the list.
-   */
-  first?: number;
-
-  /**
-   * Returns the last _n_ elements from the list.
-   */
-  last?: number;
+  'Api-Version-Date'?: string;
 }
 
 export interface PaymentRefundParams {
   /**
-   * The amount to refund. For multi-currency payments, this is in the charge
-   * currency (what the buyer paid). For single-currency, this is in the payment
-   * currency. If omitted, the full payment amount is refunded.
+   * Body param: The amount to refund. For multi-currency payments, this is in the
+   * charge currency (what the buyer paid). For single-currency, this is in the
+   * payment currency. If omitted, the full payment amount is refunded.
    */
   partial_amount?: number | null;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * Header param: A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface PaymentRetryParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
+}
+
+export interface PaymentVoidParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
+
+  /**
+   * A unique key that makes this request safe to retry. See
+   * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
+   */
+  'Idempotency-Key'?: string;
 }
 
 export declare namespace Payments {
@@ -2146,15 +799,15 @@ export declare namespace Payments {
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
     type ReceiptTaxBehavior as ReceiptTaxBehavior,
-    type PaymentCreateResponse as PaymentCreateResponse,
-    type PaymentRetrieveResponse as PaymentRetrieveResponse,
-    type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
-    type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
-    type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
     type PaymentCreateParams as PaymentCreateParams,
+    type PaymentRetrieveParams as PaymentRetrieveParams,
     type PaymentListParams as PaymentListParams,
     type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
+    type PaymentRetryParams as PaymentRetryParams,
+    type PaymentVoidParams as PaymentVoidParams,
   };
 }
+
+export { type PaymentsCursorPage };

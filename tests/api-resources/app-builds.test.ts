@@ -42,7 +42,7 @@ describe('resource appBuilds', () => {
           'eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
       },
       supported_app_view_types: ['hub'],
-      'Api-Version-Date': '2026-09-02',
+      'Api-Version-Date': '2026-09-02-1',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -65,7 +65,7 @@ describe('resource appBuilds', () => {
     await expect(
       client.appBuilds.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02' },
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -95,7 +95,7 @@ describe('resource appBuilds', () => {
       last: 0,
       platform: 'ios',
       status: 'draft',
-      'Api-Version-Date': '2026-09-02',
+      'Api-Version-Date': '2026-09-02-1',
     });
   });
 
@@ -117,7 +117,7 @@ describe('resource appBuilds', () => {
     await expect(
       client.appBuilds.promote(
         'id',
-        { 'Api-Version-Date': '2026-09-02', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

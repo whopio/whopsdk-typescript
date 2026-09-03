@@ -26,7 +26,7 @@ describe('resource resolutionCenterCases', () => {
     await expect(
       client.resolutionCenterCases.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02' },
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -63,7 +63,7 @@ describe('resource resolutionCenterCases', () => {
           reason: ['fraudulent'],
           status: ['awaiting_merchant'],
           user_id: 'user_id',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),

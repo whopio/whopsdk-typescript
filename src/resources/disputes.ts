@@ -1,6 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
+import * as PaymentsAPI from './payments';
+import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
@@ -64,7 +66,7 @@ export class Disputes extends APIResource {
    * - `member:basic:read`
    * - `member:phone:read`
    */
-  submitEvidence(id: string, options?: RequestOptions): APIPromise<Dispute> {
+  submitEvidence(id: string, options?: RequestOptions): APIPromise<DisputeSubmitEvidenceResponse> {
     return this._client.post(path`/disputes/${id}/submit_evidence`, options);
   }
 
@@ -86,7 +88,7 @@ export class Disputes extends APIResource {
     id: string,
     body: DisputeUpdateEvidenceParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<Dispute> {
+  ): APIPromise<DisputeUpdateEvidenceResponse> {
     return this._client.post(path`/disputes/${id}/update_evidence`, { body, ...options });
   }
 }
@@ -903,6 +905,1128 @@ export type DisputeStatuses =
   | 'closed'
   | 'other';
 
+/**
+ * A dispute is a chargeback or payment challenge filed against a company,
+ * including evidence and response status.
+ */
+export interface DisputeSubmitEvidenceResponse {
+  /**
+   * The unique identifier for the dispute.
+   */
+  id: string;
+
+  /**
+   * A log of IP-based access activity for the customer on Whop, submitted as
+   * evidence in the dispute.
+   */
+  access_activity_log: string | null;
+
+  /**
+   * The disputed amount in the specified currency, formatted as a decimal.
+   */
+  amount: number;
+
+  /**
+   * The customer's billing address from their payment details, submitted as evidence
+   * in the dispute.
+   */
+  billing_address: string | null;
+
+  /**
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
+   */
+  cancellation_policy_attachment: DisputeSubmitEvidenceResponse.CancellationPolicyAttachment | null;
+
+  /**
+   * A text disclosure describing the company's cancellation policy, submitted as
+   * dispute evidence.
+   */
+  cancellation_policy_disclosure: string | null;
+
+  /**
+   * The company that the dispute was filed against.
+   */
+  company: DisputeSubmitEvidenceResponse.Company | null;
+
+  /**
+   * The datetime the dispute was created.
+   */
+  created_at: string | null;
+
+  /**
+   * The three-letter ISO currency code for the disputed amount.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
+   */
+  customer_communication_attachment: DisputeSubmitEvidenceResponse.CustomerCommunicationAttachment | null;
+
+  /**
+   * The customer's email address from their payment details, included in the
+   * evidence packet sent to the payment processor. Editable before submission.
+   */
+  customer_email_address: string | null;
+
+  /**
+   * The customer's full name from their payment details, included in the evidence
+   * packet sent to the payment processor. Editable before submission.
+   */
+  customer_name: string | null;
+
+  /**
+   * Whether the dispute evidence can still be edited and submitted.
+   */
+  editable: boolean | null;
+
+  /**
+   * The deadline by which dispute evidence must be submitted. Null if no response
+   * deadline is set.
+   */
+  needs_response_by: string | null;
+
+  /**
+   * Additional freeform notes submitted by the company as part of the dispute
+   * evidence.
+   */
+  notes: string | null;
+
+  /**
+   * The original payment that was disputed.
+   */
+  payment: DisputeSubmitEvidenceResponse.Payment | null;
+
+  /**
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
+   */
+  plan: DisputeSubmitEvidenceResponse.Plan | null;
+
+  /**
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
+   */
+  product: DisputeSubmitEvidenceResponse.Product | null;
+
+  /**
+   * A description of the product or service provided, submitted as dispute evidence.
+   */
+  product_description: string | null;
+
+  /**
+   * A human-readable reason for the dispute.
+   */
+  reason: string | null;
+
+  /**
+   * The card network reason code for the dispute. Null when the payment processor
+   * did not provide one.
+   */
+  reason_code: string | null;
+
+  /**
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
+   */
+  refund_policy_attachment: DisputeSubmitEvidenceResponse.RefundPolicyAttachment | null;
+
+  /**
+   * A text disclosure describing the company's refund policy, submitted as dispute
+   * evidence.
+   */
+  refund_policy_disclosure: string | null;
+
+  /**
+   * An explanation from the company for why a refund was refused, submitted as
+   * dispute evidence.
+   */
+  refund_refusal_explanation: string | null;
+
+  /**
+   * The date when the product or service was delivered to the customer, submitted as
+   * dispute evidence.
+   */
+  service_date: string | null;
+
+  /**
+   * The current status of the dispute lifecycle, such as needs_response,
+   * under_review, won, or lost.
+   */
+  status: DisputeStatuses;
+
+  /**
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
+   */
+  uncategorized_attachment: DisputeSubmitEvidenceResponse.UncategorizedAttachment | null;
+
+  /**
+   * Whether the dispute was automatically resolved through Visa Rapid Dispute
+   * Resolution (RDR).
+   */
+  visa_rdr: boolean;
+}
+
+export namespace DisputeSubmitEvidenceResponse {
+  /**
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
+   */
+  export interface CancellationPolicyAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * The company that the dispute was filed against.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+
+    /**
+     * The written name of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
+   */
+  export interface CustomerCommunicationAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * The original payment that was disputed.
+   */
+  export interface Payment {
+    /**
+     * The unique identifier for the payment.
+     */
+    id: string;
+
+    /**
+     * The reason why a specific payment was billed
+     */
+    billing_reason: PaymentsAPI.BillingReasons | null;
+
+    /**
+     * Possible card brands that a payment token can have
+     */
+    card_brand: PaymentsAPI.CardBrands | null;
+
+    /**
+     * The last four digits of the card used to make this payment. Null if the payment
+     * was not made with a card.
+     */
+    card_last4: string | null;
+
+    /**
+     * The datetime the payment was created.
+     */
+    created_at: string;
+
+    /**
+     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+     */
+    currency: Shared.Currency;
+
+    /**
+     * When an alert came in that this transaction will be disputed
+     */
+    dispute_alerted_at: string | null;
+
+    /**
+     * The member attached to this payment.
+     */
+    member: Payment.Member | null;
+
+    /**
+     * The membership attached to this payment.
+     */
+    membership: Payment.Membership | null;
+
+    /**
+     * The time at which this payment was successfully collected. Null if the payment
+     * has not yet succeeded. As a Unix timestamp.
+     */
+    paid_at: string | null;
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    payment_instrument: Payment.PaymentInstrument | null;
+
+    /**
+     * The different types of payment methods that can be used.
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+    /**
+     * The subtotal to show to the creator (excluding buyer fees).
+     */
+    subtotal: number | null;
+
+    /**
+     * The total to show to the creator (excluding buyer fees).
+     */
+    total: number | null;
+
+    /**
+     * The total in USD to show to the creator (excluding buyer fees).
+     */
+    usd_total: number | null;
+
+    /**
+     * The user that made this payment.
+     */
+    user: Payment.User | null;
+  }
+
+  export namespace Payment {
+    /**
+     * The member attached to this payment.
+     */
+    export interface Member {
+      /**
+       * The unique identifier for the company member.
+       */
+      id: string;
+
+      /**
+       * The phone number for the member, if available.
+       */
+      phone: string | null;
+    }
+
+    /**
+     * The membership attached to this payment.
+     */
+    export interface Membership {
+      /**
+       * The unique identifier for the membership.
+       */
+      id: string;
+
+      /**
+       * The state of the membership.
+       */
+      status: Shared.MembershipStatus;
+    }
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    export interface PaymentInstrument {
+      /**
+       * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
+       * method's own name ("Klarna").
+       */
+      display_name: string;
+
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      icons: PaymentInstrument.Icons;
+
+      /**
+       * Installment methods only: how many payments the charge splits into. Data, not
+       * copy — compose and translate the label client-side.
+       */
+      installment_count: number | null;
+
+      /**
+       * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
+       */
+      payment_method_type: string;
+    }
+
+    export namespace PaymentInstrument {
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      export interface Icons {
+        /**
+         * The square tile (32x32).
+         */
+        square: Icons.Square;
+      }
+
+      export namespace Icons {
+        /**
+         * The square tile (32x32).
+         */
+        export interface Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          dark: Square.Dark;
+
+          /**
+           * The colorway for light surfaces.
+           */
+          light: Square.Light;
+        }
+
+        export namespace Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          export interface Dark {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+
+          /**
+           * The colorway for light surfaces.
+           */
+          export interface Light {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+        }
+      }
+    }
+
+    /**
+     * The user that made this payment.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's email address. Requires the member:email:read permission to access.
+       * Null if not authorized.
+       */
+      email: string | null;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+  }
+
+  /**
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
+   */
+  export interface Plan {
+    /**
+     * The unique identifier for the plan.
+     */
+    id: string;
+  }
+
+  /**
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
+   */
+  export interface Product {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * The display name of the product shown to customers on the product page and in
+     * search results.
+     */
+    title: string;
+  }
+
+  /**
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
+   */
+  export interface RefundPolicyAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
+   */
+  export interface UncategorizedAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+}
+
+/**
+ * A dispute is a chargeback or payment challenge filed against a company,
+ * including evidence and response status.
+ */
+export interface DisputeUpdateEvidenceResponse {
+  /**
+   * The unique identifier for the dispute.
+   */
+  id: string;
+
+  /**
+   * A log of IP-based access activity for the customer on Whop, submitted as
+   * evidence in the dispute.
+   */
+  access_activity_log: string | null;
+
+  /**
+   * The disputed amount in the specified currency, formatted as a decimal.
+   */
+  amount: number;
+
+  /**
+   * The customer's billing address from their payment details, submitted as evidence
+   * in the dispute.
+   */
+  billing_address: string | null;
+
+  /**
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
+   */
+  cancellation_policy_attachment: DisputeUpdateEvidenceResponse.CancellationPolicyAttachment | null;
+
+  /**
+   * A text disclosure describing the company's cancellation policy, submitted as
+   * dispute evidence.
+   */
+  cancellation_policy_disclosure: string | null;
+
+  /**
+   * The company that the dispute was filed against.
+   */
+  company: DisputeUpdateEvidenceResponse.Company | null;
+
+  /**
+   * The datetime the dispute was created.
+   */
+  created_at: string | null;
+
+  /**
+   * The three-letter ISO currency code for the disputed amount.
+   */
+  currency: Shared.Currency;
+
+  /**
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
+   */
+  customer_communication_attachment: DisputeUpdateEvidenceResponse.CustomerCommunicationAttachment | null;
+
+  /**
+   * The customer's email address from their payment details, included in the
+   * evidence packet sent to the payment processor. Editable before submission.
+   */
+  customer_email_address: string | null;
+
+  /**
+   * The customer's full name from their payment details, included in the evidence
+   * packet sent to the payment processor. Editable before submission.
+   */
+  customer_name: string | null;
+
+  /**
+   * Whether the dispute evidence can still be edited and submitted.
+   */
+  editable: boolean | null;
+
+  /**
+   * The deadline by which dispute evidence must be submitted. Null if no response
+   * deadline is set.
+   */
+  needs_response_by: string | null;
+
+  /**
+   * Additional freeform notes submitted by the company as part of the dispute
+   * evidence.
+   */
+  notes: string | null;
+
+  /**
+   * The original payment that was disputed.
+   */
+  payment: DisputeUpdateEvidenceResponse.Payment | null;
+
+  /**
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
+   */
+  plan: DisputeUpdateEvidenceResponse.Plan | null;
+
+  /**
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
+   */
+  product: DisputeUpdateEvidenceResponse.Product | null;
+
+  /**
+   * A description of the product or service provided, submitted as dispute evidence.
+   */
+  product_description: string | null;
+
+  /**
+   * A human-readable reason for the dispute.
+   */
+  reason: string | null;
+
+  /**
+   * The card network reason code for the dispute. Null when the payment processor
+   * did not provide one.
+   */
+  reason_code: string | null;
+
+  /**
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
+   */
+  refund_policy_attachment: DisputeUpdateEvidenceResponse.RefundPolicyAttachment | null;
+
+  /**
+   * A text disclosure describing the company's refund policy, submitted as dispute
+   * evidence.
+   */
+  refund_policy_disclosure: string | null;
+
+  /**
+   * An explanation from the company for why a refund was refused, submitted as
+   * dispute evidence.
+   */
+  refund_refusal_explanation: string | null;
+
+  /**
+   * The date when the product or service was delivered to the customer, submitted as
+   * dispute evidence.
+   */
+  service_date: string | null;
+
+  /**
+   * The current status of the dispute lifecycle, such as needs_response,
+   * under_review, won, or lost.
+   */
+  status: DisputeStatuses;
+
+  /**
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
+   */
+  uncategorized_attachment: DisputeUpdateEvidenceResponse.UncategorizedAttachment | null;
+
+  /**
+   * Whether the dispute was automatically resolved through Visa Rapid Dispute
+   * Resolution (RDR).
+   */
+  visa_rdr: boolean;
+}
+
+export namespace DisputeUpdateEvidenceResponse {
+  /**
+   * The cancellation policy document uploaded as dispute evidence. Null if no
+   * cancellation policy has been provided.
+   */
+  export interface CancellationPolicyAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * The company that the dispute was filed against.
+   */
+  export interface Company {
+    /**
+     * The unique identifier for the company.
+     */
+    id: string;
+
+    /**
+     * The written name of the company.
+     */
+    title: string;
+  }
+
+  /**
+   * Evidence of customer communication or product usage, uploaded as a dispute
+   * attachment. Null if not provided.
+   */
+  export interface CustomerCommunicationAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * The original payment that was disputed.
+   */
+  export interface Payment {
+    /**
+     * The unique identifier for the payment.
+     */
+    id: string;
+
+    /**
+     * The reason why a specific payment was billed
+     */
+    billing_reason: PaymentsAPI.BillingReasons | null;
+
+    /**
+     * Possible card brands that a payment token can have
+     */
+    card_brand: PaymentsAPI.CardBrands | null;
+
+    /**
+     * The last four digits of the card used to make this payment. Null if the payment
+     * was not made with a card.
+     */
+    card_last4: string | null;
+
+    /**
+     * The datetime the payment was created.
+     */
+    created_at: string;
+
+    /**
+     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
+     */
+    currency: Shared.Currency;
+
+    /**
+     * When an alert came in that this transaction will be disputed
+     */
+    dispute_alerted_at: string | null;
+
+    /**
+     * The member attached to this payment.
+     */
+    member: Payment.Member | null;
+
+    /**
+     * The membership attached to this payment.
+     */
+    membership: Payment.Membership | null;
+
+    /**
+     * The time at which this payment was successfully collected. Null if the payment
+     * has not yet succeeded. As a Unix timestamp.
+     */
+    paid_at: string | null;
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    payment_instrument: Payment.PaymentInstrument | null;
+
+    /**
+     * The different types of payment methods that can be used.
+     */
+    payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
+
+    /**
+     * The subtotal to show to the creator (excluding buyer fees).
+     */
+    subtotal: number | null;
+
+    /**
+     * The total to show to the creator (excluding buyer fees).
+     */
+    total: number | null;
+
+    /**
+     * The total in USD to show to the creator (excluding buyer fees).
+     */
+    usd_total: number | null;
+
+    /**
+     * The user that made this payment.
+     */
+    user: Payment.User | null;
+  }
+
+  export namespace Payment {
+    /**
+     * The member attached to this payment.
+     */
+    export interface Member {
+      /**
+       * The unique identifier for the company member.
+       */
+      id: string;
+
+      /**
+       * The phone number for the member, if available.
+       */
+      phone: string | null;
+    }
+
+    /**
+     * The membership attached to this payment.
+     */
+    export interface Membership {
+      /**
+       * The unique identifier for the membership.
+       */
+      id: string;
+
+      /**
+       * The state of the membership.
+       */
+      status: Shared.MembershipStatus;
+    }
+
+    /**
+     * The instrument this payment was made with, shaped for display: the method type,
+     * a buyer-facing name, the standard icon set, and the card facts when it was a
+     * card. Null when the receipt names no payment method.
+     */
+    export interface PaymentInstrument {
+      /**
+       * Buyer-facing instrument name — "Visa •••• 4242" when the card surfaced, else the
+       * method's own name ("Klarna").
+       */
+      display_name: string;
+
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      icons: PaymentInstrument.Icons;
+
+      /**
+       * Installment methods only: how many payments the charge splits into. Data, not
+       * copy — compose and translate the label client-side.
+       */
+      installment_count: number | null;
+
+      /**
+       * The payment method type identifier, e.g. `card`, `klarna`, `apple_pay`.
+       */
+      payment_method_type: string;
+    }
+
+    export namespace PaymentInstrument {
+      /**
+       * The standard icon set: square and card shapes, each in light and dark colorways.
+       */
+      export interface Icons {
+        /**
+         * The square tile (32x32).
+         */
+        square: Icons.Square;
+      }
+
+      export namespace Icons {
+        /**
+         * The square tile (32x32).
+         */
+        export interface Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          dark: Square.Dark;
+
+          /**
+           * The colorway for light surfaces.
+           */
+          light: Square.Light;
+        }
+
+        export namespace Square {
+          /**
+           * The colorway for dark surfaces.
+           */
+          export interface Dark {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+
+          /**
+           * The colorway for light surfaces.
+           */
+          export interface Light {
+            /**
+             * The vector file. Prefer this everywhere SVG renders.
+             */
+            svg: string;
+          }
+        }
+      }
+    }
+
+    /**
+     * The user that made this payment.
+     */
+    export interface User {
+      /**
+       * The unique identifier for the user.
+       */
+      id: string;
+
+      /**
+       * The user's email address. Requires the member:email:read permission to access.
+       * Null if not authorized.
+       */
+      email: string | null;
+
+      /**
+       * The user's display name shown on their public profile.
+       */
+      name: string | null;
+
+      /**
+       * The user's unique username shown on their public profile.
+       */
+      username: string;
+    }
+  }
+
+  /**
+   * The plan associated with the disputed payment. Null if the dispute is not linked
+   * to a specific plan.
+   */
+  export interface Plan {
+    /**
+     * The unique identifier for the plan.
+     */
+    id: string;
+  }
+
+  /**
+   * The product associated with the disputed payment. Null if the dispute is not
+   * linked to a specific product.
+   */
+  export interface Product {
+    /**
+     * The unique identifier for the product.
+     */
+    id: string;
+
+    /**
+     * The display name of the product shown to customers on the product page and in
+     * search results.
+     */
+    title: string;
+  }
+
+  /**
+   * The refund policy document uploaded as dispute evidence. Null if no refund
+   * policy has been provided.
+   */
+  export interface RefundPolicyAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+
+  /**
+   * An additional attachment that does not fit into the standard evidence
+   * categories. Null if not provided.
+   */
+  export interface UncategorizedAttachment {
+    /**
+     * Represents a unique identifier that is Base64 obfuscated. It is often used to
+     * refetch an object or as key for a cache. The ID type appears in a JSON response
+     * as a String; however, it is not intended to be human-readable. When expected as
+     * an input type, any string (such as `"VXNlci0xMA=="`) or integer (such as `4`)
+     * input value will be accepted as an ID.
+     */
+    id: string;
+
+    /**
+     * Uploaded file MIME type, such as image/jpeg, video/mp4, or audio/mpeg.
+     */
+    content_type: string | null;
+
+    /**
+     * The original filename of the uploaded attachment, including its file extension.
+     */
+    filename: string | null;
+
+    /**
+     * A pre-optimized URL for rendering this attachment on the client. This should be
+     * used for displaying attachments in apps.
+     */
+    url: string | null;
+  }
+}
+
 export interface DisputeRetrieveParams {
   /**
    * Pins the request to a dated API version.
@@ -1091,6 +2215,8 @@ export declare namespace Disputes {
   export {
     type Dispute as Dispute,
     type DisputeStatuses as DisputeStatuses,
+    type DisputeSubmitEvidenceResponse as DisputeSubmitEvidenceResponse,
+    type DisputeUpdateEvidenceResponse as DisputeUpdateEvidenceResponse,
     type DisputesCursorPage as DisputesCursorPage,
     type DisputeRetrieveParams as DisputeRetrieveParams,
     type DisputeListParams as DisputeListParams,

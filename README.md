@@ -35,10 +35,10 @@ const client = new Whop({
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
-const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-const paymentListResponse = page.data[0];
+const page = await client.payments.list();
+const payment = page.data[0];
 
-console.log(paymentListResponse.id);
+console.log(payment.id);
 ```
 
 ### Request & Response types
@@ -53,8 +53,7 @@ const client = new Whop({
   apiKey: process.env['WHOP_API_KEY'], // This is the default and can be omitted
 });
 
-const params: Whop.PaymentListParams = { company_id: 'biz_xxxxxxxxxxxxxx' };
-const [paymentListResponse]: [Whop.PaymentListResponse] = await client.payments.list(params);
+const [payment]: [Whop.Payment] = await client.payments.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -67,7 +66,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).catch(async (err) => {
+const page = await client.payments.list().catch(async (err) => {
   if (err instanceof Whop.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -107,7 +106,7 @@ const client = new Whop({
 });
 
 // Or, configure per-request:
-await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({
   maxRetries: 5,
 });
 ```
@@ -124,7 +123,7 @@ const client = new Whop({
 });
 
 // Override per-request:
-await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }, {
+await client.payments.list({
   timeout: 5 * 1000,
 });
 ```
@@ -139,24 +138,22 @@ List methods in the Whop API are paginated.
 You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllPaymentListResponses(params) {
-  const allPaymentListResponses = [];
+async function fetchAllPayments(params) {
+  const allPayments = [];
   // Automatically fetches more pages as needed.
-  for await (const paymentListResponse of client.payments.list({
-    company_id: 'biz_xxxxxxxxxxxxxx',
-  })) {
-    allPaymentListResponses.push(paymentListResponse);
+  for await (const payment of client.payments.list()) {
+    allPayments.push(payment);
   }
-  return allPaymentListResponses;
+  return allPayments;
 }
 ```
 
 Alternatively, you can request a single page at a time:
 
 ```ts
-let page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-for (const paymentListResponse of page.data) {
-  console.log(paymentListResponse);
+let page = await client.payments.list();
+for (const payment of page.data) {
+  console.log(payment);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -180,16 +177,14 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new Whop();
 
-const response = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' }).asResponse();
+const response = await client.payments.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: page, response: raw } = await client.payments
-  .list({ company_id: 'biz_xxxxxxxxxxxxxx' })
-  .withResponse();
+const { data: page, response: raw } = await client.payments.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-for await (const paymentListResponse of page) {
-  console.log(paymentListResponse.id);
+for await (const payment of page) {
+  console.log(payment.id);
 }
 ```
 

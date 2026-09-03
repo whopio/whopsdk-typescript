@@ -195,7 +195,9 @@ import {
   DisputeListParams,
   DisputeRetrieveParams,
   DisputeStatuses,
+  DisputeSubmitEvidenceResponse,
   DisputeUpdateEvidenceParams,
+  DisputeUpdateEvidenceResponse,
   Disputes,
   DisputesCursorPage,
 } from './resources/disputes';
@@ -307,11 +309,13 @@ import {
 import {
   CancelOptions,
   MembershipAddFreeDaysParams,
+  MembershipAddFreeDaysResponse,
   MembershipCancelParams,
   MembershipListParams,
   MembershipPauseParams,
   MembershipResumeParams,
   MembershipRetrieveParams,
+  MembershipUncancelResponse,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -341,16 +345,14 @@ import {
   BillingReasons,
   CardBrands,
   PaymentCreateParams,
-  PaymentCreateResponse,
   PaymentListFeesParams,
   PaymentListFeesResponse,
-  PaymentListFeesResponsesCursorPage,
   PaymentListParams,
-  PaymentListResponse,
-  PaymentListResponsesCursorPage,
   PaymentMethodTypes,
   PaymentRefundParams,
-  PaymentRetrieveResponse,
+  PaymentRetrieveParams,
+  PaymentRetryParams,
+  PaymentVoidParams,
   Payments,
   ReceiptTaxBehavior,
 } from './resources/payments';
@@ -418,6 +420,7 @@ import {
   RefundListResponsesCursorPage,
   RefundReferenceStatus,
   RefundReferenceType,
+  RefundRetrieveParams,
   RefundRetrieveResponse,
   RefundStatus,
   Refunds,
@@ -1475,6 +1478,12 @@ export class Whop {
    *
    */
   disputes: API.Disputes = new API.Disputes(this);
+  /**
+   * A Refund is one reversal of a payment, full or partial. Refunds are issued with `POST /payments/{id}/refund`; this resource is the record of each one — how much moved, through which provider, and where it stands (`pending`, `succeeded`, `failed`).
+   *
+   * List a payment's refunds with `?payment_id=`, or every refund an account issued with `?account_id=`. `amount` is stated in the payment's settlement currency so it nets against the payment's `total`; `original_amount` is what the processor moved.
+   *
+   */
   refunds: API.Refunds = new API.Refunds(this);
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
@@ -1797,6 +1806,8 @@ export declare namespace Whop {
   export {
     Memberships as Memberships,
     type CancelOptions as CancelOptions,
+    type MembershipAddFreeDaysResponse as MembershipAddFreeDaysResponse,
+    type MembershipUncancelResponse as MembershipUncancelResponse,
     type MembershipRetrieveParams as MembershipRetrieveParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
@@ -1879,16 +1890,14 @@ export declare namespace Whop {
     type CardBrands as CardBrands,
     type PaymentMethodTypes as PaymentMethodTypes,
     type ReceiptTaxBehavior as ReceiptTaxBehavior,
-    type PaymentCreateResponse as PaymentCreateResponse,
-    type PaymentRetrieveResponse as PaymentRetrieveResponse,
-    type PaymentListResponse as PaymentListResponse,
     type PaymentListFeesResponse as PaymentListFeesResponse,
-    type PaymentListResponsesCursorPage as PaymentListResponsesCursorPage,
-    type PaymentListFeesResponsesCursorPage as PaymentListFeesResponsesCursorPage,
     type PaymentCreateParams as PaymentCreateParams,
+    type PaymentRetrieveParams as PaymentRetrieveParams,
     type PaymentListParams as PaymentListParams,
     type PaymentListFeesParams as PaymentListFeesParams,
     type PaymentRefundParams as PaymentRefundParams,
+    type PaymentRetryParams as PaymentRetryParams,
+    type PaymentVoidParams as PaymentVoidParams,
   };
 
   export {
@@ -2029,6 +2038,8 @@ export declare namespace Whop {
     Disputes as Disputes,
     type Dispute as Dispute,
     type DisputeStatuses as DisputeStatuses,
+    type DisputeSubmitEvidenceResponse as DisputeSubmitEvidenceResponse,
+    type DisputeUpdateEvidenceResponse as DisputeUpdateEvidenceResponse,
     type DisputesCursorPage as DisputesCursorPage,
     type DisputeRetrieveParams as DisputeRetrieveParams,
     type DisputeListParams as DisputeListParams,
@@ -2044,6 +2055,7 @@ export declare namespace Whop {
     type RefundRetrieveResponse as RefundRetrieveResponse,
     type RefundListResponse as RefundListResponse,
     type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
+    type RefundRetrieveParams as RefundRetrieveParams,
     type RefundListParams as RefundListParams,
   };
 

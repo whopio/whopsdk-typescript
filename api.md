@@ -284,17 +284,19 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/memberships.ts">CancelOptions</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipAddFreeDaysResponse</a></code>
+- <code><a href="./src/resources/memberships.ts">MembershipUncancelResponse</a></code>
 
 Methods:
 
 - <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id, { ...params }) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsCursorPage</code>
-- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> Membership</code>
+- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> MembershipAddFreeDaysResponse</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id, { ...params }) -> Membership</code>
-- <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> Membership</code>
+- <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> MembershipUncancelResponse</code>
 
 # AuthorizedUsers
 
@@ -392,20 +394,17 @@ Types:
 - <code><a href="./src/resources/payments.ts">CardBrands</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentMethodTypes</a></code>
 - <code><a href="./src/resources/payments.ts">ReceiptTaxBehavior</a></code>
-- <code><a href="./src/resources/payments.ts">PaymentCreateResponse</a></code>
-- <code><a href="./src/resources/payments.ts">PaymentRetrieveResponse</a></code>
-- <code><a href="./src/resources/payments.ts">PaymentListResponse</a></code>
 - <code><a href="./src/resources/payments.ts">PaymentListFeesResponse</a></code>
 
 Methods:
 
-- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> PaymentCreateResponse</code>
-- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id) -> PaymentRetrieveResponse</code>
-- <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentListResponsesCursorPage</code>
-- <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponsesCursorPage</code>
+- <code title="post /payments">client.payments.<a href="./src/resources/payments.ts">create</a>({ ...params }) -> Payment</code>
+- <code title="get /payments/{id}">client.payments.<a href="./src/resources/payments.ts">retrieve</a>(id, { ...params }) -> Payment</code>
+- <code title="get /payments">client.payments.<a href="./src/resources/payments.ts">list</a>({ ...params }) -> PaymentsCursorPage</code>
+- <code title="get /payments/{id}/fees">client.payments.<a href="./src/resources/payments.ts">listFees</a>(id, { ...params }) -> PaymentListFeesResponse</code>
 - <code title="post /payments/{id}/refund">client.payments.<a href="./src/resources/payments.ts">refund</a>(id, { ...params }) -> Payment</code>
-- <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id) -> Payment</code>
-- <code title="post /payments/{id}/void">client.payments.<a href="./src/resources/payments.ts">void</a>(id) -> Payment</code>
+- <code title="post /payments/{id}/retry">client.payments.<a href="./src/resources/payments.ts">retry</a>(id, { ...params }) -> Payment</code>
+- <code title="post /payments/{id}/void">client.payments.<a href="./src/resources/payments.ts">void</a>(id, { ...params }) -> Payment</code>
 
 # SupportChannels
 
@@ -603,13 +602,15 @@ Types:
 
 - <code><a href="./src/resources/disputes.ts">Dispute</a></code>
 - <code><a href="./src/resources/disputes.ts">DisputeStatuses</a></code>
+- <code><a href="./src/resources/disputes.ts">DisputeSubmitEvidenceResponse</a></code>
+- <code><a href="./src/resources/disputes.ts">DisputeUpdateEvidenceResponse</a></code>
 
 Methods:
 
 - <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id, { ...params }) -> Dispute</code>
 - <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputesCursorPage</code>
-- <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> Dispute</code>
-- <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> Dispute</code>
+- <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> DisputeSubmitEvidenceResponse</code>
+- <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> DisputeUpdateEvidenceResponse</code>
 
 # Refunds
 
@@ -624,7 +625,7 @@ Types:
 
 Methods:
 
-- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id) -> RefundRetrieveResponse</code>
+- <code title="get /refunds/{id}">client.refunds.<a href="./src/resources/refunds.ts">retrieve</a>(id, { ...params }) -> RefundRetrieveResponse</code>
 - <code title="get /refunds">client.refunds.<a href="./src/resources/refunds.ts">list</a>({ ...params }) -> RefundListResponsesCursorPage</code>
 
 # Withdrawals

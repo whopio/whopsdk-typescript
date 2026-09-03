@@ -1,43 +1,54 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PaymentsAPI from './payments';
-import * as Shared from './shared';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
+import { buildHeaders } from '../internal/headers';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
+/**
+ * A Refund is one reversal of a payment, full or partial. Refunds are issued with `POST /payments/{id}/refund`; this resource is the record of each one — how much moved, through which provider, and where it stands (`pending`, `succeeded`, `failed`).
+ *
+ * List a payment's refunds with `?payment_id=`, or every refund an account issued with `?account_id=`. `amount` is stated in the payment's settlement currency so it nets against the payment's `total`; `original_amount` is what the processor moved.
+ */
 export class Refunds extends APIResource {
   /**
-   * Retrieves the details of an existing refund.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
-   * - `plan:basic:read`
-   * - `access_pass:basic:read`
-   * - `member:email:read`
-   * - `member:basic:read`
-   * - `member:phone:read`
+   * Returns one refund.
    */
-  retrieve(id: string, options?: RequestOptions): APIPromise<RefundRetrieveResponse> {
-    return this._client.get(path`/refunds/${id}`, options);
+  retrieve(
+    id: string,
+    params: RefundRetrieveParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<RefundRetrieveResponse> {
+    const { 'Api-Version-Date': apiVersionDate } = params ?? {};
+    return this._client.get(path`/refunds/${id}`, {
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 
   /**
-   * Returns a paginated list of refunds, with optional filtering by payment,
-   * company, user, and creation date.
-   *
-   * Required permissions:
-   *
-   * - `payment:basic:read`
+   * Lists refunds, newest first. Without filters this is every refund the caller can
+   * read; narrow it to one payment with `payment_id`, one account with `account_id`,
+   * or one buyer with `user_id`.
    */
   list(
-    query: RefundListParams | null | undefined = {},
+    params: RefundListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<RefundListResponsesCursorPage, RefundListResponse> {
-    return this._client.getAPIList('/refunds', CursorPage<RefundListResponse>, { query, ...options });
+    const { 'Api-Version-Date': apiVersionDate, ...query } = params ?? {};
+    return this._client.getAPIList('/refunds', CursorPage<RefundListResponse>, {
+      query,
+      ...options,
+      headers: buildHeaders([
+        { ...(apiVersionDate != null ? { 'Api-Version-Date': apiVersionDate } : undefined) },
+        options?.headers,
+      ]),
+    });
   }
 }
 
@@ -84,410 +95,406 @@ export type RefundReferenceType =
  */
 export type RefundStatus = 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
 
-/**
- * A refund represents a full or partial reversal of a payment, including the
- * amount, status, and payment provider.
- */
 export interface RefundRetrieveResponse {
   /**
-   * The unique identifier for the refund.
+   * Refund ID, prefixed `rf_`.
    */
   id: string;
 
   /**
-   * The refunded amount as a decimal in the specified currency, such as 10.43 for
-   * $10.43 USD.
+   * The account that issued the refund, prefixed `biz_`.
    */
-  amount: number;
+  account_id: string | null;
 
   /**
-   * The datetime the refund was created.
+   * The refunded amount as it settled, in the payment's settlement currency, so
+   * pages of refunds net against the payment's `refunded_amount`. Converted at the
+   * rate in force when the refund was issued, not the payment's original rate. Null
+   * only when no exchange rate is recorded for a legacy multi-currency payment.
+   */
+  amount: RefundRetrieveResponse.Amount | null;
+
+  /**
+   * When the refund was requested, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The three-letter ISO currency code for the refunded amount.
+   * The provider's own explanation of the failure, or null.
    */
-  currency: Shared.Currency;
+  failure_message: string | null;
 
   /**
-   * The original payment that this refund was issued against. Null if the payment is
-   * no longer available.
+   * Why the refund failed, normalized across providers. Null unless the refund
+   * failed or was canceled.
    */
-  payment: RefundRetrieveResponse.Payment | null;
+  failure_reason:
+    | 'bank_declined'
+    | 'expired_or_canceled_card'
+    | 'lost_or_stolen_card'
+    | 'insufficient_funds'
+    | 'charge_disputed'
+    | 'not_refundable'
+    | 'merchant_request'
+    | 'unknown'
+    | null;
 
   /**
-   * The payment provider that processed the refund.
+   * The refunded amount in the currency the processor moved.
    */
-  provider: PaymentProvider;
+  original_amount: RefundRetrieveResponse.OriginalAmount;
 
   /**
-   * The timestamp when the refund was created in the payment provider's system. Null
-   * if not available from the provider.
+   * The payment this refund reverses, prefixed `pay_`.
+   */
+  payment_id: string;
+
+  /**
+   * The payment provider that processed the refund, such as `paypal` or `coinbase`.
+   */
+  provider: string;
+
+  /**
+   * When the provider created the refund, as an ISO 8601 timestamp.
    */
   provider_created_at: string | null;
 
   /**
-   * The status of the refund reference.
+   * Why the refund was issued, when recorded.
    */
-  reference_status: RefundReferenceStatus | null;
+  reason: 'duplicate' | 'fraudulent' | 'requested_by_customer' | 'expired_uncaptured_charge' | null;
 
   /**
-   * The type of refund reference that was made available by the payment provider.
+   * Whether a banking-network tracking reference is available for this refund.
    */
-  reference_type: RefundReferenceType | null;
+  reference_status: 'available' | 'pending' | 'unavailable' | null;
 
   /**
-   * The tracking reference value from the payment processor, used to trace the
-   * refund through banking networks. Null if no reference was provided.
+   * The kind of tracking reference, such as an acquirer reference number.
+   */
+  reference_type:
+    | 'acquirer_reference_number'
+    | 'retrieval_reference_number'
+    | 'system_trace_audit_number'
+    | null;
+
+  /**
+   * The tracking reference the buyer's bank can trace the refund by.
    */
   reference_value: string | null;
 
   /**
-   * The current processing status of the refund, such as pending, succeeded, or
-   * failed.
+   * Where the refund stands with the processor: `pending`, `requires_action`,
+   * `succeeded`, `failed`, or `canceled`.
    */
-  status: RefundStatus;
+  status: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+
+  /**
+   * When the refund last changed, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * True when the card network initiated the refund through Rapid Dispute
+   * Resolution.
+   */
+  visa_rdr: boolean;
 }
 
 export namespace RefundRetrieveResponse {
   /**
-   * The original payment that this refund was issued against. Null if the payment is
-   * no longer available.
+   * The refunded amount as it settled, in the payment's settlement currency, so
+   * pages of refunds net against the payment's `refunded_amount`. Converted at the
+   * rate in force when the refund was issued, not the payment's original rate. Null
+   * only when no exchange rate is recorded for a legacy multi-currency payment.
    */
-  export interface Payment {
+  export interface Amount {
     /**
-     * The unique identifier for the payment.
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
      */
-    id: string;
+    amount: string;
 
     /**
-     * The reason why a specific payment was billed
+     * Three-letter ISO 4217 currency code, lowercase.
      */
-    billing_reason: PaymentsAPI.BillingReasons | null;
+    currency: string;
 
     /**
-     * Possible card brands that a payment token can have
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
      */
-    card_brand: PaymentsAPI.CardBrands | null;
+    decimals: number;
 
     /**
-     * The last four digits of the card used to make this payment. Null if the payment
-     * was not made with a card.
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
      */
-    card_last4: string | null;
-
-    /**
-     * The datetime the payment was created.
-     */
-    created_at: string;
-
-    /**
-     * The three-letter ISO currency code for this payment (e.g., 'usd', 'eur').
-     */
-    currency: Shared.Currency;
-
-    /**
-     * When an alert came in that this transaction will be disputed
-     */
-    dispute_alerted_at: string | null;
-
-    /**
-     * The member attached to this payment.
-     */
-    member: Payment.Member | null;
-
-    /**
-     * The membership attached to this payment.
-     */
-    membership: Payment.Membership | null;
-
-    /**
-     * The custom metadata stored on this payment. This will be copied over to the
-     * checkout configuration for which this payment was made
-     */
-    metadata: { [key: string]: unknown } | null;
-
-    /**
-     * The time at which this payment was successfully collected. Null if the payment
-     * has not yet succeeded. As a Unix timestamp.
-     */
-    paid_at: string | null;
-
-    /**
-     * The different types of payment methods that can be used.
-     */
-    payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
-
-    /**
-     * The plan attached to this payment.
-     */
-    plan: Payment.Plan | null;
-
-    /**
-     * The product this payment was made for
-     */
-    product: Payment.Product | null;
-
-    /**
-     * The subtotal to show to the creator (excluding buyer fees).
-     */
-    subtotal: number | null;
-
-    /**
-     * The calculated amount of the sales/VAT tax (if applicable).
-     */
-    tax_amount: number | null;
-
-    /**
-     * The type of tax inclusivity applied to the receipt, for determining whether the
-     * tax is included in the final price, or paid on top.
-     */
-    tax_behavior: PaymentsAPI.ReceiptTaxBehavior | null;
-
-    /**
-     * The amount of tax that has been refunded (if applicable).
-     */
-    tax_refunded_amount: number | null;
-
-    /**
-     * The total to show to the creator (excluding buyer fees).
-     */
-    total: number | null;
-
-    /**
-     * The total in USD to show to the creator (excluding buyer fees).
-     */
-    usd_total: number | null;
-
-    /**
-     * The user that made this payment.
-     */
-    user: Payment.User | null;
+    display_decimals: number;
   }
 
-  export namespace Payment {
+  /**
+   * The refunded amount in the currency the processor moved.
+   */
+  export interface OriginalAmount {
     /**
-     * The member attached to this payment.
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
      */
-    export interface Member {
-      /**
-       * The unique identifier for the company member.
-       */
-      id: string;
-
-      /**
-       * The phone number for the member, if available.
-       */
-      phone: string | null;
-    }
+    amount: string;
 
     /**
-     * The membership attached to this payment.
+     * Three-letter ISO 4217 currency code, lowercase.
      */
-    export interface Membership {
-      /**
-       * The unique identifier for the membership.
-       */
-      id: string;
-
-      /**
-       * The state of the membership.
-       */
-      status: Shared.MembershipStatus;
-    }
+    currency: string;
 
     /**
-     * The plan attached to this payment.
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
      */
-    export interface Plan {
-      /**
-       * The unique identifier for the plan.
-       */
-      id: string;
-
-      /**
-       * Custom key-value pairs stored on the plan. Included in webhook payloads for
-       * payment and membership events. Max 50 keys, 100 chars per key, 500 chars per
-       * string value. The reserved keys `custom_cta` and `custom_cta_url`, when set,
-       * override the product's checkout call to action for this plan.
-       */
-      metadata: { [key: string]: unknown } | null;
-    }
+    decimals: number;
 
     /**
-     * The product this payment was made for
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
      */
-    export interface Product {
-      /**
-       * The unique identifier for the product.
-       */
-      id: string;
-
-      /**
-       * Custom key-value pairs stored on the product and included in payment and
-       * membership webhook payloads. Max 50 keys, 100 characters per key, 500 characters
-       * per string value.
-       */
-      metadata: { [key: string]: unknown } | null;
-    }
-
-    /**
-     * The user that made this payment.
-     */
-    export interface User {
-      /**
-       * The unique identifier for the user.
-       */
-      id: string;
-
-      /**
-       * The user's email address. Requires the member:email:read permission to access.
-       * Null if not authorized.
-       */
-      email: string | null;
-
-      /**
-       * The user's display name shown on their public profile.
-       */
-      name: string | null;
-
-      /**
-       * The user's unique username shown on their public profile.
-       */
-      username: string;
-    }
+    display_decimals: number;
   }
 }
 
-/**
- * A refund represents a full or partial reversal of a payment, including the
- * amount, status, and payment provider.
- */
 export interface RefundListResponse {
   /**
-   * The unique identifier for the refund.
+   * Refund ID, prefixed `rf_`.
    */
   id: string;
 
   /**
-   * The refunded amount as a decimal in the specified currency, such as 10.43 for
-   * $10.43 USD.
+   * The account that issued the refund, prefixed `biz_`.
    */
-  amount: number;
+  account_id: string | null;
 
   /**
-   * The datetime the refund was created.
+   * The refunded amount as it settled, in the payment's settlement currency, so
+   * pages of refunds net against the payment's `refunded_amount`. Converted at the
+   * rate in force when the refund was issued, not the payment's original rate. Null
+   * only when no exchange rate is recorded for a legacy multi-currency payment.
+   */
+  amount: RefundListResponse.Amount | null;
+
+  /**
+   * When the refund was requested, as an ISO 8601 timestamp.
    */
   created_at: string;
 
   /**
-   * The three-letter ISO currency code for the refunded amount.
+   * The provider's own explanation of the failure, or null.
    */
-  currency: Shared.Currency;
+  failure_message: string | null;
 
   /**
-   * The original payment that this refund was issued against. Null if the payment is
-   * no longer available.
+   * Why the refund failed, normalized across providers. Null unless the refund
+   * failed or was canceled.
    */
-  payment: RefundListResponse.Payment | null;
+  failure_reason:
+    | 'bank_declined'
+    | 'expired_or_canceled_card'
+    | 'lost_or_stolen_card'
+    | 'insufficient_funds'
+    | 'charge_disputed'
+    | 'not_refundable'
+    | 'merchant_request'
+    | 'unknown'
+    | null;
 
   /**
-   * The payment provider that processed the refund.
+   * The refunded amount in the currency the processor moved.
    */
-  provider: PaymentProvider;
+  original_amount: RefundListResponse.OriginalAmount;
 
   /**
-   * The timestamp when the refund was created in the payment provider's system. Null
-   * if not available from the provider.
+   * The payment this refund reverses, prefixed `pay_`.
+   */
+  payment_id: string;
+
+  /**
+   * The payment provider that processed the refund, such as `paypal` or `coinbase`.
+   */
+  provider: string;
+
+  /**
+   * When the provider created the refund, as an ISO 8601 timestamp.
    */
   provider_created_at: string | null;
 
   /**
-   * The status of the refund reference.
+   * Why the refund was issued, when recorded.
    */
-  reference_status: RefundReferenceStatus | null;
+  reason: 'duplicate' | 'fraudulent' | 'requested_by_customer' | 'expired_uncaptured_charge' | null;
 
   /**
-   * The type of refund reference that was made available by the payment provider.
+   * Whether a banking-network tracking reference is available for this refund.
    */
-  reference_type: RefundReferenceType | null;
+  reference_status: 'available' | 'pending' | 'unavailable' | null;
 
   /**
-   * The tracking reference value from the payment processor, used to trace the
-   * refund through banking networks. Null if no reference was provided.
+   * The kind of tracking reference, such as an acquirer reference number.
+   */
+  reference_type:
+    | 'acquirer_reference_number'
+    | 'retrieval_reference_number'
+    | 'system_trace_audit_number'
+    | null;
+
+  /**
+   * The tracking reference the buyer's bank can trace the refund by.
    */
   reference_value: string | null;
 
   /**
-   * The current processing status of the refund, such as pending, succeeded, or
-   * failed.
+   * Where the refund stands with the processor: `pending`, `requires_action`,
+   * `succeeded`, `failed`, or `canceled`.
    */
-  status: RefundStatus;
+  status: 'pending' | 'requires_action' | 'succeeded' | 'failed' | 'canceled';
+
+  /**
+   * When the refund last changed, as an ISO 8601 timestamp.
+   */
+  updated_at: string;
+
+  /**
+   * True when the card network initiated the refund through Rapid Dispute
+   * Resolution.
+   */
+  visa_rdr: boolean;
 }
 
 export namespace RefundListResponse {
   /**
-   * The original payment that this refund was issued against. Null if the payment is
-   * no longer available.
+   * The refunded amount as it settled, in the payment's settlement currency, so
+   * pages of refunds net against the payment's `refunded_amount`. Converted at the
+   * rate in force when the refund was issued, not the payment's original rate. Null
+   * only when no exchange rate is recorded for a legacy multi-currency payment.
    */
-  export interface Payment {
+  export interface Amount {
     /**
-     * The unique identifier for the payment.
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
      */
-    id: string;
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
   }
+
+  /**
+   * The refunded amount in the currency the processor moved.
+   */
+  export interface OriginalAmount {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
+  }
+}
+
+export interface RefundRetrieveParams {
+  /**
+   * Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export interface RefundListParams extends CursorPageParams {
   /**
-   * Returns the elements in the list that come before the specified cursor.
+   * Query param: Only refunds issued by this account, prefixed `biz_`.
+   */
+  account_id?: string;
+
+  /**
+   * Query param: A cursor; returns refunds before this position.
    */
   before?: string;
 
   /**
-   * Filter refunds to those belonging to this company. Mutually exclusive with
-   * payment_id and user_id: provide exactly one.
-   */
-  company_id?: string;
-
-  /**
-   * Only return refunds created after this timestamp.
+   * Query param: Only refunds requested after this ISO 8601 timestamp.
    */
   created_after?: string;
 
   /**
-   * Only return refunds created before this timestamp.
+   * Query param: Only refunds requested before this ISO 8601 timestamp.
    */
   created_before?: string;
 
   /**
-   * The sort direction for ordering results, either ascending or descending.
+   * Query param: The sort direction.
    */
-  direction?: Shared.Direction;
+  direction?: 'asc' | 'desc';
 
   /**
-   * Returns the first _n_ elements from the list.
+   * Query param: The number of refunds to return.
    */
   first?: number;
 
   /**
-   * Returns the last _n_ elements from the list.
+   * Query param: The number of refunds to return from the end of the range.
    */
   last?: number;
 
   /**
-   * Filter refunds to those associated with this specific payment. Mutually
-   * exclusive with company_id and user_id: provide exactly one.
+   * Query param: The field to sort by.
+   */
+  order?: 'created_at';
+
+  /**
+   * Query param: Only refunds of this payment, prefixed `pay_`.
    */
   payment_id?: string;
 
   /**
-   * Filter refunds to those associated with this specific user. Mutually exclusive
-   * with payment_id and company_id: provide exactly one. Requires a credential
-   * belonging to that user; any other credential receives 'You are not authorized'.
+   * Query param: Only refunds to this buyer, prefixed `user_`.
    */
   user_id?: string;
+
+  /**
+   * Header param: Pins the request to a dated API version.
+   */
+  'Api-Version-Date'?: string;
 }
 
 export declare namespace Refunds {
@@ -499,6 +506,7 @@ export declare namespace Refunds {
     type RefundRetrieveResponse as RefundRetrieveResponse,
     type RefundListResponse as RefundListResponse,
     type RefundListResponsesCursorPage as RefundListResponsesCursorPage,
+    type RefundRetrieveParams as RefundRetrieveParams,
     type RefundListParams as RefundListParams,
   };
 }

@@ -26,7 +26,7 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02' },
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -53,7 +53,7 @@ describe('resource memberships', () => {
         {
           cancel_at_period_end: true,
           metadata: { seat: '42' },
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -91,7 +91,7 @@ describe('resource memberships', () => {
           product_id: 'product_id',
           status: 'active',
           user_id: 'user_id',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -136,7 +136,7 @@ describe('resource memberships', () => {
         {
           cancel_at_period_end: true,
           reason: 'chargeback risk',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -164,7 +164,7 @@ describe('resource memberships', () => {
         'id',
         {
           until: '2026-01-01T12:00:00.000Z',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -190,7 +190,7 @@ describe('resource memberships', () => {
     await expect(
       client.memberships.resume(
         'id',
-        { 'Api-Version-Date': '2026-09-02', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

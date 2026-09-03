@@ -25,10 +25,10 @@ For example:
 
 \`\`\`
 async function run(client) {
-  const page = await client.payments.list({ company_id: 'biz_xxxxxxxxxxxxxx' });
-  const paymentListResponse = page.data[0]
+  const page = await client.payments.list();
+  const payment = page.data[0]
 
-  console.log(paymentListResponse.id);
+  console.log(payment.id);
 }
 \`\`\`
 

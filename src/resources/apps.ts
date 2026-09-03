@@ -220,6 +220,8 @@ export interface AppListResponse {
    */
   origin: string | null;
 
+  previous_hosted_urls: Array<string>;
+
   /**
    * Claimed subdomain route where hosted web builds are served (`myapp` for
    * myapp.whop.site), or `null` if no route is claimed.

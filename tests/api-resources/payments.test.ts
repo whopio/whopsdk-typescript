@@ -11,9 +11,8 @@ describe('resource payments', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
     const responsePromise = client.payments.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      confirmation_token: 'confirmation_token',
-      plan: { currency: 'usd' },
+      account_id: 'biz_xxxxxxxxxxxxxx',
+      plan_id: 'plan_xxxxxxxxxxxxxx',
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -27,50 +26,24 @@ describe('resource payments', () => {
   // Mock server tests are disabled
   test.skip('create: required and optional params', async () => {
     const response = await client.payments.create({
-      company_id: 'biz_xxxxxxxxxxxxxx',
-      confirmation_token: 'confirmation_token',
-      plan: {
-        currency: 'usd',
-        application_fee_amount: 6.9,
-        billing_period: 42,
-        description: 'description',
-        expiration_days: 42,
-        force_create_new_plan: true,
-        initial_price: 6.9,
-        internal_notes: 'internal_notes',
-        plan_type: 'renewal',
-        product: {
-          external_identifier: 'external_identifier',
-          title: 'title',
-          collect_shipping_address: true,
-          custom_statement_descriptor: 'custom_statement_descriptor',
-          description: 'description',
-          global_affiliate_percentage: 6.9,
-          global_affiliate_status: 'enabled',
-          headline: 'headline',
-          product_tax_code_id: 'ptc_xxxxxxxxxxxxxx',
-          redirect_purchase_url: 'redirect_purchase_url',
-          route: 'route',
-          visibility: 'visible',
-        },
-        product_id: 'prod_xxxxxxxxxxxxx',
-        renewal_price: 6.9,
-        title: 'title',
-        trial_period_days: 42,
-        visibility: 'visible',
-      },
-      capture: true,
-      email: 'buyer@example.com',
-      metadata: { foo: 'bar' },
-      payment_method_id: 'pmt_xxxxxxxxxxxxxx',
-      promo_code_id: 'promo_xxxxxxxxxxxx',
-      return_url: 'https://example.com/path',
+      account_id: 'biz_xxxxxxxxxxxxxx',
+      plan_id: 'plan_xxxxxxxxxxxxxx',
+      capture: false,
+      confirmation_token: 'ctok_xxxxxxxxxxxxxx',
+      email: 'dana@shinetime.example',
+      member_id: 'mber_xxxxxxxxxxxxxx',
+      metadata: { order_ref: 'SHINE-4417' },
+      payment_method_id: 'payt_xxxxxxxxxxxxxx',
+      promo_code_id: 'promo_xxxxxxxxxxxxxx',
+      return_url: 'https://shinetime.example/checkout/done',
+      'Api-Version-Date': '2026-09-02-1',
+      'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
 
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.payments.retrieve('pay_xxxxxxxxxxxxxx');
+    const responsePromise = client.payments.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,6 +51,18 @@ describe('resource payments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-09-02-1' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 
   // Mock server tests are disabled
@@ -98,26 +83,25 @@ describe('resource payments', () => {
     await expect(
       client.payments.list(
         {
+          account_id: 'account_id',
           after: 'after',
           before: 'before',
-          billing_reasons: ['subscription_create'],
-          checkout_configuration_ids: ['string'],
-          company_id: 'biz_xxxxxxxxxxxxxx',
-          created_after: '2023-12-01T05:00:00.401Z',
-          created_before: '2023-12-01T05:00:00.401Z',
-          currencies: ['usd'],
+          billing_reason: 'subscription_create',
+          created_after: '2019-12-27T18:11:19.117Z',
+          created_before: '2019-12-27T18:11:19.117Z',
+          currency: 'currency',
           direction: 'asc',
-          first: 42,
-          include_free: true,
-          last: 42,
-          order: 'final_amount',
-          plan_ids: ['string'],
-          product_ids: ['string'],
+          first: 0,
+          last: 0,
+          member_id: 'member_id',
+          membership_id: 'membership_id',
+          order: 'created_at',
+          plan_id: 'plan_id',
+          product_id: 'product_id',
           query: 'query',
-          statuses: ['draft'],
-          substatuses: ['succeeded'],
-          updated_after: '2023-12-01T05:00:00.401Z',
-          updated_before: '2023-12-01T05:00:00.401Z',
+          status: 'open',
+          user_id: 'user_id',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -126,7 +110,7 @@ describe('resource payments', () => {
 
   // Mock server tests are disabled
   test.skip('listFees', async () => {
-    const responsePromise = client.payments.listFees('pay_xxxxxxxxxxxxxx');
+    const responsePromise = client.payments.listFees('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -141,13 +125,8 @@ describe('resource payments', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.payments.listFees(
-        'pay_xxxxxxxxxxxxxx',
-        {
-          after: 'after',
-          before: 'before',
-          first: 42,
-          last: 42,
-        },
+        'id',
+        { 'Api-Version-Date': '2026-09-02-1' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -155,7 +134,7 @@ describe('resource payments', () => {
 
   // Mock server tests are disabled
   test.skip('refund', async () => {
-    const responsePromise = client.payments.refund('pay_xxxxxxxxxxxxxx');
+    const responsePromise = client.payments.refund('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -170,8 +149,12 @@ describe('resource payments', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.payments.refund(
-        'pay_xxxxxxxxxxxxxx',
-        { partial_amount: 6.9 },
+        'id',
+        {
+          partial_amount: 49,
+          'Api-Version-Date': '2026-09-02-1',
+          'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -179,7 +162,7 @@ describe('resource payments', () => {
 
   // Mock server tests are disabled
   test.skip('retry', async () => {
-    const responsePromise = client.payments.retry('pay_xxxxxxxxxxxxxx');
+    const responsePromise = client.payments.retry('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -190,8 +173,20 @@ describe('resource payments', () => {
   });
 
   // Mock server tests are disabled
+  test.skip('retry: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.retry(
+        'id',
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
   test.skip('void', async () => {
-    const responsePromise = client.payments.void('pay_xxxxxxxxxxxxxx');
+    const responsePromise = client.payments.void('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -199,5 +194,17 @@ describe('resource payments', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('void: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.payments.void(
+        'id',
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

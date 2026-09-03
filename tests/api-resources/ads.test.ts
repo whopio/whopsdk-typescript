@@ -31,7 +31,7 @@ describe('resource ads', () => {
           stats_from: 'stats_from',
           stats_to: 'stats_to',
           time_zone: 'time_zone',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -75,7 +75,7 @@ describe('resource ads', () => {
           stats_to: 'stats_to',
           status: 'active',
           time_zone: 'time_zone',
-          'Api-Version-Date': '2026-09-02',
+          'Api-Version-Date': '2026-09-02-1',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -100,7 +100,7 @@ describe('resource ads', () => {
     await expect(
       client.ads.pause(
         'id',
-        { 'Api-Version-Date': '2026-09-02', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -124,7 +124,7 @@ describe('resource ads', () => {
     await expect(
       client.ads.unpause(
         'id',
-        { 'Api-Version-Date': '2026-09-02', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-02-1', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
