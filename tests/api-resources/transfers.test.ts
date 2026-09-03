@@ -28,6 +28,8 @@ describe('resource transfers', () => {
       currency: 'usd',
       destination_id: 'user_xxxxxxxxxxxxxx',
       expires_at: '2026-01-01T12:00:00.000Z',
+      feed_id: 'feed_shineclub',
+      feed_type: 'chat_feed',
       idempotence_key: 'shine-supplies-restock-118',
       metadata: { order_id: 'bar' },
       notes: 'Refund for the rescheduled interior detail',

@@ -695,6 +695,18 @@ export interface TransferCreateParams {
   expires_at?: string | null;
 
   /**
+   * Body param: Ledger transfers only. The feed the transfer was initiated from.
+   * Given with `feed_type`, the payment receipt posts into that feed instead of a
+   * direct message.
+   */
+  feed_id?: string | null;
+
+  /**
+   * Body param: Ledger transfers only. The type of the feed named by `feed_id`.
+   */
+  feed_type?: 'dms_feed' | 'chat_feed' | 'forum_feed' | 'livestream_feed' | 'universal_post' | 'user' | null;
+
+  /**
    * Body param: Ledger transfers and wallet sends. A unique key that makes retries
    * safe. Retrying with the same key returns the original transfer, or attaches to
    * the original wallet send, instead of moving money twice.
