@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as PaymentsAPI from './payments';
 import { APIPromise } from '../core/api-promise';
 import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { buildHeaders } from '../internal/headers';
@@ -767,16 +766,14 @@ export namespace CheckoutConfigurationCreateParams {
    */
   export interface PaymentMethodConfiguration {
     /**
-     * Payment method types explicitly disabled for checkout — the `type` values from
-     * the payment method types catalogue.
+     * Payment methods explicitly disabled for checkout.
      */
-    disabled?: Array<PaymentsAPI.PaymentMethodTypes>;
+    disabled?: Array<string>;
 
     /**
-     * Payment method types explicitly enabled for checkout — the `type` values from
-     * the payment method types catalogue.
+     * Payment methods explicitly enabled for checkout.
      */
-    enabled?: Array<PaymentsAPI.PaymentMethodTypes>;
+    enabled?: Array<string>;
 
     /**
      * Whether platform default payment methods are included.
@@ -897,16 +894,14 @@ export namespace CheckoutConfigurationCreateParams {
      */
     export interface PaymentMethodConfiguration {
       /**
-       * Payment method types explicitly disabled for this plan — the `type` values from
-       * the payment method types catalogue.
+       * Payment methods explicitly disabled for this plan.
        */
-      disabled?: Array<PaymentsAPI.PaymentMethodTypes>;
+      disabled?: Array<string>;
 
       /**
-       * Payment method types explicitly enabled for this plan — the `type` values from
-       * the payment method types catalogue.
+       * Payment methods explicitly enabled for this plan.
        */
-      enabled?: Array<PaymentsAPI.PaymentMethodTypes>;
+      enabled?: Array<string>;
 
       /**
        * Whether platform default payment methods are included.
