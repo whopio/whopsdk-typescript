@@ -416,7 +416,8 @@ export interface PlanDeleteResponse {
 export interface PlanCreateParams {
   /**
    * Body param: The unique identifier of the account to create this plan for.
-   * Defaults to the caller's account.
+   * Required when authenticating as a user; an account API key supplies its own
+   * account.
    */
   account_id?: string;
 
