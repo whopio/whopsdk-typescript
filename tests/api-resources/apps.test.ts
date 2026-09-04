@@ -34,7 +34,7 @@ describe('resource apps', () => {
       },
       redirect_uris: ['https://booking.shinetime.example/oauth/callback'],
       route: 'shine-time-booking-site',
-      'Api-Version-Date': '2026-09-02-2',
+      'Api-Version-Date': '2026-09-04',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -55,11 +55,7 @@ describe('resource apps', () => {
   test.skip('retrieve: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.apps.retrieve(
-        'id',
-        { 'Api-Version-Date': '2026-09-02-2' },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.apps.retrieve('id', { 'Api-Version-Date': '2026-09-04' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Whop.NotFoundError);
   });
 
@@ -106,7 +102,7 @@ describe('resource apps', () => {
           verified: true,
           verified_apps_only: true,
           view_type: 'hub',
-          'Api-Version-Date': '2026-09-02-2',
+          'Api-Version-Date': '2026-09-04',
         },
         { path: '/_stainless_unknown_path' },
       ),

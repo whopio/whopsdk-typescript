@@ -35,7 +35,7 @@ describe('resource transfers', () => {
       notes: 'Refund for the rescheduled interior detail',
       redeemable_count: 3,
       type: 'wallet_send',
-      'Api-Version-Date': '2026-09-02-2',
+      'Api-Version-Date': '2026-09-04',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -58,7 +58,7 @@ describe('resource transfers', () => {
     await expect(
       client.transfers.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02-2' },
+        { 'Api-Version-Date': '2026-09-04' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -92,7 +92,7 @@ describe('resource transfers', () => {
           last: 50,
           order: 'created_at',
           origin_id: 'origin_id',
-          'Api-Version-Date': '2026-09-02-2',
+          'Api-Version-Date': '2026-09-04',
         },
         { path: '/_stainless_unknown_path' },
       ),

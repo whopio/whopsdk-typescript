@@ -26,7 +26,7 @@ describe('resource verifications', () => {
     await expect(
       client.verifications.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-02-2' },
+        { 'Api-Version-Date': '2026-09-04' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -50,7 +50,7 @@ describe('resource verifications', () => {
       account_id: 'account_id',
       direction: 'asc',
       order: 'updated_at',
-      'Api-Version-Date': '2026-09-02-2',
+      'Api-Version-Date': '2026-09-04',
     });
   });
 });
