@@ -11697,6 +11697,8 @@ export namespace ResolutionCenterCaseCreatedWebhookEvent {
      */
     escalated: boolean;
 
+    line_items: Array<Data.LineItem>;
+
     /**
      * Who prevailed on the claim. `null` until the case closes. Read `refund` for
      * whether any money actually moved.
@@ -11801,6 +11803,42 @@ export namespace ResolutionCenterCaseCreatedWebhookEvent {
        * The customer's Whop username.
        */
       username: string | null;
+    }
+
+    /**
+     * Everything the disputed payment charged for, in purchase order. `product_id` and
+     * `plan_id` name the first of these; a cart's later items appear only here. A
+     * payment made before items were recorded lists the single item its plan implies.
+     * Empty when the payment is not linked to a plan.
+     */
+    export interface LineItem {
+      /**
+       * Line item ID, prefixed `li_`. Null when the payment predates item snapshots and
+       * the item is read from the payment's plan.
+       */
+      id: string | null;
+
+      /**
+       * The item's name as shown at checkout — the product title, else the plan title.
+       */
+      label: string | null;
+
+      /**
+       * The plan bought, prefixed `plan_`. Null when the plan has since been deleted.
+       */
+      plan_id: string | null;
+
+      /**
+       * The product the plan belongs to, prefixed `prod_`. On a payment that predates
+       * item snapshots this falls back to the plan's product, so it can be set where the
+       * case's own `product_id` is null. Null for a plan with no product.
+       */
+      product_id: string | null;
+
+      /**
+       * How many units were bought.
+       */
+      quantity: number;
     }
 
     /**
@@ -11920,6 +11958,8 @@ export namespace ResolutionCenterCaseDecidedWebhookEvent {
      */
     escalated: boolean;
 
+    line_items: Array<Data.LineItem>;
+
     /**
      * Who prevailed on the claim. `null` until the case closes. Read `refund` for
      * whether any money actually moved.
@@ -12024,6 +12064,42 @@ export namespace ResolutionCenterCaseDecidedWebhookEvent {
        * The customer's Whop username.
        */
       username: string | null;
+    }
+
+    /**
+     * Everything the disputed payment charged for, in purchase order. `product_id` and
+     * `plan_id` name the first of these; a cart's later items appear only here. A
+     * payment made before items were recorded lists the single item its plan implies.
+     * Empty when the payment is not linked to a plan.
+     */
+    export interface LineItem {
+      /**
+       * Line item ID, prefixed `li_`. Null when the payment predates item snapshots and
+       * the item is read from the payment's plan.
+       */
+      id: string | null;
+
+      /**
+       * The item's name as shown at checkout — the product title, else the plan title.
+       */
+      label: string | null;
+
+      /**
+       * The plan bought, prefixed `plan_`. Null when the plan has since been deleted.
+       */
+      plan_id: string | null;
+
+      /**
+       * The product the plan belongs to, prefixed `prod_`. On a payment that predates
+       * item snapshots this falls back to the plan's product, so it can be set where the
+       * case's own `product_id` is null. Null for a plan with no product.
+       */
+      product_id: string | null;
+
+      /**
+       * How many units were bought.
+       */
+      quantity: number;
     }
 
     /**
@@ -12143,6 +12219,8 @@ export namespace ResolutionCenterCaseUpdatedWebhookEvent {
      */
     escalated: boolean;
 
+    line_items: Array<Data.LineItem>;
+
     /**
      * Who prevailed on the claim. `null` until the case closes. Read `refund` for
      * whether any money actually moved.
@@ -12247,6 +12325,42 @@ export namespace ResolutionCenterCaseUpdatedWebhookEvent {
        * The customer's Whop username.
        */
       username: string | null;
+    }
+
+    /**
+     * Everything the disputed payment charged for, in purchase order. `product_id` and
+     * `plan_id` name the first of these; a cart's later items appear only here. A
+     * payment made before items were recorded lists the single item its plan implies.
+     * Empty when the payment is not linked to a plan.
+     */
+    export interface LineItem {
+      /**
+       * Line item ID, prefixed `li_`. Null when the payment predates item snapshots and
+       * the item is read from the payment's plan.
+       */
+      id: string | null;
+
+      /**
+       * The item's name as shown at checkout — the product title, else the plan title.
+       */
+      label: string | null;
+
+      /**
+       * The plan bought, prefixed `plan_`. Null when the plan has since been deleted.
+       */
+      plan_id: string | null;
+
+      /**
+       * The product the plan belongs to, prefixed `prod_`. On a payment that predates
+       * item snapshots this falls back to the plan's product, so it can be set where the
+       * case's own `product_id` is null. Null for a plan with no product.
+       */
+      product_id: string | null;
+
+      /**
+       * How many units were bought.
+       */
+      quantity: number;
     }
 
     /**
