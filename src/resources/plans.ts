@@ -468,7 +468,7 @@ export interface PlanCreateParams {
 
   /**
    * Body param: Initial amount charged in the plan's currency, e.g. 10.43 for
-   * $10.43.
+   * $10.43. A paid fiat plan charges at least 1.00 in its currency; use 0 for free.
    */
   initial_price?: number | null;
 
@@ -517,7 +517,7 @@ export interface PlanCreateParams {
 
   /**
    * Body param: The amount charged each billing period for recurring plans, in the
-   * plan's currency.
+   * plan's currency. A paid fiat plan charges at least 1.00 in its currency.
    */
   renewal_price?: number | null;
 
@@ -693,7 +693,7 @@ export interface PlanUpdateParams {
 
   /**
    * Body param: Initial amount charged in the plan's currency, e.g. 10.43 for
-   * $10.43.
+   * $10.43. A paid fiat plan charges at least 1.00 in its currency; use 0 for free.
    */
   initial_price?: number | null;
 
@@ -738,7 +738,7 @@ export interface PlanUpdateParams {
 
   /**
    * Body param: The amount charged each billing period for recurring plans, in the
-   * plan's currency.
+   * plan's currency. A paid fiat plan charges at least 1.00 in its currency.
    */
   renewal_price?: number | null;
 

@@ -113,7 +113,7 @@ export class AdCampaigns extends APIResource {
   }
 
   /**
-   * Resumes a paused ad campaign.
+   * Resumes a paused ad campaign. Requires an ads payment method on the account.
    *
    * @example
    * ```ts
