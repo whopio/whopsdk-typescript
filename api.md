@@ -284,19 +284,15 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/memberships.ts">CancelOptions</a></code>
-- <code><a href="./src/resources/memberships.ts">MembershipAddFreeDaysResponse</a></code>
-- <code><a href="./src/resources/memberships.ts">MembershipUncancelResponse</a></code>
 
 Methods:
 
 - <code title="get /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">retrieve</a>(id, { ...params }) -> Membership</code>
 - <code title="patch /memberships/{id}">client.memberships.<a href="./src/resources/memberships.ts">update</a>(id, { ...params }) -> Membership</code>
 - <code title="get /memberships">client.memberships.<a href="./src/resources/memberships.ts">list</a>({ ...params }) -> MembershipsCursorPage</code>
-- <code title="post /memberships/{id}/add_free_days">client.memberships.<a href="./src/resources/memberships.ts">addFreeDays</a>(id, { ...params }) -> MembershipAddFreeDaysResponse</code>
 - <code title="post /memberships/{id}/cancel">client.memberships.<a href="./src/resources/memberships.ts">cancel</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/pause">client.memberships.<a href="./src/resources/memberships.ts">pause</a>(id, { ...params }) -> Membership</code>
 - <code title="post /memberships/{id}/resume">client.memberships.<a href="./src/resources/memberships.ts">resume</a>(id, { ...params }) -> Membership</code>
-- <code title="post /memberships/{id}/uncancel">client.memberships.<a href="./src/resources/memberships.ts">uncancel</a>(id) -> MembershipUncancelResponse</code>
 
 # AuthorizedUsers
 
@@ -602,15 +598,11 @@ Types:
 
 - <code><a href="./src/resources/disputes.ts">Dispute</a></code>
 - <code><a href="./src/resources/disputes.ts">DisputeStatuses</a></code>
-- <code><a href="./src/resources/disputes.ts">DisputeSubmitEvidenceResponse</a></code>
-- <code><a href="./src/resources/disputes.ts">DisputeUpdateEvidenceResponse</a></code>
 
 Methods:
 
 - <code title="get /disputes/{id}">client.disputes.<a href="./src/resources/disputes.ts">retrieve</a>(id, { ...params }) -> Dispute</code>
 - <code title="get /disputes">client.disputes.<a href="./src/resources/disputes.ts">list</a>({ ...params }) -> DisputesCursorPage</code>
-- <code title="post /disputes/{id}/submit_evidence">client.disputes.<a href="./src/resources/disputes.ts">submitEvidence</a>(id) -> DisputeSubmitEvidenceResponse</code>
-- <code title="post /disputes/{id}/update_evidence">client.disputes.<a href="./src/resources/disputes.ts">updateEvidence</a>(id, { ...params }) -> DisputeUpdateEvidenceResponse</code>
 
 # Refunds
 

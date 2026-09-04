@@ -187,11 +187,8 @@ export {
   Disputes,
   type Dispute,
   type DisputeStatuses,
-  type DisputeSubmitEvidenceResponse,
-  type DisputeUpdateEvidenceResponse,
   type DisputeRetrieveParams,
   type DisputeListParams,
-  type DisputeUpdateEvidenceParams,
   type DisputesCursorPage,
 } from './disputes';
 export {
@@ -302,12 +299,9 @@ export {
 export {
   Memberships,
   type CancelOptions,
-  type MembershipAddFreeDaysResponse,
-  type MembershipUncancelResponse,
   type MembershipRetrieveParams,
   type MembershipUpdateParams,
   type MembershipListParams,
-  type MembershipAddFreeDaysParams,
   type MembershipCancelParams,
   type MembershipPauseParams,
   type MembershipResumeParams,

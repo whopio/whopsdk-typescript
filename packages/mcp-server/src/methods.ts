@@ -276,12 +276,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/memberships',
   },
   {
-    clientCallName: 'client.memberships.addFreeDays',
-    fullyQualifiedName: 'memberships.addFreeDays',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/add_free_days',
-  },
-  {
     clientCallName: 'client.memberships.cancel',
     fullyQualifiedName: 'memberships.cancel',
     httpMethod: 'post',
@@ -298,12 +292,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'memberships.resume',
     httpMethod: 'post',
     httpPath: '/memberships/{id}/resume',
-  },
-  {
-    clientCallName: 'client.memberships.uncancel',
-    fullyQualifiedName: 'memberships.uncancel',
-    httpMethod: 'post',
-    httpPath: '/memberships/{id}/uncancel',
   },
   {
     clientCallName: 'client.authorizedUsers.create',
@@ -802,18 +790,6 @@ export const sdkMethods: SdkMethod[] = [
     fullyQualifiedName: 'disputes.list',
     httpMethod: 'get',
     httpPath: '/disputes',
-  },
-  {
-    clientCallName: 'client.disputes.submitEvidence',
-    fullyQualifiedName: 'disputes.submitEvidence',
-    httpMethod: 'post',
-    httpPath: '/disputes/{id}/submit_evidence',
-  },
-  {
-    clientCallName: 'client.disputes.updateEvidence',
-    fullyQualifiedName: 'disputes.updateEvidence',
-    httpMethod: 'post',
-    httpPath: '/disputes/{id}/update_evidence',
   },
   {
     clientCallName: 'client.refunds.retrieve',

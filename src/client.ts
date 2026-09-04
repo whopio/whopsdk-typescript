@@ -195,9 +195,6 @@ import {
   DisputeListParams,
   DisputeRetrieveParams,
   DisputeStatuses,
-  DisputeSubmitEvidenceResponse,
-  DisputeUpdateEvidenceParams,
-  DisputeUpdateEvidenceResponse,
   Disputes,
   DisputesCursorPage,
 } from './resources/disputes';
@@ -308,14 +305,11 @@ import {
 } from './resources/members';
 import {
   CancelOptions,
-  MembershipAddFreeDaysParams,
-  MembershipAddFreeDaysResponse,
   MembershipCancelParams,
   MembershipListParams,
   MembershipPauseParams,
   MembershipResumeParams,
   MembershipRetrieveParams,
-  MembershipUncancelResponse,
   MembershipUpdateParams,
   Memberships,
 } from './resources/memberships';
@@ -1806,12 +1800,9 @@ export declare namespace Whop {
   export {
     Memberships as Memberships,
     type CancelOptions as CancelOptions,
-    type MembershipAddFreeDaysResponse as MembershipAddFreeDaysResponse,
-    type MembershipUncancelResponse as MembershipUncancelResponse,
     type MembershipRetrieveParams as MembershipRetrieveParams,
     type MembershipUpdateParams as MembershipUpdateParams,
     type MembershipListParams as MembershipListParams,
-    type MembershipAddFreeDaysParams as MembershipAddFreeDaysParams,
     type MembershipCancelParams as MembershipCancelParams,
     type MembershipPauseParams as MembershipPauseParams,
     type MembershipResumeParams as MembershipResumeParams,
@@ -2038,12 +2029,9 @@ export declare namespace Whop {
     Disputes as Disputes,
     type Dispute as Dispute,
     type DisputeStatuses as DisputeStatuses,
-    type DisputeSubmitEvidenceResponse as DisputeSubmitEvidenceResponse,
-    type DisputeUpdateEvidenceResponse as DisputeUpdateEvidenceResponse,
     type DisputesCursorPage as DisputesCursorPage,
     type DisputeRetrieveParams as DisputeRetrieveParams,
     type DisputeListParams as DisputeListParams,
-    type DisputeUpdateEvidenceParams as DisputeUpdateEvidenceParams,
   };
 
   export {
