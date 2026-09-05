@@ -76,6 +76,12 @@ export interface AIChat {
   id: string;
 
   /**
+   * The AI agent that handles this chat. Set when the chat is created and fixed for
+   * its lifetime.
+   */
+  agent_identifier: 'general' | 'support';
+
+  /**
    * The total number of tokens consumed across all messages in this conversation.
    */
   blended_token_usage: string;
@@ -147,6 +153,12 @@ export interface AIChatListResponse {
   id: string;
 
   /**
+   * The AI agent that handles this chat. Set when the chat is created and fixed for
+   * its lifetime.
+   */
+  agent_identifier: 'general' | 'support';
+
+  /**
    * The total number of tokens consumed across all messages in this conversation.
    */
   blended_token_usage: string;
@@ -214,6 +226,11 @@ export interface AIChatCreateParams {
   message_text: string;
 
   /**
+   * The AI agent that handles an AI chat.
+   */
+  agent_identifier?: 'general' | 'support' | null;
+
+  /**
    * The unique identifier of the account to set as context for the AI chat (e.g.,
    * "biz_XXXXX").
    */
@@ -273,6 +290,11 @@ export interface AIChatUpdateParams {
 }
 
 export interface AIChatListParams extends CursorPageParams {
+  /**
+   * Only return chats handled by this agent.
+   */
+  agent_identifier?: 'general' | 'support';
+
   /**
    * Returns the elements in the list that come before the specified cursor.
    */

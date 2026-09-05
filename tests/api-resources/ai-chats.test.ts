@@ -24,6 +24,7 @@ describe('resource aiChats', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.aiChats.create({
       message_text: 'message_text',
+      agent_identifier: 'general',
       current_account_id: 'current_account_id',
       message_attachments: [{ id: 'id' }],
       message_source: 'manual',
@@ -91,6 +92,7 @@ describe('resource aiChats', () => {
       client.aiChats.list(
         {
           after: 'after',
+          agent_identifier: 'general',
           before: 'before',
           first: 42,
           last: 42,
