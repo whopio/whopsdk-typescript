@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import * as AdCampaignsAPI from './ad-campaigns';
 import * as DisputesAPI from './disputes';
 import * as PaymentsAPI from './payments';
 import * as PayoutAccountsAPI from './payout-accounts';
@@ -284,6 +283,8 @@ export interface Webhook {
     | 'shipment.updated'
     | 'member.created'
     | 'ad_campaign.payment_failed'
+    | 'ad_campaign.updated'
+    | 'ad.updated'
     | 'chat.message.created'
     | 'chat.reaction.created'
     | 'payment.created'
@@ -400,6 +401,8 @@ export interface Webhook {
     | 'shipment.updated'
     | 'member.created'
     | 'ad_campaign.payment_failed'
+    | 'ad_campaign.updated'
+    | 'ad.updated'
     | 'chat.message.created'
     | 'chat.reaction.created'
     | 'payment.created'
@@ -514,6 +517,8 @@ export type WebhookEvent =
   | 'shipment.updated'
   | 'member.created'
   | 'ad_campaign.payment_failed'
+  | 'ad_campaign.updated'
+  | 'ad.updated'
   | 'chat.message.created'
   | 'chat.reaction.created'
   | 'payment.created'
@@ -651,6 +656,8 @@ export interface WebhookListResponse {
     | 'shipment.updated'
     | 'member.created'
     | 'ad_campaign.payment_failed'
+    | 'ad_campaign.updated'
+    | 'ad.updated'
     | 'chat.message.created'
     | 'chat.reaction.created'
     | 'payment.created'
@@ -4529,6 +4536,603 @@ export namespace AccountUpdatedWebhookEvent {
   }
 }
 
+export interface AdUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  data: AdUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'ad.updated';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
+}
+
+export namespace AdUpdatedWebhookEvent {
+  export interface Data {
+    /**
+     * Unique identifier for the ad, prefixed `ad_`.
+     */
+    id: string;
+
+    /**
+     * The ad campaign this ad belongs to.
+     */
+    ad_campaign: Data.AdCampaign;
+
+    /**
+     * The ad group this ad belongs to.
+     */
+    ad_group: Data.AdGroup;
+
+    /**
+     * The call-to-action button shown on the ad.
+     */
+    call_to_action:
+      | 'learn_more'
+      | 'shop_now'
+      | 'sign_up'
+      | 'subscribe'
+      | 'get_started'
+      | 'book_now'
+      | 'apply_now'
+      | 'contact_us'
+      | 'download'
+      | 'order_now'
+      | 'buy_now'
+      | 'get_quote'
+      | 'message_page'
+      | 'whatsapp_message'
+      | 'instagram_message'
+      | 'call_now'
+      | 'get_directions'
+      | 'send_updates'
+      | 'get_offer'
+      | 'watch_more'
+      | 'listen_now'
+      | 'play_game'
+      | 'open_link'
+      | 'no_button'
+      | 'get_offer_view'
+      | 'get_event_tickets'
+      | 'see_menu'
+      | 'request_time'
+      | 'event_rsvp'
+      | 'see_details'
+      | 'view_instagram_profile'
+      | null;
+
+    /**
+     * When the ad was created, as an ISO 8601 timestamp.
+     */
+    created_at: string;
+
+    creatives: Array<Data.Creative>;
+
+    /**
+     * Whether the ad is delivering right now, and if not, why. When several states
+     * apply at once, the highest-precedence one is returned.
+     */
+    delivery_status:
+      | 'rejected'
+      | 'in_review'
+      | 'draft'
+      | 'campaign_paused'
+      | 'ad_group_paused'
+      | 'paused'
+      | 'processing'
+      | 'issues'
+      | 'scheduled'
+      | 'learning_limited'
+      | 'learning'
+      | 'active';
+
+    descriptions: Array<string>;
+
+    /**
+     * The post you pointed this ad at, when it promotes one you already published — a
+     * Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses
+     * uploaded creatives.
+     */
+    existing_post_id: string | null;
+
+    headlines: Array<string>;
+
+    issues: Array<Data.Issue>;
+
+    /**
+     * The post the ad network serves for this ad, as `pageID_postID` on Meta — the
+     * post Meta created for an uploaded creative, or the post being promoted. Use it
+     * to open the live post, or to promote the same post from another ad. `null` until
+     * the network has created the post.
+     */
+    post_id: string | null;
+
+    /**
+     * Identifies the network that owns `existing_post_id`; `null` when the ad uses
+     * uploaded creatives.
+     */
+    post_source: 'facebook' | 'instagram' | null;
+
+    /**
+     * Preview image of the post named by `existing_post_id`. `null` for ads that use
+     * uploaded creatives, or until the post's media has been fetched from the network.
+     */
+    post_thumbnail_url: string | null;
+
+    primary_texts: Array<string>;
+
+    social_accounts: Array<Data.SocialAccount>;
+
+    /**
+     * Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and
+     * `rejected` come from ad review.
+     */
+    status: 'active' | 'paused' | 'in_review' | 'rejected';
+
+    /**
+     * Display title of the ad.
+     */
+    title: string | null;
+
+    /**
+     * When the ad was last updated, as an ISO 8601 timestamp.
+     */
+    updated_at: string;
+
+    /**
+     * The URL the ad links to, without its query string. Parameters belong in
+     * `url_parameters`; any you send on `url` are moved there.
+     */
+    url: string | null;
+
+    /**
+     * Every query parameter appended to the URL, keyed by parameter name — including
+     * any you sent on `url` itself. Whop adds its own click-attribution parameters on
+     * top; those are reserved and rejected if you set them. Which keys are reserved
+     * depends on the ad's network — Meta: utm_meta_ad_id, utm_meta_adset_id,
+     * utm_meta_campaign_id, utm_source, utm_placement, utm_medium, utm_content,
+     * utm_adset, utm_whop, wacid, wasid, waid, tw_source, tw_adid; TikTok: waid,
+     * wasid, wacid, ad_id, adset_id, campaign_id, utm_source, utm_medium,
+     * utm_placement, utm_whop, tw_source, tw_adid.
+     */
+    url_parameters: unknown;
+
+    /**
+     * The instant lead form shown when someone taps this ad. `null` when the ad
+     * group's conversion_location is not an instant-form destination.
+     */
+    lead_form?: Data.LeadForm | null;
+
+    /**
+     * The ad platform's ID for the instant form the ad uses. Set when the ad
+     * references an existing form via `lead_form_id`, or once a form built from
+     * `lead_form` has been created on the platform.
+     */
+    lead_form_id?: string | null;
+
+    /**
+     * Welcome message for click-to-message ads, shown when the conversation opens.
+     * `null` when the ad has none.
+     */
+    messaging_config?: Data.MessagingConfig | null;
+
+    /**
+     * Whether the ad can appear alongside other advertisers' ads in the same unit.
+     * Defaults to true.
+     */
+    multi_advertiser_ads?: boolean;
+
+    /**
+     * The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null`
+     * elsewhere and for non-carousel ads.
+     */
+    music?: Data.Music | null;
+  }
+
+  export namespace Data {
+    /**
+     * The ad campaign this ad belongs to.
+     */
+    export interface AdCampaign {
+      /**
+       * The referenced entity's id.
+       */
+      id: string;
+    }
+
+    /**
+     * The ad group this ad belongs to.
+     */
+    export interface AdGroup {
+      /**
+       * The referenced entity's id.
+       */
+      id: string;
+    }
+
+    /**
+     * The creative assets used by this ad. The original asset has a null format;
+     * square, vertical, and horizontal entries are placement-specific variants. A
+     * carousel ad returns one format-null entry per attachment, in order.
+     */
+    export interface Creative {
+      /**
+       * The creative attachment's file id.
+       */
+      id: string;
+
+      /**
+       * The saved crop window for this creative, in source image pixels. Null for the
+       * original asset or a format that has not been cropped.
+       */
+      crop: Creative.Crop | null;
+
+      /**
+       * The placement variant this asset covers, or null for the original asset.
+       */
+      format: 'square' | 'vertical' | 'horizontal' | null;
+
+      /**
+       * The kind of asset, image or video.
+       */
+      media_type: string | null;
+
+      /**
+       * CDN url of the asset.
+       */
+      url: string | null;
+    }
+
+    export namespace Creative {
+      /**
+       * The saved crop window for this creative, in source image pixels. Null for the
+       * original asset or a format that has not been cropped.
+       */
+      export interface Crop {
+        /**
+         * Height of the crop window in source pixels.
+         */
+        height: number;
+
+        /**
+         * Width of the crop window in source pixels.
+         */
+        width: number;
+
+        /**
+         * Left edge of the crop window in source pixels.
+         */
+        x: number;
+
+        /**
+         * Top edge of the crop window in source pixels.
+         */
+        y: number;
+      }
+    }
+
+    /**
+     * Open issues affecting this ad. Empty when there are none.
+     */
+    export interface Issue {
+      /**
+       * Unique identifier for the issue.
+       */
+      id: string;
+
+      /**
+       * A description of what the issue is and how it can be resolved.
+       */
+      message: string;
+
+      /**
+       * The ID of the campaign, ad group, or ad the issue is attached to.
+       */
+      resource_id: string | null;
+
+      /**
+       * The type of resource the issue is attached to.
+       */
+      resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+    }
+
+    /**
+     * The social accounts the ad runs under — its Facebook page and Instagram profile
+     * — each referenced by ID, prefixed `sacc_`.
+     */
+    export interface SocialAccount {
+      /**
+       * The referenced entity's id.
+       */
+      id: string;
+    }
+
+    /**
+     * The instant lead form shown when someone taps this ad. `null` when the ad
+     * group's conversion_location is not an instant-form destination.
+     */
+    export interface LeadForm {
+      /**
+       * Screen shown after the form is submitted. `null` when the form uses the default.
+       */
+      completion: LeadForm.Completion | null;
+
+      /**
+       * Custom consent disclaimer shown before submission. `null` when the form has
+       * none.
+       */
+      disclaimer: LeadForm.Disclaimer | null;
+
+      /**
+       * `more_volume` is quickest to submit; `higher_intent` adds a confirmation step
+       * before submission.
+       */
+      form_type: 'more_volume' | 'higher_intent';
+
+      /**
+       * Intro screen shown before the questions. `null` when the form has none.
+       */
+      intro: LeadForm.Intro | null;
+
+      /**
+       * Internal name of the form.
+       */
+      name: string | null;
+
+      /**
+       * Whether the phone number must be verified by SMS before submitting.
+       */
+      phone_verification: boolean;
+
+      /**
+       * Your privacy policy, linked from the form. `null` when unset.
+       */
+      privacy_policy: LeadForm.PrivacyPolicy | null;
+
+      questions: Array<LeadForm.Question>;
+    }
+
+    export namespace LeadForm {
+      /**
+       * Screen shown after the form is submitted. `null` when the form uses the default.
+       */
+      export interface Completion {
+        /**
+         * Text of the follow-up button.
+         */
+        button_text: string | null;
+
+        /**
+         * Body text under the headline.
+         */
+        description: string | null;
+
+        /**
+         * Headline of the completion screen.
+         */
+        headline: string | null;
+
+        /**
+         * Website the follow-up button opens. `null` when the screen has no button.
+         */
+        url: string | null;
+      }
+
+      /**
+       * Custom consent disclaimer shown before submission. `null` when the form has
+       * none.
+       */
+      export interface Disclaimer {
+        /**
+         * Disclaimer text.
+         */
+        body: string | null;
+
+        checkboxes: Array<Disclaimer.Checkbox>;
+
+        /**
+         * Disclaimer title.
+         */
+        title: string | null;
+      }
+
+      export namespace Disclaimer {
+        /**
+         * Consent checkboxes the person can tick. Empty when the disclaimer is text-only.
+         */
+        export interface Checkbox {
+          /**
+           * Whether the checkbox starts ticked.
+           */
+          checked_by_default: boolean | null;
+
+          /**
+           * Stable identifier consent responses are stored under.
+           */
+          key: string | null;
+
+          /**
+           * Whether the checkbox must be ticked to submit the form.
+           */
+          required: boolean | null;
+
+          /**
+           * Consent text next to the checkbox.
+           */
+          text: string;
+        }
+      }
+
+      /**
+       * Intro screen shown before the questions. `null` when the form has none.
+       */
+      export interface Intro {
+        /**
+         * Body text under the headline.
+         */
+        description: string | null;
+
+        /**
+         * Headline of the intro screen.
+         */
+        headline: string | null;
+      }
+
+      /**
+       * Your privacy policy, linked from the form. `null` when unset.
+       */
+      export interface PrivacyPolicy {
+        /**
+         * Link text shown for the policy. `null` uses the platform default.
+         */
+        link_text: string | null;
+
+        /**
+         * URL of your privacy policy.
+         */
+        url: string;
+      }
+
+      /**
+       * Questions on the form, in order.
+       */
+      export interface Question {
+        /**
+         * Question type: a standard prefill type such as `email`, `phone`, or `full_name`,
+         * or `custom` for your own question.
+         */
+        type: string;
+
+        /**
+         * Answer format for `custom` questions: `short_answer`, `multiple_choice`, or
+         * `appointment`. Absent otherwise.
+         */
+        format?: string;
+
+        /**
+         * Question text for `custom` questions. Absent for standard prefill questions.
+         */
+        label?: string;
+
+        options?: Array<Question.Option>;
+      }
+
+      export namespace Question {
+        /**
+         * Choices for `multiple_choice` questions. Absent for other formats.
+         */
+        export interface Option {
+          /**
+           * Choice text shown to the person.
+           */
+          value: string;
+
+          /**
+           * Stable identifier the choice's answers are stored under. Absent for simple
+           * choices.
+           */
+          key?: string | null;
+
+          /**
+           * Where the form goes when this choice is selected. Absent when the form just
+           * continues to the next question.
+           */
+          logic?: Option.Logic;
+        }
+
+        export namespace Option {
+          /**
+           * Where the form goes when this choice is selected. Absent when the form just
+           * continues to the next question.
+           */
+          export interface Logic {
+            /**
+             * What happens when the choice is selected.
+             */
+            action: 'go_to_question' | 'submit_form' | 'close_form';
+
+            /**
+             * Zero-based index of the ending screen to jump to.
+             */
+            target_end_page_index?: number;
+
+            /**
+             * Zero-based index of the question to jump to, for `go_to_question`.
+             */
+            target_question_index?: number;
+          }
+        }
+      }
+    }
+
+    /**
+     * Welcome message for click-to-message ads, shown when the conversation opens.
+     * `null` when the ad has none.
+     */
+    export interface MessagingConfig {
+      /**
+       * Suggested reply the person can tap to start the conversation.
+       */
+      keyword: string | null;
+
+      /**
+       * Greeting shown when the conversation opens.
+       */
+      message: string | null;
+    }
+
+    /**
+     * The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null`
+     * elsewhere and for non-carousel ads.
+     */
+    export interface Music {
+      /**
+       * The music attachment's file id.
+       */
+      id: string;
+
+      /**
+       * The uploaded file's name.
+       */
+      name: string | null;
+
+      /**
+       * CDN url of the MP3.
+       */
+      url: string | null;
+    }
+  }
+}
+
 export interface AdCampaignPaymentFailedWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -4545,7 +5149,7 @@ export interface AdCampaignPaymentFailedWebhookEvent {
    */
   api_version_date: string | null;
 
-  data: AdCampaignsAPI.AdCampaign;
+  data: AdCampaignPaymentFailedWebhookEvent.Data;
 
   /**
    * The timestamp in ISO 8601 format that the webhook was sent at on the server
@@ -4567,6 +5171,308 @@ export interface AdCampaignPaymentFailedWebhookEvent {
    * keyed by field name. Omitted when no capture is available for the event
    */
   previous_attributes?: unknown;
+}
+
+export namespace AdCampaignPaymentFailedWebhookEvent {
+  export interface Data {
+    /**
+     * Unique identifier for the ad campaign, prefixed `adcamp_`.
+     */
+    id: string;
+
+    /**
+     * The campaign's budget, in the ad account's currency. `null` when each ad group
+     * sets its own budget instead.
+     */
+    budget_amount: number | null;
+
+    /**
+     * Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group
+     * individually (`ad_group`).
+     */
+    budget_optimization: 'ad_campaign' | 'ad_group' | null;
+
+    /**
+     * Whether `budget_amount` is spent per day (`daily`) or over the campaign's full
+     * run (`lifetime`).
+     */
+    budget_type: 'daily' | 'lifetime' | null;
+
+    /**
+     * When the campaign was created, as an ISO 8601 timestamp.
+     */
+    created_at: string;
+
+    /**
+     * Whether the campaign's ads are delivering right now, and if not, why. When
+     * several states apply at once, the highest-precedence one is returned.
+     */
+    delivery_status:
+      | 'payment_failed'
+      | 'all_ads_rejected'
+      | 'draft'
+      | 'no_ad_groups'
+      | 'no_ads'
+      | 'paused'
+      | 'processing'
+      | 'issues'
+      | 'scheduled'
+      | 'completed'
+      | 'ad_groups_off'
+      | 'active';
+
+    issues: Array<Data.Issue>;
+
+    /**
+     * The goal the campaign optimizes toward.
+     */
+    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
+
+    /**
+     * The event the campaign optimizes for when a single goal is set campaign-wide.
+     * `null` when each ad group sets its own optimization_goal.
+     */
+    optimization_goal: string | null;
+
+    /**
+     * The ad network the campaign runs on.
+     */
+    platform: 'meta' | 'tiktok';
+
+    special_ad_categories: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
+
+    /**
+     * The lifecycle status of the ad campaign.
+     */
+    status:
+      | 'active'
+      | 'paused'
+      | 'inactive'
+      | 'stale'
+      | 'pending_refund'
+      | 'payment_failed'
+      | 'draft'
+      | 'in_review'
+      | 'flagged'
+      | 'importing'
+      | 'imported'
+      | 'duplicating';
+
+    /**
+     * Display name of the ad campaign.
+     */
+    title: string;
+
+    /**
+     * When the campaign was last updated, as an ISO 8601 timestamp.
+     */
+    updated_at: string;
+
+    /**
+     * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+     * the budget, `average_target` holds an average cost per result, and
+     * `maximum_target` never bids above a cap.
+     */
+    bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
+  }
+
+  export namespace Data {
+    /**
+     * Open issues affecting the campaign and its descendant ad groups and ads.
+     */
+    export interface Issue {
+      /**
+       * Unique identifier for the issue.
+       */
+      id: string;
+
+      /**
+       * A description of what the issue is and how it can be resolved.
+       */
+      message: string;
+
+      /**
+       * The ID of the campaign, ad group, or ad the issue is attached to.
+       */
+      resource_id: string | null;
+
+      /**
+       * The type of resource the issue is attached to.
+       */
+      resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+    }
+  }
+}
+
+export interface AdCampaignUpdatedWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  data: AdCampaignUpdatedWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'ad_campaign.updated';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
+}
+
+export namespace AdCampaignUpdatedWebhookEvent {
+  export interface Data {
+    /**
+     * Unique identifier for the ad campaign, prefixed `adcamp_`.
+     */
+    id: string;
+
+    /**
+     * The campaign's budget, in the ad account's currency. `null` when each ad group
+     * sets its own budget instead.
+     */
+    budget_amount: number | null;
+
+    /**
+     * Which level owns the budget: the whole campaign (`ad_campaign`) or each ad group
+     * individually (`ad_group`).
+     */
+    budget_optimization: 'ad_campaign' | 'ad_group' | null;
+
+    /**
+     * Whether `budget_amount` is spent per day (`daily`) or over the campaign's full
+     * run (`lifetime`).
+     */
+    budget_type: 'daily' | 'lifetime' | null;
+
+    /**
+     * When the campaign was created, as an ISO 8601 timestamp.
+     */
+    created_at: string;
+
+    /**
+     * Whether the campaign's ads are delivering right now, and if not, why. When
+     * several states apply at once, the highest-precedence one is returned.
+     */
+    delivery_status:
+      | 'payment_failed'
+      | 'all_ads_rejected'
+      | 'draft'
+      | 'no_ad_groups'
+      | 'no_ads'
+      | 'paused'
+      | 'processing'
+      | 'issues'
+      | 'scheduled'
+      | 'completed'
+      | 'ad_groups_off'
+      | 'active';
+
+    issues: Array<Data.Issue>;
+
+    /**
+     * The goal the campaign optimizes toward.
+     */
+    objective: 'awareness' | 'traffic' | 'engagement' | 'leads' | 'sales' | null;
+
+    /**
+     * The event the campaign optimizes for when a single goal is set campaign-wide.
+     * `null` when each ad group sets its own optimization_goal.
+     */
+    optimization_goal: string | null;
+
+    /**
+     * The ad network the campaign runs on.
+     */
+    platform: 'meta' | 'tiktok';
+
+    special_ad_categories: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
+
+    /**
+     * The lifecycle status of the ad campaign.
+     */
+    status:
+      | 'active'
+      | 'paused'
+      | 'inactive'
+      | 'stale'
+      | 'pending_refund'
+      | 'payment_failed'
+      | 'draft'
+      | 'in_review'
+      | 'flagged'
+      | 'importing'
+      | 'imported'
+      | 'duplicating';
+
+    /**
+     * Display name of the ad campaign.
+     */
+    title: string;
+
+    /**
+     * When the campaign was last updated, as an ISO 8601 timestamp.
+     */
+    updated_at: string;
+
+    /**
+     * How delivery bids in the ad auction: `minimum_cost` gets the most results for
+     * the budget, `average_target` holds an average cost per result, and
+     * `maximum_target` never bids above a cap.
+     */
+    bid_type?: 'minimum_cost' | 'average_target' | 'maximum_target' | null;
+  }
+
+  export namespace Data {
+    /**
+     * Open issues affecting the campaign and its descendant ad groups and ads.
+     */
+    export interface Issue {
+      /**
+       * Unique identifier for the issue.
+       */
+      id: string;
+
+      /**
+       * A description of what the issue is and how it can be resolved.
+       */
+      message: string;
+
+      /**
+       * The ID of the campaign, ad group, or ad the issue is attached to.
+       */
+      resource_id: string | null;
+
+      /**
+       * The type of resource the issue is attached to.
+       */
+      resource_type: 'ad_campaign' | 'ad_group' | 'ad';
+    }
+  }
 }
 
 export interface CardCanceledWebhookEvent {
@@ -14389,7 +15295,9 @@ export namespace VerificationSucceededWebhookEvent {
 
 export type UnwrapWebhookEvent =
   | AccountUpdatedWebhookEvent
+  | AdUpdatedWebhookEvent
   | AdCampaignPaymentFailedWebhookEvent
+  | AdCampaignUpdatedWebhookEvent
   | CardCanceledWebhookEvent
   | CardCreatedWebhookEvent
   | CardFrozenWebhookEvent
@@ -14558,6 +15466,8 @@ export interface WebhookCreateParams {
     | 'shipment.updated'
     | 'member.created'
     | 'ad_campaign.payment_failed'
+    | 'ad_campaign.updated'
+    | 'ad.updated'
     | 'chat.message.created'
     | 'chat.reaction.created'
     | 'payment.created'
@@ -14725,6 +15635,8 @@ export interface WebhookUpdateParams {
     | 'shipment.updated'
     | 'member.created'
     | 'ad_campaign.payment_failed'
+    | 'ad_campaign.updated'
+    | 'ad.updated'
     | 'chat.message.created'
     | 'chat.reaction.created'
     | 'payment.created'
@@ -14851,7 +15763,9 @@ export declare namespace Webhooks {
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
     type AccountUpdatedWebhookEvent as AccountUpdatedWebhookEvent,
+    type AdUpdatedWebhookEvent as AdUpdatedWebhookEvent,
     type AdCampaignPaymentFailedWebhookEvent as AdCampaignPaymentFailedWebhookEvent,
+    type AdCampaignUpdatedWebhookEvent as AdCampaignUpdatedWebhookEvent,
     type CardCanceledWebhookEvent as CardCanceledWebhookEvent,
     type CardCreatedWebhookEvent as CardCreatedWebhookEvent,
     type CardFrozenWebhookEvent as CardFrozenWebhookEvent,

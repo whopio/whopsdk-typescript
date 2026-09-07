@@ -126,7 +126,9 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">AccountUpdatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">AdUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">AdCampaignPaymentFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">AdCampaignUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardCanceledWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">CardFrozenWebhookEvent</a></code>
