@@ -26,7 +26,7 @@ describe('resource refunds', () => {
     await expect(
       client.refunds.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-04' },
+        { 'Api-Version-Date': '2026-09-06' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -61,7 +61,7 @@ describe('resource refunds', () => {
           order: 'created_at',
           payment_id: 'payment_id',
           user_id: 'user_id',
-          'Api-Version-Date': '2026-09-04',
+          'Api-Version-Date': '2026-09-06',
         },
         { path: '/_stainless_unknown_path' },
       ),
