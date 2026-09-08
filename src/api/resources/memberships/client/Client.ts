@@ -88,7 +88,7 @@ export class MembershipsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -187,7 +187,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -272,7 +272,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -348,7 +348,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -395,111 +395,6 @@ export class MembershipsClient {
     }
 
     /**
-     * Add free days to extend a membership's current billing period, expiration date, or Stripe trial.
-     *
-     * Required permissions:
-     *  - `member:manage`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *
-     * @param {Whop.AddFreeDaysMembershipRequest} request
-     * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.memberships.addFreeDaysMembership({
-     *         id: "mem_xxxxxxxxxxxxxx",
-     *         free_days: 42
-     *     })
-     */
-    public addFreeDaysMembership(
-        request: Whop.AddFreeDaysMembershipRequest,
-        requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
-        return core.HttpResponsePromise.fromPromise(this.__addFreeDaysMembership(request, requestOptions));
-    }
-
-    private async __addFreeDaysMembership(
-        request: Whop.AddFreeDaysMembershipRequest,
-        requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
-        const { id, ..._body } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
-                `memberships/${core.url.encodePathParam(id)}/add_free_days`,
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/memberships/{id}/add_free_days",
-        );
-    }
-
-    /**
      * Cancels a membership. Pass `cancel_at_period_end: true` to stop auto-renewal and keep access until the current billing period ends. Omit it (or pass `false`) to revoke access immediately. Buyers cannot cancel buy-now-pay-later (`splitit`, `sezzle`) or non-trial split-pay memberships.
      *
      * @param {Whop.CancelMembershipsRequest} request
@@ -533,7 +428,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -616,7 +511,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -698,7 +593,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -780,7 +675,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -826,49 +721,40 @@ export class MembershipsClient {
     }
 
     /**
-     * Re-run access fulfillment for a membership. Recomputes the member's content access on Whop, re-validates their Discord link (re-adding them to the server and re-assigning roles if needed), and re-fulfills TradingView indicator access. Telegram access is invite-based and cannot be resynced here. The outcome is written to the membership's logs.
+     * Re-runs access fulfillment for a membership: recomputes the member's content access on Whop, re-validates their Discord link (re-adding them to the server and re-assigning roles if needed), and re-fulfills TradingView indicator access. Telegram access is invite-based and is not resynced. The work runs in the background and the outcome is written to the membership's logs.
      *
-     * Required permissions:
-     *  - `membership:resync_access`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *
-     * @param {Whop.ResyncAccessMembershipRequest} request
+     * @param {Whop.ResyncAccessMembershipsRequest} request
      * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.memberships.resyncAccessMembership({
-     *         id: "mem_xxxxxxxxxxxxxx"
+     *     await client.memberships.resyncAccess({
+     *         id: "id"
      *     })
      */
-    public resyncAccessMembership(
-        request: Whop.ResyncAccessMembershipRequest,
+    public resyncAccess(
+        request: Whop.ResyncAccessMembershipsRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
-        return core.HttpResponsePromise.fromPromise(this.__resyncAccessMembership(request, requestOptions));
+    ): core.HttpResponsePromise<Whop.Membership> {
+        return core.HttpResponsePromise.fromPromise(this.__resyncAccess(request, requestOptions));
     }
 
-    private async __resyncAccessMembership(
-        request: Whop.ResyncAccessMembershipRequest,
+    private async __resyncAccess(
+        request: Whop.ResyncAccessMembershipsRequest,
         requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
+    ): Promise<core.WithRawResponse<Whop.Membership>> {
         const { id } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -890,25 +776,17 @@ export class MembershipsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 400:
                     throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -961,7 +839,7 @@ export class MembershipsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -1006,101 +884,5 @@ export class MembershipsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/memberships/{id}/transfer");
-    }
-
-    /**
-     * Reverse a pending cancellation for a membership that was scheduled to cancel at period end.
-     *
-     * Required permissions:
-     *  - `member:manage`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *
-     * @param {Whop.UncancelMembershipRequest} request
-     * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.memberships.uncancelMembership({
-     *         id: "mem_xxxxxxxxxxxxxx"
-     *     })
-     */
-    public uncancelMembership(
-        request: Whop.UncancelMembershipRequest,
-        requestOptions?: MembershipsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.MembershipLegacy> {
-        return core.HttpResponsePromise.fromPromise(this.__uncancelMembership(request, requestOptions));
-    }
-
-    private async __uncancelMembership(
-        request: Whop.UncancelMembershipRequest,
-        requestOptions?: MembershipsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.MembershipLegacy>> {
-        const { id } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
-                `memberships/${core.url.encodePathParam(id)}/uncancel`,
-            ),
-            method: "POST",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.MembershipLegacy, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/memberships/{id}/uncancel");
     }
 }

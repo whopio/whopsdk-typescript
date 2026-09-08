@@ -7,7 +7,7 @@
  *     }
  */
 export interface CreatePaymentMethodDomainsRequest {
-    /** Account to register the domain for (`biz_` tag). Defaults to the caller's account. */
+    /** Account to register the domain for (`biz_` tag). Required when authenticating as a user; an account API key supplies its own account. */
     account_id?: string;
     /** Hostname to register (e.g. `checkout.shinetime.example`). */
     hostname: string;

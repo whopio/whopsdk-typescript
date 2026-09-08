@@ -5,4 +5,5 @@ export * from "./ListAdsRequestDirection.js";
 export * from "./ListAdsRequestOrder.js";
 export * from "./ListAdsRequestStatus.js";
 export * from "./ListAdsResponse.js";
+export * from "./PostAdUpdatedPayload.js";
 export * from "./RetrieveAdsRequestAttributionModel.js";

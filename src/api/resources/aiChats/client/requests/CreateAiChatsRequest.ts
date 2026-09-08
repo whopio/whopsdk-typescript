@@ -9,6 +9,8 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreateAiChatsRequest {
+    /** The AI agent that handles the chat. Defaults to `support`. */
+    agent_identifier?: Whop.AiChatAgentIdentifiers | null;
     /** The unique identifier of the account to set as context for the AI chat (e.g., "biz_XXXXX"). */
     current_account_id?: string | null;
     /** A list of previously uploaded file attachments to include with the first message. */

@@ -73,7 +73,7 @@ export class WebhooksClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -171,7 +171,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -257,7 +257,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -336,7 +336,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -416,7 +416,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -502,7 +502,7 @@ export class WebhooksClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -608,7 +608,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -702,7 +702,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -791,7 +791,7 @@ export class WebhooksClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -841,132 +841,5 @@ export class WebhooksClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/webhooks/{id}/test");
-    }
-
-    /**
-     * Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt.
-     *
-     * Required permissions:
-     *  - `developer:manage_webhook`
-     *
-     * @param {Whop.DeliveriesWebhookRequest} request
-     * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.webhooks.deliveriesWebhook({
-     *         webhook_id: "webhook_id",
-     *         first: 42,
-     *         last: 42
-     *     })
-     */
-    public async deliveriesWebhook(
-        request: Whop.DeliveriesWebhookRequest,
-        requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.Page<Whop.DeliveriesWebhookResponse.Data.Item, Whop.DeliveriesWebhookResponse>> {
-        const list = core.HttpResponsePromise.interceptFunction(
-            async (
-                request: Whop.DeliveriesWebhookRequest,
-            ): Promise<core.WithRawResponse<Whop.DeliveriesWebhookResponse>> => {
-                const { webhook_id: webhookId, after, before, first, last } = request;
-                const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
-                };
-                const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-                const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-                    _authRequest.headers,
-                    this._options?.headers,
-                    mergeOnlyDefinedHeaders({
-                        "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
-                        "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-                    }),
-                    requestOptions?.headers,
-                );
-                const _response = await core.fetcher({
-                    url: core.url.join(
-                        (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
-                        `webhooks/${core.url.encodePathParam(webhookId)}/deliveries`,
-                    ),
-                    method: "GET",
-                    headers: _headers,
-                    queryString: core.url
-                        .queryBuilder()
-                        .addMany(_queryParams)
-                        .mergeAdditional(requestOptions?.queryParams)
-                        .build(),
-                    timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-                    maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-                    abortSignal: requestOptions?.abortSignal,
-                    fetchFn: this._options?.fetch,
-                    logging: this._options.logging,
-                });
-                if (_response.ok) {
-                    return {
-                        data: _response.body as Whop.DeliveriesWebhookResponse,
-                        rawResponse: _response.rawResponse,
-                    };
-                }
-                if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 401:
-                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        case 403:
-                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                        default:
-                            throw new errors.WhopError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
-                }
-                return handleNonStatusCodeError(
-                    _response.error,
-                    _response.rawResponse,
-                    "GET",
-                    "/webhooks/{webhook_id}/deliveries",
-                );
-            },
-        );
-        const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.DeliveriesWebhookResponse.Data.Item, Whop.DeliveriesWebhookResponse>({
-            response: dataWithRawResponse.data,
-            rawResponse: dataWithRawResponse.rawResponse,
-            hasNextPage: (response) =>
-                response?.page_info.end_cursor != null &&
-                !(typeof response?.page_info.end_cursor === "string" && response?.page_info.end_cursor === ""),
-            getItems: (response) => response?.data ?? [],
-            loadPage: (response) => {
-                return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
-            },
-        });
     }
 }

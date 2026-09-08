@@ -15,6 +15,8 @@ export interface CreateAccountsRequest {
     email?: string;
     /** Arbitrary key/value metadata to store on the account. */
     metadata?: Record<string, unknown>;
+    /** Whether Whop sends transactional emails to customers on behalf of the connected account. */
+    send_customer_emails?: boolean;
     /** The display name of the account. Defaults to `metadata.external_id` or the owner's email when omitted. */
     title?: string;
 }

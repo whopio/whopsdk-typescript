@@ -18,6 +18,7 @@ describe("AiChatsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    agent_identifier: "general",
                     blended_token_usage: "123.45",
                     created_at: "2023-12-01T05:00:00Z",
                     id: "aich_xxxxxxxxxxxxx",
@@ -201,6 +202,7 @@ describe("AiChatsClient", () => {
         });
         const rawRequestBody = { message_text: "message_text" };
         const rawResponseBody = {
+            agent_identifier: "general",
             blended_token_usage: "123.45",
             created_at: "2023-12-01T05:00:00Z",
             id: "aich_xxxxxxxxxxxxx",
@@ -434,6 +436,7 @@ describe("AiChatsClient", () => {
         });
 
         const rawResponseBody = {
+            agent_identifier: "general",
             blended_token_usage: "123.45",
             created_at: "2023-12-01T05:00:00Z",
             id: "aich_xxxxxxxxxxxxx",
@@ -790,6 +793,7 @@ describe("AiChatsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            agent_identifier: "general",
             blended_token_usage: "123.45",
             created_at: "2023-12-01T05:00:00Z",
             id: "aich_xxxxxxxxxxxxx",

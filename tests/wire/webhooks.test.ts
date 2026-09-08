@@ -19,7 +19,7 @@ describe("WebhooksClient", () => {
             data: [
                 {
                     api_version: "v1",
-                    api_version_date: "2026-09-02-2",
+                    api_version_date: "2026-01-01",
                     child_resource_events: false,
                     consecutive_failures: 0,
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -158,7 +158,7 @@ describe("WebhooksClient", () => {
         const rawRequestBody = { url: "https://example.com/hooks" };
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-09-02-2",
+            api_version_date: "2026-01-01",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",
@@ -342,7 +342,7 @@ describe("WebhooksClient", () => {
 
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-09-02-2",
+            api_version_date: "2026-01-01",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",
@@ -525,7 +525,7 @@ describe("WebhooksClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             api_version: "v1",
-            api_version_date: "2026-09-02-2",
+            api_version_date: "2026-01-01",
             child_resource_events: false,
             consecutive_failures: 9,
             created_at: "2026-01-01T12:00:00.000Z",
@@ -1319,239 +1319,5 @@ describe("WebhooksClient", () => {
                 event: "event",
             });
         }).rejects.toThrow(Whop.ConflictError);
-    });
-
-    test("deliveriesWebhook (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            data: [
-                {
-                    request_body: { key: "value" },
-                    resource_id: "resource_id",
-                    response_body: { key: "value" },
-                    response_code: 42,
-                    sent_at: "2023-12-01T05:00:00Z",
-                    total_time: 6.9,
-                },
-            ],
-            page_info: { end_cursor: "end_cursor", has_next_page: true },
-        };
-
-        server
-            .mockEndpoint({ once: false })
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const expected = rawResponseBody;
-        const page = await client.webhooks.deliveriesWebhook({
-            webhook_id: "webhook_id",
-            first: 42,
-            last: 42,
-        });
-
-        expect(expected.data).toEqual(page.data);
-        expect(page.hasNextPage()).toBe(true);
-        const nextPage = await page.getNextPage();
-        expect(expected.data).toEqual(nextPage.data);
-    });
-
-    test("deliveriesWebhook (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("deliveriesWebhook (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("deliveriesWebhook (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("deliveriesWebhook (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("deliveriesWebhook (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("deliveriesWebhook (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("deliveriesWebhook (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/webhooks/webhook_id/deliveries")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.webhooks.deliveriesWebhook({
-                webhook_id: "webhook_id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 });

@@ -16,6 +16,10 @@ export interface CreateTransfersRequest {
     destination_id?: string;
     /** claim_link only. Link expiry as an ISO 8601 timestamp. Defaults to 24 hours from creation. */
     expires_at?: string | null;
+    /** Ledger transfers only. The feed the transfer was initiated from. Given with `feed_type`, the payment receipt posts into that feed instead of a direct message. */
+    feed_id?: string | null;
+    /** Ledger transfers only. The type of the feed named by `feed_id`. */
+    feed_type?: CreateTransfersRequest.FeedType | null;
     /** Ledger transfers and wallet sends. A unique key that makes retries safe. Retrying with the same key returns the original transfer, or attaches to the original wallet send, instead of moving money twice. */
     idempotence_key?: string | null;
     /** Ledger transfers only. Custom key-value pairs attached to the transfer. Max 50 keys, 100 chars per key, 500 chars per string value. */
@@ -31,6 +35,16 @@ export interface CreateTransfersRequest {
 }
 
 export namespace CreateTransfersRequest {
+    /** Ledger transfers only. The type of the feed named by `feed_id`. */
+    export const FeedType = {
+        DmsFeed: "dms_feed",
+        ChatFeed: "chat_feed",
+        ForumFeed: "forum_feed",
+        LivestreamFeed: "livestream_feed",
+        UniversalPost: "universal_post",
+        User: "user",
+    } as const;
+    export type FeedType = (typeof FeedType)[keyof typeof FeedType];
     /** The kind of money movement, which decides what comes back. Defaults to ledger. `ledger` moves credit between two Whop balances and returns a `transfer`; `wallet_send` sends USDT from the origin account's Ethereum wallet and returns a `send`; `claim_link` funds a shareable link anyone with the URL can redeem and returns a `claim_link`. A `ledger` transfer from a stablecoin-rails account settles on-chain when covered, and still returns a `transfer`. */
     export const Type = {
         Ledger: "ledger",

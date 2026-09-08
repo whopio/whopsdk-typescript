@@ -187,6 +187,11 @@ export namespace LedgerActivity {
         WithdrawalReclassification: "withdrawal_reclassification",
         WithdrawalReversal: "withdrawal_reversal",
         WithdrawalTopupAdjustment: "withdrawal_topup_adjustment",
+        Deposit: "deposit",
+        WalletTransferIncoming: "wallet_transfer_incoming",
+        WalletTransferOutgoing: "wallet_transfer_outgoing",
+        SwapSource: "swap_source",
+        SwapTarget: "swap_target",
     } as const;
     export type LineType = (typeof LineType)[keyof typeof LineType];
     export const Object_ = {

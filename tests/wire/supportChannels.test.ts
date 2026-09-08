@@ -19,6 +19,7 @@ describe("SupportChannelsClient", () => {
             data: [
                 {
                     account_id: "account_id",
+                    company_id: "company_id",
                     custom_name: "Project Alpha Team",
                     customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
                     id: "id",
@@ -200,6 +201,7 @@ describe("SupportChannelsClient", () => {
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", user_id: "user_xxxxxxxxxxxxx" };
         const rawResponseBody = {
             account_id: "account_id",
+            company_id: "company_id",
             custom_name: "Project Alpha Team",
             customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
             id: "id",
@@ -438,6 +440,7 @@ describe("SupportChannelsClient", () => {
 
         const rawResponseBody = {
             account_id: "account_id",
+            company_id: "company_id",
             custom_name: "Project Alpha Team",
             customer_user: { id: "user_xxxxxxxxxxxxx", name: "John Doe", username: "johndoe42" },
             id: "id",

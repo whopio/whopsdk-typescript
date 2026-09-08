@@ -11,10 +11,12 @@ export interface UpdateCardsRequest {
     id: string;
     /** The owning account ID (a biz_ identifier). Provide this or user_id. */
     account_id?: string;
-    /** New billing address. Requires line1, city, region, postal_code, and country_code. On an invited card, passing billing alone (as the invited user) completes onboarding and starts card provisioning. */
+    /** The billing address. On an issued card this replaces the card's billing address and region is also required. On an invited card, sending it as the invited user completes onboarding and starts card provisioning. */
     billing?: UpdateCardsRequest.Billing;
     /** Pass `true` to permanently cancel the card. A canceled card cannot be uncanceled. Cannot be combined with other fields. */
     canceled?: boolean;
+    /** Details for the invited cardholder, accepted only while completing onboarding on an invited card. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not. */
+    cardholder?: UpdateCardsRequest.Cardholder;
     /** Pass `true` to freeze the card, `false` to unfreeze it. The assigned cardholder may freeze their own card without the payout:account:update scope. */
     frozen?: boolean;
     /** A display name for the card. */
@@ -35,7 +37,7 @@ export interface UpdateCardsRequest {
 
 export namespace UpdateCardsRequest {
     /**
-     * New billing address. Requires line1, city, region, postal_code, and country_code. On an invited card, passing billing alone (as the invited user) completes onboarding and starts card provisioning.
+     * The billing address. On an issued card this replaces the card's billing address and region is also required. On an invited card, sending it as the invited user completes onboarding and starts card provisioning.
      */
     export interface Billing {
         /** Billing city. */
@@ -48,8 +50,22 @@ export namespace UpdateCardsRequest {
         line2?: string | undefined;
         /** Billing postal code. */
         postal_code: string;
-        /** Billing region or state. */
-        region: string;
+        /** Billing region or state. Required when updating an issued card's billing address. */
+        region?: string | undefined;
+    }
+
+    /**
+     * Details for the invited cardholder, accepted only while completing onboarding on an invited card. The legal name comes from an approved identity verification when the invited user has one, and from these fields when they do not.
+     */
+    export interface Cardholder {
+        /** Email address for the invited cardholder. */
+        email?: string | undefined;
+        /** Legal first name of the invited cardholder. */
+        first_name?: string | undefined;
+        /** Legal last name of the invited cardholder. */
+        last_name?: string | undefined;
+        /** Phone number for the invited cardholder. */
+        phone?: string | undefined;
     }
 
     /** The window the spend limit applies to. */

@@ -163,6 +163,68 @@ describe("PartnersClient", () => {
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
+    test("retrieveLink (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            expires_at: "expires_at",
+            id: "onbr_xxxxxxxxxxxxxx",
+            max_redemptions: 1,
+            partner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            qualification_income_source: "sales",
+            qualification_met: true,
+            qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            remaining_redemptions: 0,
+            reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            reward_type: "ad_credit",
+            rewarded: true,
+            status: "available",
+        };
+
+        server.mockEndpoint().get("/partners/links").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.partners.retrieveLink({
+            partner_username: "partner_username",
+            reward_slug: "reward_slug",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("retrieveLink (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/partners/links").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.partners.retrieveLink({
+                partner_username: "partner_username",
+                reward_slug: "reward_slug",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
     test("referredUsers (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

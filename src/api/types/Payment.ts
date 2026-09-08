@@ -61,6 +61,8 @@ export interface Payment {
     product_id: string | null;
     /** The promo code applied at checkout, prefixed `promo_`, or null. */
     promo_code_id: string | null;
+    /** Whop-hosted URL where the buyer can sign in and complete 3D Secure for a failed subscription renewal. Null when recovery is unavailable, you lack `member:basic:read`, or in list responses. Retrieve the payment for it. */
+    recovery_url: string | null;
     /** True when the payment is `paid`, not yet fully refunded, and its processor supports refunds. */
     refundable: boolean;
     /** How much has been refunded so far, as it settled — refunds convert at the rate in force when each one was issued, not the payment's original rate. */

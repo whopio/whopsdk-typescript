@@ -199,6 +199,8 @@ export namespace ListBusinessesResponse {
                 attributed: string;
                 /** GMV awaiting settlement (commission not yet computed), in USD. */
                 awaiting_settlement: string;
+                /** Credited GMV from the trailing 30 days (awaiting_settlement + settled), in USD. */
+                last_30d: string;
                 /** GMV of pending + completed payments, in USD. */
                 settled: string;
             }

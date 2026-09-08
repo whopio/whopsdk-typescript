@@ -510,271 +510,6 @@ describe("MembershipsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("addFreeDaysMembership (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 42 };
-        const rawResponseBody = {
-            cancel_at_period_end: true,
-            cancel_option: "too_expensive",
-            cancelation_status: "won_back",
-            canceled_at: "2023-12-01T05:00:00Z",
-            cancellation_reason: "I found a better alternative.",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
-            created_at: "2023-12-01T05:00:00Z",
-            currency: "usd",
-            custom_field_responses: [{ answer: "answer", id: "cfrp_xxxxxxxxxxxxx", question: "question" }],
-            formatted_renewal_price: "$25.00 / month",
-            id: "mem_xxxxxxxxxxxxxx",
-            initial_price_paid: "$25.00",
-            joined_at: "2023-12-01T05:00:00Z",
-            license_key: "A1B2C3-D4E5F6-G7H8I9",
-            manage_url: "https://whop.com/billing/manage/mem_abc123",
-            member: { id: "mber_xxxxxxxxxxxxx" },
-            metadata: { key: "value" },
-            payment_collection_paused: true,
-            plan: { id: "plan_xxxxxxxxxxxxx", metadata: { key: "value" } },
-            product: { id: "prod_xxxxxxxxxxxxx", metadata: { key: "value" }, title: "Pickaxe Analytics" },
-            promo_code: { id: "promo_xxxxxxxxxxxx" },
-            renewal_period_end: "2023-12-01T05:00:00Z",
-            renewal_period_start: "2023-12-01T05:00:00Z",
-            status: "trialing",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: {
-                email: "john.doe@example.com",
-                id: "user_xxxxxxxxxxxxx",
-                name: "John Doe",
-                profile_pic: "profile_pic",
-                username: "johndoe42",
-            },
-        };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/mem_xxxxxxxxxxxxxx/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.memberships.addFreeDaysMembership({
-            id: "mem_xxxxxxxxxxxxxx",
-            free_days: 42,
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("addFreeDaysMembership (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("addFreeDaysMembership (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("addFreeDaysMembership (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("addFreeDaysMembership (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("addFreeDaysMembership (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("addFreeDaysMembership (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("addFreeDaysMembership (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { free_days: 1 };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/add_free_days")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.addFreeDaysMembership({
-                id: "id",
-                free_days: 1,
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1315,7 +1050,7 @@ describe("MembershipsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
-    test("resyncAccessMembership (1)", async () => {
+    test("resyncAccess (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1326,56 +1061,46 @@ describe("MembershipsClient", () => {
         });
 
         const rawResponseBody = {
-            cancel_at_period_end: true,
-            cancel_option: "too_expensive",
-            cancelation_status: "won_back",
-            canceled_at: "2023-12-01T05:00:00Z",
-            cancellation_reason: "I found a better alternative.",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
-            created_at: "2023-12-01T05:00:00Z",
-            currency: "usd",
-            custom_field_responses: [{ answer: "answer", id: "cfrp_xxxxxxxxxxxxx", question: "question" }],
-            formatted_renewal_price: "$25.00 / month",
-            id: "mem_xxxxxxxxxxxxxx",
-            initial_price_paid: "$25.00",
-            joined_at: "2023-12-01T05:00:00Z",
-            license_key: "A1B2C3-D4E5F6-G7H8I9",
-            manage_url: "https://whop.com/billing/manage/mem_abc123",
-            member: { id: "mber_xxxxxxxxxxxxx" },
-            metadata: { key: "value" },
-            payment_collection_paused: true,
-            plan: { id: "plan_xxxxxxxxxxxxx", metadata: { key: "value" } },
-            product: { id: "prod_xxxxxxxxxxxxx", metadata: { key: "value" }, title: "Pickaxe Analytics" },
-            promo_code: { id: "promo_xxxxxxxxxxxx" },
-            renewal_period_end: "2023-12-01T05:00:00Z",
-            renewal_period_start: "2023-12-01T05:00:00Z",
-            status: "trialing",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: {
-                email: "john.doe@example.com",
-                id: "user_xxxxxxxxxxxxx",
-                name: "John Doe",
-                profile_pic: "profile_pic",
-                username: "johndoe42",
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
             },
+            cancel_at_period_end: false,
+            created_at: "2026-01-01T12:00:00.000Z",
+            current_period_end: "2026-01-01T12:00:00.000Z",
+            id: "mem_xxxxxxxxxxxxxx",
+            license_key: "WHOP-XXXX-XXXX-XXXX",
+            member: {
+                access_level: "no_access",
+                last_accessed_at: "2026-01-01T12:00:00.000Z",
+                position: 1767268800000,
+            },
+            metadata: { key: "value" },
+            phone_number: "+xxxxxxxxxxx",
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "trialing",
+            user_id: "user_xxxxxxxxxxxxxx",
         };
 
         server
             .mockEndpoint()
-            .post("/memberships/mem_xxxxxxxxxxxxxx/resync_access")
+            .post("/memberships/id/resync_access")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.memberships.resyncAccessMembership({
-            id: "mem_xxxxxxxxxxxxxx",
+        const response = await client.memberships.resyncAccess({
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("resyncAccessMembership (2)", async () => {
+    test("resyncAccess (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1396,40 +1121,13 @@ describe("MembershipsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
+            return await client.memberships.resyncAccess({
                 id: "id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("resyncAccessMembership (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/resync_access")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("resyncAccessMembership (4)", async () => {
+    test("resyncAccess (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1450,13 +1148,13 @@ describe("MembershipsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
+            return await client.memberships.resyncAccess({
                 id: "id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("resyncAccessMembership (5)", async () => {
+    test("resyncAccess (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -1466,102 +1164,21 @@ describe("MembershipsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/memberships/id/resync_access")
             .respondWith()
-            .statusCode(404)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
+            return await client.memberships.resyncAccess({
                 id: "id",
             });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("resyncAccessMembership (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/resync_access")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("resyncAccessMembership (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/resync_access")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("resyncAccessMembership (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/resync_access")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.resyncAccessMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("transfer (1)", async () => {
@@ -1696,254 +1313,5 @@ describe("MembershipsClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.ConflictError);
-    });
-
-    test("uncancelMembership (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            cancel_at_period_end: true,
-            cancel_option: "too_expensive",
-            cancelation_status: "won_back",
-            canceled_at: "2023-12-01T05:00:00Z",
-            cancellation_reason: "I found a better alternative.",
-            checkout_configuration_id: "ch_xxxxxxxxxxxxxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx", title: "Pickaxe" },
-            created_at: "2023-12-01T05:00:00Z",
-            currency: "usd",
-            custom_field_responses: [{ answer: "answer", id: "cfrp_xxxxxxxxxxxxx", question: "question" }],
-            formatted_renewal_price: "$25.00 / month",
-            id: "mem_xxxxxxxxxxxxxx",
-            initial_price_paid: "$25.00",
-            joined_at: "2023-12-01T05:00:00Z",
-            license_key: "A1B2C3-D4E5F6-G7H8I9",
-            manage_url: "https://whop.com/billing/manage/mem_abc123",
-            member: { id: "mber_xxxxxxxxxxxxx" },
-            metadata: { key: "value" },
-            payment_collection_paused: true,
-            plan: { id: "plan_xxxxxxxxxxxxx", metadata: { key: "value" } },
-            product: { id: "prod_xxxxxxxxxxxxx", metadata: { key: "value" }, title: "Pickaxe Analytics" },
-            promo_code: { id: "promo_xxxxxxxxxxxx" },
-            renewal_period_end: "2023-12-01T05:00:00Z",
-            renewal_period_start: "2023-12-01T05:00:00Z",
-            status: "trialing",
-            updated_at: "2023-12-01T05:00:00Z",
-            user: {
-                email: "john.doe@example.com",
-                id: "user_xxxxxxxxxxxxx",
-                name: "John Doe",
-                profile_pic: "profile_pic",
-                username: "johndoe42",
-            },
-        };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/mem_xxxxxxxxxxxxxx/uncancel")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.memberships.uncancelMembership({
-            id: "mem_xxxxxxxxxxxxxx",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("uncancelMembership (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("uncancelMembership (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("uncancelMembership (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("uncancelMembership (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("uncancelMembership (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("uncancelMembership (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("uncancelMembership (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/memberships/id/uncancel")
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.memberships.uncancelMembership({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 });

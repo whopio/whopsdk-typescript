@@ -3,6 +3,8 @@
 export interface SocialAccountPost {
     /** The post's call-to-action button, for example shop_now (Facebook only; null for Instagram and TikTok). */
     call_to_action: SocialAccountPost.CallToAction | null;
+    /** The text accompanying the post, when available. */
+    caption: string | null;
     /** The URL the post's call-to-action drives to (Facebook only; null for Instagram and TikTok). */
     destination_url: string | null;
     /** An iframe-embeddable URL for previewing the post inline (the platform's player or post embed). For TikTok this is the only preview, since media_url is null; for Facebook and Instagram it supplements media_url. Null when no public embed is available. */
@@ -14,6 +16,8 @@ export interface SocialAccountPost {
     restrictions: SocialAccountPost.Restrictions.Item[];
     /** Poster image for video posts (always set for TikTok, which is video-only); null for image posts, where media_url is already the image. */
     thumbnail_url: string | null;
+    /** The platform video identifier for engagement audience rules. Null for non-video posts or when unavailable. Facebook video identifiers differ from post identifiers. */
+    video_id: string | null;
 }
 
 export namespace SocialAccountPost {

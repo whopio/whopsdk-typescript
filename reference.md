@@ -1239,7 +1239,7 @@ await client.adCampaigns.retryPayment({
 <dl>
 <dd>
 
-Resumes a paused ad campaign.
+Resumes a paused ad campaign. Requires an ads payment method on the account.
 </dd>
 </dl>
 </dd>
@@ -2051,7 +2051,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an ad in an ad group.
+Creates an ad in an ad group. Any campaign status other than `draft` launches the campaign, which requires an ads payment method on the account.
 </dd>
 </dl>
 </dd>
@@ -4162,79 +4162,6 @@ await client.apps.create({
 </dl>
 </details>
 
-<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">updatePermissionsApp</a>({ ...params }) -> boolean</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Updates the permission requirements for an app
-
-Required permissions:
- - `developer:update_app_authorization`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.apps.updatePermissionsApp({
-    app_id: "app_id",
-    requested_permissions: [{
-            action: "action",
-            is_required: true,
-            justification: "justification"
-        }]
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.UpdatePermissionsAppRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `AppsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">retrieve</a>({ ...params }) -> Whop.App</code></summary>
 <dl>
 <dd>
@@ -4657,7 +4584,7 @@ await client.apps.updatePermissions({
 <dl>
 <dd>
 
-Lists uploaded customer-list audiences for an account. Pass `audience_id` to return a specific audience.
+List custom and lookalike audiences for an account. Pass `audience_id` to return a specific audience.
 </dd>
 </dl>
 </dd>
@@ -4736,7 +4663,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an audience. Default (`audience_type` omitted or `custom`): creates one audience from an uploaded customer identity CSV file (`name`, `column_mapping`, and `file_id` required) and starts processing it; responds with the audience object. With `filters`: creates an audience from saved People filters (`name` required) — membership is built from the account's People data, and `auto_refresh` decides whether it keeps tracking the filters or keeps whoever matched at creation. With `audience_type: lookalike`: creates a ladder of Meta lookalike audiences from an existing ready custom audience (`source_audience_id`, `count`, and `percentage` required) — `count` equal similarity bands slicing the top `percentage`% (3 audiences at 6% = 0–2%, 2–4%, 4–6%), each returned as its own audience in a `{ data: [...] }` envelope.
+Create an audience from a customer list, your account's Whop People data, or engagement with videos, lead forms, Instagram profiles, or Facebook pages. Create lookalike audiences to reach people similar to an existing audience. Processing runs asynchronously. Custom creation returns one audience; lookalike creation returns the requested similarity bands in `data`.
 </dd>
 </dl>
 </dd>
@@ -4752,7 +4679,18 @@ Creates an audience. Default (`audience_type` omitted or `custom`): creates one 
 
 ```typescript
 await client.audiences.create({
-    account_id: "biz_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx",
+    engagement: {
+        include: [{
+                object: "facebook_page",
+                event: "engaged",
+                retention_days: 30,
+                social_account_id: "sacc_xxxxxxxxxxxxxx"
+            }],
+        platform: "meta"
+    },
+    name: "Page engagers",
+    source_type: "engagement"
 });
 
 ```
@@ -8869,7 +8807,7 @@ await client.courses.update({
 <dl>
 <dd>
 
-Retrieve the deposit methods for an account, including crypto and bank transfer.
+Retrieve the deposit methods for an account, including crypto and bank transfer. Crypto deposits require a $10 minimum.
 </dd>
 </dl>
 </dd>
@@ -9378,156 +9316,6 @@ await client.disputes.submit({
 <dd>
 
 **request:** `Whop.SubmitDisputesRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DisputesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">submitEvidenceDispute</a>({ ...params }) -> Whop.DisputeLegacy</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Submit a payment dispute to the payment processor for review. Once submitted, no further edits can be made.
-
-Required permissions:
- - `payment:dispute`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `company:basic:read`
- - `payment:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.disputes.submitEvidenceDispute({
-    id: "dspt_xxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.SubmitEvidenceDisputeRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `DisputesClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.disputes.<a href="/src/api/resources/disputes/client/Client.ts">updateEvidenceDispute</a>({ ...params }) -> Whop.DisputeLegacy</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update a dispute with evidence data to attempt to win the dispute.
-
-Required permissions:
- - `payment:dispute`
- - `plan:basic:read`
- - `access_pass:basic:read`
- - `company:basic:read`
- - `payment:basic:read`
- - `member:email:read`
- - `member:basic:read`
- - `member:phone:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.disputes.updateEvidenceDispute({
-    id: "dspt_xxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.UpdateEvidenceDisputeRequest` 
     
 </dd>
 </dl>
@@ -14710,77 +14498,6 @@ await client.memberships.update({
 </dl>
 </details>
 
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">addFreeDaysMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Add free days to extend a membership's current billing period, expiration date, or Stripe trial.
-
-Required permissions:
- - `member:manage`
- - `member:email:read`
- - `member:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.memberships.addFreeDaysMembership({
-    id: "mem_xxxxxxxxxxxxxx",
-    free_days: 42
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.AddFreeDaysMembershipRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MembershipsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 <details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">cancel</a>({ ...params }) -> Whop.Membership</code></summary>
 <dl>
 <dd>
@@ -15042,7 +14759,7 @@ await client.memberships.resume({
 </dl>
 </details>
 
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">resyncAccessMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">resyncAccess</a>({ ...params }) -> Whop.Membership</code></summary>
 <dl>
 <dd>
 
@@ -15054,12 +14771,7 @@ await client.memberships.resume({
 <dl>
 <dd>
 
-Re-run access fulfillment for a membership. Recomputes the member's content access on Whop, re-validates their Discord link (re-adding them to the server and re-assigning roles if needed), and re-fulfills TradingView indicator access. Telegram access is invite-based and cannot be resynced here. The outcome is written to the membership's logs.
-
-Required permissions:
- - `membership:resync_access`
- - `member:email:read`
- - `member:basic:read`
+Re-runs access fulfillment for a membership: recomputes the member's content access on Whop, re-validates their Discord link (re-adding them to the server and re-assigning roles if needed), and re-fulfills TradingView indicator access. Telegram access is invite-based and is not resynced. The work runs in the background and the outcome is written to the membership's logs.
 </dd>
 </dl>
 </dd>
@@ -15074,8 +14786,8 @@ Required permissions:
 <dd>
 
 ```typescript
-await client.memberships.resyncAccessMembership({
-    id: "mem_xxxxxxxxxxxxxx"
+await client.memberships.resyncAccess({
+    id: "id"
 });
 
 ```
@@ -15092,7 +14804,7 @@ await client.memberships.resyncAccessMembership({
 <dl>
 <dd>
 
-**request:** `Whop.ResyncAccessMembershipRequest` 
+**request:** `Whop.ResyncAccessMembershipsRequest` 
     
 </dd>
 </dl>
@@ -15158,76 +14870,6 @@ await client.memberships.transfer({
 <dd>
 
 **request:** `Whop.TransferMembershipsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MembershipsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">uncancelMembership</a>({ ...params }) -> Whop.MembershipLegacy</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Reverse a pending cancellation for a membership that was scheduled to cancel at period end.
-
-Required permissions:
- - `member:manage`
- - `member:email:read`
- - `member:basic:read`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.memberships.uncancelMembership({
-    id: "mem_xxxxxxxxxxxxxx"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.UncancelMembershipRequest` 
     
 </dd>
 </dl>
@@ -16056,6 +15698,72 @@ await client.partners.leaderboard();
 <dd>
 
 **request:** `Whop.LeaderboardPartnersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PartnersClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.partners.<a href="/src/api/resources/partners/client/Client.ts">retrieveLink</a>({ ...params }) -> Whop.OnboardingReward</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Resolves the public reward terms and whether redemption capacity remains. Immediate rewards claim capacity at business creation; qualified rewards claim it when the business reaches the threshold.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.partners.retrieveLink({
+    partner_username: "partner_username",
+    reward_slug: "reward_slug"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveLinkPartnersRequest` 
     
 </dd>
 </dl>
@@ -17232,6 +16940,71 @@ await client.payments.void({
 <dd>
 
 **request:** `Whop.VoidPaymentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PaymentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">resume</a>({ ...params }) -> Whop.PaymentStatus</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Starts a fresh on-session attempt with the saved card for a subscription renewal that is waiting on the customer to authenticate; the bank's step then arrives in `next_action` on the following status reads. Only the payment's own customer may call it — with the payment's `client_secret` or their own session — and it is a no-op for any payment that is not a parked renewal.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.resume({
+    payment_id: "payment_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ResumePaymentsRequest` 
     
 </dd>
 </dl>
@@ -18924,7 +18697,7 @@ await client.products.update({
 <dl>
 <dd>
 
-Submits a product to the whop.com marketplace for review. The product moves to `pending_review`; a Whop reviewer approves it before it goes live.
+Submits a product to the whop.com marketplace for review. The product moves to `pending_review`; a Whop reviewer approves it before it goes live. Requires a logo, a headline, and at least one gallery image or video; the request fails naming whichever is missing.
 </dd>
 </dl>
 </dd>
@@ -24999,92 +24772,6 @@ await client.webhooks.test({
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">deliveriesWebhook</a>({ ...params }) -> core.Page&lt;Whop.DeliveriesWebhookResponse.Data.Item, Whop.DeliveriesWebhookResponse&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns a paginated list of delivery attempts for a webhook, ordered by most recent first. Includes the request payload, response body, response code, and timing for each attempt.
-
-Required permissions:
- - `developer:manage_webhook`
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.webhooks.deliveriesWebhook({
-    webhook_id: "webhook_id",
-    first: 42,
-    last: 42
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.webhooks.deliveriesWebhook({
-    webhook_id: "webhook_id",
-    first: 42,
-    last: 42
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.DeliveriesWebhookRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WebhooksClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
 ## Accounts Preferences
 <details><summary><code>client.accounts.preferences.<a href="/src/api/resources/accounts/resources/preferences/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePreferencesResponse</code></summary>
 <dl>
@@ -27147,7 +26834,7 @@ await client.users.preferences.update();
 
 Sets the authenticated user's notification preferences. Each preference is addressed by `scope`, not by id, so a scope read back from either list endpoint can be sent straight here.
 
-A scope naming an experience with no topic sets that experience's level, and accepts all three levels. Any other scope sets a topic override, which is binary — `all` or `nothing` — and requires a `channel`.
+A scope naming an experience with no topic sets that experience's level, and accepts all three levels. Any other scope sets a topic override, which is binary — `all` or `nothing`. A topic override with no `channel` applies to every delivery channel.
 
 `level: null` clears the preference. Preferences are stored as overrides, so clearing one means the scope inherits its default again rather than being switched off.
 

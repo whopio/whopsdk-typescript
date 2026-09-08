@@ -59,7 +59,12 @@ describe("BusinessesClient", () => {
                         username: "ninaalvarez",
                     },
                     status: "active",
-                    volume_usd: { attributed: "40.00", awaiting_settlement: "0.00", settled: "40.00" },
+                    volume_usd: {
+                        attributed: "40.00",
+                        awaiting_settlement: "0.00",
+                        last_30d: "0.00",
+                        settled: "40.00",
+                    },
                 },
             ],
             page_info: {
@@ -255,7 +260,7 @@ describe("BusinessesClient", () => {
                 username: "marcuswebb",
             },
             status: "active",
-            volume_usd: { attributed: "0.00", awaiting_settlement: "0.00", settled: "0.00" },
+            volume_usd: { attributed: "0.00", awaiting_settlement: "0.00", last_30d: "0.00", settled: "0.00" },
         };
 
         server

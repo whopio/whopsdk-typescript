@@ -91,6 +91,7 @@ describe("PaymentsClient", () => {
                     plan_id: "plan_xxxxxxxxxxxxxx",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     promo_code_id: "promo_code_id",
+                    recovery_url: "recovery_url",
                     refundable: false,
                     refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                     refunded_at: "refunded_at",
@@ -280,6 +281,7 @@ describe("PaymentsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
@@ -567,6 +569,7 @@ describe("PaymentsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
@@ -995,6 +998,7 @@ describe("PaymentsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
@@ -1276,6 +1280,7 @@ describe("PaymentsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
@@ -1497,6 +1502,7 @@ describe("PaymentsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             refunded_at: "refunded_at",
@@ -1606,6 +1612,184 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.void({
                 id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("resume (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            capture_expires_at: "2026-01-01T12:00:00.000Z",
+            id: "pay_xxxxxxxxxxxxxx",
+            last_payment_error: {
+                code: "processing_error",
+                decline_code: "insufficient_funds",
+                message: "Your card was declined.",
+            },
+            next_action: {
+                type: "await_confirmation",
+                data: { expires_at: "2026-01-01T12:00:00.000Z" },
+                render: ["inline"],
+            },
+            object: "payment_status",
+            processing_details: { expected_by: "2026-01-01T12:00:00.000Z" },
+            return_url: "https://shinetime.example/checkout/done",
+            status: "requires_confirmation",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payments.resume({
+            payment_id: "payment_id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("resume (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.resume({
+                payment_id: "payment_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("resume (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.resume({
+                payment_id: "payment_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("resume (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.resume({
+                payment_id: "payment_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("resume (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.resume({
+                payment_id: "payment_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("resume (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/payments/payment_id/resume")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.resume({
+                payment_id: "payment_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

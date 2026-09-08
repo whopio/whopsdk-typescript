@@ -6,4 +6,5 @@ export * from "./ListAdCampaignsRequestOrder.js";
 export * from "./ListAdCampaignsRequestStatus.js";
 export * from "./ListAdCampaignsResponse.js";
 export * from "./PostAdCampaignPaymentFailedPayload.js";
+export * from "./PostAdCampaignUpdatedPayload.js";
 export * from "./RetrieveAdCampaignsRequestAttributionModel.js";

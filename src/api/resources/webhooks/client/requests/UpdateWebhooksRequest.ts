@@ -91,6 +91,8 @@ export namespace UpdateWebhooksRequest {
             ShipmentUpdated: "shipment.updated",
             MemberCreated: "member.created",
             AdCampaignPaymentFailed: "ad_campaign.payment_failed",
+            AdCampaignUpdated: "ad_campaign.updated",
+            AdUpdated: "ad.updated",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",

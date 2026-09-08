@@ -683,12 +683,14 @@ describe("SocialAccountsClient", () => {
             data: [
                 {
                     call_to_action: "learn_more",
+                    caption: "Ceramic coating in action",
                     destination_url: "https://shinetime.example/book",
                     embed_url: "https://www.facebook.com/plugins/post.php",
                     id: "media_1",
                     media_url: "https://shinetime.example/ceramic-coating-reel.mp4",
                     restrictions: ["lead_form_ineligible"],
                     thumbnail_url: "https://shinetime.example/ceramic-coating-poster.jpg",
+                    video_id: "18000000000000000",
                 },
             ],
             page_info: { end_cursor: "MTI=", has_next_page: true },

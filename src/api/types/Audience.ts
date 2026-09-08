@@ -3,15 +3,17 @@
 import type * as Whop from "../index.js";
 
 export interface Audience {
-    /** `custom` = a customer list (uploaded, or built from saved People filters); `lookalike` = Meta lookalike built from a custom audience. */
+    /** Whether the audience targets a defined group of people or people similar to an existing audience. */
     audience_type: Audience.AudienceType;
-    /** Whether membership keeps updating. `true` rebuilds it from the saved filters twice a day, so people join and leave as they start and stop matching. `false` keeps whoever matched when it was built and never rebuilds. Always `false` for uploaded lists and lookalikes. */
+    /** Whether Whop rebuilds membership from saved People filters twice a day. When `false`, People audiences keep the members matched at creation. Always `false` for uploaded lists, lookalikes, and engagement audiences. Engagement membership is maintained by Meta. */
     auto_refresh: boolean;
     /** When the audience was created, as an ISO 8601 timestamp. */
     created_at: string;
+    /** Social engagement rules maintained by the ad platform. `null` for other audience sources. */
+    engagement: Whop.AudienceEngagement | null;
     /** Processing error message. `null` unless processing is partial or failed. */
     error_message: string | null;
-    /** For audiences built from People filters: the filters that define membership, keyed exactly as `GET /people` accepts them — for example `{"os": "iOS", "country": "US"}`. `null` for uploaded lists and lookalikes. */
+    /** Saved Whop People filters that define membership, using the same keys as `GET /people`. `null` for uploaded lists, engagement audiences, and lookalikes. */
     filters: Record<string, unknown> | null;
     /** Audience ID, prefixed `adaud_`. */
     id: string;
@@ -22,41 +24,42 @@ export interface Audience {
     /** For lookalikes: the lower bound of the similarity band as a fraction. `null` for custom audiences and first-tier lookalikes. */
     lookalike_starting_ratio: number | null;
     match_rates: Whop.AudienceMatchRate[];
-    /** Members successfully uploaded to connected ad accounts. Always 0 for lookalikes. */
+    /** Members successfully uploaded to connected ad accounts. Always 0 for lookalikes and engagement audiences. */
     matched_rows: number;
     /** Audience display name. */
     name: string;
     platform_audience_ids: string[];
-    /** Members processed from the source so far. Always 0 for lookalikes. */
+    /** Members processed from the source so far. Always 0 for lookalikes and engagement audiences. */
     processed_rows: number;
     /** Processing progress from 0 to 100. */
     progress_percent: number;
     /** For lookalikes: the audience this lookalike was built from. `null` for custom audiences. */
     source_audience_id: string | null;
-    /** Where members come from. `csv_upload` = an uploaded customer list; `people_filter` = built from saved People filters. See `auto_refresh` for whether a `people_filter` audience keeps updating. */
+    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. */
     source_type: Audience.SourceType;
-    /** Current state of the audience import. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. For engagement audiences, `ready` means the rules were created on Meta; membership may still be populating. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     status: Audience.Status;
-    /** Total members detected in the source — CSV rows for uploaded lists, matching people for automatic audiences. Always 0 for lookalikes. */
+    /** Total members detected in the source — CSV rows for uploaded lists, matching people for automatic audiences. Always 0 for lookalikes and engagement audiences. */
     total_rows: number;
     /** When the audience was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
 }
 
 export namespace Audience {
-    /** `custom` = a customer list (uploaded, or built from saved People filters); `lookalike` = Meta lookalike built from a custom audience. */
+    /** Whether the audience targets a defined group of people or people similar to an existing audience. */
     export const AudienceType = {
         Custom: "custom",
         Lookalike: "lookalike",
     } as const;
     export type AudienceType = (typeof AudienceType)[keyof typeof AudienceType];
-    /** Where members come from. `csv_upload` = an uploaded customer list; `people_filter` = built from saved People filters. See `auto_refresh` for whether a `people_filter` audience keeps updating. */
+    /** Membership source: an uploaded CSV, Whop People filters, or social engagement. */
     export const SourceType = {
         CsvUpload: "csv_upload",
         PeopleFilter: "people_filter",
+        Engagement: "engagement",
     } as const;
     export type SourceType = (typeof SourceType)[keyof typeof SourceType];
-    /** Current state of the audience import. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
+    /** Current state of audience creation. For engagement audiences, `ready` means the rules were created on Meta; membership may still be populating. `syncing` means Whop is sending matched rows to connected ad accounts. When status is `partial` or `failed`, `error_message` explains what went wrong. */
     export const Status = {
         Pending: "pending",
         Processing: "processing",

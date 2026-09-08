@@ -29,7 +29,7 @@ export interface UpdatePlansRequest {
     expiration_days?: number | null;
     /** An image displayed on the product page to represent this plan. */
     image?: UpdatePlansRequest.Image | null;
-    /** Initial amount charged in the plan's currency, e.g. 10.43 for $10.43. */
+    /** Initial amount charged in the plan's currency, e.g. 10.43 for $10.43. A paid fiat plan charges at least 1.00 in its currency; use 0 for free. */
     initial_price?: number | null;
     /** Private notes visible only to the account owner. Not shown to customers. */
     internal_notes?: string | null;
@@ -43,7 +43,7 @@ export interface UpdatePlansRequest {
     payment_method_configuration?: UpdatePlansRequest.PaymentMethodConfiguration | null;
     /** Sales method for this plan. */
     release_method?: string;
-    /** The amount charged each billing period for recurring plans, in the plan's currency. */
+    /** The amount charged each billing period for recurring plans, in the plan's currency. A paid fiat plan charges at least 1.00 in its currency. */
     renewal_price?: number | null;
     /** The maximum number of units available for purchase. Ignored when unlimited_stock is true. */
     stock?: number | null;
