@@ -1,6 +1,5 @@
 export { CreateWebhooksRequest } from "./CreateWebhooksRequest.js";
 export type { DeleteWebhooksRequest } from "./DeleteWebhooksRequest.js";
-export type { DeliveriesWebhookRequest } from "./DeliveriesWebhookRequest.js";
 export type { ListDeliveriesWebhooksRequest } from "./ListDeliveriesWebhooksRequest.js";
 export type { ListWebhooksRequest } from "./ListWebhooksRequest.js";
 export type { ReplayDeliveryWebhooksRequest } from "./ReplayDeliveryWebhooksRequest.js";

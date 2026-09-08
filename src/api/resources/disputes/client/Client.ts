@@ -81,7 +81,7 @@ export class DisputesClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -188,7 +188,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -268,7 +268,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -345,7 +345,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -428,7 +428,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -476,221 +476,6 @@ export class DisputesClient {
     }
 
     /**
-     * Submit a payment dispute to the payment processor for review. Once submitted, no further edits can be made.
-     *
-     * Required permissions:
-     *  - `payment:dispute`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `company:basic:read`
-     *  - `payment:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *
-     * @param {Whop.SubmitEvidenceDisputeRequest} request
-     * @param {DisputesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.disputes.submitEvidenceDispute({
-     *         id: "dspt_xxxxxxxxxxxxx"
-     *     })
-     */
-    public submitEvidenceDispute(
-        request: Whop.SubmitEvidenceDisputeRequest,
-        requestOptions?: DisputesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.DisputeLegacy> {
-        return core.HttpResponsePromise.fromPromise(this.__submitEvidenceDispute(request, requestOptions));
-    }
-
-    private async __submitEvidenceDispute(
-        request: Whop.SubmitEvidenceDisputeRequest,
-        requestOptions?: DisputesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.DisputeLegacy>> {
-        const { id } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
-                `disputes/${core.url.encodePathParam(id)}/submit_evidence`,
-            ),
-            method: "POST",
-            headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.DisputeLegacy, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/disputes/{id}/submit_evidence",
-        );
-    }
-
-    /**
-     * Update a dispute with evidence data to attempt to win the dispute.
-     *
-     * Required permissions:
-     *  - `payment:dispute`
-     *  - `plan:basic:read`
-     *  - `access_pass:basic:read`
-     *  - `company:basic:read`
-     *  - `payment:basic:read`
-     *  - `member:email:read`
-     *  - `member:basic:read`
-     *  - `member:phone:read`
-     *
-     * @param {Whop.UpdateEvidenceDisputeRequest} request
-     * @param {DisputesClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.disputes.updateEvidenceDispute({
-     *         id: "dspt_xxxxxxxxxxxxx"
-     *     })
-     */
-    public updateEvidenceDispute(
-        request: Whop.UpdateEvidenceDisputeRequest,
-        requestOptions?: DisputesClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.DisputeLegacy> {
-        return core.HttpResponsePromise.fromPromise(this.__updateEvidenceDispute(request, requestOptions));
-    }
-
-    private async __updateEvidenceDispute(
-        request: Whop.UpdateEvidenceDisputeRequest,
-        requestOptions?: DisputesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.DisputeLegacy>> {
-        const { id, ..._body } = request;
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
-                `disputes/${core.url.encodePathParam(id)}/update_evidence`,
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.DisputeLegacy, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/disputes/{id}/update_evidence",
-        );
-    }
-
-    /**
      * Replaces the full set of uploaded evidence documents on a dispute, beyond the four fixed evidence slots. Upload files through `POST /files` and reference them by `id`, or send the files as multipart file parts to upload and attach in one call. Send every document the packet should carry — up to 10, 10MB each and 25MB in total; an empty list removes them all. Accepted content types: application/pdf, application/json, image/jpeg, image/png, image/webp — any other type is rejected.
      *
      * @param {Whop.UploadEvidenceDisputesRequest} request
@@ -728,7 +513,7 @@ export class DisputesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

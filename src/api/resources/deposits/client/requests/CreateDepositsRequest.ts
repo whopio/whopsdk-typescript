@@ -7,7 +7,7 @@
  *     }
  */
 export interface CreateDepositsRequest {
-    /** Amount to prefill on hosted deposit page. */
+    /** Amount to prefill on hosted deposit page. Crypto deposits require a $10 minimum. */
     amount?: number;
     /** Account ID to fund, `biz_` or `user_`. Any business resolves without authentication; a user account resolves only for that same authenticated user. */
     destination: string;

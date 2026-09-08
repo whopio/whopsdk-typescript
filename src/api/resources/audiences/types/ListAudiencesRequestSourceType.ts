@@ -3,6 +3,7 @@
 export const ListAudiencesRequestSourceType = {
     CsvUpload: "csv_upload",
     PeopleFilter: "people_filter",
+    Engagement: "engagement",
 } as const;
 export type ListAudiencesRequestSourceType =
     (typeof ListAudiencesRequestSourceType)[keyof typeof ListAudiencesRequestSourceType];

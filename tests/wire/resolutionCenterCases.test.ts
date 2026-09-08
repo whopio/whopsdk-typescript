@@ -33,6 +33,15 @@ describe("ResolutionCenterCasesClient", () => {
                     customer_appealed: false,
                     escalated: false,
                     id: "reso_xxxxxxxxxxxxxx",
+                    line_items: [
+                        {
+                            id: null,
+                            label: "Ceramic Coating Package",
+                            plan_id: "plan_xxxxxxxxxxxxxx",
+                            product_id: "prod_xxxxxxxxxxxxxx",
+                            quantity: 1,
+                        },
+                    ],
                     outcome: "customer_won",
                     payment: {
                         card_brand: "visa",
@@ -180,6 +189,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -387,6 +405,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -498,6 +525,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -640,6 +676,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -759,6 +804,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -987,6 +1041,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -1104,6 +1167,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",
@@ -1218,6 +1290,15 @@ describe("ResolutionCenterCasesClient", () => {
             customer_appealed: false,
             escalated: false,
             id: "reso_xxxxxxxxxxxxxx",
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    quantity: 1,
+                },
+            ],
             outcome: "customer_won",
             payment: {
                 card_brand: "visa",

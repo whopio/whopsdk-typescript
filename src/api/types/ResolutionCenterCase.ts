@@ -20,6 +20,7 @@ export interface ResolutionCenterCase {
     escalated: boolean;
     /** Resolution center case ID, prefixed `reso_`. */
     id: string;
+    line_items: Whop.ResolutionLineItem[];
     /** Who prevailed on the claim. `null` until the case closes. Read `refund` for whether any money actually moved. */
     outcome: ResolutionCenterCase.Outcome | null;
     /** The payment the case was opened against. */

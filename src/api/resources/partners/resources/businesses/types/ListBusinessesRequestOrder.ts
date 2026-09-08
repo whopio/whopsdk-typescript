@@ -6,6 +6,7 @@ export const ListBusinessesRequestOrder = {
     ReferralExpiresAt: "referral_expires_at",
     PayoutPercentage: "payout_percentage",
     VolumeUsd: "volume_usd",
+    Volume30DUsd: "volume_30d_usd",
     EarningsUsd: "earnings_usd",
 } as const;
 export type ListBusinessesRequestOrder = (typeof ListBusinessesRequestOrder)[keyof typeof ListBusinessesRequestOrder];

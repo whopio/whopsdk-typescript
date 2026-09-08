@@ -154,6 +154,7 @@ export namespace ListEventsResponse {
                     export const SourceType = {
                         CsvUpload: "csv_upload",
                         PeopleFilter: "people_filter",
+                        Engagement: "engagement",
                     } as const;
                     export type SourceType = (typeof SourceType)[keyof typeof SourceType];
                 }

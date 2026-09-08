@@ -219,6 +219,7 @@ export const PermissionAction = {
     WebhookReceiveChat: "webhook_receive:chat",
     WebhookReceiveEntries: "webhook_receive:entries",
     WebhookReceiveAdCampaigns: "webhook_receive:ad_campaigns",
+    WebhookReceiveAds: "webhook_receive:ads",
     WebhookReceiveProducts: "webhook_receive:products",
     WebhookReceivePlans: "webhook_receive:plans",
     WebhookReceiveShipments: "webhook_receive:shipments",

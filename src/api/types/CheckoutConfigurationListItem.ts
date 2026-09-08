@@ -10,6 +10,8 @@ export interface CheckoutConfigurationListItem {
     account_id: string;
     /** The affiliate code to use for the checkout configuration */
     affiliate_code: string | null;
+    /** The ID of the account to use for the checkout configuration */
+    company_id: string;
     /** The currency to use for the configuration when in 'setup' mode. This is used to target which currency specific payment methods are available. If not provided, it will default to 'usd' when in setup mode. */
     currency: Whop.Currencies | null;
     /** The unique identifier for the checkout session. */

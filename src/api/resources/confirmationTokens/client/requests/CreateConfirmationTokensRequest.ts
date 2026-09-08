@@ -49,6 +49,7 @@ export namespace CreateConfirmationTokensRequest {
         address?: (Record<string, unknown> | null) | undefined;
         email: string;
         name?: (string | null) | undefined;
+        phone?: (string | null) | undefined;
     }
 
     /**
@@ -69,6 +70,8 @@ export namespace CreateConfirmationTokensRequest {
         google_pay?: PaymentMethod.GooglePay | undefined;
         /** The buyer's identity document when the charge currency has a payer_document_requirements entry for this method, such as ARS card, MODO, or Rapipago. This is independent of the method category. */
         payer_document?: PaymentMethod.PayerDocument | undefined;
+        /** Category `redirect` only. Empty unless the method declares redirect-specific fields. */
+        redirect?: PaymentMethod.Redirect | undefined;
         /** Category `saved` only. Names one of the buyer's own stored payment methods. Requires a buyer credential — the wallet read is scoped to that account, so another user's id reads as not found. */
         saved?: PaymentMethod.Saved | undefined;
         /** The payment method type, for example `card` or `ideal`. Required for every category except `saved` and `balance`, where it is read from the referenced method. */
@@ -164,6 +167,11 @@ export namespace CreateConfirmationTokensRequest {
             } as const;
             export type Type = (typeof Type)[keyof typeof Type];
         }
+
+        /**
+         * Category `redirect` only. Empty unless the method declares redirect-specific fields.
+         */
+        export type Redirect = {};
 
         /**
          * Category `saved` only. Names one of the buyer's own stored payment methods. Requires a buyer credential — the wallet read is scoped to that account, so another user's id reads as not found.

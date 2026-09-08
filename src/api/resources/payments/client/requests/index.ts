@@ -3,6 +3,7 @@ export type { CreatePaymentsRequest } from "./CreatePaymentsRequest.js";
 export type { ListFeesPaymentsRequest } from "./ListFeesPaymentsRequest.js";
 export type { ListPaymentsRequest } from "./ListPaymentsRequest.js";
 export type { RefundPaymentsRequest } from "./RefundPaymentsRequest.js";
+export type { ResumePaymentsRequest } from "./ResumePaymentsRequest.js";
 export type { RetrievePaymentsRequest } from "./RetrievePaymentsRequest.js";
 export type { RetrieveStatusPaymentsRequest } from "./RetrieveStatusPaymentsRequest.js";
 export type { RetryPaymentsRequest } from "./RetryPaymentsRequest.js";

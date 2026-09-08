@@ -19,7 +19,7 @@ export declare namespace DepositsClient {
 /**
  * Deposits describe ways to add funds to an account balance, including hosted deposit pages, bank deposit instructions, and supported crypto wallet addresses.
  *
- * Use the Deposits API to create deposit instructions for an account.
+ * Use the Deposits API to create deposit instructions for an account. Crypto deposits require a $10 minimum.
  */
 export class DepositsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<DepositsClient.Options>;
@@ -29,7 +29,7 @@ export class DepositsClient {
     }
 
     /**
-     * Retrieve the deposit methods for an account, including crypto and bank transfer.
+     * Retrieve the deposit methods for an account, including crypto and bank transfer. Crypto deposits require a $10 minimum.
      *
      * @param {Whop.CreateDepositsRequest} request
      * @param {DepositsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -60,7 +60,7 @@ export class DepositsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-02-2",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

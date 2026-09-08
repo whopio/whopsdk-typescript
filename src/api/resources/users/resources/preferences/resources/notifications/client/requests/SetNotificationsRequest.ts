@@ -39,7 +39,7 @@ export namespace SetNotificationsRequest {
             export interface Scope {
                 /** Account to scope the preference to (member notifications), `biz_` tag. */
                 account_id?: (string | null) | undefined;
-                /** Delivery channel the preference applies to. Required when setting a topic override. */
+                /** Delivery channel the preference applies to. Omit it (or pass `null`) to apply the preference to every channel. */
                 channel?: (Scope.Channel | null) | undefined;
                 /** Experience to scope the preference to (`exp_` tag). Requires `account_id` when a `topic_id` is also given. */
                 experience_id?: (string | null) | undefined;
@@ -50,7 +50,7 @@ export namespace SetNotificationsRequest {
             }
 
             export namespace Scope {
-                /** Delivery channel the preference applies to. Required when setting a topic override. */
+                /** Delivery channel the preference applies to. Omit it (or pass `null`) to apply the preference to every channel. */
                 export const Channel = {
                     InApp: "in_app",
                     Mobile: "mobile",

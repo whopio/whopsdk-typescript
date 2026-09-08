@@ -6,6 +6,8 @@ import type * as Whop from "../index.js";
  * An AI-powered chat conversation belonging to a user, with optional scheduled automation.
  */
 export interface AiChat {
+    /** The AI agent that handles this chat. Set when the chat is created and fixed for its lifetime. */
+    agent_identifier: Whop.AiChatAgentIdentifiers;
     /** The total number of tokens consumed across all messages in this conversation. */
     blended_token_usage: string;
     /** The datetime the ai chat was created. */

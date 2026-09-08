@@ -13,9 +13,9 @@ export interface ListAudiencesRequest {
     account_id: string;
     /** Audience ID, prefixed `adaud_`, used to filter the response to one audience. */
     audience_id?: string;
-    /** Filter by audience type: `custom` (uploaded lists) or `lookalike`. */
+    /** Filter by custom or lookalike audiences. */
     audience_type?: Whop.ListAudiencesRequestAudienceType;
-    /** Filter by member source: `csv_upload` (uploaded lists) or `people_filter` (automatic audiences built from saved People filters). */
+    /** Filter by uploaded customer lists, Whop People filters, or social engagement. */
     source_type?: Whop.ListAudiencesRequestSourceType;
     /** Number of audiences to return. Defaults to 20; maximum 100. */
     first?: number;
