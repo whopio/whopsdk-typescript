@@ -22,6 +22,7 @@ export namespace AccountRequiredAction {
     /** What the holder must do; new values may be added, so handle unknown actions gracefully */
     export const Action = {
         DepositFunds: "deposit_funds",
+        AcceptAirwallexTerms: "accept_airwallex_terms",
         SubmitInformationRequest: "submit_information_request",
         UpdateAutomaticWithdrawalMethod: "update_automatic_withdrawal_method",
         ReauthorizePayoutMethods: "reauthorize_payout_methods",
