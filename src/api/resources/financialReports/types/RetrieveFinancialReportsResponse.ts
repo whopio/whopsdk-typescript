@@ -300,6 +300,7 @@ export namespace RetrieveFinancialReportsResponse {
                 PspDisputePayable: "psp_dispute_payable",
                 PspExternalAccountConnectionFee: "psp_external_account_connection_fee",
                 PspFixedFee: "psp_fixed_fee",
+                PspFxAdjustment: "psp_fx_adjustment",
                 PspGatewayFee: "psp_gateway_fee",
                 PspIdentityVerificationFee: "psp_identity_verification_fee",
                 PspInterchangeFee: "psp_interchange_fee",
