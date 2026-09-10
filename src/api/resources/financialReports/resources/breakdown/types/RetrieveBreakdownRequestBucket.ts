@@ -9,6 +9,7 @@ export const RetrieveBreakdownRequestBucket = {
     CardSpend: "card_spend",
     CardAuthorizationReleases: "card_authorization_releases",
     Withdrawals: "withdrawals",
+    WithdrawalMarkup: "withdrawal_markup",
     Swaps: "swaps",
 } as const;
 export type RetrieveBreakdownRequestBucket =

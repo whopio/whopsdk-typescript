@@ -47,7 +47,7 @@ export interface Payment {
     next_payment_attempt_at: string | null;
     /** When the money was collected, or null while it has not been. */
     paid_at: string | null;
-    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and the card's brand and last four when it was a card. */
+    /** The instrument shaped for display: a buyer-facing name, the standard icon set, and the card's brand, last four and issuer identification number when it was a card. */
     payment_instrument: Whop.PaymentInstrument | null;
     /** The stored payment method that was charged, prefixed `payt_`. Null when the method was not saved. */
     payment_method_id: string | null;
@@ -103,7 +103,7 @@ export interface Payment {
     usd_total: Whop.Money | null;
     /** The buyer. Null when the payment belongs to a company buyer rather than a user. */
     user: Whop.UserSummary | null;
-    /** The issuer's address and security code check results, or null when the processor returned none. */
+    /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none. */
     verification_checks: Whop.PaymentVerificationChecks | null;
     /** True when the payment is `open` on a past-due membership and its processor supports voiding — see `POST /payments/{id}/void`. */
     voidable: boolean;

@@ -111,6 +111,18 @@ describe("DisputesClient", () => {
                             text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
                         },
                     ],
+                    line_items: [
+                        {
+                            id: null,
+                            label: "Ceramic Coating Package",
+                            plan_id: "plan_xxxxxxxxxxxxxx",
+                            plan_title: "Unlimited Wash Club",
+                            product_id: "prod_xxxxxxxxxxxxxx",
+                            product_title: "Ceramic Coating Package",
+                            quantity: 1,
+                            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                    ],
                     payment: {
                         amount: 249,
                         card_brand: "visa",
@@ -119,7 +131,7 @@ describe("DisputesClient", () => {
                         currency: "usd",
                         id: "pay_xxxxxxxxxxxxxx",
                         payment_instrument: {
-                            card: { brand: "visa", last4: "4242" },
+                            card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                             display_name: "Visa •••• 4242",
                             icons: {
                                 card: {
@@ -413,6 +425,18 @@ describe("DisputesClient", () => {
                     text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
                 },
             ],
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Unlimited Wash Club",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             payment: {
                 amount: 249,
                 card_brand: "visa",
@@ -421,7 +445,7 @@ describe("DisputesClient", () => {
                 currency: "usd",
                 id: "pay_xxxxxxxxxxxxxx",
                 payment_instrument: {
-                    card: { brand: "visa", last4: "4242" },
+                    card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                     display_name: "Visa •••• 4242",
                     icons: {
                         card: {
@@ -621,6 +645,18 @@ describe("DisputesClient", () => {
                     text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
                 },
             ],
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Unlimited Wash Club",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             payment: {
                 amount: 249,
                 card_brand: "visa",
@@ -629,7 +665,7 @@ describe("DisputesClient", () => {
                 currency: "usd",
                 id: "pay_xxxxxxxxxxxxxx",
                 payment_instrument: {
-                    card: { brand: "visa", last4: "4242" },
+                    card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                     display_name: "Visa •••• 4242",
                     icons: {
                         card: {
@@ -878,6 +914,18 @@ describe("DisputesClient", () => {
                     text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
                 },
             ],
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Unlimited Wash Club",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             payment: {
                 amount: 249,
                 card_brand: "visa",
@@ -886,7 +934,7 @@ describe("DisputesClient", () => {
                 currency: "usd",
                 id: "pay_xxxxxxxxxxxxxx",
                 payment_instrument: {
-                    card: { brand: "visa", last4: "4242" },
+                    card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                     display_name: "Visa •••• 4242",
                     icons: {
                         card: {
@@ -1158,6 +1206,18 @@ describe("DisputesClient", () => {
                     text: "Note: Cardholder states the ceramic coating appointment never took place\nCancellation method: By phone",
                 },
             ],
+            line_items: [
+                {
+                    id: "id",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Unlimited Wash Club",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             payment: {
                 amount: 249,
                 card_brand: "visa",
@@ -1166,7 +1226,7 @@ describe("DisputesClient", () => {
                 currency: "usd",
                 id: "pay_xxxxxxxxxxxxxx",
                 payment_instrument: {
-                    card: { brand: "visa", last4: "4242" },
+                    card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                     display_name: "Visa •••• 4242",
                     icons: {
                         card: {

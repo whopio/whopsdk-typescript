@@ -100,6 +100,8 @@ export const ListFinancialActivityRequestLineTypesItem = {
     PlatformBalanceTransferOutgoing: "platform_balance_transfer_outgoing",
     PlatformCoveredDispute: "platform_covered_dispute",
     PlatformEarning: "platform_earning",
+    PlatformMarkupFee: "platform_markup_fee",
+    PlatformMarkupFeePayout: "platform_markup_fee_payout",
     PromoReversal: "promo_reversal",
     ReferralBonus: "referral_bonus",
     ResolutionCenterRefund: "resolution_center_refund",

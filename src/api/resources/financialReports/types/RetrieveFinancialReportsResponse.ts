@@ -272,6 +272,8 @@ export namespace RetrieveFinancialReportsResponse {
                 PlatformEarning: "platform_earning",
                 PlatformEarningSettlement: "platform_earning_settlement",
                 PlatformEarningUnreconciledClearing: "platform_earning_unreconciled_clearing",
+                PlatformMarkupFee: "platform_markup_fee",
+                PlatformMarkupFeePayout: "platform_markup_fee_payout",
                 PromoReversal: "promo_reversal",
                 PspAcceleratedSettlementFee: "psp_accelerated_settlement_fee",
                 PspAccountDebit: "psp_account_debit",

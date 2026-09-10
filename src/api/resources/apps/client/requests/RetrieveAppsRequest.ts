@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveAppsRequest {
-    /** App ID (prefixed `app_`), the app's claimed route, or its proxy domain id. */
+    /** App ID (prefixed `app_`). Retrieval also accepts the app's claimed route, an active verified custom hostname, or its proxy domain id. */
     id: string;
 }

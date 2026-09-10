@@ -52,6 +52,8 @@ export namespace Webhook {
         /** Event types this webhook is subscribed to, in dot form (for example `payment.succeeded`). */
         export const Item = {
             AccountUpdated: "account.updated",
+            AccountFinancingApproved: "account.financing_approved",
+            AccountFinancingDenied: "account.financing_denied",
             InvoiceCreated: "invoice.created",
             InvoiceMarkedUncollectible: "invoice.marked_uncollectible",
             InvoicePaid: "invoice.paid",
@@ -158,6 +160,8 @@ export namespace Webhook {
         /** The subset of subscribed event types that support sending test payloads, in dot form. */
         export const Item = {
             AccountUpdated: "account.updated",
+            AccountFinancingApproved: "account.financing_approved",
+            AccountFinancingDenied: "account.financing_denied",
             InvoiceCreated: "invoice.created",
             InvoiceMarkedUncollectible: "invoice.marked_uncollectible",
             InvoicePaid: "invoice.paid",

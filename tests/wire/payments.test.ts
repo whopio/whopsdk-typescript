@@ -50,7 +50,7 @@ describe("PaymentsClient", () => {
                     next_payment_attempt_at: "next_payment_attempt_at",
                     paid_at: "2026-01-01T12:00:00.000Z",
                     payment_instrument: {
-                        card: { brand: "visa", last4: "4242" },
+                        card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                         display_name: "Visa •••• 4242",
                         icons: {
                             card: {
@@ -240,7 +240,7 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", last4: "4242" },
+                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -528,7 +528,7 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", last4: "4242" },
+                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -694,6 +694,7 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {
@@ -957,7 +958,7 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", last4: "4242" },
+                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1239,7 +1240,7 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", last4: "4242" },
+                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1461,7 +1462,7 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", last4: "4242" },
+                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1627,6 +1628,7 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {
@@ -1805,6 +1807,7 @@ describe("PaymentsClient", () => {
         });
         const rawRequestBody = { return_url: "https://shinetime.example/checkout/thanks" };
         const rawResponseBody = {
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {
@@ -1908,6 +1911,7 @@ describe("PaymentsClient", () => {
         });
 
         const rawResponseBody = {
+            account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             capture_expires_at: "2026-01-01T12:00:00.000Z",
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_error: {

@@ -23,6 +23,7 @@ describe("ProductsClient", () => {
                         route: "biz_xxxxxxxxxxxxxx",
                         title: "Shine Time Auto Detailing",
                     },
+                    average_review_rating: 0,
                     created_at: "2026-01-01T12:00:00.000Z",
                     default_plan: {
                         billing_period: 30,
@@ -35,7 +36,7 @@ describe("ProductsClient", () => {
                         unlimited_stock: true,
                         visibility: "visible",
                     },
-                    description: "Two-stage paint correction, a three-year ceramic coating, and sealed wheel faces.",
+                    description: "synthesize extensible web-readiness",
                     external_identifier: "SHINE-CERAMIC-01",
                     gallery_images: [
                         {
@@ -44,14 +45,14 @@ describe("ProductsClient", () => {
                             url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         },
                     ],
-                    headline: "A showroom finish that lasts three years",
+                    headline: "out of pocket",
                     id: "prod_xxxxxxxxxxxxxx",
                     labels: ["courses"],
                     member_count: 0,
                     metadata: { key: "value" },
                     published_reviews_count: 0,
-                    route: "ceramic-coating-package",
-                    title: "Ceramic Coating Package",
+                    route: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    title: "Seller Waitlist Default",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     verified: false,
                     visibility: "visible",
@@ -135,6 +136,7 @@ describe("ProductsClient", () => {
         const rawRequestBody = { title: "Interior Deep Clean" };
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", route: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            average_review_rating: 0,
             created_at: "2026-01-01T12:00:00.000Z",
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
@@ -262,6 +264,7 @@ describe("ProductsClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", route: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            average_review_rating: 0,
             created_at: "2026-01-01T12:00:00.000Z",
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
@@ -409,6 +412,7 @@ describe("ProductsClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", route: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            average_review_rating: 0,
             created_at: "2026-01-01T12:00:00.000Z",
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
@@ -536,6 +540,7 @@ describe("ProductsClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", route: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            average_review_rating: 0,
             created_at: "2026-01-01T12:00:00.000Z",
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
@@ -687,6 +692,7 @@ describe("ProductsClient", () => {
 
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", route: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
+            average_review_rating: 0,
             created_at: "2026-01-01T12:00:00.000Z",
             custom_cta: "get_access",
             custom_cta_url: "https://shinetime.example/book",
