@@ -11,6 +11,7 @@ export const RetrieveBreakdownRequestBucket = {
     Withdrawals: "withdrawals",
     WithdrawalMarkup: "withdrawal_markup",
     Swaps: "swaps",
+    CardLoads: "card_loads",
 } as const;
 export type RetrieveBreakdownRequestBucket =
     (typeof RetrieveBreakdownRequestBucket)[keyof typeof RetrieveBreakdownRequestBucket];
