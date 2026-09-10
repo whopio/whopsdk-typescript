@@ -137,6 +137,10 @@ describe("AccountsClient", () => {
                         username: "danawhitfield",
                     },
                     parent_account: {
+                        fees: {
+                            crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                            transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                        },
                         id: "biz_xxxxxxxxxxxxxx",
                         logo_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -512,6 +516,10 @@ describe("AccountsClient", () => {
                 username: "danawhitfield",
             },
             parent_account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -915,6 +923,10 @@ describe("AccountsClient", () => {
                 username: "danawhitfield",
             },
             parent_account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1245,6 +1257,10 @@ describe("AccountsClient", () => {
                 username: "danawhitfield",
             },
             parent_account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -1602,6 +1618,10 @@ describe("AccountsClient", () => {
                 username: "danawhitfield",
             },
             parent_account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -2628,6 +2648,10 @@ describe("AccountsClient", () => {
                 username: "danawhitfield",
             },
             parent_account: {
+                fees: {
+                    crypto_swap_markup: { fixed_fee_usd: 0, percentage_fee: 3 },
+                    transfer_markup: { fixed_fee_usd: 0, percentage_fee: 0 },
+                },
                 id: "biz_xxxxxxxxxxxxxx",
                 logo_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",

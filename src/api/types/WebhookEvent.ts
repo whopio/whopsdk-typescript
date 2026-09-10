@@ -71,6 +71,7 @@ export const WebhookEvent = {
     ShipmentCreated: "shipment.created",
     ShipmentUpdated: "shipment.updated",
     MemberCreated: "member.created",
+    MemberUpdated: "member.updated",
     AdCampaignPaymentFailed: "ad_campaign.payment_failed",
     AdCampaignUpdated: "ad_campaign.updated",
     AdUpdated: "ad.updated",

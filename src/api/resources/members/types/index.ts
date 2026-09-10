@@ -4,3 +4,4 @@ export * from "./ListMembersRequestOrder.js";
 export * from "./ListMembersRequestStatus.js";
 export * from "./ListMembersResponse.js";
 export * from "./PostMemberCreatedPayload.js";
+export * from "./PostMemberUpdatedPayload.js";
