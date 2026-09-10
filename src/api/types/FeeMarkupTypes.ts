@@ -10,5 +10,6 @@ export const FeeMarkupTypes = {
     TransferMarkup: "transfer_markup",
     CryptoDepositMarkup: "crypto_deposit_markup",
     BankDepositMarkup: "bank_deposit_markup",
+    CryptoSwapMarkup: "crypto_swap_markup",
 } as const;
 export type FeeMarkupTypes = (typeof FeeMarkupTypes)[keyof typeof FeeMarkupTypes];
