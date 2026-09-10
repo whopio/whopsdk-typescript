@@ -21,6 +21,8 @@ export interface Payment {
     created_at: string;
     /** The currency the payment settles in, lowercase ISO 4217. Every money field below is stated in it unless it says otherwise. */
     currency: Whop.Currencies;
+    /** The buyer's email address. Null without `member:email:read` on the account or when the buyer has no assigned email. */
+    customer_email: string | null;
     /** The phone number the buyer gave at checkout, when one was collected. */
     customer_phone: string | null;
     /** The normalized decline reason of the most recent failed attempt, or null. */
@@ -57,6 +59,8 @@ export interface Payment {
     payments_failed: number;
     /** The plan that was charged, prefixed `plan_`. */
     plan_id: string | null;
+    /** The account-facing total in the currency presented to the buyer, before conversion into the settlement currency. Excludes buyer fees. */
+    presentment_total: Whop.Money | null;
     /** The product the plan belongs to, prefixed `prod_`. Null for a plan with no product. */
     product_id: string | null;
     /** The promo code applied at checkout, prefixed `promo_`, or null. */
