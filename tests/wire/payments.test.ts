@@ -208,7 +208,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -339,7 +339,6 @@ describe("PaymentsClient", () => {
 
         const response = await client.payments.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            plan_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -353,7 +352,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -368,7 +367,6 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.create({
                 account_id: "account_id",
-                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -382,7 +380,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -397,7 +395,6 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.create({
                 account_id: "account_id",
-                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -411,7 +408,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -426,7 +423,6 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.create({
                 account_id: "account_id",
-                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -440,7 +436,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -455,7 +451,6 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.create({
                 account_id: "account_id",
-                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -469,7 +464,7 @@ describe("PaymentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", plan_id: "plan_id" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -484,7 +479,6 @@ describe("PaymentsClient", () => {
         await expect(async () => {
             return await client.payments.create({
                 account_id: "account_id",
-                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

@@ -3,8 +3,7 @@
 /**
  * @example
  *     {
- *         account_id: "biz_xxxxxxxxxxxxxx",
- *         plan_id: "plan_xxxxxxxxxxxxxx"
+ *         account_id: "biz_xxxxxxxxxxxxxx"
  *     }
  */
 export interface CreatePaymentsRequest {
@@ -22,12 +21,211 @@ export interface CreatePaymentsRequest {
     metadata?: Record<string, string | null> | null;
     /** The stored payment method to charge, prefixed `payt_`. It must belong to the member. Required unless `confirmation_token` is provided. */
     payment_method_id?: string | null;
-    /** The plan to charge for, prefixed `plan_`. It must belong to the account. */
-    plan_id: string;
+    /** Find or create a plan for this payment. Mutually exclusive with `plan_id`. Creating a plan requires plan:create; creating or updating a product requires the corresponding product permission. */
+    plan?: CreatePaymentsRequest.Plan;
+    /** The plan to charge for, prefixed `plan_`. It must belong to the account. Mutually exclusive with `plan`. */
+    plan_id?: string;
     /** An active promo code to apply, prefixed `promo_`. It must belong to the account and be valid for the plan. */
     promo_code_id?: string | null;
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Ignored unless `confirmation_token` is provided. */
     return_url?: string | null;
     /** Overrides the text on the buyer's card statement for this payment only. Takes precedence over the product's and account's custom descriptors, and changes neither. Must start with `WHOP*`, be 5-22 characters, contain at least one letter, and use only Latin letters, numbers, spaces, underscores, hyphens, or asterisks. */
     statement_descriptor?: string | null;
+}
+
+export namespace CreatePaymentsRequest {
+    /**
+     * Find or create a plan for this payment. Mutually exclusive with `plan_id`. Creating a plan requires plan:create; creating or updating a product requires the corresponding product permission.
+     */
+    export interface Plan {
+        /** Application fee collected by the platform in the plan currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time plans or renewal price for recurring plans. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring plans. Only valid for connected accounts with a parent account. */
+        application_fee_amount?: (number | null) | undefined;
+        /** Recurring billing interval in days. */
+        billing_period?: (number | null) | undefined;
+        /** Currency code for the plan prices. */
+        currency: Plan.Currency;
+        /** Plan description. */
+        description?: (string | null) | undefined;
+        /** Days until access expires. */
+        expiration_days?: (number | null) | undefined;
+        /** Create a new plan instead of reusing a matching plan. */
+        force_create_new_plan?: (boolean | null) | undefined;
+        /** Additional amount charged on the first purchase, in the plan currency. For recurring plans without a trial, the first charge includes this amount plus renewal_price. */
+        initial_price?: (number | null) | undefined;
+        /** Internal notes for the account. */
+        internal_notes?: (string | null) | undefined;
+        /** Billing model for the plan. */
+        plan_type?: (Plan.PlanType | null) | undefined;
+        /** Find or create a product by external identifier. Mutually exclusive with product_id. */
+        product?: (Plan.Product | null) | undefined;
+        /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
+        product_id?: (string | null) | undefined;
+        /** Recurring price in the plan currency. */
+        renewal_price?: (number | null) | undefined;
+        /** Plan title. */
+        title?: (string | null) | undefined;
+        /** Free trial days before renewal. */
+        trial_period_days?: (number | null) | undefined;
+        /** Whether the plan is visible to customers. */
+        visibility?: (Plan.Visibility | null) | undefined;
+    }
+
+    export namespace Plan {
+        /** Currency code for the plan prices. */
+        export const Currency = {
+            Usd: "usd",
+            Sgd: "sgd",
+            Inr: "inr",
+            Aud: "aud",
+            Brl: "brl",
+            Cad: "cad",
+            Dkk: "dkk",
+            Eur: "eur",
+            Nok: "nok",
+            Gbp: "gbp",
+            Sek: "sek",
+            Chf: "chf",
+            Hkd: "hkd",
+            Huf: "huf",
+            Jpy: "jpy",
+            Mxn: "mxn",
+            Myr: "myr",
+            Pln: "pln",
+            Czk: "czk",
+            Nzd: "nzd",
+            Aed: "aed",
+            Eth: "eth",
+            Ape: "ape",
+            Cop: "cop",
+            Ron: "ron",
+            Thb: "thb",
+            Bgn: "bgn",
+            Idr: "idr",
+            Dop: "dop",
+            Php: "php",
+            Try: "try",
+            Krw: "krw",
+            Twd: "twd",
+            Vnd: "vnd",
+            Pkr: "pkr",
+            Clp: "clp",
+            Uyu: "uyu",
+            Ars: "ars",
+            Zar: "zar",
+            Dzd: "dzd",
+            Tnd: "tnd",
+            Mad: "mad",
+            Kes: "kes",
+            Kwd: "kwd",
+            Jod: "jod",
+            All: "all",
+            Xcd: "xcd",
+            Amd: "amd",
+            Bsd: "bsd",
+            Bhd: "bhd",
+            Bob: "bob",
+            Bam: "bam",
+            Khr: "khr",
+            Crc: "crc",
+            Xof: "xof",
+            Egp: "egp",
+            Etb: "etb",
+            Gmd: "gmd",
+            Ghs: "ghs",
+            Gtq: "gtq",
+            Gyd: "gyd",
+            Ils: "ils",
+            Jmd: "jmd",
+            Mop: "mop",
+            Mga: "mga",
+            Mur: "mur",
+            Mdl: "mdl",
+            Mnt: "mnt",
+            Nad: "nad",
+            Ngn: "ngn",
+            Mkd: "mkd",
+            Omr: "omr",
+            Pyg: "pyg",
+            Pen: "pen",
+            Qar: "qar",
+            Rwf: "rwf",
+            Sar: "sar",
+            Rsd: "rsd",
+            Lkr: "lkr",
+            Tzs: "tzs",
+            Ttd: "ttd",
+            Uzs: "uzs",
+            Rub: "rub",
+            Btc: "btc",
+            Cny: "cny",
+            Usdt: "usdt",
+            Kzt: "kzt",
+            Awg: "awg",
+            WhopUsd: "whop_usd",
+            Xau: "xau",
+        } as const;
+        export type Currency = (typeof Currency)[keyof typeof Currency];
+        /** Billing model for the plan. */
+        export const PlanType = {
+            Renewal: "renewal",
+            OneTime: "one_time",
+        } as const;
+        export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+
+        /**
+         * Find or create a product by external identifier. Mutually exclusive with product_id.
+         */
+        export interface Product {
+            /** Whether to collect a shipping address at checkout. */
+            collect_shipping_address?: (boolean | null) | undefined;
+            /** Custom card statement descriptor for the product, starting with WHOP*. */
+            custom_statement_descriptor?: (string | null) | undefined;
+            /** Product description. */
+            description?: (string | null) | undefined;
+            /** Your unique identifier for the product. */
+            external_identifier: string;
+            /** Percentage of revenue paid to global affiliates. */
+            global_affiliate_percentage?: (number | null) | undefined;
+            /** Global affiliate program status. */
+            global_affiliate_status?: (Product.GlobalAffiliateStatus | null) | undefined;
+            /** Product headline. */
+            headline?: (string | null) | undefined;
+            /** Product tax code identifier. */
+            product_tax_code_id?: (string | null) | undefined;
+            /** Where to redirect the buyer after purchase. */
+            redirect_purchase_url?: (string | null) | undefined;
+            /** Product route. */
+            route?: (string | null) | undefined;
+            /** Product title. */
+            title: string;
+            /** Product visibility. Defaults to hidden. */
+            visibility?: Product.Visibility | undefined;
+        }
+
+        export namespace Product {
+            /** Global affiliate program status. */
+            export const GlobalAffiliateStatus = {
+                Enabled: "enabled",
+                Disabled: "disabled",
+            } as const;
+            export type GlobalAffiliateStatus = (typeof GlobalAffiliateStatus)[keyof typeof GlobalAffiliateStatus];
+            /** Product visibility. Defaults to hidden. */
+            export const Visibility = {
+                Visible: "visible",
+                Hidden: "hidden",
+                Archived: "archived",
+                QuickLink: "quick_link",
+            } as const;
+            export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+        }
+
+        /** Whether the plan is visible to customers. */
+        export const Visibility = {
+            Visible: "visible",
+            Hidden: "hidden",
+            Archived: "archived",
+            QuickLink: "quick_link",
+        } as const;
+        export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+    }
 }
