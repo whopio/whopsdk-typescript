@@ -36,6 +36,12 @@ export namespace RetrieveBreakdownResponse {
         CardAuthorizationReleases: "card_authorization_releases",
         Withdrawals: "withdrawals",
         WithdrawalMarkup: "withdrawal_markup",
+        PlatformMarkup: "platform_markup",
+        Clawbacks: "clawbacks",
+        Disputes: "disputes",
+        AffiliateEarnings: "affiliate_earnings",
+        AffiliatePayouts: "affiliate_payouts",
+        RevenueShare: "revenue_share",
         Swaps: "swaps",
         CardLoads: "card_loads",
     } as const;

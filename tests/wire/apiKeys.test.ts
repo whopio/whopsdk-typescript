@@ -346,14 +346,14 @@ describe("ApiKeysClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    action: "access_pass:basic:export",
+                    action: "ai_prompt:create",
                     allowed_on_api_key: true,
-                    allowed_on_app: true,
-                    allowed_on_user: false,
-                    category: "Products",
-                    description: "Download the account's product list as a CSV.",
+                    allowed_on_app: false,
+                    allowed_on_user: true,
+                    category: "category",
+                    description: "",
                     granted_to_system_roles: ["owner"],
-                    name: "Export products",
+                    name: "ai_prompt:create",
                 },
             ],
             page_info: {

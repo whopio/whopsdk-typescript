@@ -15,7 +15,7 @@ describe("PermissionsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { data: [{ action: "ai_prompt:create", granted: false }] };
+        const rawResponseBody = { data: [{ action: "experiment:manage", granted: false }] };
 
         server.mockEndpoint().get("/permissions").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 

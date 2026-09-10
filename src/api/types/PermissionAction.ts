@@ -2,6 +2,8 @@
 
 /** A permission action identifier, such as `company:basic:read`. */
 export const PermissionAction = {
+    ExperimentManage: "experiment:manage",
+    ExperimentRead: "experiment:read",
     AiPromptCreate: "ai_prompt:create",
     AccessPassBasicExport: "access_pass:basic:export",
     AccessPassBasicRead: "access_pass:basic:read",

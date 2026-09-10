@@ -429,6 +429,17 @@
             },
             "default": "./dist/cjs/api/resources/experiences/exports.js"
         },
+        "./experiments": {
+            "import": {
+                "types": "./dist/esm/api/resources/experiments/exports.d.mts",
+                "default": "./dist/esm/api/resources/experiments/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/experiments/exports.d.ts",
+                "default": "./dist/cjs/api/resources/experiments/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/experiments/exports.js"
+        },
         "./exports": {
             "import": {
                 "types": "./dist/esm/api/resources/exports/exports.d.mts",

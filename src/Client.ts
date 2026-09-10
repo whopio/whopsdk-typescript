@@ -37,6 +37,7 @@ import { DomainsClient } from "./api/resources/domains/client/Client.js";
 import { EntriesClient } from "./api/resources/entries/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { ExperiencesClient } from "./api/resources/experiences/client/Client.js";
+import { ExperimentsClient } from "./api/resources/experiments/client/Client.js";
 import { ExportsClient } from "./api/resources/exports/client/Client.js";
 import { FeeMarkupsClient } from "./api/resources/feeMarkups/client/Client.js";
 import { FilesClient } from "./api/resources/files/client/Client.js";
@@ -131,6 +132,7 @@ export class WhopClient {
     protected _entries: EntriesClient | undefined;
     protected _events: EventsClient | undefined;
     protected _experiences: ExperiencesClient | undefined;
+    protected _experiments: ExperimentsClient | undefined;
     protected _exports: ExportsClient | undefined;
     protected _feeMarkups: FeeMarkupsClient | undefined;
     protected _files: FilesClient | undefined;
@@ -327,6 +329,10 @@ export class WhopClient {
 
     public get experiences(): ExperiencesClient {
         return (this._experiences ??= new ExperiencesClient(this._options));
+    }
+
+    public get experiments(): ExperimentsClient {
+        return (this._experiments ??= new ExperimentsClient(this._options));
     }
 
     public get exports(): ExportsClient {
