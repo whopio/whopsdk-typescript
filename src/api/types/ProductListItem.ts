@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface ProductListItem {
     /** Account that sells this product. */
     account: Record<string, unknown> | null;
+    /** Average star rating across published reviews for this product, from `1.0` to `5.0`. Returns `0.0` when no published-review rating is available. */
+    average_review_rating: number;
     /** When the product was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** Buyable plan to show and check out with. The configured default when that plan is buyable, otherwise the first buyable plan in product-page order. `null` when none is buyable. */

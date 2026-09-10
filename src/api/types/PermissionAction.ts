@@ -248,6 +248,7 @@ export const PermissionAction = {
     NotificationCreate: "notification:create",
     UserBalanceRead: "user:balance:read",
     UserEmailRead: "user:email:read",
+    UserPaymentCharge: "user:payment:charge",
     UserStaffRead: "user:staff:read",
     OauthTokenExchange: "oauth:token_exchange",
     Openid: "openid",

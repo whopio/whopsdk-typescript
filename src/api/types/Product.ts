@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface Product {
     /** Account that sells this product. */
     account: Record<string, unknown> | null;
+    /** Average star rating across published reviews for this product, from `1.0` to `5.0`. Returns `0.0` when no published-review rating is available. */
+    average_review_rating: number;
     /** When the product was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** Call-to-action button label shown on the product purchase page. */

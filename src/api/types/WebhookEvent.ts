@@ -3,6 +3,8 @@
 /** The different event types available */
 export const WebhookEvent = {
     AccountUpdated: "account.updated",
+    AccountFinancingApproved: "account.financing_approved",
+    AccountFinancingDenied: "account.financing_denied",
     InvoiceCreated: "invoice.created",
     InvoiceMarkedUncollectible: "invoice.marked_uncollectible",
     InvoicePaid: "invoice.paid",

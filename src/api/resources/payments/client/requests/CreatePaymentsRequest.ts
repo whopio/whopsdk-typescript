@@ -28,4 +28,6 @@ export interface CreatePaymentsRequest {
     promo_code_id?: string | null;
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Ignored unless `confirmation_token` is provided. */
     return_url?: string | null;
+    /** Overrides the text on the buyer's card statement for this payment only. Takes precedence over the product's and account's custom descriptors, and changes neither. Must start with `WHOP*`, be 5-22 characters, contain at least one letter, and use only Latin letters, numbers, spaces, underscores, hyphens, or asterisks. */
+    statement_descriptor?: string | null;
 }

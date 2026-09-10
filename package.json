@@ -374,6 +374,17 @@
             },
             "default": "./dist/cjs/api/resources/dmMembers/exports.js"
         },
+        "./domains": {
+            "import": {
+                "types": "./dist/esm/api/resources/domains/exports.d.mts",
+                "default": "./dist/esm/api/resources/domains/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/domains/exports.d.ts",
+                "default": "./dist/cjs/api/resources/domains/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/domains/exports.js"
+        },
         "./entries": {
             "import": {
                 "types": "./dist/esm/api/resources/entries/exports.d.mts",

@@ -258,13 +258,13 @@ export namespace ListMethodsResponse {
                 AccountSuspended: "account_suspended",
                 BlockMoveMoneyOutBecauseClawback: "block_move_money_out_because_clawback",
                 SupportabilityCheckPayoutStatusHold: "supportability_check_payout_status_hold",
+                CardUsageReviewPayoutStatusHold: "card_usage_review_payout_status_hold",
                 KycCompleted: "kyc_completed",
                 RmiClear: "rmi_clear",
                 IdentityRfiClear: "identity_rfi_clear",
                 EcommerceFulfillmentConnected: "ecommerce_fulfillment_connected",
                 BlockMoveMoneyOut: "block_move_money_out",
                 BlockMoveMoneyOutSetByParent: "block_move_money_out_set_by_parent",
-                CardUsageReviewPayoutStatusHold: "card_usage_review_payout_status_hold",
                 NoAvailableBalance: "no_available_balance",
             } as const;
             export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

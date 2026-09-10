@@ -32,6 +32,7 @@ import { DisputeAlertsClient } from "./api/resources/disputeAlerts/client/Client
 import { DisputesClient } from "./api/resources/disputes/client/Client.js";
 import { DmChannelsClient } from "./api/resources/dmChannels/client/Client.js";
 import { DmMembersClient } from "./api/resources/dmMembers/client/Client.js";
+import { DomainsClient } from "./api/resources/domains/client/Client.js";
 import { EntriesClient } from "./api/resources/entries/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { ExperiencesClient } from "./api/resources/experiences/client/Client.js";
@@ -124,6 +125,7 @@ export class WhopClient {
     protected _disputes: DisputesClient | undefined;
     protected _dmChannels: DmChannelsClient | undefined;
     protected _dmMembers: DmMembersClient | undefined;
+    protected _domains: DomainsClient | undefined;
     protected _entries: EntriesClient | undefined;
     protected _events: EventsClient | undefined;
     protected _experiences: ExperiencesClient | undefined;
@@ -303,6 +305,10 @@ export class WhopClient {
 
     public get dmMembers(): DmMembersClient {
         return (this._dmMembers ??= new DmMembersClient(this._options));
+    }
+
+    public get domains(): DomainsClient {
+        return (this._domains ??= new DomainsClient(this._options));
     }
 
     public get entries(): EntriesClient {

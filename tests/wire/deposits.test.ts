@@ -38,9 +38,11 @@ describe("DepositsClient", () => {
                 crypto: [
                     {
                         deposit_address: "soladdr",
-                        icon_url: "https://whop.com/crypto/solana.svg",
+                        icon_url: "https://whop.com/_static/images/crypto/solana.svg",
                         name: "Ethereum",
-                        supported_currencies: [{ icon_url: "https://whop.com/crypto/ethereum.svg", name: "ARB" }],
+                        supported_currencies: [
+                            { icon_url: "https://whop.com/_static/images/crypto/ethereum.svg", name: "ARB" },
+                        ],
                     },
                 ],
             },

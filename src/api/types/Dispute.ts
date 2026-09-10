@@ -30,6 +30,7 @@ export interface Dispute {
     /** Whether this is a pre-dispute inquiry rather than a formal chargeback. Inquiries follow the same lifecycle but move no funds unless one escalates. */
     inquiry: boolean;
     issuer_comments: Whop.DisputeIssuerComment[];
+    line_items: Whop.ReceiptLineItem[];
     /** The payment being disputed. */
     payment: Whop.DisputePayment | null;
     /** The plan the disputed payment was made on, prefixed `plan_`. */
@@ -38,9 +39,9 @@ export interface Dispute {
     product_id: string | null;
     /** Whether Visa Rapid Dispute Resolution settled this automatically. These refund the customer without an evidence round. */
     rapid_dispute_resolution: boolean;
-    /** Why the customer says they are disputing, normalized across card networks. `other` covers a code Whop has not categorized yet — read `reason_code` for the raw value. */
+    /** Why the customer says they are disputing, normalized across processors and card networks. `other` covers a processor reason Whop has not categorized yet. */
     reason: Dispute.Reason;
-    /** The raw card-network or processor reason code, such as `10.4`. */
+    /** The raw card-network or processor reason code, such as `10.4`. Informational only — `reason` is not derived from it. */
     reason_code: string | null;
     /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `closed` ended without a ruling. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
     status: Dispute.Status;
@@ -56,7 +57,7 @@ export namespace Dispute {
         NotContestable: "not_contestable",
     } as const;
     export type EvidenceLockedReason = (typeof EvidenceLockedReason)[keyof typeof EvidenceLockedReason];
-    /** Why the customer says they are disputing, normalized across card networks. `other` covers a code Whop has not categorized yet — read `reason_code` for the raw value. */
+    /** Why the customer says they are disputing, normalized across processors and card networks. `other` covers a processor reason Whop has not categorized yet. */
     export const Reason = {
         Fraudulent: "fraudulent",
         Unrecognized: "unrecognized",

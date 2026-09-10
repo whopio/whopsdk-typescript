@@ -7,7 +7,7 @@
  *     }
  */
 export interface UpdateAppsRequest {
-    /** App ID (prefixed `app_`), the app's claimed route, or its proxy domain id. */
+    /** App ID (prefixed `app_`). Retrieval also accepts the app's claimed route, an active verified custom hostname, or its proxy domain id. */
     id: string;
     /** The detailed description shown on the app store's in-depth app view page. */
     app_store_description?: string;

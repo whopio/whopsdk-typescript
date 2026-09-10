@@ -3,6 +3,8 @@
 export interface PaymentInstrumentCard {
     /** The network identifier (`visa`, `amex`, …), matching `card.networks` entries and saved card payment methods. */
     brand: string;
+    /** The issuer identification number, also called the BIN: the card's leading six or eight digits, which identify the issuing bank. Null when the processor did not report it. */
+    issuer_identification_number: string | null;
     /** The card's last four digits, when captured. */
     last4: string | null;
 }

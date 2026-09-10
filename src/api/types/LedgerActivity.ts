@@ -157,6 +157,8 @@ export namespace LedgerActivity {
         PlatformBalanceTransferOutgoing: "platform_balance_transfer_outgoing",
         PlatformCoveredDispute: "platform_covered_dispute",
         PlatformEarning: "platform_earning",
+        PlatformMarkupFee: "platform_markup_fee",
+        PlatformMarkupFeePayout: "platform_markup_fee_payout",
         PromoReversal: "promo_reversal",
         ReferralBonus: "referral_bonus",
         ResolutionCenterRefund: "resolution_center_refund",
@@ -374,7 +376,7 @@ export namespace LedgerActivity {
         /** Lowercase currency code converted from (swap sources only). */
         from_currency?: (string | null) | undefined;
         id: string;
-        /** Memo attached to the transfer source, or null when none was provided. */
+        /** Memo attached to the transfer or payout source, or null when none was provided (on payout sources requires payout:withdrawal:read). */
         notes?: (string | null) | undefined;
         object: string;
         /** Name of the entity processing the payout (payout sources only; requires payout:withdrawal:read). */

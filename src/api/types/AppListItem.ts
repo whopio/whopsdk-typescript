@@ -24,6 +24,7 @@ export interface AppListItem {
     discover_path: string | null;
     /** Subdomain identifier for the app's proxied URL, forming https://{domain_id}.apps.whop.com. */
     domain_id: string;
+    domains: Whop.AppDomain[] | null;
     /** URL path for the member-facing hub view, or `null` when not configured. */
     experience_path: string | null;
     /** Full URL where the app's hosted web build is served, or `null` if no route is claimed. */

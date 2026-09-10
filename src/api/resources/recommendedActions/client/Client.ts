@@ -34,6 +34,7 @@ export class RecommendedActionsClient {
      * @param {RecommendedActionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -61,7 +62,7 @@ export class RecommendedActionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-09",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -94,6 +95,8 @@ export class RecommendedActionsClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
@@ -115,6 +118,7 @@ export class RecommendedActionsClient {
      * @param {RecommendedActionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -144,7 +148,7 @@ export class RecommendedActionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-09",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -177,6 +181,8 @@ export class RecommendedActionsClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
@@ -198,6 +204,7 @@ export class RecommendedActionsClient {
      * @param {RecommendedActionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
      * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
@@ -228,7 +235,7 @@ export class RecommendedActionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-09",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -261,6 +268,8 @@ export class RecommendedActionsClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
@@ -284,6 +293,7 @@ export class RecommendedActionsClient {
      * @param {RecommendedActionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -313,7 +323,7 @@ export class RecommendedActionsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-06",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-09",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -349,6 +359,8 @@ export class RecommendedActionsClient {
             switch (_response.error.statusCode) {
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 default:
