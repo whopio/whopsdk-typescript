@@ -37,6 +37,7 @@ export namespace RetrieveBreakdownResponse {
         Withdrawals: "withdrawals",
         WithdrawalMarkup: "withdrawal_markup",
         Swaps: "swaps",
+        CardLoads: "card_loads",
     } as const;
     export type Bucket = (typeof Bucket)[keyof typeof Bucket];
     export const Direction = {
