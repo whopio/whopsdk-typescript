@@ -220,6 +220,17 @@
             },
             "default": "./dist/cjs/api/resources/cards/exports.js"
         },
+        "./cashbackRules": {
+            "import": {
+                "types": "./dist/esm/api/resources/cashbackRules/exports.d.mts",
+                "default": "./dist/esm/api/resources/cashbackRules/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/cashbackRules/exports.d.ts",
+                "default": "./dist/cjs/api/resources/cashbackRules/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/cashbackRules/exports.js"
+        },
         "./chatChannels": {
             "import": {
                 "types": "./dist/esm/api/resources/chatChannels/exports.d.mts",

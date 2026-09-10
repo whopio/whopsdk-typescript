@@ -18,6 +18,7 @@ import { BountiesClient } from "./api/resources/bounties/client/Client.js";
 import { BountySubmissionsClient } from "./api/resources/bountySubmissions/client/Client.js";
 import { CardsClient } from "./api/resources/cards/client/Client.js";
 import { CardTransactionsClient } from "./api/resources/cardTransactions/client/Client.js";
+import { CashbackRulesClient } from "./api/resources/cashbackRules/client/Client.js";
 import { ChatChannelsClient } from "./api/resources/chatChannels/client/Client.js";
 import { CheckoutConfigurationsClient } from "./api/resources/checkoutConfigurations/client/Client.js";
 import { CompanyTokenTransactionsClient } from "./api/resources/companyTokenTransactions/client/Client.js";
@@ -111,6 +112,7 @@ export class WhopClient {
     protected _bountySubmissions: BountySubmissionsClient | undefined;
     protected _cardTransactions: CardTransactionsClient | undefined;
     protected _cards: CardsClient | undefined;
+    protected _cashbackRules: CashbackRulesClient | undefined;
     protected _chatChannels: ChatChannelsClient | undefined;
     protected _checkoutConfigurations: CheckoutConfigurationsClient | undefined;
     protected _companyTokenTransactions: CompanyTokenTransactionsClient | undefined;
@@ -249,6 +251,10 @@ export class WhopClient {
 
     public get cards(): CardsClient {
         return (this._cards ??= new CardsClient(this._options));
+    }
+
+    public get cashbackRules(): CashbackRulesClient {
+        return (this._cashbackRules ??= new CashbackRulesClient(this._options));
     }
 
     public get chatChannels(): ChatChannelsClient {
