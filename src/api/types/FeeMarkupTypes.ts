@@ -7,6 +7,7 @@ export const FeeMarkupTypes = {
     NextDayBankWithdrawalMarkup: "next_day_bank_withdrawal_markup",
     BankWireWithdrawalMarkup: "bank_wire_withdrawal_markup",
     DigitalWalletWithdrawalMarkup: "digital_wallet_withdrawal_markup",
+    TransferMarkup: "transfer_markup",
     CryptoDepositMarkup: "crypto_deposit_markup",
     BankDepositMarkup: "bank_deposit_markup",
 } as const;
