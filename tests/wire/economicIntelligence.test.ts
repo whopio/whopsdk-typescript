@@ -35,7 +35,6 @@ describe("EconomicIntelligenceClient", () => {
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
                 },
             ],
-            generation_pending: false,
             page_info: {
                 end_cursor: "end_cursor",
                 has_next_page: false,
