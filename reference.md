@@ -10676,6 +10676,147 @@ await client.domains.update({
 </dl>
 </details>
 
+## Economic Intelligence
+<details><summary><code>client.economicIntelligence.<a href="/src/api/resources/economicIntelligence/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.EconomicIntelligence, Whop.ListEconomicIntelligenceResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists every recommendation the account has been given, newest first: requests the engine is still answering, cards ready to run, cards already run, and cards a newer one replaced. `status=ready` is what the dashboard shows; an account with nothing ready gets `generation_pending` true while cards are being generated, so poll until it clears.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.economicIntelligence.list();
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.economicIntelligence.list();
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListEconomicIntelligenceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EconomicIntelligenceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.economicIntelligence.<a href="/src/api/resources/economicIntelligence/client/Client.ts">run</a>({ ...params }) -> Whop.EconomicIntelligence</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Runs the engine toward what the owner wants, in their own words, such as "get more repeat buyers for my taurine supplement". The recommendation comes back right away with status `queued` and only the owner's `input` filled in; the engine moves it to `pending` while it works and then to `ready`, with the title and brief written, or to `failed`. Watch it in the list.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.economicIntelligence.run({
+    input: "get more repeat buyers for my taurine supplement"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RunEconomicIntelligenceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EconomicIntelligenceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Entries
 <details><summary><code>client.entries.<a href="/src/api/resources/entries/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.EntryListItem, Whop.ListEntriesResponse&gt;</code></summary>
 <dl>
@@ -20608,265 +20749,6 @@ await client.reactions.delete({
 <dd>
 
 **requestOptions:** `ReactionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-## Recommended Actions
-<details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">list</a>({ ...params }) -> Whop.ListRecommendedActionsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the recommended action chains for an account — short sequences of actions (create a product, price it, publish it) the account should run next, gated on what it already has.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.recommendedActions.list();
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.ListRecommendedActionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RecommendedActionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountRecommendedActionChain</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieves a recommended action chain by id, including chains that have already been run. Seeded chains are reconstructed from their hard-coded chain; generated chains are read from the account's stored chain, with each step's filled-in input.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.recommendedActions.retrieve({
-    id: "id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.RetrieveRecommendedActionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RecommendedActionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">run</a>({ ...params }) -> Whop.RunRecommendedActionsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Records that the caller ran a recommended action chain. Nothing is executed server-side yet — the client follows the chain's step CTAs itself; this writes the `recommended_action_chain.executed` analytics event and a `redirected` execution per step.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.recommendedActions.run({
-    id: "id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.RunRecommendedActionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RecommendedActionsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.recommendedActions.<a href="/src/api/resources/recommendedActions/client/Client.ts">listExecutions</a>({ ...params }) -> Whop.ListExecutionsRecommendedActionsResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the per-step record of a recommended action chain the server ran — one entry per step in position order, each carrying its current status and, once the step completed, the API response it produced. A chain that was never run server-side returns an empty list.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.recommendedActions.listExecutions({
-    id: "id"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Whop.ListExecutionsRecommendedActionsRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RecommendedActionsClient.RequestOptions` 
     
 </dd>
 </dl>

@@ -396,6 +396,17 @@
             },
             "default": "./dist/cjs/api/resources/domains/exports.js"
         },
+        "./economicIntelligence": {
+            "import": {
+                "types": "./dist/esm/api/resources/economicIntelligence/exports.d.mts",
+                "default": "./dist/esm/api/resources/economicIntelligence/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/economicIntelligence/exports.d.ts",
+                "default": "./dist/cjs/api/resources/economicIntelligence/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/economicIntelligence/exports.js"
+        },
         "./entries": {
             "import": {
                 "types": "./dist/esm/api/resources/entries/exports.d.mts",
@@ -758,17 +769,6 @@
                 "default": "./dist/cjs/api/resources/reactions/exports.js"
             },
             "default": "./dist/cjs/api/resources/reactions/exports.js"
-        },
-        "./recommendedActions": {
-            "import": {
-                "types": "./dist/esm/api/resources/recommendedActions/exports.d.mts",
-                "default": "./dist/esm/api/resources/recommendedActions/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/recommendedActions/exports.d.ts",
-                "default": "./dist/cjs/api/resources/recommendedActions/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/recommendedActions/exports.js"
         },
         "./refunds": {
             "import": {
