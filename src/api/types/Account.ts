@@ -28,6 +28,8 @@ export interface Account {
     created_at: string;
     /** Account promotional description. */
     description: string | null;
+    /** Whether economic intelligence is enabled for the account. */
+    economic_intelligence: boolean;
     /** Account owner email address. */
     email: string | null;
     /** The account's end-user license agreement document, or `null` if they have not published one. */
