@@ -162,7 +162,7 @@ export interface ChatChannelUpdateParams {
 
   /**
    * The minimum number of seconds a user must wait between sending messages in this
-   * chat channel.
+   * chat channel. Pass null or 0 to remove the cooldown.
    */
   user_posts_cooldown_seconds?: number | null;
 
