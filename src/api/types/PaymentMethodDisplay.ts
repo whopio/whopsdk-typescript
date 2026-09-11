@@ -3,9 +3,9 @@
 import type * as Whop from "../index.js";
 
 export interface PaymentMethodDisplay {
-    /** Present when the category is `bank_debit`. Carries the account's last four when the linking provider surfaced it. */
+    /** Present when the category is `bank_debit`. Empty until the account is charged. */
     bank_debit?: Whop.PaymentMethodDisplayPreview | undefined;
-    /** Present when the category is `card`. What the collection surface displayed — the token has not been charged, so this is the buyer's claim, not the vault's record. */
+    /** Details of the card, when the category is `card`. */
     card?: Whop.PaymentMethodDisplayPreview | undefined;
     /** The family the type belongs to. */
     category: PaymentMethodDisplay.Category;
@@ -13,11 +13,11 @@ export interface PaymentMethodDisplay {
     display_name: string;
     /** The saved payment method this preview came from, or `null` when the buyer supplied a new one. */
     id: string | null;
-    /** Present when the category is `saved` and the stored method is a card. Unlike the other previews this is the vault's own record, not a claim from the collection surface. Absent for a balance, which has no instrument. */
+    /** Details of the stored card, when the category is `saved`. Absent for a balance. */
     saved?: Whop.PaymentMethodDisplayPreview | undefined;
     /** The payment method type, e.g. `card`, `apple_pay`, `klarna`. */
     type: string;
-    /** Present when the category is `wallet`. Carries the backing card's brand and last four when the wallet surfaced them. */
+    /** Details of the network token the wallet supplied, when the category is `wallet`. */
     wallet?: Whop.PaymentMethodDisplayPreview | undefined;
 }
 
