@@ -17,7 +17,7 @@ export interface UpdateChatChannelsRequest {
     ban_urls?: boolean | null;
     /** A list of words that are automatically blocked from messages in this chat channel. For example, ['spam', 'scam']. */
     banned_words?: string[] | null;
-    /** The minimum number of seconds a user must wait between sending messages in this chat channel. */
+    /** The minimum number of seconds a user must wait between sending messages in this chat channel. Pass null or 0 to remove the cooldown. */
     user_posts_cooldown_seconds?: number | null;
     /** Controls which roles are allowed to send messages in this chat channel. */
     who_can_post?: Whop.WhoCanPostTypes | null;
