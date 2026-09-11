@@ -56,6 +56,7 @@ describe("PreferencesClient", () => {
             cards_auto_top_up: false,
             cards_notifications: true,
             dispute_fighter_enabled: false,
+            economic_intelligence: false,
         };
 
         server
@@ -177,6 +178,7 @@ describe("PreferencesClient", () => {
             cards_auto_top_up: false,
             cards_notifications: true,
             dispute_fighter_enabled: false,
+            economic_intelligence: false,
         };
 
         server
