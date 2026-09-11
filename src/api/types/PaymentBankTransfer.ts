@@ -15,8 +15,10 @@ export interface PaymentBankTransfer {
     bank_address?: string | undefined;
     /** The receiving branch, where the local system routes by branch. */
     bank_branch?: string | undefined;
-    /** The receiving bank's code in the local clearing system. */
+    /** The code that identifies the receiving bank — its code in the local clearing system, or its SWIFT/BIC on a transfer that crosses borders. */
     bank_code?: string | undefined;
+    /** What to call `bank_code` when showing it, in the scheme's own terms — `SWIFT / BIC` on an international wire, for example. */
+    bank_code_label?: string | undefined;
     /** The receiving bank's name. */
     bank_name?: string | undefined;
     /** The account holder's tax or identity document number, where the local system needs it to send. */
