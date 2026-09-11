@@ -65,7 +65,7 @@ export interface Account {
     privacy_policy: Whop.File_ | null;
     /** Tax classification code applied by default to the account's products, with `id`, `name`, and `product_type`. `null` when no default is set. */
     product_tax_code: Record<string, unknown> | null;
-    /** DEPRECATED: Use the `GET /recommended_actions?account_id={account_id}` endpoint instead. */
+    /** DEPRECATED: Use the `GET /economic_intelligence?account_id={account_id}` endpoint instead. */
     recommended_actions: Whop.AccountRecommendedAction[] | null;
     /** Whether authorized users must enable two-factor authentication. */
     require_2fa: boolean;

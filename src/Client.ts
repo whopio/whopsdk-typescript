@@ -34,6 +34,7 @@ import { DisputesClient } from "./api/resources/disputes/client/Client.js";
 import { DmChannelsClient } from "./api/resources/dmChannels/client/Client.js";
 import { DmMembersClient } from "./api/resources/dmMembers/client/Client.js";
 import { DomainsClient } from "./api/resources/domains/client/Client.js";
+import { EconomicIntelligenceClient } from "./api/resources/economicIntelligence/client/Client.js";
 import { EntriesClient } from "./api/resources/entries/client/Client.js";
 import { EventsClient } from "./api/resources/events/client/Client.js";
 import { ExperiencesClient } from "./api/resources/experiences/client/Client.js";
@@ -67,7 +68,6 @@ import { PlansClient } from "./api/resources/plans/client/Client.js";
 import { ProductsClient } from "./api/resources/products/client/Client.js";
 import { PromoCodesClient } from "./api/resources/promoCodes/client/Client.js";
 import { ReactionsClient } from "./api/resources/reactions/client/Client.js";
-import { RecommendedActionsClient } from "./api/resources/recommendedActions/client/Client.js";
 import { RefundsClient } from "./api/resources/refunds/client/Client.js";
 import { ResolutionCenterCasesClient } from "./api/resources/resolutionCenterCases/client/Client.js";
 import { ReviewsClient } from "./api/resources/reviews/client/Client.js";
@@ -129,6 +129,7 @@ export class WhopClient {
     protected _dmChannels: DmChannelsClient | undefined;
     protected _dmMembers: DmMembersClient | undefined;
     protected _domains: DomainsClient | undefined;
+    protected _economicIntelligence: EconomicIntelligenceClient | undefined;
     protected _entries: EntriesClient | undefined;
     protected _events: EventsClient | undefined;
     protected _experiences: ExperiencesClient | undefined;
@@ -162,7 +163,6 @@ export class WhopClient {
     protected _products: ProductsClient | undefined;
     protected _promoCodes: PromoCodesClient | undefined;
     protected _reactions: ReactionsClient | undefined;
-    protected _recommendedActions: RecommendedActionsClient | undefined;
     protected _refunds: RefundsClient | undefined;
     protected _resolutionCenterCases: ResolutionCenterCasesClient | undefined;
     protected _reviews: ReviewsClient | undefined;
@@ -319,6 +319,10 @@ export class WhopClient {
         return (this._domains ??= new DomainsClient(this._options));
     }
 
+    public get economicIntelligence(): EconomicIntelligenceClient {
+        return (this._economicIntelligence ??= new EconomicIntelligenceClient(this._options));
+    }
+
     public get entries(): EntriesClient {
         return (this._entries ??= new EntriesClient(this._options));
     }
@@ -449,10 +453,6 @@ export class WhopClient {
 
     public get reactions(): ReactionsClient {
         return (this._reactions ??= new ReactionsClient(this._options));
-    }
-
-    public get recommendedActions(): RecommendedActionsClient {
-        return (this._recommendedActions ??= new RecommendedActionsClient(this._options));
     }
 
     public get refunds(): RefundsClient {
