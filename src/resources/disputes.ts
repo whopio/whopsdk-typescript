@@ -124,6 +124,8 @@ export interface Dispute {
 
   issuer_comments: Array<Dispute.IssuerComment>;
 
+  line_items: Array<Dispute.LineItem>;
+
   /**
    * The payment being disputed.
    */
@@ -146,9 +148,8 @@ export interface Dispute {
   rapid_dispute_resolution: boolean;
 
   /**
-   * Why the customer says they are disputing, normalized across card networks.
-   * `other` covers a code Whop has not categorized yet — read `reason_code` for the
-   * raw value.
+   * Why the customer says they are disputing, normalized across processors and card
+   * networks. `other` covers a processor reason Whop has not categorized yet.
    */
   reason:
     | 'fraudulent'
@@ -165,7 +166,8 @@ export interface Dispute {
     | 'other';
 
   /**
-   * The raw card-network or processor reason code, such as `10.4`.
+   * The raw card-network or processor reason code, such as `10.4`. Informational
+   * only — `reason` is not derived from it.
    */
   reason_code: string | null;
 
@@ -590,6 +592,93 @@ export namespace Dispute {
   }
 
   /**
+   * Everything the disputed payment charged for, in purchase order. `product_id` and
+   * `plan_id` name the first of these; a cart's later items appear only here. A
+   * payment made before items were recorded lists the single item its plan implies.
+   * Empty when the payment is not linked to a plan.
+   */
+  export interface LineItem {
+    /**
+     * Line item ID, prefixed `li_`. Null when the payment predates item snapshots and
+     * the item is read from the payment's plan.
+     */
+    id: string | null;
+
+    /**
+     * The item's name as shown at checkout — the product title, else the plan title.
+     */
+    label: string | null;
+
+    /**
+     * The plan bought, prefixed `plan_`. Null when the plan has since been deleted.
+     */
+    plan_id: string | null;
+
+    /**
+     * The plan's current title, or `null` when the plan has been deleted or has no
+     * title.
+     */
+    plan_title: string | null;
+
+    /**
+     * The product the plan belongs to, prefixed `prod_`. On a payment that predates
+     * item snapshots this falls back to the plan's product, so it can be set where the
+     * parent's own `product_id` is null. Null for a plan with no product.
+     */
+    product_id: string | null;
+
+    /**
+     * The product's current title, or `null` when the item has no product.
+     */
+    product_title: string | null;
+
+    /**
+     * How many units were bought.
+     */
+    quantity: number;
+
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    subtotal: LineItem.Subtotal | null;
+  }
+
+  export namespace LineItem {
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    export interface Subtotal {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
+  }
+
+  /**
    * The payment being disputed.
    */
   export interface Payment {
@@ -650,7 +739,8 @@ export namespace Dispute {
      */
     export interface PaymentInstrument {
       /**
-       * Card payments only: the card's network and last four.
+       * Card payments only: the card's network, last four, and issuer identification
+       * number.
        */
       card: PaymentInstrument.Card | null;
 
@@ -679,7 +769,8 @@ export namespace Dispute {
 
     export namespace PaymentInstrument {
       /**
-       * Card payments only: the card's network and last four.
+       * Card payments only: the card's network, last four, and issuer identification
+       * number.
        */
       export interface Card {
         /**
@@ -687,6 +778,13 @@ export namespace Dispute {
          * saved card payment methods.
          */
         brand: string;
+
+        /**
+         * The issuer identification number, also called the BIN: the card's leading six or
+         * eight digits, which identify the issuing bank. Null when the processor did not
+         * report it.
+         */
+        issuer_identification_number: string | null;
 
         /**
          * The card's last four digits, when captured.

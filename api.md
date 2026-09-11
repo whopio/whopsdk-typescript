@@ -125,6 +125,8 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">WebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookListResponse</a></code>
 - <code><a href="./src/resources/webhooks.ts">WebhookDeleteResponse</a></code>
+- <code><a href="./src/resources/webhooks.ts">AccountFinancingApprovedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">AccountFinancingDeniedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">AccountUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">AdUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">AdCampaignPaymentFailedWebhookEvent</a></code>
@@ -163,6 +165,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">InvoiceVoidedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">LedgerAccountFundsAvailableWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MemberCreatedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">MemberUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipActivatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipCancelAtPeriodEndChangedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">MembershipDeactivatedWebhookEvent</a></code>

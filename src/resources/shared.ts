@@ -106,6 +106,8 @@ export interface App {
    */
   domain_id: string;
 
+  domains: Array<App.Domain> | null;
+
   elements_used: Array<
     | 'ads'
     | 'ads.billing-setup'
@@ -279,6 +281,28 @@ export namespace App {
      * Account display name.
      */
     title: string;
+
+    /**
+     * Markup rates this parent charges the connected account being read, keyed by fee
+     * type (for example `crypto_deposit_markup`), each with `percentage_fee` and
+     * `fixed_fee_usd`. Resolved with the connected account's own overrides winning
+     * over the platform default.
+     */
+    fees?: { [key: string]: Account.Fees };
+  }
+
+  export namespace Account {
+    export interface Fees {
+      /**
+       * Fixed markup in US dollars per transaction.
+       */
+      fixed_fee_usd: number;
+
+      /**
+       * Percentage of the transaction charged as markup.
+       */
+      percentage_fee: number;
+    }
   }
 
   /**
@@ -444,6 +468,28 @@ export namespace App {
      * Where the deployed site is served, or `null` unless the deployment went live.
      */
     url: string | null;
+  }
+
+  /**
+   * Custom domain claims and assignments for this app, excluding removed domains.
+   * Empty when none exist; `null` when the caller lacks the account's
+   * `developer:basic:read` permission.
+   */
+  export interface Domain {
+    /**
+     * Domain ID, prefixed `dom_`.
+     */
+    id: string;
+
+    /**
+     * Normalized hostname assigned to this app.
+     */
+    domain: string;
+
+    /**
+     * Domain lifecycle status, matching the domain resource.
+     */
+    status: 'pending_verification' | 'provisioning' | 'active' | 'action_required' | 'deleting' | 'removed';
   }
 
   /**
@@ -2730,6 +2776,12 @@ export interface Payment {
   currency: Currency;
 
   /**
+   * The buyer's email address. Null without `member:email:read` on the account or
+   * when the buyer has no assigned email.
+   */
+  customer_email: string | null;
+
+  /**
    * The phone number the buyer gave at checkout, when one was collected.
    */
   customer_phone: string | null;
@@ -2881,7 +2933,8 @@ export interface Payment {
 
   /**
    * The instrument shaped for display: a buyer-facing name, the standard icon set,
-   * and the card's brand and last four when it was a card.
+   * and the card's brand, last four and issuer identification number when it was a
+   * card.
    */
   payment_instrument: Payment.PaymentInstrument | null;
 
@@ -2907,6 +2960,12 @@ export interface Payment {
   plan_id: string | null;
 
   /**
+   * The account-facing total in the currency presented to the buyer, before
+   * conversion into the settlement currency. Excludes buyer fees.
+   */
+  presentment_total: Payment.PresentmentTotal | null;
+
+  /**
    * The product the plan belongs to, prefixed `prod_`. Null for a plan with no
    * product.
    */
@@ -2916,6 +2975,13 @@ export interface Payment {
    * The promo code applied at checkout, prefixed `promo_`, or null.
    */
   promo_code_id: string | null;
+
+  /**
+   * Whop-hosted URL where the buyer can sign in and complete 3D Secure for a failed
+   * subscription renewal. Null when recovery is unavailable, you lack
+   * `member:basic:read`, or in list responses. Retrieve the payment for it.
+   */
+  recovery_url: string | null;
 
   /**
    * True when the payment is `paid`, not yet fully refunded, and its processor
@@ -3035,8 +3101,8 @@ export interface Payment {
   user: Payment.User | null;
 
   /**
-   * The issuer's address and security code check results, or null when the processor
-   * returned none.
+   * The Address Verification Service (AVS), cardholder name, and Card Verification
+   * Value (CVV/CVC) results, or null when the processor returned none.
    */
   verification_checks: Payment.VerificationChecks | null;
 
@@ -3119,11 +3185,13 @@ export namespace Payment {
 
   /**
    * The instrument shaped for display: a buyer-facing name, the standard icon set,
-   * and the card's brand and last four when it was a card.
+   * and the card's brand, last four and issuer identification number when it was a
+   * card.
    */
   export interface PaymentInstrument {
     /**
-     * Card payments only: the card's network and last four.
+     * Card payments only: the card's network, last four, and issuer identification
+     * number.
      */
     card: PaymentInstrument.Card | null;
 
@@ -3152,7 +3220,8 @@ export namespace Payment {
 
   export namespace PaymentInstrument {
     /**
-     * Card payments only: the card's network and last four.
+     * Card payments only: the card's network, last four, and issuer identification
+     * number.
      */
     export interface Card {
       /**
@@ -3160,6 +3229,13 @@ export namespace Payment {
        * saved card payment methods.
        */
       brand: string;
+
+      /**
+       * The issuer identification number, also called the BIN: the card's leading six or
+       * eight digits, which identify the issuing bank. Null when the processor did not
+       * report it.
+       */
+      issuer_identification_number: string | null;
 
       /**
        * The card's last four digits, when captured.
@@ -3317,6 +3393,36 @@ export namespace Payment {
         }
       }
     }
+  }
+
+  /**
+   * The account-facing total in the currency presented to the buyer, before
+   * conversion into the settlement currency. Excludes buyer fees.
+   */
+  export interface PresentmentTotal {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
   }
 
   /**
@@ -3580,13 +3686,12 @@ export namespace Payment {
   }
 
   /**
-   * The issuer's address and security code check results, or null when the processor
-   * returned none.
+   * The Address Verification Service (AVS), cardholder name, and Card Verification
+   * Value (CVV/CVC) results, or null when the processor returned none.
    */
   export interface VerificationChecks {
     /**
-     * Whether the billing street address the customer entered matched the issuer's
-     * records.
+     * The Address Verification Service (AVS) result for the billing street address.
      */
     address_line1: string | null;
 
@@ -3596,12 +3701,12 @@ export namespace Payment {
     card_holder_name: string | null;
 
     /**
-     * Whether the CVV / CVC matched the card.
+     * The Card Verification Value (CVV/CVC) result.
      */
     card_security_code: string | null;
 
     /**
-     * Whether the billing postal code matched the issuer's records.
+     * The Address Verification Service (AVS) result for the billing postal code.
      */
     zip_code: string | null;
   }
@@ -4015,6 +4120,12 @@ export interface Product {
   account: unknown | null;
 
   /**
+   * Average star rating across published reviews for this product, from `1.0` to
+   * `5.0`. Returns `0.0` when no published-review rating is available.
+   */
+  average_review_rating: number;
+
+  /**
    * When the product was created, as an ISO 8601 timestamp.
    */
   created_at: string;
@@ -4301,6 +4412,12 @@ export interface ProductListItem {
    * Account that sells this product.
    */
   account: unknown | null;
+
+  /**
+   * Average star rating across published reviews for this product, from `1.0` to
+   * `5.0`. Returns `0.0` when no published-review rating is available.
+   */
+  average_review_rating: number;
 
   /**
    * When the product was created, as an ISO 8601 timestamp.

@@ -10,10 +10,7 @@ const client = new Whop({
 describe('resource payments', () => {
   // Mock server tests are disabled
   test.skip('create: only required params', async () => {
-    const responsePromise = client.payments.create({
-      account_id: 'biz_xxxxxxxxxxxxxx',
-      plan_id: 'plan_xxxxxxxxxxxxxx',
-    });
+    const responsePromise = client.payments.create({ account_id: 'biz_xxxxxxxxxxxxxx' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -27,16 +24,47 @@ describe('resource payments', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.payments.create({
       account_id: 'biz_xxxxxxxxxxxxxx',
-      plan_id: 'plan_xxxxxxxxxxxxxx',
       capture: false,
       confirmation_token: 'ctok_xxxxxxxxxxxxxx',
       email: 'dana@shinetime.example',
       member_id: 'mber_xxxxxxxxxxxxxx',
       metadata: { order_ref: 'SHINE-4417' },
       payment_method_id: 'payt_xxxxxxxxxxxxxx',
+      plan: {
+        currency: 'usd',
+        application_fee_amount: 2,
+        billing_period: 0,
+        description: 'description',
+        expiration_days: 0,
+        force_create_new_plan: true,
+        initial_price: 20,
+        internal_notes: 'internal_notes',
+        plan_type: 'one_time',
+        product: {
+          external_identifier: 'versioned-product',
+          title: 'Inline product',
+          collect_shipping_address: true,
+          custom_statement_descriptor: 'WHOP*INLINE',
+          description: 'Updated description',
+          global_affiliate_percentage: 0,
+          global_affiliate_status: 'enabled',
+          headline: 'Product headline',
+          product_tax_code_id: 'product_tax_code_id',
+          redirect_purchase_url: 'https://example.com/thanks',
+          route: 'route',
+          visibility: 'visible',
+        },
+        product_id: 'prod_xxxxxxxxxxxxxx',
+        renewal_price: 0,
+        title: 'title',
+        trial_period_days: 0,
+        visibility: 'visible',
+      },
+      plan_id: 'plan_xxxxxxxxxxxxxx',
       promo_code_id: 'promo_xxxxxxxxxxxxxx',
       return_url: 'https://shinetime.example/checkout/done',
-      'Api-Version-Date': '2026-09-06',
+      statement_descriptor: 'WHOP*SHINETIME',
+      'Api-Version-Date': '2026-09-11',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -59,7 +87,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-06' },
+        { 'Api-Version-Date': '2026-09-11' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -101,7 +129,7 @@ describe('resource payments', () => {
           query: 'query',
           status: 'open',
           user_id: 'user_id',
-          'Api-Version-Date': '2026-09-06',
+          'Api-Version-Date': '2026-09-11',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -126,7 +154,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.listFees(
         'id',
-        { 'Api-Version-Date': '2026-09-06' },
+        { 'Api-Version-Date': '2026-09-11' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -152,7 +180,7 @@ describe('resource payments', () => {
         'id',
         {
           partial_amount: 49,
-          'Api-Version-Date': '2026-09-06',
+          'Api-Version-Date': '2026-09-11',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -178,7 +206,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.retry(
         'id',
-        { 'Api-Version-Date': '2026-09-06', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-11', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -202,7 +230,7 @@ describe('resource payments', () => {
     await expect(
       client.payments.void(
         'id',
-        { 'Api-Version-Date': '2026-09-06', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
+        { 'Api-Version-Date': '2026-09-11', 'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

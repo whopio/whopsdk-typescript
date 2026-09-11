@@ -685,13 +685,13 @@ export namespace User {
 
     /**
      * The URL where the social account can be accessed on the platform. Null while a
-     * Whop-owned page is still being provisioned.
+     * Whop-owned account is still being provisioned.
      */
     url: string | null;
 
     /**
-     * The username of the social account on the platform. Null while a Whop-owned page
-     * is still being provisioned.
+     * The username of the social account on the platform. Null while a Whop-owned
+     * account is still being provisioned.
      */
     username: string | null;
 

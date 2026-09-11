@@ -81,8 +81,10 @@ export type FeeMarkupType =
   | 'next_day_bank_withdrawal_markup'
   | 'bank_wire_withdrawal_markup'
   | 'digital_wallet_withdrawal_markup'
+  | 'transfer_markup'
   | 'crypto_deposit_markup'
-  | 'bank_deposit_markup';
+  | 'bank_deposit_markup'
+  | 'crypto_swap_markup';
 
 /**
  * A fee markup configuration that defines additional charges applied to

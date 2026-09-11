@@ -493,6 +493,8 @@ import {
 } from './resources/verifications';
 import {
   APIVersion,
+  AccountFinancingApprovedWebhookEvent,
+  AccountFinancingDeniedWebhookEvent,
   AccountUpdatedWebhookEvent,
   AdCampaignPaymentFailedWebhookEvent,
   AdCampaignUpdatedWebhookEvent,
@@ -531,6 +533,7 @@ import {
   InvoiceVoidedWebhookEvent,
   LedgerAccountFundsAvailableWebhookEvent,
   MemberCreatedWebhookEvent,
+  MemberUpdatedWebhookEvent,
   MembershipActivatedWebhookEvent,
   MembershipCancelAtPeriodEndChangedWebhookEvent,
   MembershipDeactivatedWebhookEvent,
@@ -1668,6 +1671,8 @@ export declare namespace Whop {
     type WebhookEvent as WebhookEvent,
     type WebhookListResponse as WebhookListResponse,
     type WebhookDeleteResponse as WebhookDeleteResponse,
+    type AccountFinancingApprovedWebhookEvent as AccountFinancingApprovedWebhookEvent,
+    type AccountFinancingDeniedWebhookEvent as AccountFinancingDeniedWebhookEvent,
     type AccountUpdatedWebhookEvent as AccountUpdatedWebhookEvent,
     type AdUpdatedWebhookEvent as AdUpdatedWebhookEvent,
     type AdCampaignPaymentFailedWebhookEvent as AdCampaignPaymentFailedWebhookEvent,
@@ -1706,6 +1711,7 @@ export declare namespace Whop {
     type InvoiceVoidedWebhookEvent as InvoiceVoidedWebhookEvent,
     type LedgerAccountFundsAvailableWebhookEvent as LedgerAccountFundsAvailableWebhookEvent,
     type MemberCreatedWebhookEvent as MemberCreatedWebhookEvent,
+    type MemberUpdatedWebhookEvent as MemberUpdatedWebhookEvent,
     type MembershipActivatedWebhookEvent as MembershipActivatedWebhookEvent,
     type MembershipCancelAtPeriodEndChangedWebhookEvent as MembershipCancelAtPeriodEndChangedWebhookEvent,
     type MembershipDeactivatedWebhookEvent as MembershipDeactivatedWebhookEvent,

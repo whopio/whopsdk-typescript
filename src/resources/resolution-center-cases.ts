@@ -277,16 +277,67 @@ export namespace ResolutionCenterCaseRetrieveResponse {
     plan_id: string | null;
 
     /**
+     * The plan's current title, or `null` when the plan has been deleted or has no
+     * title.
+     */
+    plan_title: string | null;
+
+    /**
      * The product the plan belongs to, prefixed `prod_`. On a payment that predates
      * item snapshots this falls back to the plan's product, so it can be set where the
-     * case's own `product_id` is null. Null for a plan with no product.
+     * parent's own `product_id` is null. Null for a plan with no product.
      */
     product_id: string | null;
+
+    /**
+     * The product's current title, or `null` when the item has no product.
+     */
+    product_title: string | null;
 
     /**
      * How many units were bought.
      */
     quantity: number;
+
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    subtotal: LineItem.Subtotal | null;
+  }
+
+  export namespace LineItem {
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    export interface Subtotal {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
   }
 
   /**
@@ -496,16 +547,67 @@ export namespace ResolutionCenterCaseListResponse {
     plan_id: string | null;
 
     /**
+     * The plan's current title, or `null` when the plan has been deleted or has no
+     * title.
+     */
+    plan_title: string | null;
+
+    /**
      * The product the plan belongs to, prefixed `prod_`. On a payment that predates
      * item snapshots this falls back to the plan's product, so it can be set where the
-     * case's own `product_id` is null. Null for a plan with no product.
+     * parent's own `product_id` is null. Null for a plan with no product.
      */
     product_id: string | null;
+
+    /**
+     * The product's current title, or `null` when the item has no product.
+     */
+    product_title: string | null;
 
     /**
      * How many units were bought.
      */
     quantity: number;
+
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    subtotal: LineItem.Subtotal | null;
+  }
+
+  export namespace LineItem {
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. This is not the amount being contested. Returns
+     * `null` when no item amount was recorded.
+     */
+    export interface Subtotal {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
   }
 
   /**

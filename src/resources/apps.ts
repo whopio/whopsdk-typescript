@@ -43,9 +43,11 @@ export class Apps extends APIResource {
   }
 
   /**
-   * Retrieves an app by ID, claimed route, or proxy domain id. Credential fields
-   * (api_key, default_api_key, secrets) render `null` unless the caller has the
-   * corresponding developer permission on the owning account.
+   * Retrieves an app by ID, claimed route, active verified custom hostname, or proxy
+   * domain id. Custom hostnames return 404 for inactive assignments, suspended
+   * accounts, or deleted apps. Credential fields (api_key, default_api_key, secrets)
+   * render `null` unless the caller has the corresponding developer permission on
+   * the owning account.
    *
    * @example
    * ```ts
@@ -188,6 +190,8 @@ export interface AppListResponse {
    */
   domain_id: string;
 
+  domains: Array<AppListResponse.Domain> | null;
+
   /**
    * URL path for the member-facing hub view, or `null` when not configured.
    */
@@ -270,6 +274,28 @@ export namespace AppListResponse {
      * Account display name.
      */
     title: string;
+
+    /**
+     * Markup rates this parent charges the connected account being read, keyed by fee
+     * type (for example `crypto_deposit_markup`), each with `percentage_fee` and
+     * `fixed_fee_usd`. Resolved with the connected account's own overrides winning
+     * over the platform default.
+     */
+    fees?: { [key: string]: Account.Fees };
+  }
+
+  export namespace Account {
+    export interface Fees {
+      /**
+       * Fixed markup in US dollars per transaction.
+       */
+      fixed_fee_usd: number;
+
+      /**
+       * Percentage of the transaction charged as markup.
+       */
+      percentage_fee: number;
+    }
   }
 
   /**
@@ -300,6 +326,28 @@ export namespace AppListResponse {
      * Public username.
      */
     username: string;
+  }
+
+  /**
+   * Custom domain claims and assignments for this app, excluding removed domains.
+   * Empty when none exist; `null` when the caller lacks the account's
+   * `developer:basic:read` permission.
+   */
+  export interface Domain {
+    /**
+     * Domain ID, prefixed `dom_`.
+     */
+    id: string;
+
+    /**
+     * Normalized hostname assigned to this app.
+     */
+    domain: string;
+
+    /**
+     * Domain lifecycle status, matching the domain resource.
+     */
+    status: 'pending_verification' | 'provisioning' | 'active' | 'action_required' | 'deleting' | 'removed';
   }
 
   /**

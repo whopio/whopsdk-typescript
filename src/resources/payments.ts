@@ -20,14 +20,13 @@ export class Payments extends APIResource {
    * and `payment_method_id`), or a `confirmation_token` describing a method the
    * buyer just supplied. Collection runs in the background: the response is the
    * payment as created, not its outcome — poll Retrieve status for how far it has
-   * got and, for a confirmation-token payment, what the buyer must still do.
-   * `plan_id` names the plan to charge for.
+   * got and, for a confirmation-token payment, what the buyer must still do. Pass
+   * `plan_id` for an existing plan or `plan` to find or create one inline.
    *
    * @example
    * ```ts
    * const payment = await client.payments.create({
    *   account_id: 'biz_xxxxxxxxxxxxxx',
-   *   plan_id: 'plan_xxxxxxxxxxxxxx',
    * });
    * ```
    */
@@ -571,12 +570,6 @@ export interface PaymentCreateParams {
   account_id: string;
 
   /**
-   * Body param: The plan to charge for, prefixed `plan_`. It must belong to the
-   * account.
-   */
-  plan_id: string;
-
-  /**
    * Body param: Whether to capture a card payment immediately. Defaults to true.
    * Pass false to place an authorization hold that must be captured in full within
    * five days via the capture endpoint.
@@ -617,6 +610,19 @@ export interface PaymentCreateParams {
   payment_method_id?: string | null;
 
   /**
+   * Body param: Find or create a plan for this payment. Mutually exclusive with
+   * `plan_id`. Creating a plan requires plan:create; creating or updating a product
+   * requires the corresponding product permission.
+   */
+  plan?: PaymentCreateParams.Plan;
+
+  /**
+   * Body param: The plan to charge for, prefixed `plan_`. It must belong to the
+   * account. Mutually exclusive with `plan`.
+   */
+  plan_id?: string;
+
+  /**
    * Body param: An active promo code to apply, prefixed `promo_`. It must belong to
    * the account and be valid for the plan.
    */
@@ -630,6 +636,15 @@ export interface PaymentCreateParams {
   return_url?: string | null;
 
   /**
+   * Body param: Overrides the text on the buyer's card statement for this payment
+   * only. Takes precedence over the product's and account's custom descriptors, and
+   * changes neither. Must start with `WHOP*`, be 5-22 characters, contain at least
+   * one letter, and use only Latin letters, numbers, spaces, underscores, hyphens,
+   * or asterisks.
+   */
+  statement_descriptor?: string | null;
+
+  /**
    * Header param: Pins the request to a dated API version.
    */
   'Api-Version-Date'?: string;
@@ -639,6 +654,257 @@ export interface PaymentCreateParams {
    * [Idempotent requests](https://docs.whop.com/developer/api/idempotency).
    */
   'Idempotency-Key'?: string;
+}
+
+export namespace PaymentCreateParams {
+  /**
+   * Find or create a plan for this payment. Mutually exclusive with `plan_id`.
+   * Creating a plan requires plan:create; creating or updating a product requires
+   * the corresponding product permission.
+   */
+  export interface Plan {
+    /**
+     * Currency code for the plan prices.
+     */
+    currency:
+      | 'usd'
+      | 'sgd'
+      | 'inr'
+      | 'aud'
+      | 'brl'
+      | 'cad'
+      | 'dkk'
+      | 'eur'
+      | 'nok'
+      | 'gbp'
+      | 'sek'
+      | 'chf'
+      | 'hkd'
+      | 'huf'
+      | 'jpy'
+      | 'mxn'
+      | 'myr'
+      | 'pln'
+      | 'czk'
+      | 'nzd'
+      | 'aed'
+      | 'eth'
+      | 'ape'
+      | 'cop'
+      | 'ron'
+      | 'thb'
+      | 'bgn'
+      | 'idr'
+      | 'dop'
+      | 'php'
+      | 'try'
+      | 'krw'
+      | 'twd'
+      | 'vnd'
+      | 'pkr'
+      | 'clp'
+      | 'uyu'
+      | 'ars'
+      | 'zar'
+      | 'dzd'
+      | 'tnd'
+      | 'mad'
+      | 'kes'
+      | 'kwd'
+      | 'jod'
+      | 'all'
+      | 'xcd'
+      | 'amd'
+      | 'bsd'
+      | 'bhd'
+      | 'bob'
+      | 'bam'
+      | 'khr'
+      | 'crc'
+      | 'xof'
+      | 'egp'
+      | 'etb'
+      | 'gmd'
+      | 'ghs'
+      | 'gtq'
+      | 'gyd'
+      | 'ils'
+      | 'jmd'
+      | 'mop'
+      | 'mga'
+      | 'mur'
+      | 'mdl'
+      | 'mnt'
+      | 'nad'
+      | 'ngn'
+      | 'mkd'
+      | 'omr'
+      | 'pyg'
+      | 'pen'
+      | 'qar'
+      | 'rwf'
+      | 'sar'
+      | 'rsd'
+      | 'lkr'
+      | 'tzs'
+      | 'ttd'
+      | 'uzs'
+      | 'rub'
+      | 'btc'
+      | 'cny'
+      | 'usdt'
+      | 'kzt'
+      | 'awg'
+      | 'whop_usd'
+      | 'xau';
+
+    /**
+     * Application fee collected by the platform in the plan currency (5.00 means $5.00
+     * for USD). Must be positive and below the initial price for one-time plans or
+     * renewal price for recurring plans. Paid to the parent account alongside other
+     * processing fees; collection is capped to remaining proceeds. Applies to
+     * subsequent payments on recurring plans. Only valid for connected accounts with a
+     * parent account.
+     */
+    application_fee_amount?: number | null;
+
+    /**
+     * Recurring billing interval in days.
+     */
+    billing_period?: number | null;
+
+    /**
+     * Plan description.
+     */
+    description?: string | null;
+
+    /**
+     * Days until access expires.
+     */
+    expiration_days?: number | null;
+
+    /**
+     * Create a new plan instead of reusing a matching plan.
+     */
+    force_create_new_plan?: boolean | null;
+
+    /**
+     * Additional amount charged on the first purchase, in the plan currency. For
+     * recurring plans without a trial, the first charge includes this amount plus
+     * renewal_price.
+     */
+    initial_price?: number | null;
+
+    /**
+     * Internal notes for the account.
+     */
+    internal_notes?: string | null;
+
+    /**
+     * Billing model for the plan.
+     */
+    plan_type?: 'renewal' | 'one_time' | null;
+
+    /**
+     * Find or create a product by external identifier. Mutually exclusive with
+     * product_id.
+     */
+    product?: Plan.Product | null;
+
+    /**
+     * Existing product ID belonging to the account, prefixed `prod_`. Mutually
+     * exclusive with `product`.
+     */
+    product_id?: string | null;
+
+    /**
+     * Recurring price in the plan currency.
+     */
+    renewal_price?: number | null;
+
+    /**
+     * Plan title.
+     */
+    title?: string | null;
+
+    /**
+     * Free trial days before renewal.
+     */
+    trial_period_days?: number | null;
+
+    /**
+     * Whether the plan is visible to customers.
+     */
+    visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link' | null;
+  }
+
+  export namespace Plan {
+    /**
+     * Find or create a product by external identifier. Mutually exclusive with
+     * product_id.
+     */
+    export interface Product {
+      /**
+       * Your unique identifier for the product.
+       */
+      external_identifier: string;
+
+      /**
+       * Product title.
+       */
+      title: string;
+
+      /**
+       * Whether to collect a shipping address at checkout.
+       */
+      collect_shipping_address?: boolean | null;
+
+      /**
+       * Custom card statement descriptor for the product, starting with WHOP\*.
+       */
+      custom_statement_descriptor?: string | null;
+
+      /**
+       * Product description.
+       */
+      description?: string | null;
+
+      /**
+       * Percentage of revenue paid to global affiliates.
+       */
+      global_affiliate_percentage?: number | null;
+
+      /**
+       * Global affiliate program status.
+       */
+      global_affiliate_status?: 'enabled' | 'disabled' | null;
+
+      /**
+       * Product headline.
+       */
+      headline?: string | null;
+
+      /**
+       * Product tax code identifier.
+       */
+      product_tax_code_id?: string | null;
+
+      /**
+       * Where to redirect the buyer after purchase.
+       */
+      redirect_purchase_url?: string | null;
+
+      /**
+       * Product route.
+       */
+      route?: string | null;
+
+      /**
+       * Product visibility. Defaults to hidden.
+       */
+      visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link';
+    }
+  }
 }
 
 export interface PaymentRetrieveParams {
