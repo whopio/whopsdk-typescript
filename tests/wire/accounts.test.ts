@@ -93,6 +93,7 @@ describe("AccountsClient", () => {
                     created_at: "2026-01-01T12:00:00.000Z",
                     description:
                         "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+                    economic_intelligence: false,
                     email: "marcus@shinetime.example",
                     eula: {
                         content_type: "application/pdf",
@@ -472,6 +473,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
                 content_type: "application/pdf",
@@ -879,6 +881,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
                 content_type: "application/pdf",
@@ -1213,6 +1216,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
                 content_type: "application/pdf",
@@ -1574,6 +1578,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
                 content_type: "application/pdf",
@@ -2604,6 +2609,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
                 content_type: "application/pdf",
