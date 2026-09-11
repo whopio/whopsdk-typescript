@@ -9,7 +9,7 @@ export interface UpdatePreferencesResponse {
     ads_reporting_currency: string;
     /** IANA timezone (e.g. `America/New_York`) used to interpret campaign start/end times and to bucket reports. Defaults to `America/New_York` until explicitly overridden. */
     ads_scheduling_timezone: string;
-    /** The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel. */
+    /** The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel. Available to any Triple Whale customer — Shopify, WooCommerce, a custom checkout, or no connected store — by setting `shop_domain` explicitly; Shopify merchants may instead rely on a connected store's domain. Requires the `ad_campaign:create` scope. Once connected, ad click-through URLs Whop serves carry `tw_source=whop` and `tw_adid=<ad id>` query parameters so Triple Whale's pixel attributes conversions back to the originating ad — no destination URL changes are needed. */
     ads_triple_whale_integration: UpdatePreferencesResponse.AdsTripleWhaleIntegration;
     /** Whether incoming funds are automatically moved to the account's cards balance. `false` when the account has no cards balance. */
     cards_auto_top_up: boolean;
@@ -113,23 +113,23 @@ export namespace UpdatePreferencesResponse {
     }
 
     /**
-     * The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel.
+     * The account's Triple Whale integration, which pushes Whop ad spend to Triple Whale's Data-In API so it reports as a `whop` channel. Available to any Triple Whale customer — Shopify, WooCommerce, a custom checkout, or no connected store — by setting `shop_domain` explicitly; Shopify merchants may instead rely on a connected store's domain. Requires the `ad_campaign:create` scope. Once connected, ad click-through URLs Whop serves carry `tw_source=whop` and `tw_adid=<ad id>` query parameters so Triple Whale's pixel attributes conversions back to the originating ad — no destination URL changes are needed.
      */
     export interface AdsTripleWhaleIntegration {
         /** The leading characters of the stored Data-In API key, followed by asterisks. The full key is never returned. `null` when no key is stored. */
         masked_api_key: string | null;
-        /** The connected Shopify store domain spend is reported for, such as `acme.myshopify.com`. `null` when no store is connected. */
+        /** The shop domain spend is reported for, such as `acme.myshopify.com` or a custom domain for a non-Shopify store. This is the explicit `shop_domain` if one was set, otherwise a connected Shopify store's domain. `null` when neither is present. */
         shop_domain: string | null;
-        /** Where the integration stands. `requires_shopify_store` means no Shopify store is connected — Triple Whale keys records by Shopify shop, so no spend is reported until one is. */
+        /** Where the integration stands. `requires_shop_domain` means no shop domain is configured — set `shop_domain` explicitly, or connect a Shopify store, before spend can be reported. */
         status: AdsTripleWhaleIntegration.Status;
     }
 
     export namespace AdsTripleWhaleIntegration {
-        /** Where the integration stands. `requires_shopify_store` means no Shopify store is connected — Triple Whale keys records by Shopify shop, so no spend is reported until one is. */
+        /** Where the integration stands. `requires_shop_domain` means no shop domain is configured — set `shop_domain` explicitly, or connect a Shopify store, before spend can be reported. */
         export const Status = {
             Connected: "connected",
             NotConnected: "not_connected",
-            RequiresShopifyStore: "requires_shopify_store",
+            RequiresShopDomain: "requires_shop_domain",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
     }
