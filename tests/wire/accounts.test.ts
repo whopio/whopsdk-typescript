@@ -46,7 +46,7 @@ describe("AccountsClient", () => {
                         state: "TX",
                     },
                     business_name: "Shine Time Auto Detailing, LLC",
-                    business_type: "education_program",
+                    business_type: "other",
                     can_transfer_pending_balance_to_children: false,
                     capabilities: {
                         accept_bank_payments: "active",
@@ -118,7 +118,7 @@ describe("AccountsClient", () => {
                     },
                     home_preferences: ["hide_member_count"],
                     id: "biz_xxxxxxxxxxxxxx",
-                    industry_group: "academic_and_test_prep",
+                    industry_group: "automotive",
                     industry_type: "other",
                     invoice_prefix: "SHINE",
                     logo_url:
@@ -425,7 +425,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "education_program",
+            business_type: "other",
             can_transfer_pending_balance_to_children: false,
             capabilities: {
                 accept_bank_payments: "active",
@@ -497,7 +497,7 @@ describe("AccountsClient", () => {
             },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "academic_and_test_prep",
+            industry_group: "automotive",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -832,7 +832,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "education_program",
+            business_type: "other",
             can_transfer_pending_balance_to_children: false,
             capabilities: {
                 accept_bank_payments: "active",
@@ -904,7 +904,7 @@ describe("AccountsClient", () => {
             },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "academic_and_test_prep",
+            industry_group: "automotive",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -1166,7 +1166,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "education_program",
+            business_type: "other",
             can_transfer_pending_balance_to_children: false,
             capabilities: {
                 accept_bank_payments: "active",
@@ -1238,7 +1238,7 @@ describe("AccountsClient", () => {
             },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "academic_and_test_prep",
+            industry_group: "automotive",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -1527,7 +1527,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "education_program",
+            business_type: "other",
             can_transfer_pending_balance_to_children: false,
             capabilities: {
                 accept_bank_payments: "active",
@@ -1599,7 +1599,7 @@ describe("AccountsClient", () => {
             },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "academic_and_test_prep",
+            industry_group: "automotive",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
@@ -2557,7 +2557,7 @@ describe("AccountsClient", () => {
                 state: "TX",
             },
             business_name: "Shine Time Auto Detailing, LLC",
-            business_type: "education_program",
+            business_type: "other",
             can_transfer_pending_balance_to_children: false,
             capabilities: {
                 accept_bank_payments: "active",
@@ -2629,7 +2629,7 @@ describe("AccountsClient", () => {
             },
             home_preferences: ["hide_member_count"],
             id: "biz_xxxxxxxxxxxxxx",
-            industry_group: "academic_and_test_prep",
+            industry_group: "automotive",
             industry_type: "other",
             invoice_prefix: "SHINE",
             logo_url:
