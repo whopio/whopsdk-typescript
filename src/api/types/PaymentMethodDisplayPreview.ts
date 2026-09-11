@@ -3,6 +3,8 @@
 export interface PaymentMethodDisplayPreview {
     /** Lowercase card brand, e.g. `visa`. Absent when the method carries no brand. */
     brand?: string | undefined;
+    /** A stable identifier for the collected card. Matches the `fingerprint` on any payment method saved from this token. Absent when the method is not a card or no fingerprint was returned. */
+    fingerprint?: string | undefined;
     /** Last four digits of the instrument. Absent when the method carries none. */
     last4?: string | undefined;
 }
