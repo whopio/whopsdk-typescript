@@ -4,8 +4,6 @@ import type * as Whop from "../../../index.js";
 
 export interface ListEconomicIntelligenceResponse {
     data: Whop.EconomicIntelligence[];
-    /** Whether a generation is running because the account has no ready recommendations. */
-    generation_pending: boolean;
     page_info: ListEconomicIntelligenceResponse.PageInfo;
 }
 
