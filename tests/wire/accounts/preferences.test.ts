@@ -50,7 +50,7 @@ describe("PreferencesClient", () => {
             ads_scheduling_timezone: "America/New_York",
             ads_triple_whale_integration: {
                 masked_api_key: "tw_live_********",
-                shop_domain: "shinetime.myshopify.com",
+                shop_domain: "custom-store.example.com",
                 status: "connected",
             },
             cards_auto_top_up: false,
