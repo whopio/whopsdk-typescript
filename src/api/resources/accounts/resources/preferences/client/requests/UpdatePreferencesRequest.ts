@@ -23,6 +23,8 @@ export interface UpdatePreferencesRequest {
     cards_notifications?: boolean;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. */
     dispute_fighter_enabled?: boolean;
+    /** Whether economic intelligence is enabled for the account. Requires company:update permission and an existing ledger account. */
+    economic_intelligence?: boolean;
 }
 
 export namespace UpdatePreferencesRequest {
