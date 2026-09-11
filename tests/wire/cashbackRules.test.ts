@@ -22,15 +22,15 @@ describe("CashbackRulesClient", () => {
         };
         const rawResponseBody = {
             created_at: "2026-01-01T12:00:00.000Z",
-            description: "Software cashback",
+            description: "Cloud cashback",
             discarded_at: "discarded_at",
             expires_at: "2026-01-01T12:00:00.000Z",
             funding_account_id: "biz_xxxxxxxxxxxxxx",
             id: "cicbr_xxxxxxxxxxxxxx",
-            merchant_category_code: "5734",
-            merchant_name: "ACME SOFTWARE",
+            merchant_category_code: "7372",
+            merchant_name: "ACME CLOUD",
             rate_bps: 500,
-            scoped_account_id: "scoped_account_id",
+            scoped_account_id: "biz_xxxxxxxxxxxxxx",
             starts_at: "2026-01-01T12:00:00.000Z",
             updated_at: "2026-01-01T12:00:00.000Z",
         };
@@ -247,15 +247,15 @@ describe("CashbackRulesClient", () => {
             data: [
                 {
                     created_at: "2026-01-01T12:00:00.000Z",
-                    description: "Software cashback",
+                    description: "Cloud cashback",
                     discarded_at: "discarded_at",
                     expires_at: "2026-01-01T12:00:00.000Z",
                     funding_account_id: "biz_xxxxxxxxxxxxxx",
                     id: "cicbr_xxxxxxxxxxxxxx",
-                    merchant_category_code: "5734",
-                    merchant_name: "ACME SOFTWARE",
+                    merchant_category_code: "7372",
+                    merchant_name: "ACME CLOUD",
                     rate_bps: 500,
-                    scoped_account_id: "scoped_account_id",
+                    scoped_account_id: "biz_xxxxxxxxxxxxxx",
                     starts_at: "2026-01-01T12:00:00.000Z",
                     updated_at: "2026-01-01T12:00:00.000Z",
                 },
@@ -340,5 +340,157 @@ describe("CashbackRulesClient", () => {
         await expect(async () => {
             return await client.cashbackRules.list();
         }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("update (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            created_at: "2026-01-01T12:00:00.000Z",
+            description: "Cloud cashback",
+            discarded_at: "discarded_at",
+            expires_at: "2026-01-01T12:00:00.000Z",
+            funding_account_id: "biz_xxxxxxxxxxxxxx",
+            id: "cicbr_xxxxxxxxxxxxxx",
+            merchant_category_code: "7372",
+            merchant_name: "ACME CLOUD",
+            rate_bps: 500,
+            scoped_account_id: "biz_xxxxxxxxxxxxxx",
+            starts_at: "2026-01-01T12:00:00.000Z",
+            updated_at: "2026-01-01T12:00:00.000Z",
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/cashback_rules/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.cashbackRules.update({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/cashback_rules/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.cashbackRules.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("update (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/cashback_rules/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.cashbackRules.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("update (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/cashback_rules/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.cashbackRules.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("update (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/cashback_rules/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.cashbackRules.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
     });
 });
