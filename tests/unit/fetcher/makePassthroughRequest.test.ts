@@ -10,6 +10,24 @@ describe("makePassthroughRequest", () => {
     });
 
     describe("URL resolution", () => {
+        it.each([
+            "/experiments?account_id=biz_test&first=20",
+            "experiments?account_id=biz_test&first=20",
+            "/experiments?account_id=biz_test&properties=%7B%22theme%22%3A%22blue%22%7D",
+        ])("preserves query parameters in %s", async (path) => {
+            await makePassthroughRequest(path, undefined, {
+                baseUrl: "https://api.whop.com/api/v1/",
+                fetch: mockFetch,
+                headers: { "Api-Version-Date": "2026-09-11" },
+                getAuthHeaders: async () => ({ Authorization: "Bearer test-token" }),
+            });
+
+            const [calledUrl, options] = mockFetch.mock.calls[0];
+            expect(calledUrl).toBe(`https://api.whop.com/api/v1/${path.replace(/^\//, "")}`);
+            expect(options.headers.authorization).toBe("Bearer test-token");
+            expect(options.headers["api-version-date"]).toBe("2026-09-11");
+        });
+
         it("should use absolute URL directly", async () => {
             await makePassthroughRequest("https://api.example.com/v1/users", undefined, {
                 fetch: mockFetch,

@@ -1,5 +1,4 @@
 import { createLogger, type LogConfig, type Logger } from "../logging/logger.js";
-import { join } from "../url/join.js";
 import { EndpointSupplier } from "./EndpointSupplier.js";
 import { getFetchFn } from "./getFetchFn.js";
 import { makeRequest } from "./makeRequest.js";
@@ -97,7 +96,7 @@ export async function makePassthroughRequest(
     if (url.startsWith("http://") || url.startsWith("https://")) {
         fullUrl = url;
     } else if (baseUrl != null) {
-        fullUrl = join(baseUrl, url);
+        fullUrl = new URL(url.replace(/^\/+/, ""), `${baseUrl.replace(/\/+$/, "")}/`).toString();
     } else {
         fullUrl = url;
     }
