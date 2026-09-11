@@ -10689,7 +10689,7 @@ await client.domains.update({
 <dl>
 <dd>
 
-Lists every recommendation the account has been given, newest first: requests the engine is still answering (`queued`, `pending`), cards ready to run, cards already run, and cards a newer one replaced. `status=ready` is what the dashboard shows; an account with nothing ready and nothing open gets a request opened for it, so poll while a `queued` or `pending` row is in the list.
+Lists all recommended actions Economic Intelligence has generated for the account, newest first. Filter with `status=ready` for actions that are current.
 </dd>
 </dl>
 </dd>
@@ -10764,7 +10764,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Runs the engine toward what the owner wants, in their own words, such as "get more repeat buyers for my taurine supplement". The recommendation comes back right away with status `queued` and only the owner's `input` filled in; the engine moves it to `pending` while it works and then to `ready`, with the title and brief written, or to `failed`. Watch it in the list. Requests stack and are answered in turn, up to three generating at once.
+Harnesses Economic Intelligence to generate recommended actions that lead the business down the most optimal path to the next dollar. Returns a `queued` recommendation right away. Poll the list endpoint until it is `ready` or `failed`.
 </dd>
 </dl>
 </dd>
