@@ -42,3 +42,6 @@
 .gitattributes
 src/helpers
 tests/unit/helpers
+# Remove these overrides when Fern's passthrough fetch preserves relative URL queries.
+src/core/fetcher/makePassthroughRequest.ts
+tests/unit/fetcher/makePassthroughRequest.test.ts
