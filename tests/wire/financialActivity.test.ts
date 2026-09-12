@@ -31,7 +31,7 @@ describe("FinancialActivityClient", () => {
                     currency: { code: "usd", precision: "100000000" },
                     id: "line_3",
                     ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
-                    line_type: "ad_budget_release",
+                    line_type: "account_settlement",
                     object: "ledger_activity",
                     payment: {
                         amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },

@@ -145,6 +145,8 @@ export * from "./leads/types/index.js";
 export * from "./ledgerAccounts/client/requests/index.js";
 export * as ledgerAccounts from "./ledgerAccounts/index.js";
 export * from "./ledgerAccounts/types/index.js";
+export * as ledgers from "./ledgers/index.js";
+export * from "./ledgers/types/index.js";
 export * from "./media/client/requests/index.js";
 export * as media from "./media/index.js";
 export * from "./members/client/requests/index.js";

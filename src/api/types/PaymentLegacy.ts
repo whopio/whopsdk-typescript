@@ -102,7 +102,7 @@ export interface PaymentLegacy {
     settlement_currency: Whop.Currencies;
     /** Deprecated. Always returns null. */
     settlement_exchange_rate: number | null;
-    /** When this payment's funds post to the company's available balance, at midnight UTC. Known at payment time and never changes. The `ledger_account.funds_available` webhook carries the same `settlement_time_at` when that batch posts — match them to know these funds are now withdrawable. */
+    /** When this payment's funds post to the company's available balance, at midnight UTC. Known at payment time and never changes. The `financial_activity.funds_available` webhook's `posted_at` carries the same value when the settlement that clears it posts — match them to know these funds are now withdrawable. */
     settlement_time_at: string | null;
     /** The shipment attached to this payment. */
     shipment: PaymentLegacy.Shipment | null;
