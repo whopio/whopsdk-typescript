@@ -13,6 +13,8 @@ export interface UpdateProductsRequest {
     banner_image?: UpdateProductsRequest.BannerImage | null;
     /** A written description displayed on the product page. */
     description?: string | null;
+    /** Images or videos displayed in the product gallery, in display order. Replaces the existing gallery. Send an empty array to clear it; omit or pass null to leave it unchanged. A banner image does not populate the gallery. */
+    gallery_images?: UpdateProductsRequest.GalleryImages.Item[] | null;
     /** A short marketing headline for the product page. */
     headline?: string | null;
     /** Labels used to group products into collections. Replaces the existing labels. Send an empty array to clear them. */
@@ -38,5 +40,16 @@ export namespace UpdateProductsRequest {
         direct_upload_id?: string | undefined;
         /** The tag of an already-uploaded attachment. */
         id?: string | undefined;
+    }
+
+    export type GalleryImages = GalleryImages.Item[];
+
+    export namespace GalleryImages {
+        export interface Item {
+            /** The signed ID of a completed direct upload, as an alternative to id. */
+            direct_upload_id?: string | undefined;
+            /** The tag of an already-uploaded attachment. */
+            id?: string | undefined;
+        }
     }
 }

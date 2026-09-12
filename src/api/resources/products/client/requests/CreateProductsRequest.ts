@@ -19,6 +19,8 @@ export interface CreateProductsRequest {
     custom_statement_descriptor?: string | null;
     /** A written description displayed on the product page. */
     description?: string | null;
+    /** Images or videos displayed in the product gallery, in display order. Replaces the existing gallery. Send an empty array to clear it; omit or pass null to leave it unchanged. A banner image does not populate the gallery. */
+    gallery_images?: CreateProductsRequest.GalleryImages.Item[] | null;
     /** The commission rate affiliates earn. */
     global_affiliate_percentage?: number | null;
     /** The enrollment status in the global affiliate program. */
@@ -65,6 +67,17 @@ export namespace CreateProductsRequest {
         CompleteOrder: "complete_order",
     } as const;
     export type CustomCta = (typeof CustomCta)[keyof typeof CustomCta];
+    export type GalleryImages = GalleryImages.Item[];
+
+    export namespace GalleryImages {
+        export interface Item {
+            /** The signed ID of a completed direct upload, as an alternative to id. */
+            direct_upload_id?: string | undefined;
+            /** The tag of an already-uploaded attachment. */
+            id?: string | undefined;
+        }
+    }
+
     /** The enrollment status in the global affiliate program. */
     export const GlobalAffiliateStatus = {
         Enabled: "enabled",
