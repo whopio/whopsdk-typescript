@@ -238,6 +238,7 @@ export interface Webhook {
     | 'ledger_account.funds_available'
     | 'swap.completed'
     | 'deposit.succeeded'
+    | 'financial_activity.funds_available'
     | 'transfer.created'
     | 'transfer.completed'
     | 'transfer.failed'
@@ -359,6 +360,7 @@ export interface Webhook {
     | 'ledger_account.funds_available'
     | 'swap.completed'
     | 'deposit.succeeded'
+    | 'financial_activity.funds_available'
     | 'transfer.created'
     | 'transfer.completed'
     | 'transfer.failed'
@@ -478,6 +480,7 @@ export type WebhookEvent =
   | 'ledger_account.funds_available'
   | 'swap.completed'
   | 'deposit.succeeded'
+  | 'financial_activity.funds_available'
   | 'transfer.created'
   | 'transfer.completed'
   | 'transfer.failed'
@@ -620,6 +623,7 @@ export interface WebhookListResponse {
     | 'ledger_account.funds_available'
     | 'swap.completed'
     | 'deposit.succeeded'
+    | 'financial_activity.funds_available'
     | 'transfer.created'
     | 'transfer.completed'
     | 'transfer.failed'
@@ -8829,6 +8833,7 @@ export namespace DepositSucceededWebhookEvent {
      * The ledger line category this activity was posted under.
      */
     line_type:
+      | 'account_settlement'
       | 'ad_budget_release'
       | 'ad_campaign_budget'
       | 'ad_publisher_payout'
@@ -10407,6 +10412,1007 @@ export namespace ExportFailedWebhookEvent {
      * When the export last changed, as an ISO 8601 timestamp.
      */
     updated_at: string;
+  }
+}
+
+export interface FinancialActivityFundsAvailableWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  data: FinancialActivityFundsAvailableWebhookEvent.Data;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'financial_activity.funds_available';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
+}
+
+export namespace FinancialActivityFundsAvailableWebhookEvent {
+  export interface Data {
+    /**
+     * Ledger activity ID.
+     */
+    id: string;
+
+    /**
+     * Signed amount in the currency's smallest precision units.
+     */
+    amount: string;
+
+    /**
+     * ISO 8601 timestamp these funds became (or are scheduled to become) withdrawable:
+     * the posted time for already-settled funds, or 00:00:00 UTC on the scheduled
+     * release date for pending funds. Present only on inflows entering the balance
+     * (payments, top-ups, incoming transfers/affiliate); null on payouts, refunds,
+     * disputes and on-chain rows. The available_after/before filters window on its UTC
+     * settlement date.
+     */
+    available_at: string | null;
+
+    /**
+     * Currency for this ledger activity.
+     */
+    currency: Data.Currency;
+
+    /**
+     * The ledger line category this activity was posted under.
+     */
+    line_type:
+      | 'account_settlement'
+      | 'ad_budget_release'
+      | 'ad_campaign_budget'
+      | 'ad_publisher_payout'
+      | 'ad_publisher_payout_received'
+      | 'ad_spend_charge'
+      | 'affiliate_fee'
+      | 'airdrop'
+      | 'airdrop_link_created'
+      | 'airdrop_link_redeemed'
+      | 'airdrop_link_returned'
+      | 'airdrop_reversal'
+      | 'application_fee'
+      | 'application_fee_payout'
+      | 'balance_reservation'
+      | 'balance_reservation_reversal'
+      | 'bank_transfer'
+      | 'billing_percentage_fee'
+      | 'buyer_fee'
+      | 'card_interchange'
+      | 'card_load_deposit'
+      | 'card_load_transfer'
+      | 'card_spend_authorization'
+      | 'card_spend_authorization_void'
+      | 'card_spend_refund'
+      | 'card_unload_deposit'
+      | 'card_unload_transfer'
+      | 'company_referral'
+      | 'connected_account_negative_balance'
+      | 'cross_border_percentage_fee'
+      | 'currency_conversion_incoming'
+      | 'currency_conversion_outgoing'
+      | 'dispute_alert_fee'
+      | 'dispute_hold_adjustment'
+      | 'dispute_representment_fee'
+      | 'external_card_load_deposit'
+      | 'fraud_prevention_fee'
+      | 'fx_percentage_fee'
+      | 'high_risk_merchant_fee'
+      | 'installment_default'
+      | 'internal_balance_transfer_incoming'
+      | 'internal_balance_transfer_outgoing'
+      | 'internal_withdrawal'
+      | 'internal_withdrawal_complete'
+      | 'internal_withdrawal_fee'
+      | 'internal_withdrawal_fee_reversal'
+      | 'internal_withdrawal_in_transit'
+      | 'internal_withdrawal_in_transit_reversal'
+      | 'internal_withdrawal_markup_fee'
+      | 'internal_withdrawal_markup_fee_payout'
+      | 'internal_withdrawal_markup_fee_payout_reversal'
+      | 'internal_withdrawal_markup_fee_reversal'
+      | 'internal_withdrawal_reversal'
+      | 'legacy_crypto_payment'
+      | 'legacy_payment'
+      | 'legacy_payment_refund'
+      | 'license_sale'
+      | 'license_sale_commission'
+      | 'license_sale_revenue'
+      | 'marketplace_affiliate_fee'
+      | 'misc_purchase'
+      | 'misc_refund'
+      | 'misc_reversal'
+      | 'onboarding_reward'
+      | 'onchain_deposit'
+      | 'onchain_swap_source'
+      | 'onchain_swap_target'
+      | 'onchain_wallet_transfer_incoming'
+      | 'onchain_wallet_transfer_outgoing'
+      | 'onchain_withdrawal'
+      | 'orchestration_percentage_fee'
+      | 'passthrough_gmv'
+      | 'payment_dispute'
+      | 'payment_dispute_adjustment'
+      | 'payment_dispute_fee'
+      | 'payment_dispute_reversal'
+      | 'payment_gross'
+      | 'payment_gross_reversal'
+      | 'payment_processing_fixed_fee'
+      | 'payment_processing_percentage_fee'
+      | 'payment_referral'
+      | 'payment_referral_refund'
+      | 'payment_referral_reversal'
+      | 'payment_refund'
+      | 'payment_refund_reversal'
+      | 'payment_revshare'
+      | 'payment_revshare_payout'
+      | 'payment_revshare_refund'
+      | 'payment_revshare_reversal'
+      | 'payout_fee'
+      | 'platform_affiliate_payment'
+      | 'platform_affiliate_payment_reversal'
+      | 'platform_balance_payment'
+      | 'platform_balance_payment_refund'
+      | 'platform_balance_transfer_fee'
+      | 'platform_balance_transfer_incoming'
+      | 'platform_balance_transfer_outgoing'
+      | 'platform_covered_dispute'
+      | 'platform_earning'
+      | 'platform_markup_fee'
+      | 'platform_markup_fee_payout'
+      | 'promo_reversal'
+      | 'referral_bonus'
+      | 'resolution_center_refund'
+      | 'revshare_percentage_fee'
+      | 'sales_tax_fee'
+      | 'sales_tax_remittance'
+      | 'sales_tax_remittance_reversal'
+      | 'software_rental_revshare'
+      | 'software_rental_transaction'
+      | 'stripe_domestic_processing_fee'
+      | 'stripe_international_processing_fee'
+      | 'swap_fee'
+      | 'three_ds_fixed_fee'
+      | 'topup'
+      | 'topup_fee'
+      | 'topup_reversal'
+      | 'treasury_payin'
+      | 'whop_processing_fee'
+      | 'withdrawal'
+      | 'withdrawal_clawback'
+      | 'withdrawal_clawback_reversal'
+      | 'withdrawal_fee'
+      | 'withdrawal_fee_reversal'
+      | 'withdrawal_markup_fee'
+      | 'withdrawal_markup_fee_payout'
+      | 'withdrawal_markup_fee_payout_reversal'
+      | 'withdrawal_markup_fee_reversal'
+      | 'withdrawal_reclassification'
+      | 'withdrawal_reversal'
+      | 'withdrawal_topup_adjustment'
+      | 'deposit'
+      | 'wallet_transfer_incoming'
+      | 'wallet_transfer_outgoing'
+      | 'swap_source'
+      | 'swap_target';
+
+    object: 'ledger_activity';
+
+    /**
+     * When the activity posted to the ledger.
+     */
+    posted_at: string;
+
+    /**
+     * Resource associated with this ledger activity.
+     */
+    resource:
+      | Data.UnionMember0
+      | Data.UnionMember1
+      | Data.UnionMember2
+      | Data.UnionMember3
+      | Data.UnionMember4
+      | Data.UnionMember5
+      | Data.UnionMember6
+      | null;
+
+    /**
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
+     */
+    source: Data.Source | null;
+
+    /**
+     * Dollar value of this movement as a decimal string, signed like `amount`.
+     * Converted from the posted amount at the rate that was live when the line posted
+     * — the same pricing the wallet balance chart and the financial reports use — so a
+     * crypto row carries its dollar value too. `null` for a currency Whop holds no
+     * exchange rate for.
+     */
+    usd_amount: string | null;
+
+    /**
+     * The viewer account that owns this row's ledger. Present only when the response
+     * aggregates owned accounts (include_owned_accounts=true); omitted otherwise.
+     */
+    account?: Data.UnionMember0 | Data.UnionMember1;
+
+    /**
+     * The ledger account (a ldgr\_ identifier) this row belongs to. Present only when
+     * the response aggregates owned accounts (include_owned_accounts=true); omitted
+     * otherwise. Pair it with `account` to scope drawers and dashboard links to the
+     * owning business.
+     */
+    ledger_account_id?: string | null;
+
+    /**
+     * Payment related to this ledger activity. Included when rich resource hydration
+     * is enabled and the movement is tied to a payment.
+     */
+    payment?: Data.Payment | null;
+
+    /**
+     * Payment ID for any payment-related activity, including refunds and disputes.
+     */
+    payment_id?: string | null;
+
+    /**
+     * ID of the plan associated with the payment, when applicable.
+     */
+    plan_id?: string | null;
+
+    /**
+     * Name of the plan associated with the payment, when applicable.
+     */
+    plan_name?: string | null;
+
+    /**
+     * ID of the product associated with the payment, when applicable.
+     */
+    product_id?: string | null;
+
+    /**
+     * Name of the product associated with the payment, when applicable.
+     */
+    product_name?: string | null;
+
+    /**
+     * Email of the customer associated with the payment. Requires member:email:read.
+     */
+    user_email?: string | null;
+
+    /**
+     * ID of the customer associated with the payment.
+     */
+    user_id?: string | null;
+
+    /**
+     * Display name of the customer associated with the payment.
+     */
+    user_name?: string | null;
+  }
+
+  export namespace Data {
+    /**
+     * Currency for this ledger activity.
+     */
+    export interface Currency {
+      /**
+       * Currency code.
+       */
+      code: string;
+
+      /**
+       * Precision factor for the currency, for example `100000000` for USD.
+       */
+      precision: string;
+    }
+
+    export interface UnionMember0 {
+      /**
+       * Account ID.
+       */
+      id: string;
+
+      /**
+       * Account logo URL.
+       */
+      logo_url: string | null;
+
+      object: 'account';
+
+      /**
+       * Account route.
+       */
+      route: string | null;
+
+      /**
+       * Account display name.
+       */
+      title: string | null;
+    }
+
+    export interface UnionMember1 {
+      /**
+       * User ID.
+       */
+      id: string;
+
+      /**
+       * User display name.
+       */
+      name: string | null;
+
+      object: 'user';
+
+      /**
+       * User profile image URL.
+       */
+      profile_picture_url: string | null;
+
+      /**
+       * User's username.
+       */
+      username: string | null;
+    }
+
+    export interface UnionMember2 {
+      /**
+       * Bounty ID.
+       */
+      id: string;
+
+      object: 'bounty';
+
+      /**
+       * Bounty lifecycle status.
+       */
+      status: string;
+
+      /**
+       * Bounty title.
+       */
+      title: string;
+    }
+
+    export interface UnionMember3 {
+      /**
+       * Ledger account ID.
+       */
+      id: string;
+
+      object: 'ledger_account';
+
+      owner: UnionMember3.UnionMember0 | UnionMember3.UnionMember1 | null;
+    }
+
+    export namespace UnionMember3 {
+      export interface UnionMember0 {
+        /**
+         * Account ID.
+         */
+        id: string;
+
+        /**
+         * Account logo URL.
+         */
+        logo_url: string | null;
+
+        object: 'account';
+
+        /**
+         * Account route.
+         */
+        route: string | null;
+
+        /**
+         * Account display name.
+         */
+        title: string | null;
+      }
+
+      export interface UnionMember1 {
+        /**
+         * User ID.
+         */
+        id: string;
+
+        /**
+         * User display name.
+         */
+        name: string | null;
+
+        object: 'user';
+
+        /**
+         * User profile image URL.
+         */
+        profile_picture_url: string | null;
+
+        /**
+         * User's username.
+         */
+        username: string | null;
+      }
+    }
+
+    export interface UnionMember4 {
+      /**
+       * Payment method ID.
+       */
+      id: string;
+
+      bank: UnionMember4.Bank | null;
+
+      card: UnionMember4.Card | null;
+
+      /**
+       * Email identifier for email-based payment methods.
+       */
+      email_identifier: string | null;
+
+      /**
+       * Payment gateway type.
+       */
+      gateway_type: string | null;
+
+      object: 'payment_method';
+
+      /**
+       * Payment method type.
+       */
+      payment_method_type: string | null;
+    }
+
+    export namespace UnionMember4 {
+      export interface Bank {
+        /**
+         * Bank account holder name.
+         */
+        account_name: string | null;
+
+        /**
+         * Bank account type.
+         */
+        account_type: string | null;
+
+        /**
+         * Bank name.
+         */
+        bank_name: string | null;
+
+        /**
+         * Last four digits of the bank account.
+         */
+        last4: string | null;
+      }
+
+      export interface Card {
+        /**
+         * Card brand.
+         */
+        brand: string | null;
+
+        /**
+         * Card expiration month.
+         */
+        exp_month: number | null;
+
+        /**
+         * Card expiration year.
+         */
+        exp_year: number | null;
+
+        /**
+         * Last four digits of the card.
+         */
+        last4: string | null;
+      }
+    }
+
+    export interface UnionMember5 {
+      /**
+       * Payout method ID.
+       */
+      id: string;
+
+      /**
+       * Masked account reference.
+       */
+      account_reference: string | null;
+
+      /**
+       * Destination currency code.
+       */
+      destination_currency_code: string | null;
+
+      /**
+       * Payout institution name.
+       */
+      institution_name: string | null;
+
+      /**
+       * Payout method nickname.
+       */
+      nickname: string | null;
+
+      object: 'payout_method';
+
+      /**
+       * Payout provider.
+       */
+      provider: string | null;
+    }
+
+    export interface UnionMember6 {
+      /**
+       * Card transaction ID.
+       */
+      id: string;
+
+      /**
+       * ISO 8601 timestamp the transaction was authorized.
+       */
+      authorized_at: string | null;
+
+      /**
+       * Identifier of the card that the transaction was charged to.
+       */
+      card_id: string | null;
+
+      /**
+       * Cashback earned on this transaction as a USD decimal string. Zero for declined
+       * or ineligible transactions; null when cashback has not been computed yet.
+       */
+      cashback_usd: string | null;
+
+      /**
+       * Reason the transaction was declined (when status is declined).
+       */
+      declined_reason: string | null;
+
+      /**
+       * Amount the merchant charged in their local currency, as a decimal string. Pair
+       * with local_currency.
+       */
+      local_amount: string | null;
+
+      /**
+       * ISO 4217 currency code of the merchant-charged amount in local_amount.
+       */
+      local_currency: string | null;
+
+      /**
+       * Merchant category.
+       */
+      merchant_category: string | null;
+
+      /**
+       * Merchant icon URL.
+       */
+      merchant_icon_url: string | null;
+
+      /**
+       * Merchant display name.
+       */
+      merchant_name: string | null;
+
+      object: 'card_transaction';
+
+      /**
+       * ISO 8601 timestamp the transaction was settled by the card network.
+       */
+      posted_at: string | null;
+
+      /**
+       * Current card transaction status.
+       */
+      status: string | null;
+
+      /**
+       * The processor-settled USD amount as a decimal string. The ledger's USDT leg is
+       * posted 1:1 from this value.
+       */
+      usd_amount: string | null;
+    }
+
+    /**
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
+     */
+    export interface Source {
+      id: string;
+
+      object: string;
+
+      /**
+       * Payout amount as a decimal number in the destination currency (payout sources
+       * only; requires payout:withdrawal:read).
+       */
+      amount_float?: number | null;
+
+      /**
+       * Card brand used by the payment source.
+       */
+      card_brand?: string | null;
+
+      /**
+       * Chain the deposit landed on, for example plasma (onchain_transaction sources
+       * only).
+       */
+      chain?: string | null;
+
+      /**
+       * Public claim URL for the airdrop link (airdrop_link sources only).
+       */
+      claim_url?: string | null;
+
+      /**
+       * Payout creation time as an ISO 8601 timestamp (payout sources only; requires
+       * payout:withdrawal:read).
+       */
+      created_at?: string | null;
+
+      /**
+       * Estimated arrival as an ISO 8601 timestamp (payout sources only; requires
+       * payout:withdrawal:read).
+       */
+      estimated_arrival?: string | null;
+
+      /**
+       * Action that generated a platform markup fee: deposit, swap, transfer,
+       * card_spend, or payout. Present for platform_markup_fee and
+       * platform_markup_fee_payout, including when include_resource is false. Null when
+       * the originating action is unavailable; omitted on other source types.
+       */
+      fee_kind?: 'payout' | 'transfer' | 'deposit' | 'swap' | 'card_spend' | null;
+
+      /**
+       * Amount converted out of from_currency as a decimal string (swap sources only).
+       */
+      from_amount?: string | null;
+
+      /**
+       * Lowercase currency code converted from (swap sources only).
+       */
+      from_currency?: string | null;
+
+      /**
+       * Memo attached to the transfer or payout source, or null when none was provided
+       * (on payout sources requires payout:withdrawal:read).
+       */
+      notes?: string | null;
+
+      /**
+       * Name of the entity processing the payout (payout sources only; requires
+       * payout:withdrawal:read).
+       */
+      payer_name?: string | null;
+
+      /**
+       * Total charged by the payment source.
+       */
+      payment_amount?: Source.PaymentAmount | null;
+
+      /**
+       * Payment method used by the payment source.
+       */
+      payment_method_type?: string | null;
+
+      /**
+       * Processor used by the payment source.
+       */
+      payment_processor?: string | null;
+
+      /**
+       * Payout destination display info (payout sources only).
+       */
+      payout_destination?: Source.PayoutDestination | null;
+
+      /**
+       * Saved payout destination nickname (payout sources only).
+       */
+      payout_token_nickname?: string | null;
+
+      /**
+       * Why the activity happened. On transfer sources this is the transfer reason, for
+       * example pool_top_up or bounty_return. On payout sources it explains why the
+       * payout was canceled, denied, or failed (requires payout:withdrawal:read); null
+       * while the payout is progressing normally.
+       */
+      reason?: string | null;
+
+      /**
+       * Whether this payout is currently held for manual risk review (payout sources
+       * only; requires payout:withdrawal:read).
+       */
+      risk_review_hold?: boolean | null;
+
+      /**
+       * Sender wallet address or onramp provider identifier (onchain_transaction sources
+       * only).
+       */
+      sender_address?: string | null;
+
+      /**
+       * Lifecycle status. On payout sources this is the payout status (requires
+       * payout:withdrawal:read); on airdrop_link sources it is the claim-link status
+       * (ungated); on payment and top-up sources it is the friendly payment status such
+       * as succeeded/pending/failed (ungated).
+       */
+      status?: string | null;
+
+      /**
+       * Amount received in to_currency as a decimal string (swap sources only).
+       */
+      to_amount?: string | null;
+
+      /**
+       * Lowercase currency code converted to (swap sources only).
+       */
+      to_currency?: string | null;
+
+      /**
+       * On-chain transaction hash (onchain_transaction and swap sources only).
+       */
+      tx_hash?: string | null;
+
+      [k: string]: unknown;
+    }
+
+    export namespace Source {
+      /**
+       * Total charged by the payment source.
+       */
+      export interface PaymentAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * Payout destination display info (payout sources only).
+       */
+      export interface PayoutDestination {
+        icon_url?: string | null;
+
+        payer_name?: string | null;
+      }
+    }
+
+    export interface UnionMember0 {
+      /**
+       * Account ID.
+       */
+      id: string;
+
+      /**
+       * Account logo URL.
+       */
+      logo_url: string | null;
+
+      object: 'account';
+
+      /**
+       * Account route.
+       */
+      route: string | null;
+
+      /**
+       * Account display name.
+       */
+      title: string | null;
+    }
+
+    export interface UnionMember1 {
+      /**
+       * User ID.
+       */
+      id: string;
+
+      /**
+       * User display name.
+       */
+      name: string | null;
+
+      object: 'user';
+
+      /**
+       * User profile image URL.
+       */
+      profile_picture_url: string | null;
+
+      /**
+       * User's username.
+       */
+      username: string | null;
+    }
+
+    /**
+     * Payment related to this ledger activity. Included when rich resource hydration
+     * is enabled and the movement is tied to a payment.
+     */
+    export interface Payment {
+      /**
+       * Payment ID, prefixed `pay_`.
+       */
+      id: string;
+
+      /**
+       * Total charged by the payment.
+       */
+      amount: Payment.Amount | null;
+
+      /**
+       * Card brand, when the customer paid by card.
+       */
+      card_brand: string | null;
+
+      /**
+       * Last four digits of the card, when the customer paid by card.
+       */
+      card_last4: string | null;
+
+      /**
+       * When the payment was created.
+       */
+      created_at: string;
+
+      object: 'payment';
+
+      /**
+       * How the customer paid, such as `card` or `paypal`.
+       */
+      payment_method_type: string | null;
+
+      /**
+       * Processor that handled the payment, such as `stripe`.
+       */
+      payment_processor: string | null;
+
+      /**
+       * Plan associated with the payment, when applicable.
+       */
+      plan: Payment.Plan | null;
+
+      /**
+       * Product associated with the payment, when applicable.
+       */
+      product: Payment.Product | null;
+
+      /**
+       * Customer associated with the payment. Email requires member:email:read.
+       */
+      user: Payment.User | null;
+    }
+
+    export namespace Payment {
+      /**
+       * Total charged by the payment.
+       */
+      export interface Amount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * Plan associated with the payment, when applicable.
+       */
+      export interface Plan {
+        /**
+         * Plan ID, prefixed `plan_`.
+         */
+        id: string;
+
+        /**
+         * Plan name.
+         */
+        name: string | null;
+      }
+
+      /**
+       * Product associated with the payment, when applicable.
+       */
+      export interface Product {
+        /**
+         * Product ID, prefixed `prod_`.
+         */
+        id: string;
+
+        /**
+         * Product name.
+         */
+        name: string;
+      }
+
+      /**
+       * Customer associated with the payment. Email requires member:email:read.
+       */
+      export interface User {
+        /**
+         * Customer ID, prefixed `user_`.
+         */
+        id: string;
+
+        /**
+         * Customer email, or null without member:email:read.
+         */
+        email: string | null;
+
+        /**
+         * Customer display name.
+         */
+        name: string;
+      }
+    }
   }
 }
 
@@ -15247,6 +16253,7 @@ export namespace SwapCompletedWebhookEvent {
      * The ledger line category this activity was posted under.
      */
     line_type:
+      | 'account_settlement'
       | 'ad_budget_release'
       | 'ad_campaign_budget'
       | 'ad_publisher_payout'
@@ -17002,6 +18009,7 @@ export type UnwrapWebhookEvent =
   | EntryDeniedWebhookEvent
   | ExportCompletedWebhookEvent
   | ExportFailedWebhookEvent
+  | FinancialActivityFundsAvailableWebhookEvent
   | IdentityProfileUpdatedWebhookEvent
   | InvoiceCreatedWebhookEvent
   | InvoiceMarkedUncollectibleWebhookEvent
@@ -17103,6 +18111,7 @@ export interface WebhookCreateParams {
     | 'ledger_account.funds_available'
     | 'swap.completed'
     | 'deposit.succeeded'
+    | 'financial_activity.funds_available'
     | 'transfer.created'
     | 'transfer.completed'
     | 'transfer.failed'
@@ -17275,6 +18284,7 @@ export interface WebhookUpdateParams {
     | 'ledger_account.funds_available'
     | 'swap.completed'
     | 'deposit.succeeded'
+    | 'financial_activity.funds_available'
     | 'transfer.created'
     | 'transfer.completed'
     | 'transfer.failed'
@@ -17479,6 +18489,7 @@ export declare namespace Webhooks {
     type EntryDeniedWebhookEvent as EntryDeniedWebhookEvent,
     type ExportCompletedWebhookEvent as ExportCompletedWebhookEvent,
     type ExportFailedWebhookEvent as ExportFailedWebhookEvent,
+    type FinancialActivityFundsAvailableWebhookEvent as FinancialActivityFundsAvailableWebhookEvent,
     type IdentityProfileUpdatedWebhookEvent as IdentityProfileUpdatedWebhookEvent,
     type InvoiceCreatedWebhookEvent as InvoiceCreatedWebhookEvent,
     type InvoiceMarkedUncollectibleWebhookEvent as InvoiceMarkedUncollectibleWebhookEvent,

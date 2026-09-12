@@ -3020,9 +3020,9 @@ export interface Payment {
 
   /**
    * When the funds post to the account's available balance, at midnight UTC. The
-   * `ledger_account.funds_available` webhook carries the same value. Null until the
-   * payment is paid, and always null in list responses — retrieve the payment for
-   * it.
+   * `financial_activity.funds_available` webhook's `posted_at` carries the same
+   * value when the settlement that clears it posts. Null until the payment is paid,
+   * and always null in list responses — retrieve the payment for it.
    */
   settlement_time_at: string | null;
 

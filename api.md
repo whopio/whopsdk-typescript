@@ -157,6 +157,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">EntryDeniedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ExportCompletedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">ExportFailedWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">FinancialActivityFundsAvailableWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">IdentityProfileUpdatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">InvoiceMarkedUncollectibleWebhookEvent</a></code>

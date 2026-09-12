@@ -523,6 +523,7 @@ export {
   type EntryDeniedWebhookEvent,
   type ExportCompletedWebhookEvent,
   type ExportFailedWebhookEvent,
+  type FinancialActivityFundsAvailableWebhookEvent,
   type IdentityProfileUpdatedWebhookEvent,
   type InvoiceCreatedWebhookEvent,
   type InvoiceMarkedUncollectibleWebhookEvent,
