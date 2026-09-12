@@ -78,7 +78,7 @@ export interface PaymentLegacy {
     product: PaymentLegacy.Product | null;
     /** The promo code used for this payment. */
     promo_code: PaymentLegacy.PromoCode | null;
-    /** Whop-hosted URL where the buyer can sign in and complete 3D Secure for a failed subscription renewal. `null` when recovery is unavailable or you lack `member:basic:read`. */
+    /** Whop-hosted URL where the buyer can sign in and complete 3D Secure for an off-session charge the bank challenged — a subscription renewal or a saved-card payment. `null` when recovery is unavailable or you lack `member:basic:read`. */
     recovery_url: string | null;
     /** True only for payments that are `paid`, have not been fully refunded, and were processed by a payment processor that allows refunds. */
     refundable: boolean;
