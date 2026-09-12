@@ -30,6 +30,13 @@ describe('resource products', () => {
       custom_cta_url: 'https://shinetime.example/book',
       custom_statement_descriptor: 'WHOP*SHINETIME',
       description: 'Full interior extraction, leather conditioning, and an ozone odor treatment.',
+      gallery_images: [
+        {
+          id: 'file_xxxxxxxxxxxxxx',
+          direct_upload_id:
+            'eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+        },
+      ],
       global_affiliate_percentage: 10,
       global_affiliate_status: 'enabled',
       headline: 'Steam, shampoo, and odor removal in one visit',

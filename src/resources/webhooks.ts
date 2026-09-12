@@ -8986,7 +8986,8 @@ export namespace DepositSucceededWebhookEvent {
       | null;
 
     /**
-     * Source of this ledger activity.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
      */
     source: Data.Source | null;
 
@@ -9385,7 +9386,8 @@ export namespace DepositSucceededWebhookEvent {
     }
 
     /**
-     * Source of this ledger activity.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
      */
     export interface Source {
       id: string;
@@ -9425,6 +9427,14 @@ export namespace DepositSucceededWebhookEvent {
        * payout:withdrawal:read).
        */
       estimated_arrival?: string | null;
+
+      /**
+       * Action that generated a platform markup fee: deposit, swap, transfer,
+       * card_spend, or payout. Present for platform_markup_fee and
+       * platform_markup_fee_payout, including when include_resource is false. Null when
+       * the originating action is unavailable; omitted on other source types.
+       */
+      fee_kind?: 'payout' | 'transfer' | 'deposit' | 'swap' | 'card_spend' | null;
 
       /**
        * Amount converted out of from_currency as a decimal string (swap sources only).
@@ -15394,7 +15404,8 @@ export namespace SwapCompletedWebhookEvent {
       | null;
 
     /**
-     * Source of this ledger activity.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
      */
     source: Data.Source | null;
 
@@ -15793,7 +15804,8 @@ export namespace SwapCompletedWebhookEvent {
     }
 
     /**
-     * Source of this ledger activity.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and
+     * the ledger activity ID.
      */
     export interface Source {
       id: string;
@@ -15833,6 +15845,14 @@ export namespace SwapCompletedWebhookEvent {
        * payout:withdrawal:read).
        */
       estimated_arrival?: string | null;
+
+      /**
+       * Action that generated a platform markup fee: deposit, swap, transfer,
+       * card_spend, or payout. Present for platform_markup_fee and
+       * platform_markup_fee_payout, including when include_resource is false. Null when
+       * the originating action is unavailable; omitted on other source types.
+       */
+      fee_kind?: 'payout' | 'transfer' | 'deposit' | 'swap' | 'card_spend' | null;
 
       /**
        * Amount converted out of from_currency as a decimal string (swap sources only).

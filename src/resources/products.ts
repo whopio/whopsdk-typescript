@@ -198,6 +198,13 @@ export interface ProductCreateParams {
   description?: string | null;
 
   /**
+   * Body param: Images or videos displayed in the product gallery, in display order.
+   * Replaces the existing gallery. Send an empty array to clear it; omit or pass
+   * null to leave it unchanged. A banner image does not populate the gallery.
+   */
+  gallery_images?: Array<ProductCreateParams.GalleryImage> | null;
+
+  /**
    * Body param: The commission rate affiliates earn.
    */
   global_affiliate_percentage?: number | null;
@@ -273,6 +280,20 @@ export interface ProductCreateParams {
   'Idempotency-Key'?: string;
 }
 
+export namespace ProductCreateParams {
+  export interface GalleryImage {
+    /**
+     * The tag of an already-uploaded attachment.
+     */
+    id?: string;
+
+    /**
+     * The signed ID of a completed direct upload, as an alternative to id.
+     */
+    direct_upload_id?: string;
+  }
+}
+
 export interface ProductRetrieveParams {
   /**
    * Pins the request to a dated API version.
@@ -292,6 +313,13 @@ export interface ProductUpdateParams {
    * Body param: A written description displayed on the product page.
    */
   description?: string | null;
+
+  /**
+   * Body param: Images or videos displayed in the product gallery, in display order.
+   * Replaces the existing gallery. Send an empty array to clear it; omit or pass
+   * null to leave it unchanged. A banner image does not populate the gallery.
+   */
+  gallery_images?: Array<ProductUpdateParams.GalleryImage> | null;
 
   /**
    * Body param: A short marketing headline for the product page.
@@ -352,6 +380,18 @@ export namespace ProductUpdateParams {
 
     /**
      * The signed id of a completed direct upload.
+     */
+    direct_upload_id?: string;
+  }
+
+  export interface GalleryImage {
+    /**
+     * The tag of an already-uploaded attachment.
+     */
+    id?: string;
+
+    /**
+     * The signed ID of a completed direct upload, as an alternative to id.
      */
     direct_upload_id?: string;
   }
