@@ -33,4 +33,6 @@ export interface ListBusinessesRequest {
     referred_username?: string;
     /** Filter to referrals from a single tier: first, second, or blueprint. */
     tier?: Whop.partners.ListBusinessesRequestTier;
+    /** Case-insensitive business-name prefix, or an exact `biz_` account ID. Surrounding whitespace is ignored; blank values apply no filter. */
+    business_prefix_query?: string;
 }
