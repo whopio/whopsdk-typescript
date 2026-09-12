@@ -9,6 +9,8 @@
 export interface UpdatePreferencesRequest {
     /** Account ID, prefixed `biz_`. */
     account_id: string;
+    /** Opens an advertising certification application. Keyed by certification type (`prescription_drug_ads`); set the entry's `status` to `pending_information` to start, then answer the requested fields via `PATCH /verifications/{id}`. Only one application per type can be open at a time; every other status is set by Whop's review. */
+    ads_certifications?: Record<string, UpdatePreferencesRequest.AdsCertifications.Value>;
     /** How the account pays for Whop Ads spend. `primary` is charged first; `backup` covers the charge when the primary fails. */
     ads_payment_methods?: UpdatePreferencesRequest.AdsPaymentMethods;
     /** Lowercase ISO currency code, such as `usd` or `eur`, used to display ad spend and stats. Defaults to `usd`. */
@@ -28,6 +30,21 @@ export interface UpdatePreferencesRequest {
 }
 
 export namespace UpdatePreferencesRequest {
+    export namespace AdsCertifications {
+        export interface Value {
+            /** Must be `pending_information`. */
+            status: Value.Status;
+        }
+
+        export namespace Value {
+            /** Must be `pending_information`. */
+            export const Status = {
+                PendingInformation: "pending_information",
+            } as const;
+            export type Status = (typeof Status)[keyof typeof Status];
+        }
+    }
+
     /**
      * How the account pays for Whop Ads spend. `primary` is charged first; `backup` covers the charge when the primary fails.
      */
