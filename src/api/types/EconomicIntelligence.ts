@@ -9,8 +9,6 @@ export interface EconomicIntelligence {
     created_at: string;
     /** When the card was run, as an ISO 8601 timestamp, or `null` */
     executed_at: string | null;
-    /** How the card runs. `whop_ai` means `prompt` is sent to Whop AI, which carries out every step. */
-    execution_type: EconomicIntelligence.ExecutionType;
     /** Economic intelligence ID, prefixed `reca_` */
     id: string;
     /** What the owner asked for, in their own words, when this recommendation was requested, or `null` when the engine chose the action on its own */
@@ -28,11 +26,6 @@ export interface EconomicIntelligence {
 }
 
 export namespace EconomicIntelligence {
-    /** How the card runs. `whop_ai` means `prompt` is sent to Whop AI, which carries out every step. */
-    export const ExecutionType = {
-        WhopAi: "whop_ai",
-    } as const;
-    export type ExecutionType = (typeof ExecutionType)[keyof typeof ExecutionType];
     /** `queued` once requested and not yet picked up; `pending` while the engine is generating; `ready` when the card is written and the owner can run it; `executed` once it was run; `superseded` when a newer card of the same action type replaced it; `failed` when the engine had nothing to recommend for the request */
     export const Status = {
         Queued: "queued",
