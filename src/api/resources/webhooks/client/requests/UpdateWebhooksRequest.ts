@@ -49,6 +49,7 @@ export namespace UpdateWebhooksRequest {
             LedgerAccountFundsAvailable: "ledger_account.funds_available",
             SwapCompleted: "swap.completed",
             DepositSucceeded: "deposit.succeeded",
+            FinancialActivityFundsAvailable: "financial_activity.funds_available",
             TransferCreated: "transfer.created",
             TransferCompleted: "transfer.completed",
             TransferFailed: "transfer.failed",

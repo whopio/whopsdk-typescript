@@ -59,6 +59,7 @@ export namespace LedgerActivity {
 
     /** The ledger line category this activity was posted under. */
     export const LineType = {
+        AccountSettlement: "account_settlement",
         AdBudgetRelease: "ad_budget_release",
         AdCampaignBudget: "ad_campaign_budget",
         AdPublisherPayout: "ad_publisher_payout",

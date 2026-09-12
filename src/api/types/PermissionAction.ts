@@ -210,6 +210,7 @@ export const PermissionAction = {
     WebhookReceiveLedgerAccounts: "webhook_receive:ledger_accounts",
     WebhookReceiveAccounts: "webhook_receive:accounts",
     WebhookReceiveDeposits: "webhook_receive:deposits",
+    WebhookReceiveFinancialActivity: "webhook_receive:financial_activity",
     WebhookReceiveTransfers: "webhook_receive:transfers",
     WebhookReceiveCardTransactions: "webhook_receive:card_transactions",
     WebhookReceiveCards: "webhook_receive:cards",
