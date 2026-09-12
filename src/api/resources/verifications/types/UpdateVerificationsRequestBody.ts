@@ -48,6 +48,7 @@ export type UpdateVerificationsRequestBody =
                     id: string;
                     value?: string | undefined;
                     value_type?: ("raw" | "vault_token") | undefined;
+                    values?: string[] | undefined;
                 }[]
               | undefined;
           tax_identification_number?: string | undefined;
@@ -99,6 +100,7 @@ export type UpdateVerificationsRequestBody =
                     id: string;
                     value?: string | undefined;
                     value_type?: ("raw" | "vault_token") | undefined;
+                    values?: string[] | undefined;
                 }[]
               | undefined;
           tax_identification_number?: string | undefined;

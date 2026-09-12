@@ -3,6 +3,8 @@
 export interface UpdatePreferencesResponse {
     /** The account's Whop Ads services and payment authorization agreement. While `pending_signature`, campaign launch is blocked; sign by answering `requested_information` via `PATCH /verifications/{id}`. */
     ads_agreement: UpdatePreferencesResponse.AdsAgreement;
+    /** The account's advertising certifications, one entry per certification type Whop offers. Start an application by setting a type's `status` to `pending_information` via `PATCH`, then answer the fields it requests via `GET`/`PATCH /verifications/{id}`. */
+    ads_certifications: UpdatePreferencesResponse.AdsCertifications.Item[];
     /** How the account pays for Whop Ads spend. `primary` is charged first; `backup` covers the charge when the primary fails. `null` until ads billing has been configured. */
     ads_payment_methods: UpdatePreferencesResponse.AdsPaymentMethods | null;
     /** Lowercase ISO currency code, such as `usd` or `eur`, used to display ad spend and stats. Defaults to `usd`. */
@@ -44,6 +46,55 @@ export namespace UpdatePreferencesResponse {
             Signed: "signed",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
+    }
+
+    export type AdsCertifications = AdsCertifications.Item[];
+
+    export namespace AdsCertifications {
+        export interface Item {
+            /** Countries every approved application of this type covers, as ISO 3166-1 alpha-2 codes. Ads targeting only these countries are exempt from the category's restrictions. */
+            approved_countries: string[];
+            /** The business name on the latest application. */
+            business_name: string | null;
+            /** The kind of business on the latest application. `null` until the account applies. */
+            business_type: Item.BusinessType | null;
+            /** The certification this entry describes. */
+            certification_type: Item.CertificationType;
+            /** Countries the latest application covers, as ISO 3166-1 alpha-2 codes. */
+            countries: string[];
+            /** Why the latest application was denied. `null` unless `status` is `denied`. */
+            denial_reason: string | null;
+            /** The latest application's request ID, prefixed `inrq_`. `null` until the account applies. */
+            request_id: string | null;
+            /** `not_started` until the account applies; `pending_information` while an application waits for answers; `in_review` once submitted; then `approved` or `denied`. */
+            status: Item.Status;
+            /** The website on the latest application. */
+            url: string | null;
+        }
+
+        export namespace Item {
+            /** The kind of business on the latest application. `null` until the account applies. */
+            export const BusinessType = {
+                OnlinePharmacy: "online_pharmacy",
+                PharmaceuticalManufacturer: "pharmaceutical_manufacturer",
+                TelehealthProvider: "telehealth_provider",
+            } as const;
+            export type BusinessType = (typeof BusinessType)[keyof typeof BusinessType];
+            /** The certification this entry describes. */
+            export const CertificationType = {
+                PrescriptionDrugAds: "prescription_drug_ads",
+            } as const;
+            export type CertificationType = (typeof CertificationType)[keyof typeof CertificationType];
+            /** `not_started` until the account applies; `pending_information` while an application waits for answers; `in_review` once submitted; then `approved` or `denied`. */
+            export const Status = {
+                NotStarted: "not_started",
+                PendingInformation: "pending_information",
+                InReview: "in_review",
+                Approved: "approved",
+                Denied: "denied",
+            } as const;
+            export type Status = (typeof Status)[keyof typeof Status];
+        }
     }
 
     /**
