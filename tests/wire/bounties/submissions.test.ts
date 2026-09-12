@@ -25,7 +25,7 @@ describe("SubmissionsClient", () => {
                     id: "btys_xxxxxxxxxxxxxx",
                     latest_proof_livestream_feed: {
                         ended_at: "2026-01-01T12:00:00.000Z",
-                        id: "lfeed_3",
+                        id: "lfeed_1",
                         recording_status: null,
                         recording_url:
                             "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -145,7 +145,7 @@ describe("SubmissionsClient", () => {
             id: "btys_xxxxxxxxxxxxxx",
             latest_proof_livestream_feed: {
                 ended_at: "2026-01-01T12:00:00.000Z",
-                id: "lfeed_3",
+                id: "lfeed_1",
                 recording_status: "recording",
                 recording_url:
                     "https://whop-assets-example.s3.amazonaws.com/uploads/video/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
