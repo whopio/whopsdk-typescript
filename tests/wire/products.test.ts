@@ -36,7 +36,7 @@ describe("ProductsClient", () => {
                         unlimited_stock: true,
                         visibility: "visible",
                     },
-                    description: "aggregate 24/7 ROI",
+                    description: "exploit end-to-end users",
                     external_identifier: "SHINE-CERAMIC-01",
                     gallery_images: [
                         {
@@ -45,7 +45,7 @@ describe("ProductsClient", () => {
                             url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         },
                     ],
-                    headline: "SWAG",
+                    headline: "immersive experience",
                     id: "prod_xxxxxxxxxxxxxx",
                     labels: ["courses"],
                     member_count: 0,
