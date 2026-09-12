@@ -34,7 +34,7 @@ export interface LedgerActivity {
     product_name?: (string | null) | undefined;
     /** Resource associated with this ledger activity. */
     resource: LedgerActivity.Resource | null;
-    /** Source of this ledger activity. */
+    /** Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID. */
     source: LedgerActivity.Source | null;
     /** Dollar value of this movement as a decimal string, signed like `amount`. Converted from the posted amount at the rate that was live when the line posted — the same pricing the wallet balance chart and the financial reports use — so a crypto row carries its dollar value too. `null` for a currency Whop holds no exchange rate for. */
     usd_amount: string | null;
@@ -356,7 +356,7 @@ export namespace LedgerActivity {
           };
 
     /**
-     * Source of this ledger activity.
+     * Source of this ledger activity. Platform markup fees use object platform_fee and the ledger activity ID.
      */
     export interface Source {
         /** Payout amount as a decimal number in the destination currency (payout sources only; requires payout:withdrawal:read). */
@@ -371,6 +371,8 @@ export namespace LedgerActivity {
         created_at?: (string | null) | undefined;
         /** Estimated arrival as an ISO 8601 timestamp (payout sources only; requires payout:withdrawal:read). */
         estimated_arrival?: (string | null) | undefined;
+        /** Action that generated a platform markup fee: deposit, swap, transfer, card_spend, or payout. Present for platform_markup_fee and platform_markup_fee_payout, including when include_resource is false. Null when the originating action is unavailable; omitted on other source types. */
+        fee_kind?: (Source.FeeKind | null) | undefined;
         /** Amount converted out of from_currency as a decimal string (swap sources only). */
         from_amount?: (string | null) | undefined;
         /** Lowercase currency code converted from (swap sources only). */
@@ -410,6 +412,16 @@ export namespace LedgerActivity {
     }
 
     export namespace Source {
+        /** Action that generated a platform markup fee: deposit, swap, transfer, card_spend, or payout. Present for platform_markup_fee and platform_markup_fee_payout, including when include_resource is false. Null when the originating action is unavailable; omitted on other source types. */
+        export const FeeKind = {
+            Payout: "payout",
+            Transfer: "transfer",
+            Deposit: "deposit",
+            Swap: "swap",
+            CardSpend: "card_spend",
+        } as const;
+        export type FeeKind = (typeof FeeKind)[keyof typeof FeeKind];
+
         /**
          * Payout destination display info (payout sources only).
          */
