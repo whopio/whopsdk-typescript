@@ -19,15 +19,15 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    action_type: "scale_winning_ads",
+                    action_type: "improve_landing_page",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
                     id: "reca_xxxxxxxxxxxxxx",
-                    input: "more sales from ads",
+                    input: "Grow revenue",
                     prompt: "Create a 20% off promo code for my members.",
-                    reasoning: "Capped 9 of 14 days.",
+                    reasoning: "Revenue fell by 20%.",
                     status: "queued",
-                    superseded_at: "superseded_at",
+                    superseded_at: "2026-01-01T12:00:00.000Z",
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
                 },
             ],
@@ -168,15 +168,15 @@ describe("EconomicIntelligenceClient", () => {
         const rawRequestBody = { input: "get more repeat buyers for my taurine supplement" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "scale_winning_ads",
+            action_type: "improve_landing_page",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
             id: "reca_xxxxxxxxxxxxxx",
-            input: "more sales from ads",
+            input: "Grow revenue",
             prompt: "Create a 20% off promo code for my members.",
-            reasoning: "Capped 9 of 14 days.",
+            reasoning: "Revenue fell by 20%.",
             status: "queued",
-            superseded_at: "superseded_at",
+            superseded_at: "2026-01-01T12:00:00.000Z",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
         };
 
