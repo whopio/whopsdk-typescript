@@ -301,7 +301,7 @@ export class PlansClient {
     }
 
     /**
-     * Permanently delete a plan from a product. Existing memberships on this plan will not be affected.
+     * Delete a plan from a product. It stops selling immediately; existing memberships on this plan will not be affected.
      *
      * @param {Whop.DeletePlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
