@@ -183,6 +183,7 @@ describe("PartnersClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            partner_reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             qualification_income_source: "sales",
             qualification_met: true,

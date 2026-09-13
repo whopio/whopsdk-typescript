@@ -20,7 +20,7 @@ export namespace ListEarningsResponse {
             /** Income and cost lines behind this earning's commission. Null for earnings settled before this data was recorded. */
             financial_activity: Item.FinancialActivity.Item[] | null;
             id: string | null;
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, or Whop Card interchange. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding reward paid to the partner when a referred business qualifies. */
             income_source: Item.IncomeSource;
             object: Item.Object_;
             payout_at: string | null;
@@ -79,12 +79,13 @@ export namespace ListEarningsResponse {
                 }
             }
 
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, or Whop Card interchange. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding reward paid to the partner when a referred business qualifies. */
             export const IncomeSource = {
                 Sales: "sales",
                 AdSpend: "ad_spend",
                 Transfer: "transfer",
                 CardInterchange: "card_interchange",
+                OnboardingReward: "onboarding_reward",
             } as const;
             export type IncomeSource = (typeof IncomeSource)[keyof typeof IncomeSource];
             export const Object_ = {
@@ -129,6 +130,13 @@ export namespace ListEarningsResponse {
                       id: string;
                       merchant_name: string | null;
                       object: "card_transaction";
+                  }
+                | {
+                      business_id: string;
+                      created_at: string;
+                      id: string | null;
+                      object: "onboarding_reward";
+                      slug: string | null;
                   };
             /** Current status of the earning. */
             export const Status = {
