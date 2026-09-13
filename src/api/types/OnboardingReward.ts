@@ -11,6 +11,8 @@ export interface OnboardingReward {
     max_redemptions: number | null;
     /** Partner whose link attributed this reward. */
     partner: Whop.UserSummary;
+    /** What the partner earns when a referred business qualifies for this reward. Null when the reward pays the business only. */
+    partner_reward_amount: Whop.Money | null;
     /** Required qualifying volume. Null for an immediate reward. */
     qualification_amount: Whop.Money | null;
     /** Income source whose volume qualifies the business. Null for an immediate reward. */
