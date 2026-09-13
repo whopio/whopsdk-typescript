@@ -93,6 +93,7 @@ export namespace CreateDepositsResponse {
                 export const Name = {
                     Ethereum: "Ethereum",
                     Solana: "Solana",
+                    Bitcoin: "Bitcoin",
                     Base: "Base",
                     BnbSmartChain: "BNB Smart Chain",
                     Hyperliquid: "Hyperliquid",
@@ -118,6 +119,7 @@ export namespace CreateDepositsResponse {
                         export const Name = {
                             Arb: "ARB",
                             Bnb: "BNB",
+                            Btc: "BTC",
                             Eth: "ETH",
                             Eurc: "EURC",
                             Hype: "HYPE",

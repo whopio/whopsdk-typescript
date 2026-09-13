@@ -41,7 +41,7 @@ describe("DepositsClient", () => {
                         icon_url: "https://whop.com/_static/images/crypto/solana.svg",
                         name: "Ethereum",
                         supported_currencies: [
-                            { icon_url: "https://whop.com/_static/images/crypto/ethereum.svg", name: "ARB" },
+                            { icon_url: "https://whop.com/_static/images/crypto/pyusd.svg", name: "ARB" },
                         ],
                     },
                 ],
