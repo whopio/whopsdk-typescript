@@ -15,7 +15,7 @@ export interface AdGroup {
     bid_type: AdGroup.BidType | null;
     /** This ad group's budget, in the ad account's currency. `null` when the budget is set on the campaign instead. */
     budget_amount: number | null;
-    /** Whether `budget_amount` is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
+    /** Whether `budget_amount` is spent per day (`daily`) or over the ad group's full run (`lifetime`). A `lifetime` ad group also needs `ends_at`, at least 24 hours after it starts. */
     budget_type: AdGroup.BudgetType | null;
     /** Clicks divided by impressions, between 0 and 1. */
     click_through_rate: number;
@@ -154,7 +154,7 @@ export namespace AdGroup {
         MaximumTarget: "maximum_target",
     } as const;
     export type BidType = (typeof BidType)[keyof typeof BidType];
-    /** Whether `budget_amount` is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
+    /** Whether `budget_amount` is spent per day (`daily`) or over the ad group's full run (`lifetime`). A `lifetime` ad group also needs `ends_at`, at least 24 hours after it starts. */
     export const BudgetType = {
         Daily: "daily",
         Lifetime: "lifetime",
