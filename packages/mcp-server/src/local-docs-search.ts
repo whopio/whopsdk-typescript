@@ -1307,13 +1307,13 @@ const EMBEDDED_METHODS: MethodEntry[] = [
     httpMethod: 'delete',
     summary: 'Delete Plan',
     description:
-      'Permanently delete a plan from a product. Existing memberships on this plan will not be affected.',
+      'Delete a plan from a product. It stops selling immediately; existing memberships on this plan will not be affected.',
     stainlessPath: '(resource) plans > (method) delete',
     qualified: 'client.plans.delete',
     params: ['id: string;', 'Api-Version-Date?: string;'],
     response: '{ id: string; deleted: boolean; }',
     markdown:
-      "## delete\n\n`client.plans.delete(id: string, Api-Version-Date?: string): { id: string; deleted: boolean; }`\n\n**delete** `/plans/{id}`\n\nPermanently delete a plan from a product. Existing memberships on this plan will not be affected.\n\n### Parameters\n\n- `id: string`\n\n- `Api-Version-Date?: string`\n\n### Returns\n\n- `{ id: string; deleted: boolean; }`\n\n  - `id: string`\n  - `deleted: boolean`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst plan = await client.plans.delete('id');\n\nconsole.log(plan);\n```",
+      "## delete\n\n`client.plans.delete(id: string, Api-Version-Date?: string): { id: string; deleted: boolean; }`\n\n**delete** `/plans/{id}`\n\nDelete a plan from a product. It stops selling immediately; existing memberships on this plan will not be affected.\n\n### Parameters\n\n- `id: string`\n\n- `Api-Version-Date?: string`\n\n### Returns\n\n- `{ id: string; deleted: boolean; }`\n\n  - `id: string`\n  - `deleted: boolean`\n\n### Example\n\n```typescript\nimport Whop from '@whop/sdk';\n\nconst client = new Whop();\n\nconst plan = await client.plans.delete('id');\n\nconsole.log(plan);\n```",
     perLanguage: {
       typescript: {
         method: 'client.plans.delete',
