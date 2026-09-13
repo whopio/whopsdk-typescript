@@ -202,7 +202,8 @@ export interface AdGroup {
 
   /**
    * Whether `budget_amount` is spent per day (`daily`) or over the ad group's full
-   * run (`lifetime`).
+   * run (`lifetime`). A `lifetime` ad group also needs `ends_at`, at least 24 hours
+   * after it starts.
    */
   budget_type: 'daily' | 'lifetime' | null;
 
