@@ -86,6 +86,8 @@ export namespace LedgerActivity {
         CardSpendRefund: "card_spend_refund",
         CardUnloadDeposit: "card_unload_deposit",
         CardUnloadTransfer: "card_unload_transfer",
+        Cashback: "cashback",
+        CashbackFunding: "cashback_funding",
         CompanyReferral: "company_referral",
         ConnectedAccountNegativeBalance: "connected_account_negative_balance",
         CrossBorderPercentageFee: "cross_border_percentage_fee",
