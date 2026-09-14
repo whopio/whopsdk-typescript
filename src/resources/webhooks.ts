@@ -1115,6 +1115,12 @@ export namespace AccountFinancingApprovedWebhookEvent {
      * Account primary crypto wallet, or `null` if none has been provisioned.
      */
     wallet: Data.Wallet | null;
+
+    /**
+     * The account's business website URL, or `null` if none has been provided. Setting
+     * it also adds a `website` entry to `social_links`.
+     */
+    website: string | null;
   }
 
   export namespace Data {
@@ -2831,6 +2837,12 @@ export namespace AccountFinancingDeniedWebhookEvent {
      * Account primary crypto wallet, or `null` if none has been provisioned.
      */
     wallet: Data.Wallet | null;
+
+    /**
+     * The account's business website URL, or `null` if none has been provided. Setting
+     * it also adds a `website` entry to `social_links`.
+     */
+    website: string | null;
   }
 
   export namespace Data {
@@ -4547,6 +4559,12 @@ export namespace AccountUpdatedWebhookEvent {
      * Account primary crypto wallet, or `null` if none has been provisioned.
      */
     wallet: Data.Wallet | null;
+
+    /**
+     * The account's business website URL, or `null` if none has been provided. Setting
+     * it also adds a `website` entry to `social_links`.
+     */
+    website: string | null;
   }
 
   export namespace Data {
