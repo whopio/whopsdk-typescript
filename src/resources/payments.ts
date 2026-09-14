@@ -292,7 +292,6 @@ export type PaymentMethodTypes =
   | 'bancontact'
   | 'bank_wire'
   | 'billie'
-  | 'bizum'
   | 'blik'
   | 'boleto'
   | 'bre_b'
