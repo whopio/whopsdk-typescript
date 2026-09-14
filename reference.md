@@ -10752,7 +10752,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.economicIntelligence.<a href="/src/api/resources/economicIntelligence/client/Client.ts">run</a>({ ...params }) -> Whop.EconomicIntelligence</code></summary>
+<details><summary><code>client.economicIntelligence.<a href="/src/api/resources/economicIntelligence/client/Client.ts">create</a>({ ...params }) -> Whop.EconomicIntelligence</code></summary>
 <dl>
 <dd>
 
@@ -10779,8 +10779,8 @@ Harnesses Economic Intelligence to generate recommended actions that lead the bu
 <dd>
 
 ```typescript
-await client.economicIntelligence.run({
-    input: "get more repeat buyers for my taurine supplement"
+await client.economicIntelligence.create({
+    input: "I sell $79 customized gym straps. The number of purchases per day fell from 84 to 66 since June and my ads cost per signup doubled to $38. Half the leads never open the checkout. I want to win back churned visitors and lift conversion without cutting the price, and I can spend up to $500 this month on it."
 });
 
 ```
@@ -10797,7 +10797,73 @@ await client.economicIntelligence.run({
 <dl>
 <dd>
 
-**request:** `Whop.RunEconomicIntelligenceRequest` 
+**request:** `Whop.CreateEconomicIntelligenceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `EconomicIntelligenceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.economicIntelligence.<a href="/src/api/resources/economicIntelligence/client/Client.ts">update</a>({ ...params }) -> Whop.EconomicIntelligence</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retires a `ready` recommendation the owner no longer wants by setting its status to `superseded`. It leaves the ready list and stays in the account's history.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.economicIntelligence.update({
+    id: "id",
+    status: "superseded"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateEconomicIntelligenceRequest` 
     
 </dd>
 </dl>
