@@ -115,6 +115,7 @@ export const PaymentMethodTypes = {
     Sunbit: "sunbit",
     Swish: "swish",
     Tamara: "tamara",
+    TouchNGo: "touch_n_go",
     Twint: "twint",
     Upi: "upi",
     UsBankAccount: "us_bank_account",
