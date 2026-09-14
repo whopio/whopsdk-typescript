@@ -13,6 +13,8 @@ export interface RetrieveUsersRequest {
     id: string;
     /** When set, returns the user's account-specific profile overrides for this account. */
     account_id?: string;
+    /** Compute live wallet and owned-account balances on the self view (default true). Set false for identity-only reads. Ignored when the id is not `me` or the caller lacks balance-read scope. */
+    include_balance?: boolean;
     /** Also compute your balance history (opt-in; runs a heavier query). Only applies when the id is `me`; ignored for callers without balance-read scope. */
     include_balance_history?: boolean;
     /** Balance-history window start, ISO 8601 date or datetime. Defaults to 30 days ago. Only used with `include_balance_history`. */
