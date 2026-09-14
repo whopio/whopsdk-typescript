@@ -9,6 +9,8 @@ import type * as Whop from "../../../../index.js";
 export interface MeUsersRequest {
     /** When set, returns your account-specific profile overrides for this account. */
     account_id?: string;
+    /** Compute live wallet and owned-account balances (default true). Set false for identity-only reads. Ignored for callers without balance-read scope. */
+    include_balance?: boolean;
     /** Also compute your balance history (opt-in; runs a heavier query). Ignored for callers without balance-read scope. */
     include_balance_history?: boolean;
     /** Balance-history window start, ISO 8601 date or datetime. Defaults to 30 days ago. Only used with `include_balance_history`. */

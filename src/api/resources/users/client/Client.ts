@@ -162,6 +162,7 @@ export class UsersClient {
     ): Promise<core.WithRawResponse<Whop.User>> {
         const {
             account_id: accountId,
+            include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
             from: from_,
             to,
@@ -170,6 +171,7 @@ export class UsersClient {
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
             from: from_,
             to,
@@ -336,6 +338,7 @@ export class UsersClient {
         const {
             id,
             account_id: accountId,
+            include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
             from: from_,
             to,
@@ -344,6 +347,7 @@ export class UsersClient {
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
             from: from_,
             to,
