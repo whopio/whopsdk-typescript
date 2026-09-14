@@ -84,7 +84,8 @@ export type FeeMarkupType =
   | 'transfer_markup'
   | 'crypto_deposit_markup'
   | 'bank_deposit_markup'
-  | 'crypto_swap_markup';
+  | 'crypto_swap_markup'
+  | 'payment_markup';
 
 /**
  * A fee markup configuration that defines additional charges applied to
