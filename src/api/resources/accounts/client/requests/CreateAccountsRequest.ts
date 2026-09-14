@@ -19,4 +19,6 @@ export interface CreateAccountsRequest {
     send_customer_emails?: boolean;
     /** The display name of the account. Defaults to `metadata.external_id` or the owner's email when omitted. */
     title?: string;
+    /** The account's business website, as an `http` or `https` URL of at most 255 characters. Also added to the account's `social_links` as a `website` entry. */
+    website?: string | null;
 }

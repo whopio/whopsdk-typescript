@@ -119,6 +119,8 @@ export interface Account {
     volume_usd: number | null;
     /** Account primary crypto wallet, or `null` if none has been provisioned. */
     wallet: Whop.AccountWallet | null;
+    /** The account's business website URL, or `null` if none has been provided. Setting it also adds a `website` entry to `social_links`. */
+    website: string | null;
 }
 
 export namespace Account {

@@ -303,6 +303,7 @@ describe("AccountsClient", () => {
                     verification: {},
                     volume_usd: 1.1,
                     wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+                    website: "https://shinetimedetail.com",
                 },
             ],
             page_info: {
@@ -676,6 +677,7 @@ describe("AccountsClient", () => {
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+            website: "https://shinetimedetail.com",
         };
 
         server
@@ -1084,6 +1086,7 @@ describe("AccountsClient", () => {
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+            website: "https://shinetimedetail.com",
         };
 
         server.mockEndpoint().get("/accounts/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -1419,6 +1422,7 @@ describe("AccountsClient", () => {
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+            website: "https://shinetimedetail.com",
         };
 
         server.mockEndpoint().get("/accounts/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -1781,6 +1785,7 @@ describe("AccountsClient", () => {
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+            website: "https://shinetimedetail.com",
         };
 
         server
@@ -2812,6 +2817,7 @@ describe("AccountsClient", () => {
             verification: { business: { key: "value" }, individual: { key: "value" } },
             volume_usd: 1.1,
             wallet: { address: "0xabc123", id: "cwal_xxxxxxxxxxxxxx", network: "solana" },
+            website: "https://shinetimedetail.com",
         };
 
         server
