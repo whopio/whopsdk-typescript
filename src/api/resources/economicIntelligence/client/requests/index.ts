@@ -1,2 +1,3 @@
+export type { CreateEconomicIntelligenceRequest } from "./CreateEconomicIntelligenceRequest.js";
 export type { ListEconomicIntelligenceRequest } from "./ListEconomicIntelligenceRequest.js";
-export type { RunEconomicIntelligenceRequest } from "./RunEconomicIntelligenceRequest.js";
+export { UpdateEconomicIntelligenceRequest } from "./UpdateEconomicIntelligenceRequest.js";

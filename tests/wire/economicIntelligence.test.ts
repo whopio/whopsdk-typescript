@@ -156,7 +156,7 @@ describe("EconomicIntelligenceClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("run (1)", async () => {
+    test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -165,7 +165,9 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { input: "get more repeat buyers for my taurine supplement" };
+        const rawRequestBody = {
+            input: "I sell $79 customized gym straps. The number of purchases per day fell from 84 to 66 since June and my ads cost per signup doubled to $38. Half the leads never open the checkout. I want to win back churned visitors and lift conversion without cutting the price, and I can spend up to $500 this month on it.",
+        };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action_type: "improve_landing_page",
@@ -189,13 +191,13 @@ describe("EconomicIntelligenceClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.economicIntelligence.run({
-            input: "get more repeat buyers for my taurine supplement",
+        const response = await client.economicIntelligence.create({
+            input: "I sell $79 customized gym straps. The number of purchases per day fell from 84 to 66 since June and my ads cost per signup doubled to $38. Half the leads never open the checkout. I want to win back churned visitors and lift conversion without cutting the price, and I can spend up to $500 this month on it.",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("run (2)", async () => {
+    test("create (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -217,13 +219,13 @@ describe("EconomicIntelligenceClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.economicIntelligence.run({
+            return await client.economicIntelligence.create({
                 input: "input",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("run (3)", async () => {
+    test("create (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -245,13 +247,13 @@ describe("EconomicIntelligenceClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.economicIntelligence.run({
+            return await client.economicIntelligence.create({
                 input: "input",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("run (4)", async () => {
+    test("create (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -273,8 +275,164 @@ describe("EconomicIntelligenceClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.economicIntelligence.run({
+            return await client.economicIntelligence.create({
                 input: "input",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("update (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { status: "superseded" };
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            action_type: "improve_landing_page",
+            created_at: "2026-01-01T12:00:00.000Z",
+            executed_at: "2026-01-01T12:00:00.000Z",
+            id: "reca_xxxxxxxxxxxxxx",
+            input: "Grow revenue",
+            prompt: "Create a 20% off promo code for my members.",
+            reasoning: "Revenue fell by 20%.",
+            status: "queued",
+            superseded_at: "2026-01-01T12:00:00.000Z",
+            title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/economic_intelligence/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.economicIntelligence.update({
+            id: "id",
+            status: "superseded",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { status: "superseded" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/economic_intelligence/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.economicIntelligence.update({
+                id: "id",
+                status: "superseded",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("update (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { status: "superseded" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/economic_intelligence/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.economicIntelligence.update({
+                id: "id",
+                status: "superseded",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("update (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { status: "superseded" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/economic_intelligence/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.economicIntelligence.update({
+                id: "id",
+                status: "superseded",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("update (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { status: "superseded" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .patch("/economic_intelligence/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.economicIntelligence.update({
+                id: "id",
+                status: "superseded",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
