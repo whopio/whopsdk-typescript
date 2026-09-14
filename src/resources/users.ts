@@ -135,7 +135,7 @@ export interface User {
    * The user's balance: personal cash + crypto + in-flight treasury deposits, plus
    * account balances for accounts they own. Computed only on the self view
    * (retrieved with the reserved id `me`) for callers with balance-read scope;
-   * `null` otherwise.
+   * `null` otherwise, or when `include_balance=false`.
    */
   balance: User.Balance | null;
 
@@ -221,7 +221,7 @@ export namespace User {
    * The user's balance: personal cash + crypto + in-flight treasury deposits, plus
    * account balances for accounts they own. Computed only on the self view
    * (retrieved with the reserved id `me`) for callers with balance-read scope;
-   * `null` otherwise.
+   * `null` otherwise, or when `include_balance=false`.
    */
   export interface Balance {
     businesses: Array<Balance.Business>;
@@ -792,6 +792,13 @@ export interface UserRetrieveParams {
    * to 30 days ago. Only used with `include_balance_history`.
    */
   from?: string;
+
+  /**
+   * Query param: Compute live wallet and owned-account balances on the self view
+   * (default true). Set false for identity-only reads. Ignored when the id is not
+   * `me` or the caller lacks balance-read scope.
+   */
+  include_balance?: boolean;
 
   /**
    * Query param: Also compute your balance history (opt-in; runs a heavier query).

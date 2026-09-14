@@ -29,6 +29,7 @@ describe('resource users', () => {
         {
           account_id: 'account_id',
           from: 'from',
+          include_balance: true,
           include_balance_history: true,
           interval: 'hour',
           time_zone: 'time_zone',
