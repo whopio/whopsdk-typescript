@@ -103,7 +103,7 @@ export interface Account {
     tax_type: Account.TaxType | null;
     /** The account's terms of service document, or `null` if they have not published one. */
     terms_of_service: Whop.File_ | null;
-    /** Account-level 3D Secure behavior. `mandate_challenge` requires cardholder verification on supported card payments; `null` uses the standard checkout flow. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` uses the standard checkout flow. */
     three_ds_level: Account.ThreeDsLevel | null;
     /** Account display name. */
     title: string;
@@ -161,9 +161,11 @@ export namespace Account {
         Exclusive: "exclusive",
     } as const;
     export type TaxType = (typeof TaxType)[keyof typeof TaxType];
-    /** Account-level 3D Secure behavior. `mandate_challenge` requires cardholder verification on supported card payments; `null` uses the standard checkout flow. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` uses the standard checkout flow. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
     } as const;
     export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
 }

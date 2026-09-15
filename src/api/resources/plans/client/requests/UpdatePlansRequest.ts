@@ -51,7 +51,7 @@ export interface UpdatePlansRequest {
     strike_through_initial_price?: number | null;
     /** A comparison price displayed with a strikethrough for the renewal price. */
     strike_through_renewal_price?: number | null;
-    /** 3D Secure behavior for this plan. Send `null` to inherit the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Send `null` to inherit the account default. */
     three_ds_level?: UpdatePlansRequest.ThreeDsLevel | null;
     /** The display name of the plan shown to customers on the product page. */
     title?: string | null;
@@ -108,10 +108,11 @@ export namespace UpdatePlansRequest {
         include_platform_defaults?: boolean | undefined;
     }
 
-    /** 3D Secure behavior for this plan. Send `null` to inherit the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Send `null` to inherit the account default. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
-        Frictionless: "frictionless",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
     } as const;
     export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
 }

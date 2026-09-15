@@ -62,7 +62,7 @@ export interface PlanListItem {
     strike_through_initial_price: number | null;
     /** Original renewal price shown with a strikethrough, in the plan's currency. `null` when no strikethrough is set. */
     strike_through_renewal_price: number | null;
-    /** 3D Secure behavior for this plan; `null` inherits the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     three_ds_level: PlanListItem.ThreeDsLevel | null;
     /** Plan display name shown to customers. Maximum 30 characters. `null` if no title has been set. */
     title: string | null;
@@ -89,10 +89,11 @@ export namespace PlanListItem {
         Waitlist: "waitlist",
     } as const;
     export type ReleaseMethod = (typeof ReleaseMethod)[keyof typeof ReleaseMethod];
-    /** 3D Secure behavior for this plan; `null` inherits the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
-        Frictionless: "frictionless",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
     } as const;
     export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
     /** Controls where this plan can be seen. When `hidden`, the plan is reachable only by its direct link. */
