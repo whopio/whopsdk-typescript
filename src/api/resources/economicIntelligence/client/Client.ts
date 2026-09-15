@@ -19,7 +19,7 @@ export declare namespace EconomicIntelligenceClient {
 /**
  * Economic Intelligence is Whop's recommendation engine for an account. Each recommendation is a single action: a title the owner sees, a step-by-step brief Whop AI carries out, and the bet it makes on the account's ledger. Whop generates them from the account's sales, site, ads, and what its owner has said.
  *
- * Use the Economic Intelligence API to list every recommendation the account has been given and to run the engine toward what the owner wants, in their own words. Running it returns a recommendation right away with status `queued`; the engine moves it through `pending` to `ready`, or to `failed` when it has nothing to recommend. A `ready` recommendation becomes `executed` once the owner runs it from the dashboard, or `superseded` when a newer one replaces it.
+ * Use the Economic Intelligence API to list recommendations and to request actions for a specific goal with POST. For callers with company:update permission, listing automatically queues generation when no actions are ready or in progress, with a ten-minute cooldown after an unsuccessful request from the current pipeline version. A new request returns a recommendation with status `queued`; the engine moves it through `pending` to `ready`. Unsuccessful requests are omitted from the list. A `ready` recommendation becomes `executed` once the owner runs it from the dashboard, or `superseded` when a newer one replaces it.
  */
 export class EconomicIntelligenceClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<EconomicIntelligenceClient.Options>;
@@ -29,7 +29,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists all recommended actions Economic Intelligence has generated for the account, newest first. Filter with `status=ready` for actions that are current.
+     * Lists recommended actions and in-progress requests for the account, newest first. Unsuccessful generation requests are omitted. Filter with `status=ready` for current actions. For callers with company:update permission, listing automatically queues generation when no actions are ready or in progress, with a ten-minute cooldown after an unsuccessful request from the current pipeline version.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -139,7 +139,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Harnesses Economic Intelligence to generate recommended actions that lead the business down the most optimal path to the next dollar. Returns a `queued` recommendation right away. Poll the list endpoint until it is `ready` or `failed`.
+     * Harnesses Economic Intelligence to generate recommended actions that lead the business down the most optimal path to the next dollar. Returns a `queued` recommendation right away. Poll the list endpoint until it is `ready` or disappears.
      *
      * @param {Whop.CreateEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
