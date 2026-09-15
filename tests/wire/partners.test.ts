@@ -163,69 +163,6 @@ describe("PartnersClient", () => {
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
-    test("retrieveLink (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = {
-            expires_at: "expires_at",
-            id: "onbr_xxxxxxxxxxxxxx",
-            max_redemptions: 1,
-            partner: {
-                id: "user_xxxxxxxxxxxxxx",
-                name: "Dana Whitfield",
-                profile_picture: { url: "https://ui-avatars.com/api/" },
-                username: "danawhitfield",
-            },
-            partner_reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-            qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-            qualification_income_source: "sales",
-            qualification_met: true,
-            qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-            remaining_redemptions: 0,
-            reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-            reward_type: "ad_credit",
-            rewarded: true,
-            status: "available",
-        };
-
-        server.mockEndpoint().get("/partners/links").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
-
-        const response = await client.partners.retrieveLink({
-            partner_username: "partner_username",
-            reward_slug: "reward_slug",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("retrieveLink (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/partners/links").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.partners.retrieveLink({
-                partner_username: "partner_username",
-                reward_slug: "reward_slug",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
     test("referredUsers (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -300,5 +237,104 @@ describe("PartnersClient", () => {
         await expect(async () => {
             return await client.partners.referredUsers();
         }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("retrieve (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            joined_at: "2026-01-01T12:00:00.000Z",
+            payout_rates: [
+                {
+                    duration: { unit: "day", value: 600 },
+                    rates: [{ income_source: "sales", percentage: 10 }],
+                    tier: "first",
+                },
+            ],
+            referred_businesses_count: 1,
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+        };
+
+        server.mockEndpoint().get("/partners/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.partners.retrieve({
+            id: "me",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("retrieve (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/partners/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.partners.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("retrieve (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/partners/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.partners.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("retrieve (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/partners/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.partners.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
     });
 });

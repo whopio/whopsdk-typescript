@@ -9,6 +9,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
+import { LinksClient } from "../resources/links/client/Client.js";
 
 export declare namespace PartnersClient {
     export type Options = BaseClientOptions;
@@ -17,13 +18,14 @@ export declare namespace PartnersClient {
 }
 
 /**
- * The Partners API covers your Whop partner activity: the users you referred onto Whop, the businesses you referred and the earnings generated from their processing volume, and the partner leaderboard.
+ * Get started at [whop.com/network](https://whop.com/network). A Partner is a user who refers people and businesses to Whop. The partner profile includes enrollment, active direct business referral counts, and default payout terms.
  *
- * Use it to enroll as a Whop partner, list the users you referred, list your referred businesses and review their earnings, and see the partner leaderboard.
+ * Retrieve your profile with `/partners/{id}`. Use `/partners/links` for your standard referral URL and paginated promotion links, including reward amounts, requirements, redemption counts, and availability. You can also enroll in the partner program, review referred users and businesses, track earnings, and see the partner leaderboard.
  */
 export class PartnersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PartnersClient.Options>;
     protected _businesses: BusinessesClient | undefined;
+    protected _links: LinksClient | undefined;
 
     constructor(options: PartnersClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -31,6 +33,10 @@ export class PartnersClient {
 
     public get businesses(): BusinessesClient {
         return (this._businesses ??= new BusinessesClient(this._options));
+    }
+
+    public get links(): LinksClient {
+        return (this._links ??= new LinksClient(this._options));
     }
 
     /**
@@ -185,86 +191,6 @@ export class PartnersClient {
     }
 
     /**
-     * Resolves the public reward terms and whether redemption capacity remains. Immediate rewards claim capacity at business creation; qualified rewards claim it when the business reaches the threshold.
-     *
-     * @param {Whop.RetrieveLinkPartnersRequest} request
-     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.partners.retrieveLink({
-     *         partner_username: "partner_username",
-     *         reward_slug: "reward_slug"
-     *     })
-     */
-    public retrieveLink(
-        request: Whop.RetrieveLinkPartnersRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.OnboardingReward> {
-        return core.HttpResponsePromise.fromPromise(this.__retrieveLink(request, requestOptions));
-    }
-
-    private async __retrieveLink(
-        request: Whop.RetrieveLinkPartnersRequest,
-        requestOptions?: PartnersClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.OnboardingReward>> {
-        const { partner_username: partnerUsername, reward_slug: rewardSlug } = request;
-        const _queryParams: Record<string, unknown> = {
-            partner_username: partnerUsername,
-            reward_slug: rewardSlug,
-        };
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-13",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
-                "partners/links",
-            ),
-            method: "GET",
-            headers: _headers,
-            queryString: core.url
-                .queryBuilder()
-                .addMany(_queryParams)
-                .mergeAdditional(requestOptions?.queryParams)
-                .build(),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.OnboardingReward, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/partners/links");
-    }
-
-    /**
      * Lists the users the caller referred onto Whop (newest first), each with the second-tier earnings the caller has made from that user's businesses.
      *
      * @param {Whop.ReferredUsersPartnersRequest} request
@@ -370,5 +296,84 @@ export class PartnersClient {
                 return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
             },
         });
+    }
+
+    /**
+     * Retrieves the authenticated user's public profile, enrollment date, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Retrieve referral URLs and promotion links from GET /partners/links.
+     *
+     * @param {Whop.RetrievePartnersRequest} request
+     * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.partners.retrieve({
+     *         id: "me"
+     *     })
+     */
+    public retrieve(
+        request: Whop.RetrievePartnersRequest,
+        requestOptions?: PartnersClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Partner> {
+        return core.HttpResponsePromise.fromPromise(this.__retrieve(request, requestOptions));
+    }
+
+    private async __retrieve(
+        request: Whop.RetrievePartnersRequest,
+        requestOptions?: PartnersClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Partner>> {
+        const { id } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-13",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.WhopEnvironment.Default,
+                `partners/${core.url.encodePathParam(id)}`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Partner, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/partners/{id}");
     }
 }

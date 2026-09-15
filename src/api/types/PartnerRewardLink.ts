@@ -2,38 +2,34 @@
 
 import type * as Whop from "../index.js";
 
-export interface OnboardingReward {
+export interface PartnerRewardLink {
     /** When the reward stops accepting new claims and qualifying volume, as an ISO 8601 timestamp. Null when it does not expire. */
     expires_at: string | null;
     /** Onboarding reward ID, prefixed `onbr_`. */
     id: string;
     /** How many businesses can earn this reward in total. Null when unlimited. */
     max_redemptions: number | null;
-    /** Partner whose link attributed this reward. */
-    partner: Whop.UserSummary;
+    /** Promotion name used in the reward link. Null when the reward has no slug. */
+    name: string | null;
     /** What the partner earns when a referred business qualifies for this reward. Null when the reward pays the business only. */
     partner_reward_amount: Whop.Money | null;
     /** Required qualifying volume. Null for an immediate reward. */
     qualification_amount: Whop.Money | null;
     /** Income source whose volume qualifies the business. Null for an immediate reward. */
-    qualification_income_source: OnboardingReward.QualificationIncomeSource | null;
-    /** Whether the attributed business met the requirement. Null before a business claims the link. */
-    qualification_met: boolean | null;
-    /** Qualifying volume accumulated by the attributed business. Null before a business claims the link and for immediate rewards. */
-    qualification_progress: Whop.Money | null;
-    /** How many rewards are still unclaimed. For rewards with a qualification, a business claims one only when it meets the requirement, so this can reach zero while other businesses are still working toward it. Null when unlimited. */
-    remaining_redemptions: number | null;
-    /** Reward value delivered after qualification. */
-    reward_amount: Whop.Money;
+    qualification_income_source: PartnerRewardLink.QualificationIncomeSource | null;
+    /** Number of businesses that have claimed this reward. Rewards with a qualification count when the reward is granted; immediate rewards count when the business is attributed. */
+    redemptions: number;
+    /** Shareable partner URL that applies this promotion to a referred business. Null when the reward has no slug. */
+    referral_url: string | null;
+    /** Reward value delivered to the referred business after qualification. */
+    referred_business_reward_amount: Whop.Money;
     /** How the reward is delivered. */
-    reward_type: OnboardingReward.RewardType;
-    /** Whether the reward was credited to the attributed business. Null before a business claims the link. */
-    rewarded: boolean | null;
+    reward_type: PartnerRewardLink.RewardType;
     /** Whether the reward can still be claimed: `available`, `fully_claimed`, `expired`, or `unavailable`. */
-    status: OnboardingReward.Status;
+    status: PartnerRewardLink.Status;
 }
 
-export namespace OnboardingReward {
+export namespace PartnerRewardLink {
     /** Income source whose volume qualifies the business. Null for an immediate reward. */
     export const QualificationIncomeSource = {
         Sales: "sales",

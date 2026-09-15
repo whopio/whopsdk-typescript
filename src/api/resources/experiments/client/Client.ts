@@ -223,6 +223,8 @@ export class ExperimentsClient {
      *
      * Pass `subject[account_id]` to enable account-level targeting rules. Pass `properties` as a JSON object to supply the values that `property` targeting conditions match against.
      *
+     * Pass `log_exposure=false` to read an assignment without recording an exposure, for a client that caches assignments up front and records the exposure when the arm is actually rendered. Omitted records the exposure, so pinned callers are unchanged.
+     *
      * @param {Whop.ExposuresExperimentsRequest} request
      * @param {ExperimentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -249,6 +251,7 @@ export class ExperimentsClient {
             flag_key: flagKey,
             account_id: accountId,
             properties,
+            log_exposure: logExposure,
         } = request;
         const _queryParams: Record<string, unknown> = {
             subject,
@@ -256,6 +259,7 @@ export class ExperimentsClient {
             flag_key: flagKey,
             account_id: accountId,
             properties,
+            log_exposure: logExposure,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
