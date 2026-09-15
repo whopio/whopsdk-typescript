@@ -6,6 +6,7 @@ export const FriendlyReceiptStatus = {
     RequiresCapture: "requires_capture",
     Pending: "pending",
     Failed: "failed",
+    Blocked: "blocked",
     PastDue: "past_due",
     Canceled: "canceled",
     PriceTooLow: "price_too_low",
