@@ -100,6 +100,7 @@ export interface ChatChannelListResponse {
 
   /**
    * A list of words that are automatically filtered from messages in this chat.
+   * Empty unless the caller has permission to moderate this chat.
    */
   banned_words: Array<string>;
 

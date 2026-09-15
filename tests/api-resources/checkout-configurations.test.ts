@@ -56,7 +56,7 @@ describe('resource checkoutConfigurations', () => {
             release_method: 'buy_now',
             renewal_price: 59,
             stock: 25,
-            three_ds_level: 'frictionless',
+            three_ds_level: 'frictionless_if_required',
             title: 'Ceramic Coating — Full Vehicle',
             trial_period_days: 7,
             unlimited_stock: false,
@@ -64,8 +64,8 @@ describe('resource checkoutConfigurations', () => {
           },
           plan_id: 'plan_xxxxxxxxxxxxx',
           redirect_url: 'https://shinetime.example/thanks',
-          three_ds_level: 'frictionless',
-          'Api-Version-Date': '2026-09-13',
+          three_ds_level: 'frictionless_if_required',
+          'Api-Version-Date': '2026-09-15',
           'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
         },
         { path: '/_stainless_unknown_path' },
@@ -91,7 +91,7 @@ describe('resource checkoutConfigurations', () => {
     await expect(
       client.checkoutConfigurations.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-13' },
+        { 'Api-Version-Date': '2026-09-15' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -120,7 +120,7 @@ describe('resource checkoutConfigurations', () => {
       first: 100,
       order: 'created_at',
       plan_id: 'plan_id',
-      'Api-Version-Date': '2026-09-13',
+      'Api-Version-Date': '2026-09-15',
     });
   });
 });

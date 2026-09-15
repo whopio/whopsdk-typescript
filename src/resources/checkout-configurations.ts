@@ -182,9 +182,16 @@ export interface CheckoutConfigurationCreateResponse {
   redirect_url?: string | null;
 
   /**
-   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan
+   * policy.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 }
 
 export namespace CheckoutConfigurationCreateResponse {
@@ -285,9 +292,15 @@ export namespace CheckoutConfigurationCreateResponse {
     renewal_price: number;
 
     /**
-     * 3D Secure behavior for this plan, or `null` to use the account default.
+     * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+     * requires a 3DS challenge before payment processing; `mandate_if_required`
+     * mandates a challenge only when the payment processor requires it;
+     * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+     * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+     * Risk and authentication recovery requirements can override the preference.
+     * `null` inherits the account default.
      */
-    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+    three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
     /**
      * Free trial days before the first renewal charge.
@@ -378,9 +391,16 @@ export interface CheckoutConfigurationRetrieveResponse {
   redirect_url?: string | null;
 
   /**
-   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan
+   * policy.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 }
 
 export namespace CheckoutConfigurationRetrieveResponse {
@@ -481,9 +501,15 @@ export namespace CheckoutConfigurationRetrieveResponse {
     renewal_price: number;
 
     /**
-     * 3D Secure behavior for this plan, or `null` to use the account default.
+     * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+     * requires a 3DS challenge before payment processing; `mandate_if_required`
+     * mandates a challenge only when the payment processor requires it;
+     * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+     * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+     * Risk and authentication recovery requirements can override the preference.
+     * `null` inherits the account default.
      */
-    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+    three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
     /**
      * Free trial days before the first renewal charge.
@@ -574,9 +600,16 @@ export interface CheckoutConfigurationListResponse {
   redirect_url?: string | null;
 
   /**
-   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan
+   * policy.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 }
 
 export namespace CheckoutConfigurationListResponse {
@@ -677,9 +710,15 @@ export namespace CheckoutConfigurationListResponse {
     renewal_price: number;
 
     /**
-     * 3D Secure behavior for this plan, or `null` to use the account default.
+     * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+     * requires a 3DS challenge before payment processing; `mandate_if_required`
+     * mandates a challenge only when the payment processor requires it;
+     * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+     * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+     * Risk and authentication recovery requirements can override the preference.
+     * `null` inherits the account default.
      */
-    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+    three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
     /**
      * Free trial days before the first renewal charge.
@@ -743,9 +782,16 @@ export interface CheckoutConfigurationCreateParams {
   redirect_url?: string | null;
 
   /**
-   * Body param: 3D Secure behavior for this checkout.
+   * Body param: 3D Secure behavior for supported on-session card payments.
+   * `mandate_challenge` requires a 3DS challenge before payment processing;
+   * `mandate_if_required` mandates a challenge only when the payment processor
+   * requires it; `frictionless_if_required` uses the regular frictionless 3DS flow.
+   * Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge`
+   * is selected. Risk and authentication recovery requirements can override the
+   * preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode
+   * uses the plan policy.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * Header param: Pins the request to a dated API version.
@@ -863,9 +909,15 @@ export namespace CheckoutConfigurationCreateParams {
     stock?: number | null;
 
     /**
-     * 3D Secure behavior for the inline plan, or `null` to use the account default.
+     * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+     * requires a 3DS challenge before payment processing; `mandate_if_required`
+     * mandates a challenge only when the payment processor requires it;
+     * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+     * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+     * Risk and authentication recovery requirements can override the preference.
+     * `null` inherits the account default.
      */
-    three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+    three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
     /**
      * Plan display name shown to customers.

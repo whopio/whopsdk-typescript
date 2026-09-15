@@ -315,9 +315,15 @@ export interface PlanListResponse {
   strike_through_renewal_price: number | null;
 
   /**
-   * 3D Secure behavior for this plan; `null` inherits the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * `null` inherits the account default.
    */
-  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * Plan display name shown to customers. Maximum 30 characters. `null` if no title
@@ -533,10 +539,15 @@ export interface PlanCreateParams {
   stock?: number | null;
 
   /**
-   * Body param: 3D Secure behavior for this plan. Send `null` to inherit the account
-   * default.
+   * Body param: 3D Secure behavior for supported on-session card payments.
+   * `mandate_challenge` requires a 3DS challenge before payment processing;
+   * `mandate_if_required` mandates a challenge only when the payment processor
+   * requires it; `frictionless_if_required` uses the regular frictionless 3DS flow.
+   * Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge`
+   * is selected. Risk and authentication recovery requirements can override the
+   * preference. Send `null` to inherit the account default.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * Body param: The display name of the plan shown to customers on the product page.
@@ -761,10 +772,15 @@ export interface PlanUpdateParams {
   strike_through_renewal_price?: number | null;
 
   /**
-   * Body param: 3D Secure behavior for this plan. Send `null` to inherit the account
-   * default.
+   * Body param: 3D Secure behavior for supported on-session card payments.
+   * `mandate_challenge` requires a 3DS challenge before payment processing;
+   * `mandate_if_required` mandates a challenge only when the payment processor
+   * requires it; `frictionless_if_required` uses the regular frictionless 3DS flow.
+   * Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge`
+   * is selected. Risk and authentication recovery requirements can override the
+   * preference. Send `null` to inherit the account default.
    */
-  three_ds_level?: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level?: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * Body param: The display name of the plan shown to customers on the product page.

@@ -746,6 +746,7 @@ export interface ChatChannel {
 
   /**
    * A list of words that are automatically filtered from messages in this chat.
+   * Empty unless the caller has permission to moderate this chat.
    */
   banned_words: Array<string>;
 
@@ -949,9 +950,16 @@ export interface CheckoutConfiguration {
   redirect_url: string | null;
 
   /**
-   * 3D Secure behavior for this checkout, or `null` to use the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan
+   * policy.
    */
-  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * When the checkout configuration was last updated, as an ISO 8601 timestamp.
@@ -1030,9 +1038,15 @@ export namespace CheckoutConfiguration {
     renewal_price: number;
 
     /**
-     * 3D Secure behavior for this plan, or `null` to use the account default.
+     * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+     * requires a 3DS challenge before payment processing; `mandate_if_required`
+     * mandates a challenge only when the payment processor requires it;
+     * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+     * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+     * Risk and authentication recovery requirements can override the preference.
+     * `null` inherits the account default.
      */
-    three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+    three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
     /**
      * Free trial days before the first renewal charge.
@@ -4001,9 +4015,15 @@ export interface Plan {
   tax_type: 'inclusive' | 'exclusive' | 'unspecified';
 
   /**
-   * 3D Secure behavior for this plan; `null` inherits the account default.
+   * 3D Secure behavior for supported on-session card payments. `mandate_challenge`
+   * requires a 3DS challenge before payment processing; `mandate_if_required`
+   * mandates a challenge only when the payment processor requires it;
+   * `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of
+   * $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected.
+   * Risk and authentication recovery requirements can override the preference.
+   * `null` inherits the account default.
    */
-  three_ds_level: 'mandate_challenge' | 'frictionless' | null;
+  three_ds_level: 'mandate_challenge' | 'mandate_if_required' | 'frictionless_if_required' | null;
 
   /**
    * Plan display name shown to customers. Maximum 30 characters. `null` if no title
