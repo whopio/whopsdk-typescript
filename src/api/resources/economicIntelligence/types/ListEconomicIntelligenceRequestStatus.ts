@@ -6,7 +6,6 @@ export const ListEconomicIntelligenceRequestStatus = {
     Ready: "ready",
     Executed: "executed",
     Superseded: "superseded",
-    Failed: "failed",
 } as const;
 export type ListEconomicIntelligenceRequestStatus =
     (typeof ListEconomicIntelligenceRequestStatus)[keyof typeof ListEconomicIntelligenceRequestStatus];

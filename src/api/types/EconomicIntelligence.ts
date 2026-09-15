@@ -17,7 +17,7 @@ export interface EconomicIntelligence {
     prompt: string | null;
     /** The signal and number the recommendation rests on, or `null` */
     reasoning: string | null;
-    /** `queued` once requested and not yet picked up; `pending` while the engine is generating; `ready` when the card is written and the owner can run it; `executed` once it was run; `superseded` when a newer card of the same action type replaced it; `failed` when the engine had nothing to recommend for the request */
+    /** `queued` once requested and not yet picked up; `pending` while the engine is generating; `ready` when the card is written and the owner can run it; `executed` once it was run; `superseded` when a newer card of the same action type replaced it */
     status: EconomicIntelligence.Status;
     /** When a newer card replaced this one, as an ISO 8601 timestamp, or `null` */
     superseded_at: string | null;
@@ -26,14 +26,13 @@ export interface EconomicIntelligence {
 }
 
 export namespace EconomicIntelligence {
-    /** `queued` once requested and not yet picked up; `pending` while the engine is generating; `ready` when the card is written and the owner can run it; `executed` once it was run; `superseded` when a newer card of the same action type replaced it; `failed` when the engine had nothing to recommend for the request */
+    /** `queued` once requested and not yet picked up; `pending` while the engine is generating; `ready` when the card is written and the owner can run it; `executed` once it was run; `superseded` when a newer card of the same action type replaced it */
     export const Status = {
         Queued: "queued",
         Pending: "pending",
         Ready: "ready",
         Executed: "executed",
         Superseded: "superseded",
-        Failed: "failed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }
