@@ -17,4 +17,6 @@ export interface ExposuresExperimentsRequest {
     account_id?: string;
     /** JSON-encoded scalar values that property targeting conditions match against. Numeric and boolean strings are coerced. Nested query keys such as properties[plan]=pro remain accepted for existing callers. For internal experiments, is_internal_user is derived from the session and cannot be overridden. */
     properties?: string;
+    /** Set false to evaluate without recording an exposure. Omitted records it. */
+    log_exposure?: boolean;
 }
