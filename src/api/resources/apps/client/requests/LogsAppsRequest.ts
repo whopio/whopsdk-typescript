@@ -21,10 +21,10 @@ export interface LogsAppsRequest {
     created_after?: string;
     /** End of the time window as an ISO 8601 timestamp. Defaults to now. */
     created_before?: string;
-    /** The number of log lines to return (max 500). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor for fetching logs after a previous page. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** A cursor for fetching logs before a later page. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

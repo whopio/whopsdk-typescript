@@ -35,12 +35,12 @@ export interface ListPaymentsRequest {
     order?: Whop.ListPaymentsRequestOrder;
     /** The sort direction. */
     direction?: Whop.ListPaymentsRequestDirection;
-    /** The number of payments to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns payments after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of payments to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns payments before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

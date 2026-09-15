@@ -25,12 +25,12 @@ export interface ListTeamMembersRequest {
     order?: Whop.ListTeamMembersRequestOrder;
     /** Sort direction. Defaults to `desc`. */
     direction?: Whop.ListTeamMembersRequestDirection;
-    /** Number of members to return. Defaults to 20; maximum 100. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor for the next page of members. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** Number of members to return from the end of the window. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Cursor to paginate backwards from. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

@@ -11,13 +11,13 @@ export interface ListBusinessesRequest {
     status?: Whop.partners.ListBusinessesRequestStatus;
     /** When true, only businesses with pending or completed earnings paid to the caller. */
     has_earnings?: boolean;
-    /** Number of partner businesses to return from the start of the window. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to fetch the page after (from page_info.end_cursor). */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** Number of partner businesses to return from the end of the window. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Cursor to fetch the page before (from page_info.start_cursor). */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort partner businesses by. */
     order?: Whop.partners.ListBusinessesRequestOrder;

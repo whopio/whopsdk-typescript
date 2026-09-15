@@ -7,13 +7,13 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListCashbackRulesRequest {
-    /** Number of rules to return from the start of the page. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Return rules after this cursor. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** Number of rules to return from the end of the page. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Return rules before this cursor. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** Field to sort by. Defaults to created_at. */
     order?: Whop.ListCashbackRulesRequestOrder;

@@ -14,12 +14,12 @@ export interface UpdateEconomicIntelligenceRequest {
     account_id?: string;
     /** Why the recommendation was rejected. Used as feedback when replenishing recommendations. */
     reason?: string;
-    /** Use `executed` after approval to start the action, or `superseded` to reject it. */
+    /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
     status: UpdateEconomicIntelligenceRequest.Status;
 }
 
 export namespace UpdateEconomicIntelligenceRequest {
-    /** Use `executed` after approval to start the action, or `superseded` to reject it. */
+    /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
     export const Status = {
         Executed: "executed",
         Superseded: "superseded",

@@ -27,12 +27,12 @@ export interface ListMembersRequest {
     order?: Whop.ListMembersRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListMembersRequestDirection;
-    /** Number of members to return from the start of the window. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to paginate forwards from. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** Number of members to return from the end of the window. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Cursor to paginate backwards from. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

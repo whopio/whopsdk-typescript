@@ -9,8 +9,8 @@
 export interface ListDeliveriesWebhooksRequest {
     /** Webhook ID, prefixed `hook_`. */
     id: string;
-    /** The number of deliveries to return (default 50, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns deliveries after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }

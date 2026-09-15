@@ -10689,7 +10689,7 @@ await client.domains.update({
 <dl>
 <dd>
 
-Lists recommended actions and in-progress requests for the account, newest first. Unsuccessful generation requests are omitted. Filter with `status=ready` for current actions. For callers with company:update permission, listing automatically queues generation when no actions are ready or in progress, with a ten-minute cooldown after an unsuccessful request from the current pipeline version.
+Lists an account's recommendations and generation requests, newest first.
 </dd>
 </dl>
 </dd>
@@ -10764,7 +10764,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Harnesses Economic Intelligence to generate recommended actions that lead the business down the most optimal path to the next dollar. Returns a `queued` recommendation right away. Poll the list endpoint until it is `ready` or disappears.
+Generates a recommendation based on your input. Returns immediately; poll the list endpoint until its `status` is `ready`.
 </dd>
 </dl>
 </dd>
@@ -10829,7 +10829,7 @@ await client.economicIntelligence.create({
 <dl>
 <dd>
 
-Records approval with `executed`, or retires an unwanted recommendation with `superseded`. Both replenish the ready inventory. Supplying a rejection reason also allows retiring an executed recommendation.
+Approves or rejects a recommendation and requests replacements.
 </dd>
 </dl>
 </dd>
@@ -16568,7 +16568,7 @@ await client.messages.update({
 <dl>
 <dd>
 
-Lists the authenticated user's notifications, newest first. Requires a user credential — an account API key has no notification feed. Without filters the feed spans every experience the user belongs to plus the teams they are a member of.
+Lists the authenticated user's notifications, newest first. Requires a user credential — an account API key has no notification feed. Without filters the feed spans every experience the user belongs to plus the teams they are a member of. The `after` cursor is a notification `id` from a previous response; subsequent pages contain older notifications.
 </dd>
 </dl>
 </dd>

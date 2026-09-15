@@ -15,11 +15,11 @@ export interface ListEventsRequest {
     from?: string;
     /** End of the time range as an ISO 8601 timestamp. Required when identifier is omitted; otherwise defaults to now. */
     to?: string;
-    /** The number of events to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor for fetching events after a previous page. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** A cursor for fetching events before a later page. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The order events are returned in by time. Defaults to desc (most recent first); asc reads a journey forwards from where it starts. after and before always page forwards and backwards through that order. */
     direction?: Whop.ListEventsRequestDirection;
