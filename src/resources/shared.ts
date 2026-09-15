@@ -714,6 +714,7 @@ export type AppViewType = 'hub' | 'discover' | 'dash' | 'dashboard' | 'analytics
 export type AuthorizedUserRoles =
   | 'owner'
   | 'admin'
+  | 'partner'
   | 'sales_manager'
   | 'moderator'
   | 'advertiser'

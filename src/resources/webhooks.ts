@@ -1422,14 +1422,14 @@ export namespace AccountFinancingApprovedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -1446,14 +1446,14 @@ export namespace AccountFinancingApprovedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -3144,14 +3144,14 @@ export namespace AccountFinancingDeniedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -3168,14 +3168,14 @@ export namespace AccountFinancingDeniedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -4866,14 +4866,14 @@ export namespace AccountUpdatedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -4890,14 +4890,14 @@ export namespace AccountUpdatedWebhookEvent {
           status: 'pending' | 'unknown';
 
           /**
-           * When the signing URL expires, as an ISO 8601 timestamp. Present while `status`
-           * is `pending`.
+           * When the signing URL expires, as an ISO 8601 timestamp. Present only when the
+           * signing URL is included.
            */
           expires_at?: string;
 
           /**
            * Hosted signing URL where the founder completes the form. Present while `status`
-           * is `pending`.
+           * is `pending` and the caller has `incorporation:write`. Omitted from webhooks.
            */
           url?: string;
         }
@@ -9437,7 +9437,8 @@ export namespace DepositSucceededWebhookEvent {
       chain?: string | null;
 
       /**
-       * Public claim URL for the airdrop link (airdrop_link sources only).
+       * The airdrop's claim URL. Null unless the caller can manage claim links on the
+       * funding company or withdraw from the funding personal balance.
        */
       claim_url?: string | null;
 
@@ -11092,7 +11093,8 @@ export namespace FinancialActivityFundsAvailableWebhookEvent {
       chain?: string | null;
 
       /**
-       * Public claim URL for the airdrop link (airdrop_link sources only).
+       * The airdrop's claim URL. Null unless the caller can manage claim links on the
+       * funding company or withdraw from the funding personal balance.
        */
       claim_url?: string | null;
 
@@ -16861,7 +16863,8 @@ export namespace SwapCompletedWebhookEvent {
       chain?: string | null;
 
       /**
-       * Public claim URL for the airdrop link (airdrop_link sources only).
+       * The airdrop's claim URL. Null unless the caller can manage claim links on the
+       * funding company or withdraw from the funding personal balance.
        */
       claim_url?: string | null;
 

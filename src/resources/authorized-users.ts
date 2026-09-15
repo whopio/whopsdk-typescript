@@ -255,7 +255,7 @@ export interface AuthorizedUserCreateParams {
    * The role to assign to the authorized user within the company. Supported roles:
    * 'moderator', 'sales_manager'.
    */
-  role: 'owner' | 'admin' | 'sales_manager' | 'moderator' | 'advertiser';
+  role: 'owner' | 'admin' | 'partner' | 'sales_manager' | 'moderator' | 'advertiser';
 
   /**
    * The ID of the user to add as an authorized user.
