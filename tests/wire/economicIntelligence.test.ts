@@ -290,7 +290,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "superseded" };
+        const rawRequestBody = { status: "executed" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             action_type: "improve_landing_page",
@@ -316,7 +316,7 @@ describe("EconomicIntelligenceClient", () => {
 
         const response = await client.economicIntelligence.update({
             id: "id",
-            status: "superseded",
+            status: "executed",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -330,7 +330,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "superseded" };
+        const rawRequestBody = { status: "executed" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -345,7 +345,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "superseded",
+                status: "executed",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -359,7 +359,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "superseded" };
+        const rawRequestBody = { status: "executed" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -374,7 +374,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "superseded",
+                status: "executed",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -388,7 +388,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "superseded" };
+        const rawRequestBody = { status: "executed" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -403,7 +403,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "superseded",
+                status: "executed",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -417,7 +417,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "superseded" };
+        const rawRequestBody = { status: "executed" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -432,7 +432,7 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "superseded",
+                status: "executed",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

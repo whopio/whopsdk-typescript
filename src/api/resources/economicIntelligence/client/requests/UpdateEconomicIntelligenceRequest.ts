@@ -4,7 +4,7 @@
  * @example
  *     {
  *         id: "id",
- *         status: "superseded"
+ *         status: "executed"
  *     }
  */
 export interface UpdateEconomicIntelligenceRequest {
@@ -12,13 +12,16 @@ export interface UpdateEconomicIntelligenceRequest {
     id: string;
     /** Account ID, prefixed `biz_`. Defaults to the API key's own account. */
     account_id?: string;
-    /** The status to move the recommendation to. Only `superseded` is accepted. */
+    /** Why the recommendation was rejected. Used as feedback when replenishing recommendations. */
+    reason?: string;
+    /** Use `executed` after approval to start the action, or `superseded` to reject it. */
     status: UpdateEconomicIntelligenceRequest.Status;
 }
 
 export namespace UpdateEconomicIntelligenceRequest {
-    /** The status to move the recommendation to. Only `superseded` is accepted. */
+    /** Use `executed` after approval to start the action, or `superseded` to reject it. */
     export const Status = {
+        Executed: "executed",
         Superseded: "superseded",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
