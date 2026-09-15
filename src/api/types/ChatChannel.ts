@@ -10,7 +10,7 @@ export interface ChatChannel {
     ban_media: boolean;
     /** Whether URL links are blocked from being posted in this chat. */
     ban_urls: boolean;
-    /** A list of words that are automatically filtered from messages in this chat. */
+    /** A list of words that are automatically filtered from messages in this chat. Empty unless the caller has permission to moderate this chat. */
     banned_words: string[];
     /** The experience this chat feed is attached to. */
     experience: ChatChannel.Experience;
