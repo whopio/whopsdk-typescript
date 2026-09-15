@@ -75,9 +75,12 @@ export interface Payment {
     refunded_at: string | null;
     /** True when the payment is `open` and Whop can attempt the charge again — see `POST /payments/{id}/retry`. */
     retryable: boolean;
-    /** Whop's fraud risk score from 0 (lowest) to 100 (highest), or null when the payment was not scored. */
+    /** Whop's published risk index from 0 (lowest) to 100 (highest), including enforced decision floors. This is not a fraud probability. Null when no score is available. */
     risk_score: number | null;
-    /** The factors behind `risk_score`, grouped by category, or null. */
+    /**
+     * Deprecated. Risk score explanations are no longer provided; always null.
+     * DEPRECATED: Risk score explanations are no longer provided. Always null.
+     */
     risk_signals: Record<string, unknown> | null;
     /** When the funds post to the account's available balance, at midnight UTC. The `financial_activity.funds_available` webhook's `posted_at` carries the same value when the settlement that clears it posts. Null until the payment is paid, and always null in list responses — retrieve the payment for it. */
     settlement_time_at: string | null;

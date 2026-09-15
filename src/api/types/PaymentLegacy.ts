@@ -94,7 +94,7 @@ export interface PaymentLegacy {
     retryable: boolean;
     /** Whop's in-house fraud risk score for this payment, from 0 (lowest risk) to 100 (highest risk). Null when the payment has not been scored or scoring has not yet completed. */
     risk_score: number | null;
-    /** A curated set of factors behind the risk score, grouped by category (business transaction history, buyer, device). Each entry has a key, human-readable label, category, and value. Null when there is no risk assessment for this payment. */
+    /** Deprecated. Always null. */
     risk_signals: Record<string, unknown> | null;
     /** The total amount charged to the customer for this payment, including taxes and after any discounts. In the currency specified by the currency field. */
     settlement_amount: number;
