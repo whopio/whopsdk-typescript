@@ -12,17 +12,18 @@ export interface CreateTeamMembersRequest {
     account_id: string;
     /** Email address to invite. Mutually exclusive with `user_id`. If the email already belongs to a Whop account it is treated the same as passing that account's `user_id`; otherwise a pending invite is created for the email. */
     email?: string;
-    /** The system role to grant. */
+    /** The system role to grant. Partners must pass all certification quizzes. */
     role: CreateTeamMembersRequest.Role;
     /** The user to add to the team, prefixed `user_`. Mutually exclusive with `email`. */
     user_id?: string;
 }
 
 export namespace CreateTeamMembersRequest {
-    /** The system role to grant. */
+    /** The system role to grant. Partners must pass all certification quizzes. */
     export const Role = {
         Owner: "owner",
         Admin: "admin",
+        Partner: "partner",
         SalesManager: "sales_manager",
         Moderator: "moderator",
         Advertiser: "advertiser",

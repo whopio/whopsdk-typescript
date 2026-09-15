@@ -4,6 +4,7 @@
 export const AuthorizedUserRoles = {
     Owner: "owner",
     Admin: "admin",
+    Partner: "partner",
     SalesManager: "sales_manager",
     Moderator: "moderator",
     Advertiser: "advertiser",

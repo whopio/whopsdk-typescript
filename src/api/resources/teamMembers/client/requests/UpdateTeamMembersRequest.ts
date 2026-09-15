@@ -10,15 +10,16 @@
 export interface UpdateTeamMembersRequest {
     /** Team member ID — `ausr_` for accepted members, `ausri_` for pending invites. */
     id: string;
-    /** The system role to grant. */
+    /** The system role to grant. Partners must pass all certification quizzes. */
     role: UpdateTeamMembersRequest.Role;
 }
 
 export namespace UpdateTeamMembersRequest {
-    /** The system role to grant. */
+    /** The system role to grant. Partners must pass all certification quizzes. */
     export const Role = {
         Owner: "owner",
         Admin: "admin",
+        Partner: "partner",
         SalesManager: "sales_manager",
         Moderator: "moderator",
         Advertiser: "advertiser",

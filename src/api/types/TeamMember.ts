@@ -30,6 +30,7 @@ export namespace TeamMember {
     export const Role = {
         Owner: "owner",
         Admin: "admin",
+        Partner: "partner",
         SalesManager: "sales_manager",
         Moderator: "moderator",
         Advertiser: "advertiser",

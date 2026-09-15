@@ -29,6 +29,7 @@ export namespace Permission {
             Moderator: "moderator",
             SalesManager: "sales_manager",
             Advertiser: "advertiser",
+            Partner: "partner",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
     }
