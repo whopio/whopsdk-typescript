@@ -19,7 +19,7 @@ export interface CheckoutConfigurationPlan {
     release_method: CheckoutConfigurationPlan.ReleaseMethod;
     /** Recurring price charged each billing period. */
     renewal_price: number;
-    /** 3D Secure behavior for this plan, or `null` to use the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     three_ds_level: CheckoutConfigurationPlan.ThreeDsLevel | null;
     /** Free trial days before the first renewal charge. */
     trial_period_days: number | null;
@@ -40,10 +40,11 @@ export namespace CheckoutConfigurationPlan {
         Waitlist: "waitlist",
     } as const;
     export type ReleaseMethod = (typeof ReleaseMethod)[keyof typeof ReleaseMethod];
-    /** 3D Secure behavior for this plan, or `null` to use the account default. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
-        Frictionless: "frictionless",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
     } as const;
     export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
     /** Whether the plan is visible to customers or hidden from public view. */
