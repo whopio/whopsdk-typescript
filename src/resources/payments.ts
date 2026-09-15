@@ -921,7 +921,8 @@ export interface PaymentListParams extends CursorPageParams {
   account_id?: string;
 
   /**
-   * Query param: A cursor; returns payments before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -958,12 +959,12 @@ export interface PaymentListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The number of payments to return.
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: The number of payments to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

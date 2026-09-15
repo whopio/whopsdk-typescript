@@ -18437,12 +18437,13 @@ export interface WebhookListParams extends CursorPageParams {
   app_id?: string;
 
   /**
-   * Query param: A cursor; returns webhooks before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
   /**
-   * Query param: The number of webhooks to return (default 20, max 100).
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
@@ -18460,7 +18461,7 @@ export interface WebhookListParams extends CursorPageParams {
   include_app_webhooks?: boolean;
 
   /**
-   * Query param: The number of webhooks to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

@@ -229,7 +229,8 @@ export interface AppBuildListParams extends CursorPageParams {
   app_id: string;
 
   /**
-   * Query param: A cursor; returns builds before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -244,12 +245,12 @@ export interface AppBuildListParams extends CursorPageParams {
   created_before?: number | string;
 
   /**
-   * Query param: The number of builds to return (default 20, max 100).
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: The number of builds to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

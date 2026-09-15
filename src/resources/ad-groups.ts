@@ -1649,7 +1649,8 @@ export interface AdGroupListParams extends CursorPageParams {
   attribution_model?: 'last_touch' | 'first_touch';
 
   /**
-   * Query param: Cursor to fetch the page before (from page_info.start_cursor).
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -1669,12 +1670,12 @@ export interface AdGroupListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The number of ad groups to return.
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: The number of ad groups to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

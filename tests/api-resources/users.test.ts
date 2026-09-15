@@ -73,8 +73,8 @@ describe('resource users', () => {
         {
           after: 'after',
           before: 'before',
-          first: 0,
-          last: 0,
+          first: 100,
+          last: 100,
           query: 'query',
           'Api-Version-Date': '2026-09-13',
         },

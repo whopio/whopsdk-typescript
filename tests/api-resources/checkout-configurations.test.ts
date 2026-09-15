@@ -117,7 +117,7 @@ describe('resource checkoutConfigurations', () => {
       created_after: 'created_after',
       created_before: 'created_before',
       direction: 'asc',
-      first: 0,
+      first: 100,
       order: 'created_at',
       plan_id: 'plan_id',
       'Api-Version-Date': '2026-09-13',

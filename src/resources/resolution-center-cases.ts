@@ -657,7 +657,8 @@ export interface ResolutionCenterCaseListParams extends CursorPageParams {
   account_id?: string;
 
   /**
-   * Query param: A cursor; returns cases before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -677,12 +678,12 @@ export interface ResolutionCenterCaseListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The number of cases to return (default 20, max 100).
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: The number of cases to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

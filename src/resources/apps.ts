@@ -602,7 +602,8 @@ export interface AppListParams extends CursorPageParams {
   app_type?: 'b2b_app' | 'b2c_app' | 'company_app' | 'component' | 'website';
 
   /**
-   * Query param: A cursor; returns apps before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -612,12 +613,12 @@ export interface AppListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The number of apps to return (default 20, max 100).
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: The number of apps to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

@@ -276,7 +276,8 @@ export interface MemberListParams extends CursorPageParams {
   account_id?: string;
 
   /**
-   * Query param: Cursor to paginate backwards from.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -296,12 +297,12 @@ export interface MemberListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Number of members to return from the start of the window.
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
   /**
-   * Query param: Number of members to return from the end of the window.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

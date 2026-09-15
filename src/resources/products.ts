@@ -410,7 +410,8 @@ export interface ProductListParams extends CursorPageParams {
   account_id?: string;
 
   /**
-   * Query param: A cursor; returns products before this position.
+   * Query param: Return results before this cursor. Use `page_info.start_cursor`
+   * from the previous response to fetch the previous page.
    */
   before?: string;
 
@@ -430,7 +431,7 @@ export interface ProductListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: The number of products to return (default and max 100).
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 
@@ -441,7 +442,7 @@ export interface ProductListParams extends CursorPageParams {
   labels?: Array<string>;
 
   /**
-   * Query param: The number of products to return from the end of the range.
+   * Query param: Number of results to return from the end of the range.
    */
   last?: number;
 

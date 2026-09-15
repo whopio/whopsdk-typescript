@@ -942,7 +942,7 @@ export interface CheckoutConfigurationListParams extends CursorPageParams {
   direction?: 'asc' | 'desc';
 
   /**
-   * Query param: Number of checkout configurations to return.
+   * Query param: Number of results to return from the start of the range.
    */
   first?: number;
 

@@ -91,10 +91,10 @@ describe('resource webhooks', () => {
       after: 'after',
       app_id: 'app_id',
       before: 'before',
-      first: 0,
+      first: 100,
       has_failures: true,
       include_app_webhooks: true,
-      last: 0,
+      last: 100,
       'Api-Version-Date': '2026-09-13',
     });
   });
