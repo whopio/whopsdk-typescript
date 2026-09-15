@@ -21,8 +21,8 @@ export interface ListCheckoutConfigurationsRequest {
     order?: Whop.ListCheckoutConfigurationsRequestOrder;
     /** Sort direction. Defaults to `desc`. */
     direction?: Whop.ListCheckoutConfigurationsRequestDirection;
-    /** Number of checkout configurations to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor for the next page of results. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }

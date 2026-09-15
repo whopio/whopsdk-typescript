@@ -5,8 +5,8 @@
  *     {}
  */
 export interface ListExperiencesRequest {
-    /** The number of preferences to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns preferences after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }

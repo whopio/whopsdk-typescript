@@ -15,12 +15,12 @@ export interface ListWebhooksRequest {
     include_app_webhooks?: boolean;
     /** Only return webhooks whose endpoint is currently failing — every delivery since the current failure streak began has been rejected. Clears as soon as a delivery succeeds. */
     has_failures?: boolean;
-    /** The number of webhooks to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns webhooks after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of webhooks to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns webhooks before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

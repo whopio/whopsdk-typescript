@@ -7,10 +7,10 @@
 export interface PulseEventsRequest {
     /** Filter to one or more types, comma separated — for example `purchase,card_spend`. These are the item's `type`, not its `event_name`: several types share the `ledger_line.created` event name. Omit for every type in the feed. Values outside the feed's own set are rejected. */
     event?: string;
-    /** The number of events to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor for fetching events after a previous page. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** A cursor for fetching events before a later page. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

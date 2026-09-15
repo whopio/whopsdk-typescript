@@ -25,12 +25,12 @@ export interface ListAppsRequest {
     order?: Whop.ListAppsRequestOrder;
     /** Sort direction. */
     direction?: Whop.ListAppsRequestDirection;
-    /** The number of apps to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns apps after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of apps to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns apps before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

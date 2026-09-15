@@ -17,13 +17,13 @@ export interface ListSocialAccountsRequest {
     verified?: boolean;
     /** Only return social accounts that have these scopes. */
     scopes?: Whop.ListSocialAccountsRequestScopesItem | Whop.ListSocialAccountsRequestScopesItem[];
-    /** The number of social accounts to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to fetch the page after (from page_info.end_cursor). */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of social accounts to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Cursor to fetch the page before (from page_info.start_cursor). */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort social accounts by. */
     order?: Whop.ListSocialAccountsRequestOrder;

@@ -18,13 +18,13 @@ export interface ListApiKeysRequest {
     created_before?: Whop.ListApiKeysRequestCreatedBefore;
     /** Only return API keys created after this ISO 8601 timestamp. */
     created_after?: Whop.ListApiKeysRequestCreatedAfter;
-    /** The number of API keys to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns API keys after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of API keys to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns API keys before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort API keys by. */
     order?: Whop.ListApiKeysRequestOrder;

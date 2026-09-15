@@ -17,9 +17,13 @@ export interface ListEarningsRequest {
     income_source?:
         | Whop.partners.businesses.ListEarningsRequestIncomeSourceItem
         | Whop.partners.businesses.ListEarningsRequestIncomeSourceItem[];
+    /** Number of results to return from the start of the range. */
     first?: number;
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
+    /** Number of results to return from the end of the range. */
     last?: number;
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort earnings by. */
     order?: Whop.partners.businesses.ListEarningsRequestOrder;

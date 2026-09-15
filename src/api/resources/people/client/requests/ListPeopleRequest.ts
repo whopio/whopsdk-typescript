@@ -52,11 +52,11 @@ export interface ListPeopleRequest {
     last_seen_after?: string;
     /** Only include people last seen before this ISO 8601 timestamp. */
     last_seen_before?: string;
-    /** The number of people to return (default 100, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor for fetching people after a previous page. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** A cursor for fetching people before a later page. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** Column to sort by. Defaults to last_seen_at. */
     order?: Whop.ListPeopleRequestOrder;

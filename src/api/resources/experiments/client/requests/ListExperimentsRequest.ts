@@ -13,13 +13,13 @@ export interface ListExperimentsRequest {
     related_resource?: Whop.ExperimentResourceReference;
     /** Only experiments with this status. */
     status?: Whop.ListExperimentsRequestStatus;
-    /** The number of experiments to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns experiments after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of experiments to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns experiments before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort experiments by. */
     order?: Whop.ListExperimentsRequestOrder;

@@ -19,12 +19,12 @@ export interface ListSupportedMethodsRequest {
     supported_payout_method_id?: string;
     /** Currency the supported payout method would deliver payouts in. Only meaningful with supported_payout_method_id; required fields vary by destination currency. */
     destination_currency?: string;
-    /** Number of supported payout methods to return from the start of the window. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to fetch the page after (from page_info.end_cursor). */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** Number of supported payout methods to return from the end of the window. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** Cursor to fetch the page before (from page_info.start_cursor). */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

@@ -25,8 +25,8 @@ export interface ListApiLogsRequest {
     min_duration_ms?: number;
     /** Only return requests that took at most this many milliseconds. */
     max_duration_ms?: number;
-    /** Number of logs to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to fetch the page after (from page_info.end_cursor). */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }

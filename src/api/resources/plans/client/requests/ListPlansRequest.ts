@@ -30,12 +30,12 @@ export interface ListPlansRequest {
     created_before?: string;
     /** Only return plans created after this timestamp. */
     created_after?: string;
-    /** The number of plans to return (default and max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns plans after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of plans to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns plans before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
 }

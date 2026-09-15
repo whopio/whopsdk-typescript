@@ -9,13 +9,13 @@ import type * as Whop from "../../../../../../index.js";
 export interface ListOauthGrantsRequest {
     /** Only return grants for this app, prefixed `app_`. An app the user has never authorized returns an empty list. */
     app_id?: string;
-    /** The number of grants to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns grants after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of grants to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns grants before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort grants by. */
     order?: Whop.users.ListOauthGrantsRequestOrder;

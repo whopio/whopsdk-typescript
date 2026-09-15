@@ -13,8 +13,8 @@ export interface ListNotificationsRequest {
     account_id?: string;
     /** Only return notifications that mention the user directly. */
     mentions?: boolean;
-    /** The number of notifications to return (default 20, max 100). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor (a notification `id` from a previous page); returns notifications older than it. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }

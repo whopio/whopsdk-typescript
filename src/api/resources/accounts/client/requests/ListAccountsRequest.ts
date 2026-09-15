@@ -7,13 +7,13 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListAccountsRequest {
-    /** The number of accounts to return (default 10, max 50). */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** A cursor; returns accounts after this position. */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
-    /** The number of accounts to return from the end of the range. */
+    /** Number of results to return from the end of the range. */
     last?: number;
-    /** A cursor; returns accounts before this position. */
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
     /** The field to sort accounts by. `volume` requires `stats:read` on the parent account. */
     order?: Whop.ListAccountsRequestOrder;

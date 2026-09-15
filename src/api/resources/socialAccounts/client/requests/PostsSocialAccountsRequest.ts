@@ -14,8 +14,8 @@ export interface PostsSocialAccountsRequest {
     account_id: string;
     /** Return only the single post with this platform id, instead of the full list. */
     post_id?: string;
-    /** The number of posts to return. */
+    /** Number of results to return from the start of the range. */
     first?: number;
-    /** Cursor to fetch the page after (from page_info.end_cursor). */
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
     after?: string;
 }
