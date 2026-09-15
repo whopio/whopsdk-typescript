@@ -34,7 +34,7 @@ describe('resource users', () => {
           interval: 'hour',
           time_zone: 'time_zone',
           to: 'to',
-          'Api-Version-Date': '2026-09-11-1',
+          'Api-Version-Date': '2026-09-13',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -76,7 +76,7 @@ describe('resource users', () => {
           first: 0,
           last: 0,
           query: 'query',
-          'Api-Version-Date': '2026-09-11-1',
+          'Api-Version-Date': '2026-09-13',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -99,7 +99,7 @@ describe('resource users', () => {
   test.skip('checkAccess: required and optional params', async () => {
     const response = await client.users.checkAccess('resource_id', {
       id: 'id',
-      'Api-Version-Date': '2026-09-11-1',
+      'Api-Version-Date': '2026-09-13',
     });
   });
 });
