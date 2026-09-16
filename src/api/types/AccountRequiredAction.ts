@@ -34,6 +34,7 @@ export namespace AccountRequiredAction {
         SetupApplePayDomains: "setup_apple_pay_domains",
         ConfigureTaxRemitter: "configure_tax_remitter",
         AddVatRegistration: "add_vat_registration",
+        EnableTwoFactorAuthentication: "enable_two_factor_authentication",
     } as const;
     export type Action = (typeof Action)[keyof typeof Action];
     /** required (act now) or pending (under review) */
