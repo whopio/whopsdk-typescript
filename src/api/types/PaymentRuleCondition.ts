@@ -15,8 +15,10 @@ export namespace PaymentRuleCondition {
     /** The payment attribute this condition reads. */
     export const Field = {
         RiskScore: "risk_score",
+        AmountInUsd: "amount_in_usd",
         CardCountry: "card_country",
         CustomerEmail: "customer_email",
+        IpAddress: "ip_address",
     } as const;
     export type Field = (typeof Field)[keyof typeof Field];
     /** How the payment attribute is compared to the value. */
@@ -32,6 +34,7 @@ export namespace PaymentRuleCondition {
         Contains: "contains",
         StartsWith: "starts_with",
         EndsWith: "ends_with",
+        InCidr: "in_cidr",
     } as const;
     export type Operator = (typeof Operator)[keyof typeof Operator];
 }
