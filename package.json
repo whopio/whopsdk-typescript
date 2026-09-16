@@ -660,6 +660,17 @@
             },
             "default": "./dist/cjs/api/resources/paymentMethods/exports.js"
         },
+        "./paymentRules": {
+            "import": {
+                "types": "./dist/esm/api/resources/paymentRules/exports.d.mts",
+                "default": "./dist/esm/api/resources/paymentRules/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/paymentRules/exports.d.ts",
+                "default": "./dist/cjs/api/resources/paymentRules/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/paymentRules/exports.js"
+        },
         "./payments": {
             "import": {
                 "types": "./dist/esm/api/resources/payments/exports.d.mts",
