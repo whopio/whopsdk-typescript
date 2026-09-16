@@ -58,6 +58,7 @@ export const WebhookEvent = {
     PayoutAccountStatusUpdated: "payout_account.status_updated",
     PaymentAuthorized: "payment.authorized",
     PaymentCanceled: "payment.canceled",
+    PaymentRequiresAction: "payment.requires_action",
     ResolutionCenterCaseCreated: "resolution_center_case.created",
     ResolutionCenterCaseUpdated: "resolution_center_case.updated",
     ResolutionCenterCaseDecided: "resolution_center_case.decided",

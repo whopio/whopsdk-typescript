@@ -9,4 +9,5 @@ export * from "./PostPaymentCanceledPayload.js";
 export * from "./PostPaymentCreatedPayload.js";
 export * from "./PostPaymentFailedPayload.js";
 export * from "./PostPaymentPendingPayload.js";
+export * from "./PostPaymentRequiresActionPayload.js";
 export * from "./PostPaymentSucceededPayload.js";
