@@ -55,6 +55,7 @@ export interface Payment {
     payment_method_id: string | null;
     /** The kind of instrument used, for example `card`, `apple_pay`, `klarna`, or `us_bank_account`. */
     payment_method_type: Whop.PaymentMethodTypes | null;
+    payment_rule_matches: Whop.PaymentRuleMatch[];
     /** How many charge attempts have failed on this payment. */
     payments_failed: number;
     /** The plan that was charged, prefixed `plan_`. */
