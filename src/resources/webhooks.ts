@@ -2004,7 +2004,8 @@ export namespace AccountFinancingApprovedWebhookEvent {
         | 'connect_fulfillment_tracker'
         | 'setup_apple_pay_domains'
         | 'configure_tax_remitter'
-        | 'add_vat_registration';
+        | 'add_vat_registration'
+        | 'enable_two_factor_authentication';
 
       blocked_capabilities: Array<string>;
 
@@ -3731,7 +3732,8 @@ export namespace AccountFinancingDeniedWebhookEvent {
         | 'connect_fulfillment_tracker'
         | 'setup_apple_pay_domains'
         | 'configure_tax_remitter'
-        | 'add_vat_registration';
+        | 'add_vat_registration'
+        | 'enable_two_factor_authentication';
 
       blocked_capabilities: Array<string>;
 
@@ -5458,7 +5460,8 @@ export namespace AccountUpdatedWebhookEvent {
         | 'connect_fulfillment_tracker'
         | 'setup_apple_pay_domains'
         | 'configure_tax_remitter'
-        | 'add_vat_registration';
+        | 'add_vat_registration'
+        | 'enable_two_factor_authentication';
 
       blocked_capabilities: Array<string>;
 
