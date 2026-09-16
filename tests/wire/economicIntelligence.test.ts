@@ -19,7 +19,7 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    action_type: "improve_landing_page",
+                    action_type: "cut_losing_ad_spend",
                     ai_chat_id: "ai_chat_id",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
@@ -171,7 +171,7 @@ describe("EconomicIntelligenceClient", () => {
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "improve_landing_page",
+            action_type: "cut_losing_ad_spend",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
@@ -295,7 +295,7 @@ describe("EconomicIntelligenceClient", () => {
         const rawRequestBody = { status: "executed" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "improve_landing_page",
+            action_type: "cut_losing_ad_spend",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
