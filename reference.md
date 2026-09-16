@@ -17096,7 +17096,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves the authenticated user's public profile, enrollment date, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Retrieve referral URLs and promotion links from GET /partners/links.
+Retrieves the authenticated user's public profile, enrollment date, partner verification timestamp, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Retrieve referral URLs and promotion links from GET /partners/links.
 </dd>
 </dl>
 </dd>
