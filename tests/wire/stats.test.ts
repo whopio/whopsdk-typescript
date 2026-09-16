@@ -68,7 +68,7 @@ describe("StatsClient", () => {
             data: {
                 currency: "usd",
                 points: [{ breakdown: [{ name: "spend", value: 2.82 }], timestamp: 1767268800, value: 3 }],
-                totals: [{ name: "spend", value: 2.82 }],
+                totals: [{ name: "wins", value: 4 }],
             },
         };
 

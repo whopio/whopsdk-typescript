@@ -33,6 +33,7 @@ export type UpdateVerificationsRequestBody =
                               state?: (string | null) | undefined;
                           }
                         | undefined;
+                    document_number?: string | undefined;
                     documents?:
                         | {
                               drivers_back?: string | undefined;
@@ -46,6 +47,7 @@ export type UpdateVerificationsRequestBody =
                         | undefined;
                     files?: string[] | undefined;
                     id: string;
+                    issuing_country?: string | undefined;
                     value?: string | undefined;
                     value_type?: ("raw" | "vault_token") | undefined;
                     values?: string[] | undefined;
@@ -85,6 +87,7 @@ export type UpdateVerificationsRequestBody =
                               state?: (string | null) | undefined;
                           }
                         | undefined;
+                    document_number?: string | undefined;
                     documents?:
                         | {
                               drivers_back?: string | undefined;
@@ -98,6 +101,7 @@ export type UpdateVerificationsRequestBody =
                         | undefined;
                     files?: string[] | undefined;
                     id: string;
+                    issuing_country?: string | undefined;
                     value?: string | undefined;
                     value_type?: ("raw" | "vault_token") | undefined;
                     values?: string[] | undefined;

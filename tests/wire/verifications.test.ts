@@ -47,6 +47,30 @@ describe("VerificationsClient", () => {
                             optional: true,
                             options: ["sole_proprietorship"],
                             requirement: "bank_statement",
+                            supporting_documents: [
+                                {
+                                    content_type: "application/pdf",
+                                    created_at: "2026-01-01T12:00:00.000Z",
+                                    filename: "evidence.pdf",
+                                    id: "file_xxxxxxxxxxxxxx",
+                                    multipart_chunk_size: 5242880,
+                                    multipart_upload_id: "upload-id",
+                                    multipart_upload_urls: [
+                                        {
+                                            part_number: 1,
+                                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                        },
+                                    ],
+                                    object: "file",
+                                    size: 9670,
+                                    upload_headers: { key: "value" },
+                                    upload_status: "pending",
+                                    upload_url:
+                                        "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                                    visibility: "public",
+                                },
+                            ],
                             type: "files",
                         },
                     ],
@@ -163,6 +187,7 @@ describe("VerificationsClient", () => {
             phone: "+15551234567",
             requested_information: [
                 {
+                    action_url: "action_url",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
@@ -174,6 +199,30 @@ describe("VerificationsClient", () => {
                     requirement: "bank_statement",
                     response_type: "yes_no",
                     selection_mode: "single",
+                    supporting_documents: [
+                        {
+                            content_type: "application/pdf",
+                            created_at: "2026-01-01T12:00:00.000Z",
+                            filename: "evidence.pdf",
+                            id: "file_xxxxxxxxxxxxxx",
+                            multipart_chunk_size: 5242880,
+                            multipart_upload_id: "upload-id",
+                            multipart_upload_urls: [
+                                {
+                                    part_number: 1,
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                },
+                            ],
+                            object: "file",
+                            size: 9670,
+                            upload_headers: { key: "value" },
+                            upload_status: "pending",
+                            upload_url:
+                                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            visibility: "public",
+                        },
+                    ],
                     supporting_files_explanation_allowed: true,
                     supporting_files_required: true,
                     supporting_files_visible_for: ["supporting_files_visible_for"],
@@ -397,6 +446,7 @@ describe("VerificationsClient", () => {
             phone: "+15551234567",
             requested_information: [
                 {
+                    action_url: "action_url",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
@@ -408,6 +458,30 @@ describe("VerificationsClient", () => {
                     requirement: "bank_statement",
                     response_type: "yes_no",
                     selection_mode: "single",
+                    supporting_documents: [
+                        {
+                            content_type: "application/pdf",
+                            created_at: "2026-01-01T12:00:00.000Z",
+                            filename: "evidence.pdf",
+                            id: "file_xxxxxxxxxxxxxx",
+                            multipart_chunk_size: 5242880,
+                            multipart_upload_id: "upload-id",
+                            multipart_upload_urls: [
+                                {
+                                    part_number: 1,
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                },
+                            ],
+                            object: "file",
+                            size: 9670,
+                            upload_headers: { key: "value" },
+                            upload_status: "pending",
+                            upload_url:
+                                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            visibility: "public",
+                        },
+                    ],
                     supporting_files_explanation_allowed: true,
                     supporting_files_required: true,
                     supporting_files_visible_for: ["supporting_files_visible_for"],
@@ -508,6 +582,7 @@ describe("VerificationsClient", () => {
             phone: "+15551234567",
             requested_information: [
                 {
+                    action_url: "action_url",
                     details_label: "details_label",
                     details_required: true,
                     details_visible_for: ["details_visible_for"],
@@ -519,6 +594,30 @@ describe("VerificationsClient", () => {
                     requirement: "bank_statement",
                     response_type: "yes_no",
                     selection_mode: "single",
+                    supporting_documents: [
+                        {
+                            content_type: "application/pdf",
+                            created_at: "2026-01-01T12:00:00.000Z",
+                            filename: "evidence.pdf",
+                            id: "file_xxxxxxxxxxxxxx",
+                            multipart_chunk_size: 5242880,
+                            multipart_upload_id: "upload-id",
+                            multipart_upload_urls: [
+                                {
+                                    part_number: 1,
+                                    url: "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                                },
+                            ],
+                            object: "file",
+                            size: 9670,
+                            upload_headers: { key: "value" },
+                            upload_status: "pending",
+                            upload_url:
+                                "https://whop-assets-example.s3.amazonaws.com/uploads/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/application.pdf",
+                            url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            visibility: "public",
+                        },
+                    ],
                     supporting_files_explanation_allowed: true,
                     supporting_files_required: true,
                     supporting_files_visible_for: ["supporting_files_visible_for"],
