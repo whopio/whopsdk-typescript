@@ -265,6 +265,7 @@ describe("PartnersClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            whop_partner_verified_at: "whop_partner_verified_at",
         };
 
         server.mockEndpoint().get("/partners/me").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
