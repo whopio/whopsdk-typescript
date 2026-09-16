@@ -69,6 +69,12 @@ export namespace ListVerificationsResponse {
 
             export namespace RequestedInformation {
                 export interface Item {
+                    /** Follow-up prompt shown with this requirement. */
+                    details_label?: string | undefined;
+                    /** Whether the follow-up response is required when visible. */
+                    details_required?: boolean | undefined;
+                    /** Selected option values that make the follow-up prompt visible. */
+                    details_visible_for?: string[] | undefined;
                     /** Present after a rejected submission. */
                     errors?: Item.Errors.Item[] | undefined;
                     /** Requested information item ID, prefixed `inrqi_`. */
@@ -81,7 +87,17 @@ export namespace ListVerificationsResponse {
                     options?: string[] | undefined;
                     /** What is needed: a document name such as `bank_statement`, or a field key such as `ssn` or `identity_document`. Handle unrecognized values by `type`. */
                     requirement: string;
-                    /** What to send as the answer, so you never have to infer it: `files` (a document, as a list of its pages), `id_document` (send `documents` with the slot keys for the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`), or `address` (send `address`). */
+                    /** Optional native input format for a text response. */
+                    response_type?: Item.ResponseType | undefined;
+                    /** Whether a question with `options` accepts one value or multiple values. */
+                    selection_mode?: Item.SelectionMode | undefined;
+                    /** Whether a written explanation may replace required supporting files. */
+                    supporting_files_explanation_allowed?: boolean | undefined;
+                    /** Whether this requirement also needs supporting files. */
+                    supporting_files_required?: boolean | undefined;
+                    /** Selected option values that make the supporting-file input visible. */
+                    supporting_files_visible_for?: string[] | undefined;
+                    /** What to send as the answer, so you never have to infer it: `files` (a document, as a list of its pages), `id_document` (send `documents` with the slot keys for the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`), `text_with_files` (send `value` and optional `files`), or `address` (send `address`). */
                     type: string;
                 }
 
@@ -96,6 +112,23 @@ export namespace ListVerificationsResponse {
                             reason?: string | undefined;
                         }
                     }
+
+                    /** Optional native input format for a text response. */
+                    export const ResponseType = {
+                        YesNo: "yes_no",
+                        YesNoNa: "yes_no_na",
+                        Date: "date",
+                        Url: "url",
+                        Number: "number",
+                        Tel: "tel",
+                    } as const;
+                    export type ResponseType = (typeof ResponseType)[keyof typeof ResponseType];
+                    /** Whether a question with `options` accepts one value or multiple values. */
+                    export const SelectionMode = {
+                        Single: "single",
+                        Multiple: "multiple",
+                    } as const;
+                    export type SelectionMode = (typeof SelectionMode)[keyof typeof SelectionMode];
                 }
             }
 
