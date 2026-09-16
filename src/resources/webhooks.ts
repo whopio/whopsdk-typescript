@@ -271,6 +271,7 @@ export interface Webhook {
     | 'payout_account.status_updated'
     | 'payment.authorized'
     | 'payment.canceled'
+    | 'payment.requires_action'
     | 'resolution_center_case.created'
     | 'resolution_center_case.updated'
     | 'resolution_center_case.decided'
@@ -393,6 +394,7 @@ export interface Webhook {
     | 'payout_account.status_updated'
     | 'payment.authorized'
     | 'payment.canceled'
+    | 'payment.requires_action'
     | 'resolution_center_case.created'
     | 'resolution_center_case.updated'
     | 'resolution_center_case.decided'
@@ -513,6 +515,7 @@ export type WebhookEvent =
   | 'payout_account.status_updated'
   | 'payment.authorized'
   | 'payment.canceled'
+  | 'payment.requires_action'
   | 'resolution_center_case.created'
   | 'resolution_center_case.updated'
   | 'resolution_center_case.decided'
@@ -656,6 +659,7 @@ export interface WebhookListResponse {
     | 'payout_account.status_updated'
     | 'payment.authorized'
     | 'payment.canceled'
+    | 'payment.requires_action'
     | 'resolution_center_case.created'
     | 'resolution_center_case.updated'
     | 'resolution_center_case.decided'
@@ -12734,6 +12738,46 @@ export interface PaymentPendingWebhookEvent {
   previous_attributes?: unknown;
 }
 
+export interface PaymentRequiresActionWebhookEvent {
+  /**
+   * A unique ID for every single webhook request
+   */
+  id: string;
+
+  /**
+   * The API version for this webhook
+   */
+  api_version: 'v1';
+
+  /**
+   * The dated API version (Api-Version-Date) the payload is serialized to
+   */
+  api_version_date: string | null;
+
+  data: Shared.Payment;
+
+  /**
+   * The timestamp in ISO 8601 format that the webhook was sent at on the server
+   */
+  timestamp: string;
+
+  /**
+   * The webhook event type
+   */
+  type: 'payment.requires_action';
+
+  /**
+   * The account ID that this webhook event is associated with
+   */
+  account_id?: string | null;
+
+  /**
+   * For some `.updated` events, the old values of the payload fields that changed,
+   * keyed by field name. Omitted when no capture is available for the event
+   */
+  previous_attributes?: unknown;
+}
+
 export interface PaymentSucceededWebhookEvent {
   /**
    * A unique ID for every single webhook request
@@ -18073,6 +18117,7 @@ export type UnwrapWebhookEvent =
   | PaymentCreatedWebhookEvent
   | PaymentFailedWebhookEvent
   | PaymentPendingWebhookEvent
+  | PaymentRequiresActionWebhookEvent
   | PaymentSucceededWebhookEvent
   | PayoutCreatedWebhookEvent
   | PayoutReversedWebhookEvent
@@ -18186,6 +18231,7 @@ export interface WebhookCreateParams {
     | 'payout_account.status_updated'
     | 'payment.authorized'
     | 'payment.canceled'
+    | 'payment.requires_action'
     | 'resolution_center_case.created'
     | 'resolution_center_case.updated'
     | 'resolution_center_case.decided'
@@ -18359,6 +18405,7 @@ export interface WebhookUpdateParams {
     | 'payout_account.status_updated'
     | 'payment.authorized'
     | 'payment.canceled'
+    | 'payment.requires_action'
     | 'resolution_center_case.created'
     | 'resolution_center_case.updated'
     | 'resolution_center_case.decided'
@@ -18554,6 +18601,7 @@ export declare namespace Webhooks {
     type PaymentCreatedWebhookEvent as PaymentCreatedWebhookEvent,
     type PaymentFailedWebhookEvent as PaymentFailedWebhookEvent,
     type PaymentPendingWebhookEvent as PaymentPendingWebhookEvent,
+    type PaymentRequiresActionWebhookEvent as PaymentRequiresActionWebhookEvent,
     type PaymentSucceededWebhookEvent as PaymentSucceededWebhookEvent,
     type PayoutCreatedWebhookEvent as PayoutCreatedWebhookEvent,
     type PayoutReversedWebhookEvent as PayoutReversedWebhookEvent,

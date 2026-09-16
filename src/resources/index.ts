@@ -542,6 +542,7 @@ export {
   type PaymentCreatedWebhookEvent,
   type PaymentFailedWebhookEvent,
   type PaymentPendingWebhookEvent,
+  type PaymentRequiresActionWebhookEvent,
   type PaymentSucceededWebhookEvent,
   type PayoutCreatedWebhookEvent,
   type PayoutReversedWebhookEvent,

@@ -176,6 +176,7 @@ Types:
 - <code><a href="./src/resources/webhooks.ts">PaymentCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentFailedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentPendingWebhookEvent</a></code>
+- <code><a href="./src/resources/webhooks.ts">PaymentRequiresActionWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PaymentSucceededWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutCreatedWebhookEvent</a></code>
 - <code><a href="./src/resources/webhooks.ts">PayoutReversedWebhookEvent</a></code>
