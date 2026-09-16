@@ -325,6 +325,8 @@ export namespace RetrieveFinancialReportsResponse {
                 PspPayoutSettlementReversal: "psp_payout_settlement_reversal",
                 PspPoolClearing: "psp_pool_clearing",
                 PspPoolDisputeSettlement: "psp_pool_dispute_settlement",
+                PspPoolRefundClearing: "psp_pool_refund_clearing",
+                PspPoolRefundSettlement: "psp_pool_refund_settlement",
                 PspPoolSettlement: "psp_pool_settlement",
                 PspProcessingFee: "psp_processing_fee",
                 PspReceivablePooled: "psp_receivable_pooled",
