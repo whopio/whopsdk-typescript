@@ -2965,6 +2965,8 @@ export interface Payment {
    */
   payment_method_type: PaymentsAPI.PaymentMethodTypes | null;
 
+  payment_rule_matches: Array<Payment.PaymentRuleMatch>;
+
   /**
    * How many charge attempts have failed on this payment.
    */
@@ -3412,6 +3414,29 @@ export namespace Payment {
         }
       }
     }
+  }
+
+  /**
+   * The account's own payment rules that matched this payment, recorded when they
+   * ran. Empty when none matched, when the account had no rules, or when Whop
+   * blocked the payment before they ran.
+   */
+  export interface PaymentRuleMatch {
+    /**
+     * Payment rule ID, prefixed `prule_`.
+     */
+    id: string;
+
+    /**
+     * What the rule asked for.
+     */
+    action: 'allow' | 'block' | 'enforce_3ds';
+
+    /**
+     * The rule's name when it matched. Renaming the rule afterwards does not rewrite
+     * this.
+     */
+    name: string | null;
   }
 
   /**
