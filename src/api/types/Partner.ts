@@ -10,6 +10,8 @@ export interface Partner {
     referred_businesses_count: number;
     /** The authenticated partner's public profile. */
     user: Whop.UserSummary;
+    /** Whether the user has a pending or approved personal entry on the Verified Partner waitlist. */
+    verification_waitlist_joined: boolean;
     /** When the user became a verified Whop Partner, as an ISO 8601 timestamp. `null` if not verified. */
     whop_partner_verified_at: string | null;
 }
