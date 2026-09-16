@@ -9,7 +9,9 @@
 export interface CreatePaymentsRequest {
     /** The account to charge for, prefixed `biz_`. */
     account_id: string;
-    /** Whether to capture a card payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint. */
+    /** Minutes after authorization at which Whop captures the hold automatically unless it has been voided. Requires `capture: false`. Between 5 and 5760 (4 days). */
+    auto_capture_after_minutes?: number | null;
+    /** Whether to capture a card payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. */
     capture?: boolean | null;
     /** A confirmation token describing a payment method the buyer just supplied. Provide this instead of `member_id` and `payment_method_id`; the buyer is resolved from the token's billing email, or from `email`. The buyer may still have a step to complete — poll the payment's status for what to do next. */
     confirmation_token?: string | null;
