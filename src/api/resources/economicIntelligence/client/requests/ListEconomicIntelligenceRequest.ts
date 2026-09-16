@@ -7,7 +7,7 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListEconomicIntelligenceRequest {
-    /** Account ID, prefixed `biz_`. Defaults to the API key's own account. */
+    /** Account ID, prefixed `biz_`. Defaults to the API key's own account; omit for personal onboarding. */
     account_id?: string;
     /** Filter recommendations by their current status. */
     status?: Whop.ListEconomicIntelligenceRequestStatus;

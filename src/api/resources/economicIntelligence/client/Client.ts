@@ -29,7 +29,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists an account's recommendations and generation requests, newest first.
+     * Lists an account's recommendations and generation requests, newest first. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
