@@ -265,6 +265,7 @@ describe("PartnersClient", () => {
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "danawhitfield",
             },
+            verification_waitlist_joined: false,
             whop_partner_verified_at: "whop_partner_verified_at",
         };
 
