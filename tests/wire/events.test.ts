@@ -87,6 +87,18 @@ describe("EventsClient", () => {
                             card_brand: "visa",
                             card_last4: "4242",
                             id: "pay_xxxxxxxxxxxxxx",
+                            line_items: [
+                                {
+                                    id: null,
+                                    label: "Ceramic Coating Package",
+                                    plan_id: "plan_xxxxxxxxxxxxxx",
+                                    plan_title: "Unlimited Wash Club",
+                                    product_id: "prod_xxxxxxxxxxxxxx",
+                                    product_title: "Ceramic Coating Package",
+                                    quantity: 1,
+                                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                },
+                            ],
                             provider: "stripe",
                         },
                         plan: {
