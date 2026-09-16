@@ -246,9 +246,25 @@ export namespace VerificationRetrieveResponse {
      * What to send as the answer, so you never have to infer it: `files` (a document,
      * as a list of its pages), `id_document` (send `documents` with the slot keys for
      * the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`),
-     * or `address` (send `address`).
+     * `text_with_files` (send `value` and optional `files`), or `address` (send
+     * `address`).
      */
     type: string;
+
+    /**
+     * Follow-up prompt shown with this requirement.
+     */
+    details_label?: string;
+
+    /**
+     * Whether the follow-up response is required when visible.
+     */
+    details_required?: boolean;
+
+    /**
+     * Selected option values that make the follow-up prompt visible.
+     */
+    details_visible_for?: Array<string>;
 
     /**
      * Present after a rejected submission.
@@ -266,6 +282,31 @@ export namespace VerificationRetrieveResponse {
      * send. Absent when the item has no choice to make.
      */
     options?: Array<string>;
+
+    /**
+     * Optional native input format for a text response.
+     */
+    response_type?: 'yes_no' | 'yes_no_na' | 'date' | 'url' | 'number' | 'tel';
+
+    /**
+     * Whether a question with `options` accepts one value or multiple values.
+     */
+    selection_mode?: 'single' | 'multiple';
+
+    /**
+     * Whether a written explanation may replace required supporting files.
+     */
+    supporting_files_explanation_allowed?: boolean;
+
+    /**
+     * Whether this requirement also needs supporting files.
+     */
+    supporting_files_required?: boolean;
+
+    /**
+     * Selected option values that make the supporting-file input visible.
+     */
+    supporting_files_visible_for?: Array<string>;
   }
 
   export namespace RequestedInformation {
@@ -461,9 +502,25 @@ export namespace VerificationListResponse {
        * What to send as the answer, so you never have to infer it: `files` (a document,
        * as a list of its pages), `id_document` (send `documents` with the slot keys for
        * the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`),
-       * or `address` (send `address`).
+       * `text_with_files` (send `value` and optional `files`), or `address` (send
+       * `address`).
        */
       type: string;
+
+      /**
+       * Follow-up prompt shown with this requirement.
+       */
+      details_label?: string;
+
+      /**
+       * Whether the follow-up response is required when visible.
+       */
+      details_required?: boolean;
+
+      /**
+       * Selected option values that make the follow-up prompt visible.
+       */
+      details_visible_for?: Array<string>;
 
       /**
        * Present after a rejected submission.
@@ -481,6 +538,31 @@ export namespace VerificationListResponse {
        * send. Absent when the item has no choice to make.
        */
       options?: Array<string>;
+
+      /**
+       * Optional native input format for a text response.
+       */
+      response_type?: 'yes_no' | 'yes_no_na' | 'date' | 'url' | 'number' | 'tel';
+
+      /**
+       * Whether a question with `options` accepts one value or multiple values.
+       */
+      selection_mode?: 'single' | 'multiple';
+
+      /**
+       * Whether a written explanation may replace required supporting files.
+       */
+      supporting_files_explanation_allowed?: boolean;
+
+      /**
+       * Whether this requirement also needs supporting files.
+       */
+      supporting_files_required?: boolean;
+
+      /**
+       * Selected option values that make the supporting-file input visible.
+       */
+      supporting_files_visible_for?: Array<string>;
     }
 
     export namespace RequestedInformation {
