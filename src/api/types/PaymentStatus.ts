@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface PaymentStatus {
     /** The account receiving this payment, or `null` when the payment has no associated account. */
     account: Whop.AccountSummary | null;
+    /** When Whop will capture this authorization automatically, as an ISO 8601 timestamp. `null` when no automatic capture was requested. */
+    auto_capture_at: string | null;
     /** When the card authorization must be captured, as an ISO 8601 timestamp. `null` when this payment was not authorized for later capture. */
     capture_expires_at: string | null;
     /** The payment this status describes, prefixed `pay_`. */
