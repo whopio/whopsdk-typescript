@@ -342,6 +342,7 @@ export * from "./PaymentRuleConditions.js";
 export * from "./PaymentRuleConditionValue.js";
 export * from "./PaymentRuleField.js";
 export * from "./PaymentRuleFieldOption.js";
+export * from "./PaymentRuleMatch.js";
 export * from "./PaymentStatus.js";
 export * from "./PaymentsApprovalStatuses.js";
 export * from "./PaymentTransactionStatuses.js";
