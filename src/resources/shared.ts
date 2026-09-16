@@ -3024,13 +3024,15 @@ export interface Payment {
   retryable: boolean;
 
   /**
-   * Whop's fraud risk score from 0 (lowest) to 100 (highest), or null when the
-   * payment was not scored.
+   * Whop's published risk index from 0 (lowest) to 100 (highest), including enforced
+   * decision floors. This is not a fraud probability. Null when no score is
+   * available.
    */
   risk_score: number | null;
 
   /**
-   * The factors behind `risk_score`, grouped by category, or null.
+   * @deprecated Deprecated. Risk score explanations are no longer provided; always
+   * null. DEPRECATED: Risk score explanations are no longer provided. Always null.
    */
   risk_signals: unknown | null;
 
