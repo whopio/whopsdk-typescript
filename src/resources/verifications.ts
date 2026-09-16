@@ -246,10 +246,17 @@ export namespace VerificationRetrieveResponse {
      * What to send as the answer, so you never have to infer it: `files` (a document,
      * as a list of its pages), `id_document` (send `documents` with the slot keys for
      * the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`),
-     * `text_with_files` (send `value` and optional `files`), or `address` (send
-     * `address`).
+     * `text_with_files` (send `value` and optional `files`), `address` (send
+     * `address`), or `liveness` (open `action_url`, then send `value` as `true` after
+     * completion).
      */
     type: string;
+
+    /**
+     * URL for a related action, such as completing liveness verification or viewing a
+     * payment. Absent when no action is available.
+     */
+    action_url?: string;
 
     /**
      * Follow-up prompt shown with this requirement.
@@ -294,6 +301,11 @@ export namespace VerificationRetrieveResponse {
     selection_mode?: 'single' | 'multiple';
 
     /**
+     * Documents supplied with the requirement for context.
+     */
+    supporting_documents?: Array<RequestedInformation.SupportingDocument>;
+
+    /**
      * Whether a written explanation may replace required supporting files.
      */
     supporting_files_explanation_allowed?: boolean;
@@ -320,6 +332,98 @@ export namespace VerificationRetrieveResponse {
        * Why it was rejected.
        */
       reason?: string;
+    }
+
+    export interface SupportingDocument {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<SupportingDocument.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace SupportingDocument {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
+      }
     }
   }
 
@@ -502,10 +606,17 @@ export namespace VerificationListResponse {
        * What to send as the answer, so you never have to infer it: `files` (a document,
        * as a list of its pages), `id_document` (send `documents` with the slot keys for
        * the ID you are uploading), `text`, `date`, `phone` or `select` (send `value`),
-       * `text_with_files` (send `value` and optional `files`), or `address` (send
-       * `address`).
+       * `text_with_files` (send `value` and optional `files`), `address` (send
+       * `address`), or `liveness` (open `action_url`, then send `value` as `true` after
+       * completion).
        */
       type: string;
+
+      /**
+       * URL for a related action, such as completing liveness verification or viewing a
+       * payment. Absent when no action is available.
+       */
+      action_url?: string;
 
       /**
        * Follow-up prompt shown with this requirement.
@@ -550,6 +661,11 @@ export namespace VerificationListResponse {
       selection_mode?: 'single' | 'multiple';
 
       /**
+       * Documents supplied with the requirement for context.
+       */
+      supporting_documents?: Array<RequestedInformation.SupportingDocument>;
+
+      /**
        * Whether a written explanation may replace required supporting files.
        */
       supporting_files_explanation_allowed?: boolean;
@@ -576,6 +692,98 @@ export namespace VerificationListResponse {
          * Why it was rejected.
          */
         reason?: string;
+      }
+
+      export interface SupportingDocument {
+        /**
+         * The file's ID, prefixed `file_`.
+         */
+        id: string;
+
+        /**
+         * The file's MIME type, e.g. `application/pdf`.
+         */
+        content_type: string | null;
+
+        /**
+         * When the file was created, as an ISO 8601 timestamp.
+         */
+        created_at: string;
+
+        /**
+         * The original filename, including its extension.
+         */
+        filename: string | null;
+
+        /**
+         * The type of this object, always `file`.
+         */
+        object: string;
+
+        /**
+         * The file size in bytes. `null` until the upload has finished.
+         */
+        size: number | null;
+
+        /**
+         * Where the file is in its upload lifecycle.
+         */
+        upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+        /**
+         * A URL to download the file: a permanent CDN URL for public files, a signed
+         * expiring URL for private ones. `null` until the upload has finished.
+         */
+        url: string | null;
+
+        /**
+         * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+         * expiring URL.
+         */
+        visibility: 'public' | 'private';
+
+        /**
+         * The byte size each part (except the last) must be. Present only on create, and
+         * only for multipart uploads.
+         */
+        multipart_chunk_size?: number | null;
+
+        /**
+         * The ID of the multipart upload, passed back to `complete`. Present only on
+         * create, and only for multipart uploads.
+         */
+        multipart_upload_id?: string | null;
+
+        multipart_upload_urls?: Array<SupportingDocument.MultipartUploadURL> | null;
+
+        /**
+         * Headers to send with the upload PUT. Present only on create.
+         */
+        upload_headers?: unknown;
+
+        /**
+         * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+         * single-part uploads.
+         */
+        upload_url?: string | null;
+      }
+
+      export namespace SupportingDocument {
+        /**
+         * The presigned URL for each part. Present only on create, and only for multipart
+         * uploads.
+         */
+        export interface MultipartUploadURL {
+          /**
+           * The 1-based index of this part within the multipart upload.
+           */
+          part_number: number;
+
+          /**
+           * The presigned URL to PUT this part's bytes to.
+           */
+          url: string;
+        }
       }
     }
 

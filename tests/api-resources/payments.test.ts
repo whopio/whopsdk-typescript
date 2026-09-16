@@ -24,6 +24,7 @@ describe('resource payments', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.payments.create({
       account_id: 'biz_xxxxxxxxxxxxxx',
+      auto_capture_after_minutes: 60,
       capture: false,
       confirmation_token: 'ctok_xxxxxxxxxxxxxx',
       email: 'dana@shinetime.example',
