@@ -220,7 +220,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Approves or rejects a recommendation and requests replacements.
+     * Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire it and request replacements; a rating alone leaves its status unchanged.
      *
      * @param {Whop.UpdateEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -234,8 +234,7 @@ export class EconomicIntelligenceClient {
      *
      * @example
      *     await client.economicIntelligence.update({
-     *         id: "id",
-     *         status: "executed"
+     *         id: "id"
      *     })
      */
     public update(

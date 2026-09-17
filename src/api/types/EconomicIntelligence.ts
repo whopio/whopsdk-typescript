@@ -19,6 +19,8 @@ export interface EconomicIntelligence {
     prompt: string | null;
     /** Evidence and metrics supporting the recommendation, or `null` when no reasoning was provided. */
     reasoning: string | null;
+    /** How the user rated this recommendation, or `null` if they have not rated it */
+    sentiment: EconomicIntelligence.Sentiment | null;
     /** `queued` when awaiting generation; `pending` while generating; `ready` when available for approval; `executed` when approved; `superseded` when rejected or replaced. */
     status: EconomicIntelligence.Status;
     /** When the recommendation was rejected or replaced, as an ISO 8601 timestamp, or `null` if neither has occurred. */
@@ -27,9 +29,17 @@ export interface EconomicIntelligence {
     target_url?: (string | null) | undefined;
     /** Recommended action and its expected benefit, or `null` until generated. */
     title: string | null;
+    /** The user's written feedback, or `null` if they have not provided any. */
+    user_feedback: string | null;
 }
 
 export namespace EconomicIntelligence {
+    /** How the user rated this recommendation, or `null` if they have not rated it */
+    export const Sentiment = {
+        Positive: "positive",
+        Negative: "negative",
+    } as const;
+    export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
     /** `queued` when awaiting generation; `pending` while generating; `ready` when available for approval; `executed` when approved; `superseded` when rejected or replaced. */
     export const Status = {
         Queued: "queued",
