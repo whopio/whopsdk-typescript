@@ -23,6 +23,8 @@ export interface EconomicIntelligence {
     status: EconomicIntelligence.Status;
     /** When the recommendation was rejected or replaced, as an ISO 8601 timestamp, or `null` if neither has occurred. */
     superseded_at: string | null;
+    /** Website URL selected for pixel setup, or `null` when no website was captured for this recommendation. */
+    target_url?: (string | null) | undefined;
     /** Recommended action and its expected benefit, or `null` until generated. */
     title: string | null;
 }
