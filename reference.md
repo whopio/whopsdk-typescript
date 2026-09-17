@@ -18352,7 +18352,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charges a buyer for a plan. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `plan_id` for an existing plan or `plan` to find or create one inline.
+Charges a buyer for one or more plans. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `line_items` for one or more plans with quantities, `plan_id` for an existing plan, or `plan` to find or create one inline. These inputs are mutually exclusive.
 </dd>
 </dl>
 </dd>
