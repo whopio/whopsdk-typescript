@@ -333,13 +333,13 @@ describe("EventsClient", () => {
         const rawResponseBody = {
             firing_data_ok: true,
             host_events: ["lead"],
-            installed: true,
+            installed: false,
             last_fired_days: { lead: 2 },
             last_seen_days: 2,
             native_tracking: false,
             page_events: ["lead"],
             reachable: true,
-            url: "https://shinetime.example/checkout/complete",
+            url: "https://shinetime.example/",
         };
 
         server
