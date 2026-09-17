@@ -17798,11 +17798,11 @@ await client.paymentRules.create({
     conditions: {
         all: [{
                 field: "risk_score",
-                operator: "eq",
-                value: 1
+                operator: "gte",
+                value: 70
             }]
     },
-    name: "Block high risk"
+    name: "Review risky cards"
 });
 
 ```
@@ -18224,8 +18224,8 @@ await client.paymentRules.replace({
     conditions: {
         all: [{
                 field: "risk_score",
-                operator: "eq",
-                value: 1
+                operator: "gte",
+                value: 70
             }]
     }
 });

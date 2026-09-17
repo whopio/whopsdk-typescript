@@ -14,6 +14,7 @@ export namespace PaymentRuleMatch {
     export const Action = {
         Allow: "allow",
         Block: "block",
+        Review: "review",
         Enforce3Ds: "enforce_3ds",
     } as const;
     export type Action = (typeof Action)[keyof typeof Action];

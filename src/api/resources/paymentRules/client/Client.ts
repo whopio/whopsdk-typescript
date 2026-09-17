@@ -17,7 +17,7 @@ export declare namespace PaymentRulesClient {
 }
 
 /**
- * A Payment Rule lets an account act on its own payments before they reach the bank: block them, let them through, or ask the buyer for 3D Secure. Each rule matches on a small set of payment attributes, and every condition must hold for it to apply.
+ * A Payment Rule lets an account act on its own payments before they reach the bank: block them, let them through, send them to review, or ask the buyer for 3D Secure. Each rule matches on a small set of payment attributes, and every condition must hold for it to apply.
  *
  * A rule's definition is fixed once created, so the payments it decided keep naming the rule that decided them. Use [Replace](/api-reference/beta/payment-rules/replace-a-payment-rule) to change one, and [List fields](/api-reference/beta/payment-rules/list-fields) for the attributes, operators and values a condition can use.
  */
@@ -141,11 +141,11 @@ export class PaymentRulesClient {
      *         conditions: {
      *             all: [{
      *                     field: "risk_score",
-     *                     operator: "eq",
-     *                     value: 1
+     *                     operator: "gte",
+     *                     value: 70
      *                 }]
      *         },
-     *         name: "Block high risk"
+     *         name: "Review risky cards"
      *     })
      */
     public create(
@@ -647,8 +647,8 @@ export class PaymentRulesClient {
      *         conditions: {
      *             all: [{
      *                     field: "risk_score",
-     *                     operator: "eq",
-     *                     value: 1
+     *                     operator: "gte",
+     *                     value: 70
      *                 }]
      *         }
      *     })

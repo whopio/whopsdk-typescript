@@ -9,17 +9,17 @@ import type * as Whop from "../../../../index.js";
  *         conditions: {
  *             all: [{
  *                     field: "risk_score",
- *                     operator: "eq",
- *                     value: 1
+ *                     operator: "gte",
+ *                     value: 70
  *                 }]
  *         },
- *         name: "Block high risk"
+ *         name: "Review risky cards"
  *     }
  */
 export interface CreatePaymentRulesRequest {
     /** The account to create the rule on. Defaults to the account the request is acting for. */
     account_id?: string;
-    /** What happens to a payment when every condition matches. An `allow` overrides this account's other rules only, never Whop's own fraud controls. An `enforce_3ds` is skipped where the payment cannot carry a challenge. */
+    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 24 hours after authorization; capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. */
     action: CreatePaymentRulesRequest.Action;
     /** The conditions a payment is matched against. Up to 10 conditions, and 8 KiB once serialized. */
     conditions: CreatePaymentRulesRequest.Conditions;
@@ -30,10 +30,11 @@ export interface CreatePaymentRulesRequest {
 }
 
 export namespace CreatePaymentRulesRequest {
-    /** What happens to a payment when every condition matches. An `allow` overrides this account's other rules only, never Whop's own fraud controls. An `enforce_3ds` is skipped where the payment cannot carry a challenge. */
+    /** What this account's rule requests when every condition matches. One applicable account-rule action wins, in this order: `allow`, `block`, `review`, `enforce_3ds`. An `allow` overrides this account's other rules, never Whop's own fraud controls. A `review` requests authorization without capture for an eligible on-session card payment through Whop Payments. Automatic capture is scheduled for 24 hours after authorization; capture or void the payment before then to decide sooner. Capture may complete later or fail. Review is skipped for unsupported methods, off-session payments, and payments already configured for manual capture. An `enforce_3ds` is skipped when the account rule cannot apply a challenge. Other 3DS requirements still apply. */
     export const Action = {
         Allow: "allow",
         Block: "block",
+        Review: "review",
         Enforce3Ds: "enforce_3ds",
     } as const;
     export type Action = (typeof Action)[keyof typeof Action];
