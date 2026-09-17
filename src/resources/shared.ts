@@ -3430,7 +3430,7 @@ export namespace Payment {
     /**
      * What the rule asked for.
      */
-    action: 'allow' | 'block' | 'enforce_3ds';
+    action: 'allow' | 'block' | 'review' | 'enforce_3ds';
 
     /**
      * The rule's name when it matched. Renaming the rule afterwards does not rewrite
