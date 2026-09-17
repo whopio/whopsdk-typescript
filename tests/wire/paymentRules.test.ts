@@ -85,8 +85,8 @@ describe("PaymentRulesClient", () => {
         });
         const rawRequestBody = {
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
-            name: "Block high risk",
+            conditions: { all: [{ field: "risk_score", operator: "gte", value: 70 }] },
+            name: "Review risky cards",
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -116,12 +116,12 @@ describe("PaymentRulesClient", () => {
                 all: [
                     {
                         field: "risk_score",
-                        operator: "eq",
-                        value: 1,
+                        operator: "gte",
+                        value: 70,
                     },
                 ],
             },
-            name: "Block high risk",
+            name: "Review risky cards",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -570,7 +570,7 @@ describe("PaymentRulesClient", () => {
         });
         const rawRequestBody = {
             action: "allow",
-            conditions: { all: [{ field: "risk_score", operator: "eq", value: 1 }] },
+            conditions: { all: [{ field: "risk_score", operator: "gte", value: 70 }] },
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
@@ -601,8 +601,8 @@ describe("PaymentRulesClient", () => {
                 all: [
                     {
                         field: "risk_score",
-                        operator: "eq",
-                        value: 1,
+                        operator: "gte",
+                        value: 70,
                     },
                 ],
             },
