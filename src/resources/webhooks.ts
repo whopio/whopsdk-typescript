@@ -1997,6 +1997,7 @@ export namespace AccountFinancingApprovedWebhookEvent {
        */
       action:
         | 'deposit_funds'
+        | 'review_held_payments'
         | 'accept_airwallex_terms'
         | 'submit_information_request'
         | 'update_automatic_withdrawal_method'
@@ -3725,6 +3726,7 @@ export namespace AccountFinancingDeniedWebhookEvent {
        */
       action:
         | 'deposit_funds'
+        | 'review_held_payments'
         | 'accept_airwallex_terms'
         | 'submit_information_request'
         | 'update_automatic_withdrawal_method'
@@ -5453,6 +5455,7 @@ export namespace AccountUpdatedWebhookEvent {
        */
       action:
         | 'deposit_funds'
+        | 'review_held_payments'
         | 'accept_airwallex_terms'
         | 'submit_information_request'
         | 'update_automatic_withdrawal_method'
