@@ -35,10 +35,10 @@ describe("ResolutionCenterCasesClient", () => {
                     id: "reso_xxxxxxxxxxxxxx",
                     line_items: [
                         {
-                            id: null,
+                            id: "li_xxxxxxxxxxxxxx",
                             label: "Ceramic Coating Package",
                             plan_id: "plan_xxxxxxxxxxxxxx",
-                            plan_title: "Unlimited Wash Club",
+                            plan_title: "Ceramic Coating — Full Vehicle",
                             product_id: "prod_xxxxxxxxxxxxxx",
                             product_title: "Ceramic Coating Package",
                             quantity: 1,
@@ -194,10 +194,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -413,10 +413,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -536,10 +536,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -690,10 +690,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -821,10 +821,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -1061,10 +1061,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -1190,10 +1190,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
@@ -1316,10 +1316,10 @@ describe("ResolutionCenterCasesClient", () => {
             id: "reso_xxxxxxxxxxxxxx",
             line_items: [
                 {
-                    id: "id",
+                    id: "li_xxxxxxxxxxxxxx",
                     label: "Ceramic Coating Package",
                     plan_id: "plan_xxxxxxxxxxxxxx",
-                    plan_title: "Unlimited Wash Club",
+                    plan_title: "Ceramic Coating — Full Vehicle",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     product_title: "Ceramic Coating Package",
                     quantity: 1,
