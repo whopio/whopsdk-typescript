@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { FeesClient } from "../resources/fees/client/Client.js";
 import { PreferencesClient } from "../resources/preferences/client/Client.js";
 import { ReservesClient } from "../resources/reserves/client/Client.js";
 
@@ -25,11 +26,16 @@ export declare namespace AccountsClient {
  */
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
+    protected _fees: FeesClient | undefined;
     protected _preferences: PreferencesClient | undefined;
     protected _reserves: ReservesClient | undefined;
 
     constructor(options: AccountsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get fees(): FeesClient {
+        return (this._fees ??= new FeesClient(this._options));
     }
 
     public get preferences(): PreferencesClient {

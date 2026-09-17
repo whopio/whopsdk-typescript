@@ -1,3 +1,5 @@
+export * from "./fees/client/requests/index.js";
+export * as fees from "./fees/index.js";
 export * from "./preferences/client/requests/index.js";
 export * as preferences from "./preferences/index.js";
 export * from "./preferences/types/index.js";

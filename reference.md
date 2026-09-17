@@ -26134,6 +26134,137 @@ await client.webhooks.test({
 </dl>
 </details>
 
+## Accounts Fees
+<details><summary><code>client.accounts.fees.<a href="/src/api/resources/accounts/resources/fees/client/Client.ts">retrieve</a>({ ...params }) -> Whop.AccountFees</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves every fee the account is charged, as a document keyed by fee: Whop's fees, resolved the way they are charged, and any markups the platform the account is connected to adds on top. The account's own team, the Whop Verified Partner who referred it, and the platform it is connected to all read the same document; `adjustable` on each fee says what the caller may change through `PATCH`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.fees.retrieve({
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.RetrieveFeesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FeesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.fees.<a href="/src/api/resources/accounts/resources/fees/client/Client.ts">update</a>({ ...params }) -> Whop.AccountFees</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Changes fees on the account. The body mirrors the document: send only the keys to change, and each is replaced while the rest stay as they are. A platform sets `markups` on an account connected to it, or `child_markups` on itself for every connected account. A Whop Verified Partner edits the fee schedule of a business they referred, with `notes`, from a first-party Whop session. Every change is validated against the document before anything is written, and a rejected request names the key. Returns the full document.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.fees.update({
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.UpdateFeesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FeesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Accounts Preferences
 <details><summary><code>client.accounts.preferences.<a href="/src/api/resources/accounts/resources/preferences/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePreferencesResponse</code></summary>
 <dl>

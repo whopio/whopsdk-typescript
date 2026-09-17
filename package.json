@@ -946,6 +946,17 @@
             },
             "default": "./dist/cjs/api/resources/webhooks/exports.js"
         },
+        "./accounts/fees": {
+            "import": {
+                "types": "./dist/esm/api/resources/accounts/resources/fees/exports.d.mts",
+                "default": "./dist/esm/api/resources/accounts/resources/fees/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/accounts/resources/fees/exports.d.ts",
+                "default": "./dist/cjs/api/resources/accounts/resources/fees/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/accounts/resources/fees/exports.js"
+        },
         "./accounts/preferences": {
             "import": {
                 "types": "./dist/esm/api/resources/accounts/resources/preferences/exports.d.mts",
