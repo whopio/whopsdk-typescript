@@ -107,7 +107,6 @@ export namespace Webhook {
             PayoutAccountStatusUpdated: "payout_account.status_updated",
             PaymentAuthorized: "payment.authorized",
             PaymentCanceled: "payment.canceled",
-            PaymentRequiresAction: "payment.requires_action",
             ResolutionCenterCaseCreated: "resolution_center_case.created",
             ResolutionCenterCaseUpdated: "resolution_center_case.updated",
             ResolutionCenterCaseDecided: "resolution_center_case.decided",
@@ -132,6 +131,7 @@ export namespace Webhook {
             PaymentSucceeded: "payment.succeeded",
             PaymentFailed: "payment.failed",
             PaymentPending: "payment.pending",
+            PaymentRequiresAction: "payment.requires_action",
             DisputeCreated: "dispute.created",
             DisputeUpdated: "dispute.updated",
             RefundCreated: "refund.created",
@@ -152,6 +152,7 @@ export namespace Webhook {
             AppPaymentSucceeded: "app_payment.succeeded",
             AppPaymentFailed: "app_payment.failed",
             AppPaymentPending: "app_payment.pending",
+            AppPaymentRequiresAction: "app_payment.requires_action",
             AppMembershipCancelAtPeriodEndChanged: "app_membership.cancel_at_period_end_changed",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
@@ -218,7 +219,6 @@ export namespace Webhook {
             PayoutAccountStatusUpdated: "payout_account.status_updated",
             PaymentAuthorized: "payment.authorized",
             PaymentCanceled: "payment.canceled",
-            PaymentRequiresAction: "payment.requires_action",
             ResolutionCenterCaseCreated: "resolution_center_case.created",
             ResolutionCenterCaseUpdated: "resolution_center_case.updated",
             ResolutionCenterCaseDecided: "resolution_center_case.decided",
@@ -243,6 +243,7 @@ export namespace Webhook {
             PaymentSucceeded: "payment.succeeded",
             PaymentFailed: "payment.failed",
             PaymentPending: "payment.pending",
+            PaymentRequiresAction: "payment.requires_action",
             DisputeCreated: "dispute.created",
             DisputeUpdated: "dispute.updated",
             RefundCreated: "refund.created",
@@ -263,6 +264,7 @@ export namespace Webhook {
             AppPaymentSucceeded: "app_payment.succeeded",
             AppPaymentFailed: "app_payment.failed",
             AppPaymentPending: "app_payment.pending",
+            AppPaymentRequiresAction: "app_payment.requires_action",
             AppMembershipCancelAtPeriodEndChanged: "app_membership.cancel_at_period_end_changed",
         } as const;
         export type Item = (typeof Item)[keyof typeof Item];
