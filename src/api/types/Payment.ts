@@ -37,6 +37,7 @@ export interface Payment {
     id: string;
     /** When the most recent charge attempt ran, or null. */
     last_payment_attempt_at: string | null;
+    line_items: Whop.ReceiptLineItem[];
     /** The buyer's member record on the account, prefixed `mber_`. Null without the member:basic:read permission. */
     member_id: string | null;
     /** The membership this payment is billed against, prefixed `mem_`. Null for one-off purchases or without the member:basic:read permission. */
