@@ -16,12 +16,14 @@ import { path } from '../internal/utils/path';
  */
 export class Payments extends APIResource {
   /**
-   * Charges a buyer for a plan. Pass a payment method already on file (`member_id`
-   * and `payment_method_id`), or a `confirmation_token` describing a method the
-   * buyer just supplied. Collection runs in the background: the response is the
-   * payment as created, not its outcome — poll Retrieve status for how far it has
-   * got and, for a confirmation-token payment, what the buyer must still do. Pass
-   * `plan_id` for an existing plan or `plan` to find or create one inline.
+   * Charges a buyer for one or more plans. Pass a payment method already on file
+   * (`member_id` and `payment_method_id`), or a `confirmation_token` describing a
+   * method the buyer just supplied. Collection runs in the background: the response
+   * is the payment as created, not its outcome — poll Retrieve status for how far it
+   * has got and, for a confirmation-token payment, what the buyer must still do.
+   * Pass `line_items` for one or more plans with quantities, `plan_id` for an
+   * existing plan, or `plan` to find or create one inline. These inputs are mutually
+   * exclusive.
    *
    * @example
    * ```ts
@@ -601,6 +603,13 @@ export interface PaymentCreateParams {
   email?: string | null;
 
   /**
+   * Body param: What the buyer is purchasing. One entry charges that plan; several
+   * entries form a cart, which requires every plan to be a compatible plan from this
+   * account in the same currency.
+   */
+  line_items?: Array<PaymentCreateParams.LineItem>;
+
+  /**
    * Body param: The member to charge, prefixed `mber_`. Required with
    * `payment_method_id` unless `confirmation_token` is provided.
    */
@@ -619,14 +628,14 @@ export interface PaymentCreateParams {
 
   /**
    * Body param: Find or create a plan for this payment. Mutually exclusive with
-   * `plan_id`. Creating a plan requires plan:create; creating or updating a product
-   * requires the corresponding product permission.
+   * `plan_id` and `line_items`. Creating a plan requires plan:create; creating or
+   * updating a product requires the corresponding product permission.
    */
   plan?: PaymentCreateParams.Plan;
 
   /**
    * Body param: The plan to charge for, prefixed `plan_`. It must belong to the
-   * account. Mutually exclusive with `plan`.
+   * account. Mutually exclusive with `plan` and `line_items`.
    */
   plan_id?: string;
 
@@ -665,10 +674,24 @@ export interface PaymentCreateParams {
 }
 
 export namespace PaymentCreateParams {
+  export interface LineItem {
+    /**
+     * An existing plan to charge for, prefixed `plan_`. Each plan may appear once —
+     * use `quantity` for multiple units.
+     */
+    plan_id: string;
+
+    /**
+     * How many units of the plan to purchase. Defaults to 1; more than 1 requires the
+     * plan to allow multiple quantities.
+     */
+    quantity?: number | null;
+  }
+
   /**
-   * Find or create a plan for this payment. Mutually exclusive with `plan_id`.
-   * Creating a plan requires plan:create; creating or updating a product requires
-   * the corresponding product permission.
+   * Find or create a plan for this payment. Mutually exclusive with `plan_id` and
+   * `line_items`. Creating a plan requires plan:create; creating or updating a
+   * product requires the corresponding product permission.
    */
   export interface Plan {
     /**
