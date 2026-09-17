@@ -19,6 +19,7 @@ export const SpecificFeeOrigins = {
     StripePayoutFee: "stripe_payout_fee",
     DisputeFee: "dispute_fee",
     DisputeAlertFee: "dispute_alert_fee",
+    DisputeRepresentmentFee: "dispute_representment_fee",
     AppleProcessingFee: "apple_processing_fee",
     BuyerFee: "buyer_fee",
     SezzleProcessingFee: "sezzle_processing_fee",
