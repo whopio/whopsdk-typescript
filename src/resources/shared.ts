@@ -2914,6 +2914,8 @@ export interface Payment {
    */
   last_payment_attempt_at: string | null;
 
+  line_items: Array<Payment.LineItem>;
+
   /**
    * The buyer's member record on the account, prefixed `mber_`. Null without the
    * member:basic:read permission.
@@ -3202,6 +3204,91 @@ export namespace Payment {
      * The state, province or region.
      */
     state: string | null;
+  }
+
+  /**
+   * Everything this payment charged for, in purchase order, with quantities and
+   * subtotals in the purchase currency. Payments made before item snapshots were
+   * recorded return the single item implied by their plan. Empty when no items or
+   * plan can be resolved.
+   */
+  export interface LineItem {
+    /**
+     * Line item ID, prefixed `li_`. Null when the payment predates item snapshots and
+     * the item is read from the payment's plan.
+     */
+    id: string | null;
+
+    /**
+     * The item's name as shown at checkout — the product title, else the plan title.
+     */
+    label: string | null;
+
+    /**
+     * The plan bought, prefixed `plan_`. Null when the plan has since been deleted.
+     */
+    plan_id: string | null;
+
+    /**
+     * The plan's current title, or `null` when the plan has been deleted or has no
+     * title.
+     */
+    plan_title: string | null;
+
+    /**
+     * The product the plan belongs to, prefixed `prod_`. On a payment that predates
+     * item snapshots this falls back to the plan's product, so it can be set where the
+     * parent's own `product_id` is null. Null for a plan with no product.
+     */
+    product_id: string | null;
+
+    /**
+     * The product's current title, or `null` when the item has no product.
+     */
+    product_title: string | null;
+
+    /**
+     * How many units were bought.
+     */
+    quantity: number;
+
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. Returns `null` when no item amount was recorded.
+     */
+    subtotal: LineItem.Subtotal | null;
+  }
+
+  export namespace LineItem {
+    /**
+     * The recorded amount for this item's full quantity, before discounts, tax, and
+     * fees, in its purchase currency. Returns `null` when no item amount was recorded.
+     */
+    export interface Subtotal {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
   }
 
   /**
