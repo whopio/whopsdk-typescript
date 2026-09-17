@@ -19,18 +19,20 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    action_type: "cut_losing_ad_spend",
+                    action_type: "improve_landing_page",
                     ai_chat_id: "ai_chat_id",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
                     id: "reca_xxxxxxxxxxxxxx",
-                    input: "Grow revenue",
+                    input: "more buyers",
                     prompt: "Create a 20% off promo code for my members.",
-                    reasoning: "Revenue fell by 20%.",
+                    reasoning: "Capped 9 of 14 days.",
+                    sentiment: "positive",
                     status: "queued",
                     superseded_at: "2026-01-01T12:00:00.000Z",
                     target_url: "https://example.com/join",
                     title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
+                    user_feedback: "user_feedback",
                 },
             ],
             page_info: {
@@ -172,18 +174,20 @@ describe("EconomicIntelligenceClient", () => {
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "cut_losing_ad_spend",
+            action_type: "improve_landing_page",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
             id: "reca_xxxxxxxxxxxxxx",
-            input: "Grow revenue",
+            input: "more buyers",
             prompt: "Create a 20% off promo code for my members.",
-            reasoning: "Revenue fell by 20%.",
+            reasoning: "Capped 9 of 14 days.",
+            sentiment: "positive",
             status: "queued",
             superseded_at: "2026-01-01T12:00:00.000Z",
             target_url: "https://example.com/join",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
+            user_feedback: "user_feedback",
         };
 
         server
@@ -294,21 +298,23 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "executed" };
+        const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "cut_losing_ad_spend",
+            action_type: "improve_landing_page",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
             id: "reca_xxxxxxxxxxxxxx",
-            input: "Grow revenue",
+            input: "more buyers",
             prompt: "Create a 20% off promo code for my members.",
-            reasoning: "Revenue fell by 20%.",
+            reasoning: "Capped 9 of 14 days.",
+            sentiment: "positive",
             status: "queued",
             superseded_at: "2026-01-01T12:00:00.000Z",
             target_url: "https://example.com/join",
             title: "Move $180 from 3 dead ad groups into BATCH#3, +1.7x return",
+            user_feedback: "user_feedback",
         };
 
         server
@@ -322,7 +328,6 @@ describe("EconomicIntelligenceClient", () => {
 
         const response = await client.economicIntelligence.update({
             id: "id",
-            status: "executed",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -336,7 +341,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "executed" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -351,7 +356,6 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "executed",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -365,7 +369,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "executed" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -380,7 +384,6 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "executed",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -394,7 +397,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "executed" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -409,7 +412,6 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "executed",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -423,7 +425,7 @@ describe("EconomicIntelligenceClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { status: "executed" };
+        const rawRequestBody = {};
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -438,7 +440,6 @@ describe("EconomicIntelligenceClient", () => {
         await expect(async () => {
             return await client.economicIntelligence.update({
                 id: "id",
-                status: "executed",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });

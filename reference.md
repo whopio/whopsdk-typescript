@@ -10829,7 +10829,7 @@ await client.economicIntelligence.create({
 <dl>
 <dd>
 
-Approves or rejects a recommendation and requests replacements.
+Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire it and request replacements; a rating alone leaves its status unchanged.
 </dd>
 </dl>
 </dd>
@@ -10845,8 +10845,7 @@ Approves or rejects a recommendation and requests replacements.
 
 ```typescript
 await client.economicIntelligence.update({
-    id: "id",
-    status: "executed"
+    id: "id"
 });
 
 ```

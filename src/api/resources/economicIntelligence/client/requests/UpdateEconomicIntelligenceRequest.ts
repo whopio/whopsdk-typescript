@@ -3,8 +3,7 @@
 /**
  * @example
  *     {
- *         id: "id",
- *         status: "executed"
+ *         id: "id"
  *     }
  */
 export interface UpdateEconomicIntelligenceRequest {
@@ -12,13 +11,21 @@ export interface UpdateEconomicIntelligenceRequest {
     id: string;
     /** Account ID, prefixed `biz_`. Defaults to the API key's own account. */
     account_id?: string;
-    /** Why the recommendation was rejected. Used as feedback when replenishing recommendations. */
-    reason?: string;
+    /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
+    sentiment?: UpdateEconomicIntelligenceRequest.Sentiment;
     /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
-    status: UpdateEconomicIntelligenceRequest.Status;
+    status?: UpdateEconomicIntelligenceRequest.Status;
+    /** An optional explanation of the rating or rejection. Negative feedback informs replacement recommendations. */
+    user_feedback?: string;
 }
 
 export namespace UpdateEconomicIntelligenceRequest {
+    /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
+    export const Sentiment = {
+        Positive: "positive",
+        Negative: "negative",
+    } as const;
+    export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
     /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
     export const Status = {
         Executed: "executed",
