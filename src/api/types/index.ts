@@ -17,6 +17,7 @@ export * from "./AccountFee.js";
 export * from "./AccountFeeMarkup.js";
 export * from "./AccountFeeMarkups.js";
 export * from "./AccountFeeRate.js";
+export * from "./AccountFeeRegionalRate.js";
 export * from "./AccountFees.js";
 export * from "./AccountLink.js";
 export * from "./AccountLinkUseCases.js";
