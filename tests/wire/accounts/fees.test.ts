@@ -34,42 +34,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -90,42 +181,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -146,42 +328,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -202,42 +475,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -414,42 +778,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -470,42 +925,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -526,42 +1072,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -582,42 +1219,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -638,42 +1366,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -694,42 +1513,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -750,42 +1660,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -806,42 +1807,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -862,42 +1954,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -918,42 +2101,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -974,42 +2248,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -1186,42 +2551,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -1241,9 +2697,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 15,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1259,10 +2732,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1277,10 +2764,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1298,9 +2799,26 @@ describe("FeesClient", () => {
                     region: "eu",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1316,10 +2834,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1337,9 +2869,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1358,9 +2907,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 1.5,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1376,10 +2942,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1397,9 +2977,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1415,10 +3012,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1433,10 +3044,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1454,9 +3079,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1472,10 +3114,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1493,9 +3149,26 @@ describe("FeesClient", () => {
                     region: "ph",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1514,9 +3187,26 @@ describe("FeesClient", () => {
                     region: "uk",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1532,10 +3222,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1550,10 +3254,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1571,9 +3289,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1592,9 +3327,26 @@ describe("FeesClient", () => {
                     region: "ke",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1613,9 +3365,23 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         mx: {
+                            default: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 4.9,
+                            },
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            minimum: null,
                             percentage: 4.9,
+                            reset: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 4.9,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1634,9 +3400,26 @@ describe("FeesClient", () => {
                     region: "ar",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1652,10 +3435,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1673,9 +3470,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1694,9 +3508,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1715,9 +3546,26 @@ describe("FeesClient", () => {
                     region: "pe",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1736,9 +3584,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1757,9 +3622,26 @@ describe("FeesClient", () => {
                     region: "ar",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1775,10 +3657,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1796,9 +3692,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1814,10 +3727,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 3 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1835,9 +3762,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "3.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1853,10 +3797,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1874,9 +3832,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1892,10 +3867,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1910,10 +3899,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1928,10 +3931,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -1949,9 +3966,26 @@ describe("FeesClient", () => {
                     region: "eu",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1970,9 +4004,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -1991,9 +4042,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 1.5,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2012,9 +4080,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2033,9 +4118,26 @@ describe("FeesClient", () => {
                     region: "uk",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2054,9 +4156,26 @@ describe("FeesClient", () => {
                     region: "pe",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2072,10 +4191,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -2095,9 +4228,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "30.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2113,10 +4263,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 0 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -2134,9 +4298,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2155,9 +4336,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2176,9 +4374,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2197,9 +4412,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -2222,42 +4454,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2278,42 +4601,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2334,42 +4748,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2390,42 +4895,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2446,42 +5042,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2502,42 +5189,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2558,42 +5336,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2614,42 +5483,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2752,42 +5712,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2808,42 +5859,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2864,42 +6006,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2920,42 +6153,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3132,42 +6456,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3188,42 +6603,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3244,42 +6750,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3300,42 +6897,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3356,42 +7044,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3412,42 +7191,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3468,42 +7338,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3524,42 +7485,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3580,42 +7632,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3636,42 +7779,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3692,42 +7926,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3904,42 +8229,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3959,9 +8375,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 15,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -3977,10 +8410,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -3995,10 +8442,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4016,9 +8477,26 @@ describe("FeesClient", () => {
                     region: "eu",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4034,10 +8512,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4055,9 +8547,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4076,9 +8585,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 1.5,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4094,10 +8620,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4115,9 +8655,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4133,10 +8690,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4151,10 +8722,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4172,9 +8757,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4190,10 +8792,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4211,9 +8827,26 @@ describe("FeesClient", () => {
                     region: "ph",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4232,9 +8865,26 @@ describe("FeesClient", () => {
                     region: "uk",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4250,10 +8900,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4268,10 +8932,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4289,9 +8967,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4310,9 +9005,26 @@ describe("FeesClient", () => {
                     region: "ke",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4331,9 +9043,23 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         mx: {
+                            default: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 4.9,
+                            },
                             fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            minimum: null,
                             percentage: 4.9,
+                            reset: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 4.9,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4352,9 +9078,26 @@ describe("FeesClient", () => {
                     region: "ar",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4370,10 +9113,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4391,9 +9148,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4412,9 +9186,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4433,9 +9224,26 @@ describe("FeesClient", () => {
                     region: "pe",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4454,9 +9262,26 @@ describe("FeesClient", () => {
                     region: "co",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4475,9 +9300,26 @@ describe("FeesClient", () => {
                     region: "ar",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4493,10 +9335,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4514,9 +9370,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4532,10 +9405,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 3 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4553,9 +9440,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "3.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4571,10 +9475,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4592,9 +9510,26 @@ describe("FeesClient", () => {
                     region: "mx",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4610,10 +9545,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4628,10 +9577,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4646,10 +9609,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4667,9 +9644,26 @@ describe("FeesClient", () => {
                     region: "eu",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4688,9 +9682,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 2.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4709,9 +9720,26 @@ describe("FeesClient", () => {
                     region: "usa",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 1.5,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4730,9 +9758,26 @@ describe("FeesClient", () => {
                     region: "cl",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 4.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4751,9 +9796,26 @@ describe("FeesClient", () => {
                     region: "uk",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4772,9 +9834,26 @@ describe("FeesClient", () => {
                     region: "pe",
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4790,10 +9869,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 15 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4813,9 +9906,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "30.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4831,10 +9941,24 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
                     },
+                    reset: { fixed: null, percentage: 0 },
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
@@ -4852,9 +9976,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4873,9 +10014,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4894,9 +10052,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4915,9 +10090,26 @@ describe("FeesClient", () => {
                     region: null,
                     regions: {
                         key: {
+                            default: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
                             fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            percentage: 0,
+                            minimum: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            percentage: null,
+                            reset: {
+                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 0,
+                            },
+                            source: "default",
                         },
+                    },
+                    reset: {
+                        fixed: { amount: "2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: null,
                     },
                     source: "default",
                     unadjustable_reason: "not_permitted",
@@ -4940,42 +10132,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -4996,42 +10279,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5052,42 +10426,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5108,42 +10573,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5164,42 +10720,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5220,42 +10867,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5276,42 +11014,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -5332,42 +11161,133 @@ describe("FeesClient", () => {
                 region: "usa",
                 regions: {
                     ar: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     au: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     ca: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                     cl: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     co: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     eu: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
+                        minimum: null,
+                        percentage: 2.5,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.6,
+                        },
+                        source: "custom",
                     },
                     mx: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.9,
+                        },
+                        source: "default",
                     },
                     pe: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 4.9,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 4.9,
+                        },
+                        source: "default",
                     },
                     uk: {
+                        default: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
                         fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        minimum: null,
                         percentage: 2.7,
+                        reset: {
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            percentage: 2.7,
+                        },
+                        source: "default",
                     },
                 },
+                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },

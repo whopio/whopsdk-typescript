@@ -7,7 +7,7 @@ export interface AccountFee {
     adjustable: boolean;
     /** Which group of the fee schedule this fee belongs to, for grouping in a UI. */
     category: AccountFee.Category;
-    /** The platform rate with no custom deal: what applies if the custom rate is cleared. */
+    /** The platform rate before custom or inherited pricing is applied. */
     default: Whop.AccountFeeRate;
     /** When a custom or inherited rate expires and the fee returns to `default`, as an ISO 8601 timestamp. `null` when the default applies or the rate does not expire. */
     ends_at: string | null;
@@ -19,8 +19,10 @@ export interface AccountFee {
     percentage: number | null;
     /** The acquirer region `percentage` and `fixed` describe, for a fee that varies by where the money is processed. `null` for a fee that does not vary by region. */
     region: AccountFee.Region | null;
-    /** The rate in every other region this fee varies by, keyed by region. Empty for a fee that does not vary by region. */
-    regions: Record<string, Whop.AccountFeeRate>;
+    /** The rate, source, default, reset rate, and editable minimum in every other region this fee varies by, keyed by region. Empty for a fee that does not vary by region. */
+    regions: Record<string, Whop.AccountFeeRegionalRate>;
+    /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. */
+    reset: Whop.AccountFeeRate;
     /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
     source: AccountFee.Source;
     /** Why the caller may not change this fee, or `null` when `adjustable`. `not_permitted` when the caller has no say over it. */
