@@ -102,7 +102,7 @@ describe("FinancialActivityClient", () => {
 
         server
             .mockEndpoint()
-            .get("/financial-activity")
+            .get("/financial_activity")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
@@ -126,7 +126,7 @@ describe("FinancialActivityClient", () => {
 
         server
             .mockEndpoint()
-            .get("/financial-activity")
+            .get("/financial_activity")
             .respondWith()
             .statusCode(400)
             .jsonBody(rawResponseBody)
@@ -151,7 +151,7 @@ describe("FinancialActivityClient", () => {
 
         server
             .mockEndpoint()
-            .get("/financial-activity")
+            .get("/financial_activity")
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
@@ -176,7 +176,7 @@ describe("FinancialActivityClient", () => {
 
         server
             .mockEndpoint()
-            .get("/financial-activity")
+            .get("/financial_activity")
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
@@ -201,7 +201,7 @@ describe("FinancialActivityClient", () => {
 
         server
             .mockEndpoint()
-            .get("/financial-activity")
+            .get("/financial_activity")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)

@@ -104,7 +104,7 @@ export class FinancialActivityClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.WhopEnvironment.Default,
-                "financial-activity",
+                "financial_activity",
             ),
             method: "GET",
             headers: _headers,
@@ -142,6 +142,6 @@ export class FinancialActivityClient {
             }
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/financial-activity");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/financial_activity");
     }
 }
