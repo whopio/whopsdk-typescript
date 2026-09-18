@@ -5,8 +5,6 @@ import type * as Whop from "../index.js";
 export interface AccountFees {
     /** The account these fees are charged to, prefixed `biz_`. */
     account_id: string;
-    /** Charged on Whop Ads spend. */
-    ads: Whop.AccountFee;
     /** Charged on bank deposits into the account's balance. */
     bank_deposit: Whop.AccountFee;
     /** Charged on recurring billing. */

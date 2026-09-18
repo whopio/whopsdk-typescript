@@ -10,8 +10,6 @@ export interface UpdateFeesRequest {
     /** Account ID, prefixed `biz_`. */
     account_id: string;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
-    ads?: UpdateFeesRequest.Ads;
-    /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     bank_deposit?: UpdateFeesRequest.BankDeposit;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     billing?: UpdateFeesRequest.Billing;
@@ -72,29 +70,6 @@ export interface UpdateFeesRequest {
 }
 
 export namespace UpdateFeesRequest {
-    /**
-     * The fields of a fee the caller may change. Only the keys sent are replaced.
-     */
-    export interface Ads {
-        /** The new amount per event in US dollars. `null` clears the custom amount. */
-        fixed?: (number | null) | undefined;
-        /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
-        percentage?: (number | null) | undefined;
-        /** Changes for the other regions the fee varies by, keyed by region. Only accepted on a fee whose `regions` is non-empty. */
-        regions?: Record<string, Ads.Regions.Value> | undefined;
-    }
-
-    export namespace Ads {
-        export namespace Regions {
-            export interface Value {
-                /** The new amount per event in US dollars. `null` clears the custom amount. */
-                fixed?: (number | null) | undefined;
-                /** The new percentage, where `2` means 2%. `null` clears the custom rate so the fee returns to its default or inherited rate. */
-                percentage?: (number | null) | undefined;
-            }
-        }
-    }
-
     /**
      * The fields of a fee the caller may change. Only the keys sent are replaced.
      */
