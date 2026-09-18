@@ -55,6 +55,7 @@ import { MembersClient } from "./api/resources/members/client/Client.js";
 import { MembershipsClient } from "./api/resources/memberships/client/Client.js";
 import { MessagesClient } from "./api/resources/messages/client/Client.js";
 import { NotificationsClient } from "./api/resources/notifications/client/Client.js";
+import { PartnerReferralRequestsClient } from "./api/resources/partnerReferralRequests/client/Client.js";
 import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PaymentMethodDomainsClient } from "./api/resources/paymentMethodDomains/client/Client.js";
 import { PaymentMethodsClient } from "./api/resources/paymentMethods/client/Client.js";
@@ -151,6 +152,7 @@ export class WhopClient {
     protected _memberships: MembershipsClient | undefined;
     protected _messages: MessagesClient | undefined;
     protected _notifications: NotificationsClient | undefined;
+    protected _partnerReferralRequests: PartnerReferralRequestsClient | undefined;
     protected _partners: PartnersClient | undefined;
     protected _paymentMethodDomains: PaymentMethodDomainsClient | undefined;
     protected _paymentMethods: PaymentMethodsClient | undefined;
@@ -403,6 +405,10 @@ export class WhopClient {
 
     public get notifications(): NotificationsClient {
         return (this._notifications ??= new NotificationsClient(this._options));
+    }
+
+    public get partnerReferralRequests(): PartnerReferralRequestsClient {
+        return (this._partnerReferralRequests ??= new PartnerReferralRequestsClient(this._options));
     }
 
     public get partners(): PartnersClient {
