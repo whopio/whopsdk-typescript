@@ -30,6 +30,7 @@ export namespace AccountRequiredAction {
         UpdatePayoutProfile: "update_payout_profile",
         CardUsageReview: "card_usage_review",
         VerifyIdentity: "verify_identity",
+        VerifyAirwallexAccount: "verify_airwallex_account",
         SignFormationDocuments: "sign_formation_documents",
         ConnectFulfillmentTracker: "connect_fulfillment_tracker",
         SetupApplePayDomains: "setup_apple_pay_domains",
