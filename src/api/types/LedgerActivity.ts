@@ -96,6 +96,7 @@ export namespace LedgerActivity {
         DisputeAlertFee: "dispute_alert_fee",
         DisputeHoldAdjustment: "dispute_hold_adjustment",
         DisputeRepresentmentFee: "dispute_representment_fee",
+        EconomicIntelligencePercentageFee: "economic_intelligence_percentage_fee",
         ExternalCardLoadDeposit: "external_card_load_deposit",
         FraudPreventionFee: "fraud_prevention_fee",
         FxPercentageFee: "fx_percentage_fee",

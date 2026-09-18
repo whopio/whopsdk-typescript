@@ -186,6 +186,7 @@ export namespace RetrieveFinancialReportsResponse {
                 DisputeSettlementReversal: "dispute_settlement_reversal",
                 DisputeUnreconciledClearing: "dispute_unreconciled_clearing",
                 DisputeUnreconciledReversal: "dispute_unreconciled_reversal",
+                EconomicIntelligencePercentageFee: "economic_intelligence_percentage_fee",
                 ExternalAccountConnectionFee: "external_account_connection_fee",
                 ExternalCardLoadDeposit: "external_card_load_deposit",
                 ExternalCardLoadOffset: "external_card_load_offset",
