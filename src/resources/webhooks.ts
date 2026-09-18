@@ -1133,6 +1133,13 @@ export namespace AccountFinancingApprovedWebhookEvent {
      * it also adds a `website` entry to `social_links`.
      */
     website: string | null;
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    partner?: Data.Partner | null;
   }
 
   export namespace Data {
@@ -2478,6 +2485,54 @@ export namespace AccountFinancingApprovedWebhookEvent {
        * The blockchain network the wallet lives on
        */
       network: 'solana' | 'ethereum' | 'bitcoin';
+    }
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    export interface Partner {
+      /**
+       * User ID, prefixed `user_`.
+       */
+      id: string;
+
+      /**
+       * Email address for contacting the partner. Null when the partner has not added
+       * their own email address.
+       */
+      email: string | null;
+
+      /**
+       * Display name.
+       */
+      name: string | null;
+
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      profile_picture: Partner.ProfilePicture;
+
+      /**
+       * Public username.
+       */
+      username: string;
+    }
+
+    export namespace Partner {
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      export interface ProfilePicture {
+        /**
+         * Avatar image URL. Always present — a generated placeholder when the user set no
+         * picture.
+         */
+        url: string;
+      }
     }
   }
 }
@@ -2862,6 +2917,13 @@ export namespace AccountFinancingDeniedWebhookEvent {
      * it also adds a `website` entry to `social_links`.
      */
     website: string | null;
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    partner?: Data.Partner | null;
   }
 
   export namespace Data {
@@ -4207,6 +4269,54 @@ export namespace AccountFinancingDeniedWebhookEvent {
        * The blockchain network the wallet lives on
        */
       network: 'solana' | 'ethereum' | 'bitcoin';
+    }
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    export interface Partner {
+      /**
+       * User ID, prefixed `user_`.
+       */
+      id: string;
+
+      /**
+       * Email address for contacting the partner. Null when the partner has not added
+       * their own email address.
+       */
+      email: string | null;
+
+      /**
+       * Display name.
+       */
+      name: string | null;
+
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      profile_picture: Partner.ProfilePicture;
+
+      /**
+       * Public username.
+       */
+      username: string;
+    }
+
+    export namespace Partner {
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      export interface ProfilePicture {
+        /**
+         * Avatar image URL. Always present — a generated placeholder when the user set no
+         * picture.
+         */
+        url: string;
+      }
     }
   }
 }
@@ -4591,6 +4701,13 @@ export namespace AccountUpdatedWebhookEvent {
      * it also adds a `website` entry to `social_links`.
      */
     website: string | null;
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    partner?: Data.Partner | null;
   }
 
   export namespace Data {
@@ -5936,6 +6053,54 @@ export namespace AccountUpdatedWebhookEvent {
        * The blockchain network the wallet lives on
        */
       network: 'solana' | 'ethereum' | 'bitcoin';
+    }
+
+    /**
+     * The account's active first-tier partner. Present on retrieve responses; null
+     * when no active first-tier partner is attributed to the account. Omitted from
+     * other responses.
+     */
+    export interface Partner {
+      /**
+       * User ID, prefixed `user_`.
+       */
+      id: string;
+
+      /**
+       * Email address for contacting the partner. Null when the partner has not added
+       * their own email address.
+       */
+      email: string | null;
+
+      /**
+       * Display name.
+       */
+      name: string | null;
+
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      profile_picture: Partner.ProfilePicture;
+
+      /**
+       * Public username.
+       */
+      username: string;
+    }
+
+    export namespace Partner {
+      /**
+       * Avatar wrapper; its `url` is always present, using a generated placeholder when
+       * the user set no picture.
+       */
+      export interface ProfilePicture {
+        /**
+         * Avatar image URL. Always present — a generated placeholder when the user set no
+         * picture.
+         */
+        url: string;
+      }
     }
   }
 }
