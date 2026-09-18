@@ -479,7 +479,8 @@ export namespace PaymentListFeesResponse {
       | 'billing_percentage_fee'
       | 'revshare_percentage_fee'
       | 'application_fee'
-      | 'high_risk_merchant_fee';
+      | 'high_risk_merchant_fee'
+      | 'economic_intelligence_percentage_fee';
 
     /**
      * The fee converted to the payment's settlement currency, so lines can be totalled
