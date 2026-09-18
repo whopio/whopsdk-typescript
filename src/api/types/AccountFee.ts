@@ -13,13 +13,15 @@ export interface AccountFee {
     ends_at: string | null;
     /** The amount charged per event in effect. `null` when the fee has no fixed component. */
     fixed: Whop.Money | null;
+    /** The highest rate the caller may set. `null` when the fee is not adjustable or the caller is not capped. */
+    maximum: Whop.AccountFeeRate | null;
     /** The lowest rate the caller may set, present only when `adjustable`. */
     minimum: Whop.AccountFeeRate | null;
     /** The percentage of the transaction in effect, where `2` means 2%. `null` when the fee has no percentage component. */
     percentage: number | null;
     /** The acquirer region `percentage` and `fixed` describe, for a fee that varies by where the money is processed. `null` for a fee that does not vary by region. */
     region: AccountFee.Region | null;
-    /** The rate, source, default, reset rate, and editable minimum in every other region this fee varies by, keyed by region. Empty for a fee that does not vary by region. */
+    /** The rate, source, default, reset rate, and editable limits in every other region this fee varies by, keyed by region. Empty for a fee that does not vary by region. */
     regions: Record<string, Whop.AccountFeeRegionalRate>;
     /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. */
     reset: Whop.AccountFeeRate;
