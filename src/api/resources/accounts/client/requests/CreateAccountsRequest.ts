@@ -11,7 +11,7 @@ export interface CreateAccountsRequest {
     blueprint_id?: string | null;
     /** The ISO 3166-1 alpha-2 country code where the account's business is located (e.g. `US`). Defaults to the parent account's country for connected accounts. */
     country?: string;
-    /** The email address of the account owner. Required for Account API key requests. */
+    /** The email address of the account owner. Required when creating a connected account. */
     email?: string;
     /** Arbitrary key/value metadata to store on the account. */
     metadata?: Record<string, unknown>;
