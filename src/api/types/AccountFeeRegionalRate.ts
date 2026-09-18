@@ -7,6 +7,8 @@ export interface AccountFeeRegionalRate {
     default: Whop.AccountFeeRate;
     /** The amount charged per event in effect. `null` when the fee has no fixed component. */
     fixed: Whop.Money | null;
+    /** The highest regional rate the caller may set. `null` when the fee is not adjustable or the caller is not capped. */
+    maximum: Whop.AccountFeeRate | null;
     /** The lowest regional rate the caller may set, present only when the fee is adjustable. */
     minimum: Whop.AccountFeeRate | null;
     /** The percentage of the transaction in effect, where `2` means 2%. `null` when the fee has no percentage component. */
