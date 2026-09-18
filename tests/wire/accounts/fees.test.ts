@@ -17,62 +17,6 @@ describe("FeesClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            ads: {
-                adjustable: false,
-                category: "payments",
-                default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                    percentage: 0,
-                },
-                ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                    percentage: 0,
-                },
-                percentage: 2.4,
-                region: "usa",
-                regions: {
-                    ar: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    au: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    ca: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    cl: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    co: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    eu: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    mx: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    pe: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 4.9,
-                    },
-                    uk: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                },
-                source: "default",
-                unadjustable_reason: "not_permitted",
-            },
             bank_deposit: {
                 adjustable: false,
                 category: "payments",
@@ -2791,62 +2735,6 @@ describe("FeesClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            ads: {
-                adjustable: false,
-                category: "payments",
-                default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                    percentage: 0,
-                },
-                ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                    percentage: 0,
-                },
-                percentage: 2.4,
-                region: "usa",
-                regions: {
-                    ar: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    au: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    ca: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    cl: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    co: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    eu: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                    mx: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.9,
-                    },
-                    pe: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 4.9,
-                    },
-                    uk: {
-                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
-                        percentage: 2.7,
-                    },
-                },
-                source: "default",
-                unadjustable_reason: "not_permitted",
-            },
             bank_deposit: {
                 adjustable: false,
                 category: "payments",
