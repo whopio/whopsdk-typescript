@@ -61,6 +61,8 @@ export interface Account {
     owner: Whop.UserSummary;
     /** Parent account for connected accounts, or `null` for standalone accounts. */
     parent_account: Whop.AccountParent | null;
+    /** The account's active first-tier partner. Present on retrieve responses; null when no active first-tier partner is attributed to the account. Omitted from other responses. */
+    partner?: (Whop.AccountPartner | null) | undefined;
     /** Payment health controls currently applied to the account. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise. */
     payment_controls: Whop.AccountPaymentControls | null;
     /** The account's privacy policy document, or `null` if they have not published one. */

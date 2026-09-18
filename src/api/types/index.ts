@@ -21,6 +21,7 @@ export * from "./AccountFees.js";
 export * from "./AccountLink.js";
 export * from "./AccountLinkUseCases.js";
 export * from "./AccountParent.js";
+export * from "./AccountPartner.js";
 export * from "./AccountPaymentControls.js";
 export * from "./AccountPreferences.js";
 export * from "./AccountRecommendedAction.js";

@@ -148,6 +148,13 @@ describe("AccountsClient", () => {
                         route: "shine-time-holdings",
                         title: "Shine Time Holdings",
                     },
+                    partner: {
+                        email: null,
+                        id: "id",
+                        name: null,
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "username",
+                    },
                     payment_controls: {
                         dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
                         dispute_alert_fee_usd: 29,
@@ -528,6 +535,13 @@ describe("AccountsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-holdings",
                 title: "Shine Time Holdings",
+            },
+            partner: {
+                email: "email",
+                id: "id",
+                name: "name",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "username",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -938,6 +952,13 @@ describe("AccountsClient", () => {
                 route: "shine-time-holdings",
                 title: "Shine Time Holdings",
             },
+            partner: {
+                email: "email",
+                id: "id",
+                name: "name",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "username",
+            },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
                 dispute_alert_fee_usd: 29,
@@ -1273,6 +1294,13 @@ describe("AccountsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-holdings",
                 title: "Shine Time Holdings",
+            },
+            partner: {
+                email: "email",
+                id: "id",
+                name: "name",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "username",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -1636,6 +1664,13 @@ describe("AccountsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-holdings",
                 title: "Shine Time Holdings",
+            },
+            partner: {
+                email: "email",
+                id: "id",
+                name: "name",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "username",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -2668,6 +2703,13 @@ describe("AccountsClient", () => {
                     "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 route: "shine-time-holdings",
                 title: "Shine Time Holdings",
+            },
+            partner: {
+                email: "email",
+                id: "id",
+                name: "name",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "username",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
