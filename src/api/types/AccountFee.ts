@@ -55,6 +55,7 @@ export namespace AccountFee {
         Cr: "cr",
         Gt: "gt",
         Uy: "uy",
+        Br: "br",
         Ph: "ph",
     } as const;
     export type Region = (typeof Region)[keyof typeof Region];
