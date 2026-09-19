@@ -30,6 +30,21 @@ describe("PartnerReferralRequestsClient", () => {
                         username: "danawhitfield",
                     },
                     request_type: "manual",
+                    rewards: [
+                        {
+                            bot_qualification_type: null,
+                            id: "id",
+                            qualification_amount: {
+                                amount: "-2.50",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            recipient: null,
+                            recipient_id: null,
+                            reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                    ],
                     status: "pending",
                     updated_at: "2026-01-01T12:00:00.000Z",
                 },
@@ -157,6 +172,16 @@ describe("PartnerReferralRequestsClient", () => {
                 username: "danawhitfield",
             },
             request_type: "manual",
+            rewards: [
+                {
+                    bot_qualification_type: "sales",
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    recipient: "business",
+                    recipient_id: "recipient_id",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
         };
@@ -339,6 +364,16 @@ describe("PartnerReferralRequestsClient", () => {
                 username: "danawhitfield",
             },
             request_type: "manual",
+            rewards: [
+                {
+                    bot_qualification_type: "sales",
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    recipient: "business",
+                    recipient_id: "recipient_id",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
         };
@@ -461,6 +496,16 @@ describe("PartnerReferralRequestsClient", () => {
                 username: "danawhitfield",
             },
             request_type: "manual",
+            rewards: [
+                {
+                    bot_qualification_type: "sales",
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    recipient: "business",
+                    recipient_id: "recipient_id",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
         };
@@ -610,6 +655,16 @@ describe("PartnerReferralRequestsClient", () => {
                 username: "danawhitfield",
             },
             request_type: "manual",
+            rewards: [
+                {
+                    bot_qualification_type: "sales",
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    recipient: "business",
+                    recipient_id: "recipient_id",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
         };
@@ -759,6 +814,16 @@ describe("PartnerReferralRequestsClient", () => {
                 username: "danawhitfield",
             },
             request_type: "manual",
+            rewards: [
+                {
+                    bot_qualification_type: "sales",
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    recipient: "business",
+                    recipient_id: "recipient_id",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
         };

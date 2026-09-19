@@ -17,6 +17,7 @@ export interface PartnerReferralRequest {
     partner: Whop.UserSummary;
     /** How the referral request was initiated. */
     request_type: PartnerReferralRequest.RequestType;
+    rewards: Whop.PartnerReferralReward[];
     /** The approval state, or null for requests without an approval process. */
     status: PartnerReferralRequest.Status | null;
     /** When the request last changed, as an ISO 8601 timestamp. */
