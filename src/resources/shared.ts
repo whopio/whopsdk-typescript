@@ -3504,9 +3504,10 @@ export namespace Payment {
   }
 
   /**
-   * The account's own payment rules that matched this payment, recorded when they
-   * ran. Empty when none matched, when the account had no rules, or when Whop
-   * blocked the payment before they ran.
+   * The account's own payment rules that decided this payment, recorded when they
+   * ran. Only one action is taken per payment, so a rule that matched but was
+   * skipped or outranked is not listed. Empty when none decided it, when the account
+   * had no rules, or when Whop blocked the payment before they ran.
    */
   export interface PaymentRuleMatch {
     /**
