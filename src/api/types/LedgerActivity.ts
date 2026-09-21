@@ -133,6 +133,7 @@ export namespace LedgerActivity {
         OnchainWalletTransferOutgoing: "onchain_wallet_transfer_outgoing",
         OnchainWithdrawal: "onchain_withdrawal",
         OrchestrationPercentageFee: "orchestration_percentage_fee",
+        PartnerGrantReward: "partner_grant_reward",
         PassthroughGmv: "passthrough_gmv",
         PaymentDispute: "payment_dispute",
         PaymentDisputeAdjustment: "payment_dispute_adjustment",
