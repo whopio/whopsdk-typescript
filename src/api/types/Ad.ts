@@ -87,6 +87,8 @@ export interface Ad {
     multi_advertiser_ads?: boolean | undefined;
     /** The advertiser-uploaded MP3 a TikTok carousel ad plays. TikTok-only; `null` elsewhere and for non-carousel ads. */
     music?: (Whop.AdMusic | null) | undefined;
+    /** The ad platform this ad runs on. */
+    platform: Ad.Platform;
     /** The post the ad network serves for this ad, as `pageID_postID` on Meta — the post Meta created for an uploaded creative, or the post being promoted. Use it to open the live post, or to promote the same post from another ad. `null` until the network has created the post. */
     post_id: string | null;
     /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
@@ -193,6 +195,12 @@ export namespace Ad {
         Active: "active",
     } as const;
     export type DeliveryStatus = (typeof DeliveryStatus)[keyof typeof DeliveryStatus];
+    /** The ad platform this ad runs on. */
+    export const Platform = {
+        Meta: "meta",
+        Tiktok: "tiktok",
+    } as const;
+    export type Platform = (typeof Platform)[keyof typeof Platform];
     /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */
     export const PostSource = {
         Facebook: "facebook",

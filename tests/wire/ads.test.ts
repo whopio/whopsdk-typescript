@@ -124,6 +124,7 @@ describe("AdsClient", () => {
                     },
                     multi_advertiser_ads: true,
                     music: { id: "id", name: null, url: null },
+                    platform: "meta",
                     post_id: "xxxxxxxxxxxxxxxx_98765",
                     post_source: "facebook",
                     post_thumbnail_url:
@@ -328,6 +329,7 @@ describe("AdsClient", () => {
             },
             multi_advertiser_ads: true,
             music: { id: "id", name: "name", url: "url" },
+            platform: "meta",
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -557,6 +559,7 @@ describe("AdsClient", () => {
             },
             multi_advertiser_ads: true,
             music: { id: "id", name: "name", url: "url" },
+            platform: "meta",
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -765,6 +768,7 @@ describe("AdsClient", () => {
             },
             multi_advertiser_ads: true,
             music: { id: "id", name: "name", url: "url" },
+            platform: "meta",
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -929,6 +933,7 @@ describe("AdsClient", () => {
                     },
                     multi_advertiser_ads: true,
                     music: { id: "id", name: null, url: null },
+                    platform: "meta",
                     post_id: "xxxxxxxxxxxxxxxx_98765",
                     post_source: "facebook",
                     post_thumbnail_url:
@@ -1168,6 +1173,7 @@ describe("AdsClient", () => {
             },
             multi_advertiser_ads: true,
             music: { id: "id", name: "name", url: "url" },
+            platform: "meta",
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:
@@ -1335,6 +1341,7 @@ describe("AdsClient", () => {
             },
             multi_advertiser_ads: true,
             music: { id: "id", name: "name", url: "url" },
+            platform: "meta",
             post_id: "xxxxxxxxxxxxxxxx_98765",
             post_source: "facebook",
             post_thumbnail_url:

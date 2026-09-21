@@ -100,6 +100,8 @@ export interface AdGroup {
     /** The result the ad group's delivery is optimized to get the most of. */
     optimization_goal: AdGroup.OptimizationGoal | null;
     placements: Whop.AdGroupPlacement[];
+    /** The ad platform this ad group runs on. */
+    platform: AdGroup.Platform;
     /** USD value of pixel-attributed purchases. */
     purchase_value: number;
     /** Whop pixel-attributed purchases, last-click. */
@@ -225,6 +227,12 @@ export namespace AdGroup {
         ProfileAndPageEngagement: "profile_and_page_engagement",
     } as const;
     export type OptimizationGoal = (typeof OptimizationGoal)[keyof typeof OptimizationGoal];
+    /** The ad platform this ad group runs on. */
+    export const Platform = {
+        Meta: "meta",
+        Tiktok: "tiktok",
+    } as const;
+    export type Platform = (typeof Platform)[keyof typeof Platform];
     /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
     export const ResultEvent = {
         Purchase: "purchase",
