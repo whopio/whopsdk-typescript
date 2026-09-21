@@ -4,7 +4,7 @@ import * as Whop from "../../src/api/index";
 import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
-describe("ApiKeysClient", () => {
+describe("WaitlistEntriesClient", () => {
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -18,25 +18,19 @@ describe("ApiKeysClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    api_version_date: "2025-01-01",
+                    account_id: "biz_xxxxxxxxxxxxxx",
+                    approval_failure_reason: "plan_unavailable",
+                    buyer_account_id: "buyer_account_id",
                     created_at: "2026-01-01T12:00:00.000Z",
-                    expires_at: "2026-01-01T12:00:00.000Z",
-                    grants: [
-                        {
-                            actions: [{ action: "ai_prompt:create", granted: false }],
-                            resource_id: "biz_xxxxxxxxxxxxxx",
-                            resource_type: "account",
-                        },
-                    ],
-                    id: "apik_xxxxxxxxxxxxxx",
-                    ip_allowlist: ["203.0.113.0/24"],
-                    is_default_for_resource: false,
-                    name: "Shine Time Booking (admin role)",
-                    obfuscated_secret_key: "apik_xxxx....xxxx",
-                    secret_key:
-                        "apik_xxxxxxxxxxxxxx_C0000_C_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    system_role: "owner",
+                    custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+                    id: "entry_xxxxxxxxxxxxxx",
+                    membership_id: "membership_id",
+                    metadata: { key: "value" },
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    status: "pending",
                     updated_at: "2026-01-01T12:00:00.000Z",
+                    user_id: "user_xxxxxxxxxxxxxx",
                 },
             ],
             page_info: {
@@ -49,17 +43,14 @@ describe("ApiKeysClient", () => {
 
         server
             .mockEndpoint({ once: false })
-            .get("/api_keys")
+            .get("/waitlist_entries")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.apiKeys.list({
-            resource_id: "resource_id",
-            resource_type: "account",
-        });
+        const page = await client.waitlistEntries.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -79,13 +70,10 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/waitlist_entries").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.apiKeys.list({
-                resource_id: "resource_id",
-                resource_type: "account",
-            });
+            return await client.waitlistEntries.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -101,13 +89,10 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/waitlist_entries").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.apiKeys.list({
-                resource_id: "resource_id",
-                resource_type: "account",
-            });
+            return await client.waitlistEntries.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -123,13 +108,10 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/waitlist_entries").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.apiKeys.list({
-                resource_id: "resource_id",
-                resource_type: "account",
-            });
+            return await client.waitlistEntries.list();
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
@@ -145,13 +127,10 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/waitlist_entries").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.apiKeys.list({
-                resource_id: "resource_id",
-                resource_type: "account",
-            });
+            return await client.waitlistEntries.list();
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
@@ -164,47 +143,34 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            name: "Shine Time Booking (production)",
-            permissions: {},
-            resource_id: "biz_xxxxxxxxxxxxxx",
-            resource_type: "account",
-        };
+        const rawRequestBody = { plan_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            api_version_date: "2025-01-01",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            approval_failure_reason: "plan_unavailable",
+            buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
-            expires_at: "2026-01-01T12:00:00.000Z",
-            grants: [
-                {
-                    actions: [{ action: "ai_prompt:create", granted: false }],
-                    resource_id: "biz_xxxxxxxxxxxxxx",
-                    resource_type: "account",
-                },
-            ],
-            id: "apik_xxxxxxxxxxxxxx",
-            ip_allowlist: ["203.0.113.0/24"],
-            is_default_for_resource: false,
-            name: "Shine Time Booking (admin role)",
-            obfuscated_secret_key: "apik_xxxx....xxxx",
-            secret_key: "apik_xxxxxxxxxxxxxx_C0000_C_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            system_role: "owner",
+            custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+            id: "entry_xxxxxxxxxxxxxx",
+            membership_id: "membership_id",
+            metadata: { key: "value" },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
         };
 
         server
             .mockEndpoint()
-            .post("/api_keys")
+            .post("/waitlist_entries")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.apiKeys.create({
-            name: "Shine Time Booking (production)",
-            permissions: {},
-            resource_id: "biz_xxxxxxxxxxxxxx",
-            resource_type: "account",
+        const response = await client.waitlistEntries.create({
+            plan_id: "plan_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -218,12 +184,12 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { name: "name", permissions: {}, resource_id: "resource_id", resource_type: "account" };
+        const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .post("/api_keys")
+            .post("/waitlist_entries")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(400)
@@ -231,11 +197,8 @@ describe("ApiKeysClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.create({
-                name: "name",
-                permissions: {},
-                resource_id: "resource_id",
-                resource_type: "account",
+            return await client.waitlistEntries.create({
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -249,12 +212,12 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { name: "name", permissions: {}, resource_id: "resource_id", resource_type: "account" };
+        const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .post("/api_keys")
+            .post("/waitlist_entries")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
@@ -262,11 +225,8 @@ describe("ApiKeysClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.create({
-                name: "name",
-                permissions: {},
-                resource_id: "resource_id",
-                resource_type: "account",
+            return await client.waitlistEntries.create({
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -280,12 +240,12 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { name: "name", permissions: {}, resource_id: "resource_id", resource_type: "account" };
+        const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .post("/api_keys")
+            .post("/waitlist_entries")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(403)
@@ -293,11 +253,8 @@ describe("ApiKeysClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.create({
-                name: "name",
-                permissions: {},
-                resource_id: "resource_id",
-                resource_type: "account",
+            return await client.waitlistEntries.create({
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -311,12 +268,40 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { name: "name", permissions: {}, resource_id: "resource_id", resource_type: "account" };
+        const rawRequestBody = { plan_id: "plan_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.create({
+                plan_id: "plan_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("create (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
-            .post("/api_keys")
+            .post("/waitlist_entries")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(409)
@@ -324,16 +309,13 @@ describe("ApiKeysClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.create({
-                name: "name",
-                permissions: {},
-                resource_id: "resource_id",
-                resource_type: "account",
+            return await client.waitlistEntries.create({
+                plan_id: "plan_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
 
-    test("listPermissions (1)", async () => {
+    test("approveAll (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -342,41 +324,25 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-
-        const rawResponseBody = {
-            data: [
-                {
-                    action: "waitlist_entry:cancel",
-                    allowed_on_api_key: false,
-                    allowed_on_app: false,
-                    allowed_on_user: true,
-                    category: "category",
-                    description: "",
-                    granted_to_system_roles: ["owner"],
-                    name: "waitlist_entry:cancel",
-                },
-            ],
-            page_info: {
-                end_cursor: "end_cursor",
-                has_next_page: false,
-                has_previous_page: false,
-                start_cursor: "start_cursor",
-            },
-        };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
+        const rawResponseBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_id", queued: true };
 
         server
             .mockEndpoint()
-            .get("/api_keys/permissions")
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.apiKeys.listPermissions();
+        const response = await client.waitlistEntries.approveAll({
+            account_id: "biz_xxxxxxxxxxxxxx",
+        });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("listPermissions (2)", async () => {
+    test("approveAll (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -385,20 +351,135 @@ describe("ApiKeysClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .get("/api_keys/permissions")
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.approveAll({
+                account_id: "account_id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("approveAll (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { account_id: "account_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.listPermissions();
+            return await client.waitlistEntries.approveAll({
+                account_id: "account_id",
+            });
         }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("approveAll (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { account_id: "account_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.approveAll({
+                account_id: "account_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("approveAll (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { account_id: "account_id" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.approveAll({
+                account_id: "account_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("approveAll (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { account_id: "account_id" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/approve_all")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.approveAll({
+                account_id: "account_id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -412,29 +493,30 @@ describe("ApiKeysClient", () => {
         });
 
         const rawResponseBody = {
-            api_version_date: "2025-01-01",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            approval_failure_reason: "plan_unavailable",
+            buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
-            expires_at: "2026-01-01T12:00:00.000Z",
-            grants: [
-                {
-                    actions: [{ action: "ai_prompt:create", granted: false }],
-                    resource_id: "biz_xxxxxxxxxxxxxx",
-                    resource_type: "account",
-                },
-            ],
-            id: "apik_xxxxxxxxxxxxxx",
-            ip_allowlist: ["203.0.113.0/24"],
-            is_default_for_resource: false,
-            name: "Shine Time Booking (admin role)",
-            obfuscated_secret_key: "apik_xxxx....xxxx",
-            secret_key: "apik_xxxxxxxxxxxxxx_C0000_C_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            system_role: "owner",
+            custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+            id: "entry_xxxxxxxxxxxxxx",
+            membership_id: "membership_id",
+            metadata: { key: "value" },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
         };
 
-        server.mockEndpoint().get("/api_keys/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .get("/waitlist_entries/id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
-        const response = await client.apiKeys.retrieve({
+        const response = await client.waitlistEntries.retrieve({
             id: "id",
         });
         expect(response).toEqual(rawResponseBody);
@@ -452,10 +534,16 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .get("/waitlist_entries/id")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
-            return await client.apiKeys.retrieve({
+            return await client.waitlistEntries.retrieve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
@@ -473,10 +561,16 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .get("/waitlist_entries/id")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
 
         await expect(async () => {
-            return await client.apiKeys.retrieve({
+            return await client.waitlistEntries.retrieve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
@@ -494,278 +588,22 @@ describe("ApiKeysClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().get("/api_keys/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.apiKeys.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("delete (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { deleted: true, id: "apik_xxxxxxxxxxxxxx" };
-
-        server.mockEndpoint().delete("/api_keys/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
-
-        const response = await client.apiKeys.delete({
-            id: "id",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("delete (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/api_keys/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.apiKeys.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("delete (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/api_keys/id").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.apiKeys.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("delete (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/api_keys/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.apiKeys.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("delete (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/api_keys/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.apiKeys.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("update (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = {
-            api_version_date: "2025-01-01",
-            created_at: "2026-01-01T12:00:00.000Z",
-            expires_at: "2026-01-01T12:00:00.000Z",
-            grants: [
-                {
-                    actions: [{ action: "ai_prompt:create", granted: false }],
-                    resource_id: "biz_xxxxxxxxxxxxxx",
-                    resource_type: "account",
-                },
-            ],
-            id: "apik_xxxxxxxxxxxxxx",
-            ip_allowlist: ["203.0.113.0/24"],
-            is_default_for_resource: false,
-            name: "Shine Time Booking (admin role)",
-            obfuscated_secret_key: "apik_xxxx....xxxx",
-            secret_key: "apik_xxxxxxxxxxxxxx_C0000_C_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            system_role: "owner",
-            updated_at: "2026-01-01T12:00:00.000Z",
-        };
-
         server
             .mockEndpoint()
-            .patch("/api_keys/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.apiKeys.update({
-            id: "id",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("update (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/api_keys/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.apiKeys.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("update (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/api_keys/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.apiKeys.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("update (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/api_keys/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.apiKeys.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("update (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/api_keys/id")
-            .jsonBody(rawRequestBody)
+            .get("/waitlist_entries/id")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.update({
+            return await client.waitlistEntries.retrieve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("rotate (1)", async () => {
+    test("approve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -776,41 +614,36 @@ describe("ApiKeysClient", () => {
         });
 
         const rawResponseBody = {
-            api_version_date: "2025-01-01",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            approval_failure_reason: "plan_unavailable",
+            buyer_account_id: "buyer_account_id",
             created_at: "2026-01-01T12:00:00.000Z",
-            expires_at: "2026-01-01T12:00:00.000Z",
-            grants: [
-                {
-                    actions: [{ action: "ai_prompt:create", granted: false }],
-                    resource_id: "biz_xxxxxxxxxxxxxx",
-                    resource_type: "account",
-                },
-            ],
-            id: "apik_xxxxxxxxxxxxxx",
-            ip_allowlist: ["203.0.113.0/24"],
-            is_default_for_resource: false,
-            name: "Shine Time Booking (admin role)",
-            obfuscated_secret_key: "apik_xxxx....xxxx",
-            secret_key: "apik_xxxxxxxxxxxxxx_C0000_C_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            system_role: "owner",
+            custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+            id: "entry_xxxxxxxxxxxxxx",
+            membership_id: "membership_id",
+            metadata: { key: "value" },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
         };
 
         server
             .mockEndpoint()
-            .post("/api_keys/id/rotate")
+            .post("/waitlist_entries/id/approve")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.apiKeys.rotate({
+        const response = await client.waitlistEntries.approve({
             id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("rotate (2)", async () => {
+    test("approve (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -824,20 +657,20 @@ describe("ApiKeysClient", () => {
 
         server
             .mockEndpoint()
-            .post("/api_keys/id/rotate")
+            .post("/waitlist_entries/id/approve")
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.rotate({
+            return await client.waitlistEntries.approve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("rotate (3)", async () => {
+    test("approve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -851,20 +684,20 @@ describe("ApiKeysClient", () => {
 
         server
             .mockEndpoint()
-            .post("/api_keys/id/rotate")
+            .post("/waitlist_entries/id/approve")
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.rotate({
+            return await client.waitlistEntries.approve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("rotate (4)", async () => {
+    test("approve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -878,20 +711,20 @@ describe("ApiKeysClient", () => {
 
         server
             .mockEndpoint()
-            .post("/api_keys/id/rotate")
+            .post("/waitlist_entries/id/approve")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.rotate({
+            return await client.waitlistEntries.approve({
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("rotate (5)", async () => {
+    test("approve (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -905,14 +738,310 @@ describe("ApiKeysClient", () => {
 
         server
             .mockEndpoint()
-            .post("/api_keys/id/rotate")
+            .post("/waitlist_entries/id/approve")
             .respondWith()
             .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.apiKeys.rotate({
+            return await client.waitlistEntries.approve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("cancel (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            approval_failure_reason: "plan_unavailable",
+            buyer_account_id: "buyer_account_id",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+            id: "entry_xxxxxxxxxxxxxx",
+            membership_id: "membership_id",
+            metadata: { key: "value" },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "pending",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/cancel")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.waitlistEntries.cancel({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("cancel (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/cancel")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("cancel (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/cancel")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("cancel (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/cancel")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("cancel (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/cancel")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.cancel({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("deny (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            approval_failure_reason: "plan_unavailable",
+            buyer_account_id: "buyer_account_id",
+            created_at: "2026-01-01T12:00:00.000Z",
+            custom_field_responses: [{ answer: "answer", id: "id", question: "question" }],
+            id: "entry_xxxxxxxxxxxxxx",
+            membership_id: "membership_id",
+            metadata: { key: "value" },
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            status: "pending",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/deny")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.waitlistEntries.deny({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("deny (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/deny")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.deny({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("deny (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/deny")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.deny({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("deny (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/deny")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.deny({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("deny (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/waitlist_entries/id/deny")
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.waitlistEntries.deny({
                 id: "id",
             });
         }).rejects.toThrow(Whop.ConflictError);

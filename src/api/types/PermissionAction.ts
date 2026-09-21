@@ -2,6 +2,9 @@
 
 /** A permission action identifier, such as `company:basic:read`. */
 export const PermissionAction = {
+    WaitlistEntryRead: "waitlist_entry:read",
+    WaitlistEntryCreate: "waitlist_entry:create",
+    WaitlistEntryCancel: "waitlist_entry:cancel",
     ExperimentManage: "experiment:manage",
     ExperimentRead: "experiment:read",
     AiPromptCreate: "ai_prompt:create",
