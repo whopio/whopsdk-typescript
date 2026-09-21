@@ -4,6 +4,7 @@ import { AccessTokensClient } from "./api/resources/accessTokens/client/Client.j
 import { AccountLinksClient } from "./api/resources/accountLinks/client/Client.js";
 import { AccountsClient } from "./api/resources/accounts/client/Client.js";
 import { AdCampaignsClient } from "./api/resources/adCampaigns/client/Client.js";
+import { AdConversionValueRulesClient } from "./api/resources/adConversionValueRules/client/Client.js";
 import { AdGroupsClient } from "./api/resources/adGroups/client/Client.js";
 import { AdsClient } from "./api/resources/ads/client/Client.js";
 import { AffiliatesClient } from "./api/resources/affiliates/client/Client.js";
@@ -101,6 +102,7 @@ export class WhopClient {
     protected _accountLinks: AccountLinksClient | undefined;
     protected _accounts: AccountsClient | undefined;
     protected _adCampaigns: AdCampaignsClient | undefined;
+    protected _adConversionValueRules: AdConversionValueRulesClient | undefined;
     protected _adGroups: AdGroupsClient | undefined;
     protected _ads: AdsClient | undefined;
     protected _affiliates: AffiliatesClient | undefined;
@@ -201,6 +203,10 @@ export class WhopClient {
 
     public get adCampaigns(): AdCampaignsClient {
         return (this._adCampaigns ??= new AdCampaignsClient(this._options));
+    }
+
+    public get adConversionValueRules(): AdConversionValueRulesClient {
+        return (this._adConversionValueRules ??= new AdConversionValueRulesClient(this._options));
     }
 
     public get adGroups(): AdGroupsClient {

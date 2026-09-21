@@ -66,6 +66,17 @@
             },
             "default": "./dist/cjs/api/resources/adCampaigns/exports.js"
         },
+        "./adConversionValueRules": {
+            "import": {
+                "types": "./dist/esm/api/resources/adConversionValueRules/exports.d.mts",
+                "default": "./dist/esm/api/resources/adConversionValueRules/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/adConversionValueRules/exports.d.ts",
+                "default": "./dist/cjs/api/resources/adConversionValueRules/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/adConversionValueRules/exports.js"
+        },
         "./adGroups": {
             "import": {
                 "types": "./dist/esm/api/resources/adGroups/exports.d.mts",
