@@ -234,6 +234,7 @@ export namespace RetrieveFinancialReportsResponse {
                 OnchainWithdrawal: "onchain_withdrawal",
                 OnchainWithdrawalOffset: "onchain_withdrawal_offset",
                 OrchestrationPercentageFee: "orchestration_percentage_fee",
+                PartnerGrantReward: "partner_grant_reward",
                 PassthroughGmv: "passthrough_gmv",
                 PassthroughGmvOffset: "passthrough_gmv_offset",
                 PaymentDispute: "payment_dispute",

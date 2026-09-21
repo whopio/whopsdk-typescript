@@ -20,14 +20,14 @@ export namespace ListEarningsResponse {
             /** Income and cost lines behind this earning's commission. Null for earnings settled before this data was recorded. */
             financial_activity: Item.FinancialActivity.Item[] | null;
             id: string | null;
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding reward paid to the partner when a referred business qualifies. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
             income_source: Item.IncomeSource;
             object: Item.Object_;
             payout_at: string | null;
             /** The referrer's share of Whop's gross profit, as a fraction (0.3 = 30%). Null until the earning settles. */
             payout_percentage: number | null;
             product: Item.Product | null;
-            /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, or the card transaction for card interchange earnings. */
+            /** The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings. */
             resource: Item.Resource | null;
             /** Whether this earning is a second-tier (grandparent) commission. */
             second_tier: boolean;
@@ -79,13 +79,14 @@ export namespace ListEarningsResponse {
                 }
             }
 
-            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding reward paid to the partner when a referred business qualifies. */
+            /** Which income source the commission is on: product-sales gross profit, Whop Ads spend billed to the business, platform balance transfer fees, Whop Card interchange, or a fixed onboarding or referral link reward paid to the partner when a referred business qualifies. */
             export const IncomeSource = {
                 Sales: "sales",
                 AdSpend: "ad_spend",
                 Transfer: "transfer",
                 CardInterchange: "card_interchange",
                 OnboardingReward: "onboarding_reward",
+                PartnerReward: "partner_reward",
             } as const;
             export type IncomeSource = (typeof IncomeSource)[keyof typeof IncomeSource];
             export const Object_ = {
@@ -100,7 +101,7 @@ export namespace ListEarningsResponse {
             }
 
             /**
-             * The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, or the card transaction for card interchange earnings.
+             * The resource that generated the earning: the customer payment receipt for sales and ad spend earnings, the balance transfer for transfer earnings, the card transaction for card interchange earnings, or the qualifying reward for fixed reward earnings.
              */
             export type Resource =
                 | {
@@ -137,6 +138,12 @@ export namespace ListEarningsResponse {
                       id: string | null;
                       object: "onboarding_reward";
                       slug: string | null;
+                  }
+                | {
+                      business_id: string;
+                      created_at: string;
+                      id: string;
+                      object: "partner_reward";
                   };
             /** Current status of the earning. */
             export const Status = {

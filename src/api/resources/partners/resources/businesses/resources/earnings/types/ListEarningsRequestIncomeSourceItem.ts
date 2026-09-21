@@ -6,6 +6,7 @@ export const ListEarningsRequestIncomeSourceItem = {
     Transfer: "transfer",
     CardInterchange: "card_interchange",
     OnboardingReward: "onboarding_reward",
+    PartnerReward: "partner_reward",
 } as const;
 export type ListEarningsRequestIncomeSourceItem =
     (typeof ListEarningsRequestIncomeSourceItem)[keyof typeof ListEarningsRequestIncomeSourceItem];
