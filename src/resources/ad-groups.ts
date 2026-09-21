@@ -473,6 +473,11 @@ export interface AdGroup {
   placements: Array<AdGroup.Placement>;
 
   /**
+   * The ad platform this ad group runs on.
+   */
+  platform: 'meta' | 'tiktok';
+
+  /**
    * USD value of pixel-attributed purchases.
    */
   purchase_value: number;

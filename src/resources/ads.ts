@@ -344,6 +344,11 @@ export interface Ad {
   link_clicks: number;
 
   /**
+   * The ad platform this ad runs on.
+   */
+  platform: 'meta' | 'tiktok';
+
+  /**
    * The post the ad network serves for this ad, as `pageID_postID` on Meta — the
    * post Meta created for an uploaded creative, or the post being promoted. Use it
    * to open the live post, or to promote the same post from another ad. `null` until
