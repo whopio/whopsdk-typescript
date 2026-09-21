@@ -38,6 +38,8 @@ export interface Plan {
     image: Record<string, unknown> | null;
     /** Initial purchase price in plan currency. */
     initial_price: number;
+    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring plans, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this plan. */
+    initial_price_due: Whop.Money;
     /** Private notes not shown to customers. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
     internal_notes: string | null;
     /** Invoice this plan was generated for; `null` unless created for an invoice. */
