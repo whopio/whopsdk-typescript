@@ -33,6 +33,8 @@ export interface CreatePaymentsRequest {
     promo_code_id?: string | null;
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Ignored unless `confirmation_token` is provided. */
     return_url?: string | null;
+    /** Where physical goods ship, returned on the payment as `shipping_address`. Only the keys you supply are kept; omit it for digital goods. */
+    shipping_address?: CreatePaymentsRequest.ShippingAddress | null;
     /** Overrides the text on the buyer's card statement for this payment only. Takes precedence over the product's and account's custom descriptors, and changes neither. Must start with `WHOP*`, be 5-22 characters, contain at least one letter, and use only Latin letters, numbers, spaces, underscores, hyphens, or asterisks. */
     statement_descriptor?: string | null;
 }
@@ -242,5 +244,25 @@ export namespace CreatePaymentsRequest {
             QuickLink: "quick_link",
         } as const;
         export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+    }
+
+    /**
+     * Where physical goods ship, returned on the payment as `shipping_address`. Only the keys you supply are kept; omit it for digital goods.
+     */
+    export interface ShippingAddress {
+        /** City name. */
+        city?: (string | null) | undefined;
+        /** ISO 3166-1 alpha-2 country code, such as `US`. */
+        country?: (string | null) | undefined;
+        /** First line of the street address. */
+        line1?: (string | null) | undefined;
+        /** Second line of the street address. */
+        line2?: (string | null) | undefined;
+        /** The recipient's full name, as it should appear on the shipping label. */
+        name?: (string | null) | undefined;
+        /** Postal or ZIP code. */
+        postal_code?: (string | null) | undefined;
+        /** State, province, or region code, such as `CA`. */
+        state?: (string | null) | undefined;
     }
 }
