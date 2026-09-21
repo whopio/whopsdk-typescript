@@ -31,6 +31,8 @@ export namespace AdGroupGeoLocationsBody {
 
     export namespace CustomLocations {
         export interface Item {
+            /** ISO 3166-1 alpha-2 country the point falls in, as `DE`. Send it under a special ad category: the campaign must declare the countries its ad sets reach, and a coordinate names none. */
+            country_code?: string | undefined;
             /** Unit for `radius`. Defaults to `mile`. */
             distance_unit?: Item.DistanceUnit | undefined;
             /** Latitude of the center point. */
