@@ -15,7 +15,7 @@ describe("PermissionsClient", () => {
             environment: server.baseUrl,
         });
 
-        const rawResponseBody = { data: [{ action: "experiment:manage", granted: false }] };
+        const rawResponseBody = { data: [{ action: "waitlist_entry:read", granted: false }] };
 
         server.mockEndpoint().get("/permissions").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
