@@ -230,6 +230,14 @@ export interface PlanListResponse {
   initial_price: number;
 
   /**
+   * Total charged at checkout for one unit, before promo codes and tax:
+   * `initial_price` plus the first `renewal_price` for recurring plans, or
+   * `initial_price` alone while a free trial applies. The trial does not apply when
+   * the viewing user has already used one for this plan.
+   */
+  initial_price_due: PlanListResponse.InitialPriceDue;
+
+  /**
    * Private notes not shown to customers. `null` unless the actor has the
    * `plan:basic:read` scope on the plan's account.
    */
@@ -405,6 +413,38 @@ export namespace PlanListResponse {
      * Whether the customer must complete this field to check out.
      */
     required: boolean;
+  }
+
+  /**
+   * Total charged at checkout for one unit, before promo codes and tax:
+   * `initial_price` plus the first `renewal_price` for recurring plans, or
+   * `initial_price` alone while a free trial applies. The trial does not apply when
+   * the viewing user has already used one for this plan.
+   */
+  export interface InitialPriceDue {
+    /**
+     * The amount in major units, as an exact decimal string — `"10.00"` is ten
+     * dollars. A string so no float rounds it in transit.
+     */
+    amount: string;
+
+    /**
+     * Three-letter ISO 4217 currency code, lowercase.
+     */
+    currency: string;
+
+    /**
+     * How many decimal places the amount CARRIES — the precision the charge itself
+     * runs at.
+     */
+    decimals: number;
+
+    /**
+     * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+     * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+     * and `0`. Format the number in your own locale using this.
+     */
+    display_decimals: number;
   }
 }
 

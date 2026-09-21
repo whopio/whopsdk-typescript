@@ -932,6 +932,12 @@ export namespace AdGroup {
         radius: number;
 
         /**
+         * ISO 3166-1 alpha-2 country the point falls in. Send it under a special ad
+         * category, where the campaign must declare the countries its ad sets reach.
+         */
+        country_code?: string;
+
+        /**
          * Label for the location, such as a city or address. Absent when the location has
          * no label.
          */
@@ -995,6 +1001,12 @@ export namespace AdGroup {
          * Radius around the center point, in `distance_unit`.
          */
         radius: number;
+
+        /**
+         * ISO 3166-1 alpha-2 country the point falls in. Send it under a special ad
+         * category, where the campaign must declare the countries its ad sets reach.
+         */
+        country_code?: string;
 
         /**
          * Label for the location, such as a city or address. Absent when the location has
@@ -1518,6 +1530,13 @@ export namespace AdGroupUpdateParams {
         radius: number;
 
         /**
+         * ISO 3166-1 alpha-2 country the point falls in, as `DE`. Send it under a special
+         * ad category: the campaign must declare the countries its ad sets reach, and a
+         * coordinate names none.
+         */
+        country_code?: string;
+
+        /**
          * Unit for `radius`. Defaults to `mile`.
          */
         distance_unit?: 'mile' | 'kilometer';
@@ -1605,6 +1624,13 @@ export namespace AdGroupUpdateParams {
          * Radius around the center point: 1-50 miles or 1-80 kilometers.
          */
         radius: number;
+
+        /**
+         * ISO 3166-1 alpha-2 country the point falls in, as `DE`. Send it under a special
+         * ad category: the campaign must declare the countries its ad sets reach, and a
+         * coordinate names none.
+         */
+        country_code?: string;
 
         /**
          * Unit for `radius`. Defaults to `mile`.
