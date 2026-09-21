@@ -655,6 +655,13 @@ export interface PaymentCreateParams {
   return_url?: string | null;
 
   /**
+   * Body param: Where physical goods ship, returned on the payment as
+   * `shipping_address`. Only the keys you supply are kept; omit it for digital
+   * goods.
+   */
+  shipping_address?: PaymentCreateParams.ShippingAddress | null;
+
+  /**
    * Body param: Overrides the text on the buyer's card statement for this payment
    * only. Takes precedence over the product's and account's custom descriptors, and
    * changes neither. Must start with `WHOP*`, be 5-22 characters, contain at least
@@ -937,6 +944,47 @@ export namespace PaymentCreateParams {
        */
       visibility?: 'visible' | 'hidden' | 'archived' | 'quick_link';
     }
+  }
+
+  /**
+   * Where physical goods ship, returned on the payment as `shipping_address`. Only
+   * the keys you supply are kept; omit it for digital goods.
+   */
+  export interface ShippingAddress {
+    /**
+     * City name.
+     */
+    city?: string | null;
+
+    /**
+     * ISO 3166-1 alpha-2 country code, such as `US`.
+     */
+    country?: string | null;
+
+    /**
+     * First line of the street address.
+     */
+    line1?: string | null;
+
+    /**
+     * Second line of the street address.
+     */
+    line2?: string | null;
+
+    /**
+     * The recipient's full name, as it should appear on the shipping label.
+     */
+    name?: string | null;
+
+    /**
+     * Postal or ZIP code.
+     */
+    postal_code?: string | null;
+
+    /**
+     * State, province, or region code, such as `CA`.
+     */
+    state?: string | null;
   }
 }
 
