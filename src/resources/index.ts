@@ -213,13 +213,7 @@ export {
   type DmMemberListParams,
   type DmMemberListResponsesCursorPage,
 } from './dm-members';
-export {
-  Entries,
-  type EntryListResponse,
-  type EntryApproveResponse,
-  type EntryListParams,
-  type EntryListResponsesCursorPage,
-} from './entries';
+export { Entries } from './entries';
 export {
   Experiences,
   type ExperienceListResponse,

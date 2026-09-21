@@ -220,13 +220,7 @@ import {
   DmMemberUpdateParams,
   DmMembers,
 } from './resources/dm-members';
-import {
-  Entries,
-  EntryApproveResponse,
-  EntryListParams,
-  EntryListResponse,
-  EntryListResponsesCursorPage,
-} from './resources/entries';
+import { Entries } from './resources/entries';
 import {
   ExperienceAttachParams,
   ExperienceCreateParams,
@@ -1777,13 +1771,7 @@ export declare namespace Whop {
     type PlanDeleteParams as PlanDeleteParams,
   };
 
-  export {
-    Entries as Entries,
-    type EntryListResponse as EntryListResponse,
-    type EntryApproveResponse as EntryApproveResponse,
-    type EntryListResponsesCursorPage as EntryListResponsesCursorPage,
-    type EntryListParams as EntryListParams,
-  };
+  export { Entries as Entries };
 
   export {
     ForumPosts as ForumPosts,

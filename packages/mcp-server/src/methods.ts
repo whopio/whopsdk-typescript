@@ -186,30 +186,6 @@ export const sdkMethods: SdkMethod[] = [
     httpPath: '/plans/{id}',
   },
   {
-    clientCallName: 'client.entries.retrieve',
-    fullyQualifiedName: 'entries.retrieve',
-    httpMethod: 'get',
-    httpPath: '/entries/{id}',
-  },
-  {
-    clientCallName: 'client.entries.list',
-    fullyQualifiedName: 'entries.list',
-    httpMethod: 'get',
-    httpPath: '/entries',
-  },
-  {
-    clientCallName: 'client.entries.approve',
-    fullyQualifiedName: 'entries.approve',
-    httpMethod: 'post',
-    httpPath: '/entries/{id}/approve',
-  },
-  {
-    clientCallName: 'client.entries.deny',
-    fullyQualifiedName: 'entries.deny',
-    httpMethod: 'post',
-    httpPath: '/entries/{id}/deny',
-  },
-  {
     clientCallName: 'client.forumPosts.create',
     fullyQualifiedName: 'forumPosts.create',
     httpMethod: 'post',

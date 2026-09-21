@@ -236,18 +236,6 @@ Methods:
 
 # Entries
 
-Types:
-
-- <code><a href="./src/resources/entries.ts">EntryListResponse</a></code>
-- <code><a href="./src/resources/entries.ts">EntryApproveResponse</a></code>
-
-Methods:
-
-- <code title="get /entries/{id}">client.entries.<a href="./src/resources/entries.ts">retrieve</a>(id) -> Entry</code>
-- <code title="get /entries">client.entries.<a href="./src/resources/entries.ts">list</a>({ ...params }) -> EntryListResponsesCursorPage</code>
-- <code title="post /entries/{id}/approve">client.entries.<a href="./src/resources/entries.ts">approve</a>(id) -> EntryApproveResponse</code>
-- <code title="post /entries/{id}/deny">client.entries.<a href="./src/resources/entries.ts">deny</a>(id) -> Entry</code>
-
 # ForumPosts
 
 Types:
