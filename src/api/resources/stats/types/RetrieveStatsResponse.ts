@@ -10,7 +10,7 @@ export namespace RetrieveStatsResponse {
         currency?: (string | null) | undefined;
         /** One entry per period, oldest first. */
         points: Data.Points.Item[];
-        /** Whole-window aggregates, present when the metric computes them. Don't derive these from `points`: a rate is measured across the whole window, not averaged across its points, and unique-people counts exist only at window level. */
+        /** Whole-window aggregates, present when the metric computes them. Don't derive these from `points`: a rate is measured across the whole window, not averaged across its points, and whole-window unique people are distinct across every bucket. */
         totals?: (Data.Totals.Item[] | null) | undefined;
     }
 
