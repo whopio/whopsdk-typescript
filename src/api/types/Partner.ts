@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface Partner {
+    /** Whether the user passed every visible quiz and knowledge check in the partner certification course. `false` until each of those lessons has a passing result. */
+    certification_complete: boolean;
     /** When the user joined the partner program, as an ISO 8601 timestamp. Null when they have not joined. */
     joined_at: string | null;
     payout_rates: Whop.PartnerPayoutTier[];
