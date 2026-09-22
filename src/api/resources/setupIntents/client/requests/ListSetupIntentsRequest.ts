@@ -4,28 +4,27 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         first: 42,
- *         last: 42,
- *         created_before: "2023-12-01T05:00:00Z",
- *         created_after: "2023-12-01T05:00:00Z",
- *         account_id: "biz_xxxxxxxxxxxxxx"
- *     }
+ *     {}
  */
 export interface ListSetupIntentsRequest {
-    /** Returns the elements in the list that come after the specified cursor. */
-    after?: string;
-    /** Returns the elements in the list that come before the specified cursor. */
-    before?: string;
-    /** Returns the first _n_ elements from the list. */
-    first?: number;
-    /** Returns the last _n_ elements from the list. */
-    last?: number;
-    direction?: Whop.Direction;
-    /** Only return setup intents created before this timestamp. */
+    /** Only setup intents for this account, prefixed `biz_`. */
+    account_id?: string;
+    /** Only setup intents in this state. */
+    status?: Whop.ListSetupIntentsRequestStatus;
+    /** Only setup intents created before this ISO 8601 timestamp. */
     created_before?: string;
-    /** Only return setup intents created after this timestamp. */
+    /** Only setup intents created after this ISO 8601 timestamp. */
     created_after?: string;
-    /** The unique identifier of the company to list setup intents for. */
-    account_id: string;
+    /** The field to sort by. */
+    order?: Whop.ListSetupIntentsRequestOrder;
+    /** The sort direction. */
+    direction?: Whop.ListSetupIntentsRequestDirection;
+    /** Number of results to return from the start of the range. */
+    first?: number;
+    /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
+    after?: string;
+    /** Number of results to return from the end of the range. */
+    last?: number;
+    /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
+    before?: string;
 }

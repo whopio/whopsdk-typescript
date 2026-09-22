@@ -17,9 +17,9 @@ export declare namespace SetupIntentsClient {
 }
 
 /**
- * A Setup Intent saves a buyer's payment method for later without taking money now. It runs the same collection flow a payment does, so the buyer may still owe a step — 3D Secure on a card, a hosted enrollment, or linking a bank account.
+ * A Setup Intent saves a buyer's payment method for later without taking money now. Create one from a confirmation token the payment elements collected in setup mode, or from a payment method already on file to re-verify it. It runs the same collection flow a payment does, so the buyer may still owe a step: 3D Secure on a card, a hosted enrollment, or linking a bank account.
  *
- * Poll [Retrieve status](/api-reference/beta/setup-intents/retrieve-setup-status) for how far the setup has gone and what is outstanding. Once it reaches `succeeded` the method is on file and can be charged.
+ * The create response is the setup intent as created, not its outcome. Hand its `client_secret` to the elements' `handleNextAction`, or poll [Retrieve status](/api-reference/beta/setup-intents/retrieve-setup-status) for how far the setup has gone and what is outstanding. Once it reaches `succeeded`, `payment_method_id` names the saved method and Create Payment charges it.
  */
 export class SetupIntentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<SetupIntentsClient.Options>;
@@ -29,12 +29,7 @@ export class SetupIntentsClient {
     }
 
     /**
-     * Returns a paginated list of setup intents for a company, with optional filtering by creation date. A setup intent securely collects and stores a member's payment method for future use without charging them immediately.
-     *
-     * Required permissions:
-     *  - `payment:setup_intent:read`
-     *  - `member:basic:read`
-     *  - `member:email:read`
+     * Lists setup intents newest first. An account API key lists its own account; a user token lists every account it can read, or one account with `account_id`. `client_secret` is always null on list rows — retrieve the setup intent for it.
      *
      * @param {Whop.ListSetupIntentsRequest} request
      * @param {SetupIntentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -42,49 +37,43 @@ export class SetupIntentsClient {
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.setupIntents.list({
-     *         first: 42,
-     *         last: 42,
-     *         created_before: "2023-12-01T05:00:00Z",
-     *         created_after: "2023-12-01T05:00:00Z",
-     *         account_id: "biz_xxxxxxxxxxxxxx"
-     *     })
+     *     await client.setupIntents.list()
      */
     public async list(
-        request: Whop.ListSetupIntentsRequest,
+        request: Whop.ListSetupIntentsRequest = {},
         requestOptions?: SetupIntentsClient.RequestOptions,
-    ): Promise<core.Page<Whop.SetupIntentListItem, Whop.ListSetupIntentsResponse>> {
+    ): Promise<core.Page<Whop.SetupIntent, Whop.ListSetupIntentsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: Whop.ListSetupIntentsRequest,
             ): Promise<core.WithRawResponse<Whop.ListSetupIntentsResponse>> => {
                 const {
-                    after,
-                    before,
-                    first,
-                    last,
-                    direction,
+                    account_id: accountId,
+                    status,
                     created_before: createdBefore,
                     created_after: createdAfter,
-                    account_id: accountId,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
-                    after,
-                    before,
-                    first,
-                    last,
-                    direction: direction != null ? direction : undefined,
+                    account_id: accountId,
+                    status: status != null ? status : undefined,
                     created_before: createdBefore != null ? createdBefore : undefined,
                     created_after: createdAfter != null ? createdAfter : undefined,
-                    account_id: accountId,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
+                    first,
+                    after,
+                    last,
+                    before,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -92,7 +81,7 @@ export class SetupIntentsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-1",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -131,17 +120,6 @@ export class SetupIntentsClient {
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                         case 403:
                             throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                        case 422:
-                            throw new Whop.UnprocessableEntityError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
-                        case 429:
-                            throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                        case 500:
-                            throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
@@ -154,7 +132,7 @@ export class SetupIntentsClient {
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.SetupIntentListItem, Whop.ListSetupIntentsResponse>({
+        return new core.Page<Whop.SetupIntent, Whop.ListSetupIntentsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -168,12 +146,7 @@ export class SetupIntentsClient {
     }
 
     /**
-     * Save a buyer's payment method for later without charging it. Provide a confirmation token for a method the buyer just supplied, or an existing payment method to re-verify. The buyer may still have a step to complete — 3D Secure, a hosted enrollment, linking a bank account — so poll the setup intent's status endpoint for what to do next.
-     *
-     * Required permissions:
-     *  - `payment:charge`
-     *  - `member:basic:read`
-     *  - `member:email:read`
+     * Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: while it is `requires_action` the buyer still has a step, so hand `client_secret` to the elements' `handleNextAction` or poll Retrieve setup status. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
      *
      * @param {Whop.CreateSetupIntentsRequest} request
      * @param {SetupIntentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -182,35 +155,32 @@ export class SetupIntentsClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
+     * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.setupIntents.create({
-     *         account_id: "biz_xxxxxxxxxxxxxx",
-     *         confirmation_token: "ctok_xxxxxxxxxxxxxx"
+     *         account_id: "biz_xxxxxxxxxxxxxx"
      *     })
      */
     public create(
         request: Whop.CreateSetupIntentsRequest,
         requestOptions?: SetupIntentsClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.CreateSetupIntentsResponse> {
+    ): core.HttpResponsePromise<Whop.SetupIntent> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Whop.CreateSetupIntentsRequest,
         requestOptions?: SetupIntentsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.CreateSetupIntentsResponse>> {
+    ): Promise<core.WithRawResponse<Whop.SetupIntent>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -235,7 +205,7 @@ export class SetupIntentsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as Whop.CreateSetupIntentsResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as Whop.SetupIntent, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -248,12 +218,8 @@ export class SetupIntentsClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -267,29 +233,20 @@ export class SetupIntentsClient {
     }
 
     /**
-     * Retrieves the details of an existing setup intent.
-     *
-     * Required permissions:
-     *  - `payment:setup_intent:read`
-     *  - `member:basic:read`
-     *  - `member:email:read`
+     * Returns one setup intent. Related records are ids — once `status` is `succeeded`, `payment_method_id` is the saved method to charge or retrieve. The buyer's own token may retrieve a setup intent that belongs to it.
      *
      * @param {Whop.RetrieveSetupIntentsRequest} request
      * @param {SetupIntentsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
-     * @throws {@link Whop.UnprocessableEntityError}
-     * @throws {@link Whop.TooManyRequestsError}
-     * @throws {@link Whop.InternalServerError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.setupIntents.retrieve({
-     *         id: "sint_xxxxxxxxxxxxx"
+     *         id: "id"
      *     })
      */
     public retrieve(
@@ -309,7 +266,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -336,20 +293,12 @@ export class SetupIntentsClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                case 422:
-                    throw new Whop.UnprocessableEntityError(_response.error.body as unknown, _response.rawResponse);
-                case 429:
-                    throw new Whop.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
-                case 500:
-                    throw new Whop.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -397,7 +346,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -484,7 +433,7 @@ export class SetupIntentsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

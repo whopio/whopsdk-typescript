@@ -18,28 +18,76 @@ describe("SetupIntentsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    checkout_configuration: { id: "ch_xxxxxxxxxxxxxxx" },
-                    company: { id: "biz_xxxxxxxxxxxxxx" },
-                    created_at: "2023-12-01T05:00:00Z",
-                    error_message: "Your card was declined.",
-                    id: "sint_xxxxxxxxxxxxx",
-                    member: { id: "id", user: null },
-                    metadata: { key: "value" },
-                    payment_method: {
-                        card: { brand: null, exp_month: 42, exp_year: 42, last4: "4242" },
-                        created_at: "2023-12-01T05:00:00Z",
-                        id: "payt_xxxxxxxxxxxxx",
-                        mailing_address: null,
-                        payment_method_type: "acss_debit",
+                    account_id: "biz_xxxxxxxxxxxxxx",
+                    checkout_configuration_id: "checkout_configuration_id",
+                    client_secret:
+                        "sint_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                    created_at: "2026-01-01T12:00:00.000Z",
+                    id: "sint_xxxxxxxxxxxxxx",
+                    last_setup_error: { code: "enrollment_declined", message: "The bank declined the enrollment." },
+                    member_id: "mber_xxxxxxxxxxxxxx",
+                    metadata: { customer_id: "cus_4417" },
+                    payment_instrument: {
+                        card: {
+                            brand: "visa",
+                            exp_month: 10,
+                            exp_year: 2031,
+                            issuer_identification_number: "41111111",
+                            last4: "4242",
+                        },
+                        display_name: "Visa •••• 4242",
+                        icons: {
+                            card: {
+                                dark: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                                light: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                            },
+                            square: {
+                                dark: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                                light: {
+                                    png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                                    png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                                    png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                                    svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                                },
+                            },
+                        },
+                        installment_count: null,
+                        payment_method_type: "card",
                     },
+                    payment_method_id: "payt_xxxxxxxxxxxxxx",
+                    payment_method_type: "acss_debit",
+                    return_url: "https://shinetime.example/billing/saved",
                     status: "processing",
+                    three_ds_verified: false,
+                    updated_at: "2026-01-01T12:00:00.000Z",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
                 },
             ],
             page_info: {
                 end_cursor: "end_cursor",
-                has_next_page: true,
-                has_previous_page: true,
-                start_cursor: "start_cursor",
+                has_next_page: false,
+                has_previous_page: false,
+                start_cursor: "WyJjdXJzb3IiLDFd",
             },
         };
 
@@ -52,13 +100,7 @@ describe("SetupIntentsClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.setupIntents.list({
-            first: 42,
-            last: 42,
-            created_before: "2023-12-01T05:00:00Z",
-            created_after: "2023-12-01T05:00:00Z",
-            account_id: "biz_xxxxxxxxxxxxxx",
-        });
+        const page = await client.setupIntents.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
@@ -81,9 +123,7 @@ describe("SetupIntentsClient", () => {
         server.mockEndpoint().get("/setup_intents").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
+            return await client.setupIntents.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -102,9 +142,7 @@ describe("SetupIntentsClient", () => {
         server.mockEndpoint().get("/setup_intents").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
+            return await client.setupIntents.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -123,94 +161,8 @@ describe("SetupIntentsClient", () => {
         server.mockEndpoint().get("/setup_intents").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
+            return await client.setupIntents.list();
         }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("list (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("list (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("list (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("list (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.list({
-                account_id: "account_id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
     });
 
     test("create (1)", async () => {
@@ -222,33 +174,71 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", confirmation_token: "ctok_xxxxxxxxxxxxxx" };
+        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            checkout_configuration: { id: "ch_xxxxxxxxxxxxxxx" },
-            client_secret: "sint_xxxxxxxxxxxxxx_secret_v1_xxxx",
-            company: { id: "biz_xxxxxxxxxxxxxx" },
-            created_at: "2023-12-01T05:00:00Z",
-            error_message: "Your card was declined.",
-            id: "sint_xxxxxxxxxxxxx",
-            member: { id: "id", user: { email: "email", id: "id", name: "name", username: "username" } },
-            metadata: { key: "value" },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                mailing_address: {
-                    city: "city",
-                    country: "country",
-                    line1: "line1",
-                    line2: "line2",
-                    name: "name",
-                    postal_code: "postal_code",
-                    state: "state",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "sint_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            id: "sint_xxxxxxxxxxxxxx",
+            last_setup_error: { code: "enrollment_declined", message: "The bank declined the enrollment." },
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { customer_id: "cus_4417" },
+            payment_instrument: {
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
                 },
-                payment_method_type: "acss_debit",
+                display_name: "Visa •••• 4242",
+                icons: {
+                    card: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                    square: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                },
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
+            payment_method_type: "acss_debit",
+            return_url: "https://shinetime.example/billing/saved",
             status: "processing",
-            three_ds_verified: true,
+            three_ds_verified: false,
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server
@@ -262,7 +252,6 @@ describe("SetupIntentsClient", () => {
 
         const response = await client.setupIntents.create({
             account_id: "biz_xxxxxxxxxxxxxx",
-            confirmation_token: "ctok_xxxxxxxxxxxxxx",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -276,7 +265,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -291,7 +280,6 @@ describe("SetupIntentsClient", () => {
         await expect(async () => {
             return await client.setupIntents.create({
                 account_id: "account_id",
-                confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -305,7 +293,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -320,7 +308,6 @@ describe("SetupIntentsClient", () => {
         await expect(async () => {
             return await client.setupIntents.create({
                 account_id: "account_id",
-                confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -334,7 +321,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -349,7 +336,6 @@ describe("SetupIntentsClient", () => {
         await expect(async () => {
             return await client.setupIntents.create({
                 account_id: "account_id",
-                confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.ForbiddenError);
     });
@@ -363,7 +349,7 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
+        const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -378,7 +364,6 @@ describe("SetupIntentsClient", () => {
         await expect(async () => {
             return await client.setupIntents.create({
                 account_id: "account_id",
-                confirmation_token: "confirmation_token",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });
@@ -392,82 +377,23 @@ describe("SetupIntentsClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
-        const rawResponseBody = { key: "value" };
+        const rawRequestBody = { account_id: "account_id" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
             .mockEndpoint()
             .post("/setup_intents")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(422)
+            .statusCode(409)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
             return await client.setupIntents.create({
                 account_id: "account_id",
-                confirmation_token: "confirmation_token",
             });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("create (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/setup_intents")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.setupIntents.create({
-                account_id: "account_id",
-                confirmation_token: "confirmation_token",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("create (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-        const rawRequestBody = { account_id: "account_id", confirmation_token: "confirmation_token" };
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/setup_intents")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(500)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.setupIntents.create({
-                account_id: "account_id",
-                confirmation_token: "confirmation_token",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
+        }).rejects.toThrow(Whop.ConflictError);
     });
 
     test("retrieve (1)", async () => {
@@ -481,68 +407,80 @@ describe("SetupIntentsClient", () => {
         });
 
         const rawResponseBody = {
-            checkout_configuration: { id: "ch_xxxxxxxxxxxxxxx" },
-            company: { id: "biz_xxxxxxxxxxxxxx" },
-            created_at: "2023-12-01T05:00:00Z",
-            error_message: "Your card was declined.",
-            id: "sint_xxxxxxxxxxxxx",
-            member: { id: "id", user: { email: "email", id: "id", name: "name", username: "username" } },
-            metadata: { key: "value" },
-            payment_method: {
-                card: { brand: "mastercard", exp_month: 42, exp_year: 42, last4: "4242" },
-                created_at: "2023-12-01T05:00:00Z",
-                id: "payt_xxxxxxxxxxxxx",
-                mailing_address: {
-                    city: "city",
-                    country: "country",
-                    line1: "line1",
-                    line2: "line2",
-                    name: "name",
-                    postal_code: "postal_code",
-                    state: "state",
+            account_id: "biz_xxxxxxxxxxxxxx",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "sint_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            id: "sint_xxxxxxxxxxxxxx",
+            last_setup_error: { code: "enrollment_declined", message: "The bank declined the enrollment." },
+            member_id: "mber_xxxxxxxxxxxxxx",
+            metadata: { customer_id: "cus_4417" },
+            payment_instrument: {
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
                 },
-                payment_method_type: "acss_debit",
+                display_name: "Visa •••• 4242",
+                icons: {
+                    card: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                    square: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                },
+                installment_count: 1.1,
+                payment_method_type: "card",
             },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
+            payment_method_type: "acss_debit",
+            return_url: "https://shinetime.example/billing/saved",
             status: "processing",
-            three_ds_verified: true,
+            three_ds_verified: false,
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
-        server
-            .mockEndpoint()
-            .get("/setup_intents/sint_xxxxxxxxxxxxx")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/setup_intents/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.setupIntents.retrieve({
-            id: "sint_xxxxxxxxxxxxx",
+            id: "id",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -563,7 +501,7 @@ describe("SetupIntentsClient", () => {
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
-    test("retrieve (4)", async () => {
+    test("retrieve (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -584,7 +522,7 @@ describe("SetupIntentsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
-    test("retrieve (5)", async () => {
+    test("retrieve (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -605,69 +543,6 @@ describe("SetupIntentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("retrieve (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents/id").respondWith().statusCode(422).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnprocessableEntityError);
-    });
-
-    test("retrieve (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.TooManyRequestsError);
-    });
-
-    test("retrieve (8)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: server.baseUrl,
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/setup_intents/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.setupIntents.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.InternalServerError);
-    });
-
     test("updateReturnUrl (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -680,10 +555,7 @@ describe("SetupIntentsClient", () => {
         const rawRequestBody = { return_url: "https://shinetime.example/checkout/thanks" };
         const rawResponseBody = {
             id: "sint_xxxxxxxxxxxxxx",
-            last_setup_error: {
-                code: "enrollment_declined",
-                message: "The enrollment was declined by the payment provider.",
-            },
+            last_setup_error: { code: "enrollment_declined", message: "The bank declined the enrollment." },
             next_action: {
                 type: "await_confirmation",
                 data: { expires_at: "2026-01-01T12:00:00.000Z" },
@@ -809,10 +681,7 @@ describe("SetupIntentsClient", () => {
 
         const rawResponseBody = {
             id: "sint_xxxxxxxxxxxxxx",
-            last_setup_error: {
-                code: "enrollment_declined",
-                message: "The enrollment was declined by the payment provider.",
-            },
+            last_setup_error: { code: "enrollment_declined", message: "The bank declined the enrollment." },
             next_action: {
                 type: "await_confirmation",
                 data: { expires_at: "2026-01-01T12:00:00.000Z" },

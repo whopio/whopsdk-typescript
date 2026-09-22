@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         id: "sint_xxxxxxxxxxxxx"
+ *         id: "id"
  *     }
  */
 export interface RetrieveSetupIntentsRequest {
-    /** The unique identifier of the setup intent. */
+    /** The setup intent to retrieve, prefixed `sint_`. */
     id: string;
 }

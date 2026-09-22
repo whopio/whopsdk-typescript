@@ -22889,7 +22889,7 @@ await client.reviews.retrieve({
 </details>
 
 ## Setup Intents
-<details><summary><code>client.setupIntents.<a href="/src/api/resources/setupIntents/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.SetupIntentListItem, Whop.ListSetupIntentsResponse&gt;</code></summary>
+<details><summary><code>client.setupIntents.<a href="/src/api/resources/setupIntents/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.SetupIntent, Whop.ListSetupIntentsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -22901,12 +22901,7 @@ await client.reviews.retrieve({
 <dl>
 <dd>
 
-Returns a paginated list of setup intents for a company, with optional filtering by creation date. A setup intent securely collects and stores a member's payment method for future use without charging them immediately.
-
-Required permissions:
- - `payment:setup_intent:read`
- - `member:basic:read`
- - `member:email:read`
+Lists setup intents newest first. An account API key lists its own account; a user token lists every account it can read, or one account with `account_id`. `client_secret` is always null on list rows — retrieve the setup intent for it.
 </dd>
 </dl>
 </dd>
@@ -22921,25 +22916,13 @@ Required permissions:
 <dd>
 
 ```typescript
-const pageableResponse = await client.setupIntents.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+const pageableResponse = await client.setupIntents.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.setupIntents.list({
-    first: 42,
-    last: 42,
-    created_before: "2023-12-01T05:00:00Z",
-    created_after: "2023-12-01T05:00:00Z",
-    account_id: "biz_xxxxxxxxxxxxxx"
-});
+let page = await client.setupIntents.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -22981,7 +22964,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.setupIntents.<a href="/src/api/resources/setupIntents/client/Client.ts">create</a>({ ...params }) -> Whop.CreateSetupIntentsResponse</code></summary>
+<details><summary><code>client.setupIntents.<a href="/src/api/resources/setupIntents/client/Client.ts">create</a>({ ...params }) -> Whop.SetupIntent</code></summary>
 <dl>
 <dd>
 
@@ -22993,12 +22976,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Save a buyer's payment method for later without charging it. Provide a confirmation token for a method the buyer just supplied, or an existing payment method to re-verify. The buyer may still have a step to complete — 3D Secure, a hosted enrollment, linking a bank account — so poll the setup intent's status endpoint for what to do next.
-
-Required permissions:
- - `payment:charge`
- - `member:basic:read`
- - `member:email:read`
+Saves a buyer's payment method for later without charging it. Pass a `confirmation_token` for a method the buyer just supplied through the payment elements in setup mode, or a `payment_method_id` already on file to re-verify it. The response is the setup intent as created, not its outcome: while it is `requires_action` the buyer still has a step, so hand `client_secret` to the elements' `handleNextAction` or poll Retrieve setup status. A buyer's own token holding `member:payment_methods:use` may create a setup intent for itself from a confirmation token.
 </dd>
 </dl>
 </dd>
@@ -23014,8 +22992,7 @@ Required permissions:
 
 ```typescript
 await client.setupIntents.create({
-    account_id: "biz_xxxxxxxxxxxxxx",
-    confirmation_token: "ctok_xxxxxxxxxxxxxx"
+    account_id: "biz_xxxxxxxxxxxxxx"
 });
 
 ```
@@ -23064,12 +23041,7 @@ await client.setupIntents.create({
 <dl>
 <dd>
 
-Retrieves the details of an existing setup intent.
-
-Required permissions:
- - `payment:setup_intent:read`
- - `member:basic:read`
- - `member:email:read`
+Returns one setup intent. Related records are ids — once `status` is `succeeded`, `payment_method_id` is the saved method to charge or retrieve. The buyer's own token may retrieve a setup intent that belongs to it.
 </dd>
 </dl>
 </dd>
@@ -23085,7 +23057,7 @@ Required permissions:
 
 ```typescript
 await client.setupIntents.retrieve({
-    id: "sint_xxxxxxxxxxxxx"
+    id: "id"
 });
 
 ```

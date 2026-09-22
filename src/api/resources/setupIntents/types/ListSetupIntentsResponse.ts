@@ -2,12 +2,16 @@
 
 import type * as Whop from "../../../index.js";
 
-/**
- * The connection type for SetupIntent.
- */
 export interface ListSetupIntentsResponse {
-    /** A list of nodes. */
-    data: Whop.SetupIntentListItem[];
-    /** Information to aid in pagination. */
-    page_info: Whop.PageInfo;
+    data: Whop.SetupIntent[];
+    page_info: ListSetupIntentsResponse.PageInfo;
+}
+
+export namespace ListSetupIntentsResponse {
+    export interface PageInfo {
+        end_cursor: string | null;
+        has_next_page: boolean;
+        has_previous_page: boolean;
+        start_cursor: string | null;
+    }
 }
