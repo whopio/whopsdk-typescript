@@ -10,6 +10,8 @@ export namespace ListStatsResponse {
 
     export namespace Data {
         export interface Item {
+            /** Supported breakdown_by values when they differ from the filter properties. */
+            breakdowns?: string[] | undefined;
             /** A short description of what the metric measures. */
             description: string;
             /** The metric's key. Pass it to GET /stats/{metric} to query its values. */

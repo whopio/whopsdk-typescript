@@ -22,11 +22,11 @@ export interface RetrieveStatsRequest {
     user_id?: string;
     /** Start of the range — a date (YYYY-MM-DD), expanded to the start of that day, or an ISO 8601 timestamp (for example 2026-07-16T16:37:00Z), used exactly. */
     from: string;
-    /** End of the range — a date (YYYY-MM-DD), expanded to the end of that day, or an ISO 8601 timestamp (for example 2026-07-17T16:37:00Z), used exactly. */
+    /** End of the range — a date (YYYY-MM-DD), expanded to the end of that day, or an ISO 8601 timestamp (for example 2026-07-17T16:37:00Z), used exactly. Funnel entry ranges cannot exceed 90 days. */
     to: string;
-    /** How wide each point is. Defaults to day. Snapshot metrics are day-only. */
+    /** How wide each point is. Defaults to day. Snapshot metrics are day-only. Funnels support at most 2,000 first-entry cohort buckets. */
     interval?: Whop.RetrieveStatsRequestInterval;
-    /** Split the metric out by one of its properties — each point gets a breakdown array. For example breakdown_by=currency returns an entry for usd, an entry for eur, and so on. */
+    /** Split the metric out by one of its properties — each point gets a breakdown array. For example breakdown_by=currency returns an entry for usd, an entry for eur, and so on. Funnels use a property of the first matched event, with at most 300 groups. experiment_id and variant require an exposure as step 1. For funnel source breakdowns, steps[1][source]=whop:* groups by campaign, whop:<campaign>:* by ad group, and whop:<campaign>:<group>:* by ad. See funnel step properties for current availability. See the metric catalog for supported breakdowns. */
     breakdown_by?: string;
     /** Display currency for money metrics — every amount is converted into this ISO currency using the exchange rate on each period's date. Defaults to usd. For the ads metrics (ad_spend, ad_delivery), pass the account's ads reporting currency to match the ad entity endpoints. On transaction metrics, it is ignored when you filter or break down by currency (those report the original transaction currency, unconverted). */
     convert_to?: string;
@@ -84,6 +84,16 @@ export interface RetrieveStatsRequest {
     snapshot_window?: Whop.RetrieveStatsRequestSnapshotWindow;
     /** Filter the events metric to one or more full event names, for example payment.completed or pixel.lead. Comma-separated names match any listed event. Use group_by=event for separate groups. Available on metrics that list event. */
     event?: string;
+    /** Funnel only. Time allowed from the first event to the final event: integer minutes, hours, or days, up to 30d. */
+    conversion_window?: string;
+    /** Funnel only. Include only entrants whose full conversion window has elapsed. Required for confidence intervals and comparisons. */
+    mature_only?: boolean;
+    /** Funnel only. Required when metric=funnel. Consecutive one-based steps encoded as steps[1][event], steps[1][page], steps[2][event], and so on. Values are scalar strings, never JSON. */
+    steps?: Whop.RetrieveStatsRequestSteps;
+    /** Funnel only. The breakdown value to use as baseline for whole-window final conversion. Requires breakdown_by and mature_only=true; defaults confidence_level to 0.95. */
+    compare_to?: string;
+    /** Funnel only. Confidence level for whole-window final conversion intervals, for example 0.95. Requires mature_only=true. Exposure steps must each filter one user-randomized experiment. */
+    confidence_level?: number;
     /** People metric only: contactable equals this value. Applies to the current person profile for every time bucket. LTV and AOV are in USD. Not accepted by the Events metric. */
     contactable?: boolean;
     /** People metric only: has_purchased equals this value. Applies to the current person profile for every time bucket. LTV and AOV are in USD. Not accepted by the Events metric. */

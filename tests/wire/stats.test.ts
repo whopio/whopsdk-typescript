@@ -18,6 +18,7 @@ describe("StatsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    breakdowns: ["breakdowns"],
                     description:
                         "Share of paid receipts in the selected sales cohort disputed within 14 days of purchase.",
                     key: "snapshot_cohorted_dispute_rate_14d_attr",
@@ -67,8 +68,17 @@ describe("StatsClient", () => {
         const rawResponseBody = {
             data: {
                 currency: "usd",
-                points: [{ breakdown: [{ name: "spend", value: 2.82 }], timestamp: 1767268800, value: 3 }],
-                totals: [{ name: "wins", value: 4 }],
+                points: [
+                    {
+                        breakdown: [
+                            { name: "spend", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 2.82 },
+                        ],
+                        steps: [{ conversion_rate: 100, count: 100, step: 1 }],
+                        timestamp: 1767268800,
+                        value: 3,
+                    },
+                ],
+                totals: [{ name: "wins", steps: [{ conversion_rate: 100, count: 100, step: 1 }], value: 4 }],
             },
         };
 

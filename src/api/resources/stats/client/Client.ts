@@ -93,7 +93,7 @@ export class StatsClient {
     }
 
     /**
-     * Retrieves a metric as a time series of points for an account or user over a time range. The `market_prices` metric is public and requires no authentication.
+     * Retrieves a metric as a time series of points for an account or user over a time range. The `market_prices` metric is public and requires no authentication. The `funnel` metric measures 2 to 10 ordered events per person. Its first matching event inside from/to anchors the cohort, breakdown and conversion window; later entries do not restart it. Intervening events are allowed, and conversions may occur after to. Funnel values are final conversion percentages; steps include counts and cumulative conversion percentages. Experiment funnels use experiment.exposure as step 1 and breakdown_by=variant. See funnel step properties for current availability. Pass steps using bracket parameters such as steps[1][event]=pixel.page&steps[1][page]=/pricing*&steps[2][event]=payment.completed.
      *
      * @param {Whop.RetrieveStatsRequest} request
      * @param {StatsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -162,6 +162,11 @@ export class StatsClient {
             ad_ids: adIds,
             snapshot_window: snapshotWindow,
             event,
+            conversion_window: conversionWindow,
+            mature_only: matureOnly,
+            steps,
+            compare_to: compareTo,
+            confidence_level: confidenceLevel,
             contactable,
             has_purchased: hasPurchased,
             first_seen_after: firstSeenAfter,
@@ -225,6 +230,11 @@ export class StatsClient {
             ad_ids: adIds,
             snapshot_window: snapshotWindow != null ? snapshotWindow : undefined,
             event,
+            conversion_window: conversionWindow,
+            mature_only: matureOnly,
+            steps,
+            compare_to: compareTo,
+            confidence_level: confidenceLevel,
             contactable,
             has_purchased: hasPurchased,
             first_seen_after: firstSeenAfter != null ? firstSeenAfter : undefined,
