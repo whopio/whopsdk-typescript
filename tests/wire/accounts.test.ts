@@ -273,6 +273,26 @@ describe("AccountsClient", () => {
                         url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         visibility: "public",
                     },
+                    rewards: [
+                        {
+                            id: "id",
+                            qualification_amount: {
+                                amount: "-2.50",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            qualification_progress: {
+                                amount: "-2.50",
+                                currency: "usd",
+                                decimals: 2,
+                                display_decimals: 2,
+                            },
+                            qualification_type: "sales",
+                            reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            status: "in_progress",
+                        },
+                    ],
                     route: "biz_xxxxxxxxxxxxxx",
                     send_customer_emails: false,
                     shipping_policy: {
@@ -700,6 +720,16 @@ describe("AccountsClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 visibility: "public",
             },
+            rewards: [
+                {
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_type: "sales",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    status: "in_progress",
+                },
+            ],
             route: "biz_xxxxxxxxxxxxxx",
             send_customer_emails: false,
             shipping_policy: {
@@ -1160,6 +1190,16 @@ describe("AccountsClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 visibility: "public",
             },
+            rewards: [
+                {
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_type: "sales",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    status: "in_progress",
+                },
+            ],
             route: "biz_xxxxxxxxxxxxxx",
             send_customer_emails: false,
             shipping_policy: {
@@ -1547,6 +1587,16 @@ describe("AccountsClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 visibility: "public",
             },
+            rewards: [
+                {
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_type: "sales",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    status: "in_progress",
+                },
+            ],
             route: "biz_xxxxxxxxxxxxxx",
             send_customer_emails: false,
             shipping_policy: {
@@ -1961,6 +2011,16 @@ describe("AccountsClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 visibility: "public",
             },
+            rewards: [
+                {
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_type: "sales",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    status: "in_progress",
+                },
+            ],
             route: "biz_xxxxxxxxxxxxxx",
             send_customer_emails: false,
             shipping_policy: {
@@ -3205,6 +3265,16 @@ describe("AccountsClient", () => {
                 url: "https://whop-assets-example.s3.amazonaws.com/uploads/audio/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                 visibility: "public",
             },
+            rewards: [
+                {
+                    id: "id",
+                    qualification_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_progress: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    qualification_type: "sales",
+                    reward_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    status: "in_progress",
+                },
+            ],
             route: "biz_xxxxxxxxxxxxxx",
             send_customer_emails: false,
             shipping_policy: {
