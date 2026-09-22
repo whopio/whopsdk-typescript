@@ -124,7 +124,6 @@ export namespace WebhookListItem {
             AdCampaignPaymentFailed: "ad_campaign.payment_failed",
             AdCampaignUpdated: "ad_campaign.updated",
             AdUpdated: "ad.updated",
-            PixelEventCreated: "pixel_event.created",
             ChatMessageCreated: "chat.message.created",
             ChatReactionCreated: "chat.reaction.created",
             PaymentCreated: "payment.created",
