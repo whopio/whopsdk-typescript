@@ -14,6 +14,8 @@ export interface Account {
     business_type: string | null;
     /** Whether pending funds may be transferred from this platform account to its connected accounts. */
     can_transfer_pending_balance_to_children: boolean;
+    /** The account's cancellation policy document, or `null` if they have not published one. */
+    cancellation_policy: Whop.File_ | null;
     /** Payment rails enabled for this account, each `active`, `inactive`, or `pending` (onboarding or review in progress). Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise. */
     capabilities: Whop.AccountCapabilities | null;
     /** Whop Cards application details for the account. Returned on `list`, `retrieve`, and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has no card application or blocking application review. */
@@ -80,6 +82,8 @@ export interface Account {
     route: string;
     /** Whether Whop sends transactional emails to customers on behalf of this account. */
     send_customer_emails: boolean;
+    /** The account's shipping policy document, or `null` if they have not published one. */
+    shipping_policy: Whop.File_ | null;
     /** Whether the account appears in joined whops on other accounts. */
     show_joined_whops: boolean;
     /** Whether reviews are displayed on direct-to-consumer product pages. */

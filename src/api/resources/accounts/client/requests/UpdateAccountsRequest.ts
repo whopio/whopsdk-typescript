@@ -21,12 +21,16 @@ export interface UpdateAccountsRequest {
     business_name?: string | null;
     /** High-level business category for the account. See the [business types and industries glossary](/api-reference/beta/accounts/account#business-types-and-industries-glossary) for valid values. */
     business_type?: string | null;
+    /** The account's cancellation policy document. Attached to new disputes as the cancellation policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    cancellation_policy?: UpdateAccountsRequest.CancellationPolicy | null;
     /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
     collect_vat_id?: boolean;
     /** Country where the account is located. */
     country?: string | null;
     /** Account promotional description. When creating a Whop-managed Facebook page, it is truncated to 155 characters and used as the About text. */
     description?: string | null;
+    /** The account's end-user license agreement document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    eula?: UpdateAccountsRequest.Eula | null;
     /** The ID of the product to feature for affiliates. Pass `null` to clear. */
     featured_affiliate_product_id?: string | null;
     /** Public account home page preferences. */
@@ -51,14 +55,20 @@ export interface UpdateAccountsRequest {
     other_business_description?: string | null;
     /** The description of the industry type when industry_type is other. */
     other_industry_description?: string | null;
+    /** The account's privacy policy document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    privacy_policy?: UpdateAccountsRequest.PrivacyPolicy | null;
     /** ID of the tax classification code applied by default to the account's products. See the available [product categories](https://docs.numeral.com/essentials/product-categories). */
     product_tax_code_id?: string | null;
     /** Whether the account requires authorized users to have two-factor authentication enabled. */
     require_2fa?: boolean;
+    /** The account's return and refund policy document. Attached to new disputes as the refund policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    return_policy?: UpdateAccountsRequest.ReturnPolicy | null;
     /** The unique URL slug for the account. */
     route?: string | null;
     /** Whether Whop sends transactional emails to customers on behalf of this account. */
     send_customer_emails?: boolean;
+    /** The account's shipping policy document. Sent with physical-goods dispute evidence. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    shipping_policy?: UpdateAccountsRequest.ShippingPolicy | null;
     /** Whether the account appears in joined whops on other accounts. */
     show_joined_whops?: boolean;
     /** Whether reviews are displayed on direct-to-consumer product pages. */
@@ -79,6 +89,8 @@ export interface UpdateAccountsRequest {
     tax_remitted_by?: UpdateAccountsRequest.TaxRemittedBy;
     /** Determines whether tax is included in the listed price or added at checkout. */
     tax_type?: UpdateAccountsRequest.TaxType;
+    /** The account's terms of service document. Attached to new disputes as the cancellation policy evidence when no cancellation policy is set. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
+    terms_of_service?: UpdateAccountsRequest.TermsOfService | null;
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` uses the standard checkout flow. */
     three_ds_level?: UpdateAccountsRequest.ThreeDsLevel | null;
     /** The display name of the account. */
@@ -116,6 +128,26 @@ export namespace UpdateAccountsRequest {
         postal_code?: (string | null) | undefined;
         /** State, province, or region code, for example `CA`. */
         state?: (string | null) | undefined;
+    }
+
+    /**
+     * The account's cancellation policy document. Attached to new disputes as the cancellation policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface CancellationPolicy {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
+    }
+
+    /**
+     * The account's end-user license agreement document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface Eula {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
     }
 
     export type HomePreferences = HomePreferences.Item[];
@@ -162,6 +194,36 @@ export namespace UpdateAccountsRequest {
         Orange: "orange",
     } as const;
     export type OpengraphImageVariant = (typeof OpengraphImageVariant)[keyof typeof OpengraphImageVariant];
+
+    /**
+     * The account's privacy policy document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface PrivacyPolicy {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
+    }
+
+    /**
+     * The account's return and refund policy document. Attached to new disputes as the refund policy evidence, with the terms of service as the fallback. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface ReturnPolicy {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
+    }
+
+    /**
+     * The account's shipping policy document. Sent with physical-goods dispute evidence. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface ShippingPolicy {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
+    }
 
     /**
      * Account store page display configuration.
@@ -425,6 +487,17 @@ export namespace UpdateAccountsRequest {
         Exclusive: "exclusive",
     } as const;
     export type TaxType = (typeof TaxType)[keyof typeof TaxType];
+
+    /**
+     * The account's terms of service document. Attached to new disputes as the cancellation policy evidence when no cancellation policy is set. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it.
+     */
+    export interface TermsOfService {
+        /** ID of a file from [Create File](/api-reference/files/create-file), prefixed `file_`. */
+        id?: string | undefined;
+        /** Accepts any additional properties */
+        [key: string]: any;
+    }
+
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` uses the standard checkout flow. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",

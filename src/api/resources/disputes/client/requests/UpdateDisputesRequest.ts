@@ -22,7 +22,7 @@ export namespace UpdateDisputesRequest {
         access_activity_log?: (string | null) | undefined;
         /** The billing address the customer provided at checkout. */
         billing_address?: (string | null) | undefined;
-        /** The cancellation policy document. */
+        /** The cancellation policy document. Defaults to the account's cancellation policy, then its terms of service, when not set. */
         cancellation_policy_attachment?: (Evidence.CancellationPolicyAttachment | null) | undefined;
         /** How the cancellation policy was shown to the customer before purchase. */
         cancellation_policy_disclosure?: (string | null) | undefined;
@@ -36,7 +36,7 @@ export namespace UpdateDisputesRequest {
         notes?: (string | null) | undefined;
         /** What the customer purchased, in the seller's own words. */
         product_description?: (string | null) | undefined;
-        /** The refund policy document. */
+        /** The refund policy document. Defaults to the account's return policy when not set. */
         refund_policy_attachment?: (Evidence.RefundPolicyAttachment | null) | undefined;
         /** How the refund policy was shown to the customer before purchase. */
         refund_policy_disclosure?: (string | null) | undefined;
@@ -50,7 +50,7 @@ export namespace UpdateDisputesRequest {
 
     export namespace Evidence {
         /**
-         * The cancellation policy document.
+         * The cancellation policy document. Defaults to the account's cancellation policy, then its terms of service, when not set.
          */
         export interface CancellationPolicyAttachment {
             /** The ID returned by a direct upload. */
@@ -70,7 +70,7 @@ export namespace UpdateDisputesRequest {
         }
 
         /**
-         * The refund policy document.
+         * The refund policy document. Defaults to the account's return policy when not set.
          */
         export interface RefundPolicyAttachment {
             /** The ID returned by a direct upload. */
