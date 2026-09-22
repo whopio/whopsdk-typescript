@@ -48,6 +48,8 @@ export namespace DisputeEvidenceDocument {
     export const DocumentType = {
         ReturnPolicy: "return_policy",
         ShippingPolicy: "shipping_policy",
+        CancellationPolicy: "cancellation_policy",
+        TermsOfService: "terms_of_service",
         PhysicalFulfillment: "physical_fulfillment",
         CustomerOrderHistory: "customer_order_history",
         ProductImage: "product_image",
