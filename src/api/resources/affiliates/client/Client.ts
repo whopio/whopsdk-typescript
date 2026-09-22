@@ -87,8 +87,10 @@ export class AffiliatesClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "affiliates",
                     ),
                     method: "GET",
@@ -200,8 +202,8 @@ export class AffiliatesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "affiliates",
             ),
             method: "POST",
@@ -297,8 +299,8 @@ export class AffiliatesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",
@@ -391,8 +393,8 @@ export class AffiliatesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/archive`,
             ),
             method: "POST",
@@ -485,8 +487,8 @@ export class AffiliatesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/unarchive`,
             ),
             method: "POST",

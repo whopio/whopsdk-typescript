@@ -12,7 +12,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -68,7 +68,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -87,7 +87,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -106,7 +106,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -125,7 +125,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -144,7 +144,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -163,7 +163,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -182,7 +182,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -201,7 +201,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chap_xxxxxxxxxxxxx", lesson_type: "text" };
         const rawResponseBody = {
@@ -287,7 +287,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -316,7 +316,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -345,7 +345,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -374,7 +374,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -403,7 +403,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -432,7 +432,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -461,7 +461,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { chapter_id: "chapter_id", lesson_type: "text" };
         const rawResponseBody = { key: "value" };
@@ -490,7 +490,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -574,7 +574,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -595,7 +595,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -616,7 +616,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -637,7 +637,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -658,7 +658,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -679,7 +679,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -700,7 +700,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -721,7 +721,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = true;
@@ -747,7 +747,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -774,7 +774,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -801,7 +801,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -828,7 +828,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -855,7 +855,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -882,7 +882,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -909,7 +909,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -936,7 +936,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = {
@@ -1021,7 +1021,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1049,7 +1049,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1077,7 +1077,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1105,7 +1105,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1133,7 +1133,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1161,7 +1161,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1189,7 +1189,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -1217,7 +1217,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = true;
@@ -1243,7 +1243,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1270,7 +1270,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1297,7 +1297,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1324,7 +1324,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1351,7 +1351,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1378,7 +1378,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1405,7 +1405,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1432,7 +1432,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = true;
@@ -1458,7 +1458,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1485,7 +1485,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1512,7 +1512,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1539,7 +1539,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1566,7 +1566,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1593,7 +1593,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1620,7 +1620,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1647,7 +1647,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }] };
         const rawResponseBody = {
@@ -1691,7 +1691,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1727,7 +1727,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1763,7 +1763,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1799,7 +1799,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1835,7 +1835,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1871,7 +1871,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };
@@ -1907,7 +1907,7 @@ describe("CourseLessonsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { answers: [{ question_id: "question_id" }, { question_id: "question_id" }] };
         const rawResponseBody = { key: "value" };

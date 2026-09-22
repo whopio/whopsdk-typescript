@@ -12,7 +12,7 @@ describe("TopicsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -64,7 +64,7 @@ describe("TopicsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };

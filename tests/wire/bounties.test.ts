@@ -12,7 +12,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -96,7 +96,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -115,7 +115,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -134,7 +134,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -153,7 +153,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
             description: "Record one continuous pass of a full interior detail, dash to trunk, on a customer vehicle.",
@@ -278,7 +278,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { description: "description", gross_reward_amount: 1.1, title: "title" };
         const rawResponseBody = { key: "value" };
@@ -308,7 +308,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { description: "description", gross_reward_amount: 1.1, title: "title" };
         const rawResponseBody = { key: "value" };
@@ -338,7 +338,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { description: "description", gross_reward_amount: 1.1, title: "title" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -368,7 +368,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -480,7 +480,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -501,7 +501,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = {
@@ -620,7 +620,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -648,7 +648,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -766,7 +766,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -793,7 +793,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -820,7 +820,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -847,7 +847,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -874,7 +874,7 @@ describe("BountiesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { error: { message: "message", type: "type" } };

@@ -12,7 +12,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -77,7 +77,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -98,7 +98,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -119,7 +119,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -140,7 +140,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -161,7 +161,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -182,7 +182,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -203,7 +203,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -224,7 +224,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "exp_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
@@ -273,7 +273,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -301,7 +301,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -329,7 +329,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -357,7 +357,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -385,7 +385,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -413,7 +413,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -441,7 +441,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { experience_id: "experience_id" };
         const rawResponseBody = { key: "value" };
@@ -469,7 +469,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -511,7 +511,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -532,7 +532,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -553,7 +553,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -574,7 +574,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -595,7 +595,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -616,7 +616,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -637,7 +637,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -658,7 +658,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = {
@@ -707,7 +707,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -735,7 +735,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -763,7 +763,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -791,7 +791,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -819,7 +819,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -847,7 +847,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -875,7 +875,7 @@ describe("ForumPostsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };

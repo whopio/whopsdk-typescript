@@ -12,7 +12,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -65,7 +65,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -84,7 +84,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -103,7 +103,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -122,7 +122,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -141,7 +141,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
@@ -182,7 +182,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
@@ -210,7 +210,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
@@ -238,7 +238,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
@@ -266,7 +266,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { key: "value" };
@@ -294,7 +294,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { plan_id: "plan_id" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -322,7 +322,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = { account_id: "biz_xxxxxxxxxxxxxx", plan_id: "plan_id", queued: true };
@@ -349,7 +349,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
@@ -377,7 +377,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
@@ -405,7 +405,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
@@ -433,7 +433,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { key: "value" };
@@ -461,7 +461,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { account_id: "account_id" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -489,7 +489,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -529,7 +529,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -556,7 +556,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -583,7 +583,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -610,7 +610,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -650,7 +650,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -677,7 +677,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -704,7 +704,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -731,7 +731,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -758,7 +758,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -798,7 +798,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -825,7 +825,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -852,7 +852,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -879,7 +879,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -906,7 +906,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -946,7 +946,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -973,7 +973,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1000,7 +1000,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -1027,7 +1027,7 @@ describe("WaitlistEntriesClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { error: { message: "message", type: "type" } };

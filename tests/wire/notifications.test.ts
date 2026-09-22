@@ -12,7 +12,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -84,7 +84,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -103,7 +103,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -122,7 +122,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -141,7 +141,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
             content: "Drop off at 4180 Burnet Rd. Plan on two days for the full coating.",
@@ -172,7 +172,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { content: "content", title: "title" };
         const rawResponseBody = { key: "value" };
@@ -201,7 +201,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { content: "content", title: "title" };
         const rawResponseBody = { key: "value" };
@@ -230,7 +230,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { content: "content", title: "title" };
         const rawResponseBody = { key: "value" };
@@ -259,7 +259,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { content: "content", title: "title" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -288,7 +288,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -324,7 +324,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -349,7 +349,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -374,7 +374,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = {
@@ -409,7 +409,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -435,7 +435,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -461,7 +461,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -487,7 +487,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
@@ -513,7 +513,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -539,7 +539,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -591,7 +591,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
@@ -612,7 +612,7 @@ describe("NotificationsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };

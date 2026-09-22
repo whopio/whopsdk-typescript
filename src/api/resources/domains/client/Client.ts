@@ -82,8 +82,10 @@ export class DomainsClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "domains",
                     ),
                     method: "GET",
@@ -166,8 +168,8 @@ export class DomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "domains",
             ),
             method: "POST",
@@ -241,8 +243,8 @@ export class DomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `domains/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",
@@ -308,8 +310,8 @@ export class DomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `domains/${core.url.encodePathParam(id)}`,
             ),
             method: "DELETE",
@@ -375,8 +377,8 @@ export class DomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `domains/${core.url.encodePathParam(id)}`,
             ),
             method: "PATCH",

@@ -89,8 +89,10 @@ export class DisputesClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "disputes",
                     ),
                     method: "GET",
@@ -196,8 +198,8 @@ export class DisputesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "disputes/summary",
             ),
             method: "GET",
@@ -276,8 +278,8 @@ export class DisputesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `disputes/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",
@@ -353,8 +355,8 @@ export class DisputesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `disputes/${core.url.encodePathParam(id)}`,
             ),
             method: "PATCH",
@@ -436,8 +438,8 @@ export class DisputesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `disputes/${core.url.encodePathParam(id)}/submit`,
             ),
             method: "POST",
@@ -521,8 +523,8 @@ export class DisputesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `disputes/${core.url.encodePathParam(id)}/upload_evidence`,
             ),
             method: "POST",

@@ -12,7 +12,7 @@ describe("DepositsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { destination: "biz_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
@@ -71,7 +71,7 @@ describe("DepositsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { destination: "destination" };
         const rawResponseBody = { key: "value" };
@@ -99,7 +99,7 @@ describe("DepositsClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { destination: "destination" };
         const rawResponseBody = { error: { message: "message", type: "type" } };

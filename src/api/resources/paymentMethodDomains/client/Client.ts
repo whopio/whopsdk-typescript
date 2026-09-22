@@ -96,8 +96,10 @@ export class PaymentMethodDomainsClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "payment_method_domains",
                     ),
                     method: "GET",
@@ -202,8 +204,8 @@ export class PaymentMethodDomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "payment_method_domains",
             ),
             method: "POST",
@@ -288,8 +290,8 @@ export class PaymentMethodDomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payment_method_domains/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",
@@ -367,8 +369,8 @@ export class PaymentMethodDomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payment_method_domains/${core.url.encodePathParam(id)}`,
             ),
             method: "DELETE",
@@ -456,8 +458,8 @@ export class PaymentMethodDomainsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payment_method_domains/${core.url.encodePathParam(id)}/verify`,
             ),
             method: "POST",

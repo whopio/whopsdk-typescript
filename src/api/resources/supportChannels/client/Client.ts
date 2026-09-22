@@ -83,8 +83,10 @@ export class SupportChannelsClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "support_channels",
                     ),
                     method: "GET",
@@ -199,8 +201,8 @@ export class SupportChannelsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "support_channels",
             ),
             method: "POST",
@@ -296,8 +298,8 @@ export class SupportChannelsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `support_channels/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",

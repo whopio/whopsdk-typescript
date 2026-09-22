@@ -9,6 +9,7 @@ import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
+import { DirectClient } from "../resources/direct/client/Client.js";
 
 export declare namespace PaymentsClient {
     export type Options = BaseClientOptions;
@@ -23,9 +24,14 @@ export declare namespace PaymentsClient {
  */
 export class PaymentsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PaymentsClient.Options>;
+    protected _direct: DirectClient | undefined;
 
     constructor(options: PaymentsClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get direct(): DirectClient {
+        return (this._direct ??= new DirectClient(this._options));
     }
 
     /**
@@ -102,8 +108,10 @@ export class PaymentsClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         "payments",
                     ),
                     method: "GET",
@@ -196,8 +204,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 "payments",
             ),
             method: "POST",
@@ -282,8 +290,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}`,
             ),
             method: "GET",
@@ -362,8 +370,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}/capture`,
             ),
             method: "POST",
@@ -442,8 +450,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}/fees`,
             ),
             method: "GET",
@@ -521,8 +529,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}/refund`,
             ),
             method: "POST",
@@ -607,8 +615,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}/retry`,
             ),
             method: "POST",
@@ -686,8 +694,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(id)}/void`,
             ),
             method: "POST",
@@ -767,8 +775,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(paymentId)}/resume`,
             ),
             method: "POST",
@@ -855,8 +863,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(paymentId)}/return_url`,
             ),
             method: "PATCH",
@@ -940,8 +948,8 @@ export class PaymentsClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `payments/${core.url.encodePathParam(paymentId)}/status`,
             ),
             method: "GET",

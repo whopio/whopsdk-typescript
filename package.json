@@ -1089,6 +1089,17 @@
             },
             "default": "./dist/cjs/api/resources/partners/resources/businesses/resources/earnings/exports.js"
         },
+        "./payments/direct": {
+            "import": {
+                "types": "./dist/esm/api/resources/payments/resources/direct/exports.d.mts",
+                "default": "./dist/esm/api/resources/payments/resources/direct/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/payments/resources/direct/exports.d.ts",
+                "default": "./dist/cjs/api/resources/payments/resources/direct/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/payments/resources/direct/exports.js"
+        },
         "./payouts/methods": {
             "import": {
                 "types": "./dist/esm/api/resources/payouts/resources/methods/exports.d.mts",
@@ -1110,6 +1121,17 @@
                 "default": "./dist/cjs/api/resources/payouts/resources/supportedMethods/exports.js"
             },
             "default": "./dist/cjs/api/resources/payouts/resources/supportedMethods/exports.js"
+        },
+        "./setupIntents/direct": {
+            "import": {
+                "types": "./dist/esm/api/resources/setupIntents/resources/direct/exports.d.mts",
+                "default": "./dist/esm/api/resources/setupIntents/resources/direct/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/setupIntents/resources/direct/exports.d.ts",
+                "default": "./dist/cjs/api/resources/setupIntents/resources/direct/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/setupIntents/resources/direct/exports.js"
         },
         "./users/oauthGrants": {
             "import": {

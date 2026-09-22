@@ -410,7 +410,7 @@ This SDK allows you to configure different environments for API requests.
 import { WhopClient, WhopEnvironment } from "@whop/sdk";
 
 const client = new WhopClient({
-    environment: WhopEnvironment.Default,
+    environment: WhopEnvironment.Production,
 });
 ```
 
