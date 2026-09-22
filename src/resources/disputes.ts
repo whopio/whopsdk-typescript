@@ -233,8 +233,8 @@ export namespace Dispute {
     billing_address: string | null;
 
     /**
-     * The cancellation policy document. Falls back to Whop's platform policy when the
-     * seller has not uploaded their own.
+     * The cancellation policy document. Defaults to the account's cancellation policy,
+     * then its terms of service, then its return policy, then Whop's platform policy.
      */
     cancellation_policy_attachment: Evidence.CancellationPolicyAttachment | null;
 
@@ -271,8 +271,8 @@ export namespace Dispute {
     product_description: string | null;
 
     /**
-     * The refund policy document. Falls back to Whop's platform policy when the seller
-     * has not uploaded their own.
+     * The refund policy document. Defaults to the account's return policy, then its
+     * terms of service, then Whop's platform policy.
      */
     refund_policy_attachment: Evidence.RefundPolicyAttachment | null;
 
@@ -299,8 +299,8 @@ export namespace Dispute {
 
   export namespace Evidence {
     /**
-     * The cancellation policy document. Falls back to Whop's platform policy when the
-     * seller has not uploaded their own.
+     * The cancellation policy document. Defaults to the account's cancellation policy,
+     * then its terms of service, then its return policy, then Whop's platform policy.
      */
     export interface CancellationPolicyAttachment {
       /**
@@ -391,6 +391,8 @@ export namespace Dispute {
       document_type:
         | 'return_policy'
         | 'shipping_policy'
+        | 'cancellation_policy'
+        | 'terms_of_service'
         | 'physical_fulfillment'
         | 'customer_order_history'
         | 'product_image'
@@ -476,8 +478,8 @@ export namespace Dispute {
     }
 
     /**
-     * The refund policy document. Falls back to Whop's platform policy when the seller
-     * has not uploaded their own.
+     * The refund policy document. Defaults to the account's return policy, then its
+     * terms of service, then Whop's platform policy.
      */
     export interface RefundPolicyAttachment {
       /**

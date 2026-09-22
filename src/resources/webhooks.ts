@@ -832,6 +832,12 @@ export namespace AccountFinancingApprovedWebhookEvent {
     can_transfer_pending_balance_to_children: boolean;
 
     /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    cancellation_policy: Data.CancellationPolicy | null;
+
+    /**
      * Payment rails enabled for this account, each `active`, `inactive`, or `pending`
      * (onboarding or review in progress). Computed only on `retrieve` and `me` for
      * callers with `company:balance:read` scope; `null` otherwise.
@@ -1003,6 +1009,12 @@ export namespace AccountFinancingApprovedWebhookEvent {
      * Whether Whop sends transactional emails to customers on behalf of this account.
      */
     send_customer_emails: boolean;
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    shipping_policy: Data.ShippingPolicy | null;
 
     /**
      * Whether the account appears in joined whops on other accounts.
@@ -1238,6 +1250,102 @@ export namespace AccountFinancingApprovedWebhookEvent {
            */
           date: string;
         }
+      }
+    }
+
+    /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    export interface CancellationPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<CancellationPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace CancellationPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
       }
     }
 
@@ -2133,6 +2241,102 @@ export namespace AccountFinancingApprovedWebhookEvent {
     }
 
     export namespace ReturnPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
+      }
+    }
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    export interface ShippingPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<ShippingPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace ShippingPolicy {
       /**
        * The presigned URL for each part. Present only on create, and only for multipart
        * uploads.
@@ -2616,6 +2820,12 @@ export namespace AccountFinancingDeniedWebhookEvent {
     can_transfer_pending_balance_to_children: boolean;
 
     /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    cancellation_policy: Data.CancellationPolicy | null;
+
+    /**
      * Payment rails enabled for this account, each `active`, `inactive`, or `pending`
      * (onboarding or review in progress). Computed only on `retrieve` and `me` for
      * callers with `company:balance:read` scope; `null` otherwise.
@@ -2787,6 +2997,12 @@ export namespace AccountFinancingDeniedWebhookEvent {
      * Whether Whop sends transactional emails to customers on behalf of this account.
      */
     send_customer_emails: boolean;
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    shipping_policy: Data.ShippingPolicy | null;
 
     /**
      * Whether the account appears in joined whops on other accounts.
@@ -3022,6 +3238,102 @@ export namespace AccountFinancingDeniedWebhookEvent {
            */
           date: string;
         }
+      }
+    }
+
+    /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    export interface CancellationPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<CancellationPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace CancellationPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
       }
     }
 
@@ -3917,6 +4229,102 @@ export namespace AccountFinancingDeniedWebhookEvent {
     }
 
     export namespace ReturnPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
+      }
+    }
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    export interface ShippingPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<ShippingPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace ShippingPolicy {
       /**
        * The presigned URL for each part. Present only on create, and only for multipart
        * uploads.
@@ -4400,6 +4808,12 @@ export namespace AccountUpdatedWebhookEvent {
     can_transfer_pending_balance_to_children: boolean;
 
     /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    cancellation_policy: Data.CancellationPolicy | null;
+
+    /**
      * Payment rails enabled for this account, each `active`, `inactive`, or `pending`
      * (onboarding or review in progress). Computed only on `retrieve` and `me` for
      * callers with `company:balance:read` scope; `null` otherwise.
@@ -4571,6 +4985,12 @@ export namespace AccountUpdatedWebhookEvent {
      * Whether Whop sends transactional emails to customers on behalf of this account.
      */
     send_customer_emails: boolean;
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    shipping_policy: Data.ShippingPolicy | null;
 
     /**
      * Whether the account appears in joined whops on other accounts.
@@ -4806,6 +5226,102 @@ export namespace AccountUpdatedWebhookEvent {
            */
           date: string;
         }
+      }
+    }
+
+    /**
+     * The account's cancellation policy document, or `null` if they have not published
+     * one.
+     */
+    export interface CancellationPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<CancellationPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace CancellationPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
       }
     }
 
@@ -5701,6 +6217,102 @@ export namespace AccountUpdatedWebhookEvent {
     }
 
     export namespace ReturnPolicy {
+      /**
+       * The presigned URL for each part. Present only on create, and only for multipart
+       * uploads.
+       */
+      export interface MultipartUploadURL {
+        /**
+         * The 1-based index of this part within the multipart upload.
+         */
+        part_number: number;
+
+        /**
+         * The presigned URL to PUT this part's bytes to.
+         */
+        url: string;
+      }
+    }
+
+    /**
+     * The account's shipping policy document, or `null` if they have not published
+     * one.
+     */
+    export interface ShippingPolicy {
+      /**
+       * The file's ID, prefixed `file_`.
+       */
+      id: string;
+
+      /**
+       * The file's MIME type, e.g. `application/pdf`.
+       */
+      content_type: string | null;
+
+      /**
+       * When the file was created, as an ISO 8601 timestamp.
+       */
+      created_at: string;
+
+      /**
+       * The original filename, including its extension.
+       */
+      filename: string | null;
+
+      /**
+       * The type of this object, always `file`.
+       */
+      object: string;
+
+      /**
+       * The file size in bytes. `null` until the upload has finished.
+       */
+      size: number | null;
+
+      /**
+       * Where the file is in its upload lifecycle.
+       */
+      upload_status: 'pending' | 'processing' | 'ready' | 'failed';
+
+      /**
+       * A URL to download the file: a permanent CDN URL for public files, a signed
+       * expiring URL for private ones. `null` until the upload has finished.
+       */
+      url: string | null;
+
+      /**
+       * `public` files are served via an unsigned CDN URL; `private` files via a signed,
+       * expiring URL.
+       */
+      visibility: 'public' | 'private';
+
+      /**
+       * The byte size each part (except the last) must be. Present only on create, and
+       * only for multipart uploads.
+       */
+      multipart_chunk_size?: number | null;
+
+      /**
+       * The ID of the multipart upload, passed back to `complete`. Present only on
+       * create, and only for multipart uploads.
+       */
+      multipart_upload_id?: string | null;
+
+      multipart_upload_urls?: Array<ShippingPolicy.MultipartUploadURL> | null;
+
+      /**
+       * Headers to send with the upload PUT. Present only on create.
+       */
+      upload_headers?: unknown;
+
+      /**
+       * Presigned URL to PUT the file's bytes to. Present only on create, and only for
+       * single-part uploads.
+       */
+      upload_url?: string | null;
+    }
+
+    export namespace ShippingPolicy {
       /**
        * The presigned URL for each part. Present only on create, and only for multipart
        * uploads.
