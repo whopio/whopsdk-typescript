@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface AccountFeeMarkups {
+    /** The markup on card purchases settled by the connected account. */
+    card_spend: Whop.AccountFeeMarkup;
     /** The markup on cryptocurrency token swaps. */
     crypto_swaps: Whop.AccountFeeMarkup;
     /** Markups on deposits into the account's balance, keyed by rail: `bank` and `crypto`. */

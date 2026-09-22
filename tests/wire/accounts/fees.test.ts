@@ -958,6 +958,21 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             child_markups: {
+                card_spend: {
+                    adjustable: false,
+                    default: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    percentage: 0,
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 crypto_swaps: {
                     adjustable: false,
                     default: {
@@ -975,7 +990,7 @@ describe("FeesClient", () => {
                 },
                 deposits: {
                     bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -987,10 +1002,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -1002,7 +1017,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 payments: {
@@ -1022,22 +1037,22 @@ describe("FeesClient", () => {
                 },
                 payouts: {
                     bank_wire: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
-                            fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
                         },
-                        fixed: { amount: "5.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         maximum: {
                             fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 100,
                         },
                         percentage: 0,
-                        source: "custom",
-                        unadjustable_reason: null,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -1049,10 +1064,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     digital_wallet: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -1064,10 +1079,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     next_day_bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -1079,10 +1094,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     rtp: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -1094,7 +1109,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 transfers: {
@@ -3699,6 +3714,21 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             markups: {
+                card_spend: {
+                    adjustable: false,
+                    default: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    percentage: 0,
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 crypto_swaps: {
                     adjustable: false,
                     default: {
@@ -3716,7 +3746,7 @@ describe("FeesClient", () => {
                 },
                 deposits: {
                     bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3728,10 +3758,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3743,7 +3773,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 payments: {
@@ -3763,22 +3793,22 @@ describe("FeesClient", () => {
                 },
                 payouts: {
                     bank_wire: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
-                            fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
                         },
-                        fixed: { amount: "5.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         maximum: {
                             fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 100,
                         },
                         percentage: 0,
-                        source: "custom",
-                        unadjustable_reason: null,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3790,10 +3820,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     digital_wallet: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3805,10 +3835,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     next_day_bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3820,10 +3850,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     rtp: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -3835,7 +3865,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 transfers: {
@@ -8984,6 +9014,21 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             child_markups: {
+                card_spend: {
+                    adjustable: false,
+                    default: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    percentage: 0,
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 crypto_swaps: {
                     adjustable: false,
                     default: {
@@ -9001,7 +9046,7 @@ describe("FeesClient", () => {
                 },
                 deposits: {
                     bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9013,10 +9058,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9028,7 +9073,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 payments: {
@@ -9048,22 +9093,22 @@ describe("FeesClient", () => {
                 },
                 payouts: {
                     bank_wire: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
-                            fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
                         },
-                        fixed: { amount: "5.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         maximum: {
                             fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 100,
                         },
                         percentage: 0,
-                        source: "custom",
-                        unadjustable_reason: null,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9075,10 +9120,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     digital_wallet: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9090,10 +9135,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     next_day_bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9105,10 +9150,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     rtp: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -9120,7 +9165,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 transfers: {
@@ -11725,6 +11770,21 @@ describe("FeesClient", () => {
                 unadjustable_reason: "not_permitted",
             },
             markups: {
+                card_spend: {
+                    adjustable: false,
+                    default: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: {
+                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 0,
+                    },
+                    percentage: 0,
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
                 crypto_swaps: {
                     adjustable: false,
                     default: {
@@ -11742,7 +11802,7 @@ describe("FeesClient", () => {
                 },
                 deposits: {
                     bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11754,10 +11814,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11769,7 +11829,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 payments: {
@@ -11789,22 +11849,22 @@ describe("FeesClient", () => {
                 },
                 payouts: {
                     bank_wire: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
-                            fixed: { amount: "2.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
                         },
-                        fixed: { amount: "5.00", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                         maximum: {
                             fixed: { amount: "100.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 100,
                         },
                         percentage: 0,
-                        source: "custom",
-                        unadjustable_reason: null,
+                        source: "default",
+                        unadjustable_reason: "not_permitted",
                     },
                     crypto: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11816,10 +11876,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     digital_wallet: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11831,10 +11891,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     next_day_bank: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11846,10 +11906,10 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                     rtp: {
-                        adjustable: true,
+                        adjustable: false,
                         default: {
                             fixed: { amount: "0.00", currency: "usd", decimals: 2, display_decimals: 2 },
                             percentage: 0,
@@ -11861,7 +11921,7 @@ describe("FeesClient", () => {
                         },
                         percentage: 0,
                         source: "default",
-                        unadjustable_reason: null,
+                        unadjustable_reason: "not_permitted",
                     },
                 },
                 transfers: {
