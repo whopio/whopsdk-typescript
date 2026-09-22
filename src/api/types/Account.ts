@@ -78,6 +78,7 @@ export interface Account {
     required_actions: Whop.AccountRequiredAction[] | null;
     /** The account's return policy document, or `null` if they have not published one. */
     return_policy: Whop.File_ | null;
+    rewards?: Whop.AccountPartnerReward[] | undefined;
     /** Account public route identifier. */
     route: string;
     /** Whether Whop sends transactional emails to customers on behalf of this account. */
