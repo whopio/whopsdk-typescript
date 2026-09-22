@@ -14,12 +14,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "5734",
-            merchant_name: "ACME SOFTWARE",
-            rate_bps: 500,
-            starts_at: "2026-01-01T12:00:00Z",
-        };
+        const rawRequestBody = { rate_bps: 500, starts_at: "2026-01-01T12:00:00Z" };
         const rawResponseBody = {
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Cloud cashback",
@@ -45,8 +40,6 @@ describe("CashbackRulesClient", () => {
             .build();
 
         const response = await client.cashbackRules.create({
-            merchant_category_code: "5734",
-            merchant_name: "ACME SOFTWARE",
             rate_bps: 500,
             starts_at: "2026-01-01T12:00:00Z",
         });
@@ -62,12 +55,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "merchant_category_code",
-            merchant_name: "x",
-            rate_bps: 10000,
-            starts_at: "2024-01-15T09:30:00Z",
-        };
+        const rawRequestBody = { rate_bps: 10000, starts_at: "2024-01-15T09:30:00Z" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -81,8 +69,6 @@ describe("CashbackRulesClient", () => {
 
         await expect(async () => {
             return await client.cashbackRules.create({
-                merchant_category_code: "merchant_category_code",
-                merchant_name: "x",
                 rate_bps: 10000,
                 starts_at: "2024-01-15T09:30:00Z",
             });
@@ -98,12 +84,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "merchant_category_code",
-            merchant_name: "x",
-            rate_bps: 10000,
-            starts_at: "2024-01-15T09:30:00Z",
-        };
+        const rawRequestBody = { rate_bps: 10000, starts_at: "2024-01-15T09:30:00Z" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -117,8 +98,6 @@ describe("CashbackRulesClient", () => {
 
         await expect(async () => {
             return await client.cashbackRules.create({
-                merchant_category_code: "merchant_category_code",
-                merchant_name: "x",
                 rate_bps: 10000,
                 starts_at: "2024-01-15T09:30:00Z",
             });
@@ -134,12 +113,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "merchant_category_code",
-            merchant_name: "x",
-            rate_bps: 10000,
-            starts_at: "2024-01-15T09:30:00Z",
-        };
+        const rawRequestBody = { rate_bps: 10000, starts_at: "2024-01-15T09:30:00Z" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -153,8 +127,6 @@ describe("CashbackRulesClient", () => {
 
         await expect(async () => {
             return await client.cashbackRules.create({
-                merchant_category_code: "merchant_category_code",
-                merchant_name: "x",
                 rate_bps: 10000,
                 starts_at: "2024-01-15T09:30:00Z",
             });
@@ -170,12 +142,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "merchant_category_code",
-            merchant_name: "x",
-            rate_bps: 10000,
-            starts_at: "2024-01-15T09:30:00Z",
-        };
+        const rawRequestBody = { rate_bps: 10000, starts_at: "2024-01-15T09:30:00Z" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -189,8 +156,6 @@ describe("CashbackRulesClient", () => {
 
         await expect(async () => {
             return await client.cashbackRules.create({
-                merchant_category_code: "merchant_category_code",
-                merchant_name: "x",
                 rate_bps: 10000,
                 starts_at: "2024-01-15T09:30:00Z",
             });
@@ -206,12 +171,7 @@ describe("CashbackRulesClient", () => {
             idempotencyKey: "test",
             environment: server.baseUrl,
         });
-        const rawRequestBody = {
-            merchant_category_code: "merchant_category_code",
-            merchant_name: "x",
-            rate_bps: 10000,
-            starts_at: "2024-01-15T09:30:00Z",
-        };
+        const rawRequestBody = { rate_bps: 10000, starts_at: "2024-01-15T09:30:00Z" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -225,8 +185,6 @@ describe("CashbackRulesClient", () => {
 
         await expect(async () => {
             return await client.cashbackRules.create({
-                merchant_category_code: "merchant_category_code",
-                merchant_name: "x",
                 rate_bps: 10000,
                 starts_at: "2024-01-15T09:30:00Z",
             });

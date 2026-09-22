@@ -3,8 +3,6 @@
 /**
  * @example
  *     {
- *         merchant_category_code: "5734",
- *         merchant_name: "ACME SOFTWARE",
  *         rate_bps: 500,
  *         starts_at: "2026-01-01T12:00:00Z"
  *     }
@@ -14,13 +12,13 @@ export interface CreateCashbackRulesRequest {
     description?: string | null;
     /** Exclusive end, strictly later than starts_at. Omit or set null for no expiration. */
     expires_at?: string | null;
-    /** Four-digit MCC, including leading zeros. Must match together with merchant_name. */
-    merchant_category_code: string;
-    /** Raw merchant name reported by the card provider, not the enriched display name. Matched with the MCC; not a substring or wildcard. */
-    merchant_name: string;
+    /** Four-digit MCC, including leading zeros. Null matches any MCC. When both merchant filters are absent, scoped_account_id is required. */
+    merchant_category_code?: string | null;
+    /** Raw merchant name reported by the card provider, not the enriched display name. Omit or set null to match any merchant name. Supplied names must contain a non-whitespace character and match together with any MCC filter. */
+    merchant_name?: string | null;
     /** Cashback rate in basis points: 500 means 5%. */
     rate_bps: number;
-    /** Account ID prefixed biz_ belonging to a direct connected account. Omit or set null to designate all direct connected accounts. */
+    /** Account ID prefixed biz_ belonging to a direct connected account. Required when both merchant filters are omitted or null. Otherwise, omit or set null to designate all direct connected accounts. */
     scoped_account_id?: string | null;
     /** Inclusive start, strictly later than the current time, as an ISO 8601 timestamp. */
     starts_at: string;

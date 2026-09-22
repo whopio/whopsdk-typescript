@@ -13,10 +13,10 @@ export interface CashbackRule {
     funding_account_id: string;
     /** Cashback rule ID, prefixed `cicbr_`. */
     id: string;
-    /** Four-digit merchant category code. Both merchant filters must match. */
-    merchant_category_code: string;
-    /** Raw merchant name reported by the card provider. Matched together with the merchant category code; not a substring or enriched display-name match. */
-    merchant_name: string;
+    /** Four-digit merchant category code. Null matches any MCC. When both merchant filters are null, scoped_account_id is required. */
+    merchant_category_code: string | null;
+    /** Raw merchant name reported by the card provider. Null matches any merchant name. When set, matches together with any MCC filter; not a substring or enriched display-name match. */
+    merchant_name: string | null;
     /** Cashback rate in basis points. 100 means 1%, and 10000 means 100%. */
     rate_bps: number;
     /** Connected account ID, prefixed `biz_`. Null designates all direct connected accounts of the funding platform. */

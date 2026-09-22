@@ -17,7 +17,7 @@ export declare namespace CashbackRulesClient {
 }
 
 /**
- * Cashback rules designate a funding platform, a merchant name and category, a rate, and an eligibility window. An optional account ID limits the rule to one of the platform's direct connected accounts.
+ * Cashback rules designate a funding platform, optional merchant name and category filters, a rate, and an eligibility window. Every supplied merchant filter must match. An account ID limits the rule to one of the platform's direct connected accounts and is required when both merchant filters are omitted or null.
  *
  * Use the Cashback Rules API to create future-dated rules, update their merchant name, MCC, description, or expiration, and list every rule funded by the authenticated platform, including expired and discarded rules. Discarded rules cannot be updated. Creating or updating a rule does not transfer funds.
  */
@@ -29,7 +29,7 @@ export class CashbackRulesClient {
     }
 
     /**
-     * Creates a future-dated card cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Both the raw merchant name and four-digit MCC are required. Optionally limit the rule to one direct connected account. The funding account is derived from the credential and cannot be supplied. Creation does not transfer funds. Supports Idempotency-Key for safe retries.
+     * Creates a future-dated card cashback rule funded by the authenticated platform account. Requires payout:transfer_funds. Merchant name and MCC are optional. Every supplied merchant filter must match. When both are omitted or null, scoped_account_id is required and all eligible transactions for that account match. Optionally limit the rule to one direct connected account. The funding account is derived from the credential and cannot be supplied. Creation does not transfer funds. Supports Idempotency-Key for safe retries.
      *
      * @param {Whop.CreateCashbackRulesRequest} request
      * @param {CashbackRulesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -44,8 +44,6 @@ export class CashbackRulesClient {
      *
      * @example
      *     await client.cashbackRules.create({
-     *         merchant_category_code: "5734",
-     *         merchant_name: "ACME SOFTWARE",
      *         rate_bps: 500,
      *         starts_at: "2026-01-01T12:00:00Z"
      *     })
