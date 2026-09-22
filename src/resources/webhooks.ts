@@ -839,9 +839,9 @@ export namespace AccountFinancingApprovedWebhookEvent {
     capabilities: Data.Capabilities | null;
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     cards: Data.Cards | null;
 
@@ -1310,9 +1310,9 @@ export namespace AccountFinancingApprovedWebhookEvent {
     }
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     export interface Cards {
       /**
@@ -2623,9 +2623,9 @@ export namespace AccountFinancingDeniedWebhookEvent {
     capabilities: Data.Capabilities | null;
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     cards: Data.Cards | null;
 
@@ -3094,9 +3094,9 @@ export namespace AccountFinancingDeniedWebhookEvent {
     }
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     export interface Cards {
       /**
@@ -4407,9 +4407,9 @@ export namespace AccountUpdatedWebhookEvent {
     capabilities: Data.Capabilities | null;
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     cards: Data.Cards | null;
 
@@ -4878,9 +4878,9 @@ export namespace AccountUpdatedWebhookEvent {
     }
 
     /**
-     * Whop Cards application details for the account. Computed only on `retrieve` and
-     * `me` for callers with `company:balance:read` scope; `null` otherwise, or when
-     * the account has no card application.
+     * Whop Cards application details for the account. Returned on `list`, `retrieve`,
+     * and `me` for callers with `company:balance:read` scope; `null` otherwise, or
+     * when the account has no card application or blocking application review.
      */
     export interface Cards {
       /**
