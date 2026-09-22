@@ -63,7 +63,13 @@ describe("PaymentsClient", () => {
                     next_payment_attempt_at: "next_payment_attempt_at",
                     paid_at: "2026-01-01T12:00:00.000Z",
                     payment_instrument: {
-                        card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                        card: {
+                            brand: "visa",
+                            exp_month: 10,
+                            exp_year: 2031,
+                            issuer_identification_number: "41111111",
+                            last4: "4242",
+                        },
                         display_name: "Visa •••• 4242",
                         icons: {
                             card: {
@@ -268,7 +274,13 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -565,7 +577,13 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1011,7 +1029,13 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1308,7 +1332,13 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {
@@ -1545,7 +1575,13 @@ describe("PaymentsClient", () => {
             next_payment_attempt_at: "next_payment_attempt_at",
             paid_at: "2026-01-01T12:00:00.000Z",
             payment_instrument: {
-                card: { brand: "visa", issuer_identification_number: "41111111", last4: "4242" },
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
                 display_name: "Visa •••• 4242",
                 icons: {
                     card: {

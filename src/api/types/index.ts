@@ -425,6 +425,7 @@ export * from "./ReviewListItem.js";
 export * from "./ReviewStatus.js";
 export * from "./ScheduleFrequencies.js";
 export * from "./SetupIntent.js";
+export * from "./SetupIntentLegacy.js";
 export * from "./SetupIntentListItem.js";
 export * from "./SetupIntentStatuses.js";
 export * from "./SetupLastSetupError.js";

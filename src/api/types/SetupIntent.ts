@@ -2,124 +2,48 @@
 
 import type * as Whop from "../index.js";
 
-/**
- * A setup intent allows a user to save a payment method for future use without making an immediate purchase.
- */
 export interface SetupIntent {
-    /** The checkout session configuration associated with this setup intent. Null if no checkout session was used. */
-    checkout_configuration: SetupIntent.CheckoutConfiguration | null;
-    /** The company that initiated this setup intent. Null if the company has been deleted. */
-    company: SetupIntent.Company | null;
-    /** The datetime the setup intent was created. */
+    /** The account the payment method is saved for, prefixed `biz_`. */
+    account_id: string | null;
+    /** The checkout configuration this setup was created through, prefixed `ch_`. Null for a setup created through this API rather than a hosted checkout. */
+    checkout_configuration_id: string | null;
+    /** The credential a buyer's surface presents to poll this setup and set its return URL — hand it to the elements' `handleNextAction`. Only on setups created through this API, and always null in list responses — retrieve the setup intent for it. */
+    client_secret: string | null;
+    /** When the setup intent was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** A human-readable error message explaining why the setup intent failed. Null if no error occurred. */
-    error_message: string | null;
-    /** The unique identifier for the setup intent. */
+    /** Setup intent ID, prefixed `sint_`. */
     id: string;
-    /** The company member associated with this setup intent. Null if the user is not a member. */
-    member: SetupIntent.Member | null;
-    /** Custom key-value pairs attached to this setup intent. Null if no metadata was provided. */
+    /** Why the setup ended where it did, or `null` when nothing has failed. Present on `canceled` — a buyer who abandoned carries no code, one refused by the provider does. Dropped once the setup succeeds. */
+    last_setup_error: Whop.SetupLastSetupError | null;
+    /** The buyer's member record on the account, prefixed `mber_`. Null without the member:basic:read permission, unless the caller is the buyer. */
+    member_id: string | null;
+    /** Your own key-value data attached when the setup intent was created. */
     metadata: Record<string, unknown> | null;
-    /** The saved payment method created by this setup intent. Null if the setup has not completed successfully. */
-    payment_method: SetupIntent.PaymentMethod | null;
-    /** The current status of the setup intent. */
-    status: Whop.SetupIntentStatuses;
-    /** Whether 3D Secure authentication was completed when this payment method was set up. */
+    /** The method behind this setup shaped for display: a buyer-facing name, the standard icon set, and the card's brand, last four, issuer identification number, and expiry when it was a card. Null until a method was collected. */
+    payment_instrument: Whop.PaymentInstrument | null;
+    /** The saved payment method, prefixed `payt_`, ready to charge with Create Payment. Null until the setup has `succeeded`. */
+    payment_method_id: string | null;
+    /** The kind of instrument being saved, for example `card` or `us_bank_account`. */
+    payment_method_type: Whop.PaymentMethodTypes | null;
+    /** Where the buyer lands after completing an off-site step, or `null` to leave them where they are. */
+    return_url: string | null;
+    /** How far the setup has got. **A 201 or 200 means we answered, not that the method was saved — always branch on this.** `requires_action` — the buyer has a step outstanding; hand `client_secret` to the elements or poll Retrieve setup status. `processing` — the processor is deciding. `succeeded` — the method is saved, and only this one means saved. `canceled` — abandoned or refused; see `last_setup_error`. */
+    status: SetupIntent.Status;
+    /** True when the buyer completed 3D Secure while saving this payment method. */
     three_ds_verified: boolean;
+    /** When the setup intent was last updated, as an ISO 8601 timestamp. */
+    updated_at: string;
+    /** The user saving the payment method. Null when the buyer is a company rather than a user. */
+    user: Whop.UserSummary | null;
 }
 
 export namespace SetupIntent {
-    /**
-     * The checkout session configuration associated with this setup intent. Null if no checkout session was used.
-     */
-    export interface CheckoutConfiguration {
-        /** The unique identifier for the checkout session. */
-        id: string;
-    }
-
-    /**
-     * The company that initiated this setup intent. Null if the company has been deleted.
-     */
-    export interface Company {
-        /** The unique identifier for the company. */
-        id: string;
-    }
-
-    /**
-     * The company member associated with this setup intent. Null if the user is not a member.
-     */
-    export interface Member {
-        /** The unique identifier for the company member. */
-        id: string;
-        /** The user for this member, if any. */
-        user: Member.User | null;
-    }
-
-    export namespace Member {
-        /**
-         * The user for this member, if any.
-         */
-        export interface User {
-            /** The digital mailing address of the user. */
-            email: string | null;
-            /** The unique identifier for the company member user. */
-            id: string;
-            /** The user's full name. */
-            name: string | null;
-            /** The whop username. */
-            username: string;
-        }
-    }
-
-    /**
-     * The saved payment method created by this setup intent. Null if the setup has not completed successfully.
-     */
-    export interface PaymentMethod {
-        /** The card data associated with the payment method, if its a debit or credit card. */
-        card: PaymentMethod.Card | null;
-        /** The datetime the payment token was created. */
-        created_at: string;
-        /** The unique identifier for the payment token. */
-        id: string;
-        /** The mailing address associated with the payment method's user */
-        mailing_address: PaymentMethod.MailingAddress | null;
-        /** The payment method type of the payment method */
-        payment_method_type: Whop.PaymentMethodTypes;
-    }
-
-    export namespace PaymentMethod {
-        /**
-         * The card data associated with the payment method, if its a debit or credit card.
-         */
-        export interface Card {
-            /** The card network (e.g., visa, mastercard, amex). Null if the brand could not be determined. */
-            brand: Whop.CardBrands | null;
-            /** The two-digit expiration month of the card (1-12). Null if not available. */
-            exp_month: number | null;
-            /** The two-digit expiration year of the card (e.g., 27 for 2027). Null if not available. */
-            exp_year: number | null;
-            /** The last four digits of the card number. Null if not available. */
-            last4: string | null;
-        }
-
-        /**
-         * The mailing address associated with the payment method's user
-         */
-        export interface MailingAddress {
-            /** The city of the address. */
-            city: string | null;
-            /** The country of the address. */
-            country: string | null;
-            /** The line 1 of the address. */
-            line1: string | null;
-            /** The line 2 of the address. */
-            line2: string | null;
-            /** The name of the customer. */
-            name: string | null;
-            /** The postal code of the address. */
-            postal_code: string | null;
-            /** The state of the address. */
-            state: string | null;
-        }
-    }
+    /** How far the setup has got. **A 201 or 200 means we answered, not that the method was saved — always branch on this.** `requires_action` — the buyer has a step outstanding; hand `client_secret` to the elements or poll Retrieve setup status. `processing` — the processor is deciding. `succeeded` — the method is saved, and only this one means saved. `canceled` — abandoned or refused; see `last_setup_error`. */
+    export const Status = {
+        Processing: "processing",
+        Succeeded: "succeeded",
+        Canceled: "canceled",
+        RequiresAction: "requires_action",
+    } as const;
+    export type Status = (typeof Status)[keyof typeof Status];
 }
