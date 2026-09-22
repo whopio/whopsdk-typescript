@@ -59,7 +59,7 @@ export interface AdCampaign {
     custom_event_counts: Record<string, unknown>;
     /** Conversion value attributed to each custom event, keyed by event name like custom_event_counts. Sums the value passed to whop.track, normalized to USD; events fired without a value contribute 0. */
     custom_event_values: Record<string, unknown>;
-    /** Whether the campaign's ads are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
+    /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: AdCampaign.DeliveryStatus;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
@@ -103,7 +103,7 @@ export interface AdCampaign {
     spend: number;
     /** The ISO 4217 currency code of all monetary metrics. */
     spend_currency: string | null;
-    /** The lifecycle status of the ad campaign. */
+    /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
     status: AdCampaign.Status;
     /** USD value attributed to submit-application events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
     submitted_application_value: number;
@@ -143,7 +143,7 @@ export namespace AdCampaign {
         Lifetime: "lifetime",
     } as const;
     export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-    /** Whether the campaign's ads are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
+    /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
     export const DeliveryStatus = {
         PaymentFailed: "payment_failed",
         AllAdsRejected: "all_ads_rejected",
@@ -201,7 +201,7 @@ export namespace AdCampaign {
         export type Item = (typeof Item)[keyof typeof Item];
     }
 
-    /** The lifecycle status of the ad campaign. */
+    /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
     export const Status = {
         Active: "active",
         Paused: "paused",

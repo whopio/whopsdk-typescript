@@ -38,7 +38,7 @@ export namespace PostAdCampaignUpdatedPayload {
         budget_type: Data.BudgetType | null;
         /** When the campaign was created, as an ISO 8601 timestamp. */
         created_at: string;
-        /** Whether the campaign's ads are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
+        /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;
         /** Unique identifier for the ad campaign, prefixed `adcamp_`. */
         id: string;
@@ -50,7 +50,7 @@ export namespace PostAdCampaignUpdatedPayload {
         /** The ad network the campaign runs on. */
         platform: Data.Platform;
         special_ad_categories: Data.SpecialAdCategories.Item[];
-        /** The lifecycle status of the ad campaign. */
+        /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
         status: Data.Status;
         /** Display name of the ad campaign. */
         title: string;
@@ -78,7 +78,7 @@ export namespace PostAdCampaignUpdatedPayload {
             Lifetime: "lifetime",
         } as const;
         export type BudgetType = (typeof BudgetType)[keyof typeof BudgetType];
-        /** Whether the campaign's ads are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
+        /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
             PaymentFailed: "payment_failed",
             AllAdsRejected: "all_ads_rejected",
@@ -122,7 +122,7 @@ export namespace PostAdCampaignUpdatedPayload {
             export type Item = (typeof Item)[keyof typeof Item];
         }
 
-        /** The lifecycle status of the ad campaign. */
+        /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
         export const Status = {
             Active: "active",
             Paused: "paused",

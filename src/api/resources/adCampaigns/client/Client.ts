@@ -20,6 +20,8 @@ export declare namespace AdCampaignsClient {
  * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
  *
  * Use the Ad Campaigns API to create campaigns, list campaigns for an account, retrieve or update campaign settings, and pause or resume campaign delivery.
+ *
+ * Ads billing combines eligible spend across the account's campaigns. A failed payment blocks delivery with `delivery_status: payment_failed` while preserving the configured active/paused `status`. Fix the account's payment method and [retry its ads payment](/api-reference/beta/accounts/retry-failed-ads-payments) once for the account. The retry is asynchronous: acceptance does not confirm payment. Successful settlement clears the block; active campaigns can resume if otherwise eligible, while paused campaigns stay paused. See [billing and retries](/developer/ads/overview#paying-for-ads).
  */
 export class AdCampaignsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AdCampaignsClient.Options>;
@@ -617,7 +619,7 @@ export class AdCampaignsClient {
     }
 
     /**
-     * Retries billing for an ad campaign whose payment previously failed.
+     * Queues a background payment retry for the campaign's entire account, including other campaigns with failed payments. Prefer POST /accounts/{id}/retry_ads_payment for new integrations. The returned campaign does not confirm payment success; read delivery_status and issues for the outcome.
      *
      * @param {Whop.RetryPaymentAdCampaignsRequest} request
      * @param {AdCampaignsClient.RequestOptions} requestOptions - Request-specific configuration.
