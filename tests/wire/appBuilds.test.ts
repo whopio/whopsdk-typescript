@@ -28,7 +28,7 @@ describe("AppBuildsClient", () => {
                     review_message:
                         "The hub view crashes on launch when the member has no active membership. Fix and resubmit.",
                     source_url:
-                        "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        "https://whop-assets-example.s3.amazonaws.com/uploads/zip/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     status: "draft",
                     supported_app_view_types: ["hub"],
                 },
@@ -165,7 +165,7 @@ describe("AppBuildsClient", () => {
             review_message:
                 "The hub view crashes on launch when the member has no active membership. Fix and resubmit.",
             source_url:
-                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "https://whop-assets-example.s3.amazonaws.com/uploads/zip/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             status: "draft",
             supported_app_view_types: ["hub"],
         };
@@ -328,7 +328,7 @@ describe("AppBuildsClient", () => {
             review_message:
                 "The hub view crashes on launch when the member has no active membership. Fix and resubmit.",
             source_url:
-                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "https://whop-assets-example.s3.amazonaws.com/uploads/zip/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             status: "draft",
             supported_app_view_types: ["hub"],
         };
@@ -425,7 +425,7 @@ describe("AppBuildsClient", () => {
             review_message:
                 "The hub view crashes on launch when the member has no active membership. Fix and resubmit.",
             source_url:
-                "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "https://whop-assets-example.s3.amazonaws.com/uploads/zip/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             status: "draft",
             supported_app_view_types: ["hub"],
         };
