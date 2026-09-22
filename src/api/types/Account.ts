@@ -16,7 +16,7 @@ export interface Account {
     can_transfer_pending_balance_to_children: boolean;
     /** Payment rails enabled for this account, each `active`, `inactive`, or `pending` (onboarding or review in progress). Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise. */
     capabilities: Whop.AccountCapabilities | null;
-    /** Whop Cards application details for the account. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has no card application. */
+    /** Whop Cards application details for the account. Returned on `list`, `retrieve`, and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has no card application or blocking application review. */
     cards: Whop.AccountCards | null;
     /** Whether checkout shows a VAT/tax ID field for buyers to optionally enter. Does not require a VAT ID to purchase. */
     collect_vat_id: boolean;
