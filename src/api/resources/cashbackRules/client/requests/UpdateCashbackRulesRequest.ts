@@ -13,8 +13,8 @@ export interface UpdateCashbackRulesRequest {
     description?: string | null;
     /** Exclusive end as an ISO 8601 timestamp, strictly later than the original starts_at. May be in the past to end an active rule. Set null to remove the expiration. */
     expires_at?: string | null;
-    /** Four-digit MCC, including leading zeros. Must match together with merchant_name. */
-    merchant_category_code?: string;
-    /** Raw merchant name reported by the card provider. Must contain a non-whitespace character. Matched with the MCC; not a substring or wildcard. */
-    merchant_name?: string;
+    /** Four-digit MCC, including leading zeros. Null matches any MCC. When both merchant filters are absent, scoped_account_id is required. */
+    merchant_category_code?: string | null;
+    /** Raw merchant name reported by the card provider. Set null to match any merchant name. Supplied names must contain a non-whitespace character and match together with any MCC filter. Clearing both filters requires an existing scoped_account_id. */
+    merchant_name?: string | null;
 }
