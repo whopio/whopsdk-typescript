@@ -13,7 +13,7 @@ export interface AccountFees {
     buyer: Whop.AccountFee;
     /** Card payments. `percentage` and `fixed` are the rate in the headline `region`; every other acquirer region is under `regions`. */
     card_processing: Whop.AccountFee;
-    /** The default markups this account charges the accounts connected to it. `null` unless the account is a platform. */
+    /** The default markups this account charges connected accounts, configurable before any accounts connect. `null` if this account has a parent. */
     child_markups: Whop.AccountFeeMarkups | null;
     /** Added to a payment whose card was issued outside the region where the payment was processed. */
     cross_border: Whop.AccountFee;

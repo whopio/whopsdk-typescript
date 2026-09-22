@@ -17,7 +17,7 @@ export interface UpdateFeesRequest {
     buyer?: UpdateFeesRequest.Buyer;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     card_processing?: UpdateFeesRequest.CardProcessing;
-    /** This platform's default markups for every account connected to it. */
+    /** Default markups for connected accounts. Available on accounts without a parent, even before any accounts connect. */
     child_markups?: UpdateFeesRequest.ChildMarkups;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     cross_border?: UpdateFeesRequest.CrossBorder;
@@ -163,9 +163,11 @@ export namespace UpdateFeesRequest {
     }
 
     /**
-     * This platform's default markups for every account connected to it.
+     * Default markups for connected accounts. Available on accounts without a parent, even before any accounts connect.
      */
     export interface ChildMarkups {
+        /** The markup on card purchases settled by the connected account. `null` clears the custom markup. */
+        card_spend?: (ChildMarkups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (ChildMarkups.CryptoSwaps | null) | undefined;
         /** Markups on deposits, keyed by rail: `bank` or `crypto`. */
@@ -179,6 +181,16 @@ export namespace UpdateFeesRequest {
     }
 
     export namespace ChildMarkups {
+        /**
+         * The markup on card purchases settled by the connected account. `null` clears the custom markup.
+         */
+        export interface CardSpend {
+            /** The amount the platform adds per event, in US dollars. */
+            fixed?: number | undefined;
+            /** The percentage of the transaction the platform adds, where `2` means 2%. */
+            percentage?: number | undefined;
+        }
+
         /**
          * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
          */
@@ -491,6 +503,8 @@ export namespace UpdateFeesRequest {
      * Markups on this connected account, set by the platform it is connected to.
      */
     export interface Markups {
+        /** The markup on card purchases settled by the connected account. `null` clears the custom markup. */
+        card_spend?: (Markups.CardSpend | null) | undefined;
         /** The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default. */
         crypto_swaps?: (Markups.CryptoSwaps | null) | undefined;
         /** Markups on deposits, keyed by rail: `bank` or `crypto`. */
@@ -504,6 +518,16 @@ export namespace UpdateFeesRequest {
     }
 
     export namespace Markups {
+        /**
+         * The markup on card purchases settled by the connected account. `null` clears the custom markup.
+         */
+        export interface CardSpend {
+            /** The amount the platform adds per event, in US dollars. */
+            fixed?: number | undefined;
+            /** The percentage of the transaction the platform adds, where `2` means 2%. */
+            percentage?: number | undefined;
+        }
+
         /**
          * The new markup. Fields left out keep their current value; `null` clears the row so the markup returns to its default.
          */
