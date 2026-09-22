@@ -28424,6 +28424,83 @@ const response = page.response;
 </dl>
 </details>
 
+## Payments Direct
+<details><summary><code>client.payments.direct.<a href="/src/api/resources/payments/resources/direct/client/Client.ts">create</a>({ ...params }) -> Whop.Payment</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Charges a buyer for a plan from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and what the buyer must still do, such as 3D Secure.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.direct.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    billing_details: {
+        address: {
+            country: "US",
+            postal_code: "94105"
+        },
+        email: "dana@shinetime.example",
+        name: "Dana Shine"
+    },
+    payment_method: {
+        type: "card"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.payments.CreateDirectRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DirectClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Payouts Methods
 <details><summary><code>client.payouts.methods.<a href="/src/api/resources/payouts/resources/methods/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ListMethodsResponse.Data.Item, Whop.ListMethodsResponse&gt;</code></summary>
 <dl>
@@ -28760,6 +28837,83 @@ const response = page.response;
 <dd>
 
 **requestOptions:** `SupportedMethodsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## SetupIntents Direct
+<details><summary><code>client.setupIntents.direct.<a href="/src/api/resources/setupIntents/resources/direct/client/Client.ts">create</a>({ ...params }) -> Whop.SetupIntent</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Saves a card for later charges from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) The setup runs in the background: poll Retrieve setup status for its outcome and for anything the buyer must still do, such as 3D Secure. Once it succeeds, the saved payment method arrives on the `setup_intent.succeeded` webhook and in List payment methods for the member.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.setupIntents.direct.create({
+    account_id: "biz_xxxxxxxxxxxxxx",
+    billing_details: {
+        address: {
+            country: "US",
+            postal_code: "94105"
+        },
+        email: "dana@shinetime.example",
+        name: "Dana Shine"
+    },
+    payment_method: {
+        type: "card"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.setupIntents.CreateDirectRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `DirectClient.RequestOptions` 
     
 </dd>
 </dl>

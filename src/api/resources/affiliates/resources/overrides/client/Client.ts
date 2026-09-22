@@ -79,8 +79,10 @@ export class OverridesClient {
                 const _response = await core.fetcher({
                     url: core.url.join(
                         (await core.Supplier.get(this._options.baseUrl)) ??
-                            (await core.Supplier.get(this._options.environment)) ??
-                            environments.WhopEnvironment.Default,
+                            (
+                                (await core.Supplier.get(this._options.environment)) ??
+                                environments.WhopEnvironment.Production
+                            ).api,
                         `affiliates/${core.url.encodePathParam(id)}/overrides`,
                     ),
                     method: "GET",
@@ -206,8 +208,8 @@ export class OverridesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/overrides`,
             ),
             method: "POST",
@@ -307,8 +309,8 @@ export class OverridesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/overrides/${core.url.encodePathParam(overrideId)}`,
             ),
             method: "GET",
@@ -410,8 +412,8 @@ export class OverridesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/overrides/${core.url.encodePathParam(overrideId)}`,
             ),
             method: "DELETE",
@@ -510,8 +512,8 @@ export class OverridesClient {
         const _response = await core.fetcher({
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.WhopEnvironment.Default,
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
                 `affiliates/${core.url.encodePathParam(id)}/overrides/${core.url.encodePathParam(overrideId)}`,
             ),
             method: "PATCH",

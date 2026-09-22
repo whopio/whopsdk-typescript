@@ -12,7 +12,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "A 9:16 product showcase of a cordless power scrubber", type: "video" };
         const rawResponseBody = {
@@ -60,7 +60,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
         const rawResponseBody = { key: "value" };
@@ -89,7 +89,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
         const rawResponseBody = { key: "value" };
@@ -118,7 +118,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
         const rawResponseBody = { error: { deposit_url: "deposit_url", message: "message", type: "payment_required" } };
@@ -147,7 +147,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
         const rawResponseBody = { key: "value" };
@@ -176,7 +176,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = { prompt: "prompt", type: "video" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
@@ -205,7 +205,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = {
@@ -245,7 +245,7 @@ describe("MediaClient", () => {
             token: "test",
             apiVersionDate: "test",
             idempotencyKey: "test",
-            environment: server.baseUrl,
+            environment: { api: server.baseUrl, vault: server.baseUrl },
         });
 
         const rawResponseBody = { key: "value" };
