@@ -98,7 +98,7 @@ export interface PaymentListItem {
     usd_total: number | null;
     /** The user that made this payment. */
     user: PaymentListItem.User | null;
-    /** True when the payment is tied to a membership in `past_due`, the payment status is `open`, and the processor allows voiding payments; otherwise false. */
+    /** True when the payment can be voided or canceled. The request is rejected if the payment is no longer eligible. */
     voidable: boolean;
 }
 

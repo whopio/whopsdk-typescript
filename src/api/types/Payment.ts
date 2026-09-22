@@ -114,6 +114,6 @@ export interface Payment {
     user: Whop.UserSummary | null;
     /** The Address Verification Service (AVS), cardholder name, and Card Verification Value (CVV/CVC) results, or null when the processor returned none. */
     verification_checks: Whop.PaymentVerificationChecks | null;
-    /** True when the payment is `open` on a past-due membership and its processor supports voiding — see `POST /payments/{id}/void`. */
+    /** True when the payment can be voided or canceled. The request is rejected if the payment is no longer eligible — see `POST /payments/{id}/void`. */
     voidable: boolean;
 }
