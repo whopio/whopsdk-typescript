@@ -16864,10 +16864,6 @@ export interface SetupIntentCanceledWebhookEvent {
    */
   api_version_date: string | null;
 
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
   data: SetupIntentsAPI.SetupIntent;
 
   /**
@@ -16908,10 +16904,6 @@ export interface SetupIntentRequiresActionWebhookEvent {
    */
   api_version_date: string | null;
 
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
   data: SetupIntentsAPI.SetupIntent;
 
   /**
@@ -16952,10 +16944,6 @@ export interface SetupIntentSucceededWebhookEvent {
    */
   api_version_date: string | null;
 
-  /**
-   * A setup intent allows a user to save a payment method for future use without
-   * making an immediate purchase.
-   */
   data: SetupIntentsAPI.SetupIntent;
 
   /**

@@ -437,10 +437,10 @@ import {
 import {
   SetupIntent,
   SetupIntentListParams,
-  SetupIntentListResponse,
-  SetupIntentListResponsesCursorPage,
+  SetupIntentRetrieveParams,
   SetupIntentStatus,
   SetupIntents,
+  SetupIntentsCursorPage,
 } from './resources/setup-intents';
 import {
   ShipmentCreateParams,
@@ -1482,6 +1482,12 @@ export class Whop {
   refunds: API.Refunds = new API.Refunds(this);
   withdrawals: API.Withdrawals = new API.Withdrawals(this);
   accountLinks: API.AccountLinks = new API.AccountLinks(this);
+  /**
+   * A Setup Intent saves a buyer's payment method for later without taking money now. Create one from a confirmation token the payment elements collected in setup mode, or from a payment method already on file to re-verify it. It runs the same collection flow a payment does, so the buyer may still owe a step: 3D Secure on a card, a hosted enrollment, or linking a bank account.
+   *
+   * The create response is the setup intent as created, not its outcome. Hand its `client_secret` to the elements' `handleNextAction`, or poll [Retrieve status](/api-reference/beta/setup-intents/retrieve-setup-status) for how far the setup has gone and what is outstanding. Once it reaches `succeeded`, `payment_method_id` names the saved method and Create Payment charges it.
+   *
+   */
   setupIntents: API.SetupIntents = new API.SetupIntents(this);
   paymentMethods: API.PaymentMethods = new API.PaymentMethods(this);
   feeMarkups: API.FeeMarkups = new API.FeeMarkups(this);
@@ -2063,8 +2069,8 @@ export declare namespace Whop {
     SetupIntents as SetupIntents,
     type SetupIntent as SetupIntent,
     type SetupIntentStatus as SetupIntentStatus,
-    type SetupIntentListResponse as SetupIntentListResponse,
-    type SetupIntentListResponsesCursorPage as SetupIntentListResponsesCursorPage,
+    type SetupIntentsCursorPage as SetupIntentsCursorPage,
+    type SetupIntentRetrieveParams as SetupIntentRetrieveParams,
     type SetupIntentListParams as SetupIntentListParams,
   };
 

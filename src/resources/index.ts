@@ -431,9 +431,9 @@ export {
   SetupIntents,
   type SetupIntent,
   type SetupIntentStatus,
-  type SetupIntentListResponse,
+  type SetupIntentRetrieveParams,
   type SetupIntentListParams,
-  type SetupIntentListResponsesCursorPage,
+  type SetupIntentsCursorPage,
 } from './setup-intents';
 export {
   Shipments,

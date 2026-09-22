@@ -10,7 +10,7 @@ const client = new Whop({
 describe('resource setupIntents', () => {
   // Mock server tests are disabled
   test.skip('retrieve', async () => {
-    const responsePromise = client.setupIntents.retrieve('sint_xxxxxxxxxxxxx');
+    const responsePromise = client.setupIntents.retrieve('id');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,8 +21,20 @@ describe('resource setupIntents', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: only required params', async () => {
-    const responsePromise = client.setupIntents.list({ account_id: 'biz_xxxxxxxxxxxxxx' });
+  test.skip('retrieve: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.setupIntents.retrieve(
+        'id',
+        { 'Api-Version-Date': '2026-09-22-1' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
+  });
+
+  // Mock server tests are disabled
+  test.skip('list', async () => {
+    const responsePromise = client.setupIntents.list();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -33,16 +45,25 @@ describe('resource setupIntents', () => {
   });
 
   // Mock server tests are disabled
-  test.skip('list: required and optional params', async () => {
-    const response = await client.setupIntents.list({
-      account_id: 'biz_xxxxxxxxxxxxxx',
-      after: 'after',
-      before: 'before',
-      created_after: '2023-12-01T05:00:00.401Z',
-      created_before: '2023-12-01T05:00:00.401Z',
-      direction: 'asc',
-      first: 42,
-      last: 42,
-    });
+  test.skip('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.setupIntents.list(
+        {
+          account_id: 'account_id',
+          after: 'after',
+          before: 'before',
+          created_after: '2019-12-27T18:11:19.117Z',
+          created_before: '2019-12-27T18:11:19.117Z',
+          direction: 'asc',
+          first: 100,
+          last: 100,
+          order: 'created_at',
+          status: 'processing',
+          'Api-Version-Date': '2026-09-22-1',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Whop.NotFoundError);
   });
 });

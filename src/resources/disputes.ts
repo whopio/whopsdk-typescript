@@ -775,9 +775,19 @@ export namespace Dispute {
       export interface Card {
         /**
          * The network identifier (`visa`, `amex`, …), matching `card.networks` entries and
-         * saved card payment methods.
+         * saved card payment methods. Null when the vault did not record the network.
          */
-        brand: string;
+        brand: string | null;
+
+        /**
+         * The card's expiry month, 1 to 12. Null when the vault did not record it.
+         */
+        exp_month: number | null;
+
+        /**
+         * The card's four-digit expiry year. Null when the vault did not record it.
+         */
+        exp_year: number | null;
 
         /**
          * The issuer identification number, also called the BIN: the card's leading six or

@@ -633,12 +633,11 @@ Types:
 
 - <code><a href="./src/resources/setup-intents.ts">SetupIntent</a></code>
 - <code><a href="./src/resources/setup-intents.ts">SetupIntentStatus</a></code>
-- <code><a href="./src/resources/setup-intents.ts">SetupIntentListResponse</a></code>
 
 Methods:
 
-- <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id) -> SetupIntent</code>
-- <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentListResponsesCursorPage</code>
+- <code title="get /setup_intents/{id}">client.setupIntents.<a href="./src/resources/setup-intents.ts">retrieve</a>(id, { ...params }) -> SetupIntent</code>
+- <code title="get /setup_intents">client.setupIntents.<a href="./src/resources/setup-intents.ts">list</a>({ ...params }) -> SetupIntentsCursorPage</code>
 
 # PaymentMethods
 
