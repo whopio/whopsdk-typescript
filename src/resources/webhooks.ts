@@ -7390,7 +7390,9 @@ export namespace AdCampaignPaymentFailedWebhookEvent {
     created_at: string;
 
     /**
-     * Whether the campaign's ads are delivering right now, and if not, why. When
+     * Whether the campaign's ads are delivering right now, and if not, why. Account
+     * billing failures set payment_failed without changing the configured status.
+     * Successful payment retry clears that block and recalculates delivery. When
      * several states apply at once, the highest-precedence one is returned.
      */
     delivery_status:
@@ -7428,7 +7430,8 @@ export namespace AdCampaignPaymentFailedWebhookEvent {
     special_ad_categories: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
 
     /**
-     * The lifecycle status of the ad campaign.
+     * The configured lifecycle status of the ad campaign. Billing failures preserve
+     * active or paused here and set delivery_status to payment_failed.
      */
     status:
       | 'active'
@@ -7561,7 +7564,9 @@ export namespace AdCampaignUpdatedWebhookEvent {
     created_at: string;
 
     /**
-     * Whether the campaign's ads are delivering right now, and if not, why. When
+     * Whether the campaign's ads are delivering right now, and if not, why. Account
+     * billing failures set payment_failed without changing the configured status.
+     * Successful payment retry clears that block and recalculates delivery. When
      * several states apply at once, the highest-precedence one is returned.
      */
     delivery_status:
@@ -7599,7 +7604,8 @@ export namespace AdCampaignUpdatedWebhookEvent {
     special_ad_categories: Array<'housing' | 'employment' | 'financial_products' | 'politics'>;
 
     /**
-     * The lifecycle status of the ad campaign.
+     * The configured lifecycle status of the ad campaign. Billing failures preserve
+     * active or paused here and set delivery_status to payment_failed.
      */
     status:
       | 'active'

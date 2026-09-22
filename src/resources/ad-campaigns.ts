@@ -11,6 +11,8 @@ import { path } from '../internal/utils/path';
  * An Ad Campaign is the top-level container for paid ads on an ad network. It sets the platform, objective, and budget strategy shared by its [ad groups](/api-reference/beta/ad-groups/ad-group) and ads.
  *
  * Use the Ad Campaigns API to create campaigns, list campaigns for an account, retrieve or update campaign settings, and pause or resume campaign delivery.
+ *
+ * Ads billing combines eligible spend across the account's campaigns. A failed payment blocks delivery with `delivery_status: payment_failed` while preserving the configured active/paused `status`. Fix the account's payment method and [retry its ads payment](/api-reference/beta/accounts/retry-failed-ads-payments) once for the account. The retry is asynchronous: acceptance does not confirm payment. Successful settlement clears the block; active campaigns can resume if otherwise eligible, while paused campaigns stay paused. See [billing and retries](/developer/ads/overview#paying-for-ads).
  */
 export class AdCampaigns extends APIResource {
   /**
@@ -304,7 +306,9 @@ export interface AdCampaign {
   custom_event_values: unknown;
 
   /**
-   * Whether the campaign's ads are delivering right now, and if not, why. When
+   * Whether the campaign's ads are delivering right now, and if not, why. Account
+   * billing failures set payment_failed without changing the configured status.
+   * Successful payment retry clears that block and recalculates delivery. When
    * several states apply at once, the highest-precedence one is returned.
    */
   delivery_status:
@@ -444,7 +448,8 @@ export interface AdCampaign {
   spend_currency: string | null;
 
   /**
-   * The lifecycle status of the ad campaign.
+   * The configured lifecycle status of the ad campaign. Billing failures preserve
+   * active or paused here and set delivery_status to payment_failed.
    */
   status:
     | 'active'
