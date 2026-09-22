@@ -11,6 +11,7 @@ export interface EconomicIntelligence {
     created_at: string | null;
     /** When the recommendation was approved, as an ISO 8601 timestamp, or `null` if it has not been approved. */
     executed_at: string | null;
+    expected_tool_calls: string[] | null;
     /** Recommendation ID, prefixed `reca_`, or `create_business` for an unsaved setup recommendation. Authenticate and list again before executing an unsaved recommendation. */
     id: string;
     /** What you requested, in your own words, or `null` for recommendations generated without your input. */

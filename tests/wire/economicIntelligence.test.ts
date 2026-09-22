@@ -19,12 +19,13 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    action_type: "improve_landing_page",
+                    action_type: "scale_winning_ads",
                     ai_chat_id: "ai_chat_id",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
+                    expected_tool_calls: ["getAdCampaign"],
                     id: "reca_xxxxxxxxxxxxxx",
-                    input: "more buyers",
+                    input: "more sales from ads",
                     prompt: "Create a 20% off promo code for my members.",
                     reasoning: "Capped 9 of 14 days.",
                     sentiment: "positive",
@@ -174,12 +175,13 @@ describe("EconomicIntelligenceClient", () => {
         };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "improve_landing_page",
+            action_type: "scale_winning_ads",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
+            expected_tool_calls: ["getAdCampaign"],
             id: "reca_xxxxxxxxxxxxxx",
-            input: "more buyers",
+            input: "more sales from ads",
             prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
             sentiment: "positive",
@@ -301,12 +303,13 @@ describe("EconomicIntelligenceClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            action_type: "improve_landing_page",
+            action_type: "scale_winning_ads",
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
+            expected_tool_calls: ["getAdCampaign"],
             id: "reca_xxxxxxxxxxxxxx",
-            input: "more buyers",
+            input: "more sales from ads",
             prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
             sentiment: "positive",
