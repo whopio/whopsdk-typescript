@@ -3838,6 +3838,12 @@ export namespace Payment {
     address_line1: string | null;
 
     /**
+     * The card issuer's authorization code for this charge, or null when the processor
+     * did not return one.
+     */
+    authorization_code: string | null;
+
+    /**
      * Whether the cardholder name matched the issuer's records.
      */
     card_holder_name: string | null;
