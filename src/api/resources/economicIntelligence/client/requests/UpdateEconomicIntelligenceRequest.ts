@@ -11,6 +11,8 @@ export interface UpdateEconomicIntelligenceRequest {
     id: string;
     /** Account ID, prefixed `biz_`. Defaults to the API key's own account. */
     account_id?: string;
+    /** What you want the replacement recommendation for, in your own words. Up to 1000 characters. Sent when superseding, it directs the generation that replaces the rejected recommendation. */
+    input?: string;
     /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
     sentiment?: UpdateEconomicIntelligenceRequest.Sentiment;
     /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
