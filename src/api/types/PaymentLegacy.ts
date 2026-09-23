@@ -573,6 +573,8 @@ export namespace PaymentLegacy {
     export interface VerificationChecks {
         /** Whether the billing street address the customer entered matched the address the issuer has on file. */
         address_line1: string | null;
+        /** The card issuer's authorization code for this charge. Null when the processor did not return one. */
+        authorization_code: string | null;
         /** Whether the cardholder name the customer entered matched the name the issuer has on file. */
         card_holder_name: string | null;
         /** Whether the CVV / CVC the customer entered matched the card. */
