@@ -48,6 +48,14 @@ describe("DirectClient", () => {
             dispute_alerted_at: "dispute_alerted_at",
             failure_message: "failure_message",
             financing_installments_count: 1.1,
+            holds: [
+                {
+                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 1.1,
+                    release_at: "release_at",
+                    type: "reserve",
+                },
+            ],
             id: "pay_xxxxxxxxxxxxxx",
             last_payment_attempt_at: "last_payment_attempt_at",
             line_items: [

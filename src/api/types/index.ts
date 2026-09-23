@@ -325,6 +325,7 @@ export * from "./PaymentBankTransferInstructions.js";
 export * from "./PaymentBillingDetailsPreview.js";
 export * from "./PaymentDeclineCodes.js";
 export * from "./PaymentFee.js";
+export * from "./PaymentHold.js";
 export * from "./PaymentInstructions.js";
 export * from "./PaymentInstrument.js";
 export * from "./PaymentInstrumentCard.js";
