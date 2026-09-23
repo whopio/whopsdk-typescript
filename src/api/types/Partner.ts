@@ -3,7 +3,7 @@
 import type * as Whop from "../index.js";
 
 export interface Partner {
-    /** Whether the user passed every visible quiz and knowledge check in the partner certification course. `false` until each of those lessons has a passing result. */
+    /** Whether the user finished the partner certification course: every visible quiz and knowledge check has a passing result, or, when the course has none, every visible lesson is marked completed. */
     certification_complete: boolean;
     /** When the user joined the partner program, as an ISO 8601 timestamp. Null when they have not joined. */
     joined_at: string | null;
