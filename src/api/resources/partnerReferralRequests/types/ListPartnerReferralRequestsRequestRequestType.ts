@@ -3,7 +3,7 @@
 export const ListPartnerReferralRequestsRequestRequestType = {
     Manual: "manual",
     OwnershipTransfer: "ownership_transfer",
-    RewardLink: "reward_link",
+    Link: "link",
 } as const;
 export type ListPartnerReferralRequestsRequestRequestType =
     (typeof ListPartnerReferralRequestsRequestRequestType)[keyof typeof ListPartnerReferralRequestsRequestRequestType];

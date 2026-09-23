@@ -29,7 +29,7 @@ export namespace PartnerReferralRequest {
     export const RequestType = {
         Manual: "manual",
         OwnershipTransfer: "ownership_transfer",
-        RewardLink: "reward_link",
+        Link: "link",
     } as const;
     export type RequestType = (typeof RequestType)[keyof typeof RequestType];
     /** The approval state, or null for requests without an approval process. */
