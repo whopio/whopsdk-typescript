@@ -330,7 +330,7 @@ describe("AccountsClient", () => {
                     ],
                     stablecoin_rails: false,
                     status: "active",
-                    status_reason: "Payments are paused while we review recent chargebacks on this account.",
+                    status_reason: "Suspended - Fraudulent payment activity",
                     store_page_config: {
                         accent_color: null,
                         layout: null,
@@ -767,7 +767,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            status_reason: "Suspended - Fraudulent payment activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -1237,7 +1237,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            status_reason: "Suspended - Fraudulent payment activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -1634,7 +1634,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            status_reason: "Suspended - Fraudulent payment activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -2058,7 +2058,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            status_reason: "Suspended - Fraudulent payment activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -3312,7 +3312,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Payments are paused while we review recent chargebacks on this account.",
+            status_reason: "Suspended - Fraudulent payment activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
