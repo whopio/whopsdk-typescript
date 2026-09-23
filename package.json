@@ -1067,17 +1067,6 @@
             },
             "default": "./dist/cjs/api/resources/partners/resources/businesses/exports.js"
         },
-        "./partners/links": {
-            "import": {
-                "types": "./dist/esm/api/resources/partners/resources/links/exports.d.mts",
-                "default": "./dist/esm/api/resources/partners/resources/links/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/partners/resources/links/exports.d.ts",
-                "default": "./dist/cjs/api/resources/partners/resources/links/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/partners/resources/links/exports.js"
-        },
         "./partners/businesses/earnings": {
             "import": {
                 "types": "./dist/esm/api/resources/partners/resources/businesses/resources/earnings/exports.d.mts",

@@ -9,7 +9,6 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { BusinessesClient } from "../resources/businesses/client/Client.js";
-import { LinksClient } from "../resources/links/client/Client.js";
 
 export declare namespace PartnersClient {
     export type Options = BaseClientOptions;
@@ -20,12 +19,11 @@ export declare namespace PartnersClient {
 /**
  * Get started at [whop.com/network](https://whop.com/network). A Partner is a user who refers people and businesses to Whop. The partner profile includes enrollment, active direct business referral counts, and default payout terms.
  *
- * Retrieve your profile with `/partners/{id}`. Use `/partners/links` for your standard referral URL and paginated promotion links, including reward amounts, requirements, redemption counts, and availability. You can also enroll in the partner program, review referred users and businesses, track earnings, and see the partner leaderboard.
+ * Retrieve your profile with `/partners/{id}`. Use `/partner_referral_requests` to create and manage referral links and their rewards. You can also enroll in the partner program, review referred users and businesses, track earnings, and see the partner leaderboard.
  */
 export class PartnersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PartnersClient.Options>;
     protected _businesses: BusinessesClient | undefined;
-    protected _links: LinksClient | undefined;
 
     constructor(options: PartnersClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -33,10 +31,6 @@ export class PartnersClient {
 
     public get businesses(): BusinessesClient {
         return (this._businesses ??= new BusinessesClient(this._options));
-    }
-
-    public get links(): LinksClient {
-        return (this._links ??= new LinksClient(this._options));
     }
 
     /**
@@ -301,7 +295,7 @@ export class PartnersClient {
     }
 
     /**
-     * Retrieves the authenticated user's public profile, enrollment date, partner verification timestamp, verification waitlist status, partner certification completion, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Retrieve referral URLs and promotion links from GET /partners/links.
+     * Retrieves the authenticated user's public profile, enrollment date, partner verification timestamp, verification waitlist status, partner certification completion, active direct business referral count, and default payout rates. Use me or the authenticated user's own user ID; other users are not accessible. Users who have not enrolled have a null joined_at. Create and manage referral links through /partner_referral_requests.
      *
      * @param {Whop.RetrievePartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
