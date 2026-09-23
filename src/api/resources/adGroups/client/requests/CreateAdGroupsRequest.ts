@@ -15,8 +15,10 @@ export interface CreateAdGroupsRequest {
     audiences?: Whop.AdGroupAudiencesBody;
     /** How delivery bids are set in the ad auction. Target-based strategies use `desired_cost_per_result`. */
     bid_type?: CreateAdGroupsRequest.BidType;
-    /** This ad group's budget, in the ad account's currency. Omit when the budget is set on the campaign instead. */
+    /** This ad group's budget in USD, which is what it is stored and billed in. Omit when the budget is set on the campaign instead. */
     budget_amount?: number;
+    /** This ad group's budget stated in the account's ads reporting currency (`budget_currency` on the response) instead of USD. Converted to USD at the current exchange rate and stored as budget_amount; on an update, an amount equal to the current budget_amount_local keeps the stored USD budget as is. Provide this or budget_amount, not both. */
+    budget_amount_local?: number;
     /** Whether budget_amount is spent per day (`daily`) or over the ad group's full run (`lifetime`). */
     budget_type?: CreateAdGroupsRequest.BudgetType;
     conversion_event?: Whop.ConversionEvent | null;
