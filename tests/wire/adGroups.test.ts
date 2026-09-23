@@ -49,7 +49,7 @@ describe("AdGroupsClient", () => {
                     custom_conversions: 41,
                     custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
                     custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-                    delivery_status: "all_ads_rejected",
+                    delivery_status: "in_appeal",
                     demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
                     desired_cost_per_result: 40,
                     detailed_targeting: {
@@ -208,7 +208,7 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-            delivery_status: "all_ads_rejected",
+            delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
             detailed_targeting: {
@@ -670,7 +670,7 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-            delivery_status: "all_ads_rejected",
+            delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
             detailed_targeting: {
@@ -872,7 +872,7 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-            delivery_status: "all_ads_rejected",
+            delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
             detailed_targeting: {
@@ -1021,7 +1021,7 @@ describe("AdGroupsClient", () => {
                     custom_conversions: 41,
                     custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
                     custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-                    delivery_status: "all_ads_rejected",
+                    delivery_status: "in_appeal",
                     demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
                     desired_cost_per_result: 40,
                     detailed_targeting: {
@@ -1254,7 +1254,7 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-            delivery_status: "all_ads_rejected",
+            delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
             detailed_targeting: {
@@ -1427,7 +1427,7 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
-            delivery_status: "all_ads_rejected",
+            delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
             detailed_targeting: {
