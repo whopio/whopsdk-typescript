@@ -52,10 +52,11 @@ export class EconomicIntelligenceClient {
             async (
                 request: Whop.ListEconomicIntelligenceRequest,
             ): Promise<core.WithRawResponse<Whop.ListEconomicIntelligenceResponse>> => {
-                const { account_id: accountId, status, first, after, last, before } = request;
+                const { account_id: accountId, status, input, first, after, last, before } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     status: status != null ? status : undefined,
+                    input,
                     first,
                     after,
                     last,
@@ -138,87 +139,6 @@ export class EconomicIntelligenceClient {
                 return list(core.setObjectProperty(request, "after", response?.page_info.end_cursor));
             },
         });
-    }
-
-    /**
-     * Generates a recommendation based on your input. Returns immediately; poll the list endpoint until its `status` is `ready`.
-     *
-     * @param {Whop.CreateEconomicIntelligenceRequest} request
-     * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.ConflictError}
-     * @throws {@link errors.WhopError}
-     * @throws {@link errors.WhopTimeoutError}
-     *
-     * @example
-     *     await client.economicIntelligence.create({
-     *         input: "I sell $79 customized gym straps. The number of purchases per day fell from 84 to 66 since June and my ads cost per signup doubled to $38. Half the leads never open the checkout. I want to win back churned visitors and lift conversion without cutting the price, and I can spend up to $500 this month on it."
-     *     })
-     */
-    public create(
-        request: Whop.CreateEconomicIntelligenceRequest,
-        requestOptions?: EconomicIntelligenceClient.RequestOptions,
-    ): core.HttpResponsePromise<Whop.EconomicIntelligence> {
-        return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
-    }
-
-    private async __create(
-        request: Whop.CreateEconomicIntelligenceRequest,
-        requestOptions?: EconomicIntelligenceClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Whop.EconomicIntelligence>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
-                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
-            }),
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
-                        .api,
-                "economic_intelligence",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as Whop.EconomicIntelligence, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 409:
-                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/economic_intelligence");
     }
 
     /**

@@ -11,6 +11,8 @@ export interface ListEconomicIntelligenceRequest {
     account_id?: string;
     /** Filter recommendations by their current status. */
     status?: Whop.ListEconomicIntelligenceRequestStatus;
+    /** What you want recommendations for, in your own words. Up to 1000 characters. Narrows the list to the recommendations that address it. */
+    input?: string;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
