@@ -71,13 +71,6 @@ export interface DisputeAlertRetrieveResponse {
   account_id: string | null;
 
   /**
-   * Whether refunding the payment can still avoid a chargeback. `false` once the
-   * payment has been disputed or fully refunded, or when the alert could not be
-   * matched to a payment — `not_actionable_reason` says which.
-   */
-  actionable: boolean;
-
-  /**
    * The alerted amount, in whole units of `currency`. This is what the issuer
    * reported, which can differ from the payment's own amount.
    */
@@ -107,24 +100,11 @@ export interface DisputeAlertRetrieveResponse {
   fee_charged: boolean;
 
   /**
-   * Name of the bank that issued the card and filed the report.
+   * @deprecated Deprecated: always `null` outside Whop's own dashboard. Name of the
+   * bank that issued the card and filed the report. DEPRECATED: Always null outside
+   * Whop's own dashboard.
    */
   issuer: string | null;
-
-  /**
-   * Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa
-   * RDR already closed the case, `payment_unmatched` when no payment matched,
-   * `payment_not_captured` when it never captured money, `payment_disputed` once the
-   * payment carries a dispute, `payment_refunded` once fully refunded. `null` while
-   * `actionable` is true.
-   */
-  not_actionable_reason:
-    | 'network_resolved'
-    | 'payment_unmatched'
-    | 'payment_not_captured'
-    | 'payment_disputed'
-    | 'payment_refunded'
-    | null;
 
   /**
    * The payment the issuer reported, prefixed `pay_`. `null` when Whop could not
@@ -144,7 +124,10 @@ export interface DisputeAlertRetrieveResponse {
   reported_at: string;
 
   /**
-   * When the reported transaction was made, as an ISO 8601 timestamp.
+   * When the reported transaction was made, as an ISO 8601 timestamp — falls back to
+   * when the matched payment was made if the issuer's own report didn't carry one.
+   * Should not be `null` in practice; treat one as a data issue rather than expected
+   * behavior.
    */
   transaction_at: string | null;
 
@@ -177,13 +160,6 @@ export interface DisputeAlertListResponse {
   account_id: string | null;
 
   /**
-   * Whether refunding the payment can still avoid a chargeback. `false` once the
-   * payment has been disputed or fully refunded, or when the alert could not be
-   * matched to a payment — `not_actionable_reason` says which.
-   */
-  actionable: boolean;
-
-  /**
    * The alerted amount, in whole units of `currency`. This is what the issuer
    * reported, which can differ from the payment's own amount.
    */
@@ -213,24 +189,11 @@ export interface DisputeAlertListResponse {
   fee_charged: boolean;
 
   /**
-   * Name of the bank that issued the card and filed the report.
+   * @deprecated Deprecated: always `null` outside Whop's own dashboard. Name of the
+   * bank that issued the card and filed the report. DEPRECATED: Always null outside
+   * Whop's own dashboard.
    */
   issuer: string | null;
-
-  /**
-   * Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa
-   * RDR already closed the case, `payment_unmatched` when no payment matched,
-   * `payment_not_captured` when it never captured money, `payment_disputed` once the
-   * payment carries a dispute, `payment_refunded` once fully refunded. `null` while
-   * `actionable` is true.
-   */
-  not_actionable_reason:
-    | 'network_resolved'
-    | 'payment_unmatched'
-    | 'payment_not_captured'
-    | 'payment_disputed'
-    | 'payment_refunded'
-    | null;
 
   /**
    * The payment the issuer reported, prefixed `pay_`. `null` when Whop could not
@@ -250,7 +213,10 @@ export interface DisputeAlertListResponse {
   reported_at: string;
 
   /**
-   * When the reported transaction was made, as an ISO 8601 timestamp.
+   * When the reported transaction was made, as an ISO 8601 timestamp — falls back to
+   * when the matched payment was made if the issuer's own report didn't carry one.
+   * Should not be `null` in practice; treat one as a data issue rather than expected
+   * behavior.
    */
   transaction_at: string | null;
 

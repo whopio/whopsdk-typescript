@@ -71,7 +71,7 @@ export interface Dispute {
   /**
    * The customer who filed the dispute.
    */
-  buyer: Dispute.Buyer | null;
+  buyer: Dispute.Buyer;
 
   /**
    * When the dispute was opened, as an ISO 8601 timestamp.
@@ -89,8 +89,9 @@ export interface Dispute {
   evidence: Dispute.Evidence;
 
   /**
-   * The deadline to submit evidence, as an ISO 8601 timestamp. Whop reserves the
-   * last 24 hours before the processor's own cutoff to forward the submission.
+   * The deadline to submit evidence, as an ISO 8601 timestamp. `null` when the
+   * network already auto-resolved the dispute (Visa RDR) with no evidence round, or
+   * when the processor hasn't reported a deadline for this dispute.
    */
   evidence_due_at: string | null;
 
@@ -110,13 +111,6 @@ export interface Dispute {
   evidence_submitted_at: string | null;
 
   /**
-   * The AI-generated representment document filed with the processor on the seller's
-   * behalf, once ready. Null until generation completes, and for disputes not using
-   * Whop Dispute Fighter.
-   */
-  generated_response_attachment: Dispute.GeneratedResponseAttachment | null;
-
-  /**
    * Whether this is a pre-dispute inquiry rather than a formal chargeback. Inquiries
    * follow the same lifecycle but move no funds unless one escalates.
    */
@@ -129,7 +123,7 @@ export interface Dispute {
   /**
    * The payment being disputed.
    */
-  payment: Dispute.Payment | null;
+  payment: Dispute.Payment;
 
   /**
    * The plan the disputed payment was made on, prefixed `plan_`.
@@ -140,12 +134,6 @@ export interface Dispute {
    * The product the disputed payment was for, prefixed `prod_`.
    */
   product_id: string | null;
-
-  /**
-   * Whether Visa Rapid Dispute Resolution settled this automatically. These refund
-   * the customer without an evidence round.
-   */
-  rapid_dispute_resolution: boolean;
 
   /**
    * Why the customer says they are disputing, normalized across processors and card
@@ -364,9 +352,9 @@ export namespace Dispute {
     }
 
     /**
-     * Additional evidence documents uploaded through
-     * `POST /disputes/{id}/upload_evidence`, beyond the four fixed slots. Each rides
-     * into the submitted packet under its `document_type`.
+     * Additional evidence documents, beyond the four fixed slots — set via
+     * `evidence.documents` on `PATCH /disputes/{id}`. Each rides into the submitted
+     * packet under its `document_type`.
      */
     export interface Document {
       /**
@@ -376,7 +364,7 @@ export namespace Dispute {
 
       /**
        * The uploaded file's MIME type. Uploads are restricted to the types the processor
-       * accepts.
+       * accepts, and rejected without one — never null.
        */
       content_type: 'application/pdf' | 'application/json' | 'image/jpeg' | 'image/png' | 'image/webp' | null;
 
@@ -386,7 +374,20 @@ export namespace Dispute {
       created_at: string;
 
       /**
-       * What kind of evidence the document is.
+       * What this document proves, in the processor's own evidence vocabulary.
+       * `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's
+       * policy documents — uploading one overrides the account's copy for this dispute
+       * (`return_policy`, `cancellation_policy`, and `customer_communication` also
+       * override the matching fixed evidence slot). `shipping_policy` is the seller's
+       * shipping terms. `customer_communication` is correspondence with the buyer — a
+       * support thread or chat log. `product_image` is a photo of the product or service
+       * the buyer received. `physical_fulfillment` is proof a physical order shipped and
+       * arrived; `digital_fulfillment` is proof the buyer accessed a digital product.
+       * `customer_order_history` is the buyer's past orders with this seller;
+       * `prior_transactions` is their broader payment history across the platform, for a
+       * fraud defense. `customer_session` is checkout forensics — IP, device
+       * fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle
+       * evidence — renewals, cancellation, reminders sent.
        */
       document_type:
         | 'return_policy'
@@ -399,7 +400,8 @@ export namespace Dispute {
         | 'prior_transactions'
         | 'customer_session'
         | 'digital_fulfillment'
-        | 'subscription';
+        | 'subscription'
+        | 'customer_communication';
 
       /**
        * The original filename, including its extension.
@@ -541,40 +543,6 @@ export namespace Dispute {
        */
       url: string | null;
     }
-  }
-
-  /**
-   * The AI-generated representment document filed with the processor on the seller's
-   * behalf, once ready. Null until generation completes, and for disputes not using
-   * Whop Dispute Fighter.
-   */
-  export interface GeneratedResponseAttachment {
-    /**
-     * The attachment's ID. `null` for a Whop-hosted policy, which is not an uploaded
-     * file.
-     */
-    id: string | null;
-
-    /**
-     * The uploaded file's MIME type.
-     */
-    content_type: string | null;
-
-    /**
-     * The uploaded file's name.
-     */
-    filename: string | null;
-
-    /**
-     * Whether this is Whop's own hosted policy, standing in because the seller
-     * uploaded none. Sending it back on a PATCH changes nothing.
-     */
-    platform: boolean;
-
-    /**
-     * A URL to download the attachment.
-     */
-    url: string | null;
   }
 
   /**
@@ -726,7 +694,8 @@ export namespace Dispute {
     payment_method_type: string | null;
 
     /**
-     * The processor that handled the payment, such as `stripe`.
+     * @deprecated Deprecated: no longer populated. Always `null`. DEPRECATED: No
+     * longer populated. Always null.
      */
     payment_processor: string | null;
   }
