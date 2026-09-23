@@ -22,8 +22,6 @@ export namespace ListEventsResponse {
             path?: (string | null) | undefined;
             person_id: string;
             questions?: (Item.Questions.Item[] | null) | undefined;
-            recommended_action_chain_id?: (string | null) | undefined;
-            recommended_action_shown_position?: (number | null) | undefined;
             referrer_url?: (string | null) | undefined;
             /** Hydrated details for the records this event references. Only present keys resolved. */
             related?: (Item.Related | null) | undefined;

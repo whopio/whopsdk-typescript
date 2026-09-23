@@ -48,8 +48,6 @@ describe("EventsClient", () => {
                             type: "custom",
                         },
                     ],
-                    recommended_action_chain_id: "recommended_action_chain_id",
-                    recommended_action_shown_position: 1,
                     referrer_url: "https://google.com",
                     related: {
                         account: {
