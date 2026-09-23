@@ -23,7 +23,9 @@ describe("EconomicIntelligenceClient", () => {
                     ai_chat_id: "ai_chat_id",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
-                    expected_tool_calls: ["getAdCampaign"],
+                    expected_tool_calls: [
+                        { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
+                    ],
                     id: "reca_xxxxxxxxxxxxxx",
                     input: "more sales from ads",
                     prompt: "Create a 20% off promo code for my members.",
@@ -179,7 +181,9 @@ describe("EconomicIntelligenceClient", () => {
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
-            expected_tool_calls: ["getAdCampaign"],
+            expected_tool_calls: [
+                { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
+            ],
             id: "reca_xxxxxxxxxxxxxx",
             input: "more sales from ads",
             prompt: "Create a 20% off promo code for my members.",
@@ -307,7 +311,9 @@ describe("EconomicIntelligenceClient", () => {
             ai_chat_id: "ai_chat_id",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
-            expected_tool_calls: ["getAdCampaign"],
+            expected_tool_calls: [
+                { description: "Increase the summer campaign budget", tool_name: "updateAdCampaign" },
+            ],
             id: "reca_xxxxxxxxxxxxxx",
             input: "more sales from ads",
             prompt: "Create a 20% off promo code for my members.",
