@@ -2909,6 +2909,8 @@ export interface Payment {
    */
   financing_installments_count: number | null;
 
+  holds: Array<Payment.Hold>;
+
   /**
    * When the most recent charge attempt ran, or null.
    */
@@ -3041,10 +3043,11 @@ export interface Payment {
   risk_signals: unknown | null;
 
   /**
-   * When the funds post to the account's available balance, at midnight UTC. The
-   * `financial_activity.funds_available` webhook's `posted_at` carries the same
-   * value when the settlement that clears it posts. Null until the payment is paid,
-   * and always null in list responses — retrieve the payment for it.
+   * When the portion not listed in `holds` posts to the account's available balance,
+   * at midnight UTC. The `financial_activity.funds_available` webhook's `posted_at`
+   * carries the same value when the settlement that clears it posts. Null until the
+   * payment is paid, and always null in list responses — retrieve the payment for
+   * it.
    */
   settlement_time_at: string | null;
 
@@ -3204,6 +3207,68 @@ export namespace Payment {
      * The state, province or region.
      */
     state: string | null;
+  }
+
+  /**
+   * The active holds on this payment. Each hold has its own release date,
+   * independent of `settlement_time_at`. Empty when nothing is held; released holds
+   * are omitted.
+   */
+  export interface Hold {
+    /**
+     * The amount currently held, in the hold's currency.
+     */
+    amount: Hold.Amount;
+
+    /**
+     * The reserve percentage recorded when the hold was created, for example 3.5 for
+     * 3.5%. Null for other hold types or when no percentage was recorded.
+     */
+    percentage: number | null;
+
+    /**
+     * When the held funds are scheduled to become available, as an ISO 8601 timestamp.
+     * Never earlier than the payment's settlement date. Null when release depends on
+     * an event, such as shipment resolution, rather than a date.
+     */
+    release_at: string | null;
+
+    /**
+     * The reason funds are held: `reserve`, `bnpl`, `sequra`, `fraud_hold`, or
+     * `preshipment_hold`.
+     */
+    type: 'reserve' | 'bnpl' | 'sequra' | 'fraud_hold' | 'preshipment_hold';
+  }
+
+  export namespace Hold {
+    /**
+     * The amount currently held, in the hold's currency.
+     */
+    export interface Amount {
+      /**
+       * The amount in major units, as an exact decimal string — `"10.00"` is ten
+       * dollars. A string so no float rounds it in transit.
+       */
+      amount: string;
+
+      /**
+       * Three-letter ISO 4217 currency code, lowercase.
+       */
+      currency: string;
+
+      /**
+       * How many decimal places the amount CARRIES — the precision the charge itself
+       * runs at.
+       */
+      decimals: number;
+
+      /**
+       * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+       * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+       * and `0`. Format the number in your own locale using this.
+       */
+      display_decimals: number;
+    }
   }
 
   /**
