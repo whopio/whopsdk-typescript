@@ -41,7 +41,7 @@ export interface UpdatePlansRequest {
     offer_cancel_discount?: boolean | null;
     /** Override the default tax classification for this specific plan. */
     override_tax_type?: string;
-    /** Explicit payment method configuration for the plan. When not provided, the account's defaults apply. */
+    /** Explicit payment method configuration for the plan. When not provided, the account's defaults apply. Send at least one of `enabled` or `disabled`; an omitted one is empty. */
     payment_method_configuration?: UpdatePlansRequest.PaymentMethodConfiguration | null;
     /** Sales method for this plan. */
     release_method?: string;
@@ -55,7 +55,7 @@ export interface UpdatePlansRequest {
     strike_through_renewal_price?: number | null;
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Send `null` to inherit the account default. */
     three_ds_level?: UpdatePlansRequest.ThreeDsLevel | null;
-    /** The display name of the plan shown to customers on the product page. */
+    /** The display name of the plan shown to customers on the product page. Maximum 30 characters. */
     title?: string | null;
     /** Free trial duration before the first recurring charge. */
     trial_period_days?: number | null;
@@ -102,7 +102,7 @@ export namespace UpdatePlansRequest {
     }
 
     /**
-     * Explicit payment method configuration for the plan. When not provided, the account's defaults apply.
+     * Explicit payment method configuration for the plan. When not provided, the account's defaults apply. Send at least one of `enabled` or `disabled`; an omitted one is empty.
      */
     export interface PaymentMethodConfiguration {
         /** Payment method types explicitly disabled for this plan — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */

@@ -17,7 +17,7 @@ export interface CreateProductsRequest {
     custom_cta_url?: string | null;
     /** Custom bank statement descriptor. Must start with WHOP*. */
     custom_statement_descriptor?: string | null;
-    /** A written description displayed on the product page. */
+    /** A written description displayed on the product page. Maximum 1,500 characters. */
     description?: string | null;
     /** Images or videos displayed in the product gallery, in display order. Replaces the existing gallery. Send an empty array to clear it; omit or pass null to leave it unchanged. A banner image does not populate the gallery. */
     gallery_images?: CreateProductsRequest.GalleryImages.Item[] | null;
@@ -25,7 +25,7 @@ export interface CreateProductsRequest {
     global_affiliate_percentage?: number | null;
     /** The enrollment status in the global affiliate program. */
     global_affiliate_status?: CreateProductsRequest.GlobalAffiliateStatus;
-    /** A short marketing headline for the product page. */
+    /** A short marketing headline for the product page. Maximum 80 characters. */
     headline?: string | null;
     /** Labels used to group products into collections. Stored lowercased and de-duplicated. Maximum 20 labels, 50 characters each. */
     labels?: string[] | null;
