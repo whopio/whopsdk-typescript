@@ -13,8 +13,12 @@ export interface AdGroup {
     audiences: Whop.AdGroupAudiences;
     /** How delivery bids are set in the ad auction. Target-based strategies use `desired_cost_per_result`. */
     bid_type: AdGroup.BidType | null;
-    /** This ad group's budget, in the ad account's currency. `null` when the budget is set on the campaign instead. */
+    /** This ad group's budget in USD, which is what it is stored and billed in. `null` when the budget is set on the campaign instead. */
     budget_amount: number | null;
+    /** The same budget stated in `budget_currency` at today's exchange rate, for display in the account's ads reporting currency. `null` when `budget_amount` is. */
+    budget_amount_local: number | null;
+    /** The ISO 4217 code `budget_amount_local` is in: the account's `ads_reporting_currency` preference. `usd` unless the account changed it. */
+    budget_currency: string;
     /** Whether `budget_amount` is spent per day (`daily`) or over the ad group's full run (`lifetime`). A `lifetime` ad group also needs `ends_at`, at least 24 hours after it starts. */
     budget_type: AdGroup.BudgetType | null;
     /** Clicks divided by impressions, between 0 and 1. */
