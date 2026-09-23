@@ -11,11 +11,11 @@ export interface UpdateProductsRequest {
     id: string;
     /** A wide image for the product, shown on the product page and on listing cards. Pass `{ id }` for an existing attachment or `{ direct_upload_id }` for a completed direct upload; `null` removes it. */
     banner_image?: UpdateProductsRequest.BannerImage | null;
-    /** A written description displayed on the product page. */
+    /** A written description displayed on the product page. Maximum 1,500 characters. */
     description?: string | null;
     /** Images or videos displayed in the product gallery, in display order. Replaces the existing gallery. Send an empty array to clear it; omit or pass null to leave it unchanged. A banner image does not populate the gallery. */
     gallery_images?: UpdateProductsRequest.GalleryImages.Item[] | null;
-    /** A short marketing headline for the product page. */
+    /** A short marketing headline for the product page. Maximum 80 characters. */
     headline?: string | null;
     /** Labels used to group products into collections. Replaces the existing labels. Send an empty array to clear them. */
     labels?: string[] | null;
@@ -25,7 +25,7 @@ export interface UpdateProductsRequest {
     product_tax_code_id?: string | null;
     /** Whether to send an automated welcome message via support chat when a user joins this product. */
     send_welcome_message?: boolean | null;
-    /** The display name of the product. */
+    /** The display name of the product. Maximum 80 characters. */
     title?: string;
     /** Whether the product is visible to customers. */
     visibility?: string;
