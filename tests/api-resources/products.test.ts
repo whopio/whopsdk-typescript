@@ -49,7 +49,7 @@ describe('resource products', () => {
       route: 'interior-deep-clean',
       send_welcome_message: true,
       visibility: 'visible',
-      'Api-Version-Date': '2026-09-22-1',
+      'Api-Version-Date': '2026-09-22-2',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -72,7 +72,7 @@ describe('resource products', () => {
     await expect(
       client.products.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-22-1' },
+        { 'Api-Version-Date': '2026-09-22-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -125,7 +125,7 @@ describe('resource products', () => {
           price_minimum: 0,
           query: 'query',
           visibilities: ['visible'],
-          'Api-Version-Date': '2026-09-22-1',
+          'Api-Version-Date': '2026-09-22-2',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -150,7 +150,7 @@ describe('resource products', () => {
     await expect(
       client.products.delete(
         'id',
-        { 'Api-Version-Date': '2026-09-22-1' },
+        { 'Api-Version-Date': '2026-09-22-2' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

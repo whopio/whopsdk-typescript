@@ -1152,6 +1152,8 @@ export namespace AccountFinancingApprovedWebhookEvent {
      * other responses.
      */
     partner?: Data.Partner | null;
+
+    rewards?: Array<Data.Reward>;
   }
 
   export namespace Data {
@@ -2736,6 +2738,139 @@ export namespace AccountFinancingApprovedWebhookEvent {
          * picture.
          */
         url: string;
+      }
+    }
+
+    /**
+     * Business rewards attached through this account's active referral link, with
+     * account-specific progress and ledger status. Present on retrieve responses;
+     * empty without both balance and stats read access.
+     */
+    export interface Reward {
+      /**
+       * Reward definition ID, prefixed `prwd_`. Progress and status apply to the
+       * containing account.
+       */
+      id: string;
+
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      qualification_amount: Reward.QualificationAmount;
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      qualification_progress: Reward.QualificationProgress;
+
+      /**
+       * Activity that qualifies this account for the reward.
+       */
+      qualification_type: 'sales' | 'ad_spend';
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      reward_amount: Reward.RewardAmount;
+
+      /**
+       * This account's reward state. Credited requires a posted ledger entry; processing
+       * includes a met requirement awaiting fulfillment. Reversing and reversed reflect
+       * a subsequent reward reversal.
+       */
+      status: 'in_progress' | 'processing' | 'credited' | 'reversing' | 'reversed' | 'unavailable';
+    }
+
+    export namespace Reward {
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      export interface QualificationAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      export interface QualificationProgress {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      export interface RewardAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
       }
     }
   }
@@ -3140,6 +3275,8 @@ export namespace AccountFinancingDeniedWebhookEvent {
      * other responses.
      */
     partner?: Data.Partner | null;
+
+    rewards?: Array<Data.Reward>;
   }
 
   export namespace Data {
@@ -4724,6 +4861,139 @@ export namespace AccountFinancingDeniedWebhookEvent {
          * picture.
          */
         url: string;
+      }
+    }
+
+    /**
+     * Business rewards attached through this account's active referral link, with
+     * account-specific progress and ledger status. Present on retrieve responses;
+     * empty without both balance and stats read access.
+     */
+    export interface Reward {
+      /**
+       * Reward definition ID, prefixed `prwd_`. Progress and status apply to the
+       * containing account.
+       */
+      id: string;
+
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      qualification_amount: Reward.QualificationAmount;
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      qualification_progress: Reward.QualificationProgress;
+
+      /**
+       * Activity that qualifies this account for the reward.
+       */
+      qualification_type: 'sales' | 'ad_spend';
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      reward_amount: Reward.RewardAmount;
+
+      /**
+       * This account's reward state. Credited requires a posted ledger entry; processing
+       * includes a met requirement awaiting fulfillment. Reversing and reversed reflect
+       * a subsequent reward reversal.
+       */
+      status: 'in_progress' | 'processing' | 'credited' | 'reversing' | 'reversed' | 'unavailable';
+    }
+
+    export namespace Reward {
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      export interface QualificationAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      export interface QualificationProgress {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      export interface RewardAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
       }
     }
   }
@@ -5128,6 +5398,8 @@ export namespace AccountUpdatedWebhookEvent {
      * other responses.
      */
     partner?: Data.Partner | null;
+
+    rewards?: Array<Data.Reward>;
   }
 
   export namespace Data {
@@ -6712,6 +6984,139 @@ export namespace AccountUpdatedWebhookEvent {
          * picture.
          */
         url: string;
+      }
+    }
+
+    /**
+     * Business rewards attached through this account's active referral link, with
+     * account-specific progress and ledger status. Present on retrieve responses;
+     * empty without both balance and stats read access.
+     */
+    export interface Reward {
+      /**
+       * Reward definition ID, prefixed `prwd_`. Progress and status apply to the
+       * containing account.
+       */
+      id: string;
+
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      qualification_amount: Reward.QualificationAmount;
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      qualification_progress: Reward.QualificationProgress;
+
+      /**
+       * Activity that qualifies this account for the reward.
+       */
+      qualification_type: 'sales' | 'ad_spend';
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      reward_amount: Reward.RewardAmount;
+
+      /**
+       * This account's reward state. Credited requires a posted ledger entry; processing
+       * includes a met requirement awaiting fulfillment. Reversing and reversed reflect
+       * a subsequent reward reversal.
+       */
+      status: 'in_progress' | 'processing' | 'credited' | 'reversing' | 'reversed' | 'unavailable';
+    }
+
+    export namespace Reward {
+      /**
+       * Qualifying USD volume required to earn this reward.
+       */
+      export interface QualificationAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * Qualifying USD volume for the reward’s activity accumulated by this account
+       * since attribution, calculated using the fulfillment rules.
+       */
+      export interface QualificationProgress {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
+      }
+
+      /**
+       * USD balance credit for this reward. Uses the saved grant amount once fulfillment
+       * has started.
+       */
+      export interface RewardAmount {
+        /**
+         * The amount in major units, as an exact decimal string — `"10.00"` is ten
+         * dollars. A string so no float rounds it in transit.
+         */
+        amount: string;
+
+        /**
+         * Three-letter ISO 4217 currency code, lowercase.
+         */
+        currency: string;
+
+        /**
+         * How many decimal places the amount CARRIES — the precision the charge itself
+         * runs at.
+         */
+        decimals: number;
+
+        /**
+         * How many decimal places to SHOW. Usually equal to `decimals`, and deliberately
+         * not always: COP is charged in centavos but written in whole pesos, so it is `2`
+         * and `0`. Format the number in your own locale using this.
+         */
+        display_decimals: number;
       }
     }
   }
