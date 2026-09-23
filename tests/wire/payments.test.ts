@@ -148,6 +148,7 @@ describe("PaymentsClient", () => {
                     },
                     verification_checks: {
                         address_line1: "PASS",
+                        authorization_code: "A1B2C3",
                         card_holder_name: "PASS",
                         card_security_code: "PASS",
                         zip_code: "PASS",
@@ -359,6 +360,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
                 zip_code: "PASS",
@@ -662,6 +664,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
                 zip_code: "PASS",
@@ -1114,6 +1117,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
                 zip_code: "PASS",
@@ -1417,6 +1421,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
                 zip_code: "PASS",
@@ -1660,6 +1665,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
                 zip_code: "PASS",
