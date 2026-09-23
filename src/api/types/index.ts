@@ -211,6 +211,7 @@ export * from "./Domain.js";
 export * from "./DomainDnsRecord.js";
 export * from "./DomainIssue.js";
 export * from "./EconomicIntelligence.js";
+export * from "./EconomicIntelligenceOperation.js";
 export * from "./EmbedTypes.js";
 export * from "./Entry.js";
 export * from "./EntryStatus.js";
