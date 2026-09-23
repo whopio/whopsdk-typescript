@@ -177,6 +177,7 @@ export namespace AdGroup {
     export type ConversionLocation = (typeof ConversionLocation)[keyof typeof ConversionLocation];
     /** Whether ads in this ad group are delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     export const DeliveryStatus = {
+        InAppeal: "in_appeal",
         AllAdsRejected: "all_ads_rejected",
         Rejected: "rejected",
         Draft: "draft",

@@ -181,6 +181,7 @@ export namespace Ad {
     export type CallToAction = (typeof CallToAction)[keyof typeof CallToAction];
     /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     export const DeliveryStatus = {
+        InAppeal: "in_appeal",
         Rejected: "rejected",
         InReview: "in_review",
         Draft: "draft",

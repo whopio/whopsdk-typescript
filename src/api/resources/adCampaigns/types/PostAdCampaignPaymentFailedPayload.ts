@@ -81,6 +81,7 @@ export namespace PostAdCampaignPaymentFailedPayload {
         /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
         export const DeliveryStatus = {
             PaymentFailed: "payment_failed",
+            InAppeal: "in_appeal",
             AllAdsRejected: "all_ads_rejected",
             Draft: "draft",
             NoAdGroups: "no_ad_groups",
