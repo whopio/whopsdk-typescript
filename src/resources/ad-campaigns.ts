@@ -313,6 +313,7 @@ export interface AdCampaign {
    */
   delivery_status:
     | 'payment_failed'
+    | 'in_appeal'
     | 'all_ads_rejected'
     | 'draft'
     | 'no_ad_groups'

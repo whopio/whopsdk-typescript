@@ -289,6 +289,7 @@ export interface Ad {
    * apply at once, the highest-precedence one is returned.
    */
   delivery_status:
+    | 'in_appeal'
     | 'rejected'
     | 'in_review'
     | 'draft'

@@ -26,12 +26,12 @@ describe('resource webhooks', () => {
   test.skip('create: required and optional params', async () => {
     const response = await client.webhooks.create({
       url: 'https://example.com/hooks',
-      api_version_date: '2026-09-22-3',
+      api_version_date: '2026-09-22-4',
       child_resource_events: true,
       enabled: true,
       events: ['payment.succeeded'],
       resource_id: 'biz_xxxxxxxxxxxxxx',
-      'Api-Version-Date': '2026-09-22-3',
+      'Api-Version-Date': '2026-09-22-4',
       'Idempotency-Key': 'd9105228-4a08-46b1-8b91-42fed586d383',
     });
   });
@@ -54,7 +54,7 @@ describe('resource webhooks', () => {
     await expect(
       client.webhooks.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-22-3' },
+        { 'Api-Version-Date': '2026-09-22-4' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -95,7 +95,7 @@ describe('resource webhooks', () => {
       has_failures: true,
       include_app_webhooks: true,
       last: 100,
-      'Api-Version-Date': '2026-09-22-3',
+      'Api-Version-Date': '2026-09-22-4',
     });
   });
 
@@ -117,7 +117,7 @@ describe('resource webhooks', () => {
     await expect(
       client.webhooks.delete(
         'id',
-        { 'Api-Version-Date': '2026-09-22-3' },
+        { 'Api-Version-Date': '2026-09-22-4' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);

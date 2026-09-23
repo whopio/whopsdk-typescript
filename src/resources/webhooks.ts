@@ -7231,6 +7231,7 @@ export namespace AdUpdatedWebhookEvent {
      * apply at once, the highest-precedence one is returned.
      */
     delivery_status:
+      | 'in_appeal'
       | 'rejected'
       | 'in_review'
       | 'draft'
@@ -7805,6 +7806,7 @@ export namespace AdCampaignPaymentFailedWebhookEvent {
      */
     delivery_status:
       | 'payment_failed'
+      | 'in_appeal'
       | 'all_ads_rejected'
       | 'draft'
       | 'no_ad_groups'
@@ -7979,6 +7981,7 @@ export namespace AdCampaignUpdatedWebhookEvent {
      */
     delivery_status:
       | 'payment_failed'
+      | 'in_appeal'
       | 'all_ads_rejected'
       | 'draft'
       | 'no_ad_groups'

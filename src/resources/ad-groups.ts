@@ -362,6 +362,7 @@ export interface AdGroup {
    * several states apply at once, the highest-precedence one is returned.
    */
   delivery_status:
+    | 'in_appeal'
     | 'all_ads_rejected'
     | 'rejected'
     | 'draft'
