@@ -3,8 +3,6 @@
 export interface DisputeAlert {
     /** The account the alerted payment belongs to, prefixed `biz_`. `null` while the alert is unmatched. */
     account_id: string | null;
-    /** Whether refunding the payment can still avoid a chargeback. `false` once the payment has been disputed or fully refunded, or when the alert could not be matched to a payment — `not_actionable_reason` says which. */
-    actionable: boolean;
     /** The alerted amount, in whole units of `currency`. This is what the issuer reported, which can differ from the payment's own amount. */
     amount: number;
     /** The card network as reported by the issuer, lowercased, such as `visa` or `mastercard`. `unknown` when the report carries neither a network nor a recognizable BIN. */
@@ -17,17 +15,18 @@ export interface DisputeAlert {
     fee_charged: boolean;
     /** Dispute alert ID, prefixed `dspa_`. */
     id: string;
-    /** Name of the bank that issued the card and filed the report. */
+    /**
+     * Deprecated: always `null` outside Whop's own dashboard. Name of the bank that issued the card and filed the report.
+     * DEPRECATED: Always null outside Whop's own dashboard.
+     */
     issuer: string | null;
-    /** Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa RDR already closed the case, `payment_unmatched` when no payment matched, `payment_not_captured` when it never captured money, `payment_disputed` once the payment carries a dispute, `payment_refunded` once fully refunded. `null` while `actionable` is true. */
-    not_actionable_reason: DisputeAlert.NotActionableReason | null;
     /** The payment the issuer reported, prefixed `pay_`. `null` when Whop could not match the report to a payment. */
     payment_id: string | null;
     /** The product the alerted payment was for, prefixed `prod_`. */
     product_id: string | null;
     /** When the issuer filed the report, as an ISO 8601 timestamp. Earlier than `created_at`, which is when Whop received it. */
     reported_at: string;
-    /** When the reported transaction was made, as an ISO 8601 timestamp. */
+    /** When the reported transaction was made, as an ISO 8601 timestamp — falls back to when the matched payment was made if the issuer's own report didn't carry one. Should not be `null` in practice; treat one as a data issue rather than expected behavior. */
     transaction_at: string | null;
     /** What the issuer sent. `early_fraud_warning` is a fraud report on a settled payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback, and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice from the issuer's alert network, which Whop pays for and passes on as a fee. `rapid_dispute_resolution` is a Visa RDR case the network already closed by refunding the payment — nothing is left to act on. */
     type: DisputeAlert.Type;
@@ -36,15 +35,6 @@ export interface DisputeAlert {
 }
 
 export namespace DisputeAlert {
-    /** Why refunding can no longer avoid a chargeback. `network_resolved` when a Visa RDR already closed the case, `payment_unmatched` when no payment matched, `payment_not_captured` when it never captured money, `payment_disputed` once the payment carries a dispute, `payment_refunded` once fully refunded. `null` while `actionable` is true. */
-    export const NotActionableReason = {
-        NetworkResolved: "network_resolved",
-        PaymentUnmatched: "payment_unmatched",
-        PaymentNotCaptured: "payment_not_captured",
-        PaymentDisputed: "payment_disputed",
-        PaymentRefunded: "payment_refunded",
-    } as const;
-    export type NotActionableReason = (typeof NotActionableReason)[keyof typeof NotActionableReason];
     /** What the issuer sent. `early_fraud_warning` is a fraud report on a settled payment (Visa TC40 / Mastercard SAFE) — refunding still avoids the chargeback, and Whop never charges a fee for one. `dispute_alert` is a pre-dispute notice from the issuer's alert network, which Whop pays for and passes on as a fee. `rapid_dispute_resolution` is a Visa RDR case the network already closed by refunding the payment — nothing is left to act on. */
     export const Type = {
         EarlyFraudWarning: "early_fraud_warning",

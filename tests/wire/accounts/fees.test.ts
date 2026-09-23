@@ -1128,6 +1128,14 @@ describe("FeesClient", () => {
                     unadjustable_reason: "not_permitted",
                 },
             },
+            covered_payout_fees: {
+                all: false,
+                bank_wire: false,
+                crypto: false,
+                digital_wallet: false,
+                next_day_bank: false,
+                rtp: false,
+            },
             cross_border: {
                 adjustable: true,
                 category: "payments",
@@ -9183,6 +9191,14 @@ describe("FeesClient", () => {
                     source: "default",
                     unadjustable_reason: "not_permitted",
                 },
+            },
+            covered_payout_fees: {
+                all: false,
+                bank_wire: false,
+                crypto: false,
+                digital_wallet: false,
+                next_day_bank: false,
+                rtp: false,
             },
             cross_border: {
                 adjustable: true,

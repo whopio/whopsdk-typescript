@@ -15,6 +15,8 @@ export interface AccountFees {
     card_processing: Whop.AccountFee;
     /** The default markups this account charges connected accounts, configurable before any accounts connect. `null` if this account has a parent. */
     child_markups: Whop.AccountFeeMarkups | null;
+    /** Which payout fees this account pays for its connected accounts. */
+    covered_payout_fees: Whop.AccountCoveredPayoutFees;
     /** Added to a payment whose card was issued outside the region where the payment was processed. */
     cross_border: Whop.AccountFee;
     /** Charged when a payment is disputed. */

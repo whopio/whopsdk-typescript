@@ -12,6 +12,7 @@ export * from "./AccountCompanyFormation.js";
 export * from "./AccountCompanyFormationDocument.js";
 export * from "./AccountCompanyFormationSignatureRequest.js";
 export * from "./AccountCompanyFormationSignatures.js";
+export * from "./AccountCoveredPayoutFees.js";
 export * from "./AccountDisputeAlertAutoRefundControl.js";
 export * from "./AccountFee.js";
 export * from "./AccountFeeMarkup.js";

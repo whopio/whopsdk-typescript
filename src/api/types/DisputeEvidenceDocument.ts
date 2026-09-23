@@ -3,11 +3,11 @@
 import type * as Whop from "../index.js";
 
 export interface DisputeEvidenceDocument {
-    /** The uploaded file's MIME type. Uploads are restricted to the types the processor accepts. */
+    /** The uploaded file's MIME type. Uploads are restricted to the types the processor accepts, and rejected without one — never null. */
     content_type: DisputeEvidenceDocument.ContentType | null;
     /** When the file was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** What kind of evidence the document is. */
+    /** What this document proves, in the processor's own evidence vocabulary. `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's policy documents — uploading one overrides the account's copy for this dispute (`return_policy`, `cancellation_policy`, and `customer_communication` also override the matching fixed evidence slot). `shipping_policy` is the seller's shipping terms. `customer_communication` is correspondence with the buyer — a support thread or chat log. `product_image` is a photo of the product or service the buyer received. `physical_fulfillment` is proof a physical order shipped and arrived; `digital_fulfillment` is proof the buyer accessed a digital product. `customer_order_history` is the buyer's past orders with this seller; `prior_transactions` is their broader payment history across the platform, for a fraud defense. `customer_session` is checkout forensics — IP, device fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle evidence — renewals, cancellation, reminders sent. */
     document_type: DisputeEvidenceDocument.DocumentType;
     /** The original filename, including its extension. */
     filename: string | null;
@@ -35,7 +35,7 @@ export interface DisputeEvidenceDocument {
 }
 
 export namespace DisputeEvidenceDocument {
-    /** The uploaded file's MIME type. Uploads are restricted to the types the processor accepts. */
+    /** The uploaded file's MIME type. Uploads are restricted to the types the processor accepts, and rejected without one — never null. */
     export const ContentType = {
         ApplicationPdf: "application/pdf",
         ApplicationJson: "application/json",
@@ -44,7 +44,7 @@ export namespace DisputeEvidenceDocument {
         ImageWebp: "image/webp",
     } as const;
     export type ContentType = (typeof ContentType)[keyof typeof ContentType];
-    /** What kind of evidence the document is. */
+    /** What this document proves, in the processor's own evidence vocabulary. `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's policy documents — uploading one overrides the account's copy for this dispute (`return_policy`, `cancellation_policy`, and `customer_communication` also override the matching fixed evidence slot). `shipping_policy` is the seller's shipping terms. `customer_communication` is correspondence with the buyer — a support thread or chat log. `product_image` is a photo of the product or service the buyer received. `physical_fulfillment` is proof a physical order shipped and arrived; `digital_fulfillment` is proof the buyer accessed a digital product. `customer_order_history` is the buyer's past orders with this seller; `prior_transactions` is their broader payment history across the platform, for a fraud defense. `customer_session` is checkout forensics — IP, device fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle evidence — renewals, cancellation, reminders sent. */
     export const DocumentType = {
         ReturnPolicy: "return_policy",
         ShippingPolicy: "shipping_policy",
@@ -57,6 +57,7 @@ export namespace DisputeEvidenceDocument {
         CustomerSession: "customer_session",
         DigitalFulfillment: "digital_fulfillment",
         Subscription: "subscription",
+        CustomerCommunication: "customer_communication",
     } as const;
     export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
     /** Where the file is in its upload lifecycle. */

@@ -8,14 +8,14 @@ export interface Dispute {
     /** The disputed amount, in whole units of `currency`. */
     amount: number;
     /** The customer who filed the dispute. */
-    buyer: Whop.DisputeBuyer | null;
+    buyer: Whop.DisputeBuyer;
     /** When the dispute was opened, as an ISO 8601 timestamp. */
     created_at: string;
     /** Three-letter ISO currency code of the disputed amount. */
     currency: string;
     /** The evidence packet sent to the processor to contest the dispute. */
     evidence: Whop.DisputeEvidence;
-    /** The deadline to submit evidence, as an ISO 8601 timestamp. Whop reserves the last 24 hours before the processor's own cutoff to forward the submission. */
+    /** The deadline to submit evidence, as an ISO 8601 timestamp. `null` when the network already auto-resolved the dispute (Visa RDR) with no evidence round, or when the processor hasn't reported a deadline for this dispute. */
     evidence_due_at: string | null;
     /** Whether `evidence` can still be changed and submitted. */
     evidence_editable: boolean;
@@ -23,8 +23,6 @@ export interface Dispute {
     evidence_locked_reason: Dispute.EvidenceLockedReason | null;
     /** When the evidence was submitted to the processor, as an ISO 8601 timestamp. */
     evidence_submitted_at: string | null;
-    /** The AI-generated representment document filed with the processor on the seller's behalf, once ready. Null until generation completes, and for disputes not using Whop Dispute Fighter. */
-    generated_response_attachment: Whop.DisputeAttachment | null;
     /** Dispute ID, prefixed `dspt_`. */
     id: string;
     /** Whether this is a pre-dispute inquiry rather than a formal chargeback. Inquiries follow the same lifecycle but move no funds unless one escalates. */
@@ -32,13 +30,11 @@ export interface Dispute {
     issuer_comments: Whop.DisputeIssuerComment[];
     line_items: Whop.ReceiptLineItem[];
     /** The payment being disputed. */
-    payment: Whop.DisputePayment | null;
+    payment: Whop.DisputePayment;
     /** The plan the disputed payment was made on, prefixed `plan_`. */
     plan_id: string | null;
     /** The product the disputed payment was for, prefixed `prod_`. */
     product_id: string | null;
-    /** Whether Visa Rapid Dispute Resolution settled this automatically. These refund the customer without an evidence round. */
-    rapid_dispute_resolution: boolean;
     /** Why the customer says they are disputing, normalized across processors and card networks. `other` covers a processor reason Whop has not categorized yet. */
     reason: Dispute.Reason;
     /** The raw card-network or processor reason code, such as `10.4`. Informational only — `reason` is not derived from it. */
