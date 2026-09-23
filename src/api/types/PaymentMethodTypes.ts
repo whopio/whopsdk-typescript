@@ -114,6 +114,7 @@ export const PaymentMethodTypes = {
     Splitit: "splitit",
     Sunbit: "sunbit",
     Swish: "swish",
+    Tabby: "tabby",
     Tamara: "tamara",
     TouchNGo: "touch_n_go",
     Twint: "twint",
