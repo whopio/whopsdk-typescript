@@ -26,7 +26,7 @@ describe('resource setupIntents', () => {
     await expect(
       client.setupIntents.retrieve(
         'id',
-        { 'Api-Version-Date': '2026-09-22-2' },
+        { 'Api-Version-Date': '2026-09-22-3' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Whop.NotFoundError);
@@ -60,7 +60,7 @@ describe('resource setupIntents', () => {
           last: 100,
           order: 'created_at',
           status: 'processing',
-          'Api-Version-Date': '2026-09-22-2',
+          'Api-Version-Date': '2026-09-22-3',
         },
         { path: '/_stainless_unknown_path' },
       ),
