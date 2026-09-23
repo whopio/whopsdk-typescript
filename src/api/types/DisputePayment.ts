@@ -19,6 +19,9 @@ export interface DisputePayment {
     payment_instrument: Whop.PaymentInstrument | null;
     /** How the customer paid, such as `card` or `paypal`. */
     payment_method_type: string | null;
-    /** The processor that handled the payment, such as `stripe`. */
+    /**
+     * Deprecated: no longer populated. Always `null`.
+     * DEPRECATED: No longer populated. Always null.
+     */
     payment_processor: string | null;
 }

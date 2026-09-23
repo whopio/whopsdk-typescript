@@ -32,6 +32,8 @@ export namespace UpdateDisputesRequest {
         customer_email_address?: (string | null) | undefined;
         /** The customer's name as given at checkout. */
         customer_name?: (string | null) | undefined;
+        /** The full set of evidence documents the dispute should carry, beyond the four fixed evidence slots. Replaces all previously uploaded documents. Upload files through `POST /files` and reference them by `id`, or send the files as multipart file parts to upload and attach in one call. Policy documents (`return_policy`, `shipping_policy`, `cancellation_policy`, `terms_of_service`) default from the account's own documents; uploading one here replaces the account copy for this dispute, and a `cancellation_policy` or `return_policy` upload also takes precedence over the matching fixed evidence slot. */
+        documents?: Evidence.Documents.Item[] | undefined;
         /** Any additional context for the processor reviewing the dispute. */
         notes?: (string | null) | undefined;
         /** What the customer purchased, in the seller's own words. */
@@ -67,6 +69,40 @@ export namespace UpdateDisputesRequest {
             direct_upload_id?: string | undefined;
             /** The ID of an already-uploaded file. */
             id?: string | undefined;
+        }
+
+        export type Documents = Documents.Item[];
+
+        export namespace Documents {
+            export interface Item {
+                /** The ID returned by a direct upload. */
+                direct_upload_id?: string | undefined;
+                /** What this document proves, in the processor's own evidence vocabulary. `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's policy documents — uploading one overrides the account's copy for this dispute (`return_policy`, `cancellation_policy`, and `customer_communication` also override the matching fixed evidence slot). `shipping_policy` is the seller's shipping terms. `customer_communication` is correspondence with the buyer — a support thread or chat log. `product_image` is a photo of the product or service the buyer received. `physical_fulfillment` is proof a physical order shipped and arrived; `digital_fulfillment` is proof the buyer accessed a digital product. `customer_order_history` is the buyer's past orders with this seller; `prior_transactions` is their broader payment history across the platform, for a fraud defense. `customer_session` is checkout forensics — IP, device fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle evidence — renewals, cancellation, reminders sent. */
+                document_type: Item.DocumentType;
+                /** The file itself. Send it as a file part to upload and attach in one call, or use `id`/`direct_upload_id` for a file that is already stored. */
+                file?: string | undefined;
+                /** The ID of a file already stored on Whop, prefixed `file_`. */
+                id?: string | undefined;
+            }
+
+            export namespace Item {
+                /** What this document proves, in the processor's own evidence vocabulary. `return_policy`, `cancellation_policy`, and `terms_of_service` are the seller's policy documents — uploading one overrides the account's copy for this dispute (`return_policy`, `cancellation_policy`, and `customer_communication` also override the matching fixed evidence slot). `shipping_policy` is the seller's shipping terms. `customer_communication` is correspondence with the buyer — a support thread or chat log. `product_image` is a photo of the product or service the buyer received. `physical_fulfillment` is proof a physical order shipped and arrived; `digital_fulfillment` is proof the buyer accessed a digital product. `customer_order_history` is the buyer's past orders with this seller; `prior_transactions` is their broader payment history across the platform, for a fraud defense. `customer_session` is checkout forensics — IP, device fingerprint, AVS/CVV, 3D Secure result. `subscription` is membership lifecycle evidence — renewals, cancellation, reminders sent. */
+                export const DocumentType = {
+                    ReturnPolicy: "return_policy",
+                    ShippingPolicy: "shipping_policy",
+                    CancellationPolicy: "cancellation_policy",
+                    TermsOfService: "terms_of_service",
+                    PhysicalFulfillment: "physical_fulfillment",
+                    CustomerOrderHistory: "customer_order_history",
+                    ProductImage: "product_image",
+                    PriorTransactions: "prior_transactions",
+                    CustomerSession: "customer_session",
+                    DigitalFulfillment: "digital_fulfillment",
+                    Subscription: "subscription",
+                    CustomerCommunication: "customer_communication",
+                } as const;
+                export type DocumentType = (typeof DocumentType)[keyof typeof DocumentType];
+            }
         }
 
         /**

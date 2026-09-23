@@ -19,7 +19,6 @@ describe("DisputeAlertsClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    actionable: false,
                     amount: 25,
                     card_brand: "visa",
                     created_at: "2026-01-01T12:00:00.000Z",
@@ -27,7 +26,6 @@ describe("DisputeAlertsClient", () => {
                     fee_charged: false,
                     id: "dspa_xxxxxxxxxxxxxx",
                     issuer: "issuer",
-                    not_actionable_reason: "network_resolved",
                     payment_id: "pay_xxxxxxxxxxxxxx",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     reported_at: "2026-01-01T12:00:00.000Z",
@@ -130,7 +128,6 @@ describe("DisputeAlertsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            actionable: false,
             amount: 25,
             card_brand: "visa",
             created_at: "2026-01-01T12:00:00.000Z",
@@ -138,7 +135,6 @@ describe("DisputeAlertsClient", () => {
             fee_charged: false,
             id: "dspa_xxxxxxxxxxxxxx",
             issuer: "issuer",
-            not_actionable_reason: "network_resolved",
             payment_id: "pay_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             reported_at: "2026-01-01T12:00:00.000Z",

@@ -19,6 +19,8 @@ export interface UpdateFeesRequest {
     card_processing?: UpdateFeesRequest.CardProcessing;
     /** Default markups for connected accounts. Available on accounts without a parent, even before any accounts connect. */
     child_markups?: UpdateFeesRequest.ChildMarkups;
+    /** Changes to the payout fees this account covers for connected accounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true. */
+    covered_payout_fees?: UpdateFeesRequest.CoveredPayoutFees;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
     cross_border?: UpdateFeesRequest.CrossBorder;
     /** The fields of a fee the caller may change. Only the keys sent are replaced. */
@@ -244,6 +246,18 @@ export namespace UpdateFeesRequest {
             /** The percentage of the transaction the platform adds, where `2` means 2%. */
             percentage?: number | undefined;
         }
+    }
+
+    /**
+     * Changes to the payout fees this account covers for connected accounts. Send either all or individual category keys. Omitted categories stay unchanged; category changes have no effect while all is true.
+     */
+    export interface CoveredPayoutFees {
+        all?: boolean | undefined;
+        bank_wire?: boolean | undefined;
+        crypto?: boolean | undefined;
+        digital_wallet?: boolean | undefined;
+        next_day_bank?: boolean | undefined;
+        rtp?: boolean | undefined;
     }
 
     /**
