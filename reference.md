@@ -6916,6 +6916,69 @@ const response = page.response;
 </dl>
 </details>
 
+<details><summary><code>client.cashbackRules.<a href="/src/api/resources/cashbackRules/client/Client.ts">payout</a>({ ...params }) -> Whop.CashbackPayout</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Distributes cashback on demand from the authenticated platform's available USD balance to its direct connected accounts. Requires payout:transfer_funds. Optional filters combine; an empty body includes all eligible transactions. Only completed, unpaid transactions created before this request are considered. The latest matching rule wins; its funding account must be the authenticated platform. Amounts are calculated when processed. Returns status `processing` and echoes supplied filters when background processing is queued. Status `failed` with HTTP 200 means the queue rejected the request. This is not a payment confirmation. Failed transaction jobs retry automatically; insufficient funds requires adding USD to the funding wallet. Supports Idempotency-Key, and overlapping requests cannot pay the same card transaction twice.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.cashbackRules.payout();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.PayoutCashbackRulesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `CashbackRulesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.cashbackRules.<a href="/src/api/resources/cashbackRules/client/Client.ts">update</a>({ ...params }) -> Whop.CashbackRule</code></summary>
 <dl>
 <dd>

@@ -155,6 +155,7 @@ export * from "./CardIssuingTransactionStatus.js";
 export * from "./CardTransaction.js";
 export * from "./CardTransactionLegacy.js";
 export * from "./CardTransactionListItem.js";
+export * from "./CashbackPayout.js";
 export * from "./CashbackRule.js";
 export * from "./ChatChannel.js";
 export * from "./ChatChannelListItem.js";
