@@ -27,6 +27,8 @@ export interface UpdatePreferencesRequest {
     dispute_fighter_enabled?: boolean;
     /** Turns on Economic Intelligence for this many days, at the fee listed for that duration in `economic_intelligence_offers`. It can't be changed or turned off until `economic_intelligence_ends_at`, and it can't be turned on during a free trial. Requires the `company:update` scope on your API key. */
     economic_intelligence_duration_days?: number;
+    /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
+    subscription_failure_behavior?: UpdatePreferencesRequest.SubscriptionFailureBehavior;
 }
 
 export namespace UpdatePreferencesRequest {
@@ -100,4 +102,12 @@ export namespace UpdatePreferencesRequest {
         /** The exact shop domain configured in Triple Whale's Settings → Store (for Shopify this is the `.myshopify.com` domain; for a custom sales platform it's whatever domain Triple Whale assigned when the shop was set up there). A leading `https://` and trailing `/` are stripped, and what remains must be a bare hostname with no path or spaces. Validated against Triple Whale — the API key must have access to it — before it is stored. Changing it on a connected integration backfills the account's ad spend onto the new shop. Omit to fall back to a connected Shopify store's domain; there is no way to clear a stored value, only to overwrite it with a new domain. */
         shop_domain?: string | undefined;
     }
+
+    /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. Requires company:manage_checkout permission. */
+    export const SubscriptionFailureBehavior = {
+        Cancel: "cancel",
+        None: "none",
+    } as const;
+    export type SubscriptionFailureBehavior =
+        (typeof SubscriptionFailureBehavior)[keyof typeof SubscriptionFailureBehavior];
 }
