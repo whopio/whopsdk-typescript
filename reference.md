@@ -23864,6 +23864,71 @@ const response = page.response;
 </dl>
 </details>
 
+<details><summary><code>client.socialAccounts.<a href="/src/api/resources/socialAccounts/client/Client.ts">refresh</a>({ ...params }) -> Whop.SocialAccount</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Refreshes the state of a social account. Use it to clear an `error` that has been resolved.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.socialAccounts.refresh({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RefreshSocialAccountsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SocialAccountsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Stats
 <details><summary><code>client.stats.<a href="/src/api/resources/stats/client/Client.ts">list</a>() -> Whop.ListStatsResponse</code></summary>
 <dl>
