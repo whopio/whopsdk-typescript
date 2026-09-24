@@ -53,6 +53,9 @@ export interface Product {
     title: string;
     /** When the product was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** The option set the product's variants span, as a map of attribute name to the values in use, e.g. `{"color": ["Blue", "Red"], "size": ["S", "M", "L"]}`. Derived from the visible, non-invoice plans that carry `attributes`: keys alphabetical, values in the order the plans were created. Read-only. `null` when the product has no variants. */
+    variant_attributes: Record<string, unknown> | null;
+    variants: Whop.PlanListItem[] | null;
     /** Whether the product has been verified by Whop. */
     verified: boolean;
     /** Whether the product is publicly visible, hidden, or archived. */
