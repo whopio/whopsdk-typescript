@@ -105,7 +105,7 @@ export namespace CreateAdsRequest {
      * Instant lead form for the ad. Only allowed when the ad group's conversion_location is an instant-form destination (instant_forms, instant_forms_and_messenger, website_and_instant_forms). Mutually exclusive with lead_form_id.
      */
     export interface LeadForm {
-        /** Optional completion screen shown after submission; url sets the follow-up website button. */
+        /** Optional completion screen shown after submission. Its button needs a destination: url for button_type website (the default), phone_number for call, file_url for download. */
         completion?: LeadForm.Completion | undefined;
         /** Optional custom consent disclaimer with checkboxes. */
         disclaimer?: LeadForm.Disclaimer | undefined;
@@ -125,13 +125,25 @@ export namespace CreateAdsRequest {
 
     export namespace LeadForm {
         /**
-         * Optional completion screen shown after submission; url sets the follow-up website button.
+         * Optional completion screen shown after submission. Its button needs a destination: url for button_type website (the default), phone_number for call, file_url for download.
          */
         export interface Completion {
             button_text?: string | undefined;
+            button_type?: Completion.ButtonType | undefined;
             description?: string | undefined;
+            file_url?: string | undefined;
             headline?: string | undefined;
+            phone_number?: string | undefined;
             url?: string | undefined;
+        }
+
+        export namespace Completion {
+            export const ButtonType = {
+                Website: "website",
+                Call: "call",
+                Download: "download",
+            } as const;
+            export type ButtonType = (typeof ButtonType)[keyof typeof ButtonType];
         }
 
         /**

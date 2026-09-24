@@ -3,10 +3,26 @@
 export interface AdLeadFormCompletion {
     /** Text of the follow-up button. */
     button_text: string | null;
+    /** What the follow-up button does. `null` on forms saved before the button was configurable. */
+    button_type: AdLeadFormCompletion.ButtonType | null;
     /** Body text under the headline. */
     description: string | null;
+    /** File the follow-up button opens. Set when `button_type` is `download`. */
+    file_url: string | null;
     /** Headline of the completion screen. */
     headline: string | null;
-    /** Website the follow-up button opens. `null` when the screen has no button. */
+    /** Number the follow-up button calls. Set when `button_type` is `call`. */
+    phone_number: string | null;
+    /** Website the follow-up button opens. Set when `button_type` is `website`. */
     url: string | null;
+}
+
+export namespace AdLeadFormCompletion {
+    /** What the follow-up button does. `null` on forms saved before the button was configurable. */
+    export const ButtonType = {
+        Website: "website",
+        Call: "call",
+        Download: "download",
+    } as const;
+    export type ButtonType = (typeof ButtonType)[keyof typeof ButtonType];
 }

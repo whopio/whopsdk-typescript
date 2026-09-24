@@ -527,8 +527,11 @@ describe("SocialAccountsClient", () => {
                 {
                     completion: {
                         button_text: "See our work",
+                        button_type: null,
                         description: "We book coatings two days out, so pick a slot when we ring.",
+                        file_url: null,
                         headline: "Thanks — we will call you today",
+                        phone_number: null,
                         url: "https://shinetime.example/gallery",
                     },
                     created_at: "2026-01-01T12:00:00.000Z",
