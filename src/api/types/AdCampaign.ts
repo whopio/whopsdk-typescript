@@ -65,6 +65,10 @@ export interface AdCampaign {
     custom_event_values: Record<string, unknown>;
     /** Whether the campaign's ads are delivering right now, and if not, why. Account billing failures set payment_failed without changing the configured status. Successful payment retry clears that block and recalculates delivery. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: AdCampaign.DeliveryStatus;
+    /** Google only: the target cost per conversion in USD when `bid_type` is `average_target`. `null` otherwise. */
+    desired_cost_per_result?: (number | null) | undefined;
+    /** Google only: when the campaign stops delivering, as an ISO 8601 timestamp. `null` runs it until paused. */
+    ends_at?: (string | null) | undefined;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
     /** Unique identifier for the ad campaign, prefixed `adcamp_`. */
@@ -107,6 +111,8 @@ export interface AdCampaign {
     spend: number;
     /** The ISO 4217 currency code of all monetary metrics. */
     spend_currency: string | null;
+    /** Google only: when the campaign starts delivering, as an ISO 8601 timestamp. `null` starts it as soon as it launches. */
+    starts_at?: (string | null) | undefined;
     /** The configured lifecycle status of the ad campaign. Billing failures preserve active or paused here and set delivery_status to payment_failed. */
     status: AdCampaign.Status;
     /** USD value attributed to submit-application events. Sums the value sent with each event, normalized to USD; events without a value contribute 0. */
