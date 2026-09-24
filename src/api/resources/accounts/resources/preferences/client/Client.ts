@@ -56,7 +56,7 @@ export class PreferencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -117,7 +117,7 @@ export class PreferencesClient {
      * | `ads_payment_methods`, `ads_reporting_currency`, `ads_scheduling_timezone`, `ads_triple_whale_integration`, `ads_certifications` | `ad_campaign:create` |
      * | `cards_auto_top_up`, `cards_notifications` | `payout:account:update` |
      * | `dispute_fighter_enabled` | `payment:dispute` |
-     * | `economic_intelligence` | `company:update` |
+     * | `economic_intelligence_duration_days` | `company:update` |
      *
      * When updating preferences from multiple rows, all corresponding scopes are required for the account.
      *
@@ -154,7 +154,7 @@ export class PreferencesClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-24",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

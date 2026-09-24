@@ -63,13 +63,15 @@ describe("PreferencesClient", () => {
             ads_scheduling_timezone: "America/New_York",
             ads_triple_whale_integration: {
                 masked_api_key: "tw_live_********",
-                shop_domain: "custom-store.example.com",
+                shop_domain: "shinetime.myshopify.com",
                 status: "connected",
             },
             cards_auto_top_up: false,
             cards_notifications: true,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
+            economic_intelligence_ends_at: "economic_intelligence_ends_at",
+            economic_intelligence_offers: [{ duration_days: 90, fee_percentage: 1.25, recommended: false }],
         };
 
         server
@@ -205,6 +207,8 @@ describe("PreferencesClient", () => {
             cards_notifications: true,
             dispute_fighter_enabled: false,
             economic_intelligence: false,
+            economic_intelligence_ends_at: "2026-01-01T12:00:00.000Z",
+            economic_intelligence_offers: [{ duration_days: 90, fee_percentage: 1.25, recommended: false }],
         };
 
         server
