@@ -20,6 +20,7 @@ describe("DisputeAlertsClient", () => {
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
                     amount: 25,
+                    auto_refunded: false,
                     card_brand: "visa",
                     created_at: "2026-01-01T12:00:00.000Z",
                     currency: "usd",
@@ -129,6 +130,7 @@ describe("DisputeAlertsClient", () => {
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount: 25,
+            auto_refunded: false,
             card_brand: "visa",
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
