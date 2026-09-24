@@ -79,7 +79,7 @@ export class UsersClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -145,6 +145,7 @@ export class UsersClient {
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -163,6 +164,7 @@ export class UsersClient {
         requestOptions?: UsersClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.User>> {
         const {
+            include_trading: includeTrading,
             account_id: accountId,
             include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
@@ -172,6 +174,7 @@ export class UsersClient {
             time_zone: timeZone,
         } = request;
         const _queryParams: Record<string, unknown> = {
+            include_trading: includeTrading,
             account_id: accountId,
             include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
@@ -185,7 +188,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -218,6 +221,11 @@ export class UsersClient {
             switch (_response.error.statusCode) {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -263,7 +271,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -318,6 +326,7 @@ export class UsersClient {
      * @param {UsersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -339,6 +348,7 @@ export class UsersClient {
     ): Promise<core.WithRawResponse<Whop.User>> {
         const {
             id,
+            include_trading: includeTrading,
             account_id: accountId,
             include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
@@ -348,6 +358,7 @@ export class UsersClient {
             time_zone: timeZone,
         } = request;
         const _queryParams: Record<string, unknown> = {
+            include_trading: includeTrading,
             account_id: accountId,
             include_balance: includeBalance,
             include_balance_history: includeBalanceHistory,
@@ -361,7 +372,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -394,6 +405,11 @@ export class UsersClient {
             switch (_response.error.statusCode) {
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -440,7 +456,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -515,7 +531,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -589,7 +605,7 @@ export class UsersClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

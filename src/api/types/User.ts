@@ -26,6 +26,8 @@ export interface User {
     social_accounts: Whop.SocialAccount[];
     /** Whop staff access flags. Populated only on the self view (retrieved with the reserved id `me`) for callers with staff-read scope; `null` there for every user who is not Whop staff, and always `null` elsewhere. */
     staff: Whop.UserStaffAccess | null;
+    /** Live trading state. Opt in with `include_trading=true` when retrieving `me`; `null` otherwise, without trading permission, or without an Ethereum wallet. Provider failures return an error, not a zero balance. */
+    trading: Whop.TradingAccount | null;
     /** The user's unique username */
     username: string;
     /** Identity verification status for the user's `individual` (KYC) and `business` (KYB) profiles. Each is `null` until created, otherwise a `status` of `not_started`, `pending`, `approved`, or `rejected`. */

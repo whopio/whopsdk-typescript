@@ -253,6 +253,8 @@ export const PermissionAction = {
     CheckoutRequestBasicRead: "checkout_request:basic:read",
     CryptoWalletManage: "crypto_wallet:manage",
     CryptoWalletSwap: "crypto_wallet:swap",
+    CryptoWalletTrade: "crypto_wallet:trade",
+    CryptoWalletTradeRead: "crypto_wallet:trade:read",
     AirdropLinkBasicRead: "airdrop_link:basic:read",
     AirdropLinkManage: "airdrop_link:manage",
     LeadManage: "lead:manage",

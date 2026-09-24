@@ -103,7 +103,7 @@ export class AccountsClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -198,7 +198,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -251,27 +251,39 @@ export class AccountsClient {
     /**
      * Retrieves the account associated with the current Account API key.
      *
+     * @param {Whop.MeAccountsRequest} request
      * @param {AccountsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.accounts.me()
      */
-    public me(requestOptions?: AccountsClient.RequestOptions): core.HttpResponsePromise<Whop.Account> {
-        return core.HttpResponsePromise.fromPromise(this.__me(requestOptions));
+    public me(
+        request: Whop.MeAccountsRequest = {},
+        requestOptions?: AccountsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Account> {
+        return core.HttpResponsePromise.fromPromise(this.__me(request, requestOptions));
     }
 
-    private async __me(requestOptions?: AccountsClient.RequestOptions): Promise<core.WithRawResponse<Whop.Account>> {
+    private async __me(
+        request: Whop.MeAccountsRequest = {},
+        requestOptions?: AccountsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Account>> {
+        const { include_trading: includeTrading } = request;
+        const _queryParams: Record<string, unknown> = {
+            include_trading: includeTrading,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -285,7 +297,11 @@ export class AccountsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -302,6 +318,11 @@ export class AccountsClient {
                     throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -323,6 +344,7 @@ export class AccountsClient {
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ForbiddenError}
      * @throws {@link Whop.NotFoundError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -342,13 +364,16 @@ export class AccountsClient {
         request: Whop.RetrieveAccountsRequest,
         requestOptions?: AccountsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.Account>> {
-        const { id } = request;
+        const { id, include_trading: includeTrading } = request;
+        const _queryParams: Record<string, unknown> = {
+            include_trading: includeTrading,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -362,7 +387,11 @@ export class AccountsClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -381,6 +410,11 @@ export class AccountsClient {
                     throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 404:
                     throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                case 503:
+                    throw new Whop.ServiceUnavailableError(
+                        _response.error.body as Whop.V1ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.WhopError({
                         statusCode: _response.error.statusCode,
@@ -428,7 +462,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -556,7 +590,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -644,7 +678,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -733,7 +767,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,
@@ -814,7 +848,7 @@ export class AccountsClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-22-4",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-23",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

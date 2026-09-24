@@ -124,6 +124,106 @@ describe("UsersClient", () => {
                         },
                     ],
                     staff: { admin: true, investigation_access: true, manager: false, support: false },
+                    trading: {
+                        account_id: null,
+                        hyperliquid: {
+                            address: "address",
+                            builder_fee_bps: null,
+                            margin_summary: {
+                                account_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                total_margin_used: {
+                                    amount: "-2.50",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                                total_position_notional: {
+                                    amount: "-2.50",
+                                    currency: "usd",
+                                    decimals: 2,
+                                    display_decimals: 2,
+                                },
+                                total_raw_usd: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                withdrawable: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                            websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
+                            websocket_url: "websocket_url",
+                        },
+                        id: "id",
+                        object: "trading_account",
+                        open_orders: [
+                            {
+                                client_order_id: null,
+                                created_at: null,
+                                hyperliquid: {
+                                    reduce_only: null,
+                                    trigger_price: {
+                                        amount: "-2.50",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                },
+                                id: "id",
+                                market: "market",
+                                object: "trading_order",
+                                order_type: "limit",
+                                original_size: null,
+                                price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                provider_order_id: null,
+                                side: "buy",
+                                size: "size",
+                                status: "open",
+                                status_updated_at: null,
+                                time_in_force: null,
+                            },
+                        ],
+                        positions: [
+                            {
+                                entry_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                hyperliquid: {
+                                    cumulative_funding: {
+                                        all_time: {
+                                            amount: "-2.50",
+                                            currency: "usd",
+                                            decimals: 2,
+                                            display_decimals: 2,
+                                        },
+                                        since_change: {
+                                            amount: "-2.50",
+                                            currency: "usd",
+                                            decimals: 2,
+                                            display_decimals: 2,
+                                        },
+                                        since_open: {
+                                            amount: "-2.50",
+                                            currency: "usd",
+                                            decimals: 2,
+                                            display_decimals: 2,
+                                        },
+                                    },
+                                    leverage: { type: "cross", value: 1 },
+                                    liquidation_price: {
+                                        amount: "-2.50",
+                                        currency: "usd",
+                                        decimals: 2,
+                                        display_decimals: 2,
+                                    },
+                                    margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                    return_on_equity: "return_on_equity",
+                                },
+                                id: "id",
+                                market: "market",
+                                object: "trading_position",
+                                position_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                side: "long",
+                                size: "size",
+                                unrealized_pnl: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                        ],
+                        provider: "hyperliquid",
+                        user_id: null,
+                    },
                     username: "marcuswebb",
                     verification: {},
                     whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
@@ -270,6 +370,71 @@ describe("UsersClient", () => {
                 },
             ],
             staff: { admin: true, investigation_access: true, manager: false, support: false },
+            trading: {
+                account_id: "account_id",
+                hyperliquid: {
+                    address: "address",
+                    builder_fee_bps: "builder_fee_bps",
+                    margin_summary: {
+                        account_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_position_notional: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_raw_usd: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        withdrawable: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                    websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
+                    websocket_url: "websocket_url",
+                },
+                id: "id",
+                object: "trading_account",
+                open_orders: [
+                    {
+                        client_order_id: null,
+                        created_at: null,
+                        hyperliquid: {
+                            reduce_only: null,
+                            trigger_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_order",
+                        order_type: "limit",
+                        original_size: null,
+                        price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        provider_order_id: null,
+                        side: "buy",
+                        size: "size",
+                        status: "open",
+                        status_updated_at: null,
+                        time_in_force: null,
+                    },
+                ],
+                positions: [
+                    {
+                        entry_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        hyperliquid: {
+                            cumulative_funding: {
+                                all_time: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_change: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_open: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                            leverage: { type: "cross", value: 1 },
+                            liquidation_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            return_on_equity: "return_on_equity",
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_position",
+                        position_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        side: "long",
+                        size: "size",
+                        unrealized_pnl: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                ],
+                provider: "hyperliquid",
+                user_id: "user_id",
+            },
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
@@ -298,6 +463,25 @@ describe("UsersClient", () => {
         await expect(async () => {
             return await client.users.me();
         }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("me (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().get("/users/me").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.users.me();
+        }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
 
     test("updateMe (1)", async () => {
@@ -402,6 +586,71 @@ describe("UsersClient", () => {
                 },
             ],
             staff: { admin: true, investigation_access: true, manager: false, support: false },
+            trading: {
+                account_id: "account_id",
+                hyperliquid: {
+                    address: "address",
+                    builder_fee_bps: "builder_fee_bps",
+                    margin_summary: {
+                        account_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_position_notional: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_raw_usd: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        withdrawable: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                    websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
+                    websocket_url: "websocket_url",
+                },
+                id: "id",
+                object: "trading_account",
+                open_orders: [
+                    {
+                        client_order_id: null,
+                        created_at: null,
+                        hyperliquid: {
+                            reduce_only: null,
+                            trigger_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_order",
+                        order_type: "limit",
+                        original_size: null,
+                        price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        provider_order_id: null,
+                        side: "buy",
+                        size: "size",
+                        status: "open",
+                        status_updated_at: null,
+                        time_in_force: null,
+                    },
+                ],
+                positions: [
+                    {
+                        entry_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        hyperliquid: {
+                            cumulative_funding: {
+                                all_time: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_change: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_open: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                            leverage: { type: "cross", value: 1 },
+                            liquidation_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            return_on_equity: "return_on_equity",
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_position",
+                        position_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        side: "long",
+                        size: "size",
+                        unrealized_pnl: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                ],
+                provider: "hyperliquid",
+                user_id: "user_id",
+            },
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
@@ -548,6 +797,71 @@ describe("UsersClient", () => {
                 },
             ],
             staff: { admin: true, investigation_access: true, manager: false, support: false },
+            trading: {
+                account_id: "account_id",
+                hyperliquid: {
+                    address: "address",
+                    builder_fee_bps: "builder_fee_bps",
+                    margin_summary: {
+                        account_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_position_notional: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_raw_usd: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        withdrawable: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                    websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
+                    websocket_url: "websocket_url",
+                },
+                id: "id",
+                object: "trading_account",
+                open_orders: [
+                    {
+                        client_order_id: null,
+                        created_at: null,
+                        hyperliquid: {
+                            reduce_only: null,
+                            trigger_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_order",
+                        order_type: "limit",
+                        original_size: null,
+                        price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        provider_order_id: null,
+                        side: "buy",
+                        size: "size",
+                        status: "open",
+                        status_updated_at: null,
+                        time_in_force: null,
+                    },
+                ],
+                positions: [
+                    {
+                        entry_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        hyperliquid: {
+                            cumulative_funding: {
+                                all_time: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_change: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_open: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                            leverage: { type: "cross", value: 1 },
+                            liquidation_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            return_on_equity: "return_on_equity",
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_position",
+                        position_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        side: "long",
+                        size: "size",
+                        unrealized_pnl: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                ],
+                provider: "hyperliquid",
+                user_id: "user_id",
+            },
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
@@ -580,6 +894,27 @@ describe("UsersClient", () => {
                 id: "id",
             });
         }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("retrieve (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().get("/users/id").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.users.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
 
     test("update", async () => {
@@ -684,6 +1019,71 @@ describe("UsersClient", () => {
                 },
             ],
             staff: { admin: true, investigation_access: true, manager: false, support: false },
+            trading: {
+                account_id: "account_id",
+                hyperliquid: {
+                    address: "address",
+                    builder_fee_bps: "builder_fee_bps",
+                    margin_summary: {
+                        account_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_position_notional: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        total_raw_usd: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        withdrawable: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                    websocket_subscriptions: [{ channel: "clearinghouse_state", message: "message" }],
+                    websocket_url: "websocket_url",
+                },
+                id: "id",
+                object: "trading_account",
+                open_orders: [
+                    {
+                        client_order_id: null,
+                        created_at: null,
+                        hyperliquid: {
+                            reduce_only: null,
+                            trigger_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_order",
+                        order_type: "limit",
+                        original_size: null,
+                        price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        provider_order_id: null,
+                        side: "buy",
+                        size: "size",
+                        status: "open",
+                        status_updated_at: null,
+                        time_in_force: null,
+                    },
+                ],
+                positions: [
+                    {
+                        entry_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        hyperliquid: {
+                            cumulative_funding: {
+                                all_time: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_change: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                since_open: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            },
+                            leverage: { type: "cross", value: 1 },
+                            liquidation_price: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            margin_used: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            return_on_equity: "return_on_equity",
+                        },
+                        id: "id",
+                        market: "market",
+                        object: "trading_position",
+                        position_value: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        side: "long",
+                        size: "size",
+                        unrealized_pnl: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                ],
+                provider: "hyperliquid",
+                user_id: "user_id",
+            },
             username: "marcuswebb",
             verification: { business: { key: "value" }, individual: { key: "value" } },
             whop_partner_enabled_at: "2026-01-01T12:00:00.000Z",
