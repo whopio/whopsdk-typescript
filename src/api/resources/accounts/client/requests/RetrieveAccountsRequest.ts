@@ -9,4 +9,6 @@
 export interface RetrieveAccountsRequest {
     /** Account ID, prefixed `biz_`, its public route, or `me` for the account associated with the current API key. */
     id: string;
+    /** Also retrieve live trading state under `trading`. Requires crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet; null otherwise. Provider failures return 503. */
+    include_trading?: boolean;
 }

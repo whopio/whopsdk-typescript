@@ -271,7 +271,7 @@ await client.accounts.create();
 </dl>
 </details>
 
-<details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">me</a>() -> Whop.Account</code></summary>
+<details><summary><code>client.accounts.<a href="/src/api/resources/accounts/client/Client.ts">me</a>({ ...params }) -> Whop.Account</code></summary>
 <dl>
 <dd>
 
@@ -310,6 +310,14 @@ await client.accounts.me();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.MeAccountsRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>

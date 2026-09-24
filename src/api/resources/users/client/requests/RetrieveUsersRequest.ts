@@ -11,6 +11,8 @@ import type * as Whop from "../../../../index.js";
 export interface RetrieveUsersRequest {
     /** User ID (prefixed `user_`), username, or `me` for the authenticated user. */
     id: string;
+    /** Also retrieve live trading state under `trading`. Only honored on the self view (me) with crypto_wallet:trade:read, crypto_wallet:trade, or crypto_wallet:manage permission and an Ethereum wallet. Provider failures return 503. */
+    include_trading?: boolean;
     /** When set, returns the user's account-specific profile overrides for this account. */
     account_id?: string;
     /** Compute live wallet and owned-account balances on the self view (default true). Set false for identity-only reads. Ignored when the id is not `me` or the caller lacks balance-read scope. */
