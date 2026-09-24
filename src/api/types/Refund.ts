@@ -58,6 +58,7 @@ export namespace Refund {
         Fraudulent: "fraudulent",
         RequestedByCustomer: "requested_by_customer",
         ExpiredUncapturedCharge: "expired_uncaptured_charge",
+        DisputeAlert: "dispute_alert",
     } as const;
     export type Reason = (typeof Reason)[keyof typeof Reason];
     /** Whether a banking-network tracking reference is available for this refund. */
