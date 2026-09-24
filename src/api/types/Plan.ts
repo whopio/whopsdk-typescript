@@ -7,6 +7,8 @@ export interface Plan {
     account: Whop.AccountSummary | null;
     /** Whether adaptive pricing is enabled for this plan. Raw setting — does not check processor compatibility or feature flags. */
     adaptive_pricing_enabled: boolean;
+    /** Attribute values that make this plan one variant of its product, as a map of attribute name to value, e.g. `{"color": "Blue", "size": "Large"}`. Names are snake_case identifiers and come back in alphabetical order. Every variant plan on a product carries the same attribute names and a distinct set of values; the product lists the full option set as `variant_attributes`. `null` for a plan that is not a variant. */
+    attributes: Record<string, string | null> | null;
     /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time plans. */
     billing_period: number | null;
     /** Billing intervals the cancellation discount applies to (`0` forever, `1` first payment, or a month count). `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
@@ -62,6 +64,8 @@ export interface Plan {
     release_method: Plan.ReleaseMethod;
     /** Recurring price charged every billing period. */
     renewal_price: number;
+    /** Stock keeping unit, free text set by the seller (e.g. `TSHIRT-LARGE-BLUE`). Not enforced unique. `null` when unset. */
+    sku: string | null;
     /** Installment payments required before the subscription pauses. Must be greater than 1. `null` if split pay is not configured. */
     split_pay_required_payments: number | null;
     /** Units available for purchase. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
@@ -74,7 +78,7 @@ export interface Plan {
     tax_type: Plan.TaxType;
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     three_ds_level: Plan.ThreeDsLevel | null;
-    /** Plan display name shown to customers. Maximum 30 characters. `null` if no title has been set. */
+    /** Plan display name shown to customers. Maximum 30 characters. A variant created without one defaults to its attribute values joined with ` / `. `null` if no title has been set. */
     title: string | null;
     /** Free trial days before the first renewal charge. `null` if no trial is configured or the user has already used a trial for this plan. */
     trial_period_days: number | null;

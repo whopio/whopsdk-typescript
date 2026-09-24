@@ -11,6 +11,8 @@ export interface CreatePlansRequest {
     account_id?: string;
     /** Whether this plan accepts local currency payments via adaptive pricing. */
     adaptive_pricing_enabled?: boolean | null;
+    /** Attribute values that make this plan one variant of its product, as a map of attribute name to value, e.g. `{"size": "Large", "color": "Blue"}`. Names are normalized to snake_case identifiers (`Ring Size` becomes `ring_size`) and come back in alphabetical order. Every variant plan on a product must carry the same attribute names and a distinct set of values. Send `null` to make the plan an ordinary pricing option again. */
+    attributes?: Record<string, unknown> | null;
     /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
     billing_period?: number | null;
     /** Checkout styling overrides for this plan. */
@@ -43,6 +45,8 @@ export interface CreatePlansRequest {
     release_method?: string;
     /** The amount charged each billing period for recurring plans, in the plan's currency. A paid fiat plan charges at least 1.00 in its currency. */
     renewal_price?: number | null;
+    /** Stock keeping unit for this plan. Maximum 100 characters. Free text, not enforced unique. */
+    sku?: string | null;
     /** Installment payments required before the subscription pauses. */
     split_pay_required_payments?: number | null;
     /** The maximum number of units available for purchase. Ignored when unlimited_stock is true. */

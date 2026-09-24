@@ -20,6 +20,7 @@ describe("PlansClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
+                    attributes: { color: "Blue", size: "S" },
                     billing_period: 30,
                     cancel_discount_intervals: 3,
                     cancel_discount_percentage: 20,
@@ -66,6 +67,7 @@ describe("PlansClient", () => {
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
                     renewal_price: 59,
+                    sku: "CERAMIC-COATING-S-BLUE",
                     split_pay_required_payments: 4,
                     stock: 0,
                     strike_through_initial_price: 99,
@@ -159,6 +161,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
+            attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
@@ -208,6 +211,7 @@ describe("PlansClient", () => {
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
+            sku: "WASH-CLUB-TEE-LARGE-BLUE",
             split_pay_required_payments: 4,
             stock: 0,
             strike_through_initial_price: 99,
@@ -325,6 +329,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
+            attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
@@ -374,6 +379,7 @@ describe("PlansClient", () => {
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
+            sku: "WASH-CLUB-TEE-LARGE-BLUE",
             split_pay_required_payments: 4,
             stock: 0,
             strike_through_initial_price: 99,
@@ -470,6 +476,7 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
+            attributes: { color: "Blue", size: "Large" },
             billing_period: 30,
             cancel_discount_intervals: 3,
             cancel_discount_percentage: 20,
@@ -519,6 +526,7 @@ describe("PlansClient", () => {
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
+            sku: "WASH-CLUB-TEE-LARGE-BLUE",
             split_pay_required_payments: 4,
             stock: 0,
             strike_through_initial_price: 99,
