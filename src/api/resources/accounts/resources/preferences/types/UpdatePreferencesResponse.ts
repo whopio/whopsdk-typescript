@@ -19,8 +19,12 @@ export interface UpdatePreferencesResponse {
     cards_notifications: boolean;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. */
     dispute_fighter_enabled: boolean;
-    /** Whether economic intelligence is enabled for the account. */
+    /** Whether Economic Intelligence is on for the account. It turns off automatically at `economic_intelligence_ends_at`. */
     economic_intelligence: boolean;
+    /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or has no end date. */
+    economic_intelligence_ends_at: string | null;
+    /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or during a free trial. */
+    economic_intelligence_offers: UpdatePreferencesResponse.EconomicIntelligenceOffers.Item[] | null;
 }
 
 export namespace UpdatePreferencesResponse {
@@ -183,5 +187,18 @@ export namespace UpdatePreferencesResponse {
             RequiresShopDomain: "requires_shop_domain",
         } as const;
         export type Status = (typeof Status)[keyof typeof Status];
+    }
+
+    export type EconomicIntelligenceOffers = EconomicIntelligenceOffers.Item[];
+
+    export namespace EconomicIntelligenceOffers {
+        export interface Item {
+            /** How many days Economic Intelligence stays on. Pass this value as `economic_intelligence_duration_days` to turn it on. */
+            duration_days: number;
+            /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. */
+            fee_percentage: number;
+            /** Whether Whop recommends this duration. Exactly one offer is recommended. */
+            recommended: boolean;
+        }
     }
 }

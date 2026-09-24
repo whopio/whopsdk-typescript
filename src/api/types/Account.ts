@@ -30,7 +30,7 @@ export interface Account {
     created_at: string;
     /** Account promotional description. */
     description: string | null;
-    /** Whether economic intelligence is enabled for the account. */
+    /** Whether Economic Intelligence is on for the account. It turns off automatically when its committed period ends. */
     economic_intelligence: boolean;
     /** Account owner email address. */
     email: string | null;

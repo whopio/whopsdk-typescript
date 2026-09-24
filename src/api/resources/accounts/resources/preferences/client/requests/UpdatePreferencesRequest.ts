@@ -25,8 +25,8 @@ export interface UpdatePreferencesRequest {
     cards_notifications?: boolean;
     /** Whether Whop assembles and files the evidence response when this account's payments are disputed. Off by default; enabling it also opts the account into the success fee charged only on disputes it wins. Requires the `payment:dispute` scope on your API key. */
     dispute_fighter_enabled?: boolean;
-    /** Whether economic intelligence is enabled for the account. Requires an existing ledger account and the `company:update` scope on your API key. */
-    economic_intelligence?: boolean;
+    /** Turns on Economic Intelligence for this many days, at the fee listed for that duration in `economic_intelligence_offers`. It can't be changed or turned off until `economic_intelligence_ends_at`, and it can't be turned on during a free trial. Requires the `company:update` scope on your API key. */
+    economic_intelligence_duration_days?: number;
 }
 
 export namespace UpdatePreferencesRequest {
