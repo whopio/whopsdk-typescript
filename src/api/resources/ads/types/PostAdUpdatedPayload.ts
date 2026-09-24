@@ -135,6 +135,7 @@ export namespace PostAdUpdatedPayload {
         export const Platform = {
             Meta: "meta",
             Tiktok: "tiktok",
+            Google: "google",
         } as const;
         export type Platform = (typeof Platform)[keyof typeof Platform];
         /** Identifies the network that owns `existing_post_id`; `null` when the ad uses uploaded creatives. */

@@ -112,6 +112,7 @@ export namespace PostAdCampaignPaymentFailedPayload {
         export const Platform = {
             Meta: "meta",
             Tiktok: "tiktok",
+            Google: "google",
         } as const;
         export type Platform = (typeof Platform)[keyof typeof Platform];
         export type SpecialAdCategories = SpecialAdCategories.Item[];
