@@ -25,6 +25,8 @@ export interface UpdatePreferencesResponse {
     economic_intelligence_ends_at: string | null;
     /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or during a free trial. */
     economic_intelligence_offers: UpdatePreferencesResponse.EconomicIntelligenceOffers.Item[] | null;
+    /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
+    subscription_failure_behavior: UpdatePreferencesResponse.SubscriptionFailureBehavior;
 }
 
 export namespace UpdatePreferencesResponse {
@@ -201,4 +203,12 @@ export namespace UpdatePreferencesResponse {
             recommended: boolean;
         }
     }
+
+    /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
+    export const SubscriptionFailureBehavior = {
+        Cancel: "cancel",
+        None: "none",
+    } as const;
+    export type SubscriptionFailureBehavior =
+        (typeof SubscriptionFailureBehavior)[keyof typeof SubscriptionFailureBehavior];
 }
