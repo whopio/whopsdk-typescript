@@ -115,6 +115,7 @@ describe("AccountsClient", () => {
                     created_at: "2026-01-01T12:00:00.000Z",
                     description:
                         "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+                    dispute_fighter_enabled: false,
                     economic_intelligence: false,
                     email: "marcus@shinetime.example",
                     eula: {
@@ -151,6 +152,7 @@ describe("AccountsClient", () => {
                     opengraph_image_url:
                         "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                     opengraph_image_variant: "white",
+                    orchestration_enabled: true,
                     other_business_description: "Mobile auto detailing",
                     other_industry_description: "Automotive services",
                     owner: {
@@ -667,6 +669,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
@@ -703,6 +706,7 @@ describe("AccountsClient", () => {
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
+            orchestration_enabled: true,
             other_business_description: "Mobile auto detailing",
             other_industry_description: "Automotive services",
             owner: {
@@ -1202,6 +1206,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
@@ -1238,6 +1243,7 @@ describe("AccountsClient", () => {
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
+            orchestration_enabled: true,
             other_business_description: "Mobile auto detailing",
             other_industry_description: "Automotive services",
             owner: {
@@ -1683,6 +1689,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
@@ -1719,6 +1726,7 @@ describe("AccountsClient", () => {
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
+            orchestration_enabled: true,
             other_business_description: "Mobile auto detailing",
             other_industry_description: "Automotive services",
             owner: {
@@ -2193,6 +2201,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
@@ -2229,6 +2238,7 @@ describe("AccountsClient", () => {
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
+            orchestration_enabled: true,
             other_business_description: "Mobile auto detailing",
             other_industry_description: "Automotive services",
             owner: {
@@ -3512,6 +3522,7 @@ describe("AccountsClient", () => {
             country: "us",
             created_at: "2026-01-01T12:00:00.000Z",
             description: "Mobile ceramic coating, paint correction, and interior detailing across the Austin metro.",
+            dispute_fighter_enabled: false,
             economic_intelligence: false,
             email: "marcus@shinetime.example",
             eula: {
@@ -3548,6 +3559,7 @@ describe("AccountsClient", () => {
             opengraph_image_url:
                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
             opengraph_image_variant: "white",
+            orchestration_enabled: true,
             other_business_description: "Mobile auto detailing",
             other_industry_description: "Automotive services",
             owner: {
