@@ -73,8 +73,11 @@ describe("AdsClient", () => {
                     lead_form: {
                         completion: {
                             button_text: "See our work",
+                            button_type: null,
                             description: "We book coatings two days out, so pick a slot when we ring.",
+                            file_url: null,
                             headline: "Thanks — we will call you today",
+                            phone_number: null,
                             url: "https://shinetime.example/gallery",
                         },
                         disclaimer: {
@@ -287,8 +290,11 @@ describe("AdsClient", () => {
             lead_form: {
                 completion: {
                     button_text: "See our work",
+                    button_type: "website",
                     description: "We book coatings two days out, so pick a slot when we ring.",
+                    file_url: "file_url",
                     headline: "Thanks — we will call you today",
+                    phone_number: "phone_number",
                     url: "https://shinetime.example/gallery",
                 },
                 disclaimer: {
@@ -517,8 +523,11 @@ describe("AdsClient", () => {
             lead_form: {
                 completion: {
                     button_text: "See our work",
+                    button_type: "website",
                     description: "We book coatings two days out, so pick a slot when we ring.",
+                    file_url: "file_url",
                     headline: "Thanks — we will call you today",
+                    phone_number: "phone_number",
                     url: "https://shinetime.example/gallery",
                 },
                 disclaimer: {
@@ -726,8 +735,11 @@ describe("AdsClient", () => {
             lead_form: {
                 completion: {
                     button_text: "See our work",
+                    button_type: "website",
                     description: "We book coatings two days out, so pick a slot when we ring.",
+                    file_url: "file_url",
                     headline: "Thanks — we will call you today",
+                    phone_number: "phone_number",
                     url: "https://shinetime.example/gallery",
                 },
                 disclaimer: {
@@ -882,8 +894,11 @@ describe("AdsClient", () => {
                     lead_form: {
                         completion: {
                             button_text: "See our work",
+                            button_type: null,
                             description: "We book coatings two days out, so pick a slot when we ring.",
+                            file_url: null,
                             headline: "Thanks — we will call you today",
+                            phone_number: null,
                             url: "https://shinetime.example/gallery",
                         },
                         disclaimer: {
@@ -1131,8 +1146,11 @@ describe("AdsClient", () => {
             lead_form: {
                 completion: {
                     button_text: "See our work",
+                    button_type: "website",
                     description: "We book coatings two days out, so pick a slot when we ring.",
+                    file_url: "file_url",
                     headline: "Thanks — we will call you today",
+                    phone_number: "phone_number",
                     url: "https://shinetime.example/gallery",
                 },
                 disclaimer: {
@@ -1299,8 +1317,11 @@ describe("AdsClient", () => {
             lead_form: {
                 completion: {
                     button_text: "See our work",
+                    button_type: "website",
                     description: "We book coatings two days out, so pick a slot when we ring.",
+                    file_url: "file_url",
                     headline: "Thanks — we will call you today",
+                    phone_number: "phone_number",
                     url: "https://shinetime.example/gallery",
                 },
                 disclaimer: {
