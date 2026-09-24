@@ -5,6 +5,8 @@
  *     {}
  */
 export interface ReferredUsersPartnersRequest {
+    /** Search referred users by name or username. */
+    query?: string;
     /** When true, only referred users who brought at least one business onto Whop. */
     has_businesses?: boolean;
     /** When true, only referred users with at least one business that has generated earnings. */
