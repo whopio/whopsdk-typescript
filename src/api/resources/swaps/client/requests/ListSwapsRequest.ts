@@ -2,11 +2,11 @@
 
 /**
  * @example
- *     {
- *         account_id: "account_id"
- *     }
+ *     {}
  */
 export interface ListSwapsRequest {
-    /** Business or user account ID (biz_* / user_*). */
-    account_id: string;
+    /** Business account whose swaps to list, prefixed `biz_`. Provide this or `user_id`. */
+    account_id?: string;
+    /** The caller's own user ID, prefixed `user_`, to list swaps in their personal account. Provide this or `account_id`. */
+    user_id?: string;
 }

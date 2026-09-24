@@ -10,7 +10,7 @@ export namespace ListSwapsResponse {
 
     export namespace Data {
         export interface Item {
-            /** Account ID that owns the wallet used for the swap. */
+            /** Account that owns the swap: a business ID prefixed `biz_`, or the user ID for a personal account. */
             account_id: string;
             /** Latest error returned for a failed swap. */
             error?: (string | null) | undefined;
@@ -21,6 +21,8 @@ export namespace ListSwapsResponse {
             status: Item.Status;
             /** On-chain transaction hashes produced by the swap. */
             tx_hashes: string[];
+            /** User whose personal account owns the swap, prefixed `user_`. Null for a business account. */
+            user_id: string | null;
         }
 
         export namespace Item {

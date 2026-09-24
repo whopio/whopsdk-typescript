@@ -5,14 +5,15 @@ import type * as Whop from "../../../../index.js";
 /**
  * @example
  *     {
- *         account_id: "account_id",
  *         body: {
  *             kind: "individual"
  *         }
  *     }
  */
 export interface CreateVerificationsRequest {
-    /** Account or user ID whose identity you want to verify. Use a `biz_` account ID for account verifications, or the caller's `user_` ID for personal verification. */
-    account_id: string;
+    /** Business account whose identity you want to verify, prefixed `biz_`. Provide this or `user_id`. */
+    account_id?: string;
+    /** The caller's own user ID, prefixed `user_`, for a personal verification. Provide this or `account_id`. */
+    user_id?: string;
     body: Whop.CreateVerificationsRequestBody;
 }
