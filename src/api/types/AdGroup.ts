@@ -236,6 +236,7 @@ export namespace AdGroup {
     export const Platform = {
         Meta: "meta",
         Tiktok: "tiktok",
+        Google: "google",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
     /** The Whop pixel conversion event whose attributed count represents results — the optimization goal, or the highest-volume attributed event for campaigns that budget per ad group. Null when the goal isn't a Whop-attributed event. */
