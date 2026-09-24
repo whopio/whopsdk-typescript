@@ -9,6 +9,7 @@ export const ListSocialAccountsRequestPlatform = {
     Discord: "discord",
     Telegram: "telegram",
     Linkedin: "linkedin",
+    Snapchat: "snapchat",
 } as const;
 export type ListSocialAccountsRequestPlatform =
     (typeof ListSocialAccountsRequestPlatform)[keyof typeof ListSocialAccountsRequestPlatform];
