@@ -29,6 +29,8 @@ export interface UpdateAccountsRequest {
     country?: string | null;
     /** Account promotional description. When creating a Whop-managed Facebook page, it is truncated to 155 characters and used as the About text. */
     description?: string | null;
+    /** Whether Whop assembles and files dispute evidence for this account. Enabling it opts into the success fee charged on disputes it wins. Requires payment:dispute. Omit to preserve the existing setting or creation default. */
+    dispute_fighter_enabled?: boolean;
     /** The account's end-user license agreement document. PDF only. Pass a JSON object containing an `id` from [Create File](/api-reference/files/create-file), or `null` to remove it. */
     eula?: UpdateAccountsRequest.Eula | null;
     /** The ID of the product to feature for affiliates. Pass `null` to clear. */
@@ -51,6 +53,8 @@ export interface UpdateAccountsRequest {
     opengraph_image?: UpdateAccountsRequest.OpengraphImage | null;
     /** The account Open Graph image variant. */
     opengraph_image_variant?: UpdateAccountsRequest.OpengraphImageVariant | null;
+    /** Whether payment orchestration is enabled for this account. Requires payout:account:update. Omit to preserve the existing setting or creation default. */
+    orchestration_enabled?: boolean;
     /** The description of the business type when business_type is other. */
     other_business_description?: string | null;
     /** The description of the industry type when industry_type is other. */

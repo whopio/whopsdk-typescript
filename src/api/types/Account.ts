@@ -30,6 +30,8 @@ export interface Account {
     created_at: string;
     /** Account promotional description. */
     description: string | null;
+    /** Whether Whop assembles and files dispute evidence for this account. Enabling it opts the account into the success fee charged on disputes it wins. */
+    dispute_fighter_enabled: boolean;
     /** Whether Economic Intelligence is on for the account. It turns off automatically when its committed period ends. */
     economic_intelligence: boolean;
     /** Account owner email address. */
@@ -55,6 +57,8 @@ export interface Account {
     opengraph_image_url: string | null;
     /** Account Open Graph image variant. */
     opengraph_image_variant: Account.OpengraphImageVariant | null;
+    /** Whether payment orchestration is enabled for this account. */
+    orchestration_enabled: boolean;
     /** Business type details when business_type is `other`. */
     other_business_description: string | null;
     /** Industry details when industry_type is `other`. */
