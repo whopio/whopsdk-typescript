@@ -4,3 +4,4 @@ export type { DeleteSocialAccountsRequest } from "./DeleteSocialAccountsRequest.
 export type { LeadFormsSocialAccountsRequest } from "./LeadFormsSocialAccountsRequest.js";
 export type { ListSocialAccountsRequest } from "./ListSocialAccountsRequest.js";
 export type { PostsSocialAccountsRequest } from "./PostsSocialAccountsRequest.js";
+export type { RefreshSocialAccountsRequest } from "./RefreshSocialAccountsRequest.js";
