@@ -73,8 +73,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@whop/sdk",
-            "X-Fern-SDK-Version": "1.1.5",
-            "User-Agent": "@whop/sdk/1.1.5",
+            "X-Fern-SDK-Version": "2.0.0",
+            "User-Agent": "@whop/sdk/2.0.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "Api-Version-Date": options?.apiVersionDate ?? "2026-09-23",
