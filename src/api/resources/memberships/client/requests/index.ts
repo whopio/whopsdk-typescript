@@ -2,6 +2,7 @@ export type { CancelMembershipsRequest } from "./CancelMembershipsRequest.js";
 export type { ExtendMembershipsRequest } from "./ExtendMembershipsRequest.js";
 export type { ListMembershipsRequest } from "./ListMembershipsRequest.js";
 export type { PauseMembershipsRequest } from "./PauseMembershipsRequest.js";
+export type { ReactivateMembershipsRequest } from "./ReactivateMembershipsRequest.js";
 export type { ResumeMembershipsRequest } from "./ResumeMembershipsRequest.js";
 export type { ResyncAccessMembershipsRequest } from "./ResyncAccessMembershipsRequest.js";
 export type { RetrieveMembershipsRequest } from "./RetrieveMembershipsRequest.js";
