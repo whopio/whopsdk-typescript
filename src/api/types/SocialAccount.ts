@@ -37,6 +37,7 @@ export namespace SocialAccount {
         Discord: "discord",
         Telegram: "telegram",
         Linkedin: "linkedin",
+        Snapchat: "snapchat",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
 }

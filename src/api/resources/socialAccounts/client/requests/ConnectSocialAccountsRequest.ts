@@ -10,20 +10,21 @@
 export interface ConnectSocialAccountsRequest {
     /** The Account (biz_ identifier) to connect the social account for. An account-scoped API key may omit this to default to its own account. Omit for LinkedIn connections. */
     account_id?: string;
-    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts or `linkedin` to connect the authenticated user’s LinkedIn profile. */
+    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts, `snapchat` for Snapchat Public Profiles, or `linkedin` to connect the authenticated user’s LinkedIn profile. */
     platform: ConnectSocialAccountsRequest.Platform;
     /** Where to send the user once they finish connecting their accounts. Any `http` or `https` URL. If the connection fails, the user is redirected with a `social_account_error` query param. */
     redirect_url: string;
-    /** Capabilities to grant for the connected social account. `advertise` is required for both `meta_business` and `tiktok` connections — it is not conditional on whether you intend to run ads, and omitting it fails the request. Omit scopes for LinkedIn connections. */
+    /** Capabilities to grant for the connected social account. `advertise` is required for `meta_business`, `tiktok`, and `snapchat` connections — it is not conditional on whether you intend to run ads, and omitting it fails the request. Omit scopes for LinkedIn connections. */
     scopes?: ConnectSocialAccountsRequest.Scopes.Item[];
 }
 
 export namespace ConnectSocialAccountsRequest {
-    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts or `linkedin` to connect the authenticated user’s LinkedIn profile. */
+    /** The platform to connect the social account on. Use `meta_business` to connect Meta Business assets, which is how Facebook Pages and Instagram accounts are connected — there is no separate `instagram` value. Use `tiktok` for TikTok accounts, `snapchat` for Snapchat Public Profiles, or `linkedin` to connect the authenticated user’s LinkedIn profile. */
     export const Platform = {
         MetaBusiness: "meta_business",
         Tiktok: "tiktok",
         Linkedin: "linkedin",
+        Snapchat: "snapchat",
     } as const;
     export type Platform = (typeof Platform)[keyof typeof Platform];
     export type Scopes = Scopes.Item[];
