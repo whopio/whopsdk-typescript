@@ -86,9 +86,7 @@ describe("VerificationsClient", () => {
 
         server.mockEndpoint().get("/verifications").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.verifications.list({
-            account_id: "account_id",
-        });
+        const response = await client.verifications.list();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -107,9 +105,7 @@ describe("VerificationsClient", () => {
         server.mockEndpoint().get("/verifications").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.verifications.list({
-                account_id: "account_id",
-            });
+            return await client.verifications.list();
         }).rejects.toThrow(Whop.BadRequestError);
     });
 
@@ -128,9 +124,7 @@ describe("VerificationsClient", () => {
         server.mockEndpoint().get("/verifications").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.verifications.list({
-                account_id: "account_id",
-            });
+            return await client.verifications.list();
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
@@ -149,9 +143,7 @@ describe("VerificationsClient", () => {
         server.mockEndpoint().get("/verifications").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.verifications.list({
-                account_id: "account_id",
-            });
+            return await client.verifications.list();
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
@@ -251,7 +243,6 @@ describe("VerificationsClient", () => {
             .build();
 
         const response = await client.verifications.create({
-            account_id: "account_id",
             body: {
                 kind: "individual",
             },
@@ -282,7 +273,6 @@ describe("VerificationsClient", () => {
 
         await expect(async () => {
             return await client.verifications.create({
-                account_id: "account_id",
                 body: {
                     kind: "individual",
                 },
@@ -313,7 +303,6 @@ describe("VerificationsClient", () => {
 
         await expect(async () => {
             return await client.verifications.create({
-                account_id: "account_id",
                 body: {
                     kind: "individual",
                 },
@@ -344,7 +333,6 @@ describe("VerificationsClient", () => {
 
         await expect(async () => {
             return await client.verifications.create({
-                account_id: "account_id",
                 body: {
                     kind: "individual",
                 },
@@ -375,7 +363,6 @@ describe("VerificationsClient", () => {
 
         await expect(async () => {
             return await client.verifications.create({
-                account_id: "account_id",
                 body: {
                     kind: "individual",
                 },
@@ -406,7 +393,6 @@ describe("VerificationsClient", () => {
 
         await expect(async () => {
             return await client.verifications.create({
-                account_id: "account_id",
                 body: {
                     kind: "individual",
                 },

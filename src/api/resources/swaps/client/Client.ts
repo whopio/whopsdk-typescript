@@ -39,24 +39,23 @@ export class SwapsClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.swaps.list({
-     *         account_id: "account_id"
-     *     })
+     *     await client.swaps.list()
      */
     public list(
-        request: Whop.ListSwapsRequest,
+        request: Whop.ListSwapsRequest = {},
         requestOptions?: SwapsClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.ListSwapsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
-        request: Whop.ListSwapsRequest,
+        request: Whop.ListSwapsRequest = {},
         requestOptions?: SwapsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ListSwapsResponse>> {
-        const { account_id: accountId } = request;
+        const { account_id: accountId, user_id: userId } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            user_id: userId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -122,7 +121,6 @@ export class SwapsClient {
      *
      * @example
      *     await client.swaps.create({
-     *         account_id: "biz_xxxxxxxxxxxxxx",
      *         from_token: "usd",
      *         to_token: "cad"
      *     })

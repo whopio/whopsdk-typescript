@@ -4,13 +4,13 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {
- *         account_id: "account_id"
- *     }
+ *     {}
  */
 export interface ListVerificationsRequest {
-    /** Account or user ID whose verifications you want to list. Use a `biz_` account ID, or the caller's `user_` ID for personal verifications. */
-    account_id: string;
+    /** Business account whose verifications you want to list, prefixed `biz_`. Provide this or `user_id`. */
+    account_id?: string;
+    /** The caller's own user ID, prefixed `user_`, to list personal verifications. Provide this or `account_id`. */
+    user_id?: string;
     /** Field used to sort returned verifications. */
     order?: Whop.ListVerificationsRequestOrder;
     /** Sort direction for returned verifications. */

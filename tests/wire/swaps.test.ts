@@ -24,15 +24,14 @@ describe("SwapsClient", () => {
                     object: "swap",
                     status: "queued",
                     tx_hashes: ["0xabc"],
+                    user_id: "user_id",
                 },
             ],
         };
 
         server.mockEndpoint().get("/swaps").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
-        const response = await client.swaps.list({
-            account_id: "account_id",
-        });
+        const response = await client.swaps.list();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -51,9 +50,7 @@ describe("SwapsClient", () => {
         server.mockEndpoint().get("/swaps").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
-            return await client.swaps.list({
-                account_id: "account_id",
-            });
+            return await client.swaps.list();
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
@@ -66,7 +63,7 @@ describe("SwapsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "biz_xxxxxxxxxxxxxx", from_token: "usd", to_token: "cad" };
+        const rawRequestBody = { from_token: "usd", to_token: "cad" };
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             amount_in: 131.4,
@@ -80,6 +77,7 @@ describe("SwapsClient", () => {
             status: "queued",
             to_chain: "ethereum",
             to_token: { symbol: "cad" },
+            user_id: "user_id",
         };
 
         server
@@ -92,7 +90,6 @@ describe("SwapsClient", () => {
             .build();
 
         const response = await client.swaps.create({
-            account_id: "biz_xxxxxxxxxxxxxx",
             from_token: "usd",
             to_token: "cad",
         });
@@ -108,7 +105,7 @@ describe("SwapsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", from_token: "from_token", to_token: "to_token" };
+        const rawRequestBody = { from_token: "from_token", to_token: "to_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -122,7 +119,6 @@ describe("SwapsClient", () => {
 
         await expect(async () => {
             return await client.swaps.create({
-                account_id: "account_id",
                 from_token: "from_token",
                 to_token: "to_token",
             });
@@ -138,7 +134,7 @@ describe("SwapsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", from_token: "from_token", to_token: "to_token" };
+        const rawRequestBody = { from_token: "from_token", to_token: "to_token" };
         const rawResponseBody = { key: "value" };
 
         server
@@ -152,7 +148,6 @@ describe("SwapsClient", () => {
 
         await expect(async () => {
             return await client.swaps.create({
-                account_id: "account_id",
                 from_token: "from_token",
                 to_token: "to_token",
             });
@@ -168,7 +163,7 @@ describe("SwapsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { account_id: "account_id", from_token: "from_token", to_token: "to_token" };
+        const rawRequestBody = { from_token: "from_token", to_token: "to_token" };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -182,7 +177,6 @@ describe("SwapsClient", () => {
 
         await expect(async () => {
             return await client.swaps.create({
-                account_id: "account_id",
                 from_token: "from_token",
                 to_token: "to_token",
             });
@@ -326,6 +320,7 @@ describe("SwapsClient", () => {
             object: "swap",
             status: "queued",
             tx_hashes: ["0xabc"],
+            user_id: "user_id",
         };
 
         server.mockEndpoint().get("/swaps/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();

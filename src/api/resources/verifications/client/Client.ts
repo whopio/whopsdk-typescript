@@ -41,24 +41,23 @@ export class VerificationsClient {
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.verifications.list({
-     *         account_id: "account_id"
-     *     })
+     *     await client.verifications.list()
      */
     public list(
-        request: Whop.ListVerificationsRequest,
+        request: Whop.ListVerificationsRequest = {},
         requestOptions?: VerificationsClient.RequestOptions,
     ): core.HttpResponsePromise<Whop.ListVerificationsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
-        request: Whop.ListVerificationsRequest,
+        request: Whop.ListVerificationsRequest = {},
         requestOptions?: VerificationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.ListVerificationsResponse>> {
-        const { account_id: accountId, order, direction } = request;
+        const { account_id: accountId, user_id: userId, order, direction } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            user_id: userId,
             order: order != null ? order : undefined,
             direction: direction != null ? direction : undefined,
         };
@@ -132,7 +131,6 @@ export class VerificationsClient {
      *
      * @example
      *     await client.verifications.create({
-     *         account_id: "account_id",
      *         body: {
      *             kind: "individual"
      *         }
@@ -149,9 +147,10 @@ export class VerificationsClient {
         request: Whop.CreateVerificationsRequest,
         requestOptions?: VerificationsClient.RequestOptions,
     ): Promise<core.WithRawResponse<Whop.CreateVerificationsResponse>> {
-        const { account_id: accountId, body: _body } = request;
+        const { account_id: accountId, user_id: userId, body: _body } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
+            user_id: userId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

@@ -3,14 +3,13 @@
 /**
  * @example
  *     {
- *         account_id: "biz_xxxxxxxxxxxxxx",
  *         from_token: "usd",
  *         to_token: "cad"
  *     }
  */
 export interface CreateSwapsRequest {
-    /** Business or user account ID (biz_* / user_*). */
-    account_id: string;
+    /** Business account that makes the swap, prefixed `biz_`. Provide this or `user_id`. */
+    account_id?: string;
     /** Source token amount. Required for crypto swaps. For fiat pairs: the amount of from_token to convert at the mid-market rate; omit (along with to_amount) to repay the full negative to_token balance instead. */
     amount?: string | null;
     /** Source chain name or chain ID. Defaults to the source token's chain when omitted. */
@@ -25,6 +24,8 @@ export interface CreateSwapsRequest {
     to_chain?: CreateSwapsRequest.ToChain | null;
     /** Destination token contract address or ticker symbol, such as "XAUT". */
     to_token: string;
+    /** The caller's own user ID, prefixed `user_`, to swap in their personal account. Provide this or `account_id`. */
+    user_id?: string;
 }
 
 export namespace CreateSwapsRequest {

@@ -24372,9 +24372,7 @@ Retrieve the account's completed or pending swaps — currently just the latest 
 <dd>
 
 ```typescript
-await client.swaps.list({
-    account_id: "account_id"
-});
+await client.swaps.list();
 
 ```
 </dd>
@@ -24438,7 +24436,6 @@ Swaps one token for another from the account's wallet, or converts between fiat 
 
 ```typescript
 await client.swaps.create({
-    account_id: "biz_xxxxxxxxxxxxxx",
     from_token: "usd",
     to_token: "cad"
 });
@@ -25800,9 +25797,7 @@ Returns verifications for an account, including their status and any required ac
 <dd>
 
 ```typescript
-await client.verifications.list({
-    account_id: "account_id"
-});
+await client.verifications.list();
 
 ```
 </dd>
@@ -25866,7 +25861,6 @@ Starts a hosted verification session for an account or user, or returns the acti
 
 ```typescript
 await client.verifications.create({
-    account_id: "account_id",
     body: {
         kind: "individual"
     }
