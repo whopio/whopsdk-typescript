@@ -206,6 +206,7 @@ export class PartnersClient {
                 request: Whop.ReferredUsersPartnersRequest,
             ): Promise<core.WithRawResponse<Whop.ReferredUsersPartnersResponse>> => {
                 const {
+                    query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
                     first,
@@ -214,6 +215,7 @@ export class PartnersClient {
                     before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
+                    query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
                     first,

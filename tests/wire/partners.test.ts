@@ -176,6 +176,9 @@ describe("PartnersClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    business_count: 1,
+                    earnings: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    joined_at: "2026-01-01T12:00:00Z",
                     total_earnings_usd: "10.00",
                     total_volume_usd: "100.00",
                     user: {
@@ -187,6 +190,7 @@ describe("PartnersClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "tanyacole",
                     },
+                    volume_30d: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                 },
             ],
             page_info: {
