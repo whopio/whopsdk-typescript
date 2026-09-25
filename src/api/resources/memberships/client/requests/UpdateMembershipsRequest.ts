@@ -13,4 +13,6 @@ export interface UpdateMembershipsRequest {
     cancel_at_period_end?: boolean;
     /** Key-value pairs to merge into the membership's metadata. Pass an empty object to clear it. */
     metadata?: Record<string, unknown>;
+    /** The ID of a payment method the customer has saved with your account. Future renewals charge it, and an open past-due payment is retried on it right away. Requires the `member:payment_methods:manage` permission. */
+    payment_method_id?: string;
 }
