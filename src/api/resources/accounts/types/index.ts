@@ -1,3 +1,4 @@
+export * from "./DeleteAccountsResponse.js";
 export * from "./FormCompanyAccountsResponse.js";
 export * from "./ListAccountsRequestDirection.js";
 export * from "./ListAccountsRequestOrder.js";
