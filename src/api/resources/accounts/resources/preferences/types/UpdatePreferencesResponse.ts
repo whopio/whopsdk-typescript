@@ -23,7 +23,9 @@ export interface UpdatePreferencesResponse {
     economic_intelligence: boolean;
     /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or has no end date. */
     economic_intelligence_ends_at: string | null;
-    /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or during a free trial. */
+    /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. `null` when Economic Intelligence is off. */
+    economic_intelligence_fee_percentage: number | null;
+    /** Durations the account can choose from to turn on Economic Intelligence, each with its fee. `null` while Economic Intelligence is on or the account is still on the Economic Intelligence waitlist. */
     economic_intelligence_offers: UpdatePreferencesResponse.EconomicIntelligenceOffers.Item[] | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: UpdatePreferencesResponse.SubscriptionFailureBehavior;
@@ -195,12 +197,32 @@ export namespace UpdatePreferencesResponse {
 
     export namespace EconomicIntelligenceOffers {
         export interface Item {
-            /** How many days Economic Intelligence stays on. Pass this value as `economic_intelligence_duration_days` to turn it on. */
-            duration_days: number;
+            /** What period of time Economic Intelligence stays on. */
+            duration: number;
+            /** The unit of time the duration is in (hours or days) */
+            duration_unit: Item.DurationUnit;
             /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. */
             fee_percentage: number;
+            /** The unique identifier for this duration. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+            key: Item.Key;
             /** Whether Whop recommends this duration. Exactly one offer is recommended. */
             recommended: boolean;
+        }
+
+        export namespace Item {
+            /** The unit of time the duration is in (hours or days) */
+            export const DurationUnit = {
+                Hours: "hours",
+                Days: "days",
+            } as const;
+            export type DurationUnit = (typeof DurationUnit)[keyof typeof DurationUnit];
+            /** The unique identifier for this duration. Pass this value as `economic_intelligence_duration_key` to turn it on. */
+            export const Key = {
+                SevenDays: "7_days",
+                OneDay: "1_day",
+                OneHour: "1_hour",
+            } as const;
+            export type Key = (typeof Key)[keyof typeof Key];
         }
     }
 

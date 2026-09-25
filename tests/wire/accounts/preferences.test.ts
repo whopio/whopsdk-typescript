@@ -71,7 +71,10 @@ describe("PreferencesClient", () => {
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             economic_intelligence_ends_at: "economic_intelligence_ends_at",
-            economic_intelligence_offers: [{ duration_days: 90, fee_percentage: 1.25, recommended: false }],
+            economic_intelligence_fee_percentage: 1.1,
+            economic_intelligence_offers: [
+                { duration: 7, duration_unit: "hours", fee_percentage: 1, key: "7_days", recommended: false },
+            ],
             subscription_failure_behavior: "cancel",
         };
 
@@ -209,7 +212,10 @@ describe("PreferencesClient", () => {
             dispute_fighter_enabled: false,
             economic_intelligence: false,
             economic_intelligence_ends_at: "2026-01-01T12:00:00.000Z",
-            economic_intelligence_offers: [{ duration_days: 90, fee_percentage: 1.25, recommended: false }],
+            economic_intelligence_fee_percentage: 1.5,
+            economic_intelligence_offers: [
+                { duration: 7, duration_unit: "hours", fee_percentage: 1, key: "7_days", recommended: false },
+            ],
             subscription_failure_behavior: "cancel",
         };
 

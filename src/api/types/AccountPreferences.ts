@@ -24,6 +24,8 @@ export interface AccountPreferences {
     economic_intelligence: boolean;
     /** When the account's committed Economic Intelligence period ends, as an ISO 8601 timestamp. Economic Intelligence can't be turned off before then. `null` when Economic Intelligence is off or has no end date. */
     economic_intelligence_ends_at: string | null;
+    /** Percentage of volume charged while Economic Intelligence is on, such as `1.5` for 1.5%. `null` when Economic Intelligence is off. */
+    economic_intelligence_fee_percentage: number | null;
     economic_intelligence_offers: Whop.AccountEconomicIntelligenceOffer[] | null;
     /** What happens to a subscription once every retry of a renewal payment has failed. `cancel` (the default) cancels it. `none` leaves it past due and keeps billing it each period; access follows the account's past-due access setting. */
     subscription_failure_behavior: AccountPreferences.SubscriptionFailureBehavior;
