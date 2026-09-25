@@ -16,6 +16,15 @@ describe("ConfirmationTokensClient", () => {
         });
 
         const rawResponseBody = {
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
             billing_details: {
                 country: "AR",
                 email: "marcus@shinetime.example",
