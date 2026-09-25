@@ -9,6 +9,8 @@ export interface AdCreative {
     format: AdCreative.Format | null;
     /** The creative attachment's file id. */
     id: string;
+    /** ISO 639 code of the language this image or video is shown for, such as `es`. On an ad with translations, the ad's own creative carries `translations.source_language`. It's `null` on an ad without translations. */
+    language: string | null;
     /** The kind of asset, image or video. */
     media_type: string | null;
     /** CDN url of the asset. */
