@@ -39,7 +39,7 @@ export interface Dispute {
     reason: Dispute.Reason;
     /** The raw card-network or processor reason code, such as `10.4`. Informational only — `reason` is not derived from it. */
     reason_code: string | null;
-    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `closed` ended without a ruling. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
+    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `closed` ended without a ruling. The `warning_` statuses are the same stages for an inquiry, which moves no funds. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
     status: Dispute.Status;
     /** When the dispute was last changed, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -69,13 +69,16 @@ export namespace Dispute {
         Other: "other",
     } as const;
     export type Reason = (typeof Reason)[keyof typeof Reason];
-    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `closed` ended without a ruling. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
+    /** Where the dispute stands. `needs_response` is awaiting evidence, `under_review` is with the processor, `won` returned the funds to the seller, `lost` returned them to the customer, and `closed` ended without a ruling. The `warning_` statuses are the same stages for an inquiry, which moves no funds. A dispute past its `evidence_due_at` reports `under_review` — the window to respond has closed. */
     export const Status = {
         NeedsResponse: "needs_response",
+        WarningNeedsResponse: "warning_needs_response",
         UnderReview: "under_review",
+        WarningUnderReview: "warning_under_review",
         Won: "won",
         Lost: "lost",
         Closed: "closed",
+        WarningClosed: "warning_closed",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }

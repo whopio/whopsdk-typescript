@@ -27,6 +27,9 @@ export namespace SummaryDisputesResponse {
             lost: number;
             needs_response: number;
             under_review: number;
+            warning_closed: number;
+            warning_needs_response: number;
+            warning_under_review: number;
             won: number;
         }
     }
