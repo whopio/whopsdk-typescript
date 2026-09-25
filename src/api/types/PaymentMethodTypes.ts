@@ -7,6 +7,7 @@ export const PaymentMethodTypes = {
     Affirm: "affirm",
     AfterpayClearpay: "afterpay_clearpay",
     Alipay: "alipay",
+    Alipayhk: "alipayhk",
     Alma: "alma",
     AmazonPay: "amazon_pay",
     Apple: "apple",
