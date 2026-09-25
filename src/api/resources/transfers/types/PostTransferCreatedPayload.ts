@@ -64,7 +64,7 @@ export namespace PostTransferCreatedPayload {
         origin: Whop.PostTransferCreatedPayloadDataOrigin;
         /** Source ledger account ID. */
         origin_ledger_account_id: string;
-        /** Transfer status. `processing` means the on-chain leg is still executing — poll the transfer until it resolves to `succeeded` or `failed`. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
+        /** Transfer status. `processing` means the on-chain leg is still executing — subscribe to `transfer.completed` and `transfer.failed`, or retrieve the transfer to check its current status. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
         status: Data.Status;
     }
 
@@ -86,7 +86,7 @@ export namespace PostTransferCreatedPayload {
             Transfer: "transfer",
         } as const;
         export type Object_ = (typeof Object_)[keyof typeof Object_];
-        /** Transfer status. `processing` means the on-chain leg is still executing — poll the transfer until it resolves to `succeeded` or `failed`. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
+        /** Transfer status. `processing` means the on-chain leg is still executing — subscribe to `transfer.completed` and `transfer.failed`, or retrieve the transfer to check its current status. A `failed` transfer may be retried under the same ID and later resolve to `succeeded`. */
         export const Status = {
             Processing: "processing",
             Succeeded: "succeeded",
