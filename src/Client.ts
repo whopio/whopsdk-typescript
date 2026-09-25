@@ -81,6 +81,7 @@ import { SupportChannelsClient } from "./api/resources/supportChannels/client/Cl
 import { SwapsClient } from "./api/resources/swaps/client/Client.js";
 import { TeamMembersClient } from "./api/resources/teamMembers/client/Client.js";
 import { TopupsClient } from "./api/resources/topups/client/Client.js";
+import { TradesClient } from "./api/resources/trades/client/Client.js";
 import { TransfersClient } from "./api/resources/transfers/client/Client.js";
 import { UsersClient } from "./api/resources/users/client/Client.js";
 import { VerificationsClient } from "./api/resources/verifications/client/Client.js";
@@ -180,6 +181,7 @@ export class WhopClient {
     protected _swaps: SwapsClient | undefined;
     protected _teamMembers: TeamMembersClient | undefined;
     protected _topups: TopupsClient | undefined;
+    protected _trades: TradesClient | undefined;
     protected _transfers: TransfersClient | undefined;
     protected _users: UsersClient | undefined;
     protected _verifications: VerificationsClient | undefined;
@@ -512,6 +514,10 @@ export class WhopClient {
 
     public get topups(): TopupsClient {
         return (this._topups ??= new TopupsClient(this._options));
+    }
+
+    public get trades(): TradesClient {
+        return (this._trades ??= new TradesClient(this._options));
     }
 
     public get transfers(): TransfersClient {

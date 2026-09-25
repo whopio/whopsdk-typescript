@@ -913,6 +913,17 @@
             },
             "default": "./dist/cjs/api/resources/topups/exports.js"
         },
+        "./trades": {
+            "import": {
+                "types": "./dist/esm/api/resources/trades/exports.d.mts",
+                "default": "./dist/esm/api/resources/trades/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/trades/exports.d.ts",
+                "default": "./dist/cjs/api/resources/trades/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/trades/exports.js"
+        },
         "./transfers": {
             "import": {
                 "types": "./dist/esm/api/resources/transfers/exports.d.mts",
