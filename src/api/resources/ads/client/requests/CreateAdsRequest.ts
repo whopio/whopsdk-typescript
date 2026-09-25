@@ -13,12 +13,12 @@ export interface CreateAdsRequest {
     call_to_action?: CreateAdsRequest.CallToAction;
     /** The ad's creative assets. Each entry is an uploaded file id with an optional format; omit format for the original asset. Entries with no format become a carousel's ordered cards, sharing the ad's copy — 2-10 of them on Meta, while TikTok runs even a single image as a one-card carousel. */
     creatives?: CreateAdsRequest.Creatives.Item[];
-    /** The description variants shown on the ad. */
-    descriptions?: string[];
+    /** The description shown on the ad. Entries without a language are the ad's own copy; add one entry per other language on a Meta ad with `translations`. */
+    descriptions?: CreateAdsRequest.Descriptions.Item[];
     /** Promote a post you already published instead of uploading creatives — a Facebook post or Instagram media id. Mutually exclusive with creatives. Pair with post_source. */
     existing_post_id?: string;
-    /** The headline variants shown on the ad. */
-    headlines?: string[];
+    /** The headline shown on the ad. Entries without a language are the ad's own copy; add one entry per other language on a Meta ad with `translations`. */
+    headlines?: CreateAdsRequest.Headlines.Item[];
     /** Instant lead form for the ad. Only allowed when the ad group's conversion_location is an instant-form destination (instant_forms, instant_forms_and_messenger, website_and_instant_forms). Mutually exclusive with lead_form_id. */
     lead_form?: CreateAdsRequest.LeadForm;
     /** Use an existing instant form instead of creating one — the form's platform ID, from a form already on the ad's Facebook page. Only allowed when the ad group's conversion_location is an instant-form destination. Mutually exclusive with lead_form. */
@@ -31,12 +31,14 @@ export interface CreateAdsRequest {
     music?: CreateAdsRequest.Music | null;
     /** Identifies the network that owns `existing_post_id`. The source is inferred from the ID shape when omitted. */
     post_source?: CreateAdsRequest.PostSource;
-    /** The primary text variants shown in the ad body. */
-    primary_texts?: string[];
+    /** The primary text shown in the ad body. Entries without a language are the ad's own copy (several make text variations); add one entry per other language on a Meta ad with `translations`. */
+    primary_texts?: CreateAdsRequest.PrimaryTexts.Item[];
     /** The social accounts the ad runs under — a connected Facebook page and, optionally, an Instagram profile. */
     social_accounts?: CreateAdsRequest.SocialAccounts.Item[];
     /** The display name of the ad. */
     title?: string;
+    /** Shows a Meta ad in other languages. Each viewer sees the version for their language; everyone else sees the ad's own copy. Tag every copy and creatives entry with its language: the ad's own with `source_language`, and give every other language a `primary_texts` and `headlines` entry (a `descriptions` entry and a `creatives` entry are optional), or list it in `automatic_languages`. Needs a website destination, one image or video, and exactly one primary text and headline of the ad's own (and at most one description), with no Dynamic Creative or crops. Replaced as a whole when sent, so send `automatic_languages` with `source_language`. null turns translations off and deletes their media. Meta-only. */
+    translations?: CreateAdsRequest.Translations | null;
     /** The URL the ad links to. Query parameters are merged into url_parameters, so the stored URL is always bare. */
     url?: string;
     /** Query parameters to append to the destination URL, keyed by parameter name. Merged with any query string on `url`. Whop adds its own click-attribution parameters; those are reserved and rejected if you set them. Which keys are reserved depends on the ad's network — Meta: utm_meta_ad_id, utm_meta_adset_id, utm_meta_campaign_id, utm_source, utm_placement, utm_medium, utm_content, utm_adset, utm_whop, wacid, wasid, waid, tw_source, tw_adid; TikTok: waid, wasid, wacid, ad_id, adset_id, campaign_id, utm_source, utm_medium, utm_placement, utm_whop, tw_source, tw_adid. */
@@ -79,6 +81,8 @@ export namespace CreateAdsRequest {
             format?: Item.Format | undefined;
             /** Uploaded file ID, prefixed `file_`. */
             id?: string | undefined;
+            /** ISO 639 code of the language this image or video is shown for, such as `es`. Required on every entry of an ad with `translations`, where the ad's own creative uses `translations.source_language`. Another language's creative is the same type as the ad's own, with no format. Leave it out on an ad without translations. */
+            language?: string | undefined;
         }
 
         export namespace Item {
@@ -98,6 +102,28 @@ export namespace CreateAdsRequest {
                 Horizontal: "horizontal",
             } as const;
             export type Format = (typeof Format)[keyof typeof Format];
+        }
+    }
+
+    export type Descriptions = Descriptions.Item[];
+
+    export namespace Descriptions {
+        export interface Item {
+            /** ISO 639 code of the language this text is in, such as `es`. Required on every entry of an ad with `translations`, where the ad's own copy uses `translations.source_language`. Leave it out on an ad without translations. */
+            language?: (string | null) | undefined;
+            /** The text shown to viewers. */
+            text: string;
+        }
+    }
+
+    export type Headlines = Headlines.Item[];
+
+    export namespace Headlines {
+        export interface Item {
+            /** ISO 639 code of the language this text is in, such as `es`. Required on every entry of an ad with `translations`, where the ad's own copy uses `translations.source_language`. Leave it out on an ad without translations. */
+            language?: (string | null) | undefined;
+            /** The text shown to viewers. */
+            text: string;
         }
     }
 
@@ -285,6 +311,17 @@ export namespace CreateAdsRequest {
         Instagram: "instagram",
     } as const;
     export type PostSource = (typeof PostSource)[keyof typeof PostSource];
+    export type PrimaryTexts = PrimaryTexts.Item[];
+
+    export namespace PrimaryTexts {
+        export interface Item {
+            /** ISO 639 code of the language this text is in, such as `es`. Required on every entry of an ad with `translations`, where the ad's own copy uses `translations.source_language`. Leave it out on an ad without translations. */
+            language?: (string | null) | undefined;
+            /** The text shown to viewers. */
+            text: string;
+        }
+    }
+
     export type SocialAccounts = SocialAccounts.Item[];
 
     export namespace SocialAccounts {
@@ -292,5 +329,15 @@ export namespace CreateAdsRequest {
             /** Social account ID, prefixed `sacc_`. */
             id?: string | undefined;
         }
+    }
+
+    /**
+     * Shows a Meta ad in other languages. Each viewer sees the version for their language; everyone else sees the ad's own copy. Tag every copy and creatives entry with its language: the ad's own with `source_language`, and give every other language a `primary_texts` and `headlines` entry (a `descriptions` entry and a `creatives` entry are optional), or list it in `automatic_languages`. Needs a website destination, one image or video, and exactly one primary text and headline of the ad's own (and at most one description), with no Dynamic Creative or crops. Replaced as a whole when sent, so send `automatic_languages` with `source_language`. null turns translations off and deletes their media. Meta-only.
+     */
+    export interface Translations {
+        /** ISO 639 codes Meta translates the ad's own copy into automatically. English copy translates into `es`, `fr`, `de`, `pt`, `it`, `ar`, `nl`, `ms`, `sv`, `id`, `pl`, `hi`, `da`, `tr`, `fil`, and `ro`; `de`, `ar`, `he`, `es`, `ja`, `no`, `fr`, `nl`, and `sv` copy translate into `en`. */
+        automatic_languages?: string[] | undefined;
+        /** ISO 639 code the ad's own copy is written in, such as `en`. */
+        source_language: string;
     }
 }

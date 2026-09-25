@@ -61,7 +61,7 @@ export class ConfirmationTokensClient {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-24",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-24-1",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

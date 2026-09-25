@@ -39,10 +39,10 @@ export namespace PostAdUpdatedPayload {
         creatives: Whop.AdCreative[];
         /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
         delivery_status: Data.DeliveryStatus;
-        descriptions: string[];
+        descriptions: Whop.AdText[];
         /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
         existing_post_id: string | null;
-        headlines: string[];
+        headlines: Whop.AdText[];
         /** Unique identifier for the ad, prefixed `ad_`. */
         id: string;
         issues: Whop.AdPlatformIssue[];
@@ -64,12 +64,14 @@ export namespace PostAdUpdatedPayload {
         post_source: Data.PostSource | null;
         /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
         post_thumbnail_url: string | null;
-        primary_texts: string[];
+        primary_texts: Whop.AdText[];
         social_accounts: Whop.AdEntityReference[];
         /** Whether the ad is enabled. `active` and `paused` are set by you; `in_review` and `rejected` come from ad review. */
         status: Data.Status;
         /** Display title of the ad. */
         title: string | null;
+        /** The languages a Meta ad runs in besides its own. Each viewer sees the version for their language, or the ad's own copy. `null` when the ad runs in one language. */
+        translations?: (Whop.AdTranslations | null) | undefined;
         /** When the ad was last updated, as an ISO 8601 timestamp. */
         updated_at: string;
         /** The URL the ad links to, without its query string. Parameters belong in `url_parameters`; any you send on `url` are moved there. */

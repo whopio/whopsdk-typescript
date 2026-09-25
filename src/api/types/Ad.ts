@@ -60,12 +60,12 @@ export interface Ad {
     custom_event_values: Record<string, unknown>;
     /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */
     delivery_status: Ad.DeliveryStatus;
-    descriptions: string[];
+    descriptions: Whop.AdText[];
     /** The post you pointed this ad at, when it promotes one you already published — a Facebook post, Instagram media, or TikTok video ID. `null` when the ad uses uploaded creatives. */
     existing_post_id: string | null;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
-    headlines: string[];
+    headlines: Whop.AdText[];
     /** Unique identifier for the ad, prefixed `ad_`. */
     id: string;
     /** The number of impressions. */
@@ -95,7 +95,7 @@ export interface Ad {
     post_source: Ad.PostSource | null;
     /** Preview image of the post named by `existing_post_id`. `null` for ads that use uploaded creatives, or until the post's media has been fetched from the network. */
     post_thumbnail_url: string | null;
-    primary_texts: string[];
+    primary_texts: Whop.AdText[];
     /** USD value of pixel-attributed purchases. */
     purchase_value: number;
     /** Whop pixel-attributed purchases, last-click. */
@@ -127,6 +127,8 @@ export interface Ad {
     submitted_applications: number;
     /** Display title of the ad. */
     title: string | null;
+    /** The languages a Meta ad runs in besides its own. Each viewer sees the version for their language, or the ad's own copy. `null` when the ad runs in one language. */
+    translations?: (Whop.AdTranslations | null) | undefined;
     /** Unique clicks divided by impressions, between 0 and 1. */
     unique_click_through_rate: number | null;
     /** People who clicked, reported by the Whop pixel, counted once per person. */
