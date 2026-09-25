@@ -7,14 +7,22 @@ export interface Membership {
     account: Whop.StorefrontAccount;
     /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring plans. */
     cancel_at_period_end: boolean;
+    /** When cancellation was requested, or when the membership was canceled if no request time is recorded, as an ISO 8601 timestamp. `null` when neither is recorded. */
+    canceled_at: string | null;
+    /** Free-text explanation provided when canceling. `null` when no reason was provided. */
+    cancellation_reason: string | null;
     /** When the membership was created, as an ISO 8601 timestamp. */
     created_at: string;
     /** When the current billing period renews, or when a non-renewing membership expires, as an ISO 8601 timestamp. `null` for one-time purchases with no expiration. */
     current_period_end: string | null;
+    /** When the current billing period started, as an ISO 8601 timestamp. `null` when no billing period is recorded. */
+    current_period_start: string | null;
     /** Membership ID, prefixed `mem_`. */
     id: string;
     /** The software license key for this membership. Only present when the product includes a software licensing experience. */
     license_key: string | null;
+    /** URL where the buyer can sign in to manage billing. `null` without a member record or unless the caller is the buyer or has `member:manage` on the account. */
+    manage_url: string | null;
     /** The caller's member row on the account. Present only when the membership belongs to the caller; `null` on seller-side reads. */
     member: Whop.MembershipMember | null;
     /** Custom key-value pairs stored on the membership, commonly used for software licensing. */

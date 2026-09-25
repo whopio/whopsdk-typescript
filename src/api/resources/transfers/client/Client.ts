@@ -20,6 +20,10 @@ export declare namespace TransfersClient {
  * Transfers move value between identities on Whop. They are used for account-to-account money movement, user payouts inside Whop, crypto transfers, and claim links depending on the destination type.
  *
  * Use the Transfers API to create a transfer, list previous transfers, and retrieve a transfer by ID when reconciling money movement between accounts or users.
+ *
+ * Subscribe to `transfer.completed` and `transfer.failed` for outcomes instead of polling. Each participating account can subscribe to these events. `transfer.created` is also emitted on success, not when processing starts. A failed transfer can be retried under the same ID and later succeed; retrieve the transfer to reconcile its current status.
+ *
+ * A successful balance transfer credits the recipient's available balance unless a release date applies. Transfers funded from pending balance retain a release date and credit pending balance; applicable recipient reserves or fraud holds can keep funds unavailable. `succeeded` confirms the transfer completed, not that all funds are withdrawable.
  */
 export class TransfersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TransfersClient.Options>;
