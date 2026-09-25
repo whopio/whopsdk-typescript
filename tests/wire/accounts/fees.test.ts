@@ -4258,26 +4258,57 @@ describe("FeesClient", () => {
                     maximum: null,
                     minimum: null,
                     percentage: 3.9,
-                    region: "eu",
+                    region: "au",
                     regions: {
-                        key: {
+                        eu: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            percentage: null,
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 3.9,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
+                            },
+                            source: "default",
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                alipayhk: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 3.9,
+                    region: "au",
+                    regions: {
+                        eu: {
+                            default: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
+                            },
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 3.9,
+                            reset: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
                             },
                             source: "default",
                         },
@@ -12347,26 +12378,57 @@ describe("FeesClient", () => {
                     maximum: null,
                     minimum: null,
                     percentage: 3.9,
-                    region: "eu",
+                    region: "au",
                     regions: {
-                        key: {
+                        eu: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                            maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
-                            },
-                            percentage: null,
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 3.9,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-                                percentage: 0,
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
+                            },
+                            source: "default",
+                        },
+                    },
+                    reset: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
+                    },
+                    source: "default",
+                    unadjustable_reason: "not_permitted",
+                },
+                alipayhk: {
+                    adjustable: false,
+                    category: "payments",
+                    default: {
+                        fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                        percentage: 3.9,
+                    },
+                    ends_at: null,
+                    fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                    maximum: null,
+                    minimum: null,
+                    percentage: 3.9,
+                    region: "au",
+                    regions: {
+                        eu: {
+                            default: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
+                            },
+                            fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                            maximum: null,
+                            minimum: null,
+                            percentage: 3.9,
+                            reset: {
+                                fixed: { amount: "0.30", currency: "usd", decimals: 2, display_decimals: 2 },
+                                percentage: 3.9,
                             },
                             source: "default",
                         },
