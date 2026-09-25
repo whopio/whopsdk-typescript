@@ -2,10 +2,13 @@
 
 export const ListDisputesRequestStatusItem = {
     NeedsResponse: "needs_response",
+    WarningNeedsResponse: "warning_needs_response",
     UnderReview: "under_review",
+    WarningUnderReview: "warning_under_review",
     Won: "won",
     Lost: "lost",
     Closed: "closed",
+    WarningClosed: "warning_closed",
 } as const;
 export type ListDisputesRequestStatusItem =
     (typeof ListDisputesRequestStatusItem)[keyof typeof ListDisputesRequestStatusItem];

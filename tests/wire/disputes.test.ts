@@ -271,7 +271,16 @@ describe("DisputesClient", () => {
         const rawResponseBody = {
             groups: {
                 currency: { usd: 1 },
-                status: { closed: 0, lost: 0, needs_response: 1, under_review: 0, won: 0 },
+                status: {
+                    closed: 0,
+                    lost: 0,
+                    needs_response: 1,
+                    under_review: 0,
+                    warning_closed: 0,
+                    warning_needs_response: 0,
+                    warning_under_review: 0,
+                    won: 0,
+                },
             },
             total: 1,
         };
