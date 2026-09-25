@@ -3,7 +3,9 @@
 import type * as Whop from "../index.js";
 
 export interface ConfirmationToken {
-    /** Enough of the billing details to raise a customer record and recognise the method — email, name, country and postal code. The street address is collected for the charge but never returned; this endpoint is a display-safe preview. */
+    /** The collected billing address, including the name on the address. Null when not collected or without bearer authentication with payment:basic:read on the token’s account. */
+    billing_address: Whop.PaymentAddress | null;
+    /** Billing preview supplied at collection: email, name, country and postal code. */
     billing_details: Whop.PaymentBillingDetailsPreview | null;
     /** When the token was created, as an ISO 8601 timestamp. */
     created_at: string;
