@@ -15,12 +15,20 @@ export interface CreateSetupIntentsRequest {
     currency?: string | null;
     /** Overrides the buyer email carried on the confirmation token, resolving or creating the user the method belongs to. Ignored unless `confirmation_token` is provided, and when the token was created by a signed-in buyer or the caller is the buyer. */
     email?: string | null;
-    /** Set to `true` when saving a card to pay for Whop Ads on `account_id`. The card is verified by Whop Ads, the merchant that charges it, which helps minimize security declines on ad payments. Requires `ad_campaign:create` on `account_id`. Defaults to `false`. */
-    for_ads_billing?: boolean | null;
     /** Custom metadata to attach to the setup intent. Returned on the setup intent and its webhooks. */
     metadata?: Record<string, string | null> | null;
     /** An existing payment method to re-verify and save, prefixed `payt_`. Provide this or `confirmation_token`, not both. Not available to a buyer credential. */
     payment_method_id?: string | null;
+    /** What the saved payment method will pay for. Set to `ads_billing` when saving a card to pay for Whop Ads on `account_id`: the card is verified by Whop Ads, the merchant that charges it, which helps minimize security declines on ad payments, and it requires `ad_campaign:create` on `account_id`. Omit it for any other payment method. */
+    purpose?: CreateSetupIntentsRequest.Purpose | null;
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. */
     return_url?: string | null;
+}
+
+export namespace CreateSetupIntentsRequest {
+    /** What the saved payment method will pay for. Set to `ads_billing` when saving a card to pay for Whop Ads on `account_id`: the card is verified by Whop Ads, the merchant that charges it, which helps minimize security declines on ad payments, and it requires `ad_campaign:create` on `account_id`. Omit it for any other payment method. */
+    export const Purpose = {
+        AdsBilling: "ads_billing",
+    } as const;
+    export type Purpose = (typeof Purpose)[keyof typeof Purpose];
 }
