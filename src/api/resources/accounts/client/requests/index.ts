@@ -1,4 +1,5 @@
 export type { CreateAccountsRequest } from "./CreateAccountsRequest.js";
+export type { DeleteAccountsRequest } from "./DeleteAccountsRequest.js";
 export { FormCompanyAccountsRequest } from "./FormCompanyAccountsRequest.js";
 export type { ListAccountsRequest } from "./ListAccountsRequest.js";
 export type { MeAccountsRequest } from "./MeAccountsRequest.js";
