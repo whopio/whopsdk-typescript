@@ -228,7 +228,7 @@ export class SocialAccountsClient {
     }
 
     /**
-     * Starts an OAuth connection flow and returns an authorize_url where the user can connect a social account. LinkedIn connects the authenticated user’s profile and must be completed in a browser signed in as that same Whop user.
+     * Starts an OAuth connection flow and returns an authorize_url where the user can connect a social account. LinkedIn supports personal profiles only, with scopes omitted. TikTok connects the authenticated user’s profile when scopes are omitted or company advertising assets with advertise. Meta Business and Snapchat support advertising connections only and require advertise. Personal profile connections must be completed in a browser signed in as the initiating Whop user.
      *
      * @param {Whop.ConnectSocialAccountsRequest} request
      * @param {SocialAccountsClient.RequestOptions} requestOptions - Request-specific configuration.
