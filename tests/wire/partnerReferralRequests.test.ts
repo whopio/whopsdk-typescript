@@ -47,6 +47,12 @@ describe("PartnerReferralRequestsClient", () => {
                     ],
                     status: "pending",
                     updated_at: "2026-01-01T12:00:00.000Z",
+                    user: {
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Dana Whitfield",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "danawhitfield",
+                    },
                 },
             ],
             page_info: {
@@ -184,6 +190,12 @@ describe("PartnerReferralRequestsClient", () => {
             ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server
@@ -376,6 +388,12 @@ describe("PartnerReferralRequestsClient", () => {
             ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server
@@ -508,6 +526,12 @@ describe("PartnerReferralRequestsClient", () => {
             ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server
@@ -667,6 +691,12 @@ describe("PartnerReferralRequestsClient", () => {
             ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server
@@ -826,6 +856,12 @@ describe("PartnerReferralRequestsClient", () => {
             ],
             status: "pending",
             updated_at: "2026-01-01T12:00:00.000Z",
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
         };
 
         server

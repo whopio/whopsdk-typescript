@@ -22,6 +22,8 @@ export interface PartnerReferralRequest {
     status: PartnerReferralRequest.Status | null;
     /** When the request last changed, as an ISO 8601 timestamp. */
     updated_at: string;
+    /** User receiving the attribution request, or null for a business request or referral link. */
+    user: Whop.UserSummary | null;
 }
 
 export namespace PartnerReferralRequest {
