@@ -60,6 +60,7 @@ export namespace ReplacePaymentRulesRequest {
                     RiskScore: "risk_score",
                     AmountInUsd: "amount_in_usd",
                     CardCountry: "card_country",
+                    CardBin: "card_bin",
                     CustomerEmail: "customer_email",
                     IpAddress: "ip_address",
                 } as const;
@@ -74,8 +75,8 @@ export namespace ReplacePaymentRulesRequest {
                     Lte: "lte",
                     In: "in",
                     NotIn: "not_in",
-                    Contains: "contains",
                     StartsWith: "starts_with",
+                    Contains: "contains",
                     EndsWith: "ends_with",
                     InCidr: "in_cidr",
                 } as const;
