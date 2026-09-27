@@ -13,4 +13,6 @@ export interface AccountPartner {
     profile_picture: Whop.UserProfilePicture;
     /** Public username. */
     username: string;
+    /** When the user became a verified Whop Partner, as an ISO 8601 timestamp. Null if not verified. */
+    whop_partner_verified_at: string | null;
 }

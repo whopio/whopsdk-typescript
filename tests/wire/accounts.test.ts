@@ -178,6 +178,7 @@ describe("AccountsClient", () => {
                         name: null,
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "username",
+                        whop_partner_verified_at: null,
                     },
                     payment_controls: {
                         dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -732,6 +733,7 @@ describe("AccountsClient", () => {
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "username",
+                whop_partner_verified_at: "whop_partner_verified_at",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -1269,6 +1271,7 @@ describe("AccountsClient", () => {
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "username",
+                whop_partner_verified_at: "whop_partner_verified_at",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -1752,6 +1755,7 @@ describe("AccountsClient", () => {
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "username",
+                whop_partner_verified_at: "whop_partner_verified_at",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -2368,6 +2372,7 @@ describe("AccountsClient", () => {
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "username",
+                whop_partner_verified_at: "whop_partner_verified_at",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
@@ -3689,6 +3694,7 @@ describe("AccountsClient", () => {
                 name: "name",
                 profile_picture: { url: "https://ui-avatars.com/api/" },
                 username: "username",
+                whop_partner_verified_at: "whop_partner_verified_at",
             },
             payment_controls: {
                 dispute_alert_auto_refund: { locked: false, threshold_usd: 500 },
