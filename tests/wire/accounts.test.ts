@@ -199,6 +199,7 @@ describe("AccountsClient", () => {
                         undated_pending_reason: null,
                         withdrawal_schedule: { day: null, frequency: "manual", next_payout_date: null },
                     },
+                    platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
                     privacy_policy: {
                         content_type: "application/pdf",
                         created_at: "2026-01-01T12:00:00.000Z",
@@ -754,6 +755,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 content_type: "application/pdf",
                 created_at: "2026-01-01T12:00:00.000Z",
@@ -1292,6 +1294,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 content_type: "application/pdf",
                 created_at: "2026-01-01T12:00:00.000Z",
@@ -1776,6 +1779,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 content_type: "application/pdf",
                 created_at: "2026-01-01T12:00:00.000Z",
@@ -2393,6 +2397,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 content_type: "application/pdf",
                 created_at: "2026-01-01T12:00:00.000Z",
@@ -3715,6 +3720,7 @@ describe("AccountsClient", () => {
                 undated_pending_reason: "kyc_incomplete",
                 withdrawal_schedule: { day: 1, frequency: "manual", next_payout_date: "next_payout_date" },
             },
+            platform_credits: [{ amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }],
             privacy_policy: {
                 content_type: "application/pdf",
                 created_at: "2026-01-01T12:00:00.000Z",

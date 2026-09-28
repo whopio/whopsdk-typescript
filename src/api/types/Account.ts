@@ -71,6 +71,7 @@ export interface Account {
     partner?: (Whop.AccountPartner | null) | undefined;
     /** Payment health controls currently applied to the account. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise. */
     payment_controls: Whop.AccountPaymentControls | null;
+    platform_credits: Whop.Money[];
     /** The account's privacy policy document, or `null` if they have not published one. */
     privacy_policy: Whop.File_ | null;
     /** Tax classification code applied by default to the account's products, with `id`, `name`, and `product_type`. `null` when no default is set. */
