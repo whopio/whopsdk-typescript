@@ -24,6 +24,8 @@ export interface UpdateAdGroupsRequest {
     conversion_event?: Whop.ConversionEvent | null;
     /** Where the outcome being optimized for occurs, such as a website visit, social-profile visit, messaging conversation, ad interaction, or lead-form submission. The lead form itself is set on the ad. */
     conversion_location?: UpdateAdGroupsRequest.ConversionLocation;
+    /** Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget. */
+    delivery_schedule?: UpdateAdGroupsRequest.DeliverySchedule | null;
     /** Age, gender, and automatic-audience targeting. */
     demographics?: Whop.AdGroupDemographicsBody;
     /** Cost per result to aim for (`average_target`) or never exceed (`maximum_target`). */
@@ -94,6 +96,105 @@ export namespace UpdateAdGroupsRequest {
         WebsiteAndInstantForms: "website_and_instant_forms",
     } as const;
     export type ConversionLocation = (typeof ConversionLocation)[keyof typeof ConversionLocation];
+
+    /**
+     * Hours the ad group delivers in each week, keyed by day. Each window runs from `start` to `end` on the hour, with `24:00` for midnight, and a day's windows can't overlap or touch. A day that's empty or left out doesn't deliver. Replaces the whole schedule; `null` delivers at every hour. Some platforms need a lifetime `budget_type` for a schedule, on the ad group or on its campaign when the campaign holds the budget.
+     */
+    export interface DeliverySchedule {
+        /** Windows the ad group delivers in on Friday. */
+        friday?: DeliverySchedule.Friday.Item[] | undefined;
+        /** Windows the ad group delivers in on Monday. */
+        monday?: DeliverySchedule.Monday.Item[] | undefined;
+        /** Windows the ad group delivers in on Saturday. */
+        saturday?: DeliverySchedule.Saturday.Item[] | undefined;
+        /** Windows the ad group delivers in on Sunday. */
+        sunday?: DeliverySchedule.Sunday.Item[] | undefined;
+        /** Windows the ad group delivers in on Thursday. */
+        thursday?: DeliverySchedule.Thursday.Item[] | undefined;
+        /** Windows the ad group delivers in on Tuesday. */
+        tuesday?: DeliverySchedule.Tuesday.Item[] | undefined;
+        /** Windows the ad group delivers in on Wednesday. */
+        wednesday?: DeliverySchedule.Wednesday.Item[] | undefined;
+    }
+
+    export namespace DeliverySchedule {
+        export type Friday = Friday.Item[];
+
+        export namespace Friday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Monday = Monday.Item[];
+
+        export namespace Monday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Saturday = Saturday.Item[];
+
+        export namespace Saturday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Sunday = Sunday.Item[];
+
+        export namespace Sunday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Thursday = Thursday.Item[];
+
+        export namespace Thursday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Tuesday = Tuesday.Item[];
+
+        export namespace Tuesday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+
+        export type Wednesday = Wednesday.Item[];
+
+        export namespace Wednesday {
+            export interface Item {
+                /** When delivery stops, as a 24-hour `HH:00` time up to `24:00` for midnight. Later than `start`. */
+                end: string;
+                /** When delivery starts, as a 24-hour `HH:00` time from `00:00` to `23:00`. */
+                start: string;
+            }
+        }
+    }
 
     /**
      * Cap on how often one person sees ads from this ad group. Only available on campaigns with the `awareness` objective.
