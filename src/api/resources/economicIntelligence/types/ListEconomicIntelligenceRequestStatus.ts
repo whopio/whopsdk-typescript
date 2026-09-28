@@ -4,7 +4,9 @@ export const ListEconomicIntelligenceRequestStatus = {
     Queued: "queued",
     Pending: "pending",
     Ready: "ready",
+    Running: "running",
     Executed: "executed",
+    Incomplete: "incomplete",
     Superseded: "superseded",
 } as const;
 export type ListEconomicIntelligenceRequestStatus =

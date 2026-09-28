@@ -13,9 +13,11 @@ export interface UpdateEconomicIntelligenceRequest {
     account_id?: string;
     /** What you want the replacement recommendation for, in your own words. Up to 1000 characters. Sent when superseding, it directs the generation that replaces the rejected recommendation. */
     input?: string;
+    /** With `status: executed`, where to view what was produced, such as the published website or created product. An http or https URL. */
+    result_url?: string;
     /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
     sentiment?: UpdateEconomicIntelligenceRequest.Sentiment;
-    /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
+    /** Use `running` to start a run of a ready recommendation, `executed` to record that it was carried out, `incomplete` to record that a running recommendation's run ended without carrying it out, `superseded` to reject a ready recommendation, or `acknowledged` to mark an executed run as seen; the recommendation stays `executed` and records `acknowledged_at`. */
     status?: UpdateEconomicIntelligenceRequest.Status;
     /** An optional explanation of the rating or rejection. Negative feedback informs replacement recommendations. */
     user_feedback?: string;
@@ -28,10 +30,13 @@ export namespace UpdateEconomicIntelligenceRequest {
         Negative: "negative",
     } as const;
     export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
-    /** Use `executed` to record approval, or `superseded` to reject the recommendation. */
+    /** Use `running` to start a run of a ready recommendation, `executed` to record that it was carried out, `incomplete` to record that a running recommendation's run ended without carrying it out, `superseded` to reject a ready recommendation, or `acknowledged` to mark an executed run as seen; the recommendation stays `executed` and records `acknowledged_at`. */
     export const Status = {
+        Running: "running",
         Executed: "executed",
+        Incomplete: "incomplete",
         Superseded: "superseded",
+        Acknowledged: "acknowledged",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
 }

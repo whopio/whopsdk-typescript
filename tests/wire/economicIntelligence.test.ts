@@ -19,8 +19,9 @@ describe("EconomicIntelligenceClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
+                    acknowledged_at: "2026-01-01T12:00:00.000Z",
                     action_type: "scale_winning_ads",
-                    ai_chat_id: "ai_chat_id",
+                    ai_chat_id: "aich_xxxxxxxxxxxxxx",
                     created_at: "2026-01-01T12:00:00.000Z",
                     executed_at: "2026-01-01T12:00:00.000Z",
                     expected_tool_calls: [
@@ -30,6 +31,10 @@ describe("EconomicIntelligenceClient", () => {
                     input: "more sales from ads",
                     prompt: "Create a 20% off promo code for my members.",
                     reasoning: "Capped 9 of 14 days.",
+                    result_url: "https://atlas.whop.site/",
+                    run_by_user_id: "user_xxxxxxxxxxxxxx",
+                    run_ended_at: "2026-01-01T12:00:00.000Z",
+                    run_started_at: "2026-01-01T12:00:00.000Z",
                     sentiment: "positive",
                     status: "queued",
                     superseded_at: "2026-01-01T12:00:00.000Z",
@@ -175,8 +180,9 @@ describe("EconomicIntelligenceClient", () => {
         const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
+            acknowledged_at: "2026-01-01T12:00:00.000Z",
             action_type: "scale_winning_ads",
-            ai_chat_id: "ai_chat_id",
+            ai_chat_id: "aich_xxxxxxxxxxxxxx",
             created_at: "2026-01-01T12:00:00.000Z",
             executed_at: "2026-01-01T12:00:00.000Z",
             expected_tool_calls: [
@@ -186,6 +192,10 @@ describe("EconomicIntelligenceClient", () => {
             input: "more sales from ads",
             prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
+            result_url: "https://atlas.whop.site/",
+            run_by_user_id: "user_xxxxxxxxxxxxxx",
+            run_ended_at: "2026-01-01T12:00:00.000Z",
+            run_started_at: "2026-01-01T12:00:00.000Z",
             sentiment: "positive",
             status: "queued",
             superseded_at: "2026-01-01T12:00:00.000Z",

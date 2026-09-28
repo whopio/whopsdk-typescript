@@ -5,13 +5,15 @@ import type * as Whop from "../index.js";
 export interface EconomicIntelligence {
     /** ID of the account this recommendation is for, prefixed `biz_`, or null for personal onboarding. */
     account_id: string | null;
+    /** When the executed run was first marked as seen, as an ISO 8601 timestamp, or `null` if it has not been. */
+    acknowledged_at: string | null;
     /** Type of action recommended, or `null` when no type is assigned. New values may be added; handle unknown types gracefully. */
     action_type: string | null;
-    /** The chat to resume after its initial message is accepted, or null before a chat is ready. */
+    /** The chat that ran the recommendation, shown only to the user who ran it, or `null` otherwise. */
     ai_chat_id: string | null;
     /** When the recommendation was created, as an ISO 8601 timestamp, or null for an unsaved recommendation. */
     created_at: string | null;
-    /** When the recommendation was approved, as an ISO 8601 timestamp, or `null` if it has not been approved. */
+    /** When the recommendation was carried out, as an ISO 8601 timestamp, or `null` if it has not been. */
     executed_at: string | null;
     expected_tool_calls: Whop.EconomicIntelligenceOperation[] | null;
     /** Recommendation ID, prefixed `reca_`, or `create_business` for an unsaved setup recommendation. Authenticate and list again before executing an unsaved recommendation. */
@@ -22,9 +24,17 @@ export interface EconomicIntelligence {
     prompt: string | null;
     /** Evidence and metrics supporting the recommendation, or `null` when no reasoning was provided. */
     reasoning: string | null;
+    /** Where to view what the run produced, such as the published website or created product, or `null` when the result is only in the chat. */
+    result_url: string | null;
+    /** The user who started the run, prefixed `user_`, or `null` if it has not run or was started without a user, such as with an API key. */
+    run_by_user_id: string | null;
+    /** When Whop AI's run ended, whether executed or incomplete, as an ISO 8601 timestamp, or `null` if it has not ended. */
+    run_ended_at: string | null;
+    /** When Whop AI started carrying out the recommendation, as an ISO 8601 timestamp, or `null` if it has not run. */
+    run_started_at: string | null;
     /** How the user rated this recommendation, or `null` if they have not rated it */
     sentiment: EconomicIntelligence.Sentiment | null;
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available for approval; `executed` when approved; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI carries it out; `executed` when carried out; `incomplete` when Whop AI's run ended without carrying it out; `superseded` when rejected or replaced. */
     status: EconomicIntelligence.Status;
     /** When the recommendation was rejected or replaced, as an ISO 8601 timestamp, or `null` if neither has occurred. */
     superseded_at: string | null;
@@ -43,12 +53,14 @@ export namespace EconomicIntelligence {
         Negative: "negative",
     } as const;
     export type Sentiment = (typeof Sentiment)[keyof typeof Sentiment];
-    /** `queued` when awaiting generation; `pending` while generating; `ready` when available for approval; `executed` when approved; `superseded` when rejected or replaced. */
+    /** `queued` when awaiting generation; `pending` while generating; `ready` when available to run; `running` while Whop AI carries it out; `executed` when carried out; `incomplete` when Whop AI's run ended without carrying it out; `superseded` when rejected or replaced. */
     export const Status = {
         Queued: "queued",
         Pending: "pending",
         Ready: "ready",
+        Running: "running",
         Executed: "executed",
+        Incomplete: "incomplete",
         Superseded: "superseded",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
