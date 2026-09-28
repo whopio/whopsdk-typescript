@@ -17,7 +17,7 @@ export interface CreateOauthGrantsRequest {
     code_challenge?: string;
     /** How `code_challenge` was derived. Only `S256` is accepted. Required with `code_challenge`. */
     code_challenge_method?: CreateOauthGrantsRequest.CodeChallengeMethod;
-    /** Whether the consent UI listed these scopes for the user. Sending `false` succeeds only when the user has already granted every scope requested. */
+    /** Whether the consent UI listed these scopes for the user. Sending `false` succeeds only when the user has already granted every scope requested, or when the app is one of Whop's own with the consent skip switched on and asks for `openid` alone. */
     consent_shown?: boolean;
     /** OIDC nonce, echoed into the resulting ID token. Required when `requested_scopes` includes `openid`. */
     nonce?: string;
