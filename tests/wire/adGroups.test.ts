@@ -51,6 +51,15 @@ describe("AdGroupsClient", () => {
                     custom_conversions: 41,
                     custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
                     custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+                    delivery_schedule: {
+                        friday: [{ end: "12:00", start: "10:00" }],
+                        monday: [{ end: "12:00", start: "10:00" }],
+                        saturday: [{ end: "12:00", start: "10:00" }],
+                        sunday: [{ end: "12:00", start: "10:00" }],
+                        thursday: [{ end: "12:00", start: "10:00" }],
+                        tuesday: [{ end: "12:00", start: "10:00" }],
+                        wednesday: [{ end: "12:00", start: "10:00" }],
+                    },
                     delivery_status: "in_appeal",
                     demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
                     desired_cost_per_result: 40,
@@ -212,6 +221,15 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_schedule: {
+                friday: [{ end: "12:00", start: "10:00" }],
+                monday: [{ end: "12:00", start: "10:00" }],
+                saturday: [{ end: "12:00", start: "10:00" }],
+                sunday: [{ end: "12:00", start: "10:00" }],
+                thursday: [{ end: "12:00", start: "10:00" }],
+                tuesday: [{ end: "12:00", start: "10:00" }],
+                wednesday: [{ end: "12:00", start: "10:00" }],
+            },
             delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
@@ -676,6 +694,15 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_schedule: {
+                friday: [{ end: "12:00", start: "10:00" }],
+                monday: [{ end: "12:00", start: "10:00" }],
+                saturday: [{ end: "12:00", start: "10:00" }],
+                sunday: [{ end: "12:00", start: "10:00" }],
+                thursday: [{ end: "12:00", start: "10:00" }],
+                tuesday: [{ end: "12:00", start: "10:00" }],
+                wednesday: [{ end: "12:00", start: "10:00" }],
+            },
             delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
@@ -836,7 +863,7 @@ describe("AdGroupsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
-    test("update", async () => {
+    test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -880,6 +907,15 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_schedule: {
+                friday: [{ end: "12:00", start: "10:00" }],
+                monday: [{ end: "12:00", start: "10:00" }],
+                saturday: [{ end: "12:00", start: "10:00" }],
+                sunday: [{ end: "12:00", start: "10:00" }],
+                thursday: [{ end: "12:00", start: "10:00" }],
+                tuesday: [{ end: "12:00", start: "10:00" }],
+                wednesday: [{ end: "12:00", start: "10:00" }],
+            },
             delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
@@ -985,6 +1021,34 @@ describe("AdGroupsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/ad_groups/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.adGroups.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
     test("duplicate (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -1031,6 +1095,15 @@ describe("AdGroupsClient", () => {
                     custom_conversions: 41,
                     custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
                     custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+                    delivery_schedule: {
+                        friday: [{ end: "12:00", start: "10:00" }],
+                        monday: [{ end: "12:00", start: "10:00" }],
+                        saturday: [{ end: "12:00", start: "10:00" }],
+                        sunday: [{ end: "12:00", start: "10:00" }],
+                        thursday: [{ end: "12:00", start: "10:00" }],
+                        tuesday: [{ end: "12:00", start: "10:00" }],
+                        wednesday: [{ end: "12:00", start: "10:00" }],
+                    },
                     delivery_status: "in_appeal",
                     demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
                     desired_cost_per_result: 40,
@@ -1266,6 +1339,15 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_schedule: {
+                friday: [{ end: "12:00", start: "10:00" }],
+                monday: [{ end: "12:00", start: "10:00" }],
+                saturday: [{ end: "12:00", start: "10:00" }],
+                sunday: [{ end: "12:00", start: "10:00" }],
+                thursday: [{ end: "12:00", start: "10:00" }],
+                tuesday: [{ end: "12:00", start: "10:00" }],
+                wednesday: [{ end: "12:00", start: "10:00" }],
+            },
             delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,
@@ -1441,6 +1523,15 @@ describe("AdGroupsClient", () => {
             custom_conversions: 41,
             custom_event_counts: { gift_card_purchased: 5, quote_requested: 33 },
             custom_event_values: { gift_card_purchased: 750, quote_requested: 0 },
+            delivery_schedule: {
+                friday: [{ end: "12:00", start: "10:00" }],
+                monday: [{ end: "12:00", start: "10:00" }],
+                saturday: [{ end: "12:00", start: "10:00" }],
+                sunday: [{ end: "12:00", start: "10:00" }],
+                thursday: [{ end: "12:00", start: "10:00" }],
+                tuesday: [{ end: "12:00", start: "10:00" }],
+                wednesday: [{ end: "12:00", start: "10:00" }],
+            },
             delivery_status: "in_appeal",
             demographics: { automatic: false, gender: "all", maximum_age: 64, minimum_age: 21 },
             desired_cost_per_result: 40,

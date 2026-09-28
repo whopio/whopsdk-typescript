@@ -55,6 +55,8 @@ export * from "./AdGroupAudiencesBody.js";
 export * from "./AdGroupBehaviorCategory.js";
 export * from "./AdGroupCity.js";
 export * from "./AdGroupCustomLocation.js";
+export * from "./AdGroupDeliverySchedule.js";
+export * from "./AdGroupDeliveryWindow.js";
 export * from "./AdGroupDemographicCategory.js";
 export * from "./AdGroupDemographics.js";
 export * from "./AdGroupDemographicsBody.js";
