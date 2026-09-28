@@ -11,8 +11,10 @@ export interface SocialAccount {
     id: string;
     /** The display name of the social account on the platform. */
     name: string | null;
-    /** The social account this one belongs to on the platform, such as the Facebook page that owns an Instagram account. Null when the social account stands on its own. */
+    /** The social account this one belongs to on the platform, such as the Facebook page that owns an Instagram account. Null when the social account stands on its own, or when it is a partner. */
     parent_social_account: Whop.SocialAccountParent | null;
+    /** Where a partner creator's permission to run partnership ads stands. `pending` until the creator approves it in the Instagram app, `approved` once they have, and `revoked` once it no longer holds. Null when the social account isn't a partner. */
+    partnership_status: SocialAccount.PartnershipStatus | null;
     /** The platform the social account exists on. */
     platform: SocialAccount.Platform;
     /** The URL where the profile picture of the social account can be accessed. */
@@ -27,6 +29,13 @@ export interface SocialAccount {
 }
 
 export namespace SocialAccount {
+    /** Where a partner creator's permission to run partnership ads stands. `pending` until the creator approves it in the Instagram app, `approved` once they have, and `revoked` once it no longer holds. Null when the social account isn't a partner. */
+    export const PartnershipStatus = {
+        Pending: "pending",
+        Approved: "approved",
+        Revoked: "revoked",
+    } as const;
+    export type PartnershipStatus = (typeof PartnershipStatus)[keyof typeof PartnershipStatus];
     /** The platform the social account exists on. */
     export const Platform = {
         X: "x",
