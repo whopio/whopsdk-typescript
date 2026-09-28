@@ -68,7 +68,7 @@ export class EconomicIntelligenceClient {
                     this._options?.headers,
                     mergeOnlyDefinedHeaders({
                         "Api-Version-Date":
-                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-25",
+                            requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-28",
                         "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
                     }),
                     requestOptions?.headers,
@@ -142,7 +142,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire it and request replacements; a rating alone leaves its status unchanged.
+     * Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire a ready recommendation and request replacements; a rating alone leaves its status unchanged. To run a recommendation yourself, send `status: running` to start, then `status: executed` when it is carried out (with `result_url` when there is a result to view) or `status: incomplete` if the run ended without carrying it out. Whop AI reports its own runs the same way. Send `status: acknowledged` once an executed run's result has been seen.
      *
      * @param {Whop.UpdateEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -179,7 +179,7 @@ export class EconomicIntelligenceClient {
             _authRequest.headers,
             this._options?.headers,
             mergeOnlyDefinedHeaders({
-                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-25",
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-28",
                 "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
             }),
             requestOptions?.headers,

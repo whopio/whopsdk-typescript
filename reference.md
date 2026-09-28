@@ -11273,7 +11273,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire it and request replacements; a rating alone leaves its status unchanged.
+Updates a recommendation status, records feedback, or both. Send `sentiment` to rate it. Include `status: superseded` to retire a ready recommendation and request replacements; a rating alone leaves its status unchanged. To run a recommendation yourself, send `status: running` to start, then `status: executed` when it is carried out (with `result_url` when there is a result to view) or `status: incomplete` if the run ended without carrying it out. Whop AI reports its own runs the same way. Send `status: acknowledged` once an executed run's result has been seen.
 </dd>
 </dl>
 </dd>
@@ -19092,7 +19092,7 @@ await client.payments.retrieve({
 <dl>
 <dd>
 
-Changes a payment's shipping address or return URL, such as when a buyer corrects where their order should go before it ships. `shipping_address` is replaced as a whole, never merged: always send the complete address, including fields that are not changing, or they are cleared. Only `shipping_address` and `return_url` can be changed, and any other field is rejected. Omit either one to leave it unchanged.
+Updates a payment's `shipping_address` or `return_url`. Send the complete `shipping_address`, because it replaces the existing address and any field you leave out is cleared.
 </dd>
 </dl>
 </dd>
