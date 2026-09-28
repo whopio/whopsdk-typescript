@@ -25,7 +25,7 @@ export interface ResolutionCenterCase {
     outcome: ResolutionCenterCase.Outcome | null;
     /** The payment the case was opened against. */
     payment: Whop.ResolutionPayment;
-    /** The plan the payment was made on, prefixed `plan_`. */
+    /** The variant the payment was made on, prefixed `plan_`. */
     plan_id: string | null;
     /** The product the payment was for, prefixed `prod_`. */
     product_id: string | null;

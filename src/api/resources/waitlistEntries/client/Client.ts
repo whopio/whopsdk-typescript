@@ -17,8 +17,8 @@ export declare namespace WaitlistEntriesClient {
 }
 
 /**
- * Join a free plan's waitlist, read or cancel your own signups, and manage signups for accounts you are authorized to operate.
- * Joining does not grant membership or charge a payment method. Seller approval runs asynchronously and can charge a saved payment method for a paid plan.
+ * Join a free variant's waitlist, read or cancel your own signups, and manage signups for accounts you are authorized to operate.
+ * Joining does not grant membership or charge a payment method. Seller approval runs asynchronously and can charge a saved payment method for a paid variant.
  */
 export class WaitlistEntriesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<WaitlistEntriesClient.Options>;
@@ -154,7 +154,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Joins a free waitlist plan as the authenticated user. Requires waitlist_entry:create. Repeated joins return the existing pending entry, or an approved entry with a valid membership. Paid plans are rejected; no payment method is collected and no membership is granted.
+     * Joins a free waitlist variant as the authenticated user. Requires waitlist_entry:create. Repeated joins return the existing pending entry, or an approved entry with a valid membership. Paid variants are rejected; no payment method is collected and no membership is granted.
      *
      * @param {Whop.CreateWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -241,7 +241,7 @@ export class WaitlistEntriesClient {
     }
 
     /**
-     * Queues approval of every pending signup for an account, optionally narrowed to a plan. Requires plan:waitlist:manage. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
+     * Queues approval of every pending signup for an account, optionally narrowed to a variant. Requires plan:waitlist:manage. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
      *
      * @param {Whop.ApproveAllWaitlistEntriesRequest} request
      * @param {WaitlistEntriesClient.RequestOptions} requestOptions - Request-specific configuration.

@@ -17,7 +17,7 @@ export declare namespace ProductsClient {
 }
 
 /**
- * A Product is a digital good or service sold on Whop. Products may contain plans for pricing and/or experiences for content delivery.
+ * A Product is a digital good or service sold on Whop. Products contain variants for pricing and may contain experiences for content delivery.
  *
  * Use the Products API to search the public marketplace, list an account's products, retrieve a product, and create, update, or delete products.
  */

@@ -17,7 +17,7 @@ export interface CreatePaymentsRequest {
     confirmation_token?: string | null;
     /** Overrides the buyer email carried on the confirmation token, resolving or creating the user the payment belongs to. Ignored unless `confirmation_token` is provided, and when the token was created by a signed-in buyer. */
     email?: string | null;
-    /** What the buyer is purchasing. One entry charges that plan; several entries form a cart, which requires every plan to be a compatible plan from this account in the same currency. */
+    /** What the buyer is purchasing. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
     line_items?: CreatePaymentsRequest.LineItems.Item[];
     /** The member to charge, prefixed `mber_`. Required with `payment_method_id` unless `confirmation_token` is provided. */
     member_id?: string | null;
@@ -25,11 +25,11 @@ export interface CreatePaymentsRequest {
     metadata?: Record<string, string | null> | null;
     /** The stored payment method to charge, prefixed `payt_`. It must belong to the member. Required unless `confirmation_token` is provided. */
     payment_method_id?: string | null;
-    /** Find or create a plan for this payment. Mutually exclusive with `plan_id` and `line_items`. Creating a plan requires plan:create; creating or updating a product requires the corresponding product permission. */
+    /** Find or create a variant for this payment through the compatibility input `plan`. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
     plan?: CreatePaymentsRequest.Plan;
-    /** The plan to charge for, prefixed `plan_`. It must belong to the account. Mutually exclusive with `plan` and `line_items`. */
+    /** The variant to charge for, prefixed `plan_`. It must belong to the account. Mutually exclusive with `plan` and `line_items`. */
     plan_id?: string;
-    /** An active promo code to apply, prefixed `promo_`. It must belong to the account and be valid for the plan. */
+    /** An active promo code to apply, prefixed `promo_`. It must belong to the account and be valid for the variant. */
     promo_code_id?: string | null;
     /** Where the buyer continues after completing an off-site step. An absolute https URL without credentials, at most 2,048 characters. Ignored unless `confirmation_token` is provided. */
     return_url?: string | null;
@@ -44,51 +44,51 @@ export namespace CreatePaymentsRequest {
 
     export namespace LineItems {
         export interface Item {
-            /** An existing plan to charge for, prefixed `plan_`. Each plan may appear once — use `quantity` for multiple units. */
+            /** An existing variant to charge for, prefixed `plan_`. Each variant may appear once — use `quantity` for multiple units. */
             plan_id: string;
-            /** How many units of the plan to purchase. Defaults to 1; more than 1 requires the plan to allow multiple quantities. */
+            /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
             quantity?: (number | null) | undefined;
         }
     }
 
     /**
-     * Find or create a plan for this payment. Mutually exclusive with `plan_id` and `line_items`. Creating a plan requires plan:create; creating or updating a product requires the corresponding product permission.
+     * Find or create a variant for this payment through the compatibility input `plan`. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission.
      */
     export interface Plan {
-        /** Application fee collected by the platform in the plan currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time plans or renewal price for recurring plans. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring plans. Only valid for connected accounts with a parent account. */
+        /** Application fee collected by the platform in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for connected accounts with a parent account. */
         application_fee_amount?: (number | null) | undefined;
         /** Recurring billing interval in days. */
         billing_period?: (number | null) | undefined;
-        /** Currency code for the plan prices. */
+        /** Currency code for the variant prices. */
         currency: Plan.Currency;
-        /** Plan description. */
+        /** Variant description. */
         description?: (string | null) | undefined;
         /** Days until access expires. */
         expiration_days?: (number | null) | undefined;
-        /** Create a new plan instead of reusing a matching plan. */
+        /** Create a new variant instead of reusing a matching variant. */
         force_create_new_plan?: (boolean | null) | undefined;
-        /** Additional amount charged on the first purchase, in the plan currency. For recurring plans without a trial, the first charge includes this amount plus renewal_price. */
+        /** Additional amount charged on the first purchase, in the variant currency. For recurring variants without a trial, the first charge includes this amount plus renewal_price. */
         initial_price?: (number | null) | undefined;
         /** Internal notes for the account. */
         internal_notes?: (string | null) | undefined;
-        /** Billing model for the plan. */
+        /** Billing model for the variant. */
         plan_type?: (Plan.PlanType | null) | undefined;
         /** Find or create a product by external identifier. Mutually exclusive with product_id. */
         product?: (Plan.Product | null) | undefined;
         /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
         product_id?: (string | null) | undefined;
-        /** Recurring price in the plan currency. */
+        /** Recurring price in the variant currency. */
         renewal_price?: (number | null) | undefined;
-        /** Plan title. */
+        /** Variant title. */
         title?: (string | null) | undefined;
         /** Free trial days before renewal. */
         trial_period_days?: (number | null) | undefined;
-        /** Whether the plan is visible to customers. */
+        /** Whether the variant is visible to customers. */
         visibility?: (Plan.Visibility | null) | undefined;
     }
 
     export namespace Plan {
-        /** Currency code for the plan prices. */
+        /** Currency code for the variant prices. */
         export const Currency = {
             Usd: "usd",
             Sgd: "sgd",
@@ -182,7 +182,7 @@ export namespace CreatePaymentsRequest {
             Xau: "xau",
         } as const;
         export type Currency = (typeof Currency)[keyof typeof Currency];
-        /** Billing model for the plan. */
+        /** Billing model for the variant. */
         export const PlanType = {
             Renewal: "renewal",
             OneTime: "one_time",
@@ -236,7 +236,7 @@ export namespace CreatePaymentsRequest {
             export type Visibility = (typeof Visibility)[keyof typeof Visibility];
         }
 
-        /** Whether the plan is visible to customers. */
+        /** Whether the variant is visible to customers. */
         export const Visibility = {
             Visible: "visible",
             Hidden: "hidden",

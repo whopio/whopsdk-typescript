@@ -3,34 +3,34 @@
 import type * as Whop from "../index.js";
 
 export interface ProductPublicPlan {
-    /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time plans. */
+    /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
-    /** Access duration in days for expiration-based plans. `null` for plans without an expiration. */
+    /** Access duration in days for expiration-based variants. `null` for variants without an expiration. */
     expiration_days: number | null;
-    /** Plan ID, prefixed `plan_`. */
+    /** Variant ID, prefixed `plan_`. */
     id: string;
     /** What checkout charges up front. `amount` is `"0.00"` when the first charge is free, such as a trial. */
     initial_price: Whop.Money;
-    /** Billing model for this plan: `one_time` or `renewal`. */
+    /** Billing model for this variant: `one_time` or `renewal`. */
     plan_type: ProductPublicPlan.PlanType;
-    /** The recurring charge every `billing_period` days. `amount` is `"0.00"` for one-time plans. */
+    /** The recurring charge every `billing_period` days. `amount` is `"0.00"` for one-time variants. */
     renewal_price: Whop.Money;
-    /** Plan display name shown to customers. `null` if no title has been set. */
+    /** Variant display name shown to customers. `null` if no title has been set. */
     title: string | null;
-    /** Whether the plan has unlimited stock. */
+    /** Whether the variant has unlimited stock. */
     unlimited_stock: boolean;
-    /** Where this plan can be seen. `visible` plans appear on the product page. */
+    /** Where this variant can be seen. `visible` variants appear on the product page. */
     visibility: ProductPublicPlan.Visibility;
 }
 
 export namespace ProductPublicPlan {
-    /** Billing model for this plan: `one_time` or `renewal`. */
+    /** Billing model for this variant: `one_time` or `renewal`. */
     export const PlanType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
     export type PlanType = (typeof PlanType)[keyof typeof PlanType];
-    /** Where this plan can be seen. `visible` plans appear on the product page. */
+    /** Where this variant can be seen. `visible` variants appear on the product page. */
     export const Visibility = {
         Visible: "visible",
         Hidden: "hidden",

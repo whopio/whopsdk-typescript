@@ -3,40 +3,24 @@
 /**
  * @example
  *     {
- *         id: "id",
- *         address: {
- *             country: "DE",
- *             postal_code: "10115"
- *         }
+ *         id: "id"
  *     }
  */
 export interface CalculateTaxPlansRequest {
-    /** Plan ID, prefixed `plan_`. */
+    /** Variant ID, prefixed `plan_`. */
     id: string;
-    /** Buyer billing address used for tax calculation. Provide either `address.country` or `ip_address`; include state and postal code when available for more accurate results. */
     address?: CalculateTaxPlansRequest.Address | null;
-    /** Buyer IP address used to infer location when no billing address is provided. */
     ip_address?: string;
-    /** Optional buyer tax ID for B2B exemptions. At most one entry is supported. */
     tax_ids?: CalculateTaxPlansRequest.TaxIds.Item[] | null;
 }
 
 export namespace CalculateTaxPlansRequest {
-    /**
-     * Buyer billing address used for tax calculation. Provide either `address.country` or `ip_address`; include state and postal code when available for more accurate results.
-     */
     export interface Address {
-        /** City name. */
         city?: (string | null) | undefined;
-        /** ISO 3166-1 alpha-2 country code, such as `US`, `DE`, or `GB`. */
         country: string;
-        /** First line of the street address. */
         line1?: (string | null) | undefined;
-        /** Second line of the street address. */
         line2?: (string | null) | undefined;
-        /** Postal or ZIP code. */
         postal_code?: (string | null) | undefined;
-        /** State, province, or region code, such as `CA`. */
         state?: (string | null) | undefined;
     }
 
@@ -44,14 +28,11 @@ export namespace CalculateTaxPlansRequest {
 
     export namespace TaxIds {
         export interface Item {
-            /** Tax ID type, such as `eu_vat` for an EU VAT number. */
             type?: Item.Type | undefined;
-            /** Tax ID value, for example `DE123456789`. */
             value?: string | undefined;
         }
 
         export namespace Item {
-            /** Tax ID type, such as `eu_vat` for an EU VAT number. */
             export const Type = {
                 AdNrt: "ad_nrt",
                 AoTin: "ao_tin",

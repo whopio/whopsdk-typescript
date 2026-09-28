@@ -7426,7 +7426,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a reusable checkout configuration for an existing or inline plan.
+Creates a reusable checkout configuration for an existing or inline variant.
 </dd>
 </dl>
 </dd>
@@ -15750,7 +15750,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Sends an email inviting one recipient to join the account through a free plan. Identify the recipient by exactly one of `user_id` or `email`. The invitation is bound to that recipient; after signing in, accepting it immediately grants the membership without checkout. This Experimental endpoint is available only to accounts enabled for membership invitations.
+Sends an email inviting one recipient to join the account through a free variant. Identify the recipient by exactly one of `user_id` or `email`. The invitation is bound to that recipient; after signing in, accepting it immediately grants the membership without checkout. This Experimental endpoint is available only to accounts enabled for membership invitations.
 </dd>
 </dl>
 </dd>
@@ -18962,7 +18962,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charges a buyer for one or more plans. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `line_items` for one or more plans with quantities, `plan_id` for an existing plan, or `plan` to find or create one inline. These inputs are mutually exclusive.
+Charges a buyer for one or more variants. Pass a payment method already on file (`member_id` and `payment_method_id`), or a `confirmation_token` describing a method the buyer just supplied. Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and, for a confirmation-token payment, what the buyer must still do. Pass `line_items` for one or more variants with quantities, `plan_id` for an existing variant, or the compatibility input `plan` to find or create one inline. These inputs are mutually exclusive.
 </dd>
 </dl>
 </dd>
@@ -19027,7 +19027,7 @@ await client.payments.create({
 <dl>
 <dd>
 
-Returns one payment, including every purchased line item with its quantity and subtotal. Related records are ids — resolve a plan, membership, member or shipment on its own endpoint, and list this payment's refunds, disputes or Resolution Center cases with `?payment_id=`.
+Returns one payment, including every purchased line item with its quantity and subtotal. Related records are ids — resolve a variant, membership, member or shipment on its own endpoint, and list this payment's refunds, disputes or Resolution Center cases with `?payment_id=`.
 </dd>
 </dl>
 </dd>
@@ -19287,7 +19287,7 @@ await client.payments.refund({
 <dl>
 <dd>
 
-Retries a failed or pending payment. This re-attempts the charge using the original payment method and plan details.
+Retries a failed or pending payment. This re-attempts the charge using the original payment method and variant details.
 </dd>
 </dl>
 </dd>
@@ -20389,7 +20389,7 @@ await client.permissions.list({
 <dl>
 <dd>
 
-Returns a paginated list of plans. Omit `account_id` and pass `product_ids` to list a product's public buyable plans.
+Deprecated compatibility endpoint. List variants with `GET /variants` instead.
 </dd>
 </dl>
 </dd>
@@ -20404,23 +20404,13 @@ Returns a paginated list of plans. Omit `account_id` and pass `product_ids` to l
 <dd>
 
 ```typescript
-const pageableResponse = await client.plans.list({
-    release_methods: ["buy_now"],
-    visibilities: ["visible"],
-    plan_types: ["renewal"],
-    product_ids: ["prod_xxxxxxxxxxxxxx"]
-});
+const pageableResponse = await client.plans.list();
 for await (const item of pageableResponse) {
     console.log(item);
 }
 
 // Or you can manually iterate page-by-page
-let page = await client.plans.list({
-    release_methods: ["buy_now"],
-    visibilities: ["visible"],
-    plan_types: ["renewal"],
-    product_ids: ["prod_xxxxxxxxxxxxxx"]
-});
+let page = await client.plans.list();
 while (page.hasNextPage()) {
     page = page.getNextPage();
 }
@@ -20474,7 +20464,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new pricing plan for a product. The plan defines the billing interval, price, and availability for customers.
+Deprecated compatibility endpoint. Create variants with `POST /variants` instead.
 </dd>
 </dl>
 </dd>
@@ -20537,7 +20527,7 @@ await client.plans.create();
 <dl>
 <dd>
 
-Retrieves the details of an existing plan.
+Deprecated compatibility endpoint. Retrieve variants with `GET /variants/{id}` instead.
 </dd>
 </dl>
 </dd>
@@ -20602,7 +20592,7 @@ await client.plans.retrieve({
 <dl>
 <dd>
 
-Delete a plan from a product. It stops selling immediately; existing memberships on this plan will not be affected.
+Deprecated compatibility endpoint. Delete variants with `DELETE /variants/{id}` instead.
 </dd>
 </dl>
 </dd>
@@ -20667,7 +20657,7 @@ await client.plans.delete({
 <dl>
 <dd>
 
-Update a plan's pricing, billing interval, visibility, stock, and other settings.
+Deprecated compatibility endpoint. Update variants with `PATCH /variants/{id}` instead.
 </dd>
 </dl>
 </dd>
@@ -20732,7 +20722,7 @@ await client.plans.update({
 <dl>
 <dd>
 
-Previews tax for a plan before checkout, based on the buyer's location.
+Deprecated compatibility endpoint. Preview variant tax with `POST /variants/{id}/calculate_tax` instead.
 </dd>
 </dl>
 </dd>
@@ -20748,11 +20738,7 @@ Previews tax for a plan before checkout, based on the buyer's location.
 
 ```typescript
 await client.plans.calculateTax({
-    id: "id",
-    address: {
-        country: "DE",
-        postal_code: "10115"
-    }
+    id: "id"
 });
 
 ```
@@ -26244,6 +26230,419 @@ await client.users.recommendActions({
 </dl>
 </details>
 
+## Variants
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.VariantListItem, Whop.ListVariantsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a paginated list of variants. Omit `account_id` and pass `product_ids` to list a product's public buyable variants.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.variants.list({
+    release_methods: ["buy_now"],
+    visibilities: ["visible"],
+    plan_types: ["renewal"],
+    product_ids: ["prod_xxxxxxxxxxxxxx"]
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.variants.list({
+    release_methods: ["buy_now"],
+    visibilities: ["visible"],
+    plan_types: ["renewal"],
+    product_ids: ["prod_xxxxxxxxxxxxxx"]
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">create</a>({ ...params }) -> Whop.Variant</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new pricing variant for a product. The variant defines the billing interval, price, and availability for customers.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.variants.create();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CreateVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">retrieve</a>({ ...params }) -> Whop.Variant</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves the details of an existing variant.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.variants.retrieve({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.RetrieveVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">delete</a>({ ...params }) -> Whop.DeleteVariantsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete a variant from a product. It stops selling immediately; existing memberships on this variant will not be affected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.variants.delete({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.DeleteVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">update</a>({ ...params }) -> Whop.Variant</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update a variant's pricing, billing interval, visibility, stock, and other settings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.variants.update({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdateVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.variants.<a href="/src/api/resources/variants/client/Client.ts">calculateTax</a>({ ...params }) -> Whop.CalculateTaxVariantsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Previews tax for a variant before checkout, based on the buyer's location.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.variants.calculateTax({
+    id: "id",
+    address: {
+        country: "DE",
+        postal_code: "10115"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.CalculateTaxVariantsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `VariantsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Verifications
 <details><summary><code>client.verifications.<a href="/src/api/resources/verifications/client/Client.ts">list</a>({ ...params }) -> Whop.ListVerificationsResponse</code></summary>
 <dl>
@@ -26594,7 +26993,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Joins a free waitlist plan as the authenticated user. Requires waitlist_entry:create. Repeated joins return the existing pending entry, or an approved entry with a valid membership. Paid plans are rejected; no payment method is collected and no membership is granted.
+Joins a free waitlist variant as the authenticated user. Requires waitlist_entry:create. Repeated joins return the existing pending entry, or an approved entry with a valid membership. Paid variants are rejected; no payment method is collected and no membership is granted.
 </dd>
 </dl>
 </dd>
@@ -26659,7 +27058,7 @@ await client.waitlistEntries.create({
 <dl>
 <dd>
 
-Queues approval of every pending signup for an account, optionally narrowed to a plan. Requires plan:waitlist:manage. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
+Queues approval of every pending signup for an account, optionally narrowed to a variant. Requires plan:waitlist:manage. Paid signups may charge saved payment methods. Approval runs asynchronously: list signups with `status` set to `pending` to follow progress, and retrieve a signup to read its outcome. Signups created after this request are excluded.
 </dd>
 </dl>
 </dd>
@@ -28903,7 +29302,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Charges a buyer for a plan from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and what the buyer must still do, such as 3D Secure.
+Charges a buyer for a variant from card details the caller holds itself, for integrators whose own systems are PCI compliant. Card details are accepted only on the vault host, where the card is tokenized before it reaches Whop; the official SDKs route this operation there, and raw card details sent to the regular host are refused. (Whop's own clients, which tokenize with the Basis Theory SDK, send the resulting token intent id to the regular host.) Collection runs in the background: the response is the payment as created, not its outcome — poll Retrieve status for how far it has got and what the buyer must still do, such as 3D Secure.
 </dd>
 </dl>
 </dd>

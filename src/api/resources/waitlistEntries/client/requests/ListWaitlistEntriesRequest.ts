@@ -15,11 +15,11 @@ export interface ListWaitlistEntriesRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
-    /** Only return signups for this plan, prefixed `plan_`. */
+    /** Only return signups for this variant, prefixed `plan_`. */
     plan_id?: string;
     /** Only return signups submitted to this seller account, prefixed `biz_`. */
     account_id?: string;
-    /** Only return signups for plans on this product, prefixed `prod_`. */
+    /** Only return signups for variants on this product, prefixed `prod_`. */
     product_id?: string;
     /** Only return signups in this state. Canceled signups are returned only when `status` is `canceled`. */
     status?: Whop.ListWaitlistEntriesRequestStatus;

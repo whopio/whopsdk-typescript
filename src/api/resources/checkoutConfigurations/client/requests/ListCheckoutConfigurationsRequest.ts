@@ -11,7 +11,7 @@ import type * as Whop from "../../../../index.js";
 export interface ListCheckoutConfigurationsRequest {
     /** Account ID, prefixed `biz_`. */
     account_id: string;
-    /** Only return checkout configurations for this plan ID, prefixed `plan_`. */
+    /** Only return checkout configurations for this variant ID, prefixed `plan_`. */
     plan_id?: string;
     /** Only return checkout configurations created before this ISO 8601 timestamp. */
     created_before?: string;

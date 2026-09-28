@@ -17,9 +17,9 @@ export declare namespace PlansClient {
 }
 
 /**
- * A Plan defines how customers buy a product. It controls pricing, billing cadence, availability, tax behavior, checkout fields, and purchase visibility.
+ * Plans is the former public name for Variants. Existing integrations can keep calling these deprecated endpoints while they migrate; every response points to the matching Variants endpoint.
  *
- * Use the Plans API to create plans for products, list existing plans, retrieve or update plan configuration, calculate tax for checkout, and delete plans that should no longer be offered.
+ * Use the Variants API for all new integrations. Variant IDs retain their existing `plan_` prefix, and the underlying resource is unchanged.
  */
 export class PlansClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<PlansClient.Options>;
@@ -29,23 +29,18 @@ export class PlansClient {
     }
 
     /**
-     * Returns a paginated list of plans. Omit `account_id` and pass `product_ids` to list a product's public buyable plans.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. List variants with `GET /variants` instead.
      *
      * @param {Whop.ListPlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.plans.list({
-     *         release_methods: ["buy_now"],
-     *         visibilities: ["visible"],
-     *         plan_types: ["renewal"],
-     *         product_ids: ["prod_xxxxxxxxxxxxxx"]
-     *     })
+     *     await client.plans.list()
      */
     public async list(
         request: Whop.ListPlansRequest = {},
@@ -120,18 +115,11 @@ export class PlansClient {
                     return { data: _response.body as Whop.ListPlansResponse, rawResponse: _response.rawResponse };
                 }
                 if (_response.error.reason === "status-code") {
-                    switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                        case 401:
-                            throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                        default:
-                            throw new errors.WhopError({
-                                statusCode: _response.error.statusCode,
-                                body: _response.error.body,
-                                rawResponse: _response.rawResponse,
-                            });
-                    }
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
                 }
                 return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/plans");
             },
@@ -151,13 +139,13 @@ export class PlansClient {
     }
 
     /**
-     * Create a new pricing plan for a product. The plan defines the billing interval, price, and availability for customers.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Create variants with `POST /variants` instead.
      *
      * @param {Whop.CreatePlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
      * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -211,10 +199,6 @@ export class PlansClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:
@@ -230,12 +214,13 @@ export class PlansClient {
     }
 
     /**
-     * Retrieves the details of an existing plan.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Retrieve variants with `GET /variants/{id}` instead.
      *
      * @param {Whop.RetrievePlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -287,28 +272,24 @@ export class PlansClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/plans/{id}");
     }
 
     /**
-     * Delete a plan from a product. It stops selling immediately; existing memberships on this plan will not be affected.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Delete variants with `DELETE /variants/{id}` instead.
      *
      * @param {Whop.DeletePlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -360,28 +341,24 @@ export class PlansClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "DELETE", "/plans/{id}");
     }
 
     /**
-     * Update a plan's pricing, billing interval, visibility, stock, and other settings.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Update variants with `PATCH /variants/{id}` instead.
      *
      * @param {Whop.UpdatePlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.UnauthorizedError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -436,42 +413,31 @@ export class PlansClient {
         }
 
         if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                default:
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
+            throw new errors.WhopError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/plans/{id}");
     }
 
     /**
-     * Previews tax for a plan before checkout, based on the buyer's location.
+     * @deprecated
+     *
+     * Deprecated compatibility endpoint. Preview variant tax with `POST /variants/{id}/calculate_tax` instead.
      *
      * @param {Whop.CalculateTaxPlansRequest} request
      * @param {PlansClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Whop.BadRequestError}
-     * @throws {@link Whop.UnauthorizedError}
-     * @throws {@link Whop.ForbiddenError}
-     * @throws {@link Whop.NotFoundError}
      * @throws {@link Whop.ConflictError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
      *     await client.plans.calculateTax({
-     *         id: "id",
-     *         address: {
-     *             country: "DE",
-     *             postal_code: "10115"
-     *         }
+     *         id: "id"
      *     })
      */
     public calculateTax(
@@ -521,14 +487,6 @@ export class PlansClient {
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
-                case 400:
-                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
-                case 401:
-                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
-                case 403:
-                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                case 404:
-                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 409:
                     throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
                 default:

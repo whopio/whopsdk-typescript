@@ -7,11 +7,11 @@
  *     }
  */
 export interface CreateWaitlistEntriesRequest {
-    /** Answers to the plan's checkout questions. Every required question must be answered. */
+    /** Answers to the variant's checkout questions. Every required question must be answered. */
     custom_field_responses?: CreateWaitlistEntriesRequest.CustomFieldResponses.Item[];
     /** Custom key-value pairs to store on the signup. Max 50 keys, 100 chars per key, 500 chars per string value. Ignored when the request returns an existing signup. */
     metadata?: Record<string, unknown>;
-    /** The free waitlist plan to join, prefixed `plan_`. */
+    /** The free waitlist variant to join, prefixed `plan_`. */
     plan_id: string;
 }
 

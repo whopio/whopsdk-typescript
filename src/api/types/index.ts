@@ -499,6 +499,8 @@ export * from "./UserRecommendedAction.js";
 export * from "./UserStaffAccess.js";
 export * from "./UserSummary.js";
 export * from "./V1ErrorResponse.js";
+export * from "./Variant.js";
+export * from "./VariantListItem.js";
 export * from "./Verification.js";
 export * from "./VerificationErrorCodes.js";
 export * from "./VerificationListItem.js";
