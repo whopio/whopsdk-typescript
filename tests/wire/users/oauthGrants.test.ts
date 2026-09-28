@@ -139,8 +139,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "app_xxxxxxxxxxxxxx",
-            code_challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            code_challenge_method: "S256",
             redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
             requested_scopes: ["profile"],
         };
@@ -166,8 +164,6 @@ describe("OauthGrantsClient", () => {
 
         const response = await client.users.oauthGrants.create({
             client_id: "app_xxxxxxxxxxxxxx",
-            code_challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            code_challenge_method: "S256",
             redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
             requested_scopes: ["profile"],
         });
@@ -185,8 +181,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "client_id",
-            code_challenge: "code_challenge",
-            code_challenge_method: "S256",
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
@@ -204,8 +198,6 @@ describe("OauthGrantsClient", () => {
         await expect(async () => {
             return await client.users.oauthGrants.create({
                 client_id: "client_id",
-                code_challenge: "code_challenge",
-                code_challenge_method: "S256",
                 redirect_uri: "redirect_uri",
                 requested_scopes: ["requested_scopes", "requested_scopes"],
             });
@@ -223,8 +215,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "client_id",
-            code_challenge: "code_challenge",
-            code_challenge_method: "S256",
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
@@ -242,8 +232,6 @@ describe("OauthGrantsClient", () => {
         await expect(async () => {
             return await client.users.oauthGrants.create({
                 client_id: "client_id",
-                code_challenge: "code_challenge",
-                code_challenge_method: "S256",
                 redirect_uri: "redirect_uri",
                 requested_scopes: ["requested_scopes", "requested_scopes"],
             });
@@ -261,8 +249,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "client_id",
-            code_challenge: "code_challenge",
-            code_challenge_method: "S256",
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
@@ -280,8 +266,6 @@ describe("OauthGrantsClient", () => {
         await expect(async () => {
             return await client.users.oauthGrants.create({
                 client_id: "client_id",
-                code_challenge: "code_challenge",
-                code_challenge_method: "S256",
                 redirect_uri: "redirect_uri",
                 requested_scopes: ["requested_scopes", "requested_scopes"],
             });
@@ -299,8 +283,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "client_id",
-            code_challenge: "code_challenge",
-            code_challenge_method: "S256",
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
@@ -318,8 +300,6 @@ describe("OauthGrantsClient", () => {
         await expect(async () => {
             return await client.users.oauthGrants.create({
                 client_id: "client_id",
-                code_challenge: "code_challenge",
-                code_challenge_method: "S256",
                 redirect_uri: "redirect_uri",
                 requested_scopes: ["requested_scopes", "requested_scopes"],
             });
@@ -337,8 +317,6 @@ describe("OauthGrantsClient", () => {
         });
         const rawRequestBody = {
             client_id: "client_id",
-            code_challenge: "code_challenge",
-            code_challenge_method: "S256",
             redirect_uri: "redirect_uri",
             requested_scopes: ["requested_scopes", "requested_scopes"],
         };
@@ -356,8 +334,6 @@ describe("OauthGrantsClient", () => {
         await expect(async () => {
             return await client.users.oauthGrants.create({
                 client_id: "client_id",
-                code_challenge: "code_challenge",
-                code_challenge_method: "S256",
                 redirect_uri: "redirect_uri",
                 requested_scopes: ["requested_scopes", "requested_scopes"],
             });

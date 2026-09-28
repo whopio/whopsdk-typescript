@@ -134,7 +134,7 @@ export class OauthGrantsClient {
     }
 
     /**
-     * Completes the OAuth authorization step for the authenticated user: records their consent for the scopes an app asked for and mints the authorization code to hand back to it. Returns the grant, plus a `redirect_url` carrying that code — the one and only time it is returned. Exchange the code at `POST /oauth/token` with the verifier for `code_challenge`. Requires a user session, because consent has to come from the account holder: an API key or an OAuth token is refused, so an app can never authorize itself. Send an `Idempotency-Key` to make a retry safe — a replay returns the original `redirect_url` and its code rather than issuing a second one.
+     * Completes the OAuth authorization step for the authenticated user: records their consent for the scopes an app asked for and mints the authorization code to hand back to it. Returns the grant, plus a `redirect_url` carrying that code — the one and only time it is returned. Exchange the code at `POST /oauth/token` with the verifier for `code_challenge`, or with the app's secret when a confidential app sent none. Requires a user session, because consent has to come from the account holder: an API key or an OAuth token is refused, so an app can never authorize itself. Send an `Idempotency-Key` to make a retry safe — a replay returns the original `redirect_url` and its code rather than issuing a second one.
      *
      * @param {Whop.users.CreateOauthGrantsRequest} request
      * @param {OauthGrantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -150,8 +150,6 @@ export class OauthGrantsClient {
      * @example
      *     await client.users.oauthGrants.create({
      *         client_id: "app_xxxxxxxxxxxxxx",
-     *         code_challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-     *         code_challenge_method: "S256",
      *         redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
      *         requested_scopes: ["profile"]
      *     })
