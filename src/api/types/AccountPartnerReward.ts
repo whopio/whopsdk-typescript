@@ -11,7 +11,7 @@ export interface AccountPartnerReward {
     qualification_progress: Whop.Money;
     /** Activity that qualifies this account for the reward. */
     qualification_type: AccountPartnerReward.QualificationType;
-    /** USD balance credit for this reward. Uses the saved grant amount once fulfillment has started. */
+    /** USD amount credited for this reward. Uses the saved grant amount once fulfillment has started. */
     reward_amount: Whop.Money;
     /** This account's reward state. Credited requires a posted ledger entry; processing includes a met requirement awaiting fulfillment. Reversing and reversed reflect a subsequent reward reversal. */
     status: AccountPartnerReward.Status;
