@@ -328,6 +328,91 @@ export class PaymentsClient {
     }
 
     /**
+     * Changes a payment's shipping address or return URL, such as when a buyer corrects where their order should go before it ships. `shipping_address` is replaced as a whole, never merged: always send the complete address, including fields that are not changing, or they are cleared. Only `shipping_address` and `return_url` can be changed, and any other field is rejected. Omit either one to leave it unchanged.
+     *
+     * @param {Whop.UpdatePaymentsRequest} request
+     * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.payments.update({
+     *         id: "id"
+     *     })
+     */
+    public update(
+        request: Whop.UpdatePaymentsRequest,
+        requestOptions?: PaymentsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Payment> {
+        return core.HttpResponsePromise.fromPromise(this.__update(request, requestOptions));
+    }
+
+    private async __update(
+        request: Whop.UpdatePaymentsRequest,
+        requestOptions?: PaymentsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Payment>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-25",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `payments/${core.url.encodePathParam(id)}`,
+            ),
+            method: "PATCH",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Payment, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 404:
+                    throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/payments/{id}");
+    }
+
+    /**
      * Captures the full amount of a card payment created with `capture: false`. The payment must still be in `requires_capture` before `capture_expires_at`. Partial capture, multiple captures, capturing more than the authorized amount, and tips are not supported.
      *
      * @param {Whop.CapturePaymentsRequest} request
