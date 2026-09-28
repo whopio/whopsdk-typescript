@@ -4,8 +4,6 @@
  * @example
  *     {
  *         client_id: "app_xxxxxxxxxxxxxx",
- *         code_challenge: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
- *         code_challenge_method: "S256",
  *         redirect_uri: "https://Booking.Shinetime.example:8443/oauth/Callback/",
  *         requested_scopes: ["profile"]
  *     }
@@ -15,10 +13,10 @@ export interface CreateOauthGrantsRequest {
     account_id?: string;
     /** The app being authorized, prefixed `app_`. */
     client_id: string;
-    /** The PKCE code challenge: the base64url-encoded SHA-256 of your code verifier, without padding. */
-    code_challenge: string;
-    /** How `code_challenge` was derived. Only `S256` is accepted. */
-    code_challenge_method: CreateOauthGrantsRequest.CodeChallengeMethod;
+    /** The PKCE code challenge: the base64url-encoded SHA-256 of your code verifier, without padding. Required unless the app is confidential; a confidential app that leaves it out redeems the code with its secret instead of a verifier. */
+    code_challenge?: string;
+    /** How `code_challenge` was derived. Only `S256` is accepted. Required with `code_challenge`. */
+    code_challenge_method?: CreateOauthGrantsRequest.CodeChallengeMethod;
     /** Whether the consent UI listed these scopes for the user. Sending `false` succeeds only when the user has already granted every scope requested. */
     consent_shown?: boolean;
     /** OIDC nonce, echoed into the resulting ID token. Required when `requested_scopes` includes `openid`. */
@@ -34,7 +32,7 @@ export interface CreateOauthGrantsRequest {
 }
 
 export namespace CreateOauthGrantsRequest {
-    /** How `code_challenge` was derived. Only `S256` is accepted. */
+    /** How `code_challenge` was derived. Only `S256` is accepted. Required with `code_challenge`. */
     export const CodeChallengeMethod = {
         S256: "S256",
     } as const;
