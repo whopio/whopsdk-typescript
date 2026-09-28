@@ -31,6 +31,7 @@ describe("SocialAccountsClient", () => {
                         username: "shinetimedetailing",
                         verified: true,
                     },
+                    partnership_status: "pending",
                     platform: "x",
                     profile_picture_url: "https://shinetime.example/logo.png",
                     scopes: ["advertise"],
@@ -126,6 +127,7 @@ describe("SocialAccountsClient", () => {
                 username: "shinetimedetailing",
                 verified: true,
             },
+            partnership_status: "pending",
             platform: "x",
             profile_picture_url: "https://shinetime.example/logo.png",
             scopes: ["advertise"],
@@ -672,6 +674,459 @@ describe("SocialAccountsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("partners (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = {
+            data: [
+                {
+                    error: null,
+                    external_id: null,
+                    id: "sacc_xxxxxxxxxxxxxx",
+                    name: "Luvera",
+                    parent_social_account: null,
+                    partnership_status: "pending",
+                    platform: "instagram",
+                    profile_picture_url: "https://img.whop.com/sacc_xxxxxxxxxxxxxx.png",
+                    scopes: ["partner"],
+                    url: "https://instagram.com/luverahealth",
+                    username: "luverahealth",
+                    verified: false,
+                },
+            ],
+            page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: null },
+        };
+
+        server
+            .mockEndpoint()
+            .get("/social_accounts/id/partners")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const expected = rawResponseBody;
+        const page = await client.socialAccounts.partners({
+            id: "id",
+        });
+
+        expect(expected.data).toEqual(page.data);
+    });
+
+    test("partners (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/social_accounts/id/partners")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.partners({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("partners (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/social_accounts/id/partners")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.partners({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("partners (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/social_accounts/id/partners")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.partners({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("addPartner (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "@luverahealth" };
+        const rawResponseBody = {
+            error: null,
+            external_id: null,
+            id: "sacc_xxxxxxxxxxxxxx",
+            name: "Luvera",
+            parent_social_account: null,
+            partnership_status: "pending",
+            platform: "instagram",
+            profile_picture_url: "https://img.whop.com/sacc_xxxxxxxxxxxxxx.png",
+            scopes: ["partner"],
+            url: "https://instagram.com/luverahealth",
+            username: "luverahealth",
+            verified: false,
+        };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.socialAccounts.addPartner({
+            id: "id",
+            username: "@luverahealth",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("addPartner (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("addPartner (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("addPartner (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("addPartner (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
+    test("addPartner (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
+    test("addPartner (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { username: "username" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/social_accounts/id/partners")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(429)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.addPartner({
+                id: "id",
+                username: "username",
+            });
+        }).rejects.toThrow(Whop.TooManyRequestsError);
+    });
+
+    test("removePartner (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { deleted: true, id: "sacc_xxxxxxxxxxxxxx" };
+
+        server
+            .mockEndpoint()
+            .delete("/social_accounts/id/partners/partner_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.socialAccounts.removePartner({
+            id: "id",
+            partner_id: "partner_id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("removePartner (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/social_accounts/id/partners/partner_id")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.removePartner({
+                id: "id",
+                partner_id: "partner_id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("removePartner (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/social_accounts/id/partners/partner_id")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.removePartner({
+                id: "id",
+                partner_id: "partner_id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("removePartner (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/social_accounts/id/partners/partner_id")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.socialAccounts.removePartner({
+                id: "id",
+                partner_id: "partner_id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
     test("posts (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -827,6 +1282,7 @@ describe("SocialAccountsClient", () => {
                 username: "shinetimedetailing",
                 verified: true,
             },
+            partnership_status: "pending",
             platform: "x",
             profile_picture_url: "https://shinetime.example/logo.png",
             scopes: ["advertise"],
