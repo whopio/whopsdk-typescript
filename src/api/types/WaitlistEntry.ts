@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface WaitlistEntry {
     /** The seller account, prefixed `biz_`. */
     account_id: string;
-    /** Why the last approval attempt failed, or `null` when none has. `plan_unavailable` — the plan, product, or seller account was deleted. `already_member` — the user already has a membership on a one-per-user product. `checkout_failed` — checkout failed, usually a declined payment, and the signup was denied. `unknown` — another failure; retry. Cleared when approval is requeued. */
+    /** Why the last approval attempt failed, or `null` when none has. `plan_unavailable` — the variant, product, or seller account was deleted. `already_member` — the user already has a membership on a one-per-user product. `checkout_failed` — checkout failed, usually a declined payment, and the signup was denied. `unknown` — another failure; retry. Cleared when approval is requeued. */
     approval_failure_reason: WaitlistEntry.ApprovalFailureReason | null;
     /** The account the signup was submitted on behalf of, prefixed `biz_`, or `null` when the user signed up for themselves. */
     buyer_account_id: string | null;
@@ -18,9 +18,9 @@ export interface WaitlistEntry {
     membership_id: string | null;
     /** Custom key-value metadata associated with this signup. */
     metadata: Record<string, unknown>;
-    /** The plan this signup belongs to, prefixed `plan_`. */
+    /** The variant this signup belongs to, prefixed `plan_`. */
     plan_id: string;
-    /** The product this signup belongs to, prefixed `prod_`, or `null` when the plan has no product. */
+    /** The product this signup belongs to, prefixed `prod_`, or `null` when the variant has no product. */
     product_id: string | null;
     /** The signup's current state. Approval runs asynchronously, so a signup stays `pending` until processing completes. `approved` alone does not prove an active membership; check `membership_id`. */
     status: WaitlistEntry.Status;
@@ -31,7 +31,7 @@ export interface WaitlistEntry {
 }
 
 export namespace WaitlistEntry {
-    /** Why the last approval attempt failed, or `null` when none has. `plan_unavailable` — the plan, product, or seller account was deleted. `already_member` — the user already has a membership on a one-per-user product. `checkout_failed` — checkout failed, usually a declined payment, and the signup was denied. `unknown` — another failure; retry. Cleared when approval is requeued. */
+    /** Why the last approval attempt failed, or `null` when none has. `plan_unavailable` — the variant, product, or seller account was deleted. `already_member` — the user already has a membership on a one-per-user product. `checkout_failed` — checkout failed, usually a declined payment, and the signup was denied. `unknown` — another failure; retry. Cleared when approval is requeued. */
     export const ApprovalFailureReason = {
         PlanUnavailable: "plan_unavailable",
         AlreadyMember: "already_member",

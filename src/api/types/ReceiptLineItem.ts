@@ -3,15 +3,15 @@
 import type * as Whop from "../index.js";
 
 export interface ReceiptLineItem {
-    /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's plan. */
+    /** Line item ID, prefixed `li_`. Null when the payment predates item snapshots and the item is read from the payment's variant. */
     id: string | null;
-    /** The item's name as shown at checkout — the product title, else the plan title. */
+    /** The item's name as shown at checkout — the product title, else the variant title. */
     label: string | null;
-    /** The plan bought, prefixed `plan_`. Null when the plan has since been deleted. */
+    /** The variant bought, prefixed `plan_`. Null when the variant has since been deleted. */
     plan_id: string | null;
-    /** The plan's current title, or `null` when the plan has been deleted or has no title. */
+    /** The variant's current title, or `null` when the variant has been deleted or has no title. */
     plan_title: string | null;
-    /** The product the plan belongs to, prefixed `prod_`. On a payment that predates item snapshots this falls back to the plan's product, so it can be set where the parent's own `product_id` is null. Null for a plan with no product. */
+    /** The product the variant belongs to, prefixed `prod_`. On a payment that predates item snapshots this falls back to the variant's product, so it can be set where the parent's own `product_id` is null. Null for a variant with no product. */
     product_id: string | null;
     /** The product's current title, or `null` when the item has no product. */
     product_title: string | null;

@@ -3,7 +3,7 @@
 export interface ApproveAllWaitlistEntriesResponse {
     /** The seller account whose signups were queued, prefixed `biz_`. */
     account_id: string;
-    /** The plan the request was narrowed to, prefixed `plan_`, or `null` when every waitlist plan on the account was included. */
+    /** The variant the request was narrowed to, prefixed `plan_`, or `null` when every waitlist variant on the account was included. */
     plan_id: string | null;
     /** Whether any pending signups were queued for approval. `false` when there were none. */
     queued: boolean;

@@ -17,9 +17,9 @@ export declare namespace CheckoutConfigurationsClient {
 }
 
 /**
- * A Checkout Configuration is a reusable checkout link owned by an account. In `payment` mode it sells a specific plan; in `setup` mode it collects and saves payment details without charging. Each configuration can also override which payment methods are accepted and how 3D Secure is enforced for that checkout.
+ * A Checkout Configuration is a reusable checkout link owned by an account. In `payment` mode it sells a specific variant; in `setup` mode it collects and saves payment details without charging. Each configuration can also override which payment methods are accepted and how 3D Secure is enforced for that checkout.
  *
- * Use the Checkout Configurations API to create checkout links for an existing or inline plan, list configurations for an account, retrieve the configuration behind a checkout URL, and delete links that should no longer be used.
+ * Use the Checkout Configurations API to create checkout links for an existing or inline variant, list configurations for an account, retrieve the configuration behind a checkout URL, and delete links that should no longer be used.
  */
 export class CheckoutConfigurationsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<CheckoutConfigurationsClient.Options>;
@@ -151,7 +151,7 @@ export class CheckoutConfigurationsClient {
     }
 
     /**
-     * Creates a reusable checkout configuration for an existing or inline plan.
+     * Creates a reusable checkout configuration for an existing or inline variant.
      *
      * @param {Whop.CreateCheckoutConfigurationsRequest} request
      * @param {CheckoutConfigurationsClient.RequestOptions} requestOptions - Request-specific configuration.

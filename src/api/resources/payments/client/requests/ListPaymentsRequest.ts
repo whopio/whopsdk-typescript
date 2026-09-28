@@ -25,7 +25,7 @@ export interface ListPaymentsRequest {
     membership_id?: string;
     /** Only payments for this product, prefixed `prod_`. */
     product_id?: string;
-    /** Only payments priced by this plan, prefixed `plan_`. */
+    /** Only payments priced by this variant, prefixed `plan_`. */
     plan_id?: string;
     /** Only payments created before this ISO 8601 timestamp. */
     created_before?: string;

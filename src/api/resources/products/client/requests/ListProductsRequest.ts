@@ -16,11 +16,11 @@ export interface ListProductsRequest {
     query?: string;
     /** Only return marketplace products assigned to this category route, such as `trading`. */
     marketplace_category_route?: string;
-    /** Filter to products with a buyable plan of these billing models, such as `one_time` or `renewal`. */
+    /** Filter to products with a buyable variant of these billing models, such as `one_time` or `renewal`. */
     plan_types?: Whop.ListProductsRequestPlanTypesItem | Whop.ListProductsRequestPlanTypesItem[];
-    /** Only return products whose advertised buyable plan has a displayed price of at least this amount. Recurring plans use renewal price. */
+    /** Only return products whose advertised buyable variant has a displayed price of at least this amount. Recurring variants use renewal price. */
     price_minimum?: number;
-    /** Only return products whose advertised buyable plan has a displayed price of at most this amount. Recurring plans use renewal price. */
+    /** Only return products whose advertised buyable variant has a displayed price of at most this amount. Recurring variants use renewal price. */
     price_maximum?: number;
     /** Filter to only products matching these visibility states. Ignored on the public marketplace list, which only returns visible products. */
     visibilities?: string | string[];

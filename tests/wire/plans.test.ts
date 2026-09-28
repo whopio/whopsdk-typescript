@@ -5,7 +5,7 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("PlansClient", () => {
-    test("list (1)", async () => {
+    test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -20,16 +20,11 @@ describe("PlansClient", () => {
                 {
                     account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
                     adaptive_pricing_enabled: true,
-                    attributes: { color: "Blue", size: "S" },
+                    attributes: {},
                     billing_period: 30,
-                    cancel_discount_intervals: 3,
-                    cancel_discount_percentage: 20,
-                    checkout_styling: {
-                        background_color: "#0f172a",
-                        border_style: "rounded",
-                        button_color: "#f59e0b",
-                        font_family: "roboto",
-                    },
+                    cancel_discount_intervals: 1.1,
+                    cancel_discount_percentage: 1.1,
+                    checkout_styling: { key: "value" },
                     created_at: "2026-01-01T12:00:00.000Z",
                     currency: "usd",
                     custom_fields: [
@@ -42,39 +37,32 @@ describe("PlansClient", () => {
                             required: true,
                         },
                     ],
-                    description: "Two hand washes a month, interior vacuum, and a quarterly sealant top-up.",
-                    expiration_days: 365,
+                    description: "description",
+                    expiration_days: 1.1,
                     formatted_price: "$59.00 / month",
                     id: "plan_xxxxxxxxxxxxxx",
-                    image: {
-                        blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
-                        url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                    },
+                    image: { key: "value" },
                     initial_price: 0,
                     initial_price_due: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
                     internal_notes: "Maintenance tier. Upsell the interior shampoo add-on at renewal.",
-                    invoice: { id: "inv_xxxxxxxxxxxxxx" },
+                    invoice: { key: "value" },
                     member_count: 0,
                     metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
-                    offer_cancel_discount: true,
-                    payment_method_configuration: {
-                        disabled: ["crypto"],
-                        enabled: ["card"],
-                        include_platform_defaults: true,
-                    },
+                    offer_cancel_discount: false,
+                    payment_method_configuration: { key: "value" },
                     plan_type: "renewal",
                     product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
                     purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
                     release_method: "buy_now",
                     renewal_price: 59,
-                    sku: "CERAMIC-COATING-S-BLUE",
-                    split_pay_required_payments: 4,
+                    sku: "sku",
+                    split_pay_required_payments: 1.1,
                     stock: 0,
-                    strike_through_initial_price: 99,
-                    strike_through_renewal_price: 79,
+                    strike_through_initial_price: 1.1,
+                    strike_through_renewal_price: 1.1,
                     three_ds_level: "mandate_challenge",
                     title: "Unlimited Wash Club",
-                    trial_period_days: 7,
+                    trial_period_days: 1.1,
                     unlimited_stock: false,
                     updated_at: "2026-01-01T12:00:00.000Z",
                     visibility: "visible",
@@ -97,55 +85,12 @@ describe("PlansClient", () => {
             .build();
 
         const expected = rawResponseBody;
-        const page = await client.plans.list({
-            release_methods: ["buy_now"],
-            visibilities: ["visible"],
-            plan_types: ["renewal"],
-            product_ids: ["prod_xxxxxxxxxxxxxx"],
-        });
+        const page = await client.plans.list();
 
         expect(expected.data).toEqual(page.data);
         expect(page.hasNextPage()).toBe(true);
         const nextPage = await page.getNextPage();
         expect(expected.data).toEqual(nextPage.data);
-    });
-
-    test("list (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/plans").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.plans.list();
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("list (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/plans").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.plans.list();
-        }).rejects.toThrow(Whop.UnauthorizedError);
     });
 
     test("create (1)", async () => {
@@ -161,17 +106,12 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
-            attributes: { color: "Blue", size: "Large" },
+            attributes: { key: "value" },
             billing_period: 30,
-            cancel_discount_intervals: 3,
-            cancel_discount_percentage: 20,
-            checkout_styling: {
-                background_color: "#0f172a",
-                border_style: "rounded",
-                button_color: "#f59e0b",
-                font_family: "roboto",
-            },
-            collect_tax: false,
+            cancel_discount_intervals: 1.1,
+            cancel_discount_percentage: 1.1,
+            checkout_styling: { key: "value" },
+            collect_tax: true,
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             custom_fields: [
@@ -185,41 +125,38 @@ describe("PlansClient", () => {
                 },
             ],
             deletable: true,
-            description: "Two hand washes a month, interior vacuum, and a quarterly sealant top-up.",
+            description: "description",
             effective_payment_method_configuration: {
                 disabled: ["card"],
                 enabled: ["card"],
                 include_platform_defaults: true,
             },
-            expiration_days: 365,
+            expiration_days: 1.1,
             formatted_price: "$59.00 / month",
             id: "plan_xxxxxxxxxxxxxx",
-            image: {
-                blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
-                url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            },
+            image: { key: "value" },
             initial_price: 0,
             initial_price_due: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             internal_notes: "Maintenance tier. Upsell the interior shampoo add-on at renewal.",
-            invoice: { id: "inv_xxxxxxxxxxxxxx" },
+            invoice: { key: "value" },
             member_count: 0,
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
-            offer_cancel_discount: true,
-            payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
+            offer_cancel_discount: false,
+            payment_method_configuration: { key: "value" },
             plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
-            sku: "WASH-CLUB-TEE-LARGE-BLUE",
-            split_pay_required_payments: 4,
+            sku: "sku",
+            split_pay_required_payments: 1.1,
             stock: 0,
-            strike_through_initial_price: 99,
-            strike_through_renewal_price: 79,
+            strike_through_initial_price: 1.1,
+            strike_through_renewal_price: 1.1,
             tax_type: "inclusive",
             three_ds_level: "mandate_challenge",
-            title: "Unlimited Wash Club",
-            trial_period_days: 7,
+            title: "Deprecated plan update",
+            trial_period_days: 1.1,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
@@ -248,58 +185,6 @@ describe("PlansClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.create();
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("create (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.create();
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("create (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
         server
@@ -316,7 +201,7 @@ describe("PlansClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
-    test("retrieve (1)", async () => {
+    test("retrieve", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -329,17 +214,12 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
-            attributes: { color: "Blue", size: "Large" },
+            attributes: { key: "value" },
             billing_period: 30,
-            cancel_discount_intervals: 3,
-            cancel_discount_percentage: 20,
-            checkout_styling: {
-                background_color: "#0f172a",
-                border_style: "rounded",
-                button_color: "#f59e0b",
-                font_family: "roboto",
-            },
-            collect_tax: false,
+            cancel_discount_intervals: 1.1,
+            cancel_discount_percentage: 1.1,
+            checkout_styling: { key: "value" },
+            collect_tax: true,
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             custom_fields: [
@@ -353,41 +233,38 @@ describe("PlansClient", () => {
                 },
             ],
             deletable: true,
-            description: "Two hand washes a month, interior vacuum, and a quarterly sealant top-up.",
+            description: "description",
             effective_payment_method_configuration: {
                 disabled: ["card"],
                 enabled: ["card"],
                 include_platform_defaults: true,
             },
-            expiration_days: 365,
+            expiration_days: 1.1,
             formatted_price: "$59.00 / month",
             id: "plan_xxxxxxxxxxxxxx",
-            image: {
-                blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
-                url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            },
+            image: { key: "value" },
             initial_price: 0,
             initial_price_due: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             internal_notes: "Maintenance tier. Upsell the interior shampoo add-on at renewal.",
-            invoice: { id: "inv_xxxxxxxxxxxxxx" },
+            invoice: { key: "value" },
             member_count: 0,
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
-            offer_cancel_discount: true,
-            payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
+            offer_cancel_discount: false,
+            payment_method_configuration: { key: "value" },
             plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
-            sku: "WASH-CLUB-TEE-LARGE-BLUE",
-            split_pay_required_payments: 4,
+            sku: "sku",
+            split_pay_required_payments: 1.1,
             stock: 0,
-            strike_through_initial_price: 99,
-            strike_through_renewal_price: 79,
+            strike_through_initial_price: 1.1,
+            strike_through_renewal_price: 1.1,
             tax_type: "inclusive",
             three_ds_level: "mandate_challenge",
-            title: "Unlimited Wash Club",
-            trial_period_days: 7,
+            title: "Deprecated plan update",
+            trial_period_days: 1.1,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
@@ -401,28 +278,7 @@ describe("PlansClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("retrieve (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/plans/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.plans.retrieve({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("delete (1)", async () => {
+    test("delete", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -442,28 +298,7 @@ describe("PlansClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("delete (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().delete("/plans/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.plans.delete({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("update (1)", async () => {
+    test("update", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -476,17 +311,12 @@ describe("PlansClient", () => {
         const rawResponseBody = {
             account: { id: "biz_xxxxxxxxxxxxxx", title: "Shine Time Auto Detailing" },
             adaptive_pricing_enabled: true,
-            attributes: { color: "Blue", size: "Large" },
+            attributes: { key: "value" },
             billing_period: 30,
-            cancel_discount_intervals: 3,
-            cancel_discount_percentage: 20,
-            checkout_styling: {
-                background_color: "#0f172a",
-                border_style: "rounded",
-                button_color: "#f59e0b",
-                font_family: "roboto",
-            },
-            collect_tax: false,
+            cancel_discount_intervals: 1.1,
+            cancel_discount_percentage: 1.1,
+            checkout_styling: { key: "value" },
+            collect_tax: true,
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             custom_fields: [
@@ -500,41 +330,38 @@ describe("PlansClient", () => {
                 },
             ],
             deletable: true,
-            description: "Two hand washes a month, interior vacuum, and a quarterly sealant top-up.",
+            description: "description",
             effective_payment_method_configuration: {
                 disabled: ["card"],
                 enabled: ["card"],
                 include_platform_defaults: true,
             },
-            expiration_days: 365,
+            expiration_days: 1.1,
             formatted_price: "$59.00 / month",
             id: "plan_xxxxxxxxxxxxxx",
-            image: {
-                blurhash: "LA6bDXT$E3b:R6i+RibEIWbp%ej1",
-                url: "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-            },
+            image: { key: "value" },
             initial_price: 0,
             initial_price_due: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
             internal_notes: "Maintenance tier. Upsell the interior shampoo add-on at renewal.",
-            invoice: { id: "inv_xxxxxxxxxxxxxx" },
+            invoice: { key: "value" },
             member_count: 0,
             metadata: { custom_cta: "subscribe", custom_cta_url: "https://shinetime.example/wash-club" },
-            offer_cancel_discount: true,
-            payment_method_configuration: { disabled: ["crypto"], enabled: ["card"], include_platform_defaults: true },
+            offer_cancel_discount: false,
+            payment_method_configuration: { key: "value" },
             plan_type: "renewal",
             product: { id: "prod_xxxxxxxxxxxxxx", title: "Ceramic Coating Package" },
             purchase_url: "https://whop.com/checkout/plan_xxxxxxxxxxxxxx",
             release_method: "buy_now",
             renewal_price: 59,
-            sku: "WASH-CLUB-TEE-LARGE-BLUE",
-            split_pay_required_payments: 4,
+            sku: "sku",
+            split_pay_required_payments: 1.1,
             stock: 0,
-            strike_through_initial_price: 99,
-            strike_through_renewal_price: 79,
+            strike_through_initial_price: 1.1,
+            strike_through_renewal_price: 1.1,
             tax_type: "inclusive",
             three_ds_level: "mandate_challenge",
-            title: "Unlimited Wash Club",
-            trial_period_days: 7,
+            title: "Deprecated plan update",
+            trial_period_days: 1.1,
             unlimited_stock: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             visibility: "visible",
@@ -555,34 +382,6 @@ describe("PlansClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("update (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/plans/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.update({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
     test("calculateTax (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -592,7 +391,7 @@ describe("PlansClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { address: { country: "DE", postal_code: "10115" } };
+        const rawRequestBody = {};
         const rawResponseBody = {
             currency: "usd",
             status: "calculated",
@@ -613,127 +412,11 @@ describe("PlansClient", () => {
 
         const response = await client.plans.calculateTax({
             id: "id",
-            address: {
-                country: "DE",
-                postal_code: "10115",
-            },
         });
         expect(response).toEqual(rawResponseBody);
     });
 
     test("calculateTax (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans/id/calculate_tax")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.calculateTax({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.BadRequestError);
-    });
-
-    test("calculateTax (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans/id/calculate_tax")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.calculateTax({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.UnauthorizedError);
-    });
-
-    test("calculateTax (4)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans/id/calculate_tax")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.calculateTax({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.ForbiddenError);
-    });
-
-    test("calculateTax (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new WhopClient({
-            maxRetries: 0,
-            token: "test",
-            apiVersionDate: "test",
-            idempotencyKey: "test",
-            environment: { api: server.baseUrl, vault: server.baseUrl },
-        });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .post("/plans/id/calculate_tax")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.plans.calculateTax({
-                id: "id",
-            });
-        }).rejects.toThrow(Whop.NotFoundError);
-    });
-
-    test("calculateTax (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,

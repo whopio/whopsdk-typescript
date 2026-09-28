@@ -17,7 +17,7 @@ export interface ListPromoCodesRequest {
     status?: Whop.ListPromoCodesRequestStatus;
     /** Only promo codes scoped to these product IDs. */
     product_ids?: string | string[];
-    /** Only promo codes scoped to these plan IDs. */
+    /** Only promo codes scoped to these variant IDs. */
     plan_ids?: string | string[];
     /** Only promo codes created before this ISO 8601 timestamp. */
     created_before?: string;

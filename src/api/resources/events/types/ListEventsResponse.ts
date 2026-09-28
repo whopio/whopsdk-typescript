@@ -163,7 +163,7 @@ export namespace ListEventsResponse {
                     card_brand?: (string | null) | undefined;
                     card_last4?: (string | null) | undefined;
                     id?: string | undefined;
-                    /** Everything this payment charged for, in purchase order, including quantities. Older payments fall back to their original plan. */
+                    /** Everything this payment charged for, in purchase order, including quantities. Older payments fall back to their original variant. */
                     line_items?: Whop.ReceiptLineItem[] | undefined;
                     provider?: (string | null) | undefined;
                 }

@@ -11,22 +11,22 @@ export interface CheckoutConfiguration {
     created_at: string;
     /** Currency used for setup-mode payment method availability; defaults to `usd` when omitted. */
     currency: CheckoutConfiguration.Currency | null;
-    /** The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the plan's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override. */
+    /** The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the variant's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override. */
     effective_payment_method_configuration: Whop.CheckoutSessionPaymentMethodConfiguration | null;
     id: string;
     /** Custom key-value metadata copied to payments and memberships. `null` without the `checkout_configuration:basic:read` scope. */
     metadata: Record<string, unknown> | null;
     /** Controls whether checkout charges the buyer immediately or saves payment details for later. */
     mode: CheckoutConfiguration.Mode;
-    /** Payment method overrides for this checkout. `null` when it uses the plan or platform defaults. */
+    /** Payment method overrides for this checkout. `null` when it uses the variant or platform defaults. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Plan used for payment checkout. `null` in setup mode. */
+    /** Variant used for payment checkout. `null` in setup mode. */
     plan: Whop.CheckoutConfigurationPlan | null;
     /** Checkout URL you can send to customers. */
     purchase_url: string | null;
     /** URL customers are sent to after checkout, or `null` when no redirect is configured. */
     redirect_url: string | null;
-    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
     three_ds_level: CheckoutConfiguration.ThreeDsLevel | null;
     /** When the checkout configuration was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
@@ -133,7 +133,7 @@ export namespace CheckoutConfiguration {
         Setup: "setup",
     } as const;
     export type Mode = (typeof Mode)[keyof typeof Mode];
-    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
         MandateIfRequired: "mandate_if_required",

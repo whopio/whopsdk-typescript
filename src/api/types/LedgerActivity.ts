@@ -22,9 +22,9 @@ export interface LedgerActivity {
     payment?: (LedgerActivity.Payment | null) | undefined;
     /** Payment ID for any payment-related activity, including refunds and disputes. */
     payment_id?: (string | null) | undefined;
-    /** ID of the plan associated with the payment, when applicable. */
+    /** ID of the variant associated with the payment, when applicable. */
     plan_id?: (string | null) | undefined;
-    /** Name of the plan associated with the payment, when applicable. */
+    /** Name of the variant associated with the payment, when applicable. */
     plan_name?: (string | null) | undefined;
     /** When the activity posted to the ledger. */
     posted_at: string;
@@ -225,7 +225,7 @@ export namespace LedgerActivity {
         payment_method_type: string | null;
         /** Processor that handled the payment, such as `stripe`. */
         payment_processor: string | null;
-        /** Plan associated with the payment, when applicable. */
+        /** Variant associated with the payment, when applicable. */
         plan: Payment.Plan | null;
         /** Product associated with the payment, when applicable. */
         product: Payment.Product | null;
@@ -240,12 +240,12 @@ export namespace LedgerActivity {
         export type Object_ = (typeof Object_)[keyof typeof Object_];
 
         /**
-         * Plan associated with the payment, when applicable.
+         * Variant associated with the payment, when applicable.
          */
         export interface Plan {
-            /** Plan ID, prefixed `plan_`. */
+            /** Variant ID, prefixed `plan_`. */
             id: string;
-            /** Plan name. */
+            /** Variant name. */
             name: string | null;
         }
 

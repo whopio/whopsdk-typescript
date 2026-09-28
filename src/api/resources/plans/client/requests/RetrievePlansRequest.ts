@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrievePlansRequest {
-    /** Plan ID, prefixed `plan_`. */
+    /** Variant ID, prefixed `plan_`. */
     id: string;
 }

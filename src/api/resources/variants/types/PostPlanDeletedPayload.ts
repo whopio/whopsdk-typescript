@@ -2,14 +2,14 @@
 
 import type * as Whop from "../../../index.js";
 
-export interface PostPlanUpdatedPayload {
+export interface PostPlanDeletedPayload {
     /** The account ID that this webhook event is associated with */
     account_id?: (string | null) | undefined;
     /** The API version for this webhook */
-    api_version: PostPlanUpdatedPayload.ApiVersion;
+    api_version: PostPlanDeletedPayload.ApiVersion;
     /** The dated API version (Api-Version-Date) the payload is serialized to */
     api_version_date: string | null;
-    data: Whop.Plan;
+    data: Whop.Variant;
     /** A unique ID for every single webhook request */
     id: string;
     /** For some `.updated` events, the old values of the payload fields that changed, keyed by field name. Omitted when no capture is available for the event */
@@ -17,10 +17,10 @@ export interface PostPlanUpdatedPayload {
     /** The timestamp in ISO 8601 format that the webhook was sent at on the server */
     timestamp: string;
     /** The webhook event type */
-    type: PostPlanUpdatedPayload.Type;
+    type: PostPlanDeletedPayload.Type;
 }
 
-export namespace PostPlanUpdatedPayload {
+export namespace PostPlanDeletedPayload {
     /** The API version for this webhook */
     export const ApiVersion = {
         V1: "v1",
@@ -28,7 +28,7 @@ export namespace PostPlanUpdatedPayload {
     export type ApiVersion = (typeof ApiVersion)[keyof typeof ApiVersion];
     /** The webhook event type */
     export const Type = {
-        PlanUpdated: "plan.updated",
+        PlanDeleted: "plan.deleted",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }

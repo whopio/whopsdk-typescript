@@ -20,15 +20,15 @@ export interface CreateCheckoutConfigurationsRequest {
     metadata?: Record<string, unknown> | null;
     /** Controls whether checkout charges the buyer immediately or saves payment details for later. Defaults to `payment`. */
     mode?: CreateCheckoutConfigurationsRequest.Mode;
-    /** Payment method overrides for this checkout. `null` uses the plan or platform defaults. */
+    /** Payment method overrides for this checkout. `null` uses the variant or platform defaults. */
     payment_method_configuration?: CreateCheckoutConfigurationsRequest.PaymentMethodConfiguration | null;
-    /** Plan attributes used to create or find a plan for this checkout configuration. Mutually exclusive with `plan_id`. */
+    /** Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `plan_id`. */
     plan?: CreateCheckoutConfigurationsRequest.Plan | null;
-    /** Existing plan ID, prefixed `plan_`. Mutually exclusive with `plan`. */
+    /** Existing variant ID, prefixed `plan_`. Mutually exclusive with `plan`. */
     plan_id?: string | null;
     /** URL customers are sent to after checkout. */
     redirect_url?: string | null;
-    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
     three_ds_level?: CreateCheckoutConfigurationsRequest.ThreeDsLevel | null;
 }
 
@@ -41,7 +41,7 @@ export namespace CreateCheckoutConfigurationsRequest {
     export type Mode = (typeof Mode)[keyof typeof Mode];
 
     /**
-     * Payment method overrides for this checkout. `null` uses the plan or platform defaults.
+     * Payment method overrides for this checkout. `null` uses the variant or platform defaults.
      */
     export interface PaymentMethodConfiguration {
         /** Payment method types explicitly disabled for checkout — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */
@@ -53,34 +53,34 @@ export namespace CreateCheckoutConfigurationsRequest {
     }
 
     /**
-     * Plan attributes used to create or find a plan for this checkout configuration. Mutually exclusive with `plan_id`.
+     * Variant attributes used to create or find a variant for this checkout configuration. Mutually exclusive with `plan_id`.
      */
     export interface Plan {
-        /** Account ID for the inline plan, prefixed `biz_`. Defaults to the account resolved from the request. */
+        /** Account ID for the inline variant, prefixed `biz_`. Defaults to the account resolved from the request. */
         account_id?: (string | null) | undefined;
         /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. */
         billing_period?: (number | null) | undefined;
-        /** Three-letter ISO currency code for the plan's prices. */
+        /** Three-letter ISO currency code for the variant's prices. */
         currency?: (string | null) | undefined;
-        /** Customer-visible plan description. */
+        /** Customer-visible variant description. */
         description?: (string | null) | undefined;
-        /** Access duration in days for expiration-based plans. */
+        /** Access duration in days for expiration-based variants. */
         expiration_days?: (number | null) | undefined;
-        /** Whether to create a new plan instead of reusing a matching one. */
+        /** Whether to create a new variant instead of reusing a matching one. */
         force_create_new_plan?: (boolean | null) | undefined;
-        /** Initial purchase price in the plan currency. */
+        /** Initial purchase price in the variant currency. */
         initial_price?: (number | null) | undefined;
-        /** Custom key-value metadata stored on the plan. */
+        /** Custom key-value metadata stored on the variant. */
         metadata?: (Record<string, unknown> | null) | undefined;
-        /** Tax classification override for this plan. */
+        /** Tax classification override for this variant. */
         override_tax_type?: (string | null) | undefined;
-        /** Payment method overrides for the inline plan. `null` uses platform defaults. */
+        /** Payment method overrides for the inline variant. `null` uses platform defaults. */
         payment_method_configuration?: (Plan.PaymentMethodConfiguration | null) | undefined;
-        /** Billing model for the plan. */
+        /** Billing model for the variant. */
         plan_type?: (Plan.PlanType | null) | undefined;
-        /** Product ID the inline plan should belong to, prefixed `prod_`. */
+        /** Product ID the inline variant should belong to, prefixed `prod_`. */
         product_id?: (string | null) | undefined;
-        /** Sales method for the plan. */
+        /** Sales method for the variant. */
         release_method?: (Plan.ReleaseMethod | null) | undefined;
         /** Recurring price charged each billing period. */
         renewal_price?: (number | null) | undefined;
@@ -88,36 +88,36 @@ export namespace CreateCheckoutConfigurationsRequest {
         stock?: (number | null) | undefined;
         /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
         three_ds_level?: (Plan.ThreeDsLevel | null) | undefined;
-        /** Plan display name shown to customers. */
+        /** Variant display name shown to customers. */
         title?: (string | null) | undefined;
         /** Free trial days before the first renewal charge. */
         trial_period_days?: (number | null) | undefined;
-        /** Whether the plan has unlimited stock. */
+        /** Whether the variant has unlimited stock. */
         unlimited_stock?: (boolean | null) | undefined;
-        /** Whether the plan is visible to customers or hidden from public view. */
+        /** Whether the variant is visible to customers or hidden from public view. */
         visibility?: (Plan.Visibility | null) | undefined;
     }
 
     export namespace Plan {
         /**
-         * Payment method overrides for the inline plan. `null` uses platform defaults.
+         * Payment method overrides for the inline variant. `null` uses platform defaults.
          */
         export interface PaymentMethodConfiguration {
-            /** Payment method types explicitly disabled for this plan — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */
+            /** Payment method types explicitly disabled for this variant — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */
             disabled?: Whop.PaymentMethodTypes[] | undefined;
-            /** Payment method types explicitly enabled for this plan — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */
+            /** Payment method types explicitly enabled for this variant — the `type` values from the payment method types catalogue. Types Whop no longer offers, and the read-only `unknown` placeholder, are dropped. */
             enabled?: Whop.PaymentMethodTypes[] | undefined;
             /** Whether platform default payment methods are included. */
             include_platform_defaults?: boolean | undefined;
         }
 
-        /** Billing model for the plan. */
+        /** Billing model for the variant. */
         export const PlanType = {
             Renewal: "renewal",
             OneTime: "one_time",
         } as const;
         export type PlanType = (typeof PlanType)[keyof typeof PlanType];
-        /** Sales method for the plan. */
+        /** Sales method for the variant. */
         export const ReleaseMethod = {
             BuyNow: "buy_now",
             Waitlist: "waitlist",
@@ -130,7 +130,7 @@ export namespace CreateCheckoutConfigurationsRequest {
             FrictionlessIfRequired: "frictionless_if_required",
         } as const;
         export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
-        /** Whether the plan is visible to customers or hidden from public view. */
+        /** Whether the variant is visible to customers or hidden from public view. */
         export const Visibility = {
             Visible: "visible",
             Hidden: "hidden",
@@ -140,7 +140,7 @@ export namespace CreateCheckoutConfigurationsRequest {
         export type Visibility = (typeof Visibility)[keyof typeof Visibility];
     }
 
-    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
     export const ThreeDsLevel = {
         MandateChallenge: "mandate_challenge",
         MandateIfRequired: "mandate_if_required",

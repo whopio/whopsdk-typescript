@@ -3,58 +3,58 @@
 import type * as Whop from "../index.js";
 
 export interface PlanListItem {
-    /** Account that sells this plan; `null` for standalone invoice plans. */
+    /** Account that sells this variant; `null` for standalone invoice variants. */
     account: Whop.AccountSummary | null;
-    /** Whether adaptive pricing is enabled for this plan. Raw setting — does not check processor compatibility or feature flags. */
+    /** Whether adaptive pricing is enabled for this variant. Raw setting — does not check processor compatibility or feature flags. */
     adaptive_pricing_enabled: boolean;
-    /** Attribute values that make this plan one variant of its product, as a map of attribute name to value, e.g. `{"color": "Blue", "size": "Large"}`. Names are snake_case identifiers and come back in alphabetical order. Every variant plan on a product carries the same attribute names and a distinct set of values; the product lists the full option set as `variant_attributes`. `null` for a plan that is not a variant. */
+    /** Attribute values that distinguish this variant within its product, as a map of attribute name to value, e.g. `{"color": "Blue", "size": "Large"}`. Names are snake_case identifiers and come back in alphabetical order. Every attributed variant on a product carries the same attribute names and a distinct set of values; the product lists the full option set as `variant_attributes`. `null` when the variant has no attributes. */
     attributes: Record<string, string | null> | null;
-    /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time plans. */
+    /** Number of days between recurring charges, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
     billing_period: number | null;
     /** Billing intervals the cancellation discount applies to (`0` forever, `1` first payment, or a month count). `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_intervals: number | null;
     /** Cancellation discount as a whole-number percentage. `null` when none is offered or the actor lacks the `plan:basic:read` scope. */
     cancel_discount_percentage: number | null;
-    /** Plan-level checkout styling (`background_color`, `button_color`, `font_family`, `border_style`); `null` inherits the account default. */
+    /** Variant-level checkout styling (`background_color`, `button_color`, `font_family`, `border_style`); `null` inherits the account default. */
     checkout_styling: Record<string, unknown> | null;
-    /** When the plan was created, as an ISO 8601 timestamp. */
+    /** When the variant was created, as an ISO 8601 timestamp. */
     created_at: string;
-    /** Three-letter ISO currency code for this plan's prices. */
+    /** Three-letter ISO currency code for this variant's prices. */
     currency: string;
     custom_fields: Whop.PlanCustomField[];
-    /** Customer-visible plan description. Maximum 1000 characters. `null` if no description is set. */
+    /** Customer-visible variant description. Maximum 1000 characters. `null` if no description is set. */
     description: string | null;
-    /** Access duration in days for expiration-based plans, such as 365 for a one-year pass. `null` for plans without an expiration. */
+    /** Access duration in days for expiration-based variants, such as 365 for a one-year pass. `null` for variants without an expiration. */
     expiration_days: number | null;
     /** Human-readable price for display (currency + interval), e.g. "$10 / month". */
     formatted_price: string;
-    /** Plan ID, prefixed `plan_`. */
+    /** Variant ID, prefixed `plan_`. */
     id: string;
     /** Pricing-tier image (`url`, `blurhash`) shown on the product page; `null` when no image is set. */
     image: Record<string, unknown> | null;
-    /** Initial purchase price in plan currency. */
+    /** Initial purchase price in variant currency. */
     initial_price: number;
-    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring plans, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this plan. */
+    /** Total charged at checkout for one unit, before promo codes and tax: `initial_price` plus the first `renewal_price` for recurring variants, or `initial_price` alone while a free trial applies. The trial does not apply when the viewing user has already used one for this variant. */
     initial_price_due: Whop.Money;
-    /** Private notes not shown to customers. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
+    /** Private notes not shown to customers. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     internal_notes: string | null;
-    /** Invoice this plan was generated for; `null` unless created for an invoice. */
+    /** Invoice this variant was generated for; `null` unless created for an invoice. */
     invoice: Record<string, unknown> | null;
-    /** Active memberships through this plan. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
+    /** Active memberships through this variant. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     member_count: number | null;
-    /** Custom key-value pairs stored on the plan. Included in webhook payloads for payment and membership events. Maximum 50 keys, 100 characters per key, 500 characters per value. The reserved keys `custom_cta` and `custom_cta_url`, when set, override the product's checkout call to action for this plan. */
+    /** Custom key-value pairs stored on the variant. Included in webhook payloads for payment and membership events. Maximum 50 keys, 100 characters per key, 500 characters per value. The reserved keys `custom_cta` and `custom_cta_url`, when set, override the product's checkout call to action for this variant. */
     metadata: Record<string, unknown> | null;
-    /** Whether a cancellation discount is offered. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
+    /** Whether a cancellation discount is offered. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     offer_cancel_discount: boolean | null;
-    /** Payment method configuration (`enabled`, `disabled`, `include_platform_defaults`); `null` when plan uses default settings. */
+    /** Payment method configuration (`enabled`, `disabled`, `include_platform_defaults`); `null` when variant uses default settings. */
     payment_method_configuration: Record<string, unknown> | null;
-    /** Billing model for this plan. */
+    /** Billing model for this variant. */
     plan_type: PlanListItem.PlanType;
-    /** Product this plan belongs to; `null` for standalone plans. */
+    /** Product this variant belongs to; `null` for standalone variants. */
     product: Record<string, unknown> | null;
-    /** URL where customers can purchase this plan directly. */
+    /** URL where customers can purchase this variant directly. */
     purchase_url: string;
-    /** Sales method for this plan. */
+    /** Sales method for this variant. */
     release_method: PlanListItem.ReleaseMethod;
     /** Recurring price charged every billing period. */
     renewal_price: number;
@@ -62,34 +62,34 @@ export interface PlanListItem {
     sku: string | null;
     /** Installment payments required before the subscription pauses. Must be greater than 1. `null` if split pay is not configured. */
     split_pay_required_payments: number | null;
-    /** Units available for purchase. `null` unless the actor has the `plan:basic:read` scope on the plan's account. */
+    /** Units available for purchase. `null` unless the actor has the `plan:basic:read` scope on the variant's account. */
     stock: number | null;
-    /** Original initial price shown with a strikethrough, in the plan's currency. `null` when no strikethrough is set. */
+    /** Original initial price shown with a strikethrough, in the variant's currency. `null` when no strikethrough is set. */
     strike_through_initial_price: number | null;
-    /** Original renewal price shown with a strikethrough, in the plan's currency. `null` when no strikethrough is set. */
+    /** Original renewal price shown with a strikethrough, in the variant's currency. `null` when no strikethrough is set. */
     strike_through_renewal_price: number | null;
     /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. `null` inherits the account default. */
     three_ds_level: PlanListItem.ThreeDsLevel | null;
-    /** Plan display name shown to customers. Maximum 30 characters. A variant created without one defaults to its attribute values joined with ` / `. `null` if no title has been set. */
+    /** Variant display name shown to customers. Maximum 30 characters. A variant created without one defaults to its attribute values joined with ` / `. `null` if no title has been set. */
     title: string | null;
-    /** Free trial days before the first renewal charge. `null` if no trial is configured or the user has already used a trial for this plan. */
+    /** Free trial days before the first renewal charge. `null` if no trial is configured or the user has already used a trial for this variant. */
     trial_period_days: number | null;
-    /** Whether the plan has unlimited stock. When `true`, the `stock` field is ignored; waitlist plans always report `true`. */
+    /** Whether the variant has unlimited stock. When `true`, the `stock` field is ignored; waitlist variants always report `true`. */
     unlimited_stock: boolean;
-    /** When the plan was last updated, as an ISO 8601 timestamp. */
+    /** When the variant was last updated, as an ISO 8601 timestamp. */
     updated_at: string;
-    /** Controls where this plan can be seen. When `hidden`, the plan is reachable only by its direct link. */
+    /** Controls where this variant can be seen. When `hidden`, the variant is reachable only by its direct link. */
     visibility: PlanListItem.Visibility;
 }
 
 export namespace PlanListItem {
-    /** Billing model for this plan. */
+    /** Billing model for this variant. */
     export const PlanType = {
         Renewal: "renewal",
         OneTime: "one_time",
     } as const;
     export type PlanType = (typeof PlanType)[keyof typeof PlanType];
-    /** Sales method for this plan. */
+    /** Sales method for this variant. */
     export const ReleaseMethod = {
         BuyNow: "buy_now",
         Waitlist: "waitlist",
@@ -102,7 +102,7 @@ export namespace PlanListItem {
         FrictionlessIfRequired: "frictionless_if_required",
     } as const;
     export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
-    /** Controls where this plan can be seen. When `hidden`, the plan is reachable only by its direct link. */
+    /** Controls where this variant can be seen. When `hidden`, the variant is reachable only by its direct link. */
     export const Visibility = {
         Visible: "visible",
         Hidden: "hidden",

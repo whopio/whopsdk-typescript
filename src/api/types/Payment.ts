@@ -60,11 +60,11 @@ export interface Payment {
     payment_rule_matches: Whop.PaymentRuleMatch[];
     /** How many charge attempts have failed on this payment. */
     payments_failed: number;
-    /** The plan that was charged, prefixed `plan_`. */
+    /** The variant that was charged, prefixed `plan_`. */
     plan_id: string | null;
     /** The account-facing total in the currency presented to the buyer, before conversion into the settlement currency. Excludes buyer fees. */
     presentment_total: Whop.Money | null;
-    /** The product the plan belongs to, prefixed `prod_`. Null for a plan with no product. */
+    /** The product the variant belongs to, prefixed `prod_`. Null for a variant with no product. */
     product_id: string | null;
     /** The promo code applied at checkout, prefixed `promo_`, or null. */
     promo_code_id: string | null;

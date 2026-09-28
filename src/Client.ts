@@ -84,6 +84,7 @@ import { TopupsClient } from "./api/resources/topups/client/Client.js";
 import { TradesClient } from "./api/resources/trades/client/Client.js";
 import { TransfersClient } from "./api/resources/transfers/client/Client.js";
 import { UsersClient } from "./api/resources/users/client/Client.js";
+import { VariantsClient } from "./api/resources/variants/client/Client.js";
 import { VerificationsClient } from "./api/resources/verifications/client/Client.js";
 import { WaitlistEntriesClient } from "./api/resources/waitlistEntries/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
@@ -184,6 +185,7 @@ export class WhopClient {
     protected _trades: TradesClient | undefined;
     protected _transfers: TransfersClient | undefined;
     protected _users: UsersClient | undefined;
+    protected _variants: VariantsClient | undefined;
     protected _verifications: VerificationsClient | undefined;
     protected _waitlistEntries: WaitlistEntriesClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
@@ -526,6 +528,10 @@ export class WhopClient {
 
     public get users(): UsersClient {
         return (this._users ??= new UsersClient(this._options));
+    }
+
+    public get variants(): VariantsClient {
+        return (this._variants ??= new VariantsClient(this._options));
     }
 
     public get verifications(): VerificationsClient {

@@ -15,7 +15,7 @@ export interface ListMembershipsRequest {
     status?: Whop.ListMembershipsRequestStatus;
     /** Filter to memberships of this product (`prod_` tag). Repeat as product_ids[] for several. */
     product_id?: string;
-    /** Filter to memberships of this plan (`plan_` tag). Repeat as plan_ids[] for several. */
+    /** Filter to memberships of this variant (`plan_` tag). Repeat as plan_ids[] for several. */
     plan_id?: string;
     /** Only memberships created after this ISO 8601 timestamp. */
     created_after?: string;

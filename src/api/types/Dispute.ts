@@ -31,7 +31,7 @@ export interface Dispute {
     line_items: Whop.ReceiptLineItem[];
     /** The payment being disputed. */
     payment: Whop.DisputePayment;
-    /** The plan the disputed payment was made on, prefixed `plan_`. */
+    /** The variant the disputed payment was made on, prefixed `plan_`. */
     plan_id: string | null;
     /** The product the disputed payment was for, prefixed `prod_`. */
     product_id: string | null;

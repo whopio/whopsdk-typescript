@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface Membership {
     /** The account (seller) this membership belongs to. */
     account: Whop.StorefrontAccount;
-    /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring plans. */
+    /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring variants. */
     cancel_at_period_end: boolean;
     /** When cancellation was requested, or when the membership was canceled if no request time is recorded, as an ISO 8601 timestamp. `null` when neither is recorded. */
     canceled_at: string | null;
@@ -29,7 +29,7 @@ export interface Membership {
     metadata: Record<string, unknown>;
     /** The buyer's phone number recorded for this membership, or `null`. The number collected (or verified) at checkout when the seller's phone collection is on; falls back to the buyer's account number when they have shared one with this seller. */
     phone_number: string | null;
-    /** The plan the buyer purchased, prefixed `plan_`. */
+    /** The variant the buyer purchased, prefixed `plan_`. */
     plan_id: string;
     /** The product this membership grants access to, prefixed `prod_`. */
     product_id: string;

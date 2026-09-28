@@ -18,7 +18,7 @@ export namespace ListCheckoutConfigurationsResponse {
             created_at: string;
             /** Currency used for setup-mode payment method availability; defaults to `usd` when omitted. */
             currency?: (string | null) | undefined;
-            /** The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the plan's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override. */
+            /** The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the variant's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override. */
             effective_payment_method_configuration?: (Item.EffectivePaymentMethodConfiguration | null) | undefined;
             /** Checkout configuration ID, prefixed `ch_`. */
             id: string;
@@ -26,15 +26,15 @@ export namespace ListCheckoutConfigurationsResponse {
             metadata?: (Record<string, unknown> | null) | undefined;
             /** Controls whether checkout charges the buyer immediately or saves payment details for later. */
             mode: Item.Mode;
-            /** Payment method overrides for this checkout. `null` when it uses the plan or platform defaults. */
+            /** Payment method overrides for this checkout. `null` when it uses the variant or platform defaults. */
             payment_method_configuration?: (Item.PaymentMethodConfiguration | null) | undefined;
-            /** Plan used for payment checkout. `null` in setup mode. */
+            /** Variant used for payment checkout. `null` in setup mode. */
             plan?: (Item.Plan | null) | undefined;
             /** Checkout URL you can send to customers. */
             purchase_url?: (string | null) | undefined;
             /** URL customers are sent to after checkout, or `null` when no redirect is configured. */
             redirect_url?: (string | null) | undefined;
-            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
             three_ds_level?: (Item.ThreeDsLevel | null) | undefined;
             /** When the checkout configuration was last updated, as an ISO 8601 timestamp. */
             updated_at: string;
@@ -42,7 +42,7 @@ export namespace ListCheckoutConfigurationsResponse {
 
         export namespace Item {
             /**
-             * The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the plan's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override.
+             * The configuration governing a checkout mounted from this configuration, resolved through every layer (its own overrides, the variant's, and the account's) — the shape a session's `payment_method_configuration` carries. Apply it over the payment method types catalogue for the offerable set. `null` means platform defaults; `payment_method_configuration` stays this configuration's own editable override.
              */
             export interface EffectivePaymentMethodConfiguration {
                 /** Payment methods explicitly disabled. */
@@ -61,7 +61,7 @@ export namespace ListCheckoutConfigurationsResponse {
             export type Mode = (typeof Mode)[keyof typeof Mode];
 
             /**
-             * Payment method overrides for this checkout. `null` when it uses the plan or platform defaults.
+             * Payment method overrides for this checkout. `null` when it uses the variant or platform defaults.
              */
             export interface PaymentMethodConfiguration {
                 /** Payment methods explicitly disabled for checkout. */
@@ -73,24 +73,24 @@ export namespace ListCheckoutConfigurationsResponse {
             }
 
             /**
-             * Plan used for payment checkout. `null` in setup mode.
+             * Variant used for payment checkout. `null` in setup mode.
              */
             export interface Plan {
-                /** Whether this plan accepts local currency payments via adaptive pricing. */
+                /** Whether this variant accepts local currency payments via adaptive pricing. */
                 adaptive_pricing_enabled: boolean;
-                /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. `null` for one-time plans. */
+                /** Recurring billing interval in days, such as 30 for monthly or 365 for annual. `null` for one-time variants. */
                 billing_period: number | null;
-                /** Three-letter ISO currency code for the plan's prices. */
+                /** Three-letter ISO currency code for the variant's prices. */
                 currency: string;
-                /** Access duration in days for expiration-based plans. */
+                /** Access duration in days for expiration-based variants. */
                 expiration_days: number | null;
-                /** Plan ID, prefixed `plan_`. */
+                /** Variant ID, prefixed `plan_`. */
                 id: string;
-                /** Initial purchase price in the plan currency. */
+                /** Initial purchase price in the variant currency. */
                 initial_price: number;
-                /** Billing model for the plan. */
+                /** Billing model for the variant. */
                 plan_type: Plan.PlanType;
-                /** Sales method for the plan. */
+                /** Sales method for the variant. */
                 release_method: Plan.ReleaseMethod;
                 /** Recurring price charged each billing period. */
                 renewal_price: number;
@@ -98,18 +98,18 @@ export namespace ListCheckoutConfigurationsResponse {
                 three_ds_level: Plan.ThreeDsLevel | null;
                 /** Free trial days before the first renewal charge. */
                 trial_period_days: number | null;
-                /** Whether the plan is visible to customers or hidden from public view. */
+                /** Whether the variant is visible to customers or hidden from public view. */
                 visibility: Plan.Visibility;
             }
 
             export namespace Plan {
-                /** Billing model for the plan. */
+                /** Billing model for the variant. */
                 export const PlanType = {
                     Renewal: "renewal",
                     OneTime: "one_time",
                 } as const;
                 export type PlanType = (typeof PlanType)[keyof typeof PlanType];
-                /** Sales method for the plan. */
+                /** Sales method for the variant. */
                 export const ReleaseMethod = {
                     BuyNow: "buy_now",
                     Waitlist: "waitlist",
@@ -122,7 +122,7 @@ export namespace ListCheckoutConfigurationsResponse {
                     FrictionlessIfRequired: "frictionless_if_required",
                 } as const;
                 export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
-                /** Whether the plan is visible to customers or hidden from public view. */
+                /** Whether the variant is visible to customers or hidden from public view. */
                 export const Visibility = {
                     Visible: "visible",
                     Hidden: "hidden",
@@ -132,7 +132,7 @@ export namespace ListCheckoutConfigurationsResponse {
                 export type Visibility = (typeof Visibility)[keyof typeof Visibility];
             }
 
-            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the plan policy. */
+            /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. Applies in setup mode; `null` uses frictionless 3DS. Payment mode uses the variant policy. */
             export const ThreeDsLevel = {
                 MandateChallenge: "mandate_challenge",
                 MandateIfRequired: "mandate_if_required",

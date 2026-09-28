@@ -946,6 +946,17 @@
             },
             "default": "./dist/cjs/api/resources/users/exports.js"
         },
+        "./variants": {
+            "import": {
+                "types": "./dist/esm/api/resources/variants/exports.d.mts",
+                "default": "./dist/esm/api/resources/variants/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/variants/exports.d.ts",
+                "default": "./dist/cjs/api/resources/variants/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/variants/exports.js"
+        },
         "./verifications": {
             "import": {
                 "types": "./dist/esm/api/resources/verifications/exports.d.mts",
