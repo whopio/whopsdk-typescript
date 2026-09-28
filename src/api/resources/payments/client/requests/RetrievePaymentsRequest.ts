@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrievePaymentsRequest {
-    /** The payment to retrieve, prefixed `pay_`. */
+    /** The payment, prefixed `pay_`. */
     id: string;
 }

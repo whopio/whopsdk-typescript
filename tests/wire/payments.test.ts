@@ -767,6 +767,290 @@ describe("PaymentsClient", () => {
         }).rejects.toThrow(Whop.NotFoundError);
     });
 
+    test("update (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = {
+            account_id: "biz_xxxxxxxxxxxxxx",
+            amount_after_fees: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            auto_refunded: false,
+            billing_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            billing_reason: "subscription_create",
+            checkout_configuration_id: "checkout_configuration_id",
+            client_secret:
+                "pay_xxxxxxxxxxxxxx_secret_vdefault_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            created_at: "2026-01-01T12:00:00.000Z",
+            currency: "usd",
+            customer_email: "marcus@shinetime.example",
+            customer_phone: "+xxxxxxxxxxx",
+            decline_code: "insufficient_funds",
+            dispute_alerted_at: "dispute_alerted_at",
+            failure_message: "failure_message",
+            financing_installments_count: 1.1,
+            holds: [
+                {
+                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 1.1,
+                    release_at: "release_at",
+                    type: "reserve",
+                },
+            ],
+            id: "pay_xxxxxxxxxxxxxx",
+            last_payment_attempt_at: "last_payment_attempt_at",
+            line_items: [
+                {
+                    id: "li_xxxxxxxxxxxxxx",
+                    label: "Ceramic Coating Package",
+                    plan_id: "plan_xxxxxxxxxxxxxx",
+                    plan_title: "Ceramic Coating — Full Vehicle",
+                    product_id: "prod_xxxxxxxxxxxxxx",
+                    product_title: "Ceramic Coating Package",
+                    quantity: 1,
+                    subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                },
+            ],
+            member_id: "mber_xxxxxxxxxxxxxx",
+            membership_id: "mem_xxxxxxxxxxxxxx",
+            metadata: { order_ref: "SHINE-4417" },
+            needs_tracking: false,
+            next_payment_attempt_at: "next_payment_attempt_at",
+            paid_at: "2026-01-01T12:00:00.000Z",
+            payment_instrument: {
+                card: {
+                    brand: "visa",
+                    exp_month: 10,
+                    exp_year: 2031,
+                    issuer_identification_number: "41111111",
+                    last4: "4242",
+                },
+                display_name: "Visa •••• 4242",
+                icons: {
+                    card: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                    square: {
+                        dark: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                        light: {
+                            png_1x: "https://content.whop.com/payment_methods/visa/icons/card_dark_30.png",
+                            png_2x: "https://content.whop.com/payment_methods/visa/icons/card_dark_60.png",
+                            png_4x: "https://content.whop.com/payment_methods/visa/icons/card_dark_120.png",
+                            svg: "https://content.whop.com/payment_methods/visa/icons/card_dark.svg",
+                        },
+                    },
+                },
+                installment_count: 1.1,
+                payment_method_type: "card",
+            },
+            payment_method_id: "payt_xxxxxxxxxxxxxx",
+            payment_method_type: "acss_debit",
+            payment_rule_matches: [{ action: "allow", id: "id", name: "name" }],
+            payments_failed: 0,
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            presentment_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_code_id",
+            recovery_url: "recovery_url",
+            refundable: false,
+            refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            refunded_at: "refunded_at",
+            retryable: true,
+            risk_score: 1.1,
+            risk_signals: { key: "value" },
+            settlement_time_at: "settlement_time_at",
+            shipment_id: "shipment_id",
+            shipping_address: {
+                city: "Austin",
+                country: "US",
+                line1: "1114 Bouldin Ave",
+                line2: "Unit B",
+                name: "Dana Whitfield",
+                postal_code: "78704",
+                state: "TX",
+            },
+            status: "draft",
+            substatus: "succeeded",
+            subtotal: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            tax_behavior: "exclusive",
+            tax_refunded_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            three_ds_verified: false,
+            total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            updated_at: "2026-01-01T12:00:00.000Z",
+            usd_total: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            user: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
+            verification_checks: {
+                address_line1: "PASS",
+                authorization_code: "A1B2C3",
+                card_holder_name: "PASS",
+                card_security_code: "PASS",
+                zip_code: "PASS",
+            },
+            voidable: false,
+        };
+
+        server
+            .mockEndpoint()
+            .patch("/payments/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.payments.update({
+            id: "id",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("update (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/payments/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("update (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/payments/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("update (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/payments/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("update (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/payments/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.payments.update({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.NotFoundError);
+    });
+
     test("capture (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({

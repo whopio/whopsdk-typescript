@@ -19080,6 +19080,71 @@ await client.payments.retrieve({
 </dl>
 </details>
 
+<details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">update</a>({ ...params }) -> Whop.Payment</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Changes a payment's shipping address or return URL, such as when a buyer corrects where their order should go before it ships. `shipping_address` is replaced as a whole, never merged: always send the complete address, including fields that are not changing, or they are cleared. Only `shipping_address` and `return_url` can be changed, and any other field is rejected. Omit either one to leave it unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.payments.update({
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.UpdatePaymentsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `PaymentsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.payments.<a href="/src/api/resources/payments/client/Client.ts">capture</a>({ ...params }) -> Whop.PaymentStatus</code></summary>
 <dl>
 <dd>

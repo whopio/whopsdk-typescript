@@ -7,5 +7,6 @@ export type { ResumePaymentsRequest } from "./ResumePaymentsRequest.js";
 export type { RetrievePaymentsRequest } from "./RetrievePaymentsRequest.js";
 export type { RetrieveStatusPaymentsRequest } from "./RetrieveStatusPaymentsRequest.js";
 export type { RetryPaymentsRequest } from "./RetryPaymentsRequest.js";
+export type { UpdatePaymentsRequest } from "./UpdatePaymentsRequest.js";
 export type { UpdateReturnUrlPaymentsRequest } from "./UpdateReturnUrlPaymentsRequest.js";
 export type { VoidPaymentsRequest } from "./VoidPaymentsRequest.js";
