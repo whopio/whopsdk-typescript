@@ -35,6 +35,8 @@ export interface Membership {
     product_id: string;
     /** Billing state of the membership. `active`/`trialing` memberships grant access; `past_due` is the grace period after a failed payment; `completed` one-time purchases keep access; `canceled`/`expired` do not. */
     status: Whop.MembershipStatus;
+    /** When the membership was last changed, as an ISO 8601 timestamp. Reflects the most recent change to the membership itself, so you can reconcile against webhook retries, replays, and backfills. */
+    updated_at: string;
     /** The buyer, prefixed `user_`. `null` when the buyer is another business or the membership is unclaimed. */
     user_id: string | null;
 }
