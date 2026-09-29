@@ -13,7 +13,11 @@ export interface UpdateEconomicIntelligenceRequest {
     account_id?: string;
     /** What you want the replacement recommendation for, in your own words. Up to 1000 characters. Sent when superseding, it directs the generation that replaces the rejected recommendation. */
     input?: string;
-    /** With `status: executed`, where to view what was produced, such as the published website or created product. An http or https URL. */
+    /** With `status: executed`, the ID of what the run produced or changed, and the recommendation's `result_url` becomes where to view it: an ad (`ad_`), ad group (`adgrp_`) or ad campaign (`adcamp_`), a website (`app_`), a product (`prod_`), a plan (`plan_`), a checkout link (`ch_`), a promo code (`promo_`), or an experience (`exp_`). Without `result_id` or `result_page`, `result_url` links to the resource the recommendation was about, when it names one. Send only one of `result_id`, `result_page` and `result_url`. */
+    result_id?: string;
+    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list or the store page. The recommendation's `result_url` becomes that page on the account's dashboard, or its store page for `store_page`. */
+    result_page?: UpdateEconomicIntelligenceRequest.ResultPage;
+    /** With `status: executed`, where to view what was produced when it is outside Whop. An http or https URL. Prefer `result_id` for anything on Whop. */
     result_url?: string;
     /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
     sentiment?: UpdateEconomicIntelligenceRequest.Sentiment;
@@ -24,6 +28,22 @@ export interface UpdateEconomicIntelligenceRequest {
 }
 
 export namespace UpdateEconomicIntelligenceRequest {
+    /** With `status: executed`, the page where the run's result can be seen when it is not one resource, such as the checkout links list or the store page. The recommendation's `result_url` becomes that page on the account's dashboard, or its store page for `store_page`. */
+    export const ResultPage = {
+        Home: "home",
+        Products: "products",
+        Ads: "ads",
+        Websites: "websites",
+        CheckoutLinks: "checkout_links",
+        TrackingLinks: "tracking_links",
+        PromoCodes: "promo_codes",
+        Payments: "payments",
+        Customers: "customers",
+        Affiliates: "affiliates",
+        Analytics: "analytics",
+        StorePage: "store_page",
+    } as const;
+    export type ResultPage = (typeof ResultPage)[keyof typeof ResultPage];
     /** A signed-in user can rate a recommendation as `positive` or `negative`. Can be sent alone or together with status. */
     export const Sentiment = {
         Positive: "positive",
