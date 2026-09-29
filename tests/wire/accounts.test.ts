@@ -334,7 +334,7 @@ describe("AccountsClient", () => {
                     ],
                     stablecoin_rails: false,
                     status: "active",
-                    status_reason: "Suspended - Fraudulent payment activity",
+                    status_reason: "Suspended - Fraudulent activity",
                     store_page_config: {
                         accent_color: null,
                         layout: null,
@@ -875,7 +875,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Suspended - Fraudulent payment activity",
+            status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -1414,7 +1414,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Suspended - Fraudulent payment activity",
+            status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -1899,7 +1899,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Suspended - Fraudulent payment activity",
+            status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -2517,7 +2517,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Suspended - Fraudulent payment activity",
+            status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
@@ -3840,7 +3840,7 @@ describe("AccountsClient", () => {
             ],
             stablecoin_rails: false,
             status: "active",
-            status_reason: "Suspended - Fraudulent payment activity",
+            status_reason: "Suspended - Fraudulent activity",
             store_page_config: {
                 accent_color: "ruby",
                 layout: "featured",
