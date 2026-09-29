@@ -14,5 +14,6 @@ export const PaymentTransactionTypes = {
     FraudScreening: "fraud_screening",
     Authorization: "authorization",
     Installment: "installment",
+    Deposit: "deposit",
 } as const;
 export type PaymentTransactionTypes = (typeof PaymentTransactionTypes)[keyof typeof PaymentTransactionTypes];
