@@ -185,13 +185,15 @@ export class PartnersClient {
     }
 
     /**
-     * Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals.
+     * Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals. Authorized staff can set user_id=global to list referrals across partners, with earnings for each user's current primary referrer.
      *
      * @param {Whop.ReferredUsersPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.NotFoundError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -207,6 +209,9 @@ export class PartnersClient {
                 request: Whop.ReferredUsersPartnersRequest,
             ): Promise<core.WithRawResponse<Whop.ReferredUsersPartnersResponse>> => {
                 const {
+                    user_id: userId,
+                    earning_partner_id: earningPartnerId,
+                    earning_partner_username: earningPartnerUsername,
                     query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
@@ -218,6 +223,9 @@ export class PartnersClient {
                     before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
+                    user_id: userId != null ? userId : undefined,
+                    earning_partner_id: earningPartnerId,
+                    earning_partner_username: earningPartnerUsername,
                     query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
@@ -273,6 +281,10 @@ export class PartnersClient {
                             throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                        case 403:
+                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                        case 404:
+                            throw new Whop.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                         default:
                             throw new errors.WhopError({
                                 statusCode: _response.error.statusCode,
