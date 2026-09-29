@@ -22,7 +22,7 @@ describe("FinancialReportsClient", () => {
             fx_excluded_currencies: ["ngn"],
             payment_fee_breakdown: [
                 {
-                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     category: "app_store_payments",
                     payment_method: "payment_method",
                     period: "period",
