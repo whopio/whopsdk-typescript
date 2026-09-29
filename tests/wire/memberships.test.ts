@@ -25,6 +25,7 @@ describe("MembershipsClient", () => {
                         route: "shine-time-auto-detailing",
                         title: "Shine Time Auto Detailing",
                     },
+                    billing_period_days: 30,
                     cancel_at_period_end: true,
                     canceled_at: "2026-01-01T12:00:00.000Z",
                     cancellation_reason: "Too expensive",
@@ -340,6 +341,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -422,7 +424,7 @@ describe("MembershipsClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = {};
+        const rawRequestBody = { billing_period_days: 45 };
         const rawResponseBody = {
             account: {
                 id: "biz_xxxxxxxxxxxxxx",
@@ -431,6 +433,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -465,6 +468,7 @@ describe("MembershipsClient", () => {
 
         const response = await client.memberships.update({
             id: "id",
+            billing_period_days: 45,
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -543,6 +547,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -683,6 +688,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -827,6 +833,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -967,6 +974,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -1163,6 +1171,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",
@@ -1299,6 +1308,7 @@ describe("MembershipsClient", () => {
                 route: "shine-time-auto-detailing",
                 title: "Shine Time Auto Detailing",
             },
+            billing_period_days: 30,
             cancel_at_period_end: true,
             canceled_at: "2026-01-01T12:00:00.000Z",
             cancellation_reason: "Too expensive",

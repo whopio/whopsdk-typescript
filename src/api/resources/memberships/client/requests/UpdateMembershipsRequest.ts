@@ -3,12 +3,15 @@
 /**
  * @example
  *     {
- *         id: "id"
+ *         id: "id",
+ *         billing_period_days: 45
  *     }
  */
 export interface UpdateMembershipsRequest {
     /** Membership ID (`mem_` tag), or a software license key. */
     id: string;
+    /** Number of days between recurring charges. Sets the current period end to the current period start plus this value and applies to every recurring variant. The new period end must remain in the future. Existing non-daily memberships cannot be changed to daily billing. */
+    billing_period_days?: number;
     /** `true` cancels at the end of the current billing period (the customer keeps access until then); `false` reverses a pending cancellation. */
     cancel_at_period_end?: boolean;
     /** Key-value pairs to merge into the membership's metadata. Pass an empty object to clear it. */
