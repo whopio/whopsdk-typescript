@@ -185,11 +185,12 @@ export class PartnersClient {
     }
 
     /**
-     * Lists the users the caller referred onto Whop (newest first), each with the second-tier earnings the caller has made from that user's businesses.
+     * Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals.
      *
      * @param {Whop.ReferredUsersPartnersRequest} request
      * @param {PartnersClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
      * @throws {@link Whop.UnauthorizedError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
@@ -209,6 +210,8 @@ export class PartnersClient {
                     query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
+                    order,
+                    direction,
                     first,
                     after,
                     last,
@@ -218,6 +221,8 @@ export class PartnersClient {
                     query,
                     has_businesses: hasBusinesses,
                     has_earning_businesses: hasEarningBusinesses,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
                     first,
                     after,
                     last,
@@ -264,6 +269,8 @@ export class PartnersClient {
                 }
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
+                        case 400:
+                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                         case 401:
                             throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                         default:
