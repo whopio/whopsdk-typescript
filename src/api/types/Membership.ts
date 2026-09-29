@@ -5,6 +5,8 @@ import type * as Whop from "../index.js";
 export interface Membership {
     /** The account (seller) this membership belongs to. */
     account: Whop.StorefrontAccount;
+    /** Number of days between recurring charges. `null` for non-renewing memberships or memberships with multiple renewal schedules. */
+    billing_period_days: number | null;
     /** Whether the membership is set to cancel when the current billing period ends. Only meaningful for recurring variants. */
     cancel_at_period_end: boolean;
     /** When cancellation was requested, or when the membership was canceled if no request time is recorded, as an ISO 8601 timestamp. `null` when neither is recorded. */

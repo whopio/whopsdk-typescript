@@ -15881,7 +15881,7 @@ await client.memberships.retrieve({
 <dl>
 <dd>
 
-Updates a membership: merge metadata key-value pairs, toggle `cancel_at_period_end` — `true` schedules the cancellation for the end of the current billing period, `false` reverses a pending one — or move future renewals to another of the customer's saved payment methods with `payment_method_id`.
+Updates a membership: merge metadata key-value pairs, toggle `cancel_at_period_end` — `true` schedules the cancellation for the end of the current billing period, `false` reverses a pending one — or move future renewals to another of the customer's saved payment methods with `payment_method_id`, or set `billing_period_days` to change renewal cadence for an active, trialing, or past-due membership billed automatically by Whop. The current period end moves to the current period start plus the requested number of days, and future renewals use the same cadence. Invoice, externally billed, and canceling memberships are not supported.
 </dd>
 </dl>
 </dd>
@@ -15897,7 +15897,8 @@ Updates a membership: merge metadata key-value pairs, toggle `cancel_at_period_e
 
 ```typescript
 await client.memberships.update({
-    id: "id"
+    id: "id",
+    billing_period_days: 45
 });
 
 ```
