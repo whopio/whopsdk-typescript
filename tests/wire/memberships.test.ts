@@ -44,6 +44,7 @@ describe("MembershipsClient", () => {
                     plan_id: "plan_xxxxxxxxxxxxxx",
                     product_id: "prod_xxxxxxxxxxxxxx",
                     status: "trialing",
+                    updated_at: "2026-01-01T12:00:00.000Z",
                     user_id: "user_xxxxxxxxxxxxxx",
                 },
             ],
@@ -358,6 +359,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -448,6 +450,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -559,6 +562,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -698,6 +702,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -841,6 +846,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -980,6 +986,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -1175,6 +1182,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
@@ -1310,6 +1318,7 @@ describe("MembershipsClient", () => {
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
             status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
         };
 
