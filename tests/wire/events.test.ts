@@ -94,6 +94,7 @@ describe("EventsClient", () => {
                                     product_id: "prod_xxxxxxxxxxxxxx",
                                     product_title: "Ceramic Coating Package",
                                     quantity: 1,
+                                    sku: null,
                                     subtotal: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 },
                             ],
