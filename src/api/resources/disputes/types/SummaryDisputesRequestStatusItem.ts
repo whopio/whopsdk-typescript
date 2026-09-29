@@ -7,7 +7,7 @@ export const SummaryDisputesRequestStatusItem = {
     WarningUnderReview: "warning_under_review",
     Won: "won",
     Lost: "lost",
-    Closed: "closed",
+    Prevented: "prevented",
     WarningClosed: "warning_closed",
 } as const;
 export type SummaryDisputesRequestStatusItem =

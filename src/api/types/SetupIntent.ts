@@ -29,6 +29,8 @@ export interface SetupIntent {
     return_url: string | null;
     /** How far the setup has got. **A 201 or 200 means we answered, not that the method was saved — always branch on this.** `requires_action` — the buyer has a step outstanding; hand `client_secret` to the elements or poll Retrieve setup status. `processing` — the processor is deciding. `succeeded` — the method is saved, and only this one means saved. `canceled` — abandoned or refused; see `last_setup_error`. */
     status: SetupIntent.Status;
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. The setting requested for this setup, or `null` when unset. */
+    three_ds_level: SetupIntent.ThreeDsLevel | null;
     /** True when the buyer completed 3D Secure while saving this payment method. */
     three_ds_verified: boolean;
     /** When the setup intent was last updated, as an ISO 8601 timestamp. */
@@ -46,4 +48,11 @@ export namespace SetupIntent {
         RequiresAction: "requires_action",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    /** 3D Secure behavior for supported on-session card payments. `mandate_challenge` requires a 3DS challenge before payment processing; `mandate_if_required` mandates a challenge only when the payment processor requires it; `frictionless_if_required` uses the regular frictionless 3DS flow. Payments of $1,000 or more use `mandate_if_required` unless `mandate_challenge` is selected. Risk and authentication recovery requirements can override the preference. The setting requested for this setup, or `null` when unset. */
+    export const ThreeDsLevel = {
+        MandateChallenge: "mandate_challenge",
+        MandateIfRequired: "mandate_if_required",
+        FrictionlessIfRequired: "frictionless_if_required",
+    } as const;
+    export type ThreeDsLevel = (typeof ThreeDsLevel)[keyof typeof ThreeDsLevel];
 }

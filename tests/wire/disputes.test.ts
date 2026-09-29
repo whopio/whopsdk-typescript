@@ -272,9 +272,9 @@ describe("DisputesClient", () => {
             groups: {
                 currency: { usd: 1 },
                 status: {
-                    closed: 0,
                     lost: 0,
                     needs_response: 1,
+                    prevented: 0,
                     under_review: 0,
                     warning_closed: 0,
                     warning_needs_response: 0,
