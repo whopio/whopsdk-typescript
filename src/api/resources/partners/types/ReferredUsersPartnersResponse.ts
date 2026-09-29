@@ -14,7 +14,7 @@ export namespace ReferredUsersPartnersResponse {
         export interface Item {
             /** Number of active businesses this user referred that credit the caller as a second-tier partner. Excludes deleted businesses. */
             business_count: number;
-            /** The caller's total earnings across the business referrals included in business_count, in USD. */
+            /** The caller's total pending and completed affiliate earnings from this referred user across all tiers, in USD. Includes historical earnings from removed referrals and deleted businesses. */
             earnings: Whop.Money;
             /** When the referred user joined Whop, as an ISO 8601 timestamp. */
             joined_at: string;

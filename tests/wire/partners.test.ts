@@ -234,6 +234,31 @@ describe("PartnersClient", () => {
             .mockEndpoint()
             .get("/partners/referred_users")
             .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.partners.referredUsers();
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("referredUsers (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/partners/referred_users")
+            .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
