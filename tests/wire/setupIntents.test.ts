@@ -73,6 +73,7 @@ describe("SetupIntentsClient", () => {
                     payment_method_type: "acss_debit",
                     return_url: "https://shinetime.example/billing/saved",
                     status: "processing",
+                    three_ds_level: "mandate_challenge",
                     three_ds_verified: false,
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user: {
@@ -231,6 +232,7 @@ describe("SetupIntentsClient", () => {
             payment_method_type: "acss_debit",
             return_url: "https://shinetime.example/billing/saved",
             status: "processing",
+            three_ds_level: "mandate_challenge",
             three_ds_verified: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
@@ -462,6 +464,7 @@ describe("SetupIntentsClient", () => {
             payment_method_type: "acss_debit",
             return_url: "https://shinetime.example/billing/saved",
             status: "processing",
+            three_ds_level: "mandate_challenge",
             three_ds_verified: false,
             updated_at: "2026-01-01T12:00:00.000Z",
             user: {
