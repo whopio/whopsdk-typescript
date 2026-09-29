@@ -124,6 +124,22 @@ describe("PartnersClient", () => {
                     username: "marcuswebb",
                 },
             },
+            nearby: [
+                {
+                    first_referral_started_at: "2026-01-01T12:00:00Z",
+                    rank: 1,
+                    total_earnings_usd: "100.00",
+                    total_volume_usd: "0.00",
+                    user: {
+                        city: "Austin",
+                        country: "US",
+                        id: "user_xxxxxxxxxxxxxx",
+                        name: "Marcus Webb",
+                        profile_picture: { url: "https://ui-avatars.com/api/" },
+                        username: "marcuswebb",
+                    },
+                },
+            ],
         };
 
         server
