@@ -21,17 +21,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -248,7 +248,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -256,17 +259,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -483,7 +486,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -491,17 +497,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -718,7 +724,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -726,17 +735,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -953,7 +962,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -961,12 +973,12 @@ describe("FeesClient", () => {
                 card_spend: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -976,12 +988,12 @@ describe("FeesClient", () => {
                 crypto_swaps: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -1023,12 +1035,12 @@ describe("FeesClient", () => {
                 payments: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -1115,12 +1127,12 @@ describe("FeesClient", () => {
                 transfers: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -1140,17 +1152,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -1367,7 +1379,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -1375,17 +1390,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -1602,7 +1617,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -1610,17 +1628,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -1837,7 +1855,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -1845,17 +1866,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -2072,7 +2093,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2080,17 +2104,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -2307,7 +2331,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2315,17 +2342,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -2542,7 +2569,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2550,17 +2580,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -2777,7 +2807,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -2785,17 +2818,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -3012,7 +3045,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3020,17 +3056,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -3247,7 +3283,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3255,17 +3294,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -3482,7 +3521,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3490,17 +3532,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -3717,7 +3759,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -3725,12 +3770,12 @@ describe("FeesClient", () => {
                 card_spend: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -3740,12 +3785,12 @@ describe("FeesClient", () => {
                 crypto_swaps: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -3787,12 +3832,12 @@ describe("FeesClient", () => {
                 payments: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -3879,12 +3924,12 @@ describe("FeesClient", () => {
                 transfers: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -3896,17 +3941,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -4123,7 +4168,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -4145,21 +4193,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4185,21 +4233,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4222,21 +4270,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4333,21 +4381,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4373,21 +4421,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4416,21 +4464,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4456,21 +4504,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4496,21 +4544,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4539,21 +4587,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4579,21 +4627,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4616,21 +4664,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4656,21 +4704,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4696,21 +4744,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4736,21 +4784,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4779,21 +4827,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4819,21 +4867,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4856,21 +4904,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4896,21 +4944,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -4939,21 +4987,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5019,21 +5067,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5059,21 +5107,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5099,21 +5147,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5142,21 +5190,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5185,21 +5233,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5228,21 +5276,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5271,21 +5319,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5311,21 +5359,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5351,21 +5399,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5391,21 +5439,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5431,21 +5479,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5471,21 +5519,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5511,21 +5559,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5551,21 +5599,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5588,21 +5636,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5650,21 +5698,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5690,21 +5738,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5733,21 +5781,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5776,21 +5824,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5819,21 +5867,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5899,21 +5947,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5939,21 +5987,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -5981,21 +6029,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6021,21 +6069,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6061,21 +6109,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6104,21 +6152,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6147,21 +6195,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6190,21 +6238,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -6222,17 +6270,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -6449,7 +6497,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -6457,17 +6508,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -6684,7 +6735,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -6692,17 +6746,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -6919,7 +6973,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -6927,17 +6984,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -7154,7 +7211,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -7162,17 +7222,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -7389,7 +7449,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -7397,17 +7460,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -7624,7 +7687,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -7632,17 +7698,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -7859,7 +7925,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -7867,17 +7936,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -8094,7 +8163,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -8184,17 +8256,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -8411,7 +8483,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -8419,17 +8494,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -8646,7 +8721,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -8654,17 +8732,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -8881,7 +8959,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -8889,17 +8970,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -9116,7 +9197,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -9124,12 +9208,12 @@ describe("FeesClient", () => {
                 card_spend: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -9139,12 +9223,12 @@ describe("FeesClient", () => {
                 crypto_swaps: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -9186,12 +9270,12 @@ describe("FeesClient", () => {
                 payments: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -9278,12 +9362,12 @@ describe("FeesClient", () => {
                 transfers: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -9303,17 +9387,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -9530,7 +9614,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -9538,17 +9625,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -9765,7 +9852,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -9773,17 +9863,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -10000,7 +10090,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -10008,17 +10101,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -10235,7 +10328,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -10243,17 +10339,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -10470,7 +10566,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -10478,17 +10577,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -10705,7 +10804,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -10713,17 +10815,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -10940,7 +11042,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -10948,17 +11053,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -11175,7 +11280,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -11183,17 +11291,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -11410,7 +11518,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -11418,17 +11529,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -11645,7 +11756,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -11653,17 +11767,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -11880,7 +11994,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -11888,12 +12005,12 @@ describe("FeesClient", () => {
                 card_spend: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -11903,12 +12020,12 @@ describe("FeesClient", () => {
                 crypto_swaps: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -11950,12 +12067,12 @@ describe("FeesClient", () => {
                 payments: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -12042,12 +12159,12 @@ describe("FeesClient", () => {
                 transfers: {
                     adjustable: false,
                     default: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     maximum: {
-                        fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         percentage: 0,
                     },
                     percentage: 0,
@@ -12059,17 +12176,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -12286,7 +12403,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -12308,21 +12428,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12348,21 +12468,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12385,21 +12505,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12496,21 +12616,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12536,21 +12656,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12579,21 +12699,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12619,21 +12739,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12659,21 +12779,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12702,21 +12822,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12742,21 +12862,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12779,21 +12899,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12819,21 +12939,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12859,21 +12979,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12899,21 +13019,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12942,21 +13062,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -12982,21 +13102,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13019,21 +13139,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13059,21 +13179,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13102,21 +13222,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13182,21 +13302,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13222,21 +13342,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13262,21 +13382,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13305,21 +13425,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13348,21 +13468,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13391,21 +13511,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13434,21 +13554,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13474,21 +13594,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13514,21 +13634,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13554,21 +13674,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13594,21 +13714,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13634,21 +13754,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13674,21 +13794,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13714,21 +13834,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13751,21 +13871,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13813,21 +13933,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13853,21 +13973,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13896,21 +14016,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13939,21 +14059,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -13982,21 +14102,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14062,21 +14182,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14102,21 +14222,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14144,21 +14264,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14184,21 +14304,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14224,21 +14344,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14267,21 +14387,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14310,21 +14430,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14353,21 +14473,21 @@ describe("FeesClient", () => {
                     regions: {
                         key: {
                             default: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
-                            fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                            fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                             maximum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             minimum: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             percentage: null,
                             reset: {
-                                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                                 percentage: 0,
                             },
                             source: "default",
@@ -14385,17 +14505,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -14612,7 +14732,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -14620,17 +14743,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -14847,7 +14970,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -14855,17 +14981,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -15082,7 +15208,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -15090,17 +15219,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -15317,7 +15446,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -15325,17 +15457,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -15552,7 +15684,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -15560,17 +15695,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -15787,7 +15922,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -15795,17 +15933,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -16022,7 +16160,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },
@@ -16030,17 +16171,17 @@ describe("FeesClient", () => {
                 adjustable: true,
                 category: "payments",
                 default: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 ends_at: "2026-01-01T12:00:00.000Z",
-                fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 maximum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 minimum: {
-                    fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     percentage: 0,
                 },
                 percentage: 2.4,
@@ -16257,7 +16398,10 @@ describe("FeesClient", () => {
                         source: "default",
                     },
                 },
-                reset: { fixed: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 }, percentage: 0 },
+                reset: {
+                    fixed: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                    percentage: 0,
+                },
                 source: "default",
                 unadjustable_reason: "not_permitted",
             },

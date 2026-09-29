@@ -19,12 +19,12 @@ describe("RefundsClient", () => {
             data: [
                 {
                     account_id: "biz_xxxxxxxxxxxxxx",
-                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     created_at: "2026-01-01T12:00:00.000Z",
                     failure_message: "Insufficient funds on the merchant balance.",
                     failure_reason: "bank_declined",
                     id: "rf_xxxxxxxxxxxxxx",
-                    original_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    original_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     payment_id: "pay_xxxxxxxxxxxxxx",
                     provider: "stripe",
                     provider_created_at: "2026-01-01T12:00:00.000Z",
@@ -131,12 +131,12 @@ describe("RefundsClient", () => {
 
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
-            amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             created_at: "2026-01-01T12:00:00.000Z",
             failure_message: "Insufficient funds on the merchant balance.",
             failure_reason: "bank_declined",
             id: "rf_xxxxxxxxxxxxxx",
-            original_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            original_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             payment_id: "pay_xxxxxxxxxxxxxx",
             provider: "stripe",
             provider_created_at: "2026-01-01T12:00:00.000Z",

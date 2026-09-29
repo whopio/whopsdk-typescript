@@ -22,7 +22,7 @@ describe("BreakdownClient", () => {
             direction: "money_in",
             items: [
                 {
-                    amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     avatar: { shape: "circle", url: null },
                     image_url: "image_url",
                     key: "key",
@@ -31,7 +31,7 @@ describe("BreakdownClient", () => {
                     resource_id: "resource_id",
                 },
             ],
-            other_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            other_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             other_name: "Other",
         };
 

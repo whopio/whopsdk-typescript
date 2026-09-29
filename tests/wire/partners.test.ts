@@ -193,7 +193,7 @@ describe("PartnersClient", () => {
             data: [
                 {
                     business_count: 1,
-                    earnings: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    earnings: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                     joined_at: "2026-01-01T12:00:00Z",
                     total_earnings_usd: "10.00",
                     total_volume_usd: "100.00",
@@ -206,7 +206,7 @@ describe("PartnersClient", () => {
                         profile_picture: { url: "https://ui-avatars.com/api/" },
                         username: "tanyacole",
                     },
-                    volume_30d: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                    volume_30d: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                 },
             ],
             page_info: {

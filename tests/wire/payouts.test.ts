@@ -374,13 +374,13 @@ describe("PayoutsClient", () => {
         });
         const rawRequestBody = { amount: 6762.41, payout_method_id: "potk_xxxxxxxxxxxxxx" };
         const rawResponseBody = {
-            amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
-            destination_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            destination_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             exchange_rate: 4.13978443,
             expires_at: "2026-01-01T12:00:00Z",
-            fee: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            fee: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             id: "pout_aed_quote",
-            net_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+            net_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             object: "payout_quote",
             quote_token: "signed-payout-quote",
         };

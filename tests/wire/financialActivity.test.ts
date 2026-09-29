@@ -34,7 +34,7 @@ describe("FinancialActivityClient", () => {
                     line_type: "account_settlement",
                     object: "ledger_activity",
                     payment: {
-                        amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         card_brand: null,
                         card_last4: null,
                         created_at: "2024-01-15T09:30:00Z",
@@ -71,7 +71,7 @@ describe("FinancialActivityClient", () => {
                         id: "airdrp_xxxxxxxxxxxxxx",
                         object: "airdrop_link",
                         payer_name: "MassPay",
-                        payment_amount: { amount: "-2.50", currency: "usd", decimals: 2, display_decimals: 2 },
+                        payment_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         payout_destination: {
                             icon_url:
                                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-activity-icon",
