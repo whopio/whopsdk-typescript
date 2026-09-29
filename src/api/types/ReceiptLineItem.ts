@@ -17,6 +17,8 @@ export interface ReceiptLineItem {
     product_title: string | null;
     /** How many units were bought. */
     quantity: number;
+    /** The variant's stock keeping unit, free text set by the seller (e.g. `TSHIRT-LARGE-BLUE`). Accounts with billing-reason SKU suffixes enabled receive it stamped with why the charge happened: `-S` for a first subscription charge, `-R` for a renewal, `-C` for a one-time purchase, `-U` when the payment's own metadata carries `upsell: true`, `-F` when nothing was charged. Other billing reasons carry the bare SKU. `null` when the variant has no SKU or has been deleted. */
+    sku: string | null;
     /** The recorded amount for this item's full quantity, before discounts, tax, and fees, in its purchase currency. Returns `null` when no item amount was recorded. */
     subtotal: Whop.Money | null;
 }
