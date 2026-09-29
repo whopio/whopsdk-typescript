@@ -20,6 +20,7 @@ export interface EconomicIntelligence {
     id: string;
     /** What you requested, in your own words, or `null` for recommendations generated without your input. */
     input: string | null;
+    inputs: Whop.EconomicIntelligenceInput[];
     /** Step-by-step instructions for Whop AI, or `null` when no instructions are available. */
     prompt: string | null;
     /** Evidence and metrics supporting the recommendation, or `null` when no reasoning was provided. */
