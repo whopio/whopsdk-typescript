@@ -3,6 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface Account {
+    /** Lifetime charged ad spend for the account, in USD. Computed only on `list` for callers with `stats:read` on the account; `null` otherwise. */
+    ads_spend_usd: number | null;
     balances: Whop.AccountBalanceToken[];
     /** Account banner image URL. */
     banner_image_url: string | null;
