@@ -32,6 +32,7 @@ export namespace PaymentLastPaymentError {
         RestrictedCard: "restricted_card",
         CardVelocityExceeded: "card_velocity_exceeded",
         ContactIssuer: "contact_issuer",
+        CardDeclinedByIssuer: "card_declined_by_issuer",
         BankDeclined: "bank_declined",
         RegulatoryBlocked: "regulatory_blocked",
         TransactionNotPermitted: "transaction_not_permitted",
