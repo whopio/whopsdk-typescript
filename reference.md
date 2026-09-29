@@ -17632,7 +17632,7 @@ await client.partners.leaderboard();
 <dl>
 <dd>
 
-Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals.
+Lists the users the caller referred onto Whop, newest first by default, each with the caller's total affiliate earnings from that user across all tiers. Earnings sorting uses cached totals. Authorized staff can set user_id=global to list referrals across partners, with earnings for each user's current primary referrer.
 </dd>
 </dl>
 </dd>

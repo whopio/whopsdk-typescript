@@ -7,13 +7,19 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ReferredUsersPartnersRequest {
-    /** Search referred users by name or username. */
+    /** Set to global to view referred users across partners with each primary referrer's cached total earnings. Requires an admin or partner manager session; OAuth tokens and company API keys cannot use global mode. Optionally narrow to one earning_partner_id or earning_partner_username. */
+    user_id?: Whop.ReferredUsersPartnersRequestUserId;
+    /** The selected referring partner's user_ ID. Requires user_id=global; cannot be combined with earning_partner_username. */
+    earning_partner_id?: string;
+    /** The selected referring partner's exact username. Requires user_id=global; cannot be combined with earning_partner_id. */
+    earning_partner_username?: string;
+    /** Search referred users by name or username. In global mode, matches the beginning of usernames only. */
     query?: string;
     /** When true, only referred users who brought at least one business onto Whop. */
     has_businesses?: boolean;
     /** When true, only referred users with at least one business that has generated earnings. */
     has_earning_businesses?: boolean;
-    /** The field to sort by. created_at uses the user's signup date; earnings_usd uses the caller's cached total affiliate earnings from that user. */
+    /** The field to sort by. created_at uses the user's signup date; earnings_usd uses the current primary referrer's cached total affiliate earnings from that user. */
     order?: Whop.ReferredUsersPartnersRequestOrder;
     /** The direction to sort results. */
     direction?: Whop.ReferredUsersPartnersRequestDirection;
