@@ -18,6 +18,7 @@ describe("AccountsClient", () => {
         const rawResponseBody = {
             data: [
                 {
+                    ads_spend_usd: 0,
                     balances: [
                         {
                             balance: "50.0",
@@ -574,6 +575,7 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            ads_spend_usd: 0,
             balances: [
                 {
                     balance: "50.0",
@@ -1113,6 +1115,7 @@ describe("AccountsClient", () => {
         });
 
         const rawResponseBody = {
+            ads_spend_usd: 0,
             balances: [
                 {
                     balance: "50.0",
@@ -1598,6 +1601,7 @@ describe("AccountsClient", () => {
         });
 
         const rawResponseBody = {
+            ads_spend_usd: 0,
             balances: [
                 {
                     balance: "50.0",
@@ -2216,6 +2220,7 @@ describe("AccountsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            ads_spend_usd: 0,
             balances: [
                 {
                     balance: "50.0",
@@ -3539,6 +3544,7 @@ describe("AccountsClient", () => {
         });
 
         const rawResponseBody = {
+            ads_spend_usd: 0,
             balances: [
                 {
                     balance: "50.0",
