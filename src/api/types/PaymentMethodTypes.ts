@@ -25,6 +25,7 @@ export const PaymentMethodTypes = {
     CaBankTransfer: "ca_bank_transfer",
     CapchasePay: "capchase_pay",
     Card: "card",
+    CardPresent: "card_present",
     CardInstallmentsThree: "card_installments_three",
     CardInstallmentsSix: "card_installments_six",
     CardInstallmentsTwelve: "card_installments_twelve",
