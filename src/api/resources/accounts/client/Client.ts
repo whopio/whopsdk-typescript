@@ -10,6 +10,7 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import * as Whop from "../../../index.js";
 import { FeesClient } from "../resources/fees/client/Client.js";
+import { FinancingApplicationsClient } from "../resources/financingApplications/client/Client.js";
 import { PreferencesClient } from "../resources/preferences/client/Client.js";
 import { ReservesClient } from "../resources/reserves/client/Client.js";
 
@@ -27,6 +28,7 @@ export declare namespace AccountsClient {
 export class AccountsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<AccountsClient.Options>;
     protected _fees: FeesClient | undefined;
+    protected _financingApplications: FinancingApplicationsClient | undefined;
     protected _preferences: PreferencesClient | undefined;
     protected _reserves: ReservesClient | undefined;
 
@@ -36,6 +38,10 @@ export class AccountsClient {
 
     public get fees(): FeesClient {
         return (this._fees ??= new FeesClient(this._options));
+    }
+
+    public get financingApplications(): FinancingApplicationsClient {
+        return (this._financingApplications ??= new FinancingApplicationsClient(this._options));
     }
 
     public get preferences(): PreferencesClient {

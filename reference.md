@@ -28396,6 +28396,356 @@ await client.accounts.fees.update({
 </dl>
 </details>
 
+## Accounts FinancingApplications
+<details><summary><code>client.accounts.financingApplications.<a href="/src/api/resources/accounts/resources/financingApplications/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.FinancingApplication, Whop.ListFinancingApplicationsResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists payment-financing applications for the account in the URL. Account credentials can access their own account and direct sub-accounts, excluding deeper descendants. User credentials require the read permission on each account. Filters only narrow this visibility.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.accounts.financingApplications.list({
+    account_id: "account_id"
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.accounts.financingApplications.list({
+    account_id: "account_id"
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.ListFinancingApplicationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingApplicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.financingApplications.<a href="/src/api/resources/accounts/resources/financingApplications/client/Client.ts">create</a>({ ...params }) -> Whop.FinancingApplication</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates an application for merchant payment-financing approval. Requires an existing ledger account. Returns an existing application collecting information or awaiting review; applications awaiting review take precedence. Restricted industries cannot apply. Closed applications allow reapplication. This does not submit the application for review. Supports Idempotency-Key replay; open applications are also reused across different keys.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.financingApplications.create({
+    account_id: "account_id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.CreateFinancingApplicationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingApplicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.financingApplications.<a href="/src/api/resources/accounts/resources/financingApplications/client/Client.ts">retrieve</a>({ ...params }) -> Whop.FinancingApplication</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieves a payment-financing application's review state, requirements, saved answers, documents, current terms, and public review feedback. Requires read access to its owning account. Internal review notes and risk metrics are not exposed.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.financingApplications.retrieve({
+    account_id: "account_id",
+    id: "id"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.RetrieveFinancingApplicationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingApplicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.financingApplications.<a href="/src/api/resources/accounts/resources/financingApplications/client/Client.ts">update</a>({ ...params }) -> Whop.FinancingApplication</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Saves merchant answers while the application requires_collection. The entire batch is atomic. Omitted requirements and answer fields are unchanged; empty arrays clear values or documents, and null money clears a price. Only merchant requirement IDs returned by this application are accepted. Upload documents through the Files API first: new files must belong to the caller, be ready and private, and satisfy the requirement's formats and 20 MB limit. file_ids replaces the requirement's attachments. This does not submit the application.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.financingApplications.update({
+    account_id: "account_id",
+    id: "id",
+    answers: [{
+            requirement_id: "inrqi_xxxxxxxxxxxxxx"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.UpdateFinancingApplicationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingApplicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.accounts.financingApplications.<a href="/src/api/resources/accounts/resources/financingApplications/client/Client.ts">submit</a>({ ...params }) -> Whop.FinancingApplication</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Submits a complete application for financing review. Present the application's terms.content, policies, and disclosure to the merchant and collect affirmative acceptance before calling this endpoint. Pass the terms.version that was presented; stale versions are rejected. The server records acceptance, submitting actor, and submission time before entering awaiting_review. Only requires_collection applications may submit, including after a reviewer requests more information. Resubmissions require acceptance again. Use Idempotency-Key for retries; submitting an application already in review without replay returns an error. Approval does not itself enable financing payment methods.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.accounts.financingApplications.submit({
+    account_id: "account_id",
+    id: "id",
+    merchant_acceptance: {
+        accepted: true,
+        terms_version: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.accounts.SubmitFinancingApplicationsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FinancingApplicationsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Accounts Preferences
 <details><summary><code>client.accounts.preferences.<a href="/src/api/resources/accounts/resources/preferences/client/Client.ts">retrieve</a>({ ...params }) -> Whop.RetrievePreferencesResponse</code></summary>
 <dl>
