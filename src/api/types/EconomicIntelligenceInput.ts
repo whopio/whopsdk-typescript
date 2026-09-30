@@ -8,4 +8,6 @@ export interface EconomicIntelligenceInput {
     /** What you are choosing, such as the daily ad budget. */
     label: string;
     options: string[];
+    /** A plan sentence with one {answer} blank to fill with the selected answer. */
+    template: string;
 }

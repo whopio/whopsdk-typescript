@@ -29,7 +29,15 @@ describe("EconomicIntelligenceClient", () => {
                     ],
                     id: "reca_xxxxxxxxxxxxxx",
                     input: "more sales from ads",
-                    inputs: [{ answer: null, id: "daily_budget", label: "Daily ad budget", options: ["$50 a day"] }],
+                    inputs: [
+                        {
+                            answer: null,
+                            id: "audience",
+                            label: "Guide audience",
+                            options: ["Daily drivers"],
+                            template: "Guide audience: {answer}",
+                        },
+                    ],
                     prompt: "Create a 20% off promo code for my members.",
                     reasoning: "Capped 9 of 14 days.",
                     result_url: "https://atlas.whop.site/",
@@ -191,7 +199,15 @@ describe("EconomicIntelligenceClient", () => {
             ],
             id: "reca_xxxxxxxxxxxxxx",
             input: "more sales from ads",
-            inputs: [{ answer: "answer", id: "daily_budget", label: "Daily ad budget", options: ["$50 a day"] }],
+            inputs: [
+                {
+                    answer: "answer",
+                    id: "audience",
+                    label: "Guide audience",
+                    options: ["Daily drivers"],
+                    template: "Guide audience: {answer}",
+                },
+            ],
             prompt: "Create a 20% off promo code for my members.",
             reasoning: "Capped 9 of 14 days.",
             result_url: "https://atlas.whop.site/",
