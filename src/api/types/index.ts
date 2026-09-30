@@ -356,6 +356,8 @@ export * from "./PaymentMethodTypes.js";
 export * from "./PaymentNextAction.js";
 export * from "./PaymentNextActionAwaitConfirmation.js";
 export * from "./PaymentNextActionAwaitConfirmationData.js";
+export * from "./PaymentNextActionCollectCardPresent.js";
+export * from "./PaymentNextActionCollectCardPresentData.js";
 export * from "./PaymentNextActionDisplayInstructions.js";
 export * from "./PaymentNextActionRedirect.js";
 export * from "./PaymentNextActionRedirectData.js";

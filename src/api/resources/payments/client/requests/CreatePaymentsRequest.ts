@@ -15,7 +15,7 @@ export interface CreatePaymentsRequest {
     capture?: boolean | null;
     /** A confirmation token describing a payment method the buyer just supplied. Provide this instead of `member_id` and `payment_method_id`; the buyer is resolved from the token's billing email, or from `email`. The buyer may still have a step to complete — poll the payment's status for what to do next. */
     confirmation_token?: string | null;
-    /** Overrides the buyer email carried on the confirmation token, resolving or creating the user the payment belongs to. Ignored unless `confirmation_token` is provided, and when the token was created by a signed-in buyer. */
+    /** The buyer's email, resolving or creating the user the payment belongs to. With `confirmation_token` it overrides the email the token carries, and is ignored when the token was created by a signed-in buyer; with `payment_method` it names a buyer the point of sale already knows, otherwise the sale belongs to a guest until a buyer is attached. Ignored with `member_id`. */
     email?: string | null;
     /** What the buyer is purchasing. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
     line_items?: CreatePaymentsRequest.LineItems.Item[];
@@ -23,6 +23,8 @@ export interface CreatePaymentsRequest {
     member_id?: string | null;
     /** Custom metadata to attach to the payment. */
     metadata?: Record<string, string | null> | null;
+    /** A payment method collected on the seller's device rather than described by a confirmation token. `type` names it and the member named after it carries what the device needs. Today only `card_present` (Tap to Pay): nothing is collected on this call, the payment is created first and the reader then collects against it with the client secret the status endpoint serves in `next_action`. Mutually exclusive with `confirmation_token`, `member_id` and `payment_method_id`. */
+    payment_method?: CreatePaymentsRequest.PaymentMethod | null;
     /** The stored payment method to charge, prefixed `payt_`. It must belong to the member. Required unless `confirmation_token` is provided. */
     payment_method_id?: string | null;
     /** Find or create a variant for this payment through the compatibility input `plan`. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
@@ -49,6 +51,41 @@ export namespace CreatePaymentsRequest {
             /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
             quantity?: (number | null) | undefined;
         }
+    }
+
+    /**
+     * A payment method collected on the seller's device rather than described by a confirmation token. `type` names it and the member named after it carries what the device needs. Today only `card_present` (Tap to Pay): nothing is collected on this call, the payment is created first and the reader then collects against it with the client secret the status endpoint serves in `next_action`. Mutually exclusive with `confirmation_token`, `member_id` and `payment_method_id`.
+     */
+    export interface PaymentMethod {
+        /** Present when `type` is `card_present`. */
+        card_present: PaymentMethod.CardPresent;
+        /** The kind of payment method the device collects; the member named after it carries its details. */
+        type: PaymentMethod.Type;
+    }
+
+    export namespace PaymentMethod {
+        /**
+         * Present when `type` is `card_present`.
+         */
+        export interface CardPresent {
+            /** Which Tap to Pay SDK collects the payment. Stripe offers Tap to Pay in different countries per platform, so eligibility is checked for the named one, as it is for the connection-token session. */
+            platform: CardPresent.Platform;
+        }
+
+        export namespace CardPresent {
+            /** Which Tap to Pay SDK collects the payment. Stripe offers Tap to Pay in different countries per platform, so eligibility is checked for the named one, as it is for the connection-token session. */
+            export const Platform = {
+                Ios: "ios",
+                Android: "android",
+            } as const;
+            export type Platform = (typeof Platform)[keyof typeof Platform];
+        }
+
+        /** The kind of payment method the device collects; the member named after it carries its details. */
+        export const Type = {
+            CardPresent: "card_present",
+        } as const;
+        export type Type = (typeof Type)[keyof typeof Type];
     }
 
     /**
