@@ -355,6 +355,12 @@ describe("PartnersClient", () => {
                 },
             ],
             referred_businesses_count: 1,
+            referring_partner: {
+                id: "user_xxxxxxxxxxxxxx",
+                name: "Dana Whitfield",
+                profile_picture: { url: "https://ui-avatars.com/api/" },
+                username: "danawhitfield",
+            },
             user: {
                 id: "user_xxxxxxxxxxxxxx",
                 name: "Dana Whitfield",
