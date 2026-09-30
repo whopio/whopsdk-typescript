@@ -48,6 +48,12 @@ describe("EarningsClient", () => {
                         route: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                         title: "Ceramic Coating Package",
                     },
+                    projected_commission_amount_usd: {
+                        amount: "-1234.56",
+                        currency: "usd",
+                        decimals: 2,
+                        display_decimals: 2,
+                    },
                     resource: {
                         alternative_payment_method: {
                             image_url: "https://content.whop.com/core/pm_cashapp.svg",
