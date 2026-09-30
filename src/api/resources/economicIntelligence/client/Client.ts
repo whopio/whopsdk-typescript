@@ -29,7 +29,7 @@ export class EconomicIntelligenceClient {
     }
 
     /**
-     * Lists an account's recommendations and generation requests, newest first. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation.
+     * Lists an account's recommendations and generation requests, newest first by default. Without an account, signed-out visitors receive a business-setup template and eligible users receive their saved setup recommendation. With `has_run` and no account, users receive the recommendations run on every account they can read.
      *
      * @param {Whop.ListEconomicIntelligenceRequest} request
      * @param {EconomicIntelligenceClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -52,11 +52,25 @@ export class EconomicIntelligenceClient {
             async (
                 request: Whop.ListEconomicIntelligenceRequest,
             ): Promise<core.WithRawResponse<Whop.ListEconomicIntelligenceResponse>> => {
-                const { account_id: accountId, status, input, first, after, last, before } = request;
+                const {
+                    account_id: accountId,
+                    status,
+                    input,
+                    has_run: hasRun,
+                    order,
+                    direction,
+                    first,
+                    after,
+                    last,
+                    before,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
                     status: status != null ? status : undefined,
                     input,
+                    has_run: hasRun,
+                    order: order != null ? order : undefined,
+                    direction: direction != null ? direction : undefined,
                     first,
                     after,
                     last,

@@ -13,6 +13,12 @@ export interface ListEconomicIntelligenceRequest {
     status?: Whop.ListEconomicIntelligenceRequestStatus;
     /** What you want recommendations for, in your own words. Up to 1000 characters. Narrows the list to the recommendations that address it. */
     input?: string;
+    /** When true, only recommendations someone has started running, by any user. Without `account_id`, covers every account you can read that has Economic Intelligence. Can't be combined with `input`. */
+    has_run?: boolean;
+    /** Sort field. */
+    order?: Whop.ListEconomicIntelligenceRequestOrder;
+    /** Sort direction. */
+    direction?: Whop.ListEconomicIntelligenceRequestDirection;
     /** Number of results to return from the start of the range. */
     first?: number;
     /** Return results after this cursor. Use `page_info.end_cursor` from the previous response to fetch the next page. */
