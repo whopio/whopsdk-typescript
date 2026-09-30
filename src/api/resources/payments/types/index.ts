@@ -1,6 +1,7 @@
 export * from "./ListFeesPaymentsResponse.js";
 export * from "./ListPaymentsRequestBillingReason.js";
 export * from "./ListPaymentsRequestDirection.js";
+export * from "./ListPaymentsRequestMode.js";
 export * from "./ListPaymentsRequestOrder.js";
 export * from "./ListPaymentsRequestStatus.js";
 export * from "./ListPaymentsResponse.js";
