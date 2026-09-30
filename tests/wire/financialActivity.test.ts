@@ -31,7 +31,7 @@ describe("FinancialActivityClient", () => {
                     currency: { code: "usd", precision: "100000000" },
                     id: "line_3",
                     ledger_account_id: "ldgr_xxxxxxxxxxxxxx",
-                    line_type: "account_settlement",
+                    line_type: "psp_payment_receivable",
                     object: "ledger_activity",
                     payment: {
                         amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -65,13 +65,21 @@ describe("FinancialActivityClient", () => {
                         chain: "plasma",
                         claim_url: "https://whop.com/claim",
                         created_at: "2026-01-01T12:00:00Z",
+                        created_by_user: {
+                            id: "user_xxxxxxxxxxxxxx",
+                            name: "Dana Whitfield",
+                            profile_picture: { url: "https://ui-avatars.com/api/" },
+                            username: "danawhitfield",
+                        },
                         estimated_arrival: "2026-01-01T12:00:00Z",
+                        fee_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         from_amount: "502.51",
                         from_currency: "usdt",
                         id: "airdrp_xxxxxxxxxxxxxx",
                         object: "airdrop_link",
                         payer_name: "MassPay",
                         payment_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                        payout_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
                         payout_destination: {
                             icon_url:
                                 "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/ach-activity-icon",

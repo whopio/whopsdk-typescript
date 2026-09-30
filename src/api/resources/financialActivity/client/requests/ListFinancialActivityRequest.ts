@@ -25,6 +25,10 @@ export interface ListFinancialActivityRequest {
     activity_id?: string;
     /** Whether to exclude balance reservations and balanced movements between the account's own balances. */
     exclude_internal_movements?: boolean;
+    /** Which balance the activity changes. `total` includes available, pending, and reserved funds. `available` includes only movements into or out of available funds, including reservations, releases, and fees. Movements within the selected balance are omitted. Omit to preserve the existing activity feed. Requires account_id or user_id; cannot be combined with available_after or available_before. */
+    balance_type?: Whop.ListFinancialActivityRequestBalanceType;
+    /** Withdrawal ID (wdrl_). With balance_type=available, selects the same period as its statement, after the previous withdrawal and through this withdrawal, excluding this withdrawal and its fee. Requires a single account. Overrides currency and posted-date filters. */
+    withdrawal_id?: string;
     /** Optional currency code filter, for example `usd`. */
     currency?: string;
     /** Only include rows posted after this ISO 8601 timestamp. */

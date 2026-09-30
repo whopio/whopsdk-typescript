@@ -7,12 +7,16 @@ export interface RetrievePayoutsResponse {
     created_at: string;
     /** Payout currency. */
     currency: string;
+    /** Whether an in-transit withdrawal is past its settlement window. */
+    delayed?: boolean | undefined;
     /** The amount delivered in the destination currency, as a decimal string. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded conversion. */
     destination_amount: string | null;
     /** Currency the funds are delivered in, taken from the payout method when the payout is created. On a stablecoin payout it follows the settlement payout minted alongside it — the `GET /payouts` row carrying this payout's id as `payout_request_id` — and is `null` only when no settlement payout exists. */
     destination_currency: string | null;
     /** Estimated time the funds become available in the destination account. */
     estimated_arrival: string | null;
+    /** End of the expected bank settlement window. */
+    estimated_arrival_end?: (string | null) | undefined;
     /** Exchange rate from the payout currency to the destination currency. Assigned when the payout is processed, so it is `null` before then and on payouts without a recorded rate. */
     exchange_rate: number | null;
     /** Why the payout ended without paying, or why it reversed after settlement. Present on failed, canceled, denied, and reversed payouts; `null` otherwise. */
@@ -48,6 +52,8 @@ export interface RetrievePayoutsResponse {
     status: RetrievePayoutsResponse.Status;
     /** The finest machine phase under `status` — for example `awaiting_provider_acceptance` vs `in_transit` under `processing`, or the stablecoin conversion phase under `requested`. Informational vocabulary: values can be added without a version bump; `status` is the versioned contract. */
     status_detail: string;
+    /** Completed lifecycle events in chronological order. Present when retrieving a withdrawal ID. */
+    timeline?: RetrievePayoutsResponse.Timeline.Item[] | undefined;
     /** ACH trace number the recipient's bank can use to locate this payout. Assigned when the payout is submitted to the bank, so it is `null` before then and on payouts not sent over ACH. */
     trace_code: string | null;
 }
@@ -141,4 +147,30 @@ export namespace RetrievePayoutsResponse {
         Denied: "denied",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    export type Timeline = Timeline.Item[];
+
+    export namespace Timeline {
+        export interface Item {
+            /** Failure message, only with payout:destination:read. */
+            error_message: string | null;
+            estimated_arrival: string | null;
+            status: Item.Status;
+            /** Informational event detail; security_review identifies manual review. */
+            status_detail: string | null;
+            timestamp: string | null;
+        }
+
+        export namespace Item {
+            export const Status = {
+                Requested: "requested",
+                AwaitingPayment: "awaiting_payment",
+                InTransit: "in_transit",
+                Completed: "completed",
+                Failed: "failed",
+                Canceled: "canceled",
+                Denied: "denied",
+            } as const;
+            export type Status = (typeof Status)[keyof typeof Status];
+        }
+    }
 }
