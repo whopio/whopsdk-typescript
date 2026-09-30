@@ -18888,7 +18888,7 @@ await client.paymentRules.replace({
 <dl>
 <dd>
 
-Lists payments, newest first. Without filters this is every payment the caller can read: a company credential's own account, or for a user every account they can read payments for. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
+Lists payments, newest first. By default, returns account sales: a company credential's own account, or for a user every account they can read payments for. Set `mode=user_sales` to list only the sales received by the signed-in user's primary ledger account, without a company. This mode requires the user's own Whop login session and cannot be combined with `account_id`. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
 </dd>
 </dl>
 </dd>

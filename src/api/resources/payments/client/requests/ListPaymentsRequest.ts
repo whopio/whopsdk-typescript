@@ -7,6 +7,8 @@ import type * as Whop from "../../../../index.js";
  *     {}
  */
 export interface ListPaymentsRequest {
+    /** Which sales to list. `account_sales` returns sales for the accounts the caller can read. `user_sales` returns only sales received by the signed-in user's primary ledger account, without a company; requires their own Whop login session and cannot be combined with `account_id`. */
+    mode?: Whop.ListPaymentsRequestMode;
     /** Only payments charged by this account, prefixed `biz_`. */
     account_id?: string;
     /** Only payments in this lifecycle state. */
@@ -15,7 +17,7 @@ export interface ListPaymentsRequest {
     billing_reason?: Whop.ListPaymentsRequestBillingReason;
     /** Only payments presented in this three-letter currency, such as `usd`. */
     currency?: string;
-    /** Only payments made by this buyer, prefixed `user_`. Payments are listed for the accounts the caller manages, so `me` is not accepted; list the caller's own purchases with `GET /memberships?user_id=me`. */
+    /** Only payments made by this buyer, prefixed `user_`. This filters sales the caller can read, so `me` is not accepted; list the caller's own purchases with `GET /memberships?user_id=me`. */
     user_id?: string;
     /** Search payments by user ID, membership ID, user email, name, or username. Email filtering requires the member:email:read permission. */
     query?: string;

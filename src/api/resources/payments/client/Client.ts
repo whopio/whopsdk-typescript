@@ -35,7 +35,7 @@ export class PaymentsClient {
     }
 
     /**
-     * Lists payments, newest first. Without filters this is every payment the caller can read: a company credential's own account, or for a user every account they can read payments for. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
+     * Lists payments, newest first. By default, returns account sales: a company credential's own account, or for a user every account they can read payments for. Set `mode=user_sales` to list only the sales received by the signed-in user's primary ledger account, without a company. This mode requires the user's own Whop login session and cannot be combined with `account_id`. Filters narrow by account, buyer, product, plan, membership, status, billing reason, currency, and creation window. Filtering by `billing_reason=subscription_cycle` also matches renewals recorded as `subscription_update`. `settlement_time_at` is null on list rows — retrieve the payment for it.
      *
      * @param {Whop.ListPaymentsRequest} request
      * @param {PaymentsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -55,6 +55,7 @@ export class PaymentsClient {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListPaymentsRequest): Promise<core.WithRawResponse<Whop.ListPaymentsResponse>> => {
                 const {
+                    mode,
                     account_id: accountId,
                     status,
                     billing_reason: billingReason,
@@ -75,6 +76,7 @@ export class PaymentsClient {
                     before,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
+                    mode: mode != null ? mode : undefined,
                     account_id: accountId,
                     status: status != null ? status : undefined,
                     billing_reason: billingReason != null ? billingReason : undefined,
