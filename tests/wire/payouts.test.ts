@@ -531,9 +531,11 @@ describe("PayoutsClient", () => {
             amount: "500.0",
             created_at: "2026-07-29T18:22:00Z",
             currency: "usd",
+            delayed: false,
             destination_amount: "461.7",
             destination_currency: "eur",
             estimated_arrival: "2026-08-03T00:00:00Z",
+            estimated_arrival_end: "2024-01-15T09:30:00Z",
             exchange_rate: 0.9234,
             failure: {
                 code: "beneficiary_name_mismatch",
@@ -563,6 +565,15 @@ describe("PayoutsClient", () => {
             statement_descriptor: "MYCOMPANY",
             status: "requested",
             status_detail: "awaiting_provider_acceptance",
+            timeline: [
+                {
+                    error_message: "error_message",
+                    estimated_arrival: "2024-01-15T09:30:00Z",
+                    status: "requested",
+                    status_detail: "status_detail",
+                    timestamp: "2026-01-01T12:00:00Z",
+                },
+            ],
             trace_code: "021000021234567",
         };
 
