@@ -114,6 +114,9 @@ export namespace PostAdUpdatedPayload {
             EventRsvp: "event_rsvp",
             SeeDetails: "see_details",
             ViewInstagramProfile: "view_instagram_profile",
+            DonateNow: "donate_now",
+            SeeMore: "see_more",
+            VisitSite: "visit_site",
         } as const;
         export type CallToAction = (typeof CallToAction)[keyof typeof CallToAction];
         /** Whether the ad is delivering right now, and if not, why. When several states apply at once, the highest-precedence one is returned. */

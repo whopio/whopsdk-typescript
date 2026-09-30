@@ -40,6 +40,8 @@ export interface Account {
     email: string | null;
     /** The account's end-user license agreement document, or `null` if they have not published one. */
     eula: Whop.File_ | null;
+    /** The account's most recent financing application. Computed only on `retrieve` and `me` for callers with `company:balance:read` scope; `null` otherwise, or when the account has never applied for financing. */
+    financing: Whop.AccountFinancing | null;
     home_preferences: Account.HomePreferences.Item[];
     /** Account ID, prefixed `biz_`. */
     id: string;

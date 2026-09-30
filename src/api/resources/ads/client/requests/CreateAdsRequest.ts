@@ -52,6 +52,7 @@ export namespace CreateAdsRequest {
         BookNow: "book_now",
         CallNow: "call_now",
         ContactUs: "contact_us",
+        DonateNow: "donate_now",
         Download: "download",
         GetDirections: "get_directions",
         GetOffer: "get_offer",
@@ -65,10 +66,12 @@ export namespace CreateAdsRequest {
         RequestTime: "request_time",
         SeeDetails: "see_details",
         SeeMenu: "see_menu",
+        SeeMore: "see_more",
         SendUpdates: "send_updates",
         ShopNow: "shop_now",
         SignUp: "sign_up",
         Subscribe: "subscribe",
+        VisitSite: "visit_site",
         WatchMore: "watch_more",
     } as const;
     export type CallToAction = (typeof CallToAction)[keyof typeof CallToAction];
