@@ -7,12 +7,17 @@ import type * as Whop from "../index.js";
  */
 export type PaymentNextAction =
     | Whop.PaymentNextAction.AwaitConfirmation
+    | Whop.PaymentNextAction.CollectCardPresent
     | Whop.PaymentNextAction.DisplayInstructions
     | Whop.PaymentNextAction.Redirect;
 
 export namespace PaymentNextAction {
     export interface AwaitConfirmation extends Whop.PaymentNextActionAwaitConfirmation {
         type: "await_confirmation";
+    }
+
+    export interface CollectCardPresent extends Whop.PaymentNextActionCollectCardPresent {
+        type: "collect_card_present";
     }
 
     export interface DisplayInstructions extends Whop.PaymentNextActionDisplayInstructions {
