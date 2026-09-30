@@ -33,6 +33,7 @@ export namespace PaymentMethodDisplay {
         Crypto: "crypto",
         Balance: "balance",
         InAppPurchase: "in_app_purchase",
+        CardPresent: "card_present",
         Saved: "saved",
     } as const;
     export type Category = (typeof Category)[keyof typeof Category];
