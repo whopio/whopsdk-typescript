@@ -21,7 +21,9 @@ describe("ReservesClient", () => {
                     amount: "125.5",
                     by_type: [{ amount: "100.0", hold_period_days: 90, percentage: 25, type: "regular" }],
                     currency: "usd",
-                    unlocks_by_date: [{ amount: "100.0", date: "2026-01-01" }],
+                    unlocks_by_date: [
+                        { amount: "100.0", by_type: [{ amount: "100.0", type: "regular" }], date: "2026-01-01" },
+                    ],
                 },
             ],
         };
