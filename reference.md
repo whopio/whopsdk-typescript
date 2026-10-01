@@ -15935,6 +15935,72 @@ await client.memberships.update({
 </dl>
 </details>
 
+<details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">applyPromoCode</a>({ ...params }) -> Whop.Membership</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Applies a promo code to an `active` or `trialing` membership that does not already have one and has exactly one recurring item. The discount lands on the next invoice and follows the code's duration (`once`, `repeating`, or `forever`). Works for Stripe-billed memberships and memberships billed by Whop's billing engine, including payment-element and multi-PSP renewals. Stock, plan eligibility, and expiry are still checked. Memberships with multiple recurring items are rejected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.memberships.applyPromoCode({
+    id: "id",
+    promo_code: "SAVE20"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ApplyPromoCodeMembershipsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `MembershipsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.memberships.<a href="/src/api/resources/memberships/client/Client.ts">cancel</a>({ ...params }) -> Whop.Membership</code></summary>
 <dl>
 <dd>

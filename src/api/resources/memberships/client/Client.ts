@@ -19,7 +19,7 @@ export declare namespace MembershipsClient {
 /**
  * A Membership is a customer's purchase of a variant: the subscription or one-time grant that gives them access to a product. It tracks billing state (`active`, `trialing`, `past_due`, and so on), the current period, pending cancellations, custom metadata, and the software license key when the product includes licensing.
  *
- * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, invite a recipient to join through a free variant, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, generate a transfer link, and update metadata.
+ * Use the Memberships API to list an account's memberships or the caller's own, retrieve one by ID or license key, invite a recipient to join through a free variant, and manage the lifecycle: cancel immediately or at period end, reverse a scheduled period-end cancellation, pause and resume payment collection, extend with free days, apply a promo code mid-cycle, generate a transfer link, and update metadata.
  */
 export class MembershipsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MembershipsClient.Options>;
@@ -395,6 +395,97 @@ export class MembershipsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "PATCH", "/memberships/{id}");
+    }
+
+    /**
+     * Applies a promo code to an `active` or `trialing` membership that does not already have one and has exactly one recurring item. The discount lands on the next invoice and follows the code's duration (`once`, `repeating`, or `forever`). Works for Stripe-billed memberships and memberships billed by Whop's billing engine, including payment-element and multi-PSP renewals. Stock, plan eligibility, and expiry are still checked. Memberships with multiple recurring items are rejected.
+     *
+     * @param {Whop.ApplyPromoCodeMembershipsRequest} request
+     * @param {MembershipsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.UnauthorizedError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.ConflictError}
+     * @throws {@link errors.WhopError}
+     * @throws {@link errors.WhopTimeoutError}
+     *
+     * @example
+     *     await client.memberships.applyPromoCode({
+     *         id: "id",
+     *         promo_code: "SAVE20"
+     *     })
+     */
+    public applyPromoCode(
+        request: Whop.ApplyPromoCodeMembershipsRequest,
+        requestOptions?: MembershipsClient.RequestOptions,
+    ): core.HttpResponsePromise<Whop.Membership> {
+        return core.HttpResponsePromise.fromPromise(this.__applyPromoCode(request, requestOptions));
+    }
+
+    private async __applyPromoCode(
+        request: Whop.ApplyPromoCodeMembershipsRequest,
+        requestOptions?: MembershipsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Whop.Membership>> {
+        const { id, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "Api-Version-Date": requestOptions?.apiVersionDate ?? this._options?.apiVersionDate ?? "2026-09-29",
+                "Idempotency-Key": requestOptions?.idempotencyKey ?? this._options?.idempotencyKey,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    ((await core.Supplier.get(this._options.environment)) ?? environments.WhopEnvironment.Production)
+                        .api,
+                `memberships/${core.url.encodePathParam(id)}/apply_promo_code`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: mergeAdditionalBodyParameters(_body, requestOptions?.additionalBodyParameters),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Whop.Membership, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 401:
+                    throw new Whop.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                case 409:
+                    throw new Whop.ConflictError(_response.error.body as Whop.V1ErrorResponse, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/memberships/{id}/apply_promo_code",
+        );
     }
 
     /**

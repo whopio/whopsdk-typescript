@@ -44,6 +44,7 @@ describe("MembershipsClient", () => {
                     phone_number: "+xxxxxxxxxxx",
                     plan_id: "plan_xxxxxxxxxxxxxx",
                     product_id: "prod_xxxxxxxxxxxxxx",
+                    promo_code_id: "promo_xxxxxxxxxxxxxx",
                     status: "trialing",
                     updated_at: "2026-01-01T12:00:00.000Z",
                     user_id: "user_xxxxxxxxxxxxxx",
@@ -360,6 +361,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -452,6 +454,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -529,6 +532,181 @@ describe("MembershipsClient", () => {
         }).rejects.toThrow(Whop.ForbiddenError);
     });
 
+    test("applyPromoCode (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { promo_code: "SAVE20" };
+        const rawResponseBody = {
+            account: {
+                id: "biz_xxxxxxxxxxxxxx",
+                logo_url:
+                    "https://whop-assets-example.s3.amazonaws.com/uploads/image/2026-01-01/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                route: "shine-time-auto-detailing",
+                title: "Shine Time Auto Detailing",
+            },
+            billing_period_days: 30,
+            cancel_at_period_end: true,
+            canceled_at: "2026-01-01T12:00:00.000Z",
+            cancellation_reason: "Too expensive",
+            created_at: "2026-01-01T12:00:00.000Z",
+            current_period_end: "2026-01-01T12:00:00.000Z",
+            current_period_start: "2026-01-01T12:00:00.000Z",
+            id: "mem_xxxxxxxxxxxxxx",
+            license_key: "WHOP-XXXX-XXXX-XXXX",
+            manage_url: "https://whop.com/billing/manage/mber_xxxxxxxxxxxxxx",
+            member: {
+                access_level: "no_access",
+                last_accessed_at: "2026-01-01T12:00:00.000Z",
+                position: 1767268800000,
+            },
+            metadata: { key: "value" },
+            phone_number: "+xxxxxxxxxxx",
+            plan_id: "plan_xxxxxxxxxxxxxx",
+            product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
+            status: "trialing",
+            updated_at: "2026-01-01T12:00:00.000Z",
+            user_id: "user_xxxxxxxxxxxxxx",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/apply_promo_code")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.memberships.applyPromoCode({
+            id: "id",
+            promo_code: "SAVE20",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("applyPromoCode (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { promo_code: "promo_code" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/apply_promo_code")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.applyPromoCode({
+                id: "id",
+                promo_code: "promo_code",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("applyPromoCode (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { promo_code: "promo_code" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/apply_promo_code")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.applyPromoCode({
+                id: "id",
+                promo_code: "promo_code",
+            });
+        }).rejects.toThrow(Whop.UnauthorizedError);
+    });
+
+    test("applyPromoCode (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { promo_code: "promo_code" };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/apply_promo_code")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.applyPromoCode({
+                id: "id",
+                promo_code: "promo_code",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("applyPromoCode (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+        const rawRequestBody = { promo_code: "promo_code" };
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server
+            .mockEndpoint()
+            .post("/memberships/id/apply_promo_code")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(409)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.memberships.applyPromoCode({
+                id: "id",
+                promo_code: "promo_code",
+            });
+        }).rejects.toThrow(Whop.ConflictError);
+    });
+
     test("cancel (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
@@ -566,6 +744,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -707,6 +886,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -852,6 +1032,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -993,6 +1174,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -1190,6 +1372,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",
@@ -1327,6 +1510,7 @@ describe("MembershipsClient", () => {
             phone_number: "+xxxxxxxxxxx",
             plan_id: "plan_xxxxxxxxxxxxxx",
             product_id: "prod_xxxxxxxxxxxxxx",
+            promo_code_id: "promo_xxxxxxxxxxxxxx",
             status: "trialing",
             updated_at: "2026-01-01T12:00:00.000Z",
             user_id: "user_xxxxxxxxxxxxxx",

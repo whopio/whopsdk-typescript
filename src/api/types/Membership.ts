@@ -35,6 +35,8 @@ export interface Membership {
     plan_id: string;
     /** The product this membership grants access to, prefixed `prod_`. */
     product_id: string;
+    /** The promo code discounting this membership, prefixed `promo_`. `null` when none is applied. Set at checkout or by Apply Promo Code to Membership. */
+    promo_code_id: string | null;
     /** Billing state of the membership. `active`/`trialing` memberships grant access; `past_due` is the grace period after a failed payment; `completed` one-time purchases keep access; `canceled`/`expired` do not. */
     status: Whop.MembershipStatus;
     /** When the membership was last changed, as an ISO 8601 timestamp. Reflects the most recent change to the membership itself, so you can reconcile against webhook retries, replays, and backfills. */
