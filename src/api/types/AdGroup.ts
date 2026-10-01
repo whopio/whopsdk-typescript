@@ -86,7 +86,7 @@ export interface AdGroup {
     ends_at: string | null;
     /** Platform-reported impressions divided by reach. */
     frequency: number | null;
-    /** Cap on how often one person sees ads from this ad group. Only available on campaigns with the `awareness` objective; `null` when uncapped. */
+    /** Cap on how often one person sees ads from this ad group. Only available when the ad group optimizes for reach or ThruPlay; `null` when uncapped. */
     frequency_cap: Whop.AdGroupFrequencyCap | null;
     /** Unique identifier for the ad group, prefixed `adgrp_`. */
     id: string;
