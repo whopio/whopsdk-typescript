@@ -67,6 +67,7 @@ import { PayoutsClient } from "./api/resources/payouts/client/Client.js";
 import { PeopleClient } from "./api/resources/people/client/Client.js";
 import { PermissionsClient } from "./api/resources/permissions/client/Client.js";
 import { PlansClient } from "./api/resources/plans/client/Client.js";
+import { ProductAffiliatesClient } from "./api/resources/productAffiliates/client/Client.js";
 import { ProductsClient } from "./api/resources/products/client/Client.js";
 import { PromoCodesClient } from "./api/resources/promoCodes/client/Client.js";
 import { ReactionsClient } from "./api/resources/reactions/client/Client.js";
@@ -168,6 +169,7 @@ export class WhopClient {
     protected _people: PeopleClient | undefined;
     protected _permissions: PermissionsClient | undefined;
     protected _plans: PlansClient | undefined;
+    protected _productAffiliates: ProductAffiliatesClient | undefined;
     protected _products: ProductsClient | undefined;
     protected _promoCodes: PromoCodesClient | undefined;
     protected _reactions: ReactionsClient | undefined;
@@ -460,6 +462,10 @@ export class WhopClient {
 
     public get plans(): PlansClient {
         return (this._plans ??= new PlansClient(this._options));
+    }
+
+    public get productAffiliates(): ProductAffiliatesClient {
+        return (this._productAffiliates ??= new ProductAffiliatesClient(this._options));
     }
 
     public get products(): ProductsClient {

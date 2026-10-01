@@ -20907,6 +20907,88 @@ await client.plans.calculateTax({
 </dl>
 </details>
 
+## Product Affiliates
+<details><summary><code>client.productAffiliates.<a href="/src/api/resources/productAffiliates/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ProductAffiliate, Whop.ListProductAffiliatesResponse&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Lists affiliate enrollments for an account's products, newest first, including affiliates who have not made a referral. Requires `affiliate:basic:read` on the account. Email addresses and email search also require `member:email:read`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const pageableResponse = await client.productAffiliates.list({
+    account_id: "account_id",
+    product_ids: ["prod_xxxxxxxxxxxxxx"]
+});
+for await (const item of pageableResponse) {
+    console.log(item);
+}
+
+// Or you can manually iterate page-by-page
+let page = await client.productAffiliates.list({
+    account_id: "account_id",
+    product_ids: ["prod_xxxxxxxxxxxxxx"]
+});
+while (page.hasNextPage()) {
+    page = page.getNextPage();
+}
+
+// You can also access the underlying response
+const response = page.response;
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Whop.ListProductAffiliatesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProductAffiliatesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Products
 <details><summary><code>client.products.<a href="/src/api/resources/products/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Whop.ProductListItem, Whop.ListProductsResponse&gt;</code></summary>
 <dl>
