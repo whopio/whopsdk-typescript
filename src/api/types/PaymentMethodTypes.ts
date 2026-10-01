@@ -91,6 +91,7 @@ export const PaymentMethodTypes = {
     Payco: "payco",
     Paynow: "paynow",
     Paypal: "paypal",
+    PaypalExpress: "paypal_express",
     Paypay: "paypay",
     Payto: "payto",
     Pix: "pix",
