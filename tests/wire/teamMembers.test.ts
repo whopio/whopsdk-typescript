@@ -445,7 +445,7 @@ describe("TeamMembersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { role: "owner" };
+        const rawRequestBody = {};
         const rawResponseBody = {
             account_id: "biz_xxxxxxxxxxxxxx",
             authorized_role: { id: "id", name: "name" },
@@ -475,7 +475,6 @@ describe("TeamMembersClient", () => {
 
         const response = await client.teamMembers.update({
             id: "id",
-            role: "owner",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -489,7 +488,7 @@ describe("TeamMembersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { role: "owner" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -504,7 +503,6 @@ describe("TeamMembersClient", () => {
         await expect(async () => {
             return await client.teamMembers.update({
                 id: "id",
-                role: "owner",
             });
         }).rejects.toThrow(Whop.BadRequestError);
     });
@@ -518,7 +516,7 @@ describe("TeamMembersClient", () => {
             idempotencyKey: "test",
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
-        const rawRequestBody = { role: "owner" };
+        const rawRequestBody = {};
         const rawResponseBody = { key: "value" };
 
         server
@@ -533,7 +531,6 @@ describe("TeamMembersClient", () => {
         await expect(async () => {
             return await client.teamMembers.update({
                 id: "id",
-                role: "owner",
             });
         }).rejects.toThrow(Whop.NotFoundError);
     });

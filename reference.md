@@ -25367,8 +25367,7 @@ Changes a team member's system role. Requires a user session — account API key
 
 ```typescript
 await client.teamMembers.update({
-    id: "id",
-    role: "owner"
+    id: "id"
 });
 
 ```

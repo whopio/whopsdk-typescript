@@ -3,15 +3,14 @@
 /**
  * @example
  *     {
- *         id: "id",
- *         role: "owner"
+ *         id: "id"
  *     }
  */
 export interface UpdateTeamMembersRequest {
     /** Team member ID — `ausr_` for accepted members, `ausri_` for pending invites. */
     id: string;
     /** The system role to grant. The Partner role can only be granted to the account's attached, verified partner. */
-    role: UpdateTeamMembersRequest.Role;
+    role?: UpdateTeamMembersRequest.Role;
 }
 
 export namespace UpdateTeamMembersRequest {

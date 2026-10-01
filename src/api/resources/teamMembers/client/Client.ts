@@ -400,8 +400,7 @@ export class TeamMembersClient {
      *
      * @example
      *     await client.teamMembers.update({
-     *         id: "id",
-     *         role: "owner"
+     *         id: "id"
      *     })
      */
     public update(
