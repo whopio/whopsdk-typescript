@@ -157,6 +157,7 @@ describe("PaymentsClient", () => {
                     },
                     verification_checks: {
                         address_line1: "PASS",
+                        arn: "74123456789",
                         authorization_code: "A1B2C3",
                         card_holder_name: "PASS",
                         card_security_code: "PASS",
@@ -378,6 +379,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
@@ -691,6 +693,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
@@ -920,6 +923,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
@@ -1438,6 +1442,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
@@ -1751,6 +1756,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",
@@ -2004,6 +2010,7 @@ describe("PaymentsClient", () => {
             },
             verification_checks: {
                 address_line1: "PASS",
+                arn: "74123456789",
                 authorization_code: "A1B2C3",
                 card_holder_name: "PASS",
                 card_security_code: "PASS",

@@ -3,6 +3,8 @@
 export interface PaymentVerificationChecks {
     /** The Address Verification Service (AVS) result for the billing street address. */
     address_line1: string | null;
+    /** The Acquirer Reference Number (ARN) that traces this charge through the card network, or null when the processor did not return one. */
+    arn: string | null;
     /** The card issuer's authorization code for this charge, or null when the processor did not return one. */
     authorization_code: string | null;
     /** Whether the cardholder name matched the issuer's records. */
