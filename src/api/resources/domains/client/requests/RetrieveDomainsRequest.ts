@@ -7,6 +7,6 @@
  *     }
  */
 export interface RetrieveDomainsRequest {
-    /** Domain ID, prefixed dom_. To retrieve, you can instead pass a hostname such as `example.com` to look up any domain; a name without an extension looks up the name on `.com`. */
+    /** Domain ID, prefixed `dom_`. To retrieve, you can pass a hostname such as `example.com` instead; a bare name looks up `.com`. */
     id: string;
 }

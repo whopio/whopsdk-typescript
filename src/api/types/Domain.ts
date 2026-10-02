@@ -25,9 +25,9 @@ export interface Domain {
     last_checked_at: string | null;
     /** Custom string keys and values attached to this domain. Empty for a search result. */
     metadata: Record<string, string>;
-    /** The domain's public registration record (RDAP): its registrar, registrant, key dates, registry statuses, and name servers, read when you retrieve the domain by hostname. `null` for your own domains, an available domain, or a record that couldn't be read. */
+    /** The domain's public registration record (RDAP), read when you retrieve it by hostname. `null` for your own domains, available domains, or a record that couldn't be read. */
     public_record: Whop.DomainPublicRecord | null;
-    /** What registering the domain would cost: whether it's available, its first-year, renewal, and transfer prices, a link to buy it, and how desirable it is. Set for a search result: a domain from `search` or retrieved by hostname. `null` for your own domains. */
+    /** Whether you can register the domain and what it costs. Set for search results and hostname lookups; `null` for your own domains. */
     registration_quote: Whop.DomainRegistrationQuote | null;
     /** Domain lifecycle. Only active domains resolve to their app. `null` for a search result. */
     status: Domain.Status | null;

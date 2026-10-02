@@ -10861,15 +10861,9 @@ await client.dmMembers.update({
 <dl>
 <dd>
 
-Lists the caller's domain claims and assignments. Filter by account, app, or lifecycle status.
+Lists your domains. Filter by account, app, or status.
 
-To find a domain to buy instead, pass `search` with a name like `example` or a full domain like `example.com`. The results are then search results, each with a `registration_quote` saying whether it's available, what it costs, and how desirable it is:
-
-- The first result is the exact domain: the one you searched, or your name on `.com`. It's included even when it's taken.
-- Next is your name on other popular extensions, whether or not they're available.
-- The rest are more available suggestions, such as your name with a prefix or suffix.
-
-To check your name on extensions you choose, also pass `tlds`: the results are then exactly those domains, in that order. Search results come back on one page and aren't reserved. To see who holds a registered domain and its key dates, retrieve it by hostname.
+Pass `search` to find domains to buy instead: the exact domain first, even when taken, then your name on popular extensions, then suggestions. Pass `tlds` to check only the extensions you choose. Results aren't reserved.
 </dd>
 </dl>
 </dd>
@@ -10948,7 +10942,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates an unverified claim and returns DNS instructions. A claim does not reserve the hostname globally. Publish its unique TXT record; ownership verification, DNS checks, and certificate provisioning run automatically. Unverified claims are deleted after 48 hours.
+Claims a hostname for an app and returns the DNS records to publish. Verification and certificate setup run automatically, and unverified claims are deleted after 48 hours. A claim doesn't reserve the hostname.
 </dd>
 </dl>
 </dd>
@@ -11014,9 +11008,9 @@ await client.domains.create({
 <dl>
 <dd>
 
-Retrieves the claim, app assignment, DNS instructions, and the latest hostname and certificate state. For domains still connecting, needing attention, or being deleted, requests an immediate background check.
+Retrieves a domain's claim, app assignment, DNS records, and hostname and certificate status, and starts a background check if it isn't active yet.
 
-Pass a hostname instead of an ID to look up any domain, yours or not. The result is a search result: its `registration_quote` says whether it's available, what it costs, and how desirable it is. For a registered domain, `public_record` has its registrar, registrant, and key dates from public registration records, read when you call this.
+Pass a hostname instead of an ID to look up any domain, with its `registration_quote` and, if registered, its `public_record`.
 </dd>
 </dl>
 </dd>
@@ -11081,7 +11075,7 @@ await client.domains.retrieve({
 <dl>
 <dd>
 
-Stops resolving the domain to its app and queues cleanup. The response is deleting; retrieve the resource until it is removed.
+Stops routing the domain to its app and starts cleanup. It returns as `deleting`; retrieve it until it's `removed`.
 </dd>
 </dl>
 </dd>
