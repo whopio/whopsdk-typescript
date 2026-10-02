@@ -4,7 +4,7 @@ import type * as Whop from "../../../index.js";
 
 export interface RetrieveFinancialReportsResponse {
     beginning_balance?: (number | null) | undefined;
-    /** Every lifetime cashflow currency, ordered by cashflow volume in the requested period. */
+    /** Cashflow currencies ordered by volume in the requested period. Includes lifetime currencies unless `period_only_currencies` is true. */
     currencies?: string[] | undefined;
     ending_balance?: (number | null) | undefined;
     fx_excluded_currencies?: string[] | undefined;

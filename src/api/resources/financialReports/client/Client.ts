@@ -72,6 +72,7 @@ export class FinancialReportsClient {
             cumulative,
             scope_account_id: scopeAccountId,
             include_payment_fee_breakdown: includePaymentFeeBreakdown,
+            period_only_currencies: periodOnlyCurrencies,
         } = request;
         const _queryParams: Record<string, unknown> = {
             account_id: accountId,
@@ -91,6 +92,7 @@ export class FinancialReportsClient {
             cumulative,
             scope_account_id: scopeAccountId,
             include_payment_fee_breakdown: includePaymentFeeBreakdown,
+            period_only_currencies: periodOnlyCurrencies,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
