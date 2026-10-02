@@ -7,6 +7,7 @@ export const ListEarningsRequestIncomeSourceItem = {
     CardInterchange: "card_interchange",
     OnboardingReward: "onboarding_reward",
     PartnerReward: "partner_reward",
+    VerifiedPartnerReferralPayback: "verified_partner_referral_payback",
 } as const;
 export type ListEarningsRequestIncomeSourceItem =
     (typeof ListEarningsRequestIncomeSourceItem)[keyof typeof ListEarningsRequestIncomeSourceItem];
