@@ -38,4 +38,6 @@ export interface RetrieveFinancialReportsRequest {
     scope_account_id?: string;
     /** Balance activity only: include payment costs grouped by payment method and provider. */
     include_payment_fee_breakdown?: boolean;
+    /** Account-level balance activity only: return only currencies with cashflow in the exact requested window. Requires `from` and `to`. */
+    period_only_currencies?: boolean;
 }
