@@ -149,6 +149,8 @@ export namespace CreateDirectRequest {
         initial_price?: (number | null) | undefined;
         /** Internal notes for the account. */
         internal_notes?: (string | null) | undefined;
+        /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+        override_tax_type?: (Plan.OverrideTaxType | null) | undefined;
         /** Billing model for the variant. */
         plan_type?: (Plan.PlanType | null) | undefined;
         /** Find or create a product by external identifier. Mutually exclusive with product_id. */
@@ -260,6 +262,13 @@ export namespace CreateDirectRequest {
             Xau: "xau",
         } as const;
         export type Currency = (typeof Currency)[keyof typeof Currency];
+        /** Whether the variant's price includes tax: `inclusive` (tax is included in the price), `exclusive` (tax is added on top), or `unspecified`. Omit it or pass `null` to use the account's tax setting. On an account enrolled in the Whop tax service, `inclusive` or `exclusive` replaces the account's setting and `unspecified` keeps it. Otherwise it applies only where the account is the merchant of record: `inclusive` or `exclusive` replaces the account's setting when the account collects tax, and `unspecified` means the variant collects no tax. Where Whop is the merchant of record, the account's setting applies. Variants that differ only in this value are different variants. */
+        export const OverrideTaxType = {
+            Exclusive: "exclusive",
+            Inclusive: "inclusive",
+            Unspecified: "unspecified",
+        } as const;
+        export type OverrideTaxType = (typeof OverrideTaxType)[keyof typeof OverrideTaxType];
         /** Billing model for the variant. */
         export const PlanType = {
             Renewal: "renewal",
