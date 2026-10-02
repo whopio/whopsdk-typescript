@@ -13,6 +13,8 @@ export interface ListSocialAccountsRequest {
     user_id?: string;
     /** Only return social accounts for the platform that is specified. */
     platform?: Whop.ListSocialAccountsRequestPlatform;
+    /** Only return social accounts linked with this trust level, such as `oauth` for accounts connected through OAuth. */
+    trust_level?: Whop.ListSocialAccountsRequestTrustLevel;
     /** Only return social accounts that are verified on the platform. */
     verified?: boolean;
     /** Only return social accounts that have these scopes. */

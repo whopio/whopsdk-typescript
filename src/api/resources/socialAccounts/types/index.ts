@@ -5,6 +5,7 @@ export * from "./ListSocialAccountsRequestDirection.js";
 export * from "./ListSocialAccountsRequestOrder.js";
 export * from "./ListSocialAccountsRequestPlatform.js";
 export * from "./ListSocialAccountsRequestScopesItem.js";
+export * from "./ListSocialAccountsRequestTrustLevel.js";
 export * from "./ListSocialAccountsResponse.js";
 export * from "./PartnersSocialAccountsResponse.js";
 export * from "./PostsSocialAccountsResponse.js";
