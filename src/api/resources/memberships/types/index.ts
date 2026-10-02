@@ -5,7 +5,6 @@ export * from "./ListMembershipsRequestOrder.js";
 export * from "./ListMembershipsRequestStatus.js";
 export * from "./ListMembershipsResponse.js";
 export * from "./PostMembershipActivatedPayload.js";
-export * from "./PostMembershipCancelAtPeriodEndChangedPayload.js";
-export * from "./PostMembershipDeactivatedPayload.js";
 export * from "./PostMembershipTrialEndingSoonPayload.js";
+export * from "./PostMembershipUpdatedPayload.js";
 export * from "./TransferMembershipsResponse.js";

@@ -61,6 +61,7 @@ export namespace WebhookListItem {
             MembershipActivated: "membership.activated",
             MembershipDeactivated: "membership.deactivated",
             MembershipTrialEndingSoon: "membership.trial_ending_soon",
+            MembershipUpdated: "membership.updated",
             EntryCreated: "entry.created",
             EntryApproved: "entry.approved",
             EntryDenied: "entry.denied",
