@@ -8,7 +8,9 @@ export interface PaymentInput {
     account_id: string;
     /** What the buyer is purchasing. One entry charges that variant; several entries form a cart, which requires every variant to be compatible, belong to this account, and use the same currency. */
     line_items?: PaymentInput.LineItems.Item[] | undefined;
-    /** The variant purchased, prefixed `plan_`. It must belong to the account. Mutually exclusive with `line_items`. */
+    /** The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission. */
+    plan?: PaymentInput.Plan | undefined;
+    /** The variant purchased, prefixed `plan_`. It must belong to the account. Mutually exclusive with `plan` and `line_items`. */
     plan_id?: string | undefined;
     /** An active promo code to apply, prefixed `promo_`. It must belong to the account and be valid for the variant. */
     promo_code_id?: (string | null) | undefined;
@@ -24,5 +26,200 @@ export namespace PaymentInput {
             /** How many units of the variant to purchase. Defaults to 1; more than 1 requires the variant to allow multiple quantities. */
             quantity?: (number | null) | undefined;
         }
+    }
+
+    /**
+     * The variant purchased, described by its attributes instead of an id: the variant with exactly these attributes is used, and one is created when none exists. Mutually exclusive with `plan_id` and `line_items`. Creating a variant requires `plan:create`; creating or updating a product requires the corresponding product permission.
+     */
+    export interface Plan {
+        /** Application fee the platform collects per unit, in the variant currency (5.00 means $5.00 for USD). Must be positive and below the initial price for one-time variants or renewal price for recurring variants. Paid to the parent account alongside other processing fees; collection is capped to remaining proceeds. Applies to subsequent payments on recurring variants. Only valid for connected accounts with a parent account. */
+        application_fee_amount?: (number | null) | undefined;
+        /** Recurring billing interval in days. */
+        billing_period?: (number | null) | undefined;
+        /** Currency code for the variant prices. */
+        currency: Plan.Currency;
+        /** Variant description. */
+        description?: (string | null) | undefined;
+        /** Days until access expires. */
+        expiration_days?: (number | null) | undefined;
+        /** Create a new variant instead of reusing a matching variant. */
+        force_create_new_plan?: (boolean | null) | undefined;
+        /** Additional amount charged on the first purchase, in the variant currency. For recurring variants without a trial, the first charge includes this amount plus renewal_price. */
+        initial_price?: (number | null) | undefined;
+        /** Internal notes for the account. */
+        internal_notes?: (string | null) | undefined;
+        /** Billing model for the variant. */
+        plan_type?: (Plan.PlanType | null) | undefined;
+        /** Find or create a product by external identifier. Mutually exclusive with product_id. */
+        product?: (Plan.Product | null) | undefined;
+        /** Existing product ID belonging to the account, prefixed `prod_`. Mutually exclusive with `product`. */
+        product_id?: (string | null) | undefined;
+        /** Recurring price in the variant currency. */
+        renewal_price?: (number | null) | undefined;
+        /** Variant title. */
+        title?: (string | null) | undefined;
+        /** Free trial days before renewal. */
+        trial_period_days?: (number | null) | undefined;
+        /** Whether the variant is visible to customers. */
+        visibility?: (Plan.Visibility | null) | undefined;
+    }
+
+    export namespace Plan {
+        /** Currency code for the variant prices. */
+        export const Currency = {
+            Usd: "usd",
+            Sgd: "sgd",
+            Inr: "inr",
+            Aud: "aud",
+            Brl: "brl",
+            Cad: "cad",
+            Dkk: "dkk",
+            Eur: "eur",
+            Nok: "nok",
+            Gbp: "gbp",
+            Sek: "sek",
+            Chf: "chf",
+            Hkd: "hkd",
+            Huf: "huf",
+            Jpy: "jpy",
+            Mxn: "mxn",
+            Myr: "myr",
+            Pln: "pln",
+            Czk: "czk",
+            Nzd: "nzd",
+            Aed: "aed",
+            Eth: "eth",
+            Ape: "ape",
+            Cop: "cop",
+            Ron: "ron",
+            Thb: "thb",
+            Bgn: "bgn",
+            Idr: "idr",
+            Dop: "dop",
+            Php: "php",
+            Try: "try",
+            Krw: "krw",
+            Twd: "twd",
+            Vnd: "vnd",
+            Pkr: "pkr",
+            Clp: "clp",
+            Uyu: "uyu",
+            Ars: "ars",
+            Zar: "zar",
+            Dzd: "dzd",
+            Tnd: "tnd",
+            Mad: "mad",
+            Kes: "kes",
+            Kwd: "kwd",
+            Jod: "jod",
+            All: "all",
+            Xcd: "xcd",
+            Amd: "amd",
+            Bsd: "bsd",
+            Bhd: "bhd",
+            Bob: "bob",
+            Bam: "bam",
+            Khr: "khr",
+            Crc: "crc",
+            Xof: "xof",
+            Egp: "egp",
+            Etb: "etb",
+            Gmd: "gmd",
+            Ghs: "ghs",
+            Gtq: "gtq",
+            Gyd: "gyd",
+            Ils: "ils",
+            Jmd: "jmd",
+            Mop: "mop",
+            Mga: "mga",
+            Mur: "mur",
+            Mdl: "mdl",
+            Mnt: "mnt",
+            Nad: "nad",
+            Ngn: "ngn",
+            Mkd: "mkd",
+            Omr: "omr",
+            Pyg: "pyg",
+            Pen: "pen",
+            Qar: "qar",
+            Rwf: "rwf",
+            Sar: "sar",
+            Rsd: "rsd",
+            Lkr: "lkr",
+            Tzs: "tzs",
+            Ttd: "ttd",
+            Uzs: "uzs",
+            Rub: "rub",
+            Btc: "btc",
+            Cny: "cny",
+            Usdt: "usdt",
+            Kzt: "kzt",
+            Awg: "awg",
+            WhopUsd: "whop_usd",
+            Xau: "xau",
+        } as const;
+        export type Currency = (typeof Currency)[keyof typeof Currency];
+        /** Billing model for the variant. */
+        export const PlanType = {
+            Renewal: "renewal",
+            OneTime: "one_time",
+        } as const;
+        export type PlanType = (typeof PlanType)[keyof typeof PlanType];
+
+        /**
+         * Find or create a product by external identifier. Mutually exclusive with product_id.
+         */
+        export interface Product {
+            /** Whether to collect a shipping address at checkout. */
+            collect_shipping_address?: (boolean | null) | undefined;
+            /** Custom card statement descriptor for the product, starting with WHOP*. */
+            custom_statement_descriptor?: (string | null) | undefined;
+            /** Product description. */
+            description?: (string | null) | undefined;
+            /** Your unique identifier for the product. */
+            external_identifier: string;
+            /** Percentage of revenue paid to global affiliates. */
+            global_affiliate_percentage?: (number | null) | undefined;
+            /** Global affiliate program status. */
+            global_affiliate_status?: (Product.GlobalAffiliateStatus | null) | undefined;
+            /** Product headline. */
+            headline?: (string | null) | undefined;
+            /** Product tax code identifier. */
+            product_tax_code_id?: (string | null) | undefined;
+            /** Where to redirect the buyer after purchase. */
+            redirect_purchase_url?: (string | null) | undefined;
+            /** Product route. */
+            route?: (string | null) | undefined;
+            /** Product title. */
+            title: string;
+            /** Product visibility. Defaults to hidden. */
+            visibility?: Product.Visibility | undefined;
+        }
+
+        export namespace Product {
+            /** Global affiliate program status. */
+            export const GlobalAffiliateStatus = {
+                Enabled: "enabled",
+                Disabled: "disabled",
+            } as const;
+            export type GlobalAffiliateStatus = (typeof GlobalAffiliateStatus)[keyof typeof GlobalAffiliateStatus];
+            /** Product visibility. Defaults to hidden. */
+            export const Visibility = {
+                Visible: "visible",
+                Hidden: "hidden",
+                Archived: "archived",
+                QuickLink: "quick_link",
+            } as const;
+            export type Visibility = (typeof Visibility)[keyof typeof Visibility];
+        }
+
+        /** Whether the variant is visible to customers. */
+        export const Visibility = {
+            Visible: "visible",
+            Hidden: "hidden",
+            Archived: "archived",
+            QuickLink: "quick_link",
+        } as const;
+        export type Visibility = (typeof Visibility)[keyof typeof Visibility];
     }
 }
