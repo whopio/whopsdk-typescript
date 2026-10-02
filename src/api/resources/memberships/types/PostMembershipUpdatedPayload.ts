@@ -2,11 +2,11 @@
 
 import type * as Whop from "../../../index.js";
 
-export interface PostMembershipDeactivatedPayload {
+export interface PostMembershipUpdatedPayload {
     /** The account ID that this webhook event is associated with */
     account_id?: (string | null) | undefined;
     /** The API version for this webhook */
-    api_version: PostMembershipDeactivatedPayload.ApiVersion;
+    api_version: PostMembershipUpdatedPayload.ApiVersion;
     /** The dated API version (Api-Version-Date) the payload is serialized to */
     api_version_date: string | null;
     data: Whop.Membership;
@@ -17,10 +17,10 @@ export interface PostMembershipDeactivatedPayload {
     /** The timestamp in ISO 8601 format that the webhook was sent at on the server */
     timestamp: string;
     /** The webhook event type */
-    type: PostMembershipDeactivatedPayload.Type;
+    type: PostMembershipUpdatedPayload.Type;
 }
 
-export namespace PostMembershipDeactivatedPayload {
+export namespace PostMembershipUpdatedPayload {
     /** The API version for this webhook */
     export const ApiVersion = {
         V1: "v1",
@@ -28,7 +28,7 @@ export namespace PostMembershipDeactivatedPayload {
     export type ApiVersion = (typeof ApiVersion)[keyof typeof ApiVersion];
     /** The webhook event type */
     export const Type = {
-        MembershipDeactivated: "membership.deactivated",
+        MembershipUpdated: "membership.updated",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }
