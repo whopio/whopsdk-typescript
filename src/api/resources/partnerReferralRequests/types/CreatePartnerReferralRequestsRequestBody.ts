@@ -13,6 +13,9 @@ export type CreatePartnerReferralRequestsRequestBody =
     | {
           target_username: string;
       }
+    | {
+          target_email: string;
+      }
     /**
      * Create your own referral link with an optional custom code and redemption limit. Without configuration, returns your oldest saved link or creates one with a random code. Only authorized staff can configure rewards or select another partner. */
     | {
