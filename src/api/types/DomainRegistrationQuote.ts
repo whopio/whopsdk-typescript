@@ -5,16 +5,16 @@ import type * as Whop from "../index.js";
 export interface DomainRegistrationQuote {
     /** Whether the domain can be registered now. */
     available: boolean;
-    /** Whether the registry prices this domain above its standard rate. Premium prices are set per domain and can be much higher. */
+    /** Whether the registry charges more than its standard price for this domain. */
     premium: boolean;
     /** What the first year of registration costs. `null` when the domain is not available. */
     price: Whop.Money | null;
-    /** A link to this domain's page in your account's Whop dashboard, where you can buy it. `null` when the domain is not available, or when the request has no account, such as a user token without an account context. */
+    /** Link to buy the domain in your Whop dashboard. `null` when it isn't available or the request has no account, such as a user token. */
     purchase_url: string | null;
     /** What each yearly renewal costs after the first year. `null` when the domain is not available. */
     renewal_price: Whop.Money | null;
-    /** How desirable the domain is, from 0 to 100. Short names that read like real words, on well-known extensions, score highest. Hyphens, digits, random-looking letters, and famous brand names score lower. */
+    /** How desirable the domain is, from 0 to 100. Short, real-word names on well-known extensions score highest. */
     score: number;
-    /** What transferring the domain to Whop costs if you already own it elsewhere, including one added year of registration. `null` when the domain is available or its extension cannot be transferred. */
+    /** What moving the domain to Whop costs if you own it elsewhere, including a year of registration. `null` when it's available or can't be transferred. */
     transfer_price: Whop.Money | null;
 }

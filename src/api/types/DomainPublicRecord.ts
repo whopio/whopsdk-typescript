@@ -10,7 +10,7 @@ export interface DomainPublicRecord {
     name_servers: string[];
     /** When the domain was first registered, as an ISO 8601 timestamp, or `null` when the record omits it. */
     registered_at: string | null;
-    /** Who the domain is registered to. Most registrars withhold or replace these details for privacy, so expect privacy services and placeholders such as `Redacted For Privacy`. `null` when the record publishes no registrant. */
+    /** Who the domain is registered to, often a privacy service or `Redacted For Privacy`. `null` when the record publishes no registrant. */
     registrant: Whop.DomainRegistrant | null;
     /** The registrar that manages the domain, or `null` when the record doesn't name one. */
     registrar: Whop.DomainRegistrar | null;

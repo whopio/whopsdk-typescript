@@ -27,8 +27,8 @@ export interface ListDomainsRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
-    /** A name or a full domain to find domains to buy, such as `example` or `example.com`. A URL or subdomain searches its registrable domain. When set, the results are search results rather than your domains, and the other filters, sorting, and pagination don't apply. */
+    /** A name or domain to find domains to buy, such as `example` or `example.com`; a subdomain or URL searches its registrable domain. Returns search results instead of your domains, without other filters or pagination. */
     search?: string;
-    /** With `search`, the extensions to check your name on, such as `com` or `co.uk`, returned in the order you pass them. Repeat the parameter to pass several, up to 100. The results are then exactly your name on these extensions, without suggestions. */
+    /** With `search`, check only these extensions, such as `com` or `co.uk`, returned in this order. Repeat for several, up to 100. */
     tlds?: string | string[];
 }
