@@ -29,6 +29,8 @@ export interface CreateMethodsResponse {
     payer_name: string | null;
     /** Always null on create. */
     quote: Record<string, unknown> | null;
+    /** The recipient of a third-party payout method. Present only for recipient payout methods. */
+    recipient?: CreateMethodsResponse.Recipient | undefined;
     /** Always `created` on create — no payout has used the method yet. */
     status: CreateMethodsResponse.Status;
     /** Always `null` on create. */
@@ -52,6 +54,19 @@ export namespace CreateMethodsResponse {
         PayoutMethod: "payout_method",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+
+    /**
+     * The recipient of a third-party payout method. Present only for recipient payout methods.
+     */
+    export interface Recipient {
+        /** ISO 3166-1 alpha-3 country code. */
+        country: string;
+        first_name: string;
+        last_name: string;
+        /** The recipient's Whop user ID, prefixed `user_`. */
+        user_id: string;
+    }
+
     /** Always `created` on create — no payout has used the method yet. */
     export const Status = {
         Created: "created",

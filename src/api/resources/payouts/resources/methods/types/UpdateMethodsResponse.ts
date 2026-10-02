@@ -29,6 +29,8 @@ export interface UpdateMethodsResponse {
     payer_name: string | null;
     /** Always `null` after an update. */
     quote: Record<string, unknown> | null;
+    /** The recipient of a third-party payout method. Present only for recipient payout methods. */
+    recipient?: UpdateMethodsResponse.Recipient | undefined;
     /** `created` — saved, no payout has completed through it yet. `active` — a payout through it completed. `broken` — a payout through it failed with an error attributable to the method, and it no longer accepts payouts; a later successful payout returns it to `active`. */
     status: UpdateMethodsResponse.Status;
     /** Machine-readable code for why the method is `broken` — the newest failure recorded through it, whether a payout error or a pre-payout rejection. `null` unless the method is broken, or when it was disabled without a recorded failure. */
@@ -52,6 +54,19 @@ export namespace UpdateMethodsResponse {
         PayoutMethod: "payout_method",
     } as const;
     export type Object_ = (typeof Object_)[keyof typeof Object_];
+
+    /**
+     * The recipient of a third-party payout method. Present only for recipient payout methods.
+     */
+    export interface Recipient {
+        /** ISO 3166-1 alpha-3 country code. */
+        country: string;
+        first_name: string;
+        last_name: string;
+        /** The recipient's Whop user ID, prefixed `user_`. */
+        user_id: string;
+    }
+
     /** `created` — saved, no payout has completed through it yet. `active` — a payout through it completed. `broken` — a payout through it failed with an error attributable to the method, and it no longer accepts payouts; a later successful payout returns it to `active`. */
     export const Status = {
         Created: "created",

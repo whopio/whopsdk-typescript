@@ -17,8 +17,26 @@ export interface CreateMethodsRequest {
     is_default?: boolean;
     /** A label for the payout method, unique per destination. */
     nickname?: string;
+    /** Creates an external recipient and saves the bank method on their payout account, bound to the funding account. The MassPay email is generated when omitted; the recipient does not need a Whop login or Sumsub verification. Recipient methods cannot be default or recurring methods and cannot use Plaid. */
+    recipient?: CreateMethodsRequest.Recipient;
     /** The supported payout method to save (a podst_ identifier from a previous listing). */
     supported_payout_method_id: string;
     /** The user to add the payout method for, prefixed `user_`. Provide this or `account_id`. */
     user_id?: string;
+}
+
+export namespace CreateMethodsRequest {
+    /**
+     * Creates an external recipient and saves the bank method on their payout account, bound to the funding account. The MassPay email is generated when omitted; the recipient does not need a Whop login or Sumsub verification. Recipient methods cannot be default or recurring methods and cannot use Plaid.
+     */
+    export interface Recipient {
+        /** ISO 3166-1 alpha-2 or alpha-3 country code. */
+        country: string;
+        /** Optional email for the recipient's MassPay payout account. Trimmed and lowercased. When omitted or null, generates a random address ending in `_bp@payouts.whop.com`. */
+        email?: (string | null) | undefined;
+        /** Recipient's first name, at most 120 UTF-8 bytes. The trimmed full name, including a space between the names, must be at most 100 characters and cannot contain angle brackets or double quotes. */
+        first_name: string;
+        /** Recipient's last name, at most 120 UTF-8 bytes. The combined full name follows the same 100-character limit as a Whop user name. */
+        last_name: string;
+    }
 }
