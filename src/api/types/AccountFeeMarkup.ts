@@ -14,7 +14,7 @@ export interface AccountFeeMarkup {
     /** The percentage of the transaction the platform adds, where `2` means 2%. `0` when no markup is set. */
     percentage: number;
     /** `custom` when a row is set at this level, `default` when the rate falls through to the platform default or zero. */
-    source: AccountFeeMarkup.Source;
+    source: AccountFeeMarkup.Source | null;
     /** Why the caller may not change this markup, or `null` when `adjustable`. */
     unadjustable_reason: AccountFeeMarkup.UnadjustableReason | null;
 }

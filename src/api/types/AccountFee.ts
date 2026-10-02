@@ -26,7 +26,7 @@ export interface AccountFee {
     /** The rate that takes effect when this account's custom rate is cleared, including inherited pricing. */
     reset: Whop.AccountFeeRate;
     /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
-    source: AccountFee.Source;
+    source: AccountFee.Source | null;
     /** Why the caller may not change this fee, or `null` when `adjustable`. `not_permitted` when the caller has no say over it. */
     unadjustable_reason: AccountFee.UnadjustableReason | null;
 }

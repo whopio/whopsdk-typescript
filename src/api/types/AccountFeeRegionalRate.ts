@@ -16,7 +16,7 @@ export interface AccountFeeRegionalRate {
     /** The regional rate that takes effect when this account's custom rate is cleared, including inherited pricing. */
     reset: Whop.AccountFeeRate;
     /** Where the regional rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
-    source: AccountFeeRegionalRate.Source;
+    source: AccountFeeRegionalRate.Source | null;
 }
 
 export namespace AccountFeeRegionalRate {
