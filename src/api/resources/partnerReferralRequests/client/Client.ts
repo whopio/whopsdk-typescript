@@ -153,7 +153,7 @@ export class PartnerReferralRequestsClient {
     }
 
     /**
-     * Creates a referral link or sends a verified partner's attribution request to an existing business or enrolled partner for approval.
+     * Creates a referral link or sends a verified partner's attribution request to an existing business or user for approval. Recipients do not need to join the partner program.
      *
      * @param {Whop.CreatePartnerReferralRequestsRequestBody} request
      * @param {PartnerReferralRequestsClient.RequestOptions} requestOptions - Request-specific configuration.
