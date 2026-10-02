@@ -59,6 +59,8 @@ export namespace PostPayoutMethodCreatedPayload {
         payer_name: string | null;
         /** Fee and delivery estimate for paying out the requested amount through this method. Null unless an amount was provided, or when the estimate is unavailable. */
         quote: Data.Quote | null;
+        /** The recipient of a third-party payout method. Present only for recipient payout methods. */
+        recipient?: Data.Recipient | undefined;
         /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */
         status: Data.Status;
         /** Machine-readable code for why the method is `broken` — the newest disabling failure recorded through it, whether a payout error or a pre-payout rejection. `null` unless the method is broken, or when it was disabled without a recorded failure. */
@@ -156,6 +158,18 @@ export namespace PostPayoutMethodCreatedPayload {
                 /** Amount remaining after fees, in the payout currency. */
                 total_received: number;
             }
+        }
+
+        /**
+         * The recipient of a third-party payout method. Present only for recipient payout methods.
+         */
+        export interface Recipient {
+            /** ISO 3166-1 alpha-3 country code. */
+            country: string;
+            first_name: string;
+            last_name: string;
+            /** The recipient's Whop user ID, prefixed `user_`. */
+            user_id: string;
         }
 
         /** Lifecycle status: `created` means saved but unused, `active` means a payout succeeded through it, `broken` means a payout failure disabled it; a later successful payout returns it to `active`. */

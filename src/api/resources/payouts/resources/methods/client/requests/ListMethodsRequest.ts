@@ -17,6 +17,8 @@ export interface ListMethodsRequest {
     amount?: number;
     /** Currency code of the amount, for example `usd`. Only meaningful with amount or include_limits. */
     currency?: string;
+    /** When true, also includes bill-pay recipient methods tied to this funding account. Defaults to false, returning only the account's own payout methods. */
+    include_recipients?: boolean;
     /** When true, the response also carries limits — the live per-speed payout caps the account's payout requests are validated against, in the requested currency. Requires the payout:withdrawal:read scope. */
     include_limits?: boolean;
     /** Number of results to return from the start of the range. */
