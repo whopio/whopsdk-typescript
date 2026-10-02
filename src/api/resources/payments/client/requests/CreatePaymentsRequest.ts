@@ -9,6 +9,8 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreatePaymentsRequest extends Whop.PaymentInput {
+    /** The code an affiliate link carries, which is the affiliate's username. The affiliate is credited for this payment as on a checkout session. A code naming no one eligible to earn on the product is ignored, and the payment goes ahead. A promo code with its own affiliate takes precedence. No affiliate is credited on a variant without a product or on a purchase of several variants. At most 255 characters. Not supported with `payment_method`. */
+    affiliate_code?: string | null;
     /** Minutes after authorization at which Whop captures the hold automatically unless it has been voided. Requires `capture: false`. Between 5 and 5760 (4 days). */
     auto_capture_after_minutes?: number | null;
     /** Whether to capture a card payment immediately. Defaults to true. Pass false to place an authorization hold that must be captured in full within five days via the capture endpoint, or automatically after `auto_capture_after_minutes`. */
