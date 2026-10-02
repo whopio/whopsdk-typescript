@@ -3,8 +3,8 @@
 import type * as Whop from "../index.js";
 
 export interface AccountFeeRate {
-    /** The amount charged per event. `null` when the fee has no fixed component. */
+    /** The amount charged per event. `null` when unavailable. */
     fixed: Whop.Money | null;
-    /** The percentage of the transaction, where `2` means 2%. `null` when the fee has no percentage component. */
+    /** The percentage of the transaction, where `2` means 2%. `null` when unavailable. */
     percentage: number | null;
 }
