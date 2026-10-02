@@ -4,7 +4,9 @@ import type * as Whop from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         tlds: ["com"]
+ *     }
  */
 export interface ListDomainsRequest {
     /** Only domains belonging to this account, prefixed biz_. */
@@ -25,4 +27,8 @@ export interface ListDomainsRequest {
     last?: number;
     /** Return results before this cursor. Use `page_info.start_cursor` from the previous response to fetch the previous page. */
     before?: string;
+    /** A name or a full domain to find domains to buy, such as `example` or `example.com`. A URL or subdomain searches its registrable domain. When set, the results are search results rather than your domains, and the other filters, sorting, and pagination don't apply. */
+    search?: string;
+    /** With `search`, the extensions to check your name on, such as `com` or `co.uk`, returned in the order you pass them. Repeat the parameter to pass several, up to 100. The results are then exactly your name on these extensions, without suggestions. */
+    tlds?: string | string[];
 }
