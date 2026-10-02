@@ -31,19 +31,32 @@ export class DomainsClient {
     /**
      * Lists the caller's domain claims and assignments. Filter by account, app, or lifecycle status.
      *
+     * To find a domain to buy instead, pass `search` with a name like `example` or a full domain like `example.com`. The results are then search results, each with a `registrar_quote` saying whether it's available, what it costs, and how desirable it is:
+     *
+     * - The first result is the exact domain: the one you searched, or your name on `.com`. It's included even when it's taken.
+     * - Next is your name on other popular extensions, whether or not they're available.
+     * - The rest are more available suggestions, such as your name with a prefix or suffix.
+     *
+     * To check your name on extensions you choose, also pass `tlds`: the results are then exactly those domains, in that order. Search results come back on one page and aren't reserved. To see who holds a registered domain and its key dates, retrieve it by hostname.
+     *
      * @param {Whop.ListDomainsRequest} request
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.ForbiddenError}
+     * @throws {@link Whop.ServiceUnavailableError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
      * @example
-     *     await client.domains.list()
+     *     await client.domains.list({
+     *         tlds: ["com"]
+     *     })
      */
     public async list(
         request: Whop.ListDomainsRequest = {},
         requestOptions?: DomainsClient.RequestOptions,
-    ): Promise<core.Page<Whop.Domain, Whop.ListDomainsResponse>> {
+    ): Promise<core.Page<Whop.DomainListItem, Whop.ListDomainsResponse>> {
         const list = core.HttpResponsePromise.interceptFunction(
             async (request: Whop.ListDomainsRequest): Promise<core.WithRawResponse<Whop.ListDomainsResponse>> => {
                 const {
@@ -56,6 +69,8 @@ export class DomainsClient {
                     after,
                     last,
                     before,
+                    search,
+                    tlds,
                 } = request;
                 const _queryParams: Record<string, unknown> = {
                     account_id: accountId,
@@ -67,6 +82,8 @@ export class DomainsClient {
                     after,
                     last,
                     before,
+                    search,
+                    tlds,
                 };
                 const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
                 const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -105,17 +122,29 @@ export class DomainsClient {
                     return { data: _response.body as Whop.ListDomainsResponse, rawResponse: _response.rawResponse };
                 }
                 if (_response.error.reason === "status-code") {
-                    throw new errors.WhopError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
+                    switch (_response.error.statusCode) {
+                        case 400:
+                            throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                        case 403:
+                            throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                        case 503:
+                            throw new Whop.ServiceUnavailableError(
+                                _response.error.body as Whop.V1ErrorResponse,
+                                _response.rawResponse,
+                            );
+                        default:
+                            throw new errors.WhopError({
+                                statusCode: _response.error.statusCode,
+                                body: _response.error.body,
+                                rawResponse: _response.rawResponse,
+                            });
+                    }
                 }
                 return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/domains");
             },
         );
         const dataWithRawResponse = await list(request).withRawResponse();
-        return new core.Page<Whop.Domain, Whop.ListDomainsResponse>({
+        return new core.Page<Whop.DomainListItem, Whop.ListDomainsResponse>({
             response: dataWithRawResponse.data,
             rawResponse: dataWithRawResponse.rawResponse,
             hasNextPage: (response) =>
@@ -207,9 +236,13 @@ export class DomainsClient {
     /**
      * Retrieves the claim, app assignment, DNS instructions, and the latest hostname and certificate state. For domains still connecting, needing attention, or being deleted, requests an immediate background check.
      *
+     * Pass a hostname instead of an ID to look up any domain, yours or not. The result is a search result: its `registrar_quote` says whether it's available, what it costs, and how desirable it is. For a registered domain, `public_record` has its registrar, registrant, and key dates from public registration records, read when you call this.
+     *
      * @param {Whop.RetrieveDomainsRequest} request
      * @param {DomainsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
+     * @throws {@link Whop.BadRequestError}
+     * @throws {@link Whop.ForbiddenError}
      * @throws {@link errors.WhopError}
      * @throws {@link errors.WhopTimeoutError}
      *
@@ -261,11 +294,18 @@ export class DomainsClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.WhopError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new Whop.BadRequestError(_response.error.body as unknown, _response.rawResponse);
+                case 403:
+                    throw new Whop.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
+                default:
+                    throw new errors.WhopError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/domains/{id}");

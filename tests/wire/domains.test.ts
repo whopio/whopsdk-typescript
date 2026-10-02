@@ -5,7 +5,7 @@ import { WhopClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("DomainsClient", () => {
-    test("list", async () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -18,10 +18,10 @@ describe("DomainsClient", () => {
         const rawResponseBody = {
             data: [
                 {
-                    account_id: "biz_xxxxxxxxxxxxxx",
-                    app_id: "app_xxxxxxxxxxxxxx",
-                    certificate_status: "certificate_status",
-                    created_at: "2026-01-01T12:00:00.000Z",
+                    account_id: null,
+                    app_id: null,
+                    certificate_status: null,
+                    created_at: null,
                     dns_records: [
                         {
                             name: "_whop.shop.example.com",
@@ -29,10 +29,10 @@ describe("DomainsClient", () => {
                             value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                         },
                     ],
-                    dns_status: "pending",
-                    domain: "shop.example.com",
-                    hostname_status: "hostname_status",
-                    id: "dom_xxxxxxxxxxxxxx",
+                    dns_status: null,
+                    domain: "example.com",
+                    hostname_status: null,
+                    id: null,
                     issues: [
                         {
                             code: "dns_required",
@@ -40,37 +40,169 @@ describe("DomainsClient", () => {
                                 "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
                         },
                     ],
-                    last_checked_at: "last_checked_at",
+                    last_checked_at: null,
                     metadata: { key: "value" },
-                    status: "pending_verification",
-                    updated_at: "2026-01-01T12:00:00.000Z",
-                    verification_expires_at: "2026-01-01T12:00:00.000Z",
-                    verified_at: "verified_at",
+                    registrar_quote: {
+                        available: false,
+                        premium: false,
+                        price: null,
+                        purchase_url: null,
+                        renewal_price: null,
+                        score: 81,
+                        transfer_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
+                    },
+                    status: null,
+                    updated_at: null,
+                    verification_expires_at: null,
+                    verified_at: null,
+                },
+                {
+                    account_id: null,
+                    app_id: null,
+                    certificate_status: null,
+                    created_at: null,
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    dns_status: null,
+                    domain: "example.co",
+                    hostname_status: null,
+                    id: null,
+                    issues: [
+                        {
+                            code: "dns_required",
+                            message:
+                                "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                        },
+                    ],
+                    last_checked_at: null,
+                    metadata: { key: "value" },
+                    registrar_quote: {
+                        available: true,
+                        premium: false,
+                        price: { amount: "24.99", currency: "usd", decimals: 2, display_decimals: 2 },
+                        purchase_url: "https://whop.com/dashboard/biz_J8n2R5p9T1w4Kx/domains/search/example.co",
+                        renewal_price: { amount: "29.99", currency: "usd", decimals: 2, display_decimals: 2 },
+                        score: 78,
+                        transfer_price: null,
+                    },
+                    status: null,
+                    updated_at: null,
+                    verification_expires_at: null,
+                    verified_at: null,
+                },
+                {
+                    account_id: null,
+                    app_id: null,
+                    certificate_status: null,
+                    created_at: null,
+                    dns_records: [
+                        {
+                            name: "_whop.shop.example.com",
+                            type: "TXT",
+                            value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                        },
+                    ],
+                    dns_status: null,
+                    domain: "example.dev",
+                    hostname_status: null,
+                    id: null,
+                    issues: [
+                        {
+                            code: "dns_required",
+                            message:
+                                "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
+                        },
+                    ],
+                    last_checked_at: null,
+                    metadata: { key: "value" },
+                    registrar_quote: {
+                        available: true,
+                        premium: false,
+                        price: { amount: "12.99", currency: "usd", decimals: 2, display_decimals: 2 },
+                        purchase_url: "https://whop.com/dashboard/biz_J8n2R5p9T1w4Kx/domains/search/example.dev",
+                        renewal_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
+                        score: 75,
+                        transfer_price: null,
+                    },
+                    status: null,
+                    updated_at: null,
+                    verification_expires_at: null,
+                    verified_at: null,
                 },
             ],
-            page_info: {
-                end_cursor: "end_cursor",
-                has_next_page: false,
-                has_previous_page: false,
-                start_cursor: "WyJjdXJzb3IiLDFd",
-            },
+            page_info: { end_cursor: null, has_next_page: false, has_previous_page: false, start_cursor: null },
         };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/domains")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/domains").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const expected = rawResponseBody;
-        const page = await client.domains.list();
+        const page = await client.domains.list({
+            tlds: ["com"],
+        });
 
         expect(expected.data).toEqual(page.data);
-        expect(page.hasNextPage()).toBe(true);
-        const nextPage = await page.getNextPage();
-        expect(expected.data).toEqual(nextPage.data);
+    });
+
+    test("list (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.list();
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("list (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.list();
+        }).rejects.toThrow(Whop.ForbiddenError);
+    });
+
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { error: { message: "message", type: "type" } };
+
+        server.mockEndpoint().get("/domains").respondWith().statusCode(503).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.list();
+        }).rejects.toThrow(Whop.ServiceUnavailableError);
     });
 
     test("create (1)", async () => {
@@ -107,6 +239,33 @@ describe("DomainsClient", () => {
             ],
             last_checked_at: "last_checked_at",
             metadata: { key: "value" },
+            public_record: {
+                dnssec: false,
+                expires_at: "2026-01-01T12:00:00.000Z",
+                name_servers: ["ns1.example.com"],
+                registered_at: "2026-01-01T12:00:00.000Z",
+                registrant: {
+                    address: "Burlington\nMA",
+                    contact_url: "https://registrar.example/contact/example.com",
+                    country: "US",
+                    email: "email",
+                    name: "name",
+                    organization: "Privacy Protect, LLC",
+                    phone: "phone",
+                },
+                registrar: { iana_id: "9999", name: "Example Registrar, Inc.", url: "https://registrar.example" },
+                statuses: ["client transfer prohibited"],
+                updated_at: "2026-01-01T12:00:00.000Z",
+            },
+            registrar_quote: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                purchase_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/domains/search/example.dev",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             status: "pending_verification",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification_expires_at: "2026-01-01T12:00:00.000Z",
@@ -158,7 +317,7 @@ describe("DomainsClient", () => {
         }).rejects.toThrow(Whop.ConflictError);
     });
 
-    test("retrieve", async () => {
+    test("retrieve (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new WhopClient({
             maxRetries: 0,
@@ -169,10 +328,10 @@ describe("DomainsClient", () => {
         });
 
         const rawResponseBody = {
-            account_id: "biz_xxxxxxxxxxxxxx",
-            app_id: "app_xxxxxxxxxxxxxx",
-            certificate_status: "certificate_status",
-            created_at: "2026-01-01T12:00:00.000Z",
+            account_id: null,
+            app_id: null,
+            certificate_status: null,
+            created_at: null,
             dns_records: [
                 {
                     name: "_whop.shop.example.com",
@@ -180,22 +339,49 @@ describe("DomainsClient", () => {
                     value: "whop-domain-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
                 },
             ],
-            dns_status: "pending",
-            domain: "shop.example.com",
-            hostname_status: "hostname_status",
-            id: "dom_xxxxxxxxxxxxxx",
+            dns_status: null,
+            domain: "example.com",
+            hostname_status: null,
+            id: null,
             issues: [
                 {
                     code: "dns_required",
                     message: "Point DNS to Whop using the routing records. Disable other CDN proxies while connecting.",
                 },
             ],
-            last_checked_at: "last_checked_at",
+            last_checked_at: null,
             metadata: { key: "value" },
-            status: "pending_verification",
-            updated_at: "2026-01-01T12:00:00.000Z",
-            verification_expires_at: "2026-01-01T12:00:00.000Z",
-            verified_at: "verified_at",
+            public_record: {
+                dnssec: false,
+                expires_at: "2027-08-13T04:00:00.000Z",
+                name_servers: ["ns1.example.com", "ns2.example.com"],
+                registered_at: "1995-08-14T04:00:00.000Z",
+                registrant: {
+                    address: "Burlington\nMA",
+                    contact_url: "https://registrar.example/contact/example.com",
+                    country: "US",
+                    email: null,
+                    name: null,
+                    organization: "Privacy Protect, LLC",
+                    phone: null,
+                },
+                registrar: { iana_id: "9999", name: "Example Registrar, Inc.", url: "https://registrar.example" },
+                statuses: ["client transfer prohibited"],
+                updated_at: "2026-08-14T07:01:44.000Z",
+            },
+            registrar_quote: {
+                available: false,
+                premium: false,
+                price: null,
+                purchase_url: null,
+                renewal_price: null,
+                score: 81,
+                transfer_price: { amount: "14.99", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
+            status: null,
+            updated_at: null,
+            verification_expires_at: null,
+            verified_at: null,
         };
 
         server.mockEndpoint().get("/domains/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -204,6 +390,48 @@ describe("DomainsClient", () => {
             id: "id",
         });
         expect(response).toEqual(rawResponseBody);
+    });
+
+    test("retrieve (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains/id").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.BadRequestError);
+    });
+
+    test("retrieve (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new WhopClient({
+            maxRetries: 0,
+            token: "test",
+            apiVersionDate: "test",
+            idempotencyKey: "test",
+            environment: { api: server.baseUrl, vault: server.baseUrl },
+        });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/domains/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.domains.retrieve({
+                id: "id",
+            });
+        }).rejects.toThrow(Whop.ForbiddenError);
     });
 
     test("delete", async () => {
@@ -240,6 +468,33 @@ describe("DomainsClient", () => {
             ],
             last_checked_at: "last_checked_at",
             metadata: { key: "value" },
+            public_record: {
+                dnssec: false,
+                expires_at: "2026-01-01T12:00:00.000Z",
+                name_servers: ["ns1.example.com"],
+                registered_at: "2026-01-01T12:00:00.000Z",
+                registrant: {
+                    address: "Burlington\nMA",
+                    contact_url: "https://registrar.example/contact/example.com",
+                    country: "US",
+                    email: "email",
+                    name: "name",
+                    organization: "Privacy Protect, LLC",
+                    phone: "phone",
+                },
+                registrar: { iana_id: "9999", name: "Example Registrar, Inc.", url: "https://registrar.example" },
+                statuses: ["client transfer prohibited"],
+                updated_at: "2026-01-01T12:00:00.000Z",
+            },
+            registrar_quote: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                purchase_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/domains/search/example.dev",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             status: "pending_verification",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification_expires_at: "2026-01-01T12:00:00.000Z",
@@ -288,6 +543,33 @@ describe("DomainsClient", () => {
             ],
             last_checked_at: "last_checked_at",
             metadata: { key: "value" },
+            public_record: {
+                dnssec: false,
+                expires_at: "2026-01-01T12:00:00.000Z",
+                name_servers: ["ns1.example.com"],
+                registered_at: "2026-01-01T12:00:00.000Z",
+                registrant: {
+                    address: "Burlington\nMA",
+                    contact_url: "https://registrar.example/contact/example.com",
+                    country: "US",
+                    email: "email",
+                    name: "name",
+                    organization: "Privacy Protect, LLC",
+                    phone: "phone",
+                },
+                registrar: { iana_id: "9999", name: "Example Registrar, Inc.", url: "https://registrar.example" },
+                statuses: ["client transfer prohibited"],
+                updated_at: "2026-01-01T12:00:00.000Z",
+            },
+            registrar_quote: {
+                available: true,
+                premium: false,
+                price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                purchase_url: "https://whop.com/dashboard/biz_xxxxxxxxxxxxxx/domains/search/example.dev",
+                renewal_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+                score: 75,
+                transfer_price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            },
             status: "pending_verification",
             updated_at: "2026-01-01T12:00:00.000Z",
             verification_expires_at: "2026-01-01T12:00:00.000Z",

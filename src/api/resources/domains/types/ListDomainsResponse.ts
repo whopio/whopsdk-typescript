@@ -3,7 +3,7 @@
 import type * as Whop from "../../../index.js";
 
 export interface ListDomainsResponse {
-    data: Whop.Domain[];
+    data: Whop.DomainListItem[];
     page_info: ListDomainsResponse.PageInfo;
 }
 

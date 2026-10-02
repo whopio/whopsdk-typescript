@@ -2,7 +2,7 @@
 
 import type * as Whop from "../index.js";
 
-export interface Domain {
+export interface DomainListItem {
     /** ID of the account claiming or owning this domain, prefixed `biz_`. `null` for a search result. */
     account_id: string | null;
     /** ID of the app assigned to this domain, prefixed `app_`. `null` for a search result. */
@@ -13,7 +13,7 @@ export interface Domain {
     created_at: string | null;
     dns_records: Whop.DomainDnsRecord[];
     /** Result of the most recent DNS routing check. Ownership is verified separately. `null` for a search result. */
-    dns_status: Domain.DnsStatus | null;
+    dns_status: DomainListItem.DnsStatus | null;
     /** Normalized hostname, such as checkout.example.com. */
     domain: string;
     /** Cloudflare's latest hostname activation status. */
@@ -24,13 +24,11 @@ export interface Domain {
     /** When DNS and provider state were last checked, as an ISO 8601 timestamp. */
     last_checked_at: string | null;
     /** Custom string keys and values attached to this domain. Empty for a search result. */
-    metadata: Record<string, string>;
-    /** The domain's public registration record (RDAP): its registrar, registrant, key dates, registry statuses, and name servers, read when you retrieve the domain by hostname. `null` for your own domains, an available domain, or a record that couldn't be read. */
-    public_record: Whop.DomainPublicRecord | null;
+    metadata: Record<string, unknown>;
     /** What registering the domain would cost: whether it's available, its first-year, renewal, and transfer prices, a link to buy it, and how desirable it is. Set for a search result: a domain from `search` or retrieved by hostname. `null` for your own domains. */
     registrar_quote: Whop.DomainRegistrarQuote | null;
     /** Domain lifecycle. Only active domains resolve to their app. `null` for a search result. */
-    status: Domain.Status | null;
+    status: DomainListItem.Status | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. `null` for a search result. */
     updated_at: string | null;
     /** When an unverified claim is automatically deleted, 48 hours after creation, as an ISO 8601 timestamp. */
@@ -39,7 +37,7 @@ export interface Domain {
     verified_at: string | null;
 }
 
-export namespace Domain {
+export namespace DomainListItem {
     /** Result of the most recent DNS routing check. Ownership is verified separately. `null` for a search result. */
     export const DnsStatus = {
         Pending: "pending",

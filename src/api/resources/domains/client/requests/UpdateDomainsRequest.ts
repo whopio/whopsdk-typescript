@@ -7,7 +7,7 @@
  *     }
  */
 export interface UpdateDomainsRequest {
-    /** Domain ID, prefixed dom_. */
+    /** Domain ID, prefixed dom_. To retrieve, you can instead pass a hostname such as `example.com` to look up any domain; a name without an extension looks up the name on `.com`. */
     id: string;
     /** App ID, prefixed app_. Must belong to the same account. */
     app_id?: string;
