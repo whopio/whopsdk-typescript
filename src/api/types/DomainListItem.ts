@@ -7,7 +7,7 @@ export interface DomainListItem {
     account_id: string | null;
     /** ID of the app assigned to this domain, prefixed `app_`. `null` for a search result. */
     app_id: string | null;
-    /** Cloudflare's latest certificate issuance status. */
+    /** The latest issuance status of the domain's TLS certificate. */
     certificate_status: string | null;
     /** When the domain claim was created, as an ISO 8601 timestamp. `null` for a search result. */
     created_at: string | null;
@@ -16,7 +16,7 @@ export interface DomainListItem {
     dns_status: DomainListItem.DnsStatus | null;
     /** Normalized hostname, such as checkout.example.com. */
     domain: string;
-    /** Cloudflare's latest hostname activation status. */
+    /** The latest activation status of the hostname on Whop's network. */
     hostname_status: string | null;
     /** Domain ID, prefixed `dom_`. `null` for a search result. */
     id: string | null;
@@ -26,7 +26,7 @@ export interface DomainListItem {
     /** Custom string keys and values attached to this domain. Empty for a search result. */
     metadata: Record<string, unknown>;
     /** What registering the domain would cost: whether it's available, its first-year, renewal, and transfer prices, a link to buy it, and how desirable it is. Set for a search result: a domain from `search` or retrieved by hostname. `null` for your own domains. */
-    registrar_quote: Whop.DomainRegistrarQuote | null;
+    registration_quote: Whop.DomainRegistrationQuote | null;
     /** Domain lifecycle. Only active domains resolve to their app. `null` for a search result. */
     status: DomainListItem.Status | null;
     /** When the domain was last updated, as an ISO 8601 timestamp. `null` for a search result. */
