@@ -59,6 +59,7 @@ export namespace AccountFee {
         Uy: "uy",
         Br: "br",
         Ph: "ph",
+        Ng: "ng",
     } as const;
     export type Region = (typeof Region)[keyof typeof Region];
     /** Where the rate in effect comes from: `default` is the platform rate, `custom` a rate negotiated for this account, and `inherited` a rate negotiated by the platform this account is connected to. */
