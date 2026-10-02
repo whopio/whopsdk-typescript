@@ -21,6 +21,8 @@ export interface ListFinancialActivityRequest {
     direction?: Whop.ListFinancialActivityRequestDirection;
     /** Optional prefixed resource ID. Returns activity associated with that resource. */
     resource_id?: string;
+    /** Filter activity by payment ID (pay_), including related refunds, disputes, and fees. Combines with resource_id and other filters within the selected accounts. Unknown payments return an empty list. */
+    payment_id?: string;
     /** Optional ledger activity ID (for example `line_3`). Returns at most that one activity. */
     activity_id?: string;
     /** Whether to exclude balance reservations and balanced movements between the account's own balances. */
