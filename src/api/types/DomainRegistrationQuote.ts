@@ -2,7 +2,7 @@
 
 import type * as Whop from "../index.js";
 
-export interface DomainRegistrarQuote {
+export interface DomainRegistrationQuote {
     /** Whether the domain can be registered now. */
     available: boolean;
     /** Whether the registry prices this domain above its standard rate. Premium prices are set per domain and can be much higher. */

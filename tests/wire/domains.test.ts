@@ -42,7 +42,7 @@ describe("DomainsClient", () => {
                     ],
                     last_checked_at: null,
                     metadata: { key: "value" },
-                    registrar_quote: {
+                    registration_quote: {
                         available: false,
                         premium: false,
                         price: null,
@@ -81,7 +81,7 @@ describe("DomainsClient", () => {
                     ],
                     last_checked_at: null,
                     metadata: { key: "value" },
-                    registrar_quote: {
+                    registration_quote: {
                         available: true,
                         premium: false,
                         price: { amount: "24.99", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -120,7 +120,7 @@ describe("DomainsClient", () => {
                     ],
                     last_checked_at: null,
                     metadata: { key: "value" },
-                    registrar_quote: {
+                    registration_quote: {
                         available: true,
                         premium: false,
                         price: { amount: "12.99", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -257,7 +257,7 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            registrar_quote: {
+            registration_quote: {
                 available: true,
                 premium: false,
                 price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -369,7 +369,7 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-08-14T07:01:44.000Z",
             },
-            registrar_quote: {
+            registration_quote: {
                 available: false,
                 premium: false,
                 price: null,
@@ -486,7 +486,7 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            registrar_quote: {
+            registration_quote: {
                 available: true,
                 premium: false,
                 price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
@@ -561,7 +561,7 @@ describe("DomainsClient", () => {
                 statuses: ["client transfer prohibited"],
                 updated_at: "2026-01-01T12:00:00.000Z",
             },
-            registrar_quote: {
+            registration_quote: {
                 available: true,
                 premium: false,
                 price: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },

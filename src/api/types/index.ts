@@ -222,7 +222,7 @@ export * from "./DomainListItem.js";
 export * from "./DomainPublicRecord.js";
 export * from "./DomainRegistrant.js";
 export * from "./DomainRegistrar.js";
-export * from "./DomainRegistrarQuote.js";
+export * from "./DomainRegistrationQuote.js";
 export * from "./EconomicIntelligence.js";
 export * from "./EconomicIntelligenceInput.js";
 export * from "./EconomicIntelligenceOperation.js";
