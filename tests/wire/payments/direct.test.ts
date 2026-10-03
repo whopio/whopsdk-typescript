@@ -208,13 +208,13 @@ describe("DirectClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
-            account_id: "account_id",
             billing_details: {
                 address: { country: "country", postal_code: "postal_code" },
                 email: "email",
                 name: "name",
             },
             payment_method: { type: "card" },
+            account_id: "account_id",
         };
         const rawResponseBody = { key: "value" };
 
@@ -229,7 +229,6 @@ describe("DirectClient", () => {
 
         await expect(async () => {
             return await client.payments.direct.create({
-                account_id: "account_id",
                 billing_details: {
                     address: {
                         country: "country",
@@ -241,6 +240,7 @@ describe("DirectClient", () => {
                 payment_method: {
                     type: "card",
                 },
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.UnauthorizedError);
     });
@@ -255,13 +255,13 @@ describe("DirectClient", () => {
             environment: { api: server.baseUrl, vault: server.baseUrl },
         });
         const rawRequestBody = {
-            account_id: "account_id",
             billing_details: {
                 address: { country: "country", postal_code: "postal_code" },
                 email: "email",
                 name: "name",
             },
             payment_method: { type: "card" },
+            account_id: "account_id",
         };
         const rawResponseBody = { error: { message: "message", type: "type" } };
 
@@ -276,7 +276,6 @@ describe("DirectClient", () => {
 
         await expect(async () => {
             return await client.payments.direct.create({
-                account_id: "account_id",
                 billing_details: {
                     address: {
                         country: "country",
@@ -288,6 +287,7 @@ describe("DirectClient", () => {
                 payment_method: {
                     type: "card",
                 },
+                account_id: "account_id",
             });
         }).rejects.toThrow(Whop.ConflictError);
     });
