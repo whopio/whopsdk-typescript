@@ -42,6 +42,7 @@ describe("PaymentQuotesClient", () => {
                 },
             ],
             located_by: "shipping_address",
+            payment_id: "pay_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
             shipping_address: {
                 city: "Austin",
@@ -252,6 +253,7 @@ describe("PaymentQuotesClient", () => {
                 },
             ],
             located_by: "shipping_address",
+            payment_id: "pay_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
             shipping_address: {
                 city: "Austin",

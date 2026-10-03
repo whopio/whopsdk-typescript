@@ -127,6 +127,7 @@ describe("DirectClient", () => {
             presentment_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             product_id: "prod_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            quote_id: "quote_id",
             recovery_url: "recovery_url",
             refundable: false,
             refunded_amount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
