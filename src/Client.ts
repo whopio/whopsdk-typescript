@@ -59,6 +59,7 @@ import { PartnerReferralRequestsClient } from "./api/resources/partnerReferralRe
 import { PartnersClient } from "./api/resources/partners/client/Client.js";
 import { PaymentMethodDomainsClient } from "./api/resources/paymentMethodDomains/client/Client.js";
 import { PaymentMethodsClient } from "./api/resources/paymentMethods/client/Client.js";
+import { PaymentQuotesClient } from "./api/resources/paymentQuotes/client/Client.js";
 import { PaymentRulesClient } from "./api/resources/paymentRules/client/Client.js";
 import { PaymentsClient } from "./api/resources/payments/client/Client.js";
 import { PayoutAccountsClient } from "./api/resources/payoutAccounts/client/Client.js";
@@ -161,6 +162,7 @@ export class WhopClient {
     protected _partners: PartnersClient | undefined;
     protected _paymentMethodDomains: PaymentMethodDomainsClient | undefined;
     protected _paymentMethods: PaymentMethodsClient | undefined;
+    protected _paymentQuotes: PaymentQuotesClient | undefined;
     protected _paymentRules: PaymentRulesClient | undefined;
     protected _payments: PaymentsClient | undefined;
     protected _payoutAccounts: PayoutAccountsClient | undefined;
@@ -430,6 +432,10 @@ export class WhopClient {
 
     public get paymentMethods(): PaymentMethodsClient {
         return (this._paymentMethods ??= new PaymentMethodsClient(this._options));
+    }
+
+    public get paymentQuotes(): PaymentQuotesClient {
+        return (this._paymentQuotes ??= new PaymentQuotesClient(this._options));
     }
 
     public get paymentRules(): PaymentRulesClient {
