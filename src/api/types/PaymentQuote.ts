@@ -18,27 +18,29 @@ export interface PaymentQuote {
     /** Payment quote ID, prefixed `pq_`. */
     id: string;
     line_items: Whop.PaymentQuoteLineItem[];
-    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is an estimate: quote again with the buyer's address. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
+    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is a preview: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
     located_by: PaymentQuote.LocatedBy | null;
+    /** The payment holding this quote, prefixed `pay_`, or null while it is unspent. A declined payment keeps its quote and can be retried; check that payment's `status`. */
+    payment_id: string | null;
     /** The promo code the quote applied, prefixed `promo_`, or null. */
     promo_code_id: string | null;
     /** The shipping address the purchase was priced with, or null. When present it is where tax was calculated. */
     shipping_address: Whop.PaymentAddress | null;
     /** The price of every line before the promo code, tax and fees. */
     subtotal: Whop.Money;
-    /** The tax owed on the purchase. Zero unless `tax_status` is `calculated`. */
+    /** The tax a payment consuming this quote charges. Zero unless `tax_status` is `calculated`. */
     tax_amount: Whop.Money;
     /** Whether tax is added on top of the price (`exclusive`) or already inside it (`inclusive`). Null when no tax was calculated. */
     tax_behavior: PaymentQuote.TaxBehavior | null;
     tax_ids: Whop.TaxId[];
-    /** `calculated`: every line was priced. `not_applicable`: this seller collects no tax on this purchase, so the quote owes none. `unavailable`: tax could not be priced — the provider did not answer, or this seller's tax setup cannot price a purchase here; quote again. */
+    /** `calculated`: every line was priced and a payment may consume the quote. `not_applicable`: this seller collects no tax on this purchase, so the quote owes none and may still be consumed. `unavailable`: tax could not be priced — the provider did not answer, or this seller's tax setup cannot price a purchase here — so a payment refuses the quote; quote again, or charge without `quote_id` to have tax calculated at charge time. */
     tax_status: PaymentQuote.TaxStatus;
     /** What the buyer pays: the subtotal less the discount, plus `tax_amount` when tax is added on top. */
     total: Whop.Money;
 }
 
 export namespace PaymentQuote {
-    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is an estimate: quote again with the buyer's address. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
+    /** Which location tax was calculated for: `shipping_address` when it carries a country, else the billing `address` when it does, else the buyer's `ip_address`. A quote located by `ip_address` is a preview: a payment cannot use it, so quote again with the buyer's address to pay. Null when nothing in the request located the buyer, which only a seller that collects no tax on this purchase is quoted without; `tax_status` is then `not_applicable`. */
     export const LocatedBy = {
         ShippingAddress: "shipping_address",
         Address: "address",
@@ -51,7 +53,7 @@ export namespace PaymentQuote {
         Exclusive: "exclusive",
     } as const;
     export type TaxBehavior = (typeof TaxBehavior)[keyof typeof TaxBehavior];
-    /** `calculated`: every line was priced. `not_applicable`: this seller collects no tax on this purchase, so the quote owes none. `unavailable`: tax could not be priced — the provider did not answer, or this seller's tax setup cannot price a purchase here; quote again. */
+    /** `calculated`: every line was priced and a payment may consume the quote. `not_applicable`: this seller collects no tax on this purchase, so the quote owes none and may still be consumed. `unavailable`: tax could not be priced — the provider did not answer, or this seller's tax setup cannot price a purchase here — so a payment refuses the quote; quote again, or charge without `quote_id` to have tax calculated at charge time. */
     export const TaxStatus = {
         Calculated: "calculated",
         NotApplicable: "not_applicable",

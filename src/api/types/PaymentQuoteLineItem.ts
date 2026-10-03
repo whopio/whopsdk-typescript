@@ -5,7 +5,7 @@ import type * as Whop from "../index.js";
 export interface PaymentQuoteLineItem {
     /** The promo code's share on this line. Zero without a code. */
     discount: Whop.Money;
-    /** The variant this line prices, prefixed `plan_`. Null when the purchase describes the variant by `plan` and no variant with those attributes exists yet. */
+    /** The variant this line prices, prefixed `plan_`. Null when the purchase describes the variant by `plan` and no variant with those attributes exists yet: the payment that consumes the quote creates it, and the line names it from then on. */
     plan_id: string | null;
     /** How many units of the variant the line covers. */
     quantity: number;

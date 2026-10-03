@@ -9,11 +9,11 @@ import type * as Whop from "../../../../index.js";
  *     }
  */
 export interface CreatePaymentQuotesRequest extends Whop.PaymentInput {
-    /** The buyer's billing address. Where tax is calculated when no shipping address is given, and the address a tax registration belongs to. A seller that collects tax on this purchase needs the buyer located: provide a `country` here, on `shipping_address`, or an `ip_address`. Only the keys you supply are kept. */
+    /** The buyer's billing address. Where tax is calculated when no shipping address is given, and the address a tax registration belongs to. A seller that collects tax on this purchase needs the buyer located: provide a `country` here, on `shipping_address`, or an `ip_address`. Only the keys you supply are kept. The payment that consumes the quote must put the buyer in the same place, by country, state and postal code, through its own `shipping_address` or its confirmation token's billing address, or it is refused with `quote_mismatch`. */
     address?: CreatePaymentQuotesRequest.Address | null;
-    /** The buyer's IP address, when your server makes the call on their behalf. Locates the buyer when neither address carries a country. A quote located this way is an estimate (`located_by` is `ip_address`): quote again with the buyer's address. */
+    /** The buyer's IP address, when your server makes the call on their behalf. Locates the buyer when neither address carries a country. A quote located this way (`located_by` is `ip_address`) is a preview: a payment refuses it with `quote_preview_only`, so quote again with the buyer's address before paying. */
     ip_address?: string | null;
-    /** Where physical goods ship. When present it is where tax is calculated; omit it for digital goods. Only the keys you supply are kept. */
+    /** Where physical goods ship. When present it is where tax is calculated; omit it for digital goods. Only the keys you supply are kept. The payment that consumes the quote must ship to the same place, by country, state and postal code, or it is refused with `quote_mismatch`. */
     shipping_address?: CreatePaymentQuotesRequest.ShippingAddress | null;
     /** The buyer's tax registration, for a business purchase. One entry. Prices the purchase as business-to-business where that applies (EU reverse charge, for one) and requires an `address` to belong to. */
     tax_ids?: CreatePaymentQuotesRequest.TaxIds.Item[] | null;
@@ -21,7 +21,7 @@ export interface CreatePaymentQuotesRequest extends Whop.PaymentInput {
 
 export namespace CreatePaymentQuotesRequest {
     /**
-     * The buyer's billing address. Where tax is calculated when no shipping address is given, and the address a tax registration belongs to. A seller that collects tax on this purchase needs the buyer located: provide a `country` here, on `shipping_address`, or an `ip_address`. Only the keys you supply are kept.
+     * The buyer's billing address. Where tax is calculated when no shipping address is given, and the address a tax registration belongs to. A seller that collects tax on this purchase needs the buyer located: provide a `country` here, on `shipping_address`, or an `ip_address`. Only the keys you supply are kept. The payment that consumes the quote must put the buyer in the same place, by country, state and postal code, through its own `shipping_address` or its confirmation token's billing address, or it is refused with `quote_mismatch`.
      */
     export interface Address {
         /** City name. */
@@ -41,7 +41,7 @@ export namespace CreatePaymentQuotesRequest {
     }
 
     /**
-     * Where physical goods ship. When present it is where tax is calculated; omit it for digital goods. Only the keys you supply are kept.
+     * Where physical goods ship. When present it is where tax is calculated; omit it for digital goods. Only the keys you supply are kept. The payment that consumes the quote must ship to the same place, by country, state and postal code, or it is refused with `quote_mismatch`.
      */
     export interface ShippingAddress {
         /** City name. */
