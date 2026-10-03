@@ -129,6 +129,7 @@ export const PaymentMethodTypes = {
     Vipps: "vipps",
     Webpay: "webpay",
     WechatPay: "wechat_pay",
+    WhopPay: "whop_pay",
     Yape: "yape",
     Zip: "zip",
     Coinflow: "coinflow",
