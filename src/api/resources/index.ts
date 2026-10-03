@@ -175,6 +175,8 @@ export * from "./paymentMethodDomains/types/index.js";
 export * from "./paymentMethods/client/requests/index.js";
 export * as paymentMethods from "./paymentMethods/index.js";
 export * from "./paymentMethods/types/index.js";
+export * from "./paymentQuotes/client/requests/index.js";
+export * as paymentQuotes from "./paymentQuotes/index.js";
 export * from "./paymentRules/client/requests/index.js";
 export * as paymentRules from "./paymentRules/index.js";
 export * from "./paymentRules/types/index.js";
