@@ -25,10 +25,10 @@
             }
         }
     },
-    "originGitCommit": "8e449d735805d099e873c4d1220367f453ab6d10",
+    "originGitCommit": "dd36e7eba9adce05222a63ca87400e132a7477cb",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
-    "requestedVersion": "2.0.0",
+    "requestedVersion": "2.1.0",
     "ciProvider": "unknown",
-    "sdkVersion": "2.0.0"
+    "sdkVersion": "2.1.0"
 }
