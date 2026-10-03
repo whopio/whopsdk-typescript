@@ -330,6 +330,7 @@ describe("EventsClient", () => {
         });
         const rawRequestBody = {};
         const rawResponseBody = {
+            affiliate_tracking_detected: false,
             firing_data_ok: true,
             host_events: ["lead"],
             installed: false,
