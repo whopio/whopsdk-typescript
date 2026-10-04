@@ -15,6 +15,8 @@ export interface CreateAppsRequest {
     base_url?: string | null;
     /** The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new direct upload. */
     icon?: CreateAppsRequest.Icon;
+    /** The address of the existing website this app is imported from, such as `https://shop.example.com`. Must be an `http` or `https` URL. */
+    imported_from_url?: string | null;
     /** The display name for the app, shown to users on the app store and product pages. */
     name: string;
     /** The whitelisted OAuth callback URLs that users are redirected to after authorizing the app. */

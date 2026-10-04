@@ -42,6 +42,8 @@ export interface App {
     icon: Whop.AppIcon;
     /** App ID, prefixed `app_`. */
     id: string;
+    /** The address of the existing website this app was imported from, such as `https://shop.example.com`. `null` if the app was not imported from another site, or if the caller lacks the `developer:basic:read` permission on the app's account. */
+    imported_from_url: string | null;
     /** Approval status of the app's product listing on the Whop app store, or `null` when the app has no associated product. */
     marketplace_status: App.MarketplaceStatus | null;
     /** Display name shown on the app store and in experience navigation. */

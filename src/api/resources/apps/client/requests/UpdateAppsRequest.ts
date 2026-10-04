@@ -25,6 +25,8 @@ export interface UpdateAppsRequest {
     experience_path?: string | null;
     /** The icon image for the app in PNG, JPEG, or GIF format, referencing an uploaded file: `{ id }` for an existing attachment or `{ direct_upload_id }` for a new direct upload. */
     icon?: UpdateAppsRequest.Icon;
+    /** The address of the existing website this app is imported from, such as `https://shop.example.com`. Must be an `http` or `https` URL. Set to `null` to clear it. */
+    imported_from_url?: string | null;
     /** The display name for the app, shown to users on the app store and product pages. */
     name?: string;
     /** How the app authenticates at the OAuth token endpoint. */
