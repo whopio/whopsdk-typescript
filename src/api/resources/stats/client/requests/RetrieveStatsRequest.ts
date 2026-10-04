@@ -42,7 +42,7 @@ export interface RetrieveStatsRequest {
     dispute_reason?: string;
     /** Filter to a single GMV source, for example payments — or, on the traffic metrics, a visit source (whop_ads, direct, or a utm_source value). Pair with breakdown_by=source to split by source. Available on metrics that list source. */
     source?: string;
-    /** Filter traffic metrics to one website hostname, for example shop.example.com. Pair with breakdown_by=hostname to split by website. */
+    /** Filter traffic metrics to one website hostname, for example shop.example.com. On the events and people metrics, comma-separated hostnames match any listed hostname. Pair with breakdown_by=hostname to split by website. */
     hostname?: string;
     /** Filter traffic metrics to one page — a hostname plus normalized path, for example shop.example.com/pricing. Pair with breakdown_by=page to split by page. */
     page?: string;
