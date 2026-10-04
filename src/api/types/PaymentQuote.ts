@@ -7,12 +7,18 @@ export interface PaymentQuote {
     account_id: string;
     /** The billing address the purchase was priced with, or null. Where tax was calculated when no shipping address was given, and the address the registration belongs to. */
     address: Whop.PaymentAddress | null;
+    /** Three-letter ISO 4217 code of the variants' own currency, lowercase. Equal to `currency` when nothing was converted. */
+    base_currency: string;
+    /** `total` in `base_currency` at `exchange_rate`: the variants' own prices after the promo code, plus `tax_amount` converted at `exchange_rate` when tax is added on top. Equal to `total` when nothing was converted. The payment charges `total`, in `currency`. */
+    base_total: Whop.Money;
     /** When the quote was priced, as an ISO 8601 timestamp. */
     created_at: string;
-    /** ISO currency the purchase is priced and charged in, lowercase — the variants' own currency. */
+    /** Three-letter ISO 4217 currency code the purchase is priced and charged in, lowercase: the variants' own currency, or the `presentment_currency` it was converted into. */
     currency: string;
     /** What the promo code takes off. Zero without a code. */
     discount: Whop.Money;
+    /** How many units of `currency` one unit of `base_currency` buys, as a decimal string such as `"5.4321"`: the rate the variants' prices were converted at, fixed until `expires_at`, and the rate a payment consuming the quote is charged at. A string, like money amounts, so no float rounds it in transit. Null when nothing was converted. */
+    exchange_rate: string | null;
     /** When the quote stops being chargeable, as an ISO 8601 timestamp. Quote again after it. */
     expires_at: string;
     /** Payment quote ID, prefixed `pq_`. */
@@ -24,6 +30,7 @@ export interface PaymentQuote {
     payment_id: string | null;
     /** The promo code the quote applied, prefixed `promo_`, or null. */
     promo_code_id: string | null;
+    recommended_currencies: string[];
     /** The shipping address the purchase was priced with, or null. When present it is where tax was calculated. */
     shipping_address: Whop.PaymentAddress | null;
     /** The price of every line before the promo code, tax and fees. */

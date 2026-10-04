@@ -26,9 +26,12 @@ describe("PaymentQuotesClient", () => {
                 postal_code: "78704",
                 state: "TX",
             },
+            base_currency: "usd",
+            base_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             discount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            exchange_rate: "0.918",
             expires_at: "2026-01-01T12:00:00.000Z",
             id: "pq_xxxxxxxxxxxxxx",
             line_items: [
@@ -44,6 +47,7 @@ describe("PaymentQuotesClient", () => {
             located_by: "shipping_address",
             payment_id: "pay_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recommended_currencies: ["usd"],
             shipping_address: {
                 city: "Austin",
                 country: "US",
@@ -237,9 +241,12 @@ describe("PaymentQuotesClient", () => {
                 postal_code: "78704",
                 state: "TX",
             },
+            base_currency: "usd",
+            base_total: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
             created_at: "2026-01-01T12:00:00.000Z",
             currency: "usd",
             discount: { amount: "-1234.56", currency: "usd", decimals: 2, display_decimals: 2 },
+            exchange_rate: "0.918",
             expires_at: "2026-01-01T12:00:00.000Z",
             id: "pq_xxxxxxxxxxxxxx",
             line_items: [
@@ -255,6 +262,7 @@ describe("PaymentQuotesClient", () => {
             located_by: "shipping_address",
             payment_id: "pay_xxxxxxxxxxxxxx",
             promo_code_id: "promo_code_id",
+            recommended_currencies: ["usd"],
             shipping_address: {
                 city: "Austin",
                 country: "US",
